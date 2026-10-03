@@ -13,7 +13,7 @@ The application does not require Docker, WSL or a system Python installation.
 
 Version **0.6.0 is a development prerelease**. The
 [application release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.6.0)
-and all **18 independent pack archives** are published on GitHub. Their public
+and **20 independently versioned tool packs** are published on GitHub. Their public
 downloads have been checked against the original sizes and SHA-256 checksums.
 
 The signed online catalogue and its `source.json` trust file are **not published
@@ -39,6 +39,23 @@ Workbench, open **Manage tools**, choose **Import pack ZIP**, and select that ZI
 The ZIP can be copied to an offline machine before importing; running the tool
 does not require a network connection. The starter already includes the `align`,
 `bam` and `variants` packs.
+
+### RNA-seq tools
+
+Install [STAR 1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-star-v1.0.0)
+for splice-aware alignment and optional annotated gene counts, or
+[kallisto 1.0.1](https://github.com/comparativechrono/workbench/releases/tag/pack-kallisto-v1.0.1)
+for transcript quantification. Download the pack ZIP from its release and use
+**Manage tools → Import pack ZIP**.
+
+STAR needs a genomic FASTA, with a matching GTF for gene counts; kallisto needs
+a transcript/cDNA FASTA or a reusable kallisto index. STAR requires uncompressed
+inputs and rebuilds its index per run; kallisto accepts gzip inputs. See the
+[RNA-seq guide](docs/rna-seq-packs.md) for compatible pipeline branches, resource
+limits and interpretation of counts. Use kallisto 1.0.1 for the corrected
+multithread bootstrap support; existing saved pipelines keep their original
+pack version until explicitly updated.
+
 
 The separate updater requires an existing **0.5.4** installation. Close Workbench,
 extract the updater outside the application folder, run `UpdateWorkbench.exe`,
