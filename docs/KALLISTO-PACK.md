@@ -1,8 +1,8 @@
-# kallisto RNA-seq pack 1.0.0
+# kallisto RNA-seq pack 1.0.1
 
 Requires Native Workbench 0.6.0 or newer on 64-bit Windows. Import the pack ZIP in **Manage tools → Import pack ZIP**. No WSL, Docker, installed Python, network service or separate tool installation is required to run it.
 
-The pack contains kallisto **0.52.0-workbench1**, built from upstream 0.52.0 with documented Windows portability fixes. Its five operations are:
+The pack contains kallisto **0.52.0-workbench2**, built from upstream 0.52.0 with documented Windows portability fixes. Its five operations are:
 
 - Build a transcriptome index once, then reuse its `transcripts.idx` file across samples.
 - Quantify single-end reads using an existing index.
@@ -28,9 +28,13 @@ Quantification outputs are typed as metrics, not DNA alignments or variant calls
 
 Paths must contain ASCII characters; spaces are supported. The tools use individual arguments without a command shell. Transcriptome size and worker count determine resource needs; the thread setting does not cap RAM. Inputs are read locally and results are written in the new run folder. Data are not uploaded.
 
+## Fix in 1.0.1
+
+Version 1.0.1 fixes missing plaintext bootstrap output when more than one thread is selected. Upstream 0.52.0 accidentally compiled the multithreaded bootstrap dispatch only when HDF5 was enabled, although its existing worker supports plaintext. This build invokes that unchanged worker for plaintext without HDF5. Bootstrap seeds, sampling and estimation are unchanged. Version 1.0.0 still works with zero bootstraps or one thread; its requested-bootstrap runs with multiple threads fail explicitly because the expected files are absent. Existing 1.0.0 releases remain unchanged.
+
 ## Validation and reproducibility
 
-**Check installation** runs real single-end and paired-end quantification on included synthetic transcripts and gzipped reads. It checks exactly 20 pseudoaligned fragments, the known 12:6:2 transcript abundance ratio and 600000:300000:100000 TPM, plus requested bootstrap output and strict read validation. This is a scientific regression fixture, not an accuracy benchmark on experimental data. Source-build tests additionally compare the numeric estimates with the official Linux upstream release, check strandedness, ambiguous transcripts, malformed reads and reusable indexes. Native Windows validation is recorded separately in the release verification report; cross-compilation by itself is not proof of Windows execution.
+**Check installation** uses the actual two-thread UI default and runs real single-end and paired-end quantification on included synthetic transcripts and gzipped reads. It checks exactly 20 pseudoaligned fragments, the known 12:6:2 transcript abundance ratio and 600000:300000:100000 TPM, plus requested bootstrap output and strict read validation. This is a scientific regression fixture, not an accuracy benchmark on experimental data. Source-build tests additionally compare the numeric estimates with the official Linux upstream release, check strandedness, ambiguous transcripts, malformed reads and reusable indexes. Native Windows validation is recorded separately in the release verification report; cross-compilation by itself is not proof of Windows execution.
 
 The source tag, commit, archives, SHA-256 hashes, build flags, library notices and exact portability patch are retained under `licenses/`. Windows binaries link the runtime statically and need only Windows system DLLs; they target baseline x86-64 without requiring AVX or AVX2. Bootstrap draws may differ across compiler/platform standard libraries; the same seed is repeatable within the same pack build.
 
