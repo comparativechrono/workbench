@@ -7,7 +7,7 @@ from prepare_rnaseq_licenses import retain_rna_notices
 sys.path.insert(0, str(ROOT / 'desktop'))
 from prepare_modular_packs import field, number, artifact, execute, workflow
 
-PACK_VERSION = '1.0.0'
+PACK_VERSION = '1.0.1'
 CITATION = {'text': 'Bray NL, Pimentel H, Melsted P, Pachter L (2016). Near-optimal probabilistic RNA-seq quantification. Nature Biotechnology 34:525–527.', 'url': 'https://doi.org/10.1038/nbt.3519'}
 
 def dump(path, value):
@@ -74,7 +74,7 @@ def definitions():
 def checks():
     values = []
     for paired in (False, True):
-        params = {'threads': 1, 'bootstraps': 3, 'seed': 42, 'kmer': '31', 'strandness': 'fr'}
+        params = {'threads': 2, 'bootstraps': 3, 'seed': 42, 'kmer': '31', 'strandness': 'fr'}
         if not paired: params.update({'fragment-mean': 180, 'fragment-sd': 20})
         length = '821.4' if paired else '821'
         values.append({'id': 'known-' + ('paired' if paired else 'single') + '-abundances', 'workflow': 'index-quant-' + ('paired' if paired else 'single'), 'params': params, 'inputs': {'transcriptome': [{'transcriptome': 'fixture-transcriptome'}], 'reads': [{'reads1': 'fixture-reads1-gz', 'reads2': 'fixture-reads2-gz'}] if paired else [{'reads': 'fixture-single-gz'}]}, 'expect': [{'output': 'abundance', 'kind': 'text', 'contains': ['target_id\tlength\teff_length\test_counts\ttpm', *['tx' + str(n+1) + '\t1000\t' + length + '\t' + str(count) + '\t' + str(tpm) for n, (count, tpm) in enumerate(((12, 600000), (6, 300000), (2, 100000)))]]}, {'output': 'run-info', 'kind': 'text', 'contains': ['"n_processed": 20', '"n_pseudoaligned": 20', '"n_bootstraps": 3', '"index_version": 13']}, {'output': 'bootstraps', 'kind': 'text', 'contains': ['bootstrap\ttarget_id\tlength\teff_length\test_counts\ttpm', '0\ttx1\t1000\t', '2\ttx3\t1000\t']}, {'output': 'read-check', 'kind': 'text', 'contains': ['"valid":true', '"reads":40' if paired else '"reads":20']}]})
@@ -88,7 +88,7 @@ def main():
     args = parser.parse_args()
     vendor, destination = args.vendor.resolve(), args.destination.resolve()
     build = json.loads((vendor / 'build-windows/build.json').read_text())
-    if build['version'] != VERSION or build['sourceCommit'] != SOURCE_COMMIT or build['patchSha256'] != sha(vendor / 'workbench1.patch'):
+    if build['version'] != VERSION or build['sourceCommit'] != SOURCE_COMMIT or build['patchSha256'] != sha(vendor / 'workbench2.patch'):
         raise ValueError('Build identity does not match pinned sources and patch')
     if destination.exists() and any(destination.iterdir()): raise ValueError('Pack destination must be new/empty: ' + str(destination))
     for directory in ('bin', 'licenses', 'fixtures'): (destination / directory).mkdir(parents=True, exist_ok=True)
@@ -119,9 +119,9 @@ def main():
     for name, (url, checksum) in SOURCES.items():
         if sha(vendor / name) != checksum: raise ValueError('Source archive differs: ' + name)
         shutil.copy2(vendor / name, licenses / name)
-    for source, name in [(vendor / 'kallisto-0.52.0/license.txt', 'kallisto-BSD-2-Clause.txt'), (vendor / 'kallisto-0.52.0/ext/bifrost/LICENSE', 'Bifrost-BSD-2-Clause.txt'), (vendor / 'zlib-1.3.2/README', 'zlib-README.txt'), (vendor / 'workbench1.patch', 'workbench1.patch'), (ROOT / 'scripts/build_kallisto_native.py', 'build_kallisto_native.py'), (ROOT / 'tools/kallisto/adapter.cpp', 'adapter.cpp'), (ROOT / 'tools/kallisto/readcheck.c', 'readcheck.c'), (args.toolchain / 'LICENSE.TXT', 'LLVM-LICENSE.txt')]: shutil.copy2(source, licenses / name)
+    for source, name in [(vendor / 'kallisto-0.52.0/license.txt', 'kallisto-BSD-2-Clause.txt'), (vendor / 'kallisto-0.52.0/ext/bifrost/LICENSE', 'Bifrost-BSD-2-Clause.txt'), (vendor / 'zlib-1.3.2/README', 'zlib-README.txt'), (vendor / 'workbench2.patch', 'workbench2.patch'), (ROOT / 'scripts/build_kallisto_native.py', 'build_kallisto_native.py'), (ROOT / 'tools/kallisto/adapter.cpp', 'adapter.cpp'), (ROOT / 'tools/kallisto/readcheck.c', 'readcheck.c'), (args.toolchain / 'LICENSE.TXT', 'LLVM-LICENSE.txt')]: shutil.copy2(source, licenses / name)
     for source in (args.toolchain / 'x86_64-w64-mingw32/share/mingw32').glob('COPYING*'): shutil.copy2(source, licenses / source.name)
-    (licenses / 'MODIFICATIONS.txt').write_text('kallisto 0.52.0-workbench1, modified 2026-10-03 for Native Workbench. The exact upstream source and patch are included. Changes: explicit pthread header in Bifrost; correct an unused DataStorage copy-template member typo; match Bifrost Windows aligned allocation with aligned deallocation; use a private inline roaring_bitmap_contains definition to avoid duplicate COFF symbols; identify the modified build in version metadata. The RNA quantification algorithms and mathematical parameters are unchanged. Built without HDF5 or HTSlib/BAM; plaintext bootstrap output is supported. The MIT-licensed adapter handles explicit strand selection and concatenates unchanged plaintext bootstrap tables, without a shell. readcheck is the existing MIT Workbench strict gzip/FASTQ pair parser extended for single-end files and compiled natively. Full upstream and embedded third-party copyright/license notices remain in the source archives.\n')
+    (licenses / 'MODIFICATIONS.txt').write_text('kallisto 0.52.0-workbench2, modified 2026-10-03 for Native Workbench. The exact upstream source and patch are included. Changes: explicit pthread header in Bifrost; correct an unused DataStorage copy-template member typo; match Bifrost Windows aligned allocation with aligned deallocation; use a private inline roaring_bitmap_contains definition to avoid duplicate COFF symbols; identify the modified build in version metadata. Workbench2 fixes upstream plaintext bootstrap dispatch when threads exceed one: it invokes the existing BootstrapThreadPool without an HDF5 writer, using the already calculated worker limit. Single-thread and multithread bootstraps use the same upstream seeds, sampler and EM algorithm. The RNA quantification algorithms and mathematical parameters are unchanged. Built without HDF5 or HTSlib/BAM; plaintext bootstrap output is supported. The MIT-licensed adapter handles explicit strand selection and concatenates unchanged plaintext bootstrap tables, without a shell. readcheck is the existing MIT Workbench strict gzip/FASTQ pair parser extended for single-end files and compiled natively. Full upstream and embedded third-party copyright/license notices remain in the source archives.\n')
     dump(licenses / 'provenance.json', {'schema': 1, 'pack': 'kallisto', 'packVersion': PACK_VERSION, 'minAppVersion': '0.6.0', 'nativeBuild': build, 'citation': CITATION, 'upstream': 'https://github.com/pachterlab/kallisto/tree/v0.52.0', 'limitations': ['Bulk short-read transcript quantification only; no single-cell BUS, long-read quantification, BAM output, bias correction, gene aggregation or differential-expression analysis.', 'A transcript/cDNA reference is required; a genomic reference cannot be substituted.', 'ASCII paths required; spaces supported. Threads do not impose a memory cap.', 'The index input type cannot distinguish indexes for different tools; native version validation and kallisto loading reject incompatible inputs.', 'Bootstrap values can differ across compiler/platform standard-library random distributions; the seed remains reproducible within the same pack build.'], 'windowsExecuted': False})
     shutil.copy2(ROOT / 'docs/KALLISTO-PACK.md', destination / 'PACK-README.md')
     retain_rna_notices(ROOT, destination, 'kallisto')

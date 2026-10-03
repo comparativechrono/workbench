@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Reproduce native kallisto 0.52.0-workbench1 without a Unix runtime on Windows."""
+"""Reproduce native kallisto 0.52.0-workbench2 without a Unix runtime on Windows."""
 import argparse, concurrent.futures, difflib, hashlib, json, os, re, shutil, subprocess, tarfile, urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = '0.52.0-workbench1'
+VERSION = '0.52.0-workbench2'
 SOURCE_COMMIT = '4e9f29cf3b021260415430c057a22469ca081391'
 SOURCES = {
     'kallisto-v0.52.0.tar.gz': ('https://codeload.github.com/pachterlab/kallisto/tar.gz/refs/tags/v0.52.0', '68184e41706d77e409f05a598a87dacdf3cf227f18c028175e2bce8b284bdea4'),
@@ -51,12 +51,18 @@ def prepare(cache, fetch=False):
     change('ext/bifrost/src/TinyBitmap.cpp', 'free(tiny_bmp_new);', 'posix_memalign_free(tiny_bmp_new);')
     change('ext/bifrost/src/roaring.h', 'inline bool roaring_bitmap_contains(const roaring_bitmap_t *r, uint32_t val)', 'static inline bool roaring_bitmap_contains(const roaring_bitmap_t *r, uint32_t val)')
     change('ext/bifrost/src/roaring.c', 'extern inline bool roaring_bitmap_contains(const roaring_bitmap_t *r,\n                                           uint32_t val);', '/* Header contains a private inline definition for portable COFF linkage. */')
+    # Upstream 0.52.0 skips *all* multithreaded bootstraps without USE_HDF5,
+    # even for --plaintext. Dispatch the unchanged worker pool for plaintext
+    # with no HDF5 writer; its plaintext branch never dereferences that pointer.
+    change('src/main.cpp',
+           '#ifdef USE_HDF5\n            BootstrapThreadPool pool(opt.threads, seeds, collection.counts, index, collection,\n                                     em.eff_lens_, opt, &writer, fl_means);\n#endif',
+           '#ifdef USE_HDF5\n            BootstrapThreadPool pool(n_threads, seeds, collection.counts, index, collection,\n                                     em.eff_lens_, opt, &writer, fl_means);\n#else\n            if (opt.plaintext) {\n              BootstrapThreadPool pool(n_threads, seeds, collection.counts, index, collection,\n                                       em.eff_lens_, opt, nullptr, fl_means);\n            }\n#endif')
     changes = []
     for relative, old in sorted(pristine.items()):
         new = (source / relative).read_bytes()
         if old != new:
             changes += difflib.unified_diff(old.decode().splitlines(True), new.decode().splitlines(True), fromfile='a/' + relative, tofile='b/' + relative)
-    (cache / 'workbench1.patch').write_text(''.join(changes))
+    (cache / 'workbench2.patch').write_text(''.join(changes))
     return source
 
 def main():
@@ -88,7 +94,7 @@ def main():
         return obj
     with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as pool:
         objects = list(pool.map(compile, files + helpers))
-    build = {'tool': 'kallisto', 'version': VERSION, 'upstreamVersion': '0.52.0', 'sourceCommit': SOURCE_COMMIT, 'sources': {name: {'url': url, 'sha256': checksum} for name, (url, checksum) in SOURCES.items()}, 'patchSha256': sha(cache / 'workbench1.patch'), 'compiler': subprocess.check_output([cxx, '--version'], env=env, text=True).splitlines()[0], 'flags': flags, 'hdf5': False, 'bam': False, 'cpu': 'x86-64 baseline; no AVX/AVX2 required', 'windowsExecuted': False, 'helperSources': {p.name: sha(p) for p in helpers}, 'files': {}}
+    build = {'tool': 'kallisto', 'version': VERSION, 'upstreamVersion': '0.52.0', 'sourceCommit': SOURCE_COMMIT, 'sources': {name: {'url': url, 'sha256': checksum} for name, (url, checksum) in SOURCES.items()}, 'patchSha256': sha(cache / 'workbench2.patch'), 'compiler': subprocess.check_output([cxx, '--version'], env=env, text=True).splitlines()[0], 'flags': flags, 'hdf5': False, 'bam': False, 'cpu': 'x86-64 baseline; no AVX/AVX2 required', 'windowsExecuted': False, 'helperSources': {p.name: sha(p) for p in helpers}, 'files': {}}
     targets = {'kallisto': objects[:len(files)], 'kallisto-adapter': [out / 'adapter.cpp.o'], 'readcheck': [out / 'readcheck.c.o', *[out / (p.name + '.o') for p in zfiles]]}
     for name, target_objects in targets.items():
         binary = out / (name + ('' if args.linux else '.exe'))
