@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "status": "prepared-only-not-published",
+  "status": "assets-published-catalogue-pending",
   "repository": "https://github.com/comparativechrono/workbench",
   "application": {
     "tag": "app-v0.6.0",
@@ -211,6 +211,8 @@
       "release-assets.githubusercontent.com"
     ],
     "privateKey": "not-created-or-supplied",
-    "publicKey": "not-generated-until-signing"
+    "publicKey": "not-generated-until-signing",
+    "published": false,
+    "configured": false
   }
 }
