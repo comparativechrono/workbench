@@ -67,6 +67,31 @@ def build_graph(case, tool, pin, asset_path):
     return graph, selected['expect']
 
 
+def diagnostic_tails(folder, max_files=12, max_bytes=8192):
+    """Read bounded tails from this fixture's private run only."""
+    root = Path(folder).resolve()
+    result = []
+    for path in sorted(root.rglob('*')):
+        if len(result) >= max_files:
+            break
+        lower = path.name.lower()
+        if (not path.is_file() or path.is_symlink() or
+                not any(token in lower for token in ('stdout', 'stderr', 'workbench.log', 'log.out')) and path.suffix.lower() != '.log'):
+            continue
+        if not path.resolve().is_relative_to(root):
+            continue
+        try:
+            size = path.stat().st_size
+            with path.open('rb') as stream:
+                stream.seek(max(0, size - max_bytes))
+                data = stream.read(max_bytes)
+            result.append({'path': path.relative_to(root).as_posix(), 'bytes': size,
+                           'truncated': size > max_bytes, 'tail': data.decode('utf-8', errors='replace')})
+        except OSError as error:
+            result.append({'path': path.relative_to(root).as_posix(), 'readError': str(error)})
+    return result
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--app-root', type=Path, required=True)
@@ -92,6 +117,8 @@ def main(argv=None):
               'scope': 'Original paired scientific fixture at the actual UI default threads=2; immutable installed pack.'}
     backend = None
     timer = None
+    pack_root = None
+    before = None
     cancel = threading.Event()
     started = time.monotonic()
     class ObservedBackend(NativeBackend):
@@ -99,6 +126,14 @@ def main(argv=None):
             process = super()._spawn(*arguments, **options)
             report['nativeWindowsExecuted'] = True
             return process
+        def run(self, request, event, cancel):
+            report.setdefault('nativeRequests', []).append({
+                'workflow': request['workflow_id'], 'values': request['values'],
+                'outputFolder': request['output_folder'], 'packSha256': request['pack_sha256']})
+            result = super().run(request, event, cancel)
+            report.setdefault('nativeResults', []).append({key: result.get(key) for key in
+                ('success', 'cancelled', 'message', 'folder', 'exitCode', 'exit_code') if key in result})
+            return result
     try:
         catalog = load_catalog(root)
         candidates = [row for row in catalog['packs'] if row['id'] == 'kallisto' and row['version'] == args.pack_version]
@@ -133,15 +168,15 @@ def main(argv=None):
         plan = engine.prepare(graph, results, cancel=cancel)
         result = engine.execute(plan, cancel=cancel)
         report.update(folder=result.get('folder', plan['folder']), status=result.get('status'))
+        report['resultNodes'] = [{key: node.get(key) for key in
+            ('id', 'tool', 'status', 'message', 'folder', 'started', 'finished') if key in node}
+            for node in result.get('nodes', [])]
         if cancel.is_set():
             raise ValueError('The bounded default-thread scientific check timed out.')
         if result.get('success') is not True or result.get('status') != 'success':
             raise ValueError('Native tool did not complete: ' + str(result.get('message', result.get('status'))))
         for expected in expectations:
             _assert_output(expected, result)
-        report['installedPackUnchanged'] = snapshot(pack_root) == before
-        if not report['installedPackUnchanged']:
-            raise ValueError('Running the default-thread fixture changed installed pack files.')
         if not report['nativeWindowsExecuted']:
             raise ValueError('No native Windows process executed.')
         report.update(success=True, passed=1, failed=0)
@@ -152,6 +187,18 @@ def main(argv=None):
             timer.cancel()
         if backend is not None:
             backend.shutdown()
+        if pack_root is not None and before is not None:
+            try:
+                after = snapshot(pack_root)
+                report['installedPackUnchanged'] = after == before
+                if after != before:
+                    report['installedFilesChanged'] = sorted(key for key in set(before) | set(after) if before.get(key) != after.get(key))[:30]
+                    report.update(success=False, passed=0, failed=1, error='Running the default-thread fixture changed installed pack files.')
+            except Exception as error:
+                report.update(success=False, passed=0, failed=1, installedPackUnchanged=False,
+                              installedSnapshotError=str(error))
+        if not report['success'] and report.get('folder'):
+            report['diagnosticTails'] = diagnostic_tails(report['folder'])
         report['elapsedSeconds'] = round(time.monotonic() - started, 3)
         args.report.parent.mkdir(parents=True, exist_ok=True)
         args.report.write_text(json.dumps(report, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
