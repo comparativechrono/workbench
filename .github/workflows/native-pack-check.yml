@@ -86,6 +86,21 @@ jobs:
           Invoke-WebRequest -Uri "https://raw.githubusercontent.com/$env:REPOSITORY/$env:SOURCE_COMMIT/scripts/check_kallisto_defaults_windows.py" -OutFile $helper
           & $python -I $helper --app-root $app --report (Join-Path $env:RUNNER_TEMP 'kallisto-defaults.json')
           if ($LASTEXITCODE -ne 0) { throw 'Native kallisto default-thread scientific check failed.' }
+      - name: Check STAR repeated input and output chunks
+        if: inputs.asset_name == 'native-workbench-pack-star-1.0.0.zip'
+        shell: pwsh
+        env:
+          CASE_FOLDER: ${{ matrix.folder }}
+          REPOSITORY: ${{ github.repository }}
+          SOURCE_COMMIT: ${{ github.sha }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $app = Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'native-workbench'
+          $python = Join-Path $app 'runtime/python/python.exe'
+          $helper = Join-Path $env:RUNNER_TEMP 'check_star_chunks_windows.py'
+          Invoke-WebRequest -Uri "https://raw.githubusercontent.com/$env:REPOSITORY/$env:SOURCE_COMMIT/scripts/check_star_chunks_windows.py" -OutFile $helper
+          & $python -I $helper --app-root $app --report (Join-Path $env:RUNNER_TEMP 'star-chunks.json')
+          if ($LASTEXITCODE -ne 0) { throw 'Native STAR repeated-chunk scientific check failed.' }
       - name: Diagnose failed STAR process
         if: failure()
         shell: pwsh
@@ -110,6 +125,12 @@ jobs:
         env:
           CASE_FOLDER: ${{ matrix.folder }}
         run: |
+          $chunks = Join-Path $env:RUNNER_TEMP 'star-chunks.json'
+          if (Test-Path $chunks) {
+            $chunkText = Get-Content $chunks -Raw
+            Write-Output $chunkText
+            Add-Content $env:GITHUB_STEP_SUMMARY ('```json' + "`n" + $chunkText + "`n" + '```')
+          }
           $defaults = Join-Path $env:RUNNER_TEMP 'kallisto-defaults.json'
           if (Test-Path $defaults) {
             $defaultText = Get-Content $defaults -Raw
