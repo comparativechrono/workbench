@@ -1,0 +1,78 @@
+name: Native Windows pack check
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_id:
+        description: Numeric release ID in this repository (draft or published)
+        required: true
+        type: string
+      asset_name:
+        description: Exact candidate pack ZIP asset name
+        required: true
+        type: string
+      asset_sha256:
+        description: Expected SHA-256 of the candidate pack ZIP
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  native:
+    runs-on: windows-2022
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        folder: [ordinary, 'path with spaces']
+    steps:
+      - name: Download exact candidate and released application
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          SOURCE_COMMIT: ${{ github.sha }}
+          RELEASE_ID: ${{ inputs.release_id }}
+          ASSET_NAME: ${{ inputs.asset_name }}
+          ASSET_SHA256: ${{ inputs.asset_sha256 }}
+          CASE_FOLDER: ${{ matrix.folder }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if ($env:REPOSITORY -ne 'comparativechrono/workbench') { throw 'This gate pins the comparativechrono/workbench application.' }
+          if ($env:RELEASE_ID -notmatch '^\d+$' -or $env:ASSET_SHA256 -notmatch '^[a-fA-F0-9]{64}$') { throw 'Invalid release ID or checksum.' }
+          if ($env:ASSET_NAME -notmatch '^native-workbench-pack-[a-z0-9-]+-[0-9]+\.[0-9]+\.[0-9]+\.zip$') { throw 'Expected a pack ZIP asset name.' }
+          $headers = @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = 'application/vnd.github+json'; 'X-GitHub-Api-Version' = '2022-11-28' }
+          $release = Invoke-RestMethod -Uri "https://api.github.com/repos/$env:REPOSITORY/releases/$env:RELEASE_ID" -Headers $headers
+          $assets = @($release.assets | Where-Object { $_.name -eq $env:ASSET_NAME -and $_.state -eq 'uploaded' })
+          if ($assets.Count -ne 1) { throw 'Expected exactly one uploaded candidate asset.' }
+          $pack = Join-Path $env:RUNNER_TEMP 'candidate.zip'
+          $headers.Accept = 'application/octet-stream'
+          Invoke-WebRequest -Uri "https://api.github.com/repos/$env:REPOSITORY/releases/assets/$($assets[0].id)" -Headers $headers -OutFile $pack
+          if ((Get-FileHash $pack -Algorithm SHA256).Hash -ne $env:ASSET_SHA256) { throw 'Candidate SHA-256 differs.' }
+          $app = Join-Path $env:RUNNER_TEMP 'application.zip'
+          Invoke-WebRequest -Uri 'https://github.com/comparativechrono/workbench/releases/download/app-v0.6.0/native-workbench-0.6.0-starter-windows.zip' -OutFile $app
+          if ((Get-FileHash $app -Algorithm SHA256).Hash -ne '16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a') { throw 'Application SHA-256 differs.' }
+          Expand-Archive $app (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER)
+          Invoke-WebRequest -Uri "https://raw.githubusercontent.com/$env:REPOSITORY/$env:SOURCE_COMMIT/scripts/check_pack_release_windows.py" -OutFile (Join-Path $env:RUNNER_TEMP 'check_pack_release_windows.py')
+      - name: Import offline and run scientific checks on Windows
+        shell: pwsh
+        env:
+          CASE_FOLDER: ${{ matrix.folder }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $app = Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'native-workbench'
+          $python = Join-Path $app 'runtime/python/python.exe'
+          & $python -I (Join-Path $env:RUNNER_TEMP 'check_pack_release_windows.py') --app-root $app --archive (Join-Path $env:RUNNER_TEMP 'candidate.zip') --report (Join-Path $env:RUNNER_TEMP 'native-pack.json')
+          if ($LASTEXITCODE -ne 0) { throw 'Native Windows scientific checks failed.' }
+      - name: Record native evidence
+        if: always()
+        shell: pwsh
+        run: |
+          $report = Join-Path $env:RUNNER_TEMP 'native-pack.json'
+          if (Test-Path $report) {
+            $text = Get-Content $report -Raw
+            Write-Output $text
+            Add-Content $env:GITHUB_STEP_SUMMARY ('```json' + "`n" + $text + "`n" + '```')
+          }
