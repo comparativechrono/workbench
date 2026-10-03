@@ -2,6 +2,7 @@
 
 Run this separately with NW_RNASEQ_APP_ROOT pointing to an extracted 0.6.0
 starter plus the new packs, and NW_RNASEQ_ARCHIVE_DIR pointing to their ZIPs.
+Set NW_RNASEQ_STAR_VERSION / NW_RNASEQ_KALLISTO_VERSION when testing upgrades.
 The released Python modules are tested, not edited application source. No
 scientific executable or native Windows importer is exercised by this suite.
 """
@@ -27,8 +28,11 @@ APP = Path(os.environ.get('NW_RNASEQ_APP_ROOT', WORK / 'rna-build/validation-app
 ARCHIVES = Path(os.environ.get('NW_RNASEQ_ARCHIVE_DIR', WORK / 'rna-build/releases')).resolve()
 STARTER = Path(os.environ.get('NW_RNASEQ_STARTER_ZIP', WORK / 'release-0.6.0/native-workbench-0.6.0-starter-windows.zip')).resolve()
 STARTER_SHA = '16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a'
+PACK_VERSIONS = {'star': os.environ.get('NW_RNASEQ_STAR_VERSION', '1.0.0'),
+                 'kallisto': os.environ.get('NW_RNASEQ_KALLISTO_VERSION', '1.0.0')}
 EVIDENCE = {'schema': 1, 'applicationVersion': '0.6.0', 'nativeWindowsExecuted': False,
             'scientificExecutablesExecuted': False, 'nativeImporterExecuted': False,
+            'expectedPackVersions': PACK_VERSIONS,
             'scope': 'Released-app graph contracts and Python archive import; copy callback substitutes native folder publication.'}
 
 
@@ -62,6 +66,10 @@ class RnaSeqPipelineContracts(unittest.TestCase):
         for pack_id in ('star', 'kallisto', 'bam'):
             if not any(tool.get('packId') == pack_id for tool in cls.catalog['tools'].values()):
                 raise RuntimeError('Required pack is absent: ' + pack_id)
+        for pack_id, version in PACK_VERSIONS.items():
+            if not any(tool.get('packId') == pack_id and tool.get('packVersion') == version
+                       for tool in cls.catalog['tools'].values()):
+                raise RuntimeError('Expected current pack version is absent: ' + pack_id + ' ' + version)
         cls.tools = cls.catalog['tools']
         cls.engine = cls.modules['engine'].Engine(APP, cls.catalog)
 
@@ -72,7 +80,8 @@ class RnaSeqPipelineContracts(unittest.TestCase):
             backend.shutdown()
 
     def select(self, pack, predicate):
-        matches = [tool for tool in self.tools.values() if tool.get('packId') == pack and predicate(tool)]
+        matches = [tool for tool in self.tools.values() if tool.get('packId') == pack
+                   and tool.get('packVersion') == PACK_VERSIONS[pack] and predicate(tool)]
         self.assertTrue(matches, 'Missing required workflow contract in ' + pack)
         return sorted(matches, key=lambda tool: tool['id'])[0]
 
@@ -131,7 +140,7 @@ class RnaSeqPipelineContracts(unittest.TestCase):
         EVIDENCE['installedInventory'] = self.modules['verify_installation'].check_packs(APP, self.catalog)
         checked = []
         for row in self.catalog['packs']:
-            if row['id'] not in {'star', 'kallisto'}:
+            if row['id'] not in PACK_VERSIONS or row['version'] != PACK_VERSIONS[row['id']]:
                 continue
             pack = self.modules['catalog'].load_pack(APP / row['folder'] / 'pack.ini')
             for asset in ('workbench-schema', 'workbench-checks'):
@@ -233,7 +242,7 @@ class RnaSeqPipelineContracts(unittest.TestCase):
                     if 'workbench-pack.json' not in archive.namelist():
                         continue
                     envelope = json.loads(archive.read('workbench-pack.json'))
-                if envelope['id'] in {'star', 'kallisto'}:
+                if envelope['id'] in PACK_VERSIONS and envelope['version'] == PACK_VERSIONS[envelope['id']]:
                     archives.append((candidate, envelope))
             self.assertEqual({entry['id'] for _, entry in archives}, {'star', 'kallisto'}, 'Both RNA pack archives are required.')
             for archive, envelope in archives:

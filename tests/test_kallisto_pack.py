@@ -8,8 +8,8 @@ import csv, gzip, hashlib, importlib.util, json, math, os, shutil, subprocess, s
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CACHE = Path(os.environ.get('NW_KALLISTO_CACHE', ROOT.parent / 'rna-build/kallisto'))
-PACK = ROOT / 'packs/kallisto-1.0.0'
+CACHE = Path(os.environ.get('NW_KALLISTO_CACHE', ROOT.parent / 'rna-build/kallisto-fixed'))
+PACK = ROOT / 'packs/kallisto-1.0.1'
 LINUX = CACHE / 'build-linux'
 OFFICIAL = CACHE / 'official-linux-standard/kallisto/kallisto'
 OFFICIAL_SHA = '9000fd5afc1fb9f07cb4cf6513a4d932bcb086079982d0740843016a07178fa1'
@@ -73,13 +73,13 @@ class KallistoScience(unittest.TestCase):
         if okay and completed.returncode: raise AssertionError('Tool failed:\n' + completed.stdout + completed.stderr)
         return completed
 
-    def quant(self, paired, *, strand='unstranded', bootstraps=0, index=None, reads=None):
+    def quant(self, paired, *, strand='unstranded', bootstraps=0, threads=2, index=None, reads=None):
         type(self).counter += 1
         folder = self.root / ('quant result ' + str(self.counter))
         r1 = self.fixtures / ('reads1.fastq.gz' if paired else 'single.fastq.gz')
         r2 = self.fixtures / 'reads2.fastq.gz' if paired else '-'
         if reads: r1, r2 = reads
-        self.invoke([str(self.bin / 'kallisto-adapter'), 'quant', str(index or self.index), str(r1), str(r2), str(folder), strand, '1', str(bootstraps), '42', '180' if not paired else '0', '20' if not paired else '0'], self.root)
+        self.invoke([str(self.bin / 'kallisto-adapter'), 'quant', str(index or self.index), str(r1), str(r2), str(folder), strand, str(threads), str(bootstraps), '42', '180' if not paired else '0', '20' if not paired else '0'], self.root)
         return folder
 
     def assert_truth(self, folder):
@@ -107,6 +107,20 @@ class KallistoScience(unittest.TestCase):
                     self.assertAlmostEqual(sum(float(row['tpm']) for row in selected), 1000000)
                 again = self.quant(paired, strand='fr', bootstraps=3)
                 self.assertEqual((folder / 'bootstrap-estimates.tsv').read_bytes(), (again / 'bootstrap-estimates.tsv').read_bytes())
+
+    def test_plaintext_bootstraps_match_between_one_two_and_four_threads(self):
+        # Regression for upstream 0.52.0's USE_HDF5-guarded dispatch. Worker
+        # count must not drop requested plaintext replicates or alter seed IDs.
+        for paired in (False, True):
+            serial = self.quant(paired, bootstraps=3, threads=1)
+            for threads in (2, 4):
+                with self.subTest(paired=paired, threads=threads):
+                    parallel = self.quant(paired, bootstraps=3, threads=threads)
+                    self.assert_truth(parallel)
+                    self.assertEqual((serial / 'bootstrap-estimates.tsv').read_bytes(),
+                                     (parallel / 'bootstrap-estimates.tsv').read_bytes())
+                    self.assertEqual((serial / 'abundance.tsv').read_bytes(),
+                                     (parallel / 'abundance.tsv').read_bytes())
 
     def test_disabled_bootstraps_and_reverse_strand_library(self):
         folder = self.quant(True)
@@ -158,7 +172,7 @@ class KallistoScience(unittest.TestCase):
                 folder = self.root / ('manifest workflow ' + workflow['id'])
                 folder.mkdir()
                 values = {item['id']: item.get('default', '') for item in workflow['inputs']}
-                values.update({'reads': str(self.fixtures / 'single.fastq.gz'), 'reads1': str(self.fixtures / 'reads1.fastq.gz'), 'reads2': str(self.fixtures / 'reads2.fastq.gz'), 'transcriptome': str(self.fixtures / 'transcripts.fasta'), 'index': str(self.index), 'fragment-mean': '180', 'fragment-sd': '20', 'threads': '1'})
+                values.update({'reads': str(self.fixtures / 'single.fastq.gz'), 'reads1': str(self.fixtures / 'reads1.fastq.gz'), 'reads2': str(self.fixtures / 'reads2.fastq.gz'), 'transcriptome': str(self.fixtures / 'transcripts.fasta'), 'index': str(self.index), 'fragment-mean': '180', 'fragment-sd': '20', 'threads': '2'})
                 outputs = {item['id']: str(folder / item['path']) for item in workflow['outputs']}
                 for path in outputs.values(): Path(path).parent.mkdir(parents=True, exist_ok=True)
                 def expand(argument):
