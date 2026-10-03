@@ -11,9 +11,14 @@ The application does not require Docker, WSL or a system Python installation.
 
 ## Release status
 
-Version **0.6.0 is a development build**. Its application, updater and 18 pack
-archives have been prepared. This repository has not yet published those assets
-or an official signed catalogue. Do not treat proposed download URLs as live.
+Version **0.6.0 is a development prerelease**. The
+[application release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.6.0)
+and all **18 independent pack archives** are published on GitHub. Their public
+downloads have been checked against the original sizes and SHA-256 checksums.
+
+The signed online catalogue and its `source.json` trust file are **not published
+or configured**. They require a maintainer-controlled signing key. Use the offline
+pack import described below until the signed feed is available.
 
 The build passed 214 automated tests with one Windows-only skip, the eight
 starter installation/scientific checks, and an actual 0.5.4-to-0.6.0 updater
@@ -23,10 +28,17 @@ validation on Windows.
 
 ## Using the application
 
-Once published, downloads will be on the
-[Releases page](https://github.com/comparativechrono/workbench/releases).
-Extract the starter ZIP and run `NativeWorkbench.exe`. Use
-**File > Check installation** to check the target machine.
+Download the starter ZIP from the
+[0.6.0 application release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.6.0),
+extract it and run `NativeWorkbench.exe`. Use **File > Check installation** to
+check the target machine.
+
+For another tool, download its `native-workbench-pack-…zip` asset from the
+[pack releases](https://github.com/comparativechrono/workbench/releases). In
+Workbench, open **Manage tools**, choose **Import pack ZIP**, and select that ZIP.
+The ZIP can be copied to an offline machine before importing; running the tool
+does not require a network connection. The starter already includes the `align`,
+`bam` and `variants` packs.
 
 The separate updater requires an existing **0.5.4** installation. Close Workbench,
 extract the updater outside the application folder, run `UpdateWorkbench.exe`,
