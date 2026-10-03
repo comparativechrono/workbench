@@ -71,6 +71,24 @@ jobs:
           $python = Join-Path $app 'runtime/python/python.exe'
           & $python -I (Join-Path $env:RUNNER_TEMP 'check_pack_release_windows.py') --app-root $app --archive (Join-Path $env:RUNNER_TEMP 'candidate.zip') --report (Join-Path $env:RUNNER_TEMP 'native-pack.json')
           if ($LASTEXITCODE -ne 0) { throw 'Native Windows scientific checks failed.' }
+      - name: Diagnose failed STAR process
+        if: failure()
+        shell: pwsh
+        env:
+          CASE_FOLDER: ${{ matrix.folder }}
+        run: |
+          $ErrorActionPreference = 'Continue'
+          $app = Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'native-workbench'
+          $exe = Get-ChildItem (Join-Path $app 'packs') -Filter 'STAR.exe' -File -Recurse | Select-Object -First 1
+          if ($exe) {
+            foreach ($option in @('--version', '--help')) {
+              Write-Output ('Direct STAR diagnostic: ' + $option)
+              $lines = & $exe.FullName $option 2>&1
+              Write-Output ('Exit code: ' + $LASTEXITCODE)
+              $lines | Select-Object -First 12
+            }
+            Get-WinEvent -FilterHashtable @{ LogName = 'Application'; Id = 1000 } -MaxEvents 3 -ErrorAction Continue | ForEach-Object { $_.Message }
+          }
       - name: Record native evidence
         if: always()
         shell: pwsh
@@ -84,7 +102,7 @@ jobs:
             Add-Content $env:GITHUB_STEP_SUMMARY ('```json' + "`n" + $text + "`n" + '```')
             if (-not ($text | ConvertFrom-Json).success) {
               $results = Join-Path (Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'native-workbench') 'results'
-              Get-ChildItem $results -File -Recurse -Filter '*.log' | Select-Object -First 30 | ForEach-Object {
+              Get-ChildItem $results -File -Recurse | Where-Object { $_.Name -like '*.log' -or $_.Name -like '*Log.out' } | Select-Object -First 40 | ForEach-Object {
                 Write-Output ('Diagnostic: ' + $_.FullName)
                 Get-Content $_.FullName -Tail 80
               }
