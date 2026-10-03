@@ -71,6 +71,21 @@ jobs:
           $python = Join-Path $app 'runtime/python/python.exe'
           & $python -I (Join-Path $env:RUNNER_TEMP 'check_pack_release_windows.py') --app-root $app --archive (Join-Path $env:RUNNER_TEMP 'candidate.zip') --report (Join-Path $env:RUNNER_TEMP 'native-pack.json')
           if ($LASTEXITCODE -ne 0) { throw 'Native Windows scientific checks failed.' }
+      - name: Check kallisto at its default two threads
+        if: inputs.asset_name == 'native-workbench-pack-kallisto-1.0.0.zip'
+        shell: pwsh
+        env:
+          CASE_FOLDER: ${{ matrix.folder }}
+          REPOSITORY: ${{ github.repository }}
+          SOURCE_COMMIT: ${{ github.sha }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $app = Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'native-workbench'
+          $python = Join-Path $app 'runtime/python/python.exe'
+          $helper = Join-Path $env:RUNNER_TEMP 'check_kallisto_defaults_windows.py'
+          Invoke-WebRequest -Uri "https://raw.githubusercontent.com/$env:REPOSITORY/$env:SOURCE_COMMIT/scripts/check_kallisto_defaults_windows.py" -OutFile $helper
+          & $python -I $helper --app-root $app --report (Join-Path $env:RUNNER_TEMP 'kallisto-defaults.json')
+          if ($LASTEXITCODE -ne 0) { throw 'Native kallisto default-thread scientific check failed.' }
       - name: Diagnose failed STAR process
         if: failure()
         shell: pwsh
@@ -95,6 +110,12 @@ jobs:
         env:
           CASE_FOLDER: ${{ matrix.folder }}
         run: |
+          $defaults = Join-Path $env:RUNNER_TEMP 'kallisto-defaults.json'
+          if (Test-Path $defaults) {
+            $defaultText = Get-Content $defaults -Raw
+            Write-Output $defaultText
+            Add-Content $env:GITHUB_STEP_SUMMARY ('```json' + "`n" + $defaultText + "`n" + '```')
+          }
           $report = Join-Path $env:RUNNER_TEMP 'native-pack.json'
           if (Test-Path $report) {
             $text = Get-Content $report -Raw
