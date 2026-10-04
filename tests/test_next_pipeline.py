@@ -503,7 +503,7 @@ class ExpansionPipelineContracts(unittest.TestCase):
                 self.reject_type(tool, incoming, wrong)
             output = self.kind(tool, 'vcf', outputs=True)
             self.assertEqual(output.get('propagateStateFrom'), incoming['id'])
-            self.assertNotEqual(output.get('state', {}).get('filter'), 'pass')
+            self.assertNotEqual(output.get('state', {}).get('selection'), 'PASS-only')
         EVIDENCE['annotationTypeGuards'] = {'bamRejected': True, 'genericFileRejectedAtOrdinaryVcfPort': True,
                                            'consequenceSelectionDoesNotInventPassState': True}
 
