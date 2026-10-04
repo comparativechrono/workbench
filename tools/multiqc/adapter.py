@@ -146,6 +146,20 @@ def protect_html(path):
     path.write_text(text, encoding='utf-8')
 
 
+def prepare_output_space(run):
+    """Accommodate runner-created output parents without overwriting results."""
+    if (run / 'multiqc_report.html').exists():
+        raise ValueError('A MultiQC report already exists in this run directory')
+    parent = run / 'multiqc_data'
+    if parent.exists():
+        if not parent.is_dir() or parent.is_symlink() or any(parent.iterdir()):
+            raise ValueError('The reserved MultiQC data directory is not empty')
+        # The released native runner creates declared output parents before
+        # launching tools. MultiQC treats even an empty directory as a collision
+        # and otherwise silently suffixes both of its output names.
+        parent.rmdir()
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--run', required=True, type=Path)
@@ -155,6 +169,7 @@ def main(argv=None):
     run = args.run.resolve()
     if not run.is_dir():
         raise ValueError('The private Workbench run directory must already exist')
+    prepare_output_space(run)
     stage = run / 'selected-reports'
     records = stage_inputs(args.reports, stage)
     os.chdir(run)

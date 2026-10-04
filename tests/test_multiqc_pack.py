@@ -98,6 +98,15 @@ class AdapterTests(unittest.TestCase):
                 adapter.offline_audit(event, ())
         adapter.offline_audit('open', ('local-report',))
 
+    def test_existing_output_data_is_never_overwritten(self):
+        data = self.root / 'multiqc_data'
+        data.mkdir()
+        protected = data / 'retained.txt'
+        protected.write_text('previous data')
+        with self.assertRaisesRegex(ValueError, 'not empty'):
+            adapter.prepare_output_space(self.root)
+        self.assertEqual(protected.read_text(), 'previous data')
+
     def test_remote_html_resource_rejected_but_javascript_strings_not_misclassified(self):
         path = self.root / 'report.html'
         path.write_text('<html><head></head><body><script>var unused = \'<img src="https://example.com/x.png">\';</script></body></html>')
@@ -111,6 +120,9 @@ class AdapterTests(unittest.TestCase):
     def test_real_multiqc_known_metrics_and_configuration_isolation(self):
         run = self.root / 'scientific results'
         run.mkdir()
+        # Released native runner creates declared parent directories even when
+        # no output files exist. Upstream must retain the exact declared names.
+        (run / 'multiqc_data').mkdir()
         # This implicit config would remove every module and produce no report
         # if the adapter accidentally loaded it.
         (run / 'multiqc_config.yaml').write_text('run_modules: [does-not-exist]\noutput_dir: /must-not-write\n')
