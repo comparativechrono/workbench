@@ -142,6 +142,75 @@ jobs:
           $env:NW_GATK_TEMP_DIR = Join-Path $env:RUNNER_TEMP 'gatk-contracts'
           & $python -I $helper --report (Join-Path $env:RUNNER_TEMP 'gatk-graph-contracts.json')
           if ($LASTEXITCODE -ne 0) { throw 'GATK released application graph/archive contracts failed.' }
+      - name: Check expansion pack released application contracts
+        if: startsWith(inputs.asset_name, 'native-workbench-pack-snpeff-') || startsWith(inputs.asset_name, 'native-workbench-pack-deseq2-') || startsWith(inputs.asset_name, 'native-workbench-pack-mosdepth-') || startsWith(inputs.asset_name, 'native-workbench-pack-iqtree-')
+        shell: pwsh
+        env:
+          CASE_FOLDER: ${{ matrix.folder }}
+          REPOSITORY: ${{ github.repository }}
+          SOURCE_COMMIT: ${{ github.sha }}
+          ASSET_NAME: ${{ inputs.asset_name }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if ($env:ASSET_NAME -notmatch '^native-workbench-pack-(snpeff|deseq2|mosdepth|iqtree)-([0-9]+\.[0-9]+\.[0-9]+)\.zip$') { throw 'Invalid expansion pack identity.' }
+          $packId = $Matches[1]
+          $packVersion = $Matches[2]
+          $app = Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'native-workbench'
+          $python = Join-Path $app 'runtime/python/python.exe'
+          $helper = Join-Path $env:RUNNER_TEMP 'test_next_pipeline.py'
+          Invoke-WebRequest -Uri "https://raw.githubusercontent.com/$env:REPOSITORY/$env:SOURCE_COMMIT/tests/test_next_pipeline.py" -OutFile $helper
+          $env:NW_EXPANSION_PACK_IDS = $packId
+          $env:NW_EXPANSION_STARTER_ZIP = Join-Path $env:RUNNER_TEMP 'application.zip'
+          $env:NW_EXPANSION_TEMP_DIR = Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) ('expansion-contracts-' + $packId)
+          $prefix = 'NW_EXPANSION_' + $packId.ToUpperInvariant()
+          [Environment]::SetEnvironmentVariable($prefix + '_VERSION', $packVersion, 'Process')
+          [Environment]::SetEnvironmentVariable($prefix + '_PACK_DIR', (Join-Path $app ('packs/' + $packId + '-' + $packVersion)), 'Process')
+          [Environment]::SetEnvironmentVariable($prefix + '_ARCHIVE', (Join-Path $env:RUNNER_TEMP 'candidate.zip'), 'Process')
+          $dependencies = @()
+          if ($packId -eq 'iqtree') {
+            $dependencies += @{ Id = 'muscle'; Version = '0.5.2'; Sha256 = 'c07d3e398f48df683926c0970ef77c3b7d2bdab6426b80c80186f2360ed25258' }
+          }
+          if ($packId -eq 'deseq2') {
+            $dependencies += @{ Id = 'featurecounts'; Version = '1.0.0'; Sha256 = 'f3319b6a8b13c30bc31b782008b0283c7688c739da2dd77cf5ab80859ccff4c2' }
+            $dependencies += @{ Id = 'kallisto'; Version = '1.0.1'; Sha256 = '641cd1f2b05e0951b1f8a58f45d6308ca6206bf86bf90fb74d0daa2860f5eecd' }
+          }
+          foreach ($dependency in $dependencies) {
+            $depId = $dependency.Id
+            $depVersion = $dependency.Version
+            $destination = Join-Path $env:RUNNER_TEMP ('dependency-' + $depId + '.zip')
+            $url = "https://github.com/comparativechrono/workbench/releases/download/pack-$depId-v$depVersion/native-workbench-pack-$depId-$depVersion.zip"
+            Invoke-WebRequest -Uri $url -OutFile $destination
+            if ((Get-FileHash $destination -Algorithm SHA256).Hash -ne $dependency.Sha256) { throw ('Dependency hash mismatch: ' + $depId) }
+            [Environment]::SetEnvironmentVariable('NW_EXPANSION_' + $depId.ToUpperInvariant() + '_ARCHIVE', $destination, 'Process')
+          }
+          & $python -I $helper --report (Join-Path $env:RUNNER_TEMP 'expansion-graph-contracts.json')
+          if ($LASTEXITCODE -ne 0) { throw 'Expansion pack released application contracts failed.' }
+      - name: Check out expansion regression sources
+        if: startsWith(inputs.asset_name, 'native-workbench-pack-snpeff-') || startsWith(inputs.asset_name, 'native-workbench-pack-deseq2-') || startsWith(inputs.asset_name, 'native-workbench-pack-mosdepth-') || startsWith(inputs.asset_name, 'native-workbench-pack-iqtree-')
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - name: Run expansion scientific and failure regressions
+        if: startsWith(inputs.asset_name, 'native-workbench-pack-snpeff-') || startsWith(inputs.asset_name, 'native-workbench-pack-deseq2-') || startsWith(inputs.asset_name, 'native-workbench-pack-mosdepth-') || startsWith(inputs.asset_name, 'native-workbench-pack-iqtree-')
+        shell: pwsh
+        env:
+          CASE_FOLDER: ${{ matrix.folder }}
+          ASSET_NAME: ${{ inputs.asset_name }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if ($env:ASSET_NAME -notmatch '^native-workbench-pack-(snpeff|deseq2|mosdepth|iqtree)-([0-9]+\.[0-9]+\.[0-9]+)\.zip$') { throw 'Invalid expansion pack identity.' }
+          $packId = $Matches[1]
+          $packVersion = $Matches[2]
+          $app = Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'native-workbench'
+          $python = Join-Path $app 'runtime/python/python.exe'
+          $pack = Join-Path $app ('packs/' + $packId + '-' + $packVersion)
+          $helper = Join-Path $env:GITHUB_WORKSPACE ('tests/test_' + $packId + '_pack.py')
+          $regressionArgs = @('-I', $helper, '--pack', $pack, '--report', (Join-Path $env:RUNNER_TEMP 'expansion-scientific-regressions.json'))
+          if ($packId -eq 'iqtree') {
+            $regressionArgs += @('--muscle-archive', (Join-Path $env:RUNNER_TEMP 'dependency-muscle.zip'))
+          }
+          & $python @regressionArgs
+          if ($LASTEXITCODE -ne 0) { throw 'Expansion scientific/failure regressions failed.' }
       - name: Diagnose failed STAR process
         if: failure()
         shell: pwsh
@@ -166,6 +235,18 @@ jobs:
         env:
           CASE_FOLDER: ${{ matrix.folder }}
         run: |
+          $expansionScience = Join-Path $env:RUNNER_TEMP 'expansion-scientific-regressions.json'
+          if (Test-Path $expansionScience) {
+            $expansionScienceText = Get-Content $expansionScience -Raw
+            Write-Output $expansionScienceText
+            Add-Content $env:GITHUB_STEP_SUMMARY ('```json' + "`n" + $expansionScienceText + "`n" + '```')
+          }
+          $expansionGraph = Join-Path $env:RUNNER_TEMP 'expansion-graph-contracts.json'
+          if (Test-Path $expansionGraph) {
+            $expansionGraphText = Get-Content $expansionGraph -Raw
+            Write-Output $expansionGraphText
+            Add-Content $env:GITHUB_STEP_SUMMARY ('```json' + "`n" + $expansionGraphText + "`n" + '```')
+          }
           $gatkGraph = Join-Path $env:RUNNER_TEMP 'gatk-graph-contracts.json'
           if (Test-Path $gatkGraph) {
             $gatkGraphText = Get-Content $gatkGraph -Raw
