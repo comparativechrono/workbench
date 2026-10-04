@@ -340,6 +340,150 @@
       "kind": "build-recipe-or-patch"
     },
     {
+      "path": "recipes/mxe/src/cmake/conf/mxe-conf.cmake.in",
+      "bytes": 4261,
+      "sha256": "36282aaac2155b6b818e8b5bcf1067c38dd87a1514722a50e193061efdd6ce0b",
+      "urls": [
+        "https://svn.r-project.org/R-dev-web/!svn/bc/6768/trunk/WindowsBuilds/winutf8/ucrt3/toolchain_libs/mxe/src/cmake/conf/mxe-conf.cmake.in"
+      ],
+      "kind": "build-recipe-or-patch"
+    },
+    {
+      "path": "recipes/mxe/src/cmake/conf/target-cmake.in",
+      "bytes": 991,
+      "sha256": "b96f1599d75fd4b5925fdd0eb7b2c0958243dea3489d0ac6351690b28c7a6b8d",
+      "urls": [
+        "https://svn.r-project.org/R-dev-web/!svn/bc/6768/trunk/WindowsBuilds/winutf8/ucrt3/toolchain_libs/mxe/src/cmake/conf/target-cmake.in"
+      ],
+      "kind": "build-recipe-or-patch"
+    },
+    {
+      "path": "recipes/mxe/src/cmake/modules/FindFreetype.cmake",
+      "bytes": 857,
+      "sha256": "0cfd6e52a3339ef4426a1330e2b1535eedbbc719b56cc59681f7b70393207d7d",
+      "urls": [
+        "https://svn.r-project.org/R-dev-web/!svn/bc/6768/trunk/WindowsBuilds/winutf8/ucrt3/toolchain_libs/mxe/src/cmake/modules/FindFreetype.cmake"
+      ],
+      "kind": "build-recipe-or-patch"
+    },
+    {
+      "path": "recipes/mxe/src/cmake/modules/FindFriBiDi.cmake",
+      "bytes": 403,
+      "sha256": "8e59bff454b194f04eaa14ed9f994fa1b80ad38da65ae8080a3e326c18f29193",
+      "urls": [
+        "https://svn.r-project.org/R-dev-web/!svn/bc/6768/trunk/WindowsBuilds/winutf8/ucrt3/toolchain_libs/mxe/src/cmake/modules/FindFriBiDi.cmake"
+      ],
+      "kind": "build-recipe-or-patch"
+    },
+    {
+      "path": "recipes/mxe/src/cmake/modules/FindPackageHandleStandardArgs.cmake",
+      "bytes": 22946,
+      "sha256": "1a26c8fffba98b076a94fb8e8a3262b96a5a77bc8c0440205edf51f75985d628",
+      "urls": [
+        "https://svn.r-project.org/R-dev-web/!svn/bc/6768/trunk/WindowsBuilds/winutf8/ucrt3/toolchain_libs/mxe/src/cmake/modules/FindPackageHandleStandardArgs.cmake"
+      ],
+      "kind": "build-recipe-or-patch"
+    },
+    {
+      "path": "recipes/mxe/src/cmake/modules/FindPackageMessage.cmake",
+      "bytes": 1711,
+      "sha256": "654bbd1cdb7ecf291efa934c7a91cd0d2ade67b8c06605db9eee0c03ab704088",
+      "urls": [
+        "https://svn.r-project.org/R-dev-web/!svn/bc/6768/trunk/WindowsBuilds/winutf8/ucrt3/toolchain_libs/mxe/src/cmake/modules/FindPackageMessage.cmake"
+      ],
+      "kind": "build-recipe-or-patch"
+    },
+    {
+      "path": "recipes/mxe/src/cmake/modules/FindSDL.cmake",
+      "bytes": 371,
+      "sha256": "dc7e1a973186c37bb4687b79a14a706ff34a39c3b2c1dad5a1d8b95f73800834",
+      "urls": [
+        "https://svn.r-project.org/R-dev-web/!svn/bc/6768/trunk/WindowsBuilds/winutf8/ucrt3/toolchain_libs/mxe/src/cmake/modules/FindSDL.cmake"
+      ],
+      "kind": "build-recipe-or-patch"
+    },
+    {
+      "path": "recipes/mxe/src/cmake/modules/FindSDL_image.cmake",
+      "bytes": 451,
+      "sha256": "68fd5d05f848dae5cb48669fcc5d59f9ec7599563f26d2f8fee6c11c536a3c82",
+      "urls": [
+        "https://svn.r-project.org/R-dev-web/!svn/bc/6768/trunk/WindowsBuilds/winutf8/ucrt3/toolchain_libs/mxe/src/cmake/modules/FindSDL_image.cmake"
+      ],
+      "kind": "build-recipe-or-patch"
+    },
+    {
+      "path": "recipes/mxe/src/cmake/modules/FindSDL_mixer.cmake",
+      "bytes": 472,
+      "sha256": "95f8ee8f15df68732f1ce4b64328b322b529d23430f544e61daa4c83dcb82254",
+      "urls": [
+        "https://svn.r-project.org/R-dev-web/!svn/bc/6768/trunk/WindowsBuilds/winutf8/ucrt3/toolchain_libs/mxe/src/cmake/modules/FindSDL_mixer.cmake"
+      ],
+      "kind": "build-recipe-or-patch"
+    },
+    {
+      "path": "recipes/mxe/src/cmake/modules/FindSDL_net.cmake",
+      "bytes": 452,
+      "sha256": "01397a5ac9173165bd32eac9700178910f04be49871f9954487fab811f76ea13",
+      "urls": [
+        "https://svn.r-project.org/R-dev-web/!svn/bc/6768/trunk/WindowsBuilds/winutf8/ucrt3/toolchain_libs/mxe/src/cmake/modules/FindSDL_net.cmake"
+      ],
+      "kind": "build-recipe-or-patch"
+    },
+    {
+      "path": "recipes/mxe/src/cmake/modules/FindSDL_sound.cmake",
+      "bytes": 450,
+      "sha256": "0496e5a761d86b52c0412ccc741e64c6c2777cdd4a7bf30f69924f726fd5c37c",
+      "urls": [
+        "https://svn.r-project.org/R-dev-web/!svn/bc/6768/trunk/WindowsBuilds/winutf8/ucrt3/toolchain_libs/mxe/src/cmake/modules/FindSDL_sound.cmake"
+      ],
+      "kind": "build-recipe-or-patch"
+    },
+    {
+      "path": "recipes/mxe/src/cmake/modules/FindSDL_ttf.cmake",
+      "bytes": 452,
+      "sha256": "c26bd2eda175b0032b6526af93058ebd20e72927ba75bce92f989484cdc9cac9",
+      "urls": [
+        "https://svn.r-project.org/R-dev-web/!svn/bc/6768/trunk/WindowsBuilds/winutf8/ucrt3/toolchain_libs/mxe/src/cmake/modules/FindSDL_ttf.cmake"
+      ],
+      "kind": "build-recipe-or-patch"
+    },
+    {
+      "path": "recipes/mxe/src/cmake/modules/FindTIFF.cmake",
+      "bytes": 919,
+      "sha256": "5fbf056a6b7f9e1290cfac80b558dce8a2ed0407d29e21fb842137fe0210b0c9",
+      "urls": [
+        "https://svn.r-project.org/R-dev-web/!svn/bc/6768/trunk/WindowsBuilds/winutf8/ucrt3/toolchain_libs/mxe/src/cmake/modules/FindTIFF.cmake"
+      ],
+      "kind": "build-recipe-or-patch"
+    },
+    {
+      "path": "recipes/mxe/src/cmake/modules/SelectLibraryConfigurations.cmake",
+      "bytes": 3290,
+      "sha256": "e35c3358794ca1f406bd14983dc9134baaa65dd5a7e6fef2326e5e2e48dbbc39",
+      "urls": [
+        "https://svn.r-project.org/R-dev-web/!svn/bc/6768/trunk/WindowsBuilds/winutf8/ucrt3/toolchain_libs/mxe/src/cmake/modules/SelectLibraryConfigurations.cmake"
+      ],
+      "kind": "build-recipe-or-patch"
+    },
+    {
+      "path": "recipes/mxe/src/cmake/modules/TryRunResults.cmake",
+      "bytes": 5775,
+      "sha256": "e5142d40ab391a3a2865732824e589d364e1e4d3293f86536b6e13f5c2b0745e",
+      "urls": [
+        "https://svn.r-project.org/R-dev-web/!svn/bc/6768/trunk/WindowsBuilds/winutf8/ucrt3/toolchain_libs/mxe/src/cmake/modules/TryRunResults.cmake"
+      ],
+      "kind": "build-recipe-or-patch"
+    },
+    {
+      "path": "recipes/mxe/src/cmake/test/CMakeLists.txt",
+      "bytes": 475,
+      "sha256": "c0c65d12254a2f042612dabc1cdc5f7273fa7f51e7984488bf903ed141813ec0",
+      "urls": [
+        "https://svn.r-project.org/R-dev-web/!svn/bc/6768/trunk/WindowsBuilds/winutf8/ucrt3/toolchain_libs/mxe/src/cmake/test/CMakeLists.txt"
+      ],
+      "kind": "build-recipe-or-patch"
+    },
+    {
       "path": "recipes/mxe/src/curl-test.c",
       "bytes": 398,
       "sha256": "09391709e2076c9b9e867653d0d3372a5a7976d1d9c7132e79c309d29daa60d2",

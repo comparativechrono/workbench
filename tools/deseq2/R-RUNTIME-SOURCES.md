@@ -53,6 +53,14 @@ under tcl-recipes/. Their original full tree is available at the immutable
 Subversion URL above. Consult build_in_docker.sh and the R installation manual
 for the system build prerequisites. Use the gcc14 overlay selected by settings.mk
 when rebuilding Rtools libraries; do not substitute the default gcc.mk version.
+The unmodified upstream build.sh loops over both `base` and `full` toolchains.
+This companion covers the base runtime closure, not unrelated libraries in the
+full Rtools distribution. To rebuild that subset after placing source archives
+in the MXE package cache, invoke the `local-pkg-list` target from recipes/mxe with
+`R_TARGET=x86_64 R_TOOLCHAIN_TYPE=base`; for example,
+`make R_TARGET=x86_64 R_TOOLCHAIN_TYPE=base local-pkg-list`.
+The general system build prerequisites still apply. Do not expect the unmodified
+full-toolchain build.sh loop to finish offline using only this companion.
 The Windows R extraction recipe supplied in the pack reproduces the distributed
 private runtime from the pinned official installer without rebuilding R.
 

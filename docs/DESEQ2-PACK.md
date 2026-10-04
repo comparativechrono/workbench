@@ -104,7 +104,7 @@ contains corresponding Rtools45 external library and compiler-runtime sources,
 Tcl/Tk bundle sources, and immutable R-project recipes and patches. It must be
 published beside the pack. `tools/deseq2/r-runtime-source-archive.json` binds its
 exact SHA-256 and byte count to the private R runtime, while
-`r-runtime-source-lock.json` pins each of its 214 input files. The installed
+`r-runtime-source-lock.json` pins each of its 230 input files. The installed
 pack retains these records and the source recovery script under `licenses/`.
 This source download is separate so it does not increase the installed pack's
 runtime footprint; an installed pack performs no source download during analysis.
