@@ -108,6 +108,12 @@ quoting. It does not alter scoring or alignment algorithms. The Windows process
 runner's cancellation job covers descendants. The adapter does not create a
 security sandbox.
 
+The Windows adapter explicitly forwards the parent's standard handles to its
+hidden child, preserving BLAST's diagnostic output in the run log. An adapter-only
+rebuild, when used, retains the original scientific build record unchanged and
+adds a separate `adapter-provenance.json`, bound to all six original executable
+hashes and the new adapter's source, compiler and startup checks.
+
 Full matching NCBI and SQLite source archives, notices, build provenance and the
 adapter source are included under shallow `licenses/` paths. Keep exact final
 native Windows evidence separately: preparation and Linux reference tests do

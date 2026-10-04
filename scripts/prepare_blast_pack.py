@@ -133,12 +133,22 @@ def main():
         dict(path='c++/src/app/blast/blast_formatter.cpp',beforeSha256='17c2e8f4b2fc0813ac4d8ea4a6589d46f42b44b5e607de49b0be77d2d9be518f',afterSha256='00256274213373cd8f27616c21cd04d6313a6aec646ecb63cbd3b4347424cfac'),
         dict(path='c++/src/algo/blast/blastinput/blast_scope_src.cpp',beforeSha256='b040a3dc5e7fa8be0236f5e0598d50d24db9cd28508affb1a3d2e1a778b79c1e',afterSha256='7036efe9edbff9a306b20b7a560c099cc8eae686d03d71899a9ae3a0778db5aa')]:
         raise ValueError('Native build must include the exact reviewed offline boundary changes')
-    if record['adapterSourceSha256']!=sha(ROOT/'tools/blast/guard.cpp'):
+    adapter_record=None
+    if (vendor/'adapter-provenance.json').is_file():
+        adapter_record=json.loads((vendor/'adapter-provenance.json').read_text(encoding='utf-8-sig'))
+        if (adapter_record.get('kind')!='adapter-only-rebuild' or
+            adapter_record.get('parentBuildRecordSha256')!=sha(vendor/'build-provenance.json') or
+            adapter_record.get('originalAdapterSha256')!=record['adapterSha256'] or
+            adapter_record.get('unchangedScientificExecutables')!=record['binaries']):
+            raise ValueError('Adapter-only rebuild is not bound to the unchanged scientific build')
+    adapter_source_sha=adapter_record['sourceSha256'] if adapter_record else record['adapterSourceSha256']
+    adapter_binary_sha=adapter_record['sha256'] if adapter_record else record['adapterSha256']
+    if adapter_source_sha!=sha(ROOT/'tools/blast/guard.cpp'):
         raise ValueError('Adapter source has changed since the native build')
     for source,digest in [('source.tar.gz',SOURCE_SHA),('sqlite.zip',SQLITE_SHA)]:
         if sha(vendor/source)!=digest: raise ValueError('Source hash mismatch: '+source)
     expected={x['name']:x['sha256'] for x in record['binaries']}
-    expected['blast-guard.exe']=record['adapterSha256']
+    expected['blast-guard.exe']=adapter_binary_sha
     for name,digest in expected.items():
         if sha(vendor/'bin'/name)!=digest: raise ValueError('Native binary hash mismatch: '+name)
     if set(expected)!=set(p+'.exe' for p in PROGRAMS)|{'blast-guard.exe'}: raise ValueError('Incorrect native program set')
@@ -155,6 +165,9 @@ def main():
     shutil.copy2(ROOT/'scripts/build_blast_windows.ps1',licenses/'build_blast_windows.ps1')
     shutil.copy2(ROOT/'LICENSE',licenses/'WORKBENCH-LICENSE.txt')
     shutil.copy2(vendor/'build-provenance.json',licenses/'build-provenance.json')
+    if adapter_record:
+        shutil.copy2(vendor/'adapter-provenance.json',licenses/'adapter-provenance.json')
+        shutil.copy2(ROOT/'.github/workflows/blast-adapter-rebuild.yml',licenses/'blast-adapter-rebuild.yml')
     # Retain shallow copies of source licences, with immutable source archives
     # for full context and notices in source-file headers.
     with tarfile.open(vendor/'source.tar.gz','r:gz') as archive:
