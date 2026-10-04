@@ -28,6 +28,16 @@ cmd /c "`"$DevCmd`" -arch=x64 -host_arch=x64 >nul && set" | ForEach-Object {
 $Extracted = Join-Path $Output 'source'
 New-Item -ItemType Directory -Force $Extracted | Out-Null
 Checked-Run 'tar' @('-xzf',$Source,'-C',$Extracted,'--strip-components=1')
+$MakeDbSource = Join-Path $Extracted 'c++\src\app\blastdb\makeblastdb.cpp'
+$BeforePatch = (Get-FileHash $MakeDbSource -Algorithm SHA256).Hash.ToLower()
+if ($BeforePatch -ne 'b555dc444f7da23b4ee2566908e7cf9922644e8f8bac87a1f6a0c5a298e78ab4') { throw 'Unexpected makeblastdb source before patch' }
+$MakeDbText = [IO.File]::ReadAllText($MakeDbSource)
+$Original = 'CSeqDB sdb(new_db, t);'
+$Replacement = 'CSeqDB sdb("\"" + new_db + "\"", t);'
+if (($MakeDbText.Split($Original).Count - 1) -ne 1) { throw 'BLAST space-path patch context changed' }
+[IO.File]::WriteAllText($MakeDbSource,$MakeDbText.Replace($Original,$Replacement),[Text.UTF8Encoding]::new($false))
+$AfterPatch = (Get-FileHash $MakeDbSource -Algorithm SHA256).Hash.ToLower()
+if ($AfterPatch -ne 'c65d73d28f92eda26d20efd658e409990d23531e719284ef3dce60688231d4a4') { throw 'Unexpected makeblastdb source after patch' }
 $SqliteRoot = Join-Path $Output 'sqlite'
 Expand-Archive -Path $Sqlite -DestinationPath $SqliteRoot -Force
 $SqliteSource = Join-Path $SqliteRoot 'sqlite-amalgamation-3500400'
@@ -66,7 +76,10 @@ $GuardImports = (& dumpbin /nologo /dependents (Join-Path $Bin 'blast-guard.exe'
 $GuardImports | Set-Content (Join-Path $Output 'blast-guard-imports.txt')
 if ($GuardImports -match '(?i)(MSVCP[0-9_]*|VCRUNTIME[0-9_]*|ucrtbase)\.dll') { throw 'Guard has an external runtime dependency' }
 @{schema=1;tool='NCBI BLAST+';version='2.17.0';sourceSha256=$SourceHash;sqliteSha256=$SqliteHash;sqliteVersion='3.50.4';
-  sourcePatched=$false;configuration=$Configuration;compiler=(& cl.exe 2>&1 | Out-String);binaries=$Inventory;
+  sourcePatched=$true;patch='Quote makeblastdb metadata database path for the existing BLAST database-list parser';
+  patchSha256=(Get-FileHash (Join-Path $Root 'tools\blast\makeblastdb-space-path.patch') -Algorithm SHA256).Hash.ToLower();
+  patchedSourceBeforeSha256=$BeforePatch;patchedSourceAfterSha256=$AfterPatch;
+  configuration=$Configuration;compiler=(& cl.exe 2>&1 | Out-String);binaries=$Inventory;
   adapterSha256=(Get-FileHash (Join-Path $Bin 'blast-guard.exe') -Algorithm SHA256).Hash.ToLower();
   adapterImports=$GuardImports;
   adapterSourceSha256=(Get-FileHash (Join-Path $Root 'tools\blast\guard.cpp') -Algorithm SHA256).Hash.ToLower();
