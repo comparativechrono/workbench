@@ -95,6 +95,12 @@ static int run(std::vector<S> a) {
     std::wstring command=quote(exe.wstring());
     for(size_t i=3;i<a.size();++i) command+=L" "+quote(wide(a[i]));
     STARTUPINFOW startup{}; startup.cb=sizeof(startup); PROCESS_INFORMATION child{};
+    // A hidden Windows child has no console defaults. Forward the parent's
+    // redirected handles explicitly so BLAST diagnostics reach the run log.
+    startup.dwFlags=STARTF_USESTDHANDLES;
+    startup.hStdInput=GetStdHandle(STD_INPUT_HANDLE);
+    startup.hStdOutput=GetStdHandle(STD_OUTPUT_HANDLE);
+    startup.hStdError=GetStdHandle(STD_ERROR_HANDLE);
     require(CreateProcessW(exe.c_str(),command.data(),nullptr,nullptr,TRUE,CREATE_NO_WINDOW,nullptr,nullptr,&startup,&child),"Cannot start bundled BLAST executable");
     CloseHandle(child.hThread); WaitForSingleObject(child.hProcess,INFINITE);
     DWORD status=1;GetExitCodeProcess(child.hProcess,&status);CloseHandle(child.hProcess);return static_cast<int>(status);
