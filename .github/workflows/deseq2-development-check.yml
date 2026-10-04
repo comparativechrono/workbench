@@ -17,7 +17,7 @@ jobs:
         run: |
           python scripts/build_r_runtime_windows.py --output build/r-development-runtime
           if ($LASTEXITCODE -ne 0) { throw 'Private runtime build failed.' }
-          & 'build/r-development-runtime/relocated R runtime/bin/x64/Rscript.exe' --vanilla -e 'print(extSoftVersion()); print(grDevices::grSoftVersion()); print(capabilities()); print(La_library()); print(curlVersion()); print(R.version)' | Tee-Object -FilePath build/r-runtime-library-versions.txt
+          & 'build/r-development-runtime/relocated R runtime/bin/x64/Rscript.exe' --vanilla -e 'print(extSoftVersion()); print(grDevices::grSoftVersion()); print(capabilities()); print(La_library()); print(libcurlVersion()); print(R.version)' | Tee-Object -FilePath build/r-runtime-library-versions.txt
           if ($LASTEXITCODE -ne 0) { throw 'Private runtime version audit failed.' }
           python scripts/fetch_deseq2_build_inputs.py --cache build/deseq2-inputs
           if ($LASTEXITCODE -ne 0) { throw 'Pinned input recovery failed.' }
