@@ -66,8 +66,10 @@ def main():
                         subprocess.run([str(Path(os.environ['SystemRoot'])/'System32/taskkill.exe'),'/PID',str(process.pid),'/T','/F'],capture_output=True,timeout=15)
                         process.wait(timeout=10);raise ValueError(label+' timed out')
             entry['exitCode']=code
+            entry['stdout']=(folder/(label+'.stdout.txt')).read_text(encoding='utf-8',errors='replace')[:8192]
+            entry['stderr']=(folder/(label+'.stderr.txt')).read_text(encoding='utf-8',errors='replace')[:8192]
             if (code==0)!=success:raise ValueError(label+' returned unexpected exit status '+str(code))
-            return (folder/(label+'.stderr.txt')).read_text(encoding='utf-8',errors='replace')
+            return entry['stderr']
         run('index',['run','makeblastdb','-in',subjects,'-dbtype','nucl','-parse_seqids','-blastdb_version','4','-out','private-db'])
         run('search',['run','blastn','-query',query,'-db','private-db','-task','blastn','-num_threads','2','-outfmt','11','-out','search.asn'])
         run('format-present',['run','blast_formatter','-archive','search.asn','-outfmt','6 qseqid sseqid pident length qstart qend sstart send','-out','present.tsv'])
