@@ -101,6 +101,24 @@ jobs:
           Invoke-WebRequest -Uri "https://raw.githubusercontent.com/$env:REPOSITORY/$env:SOURCE_COMMIT/scripts/check_star_chunks_windows.py" -OutFile $helper
           & $python -I $helper --app-root $app --report (Join-Path $env:RUNNER_TEMP 'star-chunks.json')
           if ($LASTEXITCODE -ne 0) { throw 'Native STAR repeated-chunk scientific check failed.' }
+      - name: Check BLAST local failure paths
+        if: startsWith(inputs.asset_name, 'native-workbench-pack-blast-')
+        shell: pwsh
+        env:
+          CASE_FOLDER: ${{ matrix.folder }}
+          REPOSITORY: ${{ github.repository }}
+          SOURCE_COMMIT: ${{ github.sha }}
+          ASSET_NAME: ${{ inputs.asset_name }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if ($env:ASSET_NAME -notmatch '^native-workbench-pack-blast-([0-9]+\.[0-9]+\.[0-9]+)\.zip$') { throw 'Invalid BLAST pack identity.' }
+          $packVersion = $Matches[1]
+          $app = Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'native-workbench'
+          $python = Join-Path $app 'runtime/python/python.exe'
+          $helper = Join-Path $env:RUNNER_TEMP 'check_blast_offline.py'
+          Invoke-WebRequest -Uri "https://raw.githubusercontent.com/$env:REPOSITORY/$env:SOURCE_COMMIT/tools/blast/check_offline.py" -OutFile $helper
+          & $python -I $helper --app-root $app --pack-version $packVersion --report (Join-Path $env:RUNNER_TEMP 'blast-local-failures.json')
+          if ($LASTEXITCODE -ne 0) { throw 'Native BLAST local failure-path check failed.' }
       - name: Diagnose failed STAR process
         if: failure()
         shell: pwsh
@@ -125,6 +143,12 @@ jobs:
         env:
           CASE_FOLDER: ${{ matrix.folder }}
         run: |
+          $blast = Join-Path $env:RUNNER_TEMP 'blast-local-failures.json'
+          if (Test-Path $blast) {
+            $blastText = Get-Content $blast -Raw
+            Write-Output $blastText
+            Add-Content $env:GITHUB_STEP_SUMMARY ('```json' + "`n" + $blastText + "`n" + '```')
+          }
           $chunks = Join-Path $env:RUNNER_TEMP 'star-chunks.json'
           if (Test-Path $chunks) {
             $chunkText = Get-Content $chunks -Raw
