@@ -11,7 +11,7 @@ EXPECTED = {
         '00256274213373cd8f27616c21cd04d6313a6aec646ecb63cbd3b4347424cfac'),
     'c++/src/algo/blast/blastinput/blast_scope_src.cpp': (
         'b040a3dc5e7fa8be0236f5e0598d50d24db9cd28508affb1a3d2e1a778b79c1e',
-        '299b72fc420d32c9c73ec2ae192d11ab18c60c57a19b5dd658d2a25c5d6a61f5'),
+        '7036efe9edbff9a306b20b7a560c099cc8eae686d03d71899a9ae3a0778db5aa'),
 }
 
 
