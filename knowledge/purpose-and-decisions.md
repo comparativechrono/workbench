@@ -67,6 +67,24 @@ reference discovery, including Ensembl. Downloaded references must become
 explicit local, versioned inputs with provenance. Do not imply every reference
 database, report format or downstream analysis is already integrated.
 
+Large scientific resources follow the same separation of application and packs.
+The Kraken2/Bracken implementation keeps executable packs small enough for the
+existing importer while reference indexes and read-length models remain explicit
+local inputs. A descriptor records their identity and provenance; it does not
+contain the database or silently download missing files. Users may prepare an
+already downloaded archive locally, or register existing files without copying
+them. Classification-only preparation does not require an abundance model.
+This is an implementation of D01/D04/D08, not a new database-hosting service.
+
+Tools remain independently usable. Bracken can consume a saved Workbench
+classification record, or an external report with explicitly declared database,
+model, read-length and counting-unit provenance. The external path must preserve
+its weaker evidence instead of inventing a Workbench execution history. Hashes
+establish unchanged files; they cannot prove an external model was trained on
+the stated database. These contracts are specified in
+[local metagenomics resources](../docs/METAGENOMICS-RESOURCES.md); release status
+and successful gate claims belong in dated evidence.
+
 ## Scientific and deployment boundaries
 
 An accepted file extension is not sufficient evidence of compatibility. Genome

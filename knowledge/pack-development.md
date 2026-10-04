@@ -380,6 +380,64 @@ support version correspondence, not a claim of bit-identical recompilation.
 Apply the same review to IQ-TREE's compiled-in Boost/Eigen/Rust dependencies and
 SnpEff's Java dependencies; a large source ZIP alone proves no closure.
 
+## Continuing Kraken2 and Bracken builds
+
+The [pipeline guide](../docs/KRAKEN2-BRACKEN-PIPELINE.md) describes the two optional
+packs, using Kraken2 2.17.2 and Bracken 3.1 source pins. Consult the
+[Kraken2](../docs/KRAKEN2-PACK.md) and [Bracken](../docs/BRACKEN-PACK.md) guides for
+their build commands and supported operations. This maintenance section records
+contracts, not a completed release or native Windows validation claim.
+
+Both packs include the same pinned
+[`tools/metagenomics/resources.py`](../tools/metagenomics/resources.py) asset.
+Keep its schema, copies, provenance and tests synchronized before freezing either
+pack. The [resource specification](../docs/METAGENOMICS-RESOURCES.md) is the exact
+field/API contract. Use ordinary `file` ports for database descriptors and
+classification records; released 0.6.0 displays directory selectors but its graph
+preparation still requires ordinary files. Do not add per-tool core branches or
+weaken archive limits to accommodate databases.
+
+Kraken registration selects `hash.k2d`, locates the other two index files,
+inspects actual options and hashes the complete index/taxonomy/options identity.
+The files remain in place. Validate cheap labels, source fields, model filenames
+and declarations before a potentially long hash scan. Local archive preparation
+uses the bounded streaming helper and an owned results child; default
+classification-only mode skips model extraction. Explicit model preparation
+requires the same database/read-length/standard-settings declaration as ordinary
+registration. Preserve cleanup if subsequent scientific options inspection or
+registration fails. Never unpack arbitrary archive members or follow links.
+
+The resource descriptor records a content fingerprint, not publisher identity or
+proof of model origin. Registration labels external models
+`user-attested-external`. Only a separately verified construction can claim
+`locally-built`. A classification record binds a sibling ordinary six-column
+report to that fingerprint, settings, observed read lengths and read/fragment
+counts. Bracken checks the descriptor, report and selected distribution; it does
+not open or rehash enormous Kraken indexes it never consumes. Preserve the
+lexical-only handling of unused database paths, including absent drives.
+
+Retain the scientific boundaries:
+
+- Kraken's paired classification and downstream report counts are fragments,
+  one per pair. Bracken's model length is an individual read length, not insert
+  size or the sum of mate lengths. Plain/gzip FASTQ validation and synchronized
+  pairs must precede native classification.
+- Bracken's recorded pipeline requires the supported standard classification
+  model. Exact observed read lengths are the default; an explicitly selected
+  representative length is an approximation, not a mixture model.
+- External Bracken reports need explicit database/model, length and unit
+  declarations. Keep user-attested provenance distinct from a hash-bound
+  Workbench classification record; both remain user-editable evidence.
+- Keep the upstream estimator unchanged, including thresholds, integer
+  truncation and reestimated report contents. Fractions use upstream retained
+  estimated abundance, excluding unclassified/unallocated observations, not all
+  input reads or organism cell counts. A valid all-unclassified classification
+  does not imply an estimable abundance table.
+- Distribution checks must accept valid upstream zero-count terms and multiple
+  contigs per genome while checking complete, consistent count denominators.
+  Record changes between validation and execution as failures, including the
+  descriptor/record themselves, not only scientific data files.
+
 ## Portability lessons to retain
 
 - Preserve the fastp 0.4.1 reporting fix in `tools/build_fastp.py`. JSON command

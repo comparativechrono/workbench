@@ -188,6 +188,60 @@ remove reconstructible copies when needed, and use the independent native gate
 for Windows evidence. Historical success on an earlier archive does not validate
 a subsequently changed adapter, license tree or manifest.
 
+### Metagenomics resource, graph and scientific contracts
+
+`tests/test_metagenomics_resources.py` checks the shared descriptor and local
+archive helper with synthetic byte files. Its successful source run covers
+resource identity, paired fragment accounting, relocation, unused absent
+indexes, declaration validation before expensive hashing, archive bounds,
+disk checks and failure cleanup. It does not execute Kraken2, Bracken, the app,
+or a native importer. Record the exact helper SHA and platform with its result;
+do not describe this unit suite as scientific or Windows evidence.
+
+`tests/test_metagenomics_pipeline.py` uses unchanged released Workbench 0.6.0
+and exact selected pack archives. The primary disposable app contains starter
+plus selected packs to establish standalone discovery. A second app adds
+SHA-pinned prerequisites for connections. Kraken-only selection requires the
+published fastp 0.4.1 archive; Bracken-only selection requires an explicitly
+pinned frozen Kraken2 archive. The latter is a testing dependency, not a
+requirement for Bracken's independent external-report operation.
+
+Use `NW_METAGENOMICS_PACK_IDS=kraken2`, `bracken`, or `kraken2,bracken`, with
+`NW_METAGENOMICS_STARTER_ZIP`, `_TEMP_DIR` and selected
+`NW_METAGENOMICS_<ID>_VERSION`, `_ARCHIVE`, optional `_PACK_DIR`. Bracken-only
+gates additionally require `NW_METAGENOMICS_KRAKEN2_SHA256`; Kraken selection
+uses `NW_METAGENOMICS_FASTP_ARCHIVE`. Run in a fresh process:
+
+```sh
+python3 tests/test_metagenomics_pipeline.py --report /path/to/evidence/metagenomics-contracts.json
+```
+
+The expected graph counts are six for Kraken2, seven for Bracken and nine for
+both. These tests cover standalone operation, source provenance, typed edges,
+branch ranks, presets and pinned pipelines, exact archive payloads, duplicate
+imports and unchanged core files. Archive publication uses a checked Python
+copy callback, not the native importer. Generic file/metrics connections cannot
+establish database/model association, report structure, read lengths or counting
+units; the adapters and scientific suites must establish those properties.
+Missing CLI prerequisites or skipped cases must fail the gate.
+
+The native workflow has separate installation, graph and scientific gates for
+each metagenomics pack. It uses a source-committed dependency lock at
+`tools/metagenomics/native-dependencies.json`, verifies the chosen dependency
+archive and checks out regression sources at the workflow commit. Both ordinary
+and space-containing paths are required. Bracken's scientific command includes
+`--kraken2-archive` to execute the actual classification-to-estimation chain;
+an earlier source-only fixture record does not replace that chain. Keep
+installation checks, helper/resource tests, graph contracts and real scientific
+execution distinct in the final report. Candidate and exact-final archives each
+need their own gates and immutable source/provenance evidence.
+
+Small synthetic metagenomics data can establish known assignments, abundance
+arithmetic, no-hit behavior and portability regressions. It cannot establish
+accuracy of an arbitrary downloaded database, large-database memory/performance,
+clinical pathogen detection or GUI behavior. Source documentation of a gate is
+not evidence that a release has passed it; use dated exact-archive records.
+
 ## Native Windows pack gate
 
 Package once, freeze the archive, and calculate its SHA-256. On Windows, use a

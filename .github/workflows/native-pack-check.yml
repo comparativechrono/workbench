@@ -213,6 +213,69 @@ jobs:
           }
           & $python @regressionArgs
           if ($LASTEXITCODE -ne 0) { throw 'Expansion scientific/failure regressions failed.' }
+      - name: Check out metagenomics regression sources
+        if: always() && !cancelled() && (startsWith(inputs.asset_name, 'native-workbench-pack-kraken2-') || startsWith(inputs.asset_name, 'native-workbench-pack-bracken-'))
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - name: Check metagenomics released application contracts
+        if: always() && !cancelled() && (startsWith(inputs.asset_name, 'native-workbench-pack-kraken2-') || startsWith(inputs.asset_name, 'native-workbench-pack-bracken-'))
+        shell: pwsh
+        env:
+          CASE_FOLDER: ${{ matrix.folder }}
+          REPOSITORY: ${{ github.repository }}
+          ASSET_NAME: ${{ inputs.asset_name }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if ($env:ASSET_NAME -notmatch '^native-workbench-pack-(kraken2|bracken)-([0-9]+\.[0-9]+\.[0-9]+)\.zip$') { throw 'Invalid metagenomics pack identity.' }
+          $packId = $Matches[1]
+          $packVersion = $Matches[2]
+          $app = Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'native-workbench'
+          $python = Join-Path $app 'runtime/python/python.exe'
+          $env:NW_METAGENOMICS_PACK_IDS = $packId
+          $env:NW_METAGENOMICS_STARTER_ZIP = Join-Path $env:RUNNER_TEMP 'application.zip'
+          $env:NW_METAGENOMICS_TEMP_DIR = Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) ('metagenomics-contracts-' + $packId)
+          $prefix = 'NW_METAGENOMICS_' + $packId.ToUpperInvariant()
+          [Environment]::SetEnvironmentVariable($prefix + '_VERSION', $packVersion, 'Process')
+          [Environment]::SetEnvironmentVariable($prefix + '_PACK_DIR', (Join-Path $app ('packs/' + $packId + '-' + $packVersion)), 'Process')
+          [Environment]::SetEnvironmentVariable($prefix + '_ARCHIVE', (Join-Path $env:RUNNER_TEMP 'candidate.zip'), 'Process')
+          $lock = Get-Content (Join-Path $env:GITHUB_WORKSPACE 'tools/metagenomics/native-dependencies.json') -Raw | ConvertFrom-Json
+          if ($lock.schema -ne 1) { throw 'Unknown metagenomics dependency lock.' }
+          $depIds = if ($packId -eq 'kraken2') { @('fastp') } else { @('kraken2') }
+          foreach ($depId in $depIds) {
+            $dependency = $lock.packs.$depId
+            if (-not $dependency -or $dependency.version -notmatch '^[0-9]+\.[0-9]+\.[0-9]+$' -or $dependency.sha256 -notmatch '^[a-f0-9]{64}$') { throw ('Missing exact published dependency: ' + $depId) }
+            $depVersion = $dependency.version
+            $destination = Join-Path $env:RUNNER_TEMP ('dependency-' + $depId + '.zip')
+            $url = "https://github.com/comparativechrono/workbench/releases/download/pack-$depId-v$depVersion/native-workbench-pack-$depId-$depVersion.zip"
+            Invoke-WebRequest -Uri $url -OutFile $destination
+            if ((Get-FileHash $destination -Algorithm SHA256).Hash -ne $dependency.sha256) { throw ('Dependency hash mismatch: ' + $depId) }
+            $depPrefix = 'NW_METAGENOMICS_' + $depId.ToUpperInvariant()
+            [Environment]::SetEnvironmentVariable($depPrefix + '_VERSION', $depVersion, 'Process')
+            [Environment]::SetEnvironmentVariable($depPrefix + '_ARCHIVE', $destination, 'Process')
+            [Environment]::SetEnvironmentVariable($depPrefix + '_SHA256', $dependency.sha256, 'Process')
+          }
+          & $python -I (Join-Path $env:GITHUB_WORKSPACE 'tests/test_metagenomics_pipeline.py') --report (Join-Path $env:RUNNER_TEMP 'metagenomics-graph-contracts.json')
+          if ($LASTEXITCODE -ne 0) { throw 'Metagenomics released application graph/archive contracts failed.' }
+      - name: Run metagenomics scientific and failure regressions
+        if: always() && !cancelled() && (startsWith(inputs.asset_name, 'native-workbench-pack-kraken2-') || startsWith(inputs.asset_name, 'native-workbench-pack-bracken-'))
+        shell: pwsh
+        env:
+          CASE_FOLDER: ${{ matrix.folder }}
+          ASSET_NAME: ${{ inputs.asset_name }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if ($env:ASSET_NAME -notmatch '^native-workbench-pack-(kraken2|bracken)-([0-9]+\.[0-9]+\.[0-9]+)\.zip$') { throw 'Invalid metagenomics pack identity.' }
+          $packId = $Matches[1]
+          $packVersion = $Matches[2]
+          $app = Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'native-workbench'
+          $python = Join-Path $app 'runtime/python/python.exe'
+          $pack = Join-Path $app ('packs/' + $packId + '-' + $packVersion)
+          $helper = Join-Path $env:GITHUB_WORKSPACE ('tests/test_' + $packId + '_pack.py')
+          $regressionArgs = @('-I', $helper, '--pack', $pack, '--report', (Join-Path $env:RUNNER_TEMP 'metagenomics-scientific-regressions.json'))
+          if ($packId -eq 'bracken') { $regressionArgs += @('--kraken2-archive', (Join-Path $env:RUNNER_TEMP 'dependency-kraken2.zip')) }
+          & $python @regressionArgs
+          if ($LASTEXITCODE -ne 0) { throw 'Metagenomics scientific/failure regressions failed.' }
       - name: Diagnose failed STAR process
         if: failure()
         shell: pwsh
@@ -237,6 +300,14 @@ jobs:
         env:
           CASE_FOLDER: ${{ matrix.folder }}
         run: |
+          foreach ($name in @('metagenomics-scientific-regressions.json', 'metagenomics-graph-contracts.json')) {
+            $metagenomicsReport = Join-Path $env:RUNNER_TEMP $name
+            if (Test-Path $metagenomicsReport) {
+              $metagenomicsText = Get-Content $metagenomicsReport -Raw
+              Write-Output $metagenomicsText
+              Add-Content $env:GITHUB_STEP_SUMMARY ('```json' + "`n" + $metagenomicsText + "`n" + '```')
+            }
+          }
           $expansionScience = Join-Path $env:RUNNER_TEMP 'expansion-scientific-regressions.json'
           if (Test-Path $expansionScience) {
             $expansionScienceText = Get-Content $expansionScience -Raw

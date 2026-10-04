@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "purpose": "Exact public pack dependencies for metagenomics regression gates; not an installation catalogue or trust file.",
+  "packs": {
+    "fastp": {
+      "version": "0.4.1",
+      "sha256": "93c32ccd506bb61eed0e901f83f025fed183557587cc5378ad0d40771db4a8cc"
+    }
+  }
+}
