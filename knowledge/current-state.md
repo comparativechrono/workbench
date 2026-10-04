@@ -1,7 +1,7 @@
 # Current project state
 
 Snapshot: **2026-10-04**. Source baseline:
-[`9368c22058a3fe3cd434e7185fcaf5ff3fd6ce22`](https://github.com/comparativechrono/workbench/tree/9368c22058a3fe3cd434e7185fcaf5ff3fd6ce22).
+[`1b537869e9d88e493078e1a1f241d16013273f44`](https://github.com/comparativechrono/workbench/tree/1b537869e9d88e493078e1a1f241d16013273f44).
 Read this alongside the [machine-readable release inventory](release-inventory.json)
 and the repository [README](../README.md). Update the date, source baseline and
 evidence when the state changes; do not silently turn a pending item into a claim
@@ -9,8 +9,8 @@ of completion.
 
 ## What is available
 
-The native desktop application **0.6.0** and **20 distinct tool packs** are
-published as development prereleases. There are 21 published pack versions,
+The native desktop application **0.6.0** and **25 distinct tool packs** are
+published as development prereleases. There are 26 published pack versions,
 because kallisto 1.0.0 is retained after being superseded by 1.0.1. Historical
 candidate releases are additional diagnostics, not current analysis packs.
 
@@ -49,6 +49,11 @@ These are **pack versions**, which differ from upstream tool versions.
 | `vsearch` | 0.5.2 | Amplicon operations |
 | `star` | 1.0.0 | Bulk RNA alignment and optional annotated gene counts |
 | `kallisto` | 1.0.1 | Bulk RNA transcript quantification |
+| `fastqc` | 1.0.0 | Single/paired FASTQ quality reports |
+| `multiqc` | 1.0.0 | Aggregate explicitly selected local QC reports |
+| `featurecounts` | 1.0.0 | Single-end RNA read or paired-fragment gene counts |
+| `bedtools` | 1.0.0 | BED interval operations and reference sequence extraction |
+| `blast` | 1.0.0 | Local nucleotide/protein and translated similarity searches |
 
 Existing bundled pipeline packs remain available for reproducibility. The
 development direction is individually usable tools or small related operations
@@ -57,11 +62,13 @@ version or manifest hash pinned by a saved pipeline.
 
 ## What the evidence establishes
 
-This documentation update read public GitHub release metadata, release notes,
-the baseline README and the two final RNA workflow-run records. It **did not**
-rehash all binary downloads or rerun scientific tests. The inventory's digests
-are GitHub asset metadata; older release notes additionally record checks made
-during publication. Keep those verification levels distinct.
+The initial 2026-10-04 handover read release metadata and RNA CI records; it did
+not repeat every older binary download or scientific run. The later optional-pack
+work independently downloaded and rehashed each new public release asset,
+retained Linux/source regression evidence, and ran the exact final pack ZIPs
+through the released 0.6.0 native Windows bridge. The inventory records these
+verification levels separately. Earlier application and pack evidence remains
+dated evidence for its original bytes, not a fresh test of every older tool.
 
 | Component | Recorded evidence | Boundary |
 | --- | --- | --- |
@@ -69,6 +76,20 @@ during publication. Keep those verification levels distinct.
 | Original 18 independent archives | Preserved original pack IDs, versions, manifests, contents and licence/source materials; archive inventories, sizes, hashes and ZIP CRCs audited | Repackaging did not constitute a new native Windows execution test for every tool. |
 | STAR 1.0.0 | Eight Linux scientific tests and six released-app graph/import contracts; exact published archive passed native Windows CI in ordinary and space-containing paths | Five scientific fixtures plus a two-thread, two-pass buffer regression; small synthetic data, not a human-genome benchmark. |
 | kallisto 1.0.1 | Ten Linux scientific tests and six released-app graph/import contracts; exact published archive passed native Windows CI in ordinary and space-containing paths | Single/paired fixtures exercise two threads and three bootstrap replicates; not validation of all RNA-seq protocols. |
+| FastQC 1.0.0 | Eight Linux source/scientific tests; exact final ZIP passed two native scientific checks in each path | Single plain and synchronized paired gzip FASTQ; counts, bases, GC and Q40 truth; private Java runtime, no GUI acceptance claim. |
+| MultiQC 1.0.0 | Ten Linux source/regression tests, including real FastQC output; exact final ZIP passed its multi-input native check in each path | Six explicitly selected reports exercise five parsers; no whole-folder scanning, sample-merging inference or clinical interpretation. |
+| featureCounts 1.0.0 | Eight Linux scientific/guard tests; exact final ZIP passed six native checks in each path | Single/paired counting at two threads, all three strand modes and known gene/assignment truth. |
+| BEDTools 1.0.0 | Seven Linux regression tests, with all 15 fixture cases compared byte-for-byte to unmodified upstream; exact final ZIP passed 15 native checks in each path | Interval truth, CRLF, valid empty results, 64-bit coordinates and forward/reverse-complement extraction; exposed BED operations only. |
+| BLAST 1.0.0 | Linux tests: 10 passed and one deliberately skipped on unmodified upstream; all 11 passed on the patched build. Exact final ZIP passed five scientific checks and six additional regressions in each native path | Four search modes, known coordinates/frames and a legitimate no-hit case; local-only failure regressions are separate from OS network isolation. |
+
+The five-pack October [graph/import report](evidence/popular-pack-graph-contracts-2026-10-04.json)
+records **eight tests passed, zero failures/errors/skips** on Linux with the
+unchanged released 0.6.0 app and the corrected frozen BLAST guard. It binds the
+exact ZIP/manifest hashes of the disposable graph-tested pack copies to FastQC
+fan-in reporting, STAR-to-featureCounts branches at a shared DAG level, merged
+reporting and BEDTools-to-BLAST nucleotide search. Type/pairing mismatches,
+missing strand choices, duplicate connections and changed saved pins are rejected.
+It explicitly records that no scientific executable or native importer ran.
 
 The RNA graph/import contract tests used a Python copy callback in place of
 native folder publication. The separate Windows jobs exercised the released
@@ -89,6 +110,17 @@ Final native Windows records:
   bootstrap replicates in each location, including gzip reads.
   [Final validation JSON](https://github.com/comparativechrono/workbench/releases/download/pack-kallisto-v1.0.1/native-workbench-kallisto-1.0.1-windows-validation.json).
 
+The added packs' final runs also used the actual native importer and rejected a
+duplicate version without replacing the installed manifest:
+
+| Pack | Exact-final Windows run | Scientific checks per path |
+| --- | --- | --- |
+| FastQC 1.0.0 | [37207251061](https://github.com/comparativechrono/workbench/actions/runs/37207251061) | 2 |
+| MultiQC 1.0.0 | [37208730673](https://github.com/comparativechrono/workbench/actions/runs/37208730673) | 1 multi-input case |
+| featureCounts 1.0.0 | [37208535793](https://github.com/comparativechrono/workbench/actions/runs/37208535793) | 6 |
+| BEDTools 1.0.0 | [37207758617](https://github.com/comparativechrono/workbench/actions/runs/37207758617) | 15 |
+| BLAST 1.0.0 | [37210341211](https://github.com/comparativechrono/workbench/actions/runs/37210341211) | 5, plus 6 adapter/local-failure regressions |
+
 The corresponding source/evidence ZIPs are listed with digests in the inventory.
 They preserve Linux and candidate-stage evidence, including historical status
 at creation. The separate final validation JSON supersedes any pending-final-gate
@@ -99,8 +131,9 @@ acceptance test or proof of performance on arbitrary datasets.
 ## Important current limits
 
 See the [RNA-seq guide](../docs/rna-seq-packs.md),
-[kallisto pack guide](../docs/KALLISTO-PACK.md), each installed `PACK-README.md`
-and its `licenses/provenance.json` for detailed supported interfaces.
+[kallisto pack guide](../docs/KALLISTO-PACK.md),
+[additional pack guide](../docs/popular-packs-2026-10.md), each installed `PACK-README.md`
+and its bundled provenance files for detailed supported interfaces.
 
 - **STAR 1.0.0** uses STAR `2.7.11b-workbench1`. It builds a private index on
   every run because the 0.6.0 graph cannot expose reusable directory-valued
@@ -128,6 +161,44 @@ and its `licenses/provenance.json` for detailed supported interfaces.
   Version 1.0.1 fixes dispatch to the existing upstream worker without changing
   its sampling or estimation algorithms. Keep 1.0.0 bytes and pipeline pins
   unchanged; explicitly select 1.0.1 for new/updated pipelines.
+- **FastQC 1.0.0** uses unmodified FastQC 0.13.0 with private Temurin
+  8u504-b01. Four-line plain/gzip FASTQ, explicit Phred+33/+64 and synchronized
+  mates are supported. ASCII paths must exclude semicolons; filenames beginning
+  with lowercase `stdin` are rejected because upstream treats them as streams.
+  QC flags require interpretation and do not trim or filter reads.
+- **MultiQC 1.0.0** uses MultiQC 1.35 with private Python 3.13.16 and pinned
+  Windows wheels. It accepts 1–64 explicitly selected metrics files from five
+  supported parsers; kallisto requires its captured quantification log, not
+  `run_info.json` or `abundance.tsv`. Input names are namespaced to preserve
+  separate rows; no biological sample matching is inferred. Implicit settings,
+  version checks, uploads and AI are disabled. Its Python audit hook and report
+  CSP are bounded controls, not an OS sandbox. Reports do not launch a browser;
+  viewing HTML separately may require an approved viewer. Per-run private wheel
+  extraction needs about 1 GiB extra disk space.
+- **featureCounts 1.0.0** uses the official unmodified Subread 2.1.1 Windows
+  executable. It counts one RNA BAM against matching plain GTF, with explicit
+  strandedness. Paired counting requires both aligned ends and excludes chimeras;
+  supplementary alignments are rejected, NH multimappers/secondary and ambiguous
+  reads excluded, and duplicate-marked reads retained. Results are raw integer
+  gene counts, not normalization or differential expression. The guard requires
+  exact contig names but does not prove genome/sample identity.
+- **BEDTools 1.0.0** exposes nine interval operations using
+  `2.31.1-workbench1`. Input is consistent plain BED3–6 with zero-based half-open
+  coordinates; released 0.6.0 bounds inputs to one million intervals and rejects
+  empty downstream BED inputs even when an upstream no-hit result is legitimate.
+  Sequence extraction privately copies and indexes plain FASTA, with individual
+  contigs bounded to 2,147,483,647 bases. No BED12/GTF/VCF/BAM semantics are implied.
+- **BLAST 1.0.0** uses BLAST+ 2.17.0 built with static MSVC runtime from pinned
+  NCBI/SQLite source. It exposes BLASTN, BLASTP, BLASTX and TBLASTN with local,
+  uncompressed FASTA queries/subjects. Each run builds a private version-4
+  database; reusable database folders, remote search and automatic download are
+  not exposed. The guard validates complete FASTA records/identifiers and the
+  selected alphabet. Similarity hits do not establish function or orthology;
+  translated searches require an appropriate genetic code. Narrow source patches
+  retain paths with spaces and remove implicit remote sequence/database fallback;
+  the guard disables usage reporting and preserves child diagnostics. Exact
+  coordinate/translated-frame and local-failure checks are bounded evidence,
+  not a network firewall or validation of all BLAST operations.
 - Resource demands and portability constraints remain tool-specific. A local
   GUI cannot make a large reference fit into insufficient RAM. Do not promise
   generic Linux binary compatibility, arbitrary Unicode paths or universal
@@ -158,7 +229,7 @@ and its `licenses/provenance.json` for detailed supported interfaces.
 
 The older `publishing/releases-0.6.0.json`,
 `publishing/publication-layout-0.6.0.json` and parts of the publication guide
-describe the original **18-pack split**. They are not the complete later RNA
+describe the original **18-pack split**. They are not the complete later optional-pack
 inventory. Preserve their historical meaning and use this snapshot when planning
 the next catalogue generation; add validated release mappings deliberately.
 
@@ -168,6 +239,17 @@ later candidates established correspondence with the final packs. Do not present
 candidate downloads as current supported analysis versions, remove historical
 published bytes, or infer that a successful candidate replaces an exact-final
 archive check.
+
+The [October optional-pack candidates](https://github.com/comparativechrono/workbench/releases/tag/popular-candidates-20261004)
+retain failed and superseded diagnostics. featureCounts' first candidate counted
+correctly but its full-row checks did not accept Windows CRLF; a stale second
+candidate was not promoted. MultiQC's first candidate exposed the runner's
+precreated output directory behavior. Later candidates and exact-final gates
+record the fixes; retain historical bytes and correspondence reports. BLAST
+0.0.1 passed five scientific result-file checks per path but lost child diagnostic
+output; candidate 0.0.2 uses explicit inherited standard handles and passes the
+additional local-failure regressions. Only the separate exact-final gate validates
+the published 1.0.0 archive.
 
 Finally, a Git clone alone is not the full third-party build environment. Recover
 the explicit [application source companion](https://github.com/comparativechrono/workbench/releases/download/app-v0.6.0/native-workbench-0.6.0-source.zip)

@@ -8,9 +8,10 @@ open, diffable files with no proprietary reader or external memory service.
 separate standard called Open Knowledge Format.
 
 **Reviewed:** 2026-10-04. **Source baseline:**
-[`9368c22058a3fe3cd434e7185fcaf5ff3fd6ce22`](https://github.com/comparativechrono/workbench/commit/9368c22058a3fe3cd434e7185fcaf5ff3fd6ce22).
-The initial handover is documentation added after that baseline. Re-check the
-current tree and releases before treating its version snapshot as current.
+[`1b537869e9d88e493078e1a1f241d16013273f44`](https://github.com/comparativechrono/workbench/commit/1b537869e9d88e493078e1a1f241d16013273f44).
+This handover records the optional-pack expansion after the initial documentation
+snapshot. Re-check the current tree and releases before treating its version
+snapshot as current.
 
 ## Reading order
 
@@ -53,8 +54,8 @@ experimental computation module, not the complete current application.
 [docs/pack-development-0.6.md](../docs/pack-development-0.6.md) originally
 recommended two repositories; its guidance is now corrected to this one
 repository with independent application and pack tags. The 18-pack lists under `publishing/`
-describe the original 0.6 split, before STAR and kallisto. Do not mistake these
-historical inventories for the latest complete list.
+describe the original 0.6 split, before STAR, kallisto and the later optional
+packs. Do not mistake these historical inventories for the latest complete list.
 
 ## Maintaining the handover
 

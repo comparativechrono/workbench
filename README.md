@@ -13,18 +13,21 @@ The application does not require Docker, WSL or a system Python installation.
 
 Version **0.6.0 is a development prerelease**. The
 [application release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.6.0)
-and **20 independently versioned tool packs** are published on GitHub. Their public
+and **25 independently versioned tool packs** are published on GitHub. Their public
 downloads have been checked against the original sizes and SHA-256 checksums.
 
 The signed online catalogue and its `source.json` trust file are **not published
 or configured**. They require a maintainer-controlled signing key. Use the offline
 pack import described below until the signed feed is available.
 
-The build passed 214 automated tests with one Windows-only skip, the eight
+The application build passed 214 automated tests with one Windows-only skip, the eight
 starter installation/scientific checks, and an actual 0.5.4-to-0.6.0 updater
 migration on Linux. Scientific execution used the portable Linux reference
-backend. The new Windows GUI and native Windows long-path behavior still need
-validation on Windows.
+backend. The current Windows GUI and native Windows long-path behavior still need
+validation on Windows. Separate native Windows pack checks validate the exact
+published STAR, kallisto, FastQC, MultiQC, featureCounts, BEDTools and BLAST archives
+through the released 0.6.0 native bridge in ordinary and space-containing paths;
+see the [dated evidence and limits](knowledge/current-state.md).
 
 ## Using the application
 
@@ -39,6 +42,25 @@ Workbench, open **Manage tools**, choose **Import pack ZIP**, and select that ZI
 The ZIP can be copied to an offline machine before importing; running the tool
 does not require a network connection. The starter already includes the `align`,
 `bam` and `variants` packs.
+
+### More optional tools
+
+These additions cover widely used QC, counting, interval and similarity-search
+operations. They are independent downloads; the starter distribution is
+unchanged. Installed packs use additional disk space.
+
+| Pack | What it adds |
+| --- | --- |
+| [FastQC 1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-fastqc-v1.0.0) | Single/paired FASTQ quality reports, including gzip inputs |
+| [MultiQC 1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-multiqc-v1.0.0) | Combine explicitly selected local FastQC, fastp, STAR, featureCounts and kallisto reports |
+| [featureCounts 1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-featurecounts-v1.0.0) | Count reads or paired fragments from an RNA BAM against matching GTF genes |
+| [BEDTools 1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-bedtools-v1.0.0) | Intersect, subtract, cover, sort/merge intervals and extract reference sequences |
+| [NCBI BLAST+ 1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-blast-v1.0.0) | Local BLASTN, BLASTP, BLASTX and TBLASTN searches against your own FASTA sequences |
+
+Use [the pack guide](docs/popular-packs-2026-10.md) for supported inputs,
+scientific choices, pipeline branches and resource requirements. Reports are
+created locally; viewing an HTML report separately may require an approved
+viewer. The desktop app does not launch a browser to run these tools.
 
 ### RNA-seq tools
 

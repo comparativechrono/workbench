@@ -1,0 +1,213 @@
+{
+  "schema": 1,
+  "applicationVersion": "0.6.0",
+  "testHost": "linux",
+  "pythonVersion": "3.12.14",
+  "nativeWindowsExecuted": false,
+  "scientificExecutablesExecuted": false,
+  "nativeImporterExecuted": false,
+  "expectedPackVersions": {
+    "fastqc": "1.0.0",
+    "multiqc": "1.0.0",
+    "featurecounts": "1.0.0",
+    "bedtools": "1.0.0",
+    "blast": "1.0.0"
+  },
+  "scope": "Released-app graph contracts and Python archive import; a copy callback substitutes native folder publication.",
+  "intervalSequenceSearchGraph": {
+    "tools": [
+      "bedtools/getfasta",
+      "blast/blastn"
+    ],
+    "nucleotideProteinConfusionRejected": true
+  },
+  "qualityMergeGraph": {
+    "tools": [
+      "fastqc/single",
+      "fastqc/single",
+      "multiqc/aggregate"
+    ],
+    "ranks": [
+      {
+        "rank": 1,
+        "nodes": [
+          "step-1",
+          "step-2"
+        ]
+      },
+      {
+        "rank": 2,
+        "nodes": [
+          "step-3"
+        ]
+      }
+    ],
+    "incoming": {
+      "reports": [
+        "step-1::archive1",
+        "step-2::archive1"
+      ]
+    },
+    "savedPins": [
+      {
+        "packId": "fastqc",
+        "packVersion": "1.0.0",
+        "manifestSha256": "1f791b7fb3af5aab35a7033f1b933c40f2dd2bbc6930d68c70cbc626f14653bc"
+      },
+      {
+        "packId": "fastqc",
+        "packVersion": "1.0.0",
+        "manifestSha256": "1f791b7fb3af5aab35a7033f1b933c40f2dd2bbc6930d68c70cbc626f14653bc"
+      },
+      {
+        "packId": "multiqc",
+        "packVersion": "1.0.0",
+        "manifestSha256": "5651f9519a4dea176a4f70f09ed8b64d016b3747b6c0dce0482ac6e7872f7f83"
+      }
+    ],
+    "duplicateConnectionRejected": true
+  },
+  "offlineStaticImports": [
+    {
+      "id": "bedtools",
+      "version": "1.0.0",
+      "archiveSha256": "f195c4c25acd1b109b8bd73656d64e12939bea847aa4d95a776fa25129455382",
+      "manifestSha256": "4918fb533a648db4e1c53bd3a71676cef008bd7228a84136e2c4f4724420ead1",
+      "duplicateVersionRejected": true,
+      "receiptAndInstalledBytesUnchanged": true
+    },
+    {
+      "id": "blast",
+      "version": "1.0.0",
+      "archiveSha256": "3a907171c210d640a53cff6f2c51813be61b87a859a3a65b987947985f97024c",
+      "manifestSha256": "3242e23ba4e5edbec8b288c98d666cb4f0f3c23c9f03fc9d7d4258e4029d90c8",
+      "duplicateVersionRejected": true,
+      "receiptAndInstalledBytesUnchanged": true
+    },
+    {
+      "id": "fastqc",
+      "version": "1.0.0",
+      "archiveSha256": "10249aef6fa482fe2d0c37a76625e5664ca40dde3630814bc35e26aea6cd1bc4",
+      "manifestSha256": "1f791b7fb3af5aab35a7033f1b933c40f2dd2bbc6930d68c70cbc626f14653bc",
+      "duplicateVersionRejected": true,
+      "receiptAndInstalledBytesUnchanged": true
+    },
+    {
+      "id": "featurecounts",
+      "version": "1.0.0",
+      "archiveSha256": "f3319b6a8b13c30bc31b782008b0283c7688c739da2dd77cf5ab80859ccff4c2",
+      "manifestSha256": "f40b334f0eb469a34d92696cf17c5ac2848346add6cdb9d73ca06fab93770716",
+      "duplicateVersionRejected": true,
+      "receiptAndInstalledBytesUnchanged": true
+    },
+    {
+      "id": "multiqc",
+      "version": "1.0.0",
+      "archiveSha256": "a171da9ac947c7399057da20a8fcddd74201bdb60cfaf030301a1123b0ff9e3e",
+      "manifestSha256": "5651f9519a4dea176a4f70f09ed8b64d016b3747b6c0dce0482ac6e7872f7f83",
+      "duplicateVersionRejected": true,
+      "receiptAndInstalledBytesUnchanged": true
+    }
+  ],
+  "starterPackFilesPreserved": 143,
+  "installedInventory": {
+    "packManifests": 9,
+    "executablesVerified": 21,
+    "assetsVerified": 319
+  },
+  "newPacks": [
+    {
+      "id": "bedtools",
+      "version": "1.0.0",
+      "manifestSha256": "4918fb533a648db4e1c53bd3a71676cef008bd7228a84136e2c4f4724420ead1",
+      "scientificChecksDeclared": 15
+    },
+    {
+      "id": "blast",
+      "version": "1.0.0",
+      "manifestSha256": "3242e23ba4e5edbec8b288c98d666cb4f0f3c23c9f03fc9d7d4258e4029d90c8",
+      "scientificChecksDeclared": 5
+    },
+    {
+      "id": "fastqc",
+      "version": "1.0.0",
+      "manifestSha256": "1f791b7fb3af5aab35a7033f1b933c40f2dd2bbc6930d68c70cbc626f14653bc",
+      "scientificChecksDeclared": 2
+    },
+    {
+      "id": "featurecounts",
+      "version": "1.0.0",
+      "manifestSha256": "f40b334f0eb469a34d92696cf17c5ac2848346add6cdb9d73ca06fab93770716",
+      "scientificChecksDeclared": 6
+    },
+    {
+      "id": "multiqc",
+      "version": "1.0.0",
+      "manifestSha256": "5651f9519a4dea176a4f70f09ed8b64d016b3747b6c0dce0482ac6e7872f7f83",
+      "scientificChecksDeclared": 1
+    }
+  ],
+  "releasedApplicationFilesVerified": [
+    "WorkbenchBridge.exe",
+    "workspace/app_version.py",
+    "workspace/catalog-sources.json",
+    "workspace/catalog.py",
+    "workspace/core_checks.py",
+    "workspace/desktop_host.py",
+    "workspace/desktop_model.py",
+    "workspace/engine.py",
+    "workspace/example.py",
+    "workspace/pack_checks.py",
+    "workspace/pack_manager.py",
+    "workspace/pack_security.py",
+    "workspace/service.py",
+    "workspace/starter-check-profile.json",
+    "workspace/verify_installation.py"
+  ],
+  "starterSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+  "starDependencySha256": "edbeefff1c1149b632407f50a8a28847989a34eaa004752b43680fb6e29e4877",
+  "changedSavedManifestRejected": true,
+  "rnaCountingReportingGraph": {
+    "tools": [
+      "star/rna-paired",
+      "featurecounts/count-paired",
+      "featurecounts/count-paired",
+      "multiqc/aggregate"
+    ],
+    "ranks": [
+      {
+        "rank": 1,
+        "nodes": [
+          "step-1"
+        ]
+      },
+      {
+        "rank": 2,
+        "nodes": [
+          "step-2",
+          "step-3"
+        ]
+      },
+      {
+        "rank": 3,
+        "nodes": [
+          "step-4"
+        ]
+      }
+    ],
+    "explicitStrandednessRequired": true,
+    "singleIntoPairedRejected": true
+  },
+  "incompatibleInputsRejected": [
+    "FASTA to read QC",
+    "DNA BAM to RNA counting",
+    "RNA BAM to report aggregation",
+    "VCF to BED-only intervals"
+  ],
+  "testsRun": 8,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "testSourceSha256": "9c3ca78421cbe84c8dd4e3e8f2cf36983da256572d2dace5d37c402918f71179",
+  "success": true
+}

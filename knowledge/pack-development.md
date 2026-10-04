@@ -1,7 +1,7 @@
 # Developing a scientific tool pack
 
 Status: maintained handover, audited against repository commit
-`9368c22058a3fe3cd434e7185fcaf5ff3fd6ce22` on 2026-10-04.
+`1b537869e9d88e493078e1a1f241d16013273f44` on 2026-10-04.
 Start with [the knowledge index](README.md); use
 [validation and releases](validation-and-releases.md) before distribution.
 
@@ -162,7 +162,7 @@ The repository intentionally excludes compiled tools, private runtimes and most
 vendor archives. Follow [source recovery](../docs/source-recovery/README.md) and
 its exact-hash inventories for historical builds. Recover inputs into a separate
 tree; do not overwrite current app source with the old 0.5.4 source companion.
-The current RNA source/evidence companions supplement that history.
+The RNA and later optional-pack source/evidence companions supplement that history.
 
 ## Starting a new pack
 
@@ -232,6 +232,39 @@ build command proves Windows execution. Build-time provenance deliberately
 records that execution testing has not been performed; attach later validation
 evidence separately instead of changing an already frozen release archive.
 
+## Continuing the October optional packs
+
+The [usage and selection guide](../docs/popular-packs-2026-10.md) records why
+FastQC, MultiQC, featureCounts, BEDTools and BLAST+ were selected. These are a
+practical shortlist of widely adopted missing capabilities, not a numerical
+popularity ranking. Existing packs already cover the core DNA aligners/callers
+and STAR/kallisto RNA operations; do not duplicate their identities.
+
+| Pack | Build entry point and contract |
+| --- | --- |
+| FastQC | `scripts/prepare_fastqc_pack.py`; upstream jar plus private Temurin runtime and Java boundary adapter; [guide](../docs/FASTQC-PACK.md) |
+| MultiQC | `scripts/prepare_multiqc_pack.py`; `tools/multiqc/windows-lock.json` pins private CPython and Windows wheels; [guide](../docs/MULTIQC-PACK.md) |
+| featureCounts | `scripts/build_featurecounts_native.py` and `scripts/prepare_featurecounts_pack.py`; official Subread Windows binary plus compiled input guard; [guide](../docs/FEATURECOUNTS-PACK.md) |
+| BEDTools | `scripts/build_bedtools_native.py` and `scripts/prepare_bedtools_pack.py`; LLVM/MinGW port and input guard, preserving upstream interval algorithms; [guide](../docs/BEDTOOLS-PACK.md) |
+| BLAST+ | `scripts/build_blast_windows.ps1` and `scripts/prepare_blast_pack.py`; pinned NCBI/SQLite source with MSVC static runtime and bounded local-only/path fixes; [guide](../docs/BLAST-PACK.md) |
+
+Read each recipe's explicit cache, destination, compiler and reference-build
+requirements. Build commands are development-time network operations; prepared
+packs require no download during analysis. Private Java/Python runtimes and
+corresponding source make some optional packs much larger than the starter.
+MultiQC keeps pinned wheels compressed inside the installed pack to meet the
+file-count bound, then extracts into each private run directory. Preserve the
+upstream wheel DLL loaders; repacking Python modules without their native
+libraries can pass Linux tests while failing Windows imports.
+
+BLAST's initial build and adapter-only CI/export records distinguish the unchanged
+six upstream scientific binaries from its corrected Windows guard. Their GitHub
+Actions artifacts can expire. Rebuild normally with
+`scripts/build_blast_windows.ps1` from the public SHA-pinned NCBI/SQLite sources
+and current guard, using the documented MSVC/CMake environment; do not require
+an old run's artifact to remain downloadable. Release source/provenance companions
+retain the exact source and build records needed to review the distributed bytes.
+
 ## Portability lessons to retain
 
 - Preserve the fastp 0.4.1 reporting fix in `tools/build_fastp.py`. JSON command
@@ -263,9 +296,42 @@ evidence separately instead of changing an already frozen release archive.
   dispatch. The 1.0.1 pack invokes the existing upstream worker; it does not
   change sampling or abundance estimation. Tests exercise the actual two-thread
   default and requested bootstraps, including thread counts 1, 2 and 4.
+- featureCounts Windows output uses CRLF. Scientific row assertions must allow
+  the documented line-ending difference while still matching the complete row
+  and exact number. Do not loosen a count assertion so expected `4` also accepts
+  `40`. The CRLF regression is in `tests/test_featurecounts_pack.py`.
+- The native runner precreates declared output parents. Upstream MultiQC treats
+  an existing `multiqc_data` directory, even when empty, as a collision and
+  renames outputs. `prepare_output_space` removes only the expected empty reserved
+  directory; it rejects existing reports/nonempty directories and leaves force
+  overwrite disabled. Test through the native runner and against actual FastQC
+  output, not only hand-authored sample reports.
+- FastQC treats basenames beginning with lowercase `stdin` as stream sentinels.
+  The Java adapter rejects them before execution to prevent an apparent hang.
+  Preserve the failure regression and explicit Phred offsets; an upstream
+  diagnostic typo is not evidence that its Q40 calculation uses the wrong offset.
+- BLAST's local search mode alone does not prevent network fallback during
+  formatting or shared query loading. The bounded source patch removes those
+  fallbacks and disables implicit GenBank loading; the guard disables usage
+  reporting/configuration and rejects remote arguments. Exercise missing local
+  databases, malformed FASTA and `-remote`/`-rid` failures. These checks establish
+  selected code-path behavior, not an OS firewall or arbitrary-code sandbox.
+  Keep the separate makeblastdb absolute database-name quoting fix for spaces.
+- A Windows wrapper can produce valid result files while losing child process
+  diagnostics. BLAST's guard used `CREATE_NO_WINDOW` without explicit standard
+  handle inheritance, so the native failure regression could not see upstream
+  errors. Pass the child's stdin/stdout/stderr deliberately with
+  `STARTF_USESTDHANDLES`, and test captured failure diagnostics on Windows as well
+  as successful scientific output. Five passing result-file fixtures alone did
+  not cover this boundary.
+- Freeze from the exact final pack folder and compare its entire inventory to
+  the archive. A same-named discovery folder can be stale after an isolated fix.
+  Do not mutate published candidate versions; create a new numeric candidate
+  and record exact correspondence to the proposed final payload.
 - Preserve exact failing cases. Successful startup and a small one-thread test
   are insufficient evidence for a multithreaded scientific workflow.
 
 These lessons are traceable to the build scripts, `tools/star/`,
-`tools/kallisto/`, `tools/test_fastp.py`, `tests/test_star_pack.py`, `tests/test_kallisto_pack.py`,
+`tools/kallisto/`, the corresponding October pack adapters/tests,
+`tools/test_fastp.py`, `tests/test_star_pack.py`, `tests/test_kallisto_pack.py`,
 [RNA usage documentation](../docs/rna-seq-packs.md) and release evidence.
