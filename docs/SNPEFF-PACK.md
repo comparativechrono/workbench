@@ -100,6 +100,11 @@ multiallelic record selection, and explicit standard/mitochondrial genetic-code
 behavior without inherited per-contig assembly settings. These are software checks, not clinical or
 whole-genome validation.
 
+The adapter passes the private database directory as the relative path `data`,
+with the child working directory and generated configuration in the same private
+run folder. This avoids upstream SnpEff treating a Windows drive-prefixed data
+path as relative and prepending it a second time. Scientific classes are unchanged.
+
 ## Sources and licensing
 
 `licenses/` contains the adapter/build source, immutable input URL/hash pins,

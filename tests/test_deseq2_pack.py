@@ -174,14 +174,16 @@ write.table(data.frame(gene_id=rownames(r),as.data.frame(r)),a[2],sep='\\t',quot
             self.run_request(out,q,{'mismatch':'sample columns must exactly match','duplicate':'biological replicate IDs must be globally unique','one-replicate':'at least two independent biological replicates'}[kind])
 
     def test_07_confounded_batch_and_residual_degrees_of_freedom(self):
-        for kind in ('confounded','saturated'):
+        for kind in ('confounded','saturated','one-residual-df'):
             out,q=self.request();q['design']='batch-condition'
             def change(rows):
                 for i,r in enumerate(rows):r['batch']=r['condition'] if kind=='confounded' else 'batch'+str(i//2+1)
                 if kind=='saturated':
                     for i,r in enumerate(rows):r['batch']='batch'+str(i+1)
+                if kind=='one-residual-df':
+                    for r,batch in zip(rows,('batch1','batch2','batch3','batch1','batch2','batch4')):r['batch']=batch
             self.modify(out,q,'samples',change)
-            self.run_request(out,q,'not full rank')
+            self.run_request(out,q,'at least two residual degrees of freedom' if kind=='one-residual-df' else 'not full rank')
 
     def test_08_tx2gene_complete_unique_versioned_identifiers(self):
         for kind in ('missing','duplicate','version'):

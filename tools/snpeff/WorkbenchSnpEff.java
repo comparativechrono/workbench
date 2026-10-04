@@ -36,7 +36,9 @@ public final class WorkbenchSnpEff {
         for(String key:List.of("JAVA_TOOL_OPTIONS","JDK_JAVA_OPTIONS","_JAVA_OPTIONS","CLASSPATH"))pb.environment().remove(key);
         int status=pb.start().waitFor();require(status==0,"Upstream command failed (exit "+status+"); inspect upstream.log");
     }
-    static List<String> effArgs(String op,String genome)throws Exception{return new ArrayList<>(List.of(op,"-noLog","-nodownload","-c",config(genome).toString(),"-dataDir",work.resolve("data").toString()));}
+    // SnpEff's Config treats drive-prefixed Windows data paths as relative.
+    // Child cwd and the generated config's parent are both this private work directory.
+    static List<String> effArgs(String op,String genome)throws Exception{return new ArrayList<>(List.of(op,"-noLog","-nodownload","-c",config(genome).toString(),"-dataDir","data"));}
     static final class Ref implements AutoCloseable {
         final RandomAccessFile file; final Map<String,long[]> contigs=new LinkedHashMap<>(); final Set<String> normalized=new HashSet<>();
         Ref(Path p)throws Exception{file=new RandomAccessFile(p.toFile(),"r");String name=null,line;long length=0,start=0,width=0,bytes=0;boolean shortLine=false;

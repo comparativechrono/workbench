@@ -142,8 +142,10 @@ jobs:
           $env:NW_GATK_TEMP_DIR = Join-Path $env:RUNNER_TEMP 'gatk-contracts'
           & $python -I $helper --report (Join-Path $env:RUNNER_TEMP 'gatk-graph-contracts.json')
           if ($LASTEXITCODE -ne 0) { throw 'GATK released application graph/archive contracts failed.' }
+      # Independent diagnostic gates continue after a failed installation fixture.
+      # Any failed gate still fails the job; cancelled jobs do not resume work.
       - name: Check expansion pack released application contracts
-        if: startsWith(inputs.asset_name, 'native-workbench-pack-snpeff-') || startsWith(inputs.asset_name, 'native-workbench-pack-deseq2-') || startsWith(inputs.asset_name, 'native-workbench-pack-mosdepth-') || startsWith(inputs.asset_name, 'native-workbench-pack-iqtree-')
+        if: always() && !cancelled() && (startsWith(inputs.asset_name, 'native-workbench-pack-snpeff-') || startsWith(inputs.asset_name, 'native-workbench-pack-deseq2-') || startsWith(inputs.asset_name, 'native-workbench-pack-mosdepth-') || startsWith(inputs.asset_name, 'native-workbench-pack-iqtree-'))
         shell: pwsh
         env:
           CASE_FOLDER: ${{ matrix.folder }}
@@ -186,12 +188,12 @@ jobs:
           & $python -I $helper --report (Join-Path $env:RUNNER_TEMP 'expansion-graph-contracts.json')
           if ($LASTEXITCODE -ne 0) { throw 'Expansion pack released application contracts failed.' }
       - name: Check out expansion regression sources
-        if: startsWith(inputs.asset_name, 'native-workbench-pack-snpeff-') || startsWith(inputs.asset_name, 'native-workbench-pack-deseq2-') || startsWith(inputs.asset_name, 'native-workbench-pack-mosdepth-') || startsWith(inputs.asset_name, 'native-workbench-pack-iqtree-')
+        if: always() && !cancelled() && (startsWith(inputs.asset_name, 'native-workbench-pack-snpeff-') || startsWith(inputs.asset_name, 'native-workbench-pack-deseq2-') || startsWith(inputs.asset_name, 'native-workbench-pack-mosdepth-') || startsWith(inputs.asset_name, 'native-workbench-pack-iqtree-'))
         uses: actions/checkout@v4
         with:
           ref: ${{ github.sha }}
       - name: Run expansion scientific and failure regressions
-        if: startsWith(inputs.asset_name, 'native-workbench-pack-snpeff-') || startsWith(inputs.asset_name, 'native-workbench-pack-deseq2-') || startsWith(inputs.asset_name, 'native-workbench-pack-mosdepth-') || startsWith(inputs.asset_name, 'native-workbench-pack-iqtree-')
+        if: always() && !cancelled() && (startsWith(inputs.asset_name, 'native-workbench-pack-snpeff-') || startsWith(inputs.asset_name, 'native-workbench-pack-deseq2-') || startsWith(inputs.asset_name, 'native-workbench-pack-mosdepth-') || startsWith(inputs.asset_name, 'native-workbench-pack-iqtree-'))
         shell: pwsh
         env:
           CASE_FOLDER: ${{ matrix.folder }}

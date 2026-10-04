@@ -53,6 +53,9 @@ class SnpEffScience(unittest.TestCase):
             ann=infos(r)['ANN'].split('|');self.assertEqual(ann[1],effect);self.assertEqual(ann[2],impact);self.assertEqual(ann[10],aa)
     def test_01_build_and_annotate_independent_codon_truth(self):
         out,_=self.invoke('build-database',[self.f/'reference.fa',self.f/'genes.gff',self.f/'cds.fa','gff3','wbSynthetic1','fixture-v1','Standard','none']);ann,_=self.annotate(db=out/'database.zip');self.assert_truth(ann/'variants.vcf')
+        for result in (out,ann):
+            commands=json.loads((result/'provenance.json').read_text())['commands']
+            for command in commands:self.assertEqual(command[command.index('-dataDir')+1],'data')
         with zipfile.ZipFile(out/'database.zip') as z:
             meta=json.loads(z.read('database.json'));self.assertEqual(meta['assembly'],'wbSynthetic1');self.assertEqual(meta['sourceInputs']['reference.fa.selected']['sha256'],sha(self.f/'reference.fa'))
             for r in meta['files']:self.assertEqual(hashlib.sha256(z.read(r['path'])).hexdigest(),r['sha256'])

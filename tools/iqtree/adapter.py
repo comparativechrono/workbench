@@ -25,7 +25,9 @@ def digest(path):
 
 
 def dump(path, value):
-    path.write_text(json.dumps(value, indent=2, ensure_ascii=True) + '\n', encoding='utf-8')
+    # Released installation checks compare decoded bytes, without newline conversion.
+    # Keep JSON deterministic across Windows and Linux, including multiline splits.
+    path.write_text(json.dumps(value, indent=2, ensure_ascii=True) + '\n', encoding='utf-8', newline='\n')
 
 
 def bounded_integer(value, low, high, label):

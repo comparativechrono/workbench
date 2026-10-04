@@ -279,7 +279,9 @@ class IQTreeTests(unittest.TestCase):
             out, _ = self.run_tool(item['workflow'].removeprefix('infer-'), params.get('model', 'MFP'), params.get('support', 'none'))
             files = {'tree': 'inferred-tree.nwk', 'report': 'iqtree-report.txt', 'model': 'model-selection.json', 'provenance': 'analysis-provenance.json', 'log': 'iqtree.log'}
             for expectation in item['expect']:
-                content = (out / files[expectation['output']]).read_text()
+                # Match released pack_checks._read_check_text: decode actual bytes,
+                # not read_text(), which hides Windows CRLF regressions.
+                content = (out / files[expectation['output']]).read_bytes().decode('utf-8')
                 for fragment in expectation['contains']:
                     self.assertIn(fragment, content, item['id'] + ': missing ' + fragment)
             NATIVE_CHECKS.append({'id': item['id'], 'success': True})

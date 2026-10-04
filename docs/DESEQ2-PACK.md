@@ -99,6 +99,16 @@ original ZIP licences are retained; the R source release includes recommended
 package sources. The complete private R runtime preserves its component notices.
 Adapters and preparation recipes are MIT; upstream licenses remain authoritative.
 
+The separate `native-workbench-deseq2-1.0.0-r-runtime-sources.zip` companion
+contains corresponding Rtools45 external library and compiler-runtime sources,
+Tcl/Tk bundle sources, and immutable R-project recipes and patches. It must be
+published beside the pack. `tools/deseq2/r-runtime-source-archive.json` binds its
+exact SHA-256 and byte count to the private R runtime, while
+`r-runtime-source-lock.json` pins each of its 214 input files. The installed
+pack retains these records and the source recovery script under `licenses/`.
+This source download is separate so it does not increase the installed pack's
+runtime footprint; an installed pack performs no source download during analysis.
+
 ## Build and validation
 
 1. `python scripts/fetch_deseq2_build_inputs.py --cache build/deseq2-inputs`

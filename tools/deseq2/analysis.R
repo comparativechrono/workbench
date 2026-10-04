@@ -139,7 +139,7 @@ summary <- list(schema=1,tool='DESeq2',version=as.character(packageVersion('DESe
  dispersionFitRequested='parametric',dispersionFitUsed=attr(dispersionFunction(dds),'fitType'),pAdjustment='BH',independentFiltering=TRUE,cooksCutoff=TRUE,
  automaticOutlierReplacement=FALSE,foldChangeShrinkage=FALSE,replicates='Independent biological samples asserted by explicit metadata; identity cannot establish biological independence',
  inputOrder=data.frame(sample_id=samples$sample_id,input_index=if('input_index'%in%names(samples)) samples$input_index else NA_character_),
- runtimePackages=as.list(setNames(as.character(packageVersion('DESeq2')),'DESeq2'))
+ runtimePackages=as.list(setNames(as.character(packageVersion('DESeq2')),'DESeq2')))
 write_json(summary,file.path(req$run,'analysis-summary.json'),auto_unbox=TRUE,pretty=TRUE,na='null')
 capture.output(sessionInfo(),file=file.path(req$run,'R-session.txt'))
 methods <- c(paste('Differential gene expression was tested with DESeq2',packageVersion('DESeq2'),'under',R.version.string),
