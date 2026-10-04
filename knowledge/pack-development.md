@@ -306,6 +306,80 @@ Its historical pending-final status is superseded by the separate exact-final
 Windows report, not by replacement archive bytes. The generic application
 `build_sources` selection still needs its own reviewed handover-inclusion fix.
 
+## Continuing annotation, expression, coverage and phylogenetics packs
+
+The [four-pack overview](../docs/ANNOTATION-EXPRESSION-COVERAGE-PHYLOGENETICS.md)
+connects these independently installable packs to existing tools. Their guides
+and recipes are the authority for current pins and supported operations; this
+section records maintenance contracts, not final release validation status.
+
+| Pack | Preparation and scientific boundary |
+| --- | --- |
+| SnpEff | `scripts/fetch_snpeff_build_inputs.py`, `scripts/prepare_snpeff_pack.py`; private Java and upstream SnpEff/SnpSift; [guide](../docs/SNPEFF-PACK.md) |
+| DESeq2 | `scripts/fetch_deseq2_build_inputs.py`, `scripts/prepare_deseq2_pack.py`; private Windows R, DESeq2 and tximport; [guide](../docs/DESEQ2-PACK.md) |
+| mosdepth | `scripts/fetch_mosdepth_build_inputs.py`, `scripts/prepare_mosdepth_pack.py`; upstream coverage algorithm with documented boundary patches and its own SAMtools helper; [guide](../docs/MOSDEPTH-PACK.md) |
+| IQ-TREE | `scripts/fetch_iqtree_build_inputs.py`, `scripts/prepare_iqtree_pack.py`; official native executable with a private Python input/output adapter; [guide](../docs/IQTREE-PACK.md) |
+
+Retain these scientific distinctions:
+
+- SnpEff executable packs and annotation database resources are separate.
+  Database construction/conversion records explicit assembly and annotation
+  release, the default genetic code and exact per-contig codon mappings. Do not
+  infer a mitochondrial code from contig names or inherit unrelated assemblies'
+  configuration. Preserve mappings when converting a downloaded database and
+  when reloading the checked local resource ZIP. Ordinary VCF ports exclude
+  gVCF records; local INFO annotation requires biallelic, normalized,
+  assembly-matched inputs. Impact filtering selects whole records when any ANN
+  entry matches; it does not remove other ALT alleles or declare pathogenicity.
+- DESeq2 consumes raw integer gene counts or tximport-derived kallisto counts,
+  never a table merely accepted because it has type `metrics`. Four to 64
+  featureCounts/kallisto files use real fan-in; sample-sheet `input_index` binds
+  each selected file in order. Keep explicit biological replicate identities,
+  numerator/denominator, full-rank design and residual-degree-of-freedom guards.
+  Counts and abundance roles remain runtime checks because released 0.6.0 has
+  broad metrics types. Preserve realized sample names in the design matrix and
+  the distinction between unshrunk estimates, filtering and significance.
+- mosdepth stages and validates the same BAM bytes it executes. Coordinate
+  sorting is required; RNA BAM acceptance means genomic depth, not expression.
+  The primary summary aggregates upstream per-base depth over every `@SQ`
+  reference base, including entirely uncovered contigs. Preserve the separately
+  labelled raw upstream summary and its potentially different denominator.
+  Target means use BED target bases. Proper-pair overlap handling, MAPQ/flag
+  filters and CIGAR gaps must remain explicit; no base-quality threshold exists.
+  Do not replace upstream coverage with a new read-counting implementation.
+- IQ-TREE preserves distinct nucleotide/protein MSA types and rejects unsuitable
+  aligned input before inference. Keep datatype-specific model choices, MFP/BIC
+  selection and support settings in methods. The iterative Newick parser avoids
+  recursion failure on ladder trees. Detailed JSON bipartitions stop above 256
+  taxa to prevent quadratic summary output; the full Newick tree and upstream
+  inference remain intact, with an explicit summary-omission flag. This pack
+  does not expose partitioned/codon analyses or species-tree inference.
+
+Recover private R on native Windows with
+`scripts/build_r_runtime_windows.py` or the
+[runtime recovery workflow](../.github/workflows/build-r-runtime.yml). Verify the
+pinned official installer, relocation check, per-part inventory and reconstructed
+runtime ZIP hash. This is build-time recovery, not an installer run on the user's
+machine. The DESeq2 preparer binds the runtime to that provenance and retains
+pinned package ZIPs. Analysis extracts hash-checked archives into each run's
+private `_runtime`, uses `--vanilla` and private library paths, and never installs
+packages into user libraries. Retained runs therefore include runtime disk cost.
+
+Source completeness includes transitive native libraries and compiler runtimes,
+not just the named tool. For DESeq2, the pack retains R/package/Python sources;
+the separately published R-runtime source companion retains Rtools external
+libraries, GCC/MinGW runtime sources, Tcl/Tk extensions, original notices and
+matching R-project recipes/patches. Keep
+`tools/deseq2/r-runtime-source-lock.json`, `r-runtime-source-archive.json` and
+`prepare_runtime_sources.py` consistent with the actual companion and runtime.
+The source closure includes the MXE CMake configuration/module/test subtree.
+Use the documented base-only build target; upstream `build.sh` also builds an
+unrelated full Rtools toolchain. See
+[the source notes](../tools/deseq2/R-RUNTIME-SOURCES.md). Binary version strings
+support version correspondence, not a claim of bit-identical recompilation.
+Apply the same review to IQ-TREE's compiled-in Boost/Eigen/Rust dependencies and
+SnpEff's Java dependencies; a large source ZIP alone proves no closure.
+
 ## Portability lessons to retain
 
 - Preserve the fastp 0.4.1 reporting fix in `tools/build_fastp.py`. JSON command
@@ -369,6 +443,20 @@ Windows report, not by replacement archive bytes. The generic application
   the archive. A same-named discovery folder can be stale after an isolated fix.
   Do not mutate published candidate versions; create a new numeric candidate
   and record exact correspondence to the proposed final payload.
+- R on Windows needs a space-free temporary path even when the pack and results
+  support spaces. DESeq2 creates an owned child under user temporary storage and
+  uses an existing Windows short-path alias when needed. The optional
+  `scratch-root` directory provides an explicit writable space-free alternative.
+  Remove only the owned child; preserve the selected parent. Do not introduce
+  drive mappings, registry changes or administrator requirements to hide this.
+- SnpEff's configuration parser treated a Windows drive-qualified `dataDir` as
+  relative. Invoke `-dataDir data` from the existing private database working
+  directory. Test real Windows drive paths and spaces; Linux absolute paths do
+  not expose this parser boundary.
+- IQ-TREE's adapter JSON must use explicit LF output on Windows. Native text
+  fixture assertions inspect decoded bytes without universal-newline conversion.
+  Keep the raw-byte regression as well as parsed scientific JSON assertions;
+  valid JSON alone does not establish the declared output-byte contract.
 - Preserve exact failing cases. Successful startup and a small one-thread test
   are insufficient evidence for a multithreaded scientific workflow.
 

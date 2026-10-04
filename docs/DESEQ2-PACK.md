@@ -136,6 +136,15 @@ counts, TPM and lengths without claiming differential inference on three genes.
 The generated 300-gene/six-sample fixtures are deterministic artificial counts,
 not reads and not a real-cohort sensitivity benchmark. Exact final native evidence,
 artifact hashes and the source companion must be retained with a published release.
+The fixture plants 12 positive and 12 negative effects. The pinned upstream
+analysis reports 13 positive and 15 negative discoveries at adjusted P < 0.05,
+including four incidental discoveries among the null genes; installation checks
+use those observed deterministic totals. This does not calibrate empirical FDR.
+The regression suite separately compares all six inferential columns for all
+300 genes against direct DESeq2 matrix and tximport APIs at relative tolerance
+1e-10. The tximport path centers normalization factors to geometric mean one,
+whereas ordinary matrix size factors are not recentered; consequently its
+normalized mean is not expected to be identical even for identical gene counts.
 
 References: Love et al. (2014), doi:10.1186/s13059-014-0550-8;
 Soneson et al. (2015), doi:10.12688/f1000research.7563.2.

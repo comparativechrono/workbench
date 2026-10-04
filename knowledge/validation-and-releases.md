@@ -142,6 +142,52 @@ strict suite passed all seven contracts in both Windows paths on the candidate
 and exact final archive. The [GATK validation record](evidence/gatk-1.0.0-validation-2026-10-04.json)
 records the distinct stages and exact hashes.
 
+### Annotation, expression, coverage and phylogenetics contracts
+
+`tests/test_next_pipeline.py` checks SnpEff, DESeq2, mosdepth and IQ-TREE against
+the unchanged released 0.6.0 starter. Do not confuse it with the older
+`tests/test_expansion_pipeline.py`. Run in a fresh process and select one pack
+for its independent release gate, or several for local integration. Each selected
+archive is required; CLI execution fails on missing prerequisites. Ordinary test
+discovery may skip absent optional builds, which is not release evidence.
+
+| Environment variable | Meaning |
+| --- | --- |
+| `NW_EXPANSION_PACK_IDS` | Comma-separated `snpeff,deseq2,mosdepth,iqtree`; defaults to all four |
+| `NW_EXPANSION_STARTER_ZIP` | Exact SHA-pinned released 0.6.0 starter |
+| `NW_EXPANSION_TEMP_DIR` | Parent for disposable application copies |
+| `NW_EXPANSION_<ID>_VERSION` | Expected numeric pack version; defaults to `1.0.0` |
+| `NW_EXPANSION_<ID>_ARCHIVE` | Exact installable ZIP for that selected pack |
+| `NW_EXPANSION_<ID>_PACK_DIR` | Optional prepared/installed folder; absent means extract the exact ZIP for graph tests |
+| `NW_EXPANSION_MUSCLE_ARCHIVE` | Pinned published MUSCLE 0.5.2 dependency for IQ-TREE |
+| `NW_EXPANSION_FEATURECOUNTS_ARCHIVE` | Pinned published featureCounts 1.0.0 dependency for DESeq2 |
+| `NW_EXPANSION_KALLISTO_ARCHIVE` | Pinned published kallisto 1.0.1 dependency for DESeq2 |
+
+Use uppercase IDs in variable names, for example:
+
+```sh
+NW_EXPANSION_PACK_IDS=mosdepth \
+NW_EXPANSION_STARTER_ZIP=/path/to/native-workbench-0.6.0-starter-windows.zip \
+NW_EXPANSION_MOSDEPTH_ARCHIVE=/path/to/native-workbench-pack-mosdepth-1.0.0.zip \
+NW_EXPANSION_TEMP_DIR=/path/to/disposable-applications \
+python3 tests/test_next_pipeline.py --report /path/to/evidence/mosdepth-contracts.json
+```
+
+The suite uses real published dependency descriptors. It checks standalone
+operations, typed branches/merges and source ordering, methods, separate presets
+and pipeline saves, changed-pin rejection, payload identity, unchanged released
+app/starter files, archive import and duplicate-version immutability. It does
+not execute a scientific pipeline: broad `metrics`/`file` connections still need
+adapter checks and scientific tests. Archive publication substitutes a checked
+Python copy callback for the native importer, even on Windows.
+
+Preserve strict failed-copy diagnostics from managed Linux workspaces; transient
+files in a disposable tree are not permission to exclude inventory entries or
+weaken immutability assertions. Retain the reports and exact artifact hashes,
+remove reconstructible copies when needed, and use the independent native gate
+for Windows evidence. Historical success on an earlier archive does not validate
+a subsequently changed adapter, license tree or manifest.
+
 ## Native Windows pack gate
 
 Package once, freeze the archive, and calculate its SHA-256. On Windows, use a
@@ -193,6 +239,31 @@ Extra regressions have deliberately narrow scope:
   database failures, malformed FASTA and rejection of remote arguments. Its
   explicit `osNetworkBlocked: false` records that CI did not disable networking;
   the regression is code-path evidence, not a firewall test.
+
+For SnpEff, DESeq2, mosdepth and IQ-TREE assets, the workflow runs three distinct
+gates: native installation/declared fixtures, `test_next_pipeline.py` released-app
+contracts, and `tests/test_<id>_pack.py` scientific/failure regressions against the
+installed exact archive. IQ-TREE regressions additionally execute the pinned
+MUSCLE dependency for real alignment-to-tree checks. The workflow selects the
+one pack identified by the asset, verifies dependency archives, and records the
+helper source commit. Both ordinary and space-containing paths are required.
+
+Graph and scientific diagnostic steps use `always() && !cancelled()` so an
+installation-fixture failure does not hide independent evidence. This is not
+`continue-on-error`: any failed gate still fails the overall job. Preserve each
+report and the final job outcome; a later successful step cannot turn a failed
+installation into a passing release.
+
+The [DESeq2 development workflow](../.github/workflows/deseq2-development-check.yml)
+is a separate diagnostic path. It recovers private R, prepares a disposable pack
+from checkout source and runs native statistical/failure regressions, retaining
+runtime versions and reports. It does not download/import the frozen published
+pack and cannot replace its exact-archive native gate. Likewise, the
+[R runtime workflow](../.github/workflows/build-r-runtime.yml) establishes pinned
+installer recovery/relocation, not DESeq2 scientific correctness. Keep source-only
+development evidence separate from candidate correspondence and final release
+evidence. Runtime/source companion hashes must remain bound to the final pack;
+publish the matching companion beside every release distributing that runtime.
 
 The matrix alone does not prove Unicode/long-path support, offline network
 blocking, cancellation, interactive GUI behavior or institutional deployment.

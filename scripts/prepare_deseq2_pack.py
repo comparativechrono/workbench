@@ -55,7 +55,7 @@ def checks():
         bindings={'counts':[{'counts':'fixture-counts'}] if mode=='counts' else [{'counts':'fixture-'+mode+'-'+str(n)} for n in range(1,7)],'samples':[{'samples':'fixture-samples'}]}
         if mode=='kallisto':bindings['tx2gene']=[{'tx2gene':'fixture-tx2gene'}]
         checks.append({'id':mode+'-six-samples','workflow':mode,'params':{'design':'condition','numerator':'treated','denominator':'control','alpha':'0.05','min-count':10},'inputs':bindings,
-          'expect':[{'output':'summary','kind':'text','contains':['"samples": 6','"genesInput": 300','"genesTested": 300','"test": "Wald"','"pAdjustment": "BH"','"positiveSignificant": 12','"negativeSignificant": 12']},{'output':'results','kind':'text','contains':['gene_id\tbaseMean\tlog2FoldChange\tlfcSE\tstat\tpvalue\tpadj\tstatus','gene0001\t','gene0300\t']},{'output':'session','kind':'text','contains':['DESeq2_1.52.0','tximport_1.40.0']},{'output':'provenance','kind':'text','contains':['"unchanged": true']}]})
+          'expect':[{'output':'summary','kind':'text','contains':['"samples": 6','"genesInput": 300','"genesTested": 300','"test": "Wald"','"pAdjustment": "BH"','"positiveSignificant": 13','"negativeSignificant": 15']},{'output':'results','kind':'text','contains':['gene_id\tbaseMean\tlog2FoldChange\tlfcSE\tstat\tpvalue\tpadj\tstatus','gene0001\t','gene0300\t']},{'output':'session','kind':'text','contains':['DESeq2_1.52.0','tximport_1.40.0']},{'output':'provenance','kind':'text','contains':['"unchanged": true']}]})
     return {'schema':1,'checks':checks}
 
 

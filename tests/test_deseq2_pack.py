@@ -12,6 +12,7 @@ import math
 import os
 from pathlib import Path
 import shutil
+import statistics
 import subprocess
 import sys
 import tempfile
@@ -98,6 +99,7 @@ class DESeq2Science(unittest.TestCase):
 
     def test_01_effect_direction_fdr_and_null_genes(self):
         truth=json.loads((self.fixture/'truth.json').read_text())
+        EVIDENCE['plantedEffects']={}
         for mode,out in self.valid.items():
             rows={r['gene_id']:r for r in table(out/'differential-expression.tsv')}
             self.assertEqual(len(rows),300)
@@ -107,41 +109,77 @@ class DESeq2Science(unittest.TestCase):
             for gene in truth['negative']:
                 self.assertLess(float(rows[gene]['log2FoldChange']),-2)
                 self.assertLess(float(rows[gene]['padj']),.01)
-            self.assertLessEqual(sum(r['padj']!='NA' and float(r['padj'])<.05 for g,r in rows.items() if g in truth['null']),5)
+            null_discoveries=sum(r['padj']!='NA' and float(r['padj'])<.05 for g,r in rows.items() if g in truth['null'])
+            self.assertLessEqual(null_discoveries,5)
+            EVIDENCE['plantedEffects'][mode]={'positiveRecovered':len(truth['positive']),'negativeRecovered':len(truth['negative']),'incidentalNullDiscoveries':null_discoveries,'scope':'Deterministic effect-direction and adjusted-P-value regression; not empirical FDR calibration or a power benchmark.'}
             self.assertTrue((out/'pca.pdf').read_bytes().startswith(b'%PDF-'))
             self.assertTrue((out/'ma.pdf').read_bytes().startswith(b'%PDF-'))
             self.assertEqual([x['sample_id'] for x in table(out/'design-matrix.tsv')],truth['samples'])
 
-    def test_02_featurecounts_and_tximport_match_equivalent_matrix(self):
+    def test_02_count_import_equivalence_and_normalization_conventions(self):
         base=table(self.valid['counts']/'differential-expression.tsv')
-        for mode in ('featurecounts','kallisto'):
-            for x,y in zip(base,table(self.valid[mode]/'differential-expression.tsv')):
-                self.assertEqual(x['gene_id'],y['gene_id'])
-                for key in ('baseMean','log2FoldChange','lfcSE','stat','pvalue','padj'):
-                    if x[key]=='NA':self.assertEqual(y[key],'NA')
-                    else:self.assertAlmostEqual(float(x[key]),float(y[key]),delta=max(1e-7,abs(float(x[key]))*1e-7))
-
-    def test_03_unwrapped_upstream_reference_crosscheck(self):
-        out,request=self.request()
-        # Independently invoke the public DESeq2 API without the Workbench analysis script.
-        script=out/'reference.R'
-        script.write_text(""".libPaths(file.path(R.home(),'library'))
-suppressPackageStartupMessages(library(DESeq2)); suppressPackageStartupMessages(library(jsonlite))
-a<-commandArgs(TRUE); q<-fromJSON(a[1]); x<-read.delim(q$files[1],row.names=1,check.names=FALSE)
-s<-read.delim(q$samples,stringsAsFactors=FALSE);rownames(s)<-s$sample_id;s$condition<-relevel(factor(s$condition),'control')
-d<-DESeqDataSetFromMatrix(as.matrix(x[,s$sample_id]),s,~condition);d<-d[rowSums(counts(d))>=10,]
-d<-DESeq(d,test='Wald',fitType='parametric',sfType='ratio',betaPrior=FALSE,minReplicatesForReplace=Inf,parallel=FALSE)
-r<-results(d,contrast=c('condition','treated','control'),alpha=.05,independentFiltering=TRUE,cooksCutoff=TRUE,pAdjustMethod='BH',parallel=FALSE)
-write.table(data.frame(gene_id=rownames(r),as.data.frame(r)),a[2],sep='\\t',quote=FALSE,row.names=FALSE,na='NA')
-""")
-        req=out/'reference-request.json';req.write_text(json.dumps(request));reference=out/'reference.tsv'
-        invoke([self.rexe,'--vanilla',script,req,reference],out,env=self.env)
-        for x,y in zip(table(reference),table(self.valid['counts']/'differential-expression.tsv')):
+        for x,y in zip(base,table(self.valid['featurecounts']/'differential-expression.tsv')):
             self.assertEqual(x['gene_id'],y['gene_id'])
             for key in ('baseMean','log2FoldChange','lfcSE','stat','pvalue','padj'):
                 if x[key]=='NA':self.assertEqual(y[key],'NA')
                 else:self.assertAlmostEqual(float(x[key]),float(y[key]),delta=max(1e-10,abs(float(x[key]))*1e-10))
-        EVIDENCE['unwrappedUpstreamCrosscheck']={'samePinnedRuntime':True,'allGenesCompared':300,'relativeTolerance':1e-10,'scriptSha256':sha(script)}
+        raw=table(self.fixture/'counts.tsv')
+        imported=table(self.valid['kallisto']/'imported-gene-counts.tsv')
+        self.assertEqual(len(imported),len(raw))
+        for x,y in zip(raw,imported):
+            self.assertEqual(x['gene_id'],y['gene_id'])
+            for key in x:
+                if key!='gene_id':self.assertEqual(float(x[key]),float(y[key]))
+        # This fixture has constant effective lengths across samples. Upstream's
+        # tximport normalization factors are recentered to geometric mean 1;
+        # ordinary raw-matrix size factors are not. Thus baseMean has a known
+        # global scale difference even though imported counts are identical.
+        samples=[x for x in raw[0] if x!='gene_id']
+        log_geomeans=[statistics.mean(math.log(float(row[s])) for s in samples) for row in raw]
+        sf=[math.exp(statistics.median(math.log(float(row[s]))-gm for row,gm in zip(raw,log_geomeans))) for s in samples]
+        scale=math.exp(statistics.mean(math.log(x) for x in sf))
+        observed=[]
+        for x,y in zip(base,table(self.valid['kallisto']/'differential-expression.tsv')):
+            self.assertEqual(x['gene_id'],y['gene_id'])
+            ratio=float(y['baseMean'])/float(x['baseMean']);observed.append(ratio)
+            self.assertAlmostEqual(ratio,scale,delta=1e-10)
+        EVIDENCE['normalizationConvention']={'countsIdentical':True,'rawSizeFactors':sf,'sizeFactorGeometricMean':scale,'observedBaseMeanRatioRange':[min(observed),max(observed)],'explanation':'Pinned DESeq2 estimateNormFactors recenters tximport length normalization factors to geometric mean1; ordinary matrix size factors are not recentered. All inferential columns are instead compared against the corresponding independent upstream API path.'}
+
+    def test_03_unwrapped_upstream_reference_crosscheck(self):
+        script_hashes={}
+        for mode in ('counts','kallisto'):
+            out,request=self.request(mode)
+            # Independently invoke the public APIs without the Workbench analysis script.
+            script=out/'reference.R'
+            script.write_text(""".libPaths(file.path(R.home(),'library'))
+suppressPackageStartupMessages(library(DESeq2)); suppressPackageStartupMessages(library(jsonlite)); suppressPackageStartupMessages(library(tximport))
+a<-commandArgs(TRUE); q<-fromJSON(a[1])
+s<-read.delim(q$samples,stringsAsFactors=FALSE);rownames(s)<-s$sample_id;s$condition<-relevel(factor(s$condition),'control')
+if(q$mode=='kallisto') {
+ f<-setNames(q$files[as.integer(s$input_index)],s$sample_id)
+ txg<-read.delim(q$tx2gene,stringsAsFactors=FALSE,check.names=FALSE)
+ txi<-tximport(f,type='kallisto',tx2gene=txg,countsFromAbundance='no',dropInfReps=TRUE,importer=function(path,...) read.delim(path,check.names=FALSE,stringsAsFactors=FALSE))
+ d<-DESeqDataSetFromTximport(txi,s,~condition)
+} else {
+ x<-read.delim(q$files[1],row.names=1,check.names=FALSE)
+ d<-DESeqDataSetFromMatrix(as.matrix(x[,s$sample_id]),s,~condition)
+}
+d<-d[rowSums(counts(d))>=10,]
+d<-DESeq(d,test='Wald',fitType='parametric',sfType='ratio',betaPrior=FALSE,minReplicatesForReplace=Inf,parallel=FALSE)
+r<-results(d,contrast=c('condition','treated','control'),alpha=.05,independentFiltering=TRUE,cooksCutoff=TRUE,pAdjustMethod='BH',parallel=FALSE)
+write.table(data.frame(gene_id=rownames(r),as.data.frame(r)),a[2],sep='\\t',quote=FALSE,row.names=FALSE,na='NA')
+""")
+            req=out/'reference-request.json';req.write_text(json.dumps(request));reference=out/'reference.tsv'
+            invoke([self.rexe,'--vanilla',script,req,reference],out,env=self.env)
+            reference_rows=table(reference);actual_rows=table(self.valid[mode]/'differential-expression.tsv')
+            self.assertEqual(len(reference_rows),300);self.assertEqual(len(actual_rows),300)
+            for x,y in zip(reference_rows,actual_rows):
+                self.assertEqual(x['gene_id'],y['gene_id'])
+                for key in ('baseMean','log2FoldChange','lfcSE','stat','pvalue','padj'):
+                    if x[key]=='NA':self.assertEqual(y[key],'NA')
+                    else:self.assertAlmostEqual(float(x[key]),float(y[key]),delta=max(1e-10,abs(float(x[key]))*1e-10))
+            script_hashes[mode]=sha(script)
+        EVIDENCE['unwrappedUpstreamCrosscheck']={'samePinnedRuntime':True,'allGenesCompared':300,'inputModes':['counts','kallisto'],'totalGeneComparisons':600,'relativeTolerance':1e-10,'scriptSha256ByMode':script_hashes}
 
     def test_04_batch_adjustment_and_reversed_contrast(self):
         for reverse in (False,True):
