@@ -1,0 +1,57 @@
+--- a/c++/src/app/blast/blast_formatter.cpp
++++ b/c++/src/app/blast/blast_formatter.cpp
+@@ -291,38 +291,11 @@
+             scope->AddDataLoader(RegisterOMDataLoader(seqdb), CBlastDatabaseArgs::kSubjectsDataLoaderPriority);
+             LOG_POST(Info <<"Add local loader " << search_db->GetDatabaseName());
+         } catch (const CSeqDBException&) {
+-           	SetDiagPostLevel(eDiag_Critical);
+-            string remote_loader = kEmptyStr;
+-            try {
+-            db_adapter.Reset(new CLocalDbAdapter(*search_db));
+-            remote_loader = CRemoteBlastDbDataLoader::RegisterInObjectManager
+-                                    (*( CObjectManager::GetInstance()),
+-                                    search_db->GetDatabaseName(),
+-                                    search_db->IsProtein()  ? CBlastDbDataLoader::eProtein : CBlastDbDataLoader::eNucleotide,
+-                                    true, CObjectManager::eDefault, CBlastDatabaseArgs::kSubjectsDataLoaderPriority)
+-                                    .GetLoader()->GetName();
+-            scope->AddDataLoader(remote_loader, CBlastDatabaseArgs::kSubjectsDataLoaderPriority);
+-            SetDiagPostLevel(eDiag_Warning);
+-            isRemote = true;
+-            LOG_POST(Info <<"Remote " << search_db->GetDatabaseName());
+-            }
+-            catch (CException & ) {
+-            	SetDiagPostLevel(eDiag_Warning);
+-            	NCBI_THROW(CException, eUnknown, "Fail to initialize local or remote DB" );
+-            }
+-        }
+-    }
+-    try {
+-    	const int kGenbankLoaderPriority = 99;
+-        CRef<CReader> reader(new CId2Reader);
+-        reader->SetPreopenConnection(false);
+-        string genbank_loader = CGBDataLoader::RegisterInObjectManager
+-            (*( CObjectManager::GetInstance()), reader,CObjectManager::eNonDefault).GetLoader()->GetName();
+-        scope->AddDataLoader(genbank_loader, kGenbankLoaderPriority);
+-    } catch (const CException& ) {
+-    	LOG_POST(Info << "Failed to add genbank dataloader");
+-    	// It's ok not to have genbank loader
+-    }
++            // Workbench: local analysis must never fall back to remote sequence retrieval.
++            throw;
++        }
++    }
++    // Workbench: do not register the Genbank network fallback data loader.
+     return isRemote;
+ }
+ 
+--- a/c++/src/algo/blast/blastinput/blast_scope_src.cpp
++++ b/c++/src/algo/blast/blastinput/blast_scope_src.cpp
+@@ -58,7 +58,7 @@
+ {
+     m_UseFixedSizeSlices = true;
+     m_UseBlastDbs = (options & eUseBlastDbDataLoader) ? true : false;
+-    m_UseGenbank = (options & eUseGenbankDataLoader) ? true : false;
++    m_UseGenbank = false; // Workbench: no implicit network sequence retrieval.
+     if ( !dbname.empty() ) {
+         m_BlastDbName.assign(dbname);
+     }

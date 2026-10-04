@@ -78,7 +78,7 @@ static int run(std::vector<S> a) {
     require(a.size()>=3 && a[1]=="run", "Usage: blast-guard validate nucl|prot input report; or run tool args...");
     const std::set<S> allowed={"makeblastdb","blastn","blastp","blastx","tblastn","blast_formatter"};
     require(allowed.count(a[2]),"Unexposed BLAST program");
-    for(size_t i=3;i<a.size();++i) require(a[i]!="-remote", "Remote BLAST is not permitted in this local pack");
+    for(size_t i=3;i<a.size();++i) require(a[i]!="-remote" && a[i]!="-rid", "Remote BLAST is not permitted in this local pack");
     fs::path exe=fs::absolute(fs::u8path(a[0])).parent_path()/fs::u8path(a[2]);
     // BLAST's database paths are parsed as whitespace-separated lists. Explicit
     // embedded quoting is required by BLAST, independently of process quoting.
@@ -88,10 +88,10 @@ static int run(std::vector<S> a) {
     }
 #ifdef _WIN32
     exe+=L".exe";
-    SetEnvironmentVariableW(L"BLAST_USAGE_REPORT",L"false");
-    SetEnvironmentVariableW(L"NCBI_DONT_USE_NCBIRC",L"1");
-    SetEnvironmentVariableW(L"NCBI_DONT_USE_LOCAL_CONFIG",L"1");
-    SetEnvironmentVariableW(L"BLASTDB",L".");
+    require(SetEnvironmentVariableW(L"BLAST_USAGE_REPORT",L"false") &&
+            SetEnvironmentVariableW(L"NCBI_DONT_USE_NCBIRC",L"1") &&
+            SetEnvironmentVariableW(L"NCBI_DONT_USE_LOCAL_CONFIG",L"1") &&
+            SetEnvironmentVariableW(L"BLASTDB",L"."),"Cannot configure the local BLAST child environment");
     std::wstring command=quote(exe.wstring());
     for(size_t i=3;i<a.size();++i) command+=L" "+quote(wide(a[i]));
     STARTUPINFOW startup{}; startup.cb=sizeof(startup); PROCESS_INFORMATION child{};
@@ -99,7 +99,7 @@ static int run(std::vector<S> a) {
     CloseHandle(child.hThread); WaitForSingleObject(child.hProcess,INFINITE);
     DWORD status=1;GetExitCodeProcess(child.hProcess,&status);CloseHandle(child.hProcess);return static_cast<int>(status);
 #else
-    setenv("BLAST_USAGE_REPORT","false",1);setenv("NCBI_DONT_USE_NCBIRC","1",1);setenv("NCBI_DONT_USE_LOCAL_CONFIG","1",1);setenv("BLASTDB",".",1);
+    require(setenv("BLAST_USAGE_REPORT","false",1)==0 && setenv("NCBI_DONT_USE_NCBIRC","1",1)==0 && setenv("NCBI_DONT_USE_LOCAL_CONFIG","1",1)==0 && setenv("BLASTDB",".",1)==0,"Cannot configure the local BLAST child environment");
     S program=exe.string();std::vector<char*> args{program.data()};
     for(size_t i=3;i<a.size();++i) args.push_back(a[i].data());args.push_back(nullptr);
     execv(program.c_str(),args.data());throw std::runtime_error("Cannot start bundled BLAST executable");

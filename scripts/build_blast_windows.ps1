@@ -38,6 +38,8 @@ if (($MakeDbText.Split($Original).Count - 1) -ne 1) { throw 'BLAST space-path pa
 [IO.File]::WriteAllText($MakeDbSource,$MakeDbText.Replace($Original,$Replacement),[Text.UTF8Encoding]::new($false))
 $AfterPatch = (Get-FileHash $MakeDbSource -Algorithm SHA256).Hash.ToLower()
 if ($AfterPatch -ne 'c65d73d28f92eda26d20efd658e409990d23531e719284ef3dce60688231d4a4') { throw 'Unexpected makeblastdb source after patch' }
+Checked-Run 'python' @((Join-Path $Root 'tools\blast\apply_local_only_patch.py'),'--source-root',$Extracted,'--report',(Join-Path $Output 'offline-patch-record.json'))
+$OfflinePatches = Get-Content -Raw (Join-Path $Output 'offline-patch-record.json') | ConvertFrom-Json
 $SqliteRoot = Join-Path $Output 'sqlite'
 Expand-Archive -Path $Sqlite -DestinationPath $SqliteRoot -Force
 $SqliteSource = Join-Path $SqliteRoot 'sqlite-amalgamation-3500400'
@@ -79,7 +81,8 @@ if ($GuardImports -match '(?i)(MSVCP[0-9_]*|VCRUNTIME[0-9_]*|ucrtbase)\.dll') { 
   sourcePatched=$true;patch='Quote makeblastdb metadata database path for the existing BLAST database-list parser';
   patchSha256=(Get-FileHash (Join-Path $Root 'tools\blast\makeblastdb-space-path.patch') -Algorithm SHA256).Hash.ToLower();
   patchedSourceBeforeSha256=$BeforePatch;patchedSourceAfterSha256=$AfterPatch;
-  configuration=$Configuration;compiler=(& cl.exe 2>&1 | Out-String);binaries=$Inventory;
+  offlinePatches=$OfflinePatches;
+  configuration=$Configuration;compiler=@{path=(Get-Command cl.exe).Source;fileVersion=(Get-Item (Get-Command cl.exe).Source).VersionInfo.FileVersion};binaries=$Inventory;
   adapterSha256=(Get-FileHash (Join-Path $Bin 'blast-guard.exe') -Algorithm SHA256).Hash.ToLower();
   adapterImports=$GuardImports;
   adapterSourceSha256=(Get-FileHash (Join-Path $Root 'tools\blast\guard.cpp') -Algorithm SHA256).Hash.ToLower();
