@@ -2,14 +2,14 @@
   "schema": "native-workbench-knowledge/release-inventory",
   "schema_version": 1,
   "as_of": "2026-10-04",
-  "source_commit": "24c6899aa7c19208ec88ae816879952ed0d8527e",
+  "source_commit": "289c4176561fe6c8bbbfba1e225cd65fbafb126d",
   "repository": "https://github.com/comparativechrono/workbench",
   "purpose": "Public release handover inventory. This is documentation, not an install catalogue or a trust file.",
   "is_install_catalogue": false,
   "is_trust_file": false,
   "verification": {
     "checked_on": "2026-10-04",
-    "method": "Older application and pack entries preserve the initial 2026-10-04 GitHub metadata audit and dated publication evidence. For the October optional packs, public release assets were independently downloaded and rehashed, source/scientific regressions retained, and exact-final archives executed through the released 0.6.0 native Windows bridge in ordinary and space-containing paths. Per-asset download verification and per-pack evidence distinguish these levels.",
+    "method": "Older application and pack entries preserve the initial 2026-10-04 GitHub metadata audit and dated publication evidence. For the October optional packs, public release assets were independently downloaded and rehashed, source/scientific regressions retained, and exact-final archives executed through the released 0.6.0 native Windows bridge in ordinary and space-containing paths. Per-asset download verification and per-pack evidence distinguish these levels. Kraken2 and Bracken final asset verification and exact-final native gates are retained separately, including a real classification-to-estimation chain.",
     "release_metadata_url": "https://api.github.com/repos/comparativechrono/workbench/releases?per_page=100",
     "readme_url": "https://github.com/comparativechrono/workbench/blob/main/README.md",
     "scope": "Published releases only. Drafts and private metadata are excluded. Historical validation candidates are excluded from current_packs.",
@@ -17,8 +17,8 @@
   },
   "status": {
     "application": "development-prerelease",
-    "latest_pack_count": 30,
-    "published_pack_version_count": 31,
+    "latest_pack_count": 32,
+    "published_pack_version_count": 33,
     "online_catalogue": "not-published-or-configured",
     "catalogue_source_json": "not-published-or-configured",
     "signing_key": "requires-maintainer-controlled-external-key",
@@ -238,6 +238,60 @@
       },
       "companion_assets": [],
       "evidence_scope": "Original pack identity/manifest preserved in independent split archive. Packaging verification is not a fresh native Windows execution claim."
+    },
+    {
+      "id": "bracken",
+      "version": "1.0.0",
+      "upstream_tool_version": "3.1",
+      "tag": "pack-bracken-v1.0.0",
+      "name": "Bracken pack 1.0.0 — native Windows validated",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-bracken-v1.0.0",
+      "prerelease": true,
+      "published_at": "2026-10-04T21:26:06Z",
+      "minimum_application_for_archive_import": "0.6.0",
+      "included_in_starter": false,
+      "manifest_sha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d",
+      "primary_asset": {
+        "name": "native-workbench-pack-bracken-1.0.0.zip",
+        "bytes": 34837071,
+        "github_digest": "sha256:bfd5ae2ea3ef3e54f3ae5b97530e58bf1aad8562d66ca1c8e190b87472f1d853",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-bracken-v1.0.0/native-workbench-pack-bracken-1.0.0.zip",
+        "independently_downloaded_and_rehashed_on": "2026-10-04"
+      },
+      "companion_assets": [
+        {
+          "name": "native-workbench-bracken-1.0.0-source-evidence.zip",
+          "bytes": 1701847,
+          "github_digest": "sha256:dbe80640cf8b7a9fc81cb6400e8b20ef4b83ce6b7c1e33e440cba2bc75a2450a",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-bracken-v1.0.0/native-workbench-bracken-1.0.0-source-evidence.zip",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        },
+        {
+          "name": "native-workbench-bracken-1.0.0-windows-validation.json",
+          "bytes": 186976,
+          "github_digest": "sha256:12f0387145058c293361b634b4391a2d7a66386188b9c5a5fc9bf5f45e0e7954",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-bracken-v1.0.0/native-workbench-bracken-1.0.0-windows-validation.json",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        },
+        {
+          "name": "SHA256SUMS-archives.txt",
+          "bytes": 223,
+          "github_digest": "sha256:66b6a723aa2f85e22be0e020e71ba730c2422c58c2e097230077dbd480bc22e0",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-bracken-v1.0.0/SHA256SUMS-archives.txt",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "bytes": 434,
+          "github_digest": "sha256:5138aba4c5c25ed5b673dab14f85a70149da6e75079f25fa8985382785ad208b",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-bracken-v1.0.0/SHA256SUMS.txt",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        }
+      ],
+      "pack_implementation_source_commit": "85ef78b0436417a85d8d70ed685dc2a52c24f7a4",
+      "validation_record": "evidence/bracken-1.0.0-validation-2026-10-04.json",
+      "public_download_verification_record": "evidence/bracken-1.0.0-public-downloads-2026-10-04.json",
+      "evidence_scope": "Exact final native Windows archive: 4 installation/scientific checks, 7 graph/archive contracts and 17 additional scientific/failure regressions per path; zero failures, errors or test skips. Independent Bayesian arithmetic, unchanged upstream estimator, explicit external-report provenance and actual Kraken2-to-Bracken classification/estimation chain."
     },
     {
       "id": "bwa",
@@ -572,6 +626,60 @@
         }
       ],
       "evidence_scope": "Exact final archive native Windows CI; see native_windows_evidence."
+    },
+    {
+      "id": "kraken2",
+      "version": "1.0.0",
+      "upstream_tool_version": "2.17.2",
+      "tag": "pack-kraken2-v1.0.0",
+      "name": "Kraken2 pack 1.0.0 — native Windows validated",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-kraken2-v1.0.0",
+      "prerelease": true,
+      "published_at": "2026-10-04T21:17:25Z",
+      "minimum_application_for_archive_import": "0.6.0",
+      "included_in_starter": false,
+      "manifest_sha256": "4c0e1dbe86b43f41c72b7dbdc6c93034d6b6eeb210494bdc8252c110182b677f",
+      "primary_asset": {
+        "name": "native-workbench-pack-kraken2-1.0.0.zip",
+        "bytes": 230928151,
+        "github_digest": "sha256:9feb39546f6af9d718629304d7fc6a5d70d8a015839deef7d4a869e7587a0e91",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-kraken2-v1.0.0/native-workbench-pack-kraken2-1.0.0.zip",
+        "independently_downloaded_and_rehashed_on": "2026-10-04"
+      },
+      "companion_assets": [
+        {
+          "name": "native-workbench-kraken2-1.0.0-source-evidence.zip",
+          "bytes": 1710289,
+          "github_digest": "sha256:1a0d1557eb13c6fdee7b32183115b1b2b312b659835a5873c7a8bef1084fe997",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-kraken2-v1.0.0/native-workbench-kraken2-1.0.0-source-evidence.zip",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        },
+        {
+          "name": "native-workbench-kraken2-1.0.0-windows-validation.json",
+          "bytes": 372488,
+          "github_digest": "sha256:1e2962559c0437b3003a643c89310b83874b35291f9581877adbffe27847d4a5",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-kraken2-v1.0.0/native-workbench-kraken2-1.0.0-windows-validation.json",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        },
+        {
+          "name": "SHA256SUMS-archives.txt",
+          "bytes": 223,
+          "github_digest": "sha256:c54d4841c1b089c2218359e11f2e398206cea5a024ebc64a6377be86daec7260",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-kraken2-v1.0.0/SHA256SUMS-archives.txt",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "bytes": 434,
+          "github_digest": "sha256:2ff1442cb9a7547fdaa07508ac98e95d43acd7dbda49a960868b68aa89bd1a26",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-kraken2-v1.0.0/SHA256SUMS.txt",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        }
+      ],
+      "pack_implementation_source_commit": "85ef78b0436417a85d8d70ed685dc2a52c24f7a4",
+      "validation_record": "evidence/kraken2-1.0.0-validation-2026-10-04.json",
+      "public_download_verification_record": "evidence/kraken2-1.0.0-public-downloads-2026-10-04.json",
+      "evidence_scope": "Exact final native Windows archive: 6 installation/scientific checks, 6 graph/archive contracts and 16 additional scientific/failure regressions per path; zero failures, errors or test skips. Synthetic nucleotide assignments, paired fragment counts, gzip, mapped/loaded indexes and local resource preparation/guards."
     },
     {
       "id": "lofreq",
@@ -987,6 +1095,30 @@
       "limits": "Synthetic fixtures. Does not validate the GUI, arbitrary long paths, OS-level network blocking, all protocols, human-scale performance or clinical use."
     },
     {
+      "pack": "bracken",
+      "version": "1.0.0",
+      "workflow_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37236121810",
+      "workflow_source_commit": "289c4176561fe6c8bbbfba1e225cd65fbafb126d",
+      "workflow_name": "Native Windows pack check",
+      "status": "completed",
+      "conclusion": "success",
+      "runner": "windows-2022",
+      "application": "released 0.6.0 starter with native bridge",
+      "paths": [
+        "ordinary",
+        "contains spaces"
+      ],
+      "native_installation_scientific_checks_passed_per_path": 4,
+      "graph_archive_contracts_passed_per_path": 7,
+      "additional_scientific_regressions_passed_per_path": 17,
+      "test_failures": 0,
+      "test_errors": 0,
+      "test_skips": 0,
+      "scope": "Exact final native Windows archive: 4 installation/scientific checks, 7 graph/archive contracts and 17 additional scientific/failure regressions per path; zero failures, errors or test skips. Independent Bayesian arithmetic, unchanged upstream estimator, explicit external-report provenance and actual Kraken2-to-Bracken classification/estimation chain.",
+      "validation_record": "evidence/bracken-1.0.0-validation-2026-10-04.json",
+      "limits": "Graph/archive publication uses a Python copy callback; native importer/scientific execution are checked separately. Small synthetic fixtures do not establish interactive GUI, arbitrary paths, large-database throughput, empirical taxonomic accuracy, institutional approval or clinical suitability. Large database/model resources remain separate and externally produced associations are explicitly user-attested."
+    },
+    {
       "pack": "deseq2",
       "version": "1.0.0",
       "workflow_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37230943331",
@@ -1101,6 +1233,30 @@
       ],
       "scope": "Single-end and paired-end scientific checks, both at two threads and three bootstrap replicates, gzip inputs, native import and duplicate protection.",
       "limits": "Synthetic fixtures. Does not validate the GUI, arbitrary long paths, all protocols, human-scale performance, or clinical use."
+    },
+    {
+      "pack": "kraken2",
+      "version": "1.0.0",
+      "workflow_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37235526518",
+      "workflow_source_commit": "85ef78b0436417a85d8d70ed685dc2a52c24f7a4",
+      "workflow_name": "Native Windows pack check",
+      "status": "completed",
+      "conclusion": "success",
+      "runner": "windows-2022",
+      "application": "released 0.6.0 starter with native bridge",
+      "paths": [
+        "ordinary",
+        "contains spaces"
+      ],
+      "native_installation_scientific_checks_passed_per_path": 6,
+      "graph_archive_contracts_passed_per_path": 6,
+      "additional_scientific_regressions_passed_per_path": 16,
+      "test_failures": 0,
+      "test_errors": 0,
+      "test_skips": 0,
+      "scope": "Exact final native Windows archive: 6 installation/scientific checks, 6 graph/archive contracts and 16 additional scientific/failure regressions per path; zero failures, errors or test skips. Synthetic nucleotide assignments, paired fragment counts, gzip, mapped/loaded indexes and local resource preparation/guards.",
+      "validation_record": "evidence/kraken2-1.0.0-validation-2026-10-04.json",
+      "limits": "Graph/archive publication uses a Python copy callback; native importer/scientific execution are checked separately. Small synthetic fixtures do not establish interactive GUI, arbitrary paths, large-database throughput, empirical taxonomic accuracy, institutional approval or clinical suitability. Large database/model resources remain separate and externally produced associations are explicitly user-attested."
     },
     {
       "pack": "mosdepth",
@@ -1280,6 +1436,63 @@
         }
       ],
       "final_status": "All four corresponding exact-final 1.0.0 archives subsequently passed native Windows gates; see native_windows_evidence and the separate final reports."
+    },
+    {
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/metagenomics-candidates-20261004",
+      "status": "development-candidates-only",
+      "purpose": "Kraken2 0.0.1 and Bracken 0.0.2 public validation candidates and exact-final payload correspondence. Local Bracken 0.0.1 was never published. Candidates are excluded from current analysis pack/version counts.",
+      "public_assets": [
+        {
+          "name": "bracken-0.0.2-candidate-correspondence.json",
+          "bytes": 15035,
+          "github_digest": "sha256:3d3cb2c06f4be78f7b5aa84d26dbf5aa9626fcf83221f18634d1176e3897780c",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/metagenomics-candidates-20261004/bracken-0.0.2-candidate-correspondence.json",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        },
+        {
+          "name": "kraken2-0.0.1-candidate-correspondence.json",
+          "bytes": 20963,
+          "github_digest": "sha256:6e08584f29c2155d1ca62888b3d17b6b101dce98437d1ac05dd2d6ffc361b3bc",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/metagenomics-candidates-20261004/kraken2-0.0.1-candidate-correspondence.json",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        },
+        {
+          "name": "native-workbench-pack-bracken-0.0.2.zip",
+          "bytes": 34837211,
+          "github_digest": "sha256:354c805219487591b0d4dcdbcda21ea7c168689b85563aca0301012670d6c5eb",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/metagenomics-candidates-20261004/native-workbench-pack-bracken-0.0.2.zip",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        },
+        {
+          "name": "native-workbench-pack-kraken2-0.0.1.zip",
+          "bytes": 230928282,
+          "github_digest": "sha256:45b8483ec825901267f39ed804294d136813e4f683afa62888f72e9f8ca214b2",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/metagenomics-candidates-20261004/native-workbench-pack-kraken2-0.0.1.zip",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "bytes": 432,
+          "github_digest": "sha256:105c2dfa293932acd1753460c4cce7e3100910d52c6c4eabcfc8cf32fdb63e33",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/metagenomics-candidates-20261004/SHA256SUMS.txt",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        }
+      ],
+      "successful_candidates": [
+        {
+          "pack": "kraken2",
+          "version": "0.0.1",
+          "run": 37235242440,
+          "source_commit": "85ef78b0436417a85d8d70ed685dc2a52c24f7a4"
+        },
+        {
+          "pack": "bracken",
+          "version": "0.0.2",
+          "run": 37235798127,
+          "source_commit": "289c4176561fe6c8bbbfba1e225cd65fbafb126d"
+        }
+      ],
+      "final_status": "Both exact-final 1.0.0 archives subsequently passed native Windows gates and independent public-asset verification."
     }
   ],
   "source_recovery": {
@@ -1288,7 +1501,8 @@
     "rna_source_evidence": "The STAR and kallisto source-evidence ZIPs retain candidate/Linux-stage records. The separate windows-validation.json assets record exact-final native Windows results; a historical pending-final statement in an immutable companion is superseded by that separate report.",
     "optional_pack_source_evidence": "The October optional-pack source-evidence ZIPs retain immutable creation-time source and Linux/candidate records. Separate windows-validation.json assets bind successful native results to exact-final archive hashes. BEDTools final JSON also supplies complete static verification to correct an empty historical static-validation log in its source companion.",
     "gatk_source_evidence": "GATK 1.0.0 source/evidence companion retains a full git source and knowledge snapshot at eb4a255, Linux scientific reports and early strict-copy failures; its pending-final note is superseded by the exact-final Windows report. Upstream corresponding sources/licenses are retained in the installable pack. Preserve both archives.",
-    "annotation_expression_coverage_phylogeny_sources": "Each new pack retains upstream corresponding sources and licenses. Explicit source-evidence companions include full Git snapshots and historical failures; separate exact-final Windows JSON reports close creation-time pending validation without replacing immutable archives. DESeq2 additionally requires the separate r-runtime-sources.zip for compiled R dependency source recovery; users do not import that source ZIP."
+    "annotation_expression_coverage_phylogeny_sources": "Each new pack retains upstream corresponding sources and licenses. Explicit source-evidence companions include full Git snapshots and historical failures; separate exact-final Windows JSON reports close creation-time pending validation without replacing immutable archives. DESeq2 additionally requires the separate r-runtime-sources.zip for compiled R dependency source recovery; users do not import that source ZIP.",
+    "metagenomics_sources": "Kraken2 and Bracken source/evidence companions preserve exact Git source snapshots and creation-time scientific/static evidence. Matching upstream sources/licenses are retained with each pack. Separate final Windows reports bind native success to immutable archive hashes. Large user-selected databases and read-length distributions are scientific inputs, not executable pack assets; retain their descriptors, source declarations and hashes separately."
   },
   "historical_manifests": {
     "paths": [
@@ -1335,5 +1549,39 @@
     "test_source": "../tests/test_gatk_pipeline.py",
     "test_source_sha256": "08921b12196822716c287ec95daa13ea26f5562b44b1058bee5d47bebe2c80d6",
     "scope": "Graph/archive contracts use Python publication; separate exact-final native bridge import and science gates passed in the same jobs. Earlier Linux graph copying failures are preserved, not reported as passes."
+  },
+  "metagenomics_released_application_contract_evidence": {
+    "application": "released Workbench 0.6.0 starter unchanged",
+    "scope": "Graph/archive contracts use the released Python engine and a checked copy callback; no scientific executable or native importer is executed by the graph suite.",
+    "exact_final_windows_results": {
+      "kraken2": {
+        "tests_passed_per_path": 6,
+        "failures": 0,
+        "errors": 0,
+        "skips": 0,
+        "workflow_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37235526518",
+        "record": "evidence/kraken2-1.0.0-validation-2026-10-04.json"
+      },
+      "bracken": {
+        "tests_passed_per_path": 7,
+        "failures": 0,
+        "errors": 0,
+        "skips": 0,
+        "workflow_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37236121810",
+        "record": "evidence/bracken-1.0.0-validation-2026-10-04.json"
+      }
+    },
+    "typing_limits": "Generic file ports cannot prove database/model identity, report structure, read lengths or units; separate adapter/scientific checks are required."
+  },
+  "metagenomics_shared_resource_contract_evidence": {
+    "path": "evidence/metagenomics-resources-2026-10-04.json",
+    "sha256": "eda76e48e64bcd5e69d7a5cc917b1babfcf7e60ac45b66e96c0d73c35b8a6885",
+    "helper_sha256": "dd2c52caec9ac6d067e595230beab94429f4e38a278b5d06d3b22aa69c96e43d",
+    "tests_passed": 17,
+    "test_failures": 0,
+    "test_errors": 0,
+    "test_skips": 0,
+    "scope": "Linux source-level synthetic resource/archive contracts only; no scientific executable, native importer or Windows execution.",
+    "retention": "Stored in Git; not embedded in the earlier immutable pack source/evidence companions."
   }
 }

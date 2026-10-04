@@ -8,9 +8,9 @@ open, diffable files with no proprietary reader or external memory service.
 separate standard called Open Knowledge Format.
 
 **Reviewed:** 2026-10-04. **Source baseline:**
-[`24c6899aa7c19208ec88ae816879952ed0d8527e`](https://github.com/comparativechrono/workbench/commit/24c6899aa7c19208ec88ae816879952ed0d8527e).
-This handover includes the annotation, expression, coverage and phylogenetics
-expansion after GATK. SnpEff, DESeq2, mosdepth and IQ-TREE have successful
+[`289c4176561fe6c8bbbfba1e225cd65fbafb126d`](https://github.com/comparativechrono/workbench/commit/289c4176561fe6c8bbbfba1e225cd65fbafb126d).
+This handover includes Kraken2/Bracken metagenomics after the annotation,
+expression, coverage and phylogenetics expansion. SnpEff, DESeq2, mosdepth and IQ-TREE have successful
 exact-final Windows installation, graph and scientific gates. Evidence for
 each release retains its own date and tested bytes. Re-check the current tree
 and releases before treating this snapshot as current.
@@ -73,6 +73,14 @@ second release asset, with their own file lock and runtime-bound hash; the small
 source/evidence ZIP does not contain those third-party archives. See
 [source recovery details](../tools/deseq2/R-RUNTIME-SOURCES.md) and the maintained
 pack-development and validation pages before rebuilding.
+
+The [Kraken2/Bracken pipeline guide](../docs/KRAKEN2-BRACKEN-PIPELINE.md) and
+[shared resource specification](../docs/METAGENOMICS-RESOURCES.md) describe local
+database preparation, descriptor identities, fragment/read semantics and
+explicit external-model declarations. Both exact-final packs have successful
+Windows installation, graph and scientific evidence. Preserve their full
+source/evidence companions and separate final validation records; large
+scientific databases are user-selected inputs and are not included in the packs.
 
 ## Maintaining the handover
 

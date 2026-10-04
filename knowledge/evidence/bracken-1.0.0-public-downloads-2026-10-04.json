@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "repository": "https://github.com/comparativechrono/workbench",
+  "tag": "pack-bracken-v1.0.0",
+  "verifiedAt": "2026-10-04T21:30:53.316761+00:00",
+  "method": "Every asset independently streamed and SHA-256 hashed in the retained component reports; unchanged initial assets were not downloaded twice. Current GitHub asset names, sizes and digests also match all pre-publication pins.",
+  "assets": [
+    {
+      "name": "native-workbench-pack-bracken-1.0.0.zip",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/pack-bracken-v1.0.0/native-workbench-pack-bracken-1.0.0.zip",
+      "bytes": 34837071,
+      "sha256": "bfd5ae2ea3ef3e54f3ae5b97530e58bf1aad8562d66ca1c8e190b87472f1d853",
+      "expectedBytes": 34837071,
+      "expectedSha256": "bfd5ae2ea3ef3e54f3ae5b97530e58bf1aad8562d66ca1c8e190b87472f1d853",
+      "success": true,
+      "verifiedAt": "2026-10-04T21:27:23.329493+00:00",
+      "githubAssetId": 610709552,
+      "githubDigest": "sha256:bfd5ae2ea3ef3e54f3ae5b97530e58bf1aad8562d66ca1c8e190b87472f1d853"
+    },
+    {
+      "name": "native-workbench-bracken-1.0.0-source-evidence.zip",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/pack-bracken-v1.0.0/native-workbench-bracken-1.0.0-source-evidence.zip",
+      "bytes": 1701847,
+      "sha256": "dbe80640cf8b7a9fc81cb6400e8b20ef4b83ce6b7c1e33e440cba2bc75a2450a",
+      "expectedBytes": 1701847,
+      "expectedSha256": "dbe80640cf8b7a9fc81cb6400e8b20ef4b83ce6b7c1e33e440cba2bc75a2450a",
+      "success": true,
+      "verifiedAt": "2026-10-04T21:27:23.329493+00:00",
+      "githubAssetId": 610709634,
+      "githubDigest": "sha256:dbe80640cf8b7a9fc81cb6400e8b20ef4b83ce6b7c1e33e440cba2bc75a2450a"
+    },
+    {
+      "name": "SHA256SUMS-archives.txt",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/pack-bracken-v1.0.0/SHA256SUMS-archives.txt",
+      "bytes": 223,
+      "sha256": "66b6a723aa2f85e22be0e020e71ba730c2422c58c2e097230077dbd480bc22e0",
+      "expectedBytes": 223,
+      "expectedSha256": "66b6a723aa2f85e22be0e020e71ba730c2422c58c2e097230077dbd480bc22e0",
+      "success": true,
+      "verifiedAt": "2026-10-04T21:27:23.329493+00:00",
+      "githubAssetId": 610709649,
+      "githubDigest": "sha256:66b6a723aa2f85e22be0e020e71ba730c2422c58c2e097230077dbd480bc22e0"
+    },
+    {
+      "name": "native-workbench-bracken-1.0.0-windows-validation.json",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/pack-bracken-v1.0.0/native-workbench-bracken-1.0.0-windows-validation.json",
+      "bytes": 186976,
+      "sha256": "12f0387145058c293361b634b4391a2d7a66386188b9c5a5fc9bf5f45e0e7954",
+      "expectedBytes": 186976,
+      "expectedSha256": "12f0387145058c293361b634b4391a2d7a66386188b9c5a5fc9bf5f45e0e7954",
+      "success": true,
+      "verifiedAt": "2026-10-04T21:30:39.504525+00:00",
+      "githubAssetId": 610715953,
+      "githubDigest": "sha256:12f0387145058c293361b634b4391a2d7a66386188b9c5a5fc9bf5f45e0e7954"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/pack-bracken-v1.0.0/SHA256SUMS.txt",
+      "bytes": 434,
+      "sha256": "5138aba4c5c25ed5b673dab14f85a70149da6e75079f25fa8985382785ad208b",
+      "expectedBytes": 434,
+      "expectedSha256": "5138aba4c5c25ed5b673dab14f85a70149da6e75079f25fa8985382785ad208b",
+      "success": true,
+      "verifiedAt": "2026-10-04T21:30:39.504525+00:00",
+      "githubAssetId": 610715967,
+      "githubDigest": "sha256:5138aba4c5c25ed5b673dab14f85a70149da6e75079f25fa8985382785ad208b"
+    }
+  ],
+  "componentReports": [
+    {
+      "file": "initial-public-verification.json",
+      "sha256": "f7600706a86c0b7882cdf6e9b9925333fa7240546298cb76add9b20fee4cd563",
+      "verifiedAt": "2026-10-04T21:27:23.329493+00:00"
+    },
+    {
+      "file": "new-evidence-public-verification.json",
+      "sha256": "1faa95bfa7a908d299ee70d52bc6d5c51aaff735119428c2bc77d0bcb00b3af9",
+      "verifiedAt": "2026-10-04T21:30:39.504525+00:00"
+    }
+  ],
+  "success": true,
+  "scope": "Public byte integrity and availability only; not publisher identity or scientific execution."
+}

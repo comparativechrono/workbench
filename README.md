@@ -13,7 +13,7 @@ The application does not require Docker, WSL or a system Python installation.
 
 Version **0.6.0 is a development prerelease**. The
 [application release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.6.0)
-and **30 independently versioned tool packs** are published on GitHub. The
+and **32 independently versioned tool packs** are published on GitHub. The
 [release inventory](knowledge/release-inventory.json) records their downloads,
 sizes, SHA-256 checksums and dated validation evidence.
 
@@ -27,7 +27,7 @@ migration on Linux. Scientific execution used the portable Linux reference
 backend. The current Windows GUI and native Windows long-path behavior still need
 validation on Windows. Separate native Windows pack checks validate the exact
 published STAR, kallisto, FastQC, MultiQC, featureCounts, BEDTools, BLAST, GATK,
-SnpEff, DESeq2, mosdepth and IQ-TREE archives
+SnpEff, DESeq2, mosdepth, IQ-TREE, Kraken2 and Bracken archives
 through the released 0.6.0 native bridge in ordinary and space-containing paths;
 see the [dated evidence and limits](knowledge/current-state.md).
 
@@ -83,6 +83,22 @@ connections, sample sheets, separate database resources and material limits.
 Private runtimes are included. Matching source/evidence assets accompany the
 releases; DESeq2 additionally requires its separate R-runtime source companion
 when redistributing the complete corresponding sources.
+
+### Metagenomic classification and abundance
+
+| Pack | What it adds |
+| --- | --- |
+| [Kraken2 1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-kraken2-v1.0.0) | Prepare/register a local database, then classify single or paired FASTQ reads |
+| [Bracken 1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-bracken-v1.0.0) | Reestimate taxonomic abundance from a Workbench classification record or explicitly declared external report |
+
+Both exact-final archives passed native Windows installation, graph and
+scientific gates in ordinary and space-containing paths, including a real
+Kraken2-to-Bracken chain. Large databases are separate local resources: select an
+existing database or prepare an already downloaded archive. The packs do not
+download reference data during analysis. Bracken requires a model matching the
+database and selected read length; paired report counts remain fragments.
+See the [pipeline guide](docs/KRAKEN2-BRACKEN-PIPELINE.md) for setup, model
+declarations, supported inputs and evidence limits.
 
 ### RNA-seq tools
 

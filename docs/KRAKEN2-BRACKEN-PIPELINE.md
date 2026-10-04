@@ -1,9 +1,17 @@
 # Kraken2 and Bracken local metagenomics
 
-**Development status, 2026-10-04: implementation and validation in progress.**
-This describes the proposed pack contracts. It is not a completed release or
-native Windows validation record. Do not treat a successful source, graph or
-candidate test as proof that a final published archive has passed its gates.
+**Exact-final release status, 2026-10-04:** [Kraken2 1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-kraken2-v1.0.0)
+and [Bracken 1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-bracken-v1.0.0) passed their native Windows
+installation, graph/archive and scientific gates in ordinary and
+space-containing paths. Bracken's gate included a real Kraken2-to-Bracken chain.
+All final public assets were independently downloaded and rehashed. The
+[dated repository evidence](../knowledge/current-state.md#kraken2-and-bracken-exact-final-evidence)
+records exact hashes, workflow commits and limitations. Earlier companion
+snapshots retain their historical creation-time status.
+
+The release records below apply to the exact published 1.0.0 archives.
+Source-only, graph-only and candidate tests remain separate evidence; they
+do not by themselves establish exact-final native Windows success.
 
 These are separate optional packs for the unchanged **Workbench 0.6.0**
 application. Kraken2 classifies reads against a selected local database; Bracken
@@ -11,12 +19,12 @@ estimates taxonomic abundances from a Kraken report using that database's
 read-length-specific distribution. Both retain the pinned upstream scientific
 implementations. The application and its starter tools remain separate.
 
-| Pack | Proposed operations | Main outputs |
+| Pack | Supported operations | Main outputs |
 | --- | --- | --- |
 | [Kraken2](KRAKEN2-PACK.md), `kraken2` | Register an existing local database; prepare a selected local database archive; classify single FASTQ reads or paired FASTQ mates | Reusable database descriptor; classification record; ordinary Kraken report and assignments; provenance |
 | [Bracken](BRACKEN-PACK.md), `bracken` | Estimate from a Workbench Kraken classification record; estimate from an explicitly declared external Kraken report and distribution | Abundance table, Bracken report, provenance and methods |
 
-The source pins currently target Kraken2 **2.17.2** and Bracken **3.1**. Refer to
+The source pins use Kraken2 **2.17.2** and Bracken **3.1**. Refer to
 the individual pack's source lock, guide and validation record for its exact
 pack version, supported operations and tested bytes. Bracken's upstream v3.1
 tag contains a launcher that still prints 3.0.1; this pack invokes the v3.1
@@ -40,7 +48,7 @@ database archive into its result folder and produces the descriptor. Keep those
 files with that result; the descriptor is not a self-contained database backup.
 
 Database construction from downloaded taxonomy/reference sequences and
-generation of new Bracken distributions are outside the proposed operations.
+generation of new Bracken distributions are outside these supported operations.
 Preparing or registering files does not run those scientific database builders.
 There is no hidden network retrieval during an analysis. Obtain any needed
 reference resource separately, preserving its published provenance and terms.
@@ -99,7 +107,7 @@ read pair. Its single operation counts **reads**. Bracken preserves the declared
 unit. Neither a graph connection nor a common filename establishes that two
 datasets represent the same sample.
 
-The proposed Bracken record-based operation requires Kraken confidence 0,
+The Bracken record-based operation requires Kraken confidence 0,
 minimum hit groups 2, minimum base quality 0, and no quick mode. Those are the
 settings represented by this pack's supported distribution contract; changing
 Kraken settings can still produce a Kraken result, but may make it unsuitable

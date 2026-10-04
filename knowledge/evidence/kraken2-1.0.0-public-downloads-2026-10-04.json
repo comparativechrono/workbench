@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "repository": "https://github.com/comparativechrono/workbench",
+  "tag": "pack-kraken2-v1.0.0",
+  "verifiedAt": "2026-10-04T21:22:27.935941+00:00",
+  "method": "Every asset independently streamed and SHA-256 hashed in the retained component reports; unchanged initial assets were not downloaded twice. Current GitHub asset names, sizes and digests also match all pre-publication pins.",
+  "assets": [
+    {
+      "name": "native-workbench-pack-kraken2-1.0.0.zip",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/pack-kraken2-v1.0.0/native-workbench-pack-kraken2-1.0.0.zip",
+      "bytes": 230928151,
+      "sha256": "9feb39546f6af9d718629304d7fc6a5d70d8a015839deef7d4a869e7587a0e91",
+      "expectedBytes": 230928151,
+      "expectedSha256": "9feb39546f6af9d718629304d7fc6a5d70d8a015839deef7d4a869e7587a0e91",
+      "success": true,
+      "verifiedAt": "2026-10-04T21:18:35.672621+00:00",
+      "githubAssetId": 610693558,
+      "githubDigest": "sha256:9feb39546f6af9d718629304d7fc6a5d70d8a015839deef7d4a869e7587a0e91"
+    },
+    {
+      "name": "native-workbench-kraken2-1.0.0-source-evidence.zip",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/pack-kraken2-v1.0.0/native-workbench-kraken2-1.0.0-source-evidence.zip",
+      "bytes": 1710289,
+      "sha256": "1a0d1557eb13c6fdee7b32183115b1b2b312b659835a5873c7a8bef1084fe997",
+      "expectedBytes": 1710289,
+      "expectedSha256": "1a0d1557eb13c6fdee7b32183115b1b2b312b659835a5873c7a8bef1084fe997",
+      "success": true,
+      "verifiedAt": "2026-10-04T21:18:35.672621+00:00",
+      "githubAssetId": 610693899,
+      "githubDigest": "sha256:1a0d1557eb13c6fdee7b32183115b1b2b312b659835a5873c7a8bef1084fe997"
+    },
+    {
+      "name": "SHA256SUMS-archives.txt",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/pack-kraken2-v1.0.0/SHA256SUMS-archives.txt",
+      "bytes": 223,
+      "sha256": "c54d4841c1b089c2218359e11f2e398206cea5a024ebc64a6377be86daec7260",
+      "expectedBytes": 223,
+      "expectedSha256": "c54d4841c1b089c2218359e11f2e398206cea5a024ebc64a6377be86daec7260",
+      "success": true,
+      "verifiedAt": "2026-10-04T21:18:35.672621+00:00",
+      "githubAssetId": 610693922,
+      "githubDigest": "sha256:c54d4841c1b089c2218359e11f2e398206cea5a024ebc64a6377be86daec7260"
+    },
+    {
+      "name": "native-workbench-kraken2-1.0.0-windows-validation.json",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/pack-kraken2-v1.0.0/native-workbench-kraken2-1.0.0-windows-validation.json",
+      "bytes": 372488,
+      "sha256": "1e2962559c0437b3003a643c89310b83874b35291f9581877adbffe27847d4a5",
+      "expectedBytes": 372488,
+      "expectedSha256": "1e2962559c0437b3003a643c89310b83874b35291f9581877adbffe27847d4a5",
+      "success": true,
+      "verifiedAt": "2026-10-04T21:22:18.200587+00:00",
+      "githubAssetId": 610700366,
+      "githubDigest": "sha256:1e2962559c0437b3003a643c89310b83874b35291f9581877adbffe27847d4a5"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/pack-kraken2-v1.0.0/SHA256SUMS.txt",
+      "bytes": 434,
+      "sha256": "2ff1442cb9a7547fdaa07508ac98e95d43acd7dbda49a960868b68aa89bd1a26",
+      "expectedBytes": 434,
+      "expectedSha256": "2ff1442cb9a7547fdaa07508ac98e95d43acd7dbda49a960868b68aa89bd1a26",
+      "success": true,
+      "verifiedAt": "2026-10-04T21:22:18.200587+00:00",
+      "githubAssetId": 610700404,
+      "githubDigest": "sha256:2ff1442cb9a7547fdaa07508ac98e95d43acd7dbda49a960868b68aa89bd1a26"
+    }
+  ],
+  "componentReports": [
+    {
+      "file": "initial-public-verification.json",
+      "sha256": "17149a1d23bcbd80bbe86dfd6e512b040ec88990d79326b4772daf83c34918b5",
+      "verifiedAt": "2026-10-04T21:18:35.672621+00:00"
+    },
+    {
+      "file": "new-evidence-public-verification.json",
+      "sha256": "760f5e9849d962b03175f9ad9111c0d4a99596e6deb6f007a7b68223c33a8111",
+      "verifiedAt": "2026-10-04T21:22:18.200587+00:00"
+    }
+  ],
+  "success": true,
+  "scope": "Public byte integrity and availability only; not publisher identity or scientific execution."
+}

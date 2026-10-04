@@ -1,0 +1,2951 @@
+{
+  "schema": 1,
+  "kind": "native-workbench-exact-final-pack-validation",
+  "success": true,
+  "createdAt": "2026-10-04T21:28:19.956299+00:00",
+  "packId": "bracken",
+  "packVersion": "1.0.0",
+  "upstreamToolVersion": "3.1",
+  "privatePythonVersion": "3.13.16",
+  "nativeWindowsHost": true,
+  "nativeWindowsExecuted": true,
+  "packImplementationSourceCommit": "85ef78b0436417a85d8d70ed685dc2a52c24f7a4",
+  "validationSourceCommit": "289c4176561fe6c8bbbfba1e225cd65fbafb126d",
+  "archive": {
+    "name": "native-workbench-pack-bracken-1.0.0.zip",
+    "path": "/workspace/scratch/0c5293ac0f36/github-workbench/build/bracken-release-bounded/native-workbench-pack-bracken-1.0.0.zip",
+    "bytes": 34837071,
+    "sha256": "bfd5ae2ea3ef3e54f3ae5b97530e58bf1aad8562d66ca1c8e190b87472f1d853",
+    "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+  },
+  "release": {
+    "repository": "https://github.com/comparativechrono/workbench",
+    "tag": "pack-bracken-v1.0.0",
+    "url": "https://github.com/comparativechrono/workbench/releases/tag/pack-bracken-v1.0.0"
+  },
+  "sourceEvidenceCompanion": {
+    "name": "native-workbench-bracken-1.0.0-source-evidence.zip",
+    "path": "/workspace/scratch/0c5293ac0f36/github-workbench/build/metagenomics-publication/bracken-final/native-workbench-bracken-1.0.0-source-evidence.zip",
+    "bytes": 1701847,
+    "sha256": "dbe80640cf8b7a9fc81cb6400e8b20ef4b83ce6b7c1e33e440cba2bc75a2450a",
+    "sourceCommit": "85ef78b0436417a85d8d70ed685dc2a52c24f7a4",
+    "creationTimeNativeFinalPendingStatusSupersededByThisReport": true,
+    "immutableBytesPreserved": true
+  },
+  "publicAssetVerification": {
+    "name": "initial-public-verification.json",
+    "path": "/workspace/scratch/0c5293ac0f36/github-workbench/build/metagenomics-publication/bracken-final/initial-public-verification.json",
+    "bytes": 1816,
+    "sha256": "f7600706a86c0b7882cdf6e9b9925333fa7240546298cb76add9b20fee4cd563",
+    "report": {
+      "schema": 1,
+      "repository": "https://github.com/comparativechrono/workbench",
+      "tag": "pack-bracken-v1.0.0",
+      "verifiedAt": "2026-10-04T21:27:23.329493+00:00",
+      "method": "Independent streamed public HTTPS download; every byte SHA-256 hashed and size compared to pre-publication pins.",
+      "assets": [
+        {
+          "name": "native-workbench-pack-bracken-1.0.0.zip",
+          "url": "https://github.com/comparativechrono/workbench/releases/download/pack-bracken-v1.0.0/native-workbench-pack-bracken-1.0.0.zip",
+          "bytes": 34837071,
+          "sha256": "bfd5ae2ea3ef3e54f3ae5b97530e58bf1aad8562d66ca1c8e190b87472f1d853",
+          "expectedBytes": 34837071,
+          "expectedSha256": "bfd5ae2ea3ef3e54f3ae5b97530e58bf1aad8562d66ca1c8e190b87472f1d853",
+          "success": true
+        },
+        {
+          "name": "native-workbench-bracken-1.0.0-source-evidence.zip",
+          "url": "https://github.com/comparativechrono/workbench/releases/download/pack-bracken-v1.0.0/native-workbench-bracken-1.0.0-source-evidence.zip",
+          "bytes": 1701847,
+          "sha256": "dbe80640cf8b7a9fc81cb6400e8b20ef4b83ce6b7c1e33e440cba2bc75a2450a",
+          "expectedBytes": 1701847,
+          "expectedSha256": "dbe80640cf8b7a9fc81cb6400e8b20ef4b83ce6b7c1e33e440cba2bc75a2450a",
+          "success": true
+        },
+        {
+          "name": "SHA256SUMS-archives.txt",
+          "url": "https://github.com/comparativechrono/workbench/releases/download/pack-bracken-v1.0.0/SHA256SUMS-archives.txt",
+          "bytes": 223,
+          "sha256": "66b6a723aa2f85e22be0e020e71ba730c2422c58c2e097230077dbd480bc22e0",
+          "expectedBytes": 223,
+          "expectedSha256": "66b6a723aa2f85e22be0e020e71ba730c2422c58c2e097230077dbd480bc22e0",
+          "success": true
+        }
+      ],
+      "success": true,
+      "scope": "Byte integrity and public availability only; not publisher trust or scientific execution."
+    }
+  },
+  "releasedApplication": {
+    "version": "0.6.0",
+    "archiveName": "native-workbench-0.6.0-starter-windows.zip",
+    "sha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+    "nativeBridgeUsedForInstallationChecks": true,
+    "downloadUrl": "https://github.com/comparativechrono/workbench/releases/download/app-v0.6.0/native-workbench-0.6.0-starter-windows.zip"
+  },
+  "summary": {
+    "pathConfigurations": [
+      "ordinary",
+      "path with spaces"
+    ],
+    "passedPerPath": {
+      "native": 4,
+      "graph": 7,
+      "scientific": 17
+    },
+    "duplicateVersionRejectedInBothPaths": true,
+    "testFailures": 0,
+    "testErrors": 0,
+    "testSkips": 0,
+    "exactFinalArchiveValidated": true,
+    "initialPublicAssetsIndependentlyDownloadedAndRehashed": true
+  },
+  "exactFinalNativeEvidence": {
+    "collection": {
+      "name": "collection.json",
+      "path": "/workspace/scratch/0c5293ac0f36/github-workbench/build/metagenomics-native-evidence/bracken-final-37236121810/collection.json",
+      "bytes": 3972,
+      "sha256": "0aa7584f8367ef866bbedc7f78a6b920d3807cbd7da749b30a3e5a9bc203f070",
+      "report": {
+        "schema": 1,
+        "packId": "bracken",
+        "packVersion": "1.0.0",
+        "stage": "final",
+        "collectedAt": "2026-10-04T21:27:57.148815+00:00",
+        "success": true,
+        "errors": [],
+        "run": {
+          "id": 37236121810,
+          "html_url": "https://github.com/comparativechrono/workbench/actions/runs/37236121810",
+          "status": "completed",
+          "conclusion": "success",
+          "sourceCommit": "289c4176561fe6c8bbbfba1e225cd65fbafb126d",
+          "attempt": 1
+        },
+        "expected": {
+          "archiveSha256": "bfd5ae2ea3ef3e54f3ae5b97530e58bf1aad8562d66ca1c8e190b87472f1d853",
+          "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d",
+          "sourceCommit": "289c4176561fe6c8bbbfba1e225cd65fbafb126d",
+          "countsPerPath": {
+            "native": 4,
+            "graph": 7,
+            "scientific": 17
+          },
+          "kraken2DependencySha256": "9feb39546f6af9d718629304d7fc6a5d70d8a015839deef7d4a869e7587a0e91"
+        },
+        "metadataFiles": {
+          "run.json": {
+            "sha256": "5de1c116fe24d4c699ec5d529d440df15859e7951ff2de3e30719c248438e282"
+          },
+          "jobs.json": {
+            "sha256": "d68d027bf9014efcf9bd12edff40edecb0c9995b759418e80e855eb77f0edc24"
+          }
+        },
+        "jobs": [
+          {
+            "id": 111535455696,
+            "name": "native (path with spaces)",
+            "path": "path with spaces",
+            "html_url": "https://github.com/comparativechrono/workbench/actions/runs/37236121810/job/111535455696",
+            "log": {
+              "file": "job-111535455696.log",
+              "sha256": "d9076ccbcdec7a49e1cbee3989c2081ee9e0dde04186a9a40511b2eaf903eb31",
+              "bytes": 72227
+            },
+            "reports": {
+              "native": {
+                "file": "job-111535455696-native.json",
+                "sha256": "29f7a69f4a620a214bc18b5f8597978e1c3793cfcc413a2d1f72975056acac77",
+                "sourceLogLine": 670,
+                "recordsObserved": 1
+              },
+              "graph": {
+                "file": "job-111535455696-graph.json",
+                "sha256": "f4adc29f721ea438ee3fae65d347987f8bef67d85b06c207e835f1019b98675f",
+                "sourceLogLine": 352,
+                "recordsObserved": 1
+              },
+              "scientific": {
+                "file": "job-111535455696-scientific.json",
+                "sha256": "196fe373809e65ec8d1d6bd8698fd37bdae0346ae97cb45e1864748c16ad10da",
+                "sourceLogLine": 328,
+                "recordsObserved": 2
+              }
+            },
+            "malformedBraceOnlyRecords": [],
+            "counts": {
+              "native": 4,
+              "graph": 7,
+              "scientific": 17
+            }
+          },
+          {
+            "id": 111535455707,
+            "name": "native (ordinary)",
+            "path": "ordinary",
+            "html_url": "https://github.com/comparativechrono/workbench/actions/runs/37236121810/job/111535455707",
+            "log": {
+              "file": "job-111535455707.log",
+              "sha256": "84fe26a96c921c36239f598f46440104e3ab9fd701be1e3a8c53b50cd10fb2f8",
+              "bytes": 72119
+            },
+            "reports": {
+              "native": {
+                "file": "job-111535455707-native.json",
+                "sha256": "fb31e532580092517fee3b9bb2034495f4bff0d0fb2dbde55451d54e2b16c11f",
+                "sourceLogLine": 670,
+                "recordsObserved": 1
+              },
+              "graph": {
+                "file": "job-111535455707-graph.json",
+                "sha256": "f4adc29f721ea438ee3fae65d347987f8bef67d85b06c207e835f1019b98675f",
+                "sourceLogLine": 352,
+                "recordsObserved": 1
+              },
+              "scientific": {
+                "file": "job-111535455707-scientific.json",
+                "sha256": "8ddcdece5213e4b556b81b69d4314eecae091e5db9b6e5f5d08f928da26bd39c",
+                "sourceLogLine": 328,
+                "recordsObserved": 2
+              }
+            },
+            "malformedBraceOnlyRecords": [],
+            "counts": {
+              "native": 4,
+              "graph": 7,
+              "scientific": 17
+            }
+          }
+        ],
+        "parserSha256": "ae162f24ef662f3b5942e8c409339121763970afa33f6a6113a0ec95da95e784",
+        "scope": "Observed native Windows jobs and retained logs/reports. Graph uses Python publication callback; native importer and scientific checks are separate. No GUI, clinical, throughput or general database-accuracy validation."
+      }
+    },
+    "run": {
+      "id": 37236121810,
+      "html_url": "https://github.com/comparativechrono/workbench/actions/runs/37236121810",
+      "status": "completed",
+      "conclusion": "success",
+      "sourceCommit": "289c4176561fe6c8bbbfba1e225cd65fbafb126d",
+      "attempt": 1
+    },
+    "jobs": [
+      {
+        "id": 111535455696,
+        "name": "native (path with spaces)",
+        "path": "path with spaces",
+        "html_url": "https://github.com/comparativechrono/workbench/actions/runs/37236121810/job/111535455696",
+        "log": {
+          "file": "job-111535455696.log",
+          "sha256": "d9076ccbcdec7a49e1cbee3989c2081ee9e0dde04186a9a40511b2eaf903eb31",
+          "bytes": 72227
+        },
+        "reports": {
+          "native": {
+            "file": "job-111535455696-native.json",
+            "sha256": "29f7a69f4a620a214bc18b5f8597978e1c3793cfcc413a2d1f72975056acac77",
+            "sourceLogLine": 670,
+            "recordsObserved": 1
+          },
+          "graph": {
+            "file": "job-111535455696-graph.json",
+            "sha256": "f4adc29f721ea438ee3fae65d347987f8bef67d85b06c207e835f1019b98675f",
+            "sourceLogLine": 352,
+            "recordsObserved": 1
+          },
+          "scientific": {
+            "file": "job-111535455696-scientific.json",
+            "sha256": "196fe373809e65ec8d1d6bd8698fd37bdae0346ae97cb45e1864748c16ad10da",
+            "sourceLogLine": 328,
+            "recordsObserved": 2
+          }
+        },
+        "malformedBraceOnlyRecords": [],
+        "counts": {
+          "native": 4,
+          "graph": 7,
+          "scientific": 17
+        },
+        "nativeInstallationReport": {
+          "schema": 1,
+          "nativeWindowsHost": true,
+          "nativeWindowsExecuted": true,
+          "success": true,
+          "packId": "bracken",
+          "packVersion": "1.0.0",
+          "installation": {
+            "type": "result",
+            "success": true,
+            "cancelled": false,
+            "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\packs\\bracken-1.0.0",
+            "message": "Tool pack imported.",
+            "outputs": [],
+            "pack_id": "bracken",
+            "pack_version": "1.0.0",
+            "packId": "bracken",
+            "packVersion": "1.0.0",
+            "publisherVerified": false,
+            "verification": "Complete file inventory verified; publisher identity not verified"
+          },
+          "scientificChecks": {
+            "schema": 1,
+            "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-212658-150541d3",
+            "checks": [
+              {
+                "id": "bracken/external-species@1.0.0",
+                "pin": {
+                  "packId": "bracken",
+                  "packVersion": "1.0.0",
+                  "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+                },
+                "status": "passed",
+                "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-212658-150541d3\\run-20261004-212658-34d4f423"
+              },
+              {
+                "id": "bracken/external-genus@1.0.0",
+                "pin": {
+                  "packId": "bracken",
+                  "packVersion": "1.0.0",
+                  "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+                },
+                "status": "passed",
+                "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-212658-150541d3\\run-20261004-212659-d755f30c"
+              },
+              {
+                "id": "bracken/external-threshold@1.0.0",
+                "pin": {
+                  "packId": "bracken",
+                  "packVersion": "1.0.0",
+                  "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+                },
+                "status": "passed",
+                "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-212658-150541d3\\run-20261004-212659-fd897780"
+              },
+              {
+                "id": "bracken/kraken-record-species@1.0.0",
+                "pin": {
+                  "packId": "bracken",
+                  "packVersion": "1.0.0",
+                  "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+                },
+                "status": "passed",
+                "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-212658-150541d3\\run-20261004-212659-1861d405"
+              }
+            ],
+            "nativeWindowsExecuted": true,
+            "passed": 4,
+            "failed": 0,
+            "cancelled": false,
+            "success": true,
+            "message": "4 of 4 additional pack checks passed."
+          },
+          "duplicateVersionRejected": true
+        },
+        "releasedApplicationGraphReport": {
+          "schema": 1,
+          "applicationVersion": "0.6.0",
+          "expectedPackVersions": {
+            "bracken": "1.0.0"
+          },
+          "testHost": "win32",
+          "pythonVersion": "3.13.16",
+          "nativeWindowsExecuted": false,
+          "scientificExecutablesExecuted": false,
+          "nativeImporterExecuted": false,
+          "scope": "Released-app graph contracts and Python archive import; checked copy callback substitutes native folder publication.",
+          "typingLimitation": "Released 0.6.0 uses generic file ports for local database manifests, classification records and Bracken distributions. Graph acceptance does not validate resource identity, report hashes, read length, count units or scientific suitability; the separately tested adapters must validate them.",
+          "krakenToBrackenGraph": {
+            "tools": [
+              "kraken2/classify-paired",
+              "bracken/estimate",
+              "bracken/estimate",
+              "builtin/report"
+            ],
+            "ranks": [
+              {
+                "rank": 1,
+                "nodes": [
+                  "step-1"
+                ]
+              },
+              {
+                "rank": 2,
+                "nodes": [
+                  "step-2",
+                  "step-3"
+                ]
+              },
+              {
+                "rank": 3,
+                "nodes": [
+                  "step-4"
+                ]
+              }
+            ],
+            "savedPins": [
+              {
+                "packId": "kraken2",
+                "packVersion": "1.0.0",
+                "manifestSha256": "4c0e1dbe86b43f41c72b7dbdc6c93034d6b6eeb210494bdc8252c110182b677f"
+              },
+              {
+                "packId": "bracken",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+              },
+              {
+                "packId": "bracken",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+              },
+              {
+                "packId": "builtin",
+                "packVersion": "0.5.0",
+                "manifestSha256": "84cf3dc5da9e07bca439af537312846933105215153ce6fa533f8a88e1e3a209"
+              }
+            ],
+            "namedMethodsProvenance": true,
+            "inputBindings": {
+              "step-1": {
+                "reads": [
+                  "input-1"
+                ],
+                "database": [
+                  "input-2"
+                ]
+              },
+              "step-2": {
+                "classification": [
+                  "step-1::classification"
+                ],
+                "database": [
+                  "input-2"
+                ]
+              },
+              "step-3": {
+                "classification": [
+                  "step-1::classification"
+                ],
+                "database": [
+                  "input-2"
+                ]
+              },
+              "step-4": {
+                "metrics": [
+                  "step-2::abundance",
+                  "step-3::abundance"
+                ]
+              }
+            },
+            "diagramEdgesRetainNamedSources": true,
+            "plannedMethods": "Planned methods (review before use; this describes the selected analysis, not completed results):\n\nStep S1 (Classify paired fragments against the selected database) will be performed using python 3.13.16 (pack kraken2 1.0.0). Kraken2 2.17.2 will classify validated Phred+33 DNA FASTQ against the selected local nucleotide database, with SHA-256 identity of its minimizer index, taxonomy and options to be verified before and after execution. Confidence, minimum hit groups, base-quality threshold, threads and memory access mode will be recorded. No quick mode or read trimming will be applied. Mates will be validated for identity/order/count and classified jointly; report counts describe fragments. Ordinary six-column reports, per-fragment minimizer evidence, observed read lengths, commands and input hashes will be retained. Classification proportions include unclassified input and are not Bracken abundance estimates. Database provenance is user-supplied and does not prove suitability or clinical identification. Settings: Classification threads=2; Confidence threshold=0; Minimum hit groups=2; Minimum Phred+33 base quality=0; Database access=mapped. Inputs: Read 1 FASTQ: I1 · Read 1 FASTQ | Registered Kraken2 database: I2 · Shared versioned Kraken database and Bracken distributions.\n\nStep S2 (Estimate species abundances) will be performed using python 3.13.16 (pack bracken 1.0.0). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The Kraken2 classification record binds the report hash, database fingerprint, observation units and actual read lengths. The selected distribution hash and registered association are verified; external model association remains a user declaration, not proof of the training database. Exact fixed read length is default; explicitly selected representative length is a documented approximation for variable reads. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Read-length model=exact; Distribution read length (bases)=150; Abundance rank=S; Minimum Kraken clade count=0. Inputs: Kraken2 classification record: S1 · Classify paired fragments against the selected database → Classification record for Bracken | Local database resource: I2 · Shared versioned Kraken database and Bracken distributions.\n\nStep S3 (Estimate genus abundances) will be performed using python 3.13.16 (pack bracken 1.0.0). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The Kraken2 classification record binds the report hash, database fingerprint, observation units and actual read lengths. The selected distribution hash and registered association are verified; external model association remains a user declaration, not proof of the training database. Exact fixed read length is default; explicitly selected representative length is a documented approximation for variable reads. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Read-length model=exact; Distribution read length (bases)=150; Abundance rank=G; Minimum Kraken clade count=0. Inputs: Kraken2 classification record: S1 · Classify paired fragments against the selected database → Classification record for Bracken | Local database resource: I2 · Shared versioned Kraken database and Bracken distributions.\n\nStep S4 (Review species and genus results without pooling) will be performed using Combine statistics reports (pack builtin 0.5.0). Collect selected statistics into a local HTML report with a separate, attributed section for each input. Counts are not pooled and variant files are not merged. Settings: Report title=Pipeline report. Inputs: Statistics to include: S2 · Estimate species abundances → Bracken abundance table; S3 · Estimate genus abundances → Bracken abundance table.\n\nTool references:\nWood DE, Lu J, Langmead B (2019). Improved metagenomic analysis with Kraken2. Genome Biology20:257. https://doi.org/10.1186/s13059-019-1891-0\nLu J, Breitwieser FP, Thielen P, Salzberg SL (2017). Bracken: estimating species abundance in metagenomics data. PeerJ Computer Science 3:e104. https://doi.org/10.7717/peerj-cs.104\nLu J et al. (2022). Metagenome analysis using the Kraken software suite. Nature Protocols 17:2815–2839. https://doi.org/10.1038/s41596-022-00738-y\n\nOperations run locally in dependency order. Independent branches are scheduled sequentially. The run record records exact packs, parameters, input identities, outputs and completion states.\n",
+            "changedSavedManifestRejected": true,
+            "classificationPathResolvedFromNamedProducer": true,
+            "sameExplicitDatabaseSource": true,
+            "actualScientificProgramsExecuted": false
+          },
+          "abundanceTypeAndProvenanceGuards": {
+            "reportAndClassificationRolesHaveDifferentCoreTypes": true,
+            "externalDatabaseLabelReleaseAndConfirmationRequired": true,
+            "unsupportedRankRejected": true,
+            "genericFileSwapAcceptedByGraphAndRequiresRuntimeRejection": true
+          },
+          "independentAbundanceGraphs": [
+            {
+              "tools": [
+                "bracken/estimate",
+                "bracken/estimate",
+                "builtin/report"
+              ],
+              "ranks": [
+                {
+                  "rank": 1,
+                  "nodes": [
+                    "step-1",
+                    "step-2"
+                  ]
+                },
+                {
+                  "rank": 2,
+                  "nodes": [
+                    "step-3"
+                  ]
+                }
+              ],
+              "savedPins": [
+                {
+                  "packId": "bracken",
+                  "packVersion": "1.0.0",
+                  "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+                },
+                {
+                  "packId": "bracken",
+                  "packVersion": "1.0.0",
+                  "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+                },
+                {
+                  "packId": "builtin",
+                  "packVersion": "0.5.0",
+                  "manifestSha256": "84cf3dc5da9e07bca439af537312846933105215153ce6fa533f8a88e1e3a209"
+                }
+              ],
+              "namedMethodsProvenance": true,
+              "inputBindings": {
+                "step-1": {
+                  "classification": [
+                    "input-1"
+                  ],
+                  "database": [
+                    "input-2"
+                  ]
+                },
+                "step-2": {
+                  "classification": [
+                    "input-1"
+                  ],
+                  "database": [
+                    "input-2"
+                  ]
+                },
+                "step-3": {
+                  "metrics": [
+                    "step-1::abundance",
+                    "step-2::abundance"
+                  ]
+                }
+              },
+              "diagramEdgesRetainNamedSources": true,
+              "plannedMethods": "Planned methods (review before use; this describes the selected analysis, not completed results):\n\nStep S1 (Estimate species abundance) will be performed using python 3.13.16 (pack bracken 1.0.0). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The Kraken2 classification record binds the report hash, database fingerprint, observation units and actual read lengths. The selected distribution hash and registered association are verified; external model association remains a user declaration, not proof of the training database. Exact fixed read length is default; explicitly selected representative length is a documented approximation for variable reads. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Read-length model=exact; Distribution read length (bases)=150; Abundance rank=S; Minimum Kraken clade count=0. Inputs: Kraken2 classification record: I1 · Kraken2 classification record | Local database resource: I2 · Local database resource.\n\nStep S2 (Estimate genus abundance) will be performed using python 3.13.16 (pack bracken 1.0.0). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The Kraken2 classification record binds the report hash, database fingerprint, observation units and actual read lengths. The selected distribution hash and registered association are verified; external model association remains a user declaration, not proof of the training database. Exact fixed read length is default; explicitly selected representative length is a documented approximation for variable reads. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Read-length model=exact; Distribution read length (bases)=150; Abundance rank=G; Minimum Kraken clade count=0. Inputs: Kraken2 classification record: I1 · Kraken2 classification record | Local database resource: I2 · Local database resource.\n\nStep S3 (Review ranks as separate abundance tables) will be performed using Combine statistics reports (pack builtin 0.5.0). Collect selected statistics into a local HTML report with a separate, attributed section for each input. Counts are not pooled and variant files are not merged. Settings: Report title=Pipeline report. Inputs: Statistics to include: S1 · Estimate species abundance → Bracken abundance table; S2 · Estimate genus abundance → Bracken abundance table.\n\nTool references:\nLu J, Breitwieser FP, Thielen P, Salzberg SL (2017). Bracken: estimating species abundance in metagenomics data. PeerJ Computer Science 3:e104. https://doi.org/10.7717/peerj-cs.104\nLu J et al. (2022). Metagenome analysis using the Kraken software suite. Nature Protocols 17:2815–2839. https://doi.org/10.1038/s41596-022-00738-y\n\nOperations run locally in dependency order. Independent branches are scheduled sequentially. The run record records exact packs, parameters, input identities, outputs and completion states.\n",
+              "changedSavedManifestRejected": true,
+              "workflow": "estimate",
+              "sameExplicitInputSources": true,
+              "reportAggregation": "separate-sections-no-pooled-statistics"
+            },
+            {
+              "tools": [
+                "bracken/estimate-external",
+                "bracken/estimate-external",
+                "builtin/report"
+              ],
+              "ranks": [
+                {
+                  "rank": 1,
+                  "nodes": [
+                    "step-1",
+                    "step-2"
+                  ]
+                },
+                {
+                  "rank": 2,
+                  "nodes": [
+                    "step-3"
+                  ]
+                }
+              ],
+              "savedPins": [
+                {
+                  "packId": "bracken",
+                  "packVersion": "1.0.0",
+                  "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+                },
+                {
+                  "packId": "bracken",
+                  "packVersion": "1.0.0",
+                  "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+                },
+                {
+                  "packId": "builtin",
+                  "packVersion": "0.5.0",
+                  "manifestSha256": "84cf3dc5da9e07bca439af537312846933105215153ce6fa533f8a88e1e3a209"
+                }
+              ],
+              "namedMethodsProvenance": true,
+              "inputBindings": {
+                "step-1": {
+                  "report": [
+                    "input-1"
+                  ],
+                  "distribution": [
+                    "input-2"
+                  ]
+                },
+                "step-2": {
+                  "report": [
+                    "input-1"
+                  ],
+                  "distribution": [
+                    "input-2"
+                  ]
+                },
+                "step-3": {
+                  "metrics": [
+                    "step-1::abundance",
+                    "step-2::abundance"
+                  ]
+                }
+              },
+              "diagramEdgesRetainNamedSources": true,
+              "plannedMethods": "Planned methods (review before use; this describes the selected analysis, not completed results):\n\nStep S1 (Estimate species abundance) will be performed using python 3.13.16 (pack bracken 1.0.0). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The external database association, classifier settings, read length and read-versus-fragment units are explicitly user-declared and cannot be verified from the report alone. Report and distribution hashes will be recorded. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Database name=Synthetic probability fixture; Database release or source identifier=hand-calculated-2026-10-04; Confirm external report and model compatibility=confirmed; What the report counts=reads; Distribution read length (bases)=150; Abundance rank=S; Minimum Kraken clade count=0. Inputs: External Kraken2 report: I1 · External Kraken2 report | Matching Bracken distribution: I2 · Matching Bracken distribution.\n\nStep S2 (Estimate genus abundance) will be performed using python 3.13.16 (pack bracken 1.0.0). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The external database association, classifier settings, read length and read-versus-fragment units are explicitly user-declared and cannot be verified from the report alone. Report and distribution hashes will be recorded. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Database name=Synthetic probability fixture; Database release or source identifier=hand-calculated-2026-10-04; Confirm external report and model compatibility=confirmed; What the report counts=reads; Distribution read length (bases)=150; Abundance rank=G; Minimum Kraken clade count=0. Inputs: External Kraken2 report: I1 · External Kraken2 report | Matching Bracken distribution: I2 · Matching Bracken distribution.\n\nStep S3 (Review ranks as separate abundance tables) will be performed using Combine statistics reports (pack builtin 0.5.0). Collect selected statistics into a local HTML report with a separate, attributed section for each input. Counts are not pooled and variant files are not merged. Settings: Report title=Pipeline report. Inputs: Statistics to include: S1 · Estimate species abundance → Bracken abundance table; S2 · Estimate genus abundance → Bracken abundance table.\n\nTool references:\nLu J, Breitwieser FP, Thielen P, Salzberg SL (2017). Bracken: estimating species abundance in metagenomics data. PeerJ Computer Science 3:e104. https://doi.org/10.7717/peerj-cs.104\nLu J et al. (2022). Metagenome analysis using the Kraken software suite. Nature Protocols 17:2815–2839. https://doi.org/10.1038/s41596-022-00738-y\n\nOperations run locally in dependency order. Independent branches are scheduled sequentially. The run record records exact packs, parameters, input identities, outputs and completion states.\n",
+              "changedSavedManifestRejected": true,
+              "workflow": "estimate-external",
+              "sameExplicitInputSources": true,
+              "reportAggregation": "separate-sections-no-pooled-statistics"
+            }
+          ],
+          "installedInventory": {
+            "packManifests": 4,
+            "executablesVerified": 6,
+            "assetsVerified": 45
+          },
+          "selectedPacks": [
+            {
+              "id": "bracken",
+              "version": "1.0.0",
+              "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d",
+              "operations": [
+                "estimate",
+                "estimate-external"
+              ],
+              "scientificChecksDeclared": 4
+            }
+          ],
+          "offlineStaticImports": [
+            {
+              "id": "bracken",
+              "version": "1.0.0",
+              "archiveSha256": "bfd5ae2ea3ef3e54f3ae5b97530e58bf1aad8562d66ca1c8e190b87472f1d853",
+              "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d",
+              "archiveMatchesGraphPayload": true,
+              "duplicateVersionRejected": true,
+              "installedFilesAndReceiptsUnchanged": true,
+              "publisherVerified": false
+            }
+          ],
+          "starterPackFilesPreserved": 143,
+          "releasedApplicationFilesVerified": [
+            "WorkbenchBridge.exe",
+            "workspace/app_version.py",
+            "workspace/catalog-sources.json",
+            "workspace/catalog.py",
+            "workspace/core_checks.py",
+            "workspace/desktop_host.py",
+            "workspace/desktop_model.py",
+            "workspace/engine.py",
+            "workspace/example.py",
+            "workspace/pack_checks.py",
+            "workspace/pack_manager.py",
+            "workspace/pack_security.py",
+            "workspace/service.py",
+            "workspace/starter-check-profile.json",
+            "workspace/verify_installation.py"
+          ],
+          "starterSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+          "dependencies": {
+            "kraken2": {
+              "version": "1.0.0",
+              "archiveSha256": "9feb39546f6af9d718629304d7fc6a5d70d8a015839deef7d4a869e7587a0e91"
+            }
+          },
+          "separateConnectionApplication": true,
+          "presetAndOriginalPinContracts": [
+            "bracken/estimate",
+            "bracken/estimate-external"
+          ],
+          "testsRun": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "testSourceSha256": "468dea5339e1d863038aded5e26858cc65f2434db22c7ceba8b498ad0e6bb5dc",
+          "success": true
+        },
+        "scientificRegressionReport": {
+          "schema": 1,
+          "pack": "bracken",
+          "packVersion": "1.0.0",
+          "upstreamVersion": "3.1",
+          "nativeWindowsHost": true,
+          "nativeWindowsExecuted": true,
+          "packDirectory": "D:\\a\\_temp\\path with spaces\\native-workbench\\packs\\bracken-1.0.0",
+          "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d",
+          "upstreamEstimatorSha256": "c311cb56921b92c807ea28710c98349c725f27b7cee2b20e2e343c50e2981cca",
+          "kraken2Archive": {
+            "path": "D:\\a\\_temp\\dependency-kraken2.zip",
+            "sha256": "9feb39546f6af9d718629304d7fc6a5d70d8a015839deef7d4a869e7587a0e91"
+          },
+          "actualKrakenChainExecuted": true,
+          "testsRun": 17,
+          "passed": 17,
+          "failures": [],
+          "errors": [],
+          "skipped": [],
+          "success": true,
+          "scope": "Packaged unchanged upstream estimator with independent hand-calculated Bayesian truth, real captured Kraken fixture, explicit provenance/length/format/setting guards, input and pack immutability. Actual full Kraken chain is separately recorded. No GUI, performance, clinical or network-isolation claim."
+        }
+      },
+      {
+        "id": 111535455707,
+        "name": "native (ordinary)",
+        "path": "ordinary",
+        "html_url": "https://github.com/comparativechrono/workbench/actions/runs/37236121810/job/111535455707",
+        "log": {
+          "file": "job-111535455707.log",
+          "sha256": "84fe26a96c921c36239f598f46440104e3ab9fd701be1e3a8c53b50cd10fb2f8",
+          "bytes": 72119
+        },
+        "reports": {
+          "native": {
+            "file": "job-111535455707-native.json",
+            "sha256": "fb31e532580092517fee3b9bb2034495f4bff0d0fb2dbde55451d54e2b16c11f",
+            "sourceLogLine": 670,
+            "recordsObserved": 1
+          },
+          "graph": {
+            "file": "job-111535455707-graph.json",
+            "sha256": "f4adc29f721ea438ee3fae65d347987f8bef67d85b06c207e835f1019b98675f",
+            "sourceLogLine": 352,
+            "recordsObserved": 1
+          },
+          "scientific": {
+            "file": "job-111535455707-scientific.json",
+            "sha256": "8ddcdece5213e4b556b81b69d4314eecae091e5db9b6e5f5d08f928da26bd39c",
+            "sourceLogLine": 328,
+            "recordsObserved": 2
+          }
+        },
+        "malformedBraceOnlyRecords": [],
+        "counts": {
+          "native": 4,
+          "graph": 7,
+          "scientific": 17
+        },
+        "nativeInstallationReport": {
+          "schema": 1,
+          "nativeWindowsHost": true,
+          "nativeWindowsExecuted": true,
+          "success": true,
+          "packId": "bracken",
+          "packVersion": "1.0.0",
+          "installation": {
+            "type": "result",
+            "success": true,
+            "cancelled": false,
+            "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\packs\\bracken-1.0.0",
+            "message": "Tool pack imported.",
+            "outputs": [],
+            "pack_id": "bracken",
+            "pack_version": "1.0.0",
+            "packId": "bracken",
+            "packVersion": "1.0.0",
+            "publisherVerified": false,
+            "verification": "Complete file inventory verified; publisher identity not verified"
+          },
+          "scientificChecks": {
+            "schema": 1,
+            "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-212658-6fddb410",
+            "checks": [
+              {
+                "id": "bracken/external-species@1.0.0",
+                "pin": {
+                  "packId": "bracken",
+                  "packVersion": "1.0.0",
+                  "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+                },
+                "status": "passed",
+                "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-212658-6fddb410\\run-20261004-212658-a708e7b7"
+              },
+              {
+                "id": "bracken/external-genus@1.0.0",
+                "pin": {
+                  "packId": "bracken",
+                  "packVersion": "1.0.0",
+                  "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+                },
+                "status": "passed",
+                "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-212658-6fddb410\\run-20261004-212658-b23b75cd"
+              },
+              {
+                "id": "bracken/external-threshold@1.0.0",
+                "pin": {
+                  "packId": "bracken",
+                  "packVersion": "1.0.0",
+                  "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+                },
+                "status": "passed",
+                "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-212658-6fddb410\\run-20261004-212659-9a551447"
+              },
+              {
+                "id": "bracken/kraken-record-species@1.0.0",
+                "pin": {
+                  "packId": "bracken",
+                  "packVersion": "1.0.0",
+                  "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+                },
+                "status": "passed",
+                "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-212658-6fddb410\\run-20261004-212659-04e36927"
+              }
+            ],
+            "nativeWindowsExecuted": true,
+            "passed": 4,
+            "failed": 0,
+            "cancelled": false,
+            "success": true,
+            "message": "4 of 4 additional pack checks passed."
+          },
+          "duplicateVersionRejected": true
+        },
+        "releasedApplicationGraphReport": {
+          "schema": 1,
+          "applicationVersion": "0.6.0",
+          "expectedPackVersions": {
+            "bracken": "1.0.0"
+          },
+          "testHost": "win32",
+          "pythonVersion": "3.13.16",
+          "nativeWindowsExecuted": false,
+          "scientificExecutablesExecuted": false,
+          "nativeImporterExecuted": false,
+          "scope": "Released-app graph contracts and Python archive import; checked copy callback substitutes native folder publication.",
+          "typingLimitation": "Released 0.6.0 uses generic file ports for local database manifests, classification records and Bracken distributions. Graph acceptance does not validate resource identity, report hashes, read length, count units or scientific suitability; the separately tested adapters must validate them.",
+          "krakenToBrackenGraph": {
+            "tools": [
+              "kraken2/classify-paired",
+              "bracken/estimate",
+              "bracken/estimate",
+              "builtin/report"
+            ],
+            "ranks": [
+              {
+                "rank": 1,
+                "nodes": [
+                  "step-1"
+                ]
+              },
+              {
+                "rank": 2,
+                "nodes": [
+                  "step-2",
+                  "step-3"
+                ]
+              },
+              {
+                "rank": 3,
+                "nodes": [
+                  "step-4"
+                ]
+              }
+            ],
+            "savedPins": [
+              {
+                "packId": "kraken2",
+                "packVersion": "1.0.0",
+                "manifestSha256": "4c0e1dbe86b43f41c72b7dbdc6c93034d6b6eeb210494bdc8252c110182b677f"
+              },
+              {
+                "packId": "bracken",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+              },
+              {
+                "packId": "bracken",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+              },
+              {
+                "packId": "builtin",
+                "packVersion": "0.5.0",
+                "manifestSha256": "84cf3dc5da9e07bca439af537312846933105215153ce6fa533f8a88e1e3a209"
+              }
+            ],
+            "namedMethodsProvenance": true,
+            "inputBindings": {
+              "step-1": {
+                "reads": [
+                  "input-1"
+                ],
+                "database": [
+                  "input-2"
+                ]
+              },
+              "step-2": {
+                "classification": [
+                  "step-1::classification"
+                ],
+                "database": [
+                  "input-2"
+                ]
+              },
+              "step-3": {
+                "classification": [
+                  "step-1::classification"
+                ],
+                "database": [
+                  "input-2"
+                ]
+              },
+              "step-4": {
+                "metrics": [
+                  "step-2::abundance",
+                  "step-3::abundance"
+                ]
+              }
+            },
+            "diagramEdgesRetainNamedSources": true,
+            "plannedMethods": "Planned methods (review before use; this describes the selected analysis, not completed results):\n\nStep S1 (Classify paired fragments against the selected database) will be performed using python 3.13.16 (pack kraken2 1.0.0). Kraken2 2.17.2 will classify validated Phred+33 DNA FASTQ against the selected local nucleotide database, with SHA-256 identity of its minimizer index, taxonomy and options to be verified before and after execution. Confidence, minimum hit groups, base-quality threshold, threads and memory access mode will be recorded. No quick mode or read trimming will be applied. Mates will be validated for identity/order/count and classified jointly; report counts describe fragments. Ordinary six-column reports, per-fragment minimizer evidence, observed read lengths, commands and input hashes will be retained. Classification proportions include unclassified input and are not Bracken abundance estimates. Database provenance is user-supplied and does not prove suitability or clinical identification. Settings: Classification threads=2; Confidence threshold=0; Minimum hit groups=2; Minimum Phred+33 base quality=0; Database access=mapped. Inputs: Read 1 FASTQ: I1 · Read 1 FASTQ | Registered Kraken2 database: I2 · Shared versioned Kraken database and Bracken distributions.\n\nStep S2 (Estimate species abundances) will be performed using python 3.13.16 (pack bracken 1.0.0). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The Kraken2 classification record binds the report hash, database fingerprint, observation units and actual read lengths. The selected distribution hash and registered association are verified; external model association remains a user declaration, not proof of the training database. Exact fixed read length is default; explicitly selected representative length is a documented approximation for variable reads. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Read-length model=exact; Distribution read length (bases)=150; Abundance rank=S; Minimum Kraken clade count=0. Inputs: Kraken2 classification record: S1 · Classify paired fragments against the selected database → Classification record for Bracken | Local database resource: I2 · Shared versioned Kraken database and Bracken distributions.\n\nStep S3 (Estimate genus abundances) will be performed using python 3.13.16 (pack bracken 1.0.0). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The Kraken2 classification record binds the report hash, database fingerprint, observation units and actual read lengths. The selected distribution hash and registered association are verified; external model association remains a user declaration, not proof of the training database. Exact fixed read length is default; explicitly selected representative length is a documented approximation for variable reads. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Read-length model=exact; Distribution read length (bases)=150; Abundance rank=G; Minimum Kraken clade count=0. Inputs: Kraken2 classification record: S1 · Classify paired fragments against the selected database → Classification record for Bracken | Local database resource: I2 · Shared versioned Kraken database and Bracken distributions.\n\nStep S4 (Review species and genus results without pooling) will be performed using Combine statistics reports (pack builtin 0.5.0). Collect selected statistics into a local HTML report with a separate, attributed section for each input. Counts are not pooled and variant files are not merged. Settings: Report title=Pipeline report. Inputs: Statistics to include: S2 · Estimate species abundances → Bracken abundance table; S3 · Estimate genus abundances → Bracken abundance table.\n\nTool references:\nWood DE, Lu J, Langmead B (2019). Improved metagenomic analysis with Kraken2. Genome Biology20:257. https://doi.org/10.1186/s13059-019-1891-0\nLu J, Breitwieser FP, Thielen P, Salzberg SL (2017). Bracken: estimating species abundance in metagenomics data. PeerJ Computer Science 3:e104. https://doi.org/10.7717/peerj-cs.104\nLu J et al. (2022). Metagenome analysis using the Kraken software suite. Nature Protocols 17:2815–2839. https://doi.org/10.1038/s41596-022-00738-y\n\nOperations run locally in dependency order. Independent branches are scheduled sequentially. The run record records exact packs, parameters, input identities, outputs and completion states.\n",
+            "changedSavedManifestRejected": true,
+            "classificationPathResolvedFromNamedProducer": true,
+            "sameExplicitDatabaseSource": true,
+            "actualScientificProgramsExecuted": false
+          },
+          "abundanceTypeAndProvenanceGuards": {
+            "reportAndClassificationRolesHaveDifferentCoreTypes": true,
+            "externalDatabaseLabelReleaseAndConfirmationRequired": true,
+            "unsupportedRankRejected": true,
+            "genericFileSwapAcceptedByGraphAndRequiresRuntimeRejection": true
+          },
+          "independentAbundanceGraphs": [
+            {
+              "tools": [
+                "bracken/estimate",
+                "bracken/estimate",
+                "builtin/report"
+              ],
+              "ranks": [
+                {
+                  "rank": 1,
+                  "nodes": [
+                    "step-1",
+                    "step-2"
+                  ]
+                },
+                {
+                  "rank": 2,
+                  "nodes": [
+                    "step-3"
+                  ]
+                }
+              ],
+              "savedPins": [
+                {
+                  "packId": "bracken",
+                  "packVersion": "1.0.0",
+                  "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+                },
+                {
+                  "packId": "bracken",
+                  "packVersion": "1.0.0",
+                  "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+                },
+                {
+                  "packId": "builtin",
+                  "packVersion": "0.5.0",
+                  "manifestSha256": "84cf3dc5da9e07bca439af537312846933105215153ce6fa533f8a88e1e3a209"
+                }
+              ],
+              "namedMethodsProvenance": true,
+              "inputBindings": {
+                "step-1": {
+                  "classification": [
+                    "input-1"
+                  ],
+                  "database": [
+                    "input-2"
+                  ]
+                },
+                "step-2": {
+                  "classification": [
+                    "input-1"
+                  ],
+                  "database": [
+                    "input-2"
+                  ]
+                },
+                "step-3": {
+                  "metrics": [
+                    "step-1::abundance",
+                    "step-2::abundance"
+                  ]
+                }
+              },
+              "diagramEdgesRetainNamedSources": true,
+              "plannedMethods": "Planned methods (review before use; this describes the selected analysis, not completed results):\n\nStep S1 (Estimate species abundance) will be performed using python 3.13.16 (pack bracken 1.0.0). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The Kraken2 classification record binds the report hash, database fingerprint, observation units and actual read lengths. The selected distribution hash and registered association are verified; external model association remains a user declaration, not proof of the training database. Exact fixed read length is default; explicitly selected representative length is a documented approximation for variable reads. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Read-length model=exact; Distribution read length (bases)=150; Abundance rank=S; Minimum Kraken clade count=0. Inputs: Kraken2 classification record: I1 · Kraken2 classification record | Local database resource: I2 · Local database resource.\n\nStep S2 (Estimate genus abundance) will be performed using python 3.13.16 (pack bracken 1.0.0). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The Kraken2 classification record binds the report hash, database fingerprint, observation units and actual read lengths. The selected distribution hash and registered association are verified; external model association remains a user declaration, not proof of the training database. Exact fixed read length is default; explicitly selected representative length is a documented approximation for variable reads. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Read-length model=exact; Distribution read length (bases)=150; Abundance rank=G; Minimum Kraken clade count=0. Inputs: Kraken2 classification record: I1 · Kraken2 classification record | Local database resource: I2 · Local database resource.\n\nStep S3 (Review ranks as separate abundance tables) will be performed using Combine statistics reports (pack builtin 0.5.0). Collect selected statistics into a local HTML report with a separate, attributed section for each input. Counts are not pooled and variant files are not merged. Settings: Report title=Pipeline report. Inputs: Statistics to include: S1 · Estimate species abundance → Bracken abundance table; S2 · Estimate genus abundance → Bracken abundance table.\n\nTool references:\nLu J, Breitwieser FP, Thielen P, Salzberg SL (2017). Bracken: estimating species abundance in metagenomics data. PeerJ Computer Science 3:e104. https://doi.org/10.7717/peerj-cs.104\nLu J et al. (2022). Metagenome analysis using the Kraken software suite. Nature Protocols 17:2815–2839. https://doi.org/10.1038/s41596-022-00738-y\n\nOperations run locally in dependency order. Independent branches are scheduled sequentially. The run record records exact packs, parameters, input identities, outputs and completion states.\n",
+              "changedSavedManifestRejected": true,
+              "workflow": "estimate",
+              "sameExplicitInputSources": true,
+              "reportAggregation": "separate-sections-no-pooled-statistics"
+            },
+            {
+              "tools": [
+                "bracken/estimate-external",
+                "bracken/estimate-external",
+                "builtin/report"
+              ],
+              "ranks": [
+                {
+                  "rank": 1,
+                  "nodes": [
+                    "step-1",
+                    "step-2"
+                  ]
+                },
+                {
+                  "rank": 2,
+                  "nodes": [
+                    "step-3"
+                  ]
+                }
+              ],
+              "savedPins": [
+                {
+                  "packId": "bracken",
+                  "packVersion": "1.0.0",
+                  "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+                },
+                {
+                  "packId": "bracken",
+                  "packVersion": "1.0.0",
+                  "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+                },
+                {
+                  "packId": "builtin",
+                  "packVersion": "0.5.0",
+                  "manifestSha256": "84cf3dc5da9e07bca439af537312846933105215153ce6fa533f8a88e1e3a209"
+                }
+              ],
+              "namedMethodsProvenance": true,
+              "inputBindings": {
+                "step-1": {
+                  "report": [
+                    "input-1"
+                  ],
+                  "distribution": [
+                    "input-2"
+                  ]
+                },
+                "step-2": {
+                  "report": [
+                    "input-1"
+                  ],
+                  "distribution": [
+                    "input-2"
+                  ]
+                },
+                "step-3": {
+                  "metrics": [
+                    "step-1::abundance",
+                    "step-2::abundance"
+                  ]
+                }
+              },
+              "diagramEdgesRetainNamedSources": true,
+              "plannedMethods": "Planned methods (review before use; this describes the selected analysis, not completed results):\n\nStep S1 (Estimate species abundance) will be performed using python 3.13.16 (pack bracken 1.0.0). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The external database association, classifier settings, read length and read-versus-fragment units are explicitly user-declared and cannot be verified from the report alone. Report and distribution hashes will be recorded. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Database name=Synthetic probability fixture; Database release or source identifier=hand-calculated-2026-10-04; Confirm external report and model compatibility=confirmed; What the report counts=reads; Distribution read length (bases)=150; Abundance rank=S; Minimum Kraken clade count=0. Inputs: External Kraken2 report: I1 · External Kraken2 report | Matching Bracken distribution: I2 · Matching Bracken distribution.\n\nStep S2 (Estimate genus abundance) will be performed using python 3.13.16 (pack bracken 1.0.0). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The external database association, classifier settings, read length and read-versus-fragment units are explicitly user-declared and cannot be verified from the report alone. Report and distribution hashes will be recorded. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Database name=Synthetic probability fixture; Database release or source identifier=hand-calculated-2026-10-04; Confirm external report and model compatibility=confirmed; What the report counts=reads; Distribution read length (bases)=150; Abundance rank=G; Minimum Kraken clade count=0. Inputs: External Kraken2 report: I1 · External Kraken2 report | Matching Bracken distribution: I2 · Matching Bracken distribution.\n\nStep S3 (Review ranks as separate abundance tables) will be performed using Combine statistics reports (pack builtin 0.5.0). Collect selected statistics into a local HTML report with a separate, attributed section for each input. Counts are not pooled and variant files are not merged. Settings: Report title=Pipeline report. Inputs: Statistics to include: S1 · Estimate species abundance → Bracken abundance table; S2 · Estimate genus abundance → Bracken abundance table.\n\nTool references:\nLu J, Breitwieser FP, Thielen P, Salzberg SL (2017). Bracken: estimating species abundance in metagenomics data. PeerJ Computer Science 3:e104. https://doi.org/10.7717/peerj-cs.104\nLu J et al. (2022). Metagenome analysis using the Kraken software suite. Nature Protocols 17:2815–2839. https://doi.org/10.1038/s41596-022-00738-y\n\nOperations run locally in dependency order. Independent branches are scheduled sequentially. The run record records exact packs, parameters, input identities, outputs and completion states.\n",
+              "changedSavedManifestRejected": true,
+              "workflow": "estimate-external",
+              "sameExplicitInputSources": true,
+              "reportAggregation": "separate-sections-no-pooled-statistics"
+            }
+          ],
+          "installedInventory": {
+            "packManifests": 4,
+            "executablesVerified": 6,
+            "assetsVerified": 45
+          },
+          "selectedPacks": [
+            {
+              "id": "bracken",
+              "version": "1.0.0",
+              "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d",
+              "operations": [
+                "estimate",
+                "estimate-external"
+              ],
+              "scientificChecksDeclared": 4
+            }
+          ],
+          "offlineStaticImports": [
+            {
+              "id": "bracken",
+              "version": "1.0.0",
+              "archiveSha256": "bfd5ae2ea3ef3e54f3ae5b97530e58bf1aad8562d66ca1c8e190b87472f1d853",
+              "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d",
+              "archiveMatchesGraphPayload": true,
+              "duplicateVersionRejected": true,
+              "installedFilesAndReceiptsUnchanged": true,
+              "publisherVerified": false
+            }
+          ],
+          "starterPackFilesPreserved": 143,
+          "releasedApplicationFilesVerified": [
+            "WorkbenchBridge.exe",
+            "workspace/app_version.py",
+            "workspace/catalog-sources.json",
+            "workspace/catalog.py",
+            "workspace/core_checks.py",
+            "workspace/desktop_host.py",
+            "workspace/desktop_model.py",
+            "workspace/engine.py",
+            "workspace/example.py",
+            "workspace/pack_checks.py",
+            "workspace/pack_manager.py",
+            "workspace/pack_security.py",
+            "workspace/service.py",
+            "workspace/starter-check-profile.json",
+            "workspace/verify_installation.py"
+          ],
+          "starterSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+          "dependencies": {
+            "kraken2": {
+              "version": "1.0.0",
+              "archiveSha256": "9feb39546f6af9d718629304d7fc6a5d70d8a015839deef7d4a869e7587a0e91"
+            }
+          },
+          "separateConnectionApplication": true,
+          "presetAndOriginalPinContracts": [
+            "bracken/estimate",
+            "bracken/estimate-external"
+          ],
+          "testsRun": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "testSourceSha256": "468dea5339e1d863038aded5e26858cc65f2434db22c7ceba8b498ad0e6bb5dc",
+          "success": true
+        },
+        "scientificRegressionReport": {
+          "schema": 1,
+          "pack": "bracken",
+          "packVersion": "1.0.0",
+          "upstreamVersion": "3.1",
+          "nativeWindowsHost": true,
+          "nativeWindowsExecuted": true,
+          "packDirectory": "D:\\a\\_temp\\ordinary\\native-workbench\\packs\\bracken-1.0.0",
+          "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d",
+          "upstreamEstimatorSha256": "c311cb56921b92c807ea28710c98349c725f27b7cee2b20e2e343c50e2981cca",
+          "kraken2Archive": {
+            "path": "D:\\a\\_temp\\dependency-kraken2.zip",
+            "sha256": "9feb39546f6af9d718629304d7fc6a5d70d8a015839deef7d4a869e7587a0e91"
+          },
+          "actualKrakenChainExecuted": true,
+          "testsRun": 17,
+          "passed": 17,
+          "failures": [],
+          "errors": [],
+          "skipped": [],
+          "success": true,
+          "scope": "Packaged unchanged upstream estimator with independent hand-calculated Bayesian truth, real captured Kraken fixture, explicit provenance/length/format/setting guards, input and pack immutability. Actual full Kraken chain is separately recorded. No GUI, performance, clinical or network-isolation claim."
+        }
+      }
+    ]
+  },
+  "precedingCandidate": {
+    "collection": {
+      "name": "collection.json",
+      "path": "/workspace/scratch/0c5293ac0f36/github-workbench/build/metagenomics-native-evidence/bracken-candidate-37235798127/collection.json",
+      "bytes": 3976,
+      "sha256": "3ac67709f97161e3695915b89dad45aaec2511416f57fc477d4194f5aa452546",
+      "report": {
+        "schema": 1,
+        "packId": "bracken",
+        "packVersion": "0.0.2",
+        "stage": "candidate",
+        "collectedAt": "2026-10-04T21:23:35.203114+00:00",
+        "success": true,
+        "errors": [],
+        "run": {
+          "id": 37235798127,
+          "html_url": "https://github.com/comparativechrono/workbench/actions/runs/37235798127",
+          "status": "completed",
+          "conclusion": "success",
+          "sourceCommit": "289c4176561fe6c8bbbfba1e225cd65fbafb126d",
+          "attempt": 1
+        },
+        "expected": {
+          "archiveSha256": "354c805219487591b0d4dcdbcda21ea7c168689b85563aca0301012670d6c5eb",
+          "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e",
+          "sourceCommit": "289c4176561fe6c8bbbfba1e225cd65fbafb126d",
+          "countsPerPath": {
+            "native": 4,
+            "graph": 7,
+            "scientific": 17
+          },
+          "kraken2DependencySha256": "9feb39546f6af9d718629304d7fc6a5d70d8a015839deef7d4a869e7587a0e91"
+        },
+        "metadataFiles": {
+          "run.json": {
+            "sha256": "894f89b95077ac469172d28501153ad9b7e86243802799932bd25aab97550190"
+          },
+          "jobs.json": {
+            "sha256": "0e63e653e654419b9f3709d80485c38f45351b7cf49e1608eb80b238ab8c77d7"
+          }
+        },
+        "jobs": [
+          {
+            "id": 111534520171,
+            "name": "native (path with spaces)",
+            "path": "path with spaces",
+            "html_url": "https://github.com/comparativechrono/workbench/actions/runs/37235798127/job/111534520171",
+            "log": {
+              "file": "job-111534520171.log",
+              "sha256": "fad14ddeab9119de3851796aee791503b09be49648653f57c9299d20aa1925da",
+              "bytes": 72237
+            },
+            "reports": {
+              "native": {
+                "file": "job-111534520171-native.json",
+                "sha256": "ee42747c340d6944acc96cb6fdb8e1e25a493e6d909c2fa3b0ffecc16ce77cd9",
+                "sourceLogLine": 670,
+                "recordsObserved": 1
+              },
+              "graph": {
+                "file": "job-111534520171-graph.json",
+                "sha256": "a4e735ba09d6a04d0187df7209c09d9888377a89482eb2807dc856d215ed7ef9",
+                "sourceLogLine": 352,
+                "recordsObserved": 1
+              },
+              "scientific": {
+                "file": "job-111534520171-scientific.json",
+                "sha256": "d09db53aa127cc05b2a1353da38ddbeaae4c8a9bddf7839f7fd4a37f728c289d",
+                "sourceLogLine": 328,
+                "recordsObserved": 2
+              }
+            },
+            "malformedBraceOnlyRecords": [],
+            "counts": {
+              "native": 4,
+              "graph": 7,
+              "scientific": 17
+            }
+          },
+          {
+            "id": 111534520334,
+            "name": "native (ordinary)",
+            "path": "ordinary",
+            "html_url": "https://github.com/comparativechrono/workbench/actions/runs/37235798127/job/111534520334",
+            "log": {
+              "file": "job-111534520334.log",
+              "sha256": "c6443bf18657d3bb39134454adfd8a5a1ec3765b601ae259405032201eb21656",
+              "bytes": 72132
+            },
+            "reports": {
+              "native": {
+                "file": "job-111534520334-native.json",
+                "sha256": "47f3b56937d620b260e81ee323d4efca7b1e960370e4a674710f3047850ed8f0",
+                "sourceLogLine": 670,
+                "recordsObserved": 1
+              },
+              "graph": {
+                "file": "job-111534520334-graph.json",
+                "sha256": "a4e735ba09d6a04d0187df7209c09d9888377a89482eb2807dc856d215ed7ef9",
+                "sourceLogLine": 352,
+                "recordsObserved": 1
+              },
+              "scientific": {
+                "file": "job-111534520334-scientific.json",
+                "sha256": "080b372ffcbd69454b4971554c52de14b4ea69491f2db748fd1a373f01482c50",
+                "sourceLogLine": 328,
+                "recordsObserved": 2
+              }
+            },
+            "malformedBraceOnlyRecords": [],
+            "counts": {
+              "native": 4,
+              "graph": 7,
+              "scientific": 17
+            }
+          }
+        ],
+        "parserSha256": "ae162f24ef662f3b5942e8c409339121763970afa33f6a6113a0ec95da95e784",
+        "scope": "Observed native Windows jobs and retained logs/reports. Graph uses Python publication callback; native importer and scientific checks are separate. No GUI, clinical, throughput or general database-accuracy validation."
+      }
+    },
+    "run": {
+      "id": 37235798127,
+      "html_url": "https://github.com/comparativechrono/workbench/actions/runs/37235798127",
+      "status": "completed",
+      "conclusion": "success",
+      "sourceCommit": "289c4176561fe6c8bbbfba1e225cd65fbafb126d",
+      "attempt": 1
+    },
+    "jobs": [
+      {
+        "id": 111534520171,
+        "name": "native (path with spaces)",
+        "path": "path with spaces",
+        "html_url": "https://github.com/comparativechrono/workbench/actions/runs/37235798127/job/111534520171",
+        "log": {
+          "file": "job-111534520171.log",
+          "sha256": "fad14ddeab9119de3851796aee791503b09be49648653f57c9299d20aa1925da",
+          "bytes": 72237
+        },
+        "reports": {
+          "native": {
+            "file": "job-111534520171-native.json",
+            "sha256": "ee42747c340d6944acc96cb6fdb8e1e25a493e6d909c2fa3b0ffecc16ce77cd9",
+            "sourceLogLine": 670,
+            "recordsObserved": 1
+          },
+          "graph": {
+            "file": "job-111534520171-graph.json",
+            "sha256": "a4e735ba09d6a04d0187df7209c09d9888377a89482eb2807dc856d215ed7ef9",
+            "sourceLogLine": 352,
+            "recordsObserved": 1
+          },
+          "scientific": {
+            "file": "job-111534520171-scientific.json",
+            "sha256": "d09db53aa127cc05b2a1353da38ddbeaae4c8a9bddf7839f7fd4a37f728c289d",
+            "sourceLogLine": 328,
+            "recordsObserved": 2
+          }
+        },
+        "malformedBraceOnlyRecords": [],
+        "counts": {
+          "native": 4,
+          "graph": 7,
+          "scientific": 17
+        },
+        "nativeInstallationReport": {
+          "schema": 1,
+          "nativeWindowsHost": true,
+          "nativeWindowsExecuted": true,
+          "success": true,
+          "packId": "bracken",
+          "packVersion": "0.0.2",
+          "installation": {
+            "type": "result",
+            "success": true,
+            "cancelled": false,
+            "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\packs\\bracken-0.0.2",
+            "message": "Tool pack imported.",
+            "outputs": [],
+            "pack_id": "bracken",
+            "pack_version": "0.0.2",
+            "packId": "bracken",
+            "packVersion": "0.0.2",
+            "publisherVerified": false,
+            "verification": "Complete file inventory verified; publisher identity not verified"
+          },
+          "scientificChecks": {
+            "schema": 1,
+            "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-212212-42f0f212",
+            "checks": [
+              {
+                "id": "bracken/external-species@0.0.2",
+                "pin": {
+                  "packId": "bracken",
+                  "packVersion": "0.0.2",
+                  "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e"
+                },
+                "status": "passed",
+                "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-212212-42f0f212\\run-20261004-212212-f1474bd0"
+              },
+              {
+                "id": "bracken/external-genus@0.0.2",
+                "pin": {
+                  "packId": "bracken",
+                  "packVersion": "0.0.2",
+                  "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e"
+                },
+                "status": "passed",
+                "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-212212-42f0f212\\run-20261004-212212-36f0e075"
+              },
+              {
+                "id": "bracken/external-threshold@0.0.2",
+                "pin": {
+                  "packId": "bracken",
+                  "packVersion": "0.0.2",
+                  "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e"
+                },
+                "status": "passed",
+                "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-212212-42f0f212\\run-20261004-212212-5474ef29"
+              },
+              {
+                "id": "bracken/kraken-record-species@0.0.2",
+                "pin": {
+                  "packId": "bracken",
+                  "packVersion": "0.0.2",
+                  "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e"
+                },
+                "status": "passed",
+                "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-212212-42f0f212\\run-20261004-212213-755fd978"
+              }
+            ],
+            "nativeWindowsExecuted": true,
+            "passed": 4,
+            "failed": 0,
+            "cancelled": false,
+            "success": true,
+            "message": "4 of 4 additional pack checks passed."
+          },
+          "duplicateVersionRejected": true
+        },
+        "releasedApplicationGraphReport": {
+          "schema": 1,
+          "applicationVersion": "0.6.0",
+          "expectedPackVersions": {
+            "bracken": "0.0.2"
+          },
+          "testHost": "win32",
+          "pythonVersion": "3.13.16",
+          "nativeWindowsExecuted": false,
+          "scientificExecutablesExecuted": false,
+          "nativeImporterExecuted": false,
+          "scope": "Released-app graph contracts and Python archive import; checked copy callback substitutes native folder publication.",
+          "typingLimitation": "Released 0.6.0 uses generic file ports for local database manifests, classification records and Bracken distributions. Graph acceptance does not validate resource identity, report hashes, read length, count units or scientific suitability; the separately tested adapters must validate them.",
+          "krakenToBrackenGraph": {
+            "tools": [
+              "kraken2/classify-paired",
+              "bracken/estimate",
+              "bracken/estimate",
+              "builtin/report"
+            ],
+            "ranks": [
+              {
+                "rank": 1,
+                "nodes": [
+                  "step-1"
+                ]
+              },
+              {
+                "rank": 2,
+                "nodes": [
+                  "step-2",
+                  "step-3"
+                ]
+              },
+              {
+                "rank": 3,
+                "nodes": [
+                  "step-4"
+                ]
+              }
+            ],
+            "savedPins": [
+              {
+                "packId": "kraken2",
+                "packVersion": "1.0.0",
+                "manifestSha256": "4c0e1dbe86b43f41c72b7dbdc6c93034d6b6eeb210494bdc8252c110182b677f"
+              },
+              {
+                "packId": "bracken",
+                "packVersion": "0.0.2",
+                "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e"
+              },
+              {
+                "packId": "bracken",
+                "packVersion": "0.0.2",
+                "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e"
+              },
+              {
+                "packId": "builtin",
+                "packVersion": "0.5.0",
+                "manifestSha256": "84cf3dc5da9e07bca439af537312846933105215153ce6fa533f8a88e1e3a209"
+              }
+            ],
+            "namedMethodsProvenance": true,
+            "inputBindings": {
+              "step-1": {
+                "reads": [
+                  "input-1"
+                ],
+                "database": [
+                  "input-2"
+                ]
+              },
+              "step-2": {
+                "classification": [
+                  "step-1::classification"
+                ],
+                "database": [
+                  "input-2"
+                ]
+              },
+              "step-3": {
+                "classification": [
+                  "step-1::classification"
+                ],
+                "database": [
+                  "input-2"
+                ]
+              },
+              "step-4": {
+                "metrics": [
+                  "step-2::abundance",
+                  "step-3::abundance"
+                ]
+              }
+            },
+            "diagramEdgesRetainNamedSources": true,
+            "plannedMethods": "Planned methods (review before use; this describes the selected analysis, not completed results):\n\nStep S1 (Classify paired fragments against the selected database) will be performed using python 3.13.16 (pack kraken2 1.0.0). Kraken2 2.17.2 will classify validated Phred+33 DNA FASTQ against the selected local nucleotide database, with SHA-256 identity of its minimizer index, taxonomy and options to be verified before and after execution. Confidence, minimum hit groups, base-quality threshold, threads and memory access mode will be recorded. No quick mode or read trimming will be applied. Mates will be validated for identity/order/count and classified jointly; report counts describe fragments. Ordinary six-column reports, per-fragment minimizer evidence, observed read lengths, commands and input hashes will be retained. Classification proportions include unclassified input and are not Bracken abundance estimates. Database provenance is user-supplied and does not prove suitability or clinical identification. Settings: Classification threads=2; Confidence threshold=0; Minimum hit groups=2; Minimum Phred+33 base quality=0; Database access=mapped. Inputs: Read 1 FASTQ: I1 · Read 1 FASTQ | Registered Kraken2 database: I2 · Shared versioned Kraken database and Bracken distributions.\n\nStep S2 (Estimate species abundances) will be performed using python 3.13.16 (pack bracken 0.0.2). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The Kraken2 classification record binds the report hash, database fingerprint, observation units and actual read lengths. The selected distribution hash and registered association are verified; external model association remains a user declaration, not proof of the training database. Exact fixed read length is default; explicitly selected representative length is a documented approximation for variable reads. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Read-length model=exact; Distribution read length (bases)=150; Abundance rank=S; Minimum Kraken clade count=0. Inputs: Kraken2 classification record: S1 · Classify paired fragments against the selected database → Classification record for Bracken | Local database resource: I2 · Shared versioned Kraken database and Bracken distributions.\n\nStep S3 (Estimate genus abundances) will be performed using python 3.13.16 (pack bracken 0.0.2). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The Kraken2 classification record binds the report hash, database fingerprint, observation units and actual read lengths. The selected distribution hash and registered association are verified; external model association remains a user declaration, not proof of the training database. Exact fixed read length is default; explicitly selected representative length is a documented approximation for variable reads. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Read-length model=exact; Distribution read length (bases)=150; Abundance rank=G; Minimum Kraken clade count=0. Inputs: Kraken2 classification record: S1 · Classify paired fragments against the selected database → Classification record for Bracken | Local database resource: I2 · Shared versioned Kraken database and Bracken distributions.\n\nStep S4 (Review species and genus results without pooling) will be performed using Combine statistics reports (pack builtin 0.5.0). Collect selected statistics into a local HTML report with a separate, attributed section for each input. Counts are not pooled and variant files are not merged. Settings: Report title=Pipeline report. Inputs: Statistics to include: S2 · Estimate species abundances → Bracken abundance table; S3 · Estimate genus abundances → Bracken abundance table.\n\nTool references:\nWood DE, Lu J, Langmead B (2019). Improved metagenomic analysis with Kraken2. Genome Biology20:257. https://doi.org/10.1186/s13059-019-1891-0\nLu J, Breitwieser FP, Thielen P, Salzberg SL (2017). Bracken: estimating species abundance in metagenomics data. PeerJ Computer Science 3:e104. https://doi.org/10.7717/peerj-cs.104\nLu J et al. (2022). Metagenome analysis using the Kraken software suite. Nature Protocols 17:2815–2839. https://doi.org/10.1038/s41596-022-00738-y\n\nOperations run locally in dependency order. Independent branches are scheduled sequentially. The run record records exact packs, parameters, input identities, outputs and completion states.\n",
+            "changedSavedManifestRejected": true,
+            "classificationPathResolvedFromNamedProducer": true,
+            "sameExplicitDatabaseSource": true,
+            "actualScientificProgramsExecuted": false
+          },
+          "abundanceTypeAndProvenanceGuards": {
+            "reportAndClassificationRolesHaveDifferentCoreTypes": true,
+            "externalDatabaseLabelReleaseAndConfirmationRequired": true,
+            "unsupportedRankRejected": true,
+            "genericFileSwapAcceptedByGraphAndRequiresRuntimeRejection": true
+          },
+          "independentAbundanceGraphs": [
+            {
+              "tools": [
+                "bracken/estimate",
+                "bracken/estimate",
+                "builtin/report"
+              ],
+              "ranks": [
+                {
+                  "rank": 1,
+                  "nodes": [
+                    "step-1",
+                    "step-2"
+                  ]
+                },
+                {
+                  "rank": 2,
+                  "nodes": [
+                    "step-3"
+                  ]
+                }
+              ],
+              "savedPins": [
+                {
+                  "packId": "bracken",
+                  "packVersion": "0.0.2",
+                  "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e"
+                },
+                {
+                  "packId": "bracken",
+                  "packVersion": "0.0.2",
+                  "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e"
+                },
+                {
+                  "packId": "builtin",
+                  "packVersion": "0.5.0",
+                  "manifestSha256": "84cf3dc5da9e07bca439af537312846933105215153ce6fa533f8a88e1e3a209"
+                }
+              ],
+              "namedMethodsProvenance": true,
+              "inputBindings": {
+                "step-1": {
+                  "classification": [
+                    "input-1"
+                  ],
+                  "database": [
+                    "input-2"
+                  ]
+                },
+                "step-2": {
+                  "classification": [
+                    "input-1"
+                  ],
+                  "database": [
+                    "input-2"
+                  ]
+                },
+                "step-3": {
+                  "metrics": [
+                    "step-1::abundance",
+                    "step-2::abundance"
+                  ]
+                }
+              },
+              "diagramEdgesRetainNamedSources": true,
+              "plannedMethods": "Planned methods (review before use; this describes the selected analysis, not completed results):\n\nStep S1 (Estimate species abundance) will be performed using python 3.13.16 (pack bracken 0.0.2). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The Kraken2 classification record binds the report hash, database fingerprint, observation units and actual read lengths. The selected distribution hash and registered association are verified; external model association remains a user declaration, not proof of the training database. Exact fixed read length is default; explicitly selected representative length is a documented approximation for variable reads. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Read-length model=exact; Distribution read length (bases)=150; Abundance rank=S; Minimum Kraken clade count=0. Inputs: Kraken2 classification record: I1 · Kraken2 classification record | Local database resource: I2 · Local database resource.\n\nStep S2 (Estimate genus abundance) will be performed using python 3.13.16 (pack bracken 0.0.2). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The Kraken2 classification record binds the report hash, database fingerprint, observation units and actual read lengths. The selected distribution hash and registered association are verified; external model association remains a user declaration, not proof of the training database. Exact fixed read length is default; explicitly selected representative length is a documented approximation for variable reads. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Read-length model=exact; Distribution read length (bases)=150; Abundance rank=G; Minimum Kraken clade count=0. Inputs: Kraken2 classification record: I1 · Kraken2 classification record | Local database resource: I2 · Local database resource.\n\nStep S3 (Review ranks as separate abundance tables) will be performed using Combine statistics reports (pack builtin 0.5.0). Collect selected statistics into a local HTML report with a separate, attributed section for each input. Counts are not pooled and variant files are not merged. Settings: Report title=Pipeline report. Inputs: Statistics to include: S1 · Estimate species abundance → Bracken abundance table; S2 · Estimate genus abundance → Bracken abundance table.\n\nTool references:\nLu J, Breitwieser FP, Thielen P, Salzberg SL (2017). Bracken: estimating species abundance in metagenomics data. PeerJ Computer Science 3:e104. https://doi.org/10.7717/peerj-cs.104\nLu J et al. (2022). Metagenome analysis using the Kraken software suite. Nature Protocols 17:2815–2839. https://doi.org/10.1038/s41596-022-00738-y\n\nOperations run locally in dependency order. Independent branches are scheduled sequentially. The run record records exact packs, parameters, input identities, outputs and completion states.\n",
+              "changedSavedManifestRejected": true,
+              "workflow": "estimate",
+              "sameExplicitInputSources": true,
+              "reportAggregation": "separate-sections-no-pooled-statistics"
+            },
+            {
+              "tools": [
+                "bracken/estimate-external",
+                "bracken/estimate-external",
+                "builtin/report"
+              ],
+              "ranks": [
+                {
+                  "rank": 1,
+                  "nodes": [
+                    "step-1",
+                    "step-2"
+                  ]
+                },
+                {
+                  "rank": 2,
+                  "nodes": [
+                    "step-3"
+                  ]
+                }
+              ],
+              "savedPins": [
+                {
+                  "packId": "bracken",
+                  "packVersion": "0.0.2",
+                  "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e"
+                },
+                {
+                  "packId": "bracken",
+                  "packVersion": "0.0.2",
+                  "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e"
+                },
+                {
+                  "packId": "builtin",
+                  "packVersion": "0.5.0",
+                  "manifestSha256": "84cf3dc5da9e07bca439af537312846933105215153ce6fa533f8a88e1e3a209"
+                }
+              ],
+              "namedMethodsProvenance": true,
+              "inputBindings": {
+                "step-1": {
+                  "report": [
+                    "input-1"
+                  ],
+                  "distribution": [
+                    "input-2"
+                  ]
+                },
+                "step-2": {
+                  "report": [
+                    "input-1"
+                  ],
+                  "distribution": [
+                    "input-2"
+                  ]
+                },
+                "step-3": {
+                  "metrics": [
+                    "step-1::abundance",
+                    "step-2::abundance"
+                  ]
+                }
+              },
+              "diagramEdgesRetainNamedSources": true,
+              "plannedMethods": "Planned methods (review before use; this describes the selected analysis, not completed results):\n\nStep S1 (Estimate species abundance) will be performed using python 3.13.16 (pack bracken 0.0.2). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The external database association, classifier settings, read length and read-versus-fragment units are explicitly user-declared and cannot be verified from the report alone. Report and distribution hashes will be recorded. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Database name=Synthetic probability fixture; Database release or source identifier=hand-calculated-2026-10-04; Confirm external report and model compatibility=confirmed; What the report counts=reads; Distribution read length (bases)=150; Abundance rank=S; Minimum Kraken clade count=0. Inputs: External Kraken2 report: I1 · External Kraken2 report | Matching Bracken distribution: I2 · Matching Bracken distribution.\n\nStep S2 (Estimate genus abundance) will be performed using python 3.13.16 (pack bracken 0.0.2). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The external database association, classifier settings, read length and read-versus-fragment units are explicitly user-declared and cannot be verified from the report alone. Report and distribution hashes will be recorded. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Database name=Synthetic probability fixture; Database release or source identifier=hand-calculated-2026-10-04; Confirm external report and model compatibility=confirmed; What the report counts=reads; Distribution read length (bases)=150; Abundance rank=G; Minimum Kraken clade count=0. Inputs: External Kraken2 report: I1 · External Kraken2 report | Matching Bracken distribution: I2 · Matching Bracken distribution.\n\nStep S3 (Review ranks as separate abundance tables) will be performed using Combine statistics reports (pack builtin 0.5.0). Collect selected statistics into a local HTML report with a separate, attributed section for each input. Counts are not pooled and variant files are not merged. Settings: Report title=Pipeline report. Inputs: Statistics to include: S1 · Estimate species abundance → Bracken abundance table; S2 · Estimate genus abundance → Bracken abundance table.\n\nTool references:\nLu J, Breitwieser FP, Thielen P, Salzberg SL (2017). Bracken: estimating species abundance in metagenomics data. PeerJ Computer Science 3:e104. https://doi.org/10.7717/peerj-cs.104\nLu J et al. (2022). Metagenome analysis using the Kraken software suite. Nature Protocols 17:2815–2839. https://doi.org/10.1038/s41596-022-00738-y\n\nOperations run locally in dependency order. Independent branches are scheduled sequentially. The run record records exact packs, parameters, input identities, outputs and completion states.\n",
+              "changedSavedManifestRejected": true,
+              "workflow": "estimate-external",
+              "sameExplicitInputSources": true,
+              "reportAggregation": "separate-sections-no-pooled-statistics"
+            }
+          ],
+          "installedInventory": {
+            "packManifests": 4,
+            "executablesVerified": 6,
+            "assetsVerified": 45
+          },
+          "selectedPacks": [
+            {
+              "id": "bracken",
+              "version": "0.0.2",
+              "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e",
+              "operations": [
+                "estimate",
+                "estimate-external"
+              ],
+              "scientificChecksDeclared": 4
+            }
+          ],
+          "offlineStaticImports": [
+            {
+              "id": "bracken",
+              "version": "0.0.2",
+              "archiveSha256": "354c805219487591b0d4dcdbcda21ea7c168689b85563aca0301012670d6c5eb",
+              "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e",
+              "archiveMatchesGraphPayload": true,
+              "duplicateVersionRejected": true,
+              "installedFilesAndReceiptsUnchanged": true,
+              "publisherVerified": false
+            }
+          ],
+          "starterPackFilesPreserved": 143,
+          "releasedApplicationFilesVerified": [
+            "WorkbenchBridge.exe",
+            "workspace/app_version.py",
+            "workspace/catalog-sources.json",
+            "workspace/catalog.py",
+            "workspace/core_checks.py",
+            "workspace/desktop_host.py",
+            "workspace/desktop_model.py",
+            "workspace/engine.py",
+            "workspace/example.py",
+            "workspace/pack_checks.py",
+            "workspace/pack_manager.py",
+            "workspace/pack_security.py",
+            "workspace/service.py",
+            "workspace/starter-check-profile.json",
+            "workspace/verify_installation.py"
+          ],
+          "starterSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+          "dependencies": {
+            "kraken2": {
+              "version": "1.0.0",
+              "archiveSha256": "9feb39546f6af9d718629304d7fc6a5d70d8a015839deef7d4a869e7587a0e91"
+            }
+          },
+          "separateConnectionApplication": true,
+          "presetAndOriginalPinContracts": [
+            "bracken/estimate",
+            "bracken/estimate-external"
+          ],
+          "testsRun": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "testSourceSha256": "468dea5339e1d863038aded5e26858cc65f2434db22c7ceba8b498ad0e6bb5dc",
+          "success": true
+        },
+        "scientificRegressionReport": {
+          "schema": 1,
+          "pack": "bracken",
+          "packVersion": "0.0.2",
+          "upstreamVersion": "3.1",
+          "nativeWindowsHost": true,
+          "nativeWindowsExecuted": true,
+          "packDirectory": "D:\\a\\_temp\\path with spaces\\native-workbench\\packs\\bracken-0.0.2",
+          "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e",
+          "upstreamEstimatorSha256": "c311cb56921b92c807ea28710c98349c725f27b7cee2b20e2e343c50e2981cca",
+          "kraken2Archive": {
+            "path": "D:\\a\\_temp\\dependency-kraken2.zip",
+            "sha256": "9feb39546f6af9d718629304d7fc6a5d70d8a015839deef7d4a869e7587a0e91"
+          },
+          "actualKrakenChainExecuted": true,
+          "testsRun": 17,
+          "passed": 17,
+          "failures": [],
+          "errors": [],
+          "skipped": [],
+          "success": true,
+          "scope": "Packaged unchanged upstream estimator with independent hand-calculated Bayesian truth, real captured Kraken fixture, explicit provenance/length/format/setting guards, input and pack immutability. Actual full Kraken chain is separately recorded. No GUI, performance, clinical or network-isolation claim."
+        }
+      },
+      {
+        "id": 111534520334,
+        "name": "native (ordinary)",
+        "path": "ordinary",
+        "html_url": "https://github.com/comparativechrono/workbench/actions/runs/37235798127/job/111534520334",
+        "log": {
+          "file": "job-111534520334.log",
+          "sha256": "c6443bf18657d3bb39134454adfd8a5a1ec3765b601ae259405032201eb21656",
+          "bytes": 72132
+        },
+        "reports": {
+          "native": {
+            "file": "job-111534520334-native.json",
+            "sha256": "47f3b56937d620b260e81ee323d4efca7b1e960370e4a674710f3047850ed8f0",
+            "sourceLogLine": 670,
+            "recordsObserved": 1
+          },
+          "graph": {
+            "file": "job-111534520334-graph.json",
+            "sha256": "a4e735ba09d6a04d0187df7209c09d9888377a89482eb2807dc856d215ed7ef9",
+            "sourceLogLine": 352,
+            "recordsObserved": 1
+          },
+          "scientific": {
+            "file": "job-111534520334-scientific.json",
+            "sha256": "080b372ffcbd69454b4971554c52de14b4ea69491f2db748fd1a373f01482c50",
+            "sourceLogLine": 328,
+            "recordsObserved": 2
+          }
+        },
+        "malformedBraceOnlyRecords": [],
+        "counts": {
+          "native": 4,
+          "graph": 7,
+          "scientific": 17
+        },
+        "nativeInstallationReport": {
+          "schema": 1,
+          "nativeWindowsHost": true,
+          "nativeWindowsExecuted": true,
+          "success": true,
+          "packId": "bracken",
+          "packVersion": "0.0.2",
+          "installation": {
+            "type": "result",
+            "success": true,
+            "cancelled": false,
+            "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\packs\\bracken-0.0.2",
+            "message": "Tool pack imported.",
+            "outputs": [],
+            "pack_id": "bracken",
+            "pack_version": "0.0.2",
+            "packId": "bracken",
+            "packVersion": "0.0.2",
+            "publisherVerified": false,
+            "verification": "Complete file inventory verified; publisher identity not verified"
+          },
+          "scientificChecks": {
+            "schema": 1,
+            "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-212207-e19109ea",
+            "checks": [
+              {
+                "id": "bracken/external-species@0.0.2",
+                "pin": {
+                  "packId": "bracken",
+                  "packVersion": "0.0.2",
+                  "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e"
+                },
+                "status": "passed",
+                "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-212207-e19109ea\\run-20261004-212207-ef08b0b0"
+              },
+              {
+                "id": "bracken/external-genus@0.0.2",
+                "pin": {
+                  "packId": "bracken",
+                  "packVersion": "0.0.2",
+                  "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e"
+                },
+                "status": "passed",
+                "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-212207-e19109ea\\run-20261004-212207-53daf018"
+              },
+              {
+                "id": "bracken/external-threshold@0.0.2",
+                "pin": {
+                  "packId": "bracken",
+                  "packVersion": "0.0.2",
+                  "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e"
+                },
+                "status": "passed",
+                "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-212207-e19109ea\\run-20261004-212207-6b4f7272"
+              },
+              {
+                "id": "bracken/kraken-record-species@0.0.2",
+                "pin": {
+                  "packId": "bracken",
+                  "packVersion": "0.0.2",
+                  "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e"
+                },
+                "status": "passed",
+                "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-212207-e19109ea\\run-20261004-212208-44db3f34"
+              }
+            ],
+            "nativeWindowsExecuted": true,
+            "passed": 4,
+            "failed": 0,
+            "cancelled": false,
+            "success": true,
+            "message": "4 of 4 additional pack checks passed."
+          },
+          "duplicateVersionRejected": true
+        },
+        "releasedApplicationGraphReport": {
+          "schema": 1,
+          "applicationVersion": "0.6.0",
+          "expectedPackVersions": {
+            "bracken": "0.0.2"
+          },
+          "testHost": "win32",
+          "pythonVersion": "3.13.16",
+          "nativeWindowsExecuted": false,
+          "scientificExecutablesExecuted": false,
+          "nativeImporterExecuted": false,
+          "scope": "Released-app graph contracts and Python archive import; checked copy callback substitutes native folder publication.",
+          "typingLimitation": "Released 0.6.0 uses generic file ports for local database manifests, classification records and Bracken distributions. Graph acceptance does not validate resource identity, report hashes, read length, count units or scientific suitability; the separately tested adapters must validate them.",
+          "krakenToBrackenGraph": {
+            "tools": [
+              "kraken2/classify-paired",
+              "bracken/estimate",
+              "bracken/estimate",
+              "builtin/report"
+            ],
+            "ranks": [
+              {
+                "rank": 1,
+                "nodes": [
+                  "step-1"
+                ]
+              },
+              {
+                "rank": 2,
+                "nodes": [
+                  "step-2",
+                  "step-3"
+                ]
+              },
+              {
+                "rank": 3,
+                "nodes": [
+                  "step-4"
+                ]
+              }
+            ],
+            "savedPins": [
+              {
+                "packId": "kraken2",
+                "packVersion": "1.0.0",
+                "manifestSha256": "4c0e1dbe86b43f41c72b7dbdc6c93034d6b6eeb210494bdc8252c110182b677f"
+              },
+              {
+                "packId": "bracken",
+                "packVersion": "0.0.2",
+                "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e"
+              },
+              {
+                "packId": "bracken",
+                "packVersion": "0.0.2",
+                "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e"
+              },
+              {
+                "packId": "builtin",
+                "packVersion": "0.5.0",
+                "manifestSha256": "84cf3dc5da9e07bca439af537312846933105215153ce6fa533f8a88e1e3a209"
+              }
+            ],
+            "namedMethodsProvenance": true,
+            "inputBindings": {
+              "step-1": {
+                "reads": [
+                  "input-1"
+                ],
+                "database": [
+                  "input-2"
+                ]
+              },
+              "step-2": {
+                "classification": [
+                  "step-1::classification"
+                ],
+                "database": [
+                  "input-2"
+                ]
+              },
+              "step-3": {
+                "classification": [
+                  "step-1::classification"
+                ],
+                "database": [
+                  "input-2"
+                ]
+              },
+              "step-4": {
+                "metrics": [
+                  "step-2::abundance",
+                  "step-3::abundance"
+                ]
+              }
+            },
+            "diagramEdgesRetainNamedSources": true,
+            "plannedMethods": "Planned methods (review before use; this describes the selected analysis, not completed results):\n\nStep S1 (Classify paired fragments against the selected database) will be performed using python 3.13.16 (pack kraken2 1.0.0). Kraken2 2.17.2 will classify validated Phred+33 DNA FASTQ against the selected local nucleotide database, with SHA-256 identity of its minimizer index, taxonomy and options to be verified before and after execution. Confidence, minimum hit groups, base-quality threshold, threads and memory access mode will be recorded. No quick mode or read trimming will be applied. Mates will be validated for identity/order/count and classified jointly; report counts describe fragments. Ordinary six-column reports, per-fragment minimizer evidence, observed read lengths, commands and input hashes will be retained. Classification proportions include unclassified input and are not Bracken abundance estimates. Database provenance is user-supplied and does not prove suitability or clinical identification. Settings: Classification threads=2; Confidence threshold=0; Minimum hit groups=2; Minimum Phred+33 base quality=0; Database access=mapped. Inputs: Read 1 FASTQ: I1 · Read 1 FASTQ | Registered Kraken2 database: I2 · Shared versioned Kraken database and Bracken distributions.\n\nStep S2 (Estimate species abundances) will be performed using python 3.13.16 (pack bracken 0.0.2). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The Kraken2 classification record binds the report hash, database fingerprint, observation units and actual read lengths. The selected distribution hash and registered association are verified; external model association remains a user declaration, not proof of the training database. Exact fixed read length is default; explicitly selected representative length is a documented approximation for variable reads. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Read-length model=exact; Distribution read length (bases)=150; Abundance rank=S; Minimum Kraken clade count=0. Inputs: Kraken2 classification record: S1 · Classify paired fragments against the selected database → Classification record for Bracken | Local database resource: I2 · Shared versioned Kraken database and Bracken distributions.\n\nStep S3 (Estimate genus abundances) will be performed using python 3.13.16 (pack bracken 0.0.2). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The Kraken2 classification record binds the report hash, database fingerprint, observation units and actual read lengths. The selected distribution hash and registered association are verified; external model association remains a user declaration, not proof of the training database. Exact fixed read length is default; explicitly selected representative length is a documented approximation for variable reads. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Read-length model=exact; Distribution read length (bases)=150; Abundance rank=G; Minimum Kraken clade count=0. Inputs: Kraken2 classification record: S1 · Classify paired fragments against the selected database → Classification record for Bracken | Local database resource: I2 · Shared versioned Kraken database and Bracken distributions.\n\nStep S4 (Review species and genus results without pooling) will be performed using Combine statistics reports (pack builtin 0.5.0). Collect selected statistics into a local HTML report with a separate, attributed section for each input. Counts are not pooled and variant files are not merged. Settings: Report title=Pipeline report. Inputs: Statistics to include: S2 · Estimate species abundances → Bracken abundance table; S3 · Estimate genus abundances → Bracken abundance table.\n\nTool references:\nWood DE, Lu J, Langmead B (2019). Improved metagenomic analysis with Kraken2. Genome Biology20:257. https://doi.org/10.1186/s13059-019-1891-0\nLu J, Breitwieser FP, Thielen P, Salzberg SL (2017). Bracken: estimating species abundance in metagenomics data. PeerJ Computer Science 3:e104. https://doi.org/10.7717/peerj-cs.104\nLu J et al. (2022). Metagenome analysis using the Kraken software suite. Nature Protocols 17:2815–2839. https://doi.org/10.1038/s41596-022-00738-y\n\nOperations run locally in dependency order. Independent branches are scheduled sequentially. The run record records exact packs, parameters, input identities, outputs and completion states.\n",
+            "changedSavedManifestRejected": true,
+            "classificationPathResolvedFromNamedProducer": true,
+            "sameExplicitDatabaseSource": true,
+            "actualScientificProgramsExecuted": false
+          },
+          "abundanceTypeAndProvenanceGuards": {
+            "reportAndClassificationRolesHaveDifferentCoreTypes": true,
+            "externalDatabaseLabelReleaseAndConfirmationRequired": true,
+            "unsupportedRankRejected": true,
+            "genericFileSwapAcceptedByGraphAndRequiresRuntimeRejection": true
+          },
+          "independentAbundanceGraphs": [
+            {
+              "tools": [
+                "bracken/estimate",
+                "bracken/estimate",
+                "builtin/report"
+              ],
+              "ranks": [
+                {
+                  "rank": 1,
+                  "nodes": [
+                    "step-1",
+                    "step-2"
+                  ]
+                },
+                {
+                  "rank": 2,
+                  "nodes": [
+                    "step-3"
+                  ]
+                }
+              ],
+              "savedPins": [
+                {
+                  "packId": "bracken",
+                  "packVersion": "0.0.2",
+                  "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e"
+                },
+                {
+                  "packId": "bracken",
+                  "packVersion": "0.0.2",
+                  "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e"
+                },
+                {
+                  "packId": "builtin",
+                  "packVersion": "0.5.0",
+                  "manifestSha256": "84cf3dc5da9e07bca439af537312846933105215153ce6fa533f8a88e1e3a209"
+                }
+              ],
+              "namedMethodsProvenance": true,
+              "inputBindings": {
+                "step-1": {
+                  "classification": [
+                    "input-1"
+                  ],
+                  "database": [
+                    "input-2"
+                  ]
+                },
+                "step-2": {
+                  "classification": [
+                    "input-1"
+                  ],
+                  "database": [
+                    "input-2"
+                  ]
+                },
+                "step-3": {
+                  "metrics": [
+                    "step-1::abundance",
+                    "step-2::abundance"
+                  ]
+                }
+              },
+              "diagramEdgesRetainNamedSources": true,
+              "plannedMethods": "Planned methods (review before use; this describes the selected analysis, not completed results):\n\nStep S1 (Estimate species abundance) will be performed using python 3.13.16 (pack bracken 0.0.2). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The Kraken2 classification record binds the report hash, database fingerprint, observation units and actual read lengths. The selected distribution hash and registered association are verified; external model association remains a user declaration, not proof of the training database. Exact fixed read length is default; explicitly selected representative length is a documented approximation for variable reads. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Read-length model=exact; Distribution read length (bases)=150; Abundance rank=S; Minimum Kraken clade count=0. Inputs: Kraken2 classification record: I1 · Kraken2 classification record | Local database resource: I2 · Local database resource.\n\nStep S2 (Estimate genus abundance) will be performed using python 3.13.16 (pack bracken 0.0.2). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The Kraken2 classification record binds the report hash, database fingerprint, observation units and actual read lengths. The selected distribution hash and registered association are verified; external model association remains a user declaration, not proof of the training database. Exact fixed read length is default; explicitly selected representative length is a documented approximation for variable reads. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Read-length model=exact; Distribution read length (bases)=150; Abundance rank=G; Minimum Kraken clade count=0. Inputs: Kraken2 classification record: I1 · Kraken2 classification record | Local database resource: I2 · Local database resource.\n\nStep S3 (Review ranks as separate abundance tables) will be performed using Combine statistics reports (pack builtin 0.5.0). Collect selected statistics into a local HTML report with a separate, attributed section for each input. Counts are not pooled and variant files are not merged. Settings: Report title=Pipeline report. Inputs: Statistics to include: S1 · Estimate species abundance → Bracken abundance table; S2 · Estimate genus abundance → Bracken abundance table.\n\nTool references:\nLu J, Breitwieser FP, Thielen P, Salzberg SL (2017). Bracken: estimating species abundance in metagenomics data. PeerJ Computer Science 3:e104. https://doi.org/10.7717/peerj-cs.104\nLu J et al. (2022). Metagenome analysis using the Kraken software suite. Nature Protocols 17:2815–2839. https://doi.org/10.1038/s41596-022-00738-y\n\nOperations run locally in dependency order. Independent branches are scheduled sequentially. The run record records exact packs, parameters, input identities, outputs and completion states.\n",
+              "changedSavedManifestRejected": true,
+              "workflow": "estimate",
+              "sameExplicitInputSources": true,
+              "reportAggregation": "separate-sections-no-pooled-statistics"
+            },
+            {
+              "tools": [
+                "bracken/estimate-external",
+                "bracken/estimate-external",
+                "builtin/report"
+              ],
+              "ranks": [
+                {
+                  "rank": 1,
+                  "nodes": [
+                    "step-1",
+                    "step-2"
+                  ]
+                },
+                {
+                  "rank": 2,
+                  "nodes": [
+                    "step-3"
+                  ]
+                }
+              ],
+              "savedPins": [
+                {
+                  "packId": "bracken",
+                  "packVersion": "0.0.2",
+                  "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e"
+                },
+                {
+                  "packId": "bracken",
+                  "packVersion": "0.0.2",
+                  "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e"
+                },
+                {
+                  "packId": "builtin",
+                  "packVersion": "0.5.0",
+                  "manifestSha256": "84cf3dc5da9e07bca439af537312846933105215153ce6fa533f8a88e1e3a209"
+                }
+              ],
+              "namedMethodsProvenance": true,
+              "inputBindings": {
+                "step-1": {
+                  "report": [
+                    "input-1"
+                  ],
+                  "distribution": [
+                    "input-2"
+                  ]
+                },
+                "step-2": {
+                  "report": [
+                    "input-1"
+                  ],
+                  "distribution": [
+                    "input-2"
+                  ]
+                },
+                "step-3": {
+                  "metrics": [
+                    "step-1::abundance",
+                    "step-2::abundance"
+                  ]
+                }
+              },
+              "diagramEdgesRetainNamedSources": true,
+              "plannedMethods": "Planned methods (review before use; this describes the selected analysis, not completed results):\n\nStep S1 (Estimate species abundance) will be performed using python 3.13.16 (pack bracken 0.0.2). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The external database association, classifier settings, read length and read-versus-fragment units are explicitly user-declared and cannot be verified from the report alone. Report and distribution hashes will be recorded. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Database name=Synthetic probability fixture; Database release or source identifier=hand-calculated-2026-10-04; Confirm external report and model compatibility=confirmed; What the report counts=reads; Distribution read length (bases)=150; Abundance rank=S; Minimum Kraken clade count=0. Inputs: External Kraken2 report: I1 · External Kraken2 report | Matching Bracken distribution: I2 · Matching Bracken distribution.\n\nStep S2 (Estimate genus abundance) will be performed using python 3.13.16 (pack bracken 0.0.2). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The external database association, classifier settings, read length and read-versus-fragment units are explicitly user-declared and cannot be verified from the report alone. Report and distribution hashes will be recorded. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Database name=Synthetic probability fixture; Database release or source identifier=hand-calculated-2026-10-04; Confirm external report and model compatibility=confirmed; What the report counts=reads; Distribution read length (bases)=150; Abundance rank=G; Minimum Kraken clade count=0. Inputs: External Kraken2 report: I1 · External Kraken2 report | Matching Bracken distribution: I2 · Matching Bracken distribution.\n\nStep S3 (Review ranks as separate abundance tables) will be performed using Combine statistics reports (pack builtin 0.5.0). Collect selected statistics into a local HTML report with a separate, attributed section for each input. Counts are not pooled and variant files are not merged. Settings: Report title=Pipeline report. Inputs: Statistics to include: S1 · Estimate species abundance → Bracken abundance table; S2 · Estimate genus abundance → Bracken abundance table.\n\nTool references:\nLu J, Breitwieser FP, Thielen P, Salzberg SL (2017). Bracken: estimating species abundance in metagenomics data. PeerJ Computer Science 3:e104. https://doi.org/10.7717/peerj-cs.104\nLu J et al. (2022). Metagenome analysis using the Kraken software suite. Nature Protocols 17:2815–2839. https://doi.org/10.1038/s41596-022-00738-y\n\nOperations run locally in dependency order. Independent branches are scheduled sequentially. The run record records exact packs, parameters, input identities, outputs and completion states.\n",
+              "changedSavedManifestRejected": true,
+              "workflow": "estimate-external",
+              "sameExplicitInputSources": true,
+              "reportAggregation": "separate-sections-no-pooled-statistics"
+            }
+          ],
+          "installedInventory": {
+            "packManifests": 4,
+            "executablesVerified": 6,
+            "assetsVerified": 45
+          },
+          "selectedPacks": [
+            {
+              "id": "bracken",
+              "version": "0.0.2",
+              "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e",
+              "operations": [
+                "estimate",
+                "estimate-external"
+              ],
+              "scientificChecksDeclared": 4
+            }
+          ],
+          "offlineStaticImports": [
+            {
+              "id": "bracken",
+              "version": "0.0.2",
+              "archiveSha256": "354c805219487591b0d4dcdbcda21ea7c168689b85563aca0301012670d6c5eb",
+              "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e",
+              "archiveMatchesGraphPayload": true,
+              "duplicateVersionRejected": true,
+              "installedFilesAndReceiptsUnchanged": true,
+              "publisherVerified": false
+            }
+          ],
+          "starterPackFilesPreserved": 143,
+          "releasedApplicationFilesVerified": [
+            "WorkbenchBridge.exe",
+            "workspace/app_version.py",
+            "workspace/catalog-sources.json",
+            "workspace/catalog.py",
+            "workspace/core_checks.py",
+            "workspace/desktop_host.py",
+            "workspace/desktop_model.py",
+            "workspace/engine.py",
+            "workspace/example.py",
+            "workspace/pack_checks.py",
+            "workspace/pack_manager.py",
+            "workspace/pack_security.py",
+            "workspace/service.py",
+            "workspace/starter-check-profile.json",
+            "workspace/verify_installation.py"
+          ],
+          "starterSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+          "dependencies": {
+            "kraken2": {
+              "version": "1.0.0",
+              "archiveSha256": "9feb39546f6af9d718629304d7fc6a5d70d8a015839deef7d4a869e7587a0e91"
+            }
+          },
+          "separateConnectionApplication": true,
+          "presetAndOriginalPinContracts": [
+            "bracken/estimate",
+            "bracken/estimate-external"
+          ],
+          "testsRun": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "testSourceSha256": "468dea5339e1d863038aded5e26858cc65f2434db22c7ceba8b498ad0e6bb5dc",
+          "success": true
+        },
+        "scientificRegressionReport": {
+          "schema": 1,
+          "pack": "bracken",
+          "packVersion": "0.0.2",
+          "upstreamVersion": "3.1",
+          "nativeWindowsHost": true,
+          "nativeWindowsExecuted": true,
+          "packDirectory": "D:\\a\\_temp\\ordinary\\native-workbench\\packs\\bracken-0.0.2",
+          "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e",
+          "upstreamEstimatorSha256": "c311cb56921b92c807ea28710c98349c725f27b7cee2b20e2e343c50e2981cca",
+          "kraken2Archive": {
+            "path": "D:\\a\\_temp\\dependency-kraken2.zip",
+            "sha256": "9feb39546f6af9d718629304d7fc6a5d70d8a015839deef7d4a869e7587a0e91"
+          },
+          "actualKrakenChainExecuted": true,
+          "testsRun": 17,
+          "passed": 17,
+          "failures": [],
+          "errors": [],
+          "skipped": [],
+          "success": true,
+          "scope": "Packaged unchanged upstream estimator with independent hand-calculated Bayesian truth, real captured Kraken fixture, explicit provenance/length/format/setting guards, input and pack immutability. Actual full Kraken chain is separately recorded. No GUI, performance, clinical or network-isolation claim."
+        }
+      }
+    ],
+    "correspondence": {
+      "name": "bracken-0.0.2-candidate-correspondence.json",
+      "path": "/workspace/scratch/0c5293ac0f36/github-workbench/build/metagenomics-publication/candidates/bracken-0.0.2-candidate-correspondence.json",
+      "bytes": 15035,
+      "sha256": "3d3cb2c06f4be78f7b5aa84d26dbf5aa9626fcf83221f18634d1176e3897780c",
+      "report": {
+        "schema": 1,
+        "kind": "validation-candidate-correspondence",
+        "packId": "bracken",
+        "proposedFinalVersion": "1.0.0",
+        "proposedFinalManifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d",
+        "candidate": {
+          "id": "bracken",
+          "name": "Bracken metagenomic abundance",
+          "version": "0.0.2",
+          "description": "Database-bound Kraken2 abundance reestimation and explicitly declared external reports. Workbench0.6.0 or newer.",
+          "toolVersions": {
+            "python": "3.13.16"
+          },
+          "platform": "windows-x86_64",
+          "packApi": 1,
+          "minAppVersion": "0.6.0",
+          "manifestSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e",
+          "size": 34837211,
+          "sha256": "354c805219487591b0d4dcdbcda21ea7c168689b85563aca0301012670d6c5eb",
+          "file": "native-workbench-pack-bracken-0.0.2.zip",
+          "expandedBytes": 46125095
+        },
+        "unchangedFileCount": 58,
+        "allowedChanges": [
+          "PACK-README.md",
+          "pack.ini"
+        ],
+        "files": [
+          {
+            "path": "PACK-README.md",
+            "finalSha256": "7d453facc088207f5564146855e9238824f5526f1237245cff881abc17075fc4",
+            "candidateSha256": "d4de71723627a395945172a624816031a923afd5718a0703970b0d444c9a680b"
+          },
+          {
+            "path": "adapter.py",
+            "finalSha256": "0e32bdf9e70f8b95c99aadb4c08bde9cf51e678b69279db04ad15e5ae8dcc322",
+            "candidateSha256": "0e32bdf9e70f8b95c99aadb4c08bde9cf51e678b69279db04ad15e5ae8dcc322"
+          },
+          {
+            "path": "bin/LICENSE.txt",
+            "finalSha256": "62bec384df47b0328307db41455ff6ea2559e5546b394ac69148561b21703120",
+            "candidateSha256": "62bec384df47b0328307db41455ff6ea2559e5546b394ac69148561b21703120"
+          },
+          {
+            "path": "bin/_asyncio.pyd",
+            "finalSha256": "6654dfbf4cc92609801f35022acaddd3fc19e6c777b7771b0f0a68f5813889a8",
+            "candidateSha256": "6654dfbf4cc92609801f35022acaddd3fc19e6c777b7771b0f0a68f5813889a8"
+          },
+          {
+            "path": "bin/_bz2.pyd",
+            "finalSha256": "6da4d453852346299e983b458f3ec2f0db3b5f765998ba3f45c91b4a1549037b",
+            "candidateSha256": "6da4d453852346299e983b458f3ec2f0db3b5f765998ba3f45c91b4a1549037b"
+          },
+          {
+            "path": "bin/_ctypes.pyd",
+            "finalSha256": "5bcddf4c374c4d247e1e4a61f3347159c36c5785fe43bdae11a4e6c9ea2c0166",
+            "candidateSha256": "5bcddf4c374c4d247e1e4a61f3347159c36c5785fe43bdae11a4e6c9ea2c0166"
+          },
+          {
+            "path": "bin/_decimal.pyd",
+            "finalSha256": "eeb278dfbdb305bb5af916ed79e878943e25dc4bd6e99ec17abb7b3fd9f935d5",
+            "candidateSha256": "eeb278dfbdb305bb5af916ed79e878943e25dc4bd6e99ec17abb7b3fd9f935d5"
+          },
+          {
+            "path": "bin/_elementtree.pyd",
+            "finalSha256": "34968e3aebdb3e89cb1472b75b04986ce1bbf27d290f4154d77649cc17c41fab",
+            "candidateSha256": "34968e3aebdb3e89cb1472b75b04986ce1bbf27d290f4154d77649cc17c41fab"
+          },
+          {
+            "path": "bin/_hashlib.pyd",
+            "finalSha256": "4d3eb9d9492d626c7bb10cfe5ab233a9195ec7b27e92b465b287e7a24fc8266c",
+            "candidateSha256": "4d3eb9d9492d626c7bb10cfe5ab233a9195ec7b27e92b465b287e7a24fc8266c"
+          },
+          {
+            "path": "bin/_lzma.pyd",
+            "finalSha256": "2b4dcb12c0420ffced4b91968ae4eff6cb585f0f07490160c6da47da63064a99",
+            "candidateSha256": "2b4dcb12c0420ffced4b91968ae4eff6cb585f0f07490160c6da47da63064a99"
+          },
+          {
+            "path": "bin/_multiprocessing.pyd",
+            "finalSha256": "5017bb9dd0d5ab6d7c0f007763d7906d33464f0b436ac6577f1f4fffd5c98986",
+            "candidateSha256": "5017bb9dd0d5ab6d7c0f007763d7906d33464f0b436ac6577f1f4fffd5c98986"
+          },
+          {
+            "path": "bin/_overlapped.pyd",
+            "finalSha256": "3f393b2ce1fe5973fc45e49dffcf51405fa875cdb284cf96b2f0d4b93b08765c",
+            "candidateSha256": "3f393b2ce1fe5973fc45e49dffcf51405fa875cdb284cf96b2f0d4b93b08765c"
+          },
+          {
+            "path": "bin/_queue.pyd",
+            "finalSha256": "79c196a0804b152fc48b4055387f4352838e41c28863a0c946e7a98137e681e1",
+            "candidateSha256": "79c196a0804b152fc48b4055387f4352838e41c28863a0c946e7a98137e681e1"
+          },
+          {
+            "path": "bin/_socket.pyd",
+            "finalSha256": "c5936292083189e0675a96ddd0e38235726f1c58195cec64eb0085b9c479ddce",
+            "candidateSha256": "c5936292083189e0675a96ddd0e38235726f1c58195cec64eb0085b9c479ddce"
+          },
+          {
+            "path": "bin/_sqlite3.pyd",
+            "finalSha256": "95d5b99f696cb33550534e8be80d31003db8b8a27062dfd6b09fdba4bb92f812",
+            "candidateSha256": "95d5b99f696cb33550534e8be80d31003db8b8a27062dfd6b09fdba4bb92f812"
+          },
+          {
+            "path": "bin/_ssl.pyd",
+            "finalSha256": "30ff82a3ea0c675ddc99e6b14f71ca750f06e77d6653e2da3d7d35b7ef0fc2ed",
+            "candidateSha256": "30ff82a3ea0c675ddc99e6b14f71ca750f06e77d6653e2da3d7d35b7ef0fc2ed"
+          },
+          {
+            "path": "bin/_uuid.pyd",
+            "finalSha256": "0d6fcf704721d4bae58cc754b15a3f8c36907b718874f6d7cbbaa363a14618b1",
+            "candidateSha256": "0d6fcf704721d4bae58cc754b15a3f8c36907b718874f6d7cbbaa363a14618b1"
+          },
+          {
+            "path": "bin/_wmi.pyd",
+            "finalSha256": "f88c322f871aef92de562278bd25c34c6e758642669d5512a22ed972840317b1",
+            "candidateSha256": "f88c322f871aef92de562278bd25c34c6e758642669d5512a22ed972840317b1"
+          },
+          {
+            "path": "bin/_zoneinfo.pyd",
+            "finalSha256": "b687deba154399bf6e44963e46abff518c3f987ae4fde087a3c891a1a1f08fdd",
+            "candidateSha256": "b687deba154399bf6e44963e46abff518c3f987ae4fde087a3c891a1a1f08fdd"
+          },
+          {
+            "path": "bin/libcrypto-3.dll",
+            "finalSha256": "75495fe0e079ab00d49be740d3c710a0b94e3f74f9648cb7cc9f768fc7f52319",
+            "candidateSha256": "75495fe0e079ab00d49be740d3c710a0b94e3f74f9648cb7cc9f768fc7f52319"
+          },
+          {
+            "path": "bin/libffi-8.dll",
+            "finalSha256": "eff52743773eb550fcc6ce3efc37c85724502233b6b002a35496d828bd7b280a",
+            "candidateSha256": "eff52743773eb550fcc6ce3efc37c85724502233b6b002a35496d828bd7b280a"
+          },
+          {
+            "path": "bin/libssl-3.dll",
+            "finalSha256": "8957182a9c385bfd9f3f790921de2ddc614cf91f99edbed4e9e5446a46504e32",
+            "candidateSha256": "8957182a9c385bfd9f3f790921de2ddc614cf91f99edbed4e9e5446a46504e32"
+          },
+          {
+            "path": "bin/pyexpat.pyd",
+            "finalSha256": "3865fae84ff0f274c049e737731cd8aa184fae208af5b4c0d0cfc42a38f79cea",
+            "candidateSha256": "3865fae84ff0f274c049e737731cd8aa184fae208af5b4c0d0cfc42a38f79cea"
+          },
+          {
+            "path": "bin/python.cat",
+            "finalSha256": "297a28dea041bad442aca6d7cb92957627501870e3c5cb7c642afb83563ee9c1",
+            "candidateSha256": "297a28dea041bad442aca6d7cb92957627501870e3c5cb7c642afb83563ee9c1"
+          },
+          {
+            "path": "bin/python.exe",
+            "finalSha256": "31fe10b4ed82a2f960af0ef9931f46a4b84ff286f8b6ffd9dee098cf4f10f17f",
+            "candidateSha256": "31fe10b4ed82a2f960af0ef9931f46a4b84ff286f8b6ffd9dee098cf4f10f17f"
+          },
+          {
+            "path": "bin/python3.dll",
+            "finalSha256": "a1a32b2475675e784d9b34d33d3a8f3e4afaa563da1feb784b0dd69fc4d8f9dc",
+            "candidateSha256": "a1a32b2475675e784d9b34d33d3a8f3e4afaa563da1feb784b0dd69fc4d8f9dc"
+          },
+          {
+            "path": "bin/python313._pth",
+            "finalSha256": "6132a387c961a643beab61b8b426cfd73c366c6f6ad2d5aadc5ccf225776b399",
+            "candidateSha256": "6132a387c961a643beab61b8b426cfd73c366c6f6ad2d5aadc5ccf225776b399"
+          },
+          {
+            "path": "bin/python313.dll",
+            "finalSha256": "3b29bf9ff39bed8f660f5b935f19657f7ce7f145009851741b11364f6ebcb862",
+            "candidateSha256": "3b29bf9ff39bed8f660f5b935f19657f7ce7f145009851741b11364f6ebcb862"
+          },
+          {
+            "path": "bin/python313.zip",
+            "finalSha256": "33c48dd2c3031d27784950aaee96d3d65f916e3c43dd3637ace333a7b9e8021a",
+            "candidateSha256": "33c48dd2c3031d27784950aaee96d3d65f916e3c43dd3637ace333a7b9e8021a"
+          },
+          {
+            "path": "bin/select.pyd",
+            "finalSha256": "17df388a7aa42e7f066b80aa4f77cbbba9286495e6f3508425806be6766d122b",
+            "candidateSha256": "17df388a7aa42e7f066b80aa4f77cbbba9286495e6f3508425806be6766d122b"
+          },
+          {
+            "path": "bin/sqlite3.dll",
+            "finalSha256": "2e3cf1b96e8afc679ee8bd69d6bde3aeb797b48b297b9cafd0eb9fd578eaafb5",
+            "candidateSha256": "2e3cf1b96e8afc679ee8bd69d6bde3aeb797b48b297b9cafd0eb9fd578eaafb5"
+          },
+          {
+            "path": "bin/unicodedata.pyd",
+            "finalSha256": "d113047658f92d893bf4ee2da81ffbd624ec5c485733c02e116fac1b9a1b964c",
+            "candidateSha256": "d113047658f92d893bf4ee2da81ffbd624ec5c485733c02e116fac1b9a1b964c"
+          },
+          {
+            "path": "bin/vcruntime140.dll",
+            "finalSha256": "d1f4225df2cd877dbf130d5668a021dce3f94118455ff5ec952061c30afc9ce7",
+            "candidateSha256": "d1f4225df2cd877dbf130d5668a021dce3f94118455ff5ec952061c30afc9ce7"
+          },
+          {
+            "path": "bin/vcruntime140_1.dll",
+            "finalSha256": "a7146c08f89fe5b04541ab507cdb59ff7b44534d4ba3c668a426c6450a03434e",
+            "candidateSha256": "a7146c08f89fe5b04541ab507cdb59ff7b44534d4ba3c668a426c6450a03434e"
+          },
+          {
+            "path": "bin/winsound.pyd",
+            "finalSha256": "8450de54438b1698556b794400c3114b78ede8c10b13dcf263d646ef639ae7d1",
+            "candidateSha256": "8450de54438b1698556b794400c3114b78ede8c10b13dcf263d646ef639ae7d1"
+          },
+          {
+            "path": "fixtures/classification.json",
+            "finalSha256": "9ff5fa8277b16e8e8c2bf95b5626471051133e4f92a8d4cf6b93f9b79302cd15",
+            "candidateSha256": "9ff5fa8277b16e8e8c2bf95b5626471051133e4f92a8d4cf6b93f9b79302cd15"
+          },
+          {
+            "path": "fixtures/database.json",
+            "finalSha256": "0d077edbac7db26e0ff767c8fc436425d1845373a94799d9489f91afb1bacea1",
+            "candidateSha256": "0d077edbac7db26e0ff767c8fc436425d1845373a94799d9489f91afb1bacea1"
+          },
+          {
+            "path": "fixtures/database150mers.kmer_distrib",
+            "finalSha256": "82a75554218504dbc940b55abd24b8a3d52c506852a2465506d204f01894442f",
+            "candidateSha256": "82a75554218504dbc940b55abd24b8a3d52c506852a2465506d204f01894442f"
+          },
+          {
+            "path": "fixtures/expected.report.tsv",
+            "finalSha256": "ad226ff9929a7cd71638d49d9310e78aff3f689b7bfb9c1d2750068eb8afd00b",
+            "candidateSha256": "ad226ff9929a7cd71638d49d9310e78aff3f689b7bfb9c1d2750068eb8afd00b"
+          },
+          {
+            "path": "fixtures/fixture-model-provenance.json",
+            "finalSha256": "1416409df3239f2314673060ed51164062769ccd83201f54ef468150405659d0",
+            "candidateSha256": "1416409df3239f2314673060ed51164062769ccd83201f54ef468150405659d0"
+          },
+          {
+            "path": "fixtures/manual.report.tsv",
+            "finalSha256": "3bde7ddfdb5a7d2c1a82c588f4b7813e62cb22504b2c14fb26e5a93089abbf34",
+            "candidateSha256": "3bde7ddfdb5a7d2c1a82c588f4b7813e62cb22504b2c14fb26e5a93089abbf34"
+          },
+          {
+            "path": "fixtures/manual150mers.kmer_distrib",
+            "finalSha256": "a1502e2a3ff4e9e014c7a3aa15f4ad7f5f20cfcac8c2ecb5baa4aa425007e2e2",
+            "candidateSha256": "a1502e2a3ff4e9e014c7a3aa15f4ad7f5f20cfcac8c2ecb5baa4aa425007e2e2"
+          },
+          {
+            "path": "fixtures/truth.json",
+            "finalSha256": "9d1f5211f4fa97bc2c0f740bf451f54537ce10557a52bdf91cd77a129d3ba044",
+            "candidateSha256": "9d1f5211f4fa97bc2c0f740bf451f54537ce10557a52bdf91cd77a129d3ba044"
+          },
+          {
+            "path": "licenses/Bracken-GPL-3.0.txt",
+            "finalSha256": "40e2bd5ca4a76db23c3d439ba19074ae4107c723963beed9c8b872fb30259480",
+            "candidateSha256": "40e2bd5ca4a76db23c3d439ba19074ae4107c723963beed9c8b872fb30259480"
+          },
+          {
+            "path": "licenses/Bracken-v3.1.tar.gz",
+            "finalSha256": "c0a35331a8aac1e0dbb14c2a92c4de6f89f0aac540101c05c2eec54032107560",
+            "candidateSha256": "c0a35331a8aac1e0dbb14c2a92c4de6f89f0aac540101c05c2eec54032107560"
+          },
+          {
+            "path": "licenses/NOTICE.txt",
+            "finalSha256": "a3ff90f99524f8c3e2bf61706a2b2998b4867bcc7e42353ca3bc51781f4ba903",
+            "candidateSha256": "a3ff90f99524f8c3e2bf61706a2b2998b4867bcc7e42353ca3bc51781f4ba903"
+          },
+          {
+            "path": "licenses/Python-3.13.16.tar.xz",
+            "finalSha256": "f4b1bfb3c79b5bb11b8d228a12504163b4c0dab4d679828d8f5f26b6cb6ab35d",
+            "candidateSha256": "f4b1bfb3c79b5bb11b8d228a12504163b4c0dab4d679828d8f5f26b6cb6ab35d"
+          },
+          {
+            "path": "licenses/Workbench-MIT.txt",
+            "finalSha256": "8fc4c4b462aafaf8349f53b191ceea7496d39c49463224aaa05d366fbb406682",
+            "candidateSha256": "8fc4c4b462aafaf8349f53b191ceea7496d39c49463224aaa05d366fbb406682"
+          },
+          {
+            "path": "licenses/adapter.py",
+            "finalSha256": "0e32bdf9e70f8b95c99aadb4c08bde9cf51e678b69279db04ad15e5ae8dcc322",
+            "candidateSha256": "0e32bdf9e70f8b95c99aadb4c08bde9cf51e678b69279db04ad15e5ae8dcc322"
+          },
+          {
+            "path": "licenses/build_fixture.py",
+            "finalSha256": "4612c5500d0f62c09005f935345596668cb9b46b3548c937968fcc1e8cfb8f10",
+            "candidateSha256": "4612c5500d0f62c09005f935345596668cb9b46b3548c937968fcc1e8cfb8f10"
+          },
+          {
+            "path": "licenses/fetch_bracken_build_inputs.py",
+            "finalSha256": "7cf90ed3331089727d11aaa57697afc3dd802d4c5289de5548675145b5e678d5",
+            "candidateSha256": "7cf90ed3331089727d11aaa57697afc3dd802d4c5289de5548675145b5e678d5"
+          },
+          {
+            "path": "licenses/prepare_bracken_pack.py",
+            "finalSha256": "e17d69cc944b4867896d7b5688b9278054a6f13fd65cb3a38ac105c4f1f0843d",
+            "candidateSha256": "e17d69cc944b4867896d7b5688b9278054a6f13fd65cb3a38ac105c4f1f0843d"
+          },
+          {
+            "path": "licenses/provenance.json",
+            "finalSha256": "82a4656048d0b2dd559550bf6bbecbec21bd2f861b062b59fb741c98a2c6dcbf",
+            "candidateSha256": "82a4656048d0b2dd559550bf6bbecbec21bd2f861b062b59fb741c98a2c6dcbf"
+          },
+          {
+            "path": "licenses/resources.py",
+            "finalSha256": "dd2c52caec9ac6d067e595230beab94429f4e38a278b5d06d3b22aa69c96e43d",
+            "candidateSha256": "dd2c52caec9ac6d067e595230beab94429f4e38a278b5d06d3b22aa69c96e43d"
+          },
+          {
+            "path": "licenses/windows-lock.json",
+            "finalSha256": "195d781c6655aea15d438ac80b83415635e3c6afe3de4d3d03516b0908827f86",
+            "candidateSha256": "195d781c6655aea15d438ac80b83415635e3c6afe3de4d3d03516b0908827f86"
+          },
+          {
+            "path": "pack.ini",
+            "finalSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d",
+            "candidateSha256": "bd7f9c80e8de941cee4243cc74c1069f86367da29befd208bf938be11e70df5e"
+          },
+          {
+            "path": "resources.py",
+            "finalSha256": "dd2c52caec9ac6d067e595230beab94429f4e38a278b5d06d3b22aa69c96e43d",
+            "candidateSha256": "dd2c52caec9ac6d067e595230beab94429f4e38a278b5d06d3b22aa69c96e43d"
+          },
+          {
+            "path": "upstream/est_abundance.py",
+            "finalSha256": "c311cb56921b92c807ea28710c98349c725f27b7cee2b20e2e343c50e2981cca",
+            "candidateSha256": "c311cb56921b92c807ea28710c98349c725f27b7cee2b20e2e343c50e2981cca"
+          },
+          {
+            "path": "workbench-checks.json",
+            "finalSha256": "52e42545ccd673ae7bdaf0d2c010358313f159ae885e1541560cdd7edcde0dd7",
+            "candidateSha256": "52e42545ccd673ae7bdaf0d2c010358313f159ae885e1541560cdd7edcde0dd7"
+          },
+          {
+            "path": "workbench-schema.json",
+            "finalSha256": "31d8efc83458139bc4f4d289b774c6db68b4a3fc355e2959e09bf4696191f0cc",
+            "candidateSha256": "31d8efc83458139bc4f4d289b774c6db68b4a3fc355e2959e09bf4696191f0cc"
+          }
+        ],
+        "nativeWindowsExecuted": false,
+        "note": "This record compares bytes only. Attach native execution evidence separately."
+      }
+    },
+    "publicAssetVerification": {
+      "name": "candidate-public-verification.json",
+      "path": "/workspace/scratch/0c5293ac0f36/github-workbench/build/metagenomics-publication/candidate-public-verification.json",
+      "bytes": 2796,
+      "sha256": "54fdc6ec4364c7877adc5a7c4a74fdea20ff26f02a1647056fcb9f4ba148fe4a",
+      "report": {
+        "schema": 1,
+        "repository": "https://github.com/comparativechrono/workbench",
+        "tag": "metagenomics-candidates-20261004",
+        "verifiedAt": "2026-10-04T21:14:33.775237+00:00",
+        "method": "Independent streamed public HTTPS download; every byte SHA-256 hashed and size compared to pre-publication pins.",
+        "assets": [
+          {
+            "name": "native-workbench-pack-kraken2-0.0.1.zip",
+            "url": "https://github.com/comparativechrono/workbench/releases/download/metagenomics-candidates-20261004/native-workbench-pack-kraken2-0.0.1.zip",
+            "bytes": 230928282,
+            "sha256": "45b8483ec825901267f39ed804294d136813e4f683afa62888f72e9f8ca214b2",
+            "expectedBytes": 230928282,
+            "expectedSha256": "45b8483ec825901267f39ed804294d136813e4f683afa62888f72e9f8ca214b2",
+            "success": true
+          },
+          {
+            "name": "native-workbench-pack-bracken-0.0.2.zip",
+            "url": "https://github.com/comparativechrono/workbench/releases/download/metagenomics-candidates-20261004/native-workbench-pack-bracken-0.0.2.zip",
+            "bytes": 34837211,
+            "sha256": "354c805219487591b0d4dcdbcda21ea7c168689b85563aca0301012670d6c5eb",
+            "expectedBytes": 34837211,
+            "expectedSha256": "354c805219487591b0d4dcdbcda21ea7c168689b85563aca0301012670d6c5eb",
+            "success": true
+          },
+          {
+            "name": "kraken2-0.0.1-candidate-correspondence.json",
+            "url": "https://github.com/comparativechrono/workbench/releases/download/metagenomics-candidates-20261004/kraken2-0.0.1-candidate-correspondence.json",
+            "bytes": 20963,
+            "sha256": "6e08584f29c2155d1ca62888b3d17b6b101dce98437d1ac05dd2d6ffc361b3bc",
+            "expectedBytes": 20963,
+            "expectedSha256": "6e08584f29c2155d1ca62888b3d17b6b101dce98437d1ac05dd2d6ffc361b3bc",
+            "success": true
+          },
+          {
+            "name": "bracken-0.0.2-candidate-correspondence.json",
+            "url": "https://github.com/comparativechrono/workbench/releases/download/metagenomics-candidates-20261004/bracken-0.0.2-candidate-correspondence.json",
+            "bytes": 15035,
+            "sha256": "3d3cb2c06f4be78f7b5aa84d26dbf5aa9626fcf83221f18634d1176e3897780c",
+            "expectedBytes": 15035,
+            "expectedSha256": "3d3cb2c06f4be78f7b5aa84d26dbf5aa9626fcf83221f18634d1176e3897780c",
+            "success": true
+          },
+          {
+            "name": "SHA256SUMS.txt",
+            "url": "https://github.com/comparativechrono/workbench/releases/download/metagenomics-candidates-20261004/SHA256SUMS.txt",
+            "bytes": 432,
+            "sha256": "105c2dfa293932acd1753460c4cce7e3100910d52c6c4eabcfc8cf32fdb63e33",
+            "expectedBytes": 432,
+            "expectedSha256": "105c2dfa293932acd1753460c4cce7e3100910d52c6c4eabcfc8cf32fdb63e33",
+            "success": true
+          }
+        ],
+        "success": true,
+        "scope": "Byte integrity and public availability only; not publisher trust or scientific execution."
+      }
+    },
+    "scope": "Candidate pass is separate; exact final bytes were independently retested."
+  },
+  "sourceAndLocalEvidence": {
+    "sourceCommit": "85ef78b0436417a85d8d70ed685dc2a52c24f7a4",
+    "reports": {
+      "static-integrity": {
+        "validation": "static-integrity-only",
+        "pack": {
+          "id": "bracken",
+          "name": "Bracken metagenomic abundance",
+          "version": "1.0.0",
+          "toolVersions": {
+            "python": "3.13.16"
+          },
+          "description": "Database-bound Kraken2 abundance reestimation and explicitly declared external reports. Workbench0.6.0 or newer.",
+          "category": "Metagenomics",
+          "platform": "windows-x86_64",
+          "packApi": 1,
+          "minAppVersion": "0.6.0",
+          "size": 34837071,
+          "sha256": "bfd5ae2ea3ef3e54f3ae5b97530e58bf1aad8562d66ca1c8e190b87472f1d853",
+          "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+        }
+      },
+      "scientific-regressions": {
+        "schema": 1,
+        "pack": "bracken",
+        "packVersion": "1.0.0",
+        "upstreamVersion": "3.1",
+        "nativeWindowsHost": false,
+        "nativeWindowsExecuted": false,
+        "packDirectory": "/workspace/scratch/0c5293ac0f36/github-workbench/build/bracken-final-bounded",
+        "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d",
+        "upstreamEstimatorSha256": "c311cb56921b92c807ea28710c98349c725f27b7cee2b20e2e343c50e2981cca",
+        "kraken2Archive": {
+          "path": "/workspace/scratch/0c5293ac0f36/github-workbench/build/bracken-inputs/kraken2-unpublished-v2-diagnostic.zip",
+          "sha256": "59c2862aaf48939a0ae79da13b86e65fd32d6ae55cc948a0ee13c95e836c51f4"
+        },
+        "actualKrakenChainExecuted": true,
+        "testsRun": 17,
+        "passed": 17,
+        "failures": [],
+        "errors": [],
+        "skipped": [],
+        "success": true,
+        "scope": "Packaged unchanged upstream estimator with independent hand-calculated Bayesian truth, real captured Kraken fixture, explicit provenance/length/format/setting guards, input and pack immutability. Actual full Kraken chain is separately recorded. No GUI, performance, clinical or network-isolation claim."
+      },
+      "released-app-graph-contracts": {
+        "schema": 1,
+        "applicationVersion": "0.6.0",
+        "expectedPackVersions": {
+          "bracken": "1.0.0"
+        },
+        "testHost": "linux",
+        "pythonVersion": "3.12.14",
+        "nativeWindowsExecuted": false,
+        "scientificExecutablesExecuted": false,
+        "nativeImporterExecuted": false,
+        "scope": "Released-app graph contracts and Python archive import; checked copy callback substitutes native folder publication.",
+        "typingLimitation": "Released 0.6.0 uses generic file ports for local database manifests, classification records and Bracken distributions. Graph acceptance does not validate resource identity, report hashes, read length, count units or scientific suitability; the separately tested adapters must validate them.",
+        "krakenToBrackenGraph": {
+          "tools": [
+            "kraken2/classify-paired",
+            "bracken/estimate",
+            "bracken/estimate",
+            "builtin/report"
+          ],
+          "ranks": [
+            {
+              "rank": 1,
+              "nodes": [
+                "step-1"
+              ]
+            },
+            {
+              "rank": 2,
+              "nodes": [
+                "step-2",
+                "step-3"
+              ]
+            },
+            {
+              "rank": 3,
+              "nodes": [
+                "step-4"
+              ]
+            }
+          ],
+          "savedPins": [
+            {
+              "packId": "kraken2",
+              "packVersion": "1.0.0",
+              "manifestSha256": "4c0e1dbe86b43f41c72b7dbdc6c93034d6b6eeb210494bdc8252c110182b677f"
+            },
+            {
+              "packId": "bracken",
+              "packVersion": "1.0.0",
+              "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+            },
+            {
+              "packId": "bracken",
+              "packVersion": "1.0.0",
+              "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+            },
+            {
+              "packId": "builtin",
+              "packVersion": "0.5.0",
+              "manifestSha256": "84cf3dc5da9e07bca439af537312846933105215153ce6fa533f8a88e1e3a209"
+            }
+          ],
+          "namedMethodsProvenance": true,
+          "inputBindings": {
+            "step-1": {
+              "reads": [
+                "input-1"
+              ],
+              "database": [
+                "input-2"
+              ]
+            },
+            "step-2": {
+              "classification": [
+                "step-1::classification"
+              ],
+              "database": [
+                "input-2"
+              ]
+            },
+            "step-3": {
+              "classification": [
+                "step-1::classification"
+              ],
+              "database": [
+                "input-2"
+              ]
+            },
+            "step-4": {
+              "metrics": [
+                "step-2::abundance",
+                "step-3::abundance"
+              ]
+            }
+          },
+          "diagramEdgesRetainNamedSources": true,
+          "plannedMethods": "Planned methods (review before use; this describes the selected analysis, not completed results):\n\nStep S1 (Classify paired fragments against the selected database) will be performed using python 3.13.16 (pack kraken2 1.0.0). Kraken2 2.17.2 will classify validated Phred+33 DNA FASTQ against the selected local nucleotide database, with SHA-256 identity of its minimizer index, taxonomy and options to be verified before and after execution. Confidence, minimum hit groups, base-quality threshold, threads and memory access mode will be recorded. No quick mode or read trimming will be applied. Mates will be validated for identity/order/count and classified jointly; report counts describe fragments. Ordinary six-column reports, per-fragment minimizer evidence, observed read lengths, commands and input hashes will be retained. Classification proportions include unclassified input and are not Bracken abundance estimates. Database provenance is user-supplied and does not prove suitability or clinical identification. Settings: Classification threads=2; Confidence threshold=0; Minimum hit groups=2; Minimum Phred+33 base quality=0; Database access=mapped. Inputs: Read 1 FASTQ: I1 · Read 1 FASTQ | Registered Kraken2 database: I2 · Shared versioned Kraken database and Bracken distributions.\n\nStep S2 (Estimate species abundances) will be performed using python 3.13.16 (pack bracken 1.0.0). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The Kraken2 classification record binds the report hash, database fingerprint, observation units and actual read lengths. The selected distribution hash and registered association are verified; external model association remains a user declaration, not proof of the training database. Exact fixed read length is default; explicitly selected representative length is a documented approximation for variable reads. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Read-length model=exact; Distribution read length (bases)=150; Abundance rank=S; Minimum Kraken clade count=0. Inputs: Kraken2 classification record: S1 · Classify paired fragments against the selected database → Classification record for Bracken | Local database resource: I2 · Shared versioned Kraken database and Bracken distributions.\n\nStep S3 (Estimate genus abundances) will be performed using python 3.13.16 (pack bracken 1.0.0). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The Kraken2 classification record binds the report hash, database fingerprint, observation units and actual read lengths. The selected distribution hash and registered association are verified; external model association remains a user declaration, not proof of the training database. Exact fixed read length is default; explicitly selected representative length is a documented approximation for variable reads. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Read-length model=exact; Distribution read length (bases)=150; Abundance rank=G; Minimum Kraken clade count=0. Inputs: Kraken2 classification record: S1 · Classify paired fragments against the selected database → Classification record for Bracken | Local database resource: I2 · Shared versioned Kraken database and Bracken distributions.\n\nStep S4 (Review species and genus results without pooling) will be performed using Combine statistics reports (pack builtin 0.5.0). Collect selected statistics into a local HTML report with a separate, attributed section for each input. Counts are not pooled and variant files are not merged. Settings: Report title=Pipeline report. Inputs: Statistics to include: S2 · Estimate species abundances → Bracken abundance table; S3 · Estimate genus abundances → Bracken abundance table.\n\nTool references:\nWood DE, Lu J, Langmead B (2019). Improved metagenomic analysis with Kraken2. Genome Biology20:257. https://doi.org/10.1186/s13059-019-1891-0\nLu J, Breitwieser FP, Thielen P, Salzberg SL (2017). Bracken: estimating species abundance in metagenomics data. PeerJ Computer Science 3:e104. https://doi.org/10.7717/peerj-cs.104\nLu J et al. (2022). Metagenome analysis using the Kraken software suite. Nature Protocols 17:2815–2839. https://doi.org/10.1038/s41596-022-00738-y\n\nOperations run locally in dependency order. Independent branches are scheduled sequentially. The run record records exact packs, parameters, input identities, outputs and completion states.\n",
+          "changedSavedManifestRejected": true,
+          "classificationPathResolvedFromNamedProducer": true,
+          "sameExplicitDatabaseSource": true,
+          "actualScientificProgramsExecuted": false
+        },
+        "abundanceTypeAndProvenanceGuards": {
+          "reportAndClassificationRolesHaveDifferentCoreTypes": true,
+          "externalDatabaseLabelReleaseAndConfirmationRequired": true,
+          "unsupportedRankRejected": true,
+          "genericFileSwapAcceptedByGraphAndRequiresRuntimeRejection": true
+        },
+        "independentAbundanceGraphs": [
+          {
+            "tools": [
+              "bracken/estimate",
+              "bracken/estimate",
+              "builtin/report"
+            ],
+            "ranks": [
+              {
+                "rank": 1,
+                "nodes": [
+                  "step-1",
+                  "step-2"
+                ]
+              },
+              {
+                "rank": 2,
+                "nodes": [
+                  "step-3"
+                ]
+              }
+            ],
+            "savedPins": [
+              {
+                "packId": "bracken",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+              },
+              {
+                "packId": "bracken",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+              },
+              {
+                "packId": "builtin",
+                "packVersion": "0.5.0",
+                "manifestSha256": "84cf3dc5da9e07bca439af537312846933105215153ce6fa533f8a88e1e3a209"
+              }
+            ],
+            "namedMethodsProvenance": true,
+            "inputBindings": {
+              "step-1": {
+                "classification": [
+                  "input-1"
+                ],
+                "database": [
+                  "input-2"
+                ]
+              },
+              "step-2": {
+                "classification": [
+                  "input-1"
+                ],
+                "database": [
+                  "input-2"
+                ]
+              },
+              "step-3": {
+                "metrics": [
+                  "step-1::abundance",
+                  "step-2::abundance"
+                ]
+              }
+            },
+            "diagramEdgesRetainNamedSources": true,
+            "plannedMethods": "Planned methods (review before use; this describes the selected analysis, not completed results):\n\nStep S1 (Estimate species abundance) will be performed using python 3.13.16 (pack bracken 1.0.0). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The Kraken2 classification record binds the report hash, database fingerprint, observation units and actual read lengths. The selected distribution hash and registered association are verified; external model association remains a user declaration, not proof of the training database. Exact fixed read length is default; explicitly selected representative length is a documented approximation for variable reads. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Read-length model=exact; Distribution read length (bases)=150; Abundance rank=S; Minimum Kraken clade count=0. Inputs: Kraken2 classification record: I1 · Kraken2 classification record | Local database resource: I2 · Local database resource.\n\nStep S2 (Estimate genus abundance) will be performed using python 3.13.16 (pack bracken 1.0.0). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The Kraken2 classification record binds the report hash, database fingerprint, observation units and actual read lengths. The selected distribution hash and registered association are verified; external model association remains a user declaration, not proof of the training database. Exact fixed read length is default; explicitly selected representative length is a documented approximation for variable reads. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Read-length model=exact; Distribution read length (bases)=150; Abundance rank=G; Minimum Kraken clade count=0. Inputs: Kraken2 classification record: I1 · Kraken2 classification record | Local database resource: I2 · Local database resource.\n\nStep S3 (Review ranks as separate abundance tables) will be performed using Combine statistics reports (pack builtin 0.5.0). Collect selected statistics into a local HTML report with a separate, attributed section for each input. Counts are not pooled and variant files are not merged. Settings: Report title=Pipeline report. Inputs: Statistics to include: S1 · Estimate species abundance → Bracken abundance table; S2 · Estimate genus abundance → Bracken abundance table.\n\nTool references:\nLu J, Breitwieser FP, Thielen P, Salzberg SL (2017). Bracken: estimating species abundance in metagenomics data. PeerJ Computer Science 3:e104. https://doi.org/10.7717/peerj-cs.104\nLu J et al. (2022). Metagenome analysis using the Kraken software suite. Nature Protocols 17:2815–2839. https://doi.org/10.1038/s41596-022-00738-y\n\nOperations run locally in dependency order. Independent branches are scheduled sequentially. The run record records exact packs, parameters, input identities, outputs and completion states.\n",
+            "changedSavedManifestRejected": true,
+            "workflow": "estimate",
+            "sameExplicitInputSources": true,
+            "reportAggregation": "separate-sections-no-pooled-statistics"
+          },
+          {
+            "tools": [
+              "bracken/estimate-external",
+              "bracken/estimate-external",
+              "builtin/report"
+            ],
+            "ranks": [
+              {
+                "rank": 1,
+                "nodes": [
+                  "step-1",
+                  "step-2"
+                ]
+              },
+              {
+                "rank": 2,
+                "nodes": [
+                  "step-3"
+                ]
+              }
+            ],
+            "savedPins": [
+              {
+                "packId": "bracken",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+              },
+              {
+                "packId": "bracken",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d"
+              },
+              {
+                "packId": "builtin",
+                "packVersion": "0.5.0",
+                "manifestSha256": "84cf3dc5da9e07bca439af537312846933105215153ce6fa533f8a88e1e3a209"
+              }
+            ],
+            "namedMethodsProvenance": true,
+            "inputBindings": {
+              "step-1": {
+                "report": [
+                  "input-1"
+                ],
+                "distribution": [
+                  "input-2"
+                ]
+              },
+              "step-2": {
+                "report": [
+                  "input-1"
+                ],
+                "distribution": [
+                  "input-2"
+                ]
+              },
+              "step-3": {
+                "metrics": [
+                  "step-1::abundance",
+                  "step-2::abundance"
+                ]
+              }
+            },
+            "diagramEdgesRetainNamedSources": true,
+            "plannedMethods": "Planned methods (review before use; this describes the selected analysis, not completed results):\n\nStep S1 (Estimate species abundance) will be performed using python 3.13.16 (pack bracken 1.0.0). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The external database association, classifier settings, read length and read-versus-fragment units are explicitly user-declared and cannot be verified from the report alone. Report and distribution hashes will be recorded. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Database name=Synthetic probability fixture; Database release or source identifier=hand-calculated-2026-10-04; Confirm external report and model compatibility=confirmed; What the report counts=reads; Distribution read length (bases)=150; Abundance rank=S; Minimum Kraken clade count=0. Inputs: External Kraken2 report: I1 · External Kraken2 report | Matching Bracken distribution: I2 · Matching Bracken distribution.\n\nStep S2 (Estimate genus abundance) will be performed using python 3.13.16 (pack bracken 1.0.0). Taxonomic abundance will be estimated with the unchanged Bracken 3.1 upstream Python estimator, using a separately selected local distribution for the stated database and read length, taxonomic rank and original Kraken clade-count threshold. The external database association, classifier settings, read length and read-versus-fragment units are explicitly user-declared and cannot be verified from the report alone. Report and distribution hashes will be recorded. Only standard Kraken2 settings (confidence 0, minimum hit groups 2, minimum base quality 0, no quick mode) are supported. Paired report counts remain fragments. Upstream Bayesian reestimation, integer truncation and report output are retained. Fractions use Bracken retained estimated abundance, excluding unclassified and unallocated observations, and do not estimate organism cell abundance. Methods, source hashes and input identities accompany the result. Settings: Database name=Synthetic probability fixture; Database release or source identifier=hand-calculated-2026-10-04; Confirm external report and model compatibility=confirmed; What the report counts=reads; Distribution read length (bases)=150; Abundance rank=G; Minimum Kraken clade count=0. Inputs: External Kraken2 report: I1 · External Kraken2 report | Matching Bracken distribution: I2 · Matching Bracken distribution.\n\nStep S3 (Review ranks as separate abundance tables) will be performed using Combine statistics reports (pack builtin 0.5.0). Collect selected statistics into a local HTML report with a separate, attributed section for each input. Counts are not pooled and variant files are not merged. Settings: Report title=Pipeline report. Inputs: Statistics to include: S1 · Estimate species abundance → Bracken abundance table; S2 · Estimate genus abundance → Bracken abundance table.\n\nTool references:\nLu J, Breitwieser FP, Thielen P, Salzberg SL (2017). Bracken: estimating species abundance in metagenomics data. PeerJ Computer Science 3:e104. https://doi.org/10.7717/peerj-cs.104\nLu J et al. (2022). Metagenome analysis using the Kraken software suite. Nature Protocols 17:2815–2839. https://doi.org/10.1038/s41596-022-00738-y\n\nOperations run locally in dependency order. Independent branches are scheduled sequentially. The run record records exact packs, parameters, input identities, outputs and completion states.\n",
+            "changedSavedManifestRejected": true,
+            "workflow": "estimate-external",
+            "sameExplicitInputSources": true,
+            "reportAggregation": "separate-sections-no-pooled-statistics"
+          }
+        ],
+        "installedInventory": {
+          "packManifests": 4,
+          "executablesVerified": 6,
+          "assetsVerified": 45
+        },
+        "selectedPacks": [
+          {
+            "id": "bracken",
+            "version": "1.0.0",
+            "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d",
+            "operations": [
+              "estimate",
+              "estimate-external"
+            ],
+            "scientificChecksDeclared": 4
+          }
+        ],
+        "offlineStaticImports": [
+          {
+            "id": "bracken",
+            "version": "1.0.0",
+            "archiveSha256": "bfd5ae2ea3ef3e54f3ae5b97530e58bf1aad8562d66ca1c8e190b87472f1d853",
+            "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d",
+            "archiveMatchesGraphPayload": true,
+            "duplicateVersionRejected": true,
+            "installedFilesAndReceiptsUnchanged": true,
+            "publisherVerified": false
+          }
+        ],
+        "starterPackFilesPreserved": 143,
+        "releasedApplicationFilesVerified": [
+          "WorkbenchBridge.exe",
+          "workspace/app_version.py",
+          "workspace/catalog-sources.json",
+          "workspace/catalog.py",
+          "workspace/core_checks.py",
+          "workspace/desktop_host.py",
+          "workspace/desktop_model.py",
+          "workspace/engine.py",
+          "workspace/example.py",
+          "workspace/pack_checks.py",
+          "workspace/pack_manager.py",
+          "workspace/pack_security.py",
+          "workspace/service.py",
+          "workspace/starter-check-profile.json",
+          "workspace/verify_installation.py"
+        ],
+        "starterSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+        "dependencies": {
+          "kraken2": {
+            "version": "1.0.0",
+            "archiveSha256": "9feb39546f6af9d718629304d7fc6a5d70d8a015839deef7d4a869e7587a0e91"
+          }
+        },
+        "separateConnectionApplication": true,
+        "presetAndOriginalPinContracts": [
+          "bracken/estimate",
+          "bracken/estimate-external"
+        ],
+        "testsRun": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "testSourceSha256": "468dea5339e1d863038aded5e26858cc65f2434db22c7ceba8b498ad0e6bb5dc",
+        "success": true
+      }
+    },
+    "scope": "Linux source scientific execution and local copy-callback graph tests; not native Windows or GUI evidence."
+  },
+  "kraken2DependencySha256": "9feb39546f6af9d718629304d7fc6a5d70d8a015839deef7d4a869e7587a0e91",
+  "boundaries": [
+    "Native installation checks use the released Workbench bridge/importer and scientific runner. Graph tests use a Python publication copy callback; biological executables and native importer are exercised separately.",
+    "Ordinary and space-containing Windows paths were tested. No interactive desktop GUI, institutional approval, clinical use, large-database throughput, empirical taxonomic accuracy or laptop memory-capacity claim is made.",
+    "Large databases and read-length distributions are external resources. Hashes bind bytes, but distribution-to-database association remains explicitly user-attested. Analysis performs no implicit network download.",
+    "Paired classification counts fragments. Bracken standard-model settings and exact read lengths are checked; variable-length use requires explicit representative-length approximation. Its denominator is int(sum of unrounded retained estimates), not all sequenced reads or cell abundance.",
+    "Matching upstream/runtime sources and original notices are included in pack/licenses. Source coverage does not establish bit-identical rebuilding of upstream runtimes. Public byte verification does not establish publisher trust; signed-catalogue deployment remains separate.",
+    "The immutable source companion retains its creation-time pending-native statement and earlier diagnostic failures. This exact-final report closes that gate without changing those historical bytes."
+  ]
+}

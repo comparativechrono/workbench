@@ -1,7 +1,7 @@
 # Current project state
 
 Snapshot: **2026-10-04**. Source baseline:
-[`24c6899aa7c19208ec88ae816879952ed0d8527e`](https://github.com/comparativechrono/workbench/tree/24c6899aa7c19208ec88ae816879952ed0d8527e).
+[`289c4176561fe6c8bbbfba1e225cd65fbafb126d`](https://github.com/comparativechrono/workbench/tree/289c4176561fe6c8bbbfba1e225cd65fbafb126d).
 Read this alongside the [machine-readable release inventory](release-inventory.json)
 and the repository [README](../README.md). Update the date, source baseline and
 evidence when the state changes; do not silently turn a pending item into a claim
@@ -9,8 +9,8 @@ of completion.
 
 ## What is available
 
-The native desktop application **0.6.0** and **30 distinct tool packs** are
-published as development prereleases. There are 31 published pack versions,
+The native desktop application **0.6.0** and **32 distinct tool packs** are
+published as development prereleases. There are 33 published pack versions,
 because kallisto 1.0.0 is retained after being superseded by 1.0.1. Historical
 candidate releases are additional diagnostics, not current analysis packs.
 
@@ -59,6 +59,8 @@ These are **pack versions**, which differ from upstream tool versions.
 | `deseq2` | [1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-deseq2-v1.0.0) | DESeq2/tximport bulk gene-level differential expression |
 | `mosdepth` | [1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-mosdepth-v1.0.0) | Complete-reference and target-region BAM coverage |
 | `iqtree` | [1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-iqtree-v1.0.0) | Nucleotide/protein maximum-likelihood tree inference from alignments |
+| `kraken2` | [1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-kraken2-v1.0.0) | Register/prepare local databases and classify single or paired FASTQ reads |
+| `bracken` | [1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-bracken-v1.0.0) | Estimate taxonomic abundance from a Workbench classification record or explicitly declared external report |
 
 Existing bundled pipeline packs remain available for reproducibility. The
 development direction is individually usable tools or small related operations
@@ -91,6 +93,8 @@ dated evidence for its original bytes, not a fresh test of every older tool.
 | DESeq2 1.0.0 | Exact final ZIP passed three native installation/scientific checks, six graph/archive contracts and 14 additional scientific/failure regressions per path | Direct upstream matrix and tximport oracles cover 300 genes each. Synthetic bulk-expression/design/import tests do not establish experimental adequacy, FDR calibration or large-cohort performance. |
 | mosdepth 1.0.0 | Exact final ZIP passed four native installation/scientific checks, six graph/archive contracts and 11 additional scientific/failure regressions per path | BAM/CIGAR/pair-overlap and full-reference denominator truth, BED targets and malformed-input rejection; no base-quality filtering or RNA expression claim. |
 | IQ-TREE 1.0.0 | Exact final ZIP passed four native installation/scientific checks, six graph/archive contracts and 13 additional scientific/failure regressions per path | DNA/protein model and support truth, real MUSCLE-to-IQ-TREE execution, safe taxon restoration and bounded summaries; not species-tree or large-dataset validation. |
+| Kraken2 1.0.0 | Exact final ZIP passed 6 native installation/scientific checks, 6 graph/archive contracts and 16 additional scientific/failure regressions per path | Synthetic assignments, paired fragment counts, gzip and local database/path guards; no production database bundled or large-database/clinical validation. |
+| Bracken 1.0.0 | Exact final ZIP passed 4 native installation/scientific checks, 7 graph/archive contracts and 17 additional scientific/failure regressions per path | Independent Bayesian arithmetic, exact upstream estimator and real Kraken2-to-Bracken execution; database/model association, read-length approximation and estimated-abundance denominators remain explicit. |
 
 The five-pack October [graph/import report](evidence/popular-pack-graph-contracts-2026-10-04.json)
 records **eight tests passed, zero failures/errors/skips** on Linux with the
@@ -196,6 +200,52 @@ seven-test Linux pass. Windows candidate and final graph/archive checks passed w
 weakening the inventory or duplicate-immutability assertions. The published
 source companion retains its creation-time status; the separate final validation
 report supersedes pending-final statements without changing its bytes.
+
+## Kraken2 and Bracken exact-final evidence
+
+| Final pack | Native Windows run | Recorded result |
+| --- | --- | --- |
+| Kraken2 1.0.0 | [37235526518](https://github.com/comparativechrono/workbench/actions/runs/37235526518) | 6 installation, 6 graph/archive, 16 scientific/failure checks per path |
+| Bracken 1.0.0 | [37236121810](https://github.com/comparativechrono/workbench/actions/runs/37236121810) | 4 installation, 7 graph/archive, 17 scientific/failure checks per path |
+
+Kraken2's [final validation record](evidence/kraken2-1.0.0-validation-2026-10-04.json) binds the exact ZIP and manifest
+to helper source `85ef78b0436417a85d8d70ed685dc2a52c24f7a4`. Its final pack SHA-256 is
+`9feb39546f6af9d718629304d7fc6a5d70d8a015839deef7d4a869e7587a0e91`.
+
+Bracken's [final validation record](evidence/bracken-1.0.0-validation-2026-10-04.json) binds the exact ZIP and manifest
+to helper source `289c4176561fe6c8bbbfba1e225cd65fbafb126d`. Its final pack SHA-256 is
+`bfd5ae2ea3ef3e54f3ae5b97530e58bf1aad8562d66ca1c8e190b87472f1d853`.
+
+The unchanged released 0.6.0 application and ordinary/space-containing
+`windows-2022` paths were used. Native installation exercised the actual
+importer/bridge; graph/archive tests used the released Python engine with a
+checked copy callback. Bracken's full scientific suite also executed actual
+Kraken classification followed by the unchanged upstream abundance estimator.
+Every final public asset was independently downloaded and rehashed.
+
+The separately retained [shared-resource checks](evidence/metagenomics-resources-2026-10-04.json)
+passed 17 source-level tests on Linux for descriptor identities, path/archives,
+fragment accounting and failure cleanup. That report explicitly records no
+scientific executable, native importer or Windows execution; it is not a native
+release gate. It is preserved in Git because the earlier source companions did
+not include this report.
+
+These are small synthetic checks, not GUI acceptance, production-scale database
+benchmarks or clinical validation. The packs remain optional and independently
+usable. Reference indexes and Bracken read-length distributions remain separate
+local resources; no reference download occurs during analysis. Registration
+hashes database bytes but keeps external database/model association explicitly
+user-attested. Bracken's external-report operation likewise retains declared
+provenance rather than fabricating a Workbench classification history. Exact
+read length is the default; representative-length mode is a recorded
+approximation. Paired abundance counts fragments, not twice as many mate reads.
+
+Source/evidence companions retain their creation-time pending-final status.
+The separate exact-final reports supersede that status without replacing any
+published bytes. Historical candidate/failure records remain preserved and are
+excluded from the 32 current pack identities. See the
+[pipeline guide](../docs/KRAKEN2-BRACKEN-PIPELINE.md) and
+[resource contract](../docs/METAGENOMICS-RESOURCES.md).
 
 ## Important current limits
 

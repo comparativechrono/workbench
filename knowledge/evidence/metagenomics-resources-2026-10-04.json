@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "recordedAt": "2026-10-04T21:02:27.248412+00:00",
+  "scope": "Focused local resource/archive contracts using synthetic byte files; no scientific executables, application or native importer executed.",
+  "hostPlatform": "linux",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "pythonVersion": "3.12.14",
+  "helper": {
+    "path": "tools/metagenomics/resources.py",
+    "sha256": "dd2c52caec9ac6d067e595230beab94429f4e38a278b5d06d3b22aa69c96e43d"
+  },
+  "command": "python3 -m unittest discover -s tests -p test_metagenomics_resources.py -v",
+  "nativeWindowsExecuted": false,
+  "nativeImporterExecuted": false,
+  "scientificExecutablesExecuted": false,
+  "summary": {
+    "tests": 17,
+    "passed": 17,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "testIds": [
+    "test_metagenomics_resources.ResourceContracts.test_01_registration_does_not_modify_or_copy_indexes",
+    "test_metagenomics_resources.ResourceContracts.test_02_large_unused_indexes_need_not_be_present_for_bracken",
+    "test_metagenomics_resources.ResourceContracts.test_03_changed_consumed_file_is_rejected",
+    "test_metagenomics_resources.ResourceContracts.test_04_relocation_keeps_database_identity",
+    "test_metagenomics_resources.ResourceContracts.test_05_duplicate_unknown_nonfinite_and_boolean_fields_rejected",
+    "test_metagenomics_resources.ResourceContracts.test_06_traversal_wrong_database_and_missing_length_rejected",
+    "test_metagenomics_resources.ResourceContracts.test_07_fragment_counts_no_hit_and_single_units",
+    "test_metagenomics_resources.ResourceContracts.test_08_report_must_be_ordinary_sibling_and_reparse_is_rejected",
+    "test_metagenomics_resources.ResourceContracts.test_09_external_distributions_require_explicit_attestation",
+    "test_metagenomics_resources.ResourceContracts.test_10_stream_archive_extracts_selected_files_and_records_original",
+    "test_metagenomics_resources.ResourceContracts.test_11_archive_links_traversal_collisions_prefix_and_missing_rejected_with_cleanup",
+    "test_metagenomics_resources.ResourceContracts.test_12_archive_disk_budget_checked_before_write",
+    "test_metagenomics_resources.ResourceContracts.test_13_archive_oversized_extension_header_is_rejected",
+    "test_metagenomics_resources.ResourceContracts.test_14_corrupt_and_truncated_gzip_trailers_fail_with_cleanup",
+    "test_metagenomics_resources.ResourceContracts.test_15_gnu_and_pax_sparse_parsers_are_rejected_before_reading_maps",
+    "test_metagenomics_resources.ResourceContracts.test_16_nested_extension_headers_are_bounded_before_recursive_parse",
+    "test_metagenomics_resources.ResourceContracts.test_17_classification_only_extracts_no_models_but_rejects_unsafe_skipped_members"
+  ],
+  "success": true,
+  "log": "test_01_registration_does_not_modify_or_copy_indexes (test_metagenomics_resources.ResourceContracts.test_01_registration_does_not_modify_or_copy_indexes) ... ok\ntest_02_large_unused_indexes_need_not_be_present_for_bracken (test_metagenomics_resources.ResourceContracts.test_02_large_unused_indexes_need_not_be_present_for_bracken) ... ok\ntest_03_changed_consumed_file_is_rejected (test_metagenomics_resources.ResourceContracts.test_03_changed_consumed_file_is_rejected) ... ok\ntest_04_relocation_keeps_database_identity (test_metagenomics_resources.ResourceContracts.test_04_relocation_keeps_database_identity) ... ok\ntest_05_duplicate_unknown_nonfinite_and_boolean_fields_rejected (test_metagenomics_resources.ResourceContracts.test_05_duplicate_unknown_nonfinite_and_boolean_fields_rejected) ... ok\ntest_06_traversal_wrong_database_and_missing_length_rejected (test_metagenomics_resources.ResourceContracts.test_06_traversal_wrong_database_and_missing_length_rejected) ... ok\ntest_07_fragment_counts_no_hit_and_single_units (test_metagenomics_resources.ResourceContracts.test_07_fragment_counts_no_hit_and_single_units) ... ok\ntest_08_report_must_be_ordinary_sibling_and_reparse_is_rejected (test_metagenomics_resources.ResourceContracts.test_08_report_must_be_ordinary_sibling_and_reparse_is_rejected) ... ok\ntest_09_external_distributions_require_explicit_attestation (test_metagenomics_resources.ResourceContracts.test_09_external_distributions_require_explicit_attestation) ... ok\ntest_10_stream_archive_extracts_selected_files_and_records_original (test_metagenomics_resources.ResourceContracts.test_10_stream_archive_extracts_selected_files_and_records_original) ... ok\ntest_11_archive_links_traversal_collisions_prefix_and_missing_rejected_with_cleanup (test_metagenomics_resources.ResourceContracts.test_11_archive_links_traversal_collisions_prefix_and_missing_rejected_with_cleanup) ... ok\ntest_12_archive_disk_budget_checked_before_write (test_metagenomics_resources.ResourceContracts.test_12_archive_disk_budget_checked_before_write) ... ok\ntest_13_archive_oversized_extension_header_is_rejected (test_metagenomics_resources.ResourceContracts.test_13_archive_oversized_extension_header_is_rejected) ... ok\ntest_14_corrupt_and_truncated_gzip_trailers_fail_with_cleanup (test_metagenomics_resources.ResourceContracts.test_14_corrupt_and_truncated_gzip_trailers_fail_with_cleanup) ... ok\ntest_15_gnu_and_pax_sparse_parsers_are_rejected_before_reading_maps (test_metagenomics_resources.ResourceContracts.test_15_gnu_and_pax_sparse_parsers_are_rejected_before_reading_maps) ... ok\ntest_16_nested_extension_headers_are_bounded_before_recursive_parse (test_metagenomics_resources.ResourceContracts.test_16_nested_extension_headers_are_bounded_before_recursive_parse) ... ok\ntest_17_classification_only_extracts_no_models_but_rejects_unsafe_skipped_members (test_metagenomics_resources.ResourceContracts.test_17_classification_only_extracts_no_models_but_rejects_unsafe_skipped_members) ... ok\n\n----------------------------------------------------------------------\nRan 17 tests in 0.095s\n\nOK\n"
+}

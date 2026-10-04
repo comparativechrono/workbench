@@ -4,7 +4,7 @@
   "project": "Native Workbench",
   "repository": "https://github.com/comparativechrono/workbench",
   "reviewed_on": "2026-10-04",
-  "source_baseline_commit": "24c6899aa7c19208ec88ae816879952ed0d8527e",
+  "source_baseline_commit": "289c4176561fe6c8bbbfba1e225cd65fbafb126d",
   "format": {
     "prose": "UTF-8 Markdown",
     "data": "JSON",
@@ -28,7 +28,16 @@
     "mosdepth_validation": "evidence/mosdepth-1.0.0-validation-2026-10-04.json",
     "snpeff_validation": "evidence/snpeff-1.0.0-validation-2026-10-04.json",
     "iqtree_validation": "evidence/iqtree-1.0.0-validation-2026-10-04.json",
-    "deseq2_validation": "evidence/deseq2-1.0.0-validation-2026-10-04.json"
+    "deseq2_validation": "evidence/deseq2-1.0.0-validation-2026-10-04.json",
+    "metagenomics_pipeline_guide": "../docs/KRAKEN2-BRACKEN-PIPELINE.md",
+    "metagenomics_resource_contract": "../docs/METAGENOMICS-RESOURCES.md",
+    "metagenomics_resource_validation": "evidence/metagenomics-resources-2026-10-04.json",
+    "kraken2_pack_guide": "../docs/KRAKEN2-PACK.md",
+    "bracken_pack_guide": "../docs/BRACKEN-PACK.md",
+    "kraken2_validation": "evidence/kraken2-1.0.0-validation-2026-10-04.json",
+    "bracken_validation": "evidence/bracken-1.0.0-validation-2026-10-04.json",
+    "kraken2_public_downloads": "evidence/kraken2-1.0.0-public-downloads-2026-10-04.json",
+    "bracken_public_downloads": "evidence/bracken-1.0.0-public-downloads-2026-10-04.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -40,7 +49,8 @@
     "Reviewable methods, DAG and execution provenance retained with results",
     "Immutable published packs and explicit saved-pipeline version pins",
     "Scientific known-answer checks separate from process exit status",
-    "Catalogue signatures, source provenance and third-party licensing preserved"
+    "Catalogue signatures, source provenance and third-party licensing preserved",
+    "Large scientific databases remain separate local inputs; hashes and explicit external-model declarations preserve their distinct evidence scopes"
   ],
   "maintenance": {
     "source_of_behavior": "Current checked-out source and reproducible observations",
