@@ -68,6 +68,10 @@ pipeline diagrams and execution records accompany results.
 
 ## Development and independent packs
 
+Start with the [project knowledge base](knowledge/README.md) for the approach,
+architecture, development methods, decisions, validation evidence and next steps.
+Agents should first read [AGENTS.md](AGENTS.md).
+
 This repository contains application source and pack development tools. Large
 executables, private runtimes, third-party source archives and pack ZIPs belong
 in release assets, not Git history. Application and pack tags can be released

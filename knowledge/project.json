@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "document_kind": "project-knowledge-index",
+  "project": "Native Workbench",
+  "repository": "https://github.com/comparativechrono/workbench",
+  "reviewed_on": "2026-10-04",
+  "source_baseline_commit": "9368c22058a3fe3cd434e7185fcaf5ff3fd6ce22",
+  "format": {
+    "prose": "UTF-8 Markdown",
+    "data": "JSON",
+    "note": "Repository-defined open files, not a claim of an external knowledge-format standard. Paths are relative to this file."
+  },
+  "entry_points": {
+    "agents": "../AGENTS.md",
+    "overview": "README.md",
+    "purpose_and_decisions": "purpose-and-decisions.md",
+    "architecture": "architecture.md",
+    "development": "development.md",
+    "pack_development": "pack-development.md",
+    "validation_and_releases": "validation-and-releases.md",
+    "current_state": "current-state.md",
+    "roadmap": "roadmap.md",
+    "release_inventory": "release-inventory.json"
+  },
+  "stable_constraints": [
+    "Local analysis with no hidden data uploads",
+    "Native Windows desktop entry point with no required browser, Docker or WSL",
+    "Real pinned upstream tools with documented portability patches",
+    "Independent app and pack versions; small starter",
+    "Declarative scientifically typed pack inputs, parameters and outputs",
+    "Individual operations and branching pipelines with explicit input provenance",
+    "Reviewable methods, DAG and execution provenance retained with results",
+    "Immutable published packs and explicit saved-pipeline version pins",
+    "Scientific known-answer checks separate from process exit status",
+    "Catalogue signatures, source provenance and third-party licensing preserved"
+  ],
+  "maintenance": {
+    "source_of_behavior": "Current checked-out source and reproducible observations",
+    "source_of_requirements": "Project owner decisions recorded in purpose-and-decisions.md",
+    "release_facts_are_dated": true,
+    "is_install_catalogue": false,
+    "contains_trust_material": false,
+    "update_rule": "Update affected topic and evidence after a change; refresh the dated release snapshot after publication."
+  }
+}

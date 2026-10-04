@@ -17,10 +17,11 @@ delivery mechanism; do not add an unreviewed source merely to populate the list.
 
 ## Repository and release layout
 
-Keep application releases in the application repository and pack recipes,
-fixtures and release assets in a separate pack repository. A pack release can be
-tagged `seqkit-pack-1.0.0`; a later `bowtie2-pack-1.0.1` release need not update the
-application or rebuild Seqkit. Preserve old release assets. Attach compiled pack
+This project keeps application source and pack recipes in one repository with
+independent tags: `app-v<version>` and `pack-<id>-v<version>`. A pack release need
+not update the application or rebuild another pack. A separate pack repository
+is optional. See the [repository publication guide](github-publication.md) for
+the accepted layout. Preserve old release assets. Attach compiled pack
 ZIPs, licence/source companions, build provenance and Windows validation evidence
 to the corresponding release.
 

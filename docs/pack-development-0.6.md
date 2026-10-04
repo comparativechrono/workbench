@@ -6,11 +6,13 @@ pack manager and compatibility checks. A pack owns its executable files,
 dependencies, declared commands, typed inputs and outputs, citations, fixtures
 and scientific assertions. Installing a new pack does not rebuild the app.
 
-Keep two repositories: the application source/SDK, and a pack repository with
-one folder per stable pack ID. A single pack repository can release each pack
-independently. Use immutable release tags such as `seqkit-pack-1.0.1`, not one
-shared tag that requires rebuilding every tool. Keep previous releases available
-for saved pipelines and reproducibility.
+This project uses one repository with independent application and pack tags,
+such as `app-v0.6.0` and `pack-seqkit-v0.5.2`. A separate pack repository is also
+possible, but is not required for independent releases. Do not use one shared
+tag that requires rebuilding every tool. Keep previous releases available for
+saved pipelines and reproducibility. See the
+[publishing guide](github-publication.md) and maintained
+[project knowledge base](../knowledge/README.md).
 
 ## Versions and identity
 
@@ -101,8 +103,8 @@ inventory. The current builder targets API 1 / application 0.6.0; a future
 minimum version increase needs an explicit builder/SDK change and compatibility
 tests, not an edit to an already published archive.
 
-Current importer limits are 1 GiB expanded per pack, 2,000 files plus implied
-folders, and 512 MiB per runtime file in the native pack contract. The archive
+Current importer limits are 1 GiB expanded per pack, 2,000 files and implied
+folders combined, and 512 MiB per runtime file in the native pack contract. The archive
 reader rejects unsafe paths, case collisions, links, extra files and changed
 hashes. Keep shallow paths to support managed Windows installations. Static
 validation does not run a scientific executable.
