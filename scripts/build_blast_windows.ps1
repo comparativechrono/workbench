@@ -43,7 +43,7 @@ $Configuration = @('-S',(Join-Path $Extracted 'c++\src'),'-B',$Build,'-G','Visua
     ('-DNCBI_PTBCFG_PROJECT_TARGETS='+($Targets -join ';')),
     '-DNCBI_COMPONENT_SQLITE3_FOUND=ON',('-DNCBI_COMPONENT_SQLITE3_INCLUDE='+(Join-Path $SqliteRoot 'include')),
     ('-DNCBI_COMPONENT_SQLITE3_LIBS='+(Join-Path $SqliteRoot 'lib\sqlite3.lib')),
-    '-DNCBI_PTBCFG_PROJECT_COMPONENTS=-NGHTTP2;-VDB;-ZSTD;-GNUTLS;-OpenSSL')
+    '-DNCBI_PTBCFG_PROJECT_COMPONENTS=-NGHTTP2;-VDB;-ZSTD;-GNUTLS')
 Checked-Run 'cmake' $Configuration
 Checked-Run 'cmake' (@('--build',$Build,'--config','Release','--parallel','2','--target')+$Targets)
 $Bin = Join-Path $Output 'bin'
