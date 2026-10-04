@@ -119,6 +119,29 @@ jobs:
           Invoke-WebRequest -Uri "https://raw.githubusercontent.com/$env:REPOSITORY/$env:SOURCE_COMMIT/tools/blast/check_offline.py" -OutFile $helper
           & $python -I $helper --app-root $app --pack-version $packVersion --report (Join-Path $env:RUNNER_TEMP 'blast-local-failures.json')
           if ($LASTEXITCODE -ne 0) { throw 'Native BLAST local failure-path check failed.' }
+      - name: Check GATK released application graph and archive contracts
+        if: startsWith(inputs.asset_name, 'native-workbench-pack-gatk-')
+        shell: pwsh
+        env:
+          CASE_FOLDER: ${{ matrix.folder }}
+          REPOSITORY: ${{ github.repository }}
+          SOURCE_COMMIT: ${{ github.sha }}
+          ASSET_NAME: ${{ inputs.asset_name }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if ($env:ASSET_NAME -notmatch '^native-workbench-pack-gatk-([0-9]+\.[0-9]+\.[0-9]+)\.zip$') { throw 'Invalid GATK pack identity.' }
+          $packVersion = $Matches[1]
+          $app = Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'native-workbench'
+          $python = Join-Path $app 'runtime/python/python.exe'
+          $helper = Join-Path $env:RUNNER_TEMP 'test_gatk_pipeline.py'
+          Invoke-WebRequest -Uri "https://raw.githubusercontent.com/$env:REPOSITORY/$env:SOURCE_COMMIT/tests/test_gatk_pipeline.py" -OutFile $helper
+          $env:NW_GATK_VERSION = $packVersion
+          $env:NW_GATK_STARTER_ZIP = Join-Path $env:RUNNER_TEMP 'application.zip'
+          $env:NW_GATK_PACK_DIR = Join-Path $app ('packs/gatk-' + $packVersion)
+          $env:NW_GATK_ARCHIVE = Join-Path $env:RUNNER_TEMP 'candidate.zip'
+          $env:NW_GATK_TEMP_DIR = Join-Path $env:RUNNER_TEMP 'gatk-contracts'
+          & $python -I $helper --report (Join-Path $env:RUNNER_TEMP 'gatk-graph-contracts.json')
+          if ($LASTEXITCODE -ne 0) { throw 'GATK released application graph/archive contracts failed.' }
       - name: Diagnose failed STAR process
         if: failure()
         shell: pwsh
@@ -143,6 +166,12 @@ jobs:
         env:
           CASE_FOLDER: ${{ matrix.folder }}
         run: |
+          $gatkGraph = Join-Path $env:RUNNER_TEMP 'gatk-graph-contracts.json'
+          if (Test-Path $gatkGraph) {
+            $gatkGraphText = Get-Content $gatkGraph -Raw
+            Write-Output $gatkGraphText
+            Add-Content $env:GITHUB_STEP_SUMMARY ('```json' + "`n" + $gatkGraphText + "`n" + '```')
+          }
           $blast = Join-Path $env:RUNNER_TEMP 'blast-local-failures.json'
           if (Test-Path $blast) {
             $blastText = Get-Content $blast -Raw
