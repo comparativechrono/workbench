@@ -4,7 +4,7 @@
   "project": "Native Workbench",
   "repository": "https://github.com/comparativechrono/workbench",
   "reviewed_on": "2026-10-04",
-  "source_baseline_commit": "eb4a255b69a2eabfb539937218a1d0e57c5776a3",
+  "source_baseline_commit": "24c6899aa7c19208ec88ae816879952ed0d8527e",
   "format": {
     "prose": "UTF-8 Markdown",
     "data": "JSON",
@@ -23,7 +23,12 @@
     "release_inventory": "release-inventory.json",
     "additional_pack_guide": "../docs/popular-packs-2026-10.md",
     "gatk_pack_guide": "../docs/GATK-PACK.md",
-    "gatk_validation": "evidence/gatk-1.0.0-validation-2026-10-04.json"
+    "gatk_validation": "evidence/gatk-1.0.0-validation-2026-10-04.json",
+    "annotation_expression_coverage_phylogeny_guide": "../docs/ANNOTATION-EXPRESSION-COVERAGE-PHYLOGENETICS.md",
+    "mosdepth_validation": "evidence/mosdepth-1.0.0-validation-2026-10-04.json",
+    "snpeff_validation": "evidence/snpeff-1.0.0-validation-2026-10-04.json",
+    "iqtree_validation": "evidence/iqtree-1.0.0-validation-2026-10-04.json",
+    "deseq2_validation": "evidence/deseq2-1.0.0-validation-2026-10-04.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",

@@ -1,0 +1,894 @@
+{
+  "schema": 1,
+  "kind": "native-workbench-exact-final-pack-validation",
+  "asOf": "2026-10-04",
+  "success": true,
+  "nativeWindowsHost": true,
+  "nativeWindowsExecuted": true,
+  "packId": "mosdepth",
+  "packVersion": "1.0.0",
+  "upstreamToolVersion": "0.3.14",
+  "runtimeToolVersion": "0.3.14-workbench1",
+  "minimumApplicationVersion": "0.6.0",
+  "release": {
+    "id": 403172983,
+    "tag": "pack-mosdepth-v1.0.0",
+    "url": "https://github.com/comparativechrono/workbench/releases/tag/pack-mosdepth-v1.0.0",
+    "targetCommitish": "ef54885e2702422494ec9d3de82e99c84cf3883a",
+    "prerelease": true,
+    "publishedAt": "2026-10-04T19:26:51Z",
+    "assets": [
+      {
+        "id": 610485178,
+        "name": "native-workbench-mosdepth-1.0.0-source-evidence.zip",
+        "bytes": 55793348,
+        "githubDigest": "sha256:7aebd360332636b323277bc54781cd6fb5ca2a63c3556a018c2f09cf46d7e43f",
+        "downloadUrl": "https://github.com/comparativechrono/workbench/releases/download/pack-mosdepth-v1.0.0/native-workbench-mosdepth-1.0.0-source-evidence.zip",
+        "createdAt": "2026-10-04T19:26:25Z",
+        "updatedAt": "2026-10-04T19:26:29Z"
+      },
+      {
+        "id": 610485117,
+        "name": "native-workbench-pack-mosdepth-1.0.0.zip",
+        "bytes": 39762901,
+        "githubDigest": "sha256:b642d231350ef8eba8975a2a493714329f30880daf2e3a90c4faad293f78adfc",
+        "downloadUrl": "https://github.com/comparativechrono/workbench/releases/download/pack-mosdepth-v1.0.0/native-workbench-pack-mosdepth-1.0.0.zip",
+        "createdAt": "2026-10-04T19:26:22Z",
+        "updatedAt": "2026-10-04T19:26:25Z"
+      }
+    ]
+  },
+  "packImplementationSourceCommit": "ef54885e2702422494ec9d3de82e99c84cf3883a",
+  "run": {
+    "id": 37228329920,
+    "url": "https://github.com/comparativechrono/workbench/actions/runs/37228329920",
+    "sourceCommit": "102e85e2ce38c750b521c70e532001dd55451509",
+    "status": "completed",
+    "conclusion": "success",
+    "startedAt": "2026-10-04T19:27:19Z",
+    "updatedAt": "2026-10-04T19:27:43Z",
+    "runner": "windows-2022"
+  },
+  "archive": {
+    "name": "native-workbench-pack-mosdepth-1.0.0.zip",
+    "bytes": 39762901,
+    "sha256": "b642d231350ef8eba8975a2a493714329f30880daf2e3a90c4faad293f78adfc",
+    "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94",
+    "downloadUrl": "https://github.com/comparativechrono/workbench/releases/download/pack-mosdepth-v1.0.0/native-workbench-pack-mosdepth-1.0.0.zip"
+  },
+  "sourceEvidenceCompanion": {
+    "name": "native-workbench-mosdepth-1.0.0-source-evidence.zip",
+    "bytes": 55793348,
+    "sha256": "7aebd360332636b323277bc54781cd6fb5ca2a63c3556a018c2f09cf46d7e43f",
+    "sourceCommit": "ef54885e2702422494ec9d3de82e99c84cf3883a",
+    "downloadUrl": "https://github.com/comparativechrono/workbench/releases/download/pack-mosdepth-v1.0.0/native-workbench-mosdepth-1.0.0-source-evidence.zip",
+    "creationTimeNativeFinalPendingStatusSupersededByThisReport": true,
+    "immutableBytesPreserved": true
+  },
+  "publicAssetVerification": {
+    "schema": 1,
+    "releaseTag": "pack-mosdepth-v1.0.0",
+    "assets": [
+      {
+        "name": "native-workbench-pack-mosdepth-1.0.0.zip",
+        "downloadUrl": "https://github.com/comparativechrono/workbench/releases/download/pack-mosdepth-v1.0.0/native-workbench-pack-mosdepth-1.0.0.zip",
+        "bytes": 39762901,
+        "sha256": "b642d231350ef8eba8975a2a493714329f30880daf2e3a90c4faad293f78adfc",
+        "independentlyDownloadedAndRehashedOn": "2026-10-04",
+        "matchesFrozenArtifact": true
+      },
+      {
+        "name": "native-workbench-mosdepth-1.0.0-source-evidence.zip",
+        "downloadUrl": "https://github.com/comparativechrono/workbench/releases/download/pack-mosdepth-v1.0.0/native-workbench-mosdepth-1.0.0-source-evidence.zip",
+        "bytes": 55793348,
+        "sha256": "7aebd360332636b323277bc54781cd6fb5ca2a63c3556a018c2f09cf46d7e43f",
+        "independentlyDownloadedAndRehashedOn": "2026-10-04",
+        "matchesFrozenArtifact": true
+      }
+    ],
+    "duplicateDownloadFilesRemovedAfterVerification": true
+  },
+  "releasedApplication": {
+    "version": "0.6.0",
+    "archiveName": "native-workbench-0.6.0-starter-windows.zip",
+    "sha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+    "downloadUrl": "https://github.com/comparativechrono/workbench/releases/download/app-v0.6.0/native-workbench-0.6.0-starter-windows.zip",
+    "nativeBridgeUsedForInstallationChecks": true
+  },
+  "summary": {
+    "pathConfigurations": [
+      "ordinary",
+      "path with spaces"
+    ],
+    "scientificInstallationChecksPassedPerPath": 4,
+    "installedPeScientificRegressionTestsPassedPerPath": 11,
+    "releasedApplicationGraphArchiveTestsPassedPerPath": 6,
+    "duplicateVersionRejectedInBothPaths": true,
+    "testFailures": 0,
+    "testErrors": 0,
+    "testSkips": 0,
+    "unrelatedConditionalWorkflowStepsSkippedAsExpected": true,
+    "linuxScientificTestsPassed": 12,
+    "linuxGraphArchiveTestsPassed": 6,
+    "exactFinalArchiveValidated": true
+  },
+  "jobs": [
+    {
+      "jobId": 111512535078,
+      "name": "native (ordinary)",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37228329920/job/111512535078",
+      "conclusion": "success",
+      "log": {
+        "file": "111512535078.log",
+        "bytes": 45275,
+        "sha256": "41fc997ea3655483f4996410bd0bafc0515125849488ad52b92446b603dc0748",
+        "note": "Complete connector-retrieved decoded job log, normalized to LF; retained with local release evidence."
+      },
+      "nativeInstallationReport": {
+        "schema": 1,
+        "nativeWindowsHost": true,
+        "nativeWindowsExecuted": true,
+        "success": true,
+        "packId": "mosdepth",
+        "packVersion": "1.0.0",
+        "installation": {
+          "type": "result",
+          "success": true,
+          "cancelled": false,
+          "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\packs\\mosdepth-1.0.0",
+          "message": "Tool pack imported.",
+          "outputs": [],
+          "pack_id": "mosdepth",
+          "pack_version": "1.0.0",
+          "packId": "mosdepth",
+          "packVersion": "1.0.0",
+          "publisherVerified": false,
+          "verification": "Complete file inventory verified; publisher identity not verified"
+        },
+        "scientificChecks": {
+          "schema": 1,
+          "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-192727-e09835ca",
+          "checks": [
+            {
+              "id": "mosdepth/coverage-mapq-0-flags-1796@1.0.0",
+              "pin": {
+                "packId": "mosdepth",
+                "packVersion": "1.0.0",
+                "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-192727-e09835ca\\run-20261004-192727-f59b4e38"
+            },
+            {
+              "id": "mosdepth/targets-mapq-0-flags-1796@1.0.0",
+              "pin": {
+                "packId": "mosdepth",
+                "packVersion": "1.0.0",
+                "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-192727-e09835ca\\run-20261004-192728-2744199d"
+            },
+            {
+              "id": "mosdepth/targets-mapq-20-flags-3844@1.0.0",
+              "pin": {
+                "packId": "mosdepth",
+                "packVersion": "1.0.0",
+                "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-192727-e09835ca\\run-20261004-192728-3ac66a2a"
+            },
+            {
+              "id": "mosdepth/targets-mapq-0-flags-772@1.0.0",
+              "pin": {
+                "packId": "mosdepth",
+                "packVersion": "1.0.0",
+                "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-192727-e09835ca\\run-20261004-192728-8d4ab8b1"
+            }
+          ],
+          "nativeWindowsExecuted": true,
+          "passed": 4,
+          "failed": 0,
+          "cancelled": false,
+          "success": true,
+          "message": "4 of 4 additional pack checks passed."
+        },
+        "duplicateVersionRejected": true
+      },
+      "scientificRegressionReport": {
+        "schema": 1,
+        "packId": "mosdepth",
+        "packVersion": "1.0.0",
+        "upstreamVersion": "0.3.14",
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "nativeWindowsExecuted": true,
+        "scientificExecutablesExecuted": true,
+        "officialLinuxComparisonExecuted": false,
+        "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94",
+        "testSourceSha256": "edccdd68d7db17caa6cc5c2feabbded134f40b9c54e67fa200c544be2645a9e7",
+        "testsRun": 11,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "durationSeconds": 1.229,
+        "success": true,
+        "details": {
+          "failures": [],
+          "errors": []
+        },
+        "scope": "Synthetic BAM coverage, CIGAR/overlap/filter truth, empty references/targets, full-dictionary streaming aggregation, validation guards, immutable inputs and installed files; no GUI/whole-genome/clinical claim."
+      },
+      "releasedApplicationGraphReport": {
+        "schema": 1,
+        "applicationVersion": "0.6.0",
+        "expectedPackVersions": {
+          "mosdepth": "1.0.0"
+        },
+        "testHost": "win32",
+        "pythonVersion": "3.13.16",
+        "nativeWindowsExecuted": false,
+        "scientificExecutablesExecuted": false,
+        "nativeImporterExecuted": false,
+        "scope": "Released-app graph contracts and Python archive import; checked copy callback substitutes native folder publication.",
+        "typingLimitations": {
+          "mosdepth": "Compressed per-base and region depth products use generic file types; they are not ordinary BED intervals."
+        },
+        "installedInventory": {
+          "packManifests": 4,
+          "executablesVerified": 8,
+          "assetsVerified": 8
+        },
+        "selectedPacks": [
+          {
+            "id": "mosdepth",
+            "version": "1.0.0",
+            "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94",
+            "operations": [
+              "coverage",
+              "targets"
+            ],
+            "scientificChecksDeclared": 4
+          }
+        ],
+        "offlineStaticImports": [
+          {
+            "id": "mosdepth",
+            "version": "1.0.0",
+            "archiveSha256": "b642d231350ef8eba8975a2a493714329f30880daf2e3a90c4faad293f78adfc",
+            "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94",
+            "archiveMatchesGraphPayload": true,
+            "duplicateVersionRejected": true,
+            "installedFilesAndReceiptsUnchanged": true,
+            "publisherVerified": false
+          }
+        ],
+        "starterPackFilesPreserved": 143,
+        "coverageGuards": {
+          "querynameOrderRejected": true,
+          "unrelatedVcfRejected": true,
+          "bamPreflightHelperOwnedByPack": true
+        },
+        "coverageBranchesGraph": {
+          "tools": [
+            "bam/prepare",
+            "mosdepth/coverage",
+            "mosdepth/targets",
+            "builtin/report"
+          ],
+          "ranks": [
+            {
+              "rank": 1,
+              "nodes": [
+                "step-1"
+              ]
+            },
+            {
+              "rank": 2,
+              "nodes": [
+                "step-2",
+                "step-3"
+              ]
+            },
+            {
+              "rank": 3,
+              "nodes": [
+                "step-4"
+              ]
+            }
+          ],
+          "savedPins": [
+            {
+              "packId": "bam",
+              "packVersion": "0.4.0",
+              "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+            },
+            {
+              "packId": "mosdepth",
+              "packVersion": "1.0.0",
+              "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94"
+            },
+            {
+              "packId": "mosdepth",
+              "packVersion": "1.0.0",
+              "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94"
+            },
+            {
+              "packId": "builtin",
+              "packVersion": "0.5.0",
+              "manifestSha256": "84cf3dc5da9e07bca439af537312846933105215153ce6fa533f8a88e1e3a209"
+            }
+          ],
+          "namedMethodsProvenance": true,
+          "changedSavedManifestRejected": true
+        },
+        "releasedApplicationFilesVerified": [
+          "WorkbenchBridge.exe",
+          "workspace/app_version.py",
+          "workspace/catalog-sources.json",
+          "workspace/catalog.py",
+          "workspace/core_checks.py",
+          "workspace/desktop_host.py",
+          "workspace/desktop_model.py",
+          "workspace/engine.py",
+          "workspace/example.py",
+          "workspace/pack_checks.py",
+          "workspace/pack_manager.py",
+          "workspace/pack_security.py",
+          "workspace/service.py",
+          "workspace/starter-check-profile.json",
+          "workspace/verify_installation.py"
+        ],
+        "starterSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+        "dependencies": {},
+        "presetAndOriginalPinContracts": [
+          "mosdepth/coverage",
+          "mosdepth/targets"
+        ],
+        "testsRun": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "testSourceSha256": "249e3919d668a0995803ced740346fbddb663178deb2053d15334aeaf73fa908",
+        "success": true
+      }
+    },
+    {
+      "jobId": 111512535206,
+      "name": "native (path with spaces)",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37228329920/job/111512535206",
+      "conclusion": "success",
+      "log": {
+        "file": "111512535206.log",
+        "bytes": 45368,
+        "sha256": "c703dd268d1240bdcd33615e4683d4bfc525ed22ca21ffa11a68b64c464f166f",
+        "note": "Complete connector-retrieved decoded job log, normalized to LF; retained with local release evidence."
+      },
+      "nativeInstallationReport": {
+        "schema": 1,
+        "nativeWindowsHost": true,
+        "nativeWindowsExecuted": true,
+        "success": true,
+        "packId": "mosdepth",
+        "packVersion": "1.0.0",
+        "installation": {
+          "type": "result",
+          "success": true,
+          "cancelled": false,
+          "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\packs\\mosdepth-1.0.0",
+          "message": "Tool pack imported.",
+          "outputs": [],
+          "pack_id": "mosdepth",
+          "pack_version": "1.0.0",
+          "packId": "mosdepth",
+          "packVersion": "1.0.0",
+          "publisherVerified": false,
+          "verification": "Complete file inventory verified; publisher identity not verified"
+        },
+        "scientificChecks": {
+          "schema": 1,
+          "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-192728-12db7b66",
+          "checks": [
+            {
+              "id": "mosdepth/coverage-mapq-0-flags-1796@1.0.0",
+              "pin": {
+                "packId": "mosdepth",
+                "packVersion": "1.0.0",
+                "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-192728-12db7b66\\run-20261004-192728-1db34e83"
+            },
+            {
+              "id": "mosdepth/targets-mapq-0-flags-1796@1.0.0",
+              "pin": {
+                "packId": "mosdepth",
+                "packVersion": "1.0.0",
+                "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-192728-12db7b66\\run-20261004-192728-d771a303"
+            },
+            {
+              "id": "mosdepth/targets-mapq-20-flags-3844@1.0.0",
+              "pin": {
+                "packId": "mosdepth",
+                "packVersion": "1.0.0",
+                "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-192728-12db7b66\\run-20261004-192728-c859410a"
+            },
+            {
+              "id": "mosdepth/targets-mapq-0-flags-772@1.0.0",
+              "pin": {
+                "packId": "mosdepth",
+                "packVersion": "1.0.0",
+                "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-192728-12db7b66\\run-20261004-192728-a97e6a62"
+            }
+          ],
+          "nativeWindowsExecuted": true,
+          "passed": 4,
+          "failed": 0,
+          "cancelled": false,
+          "success": true,
+          "message": "4 of 4 additional pack checks passed."
+        },
+        "duplicateVersionRejected": true
+      },
+      "scientificRegressionReport": {
+        "schema": 1,
+        "packId": "mosdepth",
+        "packVersion": "1.0.0",
+        "upstreamVersion": "0.3.14",
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "nativeWindowsExecuted": true,
+        "scientificExecutablesExecuted": true,
+        "officialLinuxComparisonExecuted": false,
+        "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94",
+        "testSourceSha256": "edccdd68d7db17caa6cc5c2feabbded134f40b9c54e67fa200c544be2645a9e7",
+        "testsRun": 11,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "durationSeconds": 1.806,
+        "success": true,
+        "details": {
+          "failures": [],
+          "errors": []
+        },
+        "scope": "Synthetic BAM coverage, CIGAR/overlap/filter truth, empty references/targets, full-dictionary streaming aggregation, validation guards, immutable inputs and installed files; no GUI/whole-genome/clinical claim."
+      },
+      "releasedApplicationGraphReport": {
+        "schema": 1,
+        "applicationVersion": "0.6.0",
+        "expectedPackVersions": {
+          "mosdepth": "1.0.0"
+        },
+        "testHost": "win32",
+        "pythonVersion": "3.13.16",
+        "nativeWindowsExecuted": false,
+        "scientificExecutablesExecuted": false,
+        "nativeImporterExecuted": false,
+        "scope": "Released-app graph contracts and Python archive import; checked copy callback substitutes native folder publication.",
+        "typingLimitations": {
+          "mosdepth": "Compressed per-base and region depth products use generic file types; they are not ordinary BED intervals."
+        },
+        "installedInventory": {
+          "packManifests": 4,
+          "executablesVerified": 8,
+          "assetsVerified": 8
+        },
+        "selectedPacks": [
+          {
+            "id": "mosdepth",
+            "version": "1.0.0",
+            "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94",
+            "operations": [
+              "coverage",
+              "targets"
+            ],
+            "scientificChecksDeclared": 4
+          }
+        ],
+        "offlineStaticImports": [
+          {
+            "id": "mosdepth",
+            "version": "1.0.0",
+            "archiveSha256": "b642d231350ef8eba8975a2a493714329f30880daf2e3a90c4faad293f78adfc",
+            "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94",
+            "archiveMatchesGraphPayload": true,
+            "duplicateVersionRejected": true,
+            "installedFilesAndReceiptsUnchanged": true,
+            "publisherVerified": false
+          }
+        ],
+        "starterPackFilesPreserved": 143,
+        "coverageGuards": {
+          "querynameOrderRejected": true,
+          "unrelatedVcfRejected": true,
+          "bamPreflightHelperOwnedByPack": true
+        },
+        "coverageBranchesGraph": {
+          "tools": [
+            "bam/prepare",
+            "mosdepth/coverage",
+            "mosdepth/targets",
+            "builtin/report"
+          ],
+          "ranks": [
+            {
+              "rank": 1,
+              "nodes": [
+                "step-1"
+              ]
+            },
+            {
+              "rank": 2,
+              "nodes": [
+                "step-2",
+                "step-3"
+              ]
+            },
+            {
+              "rank": 3,
+              "nodes": [
+                "step-4"
+              ]
+            }
+          ],
+          "savedPins": [
+            {
+              "packId": "bam",
+              "packVersion": "0.4.0",
+              "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+            },
+            {
+              "packId": "mosdepth",
+              "packVersion": "1.0.0",
+              "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94"
+            },
+            {
+              "packId": "mosdepth",
+              "packVersion": "1.0.0",
+              "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94"
+            },
+            {
+              "packId": "builtin",
+              "packVersion": "0.5.0",
+              "manifestSha256": "84cf3dc5da9e07bca439af537312846933105215153ce6fa533f8a88e1e3a209"
+            }
+          ],
+          "namedMethodsProvenance": true,
+          "changedSavedManifestRejected": true
+        },
+        "releasedApplicationFilesVerified": [
+          "WorkbenchBridge.exe",
+          "workspace/app_version.py",
+          "workspace/catalog-sources.json",
+          "workspace/catalog.py",
+          "workspace/core_checks.py",
+          "workspace/desktop_host.py",
+          "workspace/desktop_model.py",
+          "workspace/engine.py",
+          "workspace/example.py",
+          "workspace/pack_checks.py",
+          "workspace/pack_manager.py",
+          "workspace/pack_security.py",
+          "workspace/service.py",
+          "workspace/starter-check-profile.json",
+          "workspace/verify_installation.py"
+        ],
+        "starterSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+        "dependencies": {},
+        "presetAndOriginalPinContracts": [
+          "mosdepth/coverage",
+          "mosdepth/targets"
+        ],
+        "testsRun": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "testSourceSha256": "249e3919d668a0995803ced740346fbddb663178deb2053d15334aeaf73fa908",
+        "success": true
+      }
+    }
+  ],
+  "precedingCandidate": {
+    "version": "0.0.1",
+    "archiveSha256": "987ae322f518d42049ae396531f5a3877d5007737ebbda7be902784195c7539d",
+    "manifestSha256": "4754d2731c4da6bcf4b4eaa19126bd0000af707e3f32eaf497ecc4d57d784a5a",
+    "run": {
+      "id": 37227722575,
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37227722575",
+      "sourceCommit": "ef54885e2702422494ec9d3de82e99c84cf3883a",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-10-04T19:17:43Z",
+      "updatedAt": "2026-10-04T19:18:15Z",
+      "runner": "windows-2022"
+    },
+    "correspondenceFile": "mosdepth-0.0.1-correspondence.json",
+    "correspondenceSha256": "01948dfef3e392009f30b8bc7987e05886a4bb6e56ca51da0c4e0cd5a2fda43f",
+    "scope": "Candidate previously passed four installation checks, six graph/archive tests and eleven installed-PE regressions per path. Only version and permitted README warning differ; correspondence is preserved. This report independently validates the final 1.0.0 ZIP, not merely its candidate."
+  },
+  "linuxScientificEvidence": {
+    "file": "evidence/linux-scientific.json in source/evidence companion",
+    "sha256": "61cee1775195ad26bf7ef2526552d491b303e15ec8c34a3460dcac4a58b615c2",
+    "report": {
+      "schema": 1,
+      "packId": "mosdepth",
+      "packVersion": "1.0.0",
+      "upstreamVersion": "0.3.14",
+      "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+      "nativeWindowsExecuted": false,
+      "scientificExecutablesExecuted": true,
+      "officialLinuxComparisonExecuted": true,
+      "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94",
+      "testSourceSha256": "edccdd68d7db17caa6cc5c2feabbded134f40b9c54e67fa200c544be2645a9e7",
+      "testsRun": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "durationSeconds": 0.897,
+      "success": true,
+      "details": {
+        "failures": [],
+        "errors": []
+      },
+      "scope": "Synthetic BAM coverage, CIGAR/overlap/filter truth, empty references/targets, full-dictionary streaming aggregation, validation guards, immutable inputs and installed files; no GUI/whole-genome/clinical claim."
+    }
+  },
+  "linuxGraphArchiveEvidence": {
+    "file": "evidence/released-app-graph-contracts.json in source/evidence companion",
+    "sha256": "b5da9370e094b056c789345d4d8553690cad90f209fbef12f3f6a86d2cdd3746",
+    "report": {
+      "schema": 1,
+      "applicationVersion": "0.6.0",
+      "expectedPackVersions": {
+        "mosdepth": "1.0.0"
+      },
+      "testHost": "linux",
+      "pythonVersion": "3.12.14",
+      "nativeWindowsExecuted": false,
+      "scientificExecutablesExecuted": false,
+      "nativeImporterExecuted": false,
+      "scope": "Released-app graph contracts and Python archive import; checked copy callback substitutes native folder publication.",
+      "typingLimitations": {
+        "mosdepth": "Compressed per-base and region depth products use generic file types; they are not ordinary BED intervals."
+      },
+      "installedInventory": {
+        "packManifests": 4,
+        "executablesVerified": 8,
+        "assetsVerified": 8
+      },
+      "selectedPacks": [
+        {
+          "id": "mosdepth",
+          "version": "1.0.0",
+          "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94",
+          "operations": [
+            "coverage",
+            "targets"
+          ],
+          "scientificChecksDeclared": 4
+        }
+      ],
+      "offlineStaticImports": [
+        {
+          "id": "mosdepth",
+          "version": "1.0.0",
+          "archiveSha256": "b642d231350ef8eba8975a2a493714329f30880daf2e3a90c4faad293f78adfc",
+          "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94",
+          "archiveMatchesGraphPayload": true,
+          "duplicateVersionRejected": true,
+          "installedFilesAndReceiptsUnchanged": true,
+          "publisherVerified": false
+        }
+      ],
+      "starterPackFilesPreserved": 143,
+      "coverageGuards": {
+        "querynameOrderRejected": true,
+        "unrelatedVcfRejected": true,
+        "bamPreflightHelperOwnedByPack": true
+      },
+      "coverageBranchesGraph": {
+        "tools": [
+          "bam/prepare",
+          "mosdepth/coverage",
+          "mosdepth/targets",
+          "builtin/report"
+        ],
+        "ranks": [
+          {
+            "rank": 1,
+            "nodes": [
+              "step-1"
+            ]
+          },
+          {
+            "rank": 2,
+            "nodes": [
+              "step-2",
+              "step-3"
+            ]
+          },
+          {
+            "rank": 3,
+            "nodes": [
+              "step-4"
+            ]
+          }
+        ],
+        "savedPins": [
+          {
+            "packId": "bam",
+            "packVersion": "0.4.0",
+            "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+          },
+          {
+            "packId": "mosdepth",
+            "packVersion": "1.0.0",
+            "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94"
+          },
+          {
+            "packId": "mosdepth",
+            "packVersion": "1.0.0",
+            "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94"
+          },
+          {
+            "packId": "builtin",
+            "packVersion": "0.5.0",
+            "manifestSha256": "84cf3dc5da9e07bca439af537312846933105215153ce6fa533f8a88e1e3a209"
+          }
+        ],
+        "namedMethodsProvenance": true,
+        "changedSavedManifestRejected": true
+      },
+      "releasedApplicationFilesVerified": [
+        "WorkbenchBridge.exe",
+        "workspace/app_version.py",
+        "workspace/catalog-sources.json",
+        "workspace/catalog.py",
+        "workspace/core_checks.py",
+        "workspace/desktop_host.py",
+        "workspace/desktop_model.py",
+        "workspace/engine.py",
+        "workspace/example.py",
+        "workspace/pack_checks.py",
+        "workspace/pack_manager.py",
+        "workspace/pack_security.py",
+        "workspace/service.py",
+        "workspace/starter-check-profile.json",
+        "workspace/verify_installation.py"
+      ],
+      "starterSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+      "dependencies": {},
+      "presetAndOriginalPinContracts": [
+        "mosdepth/coverage",
+        "mosdepth/targets"
+      ],
+      "testsRun": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "testSourceSha256": "09eb104b515c9ea6d6c6cd3b95b5c2d2308235d923152629d69a4d0b0866a1b1",
+      "success": true
+    }
+  },
+  "staticIntegrityEvidence": {
+    "file": "evidence/static-integrity.json in source/evidence companion",
+    "sha256": "d82ef130082a5a34f5b0930a2e40818c7fa05cabdb570629722f46382d967428",
+    "validation": "static-integrity-only",
+    "archiveSha256": "b642d231350ef8eba8975a2a493714329f30880daf2e3a90c4faad293f78adfc",
+    "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94"
+  },
+  "buildEvidence": {
+    "windows": {
+      "file": "build/windows/build.json in source/evidence companion",
+      "sha256": "77b7c8719827811408f520016acebe19d4e2b97ac04092ec8d73cc630c057486",
+      "patchSha256": "4620bd3ae4e65928f98f600da302cb2bfe60c9c0f766ffb5be2f7e1bc072a2d8",
+      "files": {
+        "mosdepth.exe": {
+          "sha256": "50bb059d4523d1634e0c2fe54eb86cc2be0b9acfc43f7569afbaf52a3df455da",
+          "bytes": 803840,
+          "imports": [
+            "api-ms-win-crt-stdio-l1-1-0.dll",
+            "api-ms-win-crt-runtime-l1-1-0.dll",
+            "api-ms-win-crt-environment-l1-1-0.dll",
+            "api-ms-win-crt-private-l1-1-0.dll",
+            "api-ms-win-crt-locale-l1-1-0.dll",
+            "api-ms-win-crt-heap-l1-1-0.dll",
+            "api-ms-win-crt-string-l1-1-0.dll",
+            "KERNEL32.dll",
+            "api-ms-win-crt-math-l1-1-0.dll",
+            "api-ms-win-crt-filesystem-l1-1-0.dll",
+            "api-ms-win-crt-convert-l1-1-0.dll"
+          ]
+        },
+        "mosdepth-guard.exe": {
+          "sha256": "ae7ff808af2ade3b0319da0641dcab09902fba52104d121c26e32024873f6a37",
+          "bytes": 2903552,
+          "imports": [
+            "api-ms-win-crt-stdio-l1-1-0.dll",
+            "api-ms-win-crt-runtime-l1-1-0.dll",
+            "api-ms-win-crt-locale-l1-1-0.dll",
+            "api-ms-win-crt-heap-l1-1-0.dll",
+            "api-ms-win-crt-private-l1-1-0.dll",
+            "api-ms-win-crt-string-l1-1-0.dll",
+            "KERNEL32.dll",
+            "api-ms-win-crt-convert-l1-1-0.dll",
+            "api-ms-win-crt-time-l1-1-0.dll",
+            "api-ms-win-crt-utility-l1-1-0.dll",
+            "api-ms-win-crt-filesystem-l1-1-0.dll",
+            "api-ms-win-crt-multibyte-l1-1-0.dll",
+            "api-ms-win-crt-math-l1-1-0.dll",
+            "api-ms-win-crt-environment-l1-1-0.dll",
+            "WS2_32.dll"
+          ]
+        },
+        "libhts.dll": {
+          "sha256": "79c722f36ab308689649c0f82a4bdd8356a0bb229cf40467958a83c2bc301298",
+          "bytes": 2006528,
+          "imports": [
+            "WS2_32.dll",
+            "api-ms-win-crt-stdio-l1-1-0.dll",
+            "api-ms-win-crt-runtime-l1-1-0.dll",
+            "api-ms-win-crt-string-l1-1-0.dll",
+            "api-ms-win-crt-time-l1-1-0.dll",
+            "api-ms-win-crt-convert-l1-1-0.dll",
+            "api-ms-win-crt-utility-l1-1-0.dll",
+            "api-ms-win-crt-heap-l1-1-0.dll",
+            "api-ms-win-crt-math-l1-1-0.dll",
+            "api-ms-win-crt-environment-l1-1-0.dll",
+            "api-ms-win-crt-private-l1-1-0.dll",
+            "api-ms-win-crt-filesystem-l1-1-0.dll",
+            "KERNEL32.dll",
+            "api-ms-win-crt-locale-l1-1-0.dll"
+          ]
+        }
+      }
+    },
+    "linux": {
+      "file": "build/linux/build.json in source/evidence companion",
+      "sha256": "1b8b2d992dab4f07c3c4f647c7e57c553664d2ae6bda9359fc673e1e791d5573",
+      "patchSha256": "4620bd3ae4e65928f98f600da302cb2bfe60c9c0f766ffb5be2f7e1bc072a2d8",
+      "files": {
+        "mosdepth": {
+          "sha256": "3f1213bb59ee0f975e2e7d350b218c5b5a80207bb6ee00acf54d22175d006065",
+          "bytes": 737360
+        },
+        "mosdepth-guard": {
+          "sha256": "286d8a9978572d5c2d15c1d6e988c62194d13b610adfa0c4beefb8444eef5499",
+          "bytes": 1011752
+        },
+        "libhts.so": {
+          "sha256": "62e37274fa9a2afb970eb75ff971e61f75d6892906e3af38495a2d639c780759",
+          "bytes": 1260072
+        }
+      }
+    },
+    "note": "Build-time nativeWindowsExecuted=false correctly records that cross-compilation itself did not execute Windows. Exact-final native evidence above supplements the immutable build record."
+  },
+  "scientificScope": [
+    "Two exposed operations: BAM-reference coverage and nonoverlapping target BED depth/breadth. Accurate upstream CIGAR processing and proper-pair overlap correction, with explicit MAPQ/flag masks and no base-quality filter.",
+    "Independent synthetic truth covers deletions, splice gaps, pair overlap, low MAPQ, Q0 bases, secondary/duplicate/QC-failed/supplementary flags, empty regions/contigs/BAM, full denominators, and threads 1/2/4.",
+    "The primary summary is a separately identified streaming length-weighted aggregation of upstream per-base intervals over every BAM dictionary/target base. Raw upstream observed-contig summary/distributions remain unchanged; their denominators can differ.",
+    "The Linux suite also compares raw scientific output with the hash-pinned official unmodified mosdepth 0.3.14 binary under four configurations."
+  ],
+  "boundaries": [
+    "Native installation checks use the actual released Workbench bridge/importer/scientific runner; graph/archive tests use a copy-based publication callback and do not themselves execute the native importer or scientific programs. Direct installed-PE regression execution is recorded separately.",
+    "Research/teaching synthetic validation; no clinical, diagnostic, regulatory or institutional approval claim. No whole-human-genome/resource-performance benchmark.",
+    "No interactive desktop GUI, cancellation, Unicode/long-path or Windows network-firewall test. Ordinary and space-containing ASCII Windows paths were exercised. Analysis exposes only explicit local BAM/BED files; CRAM, SAM and remote analyses are not exposed.",
+    "The BAM reference dictionary defines denominators; assembly identity is not verified against FASTA. All BAM samples/read groups are aggregated. RNA BAM coverage is genomic coverage, not differential expression.",
+    "Mosdepth requires roughly four bytes times the longest contig length, plus overhead. Workbench stages a full BAM copy, creates CSI and retains potentially large per-base BGZF output.",
+    "Three-line boundary patch fixes report precision, ignores implicit REF_PATH for BAM-only use and labels the runtime; coverage algorithms are unchanged.",
+    "Publisher identity is not authenticated by offline SHA/inventory verification. The signed catalogue/trust deployment is a separate unfinished project task."
+  ]
+}

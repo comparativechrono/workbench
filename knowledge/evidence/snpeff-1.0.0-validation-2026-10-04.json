@@ -1,0 +1,1053 @@
+{
+  "schema": 1,
+  "kind": "native-workbench-exact-final-release-validation",
+  "createdAt": "2026-10-04T19:50:13.366158+00:00",
+  "success": true,
+  "nativeWindowsExecuted": true,
+  "repository": "https://github.com/comparativechrono/workbench",
+  "releaseTag": "pack-snpeff-v1.0.0",
+  "releaseUrl": "https://github.com/comparativechrono/workbench/releases/tag/pack-snpeff-v1.0.0",
+  "pack": {
+    "id": "snpeff",
+    "version": "1.0.0",
+    "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f",
+    "archive": {
+      "path": "native-workbench-pack-snpeff-1.0.0.zip",
+      "bytes": 498014278,
+      "sha256": "9d15121c7e9615d7d31937c8bdfb8983dd680e39077ca137ce69793c5b31b570"
+    },
+    "minAppVersion": "0.6.0",
+    "upstreamScientificVersion": "SnpEff/SnpSift 5.4c",
+    "runtime": "private Temurin 21.0.9+10 Windows x64"
+  },
+  "application": {
+    "version": "0.6.0",
+    "archiveSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+    "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.6.0/native-workbench-0.6.0-starter-windows.zip"
+  },
+  "run": {
+    "id": 37229552990,
+    "url": "https://github.com/comparativechrono/workbench/actions/runs/37229552990",
+    "workflowSourceCommit": "24c6899aa7c19208ec88ae816879952ed0d8527e",
+    "sourceUrl": "https://github.com/comparativechrono/workbench/tree/24c6899aa7c19208ec88ae816879952ed0d8527e",
+    "runner": "windows-2022"
+  },
+  "totalsPerPath": {
+    "nativeChecksPassed": 4,
+    "graphTestsPassed": 6,
+    "scientificRegressionsPassed": 13,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "jobs": [
+    {
+      "jobId": 111516143233,
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37229552990/job/111516143233",
+      "pathKind": "path with spaces",
+      "conclusion": "success",
+      "native": {
+        "schema": 1,
+        "nativeWindowsHost": true,
+        "nativeWindowsExecuted": true,
+        "success": true,
+        "packId": "snpeff",
+        "packVersion": "1.0.0",
+        "installation": {
+          "type": "result",
+          "success": true,
+          "cancelled": false,
+          "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\packs\\snpeff-1.0.0",
+          "message": "Tool pack imported.",
+          "outputs": [],
+          "pack_id": "snpeff",
+          "pack_version": "1.0.0",
+          "packId": "snpeff",
+          "packVersion": "1.0.0",
+          "publisherVerified": false,
+          "verification": "Complete file inventory verified; publisher identity not verified"
+        },
+        "scientificChecks": {
+          "schema": 1,
+          "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-194651-923ac1da",
+          "checks": [
+            {
+              "id": "snpeff/build-known-cds@1.0.0",
+              "pin": {
+                "packId": "snpeff",
+                "packVersion": "1.0.0",
+                "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-194651-923ac1da\\run-20261004-194651-8eb25b70"
+            },
+            {
+              "id": "snpeff/known-codon-consequences@1.0.0",
+              "pin": {
+                "packId": "snpeff",
+                "packVersion": "1.0.0",
+                "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-194651-923ac1da\\run-20261004-194653-b3064f39"
+            },
+            {
+              "id": "snpeff/local-allele-specific-info@1.0.0",
+              "pin": {
+                "packId": "snpeff",
+                "packVersion": "1.0.0",
+                "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-194651-923ac1da\\run-20261004-194654-2ed34fc6"
+            },
+            {
+              "id": "snpeff/select-high-impact@1.0.0",
+              "pin": {
+                "packId": "snpeff",
+                "packVersion": "1.0.0",
+                "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-194651-923ac1da\\run-20261004-194655-c700ab26"
+            }
+          ],
+          "nativeWindowsExecuted": true,
+          "passed": 4,
+          "failed": 0,
+          "cancelled": false,
+          "success": true,
+          "message": "4 of 4 additional pack checks passed."
+        },
+        "duplicateVersionRejected": true
+      },
+      "graph": {
+        "schema": 1,
+        "applicationVersion": "0.6.0",
+        "expectedPackVersions": {
+          "snpeff": "1.0.0"
+        },
+        "testHost": "win32",
+        "pythonVersion": "3.13.16",
+        "nativeWindowsExecuted": false,
+        "scientificExecutablesExecuted": false,
+        "nativeImporterExecuted": false,
+        "scope": "Released-app graph contracts and Python archive import; checked copy callback substitutes native folder publication.",
+        "typingLimitations": {
+          "snpeff": "Local database ZIPs are generic files. Database assembly/annotation identity and reference compatibility require the separately tested adapter."
+        },
+        "installedInventory": {
+          "packManifests": 4,
+          "executablesVerified": 6,
+          "assetsVerified": 329
+        },
+        "selectedPacks": [
+          {
+            "id": "snpeff",
+            "version": "1.0.0",
+            "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f",
+            "operations": [
+              "annotate",
+              "annotate-local",
+              "build-database",
+              "filter-impact"
+            ],
+            "scientificChecksDeclared": 4
+          }
+        ],
+        "offlineStaticImports": [
+          {
+            "id": "snpeff",
+            "version": "1.0.0",
+            "archiveSha256": "9d15121c7e9615d7d31937c8bdfb8983dd680e39077ca137ce69793c5b31b570",
+            "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f",
+            "archiveMatchesGraphPayload": true,
+            "duplicateVersionRejected": true,
+            "installedFilesAndReceiptsUnchanged": true,
+            "publisherVerified": false
+          }
+        ],
+        "starterPackFilesPreserved": 143,
+        "releasedApplicationFilesVerified": [
+          "WorkbenchBridge.exe",
+          "workspace/app_version.py",
+          "workspace/catalog-sources.json",
+          "workspace/catalog.py",
+          "workspace/core_checks.py",
+          "workspace/desktop_host.py",
+          "workspace/desktop_model.py",
+          "workspace/engine.py",
+          "workspace/example.py",
+          "workspace/pack_checks.py",
+          "workspace/pack_manager.py",
+          "workspace/pack_security.py",
+          "workspace/service.py",
+          "workspace/starter-check-profile.json",
+          "workspace/verify_installation.py"
+        ],
+        "starterSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+        "dependencies": {},
+        "annotationTypeGuards": {
+          "bamRejected": true,
+          "genericFileRejectedAtOrdinaryVcfPort": true,
+          "consequenceSelectionDoesNotInventPassState": true
+        },
+        "localVariantAnnotationGraph": {
+          "tools": [
+            "snpeff/build-database",
+            "variants/call",
+            "snpeff/annotate",
+            "snpeff/annotate",
+            "snpeff/filter-impact",
+            "snpeff/annotate-local"
+          ],
+          "ranks": [
+            {
+              "rank": 1,
+              "nodes": [
+                "step-1",
+                "step-2"
+              ]
+            },
+            {
+              "rank": 2,
+              "nodes": [
+                "step-3",
+                "step-4"
+              ]
+            },
+            {
+              "rank": 3,
+              "nodes": [
+                "step-5",
+                "step-6"
+              ]
+            }
+          ],
+          "savedPins": [
+            {
+              "packId": "snpeff",
+              "packVersion": "1.0.0",
+              "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f"
+            },
+            {
+              "packId": "variants",
+              "packVersion": "0.4.0",
+              "manifestSha256": "ea4b7f0a6c28709e4190b6514c07cbf7bdd58e1a4f2a2d931f2cae3ce6ec3795"
+            },
+            {
+              "packId": "snpeff",
+              "packVersion": "1.0.0",
+              "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f"
+            },
+            {
+              "packId": "snpeff",
+              "packVersion": "1.0.0",
+              "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f"
+            },
+            {
+              "packId": "snpeff",
+              "packVersion": "1.0.0",
+              "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f"
+            },
+            {
+              "packId": "snpeff",
+              "packVersion": "1.0.0",
+              "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f"
+            }
+          ],
+          "namedMethodsProvenance": true,
+          "changedSavedManifestRejected": true
+        },
+        "presetAndOriginalPinContracts": [
+          "snpeff/build-database",
+          "snpeff/annotate",
+          "snpeff/annotate-local",
+          "snpeff/filter-impact"
+        ],
+        "testsRun": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "testSourceSha256": "249e3919d668a0995803ced740346fbddb663178deb2053d15334aeaf73fa908",
+        "success": true
+      },
+      "scientific": {
+        "schema": "native-workbench-snpeff-regression-v1",
+        "packId": "snpeff",
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "nativeWindowsExecuted": true,
+        "explicitLinuxJavaOverride": false,
+        "packManifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f",
+        "testSourceSha256": "62a170407b4e3fb210b70fbed57c2185e79c046e07087a967af5ca40dee189cd",
+        "javaExecutableSha256": "5f6248f9c0f32b38ffaba813819bf3331536a48c7ddc45b18e73acd15a6cf7ef",
+        "testsRun": 13,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "success": true,
+        "details": [],
+        "scope": "Unmodified upstream execution through pack adapter, scientific positive/negative assertions and installed pack hash immutability; separate native manifest checks cover released application import/runner. No GUI or clinical validation."
+      },
+      "completeLog": {
+        "path": "job-111516143233.log",
+        "bytes": 46687,
+        "sha256": "9db466e18bcef1b0862ea63d7f68bee53ff8fb1bc2e93d67d4adb78f67af8711"
+      }
+    },
+    {
+      "jobId": 111516143410,
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37229552990/job/111516143410",
+      "pathKind": "ordinary",
+      "conclusion": "success",
+      "native": {
+        "schema": 1,
+        "nativeWindowsHost": true,
+        "nativeWindowsExecuted": true,
+        "success": true,
+        "packId": "snpeff",
+        "packVersion": "1.0.0",
+        "installation": {
+          "type": "result",
+          "success": true,
+          "cancelled": false,
+          "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\packs\\snpeff-1.0.0",
+          "message": "Tool pack imported.",
+          "outputs": [],
+          "pack_id": "snpeff",
+          "pack_version": "1.0.0",
+          "packId": "snpeff",
+          "packVersion": "1.0.0",
+          "publisherVerified": false,
+          "verification": "Complete file inventory verified; publisher identity not verified"
+        },
+        "scientificChecks": {
+          "schema": 1,
+          "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-194650-950030b2",
+          "checks": [
+            {
+              "id": "snpeff/build-known-cds@1.0.0",
+              "pin": {
+                "packId": "snpeff",
+                "packVersion": "1.0.0",
+                "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-194650-950030b2\\run-20261004-194650-3c298f67"
+            },
+            {
+              "id": "snpeff/known-codon-consequences@1.0.0",
+              "pin": {
+                "packId": "snpeff",
+                "packVersion": "1.0.0",
+                "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-194650-950030b2\\run-20261004-194651-89f9e101"
+            },
+            {
+              "id": "snpeff/local-allele-specific-info@1.0.0",
+              "pin": {
+                "packId": "snpeff",
+                "packVersion": "1.0.0",
+                "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-194650-950030b2\\run-20261004-194652-c9228405"
+            },
+            {
+              "id": "snpeff/select-high-impact@1.0.0",
+              "pin": {
+                "packId": "snpeff",
+                "packVersion": "1.0.0",
+                "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-194650-950030b2\\run-20261004-194654-c4410269"
+            }
+          ],
+          "nativeWindowsExecuted": true,
+          "passed": 4,
+          "failed": 0,
+          "cancelled": false,
+          "success": true,
+          "message": "4 of 4 additional pack checks passed."
+        },
+        "duplicateVersionRejected": true
+      },
+      "graph": {
+        "schema": 1,
+        "applicationVersion": "0.6.0",
+        "expectedPackVersions": {
+          "snpeff": "1.0.0"
+        },
+        "testHost": "win32",
+        "pythonVersion": "3.13.16",
+        "nativeWindowsExecuted": false,
+        "scientificExecutablesExecuted": false,
+        "nativeImporterExecuted": false,
+        "scope": "Released-app graph contracts and Python archive import; checked copy callback substitutes native folder publication.",
+        "typingLimitations": {
+          "snpeff": "Local database ZIPs are generic files. Database assembly/annotation identity and reference compatibility require the separately tested adapter."
+        },
+        "installedInventory": {
+          "packManifests": 4,
+          "executablesVerified": 6,
+          "assetsVerified": 329
+        },
+        "selectedPacks": [
+          {
+            "id": "snpeff",
+            "version": "1.0.0",
+            "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f",
+            "operations": [
+              "annotate",
+              "annotate-local",
+              "build-database",
+              "filter-impact"
+            ],
+            "scientificChecksDeclared": 4
+          }
+        ],
+        "offlineStaticImports": [
+          {
+            "id": "snpeff",
+            "version": "1.0.0",
+            "archiveSha256": "9d15121c7e9615d7d31937c8bdfb8983dd680e39077ca137ce69793c5b31b570",
+            "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f",
+            "archiveMatchesGraphPayload": true,
+            "duplicateVersionRejected": true,
+            "installedFilesAndReceiptsUnchanged": true,
+            "publisherVerified": false
+          }
+        ],
+        "starterPackFilesPreserved": 143,
+        "releasedApplicationFilesVerified": [
+          "WorkbenchBridge.exe",
+          "workspace/app_version.py",
+          "workspace/catalog-sources.json",
+          "workspace/catalog.py",
+          "workspace/core_checks.py",
+          "workspace/desktop_host.py",
+          "workspace/desktop_model.py",
+          "workspace/engine.py",
+          "workspace/example.py",
+          "workspace/pack_checks.py",
+          "workspace/pack_manager.py",
+          "workspace/pack_security.py",
+          "workspace/service.py",
+          "workspace/starter-check-profile.json",
+          "workspace/verify_installation.py"
+        ],
+        "starterSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+        "dependencies": {},
+        "annotationTypeGuards": {
+          "bamRejected": true,
+          "genericFileRejectedAtOrdinaryVcfPort": true,
+          "consequenceSelectionDoesNotInventPassState": true
+        },
+        "localVariantAnnotationGraph": {
+          "tools": [
+            "snpeff/build-database",
+            "variants/call",
+            "snpeff/annotate",
+            "snpeff/annotate",
+            "snpeff/filter-impact",
+            "snpeff/annotate-local"
+          ],
+          "ranks": [
+            {
+              "rank": 1,
+              "nodes": [
+                "step-1",
+                "step-2"
+              ]
+            },
+            {
+              "rank": 2,
+              "nodes": [
+                "step-3",
+                "step-4"
+              ]
+            },
+            {
+              "rank": 3,
+              "nodes": [
+                "step-5",
+                "step-6"
+              ]
+            }
+          ],
+          "savedPins": [
+            {
+              "packId": "snpeff",
+              "packVersion": "1.0.0",
+              "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f"
+            },
+            {
+              "packId": "variants",
+              "packVersion": "0.4.0",
+              "manifestSha256": "ea4b7f0a6c28709e4190b6514c07cbf7bdd58e1a4f2a2d931f2cae3ce6ec3795"
+            },
+            {
+              "packId": "snpeff",
+              "packVersion": "1.0.0",
+              "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f"
+            },
+            {
+              "packId": "snpeff",
+              "packVersion": "1.0.0",
+              "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f"
+            },
+            {
+              "packId": "snpeff",
+              "packVersion": "1.0.0",
+              "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f"
+            },
+            {
+              "packId": "snpeff",
+              "packVersion": "1.0.0",
+              "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f"
+            }
+          ],
+          "namedMethodsProvenance": true,
+          "changedSavedManifestRejected": true
+        },
+        "presetAndOriginalPinContracts": [
+          "snpeff/build-database",
+          "snpeff/annotate",
+          "snpeff/annotate-local",
+          "snpeff/filter-impact"
+        ],
+        "testsRun": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "testSourceSha256": "249e3919d668a0995803ced740346fbddb663178deb2053d15334aeaf73fa908",
+        "success": true
+      },
+      "scientific": {
+        "schema": "native-workbench-snpeff-regression-v1",
+        "packId": "snpeff",
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "nativeWindowsExecuted": true,
+        "explicitLinuxJavaOverride": false,
+        "packManifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f",
+        "testSourceSha256": "62a170407b4e3fb210b70fbed57c2185e79c046e07087a967af5ca40dee189cd",
+        "javaExecutableSha256": "5f6248f9c0f32b38ffaba813819bf3331536a48c7ddc45b18e73acd15a6cf7ef",
+        "testsRun": 13,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "success": true,
+        "details": [],
+        "scope": "Unmodified upstream execution through pack adapter, scientific positive/negative assertions and installed pack hash immutability; separate native manifest checks cover released application import/runner. No GUI or clinical validation."
+      },
+      "completeLog": {
+        "path": "job-111516143410.log",
+        "bytes": 46585,
+        "sha256": "3fce4717171e3492975e605d1b2ad136bc247dc313227b262568df5601596b96"
+      }
+    }
+  ],
+  "sourceCompanion": {
+    "path": "/workspace/scratch/0c5293ac0f36/github-workbench/build/expansion-release/snpeff-windows-path-fix/native-workbench-snpeff-1.0.0-source-evidence.zip",
+    "bytes": 1576114,
+    "sha256": "297152a56243ac12cc73ce6277545f4eae99cda20a6c8d92d0a6335d68b16c16",
+    "members": 399,
+    "sourceCommit": "03f1468eb4208091f59450dfe845339af17f36a2",
+    "installableSha256": "9d15121c7e9615d7d31937c8bdfb8983dd680e39077ca137ce69793c5b31b570",
+    "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f",
+    "crcVerified": true,
+    "allMemberHashesReadBack": true,
+    "creationTimeNativeFinalValidation": "pending"
+  },
+  "sourceCompanionStatusResolution": "The immutable source companion recorded exact-final native validation as pending at creation. This separate report closes that pending gate for the exact final archive and manifest above; the companion was not replaced.",
+  "publishedAssets": {
+    "schema": 1,
+    "releaseTag": "pack-snpeff-v1.0.0",
+    "startedAt": "2026-10-04T19:47:44.204065+00:00",
+    "independentlyDownloaded": true,
+    "success": true,
+    "assets": [
+      {
+        "name": "native-workbench-pack-snpeff-1.0.0.zip",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/pack-snpeff-v1.0.0/native-workbench-pack-snpeff-1.0.0.zip",
+        "bytes": 498014278,
+        "sha256": "9d15121c7e9615d7d31937c8bdfb8983dd680e39077ca137ce69793c5b31b570",
+        "expectedBytes": 498014278,
+        "expectedSha256": "9d15121c7e9615d7d31937c8bdfb8983dd680e39077ca137ce69793c5b31b570",
+        "streamAndReadBackMatch": true,
+        "zipCrcVerified": true,
+        "temporaryDuplicateRemoved": true
+      },
+      {
+        "name": "native-workbench-snpeff-1.0.0-source-evidence.zip",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/pack-snpeff-v1.0.0/native-workbench-snpeff-1.0.0-source-evidence.zip",
+        "bytes": 1576114,
+        "sha256": "297152a56243ac12cc73ce6277545f4eae99cda20a6c8d92d0a6335d68b16c16",
+        "expectedBytes": 1576114,
+        "expectedSha256": "297152a56243ac12cc73ce6277545f4eae99cda20a6c8d92d0a6335d68b16c16",
+        "streamAndReadBackMatch": true,
+        "zipCrcVerified": true,
+        "temporaryDuplicateRemoved": true
+      }
+    ],
+    "completedAt": "2026-10-04T19:48:27.657265+00:00"
+  },
+  "linuxRegression": {
+    "schema": "native-workbench-snpeff-regression-v1",
+    "packId": "snpeff",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "nativeWindowsExecuted": false,
+    "explicitLinuxJavaOverride": true,
+    "packManifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f",
+    "testSourceSha256": "62a170407b4e3fb210b70fbed57c2185e79c046e07087a967af5ca40dee189cd",
+    "javaExecutableSha256": "b691821788c04b3ec27f00249c0864ea3e43003e2dd7dcd44170589ac391d598",
+    "testsRun": 13,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "success": true,
+    "details": [],
+    "scope": "Unmodified upstream execution through pack adapter, scientific positive/negative assertions and installed pack hash immutability; separate native manifest checks cover released application import/runner. No GUI or clinical validation."
+  },
+  "inputCorrespondence": {
+    "success": true,
+    "runtimeFilesVerifiedAgainstOfficialArchive": 315,
+    "allRetainedJarEntriesIdenticalToOfficialCore": true,
+    "allSourceArchivesPinned": true,
+    "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f",
+    "packRoot": "/workspace/scratch/0c5293ac0f36/github-workbench/build/snpeff-prepared-windows-path-fix-20261004",
+    "omittedPrefixes": [
+      "javax/vecmath/"
+    ],
+    "jars": [
+      {
+        "sourceCoreArchiveSha256": "3b06a1e1f939e7ebd5433387f088c1d3d1e0a7d472d63f39161b1fe9f00adf33",
+        "upstreamJarSha256": "5e8f75cbf908a33c6fb2e65c81e66fe31236cb21bb0195541c4703d8202c22b3",
+        "packagedJarSha256": "5c552488e2ab237292a999035160023f30534cc46212485d193251d8e517ace6",
+        "retainedEntries": 15760,
+        "allRetainedEntryBytesIdentical": true,
+        "omissionReason": "Unused legacy Sun Binary Code licensed javax.vecmath1.3.1; structural/PDB operations are not exposed.",
+        "omitted": [
+          {
+            "path": "javax/vecmath/AxisAngle4d.class",
+            "sha256": "436f999a37d64b21c29f1dc89efa81a6546bfb889c3d820abf7c5ac39115ef6d"
+          },
+          {
+            "path": "javax/vecmath/AxisAngle4f.class",
+            "sha256": "95c971cc0446b668c0aab444d9ad3690a0bfb348f6977319373a2d959bda307e"
+          },
+          {
+            "path": "javax/vecmath/Vector3f.class",
+            "sha256": "deb300c8b3497d71c7ba96fc77bcee1f6853c27aa9e1e9e450e90b30c43b4306"
+          },
+          {
+            "path": "javax/vecmath/Tuple3f.class",
+            "sha256": "5c3b65accb0bc180a49ee594a47f9d7e03257a253cb38fc89053d8ac74618962"
+          },
+          {
+            "path": "javax/vecmath/Vector3d.class",
+            "sha256": "269c0aba5b4b91c1aa5eb012e8d5e7af9f62d2cf853e7ce3b8b58167c1b9e6fe"
+          },
+          {
+            "path": "javax/vecmath/Tuple3d.class",
+            "sha256": "dad233224b4620e3b0c3a8fac70f875b6303d010040f23c19ac326eff7fe35be"
+          },
+          {
+            "path": "javax/vecmath/Quat4f.class",
+            "sha256": "e8ed1af80b798ca7125d50b05d8d112c5d7b13e6d77a6b35021b67a208a2aca6"
+          },
+          {
+            "path": "javax/vecmath/Tuple4f.class",
+            "sha256": "4f972438d9eab85ac4cfaf0742cce9fcd791441559e5eb44fa3c360f5474f6df"
+          },
+          {
+            "path": "javax/vecmath/Quat4d.class",
+            "sha256": "f70bcf566ea09d8baad9fe5ebe255bbc6d90bdab995271e577f0a2cd31617508"
+          },
+          {
+            "path": "javax/vecmath/Tuple4d.class",
+            "sha256": "9c08e9b55725d07386ef56b5e1e0e10a88eb8f1647fbd5171b186550c97e6bb9"
+          },
+          {
+            "path": "javax/vecmath/Matrix4f.class",
+            "sha256": "e4dcacf137d24d40db179cb74f277c9b7271b2608171e714e2aa02e3bae8e71e"
+          },
+          {
+            "path": "javax/vecmath/Matrix4d.class",
+            "sha256": "5d4005eee02999beb498653c620041ffcbf5613a32e01009be2d201d21a6dfba"
+          },
+          {
+            "path": "javax/vecmath/Matrix3f.class",
+            "sha256": "8ba0f30276afe75c6efdaf78797f97b3831e5440f8d01f94f6be0c98c4b587ca"
+          },
+          {
+            "path": "javax/vecmath/Matrix3d.class",
+            "sha256": "82e0b0e44d4499ba9e676c4a328dcbc8af59fb2c92941280866e47a3ef86d80a"
+          },
+          {
+            "path": "javax/vecmath/Vector4f.class",
+            "sha256": "c00f730cb0df417f6a646da76ec8a55d726f4be97092c897009779387e97e3fe"
+          },
+          {
+            "path": "javax/vecmath/Point3f.class",
+            "sha256": "ab2b9d6039061e1abb8c0eb93bb0a3ac713fb0427c489c74c9e912f30275f937"
+          },
+          {
+            "path": "javax/vecmath/Vector4d.class",
+            "sha256": "b70fd490ede2f2c61789b7542e51487d14c6a7cd9751b67744cae04ce23fb54e"
+          },
+          {
+            "path": "javax/vecmath/Point3d.class",
+            "sha256": "f6b37ecbaad66592214dffa3c750daa150795122f2c7c8ab442da12dea8fde56"
+          },
+          {
+            "path": "javax/vecmath/Point4f.class",
+            "sha256": "d3f5b3ffcd00ae96f9b535eebdddb8f4f48a6b7e5e11762830fc37946cbdf841"
+          },
+          {
+            "path": "javax/vecmath/Point4d.class",
+            "sha256": "d9c26cd681f3457e6b534dda08c5d74c4b615d909b5616a15be76e5cc27d67c3"
+          },
+          {
+            "path": "javax/vecmath/VecMathI18N.class",
+            "sha256": "df05cbb83e365ebec6ac1cd8a6f966f45384e3011d74a0decab95e0d53d4effd"
+          },
+          {
+            "path": "javax/vecmath/SingularMatrixException.class",
+            "sha256": "32770c9986465e503f5269f70c29e8b1ddae5238cf999db22c7164bdd6f1aea9"
+          },
+          {
+            "path": "javax/vecmath/Color3b.class",
+            "sha256": "ad72a83edda82bd49af1d0d531c6510369b2a944c9fab62fc6cb99f89fbf31ba"
+          },
+          {
+            "path": "javax/vecmath/Tuple3b.class",
+            "sha256": "7d15e952f4c5d88cea948e23079585b779cec6ba69677e7e761210c8d4a789d5"
+          },
+          {
+            "path": "javax/vecmath/Color3f.class",
+            "sha256": "4754026185f8169a98d7de3aff72ce8b80ae2d7f8c8871ebd965e67e9cd2ab79"
+          },
+          {
+            "path": "javax/vecmath/Color4b.class",
+            "sha256": "5712189fb7c38e685a3fa0e9a1fac11c825fa8ec9a9613f4f63552a8d1eee0c1"
+          },
+          {
+            "path": "javax/vecmath/Tuple4b.class",
+            "sha256": "1c68c6f40d1ec6d4c6619d2e994d07be1e0d56a891005f4f43eddc3877bd8a52"
+          },
+          {
+            "path": "javax/vecmath/Color4f.class",
+            "sha256": "255fb406eaee59ba74253bb9c5a7e5d74183cd3f79ac1b2970fb06b9d6488ddb"
+          },
+          {
+            "path": "javax/vecmath/GMatrix.class",
+            "sha256": "06947ccd01d9e24cbcf63968dc3b12849174b4b96cd818548c80addf2318a2ab"
+          },
+          {
+            "path": "javax/vecmath/GVector.class",
+            "sha256": "5639cdb13a25c99fbefc849f8b94a2e6358a5e1a9a2ef74c68baa069663894f4"
+          },
+          {
+            "path": "javax/vecmath/Tuple2f.class",
+            "sha256": "4092c9268ea768fddff6b7e0ca5511ffd1864df06676bb67deb526815b7c72f7"
+          },
+          {
+            "path": "javax/vecmath/Tuple2d.class",
+            "sha256": "50ac9eaf7873aaff8e29cc3526197d704ba5641bbad41313500d11e52c1c9cc5"
+          },
+          {
+            "path": "javax/vecmath/MismatchedSizeException.class",
+            "sha256": "345f9ed7da30fb412de334631859b948820dce802ef79a3e4f485b4e93768a20"
+          },
+          {
+            "path": "javax/vecmath/Point2d.class",
+            "sha256": "3df23836d732c97503fac2e8f2bf3546eb9ea1a65c1a08b0dd1036bef7632584"
+          },
+          {
+            "path": "javax/vecmath/Point2f.class",
+            "sha256": "60072637fd2321ac3792b38945b79cb46838715693c0bd8d8e98a330f67d183b"
+          },
+          {
+            "path": "javax/vecmath/Point3i.class",
+            "sha256": "e50fc0c4c8624ff5b9d606072f42f2f709c81bb05dfa537a6d2e4070e78806cf"
+          },
+          {
+            "path": "javax/vecmath/Tuple3i.class",
+            "sha256": "d2348bd17afaf12f7c50e88b2c7e07b9eeb6c080c026312b5627f8c0c2781556"
+          },
+          {
+            "path": "javax/vecmath/Point4i.class",
+            "sha256": "9fec07d9234e5df5024a60086f5d4648cc96011d499def006ffab370d003a7e5"
+          },
+          {
+            "path": "javax/vecmath/Tuple4i.class",
+            "sha256": "9be37844f9ae89e3143b11cd9ab74a3988143c9e8a16346a1f439c9a80246c25"
+          },
+          {
+            "path": "javax/vecmath/legal.txt",
+            "sha256": "a563598b50e64d7cbba2c5c7a2ea3be4cc2fba14724cfdbaa41f0f8dd91933c3"
+          },
+          {
+            "path": "javax/vecmath/TexCoord2f.class",
+            "sha256": "148d5cd620771288db6b9ea8ed3e625230e4a04c749dbbfe9d56cf56c3048e95"
+          },
+          {
+            "path": "javax/vecmath/TexCoord3f.class",
+            "sha256": "c757d7f82721a4482661cf84b86b94e1356dbf36096d7648a64f56171d6c194c"
+          },
+          {
+            "path": "javax/vecmath/TexCoord4f.class",
+            "sha256": "bbd50241912c75f80fdad3fdff5ec41363d4daa83a5c7f8f7575a60f10e19475"
+          },
+          {
+            "path": "javax/vecmath/Vector2d.class",
+            "sha256": "9b4bb242c02f973109e26a9e4a341fed5cfa215a89824f363011bdcb7b257d88"
+          },
+          {
+            "path": "javax/vecmath/Vector2f.class",
+            "sha256": "b3ad45628ca714848bdc9e16d0d88543767698e25d722ae90bac1957903dd580"
+          },
+          {
+            "path": "javax/vecmath/ExceptionStrings.properties",
+            "sha256": "2fd7ffd7e3709d1ea4c6e159480fb1898be623916790db3c1b8a1c0772fd32d3"
+          }
+        ]
+      },
+      {
+        "sourceCoreArchiveSha256": "3b06a1e1f939e7ebd5433387f088c1d3d1e0a7d472d63f39161b1fe9f00adf33",
+        "upstreamJarSha256": "091257ecc413a622e1a224440b8bb11ab18d99ee7a6c9093f4af18279228dade",
+        "packagedJarSha256": "f214517e87fdaf90772fcbf8f71b36cd913b8a9055df9a4134ed5d0fd3173441",
+        "retainedEntries": 13479,
+        "allRetainedEntryBytesIdentical": true,
+        "omissionReason": "Unused legacy Sun Binary Code licensed javax.vecmath1.3.1; structural/PDB operations are not exposed.",
+        "omitted": []
+      }
+    ],
+    "distLibCorrespondence": {
+      "sourceJar": "DistLib_src-0.9.1.jar",
+      "sourceSha256": "3e57189a48bef18a286a95396f7fc7d772a7b18a57b2a693e33144c225af9f23",
+      "upstreamShadedClasses": 32,
+      "sourceArchiveBinaryClassesByteIdentical": 32
+    }
+  },
+  "staticArchiveValidation": {
+    "validation": "static-integrity-only",
+    "pack": {
+      "id": "snpeff",
+      "name": "SnpEff and SnpSift",
+      "version": "1.0.0",
+      "toolVersions": {
+        "java": "Temurin-21.0.9+10"
+      },
+      "description": "Local variant consequence annotation, reusable checked databases, local VCF INFO annotation and bounded impact selection. Private Java21 included.",
+      "category": "Variant annotation",
+      "platform": "windows-x86_64",
+      "packApi": 1,
+      "minAppVersion": "0.6.0",
+      "size": 498014278,
+      "sha256": "9d15121c7e9615d7d31937c8bdfb8983dd680e39077ca137ce69793c5b31b570",
+      "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f"
+    }
+  },
+  "candidateHistory": {
+    "failedFirstCandidate": {
+      "schema": 1,
+      "createdAt": "2026-10-04T19:29:40.577Z",
+      "runId": 37228075228,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37228075228",
+      "sourceCommit": "102e85e2ce38c750b521c70e532001dd55451509",
+      "candidateVersion": "0.0.1",
+      "candidateArchiveSha256": "dc62a3d1bc97403eb7bbdff84751f54f173d5e870c029896d41fe9802c0d9281",
+      "candidateManifestSha256": "3717202eea2479f853437c0411b459f48234750f147962b64b36b3b5695e287a",
+      "appArchiveSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+      "success": false,
+      "diagnosis": "Upstream SnpEff prepends its config directory to the Windows absolute -dataDir path, making an invalid doubled drive-prefixed path. Both build-database and annotate fail. Local SnpSift annotation and impact filter pass. Native graph and full scientific regression steps did not run after installation checks failed.",
+      "jobs": [
+        {
+          "jobId": 111511775755,
+          "pathKind": "path with spaces",
+          "conclusion": "failure",
+          "nativeReport": "job-111511775755-native.json",
+          "graphReport": null,
+          "fullScientificReport": null,
+          "notExecutedReason": "The initial native installation scientific check gate failed.",
+          "nativeSummary": {
+            "importSuccess": true,
+            "scientificPassed": 2,
+            "scientificFailed": 2
+          }
+        },
+        {
+          "jobId": 111511775807,
+          "pathKind": "ordinary",
+          "conclusion": "failure",
+          "nativeReport": "job-111511775807-native.json",
+          "graphReport": null,
+          "fullScientificReport": null,
+          "notExecutedReason": "The initial native installation scientific check gate failed.",
+          "nativeSummary": {
+            "importSuccess": true,
+            "scientificPassed": 2,
+            "scientificFailed": 2
+          }
+        }
+      ]
+    },
+    "successfulSecondCandidate": {
+      "schema": 1,
+      "kind": "native-windows-candidate-validation",
+      "createdAt": "2026-10-04T19:40:56.772Z",
+      "runId": 37229017577,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37229017577",
+      "sourceCommit": "5327ce577274057c3ef79c0dc16574265069b976",
+      "packId": "snpeff",
+      "packVersion": "0.0.2",
+      "candidateArchiveSha256": "f9a53c8504cf4201980da95c196921c3d6c1846d427333b8828c8fd739e9d22c",
+      "candidateArchiveBytes": 498014406,
+      "candidateManifestSha256": "7c6f1d2e6e47bc9c65b30bb197c303f456e7c41ae9a91ffbabbda2e5a3f63b82",
+      "applicationVersion": "0.6.0",
+      "applicationArchiveSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+      "success": true,
+      "nativeWindowsExecuted": true,
+      "finalArchiveValidation": false,
+      "scope": "Candidate 0.0.2 only; exact proposed-final 1.0.0 still requires its own native gate. Synthetic software/scientific checks, not GUI, human-scale performance or clinical validation.",
+      "jobs": [
+        {
+          "id": 111514546554,
+          "pathKind": "ordinary",
+          "conclusion": "success",
+          "nativeImportSuccess": true,
+          "duplicateVersionRejected": true,
+          "nativeChecks": {
+            "passed": 4,
+            "failed": 0,
+            "cancelled": false
+          },
+          "graphTests": {
+            "testsRun": 6,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "scientificTests": {
+            "testsRun": 13,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0,
+            "privateWindowsJava": true
+          },
+          "evidencePrefix": "job-111514546554"
+        },
+        {
+          "id": 111514546724,
+          "pathKind": "path with spaces",
+          "conclusion": "success",
+          "nativeImportSuccess": true,
+          "duplicateVersionRejected": true,
+          "nativeChecks": {
+            "passed": 4,
+            "failed": 0,
+            "cancelled": false
+          },
+          "graphTests": {
+            "testsRun": 6,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "scientificTests": {
+            "testsRun": 13,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0,
+            "privateWindowsJava": true
+          },
+          "evidencePrefix": "job-111514546724"
+        }
+      ]
+    },
+    "interpretation": "Candidate 0.0.1 failed SnpEff build/annotation on both Windows paths due to drive-prefixed dataDir resolution; its SnpSift checks passed and later gates did not run. A narrow adapter change to relative data fixed the boundary. Candidate 0.0.2 passed all gates. This report independently validates the exact final 1.0.0 bytes, rather than substituting either candidate result."
+  },
+  "limitations": [
+    "Automated native Windows CLI/import/runner and graph validation; no desktop GUI acceptance or institutional approval claim.",
+    "Small synthetic known-answer and rejection tests; no human-scale memory/performance benchmark or clinical validation.",
+    "Offline imports verify the complete payload inventory and duplicate-version immutability; publisher identity is not authenticated by these hashes and catalogue publication is a separate action.",
+    "SnpEff consequence predictions and ANN impact selection do not establish pathogenicity. Impact selection retains entire records, including all alternate alleles, genotypes and existing FILTER values.",
+    "Local VCF annotation requires explicitly matching assemblies and normalized biallelic records; header checks cannot prove absent assembly identities and no liftover occurs.",
+    "Reference/annotation databases are selected local resources with explicit genetic codes and per-contig overrides; only a tiny synthetic database is bundled, not a human biological reference.",
+    "Only unused javax/vecmath entries are omitted from upstream JAR containers; retained scientific classes/resources match the official core byte for byte. Structural/PDB operations are outside the supported scope.",
+    "Pinned SnpSift v5.4b source is the latest upstream source before the official 5.4c core build; its displayed version derives from SnpEff. This is source correspondence, not a claim of a bit-reproducible upstream compiler environment.",
+    "Private executables run trusted native code. Disabled upstream downloads/telemetry/update checks are not a network or execution sandbox."
+  ],
+  "retainedEvidenceFiles": [
+    {
+      "path": ".downloaded-native-workbench-pack-snpeff-1.0.0.zip.kE02PO",
+      "bytes": 302514176,
+      "sha256": "f71968cef3fe0ef81d0a7d73ff3a7a1cd5918e2662e717675cad5b6cbedc7504"
+    },
+    {
+      "path": "job-111516143233-graph.json",
+      "bytes": 4333,
+      "sha256": "b0d34490bf2c589cbceb341c03d74cacd866bd5ecbb071859780c132f13ef40d"
+    },
+    {
+      "path": "job-111516143233-json-records.json",
+      "bytes": 9228,
+      "sha256": "7195e5cceb776dc25e619a4244c57620acf1f281495bee7d744a64e4dc595354"
+    },
+    {
+      "path": "job-111516143233-native.json",
+      "bytes": 2714,
+      "sha256": "700dfd5247eb4b8764b5df0e4a7456339018778e13e22a6602f91ef84d3dec45"
+    },
+    {
+      "path": "job-111516143233-scientific.json",
+      "bytes": 827,
+      "sha256": "6df1dc8623bf3c598d064ed81c9f8c0bb1543eed6542f472fd8731902e16151a"
+    },
+    {
+      "path": "job-111516143233.log",
+      "bytes": 46687,
+      "sha256": "9db466e18bcef1b0862ea63d7f68bee53ff8fb1bc2e93d67d4adb78f67af8711"
+    },
+    {
+      "path": "job-111516143410-graph.json",
+      "bytes": 4333,
+      "sha256": "b0d34490bf2c589cbceb341c03d74cacd866bd5ecbb071859780c132f13ef40d"
+    },
+    {
+      "path": "job-111516143410-json-records.json",
+      "bytes": 9180,
+      "sha256": "aa8ed72512dc89f32cf85262b9e17c26a0509fbca386aa06d6d3fb7a1337f91b"
+    },
+    {
+      "path": "job-111516143410-native.json",
+      "bytes": 2666,
+      "sha256": "34dda2a5282bf027318805270a084891088017a2c09fadb3c09eb105df979f73"
+    },
+    {
+      "path": "job-111516143410-scientific.json",
+      "bytes": 827,
+      "sha256": "6df1dc8623bf3c598d064ed81c9f8c0bb1543eed6542f472fd8731902e16151a"
+    },
+    {
+      "path": "job-111516143410.log",
+      "bytes": 46585,
+      "sha256": "3fce4717171e3492975e605d1b2ad136bc247dc313227b262568df5601596b96"
+    },
+    {
+      "path": "jobs.json",
+      "bytes": 5235,
+      "sha256": "cadea30beecc945992cd88e91c20f149b274bffe23856c36951af3d0d9814708"
+    },
+    {
+      "path": "published-assets-verification.json",
+      "bytes": 1354,
+      "sha256": "75cdbf3380a2d8d597d0a15c95a027b799644723d80aa1753bc402663f02b3f3"
+    }
+  ]
+}

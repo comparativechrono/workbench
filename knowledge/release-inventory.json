@@ -2,7 +2,7 @@
   "schema": "native-workbench-knowledge/release-inventory",
   "schema_version": 1,
   "as_of": "2026-10-04",
-  "source_commit": "eb4a255b69a2eabfb539937218a1d0e57c5776a3",
+  "source_commit": "24c6899aa7c19208ec88ae816879952ed0d8527e",
   "repository": "https://github.com/comparativechrono/workbench",
   "purpose": "Public release handover inventory. This is documentation, not an install catalogue or a trust file.",
   "is_install_catalogue": false,
@@ -11,14 +11,14 @@
     "checked_on": "2026-10-04",
     "method": "Older application and pack entries preserve the initial 2026-10-04 GitHub metadata audit and dated publication evidence. For the October optional packs, public release assets were independently downloaded and rehashed, source/scientific regressions retained, and exact-final archives executed through the released 0.6.0 native Windows bridge in ordinary and space-containing paths. Per-asset download verification and per-pack evidence distinguish these levels.",
     "release_metadata_url": "https://api.github.com/repos/comparativechrono/workbench/releases?per_page=100",
-    "readme_url": "https://github.com/comparativechrono/workbench/blob/eb4a255b69a2eabfb539937218a1d0e57c5776a3/README.md",
+    "readme_url": "https://github.com/comparativechrono/workbench/blob/main/README.md",
     "scope": "Published releases only. Drafts and private metadata are excluded. Historical validation candidates are excluded from current_packs.",
     "interpretation": "A GitHub asset digest checks bytes against recorded metadata; it is not a publisher signature or application-trusted catalogue."
   },
   "status": {
     "application": "development-prerelease",
-    "latest_pack_count": 26,
-    "published_pack_version_count": 27,
+    "latest_pack_count": 30,
+    "published_pack_version_count": 31,
     "online_catalogue": "not-published-or-configured",
     "catalogue_source_json": "not-published-or-configured",
     "signing_key": "requires-maintainer-controlled-external-key",
@@ -259,6 +259,62 @@
       "evidence_scope": "Original pack identity/manifest preserved in independent split archive. Packaging verification is not a fresh native Windows execution claim."
     },
     {
+      "id": "deseq2",
+      "version": "1.0.0",
+      "upstream_tool_version": "DESeq2 1.52.0; tximport 1.40.0; R 4.6.1; Bioconductor 3.23",
+      "tag": "pack-deseq2-v1.0.0",
+      "name": "DESeq2 + tximport pack 1.0.0 — native Windows validated",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-deseq2-v1.0.0",
+      "prerelease": true,
+      "published_at": "2026-10-04T20:07:12Z",
+      "minimum_application_for_archive_import": "0.6.0",
+      "included_in_starter": false,
+      "manifest_sha256": "f5a06708651f14f25e89ca3588ed6bf2f91442e43d635a9fc7ab5af066112ee1",
+      "implementation_source_commit": "24c6899aa7c19208ec88ae816879952ed0d8527e",
+      "primary_asset": {
+        "name": "native-workbench-pack-deseq2-1.0.0.zip",
+        "bytes": 277504383,
+        "github_digest": "sha256:eccffbcaf3adad6ab1da63ea771fe103a807a88722a56f5db82072cf02c1292d",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-deseq2-v1.0.0/native-workbench-pack-deseq2-1.0.0.zip",
+        "independently_downloaded_and_rehashed_on": "2026-10-04"
+      },
+      "companion_assets": [
+        {
+          "name": "native-workbench-deseq2-1.0.0-r-runtime-sources.zip",
+          "bytes": 458255663,
+          "github_digest": "sha256:4dcb85cea0f859ffec0562ca1a3ce4eb814bbbcdf6e994c328a284c3763b844b",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-deseq2-v1.0.0/native-workbench-deseq2-1.0.0-r-runtime-sources.zip",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        },
+        {
+          "name": "native-workbench-deseq2-1.0.0-source-evidence.zip",
+          "bytes": 1814514,
+          "github_digest": "sha256:da6f5b48549e1de2554f6bef903f19b64c08435cce44995eb59716d36f25dbf2",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-deseq2-v1.0.0/native-workbench-deseq2-1.0.0-source-evidence.zip",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        },
+        {
+          "name": "native-workbench-deseq2-1.0.0-windows-validation.json",
+          "bytes": 100136,
+          "github_digest": "sha256:9312bbc5ea3d7bc38035c0583b8a76950375ea0f0e20cf1f6d18eeb87077764e",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-deseq2-v1.0.0/native-workbench-deseq2-1.0.0-windows-validation.json",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "bytes": 459,
+          "github_digest": "sha256:dd3144a5f69e2ffbbc78b7ca8333c7290eb9034af89469c26cea8f4bce6141fc",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-deseq2-v1.0.0/SHA256SUMS.txt",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        }
+      ],
+      "source_regression_tests_passed": 14,
+      "source_regression_host": "Native Windows source-built private runtime; separate published-archive gate also passed",
+      "validation_report": "evidence/deseq2-1.0.0-validation-2026-10-04.json",
+      "evidence_scope": "Exact final native Windows archive: three installation/scientific checks, six graph/archive contracts and 14 additional scientific regressions per path, zero failures/errors/skips. Matrix and tximport independent upstream comparisons cover all 300 genes and six inferential columns at 1e-10; preserved 24 planted effects and four incidental null discoveries are a regression fixture, not FDR calibration. Independent bulk replicates only, condition or additive batch+condition designs; sample metadata cannot prove biological independence. Private R scratch requires a space-free path or existing short alias.",
+      "validation_report_sha256": "9312bbc5ea3d7bc38035c0583b8a76950375ea0f0e20cf1f6d18eeb87077764e"
+    },
+    {
       "id": "fastp",
       "version": "0.4.1",
       "tag": "pack-fastp-v0.4.1",
@@ -437,6 +493,55 @@
       "evidence_scope": "Original pack identity/manifest preserved in independent split archive. Packaging verification is not a fresh native Windows execution claim."
     },
     {
+      "id": "iqtree",
+      "version": "1.0.0",
+      "upstream_tool_version": "3.1.4",
+      "tag": "pack-iqtree-v1.0.0",
+      "name": "IQ-TREE pack 1.0.0 — native Windows validated",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-iqtree-v1.0.0",
+      "prerelease": true,
+      "published_at": "2026-10-04T19:43:42Z",
+      "minimum_application_for_archive_import": "0.6.0",
+      "included_in_starter": false,
+      "manifest_sha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d",
+      "implementation_source_commit": "03f1468eb4208091f59450dfe845339af17f36a2",
+      "primary_asset": {
+        "name": "native-workbench-pack-iqtree-1.0.0.zip",
+        "bytes": 248195844,
+        "github_digest": "sha256:d232985959093083cd1f40f6fcb3496a1164f43912a72b8d6c29c900d0069aad",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-iqtree-v1.0.0/native-workbench-pack-iqtree-1.0.0.zip",
+        "independently_downloaded_and_rehashed_on": "2026-10-04"
+      },
+      "companion_assets": [
+        {
+          "name": "native-workbench-iqtree-1.0.0-source-evidence.zip",
+          "bytes": 1647744,
+          "github_digest": "sha256:24e8ccf4ca71055a2fe0aebb9c20214d4835b3477753082f962d1c5301500bb6",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-iqtree-v1.0.0/native-workbench-iqtree-1.0.0-source-evidence.zip",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        },
+        {
+          "name": "native-workbench-iqtree-1.0.0-windows-validation.json",
+          "bytes": 89558,
+          "github_digest": "sha256:fc3c03be28ce1c5d42dc613c91f556316d44bd415c71976eeed5f5cfd976b915",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-iqtree-v1.0.0/native-workbench-iqtree-1.0.0-windows-validation.json",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "bytes": 341,
+          "github_digest": "sha256:e5a285a7e29e7329661df0133435a554cb647ad6e43f9d1dc25c2a658b1c7cfa",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-iqtree-v1.0.0/SHA256SUMS.txt",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        }
+      ],
+      "source_regression_tests_passed": 13,
+      "source_regression_host": "Linux",
+      "validation_report": "evidence/iqtree-1.0.0-validation-2026-10-04.json",
+      "evidence_scope": "Exact final native Windows archive: 4 installation/scientific checks, 6 graph/archive contracts and 13 additional scientific regressions per path; zero failures, errors or test skips. Synthetic DNA/protein inference and actual MUSCLE chains. ASCII installation/results paths, including spaces; selected input paths may contain Unicode. Large-tree split summaries bounded to 256 taxa; complete Newick retained.",
+      "validation_report_sha256": "fc3c03be28ce1c5d42dc613c91f556316d44bd415c71976eeed5f5cfd976b915"
+    },
+    {
       "id": "kallisto",
       "version": "1.0.1",
       "tag": "pack-kallisto-v1.0.1",
@@ -486,6 +591,55 @@
       },
       "companion_assets": [],
       "evidence_scope": "Original pack identity/manifest preserved in independent split archive. Packaging verification is not a fresh native Windows execution claim."
+    },
+    {
+      "id": "mosdepth",
+      "version": "1.0.0",
+      "upstream_tool_version": "0.3.14 (0.3.14-workbench1 runtime; HTSlib 1.23.1; private SAMtools 1.24)",
+      "tag": "pack-mosdepth-v1.0.0",
+      "name": "mosdepth pack 1.0.0 — native Windows validated",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-mosdepth-v1.0.0",
+      "prerelease": true,
+      "published_at": "2026-10-04T19:26:51Z",
+      "minimum_application_for_archive_import": "0.6.0",
+      "included_in_starter": false,
+      "manifest_sha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94",
+      "implementation_source_commit": "ef54885e2702422494ec9d3de82e99c84cf3883a",
+      "primary_asset": {
+        "name": "native-workbench-pack-mosdepth-1.0.0.zip",
+        "bytes": 39762901,
+        "github_digest": "sha256:b642d231350ef8eba8975a2a493714329f30880daf2e3a90c4faad293f78adfc",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-mosdepth-v1.0.0/native-workbench-pack-mosdepth-1.0.0.zip",
+        "independently_downloaded_and_rehashed_on": "2026-10-04"
+      },
+      "companion_assets": [
+        {
+          "name": "native-workbench-mosdepth-1.0.0-source-evidence.zip",
+          "bytes": 55793348,
+          "github_digest": "sha256:7aebd360332636b323277bc54781cd6fb5ca2a63c3556a018c2f09cf46d7e43f",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-mosdepth-v1.0.0/native-workbench-mosdepth-1.0.0-source-evidence.zip",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        },
+        {
+          "name": "native-workbench-mosdepth-1.0.0-windows-validation.json",
+          "bytes": 36731,
+          "github_digest": "sha256:aab80bef965a16dd90c0905f49e992ed137ed202191d28d9a00945e972c2140c",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-mosdepth-v1.0.0/native-workbench-mosdepth-1.0.0-windows-validation.json",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "bytes": 347,
+          "github_digest": "sha256:c1fbe64e4cc4e6e8a1a77ab4c6303bdb93b830bea853b32a4a26284f6a0a26a4",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-mosdepth-v1.0.0/SHA256SUMS.txt",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        }
+      ],
+      "source_regression_tests_passed": 12,
+      "source_regression_host": "Linux",
+      "validation_report": "evidence/mosdepth-1.0.0-validation-2026-10-04.json",
+      "evidence_scope": "Exact final native Windows archive: 4 installation/scientific checks, 6 graph/archive contracts and 11 additional scientific regressions per path; zero failures, errors or test skips. BAM only. No base-quality filter. Synthetic accurate-mode CIGAR/overlap/flags/MAPQ and complete-header/target denominator checks; no assembly FASTA validation.",
+      "validation_report_sha256": "aab80bef965a16dd90c0905f49e992ed137ed202191d28d9a00945e972c2140c"
     },
     {
       "id": "multiqc",
@@ -619,6 +773,55 @@
       },
       "companion_assets": [],
       "evidence_scope": "Original pack identity/manifest preserved in independent split archive. Packaging verification is not a fresh native Windows execution claim."
+    },
+    {
+      "id": "snpeff",
+      "version": "1.0.0",
+      "upstream_tool_version": "SnpEff/SnpSift 5.4c; Temurin 21.0.9+10",
+      "tag": "pack-snpeff-v1.0.0",
+      "name": "SnpEff and SnpSift pack 1.0.0 — native Windows validated",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-snpeff-v1.0.0",
+      "prerelease": true,
+      "published_at": "2026-10-04T19:46:05Z",
+      "minimum_application_for_archive_import": "0.6.0",
+      "included_in_starter": false,
+      "manifest_sha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f",
+      "implementation_source_commit": "03f1468eb4208091f59450dfe845339af17f36a2",
+      "primary_asset": {
+        "name": "native-workbench-pack-snpeff-1.0.0.zip",
+        "bytes": 498014278,
+        "github_digest": "sha256:9d15121c7e9615d7d31937c8bdfb8983dd680e39077ca137ce69793c5b31b570",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-snpeff-v1.0.0/native-workbench-pack-snpeff-1.0.0.zip",
+        "independently_downloaded_and_rehashed_on": "2026-10-04"
+      },
+      "companion_assets": [
+        {
+          "name": "native-workbench-snpeff-1.0.0-source-evidence.zip",
+          "bytes": 1576114,
+          "github_digest": "sha256:297152a56243ac12cc73ce6277545f4eae99cda20a6c8d92d0a6335d68b16c16",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-snpeff-v1.0.0/native-workbench-snpeff-1.0.0-source-evidence.zip",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        },
+        {
+          "name": "native-workbench-snpeff-1.0.0-windows-validation.json",
+          "bytes": 43440,
+          "github_digest": "sha256:2e209e76421c1051a905604ecb51316c5f6229510203b71d68832dc3fec2cc29",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-snpeff-v1.0.0/native-workbench-snpeff-1.0.0-windows-validation.json",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "bytes": 341,
+          "github_digest": "sha256:5d10893a8fa5374487507933245a87f6c3db2a45cc95f46cb553d83f59607adf",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-snpeff-v1.0.0/SHA256SUMS.txt",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        }
+      ],
+      "source_regression_tests_passed": 13,
+      "source_regression_host": "Linux",
+      "validation_report": "evidence/snpeff-1.0.0-validation-2026-10-04.json",
+      "evidence_scope": "Exact final native Windows archive: 4 installation/scientific checks, 6 graph/archive contracts and 13 additional scientific regressions per path; zero failures, errors or test skips. Synthetic CDS and variant consequences, local normalized biallelic annotation and whole-record impact selection. Separate versioned reference databases required; no human database bundled. ASCII paths including spaces.",
+      "validation_report_sha256": "2e209e76421c1051a905604ecb51316c5f6229510203b71d68832dc3fec2cc29"
     },
     {
       "id": "star",
@@ -784,6 +987,30 @@
       "limits": "Synthetic fixtures. Does not validate the GUI, arbitrary long paths, OS-level network blocking, all protocols, human-scale performance or clinical use."
     },
     {
+      "pack": "deseq2",
+      "version": "1.0.0",
+      "workflow_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37230943331",
+      "workflow_source_commit": "24c6899aa7c19208ec88ae816879952ed0d8527e",
+      "workflow_name": "Native Windows pack check",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-04T20:08:12Z",
+      "runner": "windows-2022",
+      "application": "released 0.6.0 starter with native bridge",
+      "paths": [
+        "ordinary",
+        "contains spaces"
+      ],
+      "native_installation_scientific_checks_passed_per_path": 3,
+      "graph_archive_contracts_passed_per_path": 6,
+      "additional_scientific_regressions_passed_per_path": 14,
+      "test_failures": 0,
+      "test_errors": 0,
+      "test_skips": 0,
+      "scope": "Exact final native Windows archive: three installation/scientific checks, six graph/archive contracts and 14 additional scientific regressions per path, zero failures/errors/skips. Matrix and tximport independent upstream comparisons cover all 300 genes and six inferential columns at 1e-10; preserved 24 planted effects and four incidental null discoveries are a regression fixture, not FDR calibration. Independent bulk replicates only, condition or additive batch+condition designs; sample metadata cannot prove biological independence. Private R scratch requires a space-free path or existing short alias.",
+      "limits": "Graph/archive contracts use Python publication; separate native import, duplicate protection and scientific execution passed in the same jobs. The earlier local graph 5/6 temporary-copy failure remains recorded, without altered assertions. No GUI, arbitrary long-path, clinical or large-cohort validation."
+    },
+    {
       "pack": "fastqc",
       "version": "1.0.0",
       "workflow_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37207251061",
@@ -835,6 +1062,29 @@
       "limits": "Synthetic fixtures; no GUI, arbitrary long paths, whole-genome throughput, OS-level network blocking or clinical validation. gVCFs are labelled generic files with adapter content guards."
     },
     {
+      "pack": "iqtree",
+      "version": "1.0.0",
+      "workflow_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37229409061",
+      "workflow_source_commit": "24c6899aa7c19208ec88ae816879952ed0d8527e",
+      "workflow_name": "Native Windows pack check",
+      "status": "completed",
+      "conclusion": "success",
+      "runner": "windows-2022",
+      "application": "released 0.6.0 starter with native bridge",
+      "paths": [
+        "ordinary",
+        "contains spaces"
+      ],
+      "native_installation_scientific_checks_passed_per_path": 4,
+      "graph_archive_contracts_passed_per_path": 6,
+      "additional_scientific_regressions_passed_per_path": 13,
+      "test_failures": 0,
+      "test_errors": 0,
+      "test_skips": 0,
+      "scope": "Exact final native Windows archive: 4 installation/scientific checks, 6 graph/archive contracts and 13 additional scientific regressions per path; zero failures, errors or test skips. Synthetic DNA/protein inference and actual MUSCLE chains. ASCII installation/results paths, including spaces; selected input paths may contain Unicode. Large-tree split summaries bounded to 256 taxa; complete Newick retained.",
+      "limits": "Graph/archive contracts use Python publication, with native import and scientific execution tested independently in the same jobs. Synthetic fixtures do not establish GUI, arbitrary long-path, production-scale or clinical validation."
+    },
+    {
       "pack": "kallisto",
       "version": "1.0.1",
       "workflow_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37150386848",
@@ -853,6 +1103,29 @@
       "limits": "Synthetic fixtures. Does not validate the GUI, arbitrary long paths, all protocols, human-scale performance, or clinical use."
     },
     {
+      "pack": "mosdepth",
+      "version": "1.0.0",
+      "workflow_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37228329920",
+      "workflow_source_commit": "102e85e2ce38c750b521c70e532001dd55451509",
+      "workflow_name": "Native Windows pack check",
+      "status": "completed",
+      "conclusion": "success",
+      "runner": "windows-2022",
+      "application": "released 0.6.0 starter with native bridge",
+      "paths": [
+        "ordinary",
+        "contains spaces"
+      ],
+      "native_installation_scientific_checks_passed_per_path": 4,
+      "graph_archive_contracts_passed_per_path": 6,
+      "additional_scientific_regressions_passed_per_path": 11,
+      "test_failures": 0,
+      "test_errors": 0,
+      "test_skips": 0,
+      "scope": "Exact final native Windows archive: 4 installation/scientific checks, 6 graph/archive contracts and 11 additional scientific regressions per path; zero failures, errors or test skips. BAM only. No base-quality filter. Synthetic accurate-mode CIGAR/overlap/flags/MAPQ and complete-header/target denominator checks; no assembly FASTA validation.",
+      "limits": "Graph/archive contracts use Python publication, with native import and scientific execution tested independently in the same jobs. Synthetic fixtures do not establish GUI, arbitrary long-path, production-scale or clinical validation."
+    },
+    {
       "pack": "multiqc",
       "version": "1.0.0",
       "workflow_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37208730673",
@@ -868,6 +1141,29 @@
       ],
       "scope": "One aggregation case per path with six selected reports across FastQC, fastp, STAR, featureCounts and kallisto parsers, retained same-named identities and known metrics; native import and duplicate-version rejection.",
       "limits": "Synthetic fixtures. Does not validate the GUI, arbitrary long paths, OS-level network blocking, all protocols, human-scale performance or clinical use."
+    },
+    {
+      "pack": "snpeff",
+      "version": "1.0.0",
+      "workflow_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37229552990",
+      "workflow_source_commit": "24c6899aa7c19208ec88ae816879952ed0d8527e",
+      "workflow_name": "Native Windows pack check",
+      "status": "completed",
+      "conclusion": "success",
+      "runner": "windows-2022",
+      "application": "released 0.6.0 starter with native bridge",
+      "paths": [
+        "ordinary",
+        "contains spaces"
+      ],
+      "native_installation_scientific_checks_passed_per_path": 4,
+      "graph_archive_contracts_passed_per_path": 6,
+      "additional_scientific_regressions_passed_per_path": 13,
+      "test_failures": 0,
+      "test_errors": 0,
+      "test_skips": 0,
+      "scope": "Exact final native Windows archive: 4 installation/scientific checks, 6 graph/archive contracts and 13 additional scientific regressions per path; zero failures, errors or test skips. Synthetic CDS and variant consequences, local normalized biallelic annotation and whole-record impact selection. Separate versioned reference databases required; no human database bundled. ASCII paths including spaces.",
+      "limits": "Graph/archive contracts use Python publication, with native import and scientific execution tested independently in the same jobs. Synthetic fixtures do not establish GUI, arbitrary long-path, production-scale or clinical validation."
     },
     {
       "pack": "star",
@@ -919,6 +1215,71 @@
       "release_url": "https://github.com/comparativechrono/workbench/releases/tag/gatk-candidates-20261004",
       "status": "development-candidates-only",
       "purpose": "GATK 0.0.1 diagnostic candidate and exact-final payload correspondence, validated in run 37220034835. Excluded from current analysis packs."
+    },
+    {
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/expansion-candidates-20261004",
+      "status": "development-candidates-only",
+      "purpose": "Separately versioned mosdepth, SnpEff, IQ-TREE and DESeq2 archive candidates, payload-correspondence records and DESeq2 corresponding runtime sources. Candidates are excluded from current analysis packs; successful candidates do not replace exact-final native validation.",
+      "preserved_failed_candidates": [
+        {
+          "pack": "snpeff",
+          "version": "0.0.1",
+          "reason": "Upstream SnpEff treated a Windows drive-letter data directory as relative; later candidate uses a relative private child data directory."
+        },
+        {
+          "pack": "iqtree",
+          "version": "0.0.1",
+          "reason": "Windows CRLF output caused multiline JSON assertions to fail; later candidate writes explicit LF."
+        }
+      ],
+      "deseq2_development_history": {
+        "workflow_name": "DESeq2 Windows development check",
+        "successful_run": "https://github.com/comparativechrono/workbench/actions/runs/37229593426",
+        "source_commit": "24c6899aa7c19208ec88ae816879952ed0d8527e",
+        "scientific_tests_passed": 14,
+        "scope": "Pinned-source build and statistical regressions; does not by itself validate a published archive.",
+        "prior_runs": [
+          {
+            "run": 37227193111,
+            "reason": "Build diagnostic called curlVersion instead of base R libcurlVersion."
+          },
+          {
+            "run": 37227394554,
+            "reason": "R_TempDir rejected a space-containing private runtime path; adapter now uses an owned OS scratch child with explicit custom-root option."
+          },
+          {
+            "run": 37228195854,
+            "reason": "R summary expression missing a closing parenthesis after completed scientific model and plots."
+          },
+          {
+            "run": 37228745912,
+            "reason": "13 of 14 tests passed. Test oracle wrongly equated raw-count and tximport-normalized base means; tximport geometrically centers normalization factors. Corrected independent upstream comparison, without changing algorithms or widening tolerances."
+          }
+        ]
+      },
+      "successful_candidates": [
+        {
+          "pack": "mosdepth",
+          "version": "0.0.1",
+          "run": 37227722575
+        },
+        {
+          "pack": "iqtree",
+          "version": "0.0.2",
+          "run": 37228916162
+        },
+        {
+          "pack": "snpeff",
+          "version": "0.0.2",
+          "run": 37229017577
+        },
+        {
+          "pack": "deseq2",
+          "version": "0.0.1",
+          "run": 37230398977
+        }
+      ],
+      "final_status": "All four corresponding exact-final 1.0.0 archives subsequently passed native Windows gates; see native_windows_evidence and the separate final reports."
     }
   ],
   "source_recovery": {
@@ -926,7 +1287,8 @@
     "guidance": "GitHub automatic source snapshots do not include the binary dependencies and retained third-party source companions. Preserve the explicit application companion, each pack's licenses/provenance, and matching pack source-evidence companion where supplied.",
     "rna_source_evidence": "The STAR and kallisto source-evidence ZIPs retain candidate/Linux-stage records. The separate windows-validation.json assets record exact-final native Windows results; a historical pending-final statement in an immutable companion is superseded by that separate report.",
     "optional_pack_source_evidence": "The October optional-pack source-evidence ZIPs retain immutable creation-time source and Linux/candidate records. Separate windows-validation.json assets bind successful native results to exact-final archive hashes. BEDTools final JSON also supplies complete static verification to correct an empty historical static-validation log in its source companion.",
-    "gatk_source_evidence": "GATK 1.0.0 source/evidence companion retains a full git source and knowledge snapshot at eb4a255, Linux scientific reports and early strict-copy failures; its pending-final note is superseded by the exact-final Windows report. Upstream corresponding sources/licenses are retained in the installable pack. Preserve both archives."
+    "gatk_source_evidence": "GATK 1.0.0 source/evidence companion retains a full git source and knowledge snapshot at eb4a255, Linux scientific reports and early strict-copy failures; its pending-final note is superseded by the exact-final Windows report. Upstream corresponding sources/licenses are retained in the installable pack. Preserve both archives.",
+    "annotation_expression_coverage_phylogeny_sources": "Each new pack retains upstream corresponding sources and licenses. Explicit source-evidence companions include full Git snapshots and historical failures; separate exact-final Windows JSON reports close creation-time pending validation without replacing immutable archives. DESeq2 additionally requires the separate r-runtime-sources.zip for compiled R dependency source recovery; users do not import that source ZIP."
   },
   "historical_manifests": {
     "paths": [

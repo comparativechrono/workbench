@@ -13,7 +13,7 @@ The application does not require Docker, WSL or a system Python installation.
 
 Version **0.6.0 is a development prerelease**. The
 [application release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.6.0)
-and **26 independently versioned tool packs** are published on GitHub. The
+and **30 independently versioned tool packs** are published on GitHub. The
 [release inventory](knowledge/release-inventory.json) records their downloads,
 sizes, SHA-256 checksums and dated validation evidence.
 
@@ -26,7 +26,8 @@ starter installation/scientific checks, and an actual 0.5.4-to-0.6.0 updater
 migration on Linux. Scientific execution used the portable Linux reference
 backend. The current Windows GUI and native Windows long-path behavior still need
 validation on Windows. Separate native Windows pack checks validate the exact
-published STAR, kallisto, FastQC, MultiQC, featureCounts, BEDTools, BLAST and GATK archives
+published STAR, kallisto, FastQC, MultiQC, featureCounts, BEDTools, BLAST, GATK,
+SnpEff, DESeq2, mosdepth and IQ-TREE archives
 through the released 0.6.0 native bridge in ordinary and space-containing paths;
 see the [dated evidence and limits](knowledge/current-state.md).
 
@@ -62,6 +63,26 @@ Use [the pack guide](docs/popular-packs-2026-10.md) for supported inputs,
 scientific choices, pipeline branches and resource requirements. Reports are
 created locally; viewing an HTML report separately may require an approved
 viewer. The desktop app does not launch a browser to run these tools.
+
+### Annotation, expression, coverage and phylogenetics
+
+These optional packs connect to existing tools without changing the 0.6.0
+application or its three-tool starter:
+
+| Pack | What it adds |
+| --- | --- |
+| [SnpEff + SnpSift 1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-snpeff-v1.0.0) | Local database construction, variant consequences, local VCF annotations and impact selection |
+| [DESeq2 + tximport 1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-deseq2-v1.0.0) | Bulk differential expression from raw counts, featureCounts or kallisto sample outputs |
+| [mosdepth 1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-mosdepth-v1.0.0) | Whole-reference and target-region BAM depth and breadth |
+| [IQ-TREE 1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-iqtree-v1.0.0) | Nucleotide/protein tree inference from alignments such as MUSCLE output |
+
+All four passed their exact-final native Windows installation, graph and
+scientific regressions in ordinary and space-containing paths. See the
+[four-pack guide](docs/ANNOTATION-EXPRESSION-COVERAGE-PHYLOGENETICS.md) for compatible
+connections, sample sheets, separate database resources and material limits.
+Private runtimes are included. Matching source/evidence assets accompany the
+releases; DESeq2 additionally requires its separate R-runtime source companion
+when redistributing the complete corresponding sources.
 
 ### RNA-seq tools
 

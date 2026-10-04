@@ -1,0 +1,2302 @@
+{
+  "schema": 1,
+  "kind": "native-workbench-exact-final-pack-validation",
+  "asOf": "2026-10-04",
+  "success": true,
+  "nativeWindowsHost": true,
+  "nativeWindowsExecuted": true,
+  "packId": "deseq2",
+  "packVersion": "1.0.0",
+  "upstreamToolVersion": "1.52.0",
+  "tximportVersion": "1.40.0",
+  "privateRVersion": "4.6.1",
+  "BioconductorVersion": "3.23",
+  "privatePythonVersion": "3.13.16",
+  "minimumApplicationVersion": "0.6.0",
+  "packImplementationSourceCommit": "24c6899aa7c19208ec88ae816879952ed0d8527e",
+  "release": {
+    "id": 403186644,
+    "tag": "pack-deseq2-v1.0.0",
+    "url": "https://github.com/comparativechrono/workbench/releases/tag/pack-deseq2-v1.0.0",
+    "targetCommitish": "24c6899aa7c19208ec88ae816879952ed0d8527e",
+    "publishedAt": "2026-10-04T20:07:12Z",
+    "prereleaseAtEvidenceRetrieval": true,
+    "assets": [
+      {
+        "id": 610557069,
+        "name": "native-workbench-deseq2-1.0.0-r-runtime-sources.zip",
+        "bytes": 458255663,
+        "githubDigest": "sha256:4dcb85cea0f859ffec0562ca1a3ce4eb814bbbcdf6e994c328a284c3763b844b",
+        "downloadUrl": "https://github.com/comparativechrono/workbench/releases/download/pack-deseq2-v1.0.0/native-workbench-deseq2-1.0.0-r-runtime-sources.zip"
+      },
+      {
+        "id": 610557048,
+        "name": "native-workbench-deseq2-1.0.0-source-evidence.zip",
+        "bytes": 1814514,
+        "githubDigest": "sha256:da6f5b48549e1de2554f6bef903f19b64c08435cce44995eb59716d36f25dbf2",
+        "downloadUrl": "https://github.com/comparativechrono/workbench/releases/download/pack-deseq2-v1.0.0/native-workbench-deseq2-1.0.0-source-evidence.zip"
+      },
+      {
+        "id": 610556586,
+        "name": "native-workbench-pack-deseq2-1.0.0.zip",
+        "bytes": 277504383,
+        "githubDigest": "sha256:eccffbcaf3adad6ab1da63ea771fe103a807a88722a56f5db82072cf02c1292d",
+        "downloadUrl": "https://github.com/comparativechrono/workbench/releases/download/pack-deseq2-v1.0.0/native-workbench-pack-deseq2-1.0.0.zip"
+      }
+    ]
+  },
+  "run": {
+    "id": 37230943331,
+    "url": "https://github.com/comparativechrono/workbench/actions/runs/37230943331",
+    "sourceCommit": "24c6899aa7c19208ec88ae816879952ed0d8527e",
+    "status": "completed",
+    "conclusion": "success",
+    "startedAt": "2026-10-04T20:08:12Z",
+    "updatedAt": "2026-10-04T20:13:18Z",
+    "runner": "windows-2022"
+  },
+  "archive": {
+    "name": "native-workbench-pack-deseq2-1.0.0.zip",
+    "assetId": 610556586,
+    "downloadUrl": "https://github.com/comparativechrono/workbench/releases/download/pack-deseq2-v1.0.0/native-workbench-pack-deseq2-1.0.0.zip",
+    "httpStatus": 200,
+    "bytes": 277504383,
+    "sha256": "eccffbcaf3adad6ab1da63ea771fe103a807a88722a56f5db82072cf02c1292d",
+    "githubDigest": "sha256:eccffbcaf3adad6ab1da63ea771fe103a807a88722a56f5db82072cf02c1292d",
+    "matchesFrozenArtifact": true,
+    "verifiedAt": "2026-10-04T20:09:27.827936+00:00",
+    "manifestSha256": "f5a06708651f14f25e89ca3588ed6bf2f91442e43d635a9fc7ab5af066112ee1"
+  },
+  "sourceEvidenceCompanion": {
+    "name": "native-workbench-deseq2-1.0.0-source-evidence.zip",
+    "assetId": 610557048,
+    "downloadUrl": "https://github.com/comparativechrono/workbench/releases/download/pack-deseq2-v1.0.0/native-workbench-deseq2-1.0.0-source-evidence.zip",
+    "httpStatus": 200,
+    "bytes": 1814514,
+    "sha256": "da6f5b48549e1de2554f6bef903f19b64c08435cce44995eb59716d36f25dbf2",
+    "githubDigest": "sha256:da6f5b48549e1de2554f6bef903f19b64c08435cce44995eb59716d36f25dbf2",
+    "matchesFrozenArtifact": true,
+    "verifiedAt": "2026-10-04T20:09:38.212274+00:00",
+    "sourceCommit": "24c6899aa7c19208ec88ae816879952ed0d8527e",
+    "creationTimeNativeFinalPendingStatusSupersededByThisReport": true,
+    "immutableBytesPreserved": true
+  },
+  "runtimeCorrespondingSourceCompanion": {
+    "name": "native-workbench-deseq2-1.0.0-r-runtime-sources.zip",
+    "assetId": 610557069,
+    "downloadUrl": "https://github.com/comparativechrono/workbench/releases/download/pack-deseq2-v1.0.0/native-workbench-deseq2-1.0.0-r-runtime-sources.zip",
+    "httpStatus": 200,
+    "bytes": 458255663,
+    "sha256": "4dcb85cea0f859ffec0562ca1a3ce4eb814bbbcdf6e994c328a284c3763b844b",
+    "githubDigest": "sha256:4dcb85cea0f859ffec0562ca1a3ce4eb814bbbcdf6e994c328a284c3763b844b",
+    "matchesFrozenArtifact": true,
+    "verifiedAt": "2026-10-04T20:10:01.992739+00:00",
+    "sourceLockSha256": "73cd990b9dcf6fede7db537169b3e086b04a87b7dd09f6e5ead397ef5f931a64",
+    "sourceFiles": 230,
+    "requiredSeparateReleaseAsset": true
+  },
+  "publicAssetVerification": {
+    "schema": 1,
+    "kind": "independent-public-release-asset-verification",
+    "releaseTag": "pack-deseq2-v1.0.0",
+    "releaseId": 403186644,
+    "method": "Fresh HTTPS reads of complete public release assets, streamed into SHA-256 and byte counters without storing duplicate ZIPs.",
+    "assets": [
+      {
+        "name": "native-workbench-pack-deseq2-1.0.0.zip",
+        "assetId": 610556586,
+        "downloadUrl": "https://github.com/comparativechrono/workbench/releases/download/pack-deseq2-v1.0.0/native-workbench-pack-deseq2-1.0.0.zip",
+        "httpStatus": 200,
+        "bytes": 277504383,
+        "sha256": "eccffbcaf3adad6ab1da63ea771fe103a807a88722a56f5db82072cf02c1292d",
+        "githubDigest": "sha256:eccffbcaf3adad6ab1da63ea771fe103a807a88722a56f5db82072cf02c1292d",
+        "matchesFrozenArtifact": true,
+        "verifiedAt": "2026-10-04T20:09:27.827936+00:00"
+      },
+      {
+        "name": "native-workbench-deseq2-1.0.0-source-evidence.zip",
+        "assetId": 610557048,
+        "downloadUrl": "https://github.com/comparativechrono/workbench/releases/download/pack-deseq2-v1.0.0/native-workbench-deseq2-1.0.0-source-evidence.zip",
+        "httpStatus": 200,
+        "bytes": 1814514,
+        "sha256": "da6f5b48549e1de2554f6bef903f19b64c08435cce44995eb59716d36f25dbf2",
+        "githubDigest": "sha256:da6f5b48549e1de2554f6bef903f19b64c08435cce44995eb59716d36f25dbf2",
+        "matchesFrozenArtifact": true,
+        "verifiedAt": "2026-10-04T20:09:38.212274+00:00"
+      },
+      {
+        "name": "native-workbench-deseq2-1.0.0-r-runtime-sources.zip",
+        "assetId": 610557069,
+        "downloadUrl": "https://github.com/comparativechrono/workbench/releases/download/pack-deseq2-v1.0.0/native-workbench-deseq2-1.0.0-r-runtime-sources.zip",
+        "httpStatus": 200,
+        "bytes": 458255663,
+        "sha256": "4dcb85cea0f859ffec0562ca1a3ce4eb814bbbcdf6e994c328a284c3763b844b",
+        "githubDigest": "sha256:4dcb85cea0f859ffec0562ca1a3ce4eb814bbbcdf6e994c328a284c3763b844b",
+        "matchesFrozenArtifact": true,
+        "verifiedAt": "2026-10-04T20:10:01.992739+00:00"
+      }
+    ]
+  },
+  "releasedApplication": {
+    "version": "0.6.0",
+    "archiveName": "native-workbench-0.6.0-starter-windows.zip",
+    "sha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+    "nativeBridgeUsedForInstallationChecks": true,
+    "downloadUrl": "https://github.com/comparativechrono/workbench/releases/download/app-v0.6.0/native-workbench-0.6.0-starter-windows.zip"
+  },
+  "summary": {
+    "pathConfigurations": [
+      "ordinary",
+      "path with spaces"
+    ],
+    "scientificInstallationChecksPassedPerPath": 3,
+    "installedPeScientificRegressionTestsPassedPerPath": 14,
+    "releasedApplicationGraphArchiveTestsPassedPerPath": 6,
+    "duplicateVersionRejectedInBothPaths": true,
+    "testFailures": 0,
+    "testErrors": 0,
+    "testSkips": 0,
+    "unrelatedConditionalWorkflowStepsSkippedAsExpected": true,
+    "exactFinalArchiveValidated": true,
+    "sourceBuildScientificTestsPassed": 14,
+    "historicalLocalGraphTestsPassed": 5,
+    "historicalLocalGraphTestsFailed": 1
+  },
+  "jobs": [
+    {
+      "jobId": 111520241931,
+      "name": "native (ordinary)",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37230943331/job/111520241931",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Download exact candidate and released application",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Import offline and run scientific checks on Windows",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Check kallisto at its default two threads",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 4
+        },
+        {
+          "name": "Check STAR repeated input and output chunks",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 5
+        },
+        {
+          "name": "Check BLAST local failure paths",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 6
+        },
+        {
+          "name": "Check GATK released application graph and archive contracts",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 7
+        },
+        {
+          "name": "Check expansion pack released application contracts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Check out expansion regression sources",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Run expansion scientific and failure regressions",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Diagnose failed STAR process",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 11
+        },
+        {
+          "name": "Record native evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Post Check out expansion regression sources",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 24
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 25
+        }
+      ],
+      "log": {
+        "file": "build/deseq2-final-evidence/111520241931.log",
+        "bytes": 87043,
+        "sha256": "f7538b1b0db800cdaa1221b364bcf1ccd03238fe3579464ca72821d911aea044",
+        "encoding": "Complete decoded timestamped job log, normalized to LF."
+      },
+      "nativeInstallationReport": {
+        "schema": 1,
+        "nativeWindowsHost": true,
+        "nativeWindowsExecuted": true,
+        "success": true,
+        "packId": "deseq2",
+        "packVersion": "1.0.0",
+        "installation": {
+          "type": "result",
+          "success": true,
+          "cancelled": false,
+          "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\packs\\deseq2-1.0.0",
+          "message": "Tool pack imported.",
+          "outputs": [],
+          "pack_id": "deseq2",
+          "pack_version": "1.0.0",
+          "packId": "deseq2",
+          "packVersion": "1.0.0",
+          "publisherVerified": false,
+          "verification": "Complete file inventory verified; publisher identity not verified"
+        },
+        "scientificChecks": {
+          "schema": 1,
+          "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-200828-33b92263",
+          "checks": [
+            {
+              "id": "deseq2/counts-six-samples@1.0.0",
+              "pin": {
+                "packId": "deseq2",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f5a06708651f14f25e89ca3588ed6bf2f91442e43d635a9fc7ab5af066112ee1"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-200828-33b92263\\run-20261004-200828-a9d8cdf7"
+            },
+            {
+              "id": "deseq2/featurecounts-six-samples@1.0.0",
+              "pin": {
+                "packId": "deseq2",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f5a06708651f14f25e89ca3588ed6bf2f91442e43d635a9fc7ab5af066112ee1"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-200828-33b92263\\run-20261004-200840-df3938a7"
+            },
+            {
+              "id": "deseq2/kallisto-six-samples@1.0.0",
+              "pin": {
+                "packId": "deseq2",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f5a06708651f14f25e89ca3588ed6bf2f91442e43d635a9fc7ab5af066112ee1"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-200828-33b92263\\run-20261004-200852-522479a4"
+            }
+          ],
+          "nativeWindowsExecuted": true,
+          "passed": 3,
+          "failed": 0,
+          "cancelled": false,
+          "success": true,
+          "message": "3 of 3 additional pack checks passed."
+        },
+        "duplicateVersionRejected": true
+      },
+      "scientificRegressionReport": {
+        "schema": 1,
+        "packId": "deseq2",
+        "packVersion": "1.0.0",
+        "packManifestSha256": "f5a06708651f14f25e89ca3588ed6bf2f91442e43d635a9fc7ab5af066112ee1",
+        "nativeWindowsHost": true,
+        "nativeWindowsExecuted": true,
+        "testSourceSha256": "b33b9a7547481eae89da93ffa138376df8354a613f8b7d176df8c4069ea1b616",
+        "testsRun": 14,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "success": true,
+        "seconds": 207.02647852897644,
+        "evidence": {
+          "validSummaries": {
+            "counts": {
+              "schema": 1,
+              "tool": "DESeq2",
+              "version": "1.52.0",
+              "tximportVersion": "1.40.0",
+              "R": "R version 4.6.1 (2026-06-24 ucrt)",
+              "mode": "counts",
+              "samples": 6,
+              "genesInput": 300,
+              "genesTested": 300,
+              "genesPrefiltered": 0,
+              "significant": 28,
+              "positiveSignificant": 13,
+              "negativeSignificant": 15,
+              "design": "~condition",
+              "contrast": [
+                "treated",
+                "control"
+              ],
+              "alpha": 0.05,
+              "minTotalCount": 10,
+              "test": "Wald",
+              "normalization": "DESeq2 median-of-ratios size factors",
+              "dispersionFitRequested": "parametric",
+              "dispersionFitUsed": "parametric",
+              "pAdjustment": "BH",
+              "independentFiltering": true,
+              "cooksCutoff": true,
+              "automaticOutlierReplacement": false,
+              "foldChangeShrinkage": false,
+              "replicates": "Independent biological samples asserted by explicit metadata; identity cannot establish biological independence",
+              "inputOrder": [
+                {
+                  "sample_id": "control1",
+                  "input_index": "1"
+                },
+                {
+                  "sample_id": "control2",
+                  "input_index": "2"
+                },
+                {
+                  "sample_id": "control3",
+                  "input_index": "3"
+                },
+                {
+                  "sample_id": "treated1",
+                  "input_index": "4"
+                },
+                {
+                  "sample_id": "treated2",
+                  "input_index": "5"
+                },
+                {
+                  "sample_id": "treated3",
+                  "input_index": "6"
+                }
+              ],
+              "runtimePackages": {
+                "DESeq2": "1.52.0"
+              }
+            },
+            "featurecounts": {
+              "schema": 1,
+              "tool": "DESeq2",
+              "version": "1.52.0",
+              "tximportVersion": "1.40.0",
+              "R": "R version 4.6.1 (2026-06-24 ucrt)",
+              "mode": "featurecounts",
+              "samples": 6,
+              "genesInput": 300,
+              "genesTested": 300,
+              "genesPrefiltered": 0,
+              "significant": 28,
+              "positiveSignificant": 13,
+              "negativeSignificant": 15,
+              "design": "~condition",
+              "contrast": [
+                "treated",
+                "control"
+              ],
+              "alpha": 0.05,
+              "minTotalCount": 10,
+              "test": "Wald",
+              "normalization": "DESeq2 median-of-ratios size factors",
+              "dispersionFitRequested": "parametric",
+              "dispersionFitUsed": "parametric",
+              "pAdjustment": "BH",
+              "independentFiltering": true,
+              "cooksCutoff": true,
+              "automaticOutlierReplacement": false,
+              "foldChangeShrinkage": false,
+              "replicates": "Independent biological samples asserted by explicit metadata; identity cannot establish biological independence",
+              "inputOrder": [
+                {
+                  "sample_id": "control1",
+                  "input_index": "1"
+                },
+                {
+                  "sample_id": "control2",
+                  "input_index": "2"
+                },
+                {
+                  "sample_id": "control3",
+                  "input_index": "3"
+                },
+                {
+                  "sample_id": "treated1",
+                  "input_index": "4"
+                },
+                {
+                  "sample_id": "treated2",
+                  "input_index": "5"
+                },
+                {
+                  "sample_id": "treated3",
+                  "input_index": "6"
+                }
+              ],
+              "runtimePackages": {
+                "DESeq2": "1.52.0"
+              }
+            },
+            "kallisto": {
+              "schema": 1,
+              "tool": "DESeq2",
+              "version": "1.52.0",
+              "tximportVersion": "1.40.0",
+              "R": "R version 4.6.1 (2026-06-24 ucrt)",
+              "mode": "kallisto",
+              "samples": 6,
+              "genesInput": 300,
+              "genesTested": 300,
+              "genesPrefiltered": 0,
+              "significant": 28,
+              "positiveSignificant": 13,
+              "negativeSignificant": 15,
+              "design": "~condition",
+              "contrast": [
+                "treated",
+                "control"
+              ],
+              "alpha": 0.05,
+              "minTotalCount": 10,
+              "test": "Wald",
+              "normalization": "DESeqDataSetFromTximport counts with average-transcript-length offsets",
+              "dispersionFitRequested": "parametric",
+              "dispersionFitUsed": "parametric",
+              "pAdjustment": "BH",
+              "independentFiltering": true,
+              "cooksCutoff": true,
+              "automaticOutlierReplacement": false,
+              "foldChangeShrinkage": false,
+              "replicates": "Independent biological samples asserted by explicit metadata; identity cannot establish biological independence",
+              "inputOrder": [
+                {
+                  "sample_id": "control1",
+                  "input_index": "1"
+                },
+                {
+                  "sample_id": "control2",
+                  "input_index": "2"
+                },
+                {
+                  "sample_id": "control3",
+                  "input_index": "3"
+                },
+                {
+                  "sample_id": "treated1",
+                  "input_index": "4"
+                },
+                {
+                  "sample_id": "treated2",
+                  "input_index": "5"
+                },
+                {
+                  "sample_id": "treated3",
+                  "input_index": "6"
+                }
+              ],
+              "runtimePackages": {
+                "DESeq2": "1.52.0"
+              }
+            }
+          },
+          "plantedEffects": {
+            "counts": {
+              "positiveRecovered": 12,
+              "negativeRecovered": 12,
+              "incidentalNullDiscoveries": 4,
+              "scope": "Deterministic effect-direction and adjusted-P-value regression; not empirical FDR calibration or a power benchmark."
+            },
+            "featurecounts": {
+              "positiveRecovered": 12,
+              "negativeRecovered": 12,
+              "incidentalNullDiscoveries": 4,
+              "scope": "Deterministic effect-direction and adjusted-P-value regression; not empirical FDR calibration or a power benchmark."
+            },
+            "kallisto": {
+              "positiveRecovered": 12,
+              "negativeRecovered": 12,
+              "incidentalNullDiscoveries": 4,
+              "scope": "Deterministic effect-direction and adjusted-P-value regression; not empirical FDR calibration or a power benchmark."
+            }
+          },
+          "normalizationConvention": {
+            "countsIdentical": true,
+            "rawSizeFactors": [
+              0.9811560495231364,
+              1.0727419077182427,
+              0.9600807925690964,
+              1.0018951107037128,
+              1.069479997924178,
+              0.9474139303151584
+            ],
+            "sizeFactorGeometricMean": 1.0042595430960437,
+            "observedBaseMeanRatioRange": [
+              1.0042595430960353,
+              1.0042595430960501
+            ],
+            "explanation": "Pinned DESeq2 estimateNormFactors recenters tximport length normalization factors to geometric mean1; ordinary matrix size factors are not recentered. All inferential columns are instead compared against the corresponding independent upstream API path."
+          },
+          "unwrappedUpstreamCrosscheck": {
+            "samePinnedRuntime": true,
+            "allGenesCompared": 300,
+            "inputModes": [
+              "counts",
+              "kallisto"
+            ],
+            "totalGeneComparisons": 600,
+            "relativeTolerance": 1e-10,
+            "scriptSha256ByMode": {
+              "counts": "5ee901f27beb3244ee69768d518113c45e10186e3b406edc7c8de1033ac09d1b",
+              "kallisto": "5ee901f27beb3244ee69768d518113c45e10186e3b406edc7c8de1033ac09d1b"
+            }
+          },
+          "actualKallistoImport": {
+            "success": true,
+            "counts": [
+              12,
+              6,
+              2
+            ],
+            "abundance": [
+              600000,
+              300000,
+              100000
+            ],
+            "length": [
+              821,
+              821,
+              821
+            ],
+            "scope": "Actual upstream kallisto output import, not differential-expression inference on three transcripts"
+          },
+          "actualKallistoFixture": {
+            "source": "Actual unmodified upstream kallisto0.52.0 Linux executable output, using exact fixtures from released Workbench kallisto1.0.1. This is tximport parser/estimates compatibility, not a differential expression experiment.",
+            "archiveUrl": "https://github.com/pachterlab/kallisto/releases/download/v0.52.0/kallisto_linux-v0.52.0.tar.gz",
+            "archiveSha256": "2a85c0a6ce54890e4b3a8953f3eea867f3e6e3aa581d28ea6e5f5f89b12aff2e",
+            "kallistoExecutableSha256": "9000fd5afc1fb9f07cb4cf6513a4d932bcb086079982d0740843016a07178fa1",
+            "workbenchKallistoArchiveSha256": "641cd1f2b05e0951b1f8a58f45d6308ca6206bf86bf90fb74d0daa2860f5eecd",
+            "commands": [
+              [
+                "/workspace/scratch/0c5293ac0f36/github-workbench/build/deseq2-kallisto-upstream/kallisto/kallisto",
+                "index",
+                "-i",
+                "/workspace/scratch/0c5293ac0f36/github-workbench/build/deseq2-kallisto-upstream/transcripts.idx",
+                "/workspace/scratch/0c5293ac0f36/github-workbench/build/deseq2-kallisto/pack/fixtures/transcripts.fasta"
+              ],
+              [
+                "/workspace/scratch/0c5293ac0f36/github-workbench/build/deseq2-kallisto-upstream/kallisto/kallisto",
+                "quant",
+                "-i",
+                "/workspace/scratch/0c5293ac0f36/github-workbench/build/deseq2-kallisto-upstream/transcripts.idx",
+                "-o",
+                "/workspace/scratch/0c5293ac0f36/github-workbench/build/deseq2-kallisto-upstream/quant",
+                "--single",
+                "-l",
+                "180",
+                "-s",
+                "20",
+                "--plaintext",
+                "-t",
+                "1",
+                "/workspace/scratch/0c5293ac0f36/github-workbench/build/deseq2-kallisto/pack/fixtures/single.fastq"
+              ]
+            ],
+            "outputSha256": "cd3934109c1dbb2186cbbedb431345b46399e31eefd3bece53cb7e6b09e0522c",
+            "inputSha256": {
+              "transcripts.fasta": "3df298b76e9e64f33246ae0d2d30075f117d727e935e985332c3f3ab624acee6",
+              "single.fastq": "e7d4119cb35b5ef1e8e09a953a413837b2164717504546485c88057d73956812"
+            }
+          },
+          "installedPackUnchanged": true
+        },
+        "limitations": [
+          "Synthetic gene-count fixtures are not a real-cohort accuracy/power benchmark.",
+          "No GUI, clinical, repeated-measure or whole-transcriptome memory/cancellation validation.",
+          "Count format and sample identifiers do not prove biological independence or that integer data were never normalized."
+        ]
+      },
+      "releasedApplicationGraphReport": {
+        "schema": 1,
+        "applicationVersion": "0.6.0",
+        "expectedPackVersions": {
+          "deseq2": "1.0.0"
+        },
+        "testHost": "win32",
+        "pythonVersion": "3.13.16",
+        "nativeWindowsExecuted": false,
+        "scientificExecutablesExecuted": false,
+        "nativeImporterExecuted": false,
+        "scope": "Released-app graph contracts and Python archive import; checked copy callback substitutes native folder publication.",
+        "typingLimitations": {
+          "deseq2": "Released count and abundance products are metrics. Their statistical/file roles, sample identities and suitability require the separately tested adapter."
+        },
+        "differentialExpressionGraphs": [
+          {
+            "tools": [
+              "featurecounts/count-paired",
+              "featurecounts/count-paired",
+              "featurecounts/count-paired",
+              "featurecounts/count-paired",
+              "deseq2/featurecounts"
+            ],
+            "ranks": [
+              {
+                "rank": 1,
+                "nodes": [
+                  "step-1",
+                  "step-2",
+                  "step-3",
+                  "step-4"
+                ]
+              },
+              {
+                "rank": 2,
+                "nodes": [
+                  "step-5"
+                ]
+              }
+            ],
+            "savedPins": [
+              {
+                "packId": "featurecounts",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f40b334f0eb469a34d92696cf17c5ac2848346add6cdb9d73ca06fab93770716"
+              },
+              {
+                "packId": "featurecounts",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f40b334f0eb469a34d92696cf17c5ac2848346add6cdb9d73ca06fab93770716"
+              },
+              {
+                "packId": "featurecounts",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f40b334f0eb469a34d92696cf17c5ac2848346add6cdb9d73ca06fab93770716"
+              },
+              {
+                "packId": "featurecounts",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f40b334f0eb469a34d92696cf17c5ac2848346add6cdb9d73ca06fab93770716"
+              },
+              {
+                "packId": "deseq2",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f5a06708651f14f25e89ca3588ed6bf2f91442e43d635a9fc7ab5af066112ee1"
+              }
+            ],
+            "namedMethodsProvenance": true,
+            "changedSavedManifestRejected": true,
+            "inputOrderPreserved": true,
+            "workflow": "featurecounts",
+            "incomingCounts": [
+              "step-1::counts",
+              "step-2::counts",
+              "step-3::counts",
+              "step-4::counts"
+            ],
+            "metadataBindingsExcludedFromSavedPipeline": true
+          },
+          {
+            "tools": [
+              "kallisto/index-quant-paired",
+              "kallisto/index-quant-paired",
+              "kallisto/index-quant-paired",
+              "kallisto/index-quant-paired",
+              "deseq2/kallisto"
+            ],
+            "ranks": [
+              {
+                "rank": 1,
+                "nodes": [
+                  "step-1",
+                  "step-2",
+                  "step-3",
+                  "step-4"
+                ]
+              },
+              {
+                "rank": 2,
+                "nodes": [
+                  "step-5"
+                ]
+              }
+            ],
+            "savedPins": [
+              {
+                "packId": "kallisto",
+                "packVersion": "1.0.1",
+                "manifestSha256": "509756b8afb9719a56da60f88ed631a578ee51eb29700bfbf51271aecd00c0c9"
+              },
+              {
+                "packId": "kallisto",
+                "packVersion": "1.0.1",
+                "manifestSha256": "509756b8afb9719a56da60f88ed631a578ee51eb29700bfbf51271aecd00c0c9"
+              },
+              {
+                "packId": "kallisto",
+                "packVersion": "1.0.1",
+                "manifestSha256": "509756b8afb9719a56da60f88ed631a578ee51eb29700bfbf51271aecd00c0c9"
+              },
+              {
+                "packId": "kallisto",
+                "packVersion": "1.0.1",
+                "manifestSha256": "509756b8afb9719a56da60f88ed631a578ee51eb29700bfbf51271aecd00c0c9"
+              },
+              {
+                "packId": "deseq2",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f5a06708651f14f25e89ca3588ed6bf2f91442e43d635a9fc7ab5af066112ee1"
+              }
+            ],
+            "namedMethodsProvenance": true,
+            "changedSavedManifestRejected": true,
+            "inputOrderPreserved": true,
+            "workflow": "kallisto",
+            "incomingCounts": [
+              "step-1::abundance",
+              "step-2::abundance",
+              "step-3::abundance",
+              "step-4::abundance"
+            ],
+            "metadataBindingsExcludedFromSavedPipeline": true
+          }
+        ],
+        "differentialExpressionGuards": {
+          "minimumFourSelectedFiles": true,
+          "duplicateConnectionRejected": true,
+          "contrastLabelsRequired": true,
+          "bamAndVcfRejected": true,
+          "biologicalReplicationAndRawCountSuitabilityRequireAdapter": true
+        },
+        "installedInventory": {
+          "packManifests": 6,
+          "executablesVerified": 11,
+          "assetsVerified": 114
+        },
+        "selectedPacks": [
+          {
+            "id": "deseq2",
+            "version": "1.0.0",
+            "manifestSha256": "f5a06708651f14f25e89ca3588ed6bf2f91442e43d635a9fc7ab5af066112ee1",
+            "operations": [
+              "counts",
+              "featurecounts",
+              "kallisto"
+            ],
+            "scientificChecksDeclared": 3
+          }
+        ],
+        "offlineStaticImports": [
+          {
+            "id": "deseq2",
+            "version": "1.0.0",
+            "archiveSha256": "eccffbcaf3adad6ab1da63ea771fe103a807a88722a56f5db82072cf02c1292d",
+            "manifestSha256": "f5a06708651f14f25e89ca3588ed6bf2f91442e43d635a9fc7ab5af066112ee1",
+            "archiveMatchesGraphPayload": true,
+            "duplicateVersionRejected": true,
+            "installedFilesAndReceiptsUnchanged": true,
+            "publisherVerified": false
+          }
+        ],
+        "starterPackFilesPreserved": 143,
+        "releasedApplicationFilesVerified": [
+          "WorkbenchBridge.exe",
+          "workspace/app_version.py",
+          "workspace/catalog-sources.json",
+          "workspace/catalog.py",
+          "workspace/core_checks.py",
+          "workspace/desktop_host.py",
+          "workspace/desktop_model.py",
+          "workspace/engine.py",
+          "workspace/example.py",
+          "workspace/pack_checks.py",
+          "workspace/pack_manager.py",
+          "workspace/pack_security.py",
+          "workspace/service.py",
+          "workspace/starter-check-profile.json",
+          "workspace/verify_installation.py"
+        ],
+        "starterSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+        "dependencies": {
+          "featurecounts": {
+            "version": "1.0.0",
+            "archiveSha256": "f3319b6a8b13c30bc31b782008b0283c7688c739da2dd77cf5ab80859ccff4c2"
+          },
+          "kallisto": {
+            "version": "1.0.1",
+            "archiveSha256": "641cd1f2b05e0951b1f8a58f45d6308ca6206bf86bf90fb74d0daa2860f5eecd"
+          }
+        },
+        "presetAndOriginalPinContracts": [
+          "deseq2/counts",
+          "deseq2/featurecounts",
+          "deseq2/kallisto"
+        ],
+        "testsRun": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "testSourceSha256": "249e3919d668a0995803ced740346fbddb663178deb2053d15334aeaf73fa908",
+        "success": true
+      }
+    },
+    {
+      "jobId": 111520242051,
+      "name": "native (path with spaces)",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37230943331/job/111520242051",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Download exact candidate and released application",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Import offline and run scientific checks on Windows",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Check kallisto at its default two threads",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 4
+        },
+        {
+          "name": "Check STAR repeated input and output chunks",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 5
+        },
+        {
+          "name": "Check BLAST local failure paths",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 6
+        },
+        {
+          "name": "Check GATK released application graph and archive contracts",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 7
+        },
+        {
+          "name": "Check expansion pack released application contracts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Check out expansion regression sources",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Run expansion scientific and failure regressions",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Diagnose failed STAR process",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 11
+        },
+        {
+          "name": "Record native evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Post Check out expansion regression sources",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 24
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 25
+        }
+      ],
+      "log": {
+        "file": "build/deseq2-final-evidence/111520242051.log",
+        "bytes": 87123,
+        "sha256": "122f1478a1762af01849610f648e7501a69e3063a333d58eda41db525942b2de",
+        "encoding": "Complete decoded timestamped job log, normalized to LF."
+      },
+      "nativeInstallationReport": {
+        "schema": 1,
+        "nativeWindowsHost": true,
+        "nativeWindowsExecuted": true,
+        "success": true,
+        "packId": "deseq2",
+        "packVersion": "1.0.0",
+        "installation": {
+          "type": "result",
+          "success": true,
+          "cancelled": false,
+          "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\packs\\deseq2-1.0.0",
+          "message": "Tool pack imported.",
+          "outputs": [],
+          "pack_id": "deseq2",
+          "pack_version": "1.0.0",
+          "packId": "deseq2",
+          "packVersion": "1.0.0",
+          "publisherVerified": false,
+          "verification": "Complete file inventory verified; publisher identity not verified"
+        },
+        "scientificChecks": {
+          "schema": 1,
+          "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-200830-46a5e97a",
+          "checks": [
+            {
+              "id": "deseq2/counts-six-samples@1.0.0",
+              "pin": {
+                "packId": "deseq2",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f5a06708651f14f25e89ca3588ed6bf2f91442e43d635a9fc7ab5af066112ee1"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-200830-46a5e97a\\run-20261004-200830-81391b45"
+            },
+            {
+              "id": "deseq2/featurecounts-six-samples@1.0.0",
+              "pin": {
+                "packId": "deseq2",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f5a06708651f14f25e89ca3588ed6bf2f91442e43d635a9fc7ab5af066112ee1"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-200830-46a5e97a\\run-20261004-200842-7d39e3e3"
+            },
+            {
+              "id": "deseq2/kallisto-six-samples@1.0.0",
+              "pin": {
+                "packId": "deseq2",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f5a06708651f14f25e89ca3588ed6bf2f91442e43d635a9fc7ab5af066112ee1"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-200830-46a5e97a\\run-20261004-200856-6b649514"
+            }
+          ],
+          "nativeWindowsExecuted": true,
+          "passed": 3,
+          "failed": 0,
+          "cancelled": false,
+          "success": true,
+          "message": "3 of 3 additional pack checks passed."
+        },
+        "duplicateVersionRejected": true
+      },
+      "scientificRegressionReport": {
+        "schema": 1,
+        "packId": "deseq2",
+        "packVersion": "1.0.0",
+        "packManifestSha256": "f5a06708651f14f25e89ca3588ed6bf2f91442e43d635a9fc7ab5af066112ee1",
+        "nativeWindowsHost": true,
+        "nativeWindowsExecuted": true,
+        "testSourceSha256": "b33b9a7547481eae89da93ffa138376df8354a613f8b7d176df8c4069ea1b616",
+        "testsRun": 14,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "success": true,
+        "seconds": 222.5464322566986,
+        "evidence": {
+          "validSummaries": {
+            "counts": {
+              "schema": 1,
+              "tool": "DESeq2",
+              "version": "1.52.0",
+              "tximportVersion": "1.40.0",
+              "R": "R version 4.6.1 (2026-06-24 ucrt)",
+              "mode": "counts",
+              "samples": 6,
+              "genesInput": 300,
+              "genesTested": 300,
+              "genesPrefiltered": 0,
+              "significant": 28,
+              "positiveSignificant": 13,
+              "negativeSignificant": 15,
+              "design": "~condition",
+              "contrast": [
+                "treated",
+                "control"
+              ],
+              "alpha": 0.05,
+              "minTotalCount": 10,
+              "test": "Wald",
+              "normalization": "DESeq2 median-of-ratios size factors",
+              "dispersionFitRequested": "parametric",
+              "dispersionFitUsed": "parametric",
+              "pAdjustment": "BH",
+              "independentFiltering": true,
+              "cooksCutoff": true,
+              "automaticOutlierReplacement": false,
+              "foldChangeShrinkage": false,
+              "replicates": "Independent biological samples asserted by explicit metadata; identity cannot establish biological independence",
+              "inputOrder": [
+                {
+                  "sample_id": "control1",
+                  "input_index": "1"
+                },
+                {
+                  "sample_id": "control2",
+                  "input_index": "2"
+                },
+                {
+                  "sample_id": "control3",
+                  "input_index": "3"
+                },
+                {
+                  "sample_id": "treated1",
+                  "input_index": "4"
+                },
+                {
+                  "sample_id": "treated2",
+                  "input_index": "5"
+                },
+                {
+                  "sample_id": "treated3",
+                  "input_index": "6"
+                }
+              ],
+              "runtimePackages": {
+                "DESeq2": "1.52.0"
+              }
+            },
+            "featurecounts": {
+              "schema": 1,
+              "tool": "DESeq2",
+              "version": "1.52.0",
+              "tximportVersion": "1.40.0",
+              "R": "R version 4.6.1 (2026-06-24 ucrt)",
+              "mode": "featurecounts",
+              "samples": 6,
+              "genesInput": 300,
+              "genesTested": 300,
+              "genesPrefiltered": 0,
+              "significant": 28,
+              "positiveSignificant": 13,
+              "negativeSignificant": 15,
+              "design": "~condition",
+              "contrast": [
+                "treated",
+                "control"
+              ],
+              "alpha": 0.05,
+              "minTotalCount": 10,
+              "test": "Wald",
+              "normalization": "DESeq2 median-of-ratios size factors",
+              "dispersionFitRequested": "parametric",
+              "dispersionFitUsed": "parametric",
+              "pAdjustment": "BH",
+              "independentFiltering": true,
+              "cooksCutoff": true,
+              "automaticOutlierReplacement": false,
+              "foldChangeShrinkage": false,
+              "replicates": "Independent biological samples asserted by explicit metadata; identity cannot establish biological independence",
+              "inputOrder": [
+                {
+                  "sample_id": "control1",
+                  "input_index": "1"
+                },
+                {
+                  "sample_id": "control2",
+                  "input_index": "2"
+                },
+                {
+                  "sample_id": "control3",
+                  "input_index": "3"
+                },
+                {
+                  "sample_id": "treated1",
+                  "input_index": "4"
+                },
+                {
+                  "sample_id": "treated2",
+                  "input_index": "5"
+                },
+                {
+                  "sample_id": "treated3",
+                  "input_index": "6"
+                }
+              ],
+              "runtimePackages": {
+                "DESeq2": "1.52.0"
+              }
+            },
+            "kallisto": {
+              "schema": 1,
+              "tool": "DESeq2",
+              "version": "1.52.0",
+              "tximportVersion": "1.40.0",
+              "R": "R version 4.6.1 (2026-06-24 ucrt)",
+              "mode": "kallisto",
+              "samples": 6,
+              "genesInput": 300,
+              "genesTested": 300,
+              "genesPrefiltered": 0,
+              "significant": 28,
+              "positiveSignificant": 13,
+              "negativeSignificant": 15,
+              "design": "~condition",
+              "contrast": [
+                "treated",
+                "control"
+              ],
+              "alpha": 0.05,
+              "minTotalCount": 10,
+              "test": "Wald",
+              "normalization": "DESeqDataSetFromTximport counts with average-transcript-length offsets",
+              "dispersionFitRequested": "parametric",
+              "dispersionFitUsed": "parametric",
+              "pAdjustment": "BH",
+              "independentFiltering": true,
+              "cooksCutoff": true,
+              "automaticOutlierReplacement": false,
+              "foldChangeShrinkage": false,
+              "replicates": "Independent biological samples asserted by explicit metadata; identity cannot establish biological independence",
+              "inputOrder": [
+                {
+                  "sample_id": "control1",
+                  "input_index": "1"
+                },
+                {
+                  "sample_id": "control2",
+                  "input_index": "2"
+                },
+                {
+                  "sample_id": "control3",
+                  "input_index": "3"
+                },
+                {
+                  "sample_id": "treated1",
+                  "input_index": "4"
+                },
+                {
+                  "sample_id": "treated2",
+                  "input_index": "5"
+                },
+                {
+                  "sample_id": "treated3",
+                  "input_index": "6"
+                }
+              ],
+              "runtimePackages": {
+                "DESeq2": "1.52.0"
+              }
+            }
+          },
+          "plantedEffects": {
+            "counts": {
+              "positiveRecovered": 12,
+              "negativeRecovered": 12,
+              "incidentalNullDiscoveries": 4,
+              "scope": "Deterministic effect-direction and adjusted-P-value regression; not empirical FDR calibration or a power benchmark."
+            },
+            "featurecounts": {
+              "positiveRecovered": 12,
+              "negativeRecovered": 12,
+              "incidentalNullDiscoveries": 4,
+              "scope": "Deterministic effect-direction and adjusted-P-value regression; not empirical FDR calibration or a power benchmark."
+            },
+            "kallisto": {
+              "positiveRecovered": 12,
+              "negativeRecovered": 12,
+              "incidentalNullDiscoveries": 4,
+              "scope": "Deterministic effect-direction and adjusted-P-value regression; not empirical FDR calibration or a power benchmark."
+            }
+          },
+          "normalizationConvention": {
+            "countsIdentical": true,
+            "rawSizeFactors": [
+              0.9811560495231364,
+              1.0727419077182427,
+              0.9600807925690964,
+              1.0018951107037128,
+              1.069479997924178,
+              0.9474139303151584
+            ],
+            "sizeFactorGeometricMean": 1.0042595430960437,
+            "observedBaseMeanRatioRange": [
+              1.0042595430960353,
+              1.0042595430960501
+            ],
+            "explanation": "Pinned DESeq2 estimateNormFactors recenters tximport length normalization factors to geometric mean1; ordinary matrix size factors are not recentered. All inferential columns are instead compared against the corresponding independent upstream API path."
+          },
+          "unwrappedUpstreamCrosscheck": {
+            "samePinnedRuntime": true,
+            "allGenesCompared": 300,
+            "inputModes": [
+              "counts",
+              "kallisto"
+            ],
+            "totalGeneComparisons": 600,
+            "relativeTolerance": 1e-10,
+            "scriptSha256ByMode": {
+              "counts": "5ee901f27beb3244ee69768d518113c45e10186e3b406edc7c8de1033ac09d1b",
+              "kallisto": "5ee901f27beb3244ee69768d518113c45e10186e3b406edc7c8de1033ac09d1b"
+            }
+          },
+          "actualKallistoImport": {
+            "success": true,
+            "counts": [
+              12,
+              6,
+              2
+            ],
+            "abundance": [
+              600000,
+              300000,
+              100000
+            ],
+            "length": [
+              821,
+              821,
+              821
+            ],
+            "scope": "Actual upstream kallisto output import, not differential-expression inference on three transcripts"
+          },
+          "actualKallistoFixture": {
+            "source": "Actual unmodified upstream kallisto0.52.0 Linux executable output, using exact fixtures from released Workbench kallisto1.0.1. This is tximport parser/estimates compatibility, not a differential expression experiment.",
+            "archiveUrl": "https://github.com/pachterlab/kallisto/releases/download/v0.52.0/kallisto_linux-v0.52.0.tar.gz",
+            "archiveSha256": "2a85c0a6ce54890e4b3a8953f3eea867f3e6e3aa581d28ea6e5f5f89b12aff2e",
+            "kallistoExecutableSha256": "9000fd5afc1fb9f07cb4cf6513a4d932bcb086079982d0740843016a07178fa1",
+            "workbenchKallistoArchiveSha256": "641cd1f2b05e0951b1f8a58f45d6308ca6206bf86bf90fb74d0daa2860f5eecd",
+            "commands": [
+              [
+                "/workspace/scratch/0c5293ac0f36/github-workbench/build/deseq2-kallisto-upstream/kallisto/kallisto",
+                "index",
+                "-i",
+                "/workspace/scratch/0c5293ac0f36/github-workbench/build/deseq2-kallisto-upstream/transcripts.idx",
+                "/workspace/scratch/0c5293ac0f36/github-workbench/build/deseq2-kallisto/pack/fixtures/transcripts.fasta"
+              ],
+              [
+                "/workspace/scratch/0c5293ac0f36/github-workbench/build/deseq2-kallisto-upstream/kallisto/kallisto",
+                "quant",
+                "-i",
+                "/workspace/scratch/0c5293ac0f36/github-workbench/build/deseq2-kallisto-upstream/transcripts.idx",
+                "-o",
+                "/workspace/scratch/0c5293ac0f36/github-workbench/build/deseq2-kallisto-upstream/quant",
+                "--single",
+                "-l",
+                "180",
+                "-s",
+                "20",
+                "--plaintext",
+                "-t",
+                "1",
+                "/workspace/scratch/0c5293ac0f36/github-workbench/build/deseq2-kallisto/pack/fixtures/single.fastq"
+              ]
+            ],
+            "outputSha256": "cd3934109c1dbb2186cbbedb431345b46399e31eefd3bece53cb7e6b09e0522c",
+            "inputSha256": {
+              "transcripts.fasta": "3df298b76e9e64f33246ae0d2d30075f117d727e935e985332c3f3ab624acee6",
+              "single.fastq": "e7d4119cb35b5ef1e8e09a953a413837b2164717504546485c88057d73956812"
+            }
+          },
+          "installedPackUnchanged": true
+        },
+        "limitations": [
+          "Synthetic gene-count fixtures are not a real-cohort accuracy/power benchmark.",
+          "No GUI, clinical, repeated-measure or whole-transcriptome memory/cancellation validation.",
+          "Count format and sample identifiers do not prove biological independence or that integer data were never normalized."
+        ]
+      },
+      "releasedApplicationGraphReport": {
+        "schema": 1,
+        "applicationVersion": "0.6.0",
+        "expectedPackVersions": {
+          "deseq2": "1.0.0"
+        },
+        "testHost": "win32",
+        "pythonVersion": "3.13.16",
+        "nativeWindowsExecuted": false,
+        "scientificExecutablesExecuted": false,
+        "nativeImporterExecuted": false,
+        "scope": "Released-app graph contracts and Python archive import; checked copy callback substitutes native folder publication.",
+        "typingLimitations": {
+          "deseq2": "Released count and abundance products are metrics. Their statistical/file roles, sample identities and suitability require the separately tested adapter."
+        },
+        "differentialExpressionGraphs": [
+          {
+            "tools": [
+              "featurecounts/count-paired",
+              "featurecounts/count-paired",
+              "featurecounts/count-paired",
+              "featurecounts/count-paired",
+              "deseq2/featurecounts"
+            ],
+            "ranks": [
+              {
+                "rank": 1,
+                "nodes": [
+                  "step-1",
+                  "step-2",
+                  "step-3",
+                  "step-4"
+                ]
+              },
+              {
+                "rank": 2,
+                "nodes": [
+                  "step-5"
+                ]
+              }
+            ],
+            "savedPins": [
+              {
+                "packId": "featurecounts",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f40b334f0eb469a34d92696cf17c5ac2848346add6cdb9d73ca06fab93770716"
+              },
+              {
+                "packId": "featurecounts",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f40b334f0eb469a34d92696cf17c5ac2848346add6cdb9d73ca06fab93770716"
+              },
+              {
+                "packId": "featurecounts",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f40b334f0eb469a34d92696cf17c5ac2848346add6cdb9d73ca06fab93770716"
+              },
+              {
+                "packId": "featurecounts",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f40b334f0eb469a34d92696cf17c5ac2848346add6cdb9d73ca06fab93770716"
+              },
+              {
+                "packId": "deseq2",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f5a06708651f14f25e89ca3588ed6bf2f91442e43d635a9fc7ab5af066112ee1"
+              }
+            ],
+            "namedMethodsProvenance": true,
+            "changedSavedManifestRejected": true,
+            "inputOrderPreserved": true,
+            "workflow": "featurecounts",
+            "incomingCounts": [
+              "step-1::counts",
+              "step-2::counts",
+              "step-3::counts",
+              "step-4::counts"
+            ],
+            "metadataBindingsExcludedFromSavedPipeline": true
+          },
+          {
+            "tools": [
+              "kallisto/index-quant-paired",
+              "kallisto/index-quant-paired",
+              "kallisto/index-quant-paired",
+              "kallisto/index-quant-paired",
+              "deseq2/kallisto"
+            ],
+            "ranks": [
+              {
+                "rank": 1,
+                "nodes": [
+                  "step-1",
+                  "step-2",
+                  "step-3",
+                  "step-4"
+                ]
+              },
+              {
+                "rank": 2,
+                "nodes": [
+                  "step-5"
+                ]
+              }
+            ],
+            "savedPins": [
+              {
+                "packId": "kallisto",
+                "packVersion": "1.0.1",
+                "manifestSha256": "509756b8afb9719a56da60f88ed631a578ee51eb29700bfbf51271aecd00c0c9"
+              },
+              {
+                "packId": "kallisto",
+                "packVersion": "1.0.1",
+                "manifestSha256": "509756b8afb9719a56da60f88ed631a578ee51eb29700bfbf51271aecd00c0c9"
+              },
+              {
+                "packId": "kallisto",
+                "packVersion": "1.0.1",
+                "manifestSha256": "509756b8afb9719a56da60f88ed631a578ee51eb29700bfbf51271aecd00c0c9"
+              },
+              {
+                "packId": "kallisto",
+                "packVersion": "1.0.1",
+                "manifestSha256": "509756b8afb9719a56da60f88ed631a578ee51eb29700bfbf51271aecd00c0c9"
+              },
+              {
+                "packId": "deseq2",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f5a06708651f14f25e89ca3588ed6bf2f91442e43d635a9fc7ab5af066112ee1"
+              }
+            ],
+            "namedMethodsProvenance": true,
+            "changedSavedManifestRejected": true,
+            "inputOrderPreserved": true,
+            "workflow": "kallisto",
+            "incomingCounts": [
+              "step-1::abundance",
+              "step-2::abundance",
+              "step-3::abundance",
+              "step-4::abundance"
+            ],
+            "metadataBindingsExcludedFromSavedPipeline": true
+          }
+        ],
+        "differentialExpressionGuards": {
+          "minimumFourSelectedFiles": true,
+          "duplicateConnectionRejected": true,
+          "contrastLabelsRequired": true,
+          "bamAndVcfRejected": true,
+          "biologicalReplicationAndRawCountSuitabilityRequireAdapter": true
+        },
+        "installedInventory": {
+          "packManifests": 6,
+          "executablesVerified": 11,
+          "assetsVerified": 114
+        },
+        "selectedPacks": [
+          {
+            "id": "deseq2",
+            "version": "1.0.0",
+            "manifestSha256": "f5a06708651f14f25e89ca3588ed6bf2f91442e43d635a9fc7ab5af066112ee1",
+            "operations": [
+              "counts",
+              "featurecounts",
+              "kallisto"
+            ],
+            "scientificChecksDeclared": 3
+          }
+        ],
+        "offlineStaticImports": [
+          {
+            "id": "deseq2",
+            "version": "1.0.0",
+            "archiveSha256": "eccffbcaf3adad6ab1da63ea771fe103a807a88722a56f5db82072cf02c1292d",
+            "manifestSha256": "f5a06708651f14f25e89ca3588ed6bf2f91442e43d635a9fc7ab5af066112ee1",
+            "archiveMatchesGraphPayload": true,
+            "duplicateVersionRejected": true,
+            "installedFilesAndReceiptsUnchanged": true,
+            "publisherVerified": false
+          }
+        ],
+        "starterPackFilesPreserved": 143,
+        "releasedApplicationFilesVerified": [
+          "WorkbenchBridge.exe",
+          "workspace/app_version.py",
+          "workspace/catalog-sources.json",
+          "workspace/catalog.py",
+          "workspace/core_checks.py",
+          "workspace/desktop_host.py",
+          "workspace/desktop_model.py",
+          "workspace/engine.py",
+          "workspace/example.py",
+          "workspace/pack_checks.py",
+          "workspace/pack_manager.py",
+          "workspace/pack_security.py",
+          "workspace/service.py",
+          "workspace/starter-check-profile.json",
+          "workspace/verify_installation.py"
+        ],
+        "starterSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+        "dependencies": {
+          "featurecounts": {
+            "version": "1.0.0",
+            "archiveSha256": "f3319b6a8b13c30bc31b782008b0283c7688c739da2dd77cf5ab80859ccff4c2"
+          },
+          "kallisto": {
+            "version": "1.0.1",
+            "archiveSha256": "641cd1f2b05e0951b1f8a58f45d6308ca6206bf86bf90fb74d0daa2860f5eecd"
+          }
+        },
+        "presetAndOriginalPinContracts": [
+          "deseq2/counts",
+          "deseq2/featurecounts",
+          "deseq2/kallisto"
+        ],
+        "testsRun": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "testSourceSha256": "249e3919d668a0995803ced740346fbddb663178deb2053d15334aeaf73fa908",
+        "success": true
+      }
+    }
+  ],
+  "precedingCandidate": {
+    "version": "0.0.1",
+    "archive": {
+      "name": "native-workbench-pack-deseq2-0.0.1.zip",
+      "bytes": 277504517,
+      "sha256": "8278c404a822a2c949f5da3d0a8b30244636e9a54b2b067d1ed3a5f960dda785",
+      "manifestSha256": "c7eaa2ef9c64f1c567b2030df2d6cee237d0ec2fd09f7fe858109055e090febf"
+    },
+    "run": {
+      "id": 37230398977,
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37230398977",
+      "sourceCommit": "24c6899aa7c19208ec88ae816879952ed0d8527e",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-10-04T20:00:06Z",
+      "updatedAt": "2026-10-04T20:04:53Z",
+      "runner": "windows-2022"
+    },
+    "validationSha256": "1f5e68b5e410697534074df40b6ffc6d0583b88de34dd5d2b5288bda10725351",
+    "correspondenceSha256": "4eb5a80f207a482481675dc2e58a261c3181549007b2a2337ec6cc8045b51ebd",
+    "unchangedPayloadFileCount": 160,
+    "allowedDifferences": [
+      "pack.ini version",
+      "PACK-README.md candidate warning"
+    ],
+    "scope": "Candidate passed 3 installation, 6 graph/archive and 14 science tests per path. The final 1.0.0 archive was independently imported and retested above."
+  },
+  "sourceBuildScientificEvidence": {
+    "file": "evidence/native-development-science.json in source/evidence companion",
+    "bytes": 10864,
+    "sha256": "d6ea65ed0bda57a4548c58127e1485ebe795a1f6d308398b1aa1f7bcc20e4624",
+    "report": {
+      "schema": 1,
+      "packId": "deseq2",
+      "packVersion": "1.0.0",
+      "packManifestSha256": "a1dd6dc2963731e8bae19972fb297b9a6c5de61080ec075728cae5755b222229",
+      "nativeWindowsHost": true,
+      "nativeWindowsExecuted": true,
+      "testSourceSha256": "b33b9a7547481eae89da93ffa138376df8354a613f8b7d176df8c4069ea1b616",
+      "testsRun": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "success": true,
+      "seconds": 180.7210509777069,
+      "evidence": {
+        "validSummaries": {
+          "counts": {
+            "schema": 1,
+            "tool": "DESeq2",
+            "version": "1.52.0",
+            "tximportVersion": "1.40.0",
+            "R": "R version 4.6.1 (2026-06-24 ucrt)",
+            "mode": "counts",
+            "samples": 6,
+            "genesInput": 300,
+            "genesTested": 300,
+            "genesPrefiltered": 0,
+            "significant": 28,
+            "positiveSignificant": 13,
+            "negativeSignificant": 15,
+            "design": "~condition",
+            "contrast": [
+              "treated",
+              "control"
+            ],
+            "alpha": 0.05,
+            "minTotalCount": 10,
+            "test": "Wald",
+            "normalization": "DESeq2 median-of-ratios size factors",
+            "dispersionFitRequested": "parametric",
+            "dispersionFitUsed": "parametric",
+            "pAdjustment": "BH",
+            "independentFiltering": true,
+            "cooksCutoff": true,
+            "automaticOutlierReplacement": false,
+            "foldChangeShrinkage": false,
+            "replicates": "Independent biological samples asserted by explicit metadata; identity cannot establish biological independence",
+            "inputOrder": [
+              {
+                "sample_id": "control1",
+                "input_index": "1"
+              },
+              {
+                "sample_id": "control2",
+                "input_index": "2"
+              },
+              {
+                "sample_id": "control3",
+                "input_index": "3"
+              },
+              {
+                "sample_id": "treated1",
+                "input_index": "4"
+              },
+              {
+                "sample_id": "treated2",
+                "input_index": "5"
+              },
+              {
+                "sample_id": "treated3",
+                "input_index": "6"
+              }
+            ],
+            "runtimePackages": {
+              "DESeq2": "1.52.0"
+            }
+          },
+          "featurecounts": {
+            "schema": 1,
+            "tool": "DESeq2",
+            "version": "1.52.0",
+            "tximportVersion": "1.40.0",
+            "R": "R version 4.6.1 (2026-06-24 ucrt)",
+            "mode": "featurecounts",
+            "samples": 6,
+            "genesInput": 300,
+            "genesTested": 300,
+            "genesPrefiltered": 0,
+            "significant": 28,
+            "positiveSignificant": 13,
+            "negativeSignificant": 15,
+            "design": "~condition",
+            "contrast": [
+              "treated",
+              "control"
+            ],
+            "alpha": 0.05,
+            "minTotalCount": 10,
+            "test": "Wald",
+            "normalization": "DESeq2 median-of-ratios size factors",
+            "dispersionFitRequested": "parametric",
+            "dispersionFitUsed": "parametric",
+            "pAdjustment": "BH",
+            "independentFiltering": true,
+            "cooksCutoff": true,
+            "automaticOutlierReplacement": false,
+            "foldChangeShrinkage": false,
+            "replicates": "Independent biological samples asserted by explicit metadata; identity cannot establish biological independence",
+            "inputOrder": [
+              {
+                "sample_id": "control1",
+                "input_index": "1"
+              },
+              {
+                "sample_id": "control2",
+                "input_index": "2"
+              },
+              {
+                "sample_id": "control3",
+                "input_index": "3"
+              },
+              {
+                "sample_id": "treated1",
+                "input_index": "4"
+              },
+              {
+                "sample_id": "treated2",
+                "input_index": "5"
+              },
+              {
+                "sample_id": "treated3",
+                "input_index": "6"
+              }
+            ],
+            "runtimePackages": {
+              "DESeq2": "1.52.0"
+            }
+          },
+          "kallisto": {
+            "schema": 1,
+            "tool": "DESeq2",
+            "version": "1.52.0",
+            "tximportVersion": "1.40.0",
+            "R": "R version 4.6.1 (2026-06-24 ucrt)",
+            "mode": "kallisto",
+            "samples": 6,
+            "genesInput": 300,
+            "genesTested": 300,
+            "genesPrefiltered": 0,
+            "significant": 28,
+            "positiveSignificant": 13,
+            "negativeSignificant": 15,
+            "design": "~condition",
+            "contrast": [
+              "treated",
+              "control"
+            ],
+            "alpha": 0.05,
+            "minTotalCount": 10,
+            "test": "Wald",
+            "normalization": "DESeqDataSetFromTximport counts with average-transcript-length offsets",
+            "dispersionFitRequested": "parametric",
+            "dispersionFitUsed": "parametric",
+            "pAdjustment": "BH",
+            "independentFiltering": true,
+            "cooksCutoff": true,
+            "automaticOutlierReplacement": false,
+            "foldChangeShrinkage": false,
+            "replicates": "Independent biological samples asserted by explicit metadata; identity cannot establish biological independence",
+            "inputOrder": [
+              {
+                "sample_id": "control1",
+                "input_index": "1"
+              },
+              {
+                "sample_id": "control2",
+                "input_index": "2"
+              },
+              {
+                "sample_id": "control3",
+                "input_index": "3"
+              },
+              {
+                "sample_id": "treated1",
+                "input_index": "4"
+              },
+              {
+                "sample_id": "treated2",
+                "input_index": "5"
+              },
+              {
+                "sample_id": "treated3",
+                "input_index": "6"
+              }
+            ],
+            "runtimePackages": {
+              "DESeq2": "1.52.0"
+            }
+          }
+        },
+        "plantedEffects": {
+          "counts": {
+            "positiveRecovered": 12,
+            "negativeRecovered": 12,
+            "incidentalNullDiscoveries": 4,
+            "scope": "Deterministic effect-direction and adjusted-P-value regression; not empirical FDR calibration or a power benchmark."
+          },
+          "featurecounts": {
+            "positiveRecovered": 12,
+            "negativeRecovered": 12,
+            "incidentalNullDiscoveries": 4,
+            "scope": "Deterministic effect-direction and adjusted-P-value regression; not empirical FDR calibration or a power benchmark."
+          },
+          "kallisto": {
+            "positiveRecovered": 12,
+            "negativeRecovered": 12,
+            "incidentalNullDiscoveries": 4,
+            "scope": "Deterministic effect-direction and adjusted-P-value regression; not empirical FDR calibration or a power benchmark."
+          }
+        },
+        "normalizationConvention": {
+          "countsIdentical": true,
+          "rawSizeFactors": [
+            0.9811560495231364,
+            1.0727419077182427,
+            0.9600807925690964,
+            1.0018951107037128,
+            1.069479997924178,
+            0.9474139303151584
+          ],
+          "sizeFactorGeometricMean": 1.0042595430960437,
+          "observedBaseMeanRatioRange": [
+            1.0042595430960353,
+            1.0042595430960501
+          ],
+          "explanation": "Pinned DESeq2 estimateNormFactors recenters tximport length normalization factors to geometric mean1; ordinary matrix size factors are not recentered. All inferential columns are instead compared against the corresponding independent upstream API path."
+        },
+        "unwrappedUpstreamCrosscheck": {
+          "samePinnedRuntime": true,
+          "allGenesCompared": 300,
+          "inputModes": [
+            "counts",
+            "kallisto"
+          ],
+          "totalGeneComparisons": 600,
+          "relativeTolerance": 1e-10,
+          "scriptSha256ByMode": {
+            "counts": "5ee901f27beb3244ee69768d518113c45e10186e3b406edc7c8de1033ac09d1b",
+            "kallisto": "5ee901f27beb3244ee69768d518113c45e10186e3b406edc7c8de1033ac09d1b"
+          }
+        },
+        "actualKallistoImport": {
+          "success": true,
+          "counts": [
+            12,
+            6,
+            2
+          ],
+          "abundance": [
+            600000,
+            300000,
+            100000
+          ],
+          "length": [
+            821,
+            821,
+            821
+          ],
+          "scope": "Actual upstream kallisto output import, not differential-expression inference on three transcripts"
+        },
+        "actualKallistoFixture": {
+          "source": "Actual unmodified upstream kallisto0.52.0 Linux executable output, using exact fixtures from released Workbench kallisto1.0.1. This is tximport parser/estimates compatibility, not a differential expression experiment.",
+          "archiveUrl": "https://github.com/pachterlab/kallisto/releases/download/v0.52.0/kallisto_linux-v0.52.0.tar.gz",
+          "archiveSha256": "2a85c0a6ce54890e4b3a8953f3eea867f3e6e3aa581d28ea6e5f5f89b12aff2e",
+          "kallistoExecutableSha256": "9000fd5afc1fb9f07cb4cf6513a4d932bcb086079982d0740843016a07178fa1",
+          "workbenchKallistoArchiveSha256": "641cd1f2b05e0951b1f8a58f45d6308ca6206bf86bf90fb74d0daa2860f5eecd",
+          "commands": [
+            [
+              "/workspace/scratch/0c5293ac0f36/github-workbench/build/deseq2-kallisto-upstream/kallisto/kallisto",
+              "index",
+              "-i",
+              "/workspace/scratch/0c5293ac0f36/github-workbench/build/deseq2-kallisto-upstream/transcripts.idx",
+              "/workspace/scratch/0c5293ac0f36/github-workbench/build/deseq2-kallisto/pack/fixtures/transcripts.fasta"
+            ],
+            [
+              "/workspace/scratch/0c5293ac0f36/github-workbench/build/deseq2-kallisto-upstream/kallisto/kallisto",
+              "quant",
+              "-i",
+              "/workspace/scratch/0c5293ac0f36/github-workbench/build/deseq2-kallisto-upstream/transcripts.idx",
+              "-o",
+              "/workspace/scratch/0c5293ac0f36/github-workbench/build/deseq2-kallisto-upstream/quant",
+              "--single",
+              "-l",
+              "180",
+              "-s",
+              "20",
+              "--plaintext",
+              "-t",
+              "1",
+              "/workspace/scratch/0c5293ac0f36/github-workbench/build/deseq2-kallisto/pack/fixtures/single.fastq"
+            ]
+          ],
+          "outputSha256": "cd3934109c1dbb2186cbbedb431345b46399e31eefd3bece53cb7e6b09e0522c",
+          "inputSha256": {
+            "transcripts.fasta": "3df298b76e9e64f33246ae0d2d30075f117d727e935e985332c3f3ab624acee6",
+            "single.fastq": "e7d4119cb35b5ef1e8e09a953a413837b2164717504546485c88057d73956812"
+          }
+        },
+        "installedPackUnchanged": true
+      },
+      "limitations": [
+        "Synthetic gene-count fixtures are not a real-cohort accuracy/power benchmark.",
+        "No GUI, clinical, repeated-measure or whole-transcriptome memory/cancellation validation.",
+        "Count format and sample identifiers do not prove biological independence or that integer data were never normalized."
+      ]
+    },
+    "runId": 37229593426,
+    "sourceCommit": "24c6899aa7c19208ec88ae816879952ed0d8527e",
+    "scope": "Diagnostic source build; its manifest differs from final. Exact final archive evidence is independently recorded above."
+  },
+  "historicalLocalGraphDiagnostic": {
+    "evidence": {
+      "file": "evidence/released-app-graph-contracts.json in source/evidence companion",
+      "bytes": 16576,
+      "sha256": "1dbe8d3390e5fe17fb12088e58edcb6fd85597437932040d41ff0a0843b168d0",
+      "report": {
+        "schema": 1,
+        "applicationVersion": "0.6.0",
+        "expectedPackVersions": {
+          "deseq2": "1.0.0"
+        },
+        "testHost": "linux",
+        "pythonVersion": "3.12.14",
+        "nativeWindowsExecuted": false,
+        "scientificExecutablesExecuted": false,
+        "nativeImporterExecuted": false,
+        "scope": "Released-app graph contracts and Python archive import; checked copy callback substitutes native folder publication.",
+        "typingLimitations": {
+          "deseq2": "Released count and abundance products are metrics. Their statistical/file roles, sample identities and suitability require the separately tested adapter."
+        },
+        "differentialExpressionGraphs": [
+          {
+            "tools": [
+              "featurecounts/count-paired",
+              "featurecounts/count-paired",
+              "featurecounts/count-paired",
+              "featurecounts/count-paired",
+              "deseq2/featurecounts"
+            ],
+            "ranks": [
+              {
+                "rank": 1,
+                "nodes": [
+                  "step-1",
+                  "step-2",
+                  "step-3",
+                  "step-4"
+                ]
+              },
+              {
+                "rank": 2,
+                "nodes": [
+                  "step-5"
+                ]
+              }
+            ],
+            "savedPins": [
+              {
+                "packId": "featurecounts",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f40b334f0eb469a34d92696cf17c5ac2848346add6cdb9d73ca06fab93770716"
+              },
+              {
+                "packId": "featurecounts",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f40b334f0eb469a34d92696cf17c5ac2848346add6cdb9d73ca06fab93770716"
+              },
+              {
+                "packId": "featurecounts",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f40b334f0eb469a34d92696cf17c5ac2848346add6cdb9d73ca06fab93770716"
+              },
+              {
+                "packId": "featurecounts",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f40b334f0eb469a34d92696cf17c5ac2848346add6cdb9d73ca06fab93770716"
+              },
+              {
+                "packId": "deseq2",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f5a06708651f14f25e89ca3588ed6bf2f91442e43d635a9fc7ab5af066112ee1"
+              }
+            ],
+            "namedMethodsProvenance": true,
+            "changedSavedManifestRejected": true,
+            "inputOrderPreserved": true,
+            "workflow": "featurecounts",
+            "incomingCounts": [
+              "step-1::counts",
+              "step-2::counts",
+              "step-3::counts",
+              "step-4::counts"
+            ],
+            "metadataBindingsExcludedFromSavedPipeline": true
+          },
+          {
+            "tools": [
+              "kallisto/index-quant-paired",
+              "kallisto/index-quant-paired",
+              "kallisto/index-quant-paired",
+              "kallisto/index-quant-paired",
+              "deseq2/kallisto"
+            ],
+            "ranks": [
+              {
+                "rank": 1,
+                "nodes": [
+                  "step-1",
+                  "step-2",
+                  "step-3",
+                  "step-4"
+                ]
+              },
+              {
+                "rank": 2,
+                "nodes": [
+                  "step-5"
+                ]
+              }
+            ],
+            "savedPins": [
+              {
+                "packId": "kallisto",
+                "packVersion": "1.0.1",
+                "manifestSha256": "509756b8afb9719a56da60f88ed631a578ee51eb29700bfbf51271aecd00c0c9"
+              },
+              {
+                "packId": "kallisto",
+                "packVersion": "1.0.1",
+                "manifestSha256": "509756b8afb9719a56da60f88ed631a578ee51eb29700bfbf51271aecd00c0c9"
+              },
+              {
+                "packId": "kallisto",
+                "packVersion": "1.0.1",
+                "manifestSha256": "509756b8afb9719a56da60f88ed631a578ee51eb29700bfbf51271aecd00c0c9"
+              },
+              {
+                "packId": "kallisto",
+                "packVersion": "1.0.1",
+                "manifestSha256": "509756b8afb9719a56da60f88ed631a578ee51eb29700bfbf51271aecd00c0c9"
+              },
+              {
+                "packId": "deseq2",
+                "packVersion": "1.0.0",
+                "manifestSha256": "f5a06708651f14f25e89ca3588ed6bf2f91442e43d635a9fc7ab5af066112ee1"
+              }
+            ],
+            "namedMethodsProvenance": true,
+            "changedSavedManifestRejected": true,
+            "inputOrderPreserved": true,
+            "workflow": "kallisto",
+            "incomingCounts": [
+              "step-1::abundance",
+              "step-2::abundance",
+              "step-3::abundance",
+              "step-4::abundance"
+            ],
+            "metadataBindingsExcludedFromSavedPipeline": true
+          }
+        ],
+        "differentialExpressionGuards": {
+          "minimumFourSelectedFiles": true,
+          "duplicateConnectionRejected": true,
+          "contrastLabelsRequired": true,
+          "bamAndVcfRejected": true,
+          "biologicalReplicationAndRawCountSuitabilityRequireAdapter": true
+        },
+        "installedInventory": {
+          "packManifests": 6,
+          "executablesVerified": 11,
+          "assetsVerified": 114
+        },
+        "selectedPacks": [
+          {
+            "id": "deseq2",
+            "version": "1.0.0",
+            "manifestSha256": "f5a06708651f14f25e89ca3588ed6bf2f91442e43d635a9fc7ab5af066112ee1",
+            "operations": [
+              "counts",
+              "featurecounts",
+              "kallisto"
+            ],
+            "scientificChecksDeclared": 3
+          }
+        ],
+        "unexpectedDuplicateImportChanges": {
+          "deseq2": {
+            "added": {
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/licenses/DelayedArray_0.38.2.tar.gz": "d9d3195f8f8e3ddf4aa9a47ac149413dc226761377e34d9320d09cbe8cefe3fd",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/python313._pth": "6132a387c961a643beab61b8b426cfd73c366c6f6ad2d5aadc5ccf225776b399",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/_hashlib.pyd": "4d3eb9d9492d626c7bb10cfe5ab233a9195ec7b27e92b465b287e7a24fc8266c",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/_zoneinfo.pyd": "b687deba154399bf6e44963e46abff518c3f987ae4fde087a3c891a1a1f08fdd",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/fixtures/featurecounts-3.tsv": "1c217d443de6111786da1158dc900c46df7aa3e357b529a2c9a0d9c553cb8d2c",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/python3.dll": "a1a32b2475675e784d9b34d33d3a8f3e4afaa563da1feb784b0dd69fc4d8f9dc",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/python.exe": "31fe10b4ed82a2f960af0ef9931f46a4b84ff286f8b6ffd9dee098cf4f10f17f",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/python313.zip": "33c48dd2c3031d27784950aaee96d3d65f916e3c43dd3637ace333a7b9e8021a",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/_socket.pyd": "c5936292083189e0675a96ddd0e38235726f1c58195cec64eb0085b9c479ddce",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/fixtures/featurecounts-5.tsv": "c2469d1658b8dade396698c4a4eaedc994346f6234cced285947f1e1de690dcb",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/select.pyd": "17df388a7aa42e7f066b80aa4f77cbbba9286495e6f3508425806be6766d122b",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/licenses/IRanges_2.46.0.tar.gz": "a61e97812b0357411b770c5886b684fc6c0b59c05441f7336e46404e6898b3e9",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/_uuid.pyd": "0d6fcf704721d4bae58cc754b15a3f8c36907b718874f6d7cbbaa363a14618b1",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/_decimal.pyd": "eeb278dfbdb305bb5af916ed79e878943e25dc4bd6e99ec17abb7b3fd9f935d5",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/fixtures/abundance-3.tsv": "32ecc0af82cc732904eedcf03be17f1f57c66e833f94e0cf39d5ad343c3a9a97",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/fixtures/featurecounts-2.tsv": "d0ff978c71e1b54e37de7bd7e3fa89d124aa02ce19c595eb1ed2c71ca6b70e49",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/fixtures/truth.json": "d40483ff7d8e2d010506f201023d2859dbbcb86c9d503035ddbd55a6ed0b6cff",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/fixtures/abundance-5.tsv": "4cd7b8d74ee50af45c3afda5a8cf6437940e1947e082c44c18a75c705b9cf7f2",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/fixtures/samples.tsv": "1c93aafdf920fb863dc228ee261de66b330e1def3d19c1221482b90a644b8c02",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/licenses/BH_1.90.0-1.tar.gz": "2e1fafb05938e81073561ae4892dc543ef15807e375e0ea8fa75e3ab79f0281b",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/licenses/Python-3.13.16.tar.xz": "f4b1bfb3c79b5bb11b8d228a12504163b4c0dab4d679828d8f5f26b6cb6ab35d",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/libcrypto-3.dll": "75495fe0e079ab00d49be740d3c710a0b94e3f74f9648cb7cc9f768fc7f52319",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/pyexpat.pyd": "3865fae84ff0f274c049e737731cd8aa184fae208af5b4c0d0cfc42a38f79cea",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/_overlapped.pyd": "3f393b2ce1fe5973fc45e49dffcf51405fa875cdb284cf96b2f0d4b93b08765c",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/licenses/Biobase_2.72.0.tar.gz": "d04af4c5850352f96a966285ea771b15777d2f009f7b86fa4b702de13f31bbdd",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/fixtures/kallisto-abundance.tsv": "cd3934109c1dbb2186cbbedb431345b46399e31eefd3bece53cb7e6b09e0522c",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/libssl-3.dll": "8957182a9c385bfd9f3f790921de2ddc614cf91f99edbed4e9e5446a46504e32",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/_ctypes.pyd": "5bcddf4c374c4d247e1e4a61f3347159c36c5785fe43bdae11a4e6c9ea2c0166",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/fixtures/featurecounts-1.tsv": "f1e320cbdb3de888fa7350445e6676c659ea764bdc9ce4e8a404fd128ae684ff",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/_ssl.pyd": "30ff82a3ea0c675ddc99e6b14f71ca750f06e77d6653e2da3d7d35b7ef0fc2ed",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/_queue.pyd": "79c196a0804b152fc48b4055387f4352838e41c28863a0c946e7a98137e681e1",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/PACK-README.md": "ee548922f1b412b6a742a1747fb0c52c8ac6e2118521dff53fd1d8c322a31d45",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/licenses/NOTICE.txt": "bbd9b659cfbbabf92bf718b2536538ce7d3f3bd2027c4dadeff440155a6519d7",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/_lzma.pyd": "2b4dcb12c0420ffced4b91968ae4eff6cb585f0f07490160c6da47da63064a99",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/LICENSE.txt": "62bec384df47b0328307db41455ff6ea2559e5546b394ac69148561b21703120",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/python.cat": "297a28dea041bad442aca6d7cb92957627501870e3c5cb7c642afb83563ee9c1",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/licenses/MatrixGenerics_1.24.0.tar.gz": "371d32bbd324ad6665465b5c54f66a9619c2958c5cad6f7aa65c6d533379005e",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/_wmi.pyd": "f88c322f871aef92de562278bd25c34c6e758642669d5512a22ed972840317b1",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/fixtures/abundance-6.tsv": "4fa57095a19d3b2e8401260ea456e6015cb1b39a398fb89eaac778d197e758a9",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/fixtures/abundance-4.tsv": "1b2101d368bc2123c18c53ac1bcf8e20257f0e965138b70b7c317a710d58fec7",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/vcruntime140.dll": "d1f4225df2cd877dbf130d5668a021dce3f94118455ff5ec952061c30afc9ce7",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/adapter.py": "ebd65059a3c822cacf0675b8576b07689c7dd07d0b97ce0d8e1ea5e91ab53a61",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/_sqlite3.pyd": "95d5b99f696cb33550534e8be80d31003db8b8a27062dfd6b09fdba4bb92f812",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/licenses/GenomicRanges_1.64.0.tar.gz": "09fee555b60be2f54c8fa35b0a2238fea9a1b96dea24e9a8c52166b61d44f776",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/fixtures/kallisto-fixture-provenance.json": "784eb6531989f678c7361c188a9ae124472a73c41675baff9fbfd7be3ed63f50",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/fixtures/featurecounts-4.tsv": "892786344b8539c19a445313a8153a0e14afc1c92cfd127c23fb9491bcc262f6",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/libffi-8.dll": "eff52743773eb550fcc6ce3efc37c85724502233b6b002a35496d828bd7b280a",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/fixtures/tx2gene.tsv": "e0112b518fe5682620713c6712d0797782b2f6553520321746db0afe3149009e",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/analysis.R": "d2de3283320b235d160733253fd25012864fcd310de1efb2c895fb7fe7e79e10",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/fixtures/counts.tsv": "30546a38e5c2d5701a014a7e5b6a1347d8e0116f3c87403fd4bd029c79d8c726",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/_elementtree.pyd": "34968e3aebdb3e89cb1472b75b04986ce1bbf27d290f4154d77649cc17c41fab",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/unicodedata.pyd": "d113047658f92d893bf4ee2da81ffbd624ec5c485733c02e116fac1b9a1b964c",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/python313.dll": "3b29bf9ff39bed8f660f5b935f19657f7ce7f145009851741b11364f6ebcb862",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/sqlite3.dll": "2e3cf1b96e8afc679ee8bd69d6bde3aeb797b48b297b9cafd0eb9fd578eaafb5",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/licenses/BiocGenerics_0.58.1.tar.gz": "6911559f0b2b5a07081cd21b6738aa4c6048509b23425cc3ebafc0b4cb011a98",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/licenses/R-4.6.1.tar.gz": "4da6e61d2c0aac5f14a2e7e432cb5fcc269efe83da4293050ba7f03dff4e2cf4",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/fixtures/abundance-1.tsv": "635164a268c77e2bf87042cb78b93ef818f50e5d536bb4d9ea622704e97a90e6",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/winsound.pyd": "8450de54438b1698556b794400c3114b78ede8c10b13dcf263d646ef639ae7d1",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/licenses/BiocParallel_1.46.0.tar.gz": "d06642f7b53517299a48ac68b074c28e03dd1de41159562fb8011117419e1038",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/_multiprocessing.pyd": "5017bb9dd0d5ab6d7c0f007763d7906d33464f0b436ac6577f1f4fffd5c98986",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/_bz2.pyd": "6da4d453852346299e983b458f3ec2f0db3b5f765998ba3f45c91b4a1549037b",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/_asyncio.pyd": "6654dfbf4cc92609801f35022acaddd3fc19e6c777b7771b0f0a68f5813889a8",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/bin/vcruntime140_1.dll": "a7146c08f89fe5b04541ab507cdb59ff7b44534d4ba3c668a426c6450a03434e",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/licenses/DESeq2_1.52.0.tar.gz": "8c91699286336350e66eec132ce6fdf5bb4af78e2a4d015a5a61224f62a95984",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/fixtures/abundance-2.tsv": "128b41e763b9a672bb2ac5c010e7567537c1e65da1da5d6381e71039e3e5b095",
+              "user-data/pack-manager/_import-1a4_n3c4/extracted/pack/fixtures/featurecounts-6.tsv": "b809d676d0016823e19af522aaf2002ce1161f9d49d79fd86a4c57bbea46d2d8"
+            },
+            "removed": {},
+            "changed": {}
+          }
+        },
+        "releasedApplicationFilesVerified": [
+          "WorkbenchBridge.exe",
+          "workspace/app_version.py",
+          "workspace/catalog-sources.json",
+          "workspace/catalog.py",
+          "workspace/core_checks.py",
+          "workspace/desktop_host.py",
+          "workspace/desktop_model.py",
+          "workspace/engine.py",
+          "workspace/example.py",
+          "workspace/pack_checks.py",
+          "workspace/pack_manager.py",
+          "workspace/pack_security.py",
+          "workspace/service.py",
+          "workspace/starter-check-profile.json",
+          "workspace/verify_installation.py"
+        ],
+        "starterSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+        "dependencies": {
+          "featurecounts": {
+            "version": "1.0.0",
+            "archiveSha256": "f3319b6a8b13c30bc31b782008b0283c7688c739da2dd77cf5ab80859ccff4c2"
+          },
+          "kallisto": {
+            "version": "1.0.1",
+            "archiveSha256": "641cd1f2b05e0951b1f8a58f45d6308ca6206bf86bf90fb74d0daa2860f5eecd"
+          }
+        },
+        "presetAndOriginalPinContracts": [
+          "deseq2/counts",
+          "deseq2/featurecounts",
+          "deseq2/kallisto"
+        ],
+        "testsRun": 6,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "testSourceSha256": "249e3919d668a0995803ced740346fbddb663178deb2053d15334aeaf73fa908",
+        "success": false
+      }
+    },
+    "interpretation": "Five of six passed on this final ZIP; the strict duplicate-import assertion found only temporary extracted files reappearing after cleanup in the managed Linux workspace. No installed file changed or disappeared. This failure is preserved. Both exact-final Windows graph/archive suites pass all six cases, including duplicate-import immutability."
+  },
+  "historicalFailedDevelopmentRuns": [
+    {
+      "runId": 37227193111,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37227193111",
+      "conclusion": "failure",
+      "file": "diagnostics/development-run1-version-command.log in source/evidence companion",
+      "sha256": "dc87e22ce172a1e7398c05cdde09cd0b78cfa990799b39ed0b7eec9ba2df6cd3",
+      "bytes": 19109,
+      "finding": "An incorrect R curl diagnostic function failed before scientific tests."
+    },
+    {
+      "runId": 37227394554,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37227394554",
+      "conclusion": "failure",
+      "file": "diagnostics/development-run2-temp-path.log in source/evidence companion",
+      "sha256": "4f9b47a33edbf0300f1d9895bb9502c6d1230c70bd5a8c9d5bee6b05079879b8",
+      "bytes": 27638,
+      "finding": "R startup required a space-free R_TempDir; fixed by owned scratch with existing short alias or explicit scratch root."
+    },
+    {
+      "runId": 37228195854,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37228195854",
+      "conclusion": "failure",
+      "file": "diagnostics/development-run3-summary-parenthesis.log in source/evidence companion",
+      "sha256": "b00dc3a635926b0e4a7b6f66e4179ce53efe9937bc3a04d8882063603c3e88f8",
+      "bytes": 28655,
+      "finding": "A missing summary-list closing parenthesis caused a parse failure after model execution; corrected before the final pack."
+    },
+    {
+      "runId": 37228745912,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37228745912",
+      "conclusion": "failure",
+      "file": "diagnostics/development-run4-normalization-oracle.log in source/evidence companion",
+      "sha256": "e8f3452864e6fb7d4321fea81829110af7d9494a31667c4ce4279efe0183ef3d",
+      "bytes": 61096,
+      "finding": "Thirteen of fourteen tests passed; incorrect raw-vs-tximport baseMean equality was replaced by strict independently called upstream API comparisons without algorithm or fixture changes."
+    }
+  ],
+  "staticIntegrityEvidence": {
+    "file": "evidence/static-integrity.json in source/evidence companion",
+    "bytes": 688,
+    "sha256": "f25691f93ca1b962ae10ea39ca8fab148b81f04173701d8672252ab9d6d21d5e",
+    "report": {
+      "validation": "static-integrity-only",
+      "pack": {
+        "id": "deseq2",
+        "name": "DESeq2 differential expression",
+        "version": "1.0.0",
+        "toolVersions": {
+          "python": "3.13.16"
+        },
+        "description": "Bulk RNA differential expression with DESeq2, tximport and private R. Raw gene matrices, featureCounts and kallisto sample fan-in. Workbench 0.6.0 or newer.",
+        "category": "RNA-seq",
+        "platform": "windows-x86_64",
+        "packApi": 1,
+        "minAppVersion": "0.6.0",
+        "size": 277504383,
+        "sha256": "eccffbcaf3adad6ab1da63ea771fe103a807a88722a56f5db82072cf02c1292d",
+        "manifestSha256": "f5a06708651f14f25e89ca3588ed6bf2f91442e43d635a9fc7ab5af066112ee1"
+      }
+    }
+  },
+  "normalizationOracleCorrection": {
+    "independentRawSizeFactorGeometricMean": 1.0042595430960437,
+    "observedTximportToRawBaseMeanRatioRange": [
+      1.0042595430960353,
+      1.0042595430960501
+    ],
+    "explanation": "DESeq2 centers tximport normalization factors to geometric mean 1 while ordinary matrix size factors are not recentered. Cross-mode baseMean equality is therefore not the correct oracle. Every inferential column is independently checked against its own unwrapped upstream API at relative tolerance 1e-10, 300 genes per mode, 600 gene comparisons. Raw featureCounts equality and planted-effect/null assertions remain strict."
+  },
+  "scientificScope": [
+    "Three operations: raw integer gene-count matrix; 4-64 single-sample featureCounts gene tables; 4-64 kallisto abundance.tsv files with complete exact transcript-to-gene mapping. Released metrics ports require additional adapter semantic validation.",
+    "Explicit sample identifiers, condition, biological replicate, optional batch and fan-in input_index establish input order. At least two distinct biological replicates per condition, full-rank design and two residual degrees of freedom are enforced. Conditions and optional additive batch are bounded choices, never arbitrary R code.",
+    "Actual serial DESeq2 Wald inference uses median-of-ratios normalization, parametric dispersion request with upstream fallback, independent filtering, Cook cutoff and BH adjustment. Kallisto uses tximport countsFromAbundance=no and DESeqDataSetFromTximport length offsets. No automatic outlier replacement or fold-change shrinkage.",
+    "Deterministic 300-gene/six-sample fixture recovers all 12 planted positive and 12 negative effects; pinned upstream output also has four incidental null discoveries, totaling 13 positive and 15 negative significant genes. This is a regression baseline, not FDR calibration or a power benchmark.",
+    "Independent direct upstream matrix and tximport reference results agree across 600 gene comparisons at tolerance 1e-10. A separate actual upstream kallisto three-transcript plaintext fixture tests import compatibility only, not differential inference on three transcripts.",
+    "All-gene results preserve NA and prefiltered status, imported/normalized counts, exact sample-labeled model matrix, PCA/MA PDFs, methods, session/runtime versions, commands and input provenance. Tests cover actual model output, malformed inputs, batch confounding, insufficient replication, offsets, private startup and unchanged installed/user files."
+  ],
+  "boundaries": [
+    "Native installation checks use the actual released Workbench bridge, importer and scientific runner. Graph/archive tests use a checked copy callback for folder publication and do not themselves execute scientific programs or the native importer. Installed private-R scientific regressions are separate.",
+    "Research/teaching validation with deterministic synthetic fixtures; no clinical, diagnostic, regulatory, institutional approval or large-cohort performance claim. No interactive desktop GUI, cancellation, Unicode/long-path or firewall test. Ordinary and space-containing ASCII Windows paths were exercised.",
+    "The pack supports independent bulk-RNA samples and fixed condition or additive batch+condition designs. It does not expose paired/repeated-measures, continuous covariates, interactions, single-cell models or arbitrary formulas.",
+    "Numeric integer/header validation cannot prove counts were never normalized or that asserted biological replicates are independent. Users must provide genuine raw gene counts or compatible kallisto estimates, matched annotations and biologically appropriate design.",
+    "Private pinned R and Python require no system installation, runtime package downloads or user library. R requires a space-free scratch path: use the OS temp short alias or an explicit existing writable scratch-root folder. No administrator rights or drive mappings are used; normal completion deletes only the owned scratch child.",
+    "Each retained run expands a 268007078-byte private R/package tree containing 6864 files, plus staged inputs and scientific outputs. Pack limits are 64 samples, 250000 genes and at least 20 genes retained; local memory/disk remain limiting.",
+    "The separate runtime source companion includes 59 upstream archives and 230 pinned source/recipe files for the conservative Rtools base-library/compiler-runtime and Tcl/Tk closure. This is corresponding-source coverage, not proof of bit-identical rebuilding of upstream DLLs; documented general build prerequisites and base-only target apply.",
+    "Offline inventory and SHA verification establish integrity, not publisher identity. Signed-catalogue trust deployment is a separate project task."
+  ]
+}

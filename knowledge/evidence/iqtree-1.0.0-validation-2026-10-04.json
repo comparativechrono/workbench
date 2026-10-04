@@ -1,0 +1,2258 @@
+{
+  "schema": 1,
+  "kind": "native-workbench-exact-final-pack-validation",
+  "asOf": "2026-10-04",
+  "success": true,
+  "nativeWindowsHost": true,
+  "nativeWindowsExecuted": true,
+  "packId": "iqtree",
+  "packVersion": "1.0.0",
+  "upstreamToolVersion": "3.1.4",
+  "privatePythonVersion": "3.13.16",
+  "minimumApplicationVersion": "0.6.0",
+  "release": {
+    "id": 403179079,
+    "tag": "pack-iqtree-v1.0.0",
+    "url": "https://github.com/comparativechrono/workbench/releases/tag/pack-iqtree-v1.0.0",
+    "targetCommitish": "03f1468eb4208091f59450dfe845339af17f36a2",
+    "prereleaseAtEvidenceRetrieval": true,
+    "publishedAt": "2026-10-04T19:43:42Z",
+    "assets": [
+      {
+        "id": 610515846,
+        "name": "native-workbench-iqtree-1.0.0-source-evidence.zip",
+        "bytes": 1647744,
+        "githubDigest": "sha256:24e8ccf4ca71055a2fe0aebb9c20214d4835b3477753082f962d1c5301500bb6",
+        "downloadUrl": "https://github.com/comparativechrono/workbench/releases/download/pack-iqtree-v1.0.0/native-workbench-iqtree-1.0.0-source-evidence.zip",
+        "createdAt": "2026-10-04T19:43:24Z",
+        "updatedAt": "2026-10-04T19:43:25Z"
+      },
+      {
+        "id": 610515497,
+        "name": "native-workbench-pack-iqtree-1.0.0.zip",
+        "bytes": 248195844,
+        "githubDigest": "sha256:d232985959093083cd1f40f6fcb3496a1164f43912a72b8d6c29c900d0069aad",
+        "downloadUrl": "https://github.com/comparativechrono/workbench/releases/download/pack-iqtree-v1.0.0/native-workbench-pack-iqtree-1.0.0.zip",
+        "createdAt": "2026-10-04T19:43:13Z",
+        "updatedAt": "2026-10-04T19:43:24Z"
+      }
+    ]
+  },
+  "packImplementationSourceCommit": "03f1468eb4208091f59450dfe845339af17f36a2",
+  "run": {
+    "id": 37229409061,
+    "url": "https://github.com/comparativechrono/workbench/actions/runs/37229409061",
+    "sourceCommit": "24c6899aa7c19208ec88ae816879952ed0d8527e",
+    "status": "completed",
+    "conclusion": "success",
+    "startedAt": "2026-10-04T19:44:11Z",
+    "updatedAt": "2026-10-04T19:46:44Z",
+    "runner": "windows-2022"
+  },
+  "archive": {
+    "name": "native-workbench-pack-iqtree-1.0.0.zip",
+    "bytes": 248195844,
+    "sha256": "d232985959093083cd1f40f6fcb3496a1164f43912a72b8d6c29c900d0069aad",
+    "manifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d",
+    "downloadUrl": "https://github.com/comparativechrono/workbench/releases/download/pack-iqtree-v1.0.0/native-workbench-pack-iqtree-1.0.0.zip"
+  },
+  "sourceEvidenceCompanion": {
+    "name": "native-workbench-iqtree-1.0.0-source-evidence.zip",
+    "bytes": 1647744,
+    "sha256": "24e8ccf4ca71055a2fe0aebb9c20214d4835b3477753082f962d1c5301500bb6",
+    "sourceCommit": "03f1468eb4208091f59450dfe845339af17f36a2",
+    "downloadUrl": "https://github.com/comparativechrono/workbench/releases/download/pack-iqtree-v1.0.0/native-workbench-iqtree-1.0.0-source-evidence.zip",
+    "creationTimeNativeFinalPendingStatusSupersededByThisReport": true,
+    "immutableBytesPreserved": true
+  },
+  "publicAssetVerification": {
+    "schema": 1,
+    "releaseTag": "pack-iqtree-v1.0.0",
+    "assets": [
+      {
+        "name": "native-workbench-pack-iqtree-1.0.0.zip",
+        "downloadUrl": "https://github.com/comparativechrono/workbench/releases/download/pack-iqtree-v1.0.0/native-workbench-pack-iqtree-1.0.0.zip",
+        "bytes": 248195844,
+        "sha256": "d232985959093083cd1f40f6fcb3496a1164f43912a72b8d6c29c900d0069aad",
+        "independentlyDownloadedAndRehashedOn": "2026-10-04",
+        "matchesFrozenArtifact": true
+      },
+      {
+        "name": "native-workbench-iqtree-1.0.0-source-evidence.zip",
+        "downloadUrl": "https://github.com/comparativechrono/workbench/releases/download/pack-iqtree-v1.0.0/native-workbench-iqtree-1.0.0-source-evidence.zip",
+        "bytes": 1647744,
+        "sha256": "24e8ccf4ca71055a2fe0aebb9c20214d4835b3477753082f962d1c5301500bb6",
+        "independentlyDownloadedAndRehashedOn": "2026-10-04",
+        "matchesFrozenArtifact": true
+      }
+    ],
+    "duplicateDownloadFilesRemovedAfterVerification": true
+  },
+  "releasedApplication": {
+    "version": "0.6.0",
+    "archiveName": "native-workbench-0.6.0-starter-windows.zip",
+    "sha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+    "downloadUrl": "https://github.com/comparativechrono/workbench/releases/download/app-v0.6.0/native-workbench-0.6.0-starter-windows.zip",
+    "nativeBridgeUsedForInstallationChecks": true
+  },
+  "summary": {
+    "pathConfigurations": [
+      "ordinary",
+      "path with spaces"
+    ],
+    "scientificInstallationChecksPassedPerPath": 4,
+    "installedPeScientificRegressionTestsPassedPerPath": 13,
+    "releasedApplicationGraphArchiveTestsPassedPerPath": 6,
+    "duplicateVersionRejectedInBothPaths": true,
+    "testFailures": 0,
+    "testErrors": 0,
+    "testSkips": 0,
+    "unrelatedConditionalWorkflowStepsSkippedAsExpected": true,
+    "linuxScientificTestsPassed": 13,
+    "exactFinalArchiveValidated": true
+  },
+  "jobs": [
+    {
+      "jobId": 111515719684,
+      "name": "native (ordinary)",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37229409061/job/111515719684",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Download exact candidate and released application",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Import offline and run scientific checks on Windows",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Check kallisto at its default two threads",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 4
+        },
+        {
+          "name": "Check STAR repeated input and output chunks",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 5
+        },
+        {
+          "name": "Check BLAST local failure paths",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 6
+        },
+        {
+          "name": "Check GATK released application graph and archive contracts",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 7
+        },
+        {
+          "name": "Check expansion pack released application contracts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Check out expansion regression sources",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Run expansion scientific and failure regressions",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Diagnose failed STAR process",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 11
+        },
+        {
+          "name": "Record native evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Post Check out expansion regression sources",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 24
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 25
+        }
+      ],
+      "log": {
+        "file": "build/iqtree-final-evidence/job-111515719684.log",
+        "bytes": 71074,
+        "sha256": "b55a27bea30b09294207413f08156dfe4fe74e30946fb865cd0a7aa1ab1d7858",
+        "encoding": "Complete timestamped job log; CRLF normalized to LF for text storage."
+      },
+      "nativeInstallationReport": {
+        "schema": 1,
+        "nativeWindowsHost": true,
+        "nativeWindowsExecuted": true,
+        "success": true,
+        "packId": "iqtree",
+        "packVersion": "1.0.0",
+        "installation": {
+          "type": "result",
+          "success": true,
+          "cancelled": false,
+          "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\packs\\iqtree-1.0.0",
+          "message": "Tool pack imported.",
+          "outputs": [],
+          "pack_id": "iqtree",
+          "pack_version": "1.0.0",
+          "packId": "iqtree",
+          "packVersion": "1.0.0",
+          "publisherVerified": false,
+          "verification": "Complete file inventory verified; publisher identity not verified"
+        },
+        "scientificChecks": {
+          "schema": 1,
+          "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-194424-44787986",
+          "checks": [
+            {
+              "id": "iqtree/nucleotide-default@1.0.0",
+              "pin": {
+                "packId": "iqtree",
+                "packVersion": "1.0.0",
+                "manifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-194424-44787986\\run-20261004-194424-84c74b40"
+            },
+            {
+              "id": "iqtree/protein-default@1.0.0",
+              "pin": {
+                "packId": "iqtree",
+                "packVersion": "1.0.0",
+                "manifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-194424-44787986\\run-20261004-194425-62519225"
+            },
+            {
+              "id": "iqtree/nucleotide-both-supports@1.0.0",
+              "pin": {
+                "packId": "iqtree",
+                "packVersion": "1.0.0",
+                "manifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-194424-44787986\\run-20261004-194427-ce638647"
+            },
+            {
+              "id": "iqtree/protein-bootstrap@1.0.0",
+              "pin": {
+                "packId": "iqtree",
+                "packVersion": "1.0.0",
+                "manifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\ordinary\\native-workbench\\results\\pack-checks-20261004-194424-44787986\\run-20261004-194443-712d5fd1"
+            }
+          ],
+          "nativeWindowsExecuted": true,
+          "passed": 4,
+          "failed": 0,
+          "cancelled": false,
+          "success": true,
+          "message": "4 of 4 additional pack checks passed."
+        },
+        "duplicateVersionRejected": true
+      },
+      "scientificRegressionReport": {
+        "schema": 1,
+        "packId": "iqtree",
+        "packVersion": "1.0.0",
+        "toolVersion": "3.1.4",
+        "nativeWindowsExecuted": true,
+        "scientificExecutablesExecuted": true,
+        "platform": "win32",
+        "pythonVersion": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+        "packManifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d",
+        "scientificBinarySha256": "43c9bf3b0dc5e7d88c183a2582369d22c9d692b7585350038769334bb6fd9aed",
+        "installedAdapterSha256": "300b3ffabcf8d02f309d414cb0bab8c1403e47343c0100f5f591d879b22172a8",
+        "testSourceSha256": "5c4a1d458910b7caf0ec367f4e02324337549c14d370e0ac9ecf552c2926e9c3",
+        "testsRun": 13,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "success": true,
+        "seconds": 82.27,
+        "installationCheckDeclarations": [
+          {
+            "id": "nucleotide-default",
+            "success": true
+          },
+          {
+            "id": "protein-default",
+            "success": true
+          },
+          {
+            "id": "nucleotide-both-supports",
+            "success": true
+          },
+          {
+            "id": "protein-bootstrap",
+            "success": true
+          }
+        ],
+        "executions": [
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: JC; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "protein",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: PMB+F; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "GTR+G4",
+            "support": "both",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: GTR+F+G4; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "protein",
+            "model": "LG+G4",
+            "support": "ufboot",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: LG+G4; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "HKY+G4",
+            "support": "sh-alrt",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: HKY+F+G4; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "JC",
+            "support": "none",
+            "threads": 1,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: JC; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "JC",
+            "support": "none",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: JC; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: IQ-TREE inference in this pack requires at least four taxa.\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: Aligned FASTA rows must have the same number of columns. Run MUSCLE first.\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: At least four distinct aligned sequences are required; identical taxa alone cannot resolve a phylogeny.\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: Each taxon must contain observed, nonambiguous residues: gamma2\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: Each taxon must contain observed, nonambiguous residues: gamma2\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: Invalid DNA alignment symbols. DNA accepts IUPAC DNA/RNA; protein accepts standard amino acids and B/X/Z. Gaps are - or .; protein stop, U, O and J require review before analysis.\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: FASTA first-word taxon identifiers must be unique: alpha1\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: No parsimony-informative alignment columns were found. This pack declines to present an unsupported resolved phylogeny; review sequence diversity and alignment.\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "GTR+G4;echo",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: Choose a model listed for the selected DNA/protein workflow.\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "LG+G4",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: Choose a model listed for the selected DNA/protein workflow.\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: Support replicates must be an integer from 1000 to 10000.\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: Threads must be an integer from 1 to 64.\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: Seed must be an integer from 1 to 2147483647.\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: Seed must be an integer from 1 to 2147483647.\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: Support replicates must be an integer from 1000 to 10000.\n"
+          },
+          {
+            "datatype": "protein",
+            "model": "LG+G4",
+            "support": "none",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: LG+G4; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "JC",
+            "support": "none",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: JC; 6 taxa; 801 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: JC; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "protein",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: PMB+F; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "GTR+G4",
+            "support": "both",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: GTR+F+G4; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "protein",
+            "model": "LG+G4",
+            "support": "ufboot",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: LG+G4; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "JC",
+            "support": "none",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: JC; 6 taxa; 816 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "protein",
+            "model": "LG+G4",
+            "support": "none",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: LG+G4; 6 taxa; 870 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "JC",
+            "support": "none",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: JC; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          }
+        ],
+        "muscleIntegration": [
+          {
+            "datatype": "nucleotide",
+            "muscleExecutableSha256": "edc84f98e1f3cbf6f3df717ccfdb03af7ad7677cd9ae2e66065f2079d0ed2146",
+            "muscleArchiveSha256": "c07d3e398f48df683926c0970ef77c3b7d2bdab6426b80c80186f2360ed25258",
+            "method": "Super5, explicit alphabet, threads1, perturb0, permnone",
+            "alignmentSha256": "d3f249f0f5d5b6c800fbe5827992a0396da8a7cbdc050c6fd47629a095a92d43",
+            "alignmentResiduesPreserved": true,
+            "alignmentColumns": 816,
+            "variableColumns": 201,
+            "informativeColumns": 117,
+            "iqtreeKnownTopologyPassed": true
+          },
+          {
+            "datatype": "protein",
+            "muscleExecutableSha256": "edc84f98e1f3cbf6f3df717ccfdb03af7ad7677cd9ae2e66065f2079d0ed2146",
+            "muscleArchiveSha256": "c07d3e398f48df683926c0970ef77c3b7d2bdab6426b80c80186f2360ed25258",
+            "method": "Super5, explicit alphabet, threads1, perturb0, permnone",
+            "alignmentSha256": "76d212001ceb7e26e8166da5ce7ef91b44de06ee6ebb69e86037ff1846a24d39",
+            "alignmentResiduesPreserved": true,
+            "alignmentColumns": 870,
+            "variableColumns": 190,
+            "informativeColumns": 111,
+            "iqtreeKnownTopologyPassed": true
+          }
+        ],
+        "scope": "Synthetic known topology, model/columns, actual support, direct upstream agreement, input/pack immutability and validation guards; no GUI, large-tree performance or clinical claim."
+      },
+      "releasedApplicationGraphReport": {
+        "schema": 1,
+        "applicationVersion": "0.6.0",
+        "expectedPackVersions": {
+          "iqtree": "1.0.0"
+        },
+        "testHost": "win32",
+        "pythonVersion": "3.13.16",
+        "nativeWindowsExecuted": false,
+        "scientificExecutablesExecuted": false,
+        "nativeImporterExecuted": false,
+        "scope": "Released-app graph contracts and Python archive import; checked copy callback substitutes native folder publication.",
+        "typingLimitations": {
+          "iqtree": "Newick trees are generic files. Core sequence types establish aligned nucleotide/protein roles; scientific suitability also requires adapter validation."
+        },
+        "installedInventory": {
+          "packManifests": 5,
+          "executablesVerified": 8,
+          "assetsVerified": 44
+        },
+        "selectedPacks": [
+          {
+            "id": "iqtree",
+            "version": "1.0.0",
+            "manifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d",
+            "operations": [
+              "infer-nucleotide",
+              "infer-protein"
+            ],
+            "scientificChecksDeclared": 4
+          }
+        ],
+        "offlineStaticImports": [
+          {
+            "id": "iqtree",
+            "version": "1.0.0",
+            "archiveSha256": "d232985959093083cd1f40f6fcb3496a1164f43912a72b8d6c29c900d0069aad",
+            "manifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d",
+            "archiveMatchesGraphPayload": true,
+            "duplicateVersionRejected": true,
+            "installedFilesAndReceiptsUnchanged": true,
+            "publisherVerified": false
+          }
+        ],
+        "starterPackFilesPreserved": 143,
+        "alignmentToPhylogenyGraphs": [
+          {
+            "tools": [
+              "muscle/align-nucleotide",
+              "iqtree/infer-nucleotide",
+              "iqtree/infer-nucleotide"
+            ],
+            "ranks": [
+              {
+                "rank": 1,
+                "nodes": [
+                  "step-1"
+                ]
+              },
+              {
+                "rank": 2,
+                "nodes": [
+                  "step-2",
+                  "step-3"
+                ]
+              }
+            ],
+            "savedPins": [
+              {
+                "packId": "muscle",
+                "packVersion": "0.5.2",
+                "manifestSha256": "085273422c7f26af77d23643efa961f1fb6ecbdee301109af67ba551f41b82c4"
+              },
+              {
+                "packId": "iqtree",
+                "packVersion": "1.0.0",
+                "manifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d"
+              },
+              {
+                "packId": "iqtree",
+                "packVersion": "1.0.0",
+                "manifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d"
+              }
+            ],
+            "namedMethodsProvenance": true,
+            "changedSavedManifestRejected": true,
+            "alphabet": "nucleotide"
+          },
+          {
+            "tools": [
+              "muscle/align-protein",
+              "iqtree/infer-protein",
+              "iqtree/infer-protein"
+            ],
+            "ranks": [
+              {
+                "rank": 1,
+                "nodes": [
+                  "step-1"
+                ]
+              },
+              {
+                "rank": 2,
+                "nodes": [
+                  "step-2",
+                  "step-3"
+                ]
+              }
+            ],
+            "savedPins": [
+              {
+                "packId": "muscle",
+                "packVersion": "0.5.2",
+                "manifestSha256": "085273422c7f26af77d23643efa961f1fb6ecbdee301109af67ba551f41b82c4"
+              },
+              {
+                "packId": "iqtree",
+                "packVersion": "1.0.0",
+                "manifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d"
+              },
+              {
+                "packId": "iqtree",
+                "packVersion": "1.0.0",
+                "manifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d"
+              }
+            ],
+            "namedMethodsProvenance": true,
+            "changedSavedManifestRejected": true,
+            "alphabet": "protein"
+          }
+        ],
+        "phylogenyTypeGuards": {
+          "rejected": [
+            "fasta-nucleotide -> msa-nucleotide",
+            "msa-protein -> msa-nucleotide",
+            "reads -> msa-nucleotide",
+            "fasta-protein -> msa-protein",
+            "msa-nucleotide -> msa-protein",
+            "reads -> msa-protein"
+          ],
+          "supportReplicateLowerBoundEnforced": true
+        },
+        "releasedApplicationFilesVerified": [
+          "WorkbenchBridge.exe",
+          "workspace/app_version.py",
+          "workspace/catalog-sources.json",
+          "workspace/catalog.py",
+          "workspace/core_checks.py",
+          "workspace/desktop_host.py",
+          "workspace/desktop_model.py",
+          "workspace/engine.py",
+          "workspace/example.py",
+          "workspace/pack_checks.py",
+          "workspace/pack_manager.py",
+          "workspace/pack_security.py",
+          "workspace/service.py",
+          "workspace/starter-check-profile.json",
+          "workspace/verify_installation.py"
+        ],
+        "starterSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+        "dependencies": {
+          "muscle": {
+            "version": "0.5.2",
+            "archiveSha256": "c07d3e398f48df683926c0970ef77c3b7d2bdab6426b80c80186f2360ed25258"
+          }
+        },
+        "presetAndOriginalPinContracts": [
+          "iqtree/infer-nucleotide",
+          "iqtree/infer-protein"
+        ],
+        "testsRun": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "testSourceSha256": "249e3919d668a0995803ced740346fbddb663178deb2053d15334aeaf73fa908",
+        "success": true
+      }
+    },
+    {
+      "jobId": 111515719927,
+      "name": "native (path with spaces)",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37229409061/job/111515719927",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Download exact candidate and released application",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Import offline and run scientific checks on Windows",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Check kallisto at its default two threads",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 4
+        },
+        {
+          "name": "Check STAR repeated input and output chunks",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 5
+        },
+        {
+          "name": "Check BLAST local failure paths",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 6
+        },
+        {
+          "name": "Check GATK released application graph and archive contracts",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 7
+        },
+        {
+          "name": "Check expansion pack released application contracts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Check out expansion regression sources",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Run expansion scientific and failure regressions",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Diagnose failed STAR process",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 11
+        },
+        {
+          "name": "Record native evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Post Check out expansion regression sources",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 24
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 25
+        }
+      ],
+      "log": {
+        "file": "build/iqtree-final-evidence/job-111515719927.log",
+        "bytes": 71173,
+        "sha256": "ee974b5777a725e815f5673ea10d5a680d0d1c8bd71623cc9b5e6f775d5f2f54",
+        "encoding": "Complete timestamped job log; CRLF normalized to LF for text storage."
+      },
+      "nativeInstallationReport": {
+        "schema": 1,
+        "nativeWindowsHost": true,
+        "nativeWindowsExecuted": true,
+        "success": true,
+        "packId": "iqtree",
+        "packVersion": "1.0.0",
+        "installation": {
+          "type": "result",
+          "success": true,
+          "cancelled": false,
+          "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\packs\\iqtree-1.0.0",
+          "message": "Tool pack imported.",
+          "outputs": [],
+          "pack_id": "iqtree",
+          "pack_version": "1.0.0",
+          "packId": "iqtree",
+          "packVersion": "1.0.0",
+          "publisherVerified": false,
+          "verification": "Complete file inventory verified; publisher identity not verified"
+        },
+        "scientificChecks": {
+          "schema": 1,
+          "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-194424-9d7a2c44",
+          "checks": [
+            {
+              "id": "iqtree/nucleotide-default@1.0.0",
+              "pin": {
+                "packId": "iqtree",
+                "packVersion": "1.0.0",
+                "manifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-194424-9d7a2c44\\run-20261004-194424-e6c584e8"
+            },
+            {
+              "id": "iqtree/protein-default@1.0.0",
+              "pin": {
+                "packId": "iqtree",
+                "packVersion": "1.0.0",
+                "manifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-194424-9d7a2c44\\run-20261004-194424-9ef9118c"
+            },
+            {
+              "id": "iqtree/nucleotide-both-supports@1.0.0",
+              "pin": {
+                "packId": "iqtree",
+                "packVersion": "1.0.0",
+                "manifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-194424-9d7a2c44\\run-20261004-194426-3a7fa559"
+            },
+            {
+              "id": "iqtree/protein-bootstrap@1.0.0",
+              "pin": {
+                "packId": "iqtree",
+                "packVersion": "1.0.0",
+                "manifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d"
+              },
+              "status": "passed",
+              "folder": "D:\\a\\_temp\\path with spaces\\native-workbench\\results\\pack-checks-20261004-194424-9d7a2c44\\run-20261004-194435-458058db"
+            }
+          ],
+          "nativeWindowsExecuted": true,
+          "passed": 4,
+          "failed": 0,
+          "cancelled": false,
+          "success": true,
+          "message": "4 of 4 additional pack checks passed."
+        },
+        "duplicateVersionRejected": true
+      },
+      "scientificRegressionReport": {
+        "schema": 1,
+        "packId": "iqtree",
+        "packVersion": "1.0.0",
+        "toolVersion": "3.1.4",
+        "nativeWindowsExecuted": true,
+        "scientificExecutablesExecuted": true,
+        "platform": "win32",
+        "pythonVersion": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+        "packManifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d",
+        "scientificBinarySha256": "43c9bf3b0dc5e7d88c183a2582369d22c9d692b7585350038769334bb6fd9aed",
+        "installedAdapterSha256": "300b3ffabcf8d02f309d414cb0bab8c1403e47343c0100f5f591d879b22172a8",
+        "testSourceSha256": "5c4a1d458910b7caf0ec367f4e02324337549c14d370e0ac9ecf552c2926e9c3",
+        "testsRun": 13,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "success": true,
+        "seconds": 50.73,
+        "installationCheckDeclarations": [
+          {
+            "id": "nucleotide-default",
+            "success": true
+          },
+          {
+            "id": "protein-default",
+            "success": true
+          },
+          {
+            "id": "nucleotide-both-supports",
+            "success": true
+          },
+          {
+            "id": "protein-bootstrap",
+            "success": true
+          }
+        ],
+        "executions": [
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: JC; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "protein",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: PMB+F; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "GTR+G4",
+            "support": "both",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: GTR+F+G4; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "protein",
+            "model": "LG+G4",
+            "support": "ufboot",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: LG+G4; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "HKY+G4",
+            "support": "sh-alrt",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: HKY+F+G4; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "JC",
+            "support": "none",
+            "threads": 1,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: JC; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "JC",
+            "support": "none",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: JC; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: IQ-TREE inference in this pack requires at least four taxa.\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: Aligned FASTA rows must have the same number of columns. Run MUSCLE first.\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: At least four distinct aligned sequences are required; identical taxa alone cannot resolve a phylogeny.\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: Each taxon must contain observed, nonambiguous residues: gamma2\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: Each taxon must contain observed, nonambiguous residues: gamma2\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: Invalid DNA alignment symbols. DNA accepts IUPAC DNA/RNA; protein accepts standard amino acids and B/X/Z. Gaps are - or .; protein stop, U, O and J require review before analysis.\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: FASTA first-word taxon identifiers must be unique: alpha1\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: No parsimony-informative alignment columns were found. This pack declines to present an unsupported resolved phylogeny; review sequence diversity and alignment.\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "GTR+G4;echo",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: Choose a model listed for the selected DNA/protein workflow.\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "LG+G4",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: Choose a model listed for the selected DNA/protein workflow.\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: Support replicates must be an integer from 1000 to 10000.\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: Threads must be an integer from 1 to 64.\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: Seed must be an integer from 1 to 2147483647.\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: Seed must be an integer from 1 to 2147483647.\n"
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 2,
+            "expectedSuccess": false,
+            "stdout": "",
+            "stderr": "IQ-TREE pack: Support replicates must be an integer from 1000 to 10000.\n"
+          },
+          {
+            "datatype": "protein",
+            "model": "LG+G4",
+            "support": "none",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: LG+G4; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "JC",
+            "support": "none",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: JC; 6 taxa; 801 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: JC; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "protein",
+            "model": "MFP",
+            "support": "none",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: PMB+F; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "GTR+G4",
+            "support": "both",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: GTR+F+G4; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "protein",
+            "model": "LG+G4",
+            "support": "ufboot",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: LG+G4; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "JC",
+            "support": "none",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: JC; 6 taxa; 816 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "protein",
+            "model": "LG+G4",
+            "support": "none",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: LG+G4; 6 taxa; 870 columns.\n",
+            "stderr": ""
+          },
+          {
+            "datatype": "nucleotide",
+            "model": "JC",
+            "support": "none",
+            "threads": 2,
+            "returncode": 0,
+            "expectedSuccess": true,
+            "stdout": "IQ-TREE completed: JC; 6 taxa; 800 columns.\n",
+            "stderr": ""
+          }
+        ],
+        "muscleIntegration": [
+          {
+            "datatype": "nucleotide",
+            "muscleExecutableSha256": "edc84f98e1f3cbf6f3df717ccfdb03af7ad7677cd9ae2e66065f2079d0ed2146",
+            "muscleArchiveSha256": "c07d3e398f48df683926c0970ef77c3b7d2bdab6426b80c80186f2360ed25258",
+            "method": "Super5, explicit alphabet, threads1, perturb0, permnone",
+            "alignmentSha256": "d3f249f0f5d5b6c800fbe5827992a0396da8a7cbdc050c6fd47629a095a92d43",
+            "alignmentResiduesPreserved": true,
+            "alignmentColumns": 816,
+            "variableColumns": 201,
+            "informativeColumns": 117,
+            "iqtreeKnownTopologyPassed": true
+          },
+          {
+            "datatype": "protein",
+            "muscleExecutableSha256": "edc84f98e1f3cbf6f3df717ccfdb03af7ad7677cd9ae2e66065f2079d0ed2146",
+            "muscleArchiveSha256": "c07d3e398f48df683926c0970ef77c3b7d2bdab6426b80c80186f2360ed25258",
+            "method": "Super5, explicit alphabet, threads1, perturb0, permnone",
+            "alignmentSha256": "76d212001ceb7e26e8166da5ce7ef91b44de06ee6ebb69e86037ff1846a24d39",
+            "alignmentResiduesPreserved": true,
+            "alignmentColumns": 870,
+            "variableColumns": 190,
+            "informativeColumns": 111,
+            "iqtreeKnownTopologyPassed": true
+          }
+        ],
+        "scope": "Synthetic known topology, model/columns, actual support, direct upstream agreement, input/pack immutability and validation guards; no GUI, large-tree performance or clinical claim."
+      },
+      "releasedApplicationGraphReport": {
+        "schema": 1,
+        "applicationVersion": "0.6.0",
+        "expectedPackVersions": {
+          "iqtree": "1.0.0"
+        },
+        "testHost": "win32",
+        "pythonVersion": "3.13.16",
+        "nativeWindowsExecuted": false,
+        "scientificExecutablesExecuted": false,
+        "nativeImporterExecuted": false,
+        "scope": "Released-app graph contracts and Python archive import; checked copy callback substitutes native folder publication.",
+        "typingLimitations": {
+          "iqtree": "Newick trees are generic files. Core sequence types establish aligned nucleotide/protein roles; scientific suitability also requires adapter validation."
+        },
+        "installedInventory": {
+          "packManifests": 5,
+          "executablesVerified": 8,
+          "assetsVerified": 44
+        },
+        "selectedPacks": [
+          {
+            "id": "iqtree",
+            "version": "1.0.0",
+            "manifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d",
+            "operations": [
+              "infer-nucleotide",
+              "infer-protein"
+            ],
+            "scientificChecksDeclared": 4
+          }
+        ],
+        "offlineStaticImports": [
+          {
+            "id": "iqtree",
+            "version": "1.0.0",
+            "archiveSha256": "d232985959093083cd1f40f6fcb3496a1164f43912a72b8d6c29c900d0069aad",
+            "manifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d",
+            "archiveMatchesGraphPayload": true,
+            "duplicateVersionRejected": true,
+            "installedFilesAndReceiptsUnchanged": true,
+            "publisherVerified": false
+          }
+        ],
+        "starterPackFilesPreserved": 143,
+        "alignmentToPhylogenyGraphs": [
+          {
+            "tools": [
+              "muscle/align-nucleotide",
+              "iqtree/infer-nucleotide",
+              "iqtree/infer-nucleotide"
+            ],
+            "ranks": [
+              {
+                "rank": 1,
+                "nodes": [
+                  "step-1"
+                ]
+              },
+              {
+                "rank": 2,
+                "nodes": [
+                  "step-2",
+                  "step-3"
+                ]
+              }
+            ],
+            "savedPins": [
+              {
+                "packId": "muscle",
+                "packVersion": "0.5.2",
+                "manifestSha256": "085273422c7f26af77d23643efa961f1fb6ecbdee301109af67ba551f41b82c4"
+              },
+              {
+                "packId": "iqtree",
+                "packVersion": "1.0.0",
+                "manifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d"
+              },
+              {
+                "packId": "iqtree",
+                "packVersion": "1.0.0",
+                "manifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d"
+              }
+            ],
+            "namedMethodsProvenance": true,
+            "changedSavedManifestRejected": true,
+            "alphabet": "nucleotide"
+          },
+          {
+            "tools": [
+              "muscle/align-protein",
+              "iqtree/infer-protein",
+              "iqtree/infer-protein"
+            ],
+            "ranks": [
+              {
+                "rank": 1,
+                "nodes": [
+                  "step-1"
+                ]
+              },
+              {
+                "rank": 2,
+                "nodes": [
+                  "step-2",
+                  "step-3"
+                ]
+              }
+            ],
+            "savedPins": [
+              {
+                "packId": "muscle",
+                "packVersion": "0.5.2",
+                "manifestSha256": "085273422c7f26af77d23643efa961f1fb6ecbdee301109af67ba551f41b82c4"
+              },
+              {
+                "packId": "iqtree",
+                "packVersion": "1.0.0",
+                "manifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d"
+              },
+              {
+                "packId": "iqtree",
+                "packVersion": "1.0.0",
+                "manifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d"
+              }
+            ],
+            "namedMethodsProvenance": true,
+            "changedSavedManifestRejected": true,
+            "alphabet": "protein"
+          }
+        ],
+        "phylogenyTypeGuards": {
+          "rejected": [
+            "fasta-nucleotide -> msa-nucleotide",
+            "msa-protein -> msa-nucleotide",
+            "reads -> msa-nucleotide",
+            "fasta-protein -> msa-protein",
+            "msa-nucleotide -> msa-protein",
+            "reads -> msa-protein"
+          ],
+          "supportReplicateLowerBoundEnforced": true
+        },
+        "releasedApplicationFilesVerified": [
+          "WorkbenchBridge.exe",
+          "workspace/app_version.py",
+          "workspace/catalog-sources.json",
+          "workspace/catalog.py",
+          "workspace/core_checks.py",
+          "workspace/desktop_host.py",
+          "workspace/desktop_model.py",
+          "workspace/engine.py",
+          "workspace/example.py",
+          "workspace/pack_checks.py",
+          "workspace/pack_manager.py",
+          "workspace/pack_security.py",
+          "workspace/service.py",
+          "workspace/starter-check-profile.json",
+          "workspace/verify_installation.py"
+        ],
+        "starterSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+        "dependencies": {
+          "muscle": {
+            "version": "0.5.2",
+            "archiveSha256": "c07d3e398f48df683926c0970ef77c3b7d2bdab6426b80c80186f2360ed25258"
+          }
+        },
+        "presetAndOriginalPinContracts": [
+          "iqtree/infer-nucleotide",
+          "iqtree/infer-protein"
+        ],
+        "testsRun": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "testSourceSha256": "249e3919d668a0995803ced740346fbddb663178deb2053d15334aeaf73fa908",
+        "success": true
+      }
+    }
+  ],
+  "precedingCandidate": {
+    "version": "0.0.2",
+    "archiveSha256": "2d6d012a0d76d5ddc1e5e7fe02d921dbdd7eaa65fbc53920496a3c7cb76cecd6",
+    "manifestSha256": "23416b3ffeea85edabd535499d5b58e0b7aed31f53bf2b5e2ac4f318a9f46091",
+    "runId": 37228916162,
+    "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37228916162",
+    "sourceCommit": "5327ce577274057c3ef79c0dc16574265069b976",
+    "conclusion": "success",
+    "correspondenceFile": "evidence/current/iqtree-0.0.2-correspondence.json in source/evidence companion",
+    "correspondenceSha256": "eb95d7f7475e43f736166aaced9346967272ea04ac9259bfe5893ef3906a0ee9",
+    "validationFile": "build/iqtree-candidate-evidence/candidate-0.0.2-validation.json",
+    "validationSha256": "1622a90c78cd555184e49b8b9333f2ed90fc45757ea9df13eff6ef53879032da",
+    "scope": "Candidate passed 4 installation, 6 graph and 13 scientific tests per path; only manifest version and allowed README differ. This report separately validates the exact final 1.0.0 archive."
+  },
+  "linuxScientificEvidence": {
+    "file": "evidence/current/linux-final-lf.json in source/evidence companion",
+    "sha256": "62d3ef5962596c2182f58d22e43d58cfde9f57eb115a36907d80e85a6e8d2f22",
+    "report": {
+      "schema": 1,
+      "packId": "iqtree",
+      "packVersion": "1.0.0",
+      "toolVersion": "3.1.4",
+      "nativeWindowsExecuted": false,
+      "scientificExecutablesExecuted": true,
+      "platform": "linux",
+      "pythonVersion": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+      "packManifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d",
+      "scientificBinarySha256": "4ba12225d8f52a727b5e6fa172d300cd9302510730ea763795b2bd7a6ed4a834",
+      "installedAdapterSha256": "300b3ffabcf8d02f309d414cb0bab8c1403e47343c0100f5f591d879b22172a8",
+      "testSourceSha256": "5c4a1d458910b7caf0ec367f4e02324337549c14d370e0ac9ecf552c2926e9c3",
+      "testsRun": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "success": true,
+      "seconds": 34.495,
+      "installationCheckDeclarations": [
+        {
+          "id": "nucleotide-default",
+          "success": true
+        },
+        {
+          "id": "protein-default",
+          "success": true
+        },
+        {
+          "id": "nucleotide-both-supports",
+          "success": true
+        },
+        {
+          "id": "protein-bootstrap",
+          "success": true
+        }
+      ],
+      "executions": [
+        {
+          "datatype": "nucleotide",
+          "model": "MFP",
+          "support": "none",
+          "threads": 2,
+          "returncode": 0,
+          "expectedSuccess": true,
+          "stdout": "IQ-TREE completed: JC; 6 taxa; 800 columns.\n",
+          "stderr": ""
+        },
+        {
+          "datatype": "protein",
+          "model": "MFP",
+          "support": "none",
+          "threads": 2,
+          "returncode": 0,
+          "expectedSuccess": true,
+          "stdout": "IQ-TREE completed: PMB+F; 6 taxa; 800 columns.\n",
+          "stderr": ""
+        },
+        {
+          "datatype": "nucleotide",
+          "model": "GTR+G4",
+          "support": "both",
+          "threads": 2,
+          "returncode": 0,
+          "expectedSuccess": true,
+          "stdout": "IQ-TREE completed: GTR+F+G4; 6 taxa; 800 columns.\n",
+          "stderr": ""
+        },
+        {
+          "datatype": "protein",
+          "model": "LG+G4",
+          "support": "ufboot",
+          "threads": 2,
+          "returncode": 0,
+          "expectedSuccess": true,
+          "stdout": "IQ-TREE completed: LG+G4; 6 taxa; 800 columns.\n",
+          "stderr": ""
+        },
+        {
+          "datatype": "nucleotide",
+          "model": "HKY+G4",
+          "support": "sh-alrt",
+          "threads": 2,
+          "returncode": 0,
+          "expectedSuccess": true,
+          "stdout": "IQ-TREE completed: HKY+F+G4; 6 taxa; 800 columns.\n",
+          "stderr": ""
+        },
+        {
+          "datatype": "nucleotide",
+          "model": "JC",
+          "support": "none",
+          "threads": 1,
+          "returncode": 0,
+          "expectedSuccess": true,
+          "stdout": "IQ-TREE completed: JC; 6 taxa; 800 columns.\n",
+          "stderr": ""
+        },
+        {
+          "datatype": "nucleotide",
+          "model": "JC",
+          "support": "none",
+          "threads": 2,
+          "returncode": 0,
+          "expectedSuccess": true,
+          "stdout": "IQ-TREE completed: JC; 6 taxa; 800 columns.\n",
+          "stderr": ""
+        },
+        {
+          "datatype": "nucleotide",
+          "model": "MFP",
+          "support": "none",
+          "threads": 2,
+          "returncode": 2,
+          "expectedSuccess": false,
+          "stdout": "",
+          "stderr": "IQ-TREE pack: IQ-TREE inference in this pack requires at least four taxa.\n"
+        },
+        {
+          "datatype": "nucleotide",
+          "model": "MFP",
+          "support": "none",
+          "threads": 2,
+          "returncode": 2,
+          "expectedSuccess": false,
+          "stdout": "",
+          "stderr": "IQ-TREE pack: Aligned FASTA rows must have the same number of columns. Run MUSCLE first.\n"
+        },
+        {
+          "datatype": "nucleotide",
+          "model": "MFP",
+          "support": "none",
+          "threads": 2,
+          "returncode": 2,
+          "expectedSuccess": false,
+          "stdout": "",
+          "stderr": "IQ-TREE pack: At least four distinct aligned sequences are required; identical taxa alone cannot resolve a phylogeny.\n"
+        },
+        {
+          "datatype": "nucleotide",
+          "model": "MFP",
+          "support": "none",
+          "threads": 2,
+          "returncode": 2,
+          "expectedSuccess": false,
+          "stdout": "",
+          "stderr": "IQ-TREE pack: Each taxon must contain observed, nonambiguous residues: gamma2\n"
+        },
+        {
+          "datatype": "nucleotide",
+          "model": "MFP",
+          "support": "none",
+          "threads": 2,
+          "returncode": 2,
+          "expectedSuccess": false,
+          "stdout": "",
+          "stderr": "IQ-TREE pack: Each taxon must contain observed, nonambiguous residues: gamma2\n"
+        },
+        {
+          "datatype": "nucleotide",
+          "model": "MFP",
+          "support": "none",
+          "threads": 2,
+          "returncode": 2,
+          "expectedSuccess": false,
+          "stdout": "",
+          "stderr": "IQ-TREE pack: Invalid DNA alignment symbols. DNA accepts IUPAC DNA/RNA; protein accepts standard amino acids and B/X/Z. Gaps are - or .; protein stop, U, O and J require review before analysis.\n"
+        },
+        {
+          "datatype": "nucleotide",
+          "model": "MFP",
+          "support": "none",
+          "threads": 2,
+          "returncode": 2,
+          "expectedSuccess": false,
+          "stdout": "",
+          "stderr": "IQ-TREE pack: FASTA first-word taxon identifiers must be unique: alpha1\n"
+        },
+        {
+          "datatype": "nucleotide",
+          "model": "MFP",
+          "support": "none",
+          "threads": 2,
+          "returncode": 2,
+          "expectedSuccess": false,
+          "stdout": "",
+          "stderr": "IQ-TREE pack: No parsimony-informative alignment columns were found. This pack declines to present an unsupported resolved phylogeny; review sequence diversity and alignment.\n"
+        },
+        {
+          "datatype": "nucleotide",
+          "model": "GTR+G4;echo",
+          "support": "none",
+          "threads": 2,
+          "returncode": 2,
+          "expectedSuccess": false,
+          "stdout": "",
+          "stderr": "IQ-TREE pack: Choose a model listed for the selected DNA/protein workflow.\n"
+        },
+        {
+          "datatype": "nucleotide",
+          "model": "LG+G4",
+          "support": "none",
+          "threads": 2,
+          "returncode": 2,
+          "expectedSuccess": false,
+          "stdout": "",
+          "stderr": "IQ-TREE pack: Choose a model listed for the selected DNA/protein workflow.\n"
+        },
+        {
+          "datatype": "nucleotide",
+          "model": "MFP",
+          "support": "none",
+          "threads": 2,
+          "returncode": 2,
+          "expectedSuccess": false,
+          "stdout": "",
+          "stderr": "IQ-TREE pack: Support replicates must be an integer from 1000 to 10000.\n"
+        },
+        {
+          "datatype": "nucleotide",
+          "model": "MFP",
+          "support": "none",
+          "threads": 2,
+          "returncode": 2,
+          "expectedSuccess": false,
+          "stdout": "",
+          "stderr": "IQ-TREE pack: Threads must be an integer from 1 to 64.\n"
+        },
+        {
+          "datatype": "nucleotide",
+          "model": "MFP",
+          "support": "none",
+          "threads": 2,
+          "returncode": 2,
+          "expectedSuccess": false,
+          "stdout": "",
+          "stderr": "IQ-TREE pack: Seed must be an integer from 1 to 2147483647.\n"
+        },
+        {
+          "datatype": "nucleotide",
+          "model": "MFP",
+          "support": "none",
+          "threads": 2,
+          "returncode": 2,
+          "expectedSuccess": false,
+          "stdout": "",
+          "stderr": "IQ-TREE pack: Seed must be an integer from 1 to 2147483647.\n"
+        },
+        {
+          "datatype": "nucleotide",
+          "model": "MFP",
+          "support": "none",
+          "threads": 2,
+          "returncode": 2,
+          "expectedSuccess": false,
+          "stdout": "",
+          "stderr": "IQ-TREE pack: Support replicates must be an integer from 1000 to 10000.\n"
+        },
+        {
+          "datatype": "protein",
+          "model": "LG+G4",
+          "support": "none",
+          "threads": 2,
+          "returncode": 0,
+          "expectedSuccess": true,
+          "stdout": "IQ-TREE completed: LG+G4; 6 taxa; 800 columns.\n",
+          "stderr": ""
+        },
+        {
+          "datatype": "nucleotide",
+          "model": "JC",
+          "support": "none",
+          "threads": 2,
+          "returncode": 0,
+          "expectedSuccess": true,
+          "stdout": "IQ-TREE completed: JC; 6 taxa; 801 columns.\n",
+          "stderr": ""
+        },
+        {
+          "datatype": "nucleotide",
+          "model": "MFP",
+          "support": "none",
+          "threads": 2,
+          "returncode": 0,
+          "expectedSuccess": true,
+          "stdout": "IQ-TREE completed: JC; 6 taxa; 800 columns.\n",
+          "stderr": ""
+        },
+        {
+          "datatype": "protein",
+          "model": "MFP",
+          "support": "none",
+          "threads": 2,
+          "returncode": 0,
+          "expectedSuccess": true,
+          "stdout": "IQ-TREE completed: PMB+F; 6 taxa; 800 columns.\n",
+          "stderr": ""
+        },
+        {
+          "datatype": "nucleotide",
+          "model": "GTR+G4",
+          "support": "both",
+          "threads": 2,
+          "returncode": 0,
+          "expectedSuccess": true,
+          "stdout": "IQ-TREE completed: GTR+F+G4; 6 taxa; 800 columns.\n",
+          "stderr": ""
+        },
+        {
+          "datatype": "protein",
+          "model": "LG+G4",
+          "support": "ufboot",
+          "threads": 2,
+          "returncode": 0,
+          "expectedSuccess": true,
+          "stdout": "IQ-TREE completed: LG+G4; 6 taxa; 800 columns.\n",
+          "stderr": ""
+        },
+        {
+          "datatype": "nucleotide",
+          "model": "JC",
+          "support": "none",
+          "threads": 2,
+          "returncode": 0,
+          "expectedSuccess": true,
+          "stdout": "IQ-TREE completed: JC; 6 taxa; 816 columns.\n",
+          "stderr": ""
+        },
+        {
+          "datatype": "protein",
+          "model": "LG+G4",
+          "support": "none",
+          "threads": 2,
+          "returncode": 0,
+          "expectedSuccess": true,
+          "stdout": "IQ-TREE completed: LG+G4; 6 taxa; 870 columns.\n",
+          "stderr": ""
+        },
+        {
+          "datatype": "nucleotide",
+          "model": "JC",
+          "support": "none",
+          "threads": 2,
+          "returncode": 0,
+          "expectedSuccess": true,
+          "stdout": "IQ-TREE completed: JC; 6 taxa; 800 columns.\n",
+          "stderr": ""
+        }
+      ],
+      "muscleIntegration": [
+        {
+          "datatype": "nucleotide",
+          "muscleExecutableSha256": "318abeb951d786a3e2532714cc81ad3b3d8f79a2b517dc31316eeb5b694db2bc",
+          "muscleArchiveSha256": null,
+          "method": "Super5, explicit alphabet, threads1, perturb0, permnone",
+          "alignmentSha256": "d3f249f0f5d5b6c800fbe5827992a0396da8a7cbdc050c6fd47629a095a92d43",
+          "alignmentResiduesPreserved": true,
+          "alignmentColumns": 816,
+          "variableColumns": 201,
+          "informativeColumns": 117,
+          "iqtreeKnownTopologyPassed": true
+        },
+        {
+          "datatype": "protein",
+          "muscleExecutableSha256": "318abeb951d786a3e2532714cc81ad3b3d8f79a2b517dc31316eeb5b694db2bc",
+          "muscleArchiveSha256": null,
+          "method": "Super5, explicit alphabet, threads1, perturb0, permnone",
+          "alignmentSha256": "76d212001ceb7e26e8166da5ce7ef91b44de06ee6ebb69e86037ff1846a24d39",
+          "alignmentResiduesPreserved": true,
+          "alignmentColumns": 870,
+          "variableColumns": 190,
+          "informativeColumns": 111,
+          "iqtreeKnownTopologyPassed": true
+        }
+      ],
+      "scope": "Synthetic known topology, model/columns, actual support, direct upstream agreement, input/pack immutability and validation guards; no GUI, large-tree performance or clinical claim."
+    }
+  },
+  "historicalLinuxGraphDiagnostic": {
+    "evidence": {
+      "file": "evidence/historical/iqtree-final-v2-contracts.json in source/evidence companion",
+      "sha256": "5c0554a15349e9a6656a1eb5c587814d97aa1ed3cc5ef1369ac40393249de6d3",
+      "report": {
+        "schema": 1,
+        "applicationVersion": "0.6.0",
+        "expectedPackVersions": {
+          "iqtree": "1.0.0"
+        },
+        "testHost": "linux",
+        "pythonVersion": "3.12.14",
+        "nativeWindowsExecuted": false,
+        "scientificExecutablesExecuted": false,
+        "nativeImporterExecuted": false,
+        "scope": "Released-app graph contracts and Python archive import; checked copy callback substitutes native folder publication.",
+        "typingLimitations": {
+          "iqtree": "Newick trees are generic files. Core sequence types establish aligned nucleotide/protein roles; scientific suitability also requires adapter validation."
+        },
+        "installedInventory": {
+          "packManifests": 5,
+          "executablesVerified": 8,
+          "assetsVerified": 44
+        },
+        "selectedPacks": [
+          {
+            "id": "iqtree",
+            "version": "1.0.0",
+            "manifestSha256": "daca3c8c194d0a980174c6dea7c81676d0fc195d4fc59578a64cbf43d686ef38",
+            "operations": [
+              "infer-nucleotide",
+              "infer-protein"
+            ],
+            "scientificChecksDeclared": 4
+          }
+        ],
+        "unexpectedDuplicateImportChanges": {
+          "iqtree": {
+            "added": {
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/_hashlib.pyd": "4d3eb9d9492d626c7bb10cfe5ab233a9195ec7b27e92b465b287e7a24fc8266c",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/licenses/NOTICE.txt": "4488fda2d0705ff7d9f0d1b05d155dafe954d015281b163cfdcc472833869038",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/vcruntime140_1.dll": "a7146c08f89fe5b04541ab507cdb59ff7b44534d4ba3c668a426c6450a03434e",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/fixtures/nucleotide.afa": "41f5a3adea038e2e268a8736b9092f8bc3355df22d207673cc2f88206074ffa9",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/_decimal.pyd": "eeb278dfbdb305bb5af916ed79e878943e25dc4bd6e99ec17abb7b3fd9f935d5",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/python313.zip": "33c48dd2c3031d27784950aaee96d3d65f916e3c43dd3637ace333a7b9e8021a",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/PACK-README.md": "73e24ff94f02ac9dca201dc4b57201c5b88b291aa931bb699eb894ed5db260e6",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/_wmi.pyd": "f88c322f871aef92de562278bd25c34c6e758642669d5512a22ed972840317b1",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/_multiprocessing.pyd": "5017bb9dd0d5ab6d7c0f007763d7906d33464f0b436ac6577f1f4fffd5c98986",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/_elementtree.pyd": "34968e3aebdb3e89cb1472b75b04986ce1bbf27d290f4154d77649cc17c41fab",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/_queue.pyd": "79c196a0804b152fc48b4055387f4352838e41c28863a0c946e7a98137e681e1",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/python.exe": "31fe10b4ed82a2f960af0ef9931f46a4b84ff286f8b6ffd9dee098cf4f10f17f",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/unicodedata.pyd": "d113047658f92d893bf4ee2da81ffbd624ec5c485733c02e116fac1b9a1b964c",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/licenses/dependencies/GCC-LIBSTDCXX-NOTICE": "28ccfda26b0f50642bb79c2e2ea2ec0d8a8a5fd9199ea573b28309a92f673607",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/libffi-8.dll": "eff52743773eb550fcc6ce3efc37c85724502233b6b002a35496d828bd7b280a",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/fixtures/truth.json": "3086132db770854aedbecc7f3cd99c153fffbe8b5410e38b4f70f68c87eb182d",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/_uuid.pyd": "0d6fcf704721d4bae58cc754b15a3f8c36907b718874f6d7cbbaa363a14618b1",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/libssl-3.dll": "8957182a9c385bfd9f3f790921de2ddc614cf91f99edbed4e9e5446a46504e32",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/licenses/dependencies/GCC-COPYING3": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/_ctypes.pyd": "5bcddf4c374c4d247e1e4a61f3347159c36c5785fe43bdae11a4e6c9ea2c0166",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/_asyncio.pyd": "6654dfbf4cc92609801f35022acaddd3fc19e6c777b7771b0f0a68f5813889a8",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/python313._pth": "6132a387c961a643beab61b8b426cfd73c366c6f6ad2d5aadc5ccf225776b399",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/licenses/Intel-OpenMP-LICENSE.txt": "5cc465536e25c34f0970b52b93984d3539b0db5e3e6b6e8f8ef3545f712efac8",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/_bz2.pyd": "6da4d453852346299e983b458f3ec2f0db3b5f765998ba3f45c91b4a1549037b",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/_ssl.pyd": "30ff82a3ea0c675ddc99e6b14f71ca750f06e77d6653e2da3d7d35b7ef0fc2ed",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/_sqlite3.pyd": "95d5b99f696cb33550534e8be80d31003db8b8a27062dfd6b09fdba4bb92f812",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/python313.dll": "3b29bf9ff39bed8f660f5b935f19657f7ce7f145009851741b11364f6ebcb862",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/select.pyd": "17df388a7aa42e7f066b80aa4f77cbbba9286495e6f3508425806be6766d122b",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/libcrypto-3.dll": "75495fe0e079ab00d49be740d3c710a0b94e3f74f9648cb7cc9f768fc7f52319",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/licenses/dependencies/GCC-COPYING.RUNTIME": "9d6b43ce4d8de0c878bf16b54d8e7a10d9bd42b75178153e3af6a815bdc90f74",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/sqlite3.dll": "2e3cf1b96e8afc679ee8bd69d6bde3aeb797b48b297b9cafd0eb9fd578eaafb5",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/fixtures/protein.afa": "26d7cf41f3ce87ac6045bcbfeaa78578328b10e1602aac08320991039b0df711",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/licenses/cmaple.tar.gz": "b8b4d6da2b8571f5a469d1d7154e15135893dc3b5b74876b1131bfdb031a29a9",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/LICENSE.txt": "62bec384df47b0328307db41455ff6ea2559e5546b394ac69148561b21703120",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/_zoneinfo.pyd": "b687deba154399bf6e44963e46abff518c3f987ae4fde087a3c891a1a1f08fdd",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/python3.dll": "a1a32b2475675e784d9b34d33d3a8f3e4afaa563da1feb784b0dd69fc4d8f9dc",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/vcruntime140.dll": "d1f4225df2cd877dbf130d5668a021dce3f94118455ff5ec952061c30afc9ce7",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/licenses/IQTREE-GPL-2.0.txt": "c03cea027b4b40e4402fabd08557736727ec3d5bc54ad64ab6472de432198cad",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/_overlapped.pyd": "3f393b2ce1fe5973fc45e49dffcf51405fa875cdb284cf96b2f0d4b93b08765c",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/adapter.py": "c67f8a7c9fcaf53ef2a8e008e04a711f5228856c977702df13e28829a1f542ed",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/python.cat": "297a28dea041bad442aca6d7cb92957627501870e3c5cb7c642afb83563ee9c1",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/iqtree3.exe": "43c9bf3b0dc5e7d88c183a2582369d22c9d692b7585350038769334bb6fd9aed",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/licenses/dependencies/boost_1_84_0.tar.bz2": "cc4b893acf645c9d4b698e9a0f08ca8846aa5d6c68275c14c3e7949c24109454",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/_socket.pyd": "c5936292083189e0675a96ddd0e38235726f1c58195cec64eb0085b9c479ddce",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/licenses/adapter.py": "c67f8a7c9fcaf53ef2a8e008e04a711f5228856c977702df13e28829a1f542ed",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/libiomp5md.dll": "946269ecbcce6950571f1c2405044810dfb8983fff35c633705adf799dfb6cb8",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/pyexpat.pyd": "3865fae84ff0f274c049e737731cd8aa184fae208af5b4c0d0cfc42a38f79cea",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/licenses/Workbench-MIT.txt": "8fc4c4b462aafaf8349f53b191ceea7496d39c49463224aaa05d366fbb406682",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/_lzma.pyd": "2b4dcb12c0420ffced4b91968ae4eff6cb585f0f07490160c6da47da63064a99",
+              "user-data/pack-manager/_import-5kvqh6i3/extracted/pack/bin/winsound.pyd": "8450de54438b1698556b794400c3114b78ede8c10b13dcf263d646ef639ae7d1"
+            },
+            "removed": {},
+            "changed": {}
+          }
+        },
+        "alignmentToPhylogenyGraphs": [
+          {
+            "tools": [
+              "muscle/align-nucleotide",
+              "iqtree/infer-nucleotide",
+              "iqtree/infer-nucleotide"
+            ],
+            "ranks": [
+              {
+                "rank": 1,
+                "nodes": [
+                  "step-1"
+                ]
+              },
+              {
+                "rank": 2,
+                "nodes": [
+                  "step-2",
+                  "step-3"
+                ]
+              }
+            ],
+            "savedPins": [
+              {
+                "packId": "muscle",
+                "packVersion": "0.5.2",
+                "manifestSha256": "085273422c7f26af77d23643efa961f1fb6ecbdee301109af67ba551f41b82c4"
+              },
+              {
+                "packId": "iqtree",
+                "packVersion": "1.0.0",
+                "manifestSha256": "daca3c8c194d0a980174c6dea7c81676d0fc195d4fc59578a64cbf43d686ef38"
+              },
+              {
+                "packId": "iqtree",
+                "packVersion": "1.0.0",
+                "manifestSha256": "daca3c8c194d0a980174c6dea7c81676d0fc195d4fc59578a64cbf43d686ef38"
+              }
+            ],
+            "namedMethodsProvenance": true,
+            "changedSavedManifestRejected": true,
+            "alphabet": "nucleotide"
+          },
+          {
+            "tools": [
+              "muscle/align-protein",
+              "iqtree/infer-protein",
+              "iqtree/infer-protein"
+            ],
+            "ranks": [
+              {
+                "rank": 1,
+                "nodes": [
+                  "step-1"
+                ]
+              },
+              {
+                "rank": 2,
+                "nodes": [
+                  "step-2",
+                  "step-3"
+                ]
+              }
+            ],
+            "savedPins": [
+              {
+                "packId": "muscle",
+                "packVersion": "0.5.2",
+                "manifestSha256": "085273422c7f26af77d23643efa961f1fb6ecbdee301109af67ba551f41b82c4"
+              },
+              {
+                "packId": "iqtree",
+                "packVersion": "1.0.0",
+                "manifestSha256": "daca3c8c194d0a980174c6dea7c81676d0fc195d4fc59578a64cbf43d686ef38"
+              },
+              {
+                "packId": "iqtree",
+                "packVersion": "1.0.0",
+                "manifestSha256": "daca3c8c194d0a980174c6dea7c81676d0fc195d4fc59578a64cbf43d686ef38"
+              }
+            ],
+            "namedMethodsProvenance": true,
+            "changedSavedManifestRejected": true,
+            "alphabet": "protein"
+          }
+        ],
+        "phylogenyTypeGuards": {
+          "rejected": [
+            "fasta-nucleotide -> msa-nucleotide",
+            "msa-protein -> msa-nucleotide",
+            "reads -> msa-nucleotide",
+            "fasta-protein -> msa-protein",
+            "msa-nucleotide -> msa-protein",
+            "reads -> msa-protein"
+          ],
+          "supportReplicateLowerBoundEnforced": true
+        },
+        "releasedApplicationFilesVerified": [
+          "WorkbenchBridge.exe",
+          "workspace/app_version.py",
+          "workspace/catalog-sources.json",
+          "workspace/catalog.py",
+          "workspace/core_checks.py",
+          "workspace/desktop_host.py",
+          "workspace/desktop_model.py",
+          "workspace/engine.py",
+          "workspace/example.py",
+          "workspace/pack_checks.py",
+          "workspace/pack_manager.py",
+          "workspace/pack_security.py",
+          "workspace/service.py",
+          "workspace/starter-check-profile.json",
+          "workspace/verify_installation.py"
+        ],
+        "starterSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+        "dependencies": {
+          "muscle": {
+            "version": "0.5.2",
+            "archiveSha256": "c07d3e398f48df683926c0970ef77c3b7d2bdab6426b80c80186f2360ed25258"
+          }
+        },
+        "presetAndOriginalPinContracts": [
+          "iqtree/infer-nucleotide",
+          "iqtree/infer-protein"
+        ],
+        "testsRun": 6,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "testSourceSha256": "249e3919d668a0995803ced740346fbddb663178deb2053d15334aeaf73fa908",
+        "success": false
+      }
+    },
+    "interpretation": "The preceding pre-LF v2 archive ran six graph/archive cases: five passed and a strict duplicate-import assertion failed when temporary files reappeared after cleanup in the managed Linux filesystem. Installed bytes were unchanged. This failure is retained, not relabelled. Both exact-final native Windows graph suites now pass all six cases including duplicate-import immutability."
+  },
+  "historicalFailedNativeCandidate": {
+    "version": "0.0.1",
+    "runId": 37228146168,
+    "file": "evidence/historical/candidate-0.0.1-validation.json in source/evidence companion",
+    "sha256": "4a99d61ed161ebf33b90f07add31929a116422d780761a3d9d156690c4b8f247",
+    "interpretation": "All four real IQ-TREE runs completed in each path, but exact multiline JSON assertions failed because Windows text output used CRLF. Subsequent graph/scientific steps were skipped. The final adapter writes explicit LF and the regression reads raw bytes like the released checker; scientific assertions and algorithms were preserved. Exact-final validation now passes."
+  },
+  "staticIntegrityEvidence": {
+    "file": "evidence/current/static-source-complete-v3-lf.json in source/evidence companion",
+    "sha256": "c4ec0af0eb807916c34f64058cfe8491700d5a6f7008c24680e21d691822c490",
+    "report": {
+      "validation": "static-integrity-only",
+      "pack": {
+        "id": "iqtree",
+        "name": "IQ-TREE phylogenetic inference",
+        "version": "1.0.0",
+        "toolVersions": {
+          "iqtree": "3.1.4",
+          "python": "3.13.16"
+        },
+        "description": "Local nucleotide/protein maximum-likelihood trees, model selection and optional branch support. Workbench 0.6.0 or newer.",
+        "category": "Phylogenetics",
+        "platform": "windows-x86_64",
+        "packApi": 1,
+        "minAppVersion": "0.6.0",
+        "size": 248195844,
+        "sha256": "d232985959093083cd1f40f6fcb3496a1164f43912a72b8d6c29c900d0069aad",
+        "manifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d"
+      }
+    }
+  },
+  "sourceClosureEvidence": {
+    "file": "evidence/current/dependency-source-audit.json in source/evidence companion; licenses/dependency-source-audit.json in installable pack",
+    "sha256": "b148938b69a4594120619a4367bd7655bb0cfc22866a829ff99cb648b28a9203",
+    "report": {
+      "cargoRegistryCratesMatchedToLock": 252,
+      "eigenPackageHeadersMatchedToSource": 530,
+      "eigenDifferences": 0,
+      "boostSource": "boost_1_84_0.tar.bz2",
+      "rustStandardLibrarySource": "rust-src-1.98.1.tar.xz",
+      "phyloGradSourceCommit": "939dedb07605411bd6b2dbb4d3d733f842a15ff5"
+    }
+  },
+  "upstreamBuildEvidence": {
+    "file": "licenses/upstream-dependency-evidence.txt in installable pack; evidence/current/upstream-dependency-evidence.txt in source companion",
+    "sha256": "5acc5a21a0d1414807989d093a330956f2a4539a5e629260267f9351f8360e89",
+    "interpretation": "Official IQ-TREE Windows executable and Intel OpenMP DLL are unchanged. Corresponding IQ-TREE/submodule, Boost, Eigen, Cargo crate, phylo_grad, Rust standard-library and CPython sources plus notices are retained under installable licenses/. Packaging does not claim a bitwise reproduction of the upstream compiler environment."
+  },
+  "scientificScope": [
+    "Explicit nucleotide and protein aligned-FASTA operations use unchanged upstream IQ-TREE3.1.4 for maximum-likelihood inference. Default ModelFinder selects by BIC; bounded fixed-model alternatives are exposed.",
+    "Optional genuine ultrafast bootstrap and SH-aLRT use 1000-10000 replicates; ultrafast bootstrap uses -bnni. Defaults are two threads and seed42.",
+    "Independent synthetic known pair topology, model and site counts, actual support values, same-platform direct upstream agreement, safe original names, input/pack immutability and malformed-input/option guards are tested.",
+    "Actual published MUSCLE0.5.2 Super5 runs feed both DNA and protein inference. Tests preserve residues, derive site counts from the real aligned output and independently verify the known topology.",
+    "Newick trees retain every leaf and are unrooted with an arbitrary display root. Detailed JSON bipartition summaries are explicitly omitted above256 taxa to avoid quadratic output; complete Newick remains unchanged."
+  ],
+  "boundaries": [
+    "Native installation checks use the released Workbench bridge/importer and scientific runner. Graph/archive tests use a copy-based publication callback; they do not themselves execute scientific programs or the native importer. Installed-PE scientific regressions are separate.",
+    "Research/teaching synthetic validation; no clinical, diagnostic, regulatory or institutional approval claim. No large-phylogeny performance benchmark or interactive GUI acceptance test.",
+    "Windows installation/results paths must be ASCII; ordinary and space-containing paths are tested. Unicode input is staged successfully, and Unicode output fails before writes. Long paths, interactive cancellation and network firewall behavior are not validated.",
+    "Frontend accepts uncompressed aligned FASTA within documented size, taxon and column bounds, requires four distinct sequences and at least one parsimony-informative column, and rejects unsupported protein stop/U/O/J symbols. These are explicit pack constraints, not universal IQ-TREE limitations.",
+    "Nucleotide U is normalized to T, dots to gaps and letters to uppercase; original taxon identifiers are restored safely and provenance records transformations and exact commands.",
+    "No promise of bitwise floating-point equality across operating systems, CPU models, thread counts or builds. Full source dependencies and pins are retained; upstream official binaries are used without scientific patches.",
+    "Publisher identity is not authenticated by offline inventory/SHA verification. Signed-catalogue trust deployment is separate from this evidence."
+  ]
+}

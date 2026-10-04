@@ -8,9 +8,10 @@ open, diffable files with no proprietary reader or external memory service.
 separate standard called Open Knowledge Format.
 
 **Reviewed:** 2026-10-04. **Source baseline:**
-[`eb4a255b69a2eabfb539937218a1d0e57c5776a3`](https://github.com/comparativechrono/workbench/commit/eb4a255b69a2eabfb539937218a1d0e57c5776a3).
-This handover includes the GATK 1.0.0 addition and the earlier optional-pack
-expansion, including the successful exact-final GATK Windows gate. Evidence for
+[`24c6899aa7c19208ec88ae816879952ed0d8527e`](https://github.com/comparativechrono/workbench/commit/24c6899aa7c19208ec88ae816879952ed0d8527e).
+This handover includes the annotation, expression, coverage and phylogenetics
+expansion after GATK. SnpEff, DESeq2, mosdepth and IQ-TREE have successful
+exact-final Windows installation, graph and scientific gates. Evidence for
 each release retains its own date and tested bytes. Re-check the current tree
 and releases before treating this snapshot as current.
 
@@ -63,6 +64,15 @@ and root `AGENTS.md`. Its creation-time pending-final-gate statements remain
 historical; use the separate final validation record for completed evidence. The generic
 application source packager still has a fixed file selection that does not yet
 include this handover automatically; the GATK companion does not close that gap.
+
+For the four newer packs, start with the
+[connection and installation overview](../docs/ANNOTATION-EXPRESSION-COVERAGE-PHYLOGENETICS.md),
+then the individual guides. Preserve each release's source/evidence snapshot and
+separate final validation report. DESeq2's R-runtime corresponding sources are a
+second release asset, with their own file lock and runtime-bound hash; the small
+source/evidence ZIP does not contain those third-party archives. See
+[source recovery details](../tools/deseq2/R-RUNTIME-SOURCES.md) and the maintained
+pack-development and validation pages before rebuilding.
 
 ## Maintaining the handover
 

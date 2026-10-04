@@ -1,7 +1,7 @@
 # Current project state
 
 Snapshot: **2026-10-04**. Source baseline:
-[`eb4a255b69a2eabfb539937218a1d0e57c5776a3`](https://github.com/comparativechrono/workbench/tree/eb4a255b69a2eabfb539937218a1d0e57c5776a3).
+[`24c6899aa7c19208ec88ae816879952ed0d8527e`](https://github.com/comparativechrono/workbench/tree/24c6899aa7c19208ec88ae816879952ed0d8527e).
 Read this alongside the [machine-readable release inventory](release-inventory.json)
 and the repository [README](../README.md). Update the date, source baseline and
 evidence when the state changes; do not silently turn a pending item into a claim
@@ -9,8 +9,8 @@ of completion.
 
 ## What is available
 
-The native desktop application **0.6.0** and **26 distinct tool packs** are
-published as development prereleases. There are 27 published pack versions,
+The native desktop application **0.6.0** and **30 distinct tool packs** are
+published as development prereleases. There are 31 published pack versions,
 because kallisto 1.0.0 is retained after being superseded by 1.0.1. Historical
 candidate releases are additional diagnostics, not current analysis packs.
 
@@ -55,6 +55,10 @@ These are **pack versions**, which differ from upstream tool versions.
 | `bedtools` | 1.0.0 | BED interval operations and reference sequence extraction |
 | `blast` | 1.0.0 | Local nucleotide/protein and translated similarity searches |
 | `gatk` | 1.0.0 | GATK 4 germline calling, alignment preparation, gVCF combination/genotyping and VCF operations |
+| `snpeff` | [1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-snpeff-v1.0.0) | SnpEff/SnpSift local annotation databases, consequences, INFO annotation and impact selection |
+| `deseq2` | [1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-deseq2-v1.0.0) | DESeq2/tximport bulk gene-level differential expression |
+| `mosdepth` | [1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-mosdepth-v1.0.0) | Complete-reference and target-region BAM coverage |
+| `iqtree` | [1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-iqtree-v1.0.0) | Nucleotide/protein maximum-likelihood tree inference from alignments |
 
 Existing bundled pipeline packs remain available for reproducibility. The
 development direction is individually usable tools or small related operations
@@ -83,6 +87,10 @@ dated evidence for its original bytes, not a fresh test of every older tool.
 | BEDTools 1.0.0 | Seven Linux regression tests, with all 15 fixture cases compared byte-for-byte to unmodified upstream; exact final ZIP passed 15 native checks in each path | Interval truth, CRLF, valid empty results, 64-bit coordinates and forward/reverse-complement extraction; exposed BED operations only. |
 | BLAST 1.0.0 | Linux tests: 10 passed and one deliberately skipped on unmodified upstream; all 11 passed on the patched build. Exact final ZIP passed five scientific checks and six additional regressions in each native path | Four search modes, known coordinates/frames and a legitimate no-hit case; local-only failure regressions are separate from OS network isolation. |
 | GATK 1.0.0 | Fourteen Linux scientific/regression tests passed. Exact final native Windows gate passed nine scientific checks and seven graph/archive contracts in each path, with no failures/errors/skips | Nine exposed operations with synthetic variant/genotype, duplicate and recalibration truth; no general Windows GATK support, clinical validation or whole-genome/cohort performance claim. |
+| SnpEff 1.0.0 | Exact final ZIP passed four native installation/scientific checks, six graph/archive contracts and 13 additional scientific/failure regressions per path | Independent codon and allele truth, explicit database genetic codes and whole-record impact selection; consequences are not pathogenicity or assembly validation. |
+| DESeq2 1.0.0 | Exact final ZIP passed three native installation/scientific checks, six graph/archive contracts and 14 additional scientific/failure regressions per path | Direct upstream matrix and tximport oracles cover 300 genes each. Synthetic bulk-expression/design/import tests do not establish experimental adequacy, FDR calibration or large-cohort performance. |
+| mosdepth 1.0.0 | Exact final ZIP passed four native installation/scientific checks, six graph/archive contracts and 11 additional scientific/failure regressions per path | BAM/CIGAR/pair-overlap and full-reference denominator truth, BED targets and malformed-input rejection; no base-quality filtering or RNA expression claim. |
+| IQ-TREE 1.0.0 | Exact final ZIP passed four native installation/scientific checks, six graph/archive contracts and 13 additional scientific/failure regressions per path | DNA/protein model and support truth, real MUSCLE-to-IQ-TREE execution, safe taxon restoration and bounded summaries; not species-tree or large-dataset validation. |
 
 The five-pack October [graph/import report](evidence/popular-pack-graph-contracts-2026-10-04.json)
 records **eight tests passed, zero failures/errors/skips** on Linux with the
@@ -123,6 +131,42 @@ duplicate version without replacing the installed manifest:
 | BEDTools 1.0.0 | [37207758617](https://github.com/comparativechrono/workbench/actions/runs/37207758617) | 15 |
 | BLAST 1.0.0 | [37210341211](https://github.com/comparativechrono/workbench/actions/runs/37210341211) | 5, plus 6 adapter/local-failure regressions |
 | GATK 1.0.0 | [37220420948](https://github.com/comparativechrono/workbench/actions/runs/37220420948) | 9, plus 7 graph/archive contracts |
+| mosdepth 1.0.0 | [37228329920](https://github.com/comparativechrono/workbench/actions/runs/37228329920) | 4, plus 6 graph/archive contracts and 11 scientific/failure regressions |
+| IQ-TREE 1.0.0 | [37229409061](https://github.com/comparativechrono/workbench/actions/runs/37229409061) | 4, plus 6 graph/archive contracts and 13 scientific/failure regressions |
+| SnpEff 1.0.0 | [37229552990](https://github.com/comparativechrono/workbench/actions/runs/37229552990) | 4, plus 6 graph/archive contracts and 13 scientific/failure regressions |
+| DESeq2 1.0.0 | [37230943331](https://github.com/comparativechrono/workbench/actions/runs/37230943331) | 3, plus 6 graph/archive contracts and 14 scientific/failure regressions |
+
+The four new exact-final runs used the released 0.6.0 application unchanged in
+ordinary and space-containing `windows-2022` paths. mosdepth's helper source was
+`102e85e2ce38c750b521c70e532001dd55451509`; IQ-TREE, SnpEff and DESeq2 used
+`24c6899aa7c19208ec88ae816879952ed0d8527e`. Their release assets include separate
+`native-workbench-<id>-1.0.0-windows-validation.json` reports. Graph contracts use
+the released Python engine and a checked publication callback; native installation
+checks separately exercise the actual bridge/importer and scientific commands.
+
+DESeq2's [source-build development run 37229593426](https://github.com/comparativechrono/workbench/actions/runs/37229593426)
+passed all 14 native scientific/failure regressions at source `24c6899aa7c19208ec88ae816879952ed0d8527e`.
+This did not import the final ZIP. The subsequent exact-final
+[run 37230943331](https://github.com/comparativechrono/workbench/actions/runs/37230943331)
+independently passed three native installation checks, six graph/archive
+contracts and 14 scientific regressions in each Windows path, with zero
+failures/errors/skips. The [dated validation record](evidence/deseq2-1.0.0-validation-2026-10-04.json)
+and [public final report](https://github.com/comparativechrono/workbench/releases/download/pack-deseq2-v1.0.0/native-workbench-deseq2-1.0.0-windows-validation.json)
+bind these results to archive SHA-256
+`eccffbcaf3adad6ab1da63ea771fe103a807a88722a56f5db82072cf02c1292d`
+and manifest SHA-256
+`f5a06708651f14f25e89ca3588ed6bf2f91442e43d635a9fc7ab5af066112ee1`.
+The pack, source/evidence and R-runtime source ZIPs were independently downloaded
+and rehashed against the frozen artifacts.
+
+The exact DESeq2 ZIP's earlier Linux graph attempt preserved one strict failure
+after temporary extracted files reappeared following cleanup; five
+graph/application tests passed and no installed file changed. Earlier six-test
+Linux success applies to a different archive. Both exact-final Windows graph
+suites subsequently passed all six cases, including duplicate-import immutability,
+without weakening assertions. Preserve the original failed report and separate
+source-build evidence; the final native report closes the release gate without
+rewriting that history.
 
 The corresponding source/evidence ZIPs are listed with digests in the inventory.
 They preserve Linux and candidate-stage evidence, including historical status
@@ -246,6 +290,19 @@ and its bundled provenance files for detailed supported interfaces.
   generic Linux binary compatibility, arbitrary Unicode paths or universal
   support for every upstream command.
 
+The [four-pack guide](../docs/ANNOTATION-EXPRESSION-COVERAGE-PHYLOGENETICS.md)
+describes the newer limits. SnpEff database resources remain separate local
+inputs with explicit assembly/release/codon mappings. DESeq2 accepts independent
+bulk samples with condition or additive batch-plus-condition designs; raw count
+semantics and actual biological independence cannot be proven by broad metrics
+ports. Its private per-run R tree consumes extra disk, and R scratch needs a
+space-free path or existing short alias. Mosdepth aggregates all BAM samples,
+including uncovered reference contigs in its primary denominator; it applies no
+base-quality filter. IQ-TREE consumes aligned nucleotide/protein sequences and
+omits detailed JSON bipartitions above 256 taxa while preserving the complete
+Newick tree. Small synthetic checks establish neither GUI acceptance nor clinical
+or human-genome/cohort performance.
+
 ## Unfinished work and safe starting points
 
 1. **Signed catalogue publication and clean installation test.** Pack downloads
@@ -298,3 +355,11 @@ the explicit [application source companion](https://github.com/comparativechrono
 and matching pack source/licence materials as described in
 [source recovery](../docs/source-recovery/README.md). Do not depend on a previous
 agent's scratch paths, compiler cache, browser session or unpublished credentials.
+
+DESeq2's complete corresponding sources additionally require the separate
+`native-workbench-deseq2-1.0.0-r-runtime-sources.zip` release asset: Rtools base
+libraries and compiler runtimes, Tcl/Tk extensions, original notices and exact
+build recipes/patches. Its runtime-bound lock and SHA-256 are recorded in
+`tools/deseq2/`; see [the recovery notes](../tools/deseq2/R-RUNTIME-SOURCES.md).
+The smaller source/evidence companion contains tracked source and reports, not
+this external-library archive. Installed packs never fetch sources during analysis.

@@ -5,13 +5,13 @@ x86-64. Each works with **Workbench 0.6.0**, independently or as part of a typed
 pipeline. The application and its starter tools remain separate installations
 from these optional downloads.
 
-**Release status: pending verification, 2026-10-04.** The intended pack version
-is 1.0.0 for each. Exact-final native Windows gates have not yet been confirmed
-in this overview. The release links below are planned destinations and may not
-be available or ready for use. Consult their eventual release notes and validation
-records before treating a download as verified.
+**Release status, 2026-10-04:** SnpEff, DESeq2, mosdepth and IQ-TREE 1.0.0 are published
+and have passed exact-final native Windows installation, graph and scientific
+regressions on the unchanged released 0.6.0 app, in ordinary and space-containing
+paths. Consult each release's separate validation record for its tested bytes
+and scope; native command-line gates do not establish desktop GUI acceptance.
 
-| Pack and detailed guide | Operations | Planned release — pending verification |
+| Pack and detailed guide | Operations | Release |
 | --- | --- | --- |
 | [SnpEff + SnpSift](SNPEFF-PACK.md), `snpeff` | Build a local annotation database; predict variant consequences; copy selected annotations from a local VCF; select a consequence impact | [pack-snpeff-v1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-snpeff-v1.0.0) |
 | [DESeq2 + tximport](DESEQ2-PACK.md), `deseq2` | Differential gene expression from a raw count matrix, featureCounts tables, or kallisto abundances | [pack-deseq2-v1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-deseq2-v1.0.0) |
@@ -20,12 +20,21 @@ records before treating a download as verified.
 
 ## Install and run locally
 
-Once a release is verified, download its
+Download the selected release's
 `native-workbench-pack-<id>-1.0.0.zip`. In Workbench choose **Manage tools → Import
 pack ZIP**, then run **Check installation**. The downloaded ZIP can be transferred
 to an offline computer. The signed online catalogue remains unconfigured; these
 instructions use offline ZIP import. Keep the matching source and licence
 materials when redistributing packs.
+
+Each release supplies a matching source/evidence companion. DESeq2 also has a
+separate `native-workbench-deseq2-1.0.0-r-runtime-sources.zip` asset containing
+the Rtools/Tcl/Tk external-library sources and build recipes. It is part of the
+corresponding-source set, not an installable pack or analysis-time download.
+Follow [its source recovery notes](../tools/deseq2/R-RUNTIME-SOURCES.md) when
+rebuilding or redistributing. Source companions preserve their creation-time
+pending statements; the separate exact-final validation JSON closes those
+statements without replacing immutable source archives.
 
 SnpEff includes private Java; DESeq2 includes private R, contributed packages and
 Python; IQ-TREE includes private Python; mosdepth supplies its native binaries
