@@ -2,7 +2,7 @@
   "schema": "native-workbench-knowledge/release-inventory",
   "schema_version": 1,
   "as_of": "2026-10-04",
-  "source_commit": "1b537869e9d88e493078e1a1f241d16013273f44",
+  "source_commit": "eb4a255b69a2eabfb539937218a1d0e57c5776a3",
   "repository": "https://github.com/comparativechrono/workbench",
   "purpose": "Public release handover inventory. This is documentation, not an install catalogue or a trust file.",
   "is_install_catalogue": false,
@@ -11,14 +11,14 @@
     "checked_on": "2026-10-04",
     "method": "Older application and pack entries preserve the initial 2026-10-04 GitHub metadata audit and dated publication evidence. For the October optional packs, public release assets were independently downloaded and rehashed, source/scientific regressions retained, and exact-final archives executed through the released 0.6.0 native Windows bridge in ordinary and space-containing paths. Per-asset download verification and per-pack evidence distinguish these levels.",
     "release_metadata_url": "https://api.github.com/repos/comparativechrono/workbench/releases?per_page=100",
-    "readme_url": "https://github.com/comparativechrono/workbench/blob/1b537869e9d88e493078e1a1f241d16013273f44/README.md",
+    "readme_url": "https://github.com/comparativechrono/workbench/blob/eb4a255b69a2eabfb539937218a1d0e57c5776a3/README.md",
     "scope": "Published releases only. Drafts and private metadata are excluded. Historical validation candidates are excluded from current_packs.",
     "interpretation": "A GitHub asset digest checks bytes against recorded metadata; it is not a publisher signature or application-trusted catalogue."
   },
   "status": {
     "application": "development-prerelease",
-    "latest_pack_count": 25,
-    "published_pack_version_count": 26,
+    "latest_pack_count": 26,
+    "published_pack_version_count": 27,
     "online_catalogue": "not-published-or-configured",
     "catalogue_source_json": "not-published-or-configured",
     "signing_key": "requires-maintainer-controlled-external-key",
@@ -371,6 +371,51 @@
       },
       "companion_assets": [],
       "evidence_scope": "Original pack identity/manifest preserved in independent split archive. Packaging verification is not a fresh native Windows execution claim."
+    },
+    {
+      "id": "gatk",
+      "version": "1.0.0",
+      "upstream_tool_version": "4.7.0.0-workbench1",
+      "tag": "pack-gatk-v1.0.0",
+      "name": "GATK germline pack 1.0.0",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-gatk-v1.0.0",
+      "prerelease": true,
+      "published_at": "2026-10-04T17:24:41Z",
+      "minimum_application_for_archive_import": "0.6.0",
+      "included_in_starter": false,
+      "manifest_sha256": "4d876053d922628f8c97896268a32c72a648b6c51b93d3364beecc641293e713",
+      "primary_asset": {
+        "name": "native-workbench-pack-gatk-1.0.0.zip",
+        "bytes": 681725138,
+        "github_digest": "sha256:e9eb3a4966f83d667ebb424612aaedd07236bac98c3462d4efbe02c55166bb24",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-gatk-v1.0.0/native-workbench-pack-gatk-1.0.0.zip",
+        "independently_downloaded_and_rehashed_on": "2026-10-04"
+      },
+      "companion_assets": [
+        {
+          "name": "native-workbench-gatk-1.0.0-source-evidence.zip",
+          "bytes": 1363293,
+          "github_digest": "sha256:73017b89013288e7f7a54dbd15d40f45d14c0d9845871ff7928966f316bbcbba",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-gatk-v1.0.0/native-workbench-gatk-1.0.0-source-evidence.zip",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        },
+        {
+          "name": "native-workbench-gatk-1.0.0-windows-validation.json",
+          "bytes": 30982,
+          "github_digest": "sha256:78f68d98aac94037945807a18e3f44e8371e444b07b3a4f3a206e155249bf603",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-gatk-v1.0.0/native-workbench-gatk-1.0.0-windows-validation.json",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "bytes": 335,
+          "github_digest": "sha256:e464ddfcc8e20f0763f29916f753a072c8b92403fa55d40924de0105bc55df9f",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-gatk-v1.0.0/SHA256SUMS.txt",
+          "independently_downloaded_and_rehashed_on": "2026-10-04"
+        }
+      ],
+      "source_regression_tests_passed": 14,
+      "evidence_scope": "Exact-final public archive independently downloaded and rehashed; 9/9 native scientific and 7/7 graph/archive checks on Windows in both path modes. Separate Linux scientific/guard suite: 14/14. See evidence/gatk-1.0.0-validation-2026-10-04.json."
     },
     {
       "id": "hisat2",
@@ -773,6 +818,23 @@
       "limits": "Synthetic fixtures. Does not validate the GUI, arbitrary long paths, OS-level network blocking, all protocols, human-scale performance or clinical use."
     },
     {
+      "pack": "gatk",
+      "version": "1.0.0",
+      "workflow_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37220420948",
+      "workflow_source_commit": "eb4a255b69a2eabfb539937218a1d0e57c5776a3",
+      "workflow_name": "Native Windows pack check",
+      "status": "completed",
+      "conclusion": "success",
+      "runner": "windows-2022",
+      "application": "released 0.6.0 starter with native bridge",
+      "paths": [
+        "ordinary",
+        "contains spaces"
+      ],
+      "scope": "Nine native scientific checks and native import/duplicate protection per path; seven additional released-app graph/archive contracts per path including branches, gVCF fan-in, saved pins and immutable payloads. Graph import uses a Python publication callback.",
+      "limits": "Synthetic fixtures; no GUI, arbitrary long paths, whole-genome throughput, OS-level network blocking or clinical validation. gVCFs are labelled generic files with adapter content guards."
+    },
+    {
       "pack": "kallisto",
       "version": "1.0.1",
       "workflow_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37150386848",
@@ -852,13 +914,19 @@
       "release_url": "https://github.com/comparativechrono/workbench/releases/tag/popular-candidates-20261004",
       "status": "development-candidates-only",
       "purpose": "Preserved October pack candidates and final-payload correspondence records; includes diagnosed featureCounts CRLF/stale-candidate, MultiQC precreated-output-directory, and BLAST child-diagnostic inheritance failures. Not current analysis packs."
+    },
+    {
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/gatk-candidates-20261004",
+      "status": "development-candidates-only",
+      "purpose": "GATK 0.0.1 diagnostic candidate and exact-final payload correspondence, validated in run 37220034835. Excluded from current analysis packs."
     }
   ],
   "source_recovery": {
     "application_source_companion": "https://github.com/comparativechrono/workbench/releases/download/app-v0.6.0/native-workbench-0.6.0-source.zip",
     "guidance": "GitHub automatic source snapshots do not include the binary dependencies and retained third-party source companions. Preserve the explicit application companion, each pack's licenses/provenance, and matching pack source-evidence companion where supplied.",
     "rna_source_evidence": "The STAR and kallisto source-evidence ZIPs retain candidate/Linux-stage records. The separate windows-validation.json assets record exact-final native Windows results; a historical pending-final statement in an immutable companion is superseded by that separate report.",
-    "optional_pack_source_evidence": "The October optional-pack source-evidence ZIPs retain immutable creation-time source and Linux/candidate records. Separate windows-validation.json assets bind successful native results to exact-final archive hashes. BEDTools final JSON also supplies complete static verification to correct an empty historical static-validation log in its source companion."
+    "optional_pack_source_evidence": "The October optional-pack source-evidence ZIPs retain immutable creation-time source and Linux/candidate records. Separate windows-validation.json assets bind successful native results to exact-final archive hashes. BEDTools final JSON also supplies complete static verification to correct an empty historical static-validation log in its source companion.",
+    "gatk_source_evidence": "GATK 1.0.0 source/evidence companion retains a full git source and knowledge snapshot at eb4a255, Linux scientific reports and early strict-copy failures; its pending-final note is superseded by the exact-final Windows report. Upstream corresponding sources/licenses are retained in the installable pack. Preserve both archives."
   },
   "historical_manifests": {
     "paths": [
@@ -886,5 +954,24 @@
       "report_sha256": "2045da2a8b1b82a278a5cd8927b18f58405db21c4304dfce8f74e3d4b5038d47",
       "status": "superseded-by-corrected-guard-final-report"
     }
+  },
+  "gatk_released_application_contract_evidence": {
+    "report_path": "evidence/gatk-1.0.0-validation-2026-10-04.json",
+    "report_sha256": "f29969163cf2d80b6cdd0e8b5f525c2b24f958d63aec96c1e4c4328b0dddb829",
+    "application_version": "0.6.0",
+    "host": "Windows Server 2022, released private Python 3.13.16",
+    "tests_passed_per_path": 7,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "native_scientific_checks_passed_per_path": 9,
+    "paths": [
+      "ordinary",
+      "contains spaces"
+    ],
+    "workflow_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37220420948",
+    "test_source": "../tests/test_gatk_pipeline.py",
+    "test_source_sha256": "08921b12196822716c287ec95daa13ea26f5562b44b1058bee5d47bebe2c80d6",
+    "scope": "Graph/archive contracts use Python publication; separate exact-final native bridge import and science gates passed in the same jobs. Earlier Linux graph copying failures are preserved, not reported as passes."
   }
 }

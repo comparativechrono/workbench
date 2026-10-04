@@ -1,7 +1,7 @@
 # Current project state
 
 Snapshot: **2026-10-04**. Source baseline:
-[`1b537869e9d88e493078e1a1f241d16013273f44`](https://github.com/comparativechrono/workbench/tree/1b537869e9d88e493078e1a1f241d16013273f44).
+[`eb4a255b69a2eabfb539937218a1d0e57c5776a3`](https://github.com/comparativechrono/workbench/tree/eb4a255b69a2eabfb539937218a1d0e57c5776a3).
 Read this alongside the [machine-readable release inventory](release-inventory.json)
 and the repository [README](../README.md). Update the date, source baseline and
 evidence when the state changes; do not silently turn a pending item into a claim
@@ -9,8 +9,8 @@ of completion.
 
 ## What is available
 
-The native desktop application **0.6.0** and **25 distinct tool packs** are
-published as development prereleases. There are 26 published pack versions,
+The native desktop application **0.6.0** and **26 distinct tool packs** are
+published as development prereleases. There are 27 published pack versions,
 because kallisto 1.0.0 is retained after being superseded by 1.0.1. Historical
 candidate releases are additional diagnostics, not current analysis packs.
 
@@ -54,6 +54,7 @@ These are **pack versions**, which differ from upstream tool versions.
 | `featurecounts` | 1.0.0 | Single-end RNA read or paired-fragment gene counts |
 | `bedtools` | 1.0.0 | BED interval operations and reference sequence extraction |
 | `blast` | 1.0.0 | Local nucleotide/protein and translated similarity searches |
+| `gatk` | 1.0.0 | GATK 4 germline calling, alignment preparation, gVCF combination/genotyping and VCF operations |
 
 Existing bundled pipeline packs remain available for reproducibility. The
 development direction is individually usable tools or small related operations
@@ -81,6 +82,7 @@ dated evidence for its original bytes, not a fresh test of every older tool.
 | featureCounts 1.0.0 | Eight Linux scientific/guard tests; exact final ZIP passed six native checks in each path | Single/paired counting at two threads, all three strand modes and known gene/assignment truth. |
 | BEDTools 1.0.0 | Seven Linux regression tests, with all 15 fixture cases compared byte-for-byte to unmodified upstream; exact final ZIP passed 15 native checks in each path | Interval truth, CRLF, valid empty results, 64-bit coordinates and forward/reverse-complement extraction; exposed BED operations only. |
 | BLAST 1.0.0 | Linux tests: 10 passed and one deliberately skipped on unmodified upstream; all 11 passed on the patched build. Exact final ZIP passed five scientific checks and six additional regressions in each native path | Four search modes, known coordinates/frames and a legitimate no-hit case; local-only failure regressions are separate from OS network isolation. |
+| GATK 1.0.0 | Fourteen Linux scientific/regression tests passed. Exact final native Windows gate passed nine scientific checks and seven graph/archive contracts in each path, with no failures/errors/skips | Nine exposed operations with synthetic variant/genotype, duplicate and recalibration truth; no general Windows GATK support, clinical validation or whole-genome/cohort performance claim. |
 
 The five-pack October [graph/import report](evidence/popular-pack-graph-contracts-2026-10-04.json)
 records **eight tests passed, zero failures/errors/skips** on Linux with the
@@ -120,6 +122,7 @@ duplicate version without replacing the installed manifest:
 | featureCounts 1.0.0 | [37208535793](https://github.com/comparativechrono/workbench/actions/runs/37208535793) | 6 |
 | BEDTools 1.0.0 | [37207758617](https://github.com/comparativechrono/workbench/actions/runs/37207758617) | 15 |
 | BLAST 1.0.0 | [37210341211](https://github.com/comparativechrono/workbench/actions/runs/37210341211) | 5, plus 6 adapter/local-failure regressions |
+| GATK 1.0.0 | [37220420948](https://github.com/comparativechrono/workbench/actions/runs/37220420948) | 9, plus 7 graph/archive contracts |
 
 The corresponding source/evidence ZIPs are listed with digests in the inventory.
 They preserve Linux and candidate-stage evidence, including historical status
@@ -127,6 +130,28 @@ at creation. The separate final validation JSON supersedes any pending-final-gat
 statement inside those immutable companions; do not rewrite the companions.
 Passing a scientific fixture is not clinical validation, a full desktop
 acceptance test or proof of performance on arbitrary datasets.
+
+GATK's [dated validation record](evidence/gatk-1.0.0-validation-2026-10-04.json)
+links the frozen pack, matching source and distinct test stages. Candidate
+[run 37220034835](https://github.com/comparativechrono/workbench/actions/runs/37220034835)
+passed nine scientific checks and seven graph/archive contracts in each of the
+ordinary and space-containing `windows-2022` paths. The scientific gate used the
+released native bridge/importer; the graph/archive suite used the unchanged
+released Python engine and a copy callback for folder publication.
+The exact final [GATK 1.0.0 release](https://github.com/comparativechrono/workbench/releases/tag/pack-gatk-v1.0.0)
+then passed the same nine scientific checks and seven graph/archive contracts
+in each path in [run 37220420948](https://github.com/comparativechrono/workbench/actions/runs/37220420948),
+at source `eb4a255b69a2eabfb539937218a1d0e57c5776a3`, with no failures/errors/skips.
+The [separate final validation report](https://github.com/comparativechrono/workbench/releases/download/pack-gatk-v1.0.0/native-workbench-gatk-1.0.0-windows-validation.json)
+binds those results to the released ZIP and manifest hashes.
+
+The Linux graph suite's six graph/application tests passed, but its strict
+archive-copy test observed transient files or altered hashes inside disposable
+copies. The diagnostic reports are retained; there is no claim of a clean
+seven-test Linux pass. Windows candidate and final graph/archive checks passed without
+weakening the inventory or duplicate-immutability assertions. The published
+source companion retains its creation-time status; the separate final validation
+report supersedes pending-final statements without changing its bytes.
 
 ## Important current limits
 
@@ -199,6 +224,23 @@ and its bundled provenance files for detailed supported interfaces.
   the guard disables usage reporting and preserves child diagnostics. Exact
   coordinate/translated-frame and local-failure checks are bounded evidence,
   not a network firewall or validation of all BLAST operations.
+- **GATK 1.0.0** exposes nine germline/preparation/VCF operations using unchanged
+  GATK 4.7.0.0, its existing Workbench local-path adaptation and private Java 17.
+  It requires coordinate-sorted single-sample DNA BAMs with a declared sample
+  and a resolvable RG tag on every alignment, the matching plain reference, and
+  BED intervals for calling/BQSR. MarkDuplicates retains reads and disables
+  optical-duplicate detection; it is not UMI-aware. BQSR learns over selected
+  intervals using explicit known sites and applies the model to the full BAM.
+  HaplotypeCaller uses pure-Java PairHMM/Smith-Waterman implementations, with
+  slower performance possible than native acceleration. CombineGVCFs accepts
+  two to 32 distinct-sample inputs. Released 0.6.0 uses labelled generic file
+  ports for gVCFs, keeping them incompatible with ordinary VCF ports; the
+  adapter validates file roles, NON_REF likelihoods and sample uniqueness.
+  Generic file connections alone do not establish gVCF compatibility. Genuine
+  empty ordinary VCF results remain valid. Filters are explicit site-annotation
+  criteria, not a guaranteed Best Practices protocol. GenomicsDB, Spark, VQSR,
+  Python-dependent CNV tools and clinical/whole-genome performance validation
+  are outside this scope. See the [pack guide](../docs/GATK-PACK.md).
 - Resource demands and portability constraints remain tool-specific. A local
   GUI cannot make a large reference fit into insufficient RAM. Do not promise
   generic Linux binary compatibility, arbitrary Unicode paths or universal

@@ -265,6 +265,47 @@ and current guard, using the documented MSVC/CMake environment; do not require
 an old run's artifact to remain downloadable. Release source/provenance companions
 retain the exact source and build records needed to review the distributed bytes.
 
+## Continuing GATK germline builds
+
+GATK 1.0.0 adds nine operations independently of the existing Mutect2 0.5.4
+identity. Both use upstream GATK 4.7.0.0 and its inherited Workbench local-path
+adaptation. The [GATK guide](../docs/GATK-PACK.md) gives the complete recovery,
+preparation, scientific-test and archive commands. `scripts/fetch_gatk_build_inputs.py`
+recovers the SHA-pinned Mutect2 seed, Java compiler/reference runtime and released
+application only when explicitly requested. `scripts/prepare_gatk_pack.py`
+verifies the seed envelope, complete file inventory, upstream JAR and Linux
+compiler; it requires a new output directory. It preserves the private Java 17
+runtime and corresponding source/licensing materials while compiling only the
+new boundary adapter. Never modify the published seed or final 1.0.0 bytes.
+
+Keep the scientific contracts explicit:
+
+- Coordinate-sorted DNA BAMs require one sample and an RG tag on every record
+  resolving to a declared read group. Header-only checks missed a case where
+  GATK silently discarded reads; retain the missing-RG regression.
+- MarkDuplicates retains reads and disables optical-duplicate detection. BQSR
+  trains on selected BED intervals using explicit known sites, then applies
+  the model to the whole BAM. It does not invent a duplicate-marked state.
+- Released 0.6.0 has no gVCF type. Labelled generic file ports preserve graph
+  compatibility while keeping gVCFs incompatible with ordinary VCF ports.
+  The adapter checks NON_REF likelihoods, sample names and duplicate inputs;
+  arbitrary generic-file connections still need runtime role validation.
+- A genotyped VCF can retain a NON_REF header even after its variants are
+  removed by selection. Do not reject valid empty ordinary VCFs solely on that
+  header. Nonempty reference-confidence records remain inappropriate for
+  ordinary VCF operations; preserve the chained empty-subset regression.
+- CombineGVCFs uses a real `files` port for two to 32 sources. Its successful
+  merge does not establish GenomicsDB support or large-cohort performance.
+- BAM preflight discovers executables used by workflows, not every tool merely
+  declared in a manifest. The four BAM operations include real SAMtools
+  quickcheck steps so the pack supplies its own pinned validation helper even
+  when the installation gate restricts its catalogue to GATK.
+
+The source/evidence companion includes a full knowledge snapshot and `AGENTS.md`.
+Its historical pending-final status is superseded by the separate exact-final
+Windows report, not by replacement archive bytes. The generic application
+`build_sources` selection still needs its own reviewed handover-inclusion fix.
+
 ## Portability lessons to retain
 
 - Preserve the fastp 0.4.1 reporting fix in `tools/build_fastp.py`. JSON command

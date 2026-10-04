@@ -114,6 +114,34 @@ All five packs and STAR are required. Per-pack `NW_POPULAR_<ID>_PACK_DIR` and
 skip is not a passing compatibility check. See current release evidence for the
 recorded run rather than assuming the command has been run on a fresh checkout.
 
+For GATK 1.0.0, use the [pack guide](../docs/GATK-PACK.md) to recover the exact
+released starter and prepare/package the frozen pack, then run in a fresh
+process:
+
+```sh
+NW_GATK_STARTER_ZIP=/path/to/native-workbench-0.6.0-starter-windows.zip \
+NW_GATK_PACK_DIR=/path/to/gatk-1.0.0 \
+NW_GATK_ARCHIVE=/path/to/native-workbench-pack-gatk-1.0.0.zip \
+NW_GATK_TEMP_DIR=/path/to/disposable-applications \
+python3 tests/test_gatk_pipeline.py --report /path/to/evidence/gatk-contracts.json
+```
+
+The seven graph/archive contracts cover standalone discovery, the pack-owned
+BAM preflight helper, two-sample preparation and gVCF merging, joint-genotyping
+branches, named methods/pins, RNA/type/order rejection and strict archive/import
+immutability. The graph suite does not execute scientific tools and substitutes
+a Python copy callback for native folder publication, including when its host
+is Windows. The separate native installation gate exercises the real importer
+and scientific runner.
+
+During the Linux GATK graph runs, six graph/application tests passed while the
+strict archive-copy test observed transient temporary files or altered hashes
+inside disposable copies. Retain those failed diagnostics; do not describe them
+as seven passing Linux tests or exclude files to make the check pass. The same
+strict suite passed all seven contracts in both Windows paths on the candidate
+and exact final archive. The [GATK validation record](evidence/gatk-1.0.0-validation-2026-10-04.json)
+records the distinct stages and exact hashes.
+
 ## Native Windows pack gate
 
 Package once, freeze the archive, and calculate its SHA-256. On Windows, use a
@@ -223,6 +251,7 @@ regressions, not human-scale performance benchmarks or clinical validation.
 | [featureCounts 1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-featurecounts-v1.0.0) | [37208535793](https://github.com/comparativechrono/workbench/actions/runs/37208535793) | Six checks per path, single/paired counts, three strand modes and two threads |
 | [BEDTools 1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-bedtools-v1.0.0) | [37207758617](https://github.com/comparativechrono/workbench/actions/runs/37207758617) | Fifteen checks per path, including CRLF, empty outputs, 64-bit coordinates and strand extraction |
 | [BLAST 1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-blast-v1.0.0) | [37210341211](https://github.com/comparativechrono/workbench/actions/runs/37210341211) | Five scientific checks plus six adapter/local-failure regressions per path; four search modes, coordinates/frames, no hits, spaces, missing databases and invalid/remote arguments |
+| [GATK 1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-gatk-v1.0.0) | [37220420948](https://github.com/comparativechrono/workbench/actions/runs/37220420948) | Nine scientific checks plus seven graph/archive contracts per path; all nine exposed operations, known alleles/genotypes, duplicate/recalibration truth, typed branches and real file fan-in |
 
 STAR final ZIP SHA-256:
 `edbeefff1c1149b632407f50a8a28847989a34eaa004752b43680fb6e29e4877`.
@@ -241,6 +270,18 @@ records supersede historical pending-final statements. BEDTools' source companio
 contains an empty static-validation log; its separate final JSON supplies a fresh
 complete static inventory/schema/hash verification. Preserve the published ZIP
 and this explicit correction rather than silently replacing it.
+
+GATK's exact final gate ran at source
+`eb4a255b69a2eabfb539937218a1d0e57c5776a3` in ordinary and space-containing
+`windows-2022` paths, with no failures/errors/skips. Its final archive SHA-256 is
+`e9eb3a4966f83d667ebb424612aaedd07236bac98c3462d4efbe02c55166bb24`; its manifest
+SHA-256 is `4d876053d922628f8c97896268a32c72a648b6c51b93d3364beecc641293e713`.
+The release supplies `native-workbench-gatk-1.0.0-windows-validation.json` and
+`SHA256SUMS.txt`. The source companion preserves the 14 passing Linux
+scientific/regression tests, candidate evidence, failed Linux copy diagnostics
+and its creation-time pending-final status. The separate final report closes
+that status without replacing the source ZIP. Its full knowledge snapshot does
+not change the generic application's fixed source-file selection.
 
 `scripts/make_pack_validation_candidate.py` creates a separate numeric candidate
 and a correspondence report from a frozen proposed final pack. Only the pack

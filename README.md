@@ -13,8 +13,9 @@ The application does not require Docker, WSL or a system Python installation.
 
 Version **0.6.0 is a development prerelease**. The
 [application release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.6.0)
-and **25 independently versioned tool packs** are published on GitHub. Their public
-downloads have been checked against the original sizes and SHA-256 checksums.
+and **26 independently versioned tool packs** are published on GitHub. The
+[release inventory](knowledge/release-inventory.json) records their downloads,
+sizes, SHA-256 checksums and dated validation evidence.
 
 The signed online catalogue and its `source.json` trust file are **not published
 or configured**. They require a maintainer-controlled signing key. Use the offline
@@ -25,7 +26,7 @@ starter installation/scientific checks, and an actual 0.5.4-to-0.6.0 updater
 migration on Linux. Scientific execution used the portable Linux reference
 backend. The current Windows GUI and native Windows long-path behavior still need
 validation on Windows. Separate native Windows pack checks validate the exact
-published STAR, kallisto, FastQC, MultiQC, featureCounts, BEDTools and BLAST archives
+published STAR, kallisto, FastQC, MultiQC, featureCounts, BEDTools, BLAST and GATK archives
 through the released 0.6.0 native bridge in ordinary and space-containing paths;
 see the [dated evidence and limits](knowledge/current-state.md).
 
@@ -77,6 +78,21 @@ inputs and rebuilds its index per run; kallisto accepts gzip inputs. See the
 limits and interpretation of counts. Use kallisto 1.0.1 for the corrected
 multithread bootstrap support; existing saved pipelines keep their original
 pack version until explicitly updated.
+
+### GATK germline tools
+
+Install [GATK 1.0.0](https://github.com/comparativechrono/workbench/releases/tag/pack-gatk-v1.0.0)
+for GATK **4.7.0.0** with its own Java 17 runtime. Its nine operations cover
+duplicate marking, base-quality recalibration, HaplotypeCaller VCF/gVCF calling,
+CombineGVCFs, GenotypeGVCFs, variant selection, filtering and validation. Run them
+individually or connect sample branches into a joint-genotyping pipeline.
+
+See the [GATK pack guide](docs/GATK-PACK.md) for inputs, scientific choices and
+validation status. The exact final archive passed nine native scientific checks
+and seven graph/archive contracts in both ordinary and space-containing Windows
+paths. The existing Mutect2 pack remains the somatic calling interface.
+GenomicsDB, Spark, VQSR and Python-dependent GATK tools
+are outside this pack, and human whole-genome performance is not yet established.
 
 
 The separate updater requires an existing **0.5.4** installation. Close Workbench,

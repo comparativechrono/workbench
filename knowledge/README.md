@@ -8,10 +8,11 @@ open, diffable files with no proprietary reader or external memory service.
 separate standard called Open Knowledge Format.
 
 **Reviewed:** 2026-10-04. **Source baseline:**
-[`1b537869e9d88e493078e1a1f241d16013273f44`](https://github.com/comparativechrono/workbench/commit/1b537869e9d88e493078e1a1f241d16013273f44).
-This handover records the optional-pack expansion after the initial documentation
-snapshot. Re-check the current tree and releases before treating its version
-snapshot as current.
+[`eb4a255b69a2eabfb539937218a1d0e57c5776a3`](https://github.com/comparativechrono/workbench/commit/eb4a255b69a2eabfb539937218a1d0e57c5776a3).
+This handover includes the GATK 1.0.0 addition and the earlier optional-pack
+expansion, including the successful exact-final GATK Windows gate. Evidence for
+each release retains its own date and tested bytes. Re-check the current tree
+and releases before treating this snapshot as current.
 
 ## Reading order
 
@@ -56,6 +57,12 @@ recommended two repositories; its guidance is now corrected to this one
 repository with independent application and pack tags. The 18-pack lists under `publishing/`
 describe the original 0.6 split, before STAR, kallisto and the later optional
 packs. Do not mistake these historical inventories for the latest complete list.
+
+The GATK 1.0.0 source/evidence companion includes a complete `knowledge/` snapshot
+and root `AGENTS.md`. Its creation-time pending-final-gate statements remain
+historical; use the separate final validation record for completed evidence. The generic
+application source packager still has a fixed file selection that does not yet
+include this handover automatically; the GATK companion does not close that gap.
 
 ## Maintaining the handover
 

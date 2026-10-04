@@ -8,6 +8,13 @@ tools locally on Windows x86-64. No system Java, Python launcher, Docker, WSL,
 browser or analysis-time download is required. The existing Mutect2 pack and its
 saved pipelines retain their versions and contents.
 
+Pack **1.0.0** is available from the
+[GATK release](https://github.com/comparativechrono/workbench/releases/tag/pack-gatk-v1.0.0).
+In Workbench **0.6.0 or later**, choose **Manage tools → Import pack ZIP** and
+select `native-workbench-pack-gatk-1.0.0.zip`, then run **File → Check installation**.
+The pack can be copied to an offline machine; the starter application is unchanged.
+Its pack version is distinct from upstream GATK 4.7.0.0.
+
 ## Individual tools and pipelines
 
 The pack exposes nine operations:
@@ -18,7 +25,7 @@ The pack exposes nine operations:
 | Base-quality recalibration | Run BaseRecalibrator and ApplyBQSR with explicitly selected local known-site resources |
 | HaplotypeCaller: VCF | Call germline short variants for one prepared DNA sample |
 | HaplotypeCaller: gVCF | Produce reference-confidence records for later genotyping |
-| CombineGVCFs | Combine selected samples' compatible GATK gVCFs |
+| CombineGVCFs | Combine two to 32 explicitly selected, distinct-sample GATK gVCFs |
 | GenotypeGVCFs | Genotype a single or combined GATK gVCF |
 | SelectVariants | Select the requested variant class |
 | VariantFiltration | Apply the selected hard-filter criterion, retaining filter-labelled records |
@@ -37,6 +44,13 @@ them. This prevents automatic connections to ordinary VCF ports. The pack's
 adapter additionally validates gVCF content before calling GATK. A generic file
 connection alone does not establish compatibility. GenotypeGVCFs produces the
 ordinary VCF used by downstream variant selection/filtering.
+
+The adapter checks reference-confidence records, NON_REF alleles and PL
+likelihoods, and rejects repeated physical merge inputs or repeated sample
+labels. A BQSR table or another generic file does not become a gVCF merely by
+connecting it to that port. Empty ordinary VCFs remain valid results: headers
+can retain NON_REF declarations after genotyping and selecting away every
+variant, so that header alone cannot identify a file as a gVCF.
 
 ## Scientific choices and limits
 
@@ -121,6 +135,12 @@ required. The pack requires application 0.6.0 or later. Graph tests run in a
 fresh process against the released starter; the graph test's temporary parent
 can be selected with `NW_GATK_TEMP_DIR`.
 
+The release's matching source/evidence companion includes the adapter, recipes,
+fixtures, build provenance, test records, full `knowledge/` snapshot and root
+`AGENTS.md`. Its creation-time pending-final-gate statements are historical;
+the separate final Windows validation report records completion. Do not replace
+the immutable source ZIP to revise that status.
+
 ## Verification boundaries
 
 `scripts/generate_gatk_fixtures.py` generates small public synthetic DNA fixtures
@@ -137,6 +157,33 @@ their commands, tested archive/manifest hashes, results and native run URLs.
 Neither these synthetic controls nor the Windows CLI gate establish interactive
 GUI acceptance, institutional approval, diagnostic validity or large-data
 performance.
+
+## Recorded release evidence
+
+The [dated validation record](../knowledge/evidence/gatk-1.0.0-validation-2026-10-04.json)
+and [final Windows report](https://github.com/comparativechrono/workbench/releases/download/pack-gatk-v1.0.0/native-workbench-gatk-1.0.0-windows-validation.json)
+identify the exact tested bytes. At source
+`eb4a255b69a2eabfb539937218a1d0e57c5776a3`:
+
+| Gate | Result and scope |
+| --- | --- |
+| Linux scientific/regression suite | 14 tests passed, including known variants/genotypes, duplicate flags, recalibrated qualities, invalid-input rejection, missing per-read RG rejection and legitimate empty VCF subsets |
+| Native Windows candidate | [Run 37220034835](https://github.com/comparativechrono/workbench/actions/runs/37220034835): nine scientific checks and seven graph/archive contracts passed in each path |
+| Exact final native Windows archive | [Run 37220420948](https://github.com/comparativechrono/workbench/actions/runs/37220420948): nine scientific checks and seven graph/archive contracts passed in each ordinary/space-containing `windows-2022` path, with no failures/errors/skips |
+
+The scientific gate imports through the released native bridge and checks
+duplicate-version rejection. The separate graph/archive suite runs the
+unchanged released application code and uses a Python copy callback for folder
+publication; it does not itself run the scientific tools or native importer.
+The Linux graph suite's six graph/application checks passed, but the strict
+archive-copy check encountered transient files or changed hashes in disposable
+copies. Those diagnostics are retained; no clean seven-test Linux graph pass is
+claimed. Both Windows paths passed the unchanged strict archive assertions.
+
+Final ZIP SHA-256:
+`e9eb3a4966f83d667ebb424612aaedd07236bac98c3462d4efbe02c55166bb24`.
+Final manifest SHA-256:
+`4d876053d922628f8c97896268a32c72a648b6c51b93d3364beecc641293e713`.
 
 Upstream references:
 

@@ -4,7 +4,7 @@
   "project": "Native Workbench",
   "repository": "https://github.com/comparativechrono/workbench",
   "reviewed_on": "2026-10-04",
-  "source_baseline_commit": "1b537869e9d88e493078e1a1f241d16013273f44",
+  "source_baseline_commit": "eb4a255b69a2eabfb539937218a1d0e57c5776a3",
   "format": {
     "prose": "UTF-8 Markdown",
     "data": "JSON",
@@ -21,7 +21,9 @@
     "current_state": "current-state.md",
     "roadmap": "roadmap.md",
     "release_inventory": "release-inventory.json",
-    "additional_pack_guide": "../docs/popular-packs-2026-10.md"
+    "additional_pack_guide": "../docs/popular-packs-2026-10.md",
+    "gatk_pack_guide": "../docs/GATK-PACK.md",
+    "gatk_validation": "evidence/gatk-1.0.0-validation-2026-10-04.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",

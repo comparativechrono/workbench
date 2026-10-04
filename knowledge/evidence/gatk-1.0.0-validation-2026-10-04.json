@@ -1,0 +1,114 @@
+{
+  "schema": "native-workbench-knowledge/gatk-validation",
+  "schema_version": 1,
+  "as_of": "2026-10-04",
+  "pack_id": "gatk",
+  "pack_version": "1.0.0",
+  "source_commit": "eb4a255b69a2eabfb539937218a1d0e57c5776a3",
+  "upstream_tool_version": "4.7.0.0-workbench1",
+  "manifest_sha256": "4d876053d922628f8c97896268a32c72a648b6c51b93d3364beecc641293e713",
+  "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-gatk-v1.0.0",
+  "assets": [
+    {
+      "name": "native-workbench-gatk-1.0.0-source-evidence.zip",
+      "bytes": 1363293,
+      "github_digest": "sha256:73017b89013288e7f7a54dbd15d40f45d14c0d9845871ff7928966f316bbcbba",
+      "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-gatk-v1.0.0/native-workbench-gatk-1.0.0-source-evidence.zip",
+      "independently_downloaded_and_rehashed_on": "2026-10-04"
+    },
+    {
+      "name": "native-workbench-gatk-1.0.0-windows-validation.json",
+      "bytes": 30982,
+      "github_digest": "sha256:78f68d98aac94037945807a18e3f44e8371e444b07b3a4f3a206e155249bf603",
+      "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-gatk-v1.0.0/native-workbench-gatk-1.0.0-windows-validation.json",
+      "independently_downloaded_and_rehashed_on": "2026-10-04"
+    },
+    {
+      "name": "native-workbench-pack-gatk-1.0.0.zip",
+      "bytes": 681725138,
+      "github_digest": "sha256:e9eb3a4966f83d667ebb424612aaedd07236bac98c3462d4efbe02c55166bb24",
+      "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-gatk-v1.0.0/native-workbench-pack-gatk-1.0.0.zip",
+      "independently_downloaded_and_rehashed_on": "2026-10-04"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 335,
+      "github_digest": "sha256:e464ddfcc8e20f0763f29916f753a072c8b92403fa55d40924de0105bc55df9f",
+      "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-gatk-v1.0.0/SHA256SUMS.txt",
+      "independently_downloaded_and_rehashed_on": "2026-10-04"
+    }
+  ],
+  "windows_validation_report": {
+    "url": "https://github.com/comparativechrono/workbench/releases/download/pack-gatk-v1.0.0/native-workbench-gatk-1.0.0-windows-validation.json",
+    "sha256": "78f68d98aac94037945807a18e3f44e8371e444b07b3a4f3a206e155249bf603"
+  },
+  "native_windows": {
+    "workflow_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37220420948",
+    "workflow_source_commit": "eb4a255b69a2eabfb539937218a1d0e57c5776a3",
+    "runner": "windows-2022",
+    "application": "released 0.6.0 with native bridge",
+    "application_sha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "job_id": 111489457472,
+        "path": "ordinary",
+        "conclusion": "success",
+        "scientific_checks_passed": 9,
+        "scientific_checks_failed": 0,
+        "native_importer_executed": true,
+        "duplicate_version_rejected": true,
+        "graph_archive_tests_passed": 7,
+        "graph_archive_failures": 0,
+        "graph_archive_errors": 0,
+        "graph_archive_skips": 0,
+        "graph_import_publication": "Python copy callback, separate from native importer gate",
+        "graph_archive_payload_match": true,
+        "installed_files_and_receipts_unchanged": true,
+        "log_sha256": "d363570a0e8f7b232a17162dfe27abed15acb77d9976b7e8ace424d869aa8818"
+      },
+      {
+        "job_id": 111489457668,
+        "path": "contains spaces",
+        "conclusion": "success",
+        "scientific_checks_passed": 9,
+        "scientific_checks_failed": 0,
+        "native_importer_executed": true,
+        "duplicate_version_rejected": true,
+        "graph_archive_tests_passed": 7,
+        "graph_archive_failures": 0,
+        "graph_archive_errors": 0,
+        "graph_archive_skips": 0,
+        "graph_import_publication": "Python copy callback, separate from native importer gate",
+        "graph_archive_payload_match": true,
+        "installed_files_and_receipts_unchanged": true,
+        "log_sha256": "04f9554734cb4ebce565ce76088c14a983cf80fa610a85518cc7db2c19924c07"
+      }
+    ]
+  },
+  "linux_scientific": {
+    "tests_passed": 14,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "native_windows_executed": false,
+    "scope": "Original manifest arguments with pinned matching Linux Java and APE SAMtools; native Windows import/bridge tests are separate.",
+    "report_sha256": "448c8eadff897a5bd29afa96b35ff220d1691db05ce1a8711abe6126bdccbcb7"
+  },
+  "graph_test_source": {
+    "path": "../../tests/test_gatk_pipeline.py",
+    "sha256": "08921b12196822716c287ec95daa13ea26f5562b44b1058bee5d47bebe2c80d6"
+  },
+  "limitations": [
+    "Synthetic scientific fixtures and released-app CLI/graph contracts; no desktop GUI, arbitrary long-path, clinical or whole-genome throughput validation.",
+    "The seven graph/archive tests use a Python copy callback for folder publication; the separate native gate tests the actual released native importer and bridge.",
+    "Released app 0.6.0 represents gVCFs as labelled generic files; the adapter validates reference-confidence content at execution.",
+    "Pure-Java supported operations only; no GenomicsDB, Spark, VQSR or Python-dependent CNV operations. CombineGVCFs accepts 2-32 local files with distinct sample sets.",
+    "Optical duplicate detection is disabled; BQSR training can be interval-limited while application covers the full input BAM.",
+    "Checksums establish byte integrity, not publisher trust or an operating-system network sandbox.",
+    "Earlier Linux graph/import attempts passed six contract tests but failed strict copy assertions amid transient workspace copying artifacts. Those failures remain in the source/evidence companion; all seven passed on native Windows.",
+    "This exact-final report supersedes the source/evidence companion creation-time note that final Windows validation was pending."
+  ],
+  "recovery": "The installable archive retains upstream sources/licenses; the companion retains the full Workbench source and knowledge snapshot at the source commit, Linux reports and candidate history. The separate Windows report supersedes its creation-time pending-final note."
+}
