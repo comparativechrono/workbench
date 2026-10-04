@@ -78,6 +78,12 @@ its hash-checked R and contributed-package ZIPs into **each run's private
 and never writes into installed packs or user R libraries. `--vanilla` and an
 explicit private library path disable user/site startup files. Selected inputs
 are copied and hashed before analysis; their source files are checked unchanged.
+R requires a space-free temporary path. The adapter creates one unique private
+child under the Windows user temporary directory and uses its existing short
+Windows path alias when necessary. If no suitable alias exists, select an
+existing writable **Temporary files folder** whose full path has no spaces.
+Only the private child is deleted after R exits; the selected parent is preserved.
+No drive mapping, registry edits or administrator privileges are used.
 No shell or arbitrary R expression is accepted. This is trusted local code, not
 an OS security sandbox; absence of network code is not a firewall guarantee.
 

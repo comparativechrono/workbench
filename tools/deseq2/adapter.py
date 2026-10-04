@@ -9,6 +9,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 import zipfile
 
 MAX_UNPACKED = 1600 * 1024 * 1024
@@ -68,11 +69,36 @@ def private_runtime(pack, run):
     return exe, rhome
 
 
+def scratch_directory(override=None):
+    """R requires a temp path without spaces; own only a unique child directory."""
+    root = Path(override).resolve(strict=True) if override else None
+    if root is not None and not root.is_dir():
+        raise ValueError('Temporary files folder must be an existing local directory')
+    owned = Path(tempfile.mkdtemp(prefix='nw-deseq2-', dir=root))
+    usable = str(owned)
+    if ' ' in usable:
+        import ctypes
+        from ctypes import wintypes
+        get_short = ctypes.WinDLL('kernel32', use_last_error=True).GetShortPathNameW
+        get_short.argtypes = [wintypes.LPCWSTR, wintypes.LPWSTR, wintypes.DWORD]
+        get_short.restype = wintypes.DWORD
+        size = get_short(usable, None, 0)
+        if size:
+            output = ctypes.create_unicode_buffer(size)
+            if get_short(usable, output, size):
+                usable = output.value
+    if ' ' in usable or not usable.isascii():
+        shutil.rmtree(owned)
+        raise ValueError('R needs a temporary folder without spaces. Select an existing user-writable local Temporary files folder whose full path has no spaces; no administrator privileges or drive mapping are needed.')
+    return owned, usable
+
+
 def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--mode', choices=('counts', 'featurecounts', 'kallisto'), required=True)
     p.add_argument('--run', type=Path, required=True)
     p.add_argument('--samples', type=Path, required=True)
+    p.add_argument('--scratch-root', default='')
     p.add_argument('--tx2gene', default='-')
     p.add_argument('--design', choices=('condition', 'batch-condition'), required=True)
     p.add_argument('--numerator', required=True)
@@ -127,16 +153,18 @@ def main(argv=None):
     dump(run / 'request.json', request)
     env = {k: v for k, v in os.environ.items() if not k.upper().startswith(('R_', 'RSTUDIO', '_R_', 'RTOOLS', 'R_LIBS'))}
     # Environment is process-local. --vanilla prevents user/site profiles and .Renviron.
-    temp = run / '_tmp'
-    temp.mkdir(exist_ok=False)
+    scratch, temp = scratch_directory(a.scratch_root or None)
     env.update({'R_HOME': str(rhome), 'R_USER': str(run / '_home'), 'R_LIBS': str(rhome / 'library'),
         'R_LIBS_USER': str(rhome / 'library'), 'R_LIBS_SITE': str(rhome / 'library'),
-        'TMPDIR': str(temp), 'TMP': str(temp), 'TEMP': str(temp), 'OMP_NUM_THREADS': '1', 'OPENBLAS_NUM_THREADS': '1',
+        'TMPDIR': temp, 'TMP': temp, 'TEMP': temp, 'OMP_NUM_THREADS': '1', 'OPENBLAS_NUM_THREADS': '1',
         'MKL_NUM_THREADS': '1', 'R_DEFAULT_PACKAGES': 'datasets,utils,grDevices,graphics,stats,methods'})
     (run / '_home').mkdir(exist_ok=False)
     command = [str(exe), '--vanilla', str(pack / 'analysis.R'), str(run / 'request.json')]
-    dump(run / 'commands.json', {'argv': command, 'shell': False, 'privateR': True, 'userStartupDisabled': True})
-    proc = subprocess.run(command, cwd=run, env=env, check=False)
+    dump(run / 'commands.json', {'argv': command, 'shell': False, 'privateR': True, 'userStartupDisabled': True, 'temporaryDirectory': temp, 'scratchPolicy': 'Unique owned child of user-selected or OS temporary folder; short Windows alias used when needed; deleted after R exits'})
+    try:
+        proc = subprocess.run(command, cwd=run, env=env, check=False)
+    finally:
+        shutil.rmtree(scratch)
     if proc.returncode:
         raise RuntimeError('DESeq2 analysis failed; inspect the R error in the run log')
     for item in inputs:
@@ -144,7 +172,7 @@ def main(argv=None):
             raise ValueError('A selected input changed during analysis')
     dump(run / 'input-provenance.json', {'inputs': inputs, 'unchanged': True, 'mode': a.mode,
         'fileOrderMeaning': 'samples.tsv input_index selects the 1-based count-file position; matrix mode uses exact sample_id column names',
-        'runtime': json.loads((pack / 'runtime-index.json').read_text()), 'networkRequestsPerformed': False})
+        'runtime': json.loads((pack / 'runtime-index.json').read_text()), 'networkRequestsPerformed': False, 'temporaryDirectoryRemoved': not scratch.exists()})
 
 
 if __name__ == '__main__':

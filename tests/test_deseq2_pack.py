@@ -52,6 +52,11 @@ class DESeq2Science(unittest.TestCase):
             # A hostile inherited user startup file must not execute.
             poison=cls.root/'user profile.R';poison.write_text("stop('USER STARTUP EXECUTED')\n")
             env['R_PROFILE_USER']=str(poison);env['R_ENVIRON_USER']=str(poison);env['R_LIBS_USER']=str(cls.root/'not a library')
+            if mode!='counts':
+                spaced_temp=cls.root/'host temporary files with spaces';spaced_temp.mkdir(exist_ok=True)
+                env['TEMP']=str(spaced_temp);env['TMP']=str(spaced_temp)
+                # An explicit user-owned short root handles hosts where 8.3 aliases are disabled.
+                command[command.index('--samples'):command.index('--samples')]=['--scratch-root',str(Path(os.environ['RUNNER_TEMP']) if 'RUNNER_TEMP' in os.environ else Path(tempfile.gettempdir()))]
             invoke(command,out,env=env)
             cls.valid[mode]=out
         cls.rhome=cls.valid['counts']/'_runtime/R';cls.rexe=cls.rhome/'bin/x64/Rscript.exe'
@@ -211,7 +216,7 @@ write.table(data.frame(gene_id=rownames(r),as.data.frame(r)),a[2],sep='\\t',quot
 
     def test_11_inputs_runtime_environment_and_pack_are_unchanged(self):
         for mode,out in self.valid.items():
-            proof=json.loads((out/'input-provenance.json').read_text());self.assertTrue(proof['unchanged'])
+            proof=json.loads((out/'input-provenance.json').read_text());self.assertTrue(proof['unchanged']);self.assertTrue(proof['temporaryDirectoryRemoved'])
             self.assertTrue(json.loads((out/'commands.json').read_text())['userStartupDisabled'])
             for item in proof['inputs']:self.assertEqual(sha(item['path']),item['sha256'])
         self.assertEqual(inventory(self.pack),self.before)
