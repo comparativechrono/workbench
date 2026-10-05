@@ -469,6 +469,28 @@ def run_update_checks(root, evidence, report, args):
     checkpoint(report, args, report["checks"][-1])
 
 
+def reference_control_geometry(rows, *, local=False):
+    """Validate independently observed Win32 bounds, not layout constants."""
+    by_id = {row["id"]: row for row in rows}
+    pairs = ([(612, 608), (608, 613), (608, 614), (608, 615)] if local else
+             [(605, 606), (606, 607), (607, 608),
+              (608, 609), (608, 610), (608, 611)])
+    gaps = []
+    for upper, lower in pairs:
+        require(upper in by_id and lower in by_id,
+                "Native layout check is missing controls: " + str((upper, lower)))
+        upper_bounds, lower_bounds = by_id[upper]["bounds"], by_id[lower]["bounds"]
+        require(upper_bounds[2] > upper_bounds[0] and upper_bounds[3] > upper_bounds[1]
+                and lower_bounds[2] > lower_bounds[0] and lower_bounds[3] > lower_bounds[1],
+                "Native reference control has empty or inverted bounds.")
+        gap = lower_bounds[1] - upper_bounds[3]
+        require(gap > 0, "Native reference controls overlap or touch: " +
+                json.dumps({"upper": upper, "lower": lower, "gapPixels": gap,
+                            "upperBounds": upper_bounds, "lowerBounds": lower_bounds}))
+        gaps.append({"upper": upper, "lower": lower, "gapPixels": gap})
+    return gaps
+
+
 def gui_smoke(root, evidence):
     """Real Win32 launch, button, child controls, resize and captured pixels."""
     import ctypes
@@ -615,14 +637,25 @@ def gui_smoke(root, evidence):
             time.sleep(.1)
         require(bool(found), "References toolbar command did not open its native window.")
         ref = found[0]
-        time.sleep(.3)
+        progress("wait for local reference library to populate")
+        deadline = time.monotonic() + 15
+        rows = 0
+        while time.monotonic() < deadline:
+            local_list = user.GetDlgItem(ref, 612)
+            rows = send(local_list, 0x1004, 0, 0) if local_list else 0
+            if rows >= 5:
+                break
+            time.sleep(.1)
+        require(rows >= 5, "The native reference window did not finish loading its local library.")
         progress("inspect normal References controls")
         normal = controls(ref)
         progress("normal References controls discovered", controls=normal)
+        normal_geometry = reference_control_geometry(normal)
         require({601, 602, 603, 604, 605, 606, 607, 609, 610, 611, 619}
                 <= {row["id"] for row in normal}, "References window is missing native controls.")
         result = {"launched": True, "pid": process.pid, "class": text(ref, True), "title": text(ref),
-                  "normalControls": normal, "captures": [capture(ref, evidence / "references-normal.bmp")],
+                  "normalControls": normal, "normalGeometry": normal_geometry,
+                  "captures": [capture(ref, evidence / "references-normal.bmp")],
                   "scope": "Automated Win32 launch, References command, controls, resize and pixel capture; human usability acceptance remains separate."}
         dpi = user.GetDpiForWindow(ref) or 96
         result["dpi"] = dpi
@@ -631,26 +664,36 @@ def gui_smoke(root, evidence):
                 "Native reference window resize failed.")
         time.sleep(.3)
         result["minimumControls"] = controls(ref)
+        result["minimumGeometry"] = reference_control_geometry(result["minimumControls"])
+        progress("minimum References geometry checked", geometry=result["minimumGeometry"],
+                 controls=result["minimumControls"])
         result["captures"].append(capture(ref, evidence / "references-minimum.bmp"))
         # Send an ordinary right-arrow key to the real native tab control. It
         # generates its own in-process notification; never pass cross-process
         # pointers through WM_NOTIFY or list-view messages.
         tab = user.GetDlgItem(ref, 601)
         progress("select Downloaded tab")
-        send(tab, 0x0100, 0x27, 0)  # WM_KEYDOWN, VK_RIGHT
-        send(tab, 0x0101, 0x27, 0)
+        # Queue normal key input on the target UI thread. Synchronously sending
+        # a key from another process can deadlock focus/notification handling.
+        require(user.PostMessageW(tab, 0x0100, 0x27, 1),
+                "Could not queue the native tab key-down event.")  # WM_KEYDOWN, VK_RIGHT
+        require(user.PostMessageW(tab, 0x0101, 0x27, 0xC0000001),
+                "Could not queue the native tab key-up event.")
         deadline = time.monotonic() + 15
         while time.monotonic() < deadline:
+            local_list = user.GetDlgItem(ref, 612)
+            rows = send(local_list, 0x1004, 0, 0)  # LVM_GETITEMCOUNT; also proves UI responsiveness
             local_controls = controls(ref)
             visible = {row["id"] for row in local_controls}
-            local_list = user.GetDlgItem(ref, 612)
-            rows = send(local_list, 0x1004, 0, 0)  # LVM_GETITEMCOUNT
             if {612, 613, 614, 615} <= visible and rows >= 5:
                 break
             time.sleep(.1)
+        progress("inspect Downloaded tab", selectedTab=send(tab, 0x130B, 0, 0),
+                 rows=rows, controls=local_controls)  # TCM_GETCURSEL
         require({612, 613, 614, 615} <= visible and rows >= 5,
                 "Downloaded native tab did not show the five local reference products.")
         result["downloadedControls"] = local_controls
+        result["downloadedGeometry"] = reference_control_geometry(local_controls, local=True)
         result["downloadedRows"] = rows
         result["captures"].append(capture(ref, evidence / "references-downloaded-minimum.bmp"))
         progress("close References and desktop")

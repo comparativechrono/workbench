@@ -1401,7 +1401,13 @@ class Workspace {
         L"your current workspace, then Use for input."
       : L"Ensembl archive · release-pinned genomes and annotations. Release 116 is the final "
         L"classic release; newer Ensembl data is not included in this provider.");
-    const int available = std::max(240, h - 382), speciesHeight = available * 2 / 5,
+    // Reserve the details panel and two visible gaps before sizing the lists.
+    // Independent bottom offsets previously overlapped details and destination
+    // controls by 15 logical pixels, including at the minimum window size.
+    const int destinationTop = h - 119, detailsHeight = 76,
+              onlineDetailsTop = destinationTop - 12 - detailsHeight,
+              available = std::max(0, onlineDetailsTop - 12 - 190),
+              speciesHeight = available * 2 / 5,
               filesTop = 190 + speciesHeight, filesHeight = available - speciesHeight;
     put(refReleaseLabel, 18, 107, 56, 28);
     put(refRelease, 78, 104, 84, 250);
@@ -1411,7 +1417,7 @@ class Workspace {
     put(refDiscover, 18, 154 + speciesHeight, 132, 30);
     put(refFiles, 18, filesTop, w - 36, filesHeight);
     put(refLocal, 18, 104, w - 36, h - 360);
-    put(refDetails, 18, h - 180, w - 36, 76);
+    put(refDetails, 18, onlineDetailsTop, w - 36, detailsHeight);
     if (local) {
       put(refDetails, 18, h - 244, w - 36, 114);
       put(refTargetLabel, 18, h - 116, 116, 30);
@@ -1419,10 +1425,10 @@ class Workspace {
       put(refUse, w - 282, h - 119, 128, 32);
       put(refOpen, w - 142, h - 119, 124, 32);
     } else {
-      put(refDestinationLabel, 18, h - 116, 66, 30);
-      put(refDestination, 88, h - 119, w - 400, 32);
-      put(refBrowse, w - 300, h - 119, 128, 32);
-      put(refDownload, w - 160, h - 119, 142, 32);
+      put(refDestinationLabel, 18, destinationTop + 3, 66, 30);
+      put(refDestination, 88, destinationTop, w - 400, 32);
+      put(refBrowse, w - 300, destinationTop, 128, 32);
+      put(refDownload, w - 160, destinationTop, 142, 32);
     }
     put(refNotice, 18, h - 74, w - 278, 50);
     put(refCancel, w - 252, h - 74, 128, 32);

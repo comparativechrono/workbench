@@ -1,0 +1,211 @@
+{
+  "schema": 1,
+  "success": false,
+  "startedUtc": "2026-10-05T10:17:24.534138+00:00",
+  "platform": "Windows-2022Server-10.0.20348-SP0",
+  "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+  "appRoot": "D:\\a\\_temp\\ordinary\\native-workbench",
+  "nativeWindowsHost": true,
+  "nativeWindowsExecuted": true,
+  "sourceCommit": "9543ae5030ee0ec42e404d251b67b6b1e1af4de6",
+  "assetSha256": "8314887d482184afac1b196f4a19d023d5abf2584dba6cedcb63a2283ce5e705",
+  "assetName": "native-workbench-0.7.0-starter-windows.zip",
+  "releaseTag": "app-v0.7.0-rc1",
+  "gateSha256": "1fcebee9b4df988367b24fb0c5493ab6bf965029d95160f9c59b4d0c10406101",
+  "checks": [
+    "Live release-pinned yeast search and five-product discovery.",
+    "Cancellation after transferred bytes removed only its partial download and published no reference.",
+    "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+    "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+    "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods.",
+    "Installed application and starter pack integrity checks passed after reference use.",
+    "Native 0.6.0-to-0.7.0 core migration and idempotent repeat preserved optional packs, saved pins, references and results; updated private host reused them offline."
+  ],
+  "skips": [],
+  "appFiles": {
+    "workspace\\app_version.py": "7cd8330315eed08d904bbf3e5eea2a132c25b22f364704b3196696ea223f9c28",
+    "workspace\\catalog.py": "267cd2e62fac179b48ea9b1f96bacade7237120a8dfa7500cd5684d202b7a196",
+    "workspace\\core_checks.py": "a206e5f22430c38e5320f76a17b8b288db4f7ffcd326299ae16bb149a49150de",
+    "workspace\\desktop_host.py": "d7c23c587d8562b5c604b60278f20e11c2db5967a97aff183ebd38b4c88bdfe3",
+    "workspace\\desktop_model.py": "5434823bb7b0d8dd578be425f8f1b2674e56c4107e633a655391482f6033b327",
+    "workspace\\engine.py": "e88dd658fe3a764acbb25a6ef53d79aa8849099957b69b29dcf800297dff97dd",
+    "workspace\\example.py": "fb558de8dc3f49f68550af3e08d768e8a99c5cd9e8d466ca357dcecc3dd699b3",
+    "workspace\\pack_checks.py": "5d17959b283524ce8115dbe6dbf904a9cc62b8ca6cfa545b25dd0b89c1f9df72",
+    "workspace\\pack_manager.py": "6eb3f3a1064b8754ea5e6d1f0fddda2f2a23f64776473689b125f58445435bc9",
+    "workspace\\pack_security.py": "2d1fa4a4267f5cecb0d583c7b43fc59dc8645125c59e3db69c4d6fa307ff6cc0",
+    "workspace\\reference_manager.py": "3df9269e3bd89a822a18c323af36f474887b185cb261399f55409354240d2bd9",
+    "workspace\\reference_provenance.py": "9175cbb21fd983816a1b8b0effdae09ebaa11990fccdc06e4446c13f56ac5971",
+    "workspace\\reference_provider.py": "30f160e22d2f8a89bac4f1d52bf4ec6709a7f331f1bb6000e78707e559fdc816",
+    "workspace\\service.py": "ab343eae8990c844d9db85bc7c2d4bea33e1b3fe4e20714fd91786cd25fcde22",
+    "workspace\\verify_installation.py": "1e2a11141609f23d4e6b5d771d01ab67199a4839f36f2174bfa2f10b70c0f23d"
+  },
+  "phase": "gui: launch bounded 180-second native smoke",
+  "passed": 7,
+  "updatedUtc": "2026-10-05T10:17:38.646760+00:00",
+  "appVersion": "0.7.0",
+  "cancelAtBytes": 1048576,
+  "downloads": [
+    {
+      "id": "genome",
+      "bytes": 12360704,
+      "sha256": "35cc97fccb91762c7a1f0f71b4adb1037b143d48b63fbd3b3f8bad45e5afa44c",
+      "compressed_bytes": 3784201,
+      "compressed_sha256": "a9953096d6a041a01a4cb5352b0232ee9373bf4c050fb23cb7ae673b2e1bb528",
+      "independentPinnedIdentity": true
+    },
+    {
+      "id": "annotation",
+      "bytes": 10463408,
+      "sha256": "8c43c98a3a0db24c9e53fd9d460f096c48de0eabefd955fd25d044c948692623",
+      "compressed_bytes": 595453,
+      "compressed_sha256": "253bd4013785b3c85a6a488bd541c12d8264aa4989046c3530d0d9ea2ecc931e",
+      "independentPinnedIdentity": true
+    },
+    {
+      "id": "cdna",
+      "bytes": 11714100,
+      "sha256": "0a60e3a655949edbed2e774deae38b896e78e623a45809eafe66d15f7062cf4d",
+      "compressed_bytes": 3806426,
+      "compressed_sha256": "3cc5b6bb7ff166cffac5c45317dad7052d06431f43f709ed14b33779702dc6a4",
+      "independentPinnedIdentity": true
+    },
+    {
+      "id": "ncrna",
+      "bytes": 205371,
+      "sha256": "e875aea40e6bfbf9811b73f30a459439fda48d5165fbaea4c2e4a7859e9c3753",
+      "compressed_bytes": 35424,
+      "compressed_sha256": "096064f75fc4c8eaf2845e52dd6d56e1e398f8da434abd8436cfaa2d71a3f604",
+      "independentPinnedIdentity": true
+    },
+    {
+      "id": "protein",
+      "bytes": 5873944,
+      "sha256": "fec10d61996147cbc29ed4587ed0bdeb4e4f5576d66896400b226f2d2d4815a4",
+      "compressed_bytes": 2700059,
+      "compressed_sha256": "67ae76c720e52cec167378ec2b8cb5c5929360fc30de31abb37ae1035ef8455c",
+      "independentPinnedIdentity": true
+    }
+  ],
+  "recordId": "3d201a72ffe54f59adbfb317788d22dc",
+  "referenceReceiptSha256": "989795884bb5dfb859f03c1f8f6376cbc5e7de34c39f17c40715c22e835c2d31",
+  "nativeIndex": {
+    "contigs": 17,
+    "bases": 12157105,
+    "sha256": "65163e1e9c8cb7b63f43befd8294019b11fba0c18dd37c801e9d356e71e391c3",
+    "dictionary": [
+      [
+        "I",
+        230218
+      ],
+      [
+        "II",
+        813184
+      ],
+      [
+        "III",
+        316620
+      ],
+      [
+        "IV",
+        1531933
+      ],
+      [
+        "V",
+        576874
+      ],
+      [
+        "VI",
+        270161
+      ],
+      [
+        "VII",
+        1090940
+      ],
+      [
+        "VIII",
+        562643
+      ],
+      [
+        "IX",
+        439888
+      ],
+      [
+        "X",
+        745751
+      ],
+      [
+        "XI",
+        666816
+      ],
+      [
+        "XII",
+        1078177
+      ],
+      [
+        "XIII",
+        924431
+      ],
+      [
+        "XIV",
+        784333
+      ],
+      [
+        "XV",
+        1091291
+      ],
+      [
+        "XVI",
+        948066
+      ],
+      [
+        "Mito",
+        85779
+      ]
+    ]
+  },
+  "installation": {
+    "passed": 7,
+    "failed": 0
+  },
+  "coreUpdate": {
+    "success": true,
+    "baseVersion": "0.6.0",
+    "targetVersion": "0.7.0",
+    "baseArchiveSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+    "updateArchiveSha256": "49b50acbb8c89a706fb99963f63f1fc87c008dcc162b82c86f44976739116496",
+    "optionalPackArchiveSha256": "2dd05fece8deb2b0178d8b1bc2b6830f175b3fbc2f5a4d48f9c9023cbfe6775b",
+    "scope": "Actual native Windows updater CLI using its private runtime; native folder-picker interaction is not exercised.",
+    "nativeOptionalPackImport": true,
+    "install": {
+      "status": "installed",
+      "version": "0.7.0",
+      "migration": false,
+      "files_verified": 68,
+      "removed_files": 0,
+      "backup": "D:\\a\\_temp\\ordinary\\update target\\native-workbench\\updates\\core-0.7.0-20261005-101737-9e7a113f\\backup",
+      "packs_changed": false,
+      "source_and_evidence_preserved": true
+    },
+    "repeat": {
+      "status": "already-installed",
+      "version": "0.7.0",
+      "files_verified": 68
+    },
+    "preservationChanges": {},
+    "preservationAdditions": {
+      "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+    },
+    "preservedFiles": 187,
+    "optionalPin": {
+      "packId": "reads",
+      "packVersion": "0.4.0",
+      "manifestSha256": "65fc3065fb382ffdd13c4b94fa834b26531e63eb87858d84a4c173e567fb73c0"
+    },
+    "coreManifestSha256": "96bb4849bfe5ea7e4aa36fc221ea50bfdabd07510fa3cf2502c82219d800e14f",
+    "offlineRestart": true
+  },
+  "error": "Native GUI smoke failed: {\"success\": false, \"error\": \"Native GUI message timed out or failed: message=0x100 hwnd=66084 winerror=1460\", \"traceback\": \"Traceback (most recent call last):\\n  File \\\"D:\\\\a\\\\workbench\\\\workbench\\\\scripts\\\\check_references_windows.py\\\", line 725, in main\\n    result[\\\"gui\\\"] = gui_smoke(root, evidence)\\n                    ~~~~~~~~~^^^^^^^^^^^^^^^^\\n  File \\\"D:\\\\a\\\\workbench\\\\workbench\\\\scripts\\\\check_references_windows.py\\\", line 640, in gui_smoke\\n    send(tab, 0x0100, 0x27, 0)  # WM_KEYDOWN, VK_RIGHT\\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"D:\\\\a\\\\workbench\\\\workbench\\\\scripts\\\\check_references_windows.py\\\", line 526, in send\\n    require(user.SendMessageTimeoutW(hwnd, message, wparam, lparam, 0x0003, 5000,\\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n                                    ctypes.byref(result)),\\n                                    ^^^^^^^^^^^^^^^^^^^^^^\\n            \\\"Native GUI message timed out or failed: message=\\\" + hex(message) +\\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n            \\\" hwnd=\\\" + str(hwnd) + \\\" winerror=\\\" + str(ctypes.get_last_error()))\\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"D:\\\\a\\\\workbench\\\\workbench\\\\scripts\\\\check_references_windows.py\\\", line 47, in require\\n    raise AssertionError(message)\\nAssertionError: Native GUI message timed out or failed: message=0x100 hwnd=66084 winerror=1460\\n\"}",
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_references_windows.py\", line 762, in main\n    report[\"gui\"] = gui_smoke_bounded(root, evidence)\n                    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_references_windows.py\", line 695, in gui_smoke_bounded\n    require(process.returncode == 0 and result.get(\"success\"),\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n            \"Native GUI smoke failed: \" + json.dumps(result))\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_references_windows.py\", line 47, in require\n    raise AssertionError(message)\nAssertionError: Native GUI smoke failed: {\"success\": false, \"error\": \"Native GUI message timed out or failed: message=0x100 hwnd=66084 winerror=1460\", \"traceback\": \"Traceback (most recent call last):\\n  File \\\"D:\\\\a\\\\workbench\\\\workbench\\\\scripts\\\\check_references_windows.py\\\", line 725, in main\\n    result[\\\"gui\\\"] = gui_smoke(root, evidence)\\n                    ~~~~~~~~~^^^^^^^^^^^^^^^^\\n  File \\\"D:\\\\a\\\\workbench\\\\workbench\\\\scripts\\\\check_references_windows.py\\\", line 640, in gui_smoke\\n    send(tab, 0x0100, 0x27, 0)  # WM_KEYDOWN, VK_RIGHT\\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"D:\\\\a\\\\workbench\\\\workbench\\\\scripts\\\\check_references_windows.py\\\", line 526, in send\\n    require(user.SendMessageTimeoutW(hwnd, message, wparam, lparam, 0x0003, 5000,\\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n                                    ctypes.byref(result)),\\n                                    ^^^^^^^^^^^^^^^^^^^^^^\\n            \\\"Native GUI message timed out or failed: message=\\\" + hex(message) +\\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n            \\\" hwnd=\\\" + str(hwnd) + \\\" winerror=\\\" + str(ctypes.get_last_error()))\\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"D:\\\\a\\\\workbench\\\\workbench\\\\scripts\\\\check_references_windows.py\\\", line 47, in require\\n    raise AssertionError(message)\\nAssertionError: Native GUI message timed out or failed: message=0x100 hwnd=66084 winerror=1460\\n\"}\n",
+  "completedUtc": "2026-10-05T10:17:45.015708+00:00",
+  "workflowRun": "https://github.com/comparativechrono/workbench/actions/runs/37295599791"
+}
