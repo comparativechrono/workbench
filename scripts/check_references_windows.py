@@ -189,7 +189,11 @@ def run_reference_checks(root, evidence, report, args):
     try:
         initial = host.call("init")
         report["appVersion"] = initial["app_version"]
-        require(initial["app_version"] == "0.7.0", "This gate targets the 0.7.0 application contract.")
+        manifest_version = json.loads((root / "manifest.json").read_text(encoding="utf-8"))["version"]
+        require(manifest_version in {"0.7.0", "0.8.0"},
+                "This gate supports the reviewed 0.7.0 and 0.8.0 reference contracts only.")
+        require(initial["app_version"] == manifest_version,
+                "The private host version differs from the exact installed application manifest.")
         state = host.call("references/list")
         old_ids = {record["id"] for record in state["local"]}
         host.call("references/search", {"release": 116, "query": "saccharomyces"})
@@ -465,7 +469,7 @@ def run_update_checks(root, evidence, report, args):
     migration.update(success=True, preservedFiles=len(preserved), optionalPin=optional_pin,
                      coreManifestSha256=sha256(base / "manifest.json"), offlineRestart=True)
     write_json(evidence / "native-core-update.json", migration)
-    report["checks"].append("Native 0.6.0-to-0.7.0 core migration and idempotent repeat preserved optional packs, saved pins, references and results; updated private host reused them offline.")
+    report["checks"].append("Native 0.6.0-to-" + report["appVersion"] + " core migration and idempotent repeat preserved optional packs, saved pins, references and results; updated private host reused them offline.")
     checkpoint(report, args, report["checks"][-1])
 
 

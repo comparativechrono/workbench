@@ -280,13 +280,27 @@ def host_contracts(root, evidence):
         first_id = first["selected"]
         second = host.call("model", {"action": "add_tool", "payload": {"toolId": "bam/sort"}})
         second_id = second["selected"]
+        compatible_preview = host.call("workspace/connection-targets", {"ref": first_id + "::sorted"})
+        require({"nodeId": second_id, "portId": "alignment"} in compatible_preview["targets"],
+                "Compatible starter output was absent from the native port preview.")
         connected = host.call("model", {"action": "connect", "payload": {
             "nodeId": second_id, "portId": "alignment", "refs": [first_id + "::sorted"]}})
         require(connected["graph"]["nodes"][1]["inputs"]["alignment"] == [first_id + "::sorted"],
                 "Compatible connection was not installed.")
-        before = connected["graph"]
+        cycle_preview = host.call("workspace/connection-targets", {"ref": second_id + "::sorted"})
+        require({"nodeId": first_id, "portId": "alignment"} not in cycle_preview["targets"],
+                "Native port preview offered a graph cycle.")
+        reference_node = host.call("model", {"action": "add_tool", "payload": {"toolId": "bam/reference-index"}})
+        reference_ref = reference_node["selected"] + "::reference"
+        type_preview = host.call("workspace/connection-targets", {"ref": reference_ref})
+        require({"nodeId": first_id, "portId": "alignment"} not in type_preview["targets"],
+                "Native port preview offered a FASTA reference to an alignment input.")
+        before = reference_node["graph"]
         rejected = []
-        for label, payload in [("cycle", {"nodeId": first_id, "portId": "alignment", "refs": [second_id + "::sorted"]})]:
+        for label, payload in [
+            ("cycle", {"nodeId": first_id, "portId": "alignment", "refs": [second_id + "::sorted"]}),
+            ("type", {"nodeId": first_id, "portId": "alignment", "refs": [reference_ref]}),
+        ]:
             try:
                 host.call("model", {"action": "connect", "payload": payload})
             except ValueError as exc:
@@ -304,8 +318,10 @@ def host_contracts(root, evidence):
         require(restored_workflow["graph"] == before, "Workflow lost after standalone selection.")
         return {"networkSocketOperationsDenied": True, "standaloneGraph": standalone["graph"],
                 "workflowGraph": before, "rejected": rejected,
+                "portPreviews": {"compatible": compatible_preview, "cycle": cycle_preview, "type": type_preview},
                 "checks": ["Default standalone mode", "Independent preserved tool and workflow graphs",
-                           "Compatible graph edge", "Atomic cycle rejection", "Per-tool settings and input retention"]}
+                           "Compatible graph edge", "Bounded native compatibility preview",
+                           "Atomic cycle and semantic type rejection", "Per-tool settings and input retention"]}
     finally:
         host.close()
 
