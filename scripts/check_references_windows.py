@@ -395,7 +395,20 @@ def run_update_checks(root, evidence, report, args):
     after = {path.relative_to(base).as_posix(): sha256(path)
              for folder in ("packs", "user-data", "results")
              for path in sorted((base / folder).rglob("*")) if path.is_file()}
-    require(after == preserved, "Core migration changed an installed pack, saved setting, reference file or result.")
+    # The legacy coordination lock is created by every updater, including the
+    # released 0.6 implementation. It is not an analysis/settings replacement.
+    # All pre-existing files must remain byte-identical; the only permitted new
+    # file is that exact one-byte lock. Retain differences for actionable CI.
+    changes = {name: {"before": digest, "after": after.get(name)}
+               for name, digest in preserved.items() if after.get(name) != digest}
+    additions = {name: digest for name, digest in after.items() if name not in preserved}
+    migration["preservationChanges"] = changes
+    migration["preservationAdditions"] = additions
+    require(not changes and all(name == "user-data/session.lock" and
+                                digest == hashlib.sha256(b"\0").hexdigest()
+                                for name, digest in additions.items()),
+            "Core migration changed user files or added unexpected data: " +
+            json.dumps({"changed": changes, "added": additions}))
     host = PrivateHost(base, evidence, "updated-offline-host", offline=True)
     try:
         state = host.call("init")
