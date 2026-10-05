@@ -199,7 +199,11 @@ class NativeUI:
         hwnd = self.child(identity)
         self.wait("native button " + str(identity), lambda:
                   hwnd and self.user.IsWindowVisible(hwnd) and self.user.IsWindowEnabled(hwnd))
-        self.post(hwnd, 0x00F5)
+        # Use a real pointer click for navigation too. A BM_CLICK between two
+        # physical clicks on the same library row leaves Windows' double-click
+        # sequence intact and does not reproduce a person's mode switch.
+        left, top, right, bottom = self.bounds(hwnd)
+        self.click_at((left + right) // 2, (top + bottom) // 2)
 
     def key(self, hwnd, code):
         self.post(hwnd, 0x0100, code, 1)
