@@ -23,7 +23,7 @@ continuation worked on `finish-reference-release`, another writer published
 failed the GUI gate in both path layouts. The new capture proves the original
 15-pixel overlap is corrected (+12-pixel gap), but a blocking “Expected a JSON
 array” modal prevents the library from loading. Seven backend/native updater
-checks passed per path for RC2. No final `app-v0.7.0` existed at the latest audit.
+checks passed per path for RC2. RC3 was subsequently published independently at 13:37:17Z; its native gate was queued at the coordination checkpoint and its bytes are not accepted by this branch. No final `app-v0.7.0` existed at that audit.
 
 This branch corrects premature species-array access and the null-discovery reset
 path, and expands native GUI acceptance. The desktop cross-compiles; this patch

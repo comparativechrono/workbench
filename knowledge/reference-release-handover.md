@@ -132,3 +132,17 @@ the captures and results are reviewed, and every final public asset is downloade
 and verified. Preserve final reports separately from source companions whose
 creation-time status is pending. Record any unavailable GUI, folder-picker,
 high-DPI, Unicode/long-path or institutional-network check explicitly.
+
+### Latest coordination checkpoint
+
+After preserving the RC2 diagnosis, the independent writer published
+[RC3](https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0-rc3)
+from `57d635370a1cd34dd1549aff95a2feba7faeeb74` at 13:37:17Z. Its release notes
+claim both empty-state fixes; this continuation has not independently verified
+those new package bytes. Native run
+[37318450359](https://github.com/comparativechrono/workbench/actions/runs/37318450359)
+was queued at inspection. It is pending, not passed. The
+[metadata checkpoint](evidence/reference-rc3-coordination-checkpoint-2026-10-05.json)
+records exact advertised identities. Further publication requires coordination
+with that active writer; our corrections and expanded gate remain on
+`finish-reference-release`. No completed final 0.7.0 is claimed.

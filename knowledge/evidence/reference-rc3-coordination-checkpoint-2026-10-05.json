@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "audited_on": "2026-10-05",
+  "publication_source": "Independent remote writer, not this continuation",
+  "tag": "app-v0.7.0-rc3",
+  "source_commit": "57d635370a1cd34dd1549aff95a2feba7faeeb74",
+  "published_at": "2026-10-05T13:37:17Z",
+  "release_url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0-rc3",
+  "native_run": "https://github.com/comparativechrono/workbench/actions/runs/37318450359",
+  "status_at_inspection": "queued; not counted as passed",
+  "artifact_verification": "Release metadata only; these RC3 bytes have not been independently downloaded or tested in this continuation.",
+  "assets": [
+    {
+      "name": "BUILD-VALIDATION.json",
+      "bytes": 12737,
+      "github_digest": "sha256:def86d4053e506d5376f69da292acf5bb4a517683f7b14b107cfde02be8a3ad6"
+    },
+    {
+      "name": "native-workbench-0.7.0-source.zip",
+      "bytes": 46002233,
+      "github_digest": "sha256:4b4993d710430c735fff69f2655781711abcda601833de1e481411913b8c164e"
+    },
+    {
+      "name": "native-workbench-0.7.0-starter-windows.zip",
+      "bytes": 16916149,
+      "github_digest": "sha256:3d5b79924e5edc69efb7d4934696f6568377b63c312a666cc37e05b8707cf1ba"
+    },
+    {
+      "name": "native-workbench-0.7.0-update-from-0.6.0.zip",
+      "bytes": 12830009,
+      "github_digest": "sha256:9c86f8c7cbe7acb8c31cdb7472db815143e7cc63be8fda0113642baee17f1469"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 408,
+      "github_digest": "sha256:396170bc664bff45e60dede293edbe2cae282460ccafedcbb331195ca103c593"
+    }
+  ],
+  "final_release": null
+}
