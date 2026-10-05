@@ -96,6 +96,27 @@
         "github_digest": "sha256:71c241a357ddb7a83f20a968a4459016e0bd19f787a5f7ce89a3c6f9ebf9f3cb",
         "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/WINDOWS-EVIDENCE.zip",
         "independently_downloaded_and_rehashed_on": "2026-10-05"
+      },
+      {
+        "name": "CONCURRENCY-AUDIT.json",
+        "bytes": 11391,
+        "github_digest": "sha256:1f26e85f4c08d613e4eac3a4cc3df326964f2522067d7f6e1a5faa2ccf607c2e",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/CONCURRENCY-AUDIT.json",
+        "independently_downloaded_and_rehashed_on": "2026-10-05"
+      },
+      {
+        "name": "CONCURRENCY-SHA256SUMS.txt",
+        "bytes": 188,
+        "github_digest": "sha256:506be0fa222d8ab0d1c0754be3d9f977eabe313bbefd5ff779ba0677b817a4e3",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/CONCURRENCY-SHA256SUMS.txt",
+        "independently_downloaded_and_rehashed_on": "2026-10-05"
+      },
+      {
+        "name": "CONCURRENCY-WINDOWS-EVIDENCE.zip",
+        "bytes": 761929,
+        "github_digest": "sha256:db00d9f8d27157f2feb12b6e24acf3d30da66b93f0dc5f6f90a7d85d8066dbfb",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/CONCURRENCY-WINDOWS-EVIDENCE.zip",
+        "independently_downloaded_and_rehashed_on": "2026-10-05"
       }
     ],
     "validation": {
@@ -119,7 +140,7 @@
       ],
       "scope": "Live Ensembl yeast five-product discovery/download with pinned compressed/expanded hashes; cancellation; socket-denied local reuse and frozen provenance; native SAMtools 17-contig indexing; installed integrity; native updater CLI preservation/idempotence; actual References search/discover/reset, normal/minimum geometry and Use for input assignment.",
       "limits": [
-        "GUI download/cancel button interactions and the native updater folder picker were not exercised by this automated gate.",
+        "Original release gate omitted GUI Download/Cancel. Post-release run 37339280407 covers those buttons; folder-picker interactions remain untested.",
         "Socket-denied private host is distinct from operating-system firewall enforcement.",
         "96 DPI automated GUI capture/interaction does not establish broad manual usability, high-DPI/multi-monitor, arbitrary Unicode/long paths, institutional proxies, human-genome performance or clinical validity.",
         "Existing optional-pack audits retain their original dates; the application release does not repeat all pack scientific suites."
@@ -147,7 +168,25 @@
       "final_assets_report": "evidence/reference-0.7.0-final-assets-2026-10-05.json",
       "final_assets_report_sha256": "13327174bc9acf7ec10374de46c11d9f4d6f15acdb597155d37170b85a20c838",
       "all_eight_public_assets_verified": true,
-      "evidence_assets_published": true
+      "evidence_assets_published": true,
+      "post_release_concurrency_audit": {
+        "status": "passed",
+        "reconciliation_report": "evidence/reference-concurrency-reconciliation-2026-10-05.json",
+        "original_assets_audit": "evidence/reference-concurrency-assets-audit-2026-10-05.json",
+        "native_report": "evidence/reference-concurrency-windows-2026-10-05.json",
+        "public_supplement_verification": "evidence/reference-concurrency-public-assets-2026-10-05.json",
+        "native_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37339280407",
+        "gate_commit": "ad5b59c06a03d3885bee5416fb47b4835ae9927f",
+        "checks_passed_per_path": 8,
+        "failures_per_path": 0,
+        "skips_per_path": 0,
+        "captures_reviewed": 20,
+        "original_assets_freshly_downloaded": 8,
+        "new_supplements_verified": 3,
+        "current_asset_count": 11,
+        "application_bytes_changed": false,
+        "scope": "Adds actual five-product checkbox selection, typed destination and verified output location, Download/Cancel button cleanup and binding a newly GUI-downloaded genome. Repeats backend live hashes, cancellation after 1 MiB, offline reuse/provenance, native SAMtools, integrity and 0.6.0-to-0.7.0 preservation."
+      }
     }
   },
   "current_packs": [

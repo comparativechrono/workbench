@@ -5,9 +5,10 @@ prerelease at [app-v0.7.0](https://github.com/comparativechrono/workbench/releas
 The exact-final native [run 37320844819](https://github.com/comparativechrono/workbench/actions/runs/37320844819)
 passed all eight checks in both paths, with zero failures or skips, and final
 public downloads are independently verified. Reference discovery/download is
-complete within the documented validation scope. The dated intermediate
-checkpoints below preserve their original scope and failures; the final section
-supersedes their pending-release status.
+complete within the documented validation scope. A later concurrency audit and
+expanded exact-final run also passed; see the reconciliation section below.
+The dated intermediate checkpoints preserve their original scope and failures;
+the completed release and audit supersede their pending status.
 
 ## Recovered repository and release state
 
@@ -238,8 +239,8 @@ The native updater CLI verified 68 target core files, preserved all 187 existing
 pack/settings/reference/result files, repeated idempotently, and reopened the
 updated host offline. Only the expected coordination lock was added.
 
-There is no outstanding implementation or native reference-gate blocker. The
-scope excludes click-through GUI download/cancel, the updater folder picker,
+There is no outstanding implementation or native reference-gate blocker. This
+original run's scope excludes click-through GUI download/cancel, the updater folder picker,
 whole-desktop/manual managed-PC acceptance, high-DPI/multi-monitor operation,
 Unicode/long paths, institutional proxies and human-genome performance. The
 network-denied private host was not an operating-system firewall test.
@@ -259,9 +260,82 @@ outstanding release-publication or reference-feature blockers.
 
 This release follows `release/reference-0.7.0-completion` from the resumed
 `main` baseline `5338853`. A concurrent independent branch
-`finish-reference-release` at `4eef03ddf2ad6b0426e054171c8aafe9e752e73e` also
-identified the null-state issue. Its report explicitly recorded blocked release,
-no publication and unrun native validation for its own patch, and preserved this
-stream's rc2. That separate patch was **not merged or used** in the released
-application. The branch is preserved; its report must not be mistaken for the
-status or provenance of this release.
+`finish-reference-release` independently identified the null-state issue in
+`4eef03ddf2ad6b0426e054171c8aafe9e752e73e`. Its report recorded blocked publication
+and unrun native validation for its own patch, and preserved this stream's rc2.
+The branch subsequently reached
+`5a5455647381bd93272326d0bd97eadbef92028d`: that documentation-only checkpoint at
+13:41:42 UTC observed this stream's rc3 publication before the later final
+validation and release. Its pending status is historical. The separate desktop
+patch was **not merged or used** in the released application; the released fix
+already covers those cases and adds absent-file/download-selection guards.
+
+## Concurrent work reconciliation, 2026-10-05
+
+The follow-up audit started with `main` at
+`0993e856506150127d345d040d80f810c8cc10f7` and the independent branch at `5a54556`.
+The [initial state record](evidence/reference-concurrency-initial-state-2026-10-05.json)
+retains the branch identities, common ancestor, release assets and live workflow
+records. No open pull request or active workflow was present at that checkpoint.
+The independent [run 37316644535](https://github.com/comparativechrono/workbench/actions/runs/37316644535)
+stopped at its existing-rc2 protection before building or publishing; its native
+job was skipped. It did not overwrite the candidate or final assets.
+
+All **eight public final assets were downloaded again** and compared with their
+recorded bytes and current GitHub digests. The
+[fresh artifact audit](evidence/reference-concurrency-assets-audit-2026-10-05.json)
+passed 57 assertions, including source/core/updater inventories, source-to-tag
+correspondence, checksum manifests and the retained final Windows evidence.
+The original final report, archive identities and twelve capture hashes agree.
+This is fresh byte/evidence verification; inspecting the old native report does
+not count as rerunning Windows.
+
+Only useful additional GUI coverage was ported from the independent stream.
+Commit `ad5b59c06a03d3885bee5416fb47b4835ae9927f` on
+`audit/reference-concurrency-20261005` extends the existing native gate with
+actual file checkboxes, typed destination, Download and Cancel interactions,
+while retaining current diagnostics and input-binding checks. The independent
+branch's obsolete rc2-specific publication workflow and stale release-status
+documents were not merged. Both development histories remain available. No
+application, pack, tag or published archive bytes changed.
+
+The expanded exact-final [run 37339280407](https://github.com/comparativechrono/workbench/actions/runs/37339280407)
+at gate commit `ad5b59c` passed **eight checks per path, zero failures and zero
+skips** against the unchanged final starter and updater. The
+[fresh native audit](evidence/reference-concurrency-windows-2026-10-05.json)
+records 43 independent evidence checks and all twenty hash-verified, visually
+reviewed captures. This is new Windows execution, separate from the earlier
+release acceptance.
+
+The native UI selected all five products with their actual checkboxes, typed a
+destination containing spaces, downloaded through **Download selected**, and
+verified that the five exact files were published under that destination. It
+preserved existing reference files and bound both existing and newly downloaded
+references through **Use for input**. A separate GUI attempt clicked **Cancel**
+and verified no ready library entry or partial output was published. That GUI
+case cancelled early; the backend case separately cancelled after at least
+1 MiB transferred. The run repeated the existing live hash, offline reuse,
+provenance, native SAMtools and 0.6.0-to-0.7.0 preservation checks.
+
+The [reconciliation record](evidence/reference-concurrency-reconciliation-2026-10-05.json)
+connects the branch decisions, fresh public downloads and expanded native
+evidence. The original eight release assets and their reports remain unchanged;
+supplemental audit evidence is separate. Application version remains **0.7.0**.
+No concurrency-related implementation, validation or release blocker remains.
+The remaining scope limits are folder-picker interactions, whole-desktop/manual
+managed-PC acceptance, high-DPI/multi-monitor operation, Unicode/long paths,
+institutional proxies and human-genome performance. Socket-denied host evidence
+does not establish an operating-system firewall test.
+
+The existing release now also supplies
+[CONCURRENCY-AUDIT.json](https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/CONCURRENCY-AUDIT.json),
+[CONCURRENCY-WINDOWS-EVIDENCE.zip](https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/CONCURRENCY-WINDOWS-EVIDENCE.zip)
+and [CONCURRENCY-SHA256SUMS.txt](https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/CONCURRENCY-SHA256SUMS.txt).
+The bundle retains both original new Windows artifact ZIPs, all twenty captures,
+reports, logs, receipts, methods, the exact gate and the independent audits.
+All three supplemental public downloads match the frozen bytes and GitHub
+digests, and the original eight asset identities remain unchanged; see the
+[post-publication verification](evidence/reference-concurrency-public-assets-2026-10-05.json).
+The release therefore has eleven explicit assets plus GitHub's generated source
+links. The gate and reconciliation records are integrated on `main`; the
+independent branch remains preserved at its audited commit.

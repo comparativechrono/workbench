@@ -1,0 +1,194 @@
+{
+  "schema": 1,
+  "inspected_at": "2026-10-05T16:08:37.473Z",
+  "repository": "comparativechrono/workbench",
+  "branches": [
+    {
+      "name": "build/blast-native",
+      "commit": "1a23b8506bcaa1c0d923d82f2bb91b918af2df54"
+    },
+    {
+      "name": "finish-reference-release",
+      "commit": "5a5455647381bd93272326d0bd97eadbef92028d"
+    },
+    {
+      "name": "main",
+      "commit": "0993e856506150127d345d040d80f810c8cc10f7"
+    },
+    {
+      "name": "release/reference-0.7.0-completion",
+      "commit": "0993e856506150127d345d040d80f810c8cc10f7"
+    }
+  ],
+  "common_ancestor": "5338853ba3b69438fc36c1b9dcd3ad89d6bbcde4",
+  "open_pull_requests": 0,
+  "active_runs": [],
+  "competing_workflow": {
+    "id": 37316644535,
+    "url": "https://github.com/comparativechrono/workbench/actions/runs/37316644535",
+    "commit": "adbb2c28270d1c6f8ac3d6d9d9d56042c1df163a",
+    "jobs": [
+      {
+        "name": "package",
+        "status": "completed",
+        "conclusion": "failure",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the exact candidate source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Refuse to replace an existing candidate or tag",
+            "conclusion": "failure"
+          },
+          {
+            "name": "Recover and verify pinned application and compiler inputs",
+            "conclusion": "skipped"
+          },
+          {
+            "name": "Check source, compile native components and package the candidate",
+            "conclusion": "skipped"
+          },
+          {
+            "name": "Publish only new immutable candidate assets and verify public downloads",
+            "conclusion": "skipped"
+          },
+          {
+            "name": "Retain build reports, checks and exact candidate artifacts",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the exact candidate source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "name": "native",
+        "status": "completed",
+        "conclusion": "skipped",
+        "steps": []
+      }
+    ],
+    "failure_log_line": "2026-10-05T13:25:20.0205970Z RC2 already exists, including possibly a retained draft. Do not rebuild or replace it. Re-run failed Windows jobs only, or review and assign a new candidate identity.",
+    "published_assets": false
+  },
+  "final_release": {
+    "id": 403758756,
+    "tag": "app-v0.7.0",
+    "published_at": "2026-10-05T13:54:17Z",
+    "url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0",
+    "draft": false,
+    "prerelease": true,
+    "assets": [
+      {
+        "id": 612700837,
+        "name": "BUILD-VALIDATION.json",
+        "bytes": 12737,
+        "digest": "sha256:def86d4053e506d5376f69da292acf5bb4a517683f7b14b107cfde02be8a3ad6",
+        "created_at": "2026-10-05T13:45:39Z",
+        "updated_at": "2026-10-05T13:45:39Z",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/BUILD-VALIDATION.json"
+      },
+      {
+        "id": 612743198,
+        "name": "EVIDENCE-SHA256SUMS.txt",
+        "bytes": 666,
+        "digest": "sha256:0ba99388f185309f2424d2477a6464f0efc776994c56b52f9b8318caa545430e",
+        "created_at": "2026-10-05T14:03:44Z",
+        "updated_at": "2026-10-05T14:03:44Z",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/EVIDENCE-SHA256SUMS.txt"
+      },
+      {
+        "id": 612700486,
+        "name": "native-workbench-0.7.0-source.zip",
+        "bytes": 46002233,
+        "digest": "sha256:4b4993d710430c735fff69f2655781711abcda601833de1e481411913b8c164e",
+        "created_at": "2026-10-05T13:45:33Z",
+        "updated_at": "2026-10-05T13:45:36Z",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/native-workbench-0.7.0-source.zip"
+      },
+      {
+        "id": 612700702,
+        "name": "native-workbench-0.7.0-starter-windows.zip",
+        "bytes": 16916149,
+        "digest": "sha256:3d5b79924e5edc69efb7d4934696f6568377b63c312a666cc37e05b8707cf1ba",
+        "created_at": "2026-10-05T13:45:36Z",
+        "updated_at": "2026-10-05T13:45:38Z",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/native-workbench-0.7.0-starter-windows.zip"
+      },
+      {
+        "id": 612700796,
+        "name": "native-workbench-0.7.0-update-from-0.6.0.zip",
+        "bytes": 12830009,
+        "digest": "sha256:9c86f8c7cbe7acb8c31cdb7472db815143e7cc63be8fda0113642baee17f1469",
+        "created_at": "2026-10-05T13:45:38Z",
+        "updated_at": "2026-10-05T13:45:39Z",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/native-workbench-0.7.0-update-from-0.6.0.zip"
+      },
+      {
+        "id": 612743142,
+        "name": "RELEASE-VALIDATION.json",
+        "bytes": 21786,
+        "digest": "sha256:fcabeacde324e9273a6a158ea32f18efde09898f9b158573b906abe6d2625877",
+        "created_at": "2026-10-05T14:03:43Z",
+        "updated_at": "2026-10-05T14:03:43Z",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/RELEASE-VALIDATION.json"
+      },
+      {
+        "id": 612700848,
+        "name": "SHA256SUMS.txt",
+        "bytes": 408,
+        "digest": "sha256:396170bc664bff45e60dede293edbe2cae282460ccafedcbb331195ca103c593",
+        "created_at": "2026-10-05T13:45:39Z",
+        "updated_at": "2026-10-05T13:45:40Z",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/SHA256SUMS.txt"
+      },
+      {
+        "id": 612743172,
+        "name": "WINDOWS-EVIDENCE.zip",
+        "bytes": 473664,
+        "digest": "sha256:71c241a357ddb7a83f20a968a4459016e0bd19f787a5f7ce89a3c6f9ebf9f3cb",
+        "created_at": "2026-10-05T14:03:43Z",
+        "updated_at": "2026-10-05T14:03:44Z",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/WINDOWS-EVIDENCE.zip"
+      }
+    ]
+  },
+  "previous_final_native_run": {
+    "id": 37320844819,
+    "commit": "6c266a58818886c6f4f5287006f20fafc5aadd68",
+    "jobs": [
+      {
+        "name": "native (ordinary)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-05T13:57:35Z",
+        "completed_at": "2026-10-05T13:58:27Z"
+      },
+      {
+        "name": "native (path with spaces)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-05T13:57:35Z",
+        "completed_at": "2026-10-05T13:58:25Z"
+      }
+    ],
+    "scope": "Existing exact-final Windows execution rechecked through live GitHub records, not rerun by this metadata audit."
+  },
+  "decisions": {
+    "application_fix": "Concurrent null-state/reset changes already covered by released main; main also guards malformed local records and Download without discovery.",
+    "concurrent_latest": "5a54556 only records rc3 publication pending at 13:41 UTC, before final validation/publication.",
+    "whole_branch_merge": false,
+    "reason": "Would import stale pending-status documentation and obsolete candidate-specific RC2 publication automation. Preserve branch history and port useful independent GUI coverage narrowly.",
+    "additional_validation": "Adapt native Download/Cancel/checkbox/destination coverage to current gate, retaining current diagnostics and native input binding. Pending fresh exact-final execution."
+  }
+}

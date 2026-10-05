@@ -1,0 +1,444 @@
+{
+  "schema": 1,
+  "kind": "independent-concurrent-release-artifact-audit",
+  "recordedAt": "2026-10-05T16:10:10.712965+00:00",
+  "success": true,
+  "repo": "comparativechrono/workbench",
+  "auditedMainCommit": "0993e856506150127d345d040d80f810c8cc10f7",
+  "releaseTag": "app-v0.7.0",
+  "releaseTagCommit": "6c266a58818886c6f4f5287006f20fafc5aadd68",
+  "packagedSourceCommit": "57d635370a1cd34dd1549aff95a2feba7faeeb74",
+  "releaseId": 403758756,
+  "releaseUpdatedAt": "2026-10-05T14:04:27Z",
+  "publicAssetsFreshlyDownloaded": 8,
+  "assets": [
+    {
+      "file": "BUILD-VALIDATION.json",
+      "bytes": 12737,
+      "sha256": "def86d4053e506d5376f69da292acf5bb4a517683f7b14b107cfde02be8a3ad6",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/BUILD-VALIDATION.json",
+      "downloadedAt": "2026-10-05T16:06:41.012339+00:00",
+      "githubId": 612700837,
+      "githubSize": 12737,
+      "githubDigest": "sha256:def86d4053e506d5376f69da292acf5bb4a517683f7b14b107cfde02be8a3ad6",
+      "matchesRecordedRelease": true,
+      "matchesCurrentGithub": true
+    },
+    {
+      "file": "EVIDENCE-SHA256SUMS.txt",
+      "bytes": 666,
+      "sha256": "0ba99388f185309f2424d2477a6464f0efc776994c56b52f9b8318caa545430e",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/EVIDENCE-SHA256SUMS.txt",
+      "downloadedAt": "2026-10-05T16:06:41.012905+00:00",
+      "githubId": 612743198,
+      "githubSize": 666,
+      "githubDigest": "sha256:0ba99388f185309f2424d2477a6464f0efc776994c56b52f9b8318caa545430e",
+      "matchesRecordedRelease": true,
+      "matchesCurrentGithub": true
+    },
+    {
+      "file": "native-workbench-0.7.0-source.zip",
+      "bytes": 46002233,
+      "sha256": "4b4993d710430c735fff69f2655781711abcda601833de1e481411913b8c164e",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/native-workbench-0.7.0-source.zip",
+      "downloadedAt": "2026-10-05T16:06:41.013282+00:00",
+      "githubId": 612700486,
+      "githubSize": 46002233,
+      "githubDigest": "sha256:4b4993d710430c735fff69f2655781711abcda601833de1e481411913b8c164e",
+      "matchesRecordedRelease": true,
+      "matchesCurrentGithub": true
+    },
+    {
+      "file": "native-workbench-0.7.0-starter-windows.zip",
+      "bytes": 16916149,
+      "sha256": "3d5b79924e5edc69efb7d4934696f6568377b63c312a666cc37e05b8707cf1ba",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/native-workbench-0.7.0-starter-windows.zip",
+      "downloadedAt": "2026-10-05T16:06:41.014075+00:00",
+      "githubId": 612700702,
+      "githubSize": 16916149,
+      "githubDigest": "sha256:3d5b79924e5edc69efb7d4934696f6568377b63c312a666cc37e05b8707cf1ba",
+      "matchesRecordedRelease": true,
+      "matchesCurrentGithub": true
+    },
+    {
+      "file": "native-workbench-0.7.0-update-from-0.6.0.zip",
+      "bytes": 12830009,
+      "sha256": "9c86f8c7cbe7acb8c31cdb7472db815143e7cc63be8fda0113642baee17f1469",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/native-workbench-0.7.0-update-from-0.6.0.zip",
+      "downloadedAt": "2026-10-05T16:07:20.605749+00:00",
+      "githubId": 612700796,
+      "githubSize": 12830009,
+      "githubDigest": "sha256:9c86f8c7cbe7acb8c31cdb7472db815143e7cc63be8fda0113642baee17f1469",
+      "matchesRecordedRelease": true,
+      "matchesCurrentGithub": true
+    },
+    {
+      "file": "RELEASE-VALIDATION.json",
+      "bytes": 21786,
+      "sha256": "fcabeacde324e9273a6a158ea32f18efde09898f9b158573b906abe6d2625877",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/RELEASE-VALIDATION.json",
+      "downloadedAt": "2026-10-05T16:07:20.632379+00:00",
+      "githubId": 612743142,
+      "githubSize": 21786,
+      "githubDigest": "sha256:fcabeacde324e9273a6a158ea32f18efde09898f9b158573b906abe6d2625877",
+      "matchesRecordedRelease": true,
+      "matchesCurrentGithub": true
+    },
+    {
+      "file": "SHA256SUMS.txt",
+      "bytes": 408,
+      "sha256": "396170bc664bff45e60dede293edbe2cae282460ccafedcbb331195ca103c593",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/SHA256SUMS.txt",
+      "downloadedAt": "2026-10-05T16:07:21.116713+00:00",
+      "githubId": 612700848,
+      "githubSize": 408,
+      "githubDigest": "sha256:396170bc664bff45e60dede293edbe2cae282460ccafedcbb331195ca103c593",
+      "matchesRecordedRelease": true,
+      "matchesCurrentGithub": true
+    },
+    {
+      "file": "WINDOWS-EVIDENCE.zip",
+      "bytes": 473664,
+      "sha256": "71c241a357ddb7a83f20a968a4459016e0bd19f787a5f7ce89a3c6f9ebf9f3cb",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/WINDOWS-EVIDENCE.zip",
+      "downloadedAt": "2026-10-05T16:07:21.883173+00:00",
+      "githubId": 612743172,
+      "githubSize": 473664,
+      "githubDigest": "sha256:71c241a357ddb7a83f20a968a4459016e0bd19f787a5f7ce89a3c6f9ebf9f3cb",
+      "matchesRecordedRelease": true,
+      "matchesCurrentGithub": true
+    }
+  ],
+  "checks": [
+    {
+      "check": "public asset BUILD-VALIDATION.json",
+      "success": true
+    },
+    {
+      "check": "public asset EVIDENCE-SHA256SUMS.txt",
+      "success": true
+    },
+    {
+      "check": "public asset native-workbench-0.7.0-source.zip",
+      "success": true
+    },
+    {
+      "check": "public asset native-workbench-0.7.0-starter-windows.zip",
+      "success": true
+    },
+    {
+      "check": "public asset native-workbench-0.7.0-update-from-0.6.0.zip",
+      "success": true
+    },
+    {
+      "check": "public asset RELEASE-VALIDATION.json",
+      "success": true
+    },
+    {
+      "check": "public asset SHA256SUMS.txt",
+      "success": true
+    },
+    {
+      "check": "public asset WINDOWS-EVIDENCE.zip",
+      "success": true
+    },
+    {
+      "check": "SHA256SUMS.txt: native-workbench-0.7.0-source.zip",
+      "success": true
+    },
+    {
+      "check": "SHA256SUMS.txt: native-workbench-0.7.0-starter-windows.zip",
+      "success": true
+    },
+    {
+      "check": "SHA256SUMS.txt: native-workbench-0.7.0-update-from-0.6.0.zip",
+      "success": true
+    },
+    {
+      "check": "SHA256SUMS.txt: BUILD-VALIDATION.json",
+      "success": true
+    },
+    {
+      "check": "SHA256SUMS.txt entry count",
+      "success": true,
+      "detail": 4
+    },
+    {
+      "check": "EVIDENCE-SHA256SUMS.txt: native-workbench-0.7.0-source.zip",
+      "success": true
+    },
+    {
+      "check": "EVIDENCE-SHA256SUMS.txt: native-workbench-0.7.0-starter-windows.zip",
+      "success": true
+    },
+    {
+      "check": "EVIDENCE-SHA256SUMS.txt: native-workbench-0.7.0-update-from-0.6.0.zip",
+      "success": true
+    },
+    {
+      "check": "EVIDENCE-SHA256SUMS.txt: BUILD-VALIDATION.json",
+      "success": true
+    },
+    {
+      "check": "EVIDENCE-SHA256SUMS.txt: SHA256SUMS.txt",
+      "success": true
+    },
+    {
+      "check": "EVIDENCE-SHA256SUMS.txt: RELEASE-VALIDATION.json",
+      "success": true
+    },
+    {
+      "check": "EVIDENCE-SHA256SUMS.txt: WINDOWS-EVIDENCE.zip",
+      "success": true
+    },
+    {
+      "check": "EVIDENCE-SHA256SUMS.txt entry count",
+      "success": true,
+      "detail": 7
+    },
+    {
+      "check": "native-workbench-0.7.0-source.zip CRC",
+      "success": true
+    },
+    {
+      "check": "native-workbench-0.7.0-starter-windows.zip CRC",
+      "success": true
+    },
+    {
+      "check": "native-workbench-0.7.0-update-from-0.6.0.zip CRC",
+      "success": true
+    },
+    {
+      "check": "WINDOWS-EVIDENCE.zip CRC",
+      "success": true
+    },
+    {
+      "check": "all packaged source inventory hashes and Git source bytes",
+      "success": true,
+      "detail": {
+        "verified": 415,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "starter core inventory",
+      "success": true,
+      "detail": {
+        "verified": 68,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "starter source companion binding",
+      "success": true
+    },
+    {
+      "check": "updater inventory",
+      "success": true,
+      "detail": {
+        "verified": 59,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "updater target equals starter manifest",
+      "success": true
+    },
+    {
+      "check": "all updater replacement blobs equal starter",
+      "success": true,
+      "detail": {
+        "verified": 13,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "Windows evidence manifest",
+      "success": true,
+      "detail": {
+        "verified": 8,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "released final report equals repository report",
+      "success": true
+    },
+    {
+      "check": "release validation binds Windows evidence",
+      "success": true
+    },
+    {
+      "check": "final Windows summary bound to release validation and repo",
+      "success": true
+    },
+    {
+      "check": "live final native workflow jobs and steps succeeded",
+      "success": true
+    },
+    {
+      "check": "artifacts/final-ordinary.zip GitHub artifact digest",
+      "success": true
+    },
+    {
+      "check": "artifacts/final-ordinary.zip CRC and member inventory",
+      "success": true
+    },
+    {
+      "check": "artifacts/final-ordinary.zip report binding",
+      "success": true
+    },
+    {
+      "check": "artifacts/final-ordinary.zip exact archive and gate binding",
+      "success": true
+    },
+    {
+      "check": "artifacts/final-ordinary.zip retained native pass",
+      "success": true
+    },
+    {
+      "check": "artifacts/final-ordinary.zip exact tested runtime files",
+      "success": true,
+      "detail": {
+        "verified": 15,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "artifacts/final-ordinary.zip capture integrity",
+      "success": true,
+      "detail": {
+        "verified": 6,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "artifacts/final-ordinary.zip receipt content reproduces original serialization hash",
+      "success": true,
+      "detail": {
+        "originalReceiptSha256": "e97a7f0046bc3482c9683485f2e2e2ab216783a7620b2084e4aa5751f0e10d51",
+        "retainedEvidenceCopySha256": "a1aff562d8175c3e9e142bf66cd5f0373f810874907bfaa649c47469968e333c",
+        "explanation": "Gate loads the original receipt and writes a formatted evidence copy with platform newline conversion. Original SHA is reproduced from the preserved content using reference-manager serialization (sorted keys, indent 2, ensure_ascii false, LF). Evidence-copy raw bytes are bound separately through original artifact ZIP."
+      }
+    },
+    {
+      "check": "artifacts/final-ordinary.zip native input binding present",
+      "success": true
+    },
+    {
+      "check": "artifacts/final-spaces.zip GitHub artifact digest",
+      "success": true
+    },
+    {
+      "check": "artifacts/final-spaces.zip CRC and member inventory",
+      "success": true
+    },
+    {
+      "check": "artifacts/final-spaces.zip report binding",
+      "success": true
+    },
+    {
+      "check": "artifacts/final-spaces.zip exact archive and gate binding",
+      "success": true
+    },
+    {
+      "check": "artifacts/final-spaces.zip retained native pass",
+      "success": true
+    },
+    {
+      "check": "artifacts/final-spaces.zip exact tested runtime files",
+      "success": true,
+      "detail": {
+        "verified": 15,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "artifacts/final-spaces.zip capture integrity",
+      "success": true,
+      "detail": {
+        "verified": 6,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "artifacts/final-spaces.zip receipt content reproduces original serialization hash",
+      "success": true,
+      "detail": {
+        "originalReceiptSha256": "8d229fe6d146fc0efbee25b9d735059e225da34e78ee5bc06fa966614844c420",
+        "retainedEvidenceCopySha256": "07a93bd937a92ff1c901b1257ffd54ae300f7bffd821c5ff2b84c63b8d9e50ec",
+        "explanation": "Gate loads the original receipt and writes a formatted evidence copy with platform newline conversion. Original SHA is reproduced from the preserved content using reference-manager serialization (sorted keys, indent 2, ensure_ascii false, LF). Evidence-copy raw bytes are bound separately through original artifact ZIP."
+      }
+    },
+    {
+      "check": "artifacts/final-spaces.zip native input binding present",
+      "success": true
+    },
+    {
+      "check": "exact twelve retained GUI captures verified",
+      "success": true,
+      "detail": 12
+    },
+    {
+      "check": "packaged source to tag has only recorded validation/evidence changes",
+      "success": true
+    },
+    {
+      "check": "release tag to audited main contains only documents/evidence",
+      "success": true
+    }
+  ],
+  "failedChecks": [],
+  "nativeEvidence": [
+    {
+      "artifactId": 11349920830,
+      "artifactSha256": "e799da24900006fb357b4159541ce05cf006eed7a2ab70d5ccfecb1c93299aa5",
+      "reportSha256": "2ea2b62054746dfc63a6c2b7e95cc6b711e28d73927da99bbe0b9cef8e6f67b4",
+      "passed": 8,
+      "skips": [],
+      "sourceCommit": "6c266a58818886c6f4f5287006f20fafc5aadd68",
+      "gateSha256": "d7e8a12dbb6eb63b145388b2a7051e9126c86a7caf29ba209dc413931cdd8905",
+      "capturesVerified": 6,
+      "nativeExecutionPerformedNow": false
+    },
+    {
+      "artifactId": 11349559619,
+      "artifactSha256": "d2af546ae765089f30761756c66d393eae2c7cb77c13363b3124f0331e7b472b",
+      "reportSha256": "1c72ceb66c011f21093353049be3e3ebecfffddf6ed209e67b28188944243ecd",
+      "passed": 8,
+      "skips": [],
+      "sourceCommit": "6c266a58818886c6f4f5287006f20fafc5aadd68",
+      "gateSha256": "d7e8a12dbb6eb63b145388b2a7051e9126c86a7caf29ba209dc413931cdd8905",
+      "capturesVerified": 6,
+      "nativeExecutionPerformedNow": false
+    }
+  ],
+  "sourceToTagChangedFiles": [
+    "knowledge/evidence/reference-rc3-candidate-2026-10-05.json",
+    "knowledge/reference-release-handover.md",
+    "scripts/check_references_windows.py"
+  ],
+  "tagToAuditedMainChangedFiles": [
+    "README.md",
+    "knowledge/current-state.md",
+    "knowledge/evidence/reference-0.7.0-build-2026-10-05.json",
+    "knowledge/evidence/reference-0.7.0-final-assets-2026-10-05.json",
+    "knowledge/evidence/reference-0.7.0-final-windows-2026-10-05.json",
+    "knowledge/evidence/reference-0.7.0-public-downloads-2026-10-05.json",
+    "knowledge/evidence/reference-0.7.0-release-validation-2026-10-05.json",
+    "knowledge/evidence/reference-rc3-native-input-2026-10-05.json",
+    "knowledge/project.json",
+    "knowledge/reference-release-handover.md",
+    "knowledge/release-inventory.json"
+  ],
+  "scope": "Fresh public downloads and independent byte/inventory/source/evidence verification. Retained original Windows run 37320844819 was inspected and live job/step conclusions checked; no Windows execution or Ensembl transfer was rerun by this audit. Forthcoming expanded GUI gate is excluded.",
+  "limitations": [
+    "Original 96-DPI Windows Server 2022 scope remains unchanged: GUI download/cancel clicks and updater folder picker were not covered by original gate.",
+    "All 12 screenshots were hash verified now; prior visual review is retained evidence, not repeated here.",
+    "Release remains a development prerelease. Checksums establish byte integrity; GitHub release immutability is not enabled."
+  ],
+  "auditCorrections": [
+    "Initial verifier incorrectly expected three base checksum entries; actual immutable manifest includes three ZIPs plus BUILD-VALIDATION.json (four), all matched.",
+    "Initial receipt comparison assumed evidence was a byte-for-byte copy. Gate intentionally reserialized it; original serializer reconstruction matches both recorded receipt SHA-256 values. No release product failure was found."
+  ]
+}

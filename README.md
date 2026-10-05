@@ -18,14 +18,16 @@ application update adds a native **References** finder and reusable offline
 library for release-pinned Ensembl archive genome FASTA, GTF, cDNA, ncRNA and
 protein files, with hashes and provenance retained in analysis results.
 
-The exact published 0.7.0 starter and updater passed the native Windows gate:
+The exact published 0.7.0 starter and updater passed the expanded native Windows
+[gate](https://github.com/comparativechrono/workbench/actions/runs/37339280407):
 eight checks in each ordinary and space-containing path, with no failures or
 skips. Checks cover live reference discovery/downloads, cancellation, offline
 reuse, provenance, preserved-data updating, References layout and actual
-**Use for input** selection. Final public downloads were independently rehashed,
-and all twelve native interface captures were reviewed. GUI download/cancel
-button interactions, the updater folder picker and wider desktop/path acceptance
-remain outside this automated gate.
+**Use for input** selection. The post-release concurrency audit also exercised
+native file checkboxes, a typed destination, **Download selected**, **Cancel
+operation**, and binding the newly downloaded genome. All eight original public
+assets were freshly downloaded and rehashed; the application bytes are unchanged.
+Folder pickers and wider desktop/path acceptance remain outside this automated gate.
 See the [release handover](knowledge/reference-release-handover.md) and
 [release inventory](knowledge/release-inventory.json) for exact hashes and scope.
 

@@ -1,0 +1,203 @@
+{
+  "schema": 1,
+  "kind": "post-release-concurrent-development-reconciliation",
+  "recorded_at": "2026-10-05T16:19:42.233150+00:00",
+  "success": true,
+  "repository": "comparativechrono/workbench",
+  "version": "0.7.0",
+  "release_tag": "app-v0.7.0",
+  "release_url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0",
+  "development_prerelease": true,
+  "application_bytes_changed": false,
+  "release_tag_moved": false,
+  "original_eight_assets_replaced": false,
+  "audited_main_commit": "0993e856506150127d345d040d80f810c8cc10f7",
+  "common_ancestor": "5338853ba3b69438fc36c1b9dcd3ad89d6bbcde4",
+  "concurrent_branch": {
+    "name": "finish-reference-release",
+    "head": "5a5455647381bd93272326d0bd97eadbef92028d",
+    "unique_commits": [
+      "adbb2c28270d1c6f8ac3d6d9d9d56042c1df163a",
+      "4eef03ddf2ad6b0426e054171c8aafe9e752e73e",
+      "5a5455647381bd93272326d0bd97eadbef92028d"
+    ],
+    "publication_run": "https://github.com/comparativechrono/workbench/actions/runs/37316644535",
+    "publication_result": "Stopped at existing RC2 guard before build/publication; native job skipped.",
+    "head_checkpoint": "Documentation-only record of RC3 pending validation at 13:41:42 UTC, before final publication/native success.",
+    "runtime_fix_disposition": "Equivalent startup and null-discovery fixes already in released application; released source adds stronger initialization/local-file/download guards.",
+    "whole_branch_merged": false,
+    "branch_preserved": true,
+    "unique_coverage_ported": "Actual GUI checkboxes, typed destination, Download/Cancel buttons, preservation and newly downloaded native input binding.",
+    "unmerged_material": "Obsolete RC2-specific publication automation, its helper/test suite, historical branch documentation/evidence. Five helper integrity tests were rerun successfully in isolated scratch; these are separate from application/native tests."
+  },
+  "gate_commit": "ad5b59c06a03d3885bee5416fb47b4835ae9927f",
+  "gate_sha256": "d2c3ecb8a3d1e37bd6b4bd49b7e10c3650aa63fac35f91c46afcb9a35a85e083",
+  "public_asset_audit": {
+    "fresh_downloads": 8,
+    "independent_assertions_passed": 57,
+    "failures": 0,
+    "report": "reference-concurrency-assets-audit-2026-10-05.json",
+    "sha256": "0130b85cc9cb925370c46f70435b81ad59f831fa284e96cd63876fa5f26839ae",
+    "assets": [
+      {
+        "file": "BUILD-VALIDATION.json",
+        "bytes": 12737,
+        "sha256": "def86d4053e506d5376f69da292acf5bb4a517683f7b14b107cfde02be8a3ad6",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/BUILD-VALIDATION.json",
+        "downloadedAt": "2026-10-05T16:06:41.012339+00:00",
+        "githubId": 612700837,
+        "githubSize": 12737,
+        "githubDigest": "sha256:def86d4053e506d5376f69da292acf5bb4a517683f7b14b107cfde02be8a3ad6",
+        "matchesRecordedRelease": true,
+        "matchesCurrentGithub": true
+      },
+      {
+        "file": "EVIDENCE-SHA256SUMS.txt",
+        "bytes": 666,
+        "sha256": "0ba99388f185309f2424d2477a6464f0efc776994c56b52f9b8318caa545430e",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/EVIDENCE-SHA256SUMS.txt",
+        "downloadedAt": "2026-10-05T16:06:41.012905+00:00",
+        "githubId": 612743198,
+        "githubSize": 666,
+        "githubDigest": "sha256:0ba99388f185309f2424d2477a6464f0efc776994c56b52f9b8318caa545430e",
+        "matchesRecordedRelease": true,
+        "matchesCurrentGithub": true
+      },
+      {
+        "file": "native-workbench-0.7.0-source.zip",
+        "bytes": 46002233,
+        "sha256": "4b4993d710430c735fff69f2655781711abcda601833de1e481411913b8c164e",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/native-workbench-0.7.0-source.zip",
+        "downloadedAt": "2026-10-05T16:06:41.013282+00:00",
+        "githubId": 612700486,
+        "githubSize": 46002233,
+        "githubDigest": "sha256:4b4993d710430c735fff69f2655781711abcda601833de1e481411913b8c164e",
+        "matchesRecordedRelease": true,
+        "matchesCurrentGithub": true
+      },
+      {
+        "file": "native-workbench-0.7.0-starter-windows.zip",
+        "bytes": 16916149,
+        "sha256": "3d5b79924e5edc69efb7d4934696f6568377b63c312a666cc37e05b8707cf1ba",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/native-workbench-0.7.0-starter-windows.zip",
+        "downloadedAt": "2026-10-05T16:06:41.014075+00:00",
+        "githubId": 612700702,
+        "githubSize": 16916149,
+        "githubDigest": "sha256:3d5b79924e5edc69efb7d4934696f6568377b63c312a666cc37e05b8707cf1ba",
+        "matchesRecordedRelease": true,
+        "matchesCurrentGithub": true
+      },
+      {
+        "file": "native-workbench-0.7.0-update-from-0.6.0.zip",
+        "bytes": 12830009,
+        "sha256": "9c86f8c7cbe7acb8c31cdb7472db815143e7cc63be8fda0113642baee17f1469",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/native-workbench-0.7.0-update-from-0.6.0.zip",
+        "downloadedAt": "2026-10-05T16:07:20.605749+00:00",
+        "githubId": 612700796,
+        "githubSize": 12830009,
+        "githubDigest": "sha256:9c86f8c7cbe7acb8c31cdb7472db815143e7cc63be8fda0113642baee17f1469",
+        "matchesRecordedRelease": true,
+        "matchesCurrentGithub": true
+      },
+      {
+        "file": "RELEASE-VALIDATION.json",
+        "bytes": 21786,
+        "sha256": "fcabeacde324e9273a6a158ea32f18efde09898f9b158573b906abe6d2625877",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/RELEASE-VALIDATION.json",
+        "downloadedAt": "2026-10-05T16:07:20.632379+00:00",
+        "githubId": 612743142,
+        "githubSize": 21786,
+        "githubDigest": "sha256:fcabeacde324e9273a6a158ea32f18efde09898f9b158573b906abe6d2625877",
+        "matchesRecordedRelease": true,
+        "matchesCurrentGithub": true
+      },
+      {
+        "file": "SHA256SUMS.txt",
+        "bytes": 408,
+        "sha256": "396170bc664bff45e60dede293edbe2cae282460ccafedcbb331195ca103c593",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/SHA256SUMS.txt",
+        "downloadedAt": "2026-10-05T16:07:21.116713+00:00",
+        "githubId": 612700848,
+        "githubSize": 408,
+        "githubDigest": "sha256:396170bc664bff45e60dede293edbe2cae282460ccafedcbb331195ca103c593",
+        "matchesRecordedRelease": true,
+        "matchesCurrentGithub": true
+      },
+      {
+        "file": "WINDOWS-EVIDENCE.zip",
+        "bytes": 473664,
+        "sha256": "71c241a357ddb7a83f20a968a4459016e0bd19f787a5f7ce89a3c6f9ebf9f3cb",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/WINDOWS-EVIDENCE.zip",
+        "downloadedAt": "2026-10-05T16:07:21.883173+00:00",
+        "githubId": 612743172,
+        "githubSize": 473664,
+        "githubDigest": "sha256:71c241a357ddb7a83f20a968a4459016e0bd19f787a5f7ce89a3c6f9ebf9f3cb",
+        "matchesRecordedRelease": true,
+        "matchesCurrentGithub": true
+      }
+    ]
+  },
+  "fresh_native_validation": {
+    "run_url": "https://github.com/comparativechrono/workbench/actions/runs/37339280407",
+    "native_windows_executed_now": true,
+    "platform": "Windows-2022Server-10.0.20348-SP0",
+    "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+    "dpi": 96,
+    "independent_evidence_assertions_passed": 43,
+    "failures": 0,
+    "report": "reference-concurrency-windows-2026-10-05.json",
+    "sha256": "95a48c05d3670940efc00426d8645de85e2e4a48aab66bb61e9b51d2d5dc12cc",
+    "paths": [
+      {
+        "pathCase": "ordinary",
+        "artifactId": 11358096303,
+        "artifactSha256": "42b760dd2ce8b724783842854fbaae22853515c6e785c310a6d2ce600e791df1",
+        "reportSha256": "d1ab257798deccb719c91e43d8355f5988699f1a3b1355a674e2721903b9dfc7",
+        "passed": 8,
+        "failed": 0,
+        "skips": [],
+        "startedUtc": "2026-10-05T16:14:43.868920+00:00",
+        "completedUtc": "2026-10-05T16:15:25.595816+00:00"
+      },
+      {
+        "pathCase": "path with spaces",
+        "artifactId": 11357023602,
+        "artifactSha256": "71308c159b5ab9c26280ea168bd4dc36a979cc176e7a731be6104d380c9b3c52",
+        "reportSha256": "6f668d04814675ec8b71fc45e539b7a48f30a850746cb8b2b7557922fa2a9ebc",
+        "passed": 8,
+        "failed": 0,
+        "skips": [],
+        "startedUtc": "2026-10-05T16:14:42.400399+00:00",
+        "completedUtc": "2026-10-05T16:15:16.263822+00:00"
+      }
+    ],
+    "capture_count": 20,
+    "all_captures_hash_verified_and_visually_reviewed": true,
+    "root_additional_new_capture_reviews": 8,
+    "aggregate_check_names": [
+      "Live release-pinned yeast search and five-product discovery.",
+      "Cancellation after transferred bytes removed only its partial download and published no reference.",
+      "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+      "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+      "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods.",
+      "Installed application and starter pack integrity checks passed after reference use.",
+      "Native 0.6.0-to-0.7.0 core migration and idempotent repeat preserved optional packs, saved pins, references and results; updated private host reused them offline.",
+      "Native app opened References, displayed local files, selected and downloaded five products through native controls, cancelled through its native button, bound both existing and newly downloaded genomes through compatible native inputs, kept controls separate at normal/minimum size and closed cleanly."
+    ],
+    "gui_cancellation_scope": "Enabled native Cancel button before publication; separate host gate cancels after 1MiB transferred.",
+    "upgrade": "Actual 0.6.0-to-0.7.0 native updater CLI:68 target core files verified,187 existing files preserved,only session.lock added,idempotent repeat and offline reopen."
+  },
+  "evidence_bundle": {
+    "name": "CONCURRENCY-WINDOWS-EVIDENCE.zip",
+    "bytes": 761929,
+    "sha256": "db00d9f8d27157f2feb12b6e24acf3d30da66b93f0dc5f6f90a7d85d8066dbfb"
+  },
+  "prior_results": "Original 93-test Linux report and earlier Windows release run remain dated evidence;93 source tests were not rerun in this audit. Initial source review/syntax checks are distinct from the fresh expanded native run.",
+  "remaining_blockers": [],
+  "limits": [
+    "GUI cancellation proves enabled button cancellation before publication; the separate host check establishes cancellation after one MiB transferred.",
+    "No native folder-picker interaction (reference destination or updater), human usability acceptance, high-DPI or multi-monitor deployment, Unicode/long-path scenario, institutional proxy, or human-genome-scale performance check was performed.",
+    "This verifier rehashed published binaries and CI evidence; it did not rebuild or alter the released application."
+  ],
+  "publication_note": "Prepared supplemental report; public supplement download verification is recorded separately after upload. Original release artifacts remain immutable."
+}

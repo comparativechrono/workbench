@@ -1,0 +1,1991 @@
+{
+  "schema": 1,
+  "kind": "independent-concurrency-exact-final-expanded-native-gui-audit",
+  "recordedAt": "2026-10-05T16:18:01.351560+00:00",
+  "success": true,
+  "releaseTag": "app-v0.7.0",
+  "workflowRun": "https://github.com/comparativechrono/workbench/actions/runs/37339280407",
+  "gateSourceCommit": "ad5b59c06a03d3885bee5416fb47b4835ae9927f",
+  "gateSha256": "d2c3ecb8a3d1e37bd6b4bd49b7e10c3650aa63fac35f91c46afcb9a35a85e083",
+  "applicationBuildSourceCommit": "57d635370a1cd34dd1549aff95a2feba7faeeb74",
+  "releaseTagCommit": "6c266a58818886c6f4f5287006f20fafc5aadd68",
+  "starterSha256": "3d5b79924e5edc69efb7d4934696f6568377b63c312a666cc37e05b8707cf1ba",
+  "updaterSha256": "9c86f8c7cbe7acb8c31cdb7472db815143e7cc63be8fda0113642baee17f1469",
+  "platform": "Windows-2022Server-10.0.20348-SP0",
+  "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+  "nativeWindowsExecutedInThisSession": true,
+  "checks": [
+    {
+      "check": "workflow completed successfully at exact gate commit",
+      "success": true
+    },
+    {
+      "check": "both native jobs and all steps succeeded",
+      "success": true
+    },
+    {
+      "check": "exact gate SHA-256",
+      "success": true
+    },
+    {
+      "check": "ordinary original artifact matches GitHub digest and size",
+      "success": true
+    },
+    {
+      "check": "ordinary original artifact CRC",
+      "success": true
+    },
+    {
+      "check": "ordinary exact final application and source binding",
+      "success": true
+    },
+    {
+      "check": "ordinary exact 15 runtime files match tested starter",
+      "success": true
+    },
+    {
+      "check": "ordinary native executed eight aggregate checks no skips",
+      "success": true
+    },
+    {
+      "check": "ordinary five host downloads retain independent pinned identities",
+      "success": true
+    },
+    {
+      "check": "ordinary host cancellation after 1 MiB",
+      "success": true
+    },
+    {
+      "check": "ordinary offline native scientific result",
+      "success": true
+    },
+    {
+      "check": "ordinary installation integrity",
+      "success": true
+    },
+    {
+      "check": "ordinary native core upgrade preserves 187 existing files",
+      "success": true
+    },
+    {
+      "check": "ordinary native GUI download click and five product checkboxes",
+      "success": true
+    },
+    {
+      "check": "ordinary native GUI cancellation preserves registry destination",
+      "success": true
+    },
+    {
+      "check": "ordinary native GUI download preserves old records and sentinel",
+      "success": true
+    },
+    {
+      "check": "ordinary native GUI exact receipt hash",
+      "success": true
+    },
+    {
+      "check": "ordinary native GUI typed destination and all file paths",
+      "success": true
+    },
+    {
+      "check": "ordinary native GUI five downloaded product hashes match pins",
+      "success": true
+    },
+    {
+      "check": "ordinary native GUI newly downloaded input binding",
+      "success": true
+    },
+    {
+      "check": "ordinary existing offline input binding retained",
+      "success": true
+    },
+    {
+      "check": "ordinary clean GUI closure and positive normal minimum gaps",
+      "success": true
+    },
+    {
+      "check": "ordinary ten native screenshot hashes and dimensions",
+      "success": true,
+      "detail": {
+        "verified": 10,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "spaces original artifact matches GitHub digest and size",
+      "success": true
+    },
+    {
+      "check": "spaces original artifact CRC",
+      "success": true
+    },
+    {
+      "check": "spaces exact final application and source binding",
+      "success": true
+    },
+    {
+      "check": "spaces exact 15 runtime files match tested starter",
+      "success": true
+    },
+    {
+      "check": "spaces native executed eight aggregate checks no skips",
+      "success": true
+    },
+    {
+      "check": "spaces five host downloads retain independent pinned identities",
+      "success": true
+    },
+    {
+      "check": "spaces host cancellation after 1 MiB",
+      "success": true
+    },
+    {
+      "check": "spaces offline native scientific result",
+      "success": true
+    },
+    {
+      "check": "spaces installation integrity",
+      "success": true
+    },
+    {
+      "check": "spaces native core upgrade preserves 187 existing files",
+      "success": true
+    },
+    {
+      "check": "spaces native GUI download click and five product checkboxes",
+      "success": true
+    },
+    {
+      "check": "spaces native GUI cancellation preserves registry destination",
+      "success": true
+    },
+    {
+      "check": "spaces native GUI download preserves old records and sentinel",
+      "success": true
+    },
+    {
+      "check": "spaces native GUI exact receipt hash",
+      "success": true
+    },
+    {
+      "check": "spaces native GUI typed destination and all file paths",
+      "success": true
+    },
+    {
+      "check": "spaces native GUI five downloaded product hashes match pins",
+      "success": true
+    },
+    {
+      "check": "spaces native GUI newly downloaded input binding",
+      "success": true
+    },
+    {
+      "check": "spaces existing offline input binding retained",
+      "success": true
+    },
+    {
+      "check": "spaces clean GUI closure and positive normal minimum gaps",
+      "success": true
+    },
+    {
+      "check": "spaces ten native screenshot hashes and dimensions",
+      "success": true,
+      "detail": {
+        "verified": 10,
+        "mismatches": []
+      }
+    }
+  ],
+  "failedChecks": [],
+  "aggregateNativeCheckNames": [
+    "Live release-pinned yeast search and five-product discovery.",
+    "Cancellation after transferred bytes removed only its partial download and published no reference.",
+    "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+    "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+    "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods.",
+    "Installed application and starter pack integrity checks passed after reference use.",
+    "Native 0.6.0-to-0.7.0 core migration and idempotent repeat preserved optional packs, saved pins, references and results; updated private host reused them offline.",
+    "Native app opened References, displayed local files, selected and downloaded five products through native controls, cancelled through its native button, bound both existing and newly downloaded genomes through compatible native inputs, kept controls separate at normal/minimum size and closed cleanly."
+  ],
+  "paths": [
+    {
+      "pathCase": "ordinary",
+      "artifactId": 11358096303,
+      "artifactUrl": "https://github.com/comparativechrono/workbench/actions/runs/37339280407/artifacts/11358096303",
+      "artifactBytes": 388098,
+      "artifactSha256": "42b760dd2ce8b724783842854fbaae22853515c6e785c310a6d2ce600e791df1",
+      "reportSha256": "d1ab257798deccb719c91e43d8355f5988699f1a3b1355a674e2721903b9dfc7",
+      "passed": 8,
+      "failed": 0,
+      "skips": [],
+      "startedUtc": "2026-10-05T16:14:43.868920+00:00",
+      "completedUtc": "2026-10-05T16:15:25.595816+00:00",
+      "gui": {
+        "launched": true,
+        "pid": 2004,
+        "class": "WorkbenchReferences070",
+        "title": "References \u00b7 Native Workbench",
+        "normalControls": [
+          {
+            "id": 601,
+            "class": "SysTabControl32",
+            "text": "Reference views",
+            "bounds": [
+              58,
+              45,
+              966,
+              75
+            ]
+          },
+          {
+            "id": 650,
+            "class": "Static",
+            "text": "Ensembl archive \u00b7 release-pinned genomes and annotations. Release 116 is the final classic release; newer Ensembl data is not included in this provider.",
+            "bounds": [
+              58,
+              85,
+              966,
+              128
+            ]
+          },
+          {
+            "id": 651,
+            "class": "Static",
+            "text": "Release",
+            "bounds": [
+              58,
+              138,
+              114,
+              166
+            ]
+          },
+          {
+            "id": 602,
+            "class": "ComboBox",
+            "text": "",
+            "bounds": [
+              118,
+              135,
+              202,
+              162
+            ]
+          },
+          {
+            "id": 603,
+            "class": "Edit",
+            "text": "",
+            "bounds": [
+              214,
+              135,
+              856,
+              167
+            ]
+          },
+          {
+            "id": 604,
+            "class": "Button",
+            "text": "Search",
+            "bounds": [
+              868,
+              135,
+              966,
+              167
+            ]
+          },
+          {
+            "id": 605,
+            "class": "SysListView32",
+            "text": "Species and assemblies",
+            "bounds": [
+              58,
+              179,
+              966,
+              291
+            ]
+          },
+          {
+            "id": 0,
+            "class": "SysHeader32",
+            "text": "",
+            "bounds": [
+              60,
+              181,
+              964,
+              205
+            ]
+          },
+          {
+            "id": 606,
+            "class": "Button",
+            "text": "Find files",
+            "bounds": [
+              58,
+              297,
+              190,
+              327
+            ]
+          },
+          {
+            "id": 607,
+            "class": "SysListView32",
+            "text": "Reference files to download",
+            "bounds": [
+              58,
+              333,
+              966,
+              501
+            ]
+          },
+          {
+            "id": 0,
+            "class": "SysHeader32",
+            "text": "",
+            "bounds": [
+              60,
+              335,
+              964,
+              359
+            ]
+          },
+          {
+            "id": 608,
+            "class": "Edit",
+            "text": "",
+            "bounds": [
+              58,
+              513,
+              966,
+              589
+            ]
+          },
+          {
+            "id": 652,
+            "class": "Static",
+            "text": "Save to",
+            "bounds": [
+              58,
+              604,
+              124,
+              634
+            ]
+          },
+          {
+            "id": 609,
+            "class": "Edit",
+            "text": "D:\\a\\_temp\\ordinary\\native-workbench\\user-data\\references",
+            "bounds": [
+              128,
+              601,
+              672,
+              633
+            ]
+          },
+          {
+            "id": 610,
+            "class": "Button",
+            "text": "Choose folder...",
+            "bounds": [
+              684,
+              601,
+              812,
+              633
+            ]
+          },
+          {
+            "id": 611,
+            "class": "Button",
+            "text": "Download selected",
+            "bounds": [
+              824,
+              601,
+              966,
+              633
+            ]
+          },
+          {
+            "id": 616,
+            "class": "Button",
+            "text": "Cancel operation",
+            "bounds": [
+              732,
+              646,
+              860,
+              678
+            ]
+          },
+          {
+            "id": 618,
+            "class": "Static",
+            "text": "Species search completed. Choose a species to discover its files.",
+            "bounds": [
+              58,
+              646,
+              724,
+              696
+            ]
+          },
+          {
+            "id": 619,
+            "class": "Button",
+            "text": "Close",
+            "bounds": [
+              872,
+              646,
+              966,
+              678
+            ]
+          }
+        ],
+        "normalGeometry": [
+          {
+            "upper": 605,
+            "lower": 606,
+            "gapPixels": 6
+          },
+          {
+            "upper": 606,
+            "lower": 607,
+            "gapPixels": 6
+          },
+          {
+            "upper": 607,
+            "lower": 608,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 609,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 610,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 611,
+            "gapPixels": 12
+          }
+        ],
+        "captures": [
+          {
+            "path": "references-discovered.bmp",
+            "width": 960,
+            "height": 728,
+            "sha256": "94188e9d417c2f53221f402b2c1fbb57c530d502db11dc25b599844d63000774"
+          },
+          {
+            "path": "references-normal.bmp",
+            "width": 960,
+            "height": 728,
+            "sha256": "af88c036281f956d8f8b639170f77cebf0a1c387ce2f0256fbad64ff13e45fc4"
+          },
+          {
+            "path": "references-minimum.bmp",
+            "width": 820,
+            "height": 680,
+            "sha256": "c8129f22caa3f24871e52c3b0a6617ce19a224501b80958d32e17a0a3d6e3ff0"
+          },
+          {
+            "path": "references-downloaded-minimum.bmp",
+            "width": 820,
+            "height": 680,
+            "sha256": "26589515ede0d04cc6f40c7e858e4307d8b70303397f926ae1c2016e0e9a3d13"
+          },
+          {
+            "path": "references-bound.bmp",
+            "width": 820,
+            "height": 680,
+            "sha256": "47aad80bc54f03d1b0386751be721af7197d0cdec3b106c6792899d8b4fda688"
+          },
+          {
+            "path": "workspace-reference-bound.bmp",
+            "width": 1024,
+            "height": 728,
+            "sha256": "dcb59a6dd78119594da41b4c3517b2962f26a5761b966ffda127a6d1721f802e"
+          },
+          {
+            "path": "references-selected-minimum.bmp",
+            "width": 820,
+            "height": 680,
+            "sha256": "f74e03d3b5e20cd66ea09b0cfeddaec919a17a64b9fe78891d22a4edafef7a6c"
+          },
+          {
+            "path": "references-cancelled-minimum.bmp",
+            "width": 820,
+            "height": 680,
+            "sha256": "50bf592331ddaf2ca00d643f954c259a587f9525c490cf6fc6d2f1b13fb0130b"
+          },
+          {
+            "path": "references-gui-download-bound.bmp",
+            "width": 820,
+            "height": 680,
+            "sha256": "cc1a3780d78382e2ef308aca22b3b6f4174f11b4f662fe161a83cf40ac9c7762"
+          },
+          {
+            "path": "workspace-gui-download-bound.bmp",
+            "width": 1024,
+            "height": 728,
+            "sha256": "dcb59a6dd78119594da41b4c3517b2962f26a5761b966ffda127a6d1721f802e"
+          }
+        ],
+        "nativeSearchDiscoverSearch": true,
+        "scope": "Automated Win32 launch, native task selection, local-library loading, live search/discover/search reset, queued tab and checkbox input, typed destination, native Download selected and Cancel operation buttons, compatible reference binding verified in the native input edit, observed control non-overlap at normal/minimum size, resize and pixel capture; folder pickers and human usability acceptance remain separate.",
+        "dpi": 96,
+        "minimumControls": [
+          {
+            "id": 601,
+            "class": "SysTabControl32",
+            "text": "Reference views",
+            "bounds": [
+              36,
+              55,
+              804,
+              85
+            ]
+          },
+          {
+            "id": 650,
+            "class": "Static",
+            "text": "Ensembl archive \u00b7 release-pinned genomes and annotations. Release 116 is the final classic release; newer Ensembl data is not included in this provider.",
+            "bounds": [
+              36,
+              95,
+              804,
+              138
+            ]
+          },
+          {
+            "id": 651,
+            "class": "Static",
+            "text": "Release",
+            "bounds": [
+              36,
+              148,
+              92,
+              176
+            ]
+          },
+          {
+            "id": 602,
+            "class": "ComboBox",
+            "text": "",
+            "bounds": [
+              96,
+              145,
+              180,
+              172
+            ]
+          },
+          {
+            "id": 603,
+            "class": "Edit",
+            "text": "",
+            "bounds": [
+              192,
+              145,
+              694,
+              177
+            ]
+          },
+          {
+            "id": 604,
+            "class": "Button",
+            "text": "Search",
+            "bounds": [
+              706,
+              145,
+              804,
+              177
+            ]
+          },
+          {
+            "id": 605,
+            "class": "SysListView32",
+            "text": "Species and assemblies",
+            "bounds": [
+              36,
+              189,
+              804,
+              281
+            ]
+          },
+          {
+            "id": 0,
+            "class": "SysHeader32",
+            "text": "",
+            "bounds": [
+              38,
+              191,
+              802,
+              215
+            ]
+          },
+          {
+            "id": 606,
+            "class": "Button",
+            "text": "Find files",
+            "bounds": [
+              36,
+              287,
+              168,
+              317
+            ]
+          },
+          {
+            "id": 607,
+            "class": "SysListView32",
+            "text": "Reference files to download",
+            "bounds": [
+              36,
+              323,
+              804,
+              463
+            ]
+          },
+          {
+            "id": 0,
+            "class": "SysHeader32",
+            "text": "",
+            "bounds": [
+              38,
+              325,
+              802,
+              349
+            ]
+          },
+          {
+            "id": 608,
+            "class": "Edit",
+            "text": "",
+            "bounds": [
+              36,
+              475,
+              804,
+              551
+            ]
+          },
+          {
+            "id": 652,
+            "class": "Static",
+            "text": "Save to",
+            "bounds": [
+              36,
+              566,
+              102,
+              596
+            ]
+          },
+          {
+            "id": 609,
+            "class": "Edit",
+            "text": "D:\\a\\_temp\\ordinary\\native-workbench\\user-data\\references",
+            "bounds": [
+              106,
+              563,
+              510,
+              595
+            ]
+          },
+          {
+            "id": 610,
+            "class": "Button",
+            "text": "Choose folder...",
+            "bounds": [
+              522,
+              563,
+              650,
+              595
+            ]
+          },
+          {
+            "id": 611,
+            "class": "Button",
+            "text": "Download selected",
+            "bounds": [
+              662,
+              563,
+              804,
+              595
+            ]
+          },
+          {
+            "id": 616,
+            "class": "Button",
+            "text": "Cancel operation",
+            "bounds": [
+              570,
+              608,
+              698,
+              640
+            ]
+          },
+          {
+            "id": 618,
+            "class": "Static",
+            "text": "Species search completed. Choose a species to discover its files.",
+            "bounds": [
+              36,
+              608,
+              562,
+              658
+            ]
+          },
+          {
+            "id": 619,
+            "class": "Button",
+            "text": "Close",
+            "bounds": [
+              710,
+              608,
+              804,
+              640
+            ]
+          }
+        ],
+        "minimumGeometry": [
+          {
+            "upper": 605,
+            "lower": 606,
+            "gapPixels": 6
+          },
+          {
+            "upper": 606,
+            "lower": 607,
+            "gapPixels": 6
+          },
+          {
+            "upper": 607,
+            "lower": 608,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 609,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 610,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 611,
+            "gapPixels": 12
+          }
+        ],
+        "downloadedControls": [
+          {
+            "id": 601,
+            "class": "SysTabControl32",
+            "text": "Reference views",
+            "bounds": [
+              36,
+              55,
+              804,
+              85
+            ]
+          },
+          {
+            "id": 650,
+            "class": "Static",
+            "text": "Downloaded references are local files. Select one, choose a compatible input in your current workspace, then Use for input.",
+            "bounds": [
+              36,
+              95,
+              804,
+              138
+            ]
+          },
+          {
+            "id": 608,
+            "class": "Edit",
+            "text": "",
+            "bounds": [
+              36,
+              438,
+              804,
+              552
+            ]
+          },
+          {
+            "id": 612,
+            "class": "SysListView32",
+            "text": "Downloaded reference files",
+            "bounds": [
+              36,
+              145,
+              804,
+              426
+            ]
+          },
+          {
+            "id": 0,
+            "class": "SysHeader32",
+            "text": "",
+            "bounds": [
+              38,
+              147,
+              802,
+              171
+            ]
+          },
+          {
+            "id": 653,
+            "class": "Static",
+            "text": "Workspace input",
+            "bounds": [
+              36,
+              566,
+              152,
+              596
+            ]
+          },
+          {
+            "id": 613,
+            "class": "ComboBox",
+            "text": "",
+            "bounds": [
+              156,
+              563,
+              528,
+              590
+            ]
+          },
+          {
+            "id": 614,
+            "class": "Button",
+            "text": "Use for input",
+            "bounds": [
+              540,
+              563,
+              668,
+              595
+            ]
+          },
+          {
+            "id": 615,
+            "class": "Button",
+            "text": "Open folder",
+            "bounds": [
+              680,
+              563,
+              804,
+              595
+            ]
+          },
+          {
+            "id": 616,
+            "class": "Button",
+            "text": "Cancel operation",
+            "bounds": [
+              570,
+              608,
+              698,
+              640
+            ]
+          },
+          {
+            "id": 618,
+            "class": "Static",
+            "text": "Species search completed. Choose a species to discover its files.",
+            "bounds": [
+              36,
+              608,
+              562,
+              658
+            ]
+          },
+          {
+            "id": 619,
+            "class": "Button",
+            "text": "Close",
+            "bounds": [
+              710,
+              608,
+              804,
+              640
+            ]
+          }
+        ],
+        "downloadedGeometry": [
+          {
+            "upper": 612,
+            "lower": 608,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 613,
+            "gapPixels": 11
+          },
+          {
+            "upper": 608,
+            "lower": 614,
+            "gapPixels": 11
+          },
+          {
+            "upper": 608,
+            "lower": 615,
+            "gapPixels": 11
+          }
+        ],
+        "downloadedRows": 5,
+        "nativeReferenceBinding": {
+          "tool": "bam/reference-index",
+          "file": "D:\\a\\_temp\\ordinary\\reference data 533fbf3x\\ref-909ef770918742fc\\Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa",
+          "sha256": "35cc97fccb91762c7a1f0f71b4adb1037b143d48b63fbd3b3f8bad45e5afa44c",
+          "matchingTargets": 1,
+          "clickedUseForInput": true,
+          "inspectorEdits": [
+            {
+              "id": 2006,
+              "text": "Index a reference"
+            },
+            {
+              "id": 2022,
+              "text": "D:\\a\\_temp\\ordinary\\reference data 533fbf3x\\ref-909ef770918742fc\\Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa"
+            }
+          ],
+          "assignedNotice": "Reference assigned. Its download provenance will be retained with the run."
+        },
+        "nativeCancellation": {
+          "clickedDownloadSelected": true,
+          "clickedCancelOperation": true,
+          "registryUnchanged": true,
+          "destinationPreserved": true,
+          "sentinelSha256": "fbfd3a4321570fe1772d70d50fff772c447a48580e4e14700d6ea2f2ffd18fc9",
+          "notice": "Reference operation cancelled",
+          "scope": "Enabled GUI cancellation before publication; transferred-byte cancellation is separately required by the private-host gate."
+        },
+        "nativeDownload": {
+          "clickedDownloadSelected": true,
+          "checkboxesSelected": 5,
+          "recordId": "42a943bb83b04d27a38791a2d971a2e8",
+          "products": [
+            "genome",
+            "annotation",
+            "ncrna",
+            "cdna",
+            "protein"
+          ],
+          "destination": "D:\\a\\_temp\\ordinary\\gui reference data 9yvlz4tk",
+          "receiptSha256": "f4fc4f721024dfd866b4778100170dc5784ba5a8f193fd67152d72f22dc2bd5a",
+          "pinnedIdentitiesVerified": true,
+          "existingRecordsPreserved": true,
+          "destinationSentinelPreserved": true,
+          "typedDestinationVerified": true
+        },
+        "nativeDownloadedReferenceBinding": {
+          "tool": "bam/reference-index",
+          "recordId": "42a943bb83b04d27a38791a2d971a2e8",
+          "fileId": "genome",
+          "file": "D:\\a\\_temp\\ordinary\\gui reference data 9yvlz4tk\\ref-42a943bb83b04d27\\Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa",
+          "sha256": "35cc97fccb91762c7a1f0f71b4adb1037b143d48b63fbd3b3f8bad45e5afa44c",
+          "matchingTargets": 1,
+          "clickedUseForInput": true,
+          "inspectorEdits": [
+            {
+              "id": 2006,
+              "text": "Index a reference"
+            },
+            {
+              "id": 2022,
+              "text": "D:\\a\\_temp\\ordinary\\gui reference data 9yvlz4tk\\ref-42a943bb83b04d27\\Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa"
+            }
+          ],
+          "assignedNotice": "Reference assigned. Its download provenance will be retained with the run."
+        },
+        "closedCleanly": true
+      },
+      "coreUpdate": {
+        "success": true,
+        "baseVersion": "0.6.0",
+        "targetVersion": "0.7.0",
+        "baseArchiveSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+        "updateArchiveSha256": "9c86f8c7cbe7acb8c31cdb7472db815143e7cc63be8fda0113642baee17f1469",
+        "optionalPackArchiveSha256": "2dd05fece8deb2b0178d8b1bc2b6830f175b3fbc2f5a4d48f9c9023cbfe6775b",
+        "scope": "Actual native Windows updater CLI using its private runtime; native folder-picker interaction is not exercised.",
+        "nativeOptionalPackImport": true,
+        "install": {
+          "status": "installed",
+          "version": "0.7.0",
+          "migration": false,
+          "files_verified": 68,
+          "removed_files": 0,
+          "backup": "D:\\a\\_temp\\ordinary\\update target\\native-workbench\\updates\\core-0.7.0-20261005-161500-59042d2f\\backup",
+          "packs_changed": false,
+          "source_and_evidence_preserved": true
+        },
+        "repeat": {
+          "status": "already-installed",
+          "version": "0.7.0",
+          "files_verified": 68
+        },
+        "preservationChanges": {},
+        "preservationAdditions": {
+          "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+        },
+        "preservedFiles": 187,
+        "optionalPin": {
+          "packId": "reads",
+          "packVersion": "0.4.0",
+          "manifestSha256": "65fc3065fb382ffdd13c4b94fa834b26531e63eb87858d84a4c173e567fb73c0"
+        },
+        "coreManifestSha256": "ee251a6545a8830a2f9fe7b46a523a04425aea37380f56ea9870ccc3cc149c4d",
+        "offlineRestart": true
+      },
+      "nativeIndex": {
+        "contigs": 17,
+        "bases": 12157105,
+        "sha256": "65163e1e9c8cb7b63f43befd8294019b11fba0c18dd37c801e9d356e71e391c3"
+      },
+      "downloads": [
+        {
+          "id": "genome",
+          "bytes": 12360704,
+          "sha256": "35cc97fccb91762c7a1f0f71b4adb1037b143d48b63fbd3b3f8bad45e5afa44c",
+          "compressed_bytes": 3784201,
+          "compressed_sha256": "a9953096d6a041a01a4cb5352b0232ee9373bf4c050fb23cb7ae673b2e1bb528",
+          "independentPinnedIdentity": true
+        },
+        {
+          "id": "annotation",
+          "bytes": 10463408,
+          "sha256": "8c43c98a3a0db24c9e53fd9d460f096c48de0eabefd955fd25d044c948692623",
+          "compressed_bytes": 595453,
+          "compressed_sha256": "253bd4013785b3c85a6a488bd541c12d8264aa4989046c3530d0d9ea2ecc931e",
+          "independentPinnedIdentity": true
+        },
+        {
+          "id": "cdna",
+          "bytes": 11714100,
+          "sha256": "0a60e3a655949edbed2e774deae38b896e78e623a45809eafe66d15f7062cf4d",
+          "compressed_bytes": 3806426,
+          "compressed_sha256": "3cc5b6bb7ff166cffac5c45317dad7052d06431f43f709ed14b33779702dc6a4",
+          "independentPinnedIdentity": true
+        },
+        {
+          "id": "ncrna",
+          "bytes": 205371,
+          "sha256": "e875aea40e6bfbf9811b73f30a459439fda48d5165fbaea4c2e4a7859e9c3753",
+          "compressed_bytes": 35424,
+          "compressed_sha256": "096064f75fc4c8eaf2845e52dd6d56e1e398f8da434abd8436cfaa2d71a3f604",
+          "independentPinnedIdentity": true
+        },
+        {
+          "id": "protein",
+          "bytes": 5873944,
+          "sha256": "fec10d61996147cbc29ed4587ed0bdeb4e4f5576d66896400b226f2d2d4815a4",
+          "compressed_bytes": 2700059,
+          "compressed_sha256": "67ae76c720e52cec167378ec2b8cb5c5929360fc30de31abb37ae1035ef8455c",
+          "independentPinnedIdentity": true
+        }
+      ],
+      "nativeReferenceReceiptSha256": "f4fc4f721024dfd866b4778100170dc5784ba5a8f193fd67152d72f22dc2bd5a",
+      "guiLibrarySha256": "1dbcfa2faa0f412bfb965ed56af65644fb330ae223ce0c589f8eda2f33791f97",
+      "allTenCapturesVisuallyReviewed": true
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifactId": 11357023602,
+      "artifactUrl": "https://github.com/comparativechrono/workbench/actions/runs/37339280407/artifacts/11357023602",
+      "artifactBytes": 388277,
+      "artifactSha256": "71308c159b5ab9c26280ea168bd4dc36a979cc176e7a731be6104d380c9b3c52",
+      "reportSha256": "6f668d04814675ec8b71fc45e539b7a48f30a850746cb8b2b7557922fa2a9ebc",
+      "passed": 8,
+      "failed": 0,
+      "skips": [],
+      "startedUtc": "2026-10-05T16:14:42.400399+00:00",
+      "completedUtc": "2026-10-05T16:15:16.263822+00:00",
+      "gui": {
+        "launched": true,
+        "pid": 5888,
+        "class": "WorkbenchReferences070",
+        "title": "References \u00b7 Native Workbench",
+        "normalControls": [
+          {
+            "id": 601,
+            "class": "SysTabControl32",
+            "text": "Reference views",
+            "bounds": [
+              58,
+              45,
+              966,
+              75
+            ]
+          },
+          {
+            "id": 650,
+            "class": "Static",
+            "text": "Ensembl archive \u00b7 release-pinned genomes and annotations. Release 116 is the final classic release; newer Ensembl data is not included in this provider.",
+            "bounds": [
+              58,
+              85,
+              966,
+              128
+            ]
+          },
+          {
+            "id": 651,
+            "class": "Static",
+            "text": "Release",
+            "bounds": [
+              58,
+              138,
+              114,
+              166
+            ]
+          },
+          {
+            "id": 602,
+            "class": "ComboBox",
+            "text": "",
+            "bounds": [
+              118,
+              135,
+              202,
+              162
+            ]
+          },
+          {
+            "id": 603,
+            "class": "Edit",
+            "text": "",
+            "bounds": [
+              214,
+              135,
+              856,
+              167
+            ]
+          },
+          {
+            "id": 604,
+            "class": "Button",
+            "text": "Search",
+            "bounds": [
+              868,
+              135,
+              966,
+              167
+            ]
+          },
+          {
+            "id": 605,
+            "class": "SysListView32",
+            "text": "Species and assemblies",
+            "bounds": [
+              58,
+              179,
+              966,
+              291
+            ]
+          },
+          {
+            "id": 0,
+            "class": "SysHeader32",
+            "text": "",
+            "bounds": [
+              60,
+              181,
+              964,
+              205
+            ]
+          },
+          {
+            "id": 606,
+            "class": "Button",
+            "text": "Find files",
+            "bounds": [
+              58,
+              297,
+              190,
+              327
+            ]
+          },
+          {
+            "id": 607,
+            "class": "SysListView32",
+            "text": "Reference files to download",
+            "bounds": [
+              58,
+              333,
+              966,
+              501
+            ]
+          },
+          {
+            "id": 0,
+            "class": "SysHeader32",
+            "text": "",
+            "bounds": [
+              60,
+              335,
+              964,
+              359
+            ]
+          },
+          {
+            "id": 608,
+            "class": "Edit",
+            "text": "",
+            "bounds": [
+              58,
+              513,
+              966,
+              589
+            ]
+          },
+          {
+            "id": 652,
+            "class": "Static",
+            "text": "Save to",
+            "bounds": [
+              58,
+              604,
+              124,
+              634
+            ]
+          },
+          {
+            "id": 609,
+            "class": "Edit",
+            "text": "D:\\a\\_temp\\path with spaces\\native-workbench\\user-data\\references",
+            "bounds": [
+              128,
+              601,
+              672,
+              633
+            ]
+          },
+          {
+            "id": 610,
+            "class": "Button",
+            "text": "Choose folder...",
+            "bounds": [
+              684,
+              601,
+              812,
+              633
+            ]
+          },
+          {
+            "id": 611,
+            "class": "Button",
+            "text": "Download selected",
+            "bounds": [
+              824,
+              601,
+              966,
+              633
+            ]
+          },
+          {
+            "id": 616,
+            "class": "Button",
+            "text": "Cancel operation",
+            "bounds": [
+              732,
+              646,
+              860,
+              678
+            ]
+          },
+          {
+            "id": 618,
+            "class": "Static",
+            "text": "Species search completed. Choose a species to discover its files.",
+            "bounds": [
+              58,
+              646,
+              724,
+              696
+            ]
+          },
+          {
+            "id": 619,
+            "class": "Button",
+            "text": "Close",
+            "bounds": [
+              872,
+              646,
+              966,
+              678
+            ]
+          }
+        ],
+        "normalGeometry": [
+          {
+            "upper": 605,
+            "lower": 606,
+            "gapPixels": 6
+          },
+          {
+            "upper": 606,
+            "lower": 607,
+            "gapPixels": 6
+          },
+          {
+            "upper": 607,
+            "lower": 608,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 609,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 610,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 611,
+            "gapPixels": 12
+          }
+        ],
+        "captures": [
+          {
+            "path": "references-discovered.bmp",
+            "width": 960,
+            "height": 728,
+            "sha256": "91f5fdd0eda10b972858077fef6f71d6a112cb6cbb605e5b1fd66195d587f69e"
+          },
+          {
+            "path": "references-normal.bmp",
+            "width": 960,
+            "height": 728,
+            "sha256": "168fa801b5c7e6e329d0a48004020ec6b9ad3b00a9a748b79e012cd09e57d222"
+          },
+          {
+            "path": "references-minimum.bmp",
+            "width": 820,
+            "height": 680,
+            "sha256": "19d6f92a0f63ef20def8ac6731a7f533a061c8bc721c7ca977589ae989d7d069"
+          },
+          {
+            "path": "references-downloaded-minimum.bmp",
+            "width": 820,
+            "height": 680,
+            "sha256": "db04d5edd427a7b8be8ad7174366845a74a516f00a0b1324b5e9148e08144a89"
+          },
+          {
+            "path": "references-bound.bmp",
+            "width": 820,
+            "height": 680,
+            "sha256": "e4164eca3f7f2176c7c58d911824859d28a24ad8349f2d07ad14c839d8f67d56"
+          },
+          {
+            "path": "workspace-reference-bound.bmp",
+            "width": 1024,
+            "height": 728,
+            "sha256": "bbd2620e85eba0f8f5b4d2a0653f4ad0e72f630f42a623aab88ec67082b11665"
+          },
+          {
+            "path": "references-selected-minimum.bmp",
+            "width": 820,
+            "height": 680,
+            "sha256": "3e52b7f7a090426dde10cf190d0293bed88f7ba0f05e632ae2d5dd3c6a3f0596"
+          },
+          {
+            "path": "references-cancelled-minimum.bmp",
+            "width": 820,
+            "height": 680,
+            "sha256": "be6a10c089f0705339db8e93e580c5fb2e8ae56a99f1905f8c0bb58f82ad26d3"
+          },
+          {
+            "path": "references-gui-download-bound.bmp",
+            "width": 820,
+            "height": 680,
+            "sha256": "a4ecb136d1ac4aa952bde2a7a576111d4dcf3dd009e5d33974e0d3af651f7116"
+          },
+          {
+            "path": "workspace-gui-download-bound.bmp",
+            "width": 1024,
+            "height": 728,
+            "sha256": "bbd2620e85eba0f8f5b4d2a0653f4ad0e72f630f42a623aab88ec67082b11665"
+          }
+        ],
+        "nativeSearchDiscoverSearch": true,
+        "scope": "Automated Win32 launch, native task selection, local-library loading, live search/discover/search reset, queued tab and checkbox input, typed destination, native Download selected and Cancel operation buttons, compatible reference binding verified in the native input edit, observed control non-overlap at normal/minimum size, resize and pixel capture; folder pickers and human usability acceptance remain separate.",
+        "dpi": 96,
+        "minimumControls": [
+          {
+            "id": 601,
+            "class": "SysTabControl32",
+            "text": "Reference views",
+            "bounds": [
+              36,
+              55,
+              804,
+              85
+            ]
+          },
+          {
+            "id": 650,
+            "class": "Static",
+            "text": "Ensembl archive \u00b7 release-pinned genomes and annotations. Release 116 is the final classic release; newer Ensembl data is not included in this provider.",
+            "bounds": [
+              36,
+              95,
+              804,
+              138
+            ]
+          },
+          {
+            "id": 651,
+            "class": "Static",
+            "text": "Release",
+            "bounds": [
+              36,
+              148,
+              92,
+              176
+            ]
+          },
+          {
+            "id": 602,
+            "class": "ComboBox",
+            "text": "",
+            "bounds": [
+              96,
+              145,
+              180,
+              172
+            ]
+          },
+          {
+            "id": 603,
+            "class": "Edit",
+            "text": "",
+            "bounds": [
+              192,
+              145,
+              694,
+              177
+            ]
+          },
+          {
+            "id": 604,
+            "class": "Button",
+            "text": "Search",
+            "bounds": [
+              706,
+              145,
+              804,
+              177
+            ]
+          },
+          {
+            "id": 605,
+            "class": "SysListView32",
+            "text": "Species and assemblies",
+            "bounds": [
+              36,
+              189,
+              804,
+              281
+            ]
+          },
+          {
+            "id": 0,
+            "class": "SysHeader32",
+            "text": "",
+            "bounds": [
+              38,
+              191,
+              802,
+              215
+            ]
+          },
+          {
+            "id": 606,
+            "class": "Button",
+            "text": "Find files",
+            "bounds": [
+              36,
+              287,
+              168,
+              317
+            ]
+          },
+          {
+            "id": 607,
+            "class": "SysListView32",
+            "text": "Reference files to download",
+            "bounds": [
+              36,
+              323,
+              804,
+              463
+            ]
+          },
+          {
+            "id": 0,
+            "class": "SysHeader32",
+            "text": "",
+            "bounds": [
+              38,
+              325,
+              802,
+              349
+            ]
+          },
+          {
+            "id": 608,
+            "class": "Edit",
+            "text": "",
+            "bounds": [
+              36,
+              475,
+              804,
+              551
+            ]
+          },
+          {
+            "id": 652,
+            "class": "Static",
+            "text": "Save to",
+            "bounds": [
+              36,
+              566,
+              102,
+              596
+            ]
+          },
+          {
+            "id": 609,
+            "class": "Edit",
+            "text": "D:\\a\\_temp\\path with spaces\\native-workbench\\user-data\\references",
+            "bounds": [
+              106,
+              563,
+              510,
+              595
+            ]
+          },
+          {
+            "id": 610,
+            "class": "Button",
+            "text": "Choose folder...",
+            "bounds": [
+              522,
+              563,
+              650,
+              595
+            ]
+          },
+          {
+            "id": 611,
+            "class": "Button",
+            "text": "Download selected",
+            "bounds": [
+              662,
+              563,
+              804,
+              595
+            ]
+          },
+          {
+            "id": 616,
+            "class": "Button",
+            "text": "Cancel operation",
+            "bounds": [
+              570,
+              608,
+              698,
+              640
+            ]
+          },
+          {
+            "id": 618,
+            "class": "Static",
+            "text": "Species search completed. Choose a species to discover its files.",
+            "bounds": [
+              36,
+              608,
+              562,
+              658
+            ]
+          },
+          {
+            "id": 619,
+            "class": "Button",
+            "text": "Close",
+            "bounds": [
+              710,
+              608,
+              804,
+              640
+            ]
+          }
+        ],
+        "minimumGeometry": [
+          {
+            "upper": 605,
+            "lower": 606,
+            "gapPixels": 6
+          },
+          {
+            "upper": 606,
+            "lower": 607,
+            "gapPixels": 6
+          },
+          {
+            "upper": 607,
+            "lower": 608,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 609,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 610,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 611,
+            "gapPixels": 12
+          }
+        ],
+        "downloadedControls": [
+          {
+            "id": 601,
+            "class": "SysTabControl32",
+            "text": "Reference views",
+            "bounds": [
+              36,
+              55,
+              804,
+              85
+            ]
+          },
+          {
+            "id": 650,
+            "class": "Static",
+            "text": "Downloaded references are local files. Select one, choose a compatible input in your current workspace, then Use for input.",
+            "bounds": [
+              36,
+              95,
+              804,
+              138
+            ]
+          },
+          {
+            "id": 608,
+            "class": "Edit",
+            "text": "",
+            "bounds": [
+              36,
+              438,
+              804,
+              552
+            ]
+          },
+          {
+            "id": 612,
+            "class": "SysListView32",
+            "text": "Downloaded reference files",
+            "bounds": [
+              36,
+              145,
+              804,
+              426
+            ]
+          },
+          {
+            "id": 0,
+            "class": "SysHeader32",
+            "text": "",
+            "bounds": [
+              38,
+              147,
+              802,
+              171
+            ]
+          },
+          {
+            "id": 653,
+            "class": "Static",
+            "text": "Workspace input",
+            "bounds": [
+              36,
+              566,
+              152,
+              596
+            ]
+          },
+          {
+            "id": 613,
+            "class": "ComboBox",
+            "text": "",
+            "bounds": [
+              156,
+              563,
+              528,
+              590
+            ]
+          },
+          {
+            "id": 614,
+            "class": "Button",
+            "text": "Use for input",
+            "bounds": [
+              540,
+              563,
+              668,
+              595
+            ]
+          },
+          {
+            "id": 615,
+            "class": "Button",
+            "text": "Open folder",
+            "bounds": [
+              680,
+              563,
+              804,
+              595
+            ]
+          },
+          {
+            "id": 616,
+            "class": "Button",
+            "text": "Cancel operation",
+            "bounds": [
+              570,
+              608,
+              698,
+              640
+            ]
+          },
+          {
+            "id": 618,
+            "class": "Static",
+            "text": "Species search completed. Choose a species to discover its files.",
+            "bounds": [
+              36,
+              608,
+              562,
+              658
+            ]
+          },
+          {
+            "id": 619,
+            "class": "Button",
+            "text": "Close",
+            "bounds": [
+              710,
+              608,
+              804,
+              640
+            ]
+          }
+        ],
+        "downloadedGeometry": [
+          {
+            "upper": 612,
+            "lower": 608,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 613,
+            "gapPixels": 11
+          },
+          {
+            "upper": 608,
+            "lower": 614,
+            "gapPixels": 11
+          },
+          {
+            "upper": 608,
+            "lower": 615,
+            "gapPixels": 11
+          }
+        ],
+        "downloadedRows": 5,
+        "nativeReferenceBinding": {
+          "tool": "bam/reference-index",
+          "file": "D:\\a\\_temp\\path with spaces\\reference data ha0qr7yf\\ref-c0174f2a3d4a438e\\Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa",
+          "sha256": "35cc97fccb91762c7a1f0f71b4adb1037b143d48b63fbd3b3f8bad45e5afa44c",
+          "matchingTargets": 1,
+          "clickedUseForInput": true,
+          "inspectorEdits": [
+            {
+              "id": 2006,
+              "text": "Index a reference"
+            },
+            {
+              "id": 2022,
+              "text": "D:\\a\\_temp\\path with spaces\\reference data ha0qr7yf\\ref-c0174f2a3d4a438e\\Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa"
+            }
+          ],
+          "assignedNotice": "Reference assigned. Its download provenance will be retained with the run."
+        },
+        "nativeCancellation": {
+          "clickedDownloadSelected": true,
+          "clickedCancelOperation": true,
+          "registryUnchanged": true,
+          "destinationPreserved": true,
+          "sentinelSha256": "fbfd3a4321570fe1772d70d50fff772c447a48580e4e14700d6ea2f2ffd18fc9",
+          "notice": "Reference operation cancelled",
+          "scope": "Enabled GUI cancellation before publication; transferred-byte cancellation is separately required by the private-host gate."
+        },
+        "nativeDownload": {
+          "clickedDownloadSelected": true,
+          "checkboxesSelected": 5,
+          "recordId": "f8fb485dc8ce4c7a9550195dfed4017c",
+          "products": [
+            "genome",
+            "annotation",
+            "ncrna",
+            "cdna",
+            "protein"
+          ],
+          "destination": "D:\\a\\_temp\\path with spaces\\gui reference data 9l5g5ghf",
+          "receiptSha256": "a3c7682421ff04cec6a750fb5b9f59a5e88fd4330dd4fdeb8e3cc9d839da11fc",
+          "pinnedIdentitiesVerified": true,
+          "existingRecordsPreserved": true,
+          "destinationSentinelPreserved": true,
+          "typedDestinationVerified": true
+        },
+        "nativeDownloadedReferenceBinding": {
+          "tool": "bam/reference-index",
+          "recordId": "f8fb485dc8ce4c7a9550195dfed4017c",
+          "fileId": "genome",
+          "file": "D:\\a\\_temp\\path with spaces\\gui reference data 9l5g5ghf\\ref-f8fb485dc8ce4c7a\\Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa",
+          "sha256": "35cc97fccb91762c7a1f0f71b4adb1037b143d48b63fbd3b3f8bad45e5afa44c",
+          "matchingTargets": 1,
+          "clickedUseForInput": true,
+          "inspectorEdits": [
+            {
+              "id": 2006,
+              "text": "Index a reference"
+            },
+            {
+              "id": 2022,
+              "text": "D:\\a\\_temp\\path with spaces\\gui reference data 9l5g5ghf\\ref-f8fb485dc8ce4c7a\\Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa"
+            }
+          ],
+          "assignedNotice": "Reference assigned. Its download provenance will be retained with the run."
+        },
+        "closedCleanly": true
+      },
+      "coreUpdate": {
+        "success": true,
+        "baseVersion": "0.6.0",
+        "targetVersion": "0.7.0",
+        "baseArchiveSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+        "updateArchiveSha256": "9c86f8c7cbe7acb8c31cdb7472db815143e7cc63be8fda0113642baee17f1469",
+        "optionalPackArchiveSha256": "2dd05fece8deb2b0178d8b1bc2b6830f175b3fbc2f5a4d48f9c9023cbfe6775b",
+        "scope": "Actual native Windows updater CLI using its private runtime; native folder-picker interaction is not exercised.",
+        "nativeOptionalPackImport": true,
+        "install": {
+          "status": "installed",
+          "version": "0.7.0",
+          "migration": false,
+          "files_verified": 68,
+          "removed_files": 0,
+          "backup": "D:\\a\\_temp\\path with spaces\\update target\\native-workbench\\updates\\core-0.7.0-20261005-161455-2c86ed13\\backup",
+          "packs_changed": false,
+          "source_and_evidence_preserved": true
+        },
+        "repeat": {
+          "status": "already-installed",
+          "version": "0.7.0",
+          "files_verified": 68
+        },
+        "preservationChanges": {},
+        "preservationAdditions": {
+          "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+        },
+        "preservedFiles": 187,
+        "optionalPin": {
+          "packId": "reads",
+          "packVersion": "0.4.0",
+          "manifestSha256": "65fc3065fb382ffdd13c4b94fa834b26531e63eb87858d84a4c173e567fb73c0"
+        },
+        "coreManifestSha256": "ee251a6545a8830a2f9fe7b46a523a04425aea37380f56ea9870ccc3cc149c4d",
+        "offlineRestart": true
+      },
+      "nativeIndex": {
+        "contigs": 17,
+        "bases": 12157105,
+        "sha256": "65163e1e9c8cb7b63f43befd8294019b11fba0c18dd37c801e9d356e71e391c3"
+      },
+      "downloads": [
+        {
+          "id": "genome",
+          "bytes": 12360704,
+          "sha256": "35cc97fccb91762c7a1f0f71b4adb1037b143d48b63fbd3b3f8bad45e5afa44c",
+          "compressed_bytes": 3784201,
+          "compressed_sha256": "a9953096d6a041a01a4cb5352b0232ee9373bf4c050fb23cb7ae673b2e1bb528",
+          "independentPinnedIdentity": true
+        },
+        {
+          "id": "annotation",
+          "bytes": 10463408,
+          "sha256": "8c43c98a3a0db24c9e53fd9d460f096c48de0eabefd955fd25d044c948692623",
+          "compressed_bytes": 595453,
+          "compressed_sha256": "253bd4013785b3c85a6a488bd541c12d8264aa4989046c3530d0d9ea2ecc931e",
+          "independentPinnedIdentity": true
+        },
+        {
+          "id": "cdna",
+          "bytes": 11714100,
+          "sha256": "0a60e3a655949edbed2e774deae38b896e78e623a45809eafe66d15f7062cf4d",
+          "compressed_bytes": 3806426,
+          "compressed_sha256": "3cc5b6bb7ff166cffac5c45317dad7052d06431f43f709ed14b33779702dc6a4",
+          "independentPinnedIdentity": true
+        },
+        {
+          "id": "ncrna",
+          "bytes": 205371,
+          "sha256": "e875aea40e6bfbf9811b73f30a459439fda48d5165fbaea4c2e4a7859e9c3753",
+          "compressed_bytes": 35424,
+          "compressed_sha256": "096064f75fc4c8eaf2845e52dd6d56e1e398f8da434abd8436cfaa2d71a3f604",
+          "independentPinnedIdentity": true
+        },
+        {
+          "id": "protein",
+          "bytes": 5873944,
+          "sha256": "fec10d61996147cbc29ed4587ed0bdeb4e4f5576d66896400b226f2d2d4815a4",
+          "compressed_bytes": 2700059,
+          "compressed_sha256": "67ae76c720e52cec167378ec2b8cb5c5929360fc30de31abb37ae1035ef8455c",
+          "independentPinnedIdentity": true
+        }
+      ],
+      "nativeReferenceReceiptSha256": "a3c7682421ff04cec6a750fb5b9f59a5e88fd4330dd4fdeb8e3cc9d839da11fc",
+      "guiLibrarySha256": "6df4d9b8229815c82ac981e716c48703f22e8f90935fda377a3cc01f41f2eb02",
+      "allTenCapturesVisuallyReviewed": true
+    }
+  ],
+  "visualReview": {
+    "capturesReviewed": 20,
+    "method": "Viewed every captured bitmap in full-resolution paired PNG contact sheets derived losslessly from the original BMPs. Ordinary and space-containing cases were reviewed together for each of ten states.",
+    "observations": [
+      "Normal and minimum finder controls and details/destination areas remain separate.",
+      "Discovery displays all five product roles; repeated search resets the product list cleanly.",
+      "Minimum-size native checkbox selection and typed destination are visible; list scroll retains all selected products.",
+      "Cancelled state shows Reference operation cancelled and re-enabled Download selected.",
+      "Completed native download library shows ten files (five pre-existing plus five new) and selected new genome provenance.",
+      "Both original and newly downloaded input binding show Reference assigned and native workspace confirmation.",
+      "No error dialogs or visible control overlap were observed."
+    ]
+  },
+  "scope": "Fresh native Windows Server 2022 execution against unchanged published app-v0.7.0 starter and updater, ordinary and path with spaces, with eight aggregate checks per path and zero failures or skips. Adds real native product-checkbox selection, typed destination, Download selected and Cancel operation button clicks, five downloaded products, old-reference/sentinel preservation, receipt/pinned hashes, and exact new genome Use for input binding. Full original reports and 20 BMP captures retained in the two unmodified artifact ZIPs.",
+  "limits": [
+    "GUI cancellation proves enabled button cancellation before publication; the separate host check establishes cancellation after one MiB transferred.",
+    "No native folder-picker interaction (reference destination or updater), human usability acceptance, high-DPI or multi-monitor deployment, Unicode/long-path scenario, institutional proxy, or human-genome-scale performance check was performed.",
+    "This verifier rehashed published binaries and CI evidence; it did not rebuild or alter the released application."
+  ]
+}

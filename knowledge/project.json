@@ -48,7 +48,11 @@
     "reference_rc3_native_input": "evidence/reference-rc3-native-input-2026-10-05.json",
     "reference_final_windows": "evidence/reference-0.7.0-final-windows-2026-10-05.json",
     "reference_release_validation": "evidence/reference-0.7.0-release-validation-2026-10-05.json",
-    "reference_final_assets": "evidence/reference-0.7.0-final-assets-2026-10-05.json"
+    "reference_final_assets": "evidence/reference-0.7.0-final-assets-2026-10-05.json",
+    "reference_concurrency_reconciliation": "evidence/reference-concurrency-reconciliation-2026-10-05.json",
+    "reference_concurrency_assets": "evidence/reference-concurrency-assets-audit-2026-10-05.json",
+    "reference_concurrency_windows": "evidence/reference-concurrency-windows-2026-10-05.json",
+    "reference_concurrency_public_assets": "evidence/reference-concurrency-public-assets-2026-10-05.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -86,7 +90,15 @@
     "release_url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0",
     "packaged_source_commit": "57d635370a1cd34dd1549aff95a2feba7faeeb74",
     "release_tag_commit": "6c266a58818886c6f4f5287006f20fafc5aadd68",
-    "exact_final_native_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37320844819"
+    "exact_final_native_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37320844819",
+    "post_release_concurrency_audit": {
+      "branch": "audit/reference-concurrency-20261005",
+      "gate_commit": "ad5b59c06a03d3885bee5416fb47b4835ae9927f",
+      "native_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37339280407",
+      "application_bytes_changed": false,
+      "independent_branch_preserved": "finish-reference-release",
+      "independent_branch_commit": "5a5455647381bd93272326d0bd97eadbef92028d"
+    }
   },
   "historical_source_baseline_commit": "8f95caa1f267d19ce72ea3cd7f2396ae66a801c1",
   "release_tag_commit": "6c266a58818886c6f4f5287006f20fafc5aadd68",

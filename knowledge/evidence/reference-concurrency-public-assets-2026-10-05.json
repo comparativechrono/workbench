@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-05T16:22:16.052470+00:00",
+  "success": true,
+  "release_url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0",
+  "release_tag": "app-v0.7.0",
+  "original_asset_count": 8,
+  "original_asset_ids_sizes_and_hashes_unchanged": true,
+  "original_assets_freshly_downloaded_earlier_this_audit": true,
+  "supplement_asset_count": 3,
+  "current_asset_count": 11,
+  "supplements": [
+    {
+      "name": "CONCURRENCY-AUDIT.json",
+      "bytes": 11391,
+      "sha256": "1f26e85f4c08d613e4eac3a4cc3df326964f2522067d7f6e1a5faa2ccf607c2e",
+      "github_id": 613067524,
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/CONCURRENCY-AUDIT.json",
+      "public_download_matches_frozen_and_github": true
+    },
+    {
+      "name": "CONCURRENCY-SHA256SUMS.txt",
+      "bytes": 188,
+      "sha256": "506be0fa222d8ab0d1c0754be3d9f977eabe313bbefd5ff779ba0677b817a4e3",
+      "github_id": 613067574,
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/CONCURRENCY-SHA256SUMS.txt",
+      "public_download_matches_frozen_and_github": true
+    },
+    {
+      "name": "CONCURRENCY-WINDOWS-EVIDENCE.zip",
+      "bytes": 761929,
+      "sha256": "db00d9f8d27157f2feb12b6e24acf3d30da66b93f0dc5f6f90a7d85d8066dbfb",
+      "github_id": 613067547,
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/CONCURRENCY-WINDOWS-EVIDENCE.zip",
+      "public_download_matches_frozen_and_github": true
+    }
+  ],
+  "supplement_checksums_verified": true,
+  "supplement_bundle_inventory_verified": true,
+  "scope": "All eight original URLs downloaded during this audit; three new supplement URLs independently downloaded after publication; retained original downloads rehashed against final metadata. No replaced app/evidence assets."
+}

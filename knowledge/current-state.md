@@ -36,11 +36,49 @@ evidence remains separate history.
 
 The source companion includes AGENTS and knowledge files. The updater preserves
 installed packs, saved pins/settings, results and references. Its tested native
-CLI is distinct from the untested updater folder-picker interaction. Click-through
-GUI download/cancel, wider high-DPI/multi-monitor acceptance, Unicode/long paths,
+CLI is distinct from the untested updater folder-picker interaction. The later
+concurrency audit below adds GUI download/cancel coverage. Folder pickers,
+wider high-DPI/multi-monitor acceptance, Unicode/long paths,
 human genomes and institutional proxies remain outside the automated gate.
 The [release handover](reference-release-handover.md) retains exact identities,
 failed candidates and scoped evidence; existing pack audits remain dated.
+
+### Concurrent work audit, 2026-10-05
+
+The follow-up audit compared released `main` at `0993e85` with the independent
+`finish-reference-release` branch at `5a54556`. The independent desktop fixes
+were already covered by the released implementation. Its rc2 publication run
+stopped before building or publishing because that candidate already existed;
+its latest pending-rc3 documentation predates the final acceptance and release.
+No open pull request or active workflow was present at the initial audit. The
+[retained state](evidence/reference-concurrency-initial-state-2026-10-05.json)
+records those observations without treating the independent branch's historical
+pending status as the current release status.
+
+All eight final public assets were freshly downloaded and verified again; the
+[artifact audit](evidence/reference-concurrency-assets-audit-2026-10-05.json)
+passed 57 assertions covering hashes, inventories, source correspondence and
+retained native evidence. No published bytes changed. Useful additional native
+Download/Cancel coverage was ported into the existing gate in commit `ad5b59c`;
+the obsolete candidate-specific workflow and stale documents remain unmerged.
+The expanded exact-final [run 37339280407](https://github.com/comparativechrono/workbench/actions/runs/37339280407)
+passed eight checks per path with zero failures or skips. The
+[fresh native audit](evidence/reference-concurrency-windows-2026-10-05.json)
+passed 43 independent evidence checks; all twenty captures were hash-verified
+and visually reviewed. The native UI selected all five file checkboxes, typed a
+destination containing spaces, downloaded there, preserved existing references,
+and bound existing and new downloads through **Use for input**. The GUI Cancel
+case stopped early without publishing a ready entry or leaving partial output;
+the separate backend cancellation case stopped after at least 1 MiB transferred.
+The existing offline/provenance, native SAMtools and updater-preservation gates
+also ran again. See the [reconciliation record](evidence/reference-concurrency-reconciliation-2026-10-05.json)
+for the full evidence and preserved independent history. No application change
+or replacement release was needed; version remains **0.7.0**, with no
+concurrency-related blocker.
+
+Three new audit supplements retain the expanded Windows reports and captures
+alongside the unchanged original eight release assets. Their independent public
+download verification is [recorded separately](evidence/reference-concurrency-public-assets-2026-10-05.json).
 
 ### Initial resume audit, retained as history
 
@@ -154,7 +192,7 @@ dated evidence for its original bytes, not a fresh test of every older tool.
 
 | Component | Recorded evidence | Boundary |
 | --- | --- | --- |
-| App 0.7.0 | 93 fresh Linux source-contract passes; exact published starter/updater passed eight native Windows checkpoints per path with zero failures/skips; all twelve final GUI captures reviewed; final public assets independently downloaded and rehashed | References-specific GUI and packaged-host/native CLI coverage at 96 DPI on Windows Server 2022; GUI download/cancel clicks, updater folder picker and broader desktop/path acceptance remain outside the gate. |
+| App 0.7.0 | Release work: 93 Linux source-contract passes and eight exact-final native checks per path. Follow-up concurrency audit: eight public assets downloaded again, 57 artifact assertions, eight new native checks per path with zero failures/skips, 43 evidence assertions and twenty captures reviewed, including GUI Download/Cancel | References-specific GUI and packaged-host/native CLI coverage at 96 DPI on Windows Server 2022; GUI Cancel stops early and a separate backend case cancels after 1 MiB. Folder pickers and broader desktop/path acceptance remain outside the gate. |
 | App 0.6.0 | 214 automated tests passed, one Windows-only skip; eight starter checks; actual 0.5.4-to-0.6.0 updater migration on Linux; desktop/updater compiled with warnings treated as errors | Scientific execution used the portable Linux reference backend. This is not proof of the current Windows GUI or native long-path behavior. |
 | Original 18 independent archives | Preserved original pack IDs, versions, manifests, contents and licence/source materials; archive inventories, sizes, hashes and ZIP CRCs audited | Repackaging did not constitute a new native Windows execution test for every tool. |
 | STAR 1.0.0 | Eight Linux scientific tests and six released-app graph/import contracts; exact published archive passed native Windows CI in ordinary and space-containing paths | Five scientific fixtures plus a two-thread, two-pass buffer regression; small synthetic data, not a human-genome benchmark. |
@@ -441,7 +479,7 @@ or human-genome/cohort performance.
    inventory cannot substitute for that trust configuration.
 2. **Broader desktop acceptance and long paths.** The 0.7.0 reference gate covers
    the measured References interactions at 96 DPI; it does not establish the
-   entire desktop, GUI download/cancel, updater folder picker, high-DPI or
+   entire desktop, folder-picker interactions, high-DPI or
    multi-monitor behavior, Unicode/long paths or managed-PC usability. Record
    exact versions/environment when adding those checks, and run
    **File > Check installation** on target machines.
