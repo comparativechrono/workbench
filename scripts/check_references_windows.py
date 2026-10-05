@@ -646,6 +646,18 @@ def gui_smoke(root, evidence):
             if rows >= 5:
                 break
             time.sleep(.1)
+        if rows < 5:
+            # Keep evidence before rejecting the gate. A modal UI error or an
+            # unprocessed host response otherwise looks like an empty library.
+            observed = [{"hwnd": hwnd, "title": text(hwnd), "class": text(hwnd, True),
+                         "controls": controls(hwnd)} for hwnd in windows(process.pid)]
+            progress("local library did not populate", localListHandle=local_list,
+                     rows=rows, windows=observed)
+            for index, item in enumerate(observed[:6]):
+                capture(item["hwnd"], evidence / ("references-load-failure-" + str(index) + ".bmp"))
+            library = root / "user-data" / "references" / "library.json"
+            if library.is_file():
+                shutil.copyfile(library, evidence / "gui-reference-library.json")
         require(rows >= 5, "The native reference window did not finish loading its local library.")
         progress("inspect normal References controls")
         normal = controls(ref)
