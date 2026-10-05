@@ -492,7 +492,7 @@ def reference_control_geometry(rows, *, local=False):
 
 
 def gui_smoke(root, evidence):
-    """Real Win32 launch, button, child controls, resize and captured pixels."""
+    """Real Win32 controls, reference downloads, input binding and captured pixels."""
     import ctypes
     from ctypes import wintypes
     user = ctypes.WinDLL("user32", use_last_error=True)
@@ -563,6 +563,12 @@ def gui_smoke(root, evidence):
         buffer = ctypes.create_unicode_buffer(32768)
         send(hwnd, 0x000D, len(buffer), ctypes.addressof(buffer))
         return buffer.value
+
+    def key(hwnd, value):
+        # Queue ordinary keyboard input so notifications run on the UI thread.
+        require(user.PostMessageW(hwnd, 0x0100, value, 1)
+                and user.PostMessageW(hwnd, 0x0101, value, 0xC0000001),
+                "Could not queue native keyboard input.")
 
     def inspector_edits(hwnd):
         children = []
@@ -719,6 +725,27 @@ def gui_smoke(root, evidence):
         def wait_reference_state(label, predicate, seconds=45):
             wait_native_state(label, predicate, ref, seconds)
 
+        def click_reference(identity):
+            child = user.GetDlgItem(ref, identity)
+            require(bool(child), "Missing native reference button: " + str(identity))
+            wait_reference_state("wait for native reference button " + str(identity), lambda:
+                user.IsWindowEnabled(child) and user.IsWindowVisible(child))
+            # The real button generates BN_CLICKED in the target process.
+            require(user.PostMessageW(child, 0x00F5, 0, 0),
+                    "Could not queue native reference button click.")
+
+        def select_reference_row(hwnd, index):
+            wait_reference_state("wait for native reference list", lambda: user.IsWindowEnabled(hwnd))
+            key(hwnd, 0x24)  # VK_HOME
+            wait_reference_state("select first native reference row", lambda:
+                send(hwnd, 0x100C, ctypes.c_size_t(-1).value, 2) == 0
+                and user.IsWindowEnabled(hwnd))  # LVM_GETNEXTITEM, LVNI_SELECTED
+            for row in range(1, index + 1):
+                key(hwnd, 0x28)  # VK_DOWN
+                wait_reference_state("select native reference row " + str(row), lambda:
+                    send(hwnd, 0x100C, ctypes.c_size_t(-1).value, 2) == row
+                    and user.IsWindowEnabled(hwnd))
+
         query = user.GetDlgItem(ref, 603)
         query_text = ctypes.create_unicode_buffer("saccharomyces cerevisiae")
         send(query, 0x000C, 0, ctypes.addressof(query_text))  # marshalled WM_SETTEXT
@@ -746,7 +773,7 @@ def gui_smoke(root, evidence):
                   "normalControls": normal, "normalGeometry": normal_geometry,
                   "captures": [discovery_capture, capture(ref, evidence / "references-normal.bmp")],
                   "nativeSearchDiscoverSearch": True,
-                  "scope": "Automated Win32 launch, native task selection, local-library loading, live search/discover/search reset, queued tab input, compatible reference binding verified in the native input edit, observed control non-overlap at normal/minimum size, resize and pixel capture; human usability acceptance remains separate."}
+                  "scope": "Automated Win32 launch, native task selection, local-library loading, live search/discover/search reset, queued tab and checkbox input, typed destination, native Download selected and Cancel operation buttons, compatible reference binding verified in the native input edit, observed control non-overlap at normal/minimum size, resize and pixel capture; folder pickers and human usability acceptance remain separate."}
         dpi = user.GetDpiForWindow(ref) or 96
         result["dpi"] = dpi
         progress("resize References to minimum")
@@ -805,6 +832,128 @@ def gui_smoke(root, evidence):
             "inspectorEdits": inspector_edits(main), "assignedNotice": control_text(user.GetDlgItem(ref, 618))}
         result["captures"].append(capture(ref, evidence / "references-bound.bmp"))
         result["captures"].append(capture(main, evidence / "workspace-reference-bound.bmp"))
+
+        # Exercise GUI download/cancel after validating the existing local
+        # reference, preserving the distinct offline-library binding evidence.
+        # These operations use actual controls; no private RPC seeds the new
+        # record or performs its input assignment.
+        registry = root / "user-data" / "references" / "library.json"
+        original_registry = registry.read_bytes()
+        original_records = json.loads(original_registry)["records"]
+        original_ids = {record["id"] for record in original_records}
+        destination = Path(tempfile.mkdtemp(prefix="gui reference data ", dir=root.parent))
+        sentinel = destination / "keep-me.txt"
+        sentinel.write_text("Preserve existing GUI destination content.\n", encoding="utf-8")
+        sentinel_sha = sha256(sentinel)
+        key(tab, 0x25)  # VK_LEFT
+        files = user.GetDlgItem(ref, 607)
+        wait_reference_state("return to Find online through native tab input", lambda:
+            send(tab, 0x130B) == 0 and user.IsWindowVisible(files))
+        require(control_text(user.GetDlgItem(ref, 602)) == "116",
+                "Native finder did not retain archive release 116.")
+        click_reference(606)
+        wait_reference_state("rediscover five products after clearing discovery", lambda:
+            send(files, 0x1004) == 5 and user.IsWindowEnabled(files), seconds=90)
+        select_reference_row(files, 0)
+        for row in range(5):
+            if row:
+                key(files, 0x28)  # VK_DOWN
+                wait_reference_state("select native product " + str(row), lambda:
+                    send(files, 0x100C, ctypes.c_size_t(-1).value, 2) == row)
+            # LVM_GETITEMSTATE reads the real checkbox state without passing
+            # an in-process list-view structure across process boundaries.
+            require(send(files, 0x102C, row, 0xF000) == 0x1000,
+                    "A newly discovered product was unexpectedly preselected.")
+            key(files, 0x20)  # VK_SPACE
+            wait_reference_state("check native product " + str(row), lambda:
+                send(files, 0x102C, row, 0xF000) == 0x2000)
+        destination_text = ctypes.create_unicode_buffer(str(destination))
+        require(send(user.GetDlgItem(ref, 609), 0x000C, 0, ctypes.addressof(destination_text)),
+                "Native destination rejected its text.")
+        require(control_text(user.GetDlgItem(ref, 609)) == str(destination),
+                "Native destination did not retain the selected path.")
+        result["captures"].append(capture(ref, evidence / "references-selected-minimum.bmp"))
+
+        progress("cancel a download through native Download selected and Cancel operation")
+        click_reference(611)
+        click_reference(616)
+        wait_reference_state("native cancellation restores finder controls", lambda:
+            user.IsWindowEnabled(user.GetDlgItem(ref, 611))
+            and not user.IsWindowEnabled(user.GetDlgItem(ref, 616)), seconds=90)
+        cancel_notice = control_text(user.GetDlgItem(ref, 618))
+        require("cancel" in cancel_notice.lower(), "Native cancellation notice is missing.")
+        require(registry.read_bytes() == original_registry
+                and list(destination.iterdir()) == [sentinel] and sha256(sentinel) == sentinel_sha,
+                "Native cancellation published a reference, left partial data or changed existing content.")
+        result["nativeCancellation"] = {
+            "clickedDownloadSelected": True, "clickedCancelOperation": True,
+            "registryUnchanged": True, "destinationPreserved": True,
+            "sentinelSha256": sentinel_sha, "notice": cancel_notice,
+            "scope": "Enabled GUI cancellation before publication; transferred-byte cancellation is separately required by the private-host gate."}
+        result["captures"].append(capture(ref, evidence / "references-cancelled-minimum.bmp"))
+
+        progress("download five products through the native Download selected button")
+        click_reference(611)
+        wait_reference_state("native download publishes and displays completed local files", lambda:
+            registry.read_bytes() != original_registry
+            and user.IsWindowVisible(user.GetDlgItem(ref, 612))
+            and user.IsWindowEnabled(user.GetDlgItem(ref, 612)), seconds=120)
+        records = json.loads(registry.read_bytes())["records"]
+        added = [record for record in records if record["id"] not in original_ids]
+        require(len(added) == 1 and [record for record in records if record["id"] in original_ids] == original_records,
+                "Native download did not add exactly one reference while preserving existing records.")
+        downloaded = added[0]
+        downloaded_folder = Path(downloaded["folder"]).resolve()
+        require(downloaded_folder.parent == destination.resolve()
+                and Path(downloaded["receipt_path"]).resolve().parent == downloaded_folder
+                and all(Path(item["path"]).resolve().parent == downloaded_folder
+                        for item in downloaded["files"]),
+                "Native download did not use the typed destination for its bundle and files.")
+        require(len(downloaded["files"]) == 5 and {item["id"] for item in downloaded["files"]} == set(EXPECTED),
+                "Native checkbox selection lost a reference product.")
+        for item in downloaded["files"]:
+            require(all(item[field] == value for field, value in EXPECTED[item["id"]].items())
+                    and sha256(item["path"]) == item["sha256"],
+                    "Native downloaded reference differs from pinned identity.")
+        require(sha256(downloaded["receipt_path"]) == downloaded["receipt_sha256"],
+                "Native download receipt identity differs.")
+        require(sha256(sentinel) == sentinel_sha, "Native download changed existing destination content.")
+        shutil.copyfile(downloaded["receipt_path"], evidence / "gui-reference-receipt.json")
+        shutil.copyfile(registry, evidence / "gui-reference-library.json")
+        result["nativeDownload"] = {"clickedDownloadSelected": True, "checkboxesSelected": 5,
+            "recordId": downloaded["id"], "products": list(EXPECTED), "destination": str(destination),
+            "receiptSha256": downloaded["receipt_sha256"], "pinnedIdentitiesVerified": True,
+            "existingRecordsPreserved": True, "destinationSentinelPreserved": True,
+            "typedDestinationVerified": True}
+        local_list = user.GetDlgItem(ref, 612)
+        wait_reference_state("native local library displays all completed reference files", lambda:
+            send(local_list, 0x1004) == sum(len(record["files"]) for record in records))
+        genome = next(item for item in downloaded["files"] if item["id"] == "genome")
+        row = 0
+        for record in records:
+            if record["id"] == downloaded["id"]:
+                row += next(index for index, item in enumerate(record["files"]) if item["id"] == "genome")
+                break
+            row += len(record["files"])
+        select_reference_row(local_list, row)
+        wait_reference_state("select compatible input for the newly GUI-downloaded genome", lambda:
+            send(user.GetDlgItem(ref, 613), 0x0146) == 1
+            and send(user.GetDlgItem(ref, 613), 0x0147) == 0
+            and user.IsWindowEnabled(user.GetDlgItem(ref, 614)))
+        details = control_text(user.GetDlgItem(ref, 608))
+        require(genome["path"] in details and genome["sha256"] in details,
+                "The newly selected native reference does not match its downloaded genome.")
+        click_reference(614)
+        wait_reference_state("bind the newly GUI-downloaded genome to the native task input", lambda:
+            any(item["text"] == genome["path"] for item in inspector_edits(main))
+            and "Reference assigned." in control_text(user.GetDlgItem(ref, 618)))
+        result["nativeDownloadedReferenceBinding"] = {
+            "tool": "bam/reference-index", "recordId": downloaded["id"], "fileId": "genome",
+            "file": genome["path"], "sha256": genome["sha256"], "matchingTargets": 1,
+            "clickedUseForInput": True, "inspectorEdits": inspector_edits(main),
+            "assignedNotice": control_text(user.GetDlgItem(ref, 618))}
+        result["captures"].append(capture(ref, evidence / "references-gui-download-bound.bmp"))
+        result["captures"].append(capture(main, evidence / "workspace-gui-download-bound.bmp"))
         progress("close References and desktop")
         send(ref, 0x0111, 619, 0)
         time.sleep(.1)
@@ -832,11 +981,11 @@ def gui_smoke_bounded(root, evidence):
     with (evidence / "gui-worker.stderr.txt").open("wb") as stderr:
         process = subprocess.Popen(command, stderr=stderr)
         try:
-            process.wait(timeout=180)
+            process.wait(timeout=480)
         except subprocess.TimeoutExpired as exc:
             progress_file = evidence / "gui-progress.json"
             last = json.loads(progress_file.read_text(encoding="utf-8")) if progress_file.is_file() else {}
-            raise TimeoutError("Native GUI smoke exceeded 180 seconds; last phase: " + json.dumps(last)) from exc
+            raise TimeoutError("Native GUI reference check exceeded 480 seconds; last phase: " + json.dumps(last)) from exc
         finally:
             stop_process_tree(process)
             host_log = root / "user-data" / "desktop-host.stderr.txt"
@@ -910,9 +1059,9 @@ def main(argv=None):
         if args.skip_gui:
             report["skips"].append("Native GUI smoke was explicitly skipped.")
         else:
-            checkpoint(report, args, "gui: launch bounded 180-second native smoke")
+            checkpoint(report, args, "gui: launch bounded 480-second native reference check")
             report["gui"] = gui_smoke_bounded(root, evidence)
-            report["checks"].append("Native app opened References, displayed five local files, bound the exact downloaded genome through its compatible native input, kept controls separate at normal/minimum size and closed cleanly.")
+            report["checks"].append("Native app opened References, displayed local files, selected and downloaded five products through native controls, cancelled through its native button, bound both existing and newly downloaded genomes through compatible native inputs, kept controls separate at normal/minimum size and closed cleanly.")
             checkpoint(report, args, report["checks"][-1])
         report["success"] = True
         checkpoint(report, args, "completed")
