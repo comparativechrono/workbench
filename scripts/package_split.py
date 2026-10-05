@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Package the 0.6 core/starter release and independently installable tool packs.
+"""Package the current core/starter and independently installable tool packs.
 
 No frozen input is modified. Source delivery is a separate, hash-pinned companion
 with the exact legacy source archive and explicit pack-source recovery references.
@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 import shutil
 import sys
+import tempfile
 import zipfile
 
 sys.dont_write_bytecode=True
@@ -20,16 +21,21 @@ SOURCE=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(SOURCE/'workspace'))
 sys.path.insert(0,str(SOURCE/'scripts'))
 from catalog import load_pack
+from app_version import APP_VERSION
 from apply_core_update import NATIVE_NOTICE_FILES, core_inventory, core_path, ordinary_root
 from apply_desktop_update import digest, inside, read_json, require, sha, verify
 
-VERSION='0.6.0'
+VERSION=APP_VERSION
+# Pack API 1 remains compatible with the existing independently released app.
+# A core feature release must not silently raise every tool's installation floor.
+PACK_MIN_APP_VERSION='0.6.0'
 STARTER=('align-0.4.0','bam-0.4.0','variants-0.4.0')
 RUNTIME_MODULES=('app_version.py','catalog.py','engine.py','example.py','desktop_host.py','desktop_model.py',
                  'service.py','verify_installation.py','pack_checks.py','pack_manager.py',
-                 'pack_security.py','core_checks.py')
+                 'pack_security.py','core_checks.py','reference_provider.py','reference_manager.py',
+                 'reference_provenance.py')
 RUNTIME_METADATA=('starter-check-profile.json',)
-FIXED_DATE=(2026,10,3,0,0,0)
+FIXED_DATE=(2026,10,5,0,0,0)
 
 
 def item(path,relative):
@@ -95,13 +101,13 @@ def pack_inventory(folder):
 def build_pack(folder,output):
     folder=ordinary_root(folder);pack,members,inventory=pack_inventory(folder)
     envelope={'schema':1,'id':pack['id'],'version':pack['version'],'packApi':1,
-              'minAppVersion':VERSION,'platform':'windows-x86_64',
+              'minAppVersion':PACK_MIN_APP_VERSION,'platform':'windows-x86_64',
               'manifestSha256':pack['manifestSha256'],'files':inventory}
     archive=_archive(output,[(p,'pack/'+p.relative_to(folder).as_posix(),False) for p in members],
                      [('workbench-pack.json',envelope)])
     return {'id':pack['id'],'name':pack['name'],'version':pack['version'],
             'description':pack['description'],'toolVersions':{key:value['version'] for key,value in pack['tools'].items()},
-            'platform':'windows-x86_64','packApi':1,'minAppVersion':VERSION,
+            'platform':'windows-x86_64','packApi':1,'minAppVersion':PACK_MIN_APP_VERSION,
             'manifestSha256':pack['manifestSha256'],'size':archive['bytes'],
             'sha256':archive['sha256'],'file':archive['file'],'expandedBytes':sum(i['size'] for i in inventory)}
 
@@ -123,15 +129,52 @@ def source_companions(base):
     return contents,list(companions.values())
 
 
-def build_sources(base,output):
+def build_sources(base,output,base_source_archive=None):
+    """Retain the exact legacy sources without recovering every optional pack.
+
+    A split baseline pins its published source ZIP in its inventoried
+    SOURCE-AVAILABILITY.json. Verify that ZIP before using its recovery metadata
+    and embedded legacy archive. The original 0.5.4 path is retained.
+    """
     base=ordinary_root(base)
-    contents,companions=source_companions(base)
-    legacy=base/'source/native-workbench-source.zip'
     manifest=read_json(base/'manifest.json')
-    original=next(i for i in manifest['files'] if i['path']=='source/native-workbench-source.zip')
-    verify(legacy,original['sha256'],original['bytes'])
+    with tempfile.TemporaryDirectory(prefix='workbench-source-') as temporary:
+        if manifest.get('ownership')=='core':
+            inventory=core_inventory(manifest)
+            require(base_source_archive is not None,'A split baseline requires its exact --base-source-archive')
+            require('SOURCE-AVAILABILITY.json' in inventory,'Split baseline source metadata is not inventoried')
+            entry=inventory['SOURCE-AVAILABILITY.json']
+            verify(base/'SOURCE-AVAILABILITY.json',entry['sha256'],entry['bytes'])
+            artifact=read_json(base/'SOURCE-AVAILABILITY.json')['sourceArtifact']
+            source_zip=Path(base_source_archive)
+            verify(source_zip,artifact['sha256'],artifact['bytes'])
+            with zipfile.ZipFile(source_zip) as zipped:
+                names=zipped.namelist()
+                required=('SOURCE-RECOVERY.json','legacy/SOURCE-CONTENTS-0.5.4.json',
+                          'legacy/native-workbench-0.5.4-source.zip')
+                require(all(names.count(name)==1 for name in required),'Source companion recovery members are missing or duplicated')
+                recovery=json.loads(zipped.read(required[0]))
+                contents=json.loads(zipped.read(required[1]))
+                require(recovery.get('release')==manifest['version'],'Source companion belongs to a different application')
+                require(recovery.get('source_aliases')==contents.get('restore_from_runtime'),
+                        'Source recovery inventories disagree')
+                companions=recovery['pack_companions'];original=recovery['legacy_source']
+                legacy=Path(temporary)/'native-workbench-0.5.4-source.zip'
+                with zipped.open(required[2]) as source,legacy.open('xb') as destination:
+                    shutil.copyfileobj(source,destination,1024*1024)
+            verify(legacy,original['sha256'],original['bytes'])
+        else:
+            require(manifest.get('version')=='0.5.4','Expected a frozen 0.5.4 or independent core baseline')
+            contents,companions=source_companions(base)
+            legacy=base/'source/native-workbench-source.zip'
+            original=next(i for i in manifest['files'] if i['path']=='source/native-workbench-source.zip')
+            verify(legacy,original['sha256'],original['bytes'])
+        return _build_sources(base,output,legacy,original,contents,companions)
+
+
+def _build_sources(base,output,legacy,original,contents,companions):
     selected=[]
-    roots=('desktop','workspace','scripts','tests','tools','src','include','platform_windows','pack-examples')
+    roots=('desktop','workspace','scripts','tests','tools','src','include','platform_windows','pack-examples','knowledge','docs')
     excluded={'__pycache__','node_modules','.git','build','tmp'}
     suffixes={'.py','.cpp','.c','.h','.hpp','.sh','.cmd','.json','.ini','.md','.txt','.patch','.rc','.manifest',
               '.yml','.yaml','.toml','.svg','.ps1','.fa','.fasta','.fna','.fq','.fastq','.tsv','.csv','.bed','.vcf','.in'}
@@ -141,20 +184,23 @@ def build_sources(base,output):
             if set(relative.parts)&excluded or any(p.startswith('.') for p in relative.parts):continue
             if path.suffix.lower() not in suffixes and path.name not in {'LICENSE','NOTICE','COPYING','Makefile'}:continue
             selected.append((path,'current/'+relative.as_posix(),False))
-    for name in ('LICENSE','build_variant.py','variant-protocol.txt','variant-provenance.json'):
+    for name in ('LICENSE','AGENTS.md','build_variant.py','variant-protocol.txt','variant-provenance.json'):
         path=SOURCE/name
         if path.is_file():selected.append((path,'current/'+name,False))
     for path in sorted(SOURCE.glob('README*')):
         if path.is_file():selected.append((path,'current/'+path.name,False))
-    for path in sorted((SOURCE/'docs').glob('*')):
-        if path.is_file() and path.suffix.lower() in suffixes:selected.append((path,'current/docs/'+path.name,False))
+    workflows=SOURCE/'.github/workflows'
+    if workflows.is_dir():
+        selected.extend((p,'current/'+p.relative_to(SOURCE).as_posix(),False)
+                        for p in files(workflows) if p.suffix.lower() in {'.yml','.yaml'})
     starter=SOURCE/'examples/starter'
     require(starter.is_dir(),'Create the starter scientific fixture before packaging source')
     selected.extend((p,'current/examples/starter/'+p.relative_to(starter).as_posix(),False) for p in files(starter))
     selected.append((legacy,'legacy/native-workbench-0.5.4-source.zip',True))
     current_inventory=[item(path,name) for path,name,_ in selected if name.startswith('current/')]
     recovery={'schema':1,'release':VERSION,'legacy_source':original,'pack_companions':companions,
-              'instructions':'Extract legacy/native-workbench-0.5.4-source.zip into a separate legacy-source folder. Obtain the listed exact pack companions, place each ZIP pack/ tree at packs/<id>-<version>/ in a separate runtime root, and run legacy-source/native-workbench/scripts/restore_source_archives.py with that source root and runtime root. The current/ folder contains the actual 0.6 application/build/test sources, not the old versions.',
+              'instructions':'Extract legacy/native-workbench-0.5.4-source.zip into a separate legacy-source folder. Obtain the listed exact pack companions, place each ZIP pack/ tree at packs/<id>-<version>/ in a separate runtime root, and run legacy-source/native-workbench/scripts/restore_source_archives.py with that source root and runtime root. The current/ folder contains the actual '+VERSION+' application/build/test sources, not the old versions.',
+              'build_baseline':{'version':read_json(base/'manifest.json')['version'],'manifestSha256':sha(base/'manifest.json')},
               'source_aliases':contents['restore_from_runtime'],'current_source_files':current_inventory}
     result=_archive(output,selected,[('SOURCE-RECOVERY.json',recovery),('legacy/SOURCE-CONTENTS-0.5.4.json',contents)])
     return {**result,'packCompanions':companions,'legacySourceSha256':original['sha256'],
@@ -166,10 +212,22 @@ def stage(base,app,source_artifact):
     require(not app.exists(),'Select an empty new application staging folder')
     require(not app.is_relative_to(base) and not base.is_relative_to(app),'Staging overlaps the frozen baseline')
     baseline=read_json(base/'manifest.json')
-    require(baseline.get('version')=='0.5.4','Expected a frozen 0.5.4 baseline')
-    from apply_desktop_update import inventory as release_inventory
-    baseline_files=release_inventory(baseline)
-    for prefix in ('runtime',*('packs/'+folder for folder in STARTER)):
+    if baseline.get('ownership')=='core':
+        baseline_files=core_inventory(baseline)
+        pins={entry['folder']:entry for entry in baseline.get('starter_packs',[])}
+        require(set(pins)=={'packs/'+folder for folder in STARTER},'Frozen starter pack identities differ')
+        for folder in STARTER:
+            pack,_,_=pack_inventory(base/'packs'/folder)
+            pin=pins['packs/'+folder]
+            require((pin.get('id'),pin.get('version'),pin.get('manifestSha256'))==
+                    (pack['id'],pack['version'],pack['manifestSha256']),'Frozen starter pack pin differs')
+        prefixes=('runtime',)
+    else:
+        require(baseline.get('version')=='0.5.4','Expected a frozen 0.5.4 or independent core baseline')
+        from apply_desktop_update import inventory as release_inventory
+        baseline_files=release_inventory(baseline)
+        prefixes=('runtime',*('packs/'+folder for folder in STARTER))
+    for prefix in prefixes:
         for path in files(base/prefix):
             name=path.relative_to(base).as_posix()
             require(name in baseline_files,'Uninventoried baseline file: '+name)
@@ -245,14 +303,14 @@ def starter_archive(app,output):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     sub=parser.add_subparsers(dest='command',required=True)
-    command=sub.add_parser('sources');command.add_argument('--base-root',type=Path,required=True);command.add_argument('--output',type=Path,required=True);command.add_argument('--metadata',type=Path,required=True)
+    command=sub.add_parser('sources');command.add_argument('--base-root',type=Path,required=True);command.add_argument('--base-source-archive',type=Path);command.add_argument('--output',type=Path,required=True);command.add_argument('--metadata',type=Path,required=True)
     command=sub.add_parser('stage');command.add_argument('--base-root',type=Path,required=True);command.add_argument('--app-root',type=Path,required=True);command.add_argument('--source-metadata',type=Path,required=True)
     command=sub.add_parser('starter');command.add_argument('--app-root',type=Path,required=True);command.add_argument('--output',type=Path,required=True)
     command=sub.add_parser('pack');command.add_argument('--pack-root',type=Path,required=True);command.add_argument('--output',type=Path,required=True)
     args=parser.parse_args()
     if args.command=='sources':
         require(not args.metadata.exists(),'Source metadata output already exists')
-        result=build_sources(args.base_root,args.output)
+        result=build_sources(args.base_root,args.output,args.base_source_archive)
         args.metadata.parent.mkdir(parents=True,exist_ok=True)
         args.metadata.write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
     elif args.command=='stage':result=stage(args.base_root,args.app_root,read_json(args.source_metadata))

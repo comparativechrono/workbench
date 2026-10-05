@@ -55,6 +55,7 @@ enum {
   OPEN_RESULTS,
   CLEAR_FILTER = 401,
   MANAGE_TOOLS,
+  MANAGE_REFERENCES,
   PACK_SEARCH = 501,
   PACK_FILTER,
   PACK_LIST,
@@ -68,6 +69,25 @@ enum {
   PACK_PROGRESS,
   PACK_NOTICE,
   PACK_CLOSE,
+  REF_TAB = 601,
+  REF_RELEASE,
+  REF_QUERY,
+  REF_SEARCH,
+  REF_SPECIES,
+  REF_DISCOVER,
+  REF_FILES,
+  REF_DETAILS,
+  REF_DESTINATION,
+  REF_BROWSE,
+  REF_DOWNLOAD,
+  REF_LOCAL,
+  REF_TARGET,
+  REF_USE,
+  REF_OPEN,
+  REF_CANCEL,
+  REF_PROGRESS,
+  REF_NOTICE,
+  REF_CLOSE,
   FIELD_BASE = 2000
 };
 std::wstring wide(const std::string &s) { return bw::utf16(s); }
@@ -413,14 +433,21 @@ class Workspace {
       cancel{}, review{}, back{}, dag{}, form{}, status{}, manageTools{},
       packWindow{}, packSearch{}, packFilter{}, packList{}, packDetails{},
       packInstall{}, packImportZip{}, packImportFolder{}, packSource{},
-      packRefresh{}, packCancel{}, packProgress{}, packNotice{}, packClose{};
+      packRefresh{}, packCancel{}, packProgress{}, packNotice{}, packClose{},
+      manageReferences{}, refWindow{}, refTab{}, refIntro{}, refReleaseLabel{},
+      refRelease{}, refQuery{}, refSearch{}, refSpecies{}, refDiscover{},
+      refFiles{}, refDetails{}, refDestinationLabel{}, refDestination{},
+      refBrowse{}, refDownload{}, refLocal{}, refTargetLabel{}, refTarget{},
+      refUse{}, refOpen{}, refCancel{}, refProgress{}, refNotice{}, refClose{};
   HFONT font{}, bold{}, small{};
+  HFONT refFont{};
   HBRUSH paper{}, background{};
   desktop::HostProcess host;
   Json state = Json::object(), catalog = object({{"tools", Json::object()}}),
        runState = Json::object(), historyRun = Json::object(),
        packState = object({{"packs", Json::array()}}),
-       packOperation = Json::object();
+       packOperation = Json::object(), refState = Json::object(),
+       refOperation = Json::object(), refTargets = Json::array();
   std::map<long long, std::string> pending;
   long long nextRequest = 1, activeRequest = 0;
   std::deque<Json> outgoing;
@@ -431,8 +458,11 @@ class Workspace {
   bool packBusy = false, packActionPending = false, packPollPending = false,
        packRebuilding = false, packReloadAfterOperation = false,
        packListAfterOperation = false, packPollFailed = false;
+  bool refBusy = false, refActionPending = false, refPollPending = false,
+       refRebuilding = false, refPollFailed = false;
   UINT dpi = 96;
   UINT packDpi = 96;
+  UINT refDpi = 96;
   int width = 1000, height = 700, formScroll = 0, formExtent = 0, dagX = 0,
       dagY = 0, dagWidth = 1, dagHeight = 1;
   std::vector<Field> fields;
@@ -440,12 +470,14 @@ class Workspace {
   std::map<int, size_t> fieldIds;
   std::vector<std::string> taskIds, stepIds;
   std::vector<size_t> packRows;
+  std::vector<std::pair<size_t, size_t>> refLocalRows;
   std::vector<Hit> hits;
   std::string selected, runId, dragTool;
   Json requiredPack = Json::object();
   std::wstring root, logs;
   ULONGLONG lastPoll = 0;
   ULONGLONG lastPackPoll = 0;
+  ULONGLONG lastRefPoll = 0;
   bool pollPending = false;
   int px(int n) const { return MulDiv(n, static_cast<int>(dpi), 96); }
   HWND make(const wchar_t *klass, const std::wstring &title, DWORD style,
@@ -547,7 +579,8 @@ class Workspace {
     return id;
   }
   void model(const std::string &action, Json payload = Json::object()) {
-    if (!ready || busy || packBusy || packActionPending || showingHistory)
+    if (!ready || busy || packBusy || packActionPending || refBusy ||
+        refActionPending || showingHistory)
       return;
     send("model",
          object({{"action", action}, {"payload", std::move(payload)}}));
@@ -626,9 +659,12 @@ class Workspace {
     std::wostringstream value;
     if (bytes < 1024 * 1024)
       value << std::fixed << std::setprecision(0) << bytes / 1024.0 << L" KB";
-    else
+    else if (bytes < 1024LL * 1024 * 1024)
       value << std::fixed << std::setprecision(1)
             << bytes / (1024.0 * 1024.0) << L" MB";
+    else
+      value << std::fixed << std::setprecision(1)
+            << bytes / (1024.0 * 1024.0 * 1024.0) << L" GB";
     return value.str();
   }
   static std::string pack_key(const Json &item) {
@@ -659,7 +695,8 @@ class Workspace {
   void pack_enabled() {
     if (!packWindow)
       return;
-    const bool idle = ready && !busy && !closing && !packBusy &&
+    const bool idle = ready && !busy && !closing && !packBusy && !refBusy &&
+                      !refActionPending &&
                       !packActionPending;
     const auto &item = selected_pack();
     const bool canInstall = !getstr(item, "id").empty() &&
@@ -860,7 +897,8 @@ class Workspace {
       pack_send("packs/cancel");
       return;
     }
-    if (!ready || busy || closing || packBusy || packActionPending)
+    if (!ready || busy || closing || packBusy || packActionPending ||
+        refBusy || refActionPending)
       return;
     if (id == PACK_REFRESH) {
       pack_send("packs/refresh");
@@ -1075,7 +1113,657 @@ class Workspace {
     pack_notice();
     pack_enabled();
     enabled();
-    if (closing && !packBusy && !busy)
+    if (closing && !packBusy && !busy && !refBusy)
+      send("shutdown");
+  }
+  static std::wstring reference_species(const Json &item) {
+    const auto &species = item.get("species");
+    return species.is_object() ? wt(species, "name", getstr(species, "id"))
+                               : wide(text(species));
+  }
+  const Json &reference_local_record() const {
+    static const Json empty = Json::object();
+    if (!refWindow)
+      return empty;
+    const int row = ListView_GetNextItem(refLocal, -1, LVNI_SELECTED);
+    if (row < 0 || static_cast<size_t>(row) >= refLocalRows.size())
+      return empty;
+    const auto index = refLocalRows[static_cast<size_t>(row)].first;
+    const auto &items = refState.get("local").array_items();
+    return index < items.size() ? items[index] : empty;
+  }
+  const Json &reference_local_file() const {
+    static const Json empty = Json::object();
+    if (!refWindow)
+      return empty;
+    const int row = ListView_GetNextItem(refLocal, -1, LVNI_SELECTED);
+    if (row < 0 || static_cast<size_t>(row) >= refLocalRows.size())
+      return empty;
+    const auto index = refLocalRows[static_cast<size_t>(row)].second;
+    const auto &files = reference_local_record().get("files").array_items();
+    return index < files.size() ? files[index] : empty;
+  }
+  const Json &reference_selected_species() const {
+    static const Json empty = Json::object();
+    if (!refWindow)
+      return empty;
+    const int row = ListView_GetNextItem(refSpecies, -1, LVNI_SELECTED);
+    const auto &items = refState.get("species").array_items();
+    return row >= 0 && static_cast<size_t>(row) < items.size()
+               ? items[static_cast<size_t>(row)] : empty;
+  }
+  void reference_send(const std::string &method, Json params = Json::object()) {
+    if (method == "references/status")
+      refPollPending = true;
+    else
+      refActionPending = true;
+    send(method, std::move(params));
+    enabled();
+  }
+  void reference_enabled() {
+    if (!refWindow)
+      return;
+    const bool idle = ready && !busy && !closing && !packBusy &&
+                      !packActionPending && !refBusy && !refActionPending;
+    for (HWND h : {refRelease, refQuery, refSearch, refSpecies, refFiles,
+                   refDestination, refBrowse, refLocal, refTarget})
+      EnableWindow(h, idle);
+    EnableWindow(refDiscover, idle &&
+                 !getstr(reference_selected_species(), "id").empty());
+    bool checked = false;
+    for (int row = 0; row < ListView_GetItemCount(refFiles); ++row)
+      checked = checked || ListView_GetCheckState(refFiles, row);
+    EnableWindow(refDownload, idle && checked &&
+                 !getstr(refState.get("discovery"), "selection_id").empty() &&
+                 !control_text(refDestination).empty());
+    EnableWindow(refOpen, idle && !getstr(reference_local_record(), "id").empty());
+    EnableWindow(refTarget, idle && reference_local_record().get("available").boolean(true));
+    EnableWindow(refUse, idle && !showingHistory &&
+                 reference_local_record().get("available").boolean(true) &&
+                 SendMessageW(refTarget, CB_GETCURSEL, 0, 0) >= 0 &&
+                 !refTargets.array_items().empty());
+    EnableWindow(refCancel, ready && refBusy && !refActionPending &&
+                 refOperation.get("cancellable").boolean(true) &&
+                 getstr(refOperation, "status") != "cancelling");
+  }
+  void reference_details() {
+    if (!refWindow)
+      return;
+    std::wstring value;
+    if (TabCtrl_GetCurSel(refTab) == 1) {
+      const auto &record = reference_local_record(), &file = reference_local_file();
+      if (!getstr(record, "id").empty()) {
+        if (!record.get("available").boolean(true))
+          value = L"Unavailable: " + wt(record, "error", "This reference bundle needs attention.") + L"\n";
+        value += reference_species(record) + L"  ·  " + wt(record, "assembly") +
+                L"  ·  Ensembl release " + wt(record, "release") +
+                L"\nAssembly accession: " + wt(record, "assembly_accession", "Not recorded") +
+                L"\n" + wt(file, "path") + L"\nSHA-256: " + wt(file, "sha256") +
+                L"\nDownload record: " + wt(record, "receipt_path");
+        for (const auto &warning : record.get("warnings").array_items())
+          value += L"\nWarning: " + wide(text(warning));
+      } else
+        value = L"No downloaded reference files yet. Find a species on the Find online tab, "
+                L"then select the files to download. Existing downloads can be used offline.";
+      const auto omitted = refState.get("omitted_local").integer();
+      if (omitted > 0)
+        value += L"\nLibrary display limit: " + std::to_wstring(omitted) +
+                 L" older reference bundles are not shown here. Their files remain on disk.";
+    } else {
+      const auto &discovery = refState.get("discovery");
+      value = wt(discovery, "notice");
+      if (!getstr(discovery, "selection_id").empty()) {
+        const auto &species = discovery.get("species");
+        value = reference_species(discovery) + L"  ·  " +
+                wt(discovery, "assembly", getstr(species, "assembly")) +
+                L"  ·  Ensembl release " + wt(discovery, "release") +
+                L"\nAssembly accession: " + wt(discovery, "assembly_accession",
+                    getstr(species, "assembly_accession", "Not recorded")) + L"\n" + value;
+        for (const auto &warning : discovery.get("warnings").array_items())
+          value += L"\nWarning: " + wide(text(warning));
+        const int row = ListView_GetNextItem(refFiles, -1, LVNI_SELECTED);
+        const auto &files = discovery.get("files").array_items();
+        if (row >= 0 && static_cast<size_t>(row) < files.size()) {
+          const auto &file = files[static_cast<size_t>(row)];
+          value += L"\n" + wt(file, "filename") + L"\n" + wt(file, "detail");
+          value += L"\nIntegrity: Ensembl CHECKSUMS (BSD sum) and gzip CRC are checked; "
+                   L"local SHA-256 hashes are recorded. BSD sum is not a cryptographic signature.";
+        }
+      }
+      if (value.empty())
+        value = L"Select a species, then Find files. Genome, annotation and transcript files "
+                L"are tied to the selected release and assembly. Downloads are unpacked to "
+                L"plain local files with a provenance record.";
+    }
+    SetWindowTextW(refDetails, lines(value).c_str());
+    reference_enabled();
+  }
+  void reference_targets() {
+    refTargets = Json::array();
+    if (!refWindow)
+      return;
+    SendMessageW(refTarget, CB_RESETCONTENT, 0, 0);
+    const auto &record = reference_local_record(), &file = reference_local_file();
+    if (ready && !refBusy && !refActionPending && !packBusy && !busy &&
+        !closing && !showingHistory && !getstr(file, "id").empty() &&
+        record.get("available").boolean(true))
+      reference_send("references/targets", object({{"record_id", getstr(record, "id")},
+                                                   {"file_id", getstr(file, "id")}}));
+    reference_details();
+  }
+  void reference_refresh(const Json &previous) {
+    if (!refWindow)
+      return;
+    refRebuilding = true;
+    if (previous.get("releases").dump() != refState.get("releases").dump()) {
+      auto selectedRelease = control_text(refRelease);
+      SendMessageW(refRelease, CB_RESETCONTENT, 0, 0);
+      int selectedIndex = -1, index = 0;
+      for (const auto &release : refState.get("releases").array_items()) {
+        auto label = wide(release.is_object() ? getstr(release, "release", getstr(release, "id"))
+                                             : text(release));
+        SendMessageW(refRelease, CB_ADDSTRING, 0, reinterpret_cast<LPARAM>(label.c_str()));
+        if (label == selectedRelease || (selectedRelease.empty() && label == L"116"))
+          selectedIndex = index;
+        ++index;
+      }
+      if (index == 0) {
+        SendMessageW(refRelease, CB_ADDSTRING, 0, reinterpret_cast<LPARAM>(L"116"));
+        index = 1;
+      }
+      SendMessageW(refRelease, CB_SETCURSEL, selectedIndex < 0 ? 0 : selectedIndex, 0);
+    }
+    if (previous.get("species").dump() != refState.get("species").dump()) {
+      ListView_DeleteAllItems(refSpecies);
+      for (const auto &species : refState.get("species").array_items()) {
+        LVITEMW row{};
+        row.mask = LVIF_TEXT;
+        row.iItem = ListView_GetItemCount(refSpecies);
+        auto label = wt(species, "name", getstr(species, "id"));
+        row.pszText = label.data();
+        ListView_InsertItem(refSpecies, &row);
+        auto assembly = wt(species, "assembly") + L" · " + wt(species, "release"),
+             accession = wt(species, "assembly_accession");
+        ListView_SetItemText(refSpecies, row.iItem, 1, assembly.data());
+        ListView_SetItemText(refSpecies, row.iItem, 2, accession.data());
+      }
+      if (ListView_GetItemCount(refSpecies))
+        ListView_SetItemState(refSpecies, 0, LVIS_SELECTED | LVIS_FOCUSED,
+                             LVIS_SELECTED | LVIS_FOCUSED);
+    }
+    if (previous.get("discovery").dump() != refState.get("discovery").dump()) {
+      ListView_DeleteAllItems(refFiles);
+      for (const auto &file : refState.get("discovery").get("files").array_items()) {
+        LVITEMW row{};
+        row.mask = LVIF_TEXT;
+        row.iItem = ListView_GetItemCount(refFiles);
+        auto label = wt(file, "label", getstr(file, "kind"));
+        row.pszText = label.data();
+        ListView_InsertItem(refFiles, &row);
+        auto filename = wt(file, "filename"), size = download_size(file.get("bytes").integer());
+        ListView_SetItemText(refFiles, row.iItem, 1, filename.data());
+        ListView_SetItemText(refFiles, row.iItem, 2, size.data());
+      }
+    }
+    if (previous.get("local").dump() != refState.get("local").dump()) {
+      // Resolve previous row identities against the previous snapshot, not the new one.
+      std::string keepRecord, keepFile;
+      int selectedRow = ListView_GetNextItem(refLocal, -1, LVNI_SELECTED);
+      if (selectedRow >= 0 && static_cast<size_t>(selectedRow) < refLocalRows.size()) {
+        const auto pair = refLocalRows[static_cast<size_t>(selectedRow)];
+        const auto &oldRecords = previous.get("local").array_items();
+        if (pair.first < oldRecords.size()) {
+          const auto &old = oldRecords[pair.first];
+          keepRecord = getstr(old, "id");
+          if (pair.second < old.get("files").array_items().size())
+            keepFile = getstr(old.get("files").array_items()[pair.second], "id");
+        }
+      }
+      ListView_DeleteAllItems(refLocal);
+      refLocalRows.clear();
+      const auto &records = refState.get("local").array_items();
+      selectedRow = -1;
+      for (size_t r = 0; r < records.size(); ++r) {
+        const auto &record = records[r];
+        const auto &files = record.get("files").array_items();
+        for (size_t f = 0; f < files.size(); ++f) {
+          const auto &file = files[f];
+          LVITEMW row{};
+          row.mask = LVIF_TEXT;
+          row.iItem = static_cast<int>(refLocalRows.size());
+          auto label = reference_species(record);
+          if (!record.get("available").boolean(true))
+            label += L" · unavailable";
+          row.pszText = label.data();
+          ListView_InsertItem(refLocal, &row);
+          auto assembly = wt(record, "assembly") + L" · " + wt(record, "release"),
+               kind = wt(file, "label", getstr(file, "kind")),
+               size = download_size(file.get("bytes").integer());
+          ListView_SetItemText(refLocal, row.iItem, 1, assembly.data());
+          ListView_SetItemText(refLocal, row.iItem, 2, kind.data());
+          ListView_SetItemText(refLocal, row.iItem, 3, size.data());
+          if (getstr(record, "id") == keepRecord && getstr(file, "id") == keepFile)
+            selectedRow = row.iItem;
+          refLocalRows.push_back({r, f});
+        }
+      }
+      if (selectedRow < 0 && !refLocalRows.empty())
+        selectedRow = 0;
+      if (selectedRow >= 0)
+        ListView_SetItemState(refLocal, selectedRow, LVIS_SELECTED | LVIS_FOCUSED,
+                             LVIS_SELECTED | LVIS_FOCUSED);
+      refTargets = Json::array();
+      SendMessageW(refTarget, CB_RESETCONTENT, 0, 0);
+    }
+    refRebuilding = false;
+    reference_details();
+  }
+  void reference_notice() {
+    if (!refWindow)
+      return;
+    auto value = wt(refOperation, "message", getstr(refState, "notice"));
+    if (value.empty())
+      value = L"Search and download contact Ensembl. Analysis files stay on this computer.";
+    const auto omitted = refState.get("omitted_local").integer();
+    if (omitted > 0)
+      value += L"  " + std::to_wstring(omitted) +
+               L" older bundles are outside the library display limit; their files remain on disk.";
+    const auto bytes = refOperation.get("bytes").integer(),
+               total = refOperation.get("total").integer();
+    if (refBusy && bytes > 0)
+      value += L"  " + download_size(bytes) +
+               (total > 0 ? L" / " + download_size(total) : L"");
+    SetWindowTextW(refNotice, value.c_str());
+    SendMessageW(refProgress, PBM_SETRANGE32, 0, 1000);
+    SendMessageW(refProgress, PBM_SETPOS,
+                 total > 0 ? static_cast<WPARAM>(std::clamp(
+                   1000.0 * static_cast<double>(bytes) / static_cast<double>(total),
+                   0.0, 1000.0)) : 0, 0);
+    ShowWindow(refProgress, refBusy ? SW_SHOW : SW_HIDE);
+    SetWindowTextW(refClose, refBusy ? L"Hide" : L"Close");
+  }
+  void reference_layout() {
+    if (!refWindow)
+      return;
+    RECT rect{};
+    GetClientRect(refWindow, &rect);
+    const int w = MulDiv(rect.right, 96, refDpi), h = MulDiv(rect.bottom, 96, refDpi);
+    auto put = [&](HWND control, int x, int y, int cw, int ch) {
+      MoveWindow(control, MulDiv(x, refDpi, 96), MulDiv(y, refDpi, 96),
+                 MulDiv(std::max(1, cw), refDpi, 96),
+                 MulDiv(std::max(1, ch), refDpi, 96), TRUE);
+    };
+    const bool local = TabCtrl_GetCurSel(refTab) == 1;
+    put(refTab, 18, 14, w - 36, 30);
+    put(refIntro, 18, 54, w - 36, 43);
+    SetWindowTextW(refIntro, local
+      ? L"Downloaded references are local files. Select one, choose a compatible input in "
+        L"your current workspace, then Use for input."
+      : L"Ensembl archive · release-pinned genomes and annotations. Release 116 is the final "
+        L"classic release; newer Ensembl data is not included in this provider.");
+    const int available = std::max(240, h - 382), speciesHeight = available * 2 / 5,
+              filesTop = 190 + speciesHeight, filesHeight = available - speciesHeight;
+    put(refReleaseLabel, 18, 107, 56, 28);
+    put(refRelease, 78, 104, 84, 250);
+    put(refQuery, 174, 104, w - 302, 32);
+    put(refSearch, w - 116, 104, 98, 32);
+    put(refSpecies, 18, 148, w - 36, speciesHeight);
+    put(refDiscover, 18, 154 + speciesHeight, 132, 30);
+    put(refFiles, 18, filesTop, w - 36, filesHeight);
+    put(refLocal, 18, 104, w - 36, h - 360);
+    put(refDetails, 18, h - 180, w - 36, 76);
+    if (local) {
+      put(refDetails, 18, h - 244, w - 36, 114);
+      put(refTargetLabel, 18, h - 116, 116, 30);
+      put(refTarget, 138, h - 119, w - 432, 240);
+      put(refUse, w - 282, h - 119, 128, 32);
+      put(refOpen, w - 142, h - 119, 124, 32);
+    } else {
+      put(refDestinationLabel, 18, h - 116, 66, 30);
+      put(refDestination, 88, h - 119, w - 400, 32);
+      put(refBrowse, w - 300, h - 119, 128, 32);
+      put(refDownload, w - 160, h - 119, 142, 32);
+    }
+    put(refNotice, 18, h - 74, w - 278, 50);
+    put(refCancel, w - 252, h - 74, 128, 32);
+    put(refClose, w - 112, h - 74, 94, 32);
+    put(refProgress, 18, h - 15, w - 36, 6);
+    for (HWND control : {refReleaseLabel, refRelease, refQuery, refSearch, refSpecies,
+                         refDiscover, refFiles, refDestinationLabel, refDestination,
+                         refBrowse, refDownload})
+      ShowWindow(control, local ? SW_HIDE : SW_SHOW);
+    for (HWND control : {refLocal, refTargetLabel, refTarget, refUse, refOpen})
+      ShowWindow(control, local ? SW_SHOW : SW_HIDE);
+    auto column = [&](HWND list, int at, int size) {
+      ListView_SetColumnWidth(list, at, MulDiv(size, refDpi, 96));
+    };
+    column(refSpecies, 0, (w - 70) / 2);
+    column(refSpecies, 1, (w - 70) / 4);
+    column(refSpecies, 2, (w - 70) / 4);
+    column(refFiles, 0, 210);
+    column(refFiles, 1, std::max(220, w - 366));
+    column(refFiles, 2, 98);
+    column(refLocal, 0, std::max(180, (w - 170) / 3));
+    column(refLocal, 1, std::max(180, (w - 170) / 3));
+    column(refLocal, 2, std::max(180, (w - 170) / 3));
+    column(refLocal, 3, 98);
+  }
+  void reference_fonts() {
+    HFONT replacement = CreateFontW(-MulDiv(14, refDpi, 96), 0, 0, 0, FW_NORMAL,
+        FALSE, FALSE, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,
+        CLEARTYPE_QUALITY, DEFAULT_PITCH, L"Segoe UI");
+    EnumChildWindows(refWindow, [](HWND child, LPARAM value) -> BOOL {
+      SendMessageW(child, WM_SETFONT, static_cast<WPARAM>(value), TRUE);
+      return TRUE;
+    }, reinterpret_cast<LPARAM>(replacement));
+    if (refFont)
+      DeleteObject(refFont);
+    refFont = replacement;
+  }
+  void reference_command(int id, int notification) {
+    if (refRebuilding)
+      return;
+    if (id == REF_CLOSE || id == IDCANCEL) {
+      DestroyWindow(refWindow);
+      return;
+    }
+    if (id == REF_DESTINATION || id == REF_TARGET) {
+      reference_enabled();
+      return;
+    }
+    if (id == REF_CANCEL && refBusy && !refActionPending &&
+        refOperation.get("cancellable").boolean(true)) {
+      reference_send("references/cancel");
+      return;
+    }
+    if (!ready || busy || closing || packBusy || packActionPending ||
+        refBusy || refActionPending)
+      return;
+    if ((id == REF_QUERY && notification == EN_CHANGE) || id == REF_RELEASE)
+      return;
+    if (id == REF_SEARCH || (id == IDOK && TabCtrl_GetCurSel(refTab) == 0)) {
+      const auto release = control_text(refRelease);
+      if (release.empty())
+        return;
+      reference_send("references/search", object({{"release", std::stoi(release)},
+                                                   {"query", narrow(control_text(refQuery))}}));
+    } else if (id == REF_DISCOVER) {
+      const auto &species = reference_selected_species();
+      if (!getstr(species, "id").empty())
+        reference_send("references/discover", object({{"release", species.get("release")},
+                            {"species_id", getstr(species, "id")}}));
+    } else if (id == REF_BROWSE) {
+      const auto path = pick(refWindow, true, false, L"", L"Choose where to store reference downloads");
+      if (!path.empty())
+        SetWindowTextW(refDestination, path.c_str());
+    } else if (id == REF_DOWNLOAD) {
+      Json selectedFiles = Json::array();
+      const auto &files = refState.get("discovery").get("files").array_items();
+      for (size_t i = 0; i < files.size(); ++i)
+        if (ListView_GetCheckState(refFiles, static_cast<int>(i)))
+          selectedFiles.array_items().push_back(getstr(files[i], "id"));
+      if (!selectedFiles.array_items().empty())
+        reference_send("references/download", object({
+            {"selection_id", getstr(refState.get("discovery"), "selection_id")},
+            {"file_ids", selectedFiles}, {"destination", narrow(control_text(refDestination))}}));
+    } else if (id == REF_OPEN || id == REF_USE) {
+      const auto &record = reference_local_record(), &file = reference_local_file();
+      if (getstr(record, "id").empty())
+        return;
+      if (id == REF_OPEN)
+        reference_send("references/open", object({{"record_id", getstr(record, "id")}}));
+      else {
+        if (!record.get("available").boolean(true))
+          return;
+        const auto selectedTarget = SendMessageW(refTarget, CB_GETCURSEL, 0, 0);
+        const auto &targets = refTargets.array_items();
+        if (selectedTarget >= 0 && static_cast<size_t>(selectedTarget) < targets.size()) {
+          const auto &target = targets[static_cast<size_t>(selectedTarget)];
+          commit_all();
+          reference_send("references/use", object({{"record_id", getstr(record, "id")},
+              {"file_id", getstr(file, "id")}, {"source_id", getstr(target, "source_id")},
+              {"field_id", getstr(target, "field_id")}}));
+        }
+      }
+    }
+    reference_enabled();
+  }
+  static LRESULT CALLBACK reference_proc(HWND h, UINT m, WPARAM w, LPARAM l) {
+    auto *app = reinterpret_cast<Workspace *>(GetWindowLongPtrW(h, GWLP_USERDATA));
+    if (m == WM_NCCREATE) {
+      app = static_cast<Workspace *>(reinterpret_cast<CREATESTRUCTW *>(l)->lpCreateParams);
+      app->refWindow = h;
+      SetWindowLongPtrW(h, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(app));
+    }
+    if (!app)
+      return DefWindowProcW(h, m, w, l);
+    try {
+      switch (m) {
+      case WM_COMMAND:
+        app->reference_command(LOWORD(w), HIWORD(w));
+        return 0;
+      case WM_NOTIFY: {
+        auto *notice = reinterpret_cast<NMHDR *>(l);
+        if (app->refRebuilding)
+          return 0;
+        if (notice->idFrom == REF_TAB && notice->code == TCN_SELCHANGE) {
+          app->reference_layout();
+          if (TabCtrl_GetCurSel(app->refTab) == 1)
+            app->reference_targets();
+          app->reference_details();
+        } else if (notice->code == LVN_ITEMCHANGED) {
+          if (notice->idFrom == REF_LOCAL) {
+            const auto *change = reinterpret_cast<NMLISTVIEW *>(l);
+            if ((change->uNewState & LVIS_SELECTED) && !(change->uOldState & LVIS_SELECTED))
+              app->reference_targets();
+          } else if (notice->idFrom == REF_FILES || notice->idFrom == REF_SPECIES)
+            app->reference_details();
+        }
+        return 0;
+      }
+      case WM_SIZE:
+        app->reference_layout();
+        return 0;
+      case WM_ACTIVATE:
+        if (LOWORD(w) != WA_INACTIVE && app->refTab &&
+            TabCtrl_GetCurSel(app->refTab) == 1 && !app->refActionPending)
+          app->reference_targets();
+        break;
+      case WM_DPICHANGED: {
+        app->refDpi = HIWORD(w);
+        app->reference_fonts();
+        const auto *rect = reinterpret_cast<RECT *>(l);
+        SetWindowPos(h, nullptr, rect->left, rect->top, rect->right - rect->left,
+                     rect->bottom - rect->top, SWP_NOZORDER | SWP_NOACTIVATE);
+        app->reference_layout();
+        return 0;
+      }
+      case WM_GETMINMAXINFO: {
+        auto *info = reinterpret_cast<MINMAXINFO *>(l);
+        info->ptMinTrackSize = {MulDiv(820, app->refDpi, 96), MulDiv(680, app->refDpi, 96)};
+        return 0;
+      }
+      case WM_CTLCOLORSTATIC:
+      case WM_CTLCOLOREDIT:
+      case WM_CTLCOLORBTN: {
+        auto dc = reinterpret_cast<HDC>(w);
+        SetTextColor(dc, INK);
+        SetBkColor(dc, BACK);
+        return reinterpret_cast<LRESULT>(app->background);
+      }
+      case WM_CLOSE:
+        DestroyWindow(h);
+        return 0;
+      case WM_NCDESTROY:
+        app->refWindow = nullptr;
+        app->refLocalRows.clear();
+        app->refTargets = Json::array();
+        SetWindowLongPtrW(h, GWLP_USERDATA, 0);
+        return DefWindowProcW(h, m, w, l);
+      default:
+        break;
+      }
+    } catch (const std::exception &error) {
+      MessageBoxW(h, wide(error.what()).c_str(), L"References", MB_OK | MB_ICONERROR);
+    }
+    return DefWindowProcW(h, m, w, l);
+  }
+  void show_references() {
+    if (refWindow) {
+      ShowWindow(refWindow, SW_RESTORE);
+      SetForegroundWindow(refWindow);
+      return;
+    }
+    WNDCLASSEXW klass{sizeof(klass)};
+    klass.lpfnWndProc = reference_proc;
+    klass.hInstance = instance;
+    klass.hCursor = LoadCursorW(nullptr, IDC_ARROW);
+    klass.hbrBackground = background;
+    klass.lpszClassName = L"WorkbenchReferences070";
+    RegisterClassExW(&klass);
+    RECT owner{}, area{};
+    GetWindowRect(window, &owner);
+    MONITORINFO monitor{sizeof(monitor)};
+    if (GetMonitorInfoW(MonitorFromWindow(window, MONITOR_DEFAULTTONEAREST), &monitor))
+      area = monitor.rcWork;
+    else
+      SystemParametersInfoW(SPI_GETWORKAREA, 0, &area, 0);
+    refDpi = dpi;
+    const int w = std::min<int>(px(960), area.right - area.left),
+              h = std::min<int>(px(800), area.bottom - area.top),
+              x = std::clamp<int>(owner.left + (owner.right - owner.left - w) / 2,
+                                  area.left, area.right - w),
+              y = std::clamp<int>(owner.top + (owner.bottom - owner.top - h) / 2,
+                                  area.top, area.bottom - h);
+    refWindow = CreateWindowExW(WS_EX_CONTROLPARENT, klass.lpszClassName,
+        L"References · Native Workbench", WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN,
+        x, y, w, h, window, nullptr, instance, this);
+    if (!refWindow)
+      throw std::runtime_error("Could not open reference discovery.");
+    refRebuilding = true;
+    refTab = make(WC_TABCONTROLW, L"Reference views", WS_TABSTOP, REF_TAB, refWindow);
+    for (const auto *label : {L"Find online", L"Downloaded"}) {
+      TCITEMW item{};
+      item.mask = TCIF_TEXT;
+      item.pszText = const_cast<wchar_t *>(label);
+      TabCtrl_InsertItem(refTab, TabCtrl_GetItemCount(refTab), &item);
+    }
+    refIntro = make(L"STATIC", L"", SS_LEFT | SS_NOPREFIX, 650, refWindow);
+    refReleaseLabel = make(L"STATIC", L"Release", SS_LEFT, 651, refWindow);
+    refRelease = make(L"COMBOBOX", L"", WS_TABSTOP | CBS_DROPDOWNLIST | WS_VSCROLL,
+                      REF_RELEASE, refWindow);
+    SendMessageW(refRelease, CB_ADDSTRING, 0, reinterpret_cast<LPARAM>(L"116"));
+    SendMessageW(refRelease, CB_SETCURSEL, 0, 0);
+    refQuery = make(L"EDIT", L"", WS_TABSTOP | ES_AUTOHSCROLL, REF_QUERY,
+                   refWindow, WS_EX_CLIENTEDGE);
+    SendMessageW(refQuery, EM_SETCUEBANNER, FALSE,
+                 reinterpret_cast<LPARAM>(L"Species name, e.g. human or Saccharomyces"));
+    refSearch = button(L"Search", REF_SEARCH, refWindow);
+    auto list = [&](const wchar_t *title, int id, bool checks,
+                    std::initializer_list<const wchar_t *> labels) {
+      HWND control = make(WC_LISTVIEWW, title,
+          WS_TABSTOP | LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS,
+          id, refWindow, WS_EX_CLIENTEDGE);
+      ListView_SetExtendedListViewStyle(control, LVS_EX_FULLROWSELECT | LVS_EX_DOUBLEBUFFER |
+          LVS_EX_LABELTIP | (checks ? LVS_EX_CHECKBOXES : 0));
+      int index = 0;
+      for (const auto *label : labels) {
+        LVCOLUMNW column{};
+        column.mask = LVCF_TEXT | LVCF_WIDTH;
+        column.pszText = const_cast<wchar_t *>(label);
+        column.cx = px(150);
+        ListView_InsertColumn(control, index++, &column);
+      }
+      return control;
+    };
+    refSpecies = list(L"Species and assemblies", REF_SPECIES, false,
+                       {L"Species", L"Assembly · release", L"Assembly accession"});
+    refDiscover = button(L"Find files", REF_DISCOVER, refWindow);
+    refFiles = list(L"Reference files to download", REF_FILES, true,
+                     {L"Select files", L"Archive filename", L"Download"});
+    refDetails = make(L"EDIT", L"", WS_TABSTOP | ES_MULTILINE | ES_READONLY |
+        ES_AUTOVSCROLL | WS_VSCROLL, REF_DETAILS, refWindow, WS_EX_CLIENTEDGE);
+    SendMessageW(refDetails, EM_SETLIMITTEXT, 256 * 1024, 0);
+    refDestinationLabel = make(L"STATIC", L"Save to", SS_LEFT, 652, refWindow);
+    refDestination = make(L"EDIT", root + L"\\user-data\\references", WS_TABSTOP |
+        ES_AUTOHSCROLL, REF_DESTINATION, refWindow, WS_EX_CLIENTEDGE);
+    refBrowse = button(L"Choose folder...", REF_BROWSE, refWindow);
+    refDownload = button(L"Download selected", REF_DOWNLOAD, refWindow);
+    refLocal = list(L"Downloaded reference files", REF_LOCAL, false,
+                     {L"Species", L"Assembly · release", L"Reference file", L"Size"});
+    refTargetLabel = make(L"STATIC", L"Workspace input", SS_LEFT, 653, refWindow);
+    refTarget = make(L"COMBOBOX", L"", WS_TABSTOP | CBS_DROPDOWNLIST | WS_VSCROLL,
+                     REF_TARGET, refWindow);
+    refUse = button(L"Use for input", REF_USE, refWindow);
+    refOpen = button(L"Open folder", REF_OPEN, refWindow);
+    refCancel = button(L"Cancel operation", REF_CANCEL, refWindow);
+    refProgress = make(PROGRESS_CLASSW, L"Reference download progress", PBS_SMOOTH,
+                       REF_PROGRESS, refWindow);
+    refNotice = make(L"STATIC", L"Loading local references...", SS_LEFT | SS_NOPREFIX,
+                     REF_NOTICE, refWindow);
+    refClose = button(L"Close", REF_CLOSE, refWindow);
+    refRebuilding = false;
+    reference_fonts();
+    reference_refresh(Json::object());
+    reference_layout();
+    reference_notice();
+    ShowWindow(refWindow, SW_SHOW);
+    SetFocus(refQuery);
+    reference_send("references/list");
+  }
+  void reference_response(const std::string &method, const Json &result) {
+    refPollFailed = false;
+    if (result.contains("operation"))
+      refOperation = result.get("operation");
+    const bool wasBusy = refBusy;
+    refBusy = refOperation.get("active").boolean();
+    if (result.get("local").is_array()) {
+      Json previous = refState;
+      refState = result;
+      reference_refresh(previous);
+    }
+    if (result.contains("model"))
+      snapshot(result.get("model"));
+    if (method == "references/targets" && refWindow) {
+      refTargets = result.get("targets");
+      SendMessageW(refTarget, CB_RESETCONTENT, 0, 0);
+      for (const auto &target : refTargets.array_items()) {
+        auto label = wt(target, "label") + L" (" + wt(target, "type") + L")";
+        if (!getstr(target, "current_path").empty())
+          label += L" · replace current file";
+        SendMessageW(refTarget, CB_ADDSTRING, 0, reinterpret_cast<LPARAM>(label.c_str()));
+      }
+      if (!refTargets.array_items().empty())
+        SendMessageW(refTarget, CB_SETCURSEL, 0, 0);
+      else
+        SetWindowTextW(refNotice, wt(result, "notice",
+            "No compatible input in this workspace. Add a tool that accepts this reference first.").c_str());
+    } else if (method == "references/open") {
+      const auto path = wt(result, "path");
+      if (!path.empty() && reinterpret_cast<INT_PTR>(ShellExecuteW(
+            refWindow ? refWindow : window, L"open", path.c_str(), nullptr, nullptr, SW_SHOWNORMAL)) <= 32)
+        message(L"Windows could not open the reference folder.");
+    } else if (method == "references/use") {
+      status_text(L"The downloaded reference is assigned to the selected workspace input.");
+      if (refWindow)
+        SetWindowTextW(refNotice, L"Reference assigned. Its download provenance will be retained with the run.");
+    } else {
+      reference_notice();
+      if (refBusy)
+        status_text(L"References: " + wt(refOperation, "message"));
+      else if (wasBusy && !getstr(refOperation, "message").empty())
+        status_text(wt(refOperation, "message"));
+      if ((wasBusy || method == "references/download") && !refBusy &&
+          getstr(refOperation, "action") == "download" &&
+          refOperation.get("success").boolean() && refWindow) {
+        TabCtrl_SetCurSel(refTab, 1);
+        reference_layout();
+        reference_targets();
+      }
+    }
+    reference_enabled();
+    enabled();
+    if (closing && !refBusy && !busy && !packBusy)
       send("shutdown");
   }
   void controls() {
@@ -1089,6 +1777,7 @@ class Workspace {
              {FILE_LOAD, L"Load saved pipeline or settings..."},
              {FILE_HISTORY, L"Run history..."},
              {FILE_IMPORT, L"Manage tools..."},
+             {MANAGE_REFERENCES, L"References..."},
              {FILE_CHECK, L"Check installation"},
              {FILE_EXIT, L"Exit"}})
       AppendMenuW(file, MF_STRING, pair.first, pair.second);
@@ -1103,6 +1792,7 @@ class Workspace {
     output = make(L"EDIT", root + L"\\results", WS_TABSTOP | ES_AUTOHSCROLL,
                   OUTPUT, nullptr, WS_EX_CLIENTEDGE);
     browse = button(L"Results folder...", BROWSE_OUTPUT);
+    manageReferences = button(L"References...", MANAGE_REFERENCES);
     run = button(L"Review and run", RUN);
     cancel = button(L"Cancel run", CANCEL);
     review = button(L"Methods", REVIEW);
@@ -1167,7 +1857,8 @@ class Workspace {
     place(run, width - 316, 14, 156, 32);
     place(cancel, width - 150, 14, 132, 32);
     place(browse, 18, 57, 138, 32);
-    place(output, 166, 57, std::max(100, width - 184), 32);
+    place(output, 166, 57, std::max(100, width - 320), 32);
+    place(manageReferences, width - 142, 57, 124, 32);
     place(search, 18, top, side - 18, 32);
     place(category, 18, top + 40, side - 18, 230);
     const bool filtering = !getstr(state, "pendingSource").empty();
@@ -1195,6 +1886,7 @@ class Workspace {
   }
   void enabled() {
     bool edit = ready && !busy && !packBusy && !packActionPending &&
+                !refBusy && !refActionPending &&
                 !showingHistory && !closing &&
                 !activeRequest && outgoing.empty();
     for (HWND h :
@@ -1204,9 +1896,10 @@ class Workspace {
     EnableWindow(run, edit && !graph().get("nodes").array_items().empty());
     EnableWindow(review, ready && !activeRequest && outgoing.empty());
     EnableWindow(cancel, busy && !closing);
-    EnableWindow(output, !busy && !packBusy && !packActionPending);
-    EnableWindow(browse, !busy && !packBusy && !packActionPending);
+    EnableWindow(output, !busy && !packBusy && !packActionPending && !refBusy && !refActionPending);
+    EnableWindow(browse, !busy && !packBusy && !packActionPending && !refBusy && !refActionPending);
     EnableWindow(manageTools, ready && !busy && !closing && !showingHistory);
+    EnableWindow(manageReferences, ready && !busy && !closing && !showingHistory);
     for (const auto &f : fields) {
       EnableWindow(f.h, edit || f.kind.rfind("historical-", 0) == 0);
       if (f.button)
@@ -1218,8 +1911,11 @@ class Workspace {
       EnableMenuItem(m, id, MF_BYCOMMAND | (edit ? MF_ENABLED : MF_GRAYED));
     EnableMenuItem(m, FILE_IMPORT, MF_BYCOMMAND |
                    (ready && !busy && !closing && !showingHistory ? MF_ENABLED : MF_GRAYED));
+    EnableMenuItem(m, MANAGE_REFERENCES, MF_BYCOMMAND |
+                   (ready && !busy && !closing && !showingHistory ? MF_ENABLED : MF_GRAYED));
     DrawMenuBar(window);
     pack_enabled();
+    reference_enabled();
   }
   void refresh_tasks(bool categories = false) {
     rebuilding = true;
@@ -1854,7 +2550,7 @@ class Workspace {
       logs = logs.substr(logs.size() - 250000);
     enabled();
     InvalidateRect(dag, nullptr, FALSE);
-    if (closing && !busy)
+    if (closing && !busy && !refBusy && !packBusy)
       send("shutdown");
   }
   void response(const Json &response_) {
@@ -1873,7 +2569,23 @@ class Workspace {
     if (method.rfind("packs/", 0) == 0 && method != "packs/list" &&
         method != "packs/status")
       packActionPending = false;
+    if (method == "references/status")
+      refPollPending = false;
+    else if (method.rfind("references/", 0) == 0)
+      refActionPending = false;
     if (!response_.get("ok").boolean()) {
+      if (method.rfind("references/", 0) == 0) {
+        refOperation["message"] = getstr(response_, "error", "Reference discovery returned an error.");
+        reference_notice();
+        if (!refPollFailed || method != "references/status")
+          MessageBoxW(refWindow ? refWindow : window,
+                      wt(response_, "error", "Reference discovery returned an error.").c_str(),
+                      L"References", MB_OK | MB_ICONERROR);
+        if (method == "references/status")
+          refPollFailed = true;
+        enabled();
+        return;
+      }
       if (method.rfind("packs/", 0) == 0) {
         if (method != "packs/status") {
           packReloadAfterOperation = false;
@@ -1907,6 +2619,8 @@ class Workspace {
     const auto &result = response_.get("result");
     if (method.rfind("packs/", 0) == 0) {
       pack_response(method, result);
+    } else if (method.rfind("references/", 0) == 0) {
+      reference_response(method, result);
     } else if (method == "init") {
       ready = true;
       if (result.contains("catalog"))
@@ -2067,7 +2781,13 @@ class Workspace {
       show_pack_manager();
       return;
     }
-    if (busy || packBusy || packActionPending || showingHistory) {
+    if (id == MANAGE_REFERENCES && ready && !busy && !showingHistory && !closing) {
+      if (!refBusy && !refActionPending && !packBusy && !packActionPending)
+        commit_all();
+      show_references();
+      return;
+    }
+    if (busy || packBusy || packActionPending || refBusy || refActionPending || showingHistory) {
       if (id == REVIEW || id == VIEW_METHODS)
         show_text(
             L"Recorded methods",
@@ -2380,6 +3100,8 @@ class Workspace {
         busy = false;
         packBusy = false;
         packActionPending = false;
+        refBusy = false;
+        refActionPending = false;
         status_text(L"The local engine stopped. Restart Workbench; "
                     L"incomplete runs remain recorded.");
         if (closing)
@@ -2483,9 +3205,9 @@ class Workspace {
                     L"cleanup; this run remains interrupted.");
         MessageBoxW(
             window,
-            L"The analysis did not stop within 25 seconds. Workbench will "
-            L"close its process group now.\n\nIncomplete results are "
-            L"preserved; the run will be marked interrupted when reopened.",
+            L"The local operation did not stop within 25 seconds. Workbench will "
+            L"close its process group now.\n\nCompleted references are preserved. "
+            L"Incomplete analysis runs will be marked interrupted when reopened.",
             L"Force local cleanup", MB_OK | MB_ICONWARNING);
         close_host_window();
         return 0;
@@ -2500,6 +3222,11 @@ class Workspace {
           GetTickCount64() - lastPackPoll > (packPollFailed ? 3000 : 650)) {
         lastPackPoll = GetTickCount64();
         pack_send("packs/status");
+      }
+      if (ready && refBusy && !refPollPending && !refActionPending &&
+          GetTickCount64() - lastRefPoll > (refPollFailed ? 3000 : 650)) {
+        lastRefPoll = GetTickCount64();
+        reference_send("references/status");
       }
       return 0;
     case WM_CTLCOLORSTATIC:
@@ -2530,6 +3257,25 @@ class Workspace {
     case WM_CLOSE:
       if (closing)
         return 0;
+      if (refBusy || refActionPending) {
+        if (refBusy && !refOperation.get("cancellable").boolean(true)) {
+          MessageBoxW(window, L"The reference download record is being saved. Please wait "
+                      L"for it to finish before closing Workbench.",
+                      L"Finishing reference download", MB_OK | MB_ICONINFORMATION);
+          return 0;
+        }
+        if (MessageBoxW(window, L"A reference operation is in progress. Cancel it and close "
+                        L"Workbench?\n\nCompleted references will be preserved.",
+                        L"Close Native Workbench",
+                        MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2) != IDYES)
+          return 0;
+        closing = true;
+        closeStarted = GetTickCount64();
+        reference_send("references/cancel");
+        status_text(L"Cancelling the reference operation before closing...");
+        enabled();
+        return 0;
+      }
       if (packBusy || packActionPending) {
         if (packBusy && !packOperation.get("cancellable").boolean(true)) {
           MessageBoxW(window,
@@ -2609,7 +3355,7 @@ class Workspace {
 public:
   ~Workspace() {
     host.stop();
-    for (HFONT f : {font, bold, small})
+    for (HFONT f : {font, bold, small, refFont})
       if (f)
         DeleteObject(f);
     if (paper)
@@ -2654,7 +3400,8 @@ public:
     UpdateWindow(h);
     MSG msg{};
     while (GetMessageW(&msg, nullptr, 0, 0) > 0) {
-      if (!(packWindow && IsDialogMessageW(packWindow, &msg)) &&
+      if (!(refWindow && IsDialogMessageW(refWindow, &msg)) &&
+          !(packWindow && IsDialogMessageW(packWindow, &msg)) &&
           !IsDialogMessageW(h, &msg)) {
         TranslateMessage(&msg);
         DispatchMessageW(&msg);
@@ -2724,6 +3471,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE, PWSTR, int) {
     }
     INITCOMMONCONTROLSEX controls{sizeof(controls), ICC_LISTVIEW_CLASSES |
                                                         ICC_STANDARD_CLASSES |
+                                                        ICC_TAB_CLASSES |
                                                         ICC_PROGRESS_CLASS};
     InitCommonControlsEx(&controls);
     int result;

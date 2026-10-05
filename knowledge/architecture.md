@@ -1,7 +1,7 @@
 # Current architecture
 
-This describes source commit `9368c22058a3fe3cd434e7185fcaf5ff3fd6ce22`, reviewed
-on 2026-10-04. It is a map of the implementation, not a claim that every deployment
+This describes the 0.7 reference-discovery implementation, reviewed
+on 2026-10-05. It is a map of the implementation, not a claim that every deployment
 or scientific use has been validated. Start with [the knowledge index](README.md).
 
 ## What runs on a user's machine
@@ -42,10 +42,9 @@ the UI and graph cannot submit arbitrary shell command strings. Binary process
 pipes are handled by the native runner, including both subprocess outcomes.
 
 The GUI build target is `build/desktop/DesktopWorkbench.exe`; the release
-packager installs it as `NativeWorkbench.exe`. The bridge build still has a
-0.5.4 Windows resource version in the 0.6.0 source tree. Do not infer the entire
-application's version from that resource; the current app version is maintained
-in `workspace/app_version.py` and release metadata.
+packager installs it as `NativeWorkbench.exe`. All three native build resource
+versions are 0.7.0. Application version is maintained in `workspace/app_version.py`
+and release metadata, independently of pack versions and pack API compatibility.
 
 ## Responsibilities and source map
 
@@ -61,6 +60,7 @@ in `workspace/app_version.py` and release metadata.
 | [`desktop/bridge.cpp`](../desktop/bridge.cpp), [`pack_model.cpp`](../desktop/pack_model.cpp), [`packs.cpp`](../desktop/packs.cpp) | Native bridge commands, execution manifest contract, discovery and local pack import. |
 | [`desktop/workflow_runner.cpp`](../desktop/workflow_runner.cpp), [`runner.cpp`](../desktop/runner.cpp), [`process_pipeline.cpp`](../desktop/process_pipeline.cpp) | Workflow execution, subprocesses, cancellation and binary pipes. |
 | [`workspace/pack_manager.py`](../workspace/pack_manager.py), [`pack_security.py`](../workspace/pack_security.py) | Offline archive validation, signed catalogue client, downloads, inventories and trust checks. |
+| [`workspace/reference_provider.py`](../workspace/reference_provider.py), [`reference_manager.py`](../workspace/reference_manager.py), [`reference_provenance.py`](../workspace/reference_provenance.py) | Explicit public-reference discovery, verified local downloads, offline library and frozen input provenance. |
 | [`workspace/verify_installation.py`](../workspace/verify_installation.py), [`core_checks.py`](../workspace/core_checks.py), [`pack_checks.py`](../workspace/pack_checks.py) | Installation integrity, starter checks and declarative pack scientific assertions. |
 | [`scripts/package_split.py`](../scripts/package_split.py), [`apply_core_update.py`](../scripts/apply_core_update.py) | Separate core/starter/pack packaging and transactional core update ownership. |
 | [`scripts/`](../scripts/) and [`tools/`](../tools/) | Tool-specific source preparation, portability patches, native builds, adapters and pack generation. |
@@ -75,7 +75,7 @@ adapters; do not add a bespoke GUI for each tool.
 
 Four different version concepts must remain distinct:
 
-* application version, currently 0.6.0;
+* application version, currently 0.7.0;
 * pack API, currently 1;
 * execution manifest format, currently 2;
 * each pack's own version and each executable's upstream/build version.
@@ -157,12 +157,31 @@ user state, separate from immutable core inventories and optional packs.
 
 ## Locality, network and trust
 
-Analysis commands consume local inputs and write local outputs. The current
-network-enabled component is the explicit pack catalogue/download client. The
-signed public catalogue is not yet configured. An Ensembl/reference retrieval
-feature was requested but is not implemented in the current desktop host; do not
-describe it as available. Future retrieval should produce explicit local inputs
-with download provenance, separately from analysis execution.
+Analysis commands consume local inputs and write local outputs. The explicit
+pack catalogue/download client and reference provider can make outbound HTTPS
+requests; neither creates a listener. The signed public pack catalogue is not
+yet configured. Reference discovery needs no executable-pack catalogue trust
+file and must not be confused with installing code.
+
+The 0.7 native References window uses Ensembl archive releases 100–116. Search,
+file discovery and download are explicit asynchronous operations. Metadata is
+bounded and URLs/redirects are restricted to numbered official archive paths.
+The modern Ensembl platform is a separate future provider, not silently mixed
+with archive release identities. See the [reference guide](../docs/reference-discovery-0.7.md).
+
+Downloads stream through gzip validation, provider BSD-sum verification and
+local compressed/expanded SHA-256 hashing. Each selection publishes a new local
+bundle with `reference.json`; only complete bundles enter
+`user-data/references/library.json`. These mutable data are excluded from core
+ownership and preserved by core updates. Reference operations participate in
+host cancellation, editing exclusion and shutdown. Startup, library browsing,
+input binding and analysis do not fetch data.
+
+The library supplies compatible existing named input fields from pack metadata.
+At preparation, the engine matches freshly hashed local inputs to verified
+receipts and freezes evidence in `plan.json` and `reference-provenance.json`.
+Completed methods use that frozen evidence, filtered to successful steps,
+rather than consulting the current library or trusting client graph claims.
 
 Pack integrity checks and process control are not an operating-system security
 sandbox. Native executables run with the user's permissions. The runner filters

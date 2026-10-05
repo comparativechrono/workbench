@@ -7,9 +7,10 @@ open, diffable files with no proprietary reader or external memory service.
 "Knowledge base" describes this directory; it does not claim compliance with a
 separate standard called Open Knowledge Format.
 
-**Reviewed:** 2026-10-04. **Source baseline:**
-[`289c4176561fe6c8bbbfba1e225cd65fbafb126d`](https://github.com/comparativechrono/workbench/commit/289c4176561fe6c8bbbfba1e225cd65fbafb126d).
-This handover includes Kraken2/Bracken metagenomics after the annotation,
+**Reviewed:** 2026-10-05. **Starting source baseline:**
+[`8f95caa1f267d19ce72ea3cd7f2396ae66a801c1`](https://github.com/comparativechrono/workbench/commit/8f95caa1f267d19ce72ea3cd7f2396ae66a801c1).
+This handover includes the 0.7 reference-discovery implementation and
+Kraken2/Bracken metagenomics after the annotation,
 expression, coverage and phylogenetics expansion. SnpEff, DESeq2, mosdepth and IQ-TREE have successful
 exact-final Windows installation, graph and scientific gates. Evidence for
 each release retains its own date and tested bytes. Re-check the current tree
@@ -22,6 +23,7 @@ and releases before treating this snapshot as current.
 | [Purpose and decisions](purpose-and-decisions.md) | Who is this for, what approach was chosen, and what must not be lost? |
 | [Current state](current-state.md) | What is released, tested, limited or unfinished? |
 | [Architecture](architecture.md) | Where does each responsibility live, and how does a run work? |
+| [Reference discovery](../docs/reference-discovery-0.7.md) | How are references found, downloaded, reused offline and recorded in runs? |
 | [Development](development.md) | How do I recover inputs, build, test and resume work? |
 | [Pack development](pack-development.md) | How do I add a real tool without rebuilding the app? |
 | [Validation and releases](validation-and-releases.md) | What establishes correctness, and how are artifacts published and trusted? |
@@ -61,9 +63,10 @@ packs. Do not mistake these historical inventories for the latest complete list.
 
 The GATK 1.0.0 source/evidence companion includes a complete `knowledge/` snapshot
 and root `AGENTS.md`. Its creation-time pending-final-gate statements remain
-historical; use the separate final validation record for completed evidence. The generic
-application source packager still has a fixed file selection that does not yet
-include this handover automatically; the GATK companion does not close that gap.
+historical; use the separate final validation record for completed evidence.
+The 0.7 application source packager now includes root `AGENTS.md`, this complete
+handover, recursive documentation and workflow definitions in its hashed source
+inventory. The older 0.6 source companion remains unchanged.
 
 For the four newer packs, start with the
 [connection and installation overview](../docs/ANNOTATION-EXPRESSION-COVERAGE-PHYLOGENETICS.md),

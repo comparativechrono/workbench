@@ -1,7 +1,11 @@
 # Development and recovery runbook
 
 Reviewed against source commit `9368c22058a3fe3cd434e7185fcaf5ff3fd6ce22` on
-2026-10-04. Commands below run from the repository root unless stated otherwise.
+2026-10-04. Recovery, packaging and updater instructions were updated for the
+0.7.0 reference-discovery working tree on 2026-10-05, based on repository
+baseline `8f95caa1f267d19ce72ea3cd7f2396ae66a801c1`. This is a build runbook;
+consult the release inventory for publication and exact-final validation status.
+Commands below run from the repository root unless stated otherwise.
 Paths in angle brackets are placeholders to replace, not files supplied by Git.
 Read [architecture](architecture.md) before changing an unfamiliar layer.
 
@@ -37,7 +41,7 @@ companions and hashes for vendor archives stored under their licence trees.
 Extract historical source into a separate directory and install the specified
 pack companions into a separate recovery runtime root. The historical
 `scripts/restore_source_archives.py` accepts `--source-root` and `--runtime-root`
-and verifies hashes before restoration. Use current application sources for 0.6
+and verifies hashes before restoration. Use current application sources for app
 work; do not overwrite them with recovered older files.
 
 Release source companions and retained upstream archives are build inputs and
@@ -45,12 +49,32 @@ licence records, not analysis datasets. A recipe is only reproducible when its
 sources, patches, compiler, dependencies and artifact identities remain
 available. Keep newly required corresponding source with its matching release.
 
-The current `build_sources()` in `scripts/package_split.py` selects a fixed set
-of source roots and top-level documentation files. It does **not** include this
-new `knowledge/` directory or root `AGENTS.md`. Before the next source release,
-update that selection and its coverage checks so the companion includes the
-handover files. Publish the changed companion under a new release version;
-do not replace an existing published source archive.
+The current `build_sources()` in `scripts/package_split.py` includes root
+`AGENTS.md`, `knowledge/`, recursive `docs/` and `.github/workflows/`, alongside
+application, pack recipe, test and fixture sources. The source inventory hashes
+these files. The 0.6.0 source companion predates that coverage; it remains
+immutable. New companions use the new application version.
+
+Application rebuilding no longer requires recovering the full 0.5.4 combined
+runtime. Use the exact published 0.6.0 starter and source companion as the
+baseline. The split packager verifies the companion against the starter's
+inventoried `SOURCE-AVAILABILITY.json`, copies its hash-verified legacy source
+archive and retains the recovery aliases. Optional tool source recovery is
+still needed when rebuilding those historical tools, but is separate from
+assembling a new application.
+
+The exact application build inputs re-downloaded and independently hashed on
+2026-10-05 are:
+
+| Input | Bytes | SHA-256 |
+| --- | ---: | --- |
+| [0.6.0 starter](https://github.com/comparativechrono/workbench/releases/download/app-v0.6.0/native-workbench-0.6.0-starter-windows.zip) | 16,871,065 | `16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a` |
+| [0.6.0 source](https://github.com/comparativechrono/workbench/releases/download/app-v0.6.0/native-workbench-0.6.0-source.zip) | 45,128,429 | `427a9b42f2528984350479e8b0155e4ef4f0159fa6f240cc1aa84a5ec2e0e60a` |
+| [LLVM-MinGW 20260922 UCRT, Ubuntu x86-64 host](https://github.com/mstorsjo/llvm-mingw/releases/download/20260922/llvm-mingw-20260922-ucrt-ubuntu-22.04-x86_64.tar.xz) | 83,924,028 | `bb7bb7654b33d5aa8712acb837c963b2e0c56352560c76105270a3268c665c21` |
+
+Keep the extracted starter immutable and stage into a new directory. Its 65
+core inventory entries were also reverified after recovery. Download integrity
+and cross-compilation are not native Windows execution evidence.
 
 ## Useful checks on a source-only checkout
 
@@ -114,7 +138,8 @@ Outputs are `build/desktop/DesktopWorkbench.exe`, `WorkbenchBridge.exe` and
 framework is needed. Building the initial prepared FASTQ module with
 `scripts/build.py` is a separate historical experiment, not a prerequisite for
 every application change. Likewise, `desktop/build.sh` builds an older interface;
-use the current scripts above for the 0.6 desktop.
+use the current scripts above for the 0.7 desktop. All three native resource
+versions now follow 0.7.0, including the previously stale bridge resource.
 
 Cross-compilation plus PE/DLL inspection proves a Windows executable was
 produced, not that it ran successfully. Run the assembled distribution on actual
@@ -124,36 +149,67 @@ simply to produce an executable.
 
 ## Assembling the current starter
 
-The 0.6 packaging recipe requires a complete, immutable 0.5.4 baseline containing
-its release `manifest.json`, private runtime, original starter packs,
-`docs/SOURCE-CONTENTS-0.5.4.json`, historical source archive and all referenced
-source-recovery companions. An arbitrary unpacked source checkout is not that
-baseline. It also requires the current compiled desktop/bridge and
+The 0.7 recipe accepts the exact immutable 0.6.0 split starter and its source
+companion above. It verifies the frozen private runtime inventory and starter
+manifest pins, then copies the starter packs byte-for-byte. An arbitrary source
+checkout is not a runtime baseline. The recipe also requires the current
+compiled desktop/bridge, the three new reference runtime modules and
 `examples/starter`. Use new output paths: packagers refuse to overwrite artifacts.
 
 ```sh
 python3 scripts/package_split.py sources \
-  --base-root /absolute/path/to/frozen-0.5.4/native-workbench \
-  --output /absolute/path/to/new-release/native-workbench-0.6.0-source.zip \
+  --base-root /absolute/path/to/frozen-0.6.0/native-workbench \
+  --base-source-archive /absolute/path/to/native-workbench-0.6.0-source.zip \
+  --output /absolute/path/to/new-release/native-workbench-0.7.0-source.zip \
   --metadata /absolute/path/to/new-release/source-metadata.json
 
 python3 scripts/package_split.py stage \
-  --base-root /absolute/path/to/frozen-0.5.4/native-workbench \
+  --base-root /absolute/path/to/frozen-0.6.0/native-workbench \
   --app-root /absolute/path/to/new-stage/native-workbench \
   --source-metadata /absolute/path/to/new-release/source-metadata.json
 
 python3 scripts/package_split.py starter \
   --app-root /absolute/path/to/new-stage/native-workbench \
-  --output /absolute/path/to/new-release/native-workbench-0.6.0-starter-windows.zip
+  --output /absolute/path/to/new-release/native-workbench-0.7.0-starter-windows.zip
 ```
 
-These commands describe the checked-in 0.6 recipe, not permission to replace the
-published 0.6.0 assets. A new release needs an explicit version change, updated
+The source and staging commands were exercised for a disposable 0.7.0 development
+integration stage on 2026-10-05; that stage is not a published or frozen release. They do not
+authorize replacing the published 0.6.0 assets. A release needs current source,
 metadata/build resources and its own immutable artifacts. The recipe copies
 `align-0.4.0`, `bam-0.4.0`, `variants-0.4.0` byte-for-byte into the starter. Core
-inventory excludes optional packs and mutable results/user-data. Read the core
-updater code before changing ownership or migration behavior; current updater
-support is specifically 0.5.4 to 0.6.0, not an unspecified upgrade matrix.
+inventory excludes optional packs and mutable results/user-data. `APP_VERSION`
+is now 0.7.0, while existing pack API 1 archives retain their 0.6.0 minimum;
+an application feature release does not raise every tool's compatibility floor.
+
+Build the app-only 0.6.0-to-0.7.0 updater from that same immutable baseline and
+the staged target:
+
+```sh
+python3 scripts/make_core_update.py \
+  --base-root /absolute/path/to/frozen-0.6.0/native-workbench \
+  --app-root /absolute/path/to/new-stage/native-workbench \
+  --output /absolute/path/to/new-update-stage \
+  --launcher /absolute/path/to/build/desktop/UpdateWorkbench.exe \
+  --zip /absolute/path/to/new-release/native-workbench-0.7.0-update-from-0.6.0.zip
+```
+
+The updater owns inventoried core files only. Installed optional pack versions,
+receipts, saved pack/manifest pins, results, local reference registries and
+external reference files remain untouched. It verifies the exact baseline,
+stages replacement files, commits the manifest last and rolls back handled
+failures. The older 0.5.4 combined-release migration path remains in the code;
+that does not imply a new 0.5.4 updater artifact has been prepared or tested.
+
+On 2026-10-05 the Linux source-only packaging/updater suites passed 24 tests
+(8 packaging, 16 updater; no skips), including 0.6.0-to-0.7.0 preservation and
+an injected failure at the final manifest commit. These synthetic transaction
+tests do not establish the native updater folder-picker/launch behavior.
+The actual development update payload was also applied on Linux to a disposable
+copy of the exact 0.6.0 starter: all 68 target core files verified, starter and
+optional pack fixtures plus saved pins/reference/result fixtures were preserved,
+and repeat application was idempotent. This is separate from final artifact and
+native Windows updater validation.
 
 ## Pack preparation and static validation
 

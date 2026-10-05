@@ -162,6 +162,7 @@ class CoreUpdate(unittest.TestCase):
         output=self.parent/'with-runtime';launcher=put(self.parent,'UpdateWorkbench.exe',b'synthetic-launcher')
         builder.make(self.base,self.target,output,launcher)
         self.assertEqual((output/'runtime/python/python.exe').read_bytes(),b'new-private-interpreter')
+
         self.assertEqual((output/'runtime/python/python313.dll').read_bytes(),b'new-private-library')
         self.assertEqual((output/'LICENSE').read_bytes(),b'application-license')
         for name in update.NATIVE_NOTICE_FILES:
@@ -175,6 +176,56 @@ class CoreUpdate(unittest.TestCase):
         update.apply(self.base,output/'update')
         self.assertEqual((self.base/'runtime/python/python.exe').read_bytes(),b'new-private-interpreter')
         self.assertEqual((output/'runtime/python/python.exe').read_bytes(),b'new-private-interpreter')
+
+    def test_060_to_070_preserves_pack_versions_pins_references_and_user_files(self):
+        base=self.parent/'split-060';target=self.parent/'split-070';out=self.parent/'split-update'
+        old={'NativeWorkbench.exe':b'060-ui','WorkbenchBridge.exe':b'bridge',
+             'workspace/desktop_host.py':b'060-host','workspace/retired.py':b'owned-old-module'}
+        new={'NativeWorkbench.exe':b'070-ui','WorkbenchBridge.exe':b'bridge',
+             'workspace/desktop_host.py':b'070-host','workspace/references.py':b'new-reference-manager'}
+        preserved={'packs/optional-1.0.0/pack.ini':b'exact old pack',
+                   'packs/optional-2.0.0/pack.ini':b'exact newer pack',
+                   'packs/optional-1.0.0/workbench-installed.json':b'original receipt',
+                   'user-data/saved.json':b'{"packVersion":"1.0.0","manifestSha256":"original-pin"}',
+                   'user-data/references.json':b'local reference registry',
+                   'references/human/reference.fa':b'>chr1\nACGT\n',
+                   'results/run/plan.json':b'old frozen plan','personal-notes.txt':b'personal notes'}
+        for name,data in {**old,**preserved}.items():put(base,name,data)
+        for name,data in new.items():put(target,name,data)
+        manifest(base,'0.6.0',old);manifest(target,'0.7.0',new)
+        summary=builder.make(base,target,out)
+        self.assertFalse(summary['migration']);self.assertFalse(summary['packs_changed'])
+        result=update.apply(base,out/'update')
+        self.assertEqual(result['version'],'0.7.0');self.assertEqual(result['removed_files'],1)
+        self.assertFalse((base/'workspace/retired.py').exists())
+        for name,data in {**new,**preserved}.items():self.assertEqual((base/name).read_bytes(),data)
+        self.assertEqual(update.apply(base,out/'update')['status'],'already-installed')
+
+    def test_060_to_070_failure_restores_retired_core_and_original_manifest(self):
+        base=self.parent/'rollback-060';target=self.parent/'rollback-070';out=self.parent/'rollback-update'
+        old={'NativeWorkbench.exe':b'060-ui','WorkbenchBridge.exe':b'bridge',
+             'workspace/desktop_host.py':b'060-host','workspace/retired.py':b'owned-old-module'}
+        new={**old,'NativeWorkbench.exe':b'070-ui','workspace/references.py':b'new-reference-manager'}
+        del new['workspace/retired.py']
+        for name,data in old.items():put(base,name,data)
+        for name,data in new.items():put(target,name,data)
+        manifest(base,'0.6.0',old);manifest(target,'0.7.0',new)
+        original_manifest=(base/'manifest.json').read_bytes();builder.make(base,target,out)
+        original_replace=update.os.replace;failed=False
+        def fail_manifest_commit(source,destination):
+            nonlocal failed
+            if not failed and Path(destination)==base/'manifest.json' and 'stage' in Path(source).parts:
+                failed=True;raise OSError('injected final manifest commit failure')
+            return original_replace(source,destination)
+        with mock.patch.object(update.os,'replace',side_effect=fail_manifest_commit),self.assertRaises(RuntimeError):
+            update.apply(base,out/'update')
+        self.assertTrue(failed)
+        self.assertEqual((base/'manifest.json').read_bytes(),original_manifest)
+        for name,data in old.items():self.assertEqual((base/name).read_bytes(),data)
+        self.assertFalse((base/'workspace/references.py').exists())
+        report=next((base/'updates').glob('*/update-result.json'))
+        self.assertTrue(json.loads(report.read_text())['baseline_restored'])
+
 
 
 if __name__=='__main__':unittest.main()

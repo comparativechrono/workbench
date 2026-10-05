@@ -258,10 +258,10 @@ def check_frontend(root):
                     full_imports.update(node.module+'.'+alias.name for alias in node.names)
                 elif isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute):
                     require(node.func.attr not in {'bind','listen','serve_forever'}, 'Desktop module creates a network listener: '+path.name)
-            # The explicit pack download client may use HTTP/TLS for catalogue
-            # and archive retrieval. It must not introduce a listener or browser.
-            permitted = {'http', 'urllib', 'socket'} if path.name == 'pack_manager.py' else set()
-            if path.name in {'pack_security.py', 'catalog.py'}:
+            # Explicit pack and reference providers may retrieve public data.
+            # Both remain outbound clients, never listeners or browser hosts.
+            permitted = {'http', 'urllib', 'socket'} if path.name in {'pack_manager.py', 'reference_provider.py'} else set()
+            if path.name in {'pack_security.py', 'catalog.py', 'reference_manager.py'}:
                 require(all(name == 'urllib.parse' or name.startswith('urllib.parse.')
                             for name in full_imports if name == 'urllib' or name.startswith('urllib.')),
                         path.name+' may only import URL parsing, not a network client')

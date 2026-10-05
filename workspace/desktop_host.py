@@ -109,6 +109,42 @@ class DesktopHost:
                 self._pack_model_revision = operation["id"]
                 result["model"] = self.snapshot()
             return result
+        if method.startswith("references/"):
+            action = method.split("/", 1)[1]
+            if action in ("search", "discover", "download"):
+                return self.app.start_reference_operation(action, params)
+            allowed = {"list": set(), "status": set(), "cancel": set(), "open": {"record_id"},
+                       "targets": {"record_id", "file_id"},
+                       "use": {"record_id", "file_id", "source_id", "field_id"}}
+            if action not in allowed or set(params) != allowed[action]:
+                raise ValueError("Unknown reference action or request field.")
+            if action in ("list", "status"):
+                return self.app.reference_state()
+            if action == "cancel":
+                return self.app.cancel_reference_operation()
+            record_id = short_text(params.get("record_id"), "local reference", 100)
+            manager = self.app.reference_manager()
+            if action == "open":
+                return {"path": manager.record_folder(record_id)}
+            file_id = short_text(params.get("file_id"), "local reference file", 100)
+            # IDs are resolved exclusively against completed local records. No
+            # client path, URI or provenance object is accepted for binding.
+            resource = manager.resolve_file(record_id, file_id)
+            if action == "targets":
+                with self.model_lock:
+                    targets = self.model.reference_targets(resource)
+                return {"targets": targets, "notice":
+                        "Choose the named input to fill. Check the assembly and reference type required by your analysis."
+                        if targets else "Add a compatible tool first, then select its reference input. Other uses can be chosen with the input's Browse button."}
+            source_id = short_text(params.get("source_id"), "reference input source", 100)
+            field_id = short_text(params.get("field_id"), "reference input field", 100)
+            with self.app.lock:
+                self.app.ensure_editable()
+                with self.model_lock:
+                    self.model.use_reference(resource, source_id, field_id)
+                result = self.app.reference_state()
+                result["model"] = self.snapshot()
+            return result
         if method == "model":
             action = short_text(params.get("action"), "model action", 60)
             payload = params.get("payload", {})

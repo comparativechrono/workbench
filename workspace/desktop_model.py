@@ -5,7 +5,9 @@ network server, window toolkit, or tool subprocess is required by this module.
 """
 from __future__ import annotations
 import copy
+import fnmatch
 from pathlib import Path
+import re
 
 from catalog import validate_parameter, resolve_tool
 from engine import Engine, display_id, pin_for, clean_text, _binding_parameter
@@ -74,6 +76,62 @@ class DesktopModel:
         # metadata is retained; values always live in source.files.
         return [{key: copy.deepcopy(field[key]) for key in ("id", "label", "type", "role", "filter", "required", "help") if key in field}
                 for field in source.get("fields", []) if isinstance(field, dict) and isinstance(field.get("id"), str)]
+
+    @staticmethod
+    def _reference_matches(source, field, resource):
+        """Conservative convenience binding, not proof of biological suitability.
+
+        Pack semantic types and explicit filename filters are authoritative.
+        Current nucleotide ports do not distinguish genomes from transcriptomes;
+        only an explicitly genome-labelled nucleotide field receives a genome.
+        A user can still browse manually for other scientifically reviewed uses.
+        """
+        if field.get("type") not in ("file", "files"):
+            return False
+        kind, semantic = resource.get("kind"), source.get("type")
+        expected = {"genome": {"reference", "fasta-nucleotide", "file"},
+                    "cdna": {"fasta-nucleotide", "file"},
+                    "ncrna": {"fasta-nucleotide", "file"},
+                    "protein": {"fasta-protein", "file"},
+                    "annotation": {"text", "file"}}
+        if semantic not in expected.get(kind, set()):
+            return False
+        words = set(re.findall(r"[a-z]+", " ".join(str(value) for value in
+                    (field.get("id", ""), field.get("label", ""))).lower()))
+        if words & {"cds", "aligned", "alignment"}:
+            return False
+        if kind == "genome" and semantic != "reference" and not words & {"genome", "genomic"}:
+            return False
+        if kind in ("cdna", "ncrna") and words & {"genome", "genomic"}:
+            return False
+        patterns = [pattern.strip().lower() for group in str(field.get("filter", "")).split("|")[1::2]
+                    for pattern in group.split(";") if pattern.strip() not in ("*", "*.*", "")]
+        name = str(resource.get("filename") or Path(resource.get("path", "")).name).lower()
+        if patterns:
+            return any(fnmatch.fnmatchcase(name, pattern) for pattern in patterns)
+        # Unqualified generic file/text ports are not a reference contract.
+        return semantic not in ("file", "text")
+
+    def reference_targets(self, resource):
+        connected = {ref for node in self.graph["nodes"] for refs in node.get("inputs", {}).values()
+                     for ref in refs if "::" not in ref}
+        targets = []
+        for source in self.graph["sources"]:
+            if source["id"] not in connected:
+                continue
+            for field in self._fields(source):
+                if self._reference_matches(source, field, resource):
+                    targets.append({"source_id": source["id"], "field_id": field["id"],
+                                    "label": display_id(source["id"]) + " · " + source.get("label", "Input")
+                                             + " → " + field.get("label", field["id"]),
+                                    "type": source["type"], "current_path": source.get("files", {}).get(field["id"], "")})
+        return targets
+
+    def use_reference(self, resource, source_id, field_id):
+        targets = self.reference_targets(resource)
+        if not any(target["source_id"] == source_id and target["field_id"] == field_id for target in targets):
+            raise ValueError("The selected reference no longer matches that input. Add a compatible tool and select its input again.")
+        return self.dispatch("bind_files", {"sourceId": source_id, "files": {field_id: resource["path"]}})
 
     def _sync_counters(self):
         self.engine._counters(self.graph)

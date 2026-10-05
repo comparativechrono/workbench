@@ -9,6 +9,7 @@ import copy
 import json
 import os
 from pathlib import Path
+import re
 import secrets
 import subprocess
 import threading
@@ -74,6 +75,13 @@ class Workbench:
         self._pack_listing = None
         self._pack_operation = {"id": "", "active": False, "status": "idle",
                                 "message": "", "bytes": 0, "total": 0, "cancellable": False}
+        self._changing_references = False
+        self._reference_manager = None
+        self._reference_worker = None
+        self._reference_cancel = threading.Event()
+        self._reference_listing = None
+        self._reference_operation = {"id": "", "active": False, "status": "idle",
+                                     "message": "", "bytes": 0, "total": 0, "cancellable": False}
         self.runs = {}
         self.last_seen = time.monotonic()
         self.token = secrets.token_urlsafe(32)
@@ -104,7 +112,8 @@ class Workbench:
             identity = next((r["run_id"] for r in self.runs.values()
                              if r["status"] in ("preparing", "running", "cancelling")), None)
             return {"active": identity is not None, "active_run": identity,
-                    "changing_packs": self._changing_packs, "closing": self._closing}
+                    "changing_packs": self._changing_packs,
+                    "changing_references": self._changing_references, "closing": self._closing}
 
     def recent(self, summaries=False):
         with self.lock:
@@ -131,6 +140,8 @@ class Workbench:
                 raise ValueError("The workbench is closing.")
             if self._changing_packs:
                 raise ValueError("Wait for the pack operation to finish.")
+            if self._changing_references:
+                raise ValueError("Wait for the reference operation to finish or cancel it.")
             if self.active():
                 raise ValueError("Wait for the active analysis to finish or cancel it before changing the workspace.")
 
@@ -300,6 +311,8 @@ class Workbench:
                 raise ValueError("The workbench is closing.")
             if self._changing_packs:
                 raise ValueError("Wait for the tool pack import to finish before starting an analysis.")
+            if self._changing_references:
+                raise ValueError("Wait for the reference operation to finish or cancel it before starting an analysis.")
             if self.active():
                 raise ValueError("An analysis is already running. Wait for it to finish or cancel it first.")
             identity = uuid.uuid4().hex
@@ -523,6 +536,120 @@ class Workbench:
                 self._pack_operation["message"] = "Cancelling pack operation…"
         return self.pack_state()
 
+    def reference_manager(self):
+        # Construction and local snapshots never contact a reference provider.
+        with self.lock:
+            if self._reference_manager is None:
+                from reference_manager import ReferenceManager
+                self._reference_manager = ReferenceManager(self.root)
+            return self._reference_manager
+
+    def reference_state(self):
+        with self.lock:
+            if self._reference_listing is None or not self._reference_operation["active"]:
+                self._reference_listing = self.reference_manager().snapshot()
+            result = copy.deepcopy(self._reference_listing)
+            result["operation"] = copy.deepcopy(self._reference_operation)
+            result.update(self.activity())
+            return result
+
+    def reference_request(self, action, request):
+        """Accept named provider choices, never client-supplied download URLs."""
+        fields = {"search": {"release", "query"}, "discover": {"release", "species_id"},
+                  "download": {"selection_id", "file_ids", "destination"}}
+        if action not in fields or not isinstance(request, dict) or set(request) - fields[action]:
+            raise ValueError("Unknown reference operation or request field.")
+        result = copy.deepcopy(request)
+        if action in ("search", "discover"):
+            release = result.setdefault("release", 116)
+            if type(release) is not int or not 1 <= release <= 9999:
+                raise ValueError("Choose a numeric Ensembl archive release.")
+        if action == "search":
+            query = result.setdefault("query", "")
+            if not isinstance(query, str) or len(query) > 200 or any(ord(c) < 32 or ord(c) == 127 for c in query):
+                raise ValueError("Use a short species name for the reference search.")
+            result["query"] = query.strip()
+        elif action == "discover":
+            species = result.get("species_id")
+            if not isinstance(species, str) or re.fullmatch(r"[a-z0-9_]{1,100}", species) is None:
+                raise ValueError("Choose a species from the reference search results.")
+        else:
+            result["selection_id"] = short_text(result.get("selection_id"), "reference selection", 100)
+            identities = result.get("file_ids")
+            if (not isinstance(identities, list) or not 1 <= len(identities) <= 20
+                    or any(not isinstance(value, str) or re.fullmatch(r"[A-Za-z0-9_.-]{1,100}", value) is None for value in identities)
+                    or len(identities) != len(set(identities))):
+                raise ValueError("Choose one or more distinct files from the discovered reference.")
+            destination = Path(short_text(result.get("destination"), "reference destination folder", 30000))
+            managed_default = destination == self.data / "references" and not destination.exists()
+            if not destination.is_absolute() or not (destination.is_dir() or managed_default):
+                raise ValueError("Choose an existing absolute reference destination folder.")
+            result["destination"] = str(destination)
+        return result
+
+    def start_reference_operation(self, action, request):
+        request = self.reference_request(action, request)
+        with self.lock:
+            self.ensure_editable()
+            manager = self.reference_manager()
+            self._reference_listing = manager.snapshot()
+            self._changing_references = True
+            cancel = self._reference_cancel = threading.Event()
+            self._reference_operation = {"id": uuid.uuid4().hex, "active": True, "status": "running",
+                                         "action": action, "message": "Preparing reference operation…",
+                                         "bytes": 0, "total": 0, "cancellable": True}
+
+            def progress(event):
+                if not isinstance(event, dict):
+                    event = {"message": str(event)}
+                with self.lock:
+                    for key in ("message", "bytes", "total", "cancellable", "phase"):
+                        if key in event:
+                            self._reference_operation[key] = event[key]
+
+            def work():
+                try:
+                    if cancel.is_set():
+                        raise InterruptedError("Reference operation cancelled.")
+                    if action == "search":
+                        manager.search(request["release"], request["query"], cancel=cancel, event=progress)
+                    elif action == "discover":
+                        manager.discover(request["release"], request["species_id"], cancel=cancel, event=progress)
+                    else:
+                        manager.download(request["selection_id"], request["file_ids"], request["destination"],
+                                         cancel=cancel, event=progress)
+                    with self.lock:
+                        self._reference_listing = manager.snapshot()
+                        self._reference_operation.update(status="completed", success=True,
+                            message={"search": "Species search completed. Choose a species to discover its files.",
+                                     "discover": "Reference files discovered. Review the assembly and files before downloading.",
+                                     "download": "Reference download completed. The local files are ready to use."}[action])
+                except Exception as error:
+                    with self.lock:
+                        cancelled = isinstance(error, InterruptedError)
+                        self._reference_operation.update(status="cancelled" if cancelled else "failed",
+                                                         success=False, message=str(error))
+                finally:
+                    with self.lock:
+                        self._reference_operation.update(active=False, cancellable=False)
+                        self._changing_references = False
+
+            worker = threading.Thread(target=work, name="workbench-reference-operation", daemon=True)
+            self._reference_worker = worker
+            # Start while holding the lifecycle lock so shutdown cannot join an
+            # unstarted worker between publication and Thread.start().
+            worker.start()
+        return self.reference_state()
+
+    def cancel_reference_operation(self):
+        with self.lock:
+            if self._reference_operation["active"]:
+                if not self._reference_operation.get("cancellable", True):
+                    raise ValueError("The completed reference is being recorded. Wait for it to finish.")
+                self._reference_cancel.set()
+                self._reference_operation["message"] = "Cancelling reference operation…"
+        return self.reference_state()
+
     def shutdown(self, grace=10):
         """Cancel background work, wait, and stop native processes if necessary.
 
@@ -535,6 +662,9 @@ class Workbench:
             self._pack_cancel.set()
             if self._pack_worker is not None:
                 workers.append(self._pack_worker)
+            self._reference_cancel.set()
+            if self._reference_worker is not None:
+                workers.append(self._reference_worker)
             for run in self.runs.values():
                 if run["status"] in ("preparing", "running", "cancelling"):
                     run["_cancel"].set()

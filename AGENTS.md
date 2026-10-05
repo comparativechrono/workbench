@@ -36,6 +36,9 @@ handover; older versioned documents describe their historical releases.
 - Keep shell-free argument arrays, bounded import validation, checksums and
   catalogue signature verification. Packs execute trusted native code; checksums
   alone do not establish publisher identity or isolate malicious tools.
+- Keep reference retrieval explicit and separate from analysis. Preserve archive,
+  assembly, resource role and exact-byte provenance; incomplete downloads must
+  never appear as ready inputs. See the reference-discovery guide.
 - Record exactly what was tested: platform, app and pack versions, artifact
   hashes, inputs and assertions. Linux execution, PE inspection, native Windows
   CLI checks, desktop GUI checks and clinical validation are different claims.

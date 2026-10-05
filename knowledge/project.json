@@ -3,8 +3,8 @@
   "document_kind": "project-knowledge-index",
   "project": "Native Workbench",
   "repository": "https://github.com/comparativechrono/workbench",
-  "reviewed_on": "2026-10-04",
-  "source_baseline_commit": "289c4176561fe6c8bbbfba1e225cd65fbafb126d",
+  "reviewed_on": "2026-10-05",
+  "source_baseline_commit": "8f95caa1f267d19ce72ea3cd7f2396ae66a801c1",
   "format": {
     "prose": "UTF-8 Markdown",
     "data": "JSON",
@@ -37,7 +37,8 @@
     "kraken2_validation": "evidence/kraken2-1.0.0-validation-2026-10-04.json",
     "bracken_validation": "evidence/bracken-1.0.0-validation-2026-10-04.json",
     "kraken2_public_downloads": "evidence/kraken2-1.0.0-public-downloads-2026-10-04.json",
-    "bracken_public_downloads": "evidence/bracken-1.0.0-public-downloads-2026-10-04.json"
+    "bracken_public_downloads": "evidence/bracken-1.0.0-public-downloads-2026-10-04.json",
+    "reference_discovery": "../docs/reference-discovery-0.7.md"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -50,7 +51,8 @@
     "Immutable published packs and explicit saved-pipeline version pins",
     "Scientific known-answer checks separate from process exit status",
     "Catalogue signatures, source provenance and third-party licensing preserved",
-    "Large scientific databases remain separate local inputs; hashes and explicit external-model declarations preserve their distinct evidence scopes"
+    "Large scientific databases remain separate local inputs; hashes and explicit external-model declarations preserve their distinct evidence scopes",
+    "Explicit reference retrieval remains separate from local analysis; release, assembly and byte identities are frozen with run provenance"
   ],
   "maintenance": {
     "source_of_behavior": "Current checked-out source and reproducible observations",

@@ -1,5 +1,41 @@
 # Validation, releases and publisher trust
 
+## Reference application gate, 0.7
+
+The initial reference provider is tested separately from tool-pack algorithms.
+Source tests in `workspace/tests/test_reference_*.py` cover release-specific
+discovery, restricted HTTPS redirects, metadata limits, immutable selections,
+streaming gzip/BSD/SHA checks, cancellation, publication rollback, receipt
+agreement, local file changes, typed input binding and frozen methods. They use
+deterministic synthetic network responses and do not establish Windows GUI
+behavior.
+
+`scripts/check_references_windows.py` exercises a disposable, exact application
+archive with public Ensembl release 116 yeast data. Independent compressed and
+expanded SHA-256 values are pinned for genome, GTF, cDNA, ncRNA and protein files.
+The check cancels an in-progress transfer, downloads a complete selection, starts
+a separate socket-denied host, binds a local reference and runs native SAMtools
+indexing against all 17 contigs. It retains methods, receipts, results and native
+window captures. Linux invocation must explicitly skip GUI and native analysis;
+that evidence must never be reported as a Windows pass.
+
+`.github/workflows/native-reference-check.yml` dispatches against an exact starter
+asset and SHA-256, with ordinary and space-containing installation paths. It
+uses read-only repository permissions. An optional exact updater payload checks
+0.6.0-to-0.7.0 migration, core identity and preservation of user data and pack
+fixtures. The updater transaction uses its separate interpreter so it does not
+lock the target runtime's DLLs. The GUI smoke and captures do not constitute
+full manual acceptance on managed PCs, multi-monitor/high-DPI configurations,
+Unicode/long paths, human genomes or institutional proxies.
+
+Candidate evidence and final public-asset evidence remain distinct. Keep the
+exact app, updater, source and gate hashes with each report; never overwrite
+published candidate bytes after a fix. The source companion records evidence
+available at creation time. A later final-gate report can supersede its pending
+release status without replacing the archive.
+
+## Earlier validation baseline
+
 Status: maintained handover, audited against repository commit
 `1b537869e9d88e493078e1a1f241d16013273f44` on 2026-10-04.
 This is an operational procedure, not a claim that every historical pack has
@@ -405,8 +441,10 @@ The release supplies `native-workbench-gatk-1.0.0-windows-validation.json` and
 `SHA256SUMS.txt`. The source companion preserves the 14 passing Linux
 scientific/regression tests, candidate evidence, failed Linux copy diagnostics
 and its creation-time pending-final status. The separate final report closes
-that status without replacing the source ZIP. Its full knowledge snapshot does
-not change the generic application's fixed source-file selection.
+that status without replacing the source ZIP. Its full knowledge snapshot was
+specific to that pack companion. The 0.7 application packager now includes root
+`AGENTS.md`, the complete knowledge directory, recursive documentation and
+workflow definitions in its own hashed source inventory.
 
 `scripts/make_pack_validation_candidate.py` creates a separate numeric candidate
 and a correspondence report from a frozen proposed final pack. Only the pack

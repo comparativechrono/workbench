@@ -85,6 +85,28 @@ the stated database. These contracts are specified in
 [local metagenomics resources](../docs/METAGENOMICS-RESOURCES.md); release status
 and successful gate claims belong in dated evidence.
 
+## Reference acquisition, 2026-10-05
+
+The user selected reference discovery/download as the next application feature.
+The 0.7 implementation provides an explicit native finder and a reusable local
+library, separate from both executable packs and analysis execution. Downloads
+produce ordinary files, receipts and hashes; tool inputs and pipelines continue
+to consume local paths. Reference identity appears in pre-run methods and is
+verified and frozen with the run's input evidence.
+
+The initial provider uses Ensembl archive releases 100–116, because Ensembl's
+replacement platform uses different release identities and a transitioning
+download layout. This is an implementation scope decision, not a statement that
+archive 116 is the newest available Ensembl data. Label it visibly and add modern
+Ensembl as a separate provider once its download contract is verified.
+
+Genome, annotation, cDNA, ncRNA and protein resources retain their distinct
+roles. cDNA alone must not be labelled a complete transcriptome. No downloads
+occur automatically when a saved pipeline is loaded or run. Dataset hashes
+record exact bytes and detect later changes; weak provider transfer checksums
+must not be described as cryptographic publisher authentication. Interrupted
+downloads remain incomplete rather than entering the ready local library.
+
 ## Scientific and deployment boundaries
 
 An accepted file extension is not sufficient evidence of compatibility. Genome

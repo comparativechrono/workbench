@@ -22,8 +22,10 @@ from decimal import Decimal
 
 try:
     from .catalog import resolve_tool
+    from .reference_provenance import collect_references, used_paths, methods_text as reference_methods
 except ImportError:
     from catalog import resolve_tool
+    from reference_provenance import collect_references, used_paths, methods_text as reference_methods
 
 
 MAX_NODES = 512
@@ -610,7 +612,7 @@ class Engine:
             groups.setdefault(rank[identity], []).append(identity)
         return [{"rank": level, "nodes": identities} for level, identities in sorted(groups.items())]
 
-    def methods(self, graph, completed=False, statuses=None):
+    def methods(self, graph, completed=False, statuses=None, references=None):
         nodes = {n["id"]: n for n in graph.get("nodes", []) if isinstance(n, dict)}
         sources = {s["id"]: s for s in graph.get("sources", []) if isinstance(s, dict)}
         try:
@@ -661,6 +663,15 @@ class Engine:
             if bindings:
                 line += " Inputs: " + " | ".join(bindings) + "."
             lines.append(line)
+        reference_paths = used_paths(graph, statuses)
+        # A preview reads only local receipt metadata. Completed methods receive
+        # frozen evidence explicitly and must never consult a changed library.
+        verified_references = references is not None
+        if references is None:
+            references = {} if completed else collect_references(self.app_root, reference_paths)
+        description = reference_methods(references, reference_paths, verified=verified_references)
+        if description:
+            lines.append(description)
         citations = []
         for identity in order:
             if statuses is not None and statuses.get(identity) != "success":
@@ -810,6 +821,9 @@ class Engine:
                     if (before.st_size, before.st_mtime_ns) != (after.st_size, after.st_mtime_ns):
                         raise ValueError("An input changed while preparing the run: " + str(path))
                     evidence[str(path)] = {"path": str(path), "bytes": after.st_size, "mtime_ns": after.st_mtime_ns, "sha256": checksum}
+        references = collect_references(self.app_root, evidence, evidence=evidence)
+        for path, reference in references.items():
+            evidence[path]["reference"] = copy.deepcopy(reference)
         self._assert_disjoint_hashes(graph, evidence)
         if cancel is not None and cancel.is_set():
             raise InterruptedError("Cancelled before creating the run.")
@@ -817,10 +831,12 @@ class Engine:
         run_id = "run-" + datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S") + "-" + uuid.uuid4().hex[:8]
         folder = parent / run_id
         folder.mkdir(mode=0o700)
-        plan = {"schema": 1, "id": run_id, "created": utc(), "folder": str(folder), "graph": graph, "nodes": frozen_nodes, "inputs": evidence, "warnings": review["warnings"], "scheduler": "sequential-independent-branches", "methods": self.methods(graph)}
+        plan = {"schema": 1, "id": run_id, "created": utc(), "folder": str(folder), "graph": graph, "nodes": frozen_nodes, "inputs": evidence, "references": references, "warnings": review["warnings"], "scheduler": "sequential-independent-branches", "methods": self.methods(graph, references=references)}
         plan["sha256"] = hashlib.sha256(canonical(plan).encode("utf-8")).hexdigest()
         write_json(folder / "plan.json", plan)
         write_json(folder / "graph.json", graph)
+        if references:
+            write_json(folder / "reference-provenance.json", {"schema": 1, "inputs": references})
         (folder / "methods-planned.txt").write_text(plan["methods"], encoding="utf-8")
         (folder / "pipeline.svg").write_text(self.diagram(plan), encoding="utf-8")
         return plan
@@ -1046,6 +1062,7 @@ class Engine:
         node_names = {n["id"]: n["label"] for n in plan["nodes"]}
         outputs, statuses = {}, {}
         record = {"schema": 1, "id": plan["id"], "planSha256": claimed, "name": plan["graph"].get("name", "Workspace"), "folder": str(folder), "started": utc(), "status": "running", "nodes": [], "outputs": {}, "scheduler": plan["scheduler"]}
+        record["references"] = copy.deepcopy(plan.get("references", {}))
         write_json(folder / "run.json", record)
         event({"type": "run", "status": "running", "folder": str(folder)})
         for node in plan["nodes"]:
@@ -1126,7 +1143,7 @@ class Engine:
         record["finished"] = utc()
         record["status"] = "cancelled" if cancel.is_set() or any(v == "cancelled" for v in statuses.values()) else "success" if all(v == "success" for v in statuses.values()) else "failed"
         record["success"] = record["status"] == "success"
-        record["methods"] = self.methods(plan["graph"], completed=True, statuses=statuses)
+        record["methods"] = self.methods(plan["graph"], completed=True, statuses=statuses, references=plan.get("references", {}))
         (folder / "methods-completed.txt").write_text(record["methods"], encoding="utf-8")
         write_json(folder / "run.json", record)
         event({"type": "run", "status": record["status"], "folder": str(folder)})

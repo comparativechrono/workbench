@@ -1,4 +1,4 @@
-Native Workbench 0.6.0 — application and tool packs
+Native Workbench 0.7.0 — application and tool packs
 
 Extract this complete folder to a location you can write to, then open
 NativeWorkbench.exe. The interface is a native Windows application.
@@ -17,6 +17,11 @@ Application updates and pack installation are separate. Updating the application
 does not replace optional packs, user settings or analysis results. Pack archives
 carry their declared executables, private runtimes, scientific metadata, tests and
 licenses. Running installed tools remains local and works without a network.
+
+Use References to discover and download public reference files. Each completed
+download is kept locally with provider, release, assembly, URL and checksums.
+Reference downloads are explicit network operations; analysis files are not
+uploaded. References are separate from the application and optional tool packs.
 
 Choose File > Check installation to check the core and installed pack fixtures.
 See SOURCE-AVAILABILITY.json for the separately distributed application source

@@ -156,7 +156,7 @@ raise SystemExit(main(["--app-root", sys.argv[2]]))
         responses = [json.loads(line) for line in result.stdout.splitlines()]
         self.assertEqual([x["id"] for x in responses], list(range(1, 8)))
         self.assertTrue(all(x["ok"] for x in responses), responses)
-        self.assertEqual(responses[0]["result"]["app_version"], "0.6.0")
+        self.assertEqual(responses[0]["result"]["app_version"], desktop_host.VERSION)
         self.assertEqual(responses[3]["result"]["graph"]["nodes"][0]["id"], "step-1")
         self.assertEqual(responses[4]["result"]["params"], {"threads": "3"})
         self.assertNotIn("params", responses[5]["result"]["presets"][0])

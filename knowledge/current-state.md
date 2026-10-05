@@ -1,11 +1,27 @@
 # Current project state
 
-Snapshot: **2026-10-04**. Source baseline:
-[`289c4176561fe6c8bbbfba1e225cd65fbafb126d`](https://github.com/comparativechrono/workbench/tree/289c4176561fe6c8bbbfba1e225cd65fbafb126d).
+Snapshot: **2026-10-05**. Starting source baseline:
+[`8f95caa1f267d19ce72ea3cd7f2396ae66a801c1`](https://github.com/comparativechrono/workbench/tree/8f95caa1f267d19ce72ea3cd7f2396ae66a801c1).
 Read this alongside the [machine-readable release inventory](release-inventory.json)
 and the repository [README](../README.md). Update the date, source baseline and
 evidence when the state changes; do not silently turn a pending item into a claim
 of completion.
+
+## Reference-discovery development
+
+The 0.7 source adds a native References finder and offline local library,
+initially using release-pinned Ensembl archive datasets. Genome FASTA, GTF,
+cDNA, ncRNA and protein files can be explicitly downloaded, checked, expanded
+and bound to compatible tool inputs. Receipts and exact file hashes feed into
+the frozen plan, methods and results. Reference datasets stay separate from
+executable packs. Current reference documentation is in the
+[0.7 guide](../docs/reference-discovery-0.7.md).
+
+This section records implementation work, not a published release or completed
+Windows acceptance claim. Candidate and exact-final release evidence will be
+recorded separately after testing. The 0.7 packaging also includes AGENTS and
+knowledge files in the source companion and supports a preserved-data update
+from the exact 0.6.0 starter. The released baseline below remains dated evidence.
 
 ## What is available
 

@@ -63,6 +63,7 @@ class SplitRelease(unittest.TestCase):
             envelope=json.loads(zipped.read('workbench-pack.json'))
             self.assertEqual(set(envelope),{'schema','id','version','packApi','minAppVersion','platform','manifestSha256','files'})
             self.assertEqual(envelope['manifestSha256'],hashlib.sha256(self.raw).hexdigest())
+            self.assertEqual(envelope['minAppVersion'],'0.6.0')
             expected={'workbench-pack.json'}
             for entry in envelope['files']:
                 path='pack/'+entry['path'];data=zipped.read(path);expected.add(path)
@@ -95,8 +96,50 @@ class SplitRelease(unittest.TestCase):
         source.write_bytes(b'changed source')
         with self.assertRaises(ValueError):package.source_companions(base)
 
+    def test_split_source_recovery_is_pinned_and_includes_handover_and_nested_docs(self):
+        source=self.root/'source';base=self.root/'base';previous=self.root/'previous-source.zip'
+        for folder in ('desktop','workspace','scripts','tests','tools','src','include','platform_windows',
+                       'pack-examples','knowledge','docs'):(source/folder).mkdir(parents=True)
+        put(source,'AGENTS.md',b'agent entry point')
+        put(source,'knowledge/current-state.md',b'current handover')
+        put(source,'knowledge/project.json',b'{"schema":1}')
+        put(source,'docs/source-recovery/README.md',b'nested recovery instructions')
+        put(source,'.github/workflows/native-core-check.yml',b'name: Core checks\n')
+        put(source,'examples/starter/reference.fa',b'>reference\nACGT\n')
+        legacy=b'exact historical source archive';contents={'restore_from_runtime':[]}
+        recovery={'release':'0.6.0','legacy_source':{'path':'source/native-workbench-source.zip',
+                  'bytes':len(legacy),'sha256':hashlib.sha256(legacy).hexdigest()},
+                  'pack_companions':[],'source_aliases':[]}
+        with zipfile.ZipFile(previous,'x') as zipped:
+            zipped.writestr('SOURCE-RECOVERY.json',json.dumps(recovery))
+            zipped.writestr('legacy/SOURCE-CONTENTS-0.5.4.json',json.dumps(contents))
+            zipped.writestr('legacy/native-workbench-0.5.4-source.zip',legacy)
+        availability={'sourceArtifact':{'file':previous.name,'bytes':previous.stat().st_size,
+                      'sha256':hashlib.sha256(previous.read_bytes()).hexdigest()}}
+        for name in ('NativeWorkbench.exe','WorkbenchBridge.exe','workspace/desktop_host.py'):put(base,name,b'old')
+        put(base,'SOURCE-AVAILABILITY.json',json.dumps(availability).encode())
+        manifest={'schema_version':2,'version':'0.6.0','ownership':'core','pack_management':'independent',
+                  'interface':'native-win32','requires_browser':False,'transport':'anonymous-pipes',
+                  'manifest_includes_itself':False,'files':[package.item(p,p.relative_to(base).as_posix()) for p in package.files(base)]}
+        put(base,'manifest.json',json.dumps(manifest).encode())
+        output=self.root/'new-source.zip'
+        with mock.patch.object(package,'SOURCE',source):package.build_sources(base,output,previous)
+        with zipfile.ZipFile(output) as zipped:
+            expected={'current/AGENTS.md','current/knowledge/current-state.md','current/knowledge/project.json',
+                      'current/docs/source-recovery/README.md','current/.github/workflows/native-core-check.yml'}
+            self.assertTrue(expected<=set(zipped.namelist()))
+            self.assertEqual(zipped.read('legacy/native-workbench-0.5.4-source.zip'),legacy)
+            record=json.loads(zipped.read('SOURCE-RECOVERY.json'))
+            self.assertEqual(record['release'],'0.7.0')
+            self.assertEqual(record['build_baseline']['version'],'0.6.0')
+            self.assertTrue(expected<={entry['path'] for entry in record['current_source_files']})
+        previous.write_bytes(b'changed source ZIP')
+        with self.assertRaises(ValueError):package.build_sources(base,self.root/'rejected-source.zip',previous)
+        self.assertFalse((self.root/'rejected-source.zip').exists())
+
     def test_runtime_inventory_contains_new_independent_manager_and_checks(self):
         self.assertTrue({'pack_manager.py','pack_security.py','core_checks.py'}<=set(package.RUNTIME_MODULES))
+        self.assertTrue({'reference_provider.py','reference_manager.py','reference_provenance.py'}<=set(package.RUNTIME_MODULES))
         self.assertNotIn('server.py',package.RUNTIME_MODULES)
         self.assertEqual(package.STARTER,('align-0.4.0','bam-0.4.0','variants-0.4.0'))
 
@@ -142,6 +185,22 @@ class SplitRelease(unittest.TestCase):
         put(app,'results/private-patient-data.txt',b'never release this')
         with self.assertRaises(ValueError):package.starter_archive(app,self.root/'rejected.zip')
         self.assertFalse((self.root/'rejected.zip').exists())
+
+        # The next application release stages from this exact split core. Optional
+        # packs and mutable data in a user's installation are not redistributed.
+        put(app,'packs/optional-9.0.0/private-file',b'not in the starter')
+        next_app=self.root/'next-starter'
+        with mock.patch.object(package,'SOURCE',source):package.stage(app,next_app,artifact)
+        self.assertEqual({p.name for p in (next_app/'packs').iterdir()},set(package.STARTER))
+        self.assertFalse((next_app/'results').exists())
+        for folder in package.STARTER:
+            before={p.relative_to(app/'packs'/folder):p.read_bytes() for p in package.files(app/'packs'/folder)}
+            after={p.relative_to(next_app/'packs'/folder):p.read_bytes() for p in package.files(next_app/'packs'/folder)}
+            self.assertEqual(before,after)
+        put(app,'runtime/python/python.exe',b'changed frozen runtime')
+        with mock.patch.object(package,'SOURCE',source),self.assertRaises(ValueError):
+            package.stage(app,self.root/'bad-runtime-starter',artifact)
+        self.assertFalse((self.root/'bad-runtime-starter').exists())
 
 
 if __name__=='__main__':unittest.main()

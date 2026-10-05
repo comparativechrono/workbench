@@ -67,7 +67,7 @@ class CoreChecksTests(unittest.TestCase):
         (self.root/'workspace/core_checks.py').write_bytes(b'changed core')
         with self.assertRaisesRegex(VerificationError,'File (size|hash) differs'):
             check_release_manifest(self.root)
-    def test_only_pack_manager_can_import_network_client_and_never_listener(self):
+    def test_only_explicit_download_clients_can_import_network_and_never_listener(self):
         (self.root/'manifest.json').write_text('{"interface":"native-win32"}')
         for name in ('desktop_host.py','desktop_model.py','service.py'):
             (self.root/'workspace'/name).write_text('import json\n')
@@ -79,6 +79,14 @@ class CoreChecksTests(unittest.TestCase):
             with self.subTest(code=code), self.assertRaises(VerificationError):
                 check_frontend(self.root)
         client.unlink()
+        reference = self.root/'workspace/reference_provider.py'
+        reference.write_text('import urllib.request\nimport http.client\n')
+        self.assertFalse(check_frontend(self.root)['requiresBrowser'])
+        for code in ('from http import server\n', 'import webbrowser\n', 'socket.listen(1)\n'):
+            reference.write_text(code)
+            with self.subTest(reference_client=code), self.assertRaises(VerificationError):
+                check_frontend(self.root)
+        reference.unlink()
         helper=self.root/'workspace/pack_security.py'
         helper.write_text('from urllib.parse import urlsplit\n')
         self.assertFalse(check_frontend(self.root)['requiresBrowser'])
