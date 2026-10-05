@@ -1,0 +1,264 @@
+{
+  "schema": 1,
+  "date_utc": "2026-10-05T13:19:38.982774+00:00",
+  "scope": "Independent static inspection of local artifacts; no native Windows execution or publication.",
+  "source_commit": "7e928100dd243cdbb9809941f98dfa80a2e0ac02",
+  "directory": "/workspace/scratch/8b23bd9aba3c/candidate-rc2-local",
+  "stage": "/workspace/scratch/8b23bd9aba3c/candidate-rc2-local-work/stage/native-workbench",
+  "baseline": "/workspace/scratch/8b23bd9aba3c/baseline-0.6.0/native-workbench",
+  "checks": [
+    {
+      "name": "release_output_allowlist",
+      "success": false,
+      "unexpected": [
+        "native-workbench-0.7.0-starter-windows.zip.partial"
+      ],
+      "missing": []
+    },
+    {
+      "name": "checksum_file_allowlist",
+      "success": false,
+      "unexpected": [
+        "native-workbench-0.7.0-starter-windows.zip.partial"
+      ],
+      "missing": []
+    },
+    {
+      "name": "listed_hashes_match_actual_files",
+      "success": true,
+      "errors": []
+    },
+    {
+      "name": "native-workbench-0.7.0-source.zip: archive identity, CRC and paths",
+      "success": true
+    },
+    {
+      "name": "native-workbench-0.7.0-starter-windows.zip: archive identity, CRC and paths",
+      "success": true
+    },
+    {
+      "name": "native-workbench-0.7.0-update-from-0.6.0.zip: archive identity, CRC and paths",
+      "success": true
+    },
+    {
+      "name": "baseline_core_inventory",
+      "success": true,
+      "count": 65,
+      "errors": [],
+      "manifest_sha256": "d1d6e19eff4a066d16540913f433d1455818e37f3fc9c83a48437337dacdc891",
+      "version": "0.6.0"
+    },
+    {
+      "name": "starter_matches_staged_tree",
+      "success": true,
+      "count": 212,
+      "errors": []
+    },
+    {
+      "name": "starter_core_inventory",
+      "success": true,
+      "count": 68,
+      "errors": [],
+      "manifest_sha256": "1bd7781c668b7bd4e12a9ae1b9bf128de1bacbdfb7b60fb14fe432d0f1f72a8a",
+      "version": "0.7.0"
+    },
+    {
+      "name": "core_inventory_does_not_own_packs_or_mutable_user_data",
+      "success": true,
+      "errors": []
+    },
+    {
+      "name": "all_starter_pack_files_preserved_exactly",
+      "success": true,
+      "file_count": 143,
+      "errors": [],
+      "pack_identities": [
+        {
+          "id": "align",
+          "version": "0.4.0",
+          "folder": "packs/align-0.4.0",
+          "manifestSha256": "81c962222c93356a4f7727b23193c71d7dcd515859e62a179574781f411824d3"
+        },
+        {
+          "id": "bam",
+          "version": "0.4.0",
+          "folder": "packs/bam-0.4.0",
+          "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+        },
+        {
+          "id": "variants",
+          "version": "0.4.0",
+          "folder": "packs/variants-0.4.0",
+          "manifestSha256": "ea4b7f0a6c28709e4190b6514c07cbf7bdd58e1a4f2a2d931f2cae3ce6ec3795"
+        }
+      ]
+    },
+    {
+      "name": "reference_modules_in_core_inventory",
+      "success": true,
+      "entries": [
+        {
+          "path": "workspace/reference_provider.py",
+          "bytes": 21669,
+          "sha256": "30f160e22d2f8a89bac4f1d52bf4ec6709a7f331f1bb6000e78707e559fdc816"
+        },
+        {
+          "path": "workspace/reference_manager.py",
+          "bytes": 28150,
+          "sha256": "3df9269e3bd89a822a18c323af36f474887b185cb261399f55409354240d2bd9"
+        },
+        {
+          "path": "workspace/reference_provenance.py",
+          "bytes": 3927,
+          "sha256": "9175cbb21fd983816a1b8b0effdae09ebaa11990fccdc06e4446c13f56ac5971"
+        }
+      ]
+    },
+    {
+      "name": "private_runtime_preserved_exactly",
+      "success": true,
+      "files": 39,
+      "errors": []
+    },
+    {
+      "name": "source_inventory_matches_archive_bytes",
+      "success": true,
+      "count": 412,
+      "errors": []
+    },
+    {
+      "name": "build_report_matches_source_inventory",
+      "success": true
+    },
+    {
+      "name": "source_inventory_covers_current_tree",
+      "success": true,
+      "missing": [],
+      "extra": []
+    },
+    {
+      "name": "source_companion_matches_exact_git_commit",
+      "success": true,
+      "files": 412,
+      "errors": []
+    },
+    {
+      "name": "required_reference_release_sources_and_handover_present",
+      "success": true,
+      "missing": []
+    },
+    {
+      "name": "starter_pins_exact_source_companion",
+      "success": true
+    },
+    {
+      "name": "legacy_corresponding_source_hash_retained",
+      "success": true,
+      "bytes": 44163162,
+      "sha256": "5dac9add19436b336cba483a0f915e39aafed383282c2a019a0dbd3cc3c8668e"
+    },
+    {
+      "name": "source_recovery_pins_exact_0_6_0_baseline",
+      "success": true
+    },
+    {
+      "name": "updater_archive_inventory",
+      "success": true,
+      "count": 59,
+      "errors": []
+    },
+    {
+      "name": "updater_exact_base_and_target_manifests",
+      "success": true,
+      "base_version": "0.6.0",
+      "target_version": "0.7.0",
+      "base_manifest_sha256": "d1d6e19eff4a066d16540913f433d1455818e37f3fc9c83a48437337dacdc891",
+      "target_manifest_sha256": "1bd7781c668b7bd4e12a9ae1b9bf128de1bacbdfb7b60fb14fe432d0f1f72a8a"
+    },
+    {
+      "name": "updater_operations_exactly_cover_changed_core",
+      "success": true,
+      "operation_count": 13,
+      "changed_paths": [
+        "NativeWorkbench.exe",
+        "README.txt",
+        "SOURCE-AVAILABILITY.json",
+        "WorkbenchBridge.exe",
+        "workspace/app_version.py",
+        "workspace/desktop_host.py",
+        "workspace/desktop_model.py",
+        "workspace/engine.py",
+        "workspace/reference_manager.py",
+        "workspace/reference_provenance.py",
+        "workspace/reference_provider.py",
+        "workspace/service.py",
+        "workspace/verify_installation.py"
+      ],
+      "errors": [],
+      "missing": [],
+      "extra": [],
+      "obsolete": []
+    },
+    {
+      "name": "workspace/reference_provider.py: packaged bytes equal source companion",
+      "success": true
+    },
+    {
+      "name": "workspace/reference_manager.py: packaged bytes equal source companion",
+      "success": true
+    },
+    {
+      "name": "workspace/reference_provenance.py: packaged bytes equal source companion",
+      "success": true
+    }
+  ],
+  "assets": [
+    {
+      "file": "native-workbench-0.7.0-source.zip",
+      "bytes": 45995633,
+      "sha256": "e1640a3c1a1918e428ad32ab421cb340e299dc403eb938276a64c51cf4e813c6",
+      "members": 415,
+      "zip_crc_pass": true,
+      "unsafe_paths": [],
+      "duplicate_paths": [],
+      "matches_build_report": true
+    },
+    {
+      "file": "native-workbench-0.7.0-starter-windows.zip",
+      "bytes": 16915486,
+      "sha256": "fd37980d3254b91f246027857ea41811985022a8e147a6e2a1cb982b9dcac2e9",
+      "members": 212,
+      "zip_crc_pass": true,
+      "unsafe_paths": [],
+      "duplicate_paths": [],
+      "matches_build_report": true
+    },
+    {
+      "file": "native-workbench-0.7.0-update-from-0.6.0.zip",
+      "bytes": 12829340,
+      "sha256": "04c0e7de307556243172744689c9d0802ba22d2fc16ee02257a8421e1c9a046f",
+      "members": 60,
+      "zip_crc_pass": true,
+      "unsafe_paths": [],
+      "duplicate_paths": [],
+      "matches_build_report": true
+    }
+  ],
+  "unexpected_artifact_evidence": [
+    {
+      "file": "native-workbench-0.7.0-starter-windows.zip.partial",
+      "bytes": 6898944,
+      "sha256": "d14fd44851e065cee40a16bfc8b61e57d2fea6faed9ce4f9ad7126e6e2a71105",
+      "zip_opened": false,
+      "zip_error": "BadZipFile: File is not a zip file"
+    }
+  ],
+  "release_ready": false,
+  "intended_assets_static_valid": true,
+  "native_windows_validation": "not performed by this audit; remains required",
+  "publication": "not performed; output directory must not be published with unexpected partial artifact",
+  "failed_checks": [
+    "release_output_allowlist",
+    "checksum_file_allowlist"
+  ]
+}

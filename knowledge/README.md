@@ -24,6 +24,7 @@ and releases before treating this snapshot as current.
 | [Current state](current-state.md) | What is released, tested, limited or unfinished? |
 | [Architecture](architecture.md) | Where does each responsibility live, and how does a run work? |
 | [Reference discovery](../docs/reference-discovery-0.7.md) | How are references found, downloaded, reused offline and recorded in runs? |
+| [Reference release continuation](reference-release-handover.md) | What happened to RC1, what interface finding was recovered, and which gates remain? |
 | [Development](development.md) | How do I recover inputs, build, test and resume work? |
 | [Pack development](pack-development.md) | How do I add a real tool without rebuilding the app? |
 | [Validation and releases](validation-and-releases.md) | What establishes correctness, and how are artifacts published and trusted? |

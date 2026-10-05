@@ -38,7 +38,8 @@
     "bracken_validation": "evidence/bracken-1.0.0-validation-2026-10-04.json",
     "kraken2_public_downloads": "evidence/kraken2-1.0.0-public-downloads-2026-10-04.json",
     "bracken_public_downloads": "evidence/bracken-1.0.0-public-downloads-2026-10-04.json",
-    "reference_discovery": "../docs/reference-discovery-0.7.md"
+    "reference_discovery": "../docs/reference-discovery-0.7.md",
+    "reference_release_continuation": "reference-release-handover.md"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",

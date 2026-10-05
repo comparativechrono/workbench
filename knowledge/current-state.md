@@ -17,9 +17,14 @@ the frozen plan, methods and results. Reference datasets stay separate from
 executable packs. Current reference documentation is in the
 [0.7 guide](../docs/reference-discovery-0.7.md).
 
-This section records implementation work, not a published release or completed
-Windows acceptance claim. Candidate and exact-final release evidence will be
-recorded separately after testing. The 0.7 packaging also includes AGENTS and
+This section records implementation work, not a completed Windows acceptance
+claim. A live 2026-10-05 audit found the published `app-v0.7.0-rc1` diagnostic
+candidate, but no final `app-v0.7.0`. Its reference backend and 0.6.0-to-0.7.0
+updater CLI passed recorded Windows checks; the overall GUI gate failed. The
+details panel overlapped download controls, and tab automation timed out. The
+source correction in `b9d0ee7` still needs a newly packaged native gate.
+See the [continuation handover](reference-release-handover.md) for recovered
+screenshots, exact identities and fresh source checks. The 0.7 packaging also includes AGENTS and
 knowledge files in the source companion and supports a preserved-data update
 from the exact 0.6.0 starter. The released baseline below remains dated evidence.
 

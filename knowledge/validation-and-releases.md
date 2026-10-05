@@ -24,9 +24,17 @@ asset and SHA-256, with ordinary and space-containing installation paths. It
 uses read-only repository permissions. An optional exact updater payload checks
 0.6.0-to-0.7.0 migration, core identity and preservation of user data and pack
 fixtures. The updater transaction uses its separate interpreter so it does not
-lock the target runtime's DLLs. The GUI smoke and captures do not constitute
-full manual acceptance on managed PCs, multi-monitor/high-DPI configurations,
-Unicode/long paths, human genomes or institutional proxies.
+lock the target runtime's DLLs. The automated GUI gate adds a SAMtools task
+through the native library, searches and discovers yeast files, selects their
+checkboxes, types a destination, cancels, downloads, and binds the genome with
+**Use for input**. It checks the displayed input path and pinned downloaded
+identities, both tab directions, measured non-overlap at normal/minimum size,
+captures and clean shutdown. GUI cancellation verifies no publication; the
+separate private-host check requires cancellation after bytes have transferred.
+The native folder pickers and full manual acceptance on managed PCs,
+multi-monitor/high-DPI configurations, Unicode/long paths, human genomes and
+institutional proxies remain outside this automated gate. Adding a check is not
+evidence that it has passed.
 
 Candidate evidence and final public-asset evidence remain distinct. Keep the
 exact app, updater, source and gate hashes with each report; never overwrite

@@ -492,7 +492,7 @@ def reference_control_geometry(rows, *, local=False):
 
 
 def gui_smoke(root, evidence):
-    """Real Win32 launch, button, child controls, resize and captured pixels."""
+    """Real Win32 reference controls, downloads, input binding and captured pixels."""
     import ctypes
     from ctypes import wintypes
     user = ctypes.WinDLL("user32", use_last_error=True)
@@ -512,6 +512,7 @@ def gui_smoke(root, evidence):
     user.GetDlgItem.argtypes = [wintypes.HWND, ctypes.c_int]
     user.GetDlgItem.restype = wintypes.HWND
     user.IsWindowVisible.argtypes = [wintypes.HWND]
+    user.IsWindowEnabled.argtypes = [wintypes.HWND]
     user.GetWindowRect.argtypes = [wintypes.HWND, ctypes.POINTER(wintypes.RECT)]
     user.GetClientRect.argtypes = [wintypes.HWND, ctypes.POINTER(wintypes.RECT)]
     user.SendMessageTimeoutW.argtypes = [wintypes.HWND, wintypes.UINT, wintypes.WPARAM,
@@ -552,9 +553,57 @@ def gui_smoke(root, evidence):
         return result.value
 
     def text(hwnd, class_name=False):
-        buffer = ctypes.create_unicode_buffer(1024)
-        (user.GetClassNameW if class_name else user.GetWindowTextW)(hwnd, buffer, len(buffer))
+        if class_name:
+            buffer = ctypes.create_unicode_buffer(256)
+            user.GetClassNameW(hwnd, buffer, len(buffer))
+            return buffer.value
+        # Unlike GetWindowText, these bounded, system-marshalled messages read
+        # another process's edit/combo contents. WM_GETTEXTLENGTH may overestimate
+        # the length; WM_GETTEXT is limited by the allocated buffer in either case.
+        length = send(hwnd, 0x000E)
+        require(length <= 256 * 1024, "Native control text exceeded the gate's limit.")
+        buffer = ctypes.create_unicode_buffer(length + 1)
+        send(hwnd, 0x000D, len(buffer), ctypes.addressof(buffer))
         return buffer.value
+
+    def wait_until(predicate, message, seconds=30):
+        deadline = time.monotonic() + seconds
+        while time.monotonic() < deadline:
+            if predicate():
+                return
+            time.sleep(.05)
+        raise TimeoutError(message)
+
+    def control(hwnd, identity):
+        child = user.GetDlgItem(hwnd, identity)
+        require(bool(child), "Missing native control: " + str(identity))
+        return child
+
+    def set_text(hwnd, value):
+        buffer = ctypes.create_unicode_buffer(value)
+        require(send(hwnd, 0x000C, 0, ctypes.addressof(buffer)), "Native edit rejected its text.")
+        require(text(hwnd) == value, "Native edit did not retain the requested text.")
+
+    def key(hwnd, value):
+        require(user.PostMessageW(hwnd, 0x0100, value, 1), "Could not queue native key-down.")
+        require(user.PostMessageW(hwnd, 0x0101, value, 0xC0000001), "Could not queue native key-up.")
+
+    def click(hwnd, identity):
+        child = control(hwnd, identity)
+        wait_until(lambda: user.IsWindowEnabled(child) and user.IsWindowVisible(child),
+                   "Native button is not available: " + str(identity))
+        # Let the actual button generate BN_CLICKED on its own UI thread.
+        require(user.PostMessageW(child, 0x00F5, 0, 0), "Could not queue native button click.")
+
+    def select_row(hwnd, index):
+        wait_until(lambda: user.IsWindowEnabled(hwnd), "Native list remained disabled.")
+        key(hwnd, 0x24)  # VK_HOME
+        wait_until(lambda: send(hwnd, 0x100C, -1, 2) == 0 and user.IsWindowEnabled(hwnd),
+                   "Native list did not select its first row.")  # LVM_GETNEXTITEM, LVNI_SELECTED
+        for row in range(1, index + 1):
+            key(hwnd, 0x28)  # VK_DOWN
+            wait_until(lambda: send(hwnd, 0x100C, -1, 2) == row and user.IsWindowEnabled(hwnd),
+                       "Native list did not select row " + str(row))
 
     def windows(pid):
         found = []
@@ -617,26 +666,41 @@ def gui_smoke(root, evidence):
             gdi.DeleteDC(memory)
             user.ReleaseDC(hwnd, dc)
 
+    # Obtain only the published task's displayed name from its real catalogue.
+    # Adding that task and binding its input below use the desktop controls.
+    catalog_host = PrivateHost(root, evidence, "gui-catalog-host", offline=True)
+    try:
+        task_name = catalog_host.call("init")["catalog"]["tools"]["bam/reference-index"]["name"]
+    finally:
+        catalog_host.close()
+    registry = root / "user-data" / "references" / "library.json"
+    original_registry = registry.read_bytes()
+    original_records = json.loads(original_registry)["records"]
+    original_ids = {record["id"] for record in original_records}
+    destination = Path(tempfile.mkdtemp(prefix="gui reference data ", dir=root.parent))
+    sentinel = destination / "keep-me.txt"
+    sentinel.write_text("Preserve existing GUI destination content.\n", encoding="utf-8")
     progress("launch native desktop")
     process = subprocess.Popen([str(root / "NativeWorkbench.exe")], cwd=root)
     main = None
     try:
         progress("wait for main window", pid=process.pid)
         main = find_window(process.pid, "Native Workbench")
+        progress("add the compatible SAMtools task through the native library")
+        search = control(main, 102)
+        wait_until(lambda: user.IsWindowEnabled(search), "Native task library did not become ready.")
+        set_text(search, task_name)
+        tasks = control(main, 104)
+        wait_until(lambda: send(tasks, 0x1004) == 1, "Task-name search did not identify one SAMtools task.")
+        select_row(tasks, 0)
+        click(main, 105)
+        wait_until(lambda: send(control(main, 106), 0x1004) == 1 and user.IsWindowEnabled(search),
+                   "Adding the SAMtools task did not create a workspace step.")
         progress("open References", pid=process.pid, windows=[
             {"hwnd": hwnd, "title": text(hwnd), "class": text(hwnd, True)}
             for hwnd in windows(process.pid)])
-        deadline = time.monotonic() + 30
-        while time.monotonic() < deadline:
-            # The command is dispatched to the same handler as clicking References.
-            require(user.PostMessageW(main, 0x0111, 403, 0),
-                    "Could not post the native References command.")  # WM_COMMAND, MANAGE_REFERENCES
-            found = [h for h in windows(process.pid) if text(h, True) == "WorkbenchReferences070"]
-            if found:
-                break
-            time.sleep(.1)
-        require(bool(found), "References toolbar command did not open its native window.")
-        ref = found[0]
+        click(main, 403)
+        ref = find_window(process.pid, "References · Native Workbench")
         progress("wait for local reference library to populate")
         deadline = time.monotonic() + 15
         rows = 0
@@ -656,7 +720,7 @@ def gui_smoke(root, evidence):
         result = {"launched": True, "pid": process.pid, "class": text(ref, True), "title": text(ref),
                   "normalControls": normal, "normalGeometry": normal_geometry,
                   "captures": [capture(ref, evidence / "references-normal.bmp")],
-                  "scope": "Automated Win32 launch, local-library loading, queued tab input, observed control non-overlap at normal/minimum size, resize and pixel capture; human usability acceptance remains separate."}
+                  "scope": "Automated native controls: add SAMtools task, References, live species search/file discovery, five checkboxes, typed destination, cancel, download, compatible input selection and visible bound path; observed control non-overlap, resize, queued tab input and pixel capture. The folder picker and human usability acceptance are separate."}
         dpi = user.GetDpiForWindow(ref) or 96
         result["dpi"] = dpi
         progress("resize References to minimum")
@@ -668,6 +732,64 @@ def gui_smoke(root, evidence):
         progress("minimum References geometry checked", geometry=result["minimumGeometry"],
                  controls=result["minimumControls"])
         result["captures"].append(capture(ref, evidence / "references-minimum.bmp"))
+        progress("search and discover yeast through native References controls")
+        require(text(control(ref, 602)) == "116", "Native finder did not retain archive release 116.")
+        set_text(control(ref, 603), "saccharomyces")
+        click(ref, 604)
+        species = control(ref, 605)
+        wait_until(lambda: send(species, 0x1004) == 1 and user.IsWindowEnabled(species),
+                   "Native species search did not return the expected yeast assembly.", 60)
+        require(send(species, 0x100C, -1, 2) == 0, "Native search did not select its species result.")
+        click(ref, 606)
+        files = control(ref, 607)
+        wait_until(lambda: send(files, 0x1004) == 5 and user.IsWindowEnabled(files),
+                   "Native file discovery did not expose five yeast products.", 90)
+        select_row(files, 0)
+        for row in range(5):
+            if row:
+                key(files, 0x28)
+                wait_until(lambda: send(files, 0x100C, -1, 2) == row,
+                           "Could not select native reference product " + str(row))
+            key(files, 0x20)  # VK_SPACE toggles the real checkbox.
+            wait_until(lambda: send(files, 0x102C, row, 0xF000) == 0x2000,
+                       "Native reference checkbox was not checked.")  # LVM_GETITEMSTATE
+        set_text(control(ref, 609), str(destination))
+        result["captures"].append(capture(ref, evidence / "references-discovered-minimum.bmp"))
+        progress("cancel a download using the native Cancel operation button")
+        click(ref, 611)
+        click(ref, 616)
+        wait_until(lambda: user.IsWindowEnabled(control(ref, 611)) and
+                   not user.IsWindowEnabled(control(ref, 616)),
+                   "Native cancellation did not restore the finder controls.", 90)
+        require("cancel" in text(control(ref, 618)).lower(), "Native cancellation notice is missing.")
+        require(registry.read_bytes() == original_registry and list(destination.iterdir()) == [sentinel],
+                "Native cancellation published a reference, left partial data or changed existing content.")
+        result["cancellation"] = {"buttonExercised": True, "registryUnchanged": True,
+                                  "destinationPreserved": True,
+                                  "scope": "Cancellation through the enabled GUI button before publication; the separate private-host gate requires transferred bytes."}
+        progress("download all five products through the native Download selected button")
+        click(ref, 611)
+        wait_until(lambda: registry.read_bytes() != original_registry and
+                   user.IsWindowVisible(control(ref, 612)) and user.IsWindowEnabled(control(ref, 612)),
+                   "Native download did not publish and show its completed local files.", 120)
+        records = json.loads(registry.read_bytes())["records"]
+        added = [record for record in records if record["id"] not in original_ids]
+        require(len(added) == 1, "Native download did not publish exactly one new reference.")
+        downloaded = added[0]
+        require({item["id"] for item in downloaded["files"]} == set(EXPECTED),
+                "Native checkbox selection lost a reference product.")
+        for item in downloaded["files"]:
+            require(all(item[field] == value for field, value in EXPECTED[item["id"]].items()) and
+                    sha256(item["path"]) == item["sha256"], "Native downloaded reference differs from pinned identity.")
+        require(sha256(downloaded["receipt_path"]) == downloaded["receipt_sha256"],
+                "Native download receipt identity differs.")
+        result["download"] = {"recordId": downloaded["id"], "products": list(EXPECTED),
+                              "receiptSha256": downloaded["receipt_sha256"], "pinnedIdentitiesVerified": True}
+        # Exercise both tab directions after the automatic download transition.
+        tab = control(ref, 601)
+        key(tab, 0x25)  # VK_LEFT
+        wait_until(lambda: send(tab, 0x130B) == 0 and user.IsWindowVisible(files),
+                   "Native Find online tab did not return.")
         # Send an ordinary right-arrow key to the real native tab control. It
         # generates its own in-process notification; never pass cross-process
         # pointers through WM_NOTIFY or list-view messages.
@@ -675,10 +797,7 @@ def gui_smoke(root, evidence):
         progress("select Downloaded tab")
         # Queue normal key input on the target UI thread. Synchronously sending
         # a key from another process can deadlock focus/notification handling.
-        require(user.PostMessageW(tab, 0x0100, 0x27, 1),
-                "Could not queue the native tab key-down event.")  # WM_KEYDOWN, VK_RIGHT
-        require(user.PostMessageW(tab, 0x0101, 0x27, 0xC0000001),
-                "Could not queue the native tab key-up event.")
+        key(tab, 0x27)  # VK_RIGHT
         deadline = time.monotonic() + 15
         while time.monotonic() < deadline:
             local_list = user.GetDlgItem(ref, 612)
@@ -694,13 +813,37 @@ def gui_smoke(root, evidence):
                 "Downloaded native tab did not show the five local reference products.")
         result["downloadedControls"] = local_controls
         result["downloadedGeometry"] = reference_control_geometry(local_controls, local=True)
+        require(rows == sum(len(record["files"]) for record in records),
+                "Native local library did not display every completed reference file.")
         result["downloadedRows"] = rows
+        progress("assign the newly downloaded genome using the native compatible-input controls")
+        genome = next(item for item in downloaded["files"] if item["id"] == "genome")
+        row = 0
+        for record in records:
+            if record["id"] == downloaded["id"]:
+                row += next(index for index, item in enumerate(record["files"]) if item["id"] == "genome")
+                break
+            row += len(record["files"])
+        select_row(local_list, row)
+        target = control(ref, 613)
+        wait_until(lambda: send(target, 0x0146) == 1 and user.IsWindowEnabled(control(ref, 614)),
+                   "Native downloaded genome did not offer the one compatible SAMtools input.")  # CB_GETCOUNT
+        require(send(target, 0x0147) == 0, "Native compatible input was not selected.")  # CB_GETCURSEL
+        click(ref, 614)
+        wait_until(lambda: "Reference assigned." in text(control(ref, 618)),
+                   "Native Use for input did not acknowledge the binding.")
+        bound = [item for item in controls(main) if item["class"].lower() == "edit" and
+                 item["text"] == genome["path"]]
+        require(len(bound) == 1, "The workspace inspector did not display the newly assigned genome path.")
+        result["inputSelection"] = {"task": task_name, "referenceId": downloaded["id"],
+                                    "fileId": "genome", "path": genome["path"],
+                                    "visibleInputControl": bound[0]["id"]}
         result["captures"].append(capture(ref, evidence / "references-downloaded-minimum.bmp"))
+        result["captures"].append(capture(main, evidence / "references-bound-workspace.bmp"))
         progress("close References and desktop")
-        send(ref, 0x0111, 619, 0)
-        time.sleep(.1)
-        require(not any(text(h, True) == "WorkbenchReferences070" for h in windows(process.pid)),
-                "Closing References left its visible window open.")
+        click(ref, 619)
+        wait_until(lambda: not any(text(h, True) == "WorkbenchReferences070" for h in windows(process.pid)),
+                   "Closing References left its visible window open.")
         user.PostMessageW(main, 0x0010, 0, 0)  # WM_CLOSE
         require(process.wait(timeout=30) == 0, "Native desktop failed to close cleanly.")
         result["closedCleanly"] = True
@@ -723,11 +866,11 @@ def gui_smoke_bounded(root, evidence):
     with (evidence / "gui-worker.stderr.txt").open("wb") as stderr:
         process = subprocess.Popen(command, stderr=stderr)
         try:
-            process.wait(timeout=180)
+            process.wait(timeout=480)
         except subprocess.TimeoutExpired as exc:
             progress_file = evidence / "gui-progress.json"
             last = json.loads(progress_file.read_text(encoding="utf-8")) if progress_file.is_file() else {}
-            raise TimeoutError("Native GUI smoke exceeded 180 seconds; last phase: " + json.dumps(last)) from exc
+            raise TimeoutError("Native GUI reference check exceeded 480 seconds; last phase: " + json.dumps(last)) from exc
         finally:
             stop_process_tree(process)
             host_log = root / "user-data" / "desktop-host.stderr.txt"
@@ -801,9 +944,9 @@ def main(argv=None):
         if args.skip_gui:
             report["skips"].append("Native GUI smoke was explicitly skipped.")
         else:
-            checkpoint(report, args, "gui: launch bounded 180-second native smoke")
+            checkpoint(report, args, "gui: launch bounded 480-second native reference check")
             report["gui"] = gui_smoke_bounded(root, evidence)
-            report["checks"].append("Native app opened References, displayed five local files, kept controls separate at normal/minimum size and closed cleanly.")
+            report["checks"].append("Native GUI controls searched yeast, discovered/selected/downloaded five files, cancelled safely, bound the genome to a compatible SAMtools input, kept controls separate at normal/minimum size and closed cleanly.")
             checkpoint(report, args, report["checks"][-1])
         report["success"] = True
         checkpoint(report, args, "completed")
