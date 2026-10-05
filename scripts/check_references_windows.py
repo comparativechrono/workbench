@@ -56,7 +56,30 @@ def sha256(path):
 
 
 def write_json(path, value):
-    Path(path).write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    path = Path(path)
+    temporary = path.with_name(path.name + ".writing")
+    temporary.write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    temporary.replace(path)
+
+
+def checkpoint(report, args, phase):
+    report["phase"] = phase
+    report["passed"] = len(report["checks"])
+    report["updatedUtc"] = datetime.now(timezone.utc).isoformat()
+    write_json(args.report, report)
+    print(json.dumps({"phase": phase, "passed": report["passed"]}), flush=True)
+
+
+def stop_process_tree(process):
+    """Kill only this gate-owned process and its descendants on failure."""
+    if process.poll() is not None:
+        return
+    if os.name == "nt":
+        subprocess.run(["taskkill", "/PID", str(process.pid), "/T", "/F"],
+                       stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=15)
+    if process.poll() is None:
+        process.kill()
+    process.wait(timeout=10)
 
 
 class PrivateHost:
@@ -186,6 +209,7 @@ def run_reference_checks(root, evidence, report, args):
         require(annotation["filename"].endswith("R64-1-1.63.gtf.gz"),
                 "Discovery must resolve the archive's actual GTF filename, not guess the release suffix.")
         report["checks"].append("Live release-pinned yeast search and five-product discovery.")
+        checkpoint(report, args, report["checks"][-1])
         request = {"selection_id": discovery["selection_id"], "file_ids": ids, "destination": str(destination)}
         host.call("references/download", request)
         deadline = time.monotonic() + 90
@@ -206,6 +230,7 @@ def run_reference_checks(root, evidence, report, args):
         require(list(destination.iterdir()) == [sentinel] and sentinel.read_text(encoding="utf-8").startswith("Existing user content"),
                 "Cancellation left partial files or changed existing user content.")
         report["checks"].append("Cancellation after transferred bytes removed only its partial download and published no reference.")
+        checkpoint(report, args, report["checks"][-1])
         host.call("references/download", request)
         state = wait_reference(host)
         added = [record for record in state["local"] if record["id"] not in old_ids]
@@ -235,6 +260,7 @@ def run_reference_checks(root, evidence, report, args):
         report["referenceReceiptSha256"] = record["receipt_sha256"]
         write_json(evidence / "reference-receipt.json", json.loads(receipt.read_text(encoding="utf-8")))
         report["checks"].append("Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.")
+        checkpoint(report, args, report["checks"][-1])
     finally:
         host.close()
 
@@ -263,6 +289,7 @@ def run_reference_checks(root, evidence, report, args):
             require(token in review["methods"], "Planned methods lost reference provenance: " + token)
         (evidence / "methods-preview.txt").write_text(review["methods"], encoding="utf-8")
         report["checks"].append("Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.")
+        checkpoint(report, args, report["checks"][-1])
         if args.skip_analysis:
             report["skips"].append("Native SAMtools indexing was explicitly skipped.")
         else:
@@ -303,6 +330,7 @@ def run_reference_checks(root, evidence, report, args):
             report["nativeIndex"] = {"contigs": len(actual), "bases": sum(item[1] for item in actual),
                                       "sha256": sha256(indexes[0]), "dictionary": actual}
             report["checks"].append("Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods.")
+            checkpoint(report, args, report["checks"][-1])
     finally:
         host.close()
     if os.name == "nt":
@@ -313,6 +341,7 @@ def run_reference_checks(root, evidence, report, args):
         require(installation.get("success"), "Released application installation integrity checks failed.")
         report["installation"] = {"passed": installation["passed"], "failed": installation["failed"]}
         report["checks"].append("Installed application and starter pack integrity checks passed after reference use.")
+        checkpoint(report, args, report["checks"][-1])
 
 
 def run_update_checks(root, evidence, report, args):
@@ -332,6 +361,7 @@ def run_update_checks(root, evidence, report, args):
                  "optionalPackArchiveSha256": sha256(args.optional_pack_archive),
                  "scope": "Actual native Windows updater CLI using its private runtime; native folder-picker interaction is not exercised."}
     report["coreUpdate"] = migration
+    checkpoint(report, args, "core-update: import optional pack and save baseline settings")
     host = PrivateHost(base, evidence, "update-baseline-host", offline=True)
     try:
         initial = host.call("init")
@@ -378,6 +408,7 @@ def run_update_checks(root, evidence, report, args):
     command = [str(update / "runtime" / "python" / "python.exe"), "-I",
                str(update / "update" / "apply_workspace_update.py"), "--app-root", str(base)]
     for attempt in ("install", "repeat"):
+        checkpoint(report, args, "core-update: " + attempt)
         completed = subprocess.run(command, cwd=update, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=180)
         (evidence / ("update-" + attempt + ".stdout.txt")).write_bytes(completed.stdout)
         (evidence / ("update-" + attempt + ".stderr.txt")).write_bytes(completed.stderr)
@@ -386,6 +417,7 @@ def run_update_checks(root, evidence, report, args):
         require(result["status"] == ("installed" if attempt == "install" else "already-installed"),
                 "Unexpected core updater transaction status: " + json.dumps(result))
         migration[attempt] = result
+    checkpoint(report, args, "core-update: verify exact core and preserved user files")
     require((base / "manifest.json").read_bytes() == (root / "manifest.json").read_bytes(),
             "Updated core manifest is not byte-identical to the exact new starter.")
     for item in json.loads((root / "manifest.json").read_text(encoding="utf-8"))["files"]:
@@ -409,6 +441,7 @@ def run_update_checks(root, evidence, report, args):
                                 for name, digest in additions.items()),
             "Core migration changed user files or added unexpected data: " +
             json.dumps({"changed": changes, "added": additions}))
+    checkpoint(report, args, "core-update: restart updated host offline and reload saved pins")
     host = PrivateHost(base, evidence, "updated-offline-host", offline=True)
     try:
         state = host.call("init")
@@ -433,6 +466,7 @@ def run_update_checks(root, evidence, report, args):
                      coreManifestSha256=sha256(base / "manifest.json"), offlineRestart=True)
     write_json(evidence / "native-core-update.json", migration)
     report["checks"].append("Native 0.6.0-to-0.7.0 core migration and idempotent repeat preserved optional packs, saved pins, references and results; updated private host reused them offline.")
+    checkpoint(report, args, report["checks"][-1])
 
 
 def gui_smoke(root, evidence):
@@ -458,8 +492,10 @@ def gui_smoke(root, evidence):
     user.IsWindowVisible.argtypes = [wintypes.HWND]
     user.GetWindowRect.argtypes = [wintypes.HWND, ctypes.POINTER(wintypes.RECT)]
     user.GetClientRect.argtypes = [wintypes.HWND, ctypes.POINTER(wintypes.RECT)]
-    user.SendMessageW.argtypes = [wintypes.HWND, wintypes.UINT, wintypes.WPARAM, wintypes.LPARAM]
-    user.SendMessageW.restype = wintypes.LPARAM
+    user.SendMessageTimeoutW.argtypes = [wintypes.HWND, wintypes.UINT, wintypes.WPARAM,
+                                       wintypes.LPARAM, wintypes.UINT, wintypes.UINT,
+                                       ctypes.POINTER(ctypes.c_size_t)]
+    user.SendMessageTimeoutW.restype = wintypes.LPARAM
     user.PostMessageW.argtypes = [wintypes.HWND, wintypes.UINT, wintypes.WPARAM, wintypes.LPARAM]
     user.MoveWindow.argtypes = [wintypes.HWND, ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_int, wintypes.BOOL]
     user.GetDC.argtypes = [wintypes.HWND]
@@ -476,6 +512,22 @@ def gui_smoke(root, evidence):
     gdi.DeleteDC.argtypes = [wintypes.HDC]
     gdi.GetDIBits.argtypes = [wintypes.HDC, wintypes.HBITMAP, wintypes.UINT, wintypes.UINT,
                             ctypes.c_void_p, ctypes.c_void_p, wintypes.UINT]
+
+    def progress(phase, **details):
+        value = {"phase": phase, "updatedUtc": datetime.now(timezone.utc).isoformat(), **details}
+        write_json(evidence / "gui-progress.json", value)
+        with (evidence / "gui-events.jsonl").open("a", encoding="utf-8") as events:
+            events.write(json.dumps(value, ensure_ascii=False) + "\n")
+        print(json.dumps({"guiPhase": phase, **details}), flush=True)
+
+    def send(hwnd, message, wparam=0, lparam=0):
+        result = ctypes.c_size_t()
+        ctypes.set_last_error(0)
+        require(user.SendMessageTimeoutW(hwnd, message, wparam, lparam, 0x0003, 5000,
+                                        ctypes.byref(result)),
+                "Native GUI message timed out or failed: message=" + hex(message) +
+                " hwnd=" + str(hwnd) + " winerror=" + str(ctypes.get_last_error()))
+        return result.value
 
     def text(hwnd, class_name=False):
         buffer = ctypes.create_unicode_buffer(1024)
@@ -517,6 +569,7 @@ def gui_smoke(root, evidence):
         return found
 
     def capture(hwnd, path):
+        progress("capture pixels", capture=path.name)
         rect = wintypes.RECT()
         user.GetWindowRect(hwnd, ctypes.byref(rect))
         width, height = rect.right - rect.left, rect.bottom - rect.top
@@ -542,14 +595,20 @@ def gui_smoke(root, evidence):
             gdi.DeleteDC(memory)
             user.ReleaseDC(hwnd, dc)
 
+    progress("launch native desktop")
     process = subprocess.Popen([str(root / "NativeWorkbench.exe")], cwd=root)
     main = None
     try:
+        progress("wait for main window", pid=process.pid)
         main = find_window(process.pid, "Native Workbench")
+        progress("open References", pid=process.pid, windows=[
+            {"hwnd": hwnd, "title": text(hwnd), "class": text(hwnd, True)}
+            for hwnd in windows(process.pid)])
         deadline = time.monotonic() + 30
         while time.monotonic() < deadline:
             # The command is dispatched to the same handler as clicking References.
-            user.SendMessageW(main, 0x0111, 403, 0)  # WM_COMMAND, MANAGE_REFERENCES
+            require(user.PostMessageW(main, 0x0111, 403, 0),
+                    "Could not post the native References command.")  # WM_COMMAND, MANAGE_REFERENCES
             found = [h for h in windows(process.pid) if text(h, True) == "WorkbenchReferences070"]
             if found:
                 break
@@ -557,7 +616,9 @@ def gui_smoke(root, evidence):
         require(bool(found), "References toolbar command did not open its native window.")
         ref = found[0]
         time.sleep(.3)
+        progress("inspect normal References controls")
         normal = controls(ref)
+        progress("normal References controls discovered", controls=normal)
         require({601, 602, 603, 604, 605, 606, 607, 609, 610, 611, 619}
                 <= {row["id"] for row in normal}, "References window is missing native controls.")
         result = {"launched": True, "pid": process.pid, "class": text(ref, True), "title": text(ref),
@@ -565,6 +626,7 @@ def gui_smoke(root, evidence):
                   "scope": "Automated Win32 launch, References command, controls, resize and pixel capture; human usability acceptance remains separate."}
         dpi = user.GetDpiForWindow(ref) or 96
         result["dpi"] = dpi
+        progress("resize References to minimum")
         require(user.MoveWindow(ref, 10, 10, round(820 * dpi / 96), round(680 * dpi / 96), True),
                 "Native reference window resize failed.")
         time.sleep(.3)
@@ -574,14 +636,15 @@ def gui_smoke(root, evidence):
         # generates its own in-process notification; never pass cross-process
         # pointers through WM_NOTIFY or list-view messages.
         tab = user.GetDlgItem(ref, 601)
-        user.SendMessageW(tab, 0x0100, 0x27, 0)  # WM_KEYDOWN, VK_RIGHT
-        user.SendMessageW(tab, 0x0101, 0x27, 0)
+        progress("select Downloaded tab")
+        send(tab, 0x0100, 0x27, 0)  # WM_KEYDOWN, VK_RIGHT
+        send(tab, 0x0101, 0x27, 0)
         deadline = time.monotonic() + 15
         while time.monotonic() < deadline:
             local_controls = controls(ref)
             visible = {row["id"] for row in local_controls}
             local_list = user.GetDlgItem(ref, 612)
-            rows = user.SendMessageW(local_list, 0x1004, 0, 0)  # LVM_GETITEMCOUNT
+            rows = send(local_list, 0x1004, 0, 0)  # LVM_GETITEMCOUNT
             if {612, 613, 614, 615} <= visible and rows >= 5:
                 break
             time.sleep(.1)
@@ -590,20 +653,48 @@ def gui_smoke(root, evidence):
         result["downloadedControls"] = local_controls
         result["downloadedRows"] = rows
         result["captures"].append(capture(ref, evidence / "references-downloaded-minimum.bmp"))
-        user.SendMessageW(ref, 0x0111, 619, 0)
+        progress("close References and desktop")
+        send(ref, 0x0111, 619, 0)
         time.sleep(.1)
         require(not any(text(h, True) == "WorkbenchReferences070" for h in windows(process.pid)),
                 "Closing References left its visible window open.")
         user.PostMessageW(main, 0x0010, 0, 0)  # WM_CLOSE
         require(process.wait(timeout=30) == 0, "Native desktop failed to close cleanly.")
         result["closedCleanly"] = True
+        progress("completed")
         return result
     finally:
-        if process.poll() is None:
-            process.kill()
-            process.wait(timeout=10)
+        stop_process_tree(process)
+        host_log = root / "user-data" / "desktop-host.stderr.txt"
+        if host_log.is_file():
+            shutil.copyfile(host_log, evidence / "gui-desktop-host.stderr.txt")
         if previous_dpi_context:
             user.SetThreadDpiAwarenessContext(previous_dpi_context)
+
+
+def gui_smoke_bounded(root, evidence):
+    """Bound even synchronous Win32 painting/window enumeration in a worker."""
+    worker_report = evidence / "gui-worker.json"
+    command = [sys.executable, "-I", "-u", str(Path(__file__).resolve()), "--gui-worker",
+               "--app-root", str(root), "--report", str(worker_report)]
+    with (evidence / "gui-worker.stderr.txt").open("wb") as stderr:
+        process = subprocess.Popen(command, stderr=stderr)
+        try:
+            process.wait(timeout=180)
+        except subprocess.TimeoutExpired as exc:
+            progress_file = evidence / "gui-progress.json"
+            last = json.loads(progress_file.read_text(encoding="utf-8")) if progress_file.is_file() else {}
+            raise TimeoutError("Native GUI smoke exceeded 180 seconds; last phase: " + json.dumps(last)) from exc
+        finally:
+            stop_process_tree(process)
+            host_log = root / "user-data" / "desktop-host.stderr.txt"
+            if host_log.is_file():
+                shutil.copyfile(host_log, evidence / "gui-desktop-host.stderr.txt")
+    require(worker_report.is_file(), "Native GUI worker exited without its result report.")
+    result = json.loads(worker_report.read_text(encoding="utf-8"))
+    require(process.returncode == 0 and result.get("success"),
+            "Native GUI smoke failed: " + json.dumps(result))
+    return result["gui"]
 
 
 def main(argv=None):
@@ -621,11 +712,22 @@ def main(argv=None):
     parser.add_argument("--update-archive", type=Path)
     parser.add_argument("--update-sha256")
     parser.add_argument("--optional-pack-archive", type=Path)
+    parser.add_argument("--gui-worker", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
     root = args.app_root.resolve()
     args.report = args.report.resolve()
     evidence = args.report.parent
     evidence.mkdir(parents=True, exist_ok=True)
+    if args.gui_worker:
+        result = {"success": False}
+        try:
+            require(os.name == "nt", "The GUI worker requires native Windows.")
+            result["gui"] = gui_smoke(root, evidence)
+            result["success"] = True
+        except Exception as exc:
+            result.update(error=str(exc), traceback=traceback.format_exc())
+        write_json(args.report, result)
+        return 0 if result["success"] else 1
     report = {"schema": 1, "success": False, "startedUtc": datetime.now(timezone.utc).isoformat(),
               "platform": platform.platform(), "python": sys.version, "appRoot": str(root),
               "nativeWindowsHost": os.name == "nt", "nativeWindowsExecuted": False,
@@ -643,19 +745,25 @@ def main(argv=None):
         report["appFiles"] = {str(path.relative_to(root)): sha256(path) for path in sorted((root / "workspace").glob("*.py"))}
         # Implementation-specific live assertions are below; failures retain the
         # exact stage and traceback rather than reporting a successful skipped gate.
+        checkpoint(report, args, "references: live discovery, downloads, cancellation and offline native reuse")
         run_reference_checks(root, evidence, report, args)
+        checkpoint(report, args, "references: completed")
         update_options = (args.base_app_root, args.update_root, args.update_archive, args.update_sha256, args.optional_pack_archive)
         require(not any(update_options) or all(update_options), "The updater gate needs its base app, updater folder/archive/hash and exact optional pack archive.")
         if all(update_options):
             run_update_checks(root, evidence, report, args)
+            checkpoint(report, args, "core-update: completed")
         else:
             report["skips"].append("Optional native core updater gate was not requested.")
         if args.skip_gui:
             report["skips"].append("Native GUI smoke was explicitly skipped.")
         else:
-            report["gui"] = gui_smoke(root, evidence)
+            checkpoint(report, args, "gui: launch bounded 180-second native smoke")
+            report["gui"] = gui_smoke_bounded(root, evidence)
             report["checks"].append("Native app opened References, resized and closed cleanly.")
+            checkpoint(report, args, report["checks"][-1])
         report["success"] = True
+        checkpoint(report, args, "completed")
     except Exception as exc:
         report["error"] = str(exc)
         report["traceback"] = traceback.format_exc()

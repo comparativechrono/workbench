@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "success": false,
+  "status": "cancelled-after-stall",
+  "workflowRun": "https://github.com/comparativechrono/workbench/actions/runs/37294336751",
+  "applicationSourceCommit": "8ad25c71ec13d2c06a670b59a2cc13ca84a50ac9",
+  "gateSourceCommit": "6081c7dfd0157d21c026587b26ee1f6fbdab860a",
+  "releaseTag": "app-v0.7.0-rc1",
+  "diagnosis": "Both Windows matrix jobs stopped producing progress after installation checks. The retained ordinary-path native-core-update report records successful migration, preservation, repeat and offline restart. No GUI captures or final reference report were produced. The run was cancelled to replace unbounded GUI harness calls with bounded diagnostics. This is not a passing GUI or release gate.",
+  "retainedArtifact": {
+    "id": 11338057141,
+    "name": "references-ordinary-1",
+    "sha256": "507114a927ef955510ae9b5e890b3d374d361f0d305165ee0b0a48ce8fef3a60"
+  },
+  "ordinaryNativeCoreUpdate": {
+    "success": true,
+    "baseVersion": "0.6.0",
+    "targetVersion": "0.7.0",
+    "baseArchiveSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+    "updateArchiveSha256": "49b50acbb8c89a706fb99963f63f1fc87c008dcc162b82c86f44976739116496",
+    "optionalPackArchiveSha256": "2dd05fece8deb2b0178d8b1bc2b6830f175b3fbc2f5a4d48f9c9023cbfe6775b",
+    "scope": "Actual native Windows updater CLI using its private runtime; native folder-picker interaction is not exercised.",
+    "nativeOptionalPackImport": true,
+    "install": {
+      "status": "installed",
+      "version": "0.7.0",
+      "migration": false,
+      "files_verified": 68,
+      "removed_files": 0,
+      "backup": "D:\\a\\_temp\\ordinary\\update target\\native-workbench\\updates\\core-0.7.0-20261005-100619-7cf0993c\\backup",
+      "packs_changed": false,
+      "source_and_evidence_preserved": true
+    },
+    "repeat": {
+      "status": "already-installed",
+      "version": "0.7.0",
+      "files_verified": 68
+    },
+    "preservationChanges": {},
+    "preservationAdditions": {
+      "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+    },
+    "preservedFiles": 187,
+    "optionalPin": {
+      "packId": "reads",
+      "packVersion": "0.4.0",
+      "manifestSha256": "65fc3065fb382ffdd13c4b94fa834b26531e63eb87858d84a4c173e567fb73c0"
+    },
+    "coreManifestSha256": "96bb4849bfe5ea7e4aa36fc221ea50bfdabd07510fa3cf2502c82219d800e14f",
+    "offlineRestart": true
+  },
+  "spacesNativeCoreUpdate": {
+    "success": true,
+    "baseVersion": "0.6.0",
+    "targetVersion": "0.7.0",
+    "baseArchiveSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+    "updateArchiveSha256": "49b50acbb8c89a706fb99963f63f1fc87c008dcc162b82c86f44976739116496",
+    "optionalPackArchiveSha256": "2dd05fece8deb2b0178d8b1bc2b6830f175b3fbc2f5a4d48f9c9023cbfe6775b",
+    "scope": "Actual native Windows updater CLI using its private runtime; native folder-picker interaction is not exercised.",
+    "nativeOptionalPackImport": true,
+    "install": {
+      "status": "installed",
+      "version": "0.7.0",
+      "migration": false,
+      "files_verified": 68,
+      "removed_files": 0,
+      "backup": "D:\\a\\_temp\\path with spaces\\update target\\native-workbench\\updates\\core-0.7.0-20261005-100614-fd53efec\\backup",
+      "packs_changed": false,
+      "source_and_evidence_preserved": true
+    },
+    "repeat": {
+      "status": "already-installed",
+      "version": "0.7.0",
+      "files_verified": 68
+    },
+    "preservationChanges": {},
+    "preservationAdditions": {
+      "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+    },
+    "preservedFiles": 187,
+    "optionalPin": {
+      "packId": "reads",
+      "packVersion": "0.4.0",
+      "manifestSha256": "65fc3065fb382ffdd13c4b94fa834b26531e63eb87858d84a4c173e567fb73c0"
+    },
+    "coreManifestSha256": "96bb4849bfe5ea7e4aa36fc221ea50bfdabd07510fa3cf2502c82219d800e14f",
+    "offlineRestart": true
+  },
+  "spacesArtifact": {
+    "id": 11338800597,
+    "sha256": "85480793b6ba93a1cbd7037bef7836c9ece3ebfd55217d69590f6a9dd9919264"
+  }
+}
