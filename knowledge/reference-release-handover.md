@@ -84,6 +84,48 @@ unchanged, and the updater's 13 operations exactly matched the core differences.
 
 ## Completion boundary
 
+### Later live audit: independently published RC2
+
+During this continuation, another writer created
+`release/reference-0.7.0-completion` and published `app-v0.7.0-rc2` at
+13:17:50Z from `19444e0f2a9c9981d87f033bd3b2b17f79878add`. That branch then
+advanced to `456d1dbc17254ec9e6ccf0408525a9c6c4955357` to retain GUI failure
+captures. These writes were not made by this continuation or its delegated
+agents. Our `finish-reference-release` workflow
+[37316644535](https://github.com/comparativechrono/workbench/actions/runs/37316644535)
+refused to replace the existing RC2 before building or publishing; its Windows
+job was skipped, not passed. It published no assets.
+
+The independent RC2 runs
+[37315901362](https://github.com/comparativechrono/workbench/actions/runs/37315901362)
+and [37317100708](https://github.com/comparativechrono/workbench/actions/runs/37317100708)
+both failed the GUI gate in ordinary and space paths. We downloaded, rehashed
+and inspected the later diagnostic artifact `11348119558`, SHA-256
+`c2c38a3c59a108469f0752bd1b6217763ef3232cab722b8b1e2cd76445b9ab94`.
+The normal capture measures the corrected +12-pixel gap. It also records a
+blocking modal, **Expected a JSON array**, with no populated library rows.
+The [exact RC2 report](evidence/reference-rc2-windows-report-2026-10-05.json)
+retains seven passing backend/native updater checks; the overall result is
+failure. These new remote runs were inspected here, not launched by this turn.
+
+Source diagnosis identifies two empty-state defects. Before requesting
+`references/list`, `show_references()` refreshes controls; `reference_enabled()`
+reads an absent `species` value as an array even though no row is selected.
+Separately, a later successful species search clears discovery to null, while
+the UI unconditionally iterates `discovery.files`. This branch now guards both
+cases and adds a repeat-search assertion to the expanded native gate. The
+desktop cross-compiles with the pinned toolchain and `-Werror`; this corrected
+executable has **not** been packaged or executed on Windows. The original
+RC1 tab timeout's cause remains unproved; queued input alone cannot establish
+that an underlying modal was absent.
+
+All five new publication-readiness regression tests pass. The
+[live audit record](evidence/reference-concurrent-release-audit-2026-10-05.json)
+keeps hashes, scope and remaining gates. Publication is paused pending
+coordination with the independent remote writer. Preserve both branches and
+immutable candidates; do not automatically overwrite RC2 or compete to publish
+the next tag. No final `app-v0.7.0` existed at the latest audit.
+
 The reference feature is not released as final 0.7.0 until a package containing
 the layout correction passes its exact native gate in ordinary and space paths,
 the captures and results are reviewed, and every final public asset is downloaded

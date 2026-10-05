@@ -1148,8 +1148,12 @@ class Workspace {
     if (!refWindow)
       return empty;
     const int row = ListView_GetNextItem(refSpecies, -1, LVNI_SELECTED);
-    const auto &items = refState.get("species").array_items();
-    return row >= 0 && static_cast<size_t>(row) < items.size()
+    const auto &species = refState.get("species");
+    // Controls are enabled before the first references/list response arrives.
+    if (row < 0 || !species.is_array())
+      return empty;
+    const auto &items = species.array_items();
+    return static_cast<size_t>(row) < items.size()
                ? items[static_cast<size_t>(row)] : empty;
   }
   void reference_send(const std::string &method, Json params = Json::object()) {
@@ -1293,16 +1297,20 @@ class Workspace {
     }
     if (previous.get("discovery").dump() != refState.get("discovery").dump()) {
       ListView_DeleteAllItems(refFiles);
-      for (const auto &file : refState.get("discovery").get("files").array_items()) {
-        LVITEMW row{};
-        row.mask = LVIF_TEXT;
-        row.iItem = ListView_GetItemCount(refFiles);
-        auto label = wt(file, "label", getstr(file, "kind"));
-        row.pszText = label.data();
-        ListView_InsertItem(refFiles, &row);
-        auto filename = wt(file, "filename"), size = download_size(file.get("bytes").integer());
-        ListView_SetItemText(refFiles, row.iItem, 1, filename.data());
-        ListView_SetItemText(refFiles, row.iItem, 2, size.data());
+      // Starting another search clears discovery to null in the host snapshot.
+      const auto &files = refState.get("discovery").get("files");
+      if (files.is_array()) {
+        for (const auto &file : files.array_items()) {
+          LVITEMW row{};
+          row.mask = LVIF_TEXT;
+          row.iItem = ListView_GetItemCount(refFiles);
+          auto label = wt(file, "label", getstr(file, "kind"));
+          row.pszText = label.data();
+          ListView_InsertItem(refFiles, &row);
+          auto filename = wt(file, "filename"), size = download_size(file.get("bytes").integer());
+          ListView_SetItemText(refFiles, row.iItem, 1, filename.data());
+          ListView_SetItemText(refFiles, row.iItem, 2, size.data());
+        }
       }
     }
     if (previous.get("local").dump() != refState.get("local").dump()) {

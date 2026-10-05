@@ -744,6 +744,14 @@ def gui_smoke(root, evidence):
         files = control(ref, 607)
         wait_until(lambda: send(files, 0x1004) == 5 and user.IsWindowEnabled(files),
                    "Native file discovery did not expose five yeast products.", 90)
+        progress("repeat species search and clear the previous discovery")
+        click(ref, 604)
+        wait_until(lambda: send(files, 0x1004) == 0 and user.IsWindowEnabled(species),
+                   "Repeating the species search did not clear its previous file discovery.", 60)
+        click(ref, 606)
+        wait_until(lambda: send(files, 0x1004) == 5 and user.IsWindowEnabled(files),
+                   "Native file discovery did not recover after repeating the search.", 90)
+        result["repeatedSearchClearedDiscovery"] = True
         select_row(files, 0)
         for row in range(5):
             if row:

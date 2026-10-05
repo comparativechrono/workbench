@@ -1587,8 +1587,21 @@
   "reference_feature": {
     "audited_on": "2026-10-05",
     "source_commit": "5338853ba3b69438fc36c1b9dcd3ad89d6bbcde4",
-    "status": "candidate-only; source UI fix pending new native package gate",
+    "status": "blocked: RC2 native GUI fails initial library loading; local source correction awaits exact native gate and release coordination",
     "candidate": {
+      "tag": "app-v0.7.0-rc2",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0-rc2",
+      "source_commit": "19444e0f2a9c9981d87f033bd3b2b17f79878add",
+      "starter_sha256": "67828ca3f19bda33129e115b902f841cf64d3d66c2ba623f1be8081fc8e7b651",
+      "updater_sha256": "3926c280c86be0fa2b8353c3c20045d576d1d9f2c6497aec06804714a9b4d08d",
+      "source_sha256": "4980d82a0568df2fbb921eeb0ff6f10a42b4983014daea067d437868a49c2f06",
+      "windows_run": "https://github.com/comparativechrono/workbench/actions/runs/37317100708",
+      "overall_gate": "failed GUI; seven backend checks passed per path; published independently during continuation"
+    },
+    "handover": "reference-release-handover.md",
+    "fresh_source_evidence": "evidence/reference-source-contracts-resumed-2026-10-05.json",
+    "final_release": null,
+    "previous_candidate": {
       "tag": "app-v0.7.0-rc1",
       "release_url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0-rc1",
       "source_commit": "8ad25c71ec13d2c06a670b59a2cc13ca84a50ac9",
@@ -1598,8 +1611,6 @@
       "windows_run": "https://github.com/comparativechrono/workbench/actions/runs/37295599791",
       "overall_gate": "failed GUI; seven backend checks passed per path"
     },
-    "handover": "reference-release-handover.md",
-    "fresh_source_evidence": "evidence/reference-source-contracts-resumed-2026-10-05.json",
-    "final_release": null
+    "continuation_audit": "evidence/reference-concurrent-release-audit-2026-10-05.json"
   }
 }

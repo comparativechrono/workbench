@@ -17,16 +17,22 @@ the frozen plan, methods and results. Reference datasets stay separate from
 executable packs. Current reference documentation is in the
 [0.7 guide](../docs/reference-discovery-0.7.md).
 
-This section records implementation work, not a completed Windows acceptance
-claim. A live 2026-10-05 audit found the published `app-v0.7.0-rc1` diagnostic
-candidate, but no final `app-v0.7.0`. Its reference backend and 0.6.0-to-0.7.0
-updater CLI passed recorded Windows checks; the overall GUI gate failed. The
-details panel overlapped download controls, and tab automation timed out. The
-source correction in `b9d0ee7` still needs a newly packaged native gate.
-See the [continuation handover](reference-release-handover.md) for recovered
-screenshots, exact identities and fresh source checks. The 0.7 packaging also includes AGENTS and
-knowledge files in the source companion and supports a preserved-data update
-from the exact 0.6.0 starter. The released baseline below remains dated evidence.
+This is not a completed release. The initial audit found only RC1; while this
+continuation worked on `finish-reference-release`, another writer published
+`app-v0.7.0-rc2` from `release/reference-0.7.0-completion`. Its two native runs
+failed the GUI gate in both path layouts. The new capture proves the original
+15-pixel overlap is corrected (+12-pixel gap), but a blocking “Expected a JSON
+array” modal prevents the library from loading. Seven backend/native updater
+checks passed per path for RC2. No final `app-v0.7.0` existed at the latest audit.
+
+This branch corrects premature species-array access and the null-discovery reset
+path, and expands native GUI acceptance. The desktop cross-compiles; this patch
+has not been executed on Windows. Publication is paused to coordinate the
+independent active release work. Our candidate workflow refused to overwrite
+RC2 before building or publishing. See the [continuation handover](reference-release-handover.md)
+and [retained audit](evidence/reference-concurrent-release-audit-2026-10-05.json)
+for exact identities, evidence and pending gates. The released baseline below
+remains dated evidence.
 
 ## What is available
 

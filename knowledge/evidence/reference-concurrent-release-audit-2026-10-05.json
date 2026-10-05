@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "reviewed_on": "2026-10-05T13:35:11.478638+00:00",
+  "status": "blocked; no completed final release",
+  "initial_main": "5338853ba3b69438fc36c1b9dcd3ad89d6bbcde4",
+  "our_branch": "finish-reference-release",
+  "our_initial_commit": "adbb2c28270d1c6f8ac3d6d9d9d56042c1df163a",
+  "our_workflow": {
+    "run": 37316644535,
+    "result": "refused existing RC2 before build or publication; native job skipped"
+  },
+  "independent_remote_activity": {
+    "branch": "release/reference-0.7.0-completion",
+    "head": "456d1dbc17254ec9e6ccf0408525a9c6c4955357",
+    "candidate_tag": "app-v0.7.0-rc2",
+    "candidate_commit": "19444e0f2a9c9981d87f033bd3b2b17f79878add",
+    "published_at": "2026-10-05T13:17:50Z",
+    "native_runs": [
+      37315901362,
+      37317100708
+    ],
+    "overall": "failed native GUI on both ordinary and space paths; seven backend checks passed per path"
+  },
+  "diagnostic_artifact": {
+    "id": 11348119558,
+    "sha256": "c2c38a3c59a108469f0752bd1b6217763ef3232cab722b8b1e2cd76445b9ab94",
+    "verification": "downloaded, rehashed and extracted in this continuation",
+    "capture_sha256": {
+      "references-load-failure-2.png": "2a93943dff170b0fc26d289788c5e21076f8a01f20a8376e55ff96b35bed260f",
+      "references-load-failure-1.png": "b7f54b0ba3b52245562012f2222db8b7ef8420274f7349b16f1c7ff7de717224",
+      "references-load-failure-0.png": "1fa445ee8021408e455a96d83d02a8bbc7e1672af10b1bab2e277acac2e11c1c"
+    }
+  },
+  "observations": [
+    "Normal-window details bottom589 and destination top601: +12 logical pixels, replacing RC1 -15 overlap.",
+    "Blocking modal Expected a JSON array; local reference rows remain zero."
+  ],
+  "diagnosis": "reference_selected_species reads missing species as array before first references/list; reference_refresh also assumes files array after discovery is reset to null.",
+  "patch_scope": "Guard initial/unselected species and null discovery reset; no host or pack changes.",
+  "fresh_patch_validation": {
+    "windows_cross_compile": "passed pinned LLVM-MinGW -Werror",
+    "desktop_sha256": "aaddcb87e0e92085ef487c57ffc3059370a97f41c3e123f1ebacb69994f30e1e",
+    "release_regressions_passed": 5,
+    "native_windows": "not performed for this patch",
+    "release": "not published"
+  },
+  "remaining": [
+    "Coordinate the independent remote release branch before new publication.",
+    "Run expanded native GUI acceptance including startup and repeat search against newly packaged corrected executable.",
+    "Run exact final public artifact verification; retain failure evidence and immutable candidates."
+  ]
+}

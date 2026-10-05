@@ -1,0 +1,37 @@
+{
+  "success": true,
+  "baseVersion": "0.6.0",
+  "targetVersion": "0.7.0",
+  "baseArchiveSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+  "updateArchiveSha256": "3926c280c86be0fa2b8353c3c20045d576d1d9f2c6497aec06804714a9b4d08d",
+  "optionalPackArchiveSha256": "2dd05fece8deb2b0178d8b1bc2b6830f175b3fbc2f5a4d48f9c9023cbfe6775b",
+  "scope": "Actual native Windows updater CLI using its private runtime; native folder-picker interaction is not exercised.",
+  "nativeOptionalPackImport": true,
+  "install": {
+    "status": "installed",
+    "version": "0.7.0",
+    "migration": false,
+    "files_verified": 68,
+    "removed_files": 0,
+    "backup": "D:\\a\\_temp\\ordinary\\update target\\native-workbench\\updates\\core-0.7.0-20261005-132926-665da624\\backup",
+    "packs_changed": false,
+    "source_and_evidence_preserved": true
+  },
+  "repeat": {
+    "status": "already-installed",
+    "version": "0.7.0",
+    "files_verified": 68
+  },
+  "preservationChanges": {},
+  "preservationAdditions": {
+    "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  "preservedFiles": 187,
+  "optionalPin": {
+    "packId": "reads",
+    "packVersion": "0.4.0",
+    "manifestSha256": "65fc3065fb382ffdd13c4b94fa834b26531e63eb87858d84a4c173e567fb73c0"
+  },
+  "coreManifestSha256": "4f1d017b383be5faffb373802983b5e86d72e9ae091b4b855e710a99314b3ea9",
+  "offlineRestart": true
+}
