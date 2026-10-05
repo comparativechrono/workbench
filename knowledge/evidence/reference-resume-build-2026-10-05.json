@@ -1,0 +1,518 @@
+{
+  "schema": 1,
+  "scope": "Fresh recovery, hash verification and Linux cross-compilation only; native Windows execution of rebuilt desktop remains pending",
+  "nativeWindowsExecuted": false,
+  "source_commit": "5338853ba3b69438fc36c1b9dcd3ad89d6bbcde4",
+  "records": {
+    "build-input-recovery.json": {
+      "recordedAt": "2026-10-05T13:06:14.885613+00:00",
+      "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+      "kind": "download-integrity-only",
+      "nativeWindowsExecuted": false,
+      "files": [
+        {
+          "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.6.0/native-workbench-0.6.0-starter-windows.zip",
+          "path": "/workspace/scratch/7cebe1115528/recovery/downloads/native-workbench-0.6.0-starter-windows.zip",
+          "expectedBytes": 16871065,
+          "expectedSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+          "bytes": 16871065,
+          "sha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+          "success": true
+        },
+        {
+          "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.6.0/native-workbench-0.6.0-source.zip",
+          "path": "/workspace/scratch/7cebe1115528/recovery/downloads/native-workbench-0.6.0-source.zip",
+          "expectedBytes": 45128429,
+          "expectedSha256": "427a9b42f2528984350479e8b0155e4ef4f0159fa6f240cc1aa84a5ec2e0e60a",
+          "bytes": 45128429,
+          "sha256": "427a9b42f2528984350479e8b0155e4ef4f0159fa6f240cc1aa84a5ec2e0e60a",
+          "success": true
+        },
+        {
+          "url": "https://github.com/mstorsjo/llvm-mingw/releases/download/20260922/llvm-mingw-20260922-ucrt-ubuntu-22.04-x86_64.tar.xz",
+          "path": "/workspace/scratch/7cebe1115528/recovery/downloads/llvm-mingw-20260922-ucrt-ubuntu-22.04-x86_64.tar.xz",
+          "expectedBytes": 83924028,
+          "expectedSha256": "bb7bb7654b33d5aa8712acb837c963b2e0c56352560c76105270a3268c665c21",
+          "bytes": 83924028,
+          "sha256": "bb7bb7654b33d5aa8712acb837c963b2e0c56352560c76105270a3268c665c21",
+          "success": true
+        }
+      ]
+    },
+    "baseline-core-inventory.json": {
+      "applicationVersion": "0.6.0",
+      "filesVerified": 65,
+      "bytesVerified": 25724459,
+      "nativeWindowsExecuted": false,
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1216,
+          "sha256": "8fc4c4b462aafaf8349f53b191ceea7496d39c49463224aaa05d366fbb406682"
+        },
+        {
+          "path": "NativeWorkbench.exe",
+          "bytes": 1138688,
+          "sha256": "5312670ea818dfcd491adbc71f0b46542efe4f3e62c84d6fee65ed8c06f2f7ae"
+        },
+        {
+          "path": "README.txt",
+          "bytes": 1665,
+          "sha256": "9190acf9fee23e68fcbaafce370078cb3c7545d1243ff317020a4dc8569c17d7"
+        },
+        {
+          "path": "SOURCE-AVAILABILITY.json",
+          "bytes": 2368,
+          "sha256": "38ef288db9ccd0466e548aa201629eef24d438c0008ab6be1603de02cb982dae"
+        },
+        {
+          "path": "WorkbenchBridge.exe",
+          "bytes": 1542656,
+          "sha256": "fdbaea41bbaa2244303e67af7f92a6f732a582fa90cc86615ff21f0a54b9eb56"
+        },
+        {
+          "path": "check-windows.cmd",
+          "bytes": 90,
+          "sha256": "29c22321d2e722ff8886ada3297ba86cd56c65ad21e7a303b648ec420a9e12c5"
+        },
+        {
+          "path": "check-workspace-windows.cmd",
+          "bytes": 152,
+          "sha256": "9e821a18fe1446c9fbeaa5bae87b9839ea6d61b02e1a2c99533556ca03a784d5"
+        },
+        {
+          "path": "examples/starter/reads1.fastq",
+          "bytes": 22011,
+          "sha256": "33053fdfd6ca5abbe34883f869958a2e621e7d513ada06f401e91ad256e9cc21"
+        },
+        {
+          "path": "examples/starter/reads2.fastq",
+          "bytes": 22011,
+          "sha256": "18b5ceeefb0115120830005a21808489f2c471c78af4aaaf724cdf99697a80e1"
+        },
+        {
+          "path": "examples/starter/reference.fa",
+          "bytes": 3059,
+          "sha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee"
+        },
+        {
+          "path": "examples/starter/truth.json",
+          "bytes": 261,
+          "sha256": "dbef1c9f40205f38fb8c51cd2109db009a006e8ae15485235aff31263a85f977"
+        },
+        {
+          "path": "runtime/licenses/native/COPYING",
+          "bytes": 2326,
+          "sha256": "99a69660981156c21336fdb5661f89341b013c94e4bf9e1c7467b4745718397f"
+        },
+        {
+          "path": "runtime/licenses/native/COPYING.MinGW-w64-runtime.txt",
+          "bytes": 12155,
+          "sha256": "1db8da07b436c68833c0673ffee3d9fcb2526047f3820b81661865dfedc79a1f"
+        },
+        {
+          "path": "runtime/licenses/native/COPYING.MinGW-w64.txt",
+          "bytes": 5905,
+          "sha256": "f38e6194bd3bfa1b654f118e5acefe0aead437bbe669eee43957ccc65a7127f1"
+        },
+        {
+          "path": "runtime/licenses/native/COPYING.winpthreads.txt",
+          "bytes": 2883,
+          "sha256": "63263614cdd29f2f93cba85e992f041b31f9fc7b4033692f31269489a8a1b177"
+        },
+        {
+          "path": "runtime/licenses/native/LLVM-Apache-2.0-with-exceptions.txt",
+          "bytes": 15141,
+          "sha256": "8d85c1057d742e597985c7d4e6320b015a9139385cff4cbae06ffc0ebe89afee"
+        },
+        {
+          "path": "runtime/python/LICENSE.txt",
+          "bytes": 33861,
+          "sha256": "62bec384df47b0328307db41455ff6ea2559e5546b394ac69148561b21703120"
+        },
+        {
+          "path": "runtime/python/_asyncio.pyd",
+          "bytes": 72928,
+          "sha256": "6654dfbf4cc92609801f35022acaddd3fc19e6c777b7771b0f0a68f5813889a8"
+        },
+        {
+          "path": "runtime/python/_bz2.pyd",
+          "bytes": 86752,
+          "sha256": "6da4d453852346299e983b458f3ec2f0db3b5f765998ba3f45c91b4a1549037b"
+        },
+        {
+          "path": "runtime/python/_ctypes.pyd",
+          "bytes": 134368,
+          "sha256": "5bcddf4c374c4d247e1e4a61f3347159c36c5785fe43bdae11a4e6c9ea2c0166"
+        },
+        {
+          "path": "runtime/python/_decimal.pyd",
+          "bytes": 286944,
+          "sha256": "eeb278dfbdb305bb5af916ed79e878943e25dc4bd6e99ec17abb7b3fd9f935d5"
+        },
+        {
+          "path": "runtime/python/_elementtree.pyd",
+          "bytes": 136416,
+          "sha256": "34968e3aebdb3e89cb1472b75b04986ce1bbf27d290f4154d77649cc17c41fab"
+        },
+        {
+          "path": "runtime/python/_hashlib.pyd",
+          "bytes": 69344,
+          "sha256": "4d3eb9d9492d626c7bb10cfe5ab233a9195ec7b27e92b465b287e7a24fc8266c"
+        },
+        {
+          "path": "runtime/python/_lzma.pyd",
+          "bytes": 159456,
+          "sha256": "2b4dcb12c0420ffced4b91968ae4eff6cb585f0f07490160c6da47da63064a99"
+        },
+        {
+          "path": "runtime/python/_multiprocessing.pyd",
+          "bytes": 38112,
+          "sha256": "5017bb9dd0d5ab6d7c0f007763d7906d33464f0b436ac6577f1f4fffd5c98986"
+        },
+        {
+          "path": "runtime/python/_overlapped.pyd",
+          "bytes": 57568,
+          "sha256": "3f393b2ce1fe5973fc45e49dffcf51405fa875cdb284cf96b2f0d4b93b08765c"
+        },
+        {
+          "path": "runtime/python/_queue.pyd",
+          "bytes": 35552,
+          "sha256": "79c196a0804b152fc48b4055387f4352838e41c28863a0c946e7a98137e681e1"
+        },
+        {
+          "path": "runtime/python/_socket.pyd",
+          "bytes": 86752,
+          "sha256": "c5936292083189e0675a96ddd0e38235726f1c58195cec64eb0085b9c479ddce"
+        },
+        {
+          "path": "runtime/python/_sqlite3.pyd",
+          "bytes": 131296,
+          "sha256": "95d5b99f696cb33550534e8be80d31003db8b8a27062dfd6b09fdba4bb92f812"
+        },
+        {
+          "path": "runtime/python/_ssl.pyd",
+          "bytes": 190688,
+          "sha256": "30ff82a3ea0c675ddc99e6b14f71ca750f06e77d6653e2da3d7d35b7ef0fc2ed"
+        },
+        {
+          "path": "runtime/python/_uuid.pyd",
+          "bytes": 27872,
+          "sha256": "0d6fcf704721d4bae58cc754b15a3f8c36907b718874f6d7cbbaa363a14618b1"
+        },
+        {
+          "path": "runtime/python/_wmi.pyd",
+          "bytes": 39648,
+          "sha256": "f88c322f871aef92de562278bd25c34c6e758642669d5512a22ed972840317b1"
+        },
+        {
+          "path": "runtime/python/_zoneinfo.pyd",
+          "bytes": 51424,
+          "sha256": "b687deba154399bf6e44963e46abff518c3f987ae4fde087a3c891a1a1f08fdd"
+        },
+        {
+          "path": "runtime/python/libcrypto-3.dll",
+          "bytes": 6021880,
+          "sha256": "75495fe0e079ab00d49be740d3c710a0b94e3f74f9648cb7cc9f768fc7f52319"
+        },
+        {
+          "path": "runtime/python/libffi-8.dll",
+          "bytes": 39696,
+          "sha256": "eff52743773eb550fcc6ce3efc37c85724502233b6b002a35496d828bd7b280a"
+        },
+        {
+          "path": "runtime/python/libssl-3.dll",
+          "bytes": 1308920,
+          "sha256": "8957182a9c385bfd9f3f790921de2ddc614cf91f99edbed4e9e5446a46504e32"
+        },
+        {
+          "path": "runtime/python/pyexpat.pyd",
+          "bytes": 200416,
+          "sha256": "3865fae84ff0f274c049e737731cd8aa184fae208af5b4c0d0cfc42a38f79cea"
+        },
+        {
+          "path": "runtime/python/python.cat",
+          "bytes": 578227,
+          "sha256": "297a28dea041bad442aca6d7cb92957627501870e3c5cb7c642afb83563ee9c1"
+        },
+        {
+          "path": "runtime/python/python.exe",
+          "bytes": 105696,
+          "sha256": "31fe10b4ed82a2f960af0ef9931f46a4b84ff286f8b6ffd9dee098cf4f10f17f"
+        },
+        {
+          "path": "runtime/python/python3.dll",
+          "bytes": 72416,
+          "sha256": "a1a32b2475675e784d9b34d33d3a8f3e4afaa563da1feb784b0dd69fc4d8f9dc"
+        },
+        {
+          "path": "runtime/python/python313._pth",
+          "bytes": 16,
+          "sha256": "6132a387c961a643beab61b8b426cfd73c366c6f6ad2d5aadc5ccf225776b399"
+        },
+        {
+          "path": "runtime/python/python313.dll",
+          "bytes": 6142176,
+          "sha256": "3b29bf9ff39bed8f660f5b935f19657f7ce7f145009851741b11364f6ebcb862"
+        },
+        {
+          "path": "runtime/python/python313.zip",
+          "bytes": 3837053,
+          "sha256": "33c48dd2c3031d27784950aaee96d3d65f916e3c43dd3637ace333a7b9e8021a"
+        },
+        {
+          "path": "runtime/python/pythonw.exe",
+          "bytes": 104160,
+          "sha256": "435e222945e1a110559fb71b5ebff8c3d698689b5e5eee0371815c1141d72738"
+        },
+        {
+          "path": "runtime/python/select.pyd",
+          "bytes": 32992,
+          "sha256": "17df388a7aa42e7f066b80aa4f77cbbba9286495e6f3508425806be6766d122b"
+        },
+        {
+          "path": "runtime/python/sqlite3.dll",
+          "bytes": 1584864,
+          "sha256": "2e3cf1b96e8afc679ee8bd69d6bde3aeb797b48b297b9cafd0eb9fd578eaafb5"
+        },
+        {
+          "path": "runtime/python/unicodedata.pyd",
+          "bytes": 712416,
+          "sha256": "d113047658f92d893bf4ee2da81ffbd624ec5c485733c02e116fac1b9a1b964c"
+        },
+        {
+          "path": "runtime/python/vcruntime140.dll",
+          "bytes": 178616,
+          "sha256": "d1f4225df2cd877dbf130d5668a021dce3f94118455ff5ec952061c30afc9ce7"
+        },
+        {
+          "path": "runtime/python/vcruntime140_1.dll",
+          "bytes": 50112,
+          "sha256": "a7146c08f89fe5b04541ab507cdb59ff7b44534d4ba3c668a426c6450a03434e"
+        },
+        {
+          "path": "runtime/python/winsound.pyd",
+          "bytes": 31968,
+          "sha256": "8450de54438b1698556b794400c3114b78ede8c10b13dcf263d646ef639ae7d1"
+        },
+        {
+          "path": "start-windows.cmd",
+          "bytes": 82,
+          "sha256": "c2aa627ff0408a928a7ca413cdc610e8a7cf8af649065e4b4c33b16f18a92a52"
+        },
+        {
+          "path": "workspace/app_version.py",
+          "bytes": 117,
+          "sha256": "31ec438e0a46aed9a5d72a39cc637c4b03eea4ca4d9fb472bb3333e41d8a9b33"
+        },
+        {
+          "path": "workspace/catalog-sources.json",
+          "bytes": 3,
+          "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+        },
+        {
+          "path": "workspace/catalog.py",
+          "bytes": 54786,
+          "sha256": "267cd2e62fac179b48ea9b1f96bacade7237120a8dfa7500cd5684d202b7a196"
+        },
+        {
+          "path": "workspace/core_checks.py",
+          "bytes": 8559,
+          "sha256": "a206e5f22430c38e5320f76a17b8b288db4f7ffcd326299ae16bb149a49150de"
+        },
+        {
+          "path": "workspace/desktop_host.py",
+          "bytes": 14450,
+          "sha256": "1bdd6e7ac9e558a4bbe174c328e7f8b318e2945aab94eae033407f5c2bb0ce3f"
+        },
+        {
+          "path": "workspace/desktop_model.py",
+          "bytes": 29369,
+          "sha256": "86a3fa02c890c7ecff02b544bfbe7b8032f1cc9d8147dd7f1315463221762ee2"
+        },
+        {
+          "path": "workspace/engine.py",
+          "bytes": 88204,
+          "sha256": "7ea1ec62897e8821164c6733b19354b5ffe94617bbbbe078c00ee0c6d59dfa66"
+        },
+        {
+          "path": "workspace/example.py",
+          "bytes": 5200,
+          "sha256": "fb558de8dc3f49f68550af3e08d768e8a99c5cd9e8d466ca357dcecc3dd699b3"
+        },
+        {
+          "path": "workspace/pack_checks.py",
+          "bytes": 19740,
+          "sha256": "5d17959b283524ce8115dbe6dbf904a9cc62b8ca6cfa545b25dd0b89c1f9df72"
+        },
+        {
+          "path": "workspace/pack_manager.py",
+          "bytes": 32523,
+          "sha256": "6eb3f3a1064b8754ea5e6d1f0fddda2f2a23f64776473689b125f58445435bc9"
+        },
+        {
+          "path": "workspace/pack_security.py",
+          "bytes": 4191,
+          "sha256": "2d1fa4a4267f5cecb0d583c7b43fc59dc8645125c59e3db69c4d6fa307ff6cc0"
+        },
+        {
+          "path": "workspace/service.py",
+          "bytes": 27985,
+          "sha256": "da3219162102faf4c754ba3fa1c4a2f1cd0f17925950b1da59d26f96e99a5535"
+        },
+        {
+          "path": "workspace/starter-check-profile.json",
+          "bytes": 1558,
+          "sha256": "395cfbd0fead5f36f52022e50827127df003dbbde086d0d9d8940f034c36fcf7"
+        },
+        {
+          "path": "workspace/verify_installation.py",
+          "bytes": 24500,
+          "sha256": "50befbdd18f7916169812a9392829981923d8c74d44446b8ee424dddd179c98a"
+        }
+      ]
+    },
+    "native-build.json": {
+      "kind": "Linux cross-compilation only",
+      "recordedAt": "2026-10-05T13:07:30.817726+00:00",
+      "sourceCommit": "5338853ba3b69438fc36c1b9dcd3ad89d6bbcde4",
+      "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+      "nativeWindowsExecuted": false,
+      "compilerArchiveSha256": "bb7bb7654b33d5aa8712acb837c963b2e0c56352560c76105270a3268c665c21",
+      "compilerVersion": "clang version 23.1.2 (https://github.com/llvm/llvm-project.git 85ac560262434c9ccfc0c183ec22d4138ed647fb)\nTarget: x86_64-w64-windows-gnu\nThread model: posix\nInstalledDir: /workspace/scratch/7cebe1115528/recovery/toolchains/llvm-mingw-20260922-ucrt-ubuntu-22.04-x86_64/bin\nConfiguration file: /workspace/scratch/7cebe1115528/recovery/toolchains/llvm-mingw-20260922-ucrt-ubuntu-22.04-x86_64/bin/x86_64-w64-windows-gnu.cfg\n",
+      "builds": [
+        {
+          "command": [
+            "bash",
+            "desktop/build_desktop_workspace.sh"
+          ],
+          "BW_MINGW_ROOT": "/workspace/scratch/7cebe1115528/recovery/toolchains/llvm-mingw-20260922-ucrt-ubuntu-22.04-x86_64",
+          "startedAt": "2026-10-05T13:07:06.751006+00:00",
+          "exitCode": 0,
+          "log": "/workspace/scratch/7cebe1115528/recovery/evidence/native-build_desktop_workspace.log",
+          "artifact": "/workspace/scratch/7cebe1115528/workbench/build/desktop/DesktopWorkbench.exe",
+          "bytes": 1198080,
+          "sha256": "7e2eee823f0eda875abac1ff1f8e383e520382e172ca0640cd454f97ed860d41",
+          "log_text": "Built /workspace/scratch/7cebe1115528/workbench/build/desktop/DesktopWorkbench.exe\n"
+        },
+        {
+          "command": [
+            "bash",
+            "desktop/build_bridge.sh"
+          ],
+          "BW_MINGW_ROOT": "/workspace/scratch/7cebe1115528/recovery/toolchains/llvm-mingw-20260922-ucrt-ubuntu-22.04-x86_64",
+          "startedAt": "2026-10-05T13:07:13.823911+00:00",
+          "exitCode": 0,
+          "log": "/workspace/scratch/7cebe1115528/recovery/evidence/native-build_bridge.log",
+          "artifact": "/workspace/scratch/7cebe1115528/workbench/build/desktop/WorkbenchBridge.exe",
+          "bytes": 1542656,
+          "sha256": "d0881daec9c51cb2efac9d325d3d4eb430506824b332532989dd80c9b00b6a84",
+          "log_text": "Built /workspace/scratch/7cebe1115528/workbench/build/desktop/WorkbenchBridge.exe\n"
+        },
+        {
+          "command": [
+            "bash",
+            "desktop/build_workspace_update_launcher.sh"
+          ],
+          "BW_MINGW_ROOT": "/workspace/scratch/7cebe1115528/recovery/toolchains/llvm-mingw-20260922-ucrt-ubuntu-22.04-x86_64",
+          "startedAt": "2026-10-05T13:07:29.924893+00:00",
+          "exitCode": 0,
+          "log": "/workspace/scratch/7cebe1115528/recovery/evidence/native-build_workspace_update_launcher.log",
+          "artifact": "/workspace/scratch/7cebe1115528/workbench/build/desktop/UpdateWorkbench.exe",
+          "bytes": 409600,
+          "sha256": "558a95c0a19280d215658723506245f45b1b00d243a1bfb516305cec99f3a44f",
+          "log_text": "Built /workspace/scratch/7cebe1115528/workbench/build/desktop/UpdateWorkbench.exe\n"
+        }
+      ]
+    },
+    "native-pe-inspection.json": {
+      "nativeWindowsExecuted": false,
+      "artifacts": [
+        {
+          "file": "DesktopWorkbench.exe",
+          "sha256": "7e2eee823f0eda875abac1ff1f8e383e520382e172ca0640cd454f97ed860d41",
+          "format": "COFF-x86-64",
+          "imports": [
+            "COMCTL32.dll",
+            "ole32.dll",
+            "SHELL32.dll",
+            "USER32.dll",
+            "GDI32.dll",
+            "gdiplus.dll",
+            "bcrypt.dll",
+            "api-ms-win-crt-stdio-l1-1-0.dll",
+            "api-ms-win-crt-string-l1-1-0.dll",
+            "api-ms-win-crt-runtime-l1-1-0.dll",
+            "api-ms-win-crt-locale-l1-1-0.dll",
+            "api-ms-win-crt-heap-l1-1-0.dll",
+            "api-ms-win-crt-private-l1-1-0.dll",
+            "api-ms-win-crt-math-l1-1-0.dll",
+            "KERNEL32.dll",
+            "api-ms-win-crt-time-l1-1-0.dll",
+            "api-ms-win-crt-multibyte-l1-1-0.dll",
+            "api-ms-win-crt-convert-l1-1-0.dll",
+            "api-ms-win-crt-environment-l1-1-0.dll",
+            "api-ms-win-crt-filesystem-l1-1-0.dll"
+          ],
+          "inspection": "/workspace/scratch/7cebe1115528/recovery/evidence/DesktopWorkbench.exe.pe.txt"
+        },
+        {
+          "file": "WorkbenchBridge.exe",
+          "sha256": "d0881daec9c51cb2efac9d325d3d4eb430506824b332532989dd80c9b00b6a84",
+          "format": "COFF-x86-64",
+          "imports": [
+            "ole32.dll",
+            "SHELL32.dll",
+            "bcrypt.dll",
+            "api-ms-win-crt-stdio-l1-1-0.dll",
+            "api-ms-win-crt-string-l1-1-0.dll",
+            "api-ms-win-crt-runtime-l1-1-0.dll",
+            "api-ms-win-crt-locale-l1-1-0.dll",
+            "api-ms-win-crt-heap-l1-1-0.dll",
+            "api-ms-win-crt-private-l1-1-0.dll",
+            "KERNEL32.dll",
+            "api-ms-win-crt-convert-l1-1-0.dll",
+            "api-ms-win-crt-time-l1-1-0.dll",
+            "api-ms-win-crt-multibyte-l1-1-0.dll",
+            "api-ms-win-crt-math-l1-1-0.dll",
+            "api-ms-win-crt-environment-l1-1-0.dll",
+            "api-ms-win-crt-filesystem-l1-1-0.dll"
+          ],
+          "inspection": "/workspace/scratch/7cebe1115528/recovery/evidence/WorkbenchBridge.exe.pe.txt"
+        },
+        {
+          "file": "UpdateWorkbench.exe",
+          "sha256": "558a95c0a19280d215658723506245f45b1b00d243a1bfb516305cec99f3a44f",
+          "format": "COFF-x86-64",
+          "imports": [
+            "SHELL32.dll",
+            "ole32.dll",
+            "USER32.dll",
+            "api-ms-win-crt-stdio-l1-1-0.dll",
+            "api-ms-win-crt-runtime-l1-1-0.dll",
+            "api-ms-win-crt-locale-l1-1-0.dll",
+            "api-ms-win-crt-heap-l1-1-0.dll",
+            "api-ms-win-crt-private-l1-1-0.dll",
+            "api-ms-win-crt-string-l1-1-0.dll",
+            "KERNEL32.dll",
+            "api-ms-win-crt-convert-l1-1-0.dll",
+            "api-ms-win-crt-math-l1-1-0.dll",
+            "api-ms-win-crt-environment-l1-1-0.dll",
+            "api-ms-win-crt-filesystem-l1-1-0.dll"
+          ],
+          "inspection": "/workspace/scratch/7cebe1115528/recovery/evidence/UpdateWorkbench.exe.pe.txt"
+        }
+      ]
+    },
+    "rc1-starter-recovery.json": {
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0-rc1/native-workbench-0.7.0-starter-windows.zip",
+      "expectedBytes": 16915504,
+      "expectedSha256": "8314887d482184afac1b196f4a19d023d5abf2584dba6cedcb63a2283ce5e705",
+      "recordedAt": "2026-10-05T13:08:11.288231+00:00",
+      "nativeWindowsExecuted": false,
+      "bytes": 16915504,
+      "sha256": "8314887d482184afac1b196f4a19d023d5abf2584dba6cedcb63a2283ce5e705",
+      "success": true
+    }
+  }
+}

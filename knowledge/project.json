@@ -38,7 +38,10 @@
     "bracken_validation": "evidence/bracken-1.0.0-validation-2026-10-04.json",
     "kraken2_public_downloads": "evidence/kraken2-1.0.0-public-downloads-2026-10-04.json",
     "bracken_public_downloads": "evidence/bracken-1.0.0-public-downloads-2026-10-04.json",
-    "reference_discovery": "../docs/reference-discovery-0.7.md"
+    "reference_discovery": "../docs/reference-discovery-0.7.md",
+    "reference_release_handover": "reference-release-handover.md",
+    "reference_resume_source_checks": "evidence/reference-resume-source-checks-2026-10-05.json",
+    "reference_resume_ui_diagnosis": "evidence/reference-resume-ui-diagnosis-2026-10-05.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -61,5 +64,16 @@
     "is_install_catalogue": false,
     "contains_trust_material": false,
     "update_rule": "Update affected topic and evidence after a change; refresh the dated release snapshot after publication."
+  },
+  "reference_release_resume": {
+    "reviewed_on": "2026-10-05",
+    "initial_branch": "main",
+    "initial_commit": "5338853ba3b69438fc36c1b9dcd3ad89d6bbcde4",
+    "working_branch": "release/reference-0.7.0-completion",
+    "target_version": "0.7.0",
+    "status": "pending-rebuilt-candidate-native-validation-and-final-release",
+    "candidate_tag": "app-v0.7.0-rc1",
+    "handover": "reference-release-handover.md",
+    "historical_inventory_scope": "Existing application and pack inventory retains its original audit dates and evidence."
   }
 }

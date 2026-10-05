@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "inspected_at": "2026-10-05T13:10:34.657623+00:00",
+  "scope": "Recovered historical native Windows rc1 geometry; no current Windows execution or fixed-build acceptance claim.",
+  "workflow_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37295599791",
+  "artifact_id": 11337734019,
+  "artifact_archive_sha256": "e76880d280ea002c3457f942c1ff5bb66eb2c5f2af5eefdd1d38e137a81f0692",
+  "source_file": "gui-events.jsonl",
+  "source_file_sha256": "a6929856fd4d0a00df10f66a60aac587cf5cdc6b3537244b34c8581364dfa0ba",
+  "observed_at": "2026-10-05T10:17:39.547249+00:00",
+  "observed_controls": [
+    {
+      "id": 608,
+      "class": "Edit",
+      "text": "",
+      "bounds": [
+        58,
+        540,
+        966,
+        616
+      ]
+    },
+    {
+      "id": 609,
+      "class": "Edit",
+      "text": "D:\\a\\_temp\\ordinary\\native-workbench\\user-data\\references",
+      "bounds": [
+        128,
+        601,
+        672,
+        633
+      ]
+    },
+    {
+      "id": 610,
+      "class": "Button",
+      "text": "Choose folder...",
+      "bounds": [
+        684,
+        601,
+        812,
+        633
+      ]
+    },
+    {
+      "id": 611,
+      "class": "Button",
+      "text": "Download selected",
+      "bounds": [
+        824,
+        601,
+        966,
+        633
+      ]
+    }
+  ],
+  "observed_gaps": [
+    {
+      "upper": 608,
+      "lower": 609,
+      "gap_pixels": -15
+    },
+    {
+      "upper": 608,
+      "lower": 610,
+      "gap_pixels": -15
+    },
+    {
+      "upper": 608,
+      "lower": 611,
+      "gap_pixels": -15
+    }
+  ],
+  "finding": "The normal References details control extends to y=616; destination and both download-row buttons begin at y=601, an overlap of 15 pixels.",
+  "related_automation_failure": {
+    "record": "reference-candidate-rc1-gui-diagnostic-2026-10-05.json",
+    "operation": "SendMessageTimeoutW WM_KEYDOWN (0x100), VK_RIGHT (0x27) on native tab control",
+    "winerror": 1460,
+    "claim": "Observed automation timeout; alone this does not establish an equivalent manual-user failure."
+  },
+  "existing_source_fix": {
+    "commit": "b9d0ee7f16f675d0c42d77d7a093530ca052d09b",
+    "changes": [
+      "Reserve details height and visible gaps before list sizing.",
+      "Queue tab key input on the target UI thread rather than send synchronously.",
+      "Validate observed native control geometry at normal and minimum sizes and on the Downloaded tab."
+    ],
+    "native_validation_status": "pending at resume audit"
+  },
+  "scope_clarification_commit": "5338853ba3b69438fc36c1b9dcd3ad89d6bbcde4",
+  "current_regression_check": {
+    "scope": "Current regression gate against independently captured old RC1 Win32 bounds; not execution of the corrected Windows application",
+    "source_commit": "5338853ba3b69438fc36c1b9dcd3ad89d6bbcde4",
+    "expected_rejection": true,
+    "diagnostic": "Native reference controls overlap or touch: {\"upper\": 608, \"lower\": 609, \"gapPixels\": -15, \"upperBounds\": [58, 540, 966, 616], \"lowerBounds\": [128, 601, 672, 633]}",
+    "success": true
+  }
+}

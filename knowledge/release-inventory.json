@@ -1583,5 +1583,56 @@
     "test_skips": 0,
     "scope": "Linux source-level synthetic resource/archive contracts only; no scientific executable, native importer or Windows execution.",
     "retention": "Stored in Git; not embedded in the earlier immutable pack source/evidence companions."
+  },
+  "reference_release_resume": {
+    "reviewed_on": "2026-10-05",
+    "source_commit": "5338853ba3b69438fc36c1b9dcd3ad89d6bbcde4",
+    "working_branch": "release/reference-0.7.0-completion",
+    "scope": "Reference application release audit only. Existing application and pack snapshot above retains its original audit dates and evidence.",
+    "target_version": "0.7.0",
+    "final_release_lookup": {
+      "url": "https://api.github.com/repos/comparativechrono/workbench/releases/tags/app-v0.7.0",
+      "http_status": 404,
+      "result": "no exact final release found during resume audit"
+    },
+    "candidate": {
+      "tag": "app-v0.7.0-rc1",
+      "source_commit": "8ad25c71ec13d2c06a670b59a2cc13ca84a50ac9",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0-rc1",
+      "starter_sha256": "8314887d482184afac1b196f4a19d023d5abf2584dba6cedcb63a2283ce5e705",
+      "update_from_0_6_0_sha256": "49b50acbb8c89a706fb99963f63f1fc87c008dcc162b82c86f44976739116496",
+      "status": "published-diagnostic-candidate-with-failed-gui-gate"
+    },
+    "historical_windows_gate": {
+      "workflow_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37295599791",
+      "source_commit": "9543ae5030ee0ec42e404d251b67b6b1e1af4de6",
+      "conclusion": "failure",
+      "paths": [
+        "ordinary",
+        "contains spaces"
+      ],
+      "completed_checks_per_path": 7,
+      "gui_passed": false,
+      "report": "evidence/reference-candidate-rc1-gui-diagnostic-2026-10-05.json",
+      "recovered_ui_diagnosis": "evidence/reference-resume-ui-diagnosis-2026-10-05.json",
+      "update_scope": "Native updater CLI from exact published 0.6.0 starter to 0.7.0 candidate, with 187 existing files preserved and only the expected user-data/session.lock added; native folder picker not exercised."
+    },
+    "existing_fixes": {
+      "layout_and_automation_commit": "b9d0ee7f16f675d0c42d77d7a093530ca052d09b",
+      "scope_wording_commit": "5338853ba3b69438fc36c1b9dcd3ad89d6bbcde4",
+      "windows_workflow_run_at_resume_audit": false
+    },
+    "fresh_source_checks": {
+      "report": "evidence/reference-resume-source-checks-2026-10-05.json",
+      "tests_passed": 93,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "platform": "Linux; Python 3.12.14",
+      "all_15_prior_runtime_hashes_match": true,
+      "scope": "Deterministic source contracts; no new live download, native Windows GUI or scientific execution claim."
+    },
+    "status": "pending-rebuilt-candidate-native-validation-and-final-release",
+    "handover": "reference-release-handover.md"
   }
 }

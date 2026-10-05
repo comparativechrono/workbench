@@ -23,6 +23,42 @@ recorded separately after testing. The 0.7 packaging also includes AGENTS and
 knowledge files in the source companion and supports a preserved-data update
 from the exact 0.6.0 starter. The released baseline below remains dated evidence.
 
+### Resumed release audit, 2026-10-05
+
+The resume started from clean `main` at
+`5338853ba3b69438fc36c1b9dcd3ad89d6bbcde4`; work continues on
+`release/reference-0.7.0-completion`. The published diagnostic candidate
+[`app-v0.7.0-rc1`](https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0-rc1)
+points to `8ad25c71ec13d2c06a670b59a2cc13ca84a50ac9`. An exact GitHub release lookup
+for `app-v0.7.0` returned 404 during this audit. Version 0.7.0 is **not yet a
+completed release**; the candidate does not contain the later interface fix.
+
+The missing interface finding is now recovered: the online References details
+panel overlapped the destination/download row by 15 pixels. The last Windows
+[run 37295599791](https://github.com/comparativechrono/workbench/actions/runs/37295599791)
+also failed while the automation synchronously sent a right-arrow key to the
+native tab control. Existing commit `b9d0ee7` reserves the layout gaps and queues
+the key event; `5338853` clarifies the validation scope. Neither fix had a Windows
+workflow run at the resume audit. They require a rebuilt candidate and native
+validation, not an assumed pass.
+
+That failed Windows run nevertheless records seven completed backend/native CLI
+checks in each ordinary and space-containing installation path, including all
+five live yeast downloads, cancellation, offline use/provenance and native
+SAMtools indexing. The reported “0.6.0 update” means the **0.6.0-to-0.7.0 updater
+CLI**, not an update to 0.6.0 or a tested folder-picker interaction: 187 existing
+files were preserved and only the expected `user-data/session.lock` was added.
+These are recovered historical results for rc1 bytes, not new Windows execution.
+
+The resumed Linux checks passed **93 tests, zero failures/errors/skips** for
+reference discovery, download, provenance, service/host, packaging and updater
+contracts. The [fresh report](evidence/reference-resume-source-checks-2026-10-05.json)
+and [log](evidence/reference-resume-source-checks-2026-10-05.txt) also confirm all
+15 runtime hashes recorded with the earlier 139-test source report still match.
+This does not rerun those 139 tests or establish a Windows GUI pass. See the
+[release handover](reference-release-handover.md) for exact identities and remaining
+gates. The 0.6.0 and pack inventory below retains its original audit scope.
+
 ## What is available
 
 The native desktop application **0.6.0** and **32 distinct tool packs** are

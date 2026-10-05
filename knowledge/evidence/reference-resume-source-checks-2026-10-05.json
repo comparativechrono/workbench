@@ -1,0 +1,206 @@
+{
+  "schema": 1,
+  "started_at": "2026-10-05T13:06:45.965998+00:00",
+  "source_commit": "5338853ba3b69438fc36c1b9dcd3ad89d6bbcde4",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "python": "3.12.14",
+  "scope": "Fresh source-only deterministic reference, host, split packaging and updater checks; no live network, Windows GUI or scientific executable claim.",
+  "suites": [
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "workspace/tests/test_reference_provider.py"
+      ],
+      "test_sha256": "d97b77cbb74bd152e00ceda2109dca7cfe18c25011cdff68a8e7d98e971990b6",
+      "exit_code": 0,
+      "tests": 17,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "success": true,
+      "passed": 17
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "workspace/tests/test_reference_manager.py"
+      ],
+      "test_sha256": "09fb1a8accf314a16b09992eea995d3a3336f67576404236fbaae70a15be86df",
+      "exit_code": 0,
+      "tests": 25,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "success": true,
+      "passed": 25
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "workspace/tests/test_reference_provenance.py"
+      ],
+      "test_sha256": "98dbeeb9282060a248bedae5819f5e6203e49bb3dcf1f029a5166db38e13b660",
+      "exit_code": 0,
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "success": true,
+      "passed": 5
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "workspace/tests/test_reference_service.py"
+      ],
+      "test_sha256": "b14d792705a37e20498fcdff59dc6a1f2a7fe83670ce2264d075111d228f973d",
+      "exit_code": 0,
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "success": true,
+      "passed": 10
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "workspace/tests/test_desktop_host.py"
+      ],
+      "test_sha256": "a65e0d14936255a0b1053147b5310e1f9b2596ef4c18671210a036a71fadb052",
+      "exit_code": 0,
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "success": true,
+      "passed": 12
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "tests/test_split_release.py"
+      ],
+      "test_sha256": "30e3828924b9e738e484264bfc016de474db21ddf741be61de96a720f5bc79c3",
+      "exit_code": 0,
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "success": true,
+      "passed": 8
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "tests/test_core_update.py"
+      ],
+      "test_sha256": "146c8bc37342032675b34805b92917a3e1d6ae00205e9de2f4c100f65c892c09",
+      "exit_code": 0,
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "success": true,
+      "passed": 16
+    }
+  ],
+  "prior_source_evidence": {
+    "path": "knowledge/evidence/reference-source-contracts-2026-10-05.json",
+    "sha256": "227440739da087871fdb153a6498a403dea1945af31b1bba3c9127a0b1e443f4",
+    "reported_tests": 139,
+    "reported_passed": 139,
+    "reported_failures": 0,
+    "reported_errors": 0,
+    "reported_skipped": 0,
+    "runtime_sha256_comparison": {
+      "workspace/app_version.py": {
+        "recorded_sha256": "7cd8330315eed08d904bbf3e5eea2a132c25b22f364704b3196696ea223f9c28",
+        "current_sha256": "7cd8330315eed08d904bbf3e5eea2a132c25b22f364704b3196696ea223f9c28",
+        "match": true
+      },
+      "workspace/catalog.py": {
+        "recorded_sha256": "267cd2e62fac179b48ea9b1f96bacade7237120a8dfa7500cd5684d202b7a196",
+        "current_sha256": "267cd2e62fac179b48ea9b1f96bacade7237120a8dfa7500cd5684d202b7a196",
+        "match": true
+      },
+      "workspace/core_checks.py": {
+        "recorded_sha256": "a206e5f22430c38e5320f76a17b8b288db4f7ffcd326299ae16bb149a49150de",
+        "current_sha256": "a206e5f22430c38e5320f76a17b8b288db4f7ffcd326299ae16bb149a49150de",
+        "match": true
+      },
+      "workspace/desktop_host.py": {
+        "recorded_sha256": "d7c23c587d8562b5c604b60278f20e11c2db5967a97aff183ebd38b4c88bdfe3",
+        "current_sha256": "d7c23c587d8562b5c604b60278f20e11c2db5967a97aff183ebd38b4c88bdfe3",
+        "match": true
+      },
+      "workspace/desktop_model.py": {
+        "recorded_sha256": "5434823bb7b0d8dd578be425f8f1b2674e56c4107e633a655391482f6033b327",
+        "current_sha256": "5434823bb7b0d8dd578be425f8f1b2674e56c4107e633a655391482f6033b327",
+        "match": true
+      },
+      "workspace/engine.py": {
+        "recorded_sha256": "e88dd658fe3a764acbb25a6ef53d79aa8849099957b69b29dcf800297dff97dd",
+        "current_sha256": "e88dd658fe3a764acbb25a6ef53d79aa8849099957b69b29dcf800297dff97dd",
+        "match": true
+      },
+      "workspace/example.py": {
+        "recorded_sha256": "fb558de8dc3f49f68550af3e08d768e8a99c5cd9e8d466ca357dcecc3dd699b3",
+        "current_sha256": "fb558de8dc3f49f68550af3e08d768e8a99c5cd9e8d466ca357dcecc3dd699b3",
+        "match": true
+      },
+      "workspace/pack_checks.py": {
+        "recorded_sha256": "5d17959b283524ce8115dbe6dbf904a9cc62b8ca6cfa545b25dd0b89c1f9df72",
+        "current_sha256": "5d17959b283524ce8115dbe6dbf904a9cc62b8ca6cfa545b25dd0b89c1f9df72",
+        "match": true
+      },
+      "workspace/pack_manager.py": {
+        "recorded_sha256": "6eb3f3a1064b8754ea5e6d1f0fddda2f2a23f64776473689b125f58445435bc9",
+        "current_sha256": "6eb3f3a1064b8754ea5e6d1f0fddda2f2a23f64776473689b125f58445435bc9",
+        "match": true
+      },
+      "workspace/pack_security.py": {
+        "recorded_sha256": "2d1fa4a4267f5cecb0d583c7b43fc59dc8645125c59e3db69c4d6fa307ff6cc0",
+        "current_sha256": "2d1fa4a4267f5cecb0d583c7b43fc59dc8645125c59e3db69c4d6fa307ff6cc0",
+        "match": true
+      },
+      "workspace/reference_manager.py": {
+        "recorded_sha256": "3df9269e3bd89a822a18c323af36f474887b185cb261399f55409354240d2bd9",
+        "current_sha256": "3df9269e3bd89a822a18c323af36f474887b185cb261399f55409354240d2bd9",
+        "match": true
+      },
+      "workspace/reference_provenance.py": {
+        "recorded_sha256": "9175cbb21fd983816a1b8b0effdae09ebaa11990fccdc06e4446c13f56ac5971",
+        "current_sha256": "9175cbb21fd983816a1b8b0effdae09ebaa11990fccdc06e4446c13f56ac5971",
+        "match": true
+      },
+      "workspace/reference_provider.py": {
+        "recorded_sha256": "30f160e22d2f8a89bac4f1d52bf4ec6709a7f331f1bb6000e78707e559fdc816",
+        "current_sha256": "30f160e22d2f8a89bac4f1d52bf4ec6709a7f331f1bb6000e78707e559fdc816",
+        "match": true
+      },
+      "workspace/service.py": {
+        "recorded_sha256": "ab343eae8990c844d9db85bc7c2d4bea33e1b3fe4e20714fd91786cd25fcde22",
+        "current_sha256": "ab343eae8990c844d9db85bc7c2d4bea33e1b3fe4e20714fd91786cd25fcde22",
+        "match": true
+      },
+      "workspace/verify_installation.py": {
+        "recorded_sha256": "1e2a11141609f23d4e6b5d771d01ab67199a4839f36f2174bfa2f10b70c0f23d",
+        "current_sha256": "1e2a11141609f23d4e6b5d771d01ab67199a4839f36f2174bfa2f10b70c0f23d",
+        "match": true
+      }
+    },
+    "all_recorded_runtime_hashes_match": true
+  },
+  "finished_at": "2026-10-05T13:06:47.315361+00:00",
+  "success": true,
+  "tests": 93,
+  "passed": 93,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "log": {
+    "filename": "reference-resume-source-checks-2026-10-05.txt",
+    "sha256": "de9208d5ae82317c9ea2da66368cef294709d3a5829b29752ec81f0695e3649f"
+  }
+}
