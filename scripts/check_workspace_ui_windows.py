@@ -87,9 +87,14 @@ class NativeUI:
         u.SendInput.restype = wintypes.UINT
         self.process = subprocess.Popen([str(root / "NativeWorkbench.exe")], cwd=root)
         self.main = None
-        self.wait("native main window", lambda: self.find_main())
-        u.ShowWindow(self.main, 9)
-        u.SetForegroundWindow(self.main)
+        try:
+            self.wait("native main window", lambda: self.find_main())
+            u.ShowWindow(self.main, 9)
+            u.SetForegroundWindow(self.main)
+        except Exception:
+            stop_process_tree(self.process)
+            u.SetThreadDpiAwarenessContext(self.previous_dpi)
+            raise
 
     def progress(self, phase, **details):
         value = {"phase": phase, "updatedUtc": datetime.now(timezone.utc).isoformat(), **details}
@@ -108,9 +113,15 @@ class NativeUI:
         require(self.user.PostMessageW(hwnd, message, wparam, lparam), "Could not queue native input.")
 
     def label(self, hwnd, class_name=False):
-        buffer = ctypes.create_unicode_buffer(32768)
+        # GetClassNameW rejects the oversized 32768-WCHAR text buffer on the
+        # native runner. Class names use their own bounded buffer and a checked
+        # return value so an automation failure cannot masquerade as missing UI.
+        buffer = ctypes.create_unicode_buffer(1024 if class_name else 32768)
         if class_name:
-            self.user.GetClassNameW(hwnd, buffer, len(buffer))
+            ctypes.set_last_error(0)
+            require(self.user.GetClassNameW(hwnd, buffer, len(buffer)) > 0,
+                    "Could not read native window class: hwnd=" + str(hwnd) +
+                    " winerror=" + str(ctypes.get_last_error()))
         else:
             self.send(hwnd, 0x000D, len(buffer), ctypes.addressof(buffer))
         return buffer.value
@@ -328,8 +339,10 @@ def host_contracts(root, evidence):
 
 # GUI assertions are filled against the public native controls/layout contract
 # alongside the three-pane implementation; no test-only application RPC is used.
-def gui_contracts(root, evidence):
+def gui_contracts(root, evidence, report):
     ui = NativeUI(root, evidence)
+    report["nativeGUILaunched"] = True
+    report["nativeWindowsExecuted"] = True
     captures, geometry = [], []
     try:
         ui.wait("installed native tool library", lambda:
@@ -376,7 +389,8 @@ def gui_contracts(root, evidence):
                 require(117 in by_id, "Workflow canvas is not visible.")
                 canvas = by_id[117]["bounds"]
                 require(tools[2] <= canvas[0] and canvas[2] <= form[0], "Workflow panes overlap.")
-            geometry.append({"mode": mode, "size": size, "dpi": ui.user.GetDpiForWindow(ui.main), "controls": rows})
+            geometry.append({"mode": mode, "requestedSize": size, "actualWindowBounds": ui.bounds(ui.main),
+                             "dpi": ui.user.GetDpiForWindow(ui.main), "controls": rows})
         select_tool("Index a reference")
         ui.wait("single click opens standalone reference indexing form", lambda: has_text("Index a reference"))
         measure("tool", "1280x900")
@@ -393,13 +407,17 @@ def gui_contracts(root, evidence):
         ui.wait("dragged tool shows workflow parameters", lambda: has_text("Coordinate sort"))
         ui.set_text(name_edit(), "First coordinate sort")
         # Dropping a second tool commits the first form and leaves its position.
-        select_tool("Coordinate sort", drag_to=(414, 290))
+        canvas_bounds = ui.bounds(ui.child(117))
+        canvas_width = (canvas_bounds[2] - canvas_bounds[0]) / scale
+        second_left = min(294, int(canvas_width - 242 - 24))
+        require(second_left >= 24, "Native canvas cannot contain a workflow card at this display size.")
+        select_tool("Coordinate sort", drag_to=(second_left + 120, 290))
         ui.wait("second dragged tool selected", lambda: has_text("Coordinate sort"))
         ui.set_text(name_edit(), "Second coordinate sort")
         # Explicitly dropped nodes have deterministic documented positions:
         # pointer minus(120,20); socket rows derive from the actual pack schema.
         canvas = ui.child(117)
-        ui.drag(point(canvas, 266, 147), point(canvas, 294, 335))
+        ui.drag(point(canvas, 266, 147), point(canvas, second_left, 335))
         ui.wait("compatible output connected through native port drag", lambda: any(
             c["class"].lower() == "static" and "From:" in c["text"] and "First coordinate sort" in c["text"]
             for c in ui.controls()), seconds=30)
@@ -456,6 +474,7 @@ def main(argv=None):
     evidence.mkdir(parents=True, exist_ok=True)
     report = {"schema": 1, "success": False, "startedUtc": datetime.now(timezone.utc).isoformat(),
               "platform": platform.platform(), "python": sys.version, "nativeWindowsExecuted": False,
+              "nativeGUILaunched": False, "nativeGUIValidated": False,
               "appRoot": str(root), "sourceCommit": args.source_commit, "assetSha256": args.asset_sha256,
               "assetName": args.asset_name, "gateSha256": sha256(__file__), "checks": [], "skips": []}
     try:
@@ -463,11 +482,13 @@ def main(argv=None):
         require(Path(sys.executable).resolve() == (root / "runtime/python/python.exe").resolve(),
                 "Run using the exact application's private Python.")
         if args.gui_worker:
-            report["gui"] = gui_contracts(root, evidence)
+            report["gui"] = gui_contracts(root, evidence, report)
             report["checks"] = report["gui"]["checks"]
+            report["nativeGUIValidated"] = True
         else:
             report["appFiles"] = {str(p.relative_to(root)): sha256(p) for p in [root/"NativeWorkbench.exe", *sorted((root/"workspace").glob("*.py"))]}
             report["host"] = host_contracts(root, evidence)
+            report["nativeWindowsExecuted"] = True
             report["checks"].extend(report["host"]["checks"])
             worker_report = evidence / "ui-worker.json"
             command = [sys.executable, "-I", "-u", str(Path(__file__).resolve()), "--gui-worker",
@@ -481,6 +502,8 @@ def main(argv=None):
                     stop_process_tree(worker)
             require(worker_report.is_file(), "Native GUI worker did not produce a report.")
             result = json.loads(worker_report.read_text(encoding="utf-8"))
+            report["nativeGUILaunched"] = result.get("nativeGUILaunched", False)
+            report["nativeGUIValidated"] = result.get("nativeGUIValidated", False)
             require(worker.returncode == 0 and result.get("success"), "Native GUI worker failed: " + json.dumps(result))
             report["gui"] = result["gui"]
             report["checks"].extend(result["checks"])
