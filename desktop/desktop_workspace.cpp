@@ -2624,8 +2624,9 @@ class Workspace {
     InvalidateRect(dag, nullptr, FALSE);
     enabled();
   }
-  void add_task() {
-    int i = ListView_GetNextItem(tasks, -1, LVNI_SELECTED);
+  void add_task(int i = -1) {
+    if (i < 0)
+      i = ListView_GetNextItem(tasks, -1, LVNI_SELECTED);
     if (i < 0 || static_cast<size_t>(i) >= taskIds.size())
       return;
     commit_all();
@@ -3231,11 +3232,21 @@ class Workspace {
         const auto *item = reinterpret_cast<NMLISTVIEW *>(l);
         if ((item->uNewState & LVIS_SELECTED) && !(item->uOldState & LVIS_SELECTED) &&
             item->iItem >= 0 && static_cast<size_t>(item->iItem) < taskIds.size())
-          add_task();
+          add_task(item->iItem);
         return 0;
       }
       if (n->idFrom == TASKS && n->code == NM_DBLCLK) {
-        add_task();
+        // A refreshed library can receive a double-click before the new row
+        // becomes selected. Activate the actual clicked row, not stale state.
+        const auto *item = reinterpret_cast<NMITEMACTIVATE *>(l);
+        int row = item->iItem;
+        if (row < 0) {
+          LVHITTESTINFO hit{};
+          hit.pt = item->ptAction;
+          row = ListView_SubItemHitTest(tasks, &hit);
+        }
+        if (!rebuilding && row >= 0)
+          add_task(row);
         return 0;
       }
       if (n->idFrom == TASKS && n->code == LVN_BEGINDRAG && workflowMode) {

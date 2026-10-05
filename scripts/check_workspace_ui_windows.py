@@ -127,6 +127,14 @@ class NativeUI:
         return buffer.value
 
     def set_text(self, hwnd, value):
+        # Focus the real edit before replacing its text. Otherwise rapid native
+        # row clicks separated only by WM_SETTEXT are interpreted by Windows as
+        # a double-click at the unchanged pointer location, unlike a person
+        # clicking the search field before editing it.
+        require(hwnd and self.user.IsWindowVisible(hwnd) and self.user.IsWindowEnabled(hwnd),
+                "The native edit is not available for user input.")
+        left, top, right, bottom = self.bounds(hwnd)
+        self.click_at((left + right) // 2, (top + bottom) // 2)
         buffer = ctypes.create_unicode_buffer(str(value))
         require(self.send(hwnd, 0x000C, 0, ctypes.addressof(buffer)), "Could not set native edit text.")
 
@@ -417,6 +425,28 @@ def gui_contracts(root, evidence, report):
         captures.append(ui.capture("tools-after-workflow-library-selection.bmp"))
         select_tool("Index a reference")
         ui.wait("single click opens standalone reference indexing form", lambda: has_text("Index a reference"))
+        # Separate native-control notification regression, not a physical drag
+        # assertion: a refreshed list can have a hit row but no selected row.
+        # Exercise the ListView's real double-click handler without constructing
+        # or injecting a foreign-process NMITEMACTIVATE pointer.
+        ui.set_text(ui.child(102), "Coordinate sort")
+        ui.wait("filter other tool for native double-click notification regression", lambda:
+                ui.send(ui.child(104), 0x1004) == 1)
+        require(ui.send(ui.child(104), 0x100C, ctypes.c_size_t(-1).value, 2) == ctypes.c_size_t(-1).value,
+                "Notification regression requires an unselected refreshed library row.")
+        tasks = ui.child(104)
+        screen_x, screen_y = first_tool_row()
+        origin = wintypes.POINT()
+        require(ui.user.ClientToScreen(tasks, ctypes.byref(origin)), "Could not locate the ListView client origin.")
+        local_x, local_y = screen_x - origin.x, screen_y - origin.y
+        pointer_coordinates = (local_x & 0xffff) | ((local_y & 0xffff) << 16)
+        ui.mouse(screen_x, screen_y)
+        ui.post(tasks, 0x0203, 1, pointer_coordinates)  # WM_LBUTTONDBLCLK, MK_LBUTTON.
+        ui.post(tasks, 0x0202, 0, pointer_coordinates)  # WM_LBUTTONUP.
+        ui.wait("double-click notification uses hit row without an existing selection", lambda: has_text("Coordinate sort"))
+        captures.append(ui.capture("tools-double-click-notification.bmp"))
+        select_tool("Index a reference")
+        ui.wait("restore standalone reference indexing after notification regression", lambda: has_text("Index a reference"))
         measure("tool", "1280x900")
         require(ui.user.IsWindowVisible(ui.child(403)), "References absent from general settings.")
         empty_inputs = [c for c in edits() if not c["text"]]
@@ -472,13 +502,17 @@ def gui_contracts(root, evidence, report):
         return {"dpi": dpi, "displayPixels": [ui.user.GetSystemMetrics(0), ui.user.GetSystemMetrics(1)],
                 "captures": captures, "geometryFile": "ui-control-geometry.json",
                 "checks": ["First click opens a previously selected workflow-library row in empty tool mode",
-                           "Single-click standalone tool form", "Three independent panes with general settings",
+                           "Single-click standalone tool form",
+                           "Separate queued native double-click notification opens its hit row after selection clears",
+                           "Three independent panes with general settings",
                            "Actual mouse drag from tool list onto workflow canvas twice",
                            "Actual compatible output-to-input mouse connection",
                            "Canvas selection displays tool options on right",
                            "General settings remain available in workflow mode",
                            "Standalone input and browsing folder survive workflow mode",
                            "Workflow graph/selection survives mode switching", "Normal/minimum observed pane separation"],
+                "notificationRegression": {"input": "Queued WM_LBUTTONDBLCLK and WM_LBUTTONUP to the real native ListView",
+                                           "scope": "Hit-row activation without prior selection; separate from the SendInput pointer and drag assertions."},
                 "limits": ["DPI coverage is only the actual reported monitor DPI; no simulated WM_DPICHANGED claim.",
                            "Human usability acceptance, multi-monitor movement and native folder pickers remain separate."]}
     finally:
