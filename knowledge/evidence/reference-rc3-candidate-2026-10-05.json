@@ -1,0 +1,355 @@
+{
+  "schema": 1,
+  "recordedDate": "2026-10-05",
+  "status": "candidate-native-gate-passed-final-public-assets-pending",
+  "success": true,
+  "releaseTag": "app-v0.7.0-rc3",
+  "appVersion": "0.7.0",
+  "workflowRun": "https://github.com/comparativechrono/workbench/actions/runs/37318450359",
+  "applicationSourceCommit": "57d635370a1cd34dd1549aff95a2feba7faeeb74",
+  "gateSourceCommit": "57d635370a1cd34dd1549aff95a2feba7faeeb74",
+  "gateSha256": "ef1b09b83e65ba304ea8efde0f0538d507d20aa5fe6fd406f551f5024745ee37",
+  "starter": {
+    "name": "native-workbench-0.7.0-starter-windows.zip",
+    "sha256": "3d5b79924e5edc69efb7d4934696f6568377b63c312a666cc37e05b8707cf1ba"
+  },
+  "updater": {
+    "name": "native-workbench-0.7.0-update-from-0.6.0.zip",
+    "sha256": "9c86f8c7cbe7acb8c31cdb7472db815143e7cc63be8fda0113642baee17f1469"
+  },
+  "checks": [
+    "Live release-pinned yeast search and five-product discovery.",
+    "Cancellation after transferred bytes removed only its partial download and published no reference.",
+    "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+    "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+    "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods.",
+    "Installed application and starter pack integrity checks passed after reference use.",
+    "Native 0.6.0-to-0.7.0 core migration and idempotent repeat preserved optional packs, saved pins, references and results; updated private host reused them offline.",
+    "Native app opened References, displayed five local files, kept controls separate at normal/minimum size and closed cleanly."
+  ],
+  "paths": [
+    {
+      "pathCase": "ordinary",
+      "success": true,
+      "passed": 8,
+      "skips": [],
+      "platform": "Windows-2022Server-10.0.20348-SP0",
+      "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+      "artifactId": 11349361558,
+      "artifactUrl": "https://github.com/comparativechrono/workbench/actions/runs/37318450359/artifacts/11349361558",
+      "artifactSha256": "fb1c8b18fd6d873f8b1d42252468d6786695a190579ba181925a5f563b3d867d",
+      "downloadedArtifactHashVerified": true,
+      "reportSha256": "f9bf21394fb446c4d352520e5fad081bee09ee730573c810ca1129845a6a1256",
+      "gui": {
+        "scope": "Automated Win32 launch, local-library loading, live search/discover/search reset, queued tab input, observed control non-overlap at normal/minimum size, resize and pixel capture; human usability acceptance remains separate.",
+        "dpi": 96,
+        "normalGeometry": [
+          {
+            "upper": 605,
+            "lower": 606,
+            "gapPixels": 6
+          },
+          {
+            "upper": 606,
+            "lower": 607,
+            "gapPixels": 6
+          },
+          {
+            "upper": 607,
+            "lower": 608,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 609,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 610,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 611,
+            "gapPixels": 12
+          }
+        ],
+        "minimumGeometry": [
+          {
+            "upper": 605,
+            "lower": 606,
+            "gapPixels": 6
+          },
+          {
+            "upper": 606,
+            "lower": 607,
+            "gapPixels": 6
+          },
+          {
+            "upper": 607,
+            "lower": 608,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 609,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 610,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 611,
+            "gapPixels": 12
+          }
+        ],
+        "downloadedGeometry": [
+          {
+            "upper": 612,
+            "lower": 608,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 613,
+            "gapPixels": 11
+          },
+          {
+            "upper": 608,
+            "lower": 614,
+            "gapPixels": 11
+          },
+          {
+            "upper": 608,
+            "lower": 615,
+            "gapPixels": 11
+          }
+        ],
+        "downloadedRows": 5,
+        "nativeSearchDiscoverSearch": true,
+        "closedCleanly": true,
+        "captures": [
+          {
+            "path": "references-discovered.bmp",
+            "width": 960,
+            "height": 728,
+            "sha256": "94188e9d417c2f53221f402b2c1fbb57c530d502db11dc25b599844d63000774"
+          },
+          {
+            "path": "references-normal.bmp",
+            "width": 960,
+            "height": 728,
+            "sha256": "af88c036281f956d8f8b639170f77cebf0a1c387ce2f0256fbad64ff13e45fc4"
+          },
+          {
+            "path": "references-minimum.bmp",
+            "width": 820,
+            "height": 680,
+            "sha256": "c8129f22caa3f24871e52c3b0a6617ce19a224501b80958d32e17a0a3d6e3ff0"
+          },
+          {
+            "path": "references-downloaded-minimum.bmp",
+            "width": 820,
+            "height": 680,
+            "sha256": "a6c250b8cb270743307e7f932ec49640c8c8734065e82e25d8006f1a62564e12"
+          }
+        ]
+      },
+      "allFourCapturesVisuallyReviewed": true,
+      "coreUpdate": {
+        "success": true,
+        "baseVersion": "0.6.0",
+        "targetVersion": "0.7.0",
+        "baseArchiveSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+        "updateArchiveSha256": "9c86f8c7cbe7acb8c31cdb7472db815143e7cc63be8fda0113642baee17f1469",
+        "preservedFiles": 187,
+        "preservationChanges": {},
+        "preservationAdditions": {
+          "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+        },
+        "optionalPin": {
+          "packId": "reads",
+          "packVersion": "0.4.0",
+          "manifestSha256": "65fc3065fb382ffdd13c4b94fa834b26531e63eb87858d84a4c173e567fb73c0"
+        },
+        "coreManifestSha256": "ee251a6545a8830a2f9fe7b46a523a04425aea37380f56ea9870ccc3cc149c4d",
+        "offlineRestart": true,
+        "scope": "Actual native Windows updater CLI using its private runtime; native folder-picker interaction is not exercised."
+      },
+      "nativeIndex": {
+        "contigs": 17,
+        "bases": 12157105,
+        "sha256": "65163e1e9c8cb7b63f43befd8294019b11fba0c18dd37c801e9d356e71e391c3"
+      }
+    },
+    {
+      "pathCase": "path with spaces",
+      "success": true,
+      "passed": 8,
+      "skips": [],
+      "platform": "Windows-2022Server-10.0.20348-SP0",
+      "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+      "artifactId": 11348229541,
+      "artifactUrl": "https://github.com/comparativechrono/workbench/actions/runs/37318450359/artifacts/11348229541",
+      "artifactSha256": "3c508a90f4f30919ea140e3903c92f3e1d0fd38a9042a7866187c59bc24a83aa",
+      "downloadedArtifactHashVerified": true,
+      "reportSha256": "c07320260a867b8d9631b949dc4f7b2105c3d33f06c20554172beafb037f3477",
+      "gui": {
+        "scope": "Automated Win32 launch, local-library loading, live search/discover/search reset, queued tab input, observed control non-overlap at normal/minimum size, resize and pixel capture; human usability acceptance remains separate.",
+        "dpi": 96,
+        "normalGeometry": [
+          {
+            "upper": 605,
+            "lower": 606,
+            "gapPixels": 6
+          },
+          {
+            "upper": 606,
+            "lower": 607,
+            "gapPixels": 6
+          },
+          {
+            "upper": 607,
+            "lower": 608,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 609,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 610,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 611,
+            "gapPixels": 12
+          }
+        ],
+        "minimumGeometry": [
+          {
+            "upper": 605,
+            "lower": 606,
+            "gapPixels": 6
+          },
+          {
+            "upper": 606,
+            "lower": 607,
+            "gapPixels": 6
+          },
+          {
+            "upper": 607,
+            "lower": 608,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 609,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 610,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 611,
+            "gapPixels": 12
+          }
+        ],
+        "downloadedGeometry": [
+          {
+            "upper": 612,
+            "lower": 608,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 613,
+            "gapPixels": 11
+          },
+          {
+            "upper": 608,
+            "lower": 614,
+            "gapPixels": 11
+          },
+          {
+            "upper": 608,
+            "lower": 615,
+            "gapPixels": 11
+          }
+        ],
+        "downloadedRows": 5,
+        "nativeSearchDiscoverSearch": true,
+        "closedCleanly": true,
+        "captures": [
+          {
+            "path": "references-discovered.bmp",
+            "width": 960,
+            "height": 728,
+            "sha256": "91f5fdd0eda10b972858077fef6f71d6a112cb6cbb605e5b1fd66195d587f69e"
+          },
+          {
+            "path": "references-normal.bmp",
+            "width": 960,
+            "height": 728,
+            "sha256": "168fa801b5c7e6e329d0a48004020ec6b9ad3b00a9a748b79e012cd09e57d222"
+          },
+          {
+            "path": "references-minimum.bmp",
+            "width": 820,
+            "height": 680,
+            "sha256": "19d6f92a0f63ef20def8ac6731a7f533a061c8bc721c7ca977589ae989d7d069"
+          },
+          {
+            "path": "references-downloaded-minimum.bmp",
+            "width": 820,
+            "height": 680,
+            "sha256": "460604aa50c6d9b6ff9b3ec12535e5fdb4ab2f4f9937e0cf1f1ce6db67b50f32"
+          }
+        ]
+      },
+      "allFourCapturesVisuallyReviewed": true,
+      "coreUpdate": {
+        "success": true,
+        "baseVersion": "0.6.0",
+        "targetVersion": "0.7.0",
+        "baseArchiveSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+        "updateArchiveSha256": "9c86f8c7cbe7acb8c31cdb7472db815143e7cc63be8fda0113642baee17f1469",
+        "preservedFiles": 187,
+        "preservationChanges": {},
+        "preservationAdditions": {
+          "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+        },
+        "optionalPin": {
+          "packId": "reads",
+          "packVersion": "0.4.0",
+          "manifestSha256": "65fc3065fb382ffdd13c4b94fa834b26531e63eb87858d84a4c173e567fb73c0"
+        },
+        "coreManifestSha256": "ee251a6545a8830a2f9fe7b46a523a04425aea37380f56ea9870ccc3cc149c4d",
+        "offlineRestart": true,
+        "scope": "Actual native Windows updater CLI using its private runtime; native folder-picker interaction is not exercised."
+      },
+      "nativeIndex": {
+        "contigs": 17,
+        "bases": 12157105,
+        "sha256": "65163e1e9c8cb7b63f43befd8294019b11fba0c18dd37c801e9d356e71e391c3"
+      }
+    }
+  ],
+  "reviewFindings": [
+    "Both native References windows load all five local products without the previous Expected a JSON array modal.",
+    "Live native species search shows yeast; discovery shows five file rows; a repeated search resets stale discovery to zero rows.",
+    "Online details and destination/download controls have a measured 12-pixel gap at normal and minimum sizes, replacing RC1 overlap of 15 pixels.",
+    "Downloaded tab displays five reference rows and scrollable provenance, and windows close cleanly."
+  ],
+  "validationBoundary": "Candidate evidence only. Final public application assets still require their own gate and download verification. The GUI checks use 96 DPI on Windows Server 2022 ordinary/space-containing paths. Compatible input binding, download/cancel operations, offline reuse and provenance are exercised through the actual bundled host; the GUI gate covers launch, live search/discovery/reset, tab switch, layout and local-library display, not click-through download/input selection or native updater folder picker. No manual managed-PC, high-DPI/multi-monitor, Unicode/long-path, human-genome or institutional-proxy acceptance is claimed."
+}

@@ -557,6 +557,24 @@ def gui_smoke(root, evidence):
         (user.GetClassNameW if class_name else user.GetWindowTextW)(hwnd, buffer, len(buffer))
         return buffer.value
 
+    def control_text(hwnd):
+        # WM_GETTEXT is a system-marshalled message. GetWindowTextW cannot
+        # retrieve another process's EDIT contents reliably.
+        buffer = ctypes.create_unicode_buffer(32768)
+        send(hwnd, 0x000D, len(buffer), ctypes.addressof(buffer))
+        return buffer.value
+
+    def inspector_edits(hwnd):
+        children = []
+        @callback_type
+        def each(child, _):
+            identity = user.GetDlgCtrlID(child)
+            if identity >= 2000 and text(child, True).lower() == "edit":
+                children.append((child, identity))
+            return True
+        user.EnumChildWindows(hwnd, each, 0)
+        return [{"id": identity, "text": control_text(child)} for child, identity in children]
+
     def windows(pid):
         found = []
         @callback_type
@@ -618,12 +636,48 @@ def gui_smoke(root, evidence):
             gdi.DeleteDC(memory)
             user.ReleaseDC(hwnd, dc)
 
+    def wait_native_state(label, predicate, owner, seconds=30):
+        progress(label)
+        deadline = time.monotonic() + seconds
+        while time.monotonic() < deadline:
+            dialogs = [{"title": text(h), "controls": controls(h)}
+                       for h in windows(process.pid) if text(h, True) == "#32770"]
+            if dialogs:
+                progress(label + " failed", dialogs=dialogs, controls=controls(owner))
+                capture(owner, evidence / "references-state-failure.bmp")
+                raise AssertionError("Unexpected native modal dialog: " + json.dumps(dialogs))
+            if predicate():
+                return
+            time.sleep(.1)
+        progress(label + " timed out", controls=controls(owner))
+        capture(owner, evidence / "references-state-failure.bmp")
+        raise TimeoutError("Native interface state did not complete: " + label)
+
     progress("launch native desktop")
     process = subprocess.Popen([str(root / "NativeWorkbench.exe")], cwd=root)
     main = None
     try:
         progress("wait for main window", pid=process.pid)
         main = find_window(process.pid, "Native Workbench")
+        wait_native_state("wait for native task library", lambda:
+            user.IsWindowEnabled(user.GetDlgItem(main, 403))
+            and send(user.GetDlgItem(main, 104), 0x1004) > 0, main)
+        task_query = ctypes.create_unicode_buffer("Index a reference")
+        send(user.GetDlgItem(main, 102), 0x000C, 0, ctypes.addressof(task_query))
+        tasks = user.GetDlgItem(main, 104)
+        wait_native_state("filter the native SAMtools reference indexing task", lambda:
+            send(tasks, 0x1004) == 1, main)
+        require(user.PostMessageW(tasks, 0x0100, 0x24, 1)
+                and user.PostMessageW(tasks, 0x0101, 0x24, 0xC0000001),
+                "Could not select the native reference indexing task.")  # VK_HOME
+        wait_native_state("select the native reference indexing task", lambda:
+            send(tasks, 0x100C, ctypes.c_size_t(-1).value, 2) == 0
+            and user.IsWindowEnabled(user.GetDlgItem(main, 105)), main)
+        require(user.PostMessageW(user.GetDlgItem(main, 105), 0x00F5, 0, 0),
+                "Could not click Add selected task.")  # queued BM_CLICK
+        wait_native_state("add native reference indexing step", lambda:
+            send(user.GetDlgItem(main, 106), 0x1004) == 1
+            and any(item["text"] == "Index a reference" for item in inspector_edits(main)), main)
         progress("open References", pid=process.pid, windows=[
             {"hwnd": hwnd, "title": text(hwnd), "class": text(hwnd, True)}
             for hwnd in windows(process.pid)])
@@ -663,18 +717,7 @@ def gui_smoke(root, evidence):
         # Exercise real asynchronous UI state transitions. Both the first empty
         # snapshot and a new search clearing an existing discovery are valid.
         def wait_reference_state(label, predicate, seconds=45):
-            progress(label)
-            deadline = time.monotonic() + seconds
-            while time.monotonic() < deadline:
-                dialogs = [{"title": text(h), "controls": controls(h)}
-                           for h in windows(process.pid) if text(h, True) == "#32770"]
-                require(not dialogs, "Unexpected native modal dialog: " + json.dumps(dialogs))
-                if predicate():
-                    return
-                time.sleep(.1)
-            progress(label + " timed out", controls=controls(ref))
-            capture(ref, evidence / "references-state-failure.bmp")
-            raise TimeoutError("Native References state did not complete: " + label)
+            wait_native_state(label, predicate, ref, seconds)
 
         query = user.GetDlgItem(ref, 603)
         query_text = ctypes.create_unicode_buffer("saccharomyces cerevisiae")
@@ -703,7 +746,7 @@ def gui_smoke(root, evidence):
                   "normalControls": normal, "normalGeometry": normal_geometry,
                   "captures": [discovery_capture, capture(ref, evidence / "references-normal.bmp")],
                   "nativeSearchDiscoverSearch": True,
-                  "scope": "Automated Win32 launch, local-library loading, live search/discover/search reset, queued tab input, observed control non-overlap at normal/minimum size, resize and pixel capture; human usability acceptance remains separate."}
+                  "scope": "Automated Win32 launch, native task selection, local-library loading, live search/discover/search reset, queued tab input, compatible reference binding verified in the native input edit, observed control non-overlap at normal/minimum size, resize and pixel capture; human usability acceptance remains separate."}
         dpi = user.GetDpiForWindow(ref) or 96
         result["dpi"] = dpi
         progress("resize References to minimum")
@@ -743,6 +786,25 @@ def gui_smoke(root, evidence):
         result["downloadedGeometry"] = reference_control_geometry(local_controls, local=True)
         result["downloadedRows"] = rows
         result["captures"].append(capture(ref, evidence / "references-downloaded-minimum.bmp"))
+        receipt = json.loads((evidence / "reference-receipt.json").read_text(encoding="utf-8"))
+        genome = next(item for item in receipt["files"] if item["id"] == "genome")
+        wait_reference_state("select compatible native reference input", lambda:
+            send(user.GetDlgItem(ref, 613), 0x0146) == 1  # CB_GETCOUNT
+            and send(user.GetDlgItem(ref, 613), 0x0147) == 0  # CB_GETCURSEL
+            and user.IsWindowEnabled(user.GetDlgItem(ref, 614)), seconds=15)
+        details = control_text(user.GetDlgItem(ref, 608))
+        require(genome["path"] in details and genome["sha256"] in details,
+                "The native selected reference is not the exact downloaded genome.")
+        require(user.PostMessageW(user.GetDlgItem(ref, 614), 0x00F5, 0, 0),
+                "Could not click native Use for input.")  # queued BM_CLICK
+        wait_reference_state("bind reference through native Use for input", lambda:
+            any(item["text"] == genome["path"] for item in inspector_edits(main))
+            and "Reference assigned." in control_text(user.GetDlgItem(ref, 618)), seconds=15)
+        result["nativeReferenceBinding"] = {"tool": "bam/reference-index", "file": genome["path"],
+            "sha256": genome["sha256"], "matchingTargets": 1, "clickedUseForInput": True,
+            "inspectorEdits": inspector_edits(main), "assignedNotice": control_text(user.GetDlgItem(ref, 618))}
+        result["captures"].append(capture(ref, evidence / "references-bound.bmp"))
+        result["captures"].append(capture(main, evidence / "workspace-reference-bound.bmp"))
         progress("close References and desktop")
         send(ref, 0x0111, 619, 0)
         time.sleep(.1)
@@ -850,7 +912,7 @@ def main(argv=None):
         else:
             checkpoint(report, args, "gui: launch bounded 180-second native smoke")
             report["gui"] = gui_smoke_bounded(root, evidence)
-            report["checks"].append("Native app opened References, displayed five local files, kept controls separate at normal/minimum size and closed cleanly.")
+            report["checks"].append("Native app opened References, displayed five local files, bound the exact downloaded genome through its compatible native input, kept controls separate at normal/minimum size and closed cleanly.")
             checkpoint(report, args, report["checks"][-1])
         report["success"] = True
         checkpoint(report, args, "completed")

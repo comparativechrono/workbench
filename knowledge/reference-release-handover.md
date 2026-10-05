@@ -176,3 +176,21 @@ geometry do not establish broad human usability, all high-DPI/multi-monitor
 setups, Unicode/long paths, institutional proxies or human-genome performance.
 Scope stays on reference discovery/download; the signed pack catalogue is a
 separate project item.
+
+## Corrected rc3 native candidate acceptance
+
+Candidate `app-v0.7.0-rc3` at source `57d635370a1cd34dd1549aff95a2feba7faeeb74`
+passed native run [37318450359](https://github.com/comparativechrono/workbench/actions/runs/37318450359)
+in both ordinary and space-containing paths: eight checks and no skips. The
+[retained candidate evidence](evidence/reference-rc3-candidate-2026-10-05.json)
+records exact archive/report/artifact/capture hashes. Root and the evidence
+reviewer inspected the captures: startup error resolved, five products shown,
+search/discover/search reset successful, normal/minimum details gap 12 pixels,
+Downloaded tab populated and clean shutdown.
+
+All five public rc3 assets were independently downloaded and matched the frozen
+local bytes. The final staging archives are byte-identical copies of those
+validated candidate archives. Final-tag publication and its post-publication
+verification remain pending. A gate-only extension now adds a real native tool,
+clicks Use for input, and verifies the exact reference path in the inspector;
+its execution is pending. No application bytes are changed by this extension.
