@@ -656,7 +656,7 @@ def gui_smoke(root, evidence):
         result = {"launched": True, "pid": process.pid, "class": text(ref, True), "title": text(ref),
                   "normalControls": normal, "normalGeometry": normal_geometry,
                   "captures": [capture(ref, evidence / "references-normal.bmp")],
-                  "scope": "Automated Win32 launch, References command, controls, resize and pixel capture; human usability acceptance remains separate."}
+                  "scope": "Automated Win32 launch, local-library loading, queued tab input, observed control non-overlap at normal/minimum size, resize and pixel capture; human usability acceptance remains separate."}
         dpi = user.GetDpiForWindow(ref) or 96
         result["dpi"] = dpi
         progress("resize References to minimum")
@@ -803,7 +803,7 @@ def main(argv=None):
         else:
             checkpoint(report, args, "gui: launch bounded 180-second native smoke")
             report["gui"] = gui_smoke_bounded(root, evidence)
-            report["checks"].append("Native app opened References, resized and closed cleanly.")
+            report["checks"].append("Native app opened References, displayed five local files, kept controls separate at normal/minimum size and closed cleanly.")
             checkpoint(report, args, report["checks"][-1])
         report["success"] = True
         checkpoint(report, args, "completed")
