@@ -2831,6 +2831,10 @@ class Workspace {
       if (!getstr(state, "pendingSource").empty())
         status_text(L"Task library now shows tools compatible with the "
                     L"selected named output.");
+      else if (method == "workspace/mode" || method == "workspace/tool")
+        status_text(workflowMode
+                        ? L"Drag tools onto the canvas. Select a tool to edit its options."
+                        : L"Select a tool, choose its inputs and options, then run it locally.");
     } else if (method == "review") {
       std::wstring content;
       for (const auto &issue : result.get("issues").array_items())

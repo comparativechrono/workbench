@@ -487,6 +487,8 @@ def gui_contracts(root, evidence, report):
         ui.click_button(410)
         ui.wait("standalone input retained after workflow editing", lambda: has_text(chosen_reference))
         require(ui.label(ui.child(413)) == str(root / "examples" / "starter"), "Input browsing folder was lost.")
+        require(ui.label(ui.child(119)) == "Select a tool, choose its inputs and options, then run it locally.",
+                "Standalone status retained an instruction from workflow editing.")
         measure("tool", "restored")
         ui.user.MoveWindow(ui.main, 0, 0, 1100, 740, True)
         time.sleep(.2)
@@ -510,6 +512,7 @@ def gui_contracts(root, evidence, report):
                            "Canvas selection displays tool options on right",
                            "General settings remain available in workflow mode",
                            "Standalone input and browsing folder survive workflow mode",
+                           "Mode-specific status guidance replaces the previous workflow drag hint",
                            "Workflow graph/selection survives mode switching", "Normal/minimum observed pane separation"],
                 "notificationRegression": {"input": "Queued WM_LBUTTONDBLCLK and WM_LBUTTONUP to the real native ListView",
                                            "scope": "Hit-row activation without prior selection; separate from the SendInput pointer and drag assertions."},
