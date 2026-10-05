@@ -11,32 +11,49 @@ The application does not require Docker, WSL or a system Python installation.
 
 ## Release status
 
-Version **0.6.0 is a development prerelease**. The
-[application release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.6.0)
-and **32 independently versioned tool packs** are published on GitHub. The
-[release inventory](knowledge/release-inventory.json) records their downloads,
-sizes, SHA-256 checksums and dated validation evidence.
+Version **0.7.0 is a development prerelease**. The
+[application release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0)
+and **32 independently versioned tool packs** are published on GitHub. This
+application update adds a native **References** finder and reusable offline
+library for release-pinned Ensembl archive genome FASTA, GTF, cDNA, ncRNA and
+protein files, with hashes and provenance retained in analysis results.
+
+The exact published 0.7.0 starter and updater passed the native Windows gate:
+eight checks in each ordinary and space-containing path, with no failures or
+skips. Checks cover live reference discovery/downloads, cancellation, offline
+reuse, provenance, preserved-data updating, References layout and actual
+**Use for input** selection. Final public downloads were independently rehashed,
+and all twelve native interface captures were reviewed. GUI download/cancel
+button interactions, the updater folder picker and wider desktop/path acceptance
+remain outside this automated gate.
+See the [release handover](knowledge/reference-release-handover.md) and
+[release inventory](knowledge/release-inventory.json) for exact hashes and scope.
 
 The signed online catalogue and its `source.json` trust file are **not published
 or configured**. They require a maintainer-controlled signing key. Use the offline
 pack import described below until the signed feed is available.
 
-The application build passed 214 automated tests with one Windows-only skip, the eight
-starter installation/scientific checks, and an actual 0.5.4-to-0.6.0 updater
-migration on Linux. Scientific execution used the portable Linux reference
-backend. The current Windows GUI and native Windows long-path behavior still need
-validation on Windows. Separate native Windows pack checks validate the exact
-published STAR, kallisto, FastQC, MultiQC, featureCounts, BEDTools, BLAST, GATK,
-SnpEff, DESeq2, mosdepth, IQ-TREE, Kraken2 and Bracken archives
-through the released 0.6.0 native bridge in ordinary and space-containing paths;
-see the [dated evidence and limits](knowledge/current-state.md).
+Earlier application and optional-pack evidence retains its original scope.
+The 0.6.0 baseline's 214 automated passes, one Windows-only skip and Linux
+scientific/updater checks are historical results. Separate native Windows pack
+gates validate the published STAR, kallisto, FastQC, MultiQC, featureCounts,
+BEDTools, BLAST, GATK, SnpEff, DESeq2, mosdepth, IQ-TREE, Kraken2 and Bracken
+archives through the released 0.6.0 bridge; this application update does not
+replace those pack versions or rerun every pack's scientific suite.
 
 ## Using the application
 
 Download the starter ZIP from the
-[0.6.0 application release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.6.0),
+[0.7.0 application release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0),
 extract it and run `NativeWorkbench.exe`. Use **File > Check installation** to
 check the target machine.
+
+Open **References** to search the **Ensembl archive**, choose a numbered release
+and species/assembly, find files and explicitly download the required products.
+On **Downloaded**, select a reference and a compatible input, then choose
+**Use for input**. The local library works offline; loading or running an
+analysis does not start downloads. cDNA and ncRNA remain distinct products.
+See the [reference guide](docs/reference-discovery-0.7.md).
 
 For another tool, download its `native-workbench-pack-…zip` asset from the
 [pack releases](https://github.com/comparativechrono/workbench/releases). In
@@ -132,10 +149,13 @@ GenomicsDB, Spark, VQSR and Python-dependent GATK tools
 are outside this pack, and human whole-genome performance is not yet established.
 
 
-The separate updater requires an existing **0.5.4** installation. Close Workbench,
+The [0.7.0 updater](https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/native-workbench-0.7.0-update-from-0.6.0.zip)
+requires an existing **0.6.0** installation. Close Workbench,
 extract the updater outside the application folder, run `UpdateWorkbench.exe`,
-and choose the existing `native-workbench` folder. Installed packs, saved settings
-and results are retained.
+and choose the existing `native-workbench` folder. Installed packs, saved settings,
+results and downloaded references are retained. The native updater CLI and
+preservation were tested; its folder-picker interaction was not part of the
+automated gate.
 
 Saved pipelines retain exact pack versions and manifest hashes. Installing a
 newer pack does not silently change an existing pipeline. Methods descriptions,

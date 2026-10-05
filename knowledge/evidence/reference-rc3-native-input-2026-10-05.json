@@ -1,0 +1,201 @@
+{
+  "schema": 1,
+  "recordedDate": "2026-10-05",
+  "status": "candidate-extended-native-gate-passed-final-public-assets-pending",
+  "success": true,
+  "releaseTag": "app-v0.7.0-rc3",
+  "appVersion": "0.7.0",
+  "workflowRun": "https://github.com/comparativechrono/workbench/actions/runs/37319693097",
+  "applicationSourceCommit": "57d635370a1cd34dd1549aff95a2feba7faeeb74",
+  "gateSourceCommit": "6c266a58818886c6f4f5287006f20fafc5aadd68",
+  "gateSha256": "d7e8a12dbb6eb63b145388b2a7051e9126c86a7caf29ba209dc413931cdd8905",
+  "platform": "Windows-2022Server-10.0.20348-SP0",
+  "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+  "dpi": 96,
+  "starter": {
+    "name": "native-workbench-0.7.0-starter-windows.zip",
+    "sha256": "3d5b79924e5edc69efb7d4934696f6568377b63c312a666cc37e05b8707cf1ba"
+  },
+  "updater": {
+    "name": "native-workbench-0.7.0-update-from-0.6.0.zip",
+    "sha256": "9c86f8c7cbe7acb8c31cdb7472db815143e7cc63be8fda0113642baee17f1469"
+  },
+  "checks": [
+    "Live release-pinned yeast search and five-product discovery.",
+    "Cancellation after transferred bytes removed only its partial download and published no reference.",
+    "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+    "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+    "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods.",
+    "Installed application and starter pack integrity checks passed after reference use.",
+    "Native 0.6.0-to-0.7.0 core migration and idempotent repeat preserved optional packs, saved pins, references and results; updated private host reused them offline.",
+    "Native app opened References, displayed five local files, bound the exact downloaded genome through its compatible native input, kept controls separate at normal/minimum size and closed cleanly."
+  ],
+  "paths": [
+    {
+      "pathCase": "ordinary",
+      "success": true,
+      "passed": 8,
+      "skips": [],
+      "artifactId": 11349613264,
+      "artifactUrl": "https://github.com/comparativechrono/workbench/actions/runs/37319693097/artifacts/11349613264",
+      "artifactSha256": "6459bfa3301aad8508b4d4c8a3fd1ad57c68ab137bf4d001360cc0a655364224",
+      "downloadedArtifactHashVerified": true,
+      "reportSha256": "b4957bd72a44a5ca575fbfd9e817e319c696f8f368ee9fe0b070686ed21f7415",
+      "nativeReferenceBinding": {
+        "tool": "bam/reference-index",
+        "file": "D:\\a\\_temp\\ordinary\\reference data 7bzndob2\\ref-0bbb9395e8084a27\\Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa",
+        "sha256": "35cc97fccb91762c7a1f0f71b4adb1037b143d48b63fbd3b3f8bad45e5afa44c",
+        "matchingTargets": 1,
+        "clickedUseForInput": true,
+        "inspectorEdits": [
+          {
+            "id": 2006,
+            "text": "Index a reference"
+          },
+          {
+            "id": 2022,
+            "text": "D:\\a\\_temp\\ordinary\\reference data 7bzndob2\\ref-0bbb9395e8084a27\\Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa"
+          }
+        ],
+        "assignedNotice": "Reference assigned. Its download provenance will be retained with the run."
+      },
+      "nativeSearchDiscoverSearch": true,
+      "downloadedRows": 5,
+      "closedCleanly": true,
+      "allSixCapturesVisuallyReviewed": true,
+      "captures": [
+        {
+          "path": "references-discovered.bmp",
+          "width": 960,
+          "height": 728,
+          "sha256": "94188e9d417c2f53221f402b2c1fbb57c530d502db11dc25b599844d63000774"
+        },
+        {
+          "path": "references-normal.bmp",
+          "width": 960,
+          "height": 728,
+          "sha256": "af88c036281f956d8f8b639170f77cebf0a1c387ce2f0256fbad64ff13e45fc4"
+        },
+        {
+          "path": "references-minimum.bmp",
+          "width": 820,
+          "height": 680,
+          "sha256": "c8129f22caa3f24871e52c3b0a6617ce19a224501b80958d32e17a0a3d6e3ff0"
+        },
+        {
+          "path": "references-downloaded-minimum.bmp",
+          "width": 820,
+          "height": 680,
+          "sha256": "84718441d9918b8a86d1480ec0b7435ffe550c5c4806e1f438af7a815d62cb88"
+        },
+        {
+          "path": "references-bound.bmp",
+          "width": 820,
+          "height": 680,
+          "sha256": "56cac5109595d5c92e43c8b18328886d1b6a301af7825f814d9a054100aa7e43"
+        },
+        {
+          "path": "workspace-reference-bound.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "dcb59a6dd78119594da41b4c3517b2962f26a5761b966ffda127a6d1721f802e"
+        }
+      ],
+      "coreUpdate": {
+        "success": true,
+        "baseVersion": "0.6.0",
+        "targetVersion": "0.7.0",
+        "preservedFiles": 187,
+        "preservationChanges": {},
+        "preservationAdditions": {
+          "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+        },
+        "offlineRestart": true
+      }
+    },
+    {
+      "pathCase": "path with spaces",
+      "success": true,
+      "passed": 8,
+      "skips": [],
+      "artifactId": 11349073692,
+      "artifactUrl": "https://github.com/comparativechrono/workbench/actions/runs/37319693097/artifacts/11349073692",
+      "artifactSha256": "e760a670cefaa699384676336b0ab781eb034ba03f0cb66f0b94421025a82074",
+      "downloadedArtifactHashVerified": true,
+      "reportSha256": "d58db4c38c87215b137a1bde900f86f67a2db258f820f8039df3fbc120b13e25",
+      "nativeReferenceBinding": {
+        "tool": "bam/reference-index",
+        "file": "D:\\a\\_temp\\path with spaces\\reference data 8reepun1\\ref-3ab56c2673c9403d\\Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa",
+        "sha256": "35cc97fccb91762c7a1f0f71b4adb1037b143d48b63fbd3b3f8bad45e5afa44c",
+        "matchingTargets": 1,
+        "clickedUseForInput": true,
+        "inspectorEdits": [
+          {
+            "id": 2006,
+            "text": "Index a reference"
+          },
+          {
+            "id": 2022,
+            "text": "D:\\a\\_temp\\path with spaces\\reference data 8reepun1\\ref-3ab56c2673c9403d\\Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa"
+          }
+        ],
+        "assignedNotice": "Reference assigned. Its download provenance will be retained with the run."
+      },
+      "nativeSearchDiscoverSearch": true,
+      "downloadedRows": 5,
+      "closedCleanly": true,
+      "allSixCapturesVisuallyReviewed": true,
+      "captures": [
+        {
+          "path": "references-discovered.bmp",
+          "width": 960,
+          "height": 728,
+          "sha256": "91f5fdd0eda10b972858077fef6f71d6a112cb6cbb605e5b1fd66195d587f69e"
+        },
+        {
+          "path": "references-normal.bmp",
+          "width": 960,
+          "height": 728,
+          "sha256": "168fa801b5c7e6e329d0a48004020ec6b9ad3b00a9a748b79e012cd09e57d222"
+        },
+        {
+          "path": "references-minimum.bmp",
+          "width": 820,
+          "height": 680,
+          "sha256": "19d6f92a0f63ef20def8ac6731a7f533a061c8bc721c7ca977589ae989d7d069"
+        },
+        {
+          "path": "references-downloaded-minimum.bmp",
+          "width": 820,
+          "height": 680,
+          "sha256": "23d42c7dbf09036f5edc044f06cd0505413bb831ab35dd0c33b0402858e4d05a"
+        },
+        {
+          "path": "references-bound.bmp",
+          "width": 820,
+          "height": 680,
+          "sha256": "151ec2752479874013738e755aed807bd51318ddf613aaed4417368095555cc2"
+        },
+        {
+          "path": "workspace-reference-bound.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "bbd2620e85eba0f8f5b4d2a0653f4ad0e72f630f42a623aab88ec67082b11665"
+        }
+      ],
+      "coreUpdate": {
+        "success": true,
+        "baseVersion": "0.6.0",
+        "targetVersion": "0.7.0",
+        "preservedFiles": 187,
+        "preservationChanges": {},
+        "preservationAdditions": {
+          "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+        },
+        "offlineRestart": true
+      }
+    }
+  ],
+  "relationshipToEarlierEvidence": "Extends the unchanged RC3 application assets with native task selection, Use for input button interaction, and an exact downloaded genome path assertion against the native input edit. All earlier backend and GUI checks were repeated, and the six screenshots per path were visually reviewed.",
+  "validationBoundary": "Candidate evidence only; final public assets still require their own gate and download verification. The GUI now covers compatible native input assignment. Download/cancellation and scientific execution are exercised through the actual bundled host; click-through GUI download/cancel and the native updater folder picker remain outside this automated gate. No manual managed-PC, high-DPI/multi-monitor, Unicode/long-path, human-genome or institutional-proxy acceptance is claimed."
+}

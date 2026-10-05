@@ -1,0 +1,516 @@
+{
+  "schema": 1,
+  "recordedDate": "2026-10-05",
+  "status": "exact-final-public-assets-native-windows-gate-passed",
+  "success": true,
+  "releaseTag": "app-v0.7.0",
+  "releaseUrl": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0",
+  "appVersion": "0.7.0",
+  "workflowRun": "https://github.com/comparativechrono/workbench/actions/runs/37320844819",
+  "applicationBuildSourceCommit": "57d635370a1cd34dd1549aff95a2feba7faeeb74",
+  "releaseTagCommit": "6c266a58818886c6f4f5287006f20fafc5aadd68",
+  "gateSourceCommit": "6c266a58818886c6f4f5287006f20fafc5aadd68",
+  "gateSha256": "d7e8a12dbb6eb63b145388b2a7051e9126c86a7caf29ba209dc413931cdd8905",
+  "platform": "Windows-2022Server-10.0.20348-SP0",
+  "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+  "starter": {
+    "name": "native-workbench-0.7.0-starter-windows.zip",
+    "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/native-workbench-0.7.0-starter-windows.zip",
+    "sha256": "3d5b79924e5edc69efb7d4934696f6568377b63c312a666cc37e05b8707cf1ba"
+  },
+  "updater": {
+    "name": "native-workbench-0.7.0-update-from-0.6.0.zip",
+    "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/native-workbench-0.7.0-update-from-0.6.0.zip",
+    "sha256": "9c86f8c7cbe7acb8c31cdb7472db815143e7cc63be8fda0113642baee17f1469"
+  },
+  "checks": [
+    "Live release-pinned yeast search and five-product discovery.",
+    "Cancellation after transferred bytes removed only its partial download and published no reference.",
+    "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+    "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+    "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods.",
+    "Installed application and starter pack integrity checks passed after reference use.",
+    "Native 0.6.0-to-0.7.0 core migration and idempotent repeat preserved optional packs, saved pins, references and results; updated private host reused them offline.",
+    "Native app opened References, displayed five local files, bound the exact downloaded genome through its compatible native input, kept controls separate at normal/minimum size and closed cleanly."
+  ],
+  "downloadedProducts": [
+    {
+      "id": "genome",
+      "bytes": 12360704,
+      "sha256": "35cc97fccb91762c7a1f0f71b4adb1037b143d48b63fbd3b3f8bad45e5afa44c",
+      "compressed_bytes": 3784201,
+      "compressed_sha256": "a9953096d6a041a01a4cb5352b0232ee9373bf4c050fb23cb7ae673b2e1bb528",
+      "independentPinnedIdentity": true
+    },
+    {
+      "id": "annotation",
+      "bytes": 10463408,
+      "sha256": "8c43c98a3a0db24c9e53fd9d460f096c48de0eabefd955fd25d044c948692623",
+      "compressed_bytes": 595453,
+      "compressed_sha256": "253bd4013785b3c85a6a488bd541c12d8264aa4989046c3530d0d9ea2ecc931e",
+      "independentPinnedIdentity": true
+    },
+    {
+      "id": "cdna",
+      "bytes": 11714100,
+      "sha256": "0a60e3a655949edbed2e774deae38b896e78e623a45809eafe66d15f7062cf4d",
+      "compressed_bytes": 3806426,
+      "compressed_sha256": "3cc5b6bb7ff166cffac5c45317dad7052d06431f43f709ed14b33779702dc6a4",
+      "independentPinnedIdentity": true
+    },
+    {
+      "id": "ncrna",
+      "bytes": 205371,
+      "sha256": "e875aea40e6bfbf9811b73f30a459439fda48d5165fbaea4c2e4a7859e9c3753",
+      "compressed_bytes": 35424,
+      "compressed_sha256": "096064f75fc4c8eaf2845e52dd6d56e1e398f8da434abd8436cfaa2d71a3f604",
+      "independentPinnedIdentity": true
+    },
+    {
+      "id": "protein",
+      "bytes": 5873944,
+      "sha256": "fec10d61996147cbc29ed4587ed0bdeb4e4f5576d66896400b226f2d2d4815a4",
+      "compressed_bytes": 2700059,
+      "compressed_sha256": "67ae76c720e52cec167378ec2b8cb5c5929360fc30de31abb37ae1035ef8455c",
+      "independentPinnedIdentity": true
+    }
+  ],
+  "cancelAtBytes": 1048576,
+  "paths": [
+    {
+      "pathCase": "ordinary",
+      "jobId": 111799208758,
+      "success": true,
+      "passed": 8,
+      "failed": 0,
+      "skips": [],
+      "startedUtc": "2026-10-05T13:57:50.862813+00:00",
+      "completedUtc": "2026-10-05T13:58:21.678913+00:00",
+      "artifactId": 11349920830,
+      "artifactUrl": "https://github.com/comparativechrono/workbench/actions/runs/37320844819/artifacts/11349920830",
+      "artifactSha256": "e799da24900006fb357b4159541ce05cf006eed7a2ab70d5ccfecb1c93299aa5",
+      "artifactBytes": 227314,
+      "downloadedArtifactHashVerified": true,
+      "reportSha256": "2ea2b62054746dfc63a6c2b7e95cc6b711e28d73927da99bbe0b9cef8e6f67b4",
+      "gui": {
+        "scope": "Automated Win32 launch, native task selection, local-library loading, live search/discover/search reset, queued tab input, compatible reference binding verified in the native input edit, observed control non-overlap at normal/minimum size, resize and pixel capture; human usability acceptance remains separate.",
+        "dpi": 96,
+        "nativeSearchDiscoverSearch": true,
+        "normalGeometry": [
+          {
+            "upper": 605,
+            "lower": 606,
+            "gapPixels": 6
+          },
+          {
+            "upper": 606,
+            "lower": 607,
+            "gapPixels": 6
+          },
+          {
+            "upper": 607,
+            "lower": 608,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 609,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 610,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 611,
+            "gapPixels": 12
+          }
+        ],
+        "minimumGeometry": [
+          {
+            "upper": 605,
+            "lower": 606,
+            "gapPixels": 6
+          },
+          {
+            "upper": 606,
+            "lower": 607,
+            "gapPixels": 6
+          },
+          {
+            "upper": 607,
+            "lower": 608,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 609,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 610,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 611,
+            "gapPixels": 12
+          }
+        ],
+        "downloadedGeometry": [
+          {
+            "upper": 612,
+            "lower": 608,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 613,
+            "gapPixels": 11
+          },
+          {
+            "upper": 608,
+            "lower": 614,
+            "gapPixels": 11
+          },
+          {
+            "upper": 608,
+            "lower": 615,
+            "gapPixels": 11
+          }
+        ],
+        "downloadedRows": 5,
+        "nativeReferenceBinding": {
+          "tool": "bam/reference-index",
+          "file": "D:\\a\\_temp\\ordinary\\reference data 32wzyvl5\\ref-c0c429e634fd4c39\\Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa",
+          "sha256": "35cc97fccb91762c7a1f0f71b4adb1037b143d48b63fbd3b3f8bad45e5afa44c",
+          "matchingTargets": 1,
+          "clickedUseForInput": true,
+          "inspectorEdits": [
+            {
+              "id": 2006,
+              "text": "Index a reference"
+            },
+            {
+              "id": 2022,
+              "text": "D:\\a\\_temp\\ordinary\\reference data 32wzyvl5\\ref-c0c429e634fd4c39\\Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa"
+            }
+          ],
+          "assignedNotice": "Reference assigned. Its download provenance will be retained with the run."
+        },
+        "closedCleanly": true,
+        "captures": [
+          {
+            "path": "references-discovered.bmp",
+            "width": 960,
+            "height": 728,
+            "sha256": "94188e9d417c2f53221f402b2c1fbb57c530d502db11dc25b599844d63000774"
+          },
+          {
+            "path": "references-normal.bmp",
+            "width": 960,
+            "height": 728,
+            "sha256": "af88c036281f956d8f8b639170f77cebf0a1c387ce2f0256fbad64ff13e45fc4"
+          },
+          {
+            "path": "references-minimum.bmp",
+            "width": 820,
+            "height": 680,
+            "sha256": "c8129f22caa3f24871e52c3b0a6617ce19a224501b80958d32e17a0a3d6e3ff0"
+          },
+          {
+            "path": "references-downloaded-minimum.bmp",
+            "width": 820,
+            "height": 680,
+            "sha256": "250258239cb8ed4a79bb7e66e6f4ceef85e84f4e2515bffeea1aedc6ecd7de91"
+          },
+          {
+            "path": "references-bound.bmp",
+            "width": 820,
+            "height": 680,
+            "sha256": "b67bdaf606640200b52da5db671b6ccd9fc504e540e87c553532d57be3a9e471"
+          },
+          {
+            "path": "workspace-reference-bound.bmp",
+            "width": 1024,
+            "height": 728,
+            "sha256": "dcb59a6dd78119594da41b4c3517b2962f26a5761b966ffda127a6d1721f802e"
+          }
+        ]
+      },
+      "allSixCapturesVisuallyReviewed": true,
+      "coreUpdate": {
+        "success": true,
+        "baseVersion": "0.6.0",
+        "targetVersion": "0.7.0",
+        "baseArchiveSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+        "updateArchiveSha256": "9c86f8c7cbe7acb8c31cdb7472db815143e7cc63be8fda0113642baee17f1469",
+        "optionalPackArchiveSha256": "2dd05fece8deb2b0178d8b1bc2b6830f175b3fbc2f5a4d48f9c9023cbfe6775b",
+        "scope": "Actual native Windows updater CLI using its private runtime; native folder-picker interaction is not exercised.",
+        "nativeOptionalPackImport": true,
+        "install": {
+          "status": "installed",
+          "version": "0.7.0",
+          "migration": false,
+          "files_verified": 68,
+          "removed_files": 0,
+          "backup": "D:\\a\\_temp\\ordinary\\update target\\native-workbench\\updates\\core-0.7.0-20261005-135809-97b8e03a\\backup",
+          "packs_changed": false,
+          "source_and_evidence_preserved": true
+        },
+        "repeat": {
+          "status": "already-installed",
+          "version": "0.7.0",
+          "files_verified": 68
+        },
+        "preservationChanges": {},
+        "preservationAdditions": {
+          "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+        },
+        "preservedFiles": 187,
+        "optionalPin": {
+          "packId": "reads",
+          "packVersion": "0.4.0",
+          "manifestSha256": "65fc3065fb382ffdd13c4b94fa834b26531e63eb87858d84a4c173e567fb73c0"
+        },
+        "coreManifestSha256": "ee251a6545a8830a2f9fe7b46a523a04425aea37380f56ea9870ccc3cc149c4d",
+        "offlineRestart": true
+      },
+      "nativeIndex": {
+        "contigs": 17,
+        "bases": 12157105,
+        "sha256": "65163e1e9c8cb7b63f43befd8294019b11fba0c18dd37c801e9d356e71e391c3"
+      },
+      "installation": {
+        "passed": 7,
+        "failed": 0
+      }
+    },
+    {
+      "pathCase": "path with spaces",
+      "jobId": 111799209257,
+      "success": true,
+      "passed": 8,
+      "failed": 0,
+      "skips": [],
+      "startedUtc": "2026-10-05T13:57:51.891835+00:00",
+      "completedUtc": "2026-10-05T13:58:20.176836+00:00",
+      "artifactId": 11349559619,
+      "artifactUrl": "https://github.com/comparativechrono/workbench/actions/runs/37320844819/artifacts/11349559619",
+      "artifactSha256": "d2af546ae765089f30761756c66d393eae2c7cb77c13363b3124f0331e7b472b",
+      "artifactBytes": 227261,
+      "downloadedArtifactHashVerified": true,
+      "reportSha256": "1c72ceb66c011f21093353049be3e3ebecfffddf6ed209e67b28188944243ecd",
+      "gui": {
+        "scope": "Automated Win32 launch, native task selection, local-library loading, live search/discover/search reset, queued tab input, compatible reference binding verified in the native input edit, observed control non-overlap at normal/minimum size, resize and pixel capture; human usability acceptance remains separate.",
+        "dpi": 96,
+        "nativeSearchDiscoverSearch": true,
+        "normalGeometry": [
+          {
+            "upper": 605,
+            "lower": 606,
+            "gapPixels": 6
+          },
+          {
+            "upper": 606,
+            "lower": 607,
+            "gapPixels": 6
+          },
+          {
+            "upper": 607,
+            "lower": 608,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 609,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 610,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 611,
+            "gapPixels": 12
+          }
+        ],
+        "minimumGeometry": [
+          {
+            "upper": 605,
+            "lower": 606,
+            "gapPixels": 6
+          },
+          {
+            "upper": 606,
+            "lower": 607,
+            "gapPixels": 6
+          },
+          {
+            "upper": 607,
+            "lower": 608,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 609,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 610,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 611,
+            "gapPixels": 12
+          }
+        ],
+        "downloadedGeometry": [
+          {
+            "upper": 612,
+            "lower": 608,
+            "gapPixels": 12
+          },
+          {
+            "upper": 608,
+            "lower": 613,
+            "gapPixels": 11
+          },
+          {
+            "upper": 608,
+            "lower": 614,
+            "gapPixels": 11
+          },
+          {
+            "upper": 608,
+            "lower": 615,
+            "gapPixels": 11
+          }
+        ],
+        "downloadedRows": 5,
+        "nativeReferenceBinding": {
+          "tool": "bam/reference-index",
+          "file": "D:\\a\\_temp\\path with spaces\\reference data nx23u89h\\ref-325b9508193d452a\\Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa",
+          "sha256": "35cc97fccb91762c7a1f0f71b4adb1037b143d48b63fbd3b3f8bad45e5afa44c",
+          "matchingTargets": 1,
+          "clickedUseForInput": true,
+          "inspectorEdits": [
+            {
+              "id": 2006,
+              "text": "Index a reference"
+            },
+            {
+              "id": 2022,
+              "text": "D:\\a\\_temp\\path with spaces\\reference data nx23u89h\\ref-325b9508193d452a\\Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa"
+            }
+          ],
+          "assignedNotice": "Reference assigned. Its download provenance will be retained with the run."
+        },
+        "closedCleanly": true,
+        "captures": [
+          {
+            "path": "references-discovered.bmp",
+            "width": 960,
+            "height": 728,
+            "sha256": "91f5fdd0eda10b972858077fef6f71d6a112cb6cbb605e5b1fd66195d587f69e"
+          },
+          {
+            "path": "references-normal.bmp",
+            "width": 960,
+            "height": 728,
+            "sha256": "168fa801b5c7e6e329d0a48004020ec6b9ad3b00a9a748b79e012cd09e57d222"
+          },
+          {
+            "path": "references-minimum.bmp",
+            "width": 820,
+            "height": 680,
+            "sha256": "19d6f92a0f63ef20def8ac6731a7f533a061c8bc721c7ca977589ae989d7d069"
+          },
+          {
+            "path": "references-downloaded-minimum.bmp",
+            "width": 820,
+            "height": 680,
+            "sha256": "2bbdb8df105a77e122413358e4c06af691311df20021edf26d3232d33facf3ce"
+          },
+          {
+            "path": "references-bound.bmp",
+            "width": 820,
+            "height": 680,
+            "sha256": "26c40b95491725fe7138263d927c0f5cbd0d39f49291eadcd1b4364fe38bb8b3"
+          },
+          {
+            "path": "workspace-reference-bound.bmp",
+            "width": 1024,
+            "height": 728,
+            "sha256": "bbd2620e85eba0f8f5b4d2a0653f4ad0e72f630f42a623aab88ec67082b11665"
+          }
+        ]
+      },
+      "allSixCapturesVisuallyReviewed": true,
+      "coreUpdate": {
+        "success": true,
+        "baseVersion": "0.6.0",
+        "targetVersion": "0.7.0",
+        "baseArchiveSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+        "updateArchiveSha256": "9c86f8c7cbe7acb8c31cdb7472db815143e7cc63be8fda0113642baee17f1469",
+        "optionalPackArchiveSha256": "2dd05fece8deb2b0178d8b1bc2b6830f175b3fbc2f5a4d48f9c9023cbfe6775b",
+        "scope": "Actual native Windows updater CLI using its private runtime; native folder-picker interaction is not exercised.",
+        "nativeOptionalPackImport": true,
+        "install": {
+          "status": "installed",
+          "version": "0.7.0",
+          "migration": false,
+          "files_verified": 68,
+          "removed_files": 0,
+          "backup": "D:\\a\\_temp\\path with spaces\\update target\\native-workbench\\updates\\core-0.7.0-20261005-135808-1f0a0b86\\backup",
+          "packs_changed": false,
+          "source_and_evidence_preserved": true
+        },
+        "repeat": {
+          "status": "already-installed",
+          "version": "0.7.0",
+          "files_verified": 68
+        },
+        "preservationChanges": {},
+        "preservationAdditions": {
+          "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+        },
+        "preservedFiles": 187,
+        "optionalPin": {
+          "packId": "reads",
+          "packVersion": "0.4.0",
+          "manifestSha256": "65fc3065fb382ffdd13c4b94fa834b26531e63eb87858d84a4c173e567fb73c0"
+        },
+        "coreManifestSha256": "ee251a6545a8830a2f9fe7b46a523a04425aea37380f56ea9870ccc3cc149c4d",
+        "offlineRestart": true
+      },
+      "nativeIndex": {
+        "contigs": 17,
+        "bases": 12157105,
+        "sha256": "65163e1e9c8cb7b63f43befd8294019b11fba0c18dd37c801e9d356e71e391c3"
+      },
+      "installation": {
+        "passed": 7,
+        "failed": 0
+      }
+    }
+  ],
+  "verificationPerformedNow": [
+    "Retrieved current GitHub job conclusions: both matrix jobs and every executed step succeeded.",
+    "Downloaded both final-run artifact ZIPs and independently matched their SHA-256 values to GitHub artifact digests.",
+    "Verified both reports identify app-v0.7.0, the exact final starter/updater hashes, eight passing checkpoints and no skips.",
+    "Verified every capture hash against its report and visually reviewed all six screenshots in each path.",
+    "Observed native discovery of five products, repeated-search reset, five local rows, successful Use for input assignment and native workspace confirmation.",
+    "Confirmed positive control spacing at normal/minimum size and clean application close."
+  ],
+  "relationshipToCandidateEvidence": "This independently reran the extended native gate against the final app-v0.7.0 public download URLs. Starter and updater bytes are identical to the validated RC3 candidate; candidate reports remain separate historical evidence.",
+  "updateMeaning": "The update is from the published app-v0.6.0 starter to app 0.7.0. Each native updater transaction verified 68 target core files and preserved 187 pre-existing pack, saved-setting, reference and result files, then repeated idempotently and reopened the updated host offline. The only permitted addition was the exact one-byte user-data/session.lock coordination file.",
+  "validationBoundary": "Exact Windows Server 2022 final-package validation in ordinary and space-containing paths at 96 DPI. Native GUI launch, discovery/search reset, Downloaded view, actual compatible Use for input button and exact native input value are exercised. Explicit downloads/cancellation, socket-denied offline reuse, hashes, provenance and SAMtools scientific execution are exercised through the packaged private host. Click-through GUI download/cancel, the updater folder picker, managed-PC human usability, high-DPI/multi-monitor, Unicode/long paths, human-genome datasets and institutional proxies were not tested by this gate. No unavailable check is counted as passed."
+}

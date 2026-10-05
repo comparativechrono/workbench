@@ -1,9 +1,13 @@
 # Reference discovery release handover
 
-Resume audit: **2026-10-05**. Target: **Native Workbench 0.7.0**. Status at this
-checkpoint: existing source fixes are present; a rebuilt candidate, native
-Windows acceptance and the final release remain pending. This record does not
-claim that packaging or cross-compilation establishes Windows execution.
+Updated **2026-10-05**. **Native Workbench 0.7.0** is published as a development
+prerelease at [app-v0.7.0](https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0).
+The exact-final native [run 37320844819](https://github.com/comparativechrono/workbench/actions/runs/37320844819)
+passed all eight checks in both paths, with zero failures or skips, and final
+public downloads are independently verified. Reference discovery/download is
+complete within the documented validation scope. The dated intermediate
+checkpoints below preserve their original scope and failures; the final section
+supersedes their pending-release status.
 
 ## Recovered repository and release state
 
@@ -93,12 +97,6 @@ record Linux/Python 3.12.14 checks at source
 | Core updater | 16 |
 | **Total** | **93** |
 
-The current geometry regression gate also rejected the independently captured
-rc1 bounds with the expected negative 15-pixel gap; that confirms it detects
-the original defect, without claiming corrected native layout success. The
-[build record](evidence/reference-resume-build-2026-10-05.json) retains the three
-successful strict cross-builds and output hashes; native execution remains pending.
-
 There were zero failures, errors or skips in the 93 source tests. These are deterministic source
 contracts, with no fresh live-network, native Windows GUI or scientific
 execution claim. The report also compared all 15 runtime hashes in the
@@ -154,7 +152,7 @@ and a second search that clears the previous discovery. These source/gate edits
 await an exact rebuilt **rc3** native run. Rc2 remains an immutable failed
 candidate, and final 0.7.0 release acceptance remains pending.
 
-## Remaining release gates
+## Initial release-gate checklist (historical)
 
 1. Build and package the corrected desktop, bridge, updater and matching source
    companion from a recorded source commit, preserving the exact 0.6.0 baseline
@@ -190,7 +188,80 @@ Downloaded tab populated and clean shutdown.
 
 All five public rc3 assets were independently downloaded and matched the frozen
 local bytes. The final staging archives are byte-identical copies of those
-validated candidate archives. Final-tag publication and its post-publication
-verification remain pending. A gate-only extension now adds a real native tool,
-clicks Use for input, and verifies the exact reference path in the inspector;
-its execution is pending. No application bytes are changed by this extension.
+validated candidate archives. A gate-only extension then added a real native
+tool, clicked **Use for input**, and verified the exact downloaded genome path
+in the native inspector. [Run 37319693097](https://github.com/comparativechrono/workbench/actions/runs/37319693097)
+passed all eight checks in both paths with no skips, using the unchanged rc3
+application and gate commit `6c266a58818886c6f4f5287006f20fafc5aadd68`.
+The [extended candidate evidence](evidence/reference-rc3-native-input-2026-10-05.json)
+retains the exact binding and all twelve reviewed capture hashes. No application
+bytes changed for the gate extension.
+
+## Final publication and exact-final validation
+
+The final [app-v0.7.0 release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0)
+was published at 2026-10-05T13:54:17Z as a development prerelease. Its five initial
+assets are byte-identical to rc3. Each final URL was independently downloaded,
+rehashed and matched against the frozen file and GitHub digest; see the
+[public-download record](evidence/reference-0.7.0-public-downloads-2026-10-05.json)
+and [build record](evidence/reference-0.7.0-build-2026-10-05.json).
+
+| Final application asset | Bytes | SHA-256 |
+| --- | ---: | --- |
+| `native-workbench-0.7.0-starter-windows.zip` | 16,916,149 | `3d5b79924e5edc69efb7d4934696f6568377b63c312a666cc37e05b8707cf1ba` |
+| `native-workbench-0.7.0-update-from-0.6.0.zip` | 12,830,009 | `9c86f8c7cbe7acb8c31cdb7472db815143e7cc63be8fda0113642baee17f1469` |
+| `native-workbench-0.7.0-source.zip` | 46,002,233 | `4b4993d710430c735fff69f2655781711abcda601833de1e481411913b8c164e` |
+
+The release tag points to **`6c266a58818886c6f4f5287006f20fafc5aadd68`**; the
+immutable archives were built from **`57d635370a1cd34dd1549aff95a2feba7faeeb74`**.
+The intervening changes affect the gate and evidence/handover only; application
+runtime, desktop and packaging sources are identical. The source companion's
+creation-time pending statements remain historical and are superseded only by
+separate later evidence, never by changing the published archive.
+
+Exact-final [run 37320844819](https://github.com/comparativechrono/workbench/actions/runs/37320844819)
+independently exercised the final release URLs at gate commit `6c266a5`. Both
+ordinary and space-containing paths passed **eight checks, zero failures and
+zero skips**. All twelve captures were downloaded, hash-checked and visually
+reviewed. The [final native report](evidence/reference-0.7.0-final-windows-2026-10-05.json)
+records exact archive, report and evidence hashes, and distinguishes this final
+run from the successful candidates.
+
+The final native UI opened without the rc2 modal, discovered all five products,
+cleared a prior discovery on a new search, populated five downloaded rows, used
+the real **Use for input** button and displayed the exact genome path in the
+native tool inspector. Normal/minimum details-to-destination spacing was 12
+pixels; the application closed cleanly. The packaged host separately verified
+all five compressed/expanded identities, cancellation, socket-denied offline
+reuse and frozen provenance. Native SAMtools indexed all 17 yeast contigs.
+The native updater CLI verified 68 target core files, preserved all 187 existing
+pack/settings/reference/result files, repeated idempotently, and reopened the
+updated host offline. Only the expected coordination lock was added.
+
+There is no outstanding implementation or native reference-gate blocker. The
+scope excludes click-through GUI download/cancel, the updater folder picker,
+whole-desktop/manual managed-PC acceptance, high-DPI/multi-monitor operation,
+Unicode/long paths, institutional proxies and human-genome performance. The
+network-denied private host was not an operating-system firewall test.
+
+The release also publishes [RELEASE-VALIDATION.json](https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/RELEASE-VALIDATION.json),
+[WINDOWS-EVIDENCE.zip](https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/WINDOWS-EVIDENCE.zip)
+and [EVIDENCE-SHA256SUMS.txt](https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/EVIDENCE-SHA256SUMS.txt).
+The [retained release report](evidence/reference-0.7.0-release-validation-2026-10-05.json)
+closes the native release gate. The [final eight-asset verification](evidence/reference-0.7.0-final-assets-2026-10-05.json)
+records independent downloads of the three supplements, rehashed retained
+initial downloads, unchanged original asset IDs/current digests, and verified
+supplemental checksum entries. All eight public assets match their frozen
+bytes. No original archive or checksum file was replaced. There are no
+outstanding release-publication or reference-feature blockers.
+
+## Source stream and preserved independent work
+
+This release follows `release/reference-0.7.0-completion` from the resumed
+`main` baseline `5338853`. A concurrent independent branch
+`finish-reference-release` at `4eef03ddf2ad6b0426e054171c8aafe9e752e73e` also
+identified the null-state issue. Its report explicitly recorded blocked release,
+no publication and unrun native validation for its own patch, and preserved this
+stream's rc2. That separate patch was **not merged or used** in the released
+application. The branch is preserved; its report must not be mistaken for the
+status or provenance of this release.

@@ -1,13 +1,16 @@
 # Current project state
 
-Snapshot: **2026-10-05**. Starting source baseline:
-[`8f95caa1f267d19ce72ea3cd7f2396ae66a801c1`](https://github.com/comparativechrono/workbench/tree/8f95caa1f267d19ce72ea3cd7f2396ae66a801c1).
+Snapshot: **2026-10-05**. Application **0.7.0** is published as a development
+prerelease; its exact-final native reference gate passed. Packaged source:
+[`57d635370a1cd34dd1549aff95a2feba7faeeb74`](https://github.com/comparativechrono/workbench/tree/57d635370a1cd34dd1549aff95a2feba7faeeb74).
+Release tag `app-v0.7.0` points to `6c266a58818886c6f4f5287006f20fafc5aadd68`,
+which adds gate/evidence changes without changing application/runtime bytes.
 Read this alongside the [machine-readable release inventory](release-inventory.json)
 and the repository [README](../README.md). Update the date, source baseline and
 evidence when the state changes; do not silently turn a pending item into a claim
 of completion.
 
-## Reference-discovery development
+## Reference-discovery release
 
 The 0.7 source adds a native References finder and offline local library,
 initially using release-pinned Ensembl archive datasets. Genome FASTA, GTF,
@@ -17,21 +20,37 @@ the frozen plan, methods and results. Reference datasets stay separate from
 executable packs. Current reference documentation is in the
 [0.7 guide](../docs/reference-discovery-0.7.md).
 
-This section records implementation work, not a published release or completed
-Windows acceptance claim. Candidate and exact-final release evidence will be
-recorded separately after testing. The 0.7 packaging also includes AGENTS and
-knowledge files in the source companion and supports a preserved-data update
-from the exact 0.6.0 starter. The released baseline below remains dated evidence.
+The [0.7.0 release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0)
+promotes the exact rc3 archives. The separate exact-final native
+[run 37320844819](https://github.com/comparativechrono/workbench/actions/runs/37320844819)
+passed eight checks in each ordinary and space-containing Windows path, with
+zero failures or skips. Live downloads/cancellation, integrity, offline reference
+use and native SAMtools indexing, frozen provenance, 0.6.0-to-0.7.0 preservation,
+measured References layout, search/discovery/reset and actual **Use for input**
+binding were checked. All twelve final captures were reviewed and their hashes
+verified. The [final native record](evidence/reference-0.7.0-final-windows-2026-10-05.json)
+and [final eight-asset verification](evidence/reference-0.7.0-final-assets-2026-10-05.json)
+bind this completed release gate to its exact bytes. The release supplies the
+final report, full Windows evidence and supplemental checksums; candidate
+evidence remains separate history.
 
-### Resumed release audit, 2026-10-05
+The source companion includes AGENTS and knowledge files. The updater preserves
+installed packs, saved pins/settings, results and references. Its tested native
+CLI is distinct from the untested updater folder-picker interaction. Click-through
+GUI download/cancel, wider high-DPI/multi-monitor acceptance, Unicode/long paths,
+human genomes and institutional proxies remain outside the automated gate.
+The [release handover](reference-release-handover.md) retains exact identities,
+failed candidates and scoped evidence; existing pack audits remain dated.
+
+### Initial resume audit, retained as history
 
 The resume started from clean `main` at
 `5338853ba3b69438fc36c1b9dcd3ad89d6bbcde4`; work continues on
 `release/reference-0.7.0-completion`. The published diagnostic candidate
 [`app-v0.7.0-rc1`](https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0-rc1)
 points to `8ad25c71ec13d2c06a670b59a2cc13ca84a50ac9`. An exact GitHub release lookup
-for `app-v0.7.0` returned 404 during this audit. Version 0.7.0 is **not yet a
-completed release**; the candidate does not contain the later interface fix.
+for `app-v0.7.0` returned 404 at the initial audit. At that checkpoint 0.7.0 was
+not a completed release, and rc1 did not contain the later interface fix.
 
 The missing interface finding is now recovered: the online References details
 panel overlapped the destination/download row by 15 pixels. The last Windows
@@ -61,7 +80,7 @@ gates. The 0.6.0 and pack inventory below retains its original audit scope.
 
 ## What is available
 
-The native desktop application **0.6.0** and **32 distinct tool packs** are
+The native desktop application **0.7.0** and **32 distinct tool packs** are
 published as development prereleases. There are 33 published pack versions,
 because kallisto 1.0.0 is retained after being superseded by 1.0.1. Historical
 candidate releases are additional diagnostics, not current analysis packs.
@@ -70,10 +89,14 @@ The Windows starter contains only the `align`, `bam` and `variants` packs
 (minimap2, SAMtools and BCFtools). Users extract the starter and run
 `NativeWorkbench.exe`; no Docker, WSL, browser launch or system Python is required.
 Additional packs install through **Manage tools > Import pack ZIP**, including on
-offline computers. The [0.6.0 application release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.6.0)
-also supplies a separate updater for an existing **0.5.4** installation, an SDK,
-the explicit source companion, checksums and a verification report. The starter
-is 16,871,065 bytes; individual tool packs can be much larger.
+offline computers. The [0.7.0 application release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0)
+supplies a 16,916,149-byte starter, a separate updater for an existing **0.6.0**
+installation, the explicit matching source companion and checksums/build evidence.
+Individual tool packs can be much larger. The unchanged
+[0.6.0 baseline release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.6.0)
+retains its historical 0.5.4 updater, SDK, source and verification assets; its
+16,871,065-byte starter is the exact baseline for the new update. The JSON
+inventory preserves that earlier application record separately.
 
 The current published pack identities are below. The JSON inventory records
 their exact release URLs, archive filenames, sizes and GitHub-reported digests.
@@ -131,6 +154,7 @@ dated evidence for its original bytes, not a fresh test of every older tool.
 
 | Component | Recorded evidence | Boundary |
 | --- | --- | --- |
+| App 0.7.0 | 93 fresh Linux source-contract passes; exact published starter/updater passed eight native Windows checkpoints per path with zero failures/skips; all twelve final GUI captures reviewed; final public assets independently downloaded and rehashed | References-specific GUI and packaged-host/native CLI coverage at 96 DPI on Windows Server 2022; GUI download/cancel clicks, updater folder picker and broader desktop/path acceptance remain outside the gate. |
 | App 0.6.0 | 214 automated tests passed, one Windows-only skip; eight starter checks; actual 0.5.4-to-0.6.0 updater migration on Linux; desktop/updater compiled with warnings treated as errors | Scientific execution used the portable Linux reference backend. This is not proof of the current Windows GUI or native long-path behavior. |
 | Original 18 independent archives | Preserved original pack IDs, versions, manifests, contents and licence/source materials; archive inventories, sizes, hashes and ZIP CRCs audited | Repackaging did not constitute a new native Windows execution test for every tool. |
 | STAR 1.0.0 | Eight Linux scientific tests and six released-app graph/import contracts; exact published archive passed native Windows CI in ordinary and space-containing paths | Five scientific fixtures plus a two-thread, two-pass buffer regression; small synthetic data, not a human-genome benchmark. |
@@ -415,10 +439,12 @@ or human-genome/cohort performance.
    maintainer-controlled external signing key and independently checked public
    fingerprint are required. An unsigned preview, GitHub credentials or this
    inventory cannot substitute for that trust configuration.
-2. **Native desktop acceptance and long paths.** Validate the current 0.6.0 GUI,
-   updater and long-path behavior on Windows, then record the exact app/pack
-   versions and environment. Run **File > Check installation** on target
-   machines. Native command-line pack CI does not close these outstanding items.
+2. **Broader desktop acceptance and long paths.** The 0.7.0 reference gate covers
+   the measured References interactions at 96 DPI; it does not establish the
+   entire desktop, GUI download/cancel, updater folder picker, high-DPI or
+   multi-monitor behavior, Unicode/long paths or managed-PC usability. Record
+   exact versions/environment when adding those checks, and run
+   **File > Check installation** on target machines.
 3. **Broader scientific and usability coverage.** Expand native checks for packs
    without equivalent current evidence, resource guidance and representative
    datasets. Preserve tool defaults in validation cases and exercise optional
@@ -426,7 +452,7 @@ or human-genome/cohort performance.
    release diagnostics.
 4. **Future schema improvements.** Reusable STAR indexes need a designed,
    versioned directory-product contract; tool-specific index typing is also a
-   useful extension. These are proposals, not implemented 0.6.0 features.
+   useful extension. These remain proposals, not implemented 0.7.0 features.
 
 The older `publishing/releases-0.6.0.json`,
 `publishing/publication-layout-0.6.0.json` and parts of the publication guide
@@ -453,7 +479,7 @@ additional local-failure regressions. Only the separate exact-final gate validat
 the published 1.0.0 archive.
 
 Finally, a Git clone alone is not the full third-party build environment. Recover
-the explicit [application source companion](https://github.com/comparativechrono/workbench/releases/download/app-v0.6.0/native-workbench-0.6.0-source.zip)
+the explicit [0.7.0 application source companion](https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/native-workbench-0.7.0-source.zip)
 and matching pack source/licence materials as described in
 [source recovery](../docs/source-recovery/README.md). Do not depend on a previous
 agent's scratch paths, compiler cache, browser session or unpublished credentials.

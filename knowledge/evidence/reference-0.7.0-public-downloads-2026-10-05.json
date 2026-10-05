@@ -1,0 +1,124 @@
+{
+  "schema": 1,
+  "recordedAt": "2026-10-05T13:56:28.254910+00:00",
+  "kind": "independent-public-release-download-verification",
+  "release": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0",
+  "releaseTagCommit": "6c266a58818886c6f4f5287006f20fafc5aadd68",
+  "packagedSourceCommit": "57d635370a1cd34dd1549aff95a2feba7faeeb74",
+  "sourceCommitDistinction": "The release tag includes later validation/evidence changes; the exact promoted application and source archives remain rc3 bytes from packagedSourceCommit.",
+  "tagDeltaFiles": [
+    "knowledge/evidence/reference-rc3-candidate-2026-10-05.json",
+    "knowledge/reference-release-handover.md",
+    "scripts/check_references_windows.py"
+  ],
+  "applicationRuntimeAndPackagingSourcesIdenticalAcrossTagDelta": true,
+  "nativeWindowsExecuted": false,
+  "allAssetsVerified": true,
+  "assets": [
+    {
+      "file": "native-workbench-0.7.0-source.zip",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/native-workbench-0.7.0-source.zip",
+      "frozenBytes": 46002233,
+      "frozenSha256": "4b4993d710430c735fff69f2655781711abcda601833de1e481411913b8c164e",
+      "downloadedBytes": 46002233,
+      "downloadedSha256": "4b4993d710430c735fff69f2655781711abcda601833de1e481411913b8c164e",
+      "success": true,
+      "githubAssetId": 612700486,
+      "githubReportedDigestVerified": true
+    },
+    {
+      "file": "native-workbench-0.7.0-starter-windows.zip",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/native-workbench-0.7.0-starter-windows.zip",
+      "frozenBytes": 16916149,
+      "frozenSha256": "3d5b79924e5edc69efb7d4934696f6568377b63c312a666cc37e05b8707cf1ba",
+      "downloadedBytes": 16916149,
+      "downloadedSha256": "3d5b79924e5edc69efb7d4934696f6568377b63c312a666cc37e05b8707cf1ba",
+      "success": true,
+      "githubAssetId": 612700702,
+      "githubReportedDigestVerified": true
+    },
+    {
+      "file": "native-workbench-0.7.0-update-from-0.6.0.zip",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/native-workbench-0.7.0-update-from-0.6.0.zip",
+      "frozenBytes": 12830009,
+      "frozenSha256": "9c86f8c7cbe7acb8c31cdb7472db815143e7cc63be8fda0113642baee17f1469",
+      "downloadedBytes": 12830009,
+      "downloadedSha256": "9c86f8c7cbe7acb8c31cdb7472db815143e7cc63be8fda0113642baee17f1469",
+      "success": true,
+      "githubAssetId": 612700796,
+      "githubReportedDigestVerified": true
+    },
+    {
+      "file": "BUILD-VALIDATION.json",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/BUILD-VALIDATION.json",
+      "frozenBytes": 12737,
+      "frozenSha256": "def86d4053e506d5376f69da292acf5bb4a517683f7b14b107cfde02be8a3ad6",
+      "downloadedBytes": 12737,
+      "downloadedSha256": "def86d4053e506d5376f69da292acf5bb4a517683f7b14b107cfde02be8a3ad6",
+      "success": true,
+      "githubAssetId": 612700837,
+      "githubReportedDigestVerified": true
+    },
+    {
+      "file": "SHA256SUMS.txt",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/SHA256SUMS.txt",
+      "frozenBytes": 408,
+      "frozenSha256": "396170bc664bff45e60dede293edbe2cae282460ccafedcbb331195ca103c593",
+      "downloadedBytes": 408,
+      "downloadedSha256": "396170bc664bff45e60dede293edbe2cae282460ccafedcbb331195ca103c593",
+      "success": true,
+      "githubAssetId": 612700848,
+      "githubReportedDigestVerified": true
+    }
+  ],
+  "publicReleaseMetadata": {
+    "id": 403758756,
+    "tag_name": "app-v0.7.0",
+    "target_commitish": "release/reference-0.7.0-completion",
+    "draft": false,
+    "prerelease": true,
+    "created_at": "2026-10-05T13:46:31Z",
+    "published_at": "2026-10-05T13:54:17Z",
+    "html_url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0",
+    "assets": [
+      {
+        "id": 612700837,
+        "name": "BUILD-VALIDATION.json",
+        "size": 12737,
+        "digest": "sha256:def86d4053e506d5376f69da292acf5bb4a517683f7b14b107cfde02be8a3ad6",
+        "browser_download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/BUILD-VALIDATION.json"
+      },
+      {
+        "id": 612700486,
+        "name": "native-workbench-0.7.0-source.zip",
+        "size": 46002233,
+        "digest": "sha256:4b4993d710430c735fff69f2655781711abcda601833de1e481411913b8c164e",
+        "browser_download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/native-workbench-0.7.0-source.zip"
+      },
+      {
+        "id": 612700702,
+        "name": "native-workbench-0.7.0-starter-windows.zip",
+        "size": 16916149,
+        "digest": "sha256:3d5b79924e5edc69efb7d4934696f6568377b63c312a666cc37e05b8707cf1ba",
+        "browser_download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/native-workbench-0.7.0-starter-windows.zip"
+      },
+      {
+        "id": 612700796,
+        "name": "native-workbench-0.7.0-update-from-0.6.0.zip",
+        "size": 12830009,
+        "digest": "sha256:9c86f8c7cbe7acb8c31cdb7472db815143e7cc63be8fda0113642baee17f1469",
+        "browser_download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/native-workbench-0.7.0-update-from-0.6.0.zip"
+      },
+      {
+        "id": 612700848,
+        "name": "SHA256SUMS.txt",
+        "size": 408,
+        "digest": "sha256:396170bc664bff45e60dede293edbe2cae282460ccafedcbb331195ca103c593",
+        "browser_download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/SHA256SUMS.txt"
+      }
+    ]
+  },
+  "exactFiveInitialAssetSetVerified": true,
+  "remoteTagCommit": "6c266a58818886c6f4f5287006f20fafc5aadd68",
+  "remoteTagCommitVerified": true
+}

@@ -1,0 +1,405 @@
+{
+  "schema": 1,
+  "createdAt": "2026-10-05T13:41:53.647696+00:00",
+  "kind": "release-promotion-evidence",
+  "version": "0.7.0",
+  "releaseTag": "app-v0.7.0",
+  "status": "exact-final-public-assets-verified-and-native-windows-gate-passed",
+  "promotedFrom": "app-v0.7.0-rc3",
+  "assets": [
+    {
+      "file": "native-workbench-0.7.0-source.zip",
+      "bytes": 46002233,
+      "sha256": "4b4993d710430c735fff69f2655781711abcda601833de1e481411913b8c164e",
+      "byteIdenticalTo": "app-v0.7.0-rc3",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/native-workbench-0.7.0-source.zip"
+    },
+    {
+      "file": "native-workbench-0.7.0-starter-windows.zip",
+      "bytes": 16916149,
+      "sha256": "3d5b79924e5edc69efb7d4934696f6568377b63c312a666cc37e05b8707cf1ba",
+      "byteIdenticalTo": "app-v0.7.0-rc3",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/native-workbench-0.7.0-starter-windows.zip"
+    },
+    {
+      "file": "native-workbench-0.7.0-update-from-0.6.0.zip",
+      "bytes": 12830009,
+      "sha256": "9c86f8c7cbe7acb8c31cdb7472db815143e7cc63be8fda0113642baee17f1469",
+      "byteIdenticalTo": "app-v0.7.0-rc3",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/native-workbench-0.7.0-update-from-0.6.0.zip"
+    },
+    {
+      "file": "BUILD-VALIDATION.json",
+      "bytes": 12737,
+      "sha256": "def86d4053e506d5376f69da292acf5bb4a517683f7b14b107cfde02be8a3ad6",
+      "byteIdenticalTo": "app-v0.7.0-rc3",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/BUILD-VALIDATION.json"
+    },
+    {
+      "file": "SHA256SUMS.txt",
+      "bytes": 408,
+      "sha256": "396170bc664bff45e60dede293edbe2cae282460ccafedcbb331195ca103c593",
+      "byteIdenticalTo": "app-v0.7.0-rc3",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/SHA256SUMS.txt"
+    }
+  ],
+  "candidateNativeValidation": {
+    "runId": 37318450359,
+    "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37318450359",
+    "success": true,
+    "paths": [
+      {
+        "pathCase": "ordinary",
+        "success": true,
+        "passed": 8,
+        "skips": [],
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+        "nativeWindowsExecuted": true,
+        "sourceCommit": "57d635370a1cd34dd1549aff95a2feba7faeeb74",
+        "starterSha256": "3d5b79924e5edc69efb7d4934696f6568377b63c312a666cc37e05b8707cf1ba",
+        "updateSha256": "9c86f8c7cbe7acb8c31cdb7472db815143e7cc63be8fda0113642baee17f1469",
+        "gateSha256": "ef1b09b83e65ba304ea8efde0f0538d507d20aa5fe6fd406f551f5024745ee37",
+        "nativeReportSha256": "f9bf21394fb446c4d352520e5fad081bee09ee730573c810ca1129845a6a1256",
+        "evidenceZipSha256": "fb1c8b18fd6d873f8b1d42252468d6786695a190579ba181925a5f563b3d867d",
+        "checks": [
+          "Live release-pinned yeast search and five-product discovery.",
+          "Cancellation after transferred bytes removed only its partial download and published no reference.",
+          "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+          "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+          "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods.",
+          "Installed application and starter pack integrity checks passed after reference use.",
+          "Native 0.6.0-to-0.7.0 core migration and idempotent repeat preserved optional packs, saved pins, references and results; updated private host reused them offline.",
+          "Native app opened References, displayed five local files, kept controls separate at normal/minimum size and closed cleanly."
+        ],
+        "cancelAtBytes": 1048576,
+        "downloads": [
+          {
+            "id": "genome",
+            "bytes": 12360704,
+            "sha256": "35cc97fccb91762c7a1f0f71b4adb1037b143d48b63fbd3b3f8bad45e5afa44c",
+            "compressed_bytes": 3784201,
+            "compressed_sha256": "a9953096d6a041a01a4cb5352b0232ee9373bf4c050fb23cb7ae673b2e1bb528",
+            "independentPinnedIdentity": true
+          },
+          {
+            "id": "annotation",
+            "bytes": 10463408,
+            "sha256": "8c43c98a3a0db24c9e53fd9d460f096c48de0eabefd955fd25d044c948692623",
+            "compressed_bytes": 595453,
+            "compressed_sha256": "253bd4013785b3c85a6a488bd541c12d8264aa4989046c3530d0d9ea2ecc931e",
+            "independentPinnedIdentity": true
+          },
+          {
+            "id": "cdna",
+            "bytes": 11714100,
+            "sha256": "0a60e3a655949edbed2e774deae38b896e78e623a45809eafe66d15f7062cf4d",
+            "compressed_bytes": 3806426,
+            "compressed_sha256": "3cc5b6bb7ff166cffac5c45317dad7052d06431f43f709ed14b33779702dc6a4",
+            "independentPinnedIdentity": true
+          },
+          {
+            "id": "ncrna",
+            "bytes": 205371,
+            "sha256": "e875aea40e6bfbf9811b73f30a459439fda48d5165fbaea4c2e4a7859e9c3753",
+            "compressed_bytes": 35424,
+            "compressed_sha256": "096064f75fc4c8eaf2845e52dd6d56e1e398f8da434abd8436cfaa2d71a3f604",
+            "independentPinnedIdentity": true
+          },
+          {
+            "id": "protein",
+            "bytes": 5873944,
+            "sha256": "fec10d61996147cbc29ed4587ed0bdeb4e4f5576d66896400b226f2d2d4815a4",
+            "compressed_bytes": 2700059,
+            "compressed_sha256": "67ae76c720e52cec167378ec2b8cb5c5929360fc30de31abb37ae1035ef8455c",
+            "independentPinnedIdentity": true
+          }
+        ],
+        "offlineIndexContigs": 17,
+        "coreFilesVerified": 68,
+        "preservedFiles": 187,
+        "preservationChanges": {},
+        "nativeUpdateScope": "Actual native Windows updater CLI using its private runtime; native folder-picker interaction is not exercised.",
+        "gui": {
+          "dpi": 96,
+          "nativeSearchDiscoverSearch": true,
+          "downloadedRows": 5,
+          "closedCleanly": true,
+          "captures": [
+            {
+              "path": "references-discovered.bmp",
+              "width": 960,
+              "height": 728,
+              "sha256": "94188e9d417c2f53221f402b2c1fbb57c530d502db11dc25b599844d63000774"
+            },
+            {
+              "path": "references-normal.bmp",
+              "width": 960,
+              "height": 728,
+              "sha256": "af88c036281f956d8f8b639170f77cebf0a1c387ce2f0256fbad64ff13e45fc4"
+            },
+            {
+              "path": "references-minimum.bmp",
+              "width": 820,
+              "height": 680,
+              "sha256": "c8129f22caa3f24871e52c3b0a6617ce19a224501b80958d32e17a0a3d6e3ff0"
+            },
+            {
+              "path": "references-downloaded-minimum.bmp",
+              "width": 820,
+              "height": 680,
+              "sha256": "a6c250b8cb270743307e7f932ec49640c8c8734065e82e25d8006f1a62564e12"
+            }
+          ],
+          "scope": "Automated Win32 launch, local-library loading, live search/discover/search reset, queued tab input, observed control non-overlap at normal/minimum size, resize and pixel capture; human usability acceptance remains separate."
+        }
+      },
+      {
+        "pathCase": "path with spaces",
+        "success": true,
+        "passed": 8,
+        "skips": [],
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+        "nativeWindowsExecuted": true,
+        "sourceCommit": "57d635370a1cd34dd1549aff95a2feba7faeeb74",
+        "starterSha256": "3d5b79924e5edc69efb7d4934696f6568377b63c312a666cc37e05b8707cf1ba",
+        "updateSha256": "9c86f8c7cbe7acb8c31cdb7472db815143e7cc63be8fda0113642baee17f1469",
+        "gateSha256": "ef1b09b83e65ba304ea8efde0f0538d507d20aa5fe6fd406f551f5024745ee37",
+        "nativeReportSha256": "c07320260a867b8d9631b949dc4f7b2105c3d33f06c20554172beafb037f3477",
+        "evidenceZipSha256": "3c508a90f4f30919ea140e3903c92f3e1d0fd38a9042a7866187c59bc24a83aa",
+        "checks": [
+          "Live release-pinned yeast search and five-product discovery.",
+          "Cancellation after transferred bytes removed only its partial download and published no reference.",
+          "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+          "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+          "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods.",
+          "Installed application and starter pack integrity checks passed after reference use.",
+          "Native 0.6.0-to-0.7.0 core migration and idempotent repeat preserved optional packs, saved pins, references and results; updated private host reused them offline.",
+          "Native app opened References, displayed five local files, kept controls separate at normal/minimum size and closed cleanly."
+        ],
+        "cancelAtBytes": 1048576,
+        "downloads": [
+          {
+            "id": "genome",
+            "bytes": 12360704,
+            "sha256": "35cc97fccb91762c7a1f0f71b4adb1037b143d48b63fbd3b3f8bad45e5afa44c",
+            "compressed_bytes": 3784201,
+            "compressed_sha256": "a9953096d6a041a01a4cb5352b0232ee9373bf4c050fb23cb7ae673b2e1bb528",
+            "independentPinnedIdentity": true
+          },
+          {
+            "id": "annotation",
+            "bytes": 10463408,
+            "sha256": "8c43c98a3a0db24c9e53fd9d460f096c48de0eabefd955fd25d044c948692623",
+            "compressed_bytes": 595453,
+            "compressed_sha256": "253bd4013785b3c85a6a488bd541c12d8264aa4989046c3530d0d9ea2ecc931e",
+            "independentPinnedIdentity": true
+          },
+          {
+            "id": "cdna",
+            "bytes": 11714100,
+            "sha256": "0a60e3a655949edbed2e774deae38b896e78e623a45809eafe66d15f7062cf4d",
+            "compressed_bytes": 3806426,
+            "compressed_sha256": "3cc5b6bb7ff166cffac5c45317dad7052d06431f43f709ed14b33779702dc6a4",
+            "independentPinnedIdentity": true
+          },
+          {
+            "id": "ncrna",
+            "bytes": 205371,
+            "sha256": "e875aea40e6bfbf9811b73f30a459439fda48d5165fbaea4c2e4a7859e9c3753",
+            "compressed_bytes": 35424,
+            "compressed_sha256": "096064f75fc4c8eaf2845e52dd6d56e1e398f8da434abd8436cfaa2d71a3f604",
+            "independentPinnedIdentity": true
+          },
+          {
+            "id": "protein",
+            "bytes": 5873944,
+            "sha256": "fec10d61996147cbc29ed4587ed0bdeb4e4f5576d66896400b226f2d2d4815a4",
+            "compressed_bytes": 2700059,
+            "compressed_sha256": "67ae76c720e52cec167378ec2b8cb5c5929360fc30de31abb37ae1035ef8455c",
+            "independentPinnedIdentity": true
+          }
+        ],
+        "offlineIndexContigs": 17,
+        "coreFilesVerified": 68,
+        "preservedFiles": 187,
+        "preservationChanges": {},
+        "nativeUpdateScope": "Actual native Windows updater CLI using its private runtime; native folder-picker interaction is not exercised.",
+        "gui": {
+          "dpi": 96,
+          "nativeSearchDiscoverSearch": true,
+          "downloadedRows": 5,
+          "closedCleanly": true,
+          "captures": [
+            {
+              "path": "references-discovered.bmp",
+              "width": 960,
+              "height": 728,
+              "sha256": "91f5fdd0eda10b972858077fef6f71d6a112cb6cbb605e5b1fd66195d587f69e"
+            },
+            {
+              "path": "references-normal.bmp",
+              "width": 960,
+              "height": 728,
+              "sha256": "168fa801b5c7e6e329d0a48004020ec6b9ad3b00a9a748b79e012cd09e57d222"
+            },
+            {
+              "path": "references-minimum.bmp",
+              "width": 820,
+              "height": 680,
+              "sha256": "19d6f92a0f63ef20def8ac6731a7f533a061c8bc721c7ca977589ae989d7d069"
+            },
+            {
+              "path": "references-downloaded-minimum.bmp",
+              "width": 820,
+              "height": 680,
+              "sha256": "460604aa50c6d9b6ff9b3ec12535e5fdb4ab2f4f9937e0cf1f1ce6db67b50f32"
+            }
+          ],
+          "scope": "Automated Win32 launch, local-library loading, live search/discover/search reset, queued tab input, observed control non-overlap at normal/minimum size, resize and pixel capture; human usability acceptance remains separate."
+        }
+      }
+    ]
+  },
+  "screenshotReview": {
+    "status": "completed",
+    "capturesReviewed": 12,
+    "scope": "Six exact-final native Windows captures in each of two path cases were hash-verified and visually reviewed by the Windows evidence reviewer.",
+    "reportPath": "knowledge/evidence/reference-0.7.0-final-windows-2026-10-05.json",
+    "reportSha256": "b904d3fb8e85b9c8b0dca16de9e9dabdf6247dc8adfae0fd3c2e541450908961"
+  },
+  "finalPublicDownloadVerification": {
+    "status": "passed",
+    "initialAssetsVerified": 5,
+    "reportPath": "knowledge/evidence/reference-0.7.0-public-downloads-2026-10-05.json",
+    "reportSha256": "df8f130af47581c29fd1c30ebc48eac6b87c575397cc194b98fb6bb90fff77f4",
+    "releaseTagCommit": "6c266a58818886c6f4f5287006f20fafc5aadd68",
+    "packagedSourceCommit": "57d635370a1cd34dd1549aff95a2feba7faeeb74",
+    "scope": "Independent downloads, sizes, SHA-256, GitHub-reported digests, exact initial asset set, and source/tag distinction. Later evidence supplements are verified separately after publication."
+  },
+  "exactFinalNativeValidation": {
+    "status": "passed",
+    "runId": 37320844819,
+    "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37320844819",
+    "success": true,
+    "reportPath": "knowledge/evidence/reference-0.7.0-final-windows-2026-10-05.json",
+    "reportSha256": "b904d3fb8e85b9c8b0dca16de9e9dabdf6247dc8adfae0fd3c2e541450908961",
+    "gateSha256": "d7e8a12dbb6eb63b145388b2a7051e9126c86a7caf29ba209dc413931cdd8905",
+    "passedPerPath": 8,
+    "failedPerPath": 0,
+    "skipsPerPath": 0,
+    "paths": [
+      {
+        "pathCase": "ordinary",
+        "success": true,
+        "passed": 8,
+        "failed": 0,
+        "skips": [],
+        "artifactSha256": "e799da24900006fb357b4159541ce05cf006eed7a2ab70d5ccfecb1c93299aa5",
+        "reportSha256": "2ea2b62054746dfc63a6c2b7e95cc6b711e28d73927da99bbe0b9cef8e6f67b4",
+        "nativeReferenceBinding": {
+          "tool": "bam/reference-index",
+          "file": "D:\\a\\_temp\\ordinary\\reference data 32wzyvl5\\ref-c0c429e634fd4c39\\Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa",
+          "sha256": "35cc97fccb91762c7a1f0f71b4adb1037b143d48b63fbd3b3f8bad45e5afa44c",
+          "matchingTargets": 1,
+          "clickedUseForInput": true,
+          "inspectorEdits": [
+            {
+              "id": 2006,
+              "text": "Index a reference"
+            },
+            {
+              "id": 2022,
+              "text": "D:\\a\\_temp\\ordinary\\reference data 32wzyvl5\\ref-c0c429e634fd4c39\\Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa"
+            }
+          ],
+          "assignedNotice": "Reference assigned. Its download provenance will be retained with the run."
+        },
+        "allSixCapturesVisuallyReviewed": true
+      },
+      {
+        "pathCase": "path with spaces",
+        "success": true,
+        "passed": 8,
+        "failed": 0,
+        "skips": [],
+        "artifactSha256": "d2af546ae765089f30761756c66d393eae2c7cb77c13363b3124f0331e7b472b",
+        "reportSha256": "1c72ceb66c011f21093353049be3e3ebecfffddf6ed209e67b28188944243ecd",
+        "nativeReferenceBinding": {
+          "tool": "bam/reference-index",
+          "file": "D:\\a\\_temp\\path with spaces\\reference data nx23u89h\\ref-325b9508193d452a\\Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa",
+          "sha256": "35cc97fccb91762c7a1f0f71b4adb1037b143d48b63fbd3b3f8bad45e5afa44c",
+          "matchingTargets": 1,
+          "clickedUseForInput": true,
+          "inspectorEdits": [
+            {
+              "id": 2006,
+              "text": "Index a reference"
+            },
+            {
+              "id": 2022,
+              "text": "D:\\a\\_temp\\path with spaces\\reference data nx23u89h\\ref-325b9508193d452a\\Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa"
+            }
+          ],
+          "assignedNotice": "Reference assigned. Its download provenance will be retained with the run."
+        },
+        "allSixCapturesVisuallyReviewed": true
+      }
+    ],
+    "checks": [
+      "Live release-pinned yeast search and five-product discovery.",
+      "Cancellation after transferred bytes removed only its partial download and published no reference.",
+      "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+      "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+      "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods.",
+      "Installed application and starter pack integrity checks passed after reference use.",
+      "Native 0.6.0-to-0.7.0 core migration and idempotent repeat preserved optional packs, saved pins, references and results; updated private host reused them offline.",
+      "Native app opened References, displayed five local files, bound the exact downloaded genome through its compatible native input, kept controls separate at normal/minimum size and closed cleanly."
+    ]
+  },
+  "limits": [
+    "Exact Windows Server 2022 final-package validation in ordinary and space-containing paths at 96 DPI. Native GUI launch, discovery/search reset, Downloaded view, actual compatible Use for input button and exact native input value are exercised. Explicit downloads/cancellation, socket-denied offline reuse, hashes, provenance and SAMtools scientific execution are exercised through the packaged private host. Click-through GUI download/cancel, the updater folder picker, managed-PC human usability, high-DPI/multi-monitor, Unicode/long paths, human-genome datasets and institutional proxies were not tested by this gate. No unavailable check is counted as passed."
+  ],
+  "notes": [
+    "The five initial release assets are unchanged exact copies of the native-validated rc3 bytes.",
+    "BUILD-VALIDATION.json retains its historical candidate label and creation-time pending native status. This final report supplies subsequent exact-final validation without changing those immutable bytes.",
+    "The packaged source is 57d635370a1cd34dd1549aff95a2feba7faeeb74; release tag and final gate source 6c266a58818886c6f4f5287006f20fafc5aadd68 add only validation and evidence changes.",
+    "Original SHA256SUMS.txt remains unchanged. EVIDENCE-SHA256SUMS.txt additionally covers this final report and the durable Windows evidence archive."
+  ],
+  "finalizedAt": "2026-10-05T14:02:56.912836+00:00",
+  "success": true,
+  "applicationBuildSourceCommit": "57d635370a1cd34dd1549aff95a2feba7faeeb74",
+  "releaseTagCommit": "6c266a58818886c6f4f5287006f20fafc5aadd68",
+  "gateSourceCommit": "6c266a58818886c6f4f5287006f20fafc5aadd68",
+  "sourceCommitDistinction": "The release tag includes later validation/evidence changes; the exact promoted application and source archives remain rc3 bytes from packagedSourceCommit.",
+  "sourceValidation": {
+    "freshChecks": {
+      "path": "knowledge/evidence/reference-resume-source-checks-2026-10-05.json",
+      "sha256": "adf1e8dfaa0fb6931aae0b2f00418783959eeb8b7ac898b393d88e3b59bd8a25",
+      "sourceCommit": "5338853ba3b69438fc36c1b9dcd3ad89d6bbcde4",
+      "scope": "Fresh source-only deterministic reference, host, split packaging and updater checks; no live network, Windows GUI or scientific executable claim.",
+      "tests": 93,
+      "passed": 93,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "priorReportedChecks": {
+      "path": "knowledge/evidence/reference-source-contracts-2026-10-05.json",
+      "sha256": "227440739da087871fdb153a6498a403dea1945af31b1bba3c9127a0b1e443f4",
+      "reportedPassed": 139,
+      "meaning": "Prior-session evidence retained separately; these 139 checks were not newly rerun or added to the 93 fresh source checks."
+    }
+  },
+  "updateMeaning": "The update is from the published app-v0.6.0 starter to app 0.7.0. Each native updater transaction verified 68 target core files and preserved 187 pre-existing pack, saved-setting, reference and result files, then repeated idempotently and reopened the updated host offline. The only permitted addition was the exact one-byte user-data/session.lock coordination file.",
+  "durableWindowsEvidence": {
+    "file": "WINDOWS-EVIDENCE.zip",
+    "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/WINDOWS-EVIDENCE.zip",
+    "bytes": 473664,
+    "sha256": "71c241a357ddb7a83f20a968a4459016e0bd19f787a5f7ce89a3c6f9ebf9f3cb",
+    "manifestSha256": "f41a1d7d0fcd3b3e758bb9335361830e7ceb968aa9266a3247a6b8a6d6596eea",
+    "contents": "Exact original final matrix artifact ZIPs containing reports, public-reference receipts, methods, logs and 12 native BMP captures; final/candidate/source/public-download/build reports and hashed manifest.",
+    "zipCrcAndManifestVerified": true
+  }
+}

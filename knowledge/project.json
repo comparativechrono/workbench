@@ -4,7 +4,7 @@
   "project": "Native Workbench",
   "repository": "https://github.com/comparativechrono/workbench",
   "reviewed_on": "2026-10-05",
-  "source_baseline_commit": "8f95caa1f267d19ce72ea3cd7f2396ae66a801c1",
+  "source_baseline_commit": "57d635370a1cd34dd1549aff95a2feba7faeeb74",
   "format": {
     "prose": "UTF-8 Markdown",
     "data": "JSON",
@@ -41,7 +41,14 @@
     "reference_discovery": "../docs/reference-discovery-0.7.md",
     "reference_release_handover": "reference-release-handover.md",
     "reference_resume_source_checks": "evidence/reference-resume-source-checks-2026-10-05.json",
-    "reference_resume_ui_diagnosis": "evidence/reference-resume-ui-diagnosis-2026-10-05.json"
+    "reference_resume_ui_diagnosis": "evidence/reference-resume-ui-diagnosis-2026-10-05.json",
+    "reference_build": "evidence/reference-0.7.0-build-2026-10-05.json",
+    "reference_public_downloads": "evidence/reference-0.7.0-public-downloads-2026-10-05.json",
+    "reference_rc2_failure": "evidence/reference-rc2-failure-2026-10-05.json",
+    "reference_rc3_native_input": "evidence/reference-rc3-native-input-2026-10-05.json",
+    "reference_final_windows": "evidence/reference-0.7.0-final-windows-2026-10-05.json",
+    "reference_release_validation": "evidence/reference-0.7.0-release-validation-2026-10-05.json",
+    "reference_final_assets": "evidence/reference-0.7.0-final-assets-2026-10-05.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -71,9 +78,17 @@
     "initial_commit": "5338853ba3b69438fc36c1b9dcd3ad89d6bbcde4",
     "working_branch": "release/reference-0.7.0-completion",
     "target_version": "0.7.0",
-    "status": "pending-rebuilt-candidate-native-validation-and-final-release",
-    "candidate_tag": "app-v0.7.0-rc1",
+    "status": "released-exact-final-native-gate-passed",
+    "candidate_tag": "app-v0.7.0-rc3",
     "handover": "reference-release-handover.md",
-    "historical_inventory_scope": "Existing application and pack inventory retains its original audit dates and evidence."
-  }
+    "historical_inventory_scope": "Existing application and pack inventory retains its original audit dates and evidence.",
+    "release_tag": "app-v0.7.0",
+    "release_url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0",
+    "packaged_source_commit": "57d635370a1cd34dd1549aff95a2feba7faeeb74",
+    "release_tag_commit": "6c266a58818886c6f4f5287006f20fafc5aadd68",
+    "exact_final_native_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37320844819"
+  },
+  "historical_source_baseline_commit": "8f95caa1f267d19ce72ea3cd7f2396ae66a801c1",
+  "release_tag_commit": "6c266a58818886c6f4f5287006f20fafc5aadd68",
+  "source_commit_scope": "Packaged application source; release tag adds validation gate/evidence only."
 }

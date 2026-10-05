@@ -1,0 +1,321 @@
+{
+  "schema": 1,
+  "createdAt": "2026-10-05T13:34:12.444959+00:00",
+  "kind": "exact-candidate-build-and-static-validation",
+  "candidate": "app-v0.7.0-rc3",
+  "sourceCommit": "57d635370a1cd34dd1549aff95a2feba7faeeb74",
+  "sourceBranch": "release/reference-0.7.0-completion",
+  "cleanWorkingTreeBeforePackaging": true,
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "python": "3.12.14",
+  "nativeWindowsExecuted": false,
+  "nativeWindowsStatus": "pending exact archive CI",
+  "assets": [
+    {
+      "file": "native-workbench-0.7.0-source.zip",
+      "bytes": 46002233,
+      "sha256": "4b4993d710430c735fff69f2655781711abcda601833de1e481411913b8c164e",
+      "zipCrcVerified": true,
+      "uniqueSafeMembers": 418
+    },
+    {
+      "file": "native-workbench-0.7.0-starter-windows.zip",
+      "bytes": 16916149,
+      "sha256": "3d5b79924e5edc69efb7d4934696f6568377b63c312a666cc37e05b8707cf1ba",
+      "zipCrcVerified": true,
+      "uniqueSafeMembers": 212
+    },
+    {
+      "file": "native-workbench-0.7.0-update-from-0.6.0.zip",
+      "bytes": 12830009,
+      "sha256": "9c86f8c7cbe7acb8c31cdb7472db815143e7cc63be8fda0113642baee17f1469",
+      "zipCrcVerified": true,
+      "uniqueSafeMembers": 60
+    }
+  ],
+  "sourceAudit": {
+    "inventoriedFilesVerified": 415,
+    "allCurrentFilesMatchCleanSourceCommit": true,
+    "uninventoriedCurrentFiles": [],
+    "legacySourceSha256": "5dac9add19436b336cba483a0f915e39aafed383282c2a019a0dbd3cc3c8668e",
+    "legacyAliases": 175
+  },
+  "starterAudit": {
+    "coreInventoryFilesVerified": 68,
+    "sourceCompanionPinVerified": true,
+    "immutableBaselineTrees": {
+      "runtime": {
+        "filesVerifiedByteIdentical": 39,
+        "unchangedFrom": "app-v0.6.0"
+      },
+      "packs": {
+        "filesVerifiedByteIdentical": 143,
+        "unchangedFrom": "app-v0.6.0"
+      }
+    },
+    "previousComparison": {
+      "candidate": "0.7.0-rc2",
+      "archiveSha256": "67828ca3f19bda33129e115b902f841cf64d3d66c2ba623f1be8081fc8e7b651",
+      "added": [],
+      "removed": [],
+      "changed": [
+        {
+          "path": "native-workbench/NativeWorkbench.exe",
+          "previousSha256": "7e2eee823f0eda875abac1ff1f8e383e520382e172ca0640cd454f97ed860d41",
+          "candidateSha256": "75df84ac7ae7e4d96384c1596a53f6f5417570b2993a53917d8f852b949004af"
+        },
+        {
+          "path": "native-workbench/SOURCE-AVAILABILITY.json",
+          "previousSha256": "c3b769a0f5de60026919750727fadbd4ed920ac2f97b18a544cac5f38b9ee879",
+          "candidateSha256": "8586fdff992c7cc3db2f8b5daa54a687b66370391fea6e58e592d386d126d650"
+        },
+        {
+          "path": "native-workbench/manifest.json",
+          "previousSha256": "4f1d017b383be5faffb373802983b5e86d72e9ae091b4b855e710a99314b3ea9",
+          "candidateSha256": "ee251a6545a8830a2f9fe7b46a523a04425aea37380f56ea9870ccc3cc149c4d"
+        }
+      ],
+      "unchangedFiles": 209
+    }
+  },
+  "updaterAudit": {
+    "baseVersion": "0.6.0",
+    "targetVersion": "0.7.0",
+    "inventoriedFilesVerified": 59,
+    "replacementFilesVerified": 13,
+    "obsoleteFiles": [],
+    "targetManifestSha256": "ee251a6545a8830a2f9fe7b46a523a04425aea37380f56ea9870ccc3cc149c4d",
+    "privateRuntimeMatchesStarter": true,
+    "optionalPacksOwned": false
+  },
+  "buildEvidence": {
+    "compilerArchiveSha256": "bb7bb7654b33d5aa8712acb837c963b2e0c56352560c76105270a3268c665c21",
+    "compilerVersion": "clang version 23.1.2 (https://github.com/llvm/llvm-project.git 85ac560262434c9ccfc0c183ec22d4138ed647fb)\nTarget: x86_64-w64-windows-gnu\nThread model: posix\nInstalledDir: /workspace/scratch/7cebe1115528/recovery/toolchains/llvm-mingw-20260922-ucrt-ubuntu-22.04-x86_64/bin\nConfiguration file: /workspace/scratch/7cebe1115528/recovery/toolchains/llvm-mingw-20260922-ucrt-ubuntu-22.04-x86_64/bin/x86_64-w64-windows-gnu.cfg\n",
+    "nativeWindowsExecuted": false,
+    "desktop": {
+      "sha256": "75df84ac7ae7e4d96384c1596a53f6f5417570b2993a53917d8f852b949004af",
+      "bytes": 1199616,
+      "command": [
+        "bash",
+        "desktop/build_desktop_workspace.sh"
+      ],
+      "sourceCommit": "57d635370a1cd34dd1549aff95a2feba7faeeb74",
+      "buildLog": "Built /workspace/scratch/7cebe1115528/workbench/build/desktop/DesktopWorkbench.exe\n"
+    },
+    "reusedBridgeAndUpdaterSourceCommit": "5338853ba3b69438fc36c1b9dcd3ad89d6bbcde4",
+    "reusedBridgeAndUpdaterInputsVerifiedEqual": [
+      "desktop/bridge.cpp",
+      "desktop/build_bridge.sh",
+      "desktop/build_workspace_update_launcher.sh",
+      "desktop/child_environment.h",
+      "desktop/common.cpp",
+      "desktop/common.h",
+      "desktop/desktop_ipc.h",
+      "desktop/modular_validation.cpp",
+      "desktop/pack_model.cpp",
+      "desktop/pack_model.h",
+      "desktop/packs.cpp",
+      "desktop/process_pipeline.cpp",
+      "desktop/runner.cpp",
+      "desktop/workbench.h",
+      "desktop/workbench.manifest",
+      "desktop/workflow_runner.cpp",
+      "desktop/workspace_update_launcher.cpp"
+    ],
+    "reusedBuilds": [
+      {
+        "command": [
+          "bash",
+          "desktop/build_bridge.sh"
+        ],
+        "BW_MINGW_ROOT": "/workspace/scratch/7cebe1115528/recovery/toolchains/llvm-mingw-20260922-ucrt-ubuntu-22.04-x86_64",
+        "startedAt": "2026-10-05T13:07:13.823911+00:00",
+        "exitCode": 0,
+        "log": "/workspace/scratch/7cebe1115528/recovery/evidence/native-build_bridge.log",
+        "artifact": "/workspace/scratch/7cebe1115528/workbench/build/desktop/WorkbenchBridge.exe",
+        "bytes": 1542656,
+        "sha256": "d0881daec9c51cb2efac9d325d3d4eb430506824b332532989dd80c9b00b6a84"
+      },
+      {
+        "command": [
+          "bash",
+          "desktop/build_workspace_update_launcher.sh"
+        ],
+        "BW_MINGW_ROOT": "/workspace/scratch/7cebe1115528/recovery/toolchains/llvm-mingw-20260922-ucrt-ubuntu-22.04-x86_64",
+        "startedAt": "2026-10-05T13:07:29.924893+00:00",
+        "exitCode": 0,
+        "log": "/workspace/scratch/7cebe1115528/recovery/evidence/native-build_workspace_update_launcher.log",
+        "artifact": "/workspace/scratch/7cebe1115528/workbench/build/desktop/UpdateWorkbench.exe",
+        "bytes": 409600,
+        "sha256": "558a95c0a19280d215658723506245f45b1b00d243a1bfb516305cec99f3a44f"
+      }
+    ]
+  },
+  "packagingCommands": [
+    {
+      "command": [
+        "python3",
+        "scripts/package_split.py",
+        "sources",
+        "--base-root",
+        "/workspace/scratch/7cebe1115528/recovery/frozen-0.6.0/native-workbench",
+        "--base-source-archive",
+        "/workspace/scratch/7cebe1115528/recovery/downloads/native-workbench-0.6.0-source.zip",
+        "--output",
+        "/workspace/scratch/7cebe1115528/release-0.7.0-rc3/native-workbench-0.7.0-source.zip",
+        "--metadata",
+        "/workspace/scratch/7cebe1115528/release-0.7.0-rc3/source-metadata.json"
+      ],
+      "startedAt": "2026-10-05T13:34:06.247970+00:00",
+      "exitCode": 0,
+      "log": "/workspace/scratch/7cebe1115528/release-0.7.0-rc3/logs/01-packaging.txt",
+      "result": {
+        "file": "native-workbench-0.7.0-source.zip",
+        "bytes": 46002233,
+        "sha256": "4b4993d710430c735fff69f2655781711abcda601833de1e481411913b8c164e",
+        "packCompanions": [
+          {
+            "id": "bowtie2",
+            "version": "0.5.3",
+            "manifestSha256": "cdaa52bde3dec022e6716d4fc6b6e78481982f1d6491b5cd21ff4d64d33cec32",
+            "file": "native-workbench-pack-bowtie2-0.5.3.zip"
+          },
+          {
+            "id": "hisat2",
+            "version": "0.5.3",
+            "manifestSha256": "06f912deb5926b00a8ca269138b4b3822bb4b3e36d4956e30ca7793655052967",
+            "file": "native-workbench-pack-hisat2-0.5.3.zip"
+          },
+          {
+            "id": "lofreq",
+            "version": "0.5.3",
+            "manifestSha256": "4a00d450461cb434e04ddd377b901f73f9027e27a38f947238b6b18e9f5d862e",
+            "file": "native-workbench-pack-lofreq-0.5.3.zip"
+          },
+          {
+            "id": "muscle",
+            "version": "0.5.2",
+            "manifestSha256": "085273422c7f26af77d23643efa961f1fb6ecbdee301109af67ba551f41b82c4",
+            "file": "native-workbench-pack-muscle-0.5.2.zip"
+          },
+          {
+            "id": "mutect2",
+            "version": "0.5.4",
+            "manifestSha256": "bef9c8ee3b35b3b4ead54ed359a019d6592933e5ee84a05e449d014891f7ab3e",
+            "file": "native-workbench-pack-mutect2-0.5.4.zip"
+          },
+          {
+            "id": "vardict",
+            "version": "0.5.3",
+            "manifestSha256": "f43b5dfa5a7ba9a8a476c956499f67576922d171c00eb63ce36cf25e28caf482",
+            "file": "native-workbench-pack-vardict-0.5.3.zip"
+          },
+          {
+            "id": "vsearch",
+            "version": "0.5.2",
+            "manifestSha256": "2971ca612558983b23a259c4e2416ddbc129dbff9fdfeac5d2bbaa17a3a652d8",
+            "file": "native-workbench-pack-vsearch-0.5.2.zip"
+          }
+        ],
+        "legacySourceSha256": "5dac9add19436b336cba483a0f915e39aafed383282c2a019a0dbd3cc3c8668e",
+        "legacySourceAliases": 175
+      }
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/package_split.py",
+        "stage",
+        "--base-root",
+        "/workspace/scratch/7cebe1115528/recovery/frozen-0.6.0/native-workbench",
+        "--app-root",
+        "/workspace/scratch/7cebe1115528/stage-0.7.0-rc3/native-workbench",
+        "--source-metadata",
+        "/workspace/scratch/7cebe1115528/release-0.7.0-rc3/source-metadata.json"
+      ],
+      "startedAt": "2026-10-05T13:34:06.656355+00:00",
+      "exitCode": 0,
+      "log": "/workspace/scratch/7cebe1115528/release-0.7.0-rc3/logs/02-packaging.txt",
+      "result": {
+        "version": "0.7.0",
+        "app_root": "/workspace/scratch/7cebe1115528/stage-0.7.0-rc3/native-workbench",
+        "core_files": 68,
+        "core_bytes": 25854214,
+        "starter_packs": [
+          {
+            "id": "align",
+            "version": "0.4.0",
+            "folder": "packs/align-0.4.0",
+            "manifestSha256": "81c962222c93356a4f7727b23193c71d7dcd515859e62a179574781f411824d3"
+          },
+          {
+            "id": "bam",
+            "version": "0.4.0",
+            "folder": "packs/bam-0.4.0",
+            "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+          },
+          {
+            "id": "variants",
+            "version": "0.4.0",
+            "folder": "packs/variants-0.4.0",
+            "manifestSha256": "ea4b7f0a6c28709e4190b6514c07cbf7bdd58e1a4f2a2d931f2cae3ce6ec3795"
+          }
+        ],
+        "installed_bytes": 36204809
+      }
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/package_split.py",
+        "starter",
+        "--app-root",
+        "/workspace/scratch/7cebe1115528/stage-0.7.0-rc3/native-workbench",
+        "--output",
+        "/workspace/scratch/7cebe1115528/release-0.7.0-rc3/native-workbench-0.7.0-starter-windows.zip"
+      ],
+      "startedAt": "2026-10-05T13:34:06.886305+00:00",
+      "exitCode": 0,
+      "log": "/workspace/scratch/7cebe1115528/release-0.7.0-rc3/logs/03-packaging.txt",
+      "result": {
+        "file": "native-workbench-0.7.0-starter-windows.zip",
+        "bytes": 16916149,
+        "sha256": "3d5b79924e5edc69efb7d4934696f6568377b63c312a666cc37e05b8707cf1ba"
+      }
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/make_core_update.py",
+        "--base-root",
+        "/workspace/scratch/7cebe1115528/recovery/frozen-0.6.0/native-workbench",
+        "--app-root",
+        "/workspace/scratch/7cebe1115528/stage-0.7.0-rc3/native-workbench",
+        "--output",
+        "/workspace/scratch/7cebe1115528/update-stage-0.7.0-rc3",
+        "--launcher",
+        "/workspace/scratch/7cebe1115528/workbench/build/desktop/UpdateWorkbench.exe",
+        "--zip",
+        "/workspace/scratch/7cebe1115528/release-0.7.0-rc3/native-workbench-0.7.0-update-from-0.6.0.zip"
+      ],
+      "startedAt": "2026-10-05T13:34:08.552201+00:00",
+      "exitCode": 0,
+      "log": "/workspace/scratch/7cebe1115528/release-0.7.0-rc3/logs/04-packaging.txt",
+      "result": {
+        "base_version": "0.6.0",
+        "target_version": "0.7.0",
+        "migration": false,
+        "replacement_files": 13,
+        "obsolete_files": 0,
+        "blob_bytes": 3011808,
+        "packs_changed": false,
+        "archive": {
+          "path": "/workspace/scratch/7cebe1115528/release-0.7.0-rc3/native-workbench-0.7.0-update-from-0.6.0.zip",
+          "bytes": 12830009,
+          "sha256": "9c86f8c7cbe7acb8c31cdb7472db815143e7cc63be8fda0113642baee17f1469"
+        }
+      }
+    }
+  ],
+  "packagingAuditScriptSha256": "7fbbd7550eaca56f94bff4e4e4492898520cc312c08b6ec925e33cde6acaa79a"
+}
