@@ -512,6 +512,7 @@ def gui_smoke(root, evidence):
     user.GetDlgItem.argtypes = [wintypes.HWND, ctypes.c_int]
     user.GetDlgItem.restype = wintypes.HWND
     user.IsWindowVisible.argtypes = [wintypes.HWND]
+    user.IsWindowEnabled.argtypes = [wintypes.HWND]
     user.GetWindowRect.argtypes = [wintypes.HWND, ctypes.POINTER(wintypes.RECT)]
     user.GetClientRect.argtypes = [wintypes.HWND, ctypes.POINTER(wintypes.RECT)]
     user.SendMessageTimeoutW.argtypes = [wintypes.HWND, wintypes.UINT, wintypes.WPARAM,
@@ -659,6 +660,39 @@ def gui_smoke(root, evidence):
             if library.is_file():
                 shutil.copyfile(library, evidence / "gui-reference-library.json")
         require(rows >= 5, "The native reference window did not finish loading its local library.")
+        # Exercise real asynchronous UI state transitions. Both the first empty
+        # snapshot and a new search clearing an existing discovery are valid.
+        def wait_reference_state(label, predicate, seconds=45):
+            progress(label)
+            deadline = time.monotonic() + seconds
+            while time.monotonic() < deadline:
+                dialogs = [{"title": text(h), "controls": controls(h)}
+                           for h in windows(process.pid) if text(h, True) == "#32770"]
+                require(not dialogs, "Unexpected native modal dialog: " + json.dumps(dialogs))
+                if predicate():
+                    return
+                time.sleep(.1)
+            progress(label + " timed out", controls=controls(ref))
+            capture(ref, evidence / "references-state-failure.bmp")
+            raise TimeoutError("Native References state did not complete: " + label)
+
+        query = user.GetDlgItem(ref, 603)
+        query_text = ctypes.create_unicode_buffer("saccharomyces cerevisiae")
+        send(query, 0x000C, 0, ctypes.addressof(query_text))  # marshalled WM_SETTEXT
+        require(user.PostMessageW(ref, 0x0111, 604, 0), "Could not queue reference search.")
+        wait_reference_state("search yeast through native interface", lambda:
+            send(user.GetDlgItem(ref, 605), 0x1004) == 1
+            and user.IsWindowEnabled(user.GetDlgItem(ref, 604)))
+        require(user.PostMessageW(ref, 0x0111, 606, 0), "Could not queue reference discovery.")
+        wait_reference_state("discover five products through native interface", lambda:
+            send(user.GetDlgItem(ref, 607), 0x1004) == 5
+            and user.IsWindowEnabled(user.GetDlgItem(ref, 604)))
+        discovery_capture = capture(ref, evidence / "references-discovered.bmp")
+        require(user.PostMessageW(ref, 0x0111, 604, 0), "Could not queue repeated reference search.")
+        wait_reference_state("new search clears previous discovery", lambda:
+            send(user.GetDlgItem(ref, 607), 0x1004) == 0
+            and send(user.GetDlgItem(ref, 605), 0x1004) == 1
+            and user.IsWindowEnabled(user.GetDlgItem(ref, 604)))
         progress("inspect normal References controls")
         normal = controls(ref)
         progress("normal References controls discovered", controls=normal)
@@ -667,8 +701,9 @@ def gui_smoke(root, evidence):
                 <= {row["id"] for row in normal}, "References window is missing native controls.")
         result = {"launched": True, "pid": process.pid, "class": text(ref, True), "title": text(ref),
                   "normalControls": normal, "normalGeometry": normal_geometry,
-                  "captures": [capture(ref, evidence / "references-normal.bmp")],
-                  "scope": "Automated Win32 launch, local-library loading, queued tab input, observed control non-overlap at normal/minimum size, resize and pixel capture; human usability acceptance remains separate."}
+                  "captures": [discovery_capture, capture(ref, evidence / "references-normal.bmp")],
+                  "nativeSearchDiscoverSearch": True,
+                  "scope": "Automated Win32 launch, local-library loading, live search/discover/search reset, queued tab input, observed control non-overlap at normal/minimum size, resize and pixel capture; human usability acceptance remains separate."}
         dpi = user.GetDpiForWindow(ref) or 96
         result["dpi"] = dpi
         progress("resize References to minimum")

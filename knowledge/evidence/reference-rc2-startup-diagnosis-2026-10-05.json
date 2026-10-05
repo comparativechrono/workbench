@@ -1,0 +1,202 @@
+{
+  "schema": 1,
+  "inspected_at": "2026-10-05T13:32:08.122469+00:00",
+  "scope": "Current-session native Windows RC2 diagnostic failure, in ordinary and space-containing paths; not a passing GUI gate or corrected RC3 execution.",
+  "workflow_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37317100708",
+  "gate_source_commit": "456d1dbc17254ec9e6ccf0408525a9c6c4955357",
+  "app_source_commit": "19444e0f2a9c9981d87f033bd3b2b17f79878add",
+  "candidate_release": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0-rc2",
+  "starter_sha256": "67828ca3f19bda33129e115b902f841cf64d3d66c2ba623f1be8081fc8e7b651",
+  "paths": [
+    {
+      "path": "ordinary",
+      "artifact_id": 11348119558,
+      "artifact_archive_sha256": "c2c38a3c59a108469f0752bd1b6217763ef3232cab722b8b1e2cd76445b9ab94",
+      "source_files": {
+        "native-references.json": "0b6e4d2228676d513798dd3a86c48c8c2b4054e3d046a37bdc984c649c438de3",
+        "gui-events.jsonl": "00adcb96345789135c1e2ac845c6bf0638415240117dedf3ed8dd5ac1550155d"
+      },
+      "success": false,
+      "backend_updater_checks_passed": 7,
+      "skips": [],
+      "observed_at": "2026-10-05T13:29:42.679706+00:00",
+      "local_rows": 0,
+      "modal": {
+        "hwnd": 262832,
+        "title": "Native Workbench",
+        "class": "#32770",
+        "controls": [
+          {
+            "id": 2,
+            "class": "Button",
+            "text": "OK",
+            "bounds": [
+              555,
+              455,
+              630,
+              478
+            ]
+          },
+          {
+            "id": 20,
+            "class": "Static",
+            "text": "",
+            "bounds": [
+              460,
+              390,
+              492,
+              422
+            ]
+          },
+          {
+            "id": 65535,
+            "class": "Static",
+            "text": "Expected a JSON array",
+            "bounds": [
+              501,
+              400,
+              615,
+              415
+            ]
+          }
+        ]
+      },
+      "notice": {
+        "id": 618,
+        "class": "Static",
+        "text": "Loading local references...",
+        "bounds": [
+          58,
+          646,
+          724,
+          696
+        ]
+      },
+      "observed_reference_bounds": {
+        "608": [
+          58,
+          513,
+          966,
+          589
+        ],
+        "609": [
+          128,
+          601,
+          672,
+          633
+        ],
+        "610": [
+          684,
+          601,
+          812,
+          633
+        ],
+        "611": [
+          824,
+          601,
+          966,
+          633
+        ]
+      },
+      "details_to_destination_gap_pixels": 12
+    },
+    {
+      "path": "spaces",
+      "artifact_id": 11347739900,
+      "artifact_archive_sha256": "3af0ee34ba5395ff8bb7416c11290d299c1755e52acf42b582b4f077d91d4adb",
+      "source_files": {
+        "native-references.json": "26be076cf9dffe784dfa4ba8a6c37db1011aba92ca78d61b4a1e4160590bb168",
+        "gui-events.jsonl": "dd6ba9ac7bf4533c94751a86efe6dc8df860bcd7032596a149563eae33af1d9b"
+      },
+      "success": false,
+      "backend_updater_checks_passed": 7,
+      "skips": [],
+      "observed_at": "2026-10-05T13:29:36.914593+00:00",
+      "local_rows": 0,
+      "modal": {
+        "hwnd": 262790,
+        "title": "Native Workbench",
+        "class": "#32770",
+        "controls": [
+          {
+            "id": 2,
+            "class": "Button",
+            "text": "OK",
+            "bounds": [
+              534,
+              434,
+              609,
+              457
+            ]
+          },
+          {
+            "id": 20,
+            "class": "Static",
+            "text": "",
+            "bounds": [
+              439,
+              369,
+              471,
+              401
+            ]
+          },
+          {
+            "id": 65535,
+            "class": "Static",
+            "text": "Expected a JSON array",
+            "bounds": [
+              480,
+              379,
+              594,
+              394
+            ]
+          }
+        ]
+      },
+      "notice": {
+        "id": 618,
+        "class": "Static",
+        "text": "Loading local references...",
+        "bounds": [
+          58,
+          646,
+          724,
+          696
+        ]
+      },
+      "observed_reference_bounds": {
+        "608": [
+          58,
+          513,
+          966,
+          589
+        ],
+        "609": [
+          128,
+          601,
+          672,
+          633
+        ],
+        "610": [
+          684,
+          601,
+          812,
+          633
+        ],
+        "611": [
+          824,
+          601,
+          966,
+          633
+        ]
+      },
+      "details_to_destination_gap_pixels": 12
+    }
+  ],
+  "source_review_findings": [
+    "Initial empty reference-state object lacks array-valued species; selection lookup dereferences array_items before the library request completes.",
+    "A new species search deliberately clears discovery to null; rendering its files with array_items without a guard can throw the same exception."
+  ],
+  "correction_status": "Source corrections implemented and strict desktop cross-build passed; exact rebuilt RC3 native validation pending.",
+  "corrected_desktop_sha256": "75df84ac7ae7e4d96384c1596a53f6f5417570b2993a53917d8f852b949004af"
+}

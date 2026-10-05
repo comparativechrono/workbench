@@ -113,6 +113,47 @@ gate also rejects the recovered rc1 bounds with the expected 15-pixel overlap.
 These are build/static and regression-sensitivity checks, not new Windows
 execution.
 
+## Interim rc2 result and additional correction, 2026-10-05
+
+The corrected layout was packaged and published as
+[app-v0.7.0-rc2](https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0-rc2)
+from `19444e0f2a9c9981d87f033bd3b2b17f79878add`. All five candidate assets were
+independently downloaded and rehashed against their frozen local bytes and
+GitHub digests. The starter SHA-256 is
+`67828ca3f19bda33129e115b902f841cf64d3d66c2ba623f1be8081fc8e7b651`;
+the updater SHA-256 is
+`3926c280c86be0fa2b8353c3c20045d576d1d9f2c6497aec06804714a9b4d08d`.
+Publication and byte verification did not close the native gate.
+
+The new native run stopped because the References library did not populate.
+Diagnostic [run 37317100708](https://github.com/comparativechrono/workbench/actions/runs/37317100708)
+used the unchanged rc2 application and gate source
+`456d1dbc17254ec9e6ccf0408525a9c6c4955357`. In **both ordinary and space-containing
+paths**, it recorded a native modal titled “Native Workbench” with the exact
+message **“Expected a JSON array”**, while References displayed “Loading local
+references...” and zero local rows. Captures and control text were inspected;
+the [retained diagnosis](evidence/reference-rc2-startup-diagnosis-2026-10-05.json)
+binds those observations to the run, artifact and source-file hashes. The seven
+backend/updater checks passed in each path, with no skips, but the overall gate
+failed. The observed normal-size details-to-destination gap was now 12 pixels;
+that one corrected measurement does not substitute for the uncompleted GUI gate.
+
+Source review traced startup to an initially empty reference-state object:
+the native selection helper requested a species array before any library reply.
+It also identified a separate reset path: a new search sets `discovery` to null,
+but the renderer attempted to iterate its files as an array. The reset failure
+is a source finding at this checkpoint, not an observed Windows interaction.
+
+The narrow desktop correction initializes collection fields as empty arrays,
+returns early when no species row is selected, handles cleared discovery, and
+guards absent local-file/download selections. Its strict desktop cross-build
+passed, producing SHA-256
+`75df84ac7ae7e4d96384c1596a53f6f5417570b2993a53917d8f852b949004af`.
+The native gate is being extended to exercise live GUI search, file discovery
+and a second search that clears the previous discovery. These source/gate edits
+await an exact rebuilt **rc3** native run. Rc2 remains an immutable failed
+candidate, and final 0.7.0 release acceptance remains pending.
+
 ## Remaining release gates
 
 1. Build and package the corrected desktop, bridge, updater and matching source

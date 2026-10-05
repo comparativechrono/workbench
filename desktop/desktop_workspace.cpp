@@ -446,7 +446,9 @@ class Workspace {
   Json state = Json::object(), catalog = object({{"tools", Json::object()}}),
        runState = Json::object(), historyRun = Json::object(),
        packState = object({{"packs", Json::array()}}),
-       packOperation = Json::object(), refState = Json::object(),
+       packOperation = Json::object(),
+       refState = object({{"releases", Json::array()}, {"species", Json::array()},
+                          {"local", Json::array()}, {"discovery", nullptr}}),
        refOperation = Json::object(), refTargets = Json::array();
   std::map<long long, std::string> pending;
   long long nextRequest = 1, activeRequest = 0;
@@ -1140,7 +1142,10 @@ class Workspace {
     if (row < 0 || static_cast<size_t>(row) >= refLocalRows.size())
       return empty;
     const auto index = refLocalRows[static_cast<size_t>(row)].second;
-    const auto &files = reference_local_record().get("files").array_items();
+    const auto &record = reference_local_record();
+    if (!record.get("files").is_array())
+      return empty;
+    const auto &files = record.get("files").array_items();
     return index < files.size() ? files[index] : empty;
   }
   const Json &reference_selected_species() const {
@@ -1148,8 +1153,10 @@ class Workspace {
     if (!refWindow)
       return empty;
     const int row = ListView_GetNextItem(refSpecies, -1, LVNI_SELECTED);
+    if (row < 0)
+      return empty;
     const auto &items = refState.get("species").array_items();
-    return row >= 0 && static_cast<size_t>(row) < items.size()
+    return static_cast<size_t>(row) < items.size()
                ? items[static_cast<size_t>(row)] : empty;
   }
   void reference_send(const std::string &method, Json params = Json::object()) {
@@ -1293,16 +1300,20 @@ class Workspace {
     }
     if (previous.get("discovery").dump() != refState.get("discovery").dump()) {
       ListView_DeleteAllItems(refFiles);
-      for (const auto &file : refState.get("discovery").get("files").array_items()) {
-        LVITEMW row{};
-        row.mask = LVIF_TEXT;
-        row.iItem = ListView_GetItemCount(refFiles);
-        auto label = wt(file, "label", getstr(file, "kind"));
-        row.pszText = label.data();
-        ListView_InsertItem(refFiles, &row);
-        auto filename = wt(file, "filename"), size = download_size(file.get("bytes").integer());
-        ListView_SetItemText(refFiles, row.iItem, 1, filename.data());
-        ListView_SetItemText(refFiles, row.iItem, 2, size.data());
+      // A new species search deliberately clears the previous discovery.
+      const auto &files = refState.get("discovery").get("files");
+      if (files.is_array()) {
+        for (const auto &file : files.array_items()) {
+          LVITEMW row{};
+          row.mask = LVIF_TEXT;
+          row.iItem = ListView_GetItemCount(refFiles);
+          auto label = wt(file, "label", getstr(file, "kind"));
+          row.pszText = label.data();
+          ListView_InsertItem(refFiles, &row);
+          auto filename = wt(file, "filename"), size = download_size(file.get("bytes").integer());
+          ListView_SetItemText(refFiles, row.iItem, 1, filename.data());
+          ListView_SetItemText(refFiles, row.iItem, 2, size.data());
+        }
       }
     }
     if (previous.get("local").dump() != refState.get("local").dump()) {
@@ -1503,8 +1514,11 @@ class Workspace {
       if (!path.empty())
         SetWindowTextW(refDestination, path.c_str());
     } else if (id == REF_DOWNLOAD) {
+      const auto &discovery = refState.get("discovery");
+      if (getstr(discovery, "selection_id").empty() || !discovery.get("files").is_array())
+        return;
       Json selectedFiles = Json::array();
-      const auto &files = refState.get("discovery").get("files").array_items();
+      const auto &files = discovery.get("files").array_items();
       for (size_t i = 0; i < files.size(); ++i)
         if (ListView_GetCheckState(refFiles, static_cast<int>(i)))
           selectedFiles.array_items().push_back(getstr(files[i], "id"));

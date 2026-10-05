@@ -1,0 +1,145 @@
+{
+  "schema": 1,
+  "recordedDate": "2026-10-05",
+  "success": false,
+  "status": "native-gui-failure-confirmed",
+  "assets": {
+    "releaseTag": "app-v0.7.0-rc2",
+    "applicationSourceCommit": "19444e0f2a9c9981d87f033bd3b2b17f79878add",
+    "starter": {
+      "name": "native-workbench-0.7.0-starter-windows.zip",
+      "sha256": "67828ca3f19bda33129e115b902f841cf64d3d66c2ba623f1be8081fc8e7b651"
+    },
+    "updater": {
+      "name": "native-workbench-0.7.0-update-from-0.6.0.zip",
+      "sha256": "3926c280c86be0fa2b8353c3c20045d576d1d9f2c6497aec06804714a9b4d08d"
+    }
+  },
+  "runs": [
+    {
+      "workflowRun": "https://github.com/comparativechrono/workbench/actions/runs/37315901362",
+      "gateSourceCommit": "19444e0f2a9c9981d87f033bd3b2b17f79878add",
+      "success": false,
+      "paths": [
+        {
+          "pathCase": "ordinary",
+          "artifactId": 11346893914,
+          "artifactUrl": "https://github.com/comparativechrono/workbench/actions/runs/37315901362/artifacts/11346893914",
+          "artifactSha256": "7c20e2ac88741dd4d5f2f38ce3f19e3238808a8df4a262a0040520f42a990a98",
+          "downloadedArtifactHashVerified": true,
+          "reportSha256": "c485c68f2f05ae44f4722f11485eff4f41265ab06923c53d3de64672ea9a5475",
+          "gateSha256": "8f23012a61f6201e99673418963cd80b2d9f2001d00b75c3d1bbe503163435e0",
+          "passedBeforeGuiFailure": 7,
+          "skips": [],
+          "platform": "Windows-2022Server-10.0.20348-SP0",
+          "guiError": "The native reference window did not finish loading its local library.",
+          "captures": []
+        },
+        {
+          "pathCase": "path with spaces",
+          "artifactId": 11347133544,
+          "artifactUrl": "https://github.com/comparativechrono/workbench/actions/runs/37315901362/artifacts/11347133544",
+          "artifactSha256": "dd5ed60efd84911f271f090a04e8d40e905751173a351e52cbcc6afb91a1a1d3",
+          "downloadedArtifactHashVerified": true,
+          "reportSha256": "a9984e0eca6995eeb51f626cb823e2c7a46f011d43a1c0688c62f812ec84f38b",
+          "gateSha256": "8f23012a61f6201e99673418963cd80b2d9f2001d00b75c3d1bbe503163435e0",
+          "passedBeforeGuiFailure": 7,
+          "skips": [],
+          "platform": "Windows-2022Server-10.0.20348-SP0",
+          "guiError": "The native reference window did not finish loading its local library.",
+          "captures": []
+        }
+      ]
+    },
+    {
+      "workflowRun": "https://github.com/comparativechrono/workbench/actions/runs/37317100708",
+      "gateSourceCommit": "456d1dbc17254ec9e6ccf0408525a9c6c4955357",
+      "success": false,
+      "paths": [
+        {
+          "pathCase": "ordinary",
+          "artifactId": 11348119558,
+          "artifactUrl": "https://github.com/comparativechrono/workbench/actions/runs/37317100708/artifacts/11348119558",
+          "artifactSha256": "c2c38a3c59a108469f0752bd1b6217763ef3232cab722b8b1e2cd76445b9ab94",
+          "downloadedArtifactHashVerified": true,
+          "reportSha256": "0b6e4d2228676d513798dd3a86c48c8c2b4054e3d046a37bdc984c649c438de3",
+          "gateSha256": "6c421a6372912a59c3bedad336cf89d6fa171ead587bb3aa65a731a5b468625e",
+          "passedBeforeGuiFailure": 7,
+          "skips": [],
+          "platform": "Windows-2022Server-10.0.20348-SP0",
+          "guiError": "The native reference window did not finish loading its local library.",
+          "captures": [
+            {
+              "name": "references-load-failure-0.bmp",
+              "sha256": "da2bdde23a5b967a068861bc9f72d9e24160406b23fb404e9c9b1378b14b13b2",
+              "visuallyReviewed": true
+            },
+            {
+              "name": "references-load-failure-1.bmp",
+              "sha256": "87080fc1c4188975566a3f63259f3e71a5f72cd7324e922cc937c40092d49538",
+              "visuallyReviewed": true
+            },
+            {
+              "name": "references-load-failure-2.bmp",
+              "sha256": "a1e7ca472e62bb3e7a75ec26131b99b0443b34cfc1d7344a682e53040372f1fd",
+              "visuallyReviewed": false
+            }
+          ],
+          "localLibraryRows": 0,
+          "modalClass": "#32770",
+          "modalTitle": "Native Workbench",
+          "modalText": "Expected a JSON array",
+          "referenceNotice": "Loading local references..."
+        },
+        {
+          "pathCase": "path with spaces",
+          "artifactId": 11347739900,
+          "artifactUrl": "https://github.com/comparativechrono/workbench/actions/runs/37317100708/artifacts/11347739900",
+          "artifactSha256": "3af0ee34ba5395ff8bb7416c11290d299c1755e52acf42b582b4f077d91d4adb",
+          "downloadedArtifactHashVerified": true,
+          "reportSha256": "26be076cf9dffe784dfa4ba8a6c37db1011aba92ca78d61b4a1e4160590bb168",
+          "gateSha256": "6c421a6372912a59c3bedad336cf89d6fa171ead587bb3aa65a731a5b468625e",
+          "passedBeforeGuiFailure": 7,
+          "skips": [],
+          "platform": "Windows-2022Server-10.0.20348-SP0",
+          "guiError": "The native reference window did not finish loading its local library.",
+          "captures": [
+            {
+              "name": "references-load-failure-0.bmp",
+              "sha256": "e0759434b0f4e5ae975e56fc94f995ce943838f935903954d4847047f808751b",
+              "visuallyReviewed": true
+            },
+            {
+              "name": "references-load-failure-1.bmp",
+              "sha256": "87080fc1c4188975566a3f63259f3e71a5f72cd7324e922cc937c40092d49538",
+              "visuallyReviewed": true
+            },
+            {
+              "name": "references-load-failure-2.bmp",
+              "sha256": "e8b78f6a1c6104e65b056b4517fd8b19d362f303cc747929f78291f23959d530",
+              "visuallyReviewed": false
+            }
+          ],
+          "localLibraryRows": 0,
+          "modalClass": "#32770",
+          "modalTitle": "Native Workbench",
+          "modalText": "Expected a JSON array",
+          "referenceNotice": "Loading local references..."
+        }
+      ]
+    }
+  ],
+  "passedChecksInAllFourJobs": [
+    "Live release-pinned yeast search and five-product discovery.",
+    "Cancellation after transferred bytes removed only its partial download and published no reference.",
+    "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+    "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+    "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods.",
+    "Installed application and starter pack integrity checks passed after reference use.",
+    "Native 0.6.0-to-0.7.0 core migration and idempotent repeat preserved optional packs, saved pins, references and results; updated private host reused them offline."
+  ],
+  "nativeFinding": "Both diagnostic Windows jobs retained a Native Workbench modal saying Expected a JSON array while References remained at Loading local references... with zero local rows. The underlying library was successfully reused by earlier private-host checks.",
+  "sourceDiagnosis": "Separate source review identified unguarded strict JSON array access while the initial reference state is empty, and when discovery is reset to null. The native evidence confirms the displayed exception, not its source stack frame.",
+  "validationBoundary": "These are failed exact RC2 Windows gates, not a release pass. All seven backend and updater checkpoints passed in both paths on both runs. No normal/minimum/Downloaded GUI acceptance sequence completed. The diagnostic run changed the gate only and used unchanged RC2 application bytes.",
+  "evidenceHandling": "Downloaded CI artifact ZIPs were independently SHA-256 verified. Reports and captures were inspected locally; no binary artifacts are committed."
+}
