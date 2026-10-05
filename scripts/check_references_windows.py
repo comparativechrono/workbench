@@ -570,6 +570,21 @@ def gui_smoke(root, evidence):
                 and user.PostMessageW(hwnd, 0x0101, value, 0xC0000001),
                 "Could not queue native keyboard input.")
 
+    def find_control(owner, identity):
+        # General settings live in a scrollable child panel from 0.8 onward.
+        direct = user.GetDlgItem(owner, identity)
+        if direct:
+            return direct
+        found = []
+        @callback_type
+        def each(child, _):
+            if user.GetDlgCtrlID(child) == identity:
+                found.append(child)
+                return False
+            return True
+        user.EnumChildWindows(owner, each, 0)
+        return found[0] if found else None
+
     def inspector_edits(hwnd):
         children = []
         @callback_type
@@ -666,11 +681,20 @@ def gui_smoke(root, evidence):
         progress("wait for main window", pid=process.pid)
         main = find_window(process.pid, "Native Workbench")
         wait_native_state("wait for native task library", lambda:
-            user.IsWindowEnabled(user.GetDlgItem(main, 403))
-            and send(user.GetDlgItem(main, 104), 0x1004) > 0, main)
+            user.IsWindowEnabled(find_control(main, 403))
+            and send(find_control(main, 104), 0x1004) > 0, main)
+        # The three-pane desktop opens single tools directly. This regression
+        # intentionally uses its workflow editor so the existing Add path stays
+        # covered; older 0.7 applications have no mode button and remain valid.
+        workflow_button = find_control(main, 411)
+        if workflow_button:
+            require(user.PostMessageW(workflow_button, 0x00F5, 0, 0),
+                    "Could not enter native workflow mode.")
+            wait_native_state("open native workflow editor", lambda:
+                user.IsWindowVisible(find_control(main, 105)), main)
         task_query = ctypes.create_unicode_buffer("Index a reference")
-        send(user.GetDlgItem(main, 102), 0x000C, 0, ctypes.addressof(task_query))
-        tasks = user.GetDlgItem(main, 104)
+        send(find_control(main, 102), 0x000C, 0, ctypes.addressof(task_query))
+        tasks = find_control(main, 104)
         wait_native_state("filter the native SAMtools reference indexing task", lambda:
             send(tasks, 0x1004) == 1, main)
         require(user.PostMessageW(tasks, 0x0100, 0x24, 1)
@@ -678,12 +702,11 @@ def gui_smoke(root, evidence):
                 "Could not select the native reference indexing task.")  # VK_HOME
         wait_native_state("select the native reference indexing task", lambda:
             send(tasks, 0x100C, ctypes.c_size_t(-1).value, 2) == 0
-            and user.IsWindowEnabled(user.GetDlgItem(main, 105)), main)
-        require(user.PostMessageW(user.GetDlgItem(main, 105), 0x00F5, 0, 0),
+            and user.IsWindowEnabled(find_control(main, 105)), main)
+        require(user.PostMessageW(find_control(main, 105), 0x00F5, 0, 0),
                 "Could not click Add selected task.")  # queued BM_CLICK
         wait_native_state("add native reference indexing step", lambda:
-            send(user.GetDlgItem(main, 106), 0x1004) == 1
-            and any(item["text"] == "Index a reference" for item in inspector_edits(main)), main)
+            any(item["text"] == "Index a reference" for item in inspector_edits(main)), main)
         progress("open References", pid=process.pid, windows=[
             {"hwnd": hwnd, "title": text(hwnd), "class": text(hwnd, True)}
             for hwnd in windows(process.pid)])

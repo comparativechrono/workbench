@@ -10,6 +10,20 @@ and the repository [README](../README.md). Update the date, source baseline and
 evidence when the state changes; do not silently turn a pending item into a claim
 of completion.
 
+## Interface development, 2026-10-05
+
+The working branch `ui/galaxy-native-workspace` is developing application
+**0.8.0** with the user-approved Galaxy-inspired native interface: Tools on the
+left, standalone options in the centre, General settings on the right, and a
+separate drag/drop Workflow mode whose right pane edits the selected step.
+Standalone tools and the workflow preserve independent edits within the running
+process. This development version is **unreleased**; the exact packaged Windows
+UI gate is **pending**, not passed. The new session/connection source suite and
+existing host/reference-service suites passed 33 checks on Linux, with zero
+failures or skips. See the [native UI guide](native-ui.md) for the contracts,
+commands and remaining gate. Published 0.7.0 bytes and all dated release evidence
+below remain unchanged.
+
 ## Reference-discovery release
 
 The 0.7 source adds a native References finder and offline local library,

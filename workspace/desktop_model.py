@@ -205,6 +205,36 @@ class DesktopModel:
                     choices.append(descriptor)
         return choices
 
+    def connection_targets(self, ref):
+        """Bounded preview for one dragged source; connect remains authoritative.
+
+        Publishing every source choice on every node made snapshots quadratic.
+        Walk the producer's ancestors once instead: connecting it to itself or
+        an ancestor would create a cycle, exactly as excluded by _choices().
+        """
+        descriptor = self._ref(ref)
+        nodes = {node["id"]: node for node in self.graph["nodes"]}
+        excluded, pending = set(), [descriptor["nodeId"]] if descriptor.get("nodeId") else []
+        while pending:
+            identity = pending.pop()
+            if identity in excluded:
+                continue
+            excluded.add(identity)
+            node = nodes.get(identity, {})
+            pending.extend(source.split("::", 1)[0] for refs in node.get("inputs", {}).values()
+                           for source in refs if "::" in source)
+        targets = []
+        for node in self.graph["nodes"]:
+            if node["id"] in excluded:
+                continue
+            for port in self._tool(node, optional=True).get("ports", []):
+                refs = node.get("inputs", {}).get(port["id"], [])
+                maximum = int(port.get("max", 1))
+                capacity = maximum == 1 or len(refs) < maximum or ref in refs
+                if capacity and self._accepts(port, descriptor):
+                    targets.append({"nodeId": node["id"], "portId": port["id"]})
+        return targets
+
     def _set_inputs(self, node, port, refs):
         if not isinstance(refs, list) or not all(isinstance(ref, str) for ref in refs):
             raise ValueError("Connections must be a list of named sources.")

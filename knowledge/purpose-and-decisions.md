@@ -1,6 +1,6 @@
 # Purpose and decisions
 
-Reviewed 2026-10-04. Product decisions below capture the project owner's explicit
+Reviewed 2026-10-05. Product decisions below capture the project owner's explicit
 requirements and tester feedback from the development conversation. Technical
 status must be read with [current state](current-state.md), not inferred from a
 requirement alone.
@@ -134,3 +134,30 @@ or a user-approved product change. Add a dated replacement decision and link the
 superseded one; do not erase the reason for the previous approach. Never treat
 this record as authorization to publish or alter account settings in a new
 session.
+
+## Galaxy-inspired native interface, 2026-10-05
+
+Following tester feedback, the user approved a Galaxy-like three-pane layout
+and workflow editor. This updates D06/D07/D11's presentation direction while
+preserving D03's native desktop requirement and the accepted searchable tool
+library. The previous central graph/step-list/editor arrangement is superseded;
+the rejected wheel designs remain historical.
+
+Tools appear on the left. Selecting one in Tools mode opens its standalone
+inputs and options in the centre. General settings occupy the right pane,
+including input/output folders and References. A Workflow button opens a canvas
+for dragging tools and connecting compatible named outputs/inputs; selecting a
+step displays its options on the right. Workbench keeps its own branding and
+native controls, with no copied Galaxy assets or dataset-history pane.
+
+Standalone settings and the workflow remain independent, with edits retained
+when switching modes within the running process. Saved tool presets and saved
+pipeline graphs keep their separate established persistence contracts. Input
+folder selection supplies browsing context, not automatic scientific bindings.
+Canvas connections retain semantic typing, cardinality, cycle rejection and
+exact pack pins; drawing a link is never sufficient evidence of compatibility.
+
+The [native UI guide](native-ui.md) records implementation boundaries and the
+0.8.0 development checkpoint. This is a user-approved product direction; native
+Windows acceptance and publication are separate evidence, pending at the time
+of this decision entry. The completed 0.7.0 release is unchanged.

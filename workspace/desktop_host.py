@@ -59,10 +59,15 @@ def validate_request(request):
 class DesktopHost:
     def __init__(self, root, *, app=None, model=None):
         self.app = app if app is not None else Workbench(root)
-        if model is None:
-            from desktop_model import DesktopModel
-            model = DesktopModel(self.app.root, self.app.catalog)
-        self.model = model
+        from desktop_model import DesktopModel
+        # Standalone tools and the workflow have independent edits, bindings,
+        # selections and undo stacks. An explicitly supplied model remains the
+        # active workflow for callers embedding the older single-model host.
+        self._workflow_model = model if model is not None else DesktopModel(self.app.root, self.app.catalog)
+        self._tool_model = DesktopModel(self.app.root, self.app.catalog)
+        self._tool_models = {}
+        self.mode = "workflow" if model is not None else "tool"
+        self.model = self._workflow_model if model is not None else self._tool_model
         self.model_lock = threading.RLock()
         self.closing = threading.Event()
         self._pack_model_revision = None
@@ -70,6 +75,7 @@ class DesktopHost:
     def snapshot(self):
         with self.model_lock:
             result = copy.deepcopy(self.model.snapshot())
+            result["mode"] = self.mode
         # Catalogue metadata describes installed operations, never command input.
         result.setdefault("catalog", self.app.catalog)
         result["app_version"] = VERSION
@@ -79,6 +85,19 @@ class DesktopHost:
     def graph(self):
         with self.model_lock:
             return copy.deepcopy(self.model.graph)
+
+    def _select_mode(self, mode):
+        """Caller holds app.lock then model_lock, including the busy check."""
+        self.mode = mode
+        self.model = self._workflow_model if mode == "workflow" else self._tool_model
+
+    def _refresh_models(self):
+        """Update every session without replacing its exact saved pack pins."""
+        with self.app.lock:
+            with self.model_lock:
+                models = [self._workflow_model, self._tool_model, *self._tool_models.values()]
+                for model in {id(model): model for model in models}.values():
+                    model.update_catalog(self.app.catalog)
 
     def dispatch(self, method, params):
         if self.closing.is_set() and method != "shutdown":
@@ -91,6 +110,38 @@ class DesktopHost:
                 result["history"] = history["runs"]
                 result["history_omitted"] = history.get("omitted", 0)
             return result
+        if method in ("workspace/mode", "workspace/tool"):
+            key = "mode" if method == "workspace/mode" else "toolId"
+            if set(params) != {key}:
+                raise ValueError("Unknown workspace request field.")
+            value = short_text(params[key], "workspace " + key, 200)
+            if key == "mode" and value not in ("tool", "workflow"):
+                raise ValueError("Choose tool or workflow mode.")
+            with self.app.lock:
+                self.app.ensure_editable()
+                with self.model_lock:
+                    if key == "toolId":
+                        # Resolve before touching the current selection. Failed
+                        # requests must leave the workflow and active tool intact.
+                        tool = resolve_tool(self.app.catalog, value)
+                        model = self._tool_models.get(value)
+                        if model is None or not model.graph["nodes"]:
+                            from desktop_model import DesktopModel
+                            model = DesktopModel(self.app.root, self.app.catalog)
+                            model.dispatch("add_tool", {"toolId": value})
+                            model.graph["name"] = tool["name"]
+                            self._tool_models[value] = model
+                        self._tool_model = model
+                        self._select_mode("tool")
+                    else:
+                        self._select_mode(value)
+                return self.snapshot()
+        if method == "workspace/connection-targets":
+            if set(params) != {"ref"}:
+                raise ValueError("Unknown connection preview field.")
+            ref = short_text(params["ref"], "connection source", 200)
+            with self.model_lock:
+                return {"ref": ref, "targets": self.model.connection_targets(ref)}
         if method.startswith("packs/"):
             action = method.split("/", 1)[1]
             if action in ("list", "status"):
@@ -104,8 +155,7 @@ class DesktopHost:
             operation = result.get("operation", {})
             if (operation.get("status") == "completed" and operation.get("success")
                     and operation.get("id") != self._pack_model_revision):
-                with self.model_lock:
-                    self.model.update_catalog(self.app.catalog)
+                self._refresh_models()
                 self._pack_model_revision = operation["id"]
                 result["model"] = self.snapshot()
             return result
@@ -151,19 +201,21 @@ class DesktopHost:
             if not isinstance(payload, dict):
                 raise ValueError("Model payload must be a JSON object.")
             read_only = action in ("select", "snapshot") or action == "use_output" and not payload.get("toolId")
-            if not read_only:
-                self.app.ensure_editable()
-            with self.model_lock:
-                self.model.dispatch(action, payload)
-            return self.snapshot()
+            with self.app.lock:
+                if not read_only:
+                    self.app.ensure_editable()
+                with self.model_lock:
+                    self.model.dispatch(action, payload)
+                return self.snapshot()
         if method == "review":
             return self.app.review(copy.deepcopy(params.get("graph", self.graph())))
         if method in ("run", "check"):
-            self.app.ensure_editable()
-            request = {"output_folder": params.get("output_folder")}
-            if method == "run":
-                request["graph"] = copy.deepcopy(params.get("graph", self.graph()))
-            return self.app.start(request, check=method == "check")
+            with self.app.lock:
+                self.app.ensure_editable()
+                request = {"output_folder": params.get("output_folder")}
+                if method == "run":
+                    request["graph"] = copy.deepcopy(params.get("graph", self.graph()))
+                return self.app.start(request, check=method == "check")
         if method in ("status", "run/get"):
             if params.get("run_id"):
                 result = self.app.get_run(params["run_id"])
@@ -204,7 +256,6 @@ class DesktopHost:
                     request["params"] = copy.deepcopy(node.get("params", {}))
             return self.app.save(request)
         if method == "load":
-            self.app.ensure_editable()
             kind = params.get("kind")
             key = {"pipeline": "pipelines", "preset": "presets"}.get(kind)
             if key is None:
@@ -213,24 +264,28 @@ class DesktopHost:
             item = next((s for s in self.app.saved()[key] if s.get("id") == identity), None)
             if item is None:
                 raise ValueError("The selected saved item is no longer available.")
-            with self.model_lock:
-                if kind == "pipeline":
-                    self.model.dispatch("load_graph", {"graph": item["graph"], "template": True})
-                else:
-                    self.model.dispatch("apply_preset", {"nodeId": params.get("node_id", params.get("nodeId")), "preset": item})
-            return self.snapshot()
+            with self.app.lock:
+                self.app.ensure_editable()
+                with self.model_lock:
+                    if kind == "pipeline":
+                        self._workflow_model.dispatch("load_graph", {"graph": item["graph"], "template": True})
+                        self._select_mode("workflow")
+                    else:
+                        self.model.dispatch("apply_preset", {"nodeId": params.get("node_id", params.get("nodeId")), "preset": item})
+                return self.snapshot()
         if method == "example":
-            self.app.ensure_editable()
             from example import make_example
-            graph = make_example(self.app.root, self.app.catalog)
-            with self.model_lock:
-                self.model.dispatch("load_graph", {"graph": graph, "template": False})
-            return self.snapshot()
+            with self.app.lock:
+                self.app.ensure_editable()
+                graph = make_example(self.app.root, self.app.catalog)
+                with self.model_lock:
+                    self._workflow_model.dispatch("load_graph", {"graph": graph, "template": False})
+                    self._select_mode("workflow")
+                return self.snapshot()
         if method == "import":
             result = self.app.import_pack(params)
             if result.get("success"):
-                with self.model_lock:
-                    self.model.update_catalog(self.app.catalog)
+                self._refresh_models()
                 result["model"] = self.snapshot()
             return result
         if method == "open":
