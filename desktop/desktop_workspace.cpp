@@ -2076,7 +2076,9 @@ class Workspace {
     const int previous = ListView_GetNextItem(tasks, -1, LVNI_SELECTED);
     if (previous >= 0 && static_cast<size_t>(previous) < taskIds.size())
       keepTool = taskIds[static_cast<size_t>(previous)];
-    if (!workflowMode && !getstr(state.get("inspector").get("tool"), "id").empty())
+    // An empty standalone session must not inherit a selected library row
+    // from Workflow mode: clicking that row needs to open its first form.
+    if (!workflowMode)
       keepTool = getstr(state.get("inspector").get("tool"), "id");
     if (categories) {
       SendMessageW(category, CB_RESETCONTENT, 0, 0);

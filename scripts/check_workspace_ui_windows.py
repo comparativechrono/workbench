@@ -357,14 +357,16 @@ def gui_contracts(root, evidence, report):
             return [c for c in ui.controls() if c["id"] >= 2000 and c["class"].lower() == "edit"]
         def has_text(value):
             return any(c["text"] == value for c in edits())
-        def select_tool(query, *, drag_to=None):
-            ui.set_text(ui.child(102), query)
-            ui.wait("filter tool " + query, lambda: ui.send(ui.child(104), 0x1004) == 1)
+        def first_tool_row():
             tasks = ui.child(104)
             left, top, right, _ = ui.bounds(tasks)
             header = ui.send(tasks, 0x101F)  # LVM_GETHEADER, handle result only.
             first_y = ui.bounds(header)[3] + round(11 * scale) if header and ui.user.IsWindowVisible(header) else top + round(13 * scale)
-            start = (left + min(round(70 * scale), (right-left)//2), first_y)
+            return left + min(round(70 * scale), (right-left)//2), first_y
+        def select_tool(query, *, drag_to=None):
+            ui.set_text(ui.child(102), query)
+            ui.wait("filter tool " + query, lambda: ui.send(ui.child(104), 0x1004) == 1)
+            start = first_tool_row()
             if drag_to:
                 ui.drag(start, point(ui.child(117), *drag_to))
             else:
@@ -391,6 +393,24 @@ def gui_contracts(root, evidence, report):
                 require(tools[2] <= canvas[0] and canvas[2] <= form[0], "Workflow panes overlap.")
             geometry.append({"mode": mode, "requestedSize": size, "actualWindowBounds": ui.bounds(ui.main),
                              "dpi": ui.user.GetDpiForWindow(ui.main), "controls": rows})
+        # A selection made only in the workflow library must not leave a stale
+        # highlighted row in an empty standalone workspace. Deliberately retain
+        # the search and click the same row without resetting the filter.
+        ui.click_button(411)
+        ui.wait("open empty workflow for library-selection regression", lambda:
+                ui.user.IsWindowVisible(ui.child(117)) and ui.user.IsWindowVisible(ui.child(105)))
+        select_tool("Coordinate sort")
+        ui.wait("select workflow library row without adding a tool", lambda:
+                ui.send(ui.child(104), 0x100C, ctypes.c_size_t(-1).value, 2) == 0)
+        require(not has_text("Coordinate sort"), "Workflow library selection unexpectedly added a node.")
+        ui.click_button(410)
+        ui.wait("return to empty standalone workspace with unchanged filter", lambda:
+                ui.user.IsWindowVisible(ui.child(118)) and not ui.user.IsWindowVisible(ui.child(117)))
+        require(ui.label(ui.child(102)) == "Coordinate sort", "Switching modes unexpectedly cleared the library filter.")
+        require(ui.send(ui.child(104), 0x1004) == 1, "The selected library row disappeared after mode switch.")
+        ui.click_at(*first_tool_row())
+        ui.wait("same library row opens standalone tool on first click", lambda: has_text("Coordinate sort"))
+        captures.append(ui.capture("tools-after-workflow-library-selection.bmp"))
         select_tool("Index a reference")
         ui.wait("single click opens standalone reference indexing form", lambda: has_text("Index a reference"))
         measure("tool", "1280x900")
@@ -447,7 +467,8 @@ def gui_contracts(root, evidence, report):
         write_json(evidence / "ui-control-geometry.json", geometry)
         return {"dpi": dpi, "displayPixels": [ui.user.GetSystemMetrics(0), ui.user.GetSystemMetrics(1)],
                 "captures": captures, "geometryFile": "ui-control-geometry.json",
-                "checks": ["Single-click standalone tool form", "Three independent panes with general settings",
+                "checks": ["First click opens a previously selected workflow-library row in empty tool mode",
+                           "Single-click standalone tool form", "Three independent panes with general settings",
                            "Actual mouse drag from tool list onto workflow canvas twice",
                            "Actual compatible output-to-input mouse connection",
                            "Canvas selection displays tool options on right",
