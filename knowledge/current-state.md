@@ -17,12 +17,22 @@ The working branch `ui/galaxy-native-workspace` is developing application
 left, standalone options in the centre, General settings on the right, and a
 separate drag/drop Workflow mode whose right pane edits the selected step.
 Standalone tools and the workflow preserve independent edits within the running
-process. This development version is **unreleased**; the exact packaged Windows
-UI gate is **pending**, not passed. The new session/connection source suite and
-existing host/reference-service suites passed 33 checks on Linux, with zero
-failures or skips. See the [native UI guide](native-ui.md) for the contracts,
-commands and remaining gate. Published 0.7.0 bytes and all dated release evidence
-below remain unchanged.
+process. The candidate is in
+[draft PR #1](https://github.com/comparativechrono/workbench/pull/1) and remains
+**unreleased**. Five source suites passed **57 checks on Linux**, with zero
+failures or skips. The final candidate at `c82c559d02a0b70e79afe67da93ace9e344f1ef3`
+passed **18 native workspace checks and 8 References/update checks per path**
+in ordinary and space-containing Windows installations, with zero failures or
+skips, in [run 37376078599](https://github.com/comparativechrono/workbench/actions/runs/37376078599).
+The downloaded archives/inventories and all 36 capture hashes were verified.
+The [candidate bundle](https://github.com/comparativechrono/workbench/actions/runs/37376078599/artifacts/11371647135)
+expires 4 November 2026; use its starter in a separate folder for review.
+Migration coverage is 0.6.0-to-0.8.0 only, with no 0.7.0 upgrade claim. Manual
+tester acceptance, high-DPI/multi-monitor movement and folder pickers remain
+unvalidated. See the [native UI guide](native-ui.md) and
+[development evidence](evidence/native-ui-0.8.0-development-2026-10-05.json) for
+exact candidate identities, retained failed attempts and scope. Published
+0.7.0 bytes and all dated release evidence below remain unchanged.
 
 ## Reference-discovery release
 

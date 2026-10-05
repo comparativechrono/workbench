@@ -4,6 +4,14 @@ This describes the 0.7 reference-discovery implementation, reviewed
 on 2026-10-05. It is a map of the implementation, not a claim that every deployment
 or scientific use has been validated. Start with [the knowledge index](README.md).
 
+**Development scope, 2026-10-05:** the separate 0.8.0 candidate adds the native
+three-pane interface, independent standalone/workflow editing sessions and
+bounded connection previews described in the [native UI guide](native-ui.md).
+Its application/resource versions are 0.8.0; the 0.7.0 version statements below
+describe the published baseline. The final candidate passed the automated
+native workspace and References gates; manual tester acceptance remains
+outstanding. Published 0.7.0 artifacts/evidence remain unchanged.
+
 ## What runs on a user's machine
 
 The current application is a native Windows x86-64 desktop program. It bundles

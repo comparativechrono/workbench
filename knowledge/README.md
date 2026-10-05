@@ -16,6 +16,17 @@ exact-final Windows installation, graph and scientific gates. Evidence for
 each release retains its own date and tested bytes. Re-check the current tree
 and releases before treating this snapshot as current.
 
+The [0.8.0 native interface candidate](native-ui.md) is separate development in
+[draft PR #1](https://github.com/comparativechrono/workbench/pull/1). Its five
+source suites passed 57 checks with no failures or skips. An earlier candidate
+exposed gate and tool-selection issues retained in the evidence. The final
+candidate passed 18 native workspace checks and 8 References/update checks in
+each installation path, with zero failures/skips. It remains unreleased and
+awaits manual tester acceptance; published 0.7.0 and its evidence are unchanged.
+The guide links the verified, time-limited candidate download and unrun desktop
+scenarios. See the [development record](evidence/native-ui-0.8.0-development-2026-10-05.json)
+for exact tested bytes and retained validation attempts.
+
 ## Reading order
 
 | File | Question it answers |
@@ -23,6 +34,7 @@ and releases before treating this snapshot as current.
 | [Purpose and decisions](purpose-and-decisions.md) | Who is this for, what approach was chosen, and what must not be lost? |
 | [Current state](current-state.md) | What is released, tested, limited or unfinished? |
 | [Architecture](architecture.md) | Where does each responsibility live, and how does a run work? |
+| [Native UI development](native-ui.md) | How do the three panes, standalone tools and workflow canvas work, and what remains to validate? |
 | [Reference discovery](../docs/reference-discovery-0.7.md) | How are references found, downloaded, reused offline and recorded in runs? |
 | [Development](development.md) | How do I recover inputs, build, test and resume work? |
 | [Pack development](pack-development.md) | How do I add a real tool without rebuilding the app? |
@@ -41,7 +53,8 @@ interaction decisions.
 - Product requirements and design history come from the project owner's
   development conversation, captured explicitly in the decision record. They
   are requirements, not proof that every feature is fully implemented.
-- Current behavior is checked against source at the baseline above. Source links
+- Each dated topic identifies its reviewed source or validation checkpoint;
+  newer development is separate from the starting baseline above. Source links
   are repository-relative so they work in a clone and on GitHub.
 - Release facts come from published release metadata, accompanying reports and
   named CI runs. A historical pass applies to the tested bytes and environment.

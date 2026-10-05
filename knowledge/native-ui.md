@@ -3,9 +3,24 @@
 **Status recorded: 2026-10-05.** The Galaxy-inspired interface is development
 work for application **0.8.0**, on `ui/galaxy-native-workspace`, starting from
 `7c6f2437842788daf9918ac2194ef859b153092c`. It is **unreleased** at this checkpoint.
-The published 0.7.0 release and its reference-validation evidence remain
-unchanged. Native Windows validation of this new interface is **pending**;
-source checks below do not establish packaged desktop behavior.
+The candidate is being reviewed in
+[draft PR #1](https://github.com/comparativechrono/workbench/pull/1).
+The final candidate at source
+`c82c559d02a0b70e79afe67da93ace9e344f1ef3` passed the automated packaged Windows
+workspace and References gates in both installation paths. Manual tester
+acceptance remains outstanding. The published 0.7.0 release and its
+reference-validation evidence remain unchanged; no 0.8.0 release was created.
+
+The [candidate bundle](https://github.com/comparativechrono/workbench/actions/runs/37376078599/artifacts/11371647135)
+contains the starter, corresponding source and 0.6.0 updater archives. For UI
+review, extract the **0.8.0 starter into a separate folder** and run
+`NativeWorkbench.exe`. A 0.7.0-to-0.8.0 updater has not been validated or
+provided. This GitHub Actions artifact expires **4 November 2026**.
+
+| Verified candidate item | SHA-256 |
+| --- | --- |
+| Actions bundle, 75,395,876 bytes | `61bd2deca854b43596b82be95cebb4d72179df6cd34c2abe097361df8777de7e` |
+| `native-workbench-0.8.0-starter-windows.zip` | `5e59dee9efd38f2ee10516292294e4bd711b2c0a61e35b2bbbb49965f27383e4` |
 
 ## User-approved direction
 
@@ -116,6 +131,12 @@ x86-64 with Python 3.12.14**, against the modified working tree:
 | `python3 workspace/tests/test_desktop_modes.py` | 11 passed, 0 failures, 0 skips |
 | `python3 workspace/tests/test_desktop_host.py` | 12 passed, 0 failures, 0 skips |
 | `python3 workspace/tests/test_reference_service.py` | 10 passed, 0 failures, 0 skips |
+| `python3 tests/test_split_release.py` | 8 passed, 0 failures, 0 skips |
+| `python3 tests/test_core_update.py` | 16 passed, 0 failures, 0 skips |
+
+Total: **57 passed, 0 failures, 0 skips**. The
+[development record](evidence/native-ui-0.8.0-development-2026-10-05.json)
+retains this checkpoint and candidate-specific native attempts.
 
 The new suite checks independent session edits/undo, strict requests, active
 reference binding/review/run selection, busy-state exclusion, pipeline/preset
@@ -124,16 +145,50 @@ and capacity rules. A synthetic 512-node graph remains below the 8 MiB snapshot
 limit; its 511-target preview remains below 64 KiB. These fixtures do not execute
 scientific tools or native Windows controls.
 
-The exact packaged Windows gate is being developed in
-[`scripts/check_workspace_ui_windows.py`](../scripts/check_workspace_ui_windows.py).
-It must establish actual pane placement, tool selection, scrolling/resizing,
-drag/drop connections, mode preservation, References access and native control
-behavior using the packaged executable and bundled host. Preserve captures,
-control bounds, source/artifact hashes, environment and failed attempts. The
-existing reference gate must also be applied where this UI changes its access
-or binding path. Do not transfer 0.7.0's native passes to the new executable.
+The exact final candidate passed native Windows
+[run 37376078599](https://github.com/comparativechrono/workbench/actions/runs/37376078599)
+on **Windows Server 2022 with bundled Python 3.13.16**, at the observed **96 DPI**.
+Each ordinary and space-containing installation passed **18 workspace checks**
+(6 packaged-host checks and 12 GUI checks) plus **8 References/update checks**,
+with zero failures or skips.
 
-Before a release, replace this pending checkpoint with links to the exact
-successful candidate/final evidence and public artifact verification. Retain
-any excluded DPI, multi-monitor, accessibility or picker scenarios explicitly;
-an unavailable check is not a pass.
+| Installation path | Workspace report | References/update report |
+| --- | --- | --- |
+| Ordinary | [18 passed](evidence/native-ui-0.8.0-final-ordinary-ui-2026-10-05.json) | [8 passed](evidence/native-ui-0.8.0-final-ordinary-references-2026-10-05.json) |
+| Contains spaces | [18 passed](evidence/native-ui-0.8.0-final-spaces-ui-2026-10-05.json) | [8 passed](evidence/native-ui-0.8.0-final-spaces-references-2026-10-05.json) |
+
+The workspace gate exercised the actual packaged executable: standalone tool
+selection, distinct panes, two tool-list-to-canvas drags, an output-to-input
+connection, right-pane selection/options, General settings, mode-specific
+guidance, retained standalone inputs/browsing folder and workflow edits, and
+pane separation at actual window sizes of 1044×788 and 1044×740 on the runner's
+1024×768 display. Requested larger sizes were constrained by that desktop;
+these checks do not establish coverage at the application's absolute minimum
+height or on a larger monitor. Pointer clicks and drags used native
+`SendInput`. One additional regression queued `WM_LBUTTONDBLCLK`/`WM_LBUTTONUP`
+to the real ListView to check activation of an unselected refreshed row; that
+notification case is distinguished from the physical pointer assertions.
+
+References checks covered all five live products, cancellation, receipt/file
+integrity, offline native SAMtools analysis, frozen provenance, native
+References download/binding controls, and **0.6.0-to-0.8.0** migration with an
+idempotent repeat preserving user data. This does not establish an upgrade from
+0.7.0. All three downloaded candidate archive hashes, the 68 core entries and
+143 starter entries were verified. All 36 final capture hashes were verified;
+the corrected Tools/minimum and connected-workflow captures were visually
+reviewed.
+
+Earlier failures and successful intermediate runs remain in the
+[development record](evidence/native-ui-0.8.0-development-2026-10-05.json).
+They exposed gate control detection and real tool-list activation issues.
+Visual review of an intermediate passing candidate also found stale workflow
+guidance in Tools mode; the final candidate fixes it and adds a native
+regression. Historical results retain their exact source/artifact identities.
+
+The maintained gate is
+[`scripts/check_workspace_ui_windows.py`](../scripts/check_workspace_ui_windows.py).
+Manual tester acceptance, broader accessibility evaluation, high-DPI and
+multi-monitor movement, and native folder-picker interaction remain outside
+this acceptance. Do not count those unrun scenarios as passed. A future release
+must retain its own exact artifact identity and publication verification; this
+checkpoint validates a review candidate and leaves published 0.7.0 unchanged.
