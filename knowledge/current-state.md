@@ -24,7 +24,8 @@ The same development changes route saved/native DAG edges around cards and
 derive a native multi-resolution application icon from the repository SVG.
 Exact candidate `beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d` is implemented and
 validated in [PR #2](https://github.com/comparativechrono/workbench/pull/2), still
-unpublished with tester review pending. Initial
+unpublished, with tester acceptance and explicit release authorization now
+recorded in the [acceptance record](evidence/cwl-dag-icon-0.9.0-acceptance-2026-10-06.json). Initial
 [run 37485987457](https://github.com/comparativechrono/workbench/actions/runs/37485987457)
 passed **125 source checks** including stock `cwltool` fixture execution, plus
 **32 workspace, 9 References/update and 7 science/export/SVG checks per Windows
@@ -38,13 +39,14 @@ bytes; four normal/83%-zoom captures were reviewed. The zoom capture used a
 native button command because the VM taskbar covered its screen location;
 physical zoom clicks were already covered by the separate workspace gate.
 The [candidate handover](cwl-dag-icon-0.9.0-handover.md)
-records exact downloads, hashes and remaining acceptance. The
+records exact downloads, hashes, acceptance and remaining release work. The
 [CWL results guide](cwl-results.md) records the export contract and limits,
 including external input rebinding, optional compatible executable overrides
 and the absence of a universal cross-platform or biological-preflight guarantee.
 Published 0.8.0 archives, release inventory/history and tool-pack bytes remain
-unchanged. The included updater is for 0.6.0; a 0.8.0-to-0.9.0 updater was not
-built or tested.
+unchanged. The accepted candidate includes its tested 0.6.0 updater. A separate
+0.8.0-to-0.9.0 updater is being prepared against the accepted starter; its build,
+native preservation checks and publication remain pending.
 
 ## Published native interface update, 2026-10-06
 

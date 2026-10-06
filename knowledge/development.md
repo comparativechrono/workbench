@@ -68,8 +68,11 @@ rebuilding it. Final validator `bc972125814c1f24dca86391d0c5f240716a52f3` passed
 with both `nativeGUIValidated` flags true. It uses `BM_CLICK` only for the zoom
 capture where the VM taskbar occludes the physical button position; the separate
 workspace gate covers actual pointer zoom. Application source remains `beea34a`.
-Tester review and publication remain pending. The included 0.6.0 updater passed its preservation gate, but no
-0.8.0-to-0.9.0 updater has been built or tested.
+The user has accepted this exact candidate and authorized publication; see the
+[acceptance record](evidence/cwl-dag-icon-0.9.0-acceptance-2026-10-06.json). The included
+0.6.0 updater passed its preservation gate. A separate 0.8.0-to-0.9.0 updater is
+being prepared against the accepted starter and still needs its native gate.
+Publication and independent public-download verification remain pending.
 
 ## Start without disturbing existing work
 

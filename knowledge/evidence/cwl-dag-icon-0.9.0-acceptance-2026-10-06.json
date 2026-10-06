@@ -1,0 +1,22 @@
+{
+  "schema": "native-workbench-release-acceptance",
+  "schema_version": 1,
+  "recorded_on": "2026-10-06",
+  "version": "0.9.0",
+  "evidence_type": "user-reported tester acceptance and explicit release authorization",
+  "user_statement": "Go ahead accept and release, the testers are happy with it",
+  "accepted_candidate_source_commit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
+  "accepted_candidate_artifact_id": 11424165351,
+  "accepted_candidate_artifact_sha256": "26f1f2070de5ffae4cdb219bd22579f22a3af943eab6e93048fa6e38ad041071",
+  "accepted_candidate_starter_sha256": "c2661c144e073c4efdd190ffd186bacd9398b6413b81770d7a057c3947eecf02",
+  "accepted": true,
+  "publication_authorized": true,
+  "scope": "Supersedes pending tester review for the exact validated candidate. User-reported acceptance is not a new automated run and does not broaden tested display, hardware, scientific or external-CWL environments.",
+  "publication_status_at_recording": "pending; the published application remains 0.8.0",
+  "remaining_release_work_at_recording": [
+    "Build and independently validate a 0.8.0-to-0.9.0 updater against the unchanged accepted starter.",
+    "Publish the accepted archives through the established promotion workflow and verify all public assets."
+  ],
+  "validation_ledger": "cwl-dag-icon-0.9.0-validation-2026-10-06.json",
+  "final_focused_native_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37489208656"
+}

@@ -30,6 +30,12 @@ for exact identities, publication diagnostics and validation limits. The
 [0.7.0 reference-release evidence](knowledge/reference-release-handover.md)
 and published tool-pack bytes remain unchanged.
 
+The **0.9.0** candidate adds a CWL workflow to analysis results, routes DAG
+edges around cards and introduces an SVG-derived native application icon. Its
+exact-package checks passed and the user accepted it; publication is in progress.
+See the [0.9.0 handover](knowledge/cwl-dag-icon-0.9.0-handover.md) for the accepted
+identities, completed checks and remaining release work.
+
 The signed online catalogue and its `source.json` trust file are **not published
 or configured**. They require a maintainer-controlled signing key. Use the offline
 pack import described below until the signed feed is available.

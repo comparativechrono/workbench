@@ -4,7 +4,8 @@
 **0.9.0**. Exact candidate `beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d` has passed
 source/CWL interoperability and exact packaged Windows checks, including the
 final focused native diagram/icon interaction gate. It is **implemented and
-exact-candidate validated; tester review is pending and it is unpublished**.
+exact-candidate validated and user-accepted; publication is authorized and
+in progress**.
 See the [candidate handover](cwl-dag-icon-0.9.0-handover.md) for exact archives,
 run identities and retained failures. Published 0.8.0 remains unchanged.
 
@@ -166,5 +167,7 @@ It also validated six Windows-produced CWL files with stock `cwltool` on Linux;
 the original Windows locations were unavailable there, so those location
 warnings are retained. That is schema validation, not a cross-platform rerun.
 Native embedded-runner replay is likewise distinct from a Windows CWL-engine
-invocation. No 0.8.0-to-0.9.0 updater was built or tested; the included updater
-and its passing preservation checks cover 0.6.0 only.
+invocation. The accepted candidate updater and its passing preservation checks
+cover 0.6.0. A separate 0.8.0-to-0.9.0 updater is being prepared and still needs
+its native preservation gate. The [user acceptance record](evidence/cwl-dag-icon-0.9.0-acceptance-2026-10-06.json)
+authorizes publication without broadening these validation claims.

@@ -1,7 +1,7 @@
 # Current architecture
 
 This describes the reference-discovery and native interface implementation,
-reviewed through the 0.8.0 release on 2026-10-06. It is a map of the implementation, not a claim that every deployment
+reviewed through the accepted 0.9.0 candidate on 2026-10-06. It is a map of the implementation, not a claim that every deployment
 or scientific use has been validated. Start with [the knowledge index](README.md).
 
 **Release scope, 2026-10-06:** 0.8.0 adds the native
@@ -13,11 +13,14 @@ are now published and independently download-verified; see the
 [0.8.0 release handover](native-ui-0.8.0-release-handover.md). Published 0.7.0
 artifacts/evidence remain unchanged.
 
-**Development scope, 2026-10-06:** branch `feature/cwl-dag-icon` targets 0.9.0.
+**Accepted candidate, 2026-10-06:** branch `feature/cwl-dag-icon` targets 0.9.0.
 It adds a frozen packed CWL result, routes SVG/native DAG edges around cards and
-builds the native application icon from repository SVG. The version statements
-and released evidence below describe 0.8.0; exact-package validation of the new
-work is pending. See [CWL results and presentation](cwl-results.md).
+builds the native application icon from repository SVG. Exact application source
+`beea34a` passed the recorded source/interoperability and packaged Windows gates;
+the user accepted it and authorized publication. Publication and the separate
+0.8.0 updater gate remain pending. See [CWL results and presentation](cwl-results.md)
+and the [candidate handover](cwl-dag-icon-0.9.0-handover.md) for exact identities,
+retained validator failures and limits.
 
 ## What runs on a user's machine
 
@@ -58,7 +61,7 @@ pipes are handled by the native runner, including both subprocess outcomes.
 
 The GUI build target is `build/desktop/DesktopWorkbench.exe`; the release
 packager installs it as `NativeWorkbench.exe`. All three native build resource
-versions are 0.8.0. Application version is maintained in `workspace/app_version.py`
+versions are 0.9.0 in the accepted candidate. Application version is maintained in `workspace/app_version.py`
 and release metadata, independently of pack versions and pack API compatibility.
 
 ## Responsibilities and source map

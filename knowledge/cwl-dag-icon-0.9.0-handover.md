@@ -1,10 +1,12 @@
 # CWL, DAG and icon candidate handover
 
-**2026-10-06: implemented and exact-candidate validated; tester review pending;
-unpublished.** Work is on `feature/cwl-dag-icon` in
-[PR #2](https://github.com/comparativechrono/workbench/pull/2). No user acceptance
-or 0.9.0 release is recorded. Published 0.8.0 and all tool-pack bytes remain
-unchanged. The [feature guide](cwl-results.md) describes the export contract and
+**2026-10-06: exact candidate validated and accepted by the user; publication
+authorized and in progress.** Work is on `feature/cwl-dag-icon` in
+[PR #2](https://github.com/comparativechrono/workbench/pull/2). The user stated,
+“Go ahead accept and release, the testers are happy with it.” This supersedes
+pending tester review; the [acceptance record](evidence/cwl-dag-icon-0.9.0-acceptance-2026-10-06.json)
+keeps user acceptance separate from automated checks. No 0.9.0 release has yet
+been recorded. Published 0.8.0 and all tool-pack bytes remain unchanged. The [feature guide](cwl-results.md) describes the export contract and
 external execution requirements.
 
 ## Exact candidate
@@ -89,11 +91,14 @@ three earlier failed runs remain failed historical records.
 
 ## Remaining scope
 
-User review and acceptance are still outstanding. The included updater supports
-**0.6.0 only**; no 0.8.0-to-0.9.0 updater was built or tested. Independent CWL
+User acceptance and release authorization are recorded above. Publication and
+independent verification of public downloads remain outstanding. The accepted
+candidate includes a tested updater for **0.6.0 only**. A separate 0.8.0-to-0.9.0
+updater is being prepared against the unchanged accepted starter; its build and
+native preservation checks remain pending. Independent CWL
 execution needs a compatible engine, Python 3.10+, matching packs and data;
 Windows binaries are not translated to another operating system. Optional
 executable replacements and rebound data need their own scientific validation.
 No rerun of all optional packs, broad physical-display survey or new temporal
-scrolling acceptance is claimed. Candidate validation does not constitute user
-acceptance or a published 0.9.0 release.
+scrolling acceptance is claimed. User acceptance does not broaden those automated
+validation claims or establish publication before its completion.

@@ -74,7 +74,8 @@
     "cwl_results": "cwl-results.md",
     "cwl_dag_icon_0_9_0_handover": "cwl-dag-icon-0.9.0-handover.md",
     "cwl_dag_icon_0_9_0_validation": "evidence/cwl-dag-icon-0.9.0-validation-2026-10-06.json",
-    "cwl_dag_icon_0_9_0_artifact_audit": "evidence/cwl-dag-icon-0.9.0-artifact-audit-2026-10-06.json"
+    "cwl_dag_icon_0_9_0_artifact_audit": "evidence/cwl-dag-icon-0.9.0-artifact-audit-2026-10-06.json",
+    "cwl_dag_icon_0_9_0_acceptance": "evidence/cwl-dag-icon-0.9.0-acceptance-2026-10-06.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -648,7 +649,7 @@
     "recorded_on": "2026-10-06",
     "version": "0.9.0",
     "branch": "feature/cwl-dag-icon",
-    "status": "implemented and exact-candidate validated; tester review pending; unpublished",
+    "status": "exact candidate validated and user-accepted; publication authorized and in progress",
     "guide": "cwl-results.md",
     "candidate_source_commit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
     "candidate_download": {
@@ -682,7 +683,7 @@
       "Windows pack executables are not translated across operating systems; external resources are not embedded, inferred or downloaded.",
       "Native embedded-runner replay is not execution through a Windows CWL engine.",
       "Diagram routing avoids card interiors but cannot eliminate all crossings or route every obscured socket in overlapping manual layouts.",
-      "No user acceptance or published 0.9.0 release is recorded. The included updater supports 0.6.0 only; a 0.8.0-to-0.9.0 updater was not built or tested."
+      "User accepted the exact candidate and authorized publication. Publication and public-download verification remain pending. The included updater supports 0.6.0; a separate 0.8.0-to-0.9.0 updater is being prepared and requires its own native preservation gate."
     ],
     "published_release_unchanged": "0.8.0",
     "archives": [
@@ -706,7 +707,7 @@
     "artifact_audit": "evidence/cwl-dag-icon-0.9.0-artifact-audit-2026-10-06.json",
     "pull_request": "https://github.com/comparativechrono/workbench/pull/2",
     "published": false,
-    "user_accepted": false,
+    "user_accepted": true,
     "initial_validation": {
       "run_id": 37485987457,
       "overall_conclusion": "failure",
@@ -742,7 +743,7 @@
       "validator_commit": "bc972125814c1f24dca86391d0c5f240716a52f3",
       "run_id": 37489208656,
       "run_url": "https://github.com/comparativechrono/workbench/actions/runs/37489208656",
-      "status": "passed for the exact candidate; tester review pending; unpublished",
+      "status": "passed for the exact candidate; user acceptance recorded; publication pending",
       "success": true,
       "per_windows_path": {
         "passed": 9,
@@ -792,7 +793,18 @@
       "from_version": "0.6.0",
       "target_version": "0.9.0",
       "preservation_gate_passed": true,
-      "from_0_8_0_built_or_tested": false
+      "from_0_8_0_built_or_tested": false,
+      "from_0_8_0_status": "preparation in progress; native preservation gate pending"
+    },
+    "user_acceptance": {
+      "recorded_on": "2026-10-06",
+      "user_statement": "Go ahead accept and release, the testers are happy with it",
+      "evidence_type": "user-reported tester acceptance and explicit release authorization",
+      "accepted_candidate_source_commit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
+      "accepted_candidate_starter_sha256": "c2661c144e073c4efdd190ffd186bacd9398b6413b81770d7a057c3947eecf02",
+      "publication_authorized": true,
+      "scope": "Supersedes pending tester review for the exact validated candidate. User-reported acceptance is not a new automated run and does not broaden tested display, hardware, scientific or external-CWL environments.",
+      "record": "evidence/cwl-dag-icon-0.9.0-acceptance-2026-10-06.json"
     }
   }
 }
