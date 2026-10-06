@@ -307,6 +307,7 @@ def gui_checks(root, evidence, report):
                 ui.user.IsWindowEnabled(ui.child(713, owner)), 60)
         click(713, owner)
         ui.wait('Starter continues into the native workspace', lambda: not setup_window())
+        ui.wait('initial setup dismissal completes', lambda: ui.user.IsWindowEnabled(ui.child(410)))
         check(report, 'Native Starter selection completes and enters the workspace without downloading packs.')
         ui.click_button(402)
         def manager():
