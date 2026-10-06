@@ -1,0 +1,137 @@
+{
+  "schema": 1,
+  "version": "0.8.0",
+  "releaseTag": "app-v0.8.0",
+  "packagedSourceCommit": "b3928ca6a29d22b5f010a303658c2e19c24324da",
+  "publicationCommit": "6fa1886b2027cfe634d9f9234fff773cd6c646d0",
+  "acceptedRunId": 37453380541,
+  "acceptedRunUrl": "https://github.com/comparativechrono/workbench/actions/runs/37453380541",
+  "recordedUtc": "2026-10-06T13:12:04.572275+00:00",
+  "archivesRebuilt": false,
+  "candidateArtifacts": [
+    {
+      "id": 11408021439,
+      "file": "candidate.zip",
+      "bytes": 75599305,
+      "sha256": "234688eabc01315aceba6fd588094bc7bf2263670766d0bdc9d088f8f0c735c1"
+    },
+    {
+      "id": 11408610523,
+      "file": "scroll-frames.zip",
+      "bytes": 227642,
+      "sha256": "6586c47e262a4edb950a35ef2e2d01c09cccd144c9c8a235aaf3a1283e795203"
+    },
+    {
+      "id": 11408585481,
+      "file": "windows-ordinary.zip",
+      "bytes": 1251294,
+      "sha256": "f3bd46da0eb6dd81c4d9075c07f355486f484b984b467e317329e989793edf88"
+    },
+    {
+      "id": 11408091528,
+      "file": "windows-spaces.zip",
+      "bytes": 1250035,
+      "sha256": "bf75a716b79225b4d1442ac80bc09a69be7d7b6a3c41d327187f3c32d29371d8"
+    },
+    {
+      "id": 11407866586,
+      "file": "long-paths.zip",
+      "bytes": 87307,
+      "sha256": "27bc14a6d4390ca43a20023c14a2b50b5062fe53bebdd36a7c93a9b63b438e43"
+    }
+  ],
+  "sourceChecks": {
+    "passed": 82,
+    "failures": 0,
+    "skips": 0,
+    "platform": "Linux CI"
+  },
+  "nativeReports": {
+    "ordinary-workspace": {
+      "passed": 32,
+      "skips": [],
+      "sha256": "73f1d9e8b4fe140f86d39966dc23ec7bee1cc9dd863d56bbe954e40e1af4e959",
+      "path": "windows-ordinary.zip:workspace-ui-evidence/native-ui.json"
+    },
+    "ordinary-references": {
+      "passed": 8,
+      "skips": [],
+      "sha256": "43cb57d895fb58f4c28494ca96e6d3cf02a1ce5b1674d2ac13e4dc58a4b7cdeb",
+      "path": "windows-ordinary.zip:workspace-reference-evidence/native-references.json"
+    },
+    "spaces-workspace": {
+      "passed": 32,
+      "skips": [],
+      "sha256": "614df16713d7d425a9287446e2ae30a850d0eed42ccd6fbd53d9c430291ca14b",
+      "path": "windows-spaces.zip:workspace-ui-evidence/native-ui.json"
+    },
+    "spaces-references": {
+      "passed": 8,
+      "skips": [],
+      "sha256": "b533f42d8dfd7a202ef1db8ffc45226be296bca0cf7113f94c21f97d17423e4b",
+      "path": "windows-spaces.zip:workspace-reference-evidence/native-references.json"
+    },
+    "temporal": {
+      "passed": 3,
+      "frames": 960,
+      "precisionCases": 18,
+      "sha256": "185d6d59031817ddf78b8036078ba66a91983742e4b0ce68914f7a910c23db0a"
+    },
+    "longPaths": {
+      "passed": 3,
+      "rehashedOutputs": 20,
+      "sha256": "07e3e8843f8c595574f01de1063ba9ffdedc3d279e102b008d57d97d5663095b"
+    }
+  },
+  "testerAcceptance": {
+    "reportedBy": "Project owner",
+    "date": "2026-10-06",
+    "statement": "Testers are happy with the accepted candidate; publication authorized."
+  },
+  "scope": "Reuse exact accepted candidate native evidence; promotion verifies immutable archives and release downloads. No new native execution is claimed.",
+  "limits": [
+    "Hosted native display tests used Windows Server 2022, 96 DPI. Physical tester acceptance is user-reported; no tester hardware details were supplied.",
+    "Old and new packages both had zero unexpected frames in finite CI sampling; CI did not reproduce the reported visual flashing. Precision-wheel failure was reproduced and corrected.",
+    "Finite frame samples mask edit/button animation and cannot exclude between-sample flashes; no general high-DPI, multi-monitor or physical-trackpad claim.",
+    "Migration was verified from 0.6.0 only. No 0.7.0-to-0.8.0 updater is included or claimed.",
+    "Long-path validation covers recorded starter outputs, not every optional tool or native folder picker."
+  ],
+  "originalCompanions": "BUILD-PROVENANCE and source archive retain immutable creation-time candidate/pending statements; this later record supplies completed evidence.",
+  "assets": [
+    {
+      "file": "BUILD-PROVENANCE.json",
+      "bytes": 940,
+      "sha256": "b6f9285b6160da0c6d9a7c5a5195cc4404f1796c1f9db3ec7df707efb8ce0e15"
+    },
+    {
+      "file": "SHA256SUMS.txt",
+      "bytes": 320,
+      "sha256": "a9adefa254aff2fab797830a3832b82a9cc69a130800bd5594d9a7ee15c7fb01"
+    },
+    {
+      "file": "WINDOWS-EVIDENCE.zip",
+      "bytes": 2446044,
+      "sha256": "781dbb3487bcbb9ba5c17509f8ba32ed964f8d7cafa0bc8e93678882f1c94d1c"
+    },
+    {
+      "file": "native-workbench-0.8.0-source.zip",
+      "bytes": 46243835,
+      "sha256": "c2590379b45d313acbcd5bbc41344b288aa6ad159804bf06dcbdcc9726adb22f"
+    },
+    {
+      "file": "native-workbench-0.8.0-starter-windows.zip",
+      "bytes": 16948940,
+      "sha256": "df001a80033ff8e834045ec683c79672e0efdbd4880fb89fca8bf8c36d830fdc"
+    },
+    {
+      "file": "native-workbench-0.8.0-update-from-0.6.0.zip",
+      "bytes": 12897242,
+      "sha256": "3dd146267b9a8300ba957c84914bc324ea537c05b09268b48381ae6a4d530e96"
+    },
+    {
+      "file": "source-metadata.json",
+      "bytes": 1763,
+      "sha256": "364c1606a0feff888b2eebf4482c28c767032d1d56170a805b02bdc50297d90c"
+    }
+  ]
+}

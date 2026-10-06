@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "kind": "publication-attempt",
+  "success": false,
+  "releasePublished": true,
+  "runId": 37468900068,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37468900068",
+  "jobId": 112286904231,
+  "publicationCommit": "6fa1886b2027cfe634d9f9234fff773cd6c646d0",
+  "releaseId": 404720508,
+  "publishedAt": "2026-10-06T13:12:15Z",
+  "releaseUrl": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.8.0",
+  "draftReadbackVerifiedAssets": 9,
+  "promotionRefusalTestsPassed": 8,
+  "failurePhase": "First anonymous download immediately after publication",
+  "error": "HTTP 404; original failing URL was not retained, so stale draft URL versus publication propagation was not independently determined.",
+  "retainedReceipt": {
+    "path": "native-ui-0.8.0-publication-attempt-2-receipt-2026-10-06.json",
+    "bytes": 441,
+    "sha256": "b348e380642aa9835868ff8d17fbe7fe10e77555d514c87bf8124b9add459f63"
+  },
+  "promotionArtifact": {
+    "id": 11415239631,
+    "bytes": 78049210,
+    "sha256": "5f5b4b5a8d8e99858ae7d509b24fe3f07b96ed7137b96bb09c9c4835b4fd0cf2",
+    "allNinePreparedFilesMatchLaterPublicDownloads": true
+  },
+  "subsequentIndependentVerification": "native-ui-0.8.0-public-downloads-2026-10-06.json",
+  "assetsReplaced": false,
+  "applicationRebuilt": false,
+  "scope": "Original workflow remains failed; later complete public-download verification is a separate observation."
+}

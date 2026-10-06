@@ -1,0 +1,11 @@
+{
+  "success": false,
+  "phase": "public-download-verification",
+  "release": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.8.0",
+  "publicationCommit": "6fa1886b2027cfe634d9f9234fff773cd6c646d0",
+  "packagedSourceCommit": "b3928ca6a29d22b5f010a303658c2e19c24324da",
+  "publicDownloads": [],
+  "failureType": "RuntimeError",
+  "error": "Download failed: HTTP 404",
+  "recordedUtc": "2026-10-06T13:12:15.838942+00:00"
+}

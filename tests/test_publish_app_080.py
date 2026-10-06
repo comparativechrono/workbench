@@ -110,6 +110,66 @@ class PromotionControls(unittest.TestCase):
             self.assertEqual(report["publicDownloads"], [])
             self.assertEqual(report["error"], "Download failed: HTTP 415")
 
+    def test_read_only_client_rejects_mutations_before_request(self):
+        with patch.object(promotion.GitHub, "api") as request:
+            for method in ["POST", "PATCH", "DELETE"]:
+                with self.subTest(method=method), self.assertRaisesRegex(ValueError, "GET requests only"):
+                    promotion.ReadOnlyGitHub("dummy-token").api("/releases", method)
+            request.assert_not_called()
+
+    def test_public_verification_refreshes_metadata_and_retries_anonymous_404(self):
+        content = b"exact public asset"
+        canonical = f"https://github.com/{promotion.REPOSITORY}/releases/download/{promotion.TAG}/asset.txt"
+        requests, downloads = [], []
+        class Client:
+            def api(self, path, method="GET"):
+                requests.append((path, method))
+                if path.startswith("/git/ref/"):
+                    return {"object": {"sha": promotion.PUBLISHED_COMMIT}}
+                return {"id": promotion.PUBLISHED_RELEASE, "tag_name": promotion.TAG, "draft": False,
+                        "prerelease": True, "html_url": "https://github.com/example/release", "assets": [
+                            {"name": "asset.txt", "state": "uploaded", "size": len(content),
+                             "digest": "sha256:" + promotion.sha(content), "browser_download_url": canonical}]}
+            def download(self, url, path, digest, size, authenticated=False):
+                downloads.append((url, authenticated))
+                if len(downloads) == 1:
+                    raise RuntimeError("Download failed: HTTP 404")
+                assert digest == promotion.sha(content) and size == len(content)
+                path.write_bytes(content)
+        with tempfile.TemporaryDirectory() as temporary, patch.object(promotion.time, "sleep") as sleep:
+            asset = Path(temporary) / "asset.txt"
+            asset.write_bytes(content)
+            receipt = Path(temporary) / "receipt.json"
+            result = promotion.verify_public_downloads(Client(), promotion.PUBLISHED_RELEASE, [asset],
+                                                        promotion.PUBLISHED_COMMIT, receipt, True)
+            self.assertTrue(result["success"])
+            self.assertTrue(result["verificationOnly"])
+            self.assertEqual(len(result["publicDownloads"]), 1)
+            self.assertEqual(requests[0], (f"/releases/{promotion.PUBLISHED_RELEASE}", "GET"))
+            self.assertTrue(all(method == "GET" for _, method in requests))
+            self.assertEqual(downloads, [(canonical, False), (canonical, False)])
+            sleep.assert_called_once_with(2)
+
+    def test_public_verification_rejects_temporary_draft_url(self):
+        content = b"exact public asset"
+        class Client:
+            def api(self, path):
+                if path.startswith("/git/ref/"):
+                    return {"object": {"sha": promotion.PUBLISHED_COMMIT}}
+                return {"id": promotion.PUBLISHED_RELEASE, "tag_name": promotion.TAG, "draft": False,
+                        "prerelease": True, "html_url": "https://github.com/example/release", "assets": [
+                            {"name": "asset.txt", "state": "uploaded", "size": len(content),
+                             "digest": "sha256:" + promotion.sha(content),
+                             "browser_download_url": "https://github.com/example/releases/download/untagged-test/asset.txt"}]}
+            def download(self, *args):
+                raise AssertionError("Must not download an unexpected URL")
+        with tempfile.TemporaryDirectory() as temporary:
+            asset = Path(temporary) / "asset.txt"
+            asset.write_bytes(content)
+            with self.assertRaisesRegex(ValueError, "canonical URL differs"):
+                promotion.verify_public_downloads(Client(), promotion.PUBLISHED_RELEASE, [asset],
+                    promotion.PUBLISHED_COMMIT, Path(temporary) / "receipt.json", True)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

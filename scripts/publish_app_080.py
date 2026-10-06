@@ -18,6 +18,7 @@ from pathlib import Path, PurePosixPath
 import re
 import subprocess
 import tempfile
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -27,6 +28,10 @@ REPOSITORY = "comparativechrono/workbench"
 TAG = "app-v0.8.0"
 SOURCE = "b3928ca6a29d22b5f010a303658c2e19c24324da"
 RUN = 37453380541
+PUBLISHED_COMMIT = "6fa1886b2027cfe634d9f9234fff773cd6c646d0"
+PUBLISHED_RELEASE = 404720508
+PROMOTION_RUN = 37468900068
+PROMOTION_ARTIFACT = (11415239631, 78049210, "5f5b4b5a8d8e99858ae7d509b24fe3f07b96ed7137b96bb09c9c4835b4fd0cf2")
 ARTIFACTS = {
     11408021439: ("candidate.zip", 75599305, "234688eabc01315aceba6fd588094bc7bf2263670766d0bdc9d088f8f0c735c1"),
     11408610523: ("scroll-frames.zip", 227642, "6586c47e262a4edb950a35ef2e2d01c09cccd144c9c8a235aaf3a1283e795203"),
@@ -254,6 +259,107 @@ class GitHub:
             partial.unlink(missing_ok=True)
 
 
+class ReadOnlyGitHub(GitHub):
+    def api(self, path, method="GET", data=None, absent_ok=False):
+        require(method == "GET" and data is None, "Published-release verification permits GET requests only.")
+        return super().api(path, method, data, absent_ok)
+
+
+def verify_public_downloads(client, release_id, files, publish_sha, receipt_path, verification_only=False):
+    # Draft asset browser URLs can name a temporary untagged release. Refresh
+    # after publication and accept only the final canonical tagged URLs.
+    published = client.api(f"/releases/{release_id}")
+    require(published["id"] == release_id and published["tag_name"] == TAG and
+            not published["draft"] and published["prerelease"], "Expected the existing published prerelease.")
+    require(client.api("/git/ref/tags/" + TAG)["object"]["sha"] == publish_sha, "Published tag identity differs.")
+    by_name = {a["name"]: a for a in published["assets"]}
+    require(len(by_name) == len(published["assets"]) == len(files) and set(by_name) == {p.name for p in files},
+            "Published asset inventory differs.")
+    receipt = {"success": False, "phase": "public-download-verification", "verificationOnly": verification_only,
+               "release": published["html_url"], "releaseId": release_id, "publicationCommit": publish_sha,
+               "packagedSourceCommit": SOURCE, "publicDownloads": []}
+    receipt_path.write_bytes(json_bytes(receipt))
+    with tempfile.TemporaryDirectory(prefix="verify-workbench-public-") as temporary:
+        for path in files:
+            asset = by_name[path.name]
+            digest = sha(path.read_bytes())
+            expected_url = f"https://github.com/{REPOSITORY}/releases/download/{TAG}/" + urllib.parse.quote(path.name)
+            require(asset["browser_download_url"] == expected_url and asset["state"] == "uploaded"
+                    and asset["size"] == path.stat().st_size and asset["digest"] == "sha256:" + digest,
+                    "Published asset metadata or canonical URL differs: " + path.name)
+            for attempt in range(3):
+                try:
+                    client.download(expected_url, Path(temporary) / path.name, digest, path.stat().st_size)
+                    break
+                except RuntimeError as error:
+                    if str(error) != "Download failed: HTTP 404" or attempt == 2:
+                        raise
+                    time.sleep((2, 5)[attempt])
+            receipt["publicDownloads"].append({"file": path.name, "bytes": path.stat().st_size,
+                                                "sha256": digest, "url": expected_url})
+            receipt_path.write_bytes(json_bytes(receipt))
+    require(client.api("/git/ref/tags/" + TAG)["object"]["sha"] == publish_sha, "Published tag identity changed.")
+    receipt.update(success=True, phase="completed")
+    receipt_path.write_bytes(json_bytes(receipt))
+    return receipt
+
+
+def recover_promotion_assets(raw, output_dir):
+    require(len(raw) == PROMOTION_ARTIFACT[1] and sha(raw) == PROMOTION_ARTIFACT[2], "Retained promotion artifact identity differs.")
+    require(not output_dir.exists() or not any(output_dir.iterdir()), "Verification output must be empty.")
+    output_dir.mkdir(parents=True, exist_ok=True)
+    names = set(ARCHIVES) | {"BUILD-PROVENANCE.json", "SHA256SUMS.txt", "source-metadata.json",
+                             "WINDOWS-EVIDENCE.zip", "RELEASE-VALIDATION.json", "EVIDENCE-SHA256SUMS.txt"}
+    with checked_zip(raw) as archive:
+        members = {"promotion-assets/" + name for name in names} | {"public-download-verification.json"}
+        require(set(archive.namelist()) == members, "Retained promotion artifact member inventory differs.")
+        for name in names:
+            (output_dir / name).write_bytes(archive.read("promotion-assets/" + name))
+        prior = json.loads(archive.read("public-download-verification.json"))
+        require(prior["publicationCommit"] == PUBLISHED_COMMIT and prior["packagedSourceCommit"] == SOURCE,
+                "Retained publication receipt source differs.")
+    for name, (size, digest) in ARCHIVES.items():
+        raw = (output_dir / name).read_bytes()
+        require(len(raw) == size and sha(raw) == digest, "Original accepted archive changed: " + name)
+        with checked_zip(raw):
+            pass
+    for checksum, expected_names in [("SHA256SUMS.txt", set(ARCHIVES)),
+                                      ("EVIDENCE-SHA256SUMS.txt", names - set(ARCHIVES) - {"EVIDENCE-SHA256SUMS.txt"})]:
+        rows = [line.split("  ", 1) for line in (output_dir / checksum).read_text().splitlines()]
+        require(len(rows) == len(expected_names) and {row[1] for row in rows} == expected_names,
+                "Retained checksum member inventory differs.")
+        require(all(sha((output_dir / name).read_bytes()) == digest for digest, name in rows), "Retained checksum verification failed.")
+    validation = json.loads((output_dir / "RELEASE-VALIDATION.json").read_bytes())
+    require(validation["packagedSourceCommit"] == SOURCE and validation["publicationCommit"] == PUBLISHED_COMMIT
+            and validation["acceptedRunId"] == RUN and not validation["archivesRebuilt"], "Retained release validation identity differs.")
+    require(len(validation["assets"]) == 7 and {a["file"] for a in validation["assets"]} ==
+            names - {"RELEASE-VALIDATION.json", "EVIDENCE-SHA256SUMS.txt"}, "Retained validation inventory differs.")
+    for item in validation["assets"]:
+        raw = (output_dir / item["file"]).read_bytes()
+        require(len(raw) == item["bytes"] and sha(raw) == item["sha256"], "Retained validation asset differs.")
+    return sorted(output_dir.iterdir())
+
+
+def verify_published(args):
+    require(os.environ.get("GITHUB_REPOSITORY") == REPOSITORY and
+            os.environ.get("GITHUB_REF") == "refs/heads/release/verify-app-0.8.0", "Wrong verification repository or branch.")
+    require(args.publish_sha == PUBLISHED_COMMIT, "Verification must identify the existing published commit.")
+    verify_source_identity(PUBLISHED_COMMIT)
+    client = ReadOnlyGitHub(os.environ.get("GH_TOKEN"))
+    verify_run(client)
+    identity, size, digest = PROMOTION_ARTIFACT
+    metadata = client.api(f"/actions/artifacts/{identity}")
+    require(metadata["workflow_run"]["id"] == PROMOTION_RUN and metadata["workflow_run"]["head_sha"] == PUBLISHED_COMMIT
+            and not metadata["expired"] and metadata["size_in_bytes"] == size and metadata["digest"] == "sha256:" + digest,
+            "Retained promotion artifact metadata differs or expired.")
+    args.input_dir.mkdir(parents=True, exist_ok=True)
+    archive = args.input_dir / "retained-promotion.zip"
+    client.download(client.base + f"/actions/artifacts/{identity}/zip", archive, digest, size, True)
+    files = recover_promotion_assets(archive.read_bytes(), args.output_dir)
+    receipt = verify_public_downloads(client, PUBLISHED_RELEASE, files, PUBLISHED_COMMIT, args.receipt, True)
+    print(json.dumps({"verifiedExistingRelease": receipt["release"], "verifiedAssets": len(files), "remoteMutations": False}))
+
+
 def verify_run(client):
     run = client.api(f"/actions/runs/{RUN}")
     require(run["head_sha"] == SOURCE and run["status"] == "completed" and run["conclusion"] == "success",
@@ -310,20 +416,7 @@ def publish(args):
             "Tag changed before publication; leaving the verified assets in draft.")
     published = client.api(f"/releases/{release['id']}", "PATCH", {"draft": False, "prerelease": True, "make_latest": "false"})
     require(not published["draft"] and published["prerelease"], "Release was not published as a prerelease.")
-    receipt = {"success": False, "phase": "public-download-verification",
-               "release": published["html_url"], "publicationCommit": args.publish_sha,
-               "packagedSourceCommit": SOURCE, "publicDownloads": []}
-    args.receipt.write_bytes(json_bytes(receipt))
-    with tempfile.TemporaryDirectory(prefix="verify-workbench-public-") as temporary:
-        for path in files:
-            asset = by_name[path.name]
-            digest = sha(path.read_bytes())
-            client.download(asset["browser_download_url"], Path(temporary) / path.name, digest, path.stat().st_size)
-            receipt["publicDownloads"].append({"file": path.name, "bytes": path.stat().st_size, "sha256": digest})
-            args.receipt.write_bytes(json_bytes(receipt))
-    require(client.api("/git/ref/tags/" + TAG)["object"]["sha"] == args.publish_sha, "Published tag identity changed.")
-    receipt.update(success=True, phase="completed")
-    args.receipt.write_bytes(json_bytes(receipt))
+    verify_public_downloads(client, release["id"], files, args.publish_sha, args.receipt)
     print(json.dumps({"published": published["html_url"], "verifiedAssets": len(files)}))
 
 
@@ -332,7 +425,9 @@ def main():
     parser.add_argument("--input-dir", required=True, type=Path)
     parser.add_argument("--output-dir", required=True, type=Path)
     parser.add_argument("--publish-sha", required=True)
-    parser.add_argument("--prepare-only", action="store_true")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--prepare-only", action="store_true")
+    mode.add_argument("--verify-published", action="store_true")
     parser.add_argument("--receipt", type=Path, default=Path("public-download-verification.json"))
     args = parser.parse_args()
     if args.prepare_only:
@@ -340,7 +435,7 @@ def main():
         print(json.dumps({"prepared": str(args.output_dir), "assets": len(list(args.output_dir.iterdir())), "networkWrites": False}))
     else:
         try:
-            publish(args)
+            (verify_published if args.verify_published else publish)(args)
         except Exception as error:
             # Retain a diagnostic even if download fails before assets exist.
             # Preserve partial public verification if publishing already happened.

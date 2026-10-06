@@ -1,0 +1,111 @@
+{
+  "schema": 1,
+  "kind": "independent-final-public-download-verification",
+  "checked_utc": "2026-10-06T13:15:00.824019+00:00",
+  "success": true,
+  "release_url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.8.0",
+  "release_id": 404720508,
+  "published_at": "2026-10-06T13:12:15Z",
+  "prerelease": true,
+  "publication_commit": "6fa1886b2027cfe634d9f9234fff773cd6c646d0",
+  "packaged_source_commit": "b3928ca6a29d22b5f010a303658c2e19c24324da",
+  "asset_count": 9,
+  "assets": [
+    {
+      "name": "BUILD-PROVENANCE.json",
+      "asset_id": 615555727,
+      "bytes": 940,
+      "sha256": "b6f9285b6160da0c6d9a7c5a5195cc4404f1796c1f9db3ec7df707efb8ce0e15",
+      "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/BUILD-PROVENANCE.json",
+      "downloaded_anonymously": true,
+      "github_digest_matches": true,
+      "zip_crc_checked": false
+    },
+    {
+      "name": "EVIDENCE-SHA256SUMS.txt",
+      "asset_id": 615555720,
+      "bytes": 433,
+      "sha256": "bdfddef2b9933713668ec0f68aa91cddd347b96d6a4b2508e6ed7134458db445",
+      "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/EVIDENCE-SHA256SUMS.txt",
+      "downloaded_anonymously": true,
+      "github_digest_matches": true,
+      "zip_crc_checked": false
+    },
+    {
+      "name": "native-workbench-0.8.0-source.zip",
+      "asset_id": 615555739,
+      "bytes": 46243835,
+      "sha256": "c2590379b45d313acbcd5bbc41344b288aa6ad159804bf06dcbdcc9726adb22f",
+      "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/native-workbench-0.8.0-source.zip",
+      "downloaded_anonymously": true,
+      "github_digest_matches": true,
+      "zip_crc_checked": true
+    },
+    {
+      "name": "native-workbench-0.8.0-starter-windows.zip",
+      "asset_id": 615555740,
+      "bytes": 16948940,
+      "sha256": "df001a80033ff8e834045ec683c79672e0efdbd4880fb89fca8bf8c36d830fdc",
+      "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/native-workbench-0.8.0-starter-windows.zip",
+      "downloaded_anonymously": true,
+      "github_digest_matches": true,
+      "zip_crc_checked": true
+    },
+    {
+      "name": "native-workbench-0.8.0-update-from-0.6.0.zip",
+      "asset_id": 615555744,
+      "bytes": 12897242,
+      "sha256": "3dd146267b9a8300ba957c84914bc324ea537c05b09268b48381ae6a4d530e96",
+      "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/native-workbench-0.8.0-update-from-0.6.0.zip",
+      "downloaded_anonymously": true,
+      "github_digest_matches": true,
+      "zip_crc_checked": true
+    },
+    {
+      "name": "RELEASE-VALIDATION.json",
+      "asset_id": 615555723,
+      "bytes": 5163,
+      "sha256": "00903db808257cf8cb810c58e4d517c2768cf4198db010f9766335213f4e94bb",
+      "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/RELEASE-VALIDATION.json",
+      "downloaded_anonymously": true,
+      "github_digest_matches": true,
+      "zip_crc_checked": false
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "asset_id": 615555724,
+      "bytes": 320,
+      "sha256": "a9adefa254aff2fab797830a3832b82a9cc69a130800bd5594d9a7ee15c7fb01",
+      "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/SHA256SUMS.txt",
+      "downloaded_anonymously": true,
+      "github_digest_matches": true,
+      "zip_crc_checked": false
+    },
+    {
+      "name": "source-metadata.json",
+      "asset_id": 615555745,
+      "bytes": 1763,
+      "sha256": "364c1606a0feff888b2eebf4482c28c767032d1d56170a805b02bdc50297d90c",
+      "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/source-metadata.json",
+      "downloaded_anonymously": true,
+      "github_digest_matches": true,
+      "zip_crc_checked": false
+    },
+    {
+      "name": "WINDOWS-EVIDENCE.zip",
+      "asset_id": 615555719,
+      "bytes": 2446044,
+      "sha256": "781dbb3487bcbb9ba5c17509f8ba32ed964f8d7cafa0bc8e93678882f1c94d1c",
+      "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/WINDOWS-EVIDENCE.zip",
+      "downloaded_anonymously": true,
+      "github_digest_matches": true,
+      "zip_crc_checked": true
+    }
+  ],
+  "unchanged_candidate_companions": 6,
+  "checksum_files_verified": 2,
+  "scope": "Fresh anonymous downloads performed after publication; all public bytes match GitHub SHA-256/size metadata, six original companion files equal the accepted candidate, all four ZIP CRCs passed. Reuses exact candidate Windows evidence; no new native execution performed.",
+  "release_tag_verified": true,
+  "original_promotion_asset_bytes_match": 9,
+  "promotion_artifact_sha256": "5f5b4b5a8d8e99858ae7d509b24fe3f07b96ed7137b96bb09c9c4835b4fd0cf2"
+}
