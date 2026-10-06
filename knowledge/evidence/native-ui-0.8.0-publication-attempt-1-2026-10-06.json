@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "kind": "publication-attempt",
+  "success": false,
+  "runId": 37468353660,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37468353660",
+  "jobId": 112285013861,
+  "publicationSourceCommit": "2086175a18ae018f9f14a295dd6c4e207d1d41e7",
+  "acceptedApplicationSourceCommit": "b3928ca6a29d22b5f010a303658c2e19c24324da",
+  "failureUtc": "2026-10-06T13:07:39Z",
+  "phase": "first accepted Actions artifact download, before tag/release creation",
+  "error": "HTTP 415 from GitHub Actions artifact download endpoint; initial request used application/octet-stream instead of recommended application/vnd.github+json.",
+  "officialApiDocumentation": "https://docs.github.com/en/rest/actions/artifacts#download-an-artifact",
+  "promotionRefusalTests": {
+    "passed": 6,
+    "failures": 0
+  },
+  "secondaryFailure": "Artifact retention found no prepared release files, because preparation never began.",
+  "tagAbsentAfterFailure": true,
+  "tagAbsenceCheck": "GitHub matching-refs/tags/app-v0.8.0 returned [] after this run.",
+  "applicationArchivesModified": false,
+  "scope": "Release automation failure; accepted application bytes and prior native results remain unchanged."
+}

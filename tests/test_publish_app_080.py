@@ -2,8 +2,10 @@
 """Fail-closed controls for this one accepted release; no network or publishing."""
 import importlib.util
 import io
+import json
 import os
 from pathlib import Path
+import tempfile
 import types
 import unittest
 from unittest.mock import patch
@@ -70,6 +72,43 @@ class PromotionControls(unittest.TestCase):
                 promotion.GitHub("dummy-token").api("/releases")
             opener.assert_called_once_with(promotion.NoRedirect)
             default_open.assert_not_called()
+
+    def test_download_media_types_and_redirect_authentication(self):
+        client = promotion.GitHub("dummy-token")
+        content = b"pinned downloadable bytes"
+        for endpoint, accept in [("/actions/artifacts/11408021439/zip", "application/vnd.github+json"),
+                                 ("/releases/assets/123", "application/octet-stream")]:
+            with self.subTest(endpoint=endpoint), tempfile.TemporaryDirectory() as temporary, \
+                 patch.object(promotion.urllib.request, "build_opener") as opener:
+                requests = []
+                def open_request(request, timeout):
+                    requests.append(request)
+                    if len(requests) == 1:
+                        raise urllib.error.HTTPError(request.full_url, 302, "redirect", {
+                            "Location": "https://test.blob.core.windows.net/artifacts/pinned.zip?signature=synthetic"}, None)
+                    return io.BytesIO(content)
+                opener.return_value.open.side_effect = open_request
+                destination = Path(temporary) / "download.zip"
+                client.download(client.base + endpoint, destination, promotion.sha(content), len(content), True)
+                self.assertEqual(destination.read_bytes(), content)
+                self.assertEqual(len(requests), 2)
+                self.assertEqual(requests[0].get_header("Accept"), accept)
+                self.assertEqual(requests[0].get_header("Authorization"), "Bearer dummy-token")
+                self.assertEqual(requests[1].get_header("Accept"), "application/octet-stream")
+                self.assertIsNone(requests[1].get_header("Authorization"))
+
+    def test_early_publication_failure_retains_diagnostic(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            receipt = Path(temporary) / "receipt.json"
+            argv = ["promotion", "--input-dir", temporary, "--output-dir", str(Path(temporary) / "assets"),
+                    "--publish-sha", promotion.SOURCE, "--receipt", str(receipt)]
+            with patch("sys.argv", argv), patch.object(promotion, "publish", side_effect=RuntimeError("Download failed: HTTP 415")):
+                with self.assertRaisesRegex(RuntimeError, "HTTP 415"):
+                    promotion.main()
+            report = json.loads(receipt.read_bytes())
+            self.assertFalse(report["success"])
+            self.assertEqual(report["publicDownloads"], [])
+            self.assertEqual(report["error"], "Download failed: HTTP 415")
 
 
 if __name__ == "__main__":

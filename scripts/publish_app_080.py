@@ -209,10 +209,14 @@ class GitHub:
             raise RuntimeError(f"GitHub {method} {path} failed: HTTP {error.code}") from None
 
     def download(self, url, destination, expected_sha, expected_size, authenticated=False):
-        headers = {"Accept": "application/octet-stream"}
+        # Actions' archive endpoint returns a storage redirect using the JSON
+        # API media type. Release-asset endpoints instead need octet-stream.
+        artifact_endpoint = re.fullmatch(re.escape(self.base) + r"/actions/artifacts/[0-9]+/zip", url)
+        headers = {"Accept": "application/vnd.github+json" if artifact_endpoint else "application/octet-stream"}
         if authenticated:
             require(url.startswith(self.base + "/"), "Credentials only belong on this repository's API.")
             headers["Authorization"] = "Bearer " + self.token
+            headers["X-GitHub-Api-Version"] = "2022-11-28"
         opener = urllib.request.build_opener(NoRedirect)
         for _ in range(6):
             parsed = urllib.parse.urlparse(url)
@@ -335,7 +339,20 @@ def main():
         prepare(args.input_dir, args.output_dir, args.publish_sha)
         print(json.dumps({"prepared": str(args.output_dir), "assets": len(list(args.output_dir.iterdir())), "networkWrites": False}))
     else:
-        publish(args)
+        try:
+            publish(args)
+        except Exception as error:
+            # Retain a diagnostic even if download fails before assets exist.
+            # Preserve partial public verification if publishing already happened.
+            receipt = json.loads(args.receipt.read_bytes()) if args.receipt.is_file() else {
+                "phase": "promotion", "publicationCommit": args.publish_sha,
+                "packagedSourceCommit": SOURCE, "publicDownloads": []}
+            receipt.update(success=False, failureType=type(error).__name__,
+                           error=str(error) if isinstance(error, (ValueError, RuntimeError)) else "See workflow log.",
+                           recordedUtc=datetime.now(timezone.utc).isoformat())
+            args.receipt.parent.mkdir(parents=True, exist_ok=True)
+            args.receipt.write_bytes(json_bytes(receipt))
+            raise
 
 
 if __name__ == "__main__":
