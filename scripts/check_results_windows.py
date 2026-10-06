@@ -504,13 +504,24 @@ def gui_checks(root, evidence, report):
         for card in cards:
             add_card(card['name'], card['x'], card['y'])
         producer, middle, consumer = cards
+        # Socket drops are private-host requests. Select the producer first
+        # so its changed 'Used by' text provides an observable completion
+        # condition before the next card-selection pointer event.
+        ui.click_at(*point(producer['x']+100, producer['y']+20))
+        ui.wait('select forward connection producer', lambda: has_name(producer['name']))
         ui.drag(point(producer['x']+card_width, producer['y']+107), point(middle['x'], middle['y']+65))
+        ui.wait('forward connection applied before receiver selection', lambda: any(
+            row['class'].lower() == 'static' and 'Used by:' in row['text'] and
+            middle['name'] in row['text'] for row in ui.controls()))
         # Connecting sockets preserves the selected card. Select the receiver
         # explicitly before checking its own inspector's connection description.
         ui.click_at(*point(middle['x']+100, middle['y']+20))
         ui.wait('select forward connection receiver', lambda: has_name(middle['name']))
         ui.wait('native forward port connection', lambda: any(row['class'].lower() == 'static' and 'From:' in row['text'] and 'Route producer' in row['text'] for row in ui.controls()))
         ui.drag(point(middle['x']+card_width, middle['y']+107), point(consumer['x'], consumer['y']+65))
+        ui.wait('backward connection applied before receiver selection', lambda: any(
+            row['class'].lower() == 'static' and 'Used by:' in row['text'] and
+            consumer['name'] in row['text'] for row in ui.controls()))
         ui.click_at(*point(consumer['x']+100, consumer['y']+20))
         ui.wait('select backward connection receiver', lambda: has_name(consumer['name']))
         ui.wait('native backward port connection', lambda: any(row['class'].lower() == 'static' and 'From:' in row['text'] and 'Route middle' in row['text'] for row in ui.controls()))

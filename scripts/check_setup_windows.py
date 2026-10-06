@@ -34,7 +34,7 @@ import zipfile
 
 sys.dont_write_bytecode = True
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from check_references_windows import PrivateHost, require, sha256, write_json
+from check_references_windows import PrivateHost, require, sha256, write_json, stop_process_tree
 from check_workspace_ui_windows import NativeUI, native_scientific_chain
 
 TEST_URL = 'https://setup-fixture.invalid/catalogue.json'
@@ -99,7 +99,7 @@ def test_signature(document):
     return json.dumps(wrapper).encode(), {'n': literals['N'], 'e': 65537}
 
 
-def fixture_archive(identity, executable, padding=0):
+def fixture_archive(identity, executable, padding=0, licenses=None):
     """A synthetic pack around an unchanged native SAMtools executable."""
     digest = hashlib.sha256(executable).hexdigest()
     manifest = f'''[pack]
@@ -129,6 +129,7 @@ stdout=version
 '''.encode()
     files = {'pack.ini': manifest, 'bin/samtools.exe': executable,
              'licenses/TEST-FIXTURE.txt': b'Synthetic validation wrapper, not a distributed scientific pack.\n'}
+    files.update(licenses or {})
     if padding:
         files['licenses/setup-test-padding.bin'] = hashlib.shake_256(identity.encode()).digest(padding)
     envelope = {'schema': 1, 'id': identity, 'version': '1.0.0', 'packApi': 1,
@@ -246,6 +247,7 @@ def unchanged(before, root, exceptions=()):
 def gui_checks(root, evidence, report):
     ui = NativeUI(root, evidence)
     captures = []
+    succeeded = False
     def setup_window():
         return next((h for h in ui.windows() if ui.label(h, True) == 'WorkbenchToolSetup0100'), None)
     def click(identity, owner):
@@ -300,7 +302,9 @@ def gui_checks(root, evidence, report):
         ui.wait('Starter radio selected', lambda: ui.send(ui.child(703, owner), 0x00F0) == 1)
         captures.append(ui.capture('setup-starter.bmp', owner))
         click(710, owner)
-        ui.wait('offline Starter completes', lambda: ui.user.IsWindowEnabled(ui.child(713, owner)), 60)
+        ui.wait('offline Starter completes', lambda:
+                'Your selected tools are ready.' in ui.label(ui.child(707, owner)) and
+                ui.user.IsWindowEnabled(ui.child(713, owner)), 60)
         click(713, owner)
         ui.wait('Starter continues into the native workspace', lambda: not setup_window())
         check(report, 'Native Starter selection completes and enters the workspace without downloading packs.')
@@ -315,13 +319,30 @@ def gui_checks(root, evidence, report):
         ui.wait('reopened setup closes', lambda: not setup_window())
         if manager():
             click(513, manager())
+        ui.wait('workspace idle after setup dismissal', lambda:
+                ui.user.IsWindowEnabled(ui.child(410)) and ui.user.IsWindowEnabled(ui.child(402)))
         check(report, 'Manage tools remains available and reopens Tool setup after first-run completion.')
+        succeeded = True
         return {'captures': captures, 'nativeGUIValidated': True,
                 'scope': 'Exact unmodified native GUI; first-run, profiles, offline Starter, reopening. Batch transfers validated separately.'}
+    except Exception:
+        owner = setup_window()
+        if owner:
+            ui.capture('setup-failure.bmp', owner)
+            write_json(evidence/'setup-failure-controls.json', ui.controls(owner))
+        raise
     finally:
-        if setup_window():
-            ui.post(setup_window(), 0x0010)
-        ui.close()
+        if succeeded:
+            ui.close()
+        else:
+            # Do not race a queued setup/dismiss with main WM_CLOSE: that
+            # opens the app's deliberate close-confirmation dialog. Preserve
+            # the original failure, then stop only this gate-owned process.
+            stop_process_tree(ui.process)
+            ui.user.SetThreadDpiAwarenessContext(ui.previous_dpi)
+            log = root/'user-data/desktop-host.stderr.txt'
+            if log.is_file():
+                shutil.copyfile(log, evidence/'ui-desktop-host.stderr.txt')
 
 
 def fixture_checks(root, evidence, report):
@@ -333,12 +354,19 @@ def fixture_checks(root, evidence, report):
     data = fixture_root / 'user-data'
     (data/'tool-setup.json').unlink(missing_ok=True)
     fixture = evidence / 'transport-fixture'
-    executable = (root / 'packs/bam-0.4.0/bin/samtools.exe').read_bytes()
-    a, entry_a = fixture_archive('setup-a', executable)
-    b, entry_b = fixture_archive('setup-b', executable, padding=2*1024*1024)
-    c, entry_c = fixture_archive('setup-c', executable)
+    origin = root/'packs/bam-0.4.0'
+    executable = (origin/'bin/samtools.exe').read_bytes()
+    licenses = {path.relative_to(origin).as_posix(): path.read_bytes()
+                for path in (origin/'licenses').rglob('*') if path.is_file()}
+    require(bool(licenses), 'The original SAMtools fixture licensing material is missing.')
+    a, entry_a = fixture_archive('setup-a', executable, licenses=licenses)
+    b, entry_b = fixture_archive('setup-b', executable, padding=2*1024*1024, licenses=licenses)
+    c, entry_c = fixture_archive('setup-c', executable, licenses=licenses)
     config = prepare_fixture(fixture_root, fixture, [entry_a, entry_b, entry_c],
                              {'setup-a': a, 'setup-b': b, 'setup-c': c})
+    config['fixtureOrigin'] = {'pack': 'bam-0.4.0',
+        'executableSha256': hashlib.sha256(executable).hexdigest(),
+        'preservedLicenseFiles': {name: hashlib.sha256(data).hexdigest() for name, data in licenses.items()}}
     original = core_hashes(root)
     marker = data / 'saved-settings' / 'preserve-setup-gate.json'
     marker.parent.mkdir(exist_ok=True)
