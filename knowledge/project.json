@@ -65,7 +65,8 @@
     "native_workflow_final_ordinary_references": "evidence/native-workflow-0.8.0-final-ordinary-references-2026-10-06.json",
     "native_workflow_final_spaces_ui": "evidence/native-workflow-0.8.0-final-spaces-ui-2026-10-06.json",
     "native_workflow_final_spaces_references": "evidence/native-workflow-0.8.0-final-spaces-references-2026-10-06.json",
-    "native_workflow_long_path_evidence": "evidence/native-workflow-0.8.0-long-path-2026-10-06.json"
+    "native_workflow_long_path_evidence": "evidence/native-workflow-0.8.0-long-path-2026-10-06.json",
+    "native_workflow_scroll_evidence": "evidence/native-workflow-0.8.0-scroll-2026-10-06.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -125,10 +126,10 @@
     "starting_commit": "7c6f2437842788daf9918ac2194ef859b153092c",
     "pull_request": "https://github.com/comparativechrono/workbench/pull/1",
     "pull_request_state": "draft",
-    "status": "nested Windows output-path defect reproduced and fixed; exact packaged candidate passed Windows gates; unreleased; awaiting tester reacceptance",
-    "candidate_source_commit": "0d3282046d7aa05dc822315c9a237c8ac534cd7a",
-    "native_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37449356224",
-    "native_status": "passed in ordinary and space-containing installation paths; prior-package missing-output failure reproduced and fixed-package full starter scientific pipeline passed with long-path policy disabled",
+    "status": "user accepted the reported pipeline fix; composited-panel and precision-wheel candidate passed exact-package gates; visual flashing was not reproduced in CI and requires tester-display confirmation; unreleased",
+    "candidate_source_commit": "b3928ca6a29d22b5f010a303658c2e19c24324da",
+    "native_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37453380541",
+    "native_status": "all five jobs passed: 82 source checks, 32 workspace plus 8 References/update checks per Windows path, full five-stage long-path pipeline regression and the three-panel temporal/precision scroll gate",
     "source_checks": {
       "passes": 82,
       "failures": 0,
@@ -145,7 +146,8 @@
       "related_host_reference_workflow_pin_checks": 43,
       "selected_core_check_contracts": 9,
       "pack_check_contracts": 13,
-      "scope": "72 distinct local source checks; 50 overlap the CI gate and 22 selected core/pack-check contracts are additional. The seven path regressions emulate ordinary-path failure with real files and a synthetic backend; no Windows execution claim."
+      "scope": "Historical local source checks from the preceding long-path task, retained as prior evidence; not rerun or counted as new local passes for the scroll correction. The current 82-check CI result is separate.",
+      "source_commit": "0d3282046d7aa05dc822315c9a237c8ac534cd7a"
     },
     "feedback_changes": [
       "Explicit reusable typed workflow inputs; no automatic source cards when a workflow tool is added",
@@ -194,19 +196,27 @@
         "failures": 0,
         "skips": 0,
         "scope": "Actual packaged host Check installation action, short installation root and nested pipeline outputs; no long-path GUI interaction claim. Only the disposable CI runner policy was changed."
-      }
+      },
+      "user_acceptance": {
+        "recorded_on": "2026-10-06",
+        "outcome": "User confirmed that the pipeline fix worked.",
+        "scope": "User report for the previously failing pipeline; not a fresh automated run or acceptance of every workflow/display behavior."
+      },
+      "first_native_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37449356224",
+      "repeated_in_current_scroll_candidate": "Full five-stage scientific pipeline regression passed in run 37453380541; detailed original metrics remain bound to the first native long-path record."
     },
     "limits": [
+      "The reported visual flashing was not reproduced in CI: both prior and current packages had zero unexpected frames in 960 samples. Finite 27.16-31.80 fps current-package observations mask edit/button regions and cannot exclude shorter flashes between frames or establish physical tester-display behavior.",
       "Native GUI coverage remains Windows Server 2022 at observed 96 DPI. The long-path regression is host/CLI execution, not long-path GUI validation.",
       "Earlier ordinary/space-containing native paths did not establish legacy-limit behavior for nested result files.",
       "No universal long-path claim for every optional pack, arbitrary deep installations or reference libraries, or Windows shell dialogs.",
       "Physical trackpad pinch, high-DPI/multi-monitor movement and native folder pickers remain unvalidated.",
-      "Manual tester reacceptance remains outstanding.",
+      "User accepted the reported pipeline fix; scroll-flashing reacceptance and broader manual display/workflow acceptance remain outstanding.",
       "Updater coverage is 0.6.0 to 0.8.0 only; no 0.7.0-to-0.8.0 upgrade validation is claimed.",
       "No 0.8.0 release tag or published release was created."
     ],
     "guide": "native-ui.md",
-    "evidence": "evidence/native-workflow-0.8.0-long-path-2026-10-06.json",
+    "evidence": "evidence/native-workflow-0.8.0-scroll-2026-10-06.json",
     "feedback_evidence": "evidence/native-workflow-0.8.0-feedback-2026-10-06.json",
     "starter_tool_audit": "starter-tool-semantics.md",
     "published_release_unchanged": "0.7.0",
@@ -217,17 +227,28 @@
       "starting_commit": "7c6f2437842788daf9918ac2194ef859b153092c",
       "pull_request": "https://github.com/comparativechrono/workbench/pull/1",
       "pull_request_state": "draft",
-      "status": "tester layout accepted; feedback candidate passed exact packaged Windows gates; unreleased; awaiting tester reacceptance",
+      "status": "nested Windows output-path defect reproduced and fixed; exact packaged candidate passed Windows gates; unreleased; awaiting tester reacceptance",
+      "candidate_source_commit": "0d3282046d7aa05dc822315c9a237c8ac534cd7a",
+      "native_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37449356224",
+      "native_status": "passed in ordinary and space-containing installation paths; prior-package missing-output failure reproduced and fixed-package full starter scientific pipeline passed with long-path policy disabled",
       "source_checks": {
-        "passes": 75,
+        "passes": 82,
         "failures": 0,
         "skips": 0,
-        "platform": "Linux x86-64 / Python 3.12.14",
-        "scope": "Local run used Python 3.12.14; final Linux CI independently passed the same 75 suites."
+        "platform": "Linux CI",
+        "scope": "Seven new path-boundary regressions use real local files and a synthetic backend under an emulated ordinary-path limit; separate exact-package native evidence follows."
       },
-      "source_checked_commit": "0d2a993fca95a5837a69aa05c63aa5e806c553af",
-      "native_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37441781509",
-      "native_status": "passed in ordinary and space-containing installation paths; previous failed attempt retained in evidence",
+      "local_source_checks": {
+        "platform": "Linux x86-64 / Python 3.12.14",
+        "passes": 72,
+        "failures": 0,
+        "skips": 0,
+        "engine_path_regressions": 7,
+        "related_host_reference_workflow_pin_checks": 43,
+        "selected_core_check_contracts": 9,
+        "pack_check_contracts": 13,
+        "scope": "72 distinct local source checks; 50 overlap the CI gate and 22 selected core/pack-check contracts are additional. The seven path regressions emulate ordinary-path failure with real files and a synthetic backend; no Windows execution claim."
+      },
       "feedback_changes": [
         "Explicit reusable typed workflow inputs; no automatic source cards when a workflow tool is added",
         "Input card owns file fields; tool inspector shows connections and parameters without duplicate file editors",
@@ -237,63 +258,183 @@
         "Native form child repainting and first-open Manage tools array initialization",
         "Program-qualified operation labels and clearer existing SAM-to-sorted-BAM / FASTA lookup-index meaning"
       ],
+      "nested_output_path_fix": {
+        "report": "Application integrity passed 7/7, native first-stage alignment succeeded and its SAM matched the native hash, but Python reported the existing declared output missing.",
+        "result_folder_characters": 255,
+        "sam_path_characters": 269,
+        "sam_bytes": 69441,
+        "sam_records": 202,
+        "system_long_paths_setting": "not recorded in user evidence",
+        "io_policy": "Explicit extended-length paths at engine and check filesystem boundaries; ordinary normalized paths retained for identity, provenance and arguments.",
+        "protections_retained": [
+          "exact manifests and frozen plans",
+          "input and output hashes",
+          "result containment",
+          "symlink/junction guards",
+          "file identity checks"
+        ],
+        "privacy": "No private user paths or raw uploaded data committed.",
+        "native_regression": {
+          "policy": 0,
+          "fresh_packaged_python_processes": true,
+          "original_policy_restored": 1,
+          "prior_source_commit": "0d2a993fca95a5837a69aa05c63aa5e806c553af",
+          "prior_missing_output_failure_reproduced": true,
+          "prior_result_folder_characters": 254,
+          "prior_sam_path_characters": 268,
+          "ordinary_is_file": false,
+          "extended_io_is_file": true,
+          "fixed_core_checks_passed": 7,
+          "fixed_scientific_stages_passed": 5,
+          "output_hashes_independently_verified": 20,
+          "output_paths_above_260": 19,
+          "maximum_output_path_characters": 279,
+          "binary_bam_verified": true,
+          "variant_truth": "starter:1351 G>A, GT 1/1",
+          "negative_control_assertions_passed": 2,
+          "fixed_assertions_passed": 3,
+          "failures": 0,
+          "skips": 0,
+          "scope": "Actual packaged host Check installation action, short installation root and nested pipeline outputs; no long-path GUI interaction claim. Only the disposable CI runner policy was changed."
+        },
+        "user_acceptance": {
+          "recorded_on": "2026-10-06",
+          "outcome": "User confirmed that the pipeline fix worked.",
+          "scope": "User report for the previously failing pipeline; not a fresh automated run or acceptance of every workflow/display behavior."
+        }
+      },
       "limits": [
-        "Layout acceptance does not establish acceptance of revised workflow behavior; manual tester reacceptance remains outstanding.",
-        "Native coverage is Windows Server 2022 at observed 96 DPI.",
+        "Native GUI coverage remains Windows Server 2022 at observed 96 DPI. The long-path regression is host/CLI execution, not long-path GUI validation.",
+        "Earlier ordinary/space-containing native paths did not establish legacy-limit behavior for nested result files.",
+        "No universal long-path claim for every optional pack, arbitrary deep installations or reference libraries, or Windows shell dialogs.",
         "Physical trackpad pinch, high-DPI/multi-monitor movement and native folder pickers remain unvalidated.",
-        "The tiny-delta Ctrl+wheel regression injects native messages and does not establish physical trackpad behavior.",
-        "Updater checked only from 0.6.0 to 0.8.0; no 0.7.0-to-0.8.0 upgrade validation is claimed.",
+        "Manual tester reacceptance remains outstanding.",
+        "Updater coverage is 0.6.0 to 0.8.0 only; no 0.7.0-to-0.8.0 upgrade validation is claimed.",
         "No 0.8.0 release tag or published release was created."
       ],
       "guide": "native-ui.md",
-      "evidence": "evidence/native-workflow-0.8.0-feedback-2026-10-06.json",
+      "evidence": "evidence/native-workflow-0.8.0-long-path-2026-10-06.json",
+      "feedback_evidence": "evidence/native-workflow-0.8.0-feedback-2026-10-06.json",
       "starter_tool_audit": "starter-tool-semantics.md",
       "published_release_unchanged": "0.7.0",
       "previous_candidate": {
-        "recorded_on": "2026-10-05",
+        "recorded_on": "2026-10-06",
         "version": "0.8.0",
         "branch": "ui/galaxy-native-workspace",
         "starting_commit": "7c6f2437842788daf9918ac2194ef859b153092c",
         "pull_request": "https://github.com/comparativechrono/workbench/pull/1",
         "pull_request_state": "draft",
-        "status": "validated development candidate; unreleased; awaiting manual tester acceptance",
+        "status": "tester layout accepted; feedback candidate passed exact packaged Windows gates; unreleased; awaiting tester reacceptance",
         "source_checks": {
-          "passes": 57,
+          "passes": 75,
           "failures": 0,
-          "skips": 0
+          "skips": 0,
+          "platform": "Linux x86-64 / Python 3.12.14",
+          "scope": "Local run used Python 3.12.14; final Linux CI independently passed the same 75 suites."
         },
-        "tested_source_commit": "c82c559d02a0b70e79afe67da93ace9e344f1ef3",
-        "native_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37376078599",
+        "source_checked_commit": "0d2a993fca95a5837a69aa05c63aa5e806c553af",
+        "native_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37441781509",
+        "native_status": "passed in ordinary and space-containing installation paths; previous failed attempt retained in evidence",
+        "feedback_changes": [
+          "Explicit reusable typed workflow inputs; no automatic source cards when a workflow tool is added",
+          "Input card owns file fields; tool inspector shows connections and parameters without duplicate file editors",
+          "Shared paired-read roles, old workflow graph IDs and exact pack pins retained across saves",
+          "Empty-canvas pan, visible 25-200 percent zoom/reset, Ctrl+wheel and Windows pan/zoom gesture handling",
+          "Hover delete cross and Delete key; removal disconnects consumers and supports Undo",
+          "Native form child repainting and first-open Manage tools array initialization",
+          "Program-qualified operation labels and clearer existing SAM-to-sorted-BAM / FASTA lookup-index meaning"
+        ],
+        "limits": [
+          "Layout acceptance does not establish acceptance of revised workflow behavior; manual tester reacceptance remains outstanding.",
+          "Native coverage is Windows Server 2022 at observed 96 DPI.",
+          "Physical trackpad pinch, high-DPI/multi-monitor movement and native folder pickers remain unvalidated.",
+          "The tiny-delta Ctrl+wheel regression injects native messages and does not establish physical trackpad behavior.",
+          "Updater checked only from 0.6.0 to 0.8.0; no 0.7.0-to-0.8.0 upgrade validation is claimed.",
+          "No 0.8.0 release tag or published release was created."
+        ],
+        "guide": "native-ui.md",
+        "evidence": "evidence/native-workflow-0.8.0-feedback-2026-10-06.json",
+        "starter_tool_audit": "starter-tool-semantics.md",
+        "published_release_unchanged": "0.7.0",
+        "previous_candidate": {
+          "recorded_on": "2026-10-05",
+          "version": "0.8.0",
+          "branch": "ui/galaxy-native-workspace",
+          "starting_commit": "7c6f2437842788daf9918ac2194ef859b153092c",
+          "pull_request": "https://github.com/comparativechrono/workbench/pull/1",
+          "pull_request_state": "draft",
+          "status": "validated development candidate; unreleased; awaiting manual tester acceptance",
+          "source_checks": {
+            "passes": 57,
+            "failures": 0,
+            "skips": 0
+          },
+          "tested_source_commit": "c82c559d02a0b70e79afe67da93ace9e344f1ef3",
+          "native_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37376078599",
+          "native_checks_per_path": {
+            "paths": [
+              "ordinary",
+              "spaces"
+            ],
+            "workspace_host": 6,
+            "workspace_gui": 12,
+            "references_and_update": 8,
+            "failures": 0,
+            "skips": 0
+          },
+          "candidate_download": {
+            "url": "https://github.com/comparativechrono/workbench/actions/runs/37376078599/artifacts/11371647135",
+            "sha256": "61bd2deca854b43596b82be95cebb4d72179df6cd34c2abe097361df8777de7e",
+            "bytes": 75395876,
+            "expires_at": "2026-11-04T21:29:20Z",
+            "starter_sha256": "5e59dee9efd38f2ee10516292294e4bd711b2c0a61e35b2bbbb49965f27383e4",
+            "review_installation": "Extract starter into a separate folder."
+          },
+          "limits": [
+            "Manual tester acceptance remains outstanding.",
+            "Native coverage is Windows Server 2022 at observed 96 DPI; high-DPI/multi-monitor movement and native folder pickers are unvalidated.",
+            "Updater checked only from 0.6.0 to 0.8.0; no 0.7.0-to-0.8.0 updater or upgrade validation is claimed.",
+            "No 0.8.0 release tag or published release was created."
+          ],
+          "guide": "native-ui.md",
+          "evidence": "evidence/native-ui-0.8.0-development-2026-10-05.json",
+          "published_release_unchanged": "0.7.0"
+        },
+        "candidate_source_commit": "0d2a993fca95a5837a69aa05c63aa5e806c553af",
         "native_checks_per_path": {
           "paths": [
             "ordinary",
             "spaces"
           ],
-          "workspace_host": 6,
-          "workspace_gui": 12,
+          "workspace_host": 8,
+          "workspace_scientific": 2,
+          "workspace_gui": 22,
           "references_and_update": 8,
           "failures": 0,
-          "skips": 0
+          "skips": 0,
+          "platform": "Windows Server 2022",
+          "python": "bundled 3.13.16",
+          "observed_dpi": 96,
+          "sam_to_bam_records": 202,
+          "scroll_static_pixels_compared": 197198,
+          "scroll_pixel_differences": 0
         },
         "candidate_download": {
-          "url": "https://github.com/comparativechrono/workbench/actions/runs/37376078599/artifacts/11371647135",
-          "sha256": "61bd2deca854b43596b82be95cebb4d72179df6cd34c2abe097361df8777de7e",
-          "bytes": 75395876,
-          "expires_at": "2026-11-04T21:29:20Z",
-          "starter_sha256": "5e59dee9efd38f2ee10516292294e4bd711b2c0a61e35b2bbbb49965f27383e4",
-          "review_installation": "Extract starter into a separate folder."
+          "url": "https://github.com/comparativechrono/workbench/actions/runs/37441781509/artifacts/11401422780",
+          "expires_at": "2026-11-05T09:16:55Z",
+          "starter_sha256": "de099e5feef437c788352c31c0e743c7e8f22aa08bfe2364e59b715ec3501806",
+          "starter_bytes": 16948268,
+          "verified_core_entries": 68,
+          "verified_unchanged_pack_entries": 143,
+          "verified_workspace_source_copies": 15,
+          "review_installation": "Extract starter into a separate folder.",
+          "sha256": "90933af445f8696baa0f787ece51a5e795cd654dfd6783dc2d3309c352d22419",
+          "bytes": 75484976
         },
-        "limits": [
-          "Manual tester acceptance remains outstanding.",
-          "Native coverage is Windows Server 2022 at observed 96 DPI; high-DPI/multi-monitor movement and native folder pickers are unvalidated.",
-          "Updater checked only from 0.6.0 to 0.8.0; no 0.7.0-to-0.8.0 updater or upgrade validation is claimed.",
-          "No 0.8.0 release tag or published release was created."
-        ],
-        "guide": "native-ui.md",
-        "evidence": "evidence/native-ui-0.8.0-development-2026-10-05.json",
-        "published_release_unchanged": "0.7.0"
+        "tested_source_commit": "0d2a993fca95a5837a69aa05c63aa5e806c553af"
       },
-      "candidate_source_commit": "0d2a993fca95a5837a69aa05c63aa5e806c553af",
+      "source_checked_commit": "0d3282046d7aa05dc822315c9a237c8ac534cd7a",
+      "tested_source_commit": "0d3282046d7aa05dc822315c9a237c8ac534cd7a",
       "native_checks_per_path": {
         "paths": [
           "ordinary",
@@ -308,26 +449,27 @@
         "platform": "Windows Server 2022",
         "python": "bundled 3.13.16",
         "observed_dpi": 96,
+        "capture_hashes_verified_total": 56,
         "sam_to_bam_records": 202,
         "scroll_static_pixels_compared": 197198,
-        "scroll_pixel_differences": 0
+        "scroll_pixel_differences": 0,
+        "scroll_scope": "Settled images only; does not establish absence of transient flashing during scroll activity."
       },
       "candidate_download": {
-        "url": "https://github.com/comparativechrono/workbench/actions/runs/37441781509/artifacts/11401422780",
-        "expires_at": "2026-11-05T09:16:55Z",
-        "starter_sha256": "de099e5feef437c788352c31c0e743c7e8f22aa08bfe2364e59b715ec3501806",
-        "starter_bytes": 16948268,
+        "url": "https://github.com/comparativechrono/workbench/actions/runs/37449356224/artifacts/11404414503",
+        "expires_at": "2026-11-05T10:23:19Z",
+        "sha256": "6d6679f8df73cd20b050605a295400705d40242ecf42d62c31000e2b55c5f0cc",
+        "bytes": 75551632,
+        "starter_sha256": "71a84d2c6f7f293bf7f57c1fa3221fc942fce57bca61c8ed3344d593c31c262c",
+        "starter_bytes": 16948757,
         "verified_core_entries": 68,
         "verified_unchanged_pack_entries": 143,
         "verified_workspace_source_copies": 15,
-        "review_installation": "Extract starter into a separate folder.",
-        "sha256": "90933af445f8696baa0f787ece51a5e795cd654dfd6783dc2d3309c352d22419",
-        "bytes": 75484976
-      },
-      "tested_source_commit": "0d2a993fca95a5837a69aa05c63aa5e806c553af"
+        "review_installation": "Extract starter into a separate folder."
+      }
     },
-    "source_checked_commit": "0d3282046d7aa05dc822315c9a237c8ac534cd7a",
-    "tested_source_commit": "0d3282046d7aa05dc822315c9a237c8ac534cd7a",
+    "source_checked_commit": "b3928ca6a29d22b5f010a303658c2e19c24324da",
+    "tested_source_commit": "b3928ca6a29d22b5f010a303658c2e19c24324da",
     "native_checks_per_path": {
       "paths": [
         "ordinary",
@@ -342,22 +484,79 @@
       "platform": "Windows Server 2022",
       "python": "bundled 3.13.16",
       "observed_dpi": 96,
-      "capture_hashes_verified_total": 56,
       "sam_to_bam_records": 202,
       "scroll_static_pixels_compared": 197198,
-      "scroll_pixel_differences": 0
+      "scroll_pixel_differences": 0,
+      "scroll_scope": "Settled-image regression retained; additional desktop-frame sampling and precision-wheel outcomes are recorded separately below."
     },
     "candidate_download": {
-      "url": "https://github.com/comparativechrono/workbench/actions/runs/37449356224/artifacts/11404414503",
-      "expires_at": "2026-11-05T10:23:19Z",
-      "sha256": "6d6679f8df73cd20b050605a295400705d40242ecf42d62c31000e2b55c5f0cc",
-      "bytes": 75551632,
-      "starter_sha256": "71a84d2c6f7f293bf7f57c1fa3221fc942fce57bca61c8ed3344d593c31c262c",
-      "starter_bytes": 16948757,
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37453380541/artifacts/11408021439",
+      "expires_at": "2026-11-05T10:59:55Z",
+      "sha256": "234688eabc01315aceba6fd588094bc7bf2263670766d0bdc9d088f8f0c735c1",
+      "bytes": 75599305,
+      "starter_sha256": "df001a80033ff8e834045ec683c79672e0efdbd4880fb89fca8bf8c36d830fdc",
+      "starter_bytes": 16948940,
+      "native_executable_sha256": "e32fc3e5acb42766641a822f01835430b3312b84c3174bd282fe2a50ef6f9d71",
       "verified_core_entries": 68,
       "verified_unchanged_pack_entries": 143,
       "verified_workspace_source_copies": 15,
-      "review_installation": "Extract starter into a separate folder."
+      "verified_zip_crcs": 3,
+      "build_provenance_verified": true,
+      "review_installation": "Extract starter into a separate folder.",
+      "verified_relevant_source_files": 14
+    },
+    "scroll_flashing_follow_up": {
+      "recorded_on": "2026-10-06",
+      "status": "exact package passed native observation and precision-wheel gate; tester visual flashing not reproduced in CI and manual confirmation remains outstanding",
+      "report": "Text still flashes while scrolling after the user-confirmed pipeline fix.",
+      "previous_candidate_source_commit": "0d3282046d7aa05dc822315c9a237c8ac534cd7a",
+      "prior_scroll_evidence": {
+        "pixels_compared_per_path": 197198,
+        "differences_per_path": 0,
+        "scope": "Settled static-text/background captures at the same scroll offset before and after clean redraw; no observation of intermediate scrolling frames."
+      },
+      "implementation": [
+        "Composited form and General settings panel descendant painting",
+        "Queued repainting instead of forced immediate descendant paints for each scroll event",
+        "No layout/redraw when a boundary scroll or focus change leaves the position unchanged",
+        "Accumulate precision wheel deltas separately for each panel and ignore zero movement"
+      ],
+      "candidate_source_commit": "b3928ca6a29d22b5f010a303658c2e19c24324da",
+      "native_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37453380541",
+      "evidence": "evidence/native-workflow-0.8.0-scroll-2026-10-06.json",
+      "native_observation": {
+        "platform": "Windows Server 2022",
+        "private_python": "3.13.16",
+        "dpi": 96,
+        "panels": [
+          "standalone-options",
+          "general-settings",
+          "workflow-options"
+        ],
+        "frames_per_panel": 320,
+        "frames_total": 960,
+        "unexpected_static_text_background_frames": 0,
+        "requested_endpoint_transitions": 300,
+        "observed_endpoint_transitions": 300,
+        "precision_cases_passed": 18,
+        "failures": 0,
+        "skips": 0,
+        "observed_frames_per_second_range": [
+          27.16,
+          31.8
+        ],
+        "method": "Paced displayed-desktop BitBlt samples with DwmFlush timing aid; no app paint request during sampling; edit/button regions masked.",
+        "scope": "Finite static-text/background observation cannot exclude shorter flashes between samples or establish behavior on the tester physical display."
+      },
+      "prior_package_comparison": {
+        "source_commit": "0d3282046d7aa05dc822315c9a237c8ac534cd7a",
+        "frames_total": 960,
+        "unexpected_static_text_background_frames": 0,
+        "visual_flashing_reproduced": false,
+        "precision_cases_failed": 6,
+        "precision_failure": "Six negative-one-unit cases through panel and child-edit routes produced offset 0 instead of expected 48 pixels.",
+        "scope": "Precision-wheel movement failure was reproduced; it is not reproduction of visual flashing."
+      }
     }
   }
 }

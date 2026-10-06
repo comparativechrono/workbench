@@ -174,6 +174,33 @@ stores settings and exact pack identity, excluding file, sample, library and
 read-group bindings. `user-data/saved.json` and `user-data/runs.json` are mutable
 user state, separate from immutable core inventories and optional packs.
 
+## Native panel scrolling
+
+The 0.8 development interface uses composited child-window painting only on
+the options form and general-settings panel. `place_panel()` batches final
+child positions without copying stale pixels, then queues a complete descendant
+repaint. Windows presents the buffered panel together rather than displaying
+each static label's erase/draw cycle. Keep `SWP_NOCOPYBITS` and descendant
+invalidation: they prevent the previously observed lines through clipped text.
+Canvas drawing remains on its existing separate buffered path.
+
+Do not retain a panel device context between paint operations. The native
+surface class must remain compatible with `WS_EX_COMPOSITED` (no own, class or
+parent DC style). See Microsoft's [extended-window style contract](https://learn.microsoft.com/en-us/windows/win32/winmsg/extended-window-styles)
+and [device-context lifetime guidance](https://devblogs.microsoft.com/oldnewthing/20171018-00/?p=97245/).
+
+Wheel input accumulates fractional movement independently for each panel;
+child controls and panel background share their panel's accumulator. A rounded
+zero wheel movement must never enter the scrollbar command path as
+`SB_LINEUP`, whose value is also zero. Reaching a scroll boundary or focusing an
+already visible field leaves the panel untouched. The form accumulator resets
+when the selected item or workspace mode changes.
+
+These are presentation changes; input ownership, exact pack pins, scientific
+execution and recorded provenance remain governed by the existing model and
+engine. Artifact-specific temporal scrolling evidence is separate from settled
+screenshot equality; see the [native UI guide](native-ui.md).
+
 ## Locality, network and trust
 
 Analysis commands consume local inputs and write local outputs. The explicit

@@ -33,7 +33,47 @@ sort already converts minimap2 SAM to sorted BAM, while the standalone faidx
 utility is not a prerequisite for starter alignment or variant operations.
 Published pack bytes, operation IDs and saved pins remain unchanged.
 
-### Current nested-output-path fix
+### Current scroll-flashing follow-up
+
+The user confirmed that the nested-output-path pipeline fix worked, but reported
+that text still flashes while scrolling. This is user acceptance of the reported
+pipeline fix; it does not establish that every workflow or display configuration
+is accepted. The previous zero-difference scroll comparison checked settled
+images before and after a clean redraw. It did not observe intermediate frames
+and is not evidence that scrolling was free from visible flashing.
+
+The current revision makes form and General settings panel descendants paint
+together, queues their repaint instead of forcing each scroll message to draw
+immediately, and avoids layout/redraw work when scrolling or focus leaves the
+scroll position unchanged. It also accumulates small wheel deltas separately for
+each panel; a rounded zero movement previously entered the line-up command path.
+Exact candidate `b3928ca6a29d22b5f010a303658c2e19c24324da` passed all five jobs in
+[run 37453380541](https://github.com/comparativechrono/workbench/actions/runs/37453380541):
+82 source checks, the existing 32 workspace and 8 References/update checks in
+each Windows path, the five-stage long-path scientific regression, and the new
+scroll gate. The [scroll record](evidence/native-workflow-0.8.0-scroll-2026-10-06.json)
+binds the reports to the exact package.
+
+At 96 DPI on Windows Server 2022, the new gate sampled **960 desktop frames**
+across standalone options, General settings and workflow options at
+27.16–31.80 frames/second. There were no unexpected static-text/background frames,
+and all 300 requested endpoint transitions were observed. All **18 precision-wheel
+cases passed**. The old package also had no unexpected sampled frames, so the
+tester's **visual flashing was not reproduced in CI**. Six old precision-wheel
+cases failed, reporting zero movement where 48 pixels were expected; those
+separate movement failures now pass. Sampling masks edit/button regions and
+cannot exclude shorter flashes between frames or establish behavior on the
+tester's physical display. Manual confirmation remains outstanding.
+
+The [current review bundle](https://github.com/comparativechrono/workbench/actions/runs/37453380541/artifacts/11408021439)
+expires 5 November 2026. Extract its starter into a separate folder. The
+16,948,940-byte starter SHA-256 is
+`df001a80033ff8e834045ec683c79672e0efdbd4880fb89fca8bf8c36d830fdc`.
+The bundle, all three ZIP CRCs, build provenance, 68 core entries, 143 unchanged
+pack entries, 15 workspace source copies and 14 relevant source files were
+verified. Application 0.8.0 remains unreleased; published 0.7.0 is unchanged.
+
+### Accepted nested-output-path fix
 
 A later user installation report passed all seven application/integrity checks
 but blocked the starter pipeline after its first alignment. The native runner
@@ -42,7 +82,7 @@ existence check on a **269-character** output path. The folder was 255 character
 and both components identified the same file. User registry state was not
 captured. No private directory paths or uploaded data are committed.
 
-Current source `0d3282046d7aa05dc822315c9a237c8ac534cd7a` uses explicit Windows
+The earlier correction `0d3282046d7aa05dc822315c9a237c8ac534cd7a` uses explicit Windows
 extended paths at pipeline/check filesystem boundaries while retaining ordinary
 paths in provenance, plans and tool arguments. Trust, containment and reparse
 protections remain enforced. The **82-check source gate** passed, including
@@ -62,7 +102,7 @@ checks in each Windows path**, with zero failures or skips. All 56 capture
 hashes were verified. The long-path check itself is a host/CLI execution test,
 distinct from the ordinary/space-containing GUI gate.
 
-The [current corrected bundle](https://github.com/comparativechrono/workbench/actions/runs/37449356224/artifacts/11404414503)
+The [prior long-path bundle](https://github.com/comparativechrono/workbench/actions/runs/37449356224/artifacts/11404414503)
 expires 5 November 2026. Extract its starter into a separate folder for review.
 The verified starter is 16,948,757 bytes, SHA-256
 `71a84d2c6f7f293bf7f57c1fa3221fc942fce57bca61c8ed3344d593c31c262c`.
@@ -91,7 +131,8 @@ with zero failures or skips, on Windows Server 2022/private Python 3.13.16 at
 alignment records and produced coordinate-sorted BAM. Native pointer checks
 covered connections, pan/zoom, hover deletion/Undo, input ownership and Manage
 tools. The scroll comparison found zero differences across 197,198 sampled
-static-text/background pixels per path; all 56 workspace/References capture
+static-text/background pixels per path in settled images, not intermediate
+scrolling frames; all 56 workspace/References capture
 hashes were verified. See the [feedback record](evidence/native-workflow-0.8.0-feedback-2026-10-06.json)
 and [native UI guide](native-ui.md) for exact scope and limitations.
 

@@ -9,10 +9,16 @@ Testers accepted the three-pane layout, then reported workflow input duplication
 difficult chaining, missing navigation/delete controls, text corruption while
 scrolling and an error on the first opening of Manage tools. The feedback
 revision passed its native gate, then a user installation report exposed an
-additional defect with deeply nested Windows result paths. The current fix is
+additional defect with deeply nested Windows result paths. The pipeline fix is
 source `0d3282046d7aa05dc822315c9a237c8ac534cd7a`, which passed exact-package
 validation in [run 37449356224](https://github.com/comparativechrono/workbench/actions/runs/37449356224).
 See the [long-path record](evidence/native-workflow-0.8.0-long-path-2026-10-06.json).
+The user confirmed that this pipeline fix worked, then reported that text still
+flashes while scrolling. The current repaint follow-up at
+`b3928ca6a29d22b5f010a303658c2e19c24324da` passed exact-package automated gates in
+[run 37453380541](https://github.com/comparativechrono/workbench/actions/runs/37453380541).
+The visual flashing was not reproduced by CI on either old or new bytes;
+confirmation on the tester's display remains outstanding.
 
 The prior feedback source `0d2a993fca95a5837a69aa05c63aa5e806c553af` passed
 **32 workspace checks and 8 References/update checks per Windows path** in
@@ -27,18 +33,72 @@ Layout acceptance is not acceptance of the corrected workflow behavior.
 The published 0.7.0 release and its reference-validation evidence remain
 unchanged; no 0.8.0 release was created.
 
-The [current candidate bundle](https://github.com/comparativechrono/workbench/actions/runs/37449356224/artifacts/11404414503)
+The [current candidate bundle](https://github.com/comparativechrono/workbench/actions/runs/37453380541/artifacts/11408021439)
 contains the corrected starter, matching source and 0.6.0 updater. Extract the
 starter into a **separate folder** and launch `NativeWorkbench.exe` for review.
 It expires **5 November 2026**. No 0.7.0-to-0.8.0 upgrade is claimed.
 
-| Verified current item | Bytes | SHA-256 |
+| Verified current candidate item | Bytes | SHA-256 |
 | --- | ---: | --- |
-| Actions bundle | 75,551,632 | `6d6679f8df73cd20b050605a295400705d40242ecf42d62c31000e2b55c5f0cc` |
-| `native-workbench-0.8.0-starter-windows.zip` | 16,948,757 | `71a84d2c6f7f293bf7f57c1fa3221fc942fce57bca61c8ed3344d593c31c262c` |
+| Actions bundle | 75,599,305 | `234688eabc01315aceba6fd588094bc7bf2263670766d0bdc9d088f8f0c735c1` |
+| `native-workbench-0.8.0-starter-windows.zip` | 16,948,940 | `df001a80033ff8e834045ec683c79672e0efdbd4880fb89fca8bf8c36d830fdc` |
 
-All 68 core entries, 143 unchanged starter-pack entries and 15 packaged workspace
-source copies were verified against their corresponding inventories/source.
+All 68 core entries, 143 unchanged starter-pack entries, 15 packaged workspace
+source copies and 14 relevant source files were verified against their
+corresponding inventories/source. All three ZIP CRCs and build provenance were
+checked. The packaged native executable SHA-256 is
+`e32fc3e5acb42766641a822f01835430b3312b84c3174bd282fe2a50ef6f9d71`.
+
+## Scroll-flashing follow-up, 2026-10-06
+
+User confirmation closes the reported pipeline failure on the reviewed machine;
+it does not close the separately reported flashing text. The previous scrolling
+regression sampled static text and background after movement had settled, then
+compared that image with a clean redraw. Its zero-difference result establishes
+the tested final rendering, not what a person saw between frames while scrolling.
+Preserve that result with its original scope.
+
+The correction adds `WS_EX_COMPOSITED` to the form and General
+settings panels, so child labels and controls are painted together. Scroll
+layout retains the no-pixel-copy behavior but queues repainting rather than
+forcing immediate descendant paints for every event. Boundary scrolls and
+focus changes that do not change the scroll position avoid unnecessary layout.
+Source review also found that small wheel deltas rounded to zero could enter
+the `SB_LINEUP` command path and move upward. The correction accumulates the
+fraction separately for each panel and does nothing until it yields movement.
+The [exact-package scroll record](evidence/native-workflow-0.8.0-scroll-2026-10-06.json)
+retains the new run, hashes and prior-package comparison. All five jobs passed:
+82 CI source checks, 32 workspace plus 8 References/update checks in each native
+path, the full five-stage long-path pipeline regression and the temporal scroll
+gate. The latter observed standalone options, General settings and workflow
+options at 96 DPI on Windows Server 2022 with private Python 3.13.16.
+
+| Current-package scroll observation | Result |
+| --- | --- |
+| Desktop frames | 320 per panel; 960 total |
+| Unexpected static-text/background frames | 0 |
+| Requested/observed endpoint transitions | 300 / 300 |
+| Precision-wheel cases | 18 passed |
+| Observed sampling rate | 27.16–31.80 frames/second |
+
+The gate samples the displayed desktop without asking the app to repaint during
+observation. Edit/button regions are masked; this is a finite static-text and
+background observation. The previous package also had zero unexpected frames
+across the same 960 samples. Therefore the **reported visual flashing was not
+reproduced in CI**, and these results do not prove its absence on the tester's
+display or between sampled frames. Physical scrolling/display confirmation
+remains needed.
+
+The prior-package comparison did reproduce a separate precision-wheel defect:
+six negative-one-unit cases, routed through panels and child edits, remained at
+offset zero instead of reaching the expected 48 pixels. All 18 current-package
+precision cases passed. A detected movement failure must not be described as
+reproduction of the visual flashing.
+
+The [prior long-path bundle](https://github.com/comparativechrono/workbench/actions/runs/37449356224/artifacts/11404414503)
+and its SHA-256 `71a84d2c6f7f293bf7f57c1fa3221fc942fce57bca61c8ed3344d593c31c262c`
+remain historical evidence. Published 0.7.0 and all historical package/evidence
+bytes remain unchanged. Version 0.8.0 remains an unreleased review candidate.
 
 ## Nested Windows result paths, 2026-10-06
 
@@ -100,6 +160,8 @@ Each workspace total is 8 packaged-host, 2 scientific and 22 GUI checks. All 56
 workspace/References capture hashes were verified. The new long-path regression
 is a host/CLI scientific execution check, not a separate GUI interaction claim.
 
+The user subsequently confirmed that the pipeline fix worked. This is separate
+manual feedback for the reported failure, not a rerun of the automated checks.
 This is not a universal long-path claim for every optional executable, arbitrary
 deep installation/reference-library location or Windows shell dialog. Physical
 trackpad pinch, higher-DPI/multiple-monitor behavior and manual tester acceptance
@@ -244,7 +306,7 @@ dependency order, pack pins or scientific graph semantics.
 
 ## Feedback revision, 2026-10-06
 
-The scrolling fix moves child controls together without copying old pixels,
+The initial scrolling correction moves child controls together without copying old pixels,
 then repaints the panel and all children. Manage tools starts with correctly
 typed empty arrays before its asynchronous response arrives; the first opening
 must not parse an absent value as an array.
@@ -306,7 +368,8 @@ hardware.
 
 The scroll regression compared **197,198 static-text/background pixels** at the
 same scrolled offset before and after a clean redraw, with **zero differing
-pixels in each path**. All 36 workspace GUI capture hashes were verified.
+pixels in each path**. These were settled captures; no intermediate scroll
+frames were sampled. All 36 workspace GUI capture hashes were verified.
 These assertions concern the tested native controls and scroll positions at
 96 DPI; they do not establish every display scaling or accessibility setting.
 

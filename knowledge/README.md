@@ -40,8 +40,22 @@ ordinary provenance identities and uses extended paths at filesystem boundaries.
 See the
 [sanitized long-path record](evidence/native-workflow-0.8.0-long-path-2026-10-06.json).
 Earlier native passes did not establish this deep-output-path behavior.
-Version 0.8.0 remains unreleased and awaits tester reacceptance; published 0.7.0
-and its evidence are unchanged.
+The user subsequently confirmed that the pipeline fix worked, while reporting
+that text still flashes during scrolling. That pipeline confirmation is user
+acceptance of the reported fix, not a new automated run or acceptance of all
+display behavior. The earlier scroll check compared settled images and did not
+observe intermediate frames. The further revision at `b3928ca` adds composited
+form panels, suppresses redundant redraws and accumulates small wheel deltas.
+Its [exact-package native run](https://github.com/comparativechrono/workbench/actions/runs/37453380541)
+passed all five jobs. Across three panels, 960 sampled desktop frames showed
+no unexpected text/background image and all 300 requested endpoint transitions
+were observed; all 18 precision-wheel cases passed. The old package also showed
+no unexpected frames, so the tester's visual flashing was **not reproduced in
+CI**. Six old precision-wheel cases did fail and now pass; that is a separately
+reproduced movement defect. The [scroll record](evidence/native-workflow-0.8.0-scroll-2026-10-06.json)
+retains these limits and the verified candidate download. Physical tester-display
+confirmation remains needed.
+Version 0.8.0 remains unreleased; published 0.7.0 and its evidence are unchanged.
 
 ## Reading order
 
