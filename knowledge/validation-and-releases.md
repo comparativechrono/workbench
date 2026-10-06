@@ -1,5 +1,29 @@
 # Validation, releases and publisher trust
 
+## Nested Windows result-path regression, 0.8 candidate
+
+`scripts/check_long_paths_windows.py` uses the exact packaged private host's
+**Check installation** action and the pinned five-step starter scientific
+profile. Its dedicated job in `native-workspace-ui-check.yml` disables ordinary
+long-path opt-in only on a disposable hosted Windows runner, starts fresh
+processes, proves ordinary and extended file probes differ, and restores the
+previous policy in `finally`. Application execution must never change a user's
+machine policy or require administrator privileges to apply this fix.
+
+The corrected package must complete alignment, BAM preparation, variant
+calling, statistics and reporting, preserve the pinned scientific truth, and
+independently rehash every output. The regression isolates long result files
+while keeping the installation root and native working directory short. An
+unchanged previous candidate supplies a separately reported negative control
+while its artifact is available. Its expiry may mark that diagnostic unrun,
+never passed; the corrected-package regression remains mandatory. Keep the
+old failure, new success, policy setup/restoration and exact artifact identities
+in the [dated evidence](evidence/native-workflow-0.8.0-long-path-2026-10-06.json).
+
+`workspace/tests/test_engine_paths.py` complements this with real files under
+an emulated path limit, synthetic backend execution, canonical identity and
+containment/hash/link regressions. Its source pass is not native Windows proof.
+
 ## Reference application gate, 0.7
 
 The initial reference provider is tested separately from tool-pack algorithms.

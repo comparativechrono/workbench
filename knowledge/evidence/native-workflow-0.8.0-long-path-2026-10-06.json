@@ -1,0 +1,587 @@
+{
+  "schema": 1,
+  "recordedDate": "2026-10-06",
+  "version": "0.8.0",
+  "status": "Nested Windows result-path defect reproduced in unchanged prior package and fixed; exact corrected Windows package validated; unreleased development candidate",
+  "branch": "ui/galaxy-native-workspace",
+  "pullRequest": "https://github.com/comparativechrono/workbench/pull/1",
+  "reportedCandidateSource": "0d2a993fca95a5837a69aa05c63aa5e806c553af",
+  "priorEvidence": "knowledge/evidence/native-workflow-0.8.0-feedback-2026-10-06.json",
+  "userEvidence": {
+    "attachment": "installation-20261006-100855-4be26b67.zip",
+    "sha256": "6ad078bb873b87557f5b4f2a0dbf244ecc07ab14f9d244f0d37b825476a794d7",
+    "privacy": "User account/directory paths and raw uploaded files are intentionally not committed.",
+    "coreIntegrityChecksPassed": 7,
+    "coreManifestFilesVerified": 68,
+    "starterScientificCheckFailed": true,
+    "bridgeStage1Status": "success",
+    "alignmentExitCode": 0,
+    "nativeAnalysisFolderCharacters": 255,
+    "nativeSAMPathCharacters": 269,
+    "SAMBytes": 69441,
+    "SAMRecords": 202,
+    "SAMMatchesNativeRecordedHash": true,
+    "orchestratorFailure": "Declared SAM output reported missing; downstream steps blocked.",
+    "systemLongPathsSetting": "Not included in user report; no claim about user registry configuration."
+  },
+  "diagnosis": "Native runner successfully created and hashed the output. Python orchestration used an ordinary-path existence check on a 269-character path, beyond the legacy Windows boundary. The native runner already uses extended-length file I/O; Python pipeline I/O needs the same handling.",
+  "reference": "https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation",
+  "validationGap": "Prior candidate used ordinary/space-containing paths that did not establish legacy-limit behavior for deep pipeline results. Its successful evidence remains valid only within that scope.",
+  "limits": [
+    "No universal long-path support claim for every optional pack, arbitrary deep installations or Windows shell dialogs.",
+    "Raw user data retained only in the authorized attachment/workspace, not uploaded to the repository.",
+    "Long-path gate used a short installation root, a 152-character synthetic output parent, a native working directory below 260, and output files up to 279 characters.",
+    "New long-path check uses the actual private host Check installation action; it does not claim long-path GUI interaction.",
+    "Existing GUI evidence remains Windows Server 2022 at 96 DPI; physical trackpad pinch, high-DPI, multi-monitor and folder-picker behavior and manual acceptance remain unvalidated.",
+    "No 0.8.0 release published; candidate updater tested only from 0.6.0; no 0.7.0 upgrade pass claimed."
+  ],
+  "diagnosisConfirmed": "Exact previous package reproduced the false missing-SAM error under disabled long-path policy. The corrected package completed all five scientific steps under the same policy, while ordinary unprefixed is_file still returned false for the 268-character SAM.",
+  "implementation": [
+    "Reuse existing extended Windows filesystem paths at engine I/O boundaries; retain ordinary serialized paths and tool arguments.",
+    "Cover output detection, hashing, upstream reads, preflight readers, reports, cancellation and run records.",
+    "Use the same physical I/O boundary for starter/pack scientific output assertions.",
+    "Preserve exact pack bytes, frozen plan/manifest validation, containment and link/file identity protections."
+  ],
+  "sourceChecks": {
+    "ciPasses": 82,
+    "failures": 0,
+    "skips": 0,
+    "ciSourceCommit": "0d3282046d7aa05dc822315c9a237c8ac534cd7a",
+    "suites": {
+      "engine_paths": 7,
+      "workflow_inputs": 11,
+      "catalog_presentation": 7,
+      "desktop_modes": 11,
+      "desktop_host": 12,
+      "reference_service": 10,
+      "split_release": 8,
+      "core_update": 16
+    },
+    "newPathTestsScope": "Linux real files with emulated MAX_PATH and synthetic backend; not native Windows evidence.",
+    "additionalLocalChecks": {
+      "pack_checks": 13,
+      "selected_core_contracts": 9,
+      "failures": 0,
+      "skips": 0,
+      "scope": "Selected source contracts on Python 3.12.14; the separate portable Linux scientific integration test was not run. Full actual Windows scientific chain is covered below."
+    }
+  },
+  "finalCandidate": {
+    "runId": 37449356224,
+    "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37449356224",
+    "conclusion": "success",
+    "sourceCommit": "0d3282046d7aa05dc822315c9a237c8ac534cd7a",
+    "artifact": {
+      "id": 11404414503,
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37449356224/artifacts/11404414503",
+      "sha256": "6d6679f8df73cd20b050605a295400705d40242ecf42d62c31000e2b55c5f0cc",
+      "bytes": 75551632,
+      "expiresAt": "2026-11-05T10:23:19Z"
+    },
+    "downloadVerification": {
+      "bundleSha256": "6d6679f8df73cd20b050605a295400705d40242ecf42d62c31000e2b55c5f0cc",
+      "sourceCommit": "0d3282046d7aa05dc822315c9a237c8ac534cd7a",
+      "archives": [
+        {
+          "file": "native-workbench-0.8.0-source.zip",
+          "bytes": 46193704,
+          "sha256": "e8cf91fc1172c3df6b607797997cdbb036aa5461aa0928a5ccb3f765bbcb9961"
+        },
+        {
+          "file": "native-workbench-0.8.0-starter-windows.zip",
+          "bytes": 16948757,
+          "sha256": "71a84d2c6f7f293bf7f57c1fa3221fc942fce57bca61c8ed3344d593c31c262c"
+        },
+        {
+          "file": "native-workbench-0.8.0-update-from-0.6.0.zip",
+          "bytes": 12897057,
+          "sha256": "7f63e348ae033819a503e17d11ec70d9d44b1f742d4a0866679c33952c1eac6b"
+        }
+      ],
+      "coreManifestFilesVerified": 68,
+      "starterPackFilesByteIdenticalToFrozen060": 143,
+      "nativeExecutableSha256": "b0c089b37b0af6ac37d584f847a49a09d4702f0ba27b9edc94ba30c999ff9791",
+      "changedSourceFilesCompared": [
+        "desktop/desktop_workspace.cpp",
+        "desktop/workflow_canvas.h",
+        "workspace/desktop_model.py",
+        "workspace/desktop_host.py",
+        "workspace/catalog.py",
+        "workspace/engine.py",
+        "scripts/check_workspace_ui_windows.py",
+        "scripts/check_references_windows.py",
+        "workspace/pack_manager.py",
+        "workspace/core_checks.py",
+        "workspace/pack_checks.py",
+        "scripts/check_long_paths_windows.py"
+      ],
+      "packagedWorkspaceSourceFilesCompared": 15
+    },
+    "windows": [
+      {
+        "installationPathCase": "ordinary",
+        "artifact": {
+          "id": 11406290128,
+          "url": "https://github.com/comparativechrono/workbench/actions/runs/37449356224/artifacts/11406290128",
+          "sha256": "b37a11db45c807f6a10a236a84563be7e3951da64ac13a51c9a329fa48a0d165",
+          "bytes": 1251198,
+          "expiresAt": "2026-11-05T10:24:48Z"
+        },
+        "nativeWorkspaceChecksPassed": 32,
+        "workspaceHostChecks": 8,
+        "scientificChecks": 2,
+        "nativeGUIChecks": 22,
+        "referenceChecksPassed": 8,
+        "failures": 0,
+        "skips": [],
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+        "dpi": 96,
+        "checks": [
+          "Default standalone mode",
+          "Independent preserved tool and workflow graphs",
+          "Compatible graph edge",
+          "Bounded native compatibility preview",
+          "Atomic cycle and semantic type rejection",
+          "Per-tool settings and input retention",
+          "Workflow additions leave ports unbound without automatic source boxes",
+          "Explicit reusable input owns one file editor and connects without duplication",
+          "Native minimap2 alignment chains to SAMtools coordinate-sorted binary BAM using two explicit inputs",
+          "All 202 synthetic mapped proper-pair records, mate flags, sequence, quality and typed tags survive SAM-to-BAM conversion",
+          "Manage tools loads installed packs on its first click without a modal error and reopens cleanly",
+          "First click opens a previously selected workflow-library row in empty tool mode",
+          "Single-click standalone tool form",
+          "Separate queued native double-click notification opens its hit row after selection clears",
+          "Three independent panes with general settings",
+          "Actual mouse drag from tool list onto workflow canvas twice",
+          "Actual compatible output-to-input mouse connection",
+          "Canvas selection displays tool options on right",
+          "General settings remain available in workflow mode",
+          "Standalone input and browsing folder survive workflow mode",
+          "Mode-specific status guidance replaces the previous workflow drag hint",
+          "Workflow graph/selection survives mode switching",
+          "Normal/minimum observed pane separation",
+          "Real repeated option scrolling leaves static text identical to a clean repaint",
+          "Blank-canvas mouse drag pans and reverses the viewport",
+          "Zoom buttons decrease, increase and reset scale; scaled card hit testing selects both tools",
+          "Injected one-unit native Ctrl-wheel deltas accumulate into visible zoom",
+          "Editing a tool immediately before Add input preserves its draft through the nested modal loop",
+          "Native Add input creates one independently editable reference file slot",
+          "Actual mouse connection from an explicit input output socket to a tool input without duplicate file fields",
+          "Header hover close deletes a tool and Undo restores its selection",
+          "Header hover close deletes an explicit input and Undo restores its files"
+        ],
+        "referenceChecks": [
+          "Live release-pinned yeast search and five-product discovery.",
+          "Cancellation after transferred bytes removed only its partial download and published no reference.",
+          "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+          "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+          "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods.",
+          "Installed application and starter pack integrity checks passed after reference use.",
+          "Native 0.6.0-to-0.8.0 core migration and idempotent repeat preserved optional packs, saved pins, references and results; updated private host reused them offline.",
+          "Native app opened References, displayed local files, selected and downloaded five products through native controls, cancelled through its native button, bound both existing and newly downloaded genomes through compatible native inputs, kept controls separate at normal/minimum size and closed cleanly."
+        ],
+        "scrollRendering": {
+          "scrollBefore": {
+            "nMin": 0,
+            "nMax": 1019,
+            "nPage": 555,
+            "nPos": 0
+          },
+          "scrollAfter": {
+            "nMin": 0,
+            "nMax": 1019,
+            "nPage": 555,
+            "nPos": 48
+          },
+          "comparedPixels": 197198,
+          "differentPixels": 0,
+          "maskedChildControlBounds": [
+            [
+              253,
+              247,
+              678,
+              281
+            ],
+            [
+              253,
+              497,
+              584,
+              531
+            ],
+            [
+              590,
+              497,
+              678,
+              531
+            ],
+            [
+              253,
+              571,
+              584,
+              605
+            ],
+            [
+              590,
+              571,
+              678,
+              605
+            ],
+            [
+              253,
+              719,
+              584,
+              753
+            ],
+            [
+              590,
+              719,
+              678,
+              753
+            ],
+            [
+              253,
+              867,
+              678,
+              901
+            ],
+            [
+              253,
+              941,
+              678,
+              975
+            ]
+          ],
+          "method": "Actual desktop BitBlt before and after forced descendant redraw at unchanged scroll offset"
+        },
+        "migration": {
+          "baseVersion": "0.6.0",
+          "targetVersion": "0.8.0",
+          "preservedFiles": 187,
+          "preservationChanges": {},
+          "repeat": {
+            "status": "already-installed",
+            "version": "0.8.0",
+            "files_verified": 68
+          },
+          "offlineRestart": true
+        },
+        "rawReports": [
+          {
+            "path": "knowledge/evidence/native-workflow-0.8.0-long-path-ordinary-ui-2026-10-06.json",
+            "bytes": 22256,
+            "sha256": "dd7bee717c3b6022d6467dfb405bb15b099aef194993ee2be1b5e95263307053"
+          },
+          {
+            "path": "knowledge/evidence/native-workflow-0.8.0-long-path-ordinary-references-2026-10-06.json",
+            "bytes": 25532,
+            "sha256": "ffac19da9317fb00874f5bfff06934a4be8835549dbae9f1c9623cb5298ac96e"
+          }
+        ],
+        "captureHashesVerified": 28
+      },
+      {
+        "installationPathCase": "spaces",
+        "artifact": {
+          "id": 11406595024,
+          "url": "https://github.com/comparativechrono/workbench/actions/runs/37449356224/artifacts/11406595024",
+          "sha256": "d7c9086cf3ca2c5f8ad25db88baea7d0497df75caea11b0a1a7c4b1523536f9c",
+          "bytes": 1250724,
+          "expiresAt": "2026-11-05T10:24:41Z"
+        },
+        "nativeWorkspaceChecksPassed": 32,
+        "workspaceHostChecks": 8,
+        "scientificChecks": 2,
+        "nativeGUIChecks": 22,
+        "referenceChecksPassed": 8,
+        "failures": 0,
+        "skips": [],
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+        "dpi": 96,
+        "checks": [
+          "Default standalone mode",
+          "Independent preserved tool and workflow graphs",
+          "Compatible graph edge",
+          "Bounded native compatibility preview",
+          "Atomic cycle and semantic type rejection",
+          "Per-tool settings and input retention",
+          "Workflow additions leave ports unbound without automatic source boxes",
+          "Explicit reusable input owns one file editor and connects without duplication",
+          "Native minimap2 alignment chains to SAMtools coordinate-sorted binary BAM using two explicit inputs",
+          "All 202 synthetic mapped proper-pair records, mate flags, sequence, quality and typed tags survive SAM-to-BAM conversion",
+          "Manage tools loads installed packs on its first click without a modal error and reopens cleanly",
+          "First click opens a previously selected workflow-library row in empty tool mode",
+          "Single-click standalone tool form",
+          "Separate queued native double-click notification opens its hit row after selection clears",
+          "Three independent panes with general settings",
+          "Actual mouse drag from tool list onto workflow canvas twice",
+          "Actual compatible output-to-input mouse connection",
+          "Canvas selection displays tool options on right",
+          "General settings remain available in workflow mode",
+          "Standalone input and browsing folder survive workflow mode",
+          "Mode-specific status guidance replaces the previous workflow drag hint",
+          "Workflow graph/selection survives mode switching",
+          "Normal/minimum observed pane separation",
+          "Real repeated option scrolling leaves static text identical to a clean repaint",
+          "Blank-canvas mouse drag pans and reverses the viewport",
+          "Zoom buttons decrease, increase and reset scale; scaled card hit testing selects both tools",
+          "Injected one-unit native Ctrl-wheel deltas accumulate into visible zoom",
+          "Editing a tool immediately before Add input preserves its draft through the nested modal loop",
+          "Native Add input creates one independently editable reference file slot",
+          "Actual mouse connection from an explicit input output socket to a tool input without duplicate file fields",
+          "Header hover close deletes a tool and Undo restores its selection",
+          "Header hover close deletes an explicit input and Undo restores its files"
+        ],
+        "referenceChecks": [
+          "Live release-pinned yeast search and five-product discovery.",
+          "Cancellation after transferred bytes removed only its partial download and published no reference.",
+          "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+          "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+          "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods.",
+          "Installed application and starter pack integrity checks passed after reference use.",
+          "Native 0.6.0-to-0.8.0 core migration and idempotent repeat preserved optional packs, saved pins, references and results; updated private host reused them offline.",
+          "Native app opened References, displayed local files, selected and downloaded five products through native controls, cancelled through its native button, bound both existing and newly downloaded genomes through compatible native inputs, kept controls separate at normal/minimum size and closed cleanly."
+        ],
+        "scrollRendering": {
+          "scrollBefore": {
+            "nMin": 0,
+            "nMax": 1019,
+            "nPage": 555,
+            "nPos": 0
+          },
+          "scrollAfter": {
+            "nMin": 0,
+            "nMax": 1019,
+            "nPage": 555,
+            "nPos": 48
+          },
+          "comparedPixels": 197198,
+          "differentPixels": 0,
+          "maskedChildControlBounds": [
+            [
+              253,
+              247,
+              678,
+              281
+            ],
+            [
+              253,
+              497,
+              584,
+              531
+            ],
+            [
+              590,
+              497,
+              678,
+              531
+            ],
+            [
+              253,
+              571,
+              584,
+              605
+            ],
+            [
+              590,
+              571,
+              678,
+              605
+            ],
+            [
+              253,
+              719,
+              584,
+              753
+            ],
+            [
+              590,
+              719,
+              678,
+              753
+            ],
+            [
+              253,
+              867,
+              678,
+              901
+            ],
+            [
+              253,
+              941,
+              678,
+              975
+            ]
+          ],
+          "method": "Actual desktop BitBlt before and after forced descendant redraw at unchanged scroll offset"
+        },
+        "migration": {
+          "baseVersion": "0.6.0",
+          "targetVersion": "0.8.0",
+          "preservedFiles": 187,
+          "preservationChanges": {},
+          "repeat": {
+            "status": "already-installed",
+            "version": "0.8.0",
+            "files_verified": 68
+          },
+          "offlineRestart": true
+        },
+        "rawReports": [
+          {
+            "path": "knowledge/evidence/native-workflow-0.8.0-long-path-spaces-ui-2026-10-06.json",
+            "bytes": 22304,
+            "sha256": "b636f90dfa445ca3ff9c39830de291e2b7fcd6293aa5e8dfd7e6d4937aa6cff8"
+          },
+          {
+            "path": "knowledge/evidence/native-workflow-0.8.0-long-path-spaces-references-2026-10-06.json",
+            "bytes": 25604,
+            "sha256": "fb6db9c06193d2d639e567518fe0bcb7440fd6bc918711ac0ab46dd25af5a865"
+          }
+        ],
+        "captureHashesVerified": 28
+      }
+    ]
+  },
+  "nativeLongPathRegression": {
+    "artifact": {
+      "id": 11405411224,
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37449356224/artifacts/11405411224",
+      "sha256": "2224a526969d59b1fbcc80d3c7c547e36d24218506484d854e85b392c14335f5",
+      "bytes": 87330,
+      "expiresAt": "2026-11-05T10:23:51Z"
+    },
+    "scope": "Exact packaged private host and complete starter installation-check chain; no GUI claim.",
+    "policy": {
+      "requestedValue": 0,
+      "restoredValue": 1,
+      "observedValue": 0,
+      "restored": true,
+      "scope": "Disposable hosted CI runner only; no application or user-machine policy changes",
+      "previousValue": 1
+    },
+    "negativeControlAvailability": {
+      "artifactId": 11401422780,
+      "passed": 2,
+      "executed": true,
+      "runId": 37441781509,
+      "available": true,
+      "status": "expected-failure-reproduced",
+      "skips": [],
+      "hashVerified": true
+    },
+    "prior": {
+      "sourceCommit": "0d2a993fca95a5837a69aa05c63aa5e806c553af",
+      "assetSha256": "de099e5feef437c788352c31c0e743c7e8f22aa08bfe2364e59b715ec3501806",
+      "diagnosticChecksPassed": 2,
+      "applicationCheck": {
+        "status": "failed",
+        "corePassed": 7,
+        "starterPassed": 0,
+        "starterFailed": 1,
+        "starterSkipped": 0
+      },
+      "alignmentOutput": {
+        "characters": 268,
+        "bytes": 69138,
+        "sha256": "1c8ba859879fdb77504077b6a1059ab6df60c9f3c8e63b8a8ffaad414ece8127",
+        "ordinaryIsFile": false,
+        "extendedIsFile": true
+      },
+      "skips": [],
+      "rawReport": {
+        "path": "knowledge/evidence/native-workflow-0.8.0-long-path-prior-2026-10-06.json",
+        "bytes": 1882,
+        "sha256": "3c5226fb32f96a84c7a14e483c777c8e4f40e12f23dd2578dbf50501d0181e65"
+      }
+    },
+    "fixed": {
+      "sourceCommit": "0d3282046d7aa05dc822315c9a237c8ac534cd7a",
+      "assetSha256": "71a84d2c6f7f293bf7f57c1fa3221fc942fce57bca61c8ed3344d593c31c262c",
+      "checksPassed": 3,
+      "applicationCheck": {
+        "status": "completed",
+        "corePassed": 7,
+        "starterPassed": 1,
+        "starterFailed": 0,
+        "starterSkipped": 0
+      },
+      "alignmentOutput": {
+        "characters": 268,
+        "bytes": 69138,
+        "sha256": "42f2c1e2b0743e20cefcc0da1e421c08b6849c96cde9740449efab019d381ee7",
+        "ordinaryIsFile": false,
+        "extendedIsFile": true
+      },
+      "outputFilesRehashed": 20,
+      "outputPathsOver260": 19,
+      "maximumOutputPathCharacters": 279,
+      "skips": [],
+      "rawReport": {
+        "path": "knowledge/evidence/native-workflow-0.8.0-long-path-fixed-2026-10-06.json",
+        "bytes": 7461,
+        "sha256": "3ed08e2ff700dc2a1ea02b59a59541ea20a6b5c807a084028e25fc83b164d9cd"
+      }
+    },
+    "independentScientificReview": "Root rehashed all 20 retained output copies and decoded expected starter:1351 G>A genotype 1/1. Gate reviewer independently confirmed 202 mapped properly paired records and BAM magic.",
+    "policyRawReport": {
+      "path": "knowledge/evidence/native-workflow-0.8.0-long-path-policy-2026-10-06.json",
+      "bytes": 214,
+      "sha256": "bf3ed98e0872ab62ed0b69caee5bd19b0a2644e682d690b78dc4dbc4802372cc"
+    },
+    "availabilityRawReport": {
+      "path": "knowledge/evidence/native-workflow-0.8.0-long-path-negative-control-2026-10-06.json",
+      "bytes": 204,
+      "sha256": "722bfcd27eba6f91ccf68b7e6368a16c14a3f523c2bda40486e14d2d31017125"
+    },
+    "futureDiagnosticAvailability": "Old artifact is optional after expiry: missing diagnostic is recorded unavailable/unrun, never passed. Corrected-package policy-disabled scientific regression remains mandatory."
+  },
+  "rawReports": [
+    {
+      "path": "knowledge/evidence/native-workflow-0.8.0-long-path-prior-2026-10-06.json",
+      "bytes": 1882,
+      "sha256": "3c5226fb32f96a84c7a14e483c777c8e4f40e12f23dd2578dbf50501d0181e65"
+    },
+    {
+      "path": "knowledge/evidence/native-workflow-0.8.0-long-path-fixed-2026-10-06.json",
+      "bytes": 7461,
+      "sha256": "3ed08e2ff700dc2a1ea02b59a59541ea20a6b5c807a084028e25fc83b164d9cd"
+    },
+    {
+      "path": "knowledge/evidence/native-workflow-0.8.0-long-path-policy-2026-10-06.json",
+      "bytes": 214,
+      "sha256": "bf3ed98e0872ab62ed0b69caee5bd19b0a2644e682d690b78dc4dbc4802372cc"
+    },
+    {
+      "path": "knowledge/evidence/native-workflow-0.8.0-long-path-negative-control-2026-10-06.json",
+      "bytes": 204,
+      "sha256": "722bfcd27eba6f91ccf68b7e6368a16c14a3f523c2bda40486e14d2d31017125"
+    },
+    {
+      "path": "knowledge/evidence/native-workflow-0.8.0-long-path-ordinary-ui-2026-10-06.json",
+      "bytes": 22256,
+      "sha256": "dd7bee717c3b6022d6467dfb405bb15b099aef194993ee2be1b5e95263307053"
+    },
+    {
+      "path": "knowledge/evidence/native-workflow-0.8.0-long-path-ordinary-references-2026-10-06.json",
+      "bytes": 25532,
+      "sha256": "ffac19da9317fb00874f5bfff06934a4be8835549dbae9f1c9623cb5298ac96e"
+    },
+    {
+      "path": "knowledge/evidence/native-workflow-0.8.0-long-path-spaces-ui-2026-10-06.json",
+      "bytes": 22304,
+      "sha256": "b636f90dfa445ca3ff9c39830de291e2b7fcd6293aa5e8dfd7e6d4937aa6cff8"
+    },
+    {
+      "path": "knowledge/evidence/native-workflow-0.8.0-long-path-spaces-references-2026-10-06.json",
+      "bytes": 25604,
+      "sha256": "fb6db9c06193d2d639e567518fe0bcb7440fd6bc918711ac0ab46dd25af5a865"
+    }
+  ],
+  "concurrencyReview": {
+    "branchUpdates": "Compare-and-swap updates against observed heads; no force update or release replacement.",
+    "mainUnchanged": "7c6f2437842788daf9918ac2194ef859b153092c",
+    "independentReview": "Separate source and native-gate reviewers checked I/O boundaries, retained protections, exact negative-control evidence and scientific outputs."
+  }
+}

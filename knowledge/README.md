@@ -21,7 +21,7 @@ The [0.8.0 native interface candidate](native-ui.md) is separate development in
 accepted its layout and reported workflow/input, scrolling and navigation
 issues. The 2026-10-06 revision adds explicit reusable workflow inputs and
 navigation controls, fixes native repaint/first-open errors and clarifies
-scientific tool names. Its **75 source checks passed**, followed by **32
+scientific tool names. The first feedback candidate's **75 source checks passed**, followed by **32
 workspace checks and 8 References/update checks in each Windows path**, with
 zero failures or skips. These include native workflow pointer interactions,
 scroll repaint comparison and a 202-record minimap2 SAM-to-sorted-BAM run. The
@@ -29,9 +29,19 @@ scroll repaint comparison and a 202-record minimap2 SAM-to-sorted-BAM run. The
 retains an earlier scientific-assertion failure and keeps the revised candidate
 separate from the
 [successful 2026-10-05 candidate](evidence/native-ui-0.8.0-development-2026-10-05.json).
-The guide links the verified revised download and identifies untested physical
-trackpad/display scenarios. Version 0.8.0 remains unreleased and awaits tester
-reacceptance; published 0.7.0 and its evidence are unchanged.
+The guide retains tested candidate identities and identifies untested physical
+trackpad/display scenarios. A later user report exposed a separate ordinary-path
+I/O failure on a 269-character pipeline output. The corrected candidate passed
+**82 CI source checks**, the repeated **32+8 native checks per path**, and a new
+long-path regression that reproduces the old error and passes the full corrected
+starter pipeline with machine long-path policy disabled. All 20 pipeline output
+hashes were checked, including the expected variant-call truth. The fix preserves
+ordinary provenance identities and uses extended paths at filesystem boundaries.
+See the
+[sanitized long-path record](evidence/native-workflow-0.8.0-long-path-2026-10-06.json).
+Earlier native passes did not establish this deep-output-path behavior.
+Version 0.8.0 remains unreleased and awaits tester reacceptance; published 0.7.0
+and its evidence are unchanged.
 
 ## Reading order
 

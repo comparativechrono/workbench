@@ -33,6 +33,49 @@ sort already converts minimap2 SAM to sorted BAM, while the standalone faidx
 utility is not a prerequisite for starter alignment or variant operations.
 Published pack bytes, operation IDs and saved pins remain unchanged.
 
+### Current nested-output-path fix
+
+A later user installation report passed all seven application/integrity checks
+but blocked the starter pipeline after its first alignment. The native runner
+had produced and hashed 202 SAM records; Python then failed an ordinary-path
+existence check on a **269-character** output path. The folder was 255 characters
+and both components identified the same file. User registry state was not
+captured. No private directory paths or uploaded data are committed.
+
+Current source `0d3282046d7aa05dc822315c9a237c8ac534cd7a` uses explicit Windows
+extended paths at pipeline/check filesystem boundaries while retaining ordinary
+paths in provenance, plans and tool arguments. Trust, containment and reparse
+protections remain enforced. The **82-check source gate** passed, including
+seven emulated-path regressions; **22 additional selected core/pack-check
+contracts** passed locally. Exact packaged Windows validation passed in
+[run 37449356224](https://github.com/comparativechrono/workbench/actions/runs/37449356224).
+With long-path policy disabled before fresh private Python processes launched,
+the previous package reproduced the missing-output failure on a 268-character
+SAM path. The correction passed all **7 core checks and 5 scientific stages**,
+and all **20 output hashes** were independently verified; **19 output paths
+exceeded 260 characters**, reaching 279. The native result includes BAM and
+the expected homozygous **starter:1351 G>A, GT 1/1** call. The original runner
+policy was restored afterward. No user machine policy change was required.
+
+The same corrected package passed **32 workspace and 8 References/update
+checks in each Windows path**, with zero failures or skips. All 56 capture
+hashes were verified. The long-path check itself is a host/CLI execution test,
+distinct from the ordinary/space-containing GUI gate.
+
+The [current corrected bundle](https://github.com/comparativechrono/workbench/actions/runs/37449356224/artifacts/11404414503)
+expires 5 November 2026. Extract its starter into a separate folder for review.
+The verified starter is 16,948,757 bytes, SHA-256
+`71a84d2c6f7f293bf7f57c1fa3221fc942fce57bca61c8ed3344d593c31c262c`.
+All 68 core entries, 143 unchanged pack entries and 15 workspace source copies
+matched their expected bytes.
+The [sanitized long-path record](evidence/native-workflow-0.8.0-long-path-2026-10-06.json)
+tracks the report, fix and new regression. Previous 32+8 native results below
+remain valid within their original path scope; they did not cover deep result
+paths with legacy policy behavior. No universal optional-pack/deep-installation
+or shell-dialog long-path support is claimed.
+
+### Prior feedback candidate, retained evidence
+
 The first feedback source `4cb5f335c0d22b159555df90b275c1f7ec32750e` passed
 **75 source checks on Linux**, with zero failures or skips. Its native gate
 failed before GUI launch when a raw-text SAM assertion rejected equivalent
@@ -52,8 +95,8 @@ static-text/background pixels per path; all 56 workspace/References capture
 hashes were verified. See the [feedback record](evidence/native-workflow-0.8.0-feedback-2026-10-06.json)
 and [native UI guide](native-ui.md) for exact scope and limitations.
 
-The [revised candidate bundle](https://github.com/comparativechrono/workbench/actions/runs/37441781509/artifacts/11401422780)
-expires 5 November 2026. Extract its starter into a separate folder for review.
+The [prior feedback candidate bundle](https://github.com/comparativechrono/workbench/actions/runs/37441781509/artifacts/11401422780)
+expires 5 November 2026; it does not contain the nested-output-path correction.
 The 16,948,268-byte starter has SHA-256
 `de099e5feef437c788352c31c0e743c7e8f22aa08bfe2364e59b715ec3501806`;
 its 68 core entries, 143 unchanged pack entries and 15 workspace source copies

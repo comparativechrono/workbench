@@ -142,6 +142,17 @@ subdirectory. A declared output must exist inside its assigned step directory;
 it is hashed before being exposed to downstream nodes. A failed operation cannot
 contribute apparently successful downstream products.
 
+Windows filesystem calls in the engine use explicit extended-length paths via
+the existing pack-manager path helpers. Plans, provenance, tool arguments and
+containment comparisons retain ordinary absolute paths; only physical I/O uses
+the extended namespace. This lets the host detect, hash and consume nested
+outputs that the native runner successfully created when the machine's ordinary
+long-path opt-in is disabled. Starter and pack scientific assertions use the
+same I/O boundary. Exact native coverage is recorded in the
+[nested-result-path regression](evidence/native-workflow-0.8.0-long-path-2026-10-06.json);
+it does not establish arbitrary long installation roots or every optional
+scientific tool's path handling.
+
 | Run artifact | Meaning |
 | --- | --- |
 | `plan.json` | Frozen execution definitions, parameters, input identities/hashes, warnings and plan hash. |

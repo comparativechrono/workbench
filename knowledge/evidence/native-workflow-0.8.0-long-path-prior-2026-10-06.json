@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "success": true,
+  "sourceCommit": "0d2a993fca95a5837a69aa05c63aa5e806c553af",
+  "assetSha256": "de099e5feef437c788352c31c0e743c7e8f22aa08bfe2364e59b715ec3501806",
+  "startedUtc": "2026-10-06T10:23:47.423469+00:00",
+  "platform": "Windows-2022Server-10.0.20348-SP0",
+  "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+  "checks": [
+    "Long-path opt-in is disabled and a real >260-character file requires explicit extended I/O.",
+    "Unchanged prior package reproduces false missing-SAM rejection although native bytes and bridge hash exist."
+  ],
+  "skips": [],
+  "expectedApplicationFailure": true,
+  "nativeWindowsExecuted": true,
+  "scope": "Exact packaged private host and complete starter installation-check chain; no GUI claim.",
+  "longPathsEnabled": 0,
+  "appFiles": {
+    "NativeWorkbench.exe": "b0c089b37b0af6ac37d584f847a49a09d4702f0ba27b9edc94ba30c999ff9791",
+    "WorkbenchBridge.exe": "1fc133de534b3ca5a5b4451190ba5e8a59447192aa2f22cd0d36b95e3e8c28b7",
+    "runtime\\python\\python.exe": "31fe10b4ed82a2f960af0ef9931f46a4b84ff286f8b6ffd9dee098cf4f10f17f",
+    "workspace\\engine.py": "0b4c4292fa88eda28900ec6026b1710a9ea31ad9129010eac7f69d33cefb789c"
+  },
+  "policyProbe": {
+    "characters": 287,
+    "ordinaryIsFile": false,
+    "extendedIsFile": true
+  },
+  "appVersion": "0.8.0",
+  "applicationCheck": {
+    "status": "failed",
+    "corePassed": 7,
+    "starterPassed": 0,
+    "starterFailed": 1,
+    "starterSkipped": 0
+  },
+  "nativeWorkingDirectoryCharacters": 254,
+  "alignmentOutput": {
+    "characters": 268,
+    "bytes": 69138,
+    "sha256": "1c8ba859879fdb77504077b6a1059ab6df60c9f3c8e63b8a8ffaad414ece8127",
+    "ordinaryIsFile": false,
+    "extendedIsFile": true
+  },
+  "passed": 2,
+  "completedUtc": "2026-10-06T10:23:48.459709+00:00"
+}
