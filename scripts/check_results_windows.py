@@ -479,7 +479,13 @@ def gui_checks(root, evidence, report):
         cards = [{'name': 'Route producer', 'x': 24, 'y': 24},
                  {'name': 'Route middle', 'x': right_x, 'y': 24+card_height+gap},
                  {'name': 'Route backward consumer', 'x': 24, 'y': 24+2*(card_height+gap)}]
+        work_area = wintypes.RECT()
+        ui.user.SystemParametersInfoW.argtypes = [wintypes.UINT, wintypes.UINT, ctypes.c_void_p, wintypes.UINT]
+        ui.user.SystemParametersInfoW.restype = wintypes.BOOL
+        require(ui.user.SystemParametersInfoW(0x0030, 0, ctypes.byref(work_area), 0), 'Could not inspect the native desktop work area.')
         geometry = {'windowBounds': ui.bounds(ui.main), 'canvasBounds': ui.bounds(canvas),
+                    'screenPixels': [ui.user.GetSystemMetrics(0), ui.user.GetSystemMetrics(1)],
+                    'desktopWorkArea': [work_area.left, work_area.top, work_area.right, work_area.bottom],
                     'canvasClientLogicalSize': [canvas_width, canvas_height],
                     'dpi': ui.user.GetDpiForWindow(ui.main), 'cards': cards,
                     'cardLogicalSize': [card_width, card_height]}
@@ -510,13 +516,28 @@ def gui_checks(root, evidence, report):
         ui.wait('native backward port connection', lambda: any(row['class'].lower() == 'static' and 'From:' in row['text'] and 'Route middle' in row['text'] for row in ui.controls()))
         ui.mouse(*point(canvas_width-12, 20))
         captures.append(ui.capture('workflow-backward-routing.bmp'))
-        ui.click_button(420)
-        ui.wait('routed canvas zooms', lambda: int(ui.label(ui.child(422)).rstrip('%')) < 100)
+        # The hosted desktop can put its taskbar over an oversized test window's
+        # footer. Pointer connections above remain real SendInput interactions;
+        # this view-only capture invokes the documented native button message.
+        zoom_button = ui.child(420)
+        require(ui.user.IsWindowVisible(zoom_button) and ui.user.IsWindowEnabled(zoom_button), 'Native zoom button unavailable.')
+        bounds = ui.bounds(zoom_button)
+        center = wintypes.POINT((bounds[0]+bounds[2])//2, (bounds[1]+bounds[3])//2)
+        ui.user.WindowFromPoint.argtypes = [wintypes.POINT]
+        ui.user.WindowFromPoint.restype = wintypes.HWND
+        hit = ui.user.WindowFromPoint(center)
+        geometry['zoomActivation'] = {'method': 'BM_CLICK', 'buttonBounds': bounds,
+                                      'physicalCenter': [center.x, center.y],
+                                      'centerHitsButton': hit == zoom_button,
+                                      'centerWindowClass': ui.label(hit, True) if hit else None}
+        write_json(evidence / 'routing-fixture-geometry.json', geometry)
+        ui.send(zoom_button, 0x00F5)  # BM_CLICK; no application-specific testing hook.
+        ui.wait('routed canvas zooms after native BM_CLICK', lambda: int(ui.label(ui.child(422)).rstrip('%')) < 100)
         captures.append(ui.capture('workflow-backward-routing-zoomed.bmp'))
         return {'icons': icons, 'captures': captures, 'dpi': ui.user.GetDpiForWindow(ui.main),
                 'routingFixture': {'cards': cards, 'geometryFile': 'routing-fixture-geometry.json',
                                    'connections': ['producer -> middle', 'middle -> backward consumer'],
-                                   'scope': 'Real native pointer drags and compatibility confirmation, normal/zoomed pixel captures for visual review. No native route-coordinate introspection or automatic pixel geometry assertion.'},
+                                   'scope': 'Real native pointer drags and compatibility confirmation; normal and BM_CLICK-activated zoomed pixel captures for visual review. Physical zoom-button clicks are covered by the separate workspace gate. No native route-coordinate introspection or automatic pixel geometry assertion.'},
                 'checks': ['Packaged executable contains all nine SVG-derived icon resolutions; actual large/small class icons match that resource and differ from Windows default.',
                            'Real native canvas accepts compatible forward and backward connections across manually positioned cards and retains normal/zoomed captures.']}
     finally:
