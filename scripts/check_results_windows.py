@@ -450,6 +450,8 @@ def gui_checks(root, evidence, report):
         ui.wait('native library ready for results gate', lambda: ui.user.IsWindowEnabled(ui.child(410)) and ui.send(ui.child(104), 0x1004) > 0)
         ui.user.MoveWindow(ui.main, 0, 0, 1280, 900, True)
         icons = icon_checks(ui, root, evidence)
+        write_json(evidence / 'native-icon-checks.json', icons)
+        report['nativeWindowsExecuted'] = True
         captures = [ui.capture('application-icon-normal.bmp')]
         scale = ui.user.GetDpiForWindow(ui.main) / 96
         def point(x, y):
@@ -462,7 +464,26 @@ def gui_checks(root, evidence, report):
         ui.click_button(411)
         ui.wait('workflow canvas ready', lambda: ui.user.IsWindowVisible(ui.child(117)))
         canvas = ui.child(117)
-        require((ui.bounds(canvas)[2]-ui.bounds(canvas)[0])/scale >= 560, 'Native canvas is too narrow for the routing fixture.')
+        # Hosted desktops may clamp a requested 1280x900 window to their work
+        # area (observed 1044x788, 457x538 canvas client at 96 DPI). Fit three
+        # staggered rows to the real viewport instead of requiring two cards
+        # side by side. The final connection still runs backwards from the
+        # right-hand output to the next row's left-hand input.
+        client = wintypes.RECT()
+        require(ui.user.GetClientRect(canvas, ctypes.byref(client)), 'Could not measure actual native canvas client area.')
+        canvas_width, canvas_height = client.right/scale, client.bottom/scale
+        card_width, card_height = 242, 140  # Coordinate sort: one input + one output.
+        right_x = min(294, int(canvas_width-card_width-24))
+        gap = min(30, int((canvas_height-3*card_height-48)/2))
+        require(right_x >= 110 and gap >= 20, 'Actual native viewport cannot contain the three-row routing fixture.')
+        cards = [{'name': 'Route producer', 'x': 24, 'y': 24},
+                 {'name': 'Route middle', 'x': right_x, 'y': 24+card_height+gap},
+                 {'name': 'Route backward consumer', 'x': 24, 'y': 24+2*(card_height+gap)}]
+        geometry = {'windowBounds': ui.bounds(ui.main), 'canvasBounds': ui.bounds(canvas),
+                    'canvasClientLogicalSize': [canvas_width, canvas_height],
+                    'dpi': ui.user.GetDpiForWindow(ui.main), 'cards': cards,
+                    'cardLogicalSize': [card_width, card_height]}
+        write_json(evidence / 'routing-fixture-geometry.json', geometry)
         def add_card(name, x, y):
             ui.set_text(ui.child(102), 'Coordinate sort')
             ui.wait('single coordinate-sort library row', lambda: ui.send(ui.child(104), 0x1004) == 1)
@@ -474,22 +495,20 @@ def gui_checks(root, evidence, report):
             ui.wait('new routing fixture tool', lambda: has_name('Coordinate sort'))
             edit = next(row for row in edits() if row['text'] == 'Coordinate sort')
             ui.set_text(edit['hwnd'], name)
-        add_card('Route producer', 24, 40)
-        add_card('Route middle', 294, 270)
-        add_card('Route backward consumer', 24, 270)
-        ui.drag(point(266, 147), point(294, 335))
+        for card in cards:
+            add_card(card['name'], card['x'], card['y'])
+        producer, middle, consumer = cards
+        ui.drag(point(producer['x']+card_width, producer['y']+107), point(middle['x'], middle['y']+65))
         ui.wait('native forward port connection', lambda: any(row['class'].lower() == 'static' and 'From:' in row['text'] and 'Route producer' in row['text'] for row in ui.controls()))
-        ui.drag(point(536, 377), point(24, 335))
+        ui.drag(point(middle['x']+card_width, middle['y']+107), point(consumer['x'], consumer['y']+65))
         ui.wait('native backward port connection', lambda: any(row['class'].lower() == 'static' and 'From:' in row['text'] and 'Route middle' in row['text'] for row in ui.controls()))
-        ui.mouse(*point(280, 220))
+        ui.mouse(*point(canvas_width-12, 20))
         captures.append(ui.capture('workflow-backward-routing.bmp'))
         ui.click_button(420)
         ui.wait('routed canvas zooms', lambda: int(ui.label(ui.child(422)).rstrip('%')) < 100)
         captures.append(ui.capture('workflow-backward-routing-zoomed.bmp'))
         return {'icons': icons, 'captures': captures, 'dpi': ui.user.GetDpiForWindow(ui.main),
-                'routingFixture': {'cards': [{'name': 'Route producer', 'x': 24, 'y': 40},
-                                             {'name': 'Route middle', 'x': 294, 'y': 270},
-                                             {'name': 'Route backward consumer', 'x': 24, 'y': 270}],
+                'routingFixture': {'cards': cards, 'geometryFile': 'routing-fixture-geometry.json',
                                    'connections': ['producer -> middle', 'middle -> backward consumer'],
                                    'scope': 'Real native pointer drags and compatibility confirmation, normal/zoomed pixel captures for visual review. No native route-coordinate introspection or automatic pixel geometry assertion.'},
                 'checks': ['Packaged executable contains all nine SVG-derived icon resolutions; actual large/small class icons match that resource and differ from Windows default.',
