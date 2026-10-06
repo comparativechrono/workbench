@@ -92,6 +92,12 @@ def local_reference_run(host, base, evidence, record, label, *, cwl=False):
         raise TimeoutError('Offline native reference indexing did not finish.')
     require(result['status'] == 'completed' and result.get('success'), 'Offline reference analysis failed.')
     folder = Path(result['folder'])
+    # Keep the actual run/receipt evidence even if a later oracle assertion
+    # fails; a display-name mismatch must remain diagnosable without rerunning.
+    write_json(evidence / (label + '-result.json'), result)
+    for name in ('plan.json', 'run.json', 'methods-completed.txt', 'reference-provenance.json', 'workflow.cwl'):
+        if (folder / name).is_file():
+            shutil.copyfile(folder / name, evidence / (label + '-' + name))
     indexes = list(folder.rglob('*.fai'))
     require(len(indexes) == 1, 'Native SAMtools failed to create one private reference index.')
     actual = [(row[0], int(row[1])) for line in indexes[0].read_text(encoding='utf-8').splitlines()
@@ -106,10 +112,18 @@ def local_reference_run(host, base, evidence, record, label, *, cwl=False):
     require(not Path(record['files'][0]['path'] + '.fai').exists(), 'Analysis modified external reference directory.')
     plan, run = read_json(folder / 'plan.json'), read_json(folder / 'run.json')
     genome = record['files'][0]
-    require(plan['references'][genome['path']]['file']['sha256'] == genome['sha256'] and
+    frozen = plan['references'][genome['path']]
+    require(frozen['file']['sha256'] == genome['sha256'] and
             sha256(genome['path']) == genome['sha256'], 'Run lost or changed the preserved reference.')
-    require('Synthetic update fixture' in (folder / 'methods-completed.txt').read_text(encoding='utf-8'),
-            'Completed methods lost the preserved reference provenance.')
+    require(all(frozen[key] == record[key] for key in
+                ('provider', 'release', 'species', 'assembly', 'receipt_path', 'receipt_sha256')),
+            'Frozen run changed the preserved reference identity or receipt.')
+    # The public provenance contract carries provider ID; provider_name is not
+    # copied from the local registry into frozen run evidence in either release.
+    methods = (folder / 'methods-completed.txt').read_text(encoding='utf-8')
+    for token in (record['provider'], 'release ' + record['release'], record['species']['name'],
+                  'assembly ' + record['assembly'], genome['filename']):
+        require(token in methods, 'Completed methods lost reference provenance: ' + token)
     if cwl:
         exported = read_json(folder / 'workflow.cwl')
         main = exported['$graph'][0]
@@ -118,7 +132,6 @@ def local_reference_run(host, base, evidence, record, label, *, cwl=False):
                 run['workflowExport']['sha256'] == sha256(folder / 'workflow.cwl'),
                 'Updated reference analysis did not export preserved provenance in successful CWL.')
         shutil.copyfile(folder / 'workflow.cwl', evidence / 'updated-reference-workflow.cwl')
-    write_json(evidence / (label + '-result.json'), result)
     return {'folder': str(folder), 'nativeWindowsExecuted': True, 'contigs': len(expected),
             'referenceSha256': genome['sha256'], 'runSha256': sha256(folder / 'run.json'), 'cwlChecked': cwl}
 
@@ -205,7 +218,9 @@ def migration(args, report):
     host = PrivateHost(base, evidence, 'updated-offline-host', offline=True)
     try:
         require(host.call('init')['app_version'] == '0.9.0', 'Updated private host did not start 0.9.0.')
-        state = host.call('workspace/tool', {'toolId': saved['presets'][0]['tool'], 'pin': optional_pin})
+        state = host.call('workspace/tool', {'toolId': saved['presets'][0]['tool']})
+        require(state['graph']['nodes'][0]['pin'] == optional_pin,
+                'Updated tool selection did not resolve the preserved exact optional pack.')
         host.call('load', {'kind': 'preset', 'id': saved['presets'][0]['id'], 'node_id': state['graph']['nodes'][0]['id']})
         require(host.call('state')['graph']['nodes'][0]['pin'] == optional_pin, 'Updated host changed saved optional pack pin.')
         state = host.call('load', {'kind': 'pipeline', 'id': saved['pipelines'][0]['id']})
