@@ -70,7 +70,8 @@
     "native_ui_0_8_0_release_handover": "native-ui-0.8.0-release-handover.md",
     "native_ui_0_8_0_public_downloads": "evidence/native-ui-0.8.0-public-downloads-2026-10-06.json",
     "native_ui_0_8_0_release_validation": "evidence/native-ui-0.8.0-release-validation-2026-10-06.json",
-    "native_ui_release_final_verification": "evidence/native-ui-0.8.0-final-public-verification-2026-10-06.json"
+    "native_ui_release_final_verification": "evidence/native-ui-0.8.0-final-public-verification-2026-10-06.json",
+    "cwl_results": "cwl-results.md"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -639,5 +640,39 @@
         "sha256": "3dd146267b9a8300ba957c84914bc324ea537c05b09268b48381ae6a4d530e96"
       }
     ]
+  },
+  "results_development": {
+    "recorded_on": "2026-10-06",
+    "version": "0.9.0",
+    "branch": "feature/cwl-dag-icon",
+    "status": "source development; exact candidate CI and native Windows evidence pending",
+    "guide": "cwl-results.md",
+    "candidate_source_commit": null,
+    "candidate_download": null,
+    "native_run_url": null,
+    "evidence": null,
+    "features": [
+      "workflow.cwl packed CWL v1.2 JSON for the actual frozen analysis, with parameters, pack pins, hashes, reference provenance and original execution outcome",
+      "Independent embedded Python 3.10+ standard-library runner preserving argument arrays, copy operations and binary pipes without Workbench imports",
+      "Orthogonal dependency routes around native and saved SVG diagram cards",
+      "Repository SVG artwork compiled into a native ICO with nine resolutions"
+    ],
+    "external_execution_requirements": [
+      "CWL v1.2 engine",
+      "Python 3.10+",
+      "matching tool-pack directories and their private runtime/assets",
+      "input data and any descriptor-referenced external resources"
+    ],
+    "application_dependencies_changed": false,
+    "limits": [
+      "Exact packaged validation and stock-CWL interoperability CI are pending; no unavailable or skipped check is counted as passed.",
+      "Original input hashes are historical provenance; external rebinding is allowed and current bound-file mutation checks do not prove original bytes were present before a rerun.",
+      "Explicit optional executable overrides replace original executable identity; manifest and asset pins still apply and scientific equivalence needs separate evidence.",
+      "CWL typing/runner execution does not reproduce all biological preflight, reference/header checks, Windows process ownership, cancellation or scheduler behavior.",
+      "Windows pack executables are not translated across operating systems; external resources are not embedded, inferred or downloaded.",
+      "Native embedded-runner replay is not execution through a Windows CWL engine.",
+      "Diagram routing avoids card interiors but cannot eliminate all crossings or route every obscured socket in overlapping manual layouts."
+    ],
+    "published_release_unchanged": "0.8.0"
   }
 }

@@ -11,6 +11,25 @@ and the repository [README](../README.md). Update the date, source baseline and
 evidence when the state changes; do not silently turn a pending item into a claim
 of completion.
 
+## CWL results, DAG routing and icon development, 2026-10-06
+
+Branch `feature/cwl-dag-icon` targets **0.9.0** with a packed CWL v1.2
+`workflow.cwl` in each newly prepared analysis, preserving frozen dependencies,
+parameters, pack pins, hashes, provenance and actual original-run status. Its
+embedded Python runner is independent of Workbench; rerunning it externally
+needs a CWL engine, Python 3.10+, matching packs and the input data. Normal native
+app operation keeps its bundled runtime and existing standalone requirements.
+
+The same development changes route saved/native DAG edges around cards and
+derive a native multi-resolution application icon from the repository SVG.
+These are source changes, **not a published 0.9.0 release or a new native pass**.
+Exact CI run, packaged artifacts and evidence remain pending. The
+[CWL results guide](cwl-results.md) records the export contract and limits,
+including external input rebinding, optional compatible executable overrides
+and the absence of a universal cross-platform or biological-preflight guarantee.
+Published 0.8.0 archives, release inventory/history and tool-pack bytes remain
+unchanged.
+
 ## Published native interface update, 2026-10-06
 
 The user accepted the latest tested **0.8.0** candidate and explicitly authorized

@@ -9,12 +9,15 @@ export LD_LIBRARY_PATH="$toolchain_dir/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 cd "$project_dir"
 mkdir -p build/desktop/tmp
 export TMPDIR="$project_dir/build/desktop/tmp"
+python3 scripts/build_app_icon.py
 cat > build/desktop/desktop-workspace.rc <<'RC'
 #include <windows.h>
+#include "resource.h"
 1 RT_MANIFEST "workbench.manifest"
+IDI_WORKBENCH ICON "native-workbench.ico"
 1 VERSIONINFO
-FILEVERSION 0,8,0,0
-PRODUCTVERSION 0,8,0,0
+FILEVERSION 0,9,0,0
+PRODUCTVERSION 0,9,0,0
 FILEFLAGSMASK 0x3fL
 FILEFLAGS 0x0L
 FILEOS VOS_NT_WINDOWS32
@@ -25,11 +28,11 @@ BEGIN
   BLOCK "040904b0"
   BEGIN
    VALUE "FileDescription", "Native Workbench desktop workspace\0"
-   VALUE "FileVersion", "0.8.0\0"
+   VALUE "FileVersion", "0.9.0\0"
    VALUE "InternalName", "NativeWorkbench\0"
    VALUE "OriginalFilename", "NativeWorkbench.exe\0"
    VALUE "ProductName", "Native Workbench\0"
-   VALUE "ProductVersion", "0.8.0\0"
+   VALUE "ProductVersion", "0.9.0\0"
   END
  END
  BLOCK "VarFileInfo"
@@ -38,7 +41,7 @@ BEGIN
  END
 END
 RC
-"$windres" -I desktop build/desktop/desktop-workspace.rc -O coff -o build/desktop/desktop-workspace-res.o
+"$windres" -I desktop -I build/desktop build/desktop/desktop-workspace.rc -O coff -o build/desktop/desktop-workspace-res.o
 "$compiler" -std=c++17 -O2 -Wall -Wextra -Werror -Wno-missing-field-initializers -D_WIN32_WINNT=0x0A00 -DWINVER=0x0A00 \
  -municode -mwindows -static -Idesktop desktop/common.cpp desktop/desktop_ipc.cpp desktop/desktop_workspace.cpp \
  build/desktop/desktop-workspace-res.o -lcomctl32 -lole32 -lshell32 -luuid -luser32 -lgdi32 -lgdiplus -luxtheme -lbcrypt \

@@ -22,9 +22,11 @@ from decimal import Decimal
 
 try:
     from .catalog import resolve_tool
+    from .cwl_export import definition_sha256, export_workflow, update_run_status
     from .reference_provenance import collect_references, used_paths, methods_text as reference_methods
 except ImportError:
     from catalog import resolve_tool
+    from cwl_export import definition_sha256, export_workflow, update_run_status
     from reference_provenance import collect_references, used_paths, methods_text as reference_methods
 
 
@@ -878,11 +880,17 @@ class Engine:
         self._counters(graph)
         run_id = "run-" + datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S") + "-" + uuid.uuid4().hex[:8]
         folder = parent / run_id
-        _io_path(folder).mkdir(mode=0o700)
         plan = {"schema": 1, "id": run_id, "created": utc(), "folder": str(folder), "graph": graph, "nodes": frozen_nodes, "inputs": evidence, "references": references, "warnings": review["warnings"], "scheduler": "sequential-independent-branches", "methods": self.methods(graph, references=references)}
+        workflow = export_workflow(plan, self.app_root)
+        # Bind the executable export to the frozen plan without a circular hash:
+        # its definition excludes only the plan digest and execution outcome.
+        plan["workflowExport"] = {"file": "workflow.cwl", "format": "CWL v1.2", "definitionSha256": definition_sha256(workflow)}
         plan["sha256"] = hashlib.sha256(canonical(plan).encode("utf-8")).hexdigest()
+        workflow["$graph"][0]["nw:planSha256"] = plan["sha256"]
+        _io_path(folder).mkdir(mode=0o700)
         write_json(folder / "plan.json", plan)
         write_json(folder / "graph.json", graph)
+        write_json(folder / "workflow.cwl", workflow)
         if references:
             write_json(folder / "reference-provenance.json", {"schema": 1, "inputs": references})
         _io_path(folder / "methods-planned.txt").write_text(plan["methods"], encoding="utf-8")
@@ -1106,11 +1114,18 @@ class Engine:
             raise ValueError("The stored execution plan does not match this run.")
         if _io_path(folder / "run.json").exists():
             raise ValueError("This plan has already started. Prepare a new run to execute again.")
+        workflow = json.loads(_io_path(folder / "workflow.cwl").read_text(encoding="utf-8"))
+        if (definition_sha256(workflow) != plan["workflowExport"]["definitionSha256"]
+                or workflow["$graph"][0].get("nw:planSha256") != claimed):
+            raise ValueError("The CWL workflow export does not match the frozen execution plan.")
         sources = {s["id"]: s for s in plan["graph"]["sources"]}
         node_names = {n["id"]: n["label"] for n in plan["nodes"]}
         outputs, statuses = {}, {}
         record = {"schema": 1, "id": plan["id"], "planSha256": claimed, "name": plan["graph"].get("name", "Workspace"), "folder": str(folder), "started": utc(), "status": "running", "nodes": [], "outputs": {}, "scheduler": plan["scheduler"]}
         record["references"] = copy.deepcopy(plan.get("references", {}))
+        workflow = update_run_status(workflow, record)
+        write_json(folder / "workflow.cwl", workflow)
+        record["workflowExport"] = dict(plan["workflowExport"], sha256=digest_file(folder / "workflow.cwl"))
         write_json(folder / "run.json", record)
         event({"type": "run", "status": "running", "folder": str(folder)})
         for node in plan["nodes"]:
@@ -1193,6 +1208,8 @@ class Engine:
         record["success"] = record["status"] == "success"
         record["methods"] = self.methods(plan["graph"], completed=True, statuses=statuses, references=plan.get("references", {}))
         _io_path(folder / "methods-completed.txt").write_text(record["methods"], encoding="utf-8")
+        write_json(folder / "workflow.cwl", update_run_status(workflow, record))
+        record["workflowExport"]["sha256"] = digest_file(folder / "workflow.cwl")
         write_json(folder / "run.json", record)
         event({"type": "run", "status": record["status"], "folder": str(folder)})
         return record
@@ -1237,6 +1254,10 @@ class Engine:
         return {"success": True, "cancelled": False, "folder": str(folder), "message": "Separate report sections written."}
 
     def diagram(self, plan):
+        try:
+            from .dag_routing import MAX_COSMETIC_CARDS, route, simplify
+        except ImportError:
+            from dag_routing import MAX_COSMETIC_CARDS, route, simplify
         graph = plan["graph"]
         nodes = {n["id"]: n for n in graph["nodes"]}
         sources = {s["id"]: s for s in graph["sources"]}
@@ -1247,26 +1268,52 @@ class Engine:
         groups = {}
         for identity, rank in ranks.items():
             groups.setdefault(rank, []).append(identity)
-        width = max(800, max([len(items) for items in groups.values()] + [1]) * 280)
-        height = (max(groups.keys(), default=0) + 1) * 130 + 60
+        width = max(800, max([len(items) for items in groups.values()] + [1]) * 280 + 40)
+        height = (max(groups.keys(), default=0) + 1) * 150 + 40
         positions = {}
         for rank, items in groups.items():
             for index, identity in enumerate(items):
-                positions[identity] = ((width - len(items) * 280) / 2 + index * 280 + 20, rank * 130 + 24)
-        svg = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="Pipeline dependency graph"><rect width="100%" height="100%" fill="#f5f7fb"/><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#8292a7"/></marker></defs>']
+                positions[identity] = ((width - len(items) * 280) // 2 + index * 280 + 20, rank * 150 + 24)
+        obstacles = [(x - 10, y - 10, x + 250, y + 86) for x, y in positions.values()]
+        edges, incoming, outgoing = [], {}, {}
         for node in graph["nodes"]:
             for port, refs in node.get("inputs", {}).items():
                 for ref in refs:
                     source = ref.split("::", 1)[0]
                     if source not in positions:
                         continue
-                    x1, y1 = positions[source]
-                    x2, y2 = positions[node["id"]]
-                    svg.append(f'<path d="M{x1+120},{y1+76} C{x1+120},{y1+104} {x2+120},{y2-28} {x2+120},{y2}" fill="none" stroke="#8292a7" stroke-width="2" marker-end="url(#arrow)"><title>{html.escape(ref + " → " + node["id"] + ":" + port)}</title></path>')
+                    edge = (source, ref, node["id"], port)
+                    edges.append(edge)
+                    if ref not in outgoing.setdefault(source, []):
+                        outgoing[source].append(ref)
+                    if port not in incoming.setdefault(node["id"], []):
+                        incoming[node["id"]].append(port)
+        svg = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="Pipeline dependency graph"><rect width="100%" height="100%" fill="#f5f7fb"/><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#687f98"/></marker></defs>']
+        routed = []
+        for source, ref, target, port in edges:
+            x1, y1 = positions[source]
+            x2, y2 = positions[target]
+            # Named outputs share an exit and named inputs share an entry, while
+            # separate ports get separate attachment points. All intermediate
+            # segments avoid every padded card, including skipped ranks.
+            sx = x1 + 240 * (outgoing[source].index(ref) + 1) // (len(outgoing[source]) + 1)
+            tx = x2 + 240 * (incoming[target].index(port) + 1) // (len(incoming[target]) + 1)
+            start, end = (sx, y1 + 76), (tx, y2)
+            occupied = ([segment for other_ref, points in routed if other_ref != ref for segment in zip(points, points[1:])]
+                        if len(positions) <= MAX_COSMETIC_CARDS else [])
+            middle = route((sx, y1 + 90), (tx, y2 - 14), obstacles, occupied=occupied)
+            if not middle:
+                raise ValueError("Unable to route pipeline dependency: " + ref + " → " + target)
+            points = simplify([start, *middle, end])
+            routed.append((ref, points))
+            path = "M" + " L".join(f"{x},{y}" for x, y in points)
+            title = html.escape(ref + " → " + target + ":" + port)
+            svg.append(f'<path class="dependency-halo" d="{path}" fill="none" stroke="#f5f7fb" stroke-width="6" stroke-linejoin="round"/>')
+            svg.append(f'<path class="dependency" data-source="{html.escape(source, quote=True)}" data-target="{html.escape(target, quote=True)}" d="{path}" fill="none" stroke="#687f98" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"><title>{title}</title></path>')
         for identity, (x, y) in positions.items():
             source = identity in sources
             label = sources[identity].get("label", "Input") if source else node_name(nodes[identity], self._tool(nodes[identity]))
-            svg.append(f'<g><rect x="{x}" y="{y}" width="240" height="76" rx="14" fill="{"#e6edf5" if source else "#ffffff"}" stroke="#a7b4c5"/><text x="{x+14}" y="{y+25}" font-family="sans-serif" font-size="12" fill="#4b5f78">{html.escape(display_id(identity))}</text>')
+            svg.append(f'<g data-node="{html.escape(identity, quote=True)}"><rect x="{x}" y="{y}" width="240" height="76" rx="14" fill="{"#e6edf5" if source else "#ffffff"}" stroke="#a7b4c5"/><text x="{x+14}" y="{y+25}" font-family="sans-serif" font-size="12" fill="#4b5f78">{html.escape(display_id(identity))}</text>')
             words, lines, line = label.split(), [], ""
             for word in words:
                 if len(line + " " + word) > 28 and line:

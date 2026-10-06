@@ -13,6 +13,12 @@ are now published and independently download-verified; see the
 [0.8.0 release handover](native-ui-0.8.0-release-handover.md). Published 0.7.0
 artifacts/evidence remain unchanged.
 
+**Development scope, 2026-10-06:** branch `feature/cwl-dag-icon` targets 0.9.0.
+It adds a frozen packed CWL result, routes SVG/native DAG edges around cards and
+builds the native application icon from repository SVG. The version statements
+and released evidence below describe 0.8.0; exact-package validation of the new
+work is pending. See [CWL results and presentation](cwl-results.md).
+
 ## What runs on a user's machine
 
 The current application is a native Windows x86-64 desktop program. It bundles
@@ -66,6 +72,8 @@ and release metadata, independently of pack versions and pack API compatibility.
 | [`workspace/service.py`](../workspace/service.py) | Shared lifecycle, background work, history, saved pipelines/presets, pack operations and installation checks. |
 | [`workspace/catalog.py`](../workspace/catalog.py) | Strict manifest/schema parsing, installed operation discovery, semantic types and exact-version resolution. |
 | [`workspace/engine.py`](../workspace/engine.py) | Graph validation, biological preflight, plan freezing, hashing, scheduling, native backend, methods and SVG/report generation. |
+| [`workspace/cwl_export.py`](../workspace/cwl_export.py) | 0.9 development: frozen packed CWL definitions and embedded independent runner; original execution-outcome metadata. |
+| [`workspace/dag_routing.py`](../workspace/dag_routing.py), [`desktop/dag_routing.h`](../desktop/dag_routing.h) | 0.9 development: orthogonal routes around diagram cards for saved SVG/native presentation. |
 | [`desktop/bridge.cpp`](../desktop/bridge.cpp), [`pack_model.cpp`](../desktop/pack_model.cpp), [`packs.cpp`](../desktop/packs.cpp) | Native bridge commands, execution manifest contract, discovery and local pack import. |
 | [`desktop/workflow_runner.cpp`](../desktop/workflow_runner.cpp), [`runner.cpp`](../desktop/runner.cpp), [`process_pipeline.cpp`](../desktop/process_pipeline.cpp) | Workflow execution, subprocesses, cancellation and binary pipes. |
 | [`workspace/pack_manager.py`](../workspace/pack_manager.py), [`pack_security.py`](../workspace/pack_security.py) | Offline archive validation, signed catalogue client, downloads, inventories and trust checks. |
@@ -158,11 +166,24 @@ scientific tool's path handling.
 | --- | --- |
 | `plan.json` | Frozen execution definitions, parameters, input identities/hashes, warnings and plan hash. |
 | `graph.json` | Explicit graph and source bindings used for this analysis. |
+| `workflow.cwl` (0.9 development) | Packed CWL v1.2 definition of the frozen workflow, original provenance and actual original-run outcome. |
 | `methods-planned.txt` | Pre-run description; it must not imply completed work. |
 | `pipeline.svg` | Dependency-layered DAG derived from that plan. |
 | `run.json` | Per-step states, provenance, produced files/hashes and overall outcome. |
 | `methods-completed.txt` | Description of successfully completed operations only. |
 | Step folders and runner logs | Declared products and command/execution evidence; preserve these when diagnosing failures. |
+
+The 0.9 exporter is called during preparation after the graph, commands,
+parameters and input/reference evidence are frozen. Its definition digest is
+bound into the plan; only reciprocal plan hash and changing outcome metadata
+are excluded. Execution verifies that binding before running, updates the CWL
+outcome on start/finalization and records the final file hash in `run.json`.
+The embedded runner uses Python's standard library without Workbench imports.
+External CWL execution still requires a CWL engine, Python 3.10+, matching packs
+and data; it does not replace native analysis or introduce a new app dependency.
+Original input hashes are provenance, while the runner checks its currently
+bound files for mutation during execution. Biological preflight and platform
+equivalence are not inherited from CWL typing; see the [export limits](cwl-results.md).
 
 The built-in report operation can combine selected metrics/products into a local
 HTML report. It is an analysis output, not the application's UI. Its content is

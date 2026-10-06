@@ -20,6 +20,42 @@ runbook. Use `workspace/app_version.py` and recorded build inputs for new
 artifact names; never replace published archives or transfer their validation
 results to changed bytes. The published 0.8.0 updater supports 0.6.0 only.
 
+## Current 0.9 results and presentation work
+
+Branch `feature/cwl-dag-icon` adds `workflow.cwl` result export, routed native/SVG
+DAG edges and SVG-derived native icon resources. Read [the CWL results guide](cwl-results.md)
+before changing the exporter or interpreting its portability. Exact candidate
+source, archive identities and native CI evidence are pending at this checkpoint;
+the published 0.8.0 record above remains unchanged.
+
+The focused source commands are:
+
+```sh
+python3 workspace/tests/test_cwl_export.py
+python3 workspace/tests/test_cwl_results.py
+python3 tests/test_dag_routing.py
+python3 tests/test_app_icon.py
+```
+
+`NW_CWLTOOL` must name the independently installed validator/runner for the
+interoperability case in `test_cwl_export.py`; absent that variable, its skip is
+not a CWL interoperability pass. The development workflow
+[`native-results-candidate.yml`](../.github/workflows/native-results-candidate.yml)
+uses a separate test-only environment with pinned `cwltool` and retains the
+existing workspace/reference/packaging/updater suites. This adds no CWL runtime
+dependency to the application. The routing suite also distinguishes compiler
+availability from a native GUI result.
+
+The native build scripts generate the ICO with
+`python3 scripts/build_app_icon.py` from the tracked SVG. Generated icon/build
+outputs remain reproducible artifacts, not a new graphics dependency. The
+exact-package Windows gate in
+[`scripts/check_results_windows.py`](../scripts/check_results_windows.py) checks
+result exports, real native execution and standalone-runner replay, routed
+geometry and native icon resources. That replay does not claim Windows CWL-engine
+execution. Record source/interoperability, cross-build and native results
+separately, and keep any missing prerequisite or failed check visible.
+
 ## Start without disturbing existing work
 
 1. Read the root `AGENTS.md`, this knowledge directory and the relevant source.

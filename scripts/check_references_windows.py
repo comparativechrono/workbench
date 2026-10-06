@@ -190,8 +190,8 @@ def run_reference_checks(root, evidence, report, args):
         initial = host.call("init")
         report["appVersion"] = initial["app_version"]
         manifest_version = json.loads((root / "manifest.json").read_text(encoding="utf-8"))["version"]
-        require(manifest_version in {"0.7.0", "0.8.0"},
-                "This gate supports the reviewed 0.7.0 and 0.8.0 reference contracts only.")
+        require(manifest_version in {"0.7.0", "0.8.0", "0.9.0"},
+                "This gate supports the reviewed 0.7.0, 0.8.0 and 0.9.0 reference contracts only.")
         require(initial["app_version"] == manifest_version,
                 "The private host version differs from the exact installed application manifest.")
         state = host.call("references/list")
@@ -330,6 +330,35 @@ def run_reference_checks(root, evidence, report, args):
             require(plan["inputs"][reference_path]["reference"] == plan["references"][reference_path], "Input evidence and frozen reference provenance disagree.")
             frozen = json.loads((folder / "reference-provenance.json").read_text(encoding="utf-8"))
             require(frozen["inputs"] == plan["references"], "Results reference receipt differs from the frozen plan.")
+            # CWL export is an application 0.9+ contract. Keep historical 0.7/0.8
+            # exact-package gates usable without inventing an export they lack.
+            if tuple(map(int, report["appVersion"].split(".")[:2])) >= (0, 9):
+                cwl_path = folder / "workflow.cwl"
+                workflow = json.loads(cwl_path.read_text(encoding="utf-8"))
+                main = workflow["$graph"][0]
+                completed_run = json.loads((folder / "run.json").read_text(encoding="utf-8"))
+                require(workflow["cwlVersion"] == "v1.2" and main["class"] == "Workflow",
+                        "Reference result lacks a CWL v1.2 workflow.")
+                require(plan["references"] and json.loads(main["nw:references"]) == plan["references"],
+                        "CWL export lost the nonempty downloaded-reference provenance.")
+                source_evidence = [json.loads(field["nw:source"])["evidence"]
+                                   for field in main["inputs"].values() if "nw:source" in field]
+                require(any(item == plan["inputs"][reference_path] for item in source_evidence),
+                        "CWL input metadata lost the frozen reference receipt or file hash.")
+                require(main["nw:planSha256"] == plan["sha256"] == completed_run["planSha256"],
+                        "Reference CWL export differs from the executed frozen plan.")
+                require(main["nw:execution"]["status"] == completed_run["status"] == "success" and
+                        json.loads(main["nw:execution"]["recordJson"])["outputs"] == completed_run["outputs"],
+                        "Reference CWL export differs from the successful native outputs.")
+                require(completed_run["workflowExport"]["sha256"] == sha256(cwl_path),
+                        "Reference run did not retain the final CWL export hash.")
+                for original, retained in (("workflow.cwl", "reference-workflow.cwl"),
+                                           ("plan.json", "reference-plan.json"),
+                                           ("run.json", "reference-run.json")):
+                    shutil.copyfile(folder / original, evidence / retained)
+                report["cwlReference"] = {"file": "reference-workflow.cwl", "sha256": sha256(cwl_path),
+                                           "planSha256": plan["sha256"], "referenceInputs": len(plan["references"])}
+                report["checks"].append("Completed CWL export preserves the real downloaded yeast reference receipt, input hash, frozen plan and native output provenance.")
             completed = (folder / "methods-completed.txt").read_text(encoding="utf-8")
             for token in ("Ensembl archive", "116", "R64-1-1", genome["filename"]):
                 require(token in completed, "Completed methods lost frozen reference provenance: " + token)

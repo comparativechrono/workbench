@@ -16,8 +16,8 @@ cat > build/desktop/workspace-update-launcher.rc <<'RESOURCE'
 #include <windows.h>
 1 RT_MANIFEST "workbench.manifest"
 1 VERSIONINFO
-FILEVERSION 0,8,0,0
-PRODUCTVERSION 0,8,0,0
+FILEVERSION 0,9,0,0
+PRODUCTVERSION 0,9,0,0
 FILEFLAGSMASK 0x3fL
 FILEFLAGS 0x0L
 FILEOS VOS_NT_WINDOWS32
@@ -28,11 +28,11 @@ BEGIN
     BLOCK "040904b0"
     BEGIN
       VALUE "FileDescription", "Native Workbench compact update launcher\0"
-      VALUE "FileVersion", "0.8.0\0"
+      VALUE "FileVersion", "0.9.0\0"
       VALUE "InternalName", "UpdateWorkbench\0"
       VALUE "OriginalFilename", "UpdateWorkbench.exe\0"
       VALUE "ProductName", "Native Workbench\0"
-      VALUE "ProductVersion", "0.8.0\0"
+      VALUE "ProductVersion", "0.9.0\0"
     END
   END
   BLOCK "VarFileInfo"

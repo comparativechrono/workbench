@@ -1,4 +1,6 @@
 #include "desktop_ipc.h"
+#include "resource.h"
+#include "dag_routing.h"
 #include "workbench.h"
 #include <algorithm>
 #include <commctrl.h>
@@ -453,6 +455,8 @@ class Workspace {
     bool source = false;
   };
   HINSTANCE instance{};
+  HICON appIcon{}, appSmallIcon{};
+  ATOM appWindowClass{}, appSurfaceClass{};
   HWND window{}, name{}, search{}, category{}, tasks{}, add{}, clearFilter{},
       steps{}, remove{}, undo{}, up{}, down{}, output{}, browse{}, run{},
       cancel{}, review{}, back{}, dag{}, form{}, status{}, manageTools{},
@@ -3619,7 +3623,22 @@ class Workspace {
 
 public:
   ~Workspace() {
+    if (window && IsWindow(window))
+      DestroyWindow(window);
     host.stop();
+    // Classes retain their icon handles. Release them before destroying our
+    // private icons; an unexpected live class can safely retain them until exit.
+    bool iconsUnused = true;
+    if (appSurfaceClass)
+      iconsUnused = UnregisterClassW(MAKEINTATOM(appSurfaceClass), instance) != FALSE;
+    if (appWindowClass)
+      iconsUnused = (UnregisterClassW(MAKEINTATOM(appWindowClass), instance) != FALSE) && iconsUnused;
+    if (iconsUnused) {
+      if (appIcon)
+        DestroyIcon(appIcon);
+      if (appSmallIcon)
+        DestroyIcon(appSmallIcon);
+    }
     for (HFONT f : {font, bold, small, refFont})
       if (f)
         DeleteObject(f);
@@ -3642,14 +3661,29 @@ public:
     wc.lpfnWndProc = proc;
     wc.hInstance = inst;
     wc.hCursor = LoadCursorW(nullptr, IDC_ARROW);
-    wc.hIcon = LoadIconW(nullptr, IDI_APPLICATION);
-    wc.hbrBackground = background;
+    // LR_SHARED caches by resource identity rather than requested size. Own
+    // separate images so the small title-bar icon uses its native-size frame.
+    appIcon = static_cast<HICON>(LoadImageW(inst, MAKEINTRESOURCEW(IDI_WORKBENCH),
+                                         IMAGE_ICON, GetSystemMetrics(SM_CXICON),
+                                         GetSystemMetrics(SM_CYICON), LR_DEFAULTCOLOR));
+    appSmallIcon = static_cast<HICON>(LoadImageW(inst, MAKEINTRESOURCEW(IDI_WORKBENCH),
+                                              IMAGE_ICON, GetSystemMetrics(SM_CXSMICON),
+                                              GetSystemMetrics(SM_CYSMICON), LR_DEFAULTCOLOR));
+    if (!appIcon || !appSmallIcon)
+      throw std::runtime_error("Could not load Native Workbench application icon.");
+    wc.hIcon = appIcon;
+    wc.hIconSm = appSmallIcon;
+    // Both procedures paint their own backgrounds. Do not transfer ownership
+    // of our shared brush to these classes when they are unregistered below.
+    wc.hbrBackground = nullptr;
     wc.lpszClassName = windowClass.c_str();
-    if (!RegisterClassExW(&wc))
+    appWindowClass = RegisterClassExW(&wc);
+    if (!appWindowClass)
       throw std::runtime_error("Could not register workspace window.");
     wc.lpfnWndProc = surface;
     wc.lpszClassName = L"WorkbenchNativeSurface051";
-    if (!RegisterClassExW(&wc))
+    appSurfaceClass = RegisterClassExW(&wc);
+    if (!appSurfaceClass)
       throw std::runtime_error("Could not register workspace surface.");
     RECT area{};
     SystemParametersInfoW(SPI_GETWORKAREA, 0, &area, 0);
