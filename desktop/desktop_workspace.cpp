@@ -470,6 +470,7 @@ class Workspace {
       outputLabel{}, outputHelp{}, referenceHelp{}, generalPanel{};
   HWND addInput{}, zoomOut{}, zoomIn{}, zoomReset{};
   int generalScroll = 0;
+  int generalWheelRemainder = 0, formWheelRemainder = 0;
   HFONT font{}, bold{}, small{};
   HFONT refFont{};
   HBRUSH paper{}, background{};
@@ -549,27 +550,30 @@ class Workspace {
       for (const auto &p : items)
         SetWindowPos(p.h, nullptr, px(p.x), px(p.y), px(std::max(1, p.w)),
                      px(std::max(1, p.height)), flags);
-    // Moving overlapping child controls must not copy their previous pixels.
-    // Repaint every child after all positions are final, including STATIC text.
+    // Moving partially clipped child controls must not copy their previous
+    // pixels. The form and general panel use WS_EX_COMPOSITED so this complete
+    // descendant repaint is presented together, without exposing each label's
+    // erase/draw cycle. Queue painting so a burst of scroll messages can share
+    // one frame. Do not hold a panel DC beyond its paint operation.
     RedrawWindow(panel, nullptr, nullptr,
-                 RDW_INVALIDATE | RDW_ERASE | RDW_ALLCHILDREN | RDW_UPDATENOW);
+                 RDW_INVALIDATE | RDW_ERASE | RDW_ALLCHILDREN);
   }
   static LRESULT CALLBACK field_proc(HWND h, UINT message_, WPARAM w, LPARAM l,
                                      UINT_PTR, DWORD_PTR context) {
     auto *app = reinterpret_cast<Workspace *>(context);
     if (GetParent(h) == app->generalPanel) {
       if (message_ == WM_SETFOCUS) {
+        const int previous = app->generalScroll;
         RECT r{}, client{};
         GetWindowRect(h, &r); MapWindowPoints(nullptr, app->generalPanel, reinterpret_cast<POINT *>(&r), 2);
         GetClientRect(app->generalPanel, &client);
         if (r.top < 0) app->generalScroll += MulDiv(r.top - app->px(8), 96, app->dpi);
         else if (r.bottom > client.bottom)
           app->generalScroll += MulDiv(r.bottom - client.bottom + app->px(8), 96, app->dpi);
-        app->layout_general();
+        if (app->generalScroll != previous) app->layout_general();
       }
       if (message_ == WM_MOUSEWHEEL) {
-        app->scroll(app->generalPanel, SB_VERT, 0,
-                    -GET_WHEEL_DELTA_WPARAM(w) * 48 / WHEEL_DELTA);
+        app->panel_mouse_wheel(app->generalPanel, w);
         return 0;
       }
       return DefSubclassProc(h, message_, w, l);
@@ -577,6 +581,7 @@ class Workspace {
     if (message_ == WM_SETFOCUS) {
       auto found = app->fieldIds.find(GetDlgCtrlID(h));
       if (found != app->fieldIds.end() && found->second < app->fields.size()) {
+        const int previous = app->formScroll;
         const auto &field = app->fields[found->second];
         RECT client{};
         GetClientRect(app->form, &client);
@@ -585,13 +590,12 @@ class Workspace {
           app->formScroll = field.y;
         else if (field.y + field.height > app->formScroll + visible)
           app->formScroll = field.y + field.height - visible;
-        app->layout_fields();
+        if (app->formScroll != previous) app->layout_fields();
       }
     }
     if (message_ == WM_MOUSEWHEEL &&
         !SendMessageW(h, CB_GETDROPPEDSTATE, 0, 0)) {
-      app->scroll(app->form, SB_VERT, 0,
-                  -GET_WHEEL_DELTA_WPARAM(w) * 48 / WHEEL_DELTA);
+      app->panel_mouse_wheel(app->form, w);
       return 0;
     }
     if (message_ == WM_NCDESTROY)
@@ -1960,13 +1964,13 @@ class Workspace {
         0, 0, 1, 1, window, reinterpret_cast<HMENU>(DAG), instance, this);
     canvas_configure_gestures();
     form = CreateWindowExW(
-        WS_EX_CONTROLPARENT, L"WorkbenchNativeSurface051",
+        WS_EX_CONTROLPARENT | WS_EX_COMPOSITED, L"WorkbenchNativeSurface051",
         L"Step inputs and options",
         WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_CLIPCHILDREN | WS_CLIPSIBLINGS,
         0, 0, 1, 1, window, reinterpret_cast<HMENU>(FORM), instance, this);
     status = make(L"STATIC", L"Starting the local analysis engine...", SS_LEFT,
                   STATUS);
-    generalPanel = CreateWindowExW(WS_EX_CONTROLPARENT, L"WorkbenchNativeSurface051",
+    generalPanel = CreateWindowExW(WS_EX_CONTROLPARENT | WS_EX_COMPOSITED, L"WorkbenchNativeSurface051",
         L"General settings", WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_CLIPCHILDREN,
         0, 0, 1, 1, window, nullptr, instance, this);
     for (HWND h : {nameLabel, name, inputLabel, inputFolder, browseInput, inputHelp,
@@ -2676,6 +2680,7 @@ class Workspace {
         getstr(state, "selected", getstr(state.get("inspector"), "nodeId"));
     if (previousMode != workflowMode || previousSelected != selected) {
       formScroll = 0;
+      formWheelRemainder = 0;
       generalVisible = false;
     }
     rebuilding = true;
@@ -3161,6 +3166,15 @@ class Workspace {
     }
   }
 #include "workflow_canvas.h"
+  void panel_mouse_wheel(HWND panel, WPARAM w) {
+    // Precision wheels can report less than one logical pixel of movement.
+    // Retain that fraction per panel; zero must never become SB_LINEUP (0).
+    int &remainder = panel == generalPanel ? generalWheelRemainder : formWheelRemainder;
+    remainder -= GET_WHEEL_DELTA_WPARAM(w) * 48;
+    const int amount = remainder / WHEEL_DELTA;
+    remainder %= WHEEL_DELTA;
+    if (amount) scroll(panel, SB_VERT, 0, amount);
+  }
   void scroll(HWND h, int bar, int action, int delta = 0) {
     if (h == dag) { canvas_scroll(bar, action, delta); return; }
     RECT r{};
@@ -3174,6 +3188,7 @@ class Workspace {
                                   : &dagY;
     SCROLLINFO si{sizeof(si), SIF_TRACKPOS};
     GetScrollInfo(h, bar, &si);
+    const int previous = *value;
     if (delta)
       *value += delta;
     else
@@ -3204,6 +3219,8 @@ class Workspace {
         break;
       }
     *value = std::clamp(*value, 0, std::max(0, extent - page));
+    if (*value == previous)
+      return;
     if (h == form)
       layout_fields();
     else if (h == generalPanel)
@@ -3246,8 +3263,7 @@ class Workspace {
         return 0;
       }
       if (m == WM_MOUSEWHEEL) {
-        app->scroll(h, (GET_KEYSTATE_WPARAM(w) & MK_SHIFT) ? SB_HORZ : SB_VERT,
-                    0, -GET_WHEEL_DELTA_WPARAM(w) * 48 / WHEEL_DELTA);
+        app->panel_mouse_wheel(h, w);
         return 0;
       }
       if (h == app->dag) {

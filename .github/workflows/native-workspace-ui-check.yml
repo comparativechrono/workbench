@@ -169,6 +169,76 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
+  native-scroll-frames:
+    needs: build
+    runs-on: windows-2022
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: workspace-ui-candidate-${{ github.sha }}
+          path: ${{ runner.temp }}/scroll-candidate
+      - name: Recover unchanged pre-fix package for temporal comparison
+        id: prior
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: workspace-ui-candidate-0d3282046d7aa05dc822315c9a237c8ac534cd7a
+          run-id: 37449356224
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/scroll-prior-candidate
+      - name: Observe scrolling frames and precision-wheel routing in exact old and new packages
+        shell: pwsh
+        env:
+          ASSET_SHA256: ${{ needs.build.outputs.asset_sha256 }}
+          SOURCE_COMMIT: ${{ github.sha }}
+          PRIOR_DOWNLOAD_OUTCOME: ${{ steps.prior.outcome }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $newZip = Join-Path $env:RUNNER_TEMP 'scroll-candidate/native-workbench-0.8.0-starter-windows.zip'
+          $oldZip = Join-Path $env:RUNNER_TEMP 'scroll-prior-candidate/native-workbench-0.8.0-starter-windows.zip'
+          $oldSha = '71a84d2c6f7f293bf7f57c1fa3221fc942fce57bca61c8ed3344d593c31c262c'
+          if ((Get-FileHash $newZip -Algorithm SHA256).Hash -ne $env:ASSET_SHA256) { throw 'New candidate SHA-256 mismatch.' }
+          $newRoot = Join-Path $env:RUNNER_TEMP 'scroll-fixed'
+          Expand-Archive $newZip $newRoot
+          $evidence = Join-Path $env:RUNNER_TEMP 'scroll-evidence'
+          New-Item -ItemType Directory -Force $evidence | Out-Null
+          $priorAvailable = $env:PRIOR_DOWNLOAD_OUTCOME -eq 'success' -and (Test-Path $oldZip)
+          $priorState = @{ artifactId = 11404414503; runId = 37449356224; available = $priorAvailable; hashVerified = $false; executed = $false; status = 'unavailable'; skips = @() }
+          if ($priorAvailable) {
+            if ((Get-FileHash $oldZip -Algorithm SHA256).Hash -ne $oldSha) { throw 'Previous candidate SHA-256 mismatch.' }
+            $priorState.hashVerified = $true
+            $oldRoot = Join-Path $env:RUNNER_TEMP 'scroll-prior'
+            Expand-Archive $oldZip $oldRoot
+            $oldApp = Join-Path $oldRoot 'native-workbench'
+            $priorState.executed = $true
+            & (Join-Path $oldApp 'runtime/python/python.exe') -I scripts/check_scroll_frames_windows.py --diagnostic --app-root $oldApp --report (Join-Path $evidence 'prior/native-scroll-frames.json') --source-commit '0d3282046d7aa05dc822315c9a237c8ac534cd7a' --asset-sha256 $oldSha
+            $priorState.status = if ($LASTEXITCODE -eq 0) { 'observation-completed-see-report' } else { 'observation-failed-not-a-passing-negative-control' }
+          } else {
+            $priorState.skips = @('Diagnostic previous package unavailable; no temporal negative-control observation was executed or counted as passed.')
+          }
+          $priorState | ConvertTo-Json | Set-Content (Join-Path $evidence 'negative-control-availability.json')
+          # A missed old-package flash is reported honestly; it cannot turn an
+          # unavailable/failed diagnostic into a pass or weaken the new gate.
+          $newApp = Join-Path $newRoot 'native-workbench'
+          & (Join-Path $newApp 'runtime/python/python.exe') -I scripts/check_scroll_frames_windows.py --app-root $newApp --report (Join-Path $evidence 'fixed/native-scroll-frames.json') --source-commit $env:SOURCE_COMMIT --asset-sha256 $env:ASSET_SHA256
+          if ($LASTEXITCODE -ne 0) { throw 'The new package failed native temporal scrolling or precision-wheel routing.' }
+      - name: Retain displayed-frame evidence and diagnostic comparison
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: workspace-ui-scroll-frames-${{ github.sha }}
+          path: ${{ runner.temp }}/scroll-evidence
+          if-no-files-found: error
+          retention-days: 30
+
   native-long-paths:
     needs: build
     runs-on: windows-2022
