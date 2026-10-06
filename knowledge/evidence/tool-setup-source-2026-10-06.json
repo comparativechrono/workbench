@@ -1,0 +1,113 @@
+{
+  "schema": 1,
+  "createdUtc": "2026-10-06T21:44:05.050101+00:00",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "scope": "Source tests of current implementation; not native Windows evidence",
+  "results": [
+    {
+      "suite": "workspace/tests/test_setup_manager.py",
+      "returnCode": 0,
+      "tests": 15,
+      "skipped": 0,
+      "log": "test_setup_manager.txt"
+    },
+    {
+      "suite": "workspace/tests/test_setup_service.py",
+      "returnCode": 0,
+      "tests": 7,
+      "skipped": 0,
+      "log": "test_setup_service.txt"
+    },
+    {
+      "suite": "workspace/tests/test_pack_service.py",
+      "returnCode": 0,
+      "tests": 6,
+      "skipped": 0,
+      "log": "test_pack_service.txt"
+    },
+    {
+      "suite": "workspace/tests/test_desktop_host.py",
+      "returnCode": 0,
+      "tests": 12,
+      "skipped": 0,
+      "log": "test_desktop_host.txt"
+    },
+    {
+      "suite": "workspace/tests/test_reference_service.py",
+      "returnCode": 0,
+      "tests": 10,
+      "skipped": 0,
+      "log": "test_reference_service.txt"
+    },
+    {
+      "suite": "tests/test_pack_manager.py",
+      "returnCode": 0,
+      "tests": 42,
+      "skipped": 1,
+      "log": "test_pack_manager.txt"
+    },
+    {
+      "suite": "tests/test_publish_pack_catalog.py",
+      "returnCode": 0,
+      "tests": 11,
+      "skipped": 0,
+      "log": "test_publish_pack_catalog.txt"
+    },
+    {
+      "suite": "tests/test_prepare_setup_catalogue.py",
+      "returnCode": 0,
+      "tests": 6,
+      "skipped": 0,
+      "log": "test_prepare_setup_catalogue.txt"
+    },
+    {
+      "suite": "tests/test_setup_release.py",
+      "returnCode": 0,
+      "tests": 3,
+      "skipped": 0,
+      "log": "test_setup_release.txt"
+    },
+    {
+      "suite": "tests/test_split_release.py",
+      "returnCode": 0,
+      "tests": 8,
+      "skipped": 0,
+      "log": "test_split_release.txt"
+    },
+    {
+      "suite": "tests/test_core_update.py",
+      "returnCode": 0,
+      "tests": 17,
+      "skipped": 0,
+      "log": "test_core_update.txt"
+    }
+  ],
+  "success": true,
+  "baseCommit": "1abd62b49acc841502c9714d12a2470b7e48f8d6",
+  "tests": 137,
+  "skipped": 1,
+  "passed": 136,
+  "testedFileSha256": {
+    "workspace/setup_manager.py": "fb150bd38b8feb0cc9052444faf529d4fa65ed66832d3685bf85b78fc20ed3d4",
+    "workspace/service.py": "0f907378ed5c046426d713b3cd22d12e92fef2733f54c5af0266510303c6bf91",
+    "workspace/desktop_host.py": "925448ad0f5f8e710f54003ff9217ae7d95bb9e9cf27ca1615f978fa966dd517",
+    "workspace/pack_manager.py": "70ac2bb8ef5cd8b2b16e413c3712cff8b7e25b80db412cde85142b7d0c361138",
+    "workspace/setup-profile.json": "4cad899dcc1f6541f6edecc3ace7d0d4dd5d6103b1b16218fece0c0b68d2a4ba",
+    "scripts/package_split.py": "21537cdc9b9c62bcd57f72b83e44b3ff4b89365347cd09d4dc8607ae13af4679",
+    "scripts/prepare_setup_catalogue.py": "1fae047783f9a10e0f023da0b94134c0cfdcbfe792bf55b6ba4e8db4902ca8c4",
+    "scripts/build_update_0100.py": "00720f03f60725c6faa6b4ff28281d8fd563d218fa91e68d97d72e60419e6b27",
+    "workspace/tests/test_setup_manager.py": "8fa2df77dba850818c481427894c81b27570b525bdb0d3e90a66bb4b639a60b6",
+    "workspace/tests/test_setup_service.py": "df8ccb503352eabba3dc249bc9ace34d56792b1e2d42ee6ff4e3a050767ddc2b",
+    "workspace/tests/test_pack_service.py": "f4822c5f37bcf52fe625e521d127be52289ce81b1736b1b0ab2b4871cbed3de2",
+    "workspace/tests/test_desktop_host.py": "a65e0d14936255a0b1053147b5310e1f9b2596ef4c18671210a036a71fadb052",
+    "workspace/tests/test_reference_service.py": "b14d792705a37e20498fcdff59dc6a1f2a7fe83670ce2264d075111d228f973d",
+    "tests/test_pack_manager.py": "e1f609991a9ffd8939f43e1b8f2977c52f478f41949be1d368d680e30ffa5f39",
+    "tests/test_publish_pack_catalog.py": "c4a02ebbb0c03ef7b24a092c90b97b039ca129ed5cc3eb749dad8017cd072d74",
+    "tests/test_prepare_setup_catalogue.py": "0f6ace3dc8f7d28a1284ef3542fccc7592339c15fbebe3917f0ae7daacb821e9",
+    "tests/test_setup_release.py": "64438044b571257a6e0eca6d952597ceb5539fad453905387d14be7f2dba0518",
+    "tests/test_split_release.py": "4e3ad0472c8bc2639b8c988abf8caea1e0e46e04e071ce8255a65b892c1a46ad",
+    "tests/test_core_update.py": "7820ea4883dadd5dec204e8649b9a0f9fbe1d6c98cc25c275814d94cb9151b6c"
+  },
+  "skipReason": "tests/test_pack_manager.py::test_windows_deep_local_archive_import: Native Windows long-path filesystem check. Not counted as passed."
+}

@@ -106,6 +106,20 @@ enum {
   REF_PROGRESS,
   REF_NOTICE,
   REF_CLOSE,
+  TOOL_SETUP = 701,
+  SETUP_FULL,
+  SETUP_STARTER,
+  SETUP_CUSTOM,
+  SETUP_LIST,
+  SETUP_TOTAL,
+  SETUP_NOTICE,
+  SETUP_PROGRESS,
+  SETUP_REFRESH,
+  SETUP_INSTALL,
+  SETUP_RETRY,
+  SETUP_CANCEL,
+  SETUP_CLOSE,
+  PACK_SETUP,
   FIELD_BASE = 2000
 };
 std::wstring wide(const std::string &s) { return bw::utf16(s); }
@@ -473,6 +487,9 @@ class Workspace {
       centerHeading{}, rightHeading{}, nameLabel{}, inputLabel{}, inputHelp{},
       outputLabel{}, outputHelp{}, referenceHelp{}, generalPanel{};
   HWND addInput{}, zoomOut{}, zoomIn{}, zoomReset{};
+  HWND setupWindow{}, setupIntro{}, setupFull{}, setupStarter{}, setupCustom{},
+      setupHelp{}, setupList{}, setupTotal{}, setupNotice{}, setupProgress{},
+      setupRefresh{}, setupInstall{}, setupRetry{}, setupCancel{}, setupClose{}, packSetup{};
   int generalScroll = 0;
   int generalWheelRemainder = 0, formWheelRemainder = 0;
   HFONT font{}, bold{}, small{};
@@ -487,6 +504,7 @@ class Workspace {
        refState = object({{"releases", Json::array()}, {"species", Json::array()},
                           {"local", Json::array()}, {"discovery", nullptr}}),
        refOperation = Json::object(), refTargets = Json::array();
+  Json setupState = object({{"rows", Json::array()}, {"operation", Json::object()}});
   std::map<long long, std::string> pending;
   long long nextRequest = 1, activeRequest = 0;
   std::deque<Json> outgoing;
@@ -502,6 +520,12 @@ class Workspace {
        packListAfterOperation = false, packPollFailed = false;
   bool refBusy = false, refActionPending = false, refPollPending = false,
        refRebuilding = false, refPollFailed = false;
+  bool setupBusy = false, setupActionPending = false, setupPollPending = false,
+       setupRebuilding = false, setupPollFailed = false, setupWelcomeChecked = false,
+       setupSelectionLoaded = false;
+  std::string setupProfile = "full", setupRowsFingerprint;
+  std::set<std::string> setupChosen;
+  UINT setupDpi = 96;
   UINT dpi = 96;
   UINT packDpi = 96;
   UINT refDpi = 96;
@@ -520,6 +544,7 @@ class Workspace {
   ULONGLONG lastPoll = 0;
   ULONGLONG lastPackPoll = 0;
   ULONGLONG lastRefPoll = 0;
+  ULONGLONG lastSetupPoll = 0;
   bool pollPending = false;
   int px(int n) const { return MulDiv(n, static_cast<int>(dpi), 96); }
   HWND make(const wchar_t *klass, const std::wstring &title, DWORD style,
@@ -661,7 +686,7 @@ class Workspace {
   }
   void model(const std::string &action, Json payload = Json::object()) {
     if (!ready || busy || packBusy || packActionPending || refBusy ||
-        refActionPending || showingHistory)
+        refActionPending || setupBusy || setupActionPending || showingHistory)
       return;
     send("model",
          object({{"action", action}, {"payload", std::move(payload)}}));
@@ -778,7 +803,7 @@ class Workspace {
   void pack_enabled() {
     if (!packWindow)
       return;
-    const bool idle = ready && !busy && !closing && !packBusy && !refBusy &&
+    const bool idle = ready && !busy && !closing && !setupBusy && !setupActionPending && !packBusy && !refBusy &&
                       !refActionPending &&
                       !packActionPending;
     const auto &item = selected_pack();
@@ -956,6 +981,7 @@ class Workspace {
     put(packSource, 18, h - 112, 144, 32);
     put(packRefresh, 174, h - 112, 138, 32);
     put(packCancel, 324, h - 112, 138, 32);
+    put(packSetup, 474, h - 154, 150, 32);
     put(packClose, w - 112, h - 112, 94, 32);
     put(packNotice, 18, h - 69, w - 36, 43);
     put(packProgress, 18, h - 20, w - 36, 7);
@@ -965,6 +991,11 @@ class Workspace {
     ListView_SetColumnWidth(packList, 3, MulDiv(92, packDpi, 96));
   }
   void pack_command(int id, int notification) {
+    if (id == PACK_SETUP && ready && !busy && !closing) {
+      show_setup();
+      if (!setupPollPending && !setupActionPending) setup_send("setup/status");
+      return;
+    }
     if (id == PACK_CLOSE || id == IDCANCEL) {
       DestroyWindow(packWindow);
       return;
@@ -981,7 +1012,7 @@ class Workspace {
       return;
     }
     if (!ready || busy || closing || packBusy || packActionPending ||
-        refBusy || refActionPending)
+        refBusy || refActionPending || setupBusy || setupActionPending)
       return;
     if (id == PACK_REFRESH) {
       pack_send("packs/refresh");
@@ -1149,6 +1180,7 @@ class Workspace {
     packRefresh = button(L"Refresh", PACK_REFRESH, packWindow);
     packCancel = button(L"Cancel download", PACK_CANCEL, packWindow);
     packClose = button(L"Close", PACK_CLOSE, packWindow);
+    packSetup = button(L"Tool setup...", PACK_SETUP, packWindow);
     packNotice = make(L"STATIC", L"Loading installed packs...", SS_LEFT | SS_NOPREFIX,
                        PACK_NOTICE, packWindow);
     packProgress = make(PROGRESS_CLASSW, L"Download progress", PBS_SMOOTH,
@@ -1196,8 +1228,368 @@ class Workspace {
     pack_notice();
     pack_enabled();
     enabled();
-    if (closing && !packBusy && !busy && !refBusy)
+    if (closing && !packBusy && !busy && !refBusy && !setupBusy)
       send("shutdown");
+  }
+  static std::wstring setup_size(long long bytes) {
+    std::wostringstream value;
+    value << std::fixed << std::setprecision(1);
+    if (bytes >= 1000000000LL)
+      value << bytes / 1000000000.0 << L" GB";
+    else if (bytes >= 1000000)
+      value << bytes / 1000000.0 << L" MB";
+    else if (bytes >= 1000)
+      value << bytes / 1000.0 << L" KB";
+    else
+      value << bytes << L" bytes";
+    return value.str();
+  }
+  bool setup_selected(const Json &row) const {
+    if (setupProfile == "starter")
+      return row.get("starter").boolean();
+    return setupProfile == "full" || row.get("starter").boolean() ||
+           setupChosen.count(getstr(row, "id"));
+  }
+  void setup_send(const std::string &method, Json params = Json::object()) {
+    if (method == "setup/status")
+      setupPollPending = true;
+    else
+      setupActionPending = true;
+    send(method, std::move(params));
+    enabled();
+  }
+  void setup_enabled() {
+    if (!setupWindow)
+      return;
+    const bool idle = ready && !busy && !closing && !packBusy &&
+        !packActionPending && !refBusy && !refActionPending &&
+        !setupBusy && !setupActionPending;
+    bool available = true;
+    int selectedCount = 0;
+    long long bytes = 0;
+    int installed = 0;
+    for (const auto &row : setupState.get("rows").array_items()) {
+      if (!setup_selected(row)) continue;
+      ++selectedCount;
+      if (row.get("installed").boolean()) ++installed;
+      else {
+        bytes += row.get("size").integer();
+        available = available && row.get("available").boolean() &&
+                    row.get("compatible").boolean(true);
+      }
+    }
+    for (HWND h : {setupFull, setupStarter, setupCustom}) EnableWindow(h, idle);
+    // Full and Starter still allow scrolling/selection for inspection; the
+    // notification handler only changes checks in Custom.
+    EnableWindow(setupList, idle);
+    EnableWindow(setupRefresh, idle && setupState.get("configured").boolean());
+    EnableWindow(setupInstall, idle && selectedCount > 0 && available);
+    const auto &operation = setupState.get("operation");
+    const auto operationStatus = getstr(operation, "status");
+    EnableWindow(setupRetry, idle &&
+        (operationStatus == "failed" || operationStatus == "cancelled" ||
+         operationStatus == "interrupted"));
+    EnableWindow(setupCancel, ready && setupBusy && !setupActionPending &&
+        operation.get("cancellable").boolean(true) && operationStatus != "cancelling");
+    EnableWindow(setupClose, !setupBusy && !setupActionPending && !closing);
+    SetWindowTextW(setupInstall, setupProfile == "starter" ? L"Use Starter" :
+        bytes == 0 ? L"Use installed selection" : L"Install selection");
+    std::wstring summary = std::to_wstring(selectedCount) + L" packs selected · " +
+        std::to_wstring(installed) + L" already installed · " + setup_size(bytes) +
+        L" additional download\nReferences, databases and working space are separate.";
+    if (control_text(setupTotal) != summary) SetWindowTextW(setupTotal, summary.c_str());
+  }
+  void setup_refresh_rows() {
+    if (!setupWindow) return;
+    const auto fingerprint = setupState.get("rows").dump() + setupProfile;
+    if (fingerprint == setupRowsFingerprint) {
+      setup_enabled();
+      return;
+    }
+    setupRowsFingerprint = fingerprint;
+    setupRebuilding = true;
+    const int first = ListView_GetTopIndex(setupList);
+    SendMessageW(setupList, WM_SETREDRAW, FALSE, 0);
+    ListView_DeleteAllItems(setupList);
+    int index = 0;
+    for (const auto &row : setupState.get("rows").array_items()) {
+      auto name = wt(row, "name", getstr(row, "id"));
+      LVITEMW item{};
+      item.mask = LVIF_TEXT;
+      item.iItem = index;
+      item.pszText = name.data();
+      ListView_InsertItem(setupList, &item);
+      auto version = wt(row, "version");
+      std::wstring status = row.get("installed").boolean() ? L"Installed" :
+          !row.get("available").boolean() ? L"Catalogue needed" :
+          !row.get("compatible").boolean(true) ? L"Incompatible" : L"Ready to download";
+      const auto queueStatus = getstr(row, "status");
+      if (!row.get("installed").boolean() && !queueStatus.empty() && queueStatus != "pending")
+        status = wide(queueStatus);
+      auto size = row.get("installed").boolean() ? L"—" : setup_size(row.get("size").integer());
+      ListView_SetItemText(setupList, index, 1, version.data());
+      ListView_SetItemText(setupList, index, 2, status.data());
+      ListView_SetItemText(setupList, index, 3, size.data());
+      ListView_SetCheckState(setupList, index, setup_selected(row));
+      ++index;
+    }
+    if (first > 0 && first < index) ListView_EnsureVisible(setupList, first, FALSE);
+    SendMessageW(setupList, WM_SETREDRAW, TRUE, 0);
+    InvalidateRect(setupList, nullptr, FALSE);
+    setupRebuilding = false;
+    setup_enabled();
+  }
+  void setup_notice() {
+    if (!setupWindow) return;
+    const auto &operation = setupState.get("operation");
+    std::wstring notice = wt(operation, "message");
+    if (notice.empty()) notice = wt(setupState, "notice");
+    else if (!setupBusy && !getstr(setupState, "notice").empty() &&
+             notice != wt(setupState, "notice")) notice += L"\n" + wt(setupState, "notice");
+    if (notice.empty())
+      notice = setupState.get("configured").boolean()
+          ? L"Refresh the official catalogue to verify available downloads. Nothing is downloaded until you choose an action."
+          : L"Online setup is unavailable: no official catalogue is configured. Use Starter now; Manage tools still supports trusted pack imports.";
+    if (setupBusy) {
+      if (!getstr(operation, "current").empty()) notice += L" · " + wt(operation, "current");
+      if (operation.get("count").integer() > 0)
+        notice += L"\n" + std::to_wstring(operation.get("completed").integer()) +
+            L" / " + std::to_wstring(operation.get("count").integer()) + L" packs ready";
+      if (operation.get("total").integer() > 0)
+        notice += L" · " + setup_size(operation.get("bytes").integer()) + L" / " +
+            setup_size(operation.get("total").integer()) + L" downloaded";
+    }
+    if (control_text(setupNotice) != notice) SetWindowTextW(setupNotice, notice.c_str());
+    const auto bytes = operation.get("bytes").integer(), total = operation.get("total").integer();
+    SendMessageW(setupProgress, PBM_SETRANGE32, 0, 1000);
+    SendMessageW(setupProgress, PBM_SETPOS, total > 0 ?
+        static_cast<WPARAM>(std::clamp(1000.0 * bytes / total, 0.0, 1000.0)) : 0, 0);
+    ShowWindow(setupProgress, setupBusy ? SW_SHOW : SW_HIDE);
+  }
+  void setup_layout() {
+    if (!setupWindow) return;
+    RECT area{};
+    GetClientRect(setupWindow, &area);
+    const int w = MulDiv(area.right, 96, setupDpi), h = MulDiv(area.bottom, 96, setupDpi);
+    auto put = [&](HWND control, int x, int y, int cw, int ch) {
+      SetWindowPos(control, nullptr, MulDiv(x, setupDpi, 96), MulDiv(y, setupDpi, 96),
+          MulDiv(std::max(1, cw), setupDpi, 96), MulDiv(std::max(1, ch), setupDpi, 96),
+          SWP_NOZORDER | SWP_NOACTIVATE | SWP_NOREDRAW | SWP_NOCOPYBITS);
+    };
+    put(setupIntro, 18, 18, w - 36, 60);
+    const int choiceWidth = (w - 36) / 3;
+    put(setupFull, 18, 84, choiceWidth, 32);
+    put(setupStarter, 18 + choiceWidth, 84, choiceWidth, 32);
+    put(setupCustom, 18 + choiceWidth * 2, 84, choiceWidth, 32);
+    put(setupHelp, 18, 128, w - 36, 44);
+    const int listHeight = std::max(110, h - 396);
+    put(setupList, 18, 184, w - 36, listHeight);
+    put(setupTotal, 18, 194 + listHeight, w - 36, 46);
+    put(setupRefresh, 18, h - 132, 150, 34);
+    put(setupInstall, 180, h - 132, 190, 34);
+    put(setupRetry, 382, h - 132, 110, 34);
+    put(setupCancel, 504, h - 132, 120, 34);
+    put(setupClose, w - 166, h - 132, 148, 34);
+    put(setupNotice, 18, h - 87, w - 36, 63);
+    put(setupProgress, 18, h - 17, w - 36, 7);
+    ListView_SetColumnWidth(setupList, 0, MulDiv(std::max(230, w - 385), setupDpi, 96));
+    ListView_SetColumnWidth(setupList, 1, MulDiv(90, setupDpi, 96));
+    ListView_SetColumnWidth(setupList, 2, MulDiv(160, setupDpi, 96));
+    ListView_SetColumnWidth(setupList, 3, MulDiv(99, setupDpi, 96));
+    RedrawWindow(setupWindow, nullptr, nullptr, RDW_INVALIDATE | RDW_ALLCHILDREN);
+  }
+  void setup_command(int id) {
+    if (id == SETUP_CLOSE || id == IDCANCEL) {
+      if (!setupBusy && !setupActionPending) {
+        setup_send("setup/dismiss");
+        DestroyWindow(setupWindow);
+      }
+      return;
+    }
+    if (id == SETUP_CANCEL && setupBusy && !setupActionPending &&
+        setupState.get("operation").get("cancellable").boolean(true)) {
+      setup_send("setup/cancel");
+      return;
+    }
+    if (!ready || busy || closing || packBusy || packActionPending ||
+        refBusy || refActionPending || setupBusy || setupActionPending) return;
+    if (id == SETUP_FULL || id == SETUP_STARTER || id == SETUP_CUSTOM) {
+      setupProfile = id == SETUP_FULL ? "full" : id == SETUP_STARTER ? "starter" : "custom";
+      CheckRadioButton(setupWindow, SETUP_FULL, SETUP_CUSTOM, id);
+      setup_refresh_rows();
+      return;
+    }
+    if (id == SETUP_REFRESH) setup_send("setup/refresh");
+    else if (id == SETUP_RETRY) {
+      commit_all();
+      setup_send("setup/retry");
+    } else if (id == SETUP_INSTALL) {
+      Json ids = Json::array();
+      for (const auto &row : setupState.get("rows").array_items())
+        if (setup_selected(row)) ids.array_items().push_back(getstr(row, "id"));
+      commit_all();
+      Json request = object({{"profile", setupProfile}});
+      if (setupProfile == "custom") request["pack_ids"] = std::move(ids);
+      setup_send("setup/start", std::move(request));
+    }
+  }
+  static LRESULT CALLBACK setup_proc(HWND h, UINT m, WPARAM w, LPARAM l) {
+    auto *app = reinterpret_cast<Workspace *>(GetWindowLongPtrW(h, GWLP_USERDATA));
+    if (m == WM_NCCREATE) {
+      app = static_cast<Workspace *>(reinterpret_cast<CREATESTRUCTW *>(l)->lpCreateParams);
+      app->setupWindow = h;
+      SetWindowLongPtrW(h, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(app));
+    }
+    if (!app) return DefWindowProcW(h, m, w, l);
+    try {
+      switch (m) {
+      case WM_COMMAND:
+        app->setup_command(LOWORD(w));
+        return 0;
+      case WM_NOTIFY: {
+        auto *notice = reinterpret_cast<NMHDR *>(l);
+        if (notice->idFrom == SETUP_LIST && notice->code == LVN_ITEMCHANGED && !app->setupRebuilding) {
+          const auto *change = reinterpret_cast<NMLISTVIEW *>(l);
+          const auto &rows = app->setupState.get("rows").array_items();
+          if (change->iItem >= 0 && static_cast<size_t>(change->iItem) < rows.size() &&
+              (change->uChanged & LVIF_STATE) &&
+              ((change->uOldState ^ change->uNewState) & LVIS_STATEIMAGEMASK)) {
+            const auto &row = rows[static_cast<size_t>(change->iItem)];
+            if (app->setupProfile != "custom" || row.get("starter").boolean() ||
+                app->setupBusy || app->setupActionPending) {
+              app->setupRebuilding = true;
+              ListView_SetCheckState(app->setupList, change->iItem, app->setup_selected(row));
+              app->setupRebuilding = false;
+            } else if (ListView_GetCheckState(app->setupList, change->iItem))
+              app->setupChosen.insert(getstr(row, "id"));
+            else app->setupChosen.erase(getstr(row, "id"));
+            app->setup_enabled();
+          }
+        }
+        return 0;
+      }
+      case WM_SIZE: app->setup_layout(); return 0;
+      case WM_DPICHANGED: {
+        app->setupDpi = HIWORD(w);
+        auto *area = reinterpret_cast<RECT *>(l);
+        SetWindowPos(h, nullptr, area->left, area->top, area->right - area->left,
+            area->bottom - area->top, SWP_NOZORDER | SWP_NOACTIVATE);
+        app->setup_layout();
+        return 0;
+      }
+      case WM_GETMINMAXINFO:
+        reinterpret_cast<MINMAXINFO *>(l)->ptMinTrackSize = {
+            MulDiv(830, app->setupDpi, 96), MulDiv(650, app->setupDpi, 96)};
+        return 0;
+      case WM_CTLCOLORSTATIC:
+      case WM_CTLCOLOREDIT:
+      case WM_CTLCOLORBTN:
+        SetTextColor(reinterpret_cast<HDC>(w), INK);
+        SetBkColor(reinterpret_cast<HDC>(w), BACK);
+        return reinterpret_cast<LRESULT>(app->background);
+      case WM_CLOSE: app->setup_command(SETUP_CLOSE); return 0;
+      case WM_NCDESTROY:
+        app->setupWindow = nullptr;
+        app->setupRowsFingerprint.clear();
+        SetWindowLongPtrW(h, GWLP_USERDATA, 0);
+        break;
+      default: break;
+      }
+    } catch (const std::exception &error) {
+      MessageBoxW(h, wide(error.what()).c_str(), L"Tool setup", MB_OK | MB_ICONERROR);
+    }
+    return DefWindowProcW(h, m, w, l);
+  }
+  void show_setup() {
+    if (setupWindow) {
+      ShowWindow(setupWindow, SW_RESTORE);
+      SetForegroundWindow(setupWindow);
+      return;
+    }
+    WNDCLASSEXW klass{sizeof(klass)};
+    klass.lpfnWndProc = setup_proc;
+    klass.hInstance = instance;
+    klass.hCursor = LoadCursorW(nullptr, IDC_ARROW);
+    klass.hbrBackground = background;
+    klass.hIcon = appIcon;
+    klass.hIconSm = appSmallIcon;
+    klass.lpszClassName = L"WorkbenchToolSetup0100";
+    RegisterClassExW(&klass);
+    RECT area{};
+    GetWindowRect(window, &area);
+    setupDpi = dpi;
+    const int w = px(920), h = px(720);
+    setupWindow = CreateWindowExW(WS_EX_CONTROLPARENT | WS_EX_COMPOSITED,
+        klass.lpszClassName, L"Tool setup · Native Workbench",
+        WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN,
+        area.left + std::max<LONG>(0, (area.right - area.left - w) / 2),
+        area.top + std::max<LONG>(0, (area.bottom - area.top - h) / 2),
+        w, h, window, nullptr, instance, this);
+    if (!setupWindow) throw std::runtime_error("Could not open tool setup.");
+    setupIntro = make(L"STATIC", L"Choose your tools\nFull installs the complete current selection. Starter is ready offline. You can add more packs later in Manage tools.",
+        SS_LEFT | SS_NOPREFIX, 0, setupWindow);
+    setupFull = make(L"BUTTON", L"&Full — recommended", WS_TABSTOP | WS_GROUP | BS_AUTORADIOBUTTON,
+        SETUP_FULL, setupWindow);
+    setupStarter = make(L"BUTTON", L"&Starter", WS_TABSTOP | BS_AUTORADIOBUTTON, SETUP_STARTER, setupWindow);
+    setupCustom = make(L"BUTTON", L"&Custom", WS_TABSTOP | BS_AUTORADIOBUTTON, SETUP_CUSTOM, setupWindow);
+    CheckRadioButton(setupWindow, SETUP_FULL, SETUP_CUSTOM,
+        setupProfile == "full" ? SETUP_FULL : setupProfile == "starter" ? SETUP_STARTER : SETUP_CUSTOM);
+    setupHelp = make(L"STATIC", L"Choose Custom to select individual packs. Downloads require internet access. Completed packs remain installed after cancellation; existing versions and saved workflows are retained.",
+        SS_LEFT | SS_NOPREFIX, 0, setupWindow);
+    setupList = make(WC_LISTVIEWW, L"Choose tool packs", WS_TABSTOP | LVS_REPORT | LVS_SHOWSELALWAYS,
+        SETUP_LIST, setupWindow, WS_EX_CLIENTEDGE);
+    ListView_SetExtendedListViewStyle(setupList, LVS_EX_FULLROWSELECT | LVS_EX_DOUBLEBUFFER | LVS_EX_CHECKBOXES | LVS_EX_LABELTIP);
+    int column = 0;
+    for (const auto *label : {L"Tool pack", L"Version", L"Status", L"Download"}) {
+      LVCOLUMNW col{};
+      col.mask = LVCF_TEXT | LVCF_WIDTH;
+      col.pszText = const_cast<wchar_t *>(label);
+      col.cx = px(120);
+      ListView_InsertColumn(setupList, column++, &col);
+    }
+    setupTotal = make(L"STATIC", L"", SS_LEFT | SS_NOPREFIX, SETUP_TOTAL, setupWindow);
+    setupRefresh = button(L"Refresh catalogue", SETUP_REFRESH, setupWindow);
+    setupInstall = button(L"Install selection", SETUP_INSTALL, setupWindow);
+    setupRetry = button(L"Retry", SETUP_RETRY, setupWindow);
+    setupCancel = button(L"Cancel", SETUP_CANCEL, setupWindow);
+    setupClose = button(L"Use Workbench", SETUP_CLOSE, setupWindow);
+    setupNotice = make(L"STATIC", L"Loading tool selection...", SS_LEFT | SS_NOPREFIX, SETUP_NOTICE, setupWindow);
+    setupProgress = make(PROGRESS_CLASSW, L"Tool installation progress", PBS_SMOOTH, SETUP_PROGRESS, setupWindow);
+    setup_refresh_rows();
+    setup_notice();
+    setup_layout();
+    ShowWindow(setupWindow, SW_SHOW);
+    SetForegroundWindow(setupWindow);
+    SetFocus(setupFull);
+  }
+  void setup_response(const std::string &method, const Json &result) {
+    setupPollFailed = false;
+    setupState = result;
+    setupBusy = result.get("operation").get("active").boolean();
+    if (!setupSelectionLoaded && result.get("rows").is_array()) {
+      setupSelectionLoaded = true;
+      const auto &selection = result.get("selection");
+      const auto profile = getstr(selection, "profile");
+      if (profile == "full" || profile == "starter" || profile == "custom") setupProfile = profile;
+      if (selection.get("pack_ids").is_array())
+        for (const auto &id : selection.get("pack_ids").array_items()) setupChosen.insert(text(id));
+      else for (const auto &row : result.get("rows").array_items()) setupChosen.insert(getstr(row, "id"));
+    }
+    if (result.contains("model")) {
+      snapshot(result.get("model"));
+      refresh_tasks(true);
+    }
+    if (!setupWelcomeChecked && method == "setup/status") {
+      setupWelcomeChecked = true;
+      if (result.get("offered").boolean()) show_setup();
+    }
+    if (setupWindow)
+      CheckRadioButton(setupWindow, SETUP_FULL, SETUP_CUSTOM,
+          setupProfile == "full" ? SETUP_FULL : setupProfile == "starter" ? SETUP_STARTER : SETUP_CUSTOM);
+    setup_refresh_rows();
+    setup_notice();
+    enabled();
+    if (closing && !setupBusy && !busy && !packBusy && !refBusy) send("shutdown");
   }
   static std::wstring reference_species(const Json &item) {
     const auto &species = item.get("species");
@@ -1251,7 +1643,7 @@ class Workspace {
   void reference_enabled() {
     if (!refWindow)
       return;
-    const bool idle = ready && !busy && !closing && !packBusy &&
+    const bool idle = ready && !busy && !closing && !setupBusy && !setupActionPending && !packBusy &&
                       !packActionPending && !refBusy && !refActionPending &&
                       !activeRequest && outgoing.empty();
     for (HWND h : {refRelease, refQuery, refSearch, refSpecies, refFiles,
@@ -1333,7 +1725,7 @@ class Workspace {
       return;
     SendMessageW(refTarget, CB_RESETCONTENT, 0, 0);
     const auto &record = reference_local_record(), &file = reference_local_file();
-    if (ready && !refBusy && !refActionPending && !packBusy && !busy &&
+    if (ready && !refBusy && !refActionPending && !packBusy && !busy && !setupBusy && !setupActionPending &&
         !closing && !showingHistory && !getstr(file, "id").empty() &&
         record.get("available").boolean(true))
       reference_send("references/targets", object({{"record_id", getstr(record, "id")},
@@ -1576,7 +1968,7 @@ class Workspace {
       return;
     }
     if (!ready || busy || closing || packBusy || packActionPending ||
-        refBusy || refActionPending)
+        refBusy || refActionPending || setupBusy || setupActionPending)
       return;
     if ((id == REF_QUERY && notification == EN_CHANGE) || id == REF_RELEASE)
       return;
@@ -1871,7 +2263,7 @@ class Workspace {
     }
     reference_enabled();
     enabled();
-    if (closing && !refBusy && !busy && !packBusy)
+    if (closing && !refBusy && !busy && !packBusy && !setupBusy)
       send("shutdown");
   }
   void controls() {
@@ -1885,6 +2277,7 @@ class Workspace {
              {FILE_LOAD, L"Load saved pipeline or settings..."},
              {FILE_HISTORY, L"Recorded results..."},
              {FILE_IMPORT, L"Manage tools..."},
+             {TOOL_SETUP, L"Tool setup..."},
              {MANAGE_REFERENCES, L"References..."},
              {FILE_CHECK, L"Check installation"},
              {FILE_EXIT, L"Exit"}})
@@ -2089,7 +2482,7 @@ class Workspace {
       {referenceHelp, 14, 472 - generalScroll, w, 42}});
   }
   void enabled() {
-    bool edit = ready && !busy && !packBusy && !packActionPending &&
+    bool edit = ready && !busy && !setupBusy && !setupActionPending && !packBusy && !packActionPending &&
                 !refBusy && !refActionPending &&
                 !showingHistory && !closing &&
                 !activeRequest && outgoing.empty();
@@ -2108,8 +2501,8 @@ class Workspace {
     EnableWindow(resultsList, ready && !busy && !activeRequest && outgoing.empty());
     EnableWindow(cancel, busy && !closing);
     ShowWindow(cancel, busy ? SW_SHOW : SW_HIDE);
-    EnableWindow(output, !busy && !packBusy && !packActionPending && !refBusy && !refActionPending);
-    EnableWindow(browse, !busy && !packBusy && !packActionPending && !refBusy && !refActionPending);
+    EnableWindow(output, !busy && !setupBusy && !setupActionPending && !packBusy && !packActionPending && !refBusy && !refActionPending);
+    EnableWindow(browse, !busy && !setupBusy && !setupActionPending && !packBusy && !packActionPending && !refBusy && !refActionPending);
     EnableWindow(manageTools, ready && !busy && !closing && !showingHistory);
     EnableWindow(manageReferences, ready && !busy && !closing && !showingHistory);
     for (const auto &f : fields) {
@@ -2125,9 +2518,12 @@ class Workspace {
                    (ready && !busy && !closing && !showingHistory ? MF_ENABLED : MF_GRAYED));
     EnableMenuItem(m, MANAGE_REFERENCES, MF_BYCOMMAND |
                    (ready && !busy && !closing && !showingHistory ? MF_ENABLED : MF_GRAYED));
+    EnableMenuItem(m, TOOL_SETUP, MF_BYCOMMAND |
+                   (ready && !busy && !closing ? MF_ENABLED : MF_GRAYED));
     DrawMenuBar(window);
     pack_enabled();
     reference_enabled();
+    setup_enabled();
   }
   void refresh_tasks(bool categories = false) {
     rebuilding = true;
@@ -2826,7 +3222,7 @@ class Workspace {
       logs = logs.substr(logs.size() - 250000);
     enabled();
     InvalidateRect(dag, nullptr, FALSE);
-    if (closing && !busy && !refBusy && !packBusy)
+    if (closing && !busy && !refBusy && !packBusy && !setupBusy)
       send("shutdown");
   }
   void response(const Json &response_) {
@@ -2838,6 +3234,10 @@ class Workspace {
     std::string method = found == pending.end() ? "" : found->second;
     if (found != pending.end())
       pending.erase(found);
+    if (method == "setup/status")
+      setupPollPending = false;
+    else if (method.rfind("setup/", 0) == 0)
+      setupActionPending = false;
     if (method == "status")
       pollPending = false;
     if (method == "packs/status")
@@ -2850,6 +3250,18 @@ class Workspace {
     else if (method.rfind("references/", 0) == 0)
       refActionPending = false;
     if (!response_.get("ok").boolean()) {
+      if (method.rfind("setup/", 0) == 0) {
+        setupState["notice"] = getstr(response_, "error", "Tool setup returned an error.");
+        setupState["operation"]["message"] = getstr(response_, "error", "Tool setup returned an error.");
+        setup_notice();
+        if (!setupPollFailed || method != "setup/status")
+          MessageBoxW(setupWindow ? setupWindow : window,
+              wt(response_, "error", "Tool setup returned an error.").c_str(),
+              L"Tool setup", MB_OK | MB_ICONERROR);
+        if (method == "setup/status") setupPollFailed = true;
+        enabled();
+        return;
+      }
       if (method.rfind("references/", 0) == 0) {
         refOperation["message"] = getstr(response_, "error", "Reference discovery returned an error.");
         reference_notice();
@@ -2894,7 +3306,9 @@ class Workspace {
       return;
     }
     const auto &result = response_.get("result");
-    if (method.rfind("packs/", 0) == 0) {
+    if (method.rfind("setup/", 0) == 0) {
+      setup_response(method, result);
+    } else if (method.rfind("packs/", 0) == 0) {
       pack_response(method, result);
     } else if (method.rfind("references/", 0) == 0) {
       reference_response(method, result);
@@ -2908,10 +3322,12 @@ class Workspace {
       refresh_tasks(true);
       status_text(L"Ready. All computation remains on this computer.");
       if (autoCheck) {
+        setupWelcomeChecked = true;
         autoCheck = false;
         send("check",
              object({{"output_folder", narrow(control_text(output))}}));
-      }
+      } else if (!setupWelcomeChecked && !setupPollPending)
+        setup_send("setup/status");
     } else if (method == "model" || method == "load" || method == "example" ||
                method == "workspace/mode" || method == "workspace/tool") {
       submittedFields.clear();
@@ -3095,13 +3511,18 @@ class Workspace {
       show_pack_manager();
       return;
     }
+    if (id == TOOL_SETUP && ready && !busy && !closing) {
+      show_setup();
+      if (!setupPollPending && !setupActionPending) setup_send("setup/status");
+      return;
+    }
     if (id == MANAGE_REFERENCES && ready && !busy && !showingHistory && !closing) {
       if (!refBusy && !refActionPending && !packBusy && !packActionPending)
         commit_all();
       show_references();
       return;
     }
-    if (busy || packBusy || packActionPending || refBusy || refActionPending || showingHistory) {
+    if (busy || setupBusy || setupActionPending || packBusy || packActionPending || refBusy || refActionPending || showingHistory) {
       if (id == REVIEW || id == VIEW_METHODS)
         show_text(
             L"Recorded methods",
@@ -3308,6 +3729,8 @@ class Workspace {
         busy = false;
         packBusy = false;
         packActionPending = false;
+        setupBusy = false;
+        setupActionPending = false;
         refBusy = false;
         refActionPending = false;
         status_text(L"The local engine stopped. Restart Workbench; "
@@ -3452,6 +3875,11 @@ class Workspace {
         lastPackPoll = GetTickCount64();
         pack_send("packs/status");
       }
+      if (ready && setupBusy && !setupPollPending && !setupActionPending &&
+          GetTickCount64() - lastSetupPoll > (setupPollFailed ? 3000 : 650)) {
+        lastSetupPoll = GetTickCount64();
+        setup_send("setup/status");
+      }
       if (ready && refBusy && !refPollPending && !refActionPending &&
           GetTickCount64() - lastRefPoll > (refPollFailed ? 3000 : 650)) {
         lastRefPoll = GetTickCount64();
@@ -3526,6 +3954,21 @@ class Workspace {
     case WM_CLOSE:
       if (closing)
         return 0;
+      if (setupBusy || setupActionPending) {
+        if (setupBusy && !setupState.get("operation").get("cancellable").boolean(true)) {
+          MessageBoxW(window, L"A tool installation is being committed. Please wait for it to finish.",
+              L"Finishing tool installation", MB_OK | MB_ICONINFORMATION);
+          return 0;
+        }
+        if (MessageBoxW(window, L"Cancel tool setup and close Workbench?\n\nCompleted packs will remain installed. Reopen Tool setup to retry unfinished downloads.",
+            L"Close Native Workbench", MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2) != IDYES) return 0;
+        closing = true;
+        closeStarted = GetTickCount64();
+        setup_send("setup/cancel");
+        status_text(L"Cancelling tool setup before closing...");
+        enabled();
+        return 0;
+      }
       if (refBusy || refActionPending) {
         if (refBusy && !refOperation.get("cancellable").boolean(true)) {
           MessageBoxW(window, L"The reference download record is being saved. Please wait "
@@ -3699,7 +4142,8 @@ public:
     UpdateWindow(h);
     MSG msg{};
     while (GetMessageW(&msg, nullptr, 0, 0) > 0) {
-      if (!(refWindow && IsDialogMessageW(refWindow, &msg)) &&
+      if (!(setupWindow && IsDialogMessageW(setupWindow, &msg)) &&
+          !(refWindow && IsDialogMessageW(refWindow, &msg)) &&
           !(packWindow && IsDialogMessageW(packWindow, &msg)) &&
           !IsDialogMessageW(h, &msg)) {
         TranslateMessage(&msg);

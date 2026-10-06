@@ -36,7 +36,7 @@ choice, not a claim that they inherently repartition or damage a PC.
 | D01 | Local analysis is the default. Data locality is necessary for teaching and restricted workplaces. | Analysis files remain local. Public reference downloads and pack downloads are distinct, explicit operations. No hidden uploads or cloud fallback. |
 | D02 | Use real pinned upstream tools with bounded portability adaptations. | Prefer native Windows builds, portable runtimes or a pack-private language runtime according to the tool. Preserve algorithms, record patches and compare scientific outputs. |
 | D03 | The supported entry point is a native desktop app. The browser prototype was unsuitable for some workplace policies. | Preserve Win32 UI and private pipe-based backend. A browser or listening HTTP server must not become necessary to launch or run analysis. |
-| D04 | Application and packs have independent lifecycles. The starter stays small. | Starter pack IDs are `align` (minimap2), `bam` (SAMtools), `variants` (BCFtools). Optional packs install through the manager or offline ZIP import. One repository with independent tags is sufficient. |
+| D04 | Application and packs have independent lifecycles. Retain a small Starter; the 2026-10-06 setup decision recommends Full for new installations. | Starter pack IDs are `align` (minimap2), `bam` (SAMtools), `variants` (BCFtools). Optional packs install through the manager or offline ZIP import. One repository with independent tags is sufficient. |
 | D05 | A pack represents one tool or a small closely related operation set, such as indexing plus alignment. | New tools declare their own inputs, parameters and outputs. Existing multi-tool packs remain compatible; do not delete or rename published identities to impose the new preference retroactively. |
 | D06 | Individual tools and assembled pipelines are both first-class. | Keep one clear library selection path, standalone operations and distinct saved tool settings versus saved pipeline graphs. Do not relabel one tool's settings as a complete pipeline. |
 | D07 | Pipelines support branching, fan-out and merging, not just a list. | Draw a layered DAG with shared-output consumers at the same dependency level when dependencies permit. Show each input's producing step/output. Support step removal and validate the remaining graph. |
@@ -200,3 +200,35 @@ Scrolling text corruption and the first-open Manage tools array error are bugs
 to fix and reproduce in native gates. Source fixes and layout acceptance alone
 do not establish a complete workflow acceptance or a released version; current
 artifact-specific evidence remains in the [native UI guide](native-ui.md).
+
+
+## Full, Starter and Custom tool setup, 2026-10-06
+
+After reviewing the measured size of all 32 current packs, the user approved a
+small native setup flow that retrieves the existing independently released packs.
+**Full is the recommended selection**, Starter keeps the three bundled tools,
+and Custom allows a selected subset. This updates D04's onboarding preference;
+it does not merge optional tools into core ownership or remove the small Starter.
+The measured current selection is approximately 3.81 GB downloaded and 4.67 GB
+of initial files, excluding scientific databases, results and run-time expansion.
+See the [sizing record](full-bundle-sizing-2026-10-06.md) for exact scope.
+
+Downloads require an explicit user action. Show the missing selection's download
+size and per-pack progress; keep each fully verified installed pack if a later
+pack fails or installation is cancelled. Persist the exact queue so retry does
+not silently select a different version or publisher. Incomplete pack transfers
+must not be exposed as installed tools. Starter and offline use remain available.
+
+Keep Manage tools and offline import for future official packs and other
+developers' packs. Installed versions, private runtimes, scientific metadata,
+licences and matching sources remain pack-owned. Saved workflows keep their
+exact existing pins. Core updates preserve packs, user setup state, publisher
+configuration, settings, reference files and results.
+
+The bundled Full selection lock records what to install; it is not a trust
+root. Official online setup requires a signed catalogue and a reviewed public
+source configuration distributed with the application. The existing key policy
+(D10) remains binding: a repository token or checksum cannot replace the
+maintainer's external signing key. Development fixture keys must never become
+production trust. The [setup guide](tool-setup.md) separates implemented behavior
+from pending official deployment and exact Windows evidence.

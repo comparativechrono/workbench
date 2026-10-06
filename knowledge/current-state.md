@@ -14,6 +14,24 @@ Read this alongside the [release inventory](release-inventory.json) and
 [release handover](cwl-dag-icon-0.9.0-handover.md). Earlier versions and their
 evidence remain unchanged.
 
+## Tool setup development, 0.10.0, 2026-10-06
+
+The user approved Full (recommended), Starter and Custom setup over the existing
+pack manager. Application **0.10.0 is in development, not released**. The native
+setup interface and durable per-pack queue use the 32 current published pack
+identities; application and tool versions remain independent. The small Starter
+retains its unchanged three packs, and Manage tools/offline import remain.
+See [tool setup](tool-setup.md) and the [size assessment](full-bundle-sizing-2026-10-06.md).
+
+Official online setup is **pending deployment**: no maintainer-controlled
+external signing key or independently reviewed official source configuration was
+available in this session. The checked-in source list remains empty; no test key
+or unsigned catalogue is substituted. Publishing preparation validates the
+32-pack lock and can consume the existing external key when provisioned. Native
+candidate, full-pack coexistence and 0.9.0-to-0.10.0 preservation checks are
+separate required gates; source checks and authored gate scripts do not count as
+those passes. Published 0.9.0 and existing pack release bytes remain unchanged.
+
 ## Published CWL results, DAG routing and icon, 2026-10-06
 
 Version **0.9.0** adds a packed CWL v1.2

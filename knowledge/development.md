@@ -9,6 +9,10 @@ Commands below run from the repository root unless stated otherwise.
 Paths in angle brackets are placeholders to replace, not files supplied by Git.
 Read [architecture](architecture.md) before changing an unfamiliar layer.
 
+**Current development:** application 0.10.0 adds native Full/Starter/Custom tool setup.
+See [tool setup](tool-setup.md) for source, packaging and exact Windows gate commands.
+Official signed-catalogue deployment remains pending; this is not a released version.
+
 **Release scope, 2026-10-06:** application 0.9.0 is published from the exact
 accepted `beea34a` application candidate without rebuilding. The release tag
 `app-v0.9.0` and PR #2 merge commit are `1ee61f1`; the separately built updater

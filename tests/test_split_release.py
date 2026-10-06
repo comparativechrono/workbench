@@ -103,6 +103,9 @@ class SplitRelease(unittest.TestCase):
         put(source,'AGENTS.md',b'agent entry point')
         put(source,'knowledge/current-state.md',b'current handover')
         put(source,'knowledge/project.json',b'{"schema":1}')
+        put(source,'publishing/setup-assets.json',b'{"schema":1,"packs":[]}')
+        put(source,'publishing/setup-catalogue.UNSIGNED.json',b'{"schema":1,"fixture":true}')
+        put(source,'publishing/private-key.pem',b'never include local signing material')
         put(source,'docs/source-recovery/README.md',b'nested recovery instructions')
         put(source,'.github/workflows/native-core-check.yml',b'name: Core checks\n')
         put(source,'examples/starter/reference.fa',b'>reference\nACGT\n')
@@ -126,11 +129,13 @@ class SplitRelease(unittest.TestCase):
         with mock.patch.object(package,'SOURCE',source):package.build_sources(base,output,previous)
         with zipfile.ZipFile(output) as zipped:
             expected={'current/AGENTS.md','current/knowledge/current-state.md','current/knowledge/project.json',
-                      'current/docs/source-recovery/README.md','current/.github/workflows/native-core-check.yml'}
+                      'current/docs/source-recovery/README.md','current/.github/workflows/native-core-check.yml',
+                      'current/publishing/setup-assets.json','current/publishing/setup-catalogue.UNSIGNED.json'}
             self.assertTrue(expected<=set(zipped.namelist()))
+            self.assertNotIn('current/publishing/private-key.pem',zipped.namelist())
             self.assertEqual(zipped.read('legacy/native-workbench-0.5.4-source.zip'),legacy)
             record=json.loads(zipped.read('SOURCE-RECOVERY.json'))
-            self.assertEqual(record['release'],'0.9.0')
+            self.assertEqual(record['release'],package.VERSION)
             self.assertEqual(record['build_baseline']['version'],'0.6.0')
             self.assertTrue(expected<={entry['path'] for entry in record['current_source_files']})
         previous.write_bytes(b'changed source ZIP')
@@ -141,6 +146,8 @@ class SplitRelease(unittest.TestCase):
         self.assertTrue({'pack_manager.py','pack_security.py','core_checks.py'}<=set(package.RUNTIME_MODULES))
         self.assertTrue({'reference_provider.py','reference_manager.py','reference_provenance.py'}<=set(package.RUNTIME_MODULES))
         self.assertTrue({'cwl_export.py','dag_routing.py'}<=set(package.RUNTIME_MODULES))
+        self.assertIn('setup_manager.py',package.RUNTIME_MODULES)
+        self.assertIn('setup-profile.json',package.RUNTIME_METADATA)
         self.assertNotIn('server.py',package.RUNTIME_MODULES)
         self.assertEqual(package.STARTER,('align-0.4.0','bam-0.4.0','variants-0.4.0'))
 
@@ -172,6 +179,10 @@ class SplitRelease(unittest.TestCase):
         result=json.loads((app/'manifest.json').read_text())
         self.assertTrue(all(not i['path'].startswith('packs/') for i in result['files']))
         indexed={i['path']:i for i in result['files']}
+        for name in ('setup_manager.py','setup-profile.json'):
+            relative='workspace/'+name
+            self.assertEqual((app/relative).read_bytes(),(source/relative).read_bytes())
+            self.assertEqual(indexed[relative]['sha256'],hashlib.sha256((source/relative).read_bytes()).hexdigest())
         for name in package.NATIVE_NOTICE_FILES:
             path='runtime/licenses/native/'+name
             self.assertEqual((app/path).read_bytes(),(source/'desktop/licenses'/name).read_bytes())
