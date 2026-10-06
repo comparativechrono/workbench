@@ -22,6 +22,7 @@ POINT canvasPanStart{}, canvasPanScroll{}, canvasGesturePoint{};
 POINT canvasWorkspaceScroll{LONG_MIN, LONG_MIN};
 bool canvasNodeMoved = false, canvasPanning = false, canvasHoverDelete = false;
 int canvasZoom = 100, canvasWorkspaceZoom = 100, canvasGestureZoom = 100;
+double canvasPreciseZoom = 100.0;
 int canvasWheelVertical = 0, canvasWheelHorizontal = 0;
 ULONGLONG canvasGestureDistance = 0;
 
@@ -100,8 +101,12 @@ void canvas_scroll(int bar, int action, int delta = 0) {
   canvas_navigation_bounds();
   InvalidateRect(dag, nullptr, FALSE);
 }
-void canvas_zoom_at(int percent, POINT screen) {
-  percent = std::clamp(percent, 25, 200);
+void canvas_zoom_at(double requested, POINT screen) {
+  // Precision touchpads can send wheel deltas much smaller than WHEEL_DELTA.
+  // Retain their fractional progress even when no whole percent is drawn yet.
+  // Explicit reset/button/gesture requests replace this accumulator as well.
+  canvasPreciseZoom = std::clamp(requested, 25.0, 200.0);
+  const int percent = static_cast<int>(canvasPreciseZoom + .5);
   if (percent == canvasZoom)
     return;
   // A pointer anchor makes pinch and wheel zoom keep the same part of the
@@ -132,7 +137,7 @@ void canvas_mouse_wheel(WPARAM w, LPARAM l, bool horizontal = false) {
     POINT pointer{GET_X_LPARAM(l), GET_Y_LPARAM(l)};
     ScreenToClient(dag, &pointer);
     const double factor = 1.0 + std::min(480, std::abs(delta)) / 120.0 * .15;
-    canvas_zoom_at(static_cast<int>(canvasZoom * (delta < 0 ? 1.0 / factor : factor) + .5), pointer);
+    canvas_zoom_at(canvasPreciseZoom * (delta < 0 ? 1.0 / factor : factor), pointer);
   } else {
     const bool across = horizontal || (GET_KEYSTATE_WPARAM(w) & MK_SHIFT);
     int &remainder = across ? canvasWheelHorizontal : canvasWheelVertical;
@@ -287,6 +292,7 @@ void canvas_reset_positions() {
   canvasHoverNode.clear();
   canvasHoverDelete = false;
   canvasZoom = 100;
+  canvasPreciseZoom = canvasZoom;
   canvas_zoom_label();
   dagX = dagY = 0;
   canvasWorkspaceScroll = {LONG_MIN, LONG_MIN};
@@ -300,6 +306,7 @@ void canvas_enter_history() {
   }
   dagX = dagY = 0;
   canvasZoom = 100;
+  canvasPreciseZoom = canvasZoom;
   canvas_zoom_label();
 }
 void canvas_leave_history() {
@@ -308,6 +315,7 @@ void canvas_leave_history() {
     dagY = static_cast<int>(canvasWorkspaceScroll.y);
     canvasZoom = canvasWorkspaceZoom;
   }
+  canvasPreciseZoom = canvasZoom;
   canvas_zoom_label();
   canvasWorkspaceScroll = {LONG_MIN, LONG_MIN};
   InvalidateRect(dag, nullptr, FALSE);

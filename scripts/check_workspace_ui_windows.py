@@ -423,6 +423,25 @@ def host_contracts(root, evidence):
         host.close()
 
 
+def canonical_sam_record(line):
+    """Preserve record values across BAM's typed serialization.
+
+    SAMtools legitimately writes de:f:0.0100 as de:f:0.01 on BAM decoding.
+    Compare float tags at their specified IEEE single-precision storage value;
+    optional tag ordering and redundant numeric text zeros are not biology.
+    """
+    columns = line.split("\t")
+    tags = []
+    for tag in columns[11:]:
+        key, kind, value = tag.split(":", 2)
+        if kind == "f":
+            value = struct.pack("<f", float(value)).hex()
+        elif kind == "i":
+            value = str(int(value))
+        tags.append((key, kind, value))
+    return tuple(columns[:11]) + tuple(sorted(tags))
+
+
 def native_scientific_chain(root, evidence):
     """Exercise the requested SAM-to-BAM path through explicit native-host edits.
 
@@ -481,10 +500,13 @@ def native_scientific_chain(root, evidence):
         require(decoded.returncode == 0, "Bundled SAMtools could not decode sorted BAM: " + decoded.stderr.decode(errors="replace"))
         original_text = sam.read_text(encoding="utf-8")
         decoded_text = decoded.stdout.decode("utf-8")
+        (evidence / "native-workflow-original.sam").write_text(original_text, encoding="utf-8")
+        (evidence / "native-workflow-bam-roundtrip.sam").write_text(decoded_text, encoding="utf-8")
         original = [line for line in original_text.splitlines() if line and not line.startswith("@")]
         converted = [line for line in decoded_text.splitlines() if line and not line.startswith("@")]
         require(len(original) == len(converted) == 202, "Native alignment truth must contain exactly 202 records.")
-        require(Counter(original) == Counter(converted), "SAM-to-BAM conversion changed alignment records, mate flags, sequence, qualities or tags.")
+        require(Counter(map(canonical_sam_record, original)) == Counter(map(canonical_sam_record, converted)),
+                "SAM-to-BAM conversion changed alignment records, mate flags, sequence, qualities or typed tag values.")
         rows = [line.split("\t") for line in converted]
         require(all(int(row[1]) & 1 and int(row[1]) & 2 and not int(row[1]) & 4 for row in rows),
                 "Expected 202 mapped, paired and properly paired synthetic records.")
@@ -503,7 +525,7 @@ def native_scientific_chain(root, evidence):
                   "bam": {"path": str(bam), "sha256": sha256(bam)},
                   "samtoolsSha256": sha256(samtools), "runFolder": str(folder),
                   "checks": ["Native minimap2 alignment chains to SAMtools coordinate-sorted binary BAM using two explicit inputs",
-                             "All 202 synthetic mapped proper-pair records, mate flags, sequence, quality and read groups survive SAM-to-BAM conversion"]}
+                             "All 202 synthetic mapped proper-pair records, mate flags, sequence, quality and typed tags survive SAM-to-BAM conversion"]}
         write_json(evidence / "native-workflow-science.json", result)
         return result
     finally:
@@ -778,12 +800,28 @@ def gui_contracts(root, evidence, report):
                 int(ui.label(ui.child(422)).rstrip("%")) > int(zoom_out.rstrip("%")))
         ui.click_button(422)
         ui.wait("reset workflow zoom to 100 percent", lambda: ui.label(ui.child(422)) == "100%")
-        ui.click_at(*point(canvas, 120, 58))
+        # Precision touchpads may emit Ctrl+wheel deltas far smaller than120.
+        # Inject documented native messages to check accumulation; this is not
+        # evidence that physical trackpad hardware was available on the runner.
+        wheel_x, wheel_y = point(canvas, 180, 210)
+        wheel_coordinates = (wheel_x & 0xffff) | ((wheel_y & 0xffff) << 16)
+        for _ in range(120):
+            ui.send(canvas, 0x020A, (1 << 16) | 0x0008, wheel_coordinates)
+        ui.wait("precision Ctrl-wheel deltas accumulate into visible zoom", lambda:
+                int(ui.label(ui.child(422)).rstrip("%")) > 100)
+        precision_zoom = ui.label(ui.child(422))
+        ui.click_button(422)
+        ui.wait("reset after injected precision wheel", lambda: ui.label(ui.child(422)) == "100%")
+        def current_world_point(x, y):
+            sx, sy = [ui.scroll_info(canvas, bar)["nPos"] for bar in (0, 1)]
+            factor = int(ui.label(ui.child(422)).rstrip("%")) / 100
+            return point(canvas, (x-sx)*factor, (y-sy)*factor)
+        ui.click_at(*current_world_point(120, 58))
         ui.wait("select tool before hover deletion", lambda: has_text("First coordinate sort"))
-        ui.mouse(*point(canvas, 24+242-17, 40+20))
+        ui.mouse(*current_world_point(24+242-17, 40+20))
         time.sleep(.15)
         captures.append(ui.capture("workflow-tool-delete-hover.bmp"))
-        ui.click_at(*point(canvas, 24+242-17, 40+20))
+        ui.click_at(*current_world_point(24+242-17, 40+20))
         ui.wait("hover close removes selected workflow tool", lambda: not has_text("First coordinate sort"))
         ui.click_button(108)
         ui.wait("Undo restores deleted tool and its selection", lambda: has_text("First coordinate sort"))
@@ -800,10 +838,24 @@ def gui_contracts(root, evidence, report):
         captures.append(ui.capture("workflow-explicit-reference-input.bmp"))
         ui.click_button(418)  # Arrange resets presentation only, keeping graph.
         ui.wait("arrange workflow with explicit source", lambda: ui.label(ui.child(422)) == "100%")
-        ui.click_at(*point(canvas, 120, 185))
+        ui.click_at(*point(canvas, 380, 52))
         ui.wait("draft tool name survives the Add input modal loop", lambda: has_text("Saved before Add input"))
         ui.click_at(*point(canvas, 120, 52))
         ui.wait("explicit source fields remain after selecting its consumer tool", lambda:
+                has_text("Reusable genome") and has_text(chosen_reference))
+        select_tool("Index a reference", drag_to=(144, 390))
+        ui.wait("new workflow reference tool has unconnected input", lambda: has_text("Index a reference"))
+        require(len(edits()) == 1, "Unconnected workflow reference tool duplicated a filename form.")
+        # The explicitly created source has one output at (274,97); the new
+        # tool was dropped with header at(24,370), reference input at(24,435).
+        ui.drag(point(canvas, 274, 97), point(canvas, 24, 435))
+        ui.wait("explicit source output connects to a compatible tool input by mouse", lambda: any(
+            c["class"].lower() == "static" and "From:" in c["text"] and "Reusable genome" in c["text"]
+            for c in ui.controls()))
+        require(len(edits()) == 1, "Connected workflow reference tool duplicated the shared filename form.")
+        captures.append(ui.capture("workflow-explicit-input-connected.bmp"))
+        ui.click_at(*point(canvas, 120, 52))
+        ui.wait("select reusable source after physical connection", lambda:
                 has_text("Reusable genome") and has_text(chosen_reference))
         # Arrange puts the sole explicit source at (32,32). Select its header,
         # reveal its own close control, remove it, and verify Undo restores it.
@@ -819,7 +871,10 @@ def gui_contracts(root, evidence, report):
         return {"dpi": dpi, "displayPixels": [ui.user.GetSystemMetrics(0), ui.user.GetSystemMetrics(1)],
                 "captures": captures, "geometryFile": "ui-control-geometry.json", "scrollRendering": rendering,
                 "navigation": {"initialScroll": initial_scroll, "pannedScroll": moved_scroll,
-                               "zoomOutLabel": zoom_out, "resetZoomLabel": ui.label(ui.child(422))},
+                               "zoomOutLabel": zoom_out, "resetZoomLabel": ui.label(ui.child(422)),
+                               "precisionWheel": {"messages": 120, "delta": 1, "flags": "MK_CONTROL",
+                                                  "resultingZoomLabel": precision_zoom,
+                                                  "input": "Injected WM_MOUSEWHEEL on the native canvas; physical trackpad not tested"}},
                 "checks": ["Manage tools loads installed packs on its first click without a modal error and reopens cleanly",
                            "First click opens a previously selected workflow-library row in empty tool mode",
                            "Single-click standalone tool form",
@@ -835,8 +890,10 @@ def gui_contracts(root, evidence, report):
                            "Real repeated option scrolling leaves static text identical to a clean repaint",
                            "Blank-canvas mouse drag pans and reverses the viewport",
                            "Zoom buttons decrease, increase and reset scale; scaled card hit testing selects both tools",
+                           "Injected one-unit native Ctrl-wheel deltas accumulate into visible zoom",
                            "Editing a tool immediately before Add input preserves its draft through the nested modal loop",
                            "Native Add input creates one independently editable reference file slot",
+                           "Actual mouse connection from an explicit input output socket to a tool input without duplicate file fields",
                            "Header hover close deletes a tool and Undo restores its selection",
                            "Header hover close deletes an explicit input and Undo restores its files"],
                 "notificationRegression": {"input": "Queued WM_LBUTTONDBLCLK and WM_LBUTTONUP to the real native ListView",
