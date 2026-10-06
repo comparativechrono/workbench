@@ -44,9 +44,12 @@ records exact downloads, hashes, acceptance and remaining release work. The
 including external input rebinding, optional compatible executable overrides
 and the absence of a universal cross-platform or biological-preflight guarantee.
 Published 0.8.0 archives, release inventory/history and tool-pack bytes remain
-unchanged. The accepted candidate includes its tested 0.6.0 updater. A separate
-0.8.0-to-0.9.0 updater is being prepared against the accepted starter; its build,
-native preservation checks and publication remain pending.
+unchanged. The accepted candidate includes its tested 0.6.0 updater. The separate
+0.8.0-to-0.9.0 updater passed [run 37527359533](https://github.com/comparativechrono/workbench/actions/runs/37527359533):
+13 native checks per path, zero failures/skips, 70 verified core files and
+202 preserved existing files. Post-update reference and scientific/CWL analyses
+passed. The two earlier updater-fixture failures are retained in the handover.
+Publication and independent public-download verification remain pending.
 
 ## Published native interface update, 2026-10-06
 

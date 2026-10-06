@@ -75,7 +75,8 @@
     "cwl_dag_icon_0_9_0_handover": "cwl-dag-icon-0.9.0-handover.md",
     "cwl_dag_icon_0_9_0_validation": "evidence/cwl-dag-icon-0.9.0-validation-2026-10-06.json",
     "cwl_dag_icon_0_9_0_artifact_audit": "evidence/cwl-dag-icon-0.9.0-artifact-audit-2026-10-06.json",
-    "cwl_dag_icon_0_9_0_acceptance": "evidence/cwl-dag-icon-0.9.0-acceptance-2026-10-06.json"
+    "cwl_dag_icon_0_9_0_acceptance": "evidence/cwl-dag-icon-0.9.0-acceptance-2026-10-06.json",
+    "cwl_dag_icon_0_9_0_update_build": "evidence/cwl-dag-icon-0.9.0-update-build-2026-10-06.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -683,7 +684,7 @@
       "Windows pack executables are not translated across operating systems; external resources are not embedded, inferred or downloaded.",
       "Native embedded-runner replay is not execution through a Windows CWL engine.",
       "Diagram routing avoids card interiors but cannot eliminate all crossings or route every obscured socket in overlapping manual layouts.",
-      "User accepted the exact candidate and authorized publication. Publication and public-download verification remain pending. The included updater supports 0.6.0; a separate 0.8.0-to-0.9.0 updater is being prepared and requires its own native preservation gate."
+      "User accepted the exact candidate and authorized publication. Publication and public-download verification remain pending. Both the included 0.6.0 updater and separately built 0.8.0-to-0.9.0 updater have passing native preservation gates."
     ],
     "published_release_unchanged": "0.8.0",
     "archives": [
@@ -701,6 +702,12 @@
         "file": "native-workbench-0.9.0-update-from-0.6.0.zip",
         "bytes": 12951447,
         "sha256": "eed778882bed560e765c1f2c03d6473b2ea07f2b219e4bd81bff7297e67b177d"
+      },
+      {
+        "file": "native-workbench-0.9.0-update-from-0.8.0.zip",
+        "bytes": 12864532,
+        "sha256": "caa50ff7807be889fd9f4fbb617a458b1d2b38f397ce365d4fc7fc17a2511d9e",
+        "build_record": "evidence/cwl-dag-icon-0.9.0-update-build-2026-10-06.json"
       }
     ],
     "handover": "cwl-dag-icon-0.9.0-handover.md",
@@ -793,8 +800,58 @@
       "from_version": "0.6.0",
       "target_version": "0.9.0",
       "preservation_gate_passed": true,
-      "from_0_8_0_built_or_tested": false,
-      "from_0_8_0_status": "preparation in progress; native preservation gate pending"
+      "from_0_8_0_built_or_tested": true,
+      "from_0_8_0_status": "passed native preservation and post-update scientific/CWL checks; publication pending",
+      "from_0_8_0": {
+        "from_version": "0.8.0",
+        "target_version": "0.9.0",
+        "archive": "native-workbench-0.9.0-update-from-0.8.0.zip",
+        "bytes": 12864532,
+        "sha256": "caa50ff7807be889fd9f4fbb617a458b1d2b38f397ce365d4fc7fc17a2511d9e",
+        "application_source_commit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
+        "packaging_validation_commit": "648676c4388f1c4dc9f9af0476bf31f9cfca8c92",
+        "run_id": 37527359533,
+        "run_url": "https://github.com/comparativechrono/workbench/actions/runs/37527359533",
+        "status": "passed",
+        "application_rebuilt": false,
+        "all_jobs_passed": 3,
+        "per_windows_path": {
+          "passed": 13,
+          "failed": 0,
+          "skipped": 0,
+          "core_files_verified": 70,
+          "existing_files_preserved": 202,
+          "preserved_file_changes": 0,
+          "repeated_update_idempotent": true
+        },
+        "scientific_evidence": {
+          "alignment_records": 202,
+          "variant_truth": "starter:1351 G>A; GT=1/1",
+          "outputs_independently_hashed": 20,
+          "native_commands_compared": 18,
+          "cwl_runner_replays": 5,
+          "baseline_and_post_update_reference_analysis_passed": true,
+          "post_update_reference_cwl_checked": true
+        },
+        "build_record": "evidence/cwl-dag-icon-0.9.0-update-build-2026-10-06.json",
+        "native_reports": [
+          "evidence/cwl-dag-icon-0.9.0-update-final-ordinary-2026-10-06.json",
+          "evidence/cwl-dag-icon-0.9.0-update-final-spaces-2026-10-06.json"
+        ],
+        "scope": "Native updater CLI/private runtime; synthetic local reference. Host Python socket operations denied, native subprocesses not OS-firewalled. No updater picker UI or live reference download. Embedded-runner replay is not execution through a Windows CWL engine.",
+        "retained_failed_attempts": [
+          {
+            "run_id": 37526784016,
+            "failure": "Failed before update: fixture expected provider display name instead of provider ID.",
+            "passed_per_path": 1
+          },
+          {
+            "run_id": 37527241170,
+            "failure": "Failed before update: saved-workflow fixture omitted explicit reference-input binding.",
+            "passed_per_path": 1
+          }
+        ]
+      }
     },
     "user_acceptance": {
       "recorded_on": "2026-10-06",

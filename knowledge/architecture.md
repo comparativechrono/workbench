@@ -17,8 +17,9 @@ artifacts/evidence remain unchanged.
 It adds a frozen packed CWL result, routes SVG/native DAG edges around cards and
 builds the native application icon from repository SVG. Exact application source
 `beea34a` passed the recorded source/interoperability and packaged Windows gates;
-the user accepted it and authorized publication. Publication and the separate
-0.8.0 updater gate remain pending. See [CWL results and presentation](cwl-results.md)
+the user accepted it and authorized publication. The separate 0.8.0 updater
+also passed its native preservation and post-update execution gate; publication
+remains pending. See [CWL results and presentation](cwl-results.md)
 and the [candidate handover](cwl-dag-icon-0.9.0-handover.md) for exact identities,
 retained validator failures and limits.
 

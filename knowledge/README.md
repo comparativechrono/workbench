@@ -66,8 +66,8 @@ Published 0.7.0 and its evidence remain unchanged.
 
 The **0.9.0** CWL export, routed DAG and SVG-derived icon candidate has passed
 its exact-package checks. The user accepted it and authorized release on
-2026-10-06. Publication and a separately validated updater from 0.8.0 are in
-progress; see the [0.9.0 handover](cwl-dag-icon-0.9.0-handover.md) and
+2026-10-06. The separate updater from 0.8.0 passed 13 native checks per path;
+publication and public-download verification remain in progress; see the [0.9.0 handover](cwl-dag-icon-0.9.0-handover.md) and
 [CWL feature guide](cwl-results.md). Accepted application bytes are frozen.
 
 ## Reading order

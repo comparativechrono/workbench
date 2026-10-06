@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "sourceCommit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
+  "validationCommit": "316f707234ae10782b547bc619cdf8c41ed42fa7",
+  "workflowRun": "37527241170",
+  "startedUtc": "2026-10-06T20:33:21.222087+00:00",
+  "platform": "Windows-2022Server-10.0.20348-SP0",
+  "pythonVersion": "3.13.16",
+  "nativeWindowsHost": true,
+  "nativeWindowsExecuted": false,
+  "success": false,
+  "baseVersion": "0.8.0",
+  "appVersion": "0.9.0",
+  "starterSha256": "c2661c144e073c4efdd190ffd186bacd9398b6413b81770d7a057c3947eecf02",
+  "baselineSha256": "df001a80033ff8e834045ec683c79672e0efdbd4880fb89fca8bf8c36d830fdc",
+  "updateSha256": "6a4a09b6b7f43edbee29126b2d3e43d3f000c7a11658eed26309dd43715e2218",
+  "scope": "Native updater CLI/private runtime, preservation and offline native scientific/CWL checks; no updater picker UI or live reference download.",
+  "networkScope": "Private-host Python socket operations denied by audit hook; native subprocesses are not OS-firewalled.",
+  "checks": [
+    "Frozen baseline, accepted target and updater inventories match the exact archives and manifest identities."
+  ],
+  "failures": [
+    {
+      "error": "save: Reference genome needs 1 source(s).",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_update_090_windows.py\", line 258, in main\n    migration(args, report)\n    ~~~~~~~~~^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_update_090_windows.py\", line 184, in migration\n    host.call('save', {'kind': 'pipeline', 'name': 'Preserve connected pinned pipeline'})\n    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_references_windows.py\", line 139, in call\n    raise ValueError(method + \": \" + str(response.get(\"error\")))\nValueError: save: Reference genome needs 1 source(s).\n"
+    }
+  ],
+  "skips": [],
+  "baselineReferenceRun": {
+    "folder": "D:\\a\\_temp\\path with spaces\\baseline\\native-workbench\\results\\existing-reference-run\\run-20261006-203322-d301c882",
+    "nativeWindowsExecuted": true,
+    "contigs": 1,
+    "referenceSha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+    "runSha256": "d417d082f437c640a22e05db74e0e559fd7fd63a5cd77d04a2eb000e506c0390",
+    "cwlChecked": false
+  },
+  "passed": 1,
+  "finishedUtc": "2026-10-06T20:33:22.459461+00:00"
+}

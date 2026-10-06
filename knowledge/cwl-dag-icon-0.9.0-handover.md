@@ -89,13 +89,66 @@ Real connection interactions and native icons remain checked in the focused
 gate. No application bytes changed to repair these validator fixtures, and all
 three earlier failed runs remain failed historical records.
 
+## Updater from the published 0.8.0 baseline
+
+The additional updater is built from the published 0.8.0 starter and the accepted
+0.9.0 starter without changing accepted application or updater-engine bytes.
+Its dedicated native gate is separate from the earlier 0.6.0 updater checks.
+
+Two early native gate attempts failed before applying the update and remain
+failed evidence. [Run 37526784016](https://github.com/comparativechrono/workbench/actions/runs/37526784016)
+(source `a2312028f4bc6b1849c42a9c4acb8fb918d75310`) passed one check per path,
+then the fixture incorrectly expected a provider display name in provenance
+that uses the provider ID. The unchanged 0.8.0 reference analysis completed,
+but this did not establish updater success. The retained
+[ordinary report](evidence/cwl-dag-icon-0.9.0-updater-attempt-1-ordinary-2026-10-06.json)
+and [spaces report](evidence/cwl-dag-icon-0.9.0-updater-attempt-1-spaces-2026-10-06.json)
+record the failure.
+
+[Run 37527241170](https://github.com/comparativechrono/workbench/actions/runs/37527241170)
+(source `316f707`) also failed before the update: its saved-workflow fixture
+omitted an explicit reference-input binding and was rejected with
+`Reference genome needs 1 source(s).` Its
+[ordinary report](evidence/cwl-dag-icon-0.9.0-updater-attempt-2-ordinary-2026-10-06.json)
+and [spaces report](evidence/cwl-dag-icon-0.9.0-updater-attempt-2-spaces-2026-10-06.json)
+remain diagnostics. These were corrections to validation fixtures, not changes
+to the accepted application or updater engine.
+
+The corrected fixture at **`648676c4388f1c4dc9f9af0476bf31f9cfca8c92`** passed
+[run 37527359533](https://github.com/comparativechrono/workbench/actions/runs/37527359533):
+all three jobs succeeded, with **13 native checks per ordinary/space-containing
+path, zero failures and zero skips**. Each native run verified 70 core files,
+preserved all 202 tracked existing files without changes, and repeated the
+update idempotently. Saved settings, pinned workflows, packs, reference files
+and existing results were included in preservation checks.
+
+Real SAMtools reference analysis succeeded before and after the update; the
+post-update result included CWL reference provenance. The reference fixture was
+created from the packaged synthetic FASTA, not newly downloaded. Python host
+socket operations were denied; native subprocesses were not OS-firewalled.
+The updated app also passed seven scientific/export/SVG checks: 202 alignment
+records, the known `starter:1351 G>A; GT=1/1` variant, 20 independently hashed
+outputs, 18 command comparisons and five embedded-runner replays. This checks
+the native updater CLI/private runtime, not its folder-picker UI or a Windows
+CWL-engine invocation.
+
+The [build record](evidence/cwl-dag-icon-0.9.0-update-build-2026-10-06.json),
+[ordinary native report](evidence/cwl-dag-icon-0.9.0-update-final-ordinary-2026-10-06.json)
+and [spaces native report](evidence/cwl-dag-icon-0.9.0-update-final-spaces-2026-10-06.json)
+were downloaded and verified. The new archive is
+`native-workbench-0.9.0-update-from-0.8.0.zip`, **12,864,532 bytes**, SHA-256
+`caa50ff7807be889fd9f4fbb617a458b1d2b38f397ce365d4fc7fc17a2511d9e`.
+It changes seven core files, removes none, and preserves all 143 starter-pack
+files. Its accepted target application, updater engine and launcher bytes were
+not rebuilt. The original candidate checksum list remains unchanged; the new
+updater has a separate `UPDATE-SHA256SUMS.txt`.
+
 ## Remaining scope
 
 User acceptance and release authorization are recorded above. Publication and
 independent verification of public downloads remain outstanding. The accepted
-candidate includes a tested updater for **0.6.0 only**. A separate 0.8.0-to-0.9.0
-updater is being prepared against the unchanged accepted starter; its build and
-native preservation checks remain pending. Independent CWL
+candidate includes a tested updater for **0.6.0**. The separate **0.8.0-to-0.9.0**
+updater now has a passing native preservation gate, recorded above. Independent CWL
 execution needs a compatible engine, Python 3.10+, matching packs and data;
 Windows binaries are not translated to another operating system. Optional
 executable replacements and rebound data need their own scientific validation.

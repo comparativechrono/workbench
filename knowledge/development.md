@@ -70,8 +70,14 @@ capture where the VM taskbar occludes the physical button position; the separate
 workspace gate covers actual pointer zoom. Application source remains `beea34a`.
 The user has accepted this exact candidate and authorized publication; see the
 [acceptance record](evidence/cwl-dag-icon-0.9.0-acceptance-2026-10-06.json). The included
-0.6.0 updater passed its preservation gate. A separate 0.8.0-to-0.9.0 updater is
-being prepared against the accepted starter and still needs its native gate.
+0.6.0 updater passed its preservation gate. The separate 0.8.0-to-0.9.0 updater
+was built by [`build_update_090.py`](../scripts/build_update_090.py) against the
+unchanged accepted starter, and passed the focused native gate at
+[`check_update_090_windows.py`](../scripts/check_update_090_windows.py) in
+[run 37527359533](https://github.com/comparativechrono/workbench/actions/runs/37527359533):
+13 checks per path, zero failures/skips, 70 core files verified and 202 existing
+files preserved, with native post-update reference and scientific/CWL execution.
+The handover records exact updater bytes, earlier fixture failures and limits.
 Publication and independent public-download verification remain pending.
 
 ## Start without disturbing existing work

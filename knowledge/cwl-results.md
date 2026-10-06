@@ -168,6 +168,10 @@ the original Windows locations were unavailable there, so those location
 warnings are retained. That is schema validation, not a cross-platform rerun.
 Native embedded-runner replay is likewise distinct from a Windows CWL-engine
 invocation. The accepted candidate updater and its passing preservation checks
-cover 0.6.0. A separate 0.8.0-to-0.9.0 updater is being prepared and still needs
-its native preservation gate. The [user acceptance record](evidence/cwl-dag-icon-0.9.0-acceptance-2026-10-06.json)
+cover 0.6.0. The separate 0.8.0-to-0.9.0 updater passed 13 native checks per
+ordinary/space-containing path in [run 37527359533](https://github.com/comparativechrono/workbench/actions/runs/37527359533),
+preserving 202 existing files and verifying 70 core files. Post-update native
+reference analysis, CWL provenance and scientific/export checks passed. The
+[handover](cwl-dag-icon-0.9.0-handover.md) retains the two earlier failed updater
+fixtures and the host-socket, synthetic-reference and CLI-only test limits. The [user acceptance record](evidence/cwl-dag-icon-0.9.0-acceptance-2026-10-06.json)
 authorizes publication without broadening these validation claims.
