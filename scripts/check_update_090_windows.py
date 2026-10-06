@@ -180,6 +180,8 @@ def migration(args, report):
         host.call('workspace/mode', {'mode': 'workflow'})
         first = host.call('model', {'action': 'add_tool', 'payload': {'toolId': 'bam/reference-index'}})['selected']
         second = host.call('model', {'action': 'add_tool', 'payload': {'toolId': 'bam/reference-index'}})['selected']
+        source = host.call('model', {'action': 'add_input', 'payload': {'inputType': 'reference'}})['selected']
+        host.call('model', {'action': 'connect', 'payload': {'nodeId': first, 'portId': 'reference', 'refs': [source]}})
         host.call('model', {'action': 'connect', 'payload': {'nodeId': second, 'portId': 'reference', 'refs': [first + '::reference']}})
         host.call('save', {'kind': 'pipeline', 'name': 'Preserve connected pinned pipeline'})
     finally:
