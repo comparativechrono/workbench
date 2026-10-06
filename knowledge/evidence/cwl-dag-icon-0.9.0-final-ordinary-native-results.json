@@ -1,0 +1,421 @@
+{
+  "schema": 1,
+  "success": true,
+  "startedUtc": "2026-10-06T15:38:42.120922+00:00",
+  "sourceCommit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
+  "assetSha256": "c2661c144e073c4efdd190ffd186bacd9398b6413b81770d7a057c3947eecf02",
+  "gateSha256": "d543240a8f44ddd587f35854938f0484b6546bc33c77ba233631f3fa7b06afbb",
+  "platform": "Windows-2022Server-10.0.20348-SP0",
+  "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+  "checks": [
+    "Exact packaged integrity check and all five starter scientific operations execute without failures or skips.",
+    "Results include a packed CWL v1.2 workflow tied to the frozen plan, real completion record and final export hash.",
+    "CWL source hashes, file roles, scientific parameters, complete output set, pack pins and reference metadata match frozen native provenance.",
+    "Every exported command/copy/binary-pipe definition expands to the actual native bridge argument record.",
+    "All five embedded CWL runners execute independently with packaged private Python and pinned native pack programs.",
+    "Independent CWL replay preserves 202 proper-pair SAM/BAM records and known starter:1351 G>A homozygous SNP truth.",
+    "Saved scientific DAG includes every actual dependency and avoids all unrelated cards with padding, including skipped ranks.",
+    "Packaged executable contains all nine SVG-derived icon resolutions; actual large/small class icons match that resource and differ from Windows default.",
+    "Real native canvas accepts compatible forward and backward connections across manually positioned cards and retains normal/zoomed captures."
+  ],
+  "skips": [],
+  "nativeWindowsExecuted": true,
+  "nativeGUILaunched": true,
+  "nativeGUIValidated": true,
+  "appFiles": {
+    "NativeWorkbench.exe": "726f8411afa2540cf03c9c656244b27ce7890e7ce2b25f9499d204dc7af0f9c6",
+    "WorkbenchBridge.exe": "040499b0c3c8cf19187ece52274491271d2ab5d87a891bef61ab12359ffd0c30",
+    "runtime\\python\\python.exe": "31fe10b4ed82a2f960af0ef9931f46a4b84ff286f8b6ffd9dee098cf4f10f17f",
+    "workspace\\engine.py": "8275b8058fae82a538bd127634531fc2d1a8f0daf8bd95dc00d8bd1b35553b27",
+    "workspace\\cwl_export.py": "18ea65dcb6283da4b060f0d50e3419362d0be3739b8a831092e1c855b8553ecc",
+    "workspace\\dag_routing.py": "eb79a385a6426e8ce9778124620fe48c69e8c6ca3a7a9351b95780c99e869fe4"
+  },
+  "appVersion": "0.9.0",
+  "dag": {
+    "cards": 7,
+    "edges": 8,
+    "segments": 18,
+    "skipRankEdges": 2,
+    "paddingChecked": 9,
+    "sha256": "91b94a4a526281f848fdf090a1bac59e50a3be244910b9678675b21c265dfbc6"
+  },
+  "science": {
+    "networkSocketOperationsDeniedForHost": true,
+    "nativeWindowsExecuted": true,
+    "nativeCommandsCompared": 18,
+    "outputsIndependentlyHashed": 20,
+    "cwlRunnerReplays": [
+      {
+        "step": "step_1",
+        "scriptSha256": "39e0360c49b2e1bf1478a6d5b5f398f4fbe9f18f3fdb6e7584a03aba855b8da2",
+        "exitCode": 0,
+        "outputs": [
+          {
+            "id": "sam",
+            "sha256": "6c90441b35a128b9af74a8b23872a2e0a42780b78b29a683e5b2268a27228bce"
+          },
+          {
+            "id": "pair-check",
+            "sha256": "2c25256e25928cff40cffb9069f201138ae4bd083e3ab626b82cd55099e1c436"
+          }
+        ]
+      },
+      {
+        "step": "step_2",
+        "scriptSha256": "62e20f8334aa67d2d904f25083834af4df53e881bdef3cb320c37a169787dd3f",
+        "exitCode": 0,
+        "outputs": [
+          {
+            "id": "bam",
+            "sha256": "660274c04ad7333217c342d7d36ec5266801d312d8195c6189255c130ea841ec"
+          },
+          {
+            "id": "duplicate-stats",
+            "sha256": "1959d90371ebbb939f723a3e8b952e3f5aff9b0764a596d6b23fd771c039a9b0"
+          },
+          {
+            "id": "flagstat",
+            "sha256": "b9b7e24ae5f0f1f69ef4feb916513d0acc088f3d18b8d75664c38e5ce092cf8f"
+          },
+          {
+            "id": "alignment-stats",
+            "sha256": "ee8f9d5854b380fefd27eddb1da03e27215c485b295cf949278d1a60c1aa130a"
+          },
+          {
+            "id": "bam-index",
+            "sha256": "c2e15d40ab0eea0bf5f687d88d5884262b3841abda03a4f8a5a398fdead6c84f"
+          },
+          {
+            "id": "names",
+            "sha256": "22d0e081042e726905f5838b6507cddaef369c37ca204687d1ad27708702cc0e"
+          },
+          {
+            "id": "fixed",
+            "sha256": "f108fc56543b155232e595daf2e4f27353eb3bc98d2d35c6347092b576b11ecb"
+          },
+          {
+            "id": "coordinates",
+            "sha256": "b8094e2471ce0467572d6cddb68a265fa0cd3edb76cb4b6831ffde689be38c1a"
+          }
+        ]
+      },
+      {
+        "step": "step_3",
+        "scriptSha256": "55ed0a4315f34b073402058068dda3d17fd5a1cd420a1af227d34a56d9b3c019",
+        "exitCode": 0,
+        "outputs": [
+          {
+            "id": "variants",
+            "sha256": "270ddb9d7e1416f9ae52e18b08bce4e6339189f6512e94a2b206cc12082e20d8"
+          },
+          {
+            "id": "variant-stats",
+            "sha256": "1b344f279162ce198521140a6410c44d5ea5bf4821ab8bb153aa9fe80140d4b8"
+          },
+          {
+            "id": "variants-index",
+            "sha256": "4387d585c36b61d36bc407f02eb05765e0e4e80e9afcd2f359da318d92cfe4e9"
+          },
+          {
+            "id": "pileup",
+            "sha256": "dda47d3c36805783e29483bdb1cafc9d87102a37a25cdc360ad3b31f17f8f835"
+          },
+          {
+            "id": "calls",
+            "sha256": "e9bbcce93f02da8cad28151069003f3c4080a97d57afba171b21812faa99495e"
+          },
+          {
+            "id": "normalized",
+            "sha256": "b03d531ffeae4885d56df927a463063d658283a47fe8ab3cb13ad2603adc9936"
+          },
+          {
+            "id": "reference",
+            "sha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee"
+          },
+          {
+            "id": "reference-index",
+            "sha256": "6bf365006e0d9d03de4e0fbfdfc082c6e5bee611888e54450bc2516614ae95a3"
+          }
+        ]
+      },
+      {
+        "step": "step_4",
+        "scriptSha256": "ec2896685a5c666104cb21d2bb8c8ffa93cd895c1d1b0908cb92078528177967",
+        "exitCode": 0,
+        "outputs": [
+          {
+            "id": "statistics",
+            "sha256": "1b344f279162ce198521140a6410c44d5ea5bf4821ab8bb153aa9fe80140d4b8"
+          }
+        ]
+      },
+      {
+        "step": "step_5",
+        "scriptSha256": "03bc8f86144fe2d9e85d18dc898bedfb0f44c545654e542c32beae82c11b190a",
+        "exitCode": 0,
+        "outputs": [
+          {
+            "id": "report",
+            "sha256": "f1a3619b76738c4881e1d13a9507a9c68d10de4b2c8fe2cbdf88672c493f0b7c"
+          }
+        ]
+      }
+    ],
+    "alignmentRecords": 202,
+    "variantTruth": "starter:1351 G>A; GT=1/1",
+    "scope": "Native private-host execution plus embedded-runner replay; not a Windows cwltool invocation."
+  },
+  "gui": {
+    "icons": {
+      "groupResource": 101,
+      "frames": [
+        {
+          "width": 16,
+          "height": 16,
+          "bitDepth": 32,
+          "bytes": 1128,
+          "resourceId": 1
+        },
+        {
+          "width": 20,
+          "height": 20,
+          "bitDepth": 32,
+          "bytes": 1720,
+          "resourceId": 2
+        },
+        {
+          "width": 24,
+          "height": 24,
+          "bitDepth": 32,
+          "bytes": 2440,
+          "resourceId": 3
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bitDepth": 32,
+          "bytes": 4264,
+          "resourceId": 4
+        },
+        {
+          "width": 40,
+          "height": 40,
+          "bitDepth": 32,
+          "bytes": 6760,
+          "resourceId": 5
+        },
+        {
+          "width": 48,
+          "height": 48,
+          "bitDepth": 32,
+          "bytes": 9640,
+          "resourceId": 6
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bitDepth": 32,
+          "bytes": 16936,
+          "resourceId": 7
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bitDepth": 32,
+          "bytes": 1606,
+          "resourceId": 8
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bitDepth": 32,
+          "bytes": 3105,
+          "resourceId": 9
+        }
+      ],
+      "windowClassIcons": [
+        {
+          "kind": "large",
+          "pixels": 32,
+          "bitmapWidth": 32,
+          "bitmapHeight": 32,
+          "visibleRgbSha256": "af31660c1b199f1fda4389806560ec8af7118f09fa2905f382b8e78235b57416",
+          "stockRgbSha256": "f9fc9156e5bf52e3e4300882c888474560aa27dccc551f334fe4991d9502004f"
+        },
+        {
+          "kind": "small",
+          "pixels": 16,
+          "bitmapWidth": 16,
+          "bitmapHeight": 16,
+          "visibleRgbSha256": "cdc8e04c11403e45d64952a65cbcf5430ebc08d9c438177bb45114469e7e84b9",
+          "stockRgbSha256": "36436e698b2d4cc358f00f427b74cc1a66b3aac823ef701f7735ab39beab99c7"
+        }
+      ]
+    },
+    "captures": [
+      {
+        "path": "application-icon-normal.bmp",
+        "width": 1044,
+        "height": 788,
+        "sha256": "09c90dc18a2f79afe92bf6fe3aee0c356a707de65283b8e275e1688c47e1eb26"
+      },
+      {
+        "path": "workflow-backward-routing.bmp",
+        "width": 1044,
+        "height": 788,
+        "sha256": "b4a2f8b0c7ec378c1d6dca780fb2e1ddbec85966f349951ba283e1b5d812ed22"
+      },
+      {
+        "path": "workflow-backward-routing-zoomed.bmp",
+        "width": 1044,
+        "height": 788,
+        "sha256": "b888a515298965ef492d0f9a2e59d5e0d6b10be34fa7a9f628fc62dd14ed761c"
+      }
+    ],
+    "dpi": 96,
+    "routingFixture": {
+      "cards": [
+        {
+          "name": "Route producer",
+          "x": 24,
+          "y": 24
+        },
+        {
+          "name": "Route middle",
+          "x": 191,
+          "y": 194
+        },
+        {
+          "name": "Route backward consumer",
+          "x": 24,
+          "y": 364
+        }
+      ],
+      "geometryFile": "routing-fixture-geometry.json",
+      "connections": [
+        "producer -> middle",
+        "middle -> backward consumer"
+      ],
+      "scope": "Real native pointer drags and compatibility confirmation; normal and BM_CLICK-activated zoomed pixel captures for visual review. Physical zoom-button clicks are covered by the separate workspace gate. No native route-coordinate introspection or automatic pixel geometry assertion."
+    },
+    "checks": [
+      "Packaged executable contains all nine SVG-derived icon resolutions; actual large/small class icons match that resource and differ from Windows default.",
+      "Real native canvas accepts compatible forward and backward connections across manually positioned cards and retains normal/zoomed captures."
+    ]
+  },
+  "passed": 9,
+  "failed": 0,
+  "completedUtc": "2026-10-06T15:38:48.989817+00:00",
+  "evidenceFiles": [
+    {
+      "file": "application-icon-normal.bmp",
+      "bytes": 3290742,
+      "sha256": "09c90dc18a2f79afe92bf6fe3aee0c356a707de65283b8e275e1688c47e1eb26"
+    },
+    {
+      "file": "installation-service-result.json",
+      "bytes": 37851,
+      "sha256": "da0c20b5ecebc1a45efca909a06ff8281664bb97c4390d7b114954a909260add"
+    },
+    {
+      "file": "methods-completed.txt",
+      "bytes": 2199,
+      "sha256": "77c325da4276cfcbc3402bfa4e0859c6f89ccdd692c9ab3c1ccfdfce0688aec1"
+    },
+    {
+      "file": "native-icon-checks.json",
+      "bytes": 1801,
+      "sha256": "b0fe060bf514a41d84308b0476848d3190887ab0d614fcd750f811c287960ef3"
+    },
+    {
+      "file": "pipeline.svg",
+      "bytes": 6038,
+      "sha256": "91b94a4a526281f848fdf090a1bac59e50a3be244910b9678675b21c265dfbc6"
+    },
+    {
+      "file": "plan.json",
+      "bytes": 53331,
+      "sha256": "d8d618122d11928db9c20a9abcbcc148d921918df028140993d513c55f1abcb2"
+    },
+    {
+      "file": "results-host.stderr.txt",
+      "bytes": 299,
+      "sha256": "84afca693c3501799d09bc2b08ffd34613041c36417d320cc8833b3bb6a80c11"
+    },
+    {
+      "file": "results-ui-worker.json",
+      "bytes": 9043,
+      "sha256": "67bbe6e3ea00edd8c9ddae257616e8827792e09adafe62eaf59f1dbc73c5b497"
+    },
+    {
+      "file": "results-ui-worker.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "routing-fixture-geometry.json",
+      "bytes": 904,
+      "sha256": "d7032d271e4f7ccbaf569966e19d788d3040ec5ebf251a2da47b65a5cf6a9a35"
+    },
+    {
+      "file": "run.json",
+      "bytes": 33858,
+      "sha256": "6a9146dabdfe293642372d80dfa6b9b64ff942dece7c90baf18bc83a50d42689"
+    },
+    {
+      "file": "step_1-native-run.json",
+      "bytes": 8501,
+      "sha256": "98b4d802b3e19c262f7f1ff4efefc917b38eb0d244e463e6098b1ac9806c4916"
+    },
+    {
+      "file": "step_2-native-run.json",
+      "bytes": 19679,
+      "sha256": "247878ff846001f5b949beb627d3182de2e9346c858b40496dbb53086141ee60"
+    },
+    {
+      "file": "step_3-native-run.json",
+      "bytes": 21207,
+      "sha256": "e36a57fa13344973200e93f8cb6a0adf2a163ce84b2e4c1aad3be5deaf654091"
+    },
+    {
+      "file": "step_4-native-run.json",
+      "bytes": 5143,
+      "sha256": "d1f6950e90120d72fe0c3d7b84458107c3ec90a5ee7a506a7a10cd3a7ac7fd9d"
+    },
+    {
+      "file": "ui-desktop-host.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "ui-events.jsonl",
+      "bytes": 1413,
+      "sha256": "eaa27dc6f372d73165bfe85a6b1d1c65854eee669c9afd7562bc212c4ffd187e"
+    },
+    {
+      "file": "ui-progress.json",
+      "bytes": 115,
+      "sha256": "2614cfe4ad56e4435c9f8c01383bc4cec199d9dcaf5d378a6b1bca126961e212"
+    },
+    {
+      "file": "validation-context.json",
+      "bytes": 308,
+      "sha256": "d37255ed1b47c8839959c22db81cb456c5ea5ec802681611d0dbfdd20916c539"
+    },
+    {
+      "file": "workflow-backward-routing-zoomed.bmp",
+      "bytes": 3290742,
+      "sha256": "b888a515298965ef492d0f9a2e59d5e0d6b10be34fa7a9f628fc62dd14ed761c"
+    },
+    {
+      "file": "workflow-backward-routing.bmp",
+      "bytes": 3290742,
+      "sha256": "b4a2f8b0c7ec378c1d6dca780fb2e1ddbec85966f349951ba283e1b5d812ed22"
+    },
+    {
+      "file": "workflow.cwl",
+      "bytes": 147950,
+      "sha256": "9b1280b5f212accddfedf7153c6ed2367f2ea4582c3b7d220ffe76066fe86d87"
+    }
+  ]
+}

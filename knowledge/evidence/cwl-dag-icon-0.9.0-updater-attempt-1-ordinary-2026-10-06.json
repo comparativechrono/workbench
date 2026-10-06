@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "sourceCommit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
+  "validationCommit": "a2312028f4bc6b1849c42a9c4acb8fb918d75310",
+  "workflowRun": "37526784016",
+  "startedUtc": "2026-10-06T20:29:36.627611+00:00",
+  "platform": "Windows-2022Server-10.0.20348-SP0",
+  "pythonVersion": "3.13.16",
+  "nativeWindowsHost": true,
+  "nativeWindowsExecuted": false,
+  "success": false,
+  "baseVersion": "0.8.0",
+  "appVersion": "0.9.0",
+  "starterSha256": "c2661c144e073c4efdd190ffd186bacd9398b6413b81770d7a057c3947eecf02",
+  "baselineSha256": "df001a80033ff8e834045ec683c79672e0efdbd4880fb89fca8bf8c36d830fdc",
+  "updateSha256": "70eaf2a693060a80ceadf81a68cd530722a1fc0c762906b4e01328992365902f",
+  "scope": "Native updater CLI/private runtime, preservation and offline native scientific/CWL checks; no updater picker UI or live reference download.",
+  "networkScope": "Private-host Python socket operations denied by audit hook; native subprocesses are not OS-firewalled.",
+  "checks": [
+    "Frozen baseline, accepted target and updater inventories match the exact archives and manifest identities."
+  ],
+  "failures": [
+    {
+      "error": "Completed methods lost the preserved reference provenance.",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_update_090_windows.py\", line 243, in main\n    migration(args, report)\n    ~~~~~~~~~^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_update_090_windows.py\", line 160, in migration\n    report['baselineReferenceRun'] = local_reference_run(host, base, evidence, record, 'existing-reference-run')\n                                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_update_090_windows.py\", line 111, in local_reference_run\n    require('Synthetic update fixture' in (folder / 'methods-completed.txt').read_text(encoding='utf-8'),\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n            'Completed methods lost the preserved reference provenance.')\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_references_windows.py\", line 47, in require\n    raise AssertionError(message)\nAssertionError: Completed methods lost the preserved reference provenance.\n"
+    }
+  ],
+  "skips": [],
+  "passed": 1,
+  "finishedUtc": "2026-10-06T20:29:37.849019+00:00"
+}

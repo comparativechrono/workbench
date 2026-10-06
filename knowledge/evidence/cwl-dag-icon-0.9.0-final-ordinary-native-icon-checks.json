@@ -1,0 +1,86 @@
+{
+  "groupResource": 101,
+  "frames": [
+    {
+      "width": 16,
+      "height": 16,
+      "bitDepth": 32,
+      "bytes": 1128,
+      "resourceId": 1
+    },
+    {
+      "width": 20,
+      "height": 20,
+      "bitDepth": 32,
+      "bytes": 1720,
+      "resourceId": 2
+    },
+    {
+      "width": 24,
+      "height": 24,
+      "bitDepth": 32,
+      "bytes": 2440,
+      "resourceId": 3
+    },
+    {
+      "width": 32,
+      "height": 32,
+      "bitDepth": 32,
+      "bytes": 4264,
+      "resourceId": 4
+    },
+    {
+      "width": 40,
+      "height": 40,
+      "bitDepth": 32,
+      "bytes": 6760,
+      "resourceId": 5
+    },
+    {
+      "width": 48,
+      "height": 48,
+      "bitDepth": 32,
+      "bytes": 9640,
+      "resourceId": 6
+    },
+    {
+      "width": 64,
+      "height": 64,
+      "bitDepth": 32,
+      "bytes": 16936,
+      "resourceId": 7
+    },
+    {
+      "width": 128,
+      "height": 128,
+      "bitDepth": 32,
+      "bytes": 1606,
+      "resourceId": 8
+    },
+    {
+      "width": 256,
+      "height": 256,
+      "bitDepth": 32,
+      "bytes": 3105,
+      "resourceId": 9
+    }
+  ],
+  "windowClassIcons": [
+    {
+      "kind": "large",
+      "pixels": 32,
+      "bitmapWidth": 32,
+      "bitmapHeight": 32,
+      "visibleRgbSha256": "af31660c1b199f1fda4389806560ec8af7118f09fa2905f382b8e78235b57416",
+      "stockRgbSha256": "f9fc9156e5bf52e3e4300882c888474560aa27dccc551f334fe4991d9502004f"
+    },
+    {
+      "kind": "small",
+      "pixels": 16,
+      "bitmapWidth": 16,
+      "bitmapHeight": 16,
+      "visibleRgbSha256": "cdc8e04c11403e45d64952a65cbcf5430ebc08d9c438177bb45114469e7e84b9",
+      "stockRgbSha256": "36436e698b2d4cc358f00f427b74cc1a66b3aac823ef701f7735ab39beab99c7"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "createdUtc": "2026-10-06T20:33:46.055436+00:00",
+  "sourceCommit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
+  "packagingCommit": "648676c4388f1c4dc9f9af0476bf31f9cfca8c92",
+  "workflowRun": "37527359533",
+  "platform": "Linux-6.8.0-1064-azure-x86_64-with-glibc2.35",
+  "applicationRebuilt": false,
+  "nativeWindowsExecutedByBuilder": false,
+  "baseVersion": "0.8.0",
+  "targetVersion": "0.9.0",
+  "inputs": [
+    {
+      "file": "native-workbench-0.9.0-starter-windows.zip",
+      "bytes": 17002821,
+      "sha256": "c2661c144e073c4efdd190ffd186bacd9398b6413b81770d7a057c3947eecf02"
+    },
+    {
+      "file": "baseline-0.8.0.zip",
+      "bytes": 16948940,
+      "sha256": "df001a80033ff8e834045ec683c79672e0efdbd4880fb89fca8bf8c36d830fdc"
+    },
+    {
+      "file": "native-workbench-0.9.0-update-from-0.6.0.zip",
+      "bytes": 12951447,
+      "sha256": "eed778882bed560e765c1f2c03d6473b2ea07f2b219e4bd81bff7297e67b177d"
+    }
+  ],
+  "baselineSha256": "df001a80033ff8e834045ec683c79672e0efdbd4880fb89fca8bf8c36d830fdc",
+  "starterSha256": "c2661c144e073c4efdd190ffd186bacd9398b6413b81770d7a057c3947eecf02",
+  "updateSha256": "caa50ff7807be889fd9f4fbb617a458b1d2b38f397ce365d4fc7fc17a2511d9e",
+  "archive": {
+    "file": "native-workbench-0.9.0-update-from-0.8.0.zip",
+    "bytes": 12864532,
+    "sha256": "caa50ff7807be889fd9f4fbb617a458b1d2b38f397ce365d4fc7fc17a2511d9e"
+  },
+  "baseManifestSha256": "2624183924564bc92f9146448c3a2a8d336a379034e168a25cd0c8c43c5ae573",
+  "targetManifestSha256": "d86fce3dc88b368fc7e1f0c0237154089fd39cb854990de29c35d0b55a0bc62d",
+  "launcherSha256": "cd81099a9e8a69d4b30b0dbd63b5ce90451f7b1f3c96408a7b72a0ffb5254343",
+  "coreFilesVerified": 70,
+  "unchangedPackFiles": 143,
+  "result": {
+    "base_version": "0.8.0",
+    "target_version": "0.9.0",
+    "migration": false,
+    "replacement_files": 7,
+    "obsolete_files": 0,
+    "blob_bytes": 3091399,
+    "packs_changed": false
+  },
+  "scope": "App-only update derived from accepted starter; target files, launcher and updater code are unchanged."
+}

@@ -1,0 +1,283 @@
+{
+  "schema": 1,
+  "success": false,
+  "startedUtc": "2026-10-06T15:31:47.956904+00:00",
+  "sourceCommit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
+  "assetSha256": "c2661c144e073c4efdd190ffd186bacd9398b6413b81770d7a057c3947eecf02",
+  "gateSha256": "9c92351e8418cd4085cd18ce316dee05ac031fbb99f29fab34d73ad2469c6a2a",
+  "platform": "Windows-2022Server-10.0.20348-SP0",
+  "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+  "checks": [
+    "Exact packaged integrity check and all five starter scientific operations execute without failures or skips.",
+    "Results include a packed CWL v1.2 workflow tied to the frozen plan, real completion record and final export hash.",
+    "CWL source hashes, file roles, scientific parameters, complete output set, pack pins and reference metadata match frozen native provenance.",
+    "Every exported command/copy/binary-pipe definition expands to the actual native bridge argument record.",
+    "All five embedded CWL runners execute independently with packaged private Python and pinned native pack programs.",
+    "Independent CWL replay preserves 202 proper-pair SAM/BAM records and known starter:1351 G>A homozygous SNP truth.",
+    "Saved scientific DAG includes every actual dependency and avoids all unrelated cards with padding, including skipped ranks."
+  ],
+  "skips": [],
+  "nativeWindowsExecuted": true,
+  "nativeGUILaunched": true,
+  "nativeGUIValidated": false,
+  "appFiles": {
+    "NativeWorkbench.exe": "726f8411afa2540cf03c9c656244b27ce7890e7ce2b25f9499d204dc7af0f9c6",
+    "WorkbenchBridge.exe": "040499b0c3c8cf19187ece52274491271d2ab5d87a891bef61ab12359ffd0c30",
+    "runtime\\python\\python.exe": "31fe10b4ed82a2f960af0ef9931f46a4b84ff286f8b6ffd9dee098cf4f10f17f",
+    "workspace\\engine.py": "8275b8058fae82a538bd127634531fc2d1a8f0daf8bd95dc00d8bd1b35553b27",
+    "workspace\\cwl_export.py": "18ea65dcb6283da4b060f0d50e3419362d0be3739b8a831092e1c855b8553ecc",
+    "workspace\\dag_routing.py": "eb79a385a6426e8ce9778124620fe48c69e8c6ca3a7a9351b95780c99e869fe4"
+  },
+  "appVersion": "0.9.0",
+  "dag": {
+    "cards": 7,
+    "edges": 8,
+    "segments": 18,
+    "skipRankEdges": 2,
+    "paddingChecked": 9,
+    "sha256": "91b94a4a526281f848fdf090a1bac59e50a3be244910b9678675b21c265dfbc6"
+  },
+  "science": {
+    "networkSocketOperationsDeniedForHost": true,
+    "nativeWindowsExecuted": true,
+    "nativeCommandsCompared": 18,
+    "outputsIndependentlyHashed": 20,
+    "cwlRunnerReplays": [
+      {
+        "step": "step_1",
+        "scriptSha256": "39e0360c49b2e1bf1478a6d5b5f398f4fbe9f18f3fdb6e7584a03aba855b8da2",
+        "exitCode": 0,
+        "outputs": [
+          {
+            "id": "sam",
+            "sha256": "fee6b9975f41bbedd050beb7cb8c2c8abac88e389ee799ff198c64a63eaf176c"
+          },
+          {
+            "id": "pair-check",
+            "sha256": "2c25256e25928cff40cffb9069f201138ae4bd083e3ab626b82cd55099e1c436"
+          }
+        ]
+      },
+      {
+        "step": "step_2",
+        "scriptSha256": "62e20f8334aa67d2d904f25083834af4df53e881bdef3cb320c37a169787dd3f",
+        "exitCode": 0,
+        "outputs": [
+          {
+            "id": "bam",
+            "sha256": "2e9e85d48e50c3d2d9a489e5cb942647907fb74e9407ab61ac91f5afb0c2510d"
+          },
+          {
+            "id": "duplicate-stats",
+            "sha256": "0ebdaa3796fccd4c9fe7b17f58d01080a260ee307388fd78c884a45202f4a12e"
+          },
+          {
+            "id": "flagstat",
+            "sha256": "b9b7e24ae5f0f1f69ef4feb916513d0acc088f3d18b8d75664c38e5ce092cf8f"
+          },
+          {
+            "id": "alignment-stats",
+            "sha256": "ee8f9d5854b380fefd27eddb1da03e27215c485b295cf949278d1a60c1aa130a"
+          },
+          {
+            "id": "bam-index",
+            "sha256": "30071f1300f33b1972f1e612da2a26d75a6032b2ff88cebb998641f9bd374e0f"
+          },
+          {
+            "id": "names",
+            "sha256": "b8a4f152cb1e69df96cd9ec1b205fa829c1659028eba3fb6b501c99701ca9ec0"
+          },
+          {
+            "id": "fixed",
+            "sha256": "bf9685e88f295576d1846a0767db797b1cbf9d331a52a74f363e33496ae62301"
+          },
+          {
+            "id": "coordinates",
+            "sha256": "dbae21784883ffece4d4d10d7986c9a99be18c2b22ef603a307503a5bb9c0d52"
+          }
+        ]
+      },
+      {
+        "step": "step_3",
+        "scriptSha256": "55ed0a4315f34b073402058068dda3d17fd5a1cd420a1af227d34a56d9b3c019",
+        "exitCode": 0,
+        "outputs": [
+          {
+            "id": "variants",
+            "sha256": "f5acda50e10b041d1c05be0085dfa71c5993d85972790c70197939d8bc598bff"
+          },
+          {
+            "id": "variant-stats",
+            "sha256": "1b344f279162ce198521140a6410c44d5ea5bf4821ab8bb153aa9fe80140d4b8"
+          },
+          {
+            "id": "variants-index",
+            "sha256": "61e3fdf9cf8c38596dcbd893f8176a0264d587e5a594b27a3dc143cf84e47471"
+          },
+          {
+            "id": "pileup",
+            "sha256": "dda47d3c36805783e29483bdb1cafc9d87102a37a25cdc360ad3b31f17f8f835"
+          },
+          {
+            "id": "calls",
+            "sha256": "514da981df7108eedefc71c35675b7c00e76acbbe30d5f16b2ea8080dacb6244"
+          },
+          {
+            "id": "normalized",
+            "sha256": "dcf7386b8f55973e871842b1aed518674212e56da5412e2a35703a4e3119e07b"
+          },
+          {
+            "id": "reference",
+            "sha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee"
+          },
+          {
+            "id": "reference-index",
+            "sha256": "6bf365006e0d9d03de4e0fbfdfc082c6e5bee611888e54450bc2516614ae95a3"
+          }
+        ]
+      },
+      {
+        "step": "step_4",
+        "scriptSha256": "ec2896685a5c666104cb21d2bb8c8ffa93cd895c1d1b0908cb92078528177967",
+        "exitCode": 0,
+        "outputs": [
+          {
+            "id": "statistics",
+            "sha256": "1b344f279162ce198521140a6410c44d5ea5bf4821ab8bb153aa9fe80140d4b8"
+          }
+        ]
+      },
+      {
+        "step": "step_5",
+        "scriptSha256": "03bc8f86144fe2d9e85d18dc898bedfb0f44c545654e542c32beae82c11b190a",
+        "exitCode": 0,
+        "outputs": [
+          {
+            "id": "report",
+            "sha256": "f1a3619b76738c4881e1d13a9507a9c68d10de4b2c8fe2cbdf88672c493f0b7c"
+          }
+        ]
+      }
+    ],
+    "alignmentRecords": 202,
+    "variantTruth": "starter:1351 G>A; GT=1/1",
+    "scope": "Native private-host execution plus embedded-runner replay; not a Windows cwltool invocation."
+  },
+  "error": "Native results GUI worker failed: {\"schema\": 1, \"success\": false, \"startedUtc\": \"2026-10-06T15:31:51.349949+00:00\", \"sourceCommit\": \"beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d\", \"assetSha256\": \"c2661c144e073c4efdd190ffd186bacd9398b6413b81770d7a057c3947eecf02\", \"gateSha256\": \"9c92351e8418cd4085cd18ce316dee05ac031fbb99f29fab34d73ad2469c6a2a\", \"platform\": \"Windows-2022Server-10.0.20348-SP0\", \"python\": \"3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]\", \"checks\": [], \"skips\": [], \"nativeWindowsExecuted\": true, \"nativeGUILaunched\": true, \"nativeGUIValidated\": false, \"appFiles\": {\"NativeWorkbench.exe\": \"726f8411afa2540cf03c9c656244b27ce7890e7ce2b25f9499d204dc7af0f9c6\", \"WorkbenchBridge.exe\": \"040499b0c3c8cf19187ece52274491271d2ab5d87a891bef61ab12359ffd0c30\", \"runtime\\\\python\\\\python.exe\": \"31fe10b4ed82a2f960af0ef9931f46a4b84ff286f8b6ffd9dee098cf4f10f17f\", \"workspace\\\\engine.py\": \"8275b8058fae82a538bd127634531fc2d1a8f0daf8bd95dc00d8bd1b35553b27\", \"workspace\\\\cwl_export.py\": \"18ea65dcb6283da4b060f0d50e3419362d0be3739b8a831092e1c855b8553ecc\", \"workspace\\\\dag_routing.py\": \"eb79a385a6426e8ce9778124620fe48c69e8c6ca3a7a9351b95780c99e869fe4\"}, \"error\": \"routed canvas zooms\", \"traceback\": \"Traceback (most recent call last):\\n  File \\\"D:\\\\a\\\\workbench\\\\workbench\\\\scripts\\\\check_results_windows.py\\\", line 549, in main\\n    report['gui'] = gui_checks(root, evidence, report)\\n                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"D:\\\\a\\\\workbench\\\\workbench\\\\scripts\\\\check_results_windows.py\\\", line 514, in gui_checks\\n    ui.wait('routed canvas zooms', lambda: int(ui.label(ui.child(422)).rstrip('%')) < 100)\\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"D:\\\\a\\\\workbench\\\\workbench\\\\scripts\\\\check_workspace_ui_windows.py\\\", line 217, in wait\\n    raise TimeoutError(phase)\\nTimeoutError: routed canvas zooms\\n\", \"passed\": 0, \"failed\": 1, \"completedUtc\": \"2026-10-06T15:32:26.164698+00:00\", \"evidenceFiles\": [{\"file\": \"application-icon-normal.bmp\", \"bytes\": 3290742, \"sha256\": \"96ecc70286cc5aa04310b5e52f042791977e0bef599e01421b42fffbcfe7540f\"}, {\"file\": \"failure.bmp\", \"bytes\": 3290742, \"sha256\": \"6132d45635e1c88f92bf37b8e927f492ff95045ac045c5ec08766c6fd3277ffe\"}, {\"file\": \"installation-service-result.json\", \"bytes\": 38091, \"sha256\": \"615627379d455a14c8377c17695738a89dbe98e9b66e29b0c321fc656d66302c\"}, {\"file\": \"methods-completed.txt\", \"bytes\": 2199, \"sha256\": \"77c325da4276cfcbc3402bfa4e0859c6f89ccdd692c9ab3c1ccfdfce0688aec1\"}, {\"file\": \"native-icon-checks.json\", \"bytes\": 1801, \"sha256\": \"b0fe060bf514a41d84308b0476848d3190887ab0d614fcd750f811c287960ef3\"}, {\"file\": \"pipeline.svg\", \"bytes\": 6038, \"sha256\": \"91b94a4a526281f848fdf090a1bac59e50a3be244910b9678675b21c265dfbc6\"}, {\"file\": \"plan.json\", \"bytes\": 53403, \"sha256\": \"79a5ded4675f7aaaa7b40856b95e47d5c05d19d0bd529344b658469394137a0d\"}, {\"file\": \"results-host.stderr.txt\", \"bytes\": 299, \"sha256\": \"84afca693c3501799d09bc2b08ffd34613041c36417d320cc8833b3bb6a80c11\"}, {\"file\": \"results-ui-worker.stderr.txt\", \"bytes\": 0, \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}, {\"file\": \"routing-fixture-geometry.json\", \"bytes\": 524, \"sha256\": \"0405c2fd3d3656d1eaef2ba3d5c9e7623288abdce58c8af8d9f4a9067722dbd8\"}, {\"file\": \"run.json\", \"bytes\": 33866, \"sha256\": \"841f8d323b692011d451fc8fd0528bce0bd9cd34a76299868d281c33fa9da716\"}, {\"file\": \"step_1-native-run.json\", \"bytes\": 8621, \"sha256\": \"03768ddf5cc523d57827a1629bf1a4e8191e604995b57b3b2230ab2f944c5f7d\"}, {\"file\": \"step_2-native-run.json\", \"bytes\": 19743, \"sha256\": \"e474235d2d977272a4fcca305c773fdb780f87a7c8a2c02914aad3dcef5bc12b\"}, {\"file\": \"step_3-native-run.json\", \"bytes\": 21303, \"sha256\": \"4cc85881ad703297fc7b81a129c24d11c9d3aa3b9113d9758c94e6688ca8016c\"}, {\"file\": \"step_4-native-run.json\", \"bytes\": 5167, \"sha256\": \"b9d51149116b7fdf69a55e3e1aea43184078dfe44be39124001e275d509b28c5\"}, {\"file\": \"ui-desktop-host.stderr.txt\", \"bytes\": 0, \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}, {\"file\": \"ui-events.jsonl\", \"bytes\": 5949, \"sha256\": \"1264f08a34efb71e8bf54532b3b3cc5cc882ea1cd8936e94f4a243f1c5634a3e\"}, {\"file\": \"ui-progress.json\", \"bytes\": 8081, \"sha256\": \"339e01f6d3126aa74bf06ee90d03deafcc259446298d1b40f35024ab0e31d17f\"}, {\"file\": \"validation-context.json\", \"bytes\": 308, \"sha256\": \"b292eb8252f1f03e942b0c2d8095e22a0ce0b507cafb13d6ffedf2863ada74c6\"}, {\"file\": \"workflow-backward-routing.bmp\", \"bytes\": 3290742, \"sha256\": \"b4a2f8b0c7ec378c1d6dca780fb2e1ddbec85966f349951ba283e1b5d812ed22\"}, {\"file\": \"workflow.cwl\", \"bytes\": 148066, \"sha256\": \"d82b80f48c667c0cb8e0704247872e6252c4ec9c81410a7de0c6d98ffe79e5ce\"}]}",
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_results_windows.py\", line 568, in main\n    require(worker.returncode == 0 and result.get('success'), 'Native results GUI worker failed: ' + json.dumps(result))\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_references_windows.py\", line 47, in require\n    raise AssertionError(message)\nAssertionError: Native results GUI worker failed: {\"schema\": 1, \"success\": false, \"startedUtc\": \"2026-10-06T15:31:51.349949+00:00\", \"sourceCommit\": \"beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d\", \"assetSha256\": \"c2661c144e073c4efdd190ffd186bacd9398b6413b81770d7a057c3947eecf02\", \"gateSha256\": \"9c92351e8418cd4085cd18ce316dee05ac031fbb99f29fab34d73ad2469c6a2a\", \"platform\": \"Windows-2022Server-10.0.20348-SP0\", \"python\": \"3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]\", \"checks\": [], \"skips\": [], \"nativeWindowsExecuted\": true, \"nativeGUILaunched\": true, \"nativeGUIValidated\": false, \"appFiles\": {\"NativeWorkbench.exe\": \"726f8411afa2540cf03c9c656244b27ce7890e7ce2b25f9499d204dc7af0f9c6\", \"WorkbenchBridge.exe\": \"040499b0c3c8cf19187ece52274491271d2ab5d87a891bef61ab12359ffd0c30\", \"runtime\\\\python\\\\python.exe\": \"31fe10b4ed82a2f960af0ef9931f46a4b84ff286f8b6ffd9dee098cf4f10f17f\", \"workspace\\\\engine.py\": \"8275b8058fae82a538bd127634531fc2d1a8f0daf8bd95dc00d8bd1b35553b27\", \"workspace\\\\cwl_export.py\": \"18ea65dcb6283da4b060f0d50e3419362d0be3739b8a831092e1c855b8553ecc\", \"workspace\\\\dag_routing.py\": \"eb79a385a6426e8ce9778124620fe48c69e8c6ca3a7a9351b95780c99e869fe4\"}, \"error\": \"routed canvas zooms\", \"traceback\": \"Traceback (most recent call last):\\n  File \\\"D:\\\\a\\\\workbench\\\\workbench\\\\scripts\\\\check_results_windows.py\\\", line 549, in main\\n    report['gui'] = gui_checks(root, evidence, report)\\n                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"D:\\\\a\\\\workbench\\\\workbench\\\\scripts\\\\check_results_windows.py\\\", line 514, in gui_checks\\n    ui.wait('routed canvas zooms', lambda: int(ui.label(ui.child(422)).rstrip('%')) < 100)\\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"D:\\\\a\\\\workbench\\\\workbench\\\\scripts\\\\check_workspace_ui_windows.py\\\", line 217, in wait\\n    raise TimeoutError(phase)\\nTimeoutError: routed canvas zooms\\n\", \"passed\": 0, \"failed\": 1, \"completedUtc\": \"2026-10-06T15:32:26.164698+00:00\", \"evidenceFiles\": [{\"file\": \"application-icon-normal.bmp\", \"bytes\": 3290742, \"sha256\": \"96ecc70286cc5aa04310b5e52f042791977e0bef599e01421b42fffbcfe7540f\"}, {\"file\": \"failure.bmp\", \"bytes\": 3290742, \"sha256\": \"6132d45635e1c88f92bf37b8e927f492ff95045ac045c5ec08766c6fd3277ffe\"}, {\"file\": \"installation-service-result.json\", \"bytes\": 38091, \"sha256\": \"615627379d455a14c8377c17695738a89dbe98e9b66e29b0c321fc656d66302c\"}, {\"file\": \"methods-completed.txt\", \"bytes\": 2199, \"sha256\": \"77c325da4276cfcbc3402bfa4e0859c6f89ccdd692c9ab3c1ccfdfce0688aec1\"}, {\"file\": \"native-icon-checks.json\", \"bytes\": 1801, \"sha256\": \"b0fe060bf514a41d84308b0476848d3190887ab0d614fcd750f811c287960ef3\"}, {\"file\": \"pipeline.svg\", \"bytes\": 6038, \"sha256\": \"91b94a4a526281f848fdf090a1bac59e50a3be244910b9678675b21c265dfbc6\"}, {\"file\": \"plan.json\", \"bytes\": 53403, \"sha256\": \"79a5ded4675f7aaaa7b40856b95e47d5c05d19d0bd529344b658469394137a0d\"}, {\"file\": \"results-host.stderr.txt\", \"bytes\": 299, \"sha256\": \"84afca693c3501799d09bc2b08ffd34613041c36417d320cc8833b3bb6a80c11\"}, {\"file\": \"results-ui-worker.stderr.txt\", \"bytes\": 0, \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}, {\"file\": \"routing-fixture-geometry.json\", \"bytes\": 524, \"sha256\": \"0405c2fd3d3656d1eaef2ba3d5c9e7623288abdce58c8af8d9f4a9067722dbd8\"}, {\"file\": \"run.json\", \"bytes\": 33866, \"sha256\": \"841f8d323b692011d451fc8fd0528bce0bd9cd34a76299868d281c33fa9da716\"}, {\"file\": \"step_1-native-run.json\", \"bytes\": 8621, \"sha256\": \"03768ddf5cc523d57827a1629bf1a4e8191e604995b57b3b2230ab2f944c5f7d\"}, {\"file\": \"step_2-native-run.json\", \"bytes\": 19743, \"sha256\": \"e474235d2d977272a4fcca305c773fdb780f87a7c8a2c02914aad3dcef5bc12b\"}, {\"file\": \"step_3-native-run.json\", \"bytes\": 21303, \"sha256\": \"4cc85881ad703297fc7b81a129c24d11c9d3aa3b9113d9758c94e6688ca8016c\"}, {\"file\": \"step_4-native-run.json\", \"bytes\": 5167, \"sha256\": \"b9d51149116b7fdf69a55e3e1aea43184078dfe44be39124001e275d509b28c5\"}, {\"file\": \"ui-desktop-host.stderr.txt\", \"bytes\": 0, \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}, {\"file\": \"ui-events.jsonl\", \"bytes\": 5949, \"sha256\": \"1264f08a34efb71e8bf54532b3b3cc5cc882ea1cd8936e94f4a243f1c5634a3e\"}, {\"file\": \"ui-progress.json\", \"bytes\": 8081, \"sha256\": \"339e01f6d3126aa74bf06ee90d03deafcc259446298d1b40f35024ab0e31d17f\"}, {\"file\": \"validation-context.json\", \"bytes\": 308, \"sha256\": \"b292eb8252f1f03e942b0c2d8095e22a0ce0b507cafb13d6ffedf2863ada74c6\"}, {\"file\": \"workflow-backward-routing.bmp\", \"bytes\": 3290742, \"sha256\": \"b4a2f8b0c7ec378c1d6dca780fb2e1ddbec85966f349951ba283e1b5d812ed22\"}, {\"file\": \"workflow.cwl\", \"bytes\": 148066, \"sha256\": \"d82b80f48c667c0cb8e0704247872e6252c4ec9c81410a7de0c6d98ffe79e5ce\"}]}\n",
+  "passed": 7,
+  "failed": 1,
+  "completedUtc": "2026-10-06T15:32:26.211242+00:00",
+  "evidenceFiles": [
+    {
+      "file": "application-icon-normal.bmp",
+      "bytes": 3290742,
+      "sha256": "96ecc70286cc5aa04310b5e52f042791977e0bef599e01421b42fffbcfe7540f"
+    },
+    {
+      "file": "failure.bmp",
+      "bytes": 3290742,
+      "sha256": "6132d45635e1c88f92bf37b8e927f492ff95045ac045c5ec08766c6fd3277ffe"
+    },
+    {
+      "file": "installation-service-result.json",
+      "bytes": 38091,
+      "sha256": "615627379d455a14c8377c17695738a89dbe98e9b66e29b0c321fc656d66302c"
+    },
+    {
+      "file": "methods-completed.txt",
+      "bytes": 2199,
+      "sha256": "77c325da4276cfcbc3402bfa4e0859c6f89ccdd692c9ab3c1ccfdfce0688aec1"
+    },
+    {
+      "file": "native-icon-checks.json",
+      "bytes": 1801,
+      "sha256": "b0fe060bf514a41d84308b0476848d3190887ab0d614fcd750f811c287960ef3"
+    },
+    {
+      "file": "pipeline.svg",
+      "bytes": 6038,
+      "sha256": "91b94a4a526281f848fdf090a1bac59e50a3be244910b9678675b21c265dfbc6"
+    },
+    {
+      "file": "plan.json",
+      "bytes": 53403,
+      "sha256": "79a5ded4675f7aaaa7b40856b95e47d5c05d19d0bd529344b658469394137a0d"
+    },
+    {
+      "file": "results-host.stderr.txt",
+      "bytes": 299,
+      "sha256": "84afca693c3501799d09bc2b08ffd34613041c36417d320cc8833b3bb6a80c11"
+    },
+    {
+      "file": "results-ui-worker.json",
+      "bytes": 5466,
+      "sha256": "b0e63efb9e1d9148b2551185ccd9e13612edad960f28f18984b75f58efa1718d"
+    },
+    {
+      "file": "results-ui-worker.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "routing-fixture-geometry.json",
+      "bytes": 524,
+      "sha256": "0405c2fd3d3656d1eaef2ba3d5c9e7623288abdce58c8af8d9f4a9067722dbd8"
+    },
+    {
+      "file": "run.json",
+      "bytes": 33866,
+      "sha256": "841f8d323b692011d451fc8fd0528bce0bd9cd34a76299868d281c33fa9da716"
+    },
+    {
+      "file": "step_1-native-run.json",
+      "bytes": 8621,
+      "sha256": "03768ddf5cc523d57827a1629bf1a4e8191e604995b57b3b2230ab2f944c5f7d"
+    },
+    {
+      "file": "step_2-native-run.json",
+      "bytes": 19743,
+      "sha256": "e474235d2d977272a4fcca305c773fdb780f87a7c8a2c02914aad3dcef5bc12b"
+    },
+    {
+      "file": "step_3-native-run.json",
+      "bytes": 21303,
+      "sha256": "4cc85881ad703297fc7b81a129c24d11c9d3aa3b9113d9758c94e6688ca8016c"
+    },
+    {
+      "file": "step_4-native-run.json",
+      "bytes": 5167,
+      "sha256": "b9d51149116b7fdf69a55e3e1aea43184078dfe44be39124001e275d509b28c5"
+    },
+    {
+      "file": "ui-desktop-host.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "ui-events.jsonl",
+      "bytes": 5949,
+      "sha256": "1264f08a34efb71e8bf54532b3b3cc5cc882ea1cd8936e94f4a243f1c5634a3e"
+    },
+    {
+      "file": "ui-progress.json",
+      "bytes": 8081,
+      "sha256": "339e01f6d3126aa74bf06ee90d03deafcc259446298d1b40f35024ab0e31d17f"
+    },
+    {
+      "file": "validation-context.json",
+      "bytes": 308,
+      "sha256": "b292eb8252f1f03e942b0c2d8095e22a0ce0b507cafb13d6ffedf2863ada74c6"
+    },
+    {
+      "file": "workflow-backward-routing.bmp",
+      "bytes": 3290742,
+      "sha256": "b4a2f8b0c7ec378c1d6dca780fb2e1ddbec85966f349951ba283e1b5d812ed22"
+    },
+    {
+      "file": "workflow.cwl",
+      "bytes": 148066,
+      "sha256": "d82b80f48c667c0cb8e0704247872e6252c4ec9c81410a7de0c6d98ffe79e5ce"
+    }
+  ]
+}

@@ -20,6 +20,66 @@ runbook. Use `workspace/app_version.py` and recorded build inputs for new
 artifact names; never replace published archives or transfer their validation
 results to changed bytes. The published 0.8.0 updater supports 0.6.0 only.
 
+## Current 0.9 results and presentation work
+
+Branch `feature/cwl-dag-icon` adds `workflow.cwl` result export, routed native/SVG
+DAG edges and SVG-derived native icon resources. Read [the CWL results guide](cwl-results.md)
+before changing the exporter or interpreting its portability. Candidate source
+is `beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d`; its
+[handover](cwl-dag-icon-0.9.0-handover.md) records the exact archives and passing
+125-check source gate, including stock `cwltool` fixture execution. Existing
+workspace/References, scientific/export/SVG and long-path checks have recorded
+native passes. The final focused feature gate passed nine checks in each Windows
+path with no failures/skips; its three earlier fixture/capture failures remain
+diagnostics. Validator-only commits have not rebuilt or changed the candidate.
+The published 0.8.0 record above remains unchanged.
+
+The focused source commands are:
+
+```sh
+python3 workspace/tests/test_cwl_export.py
+python3 workspace/tests/test_cwl_results.py
+python3 tests/test_dag_routing.py
+python3 tests/test_app_icon.py
+```
+
+`NW_CWLTOOL` must name the independently installed validator/runner for the
+interoperability case in `test_cwl_export.py`; absent that variable, its skip is
+not a CWL interoperability pass. The development workflow
+[`native-results-candidate.yml`](../.github/workflows/native-results-candidate.yml)
+uses a separate test-only environment with pinned `cwltool` and retains the
+existing workspace/reference/packaging/updater suites. This adds no CWL runtime
+dependency to the application. The routing suite also distinguishes compiler
+availability from a native GUI result.
+
+The native build scripts generate the ICO with
+`python3 scripts/build_app_icon.py` from the tracked SVG. Generated icon/build
+outputs remain reproducible artifacts, not a new graphics dependency. The
+exact-package Windows gate in
+[`scripts/check_results_windows.py`](../scripts/check_results_windows.py) checks
+result exports, real native execution and standalone-runner replay, routed
+geometry and native icon resources. That replay does not claim Windows CWL-engine
+execution. Record source/interoperability, cross-build and native results
+separately, and keep any missing prerequisite or failed check visible.
+
+The focused verification uses the original candidate artifact instead of
+rebuilding it. Final validator `bc972125814c1f24dca86391d0c5f240716a52f3` passed
+[run 37489208656](https://github.com/comparativechrono/workbench/actions/runs/37489208656)
+with both `nativeGUIValidated` flags true. It uses `BM_CLICK` only for the zoom
+capture where the VM taskbar occludes the physical button position; the separate
+workspace gate covers actual pointer zoom. Application source remains `beea34a`.
+The user has accepted this exact candidate and authorized publication; see the
+[acceptance record](evidence/cwl-dag-icon-0.9.0-acceptance-2026-10-06.json). The included
+0.6.0 updater passed its preservation gate. The separate 0.8.0-to-0.9.0 updater
+was built by [`build_update_090.py`](../scripts/build_update_090.py) against the
+unchanged accepted starter, and passed the focused native gate at
+[`check_update_090_windows.py`](../scripts/check_update_090_windows.py) in
+[run 37527359533](https://github.com/comparativechrono/workbench/actions/runs/37527359533):
+13 checks per path, zero failures/skips, 70 core files verified and 202 existing
+files preserved, with native post-update reference and scientific/CWL execution.
+The handover records exact updater bytes, earlier fixture failures and limits.
+Publication and independent public-download verification remain pending.
+
 ## Start without disturbing existing work
 
 1. Read the root `AGENTS.md`, this knowledge directory and the relevant source.

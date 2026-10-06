@@ -64,6 +64,12 @@ Version 0.8.0 was published at **2026-10-06T13:12:15Z** as
 [app-v0.8.0](https://github.com/comparativechrono/workbench/releases/tag/app-v0.8.0).
 Published 0.7.0 and its evidence remain unchanged.
 
+The **0.9.0** CWL export, routed DAG and SVG-derived icon candidate has passed
+its exact-package checks. The user accepted it and authorized release on
+2026-10-06. The separate updater from 0.8.0 passed 13 native checks per path;
+publication and public-download verification remain in progress; see the [0.9.0 handover](cwl-dag-icon-0.9.0-handover.md) and
+[CWL feature guide](cwl-results.md). Accepted application bytes are frozen.
+
 ## Reading order
 
 | File | Question it answers |
@@ -72,7 +78,9 @@ Published 0.7.0 and its evidence remain unchanged.
 | [Current state](current-state.md) | What is released, tested, limited or unfinished? |
 | [Architecture](architecture.md) | Where does each responsibility live, and how does a run work? |
 | [Native UI development](native-ui.md) | How do the three panes, standalone tools and workflow canvas work, and what remains to validate? |
-| [0.8.0 release handover](native-ui-0.8.0-release-handover.md) | Which exact tested bytes were accepted, and what is their publication status? |
+| [0.9.0 handover](cwl-dag-icon-0.9.0-handover.md) | Which CWL/DAG/icon bytes were accepted, what passed and what release work remains? |
+| [CWL results](cwl-results.md) | What does an exported workflow contain and what does external execution require? |
+| [0.8.0 release handover](native-ui-0.8.0-release-handover.md) | Which exact native-interface bytes were accepted and published? |
 | [Starter tool semantics](starter-tool-semantics.md) | Which program does each starter operation run, how does SAM become BAM, and what does faidx mean? |
 | [Reference discovery](../docs/reference-discovery-0.7.md) | How are references found, downloaded, reused offline and recorded in runs? |
 | [Development](development.md) | How do I recover inputs, build, test and resume work? |

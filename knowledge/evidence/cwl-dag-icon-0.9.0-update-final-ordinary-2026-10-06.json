@@ -1,0 +1,214 @@
+{
+  "schema": 1,
+  "sourceCommit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
+  "validationCommit": "648676c4388f1c4dc9f9af0476bf31f9cfca8c92",
+  "workflowRun": "37527359533",
+  "startedUtc": "2026-10-06T20:34:10.259153+00:00",
+  "platform": "Windows-2022Server-10.0.20348-SP0",
+  "pythonVersion": "3.13.16",
+  "nativeWindowsHost": true,
+  "nativeWindowsExecuted": true,
+  "success": true,
+  "baseVersion": "0.8.0",
+  "appVersion": "0.9.0",
+  "starterSha256": "c2661c144e073c4efdd190ffd186bacd9398b6413b81770d7a057c3947eecf02",
+  "baselineSha256": "df001a80033ff8e834045ec683c79672e0efdbd4880fb89fca8bf8c36d830fdc",
+  "updateSha256": "caa50ff7807be889fd9f4fbb617a458b1d2b38f397ce365d4fc7fc17a2511d9e",
+  "scope": "Native updater CLI/private runtime, preservation and offline native scientific/CWL checks; no updater picker UI or live reference download.",
+  "networkScope": "Private-host Python socket operations denied by audit hook; native subprocesses are not OS-firewalled.",
+  "checks": [
+    "Frozen baseline, accepted target and updater inventories match the exact archives and manifest identities.",
+    "Published 0.8.0 imports the exact optional reads pack, executes a real reference run, and saves independent settings and pipeline pins offline.",
+    "Native updater installs 0.9.0 and returns already-installed on repeat; every installed core file equals the accepted starter.",
+    "Starter and optional packs, saved settings/pins, existing real results, local registry/receipt and external reference bytes survive unchanged.",
+    "Updated host reloads exact saved pins, selects the preserved compatible reference, and executes offline with its provenance in CWL and completed methods.",
+    "Exact packaged integrity check and all five starter scientific operations execute without failures or skips.",
+    "Results include a packed CWL v1.2 workflow tied to the frozen plan, real completion record and final export hash.",
+    "CWL source hashes, file roles, scientific parameters, complete output set, pack pins and reference metadata match frozen native provenance.",
+    "Every exported command/copy/binary-pipe definition expands to the actual native bridge argument record.",
+    "All five embedded CWL runners execute independently with packaged private Python and pinned native pack programs.",
+    "Independent CWL replay preserves 202 proper-pair SAM/BAM records and known starter:1351 G>A homozygous SNP truth.",
+    "Saved scientific DAG includes every actual dependency and avoids all unrelated cards with padding, including skipped ranks.",
+    "Updater inventories remain intact after execution with its own private runtime."
+  ],
+  "failures": [],
+  "skips": [],
+  "baselineReferenceRun": {
+    "folder": "D:\\a\\_temp\\ordinary\\baseline\\native-workbench\\results\\existing-reference-run\\run-20261006-203411-b23b2f84",
+    "nativeWindowsExecuted": true,
+    "contigs": 1,
+    "referenceSha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+    "runSha256": "89330a5d098a9bcd752ae59b3a06102424a903b15a3d94c9939fc1fe055a41d1",
+    "cwlChecked": false
+  },
+  "updateAttempts": {
+    "install": {
+      "status": "installed",
+      "version": "0.9.0",
+      "migration": false,
+      "files_verified": 70,
+      "removed_files": 0,
+      "backup": "D:\\a\\_temp\\ordinary\\baseline\\native-workbench\\updates\\core-0.9.0-20261006-203411-53e902a3\\backup",
+      "packs_changed": false,
+      "source_and_evidence_preserved": true
+    },
+    "repeat": {
+      "status": "already-installed",
+      "version": "0.9.0",
+      "files_verified": 70
+    }
+  },
+  "coreFilesVerified": 70,
+  "preservation": {
+    "files": 202,
+    "changes": {},
+    "additions": {
+      "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+    },
+    "fixtureNotice": "Created by this gate from the packaged synthetic FASTA; not downloaded."
+  },
+  "updatedReferenceRun": {
+    "folder": "D:\\a\\_temp\\ordinary\\baseline\\native-workbench\\results\\updated-reference-run\\run-20261006-203412-4494213b",
+    "nativeWindowsExecuted": true,
+    "contigs": 1,
+    "referenceSha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+    "runSha256": "de9813507d976291c3b7e8e943878a3b6baf3f1e013954438fd2e1cee4332c06",
+    "cwlChecked": true
+  },
+  "dag": {
+    "cards": 7,
+    "edges": 8,
+    "segments": 18,
+    "skipRankEdges": 2,
+    "paddingChecked": 9,
+    "sha256": "91b94a4a526281f848fdf090a1bac59e50a3be244910b9678675b21c265dfbc6"
+  },
+  "science": {
+    "networkSocketOperationsDeniedForHost": true,
+    "nativeWindowsExecuted": true,
+    "nativeCommandsCompared": 18,
+    "outputsIndependentlyHashed": 20,
+    "cwlRunnerReplays": [
+      {
+        "step": "step_1",
+        "scriptSha256": "39e0360c49b2e1bf1478a6d5b5f398f4fbe9f18f3fdb6e7584a03aba855b8da2",
+        "exitCode": 0,
+        "outputs": [
+          {
+            "id": "sam",
+            "sha256": "03fd121c45a1e7994368dacafaaddc20d829168b4e516346bcfdc24e45f60b09"
+          },
+          {
+            "id": "pair-check",
+            "sha256": "2c25256e25928cff40cffb9069f201138ae4bd083e3ab626b82cd55099e1c436"
+          }
+        ]
+      },
+      {
+        "step": "step_2",
+        "scriptSha256": "62e20f8334aa67d2d904f25083834af4df53e881bdef3cb320c37a169787dd3f",
+        "exitCode": 0,
+        "outputs": [
+          {
+            "id": "bam",
+            "sha256": "5c577d0798667f9f30d3e93e4e078a9bc9ed609dc7d178b9bf2dba4b5859c9d9"
+          },
+          {
+            "id": "duplicate-stats",
+            "sha256": "226313f0085c02deb259bd24a437c26c8ac87a2cfd510465509b1f8cc8b705b3"
+          },
+          {
+            "id": "flagstat",
+            "sha256": "b9b7e24ae5f0f1f69ef4feb916513d0acc088f3d18b8d75664c38e5ce092cf8f"
+          },
+          {
+            "id": "alignment-stats",
+            "sha256": "450d9b9fd90e1115c0a50a24a62044ee3cba6d03e8ba3890a1c2253463fcf21f"
+          },
+          {
+            "id": "bam-index",
+            "sha256": "9b9c6f74e98d26f6fb37124b30e92c77c44d9ef58fb2244807f4926b85e220ef"
+          },
+          {
+            "id": "names",
+            "sha256": "7a4914d72c42e8a9f826054224c40e6cf177991e0ec6c1e419ffc365be5852b1"
+          },
+          {
+            "id": "fixed",
+            "sha256": "c60215caed7efe152de1ed44acf9c977e5605ec1419f8e4bacce8db1ff1ec799"
+          },
+          {
+            "id": "coordinates",
+            "sha256": "608dd4eff5691244e964015ab37c21e7379cdfc70e9ddc1405ff29ddccdb60c3"
+          }
+        ]
+      },
+      {
+        "step": "step_3",
+        "scriptSha256": "55ed0a4315f34b073402058068dda3d17fd5a1cd420a1af227d34a56d9b3c019",
+        "exitCode": 0,
+        "outputs": [
+          {
+            "id": "variants",
+            "sha256": "fae621d8045e7f01128f3c4ea823049293c7f85a4e00f8386174ee608b7215dd"
+          },
+          {
+            "id": "variant-stats",
+            "sha256": "b5ca20bcdcd605ca341d24e0bde6c4e3b685a527f975b882b3626e5bbecc999a"
+          },
+          {
+            "id": "variants-index",
+            "sha256": "fb9f154053904b588fc5bdbc193db55e204f40020ab9f9635b0fb6f0a3bd1b03"
+          },
+          {
+            "id": "pileup",
+            "sha256": "9f9ce36a49917c099094b691495c7a74f37fb9520bec50b026ddae0b37f3debf"
+          },
+          {
+            "id": "calls",
+            "sha256": "98fe2efba907b4e4123b3076489c35609a1291b1eeaa46bc1c22db31c050b54b"
+          },
+          {
+            "id": "normalized",
+            "sha256": "0041036feecbb2bf539fe08c9df90249186834e77eeeabdfadde86cbc783dbdb"
+          },
+          {
+            "id": "reference",
+            "sha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee"
+          },
+          {
+            "id": "reference-index",
+            "sha256": "6bf365006e0d9d03de4e0fbfdfc082c6e5bee611888e54450bc2516614ae95a3"
+          }
+        ]
+      },
+      {
+        "step": "step_4",
+        "scriptSha256": "ec2896685a5c666104cb21d2bb8c8ffa93cd895c1d1b0908cb92078528177967",
+        "exitCode": 0,
+        "outputs": [
+          {
+            "id": "statistics",
+            "sha256": "b5ca20bcdcd605ca341d24e0bde6c4e3b685a527f975b882b3626e5bbecc999a"
+          }
+        ]
+      },
+      {
+        "step": "step_5",
+        "scriptSha256": "03bc8f86144fe2d9e85d18dc898bedfb0f44c545654e542c32beae82c11b190a",
+        "exitCode": 0,
+        "outputs": [
+          {
+            "id": "report",
+            "sha256": "9b2ff4371cd64660897343936eab933fb680e5c8cc6c3cbc4eecf80b1d6e93c9"
+          }
+        ]
+      }
+    ],
+    "alignmentRecords": 202,
+    "variantTruth": "starter:1351 G>A; GT=1/1",
+    "scope": "Native private-host execution plus embedded-runner replay; not a Windows cwltool invocation."
+  },
+  "passed": 13,
+  "finishedUtc": "2026-10-06T20:34:15.791484+00:00"
+}

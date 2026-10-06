@@ -130,7 +130,7 @@ class SplitRelease(unittest.TestCase):
             self.assertTrue(expected<=set(zipped.namelist()))
             self.assertEqual(zipped.read('legacy/native-workbench-0.5.4-source.zip'),legacy)
             record=json.loads(zipped.read('SOURCE-RECOVERY.json'))
-            self.assertEqual(record['release'],'0.8.0')
+            self.assertEqual(record['release'],'0.9.0')
             self.assertEqual(record['build_baseline']['version'],'0.6.0')
             self.assertTrue(expected<={entry['path'] for entry in record['current_source_files']})
         previous.write_bytes(b'changed source ZIP')
@@ -140,6 +140,7 @@ class SplitRelease(unittest.TestCase):
     def test_runtime_inventory_contains_new_independent_manager_and_checks(self):
         self.assertTrue({'pack_manager.py','pack_security.py','core_checks.py'}<=set(package.RUNTIME_MODULES))
         self.assertTrue({'reference_provider.py','reference_manager.py','reference_provenance.py'}<=set(package.RUNTIME_MODULES))
+        self.assertTrue({'cwl_export.py','dag_routing.py'}<=set(package.RUNTIME_MODULES))
         self.assertNotIn('server.py',package.RUNTIME_MODULES)
         self.assertEqual(package.STARTER,('align-0.4.0','bam-0.4.0','variants-0.4.0'))
 

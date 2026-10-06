@@ -14,6 +14,13 @@ struct CanvasCard {
 std::map<std::string, POINT> canvasPositions;
 std::vector<CanvasCard> canvasCards;
 std::vector<CanvasPort> canvasPorts;
+struct CanvasConnection {
+  CanvasPort source, target;
+  std::vector<dag_routing::Point> points;
+};
+std::vector<CanvasConnection> canvasConnections;
+std::string canvasRouteKey;
+bool canvasBlockedRoutes = false;
 std::string canvasDragNode, canvasDragRef;
 std::string canvasHoverNode;
 Json canvasTargets = Json::object();
@@ -498,6 +505,68 @@ bool canvas_mouse_up(POINT screen) {
                             {"refs", std::move(refs)}}));
   return true;
 }
+std::vector<dag_routing::Rect> canvas_obstacles() const {
+  std::vector<dag_routing::Rect> result;
+  for (const auto &card : canvasCards)
+    result.push_back({static_cast<int>(card.box.left) - 12, static_cast<int>(card.box.top) - 12,
+                      static_cast<int>(card.box.right) + 12, static_cast<int>(card.box.bottom) + 12});
+  return result;
+}
+std::vector<dag_routing::Point> canvas_route(const CanvasPort &source, POINT endpoint,
+                                           const std::string &targetNode,
+                                           const std::vector<dag_routing::Segment> &occupied = {}) const {
+  const dag_routing::Point start{static_cast<int>(source.point.x), static_cast<int>(source.point.y)},
+                          end{static_cast<int>(endpoint.x), static_cast<int>(endpoint.y)};
+  int sourceIndex = -1, targetIndex = -1;
+  for (size_t i = 0; i < canvasCards.size(); ++i) {
+    if (canvasCards[i].id == source.node)
+      sourceIndex = static_cast<int>(i);
+    if (canvasCards[i].id == targetNode)
+      targetIndex = static_cast<int>(i);
+  }
+  return dag_routing::route_ports(start, end, canvas_obstacles(), sourceIndex, targetIndex, occupied);
+}
+void canvas_route_connections() {
+  // Painting, panning, hovering and zooming reuse world-coordinate routes.
+  // Recompute only when cards, ports or actual graph connections change.
+  std::ostringstream key;
+  for (const auto &card : canvasCards)
+    key << card.id << ':' << card.box.left << ',' << card.box.top << ','
+        << card.box.right << ',' << card.box.bottom << ';';
+  for (const auto &port : canvasPorts)
+    key << port.node << ':' << port.port << ':' << port.ref << ':'
+        << port.point.x << ',' << port.point.y << ';';
+  std::vector<CanvasConnection> connections;
+  for (const auto &target : canvasPorts) {
+    if (target.output)
+      continue;
+    for (const auto &node : graph().get("nodes").array_items()) {
+      if (getstr(node, "id") != target.node || !node.get("inputs").get(target.port).is_array())
+        continue;
+      for (const auto &ref : node.get("inputs").get(target.port).array_items())
+        for (const auto &source : canvasPorts)
+          if (source.output && source.ref == text(ref)) {
+            key << source.ref << '>' << target.node << ':' << target.port << ';';
+            connections.push_back({source, target, {}});
+          }
+    }
+  }
+  if (key.str() == canvasRouteKey)
+    return;
+  canvasRouteKey = key.str();
+  canvasBlockedRoutes = false;
+  for (size_t i = 0; i < connections.size(); ++i) {
+    auto &connection = connections[i];
+    std::vector<dag_routing::Segment> occupied;
+    for (size_t j = 0; canvasCards.size() <= dag_routing::max_cosmetic_cards && j < i; ++j)
+      if (connections[j].source.ref != connection.source.ref)
+        for (size_t k = 1; k < connections[j].points.size(); ++k)
+          occupied.emplace_back(connections[j].points[k - 1], connections[j].points[k]);
+    connection.points = canvas_route(connection.source, connection.target.point, connection.target.node, occupied);
+    canvasBlockedRoutes = canvasBlockedRoutes || connection.points.empty();
+  }
+  canvasConnections = std::move(connections);
+}
 void canvas_layout() {
   canvasCards.clear();
   canvasPorts.clear();
@@ -617,6 +686,7 @@ void canvas_layout() {
       else
         ++it;
   }
+  canvas_route_connections();
   canvas_navigation_bounds();
   for (const auto &item : canvasCards) {
     const auto &box = item.box;
@@ -655,51 +725,62 @@ void paint_dag() {
     for (int y = dagY / 20 * 20; y <= dagY + vh; y += 20)
       for (int x = dagX / 20 * 20; x <= dagX + vw; x += 20)
         g.FillEllipse(&grid, static_cast<float>(x), static_cast<float>(y), 1.5f, 1.5f);
-    auto curve = [&](POINT a, POINT b, Gdiplus::Color color, float weight, bool pending) {
+    auto connection = [&](const std::vector<dag_routing::Point> &points,
+                          Gdiplus::Color color, float weight, bool pending, bool arrow) {
+      if (points.size() < 2)
+        return;
       Gdiplus::Pen pen(color, weight);
+      pen.SetLineJoin(Gdiplus::LineJoinRound);
       if (pending)
         pen.SetDashStyle(Gdiplus::DashStyleDash);
-      const float lead = std::max(60.f, (b.x - a.x) / 2.f);
-      g.DrawBezier(&pen, static_cast<float>(a.x), static_cast<float>(a.y),
-                   a.x + lead, static_cast<float>(a.y), b.x - lead,
-                   static_cast<float>(b.y), static_cast<float>(b.x), static_cast<float>(b.y));
-    };
-    for (const auto &target : canvasPorts) {
-      if (target.output)
-        continue;
-      for (const auto &node : graph().get("nodes").array_items()) {
-        if (getstr(node, "id") != target.node)
-          continue;
-        if (!node.get("inputs").get(target.port).is_array())
-          continue;
-        for (const auto &ref : node.get("inputs").get(target.port).array_items())
-          for (const auto &source : canvasPorts)
-            if (source.output && source.ref == text(ref)) {
-              const bool active = source.node == selected || target.node == selected || source.ref == canvasDragRef;
-              curve(source.point, target.point,
-                    active ? Gdiplus::Color(255, 45, 106, 166) : Gdiplus::Color(255, 151, 169, 190),
-                    active ? 2.4f : 1.7f, false);
-            }
+      std::vector<Gdiplus::PointF> path;
+      for (const auto point : points)
+        path.emplace_back(static_cast<float>(point.x), static_cast<float>(point.y));
+      // A background halo makes an unavoidable crossing read as two edges,
+      // rather than an accidental merge. Shared fan-out still has one trunk.
+      Gdiplus::Pen halo(Gdiplus::Color(255, 246, 248, 251), weight + 4.f);
+      halo.SetLineJoin(Gdiplus::LineJoinRound);
+      if (pending)
+        halo.SetDashStyle(Gdiplus::DashStyleDash);
+      g.DrawLines(&halo, path.data(), static_cast<INT>(path.size()));
+      g.DrawLines(&pen, path.data(), static_cast<INT>(path.size()));
+      if (arrow) {
+        const auto &end = path.back();
+        // The socket is drawn later. Put the arrow just outside its left rim.
+        const Gdiplus::PointF head[] = {{end.X - 7.f, end.Y},
+                                      {end.X - 15.f, end.Y - 4.f},
+                                      {end.X - 15.f, end.Y + 4.f}};
+        Gdiplus::SolidBrush fill(color);
+        g.FillPolygon(&fill, head, 3);
       }
+    };
+    for (const auto &edge : canvasConnections) {
+      const bool active = edge.source.node == selected || edge.target.node == selected ||
+                          edge.source.ref == canvasDragRef;
+      connection(edge.points,
+                 active ? Gdiplus::Color(255, 45, 106, 166) : Gdiplus::Color(255, 123, 145, 170),
+                 active ? 2.4f : 1.7f, false, true);
     }
     if (!canvasDragRef.empty())
       for (const auto &source : canvasPorts)
         if (source.output && source.ref == canvasDragRef) {
           POINT endpoint = canvasPointer;
           bool compatible = false;
+          std::string targetNode;
           for (const auto &target : canvasPorts) {
             const long long dx = static_cast<long long>(canvasPointer.x) - target.point.x,
                             dy = static_cast<long long>(canvasPointer.y) - target.point.y;
             const int radius = std::max(6, MulDiv(12, 100, canvasZoom));
             if (!target.output && dx * dx + dy * dy <= static_cast<long long>(radius) * radius) {
               endpoint = target.point;
+              targetNode = target.node;
               compatible = canvas_accepts(target, canvasDragRef);
               break;
             }
           }
-          curve(source.point, endpoint,
-                compatible ? Gdiplus::Color(255, 33, 135, 94) : Gdiplus::Color(255, 45, 106, 166),
-                2.5f, true);
+          connection(canvas_route(source, endpoint, targetNode),
+                     compatible ? Gdiplus::Color(255, 33, 135, 94) : Gdiplus::Color(255, 45, 106, 166),
+                     2.5f, true, !targetNode.empty());
           break;
         }
     for (const auto &item : canvasCards) {
@@ -793,6 +874,19 @@ void paint_dag() {
     SetTextColor(mem, MUTED);
     RECT help{px(32), px(88), client.right - px(32), client.bottom - px(24)};
     DrawTextW(mem, L"Add named workflow inputs for your files and reference, then drag tools from the Tool shed onto this canvas.\n\nConnect input or tool-output sockets to compatible tool inputs. Select a card to edit its options on the right.\n\nDrag empty canvas to pan. Use the zoom buttons, Ctrl+wheel or a trackpad pinch to zoom.", -1, &help, DT_LEFT | DT_WORDBREAK | DT_NOPREFIX);
+  }
+  if (canvasBlockedRoutes && !canvasCards.empty()) {
+    // Obscured sockets cannot have a truthful visible route. Explain the small
+    // remaining manual-layout action instead of silently drawing under a card.
+    RECT notice{px(10), client.bottom - px(40), client.right - px(10), client.bottom - px(10)};
+    HBRUSH background = CreateSolidBrush(RGB(255, 245, 221));
+    FillRect(mem, &notice, background);
+    DeleteObject(background);
+    SelectObject(mem, small);
+    SetTextColor(mem, RGB(115, 75, 24));
+    notice.left += px(8);
+    DrawTextW(mem, L"Move overlapping cards apart to show every connection.", -1,
+              &notice, DT_LEFT | DT_VCENTER | DT_SINGLELINE | DT_END_ELLIPSIS | DT_NOPREFIX);
   }
   BitBlt(dc, 0, 0, client.right, client.bottom, mem, 0, 0, SRCCOPY);
   SelectObject(mem, oldFont);

@@ -1,0 +1,343 @@
+{
+  "schema": 1,
+  "recordedOn": "2026-10-06",
+  "status": "implemented and exact-candidate validated; unpublished, awaiting tester review",
+  "published": false,
+  "version": "0.9.0",
+  "sourceCommit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
+  "pullRequest": "https://github.com/comparativechrono/workbench/pull/2",
+  "archives": [
+    {
+      "file": "native-workbench-0.9.0-source.zip",
+      "bytes": 46423298,
+      "sha256": "7bfc3802cad3b476300ae7075214e2c06ee320d987df66945ff0809cb3218824"
+    },
+    {
+      "file": "native-workbench-0.9.0-starter-windows.zip",
+      "bytes": 17002821,
+      "sha256": "c2661c144e073c4efdd190ffd186bacd9398b6413b81770d7a057c3947eecf02"
+    },
+    {
+      "file": "native-workbench-0.9.0-update-from-0.6.0.zip",
+      "bytes": 12951447,
+      "sha256": "eed778882bed560e765c1f2c03d6473b2ea07f2b219e4bd81bff7297e67b177d"
+    }
+  ],
+  "candidateArtifact": {
+    "id": 11424165351,
+    "bytes": 75880943,
+    "sha256": "26f1f2070de5ffae4cdb219bd22579f22a3af943eab6e93048fa6e38ad041071",
+    "url": "https://github.com/comparativechrono/workbench/actions/runs/37485987457/artifacts/11424165351",
+    "independentlyDownloadedAndHashVerified": true,
+    "archiveCRCsVerified": true
+  },
+  "buildAndInitialValidation": {
+    "runId": 37485987457,
+    "url": "https://github.com/comparativechrono/workbench/actions/runs/37485987457",
+    "overallConclusion": "failure",
+    "source": {
+      "jobId": 112345987580,
+      "platform": "Ubuntu 22.04.5",
+      "passed": 125,
+      "failed": 0,
+      "skipped": 0,
+      "cwltoolVersion": "3.3.20260925135507",
+      "stockCWLValidationAndExecution": true,
+      "strictNativeCrossCompilation": true
+    },
+    "native": {
+      "platform": "Windows Server 2022 build20348",
+      "privatePython": "3.13.16",
+      "ordinary": {
+        "workspacePassed": 32,
+        "referencesPassed": 9,
+        "resultsPassed": 7,
+        "resultsFailed": 1,
+        "skipped": 0
+      },
+      "spaces": {
+        "workspacePassed": 32,
+        "referencesPassed": 9,
+        "resultsPassed": 7,
+        "resultsFailed": 1,
+        "skipped": 0
+      },
+      "resultsFailure": "The new GUI test required a canvas at least 560 logical pixels wide. The hosted desktop limited the app window to 1044x788 and actual canvas client to 457x538 at 96 DPI. It failed before testing connections; this is retained as a failed check, not a native GUI pass.",
+      "sourceFix": "Validation fixture measures the actual viewport and places three staggered rows while retaining real forward/backward port drags and normal/zoomed captures; application bytes unchanged.",
+      "longPaths": {
+        "jobId": 112346832423,
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0,
+        "fullStarterStages": 5,
+        "outputFilesIndependentlyHashed": 20,
+        "longPathOptIn": false,
+        "policyRestoredInFinally": true
+      }
+    },
+    "reports": [
+      {
+        "file": "cwl-dag-icon-0.9.0-initial-ordinary-native-ui.json",
+        "sha256": "6f7ac0d06df817774d9fc49dbeb3b9eb266a741d90d54c5c5171acf114a730e2",
+        "success": true,
+        "passed": 32,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "file": "cwl-dag-icon-0.9.0-initial-ordinary-native-references.json",
+        "sha256": "b9247ecaf61d06052990974793e5da321bac1ac0780c53c64a6bb162544ed76c",
+        "success": true,
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "file": "cwl-dag-icon-0.9.0-initial-ordinary-native-results.json",
+        "sha256": "d6966867fbeec564cabc7dbd99bd1f1a2ff23c1aeafbf930844c19db8c8a1d5e",
+        "success": false,
+        "passed": 7,
+        "failed": 1,
+        "skipped": 0
+      },
+      {
+        "file": "cwl-dag-icon-0.9.0-initial-spaces-native-ui.json",
+        "sha256": "416b25f52a4ab6e86b65f731d7ac53a536e3ba731cc0860eb6cf4c081a279c66",
+        "success": true,
+        "passed": 32,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "file": "cwl-dag-icon-0.9.0-initial-spaces-native-references.json",
+        "sha256": "2e35071744f7b0d06058b6e29dd014f4145b76b2c4b8cb7a74329caa777ed796",
+        "success": true,
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "file": "cwl-dag-icon-0.9.0-initial-spaces-native-results.json",
+        "sha256": "46fcc8c55326f21840c69f7a9bdad8bf0f6a9bbb98629be89c1ed24642034689",
+        "success": false,
+        "passed": 7,
+        "failed": 1,
+        "skipped": 0
+      },
+      {
+        "file": "cwl-dag-icon-0.9.0-native-long-paths.json",
+        "sha256": "056cc5cac529dcd6b9b1fb85cb6f5122aad159f5f64cf503062b751404b9c146"
+      },
+      {
+        "file": "cwl-dag-icon-0.9.0-policy-setup.json",
+        "sha256": "bc761cea17045c584f4d7f6483e64e114e2bcb8f4f782233011a8698c1861dac"
+      }
+    ]
+  },
+  "focusedVerification": {
+    "sourceCommit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
+    "validationCommit": "bc972125814c1f24dca86391d0c5f240716a52f3",
+    "runId": 37489208656,
+    "url": "https://github.com/comparativechrono/workbench/actions/runs/37489208656",
+    "rebuilt": false,
+    "status": "success",
+    "scope": "Real pointer connections and icon checks; zoomed capture activated with documented BM_CLICK. Physical zoom-button interactions already passed in the separate 32-check workspace gate on the same application bytes.",
+    "overallConclusion": "success",
+    "gateSha256": "d543240a8f44ddd587f35854938f0484b6546bc33c77ba233631f3fa7b06afbb",
+    "checks": [
+      {
+        "case": "ordinary",
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0,
+        "nativeWindowsExecuted": true,
+        "nativeGUIValidated": true,
+        "evidenceFileHashesVerified": 22
+      },
+      {
+        "case": "spaces",
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0,
+        "nativeWindowsExecuted": true,
+        "nativeGUIValidated": true,
+        "evidenceFileHashesVerified": 22
+      }
+    ],
+    "reports": [
+      {
+        "file": "cwl-dag-icon-0.9.0-final-ordinary-native-results.json",
+        "sha256": "4f9739a1278abed91ea0b6b477ecf610a556fb40701a6b8a038e84011ea67100",
+        "bytes": 14672
+      },
+      {
+        "file": "cwl-dag-icon-0.9.0-final-ordinary-routing-fixture-geometry.json",
+        "sha256": "d7032d271e4f7ccbaf569966e19d788d3040ec5ebf251a2da47b65a5cf6a9a35",
+        "bytes": 904
+      },
+      {
+        "file": "cwl-dag-icon-0.9.0-final-ordinary-native-icon-checks.json",
+        "sha256": "b0fe060bf514a41d84308b0476848d3190887ab0d614fcd750f811c287960ef3",
+        "bytes": 1801
+      },
+      {
+        "file": "cwl-dag-icon-0.9.0-final-spaces-native-results.json",
+        "sha256": "7ef031d17df2657a0455a86cd09d644fff4eca3f93a5bd867831b6b609501917",
+        "bytes": 14672
+      },
+      {
+        "file": "cwl-dag-icon-0.9.0-final-spaces-routing-fixture-geometry.json",
+        "sha256": "d7032d271e4f7ccbaf569966e19d788d3040ec5ebf251a2da47b65a5cf6a9a35",
+        "bytes": 904
+      },
+      {
+        "file": "cwl-dag-icon-0.9.0-final-spaces-native-icon-checks.json",
+        "sha256": "b0fe060bf514a41d84308b0476848d3190887ab0d614fcd750f811c287960ef3",
+        "bytes": 1801
+      }
+    ],
+    "captures": [
+      {
+        "case": "ordinary",
+        "file": "workflow-backward-routing.bmp",
+        "sha256": "b4a2f8b0c7ec378c1d6dca780fb2e1ddbec85966f349951ba283e1b5d812ed22",
+        "bytes": 3290742,
+        "visuallyReviewed": true,
+        "finding": "Dependency paths and arrowheads clear all three cards at the recorded scale; connection source is visible in the receiving inspector."
+      },
+      {
+        "case": "ordinary",
+        "file": "workflow-backward-routing-zoomed.bmp",
+        "sha256": "b888a515298965ef492d0f9a2e59d5e0d6b10be34fa7a9f628fc62dd14ed761c",
+        "bytes": 3290742,
+        "visuallyReviewed": true,
+        "finding": "Dependency paths and arrowheads clear all three cards at the recorded scale; connection source is visible in the receiving inspector."
+      },
+      {
+        "case": "spaces",
+        "file": "workflow-backward-routing.bmp",
+        "sha256": "b4a2f8b0c7ec378c1d6dca780fb2e1ddbec85966f349951ba283e1b5d812ed22",
+        "bytes": 3290742,
+        "visuallyReviewed": true,
+        "finding": "Dependency paths and arrowheads clear all three cards at the recorded scale; connection source is visible in the receiving inspector."
+      },
+      {
+        "case": "spaces",
+        "file": "workflow-backward-routing-zoomed.bmp",
+        "sha256": "b888a515298965ef492d0f9a2e59d5e0d6b10be34fa7a9f628fc62dd14ed761c",
+        "bytes": 3290742,
+        "visuallyReviewed": true,
+        "finding": "Dependency paths and arrowheads clear all three cards at the recorded scale; connection source is visible in the receiving inspector."
+      }
+    ],
+    "zoomCapture": {
+      "scalePercent": 83,
+      "activation": "documented native BM_CLICK",
+      "priorPhysicalClickDiagnosis": "Hosted screen 1024x768, work area height728. Zoom-button center (582,732) is outside the work area: WindowFromPoint reports MSTaskListWClass with centerHitsButton=false in both paths. The existing same-package workspace check independently passed physical zoom-button interactions."
+    },
+    "artifacts": [
+      {
+        "case": "spaces",
+        "id": 11425275080,
+        "bytes": 395894,
+        "digest": "sha256:f32a89e1d3aae5a69efe9423702a0ff60e411b7377c414b9dd903f1c27dda80e"
+      },
+      {
+        "case": "ordinary",
+        "id": 11425145308,
+        "bytes": 395645,
+        "digest": "sha256:66c2c7bd8446de029007d954d4f510744812390bda7d176eb50007105a831033"
+      }
+    ]
+  },
+  "artifactAudit": "cwl-dag-icon-0.9.0-artifact-audit-2026-10-06.json",
+  "priorReportedEvidence": {
+    "usedAsNewFeaturePass": false,
+    "publishedBaseline": "0.8.0",
+    "note": "Prior 0.8 release/tester acceptance is context only. The 125 source checks and Windows reports listed here were performed for the current request."
+  },
+  "limits": [
+    "Unpublished development candidate; tester acceptance and a 0.9 release have not been established.",
+    "External CWL execution requires a compatible CWL engine, Python 3.10+, matching packs and data.",
+    "Windows native replay runs embedded CWL helpers; independent stock CWL execution is Linux fixture evidence, not a Windows CWL-engine pass.",
+    "All 32 optional packs and cross-platform replacement-tool scientific equivalence were not executed.",
+    "The included updater supports 0.6.0 only; a 0.8.0-to-0.9.0 updater was not built or tested.",
+    "No new temporal scrolling or physical-display survey is claimed; workspace interaction and settled-rendering checks ran again."
+  ],
+  "intermediateValidation": [
+    {
+      "sourceCommit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
+      "validationCommit": "3352ef7819294ea1677688368af8bc0253140d0e",
+      "runId": 37487450679,
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37487450679",
+      "rebuilt": false,
+      "status": "failure",
+      "overallConclusion": "failure",
+      "ordinary": {
+        "resultsPassed": 7,
+        "resultsFailed": 1,
+        "skipped": 0
+      },
+      "spaces": {
+        "resultsPassed": 7,
+        "resultsFailed": 1,
+        "skipped": 0
+      },
+      "failure": "The connection succeeded and is visible in the retained screenshot, but the fixture checked the inspector of the previously selected third card. Corrected validation clicks the receiving card before asserting its connection description.",
+      "applicationChanged": false,
+      "reports": [
+        {
+          "file": "cwl-dag-icon-0.9.0-fixture-selection-ordinary.json",
+          "sha256": "b4a32fad1394aab9d3f11ad0c97e43e19c6e03c5bae7814b193fca56ab8bffb2"
+        },
+        {
+          "file": "cwl-dag-icon-0.9.0-fixture-selection-spaces.json",
+          "sha256": "b13b2b5f311b1aeeef2b1d68756b547c7468dee27a453603f47e6a351e41daeb"
+        }
+      ]
+    },
+    {
+      "sourceCommit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
+      "validationCommit": "a8c939a81ee6bdc0f3bb8f3682d4a415d768d9e8",
+      "runId": 37488239616,
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37488239616",
+      "rebuilt": false,
+      "status": "failure",
+      "overallConclusion": "failure",
+      "ordinary": {
+        "resultsPassed": 7,
+        "resultsFailed": 1,
+        "skipped": 0
+      },
+      "spaces": {
+        "resultsPassed": 7,
+        "resultsFailed": 1,
+        "skipped": 0
+      },
+      "failure": "Both real pointer connections and their receiving inspectors passed. A physical click for the zoomed capture struck the hosted desktop taskbar; the following run recorded WindowFromPoint=MSTaskListWClass at the button center. This run remains a failed check. Final capture uses documented BM_CLICK; physical zoom behavior passed in the separate workspace gate.",
+      "reports": [
+        {
+          "file": "cwl-dag-icon-0.9.0-fixture-zoom-ordinary.json",
+          "sha256": "0f2346c7759680953e961f7b31e8686a72467d30add70254468bb1eed3c79b7a"
+        },
+        {
+          "file": "cwl-dag-icon-0.9.0-fixture-zoom-spaces.json",
+          "sha256": "2ad4abaeccfa58f4d724f4d7c67378c2579674f3811b6180f2a85ec77e5aa3ae"
+        }
+      ]
+    }
+  ],
+  "independentFinalReview": {
+    "passed": true,
+    "candidateAndEvidenceHashesRechecked": true,
+    "recordedApplicationFilesCheckedPerCase": 6,
+    "evidenceFilesCheckedPerCase": 22,
+    "routeCapturesReviewed": 4,
+    "iconBitmapSizesChecked": [
+      16,
+      32
+    ],
+    "applicationSourceUnchanged": true,
+    "finding": "No remaining blocker for the requested feature candidate. Typed native connections and 100%/83% routes match the recorded claims; zoom-capture scope and taskbar occlusion are explicit."
+  }
+}

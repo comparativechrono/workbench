@@ -33,7 +33,7 @@ STARTER=('align-0.4.0','bam-0.4.0','variants-0.4.0')
 RUNTIME_MODULES=('app_version.py','catalog.py','engine.py','example.py','desktop_host.py','desktop_model.py',
                  'service.py','verify_installation.py','pack_checks.py','pack_manager.py',
                  'pack_security.py','core_checks.py','reference_provider.py','reference_manager.py',
-                 'reference_provenance.py')
+                 'reference_provenance.py','cwl_export.py','dag_routing.py')
 RUNTIME_METADATA=('starter-check-profile.json',)
 FIXED_DATE=(2026,10,5,0,0,0)
 
