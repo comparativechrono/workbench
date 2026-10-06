@@ -39,9 +39,42 @@ def utc():
     return datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
 
 
+def _io_path(value):
+    """Use extended Windows paths only at filesystem-call boundaries.
+
+    A native tool may create a valid output beyond MAX_PATH even when the host
+    machine has not opted Python into long ordinary paths. Keep the same
+    registry-independent I/O policy as the pack/reference managers, without
+    leaking the Windows namespace prefix into plans, provenance or tool argv.
+    """
+    if os.name != "nt":
+        return Path(value)
+    try:
+        from .pack_manager import filesystem_path
+    except ImportError:
+        from pack_manager import filesystem_path
+    return filesystem_path(value)
+
+
+def _display_path(value):
+    if os.name == "nt":
+        try:
+            from .pack_manager import ordinary_windows_path
+        except ImportError:
+            from pack_manager import ordinary_windows_path
+        value = ordinary_windows_path(value)
+    return Path(value)
+
+
+def _resolved_path(value):
+    # Resolve reparse points through the physical namespace, then compare and
+    # serialize ordinary absolute identities consistently with existing runs.
+    return _display_path(_io_path(value).resolve())
+
+
 def digest_file(path, cancel=None):
     h = hashlib.sha256()
-    with open(path, "rb") as stream:
+    with open(_io_path(path), "rb") as stream:
         for part in iter(lambda: stream.read(1024 * 1024), b""):
             if cancel is not None and cancel.is_set():
                 raise InterruptedError("Cancelled while verifying files.")
@@ -56,12 +89,12 @@ def canonical(value):
 def write_json(path, value):
     path = Path(path)
     temporary = path.with_name(path.name + ".pending")
-    with open(temporary, "w", encoding="utf-8", newline="\n") as stream:
+    with open(_io_path(temporary), "w", encoding="utf-8", newline="\n") as stream:
         json.dump(value, stream, ensure_ascii=False, indent=2, allow_nan=False)
         stream.write("\n")
         stream.flush()
         os.fsync(stream.fileno())
-    os.replace(temporary, path)
+    os.replace(_io_path(temporary), _io_path(path))
 
 
 def clean_text(value, maximum=8192):
@@ -103,12 +136,14 @@ def pin_for(tool):
 
 def _ordinary(path):
     path = Path(path).absolute()
-    if not path.is_file() or path.is_symlink():
+    physical = _io_path(path)
+    if not physical.is_file() or physical.is_symlink():
         raise ValueError("Select an existing ordinary file: " + str(path))
     for parent in path.parents:
-        if parent.is_symlink() or (hasattr(parent, "is_junction") and parent.is_junction()):
+        ancestor = _io_path(parent)
+        if ancestor.is_symlink() or (hasattr(ancestor, "is_junction") and ancestor.is_junction()):
             raise ValueError("Input folders must not be symbolic links or junctions: " + str(parent))
-    return path.resolve()
+    return _resolved_path(path)
 
 
 def _safe_relative(root, relative):
@@ -140,7 +175,7 @@ def _check_distinct_files(tool, values):
     for identity, field in fields.items():
         other = field.get('differentFrom')
         left, right = values.get(identity, ''), values.get(other, '')
-        if other and left and right and os.path.samefile(left, right):
+        if other and left and right and os.path.samefile(_io_path(left), _io_path(right)):
             raise ValueError(field['label']+' must be a different file from '+fields[other]['label']+'. Different names or hard links to the same file do not count.')
 
 
@@ -179,7 +214,7 @@ def _source_fields(source, port):
 
 
 def _head(path, count=4096):
-    with open(path, "rb") as stream:
+    with open(_io_path(path), "rb") as stream:
         magic = stream.read(2)
         stream.seek(0)
         if magic == b"\x1f\x8b":
@@ -191,7 +226,7 @@ def _head(path, count=4096):
 def _compression_kind(path, compressed=None):
     if compressed is False:
         return "none"
-    with open(path, "rb") as stream:
+    with open(_io_path(path), "rb") as stream:
         header = stream.read(12)
         if not header.startswith(b"\x1f\x8b"):
             return "none"
@@ -263,7 +298,7 @@ def _check_path_policy(tool, paths):
 class NativeBackend:
     """JSON-lines bridge into the existing manifest runner and Job Object."""
     def __init__(self, app_root):
-        self.app_root = Path(app_root).resolve()
+        self.app_root = _resolved_path(app_root)
         self._process_lock = threading.RLock()
         self._processes = set()
         self._closed = False
@@ -304,7 +339,7 @@ class NativeBackend:
         def watch():
             while not stopped.wait(0.1):
                 if cancel.is_set():
-                    Path(request["cancel_file"]).write_text("cancel\n", encoding="ascii")
+                    _io_path(request["cancel_file"]).write_text("cancel\n", encoding="ascii")
                     return
         watcher = threading.Thread(target=watch, daemon=True)
         watcher.start()
@@ -378,7 +413,7 @@ class NativeBackend:
 
 class Engine:
     def __init__(self, app_root, catalog=None, backend=None):
-        self.app_root = Path(app_root).resolve()
+        self.app_root = _resolved_path(app_root)
         if catalog is None:
             try:
                 from .catalog import load_catalog
@@ -782,12 +817,13 @@ class Engine:
         if not review["ok"]:
             raise ValueError("; ".join(i["message"] for i in review["errors"]))
         parent = Path(output_parent).absolute()
-        if not parent.is_dir() or parent.is_symlink():
+        if not _io_path(parent).is_dir() or _io_path(parent).is_symlink():
             raise ValueError("Select an existing output folder.")
         for ancestor in [parent] + list(parent.parents):
-            if ancestor.is_symlink() or (hasattr(ancestor, "is_junction") and ancestor.is_junction()):
+            physical = _io_path(ancestor)
+            if physical.is_symlink() or (hasattr(physical, "is_junction") and physical.is_junction()):
                 raise ValueError("The output folder must not use symbolic links or junctions.")
-        parent = parent.resolve()
+        parent = _resolved_path(parent)
         nodes = {n["id"]: n for n in graph["nodes"]}
         _, dependencies = self._topology(graph)
         frozen_nodes = []
@@ -827,9 +863,9 @@ class Engine:
                         source["type"] = "sam-rna" if rna else "sam"
                 source["files"][key] = str(path)
                 if str(path) not in evidence:
-                    before = path.stat()
+                    before = _io_path(path).stat()
                     checksum = digest_file(path, cancel)
-                    after = path.stat()
+                    after = _io_path(path).stat()
                     if (before.st_size, before.st_mtime_ns) != (after.st_size, after.st_mtime_ns):
                         raise ValueError("An input changed while preparing the run: " + str(path))
                     evidence[str(path)] = {"path": str(path), "bytes": after.st_size, "mtime_ns": after.st_mtime_ns, "sha256": checksum}
@@ -842,15 +878,15 @@ class Engine:
         self._counters(graph)
         run_id = "run-" + datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S") + "-" + uuid.uuid4().hex[:8]
         folder = parent / run_id
-        folder.mkdir(mode=0o700)
+        _io_path(folder).mkdir(mode=0o700)
         plan = {"schema": 1, "id": run_id, "created": utc(), "folder": str(folder), "graph": graph, "nodes": frozen_nodes, "inputs": evidence, "references": references, "warnings": review["warnings"], "scheduler": "sequential-independent-branches", "methods": self.methods(graph, references=references)}
         plan["sha256"] = hashlib.sha256(canonical(plan).encode("utf-8")).hexdigest()
         write_json(folder / "plan.json", plan)
         write_json(folder / "graph.json", graph)
         if references:
             write_json(folder / "reference-provenance.json", {"schema": 1, "inputs": references})
-        (folder / "methods-planned.txt").write_text(plan["methods"], encoding="utf-8")
-        (folder / "pipeline.svg").write_text(self.diagram(plan), encoding="utf-8")
+        _io_path(folder / "methods-planned.txt").write_text(plan["methods"], encoding="utf-8")
+        _io_path(folder / "pipeline.svg").write_text(self.diagram(plan), encoding="utf-8")
         return plan
 
     def _assert_disjoint_hashes(self, graph, evidence):
@@ -867,7 +903,7 @@ class Engine:
                         source = sources[ref]
                         if source.get("type") not in ALIGNMENT_TYPES | {"pair", "reads"}:
                             continue
-                        groups.append({evidence[str(Path(path).resolve())]["sha256"] for path in source.get("files", {}).values()})
+                        groups.append({evidence[str(_resolved_path(path))]["sha256"] for path in source.get("files", {}).values()})
                     else:
                         groups.append(lineages.get(ref.split("::", 1)[0], set()))
             if self._tool(node).get("merge") or node["tool"] == "bam/merge":
@@ -884,8 +920,8 @@ class Engine:
         folder = Path(tool["packFolder"])
         if not folder.is_absolute():
             folder = self.app_root / folder
-        folder = folder.resolve()
-        packs = (self.app_root / "packs").resolve()
+        folder = _resolved_path(folder)
+        packs = _resolved_path(self.app_root / "packs")
         if not folder.is_relative_to(packs):
             raise ValueError("Tool pack is outside the installed pack directory.")
         if digest_file(folder / "pack.ini") != tool["manifestSha256"]:
@@ -938,7 +974,7 @@ class Engine:
                         actual_type = (input_types or {}).get(str(path), port["type"])
                         evidence = _sequence_evidence(path, actual_type, accepted, port.get("requiredState", {}), cancel, allow_empty=False, rules=port.get("validation", {}))
                         checks.append(dict(evidence, portId=port["id"], path=str(path)))
-                    elif port["type"] in {"reads", "pair"} and path.stat().st_size == 0:
+                    elif port["type"] in {"reads", "pair"} and _io_path(path).stat().st_size == 0:
                         raise ValueError("No sequence records are available for this input: " + str(path))
         return checks
 
@@ -1063,12 +1099,12 @@ class Engine:
             raise ValueError("The frozen execution plan has changed.")
         plan["sha256"] = claimed
         folder = Path(plan["folder"])
-        stored = json.loads((folder / "plan.json").read_text(encoding="utf-8"))
+        stored = json.loads(_io_path(folder / "plan.json").read_text(encoding="utf-8"))
         stored_claim = stored.pop("sha256", None)
         stored_actual = hashlib.sha256(canonical(stored).encode("utf-8")).hexdigest()
         if stored_claim != claimed or stored_actual != claimed:
             raise ValueError("The stored execution plan does not match this run.")
-        if (folder / "run.json").exists():
+        if _io_path(folder / "run.json").exists():
             raise ValueError("This plan has already started. Prepare a new run to execute again.")
         sources = {s["id"]: s for s in plan["graph"]["sources"]}
         node_names = {n["id"]: n["label"] for n in plan["nodes"]}
@@ -1099,7 +1135,7 @@ class Engine:
                         for filename in str(value).splitlines():
                             if filename in plan["inputs"]:
                                 evidence = plan["inputs"][filename]
-                                if not Path(filename).is_file() or digest_file(filename, cancel) != evidence["sha256"]:
+                                if not _io_path(filename).is_file() or digest_file(filename, cancel) != evidence["sha256"]:
                                     raise ValueError("An external input changed after the plan was frozen: " + filename)
                     for refs in node["inputs"].values():
                         for ref in refs:
@@ -1108,7 +1144,7 @@ class Engine:
                                     if digest_file(filename, cancel) != outputs[ref]["sha256"][key]:
                                         raise ValueError("An upstream output changed before it could be consumed: " + ref)
                     step_folder = folder / display_id(identity)
-                    step_folder.mkdir()
+                    _io_path(step_folder).mkdir()
                     if node["tool"].get("builtin") or node["tool"]["id"] == "builtin/report":
                         result = self._report(node, values, step_folder, outputs, sources, node_names)
                     else:
@@ -1118,20 +1154,20 @@ class Engine:
                                 descriptor = sources.get(ref) or outputs.get(ref)
                                 if descriptor:
                                     for filename in descriptor.get("files", {}).values():
-                                        input_types[str(Path(filename).resolve())] = descriptor["type"]
+                                        input_types[str(_resolved_path(filename))] = descriptor["type"]
                         entry["preflight"] = self._preflight(node, values, cancel, input_types)
-                        request = {"app_root": str(self.app_root), "pack_folder": str((self.app_root / node["tool"]["packFolder"]).resolve()), "pack_sha256": node["tool"]["manifestSha256"], "workflow_id": node["tool"]["workflowId"], "output_folder": str(step_folder), "values": values, "cancel_file": str(folder / "cancel.request")}
+                        request = {"app_root": str(self.app_root), "pack_folder": str(_resolved_path(self.app_root / node["tool"]["packFolder"])), "pack_sha256": node["tool"]["manifestSha256"], "workflow_id": node["tool"]["workflowId"], "output_folder": str(step_folder), "values": values, "cancel_file": str(folder / "cancel.request")}
                         result = self.backend.run(request, lambda item: event(dict(item, nodeId=identity)), cancel)
                     entry.update(status="success" if result.get("success") else "cancelled" if result.get("cancelled") else "failed", message=result.get("message", ""), folder=result.get("folder", str(step_folder)))
                     if entry["status"] == "success":
-                        actual_folder = Path(entry["folder"]).resolve()
-                        if not actual_folder.is_relative_to(step_folder.resolve()):
+                        actual_folder = _resolved_path(entry["folder"])
+                        if not actual_folder.is_relative_to(_resolved_path(step_folder)):
                             raise ValueError("Runner returned a result outside this step's private folder.")
                         for output in node["tool"].get("outputs", []):
                             files, hashes = {}, {}
                             for key, relative in output.get("files", {}).items():
                                 path = _safe_relative(actual_folder, relative)
-                                if not path.is_file():
+                                if not _io_path(path).is_file():
                                     raise ValueError("The runner did not produce declared output " + output["id"] + ": " + str(path))
                                 if node["tool"].get("schemaAsset") and output["type"] in {"fasta-nucleotide", "fasta-protein", "msa-nucleotide", "msa-protein", "fasta-nucleotide-abundance", "id-list"}:
                                     declared = next((f for f in output.get("fields", []) if f["id"] == key), {})
@@ -1156,7 +1192,7 @@ class Engine:
         record["status"] = "cancelled" if cancel.is_set() or any(v == "cancelled" for v in statuses.values()) else "success" if all(v == "success" for v in statuses.values()) else "failed"
         record["success"] = record["status"] == "success"
         record["methods"] = self.methods(plan["graph"], completed=True, statuses=statuses, references=plan.get("references", {}))
-        (folder / "methods-completed.txt").write_text(record["methods"], encoding="utf-8")
+        _io_path(folder / "methods-completed.txt").write_text(record["methods"], encoding="utf-8")
         write_json(folder / "run.json", record)
         event({"type": "run", "status": record["status"], "folder": str(folder)})
         return record
@@ -1171,7 +1207,7 @@ class Engine:
                     item = {"label": sources[ref].get("label", ref), "files": sources[ref].get("files", {})}
                 for key, filename in item["files"].items():
                     path = _ordinary(filename)
-                    raw = path.read_bytes() if path.stat().st_size <= 4 * 1024 * 1024 else b"Report exceeds inline size limit; open the named original file."
+                    raw = _io_path(path).read_bytes() if _io_path(path).stat().st_size <= 4 * 1024 * 1024 else b"Report exceeds inline size limit; open the named original file."
                     try:
                         content = raw.decode("utf-8")
                     except UnicodeDecodeError:
@@ -1193,11 +1229,11 @@ class Engine:
         for output in node["tool"].get("outputs", []):
             for relative in output.get("files", {}).values():
                 target = _safe_relative(folder, relative)
-                target.parent.mkdir(parents=True, exist_ok=True)
+                _io_path(target.parent).mkdir(parents=True, exist_ok=True)
                 if target.suffix.lower() == ".json":
                     write_json(target, {"schema": 1, "aggregation": "separate-sections-no-pooled-statistics", "sections": sections})
                 else:
-                    target.write_text(body, encoding="utf-8")
+                    _io_path(target).write_text(body, encoding="utf-8")
         return {"success": True, "cancelled": False, "folder": str(folder), "message": "Separate report sections written."}
 
     def diagram(self, plan):
@@ -1271,7 +1307,7 @@ def _fasta_dictionary(filename, cancel=None):
     """Names, lengths and SAM-style uppercase sequence MD5, streamed locally."""
     result = []
     name, length, checksum = None, 0, hashlib.md5()
-    with open(filename, "rb") as stream:
+    with open(_io_path(filename), "rb") as stream:
         for line in stream:
             if cancel is not None and cancel.is_set():
                 raise InterruptedError("Cancelled while checking the reference FASTA.")
@@ -1322,9 +1358,9 @@ def _vcf_header_attributes(text):
 def _vcf_header_evidence(path, rules, cancel):
     """Check declared INFO header types, without claiming per-record validity."""
     declarations={};total=0
-    with open(path,'rb') as probe:
+    with open(_io_path(path),'rb') as probe:
         compressed=probe.read(2)==b'\x1f\x8b'
-    with (gzip.open(path,'rb') if compressed else open(path,'rb')) as stream:
+    with (gzip.open(_io_path(path),'rb') if compressed else open(_io_path(path),'rb')) as stream:
         while True:
             if cancel.is_set():
                 raise InterruptedError('Cancelled while checking the VCF resource header.')
@@ -1366,7 +1402,7 @@ def _bed_evidence(path, rules, reference_dictionary, cancel):
         raise ValueError('BED interval validation requires a selected reference FASTA.')
     minimum = rules.get('minColumns',3)
     count, intervals = 0, {}
-    with open(path,'r',encoding='utf-8-sig') as stream:
+    with open(_io_path(path),'r',encoding='utf-8-sig') as stream:
         for number,line in enumerate(stream,1):
             if cancel.is_set():
                 raise InterruptedError('Cancelled while validating BED intervals.')
@@ -1424,7 +1460,7 @@ def _sequence_evidence(path, declared_type, accepted, state, cancel, allow_empty
         raise ValueError("No sequence records are available for this input: " + str(path))
     if declared_type == "id-list":
         count = 0
-        with (gzip.open(path, "rt", encoding="utf-8") if compressed else open(path, "r", encoding="utf-8")) as stream:
+        with (gzip.open(_io_path(path), "rt", encoding="utf-8") if compressed else open(_io_path(path), "r", encoding="utf-8")) as stream:
             for line in stream:
                 if cancel.is_set():
                     raise InterruptedError("Cancelled while checking identifier list.")
@@ -1474,7 +1510,7 @@ def _sequence_evidence(path, declared_type, accepted, state, cancel, allow_empty
         if width is None:
             width = length
         total += length
-    with (gzip.open(path, "rb") if compressed else open(path, "rb")) as stream:
+    with (gzip.open(_io_path(path), "rb") if compressed else open(_io_path(path), "rb")) as stream:
         for line in stream:
             if cancel.is_set():
                 raise InterruptedError("Cancelled while validating FASTA sequences.")

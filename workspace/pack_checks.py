@@ -15,7 +15,7 @@ import threading
 import uuid
 
 from catalog import load_pack, _relative, resolve_tool
-from engine import Engine, digest_file, pin_for, write_json
+from engine import Engine, digest_file, pin_for, write_json, _io_path
 
 
 def require(condition, message):
@@ -74,6 +74,7 @@ def _sequence_records(text, kind):
 
 
 def _read_check_text(path):
+    path = _io_path(path)
     limit = 4*1024*1024
     require(path.stat().st_size <= limit, 'Check output is unexpectedly large')
     with path.open('rb') as stream:
@@ -268,7 +269,7 @@ def run_pack_checks(root, catalog, output_parent, event=None, cancel=None, backe
     if not installed and not discovery_failures:
         return {'success':True, 'passed':0, 'failed':0, 'checks':[], 'message':'No additional pack self-checks are declared.'}
     folder = Path(output_parent)/('pack-checks-'+datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S')+'-'+uuid.uuid4().hex[:8])
-    folder.mkdir()
+    _io_path(folder).mkdir()
     engine = Engine(root, catalog, backend=backend) if backend is not None else Engine(root, catalog)
     report = {'schema':1, 'folder':str(folder), 'checks':discovery_failures, 'nativeWindowsExecuted':os.name == 'nt'}
     def tool_event(value):

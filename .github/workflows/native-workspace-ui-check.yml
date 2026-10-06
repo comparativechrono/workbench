@@ -51,6 +51,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          python3 workspace/tests/test_engine_paths.py
           python3 workspace/tests/test_workflow_inputs.py
           python3 workspace/tests/test_catalog_presentation.py
           python3 workspace/tests/test_desktop_modes.py
@@ -165,5 +166,109 @@ jobs:
           path: |
             ${{ runner.temp }}/workspace-ui-evidence
             ${{ runner.temp }}/workspace-reference-evidence
+          if-no-files-found: error
+          retention-days: 30
+
+  native-long-paths:
+    needs: build
+    runs-on: windows-2022
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: workspace-ui-candidate-${{ github.sha }}
+          path: ${{ runner.temp }}/long-path-candidate
+      - name: Recover unchanged reported candidate for diagnostic negative control
+        id: prior
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: workspace-ui-candidate-0d2a993fca95a5837a69aa05c63aa5e806c553af
+          run-id: 37441781509
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/long-path-prior-candidate
+      - name: Prove failure and full scientific recovery without Windows long-path opt-in
+        shell: pwsh
+        env:
+          ASSET_SHA256: ${{ needs.build.outputs.asset_sha256 }}
+          SOURCE_COMMIT: ${{ github.sha }}
+          PRIOR_DOWNLOAD_OUTCOME: ${{ steps.prior.outcome }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $newZip = Join-Path $env:RUNNER_TEMP 'long-path-candidate/native-workbench-0.8.0-starter-windows.zip'
+          $oldZip = Join-Path $env:RUNNER_TEMP 'long-path-prior-candidate/native-workbench-0.8.0-starter-windows.zip'
+          $oldSha = 'de099e5feef437c788352c31c0e743c7e8f22aa08bfe2364e59b715ec3501806'
+          if ((Get-FileHash $newZip -Algorithm SHA256).Hash -ne $env:ASSET_SHA256) { throw 'New candidate SHA-256 mismatch.' }
+          $newRoot = Join-Path $env:RUNNER_TEMP 'long-path-fixed'
+          $oldRoot = Join-Path $env:RUNNER_TEMP 'long-path-prior'
+          Expand-Archive $newZip $newRoot
+          $priorAvailable = $env:PRIOR_DOWNLOAD_OUTCOME -eq 'success' -and (Test-Path $oldZip)
+          $priorHashValid = $priorAvailable -and (Get-FileHash $oldZip -Algorithm SHA256).Hash -eq $oldSha
+          if ($priorHashValid) { Expand-Archive $oldZip $oldRoot }
+          $evidence = Join-Path $env:RUNNER_TEMP 'long-path-evidence'
+          New-Item -ItemType Directory -Force $evidence | Out-Null
+          $priorState = @{ artifactId = 11401422780; runId = 37441781509; available = $priorAvailable; hashVerified = $priorHashValid; executed = $false; status = 'unavailable'; passed = 0; skips = @() }
+          if (-not $priorAvailable) { $priorState.skips = @('Diagnostic prior-candidate artifact is unavailable; no negative-control check was executed or counted as passed.') }
+          $priorState | ConvertTo-Json | Set-Content (Join-Path $evidence 'negative-control-availability.json')
+          $negativeFailure = $null
+          $key = 'HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem'
+          $before = Get-ItemProperty -Path $key -Name LongPathsEnabled -ErrorAction SilentlyContinue
+          $hadValue = $null -ne $before
+          $oldValue = if ($hadValue) { [int]$before.LongPathsEnabled } else { $null }
+          $setup = @{ scope = 'Disposable hosted CI runner only; no application or user-machine policy changes'; previousValue = $oldValue; requestedValue = 0; restored = $false }
+          try {
+            New-ItemProperty -Path $key -Name LongPathsEnabled -PropertyType DWord -Value 0 -Force | Out-Null
+            $setup.observedValue = [int](Get-ItemPropertyValue -Path $key -Name LongPathsEnabled)
+            if ($setup.observedValue -ne 0) { throw 'Could not establish disabled-policy regression environment.' }
+            $setup | ConvertTo-Json | Set-Content (Join-Path $evidence 'policy-setup.json')
+            # Both interpreters and their private hosts start after the change,
+            # so Windows cannot reuse a previously cached long-path policy.
+            if ($priorAvailable -and -not $priorHashValid) {
+              $negativeFailure = 'Reported candidate SHA-256 mismatch; negative-control package was not executed.'
+              $priorState.status = 'failed-integrity'
+            } elseif ($priorHashValid) {
+              $oldApp = Join-Path $oldRoot 'native-workbench'
+              $priorState.executed = $true
+              & (Join-Path $oldApp 'runtime/python/python.exe') -I scripts/check_long_paths_windows.py --app-root $oldApp --output-root (Join-Path $env:RUNNER_TEMP 'old synthetic check') --report (Join-Path $evidence 'prior/native-long-paths.json') --source-commit '0d2a993fca95a5837a69aa05c63aa5e806c553af' --asset-sha256 $oldSha --expect-missing-output
+              if ($LASTEXITCODE -ne 0) {
+                $negativeFailure = 'The exact reported package did not reproduce the expected MAX_PATH failure.'
+                $priorState.status = 'failed'
+              } else {
+                $priorState.status = 'expected-failure-reproduced'
+                $priorState.passed = (Get-Content (Join-Path $evidence 'prior/native-long-paths.json') | ConvertFrom-Json).passed
+              }
+            }
+            $priorState | ConvertTo-Json | Set-Content (Join-Path $evidence 'negative-control-availability.json')
+            # The fixed candidate remains mandatory even when the time-limited
+            # old diagnostic artifact has expired or its control failed.
+            $newApp = Join-Path $newRoot 'native-workbench'
+            & (Join-Path $newApp 'runtime/python/python.exe') -I scripts/check_long_paths_windows.py --app-root $newApp --output-root (Join-Path $env:RUNNER_TEMP 'new synthetic check') --report (Join-Path $evidence 'fixed/native-long-paths.json') --source-commit $env:SOURCE_COMMIT --asset-sha256 $env:ASSET_SHA256
+            if ($LASTEXITCODE -ne 0) { throw 'The corrected package failed the full native long-path scientific regression.' }
+            if ($negativeFailure) { throw $negativeFailure }
+          } finally {
+            if ($hadValue) {
+              Set-ItemProperty -Path $key -Name LongPathsEnabled -Value $oldValue
+              $setup.restoredValue = [int](Get-ItemPropertyValue -Path $key -Name LongPathsEnabled)
+              $setup.restored = $setup.restoredValue -eq $oldValue
+            } else {
+              Remove-ItemProperty -Path $key -Name LongPathsEnabled -ErrorAction SilentlyContinue
+              $setup.restored = $null -eq (Get-ItemProperty -Path $key -Name LongPathsEnabled -ErrorAction SilentlyContinue)
+            }
+            $setup | ConvertTo-Json | Set-Content (Join-Path $evidence 'policy-setup.json')
+            if (-not $setup.restored) { throw 'Disposable runner policy was not restored.' }
+          }
+      - name: Retain exact long-path negative control and scientific evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: workspace-ui-long-paths-${{ github.sha }}
+          path: ${{ runner.temp }}/long-path-evidence
           if-no-files-found: error
           retention-days: 30
