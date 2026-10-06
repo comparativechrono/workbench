@@ -63,7 +63,7 @@ class DesktopHost:
         # Standalone tools and the workflow have independent edits, bindings,
         # selections and undo stacks. An explicitly supplied model remains the
         # active workflow for callers embedding the older single-model host.
-        self._workflow_model = model if model is not None else DesktopModel(self.app.root, self.app.catalog)
+        self._workflow_model = model if model is not None else DesktopModel(self.app.root, self.app.catalog, auto_sources=False)
         self._tool_model = DesktopModel(self.app.root, self.app.catalog)
         self._tool_models = {}
         self.mode = "workflow" if model is not None else "tool"
@@ -185,7 +185,7 @@ class DesktopHost:
                     targets = self.model.reference_targets(resource)
                 return {"targets": targets, "notice":
                         "Choose the named input to fill. Check the assembly and reference type required by your analysis."
-                        if targets else "Add a compatible tool first, then select its reference input. Other uses can be chosen with the input's Browse button."}
+                        if targets else "Add a Reference FASTA workflow input, or open a tool with a compatible reference input. Other uses can be chosen with the input's Browse button."}
             source_id = short_text(params.get("source_id"), "reference input source", 100)
             field_id = short_text(params.get("field_id"), "reference input field", 100)
             with self.app.lock:

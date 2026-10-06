@@ -9,6 +9,8 @@ It never modifies published artifacts or asserts unsupported DPI coverage.
 from __future__ import annotations
 
 import argparse
+from collections import Counter
+import gzip
 from datetime import datetime, timezone
 import ctypes
 from ctypes import wintypes
@@ -52,6 +54,12 @@ class NativeUI:
         u.IsWindowEnabled.argtypes = [wintypes.HWND]
         u.GetWindowRect.argtypes = [wintypes.HWND, ctypes.POINTER(wintypes.RECT)]
         u.GetClientRect.argtypes = [wintypes.HWND, ctypes.POINTER(wintypes.RECT)]
+        class ScrollInfo(ctypes.Structure):
+            _fields_ = [("cbSize", wintypes.UINT), ("fMask", wintypes.UINT),
+                        ("nMin", ctypes.c_int), ("nMax", ctypes.c_int),
+                        ("nPage", wintypes.UINT), ("nPos", ctypes.c_int), ("nTrackPos", ctypes.c_int)]
+        self.ScrollInfo = ScrollInfo
+        u.GetScrollInfo.argtypes = [wintypes.HWND, ctypes.c_int, ctypes.POINTER(ScrollInfo)]
         u.ClientToScreen.argtypes = [wintypes.HWND, ctypes.POINTER(wintypes.POINT)]
         u.SendMessageTimeoutW.argtypes = [wintypes.HWND, wintypes.UINT, wintypes.WPARAM,
                                          wintypes.LPARAM, wintypes.UINT, wintypes.UINT,
@@ -73,6 +81,11 @@ class NativeUI:
         g.SelectObject.restype = wintypes.HANDLE
         g.DeleteObject.argtypes = [wintypes.HANDLE]
         g.DeleteDC.argtypes = [wintypes.HDC]
+        g.BitBlt.argtypes = [wintypes.HDC, ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                            wintypes.HDC, ctypes.c_int, ctypes.c_int, wintypes.DWORD]
+        g.BitBlt.restype = wintypes.BOOL
+        u.RedrawWindow.argtypes = [wintypes.HWND, ctypes.c_void_p, ctypes.c_void_p, wintypes.UINT]
+        u.RedrawWindow.restype = wintypes.BOOL
         g.GetDIBits.argtypes = [wintypes.HDC, wintypes.HBITMAP, wintypes.UINT, wintypes.UINT,
                                 ctypes.c_void_p, ctypes.c_void_p, wintypes.UINT]
         class MouseInput(ctypes.Structure):
@@ -228,6 +241,12 @@ class NativeUI:
         require(self.user.SendInput(1, ctypes.byref(item), ctypes.sizeof(item)) == 1,
                 "Native pointer input was unavailable; do not count drag as passed.")
 
+    def scroll_info(self, hwnd, bar=1):
+        value = self.ScrollInfo()
+        value.cbSize, value.fMask = ctypes.sizeof(value), 0x17
+        require(self.user.GetScrollInfo(hwnd, bar, ctypes.byref(value)), "Could not inspect native scroll state.")
+        return {key: getattr(value, key) for key in ("nMin", "nMax", "nPage", "nPos")}
+
     def click_at(self, x, y):
         self.mouse(x, y)
         self.mouse(x, y, 2)
@@ -243,6 +262,44 @@ class NativeUI:
                 time.sleep(.035)
         finally:
             self.mouse(*finish, 4)
+
+    def screen_capture(self, filename, bounds):
+        """Read visible desktop pixels with BitBlt, without asking the app to paint."""
+        left, top, right, bottom = bounds
+        width, height = right-left, bottom-top
+        require(0 <= left < right <= self.user.GetSystemMetrics(0) and
+                0 <= top < bottom <= self.user.GetSystemMetrics(1), "Screen capture rectangle is off desktop.")
+        dc = self.user.GetDC(None)
+        memory = self.gdi.CreateCompatibleDC(dc)
+        bitmap = self.gdi.CreateCompatibleBitmap(dc, width, height)
+        old = self.gdi.SelectObject(memory, bitmap)
+        try:
+            require(self.gdi.BitBlt(memory, 0, 0, width, height, dc, left, top, 0x00CC0020),
+                    "Could not capture displayed pixels without repainting.")
+            header = struct.pack("<IiiHHIIiiII", 40, width, -height, 1, 32, 0, width*height*4, 0, 0, 0, 0)
+            info = ctypes.create_string_buffer(header + bytes(1024))
+            pixels = ctypes.create_string_buffer(width*height*4)
+            self.gdi.SelectObject(memory, old)
+            require(self.gdi.GetDIBits(memory, bitmap, 0, height, pixels, info, 0) == height,
+                    "Actual screen pixel read failed.")
+            raw = pixels.raw
+            path = self.evidence / filename
+            path.write_bytes(struct.pack("<2sIHHI", b"BM", 54+len(raw), 0, 0, 54) + header + raw)
+            return {"path": filename, "width": width, "height": height, "sha256": sha256(path),
+                    "method": "screen BitBlt; no PrintWindow repaint"}, raw
+        finally:
+            self.gdi.SelectObject(memory, old)
+            self.gdi.DeleteObject(bitmap)
+            self.gdi.DeleteDC(memory)
+            self.user.ReleaseDC(None, dc)
+
+    def wheel(self, x, y, delta):
+        self.mouse(x, y)
+        item = self.Input()
+        item.type = 0
+        item.data.mi = self.MouseInput(0, 0, delta & 0xffffffff, 0x0800, 0, 0)
+        require(self.user.SendInput(1, ctypes.byref(item), ctypes.sizeof(item)) == 1,
+                "Native wheel input was unavailable.")
 
     def capture(self, filename, owner=None):
         hwnd = owner or self.main
@@ -301,6 +358,10 @@ def host_contracts(root, evidence):
         require(not workflow["nodes"], "Standalone operation leaked into empty workflow.")
         first = host.call("model", {"action": "add_tool", "payload": {"toolId": "bam/sort"}})
         first_id = first["selected"]
+        require(not first["sources"] and all(not refs for refs in first["graph"]["nodes"][0]["inputs"].values()),
+                "Adding a workflow tool invented external input boxes.")
+        require(not first["inspector"]["sources"] and all(not port["sources"] for port in first["inspector"]["ports"]),
+                "Workflow tool inspector duplicated input file forms.")
         second = host.call("model", {"action": "add_tool", "payload": {"toolId": "bam/sort"}})
         second_id = second["selected"]
         compatible_preview = host.call("workspace/connection-targets", {"ref": first_id + "::sorted"})
@@ -318,7 +379,18 @@ def host_contracts(root, evidence):
         type_preview = host.call("workspace/connection-targets", {"ref": reference_ref})
         require({"nodeId": first_id, "portId": "alignment"} not in type_preview["targets"],
                 "Native port preview offered a FASTA reference to an alignment input.")
-        before = reference_node["graph"]
+        added = host.call("model", {"action": "add_input", "payload": {"inputType": "reference", "label": "Shared genome"}})
+        explicit_source = added["selected"]
+        require(added["inspector"]["kind"] == "source" and added["inspector"]["sourceId"] == explicit_source,
+                "Explicit input did not own its inspector.")
+        field = added["inspector"]["fields"][0]["id"]
+        host.call("model", {"action": "apply_fields", "payload": {"sourceId": explicit_source,
+            "files": {explicit_source: {field: str(fixture)}}}})
+        shared = host.call("model", {"action": "connect", "payload": {
+            "nodeId": reference_node["selected"], "portId": "reference", "refs": [explicit_source]}})
+        require(len(shared["sources"]) == 1, "Workflow input connection duplicated the external source.")
+        require(not shared["inspector"].get("sources"), "Connected workflow input duplicated a file editor.")
+        before = shared["graph"]
         rejected = []
         for label, payload in [
             ("cycle", {"nodeId": first_id, "portId": "alignment", "refs": [second_id + "::sorted"]}),
@@ -344,7 +416,96 @@ def host_contracts(root, evidence):
                 "portPreviews": {"compatible": compatible_preview, "cycle": cycle_preview, "type": type_preview},
                 "checks": ["Default standalone mode", "Independent preserved tool and workflow graphs",
                            "Compatible graph edge", "Bounded native compatibility preview",
-                           "Atomic cycle and semantic type rejection", "Per-tool settings and input retention"]}
+                           "Atomic cycle and semantic type rejection", "Per-tool settings and input retention",
+                           "Workflow additions leave ports unbound without automatic source boxes",
+                           "Explicit reusable input owns one file editor and connects without duplication"]}
+    finally:
+        host.close()
+
+
+def native_scientific_chain(root, evidence):
+    """Exercise the requested SAM-to-BAM path through explicit native-host edits.
+
+    The tiny starter fixture is public synthetic truth, never user data. We
+    inspect both the original SAM and the BAM converted back to SAM by the
+    exact bundled SAMtools, comparing every record rather than just file size.
+    """
+    host = PrivateHost(root, evidence, "workflow-science", offline=True)
+    try:
+        host.call("init")
+        host.call("workspace/mode", {"mode": "workflow"})
+        alignment = host.call("model", {"action": "add_tool", "payload": {"toolId": "align/paired-end"}})["selected"]
+        sorting = host.call("model", {"action": "add_tool", "payload": {"toolId": "bam/sort"}})["selected"]
+        require(not host.call("state")["sources"], "Scientific workflow tools auto-created inputs.")
+        fixture = root / "examples" / "starter"
+        profile = json.loads((root / "workspace" / "starter-check-profile.json").read_text(encoding="utf-8"))
+        for name, expected in profile["fixtures"].items():
+            require(sha256(fixture / name) == expected, "Scientific fixture hash mismatch: " + name)
+        for kind, names, port in [("reference", ["reference.fa"], "reference"),
+                                  ("pair", ["reads1.fastq", "reads2.fastq"], "reads")]:
+            state = host.call("model", {"action": "add_input", "payload": {"inputType": kind}})
+            source = state["selected"]
+            fields = state["inspector"]["fields"]
+            require(len(fields) == len(names), "Explicit workflow input fields differ from the declared semantic contract.")
+            host.call("model", {"action": "apply_fields", "payload": {"sourceId": source,
+                "files": {source: {field["id"]: str(fixture / name) for field, name in zip(fields, names)}}}})
+            host.call("model", {"action": "connect", "payload": {"nodeId": alignment, "portId": port, "refs": [source]}})
+        host.call("model", {"action": "apply_fields", "payload": {"nodeId": alignment,
+            "params": {"sample": "starter", "threads": "2"}}})
+        state = host.call("model", {"action": "connect", "payload": {
+            "nodeId": sorting, "portId": "alignment", "refs": [alignment + "::sam"]}})
+        require(len(state["sources"]) == 2 and len(state["nodes"]) == 2,
+                "Two-input/two-tool workflow contains unexpected nodes or duplicated bindings.")
+        require(host.call("review")["valid"], "Explicit minimap2-to-SAMtools graph failed review.")
+        output = evidence / "scientific-results"
+        output.mkdir(exist_ok=True)
+        started = host.call("run", {"output_folder": str(output)})
+        deadline = time.monotonic() + 180
+        while time.monotonic() < deadline:
+            run = host.call("run/get", {"run_id": started["run_id"]})
+            if run["status"] not in ("preparing", "running", "cancelling"):
+                break
+            time.sleep(.1)
+        else:
+            raise TimeoutError("Native explicit-input SAM-to-BAM workflow did not finish.")
+        require(run["status"] == "completed", "Native explicit-input SAM-to-BAM workflow failed: " + json.dumps(run))
+        folder = Path(run["folder"])
+        record = json.loads((folder / "run.json").read_text(encoding="utf-8"))
+        sam = Path(record["outputs"][alignment + "::sam"]["files"]["sam"])
+        bam = Path(record["outputs"][sorting + "::sorted"]["files"]["sorted"])
+        with gzip.open(bam, "rb") as handle:
+            require(handle.read(4) == b"BAM\x01", "SAMtools sort did not produce binary BAM.")
+        samtools = root / "packs" / "bam-0.4.0" / "bin" / "samtools.exe"
+        decoded = subprocess.run([str(samtools), "view", "-h", str(bam)], cwd=root,
+                                 stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=60)
+        require(decoded.returncode == 0, "Bundled SAMtools could not decode sorted BAM: " + decoded.stderr.decode(errors="replace"))
+        original_text = sam.read_text(encoding="utf-8")
+        decoded_text = decoded.stdout.decode("utf-8")
+        original = [line for line in original_text.splitlines() if line and not line.startswith("@")]
+        converted = [line for line in decoded_text.splitlines() if line and not line.startswith("@")]
+        require(len(original) == len(converted) == 202, "Native alignment truth must contain exactly 202 records.")
+        require(Counter(original) == Counter(converted), "SAM-to-BAM conversion changed alignment records, mate flags, sequence, qualities or tags.")
+        rows = [line.split("\t") for line in converted]
+        require(all(int(row[1]) & 1 and int(row[1]) & 2 and not int(row[1]) & 4 for row in rows),
+                "Expected 202 mapped, paired and properly paired synthetic records.")
+        require(all(row[2] == "starter" and "RG:Z:starter" in row[11:] for row in rows),
+                "Converted alignments lost the expected reference or read group.")
+        require([int(row[3]) for row in rows] == sorted(int(row[3]) for row in rows),
+                "SAMtools output is not in coordinate order.")
+        require(any(line.startswith("@SQ\tSN:starter\tLN:3000") for line in decoded_text.splitlines()),
+                "BAM header lost the known synthetic reference length.")
+        require(any(line.startswith("@RG\t") and "SM:starter" in line for line in decoded_text.splitlines()),
+                "BAM header lost the sample read-group identity.")
+        write_json(evidence / "native-workflow-science-run.json", record)
+        result = {"networkSocketOperationsDenied": True, "nativeWindowsExecuted": True,
+                  "graph": state["graph"], "records": len(rows), "fixtureHashes": profile["fixtures"],
+                  "sam": {"path": str(sam), "sha256": sha256(sam)},
+                  "bam": {"path": str(bam), "sha256": sha256(bam)},
+                  "samtoolsSha256": sha256(samtools), "runFolder": str(folder),
+                  "checks": ["Native minimap2 alignment chains to SAMtools coordinate-sorted binary BAM using two explicit inputs",
+                             "All 202 synthetic mapped proper-pair records, mate flags, sequence, quality and read groups survive SAM-to-BAM conversion"]}
+        write_json(evidence / "native-workflow-science.json", result)
+        return result
     finally:
         host.close()
 
@@ -359,6 +520,22 @@ def gui_contracts(root, evidence, report):
     try:
         ui.wait("installed native tool library", lambda:
                 ui.user.IsWindowEnabled(ui.child(410)) and ui.send(ui.child(104), 0x1004) > 0)
+        ui.click_button(402)
+        def manager_window():
+            return next((h for h in ui.windows() if ui.label(h, True) == "WorkbenchPackManager060"), None)
+        ui.wait("first Manage tools click opens without a JSON array error", lambda: manager_window())
+        manager = manager_window()
+        ui.wait("first Manage tools opening populates installed packs", lambda:
+                ui.send(ui.child(503, manager), 0x1004) >= 3 and bool(ui.label(ui.child(504, manager))))
+        captures.append(ui.capture("manage-tools-first-open.bmp", manager))
+        close = ui.child(513, manager)
+        ui.send(close, 0x00F5)
+        ui.wait("close Manage tools", lambda: not manager_window())
+        ui.click_button(402)
+        ui.wait("Manage tools reopens with populated installed packs", lambda:
+                manager_window() and ui.send(ui.child(503, manager_window()), 0x1004) >= 3)
+        ui.send(ui.child(513, manager_window()), 0x00F5)
+        ui.wait("return from reopened Manage tools", lambda: not manager_window())
         ui.user.MoveWindow(ui.main, 0, 0, 1280, 900, True)
         dpi = ui.user.GetDpiForWindow(ui.main)
         scale = dpi / 96
@@ -405,6 +582,78 @@ def gui_contracts(root, evidence, report):
                 require(tools[2] <= canvas[0] and canvas[2] <= form[0], "Workflow panes overlap.")
             geometry.append({"mode": mode, "requestedSize": size, "actualWindowBounds": ui.bounds(ui.main),
                              "dpi": ui.user.GetDpiForWindow(ui.main), "controls": rows})
+        def add_input(label):
+            ui.click_button(419)
+            def modal_window():
+                return next((h for h in ui.windows() if ui.label(h) == "Add workflow input"), None)
+            ui.wait("open native workflow input chooser", lambda: modal_window())
+            modal = modal_window()
+            # The nested native modal loop must safely process the preceding
+            # draft commit while its input choices remain open.
+            time.sleep(.3)
+            choices = ui.child(105, modal)
+            labels = []
+            for index in range(ui.send(choices, 0x018B)):  # LB_GETCOUNT.
+                buffer = ctypes.create_unicode_buffer(1024)
+                require(ui.send(choices, 0x0189, index, ctypes.addressof(buffer)) < len(buffer),
+                        "Native input type label is too long.")
+                labels.append(buffer.value)
+            require(label in labels, "Native input chooser lacks semantic type: " + label)
+            index = labels.index(label)
+            ui.send(choices, 0x0186, index)  # LB_SETCURSEL; native choice, no application RPC.
+            button = ui.child(1, modal)
+            left, top, right, bottom = ui.bounds(button)
+            ui.click_at((left+right)//2, (top+bottom)//2)
+            ui.wait("new workflow input owns its file form", lambda: has_text(label))
+
+        def scroll_rendering_check():
+            select_tool("Paired-end alignment")
+            ui.wait("long paired-end tool form available for rendering regression", lambda: has_text("Paired-end alignment"))
+            form = ui.child(118)
+            state = ui.scroll_info(form)
+            require(state["nMax"] + 1 > state["nPage"], "Rendering regression requires a genuinely scrollable option form.")
+            left, top, right, bottom = ui.bounds(form)
+            # A real wheel over both child edits and background exercises routing
+            # and repeated child relocation. Finish at a nonzero offset.
+            edit = next(c for c in edits() if left < c["bounds"][0] and top <= c["bounds"][1] and c["bounds"][3] < bottom)
+            edit_x, edit_y = (edit["bounds"][0] + edit["bounds"][2]) // 2, (edit["bounds"][1] + edit["bounds"][3]) // 2
+            blank_x, blank_y = left + 5, min(top + 120, bottom - 20)
+            for _ in range(3):
+                ui.wheel(edit_x, edit_y, -240)
+                time.sleep(.06)
+                ui.wheel(blank_x, blank_y, 240)
+                time.sleep(.06)
+            ui.wheel(blank_x, blank_y, -120)
+            time.sleep(.2)
+            scrolled = ui.scroll_info(form)
+            require(scrolled["nPos"] > 0, "Real mouse wheel did not scroll tool options.")
+            # Exclude child controls (caret/focus/button states) while retaining
+            # background and every static text region where stale lines appeared.
+            rectangle = [left+3, top+3, min(right-23, ui.user.GetSystemMetrics(0)),
+                         min(bottom-3, ui.user.GetSystemMetrics(1))]
+            ui.mouse(5, 5)
+            before, raw_before = ui.screen_capture("options-scroll-screen-before-redraw.bmp", rectangle)
+            masks = [c["bounds"] for c in ui.controls(form) if c["class"].lower() != "static"]
+            require(ui.user.RedrawWindow(form, None, None, 0x0185), "Could not request clean descendant repaint.")
+            time.sleep(.2)
+            after, raw_after = ui.screen_capture("options-scroll-screen-clean-redraw.bmp", rectangle)
+            width = before["width"]
+            checked = changed = 0
+            for y in range(before["height"]):
+                for x in range(width):
+                    sx, sy = rectangle[0]+x, rectangle[1]+y
+                    if any(a-2 <= sx < c+2 and b-2 <= sy < d+2 for a,b,c,d in masks):
+                        continue
+                    offset = (y*width+x)*4
+                    checked += 1
+                    changed += raw_before[offset:offset+3] != raw_after[offset:offset+3]
+            require(checked > 10000, "Too little visible static text/background remained for the render comparison.")
+            require(changed == 0, "Scrolled static text/background differed from a clean repaint: " + str(changed) + " pixels.")
+            captures.extend([before, after])
+            return {"scrollBefore": state, "scrollAfter": scrolled, "comparedPixels": checked,
+                    "differentPixels": changed, "maskedChildControlBounds": masks,
+                    "method": "Actual desktop BitBlt before and after forced descendant redraw at unchanged scroll offset"}
+
         # A selection made only in the workflow library must not leave a stale
         # highlighted row in an empty standalone workspace. Deliberately retain
         # the search and click the same row without resetting the filter.
@@ -447,6 +696,9 @@ def gui_contracts(root, evidence, report):
         captures.append(ui.capture("tools-double-click-notification.bmp"))
         select_tool("Index a reference")
         ui.wait("restore standalone reference indexing after notification regression", lambda: has_text("Index a reference"))
+        rendering = scroll_rendering_check()
+        select_tool("Index a reference")
+        ui.wait("restore reference form after scroll regression", lambda: has_text("Index a reference"))
         measure("tool", "1280x900")
         require(ui.user.IsWindowVisible(ui.child(403)), "References absent from general settings.")
         empty_inputs = [c for c in edits() if not c["text"]]
@@ -500,10 +752,76 @@ def gui_contracts(root, evidence, report):
         ui.wait("workflow selection retained", lambda: has_text("First coordinate sort"))
         measure("workflow", "requested1100x740")
         captures.append(ui.capture("workflow-minimum.bmp"))
+        # Navigation assertions use actual mouse gestures and public native
+        # scrollbars/button labels, then retain displayed canvas pixels.
+        canvas = ui.child(117)
+        initial_scroll = [ui.scroll_info(canvas, bar)["nPos"] for bar in (0, 1)]
+        ui.drag(point(canvas, 20, 215), point(canvas, 60, 255))
+        moved_scroll = [ui.scroll_info(canvas, bar)["nPos"] for bar in (0, 1)]
+        require(moved_scroll == [v-40 for v in initial_scroll], "Dragging blank canvas did not pan the viewport with the pointer.")
+        captures.append(ui.capture("workflow-panned.bmp"))
+        ui.drag(point(canvas, 60, 255), point(canvas, 20, 215))
+        require([ui.scroll_info(canvas, bar)["nPos"] for bar in (0, 1)] == initial_scroll,
+                "Reverse canvas drag did not restore the viewport.")
+        ui.click_button(420)
+        ui.wait("zoom-out button reduces workflow scale", lambda: int(ui.label(ui.child(422)).rstrip("%")) < 100)
+        zoom_out = ui.label(ui.child(422))
+        captures.append(ui.capture("workflow-zoomed-out.bmp"))
+        zoom = int(zoom_out.rstrip("%")) / 100
+        scroll_x, scroll_y = [ui.scroll_info(canvas, bar)["nPos"] for bar in (0, 1)]
+        ui.click_at(*point(canvas, (second_left+100-scroll_x)*zoom, (288-scroll_y)*zoom))
+        ui.wait("zoomed canvas hit testing selects second tool", lambda: has_text("Second coordinate sort"))
+        ui.click_at(*point(canvas, (120-scroll_x)*zoom, (58-scroll_y)*zoom))
+        ui.wait("zoomed canvas hit testing selects first tool", lambda: has_text("First coordinate sort"))
+        ui.click_button(421)
+        ui.wait("zoom-in button enlarges workflow scale", lambda:
+                int(ui.label(ui.child(422)).rstrip("%")) > int(zoom_out.rstrip("%")))
+        ui.click_button(422)
+        ui.wait("reset workflow zoom to 100 percent", lambda: ui.label(ui.child(422)) == "100%")
+        ui.click_at(*point(canvas, 120, 58))
+        ui.wait("select tool before hover deletion", lambda: has_text("First coordinate sort"))
+        ui.mouse(*point(canvas, 24+242-17, 40+20))
+        time.sleep(.15)
+        captures.append(ui.capture("workflow-tool-delete-hover.bmp"))
+        ui.click_at(*point(canvas, 24+242-17, 40+20))
+        ui.wait("hover close removes selected workflow tool", lambda: not has_text("First coordinate sort"))
+        ui.click_button(108)
+        ui.wait("Undo restores deleted tool and its selection", lambda: has_text("First coordinate sort"))
+        # Explicit reference creation is exercised through the real native modal;
+        # it starts unconnected and has exactly one file editor of its own.
+        ui.set_text(name_edit(), "Saved before Add input")
+        add_input("Reference FASTA")
+        source_edits = edits()
+        require(len(source_edits) == 2, "Explicit reference input duplicated its filename or name controls.")
+        source_name = next(c for c in source_edits if c["text"] == "Reference FASTA")
+        file_edit = next(c for c in source_edits if not c["text"])
+        ui.set_text(source_name["hwnd"], "Reusable genome")
+        ui.set_text(file_edit["hwnd"], chosen_reference)
+        captures.append(ui.capture("workflow-explicit-reference-input.bmp"))
+        ui.click_button(418)  # Arrange resets presentation only, keeping graph.
+        ui.wait("arrange workflow with explicit source", lambda: ui.label(ui.child(422)) == "100%")
+        ui.click_at(*point(canvas, 120, 185))
+        ui.wait("draft tool name survives the Add input modal loop", lambda: has_text("Saved before Add input"))
+        ui.click_at(*point(canvas, 120, 52))
+        ui.wait("explicit source fields remain after selecting its consumer tool", lambda:
+                has_text("Reusable genome") and has_text(chosen_reference))
+        # Arrange puts the sole explicit source at (32,32). Select its header,
+        # reveal its own close control, remove it, and verify Undo restores it.
+        ui.mouse(*point(canvas, 32+242-17, 32+20))
+        time.sleep(.15)
+        captures.append(ui.capture("workflow-source-delete-hover.bmp"))
+        ui.click_at(*point(canvas, 32+242-17, 32+20))
+        ui.wait("hover close removes selected explicit input", lambda: not has_text("Reusable genome"))
+        ui.click_button(108)
+        ui.wait("Undo restores explicit input files and name", lambda: has_text("Reusable genome") and has_text(chosen_reference))
+        captures.append(ui.capture("workflow-source-delete-undone.bmp"))
         write_json(evidence / "ui-control-geometry.json", geometry)
         return {"dpi": dpi, "displayPixels": [ui.user.GetSystemMetrics(0), ui.user.GetSystemMetrics(1)],
-                "captures": captures, "geometryFile": "ui-control-geometry.json",
-                "checks": ["First click opens a previously selected workflow-library row in empty tool mode",
+                "captures": captures, "geometryFile": "ui-control-geometry.json", "scrollRendering": rendering,
+                "navigation": {"initialScroll": initial_scroll, "pannedScroll": moved_scroll,
+                               "zoomOutLabel": zoom_out, "resetZoomLabel": ui.label(ui.child(422))},
+                "checks": ["Manage tools loads installed packs on its first click without a modal error and reopens cleanly",
+                           "First click opens a previously selected workflow-library row in empty tool mode",
                            "Single-click standalone tool form",
                            "Separate queued native double-click notification opens its hit row after selection clears",
                            "Three independent panes with general settings",
@@ -513,10 +831,18 @@ def gui_contracts(root, evidence, report):
                            "General settings remain available in workflow mode",
                            "Standalone input and browsing folder survive workflow mode",
                            "Mode-specific status guidance replaces the previous workflow drag hint",
-                           "Workflow graph/selection survives mode switching", "Normal/minimum observed pane separation"],
+                           "Workflow graph/selection survives mode switching", "Normal/minimum observed pane separation",
+                           "Real repeated option scrolling leaves static text identical to a clean repaint",
+                           "Blank-canvas mouse drag pans and reverses the viewport",
+                           "Zoom buttons decrease, increase and reset scale; scaled card hit testing selects both tools",
+                           "Editing a tool immediately before Add input preserves its draft through the nested modal loop",
+                           "Native Add input creates one independently editable reference file slot",
+                           "Header hover close deletes a tool and Undo restores its selection",
+                           "Header hover close deletes an explicit input and Undo restores its files"],
                 "notificationRegression": {"input": "Queued WM_LBUTTONDBLCLK and WM_LBUTTONUP to the real native ListView",
                                            "scope": "Hit-row activation without prior selection; separate from the SendInput pointer and drag assertions."},
                 "limits": ["DPI coverage is only the actual reported monitor DPI; no simulated WM_DPICHANGED claim.",
+                           "Physical trackpad pinch hardware is unavailable on this CI runner; the gesture implementation is not claimed as hardware-validated.",
                            "Human usability acceptance, multi-monitor movement and native folder pickers remain separate."]}
     finally:
         ui.close()
@@ -552,6 +878,8 @@ def main(argv=None):
             report["host"] = host_contracts(root, evidence)
             report["nativeWindowsExecuted"] = True
             report["checks"].extend(report["host"]["checks"])
+            report["science"] = native_scientific_chain(root, evidence)
+            report["checks"].extend(report["science"]["checks"])
             worker_report = evidence / "ui-worker.json"
             command = [sys.executable, "-I", "-u", str(Path(__file__).resolve()), "--gui-worker",
                        "--app-root", str(root), "--report", str(worker_report), "--source-commit", args.source_commit,

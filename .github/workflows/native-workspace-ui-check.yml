@@ -51,6 +51,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          python3 workspace/tests/test_workflow_inputs.py
+          python3 workspace/tests/test_catalog_presentation.py
           python3 workspace/tests/test_desktop_modes.py
           python3 workspace/tests/test_desktop_host.py
           python3 workspace/tests/test_reference_service.py

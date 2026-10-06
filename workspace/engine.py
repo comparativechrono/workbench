@@ -734,6 +734,18 @@ class Engine:
                         slot["fields"] = copy.deepcopy(port.get("fields", []))
                         for field in slot["fields"]:
                             field["default"] = ""
+                        # Explicit paired workflow inputs own canonical read
+                        # roles across tools whose manifest field IDs differ.
+                        # Retain those IDs using trusted receiving-port schema;
+                        # never copy nested user-supplied values/defaults.
+                        canonical_pair = {"read1": "reads1", "read2": "reads2"}
+                        source_schema = source.get("fields", [])
+                        source_pair = {field.get("role"): field.get("id") for field in (source_schema if isinstance(source_schema, list) else [])
+                                       if isinstance(field, dict)}
+                        if source.get("type") == "pair" and source_pair == canonical_pair and port.get("type") == "pair" and len(slot["fields"]) == 2:
+                            for field, role in zip(slot["fields"], ("read1", "read2")):
+                                field["role"], field["id"] = role, canonical_pair[role]
+                                field["differentFrom"] = "reads2" if role == "read1" else "reads1"
                         break
                 if "fields" in slot:
                     break

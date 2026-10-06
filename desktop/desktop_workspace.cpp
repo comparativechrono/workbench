@@ -2,6 +2,8 @@
 #include "workbench.h"
 #include <algorithm>
 #include <commctrl.h>
+#include <climits>
+#include <cstdlib>
 #include <cwctype>
 #include <deque>
 #include <gdiplus.h>
@@ -66,6 +68,10 @@ enum {
   LOAD_CURRENT,
   RESULTS_LIST,
   RESET_LAYOUT,
+  ADD_INPUT,
+  ZOOM_OUT,
+  ZOOM_IN,
+  ZOOM_RESET,
   PACK_SEARCH = 501,
   PACK_FILTER,
   PACK_LIST,
@@ -462,6 +468,7 @@ class Workspace {
       saveCurrent{}, loadCurrent{}, resultsList{}, resetLayout{}, toolsHeading{},
       centerHeading{}, rightHeading{}, nameLabel{}, inputLabel{}, inputHelp{},
       outputLabel{}, outputHelp{}, referenceHelp{}, generalPanel{};
+  HWND addInput{}, zoomOut{}, zoomIn{}, zoomReset{};
   int generalScroll = 0;
   HFONT font{}, bold{}, small{};
   HFONT refFont{};
@@ -469,7 +476,8 @@ class Workspace {
   desktop::HostProcess host;
   Json state = Json::object(), catalog = object({{"tools", Json::object()}}),
        runState = Json::object(), historyRun = Json::object(),
-       packState = object({{"packs", Json::array()}}),
+       packState = object({{"packs", Json::array()}, {"sources", Json::array()},
+                           {"errors", Json::array()}}),
        packOperation = Json::object(),
        refState = object({{"releases", Json::array()}, {"species", Json::array()},
                           {"local", Json::array()}, {"discovery", nullptr}}),
@@ -526,6 +534,25 @@ class Workspace {
   }
   void place(HWND h, int x, int y, int w, int hgt) {
     MoveWindow(h, px(x), px(y), px(std::max(1, w)), px(std::max(1, hgt)), TRUE);
+  }
+  struct PanelPlacement { HWND h; int x, y, w, height; };
+  void place_panel(HWND panel, const std::vector<PanelPlacement> &items) {
+    constexpr UINT flags = SWP_NOZORDER | SWP_NOACTIVATE | SWP_NOREDRAW | SWP_NOCOPYBITS;
+    HDWP batch = BeginDeferWindowPos(static_cast<int>(items.size()));
+    for (const auto &p : items) {
+      if (!batch) break;
+      batch = DeferWindowPos(batch, p.h, nullptr, px(p.x), px(p.y),
+                             px(std::max(1, p.w)), px(std::max(1, p.height)), flags);
+    }
+    const bool placed = batch && EndDeferWindowPos(batch);
+    if (!placed)
+      for (const auto &p : items)
+        SetWindowPos(p.h, nullptr, px(p.x), px(p.y), px(std::max(1, p.w)),
+                     px(std::max(1, p.height)), flags);
+    // Moving overlapping child controls must not copy their previous pixels.
+    // Repaint every child after all positions are final, including STATIC text.
+    RedrawWindow(panel, nullptr, nullptr,
+                 RDW_INVALIDATE | RDW_ERASE | RDW_ALLCHILDREN | RDW_UPDATENOW);
   }
   static LRESULT CALLBACK field_proc(HWND h, UINT message_, WPARAM w, LPARAM l,
                                      UINT_PTR, DWORD_PTR context) {
@@ -1794,17 +1821,23 @@ class Workspace {
     if (method == "references/targets" && refWindow) {
       refTargets = result.get("targets");
       SendMessageW(refTarget, CB_RESETCONTENT, 0, 0);
+      int targetIndex = 0, preferredTarget = 0;
       for (const auto &target : refTargets.array_items()) {
+        if (getstr(state.get("inspector"), "kind") == "source" &&
+            getstr(target, "source_id") == selected)
+          preferredTarget = targetIndex;
         auto label = wt(target, "label") + L" (" + wt(target, "type") + L")";
         if (!getstr(target, "current_path").empty())
           label += L" · replace current file";
         SendMessageW(refTarget, CB_ADDSTRING, 0, reinterpret_cast<LPARAM>(label.c_str()));
+        ++targetIndex;
       }
       if (!refTargets.array_items().empty())
-        SendMessageW(refTarget, CB_SETCURSEL, 0, 0);
+        SendMessageW(refTarget, CB_SETCURSEL, preferredTarget, 0);
       else
         SetWindowTextW(refNotice, wt(result, "notice",
-            "No compatible input in this workspace. Add a tool that accepts this reference first.").c_str());
+            workflowMode ? "No compatible workflow input. Use Add input to create a reference input first."
+                         : "No compatible input. Select a tool that accepts this reference first.").c_str());
     } else if (method == "references/open") {
       const auto path = wt(result, "path");
       if (!path.empty() && reinterpret_cast<INT_PTR>(ShellExecuteW(
@@ -1861,6 +1894,10 @@ class Workspace {
     loadCurrent = button(L"Load saved...", LOAD_CURRENT);
     resultsList = make(L"BUTTON", L"Results", WS_TABSTOP | BS_OWNERDRAW, RESULTS_LIST);
     resetLayout = button(L"Arrange", RESET_LAYOUT);
+    addInput = button(L"Add input...", ADD_INPUT);
+    zoomOut = button(L"−", ZOOM_OUT);
+    zoomIn = button(L"+", ZOOM_IN);
+    zoomReset = button(L"100%", ZOOM_RESET);
     toolsHeading = make(L"STATIC", L"Tools", SS_LEFT, 0);
     centerHeading = make(L"STATIC", L"Run a tool", SS_LEFT, 0);
     rightHeading = make(L"STATIC", L"General settings", SS_LEFT, 0);
@@ -1921,6 +1958,7 @@ class Workspace {
         WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_HSCROLL | WS_VSCROLL |
             WS_CLIPSIBLINGS,
         0, 0, 1, 1, window, reinterpret_cast<HMENU>(DAG), instance, this);
+    canvas_configure_gestures();
     form = CreateWindowExW(
         WS_EX_CONTROLPARENT, L"WorkbenchNativeSurface051",
         L"Step inputs and options",
@@ -1960,7 +1998,9 @@ class Workspace {
     place(clearFilter, 12, 180, left - 24, 30);
     ShowWindow(clearFilter, filtering ? SW_SHOW : SW_HIDE);
     place(tasks, 12, filtering ? 216 : 182, left - 24,
-          std::max(100, height - (filtering ? 216 : 182) - (workflowMode ? 126 : 84)));
+          std::max(100, height - (filtering ? 216 : 182) - (workflowMode ? 166 : 84)));
+    place(addInput, 12, height - 154, left - 24, 32);
+    ShowWindow(addInput, workflowMode && !showingHistory ? SW_SHOW : SW_HIDE);
     place(add, 12, height - 114, left - 24, 32);
     ShowWindow(add, workflowMode && !showingHistory ? SW_SHOW : SW_HIDE);
     place(manageTools, 12, height - 72, left - 24, 32);
@@ -1969,6 +2009,8 @@ class Workspace {
                    workflowMode ? L"Workflow" : L"Run a tool");
     place(rightHeading, rightX, 65, rightWidth - (workflowMode ? 145 : 0), 26);
     SetWindowTextW(rightHeading, general ? L"General settings" : L"Tool options");
+    if (!general && getstr(state.get("inspector"), "kind") == "source")
+      SetWindowTextW(rightHeading, L"Input options");
     place(generalSettings, width - 157, 59, 141, 32);
     SetWindowTextW(generalSettings, general ? L"Tool options" : L"General settings");
     ShowWindow(generalSettings, workflowMode && !showingHistory ? SW_SHOW : SW_HIDE);
@@ -1993,6 +2035,11 @@ class Workspace {
     place(review, center + 138, footer, 84, 32);
     place(cancel, center + 230, footer, 98, 32);
     ShowWindow(cancel, busy ? SW_SHOW : SW_HIDE);
+    place(zoomOut, center + centerWidth - 150, footer, 34, 32);
+    place(zoomReset, center + centerWidth - 110, footer, 62, 32);
+    place(zoomIn, center + centerWidth - 42, footer, 34, 32);
+    for (HWND h : {zoomOut, zoomReset, zoomIn})
+      ShowWindow(h, canvas && !busy ? SW_SHOW : SW_HIDE);
     place(saveCurrent, canvas ? center + centerWidth - 248 : width - right + 12,
           canvas ? 59 : footer, canvas ? 126 : 146, 32);
     place(loadCurrent, canvas ? center + centerWidth - 114 : width - right + 166,
@@ -2019,19 +2066,19 @@ class Workspace {
     SCROLLINFO si{sizeof(si), SIF_RANGE | SIF_PAGE | SIF_POS | SIF_DISABLENOSCROLL};
     si.nMax = 531; si.nPage = h; si.nPos = generalScroll;
     SetScrollInfo(generalPanel, SB_VERT, &si, TRUE);
-    place(nameLabel, 14, 10 - generalScroll, w, 22);
-    place(name, 14, 36 - generalScroll, w, 32);
-    place(inputLabel, 14, 88 - generalScroll, w, 22);
-    place(inputFolder, 14, 114 - generalScroll, w, 32);
-    place(browseInput, 14, 154 - generalScroll, w, 32);
-    place(inputHelp, 14, 194 - generalScroll, w, 42);
-    place(outputLabel, 14, 256 - generalScroll, w, 22);
-    place(output, 14, 282 - generalScroll, w, 32);
-    place(browse, 14, 322 - generalScroll, w, 32);
-    place(outputHelp, 14, 362 - generalScroll, w, 42);
-    place(manageReferences, 14, 428 - generalScroll, w, 34);
-    place(referenceHelp, 14, 472 - generalScroll, w, 42);
-    InvalidateRect(generalPanel, nullptr, TRUE);
+    place_panel(generalPanel, {
+      {nameLabel, 14, 10 - generalScroll, w, 22},
+      {name, 14, 36 - generalScroll, w, 32},
+      {inputLabel, 14, 88 - generalScroll, w, 22},
+      {inputFolder, 14, 114 - generalScroll, w, 32},
+      {browseInput, 14, 154 - generalScroll, w, 32},
+      {inputHelp, 14, 194 - generalScroll, w, 42},
+      {outputLabel, 14, 256 - generalScroll, w, 22},
+      {output, 14, 282 - generalScroll, w, 32},
+      {browse, 14, 322 - generalScroll, w, 32},
+      {outputHelp, 14, 362 - generalScroll, w, 42},
+      {manageReferences, 14, 428 - generalScroll, w, 34},
+      {referenceHelp, 14, 472 - generalScroll, w, 42}});
   }
   void enabled() {
     bool edit = ready && !busy && !packBusy && !packActionPending &&
@@ -2041,8 +2088,12 @@ class Workspace {
     for (HWND h :
          {name, search, category, tasks, add, steps, remove, undo, up, down,
           modeTools, modeWorkflow, generalSettings, saveCurrent, loadCurrent,
-          resetLayout, inputFolder, browseInput})
+          resetLayout, inputFolder, browseInput, addInput})
       EnableWindow(h, edit);
+    for (HWND h : {zoomOut, zoomReset, zoomIn}) {
+      EnableWindow(h, ready && !closing);
+      ShowWindow(h, (workflowMode || showingHistory) && !busy ? SW_SHOW : SW_HIDE);
+    }
     EnableWindow(undo, edit && state.get("canUndo").boolean());
     EnableWindow(run, edit && !graph().get("nodes").array_items().empty());
     EnableWindow(review, ready && !activeRequest && outgoing.empty());
@@ -2103,10 +2154,10 @@ class Workspace {
     const bool filtered = workflowMode && !getstr(state, "pendingSource").empty();
     for (const auto &entry : catalog.get("tools").object_items()) {
       const auto &t = entry.second;
-      std::wstring label = wt(t, "name"),
+      std::wstring label = wt(t, "displayName", getstr(t, "name")),
                    categoryName = wt(t, "category", "Other");
       if (!query.empty() &&
-          lower(label + L" " + wt(t, "packId") + L" " + wt(t, "description"))
+          lower(label + L" " + wt(t, "packId") + L" " + wt(t, "description") + L" " + wt(t, "searchTerms"))
                   .find(query) == std::wstring::npos)
         continue;
       if (!cat.empty() && cat != L"All categories" && cat != categoryName)
@@ -2281,12 +2332,24 @@ class Workspace {
           ? L"Drag tools from the left onto the canvas. Connect an output port to a compatible input, then select a tool to edit its options here."
           : L"Select a tool from the panel on the left. Its input files and run options appear here.");
       form_text(L"Analysis runs locally. Use General settings for folders and References for reusable genome and annotation downloads.");
+    } else if (getstr(inspector, "kind") == "source") {
+      form_text(wide(display_id(selected)) + L" · " + wt(inspector, "name"), true);
+      form_text(L"Workflow input — choose files once and connect this input to each tool that needs them.");
+      form_text(L"Input name", true);
+      add_field("rename-source", "name", object({{"type", "text"}}), getstr(inspector, "name"));
+      for (const auto &field : inspector.get("fields").array_items()) {
+        form_text(wt(field, "label", getstr(field, "id")), true);
+        add_field("source", getstr(field, "id"), field, getstr(field, "value"), selected);
+        if (!getstr(field, "help").empty()) form_text(wt(field, "help"));
+      }
+      if (getstr(inspector, "type") == "reference")
+        form_action(L"Choose from References...", "input-references");
     } else {
       form_text(wide(display_id(selected)) + L" · " + wt(inspector, "name"),
                 true);
       const auto &t = inspector.get("tool");
-      form_text(wt(t, "name") + L"  ·  " + wt(t, "packVersion"));
-      form_text(wt(t, "description"));
+      form_text(wt(t, "displayName", getstr(t, "name")) + L"  ·  " + wt(t, "packVersion"));
+      form_text(wt(t, "displayDescription", getstr(t, "description")));
       for (const auto &node : graph().get("nodes").array_items()) {
         if (getstr(node, "id") != selected || !getstr(tool(node), "id").empty())
           continue;
@@ -2321,7 +2384,6 @@ class Workspace {
                       ? L"No source connected — choose a named input or output."
                       : L"From: " + sources);
         form_action(L"Choose connected source(s)...", "connect", pid, port);
-        form_action(L"Add a new file input slot", "add-source", pid, port);
         } else if (sources.empty()) {
           form_action(L"Choose files for this input", "add-source", pid, port);
         }
@@ -2414,14 +2476,15 @@ class Workspace {
     si.nPage = fh;
     si.nPos = formScroll;
     SetScrollInfo(form, SB_VERT, &si, TRUE);
+    std::vector<PanelPlacement> positions;
     for (auto &f : fields) {
       int fw_ = fw - 32 - (f.button ? 94 : 0);
-      place(f.h, 12, f.y - formScroll, fw_,
-            getstr(f.schema, "type") == "choice" ? 260 : f.height);
+      positions.push_back({f.h, 12, f.y - formScroll, fw_,
+            getstr(f.schema, "type") == "choice" ? 260 : f.height});
       if (f.button)
-        place(f.button, fw - 108, f.y - formScroll, 88, 34);
+        positions.push_back({f.button, fw - 108, f.y - formScroll, 88, 34});
     }
-    InvalidateRect(form, nullptr, TRUE);
+    place_panel(form, positions);
   }
   std::string field_value(const Field &f) const {
     auto type = getstr(f.schema, "type");
@@ -2457,10 +2520,11 @@ class Workspace {
     if (rebuilding || busy || showingHistory || !ready)
       return;
     Json params = Json::object(), files = Json::object(),
-         payload = object({{"nodeId", selected}});
+         payload = getstr(state.get("inspector"), "kind") == "source"
+                       ? object({{"sourceId", selected}}) : object({{"nodeId", selected}});
     bool changed = false;
     for (const auto &f : fields) {
-      if (f.kind != "param" && f.kind != "source" && f.kind != "rename")
+      if (f.kind != "param" && f.kind != "source" && f.kind != "rename" && f.kind != "rename-source")
         continue;
       auto value = field_value(f);
       if (value == narrow(f.initial))
@@ -2573,6 +2637,8 @@ class Workspace {
     commit_all();
     if (f.kind == "add-source")
       model("add_source", object({{"nodeId", f.node}, {"portId", f.key}}));
+    else if (f.kind == "input-references")
+      show_references();
     else if (f.kind == "use-output")
       model("use_output", object({{"ref", f.key}}));
     else if (f.kind == "historical-methods")
@@ -2639,6 +2705,25 @@ class Workspace {
     if (!pendingSource.empty())
       payload["fromRef"] = pendingSource;
     model("add_tool", payload);
+  }
+  void add_workflow_input() {
+    // The modal pumps host responses; keep its choices independent of snapshots.
+    const Json types = state.get("inputTypes");
+    if (!workflowMode || !types.is_array() || types.array_items().empty()) return;
+    Modal m;
+    m.owner = window; m.font = font; m.mode = 0;
+    m.title = L"Add workflow input";
+    m.message = L"Choose an input type. Select its files once, give it a name, then connect it to any compatible tools.";
+    m.confirm = L"Add input";
+    for (const auto &type : types.array_items()) m.labels.push_back(wt(type, "label"));
+    m.selected.push_back(0);
+    if (m.show() && !m.selected.empty()) {
+      const auto at = static_cast<size_t>(m.selected.front());
+      if (at < types.array_items().size()) {
+        commit_all();
+        model("add_input", object({{"inputType", getstr(types.array_items()[at], "id")}}));
+      }
+    }
   }
   void save(bool pipeline) {
     if (!pipeline && selected.empty()) {
@@ -2927,6 +3012,12 @@ class Workspace {
       canvas_reset_positions();
       return;
     }
+    // View navigation is also available in read-only recorded workflows.
+    if (id == ZOOM_OUT || id == ZOOM_IN || id == ZOOM_RESET) {
+      if (id == ZOOM_RESET) canvas_zoom_reset();
+      else canvas_zoom_by(id == ZOOM_IN ? 1.2 : 1.0 / 1.2);
+      return;
+    }
     if (id == BROWSE_INPUT) {
       auto path = pick(window, true, false, L"", L"Choose the starting folder for input file pickers",
                        control_text(inputFolder));
@@ -3017,9 +3108,15 @@ class Workspace {
       canvas_cancel_drag();
       send("workspace/mode", object({{"mode", id == MODE_WORKFLOW ? "workflow" : "tool"}}));
       break;
+    case ADD_INPUT:
+      add_workflow_input();
+      break;
     case REMOVE:
-      if (!selected.empty())
-        model("remove_step", object({{"nodeId", selected}}));
+      if (!selected.empty()) {
+        if (getstr(state.get("inspector"), "kind") == "source")
+          model("remove_source", object({{"sourceId", selected}}));
+        else model("remove_step", object({{"nodeId", selected}}));
+      }
       break;
     case UNDO:
       model("undo");
@@ -3065,6 +3162,7 @@ class Workspace {
   }
 #include "workflow_canvas.h"
   void scroll(HWND h, int bar, int action, int delta = 0) {
+    if (h == dag) { canvas_scroll(bar, action, delta); return; }
     RECT r{};
     GetClientRect(h, &r);
     int extent = h == generalPanel ? 532 : h == form ? formExtent
@@ -3124,6 +3222,15 @@ class Workspace {
     if (!app)
       return DefWindowProcW(h, m, w, l);
     try {
+      if (h == app->dag) {
+        if (m == WM_GESTURE && app->canvas_gesture(l)) return 0;
+        if (m == WM_GESTURENOTIFY) app->canvas_configure_gestures();
+        if (m == WM_MOUSELEAVE) { app->canvas_mouse_leave(); return 0; }
+        if (m == WM_KEYDOWN && app->canvas_key_down(w)) return 0;
+        if (m == WM_MOUSEWHEEL || m == WM_MOUSEHWHEEL) {
+          app->canvas_mouse_wheel(w, l, m == WM_MOUSEHWHEEL); return 0;
+        }
+      }
       if (m == WM_PAINT && GetDlgCtrlID(h) == DAG) {
         app->paint_dag();
         return 0;
@@ -3336,9 +3443,10 @@ class Workspace {
     case WM_CTLCOLORBTN: {
       HDC dc = reinterpret_cast<HDC>(w);
       SetTextColor(dc, INK);
-      SetBkMode(dc, TRANSPARENT);
-      return reinterpret_cast<LRESULT>(
-          GetParent(reinterpret_cast<HWND>(l)) == form ? paper : background);
+      const bool white = m == WM_CTLCOLOREDIT || GetParent(reinterpret_cast<HWND>(l)) == form;
+      SetBkMode(dc, OPAQUE);
+      SetBkColor(dc, white ? PAPER : BACK);
+      return reinterpret_cast<LRESULT>(white ? paper : background);
     }
     case WM_DRAWITEM: {
       const auto *item = reinterpret_cast<DRAWITEMSTRUCT *>(l);

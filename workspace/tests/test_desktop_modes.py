@@ -134,6 +134,7 @@ class DesktopModeTests(unittest.TestCase):
     def test_pipeline_load_and_example_select_workflow_and_preset_applies_active_tool(self):
         self.mode("workflow")
         self.action("add_tool", toolId="fixture/process")
+        self.action("add_source", nodeId="step-1", portId="sequence")
         self.action("add_tool", toolId="fixture/process", fromRef="step-1::result")
         graph = self.host.graph()
         graph["sources"][0]["files"] = {"genome": str(self.root / "private.fa")}
@@ -174,6 +175,7 @@ class DesktopModeTests(unittest.TestCase):
         self.app._reference_manager = manager
         self.mode("workflow")
         self.action("add_tool", toolId="fixture/process")
+        self.action("add_source", nodeId="step-1", portId="sequence")
         workflow = self.host.graph()
         self.tool()
         identity = {"record_id": "ready", "file_id": "genome"}
@@ -284,6 +286,7 @@ class DesktopModeTests(unittest.TestCase):
         tool["ports"][0]["max"] = 2
         self.mode("workflow")
         self.action("add_tool", toolId="fixture/process")
+        self.action("add_source", nodeId="step-1", portId="sequence")
         self.action("add_tool", toolId="fixture/process")
         self.action("add_tool", toolId="fixture/process")
         self.action("connect", nodeId="step-3", portId="sequence", refs=["input-1", "step-1::result"])

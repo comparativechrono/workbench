@@ -1,7 +1,7 @@
 // Included inside Workspace. Native workflow presentation and pointer gestures
 // live here; the desktop model remains the authority for every connection.
 struct CanvasPort {
-  POINT point{}; // Logical canvas coordinates, before scrolling / DPI scaling.
+  POINT point{}; // World coordinates, before scrolling, zoom and DPI scaling.
   std::string node, port, ref, label, type;
   bool output = false;
 };
@@ -15,13 +15,31 @@ std::map<std::string, POINT> canvasPositions;
 std::vector<CanvasCard> canvasCards;
 std::vector<CanvasPort> canvasPorts;
 std::string canvasDragNode, canvasDragRef;
+std::string canvasHoverNode;
 Json canvasTargets = Json::object();
 POINT canvasDragStart{}, canvasNodeStart{}, canvasPointer{};
-POINT canvasWorkspaceScroll{-1, -1};
-bool canvasNodeMoved = false;
+POINT canvasPanStart{}, canvasPanScroll{}, canvasGesturePoint{};
+POINT canvasWorkspaceScroll{LONG_MIN, LONG_MIN};
+bool canvasNodeMoved = false, canvasPanning = false, canvasHoverDelete = false;
+int canvasZoom = 100, canvasWorkspaceZoom = 100, canvasGestureZoom = 100;
+int canvasWheelVertical = 0, canvasWheelHorizontal = 0;
+ULONGLONG canvasGestureDistance = 0;
+
+int canvas_px(int value) const { return MulDiv(value, dpi * canvasZoom, 9600); }
+int canvas_units(int value) const { return MulDiv(value, 9600, dpi * canvasZoom); }
+int canvas_zoom_percent() const { return canvasZoom; }
+void canvas_zoom_label() {
+  if (zoomReset)
+    SetWindowTextW(zoomReset, (std::to_wstring(canvasZoom) + L"%").c_str());
+}
+SIZE canvas_viewport() const {
+  RECT r{};
+  GetClientRect(dag, &r);
+  return {std::max(1, canvas_units(r.right)), std::max(1, canvas_units(r.bottom))};
+}
 
 POINT canvas_world(POINT p) const {
-  return {MulDiv(p.x, 96, dpi) + dagX, MulDiv(p.y, 96, dpi) + dagY};
+  return {canvas_units(p.x) + dagX, canvas_units(p.y) + dagY};
 }
 bool canvas_editable() const {
   return ready && !busy && !packBusy && !packActionPending && !refBusy &&
@@ -29,6 +47,167 @@ bool canvas_editable() const {
 }
 bool canvas_positioned(const std::string &id) const {
   return !showingHistory && canvasPositions.count(id);
+}
+void canvas_configure_gestures() {
+  GESTURECONFIG config[] = {{GID_ZOOM, GC_ZOOM, 0},
+                           {GID_PAN, GC_PAN | GC_PAN_WITH_SINGLE_FINGER_HORIZONTALLY |
+                                       GC_PAN_WITH_SINGLE_FINGER_VERTICALLY, GC_PAN_WITH_INERTIA}};
+  SetGestureConfig(dag, 0, 2, config, sizeof(GESTURECONFIG));
+}
+void canvas_navigation_bounds() {
+  const auto view = canvas_viewport();
+  dagWidth = view.cx;
+  dagHeight = view.cy;
+  for (const auto &item : canvasCards) {
+    dagWidth = std::max(dagWidth, static_cast<int>(item.box.right) + static_cast<int>(view.cx));
+    dagHeight = std::max(dagHeight, static_cast<int>(item.box.bottom) + static_cast<int>(view.cy));
+  }
+  // A viewport of margin permits grabbing an initially top-left graph in either
+  // direction without forcing users to find the scrollbars first.
+  dagX = std::clamp(dagX, -static_cast<int>(view.cx), std::max(0, dagWidth - static_cast<int>(view.cx)));
+  dagY = std::clamp(dagY, -static_cast<int>(view.cy), std::max(0, dagHeight - static_cast<int>(view.cy)));
+  for (int bar : {SB_HORZ, SB_VERT}) {
+    const int page = static_cast<int>(bar == SB_HORZ ? view.cx : view.cy);
+    SCROLLINFO si{sizeof(si), SIF_RANGE | SIF_PAGE | SIF_POS};
+    si.nMin = -page;
+    si.nMax = (bar == SB_HORZ ? dagWidth : dagHeight) - 1;
+    si.nPage = page;
+    si.nPos = bar == SB_HORZ ? dagX : dagY;
+    SetScrollInfo(dag, bar, &si, TRUE);
+  }
+}
+void canvas_scroll(int bar, int action, int delta = 0) {
+  const auto view = canvas_viewport();
+  const int page = static_cast<int>(bar == SB_HORZ ? view.cx : view.cy);
+  const int line = std::max(1, MulDiv(32, 100, canvasZoom));
+  int &value = bar == SB_HORZ ? dagX : dagY;
+  SCROLLINFO si{sizeof(si), SIF_TRACKPOS};
+  GetScrollInfo(dag, bar, &si);
+  if (delta)
+    value += MulDiv(delta, 100, canvasZoom);
+  else
+    switch (action) {
+    case SB_LINEUP: value -= line; break;
+    case SB_LINEDOWN: value += line; break;
+    case SB_PAGEUP: value -= page; break;
+    case SB_PAGEDOWN: value += page; break;
+    case SB_THUMBTRACK:
+    case SB_THUMBPOSITION: value = si.nTrackPos; break;
+    case SB_TOP: value = -page; break;
+    case SB_BOTTOM: value = bar == SB_HORZ ? dagWidth : dagHeight; break;
+    default: break;
+    }
+  canvas_navigation_bounds();
+  InvalidateRect(dag, nullptr, FALSE);
+}
+void canvas_zoom_at(int percent, POINT screen) {
+  percent = std::clamp(percent, 25, 200);
+  if (percent == canvasZoom)
+    return;
+  // A pointer anchor makes pinch and wheel zoom keep the same part of the
+  // graph beneath the user's hand; toolbar zoom anchors the viewport centre.
+  const auto anchor = canvas_world(screen);
+  canvas_cancel_drag();
+  canvasZoom = percent;
+  canvas_zoom_label();
+  dagX = anchor.x - canvas_units(screen.x);
+  dagY = anchor.y - canvas_units(screen.y);
+  canvas_navigation_bounds();
+  InvalidateRect(dag, nullptr, FALSE);
+  status_text(L"Workflow zoom: " + std::to_wstring(canvasZoom) + L"%. Drag empty canvas to pan; Ctrl+wheel or pinch to zoom.");
+}
+void canvas_zoom_by(double factor) {
+  RECT r{};
+  GetClientRect(dag, &r);
+  canvas_zoom_at(static_cast<int>(canvasZoom * factor + .5), {r.right / 2, r.bottom / 2});
+}
+void canvas_zoom_reset() {
+  RECT r{};
+  GetClientRect(dag, &r);
+  canvas_zoom_at(100, {r.right / 2, r.bottom / 2});
+}
+void canvas_mouse_wheel(WPARAM w, LPARAM l, bool horizontal = false) {
+  const int delta = GET_WHEEL_DELTA_WPARAM(w);
+  if (!horizontal && (GET_KEYSTATE_WPARAM(w) & MK_CONTROL)) {
+    POINT pointer{GET_X_LPARAM(l), GET_Y_LPARAM(l)};
+    ScreenToClient(dag, &pointer);
+    const double factor = 1.0 + std::min(480, std::abs(delta)) / 120.0 * .15;
+    canvas_zoom_at(static_cast<int>(canvasZoom * (delta < 0 ? 1.0 / factor : factor) + .5), pointer);
+  } else {
+    const bool across = horizontal || (GET_KEYSTATE_WPARAM(w) & MK_SHIFT);
+    int &remainder = across ? canvasWheelHorizontal : canvasWheelVertical;
+    remainder += (horizontal ? delta : -delta) * 48;
+    const int movement = remainder / WHEEL_DELTA;
+    remainder %= WHEEL_DELTA;
+    if (movement)
+      canvas_scroll(across ? SB_HORZ : SB_VERT, 0, movement);
+  }
+}
+bool canvas_gesture(LPARAM l) {
+  GESTUREINFO gesture{sizeof(GESTUREINFO)};
+  if (!GetGestureInfo(reinterpret_cast<HGESTUREINFO>(l), &gesture))
+    return false;
+  if (gesture.dwID != GID_ZOOM && gesture.dwID != GID_PAN)
+    return false; // DefWindowProc owns unhandled gesture handles.
+  POINT point{gesture.ptsLocation.x, gesture.ptsLocation.y};
+  ScreenToClient(dag, &point);
+  if (gesture.dwFlags & GF_BEGIN)
+    canvas_cancel_drag();
+  if (gesture.dwID == GID_ZOOM) {
+    if ((gesture.dwFlags & GF_BEGIN) || !canvasGestureDistance) {
+      canvasGestureDistance = gesture.ullArguments;
+      canvasGestureZoom = canvasZoom;
+    } else if (canvasGestureDistance) {
+      const auto percent = static_cast<int>(std::clamp(
+          canvasGestureZoom * static_cast<double>(gesture.ullArguments) / canvasGestureDistance, 25.0, 200.0) + .5);
+      canvas_zoom_at(percent, point);
+    }
+    if (gesture.dwFlags & GF_END)
+      canvasGestureDistance = 0;
+  } else {
+    if (!(gesture.dwFlags & GF_BEGIN)) {
+      dagX -= canvas_units(point.x - canvasGesturePoint.x);
+      dagY -= canvas_units(point.y - canvasGesturePoint.y);
+      canvas_navigation_bounds();
+      InvalidateRect(dag, nullptr, FALSE);
+    }
+    canvasGesturePoint = point;
+  }
+  CloseGestureInfoHandle(reinterpret_cast<HGESTUREINFO>(l));
+  return true;
+}
+RECT canvas_delete_rect(const CanvasCard &card) const {
+  return {card.box.right - 30, card.box.top + 6, card.box.right - 5, card.box.top + 33};
+}
+bool canvas_delete(const CanvasCard &card) {
+  if (!canvas_editable() || activeRequest || !outgoing.empty())
+    return false;
+  const auto id = card.id;
+  const bool source = card.source;
+  canvas_cancel_drag();
+  canvasHoverNode.clear();
+  canvasHoverDelete = false;
+  commit_all();
+  model(source ? "remove_source" : "remove_step",
+        object({{source ? "sourceId" : "nodeId", id}}));
+  return true;
+}
+bool canvas_key_down(WPARAM key) {
+  if (key == VK_ADD || key == VK_OEM_PLUS) { canvas_zoom_by(1.2); return true; }
+  if (key == VK_SUBTRACT || key == VK_OEM_MINUS) { canvas_zoom_by(1.0 / 1.2); return true; }
+  if (key == '0' || key == VK_NUMPAD0) { canvas_zoom_reset(); return true; }
+  if (key == VK_DELETE)
+    for (const auto &card : canvasCards)
+      if (card.id == selected)
+        return canvas_delete(card);
+  return false;
+}
+void canvas_mouse_leave() {
+  if (!canvasHoverNode.empty()) {
+    canvasHoverNode.clear();
+    canvasHoverDelete = false;
+    InvalidateRect(dag, nullptr, FALSE);
+  }
 }
 const Json &canvas_input(const std::string &node,
                          const std::string &port) const {
@@ -72,24 +251,30 @@ void canvas_set_targets(const Json &result) {
 }
 const CanvasPort *canvas_port_at(POINT screen) const {
   const auto p = canvas_world(screen);
+  const int radius = std::max(6, MulDiv(12, 100, canvasZoom));
   for (auto it = canvasPorts.rbegin(); it != canvasPorts.rend(); ++it) {
     const long long dx = static_cast<long long>(p.x) - it->point.x,
                     dy = static_cast<long long>(p.y) - it->point.y;
-    if (dx * dx + dy * dy <= 12 * 12)
+    if (dx * dx + dy * dy <= static_cast<long long>(radius) * radius)
       return &*it;
   }
   return nullptr;
 }
 void canvas_cancel_drag() {
-  if (canvasDragNode.empty() && canvasDragRef.empty())
+  if (canvasDragNode.empty() && canvasDragRef.empty() && !canvasPanning)
     return;
   // Escape and capture loss cancel the visual move as well as a pending link.
   if (!canvasDragNode.empty() && canvasNodeMoved)
     canvasPositions[canvasDragNode] = canvasNodeStart;
+  if (canvasPanning) {
+    dagX = canvasPanScroll.x;
+    dagY = canvasPanScroll.y;
+  }
   canvasDragNode.clear();
   canvasDragRef.clear();
   canvasTargets = Json::object();
   canvasNodeMoved = false;
+  canvasPanning = false;
   if (GetCapture() == dag)
     ReleaseCapture();
   InvalidateRect(dag, nullptr, FALSE);
@@ -99,22 +284,32 @@ void canvas_reset_positions() {
   canvasPositions.clear();
   canvasCards.clear();
   canvasPorts.clear();
+  canvasHoverNode.clear();
+  canvasHoverDelete = false;
+  canvasZoom = 100;
+  canvas_zoom_label();
   dagX = dagY = 0;
-  canvasWorkspaceScroll = {-1, -1};
+  canvasWorkspaceScroll = {LONG_MIN, LONG_MIN};
   InvalidateRect(dag, nullptr, FALSE);
 }
 void canvas_enter_history() {
   canvas_cancel_drag();
-  if (canvasWorkspaceScroll.x < 0)
+  if (canvasWorkspaceScroll.x == LONG_MIN) {
     canvasWorkspaceScroll = {dagX, dagY};
+    canvasWorkspaceZoom = canvasZoom;
+  }
   dagX = dagY = 0;
+  canvasZoom = 100;
+  canvas_zoom_label();
 }
 void canvas_leave_history() {
-  if (canvasWorkspaceScroll.x >= 0) {
+  if (canvasWorkspaceScroll.x != LONG_MIN) {
     dagX = static_cast<int>(canvasWorkspaceScroll.x);
     dagY = static_cast<int>(canvasWorkspaceScroll.y);
+    canvasZoom = canvasWorkspaceZoom;
   }
-  canvasWorkspaceScroll = {-1, -1};
+  canvas_zoom_label();
+  canvasWorkspaceScroll = {LONG_MIN, LONG_MIN};
   InvalidateRect(dag, nullptr, FALSE);
 }
 void canvas_place_new_node(const std::string &id, POINT screen) {
@@ -126,12 +321,22 @@ void canvas_place_new_node(const std::string &id, POINT screen) {
   InvalidateRect(dag, nullptr, FALSE);
 }
 bool canvas_mouse_down(POINT screen) {
-  if (!canvas_editable() || activeRequest || !outgoing.empty())
-    return false;
   SetFocus(dag);
   canvas_cancel_drag();
   canvasPointer = canvas_world(screen);
+  const auto p = canvasPointer;
+  // Navigation stays available while a run/host request is active, but card
+  // selection, connection and deletion continue to use the editing guard.
+  const bool editable = canvas_editable() && !activeRequest && outgoing.empty();
+  if (editable)
+    for (auto it = canvasCards.rbegin(); it != canvasCards.rend(); ++it) {
+      const RECT close = canvas_delete_rect(*it);
+      if (PtInRect(&close, p))
+        return canvas_delete(*it);
+    }
   if (const auto *hit = canvas_port_at(screen)) {
+    if (!editable)
+      return false;
     const auto port = *hit;
     if (port.output) {
       commit_all();
@@ -150,29 +355,40 @@ bool canvas_mouse_down(POINT screen) {
     }
     return true;
   }
-  const auto p = canvas_world(screen);
   for (auto it = canvasCards.rbegin(); it != canvasCards.rend(); ++it)
     if (PtInRect(&it->box, p)) {
+      if (!editable)
+        return false;
       const auto id = it->id;
       canvasDragNode = id;
       canvasDragStart = p;
       canvasNodeStart = {it->box.left, it->box.top};
       canvasNodeMoved = false;
       SetCapture(dag);
-      if (!it->source) {
-        generalVisible = false;
-        layout();
-        commit_all();
-        if (id != selected)
-          model("select", object({{"nodeId", id}}));
-      } else
-        status_text(wide(display_id(id)) + L" is a shared local input. Select a consuming tool to choose its files.");
+      generalVisible = false;
+      layout();
+      commit_all();
+      if (id != selected)
+        model("select", object({{"nodeId", id}}));
       return true;
     }
-  return false;
+  canvasPanning = true;
+  canvasPanStart = screen;
+  canvasPanScroll = {dagX, dagY};
+  SetCapture(dag);
+  SetCursor(LoadCursorW(nullptr, IDC_SIZEALL));
+  return true;
 }
 bool canvas_mouse_move(POINT screen) {
   canvasPointer = canvas_world(screen);
+  if (canvasPanning) {
+    dagX = canvasPanScroll.x - canvas_units(screen.x - canvasPanStart.x);
+    dagY = canvasPanScroll.y - canvas_units(screen.y - canvasPanStart.y);
+    canvas_navigation_bounds();
+    InvalidateRect(dag, nullptr, FALSE);
+    SetCursor(LoadCursorW(nullptr, IDC_SIZEALL));
+    return true;
+  }
   if (!canvasDragNode.empty()) {
     const LONG dx = canvasPointer.x - canvasDragStart.x,
                dy = canvasPointer.y - canvasDragStart.y;
@@ -194,6 +410,27 @@ bool canvas_mouse_move(POINT screen) {
     InvalidateRect(dag, nullptr, FALSE);
     return true;
   }
+  std::string hover;
+  bool overDelete = false;
+  if (canvas_editable())
+    for (auto it = canvasCards.rbegin(); it != canvasCards.rend(); ++it)
+      if (PtInRect(&it->box, canvasPointer) && canvasPointer.y < it->box.top + 44) {
+        hover = it->id;
+        const RECT close = canvas_delete_rect(*it);
+        overDelete = PtInRect(&close, canvasPointer);
+        break;
+      }
+  if (hover != canvasHoverNode || overDelete != canvasHoverDelete) {
+    canvasHoverNode = hover;
+    canvasHoverDelete = overDelete;
+    InvalidateRect(dag, nullptr, FALSE);
+  }
+  TRACKMOUSEEVENT tracking{sizeof(tracking), TME_LEAVE, dag, 0};
+  TrackMouseEvent(&tracking);
+  if (overDelete) {
+    SetCursor(LoadCursorW(nullptr, IDC_HAND));
+    return true;
+  }
   if (const auto *port = canvas_port_at(screen)) {
     SetCursor(LoadCursorW(nullptr, port->output ? IDC_CROSS : IDC_HAND));
     return true;
@@ -201,6 +438,13 @@ bool canvas_mouse_move(POINT screen) {
   return false;
 }
 bool canvas_mouse_up(POINT screen) {
+  if (canvasPanning) {
+    canvasPanning = false;
+    if (GetCapture() == dag)
+      ReleaseCapture();
+    InvalidateRect(dag, nullptr, FALSE);
+    return true;
+  }
   if (canvasDragNode.empty() && canvasDragRef.empty())
     return false;
   const auto ref = canvasDragRef;
@@ -246,18 +490,13 @@ bool canvas_mouse_up(POINT screen) {
                             {"refs", std::move(refs)}}));
   return true;
 }
-void canvas_layout(int vw, int vh) {
+void canvas_layout() {
   canvasCards.clear();
   canvasPorts.clear();
   hits.clear();
   const auto rank = ranks();
   std::map<int, int> nextY;
-  std::set<std::string> usedSources, activeIds;
-  for (const auto &node : graph().get("nodes").array_items())
-    for (const auto &port : node.get("inputs").object_items())
-      for (const auto &ref : port.second.array_items())
-        if (text(ref).find("::") == std::string::npos)
-          usedSources.insert(text(ref));
+  std::set<std::string> activeIds;
   auto card = [&](const Json &node, bool source) {
     CanvasCard item;
     item.id = getstr(node, "id");
@@ -328,8 +567,7 @@ void canvas_layout(int vw, int vh) {
     canvasCards.push_back(std::move(item));
   };
   for (const auto &source : graph().get("sources").array_items())
-    if (usedSources.count(getstr(source, "id")))
-      card(source, true);
+    card(source, true);
   for (const auto &node : graph().get("nodes").array_items())
     card(node, false);
   // Automatically placed inputs must not cover a tool dropped near the left
@@ -371,26 +609,12 @@ void canvas_layout(int vw, int vh) {
       else
         ++it;
   }
-  dagWidth = vw;
-  dagHeight = vh;
-  for (const auto &item : canvasCards) {
-    dagWidth = std::max(dagWidth, static_cast<int>(item.box.right) + 48);
-    dagHeight = std::max(dagHeight, static_cast<int>(item.box.bottom) + 48);
-  }
-  dagX = std::clamp(dagX, 0, std::max(0, dagWidth - vw));
-  dagY = std::clamp(dagY, 0, std::max(0, dagHeight - vh));
+  canvas_navigation_bounds();
   for (const auto &item : canvasCards) {
     const auto &box = item.box;
-    hits.push_back({{px(box.left - dagX), px(box.top - dagY),
-                     px(box.right - dagX), px(box.bottom - dagY)},
+    hits.push_back({{canvas_px(box.left - dagX), canvas_px(box.top - dagY),
+                     canvas_px(box.right - dagX), canvas_px(box.bottom - dagY)},
                     item.id, item.source});
-  }
-  for (int bar : {SB_HORZ, SB_VERT}) {
-    SCROLLINFO si{sizeof(si), SIF_RANGE | SIF_PAGE | SIF_POS};
-    si.nMax = (bar == SB_HORZ ? dagWidth : dagHeight) - 1;
-    si.nPage = bar == SB_HORZ ? vw : vh;
-    si.nPos = bar == SB_HORZ ? dagX : dagY;
-    SetScrollInfo(dag, bar, &si, TRUE);
   }
 }
 void paint_dag() {
@@ -410,13 +634,14 @@ void paint_dag() {
   HBRUSH gridBackground = CreateSolidBrush(RGB(246, 248, 251));
   FillRect(mem, &client, gridBackground);
   DeleteObject(gridBackground);
-  const int vw = std::max(1, MulDiv(client.right, 96, dpi)),
-            vh = std::max(1, MulDiv(client.bottom, 96, dpi));
-  canvas_layout(vw, vh);
+  canvas_layout();
+  const auto view = canvas_viewport();
+  const int vw = static_cast<int>(view.cx), vh = static_cast<int>(view.cy);
   {
     Gdiplus::Graphics g(mem);
     g.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias);
-    g.ScaleTransform(dpi / 96.f, dpi / 96.f);
+    const float scale = dpi / 96.f * canvasZoom / 100.f;
+    g.ScaleTransform(scale, scale);
     g.TranslateTransform(static_cast<float>(-dagX), static_cast<float>(-dagY));
     Gdiplus::SolidBrush grid(Gdiplus::Color(255, 215, 224, 234));
     for (int y = dagY / 20 * 20; y <= dagY + vh; y += 20)
@@ -457,7 +682,8 @@ void paint_dag() {
           for (const auto &target : canvasPorts) {
             const long long dx = static_cast<long long>(canvasPointer.x) - target.point.x,
                             dy = static_cast<long long>(canvasPointer.y) - target.point.y;
-            if (!target.output && dx * dx + dy * dy <= 12 * 12) {
+            const int radius = std::max(6, MulDiv(12, 100, canvasZoom));
+            if (!target.output && dx * dx + dy * dy <= static_cast<long long>(radius) * radius) {
               endpoint = target.point;
               compatible = canvas_accepts(target, canvasDragRef);
               break;
@@ -482,6 +708,18 @@ void paint_dag() {
                                                   : Gdiplus::Color(255, 43, 90, 139));
       g.FillRectangle(&header, static_cast<float>(box.left + 1), static_cast<float>(box.top + 1),
                       static_cast<float>(box.right - box.left - 2), 43.f);
+      if (item.id == canvasHoverNode && canvas_editable()) {
+        const auto close = canvas_delete_rect(item);
+        if (canvasHoverDelete)
+          rounded(g, static_cast<float>(close.left), static_cast<float>(close.top),
+                  static_cast<float>(close.right - close.left), static_cast<float>(close.bottom - close.top),
+                  3, RGB(169, 54, 57), RGB(169, 54, 57));
+        Gdiplus::Pen cross(Gdiplus::Color(255, 255, 255, 255), 1.8f);
+        const float cx = (close.left + close.right) / 2.f,
+                    cy = (close.top + close.bottom) / 2.f;
+        g.DrawLine(&cross, cx - 4.f, cy - 4.f, cx + 4.f, cy + 4.f);
+        g.DrawLine(&cross, cx + 4.f, cy - 4.f, cx - 4.f, cy + 4.f);
+      }
       if (!item.inputs.empty() && !item.outputs.empty()) {
         Gdiplus::Pen separator(Gdiplus::Color(255, 224, 231, 239), 1.f);
         const float y = item.outputs.front().point.y - 23.f;
@@ -507,20 +745,31 @@ void paint_dag() {
     }
   }
   SetBkMode(mem, TRANSPARENT);
+  // GDI text uses the same zoom as the GDI+ card geometry. Scaling only the
+  // boxes leaves clipped, overlapping labels at non-default zoom levels.
+  auto scaledFont = [&](HFONT face) {
+    LOGFONTW descriptor{};
+    if (!GetObjectW(face, sizeof(descriptor), &descriptor))
+      return static_cast<HFONT>(nullptr);
+    descriptor.lfHeight = MulDiv(descriptor.lfHeight, canvasZoom, 100);
+    return CreateFontIndirectW(&descriptor);
+  };
+  HFONT zoomFont = scaledFont(font), zoomBold = scaledFont(bold), zoomSmall = scaledFont(small);
+  const auto oldFont = SelectObject(mem, zoomFont ? zoomFont : font);
   auto label = [&](const std::wstring &value, RECT r, HFONT face, COLORREF color, UINT flags) {
-    RECT screen{px(r.left - dagX), px(r.top - dagY), px(r.right - dagX), px(r.bottom - dagY)};
+    RECT screen{canvas_px(r.left - dagX), canvas_px(r.top - dagY), canvas_px(r.right - dagX), canvas_px(r.bottom - dagY)};
     SelectObject(mem, face);
     SetTextColor(mem, color);
     DrawTextW(mem, value.c_str(), -1, &screen, flags | DT_NOPREFIX | DT_SINGLELINE | DT_END_ELLIPSIS);
   };
   for (const auto &item : canvasCards) {
     const auto &box = item.box;
-    label(wide(item.title), {box.left + 12, box.top + 5, box.right - 12, box.top + 25}, bold, PAPER, DT_LEFT | DT_VCENTER);
-    label(wide(item.subtitle), {box.left + 12, box.top + 25, box.right - 12, box.top + 42}, small, RGB(223, 235, 247), DT_LEFT | DT_VCENTER);
+    label(wide(item.title), {box.left + 12, box.top + 5, box.right - 34, box.top + 25}, zoomBold ? zoomBold : bold, PAPER, DT_LEFT | DT_VCENTER);
+    label(wide(item.subtitle), {box.left + 12, box.top + 25, box.right - 34, box.top + 42}, zoomSmall ? zoomSmall : small, RGB(223, 235, 247), DT_LEFT | DT_VCENTER);
     auto portLabel = [&](const CanvasPort &port) {
       const UINT align = port.output ? DT_RIGHT : DT_LEFT;
-      label(wide(port.label), {box.left + 14, port.point.y - 14, box.right - 14, port.point.y + 3}, font, INK, align | DT_VCENTER);
-      label(wide(port.type), {box.left + 14, port.point.y + 3, box.right - 14, port.point.y + 18}, small, MUTED, align | DT_VCENTER);
+      label(wide(port.label), {box.left + 14, port.point.y - 14, box.right - 14, port.point.y + 3}, zoomFont ? zoomFont : font, INK, align | DT_VCENTER);
+      label(wide(port.type), {box.left + 14, port.point.y + 3, box.right - 14, port.point.y + 18}, zoomSmall ? zoomSmall : small, MUTED, align | DT_VCENTER);
     };
     for (const auto &port : item.inputs)
       portLabel(port);
@@ -535,9 +784,13 @@ void paint_dag() {
     SelectObject(mem, font);
     SetTextColor(mem, MUTED);
     RECT help{px(32), px(88), client.right - px(32), client.bottom - px(24)};
-    DrawTextW(mem, L"Drag tools from the Tool shed onto this canvas.\n\nConnect an output socket to a compatible input socket. Select a tool to edit its options on the right.\n\nYou can also add a selected tool with the Add to workflow button and choose connections in Tool options.", -1, &help, DT_LEFT | DT_WORDBREAK | DT_NOPREFIX);
+    DrawTextW(mem, L"Add named workflow inputs for your files and reference, then drag tools from the Tool shed onto this canvas.\n\nConnect input or tool-output sockets to compatible tool inputs. Select a card to edit its options on the right.\n\nDrag empty canvas to pan. Use the zoom buttons, Ctrl+wheel or a trackpad pinch to zoom.", -1, &help, DT_LEFT | DT_WORDBREAK | DT_NOPREFIX);
   }
   BitBlt(dc, 0, 0, client.right, client.bottom, mem, 0, 0, SRCCOPY);
+  SelectObject(mem, oldFont);
+  for (HFONT face : {zoomFont, zoomBold, zoomSmall})
+    if (face)
+      DeleteObject(face);
   SelectObject(mem, old);
   DeleteObject(bitmap);
   DeleteDC(mem);

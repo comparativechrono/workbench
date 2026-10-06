@@ -277,7 +277,11 @@ def run_reference_checks(root, evidence, report, args):
         local = next(item for item in state["local"] if item["id"] == record["id"])
         require(local["available"] and local["receipt_sha256"] == record["receipt_sha256"],
                 "Offline restart could not rediscover the unchanged local reference.")
-        snapshot = host.call("model", {"action": "add_tool", "payload": {"toolId": "bam/reference-index"}})
+        state = host.call("state")
+        if "mode" in state:
+            snapshot = host.call("workspace/tool", {"toolId": "bam/reference-index"})
+        else:
+            snapshot = host.call("model", {"action": "add_tool", "payload": {"toolId": "bam/reference-index"}})
         targets = host.call("references/targets", {"record_id": record["id"], "file_id": "genome"})["targets"]
         require(len(targets) == 1 and targets[0]["type"] == "reference", "Downloaded genome did not match the existing SAMtools reference input.")
         target = targets[0]
@@ -687,15 +691,15 @@ def gui_smoke(root, evidence):
         wait_native_state("wait for native task library", lambda:
             user.IsWindowEnabled(find_control(main, 403))
             and send(find_control(main, 104), 0x1004) > 0, main)
-        # The three-pane desktop opens single tools directly. This regression
-        # intentionally uses its workflow editor so the existing Add path stays
-        # covered; older 0.7 applications have no mode button and remain valid.
-        workflow_button = find_control(main, 411)
-        if workflow_button:
-            require(user.PostMessageW(workflow_button, 0x00F5, 0, 0),
-                    "Could not enter native workflow mode.")
-            wait_native_state("open native workflow editor", lambda:
-                user.IsWindowVisible(find_control(main, 105)), main)
+        # Reference binding in the three-pane desktop uses its standalone form.
+        # The workspace gate separately tests explicitly created reusable inputs.
+        # Legacy 0.7 has no mode button and retains its Add-task interaction.
+        standalone_button = find_control(main, 410)
+        if standalone_button:
+            require(user.PostMessageW(standalone_button, 0x00F5, 0, 0),
+                    "Could not enter native standalone mode.")
+            wait_native_state("open native standalone editor", lambda:
+                not user.IsWindowVisible(find_control(main, 105)), main)
         task_query = ctypes.create_unicode_buffer("Index a reference")
         send(find_control(main, 102), 0x000C, 0, ctypes.addressof(task_query))
         tasks = find_control(main, 104)
@@ -705,12 +709,15 @@ def gui_smoke(root, evidence):
                 and user.PostMessageW(tasks, 0x0101, 0x24, 0xC0000001),
                 "Could not select the native reference indexing task.")  # VK_HOME
         wait_native_state("select the native reference indexing task", lambda:
-            send(tasks, 0x100C, ctypes.c_size_t(-1).value, 2) == 0
-            and user.IsWindowEnabled(find_control(main, 105)), main)
-        require(user.PostMessageW(find_control(main, 105), 0x00F5, 0, 0),
-                "Could not click Add selected task.")  # queued BM_CLICK
-        wait_native_state("add native reference indexing step", lambda:
-            any(item["text"] == "Index a reference" for item in inspector_edits(main)), main)
+            send(tasks, 0x100C, ctypes.c_size_t(-1).value, 2) == 0, main)
+        if not standalone_button:
+            wait_native_state("enable Add selected task", lambda:
+                user.IsWindowEnabled(find_control(main, 105)), main)
+            require(user.PostMessageW(find_control(main, 105), 0x00F5, 0, 0),
+                    "Could not click Add selected task.")  # queued BM_CLICK
+        wait_native_state("open native reference indexing form", lambda:
+            any("Index a reference" in item["text"] or "FASTA index" in item["text"]
+                for item in inspector_edits(main)), main)
         progress("open References", pid=process.pid, windows=[
             {"hwnd": hwnd, "title": text(hwnd), "class": text(hwnd, True)}
             for hwnd in windows(process.pid)])
