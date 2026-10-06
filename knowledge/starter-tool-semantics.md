@@ -2,8 +2,9 @@
 
 Reviewed 2026-10-06 after testers reported difficulty connecting alignment
 outputs and could not identify the purpose of the reference-index operation.
-This is a source/manifest audit, not a new native scientific execution claim.
-Published pack files and identities were not changed.
+The initial findings below came from source and manifests. Follow-up native
+execution is recorded separately below. Published pack files and identities
+were not changed.
 
 ## What the starter actually runs
 
@@ -104,12 +105,20 @@ preparation → BCFtools variant-calling check. Its truth requires 202 mapped,
 paired, properly paired records and the expected homozygous SNP at
 `starter:1351 G>A`. Reading this profile is not a rerun of that check.
 
-For the revised workflow interface, validate direct minimap2 SAM → `bam/sort`
-connections and native execution separately: check BAM encoding, record and
-read-group preservation, mate flags and coordinate order, with no prerequisite
-reference-index step. Interface tests should establish shared explicit inputs,
-no automatically created input boxes, and no duplicated file-entry controls for
-connected tool inputs.
+Follow-up exact-package Windows validation passed in
+[run 37441781509](https://github.com/comparativechrono/workbench/actions/runs/37441781509)
+for source `0d2a993fca95a5837a69aa05c63aa5e806c553af`. Both ordinary and
+space-containing installations ran explicit reference and paired-read inputs
+through minimap2 SAM → `bam/sort`, without a separate reference-index step.
+The checks verified binary BAM, coordinate order, read groups, and preservation
+of all 202 expected records, mate flags, sequences, qualities and typed tags.
+Floating tags were compared at their IEEE single-precision value, since SAM
+text formatting can legitimately change on a BAM round trip. Native pointer
+checks also connected an explicit source to a tool and one tool to another,
+with no automatically allocated or duplicated workflow file controls. See the
+[feedback evidence](evidence/native-workflow-0.8.0-feedback-2026-10-06.json)
+and linked raw reports for the exact artifacts and validation limits. This did
+not rerun every optional pack or the separate variant-calling truth profile.
 
 Primary upstream documentation consulted on 2026-10-06:
 

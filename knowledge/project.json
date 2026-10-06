@@ -3,7 +3,7 @@
   "document_kind": "project-knowledge-index",
   "project": "Native Workbench",
   "repository": "https://github.com/comparativechrono/workbench",
-  "reviewed_on": "2026-10-05",
+  "reviewed_on": "2026-10-06",
   "source_baseline_commit": "57d635370a1cd34dd1549aff95a2feba7faeeb74",
   "format": {
     "prose": "UTF-8 Markdown",
@@ -58,7 +58,13 @@
     "reference_concurrency_reconciliation": "evidence/reference-concurrency-reconciliation-2026-10-05.json",
     "reference_concurrency_assets": "evidence/reference-concurrency-assets-audit-2026-10-05.json",
     "reference_concurrency_windows": "evidence/reference-concurrency-windows-2026-10-05.json",
-    "reference_concurrency_public_assets": "evidence/reference-concurrency-public-assets-2026-10-05.json"
+    "reference_concurrency_public_assets": "evidence/reference-concurrency-public-assets-2026-10-05.json",
+    "starter_tool_semantics": "starter-tool-semantics.md",
+    "native_workflow_feedback_evidence": "evidence/native-workflow-0.8.0-feedback-2026-10-06.json",
+    "native_workflow_final_ordinary_ui": "evidence/native-workflow-0.8.0-final-ordinary-ui-2026-10-06.json",
+    "native_workflow_final_ordinary_references": "evidence/native-workflow-0.8.0-final-ordinary-references-2026-10-06.json",
+    "native_workflow_final_spaces_ui": "evidence/native-workflow-0.8.0-final-spaces-ui-2026-10-06.json",
+    "native_workflow_final_spaces_references": "evidence/native-workflow-0.8.0-final-spaces-references-2026-10-06.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -73,7 +79,8 @@
     "Catalogue signatures, source provenance and third-party licensing preserved",
     "Large scientific databases remain separate local inputs; hashes and explicit external-model declarations preserve their distinct evidence scopes",
     "Explicit reference retrieval remains separate from local analysis; release, assembly and byte identities are frozen with run provenance",
-    "Native three-pane Tools and Workflow modes preserve independent in-process edits; canonical tool presets and pinned workflow saves remain separate"
+    "Native three-pane Tools and Workflow modes preserve independent in-process edits; canonical tool presets and pinned workflow saves remain separate",
+    "New workflow tools start unconnected; explicit reusable input cards own file bindings, while standalone tools retain direct file fields"
   ],
   "maintenance": {
     "source_of_behavior": "Current checked-out source and reproducible observations",
@@ -111,40 +118,119 @@
   "release_tag_commit": "6c266a58818886c6f4f5287006f20fafc5aadd68",
   "source_commit_scope": "Published 0.7.0 packaged application source; release tag adds validation gate/evidence only. Development checkpoints are separate.",
   "native_ui_development": {
-    "recorded_on": "2026-10-05",
+    "recorded_on": "2026-10-06",
     "version": "0.8.0",
     "branch": "ui/galaxy-native-workspace",
     "starting_commit": "7c6f2437842788daf9918ac2194ef859b153092c",
     "pull_request": "https://github.com/comparativechrono/workbench/pull/1",
     "pull_request_state": "draft",
-    "status": "validated development candidate; unreleased; awaiting manual tester acceptance",
-    "source_checks": {"passes": 57, "failures": 0, "skips": 0},
-    "tested_source_commit": "c82c559d02a0b70e79afe67da93ace9e344f1ef3",
-    "native_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37376078599",
-    "native_checks_per_path": {
-      "paths": ["ordinary", "spaces"],
-      "workspace_host": 6,
-      "workspace_gui": 12,
-      "references_and_update": 8,
+    "status": "tester layout accepted; feedback candidate passed exact packaged Windows gates; unreleased; awaiting tester reacceptance",
+    "source_checks": {
+      "passes": 75,
       "failures": 0,
-      "skips": 0
+      "skips": 0,
+      "platform": "Linux x86-64 / Python 3.12.14",
+      "scope": "Local run used Python 3.12.14; final Linux CI independently passed the same 75 suites."
     },
-    "candidate_download": {
-      "url": "https://github.com/comparativechrono/workbench/actions/runs/37376078599/artifacts/11371647135",
-      "sha256": "61bd2deca854b43596b82be95cebb4d72179df6cd34c2abe097361df8777de7e",
-      "bytes": 75395876,
-      "expires_at": "2026-11-04T21:29:20Z",
-      "starter_sha256": "5e59dee9efd38f2ee10516292294e4bd711b2c0a61e35b2bbbb49965f27383e4",
-      "review_installation": "Extract starter into a separate folder."
-    },
+    "source_checked_commit": "0d2a993fca95a5837a69aa05c63aa5e806c553af",
+    "native_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37441781509",
+    "native_status": "passed in ordinary and space-containing installation paths; previous failed attempt retained in evidence",
+    "feedback_changes": [
+      "Explicit reusable typed workflow inputs; no automatic source cards when a workflow tool is added",
+      "Input card owns file fields; tool inspector shows connections and parameters without duplicate file editors",
+      "Shared paired-read roles, old workflow graph IDs and exact pack pins retained across saves",
+      "Empty-canvas pan, visible 25-200 percent zoom/reset, Ctrl+wheel and Windows pan/zoom gesture handling",
+      "Hover delete cross and Delete key; removal disconnects consumers and supports Undo",
+      "Native form child repainting and first-open Manage tools array initialization",
+      "Program-qualified operation labels and clearer existing SAM-to-sorted-BAM / FASTA lookup-index meaning"
+    ],
     "limits": [
-      "Manual tester acceptance remains outstanding.",
-      "Native coverage is Windows Server 2022 at observed 96 DPI; high-DPI/multi-monitor movement and native folder pickers are unvalidated.",
-      "Updater checked only from 0.6.0 to 0.8.0; no 0.7.0-to-0.8.0 updater or upgrade validation is claimed.",
+      "Layout acceptance does not establish acceptance of revised workflow behavior; manual tester reacceptance remains outstanding.",
+      "Native coverage is Windows Server 2022 at observed 96 DPI.",
+      "Physical trackpad pinch, high-DPI/multi-monitor movement and native folder pickers remain unvalidated.",
+      "The tiny-delta Ctrl+wheel regression injects native messages and does not establish physical trackpad behavior.",
+      "Updater checked only from 0.6.0 to 0.8.0; no 0.7.0-to-0.8.0 upgrade validation is claimed.",
       "No 0.8.0 release tag or published release was created."
     ],
     "guide": "native-ui.md",
-    "evidence": "evidence/native-ui-0.8.0-development-2026-10-05.json",
-    "published_release_unchanged": "0.7.0"
+    "evidence": "evidence/native-workflow-0.8.0-feedback-2026-10-06.json",
+    "starter_tool_audit": "starter-tool-semantics.md",
+    "published_release_unchanged": "0.7.0",
+    "previous_candidate": {
+      "recorded_on": "2026-10-05",
+      "version": "0.8.0",
+      "branch": "ui/galaxy-native-workspace",
+      "starting_commit": "7c6f2437842788daf9918ac2194ef859b153092c",
+      "pull_request": "https://github.com/comparativechrono/workbench/pull/1",
+      "pull_request_state": "draft",
+      "status": "validated development candidate; unreleased; awaiting manual tester acceptance",
+      "source_checks": {
+        "passes": 57,
+        "failures": 0,
+        "skips": 0
+      },
+      "tested_source_commit": "c82c559d02a0b70e79afe67da93ace9e344f1ef3",
+      "native_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37376078599",
+      "native_checks_per_path": {
+        "paths": [
+          "ordinary",
+          "spaces"
+        ],
+        "workspace_host": 6,
+        "workspace_gui": 12,
+        "references_and_update": 8,
+        "failures": 0,
+        "skips": 0
+      },
+      "candidate_download": {
+        "url": "https://github.com/comparativechrono/workbench/actions/runs/37376078599/artifacts/11371647135",
+        "sha256": "61bd2deca854b43596b82be95cebb4d72179df6cd34c2abe097361df8777de7e",
+        "bytes": 75395876,
+        "expires_at": "2026-11-04T21:29:20Z",
+        "starter_sha256": "5e59dee9efd38f2ee10516292294e4bd711b2c0a61e35b2bbbb49965f27383e4",
+        "review_installation": "Extract starter into a separate folder."
+      },
+      "limits": [
+        "Manual tester acceptance remains outstanding.",
+        "Native coverage is Windows Server 2022 at observed 96 DPI; high-DPI/multi-monitor movement and native folder pickers are unvalidated.",
+        "Updater checked only from 0.6.0 to 0.8.0; no 0.7.0-to-0.8.0 updater or upgrade validation is claimed.",
+        "No 0.8.0 release tag or published release was created."
+      ],
+      "guide": "native-ui.md",
+      "evidence": "evidence/native-ui-0.8.0-development-2026-10-05.json",
+      "published_release_unchanged": "0.7.0"
+    },
+    "candidate_source_commit": "0d2a993fca95a5837a69aa05c63aa5e806c553af",
+    "native_checks_per_path": {
+      "paths": [
+        "ordinary",
+        "spaces"
+      ],
+      "workspace_host": 8,
+      "workspace_scientific": 2,
+      "workspace_gui": 22,
+      "references_and_update": 8,
+      "failures": 0,
+      "skips": 0,
+      "platform": "Windows Server 2022",
+      "python": "bundled 3.13.16",
+      "observed_dpi": 96,
+      "sam_to_bam_records": 202,
+      "scroll_static_pixels_compared": 197198,
+      "scroll_pixel_differences": 0
+    },
+    "candidate_download": {
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37441781509/artifacts/11401422780",
+      "expires_at": "2026-11-05T09:16:55Z",
+      "starter_sha256": "de099e5feef437c788352c31c0e743c7e8f22aa08bfe2364e59b715ec3501806",
+      "starter_bytes": 16948268,
+      "verified_core_entries": 68,
+      "verified_unchanged_pack_entries": 143,
+      "verified_workspace_source_copies": 15,
+      "review_installation": "Extract starter into a separate folder.",
+      "sha256": "90933af445f8696baa0f787ece51a5e795cd654dfd6783dc2d3309c352d22419",
+      "bytes": 75484976
+    },
+    "tested_source_commit": "0d2a993fca95a5837a69aa05c63aa5e806c553af"
   }
 }

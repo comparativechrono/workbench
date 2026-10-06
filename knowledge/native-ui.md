@@ -1,26 +1,35 @@
 # Native interface development
 
-**Status recorded: 2026-10-05.** The Galaxy-inspired interface is development
+**Status recorded: 2026-10-06.** The Galaxy-inspired interface is development
 work for application **0.8.0**, on `ui/galaxy-native-workspace`, starting from
 `7c6f2437842788daf9918ac2194ef859b153092c`. It is **unreleased** at this checkpoint.
 The candidate is being reviewed in
 [draft PR #1](https://github.com/comparativechrono/workbench/pull/1).
-The final candidate at source
-`c82c559d02a0b70e79afe67da93ace9e344f1ef3` passed the automated packaged Windows
-workspace and References gates in both installation paths. Manual tester
-acceptance remains outstanding. The published 0.7.0 release and its
-reference-validation evidence remain unchanged; no 0.8.0 release was created.
+Testers accepted the three-pane layout, then reported workflow input duplication,
+difficult chaining, missing navigation/delete controls, text corruption while
+scrolling and an error on the first opening of Manage tools. The 2026-10-06
+revision addresses those findings in source. Candidate source
+`0d2a993fca95a5837a69aa05c63aa5e806c553af` passed validation in
+[run 37441781509](https://github.com/comparativechrono/workbench/actions/runs/37441781509).
+Each Windows path passed **32 workspace checks and 8 References/update checks**,
+with zero failures or skips. The detailed checks below retain their exact
+candidate identity. The first feedback attempt failed a raw-text SAM
+assertion before GUI launch and remains recorded separately.
 
-The [candidate bundle](https://github.com/comparativechrono/workbench/actions/runs/37376078599/artifacts/11371647135)
-contains the starter, corresponding source and 0.6.0 updater archives. For UI
-review, extract the **0.8.0 starter into a separate folder** and run
-`NativeWorkbench.exe`. A 0.7.0-to-0.8.0 updater has not been validated or
-provided. This GitHub Actions artifact expires **4 November 2026**.
+The 2026-10-05 candidate at `c82c559d02a0b70e79afe67da93ace9e344f1ef3`
+and its successful automated Windows gate remain historical evidence below.
+Layout acceptance is not acceptance of the corrected workflow behavior.
+The published 0.7.0 release and its reference-validation evidence remain
+unchanged; no 0.8.0 release was created.
 
-| Verified candidate item | SHA-256 |
-| --- | --- |
-| Actions bundle, 75,395,876 bytes | `61bd2deca854b43596b82be95cebb4d72179df6cd34c2abe097361df8777de7e` |
-| `native-workbench-0.8.0-starter-windows.zip` | `5e59dee9efd38f2ee10516292294e4bd711b2c0a61e35b2bbbb49965f27383e4` |
+The [revised candidate bundle](https://github.com/comparativechrono/workbench/actions/runs/37441781509/artifacts/11401422780)
+contains the starter, matching source and 0.6.0 updater. Extract its **0.8.0
+starter into a separate folder** and launch `NativeWorkbench.exe` for review.
+The bundle expires **5 November 2026**. No 0.7.0-to-0.8.0 upgrade is claimed.
+The downloaded starter is **16,948,268 bytes**, SHA-256
+`de099e5feef437c788352c31c0e743c7e8f22aa08bfe2364e59b715ec3501806`.
+All 68 core entries, 143 unchanged starter-pack entries and 15 packaged workspace
+source copies were verified against their corresponding inventories/source.
 
 ## User-approved direction
 
@@ -38,8 +47,8 @@ Galaxy is copyrighted open-source software; its
 [current licence](https://github.com/galaxyproject/galaxy/blob/dev/LICENSE.txt)
 describes the applicable terms. Workbench uses its own branding, controls and
 Win32/GDI+ drawing. No Galaxy code, icons or screenshots are incorporated into
-the application. The left panel is labelled **Tools**: Galaxy's separate Tool
-Shed marketplace should not imply a newly implemented Workbench marketplace.
+the application. The left panel is the installed tool library: references to a
+tool shed do not imply a newly implemented Galaxy-compatible marketplace.
 
 ## Layout and operation
 
@@ -47,21 +56,39 @@ Shed marketplace should not imply a newly implemented Workbench marketplace.
 | --- | --- | --- |
 | Header | Tools and Workflow buttons; Native Workbench identity | The same mode buttons |
 | Left pane | Searchable installed tool library, category filter, Manage tools | The same library; drag a tool to the canvas or use Add to workflow |
-| Central pane | Selected tool's description, explicit file inputs and run parameters | Workflow canvas with named input/output ports and tool cards |
-| Right pane | General settings: analysis name, input browsing folder, output folder, References | Selected step's options; General settings remains accessible |
+| Central pane | Selected tool's description, explicit file inputs and run parameters | Workflow canvas with explicit input cards and tool cards |
+| Right pane | General settings: analysis name, input browsing folder, output folder, References | Selected tool's connections/options or selected input's files; General settings remains accessible |
 | Run action | Run tool | Run workflow |
 | Save action | Save settings | Save workflow |
 
 Selecting a tool in Tools mode opens that tool's standalone form. Switching
 tools does not append hidden workflow steps. In Workflow mode, selecting a
-canvas tool opens its options in the right pane. Dragging an output to an input
-requests an explicit graph connection. Compatible targets depend on declared
+canvas tool opens its options in the right pane. Adding a workflow tool leaves
+its ports unconnected and creates no file-input cards. **Add input** creates a
+named reference, single FASTQ, paired FASTQ or other installed semantic input.
+Select that input card to bind its files once, then reuse its output in multiple
+tools. Paired reads remain one atomic input with explicit read-1/read-2 fields.
+Downloaded references can be assigned before the input is connected to a tool.
+
+Dragging an input card's output or a tool output to a tool input requests an
+explicit graph connection. Compatible targets depend on declared
 semantic types, required state, capacity and cycle rules. The named-source
-picker remains an alternative to pointer dragging.
+picker remains an alternative to pointer dragging. A workflow tool's inspector
+shows its connections without repeating the file editors owned by input cards.
+Standalone Tools mode retains its direct file fields.
+
+Drag empty canvas to pan. The minus/plus buttons zoom between 25% and 200%; the
+percentage button resets to 100%. Ctrl+wheel zooms around the pointer, and
+Windows pan/zoom gesture messages are handled. Physical trackpad pinch behavior
+has not been verified on hardware. Hovering a card header exposes its delete
+cross; Delete also removes the selected card. Removal disconnects consumers
+and supports Undo. Canvas positions, pan and zoom are presentation state, not
+saved scientific graph parameters.
 
 The input folder is a browsing starting point for native file pickers. Selecting
 it does not bind every file in that folder or infer paired reads. Tool inputs
-remain individually selected named fields. The output folder is the parent for
+remain individually selected named fields, owned by an input card in Workflow
+mode or the standalone form in Tools mode. The output folder is the parent for
 new run directories, which retain methods, files, checksums and logs. References
 opens the existing native finder/local library; download and binding remain
 explicit operations. Results access remains available without introducing a
@@ -97,7 +124,12 @@ Canonical persistence remains the existing separate contracts:
   existing pack-version and manifest pins.
 
 Explicitly injected host models remain the active workflow session for existing
-embedders/tests. Normal native startup begins with an empty Tools session.
+embedders/tests and retain their older default source-allocation behavior.
+Production workflow sessions set `auto_sources=False`; standalone sessions
+retain automatic file slots. Normal native startup begins with an empty Tools
+session. Existing saved graph/source IDs, connections and pack pins are not
+rewritten. Explicit paired input schemas retain canonical read roles across
+save/load and receivers with different manifest input IDs.
 
 ## Native host and canvas boundary
 
@@ -106,6 +138,21 @@ embedders/tests. Normal native startup begins with an empty Tools session.
 | `workspace/mode` | `{"mode":"tool"}` or `{"mode":"workflow"}` | Active snapshot including `mode` |
 | `workspace/tool` | `{"toolId":"bam/reference-index"}` | Preserved standalone tool snapshot, `mode: "tool"` |
 | `workspace/connection-targets` | `{"ref":"step-1::sorted"}` | `{"ref":"step-1::sorted","targets":[{"nodeId":"step-2","portId":"alignment"}]}` |
+
+The `model` RPC uses the existing `{"action":...,"payload":...}` envelope:
+
+| Action | Payload | Effect |
+| --- | --- | --- |
+| `add_input` | `{"inputType":"reference","label":"Genome"}` | Create and select an unconnected reusable source |
+| `select` | `{"nodeId":"input-1"}` | Select an input card and its file inspector |
+| `apply_fields` | `{"sourceId":"input-1","files":{"input-1":{"reference":"C:/data/genome.fa"}}}` | Bind that source's declared field; actual field IDs come from the snapshot |
+| `remove_source` | `{"sourceId":"input-1"}` | Remove the source and disconnect its consumers, with Undo |
+
+Snapshot `inputTypes` derives IDs, labels and file schemas from installed port
+metadata, including accepted semantic alternatives such as SAM and BAM. A
+source inspector has `kind: "source"`, `sourceId`, `fields` and `consumers`.
+A tool inspector has `kind: "tool"`; its connection choices remain available,
+while workflow `ports[].sources` and `sources` omit duplicate file editors.
 
 Connection previews are read-only and concern one dragged source at a time.
 They traverse the producer's ancestors to exclude cyclic targets, then apply
@@ -121,9 +168,92 @@ inspector retains its source picker choices. Preview targets have only
 `nodeId` and `portId`. Canvas positions are presentation state and do not change
 dependency order, pack pins or scientific graph semantics.
 
-## Verification checkpoint
+## Feedback revision, 2026-10-06
 
-These source checks were performed during this development session on **Linux
+The scrolling fix moves child controls together without copying old pixels,
+then repaints the panel and all children. Manage tools starts with correctly
+typed empty arrays before its asynchronous response arrives; the first opening
+must not parse an absent value as an array.
+
+Library labels now identify the scientific program as well as the operation.
+Starter minimap2 produces SAM; **SAMtools — Coordinate sort to BAM (SAM/BAM
+input)** already supplies the direct SAM-to-sorted-BAM path. **SAMtools — FASTA
+lookup index (.fai)** names the standalone lookup-index export accurately.
+Starter alignment and variant operations prepare their own required indexes,
+so a separate faidx card is not a prerequisite. Canonical pack/workflow IDs,
+commands and published pack bytes remain unchanged. See the
+[starter tool audit](starter-tool-semantics.md) for exact commands, limitations
+and the distinction between FASTA lookup and aligner-specific indexes.
+
+The revised source gate ran these seven suites on Linux with Python 3.12.14:
+
+| Suite | Passed |
+| --- | ---: |
+| `test_workflow_inputs.py` | 11 |
+| `test_catalog_presentation.py` | 7 |
+| `test_desktop_modes.py` | 11 |
+| `test_desktop_host.py` | 12 |
+| `test_reference_service.py` | 10 |
+| `test_split_release.py` | 8 |
+| `test_core_update.py` | 16 |
+
+Total: **75 passed, zero failures or skips**. The new tests cover unconnected
+workflow tools, standalone bindings, shared references before connection,
+paired roles and file validation across save/load, removal/undo, atomic invalid
+edits, SAM/BAM connection differences and unchanged canonical pack metadata.
+These source checks do not execute Windows controls or scientific binaries.
+The first revised native gate in
+[run 37440843001](https://github.com/comparativechrono/workbench/actions/runs/37440843001)
+failed before GUI launch because it compared a SAM floating-point tag as raw
+text (`0.0100` versus equivalent `0.01`). Both paths passed eight packaged-host
+checks and eight References/update checks. The next attempt uses typed float
+comparison and also checks accumulated small Ctrl+wheel deltas; its complete
+native results passed as described below. The
+[feedback record](evidence/native-workflow-0.8.0-feedback-2026-10-06.json)
+retains both attempt identities and outcomes.
+
+The exact revised package passed
+[run 37441781509](https://github.com/comparativechrono/workbench/actions/runs/37441781509)
+on **Windows Server 2022 with bundled Python 3.13.16 at 96 DPI**:
+
+| Installation path | Packaged host | Native scientific checks | Native GUI | References/update | Failures/skips |
+| --- | ---: | ---: | ---: | ---: | --- |
+| [Ordinary](evidence/native-workflow-0.8.0-final-ordinary-ui-2026-10-06.json) | 8 | 2 | 22 | [8](evidence/native-workflow-0.8.0-final-ordinary-references-2026-10-06.json) | 0 / 0 |
+| [Contains spaces](evidence/native-workflow-0.8.0-final-spaces-ui-2026-10-06.json) | 8 | 2 | 22 | [8](evidence/native-workflow-0.8.0-final-spaces-references-2026-10-06.json) | 0 / 0 |
+
+The GUI checks used actual native pointer interactions for input-to-tool and
+tool-to-tool connections, shared input selection and its single file form,
+canvas panning in both directions, 83% zoom hit-testing, zoom reset, hover-cross
+deletion/Undo for both tools and sources, and the first Manage tools opening
+and reopening. Dialog interactions preserved unsaved form edits. A native
+message regression accumulated 120 Ctrl+wheel deltas of one unit and reached
+116% zoom; this checks high-resolution event handling, not physical trackpad
+hardware.
+
+The scroll regression compared **197,198 static-text/background pixels** at the
+same scrolled offset before and after a clean redraw, with **zero differing
+pixels in each path**. All 36 workspace GUI capture hashes were verified.
+These assertions concern the tested native controls and scroll positions at
+96 DPI; they do not establish every display scaling or accessibility setting.
+
+The scientific checks executed starter minimap2 paired alignment directly into
+SAMtools coordinate sorting. They verified binary BAM output with **202 mapped,
+properly paired records**, coordinate order, preserved mandatory SAM fields
+and typed optional tags. No separate reference-index operation was needed.
+Float values were compared according to their declared type, not cosmetic
+decimal formatting. The eight References/update checks also passed in each
+path, retaining download/cancellation, integrity, offline/provenance and
+**0.6.0-to-0.8.0** data-preservation coverage. No 0.7.0 updater claim follows.
+
+Physical trackpad pinch, high-DPI/multi-monitor movement, native folder-picker
+interaction and manual tester reacceptance of the corrected workflow remain
+unvalidated. The accepted layout, source tests and automated native result are
+separate evidence. Version 0.8.0 remains a review candidate rather than a
+published release.
+
+## Historical verification checkpoint, 2026-10-05
+
+These source checks were performed for the previous candidate on **Linux
 x86-64 with Python 3.12.14**, against the modified working tree:
 
 | Command | Result |
@@ -145,7 +275,7 @@ and capacity rules. A synthetic 512-node graph remains below the 8 MiB snapshot
 limit; its 511-target preview remains below 64 KiB. These fixtures do not execute
 scientific tools or native Windows controls.
 
-The exact final candidate passed native Windows
+The exact final candidate from 2026-10-05 passed native Windows
 [run 37376078599](https://github.com/comparativechrono/workbench/actions/runs/37376078599)
 on **Windows Server 2022 with bundled Python 3.13.16**, at the observed **96 DPI**.
 Each ordinary and space-containing installation passed **18 workspace checks**
@@ -185,10 +315,21 @@ Visual review of an intermediate passing candidate also found stale workflow
 guidance in Tools mode; the final candidate fixes it and adds a native
 regression. Historical results retain their exact source/artifact identities.
 
+The historical [candidate bundle](https://github.com/comparativechrono/workbench/actions/runs/37376078599/artifacts/11371647135)
+contains the older starter, matching source and 0.6.0 updater; it expires
+**4 November 2026** and does not include the 2026-10-06 feedback fixes.
+
+| Historical verified item | SHA-256 |
+| --- | --- |
+| Actions bundle, 75,395,876 bytes | `61bd2deca854b43596b82be95cebb4d72179df6cd34c2abe097361df8777de7e` |
+| `native-workbench-0.8.0-starter-windows.zip` | `5e59dee9efd38f2ee10516292294e4bd711b2c0a61e35b2bbbb49965f27383e4` |
+
 The maintained gate is
 [`scripts/check_workspace_ui_windows.py`](../scripts/check_workspace_ui_windows.py).
-Manual tester acceptance, broader accessibility evaluation, high-DPI and
-multi-monitor movement, and native folder-picker interaction remain outside
-this acceptance. Do not count those unrun scenarios as passed. A future release
+At that checkpoint, manual tester acceptance, broader accessibility evaluation,
+high-DPI and multi-monitor movement, and native folder-picker interaction were
+outside the automated acceptance. The later layout acceptance and workflow
+findings above do not retroactively change its test scope. Do not count unrun
+scenarios as passed. A future release
 must retain its own exact artifact identity and publication verification; this
 checkpoint validates a review candidate and leaves published 0.7.0 unchanged.

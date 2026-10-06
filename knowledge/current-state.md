@@ -1,6 +1,6 @@
 # Current project state
 
-Snapshot: **2026-10-05**. Application **0.7.0** is published as a development
+Snapshot: **2026-10-06**. Application **0.7.0** is published as a development
 prerelease; its exact-final native reference gate passed. Packaged source:
 [`57d635370a1cd34dd1549aff95a2feba7faeeb74`](https://github.com/comparativechrono/workbench/tree/57d635370a1cd34dd1549aff95a2feba7faeeb74).
 Release tag `app-v0.7.0` points to `6c266a58818886c6f4f5287006f20fafc5aadd68`,
@@ -10,7 +10,7 @@ and the repository [README](../README.md). Update the date, source baseline and
 evidence when the state changes; do not silently turn a pending item into a claim
 of completion.
 
-## Interface development, 2026-10-05
+## Interface development, 2026-10-06
 
 The working branch `ui/galaxy-native-workspace` is developing application
 **0.8.0** with the user-approved Galaxy-inspired native interface: Tools on the
@@ -19,20 +19,57 @@ separate drag/drop Workflow mode whose right pane edits the selected step.
 Standalone tools and the workflow preserve independent edits within the running
 process. The candidate is in
 [draft PR #1](https://github.com/comparativechrono/workbench/pull/1) and remains
-**unreleased**. Five source suites passed **57 checks on Linux**, with zero
-failures or skips. The final candidate at `c82c559d02a0b70e79afe67da93ace9e344f1ef3`
-passed **18 native workspace checks and 8 References/update checks per path**
-in ordinary and space-containing Windows installations, with zero failures or
-skips, in [run 37376078599](https://github.com/comparativechrono/workbench/actions/runs/37376078599).
-The downloaded archives/inventories and all 36 capture hashes were verified.
-The [candidate bundle](https://github.com/comparativechrono/workbench/actions/runs/37376078599/artifacts/11371647135)
-expires 4 November 2026; use its starter in a separate folder for review.
-Migration coverage is 0.6.0-to-0.8.0 only, with no 0.7.0 upgrade claim. Manual
-tester acceptance, high-DPI/multi-monitor movement and folder pickers remain
-unvalidated. See the [native UI guide](native-ui.md) and
-[development evidence](evidence/native-ui-0.8.0-development-2026-10-05.json) for
-exact candidate identities, retained failed attempts and scope. Published
-0.7.0 bytes and all dated release evidence below remain unchanged.
+**unreleased**. Testers accepted the layout, then identified problems with
+workflow chaining and input ownership, scrolling text, navigation/deletion,
+the first Manage tools opening and unclear tool names/indexing guidance.
+
+The feedback revision leaves new workflow tool ports unconnected and adds
+explicit reusable input cards, with file controls owned by the input rather
+than duplicated in every tool. It adds canvas panning, visible zoom controls,
+Windows gesture handling and hover deletion; repairs native panel repainting
+and initial pack-manager state; and names the scientific program in the tool
+library. The [starter audit](starter-tool-semantics.md) confirms that SAMtools
+sort already converts minimap2 SAM to sorted BAM, while the standalone faidx
+utility is not a prerequisite for starter alignment or variant operations.
+Published pack bytes, operation IDs and saved pins remain unchanged.
+
+The first feedback source `4cb5f335c0d22b159555df90b275c1f7ec32750e` passed
+**75 source checks on Linux**, with zero failures or skips. Its native gate
+failed before GUI launch when a raw-text SAM assertion rejected equivalent
+floating-point formatting; both paths passed eight packaged-host and eight
+References/update checks. Revised source
+`0d2a993fca95a5837a69aa05c63aa5e806c553af` includes a typed comparison and
+small-delta Ctrl+wheel handling, and passed
+[run 37441781509](https://github.com/comparativechrono/workbench/actions/runs/37441781509).
+Each ordinary and space-containing Windows installation passed **32 workspace
+checks** (8 host, 2 scientific and 22 GUI) plus **8 References/update checks**,
+with zero failures or skips, on Windows Server 2022/private Python 3.13.16 at
+96 DPI. Native minimap2-to-SAMtools sorting preserved 202 properly paired
+alignment records and produced coordinate-sorted BAM. Native pointer checks
+covered connections, pan/zoom, hover deletion/Undo, input ownership and Manage
+tools. The scroll comparison found zero differences across 197,198 sampled
+static-text/background pixels per path; all 56 workspace/References capture
+hashes were verified. See the [feedback record](evidence/native-workflow-0.8.0-feedback-2026-10-06.json)
+and [native UI guide](native-ui.md) for exact scope and limitations.
+
+The [revised candidate bundle](https://github.com/comparativechrono/workbench/actions/runs/37441781509/artifacts/11401422780)
+expires 5 November 2026. Extract its starter into a separate folder for review.
+The 16,948,268-byte starter has SHA-256
+`de099e5feef437c788352c31c0e743c7e8f22aa08bfe2364e59b715ec3501806`;
+its 68 core entries, 143 unchanged pack entries and 15 workspace source copies
+were verified.
+Physical trackpad pinch, high-DPI/multi-monitor movement and native folder
+pickers remain unvalidated. Layout acceptance does not establish acceptance of
+these changed workflow behaviors; manual retesting remains outstanding.
+
+The previous candidate at `c82c559d02a0b70e79afe67da93ace9e344f1ef3` passed
+18 workspace and 8 References/update checks per Windows path in
+[run 37376078599](https://github.com/comparativechrono/workbench/actions/runs/37376078599),
+with verified archives/inventories and 36 capture hashes. Its
+[2026-10-05 evidence](evidence/native-ui-0.8.0-development-2026-10-05.json)
+is historical and does not cover the feedback fixes. Updater coverage is
+0.6.0-to-0.8.0 only; no 0.7.0 upgrade is claimed. Published 0.7.0 bytes and all
+dated release evidence below remain unchanged.
 
 ## Reference-discovery release
 

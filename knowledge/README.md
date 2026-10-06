@@ -7,7 +7,7 @@ open, diffable files with no proprietary reader or external memory service.
 "Knowledge base" describes this directory; it does not claim compliance with a
 separate standard called Open Knowledge Format.
 
-**Reviewed:** 2026-10-05. **Starting source baseline:**
+**Reviewed:** 2026-10-06. **Starting source baseline:**
 [`8f95caa1f267d19ce72ea3cd7f2396ae66a801c1`](https://github.com/comparativechrono/workbench/commit/8f95caa1f267d19ce72ea3cd7f2396ae66a801c1).
 This handover includes the 0.7 reference-discovery implementation and
 Kraken2/Bracken metagenomics after the annotation,
@@ -17,15 +17,21 @@ each release retains its own date and tested bytes. Re-check the current tree
 and releases before treating this snapshot as current.
 
 The [0.8.0 native interface candidate](native-ui.md) is separate development in
-[draft PR #1](https://github.com/comparativechrono/workbench/pull/1). Its five
-source suites passed 57 checks with no failures or skips. An earlier candidate
-exposed gate and tool-selection issues retained in the evidence. The final
-candidate passed 18 native workspace checks and 8 References/update checks in
-each installation path, with zero failures/skips. It remains unreleased and
-awaits manual tester acceptance; published 0.7.0 and its evidence are unchanged.
-The guide links the verified, time-limited candidate download and unrun desktop
-scenarios. See the [development record](evidence/native-ui-0.8.0-development-2026-10-05.json)
-for exact tested bytes and retained validation attempts.
+[draft PR #1](https://github.com/comparativechrono/workbench/pull/1). Testers
+accepted its layout and reported workflow/input, scrolling and navigation
+issues. The 2026-10-06 revision adds explicit reusable workflow inputs and
+navigation controls, fixes native repaint/first-open errors and clarifies
+scientific tool names. Its **75 source checks passed**, followed by **32
+workspace checks and 8 References/update checks in each Windows path**, with
+zero failures or skips. These include native workflow pointer interactions,
+scroll repaint comparison and a 202-record minimap2 SAM-to-sorted-BAM run. The
+[feedback record](evidence/native-workflow-0.8.0-feedback-2026-10-06.json)
+retains an earlier scientific-assertion failure and keeps the revised candidate
+separate from the
+[successful 2026-10-05 candidate](evidence/native-ui-0.8.0-development-2026-10-05.json).
+The guide links the verified revised download and identifies untested physical
+trackpad/display scenarios. Version 0.8.0 remains unreleased and awaits tester
+reacceptance; published 0.7.0 and its evidence are unchanged.
 
 ## Reading order
 
@@ -35,6 +41,7 @@ for exact tested bytes and retained validation attempts.
 | [Current state](current-state.md) | What is released, tested, limited or unfinished? |
 | [Architecture](architecture.md) | Where does each responsibility live, and how does a run work? |
 | [Native UI development](native-ui.md) | How do the three panes, standalone tools and workflow canvas work, and what remains to validate? |
+| [Starter tool semantics](starter-tool-semantics.md) | Which program does each starter operation run, how does SAM become BAM, and what does faidx mean? |
 | [Reference discovery](../docs/reference-discovery-0.7.md) | How are references found, downloaded, reused offline and recorded in runs? |
 | [Development](development.md) | How do I recover inputs, build, test and resume work? |
 | [Pack development](pack-development.md) | How do I add a real tool without rebuilding the app? |

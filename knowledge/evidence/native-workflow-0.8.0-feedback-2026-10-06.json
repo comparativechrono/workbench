@@ -1,0 +1,509 @@
+{
+  "schema": 1,
+  "recordedDate": "2026-10-06",
+  "version": "0.8.0",
+  "status": "Workflow feedback fixes implemented and exact Windows package validated; development candidate in draft PR awaiting tester acceptance; not a published release",
+  "publishedReleaseUnchanged": "0.7.0",
+  "branch": "ui/galaxy-native-workspace",
+  "pullRequest": "https://github.com/comparativechrono/workbench/pull/1",
+  "priorEvidence": "knowledge/evidence/native-ui-0.8.0-development-2026-10-05.json",
+  "scope": "Follow-up to tester feedback on explicit workflow input ownership, chaining, native navigation/rendering, first-use pack manager and scientific tool discoverability.",
+  "sourceChecks": {
+    "platform": "Linux x86-64",
+    "python": "3.12.14",
+    "passes": 75,
+    "failures": 0,
+    "skips": 0,
+    "suites": {
+      "desktop_modes": 11,
+      "desktop_host": 12,
+      "reference_service": 10,
+      "catalog_presentation": 7,
+      "workflow_inputs": 11,
+      "split_release": 8,
+      "core_update": 16
+    },
+    "localSourceCommit": "4cb5f335c0d22b159555df90b275c1f7ec32750e",
+    "finalCICommit": "0d2a993fca95a5837a69aa05c63aa5e806c553af",
+    "scope": "Local 75-check run used Python 3.12.14. The final CI build independently reran the same 75 suites on Linux; their Python/model sources were unchanged by the intervening canvas and gate-only commit."
+  },
+  "attempts": [
+    {
+      "runId": 37440843001,
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37440843001",
+      "sourceCommit": "4cb5f335c0d22b159555df90b275c1f7ec32750e",
+      "build": "passed",
+      "sourceChecks": 75,
+      "windowsResult": "UI gate failed before GUI launch; eight packaged host checks and eight reference/update checks passed per path. Not a UI pass.",
+      "failure": "Exact raw SAM-text comparison rejected equivalent floating tag text (de:f:0.0100 versus de:f:0.01) after successful native BAM conversion. Gate now compares mandatory columns and typed tag values, using IEEE single-precision representation for f tags.",
+      "independentDiagnostic": "Decoded actual BAM independently: 202 records, 50 differences confined to trailing zeros in equivalent floating tags. Corrected comparison accepts these records and rejects injected flag/tag-value mutations.",
+      "artifacts": [
+        {
+          "case": "ordinary",
+          "id": 11401495943,
+          "sha256": "84f96b7cb4d326b45bc52cf28e0ac5c731ba7a790b032b2cc38be17bb3e3bade",
+          "bytes": 446047
+        },
+        {
+          "case": "spaces",
+          "id": 11400728711,
+          "sha256": "9ab6319718080b50a495ccb0fefc5019ad2dc3005f90a18ad5786ea0bda884db",
+          "bytes": 446324
+        }
+      ]
+    },
+    {
+      "runId": 37441781509,
+      "sourceCommit": "0d2a993fca95a5837a69aa05c63aa5e806c553af",
+      "build": "passed",
+      "sourceChecks": 75,
+      "conclusion": "success",
+      "reason": "Corrected typed scientific comparison; fractional high-resolution wheel accumulation; expanded explicit-source pointer connection regression. See finalCandidate for exact artifacts/reports."
+    }
+  ],
+  "limits": [
+    "Physical Precision Touchpad pinch requires tester hardware; synthetic wheel and native gesture implementation are not physical-device validation.",
+    "No manual tester acceptance of these fixes yet.",
+    "No 0.8.0 release tag or published release created.",
+    "Candidate updater is scoped to 0.6.0 to 0.8.0; no 0.7.0 migration claim. Use the starter in a separate folder for review.",
+    "Native coverage is Windows Server 2022 at 96 DPI on a 1024x768 runner display; multi-monitor/high-DPI movement and native folder-picker interaction are not counted as passed.",
+    "Observed app bounds were 1044x788 and 1044x740, not the larger requested dimensions.",
+    "Source/build companion is immutable at tested commit. Later documentation/evidence updates do not change tested application bytes."
+  ],
+  "finalCandidate": {
+    "runId": 37441781509,
+    "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37441781509",
+    "sourceCommit": "0d2a993fca95a5837a69aa05c63aa5e806c553af",
+    "conclusion": "success",
+    "artifact": {
+      "id": 11401422780,
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37441781509/artifacts/11401422780",
+      "sha256": "90933af445f8696baa0f787ece51a5e795cd654dfd6783dc2d3309c352d22419",
+      "bytes": 75484976,
+      "expiresAt": "2026-11-05T09:16:55Z"
+    },
+    "downloadVerification": {
+      "bundleSha256": "90933af445f8696baa0f787ece51a5e795cd654dfd6783dc2d3309c352d22419",
+      "sourceCommit": "0d2a993fca95a5837a69aa05c63aa5e806c553af",
+      "archives": [
+        {
+          "file": "native-workbench-0.8.0-source.zip",
+          "bytes": 46144883,
+          "sha256": "7a89ec0438c689971f576ae966d3c2cf44459c7dd6e30c6d577342df8eb26998"
+        },
+        {
+          "file": "native-workbench-0.8.0-starter-windows.zip",
+          "bytes": 16948268,
+          "sha256": "de099e5feef437c788352c31c0e743c7e8f22aa08bfe2364e59b715ec3501806"
+        },
+        {
+          "file": "native-workbench-0.8.0-update-from-0.6.0.zip",
+          "bytes": 12877714,
+          "sha256": "6a1a7c05a2edc0dabaa35584d37287ebc1b8da21ec608554fcaa7cde81661b0f"
+        }
+      ],
+      "coreManifestFilesVerified": 68,
+      "starterPackFilesByteIdenticalToFrozen060": 143,
+      "nativeExecutableSha256": "b0c089b37b0af6ac37d584f847a49a09d4702f0ba27b9edc94ba30c999ff9791",
+      "changedSourceFilesCompared": [
+        "desktop/desktop_workspace.cpp",
+        "desktop/workflow_canvas.h",
+        "workspace/desktop_model.py",
+        "workspace/desktop_host.py",
+        "workspace/catalog.py",
+        "workspace/engine.py",
+        "scripts/check_workspace_ui_windows.py",
+        "scripts/check_references_windows.py"
+      ],
+      "packagedWorkspaceSourceFilesCompared": 15
+    },
+    "windows": [
+      {
+        "installationPathCase": "ordinary",
+        "artifactId": 11401118627,
+        "artifactUrl": "https://github.com/comparativechrono/workbench/actions/runs/37441781509/artifacts/11401118627",
+        "artifactSha256": "49ddaa3370d2794563c11066ea435504cdd94696b975293c9c34fcef65b58bda",
+        "artifactBytes": 1251842,
+        "nativeWorkspaceChecksPassed": 32,
+        "nativeHostChecksPassed": 8,
+        "nativeScientificChecksPassed": 2,
+        "nativeGUIChecksPassed": 22,
+        "referenceChecksPassed": 8,
+        "failures": 0,
+        "skips": [],
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+        "dpi": 96,
+        "displayPixels": [
+          1024,
+          768
+        ],
+        "nativeWorkspaceChecks": [
+          "Default standalone mode",
+          "Independent preserved tool and workflow graphs",
+          "Compatible graph edge",
+          "Bounded native compatibility preview",
+          "Atomic cycle and semantic type rejection",
+          "Per-tool settings and input retention",
+          "Workflow additions leave ports unbound without automatic source boxes",
+          "Explicit reusable input owns one file editor and connects without duplication",
+          "Native minimap2 alignment chains to SAMtools coordinate-sorted binary BAM using two explicit inputs",
+          "All 202 synthetic mapped proper-pair records, mate flags, sequence, quality and typed tags survive SAM-to-BAM conversion",
+          "Manage tools loads installed packs on its first click without a modal error and reopens cleanly",
+          "First click opens a previously selected workflow-library row in empty tool mode",
+          "Single-click standalone tool form",
+          "Separate queued native double-click notification opens its hit row after selection clears",
+          "Three independent panes with general settings",
+          "Actual mouse drag from tool list onto workflow canvas twice",
+          "Actual compatible output-to-input mouse connection",
+          "Canvas selection displays tool options on right",
+          "General settings remain available in workflow mode",
+          "Standalone input and browsing folder survive workflow mode",
+          "Mode-specific status guidance replaces the previous workflow drag hint",
+          "Workflow graph/selection survives mode switching",
+          "Normal/minimum observed pane separation",
+          "Real repeated option scrolling leaves static text identical to a clean repaint",
+          "Blank-canvas mouse drag pans and reverses the viewport",
+          "Zoom buttons decrease, increase and reset scale; scaled card hit testing selects both tools",
+          "Injected one-unit native Ctrl-wheel deltas accumulate into visible zoom",
+          "Editing a tool immediately before Add input preserves its draft through the nested modal loop",
+          "Native Add input creates one independently editable reference file slot",
+          "Actual mouse connection from an explicit input output socket to a tool input without duplicate file fields",
+          "Header hover close deletes a tool and Undo restores its selection",
+          "Header hover close deletes an explicit input and Undo restores its files"
+        ],
+        "referenceChecks": [
+          "Live release-pinned yeast search and five-product discovery.",
+          "Cancellation after transferred bytes removed only its partial download and published no reference.",
+          "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+          "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+          "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods.",
+          "Installed application and starter pack integrity checks passed after reference use.",
+          "Native 0.6.0-to-0.8.0 core migration and idempotent repeat preserved optional packs, saved pins, references and results; updated private host reused them offline.",
+          "Native app opened References, displayed local files, selected and downloaded five products through native controls, cancelled through its native button, bound both existing and newly downloaded genomes through compatible native inputs, kept controls separate at normal/minimum size and closed cleanly."
+        ],
+        "scrollRendering": {
+          "scrollBefore": {
+            "nMin": 0,
+            "nMax": 1019,
+            "nPage": 555,
+            "nPos": 0
+          },
+          "scrollAfter": {
+            "nMin": 0,
+            "nMax": 1019,
+            "nPage": 555,
+            "nPos": 48
+          },
+          "comparedPixels": 197198,
+          "differentPixels": 0,
+          "maskedChildControlBounds": [
+            [
+              253,
+              247,
+              678,
+              281
+            ],
+            [
+              253,
+              497,
+              584,
+              531
+            ],
+            [
+              590,
+              497,
+              678,
+              531
+            ],
+            [
+              253,
+              571,
+              584,
+              605
+            ],
+            [
+              590,
+              571,
+              678,
+              605
+            ],
+            [
+              253,
+              719,
+              584,
+              753
+            ],
+            [
+              590,
+              719,
+              678,
+              753
+            ],
+            [
+              253,
+              867,
+              678,
+              901
+            ],
+            [
+              253,
+              941,
+              678,
+              975
+            ]
+          ],
+          "method": "Actual desktop BitBlt before and after forced descendant redraw at unchanged scroll offset"
+        },
+        "navigation": {
+          "initialScroll": [
+            0,
+            0
+          ],
+          "pannedScroll": [
+            -40,
+            -40
+          ],
+          "zoomOutLabel": "83%",
+          "resetZoomLabel": "100%",
+          "precisionWheel": {
+            "messages": 120,
+            "delta": 1,
+            "flags": "MK_CONTROL",
+            "resultingZoomLabel": "116%",
+            "input": "Injected WM_MOUSEWHEEL on the native canvas; physical trackpad not tested"
+          }
+        },
+        "scientificRecords": 202,
+        "scientificSAM": "6c90441b35a128b9af74a8b23872a2e0a42780b78b29a683e5b2268a27228bce",
+        "scientificBAM": "9b9c68dadf5b74691446f0c51fc62987536e44a07849215a67608549aba043f4",
+        "migration": {
+          "baseVersion": "0.6.0",
+          "targetVersion": "0.8.0",
+          "preservedFiles": 187,
+          "preservationChanges": {},
+          "repeat": {
+            "status": "already-installed",
+            "version": "0.8.0",
+            "files_verified": 68
+          },
+          "offlineRestart": true
+        },
+        "rawReports": [
+          {
+            "path": "knowledge/evidence/native-workflow-0.8.0-final-ordinary-ui-2026-10-06.json",
+            "bytes": 22256,
+            "sha256": "d84feb4380a760670451195d8e0b0c0efce769ab0e52564cf95b4b8948eaee71"
+          },
+          {
+            "path": "knowledge/evidence/native-workflow-0.8.0-final-ordinary-references-2026-10-06.json",
+            "bytes": 25532,
+            "sha256": "41bfb9b3f77d3a192be2fd71b799ff85a15f46c93bedaa1b6ae51f37cee7f819"
+          }
+        ],
+        "captureFilesHashVerified": 28
+      },
+      {
+        "installationPathCase": "spaces",
+        "artifactId": 11401178282,
+        "artifactUrl": "https://github.com/comparativechrono/workbench/actions/runs/37441781509/artifacts/11401178282",
+        "artifactSha256": "3a7bb2909f4b7bddb08ba548368d79894244182868b1b725a9bc599c9d0a8dd3",
+        "artifactBytes": 1250328,
+        "nativeWorkspaceChecksPassed": 32,
+        "nativeHostChecksPassed": 8,
+        "nativeScientificChecksPassed": 2,
+        "nativeGUIChecksPassed": 22,
+        "referenceChecksPassed": 8,
+        "failures": 0,
+        "skips": [],
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+        "dpi": 96,
+        "displayPixels": [
+          1024,
+          768
+        ],
+        "nativeWorkspaceChecks": [
+          "Default standalone mode",
+          "Independent preserved tool and workflow graphs",
+          "Compatible graph edge",
+          "Bounded native compatibility preview",
+          "Atomic cycle and semantic type rejection",
+          "Per-tool settings and input retention",
+          "Workflow additions leave ports unbound without automatic source boxes",
+          "Explicit reusable input owns one file editor and connects without duplication",
+          "Native minimap2 alignment chains to SAMtools coordinate-sorted binary BAM using two explicit inputs",
+          "All 202 synthetic mapped proper-pair records, mate flags, sequence, quality and typed tags survive SAM-to-BAM conversion",
+          "Manage tools loads installed packs on its first click without a modal error and reopens cleanly",
+          "First click opens a previously selected workflow-library row in empty tool mode",
+          "Single-click standalone tool form",
+          "Separate queued native double-click notification opens its hit row after selection clears",
+          "Three independent panes with general settings",
+          "Actual mouse drag from tool list onto workflow canvas twice",
+          "Actual compatible output-to-input mouse connection",
+          "Canvas selection displays tool options on right",
+          "General settings remain available in workflow mode",
+          "Standalone input and browsing folder survive workflow mode",
+          "Mode-specific status guidance replaces the previous workflow drag hint",
+          "Workflow graph/selection survives mode switching",
+          "Normal/minimum observed pane separation",
+          "Real repeated option scrolling leaves static text identical to a clean repaint",
+          "Blank-canvas mouse drag pans and reverses the viewport",
+          "Zoom buttons decrease, increase and reset scale; scaled card hit testing selects both tools",
+          "Injected one-unit native Ctrl-wheel deltas accumulate into visible zoom",
+          "Editing a tool immediately before Add input preserves its draft through the nested modal loop",
+          "Native Add input creates one independently editable reference file slot",
+          "Actual mouse connection from an explicit input output socket to a tool input without duplicate file fields",
+          "Header hover close deletes a tool and Undo restores its selection",
+          "Header hover close deletes an explicit input and Undo restores its files"
+        ],
+        "referenceChecks": [
+          "Live release-pinned yeast search and five-product discovery.",
+          "Cancellation after transferred bytes removed only its partial download and published no reference.",
+          "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+          "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+          "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods.",
+          "Installed application and starter pack integrity checks passed after reference use.",
+          "Native 0.6.0-to-0.8.0 core migration and idempotent repeat preserved optional packs, saved pins, references and results; updated private host reused them offline.",
+          "Native app opened References, displayed local files, selected and downloaded five products through native controls, cancelled through its native button, bound both existing and newly downloaded genomes through compatible native inputs, kept controls separate at normal/minimum size and closed cleanly."
+        ],
+        "scrollRendering": {
+          "scrollBefore": {
+            "nMin": 0,
+            "nMax": 1019,
+            "nPage": 555,
+            "nPos": 0
+          },
+          "scrollAfter": {
+            "nMin": 0,
+            "nMax": 1019,
+            "nPage": 555,
+            "nPos": 48
+          },
+          "comparedPixels": 197198,
+          "differentPixels": 0,
+          "maskedChildControlBounds": [
+            [
+              253,
+              247,
+              678,
+              281
+            ],
+            [
+              253,
+              497,
+              584,
+              531
+            ],
+            [
+              590,
+              497,
+              678,
+              531
+            ],
+            [
+              253,
+              571,
+              584,
+              605
+            ],
+            [
+              590,
+              571,
+              678,
+              605
+            ],
+            [
+              253,
+              719,
+              584,
+              753
+            ],
+            [
+              590,
+              719,
+              678,
+              753
+            ],
+            [
+              253,
+              867,
+              678,
+              901
+            ],
+            [
+              253,
+              941,
+              678,
+              975
+            ]
+          ],
+          "method": "Actual desktop BitBlt before and after forced descendant redraw at unchanged scroll offset"
+        },
+        "navigation": {
+          "initialScroll": [
+            0,
+            0
+          ],
+          "pannedScroll": [
+            -40,
+            -40
+          ],
+          "zoomOutLabel": "83%",
+          "resetZoomLabel": "100%",
+          "precisionWheel": {
+            "messages": 120,
+            "delta": 1,
+            "flags": "MK_CONTROL",
+            "resultingZoomLabel": "116%",
+            "input": "Injected WM_MOUSEWHEEL on the native canvas; physical trackpad not tested"
+          }
+        },
+        "scientificRecords": 202,
+        "scientificSAM": "fee6b9975f41bbedd050beb7cb8c2c8abac88e389ee799ff198c64a63eaf176c",
+        "scientificBAM": "bdaf942c1bb87d3ccb70e76fd702f6dc89cb6a95b49ae5e5028d057ab98ef3f0",
+        "migration": {
+          "baseVersion": "0.6.0",
+          "targetVersion": "0.8.0",
+          "preservedFiles": 187,
+          "preservationChanges": {},
+          "repeat": {
+            "status": "already-installed",
+            "version": "0.8.0",
+            "files_verified": 68
+          },
+          "offlineRestart": true
+        },
+        "rawReports": [
+          {
+            "path": "knowledge/evidence/native-workflow-0.8.0-final-spaces-ui-2026-10-06.json",
+            "bytes": 22304,
+            "sha256": "170cec3ec2ba8c8ab56f08d29e03e29e4aba32e1610a779417c5806a9f848415"
+          },
+          {
+            "path": "knowledge/evidence/native-workflow-0.8.0-final-spaces-references-2026-10-06.json",
+            "bytes": 25604,
+            "sha256": "845174bdd63ef4982f3483251d353d68614838c04e69468c1b3722214143cfdf"
+          }
+        ],
+        "captureFilesHashVerified": 28
+      }
+    ]
+  },
+  "concurrencyReview": {
+    "mainCommit": "7c6f2437842788daf9918ac2194ef859b153092c",
+    "mainUnchangedAtFinalReview": true,
+    "branchUpdates": "Compare-and-swap expected_sha checks; no forced update or release replacement.",
+    "independentSourceReview": "Separate agents reviewed explicit-input ownership, canvas integration, precision wheel state and scientific semantics. Modal snapshot lifetime, contextual reference selection and history zoom defects were fixed before the final package."
+  },
+  "visualReview": {
+    "capturesInspectedByRoot": [
+      "ordinary/workspace-ui-evidence/workflow-explicit-reference-input.bmp",
+      "ordinary/workspace-ui-evidence/workflow-explicit-input-connected.bmp",
+      "ordinary/workspace-ui-evidence/options-scroll-screen-before-redraw.bmp"
+    ],
+    "findings": "One reference input owns its file field; connected tool shows source identity without duplicating that file editor. Source-to-tool edge and zoom controls are visible; inspected scrolled text is clean.",
+    "independentReview": "Reviewer inspected ordinary connected-input, ordinary tool-delete hover, spaces source-delete hover, spaces 83% zoom, ordinary scrolled text and spaces first-open manager. No blocking overlap/rendering issue or duplicated workflow file editor found; all 36 workspace screenshot hashes independently verified. Root and gate agent also verified all 20 References captures, for 56 total.",
+    "scope": "Screenshot inspection plus automated pixel comparison, not human tester acceptance."
+  }
+}
