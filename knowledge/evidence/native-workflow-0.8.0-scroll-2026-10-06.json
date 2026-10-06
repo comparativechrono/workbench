@@ -1,0 +1,1175 @@
+{
+  "schema": 1,
+  "recordedOn": "2026-10-06",
+  "applicationVersion": "0.8.0",
+  "branch": "ui/galaxy-native-workspace",
+  "status": "Composited panel scrolling and precision-wheel fix packaged and validated; unreleased candidate awaiting tester confirmation of reported visual flashing",
+  "baselineCommit": "85db46a10cd4b70026ddfdc869fa18ab89dec6e9",
+  "userFeedback": {
+    "pipeline": "User confirmed the previous long-path fix worked.",
+    "scrolling": "Testers still observe text flashing during scrolling. No display model, DPI or physical input-device details supplied."
+  },
+  "priorEvidenceScope": "The previous settled-pixel comparison after a 200ms wait established absence of residual text corruption only; it did not sample the erase/draw interval or establish flicker-free movement. Prior exact-package evidence remains unchanged.",
+  "diagnosis": {
+    "repaint": "Source exposes an unbuffered synchronous erase/draw path consistent with the reported flashing. CI did not reproduce the visual flash in the prior package; causality and user-machine improvement remain to be confirmed by testers.",
+    "precisionWheel": "A tiny wheel delta rounded to zero and entered scroll(action=0,delta=0); action 0 is SB_LINEUP, causing an unintended 32-DIP upward move."
+  },
+  "changes": [
+    "Composite the native options and general-settings panel descendants; keep the canvas on its existing drawing path.",
+    "Batch child relocation without copying stale pixels, queue complete descendant repaint and retain background erasure.",
+    "Avoid layout/repaint when scrolling at a boundary or focusing an already visible field.",
+    "Accumulate fractional wheel movement separately per panel, share it across child/background routes, and reset the form fraction on selection/mode changes."
+  ],
+  "localCompilation": {
+    "result": "passed",
+    "strictWarnings": true,
+    "compiler": "LLVM-MinGW 20260922 UCRT",
+    "compilerArchiveSha256": "bb7bb7654b33d5aa8712acb837c963b2e0c56352560c76105270a3268c665c21",
+    "desktopSourceSha256": "0420fceede53e28362cede17831050c35e433fa62c271a0bebb85744842044e0",
+    "nativeExecutableSha256": "e32fc3e5acb42766641a822f01835430b3312b84c3174bd282fe2a50ef6f9d71",
+    "nativeExecutableBytes": 1261568,
+    "sourceStableDuringBuild": true,
+    "nativeWindowsExecuted": false,
+    "recovery": "Existing scratch toolchain lacked headers; a fresh extraction of the verified pinned archive restored the toolchain. The first compilation failure was not counted as passed."
+  },
+  "independentSourceReview": "Separate native reviewer approved panel composition, queued repaint, retained stale-pixel safeguards and signed fractional wheel behavior.",
+  "nativeValidation": {
+    "status": "passed within sampled hosted-Windows scope",
+    "artifact": {
+      "id": 11408610523,
+      "name": "workspace-ui-scroll-frames-b3928ca6a29d22b5f010a303658c2e19c24324da",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37453380541/artifacts/11408610523",
+      "bytes": 227642,
+      "sha256": "6586c47e262a4edb950a35ef2e2d01c09cccd144c9c8a235aaf3a1283e795203",
+      "expiresAt": "2026-11-05T11:01:43Z"
+    },
+    "platform": "Windows-2022Server-10.0.20348-SP0",
+    "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+    "dpi": 96,
+    "fixed": {
+      "sourceCommit": "b3928ca6a29d22b5f010a303658c2e19c24324da",
+      "applicationChecksPassed": true,
+      "panelChecksPassed": 3,
+      "framesSampled": 960,
+      "unexpectedFrames": 0,
+      "observedEndpointTransitions": 300,
+      "precisionChecksPassed": 18,
+      "failures": 0,
+      "skips": [],
+      "panels": [
+        {
+          "panel": "standalone-options",
+          "frames": 320,
+          "unexpectedFrames": 0,
+          "endpointFailures": 0,
+          "precisionPassed": true,
+          "precisionChecks": [
+            {
+              "route": "panel",
+              "case": "negative-one-unit",
+              "messages": 120,
+              "expectedOffset": 48,
+              "actualOffset": 48,
+              "passed": true
+            },
+            {
+              "route": "panel",
+              "case": "positive-one-unit",
+              "messages": 120,
+              "expectedOffset": 0,
+              "actualOffset": 0,
+              "passed": true
+            },
+            {
+              "route": "panel",
+              "case": "opposite-fractions",
+              "messages": 120,
+              "expectedOffset": 0,
+              "actualOffset": 0,
+              "passed": true
+            },
+            {
+              "route": "child-edit",
+              "case": "negative-one-unit",
+              "messages": 120,
+              "expectedOffset": 48,
+              "actualOffset": 48,
+              "passed": true
+            },
+            {
+              "route": "child-edit",
+              "case": "positive-one-unit",
+              "messages": 120,
+              "expectedOffset": 0,
+              "actualOffset": 0,
+              "passed": true
+            },
+            {
+              "route": "child-edit",
+              "case": "opposite-fractions",
+              "messages": 120,
+              "expectedOffset": 0,
+              "actualOffset": 0,
+              "passed": true
+            }
+          ],
+          "phases": [
+            {
+              "name": "top-boundary",
+              "wheelEvents": 30,
+              "frames": 60,
+              "requestedEndpointTransitions": 0,
+              "observedEndpointTransitions": 0,
+              "elapsedSeconds": 1.9231,
+              "observedFramesPerSecond": 31.2,
+              "comparedPixelsPerFrame": 163580,
+              "referenceDarkPixels": [
+                3955
+              ],
+              "unexpectedFrames": 0,
+              "endpointFailures": []
+            },
+            {
+              "name": "alternating",
+              "wheelEvents": 100,
+              "frames": 200,
+              "requestedEndpointTransitions": 100,
+              "observedEndpointTransitions": 100,
+              "elapsedSeconds": 7.3635,
+              "observedFramesPerSecond": 27.16,
+              "comparedPixelsPerFrame": 124588,
+              "referenceDarkPixels": [
+                3011,
+                2949
+              ],
+              "unexpectedFrames": 0,
+              "endpointFailures": []
+            },
+            {
+              "name": "bottom-boundary",
+              "wheelEvents": 30,
+              "frames": 60,
+              "requestedEndpointTransitions": 0,
+              "observedEndpointTransitions": 0,
+              "elapsedSeconds": 1.9103,
+              "observedFramesPerSecond": 31.41,
+              "comparedPixelsPerFrame": 147430,
+              "referenceDarkPixels": [
+                3053
+              ],
+              "unexpectedFrames": 0,
+              "endpointFailures": []
+            }
+          ]
+        },
+        {
+          "panel": "general-settings",
+          "frames": 320,
+          "unexpectedFrames": 0,
+          "endpointFailures": 0,
+          "precisionPassed": true,
+          "precisionChecks": [
+            {
+              "route": "panel",
+              "case": "negative-one-unit",
+              "messages": 120,
+              "expectedOffset": 48,
+              "actualOffset": 48,
+              "passed": true
+            },
+            {
+              "route": "panel",
+              "case": "positive-one-unit",
+              "messages": 120,
+              "expectedOffset": 0,
+              "actualOffset": 0,
+              "passed": true
+            },
+            {
+              "route": "panel",
+              "case": "opposite-fractions",
+              "messages": 120,
+              "expectedOffset": 0,
+              "actualOffset": 0,
+              "passed": true
+            },
+            {
+              "route": "child-edit",
+              "case": "negative-one-unit",
+              "messages": 120,
+              "expectedOffset": 48,
+              "actualOffset": 48,
+              "passed": true
+            },
+            {
+              "route": "child-edit",
+              "case": "positive-one-unit",
+              "messages": 120,
+              "expectedOffset": 0,
+              "actualOffset": 0,
+              "passed": true
+            },
+            {
+              "route": "child-edit",
+              "case": "opposite-fractions",
+              "messages": 120,
+              "expectedOffset": 0,
+              "actualOffset": 0,
+              "passed": true
+            }
+          ],
+          "phases": [
+            {
+              "name": "top-boundary",
+              "wheelEvents": 30,
+              "frames": 60,
+              "requestedEndpointTransitions": 0,
+              "observedEndpointTransitions": 0,
+              "elapsedSeconds": 1.9069,
+              "observedFramesPerSecond": 31.47,
+              "comparedPixelsPerFrame": 73926,
+              "referenceDarkPixels": [
+                1968
+              ],
+              "unexpectedFrames": 0,
+              "endpointFailures": []
+            },
+            {
+              "name": "alternating",
+              "wheelEvents": 100,
+              "frames": 200,
+              "requestedEndpointTransitions": 100,
+              "observedEndpointTransitions": 100,
+              "elapsedSeconds": 7.211,
+              "observedFramesPerSecond": 27.74,
+              "comparedPixelsPerFrame": 35423,
+              "referenceDarkPixels": [
+                1285,
+                311
+              ],
+              "unexpectedFrames": 0,
+              "endpointFailures": []
+            },
+            {
+              "name": "bottom-boundary",
+              "wheelEvents": 30,
+              "frames": 60,
+              "requestedEndpointTransitions": 0,
+              "observedEndpointTransitions": 0,
+              "elapsedSeconds": 1.9038,
+              "observedFramesPerSecond": 31.52,
+              "comparedPixelsPerFrame": 78358,
+              "referenceDarkPixels": [
+                2312
+              ],
+              "unexpectedFrames": 0,
+              "endpointFailures": []
+            }
+          ]
+        },
+        {
+          "panel": "workflow-options",
+          "frames": 320,
+          "unexpectedFrames": 0,
+          "endpointFailures": 0,
+          "precisionPassed": true,
+          "precisionChecks": [
+            {
+              "route": "panel",
+              "case": "negative-one-unit",
+              "messages": 120,
+              "expectedOffset": 48,
+              "actualOffset": 48,
+              "passed": true
+            },
+            {
+              "route": "panel",
+              "case": "positive-one-unit",
+              "messages": 120,
+              "expectedOffset": 0,
+              "actualOffset": 0,
+              "passed": true
+            },
+            {
+              "route": "panel",
+              "case": "opposite-fractions",
+              "messages": 120,
+              "expectedOffset": 0,
+              "actualOffset": 0,
+              "passed": true
+            },
+            {
+              "route": "child-edit",
+              "case": "negative-one-unit",
+              "messages": 120,
+              "expectedOffset": 48,
+              "actualOffset": 48,
+              "passed": true
+            },
+            {
+              "route": "child-edit",
+              "case": "positive-one-unit",
+              "messages": 120,
+              "expectedOffset": 0,
+              "actualOffset": 0,
+              "passed": true
+            },
+            {
+              "route": "child-edit",
+              "case": "opposite-fractions",
+              "messages": 120,
+              "expectedOffset": 0,
+              "actualOffset": 0,
+              "passed": true
+            }
+          ],
+          "phases": [
+            {
+              "name": "top-boundary",
+              "wheelEvents": 30,
+              "frames": 60,
+              "requestedEndpointTransitions": 0,
+              "observedEndpointTransitions": 0,
+              "elapsedSeconds": 1.9296,
+              "observedFramesPerSecond": 31.09,
+              "comparedPixelsPerFrame": 108024,
+              "referenceDarkPixels": [
+                3555
+              ],
+              "unexpectedFrames": 0,
+              "endpointFailures": []
+            },
+            {
+              "name": "alternating",
+              "wheelEvents": 100,
+              "frames": 200,
+              "requestedEndpointTransitions": 100,
+              "observedEndpointTransitions": 100,
+              "elapsedSeconds": 7.2526,
+              "observedFramesPerSecond": 27.58,
+              "comparedPixelsPerFrame": 79359,
+              "referenceDarkPixels": [
+                2527,
+                2192
+              ],
+              "unexpectedFrames": 0,
+              "endpointFailures": []
+            },
+            {
+              "name": "bottom-boundary",
+              "wheelEvents": 30,
+              "frames": 60,
+              "requestedEndpointTransitions": 0,
+              "observedEndpointTransitions": 0,
+              "elapsedSeconds": 1.8868,
+              "observedFramesPerSecond": 31.8,
+              "comparedPixelsPerFrame": 87276,
+              "referenceDarkPixels": [
+                2388
+              ],
+              "unexpectedFrames": 0,
+              "endpointFailures": []
+            }
+          ]
+        }
+      ],
+      "rawReport": {
+        "path": "knowledge/evidence/native-workflow-0.8.0-scroll-fixed-temporal-2026-10-06.json",
+        "bytes": 319607,
+        "sha256": "185d6d59031817ddf78b8036078ba66a91983742e4b0ce68914f7a910c23db0a"
+      }
+    },
+    "prior": {
+      "sourceCommit": "0d3282046d7aa05dc822315c9a237c8ac534cd7a",
+      "visualFlashReproduced": false,
+      "framesSampled": 960,
+      "unexpectedFrames": 0,
+      "precisionMovementFailures": 6,
+      "applicationChecksPassed": false,
+      "diagnosticObservationCompleted": true,
+      "panels": [
+        {
+          "panel": "standalone-options",
+          "frames": 320,
+          "unexpectedFrames": 0,
+          "endpointFailures": 0,
+          "precisionPassed": false,
+          "precisionChecks": [
+            {
+              "route": "panel",
+              "case": "negative-one-unit",
+              "messages": 120,
+              "expectedOffset": 48,
+              "actualOffset": 0,
+              "passed": false
+            },
+            {
+              "route": "panel",
+              "case": "positive-one-unit",
+              "messages": 120,
+              "expectedOffset": 0,
+              "actualOffset": 0,
+              "passed": true
+            },
+            {
+              "route": "panel",
+              "case": "opposite-fractions",
+              "messages": 120,
+              "expectedOffset": 0,
+              "actualOffset": 0,
+              "passed": true
+            },
+            {
+              "route": "child-edit",
+              "case": "negative-one-unit",
+              "messages": 120,
+              "expectedOffset": 48,
+              "actualOffset": 0,
+              "passed": false
+            },
+            {
+              "route": "child-edit",
+              "case": "positive-one-unit",
+              "messages": 120,
+              "expectedOffset": 0,
+              "actualOffset": 0,
+              "passed": true
+            },
+            {
+              "route": "child-edit",
+              "case": "opposite-fractions",
+              "messages": 120,
+              "expectedOffset": 0,
+              "actualOffset": 0,
+              "passed": true
+            }
+          ],
+          "phases": [
+            {
+              "name": "top-boundary",
+              "wheelEvents": 30,
+              "frames": 60,
+              "requestedEndpointTransitions": 0,
+              "observedEndpointTransitions": 0,
+              "elapsedSeconds": 2.2363,
+              "observedFramesPerSecond": 26.83,
+              "comparedPixelsPerFrame": 163580,
+              "referenceDarkPixels": [
+                3955
+              ],
+              "unexpectedFrames": 0,
+              "endpointFailures": []
+            },
+            {
+              "name": "alternating",
+              "wheelEvents": 100,
+              "frames": 200,
+              "requestedEndpointTransitions": 100,
+              "observedEndpointTransitions": 100,
+              "elapsedSeconds": 7.6047,
+              "observedFramesPerSecond": 26.3,
+              "comparedPixelsPerFrame": 124588,
+              "referenceDarkPixels": [
+                3011,
+                2949
+              ],
+              "unexpectedFrames": 0,
+              "endpointFailures": []
+            },
+            {
+              "name": "bottom-boundary",
+              "wheelEvents": 30,
+              "frames": 60,
+              "requestedEndpointTransitions": 0,
+              "observedEndpointTransitions": 0,
+              "elapsedSeconds": 2.2378,
+              "observedFramesPerSecond": 26.81,
+              "comparedPixelsPerFrame": 147430,
+              "referenceDarkPixels": [
+                3053
+              ],
+              "unexpectedFrames": 0,
+              "endpointFailures": []
+            }
+          ]
+        },
+        {
+          "panel": "general-settings",
+          "frames": 320,
+          "unexpectedFrames": 0,
+          "endpointFailures": 0,
+          "precisionPassed": false,
+          "precisionChecks": [
+            {
+              "route": "panel",
+              "case": "negative-one-unit",
+              "messages": 120,
+              "expectedOffset": 48,
+              "actualOffset": 0,
+              "passed": false
+            },
+            {
+              "route": "panel",
+              "case": "positive-one-unit",
+              "messages": 120,
+              "expectedOffset": 0,
+              "actualOffset": 0,
+              "passed": true
+            },
+            {
+              "route": "panel",
+              "case": "opposite-fractions",
+              "messages": 120,
+              "expectedOffset": 0,
+              "actualOffset": 0,
+              "passed": true
+            },
+            {
+              "route": "child-edit",
+              "case": "negative-one-unit",
+              "messages": 120,
+              "expectedOffset": 48,
+              "actualOffset": 0,
+              "passed": false
+            },
+            {
+              "route": "child-edit",
+              "case": "positive-one-unit",
+              "messages": 120,
+              "expectedOffset": 0,
+              "actualOffset": 0,
+              "passed": true
+            },
+            {
+              "route": "child-edit",
+              "case": "opposite-fractions",
+              "messages": 120,
+              "expectedOffset": 0,
+              "actualOffset": 0,
+              "passed": true
+            }
+          ],
+          "phases": [
+            {
+              "name": "top-boundary",
+              "wheelEvents": 30,
+              "frames": 60,
+              "requestedEndpointTransitions": 0,
+              "observedEndpointTransitions": 0,
+              "elapsedSeconds": 2.1703,
+              "observedFramesPerSecond": 27.65,
+              "comparedPixelsPerFrame": 73926,
+              "referenceDarkPixels": [
+                1968
+              ],
+              "unexpectedFrames": 0,
+              "endpointFailures": []
+            },
+            {
+              "name": "alternating",
+              "wheelEvents": 100,
+              "frames": 200,
+              "requestedEndpointTransitions": 100,
+              "observedEndpointTransitions": 100,
+              "elapsedSeconds": 6.7372,
+              "observedFramesPerSecond": 29.69,
+              "comparedPixelsPerFrame": 35423,
+              "referenceDarkPixels": [
+                1285,
+                311
+              ],
+              "unexpectedFrames": 0,
+              "endpointFailures": []
+            },
+            {
+              "name": "bottom-boundary",
+              "wheelEvents": 30,
+              "frames": 60,
+              "requestedEndpointTransitions": 0,
+              "observedEndpointTransitions": 0,
+              "elapsedSeconds": 2.0292,
+              "observedFramesPerSecond": 29.57,
+              "comparedPixelsPerFrame": 78358,
+              "referenceDarkPixels": [
+                2312
+              ],
+              "unexpectedFrames": 0,
+              "endpointFailures": []
+            }
+          ]
+        },
+        {
+          "panel": "workflow-options",
+          "frames": 320,
+          "unexpectedFrames": 0,
+          "endpointFailures": 0,
+          "precisionPassed": false,
+          "precisionChecks": [
+            {
+              "route": "panel",
+              "case": "negative-one-unit",
+              "messages": 120,
+              "expectedOffset": 48,
+              "actualOffset": 0,
+              "passed": false
+            },
+            {
+              "route": "panel",
+              "case": "positive-one-unit",
+              "messages": 120,
+              "expectedOffset": 0,
+              "actualOffset": 0,
+              "passed": true
+            },
+            {
+              "route": "panel",
+              "case": "opposite-fractions",
+              "messages": 120,
+              "expectedOffset": 0,
+              "actualOffset": 0,
+              "passed": true
+            },
+            {
+              "route": "child-edit",
+              "case": "negative-one-unit",
+              "messages": 120,
+              "expectedOffset": 48,
+              "actualOffset": 0,
+              "passed": false
+            },
+            {
+              "route": "child-edit",
+              "case": "positive-one-unit",
+              "messages": 120,
+              "expectedOffset": 0,
+              "actualOffset": 0,
+              "passed": true
+            },
+            {
+              "route": "child-edit",
+              "case": "opposite-fractions",
+              "messages": 120,
+              "expectedOffset": 0,
+              "actualOffset": 0,
+              "passed": true
+            }
+          ],
+          "phases": [
+            {
+              "name": "top-boundary",
+              "wheelEvents": 30,
+              "frames": 60,
+              "requestedEndpointTransitions": 0,
+              "observedEndpointTransitions": 0,
+              "elapsedSeconds": 2.2743,
+              "observedFramesPerSecond": 26.38,
+              "comparedPixelsPerFrame": 108024,
+              "referenceDarkPixels": [
+                3555
+              ],
+              "unexpectedFrames": 0,
+              "endpointFailures": []
+            },
+            {
+              "name": "alternating",
+              "wheelEvents": 100,
+              "frames": 200,
+              "requestedEndpointTransitions": 100,
+              "observedEndpointTransitions": 100,
+              "elapsedSeconds": 7.0877,
+              "observedFramesPerSecond": 28.22,
+              "comparedPixelsPerFrame": 79359,
+              "referenceDarkPixels": [
+                2527,
+                2192
+              ],
+              "unexpectedFrames": 0,
+              "endpointFailures": []
+            },
+            {
+              "name": "bottom-boundary",
+              "wheelEvents": 30,
+              "frames": 60,
+              "requestedEndpointTransitions": 0,
+              "observedEndpointTransitions": 0,
+              "elapsedSeconds": 2.0722,
+              "observedFramesPerSecond": 28.95,
+              "comparedPixelsPerFrame": 87276,
+              "referenceDarkPixels": [
+                2388
+              ],
+              "unexpectedFrames": 0,
+              "endpointFailures": []
+            }
+          ]
+        }
+      ],
+      "rawReport": {
+        "path": "knowledge/evidence/native-workflow-0.8.0-scroll-prior-temporal-2026-10-06.json",
+        "bytes": 319678,
+        "sha256": "0ffc7b4e4ac27cfb9914344ccdfc091a2284024d81b6407b4d92722f67710546"
+      }
+    },
+    "availability": {
+      "hashVerified": true,
+      "available": true,
+      "artifactId": 11404414503,
+      "status": "observation-completed-see-report",
+      "runId": 37449356224,
+      "skips": [],
+      "executed": true
+    },
+    "availabilityRawReport": {
+      "path": "knowledge/evidence/native-workflow-0.8.0-scroll-temporal-availability-2026-10-06.json",
+      "bytes": 193,
+      "sha256": "94b762cee610b7479aebd544997b74c59df795c2cde22ba33feb733c6317bac8"
+    },
+    "temporalReferenceCaptureHashesVerified": 18,
+    "visualReview": "Root and independent gate reviewer inspected the fixed standalone, workflow and general-settings reference captures; settled text was clean.",
+    "logCaveat": "An ignored control-enumeration GetWindowRect race occurred once while the initial form was being rebuilt in each old/new run, before temporal setup/sampling. Subsequent snapshots and all finite observations completed; this is an automation enumeration warning, not an observed application error."
+  },
+  "publishedReleaseUnchanged": "0.7.0",
+  "limits": [
+    "The prior package also showed zero unexpected frames in 960 CI samples. The testers' visual flashing was not reproduced; the precision-wheel failure was independently reproduced and corrected.",
+    "Finite sampling at 27.16\u201331.80 observed frames per second cannot exclude flashes between captures. Child edits/buttons are masked to exclude caret/hover animation; this is static text/background coverage.",
+    "Native display coverage is Windows Server 2022 at 96 DPI; no physical trackpad, high-DPI/multiple-monitor, native folder-picker or tester-machine scrolling pass is claimed.",
+    "The long-path gate covers the recorded nested output paths and starter tools, not arbitrary optional packs or every Windows shell dialog.",
+    "0.8.0 remains an unreleased development candidate; updater checked from 0.6.0 only, with no 0.7.0-to-0.8.0 update pass claimed."
+  ],
+  "sourceChecks": {
+    "ciPasses": 82,
+    "failures": 0,
+    "skips": 0,
+    "sourceCommit": "b3928ca6a29d22b5f010a303658c2e19c24324da",
+    "suites": {
+      "engine_paths": 7,
+      "workflow_inputs": 11,
+      "catalog_presentation": 7,
+      "desktop_modes": 11,
+      "desktop_host": 12,
+      "reference_service": 10,
+      "split_release": 8,
+      "core_update": 16
+    },
+    "scope": "Existing relevant contracts rerun in Linux CI; native presentation checked separately."
+  },
+  "finalCandidate": {
+    "sourceCommit": "b3928ca6a29d22b5f010a303658c2e19c24324da",
+    "runId": 37453380541,
+    "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37453380541",
+    "conclusion": "success",
+    "artifact": {
+      "id": 11408021439,
+      "name": "workspace-ui-candidate-b3928ca6a29d22b5f010a303658c2e19c24324da",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37453380541/artifacts/11408021439",
+      "bytes": 75599305,
+      "sha256": "234688eabc01315aceba6fd588094bc7bf2263670766d0bdc9d088f8f0c735c1",
+      "expiresAt": "2026-11-05T10:59:55Z"
+    },
+    "downloadVerification": {
+      "bundleSha256": "234688eabc01315aceba6fd588094bc7bf2263670766d0bdc9d088f8f0c735c1",
+      "sourceCommit": "b3928ca6a29d22b5f010a303658c2e19c24324da",
+      "archives": [
+        {
+          "file": "native-workbench-0.8.0-source.zip",
+          "bytes": 46243835,
+          "sha256": "c2590379b45d313acbcd5bbc41344b288aa6ad159804bf06dcbdcc9726adb22f"
+        },
+        {
+          "file": "native-workbench-0.8.0-starter-windows.zip",
+          "bytes": 16948940,
+          "sha256": "df001a80033ff8e834045ec683c79672e0efdbd4880fb89fca8bf8c36d830fdc"
+        },
+        {
+          "file": "native-workbench-0.8.0-update-from-0.6.0.zip",
+          "bytes": 12897242,
+          "sha256": "3dd146267b9a8300ba957c84914bc324ea537c05b09268b48381ae6a4d530e96"
+        }
+      ],
+      "coreManifestFilesVerified": 68,
+      "starterPackFilesByteIdenticalToFrozen060": 143,
+      "nativeExecutableSha256": "e32fc3e5acb42766641a822f01835430b3312b84c3174bd282fe2a50ef6f9d71",
+      "changedSourceFilesCompared": [
+        "desktop/desktop_workspace.cpp",
+        "desktop/workflow_canvas.h",
+        "workspace/desktop_model.py",
+        "workspace/desktop_host.py",
+        "workspace/catalog.py",
+        "workspace/engine.py",
+        "scripts/check_workspace_ui_windows.py",
+        "scripts/check_references_windows.py",
+        "workspace/pack_manager.py",
+        "workspace/core_checks.py",
+        "workspace/pack_checks.py",
+        "scripts/check_long_paths_windows.py",
+        "scripts/check_scroll_frames_windows.py",
+        ".github/workflows/native-workspace-ui-check.yml"
+      ],
+      "packagedWorkspaceSourceFilesCompared": 15
+    },
+    "windows": [
+      {
+        "installationPathCase": "ordinary",
+        "artifact": {
+          "id": 11408585481,
+          "name": "workspace-ui-windows-ordinary-1",
+          "url": "https://github.com/comparativechrono/workbench/actions/runs/37453380541/artifacts/11408585481",
+          "bytes": 1251294,
+          "sha256": "f3bd46da0eb6dd81c4d9075c07f355486f484b984b467e317329e989793edf88",
+          "expiresAt": "2026-11-05T11:01:21Z"
+        },
+        "nativeWorkspaceChecksPassed": 32,
+        "workspaceHostChecks": 8,
+        "scientificChecks": 2,
+        "nativeGUIChecks": 22,
+        "referenceChecksPassed": 8,
+        "failures": 0,
+        "skips": [],
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+        "dpi": 96,
+        "settledScrollRendering": {
+          "scrollBefore": {
+            "nMin": 0,
+            "nMax": 1019,
+            "nPage": 555,
+            "nPos": 0
+          },
+          "scrollAfter": {
+            "nMin": 0,
+            "nMax": 1019,
+            "nPage": 555,
+            "nPos": 48
+          },
+          "comparedPixels": 197198,
+          "differentPixels": 0,
+          "maskedChildControlBounds": [
+            [
+              253,
+              247,
+              678,
+              281
+            ],
+            [
+              253,
+              497,
+              584,
+              531
+            ],
+            [
+              590,
+              497,
+              678,
+              531
+            ],
+            [
+              253,
+              571,
+              584,
+              605
+            ],
+            [
+              590,
+              571,
+              678,
+              605
+            ],
+            [
+              253,
+              719,
+              584,
+              753
+            ],
+            [
+              590,
+              719,
+              678,
+              753
+            ],
+            [
+              253,
+              867,
+              678,
+              901
+            ],
+            [
+              253,
+              941,
+              678,
+              975
+            ]
+          ],
+          "method": "Actual desktop BitBlt before and after forced descendant redraw at unchanged scroll offset"
+        },
+        "migration": {
+          "baseVersion": "0.6.0",
+          "targetVersion": "0.8.0",
+          "preservedFiles": 187,
+          "preservationChanges": {},
+          "repeat": {
+            "status": "already-installed",
+            "version": "0.8.0",
+            "files_verified": 68
+          },
+          "offlineRestart": true
+        },
+        "rawReports": [
+          {
+            "path": "knowledge/evidence/native-workflow-0.8.0-scroll-ordinary-ui-2026-10-06.json",
+            "bytes": 22256,
+            "sha256": "73f1d9e8b4fe140f86d39966dc23ec7bee1cc9dd863d56bbe954e40e1af4e959"
+          },
+          {
+            "path": "knowledge/evidence/native-workflow-0.8.0-scroll-ordinary-references-2026-10-06.json",
+            "bytes": 25532,
+            "sha256": "43cb57d895fb58f4c28494ca96e6d3cf02a1ce5b1674d2ac13e4dc58a4b7cdeb"
+          }
+        ],
+        "captureHashesVerified": 28
+      },
+      {
+        "installationPathCase": "spaces",
+        "artifact": {
+          "id": 11408091528,
+          "name": "workspace-ui-windows-path with spaces-1",
+          "url": "https://github.com/comparativechrono/workbench/actions/runs/37453380541/artifacts/11408091528",
+          "bytes": 1250035,
+          "sha256": "bf75a716b79225b4d1442ac80bc09a69be7d7b6a3c41d327187f3c32d29371d8",
+          "expiresAt": "2026-11-05T11:01:06Z"
+        },
+        "nativeWorkspaceChecksPassed": 32,
+        "workspaceHostChecks": 8,
+        "scientificChecks": 2,
+        "nativeGUIChecks": 22,
+        "referenceChecksPassed": 8,
+        "failures": 0,
+        "skips": [],
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+        "dpi": 96,
+        "settledScrollRendering": {
+          "scrollBefore": {
+            "nMin": 0,
+            "nMax": 1019,
+            "nPage": 555,
+            "nPos": 0
+          },
+          "scrollAfter": {
+            "nMin": 0,
+            "nMax": 1019,
+            "nPage": 555,
+            "nPos": 48
+          },
+          "comparedPixels": 197198,
+          "differentPixels": 0,
+          "maskedChildControlBounds": [
+            [
+              253,
+              247,
+              678,
+              281
+            ],
+            [
+              253,
+              497,
+              584,
+              531
+            ],
+            [
+              590,
+              497,
+              678,
+              531
+            ],
+            [
+              253,
+              571,
+              584,
+              605
+            ],
+            [
+              590,
+              571,
+              678,
+              605
+            ],
+            [
+              253,
+              719,
+              584,
+              753
+            ],
+            [
+              590,
+              719,
+              678,
+              753
+            ],
+            [
+              253,
+              867,
+              678,
+              901
+            ],
+            [
+              253,
+              941,
+              678,
+              975
+            ]
+          ],
+          "method": "Actual desktop BitBlt before and after forced descendant redraw at unchanged scroll offset"
+        },
+        "migration": {
+          "baseVersion": "0.6.0",
+          "targetVersion": "0.8.0",
+          "preservedFiles": 187,
+          "preservationChanges": {},
+          "repeat": {
+            "status": "already-installed",
+            "version": "0.8.0",
+            "files_verified": 68
+          },
+          "offlineRestart": true
+        },
+        "rawReports": [
+          {
+            "path": "knowledge/evidence/native-workflow-0.8.0-scroll-spaces-ui-2026-10-06.json",
+            "bytes": 22304,
+            "sha256": "614df16713d7d425a9287446e2ae30a850d0eed42ccd6fbd53d9c430291ca14b"
+          },
+          {
+            "path": "knowledge/evidence/native-workflow-0.8.0-scroll-spaces-references-2026-10-06.json",
+            "bytes": 25604,
+            "sha256": "b533f42d8dfd7a202ef1db8ffc45226be296bca0cf7113f94c21f97d17423e4b"
+          }
+        ],
+        "captureHashesVerified": 28
+      }
+    ]
+  },
+  "longPathRegression": {
+    "artifact": {
+      "id": 11407866586,
+      "name": "workspace-ui-long-paths-b3928ca6a29d22b5f010a303658c2e19c24324da",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37453380541/artifacts/11407866586",
+      "bytes": 87307,
+      "sha256": "27bc14a6d4390ca43a20023c14a2b50b5062fe53bebdd36a7c93a9b63b438e43",
+      "expiresAt": "2026-11-05T11:00:26Z"
+    },
+    "fixedChecksPassed": 3,
+    "applicationCheck": {
+      "status": "completed",
+      "corePassed": 7,
+      "starterPassed": 1,
+      "starterFailed": 0,
+      "starterSkipped": 0
+    },
+    "outputFilesIndependentlyRehashed": 20,
+    "outputPathsOver260": 19,
+    "maximumOutputPathCharacters": 279,
+    "fixedRawReport": {
+      "path": "knowledge/evidence/native-workflow-0.8.0-scroll-fixed-long-path-2026-10-06.json",
+      "bytes": 7461,
+      "sha256": "07e3e8843f8c595574f01de1063ba9ffdedc3d279e102b008d57d97d5663095b"
+    },
+    "priorExpectedApplicationFailureReproduced": true,
+    "priorDiagnosticChecksPassed": 2,
+    "priorRawReport": {
+      "path": "knowledge/evidence/native-workflow-0.8.0-scroll-prior-long-path-2026-10-06.json",
+      "bytes": 1882,
+      "sha256": "b7844a1eb1e5276123867a01a5320c9a2f69fbf65f409bbe94f3defbc68d888c"
+    },
+    "policy": {
+      "restored": true,
+      "previousValue": 1,
+      "requestedValue": 0,
+      "scope": "Disposable hosted CI runner only; no application or user-machine policy changes",
+      "restoredValue": 1,
+      "observedValue": 0
+    },
+    "policyRawReport": {
+      "path": "knowledge/evidence/native-workflow-0.8.0-scroll-long-path-policy-2026-10-06.json",
+      "bytes": 214,
+      "sha256": "9b241c947234c7582d34778cbe42d629fca63f7817f412524674728d0060eab2"
+    },
+    "availability": {
+      "artifactId": 11401422780,
+      "runId": 37441781509,
+      "hashVerified": true,
+      "status": "expected-failure-reproduced",
+      "skips": [],
+      "passed": 2,
+      "available": true,
+      "executed": true
+    },
+    "availabilityRawReport": {
+      "path": "knowledge/evidence/native-workflow-0.8.0-scroll-long-path-availability-2026-10-06.json",
+      "bytes": 204,
+      "sha256": "b10cc72a6893ac251f6d9ca89bcbeeacf9ba0002ec3102145025207c296a3ea4"
+    }
+  },
+  "rawReports": [
+    {
+      "path": "knowledge/evidence/native-workflow-0.8.0-scroll-prior-temporal-2026-10-06.json",
+      "bytes": 319678,
+      "sha256": "0ffc7b4e4ac27cfb9914344ccdfc091a2284024d81b6407b4d92722f67710546"
+    },
+    {
+      "path": "knowledge/evidence/native-workflow-0.8.0-scroll-fixed-temporal-2026-10-06.json",
+      "bytes": 319607,
+      "sha256": "185d6d59031817ddf78b8036078ba66a91983742e4b0ce68914f7a910c23db0a"
+    },
+    {
+      "path": "knowledge/evidence/native-workflow-0.8.0-scroll-temporal-availability-2026-10-06.json",
+      "bytes": 193,
+      "sha256": "94b762cee610b7479aebd544997b74c59df795c2cde22ba33feb733c6317bac8"
+    },
+    {
+      "path": "knowledge/evidence/native-workflow-0.8.0-scroll-ordinary-ui-2026-10-06.json",
+      "bytes": 22256,
+      "sha256": "73f1d9e8b4fe140f86d39966dc23ec7bee1cc9dd863d56bbe954e40e1af4e959"
+    },
+    {
+      "path": "knowledge/evidence/native-workflow-0.8.0-scroll-ordinary-references-2026-10-06.json",
+      "bytes": 25532,
+      "sha256": "43cb57d895fb58f4c28494ca96e6d3cf02a1ce5b1674d2ac13e4dc58a4b7cdeb"
+    },
+    {
+      "path": "knowledge/evidence/native-workflow-0.8.0-scroll-spaces-ui-2026-10-06.json",
+      "bytes": 22304,
+      "sha256": "614df16713d7d425a9287446e2ae30a850d0eed42ccd6fbd53d9c430291ca14b"
+    },
+    {
+      "path": "knowledge/evidence/native-workflow-0.8.0-scroll-spaces-references-2026-10-06.json",
+      "bytes": 25604,
+      "sha256": "b533f42d8dfd7a202ef1db8ffc45226be296bca0cf7113f94c21f97d17423e4b"
+    },
+    {
+      "path": "knowledge/evidence/native-workflow-0.8.0-scroll-prior-long-path-2026-10-06.json",
+      "bytes": 1882,
+      "sha256": "b7844a1eb1e5276123867a01a5320c9a2f69fbf65f409bbe94f3defbc68d888c"
+    },
+    {
+      "path": "knowledge/evidence/native-workflow-0.8.0-scroll-fixed-long-path-2026-10-06.json",
+      "bytes": 7461,
+      "sha256": "07e3e8843f8c595574f01de1063ba9ffdedc3d279e102b008d57d97d5663095b"
+    },
+    {
+      "path": "knowledge/evidence/native-workflow-0.8.0-scroll-long-path-policy-2026-10-06.json",
+      "bytes": 214,
+      "sha256": "9b241c947234c7582d34778cbe42d629fca63f7817f412524674728d0060eab2"
+    },
+    {
+      "path": "knowledge/evidence/native-workflow-0.8.0-scroll-long-path-availability-2026-10-06.json",
+      "bytes": 204,
+      "sha256": "b10cc72a6893ac251f6d9ca89bcbeeacf9ba0002ec3102145025207c296a3ea4"
+    }
+  ],
+  "concurrencyReview": {
+    "branchUpdates": "Expected-head compare-and-swap without force; source and gate independently reviewed.",
+    "applicationSourceFrozen": "b3928ca6a29d22b5f010a303658c2e19c24324da",
+    "laterDocumentationChanges": "Only knowledge/evidence updates after exact packaged validation.",
+    "publishedReleaseUnchanged": "0.7.0"
+  }
+}

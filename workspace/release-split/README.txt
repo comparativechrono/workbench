@@ -1,4 +1,4 @@
-Native Workbench 0.7.0 — application and tool packs
+Native Workbench 0.8.0 — application and tool packs
 
 Extract this complete folder to a location you can write to, then open
 NativeWorkbench.exe. The interface is a native Windows application.

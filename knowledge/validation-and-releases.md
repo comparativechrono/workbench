@@ -1,5 +1,61 @@
 # Validation, releases and publisher trust
 
+## Scrolling frames, 0.8 candidate
+
+`scripts/check_scroll_frames_windows.py` complements the settled-image comparison
+in the existing native UI gate. It runs the exact packaged executable/private
+Python and samples the actual desktop with screen `BitBlt`, not `PrintWindow`.
+Clean reference captures may request repaint; observed scrolling frames must
+not. A reusable DIB and `GdiFlush` make the captured pixel bytes available;
+`DwmFlush` is only a presentation timing aid, not a barrier for the application's
+paint processing or a guarantee of observing every display frame.
+
+The gate covers standalone options, workflow options and general settings in
+the supported minimum-height window. Each panel receives fifty down/up wheel
+cycles and repeated wheel events at both boundaries. Mask finite edit/button
+regions to exclude caret and hover animation, normalize unused alpha bytes,
+and retain static text/background. Require distinct masked endpoint images,
+sufficient text pixels, and each requested endpoint's visible bitmap and
+scroll offset. A test that only accepts either endpoint could falsely pass an
+unmoving screen. Unexpected intermediate frames, unmatched endpoint positions,
+timing and captures remain in the evidence.
+
+Separate native message checks exercise tiny positive/negative wheel deltas
+through the panel and a child edit. Label these sent Windows messages honestly:
+they verify fractional accumulation and routing, not physical trackpad hardware.
+The existing settled-text, full native UI, References/update and long-path
+scientific gates remain applicable to the same candidate.
+
+The optional exact previous package is a diagnostic comparison. A missed flash
+in finite samples is not proof of no flicker; an unavailable diagnostic is
+unrun, never passed. The fixed-package frame and precision checks remain
+mandatory. Preserve the dated [scroll evidence](evidence/native-workflow-0.8.0-scroll-2026-10-06.json)
+alongside earlier settled-image results rather than broadening their scope.
+
+## Nested Windows result-path regression, 0.8 candidate
+
+`scripts/check_long_paths_windows.py` uses the exact packaged private host's
+**Check installation** action and the pinned five-step starter scientific
+profile. Its dedicated job in `native-workspace-ui-check.yml` disables ordinary
+long-path opt-in only on a disposable hosted Windows runner, starts fresh
+processes, proves ordinary and extended file probes differ, and restores the
+previous policy in `finally`. Application execution must never change a user's
+machine policy or require administrator privileges to apply this fix.
+
+The corrected package must complete alignment, BAM preparation, variant
+calling, statistics and reporting, preserve the pinned scientific truth, and
+independently rehash every output. The regression isolates long result files
+while keeping the installation root and native working directory short. An
+unchanged previous candidate supplies a separately reported negative control
+while its artifact is available. Its expiry may mark that diagnostic unrun,
+never passed; the corrected-package regression remains mandatory. Keep the
+old failure, new success, policy setup/restoration and exact artifact identities
+in the [dated evidence](evidence/native-workflow-0.8.0-long-path-2026-10-06.json).
+
+`workspace/tests/test_engine_paths.py` complements this with real files under
+an emulated path limit, synthetic backend execution, canonical identity and
+containment/hash/link regressions. Its source pass is not native Windows proof.
+
 ## Reference application gate, 0.7
 
 The initial reference provider is tested separately from tool-pack algorithms.

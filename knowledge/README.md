@@ -7,7 +7,7 @@ open, diffable files with no proprietary reader or external memory service.
 "Knowledge base" describes this directory; it does not claim compliance with a
 separate standard called Open Knowledge Format.
 
-**Reviewed:** 2026-10-05. **Starting source baseline:**
+**Reviewed:** 2026-10-06. **Starting source baseline:**
 [`8f95caa1f267d19ce72ea3cd7f2396ae66a801c1`](https://github.com/comparativechrono/workbench/commit/8f95caa1f267d19ce72ea3cd7f2396ae66a801c1).
 This handover includes the 0.7 reference-discovery implementation and
 Kraken2/Bracken metagenomics after the annotation,
@@ -16,6 +16,52 @@ exact-final Windows installation, graph and scientific gates. Evidence for
 each release retains its own date and tested bytes. Re-check the current tree
 and releases before treating this snapshot as current.
 
+The [0.8.0 native interface candidate](native-ui.md) is separate development in
+[PR #1](https://github.com/comparativechrono/workbench/pull/1). The user has
+accepted the latest tested candidate and explicitly authorized publication.
+Promotion of its exact bytes is pending; see the
+[0.8.0 release handover](native-ui-0.8.0-release-handover.md). Testers
+accepted its layout and reported workflow/input, scrolling and navigation
+issues. The 2026-10-06 revision adds explicit reusable workflow inputs and
+navigation controls, fixes native repaint/first-open errors and clarifies
+scientific tool names. The first feedback candidate's **75 source checks passed**, followed by **32
+workspace checks and 8 References/update checks in each Windows path**, with
+zero failures or skips. These include native workflow pointer interactions,
+scroll repaint comparison and a 202-record minimap2 SAM-to-sorted-BAM run. The
+[feedback record](evidence/native-workflow-0.8.0-feedback-2026-10-06.json)
+retains an earlier scientific-assertion failure and keeps the revised candidate
+separate from the
+[successful 2026-10-05 candidate](evidence/native-ui-0.8.0-development-2026-10-05.json).
+The guide retains tested candidate identities and identifies untested physical
+trackpad/display scenarios. A later user report exposed a separate ordinary-path
+I/O failure on a 269-character pipeline output. The corrected candidate passed
+**82 CI source checks**, the repeated **32+8 native checks per path**, and a new
+long-path regression that reproduces the old error and passes the full corrected
+starter pipeline with machine long-path policy disabled. All 20 pipeline output
+hashes were checked, including the expected variant-call truth. The fix preserves
+ordinary provenance identities and uses extended paths at filesystem boundaries.
+See the
+[sanitized long-path record](evidence/native-workflow-0.8.0-long-path-2026-10-06.json).
+Earlier native passes did not establish this deep-output-path behavior.
+The user subsequently confirmed that the pipeline fix worked, while reporting
+that text still flashes during scrolling. That pipeline confirmation is user
+acceptance of the reported fix, not a new automated run or acceptance of all
+display behavior. The earlier scroll check compared settled images and did not
+observe intermediate frames. The further revision at `b3928ca` adds composited
+form panels, suppresses redundant redraws and accumulates small wheel deltas.
+Its [exact-package native run](https://github.com/comparativechrono/workbench/actions/runs/37453380541)
+passed all five jobs. Across three panels, 960 sampled desktop frames showed
+no unexpected text/background image and all 300 requested endpoint transitions
+were observed; all 18 precision-wheel cases passed. The old package also showed
+no unexpected frames, so the tester's visual flashing was **not reproduced in
+CI**. Six old precision-wheel cases did fail and now pass; that is a separately
+reproduced movement defect. The [scroll record](evidence/native-workflow-0.8.0-scroll-2026-10-06.json)
+retains these limits and the verified candidate download. The user's subsequent
+acceptance supersedes the pending tester-confirmation status; it is user-reported
+acceptance, not a new CI observation or broader display-coverage claim.
+Version 0.8.0 is accepted for publication but remains unreleased at this
+checkpoint; published 0.7.0 and its evidence are unchanged.
+
 ## Reading order
 
 | File | Question it answers |
@@ -23,6 +69,9 @@ and releases before treating this snapshot as current.
 | [Purpose and decisions](purpose-and-decisions.md) | Who is this for, what approach was chosen, and what must not be lost? |
 | [Current state](current-state.md) | What is released, tested, limited or unfinished? |
 | [Architecture](architecture.md) | Where does each responsibility live, and how does a run work? |
+| [Native UI development](native-ui.md) | How do the three panes, standalone tools and workflow canvas work, and what remains to validate? |
+| [0.8.0 release handover](native-ui-0.8.0-release-handover.md) | Which exact tested bytes were accepted, and what is their publication status? |
+| [Starter tool semantics](starter-tool-semantics.md) | Which program does each starter operation run, how does SAM become BAM, and what does faidx mean? |
 | [Reference discovery](../docs/reference-discovery-0.7.md) | How are references found, downloaded, reused offline and recorded in runs? |
 | [Development](development.md) | How do I recover inputs, build, test and resume work? |
 | [Pack development](pack-development.md) | How do I add a real tool without rebuilding the app? |
@@ -41,7 +90,8 @@ interaction decisions.
 - Product requirements and design history come from the project owner's
   development conversation, captured explicitly in the decision record. They
   are requirements, not proof that every feature is fully implemented.
-- Current behavior is checked against source at the baseline above. Source links
+- Each dated topic identifies its reviewed source or validation checkpoint;
+  newer development is separate from the starting baseline above. Source links
   are repository-relative so they work in a clone and on GitHub.
 - Release facts come from published release metadata, accompanying reports and
   named CI runs. A historical pass applies to the tested bytes and environment.

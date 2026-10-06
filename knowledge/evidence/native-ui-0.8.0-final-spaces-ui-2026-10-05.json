@@ -1,0 +1,347 @@
+{
+  "schema": 1,
+  "success": true,
+  "startedUtc": "2026-10-05T21:29:44.363446+00:00",
+  "platform": "Windows-2022Server-10.0.20348-SP0",
+  "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+  "nativeWindowsExecuted": true,
+  "nativeGUILaunched": true,
+  "nativeGUIValidated": true,
+  "appRoot": "D:\\a\\_temp\\path with spaces\\native-workbench",
+  "sourceCommit": "c82c559d02a0b70e79afe67da93ace9e344f1ef3",
+  "assetSha256": "5e59dee9efd38f2ee10516292294e4bd711b2c0a61e35b2bbbb49965f27383e4",
+  "assetName": "native-workbench-0.8.0-starter-windows.zip",
+  "gateSha256": "609b73508dca93a4b18a009e2b460c8bf1fae4422e7c4afc380413435330bd62",
+  "checks": [
+    "Default standalone mode",
+    "Independent preserved tool and workflow graphs",
+    "Compatible graph edge",
+    "Bounded native compatibility preview",
+    "Atomic cycle and semantic type rejection",
+    "Per-tool settings and input retention",
+    "First click opens a previously selected workflow-library row in empty tool mode",
+    "Single-click standalone tool form",
+    "Separate queued native double-click notification opens its hit row after selection clears",
+    "Three independent panes with general settings",
+    "Actual mouse drag from tool list onto workflow canvas twice",
+    "Actual compatible output-to-input mouse connection",
+    "Canvas selection displays tool options on right",
+    "General settings remain available in workflow mode",
+    "Standalone input and browsing folder survive workflow mode",
+    "Mode-specific status guidance replaces the previous workflow drag hint",
+    "Workflow graph/selection survives mode switching",
+    "Normal/minimum observed pane separation"
+  ],
+  "skips": [],
+  "appFiles": {
+    "NativeWorkbench.exe": "9bff261b07fc038c0240aa229e95c191c341fede3bc2f9a8eeca9120714f1a44",
+    "workspace\\app_version.py": "8e0453c5a2ce403d531bdbf399a4aaa1bcbbaa5cbeffdbc19af407bbe0a67c14",
+    "workspace\\catalog.py": "267cd2e62fac179b48ea9b1f96bacade7237120a8dfa7500cd5684d202b7a196",
+    "workspace\\core_checks.py": "a206e5f22430c38e5320f76a17b8b288db4f7ffcd326299ae16bb149a49150de",
+    "workspace\\desktop_host.py": "9ae58b506eec11c2645f50042460b8fb0bb0d386821ac592c27e80b75eb9ed1a",
+    "workspace\\desktop_model.py": "9a5071ddd10974443cb83ba077fb18b7466eeca85ea87e173f65046bff67907b",
+    "workspace\\engine.py": "e88dd658fe3a764acbb25a6ef53d79aa8849099957b69b29dcf800297dff97dd",
+    "workspace\\example.py": "fb558de8dc3f49f68550af3e08d768e8a99c5cd9e8d466ca357dcecc3dd699b3",
+    "workspace\\pack_checks.py": "5d17959b283524ce8115dbe6dbf904a9cc62b8ca6cfa545b25dd0b89c1f9df72",
+    "workspace\\pack_manager.py": "6eb3f3a1064b8754ea5e6d1f0fddda2f2a23f64776473689b125f58445435bc9",
+    "workspace\\pack_security.py": "2d1fa4a4267f5cecb0d583c7b43fc59dc8645125c59e3db69c4d6fa307ff6cc0",
+    "workspace\\reference_manager.py": "3df9269e3bd89a822a18c323af36f474887b185cb261399f55409354240d2bd9",
+    "workspace\\reference_provenance.py": "9175cbb21fd983816a1b8b0effdae09ebaa11990fccdc06e4446c13f56ac5971",
+    "workspace\\reference_provider.py": "30f160e22d2f8a89bac4f1d52bf4ec6709a7f331f1bb6000e78707e559fdc816",
+    "workspace\\service.py": "ab343eae8990c844d9db85bc7c2d4bea33e1b3fe4e20714fd91786cd25fcde22",
+    "workspace\\verify_installation.py": "1e2a11141609f23d4e6b5d771d01ab67199a4839f36f2174bfa2f10b70c0f23d"
+  },
+  "host": {
+    "networkSocketOperationsDenied": true,
+    "standaloneGraph": {
+      "schema": 1,
+      "name": "Index a reference",
+      "nodes": [
+        {
+          "id": "step-1",
+          "tool": "bam/reference-index",
+          "params": {},
+          "inputs": {
+            "reference": [
+              "input-1"
+            ]
+          },
+          "pin": {
+            "packId": "bam",
+            "packVersion": "0.4.0",
+            "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+          },
+          "label": "Preserved reference index"
+        }
+      ],
+      "sources": [
+        {
+          "id": "input-1",
+          "type": "reference",
+          "label": "Reference genome",
+          "files": {
+            "reference": "D:\\a\\_temp\\path with spaces\\native-workbench\\examples\\starter\\reference.fa"
+          },
+          "fields": [
+            {
+              "id": "reference",
+              "label": "Reference genome",
+              "type": "file",
+              "role": "file",
+              "binding": false,
+              "preset": true,
+              "required": true,
+              "default": "",
+              "help": "Uncompressed FASTA. Workflows that build an index copy this file into the run folder first.",
+              "filter": "Uncompressed FASTA reference|*.fa;*.fasta;*.fna|All files|*.*",
+              "constraint": "",
+              "differentFrom": ""
+            }
+          ]
+        }
+      ],
+      "nextNode": 2,
+      "nextSource": 2
+    },
+    "workflowGraph": {
+      "schema": 1,
+      "name": "Untitled analysis",
+      "nodes": [
+        {
+          "id": "step-1",
+          "tool": "bam/sort",
+          "params": {},
+          "inputs": {
+            "alignment": [
+              "input-1"
+            ]
+          },
+          "pin": {
+            "packId": "bam",
+            "packVersion": "0.4.0",
+            "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+          }
+        },
+        {
+          "id": "step-2",
+          "tool": "bam/sort",
+          "params": {},
+          "inputs": {
+            "alignment": [
+              "step-1::sorted"
+            ]
+          },
+          "pin": {
+            "packId": "bam",
+            "packVersion": "0.4.0",
+            "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+          }
+        },
+        {
+          "id": "step-3",
+          "tool": "bam/reference-index",
+          "params": {},
+          "inputs": {
+            "reference": [
+              "input-3"
+            ]
+          },
+          "pin": {
+            "packId": "bam",
+            "packVersion": "0.4.0",
+            "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+          }
+        }
+      ],
+      "sources": [
+        {
+          "id": "input-1",
+          "type": "bam",
+          "label": "Alignments",
+          "files": {},
+          "fields": [
+            {
+              "id": "alignment",
+              "label": "Alignments",
+              "type": "file",
+              "role": "file",
+              "binding": false,
+              "preset": true,
+              "required": true,
+              "default": "",
+              "help": "",
+              "filter": "Alignments|*.bam;*.sam|All files|*.*",
+              "constraint": "",
+              "differentFrom": ""
+            }
+          ]
+        },
+        {
+          "id": "input-2",
+          "type": "bam",
+          "label": "Alignments",
+          "files": {},
+          "fields": [
+            {
+              "id": "alignment",
+              "label": "Alignments",
+              "type": "file",
+              "role": "file",
+              "binding": false,
+              "preset": true,
+              "required": true,
+              "default": "",
+              "help": "",
+              "filter": "Alignments|*.bam;*.sam|All files|*.*",
+              "constraint": "",
+              "differentFrom": ""
+            }
+          ]
+        },
+        {
+          "id": "input-3",
+          "type": "reference",
+          "label": "Reference genome",
+          "files": {},
+          "fields": [
+            {
+              "id": "reference",
+              "label": "Reference genome",
+              "type": "file",
+              "role": "file",
+              "binding": false,
+              "preset": true,
+              "required": true,
+              "default": "",
+              "help": "Uncompressed FASTA. Workflows that build an index copy this file into the run folder first.",
+              "filter": "Uncompressed FASTA reference|*.fa;*.fasta;*.fna|All files|*.*",
+              "constraint": "",
+              "differentFrom": ""
+            }
+          ]
+        }
+      ],
+      "nextNode": 4,
+      "nextSource": 4
+    },
+    "rejected": [
+      {
+        "case": "cycle",
+        "message": "model: Choose a compatible source that does not create a cycle."
+      },
+      {
+        "case": "type",
+        "message": "model: Choose a compatible source that does not create a cycle."
+      }
+    ],
+    "portPreviews": {
+      "compatible": {
+        "ref": "step-1::sorted",
+        "targets": [
+          {
+            "nodeId": "step-2",
+            "portId": "alignment"
+          }
+        ]
+      },
+      "cycle": {
+        "ref": "step-2::sorted",
+        "targets": []
+      },
+      "type": {
+        "ref": "step-3::reference",
+        "targets": []
+      }
+    },
+    "checks": [
+      "Default standalone mode",
+      "Independent preserved tool and workflow graphs",
+      "Compatible graph edge",
+      "Bounded native compatibility preview",
+      "Atomic cycle and semantic type rejection",
+      "Per-tool settings and input retention"
+    ]
+  },
+  "gui": {
+    "dpi": 96,
+    "displayPixels": [
+      1024,
+      768
+    ],
+    "captures": [
+      {
+        "path": "tools-after-workflow-library-selection.bmp",
+        "width": 1044,
+        "height": 788,
+        "sha256": "c96ed7e284adbc730aa234e62aa5dec0456d70a8de71096e403aa272bf5d5a48"
+      },
+      {
+        "path": "tools-double-click-notification.bmp",
+        "width": 1044,
+        "height": 788,
+        "sha256": "c96ed7e284adbc730aa234e62aa5dec0456d70a8de71096e403aa272bf5d5a48"
+      },
+      {
+        "path": "tools-reference-1280.bmp",
+        "width": 1044,
+        "height": 788,
+        "sha256": "570f317000db309d3e28d5f54e6af65c31b4c66b33028ce12b4198f5a59f7eee"
+      },
+      {
+        "path": "workflow-connected-1280.bmp",
+        "width": 1044,
+        "height": 788,
+        "sha256": "e7fbb73944e216b32b04a44cdeeb4f976d030c0f23ed5e4f279668458615e713"
+      },
+      {
+        "path": "workflow-first-selected.bmp",
+        "width": 1044,
+        "height": 788,
+        "sha256": "abb69535e3c2b0a9b0546c8eb035bddc38f0b392519e17ceeaedd99f87883c42"
+      },
+      {
+        "path": "workflow-general-settings.bmp",
+        "width": 1044,
+        "height": 788,
+        "sha256": "40f220ccb2aabef2fb601024e26538e32fe0932269746507b7898f99ab8990db"
+      },
+      {
+        "path": "tools-minimum.bmp",
+        "width": 1044,
+        "height": 740,
+        "sha256": "879b54127be02107b2bc2f2eac51b1f65a4d23ab419bdb777f68500b26f9ad73"
+      },
+      {
+        "path": "workflow-minimum.bmp",
+        "width": 1044,
+        "height": 740,
+        "sha256": "76bc9d9f4dfd30b319d1742761bb921758a36c42319f6a46f03e8522e3844deb"
+      }
+    ],
+    "geometryFile": "ui-control-geometry.json",
+    "checks": [
+      "First click opens a previously selected workflow-library row in empty tool mode",
+      "Single-click standalone tool form",
+      "Separate queued native double-click notification opens its hit row after selection clears",
+      "Three independent panes with general settings",
+      "Actual mouse drag from tool list onto workflow canvas twice",
+      "Actual compatible output-to-input mouse connection",
+      "Canvas selection displays tool options on right",
+      "General settings remain available in workflow mode",
+      "Standalone input and browsing folder survive workflow mode",
+      "Mode-specific status guidance replaces the previous workflow drag hint",
+      "Workflow graph/selection survives mode switching",
+      "Normal/minimum observed pane separation"
+    ],
+    "notificationRegression": {
+      "input": "Queued WM_LBUTTONDBLCLK and WM_LBUTTONUP to the real native ListView",
+      "scope": "Hit-row activation without prior selection; separate from the SendInput pointer and drag assertions."
+    },
+    "limits": [
+      "DPI coverage is only the actual reported monitor DPI; no simulated WM_DPICHANGED claim.",
+      "Human usability acceptance, multi-monitor movement and native folder pickers remain separate."
+    ]
+  },
+  "completedUtc": "2026-10-05T21:29:49.909472+00:00",
+  "passed": 18
+}

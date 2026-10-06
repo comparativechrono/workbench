@@ -13,7 +13,7 @@ import threading
 import uuid
 
 from catalog import load_catalog, resolve_tool
-from engine import Engine, NativeBackend, digest_file, write_json
+from engine import Engine, NativeBackend, digest_file, write_json, _io_path, _resolved_path
 from example import make_example
 from pack_checks import _assert_sam, _assert_vcf, _read_check_text
 from verify_installation import inside, require, run_checks, strict_json
@@ -91,7 +91,7 @@ without modifying an already distributed pack or invalidating saved pipelines.
             entry['folder'] = record.get('folder',plan['folder'])
             require(record.get('success') is True, 'Starter pipeline did not complete: '+str(record.get('message',record.get('status'))))
             def output(reference, field):
-                return Path(record['outputs'][reference]['files'][field])
+                return _io_path(record['outputs'][reference]['files'][field])
             _assert_sam(profile['expect']['alignment'],_read_check_text(output('step-1::sam','sam')))
             _assert_vcf(profile['expect']['variants'],_read_check_text(output('step-3::variants','variants')))
             require(output('step-2::bam','bam').stat().st_size > 0, 'Prepared BAM is empty')
@@ -116,10 +116,10 @@ def run_core_checks(root, catalog, output_parent, event=None, cancel=None, backe
     root = Path(root).resolve()
     event = event or (lambda value: None)
     cancel = cancel or threading.Event()
-    parent = Path(output_parent).resolve()
-    require(parent.is_dir(), 'Choose an existing output folder for installation checks')
+    parent = _resolved_path(output_parent)
+    require(_io_path(parent).is_dir(), 'Choose an existing output folder for installation checks')
     folder = parent/('installation-'+datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S')+'-'+uuid.uuid4().hex[:8])
-    folder.mkdir()
+    _io_path(folder).mkdir()
     event({'type':'run','folder':str(folder)})
     event({'type':'phase','message':'Checking application and installed pack integrity'})
     core = run_checks(root,event=event,cancel=cancel,catalog=catalog)

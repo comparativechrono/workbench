@@ -1,0 +1,579 @@
+{
+  "schema": 1,
+  "status": "development candidate validated; draft pull request awaiting tester acceptance; not a published 0.8.0 release",
+  "recordedDate": "2026-10-05",
+  "version": "0.8.0",
+  "publishedReleaseUnchanged": "0.7.0",
+  "branch": "ui/galaxy-native-workspace",
+  "pullRequest": "https://github.com/comparativechrono/workbench/pull/1",
+  "sourceChecks": {
+    "platform": "Linux x86-64",
+    "python": "3.12.14",
+    "passes": 57,
+    "failures": 0,
+    "skips": 0,
+    "suites": {
+      "desktop_modes": 11,
+      "desktop_host": 12,
+      "reference_service": 10,
+      "split_release": 8,
+      "core_update": 16
+    },
+    "scope": "Current-source contracts; not scientific/native GUI execution."
+  },
+  "attempts": [
+    {
+      "runId": 37370902904,
+      "sourceCommit": "3021c0bf3c6a2414441292a8b1b9713ab402cdbc",
+      "build": "passed",
+      "windows": "cancelled while queued; not run",
+      "reason": "Reference gate needed an explicit 0.8 contract before native execution."
+    },
+    {
+      "runId": 37371315018,
+      "sourceCommit": "d27dd8a8d008cb483498e05c20bf58d01fca427c",
+      "starterSha256": "4215c783fc1f0076ad416850ba00157e674619ec15ecf83d1b16963bf5784f53",
+      "build": "passed",
+      "windows": [
+        {
+          "installationPathCase": "ordinary",
+          "artifactId": 11370466730,
+          "artifactSha256": "7ca737ffec2388dd69d63b4ab52ae55c7885f847b24ce1ebc2d5de503490f9b5",
+          "artifactBytes": 455087,
+          "nativeHostChecksPassed": 6,
+          "nativeUICheckSuccess": false,
+          "nativeUIFailure": "Gate class-name reads were empty; timed out detecting a form that the captured controls and screenshot show had opened. The gate was corrected, not counted as a GUI pass.",
+          "referenceChecksPassed": 8,
+          "referenceChecks": [
+            "Live release-pinned yeast search and five-product discovery.",
+            "Cancellation after transferred bytes removed only its partial download and published no reference.",
+            "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+            "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+            "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods.",
+            "Installed application and starter pack integrity checks passed after reference use.",
+            "Native 0.6.0-to-0.8.0 core migration and idempotent repeat preserved optional packs, saved pins, references and results; updated private host reused them offline.",
+            "Native app opened References, displayed local files, selected and downloaded five products through native controls, cancelled through its native button, bound both existing and newly downloaded genomes through compatible native inputs, kept controls separate at normal/minimum size and closed cleanly."
+          ],
+          "referenceSuccess": true,
+          "skips": [],
+          "nativeExecutableSha256": "329fc99cd8c3cdaeb707622be68a6d8c37534b7d83c6ac3b856985a22b3f89c5",
+          "platform": "Windows-2022Server-10.0.20348-SP0",
+          "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]"
+        },
+        {
+          "installationPathCase": "spaces",
+          "artifactId": 11369787007,
+          "artifactSha256": "d6c6cbfdeb46dc608e436a9c81b489eeb3b342c5557e328e3b3a57ab8ec2e575",
+          "artifactBytes": 455047,
+          "nativeHostChecksPassed": 6,
+          "nativeUICheckSuccess": false,
+          "nativeUIFailure": "Gate class-name reads were empty; timed out detecting a form that the captured controls and screenshot show had opened. The gate was corrected, not counted as a GUI pass.",
+          "referenceChecksPassed": 8,
+          "referenceChecks": [
+            "Live release-pinned yeast search and five-product discovery.",
+            "Cancellation after transferred bytes removed only its partial download and published no reference.",
+            "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+            "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+            "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods.",
+            "Installed application and starter pack integrity checks passed after reference use.",
+            "Native 0.6.0-to-0.8.0 core migration and idempotent repeat preserved optional packs, saved pins, references and results; updated private host reused them offline.",
+            "Native app opened References, displayed local files, selected and downloaded five products through native controls, cancelled through its native button, bound both existing and newly downloaded genomes through compatible native inputs, kept controls separate at normal/minimum size and closed cleanly."
+          ],
+          "referenceSuccess": true,
+          "skips": [],
+          "nativeExecutableSha256": "329fc99cd8c3cdaeb707622be68a6d8c37534b7d83c6ac3b856985a22b3f89c5",
+          "platform": "Windows-2022Server-10.0.20348-SP0",
+          "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]"
+        }
+      ]
+    },
+    {
+      "runId": 37372046810,
+      "sourceCommit": "ce19b9185cb5ef416f7cdd6067d5ca93f58502f6",
+      "build": "cancelled while queued; not run",
+      "windows": "not run",
+      "reason": "Superseded by first-use library-selection fix and its native regression."
+    },
+    {
+      "runId": 37372389565,
+      "build": "passed",
+      "reason": "Native GUI timed out on first tool activation after mode switch. Mixed BM_CLICK navigation and physical row clicks retained the Windows double-click sequence. Subsequent physical navigation passed this phase. Ordinary job concluded cancelled after its UI/reference/evidence steps had already run.",
+      "windows": [
+        {
+          "installationPathCase": "ordinary",
+          "artifactId": 11370878975,
+          "artifactSha256": "e12b3124451ae87275eaf8270a113d2584fac17462b20eb45d993d41a0fcf990",
+          "artifactBytes": 448769,
+          "nativeHostChecksPassed": 6,
+          "nativeUICheckSuccess": false,
+          "nativeUIFailurePhase": "same library row opens standalone tool on first click",
+          "referenceChecksPassed": 8,
+          "referenceSuccess": true,
+          "skips": [],
+          "nativeExecutableSha256": "590eee02d70f2d4bc8145118eb97b37b43c741fa0f107a8240463799cfd3d191",
+          "platform": "Windows-2022Server-10.0.20348-SP0",
+          "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]"
+        },
+        {
+          "installationPathCase": "spaces",
+          "artifactId": 11369803295,
+          "artifactSha256": "111752396392abd6797696ced167437fda281f01bf91b36040b68d23b91a05dd",
+          "artifactBytes": 448570,
+          "nativeHostChecksPassed": 6,
+          "nativeUICheckSuccess": false,
+          "nativeUIFailurePhase": "same library row opens standalone tool on first click",
+          "referenceChecksPassed": 8,
+          "referenceSuccess": true,
+          "skips": [],
+          "nativeExecutableSha256": "590eee02d70f2d4bc8145118eb97b37b43c741fa0f107a8240463799cfd3d191",
+          "platform": "Windows-2022Server-10.0.20348-SP0",
+          "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]"
+        }
+      ],
+      "sourceCommit": "65fc7588001d850f52d48d17ea191a481a8381fa",
+      "starterSha256": "9dab0aca5ee035924d9a6a82b1f08443d0537c8d76b553c66f7b84a6e728ef88"
+    },
+    {
+      "runId": 37373594117,
+      "build": "passed",
+      "reason": "Physical mode-switch/first-click regression passed; GUI then timed out after search text was replaced without focusing the edit and a rapid same-position row click. Review also identified an application defect: NM_DBLCLK consulted selected-row state instead of its activated row. Both the app handler and realistic edit-focus sequence were fixed; a separate native-control notification regression was added.",
+      "windows": [
+        {
+          "installationPathCase": "ordinary",
+          "artifactId": 11370999811,
+          "artifactSha256": "305d1b0acc34f48612704ceeba75e6717eb0ed105ba3526050ab37cb704a658c",
+          "artifactBytes": 488364,
+          "nativeHostChecksPassed": 6,
+          "nativeUICheckSuccess": false,
+          "nativeUIFailurePhase": "single click opens standalone reference indexing form",
+          "referenceChecksPassed": 8,
+          "referenceSuccess": true,
+          "skips": [],
+          "nativeExecutableSha256": "590eee02d70f2d4bc8145118eb97b37b43c741fa0f107a8240463799cfd3d191",
+          "platform": "Windows-2022Server-10.0.20348-SP0",
+          "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]"
+        },
+        {
+          "installationPathCase": "spaces",
+          "artifactId": 11369823896,
+          "artifactSha256": "202395ccb243b279973d7f1094389c92b02171c1beb9e3187c9b6c9e3881dd9c",
+          "artifactBytes": 487750,
+          "nativeHostChecksPassed": 6,
+          "nativeUICheckSuccess": false,
+          "nativeUIFailurePhase": "single click opens standalone reference indexing form",
+          "referenceChecksPassed": 8,
+          "referenceSuccess": true,
+          "skips": [],
+          "nativeExecutableSha256": "590eee02d70f2d4bc8145118eb97b37b43c741fa0f107a8240463799cfd3d191",
+          "platform": "Windows-2022Server-10.0.20348-SP0",
+          "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]"
+        }
+      ],
+      "sourceCommit": "0a6a5d713e99d2ecd6a361d6fd733f49be1873dc",
+      "starterSha256": "ea117df903e3574fc594a1546c75d738091a928c19ac7e5a0d55a06bcf08c721"
+    },
+    {
+      "runId": 37374888317,
+      "sourceCommit": "2ac8eb79bb95322f74102dbd4fb240ba02d32fa5",
+      "build": "passed",
+      "conclusion": "success",
+      "reason": "All automated gates passed. Visual review then found a stale workflow drag hint after switching to Tools; the contextual status message was corrected in the next candidate. This successful evidence remains scoped to these exact bytes.",
+      "downloadVerification": {
+        "bundleSha256": "fbea92831ac01ac439287bccf27564310b1f60c2e04b08084f6241b75cae395f",
+        "sourceCommit": "2ac8eb79bb95322f74102dbd4fb240ba02d32fa5",
+        "archives": [
+          {
+            "file": "native-workbench-0.8.0-source.zip",
+            "bytes": 46091568,
+            "sha256": "f36f4a03f8e132f3a570ae6286be33eba1cbe28fd383e33ab78f1437427355c9"
+          },
+          {
+            "file": "native-workbench-0.8.0-starter-windows.zip",
+            "bytes": 16936590,
+            "sha256": "4ebcaec7363843d7aeeba6322e38324f6e4cf9edf90e68267fc3534b92c8d0a5"
+          },
+          {
+            "file": "native-workbench-0.8.0-update-from-0.6.0.zip",
+            "bytes": 12850449,
+            "sha256": "aefb7dc20aa8aaf8be44b15512898efc017604db1c209bc0bf013756d0a539ad"
+          }
+        ],
+        "coreManifestFilesVerified": 68,
+        "starterPackFilesByteIdenticalToFrozen060": 143,
+        "nativeExecutableSha256": "454f7d4ec1ff54cbeca9273f0f58aad320f4afdc230a75e6306c1e603538066d"
+      },
+      "windows": [
+        {
+          "installationPathCase": "ordinary",
+          "artifactId": 11372105357,
+          "artifactSha256": "f87a30ee2e2844928caa8185505d632e8b6eccc4d2c2b66c3fbe4e8b0f48ec5d",
+          "artifactBytes": 784893,
+          "nativeHostChecksPassed": 6,
+          "nativeGUIChecksPassed": 11,
+          "nativeUIChecksPassed": 17,
+          "nativeUICheckSuccess": true,
+          "referenceChecksPassed": 8,
+          "referenceSuccess": true,
+          "skips": [],
+          "nativeExecutableSha256": "454f7d4ec1ff54cbeca9273f0f58aad320f4afdc230a75e6306c1e603538066d",
+          "platform": "Windows-2022Server-10.0.20348-SP0",
+          "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+          "dpi": 96
+        },
+        {
+          "installationPathCase": "spaces",
+          "artifactId": 11371960398,
+          "artifactSha256": "38408236f24234deedcb924c01abd0ef432d12b4a739ea04afeb9271cc4bdc34",
+          "artifactBytes": 784246,
+          "nativeHostChecksPassed": 6,
+          "nativeGUIChecksPassed": 11,
+          "nativeUIChecksPassed": 17,
+          "nativeUICheckSuccess": true,
+          "referenceChecksPassed": 8,
+          "referenceSuccess": true,
+          "skips": [],
+          "nativeExecutableSha256": "454f7d4ec1ff54cbeca9273f0f58aad320f4afdc230a75e6306c1e603538066d",
+          "platform": "Windows-2022Server-10.0.20348-SP0",
+          "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+          "dpi": 96
+        }
+      ]
+    },
+    {
+      "runId": 37376078599,
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37376078599",
+      "sourceCommit": "c82c559d02a0b70e79afe67da93ace9e344f1ef3",
+      "build": "passed",
+      "conclusion": "success",
+      "downloadVerification": {
+        "bundleSha256": "61bd2deca854b43596b82be95cebb4d72179df6cd34c2abe097361df8777de7e",
+        "sourceCommit": "c82c559d02a0b70e79afe67da93ace9e344f1ef3",
+        "archives": [
+          {
+            "file": "native-workbench-0.8.0-source.zip",
+            "bytes": 46091730,
+            "sha256": "1a373b5701f3de123278f7b8d082218ec657ad5e8f121e59602bb37126dbafe4"
+          },
+          {
+            "file": "native-workbench-0.8.0-starter-windows.zip",
+            "bytes": 16936686,
+            "sha256": "5e59dee9efd38f2ee10516292294e4bd711b2c0a61e35b2bbbb49965f27383e4"
+          },
+          {
+            "file": "native-workbench-0.8.0-update-from-0.6.0.zip",
+            "bytes": 12850543,
+            "sha256": "32a65944e63c6057c97d150162dcf858ec47d8a5efee78c668e32ed13729421c"
+          }
+        ],
+        "coreManifestFilesVerified": 68,
+        "starterPackFilesByteIdenticalToFrozen060": 143,
+        "nativeExecutableSha256": "9bff261b07fc038c0240aa229e95c191c341fede3bc2f9a8eeca9120714f1a44",
+        "sourceCompanionNativeUISourcesMatch": true
+      },
+      "windows": [
+        {
+          "installationPathCase": "ordinary",
+          "artifactId": 11371857342,
+          "artifactSha256": "9f4b80ad14f3fb71f698847e421c97b49710d6d30a1209169e47b6e2ed5ca3e8",
+          "artifactBytes": 786814,
+          "artifactUrl": "https://github.com/comparativechrono/workbench/actions/runs/37376078599/artifacts/11371857342",
+          "nativeHostChecksPassed": 6,
+          "nativeGUIChecksPassed": 12,
+          "nativeUIChecksPassed": 18,
+          "nativeUICheckSuccess": true,
+          "referenceChecksPassed": 8,
+          "referenceSuccess": true,
+          "skips": [],
+          "platform": "Windows-2022Server-10.0.20348-SP0",
+          "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+          "dpi": 96,
+          "displayPixels": [
+            1024,
+            768
+          ],
+          "nativeUIChecks": [
+            "Default standalone mode",
+            "Independent preserved tool and workflow graphs",
+            "Compatible graph edge",
+            "Bounded native compatibility preview",
+            "Atomic cycle and semantic type rejection",
+            "Per-tool settings and input retention",
+            "First click opens a previously selected workflow-library row in empty tool mode",
+            "Single-click standalone tool form",
+            "Separate queued native double-click notification opens its hit row after selection clears",
+            "Three independent panes with general settings",
+            "Actual mouse drag from tool list onto workflow canvas twice",
+            "Actual compatible output-to-input mouse connection",
+            "Canvas selection displays tool options on right",
+            "General settings remain available in workflow mode",
+            "Standalone input and browsing folder survive workflow mode",
+            "Mode-specific status guidance replaces the previous workflow drag hint",
+            "Workflow graph/selection survives mode switching",
+            "Normal/minimum observed pane separation"
+          ],
+          "referenceChecks": [
+            "Live release-pinned yeast search and five-product discovery.",
+            "Cancellation after transferred bytes removed only its partial download and published no reference.",
+            "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+            "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+            "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods.",
+            "Installed application and starter pack integrity checks passed after reference use.",
+            "Native 0.6.0-to-0.8.0 core migration and idempotent repeat preserved optional packs, saved pins, references and results; updated private host reused them offline.",
+            "Native app opened References, displayed local files, selected and downloaded five products through native controls, cancelled through its native button, bound both existing and newly downloaded genomes through compatible native inputs, kept controls separate at normal/minimum size and closed cleanly."
+          ],
+          "rawReports": [
+            {
+              "path": "knowledge/evidence/native-ui-0.8.0-final-ordinary-ui-2026-10-05.json",
+              "sha256": "49f3b9ea0a5c6036c99b4912f52a17bab0f8c9a71a6c14f071faf2f7b7686220"
+            },
+            {
+              "path": "knowledge/evidence/native-ui-0.8.0-final-ordinary-references-2026-10-05.json",
+              "sha256": "734533dfee85ae033e191c4021b412fe0c4682860d5565bd7cb52af8c6f7fa24"
+            }
+          ],
+          "observedGeometry": [
+            {
+              "mode": "tool",
+              "requestedSize": "1280x900",
+              "actualWindowBounds": [
+                0,
+                0,
+                1044,
+                788
+              ],
+              "dpi": 96
+            },
+            {
+              "mode": "workflow",
+              "requestedSize": "1280x900",
+              "actualWindowBounds": [
+                0,
+                0,
+                1044,
+                788
+              ],
+              "dpi": 96
+            },
+            {
+              "mode": "tool",
+              "requestedSize": "restored",
+              "actualWindowBounds": [
+                0,
+                0,
+                1044,
+                788
+              ],
+              "dpi": 96
+            },
+            {
+              "mode": "tool",
+              "requestedSize": "requested1100x740",
+              "actualWindowBounds": [
+                0,
+                0,
+                1044,
+                740
+              ],
+              "dpi": 96
+            },
+            {
+              "mode": "workflow",
+              "requestedSize": "requested1100x740",
+              "actualWindowBounds": [
+                0,
+                0,
+                1044,
+                740
+              ],
+              "dpi": 96
+            }
+          ],
+          "migration": {
+            "baseVersion": "0.6.0",
+            "targetVersion": "0.8.0",
+            "preservedFiles": 187,
+            "preservationChanges": {},
+            "idempotentRepeat": "already-installed",
+            "offlineRestart": true
+          }
+        },
+        {
+          "installationPathCase": "spaces",
+          "artifactId": 11372131147,
+          "artifactSha256": "f5e122b5fc40c513ed14d6c073aac5538df479505f6fc856a81b0d64789eda4e",
+          "artifactBytes": 785159,
+          "artifactUrl": "https://github.com/comparativechrono/workbench/actions/runs/37376078599/artifacts/11372131147",
+          "nativeHostChecksPassed": 6,
+          "nativeGUIChecksPassed": 12,
+          "nativeUIChecksPassed": 18,
+          "nativeUICheckSuccess": true,
+          "referenceChecksPassed": 8,
+          "referenceSuccess": true,
+          "skips": [],
+          "platform": "Windows-2022Server-10.0.20348-SP0",
+          "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+          "dpi": 96,
+          "displayPixels": [
+            1024,
+            768
+          ],
+          "nativeUIChecks": [
+            "Default standalone mode",
+            "Independent preserved tool and workflow graphs",
+            "Compatible graph edge",
+            "Bounded native compatibility preview",
+            "Atomic cycle and semantic type rejection",
+            "Per-tool settings and input retention",
+            "First click opens a previously selected workflow-library row in empty tool mode",
+            "Single-click standalone tool form",
+            "Separate queued native double-click notification opens its hit row after selection clears",
+            "Three independent panes with general settings",
+            "Actual mouse drag from tool list onto workflow canvas twice",
+            "Actual compatible output-to-input mouse connection",
+            "Canvas selection displays tool options on right",
+            "General settings remain available in workflow mode",
+            "Standalone input and browsing folder survive workflow mode",
+            "Mode-specific status guidance replaces the previous workflow drag hint",
+            "Workflow graph/selection survives mode switching",
+            "Normal/minimum observed pane separation"
+          ],
+          "referenceChecks": [
+            "Live release-pinned yeast search and five-product discovery.",
+            "Cancellation after transferred bytes removed only its partial download and published no reference.",
+            "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+            "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+            "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods.",
+            "Installed application and starter pack integrity checks passed after reference use.",
+            "Native 0.6.0-to-0.8.0 core migration and idempotent repeat preserved optional packs, saved pins, references and results; updated private host reused them offline.",
+            "Native app opened References, displayed local files, selected and downloaded five products through native controls, cancelled through its native button, bound both existing and newly downloaded genomes through compatible native inputs, kept controls separate at normal/minimum size and closed cleanly."
+          ],
+          "rawReports": [
+            {
+              "path": "knowledge/evidence/native-ui-0.8.0-final-spaces-ui-2026-10-05.json",
+              "sha256": "0b3bf3adc99ac9fc732ab43f6b34d9a1b579c68b8d318dee944347878b7a935b"
+            },
+            {
+              "path": "knowledge/evidence/native-ui-0.8.0-final-spaces-references-2026-10-05.json",
+              "sha256": "0fa4a819fc8426047cb8d058a6186c239069d3b72d31aaf38a2ee799c285d1c5"
+            }
+          ],
+          "observedGeometry": [
+            {
+              "mode": "tool",
+              "requestedSize": "1280x900",
+              "actualWindowBounds": [
+                0,
+                0,
+                1044,
+                788
+              ],
+              "dpi": 96
+            },
+            {
+              "mode": "workflow",
+              "requestedSize": "1280x900",
+              "actualWindowBounds": [
+                0,
+                0,
+                1044,
+                788
+              ],
+              "dpi": 96
+            },
+            {
+              "mode": "tool",
+              "requestedSize": "restored",
+              "actualWindowBounds": [
+                0,
+                0,
+                1044,
+                788
+              ],
+              "dpi": 96
+            },
+            {
+              "mode": "tool",
+              "requestedSize": "requested1100x740",
+              "actualWindowBounds": [
+                0,
+                0,
+                1044,
+                740
+              ],
+              "dpi": 96
+            },
+            {
+              "mode": "workflow",
+              "requestedSize": "requested1100x740",
+              "actualWindowBounds": [
+                0,
+                0,
+                1044,
+                740
+              ],
+              "dpi": 96
+            }
+          ],
+          "migration": {
+            "baseVersion": "0.6.0",
+            "targetVersion": "0.8.0",
+            "preservedFiles": 187,
+            "preservationChanges": {},
+            "idempotentRepeat": "already-installed",
+            "offlineRestart": true
+          }
+        }
+      ],
+      "candidateArtifact": {
+        "id": 11371647135,
+        "url": "https://github.com/comparativechrono/workbench/actions/runs/37376078599/artifacts/11371647135",
+        "sha256": "61bd2deca854b43596b82be95cebb4d72179df6cd34c2abe097361df8777de7e",
+        "bytes": 75395876,
+        "expiresAt": "2026-11-04T21:29:20Z"
+      }
+    }
+  ],
+  "limits": [
+    "No manual tester acceptance yet.",
+    "Native coverage is Windows Server 2022 and observed DPI only.",
+    "Multi-monitor/high-DPI movement and native folder-picker interaction are not counted as passed.",
+    "No release tag or published 0.8.0 release created.",
+    "Candidate updater tested only from 0.6.0 to 0.8.0. No 0.7.0-to-0.8.0 updater or upgrade pass is claimed. Use the starter in a separate folder for review.",
+    "Observed window sizes were 1044x788 and 1044x740 on a 1024x768 runner display. The absolute minimum height and larger monitors were not exercised."
+  ],
+  "finalCandidate": {
+    "runId": 37376078599,
+    "sourceCommit": "c82c559d02a0b70e79afe67da93ace9e344f1ef3",
+    "artifact": {
+      "id": 11371647135,
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37376078599/artifacts/11371647135",
+      "sha256": "61bd2deca854b43596b82be95cebb4d72179df6cd34c2abe097361df8777de7e",
+      "bytes": 75395876,
+      "expiresAt": "2026-11-04T21:29:20Z"
+    },
+    "nativeWindowsResult": "18 UI/session checks and 8 reference/update checks passed per installation path; zero failures/skips"
+  },
+  "visualReview": {
+    "finalCandidate": {
+      "sourceCommit": "c82c559d02a0b70e79afe67da93ace9e344f1ef3",
+      "capturesInspected": [
+        "spaces/workspace-ui-evidence/tools-minimum.bmp",
+        "ordinary/workspace-ui-evidence/workflow-connected-1280.bmp"
+      ],
+      "findings": "Mode-specific Tools guidance is corrected; distinct panes, connected ports, selected-tool inspector and scrollable viewport are visible. No blocking overlap observed in these captures."
+    },
+    "precedingCandidate": {
+      "sourceCommit": "2ac8eb79bb95322f74102dbd4fb240ba02d32fa5",
+      "capturesInspected": "Tools/reference configuration, connected workflow, first-selected workflow, workflow general settings, smaller Tools and Workflow views, and all ten ordinary-path References captures.",
+      "findings": "No blocking control overlap. Stale workflow hint in Tools mode identified and fixed in the final candidate. Viewport clipping is handled by canvas/form scroll controls; path edits scroll horizontally."
+    },
+    "scope": "Screenshot inspection by root and independent reviewer, not manual tester acceptance."
+  },
+  "concurrencyReview": {
+    "baseMainCommit": "7c6f2437842788daf9918ac2194ef859b153092c",
+    "mainUnchangedAtFinalReview": true,
+    "isolatedBranch": "ui/galaxy-native-workspace",
+    "branchUpdates": "Compare-and-swap expected_sha checks; no force update or release replacement.",
+    "independentReview": "Host/mode and canvas integration reviewed by separate agents; native activation defect and contextual-status regression fixed and checked in exact final Windows package."
+  }
+}

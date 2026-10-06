@@ -2,6 +2,8 @@
 #include "workbench.h"
 #include <algorithm>
 #include <commctrl.h>
+#include <climits>
+#include <cstdlib>
 #include <cwctype>
 #include <deque>
 #include <gdiplus.h>
@@ -18,9 +20,10 @@
 namespace {
 using desktop::Json;
 constexpr UINT HOST_MESSAGE = WM_APP + 35;
-constexpr COLORREF BACK = RGB(243, 245, 248), PAPER = RGB(255, 255, 255),
+constexpr COLORREF BACK = RGB(246, 247, 248), PAPER = RGB(255, 255, 255),
                    INK = RGB(32, 44, 62), MUTED = RGB(98, 112, 132),
-                   BORDER = RGB(218, 225, 233), ACCENT = RGB(54, 82, 121);
+                   BORDER = RGB(198, 206, 214), ACCENT = RGB(43, 88, 122),
+                   NAVY = RGB(44, 49, 67);
 enum {
   NAME = 101,
   SEARCH,
@@ -56,6 +59,19 @@ enum {
   CLEAR_FILTER = 401,
   MANAGE_TOOLS,
   MANAGE_REFERENCES,
+  MODE_TOOLS = 410,
+  MODE_WORKFLOW,
+  GENERAL_SETTINGS,
+  INPUT_FOLDER,
+  BROWSE_INPUT,
+  SAVE_CURRENT,
+  LOAD_CURRENT,
+  RESULTS_LIST,
+  RESET_LAYOUT,
+  ADD_INPUT,
+  ZOOM_OUT,
+  ZOOM_IN,
+  ZOOM_RESET,
   PACK_SEARCH = 501,
   PACK_FILTER,
   PACK_LIST,
@@ -171,7 +187,8 @@ void rounded(Gdiplus::Graphics &g, float x, float y, float w, float h,
   g.DrawPath(&pen, &p);
 }
 std::wstring pick(HWND owner, bool folder, bool multiple,
-                  const std::wstring &filter, const std::wstring &title) {
+                  const std::wstring &filter, const std::wstring &title,
+                  const std::wstring &initialFolder = {}) {
   IFileOpenDialog *raw = nullptr;
   HRESULT hr = CoCreateInstance(CLSID_FileOpenDialog, nullptr,
                                 CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&raw));
@@ -190,6 +207,14 @@ std::wstring pick(HWND owner, bool folder, bool multiple,
   if (FAILED(hr))
     throw std::runtime_error("Windows could not configure the file picker.");
   raw->SetTitle(title.c_str());
+  if (!initialFolder.empty()) {
+    IShellItem *start = nullptr;
+    if (SUCCEEDED(SHCreateItemFromParsingName(initialFolder.c_str(), nullptr,
+                                             IID_PPV_ARGS(&start)))) {
+      raw->SetFolder(start);
+      start->Release();
+    }
+  }
   std::vector<std::wstring> parts;
   std::vector<COMDLG_FILTERSPEC> specs;
   if (!folder && !filter.empty()) {
@@ -439,13 +464,21 @@ class Workspace {
       refFiles{}, refDetails{}, refDestinationLabel{}, refDestination{},
       refBrowse{}, refDownload{}, refLocal{}, refTargetLabel{}, refTarget{},
       refUse{}, refOpen{}, refCancel{}, refProgress{}, refNotice{}, refClose{};
+  HWND modeTools{}, modeWorkflow{}, generalSettings{}, inputFolder{}, browseInput{},
+      saveCurrent{}, loadCurrent{}, resultsList{}, resetLayout{}, toolsHeading{},
+      centerHeading{}, rightHeading{}, nameLabel{}, inputLabel{}, inputHelp{},
+      outputLabel{}, outputHelp{}, referenceHelp{}, generalPanel{};
+  HWND addInput{}, zoomOut{}, zoomIn{}, zoomReset{};
+  int generalScroll = 0;
+  int generalWheelRemainder = 0, formWheelRemainder = 0;
   HFONT font{}, bold{}, small{};
   HFONT refFont{};
   HBRUSH paper{}, background{};
   desktop::HostProcess host;
   Json state = Json::object(), catalog = object({{"tools", Json::object()}}),
        runState = Json::object(), historyRun = Json::object(),
-       packState = object({{"packs", Json::array()}}),
+       packState = object({{"packs", Json::array()}, {"sources", Json::array()},
+                           {"errors", Json::array()}}),
        packOperation = Json::object(),
        refState = object({{"releases", Json::array()}, {"species", Json::array()},
                           {"local", Json::array()}, {"discovery", nullptr}}),
@@ -457,6 +490,9 @@ class Workspace {
   ULONGLONG closeStarted = 0;
   bool rebuilding = false, ready = false, busy = false, closing = false,
        reviewThenRun = false, showingHistory = false, autoCheck = false;
+  bool workflowMode = false, generalVisible = false, pendingCanvasDrop = false;
+  POINT canvasDropPoint{};
+  std::set<std::string> canvasDropExisting;
   bool packBusy = false, packActionPending = false, packPollPending = false,
        packRebuilding = false, packReloadAfterOperation = false,
        packListAfterOperation = false, packPollFailed = false;
@@ -500,12 +536,52 @@ class Workspace {
   void place(HWND h, int x, int y, int w, int hgt) {
     MoveWindow(h, px(x), px(y), px(std::max(1, w)), px(std::max(1, hgt)), TRUE);
   }
+  struct PanelPlacement { HWND h; int x, y, w, height; };
+  void place_panel(HWND panel, const std::vector<PanelPlacement> &items) {
+    constexpr UINT flags = SWP_NOZORDER | SWP_NOACTIVATE | SWP_NOREDRAW | SWP_NOCOPYBITS;
+    HDWP batch = BeginDeferWindowPos(static_cast<int>(items.size()));
+    for (const auto &p : items) {
+      if (!batch) break;
+      batch = DeferWindowPos(batch, p.h, nullptr, px(p.x), px(p.y),
+                             px(std::max(1, p.w)), px(std::max(1, p.height)), flags);
+    }
+    const bool placed = batch && EndDeferWindowPos(batch);
+    if (!placed)
+      for (const auto &p : items)
+        SetWindowPos(p.h, nullptr, px(p.x), px(p.y), px(std::max(1, p.w)),
+                     px(std::max(1, p.height)), flags);
+    // Moving partially clipped child controls must not copy their previous
+    // pixels. The form and general panel use WS_EX_COMPOSITED so this complete
+    // descendant repaint is presented together, without exposing each label's
+    // erase/draw cycle. Queue painting so a burst of scroll messages can share
+    // one frame. Do not hold a panel DC beyond its paint operation.
+    RedrawWindow(panel, nullptr, nullptr,
+                 RDW_INVALIDATE | RDW_ERASE | RDW_ALLCHILDREN);
+  }
   static LRESULT CALLBACK field_proc(HWND h, UINT message_, WPARAM w, LPARAM l,
                                      UINT_PTR, DWORD_PTR context) {
     auto *app = reinterpret_cast<Workspace *>(context);
+    if (GetParent(h) == app->generalPanel) {
+      if (message_ == WM_SETFOCUS) {
+        const int previous = app->generalScroll;
+        RECT r{}, client{};
+        GetWindowRect(h, &r); MapWindowPoints(nullptr, app->generalPanel, reinterpret_cast<POINT *>(&r), 2);
+        GetClientRect(app->generalPanel, &client);
+        if (r.top < 0) app->generalScroll += MulDiv(r.top - app->px(8), 96, app->dpi);
+        else if (r.bottom > client.bottom)
+          app->generalScroll += MulDiv(r.bottom - client.bottom + app->px(8), 96, app->dpi);
+        if (app->generalScroll != previous) app->layout_general();
+      }
+      if (message_ == WM_MOUSEWHEEL) {
+        app->panel_mouse_wheel(app->generalPanel, w);
+        return 0;
+      }
+      return DefSubclassProc(h, message_, w, l);
+    }
     if (message_ == WM_SETFOCUS) {
       auto found = app->fieldIds.find(GetDlgCtrlID(h));
       if (found != app->fieldIds.end() && found->second < app->fields.size()) {
+        const int previous = app->formScroll;
         const auto &field = app->fields[found->second];
         RECT client{};
         GetClientRect(app->form, &client);
@@ -514,13 +590,12 @@ class Workspace {
           app->formScroll = field.y;
         else if (field.y + field.height > app->formScroll + visible)
           app->formScroll = field.y + field.height - visible;
-        app->layout_fields();
+        if (app->formScroll != previous) app->layout_fields();
       }
     }
     if (message_ == WM_MOUSEWHEEL &&
         !SendMessageW(h, CB_GETDROPPEDSTATE, 0, 0)) {
-      app->scroll(app->form, SB_VERT, 0,
-                  -GET_WHEEL_DELTA_WPARAM(w) * 48 / WHEEL_DELTA);
+      app->panel_mouse_wheel(app->form, w);
       return 0;
     }
     if (message_ == WM_NCDESTROY)
@@ -614,9 +689,11 @@ class Workspace {
              getstr(candidate, "manifestSha256") == getstr(pin, "manifestSha256") &&
              (!pin.contains("packId") || getstr(candidate, "packId") == getstr(pin, "packId"));
     };
-    for (const auto &candidate : catalog.get("toolVersions").get(id).array_items())
-      if (matches(candidate))
-        return candidate;
+    const auto &versions = catalog.get("toolVersions").get(id);
+    if (versions.is_array())
+      for (const auto &candidate : versions.array_items())
+        if (matches(candidate))
+          return candidate;
     const auto &latest = tool(id);
     return matches(latest) ? latest : missing;
   }
@@ -1171,7 +1248,8 @@ class Workspace {
     if (!refWindow)
       return;
     const bool idle = ready && !busy && !closing && !packBusy &&
-                      !packActionPending && !refBusy && !refActionPending;
+                      !packActionPending && !refBusy && !refActionPending &&
+                      !activeRequest && outgoing.empty();
     for (HWND h : {refRelease, refQuery, refSearch, refSpecies, refFiles,
                    refDestination, refBrowse, refLocal, refTarget})
       EnableWindow(h, idle);
@@ -1747,17 +1825,23 @@ class Workspace {
     if (method == "references/targets" && refWindow) {
       refTargets = result.get("targets");
       SendMessageW(refTarget, CB_RESETCONTENT, 0, 0);
+      int targetIndex = 0, preferredTarget = 0;
       for (const auto &target : refTargets.array_items()) {
+        if (getstr(state.get("inspector"), "kind") == "source" &&
+            getstr(target, "source_id") == selected)
+          preferredTarget = targetIndex;
         auto label = wt(target, "label") + L" (" + wt(target, "type") + L")";
         if (!getstr(target, "current_path").empty())
           label += L" · replace current file";
         SendMessageW(refTarget, CB_ADDSTRING, 0, reinterpret_cast<LPARAM>(label.c_str()));
+        ++targetIndex;
       }
       if (!refTargets.array_items().empty())
-        SendMessageW(refTarget, CB_SETCURSEL, 0, 0);
+        SendMessageW(refTarget, CB_SETCURSEL, preferredTarget, 0);
       else
         SetWindowTextW(refNotice, wt(result, "notice",
-            "No compatible input in this workspace. Add a tool that accepts this reference first.").c_str());
+            workflowMode ? "No compatible workflow input. Use Add input to create a reference input first."
+                         : "No compatible input. Select a tool that accepts this reference first.").c_str());
     } else if (method == "references/open") {
       const auto path = wt(result, "path");
       if (!path.empty() && reinterpret_cast<INT_PTR>(ShellExecuteW(
@@ -1795,7 +1879,7 @@ class Workspace {
              {FILE_SAVE_PIPELINE, L"Save pipeline..."},
              {FILE_SAVE_PRESET, L"Save selected tool settings..."},
              {FILE_LOAD, L"Load saved pipeline or settings..."},
-             {FILE_HISTORY, L"Run history..."},
+             {FILE_HISTORY, L"Recorded results..."},
              {FILE_IMPORT, L"Manage tools..."},
              {MANAGE_REFERENCES, L"References..."},
              {FILE_CHECK, L"Check installation"},
@@ -1807,24 +1891,49 @@ class Workspace {
     AppendMenuW(menu, MF_POPUP, reinterpret_cast<UINT_PTR>(file), L"File");
     AppendMenuW(menu, MF_POPUP, reinterpret_cast<UINT_PTR>(view), L"View");
     SetMenu(window, menu);
+    modeTools = make(L"BUTTON", L"Tools", WS_TABSTOP | BS_OWNERDRAW, MODE_TOOLS);
+    modeWorkflow = make(L"BUTTON", L"Workflow", WS_TABSTOP | BS_OWNERDRAW, MODE_WORKFLOW);
+    generalSettings = button(L"General settings", GENERAL_SETTINGS);
+    saveCurrent = button(L"Save settings...", SAVE_CURRENT);
+    loadCurrent = button(L"Load saved...", LOAD_CURRENT);
+    resultsList = make(L"BUTTON", L"Results", WS_TABSTOP | BS_OWNERDRAW, RESULTS_LIST);
+    resetLayout = button(L"Arrange", RESET_LAYOUT);
+    addInput = button(L"Add input...", ADD_INPUT);
+    zoomOut = button(L"−", ZOOM_OUT);
+    zoomIn = button(L"+", ZOOM_IN);
+    zoomReset = button(L"100%", ZOOM_RESET);
+    toolsHeading = make(L"STATIC", L"Tools", SS_LEFT, 0);
+    centerHeading = make(L"STATIC", L"Run a tool", SS_LEFT, 0);
+    rightHeading = make(L"STATIC", L"General settings", SS_LEFT, 0);
+    nameLabel = make(L"STATIC", L"Analysis name", SS_LEFT, 0);
+    inputLabel = make(L"STATIC", L"Input folder", SS_LEFT, 0);
+    inputHelp = make(L"STATIC", L"File pickers start here. Select each tool's input files explicitly.", SS_LEFT, 0);
+    outputLabel = make(L"STATIC", L"Output folder", SS_LEFT, 0);
+    outputHelp = make(L"STATIC", L"Each run gets its own folder with results, methods and logs.", SS_LEFT, 0);
+    referenceHelp = make(L"STATIC", L"Discover Ensembl references or reuse verified local downloads.", SS_LEFT, 0);
+    inputFolder = make(L"EDIT", root + L"\\examples", WS_TABSTOP | ES_AUTOHSCROLL,
+                       INPUT_FOLDER, nullptr, WS_EX_CLIENTEDGE);
+    browseInput = button(L"Browse input folder...", BROWSE_INPUT);
+    for (HWND h : {toolsHeading, centerHeading, rightHeading, nameLabel, inputLabel, outputLabel})
+      SendMessageW(h, WM_SETFONT, reinterpret_cast<WPARAM>(bold), FALSE);
     name = make(L"EDIT", L"Untitled analysis", WS_TABSTOP | ES_AUTOHSCROLL,
                 NAME, nullptr, WS_EX_CLIENTEDGE);
     output = make(L"EDIT", root + L"\\results", WS_TABSTOP | ES_AUTOHSCROLL,
                   OUTPUT, nullptr, WS_EX_CLIENTEDGE);
-    browse = button(L"Results folder...", BROWSE_OUTPUT);
+    browse = button(L"Browse output folder...", BROWSE_OUTPUT);
     manageReferences = button(L"References...", MANAGE_REFERENCES);
-    run = button(L"Review and run", RUN);
+    run = make(L"BUTTON", L"Run tool", WS_TABSTOP | BS_OWNERDRAW, RUN);
     cancel = button(L"Cancel run", CANCEL);
     review = button(L"Methods", REVIEW);
     back = button(L"Back to workspace", BACK_WORKSPACE);
     search = make(L"EDIT", L"", WS_TABSTOP | ES_AUTOHSCROLL, SEARCH, nullptr,
                   WS_EX_CLIENTEDGE);
     SendMessageW(search, EM_SETCUEBANNER, FALSE,
-                 reinterpret_cast<LPARAM>(L"Search tasks or tools"));
+                 reinterpret_cast<LPARAM>(L"Search tools"));
     category = make(L"COMBOBOX", L"",
                     WS_TABSTOP | CBS_DROPDOWNLIST | WS_VSCROLL, CATEGORY);
     tasks = make(WC_LISTVIEWW, L"Available tasks",
-                 WS_TABSTOP | LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS,
+                 WS_TABSTOP | LVS_REPORT | LVS_NOCOLUMNHEADER | LVS_SINGLESEL | LVS_SHOWSELALWAYS,
                  TASKS, nullptr, WS_EX_CLIENTEDGE);
     ListView_SetExtendedListViewStyle(
         tasks, LVS_EX_FULLROWSELECT | LVS_EX_DOUBLEBUFFER | LVS_EX_LABELTIP);
@@ -1833,7 +1942,7 @@ class Workspace {
     col.pszText = const_cast<wchar_t *>(L"Task library");
     col.cx = px(195);
     ListView_InsertColumn(tasks, 0, &col);
-    add = button(L"Add selected task", ADD);
+    add = button(L"Add to workflow", ADD);
     manageTools = button(L"Manage tools...", MANAGE_TOOLS);
     clearFilter = button(L"Show all tasks", CLEAR_FILTER);
     steps = make(WC_LISTVIEWW, L"Pipeline steps by dependency level",
@@ -1853,13 +1962,22 @@ class Workspace {
         WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_HSCROLL | WS_VSCROLL |
             WS_CLIPSIBLINGS,
         0, 0, 1, 1, window, reinterpret_cast<HMENU>(DAG), instance, this);
+    canvas_configure_gestures();
     form = CreateWindowExW(
-        WS_EX_CONTROLPARENT, L"WorkbenchNativeSurface051",
+        WS_EX_CONTROLPARENT | WS_EX_COMPOSITED, L"WorkbenchNativeSurface051",
         L"Step inputs and options",
         WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_CLIPCHILDREN | WS_CLIPSIBLINGS,
         0, 0, 1, 1, window, reinterpret_cast<HMENU>(FORM), instance, this);
     status = make(L"STATIC", L"Starting the local analysis engine...", SS_LEFT,
                   STATUS);
+    generalPanel = CreateWindowExW(WS_EX_CONTROLPARENT | WS_EX_COMPOSITED, L"WorkbenchNativeSurface051",
+        L"General settings", WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_CLIPCHILDREN,
+        0, 0, 1, 1, window, nullptr, instance, this);
+    for (HWND h : {nameLabel, name, inputLabel, inputFolder, browseInput, inputHelp,
+                   outputLabel, output, browse, outputHelp, manageReferences, referenceHelp})
+      SetParent(h, generalPanel);
+    for (HWND h : {name, inputFolder, browseInput, output, browse, manageReferences})
+      SetWindowSubclass(h, field_proc, 1, reinterpret_cast<DWORD_PTR>(this));
     SetTimer(window, 1, 400, nullptr);
     layout();
   }
@@ -1868,41 +1986,103 @@ class Workspace {
     GetClientRect(window, &rc);
     width = std::max(1, MulDiv(rc.right, 96, dpi));
     height = std::max(1, MulDiv(rc.bottom, 96, dpi));
-    int side = 216, main = side + 24, mw = std::max(400, width - main - 18),
-        top = 108, dh = std::clamp(height / 3, 145, 255), body = top + dh + 12,
-        bh = std::max(90, height - body - 54),
-        sw = std::clamp(mw / 3, 164, 230);
-    place(name, 18, 14, std::max(250, width - 454), 32);
-    place(review, width - 418, 14, 92, 32);
-    place(run, width - 316, 14, 156, 32);
-    place(cancel, width - 150, 14, 132, 32);
-    place(browse, 18, 57, 138, 32);
-    place(output, 166, 57, std::max(100, width - 320), 32);
-    place(manageReferences, width - 142, 57, 124, 32);
-    place(search, 18, top, side - 18, 32);
-    place(category, 18, top + 40, side - 18, 230);
-    const bool filtering = !getstr(state, "pendingSource").empty();
-    place(tasks, 18, top + 80 + (filtering ? 38 : 0), side - 18,
-          std::max(70, height - top - 204 - (filtering ? 38 : 0)));
+    const int left = 232, right = 320, center = left + 1,
+              centerWidth = std::max(250, width - left - right - 2),
+              rightX = width - right + 16, rightWidth = right - 32,
+              bodyHeight = std::max(160, height - 174), footer = height - 64;
+    const bool canvas = workflowMode || showingHistory;
+    const bool general = !showingHistory && (!workflowMode || generalVisible || selected.empty());
+    place(modeTools, 216, 7, 90, 34);
+    place(modeWorkflow, 314, 7, 110, 34);
+    place(resultsList, width - 112, 7, 96, 34);
+    place(toolsHeading, 16, 64, 200, 24);
+    place(search, 12, 98, left - 24, 32);
+    place(category, 12, 140, left - 24, 240);
+    const bool filtering = workflowMode && !getstr(state, "pendingSource").empty();
+    place(clearFilter, 12, 180, left - 24, 30);
     ShowWindow(clearFilter, filtering ? SW_SHOW : SW_HIDE);
-    place(add, 18, height - 112, side - 18, 32);
-    place(manageTools, 18, height - 72, side - 18, 32);
-    place(clearFilter, 18, top + 80, side - 18, 30);
-    place(dag, main, top, mw, dh);
-    place(steps, main, body, sw, bh - 78);
-    place(remove, main, body + bh - 70, sw / 2 - 4, 30);
-    place(undo, main + sw / 2 + 4, body + bh - 70, sw / 2 - 4, 30);
-    place(up, main, body + bh - 34, sw / 2 - 4, 30);
-    place(down, main + sw / 2 + 4, body + bh - 34, sw / 2 - 4, 30);
-    place(form, main + sw + 12, body, mw - sw - 12, bh);
-    place(status, 18, height - 30, width - 36, 24);
-    place(back, main, top + 5, 170, 28);
+    place(tasks, 12, filtering ? 216 : 182, left - 24,
+          std::max(100, height - (filtering ? 216 : 182) - (workflowMode ? 166 : 84)));
+    place(addInput, 12, height - 154, left - 24, 32);
+    ShowWindow(addInput, workflowMode && !showingHistory ? SW_SHOW : SW_HIDE);
+    place(add, 12, height - 114, left - 24, 32);
+    ShowWindow(add, workflowMode && !showingHistory ? SW_SHOW : SW_HIDE);
+    place(manageTools, 12, height - 72, left - 24, 32);
+    place(centerHeading, center + 16, 65, centerWidth - (canvas ? 258 : 32), 26);
+    SetWindowTextW(centerHeading, showingHistory ? L"Recorded results" :
+                   workflowMode ? L"Workflow" : L"Run a tool");
+    place(rightHeading, rightX, 65, rightWidth - (workflowMode ? 145 : 0), 26);
+    SetWindowTextW(rightHeading, general ? L"General settings" : L"Tool options");
+    if (!general && getstr(state.get("inspector"), "kind") == "source")
+      SetWindowTextW(rightHeading, L"Input options");
+    place(generalSettings, width - 157, 59, 141, 32);
+    SetWindowTextW(generalSettings, general ? L"Tool options" : L"General settings");
+    ShowWindow(generalSettings, workflowMode && !showingHistory ? SW_SHOW : SW_HIDE);
+    place(generalPanel, width - right + 1, 102, right - 2, bodyHeight);
+    ShowWindow(generalPanel, general ? SW_SHOW : SW_HIDE);
+    layout_general();
+    place(dag, center, 102, centerWidth, bodyHeight);
+    ShowWindow(dag, canvas ? SW_SHOW : SW_HIDE);
+    place(form, canvas ? width - right + 1 : center, 102,
+          canvas ? right - 2 : centerWidth, bodyHeight);
+    ShowWindow(form, !canvas || !general ? SW_SHOW : SW_HIDE);
+    ShowWindow(steps, SW_HIDE);
+    ShowWindow(up, SW_HIDE);
+    ShowWindow(down, SW_HIDE);
+    place(remove, width - right + 12, footer, 84, 32);
+    place(undo, width - right + 104, footer, 72, 32);
+    place(resetLayout, width - right + 184, footer, 120, 32);
+    for (HWND h : {remove, undo, resetLayout})
+      ShowWindow(h, workflowMode && !showingHistory ? SW_SHOW : SW_HIDE);
+    place(run, center + 12, footer, 118, 32);
+    SetWindowTextW(run, workflowMode ? L"Run workflow" : L"Run tool");
+    place(review, center + 138, footer, 84, 32);
+    place(cancel, center + 230, footer, 98, 32);
+    ShowWindow(cancel, busy ? SW_SHOW : SW_HIDE);
+    place(zoomOut, center + centerWidth - 150, footer, 34, 32);
+    place(zoomReset, center + centerWidth - 110, footer, 62, 32);
+    place(zoomIn, center + centerWidth - 42, footer, 34, 32);
+    for (HWND h : {zoomOut, zoomReset, zoomIn})
+      ShowWindow(h, canvas && !busy ? SW_SHOW : SW_HIDE);
+    place(saveCurrent, canvas ? center + centerWidth - 248 : width - right + 12,
+          canvas ? 59 : footer, canvas ? 126 : 146, 32);
+    place(loadCurrent, canvas ? center + centerWidth - 114 : width - right + 166,
+          canvas ? 59 : footer, canvas ? 102 : 142, 32);
+    ShowWindow(saveCurrent, showingHistory ? SW_HIDE : SW_SHOW);
+    ShowWindow(loadCurrent, showingHistory ? SW_HIDE : SW_SHOW);
+    SetWindowTextW(saveCurrent, workflowMode ? L"Save workflow..." : L"Save settings...");
+    place(back, center + 12, footer, 180, 32);
     ShowWindow(back, showingHistory ? SW_SHOW : SW_HIDE);
-    ListView_SetColumnWidth(tasks, 0, px(side - 40));
-    ListView_SetColumnWidth(steps, 0, px(sw - 22));
+    for (HWND h : {run, review}) ShowWindow(h, showingHistory ? SW_HIDE : SW_SHOW);
+    place(status, 12, height - 24, width - 24, 22);
+    ListView_SetColumnWidth(tasks, 0, px(left - 46));
     layout_fields();
     InvalidateRect(dag, nullptr, FALSE);
     InvalidateRect(window, nullptr, TRUE);
+  }
+  void layout_general() {
+    if (!generalPanel) return;
+    RECT r{};
+    GetClientRect(generalPanel, &r);
+    const int w = std::max(200, MulDiv(r.right, 96, dpi)) - 28,
+              h = std::max(1, MulDiv(r.bottom, 96, dpi));
+    generalScroll = std::clamp(generalScroll, 0, std::max(0, 532 - h));
+    SCROLLINFO si{sizeof(si), SIF_RANGE | SIF_PAGE | SIF_POS | SIF_DISABLENOSCROLL};
+    si.nMax = 531; si.nPage = h; si.nPos = generalScroll;
+    SetScrollInfo(generalPanel, SB_VERT, &si, TRUE);
+    place_panel(generalPanel, {
+      {nameLabel, 14, 10 - generalScroll, w, 22},
+      {name, 14, 36 - generalScroll, w, 32},
+      {inputLabel, 14, 88 - generalScroll, w, 22},
+      {inputFolder, 14, 114 - generalScroll, w, 32},
+      {browseInput, 14, 154 - generalScroll, w, 32},
+      {inputHelp, 14, 194 - generalScroll, w, 42},
+      {outputLabel, 14, 256 - generalScroll, w, 22},
+      {output, 14, 282 - generalScroll, w, 32},
+      {browse, 14, 322 - generalScroll, w, 32},
+      {outputHelp, 14, 362 - generalScroll, w, 42},
+      {manageReferences, 14, 428 - generalScroll, w, 34},
+      {referenceHelp, 14, 472 - generalScroll, w, 42}});
   }
   void enabled() {
     bool edit = ready && !busy && !packBusy && !packActionPending &&
@@ -1910,12 +2090,20 @@ class Workspace {
                 !showingHistory && !closing &&
                 !activeRequest && outgoing.empty();
     for (HWND h :
-         {name, search, category, tasks, add, steps, remove, undo, up, down})
+         {name, search, category, tasks, add, steps, remove, undo, up, down,
+          modeTools, modeWorkflow, generalSettings, saveCurrent, loadCurrent,
+          resetLayout, inputFolder, browseInput, addInput})
       EnableWindow(h, edit);
+    for (HWND h : {zoomOut, zoomReset, zoomIn}) {
+      EnableWindow(h, ready && !closing);
+      ShowWindow(h, (workflowMode || showingHistory) && !busy ? SW_SHOW : SW_HIDE);
+    }
     EnableWindow(undo, edit && state.get("canUndo").boolean());
     EnableWindow(run, edit && !graph().get("nodes").array_items().empty());
     EnableWindow(review, ready && !activeRequest && outgoing.empty());
+    EnableWindow(resultsList, ready && !busy && !activeRequest && outgoing.empty());
     EnableWindow(cancel, busy && !closing);
+    ShowWindow(cancel, busy ? SW_SHOW : SW_HIDE);
     EnableWindow(output, !busy && !packBusy && !packActionPending && !refBusy && !refActionPending);
     EnableWindow(browse, !busy && !packBusy && !packActionPending && !refBusy && !refActionPending);
     EnableWindow(manageTools, ready && !busy && !closing && !showingHistory);
@@ -1939,6 +2127,14 @@ class Workspace {
   }
   void refresh_tasks(bool categories = false) {
     rebuilding = true;
+    std::string keepTool;
+    const int previous = ListView_GetNextItem(tasks, -1, LVNI_SELECTED);
+    if (previous >= 0 && static_cast<size_t>(previous) < taskIds.size())
+      keepTool = taskIds[static_cast<size_t>(previous)];
+    // An empty standalone session must not inherit a selected library row
+    // from Workflow mode: clicking that row needs to open its first form.
+    if (!workflowMode)
+      keepTool = getstr(state.get("inspector").get("tool"), "id");
     if (categories) {
       SendMessageW(category, CB_RESETCONTENT, 0, 0);
       SendMessageW(category, CB_ADDSTRING, 0,
@@ -1959,13 +2155,13 @@ class Workspace {
     if (state.get("compatibleTools").is_array())
       for (const auto &c : state.get("compatibleTools").array_items())
         compatible.insert(text(c));
-    const bool filtered = !getstr(state, "pendingSource").empty();
+    const bool filtered = workflowMode && !getstr(state, "pendingSource").empty();
     for (const auto &entry : catalog.get("tools").object_items()) {
       const auto &t = entry.second;
-      std::wstring label = wt(t, "name"),
+      std::wstring label = wt(t, "displayName", getstr(t, "name")),
                    categoryName = wt(t, "category", "Other");
       if (!query.empty() &&
-          lower(label + L" " + wt(t, "packId") + L" " + wt(t, "description"))
+          lower(label + L" " + wt(t, "packId") + L" " + wt(t, "description") + L" " + wt(t, "searchTerms"))
                   .find(query) == std::wstring::npos)
         continue;
       if (!cat.empty() && cat != L"All categories" && cat != categoryName)
@@ -1977,6 +2173,8 @@ class Workspace {
       row.iItem = static_cast<int>(taskIds.size());
       row.pszText = label.data();
       ListView_InsertItem(tasks, &row);
+      if (entry.first == keepTool)
+        ListView_SetItemState(tasks, row.iItem, LVIS_SELECTED, LVIS_SELECTED);
       taskIds.push_back(entry.first);
     }
     rebuilding = false;
@@ -2133,17 +2331,29 @@ class Workspace {
       form_action(L"Show recorded methods", "historical-methods");
       form_action(L"Open results folder", "historical-open");
     } else if (selected.empty() || inspector.is_null()) {
-      form_text(L"Build your analysis", true);
-      form_text(L"Search the task library and add a tool. Each input names its "
-                L"exact file slot or producing step. Shared outputs form "
-                L"branches automatically.");
-      form_text(L"Drag a task from the library into the diagram, or select it "
-                L"and choose Add selected task.");
+      form_text(workflowMode ? L"Build a workflow" : L"Choose a tool to begin", true);
+      form_text(workflowMode
+          ? L"Drag tools from the left onto the canvas. Connect an output port to a compatible input, then select a tool to edit its options here."
+          : L"Select a tool from the panel on the left. Its input files and run options appear here.");
+      form_text(L"Analysis runs locally. Use General settings for folders and References for reusable genome and annotation downloads.");
+    } else if (getstr(inspector, "kind") == "source") {
+      form_text(wide(display_id(selected)) + L" · " + wt(inspector, "name"), true);
+      form_text(L"Workflow input — choose files once and connect this input to each tool that needs them.");
+      form_text(L"Input name", true);
+      add_field("rename-source", "name", object({{"type", "text"}}), getstr(inspector, "name"));
+      for (const auto &field : inspector.get("fields").array_items()) {
+        form_text(wt(field, "label", getstr(field, "id")), true);
+        add_field("source", getstr(field, "id"), field, getstr(field, "value"), selected);
+        if (!getstr(field, "help").empty()) form_text(wt(field, "help"));
+      }
+      if (getstr(inspector, "type") == "reference")
+        form_action(L"Choose from References...", "input-references");
     } else {
       form_text(wide(display_id(selected)) + L" · " + wt(inspector, "name"),
                 true);
       const auto &t = inspector.get("tool");
-      form_text(wt(t, "description"));
+      form_text(wt(t, "displayName", getstr(t, "name")) + L"  ·  " + wt(t, "packVersion"));
+      form_text(wt(t, "displayDescription", getstr(t, "description")));
       for (const auto &node : graph().get("nodes").array_items()) {
         if (getstr(node, "id") != selected || !getstr(tool(node), "id").empty())
           continue;
@@ -2160,7 +2370,7 @@ class Workspace {
         form_action(L"Show required pack details...", "required-pack-details", "", pin);
         break;
       }
-      form_text(L"Step name", true);
+      form_text(workflowMode ? L"Step name" : L"Tool run name", true);
       add_field("rename", "name", object({{"type", "text"}}),
                 getstr(inspector, "name"));
       for (const auto &port : inspector.get("ports").array_items()) {
@@ -2173,11 +2383,14 @@ class Workspace {
             sources += L"\n";
           sources += wt(ref, "label", getstr(ref, "ref", text(ref)));
         }
-        form_text(sources.empty()
+        if (workflowMode) {
+          form_text(sources.empty()
                       ? L"No source connected — choose a named input or output."
                       : L"From: " + sources);
         form_action(L"Choose connected source(s)...", "connect", pid, port);
-        form_action(L"Add a new file input slot", "add-source", pid, port);
+        } else if (sources.empty()) {
+          form_action(L"Choose files for this input", "add-source", pid, port);
+        }
         if (!getstr(port, "help").empty())
           form_text(wt(port, "help"));
       }
@@ -2225,10 +2438,12 @@ class Workspace {
             consumers += wt(c, "displayId", getstr(c, "nodeId")) + L" · " +
                          wt(c, "name") + L" → " + wt(c, "portLabel");
           }
-          form_text(consumers.empty() ? L"No downstream consumer yet."
+          if (workflowMode) {
+            form_text(consumers.empty() ? L"No downstream consumer yet."
                                       : L"Used by: " + consumers);
           form_action(L"Use this output in another task...", "use-output",
                       getstr(out, "ref"));
+          }
         }
       }
     }
@@ -2265,14 +2480,15 @@ class Workspace {
     si.nPage = fh;
     si.nPos = formScroll;
     SetScrollInfo(form, SB_VERT, &si, TRUE);
+    std::vector<PanelPlacement> positions;
     for (auto &f : fields) {
       int fw_ = fw - 32 - (f.button ? 94 : 0);
-      place(f.h, 12, f.y - formScroll, fw_,
-            getstr(f.schema, "type") == "choice" ? 260 : f.height);
+      positions.push_back({f.h, 12, f.y - formScroll, fw_,
+            getstr(f.schema, "type") == "choice" ? 260 : f.height});
       if (f.button)
-        place(f.button, fw - 108, f.y - formScroll, 88, 34);
+        positions.push_back({f.button, fw - 108, f.y - formScroll, 88, 34});
     }
-    InvalidateRect(form, nullptr, TRUE);
+    place_panel(form, positions);
   }
   std::string field_value(const Field &f) const {
     auto type = getstr(f.schema, "type");
@@ -2308,10 +2524,11 @@ class Workspace {
     if (rebuilding || busy || showingHistory || !ready)
       return;
     Json params = Json::object(), files = Json::object(),
-         payload = object({{"nodeId", selected}});
+         payload = getstr(state.get("inspector"), "kind") == "source"
+                       ? object({{"sourceId", selected}}) : object({{"nodeId", selected}});
     bool changed = false;
     for (const auto &f : fields) {
-      if (f.kind != "param" && f.kind != "source" && f.kind != "rename")
+      if (f.kind != "param" && f.kind != "source" && f.kind != "rename" && f.kind != "rename-source")
         continue;
       auto value = field_value(f);
       if (value == narrow(f.initial))
@@ -2409,7 +2626,7 @@ class Workspace {
     if (secondary) {
       const auto path = pick(window, getstr(f.schema, "type") == "directory",
                              false, wt(f.schema, "filter", "All files|*.*"),
-                             L"Choose " + wt(f.schema, "label"));
+                             L"Choose " + wt(f.schema, "label"), control_text(inputFolder));
       if (!path.empty()) {
         SetWindowTextW(f.h, path.c_str());
         commit_all();
@@ -2424,6 +2641,8 @@ class Workspace {
     commit_all();
     if (f.kind == "add-source")
       model("add_source", object({{"nodeId", f.node}, {"portId", f.key}}));
+    else if (f.kind == "input-references")
+      show_references();
     else if (f.kind == "use-output")
       model("use_output", object({{"ref", f.key}}));
     else if (f.kind == "historical-methods")
@@ -2451,11 +2670,19 @@ class Workspace {
   void snapshot(Json value) {
     if (value.contains("model"))
       value = value.get("model");
+    const auto previousSelected = selected;
+    const bool previousMode = workflowMode;
     state = std::move(value);
+    workflowMode = getstr(state, "mode", "tool") == "workflow";
     if (state.contains("catalog"))
       catalog = state.get("catalog");
     selected =
         getstr(state, "selected", getstr(state.get("inspector"), "nodeId"));
+    if (previousMode != workflowMode || previousSelected != selected) {
+      formScroll = 0;
+      formWheelRemainder = 0;
+      generalVisible = false;
+    }
     rebuilding = true;
     SetWindowTextW(name,
                    wt(state.get("graph"), "name", "Untitled analysis").c_str());
@@ -2464,19 +2691,44 @@ class Workspace {
     refresh_steps();
     rebuild_inspector();
     layout();
+    if (refWindow) reference_targets();
     InvalidateRect(dag, nullptr, FALSE);
     enabled();
   }
-  void add_task() {
-    int i = ListView_GetNextItem(tasks, -1, LVNI_SELECTED);
+  void add_task(int i = -1) {
+    if (i < 0)
+      i = ListView_GetNextItem(tasks, -1, LVNI_SELECTED);
     if (i < 0 || static_cast<size_t>(i) >= taskIds.size())
       return;
     commit_all();
+    if (!workflowMode) {
+      send("workspace/tool", object({{"toolId", taskIds[static_cast<size_t>(i)]}}));
+      return;
+    }
     const auto pendingSource = getstr(state, "pendingSource");
     Json payload = object({{"toolId", taskIds[static_cast<size_t>(i)]}});
     if (!pendingSource.empty())
       payload["fromRef"] = pendingSource;
     model("add_tool", payload);
+  }
+  void add_workflow_input() {
+    // The modal pumps host responses; keep its choices independent of snapshots.
+    const Json types = state.get("inputTypes");
+    if (!workflowMode || !types.is_array() || types.array_items().empty()) return;
+    Modal m;
+    m.owner = window; m.font = font; m.mode = 0;
+    m.title = L"Add workflow input";
+    m.message = L"Choose an input type. Select its files once, give it a name, then connect it to any compatible tools.";
+    m.confirm = L"Add input";
+    for (const auto &type : types.array_items()) m.labels.push_back(wt(type, "label"));
+    m.selected.push_back(0);
+    if (m.show() && !m.selected.empty()) {
+      const auto at = static_cast<size_t>(m.selected.front());
+      if (at < types.array_items().size()) {
+        commit_all();
+        model("add_input", object({{"inputType", getstr(types.array_items()[at], "id")}}));
+      }
+    }
   }
   void save(bool pipeline) {
     if (!pipeline && selected.empty()) {
@@ -2531,7 +2783,7 @@ class Workspace {
     Modal m;
     m.owner = window;
     m.font = font;
-    m.title = L"Run history";
+    m.title = L"Recorded results";
     m.message = data.get("omitted").integer() > 0
                     ? L"Recent runs are shown; older records remain in their "
                       L"result folders."
@@ -2628,6 +2880,7 @@ class Workspace {
       }
       reviewThenRun = false;
       submittedFields.clear();
+      pendingCanvasDrop = false;
       outgoing.clear();
       pending.clear();
       message(wt(response_, "error", "The local engine returned an error."));
@@ -2641,6 +2894,8 @@ class Workspace {
       pack_response(method, result);
     } else if (method.rfind("references/", 0) == 0) {
       reference_response(method, result);
+    } else if (method == "workspace/connection-targets") {
+      canvas_set_targets(result);
     } else if (method == "init") {
       ready = true;
       if (result.contains("catalog"))
@@ -2653,12 +2908,23 @@ class Workspace {
         send("check",
              object({{"output_folder", narrow(control_text(output))}}));
       }
-    } else if (method == "model" || method == "load" || method == "example") {
+    } else if (method == "model" || method == "load" || method == "example" ||
+               method == "workspace/mode" || method == "workspace/tool") {
       submittedFields.clear();
       snapshot(result);
+      if (method == "load" || method == "example") canvas_reset_positions();
+      if (pendingCanvasDrop && method == "model" && workflowMode &&
+          !selected.empty() && !canvasDropExisting.count(selected)) {
+        canvas_place_new_node(selected, canvasDropPoint);
+        pendingCanvasDrop = false;
+      }
       if (!getstr(state, "pendingSource").empty())
         status_text(L"Task library now shows tools compatible with the "
                     L"selected named output.");
+      else if (method == "workspace/mode" || method == "workspace/tool")
+        status_text(workflowMode
+                        ? L"Drag tools onto the canvas. Select a tool to edit its options."
+                        : L"Select a tool, choose its inputs and options, then run it locally.");
     } else if (method == "review") {
       std::wstring content;
       for (const auto &issue : result.get("issues").array_items())
@@ -2685,6 +2951,7 @@ class Workspace {
       enabled();
     } else if (method == "run/get") {
       historyRun = result;
+      canvas_enter_history();
       showingHistory = true;
       refresh_steps();
       rebuild_inspector();
@@ -2738,8 +3005,30 @@ class Workspace {
     }
     // Native edit notifications are not actions. Keep the draft intact while
     // typing; the next explicit operation commits it transactionally.
-    if (id == NAME || id == OUTPUT || id == SEARCH || id == CATEGORY)
+    if (id == NAME || id == OUTPUT || id == INPUT_FOLDER || id == SEARCH || id == CATEGORY)
       return;
+    if (id == GENERAL_SETTINGS) {
+      commit_all();
+      generalVisible = !generalVisible;
+      layout();
+      return;
+    }
+    if (id == RESET_LAYOUT) {
+      canvas_reset_positions();
+      return;
+    }
+    // View navigation is also available in read-only recorded workflows.
+    if (id == ZOOM_OUT || id == ZOOM_IN || id == ZOOM_RESET) {
+      if (id == ZOOM_RESET) canvas_zoom_reset();
+      else canvas_zoom_by(id == ZOOM_IN ? 1.2 : 1.0 / 1.2);
+      return;
+    }
+    if (id == BROWSE_INPUT) {
+      auto path = pick(window, true, false, L"", L"Choose the starting folder for input file pickers",
+                       control_text(inputFolder));
+      if (!path.empty()) SetWindowTextW(inputFolder, path.c_str());
+      return;
+    }
     if (id == ADD) {
       add_task();
       return;
@@ -2751,7 +3040,7 @@ class Workspace {
     }
     if (id == BROWSE_OUTPUT) {
       auto path = pick(window, true, false, L"",
-                       L"Choose the parent folder for new run results");
+                       L"Choose the parent folder for new run results", control_text(output));
       if (!path.empty())
         SetWindowTextW(output, path.c_str());
       return;
@@ -2762,6 +3051,7 @@ class Workspace {
     }
     if (id == BACK_WORKSPACE) {
       showingHistory = false;
+      canvas_leave_history();
       historyRun = Json::object();
       snapshot(state);
       layout();
@@ -2782,13 +3072,13 @@ class Workspace {
         send("open", object({{"run_id", identity}}));
       return;
     }
-    if (id == FILE_HISTORY) {
+    if (id == FILE_HISTORY || id == RESULTS_LIST) {
       commit_all();
       send("history");
       return;
     }
-    if (id == FILE_SAVE_PIPELINE) {
-      save(true);
+    if (id == FILE_SAVE_PIPELINE || id == SAVE_CURRENT) {
+      save(id == FILE_SAVE_PIPELINE || workflowMode);
       return;
     }
     if (id == FILE_SAVE_PRESET) {
@@ -2818,9 +3108,20 @@ class Workspace {
     }
     commit_all();
     switch (id) {
+    case MODE_TOOLS:
+    case MODE_WORKFLOW:
+      canvas_cancel_drag();
+      send("workspace/mode", object({{"mode", id == MODE_WORKFLOW ? "workflow" : "tool"}}));
+      break;
+    case ADD_INPUT:
+      add_workflow_input();
+      break;
     case REMOVE:
-      if (!selected.empty())
-        model("remove_step", object({{"nodeId", selected}}));
+      if (!selected.empty()) {
+        if (getstr(state.get("inspector"), "kind") == "source")
+          model("remove_source", object({{"sourceId", selected}}));
+        else model("remove_step", object({{"nodeId", selected}}));
+      }
       break;
     case UNDO:
       model("undo");
@@ -2841,6 +3142,7 @@ class Workspace {
       send("review");
       break;
     case FILE_NEW:
+      canvas_reset_positions();
       model("clear");
       break;
     case FILE_EXAMPLE:
@@ -2853,6 +3155,7 @@ class Workspace {
       save(false);
       break;
     case FILE_LOAD:
+    case LOAD_CURRENT:
       send("saved");
       break;
     case FILE_CHECK:
@@ -2862,158 +3165,30 @@ class Workspace {
       break;
     }
   }
-  void paint_dag() {
-    PAINTSTRUCT ps{};
-    HDC dc = BeginPaint(dag, &ps);
-    struct End {
-      HWND h;
-      PAINTSTRUCT *ps;
-      ~End() { EndPaint(h, ps); }
-    } end{dag, &ps};
-    RECT client{};
-    GetClientRect(dag, &client);
-    HDC mem = CreateCompatibleDC(dc);
-    HBITMAP bitmap = CreateCompatibleBitmap(dc, std::max<LONG>(1, client.right),
-                                            std::max<LONG>(1, client.bottom));
-    HGDIOBJ old = SelectObject(mem, bitmap);
-    FillRect(mem, &client, paper);
-    hits.clear();
-    int vw = std::max(1, MulDiv(client.right, 96, dpi)),
-        vh = std::max(1, MulDiv(client.bottom, 96, dpi));
-    auto rank = ranks();
-    std::map<int, std::vector<std::string>> levels;
-    std::map<std::string, const Json *> nodes;
-    std::set<std::string> usedSources;
-    for (const auto &node : graph().get("nodes").array_items())
-      for (const auto &port : node.get("inputs").object_items())
-        for (const auto &ref : port.second.array_items())
-          if (text(ref).rfind("input-", 0) == 0)
-            usedSources.insert(text(ref));
-    for (const auto &s : graph().get("sources").array_items()) {
-      const auto id = getstr(s, "id");
-      if (!usedSources.count(id))
-        continue;
-      levels[0].push_back(id);
-      nodes[id] = &s;
-    }
-    for (const auto &n : graph().get("nodes").array_items()) {
-      const auto id = getstr(n, "id");
-      levels[rank[id]].push_back(id);
-      nodes[id] = &n;
-    }
-    size_t maximum = 1;
-    for (const auto &level : levels)
-      maximum = std::max(maximum, level.second.size());
-    dagWidth = std::max(vw, static_cast<int>(maximum) * 218 + 32);
-    int maxRank = levels.empty() ? 0 : levels.rbegin()->first;
-    dagHeight = std::max(vh, 98 + maxRank * 112);
-    dagX = std::clamp(dagX, 0, std::max(0, dagWidth - vw));
-    dagY = std::clamp(dagY, 0, std::max(0, dagHeight - vh));
-    for (int bar : {SB_HORZ, SB_VERT}) {
-      SCROLLINFO si{sizeof(si), SIF_RANGE | SIF_PAGE | SIF_POS};
-      si.nMax = (bar == SB_HORZ ? dagWidth : dagHeight) - 1;
-      si.nPage = bar == SB_HORZ ? vw : vh;
-      si.nPos = bar == SB_HORZ ? dagX : dagY;
-      SetScrollInfo(dag, bar, &si, TRUE);
-    }
-    std::map<std::string, RECT> boxes;
-    for (const auto &level : levels) {
-      int total = static_cast<int>(level.second.size()) * 218;
-      int start = (dagWidth - total) / 2 + 9;
-      for (size_t i = 0; i < level.second.size(); ++i) {
-        int x = start + static_cast<int>(i) * 218, y = 16 + level.first * 112;
-        boxes[level.second[i]] = {x, y, x + 200,
-                                  y + (level.first == 0 ? 64 : 82)};
-      }
-    }
-    {
-      Gdiplus::Graphics g(mem);
-      g.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias);
-      g.ScaleTransform(dpi / 96.f, dpi / 96.f);
-      g.TranslateTransform(static_cast<float>(-dagX),
-                           static_cast<float>(-dagY));
-      for (const auto &n : graph().get("nodes").array_items()) {
-        auto target = boxes.find(getstr(n, "id"));
-        if (target == boxes.end())
-          continue;
-        for (const auto &port : n.get("inputs").object_items())
-          for (const auto &r : port.second.array_items()) {
-            std::string ref = text(r), source = ref.substr(0, ref.find("::"));
-            auto from = boxes.find(source);
-            if (from == boxes.end())
-              continue;
-            bool highlight = getstr(n, "id") == selected || source == selected;
-            Gdiplus::Pen pen(highlight ? Gdiplus::Color(255, 58, 93, 140)
-                                       : Gdiplus::Color(255, 177, 191, 207),
-                             highlight ? 2.4f : 1.3f);
-            float x1 = (from->second.left + from->second.right) / 2.f,
-                  y1 = static_cast<float>(from->second.bottom),
-                  x2 = (target->second.left + target->second.right) / 2.f,
-                  y2 = static_cast<float>(target->second.top);
-            g.DrawBezier(&pen, x1, y1, x1, (y1 + y2) / 2, x2, (y1 + y2) / 2, x2,
-                         y2);
-            g.DrawLine(&pen, x2, y2, x2 - 4, y2 - 7);
-            g.DrawLine(&pen, x2, y2, x2 + 4, y2 - 7);
-          }
-      }
-      for (const auto &entry : boxes) {
-        const auto &box = entry.second;
-        bool isSource = entry.first.rfind("input-", 0) == 0;
-        bool active = entry.first == selected;
-        rounded(g, static_cast<float>(box.left), static_cast<float>(box.top),
-                static_cast<float>(box.right - box.left),
-                static_cast<float>(box.bottom - box.top), 10,
-                active     ? RGB(229, 236, 246)
-                : isSource ? RGB(240, 244, 249)
-                           : PAPER,
-                active ? ACCENT : BORDER);
-        RECT screen{px(box.left - dagX), px(box.top - dagY),
-                    px(box.right - dagX), px(box.bottom - dagY)};
-        hits.push_back({screen, entry.first, isSource});
-      }
-    }
-    SetBkMode(mem, TRANSPARENT);
-    SetTextColor(mem, INK);
-    for (const auto &entry : boxes) {
-      const auto &n = *nodes[entry.first];
-      bool source = entry.first.rfind("input-", 0) == 0;
-      auto box = entry.second;
-      RECT line{px(box.left + 10 - dagX), px(box.top + 7 - dagY),
-                px(box.right - 10 - dagX), px(box.bottom - 7 - dagY)};
-      std::wstring title =
-          wide(display_id(entry.first) + " · " +
-               (source ? getstr(n, "label", getstr(n, "type")) : node_name(n)));
-      SelectObject(mem, bold);
-      DrawTextW(mem, title.c_str(), -1, &line,
-                DT_WORDBREAK | DT_NOPREFIX | DT_END_ELLIPSIS);
-    }
-    if (nodes.empty()) {
-      SelectObject(mem, font);
-      SetTextColor(mem, MUTED);
-      RECT textBox{px(22), px(20), client.right - px(22),
-                   client.bottom - px(10)};
-      const wchar_t *prompt =
-          L"Your pipeline diagram\n\nAdd a task to begin. Branches sharing "
-          L"an input stay on the same dependency level.";
-      DrawTextW(mem, prompt, -1, &textBox, DT_WORDBREAK | DT_NOPREFIX);
-    }
-    BitBlt(dc, 0, 0, client.right, client.bottom, mem, 0, 0, SRCCOPY);
-    SelectObject(mem, old);
-    DeleteObject(bitmap);
-    DeleteDC(mem);
+#include "workflow_canvas.h"
+  void panel_mouse_wheel(HWND panel, WPARAM w) {
+    // Precision wheels can report less than one logical pixel of movement.
+    // Retain that fraction per panel; zero must never become SB_LINEUP (0).
+    int &remainder = panel == generalPanel ? generalWheelRemainder : formWheelRemainder;
+    remainder -= GET_WHEEL_DELTA_WPARAM(w) * 48;
+    const int amount = remainder / WHEEL_DELTA;
+    remainder %= WHEEL_DELTA;
+    if (amount) scroll(panel, SB_VERT, 0, amount);
   }
   void scroll(HWND h, int bar, int action, int delta = 0) {
+    if (h == dag) { canvas_scroll(bar, action, delta); return; }
     RECT r{};
     GetClientRect(h, &r);
-    int extent = h == form        ? formExtent
+    int extent = h == generalPanel ? 532 : h == form ? formExtent
                  : bar == SB_HORZ ? dagWidth
                                   : dagHeight,
         page = MulDiv(bar == SB_HORZ ? r.right : r.bottom, 96, dpi),
-        *value = h == form        ? &formScroll
+        *value = h == generalPanel ? &generalScroll : h == form ? &formScroll
                  : bar == SB_HORZ ? &dagX
                                   : &dagY;
     SCROLLINFO si{sizeof(si), SIF_TRACKPOS};
     GetScrollInfo(h, bar, &si);
+    const int previous = *value;
     if (delta)
       *value += delta;
     else
@@ -3044,8 +3219,12 @@ class Workspace {
         break;
       }
     *value = std::clamp(*value, 0, std::max(0, extent - page));
+    if (*value == previous)
+      return;
     if (h == form)
       layout_fields();
+    else if (h == generalPanel)
+      layout_general();
     else
       InvalidateRect(dag, nullptr, FALSE);
   }
@@ -3060,6 +3239,15 @@ class Workspace {
     if (!app)
       return DefWindowProcW(h, m, w, l);
     try {
+      if (h == app->dag) {
+        if (m == WM_GESTURE && app->canvas_gesture(l)) return 0;
+        if (m == WM_GESTURENOTIFY) app->canvas_configure_gestures();
+        if (m == WM_MOUSELEAVE) { app->canvas_mouse_leave(); return 0; }
+        if (m == WM_KEYDOWN && app->canvas_key_down(w)) return 0;
+        if (m == WM_MOUSEWHEEL || m == WM_MOUSEHWHEEL) {
+          app->canvas_mouse_wheel(w, l, m == WM_MOUSEHWHEEL); return 0;
+        }
+      }
       if (m == WM_PAINT && GetDlgCtrlID(h) == DAG) {
         app->paint_dag();
         return 0;
@@ -3067,7 +3255,7 @@ class Workspace {
       if (m == WM_ERASEBKGND) {
         RECT r{};
         GetClientRect(h, &r);
-        FillRect(reinterpret_cast<HDC>(w), &r, app->paper);
+        FillRect(reinterpret_cast<HDC>(w), &r, h == app->generalPanel ? app->background : app->paper);
         return 1;
       }
       if (m == WM_VSCROLL || m == WM_HSCROLL) {
@@ -3075,23 +3263,19 @@ class Workspace {
         return 0;
       }
       if (m == WM_MOUSEWHEEL) {
-        app->scroll(h, (GET_KEYSTATE_WPARAM(w) & MK_SHIFT) ? SB_HORZ : SB_VERT,
-                    0, -GET_WHEEL_DELTA_WPARAM(w) * 48 / WHEEL_DELTA);
+        app->panel_mouse_wheel(h, w);
         return 0;
       }
-      if (m == WM_LBUTTONUP && h == app->dag) {
-        POINT p{GET_X_LPARAM(l), GET_Y_LPARAM(l)};
-        for (const auto &hit : app->hits)
-          if (PtInRect(&hit.box, p)) {
-            if (!hit.source && !app->showingHistory) {
-              app->commit_all();
-              app->model("select", object({{"nodeId", hit.id}}));
-            } else if (hit.source)
-              app->status_text(wide(display_id(hit.id)) +
-                               L" is a named shared input. Select a "
-                               L"consuming step to edit its binding.");
-            return 0;
-          }
+      if (h == app->dag) {
+        const POINT p{GET_X_LPARAM(l), GET_Y_LPARAM(l)};
+        if (m == WM_LBUTTONDOWN && app->canvas_mouse_down(p)) return 0;
+        if (m == WM_MOUSEMOVE && app->canvas_mouse_move(p)) return 0;
+        if (m == WM_LBUTTONUP && app->canvas_mouse_up(p)) return 0;
+        if (m == WM_CAPTURECHANGED || m == WM_CANCELMODE ||
+            (m == WM_KEYDOWN && w == VK_ESCAPE)) {
+          app->canvas_cancel_drag();
+          return 0;
+        }
       }
       if (m == WM_COMMAND || m == WM_CTLCOLORSTATIC || m == WM_CTLCOLOREDIT ||
           m == WM_CTLCOLORBTN)
@@ -3155,7 +3339,7 @@ class Workspace {
       return 0;
     case WM_GETMINMAXINFO: {
       auto *p = reinterpret_cast<MINMAXINFO *>(l);
-      p->ptMinTrackSize = {px(800), px(560)};
+      p->ptMinTrackSize = {px(1040), px(680)};
       return 0;
     }
     case WM_KEYDOWN:
@@ -3171,16 +3355,33 @@ class Workspace {
       return 0;
     case WM_NOTIFY: {
       auto *n = reinterpret_cast<NMHDR *>(l);
-      if (n->idFrom == TASKS && n->code == NM_DBLCLK) {
-        add_task();
+      if (n->idFrom == TASKS && n->code == LVN_ITEMCHANGED && !rebuilding && !workflowMode) {
+        const auto *item = reinterpret_cast<NMLISTVIEW *>(l);
+        if ((item->uNewState & LVIS_SELECTED) && !(item->uOldState & LVIS_SELECTED) &&
+            item->iItem >= 0 && static_cast<size_t>(item->iItem) < taskIds.size())
+          add_task(item->iItem);
         return 0;
       }
-      if (n->idFrom == TASKS && n->code == LVN_BEGINDRAG) {
+      if (n->idFrom == TASKS && n->code == NM_DBLCLK) {
+        // A refreshed library can receive a double-click before the new row
+        // becomes selected. Activate the actual clicked row, not stale state.
+        const auto *item = reinterpret_cast<NMITEMACTIVATE *>(l);
+        int row = item->iItem;
+        if (row < 0) {
+          LVHITTESTINFO hit{};
+          hit.pt = item->ptAction;
+          row = ListView_SubItemHitTest(tasks, &hit);
+        }
+        if (!rebuilding && row >= 0)
+          add_task(row);
+        return 0;
+      }
+      if (n->idFrom == TASKS && n->code == LVN_BEGINDRAG && workflowMode) {
         int i = reinterpret_cast<NMLISTVIEW *>(l)->iItem;
         if (i >= 0 && static_cast<size_t>(i) < taskIds.size()) {
           dragTool = taskIds[static_cast<size_t>(i)];
           SetCapture(window);
-          status_text(L"Drop in the diagram or step list to add this task.");
+          status_text(L"Drop on the workflow canvas to add this tool.");
         }
         return 0;
       }
@@ -3206,10 +3407,14 @@ class Workspace {
         ClientToScreen(window, &p);
         RECT r{};
         GetWindowRect(dag, &r);
-        RECT s{};
-        GetWindowRect(steps, &s);
-        if (PtInRect(&r, p) || PtInRect(&s, p)) {
+        if (workflowMode && PtInRect(&r, p)) {
           commit_all();
+          ScreenToClient(dag, &p);
+          canvasDropPoint = p;
+          canvasDropExisting.clear();
+          for (const auto &node : graph().get("nodes").array_items())
+            canvasDropExisting.insert(getstr(node, "id"));
+          pendingCanvasDrop = true;
           model("add_tool", object({{"toolId", droppedTool}}));
         }
         dragTool.clear();
@@ -3254,9 +3459,38 @@ class Workspace {
     case WM_CTLCOLORBTN: {
       HDC dc = reinterpret_cast<HDC>(w);
       SetTextColor(dc, INK);
-      SetBkMode(dc, TRANSPARENT);
-      return reinterpret_cast<LRESULT>(
-          GetParent(reinterpret_cast<HWND>(l)) == form ? paper : background);
+      const bool white = m == WM_CTLCOLOREDIT || GetParent(reinterpret_cast<HWND>(l)) == form;
+      SetBkMode(dc, OPAQUE);
+      SetBkColor(dc, white ? PAPER : BACK);
+      return reinterpret_cast<LRESULT>(white ? paper : background);
+    }
+    case WM_DRAWITEM: {
+      const auto *item = reinterpret_cast<DRAWITEMSTRUCT *>(l);
+      const bool primary = item->CtlID == RUN;
+      const bool active = (item->CtlID == MODE_TOOLS && !workflowMode) ||
+                          (item->CtlID == MODE_WORKFLOW && workflowMode);
+      const bool disabled = (item->itemState & ODS_DISABLED) != 0;
+      COLORREF fill = primary ? (disabled ? RGB(151, 169, 184) : ACCENT) :
+                      active ? RGB(68, 81, 105) : NAVY;
+      if (item->itemState & ODS_SELECTED) fill = RGB(33, 65, 92);
+      HBRUSH brush = CreateSolidBrush(fill);
+      FillRect(item->hDC, &item->rcItem, brush);
+      DeleteObject(brush);
+      SetBkMode(item->hDC, TRANSPARENT);
+      SetTextColor(item->hDC, disabled ? RGB(216, 221, 228) : PAPER);
+      SelectObject(item->hDC, bold);
+      RECT r = item->rcItem;
+      const auto label = control_text(item->hwndItem);
+      DrawTextW(item->hDC, label.c_str(), -1, &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+      if (active) {
+        RECT underline = r; underline.top = underline.bottom - px(3);
+        HBRUSH line = CreateSolidBrush(RGB(141, 199, 233));
+        FillRect(item->hDC, &underline, line); DeleteObject(line);
+      }
+      if (item->itemState & ODS_FOCUS) {
+        InflateRect(&r, -px(4), -px(4)); DrawFocusRect(item->hDC, &r);
+      }
+      return TRUE;
     }
     case WM_PAINT: {
       PAINTSTRUCT ps{};
@@ -3264,11 +3498,22 @@ class Workspace {
       RECT r{};
       GetClientRect(window, &r);
       FillRect(dc, &r, background);
-      Gdiplus::Graphics g(dc);
-      g.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias);
-      g.ScaleTransform(dpi / 96.f, dpi / 96.f);
-      rounded(g, 230, 100, static_cast<float>(width - 240),
-              static_cast<float>(height - 142), 12, PAPER);
+      RECT header{0, 0, r.right, px(48)};
+      HBRUSH navy = CreateSolidBrush(NAVY);
+      FillRect(dc, &header, navy); DeleteObject(navy);
+      RECT center{px(233), px(49), px(width - 321), px(height - 28)};
+      FillRect(dc, &center, paper);
+      SetBkMode(dc, TRANSPARENT); SetTextColor(dc, PAPER);
+      SelectObject(dc, bold);
+      RECT brand{px(16), 0, px(206), px(48)};
+      DrawTextW(dc, L"Native Workbench", -1, &brand, DT_LEFT | DT_VCENTER | DT_SINGLELINE);
+      HPEN pen = CreatePen(PS_SOLID, 1, BORDER);
+      HGDIOBJ old = SelectObject(dc, pen);
+      for (int x : {232, width - 320}) {
+        MoveToEx(dc, px(x), px(48), nullptr); LineTo(dc, px(x), px(height - 28));
+      }
+      MoveToEx(dc, 0, px(height - 28), nullptr); LineTo(dc, r.right, px(height - 28));
+      SelectObject(dc, old); DeleteObject(pen);
       EndPaint(window, &ps);
       return 0;
     }

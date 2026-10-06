@@ -1,0 +1,10 @@
+{
+  "artifactId": 11401422780,
+  "runId": 37441781509,
+  "hashVerified": true,
+  "status": "expected-failure-reproduced",
+  "skips": [],
+  "passed": 2,
+  "available": true,
+  "executed": true
+}

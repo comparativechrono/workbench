@@ -21,9 +21,14 @@ import urllib.error
 import urllib.request
 import zipfile
 
-from app_version import APP_VERSION, PACK_API
-from catalog import ID, VERSION, SHA, _relative, load_pack, load_catalog
-from pack_security import PackError, require, strict_json, public_key, key_fingerprint, signed_payload, https_url
+try:
+    from .app_version import APP_VERSION, PACK_API
+    from .catalog import ID, VERSION, SHA, _relative, load_pack, load_catalog
+    from .pack_security import PackError, require, strict_json, public_key, key_fingerprint, signed_payload, https_url
+except ImportError:
+    from app_version import APP_VERSION, PACK_API
+    from catalog import ID, VERSION, SHA, _relative, load_pack, load_catalog
+    from pack_security import PackError, require, strict_json, public_key, key_fingerprint, signed_payload, https_url
 
 MAX_PACK_BYTES = 1024 * 1024 * 1024
 MAX_ARCHIVE_BYTES = MAX_PACK_BYTES + 8 * 1024 * 1024

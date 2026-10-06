@@ -189,7 +189,11 @@ def run_reference_checks(root, evidence, report, args):
     try:
         initial = host.call("init")
         report["appVersion"] = initial["app_version"]
-        require(initial["app_version"] == "0.7.0", "This gate targets the 0.7.0 application contract.")
+        manifest_version = json.loads((root / "manifest.json").read_text(encoding="utf-8"))["version"]
+        require(manifest_version in {"0.7.0", "0.8.0"},
+                "This gate supports the reviewed 0.7.0 and 0.8.0 reference contracts only.")
+        require(initial["app_version"] == manifest_version,
+                "The private host version differs from the exact installed application manifest.")
         state = host.call("references/list")
         old_ids = {record["id"] for record in state["local"]}
         host.call("references/search", {"release": 116, "query": "saccharomyces"})
@@ -273,7 +277,11 @@ def run_reference_checks(root, evidence, report, args):
         local = next(item for item in state["local"] if item["id"] == record["id"])
         require(local["available"] and local["receipt_sha256"] == record["receipt_sha256"],
                 "Offline restart could not rediscover the unchanged local reference.")
-        snapshot = host.call("model", {"action": "add_tool", "payload": {"toolId": "bam/reference-index"}})
+        state = host.call("state")
+        if "mode" in state:
+            snapshot = host.call("workspace/tool", {"toolId": "bam/reference-index"})
+        else:
+            snapshot = host.call("model", {"action": "add_tool", "payload": {"toolId": "bam/reference-index"}})
         targets = host.call("references/targets", {"record_id": record["id"], "file_id": "genome"})["targets"]
         require(len(targets) == 1 and targets[0]["type"] == "reference", "Downloaded genome did not match the existing SAMtools reference input.")
         target = targets[0]
@@ -465,7 +473,7 @@ def run_update_checks(root, evidence, report, args):
     migration.update(success=True, preservedFiles=len(preserved), optionalPin=optional_pin,
                      coreManifestSha256=sha256(base / "manifest.json"), offlineRestart=True)
     write_json(evidence / "native-core-update.json", migration)
-    report["checks"].append("Native 0.6.0-to-0.7.0 core migration and idempotent repeat preserved optional packs, saved pins, references and results; updated private host reused them offline.")
+    report["checks"].append("Native 0.6.0-to-" + report["appVersion"] + " core migration and idempotent repeat preserved optional packs, saved pins, references and results; updated private host reused them offline.")
     checkpoint(report, args, report["checks"][-1])
 
 
@@ -570,6 +578,21 @@ def gui_smoke(root, evidence):
                 and user.PostMessageW(hwnd, 0x0101, value, 0xC0000001),
                 "Could not queue native keyboard input.")
 
+    def find_control(owner, identity):
+        # General settings live in a scrollable child panel from 0.8 onward.
+        direct = user.GetDlgItem(owner, identity)
+        if direct:
+            return direct
+        found = []
+        @callback_type
+        def each(child, _):
+            if user.GetDlgCtrlID(child) == identity:
+                found.append(child)
+                return False
+            return True
+        user.EnumChildWindows(owner, each, 0)
+        return found[0] if found else None
+
     def inspector_edits(hwnd):
         children = []
         @callback_type
@@ -666,24 +689,35 @@ def gui_smoke(root, evidence):
         progress("wait for main window", pid=process.pid)
         main = find_window(process.pid, "Native Workbench")
         wait_native_state("wait for native task library", lambda:
-            user.IsWindowEnabled(user.GetDlgItem(main, 403))
-            and send(user.GetDlgItem(main, 104), 0x1004) > 0, main)
+            user.IsWindowEnabled(find_control(main, 403))
+            and send(find_control(main, 104), 0x1004) > 0, main)
+        # Reference binding in the three-pane desktop uses its standalone form.
+        # The workspace gate separately tests explicitly created reusable inputs.
+        # Legacy 0.7 has no mode button and retains its Add-task interaction.
+        standalone_button = find_control(main, 410)
+        if standalone_button:
+            require(user.PostMessageW(standalone_button, 0x00F5, 0, 0),
+                    "Could not enter native standalone mode.")
+            wait_native_state("open native standalone editor", lambda:
+                not user.IsWindowVisible(find_control(main, 105)), main)
         task_query = ctypes.create_unicode_buffer("Index a reference")
-        send(user.GetDlgItem(main, 102), 0x000C, 0, ctypes.addressof(task_query))
-        tasks = user.GetDlgItem(main, 104)
+        send(find_control(main, 102), 0x000C, 0, ctypes.addressof(task_query))
+        tasks = find_control(main, 104)
         wait_native_state("filter the native SAMtools reference indexing task", lambda:
             send(tasks, 0x1004) == 1, main)
         require(user.PostMessageW(tasks, 0x0100, 0x24, 1)
                 and user.PostMessageW(tasks, 0x0101, 0x24, 0xC0000001),
                 "Could not select the native reference indexing task.")  # VK_HOME
         wait_native_state("select the native reference indexing task", lambda:
-            send(tasks, 0x100C, ctypes.c_size_t(-1).value, 2) == 0
-            and user.IsWindowEnabled(user.GetDlgItem(main, 105)), main)
-        require(user.PostMessageW(user.GetDlgItem(main, 105), 0x00F5, 0, 0),
-                "Could not click Add selected task.")  # queued BM_CLICK
-        wait_native_state("add native reference indexing step", lambda:
-            send(user.GetDlgItem(main, 106), 0x1004) == 1
-            and any(item["text"] == "Index a reference" for item in inspector_edits(main)), main)
+            send(tasks, 0x100C, ctypes.c_size_t(-1).value, 2) == 0, main)
+        if not standalone_button:
+            wait_native_state("enable Add selected task", lambda:
+                user.IsWindowEnabled(find_control(main, 105)), main)
+            require(user.PostMessageW(find_control(main, 105), 0x00F5, 0, 0),
+                    "Could not click Add selected task.")  # queued BM_CLICK
+        wait_native_state("open native reference indexing form", lambda:
+            any("Index a reference" in item["text"] or "FASTA index" in item["text"]
+                for item in inspector_edits(main)), main)
         progress("open References", pid=process.pid, windows=[
             {"hwnd": hwnd, "title": text(hwnd), "class": text(hwnd, True)}
             for hwnd in windows(process.pid)])

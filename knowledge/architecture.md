@@ -4,6 +4,16 @@ This describes the 0.7 reference-discovery implementation, reviewed
 on 2026-10-05. It is a map of the implementation, not a claim that every deployment
 or scientific use has been validated. Start with [the knowledge index](README.md).
 
+**Development scope, 2026-10-06:** the separate 0.8.0 candidate adds the native
+three-pane interface, independent standalone/workflow editing sessions and
+bounded connection previews described in the [native UI guide](native-ui.md).
+Its application/resource versions are 0.8.0; the 0.7.0 version statements below
+describe the published baseline. The final candidate passed the automated
+native gates, and the user accepted it and authorized publication. Promotion of
+the exact accepted archives is pending; see the
+[0.8.0 release handover](native-ui-0.8.0-release-handover.md). Published 0.7.0
+artifacts/evidence remain unchanged.
+
 ## What runs on a user's machine
 
 The current application is a native Windows x86-64 desktop program. It bundles
@@ -134,6 +144,17 @@ subdirectory. A declared output must exist inside its assigned step directory;
 it is hashed before being exposed to downstream nodes. A failed operation cannot
 contribute apparently successful downstream products.
 
+Windows filesystem calls in the engine use explicit extended-length paths via
+the existing pack-manager path helpers. Plans, provenance, tool arguments and
+containment comparisons retain ordinary absolute paths; only physical I/O uses
+the extended namespace. This lets the host detect, hash and consume nested
+outputs that the native runner successfully created when the machine's ordinary
+long-path opt-in is disabled. Starter and pack scientific assertions use the
+same I/O boundary. Exact native coverage is recorded in the
+[nested-result-path regression](evidence/native-workflow-0.8.0-long-path-2026-10-06.json);
+it does not establish arbitrary long installation roots or every optional
+scientific tool's path handling.
+
 | Run artifact | Meaning |
 | --- | --- |
 | `plan.json` | Frozen execution definitions, parameters, input identities/hashes, warnings and plan hash. |
@@ -154,6 +175,33 @@ at least two connected tools and excludes bound local filenames. A tool preset
 stores settings and exact pack identity, excluding file, sample, library and
 read-group bindings. `user-data/saved.json` and `user-data/runs.json` are mutable
 user state, separate from immutable core inventories and optional packs.
+
+## Native panel scrolling
+
+The 0.8 development interface uses composited child-window painting only on
+the options form and general-settings panel. `place_panel()` batches final
+child positions without copying stale pixels, then queues a complete descendant
+repaint. Windows presents the buffered panel together rather than displaying
+each static label's erase/draw cycle. Keep `SWP_NOCOPYBITS` and descendant
+invalidation: they prevent the previously observed lines through clipped text.
+Canvas drawing remains on its existing separate buffered path.
+
+Do not retain a panel device context between paint operations. The native
+surface class must remain compatible with `WS_EX_COMPOSITED` (no own, class or
+parent DC style). See Microsoft's [extended-window style contract](https://learn.microsoft.com/en-us/windows/win32/winmsg/extended-window-styles)
+and [device-context lifetime guidance](https://devblogs.microsoft.com/oldnewthing/20171018-00/?p=97245/).
+
+Wheel input accumulates fractional movement independently for each panel;
+child controls and panel background share their panel's accumulator. A rounded
+zero wheel movement must never enter the scrollbar command path as
+`SB_LINEUP`, whose value is also zero. Reaching a scroll boundary or focusing an
+already visible field leaves the panel untouched. The form accumulator resets
+when the selected item or workspace mode changes.
+
+These are presentation changes; input ownership, exact pack pins, scientific
+execution and recorded provenance remain governed by the existing model and
+engine. Artifact-specific temporal scrolling evidence is separate from settled
+screenshot equality; see the [native UI guide](native-ui.md).
 
 ## Locality, network and trust
 

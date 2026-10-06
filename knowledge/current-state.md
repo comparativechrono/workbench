@@ -1,6 +1,6 @@
 # Current project state
 
-Snapshot: **2026-10-05**. Application **0.7.0** is published as a development
+Snapshot: **2026-10-06**. Application **0.7.0** is published as a development
 prerelease; its exact-final native reference gate passed. Packaged source:
 [`57d635370a1cd34dd1549aff95a2feba7faeeb74`](https://github.com/comparativechrono/workbench/tree/57d635370a1cd34dd1549aff95a2feba7faeeb74).
 Release tag `app-v0.7.0` points to `6c266a58818886c6f4f5287006f20fafc5aadd68`,
@@ -9,6 +9,161 @@ Read this alongside the [machine-readable release inventory](release-inventory.j
 and the repository [README](../README.md). Update the date, source baseline and
 evidence when the state changes; do not silently turn a pending item into a claim
 of completion.
+
+## Accepted interface update, publication pending, 2026-10-06
+
+The user accepted the latest tested **0.8.0** candidate and explicitly authorized
+publication. This supersedes the earlier pending tester-acceptance status.
+The planned development prerelease promotes the exact
+`b3928ca6a29d22b5f010a303658c2e19c24324da` candidate without rebuilding or changing
+its archives. Publication and final public-download verification are pending;
+0.7.0 remains the published application at this checkpoint. The
+[release handover](native-ui-0.8.0-release-handover.md) records the accepted
+identities and remaining publication steps.
+
+The working branch `ui/galaxy-native-workspace` is developing application
+**0.8.0** with the user-approved Galaxy-inspired native interface: Tools on the
+left, standalone options in the centre, General settings on the right, and a
+separate drag/drop Workflow mode whose right pane edits the selected step.
+Standalone tools and the workflow preserve independent edits within the running
+process. The candidate is in
+[PR #1](https://github.com/comparativechrono/workbench/pull/1) and remains
+**unreleased**. Testers accepted the layout, then identified problems with
+workflow chaining and input ownership, scrolling text, navigation/deletion,
+the first Manage tools opening and unclear tool names/indexing guidance.
+
+The feedback revision leaves new workflow tool ports unconnected and adds
+explicit reusable input cards, with file controls owned by the input rather
+than duplicated in every tool. It adds canvas panning, visible zoom controls,
+Windows gesture handling and hover deletion; repairs native panel repainting
+and initial pack-manager state; and names the scientific program in the tool
+library. The [starter audit](starter-tool-semantics.md) confirms that SAMtools
+sort already converts minimap2 SAM to sorted BAM, while the standalone faidx
+utility is not a prerequisite for starter alignment or variant operations.
+Published pack bytes, operation IDs and saved pins remain unchanged.
+
+### Current scroll-flashing follow-up
+
+The user confirmed that the nested-output-path pipeline fix worked, but reported
+that text still flashes while scrolling. This is user acceptance of the reported
+pipeline fix; it does not establish that every workflow or display configuration
+is accepted. The previous zero-difference scroll comparison checked settled
+images before and after a clean redraw. It did not observe intermediate frames
+and is not evidence that scrolling was free from visible flashing.
+
+The current revision makes form and General settings panel descendants paint
+together, queues their repaint instead of forcing each scroll message to draw
+immediately, and avoids layout/redraw work when scrolling or focus leaves the
+scroll position unchanged. It also accumulates small wheel deltas separately for
+each panel; a rounded zero movement previously entered the line-up command path.
+Exact candidate `b3928ca6a29d22b5f010a303658c2e19c24324da` passed all five jobs in
+[run 37453380541](https://github.com/comparativechrono/workbench/actions/runs/37453380541):
+82 source checks, the existing 32 workspace and 8 References/update checks in
+each Windows path, the five-stage long-path scientific regression, and the new
+scroll gate. The [scroll record](evidence/native-workflow-0.8.0-scroll-2026-10-06.json)
+binds the reports to the exact package.
+
+At 96 DPI on Windows Server 2022, the new gate sampled **960 desktop frames**
+across standalone options, General settings and workflow options at
+27.16–31.80 frames/second. There were no unexpected static-text/background frames,
+and all 300 requested endpoint transitions were observed. All **18 precision-wheel
+cases passed**. The old package also had no unexpected sampled frames, so the
+tester's **visual flashing was not reproduced in CI**. Six old precision-wheel
+cases failed, reporting zero movement where 48 pixels were expected; those
+separate movement failures now pass. Sampling masks edit/button regions and
+cannot exclude shorter flashes between frames or establish behavior on the
+tester's physical display. The user's later acceptance is separate manual
+feedback and does not change what the CI observation established.
+
+The [current review bundle](https://github.com/comparativechrono/workbench/actions/runs/37453380541/artifacts/11408021439)
+expires 5 November 2026. Extract its starter into a separate folder. The
+16,948,940-byte starter SHA-256 is
+`df001a80033ff8e834045ec683c79672e0efdbd4880fb89fca8bf8c36d830fdc`.
+The bundle, all three ZIP CRCs, build provenance, 68 core entries, 143 unchanged
+pack entries, 15 workspace source copies and 14 relevant source files were
+verified. Application 0.8.0 remains unreleased; published 0.7.0 is unchanged.
+
+### Accepted nested-output-path fix
+
+A later user installation report passed all seven application/integrity checks
+but blocked the starter pipeline after its first alignment. The native runner
+had produced and hashed 202 SAM records; Python then failed an ordinary-path
+existence check on a **269-character** output path. The folder was 255 characters
+and both components identified the same file. User registry state was not
+captured. No private directory paths or uploaded data are committed.
+
+The earlier correction `0d3282046d7aa05dc822315c9a237c8ac534cd7a` uses explicit Windows
+extended paths at pipeline/check filesystem boundaries while retaining ordinary
+paths in provenance, plans and tool arguments. Trust, containment and reparse
+protections remain enforced. The **82-check source gate** passed, including
+seven emulated-path regressions; **22 additional selected core/pack-check
+contracts** passed locally. Exact packaged Windows validation passed in
+[run 37449356224](https://github.com/comparativechrono/workbench/actions/runs/37449356224).
+With long-path policy disabled before fresh private Python processes launched,
+the previous package reproduced the missing-output failure on a 268-character
+SAM path. The correction passed all **7 core checks and 5 scientific stages**,
+and all **20 output hashes** were independently verified; **19 output paths
+exceeded 260 characters**, reaching 279. The native result includes BAM and
+the expected homozygous **starter:1351 G>A, GT 1/1** call. The original runner
+policy was restored afterward. No user machine policy change was required.
+
+The same corrected package passed **32 workspace and 8 References/update
+checks in each Windows path**, with zero failures or skips. All 56 capture
+hashes were verified. The long-path check itself is a host/CLI execution test,
+distinct from the ordinary/space-containing GUI gate.
+
+The [prior long-path bundle](https://github.com/comparativechrono/workbench/actions/runs/37449356224/artifacts/11404414503)
+expires 5 November 2026. Extract its starter into a separate folder for review.
+The verified starter is 16,948,757 bytes, SHA-256
+`71a84d2c6f7f293bf7f57c1fa3221fc942fce57bca61c8ed3344d593c31c262c`.
+All 68 core entries, 143 unchanged pack entries and 15 workspace source copies
+matched their expected bytes.
+The [sanitized long-path record](evidence/native-workflow-0.8.0-long-path-2026-10-06.json)
+tracks the report, fix and new regression. Previous 32+8 native results below
+remain valid within their original path scope; they did not cover deep result
+paths with legacy policy behavior. No universal optional-pack/deep-installation
+or shell-dialog long-path support is claimed.
+
+### Prior feedback candidate, retained evidence
+
+The first feedback source `4cb5f335c0d22b159555df90b275c1f7ec32750e` passed
+**75 source checks on Linux**, with zero failures or skips. Its native gate
+failed before GUI launch when a raw-text SAM assertion rejected equivalent
+floating-point formatting; both paths passed eight packaged-host and eight
+References/update checks. Revised source
+`0d2a993fca95a5837a69aa05c63aa5e806c553af` includes a typed comparison and
+small-delta Ctrl+wheel handling, and passed
+[run 37441781509](https://github.com/comparativechrono/workbench/actions/runs/37441781509).
+Each ordinary and space-containing Windows installation passed **32 workspace
+checks** (8 host, 2 scientific and 22 GUI) plus **8 References/update checks**,
+with zero failures or skips, on Windows Server 2022/private Python 3.13.16 at
+96 DPI. Native minimap2-to-SAMtools sorting preserved 202 properly paired
+alignment records and produced coordinate-sorted BAM. Native pointer checks
+covered connections, pan/zoom, hover deletion/Undo, input ownership and Manage
+tools. The scroll comparison found zero differences across 197,198 sampled
+static-text/background pixels per path in settled images, not intermediate
+scrolling frames; all 56 workspace/References capture
+hashes were verified. See the [feedback record](evidence/native-workflow-0.8.0-feedback-2026-10-06.json)
+and [native UI guide](native-ui.md) for exact scope and limitations.
+
+The [prior feedback candidate bundle](https://github.com/comparativechrono/workbench/actions/runs/37441781509/artifacts/11401422780)
+expires 5 November 2026; it does not contain the nested-output-path correction.
+The 16,948,268-byte starter has SHA-256
+`de099e5feef437c788352c31c0e743c7e8f22aa08bfe2364e59b715ec3501806`;
+its 68 core entries, 143 unchanged pack entries and 15 workspace source copies
+were verified.
+Physical trackpad pinch, high-DPI/multi-monitor movement and native folder
+pickers remain unvalidated. Layout acceptance does not establish acceptance of
+these changed workflow behaviors; manual retesting remains outstanding.
+
+The previous candidate at `c82c559d02a0b70e79afe67da93ace9e344f1ef3` passed
+18 workspace and 8 References/update checks per Windows path in
+[run 37376078599](https://github.com/comparativechrono/workbench/actions/runs/37376078599),
+with verified archives/inventories and 36 capture hashes. Its
+[2026-10-05 evidence](evidence/native-ui-0.8.0-development-2026-10-05.json)
+is historical and does not cover the feedback fixes. Updater coverage is
+0.6.0-to-0.8.0 only; no 0.7.0 upgrade is claimed. Published 0.7.0 bytes and all
+dated release evidence below remain unchanged.
 
 ## Reference-discovery release
 

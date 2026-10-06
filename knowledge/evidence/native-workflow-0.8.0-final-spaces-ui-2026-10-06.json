@@ -1,0 +1,602 @@
+{
+  "schema": 1,
+  "success": true,
+  "startedUtc": "2026-10-06T09:17:21.470708+00:00",
+  "platform": "Windows-2022Server-10.0.20348-SP0",
+  "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+  "nativeWindowsExecuted": true,
+  "nativeGUILaunched": true,
+  "nativeGUIValidated": true,
+  "appRoot": "D:\\a\\_temp\\path with spaces\\native-workbench",
+  "sourceCommit": "0d2a993fca95a5837a69aa05c63aa5e806c553af",
+  "assetSha256": "de099e5feef437c788352c31c0e743c7e8f22aa08bfe2364e59b715ec3501806",
+  "assetName": "native-workbench-0.8.0-starter-windows.zip",
+  "gateSha256": "3fd7a86e2b116ffb7b7efad392d6d9b90bc7060b4dac6136648eea21657d26a2",
+  "checks": [
+    "Default standalone mode",
+    "Independent preserved tool and workflow graphs",
+    "Compatible graph edge",
+    "Bounded native compatibility preview",
+    "Atomic cycle and semantic type rejection",
+    "Per-tool settings and input retention",
+    "Workflow additions leave ports unbound without automatic source boxes",
+    "Explicit reusable input owns one file editor and connects without duplication",
+    "Native minimap2 alignment chains to SAMtools coordinate-sorted binary BAM using two explicit inputs",
+    "All 202 synthetic mapped proper-pair records, mate flags, sequence, quality and typed tags survive SAM-to-BAM conversion",
+    "Manage tools loads installed packs on its first click without a modal error and reopens cleanly",
+    "First click opens a previously selected workflow-library row in empty tool mode",
+    "Single-click standalone tool form",
+    "Separate queued native double-click notification opens its hit row after selection clears",
+    "Three independent panes with general settings",
+    "Actual mouse drag from tool list onto workflow canvas twice",
+    "Actual compatible output-to-input mouse connection",
+    "Canvas selection displays tool options on right",
+    "General settings remain available in workflow mode",
+    "Standalone input and browsing folder survive workflow mode",
+    "Mode-specific status guidance replaces the previous workflow drag hint",
+    "Workflow graph/selection survives mode switching",
+    "Normal/minimum observed pane separation",
+    "Real repeated option scrolling leaves static text identical to a clean repaint",
+    "Blank-canvas mouse drag pans and reverses the viewport",
+    "Zoom buttons decrease, increase and reset scale; scaled card hit testing selects both tools",
+    "Injected one-unit native Ctrl-wheel deltas accumulate into visible zoom",
+    "Editing a tool immediately before Add input preserves its draft through the nested modal loop",
+    "Native Add input creates one independently editable reference file slot",
+    "Actual mouse connection from an explicit input output socket to a tool input without duplicate file fields",
+    "Header hover close deletes a tool and Undo restores its selection",
+    "Header hover close deletes an explicit input and Undo restores its files"
+  ],
+  "skips": [],
+  "appFiles": {
+    "NativeWorkbench.exe": "b0c089b37b0af6ac37d584f847a49a09d4702f0ba27b9edc94ba30c999ff9791",
+    "workspace\\app_version.py": "8e0453c5a2ce403d531bdbf399a4aaa1bcbbaa5cbeffdbc19af407bbe0a67c14",
+    "workspace\\catalog.py": "c35ceca347672fd77ea15419dc4869dca4c1819d979d566a5f049b8632608735",
+    "workspace\\core_checks.py": "a206e5f22430c38e5320f76a17b8b288db4f7ffcd326299ae16bb149a49150de",
+    "workspace\\desktop_host.py": "c71735827d3308bc1f7d63434c8704b86ad8cb214cc0f8d3ceb83d4f375bb2ed",
+    "workspace\\desktop_model.py": "e8bc084508607f97f40b2db802c1b5d420b15cb66e0f9b9b9b77b83064479c86",
+    "workspace\\engine.py": "0b4c4292fa88eda28900ec6026b1710a9ea31ad9129010eac7f69d33cefb789c",
+    "workspace\\example.py": "fb558de8dc3f49f68550af3e08d768e8a99c5cd9e8d466ca357dcecc3dd699b3",
+    "workspace\\pack_checks.py": "5d17959b283524ce8115dbe6dbf904a9cc62b8ca6cfa545b25dd0b89c1f9df72",
+    "workspace\\pack_manager.py": "6eb3f3a1064b8754ea5e6d1f0fddda2f2a23f64776473689b125f58445435bc9",
+    "workspace\\pack_security.py": "2d1fa4a4267f5cecb0d583c7b43fc59dc8645125c59e3db69c4d6fa307ff6cc0",
+    "workspace\\reference_manager.py": "3df9269e3bd89a822a18c323af36f474887b185cb261399f55409354240d2bd9",
+    "workspace\\reference_provenance.py": "9175cbb21fd983816a1b8b0effdae09ebaa11990fccdc06e4446c13f56ac5971",
+    "workspace\\reference_provider.py": "30f160e22d2f8a89bac4f1d52bf4ec6709a7f331f1bb6000e78707e559fdc816",
+    "workspace\\service.py": "ab343eae8990c844d9db85bc7c2d4bea33e1b3fe4e20714fd91786cd25fcde22",
+    "workspace\\verify_installation.py": "1e2a11141609f23d4e6b5d771d01ab67199a4839f36f2174bfa2f10b70c0f23d"
+  },
+  "host": {
+    "networkSocketOperationsDenied": true,
+    "standaloneGraph": {
+      "schema": 1,
+      "name": "Index a reference",
+      "nodes": [
+        {
+          "id": "step-1",
+          "tool": "bam/reference-index",
+          "params": {},
+          "inputs": {
+            "reference": [
+              "input-1"
+            ]
+          },
+          "pin": {
+            "packId": "bam",
+            "packVersion": "0.4.0",
+            "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+          },
+          "label": "Preserved reference index"
+        }
+      ],
+      "sources": [
+        {
+          "id": "input-1",
+          "type": "reference",
+          "label": "Reference genome",
+          "files": {
+            "reference": "D:\\a\\_temp\\path with spaces\\native-workbench\\examples\\starter\\reference.fa"
+          },
+          "fields": [
+            {
+              "id": "reference",
+              "label": "Reference genome",
+              "type": "file",
+              "role": "file",
+              "binding": false,
+              "preset": true,
+              "required": true,
+              "default": "",
+              "help": "Uncompressed FASTA. Workflows that build an index copy this file into the run folder first.",
+              "filter": "Uncompressed FASTA reference|*.fa;*.fasta;*.fna|All files|*.*",
+              "constraint": "",
+              "differentFrom": ""
+            }
+          ]
+        }
+      ],
+      "nextNode": 2,
+      "nextSource": 2
+    },
+    "workflowGraph": {
+      "schema": 1,
+      "name": "Untitled analysis",
+      "nodes": [
+        {
+          "id": "step-1",
+          "tool": "bam/sort",
+          "params": {},
+          "inputs": {
+            "alignment": []
+          },
+          "pin": {
+            "packId": "bam",
+            "packVersion": "0.4.0",
+            "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+          }
+        },
+        {
+          "id": "step-2",
+          "tool": "bam/sort",
+          "params": {},
+          "inputs": {
+            "alignment": [
+              "step-1::sorted"
+            ]
+          },
+          "pin": {
+            "packId": "bam",
+            "packVersion": "0.4.0",
+            "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+          }
+        },
+        {
+          "id": "step-3",
+          "tool": "bam/reference-index",
+          "params": {},
+          "inputs": {
+            "reference": [
+              "input-1"
+            ]
+          },
+          "pin": {
+            "packId": "bam",
+            "packVersion": "0.4.0",
+            "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+          }
+        }
+      ],
+      "sources": [
+        {
+          "id": "input-1",
+          "type": "reference",
+          "label": "Shared genome",
+          "files": {
+            "reference": "D:\\a\\_temp\\path with spaces\\native-workbench\\examples\\starter\\reference.fa"
+          },
+          "fields": [
+            {
+              "id": "reference",
+              "label": "Reference genome",
+              "type": "file",
+              "role": "file",
+              "filter": "Uncompressed FASTA reference|*.fa;*.fasta;*.fna|All files|*.*",
+              "required": true,
+              "help": "Uncompressed FASTA. Workflows that build an index copy this file into the run folder first.",
+              "differentFrom": ""
+            }
+          ]
+        }
+      ],
+      "nextNode": 4,
+      "nextSource": 2
+    },
+    "rejected": [
+      {
+        "case": "cycle",
+        "message": "model: Choose a compatible source that does not create a cycle."
+      },
+      {
+        "case": "type",
+        "message": "model: Choose a compatible source that does not create a cycle."
+      }
+    ],
+    "portPreviews": {
+      "compatible": {
+        "ref": "step-1::sorted",
+        "targets": [
+          {
+            "nodeId": "step-2",
+            "portId": "alignment"
+          }
+        ]
+      },
+      "cycle": {
+        "ref": "step-2::sorted",
+        "targets": []
+      },
+      "type": {
+        "ref": "step-3::reference",
+        "targets": []
+      }
+    },
+    "checks": [
+      "Default standalone mode",
+      "Independent preserved tool and workflow graphs",
+      "Compatible graph edge",
+      "Bounded native compatibility preview",
+      "Atomic cycle and semantic type rejection",
+      "Per-tool settings and input retention",
+      "Workflow additions leave ports unbound without automatic source boxes",
+      "Explicit reusable input owns one file editor and connects without duplication"
+    ]
+  },
+  "science": {
+    "networkSocketOperationsDenied": true,
+    "nativeWindowsExecuted": true,
+    "graph": {
+      "schema": 1,
+      "name": "Untitled analysis",
+      "nodes": [
+        {
+          "id": "step-1",
+          "tool": "align/paired-end",
+          "params": {
+            "sample": "starter",
+            "threads": "2"
+          },
+          "inputs": {
+            "reads": [
+              "input-2"
+            ],
+            "reference": [
+              "input-1"
+            ]
+          },
+          "pin": {
+            "packId": "align",
+            "packVersion": "0.4.0",
+            "manifestSha256": "81c962222c93356a4f7727b23193c71d7dcd515859e62a179574781f411824d3"
+          }
+        },
+        {
+          "id": "step-2",
+          "tool": "bam/sort",
+          "params": {},
+          "inputs": {
+            "alignment": [
+              "step-1::sam"
+            ]
+          },
+          "pin": {
+            "packId": "bam",
+            "packVersion": "0.4.0",
+            "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+          }
+        }
+      ],
+      "sources": [
+        {
+          "id": "input-1",
+          "type": "reference",
+          "label": "Reference FASTA",
+          "files": {
+            "reference": "D:\\a\\_temp\\path with spaces\\native-workbench\\examples\\starter\\reference.fa"
+          },
+          "fields": [
+            {
+              "id": "reference",
+              "label": "Reference genome",
+              "type": "file",
+              "role": "file",
+              "filter": "Uncompressed FASTA reference|*.fa;*.fasta;*.fna|All files|*.*",
+              "required": true,
+              "help": "Uncompressed FASTA. Workflows that build an index copy this file into the run folder first.",
+              "differentFrom": ""
+            }
+          ]
+        },
+        {
+          "id": "input-2",
+          "type": "pair",
+          "label": "Paired FASTQ reads",
+          "files": {
+            "reads1": "D:\\a\\_temp\\path with spaces\\native-workbench\\examples\\starter\\reads1.fastq",
+            "reads2": "D:\\a\\_temp\\path with spaces\\native-workbench\\examples\\starter\\reads2.fastq"
+          },
+          "fields": [
+            {
+              "id": "reads1",
+              "label": "Read 1 (forward)",
+              "type": "file",
+              "role": "read1",
+              "filter": "FASTQ reads|*.fastq;*.fq;*.fastq.gz;*.fq.gz|All files|*.*",
+              "required": true,
+              "help": "",
+              "differentFrom": "reads2"
+            },
+            {
+              "id": "reads2",
+              "label": "Read 2 (reverse)",
+              "type": "file",
+              "role": "read2",
+              "filter": "FASTQ reads|*.fastq;*.fq;*.fastq.gz;*.fq.gz|All files|*.*",
+              "required": true,
+              "help": "Use the matching mate file, in the same read order. Plain or gzip FASTQ accepted.",
+              "differentFrom": "reads1"
+            }
+          ]
+        }
+      ],
+      "nextNode": 3,
+      "nextSource": 3
+    },
+    "records": 202,
+    "fixtureHashes": {
+      "reads1.fastq": "33053fdfd6ca5abbe34883f869958a2e621e7d513ada06f401e91ad256e9cc21",
+      "reads2.fastq": "18b5ceeefb0115120830005a21808489f2c471c78af4aaaf724cdf99697a80e1",
+      "reference.fa": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+      "truth.json": "dbef1c9f40205f38fb8c51cd2109db009a006e8ae15485235aff31263a85f977"
+    },
+    "sam": {
+      "path": "D:\\a\\_temp\\workspace-ui-evidence\\scientific-results\\run-20261006-091722-986f6df4\\S1\\analysis-20261006-091722-2872-0\\alignment.sam",
+      "sha256": "fee6b9975f41bbedd050beb7cb8c2c8abac88e389ee799ff198c64a63eaf176c"
+    },
+    "bam": {
+      "path": "D:\\a\\_temp\\workspace-ui-evidence\\scientific-results\\run-20261006-091722-986f6df4\\S2\\analysis-20261006-091722-7752-0\\sorted.bam",
+      "sha256": "bdaf942c1bb87d3ccb70e76fd702f6dc89cb6a95b49ae5e5028d057ab98ef3f0"
+    },
+    "samtoolsSha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+    "runFolder": "D:\\a\\_temp\\workspace-ui-evidence\\scientific-results\\run-20261006-091722-986f6df4",
+    "checks": [
+      "Native minimap2 alignment chains to SAMtools coordinate-sorted binary BAM using two explicit inputs",
+      "All 202 synthetic mapped proper-pair records, mate flags, sequence, quality and typed tags survive SAM-to-BAM conversion"
+    ]
+  },
+  "gui": {
+    "dpi": 96,
+    "displayPixels": [
+      1024,
+      768
+    ],
+    "captures": [
+      {
+        "path": "manage-tools-first-open.bmp",
+        "width": 830,
+        "height": 700,
+        "sha256": "b9b86550806d02865b49d5ae1c936535557058d298a2c649070cead75506c0e0"
+      },
+      {
+        "path": "tools-after-workflow-library-selection.bmp",
+        "width": 1044,
+        "height": 788,
+        "sha256": "d13a5910833db16120e86e1ed1f69132abecb660d21099ef0a025fa89866a7f9"
+      },
+      {
+        "path": "tools-double-click-notification.bmp",
+        "width": 1044,
+        "height": 788,
+        "sha256": "d13a5910833db16120e86e1ed1f69132abecb660d21099ef0a025fa89866a7f9"
+      },
+      {
+        "path": "options-scroll-screen-before-redraw.bmp",
+        "width": 448,
+        "height": 549,
+        "sha256": "e0a9cb4fc507fde6c74b752a2da844f735b148b0d8f4c30ccf41b44a7746ea49",
+        "method": "screen BitBlt; no PrintWindow repaint"
+      },
+      {
+        "path": "options-scroll-screen-clean-redraw.bmp",
+        "width": 448,
+        "height": 549,
+        "sha256": "e0a9cb4fc507fde6c74b752a2da844f735b148b0d8f4c30ccf41b44a7746ea49",
+        "method": "screen BitBlt; no PrintWindow repaint"
+      },
+      {
+        "path": "tools-reference-1280.bmp",
+        "width": 1044,
+        "height": 788,
+        "sha256": "53664180386949071df1085578d7037debcce2b0b559ca2562b4ce1ae1c12b9d"
+      },
+      {
+        "path": "workflow-connected-1280.bmp",
+        "width": 1044,
+        "height": 788,
+        "sha256": "80021d893beca3a47cf424c8a63c526dd79827d5e0f9ad13ab42449b0047ab34"
+      },
+      {
+        "path": "workflow-first-selected.bmp",
+        "width": 1044,
+        "height": 788,
+        "sha256": "84e4e5670f9a9adb26df30915f03caa6ae78b0b10e3ac25518691e8ea24bcd11"
+      },
+      {
+        "path": "workflow-general-settings.bmp",
+        "width": 1044,
+        "height": 788,
+        "sha256": "a136f58b6ce3df15af507193644b1b9347ad184189c942fec0ad54c21750d195"
+      },
+      {
+        "path": "tools-minimum.bmp",
+        "width": 1044,
+        "height": 740,
+        "sha256": "1d0b0b2fbbc62a1b29ae29ecb0e3bd072c9e795caa9f0d3bfdd43f36c9b7da28"
+      },
+      {
+        "path": "workflow-minimum.bmp",
+        "width": 1044,
+        "height": 740,
+        "sha256": "7b9137f1155a5020e7687438d5e33f2ea6f1eda79da88cea52f36803ab291bc8"
+      },
+      {
+        "path": "workflow-panned.bmp",
+        "width": 1044,
+        "height": 740,
+        "sha256": "e95b020169fb4937a2b1db8a7f36ad244913afd69eedf837bd7cb4f2d814fdad"
+      },
+      {
+        "path": "workflow-zoomed-out.bmp",
+        "width": 1044,
+        "height": 740,
+        "sha256": "4f053d9b7ddcbfa4b6235f390e64b64cd34c906edb3e421ec12205b29881515b"
+      },
+      {
+        "path": "workflow-tool-delete-hover.bmp",
+        "width": 1044,
+        "height": 740,
+        "sha256": "2f60ac023f4368bcb784e72fd845d28cbc06511ee34db572518c8223282a66bf"
+      },
+      {
+        "path": "workflow-explicit-reference-input.bmp",
+        "width": 1044,
+        "height": 740,
+        "sha256": "287ca376ccf36b326c1649b81cf41dacaee73893f93a8afa15b256f39e88f8b4"
+      },
+      {
+        "path": "workflow-explicit-input-connected.bmp",
+        "width": 1044,
+        "height": 740,
+        "sha256": "cd0380f6775e81998f54feb3cea5caa0d73d13c97ce87d5c517b846edbf34cf9"
+      },
+      {
+        "path": "workflow-source-delete-hover.bmp",
+        "width": 1044,
+        "height": 740,
+        "sha256": "39f3bd364a6185d2de569e33cac6be03e975532dda71a813451ba3594cfef62a"
+      },
+      {
+        "path": "workflow-source-delete-undone.bmp",
+        "width": 1044,
+        "height": 740,
+        "sha256": "e631d22a4463302c0bcf3efcc08270d6ede78e14f3382f1752902d9b832696dd"
+      }
+    ],
+    "geometryFile": "ui-control-geometry.json",
+    "scrollRendering": {
+      "scrollBefore": {
+        "nMin": 0,
+        "nMax": 1019,
+        "nPage": 555,
+        "nPos": 0
+      },
+      "scrollAfter": {
+        "nMin": 0,
+        "nMax": 1019,
+        "nPage": 555,
+        "nPos": 48
+      },
+      "comparedPixels": 197198,
+      "differentPixels": 0,
+      "maskedChildControlBounds": [
+        [
+          253,
+          247,
+          678,
+          281
+        ],
+        [
+          253,
+          497,
+          584,
+          531
+        ],
+        [
+          590,
+          497,
+          678,
+          531
+        ],
+        [
+          253,
+          571,
+          584,
+          605
+        ],
+        [
+          590,
+          571,
+          678,
+          605
+        ],
+        [
+          253,
+          719,
+          584,
+          753
+        ],
+        [
+          590,
+          719,
+          678,
+          753
+        ],
+        [
+          253,
+          867,
+          678,
+          901
+        ],
+        [
+          253,
+          941,
+          678,
+          975
+        ]
+      ],
+      "method": "Actual desktop BitBlt before and after forced descendant redraw at unchanged scroll offset"
+    },
+    "navigation": {
+      "initialScroll": [
+        0,
+        0
+      ],
+      "pannedScroll": [
+        -40,
+        -40
+      ],
+      "zoomOutLabel": "83%",
+      "resetZoomLabel": "100%",
+      "precisionWheel": {
+        "messages": 120,
+        "delta": 1,
+        "flags": "MK_CONTROL",
+        "resultingZoomLabel": "116%",
+        "input": "Injected WM_MOUSEWHEEL on the native canvas; physical trackpad not tested"
+      }
+    },
+    "checks": [
+      "Manage tools loads installed packs on its first click without a modal error and reopens cleanly",
+      "First click opens a previously selected workflow-library row in empty tool mode",
+      "Single-click standalone tool form",
+      "Separate queued native double-click notification opens its hit row after selection clears",
+      "Three independent panes with general settings",
+      "Actual mouse drag from tool list onto workflow canvas twice",
+      "Actual compatible output-to-input mouse connection",
+      "Canvas selection displays tool options on right",
+      "General settings remain available in workflow mode",
+      "Standalone input and browsing folder survive workflow mode",
+      "Mode-specific status guidance replaces the previous workflow drag hint",
+      "Workflow graph/selection survives mode switching",
+      "Normal/minimum observed pane separation",
+      "Real repeated option scrolling leaves static text identical to a clean repaint",
+      "Blank-canvas mouse drag pans and reverses the viewport",
+      "Zoom buttons decrease, increase and reset scale; scaled card hit testing selects both tools",
+      "Injected one-unit native Ctrl-wheel deltas accumulate into visible zoom",
+      "Editing a tool immediately before Add input preserves its draft through the nested modal loop",
+      "Native Add input creates one independently editable reference file slot",
+      "Actual mouse connection from an explicit input output socket to a tool input without duplicate file fields",
+      "Header hover close deletes a tool and Undo restores its selection",
+      "Header hover close deletes an explicit input and Undo restores its files"
+    ],
+    "notificationRegression": {
+      "input": "Queued WM_LBUTTONDBLCLK and WM_LBUTTONUP to the real native ListView",
+      "scope": "Hit-row activation without prior selection; separate from the SendInput pointer and drag assertions."
+    },
+    "limits": [
+      "DPI coverage is only the actual reported monitor DPI; no simulated WM_DPICHANGED claim.",
+      "Physical trackpad pinch hardware is unavailable on this CI runner; the gesture implementation is not claimed as hardware-validated.",
+      "Human usability acceptance, multi-monitor movement and native folder pickers remain separate."
+    ]
+  },
+  "completedUtc": "2026-10-06T09:17:36.835545+00:00",
+  "passed": 32
+}

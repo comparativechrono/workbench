@@ -386,6 +386,71 @@ def _state(pack_id, workflow_id, output):
     return state
 
 
+def _workflow_presentation(data):
+    """Add discoverable labels without changing an operation's saved contract.
+
+    Foreground the executables that actually produce the scientific products,
+    not the first alphabetically sorted executable (often a validation helper).
+    These strings never select a command, a port type or a saved tool identity.
+    """
+    steps = [step for step in data.get('steps', []) if step['kind'] != 'copy']
+    executables = {item['id']: item for item in data.get('executables', [])}
+    products = [item for item in data.get('outputs', []) if item.get('final')]
+    scientific = [item for item in products if item['type'] not in ('metrics', 'index', 'text', 'script')]
+    product_ids = {member for item in scientific or products for member in item['manifestOutputs']}
+    producers = [step for step in steps if product_ids.intersection(
+        step.get('produces', []) + ([step['stdout']] if step.get('stdout') else []))]
+    program_ids = []
+    for step in producers or steps:
+        for key in ('tool', 'sinkTool'):
+            identity = step.get(key)
+            if identity in executables and identity not in program_ids:
+                program_ids.append(identity)
+    # Known executable spellings are presentation only; unknown pack programs
+    # retain their declared identity. No pack IDs are renamed or special-cased.
+    spellings = {'samtools': 'SAMtools', 'bcftools': 'BCFtools', 'bwa': 'BWA',
+                 'star': 'STAR', 'fastqc': 'FastQC', 'multiqc': 'MultiQC'}
+    programs = [spellings.get(identity.casefold(), identity) for identity in program_ids]
+    name, description = data['name'], data['description']
+    extra_terms = []
+    # Recognize the precise declared SAMtools commands, not an operation ID or
+    # a filename alone. A larger operation containing faidx is not an index tool.
+    only = steps[0] if len(steps) == 1 and steps[0]['kind'] == 'exec' else None
+    samtools_command = (only.get('args', [])[0] if only and only.get('tool') == 'samtools'
+                        and only.get('args') else None)
+    if samtools_command == 'faidx' and any(
+            path.lower().endswith('.fai') for item in products for path in item['files'].values()):
+        name = 'FASTA lookup index (.fai)'
+        description += (' Creates a SAMtools FASTA lookup index for sequence access, not an aligner index. '
+                        'Starter alignment and variant-calling operations prepare their required indexes '
+                        'themselves; this separate export step is not a prerequisite.')
+        extra_terms.extend(['faidx', 'FASTA lookup index', '.fai'])
+    elif samtools_command == 'sort' and any(item['type'] == 'bam' for item in products):
+        accepts = {kind for port in data.get('ports', []) for kind in port.get('accepts', [])}
+        if {'sam', 'bam'} <= accepts:
+            name += ' to BAM (SAM/BAM input)'
+            description += (' Converts SAM input to BAM while sorting, and also accepts BAM. '
+                            'Sorting does not repair mates or mark duplicates.')
+            extra_terms.extend(['SAM to BAM', 'SAM -> BAM', 'convert SAM', 'BAM conversion'])
+    # Existing names that already identify their program need no redundant
+    # prefix. Adapter wrappers can be recognized by their operation's own name.
+    missing = [program for program in programs if re.search(
+        r'(?<![a-z0-9])' + re.escape(program.removesuffix('-adapter').casefold()) + r'(?![a-z0-9])',
+        name.casefold()) is None]
+    if missing:
+        name = ' + '.join(missing) + ' — ' + name
+    if any(item['type'] == 'sam' for item in products) and not re.search(r'\bsam\b', name, re.I):
+        name += ' (SAM)'
+    data['displayName'] = name
+    data['displayDescription'] = description
+    # Search uses both friendly labels and exact command/format vocabulary.
+    data['searchTerms'] = ' '.join(dict.fromkeys(
+        [data['name'], name, description, data.get('category', '')] + program_ids + programs + extra_terms +
+        [step['args'][0] for step in steps if step.get('args')] +
+        [kind for port in data.get('ports', []) for kind in port.get('accepts', [])] +
+        [item['type'] for item in data.get('outputs', [])]))
+
+
 def describe_workflow(pack, workflow, pack_folder, manifest_sha):
     key = pack['id']+'/'+workflow['id']
     data={'id':key,'packId':pack['id'],'packVersion':pack['version'],'packFolder':pack_folder,
@@ -453,6 +518,7 @@ def describe_workflow(pack, workflow, pack_folder, manifest_sha):
         for out in data['outputs']:
             if out['id']=='variants': out['label']='All normalized calls with filter labels'
     _apply_workbench_schema(pack,workflow,data)
+    _workflow_presentation(data)
     return data
 
 

@@ -1,6 +1,6 @@
 # Purpose and decisions
 
-Reviewed 2026-10-04. Product decisions below capture the project owner's explicit
+Reviewed 2026-10-06. Product decisions below capture the project owner's explicit
 requirements and tester feedback from the development conversation. Technical
 status must be read with [current state](current-state.md), not inferred from a
 requirement alone.
@@ -134,3 +134,69 @@ or a user-approved product change. Add a dated replacement decision and link the
 superseded one; do not erase the reason for the previous approach. Never treat
 this record as authorization to publish or alter account settings in a new
 session.
+
+## Galaxy-inspired native interface, 2026-10-05
+
+Following tester feedback, the user approved a Galaxy-like three-pane layout
+and workflow editor. This updates D06/D07/D11's presentation direction while
+preserving D03's native desktop requirement and the accepted searchable tool
+library. The previous central graph/step-list/editor arrangement is superseded;
+the rejected wheel designs remain historical.
+
+Tools appear on the left. Selecting one in Tools mode opens its standalone
+inputs and options in the centre. General settings occupy the right pane,
+including input/output folders and References. A Workflow button opens a canvas
+for dragging tools and connecting compatible named outputs/inputs; selecting a
+step displays its options on the right. Workbench keeps its own branding and
+native controls, with no copied Galaxy assets or dataset-history pane.
+
+Standalone settings and the workflow remain independent, with edits retained
+when switching modes within the running process. Saved tool presets and saved
+pipeline graphs keep their separate established persistence contracts. Input
+folder selection supplies browsing context, not automatic scientific bindings.
+Canvas connections retain semantic typing, cardinality, cycle rejection and
+exact pack pins; drawing a link is never sufficient evidence of compatibility.
+
+The [native UI guide](native-ui.md) records implementation boundaries and the
+0.8.0 development checkpoint. This is a user-approved product direction; native
+Windows acceptance and publication are separate evidence, pending at the time
+of this decision entry. The completed 0.7.0 release is unchanged.
+
+## Workflow feedback and explicit inputs, 2026-10-06
+
+Testers accepted the three-pane layout but found that automatically creating
+file-input cards for each workflow tool obscured chaining and duplicated file
+controls. The user requested Galaxy-like explicit inputs: add and name a
+reference or a single/paired FASTQ input once, bind its files, and connect that
+input or an earlier tool's output to compatible tool ports. This supersedes
+automatic input allocation for new Workflow-mode tools. Standalone tools retain
+their direct file fields, and existing saved workflow sources, connections and
+exact pack pins remain valid.
+
+Each workflow input owns its file controls; selected tools show connections and
+run parameters without repeating those file editors. Shared inputs support
+fan-out, paired reads retain explicit mate roles, and reference-library binding
+works before an input is connected. Removing an input or tool disconnects its
+consumers and supports Undo rather than silently bypassing a missing step.
+
+The requested canvas navigation includes dragging empty space to pan, visible
+zoom controls and trackpad pinch support where Windows supplies pan/zoom
+gestures. Hovering over a card header exposes a delete cross. These are native
+presentation features and do not alter dependency order or scientific graph
+semantics. Physical trackpad behavior needs hardware validation separately from
+automated mouse and keyboard checks.
+
+Testers also requested scientific program names in the tool library and clearer
+alignment/indexing guidance. Display labels should name the actual program and
+operation while keeping published IDs and saved pins unchanged. The existing
+SAMtools sort operation already converts starter minimap2 SAM to sorted BAM;
+a duplicate conversion pack is not necessary for this workflow. The standalone
+SAMtools faidx operation exports a FASTA lookup index, distinct from aligner
+mapping indexes. Starter alignments and variant operations prepare their own
+required indexes. The [starter audit](starter-tool-semantics.md) records the
+exact supported contracts and limitations.
+
+Scrolling text corruption and the first-open Manage tools array error are bugs
+to fix and reproduce in native gates. Source fixes and layout acceptance alone
+do not establish a complete workflow acceptance or a released version; current
+artifact-specific evidence remains in the [native UI guide](native-ui.md).

@@ -9,15 +9,18 @@ import fnmatch
 from pathlib import Path
 import re
 
-from catalog import validate_parameter, resolve_tool
+from catalog import TYPES, validate_parameter, resolve_tool
 from engine import Engine, display_id, pin_for, clean_text, _binding_parameter
 
 
 class DesktopModel:
-    def __init__(self, app_root, catalog):
+    def __init__(self, app_root, catalog, *, auto_sources=True):
         self.root = Path(app_root).resolve()
         self.catalog = catalog
         self.engine = Engine(self.root, catalog)
+        # Standalone forms allocate their file slots. Workflow sessions leave
+        # ports unconnected until the user chooses an input or an upstream tool.
+        self.auto_sources = auto_sources
         self.graph = {"schema": 1, "name": "Untitled analysis", "nodes": [], "sources": [], "nextNode": 1, "nextSource": 1}
         self.selected = None
         self.pending_source = None
@@ -67,6 +70,10 @@ class DesktopModel:
         return node.get("label") or self._tool(node, optional=True).get("name", "Unavailable tool: " + node["tool"])
 
     def _fields(self, source):
+        # An explicitly created input owns its schema. Sharing it between tools
+        # must not change its field names when a consumer is added or removed.
+        if source.get("fields"):
+            return self._file_schema(source["fields"])
         for node in self.graph["nodes"]:
             tool = self._tool(node, optional=True)
             for port in tool.get("ports", []):
@@ -74,8 +81,50 @@ class DesktopModel:
                     return copy.deepcopy(port.get("fields", []))
         # Empty, detached slots can later be reconnected. Only structural file
         # metadata is retained; values always live in source.files.
-        return [{key: copy.deepcopy(field[key]) for key in ("id", "label", "type", "role", "filter", "required", "help") if key in field}
-                for field in source.get("fields", []) if isinstance(field, dict) and isinstance(field.get("id"), str)]
+        return next((copy.deepcopy(item["fields"]) for item in self.input_types()
+                     if item["id"] == source.get("type")), [])
+
+    @staticmethod
+    def _file_schema(fields):
+        # Paths/defaults belong to bindings, never reusable input metadata.
+        return [{key: copy.deepcopy(field[key]) for key in
+                 ("id", "label", "type", "role", "filter", "required", "help", "differentFrom") if key in field}
+                for field in fields if isinstance(field, dict) and isinstance(field.get("id"), str)]
+
+    def input_types(self):
+        """One explicit input kind per installed semantic contract.
+
+        Port metadata remains authoritative. Paired reads stay atomic with
+        named read-1/read-2 roles; the engine maps those roles to each receiver.
+        """
+        available = {}
+        for tool in self.catalog["tools"].values():
+            for port in tool.get("ports", []):
+                fields = self._file_schema(port.get("fields", []))
+                if not fields or any(field.get("type") not in ("file", "files", "directory") for field in fields):
+                    continue
+                for kind in dict.fromkeys([port["type"], *port.get("accepts", [])]):
+                    if kind == "*":
+                        continue
+                    schema = copy.deepcopy(fields)
+                    if kind == "pair":
+                        if len(schema) != 2 or any(field.get("type") != "file" for field in schema):
+                            continue
+                        # Paired semantic ports declare read 1/read 2 in their
+                        # manifest input order, also used by engine mapping.
+                        schema = [dict(field, id=identity, role=role)
+                                  for field, role, identity in zip(schema, ("read1", "read2"), ("reads1", "reads2"))]
+                        schema[0]["differentFrom"] = "reads2"
+                        schema[1]["differentFrom"] = "reads1"
+                    elif len(schema) != 1:
+                        # Unknown composite contracts need an explicit pack
+                        # schema; never invent a positional file mapping.
+                        continue
+                    if kind not in available:
+                        available[kind] = {"id": kind, "type": kind, "label": TYPES.get(kind, port.get("label", kind)),
+                                           "fields": schema}
+        priority = {"reference": 0, "pair": 1, "reads": 2}
+        return sorted(available.values(), key=lambda item: (priority.get(item["id"], 3), item["label"].casefold()))
 
     @staticmethod
     def _reference_matches(source, field, resource):
@@ -117,7 +166,7 @@ class DesktopModel:
                      for ref in refs if "::" not in ref}
         targets = []
         for source in self.graph["sources"]:
-            if source["id"] not in connected:
+            if self.auto_sources and source["id"] not in connected:
                 continue
             for field in self._fields(source):
                 if self._reference_matches(source, field, resource):
@@ -205,6 +254,36 @@ class DesktopModel:
                     choices.append(descriptor)
         return choices
 
+    def connection_targets(self, ref):
+        """Bounded preview for one dragged source; connect remains authoritative.
+
+        Publishing every source choice on every node made snapshots quadratic.
+        Walk the producer's ancestors once instead: connecting it to itself or
+        an ancestor would create a cycle, exactly as excluded by _choices().
+        """
+        descriptor = self._ref(ref)
+        nodes = {node["id"]: node for node in self.graph["nodes"]}
+        excluded, pending = set(), [descriptor["nodeId"]] if descriptor.get("nodeId") else []
+        while pending:
+            identity = pending.pop()
+            if identity in excluded:
+                continue
+            excluded.add(identity)
+            node = nodes.get(identity, {})
+            pending.extend(source.split("::", 1)[0] for refs in node.get("inputs", {}).values()
+                           for source in refs if "::" in source)
+        targets = []
+        for node in self.graph["nodes"]:
+            if node["id"] in excluded:
+                continue
+            for port in self._tool(node, optional=True).get("ports", []):
+                refs = node.get("inputs", {}).get(port["id"], [])
+                maximum = int(port.get("max", 1))
+                capacity = maximum == 1 or len(refs) < maximum or ref in refs
+                if capacity and self._accepts(port, descriptor):
+                    targets.append({"nodeId": node["id"], "portId": port["id"]})
+        return targets
+
     def _set_inputs(self, node, port, refs):
         if not isinstance(refs, list) or not all(isinstance(ref, str) for ref in refs):
             raise ValueError("Connections must be a list of named sources.")
@@ -246,7 +325,7 @@ class DesktopModel:
         self.graph["nodes"].append(node)
         for port in tool.get("ports", []):
             refs = [from_ref] if port["id"] == chosen_port else []
-            while len(refs) < int(port.get("min", 1)):
+            while self.auto_sources and len(refs) < int(port.get("min", 1)):
                 refs.append(self._default_source(port)["id"])
             node["inputs"][port["id"]] = refs
         self.selected, self.pending_source = identity, None
@@ -268,7 +347,10 @@ class DesktopModel:
             raise ValueError("Action payload must be an object.")
         if action in ("snapshot", "select", "use_output") and not (action == "use_output" and payload.get("toolId")):
             if action == "select":
-                self.selected = self._node(payload.get("nodeId"))["id"]
+                identity = payload.get("nodeId", payload.get("sourceId"))
+                if identity is not None and not isinstance(identity, str):
+                    raise ValueError("Select a named workflow step or input.")
+                self.selected = (self._source(identity) if identity and identity.startswith("input-") else self._node(identity))["id"]
                 self.pending_source = None
             elif action == "use_output":
                 self.pending_source = self._ref(payload.get("ref"))["ref"]
@@ -294,12 +376,25 @@ class DesktopModel:
 
     def _mutate(self, action, payload):
         if action == "apply_fields":
-            if set(payload) - {"nodeId", "params", "files", "name", "graphName"}:
+            if set(payload) - {"nodeId", "sourceId", "params", "files", "name", "graphName"}:
                 raise ValueError("Unknown form update field.")
             params, files = payload.get("params", {}), payload.get("files", {})
             if not isinstance(params, dict) or not isinstance(files, dict):
                 raise ValueError("Form parameters and file bindings must be named objects.")
             if not params and not files and "name" not in payload:
+                if "graphName" in payload:
+                    self._mutate("rename_graph", {"name": payload["graphName"]})
+                return
+            if "sourceId" in payload:
+                if "nodeId" in payload or params:
+                    raise ValueError("An input form cannot change tool options.")
+                source = self._source(payload["sourceId"])
+                if set(files) - {source["id"]}:
+                    raise ValueError("An input form can only edit its own files.")
+                if source["id"] in files:
+                    self._mutate("bind_files", {"sourceId": source["id"], "files": files[source["id"]]})
+                if "name" in payload:
+                    self._mutate("rename_source", {"sourceId": source["id"], "name": payload["name"]})
                 if "graphName" in payload:
                     self._mutate("rename_graph", {"name": payload["graphName"]})
                 return
@@ -317,6 +412,30 @@ class DesktopModel:
                 self._mutate("rename_graph", {"name": payload["graphName"]})
         elif action == "add_tool":
             self._add(payload.get("toolId"), payload.get("fromRef", self.pending_source), payload.get("portId"), payload.get("pin"))
+        elif action == "add_input":
+            if set(payload) - {"inputType", "label"}:
+                raise ValueError("Unknown workflow input field.")
+            item = next((item for item in self.input_types() if item["id"] == payload.get("inputType")), None)
+            if item is None:
+                raise ValueError("Choose an input type supported by an installed tool.")
+            label = payload.get("label", item["label"])
+            if not clean_text(label, 200) or not label.strip():
+                raise ValueError("Give this input a short plain-text name.")
+            source = self._new_source(item, label.strip())
+            self.selected, self.pending_source = source["id"], None
+        elif action == "remove_source":
+            source = self._source(payload.get("sourceId"))
+            affected = []
+            for node in self.graph["nodes"]:
+                for port, refs in node.get("inputs", {}).items():
+                    if source["id"] in refs:
+                        node["inputs"][port] = [ref for ref in refs if ref != source["id"]]
+                        affected.append(display_id(node["id"]) + " · " + port)
+            self.graph["sources"].remove(source)
+            if self.selected == source["id"]:
+                self.selected = None
+            self.pending_source = None
+            self.notice = "Removed " + display_id(source["id"]) + "." + (" Reconnect: " + "; ".join(affected) + "." if affected else "")
         elif action == "use_output":
             self._add(payload.get("toolId"), payload.get("ref"), payload.get("portId"), payload.get("pin"))
         elif action == "remove_step":
@@ -411,7 +530,7 @@ class DesktopModel:
                     if self._accepts(port, self._ref(ref)):
                         refs.append(ref)
                 refs = refs[:int(port.get("max", 1))]
-                while len(refs) < int(port.get("min", 1)):
+                while self.auto_sources and len(refs) < int(port.get("min", 1)):
                     refs.append(self._default_source(port)["id"])
                 node["inputs"][port["id"]] = refs
             affected = []
@@ -451,6 +570,7 @@ class DesktopModel:
             self.engine._structure(graph)
             self.engine._topology(graph)
             if payload.get("template", True):
+                source_fields = {source["id"]: self._file_schema(source.get("fields", [])) for source in graph["sources"]}
                 graph = {"schema": 1, "name": graph.get("name", "Untitled analysis"), "nodes": [
                     {key: copy.deepcopy(node[key]) for key in ("id", "tool", "params", "label", "inputs", "pin") if key in node}
                     for node in graph["nodes"]], "sources": [
@@ -462,6 +582,8 @@ class DesktopModel:
                             node.setdefault("params", {})[field["id"]] = ""
                 for source in graph["sources"]:
                     source["files"] = {}
+                    if source_fields[source["id"]]:
+                        source["fields"] = source_fields[source["id"]]
             self.graph = graph
             self.selected = graph["nodes"][0]["id"] if graph["nodes"] else None
             self.pending_source = None
@@ -506,9 +628,15 @@ class DesktopModel:
             for field in fields:
                 field["value"] = source.get("files", {}).get(field["id"], "")
             source_items.append({**copy.deepcopy(source), "displayId": display_id(source["id"]), "fields": fields,
+                                 "selected": source["id"] == self.selected,
                                  "consumers": copy.deepcopy(consumers.get(source["id"], []))})
         source_map = {source["id"]: source for source in source_items}
         nodes, inspector = [], None
+        if self.selected in source_map:
+            source = source_map[self.selected]
+            inspector = {"kind": "source", "sourceId": source["id"], "displayId": source["displayId"],
+                         "name": source.get("label", "Input"), "type": source["type"],
+                         "fields": copy.deepcopy(source["fields"]), "consumers": copy.deepcopy(source["consumers"])}
         for node in self.graph["nodes"]:
             missing_reason = ''
             try:
@@ -528,7 +656,7 @@ class DesktopModel:
                 compact_ports[-1]["refs"] = refs
                 if node["id"] == self.selected:
                     ports.append({**copy.deepcopy(port), "refs": refs,
-                                  "sources": [copy.deepcopy(source_map[r["ref"]]) for r in refs if r["ref"] in source_map],
+                                  "sources": [copy.deepcopy(source_map[r["ref"]]) for r in refs if self.auto_sources and r["ref"] in source_map],
                                   "choices": self._choices(node, port)})
             outputs = [{**copy.deepcopy(output), "ref": node["id"] + "::" + output["id"],
                         "consumers": copy.deepcopy(consumers.get(node["id"] + "::" + output["id"], []))}
@@ -543,9 +671,9 @@ class DesktopModel:
                 params = []
                 for field in tool.get("params", []):
                     params.append({**copy.deepcopy(field), "value": node.get("params", {}).get(field["id"], field.get("default", ""))})
-                inspector = {"nodeId": node["id"], "displayId": display_id(node["id"]), "name": self._name(node),
+                inspector = {"kind": "tool", "nodeId": node["id"], "displayId": display_id(node["id"]), "name": self._name(node),
                              "tool": copy.deepcopy(tool), "ports": ports, "params": params, "outputs": outputs,
-                             "sources": [copy.deepcopy(source_map[ref["ref"]]) for port in ports for ref in port["refs"] if ref["ref"] in source_map]}
+                             "sources": [copy.deepcopy(source_map[ref["ref"]]) for port in ports for ref in port["refs"] if self.auto_sources and ref["ref"] in source_map]}
                 if missing_reason:
                     inspector.update(unavailable=True, missingPin=copy.deepcopy(node.get('pin')), missingReason=missing_reason)
         review = self.engine.validate(self.graph, check_files=False)
@@ -566,5 +694,5 @@ class DesktopModel:
             except ValueError:
                 self.pending_source = None
         return {"schema": 1, "catalog": copy.deepcopy(self.catalog), "graph": copy.deepcopy(self.graph), "selected": self.selected,
-                "nodes": nodes, "sources": source_items, "ranks": ranks, "inspector": inspector, "review": review,
+                "nodes": nodes, "sources": source_items, "inputTypes": self.input_types(), "ranks": ranks, "inspector": inspector, "review": review,
                 "canUndo": bool(self._undo), "pendingSource": self.pending_source, "compatibleTools": compatible, "notice": self.notice}

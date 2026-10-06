@@ -1,0 +1,190 @@
+{
+  "schema": 1,
+  "success": true,
+  "sourceCommit": "0d3282046d7aa05dc822315c9a237c8ac534cd7a",
+  "assetSha256": "71a84d2c6f7f293bf7f57c1fa3221fc942fce57bca61c8ed3344d593c31c262c",
+  "startedUtc": "2026-10-06T10:23:48.608076+00:00",
+  "platform": "Windows-2022Server-10.0.20348-SP0",
+  "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+  "checks": [
+    "Long-path opt-in is disabled and a real >260-character file requires explicit extended I/O.",
+    "All 7 exact-package integrity checks and the full five-step native starter scientific oracle pass with Windows long-path opt-in disabled.",
+    "Every completed long-path result is present and independently rehashed; native alignments, BAM preparation, variant truth and report creation all pass."
+  ],
+  "skips": [],
+  "expectedApplicationFailure": false,
+  "nativeWindowsExecuted": true,
+  "scope": "Exact packaged private host and complete starter installation-check chain; no GUI claim.",
+  "longPathsEnabled": 0,
+  "appFiles": {
+    "NativeWorkbench.exe": "b0c089b37b0af6ac37d584f847a49a09d4702f0ba27b9edc94ba30c999ff9791",
+    "WorkbenchBridge.exe": "1fc133de534b3ca5a5b4451190ba5e8a59447192aa2f22cd0d36b95e3e8c28b7",
+    "runtime\\python\\python.exe": "31fe10b4ed82a2f960af0ef9931f46a4b84ff286f8b6ffd9dee098cf4f10f17f",
+    "workspace\\engine.py": "6a88960a9e6869061e261cad93b9331f4c66399162787d516a31e9dbc70cf240"
+  },
+  "policyProbe": {
+    "characters": 287,
+    "ordinaryIsFile": false,
+    "extendedIsFile": true
+  },
+  "appVersion": "0.8.0",
+  "applicationCheck": {
+    "status": "completed",
+    "corePassed": 7,
+    "starterPassed": 1,
+    "starterFailed": 0,
+    "starterSkipped": 0
+  },
+  "nativeWorkingDirectoryCharacters": 254,
+  "alignmentOutput": {
+    "characters": 268,
+    "bytes": 69138,
+    "sha256": "42f2c1e2b0743e20cefcc0da1e421c08b6849c96cde9740449efab019d381ee7",
+    "ordinaryIsFile": false,
+    "extendedIsFile": true
+  },
+  "outputFiles": [
+    {
+      "evidenceFile": "completed-outputs\\step-1-sam-sam.sam",
+      "characters": 268,
+      "sha256": "42f2c1e2b0743e20cefcc0da1e421c08b6849c96cde9740449efab019d381ee7",
+      "output": "step-1::sam",
+      "field": "sam"
+    },
+    {
+      "evidenceFile": "completed-outputs\\step-1-pair-check-pair-check.json",
+      "characters": 270,
+      "sha256": "2c25256e25928cff40cffb9069f201138ae4bd083e3ab626b82cd55099e1c436",
+      "output": "step-1::pair-check",
+      "field": "pair-check"
+    },
+    {
+      "evidenceFile": "completed-outputs\\step-2-bam-bam.bam",
+      "characters": 275,
+      "sha256": "5a004ca66dd476375e0a9336e0d086e0406c53b6d63c4d00dafe0ce8a0efef7b",
+      "output": "step-2::bam",
+      "field": "bam"
+    },
+    {
+      "evidenceFile": "completed-outputs\\step-2-duplicate-stats-duplicate-stats.txt",
+      "characters": 269,
+      "sha256": "d17e3fc5e76b234551e22acb81bc2ab96c2c568d8da98ab06b5847dab5a17364",
+      "output": "step-2::duplicate-stats",
+      "field": "duplicate-stats"
+    },
+    {
+      "evidenceFile": "completed-outputs\\step-2-flagstat-flagstat.txt",
+      "characters": 267,
+      "sha256": "b9b7e24ae5f0f1f69ef4feb916513d0acc088f3d18b8d75664c38e5ce092cf8f",
+      "output": "step-2::flagstat",
+      "field": "flagstat"
+    },
+    {
+      "evidenceFile": "completed-outputs\\step-2-alignment-stats-alignment-stats.txt",
+      "characters": 274,
+      "sha256": "657478c5d4e826cbc35ecdb2921d889cda26714bcc134dd05e7cfbd2a8372884",
+      "output": "step-2::alignment-stats",
+      "field": "alignment-stats"
+    },
+    {
+      "evidenceFile": "completed-outputs\\step-2-bam-index-bam-index.csi",
+      "characters": 279,
+      "sha256": "e191b6e288e28cdb8e6d7bf14eb391c6c3f26d57e8c83f2cba92a0ed94e0e374",
+      "output": "step-2::bam-index",
+      "field": "bam-index"
+    },
+    {
+      "evidenceFile": "completed-outputs\\step-2-names-names.bam",
+      "characters": 274,
+      "sha256": "90cca0edba8138c7a81dc07a81a0d48023f6250230d5e496bd1eaa17de4a0228",
+      "output": "step-2::names",
+      "field": "names"
+    },
+    {
+      "evidenceFile": "completed-outputs\\step-2-fixed-fixed.bam",
+      "characters": 276,
+      "sha256": "a5b5b18228aba7b1b71990abf39d7756c3ffdf402570e035d09dc62e66f6a046",
+      "output": "step-2::fixed",
+      "field": "fixed"
+    },
+    {
+      "evidenceFile": "completed-outputs\\step-2-coordinates-coordinates.bam",
+      "characters": 275,
+      "sha256": "cae8c951ed3957ea09bc9d36c54226ea0acb8a555cd6415781e5b2fe57be7c7b",
+      "output": "step-2::coordinates",
+      "field": "coordinates"
+    },
+    {
+      "evidenceFile": "completed-outputs\\step-3-variants-variants.gz",
+      "characters": 270,
+      "sha256": "3cc16ef9df36e28d866d48719a2d643a20cf5b5256a50e71fb2d4428208629d4",
+      "output": "step-3::variants",
+      "field": "variants"
+    },
+    {
+      "evidenceFile": "completed-outputs\\step-3-variant-stats-variant-stats.txt",
+      "characters": 272,
+      "sha256": "660f67134c504a53e9efbd7d374182a9df778b75607cb707b42b338899494001",
+      "output": "step-3::variant-stats",
+      "field": "variant-stats"
+    },
+    {
+      "evidenceFile": "completed-outputs\\step-3-variants-index-variants-index.csi",
+      "characters": 274,
+      "sha256": "36006e889597c9059d580852ee13539e8a4d19713d8ab283859391fa5d97d081",
+      "output": "step-3::variants-index",
+      "field": "variants-index"
+    },
+    {
+      "evidenceFile": "completed-outputs\\step-3-pileup-pileup.bcf",
+      "characters": 265,
+      "sha256": "37f89689296101d7065c2c6d934bdc6433a396472e5a9b94749a932b7867c3e7",
+      "output": "step-3::pileup",
+      "field": "pileup"
+    },
+    {
+      "evidenceFile": "completed-outputs\\step-3-calls-calls.bcf",
+      "characters": 264,
+      "sha256": "cc3f3d2a8e5f38f1c47acab71ad47fd9f7a452e4b2e794ebc43bf138a1f94cc4",
+      "output": "step-3::calls",
+      "field": "calls"
+    },
+    {
+      "evidenceFile": "completed-outputs\\step-3-normalized-normalized.bcf",
+      "characters": 269,
+      "sha256": "d1c751bb0e348304b78af6e6871726b97c92101d83cdf4fe8e0edcd765e3acf5",
+      "output": "step-3::normalized",
+      "field": "normalized"
+    },
+    {
+      "evidenceFile": "completed-outputs\\step-3-reference-reference.fa",
+      "characters": 267,
+      "sha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+      "output": "step-3::reference",
+      "field": "reference"
+    },
+    {
+      "evidenceFile": "completed-outputs\\step-3-reference-index-reference-index.fai",
+      "characters": 271,
+      "sha256": "6bf365006e0d9d03de4e0fbfdfc082c6e5bee611888e54450bc2516614ae95a3",
+      "output": "step-3::reference-index",
+      "field": "reference-index"
+    },
+    {
+      "evidenceFile": "completed-outputs\\step-4-statistics-statistics.txt",
+      "characters": 272,
+      "sha256": "660f67134c504a53e9efbd7d374182a9df778b75607cb707b42b338899494001",
+      "output": "step-4::statistics",
+      "field": "statistics"
+    },
+    {
+      "evidenceFile": "completed-outputs\\step-5-report-report.html",
+      "characters": 234,
+      "sha256": "53fcb6b9095a139e2f85fdf6c495fd8cd8e3ad5e4a219040f0316739b7085588",
+      "output": "step-5::report",
+      "field": "report"
+    }
+  ],
+  "passed": 3,
+  "completedUtc": "2026-10-06T10:23:51.073961+00:00"
+}

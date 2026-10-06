@@ -130,7 +130,7 @@ class SplitRelease(unittest.TestCase):
             self.assertTrue(expected<=set(zipped.namelist()))
             self.assertEqual(zipped.read('legacy/native-workbench-0.5.4-source.zip'),legacy)
             record=json.loads(zipped.read('SOURCE-RECOVERY.json'))
-            self.assertEqual(record['release'],'0.7.0')
+            self.assertEqual(record['release'],'0.8.0')
             self.assertEqual(record['build_baseline']['version'],'0.6.0')
             self.assertTrue(expected<={entry['path'] for entry in record['current_source_files']})
         previous.write_bytes(b'changed source ZIP')
