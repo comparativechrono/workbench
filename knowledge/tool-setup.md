@@ -2,8 +2,10 @@
 
 **Development target: 0.10.0. Not released.** The user approved this direction on
 2026-10-06. Published 0.9.0 and all existing pack releases remain unchanged.
-Official online setup is pending a maintainer-controlled signing key, reviewed
-source configuration and the exact native release gates described below.
+The current exact candidate passed the native checks recorded in the
+[0.10.0 handover](tool-setup-0.10.0-handover.md). Official online setup is pending
+a maintainer-controlled signing process, reviewed source configuration and a new
+candidate validated against that deployed production trust.
 
 ## Installing tools
 
@@ -49,7 +51,9 @@ The [measured 32-pack assessment](full-bundle-sizing-2026-10-06.md) found a
 published 0.9.0 Starter. The new setup interface adds a small core change; its
 exact packaged size must be measured from its own candidate.
 
-A fresh Starter already contains three of the selected packs. The remaining 29
+A fresh Starter already contains three of the selected packs. The measured
+0.10.0 development Starter is **17,027,658 bytes**; its matching source and updater
+identities are in the handover. The remaining 29
 published archives total **3,795,572,848 bytes**. Setup's download estimate counts
 only the missing selection. These numbers exclude reference databases, results,
 filesystem allocation overhead, extraction working space and per-run expansion
@@ -109,7 +113,24 @@ outside the core transaction. The application and updater versions advance to
 
 ## Validation and remaining gates
 
-The combined Linux source gate passed **136 tests**, with **one native-Windows
+The [candidate validation record](evidence/tool-setup-0.10.0-validation-2026-10-06.json)
+now records actual `windows-2022` execution of source `8cee606`: per path, **13
+setup, 32 workspace, eight References, nine results/CWL/DAG/icon and 13 upgrade
+checks passed**. The exact upgrade preserved 203 existing files and verified all
+72 target core files. Test scopes overlap; these are not additive unique-test
+counts. Initial asynchronous GUI test failures were corrected in validators and
+rerun against unchanged application bytes, with the failures retained.
+
+Full setup downloaded the 29 missing real packs (**3,795,572,848 bytes**), and four
+checks covering all 32 packs' coexistence, offline startup, pack-driven BED input
+and 202-record scientific truth passed. The offline host denied Python socket
+operations; this was not an OS firewall test. This used isolated test-only
+catalogue trust, not a deployed
+production source. An independent audit verified all three candidate archives,
+558 matching Git source files and 143 unchanged Starter pack files. See the
+handover for exact archive identities, run URLs, skips and remaining limits.
+
+The combined local Linux source gate passed **136 tests**, with **one native-Windows
 long-path check skipped** and no failures. It covers setup profiles, exact queue
 and signing identities, cancellation/retry, state-write failures, private host
 integration, pack import, catalogue publication and core packaging/upgrades.
@@ -145,8 +166,9 @@ rerun. Existing scientific/UI/References/CWL gates remain separate.
 and connected pinned workflow, actual reference results and receipts, every
 preserved file hash, idempotent repeat update, and new offline scientific/CWL
 execution. It uses the updater's private interpreter and does not claim native
-updater folder-picker interaction or a live reference download. Its Windows
-run is a required release gate, not a pass implied by the script existing.
+updater folder-picker interaction or a live reference download. Its Windows run
+passed in both paths for the current empty-trust candidate; repeat affected
+checks for the future candidate containing production trust.
 
 The candidate workflow must retain input/output hashes, source commit, failures,
 screenshots and native reports. After the production signed catalogue is

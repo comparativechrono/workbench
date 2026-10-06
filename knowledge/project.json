@@ -80,7 +80,11 @@
     "cwl_dag_icon_0_9_0_publication_receipt": "evidence/cwl-dag-icon-0.9.0-publication-receipt-2026-10-06.json",
     "cwl_dag_icon_0_9_0_public_downloads": "evidence/cwl-dag-icon-0.9.0-public-downloads-2026-10-06.json",
     "cwl_dag_icon_0_9_0_release_validation": "evidence/cwl-dag-icon-0.9.0-release-validation-2026-10-06.json",
-    "tool_setup": "tool-setup.md"
+    "tool_setup": "tool-setup.md",
+    "tool_setup_0_10_0_handover": "tool-setup-0.10.0-handover.md",
+    "tool_setup_0_10_0_validation": "evidence/tool-setup-0.10.0-validation-2026-10-06.json",
+    "tool_setup_0_10_0_artifact_audit": "evidence/tool-setup-0.10.0-artifact-audit-2026-10-06.json",
+    "tool_setup_0_10_0_full_state": "evidence/tool-setup-0.10.0-full-state-2026-10-06.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",

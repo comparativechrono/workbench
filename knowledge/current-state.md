@@ -23,14 +23,25 @@ identities; application and tool versions remain independent. The small Starter
 retains its unchanged three packs, and Manage tools/offline import remain.
 See [tool setup](tool-setup.md) and the [size assessment](full-bundle-sizing-2026-10-06.md).
 
+The exact candidate from `8cee606` passed native setup, workspace, References,
+CWL/DAG/icon and 0.9.0 upgrade checks in ordinary and space-containing Windows
+paths. Full setup also installed all 32 real published packs under isolated test
+trust, reopened them with Python host socket operations denied, exposed BED workflow inputs and
+passed the 202-record alignment/BAM check. Initial GUI validator races and their
+successful same-archive rerun remain recorded in the
+[0.10.0 handover](tool-setup-0.10.0-handover.md) and
+[validation evidence](evidence/tool-setup-0.10.0-validation-2026-10-06.json).
+
 Official online setup is **pending deployment**: no maintainer-controlled
-external signing key or independently reviewed official source configuration was
-available in this session. The checked-in source list remains empty; no test key
-or unsigned catalogue is substituted. Publishing preparation validates the
-32-pack lock and can consume the existing external key when provisioned. Native
-candidate, full-pack coexistence and 0.9.0-to-0.10.0 preservation checks are
-separate required gates; source checks and authored gate scripts do not count as
-those passes. Published 0.9.0 and existing pack release bytes remain unchanged.
+external signing process/key location or independently reviewed official source
+configuration was available. GitHub secret provisioning is unknown. The checked-in
+source list remains empty; no test key or unsigned catalogue is substituted.
+Publishing preparation fully verified all 32 archives and can consume the
+maintainer's external key when provisioned. The resulting reviewed signed source
+must be bundled into a new candidate and pass live production setup before
+release. [Draft PR #3](https://github.com/comparativechrono/workbench/pull/3)
+retains implementation and evidence; published 0.9.0 and existing pack bytes
+remain unchanged.
 
 ## Published CWL results, DAG routing and icon, 2026-10-06
 

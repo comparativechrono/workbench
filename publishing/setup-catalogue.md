@@ -103,7 +103,7 @@ list remains empty until the real source has been reviewed and deployed.
 
 ## Observed readiness, 2026-10-06
 
-Live GitHub inspection found `main` at
+Initial GitHub inspection before implementation found `main` at
 `1abd62b49acc841502c9714d12a2470b7e48f8d6`, no open pull requests and no
 `catalogue` branch. The source configuration is `[]`; no documented key locator,
 catalogue-signing workflow secret reference, or catalogue-related environment
@@ -113,3 +113,12 @@ could not be inspected: that is **unknown**, not evidence that no GitHub secret
 exists. A maintainer-provisioned key or the resulting reviewed signed documents
 is the remaining production trust input. See the dated preparation evidence for
 completed acquisition checks; this page is not a live deployment registry.
+
+Implementation is now retained in [draft PR #3](https://github.com/comparativechrono/workbench/pull/3).
+The exact 0.10.0 candidate passed native setup and 0.9.0 upgrade checks in both
+Windows paths, and installed all 32 real packs under isolated test-only trust.
+The [candidate handover](../knowledge/tool-setup-0.10.0-handover.md) records the
+evidence and original validator failures. These checks do not remove the
+production signing prerequisite. The current candidate has empty production
+trust and must be rebuilt with the reviewed source before live production
+validation and publication.
