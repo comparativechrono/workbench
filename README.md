@@ -11,30 +11,24 @@ The application does not require Docker, WSL or a system Python installation.
 
 ## Release status
 
-The latest tested **0.8.0** interface update has been accepted by the user and
-authorized for publication. Promotion of the exact candidate bytes is pending;
-see the [0.8.0 release handover](knowledge/native-ui-0.8.0-release-handover.md).
-The published download below remains 0.7.0 until that promotion is verified.
+Version **0.8.0 is published as a development prerelease** alongside
+**32 independently versioned tool packs**. The
+[application release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.8.0)
+adds separate native **Tools** and **Workflow** modes, reusable workflow inputs,
+drag-to-connect editing, pan/zoom and deletion controls, clearer scientific tool
+names, and fixes for scrolling and deeply nested pipeline output paths. It
+retains the Ensembl archive References finder, offline library and provenance.
 
-Version **0.7.0 is a development prerelease**. The
-[application release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0)
-and **32 independently versioned tool packs** are published on GitHub. This
-application update adds a native **References** finder and reusable offline
-library for release-pinned Ensembl archive genome FASTA, GTF, cDNA, ncRNA and
-protein files, with hashes and provenance retained in analysis results.
-
-The exact published 0.7.0 starter and updater passed the expanded native Windows
-[gate](https://github.com/comparativechrono/workbench/actions/runs/37339280407):
-eight checks in each ordinary and space-containing path, with no failures or
-skips. Checks cover live reference discovery/downloads, cancellation, offline
-reuse, provenance, preserved-data updating, References layout and actual
-**Use for input** selection. The post-release concurrency audit also exercised
-native file checkboxes, a typed destination, **Download selected**, **Cancel
-operation**, and binding the newly downloaded genome. All eight original public
-assets were freshly downloaded and rehashed; the application bytes are unchanged.
-Folder pickers and wider desktop/path acceptance remain outside this automated gate.
-See the [release handover](knowledge/reference-release-handover.md) and
-[release inventory](knowledge/release-inventory.json) for exact hashes and scope.
+The release promotes the exact user-accepted candidate archives without a
+rebuild. Those bytes passed [native run 37453380541](https://github.com/comparativechrono/workbench/actions/runs/37453380541):
+32 workspace and 8 References/update checks in each Windows path, the full
+starter long-path pipeline, and temporal/precision scrolling checks. The CI
+source gate passed 82 checks. All nine public assets have been independently
+downloaded and verified against their expected sizes and SHA-256 values.
+See the [0.8.0 release handover](knowledge/native-ui-0.8.0-release-handover.md)
+for exact identities, publication diagnostics and validation limits. The
+[0.7.0 reference-release evidence](knowledge/reference-release-handover.md)
+and published tool-pack bytes remain unchanged.
 
 The signed online catalogue and its `source.json` trust file are **not published
 or configured**. They require a maintainer-controlled signing key. Use the offline
@@ -50,10 +44,14 @@ replace those pack versions or rerun every pack's scientific suite.
 
 ## Using the application
 
-Download the starter ZIP from the
-[0.7.0 application release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0),
+Download the [0.8.0 Windows starter ZIP](https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/native-workbench-0.8.0-starter-windows.zip),
 extract it and run `NativeWorkbench.exe`. Use **File > Check installation** to
 check the target machine.
+
+Use **Tools** for one operation, or switch to **Workflow** to add reusable input
+cards and connect compatible tool ports. Input cards own the selected files;
+tool cards own their options and connections. See the
+[native interface guide](knowledge/native-ui.md).
 
 Open **References** to search the **Ensembl archive**, choose a numbered release
 and species/assembly, find files and explicitly download the required products.
@@ -156,13 +154,16 @@ GenomicsDB, Spark, VQSR and Python-dependent GATK tools
 are outside this pack, and human whole-genome performance is not yet established.
 
 
-The [0.7.0 updater](https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/native-workbench-0.7.0-update-from-0.6.0.zip)
+The [0.8.0 updater](https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/native-workbench-0.8.0-update-from-0.6.0.zip)
 requires an existing **0.6.0** installation. Close Workbench,
 extract the updater outside the application folder, run `UpdateWorkbench.exe`,
 and choose the existing `native-workbench` folder. Installed packs, saved settings,
 results and downloaded references are retained. The native updater CLI and
 preservation were tested; its folder-picker interaction was not part of the
 automated gate.
+There is **no 0.7.0-to-0.8.0 updater**. For an existing 0.7.0 installation,
+extract the 0.8.0 starter into a separate folder; do not apply the 0.6.0 updater
+or overwrite the existing installation.
 
 Saved pipelines retain exact pack versions and manifest hashes. Installing a
 newer pack does not silently change an existing pipeline. Methods descriptions,

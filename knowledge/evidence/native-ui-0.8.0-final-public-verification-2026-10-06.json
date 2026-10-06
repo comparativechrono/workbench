@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "passed": true,
+  "run_url": "https://github.com/comparativechrono/workbench/actions/runs/37469812304",
+  "run_id": 37469812304,
+  "job_id": 112290052315,
+  "workflow_commit": "2159e0f38b42ef2b8433e1311ece22304cbdf33f",
+  "all_steps_passed": true,
+  "guard_tests_passed": 11,
+  "public_assets_verified": 9,
+  "remote_mutations": false,
+  "artifact": {
+    "id": 11416465488,
+    "bytes": 1075,
+    "sha256": "8a99f78c8d2b24209ac82283062c8ca0a79e1665681ab915115298cc08d87d0a"
+  },
+  "receipt": "evidence/native-ui-0.8.0-final-public-verification-receipt-2026-10-06.json",
+  "receipt_sha256": "d422e4f1c6fd6440eba1fe42d6a8797ec277768d2373e51bc604d777f974455c",
+  "scope": "Read-only recovery of the exact promotion artifact and fresh anonymous downloads of all nine canonical public URLs. Candidate native evidence is reused for unchanged application bytes; no new native execution is claimed."
+}

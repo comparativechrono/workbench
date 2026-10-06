@@ -16,10 +16,11 @@ exact-final Windows installation, graph and scientific gates. Evidence for
 each release retains its own date and tested bytes. Re-check the current tree
 and releases before treating this snapshot as current.
 
-The [0.8.0 native interface candidate](native-ui.md) is separate development in
-[PR #1](https://github.com/comparativechrono/workbench/pull/1). The user has
-accepted the latest tested candidate and explicitly authorized publication.
-Promotion of its exact bytes is pending; see the
+The [0.8.0 native interface](native-ui.md) is now published as a development
+prerelease after user acceptance; [PR #1](https://github.com/comparativechrono/workbench/pull/1)
+is merged. The release promotes the exact tested candidate bytes without a
+rebuild. All nine public assets were independently downloaded and hash-verified;
+see the
 [0.8.0 release handover](native-ui-0.8.0-release-handover.md). Testers
 accepted its layout and reported workflow/input, scrolling and navigation
 issues. The 2026-10-06 revision adds explicit reusable workflow inputs and
@@ -59,8 +60,9 @@ reproduced movement defect. The [scroll record](evidence/native-workflow-0.8.0-s
 retains these limits and the verified candidate download. The user's subsequent
 acceptance supersedes the pending tester-confirmation status; it is user-reported
 acceptance, not a new CI observation or broader display-coverage claim.
-Version 0.8.0 is accepted for publication but remains unreleased at this
-checkpoint; published 0.7.0 and its evidence are unchanged.
+Version 0.8.0 was published at **2026-10-06T13:12:15Z** as
+[app-v0.8.0](https://github.com/comparativechrono/workbench/releases/tag/app-v0.8.0).
+Published 0.7.0 and its evidence remain unchanged.
 
 ## Reading order
 

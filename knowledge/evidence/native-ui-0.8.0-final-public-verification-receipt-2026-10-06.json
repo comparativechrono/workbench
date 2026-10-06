@@ -1,0 +1,65 @@
+{
+  "success": true,
+  "phase": "completed",
+  "verificationOnly": true,
+  "release": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.8.0",
+  "releaseId": 404720508,
+  "publicationCommit": "6fa1886b2027cfe634d9f9234fff773cd6c646d0",
+  "packagedSourceCommit": "b3928ca6a29d22b5f010a303658c2e19c24324da",
+  "publicDownloads": [
+    {
+      "file": "BUILD-PROVENANCE.json",
+      "bytes": 940,
+      "sha256": "b6f9285b6160da0c6d9a7c5a5195cc4404f1796c1f9db3ec7df707efb8ce0e15",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/BUILD-PROVENANCE.json"
+    },
+    {
+      "file": "EVIDENCE-SHA256SUMS.txt",
+      "bytes": 433,
+      "sha256": "bdfddef2b9933713668ec0f68aa91cddd347b96d6a4b2508e6ed7134458db445",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/EVIDENCE-SHA256SUMS.txt"
+    },
+    {
+      "file": "RELEASE-VALIDATION.json",
+      "bytes": 5163,
+      "sha256": "00903db808257cf8cb810c58e4d517c2768cf4198db010f9766335213f4e94bb",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/RELEASE-VALIDATION.json"
+    },
+    {
+      "file": "SHA256SUMS.txt",
+      "bytes": 320,
+      "sha256": "a9adefa254aff2fab797830a3832b82a9cc69a130800bd5594d9a7ee15c7fb01",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/SHA256SUMS.txt"
+    },
+    {
+      "file": "WINDOWS-EVIDENCE.zip",
+      "bytes": 2446044,
+      "sha256": "781dbb3487bcbb9ba5c17509f8ba32ed964f8d7cafa0bc8e93678882f1c94d1c",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/WINDOWS-EVIDENCE.zip"
+    },
+    {
+      "file": "native-workbench-0.8.0-source.zip",
+      "bytes": 46243835,
+      "sha256": "c2590379b45d313acbcd5bbc41344b288aa6ad159804bf06dcbdcc9726adb22f",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/native-workbench-0.8.0-source.zip"
+    },
+    {
+      "file": "native-workbench-0.8.0-starter-windows.zip",
+      "bytes": 16948940,
+      "sha256": "df001a80033ff8e834045ec683c79672e0efdbd4880fb89fca8bf8c36d830fdc",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/native-workbench-0.8.0-starter-windows.zip"
+    },
+    {
+      "file": "native-workbench-0.8.0-update-from-0.6.0.zip",
+      "bytes": 12897242,
+      "sha256": "3dd146267b9a8300ba957c84914bc324ea537c05b09268b48381ae6a4d530e96",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/native-workbench-0.8.0-update-from-0.6.0.zip"
+    },
+    {
+      "file": "source-metadata.json",
+      "bytes": 1763,
+      "sha256": "364c1606a0feff888b2eebf4482c28c767032d1d56170a805b02bdc50297d90c",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/source-metadata.json"
+    }
+  ]
+}

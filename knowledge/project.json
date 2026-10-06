@@ -4,7 +4,7 @@
   "project": "Native Workbench",
   "repository": "https://github.com/comparativechrono/workbench",
   "reviewed_on": "2026-10-06",
-  "source_baseline_commit": "57d635370a1cd34dd1549aff95a2feba7faeeb74",
+  "source_baseline_commit": "b3928ca6a29d22b5f010a303658c2e19c24324da",
   "format": {
     "prose": "UTF-8 Markdown",
     "data": "JSON",
@@ -67,7 +67,10 @@
     "native_workflow_final_spaces_references": "evidence/native-workflow-0.8.0-final-spaces-references-2026-10-06.json",
     "native_workflow_long_path_evidence": "evidence/native-workflow-0.8.0-long-path-2026-10-06.json",
     "native_workflow_scroll_evidence": "evidence/native-workflow-0.8.0-scroll-2026-10-06.json",
-    "native_ui_0_8_0_release_handover": "native-ui-0.8.0-release-handover.md"
+    "native_ui_0_8_0_release_handover": "native-ui-0.8.0-release-handover.md",
+    "native_ui_0_8_0_public_downloads": "evidence/native-ui-0.8.0-public-downloads-2026-10-06.json",
+    "native_ui_0_8_0_release_validation": "evidence/native-ui-0.8.0-release-validation-2026-10-06.json",
+    "native_ui_release_final_verification": "evidence/native-ui-0.8.0-final-public-verification-2026-10-06.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -118,16 +121,16 @@
     }
   },
   "historical_source_baseline_commit": "8f95caa1f267d19ce72ea3cd7f2396ae66a801c1",
-  "release_tag_commit": "6c266a58818886c6f4f5287006f20fafc5aadd68",
-  "source_commit_scope": "Published 0.7.0 packaged application source; release tag adds validation gate/evidence only. Development checkpoints are separate.",
+  "release_tag_commit": "6fa1886b2027cfe634d9f9234fff773cd6c646d0",
+  "source_commit_scope": "Published 0.8.0 packaged application source; the release tag adds documentation and promotion automation without rebuilding accepted candidate bytes. Historical releases and development checkpoints retain their own identities.",
   "native_ui_development": {
     "recorded_on": "2026-10-06",
     "version": "0.8.0",
     "branch": "ui/galaxy-native-workspace",
     "starting_commit": "7c6f2437842788daf9918ac2194ef859b153092c",
     "pull_request": "https://github.com/comparativechrono/workbench/pull/1",
-    "pull_request_state": "open-ready-for-review",
-    "status": "latest exact tested 0.8.0 candidate accepted by the user and authorized for publication; unchanged-byte promotion pending; not yet published",
+    "pull_request_state": "merged",
+    "status": "user-accepted exact candidate published as app-v0.8.0 development prerelease; all nine public assets independently downloaded and verified; accepted application bytes unchanged",
     "candidate_source_commit": "b3928ca6a29d22b5f010a303658c2e19c24324da",
     "native_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37453380541",
     "native_status": "all five jobs passed: 82 source checks, 32 workspace plus 8 References/update checks per Windows path, full five-stage long-path pipeline regression and the three-panel temporal/precision scroll gate",
@@ -214,7 +217,7 @@
       "Physical trackpad pinch, high-DPI/multi-monitor movement and native folder pickers remain unvalidated.",
       "User accepted the latest tested candidate and authorized publication; acceptance is user-reported and does not broaden automated display/device coverage.",
       "Updater coverage is 0.6.0 to 0.8.0 only; no 0.7.0-to-0.8.0 upgrade validation is claimed.",
-      "No 0.8.0 release tag or published release was created."
+      "Version 0.8.0 is published as a development prerelease; prior pending-publication statements in immutable candidate evidence remain historical."
     ],
     "guide": "native-ui.md",
     "evidence": "evidence/native-workflow-0.8.0-scroll-2026-10-06.json",
@@ -508,7 +511,7 @@
     },
     "scroll_flashing_follow_up": {
       "recorded_on": "2026-10-06",
-      "status": "exact package passed native observation and precision-wheel gate; user subsequently accepted the latest candidate and authorized publication; CI did not reproduce visual flashing",
+      "status": "exact package passed native observation and precision-wheel gate; user subsequently accepted it and it was published unchanged; CI did not reproduce visual flashing",
       "report": "Text still flashes while scrolling after the user-confirmed pipeline fix.",
       "previous_candidate_source_commit": "0d3282046d7aa05dc822315c9a237c8ac534cd7a",
       "prior_scroll_evidence": {
@@ -568,15 +571,73 @@
       "scope": "Supersedes pending tester confirmation; not a fresh automated run or evidence of additional display/device configurations."
     },
     "publication": {
-      "status": "authorized; pending promotion and final public-download verification",
-      "intended_release_tag": "app-v0.8.0",
+      "status": "published; independent final public-download verification passed",
+      "release_id": 404720508,
+      "release_tag": "app-v0.8.0",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.8.0",
+      "published_at": "2026-10-06T13:12:15Z",
+      "release_tag_commit": "6fa1886b2027cfe634d9f9234fff773cd6c646d0",
       "prerelease": true,
+      "draft": false,
+      "published": true,
       "accepted_source_commit": "b3928ca6a29d22b5f010a303658c2e19c24324da",
-      "promotion_policy": "Promote unchanged accepted candidate archives without rebuilding.",
-      "published": false,
+      "promotion_policy": "Accepted candidate archives promoted unchanged without rebuilding.",
+      "public_assets_verified": 9,
+      "zip_crcs_verified": 4,
+      "checksum_manifests_verified": 2,
+      "original_candidate_companions_unchanged": 6,
+      "public_download_record": "evidence/native-ui-0.8.0-public-downloads-2026-10-06.json",
+      "release_validation_record": "evidence/native-ui-0.8.0-release-validation-2026-10-06.json",
+      "public_verification_scope": "Fresh anonymous downloads and byte/checksum verification; reuses exact accepted candidate Windows evidence, without claiming a new native run.",
+      "publication_diagnostics": [
+        "First attempt: HTTP 415 while downloading the build artifact, before release mutation.",
+        "Second attempt: all nine draft assets verified and release published; first public GET returned HTTP 404 and failed that workflow verification step. Independent public downloads subsequently passed without changing assets."
+      ],
+      "read_only_verification_workflow_status": "passed; all nine public assets verified without remote mutations",
       "updater_from_version": "0.6.0",
       "updater_from_0_7_0_supported": false,
-      "handover": "native-ui-0.8.0-release-handover.md"
-    }
+      "handover": "native-ui-0.8.0-release-handover.md",
+      "read_only_verification_workflow": {
+        "status": "passed",
+        "passed": true,
+        "run_url": "https://github.com/comparativechrono/workbench/actions/runs/37469812304",
+        "run_id": 37469812304,
+        "job_id": 112290052315,
+        "workflow_commit": "2159e0f38b42ef2b8433e1311ece22304cbdf33f",
+        "all_steps_passed": true,
+        "guard_tests_passed": 11,
+        "public_assets_verified": 9,
+        "remote_mutations": false,
+        "artifact": {
+          "id": 11416465488,
+          "bytes": 1075,
+          "sha256": "8a99f78c8d2b24209ac82283062c8ca0a79e1665681ab915115298cc08d87d0a"
+        },
+        "receipt": "evidence/native-ui-0.8.0-final-public-verification-receipt-2026-10-06.json",
+        "receipt_sha256": "d422e4f1c6fd6440eba1fe42d6a8797ec277768d2373e51bc604d777f974455c",
+        "scope": "Read-only recovery of the exact promotion artifact and fresh anonymous downloads of all nine canonical public URLs. Candidate native evidence is reused for unchanged application bytes; no new native execution is claimed."
+      }
+    },
+    "merge_commit": "2086175a18ae018f9f14a295dd6c4e207d1d41e7",
+    "published_downloads": [
+      {
+        "name": "native-workbench-0.8.0-source.zip",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/native-workbench-0.8.0-source.zip",
+        "bytes": 46243835,
+        "sha256": "c2590379b45d313acbcd5bbc41344b288aa6ad159804bf06dcbdcc9726adb22f"
+      },
+      {
+        "name": "native-workbench-0.8.0-starter-windows.zip",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/native-workbench-0.8.0-starter-windows.zip",
+        "bytes": 16948940,
+        "sha256": "df001a80033ff8e834045ec683c79672e0efdbd4880fb89fca8bf8c36d830fdc"
+      },
+      {
+        "name": "native-workbench-0.8.0-update-from-0.6.0.zip",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/native-workbench-0.8.0-update-from-0.6.0.zip",
+        "bytes": 12897242,
+        "sha256": "3dd146267b9a8300ba957c84914bc324ea537c05b09268b48381ae6a4d530e96"
+      }
+    ]
   }
 }

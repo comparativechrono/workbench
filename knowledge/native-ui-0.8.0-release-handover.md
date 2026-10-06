@@ -3,12 +3,14 @@
 Recorded **2026-10-06**. The user explicitly accepted the latest tested 0.8.0
 candidate and authorized publication. This is user-reported acceptance of the
 candidate, separate from the automated evidence below. It supersedes the
-previous pending tester-confirmation status. **Publication is pending** at this
-checkpoint; 0.7.0 remains the published application.
+previous pending tester-confirmation status. **0.8.0 is published as a development
+prerelease**, and all nine public assets have been independently downloaded and
+verified. The [release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.8.0)
+was published at **2026-10-06T13:12:15Z**. Published 0.7.0 remains unchanged.
 
 ## Accepted source and immutable candidate
 
-Promote the exact archives built from
+The release promotes the exact archives built from
 `b3928ca6a29d22b5f010a303658c2e19c24324da`, validated in
 [run 37453380541](https://github.com/comparativechrono/workbench/actions/runs/37453380541).
 The [candidate bundle](https://github.com/comparativechrono/workbench/actions/runs/37453380541/artifacts/11408021439)
@@ -19,9 +21,9 @@ durable release download.
 
 | Accepted archive | Bytes | SHA-256 |
 | --- | ---: | --- |
-| `native-workbench-0.8.0-starter-windows.zip` | 16,948,940 | `df001a80033ff8e834045ec683c79672e0efdbd4880fb89fca8bf8c36d830fdc` |
-| `native-workbench-0.8.0-update-from-0.6.0.zip` | 12,897,242 | `3dd146267b9a8300ba957c84914bc324ea537c05b09268b48381ae6a4d530e96` |
-| `native-workbench-0.8.0-source.zip` | 46,243,835 | `c2590379b45d313acbcd5bbc41344b288aa6ad159804bf06dcbdcc9726adb22f` |
+| [native-workbench-0.8.0-starter-windows.zip](https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/native-workbench-0.8.0-starter-windows.zip) | 16,948,940 | `df001a80033ff8e834045ec683c79672e0efdbd4880fb89fca8bf8c36d830fdc` |
+| [native-workbench-0.8.0-update-from-0.6.0.zip](https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/native-workbench-0.8.0-update-from-0.6.0.zip) | 12,897,242 | `3dd146267b9a8300ba957c84914bc324ea537c05b09268b48381ae6a4d530e96` |
+| [native-workbench-0.8.0-source.zip](https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/native-workbench-0.8.0-source.zip) | 46,243,835 | `c2590379b45d313acbcd5bbc41344b288aa6ad159804bf06dcbdcc9726adb22f` |
 
 The packaged `NativeWorkbench.exe` SHA-256 is
 `e32fc3e5acb42766641a822f01835430b3312b84c3174bd282fe2a50ef6f9d71`.
@@ -31,7 +33,7 @@ source copies and 14 relevant source files. The
 [scroll/candidate ledger](evidence/native-workflow-0.8.0-scroll-2026-10-06.json)
 retains exact report and capture hashes and earlier failures.
 
-The release workflow is to promote these accepted bytes, not rebuild them.
+The release workflow promoted these accepted bytes without rebuilding them.
 Later handover and publication records remain separate from the source
 companion's creation-time snapshot. Do not replace an archive to make its
 historical pending statements appear current. Published 0.7.0 application and
@@ -40,7 +42,7 @@ tool-pack bytes remain unchanged.
 ## What the accepted candidate passed
 
 All five jobs in run 37453380541 passed. Evidence is tied to the accepted
-archives, not inferred from the planned release tag:
+archives, not inferred from the release tag:
 
 - **82 source checks** passed in Linux CI with no failures or skips.
 - Each ordinary and space-containing Windows path passed **32 workspace checks**
@@ -83,17 +85,45 @@ clinical validation. Accepted user feedback does not widen those automated
 claims. See the [native interface guide](native-ui.md) for the workflow and
 input contracts.
 
-## Publication checkpoint
+## Publication and final public verification
 
-Publication is authorized but not yet recorded as complete. The intended
-identity is **app-v0.8.0**, a development prerelease consistent with 0.7.0. A
-narrow Actions promotion will recover and verify the pinned accepted bundle,
-publish its unchanged archives with matching provenance/evidence and checksums,
-and verify the final public downloads.
+[Release 404720508](https://github.com/comparativechrono/workbench/releases/tag/app-v0.8.0)
+is public, non-draft and marked as a development prerelease. Tag **app-v0.8.0**
+points to **`6fa1886b2027cfe634d9f9234fff773cd6c646d0`**. The accepted interface
+work merged through [PR #1](https://github.com/comparativechrono/workbench/pull/1)
+at `2086175`. Packaged source remains **`b3928ca`**: subsequent source-control
+changes contain documentation, release records and promotion automation, not a
+rebuilt application.
 
-Record the actual release tag/commit, publication time, final download URLs,
-asset sizes/hashes, retained evidence locations and public verification after
-publication succeeds. Keep the accepted candidate run distinct from any later
-native execution against final release URLs; publication itself is not a new
-native test. Update the current-state/index/inventory at the verified completion
-level without altering dated reports or historical candidate objects.
+The release contains the three archives above plus `BUILD-PROVENANCE.json`,
+`source-metadata.json`, `SHA256SUMS.txt`, `RELEASE-VALIDATION.json`,
+`WINDOWS-EVIDENCE.zip` and `EVIDENCE-SHA256SUMS.txt`. The
+[independent public-download record](evidence/native-ui-0.8.0-public-downloads-2026-10-06.json)
+records fresh anonymous downloads of all **nine assets**: sizes and SHA-256
+values match GitHub metadata and the frozen promotion bytes; six original
+companion files also match the accepted candidate. All four ZIP CRCs and both
+checksum manifests passed. The
+[retained release validation](evidence/native-ui-0.8.0-release-validation-2026-10-06.json)
+matches the published report and binds the accepted native evidence.
+
+Two publication diagnostics remain separate history. The
+[first attempt](evidence/native-ui-0.8.0-publication-attempt-1-2026-10-06.json)
+failed with HTTP 415 while obtaining a build artifact, before any release
+mutation. The [second attempt](evidence/native-ui-0.8.0-publication-attempt-2-2026-10-06.json)
+verified all nine draft assets and published successfully, then its first public
+GET returned HTTP 404 and failed that workflow's verification step. Publication
+had already occurred; the independent downloads above subsequently succeeded
+without replacing any asset. The separate [read-only verification run 37469812304](https://github.com/comparativechrono/workbench/actions/runs/37469812304)
+subsequently passed every step and all 11 promotion/verification guard tests. It
+recovered the exact retained promotion archive and anonymously reverified all
+nine canonical public downloads without remote mutations. Its
+[final record](evidence/native-ui-0.8.0-final-public-verification-2026-10-06.json)
+and [raw receipt](evidence/native-ui-0.8.0-final-public-verification-receipt-2026-10-06.json)
+remain separate from both original failed attempts.
+
+Public-download verification reuses the exact accepted candidate's Windows
+evidence; it does not claim new native execution against final URLs. User
+acceptance, automated native results and public byte verification remain
+distinct records. Existing evidence and historical candidate objects are
+preserved. There is no 0.7.0-to-0.8.0 updater; the supplied update is for 0.6.0
+only.

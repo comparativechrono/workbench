@@ -9,14 +9,16 @@ Commands below run from the repository root unless stated otherwise.
 Paths in angle brackets are placeholders to replace, not files supplied by Git.
 Read [architecture](architecture.md) before changing an unfamiliar layer.
 
-**Development scope, 2026-10-05:** the current UI branch targets 0.8.0; follow
-the [native UI guide](native-ui.md) for its source checks, verified candidate
-download and successful packaged Windows gates. The exact `b3928ca` candidate was accepted by the user/testers on 2026-10-06;
-publication is in progress. See the [0.8.0 release handover](native-ui-0.8.0-release-handover.md). Versioned 0.7.0 commands, inventories
-and validation results below remain the published-baseline runbook, not claims
-about the new candidate. Use `workspace/app_version.py` and the candidate's
-recorded build inputs when constructing new artifact names; never replace the
-published 0.7.0 archives or transfer their validation results to new bytes.
+**Release scope, 2026-10-06:** application 0.8.0 is published from the exact
+accepted `b3928ca` candidate without rebuilding. Follow the
+[native UI guide](native-ui.md) for its source checks and packaged Windows gates,
+and the [release handover](native-ui-0.8.0-release-handover.md) for the durable
+downloads and independent public verification. The release tag is `app-v0.8.0`
+at `6fa1886`, while packaged source remains `b3928ca`. Versioned 0.7.0 commands,
+inventories and validation results below remain the historical baseline
+runbook. Use `workspace/app_version.py` and recorded build inputs for new
+artifact names; never replace published archives or transfer their validation
+results to changed bytes. The published 0.8.0 updater supports 0.6.0 only.
 
 ## Start without disturbing existing work
 

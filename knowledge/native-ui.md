@@ -1,13 +1,13 @@
 # Native interface development
 
-**Status recorded: 2026-10-06.** The Galaxy-inspired interface is development
-work for application **0.8.0**, on `ui/galaxy-native-workspace`, starting from
-`7c6f2437842788daf9918ac2194ef859b153092c`. It is **unreleased** at this checkpoint.
-The candidate is being reviewed in
-[PR #1](https://github.com/comparativechrono/workbench/pull/1).
-The user has now accepted the latest tested candidate and explicitly authorized
-publication. The exact accepted bytes are being prepared for promotion without
-a rebuild; publication remains pending. The
+**Status recorded: 2026-10-06.** The Galaxy-inspired interface is published in
+application **0.8.0**, a development prerelease. Work started from
+`7c6f2437842788daf9918ac2194ef859b153092c` on `ui/galaxy-native-workspace`;
+[PR #1](https://github.com/comparativechrono/workbench/pull/1) merged at `2086175`.
+The user accepted the latest tested candidate and authorized publication.
+The exact accepted bytes were promoted without a rebuild to
+[app-v0.8.0](https://github.com/comparativechrono/workbench/releases/tag/app-v0.8.0).
+All nine public assets were independently downloaded and verified. The
 [0.8.0 release handover](native-ui-0.8.0-release-handover.md) records acceptance,
 archive identities and publication status. Earlier pending-acceptance statements
 below describe their original checkpoints and are superseded by this decision.
@@ -38,14 +38,16 @@ The 2026-10-05 candidate at `c82c559d02a0b70e79afe67da93ace9e344f1ef3`
 and its successful automated Windows gate remain historical evidence below.
 Layout acceptance is not acceptance of the corrected workflow behavior.
 The published 0.7.0 release and its reference-validation evidence remain
-unchanged; no 0.8.0 release was created.
+unchanged. The 0.8.0 release promotes the latest accepted candidate only.
 
-The [current candidate bundle](https://github.com/comparativechrono/workbench/actions/runs/37453380541/artifacts/11408021439)
-contains the corrected starter, matching source and 0.6.0 updater. Extract the
-starter into a **separate folder** and launch `NativeWorkbench.exe` for review.
-It expires **5 November 2026**. No 0.7.0-to-0.8.0 upgrade is claimed.
+Download the [published 0.8.0 Windows starter](https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/native-workbench-0.8.0-starter-windows.zip),
+extract it into a **separate folder** and launch `NativeWorkbench.exe`.
+The [accepted candidate bundle](https://github.com/comparativechrono/workbench/actions/runs/37453380541/artifacts/11408021439)
+remains historical build evidence and expires **5 November 2026**. The separate
+[updater](https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/native-workbench-0.8.0-update-from-0.6.0.zip)
+requires 0.6.0; no 0.7.0-to-0.8.0 updater is supplied or validated.
 
-| Verified current candidate item | Bytes | SHA-256 |
+| Accepted build/release item | Bytes | SHA-256 |
 | --- | ---: | --- |
 | Actions bundle | 75,599,305 | `234688eabc01315aceba6fd588094bc7bf2263670766d0bdc9d088f8f0c735c1` |
 | `native-workbench-0.8.0-starter-windows.zip` | 16,948,940 | `df001a80033ff8e834045ec683c79672e0efdbd4880fb89fca8bf8c36d830fdc` |
@@ -105,7 +107,10 @@ reproduction of the visual flashing.
 The [prior long-path bundle](https://github.com/comparativechrono/workbench/actions/runs/37449356224/artifacts/11404414503)
 and its SHA-256 `71a84d2c6f7f293bf7f57c1fa3221fc942fce57bca61c8ed3344d593c31c262c`
 remain historical evidence. Published 0.7.0 and all historical package/evidence
-bytes remain unchanged. Version 0.8.0 remains an unreleased review candidate.
+bytes remain unchanged. Version 0.8.0 is now published from the accepted bytes;
+the [public-download record](evidence/native-ui-0.8.0-public-downloads-2026-10-06.json)
+and [release validation](evidence/native-ui-0.8.0-release-validation-2026-10-06.json)
+bind publication to those identities.
 
 ## Nested Windows result paths, 2026-10-06
 

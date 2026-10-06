@@ -1,34 +1,38 @@
 # Current project state
 
-Snapshot: **2026-10-06**. Application **0.7.0** is published as a development
-prerelease; its exact-final native reference gate passed. Packaged source:
-[`57d635370a1cd34dd1549aff95a2feba7faeeb74`](https://github.com/comparativechrono/workbench/tree/57d635370a1cd34dd1549aff95a2feba7faeeb74).
-Release tag `app-v0.7.0` points to `6c266a58818886c6f4f5287006f20fafc5aadd68`,
-which adds gate/evidence changes without changing application/runtime bytes.
+Snapshot: **2026-10-06**. Application **0.8.0** is published as a development
+prerelease. It promotes the exact accepted, native-tested archives from source
+[`b3928ca6a29d22b5f010a303658c2e19c24324da`](https://github.com/comparativechrono/workbench/tree/b3928ca6a29d22b5f010a303658c2e19c24324da).
+Release tag `app-v0.8.0` points to `6fa1886b2027cfe634d9f9234fff773cd6c646d0`;
+later changes add handover/publication automation without rebuilding the app.
+All nine public assets were independently downloaded and hash-verified.
 Read this alongside the [machine-readable release inventory](release-inventory.json)
 and the repository [README](../README.md). Update the date, source baseline and
 evidence when the state changes; do not silently turn a pending item into a claim
 of completion.
 
-## Accepted interface update, publication pending, 2026-10-06
+## Published native interface update, 2026-10-06
 
 The user accepted the latest tested **0.8.0** candidate and explicitly authorized
 publication. This supersedes the earlier pending tester-acceptance status.
-The planned development prerelease promotes the exact
+The development prerelease promotes the exact
 `b3928ca6a29d22b5f010a303658c2e19c24324da` candidate without rebuilding or changing
-its archives. Publication and final public-download verification are pending;
-0.7.0 remains the published application at this checkpoint. The
+its archives. [Release 404720508](https://github.com/comparativechrono/workbench/releases/tag/app-v0.8.0)
+was published at **2026-10-06T13:12:15Z** with nine assets. The
+[public-download record](evidence/native-ui-0.8.0-public-downloads-2026-10-06.json)
+verifies all nine assets, all four ZIP CRCs and both checksum manifests. The
+[release validation record](evidence/native-ui-0.8.0-release-validation-2026-10-06.json)
+retains the exact accepted-archive evidence. The
 [release handover](native-ui-0.8.0-release-handover.md) records the accepted
-identities and remaining publication steps.
+identities, publication diagnostics and completed public verification.
 
-The working branch `ui/galaxy-native-workspace` is developing application
+The work from `ui/galaxy-native-workspace` is merged into `main` for application
 **0.8.0** with the user-approved Galaxy-inspired native interface: Tools on the
 left, standalone options in the centre, General settings on the right, and a
 separate drag/drop Workflow mode whose right pane edits the selected step.
 Standalone tools and the workflow preserve independent edits within the running
-process. The candidate is in
-[PR #1](https://github.com/comparativechrono/workbench/pull/1) and remains
-**unreleased**. Testers accepted the layout, then identified problems with
+process. [PR #1](https://github.com/comparativechrono/workbench/pull/1) merged at
+`2086175`. Testers accepted the layout, then identified problems with
 workflow chaining and input ownership, scrolling text, navigation/deletion,
 the first Manage tools opening and unclear tool names/indexing guidance.
 
@@ -75,13 +79,14 @@ cannot exclude shorter flashes between frames or establish behavior on the
 tester's physical display. The user's later acceptance is separate manual
 feedback and does not change what the CI observation established.
 
-The [current review bundle](https://github.com/comparativechrono/workbench/actions/runs/37453380541/artifacts/11408021439)
-expires 5 November 2026. Extract its starter into a separate folder. The
+Download the [published Windows starter](https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/native-workbench-0.8.0-starter-windows.zip).
+The [accepted CI bundle](https://github.com/comparativechrono/workbench/actions/runs/37453380541/artifacts/11408021439)
+is retained as candidate evidence and expires 5 November 2026. The
 16,948,940-byte starter SHA-256 is
 `df001a80033ff8e834045ec683c79672e0efdbd4880fb89fca8bf8c36d830fdc`.
 The bundle, all three ZIP CRCs, build provenance, 68 core entries, 143 unchanged
 pack entries, 15 workspace source copies and 14 relevant source files were
-verified. Application 0.8.0 remains unreleased; published 0.7.0 is unchanged.
+verified during candidate acceptance. Published 0.7.0 is unchanged.
 
 ### Accepted nested-output-path fix
 
@@ -273,7 +278,7 @@ gates. The 0.6.0 and pack inventory below retains its original audit scope.
 
 ## What is available
 
-The native desktop application **0.7.0** and **32 distinct tool packs** are
+The native desktop application **0.8.0** and **32 distinct tool packs** are
 published as development prereleases. There are 33 published pack versions,
 because kallisto 1.0.0 is retained after being superseded by 1.0.1. Historical
 candidate releases are additional diagnostics, not current analysis packs.
@@ -282,9 +287,11 @@ The Windows starter contains only the `align`, `bam` and `variants` packs
 (minimap2, SAMtools and BCFtools). Users extract the starter and run
 `NativeWorkbench.exe`; no Docker, WSL, browser launch or system Python is required.
 Additional packs install through **Manage tools > Import pack ZIP**, including on
-offline computers. The [0.7.0 application release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0)
-supplies a 16,916,149-byte starter, a separate updater for an existing **0.6.0**
+offline computers. The [0.8.0 application release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.8.0)
+supplies a 16,948,940-byte starter, a separate updater for an existing **0.6.0**
 installation, the explicit matching source companion and checksums/build evidence.
+There is no 0.7.0-to-0.8.0 updater; use a separate starter installation and retain
+the existing 0.7.0 folder.
 Individual tool packs can be much larger. The unchanged
 [0.6.0 baseline release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.6.0)
 retains its historical 0.5.4 updater, SDK, source and verification assets; its
@@ -347,6 +354,7 @@ dated evidence for its original bytes, not a fresh test of every older tool.
 
 | Component | Recorded evidence | Boundary |
 | --- | --- | --- |
+| App 0.8.0 | Exact accepted archives promoted unchanged; 82 CI source checks, 32 workspace and 8 References/update checks per native path, full starter long-path pipeline and 960-frame/18-case scroll checks passed; user accepted the candidate; all nine public assets independently downloaded and verified | Native display scope is Windows Server 2022 at 96 DPI. CI did not reproduce visual flashing on either package; precision-wheel movement failure was reproduced and corrected. Updater coverage is 0.6.0 only. |
 | App 0.7.0 | Release work: 93 Linux source-contract passes and eight exact-final native checks per path. Follow-up concurrency audit: eight public assets downloaded again, 57 artifact assertions, eight new native checks per path with zero failures/skips, 43 evidence assertions and twenty captures reviewed, including GUI Download/Cancel | References-specific GUI and packaged-host/native CLI coverage at 96 DPI on Windows Server 2022; GUI Cancel stops early and a separate backend case cancels after 1 MiB. Folder pickers and broader desktop/path acceptance remain outside the gate. |
 | App 0.6.0 | 214 automated tests passed, one Windows-only skip; eight starter checks; actual 0.5.4-to-0.6.0 updater migration on Linux; desktop/updater compiled with warnings treated as errors | Scientific execution used the portable Linux reference backend. This is not proof of the current Windows GUI or native long-path behavior. |
 | Original 18 independent archives | Preserved original pack IDs, versions, manifests, contents and licence/source materials; archive inventories, sizes, hashes and ZIP CRCs audited | Repackaging did not constitute a new native Windows execution test for every tool. |
@@ -632,8 +640,8 @@ or human-genome/cohort performance.
    maintainer-controlled external signing key and independently checked public
    fingerprint are required. An unsigned preview, GitHub credentials or this
    inventory cannot substitute for that trust configuration.
-2. **Broader desktop acceptance and long paths.** The 0.7.0 reference gate covers
-   the measured References interactions at 96 DPI; it does not establish the
+2. **Broader desktop acceptance and long paths.** The 0.8.0 gates cover the
+   recorded workspace and References interactions at 96 DPI; they do not establish the
    entire desktop, folder-picker interactions, high-DPI or
    multi-monitor behavior, Unicode/long paths or managed-PC usability. Record
    exact versions/environment when adding those checks, and run
@@ -645,7 +653,7 @@ or human-genome/cohort performance.
    release diagnostics.
 4. **Future schema improvements.** Reusable STAR indexes need a designed,
    versioned directory-product contract; tool-specific index typing is also a
-   useful extension. These remain proposals, not implemented 0.7.0 features.
+   useful extension. These remain proposals, not implemented 0.8.0 features.
 
 The older `publishing/releases-0.6.0.json`,
 `publishing/publication-layout-0.6.0.json` and parts of the publication guide
@@ -672,7 +680,7 @@ additional local-failure regressions. Only the separate exact-final gate validat
 the published 1.0.0 archive.
 
 Finally, a Git clone alone is not the full third-party build environment. Recover
-the explicit [0.7.0 application source companion](https://github.com/comparativechrono/workbench/releases/download/app-v0.7.0/native-workbench-0.7.0-source.zip)
+the explicit [0.8.0 application source companion](https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/native-workbench-0.8.0-source.zip)
 and matching pack source/licence materials as described in
 [source recovery](../docs/source-recovery/README.md). Do not depend on a previous
 agent's scratch paths, compiler cache, browser session or unpublished credentials.

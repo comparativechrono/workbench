@@ -1,16 +1,15 @@
 # Current architecture
 
-This describes the 0.7 reference-discovery implementation, reviewed
-on 2026-10-05. It is a map of the implementation, not a claim that every deployment
+This describes the reference-discovery and native interface implementation,
+reviewed through the 0.8.0 release on 2026-10-06. It is a map of the implementation, not a claim that every deployment
 or scientific use has been validated. Start with [the knowledge index](README.md).
 
-**Development scope, 2026-10-06:** the separate 0.8.0 candidate adds the native
+**Release scope, 2026-10-06:** 0.8.0 adds the native
 three-pane interface, independent standalone/workflow editing sessions and
 bounded connection previews described in the [native UI guide](native-ui.md).
-Its application/resource versions are 0.8.0; the 0.7.0 version statements below
-describe the published baseline. The final candidate passed the automated
-native gates, and the user accepted it and authorized publication. Promotion of
-the exact accepted archives is pending; see the
+Its application/resource versions are 0.8.0. The final candidate passed the
+automated native gates, and the user accepted it. The exact accepted archives
+are now published and independently download-verified; see the
 [0.8.0 release handover](native-ui-0.8.0-release-handover.md). Published 0.7.0
 artifacts/evidence remain unchanged.
 
@@ -53,7 +52,7 @@ pipes are handled by the native runner, including both subprocess outcomes.
 
 The GUI build target is `build/desktop/DesktopWorkbench.exe`; the release
 packager installs it as `NativeWorkbench.exe`. All three native build resource
-versions are 0.7.0. Application version is maintained in `workspace/app_version.py`
+versions are 0.8.0. Application version is maintained in `workspace/app_version.py`
 and release metadata, independently of pack versions and pack API compatibility.
 
 ## Responsibilities and source map
@@ -85,7 +84,7 @@ adapters; do not add a bespoke GUI for each tool.
 
 Four different version concepts must remain distinct:
 
-* application version, currently 0.7.0;
+* application version, currently 0.8.0;
 * pack API, currently 1;
 * execution manifest format, currently 2;
 * each pack's own version and each executable's upstream/build version.
