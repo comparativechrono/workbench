@@ -1,0 +1,240 @@
+{
+  "schema": 1,
+  "kind": "read-only-0.8.0-release-readiness-audit",
+  "recordedAt": "2026-10-06T12:55:43.596664+00:00",
+  "success": true,
+  "repository": "comparativechrono/workbench",
+  "candidateSourceCommit": "b3928ca6a29d22b5f010a303658c2e19c24324da",
+  "candidateRun": "https://github.com/comparativechrono/workbench/actions/runs/37453380541",
+  "candidateArtifactId": 11408021439,
+  "candidateArtifactSha256": "234688eabc01315aceba6fd588094bc7bf2263670766d0bdc9d088f8f0c735c1",
+  "assets": [
+    {
+      "file": "native-workbench-0.8.0-source.zip",
+      "bytes": 46243835,
+      "sha256": "c2590379b45d313acbcd5bbc41344b288aa6ad159804bf06dcbdcc9726adb22f"
+    },
+    {
+      "file": "native-workbench-0.8.0-starter-windows.zip",
+      "bytes": 16948940,
+      "sha256": "df001a80033ff8e834045ec683c79672e0efdbd4880fb89fca8bf8c36d830fdc"
+    },
+    {
+      "file": "native-workbench-0.8.0-update-from-0.6.0.zip",
+      "bytes": 12897242,
+      "sha256": "3dd146267b9a8300ba957c84914bc324ea537c05b09268b48381ae6a4d530e96"
+    }
+  ],
+  "checks": [
+    {
+      "check": "candidate artifact size and digest match current GitHub",
+      "success": true
+    },
+    {
+      "check": "current candidate CI source and success",
+      "success": true
+    },
+    {
+      "check": "all five CI jobs and executed steps passed",
+      "success": true
+    },
+    {
+      "check": "no existing app-v0.8.0 release or tag at initial audit",
+      "success": true
+    },
+    {
+      "check": "candidate artifact CRC",
+      "success": true
+    },
+    {
+      "check": "all six extracted release inputs equal artifact members",
+      "success": true
+    },
+    {
+      "check": "build provenance source",
+      "success": true
+    },
+    {
+      "check": "native-workbench-0.8.0-source.zip build hash",
+      "success": true
+    },
+    {
+      "check": "native-workbench-0.8.0-starter-windows.zip build hash",
+      "success": true
+    },
+    {
+      "check": "native-workbench-0.8.0-update-from-0.6.0.zip build hash",
+      "success": true
+    },
+    {
+      "check": "candidate checksum native-workbench-0.8.0-source.zip",
+      "success": true
+    },
+    {
+      "check": "candidate checksum native-workbench-0.8.0-starter-windows.zip",
+      "success": true
+    },
+    {
+      "check": "candidate checksum native-workbench-0.8.0-update-from-0.6.0.zip",
+      "success": true
+    },
+    {
+      "check": "native-workbench-0.8.0-source.zip CRC",
+      "success": true
+    },
+    {
+      "check": "native-workbench-0.8.0-starter-windows.zip CRC",
+      "success": true
+    },
+    {
+      "check": "native-workbench-0.8.0-update-from-0.6.0.zip CRC",
+      "success": true
+    },
+    {
+      "check": "all current source inventory entries match Git source",
+      "success": true,
+      "detail": {
+        "verified": 457,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "legacy recovery archive identity",
+      "success": true
+    },
+    {
+      "check": "all 68 core inventory entries verified",
+      "success": true,
+      "detail": {
+        "mismatches": []
+      }
+    },
+    {
+      "check": "143 starter pack files unchanged from frozen baseline",
+      "success": true,
+      "detail": {
+        "mismatches": []
+      }
+    },
+    {
+      "check": "starter binds matching source companion",
+      "success": true
+    },
+    {
+      "check": "established application runtime licensing materials present",
+      "success": true
+    },
+    {
+      "check": "matching native notices retained in source",
+      "success": true
+    },
+    {
+      "check": "all updater inventory entries verified",
+      "success": true,
+      "detail": {
+        "verified": 63,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "updater recipe explicitly 0.6 to 0.8 and correct target",
+      "success": true
+    },
+    {
+      "check": "all 17 update operations equal starter target",
+      "success": true
+    },
+    {
+      "check": "recorded candidate identity matches live accepted candidate",
+      "success": true
+    },
+    {
+      "check": "retained raw report native-workflow-0.8.0-scroll-prior-temporal-2026-10-06.json",
+      "success": true
+    },
+    {
+      "check": "retained raw report native-workflow-0.8.0-scroll-fixed-temporal-2026-10-06.json",
+      "success": true
+    },
+    {
+      "check": "retained raw report native-workflow-0.8.0-scroll-temporal-availability-2026-10-06.json",
+      "success": true
+    },
+    {
+      "check": "retained raw report native-workflow-0.8.0-scroll-ordinary-ui-2026-10-06.json",
+      "success": true
+    },
+    {
+      "check": "retained raw report native-workflow-0.8.0-scroll-ordinary-references-2026-10-06.json",
+      "success": true
+    },
+    {
+      "check": "retained raw report native-workflow-0.8.0-scroll-spaces-ui-2026-10-06.json",
+      "success": true
+    },
+    {
+      "check": "retained raw report native-workflow-0.8.0-scroll-spaces-references-2026-10-06.json",
+      "success": true
+    },
+    {
+      "check": "retained raw report native-workflow-0.8.0-scroll-prior-long-path-2026-10-06.json",
+      "success": true
+    },
+    {
+      "check": "retained raw report native-workflow-0.8.0-scroll-fixed-long-path-2026-10-06.json",
+      "success": true
+    },
+    {
+      "check": "retained raw report native-workflow-0.8.0-scroll-long-path-policy-2026-10-06.json",
+      "success": true
+    },
+    {
+      "check": "retained raw report native-workflow-0.8.0-scroll-long-path-availability-2026-10-06.json",
+      "success": true
+    },
+    {
+      "check": "retained CI original artifact 11408610523",
+      "success": true
+    },
+    {
+      "check": "retained CI original artifact 11408585481",
+      "success": true
+    },
+    {
+      "check": "retained CI original artifact 11408091528",
+      "success": true
+    },
+    {
+      "check": "retained CI original artifact 11407866586",
+      "success": true
+    },
+    {
+      "check": "post-package commit only knowledge/evidence",
+      "success": true
+    }
+  ],
+  "failedChecks": [],
+  "acceptanceEvidence": "Root task reports the user explicitly approved publishing 0.8.0 after testers were happy. This audit independently establishes package/source/evidence identity, not the content of an unseen tester session.",
+  "releaseStateAtAudit": "No app-v0.8.0 release or tag exists; 0.7.0 is published as a development prerelease with 11 assets.",
+  "updaterScope": {
+    "baseVersion": "0.6.0",
+    "targetVersion": "0.8.0",
+    "from070Supported": false,
+    "reason": "Recipe pins the exact 0.6.0 base manifest; apply_core_update.py verifies that base manifest before applying and rejects another installed version. A separate newly packaged, validated delta is required for 0.7.0 installations.",
+    "claimBoundary": "Existing native migration evidence proves 0.6.0 to 0.8.0 only."
+  },
+  "establishedReleaseWorkflow": [
+    "Freeze accepted starter/updater/source bytes and promote without rebuilding.",
+    "Preserve BUILD-PROVENANCE creation-time candidate status; add a separate final release evidence report.",
+    "Attach SHA256SUMS plus matching source companion and durable original Windows artifact ZIPs/reports/screenshots before CI expiry.",
+    "Create app-v0.8.0 tag at accepted source or clearly distinguish any later evidence-only tag commit.",
+    "Download and verify every final public asset and run exact-final native validation against published URLs.",
+    "Update current state, project index, release inventory and PR/handover after successful final gates.",
+    "Keep published 0.7.0 and all independent pack assets unchanged."
+  ],
+  "limits": [
+    "No application rebuild or native test was performed by this read-only audit; existing exact candidate evidence was revalidated against live GitHub metadata and local bytes.",
+    "CI did not reproduce the prior visual flashing; accepted user feedback is distinct from finite CI frame sampling.",
+    "Presence and identity of established licensing/source materials were checked, not a new legal compliance opinion."
+  ]
+}

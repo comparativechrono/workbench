@@ -10,7 +10,16 @@ and the repository [README](../README.md). Update the date, source baseline and
 evidence when the state changes; do not silently turn a pending item into a claim
 of completion.
 
-## Interface development, 2026-10-06
+## Accepted interface update, publication pending, 2026-10-06
+
+The user accepted the latest tested **0.8.0** candidate and explicitly authorized
+publication. This supersedes the earlier pending tester-acceptance status.
+The planned development prerelease promotes the exact
+`b3928ca6a29d22b5f010a303658c2e19c24324da` candidate without rebuilding or changing
+its archives. Publication and final public-download verification are pending;
+0.7.0 remains the published application at this checkpoint. The
+[release handover](native-ui-0.8.0-release-handover.md) records the accepted
+identities and remaining publication steps.
 
 The working branch `ui/galaxy-native-workspace` is developing application
 **0.8.0** with the user-approved Galaxy-inspired native interface: Tools on the
@@ -18,7 +27,7 @@ left, standalone options in the centre, General settings on the right, and a
 separate drag/drop Workflow mode whose right pane edits the selected step.
 Standalone tools and the workflow preserve independent edits within the running
 process. The candidate is in
-[draft PR #1](https://github.com/comparativechrono/workbench/pull/1) and remains
+[PR #1](https://github.com/comparativechrono/workbench/pull/1) and remains
 **unreleased**. Testers accepted the layout, then identified problems with
 workflow chaining and input ownership, scrolling text, navigation/deletion,
 the first Manage tools opening and unclear tool names/indexing guidance.
@@ -63,7 +72,8 @@ tester's **visual flashing was not reproduced in CI**. Six old precision-wheel
 cases failed, reporting zero movement where 48 pixels were expected; those
 separate movement failures now pass. Sampling masks edit/button regions and
 cannot exclude shorter flashes between frames or establish behavior on the
-tester's physical display. Manual confirmation remains outstanding.
+tester's physical display. The user's later acceptance is separate manual
+feedback and does not change what the CI observation established.
 
 The [current review bundle](https://github.com/comparativechrono/workbench/actions/runs/37453380541/artifacts/11408021439)
 expires 5 November 2026. Extract its starter into a separate folder. The

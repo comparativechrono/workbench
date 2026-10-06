@@ -66,7 +66,8 @@
     "native_workflow_final_spaces_ui": "evidence/native-workflow-0.8.0-final-spaces-ui-2026-10-06.json",
     "native_workflow_final_spaces_references": "evidence/native-workflow-0.8.0-final-spaces-references-2026-10-06.json",
     "native_workflow_long_path_evidence": "evidence/native-workflow-0.8.0-long-path-2026-10-06.json",
-    "native_workflow_scroll_evidence": "evidence/native-workflow-0.8.0-scroll-2026-10-06.json"
+    "native_workflow_scroll_evidence": "evidence/native-workflow-0.8.0-scroll-2026-10-06.json",
+    "native_ui_0_8_0_release_handover": "native-ui-0.8.0-release-handover.md"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -125,8 +126,8 @@
     "branch": "ui/galaxy-native-workspace",
     "starting_commit": "7c6f2437842788daf9918ac2194ef859b153092c",
     "pull_request": "https://github.com/comparativechrono/workbench/pull/1",
-    "pull_request_state": "draft",
-    "status": "user accepted the reported pipeline fix; composited-panel and precision-wheel candidate passed exact-package gates; visual flashing was not reproduced in CI and requires tester-display confirmation; unreleased",
+    "pull_request_state": "open-ready-for-review",
+    "status": "latest exact tested 0.8.0 candidate accepted by the user and authorized for publication; unchanged-byte promotion pending; not yet published",
     "candidate_source_commit": "b3928ca6a29d22b5f010a303658c2e19c24324da",
     "native_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37453380541",
     "native_status": "all five jobs passed: 82 source checks, 32 workspace plus 8 References/update checks per Windows path, full five-stage long-path pipeline regression and the three-panel temporal/precision scroll gate",
@@ -211,7 +212,7 @@
       "Earlier ordinary/space-containing native paths did not establish legacy-limit behavior for nested result files.",
       "No universal long-path claim for every optional pack, arbitrary deep installations or reference libraries, or Windows shell dialogs.",
       "Physical trackpad pinch, high-DPI/multi-monitor movement and native folder pickers remain unvalidated.",
-      "User accepted the reported pipeline fix; scroll-flashing reacceptance and broader manual display/workflow acceptance remain outstanding.",
+      "User accepted the latest tested candidate and authorized publication; acceptance is user-reported and does not broaden automated display/device coverage.",
       "Updater coverage is 0.6.0 to 0.8.0 only; no 0.7.0-to-0.8.0 upgrade validation is claimed.",
       "No 0.8.0 release tag or published release was created."
     ],
@@ -507,7 +508,7 @@
     },
     "scroll_flashing_follow_up": {
       "recorded_on": "2026-10-06",
-      "status": "exact package passed native observation and precision-wheel gate; tester visual flashing not reproduced in CI and manual confirmation remains outstanding",
+      "status": "exact package passed native observation and precision-wheel gate; user subsequently accepted the latest candidate and authorized publication; CI did not reproduce visual flashing",
       "report": "Text still flashes while scrolling after the user-confirmed pipeline fix.",
       "previous_candidate_source_commit": "0d3282046d7aa05dc822315c9a237c8ac534cd7a",
       "prior_scroll_evidence": {
@@ -557,6 +558,25 @@
         "precision_failure": "Six negative-one-unit cases through panel and child-edit routes produced offset 0 instead of expected 48 pixels.",
         "scope": "Precision-wheel movement failure was reproduced; it is not reproduction of visual flashing."
       }
+    },
+    "user_acceptance": {
+      "recorded_on": "2026-10-06",
+      "accepted_candidate_source_commit": "b3928ca6a29d22b5f010a303658c2e19c24324da",
+      "accepted_candidate_starter_sha256": "df001a80033ff8e834045ec683c79672e0efdbd4880fb89fca8bf8c36d830fdc",
+      "outcome": "User explicitly accepted the latest tested candidate and authorized publication.",
+      "evidence_type": "user-reported acceptance",
+      "scope": "Supersedes pending tester confirmation; not a fresh automated run or evidence of additional display/device configurations."
+    },
+    "publication": {
+      "status": "authorized; pending promotion and final public-download verification",
+      "intended_release_tag": "app-v0.8.0",
+      "prerelease": true,
+      "accepted_source_commit": "b3928ca6a29d22b5f010a303658c2e19c24324da",
+      "promotion_policy": "Promote unchanged accepted candidate archives without rebuilding.",
+      "published": false,
+      "updater_from_version": "0.6.0",
+      "updater_from_0_7_0_supported": false,
+      "handover": "native-ui-0.8.0-release-handover.md"
     }
   }
 }

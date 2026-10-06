@@ -4,7 +4,13 @@
 work for application **0.8.0**, on `ui/galaxy-native-workspace`, starting from
 `7c6f2437842788daf9918ac2194ef859b153092c`. It is **unreleased** at this checkpoint.
 The candidate is being reviewed in
-[draft PR #1](https://github.com/comparativechrono/workbench/pull/1).
+[PR #1](https://github.com/comparativechrono/workbench/pull/1).
+The user has now accepted the latest tested candidate and explicitly authorized
+publication. The exact accepted bytes are being prepared for promotion without
+a rebuild; publication remains pending. The
+[0.8.0 release handover](native-ui-0.8.0-release-handover.md) records acceptance,
+archive identities and publication status. Earlier pending-acceptance statements
+below describe their original checkpoints and are superseded by this decision.
 Testers accepted the three-pane layout, then reported workflow input duplication,
 difficult chaining, missing navigation/delete controls, text corruption while
 scrolling and an error on the first opening of Manage tools. The feedback
@@ -17,8 +23,9 @@ The user confirmed that this pipeline fix worked, then reported that text still
 flashes while scrolling. The current repaint follow-up at
 `b3928ca6a29d22b5f010a303658c2e19c24324da` passed exact-package automated gates in
 [run 37453380541](https://github.com/comparativechrono/workbench/actions/runs/37453380541).
-The visual flashing was not reproduced by CI on either old or new bytes;
-confirmation on the tester's display remains outstanding.
+The visual flashing was not reproduced by CI on either old or new bytes.
+Subsequent acceptance is user-reported; it is not a new CI observation or a
+claim about additional display configurations.
 
 The prior feedback source `0d2a993fca95a5837a69aa05c63aa5e806c553af` passed
 **32 workspace checks and 8 References/update checks per Windows path** in
@@ -51,8 +58,8 @@ checked. The packaged native executable SHA-256 is
 
 ## Scroll-flashing follow-up, 2026-10-06
 
-User confirmation closes the reported pipeline failure on the reviewed machine;
-it does not close the separately reported flashing text. The previous scrolling
+The earlier pipeline confirmation preceded the separate scrolling report; the
+user has now accepted the latest scrolling candidate for publication. The previous scrolling
 regression sampled static text and background after movement had settled, then
 compared that image with a clean redraw. Its zero-difference result establishes
 the tested final rendering, not what a person saw between frames while scrolling.
@@ -86,8 +93,8 @@ observation. Edit/button regions are masked; this is a finite static-text and
 background observation. The previous package also had zero unexpected frames
 across the same 960 samples. Therefore the **reported visual flashing was not
 reproduced in CI**, and these results do not prove its absence on the tester's
-display or between sampled frames. Physical scrolling/display confirmation
-remains needed.
+display or between sampled frames. The user's subsequent acceptance supersedes
+the pending manual-review status while leaving these automated limits unchanged.
 
 The prior-package comparison did reproduce a separate precision-wheel defect:
 six negative-one-unit cases, routed through panels and child edits, remained at

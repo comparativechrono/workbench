@@ -11,8 +11,8 @@ Read [architecture](architecture.md) before changing an unfamiliar layer.
 
 **Development scope, 2026-10-05:** the current UI branch targets 0.8.0; follow
 the [native UI guide](native-ui.md) for its source checks, verified candidate
-download and successful packaged Windows gates. The candidate remains
-unreleased, awaiting manual tester acceptance. Versioned 0.7.0 commands, inventories
+download and successful packaged Windows gates. The exact `b3928ca` candidate was accepted by the user/testers on 2026-10-06;
+publication is in progress. See the [0.8.0 release handover](native-ui-0.8.0-release-handover.md). Versioned 0.7.0 commands, inventories
 and validation results below remain the published-baseline runbook, not claims
 about the new candidate. Use `workspace/app_version.py` and the candidate's
 recorded build inputs when constructing new artifact names; never replace the

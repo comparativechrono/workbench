@@ -11,6 +11,11 @@ The application does not require Docker, WSL or a system Python installation.
 
 ## Release status
 
+The latest tested **0.8.0** interface update has been accepted by the user and
+authorized for publication. Promotion of the exact candidate bytes is pending;
+see the [0.8.0 release handover](knowledge/native-ui-0.8.0-release-handover.md).
+The published download below remains 0.7.0 until that promotion is verified.
+
 Version **0.7.0 is a development prerelease**. The
 [application release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.7.0)
 and **32 independently versioned tool packs** are published on GitHub. This

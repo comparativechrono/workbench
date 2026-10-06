@@ -17,7 +17,10 @@ each release retains its own date and tested bytes. Re-check the current tree
 and releases before treating this snapshot as current.
 
 The [0.8.0 native interface candidate](native-ui.md) is separate development in
-[draft PR #1](https://github.com/comparativechrono/workbench/pull/1). Testers
+[PR #1](https://github.com/comparativechrono/workbench/pull/1). The user has
+accepted the latest tested candidate and explicitly authorized publication.
+Promotion of its exact bytes is pending; see the
+[0.8.0 release handover](native-ui-0.8.0-release-handover.md). Testers
 accepted its layout and reported workflow/input, scrolling and navigation
 issues. The 2026-10-06 revision adds explicit reusable workflow inputs and
 navigation controls, fixes native repaint/first-open errors and clarifies
@@ -53,9 +56,11 @@ were observed; all 18 precision-wheel cases passed. The old package also showed
 no unexpected frames, so the tester's visual flashing was **not reproduced in
 CI**. Six old precision-wheel cases did fail and now pass; that is a separately
 reproduced movement defect. The [scroll record](evidence/native-workflow-0.8.0-scroll-2026-10-06.json)
-retains these limits and the verified candidate download. Physical tester-display
-confirmation remains needed.
-Version 0.8.0 remains unreleased; published 0.7.0 and its evidence are unchanged.
+retains these limits and the verified candidate download. The user's subsequent
+acceptance supersedes the pending tester-confirmation status; it is user-reported
+acceptance, not a new CI observation or broader display-coverage claim.
+Version 0.8.0 is accepted for publication but remains unreleased at this
+checkpoint; published 0.7.0 and its evidence are unchanged.
 
 ## Reading order
 
@@ -65,6 +70,7 @@ Version 0.8.0 remains unreleased; published 0.7.0 and its evidence are unchanged
 | [Current state](current-state.md) | What is released, tested, limited or unfinished? |
 | [Architecture](architecture.md) | Where does each responsibility live, and how does a run work? |
 | [Native UI development](native-ui.md) | How do the three panes, standalone tools and workflow canvas work, and what remains to validate? |
+| [0.8.0 release handover](native-ui-0.8.0-release-handover.md) | Which exact tested bytes were accepted, and what is their publication status? |
 | [Starter tool semantics](starter-tool-semantics.md) | Which program does each starter operation run, how does SAM become BAM, and what does faidx mean? |
 | [Reference discovery](../docs/reference-discovery-0.7.md) | How are references found, downloaded, reused offline and recorded in runs? |
 | [Development](development.md) | How do I recover inputs, build, test and resume work? |
