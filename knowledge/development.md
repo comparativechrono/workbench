@@ -9,20 +9,21 @@ Commands below run from the repository root unless stated otherwise.
 Paths in angle brackets are placeholders to replace, not files supplied by Git.
 Read [architecture](architecture.md) before changing an unfamiliar layer.
 
-**Release scope, 2026-10-06:** application 0.8.0 is published from the exact
-accepted `b3928ca` candidate without rebuilding. Follow the
-[native UI guide](native-ui.md) for its source checks and packaged Windows gates,
-and the [release handover](native-ui-0.8.0-release-handover.md) for the durable
-downloads and independent public verification. The release tag is `app-v0.8.0`
-at `6fa1886`, while packaged source remains `b3928ca`. Versioned 0.7.0 commands,
-inventories and validation results below remain the historical baseline
-runbook. Use `workspace/app_version.py` and recorded build inputs for new
-artifact names; never replace published archives or transfer their validation
-results to changed bytes. The published 0.8.0 updater supports 0.6.0 only.
+**Release scope, 2026-10-06:** application 0.9.0 is published from the exact
+accepted `beea34a` application candidate without rebuilding. The release tag
+`app-v0.9.0` and PR #2 merge commit are `1ee61f1`; the separately built updater
+from 0.8.0 has its own exact native gate. Follow the
+[CWL results guide](cwl-results.md) and [release handover](cwl-dag-icon-0.9.0-handover.md)
+for the contract, immutable identities and publication checks. Versioned 0.7.0
+commands, inventories and results below remain the historical baseline runbook.
+Use `workspace/app_version.py` and recorded build inputs for new artifact names;
+never replace published archives or transfer their validation results to changed
+bytes. Historical [0.8.0 evidence](native-ui-0.8.0-release-handover.md) remains
+unchanged. Published 0.9.0 updaters support 0.6.0 and 0.8.0, not 0.7.0.
 
-## Current 0.9 results and presentation work
+## 0.9 results and presentation
 
-Branch `feature/cwl-dag-icon` adds `workflow.cwl` result export, routed native/SVG
+Merged branch `feature/cwl-dag-icon` adds `workflow.cwl` result export, routed native/SVG
 DAG edges and SVG-derived native icon resources. Read [the CWL results guide](cwl-results.md)
 before changing the exporter or interpreting its portability. Candidate source
 is `beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d`; its
@@ -78,7 +79,11 @@ unchanged accepted starter, and passed the focused native gate at
 13 checks per path, zero failures/skips, 70 core files verified and 202 existing
 files preserved, with native post-update reference and scientific/CWL execution.
 The handover records exact updater bytes, earlier fixture failures and limits.
-Publication and independent public-download verification remain pending.
+[Publication run 37528064595](https://github.com/comparativechrono/workbench/actions/runs/37528064595)
+passed 18 promotion guard checks and verified all 12 public assets by anonymous
+download. A separate [independent public audit](evidence/cwl-dag-icon-0.9.0-public-downloads-2026-10-06.json)
+verified all 12 assets, five ZIP CRCs and three checksum manifests. Later
+documentation records this without modifying accepted archives.
 
 ## Start without disturbing existing work
 

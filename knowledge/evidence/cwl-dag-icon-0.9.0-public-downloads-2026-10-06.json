@@ -1,0 +1,191 @@
+{
+  "schema": 1,
+  "kind": "independent-final-public-download-verification",
+  "checked_utc": "2026-10-06T20:43:54.882611+00:00",
+  "success": true,
+  "release_url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.9.0",
+  "release_id": 405123004,
+  "tag": "app-v0.9.0",
+  "published_at": "2026-10-06T20:39:35Z",
+  "prerelease": true,
+  "draft": false,
+  "publication_commit": "1ee61f1e2334bf0049aa4b9227da6f8663fc0c43",
+  "packaged_source_commit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
+  "publication_workflow": {
+    "run_id": 37528064595,
+    "url": "https://github.com/comparativechrono/workbench/actions/runs/37528064595",
+    "conclusion": "success"
+  },
+  "metadata_and_tag_unchanged_after_downloads": true,
+  "asset_count": 12,
+  "assets": [
+    {
+      "name": "BUILD-PROVENANCE.json",
+      "asset_id": 616601323,
+      "bytes": 940,
+      "sha256": "0de10868b19243071cffd7753381516f67bdfe62350b9a57d7f43326919b9a2c",
+      "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/BUILD-PROVENANCE.json",
+      "downloaded_anonymously": true,
+      "github_digest_matches": true,
+      "zip_crc_checked": false
+    },
+    {
+      "name": "BUILD-UPDATE-PROVENANCE.json",
+      "asset_id": 616601326,
+      "bytes": 2059,
+      "sha256": "202c3999ca365a45acb427bcdf8e30d169d84f6f4f308d2a3004515d29a07311",
+      "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/BUILD-UPDATE-PROVENANCE.json",
+      "downloaded_anonymously": true,
+      "github_digest_matches": true,
+      "zip_crc_checked": false
+    },
+    {
+      "name": "EVIDENCE-SHA256SUMS.txt",
+      "asset_id": 616601325,
+      "bytes": 727,
+      "sha256": "e8a7b8a297f50f5d6af7356dda493bb1a6d741562ab909e0e988293c56d29174",
+      "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/EVIDENCE-SHA256SUMS.txt",
+      "downloaded_anonymously": true,
+      "github_digest_matches": true,
+      "zip_crc_checked": false
+    },
+    {
+      "name": "native-workbench-0.9.0-source.zip",
+      "asset_id": 616601356,
+      "bytes": 46423298,
+      "sha256": "7bfc3802cad3b476300ae7075214e2c06ee320d987df66945ff0809cb3218824",
+      "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/native-workbench-0.9.0-source.zip",
+      "downloaded_anonymously": true,
+      "github_digest_matches": true,
+      "zip_crc_checked": true
+    },
+    {
+      "name": "native-workbench-0.9.0-starter-windows.zip",
+      "asset_id": 616601367,
+      "bytes": 17002821,
+      "sha256": "c2661c144e073c4efdd190ffd186bacd9398b6413b81770d7a057c3947eecf02",
+      "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/native-workbench-0.9.0-starter-windows.zip",
+      "downloaded_anonymously": true,
+      "github_digest_matches": true,
+      "zip_crc_checked": true
+    },
+    {
+      "name": "native-workbench-0.9.0-update-from-0.6.0.zip",
+      "asset_id": 616601364,
+      "bytes": 12951447,
+      "sha256": "eed778882bed560e765c1f2c03d6473b2ea07f2b219e4bd81bff7297e67b177d",
+      "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/native-workbench-0.9.0-update-from-0.6.0.zip",
+      "downloaded_anonymously": true,
+      "github_digest_matches": true,
+      "zip_crc_checked": true
+    },
+    {
+      "name": "native-workbench-0.9.0-update-from-0.8.0.zip",
+      "asset_id": 616601376,
+      "bytes": 12864532,
+      "sha256": "caa50ff7807be889fd9f4fbb617a458b1d2b38f397ce365d4fc7fc17a2511d9e",
+      "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/native-workbench-0.9.0-update-from-0.8.0.zip",
+      "downloaded_anonymously": true,
+      "github_digest_matches": true,
+      "zip_crc_checked": true
+    },
+    {
+      "name": "RELEASE-VALIDATION.json",
+      "asset_id": 616601329,
+      "bytes": 9033,
+      "sha256": "85f979460248df7de872f58613843ed09a868714e7bd6c6b3947e37ca70cfacf",
+      "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/RELEASE-VALIDATION.json",
+      "downloaded_anonymously": true,
+      "github_digest_matches": true,
+      "zip_crc_checked": false
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "asset_id": 616601328,
+      "bytes": 320,
+      "sha256": "c622bb22bc27fc571d5a9e728d80dabff7fe66d4617e9654aaa0259d212480a1",
+      "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/SHA256SUMS.txt",
+      "downloaded_anonymously": true,
+      "github_digest_matches": true,
+      "zip_crc_checked": false
+    },
+    {
+      "name": "source-metadata.json",
+      "asset_id": 616601399,
+      "bytes": 1763,
+      "sha256": "94280fda60803a5ad5598187008ce3e78adf4de751deb450517c24ccb109ddb8",
+      "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/source-metadata.json",
+      "downloaded_anonymously": true,
+      "github_digest_matches": true,
+      "zip_crc_checked": false
+    },
+    {
+      "name": "UPDATE-SHA256SUMS.txt",
+      "asset_id": 616601351,
+      "bytes": 111,
+      "sha256": "12e14bd7ef99d227c8e9a77c583424bb409d096c5fe1a7030cda9e926c0e7e5e",
+      "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/UPDATE-SHA256SUMS.txt",
+      "downloaded_anonymously": true,
+      "github_digest_matches": true,
+      "zip_crc_checked": false
+    },
+    {
+      "name": "WINDOWS-EVIDENCE.zip",
+      "asset_id": 616601353,
+      "bytes": 16852143,
+      "sha256": "1d5b22a19be174007e44e52159a4901bba72c09c2fe6651102f96f51ab4e4e4e",
+      "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/WINDOWS-EVIDENCE.zip",
+      "downloaded_anonymously": true,
+      "github_digest_matches": true,
+      "zip_crc_checked": true
+    }
+  ],
+  "zip_crc_checks": {
+    "passed": 5,
+    "files": [
+      "native-workbench-0.9.0-source.zip",
+      "native-workbench-0.9.0-starter-windows.zip",
+      "native-workbench-0.9.0-update-from-0.6.0.zip",
+      "native-workbench-0.9.0-update-from-0.8.0.zip",
+      "WINDOWS-EVIDENCE.zip"
+    ]
+  },
+  "checksum_manifests": [
+    {
+      "file": "SHA256SUMS.txt",
+      "entries": 3,
+      "success": true
+    },
+    {
+      "file": "UPDATE-SHA256SUMS.txt",
+      "entries": 1,
+      "success": true
+    },
+    {
+      "file": "EVIDENCE-SHA256SUMS.txt",
+      "entries": 8,
+      "success": true
+    }
+  ],
+  "accepted_candidate_members_byte_identical": [
+    "BUILD-PROVENANCE.json",
+    "SHA256SUMS.txt",
+    "native-workbench-0.9.0-source.zip",
+    "native-workbench-0.9.0-starter-windows.zip",
+    "native-workbench-0.9.0-update-from-0.6.0.zip",
+    "source-metadata.json"
+  ],
+  "new_updater": {
+    "file": "native-workbench-0.9.0-update-from-0.8.0.zip",
+    "bytes": 12864532,
+    "sha256": "caa50ff7807be889fd9f4fbb617a458b1d2b38f397ce365d4fc7fc17a2511d9e",
+    "byte_identical_to_validated_artifact": true,
+    "native_validation_run": 37527359533,
+    "native_validation_commit": "648676c4388f1c4dc9f9af0476bf31f9cfca8c92"
+  },
+  "release_validation_assets_rehashed": 10,
+  "scope": "Fresh anonymous canonical GitHub public downloads, metadata/size/SHA-256 checks, five ZIP CRC checks, three checksum manifests, accepted-companion and validated-updater byte comparisons. Reuses exact candidate and native updater evidence; no new native Windows execution is claimed.",
+  "local_recovery_note": "The first local WINDOWS-EVIDENCE.zip copy was unexpectedly truncated after its completed download check. A second independent public download to a new temporary file passed pinned size/SHA-256, was atomically renamed, and then passed this full CRC/checksum verification. Public asset metadata remained unchanged; no remote asset was replaced.",
+  "failures": [],
+  "skips": []
+}

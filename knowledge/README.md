@@ -16,7 +16,7 @@ exact-final Windows installation, graph and scientific gates. Evidence for
 each release retains its own date and tested bytes. Re-check the current tree
 and releases before treating this snapshot as current.
 
-The [0.8.0 native interface](native-ui.md) is now published as a development
+The [0.8.0 native interface](native-ui.md) was published as a development
 prerelease after user acceptance; [PR #1](https://github.com/comparativechrono/workbench/pull/1)
 is merged. The release promotes the exact tested candidate bytes without a
 rebuild. All nine public assets were independently downloaded and hash-verified;
@@ -64,11 +64,14 @@ Version 0.8.0 was published at **2026-10-06T13:12:15Z** as
 [app-v0.8.0](https://github.com/comparativechrono/workbench/releases/tag/app-v0.8.0).
 Published 0.7.0 and its evidence remain unchanged.
 
-The **0.9.0** CWL export, routed DAG and SVG-derived icon candidate has passed
-its exact-package checks. The user accepted it and authorized release on
-2026-10-06. The separate updater from 0.8.0 passed 13 native checks per path;
-publication and public-download verification remain in progress; see the [0.9.0 handover](cwl-dag-icon-0.9.0-handover.md) and
-[CWL feature guide](cwl-results.md). Accepted application bytes are frozen.
+The **0.9.0** CWL export, routed DAG and SVG-derived icon release is now
+[published](https://github.com/comparativechrono/workbench/releases/tag/app-v0.9.0)
+after exact-package checks and user acceptance. The release promotes application
+source `beea34a` unchanged; PR #2 and tag point to `1ee61f1`. Its separate updater
+from 0.8.0 passed 13 native checks per path, and the publication workflow verified
+all 12 public assets by anonymous download. A separate independent audit also
+verified all 12 assets, five ZIP CRCs and three checksum manifests. See the
+[0.9.0 handover](cwl-dag-icon-0.9.0-handover.md) and [CWL feature guide](cwl-results.md).
 
 ## Reading order
 
@@ -78,7 +81,7 @@ publication and public-download verification remain in progress; see the [0.9.0 
 | [Current state](current-state.md) | What is released, tested, limited or unfinished? |
 | [Architecture](architecture.md) | Where does each responsibility live, and how does a run work? |
 | [Native UI development](native-ui.md) | How do the three panes, standalone tools and workflow canvas work, and what remains to validate? |
-| [0.9.0 handover](cwl-dag-icon-0.9.0-handover.md) | Which CWL/DAG/icon bytes were accepted, what passed and what release work remains? |
+| [0.9.0 handover](cwl-dag-icon-0.9.0-handover.md) | Which CWL/DAG/icon bytes were accepted and published, and what passed? |
 | [CWL results](cwl-results.md) | What does an exported workflow contain and what does external execution require? |
 | [0.8.0 release handover](native-ui-0.8.0-release-handover.md) | Which exact native-interface bytes were accepted and published? |
 | [Starter tool semantics](starter-tool-semantics.md) | Which program does each starter operation run, how does SAM become BAM, and what does faidx mean? |

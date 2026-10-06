@@ -1,13 +1,13 @@
 # CWL results, dependency routing and application icon
 
-**Development checkpoint: 2026-10-06.** Branch `feature/cwl-dag-icon` targets
-**0.9.0**. Exact candidate `beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d` has passed
-source/CWL interoperability and exact packaged Windows checks, including the
-final focused native diagram/icon interaction gate. It is **implemented and
-exact-candidate validated and user-accepted; publication is authorized and
-in progress**.
-See the [candidate handover](cwl-dag-icon-0.9.0-handover.md) for exact archives,
-run identities and retained failures. Published 0.8.0 remains unchanged.
+**Released: 2026-10-06.** [Version 0.9.0](https://github.com/comparativechrono/workbench/releases/tag/app-v0.9.0)
+contains the exact accepted application from
+`beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d`. It passed the recorded source/CWL
+interoperability and packaged Windows checks, including routed native diagrams
+and displayed icon frames. The release promotes those application archives
+unchanged and adds a separately validated updater from 0.8.0. See the
+[release handover](cwl-dag-icon-0.9.0-handover.md) for exact archives,
+publication checks, retained fixture failures and validation limits.
 
 ## The result's executable workflow
 
@@ -174,4 +174,5 @@ preserving 202 existing files and verifying 70 core files. Post-update native
 reference analysis, CWL provenance and scientific/export checks passed. The
 [handover](cwl-dag-icon-0.9.0-handover.md) retains the two earlier failed updater
 fixtures and the host-socket, synthetic-reference and CLI-only test limits. The [user acceptance record](evidence/cwl-dag-icon-0.9.0-acceptance-2026-10-06.json)
-authorizes publication without broadening these validation claims.
+records the authorization for the published release without broadening these
+validation claims.

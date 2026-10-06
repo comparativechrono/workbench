@@ -11,30 +11,32 @@ The application does not require Docker, WSL or a system Python installation.
 
 ## Release status
 
-Version **0.8.0 is published as a development prerelease** alongside
+Version **0.9.0 is published as a development prerelease** alongside
 **32 independently versioned tool packs**. The
-[application release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.8.0)
-adds separate native **Tools** and **Workflow** modes, reusable workflow inputs,
-drag-to-connect editing, pan/zoom and deletion controls, clearer scientific tool
-names, and fixes for scrolling and deeply nested pipeline output paths. It
-retains the Ensembl archive References finder, offline library and provenance.
+[application release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.9.0)
+adds **`workflow.cwl` to analysis results**, routes native and saved DAG
+connections around tool cards, and introduces an original SVG-derived Windows
+icon. It retains the native Tools/Workflow interface, reusable inputs and
+Ensembl archive References finder with offline reuse and provenance.
 
-The release promotes the exact user-accepted candidate archives without a
-rebuild. Those bytes passed [native run 37453380541](https://github.com/comparativechrono/workbench/actions/runs/37453380541):
-32 workspace and 8 References/update checks in each Windows path, the full
-starter long-path pipeline, and temporal/precision scrolling checks. The CI
-source gate passed 82 checks. All nine public assets have been independently
-downloaded and verified against their expected sizes and SHA-256 values.
-See the [0.8.0 release handover](knowledge/native-ui-0.8.0-release-handover.md)
-for exact identities, publication diagnostics and validation limits. The
-[0.7.0 reference-release evidence](knowledge/reference-release-handover.md)
-and published tool-pack bytes remain unchanged.
+The exact user-accepted application archives were promoted without rebuilding.
+Their evidence includes **125 source checks**, **32 workspace plus 9
+References/update checks per Windows path**, a final **9-check feature gate per
+path**, and the full five-stage starter long-path regression. The additional
+**0.8.0 updater passed 13 native checks per path**, preserving 202 existing files
+and verifying 70 core files, with post-update reference/scientific/CWL execution.
+The publication workflow and a separate independent audit verified all **12
+public assets** by anonymous download and checksum; five ZIP CRC checks and all
+three checksum manifests passed. See the [0.9.0 release handover](knowledge/cwl-dag-icon-0.9.0-handover.md)
+for exact identities, retained validator failures and validation limits.
 
-The **0.9.0** candidate adds a CWL workflow to analysis results, routes DAG
-edges around cards and introduces an SVG-derived native application icon. Its
-exact-package checks passed and the user accepted it; publication is in progress.
-See the [0.9.0 handover](knowledge/cwl-dag-icon-0.9.0-handover.md) for the accepted
-identities, completed checks and remaining release work.
+To execute exported CWL separately, provide a CWL engine, Python 3.10+, matching
+tool-pack files and input data; Windows binaries remain Windows binaries. This
+adds no dependency to normal Workbench operation. The
+[CWL guide](knowledge/cwl-results.md) describes the export contract and limits.
+Earlier [0.8.0](knowledge/native-ui-0.8.0-release-handover.md) and
+[0.7.0](knowledge/reference-release-handover.md) release evidence and all published
+tool-pack bytes remain unchanged.
 
 The signed online catalogue and its `source.json` trust file are **not published
 or configured**. They require a maintainer-controlled signing key. Use the offline
@@ -50,7 +52,7 @@ replace those pack versions or rerun every pack's scientific suite.
 
 ## Using the application
 
-Download the [0.8.0 Windows starter ZIP](https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/native-workbench-0.8.0-starter-windows.zip),
+Download the [0.9.0 Windows starter ZIP](https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/native-workbench-0.9.0-starter-windows.zip),
 extract it and run `NativeWorkbench.exe`. Use **File > Check installation** to
 check the target machine.
 
@@ -160,16 +162,16 @@ GenomicsDB, Spark, VQSR and Python-dependent GATK tools
 are outside this pack, and human whole-genome performance is not yet established.
 
 
-The [0.8.0 updater](https://github.com/comparativechrono/workbench/releases/download/app-v0.8.0/native-workbench-0.8.0-update-from-0.6.0.zip)
-requires an existing **0.6.0** installation. Close Workbench,
-extract the updater outside the application folder, run `UpdateWorkbench.exe`,
-and choose the existing `native-workbench` folder. Installed packs, saved settings,
-results and downloaded references are retained. The native updater CLI and
-preservation were tested; its folder-picker interaction was not part of the
-automated gate.
-There is **no 0.7.0-to-0.8.0 updater**. For an existing 0.7.0 installation,
-extract the 0.8.0 starter into a separate folder; do not apply the 0.6.0 updater
-or overwrite the existing installation.
+Use the [updater from 0.8.0](https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/native-workbench-0.9.0-update-from-0.8.0.zip)
+or [updater from 0.6.0](https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/native-workbench-0.9.0-update-from-0.6.0.zip)
+matching the installed version. Close Workbench, extract the updater outside the
+application folder, run `UpdateWorkbench.exe`, and choose the existing
+`native-workbench` folder. Installed packs, saved settings, results and reference
+files are retained. Both native updater CLI preservation gates passed; the
+folder-picker interaction was not part of the automated gate. There is **no
+updater for 0.7.0**. For that version, retain the existing installation and
+extract the 0.9.0 starter into a separate folder; extraction does not migrate data
+automatically.
 
 Saved pipelines retain exact pack versions and manifest hashes. Installing a
 newer pack does not silently change an existing pipeline. Methods descriptions,

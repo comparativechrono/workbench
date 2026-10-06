@@ -1,0 +1,242 @@
+{
+  "schema": 1,
+  "version": "0.9.0",
+  "releaseTag": "app-v0.9.0",
+  "packagedSourceCommit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
+  "publicationCommit": "1ee61f1e2334bf0049aa4b9227da6f8663fc0c43",
+  "recordedUtc": "2026-10-06T20:39:24.871226+00:00",
+  "acceptedApplicationArchivesRebuilt": false,
+  "newUpdaterFrom": "0.8.0",
+  "initialRunId": 37485987457,
+  "initialRunConclusion": "failure",
+  "finalFeatureRunId": 37489208656,
+  "updateRunId": 37527359533,
+  "updateValidationCommit": "648676c4388f1c4dc9f9af0476bf31f9cfca8c92",
+  "candidateArtifacts": [
+    {
+      "id": 11424165351,
+      "file": "candidate.zip",
+      "bytes": 75880943,
+      "sha256": "26f1f2070de5ffae4cdb219bd22579f22a3af943eab6e93048fa6e38ad041071",
+      "runId": 37485987457,
+      "headSha": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d"
+    },
+    {
+      "id": 11424060736,
+      "file": "initial-ordinary.zip",
+      "bytes": 1543142,
+      "sha256": "80524be2df80e73f854a2176156e6d9d808b028c2d005ab2d6029411ef1abec8",
+      "runId": 37485987457,
+      "headSha": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d"
+    },
+    {
+      "id": 11424185653,
+      "file": "initial-spaces.zip",
+      "bytes": 1542320,
+      "sha256": "537febe47691043087376810374c965974a8117d52d3e0c09238281aabfe8f02",
+      "runId": 37485987457,
+      "headSha": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d"
+    },
+    {
+      "id": 11422654753,
+      "file": "long-paths.zip",
+      "bytes": 74617,
+      "sha256": "fa473e5729b322dc6b78e11fd70b4d80bb119a2620b529ef8380cae51388c2aa",
+      "runId": 37485987457,
+      "headSha": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d"
+    },
+    {
+      "id": 11425145308,
+      "file": "final-ordinary.zip",
+      "bytes": 395645,
+      "sha256": "66c2c7bd8446de029007d954d4f510744812390bda7d176eb50007105a831033",
+      "runId": 37489208656,
+      "headSha": "bc972125814c1f24dca86391d0c5f240716a52f3"
+    },
+    {
+      "id": 11425275080,
+      "file": "final-spaces.zip",
+      "bytes": 395894,
+      "sha256": "f32a89e1d3aae5a69efe9423702a0ff60e411b7377c414b9dd903f1c27dda80e",
+      "runId": 37489208656,
+      "headSha": "bc972125814c1f24dca86391d0c5f240716a52f3"
+    },
+    {
+      "id": 11442014825,
+      "file": "update-candidate.zip",
+      "bytes": 12845983,
+      "sha256": "0edfa07d0287b6712b3391081c8cda8988974435123e64aa9601e973eef8f7af",
+      "runId": 37527359533,
+      "headSha": "648676c4388f1c4dc9f9af0476bf31f9cfca8c92"
+    },
+    {
+      "id": 11442039933,
+      "file": "update-ordinary.zip",
+      "bytes": 279601,
+      "sha256": "572f55e5e17118a4fa4e7d907301554bdf4c7d2f68697427ed2086dbbc319744",
+      "runId": 37527359533,
+      "headSha": "648676c4388f1c4dc9f9af0476bf31f9cfca8c92"
+    },
+    {
+      "id": 11442179764,
+      "file": "update-spaces.zip",
+      "bytes": 279925,
+      "sha256": "88837d0abbeae9a8518fbfe4238d5c9599a9e2b1995b513bb3c8d12a10f8f85b",
+      "runId": 37527359533,
+      "headSha": "648676c4388f1c4dc9f9af0476bf31f9cfca8c92"
+    }
+  ],
+  "sourceChecks": {
+    "passed": 125,
+    "failures": 0,
+    "skips": 0,
+    "platform": "Linux CI",
+    "stockCwltoolValidationAndExecution": "3.3.20260925135507"
+  },
+  "nativeReports": {
+    "ordinary-workspace": {
+      "passed": 32,
+      "failed": 0,
+      "skips": [],
+      "sha256": "6f7ac0d06df817774d9fc49dbeb3b9eb266a741d90d54c5c5171acf114a730e2",
+      "path": "workspace-ui-evidence/native-ui.json"
+    },
+    "ordinary-references": {
+      "passed": 9,
+      "failed": 0,
+      "skips": [],
+      "sha256": "b9247ecaf61d06052990974793e5da321bac1ac0780c53c64a6bb162544ed76c",
+      "path": "workspace-reference-evidence/native-references.json"
+    },
+    "spaces-workspace": {
+      "passed": 32,
+      "failed": 0,
+      "skips": [],
+      "sha256": "416b25f52a4ab6e86b65f731d7ac53a536e3ba731cc0860eb6cf4c081a279c66",
+      "path": "workspace-ui-evidence/native-ui.json"
+    },
+    "spaces-references": {
+      "passed": 9,
+      "failed": 0,
+      "skips": [],
+      "sha256": "2e35071744f7b0d06058b6e29dd014f4145b76b2c4b8cb7a74329caa777ed796",
+      "path": "workspace-reference-evidence/native-references.json"
+    },
+    "ordinary-results": {
+      "passed": 9,
+      "failed": 0,
+      "skips": [],
+      "sha256": "4f9739a1278abed91ea0b6b477ecf610a556fb40701a6b8a038e84011ea67100",
+      "path": "native-results.json"
+    },
+    "spaces-results": {
+      "passed": 9,
+      "failed": 0,
+      "skips": [],
+      "sha256": "7ef031d17df2657a0455a86cd09d644fff4eca3f93a5bd867831b6b609501917",
+      "path": "native-results.json"
+    },
+    "longPaths": {
+      "passed": 3,
+      "failed": 0,
+      "skips": [],
+      "sha256": "056cc5cac529dcd6b9b1fb85cb6f5122aad159f5f64cf503062b751404b9c146",
+      "path": "native-long-paths.json"
+    },
+    "ordinary-update-from-0.8.0": {
+      "passed": 13,
+      "sha256": "934e2e0e64bbe3adccf26ab6d8b7f8a3f83c2fb4fb857cef3c9b600087f15b6f",
+      "skips": []
+    },
+    "spaces-update-from-0.8.0": {
+      "passed": 13,
+      "sha256": "30fab87df6812b5cc1841730b76f051e48b95adfbd84b94d0b23d6358350edef",
+      "skips": []
+    }
+  },
+  "retainedFailedUpdaterReports": [
+    {
+      "file": "cwl-dag-icon-0.9.0-updater-attempt-1-ordinary-2026-10-06.json",
+      "sha256": "6f13e17026e5f466c0847182bdeeedbaaee93db9741f13b00607b26044701329"
+    },
+    {
+      "file": "cwl-dag-icon-0.9.0-updater-attempt-1-spaces-2026-10-06.json",
+      "sha256": "a6007d3a187cb70ee993a28a9e2669eceab0b22c1e4842364ef0922a7116670a"
+    },
+    {
+      "file": "cwl-dag-icon-0.9.0-updater-attempt-2-ordinary-2026-10-06.json",
+      "sha256": "c0e9de845f5feb04730b82a85599f12ae25cdfdd71d3698fbf7020d3c131c8e0"
+    },
+    {
+      "file": "cwl-dag-icon-0.9.0-updater-attempt-2-spaces-2026-10-06.json",
+      "sha256": "752a03ad915c07d12f9938dc0243c22c0256e9341a320d5ff4af82aaf63714e5"
+    }
+  ],
+  "testerAcceptance": {
+    "reportedBy": "Project owner",
+    "date": "2026-10-06",
+    "statement": "Go ahead accept and release, the testers are happy with it"
+  },
+  "scope": "Reuses exact accepted application evidence; newly builds and validates only the 0.8-to-0.9 updater. Promotion verifies immutable artifacts and downloads.",
+  "limits": [
+    "The initial feature workflow and two intermediate GUI validator workflows failed. Their reports are retained; final corrected fixture passes on unchanged application bytes.",
+    "Earlier updater fixture failures remain failed historical reports; only the pinned successful final updater workflow supplies migration evidence.",
+    "Final zoom screenshot uses native BM_CLICK because the hosted desktop taskbar occluded the physical button. Physical zoom interactions passed the separate workspace gate.",
+    "External CWL execution requires a compatible engine, Python 3.10+, matching packs/runtime and input data. Windows native helper replay is separate from the Linux stock CWL-engine fixture.",
+    "No execution of all optional packs or broad physical-trackpad/high-DPI/multi-monitor survey is claimed. Tester acceptance is user-reported.",
+    "Updater migration is provided from 0.6.0 and 0.8.0 only; no 0.7.0-to-0.9.0 updater is included."
+  ],
+  "originalCompanions": "All six original candidate members, including source/build provenance and SHA256SUMS, retain unchanged creation-time statements. This later validation record supersedes pending acceptance/release status.",
+  "assets": [
+    {
+      "file": "BUILD-PROVENANCE.json",
+      "bytes": 940,
+      "sha256": "0de10868b19243071cffd7753381516f67bdfe62350b9a57d7f43326919b9a2c"
+    },
+    {
+      "file": "BUILD-UPDATE-PROVENANCE.json",
+      "bytes": 2059,
+      "sha256": "202c3999ca365a45acb427bcdf8e30d169d84f6f4f308d2a3004515d29a07311"
+    },
+    {
+      "file": "SHA256SUMS.txt",
+      "bytes": 320,
+      "sha256": "c622bb22bc27fc571d5a9e728d80dabff7fe66d4617e9654aaa0259d212480a1"
+    },
+    {
+      "file": "UPDATE-SHA256SUMS.txt",
+      "bytes": 111,
+      "sha256": "12e14bd7ef99d227c8e9a77c583424bb409d096c5fe1a7030cda9e926c0e7e5e"
+    },
+    {
+      "file": "WINDOWS-EVIDENCE.zip",
+      "bytes": 16852143,
+      "sha256": "1d5b22a19be174007e44e52159a4901bba72c09c2fe6651102f96f51ab4e4e4e"
+    },
+    {
+      "file": "native-workbench-0.9.0-source.zip",
+      "bytes": 46423298,
+      "sha256": "7bfc3802cad3b476300ae7075214e2c06ee320d987df66945ff0809cb3218824"
+    },
+    {
+      "file": "native-workbench-0.9.0-starter-windows.zip",
+      "bytes": 17002821,
+      "sha256": "c2661c144e073c4efdd190ffd186bacd9398b6413b81770d7a057c3947eecf02"
+    },
+    {
+      "file": "native-workbench-0.9.0-update-from-0.6.0.zip",
+      "bytes": 12951447,
+      "sha256": "eed778882bed560e765c1f2c03d6473b2ea07f2b219e4bd81bff7297e67b177d"
+    },
+    {
+      "file": "native-workbench-0.9.0-update-from-0.8.0.zip",
+      "bytes": 12864532,
+      "sha256": "caa50ff7807be889fd9f4fbb617a458b1d2b38f397ce365d4fc7fc17a2511d9e"
+    },
+    {
+      "file": "source-metadata.json",
+      "bytes": 1763,
+      "sha256": "94280fda60803a5ad5598187008ce3e78adf4de751deb450517c24ccb109ddb8"
+    }
+  ]
+}

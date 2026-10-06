@@ -1,31 +1,34 @@
 # Current project state
 
-Snapshot: **2026-10-06**. Application **0.8.0** is published as a development
-prerelease. It promotes the exact accepted, native-tested archives from source
-[`b3928ca6a29d22b5f010a303658c2e19c24324da`](https://github.com/comparativechrono/workbench/tree/b3928ca6a29d22b5f010a303658c2e19c24324da).
-Release tag `app-v0.8.0` points to `6fa1886b2027cfe634d9f9234fff773cd6c646d0`;
-later changes add handover/publication automation without rebuilding the app.
-All nine public assets were independently downloaded and hash-verified.
-Read this alongside the [machine-readable release inventory](release-inventory.json)
-and the repository [README](../README.md). Update the date, source baseline and
-evidence when the state changes; do not silently turn a pending item into a claim
-of completion.
+Snapshot: **2026-10-06**. Application **0.9.0** is published as a development
+prerelease at [app-v0.9.0](https://github.com/comparativechrono/workbench/releases/tag/app-v0.9.0).
+Release **405123004** was published at **2026-10-06T20:39:35Z**. Its tag and
+[PR #2](https://github.com/comparativechrono/workbench/pull/2) merge point to
+`1ee61f1e2334bf0049aa4b9227da6f8663fc0c43`; packaged application source remains
+**`beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d`**. Accepted application archives were
+promoted unchanged. The additional updater from 0.8.0 was separately built and
+natively validated against that same target. The publication workflow passed,
+and a separate independent audit verified all **12 public assets**, five ZIP
+CRCs and all three checksum manifests.
+Read this alongside the [release inventory](release-inventory.json) and
+[release handover](cwl-dag-icon-0.9.0-handover.md). Earlier versions and their
+evidence remain unchanged.
 
-## CWL results, DAG routing and icon development, 2026-10-06
+## Published CWL results, DAG routing and icon, 2026-10-06
 
-Branch `feature/cwl-dag-icon` targets **0.9.0** with a packed CWL v1.2
+Version **0.9.0** adds a packed CWL v1.2
 `workflow.cwl` in each newly prepared analysis, preserving frozen dependencies,
 parameters, pack pins, hashes, provenance and actual original-run status. Its
 embedded Python runner is independent of Workbench; rerunning it externally
 needs a CWL engine, Python 3.10+, matching packs and the input data. Normal native
 app operation keeps its bundled runtime and existing standalone requirements.
 
-The same development changes route saved/native DAG edges around cards and
+The same release changes route saved/native DAG edges around cards and
 derive a native multi-resolution application icon from the repository SVG.
-Exact candidate `beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d` is implemented and
-validated in [PR #2](https://github.com/comparativechrono/workbench/pull/2), still
-unpublished, with tester acceptance and explicit release authorization now
-recorded in the [acceptance record](evidence/cwl-dag-icon-0.9.0-acceptance-2026-10-06.json). Initial
+Exact candidate `beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d` was accepted,
+merged in [PR #2](https://github.com/comparativechrono/workbench/pull/2) and
+published unchanged. The [acceptance record](evidence/cwl-dag-icon-0.9.0-acceptance-2026-10-06.json)
+retains the user's explicit authorization. Initial
 [run 37485987457](https://github.com/comparativechrono/workbench/actions/runs/37485987457)
 passed **125 source checks** including stock `cwltool` fixture execution, plus
 **32 workspace, 9 References/update and 7 science/export/SVG checks per Windows
@@ -38,18 +41,24 @@ passed **9 checks per path, zero failures/skips**, against the same application
 bytes; four normal/83%-zoom captures were reviewed. The zoom capture used a
 native button command because the VM taskbar covered its screen location;
 physical zoom clicks were already covered by the separate workspace gate.
-The [candidate handover](cwl-dag-icon-0.9.0-handover.md)
-records exact downloads, hashes, acceptance and remaining release work. The
+The [release handover](cwl-dag-icon-0.9.0-handover.md)
+records exact downloads, hashes, acceptance and publication checks. The
 [CWL results guide](cwl-results.md) records the export contract and limits,
 including external input rebinding, optional compatible executable overrides
 and the absence of a universal cross-platform or biological-preflight guarantee.
-Published 0.8.0 archives, release inventory/history and tool-pack bytes remain
+Published 0.8.0 archives, historical release evidence and tool-pack bytes remain
 unchanged. The accepted candidate includes its tested 0.6.0 updater. The separate
 0.8.0-to-0.9.0 updater passed [run 37527359533](https://github.com/comparativechrono/workbench/actions/runs/37527359533):
 13 native checks per path, zero failures/skips, 70 verified core files and
 202 preserved existing files. Post-update reference and scientific/CWL analyses
 passed. The two earlier updater-fixture failures are retained in the handover.
-Publication and independent public-download verification remain pending.
+[Publication run 37528064595](https://github.com/comparativechrono/workbench/actions/runs/37528064595)
+passed all steps, including 18 promotion guard checks and fresh anonymous
+downloads of all 12 public assets. The [publication receipt](evidence/cwl-dag-icon-0.9.0-publication-receipt-2026-10-06.json)
+records the completed publication. The [independent public-download report](evidence/cwl-dag-icon-0.9.0-public-downloads-2026-10-06.json)
+confirms all 12 asset hashes/sizes, five ZIP CRCs, three checksum manifests and
+unchanged accepted application/updater bytes; the [release validation record](evidence/cwl-dag-icon-0.9.0-release-validation-2026-10-06.json)
+retains the exact native evidence. Publication verification did not rerun Windows.
 
 ## Published native interface update, 2026-10-06
 

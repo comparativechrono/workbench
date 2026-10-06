@@ -1,27 +1,24 @@
 # Current architecture
 
-This describes the reference-discovery and native interface implementation,
-reviewed through the accepted 0.9.0 candidate on 2026-10-06. It is a map of the implementation, not a claim that every deployment
-or scientific use has been validated. Start with [the knowledge index](README.md).
+This describes the reference-discovery, native interface and results-export
+implementation, reviewed through the 0.9.0 release on 2026-10-06. It is a map of
+the implementation, not a claim that every deployment or scientific use has been
+validated. Start with [the knowledge index](README.md).
 
-**Release scope, 2026-10-06:** 0.8.0 adds the native
-three-pane interface, independent standalone/workflow editing sessions and
-bounded connection previews described in the [native UI guide](native-ui.md).
-Its application/resource versions are 0.8.0. The final candidate passed the
-automated native gates, and the user accepted it. The exact accepted archives
-are now published and independently download-verified; see the
-[0.8.0 release handover](native-ui-0.8.0-release-handover.md). Published 0.7.0
-artifacts/evidence remain unchanged.
+**Release scope, 2026-10-06:** 0.9.0 adds a frozen packed CWL result, routes
+SVG/native DAG edges around cards and builds the native application icon from
+repository SVG. Exact application source `beea34a` passed the recorded
+source/interoperability and packaged Windows gates, was accepted by the user and
+was published without rebuilding. The separate updater from 0.8.0 also passed
+its native preservation and post-update execution gate. See
+[CWL results and presentation](cwl-results.md) and the
+[release handover](cwl-dag-icon-0.9.0-handover.md) for exact identities, retained
+validator failures, publication checks and limits.
 
-**Accepted candidate, 2026-10-06:** branch `feature/cwl-dag-icon` targets 0.9.0.
-It adds a frozen packed CWL result, routes SVG/native DAG edges around cards and
-builds the native application icon from repository SVG. Exact application source
-`beea34a` passed the recorded source/interoperability and packaged Windows gates;
-the user accepted it and authorized publication. The separate 0.8.0 updater
-also passed its native preservation and post-update execution gate; publication
-remains pending. See [CWL results and presentation](cwl-results.md)
-and the [candidate handover](cwl-dag-icon-0.9.0-handover.md) for exact identities,
-retained validator failures and limits.
+The 0.8.0 native three-pane interface, independent standalone/workflow editing
+sessions and bounded connection previews remain described in the
+[native UI guide](native-ui.md). Its [release evidence](native-ui-0.8.0-release-handover.md)
+and the published 0.7.0 artifacts remain unchanged.
 
 ## What runs on a user's machine
 
@@ -62,7 +59,7 @@ pipes are handled by the native runner, including both subprocess outcomes.
 
 The GUI build target is `build/desktop/DesktopWorkbench.exe`; the release
 packager installs it as `NativeWorkbench.exe`. All three native build resource
-versions are 0.9.0 in the accepted candidate. Application version is maintained in `workspace/app_version.py`
+versions are 0.9.0. Application version is maintained in `workspace/app_version.py`
 and release metadata, independently of pack versions and pack API compatibility.
 
 ## Responsibilities and source map
@@ -76,8 +73,8 @@ and release metadata, independently of pack versions and pack API compatibility.
 | [`workspace/service.py`](../workspace/service.py) | Shared lifecycle, background work, history, saved pipelines/presets, pack operations and installation checks. |
 | [`workspace/catalog.py`](../workspace/catalog.py) | Strict manifest/schema parsing, installed operation discovery, semantic types and exact-version resolution. |
 | [`workspace/engine.py`](../workspace/engine.py) | Graph validation, biological preflight, plan freezing, hashing, scheduling, native backend, methods and SVG/report generation. |
-| [`workspace/cwl_export.py`](../workspace/cwl_export.py) | 0.9 development: frozen packed CWL definitions and embedded independent runner; original execution-outcome metadata. |
-| [`workspace/dag_routing.py`](../workspace/dag_routing.py), [`desktop/dag_routing.h`](../desktop/dag_routing.h) | 0.9 development: orthogonal routes around diagram cards for saved SVG/native presentation. |
+| [`workspace/cwl_export.py`](../workspace/cwl_export.py) | 0.9: frozen packed CWL definitions and embedded independent runner; original execution-outcome metadata. |
+| [`workspace/dag_routing.py`](../workspace/dag_routing.py), [`desktop/dag_routing.h`](../desktop/dag_routing.h) | 0.9: orthogonal routes around diagram cards for saved SVG/native presentation. |
 | [`desktop/bridge.cpp`](../desktop/bridge.cpp), [`pack_model.cpp`](../desktop/pack_model.cpp), [`packs.cpp`](../desktop/packs.cpp) | Native bridge commands, execution manifest contract, discovery and local pack import. |
 | [`desktop/workflow_runner.cpp`](../desktop/workflow_runner.cpp), [`runner.cpp`](../desktop/runner.cpp), [`process_pipeline.cpp`](../desktop/process_pipeline.cpp) | Workflow execution, subprocesses, cancellation and binary pipes. |
 | [`workspace/pack_manager.py`](../workspace/pack_manager.py), [`pack_security.py`](../workspace/pack_security.py) | Offline archive validation, signed catalogue client, downloads, inventories and trust checks. |
@@ -170,7 +167,7 @@ scientific tool's path handling.
 | --- | --- |
 | `plan.json` | Frozen execution definitions, parameters, input identities/hashes, warnings and plan hash. |
 | `graph.json` | Explicit graph and source bindings used for this analysis. |
-| `workflow.cwl` (0.9 development) | Packed CWL v1.2 definition of the frozen workflow, original provenance and actual original-run outcome. |
+| `workflow.cwl` (0.9+) | Packed CWL v1.2 definition of the frozen workflow, original provenance and actual original-run outcome. |
 | `methods-planned.txt` | Pre-run description; it must not imply completed work. |
 | `pipeline.svg` | Dependency-layered DAG derived from that plan. |
 | `run.json` | Per-step states, provenance, produced files/hashes and overall outcome. |

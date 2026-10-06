@@ -1,13 +1,14 @@
-# CWL, DAG and icon candidate handover
+# CWL, DAG and icon 0.9.0 release handover
 
-**2026-10-06: exact candidate validated and accepted by the user; publication
-authorized and in progress.** Work is on `feature/cwl-dag-icon` in
-[PR #2](https://github.com/comparativechrono/workbench/pull/2). The user stated,
-“Go ahead accept and release, the testers are happy with it.” This supersedes
-pending tester review; the [acceptance record](evidence/cwl-dag-icon-0.9.0-acceptance-2026-10-06.json)
-keeps user acceptance separate from automated checks. No 0.9.0 release has yet
-been recorded. Published 0.8.0 and all tool-pack bytes remain unchanged. The [feature guide](cwl-results.md) describes the export contract and
-external execution requirements.
+**2026-10-06: accepted, published and independently public-download verified.** [Native Workbench 0.9.0](https://github.com/comparativechrono/workbench/releases/tag/app-v0.9.0)
+is release **405123004**, a development prerelease published at
+**2026-10-06T20:39:35Z**. [PR #2](https://github.com/comparativechrono/workbench/pull/2)
+is merged at **`1ee61f1e2334bf0049aa4b9227da6f8663fc0c43`**, also the release tag
+commit. The user stated, “Go ahead accept and release, the testers are happy
+with it.” The [acceptance record](evidence/cwl-dag-icon-0.9.0-acceptance-2026-10-06.json)
+keeps user acceptance separate from automated checks. Published 0.8.0 and all
+tool-pack bytes remain unchanged. The [feature guide](cwl-results.md) describes
+the export contract and external execution requirements.
 
 ## Exact candidate
 
@@ -16,8 +17,9 @@ Application source is **`beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d`**, packaged b
 The [candidate bundle](https://github.com/comparativechrono/workbench/actions/runs/37485987457/artifacts/11424165351)
 is artifact **11424165351**, 75,880,943 bytes, SHA-256
 `26f1f2070de5ffae4cdb219bd22579f22a3af943eab6e93048fa6e38ad041071`.
-It was independently downloaded and hash-verified; this is a CI artifact,
-not a published application release.
+It was independently downloaded and hash-verified. Its six original members
+were promoted byte-for-byte to the public release; the CI artifact remains the
+original build evidence, distinct from publication.
 
 | Archive | Bytes | SHA-256 |
 | --- | ---: | --- |
@@ -143,15 +145,48 @@ files. Its accepted target application, updater engine and launcher bytes were
 not rebuilt. The original candidate checksum list remains unchanged; the new
 updater has a separate `UPDATE-SHA256SUMS.txt`.
 
-## Remaining scope
+## Publication
 
-User acceptance and release authorization are recorded above. Publication and
-independent verification of public downloads remain outstanding. The accepted
-candidate includes a tested updater for **0.6.0**. The separate **0.8.0-to-0.9.0**
-updater now has a passing native preservation gate, recorded above. Independent CWL
+[Publication run 37528064595](https://github.com/comparativechrono/workbench/actions/runs/37528064595)
+passed all steps, including **18 promotion guard checks** and fresh anonymous
+download/checksum verification of all **12 public assets**. The
+[publication receipt](evidence/cwl-dag-icon-0.9.0-publication-receipt-2026-10-06.json)
+records the release identity and asset hashes. A separate
+[independent public-download audit](evidence/cwl-dag-icon-0.9.0-public-downloads-2026-10-06.json)
+passed for **all 12 assets**, **five ZIP CRCs** and **three checksum manifests**.
+It confirmed that all six original candidate members and the new updater match
+their exact validated bytes, and that release metadata/tag stayed unchanged.
+The [published release validation record](evidence/cwl-dag-icon-0.9.0-release-validation-2026-10-06.json)
+retains the native gates. These public checks reuse exact candidate/updater
+Windows evidence; they do not claim new native execution.
+
+One local copy of `WINDOWS-EVIDENCE.zip` was unexpectedly truncated after its
+first completed download check. A fresh public download to a new temporary file
+was hash-verified, atomically substituted locally and passed the full final
+CRC/checksum audit. The diagnostic remains in the audit record; no public asset
+was changed or replaced.
+
+The release includes the unchanged accepted starter, source, 0.6.0 updater,
+`BUILD-PROVENANCE.json`, `source-metadata.json` and `SHA256SUMS.txt`. It adds the
+separately tested 0.8.0 updater, `BUILD-UPDATE-PROVENANCE.json`,
+`UPDATE-SHA256SUMS.txt`, `RELEASE-VALIDATION.json`, `WINDOWS-EVIDENCE.zip` and
+`EVIDENCE-SHA256SUMS.txt`. The evidence ZIP carries the earlier and final native
+reports/captures plus updater evidence and validation source. Creation-time
+pending statements in accepted source/build companions are historical; this
+release record supplies later checks without replacing the tested archives.
+
+- [Windows starter](https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/native-workbench-0.9.0-starter-windows.zip)
+- [Updater from 0.8.0](https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/native-workbench-0.9.0-update-from-0.8.0.zip)
+- [Updater from 0.6.0](https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/native-workbench-0.9.0-update-from-0.6.0.zip)
+- [Matching application source](https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/native-workbench-0.9.0-source.zip)
+
+## Limits
+
+Both published updaters have passing native preservation gates, as recorded
+above. No updater from 0.7.0 is included or claimed. Independent CWL
 execution needs a compatible engine, Python 3.10+, matching packs and data;
 Windows binaries are not translated to another operating system. Optional
 executable replacements and rebound data need their own scientific validation.
 No rerun of all optional packs, broad physical-display survey or new temporal
 scrolling acceptance is claimed. User acceptance does not broaden those automated
-validation claims or establish publication before its completion.
+validation claims.
