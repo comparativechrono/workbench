@@ -1,0 +1,8 @@
+{
+  "requestedValue": 0,
+  "restoredValue": 1,
+  "previousValue": 1,
+  "observedValue": 0,
+  "scope": "Disposable hosted CI runner only; no application or user-machine policy changes",
+  "restored": true
+}

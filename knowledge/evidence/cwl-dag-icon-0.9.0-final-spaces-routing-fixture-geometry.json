@@ -1,0 +1,65 @@
+{
+  "windowBounds": [
+    0,
+    0,
+    1044,
+    788
+  ],
+  "canvasBounds": [
+    241,
+    153,
+    715,
+    708
+  ],
+  "screenPixels": [
+    1024,
+    768
+  ],
+  "desktopWorkArea": [
+    0,
+    0,
+    1024,
+    728
+  ],
+  "canvasClientLogicalSize": [
+    457.0,
+    538.0
+  ],
+  "dpi": 96,
+  "cards": [
+    {
+      "name": "Route producer",
+      "x": 24,
+      "y": 24
+    },
+    {
+      "name": "Route middle",
+      "x": 191,
+      "y": 194
+    },
+    {
+      "name": "Route backward consumer",
+      "x": 24,
+      "y": 364
+    }
+  ],
+  "cardLogicalSize": [
+    242,
+    140
+  ],
+  "zoomActivation": {
+    "method": "BM_CLICK",
+    "buttonBounds": [
+      565,
+      716,
+      599,
+      748
+    ],
+    "physicalCenter": [
+      582,
+      732
+    ],
+    "centerHitsButton": false,
+    "centerWindowClass": "MSTaskListWClass"
+  }
+}

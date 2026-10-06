@@ -71,7 +71,10 @@
     "native_ui_0_8_0_public_downloads": "evidence/native-ui-0.8.0-public-downloads-2026-10-06.json",
     "native_ui_0_8_0_release_validation": "evidence/native-ui-0.8.0-release-validation-2026-10-06.json",
     "native_ui_release_final_verification": "evidence/native-ui-0.8.0-final-public-verification-2026-10-06.json",
-    "cwl_results": "cwl-results.md"
+    "cwl_results": "cwl-results.md",
+    "cwl_dag_icon_0_9_0_handover": "cwl-dag-icon-0.9.0-handover.md",
+    "cwl_dag_icon_0_9_0_validation": "evidence/cwl-dag-icon-0.9.0-validation-2026-10-06.json",
+    "cwl_dag_icon_0_9_0_artifact_audit": "evidence/cwl-dag-icon-0.9.0-artifact-audit-2026-10-06.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -645,12 +648,19 @@
     "recorded_on": "2026-10-06",
     "version": "0.9.0",
     "branch": "feature/cwl-dag-icon",
-    "status": "source development; exact candidate CI and native Windows evidence pending",
+    "status": "implemented and exact-candidate validated; tester review pending; unpublished",
     "guide": "cwl-results.md",
-    "candidate_source_commit": null,
-    "candidate_download": null,
-    "native_run_url": null,
-    "evidence": null,
+    "candidate_source_commit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
+    "candidate_download": {
+      "id": 11424165351,
+      "bytes": 75880943,
+      "sha256": "26f1f2070de5ffae4cdb219bd22579f22a3af943eab6e93048fa6e38ad041071",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37485987457/artifacts/11424165351",
+      "independentlyDownloadedAndHashVerified": true,
+      "archiveCRCsVerified": true
+    },
+    "native_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37489208656",
+    "evidence": "evidence/cwl-dag-icon-0.9.0-validation-2026-10-06.json",
     "features": [
       "workflow.cwl packed CWL v1.2 JSON for the actual frozen analysis, with parameters, pack pins, hashes, reference provenance and original execution outcome",
       "Independent embedded Python 3.10+ standard-library runner preserving argument arrays, copy operations and binary pipes without Workbench imports",
@@ -665,14 +675,124 @@
     ],
     "application_dependencies_changed": false,
     "limits": [
-      "Exact packaged validation and stock-CWL interoperability CI are pending; no unavailable or skipped check is counted as passed.",
+      "125 source checks including stock-CWL fixture execution passed. Final focused verification passed 9 checks per Windows path with no failures or skips; all three earlier failed runs remain diagnostic evidence, not passes.",
       "Original input hashes are historical provenance; external rebinding is allowed and current bound-file mutation checks do not prove original bytes were present before a rerun.",
       "Explicit optional executable overrides replace original executable identity; manifest and asset pins still apply and scientific equivalence needs separate evidence.",
       "CWL typing/runner execution does not reproduce all biological preflight, reference/header checks, Windows process ownership, cancellation or scheduler behavior.",
       "Windows pack executables are not translated across operating systems; external resources are not embedded, inferred or downloaded.",
       "Native embedded-runner replay is not execution through a Windows CWL engine.",
-      "Diagram routing avoids card interiors but cannot eliminate all crossings or route every obscured socket in overlapping manual layouts."
+      "Diagram routing avoids card interiors but cannot eliminate all crossings or route every obscured socket in overlapping manual layouts.",
+      "No user acceptance or published 0.9.0 release is recorded. The included updater supports 0.6.0 only; a 0.8.0-to-0.9.0 updater was not built or tested."
     ],
-    "published_release_unchanged": "0.8.0"
+    "published_release_unchanged": "0.8.0",
+    "archives": [
+      {
+        "file": "native-workbench-0.9.0-source.zip",
+        "bytes": 46423298,
+        "sha256": "7bfc3802cad3b476300ae7075214e2c06ee320d987df66945ff0809cb3218824"
+      },
+      {
+        "file": "native-workbench-0.9.0-starter-windows.zip",
+        "bytes": 17002821,
+        "sha256": "c2661c144e073c4efdd190ffd186bacd9398b6413b81770d7a057c3947eecf02"
+      },
+      {
+        "file": "native-workbench-0.9.0-update-from-0.6.0.zip",
+        "bytes": 12951447,
+        "sha256": "eed778882bed560e765c1f2c03d6473b2ea07f2b219e4bd81bff7297e67b177d"
+      }
+    ],
+    "handover": "cwl-dag-icon-0.9.0-handover.md",
+    "artifact_audit": "evidence/cwl-dag-icon-0.9.0-artifact-audit-2026-10-06.json",
+    "pull_request": "https://github.com/comparativechrono/workbench/pull/2",
+    "published": false,
+    "user_accepted": false,
+    "initial_validation": {
+      "run_id": 37485987457,
+      "overall_conclusion": "failure",
+      "source_passed": 125,
+      "source_failed": 0,
+      "source_skipped": 0,
+      "source_platform": "Ubuntu 22.04.5",
+      "stock_cwltool_version": "3.3.20260925135507",
+      "stock_cwl_fixture_validated_and_executed": true,
+      "per_windows_path": {
+        "workspace_passed": 32,
+        "references_update_passed": 9,
+        "new_feature_passed": 7,
+        "new_feature_failed": 1,
+        "skipped": 0
+      },
+      "windows_platform": "Windows Server 2022 build 20348",
+      "private_python": "3.13.16",
+      "new_feature_failure": "Canvas-width fixture requirement exceeded the hosted viewport; failed before new connection interactions.",
+      "long_path_regression": {
+        "checks_passed": 3,
+        "failures": 0,
+        "skips": 0,
+        "full_starter_stages": 5,
+        "output_hashes_checked": 20,
+        "long_path_opt_in": false,
+        "original_policy_restored": true
+      }
+    },
+    "focused_verification": {
+      "application_source_commit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
+      "application_rebuilt": false,
+      "validator_commit": "bc972125814c1f24dca86391d0c5f240716a52f3",
+      "run_id": 37489208656,
+      "run_url": "https://github.com/comparativechrono/workbench/actions/runs/37489208656",
+      "status": "passed for the exact candidate; tester review pending; unpublished",
+      "success": true,
+      "per_windows_path": {
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0,
+        "nativeGUIValidated": true
+      },
+      "reports": [
+        "evidence/cwl-dag-icon-0.9.0-final-ordinary-native-results.json",
+        "evidence/cwl-dag-icon-0.9.0-final-spaces-native-results.json"
+      ],
+      "captures_reviewed": 4,
+      "capture_zooms_percent": [
+        100,
+        83
+      ],
+      "zoom_capture": "BM_CLICK only for the focused zoom capture; separate 32-check workspace gates already passed physical zoom-button interaction.",
+      "fixture_geometry": {
+        "zoom_button_center": [
+          582,
+          732
+        ],
+        "work_area_size": [
+          1024,
+          728
+        ],
+        "hit_window_class": "MSTaskListWClass"
+      },
+      "retained_failed_attempts": [
+        {
+          "run_id": 37485987457,
+          "failure": "Initial canvas-width fixture requirement exceeded the hosted viewport; failed before new connection interactions."
+        },
+        {
+          "run_id": 37487450679,
+          "validator_commit": "3352ef7819294ea1677688368af8bc0253140d0e",
+          "failure": "Viewport fixture corrected, then the validator inspected the wrong selected card; retained screenshot showed the intended connection."
+        },
+        {
+          "run_id": 37488239616,
+          "validator_commit": "a8c939a81ee6bdc0f3bb8f3682d4a415d768d9e8",
+          "failure": "Correct connections and native icons were confirmed; zoom-capture interaction timed out because the button center fell behind the taskbar."
+        }
+      ]
+    },
+    "updater": {
+      "from_version": "0.6.0",
+      "target_version": "0.9.0",
+      "preservation_gate_passed": true,
+      "from_0_8_0_built_or_tested": false
+    }
   }
 }

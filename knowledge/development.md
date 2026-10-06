@@ -24,9 +24,15 @@ results to changed bytes. The published 0.8.0 updater supports 0.6.0 only.
 
 Branch `feature/cwl-dag-icon` adds `workflow.cwl` result export, routed native/SVG
 DAG edges and SVG-derived native icon resources. Read [the CWL results guide](cwl-results.md)
-before changing the exporter or interpreting its portability. Exact candidate
-source, archive identities and native CI evidence are pending at this checkpoint;
-the published 0.8.0 record above remains unchanged.
+before changing the exporter or interpreting its portability. Candidate source
+is `beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d`; its
+[handover](cwl-dag-icon-0.9.0-handover.md) records the exact archives and passing
+125-check source gate, including stock `cwltool` fixture execution. Existing
+workspace/References, scientific/export/SVG and long-path checks have recorded
+native passes. The final focused feature gate passed nine checks in each Windows
+path with no failures/skips; its three earlier fixture/capture failures remain
+diagnostics. Validator-only commits have not rebuilt or changed the candidate.
+The published 0.8.0 record above remains unchanged.
 
 The focused source commands are:
 
@@ -55,6 +61,15 @@ result exports, real native execution and standalone-runner replay, routed
 geometry and native icon resources. That replay does not claim Windows CWL-engine
 execution. Record source/interoperability, cross-build and native results
 separately, and keep any missing prerequisite or failed check visible.
+
+The focused verification uses the original candidate artifact instead of
+rebuilding it. Final validator `bc972125814c1f24dca86391d0c5f240716a52f3` passed
+[run 37489208656](https://github.com/comparativechrono/workbench/actions/runs/37489208656)
+with both `nativeGUIValidated` flags true. It uses `BM_CLICK` only for the zoom
+capture where the VM taskbar occludes the physical button position; the separate
+workspace gate covers actual pointer zoom. Application source remains `beea34a`.
+Tester review and publication remain pending. The included 0.6.0 updater passed its preservation gate, but no
+0.8.0-to-0.9.0 updater has been built or tested.
 
 ## Start without disturbing existing work
 

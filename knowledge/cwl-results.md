@@ -1,10 +1,12 @@
 # CWL results, dependency routing and application icon
 
 **Development checkpoint: 2026-10-06.** Branch `feature/cwl-dag-icon` targets
-**0.9.0**. This is source under development, not a published release or an
-exact-package Windows pass. Candidate commit, archive hashes, CI run and final
-evidence are **pending**. Published 0.8.0 artifacts, pack versions and their
-dated evidence remain unchanged.
+**0.9.0**. Exact candidate `beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d` has passed
+source/CWL interoperability and exact packaged Windows checks, including the
+final focused native diagram/icon interaction gate. It is **implemented and
+exact-candidate validated; tester review is pending and it is unpublished**.
+See the [candidate handover](cwl-dag-icon-0.9.0-handover.md) for exact archives,
+run identities and retained failures. Published 0.8.0 remains unchanged.
 
 ## The result's executable workflow
 
@@ -127,22 +129,42 @@ own packaged Windows check, separate from inspecting the SVG or ICO structure.
 
 ## Validation checkpoint
 
-Source tests and exact packaged CI evidence are being assembled. **No new pass
-count, native run identity or candidate download is asserted here yet.** The
-development gate is intended to distinguish:
+The [validation ledger](evidence/cwl-dag-icon-0.9.0-validation-2026-10-06.json)
+records initial [run 37485987457](https://github.com/comparativechrono/workbench/actions/runs/37485987457)
+against the exact candidate. Linux CI passed **125 source checks**, with no
+failures or skips, including validation and complete controlled-fixture execution
+through stock `cwltool 3.3.20260925135507`. Each ordinary/space-containing Windows
+path passed **32 workspace checks**, **9 References/update checks** and **7
+science/export/SVG checks**. The new feature gate also recorded one GUI fixture
+failure per path, so the initial run failed overall. The separate long-path
+gate passed three checks, exercising all five starter stages and rehashing all
+20 output files with policy opt-in disabled.
 
-- Export/schema contracts and independent `cwltool` validation/execution of
-  controlled fixtures on the recorded host platform.
-- Native Workbench result creation, frozen outcome/hash binding, native pack
-  execution and replay of the exported standalone runner. Runner replay on
-  Windows is not execution through a Windows CWL engine.
-- SVG/native edge geometry, interaction regressions and actual packaged icon
-  resources/class icons.
-- Existing workspace, References and data-preserving updater regressions.
+The first GUI fixture required a canvas wider than the hosted viewport. A
+validator-only follow-up fitted the layout but then checked the wrong selected
+inspector; its screenshot showed the intended connection. Both failed checks
+remain failures in the record. The subsequent focused
+[run 37488239616](https://github.com/comparativechrono/workbench/actions/runs/37488239616)
+used validator `a8c939a81ee6bdc0f3bb8f3682d4a415d768d9e8` against unchanged candidate
+application bytes. It confirmed the intended connections and native icons but
+timed out during the normal-to-zoom capture interaction, so the full GUI check
+still failed. These three earlier run failures remain separate diagnostics.
 
-Record the exact source commit, candidate archive hashes, platform, validator
-version, passed/failed/skipped checks and reviewed native captures after the gate
-finishes. Preserve failures, missing-prerequisite skips and original release
-evidence. Neither a valid CWL document nor one controlled rerun establishes
-every tool's cross-platform equivalence or a changed analysis's scientific
-validity.
+Final focused [run 37489208656](https://github.com/comparativechrono/workbench/actions/runs/37489208656)
+used validator `bc972125814c1f24dca86391d0c5f240716a52f3` against the same `beea34a`
+archives. Both paths passed **9 checks, zero failures and zero skips**, with
+`nativeGUIValidated: true`. Four normal/83%-zoom captures were reviewed and showed
+clear cards, routed connections and arrowheads. The zoom-capture fixture used a
+native `BM_CLICK` because the hosted desktop's taskbar covered the zoom button's
+screen position. The separate 32-check workspace gate had already exercised
+physical zoom-button clicks; this focused capture does not count as another
+physical click test. Application bytes were unchanged throughout.
+
+The [independent artifact audit](evidence/cwl-dag-icon-0.9.0-artifact-audit-2026-10-06.json)
+verified inventories, unchanged starter packs and SVG-derived icon resources.
+It also validated six Windows-produced CWL files with stock `cwltool` on Linux;
+the original Windows locations were unavailable there, so those location
+warnings are retained. That is schema validation, not a cross-platform rerun.
+Native embedded-runner replay is likewise distinct from a Windows CWL-engine
+invocation. No 0.8.0-to-0.9.0 updater was built or tested; the included updater
+and its passing preservation checks cover 0.6.0 only.
