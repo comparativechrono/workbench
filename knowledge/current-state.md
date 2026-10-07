@@ -1,50 +1,48 @@
 # Current project state
 
-Snapshot: **2026-10-07**. Application **0.10.0** is published as a development
-prerelease at [app-v0.10.0](https://github.com/comparativechrono/workbench/releases/tag/app-v0.10.0).
-Release **405745578** was published at **2026-10-07T12:35:21Z**. Its tag and
-[PR #3](https://github.com/comparativechrono/workbench/pull/3) merge point to
-`2e474345dff195b860df39fdde263c840dd1fba3`; packaged application source is
-**`5a390acd8440856e3f4e32de237322a18bb82d7e`**. All seven original candidate files, including the three
-accepted archives, were promoted unchanged. All **ten public
-assets** were independently downloaded and rehashed; **four ZIP CRCs** and both
-checksum manifests passed. The updater in this release supports **0.9.0**.
+Snapshot: **2026-10-07**. Application **0.10.1** is published as a development
+prerelease at [app-v0.10.1](https://github.com/comparativechrono/workbench/releases/tag/app-v0.10.1).
+Release **405862679** was published at **2026-10-07T14:38:46Z**. Its tag and
+[PR #5](https://github.com/comparativechrono/workbench/pull/5) merge point to
+`28b1ff621f7fdafe6162a3d7ce1d7984962a290b`; packaged application source is
+`00b53cdded5db3bb176ee7e5a06546b8a0c66fff`. The accepted archives were promoted
+unchanged. Publication run `37638350825` verified all ten public assets;
+an independent second download also passed all hashes/sizes, four ZIP CRCs
+and both checksum manifests.
+The updater in this release supports **0.10.0**.
 
-The [publication record](evidence/tool-setup-0.10.0-publication-2026-10-07.json),
-[independent public audit](evidence/tool-setup-0.10.0-public-downloads-2026-10-07.json),
-[release inventory](release-inventory.json) and [handover](tool-setup-0.10.0-handover.md)
-retain exact release and validation identities. Earlier releases and all existing
-pack bytes remain unchanged.
+## Tool Setup corrective patch, 0.10.1
 
-## Tool Setup corrective patch, 0.10.1, in development
+The patch keeps the package list enabled for inspection during installation,
+locks checkbox edits, updates changed cells in place, retains navigation state
+and suppresses redundant control redraws/compositing. Exact native run
+`37634723095` passed both paths: setup 14, workspace 32, References 8, results 9,
+update 13 and a separate published-baseline negative control. The baseline
+showed disabled scrolling, lost navigation state and variable header pixels;
+the patch retained 391 stable samples and working busy wheel/scrollbar navigation.
+Each upgrade preserved all 204 existing fixture files and verified 72 core files.
+References explicitly omitted its optional embedded updater helper; the separate
+updater passed. Linux source checks were 161 passed/one Windows-only skip; the
+separate Windows source suite passed all 47 pack-manager checks.
 
-After the 0.10.0 release, testers reported flashing Tool Setup column headers,
-inability to scroll packages, and a generic download failure. The earlier Windows
-passes retain their recorded scope; they did not establish sustained navigation
-while installation was active or the testers' network environment.
+Real production Full passed four checks: all 32 exact pins installed with
+unchanged official trust, reopened offline, preserved the expected 202-record
+alignment/BAM output and exposed BED input. Independent archive review verified
+590 matching source files and unchanged production metadata/143 starter pack files.
+Finite hosted samples do not cover all physical displays or institutional networks.
 
-Branch `fix/tool-setup-0.10.1` keeps the package list enabled for inspection while
-locking changes to the installation selection, updates changed cells without
-resetting the viewport, and suppresses repeated control updates. The new native
-gate compares the published 0.10.0 package with the patch during repeated idle
-and live-operation polling. Run `37634723095` reproduced disabled navigation,
-viewport/selection resets and header pixel variability in the published baseline.
-Both patched native path cases passed with 391 stable header samples, functioning
-busy wheel navigation and locked checkbox edits. Workspace, References, results
-and 0.10.0 upgrade checks also passed; 204 existing files were preserved per path.
+The generic download message previously hid both network and local-file errors.
+New diagnostics distinguish bounded HTTP/TLS/proxy/DNS/timeout and destination
+write failures, retain the pack name, and omit raw exception text, signed URLs
+and credentials. The testers' download failure remains undiagnosed: old/new
+transports worked in development and the exact patch passed Windows Full.
+If their installation still fails, obtain the pack name and exact new message.
 
-The old download message caught both network and local disk errors. The patch
-reports bounded HTTP/TLS/proxy/DNS/timeout or destination-write causes, naming
-only approved hosts and omitting signed URLs and credentials. Both old and new
-transports successfully fetched the current signed catalogue and a real small
-pack from the development environment; the testers' failure remains undiagnosed.
-This is not a claim that their connection problem is fixed.
-
-The exact candidate and 0.10.0-to-0.10.1 updater are built and reviewed.
-The real production Full installation passed all four checks with all 32 exact
-pins installed and offline reuse verified. Publication is being prepared.
-Published 0.10.0 and pack bytes remain unchanged. See the
-[patch handover](tool-setup-0.10.1-handover.md) for scope and pending checks.
+The [publication record](evidence/tool-setup-0.10.1-publication-2026-10-07.json),
+[public audit](evidence/tool-setup-0.10.1-public-downloads-2026-10-07.json),
+[release inventory](release-inventory.json), [release notes](../docs/releases/0.10.1.md)
+and [handover](tool-setup-0.10.1-handover.md) retain exact identities and limits.
+Earlier releases and all published pack bytes remain unchanged.
 
 ## Published tool setup, 0.10.0, 2026-10-07
 

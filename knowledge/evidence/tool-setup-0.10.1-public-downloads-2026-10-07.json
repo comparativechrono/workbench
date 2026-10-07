@@ -1,0 +1,809 @@
+{
+  "schema": 1,
+  "kind": "independent-public-download-audit",
+  "recordedUtc": "2026-10-07T14:45:06.507133+00:00",
+  "success": true,
+  "release": {
+    "id": 405862679,
+    "tag": "app-v0.10.1",
+    "url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.10.1",
+    "publishedAt": "2026-10-07T14:38:46Z",
+    "draft": false,
+    "prerelease": true,
+    "tagCommit": "28b1ff621f7fdafe6162a3d7ce1d7984962a290b",
+    "assetCount": 10
+  },
+  "packagedSourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+  "acceptedCandidateRun": 37634723095,
+  "nativeWindowsExecutedByThisAudit": false,
+  "assets": [
+    {
+      "assetId": 618962216,
+      "file": "BUILD-PROVENANCE.json",
+      "bytes": 1027,
+      "sha256": "25c815aa4a67223364673dbf299437c487010b6408d1f83b19231c2c8dce49fb",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.1/BUILD-PROVENANCE.json",
+      "startedUtc": "2026-10-07T14:39:26.784281+00:00",
+      "completedUtc": "2026-10-07T14:39:50.989064+00:00",
+      "downloadedAnonymously": true,
+      "githubSizeAndDigestMatch": true
+    },
+    {
+      "assetId": 618962218,
+      "file": "BUILD-UPDATE-PROVENANCE.json",
+      "bytes": 2227,
+      "sha256": "9be1bfe0db6b616401bdf2aeac88804f46abfc1365f80ed9c16d23888b1ece19",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.1/BUILD-UPDATE-PROVENANCE.json",
+      "startedUtc": "2026-10-07T14:39:26.784952+00:00",
+      "completedUtc": "2026-10-07T14:39:51.097415+00:00",
+      "downloadedAnonymously": true,
+      "githubSizeAndDigestMatch": true
+    },
+    {
+      "assetId": 618962219,
+      "file": "EVIDENCE-SHA256SUMS.txt",
+      "bytes": 528,
+      "sha256": "b640d53ae01194258ccbb98562a65c0e4040a152ba8e945e539c1cb44d2017ae",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.1/EVIDENCE-SHA256SUMS.txt",
+      "startedUtc": "2026-10-07T14:39:26.785348+00:00",
+      "completedUtc": "2026-10-07T14:39:51.084794+00:00",
+      "downloadedAnonymously": true,
+      "githubSizeAndDigestMatch": true
+    },
+    {
+      "assetId": 618962214,
+      "file": "RELEASE-VALIDATION.json",
+      "bytes": 7688,
+      "sha256": "cf7daa91cc8f0468818315c601efc556c386af4bf39630482e865bcf44d3cee3",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.1/RELEASE-VALIDATION.json",
+      "startedUtc": "2026-10-07T14:39:51.097506+00:00",
+      "completedUtc": "2026-10-07T14:40:13.436428+00:00",
+      "downloadedAnonymously": true,
+      "githubSizeAndDigestMatch": true
+    },
+    {
+      "assetId": 618962217,
+      "file": "SHA256SUMS.txt",
+      "bytes": 324,
+      "sha256": "8c356b75c70e4afd406891a9b917c7762bcb41b71d718cc23ef0e962c22a492f",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.1/SHA256SUMS.txt",
+      "startedUtc": "2026-10-07T14:39:51.475646+00:00",
+      "completedUtc": "2026-10-07T14:40:13.378164+00:00",
+      "downloadedAnonymously": true,
+      "githubSizeAndDigestMatch": true
+    },
+    {
+      "assetId": 618962242,
+      "file": "WINDOWS-EVIDENCE.zip",
+      "bytes": 15607954,
+      "sha256": "4ede5a08c83e2bb91fef51d83316dae0ff7321dd29f8e884fa53030d9ca35c6d",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.1/WINDOWS-EVIDENCE.zip",
+      "startedUtc": "2026-10-07T14:40:13.436561+00:00",
+      "completedUtc": "2026-10-07T14:40:37.541866+00:00",
+      "downloadedAnonymously": true,
+      "githubSizeAndDigestMatch": true
+    },
+    {
+      "assetId": 618962244,
+      "file": "native-workbench-0.10.1-source.zip",
+      "bytes": 46832829,
+      "sha256": "4130c105e0ce0956c234718f93926d1f9b3f6bfd81048b8fc6e8823617c583ab",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.1/native-workbench-0.10.1-source.zip",
+      "startedUtc": "2026-10-07T14:39:26.785752+00:00",
+      "completedUtc": "2026-10-07T14:39:51.475540+00:00",
+      "downloadedAnonymously": true,
+      "githubSizeAndDigestMatch": true
+    },
+    {
+      "assetId": 618962246,
+      "file": "native-workbench-0.10.1-starter-windows.zip",
+      "bytes": 17032722,
+      "sha256": "a8c4d374104d62fdf46dbd405e9d5bc36f5e2ea191f573faa63cfb29b433ba79",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.1/native-workbench-0.10.1-starter-windows.zip",
+      "startedUtc": "2026-10-07T14:39:50.989169+00:00",
+      "completedUtc": "2026-10-07T14:40:13.664069+00:00",
+      "downloadedAnonymously": true,
+      "githubSizeAndDigestMatch": true
+    },
+    {
+      "assetId": 618962247,
+      "file": "native-workbench-0.10.1-update-from-0.10.0.zip",
+      "bytes": 12858983,
+      "sha256": "fbf1f20d93c1fe781608cba6d48c948979986c06cdb9a4ce5b825b088d2fc3fb",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.1/native-workbench-0.10.1-update-from-0.10.0.zip",
+      "startedUtc": "2026-10-07T14:39:51.084949+00:00",
+      "completedUtc": "2026-10-07T14:40:13.653826+00:00",
+      "downloadedAnonymously": true,
+      "githubSizeAndDigestMatch": true
+    },
+    {
+      "assetId": 618962245,
+      "file": "source-metadata.json",
+      "bytes": 1764,
+      "sha256": "2f8bccae52f16ac5e5fc4b0dbd6a39059494c79abee77b45975c1c816ec5ea60",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.1/source-metadata.json",
+      "startedUtc": "2026-10-07T14:40:13.378267+00:00",
+      "completedUtc": "2026-10-07T14:40:37.401057+00:00",
+      "downloadedAnonymously": true,
+      "githubSizeAndDigestMatch": true
+    }
+  ],
+  "zipCrcChecks": [
+    {
+      "file": "WINDOWS-EVIDENCE.zip",
+      "members": 15,
+      "success": true
+    },
+    {
+      "file": "native-workbench-0.10.1-source.zip",
+      "members": 593,
+      "success": true
+    },
+    {
+      "file": "native-workbench-0.10.1-starter-windows.zip",
+      "members": 216,
+      "success": true
+    },
+    {
+      "file": "native-workbench-0.10.1-update-from-0.10.0.zip",
+      "members": 53,
+      "success": true
+    }
+  ],
+  "checksumManifests": {
+    "SHA256SUMS.txt": {
+      "entries": 3,
+      "files": [
+        "native-workbench-0.10.1-source.zip",
+        "native-workbench-0.10.1-starter-windows.zip",
+        "native-workbench-0.10.1-update-from-0.10.0.zip"
+      ],
+      "success": true
+    },
+    "EVIDENCE-SHA256SUMS.txt": {
+      "entries": 6,
+      "files": [
+        "BUILD-PROVENANCE.json",
+        "BUILD-UPDATE-PROVENANCE.json",
+        "RELEASE-VALIDATION.json",
+        "SHA256SUMS.txt",
+        "WINDOWS-EVIDENCE.zip",
+        "source-metadata.json"
+      ],
+      "success": true
+    }
+  },
+  "candidateByteIdentity": {
+    "originalFiles": [
+      "BUILD-PROVENANCE.json",
+      "BUILD-UPDATE-PROVENANCE.json",
+      "SHA256SUMS.txt",
+      "native-workbench-0.10.1-source.zip",
+      "native-workbench-0.10.1-starter-windows.zip",
+      "native-workbench-0.10.1-update-from-0.10.0.zip",
+      "source-metadata.json"
+    ],
+    "count": 7,
+    "allByteEqual": true,
+    "acceptedArchives": [
+      {
+        "file": "native-workbench-0.10.1-source.zip",
+        "bytes": 46832829,
+        "sha256": "4130c105e0ce0956c234718f93926d1f9b3f6bfd81048b8fc6e8823617c583ab"
+      },
+      {
+        "file": "native-workbench-0.10.1-starter-windows.zip",
+        "bytes": 17032722,
+        "sha256": "a8c4d374104d62fdf46dbd405e9d5bc36f5e2ea191f573faa63cfb29b433ba79"
+      },
+      {
+        "file": "native-workbench-0.10.1-update-from-0.10.0.zip",
+        "bytes": 12858983,
+        "sha256": "fbf1f20d93c1fe781608cba6d48c948979986c06cdb9a4ce5b825b088d2fc3fb"
+      }
+    ],
+    "staticAudit": "knowledge/evidence/tool-setup-0.10.1-candidate-static-audit.json",
+    "staticAuditSha256": "887c285ac9031cc572c8d0ce70a9c69dfe1eb0f51d3ac89303d9bb7fb98e68d2",
+    "reuseScope": "Exact public bytes inherit the earlier 590-file source, 72-core-file, 143-unchanged-pack-file and production configuration audit; those original checks were not rerun in full here."
+  },
+  "releaseValidationSha256": "cf7daa91cc8f0468818315c601efc556c386af4bf39630482e865bcf44d3cee3",
+  "retainedNativeArtifacts": [
+    {
+      "case": "ordinary",
+      "artifactId": 11489175077,
+      "bytes": 7869073,
+      "sha256": "98557aa03aca4f2e244392f66e473c7f09b1342e50de0ec4ba53bb53c686ac6b",
+      "members": 397,
+      "zipCrcSuccess": true
+    },
+    {
+      "case": "spaces",
+      "artifactId": 11487569680,
+      "bytes": 7868005,
+      "sha256": "9218df6d9082cf9d22d7e49fe362ccf82740d94b52cdb3bafb5fd7902be9774e",
+      "members": 397,
+      "zipCrcSuccess": true
+    },
+    {
+      "case": "production-full",
+      "artifactId": 11489622944,
+      "bytes": 467522,
+      "sha256": "5a5a332cc1e88bbdf0906720ea8453e49c1f303b29fe25e7c1ed62e60229f99b",
+      "members": 29,
+      "zipCrcSuccess": true
+    }
+  ],
+  "retainedNativeReports": {
+    "ordinary-setup": {
+      "sha256": "0557f1cbce8c6f7a0dce66a66dfeb8d6925f5a6322a927edb3febc36c74a23d4",
+      "passed": 14,
+      "skips": [],
+      "unrun": [
+        "Production signed catalogue refresh and clean-client Full installation are not exercised by test-only trust fixtures."
+      ],
+      "success": true,
+      "nativeWindowsExecutedByLinkedCI": true,
+      "appFileHashesCompared": 23,
+      "scope": "exact accepted 0.10.1 package"
+    },
+    "ordinary-workspace": {
+      "sha256": "d581084de2702ef0b7a4607650830646535ef88b8517b46e6fcf15f163d97d50",
+      "passed": 32,
+      "skips": [],
+      "unrun": [],
+      "success": true,
+      "nativeWindowsExecutedByLinkedCI": true,
+      "appFileHashesCompared": 19,
+      "scope": "exact accepted 0.10.1 package"
+    },
+    "ordinary-references": {
+      "sha256": "88747e7d0a87a2ec5153130597a1c1942563d59447721962637a11963c0b5f13",
+      "passed": 8,
+      "skips": [
+        "Optional native core updater gate was not requested."
+      ],
+      "unrun": [],
+      "success": true,
+      "nativeWindowsExecutedByLinkedCI": true,
+      "appFileHashesCompared": 18,
+      "scope": "exact accepted 0.10.1 package"
+    },
+    "ordinary-results": {
+      "sha256": "a6a90285887fce30bd662a371764cf61c6fcfbc81b24e3905e3b3db10b81ed8d",
+      "passed": 9,
+      "skips": [],
+      "unrun": [],
+      "success": true,
+      "nativeWindowsExecutedByLinkedCI": true,
+      "appFileHashesCompared": 6,
+      "scope": "exact accepted 0.10.1 package"
+    },
+    "ordinary-update": {
+      "sha256": "8636a0c36c939e2453b2465c70d18a0ffbd2b469d4ef005760dc9ab7958c8397",
+      "passed": 13,
+      "skips": [],
+      "unrun": [],
+      "success": true,
+      "nativeWindowsExecutedByLinkedCI": true,
+      "appFileHashesCompared": 0,
+      "scope": "exact accepted 0.10.1 package",
+      "preservedFiles": 204,
+      "verifiedCoreFiles": 72
+    },
+    "ordinary-negative-control": {
+      "sha256": "52a0b36d29fd8386061b997e0ddd60678a210f7c7128d86da00a55aa8c3e01b3",
+      "passed": 1,
+      "skips": [],
+      "unrun": [
+        "Production signed catalogue refresh and clean-client Full installation are not exercised by test-only trust fixtures."
+      ],
+      "success": true,
+      "nativeWindowsExecutedByLinkedCI": true,
+      "appFileHashesCompared": 23,
+      "scope": "published baseline negative control"
+    },
+    "spaces-setup": {
+      "sha256": "ae3e0dd68b2b4e7ad1f4a9a69ba2e59990fff0e5a2dfb7e4786d4f018bea14ec",
+      "passed": 14,
+      "skips": [],
+      "unrun": [
+        "Production signed catalogue refresh and clean-client Full installation are not exercised by test-only trust fixtures."
+      ],
+      "success": true,
+      "nativeWindowsExecutedByLinkedCI": true,
+      "appFileHashesCompared": 23,
+      "scope": "exact accepted 0.10.1 package"
+    },
+    "spaces-workspace": {
+      "sha256": "5128b75f6a982ab4a8821563a15b49d85646646634f6692cb983ecb1afa76eef",
+      "passed": 32,
+      "skips": [],
+      "unrun": [],
+      "success": true,
+      "nativeWindowsExecutedByLinkedCI": true,
+      "appFileHashesCompared": 19,
+      "scope": "exact accepted 0.10.1 package"
+    },
+    "spaces-references": {
+      "sha256": "64cdca36db2fd1140889826161b1a7495c3df10874b9ee8795b196075334e670",
+      "passed": 8,
+      "skips": [
+        "Optional native core updater gate was not requested."
+      ],
+      "unrun": [],
+      "success": true,
+      "nativeWindowsExecutedByLinkedCI": true,
+      "appFileHashesCompared": 18,
+      "scope": "exact accepted 0.10.1 package"
+    },
+    "spaces-results": {
+      "sha256": "1c30a04b0703da62d2a5d29dc5a28167a3c40a8a6a86978257134329794d54b2",
+      "passed": 9,
+      "skips": [],
+      "unrun": [],
+      "success": true,
+      "nativeWindowsExecutedByLinkedCI": true,
+      "appFileHashesCompared": 6,
+      "scope": "exact accepted 0.10.1 package"
+    },
+    "spaces-update": {
+      "sha256": "e96a733f79ed1cd8d1200d9ef44cbc6a0daad9b4c424ff45dd39be72204aa0bc",
+      "passed": 13,
+      "skips": [],
+      "unrun": [],
+      "success": true,
+      "nativeWindowsExecutedByLinkedCI": true,
+      "appFileHashesCompared": 0,
+      "scope": "exact accepted 0.10.1 package",
+      "preservedFiles": 204,
+      "verifiedCoreFiles": 72
+    },
+    "spaces-negative-control": {
+      "sha256": "a528b72055a5c43d525886175dd51022a48311bd3b8efe39dfcfba5455cfd304",
+      "passed": 1,
+      "skips": [],
+      "unrun": [
+        "Production signed catalogue refresh and clean-client Full installation are not exercised by test-only trust fixtures."
+      ],
+      "success": true,
+      "nativeWindowsExecutedByLinkedCI": true,
+      "appFileHashesCompared": 23,
+      "scope": "published baseline negative control"
+    },
+    "production-full": {
+      "sha256": "ebcfd285acfbe48a59bf2ef61927698319fd3e4acfda7555d5b7bfc7917ad41f",
+      "passed": 4,
+      "skips": [],
+      "unrun": [],
+      "success": true,
+      "nativeWindowsExecutedByLinkedCI": true,
+      "appFileHashesCompared": 23,
+      "scope": "exact accepted 0.10.1 package"
+    }
+  },
+  "productionFull": {
+    "artifactId": 11489622944,
+    "reportSha256": "ebcfd285acfbe48a59bf2ef61927698319fd3e4acfda7555d5b7bfc7917ad41f",
+    "completedPackPins": 32,
+    "profileSha256": "4cad899dcc1f6541f6edecc3ace7d0d4dd5d6103b1b16218fece0c0b68d2a4ba",
+    "stateSha256": "3a8fc805dd147b67847e71d403cdd0c9173974bf64c4f8f173fb98173d13df2b",
+    "productionTrustValidated": true,
+    "passed": 4,
+    "skips": 0,
+    "unrun": 0,
+    "scientificRecords": 202,
+    "scope": "All current real release packs; catalogue/import/coexistence and starter scientific checks, not every pack scientific fixture."
+  },
+  "validationHelperSourceHashes": {
+    "scripts/check_references_windows.py": "0fccc0d2d6c0468c0741085a71be4e0ab29dad9734c9a0573007d5d8179e9679",
+    "scripts/check_results_windows.py": "5d5b6feaf94d2e880ca3496717b089b89a8e3dadb30a771c3c319b900ddbd011",
+    "scripts/check_setup_windows.py": "54514df39c411027b0e9a2f57cd06554b1a33cd408f0f11c48035486cfea5776",
+    "scripts/check_update_0101_windows.py": "c6d2c2be203dd18b7d19e4fe2d0727b7931cbda7aaf12cdabd2fd77bd6d49e7c",
+    "scripts/check_workspace_ui_windows.py": "3fd7a86e2b116ffb7b7efad392d6d9b90bc7060b4dac6136648eea21657d26a2"
+  },
+  "freshCandidateJobStatus": [
+    {
+      "id": 112838027832,
+      "name": "build",
+      "conclusion": "success"
+    },
+    {
+      "id": 112838686323,
+      "name": "native (path with spaces)",
+      "conclusion": "success"
+    },
+    {
+      "id": 112838686364,
+      "name": "production-full",
+      "conclusion": "success"
+    },
+    {
+      "id": 112838686375,
+      "name": "native (ordinary)",
+      "conclusion": "success"
+    }
+  ],
+  "upgradeScope": "Only the published 0.10.0 baseline to 0.10.1 updater; retained ordinary and space-containing path checks each preserve 204 fixture files and verify 72 target core files.",
+  "checks": [
+    {
+      "check": "Public release identity, tag, development status and asset count",
+      "success": true
+    },
+    {
+      "check": "Tag points at accepted publication commit",
+      "success": true
+    },
+    {
+      "check": "Release assets unchanged across independent before/after API reads",
+      "success": true
+    },
+    {
+      "check": "Anonymous public asset size and SHA-256: BUILD-PROVENANCE.json",
+      "success": true
+    },
+    {
+      "check": "Anonymous public asset size and SHA-256: BUILD-UPDATE-PROVENANCE.json",
+      "success": true
+    },
+    {
+      "check": "Anonymous public asset size and SHA-256: EVIDENCE-SHA256SUMS.txt",
+      "success": true
+    },
+    {
+      "check": "Anonymous public asset size and SHA-256: native-workbench-0.10.1-source.zip",
+      "success": true
+    },
+    {
+      "check": "Anonymous public asset size and SHA-256: native-workbench-0.10.1-starter-windows.zip",
+      "success": true
+    },
+    {
+      "check": "Anonymous public asset size and SHA-256: native-workbench-0.10.1-update-from-0.10.0.zip",
+      "success": true
+    },
+    {
+      "check": "Anonymous public asset size and SHA-256: RELEASE-VALIDATION.json",
+      "success": true
+    },
+    {
+      "check": "Anonymous public asset size and SHA-256: SHA256SUMS.txt",
+      "success": true
+    },
+    {
+      "check": "Anonymous public asset size and SHA-256: source-metadata.json",
+      "success": true
+    },
+    {
+      "check": "Anonymous public asset size and SHA-256: WINDOWS-EVIDENCE.zip",
+      "success": true
+    },
+    {
+      "check": "All public assets downloaded exactly once",
+      "success": true
+    },
+    {
+      "check": "Public ZIP CRC: WINDOWS-EVIDENCE.zip",
+      "success": true
+    },
+    {
+      "check": "Public ZIP CRC: native-workbench-0.10.1-source.zip",
+      "success": true
+    },
+    {
+      "check": "Public ZIP CRC: native-workbench-0.10.1-starter-windows.zip",
+      "success": true
+    },
+    {
+      "check": "Public ZIP CRC: native-workbench-0.10.1-update-from-0.10.0.zip",
+      "success": true
+    },
+    {
+      "check": "Four public ZIP archives checked",
+      "success": true
+    },
+    {
+      "check": "Exact checksum inventory: SHA256SUMS.txt",
+      "success": true
+    },
+    {
+      "check": "Every checksum matches downloaded bytes: SHA256SUMS.txt",
+      "success": true
+    },
+    {
+      "check": "Exact checksum inventory: EVIDENCE-SHA256SUMS.txt",
+      "success": true
+    },
+    {
+      "check": "Every checksum matches downloaded bytes: EVIDENCE-SHA256SUMS.txt",
+      "success": true
+    },
+    {
+      "check": "Static accepted archive hashes and sizes match all three public archives",
+      "success": true
+    },
+    {
+      "check": "All seven original candidate files published byte-for-byte",
+      "success": true
+    },
+    {
+      "check": "Release validation binds exact accepted run, source, publication and no rebuild",
+      "success": true
+    },
+    {
+      "check": "Release validation asset inventory matches all eight described public files",
+      "success": true
+    },
+    {
+      "check": "Fresh GitHub jobs read confirms all four accepted jobs completed successfully",
+      "success": true
+    },
+    {
+      "check": "Published baseline used for negative controls remains exact",
+      "success": true
+    },
+    {
+      "check": "Published promotion lock binds exact source, run, archives and artifacts",
+      "success": true
+    },
+    {
+      "check": "Retained run verification agrees with fresh live jobs read",
+      "success": true
+    },
+    {
+      "check": "Published retained repository evidence byte binding: repository-evidence/tool-setup-0.10.1-candidate-run.json",
+      "success": true
+    },
+    {
+      "check": "Published retained repository evidence byte binding: repository-evidence/tool-setup-0.10.1-candidate-static-audit.json",
+      "success": true
+    },
+    {
+      "check": "Published retained repository evidence byte binding: repository-evidence/tool-setup-0.10.1-first-attempt.json",
+      "success": true
+    },
+    {
+      "check": "Published retained repository evidence byte binding: repository-evidence/tool-setup-0.10.1-native-evidence-audit.json",
+      "success": true
+    },
+    {
+      "check": "Published retained repository evidence byte binding: repository-evidence/tool-setup-0.10.1-production-full-audit.json",
+      "success": true
+    },
+    {
+      "check": "Validation helper byte binding to packaged source: scripts/check_references_windows.py",
+      "success": true
+    },
+    {
+      "check": "Validation helper byte binding to packaged source: scripts/check_results_windows.py",
+      "success": true
+    },
+    {
+      "check": "Validation helper byte binding to packaged source: scripts/check_setup_windows.py",
+      "success": true
+    },
+    {
+      "check": "Validation helper byte binding to packaged source: scripts/check_update_0101_windows.py",
+      "success": true
+    },
+    {
+      "check": "Validation helper byte binding to packaged source: scripts/check_workspace_ui_windows.py",
+      "success": true
+    },
+    {
+      "check": "Retained original CI artifact size and SHA-256: ordinary",
+      "success": true
+    },
+    {
+      "check": "Retained original CI artifact ZIP CRC: ordinary",
+      "success": true
+    },
+    {
+      "check": "Retained native report identity and outcome: ordinary-setup",
+      "success": true
+    },
+    {
+      "check": "Retained native report exact application binding: ordinary-setup",
+      "success": true
+    },
+    {
+      "check": "Retained report app-file hashes match public archive: ordinary-setup",
+      "success": true
+    },
+    {
+      "check": "Retained native report identity and outcome: ordinary-workspace",
+      "success": true
+    },
+    {
+      "check": "Retained native report exact application binding: ordinary-workspace",
+      "success": true
+    },
+    {
+      "check": "Retained report app-file hashes match public archive: ordinary-workspace",
+      "success": true
+    },
+    {
+      "check": "Retained native report identity and outcome: ordinary-references",
+      "success": true
+    },
+    {
+      "check": "Retained native report exact application binding: ordinary-references",
+      "success": true
+    },
+    {
+      "check": "Retained report app-file hashes match public archive: ordinary-references",
+      "success": true
+    },
+    {
+      "check": "Retained native report identity and outcome: ordinary-results",
+      "success": true
+    },
+    {
+      "check": "Retained native report exact application binding: ordinary-results",
+      "success": true
+    },
+    {
+      "check": "Retained report app-file hashes match public archive: ordinary-results",
+      "success": true
+    },
+    {
+      "check": "Retained native report identity and outcome: ordinary-update",
+      "success": true
+    },
+    {
+      "check": "Retained native report exact application binding: ordinary-update",
+      "success": true
+    },
+    {
+      "check": "Retained report app-file hashes match public archive: ordinary-update",
+      "success": true
+    },
+    {
+      "check": "Retained update preservation and target binding: ordinary-update",
+      "success": true
+    },
+    {
+      "check": "Retained native report identity and outcome: ordinary-negative-control",
+      "success": true
+    },
+    {
+      "check": "Retained native report exact application binding: ordinary-negative-control",
+      "success": true
+    },
+    {
+      "check": "Retained report app-file hashes match public archive: ordinary-negative-control",
+      "success": true
+    },
+    {
+      "check": "Retained original CI artifact size and SHA-256: spaces",
+      "success": true
+    },
+    {
+      "check": "Retained original CI artifact ZIP CRC: spaces",
+      "success": true
+    },
+    {
+      "check": "Retained native report identity and outcome: spaces-setup",
+      "success": true
+    },
+    {
+      "check": "Retained native report exact application binding: spaces-setup",
+      "success": true
+    },
+    {
+      "check": "Retained report app-file hashes match public archive: spaces-setup",
+      "success": true
+    },
+    {
+      "check": "Retained native report identity and outcome: spaces-workspace",
+      "success": true
+    },
+    {
+      "check": "Retained native report exact application binding: spaces-workspace",
+      "success": true
+    },
+    {
+      "check": "Retained report app-file hashes match public archive: spaces-workspace",
+      "success": true
+    },
+    {
+      "check": "Retained native report identity and outcome: spaces-references",
+      "success": true
+    },
+    {
+      "check": "Retained native report exact application binding: spaces-references",
+      "success": true
+    },
+    {
+      "check": "Retained report app-file hashes match public archive: spaces-references",
+      "success": true
+    },
+    {
+      "check": "Retained native report identity and outcome: spaces-results",
+      "success": true
+    },
+    {
+      "check": "Retained native report exact application binding: spaces-results",
+      "success": true
+    },
+    {
+      "check": "Retained report app-file hashes match public archive: spaces-results",
+      "success": true
+    },
+    {
+      "check": "Retained native report identity and outcome: spaces-update",
+      "success": true
+    },
+    {
+      "check": "Retained native report exact application binding: spaces-update",
+      "success": true
+    },
+    {
+      "check": "Retained report app-file hashes match public archive: spaces-update",
+      "success": true
+    },
+    {
+      "check": "Retained update preservation and target binding: spaces-update",
+      "success": true
+    },
+    {
+      "check": "Retained native report identity and outcome: spaces-negative-control",
+      "success": true
+    },
+    {
+      "check": "Retained native report exact application binding: spaces-negative-control",
+      "success": true
+    },
+    {
+      "check": "Retained report app-file hashes match public archive: spaces-negative-control",
+      "success": true
+    },
+    {
+      "check": "Retained original CI artifact size and SHA-256: production-full",
+      "success": true
+    },
+    {
+      "check": "Retained original CI artifact ZIP CRC: production-full",
+      "success": true
+    },
+    {
+      "check": "Retained native report identity and outcome: production-full",
+      "success": true
+    },
+    {
+      "check": "Retained native report exact application binding: production-full",
+      "success": true
+    },
+    {
+      "check": "Retained report app-file hashes match public archive: production-full",
+      "success": true
+    },
+    {
+      "check": "All 32 official pack pins retained completed and exact to accepted profile",
+      "success": true
+    },
+    {
+      "check": "Production Full accepted report is native, production-trusted, four checks without skips/unrun",
+      "success": true
+    },
+    {
+      "check": "All thirteen retained reports checked, with old-package negative controls kept separate",
+      "success": true
+    }
+  ],
+  "failedChecks": [],
+  "scope": "Fresh anonymous public download, SHA-256/size/checksum/CRC verification and exact accepted-candidate and retained native-evidence binding. This audit did not execute Windows or create new scientific runs. All native execution claims refer to the successful accepted Windows CI run.",
+  "limits": [
+    "Full setup validates installation/coexistence of all 32 packs and starter scientific truth; it does not rerun every optional pack scientific fixture.",
+    "Offline checks deny Python host socket operations; native subprocesses are not OS-firewalled.",
+    "Physical trackpad, broad high-DPI/multi-monitor deployment and institutional proxies are not validated by these hosted Windows gates.",
+    "Only the published 0.10.0 baseline has an updater in this release.",
+    "Historical test-trust and failed validator evidence remains historical; it does not supply production acceptance.",
+    "Creation-time build provenance retains its original pending-validation statement; later RELEASE-VALIDATION.json and bound successful native reports record final acceptance.",
+    "The original 76 MB candidate artifact container was not redownloaded by this audit; its seven original member files were independently acquired through bounded transfers and are now byte-equal to the public downloads."
+  ],
+  "metadataSha256": {
+    "releaseBefore": "cd84e67d1e6a86b8c88de239b0ffff57beb285ff74c2473011f87b1231fb773c",
+    "releaseAfter": "cd84e67d1e6a86b8c88de239b0ffff57beb285ff74c2473011f87b1231fb773c",
+    "tagAfter": "43c0da61f6a297237cb77ceefeb02e9baccb69bd46c76b40df2c5c8bfc5fef73"
+  }
+}

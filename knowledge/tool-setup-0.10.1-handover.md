@@ -1,7 +1,9 @@
 # Tool Setup corrective patch 0.10.1
 
 Snapshot: 2026-10-07. Branch: `fix/tool-setup-0.10.1`, from published-main
-`4777f020f0907b4431d0a5be115ef5d9aa776457`. Version 0.10.1 is not released.
+`4777f020f0907b4431d0a5be115ef5d9aa776457`. **Final status: 0.10.1 released**
+as a development prerelease; the dated preparation sections below retain their
+original evidence boundaries.
 
 Testers reported flashing column headers, unusable package scrolling and the
 message “Download failed. Check the connection and whether the approved host
@@ -117,3 +119,31 @@ The complete acceptance lock in `scripts/publish_app_0101.py` pins the three
 archives, four original CI artifacts and 13 reviewed report hashes. PR #5 and
 read-only preparation will precede publication. No public release is claimed
 at this acceptance snapshot; the tester-PC download failure remains undiagnosed.
+
+## Published result
+
+Release **405862679**: [app-v0.10.1](https://github.com/comparativechrono/workbench/releases/tag/app-v0.10.1),
+published **2026-10-07T14:38:46Z**. PR #5 merged at
+`28b1ff621f7fdafe6162a3d7ce1d7984962a290b`, which is the release tag commit.
+The application/source/update archives remain the exact accepted `00b53cdd` bytes.
+Read-only preparation run `37637802039` verified all ten prepared assets, then
+publication run `37638350825` passed its 28 guards, immutable promotion and
+anonymous ten-asset verification. No release asset was replaced or rebuilt.
+
+| Archive | Bytes | SHA-256 |
+| --- | ---: | --- |
+| Starter | 17,032,722 | `a8c4d374104d62fdf46dbd405e9d5bc36f5e2ea191f573faa63cfb29b433ba79` |
+| Update from 0.10.0 | 12,858,983 | `fbf1f20d93c1fe781608cba6d48c948979986c06cdb9a4ce5b825b088d2fc3fb` |
+| Source | 46,832,829 | `4130c105e0ce0956c234718f93926d1f9b3f6bfd81048b8fc6e8823617c583ab` |
+
+The UI correction is complete in the tested hosted conditions. The original
+machine-specific download cause remains a blocker to claiming that user's
+installation problem resolved. Apply the 0.10.0 updater, retry setup, and collect
+the exact new message plus pack name if it fails. Do not relax certificate,
+signature, checksum or approved-host checks to make an unexplained failure pass.
+
+Independent public verification downloaded all ten assets again and found no
+mismatches: all expected sizes/SHA-256, four public ZIP CRCs and both checksum
+manifests passed. Seven original candidate files remain byte-identical; 13
+reviewed reports and all 32 completed production pins bind to the public starter.
+The public audit performed no new Windows execution and retains that distinction.

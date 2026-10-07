@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "kind": "observed-publication-record",
+  "recordedUtc": "2026-10-07T14:40:56.003Z",
+  "success": true,
+  "releaseId": 405862679,
+  "releaseUrl": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.10.1",
+  "releaseTag": "app-v0.10.1",
+  "publishedAt": "2026-10-07T14:38:46Z",
+  "prerelease": true,
+  "draft": false,
+  "publicationCommit": "28b1ff621f7fdafe6162a3d7ce1d7984962a290b",
+  "packagedSourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+  "candidateRun": 37634723095,
+  "readOnlyPreparationRun": 37637802039,
+  "publicationRun": 37638350825,
+  "publicationJob": 112850407630,
+  "publicationJobConclusion": "success",
+  "publisherLogSummary": {
+    "published": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.10.1",
+    "verifiedAssets": 10
+  },
+  "fullReceiptLocation": "Retained in the publication workflow artifact; this record combines the observed job log summary and public release metadata.",
+  "acceptedApplicationArchivesRebuilt": false,
+  "assets": [
+    {
+      "id": 618962216,
+      "name": "BUILD-PROVENANCE.json",
+      "bytes": 1027,
+      "sha256": "25c815aa4a67223364673dbf299437c487010b6408d1f83b19231c2c8dce49fb",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.1/BUILD-PROVENANCE.json"
+    },
+    {
+      "id": 618962218,
+      "name": "BUILD-UPDATE-PROVENANCE.json",
+      "bytes": 2227,
+      "sha256": "9be1bfe0db6b616401bdf2aeac88804f46abfc1365f80ed9c16d23888b1ece19",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.1/BUILD-UPDATE-PROVENANCE.json"
+    },
+    {
+      "id": 618962219,
+      "name": "EVIDENCE-SHA256SUMS.txt",
+      "bytes": 528,
+      "sha256": "b640d53ae01194258ccbb98562a65c0e4040a152ba8e945e539c1cb44d2017ae",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.1/EVIDENCE-SHA256SUMS.txt"
+    },
+    {
+      "id": 618962244,
+      "name": "native-workbench-0.10.1-source.zip",
+      "bytes": 46832829,
+      "sha256": "4130c105e0ce0956c234718f93926d1f9b3f6bfd81048b8fc6e8823617c583ab",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.1/native-workbench-0.10.1-source.zip"
+    },
+    {
+      "id": 618962246,
+      "name": "native-workbench-0.10.1-starter-windows.zip",
+      "bytes": 17032722,
+      "sha256": "a8c4d374104d62fdf46dbd405e9d5bc36f5e2ea191f573faa63cfb29b433ba79",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.1/native-workbench-0.10.1-starter-windows.zip"
+    },
+    {
+      "id": 618962247,
+      "name": "native-workbench-0.10.1-update-from-0.10.0.zip",
+      "bytes": 12858983,
+      "sha256": "fbf1f20d93c1fe781608cba6d48c948979986c06cdb9a4ce5b825b088d2fc3fb",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.1/native-workbench-0.10.1-update-from-0.10.0.zip"
+    },
+    {
+      "id": 618962214,
+      "name": "RELEASE-VALIDATION.json",
+      "bytes": 7688,
+      "sha256": "cf7daa91cc8f0468818315c601efc556c386af4bf39630482e865bcf44d3cee3",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.1/RELEASE-VALIDATION.json"
+    },
+    {
+      "id": 618962217,
+      "name": "SHA256SUMS.txt",
+      "bytes": 324,
+      "sha256": "8c356b75c70e4afd406891a9b917c7762bcb41b71d718cc23ef0e962c22a492f",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.1/SHA256SUMS.txt"
+    },
+    {
+      "id": 618962245,
+      "name": "source-metadata.json",
+      "bytes": 1764,
+      "sha256": "2f8bccae52f16ac5e5fc4b0dbd6a39059494c79abee77b45975c1c816ec5ea60",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.1/source-metadata.json"
+    },
+    {
+      "id": 618962242,
+      "name": "WINDOWS-EVIDENCE.zip",
+      "bytes": 15607954,
+      "sha256": "4ede5a08c83e2bb91fef51d83316dae0ff7321dd29f8e884fa53030d9ca35c6d",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.1/WINDOWS-EVIDENCE.zip"
+    }
+  ],
+  "independentAudit": "tool-setup-0.10.1-public-downloads-2026-10-07.json"
+}

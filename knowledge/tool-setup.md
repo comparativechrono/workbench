@@ -1,6 +1,18 @@
 # Tool setup: Full, Starter and Custom
 
-**Released: [0.10.0](https://github.com/comparativechrono/workbench/releases/tag/app-v0.10.0), 2026-10-07.** The user approved this direction on
+**Current patch: [0.10.1](https://github.com/comparativechrono/workbench/releases/tag/app-v0.10.1), 2026-10-07.**
+The package list remains scrollable during refresh/install, with checkbox edits
+locked while active. Repeated header redraws and navigation resets were corrected
+and verified against the published 0.10.0 baseline in both native Windows paths.
+See the [patch handover](tool-setup-0.10.1-handover.md) for exact evidence and limits.
+
+A download failure now names the pack and distinguishes HTTP/proxy/TLS/DNS or
+connection causes from local storage/write failures. Record that exact message,
+resolve the named cause, then use **Retry**. Completed packs remain installed.
+The original tester-PC failure remains undiagnosed; do not treat successful
+hosted downloads as proof about that machine's network or storage.
+
+**Initial feature release: [0.10.0](https://github.com/comparativechrono/workbench/releases/tag/app-v0.10.0), 2026-10-07.** The user approved this direction on
 2026-10-06. Published 0.9.0 and all existing pack releases remain unchanged.
 The earlier empty-trust candidate passed the native checks recorded in the
 [0.10.0 handover](tool-setup-0.10.0-handover.md). As of **2026-10-07**, the official
