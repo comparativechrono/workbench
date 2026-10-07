@@ -75,3 +75,45 @@ It also compares active header pixels with the settled idle reference and keeps
 the disposable probe application outside retained evidence. No application-code
 change was needed for this probe correction. A new complete candidate run is
 required; the first attempt is not accepted release evidence.
+
+## Corrected candidate, native checks complete; Full pending
+
+Candidate `00b53cdded5db3bb176ee7e5a06546b8a0c66fff`, run `37634723095`,
+passed all ordinary and space-containing Windows jobs: setup 14, workspace 32,
+References 8, results 9 and update 13 per path, plus a separate one-check
+published-baseline negative control. References reports its optional embedded
+updater as unrequested; the separate 13-check updater passed. All 47 native
+Windows pack-manager source tests passed. Linux source checks were 161 passed
+and one Windows-only skip; these overlap earlier source results.
+
+The published baseline showed five navigation defects per path, an unchanged
+wheel position (25 to 25), a disabled list throughout active samples, lost
+selection/focus and multiple header pixel hashes during both idle and active
+observations. The patch retained a single identical normalized header image
+across 391 samples in total, including 98 active samples per path. Wheel input
+moved the viewport from 25 to 16 while keeping the selected/focused pack;
+checkbox edits remained blocked during active installation. Six/seven changing
+progress states established live activity over approximately 4.96 seconds.
+These are finite hosted desktop observations, not all physical-display coverage.
+Only final header bitmaps were retained, so transient baseline images cannot be
+visually classified retrospectively.
+
+The core updater preserved all 204 pre-existing fixture files in each path,
+verified all 72 target core files and safely reported already-installed on repeat.
+The independent bounded-download audit verified all three archives, 590 matching
+source files, unchanged production trust/profile and 143 starter pack files.
+Both compact audits are retained under `knowledge/evidence/tool-setup-0.10.1-*`.
+Real production Full, release acceptance and public-download verification remain
+pending at this snapshot; no tester-PC download diagnosis is asserted.
+
+## Accepted for immutable promotion
+
+Run `37634723095` completed successfully, including production Full: all 32 exact
+pack pins installed using unchanged official trust, reopened offline, preserved
+202 alignment/BAM records and contributed the BED workflow input. Its four checks
+had no skips or unrun scope. The exact report, final state, artifact hash/size
+and ZIP CRC were independently checked; the publication guards accepted them.
+The complete acceptance lock in `scripts/publish_app_0101.py` pins the three
+archives, four original CI artifacts and 13 reviewed report hashes. PR #5 and
+read-only preparation will precede publication. No public release is claimed
+at this acceptance snapshot; the tester-PC download failure remains undiagnosed.

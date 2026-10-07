@@ -1,0 +1,416 @@
+{
+  "schema": 1,
+  "runId": 37634723095,
+  "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "id": 112838027832,
+      "name": "build",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 37634723095,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Recover immutable build inputs and published upgrade baseline",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Compile native application and updater with strict warnings",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Verify setup and affected source contracts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Freeze candidate application and matching source once",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Derive exact 0.10.0 core update without rebuilding the application",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Prepare bounded transport without changing the frozen archives",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 28
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 29
+        }
+      ]
+    },
+    {
+      "id": 112838686323,
+      "name": "native (path with spaces)",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 37634723095,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/download-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Verify and extract exact candidate, updater and published baseline",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Native Windows source pack-manager filesystem regressions",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 5
+        },
+        {
+          "name": "Reproduce setup redraw and scrolling defect in exact published 0.10.0",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Native first-run profiles and signed batch failure/retry fixtures",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Recheck native workspace interactions, pipeline, CWL, DAGs and icon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Recheck live References downloads, cancellation, native selection and offline reuse",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Native 0.10.0 upgrade preserves tools, saved pins, references and results",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Retain successful and failed native evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 22
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 23
+        }
+      ]
+    },
+    {
+      "id": 112838686364,
+      "name": "production-full",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 37634723095,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/download-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Require packaged production trust and perform real clean-client Full installation",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        }
+      ]
+    },
+    {
+      "id": 112838686375,
+      "name": "native (ordinary)",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 37634723095,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/download-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Verify and extract exact candidate, updater and published baseline",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Native Windows source pack-manager filesystem regressions",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Reproduce setup redraw and scrolling defect in exact published 0.10.0",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Native first-run profiles and signed batch failure/retry fixtures",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Recheck native workspace interactions, pipeline, CWL, DAGs and icon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Recheck live References downloads, cancellation, native selection and offline reuse",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Native 0.10.0 upgrade preserves tools, saved pins, references and results",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Retain successful and failed native evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 22
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 23
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 11489622944,
+      "name": "setup-patch-production-full-00b53cdded5db3bb176ee7e5a06546b8a0c66fff-1",
+      "bytes": 467522,
+      "sha256": "5a5a332cc1e88bbdf0906720ea8453e49c1f303b29fe25e7c1ed62e60229f99b",
+      "runId": 37634723095,
+      "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff"
+    },
+    {
+      "id": 11489390077,
+      "name": "setup-patch-transfer-metadata-00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+      "bytes": 3492,
+      "sha256": "1181345ecee75e405e31dcf789d127109587245625b5acbe4f13542eebde9ff5",
+      "runId": 37634723095,
+      "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff"
+    },
+    {
+      "id": 11489335083,
+      "name": "setup-patch-transfer-source-part-1-00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+      "bytes": 25166018,
+      "sha256": "fd16dda61aa0a2bdd09f40d1e79837588769e9593ab2ec40019fccdd20a10b72",
+      "runId": 37634723095,
+      "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff"
+    },
+    {
+      "id": 11489175077,
+      "name": "setup-patch-windows-ordinary-1",
+      "bytes": 7869073,
+      "sha256": "98557aa03aca4f2e244392f66e473c7f09b1342e50de0ec4ba53bb53c686ac6b",
+      "runId": 37634723095,
+      "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff"
+    },
+    {
+      "id": 11488840002,
+      "name": "setup-patch-transfer-source-part-2-00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+      "bytes": 21667199,
+      "sha256": "b0554f0f466f9dfe548e4a8d64afd39ef75c5762382b94c457c12c2aa974f923",
+      "runId": 37634723095,
+      "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff"
+    },
+    {
+      "id": 11488695103,
+      "name": "setup-patch-candidate-00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+      "bytes": 76212926,
+      "sha256": "50b995aa56e50d05cfcbf2a3dc59eea60ee4af657e2749191ddf80db75e74822",
+      "runId": 37634723095,
+      "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff"
+    },
+    {
+      "id": 11488625084,
+      "name": "setup-patch-transfer-update-00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+      "bytes": 12859189,
+      "sha256": "eb63094194622cae55efe1dc3b5740b90f53a4a44aa499fd2d5da1c133ebf334",
+      "runId": 37634723095,
+      "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff"
+    },
+    {
+      "id": 11488390389,
+      "name": "setup-patch-transfer-starter-00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+      "bytes": 17032922,
+      "sha256": "e4421d765adc0ce8bd5eb324676b56bfdfa7fa0df9611bd4fa35ab3836f666ff",
+      "runId": 37634723095,
+      "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff"
+    },
+    {
+      "id": 11487569680,
+      "name": "setup-patch-windows-path with spaces-1",
+      "bytes": 7868005,
+      "sha256": "9218df6d9082cf9d22d7e49fe362ccf82740d94b52cdb3bafb5fd7902be9774e",
+      "runId": 37634723095,
+      "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff"
+    }
+  ]
+}

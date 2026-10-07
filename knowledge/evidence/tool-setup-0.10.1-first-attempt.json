@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "kind": "failed-first-patch-candidate-historical-evidence",
+  "sourceCommit": "12b7c89580fd97acc55a731a298d20b01af7473c",
+  "runId": 37633214062,
+  "acceptedForRelease": false,
+  "sourceChecks": {
+    "passed": 161,
+    "skipped": 1,
+    "nativePackManagerPassed": 47
+  },
+  "ordinaryReports": {
+    "setup": {
+      "success": false,
+      "passed": 0,
+      "error": "Custom final pack unchecked"
+    },
+    "negative-control": {
+      "success": false,
+      "passed": 0,
+      "error": "Custom final pack unchecked"
+    },
+    "workspace": {
+      "success": true,
+      "passed": 32,
+      "error": null
+    },
+    "references": {
+      "success": true,
+      "passed": 8,
+      "error": null
+    },
+    "results": {
+      "success": true,
+      "passed": 9,
+      "error": null
+    },
+    "update": {
+      "success": true,
+      "passed": 13,
+      "error": null
+    }
+  },
+  "cause": "New UI probe posted Space without restoring actual native list focus after profile changes; both published and patched applications failed the probe at Custom final pack unchecked. The next validator acknowledges profile and GUI-thread focus before key input.",
+  "followupSource": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+  "scope": "This historical attempt supplies no final acceptance or production Full pass.",
+  "workflowConclusion": "cancelled",
+  "productionFull": "Cancelled when corrected candidate superseded this run; not passed."
+}

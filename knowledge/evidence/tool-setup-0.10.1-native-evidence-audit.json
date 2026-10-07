@@ -1,0 +1,540 @@
+{
+  "schema": 1,
+  "auditedUtc": "2026-10-07T14:20:16.261760+00:00",
+  "runId": 37634723095,
+  "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+  "scope": "Independent artifact acquisition/hash/CRC and retained exact-Windows report audit; no new Windows execution by reviewer. Production Full is reviewed separately.",
+  "success": true,
+  "artifacts": [
+    {
+      "pathCase": "ordinary",
+      "id": 11489175077,
+      "bytes": 7869073,
+      "sha256": "98557aa03aca4f2e244392f66e473c7f09b1342e50de0ec4ba53bb53c686ac6b",
+      "zipCRC": "passed",
+      "archiveLocalPath": "/workspace/scratch/7cebe1115528/attachments/ddf0b5e0-51f7-43c6-845f-bc42e9516008/github-actions-artifact-11489175077.zip",
+      "extractedPath": "/workspace/scratch/7cebe1115528/patch-final-native-evidence/ordinary",
+      "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+      "runId": 37634723095,
+      "name": "setup-patch-windows-ordinary-1"
+    },
+    {
+      "pathCase": "spaces",
+      "id": 11487569680,
+      "bytes": 7868005,
+      "sha256": "9218df6d9082cf9d22d7e49fe362ccf82740d94b52cdb3bafb5fd7902be9774e",
+      "zipCRC": "passed",
+      "archiveLocalPath": "/workspace/scratch/7cebe1115528/attachments/67ebf0c1-8d5c-4dc6-a071-537a2355e472/github-actions-artifact-11487569680.zip",
+      "extractedPath": "/workspace/scratch/7cebe1115528/patch-final-native-evidence/spaces",
+      "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+      "runId": 37634723095,
+      "name": "setup-patch-windows-path with spaces-1"
+    }
+  ],
+  "reportHashes": {
+    "ordinary-setup": "0557f1cbce8c6f7a0dce66a66dfeb8d6925f5a6322a927edb3febc36c74a23d4",
+    "ordinary-workspace": "d581084de2702ef0b7a4607650830646535ef88b8517b46e6fcf15f163d97d50",
+    "ordinary-references": "88747e7d0a87a2ec5153130597a1c1942563d59447721962637a11963c0b5f13",
+    "ordinary-results": "a6a90285887fce30bd662a371764cf61c6fcfbc81b24e3905e3b3db10b81ed8d",
+    "ordinary-update": "8636a0c36c939e2453b2465c70d18a0ffbd2b469d4ef005760dc9ab7958c8397",
+    "ordinary-negative-control": "52a0b36d29fd8386061b997e0ddd60678a210f7c7128d86da00a55aa8c3e01b3",
+    "spaces-setup": "ae3e0dd68b2b4e7ad1f4a9a69ba2e59990fff0e5a2dfb7e4786d4f018bea14ec",
+    "spaces-workspace": "5128b75f6a982ab4a8821563a15b49d85646646634f6692cb983ecb1afa76eef",
+    "spaces-references": "64cdca36db2fd1140889826161b1a7495c3df10874b9ee8795b196075334e670",
+    "spaces-results": "1c30a04b0703da62d2a5d29dc5a28167a3c40a8a6a86978257134329794d54b2",
+    "spaces-update": "e96a733f79ed1cd8d1200d9ef44cbc6a0daad9b4c424ff45dd39be72204aa0bc",
+    "spaces-negative-control": "a528b72055a5c43d525886175dd51022a48311bd3b8efe39dfcfba5455cfd304"
+  },
+  "reports": {
+    "ordinary-setup": {
+      "relativePath": "ordinary/setup-evidence/native-setup.json",
+      "artifactMember": "setup-evidence/native-setup.json",
+      "localPath": "/workspace/scratch/7cebe1115528/patch-final-native-evidence/ordinary/setup-evidence/native-setup.json",
+      "bytes": 689580,
+      "sha256": "0557f1cbce8c6f7a0dce66a66dfeb8d6925f5a6322a927edb3febc36c74a23d4",
+      "passed": 14,
+      "success": true,
+      "skips": [],
+      "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+      "appFilesMatchedArchive": 23
+    },
+    "ordinary-workspace": {
+      "relativePath": "ordinary/workspace-evidence/native-ui.json",
+      "artifactMember": "workspace-evidence/native-ui.json",
+      "localPath": "/workspace/scratch/7cebe1115528/patch-final-native-evidence/ordinary/workspace-evidence/native-ui.json",
+      "bytes": 22555,
+      "sha256": "d581084de2702ef0b7a4607650830646535ef88b8517b46e6fcf15f163d97d50",
+      "passed": 32,
+      "success": true,
+      "skips": [],
+      "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+      "appFilesMatchedArchive": 19
+    },
+    "ordinary-references": {
+      "relativePath": "ordinary/references-evidence/native-references.json",
+      "artifactMember": "references-evidence/native-references.json",
+      "localPath": "/workspace/scratch/7cebe1115528/patch-final-native-evidence/ordinary/references-evidence/native-references.json",
+      "bytes": 24589,
+      "sha256": "88747e7d0a87a2ec5153130597a1c1942563d59447721962637a11963c0b5f13",
+      "passed": 8,
+      "success": true,
+      "skips": [
+        "Optional native core updater gate was not requested."
+      ],
+      "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+      "appFilesMatchedArchive": 18
+    },
+    "ordinary-results": {
+      "relativePath": "ordinary/results-evidence/native-results.json",
+      "artifactMember": "results-evidence/native-results.json",
+      "localPath": "/workspace/scratch/7cebe1115528/patch-final-native-evidence/ordinary/results-evidence/native-results.json",
+      "bytes": 14511,
+      "sha256": "a6a90285887fce30bd662a371764cf61c6fcfbc81b24e3905e3b3db10b81ed8d",
+      "passed": 9,
+      "success": true,
+      "skips": [],
+      "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+      "appFilesMatchedArchive": 6
+    },
+    "ordinary-update": {
+      "relativePath": "ordinary/update-evidence/native-update.json",
+      "artifactMember": "update-evidence/native-update.json",
+      "localPath": "/workspace/scratch/7cebe1115528/patch-final-native-evidence/ordinary/update-evidence/native-update.json",
+      "bytes": 9088,
+      "sha256": "8636a0c36c939e2453b2465c70d18a0ffbd2b469d4ef005760dc9ab7958c8397",
+      "passed": 13,
+      "success": true,
+      "skips": [],
+      "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+      "appFilesMatchedArchive": 0
+    },
+    "ordinary-negative-control": {
+      "relativePath": "ordinary/setup-negative-control/native-setup-negative-control.json",
+      "artifactMember": "setup-negative-control/native-setup-negative-control.json",
+      "localPath": "/workspace/scratch/7cebe1115528/patch-final-native-evidence/ordinary/setup-negative-control/native-setup-negative-control.json",
+      "bytes": 10089,
+      "sha256": "52a0b36d29fd8386061b997e0ddd60678a210f7c7128d86da00a55aa8c3e01b3",
+      "passed": 1,
+      "success": true,
+      "skips": [],
+      "sourceCommit": "5a390acd8440856e3f4e32de237322a18bb82d7e",
+      "appFilesMatchedArchive": 23
+    },
+    "spaces-setup": {
+      "relativePath": "spaces/setup-evidence/native-setup.json",
+      "artifactMember": "setup-evidence/native-setup.json",
+      "localPath": "/workspace/scratch/7cebe1115528/patch-final-native-evidence/spaces/setup-evidence/native-setup.json",
+      "bytes": 689941,
+      "sha256": "ae3e0dd68b2b4e7ad1f4a9a69ba2e59990fff0e5a2dfb7e4786d4f018bea14ec",
+      "passed": 14,
+      "success": true,
+      "skips": [],
+      "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+      "appFilesMatchedArchive": 23
+    },
+    "spaces-workspace": {
+      "relativePath": "spaces/workspace-evidence/native-ui.json",
+      "artifactMember": "workspace-evidence/native-ui.json",
+      "localPath": "/workspace/scratch/7cebe1115528/patch-final-native-evidence/spaces/workspace-evidence/native-ui.json",
+      "bytes": 22603,
+      "sha256": "5128b75f6a982ab4a8821563a15b49d85646646634f6692cb983ecb1afa76eef",
+      "passed": 32,
+      "success": true,
+      "skips": [],
+      "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+      "appFilesMatchedArchive": 19
+    },
+    "spaces-references": {
+      "relativePath": "spaces/references-evidence/native-references.json",
+      "artifactMember": "references-evidence/native-references.json",
+      "localPath": "/workspace/scratch/7cebe1115528/patch-final-native-evidence/spaces/references-evidence/native-references.json",
+      "bytes": 24653,
+      "sha256": "64cdca36db2fd1140889826161b1a7495c3df10874b9ee8795b196075334e670",
+      "passed": 8,
+      "success": true,
+      "skips": [
+        "Optional native core updater gate was not requested."
+      ],
+      "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+      "appFilesMatchedArchive": 18
+    },
+    "spaces-results": {
+      "relativePath": "spaces/results-evidence/native-results.json",
+      "artifactMember": "results-evidence/native-results.json",
+      "localPath": "/workspace/scratch/7cebe1115528/patch-final-native-evidence/spaces/results-evidence/native-results.json",
+      "bytes": 14511,
+      "sha256": "1c30a04b0703da62d2a5d29dc5a28167a3c40a8a6a86978257134329794d54b2",
+      "passed": 9,
+      "success": true,
+      "skips": [],
+      "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+      "appFilesMatchedArchive": 6
+    },
+    "spaces-update": {
+      "relativePath": "spaces/update-evidence/native-update.json",
+      "artifactMember": "update-evidence/native-update.json",
+      "localPath": "/workspace/scratch/7cebe1115528/patch-final-native-evidence/spaces/update-evidence/native-update.json",
+      "bytes": 9112,
+      "sha256": "e96a733f79ed1cd8d1200d9ef44cbc6a0daad9b4c424ff45dd39be72204aa0bc",
+      "passed": 13,
+      "success": true,
+      "skips": [],
+      "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+      "appFilesMatchedArchive": 0
+    },
+    "spaces-negative-control": {
+      "relativePath": "spaces/setup-negative-control/native-setup-negative-control.json",
+      "artifactMember": "setup-negative-control/native-setup-negative-control.json",
+      "localPath": "/workspace/scratch/7cebe1115528/patch-final-native-evidence/spaces/setup-negative-control/native-setup-negative-control.json",
+      "bytes": 10572,
+      "sha256": "a528b72055a5c43d525886175dd51022a48311bd3b8efe39dfcfba5455cfd304",
+      "passed": 1,
+      "success": true,
+      "skips": [],
+      "sourceCommit": "5a390acd8440856e3f4e32de237322a18bb82d7e",
+      "appFilesMatchedArchive": 23
+    }
+  },
+  "cases": {
+    "ordinary": {
+      "upgrade": {
+        "checksPassed": 13,
+        "coreFilesVerified": 72,
+        "existingFilesPreserved": 204,
+        "changes": {},
+        "additions": {
+          "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+        },
+        "installStatus": "installed",
+        "repeatStatus": "already-installed",
+        "scope": "Starter/optional packs, saved settings/pins, setup selection/queue, existing reference/run bytes plus post-update reference and five-step starter/CWL replay."
+      },
+      "baseline": {
+        "frames": {
+          "idle": {
+            "requestedSeconds": 3,
+            "frames": 37,
+            "uniqueHeaderHashes": 2,
+            "busySamples": 0,
+            "disabledSamples": 0,
+            "observedBusySeconds": 0,
+            "distinctProgressStates": 1,
+            "positionChanges": []
+          },
+          "idleWheel": {
+            "requestedSeconds": 2,
+            "frames": 26,
+            "uniqueHeaderHashes": 2,
+            "busySamples": 0,
+            "disabledSamples": 0,
+            "observedBusySeconds": 0,
+            "distinctProgressStates": 1,
+            "positionChanges": []
+          },
+          "polling": {
+            "requestedSeconds": 5,
+            "frames": 56,
+            "uniqueHeaderHashes": 3,
+            "busySamples": 56,
+            "disabledSamples": 56,
+            "observedBusySeconds": 4.915847600000006,
+            "distinctProgressStates": 6,
+            "positionChanges": [
+              {
+                "top": 19,
+                "selected": 18446744073709551615,
+                "focused": 18446744073709551615,
+                "horizontal": 0
+              },
+              {
+                "top": 13,
+                "selected": 18446744073709551615,
+                "focused": 18446744073709551615,
+                "horizontal": 0
+              }
+            ]
+          }
+        },
+        "defects": [
+          "Unchanged column header pixels changed during idle sampling.",
+          "Catalogue row updates lost the exact viewport, highlighted pack or focus.",
+          "Package list is disabled during installation, preventing native scrolling.",
+          "Real mouse wheel cannot scroll the active installation list.",
+          "Status polling disabled the inspectable package list.",
+          "Status polling changed the viewport, highlighted pack or focus.",
+          "Unchanged column header pixels changed during active status polling."
+        ],
+        "navigationDefects": [
+          "Catalogue row updates lost the exact viewport, highlighted pack or focus.",
+          "Package list is disabled during installation, preventing native scrolling.",
+          "Real mouse wheel cannot scroll the active installation list.",
+          "Status polling disabled the inspectable package list.",
+          "Status polling changed the viewport, highlighted pack or focus."
+        ],
+        "headerPixelVariabilityObserved": true,
+        "busyWheel": {
+          "before": {
+            "top": 25,
+            "selected": 31,
+            "focused": 31,
+            "horizontal": 0
+          },
+          "after": {
+            "top": 25,
+            "selected": 31,
+            "focused": 31,
+            "horizontal": 0
+          }
+        },
+        "refreshPosition": {
+          "top": 10,
+          "selected": 18446744073709551615,
+          "focused": 18446744073709551615,
+          "horizontal": 0
+        },
+        "lockedCheckboxInteractionExecuted": false,
+        "immediateCustomFullChecks": true,
+        "finalNotice": "Pack installation cancelled before publication\nChoose Full, Starter or Custom. Downloads start only when requested. Installed tools work offline.",
+        "capture": "/workspace/scratch/7cebe1115528/patch-final-native-evidence/ordinary/setup-negative-control/polling/setup-polling-final.bmp"
+      },
+      "candidate": {
+        "frames": {
+          "idle": {
+            "requestedSeconds": 3,
+            "frames": 56,
+            "uniqueHeaderHashes": 1,
+            "busySamples": 0,
+            "disabledSamples": 0,
+            "observedBusySeconds": 0,
+            "distinctProgressStates": 1,
+            "positionChanges": []
+          },
+          "idleWheel": {
+            "requestedSeconds": 2,
+            "frames": 38,
+            "uniqueHeaderHashes": 1,
+            "busySamples": 0,
+            "disabledSamples": 0,
+            "observedBusySeconds": 0,
+            "distinctProgressStates": 1,
+            "positionChanges": []
+          },
+          "polling": {
+            "requestedSeconds": 5,
+            "frames": 98,
+            "uniqueHeaderHashes": 1,
+            "busySamples": 98,
+            "disabledSamples": 0,
+            "observedBusySeconds": 4.955568400000004,
+            "distinctProgressStates": 6,
+            "positionChanges": []
+          }
+        },
+        "defects": [],
+        "navigationDefects": [],
+        "headerPixelVariabilityObserved": false,
+        "busyWheel": {
+          "before": {
+            "top": 25,
+            "selected": 31,
+            "focused": 31,
+            "horizontal": 0
+          },
+          "after": {
+            "top": 16,
+            "selected": 31,
+            "focused": 31,
+            "horizontal": 0
+          }
+        },
+        "refreshPosition": {
+          "top": 16,
+          "selected": 31,
+          "focused": 31,
+          "horizontal": 0
+        },
+        "lockedCheckboxInteractionExecuted": true,
+        "immediateCustomFullChecks": true,
+        "finalNotice": "Pack installation cancelled before publication\nChoose Full, Starter or Custom. Downloads start only when requested. Installed tools work offline. \u00b7 Bowtie 2",
+        "capture": "/workspace/scratch/7cebe1115528/patch-final-native-evidence/ordinary/setup-evidence/polling/setup-polling-final.bmp"
+      }
+    },
+    "spaces": {
+      "upgrade": {
+        "checksPassed": 13,
+        "coreFilesVerified": 72,
+        "existingFilesPreserved": 204,
+        "changes": {},
+        "additions": {
+          "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+        },
+        "installStatus": "installed",
+        "repeatStatus": "already-installed",
+        "scope": "Starter/optional packs, saved settings/pins, setup selection/queue, existing reference/run bytes plus post-update reference and five-step starter/CWL replay."
+      },
+      "baseline": {
+        "frames": {
+          "idle": {
+            "requestedSeconds": 3,
+            "frames": 36,
+            "uniqueHeaderHashes": 3,
+            "busySamples": 0,
+            "disabledSamples": 0,
+            "observedBusySeconds": 0,
+            "distinctProgressStates": 1,
+            "positionChanges": []
+          },
+          "idleWheel": {
+            "requestedSeconds": 2,
+            "frames": 25,
+            "uniqueHeaderHashes": 1,
+            "busySamples": 0,
+            "disabledSamples": 0,
+            "observedBusySeconds": 0,
+            "distinctProgressStates": 1,
+            "positionChanges": []
+          },
+          "polling": {
+            "requestedSeconds": 5,
+            "frames": 60,
+            "uniqueHeaderHashes": 3,
+            "busySamples": 60,
+            "disabledSamples": 60,
+            "observedBusySeconds": 4.941859300000033,
+            "distinctProgressStates": 7,
+            "positionChanges": [
+              {
+                "top": 19,
+                "selected": 18446744073709551615,
+                "focused": 18446744073709551615,
+                "horizontal": 0
+              },
+              {
+                "top": 13,
+                "selected": 18446744073709551615,
+                "focused": 18446744073709551615,
+                "horizontal": 0
+              },
+              {
+                "top": 7,
+                "selected": 18446744073709551615,
+                "focused": 18446744073709551615,
+                "horizontal": 0
+              }
+            ]
+          }
+        },
+        "defects": [
+          "Unchanged column header pixels changed during idle sampling.",
+          "Catalogue row updates lost the exact viewport, highlighted pack or focus.",
+          "Package list is disabled during installation, preventing native scrolling.",
+          "Real mouse wheel cannot scroll the active installation list.",
+          "Status polling disabled the inspectable package list.",
+          "Status polling changed the viewport, highlighted pack or focus.",
+          "Unchanged column header pixels changed during active status polling."
+        ],
+        "navigationDefects": [
+          "Catalogue row updates lost the exact viewport, highlighted pack or focus.",
+          "Package list is disabled during installation, preventing native scrolling.",
+          "Real mouse wheel cannot scroll the active installation list.",
+          "Status polling disabled the inspectable package list.",
+          "Status polling changed the viewport, highlighted pack or focus."
+        ],
+        "headerPixelVariabilityObserved": true,
+        "busyWheel": {
+          "before": {
+            "top": 25,
+            "selected": 31,
+            "focused": 31,
+            "horizontal": 0
+          },
+          "after": {
+            "top": 25,
+            "selected": 31,
+            "focused": 31,
+            "horizontal": 0
+          }
+        },
+        "refreshPosition": {
+          "top": 10,
+          "selected": 18446744073709551615,
+          "focused": 18446744073709551615,
+          "horizontal": 0
+        },
+        "lockedCheckboxInteractionExecuted": false,
+        "immediateCustomFullChecks": true,
+        "finalNotice": "Pack installation cancelled before publication\nChoose Full, Starter or Custom. Downloads start only when requested. Installed tools work offline.",
+        "capture": "/workspace/scratch/7cebe1115528/patch-final-native-evidence/spaces/setup-negative-control/polling/setup-polling-final.bmp"
+      },
+      "candidate": {
+        "frames": {
+          "idle": {
+            "requestedSeconds": 3,
+            "frames": 61,
+            "uniqueHeaderHashes": 1,
+            "busySamples": 0,
+            "disabledSamples": 0,
+            "observedBusySeconds": 0,
+            "distinctProgressStates": 1,
+            "positionChanges": []
+          },
+          "idleWheel": {
+            "requestedSeconds": 2,
+            "frames": 40,
+            "uniqueHeaderHashes": 1,
+            "busySamples": 0,
+            "disabledSamples": 0,
+            "observedBusySeconds": 0,
+            "distinctProgressStates": 1,
+            "positionChanges": []
+          },
+          "polling": {
+            "requestedSeconds": 5,
+            "frames": 98,
+            "uniqueHeaderHashes": 1,
+            "busySamples": 98,
+            "disabledSamples": 0,
+            "observedBusySeconds": 4.976467800000023,
+            "distinctProgressStates": 7,
+            "positionChanges": []
+          }
+        },
+        "defects": [],
+        "navigationDefects": [],
+        "headerPixelVariabilityObserved": false,
+        "busyWheel": {
+          "before": {
+            "top": 25,
+            "selected": 31,
+            "focused": 31,
+            "horizontal": 0
+          },
+          "after": {
+            "top": 16,
+            "selected": 31,
+            "focused": 31,
+            "horizontal": 0
+          }
+        },
+        "refreshPosition": {
+          "top": 16,
+          "selected": 31,
+          "focused": 31,
+          "horizontal": 0
+        },
+        "lockedCheckboxInteractionExecuted": true,
+        "immediateCustomFullChecks": true,
+        "finalNotice": "Pack installation cancelled before publication\nChoose Full, Starter or Custom. Downloads start only when requested. Installed tools work offline. \u00b7 Bowtie 2",
+        "capture": "/workspace/scratch/7cebe1115528/patch-final-native-evidence/spaces/setup-evidence/polling/setup-polling-final.bmp"
+      }
+    }
+  },
+  "limitations": [
+    "Header pixel variability in the baseline is observed quantitatively, separately from navigation defects. Only the last bitmap in each sample interval is retained, so transient alternate images cannot be visually classified retrospectively.",
+    "391 stable patch header samples cover two hosted Windows paths and requested 3+2+5-second intervals each; they do not establish all physical-display behavior.",
+    "References report explicitly skips its optional legacy updater subgate; the separate exact 0.10.0-to-0.10.1 updater passes 13 checks in each path.",
+    "The small UI live installation probe uses production trust but deliberately cancels; full production installation is a separate report.",
+    "Native Windows CWL evidence executes standalone embedded runners, not a Windows CWL engine."
+  ],
+  "retainedHeaderVisualReview": "Ordinary candidate active header bitmap shows the four readable expected labels Tool pack, Version, Status and Download. Its normalized BGR hash matches the recorded reference shared by every patch phase and both paths."
+}

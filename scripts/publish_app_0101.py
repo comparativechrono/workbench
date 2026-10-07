@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Promote one accepted 0.10.1 candidate without rebuilding or replacing assets.
 
-The acceptance lock is deliberately incomplete until the exact patch candidate
-and Windows regression evidence have been reviewed. Only the release branch at
+The acceptance lock records the exact patch candidate and completed Windows
+regression evidence reviewed on 2026-10-07. Only the release branch at
 the locked patch PR merge commit may publish. Preparation and published-release
 verification make no remote mutations.
 """
@@ -39,19 +39,76 @@ STARTER = 'native-workbench-0.10.1-starter-windows.zip'
 UPDATE = 'native-workbench-0.10.1-update-from-0.10.0.zip'
 SOURCES = 'native-workbench-0.10.1-source.zip'
 ROOT = Path(__file__).resolve().parents[1]
-# Intentionally incomplete: fill only with independently reviewed, completed
-# candidate evidence. Every promotion/preparation path validates this lock.
+# Frozen after independent archive/report review and successful run37634723095.
+# Every promotion/preparation path validates this completed acceptance lock.
 # Artifacts are the exact GitHub artifact ZIP identities, not their contents.
 ACCEPTED = {
-    "sourceCommit": "",
-    "runId": 0,
-    "prNumber": 0,
-    "fingerprint": FINGERPRINT,
-    "coreFiles": 0,
-    "archives": {},
-    "artifacts": {},
-    "reportHashes": {},
+    "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+    "runId": 37634723095,
+    "prNumber": 5,
+    "fingerprint": "8d2093f9fafd71de56fea2038faeb2efa0964767d3235430b06428132cdc8505",
+    "coreFiles": 72,
+    "archives": {
+        "native-workbench-0.10.1-source.zip": {
+            "bytes": 46832829,
+            "sha256": "4130c105e0ce0956c234718f93926d1f9b3f6bfd81048b8fc6e8823617c583ab"
+        },
+        "native-workbench-0.10.1-starter-windows.zip": {
+            "bytes": 17032722,
+            "sha256": "a8c4d374104d62fdf46dbd405e9d5bc36f5e2ea191f573faa63cfb29b433ba79"
+        },
+        "native-workbench-0.10.1-update-from-0.10.0.zip": {
+            "bytes": 12858983,
+            "sha256": "fbf1f20d93c1fe781608cba6d48c948979986c06cdb9a4ce5b825b088d2fc3fb"
+        }
+    },
+    "artifacts": {
+        "candidate": {
+            "id": 11488695103,
+            "name": "setup-patch-candidate-00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+            "bytes": 76212926,
+            "sha256": "50b995aa56e50d05cfcbf2a3dc59eea60ee4af657e2749191ddf80db75e74822",
+            "file": "candidate.zip"
+        },
+        "ordinary": {
+            "id": 11489175077,
+            "name": "setup-patch-windows-ordinary-1",
+            "bytes": 7869073,
+            "sha256": "98557aa03aca4f2e244392f66e473c7f09b1342e50de0ec4ba53bb53c686ac6b",
+            "file": "ordinary.zip"
+        },
+        "spaces": {
+            "id": 11487569680,
+            "name": "setup-patch-windows-path with spaces-1",
+            "bytes": 7868005,
+            "sha256": "9218df6d9082cf9d22d7e49fe362ccf82740d94b52cdb3bafb5fd7902be9774e",
+            "file": "spaces.zip"
+        },
+        "production-full": {
+            "id": 11489622944,
+            "name": "setup-patch-production-full-00b53cdded5db3bb176ee7e5a06546b8a0c66fff-1",
+            "bytes": 467522,
+            "sha256": "5a5a332cc1e88bbdf0906720ea8453e49c1f303b29fe25e7c1ed62e60229f99b",
+            "file": "production-full.zip"
+        }
+    },
+    "reportHashes": {
+        "ordinary-setup": "0557f1cbce8c6f7a0dce66a66dfeb8d6925f5a6322a927edb3febc36c74a23d4",
+        "ordinary-workspace": "d581084de2702ef0b7a4607650830646535ef88b8517b46e6fcf15f163d97d50",
+        "ordinary-references": "88747e7d0a87a2ec5153130597a1c1942563d59447721962637a11963c0b5f13",
+        "ordinary-results": "a6a90285887fce30bd662a371764cf61c6fcfbc81b24e3905e3b3db10b81ed8d",
+        "ordinary-update": "8636a0c36c939e2453b2465c70d18a0ffbd2b469d4ef005760dc9ab7958c8397",
+        "ordinary-negative-control": "52a0b36d29fd8386061b997e0ddd60678a210f7c7128d86da00a55aa8c3e01b3",
+        "spaces-setup": "ae3e0dd68b2b4e7ad1f4a9a69ba2e59990fff0e5a2dfb7e4786d4f018bea14ec",
+        "spaces-workspace": "5128b75f6a982ab4a8821563a15b49d85646646634f6692cb983ecb1afa76eef",
+        "spaces-references": "64cdca36db2fd1140889826161b1a7495c3df10874b9ee8795b196075334e670",
+        "spaces-results": "1c30a04b0703da62d2a5d29dc5a28167a3c40a8a6a86978257134329794d54b2",
+        "spaces-update": "e96a733f79ed1cd8d1200d9ef44cbc6a0daad9b4c424ff45dd39be72204aa0bc",
+        "spaces-negative-control": "a528b72055a5c43d525886175dd51022a48311bd3b8efe39dfcfba5455cfd304",
+        "production-full": "ebcfd285acfbe48a59bf2ef61927698319fd3e4acfda7555d5b7bfc7917ad41f"
+    }
 }
+
 CANDIDATE_MEMBERS = {STARTER, UPDATE, SOURCES, 'BUILD-PROVENANCE.json',
                      'BUILD-UPDATE-PROVENANCE.json', 'source-metadata.json', 'SHA256SUMS.txt'}
 ASSET_NAMES = CANDIDATE_MEMBERS | {'WINDOWS-EVIDENCE.zip', 'RELEASE-VALIDATION.json', 'EVIDENCE-SHA256SUMS.txt'}
