@@ -71,6 +71,7 @@ class DesktopHost:
         self.model_lock = threading.RLock()
         self.closing = threading.Event()
         self._pack_model_revision = None
+        self._setup_model_revision = None
 
     def snapshot(self):
         with self.model_lock:
@@ -142,6 +143,28 @@ class DesktopHost:
             ref = short_text(params["ref"], "connection source", 200)
             with self.model_lock:
                 return {"ref": ref, "targets": self.model.connection_targets(ref)}
+        if method.startswith("setup/"):
+            action = method.split("/", 1)[1]
+            if action == "start":
+                result = self.app.start_setup_operation(action, params)
+            elif params:
+                raise ValueError("Unknown tool setup request field.")
+            elif action in ("refresh", "retry"):
+                result = self.app.start_setup_operation(action, params)
+            elif action == "status":
+                result = self.app.setup_state()
+            elif action == "cancel":
+                result = self.app.cancel_setup_operation()
+            elif action == "dismiss":
+                result = self.app.dismiss_setup()
+            else:
+                raise ValueError("Unknown tool setup action.")
+            revision = result.get("revision")
+            if revision != self._setup_model_revision:
+                self._refresh_models()
+                self._setup_model_revision = revision
+                result["model"] = self.snapshot()
+            return result
         if method.startswith("packs/"):
             action = method.split("/", 1)[1]
             if action in ("list", "status"):

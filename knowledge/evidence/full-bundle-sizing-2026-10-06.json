@@ -1,0 +1,1561 @@
+{
+  "schema": "native-workbench-full-bundle-sizing/1",
+  "measured_at": "2026-10-06T21:01:48.721687+00:00",
+  "metadata_snapshot": {
+    "file": "full-bundle-live-packs-2026-10-06.json",
+    "sha256": "4bab24363a91b90965e5ec50e39f0701097f11c6a410916145e0b1a7b137ecba",
+    "checked_on": "2026-10-06T20:51:44.022Z",
+    "url": "https://api.github.com/repos/comparativechrono/workbench/releases?per_page=100"
+  },
+  "starter": {
+    "file": "native-workbench-0.9.0-starter-windows.zip",
+    "version": "0.9.0",
+    "download_bytes": 17002821,
+    "sha256": "c2661c144e073c4efdd190ffd186bacd9398b6413b81770d7a057c3947eecf02",
+    "expanded_bytes": 36465628,
+    "compressed_payload_bytes": 16952251,
+    "files": 214,
+    "starter_pack_count": 3,
+    "whole_archive_sha256_verified": true,
+    "whole_archive_crc_verified": true,
+    "starter_payloads_match_published_pack_envelopes": true
+  },
+  "packs": [
+    {
+      "id": "align",
+      "version": "0.4.0",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-align-v0.4.0",
+      "included_in_starter": true,
+      "primary_asset": {
+        "name": "native-workbench-pack-align-0.4.0.zip",
+        "asset_id": 608299341,
+        "bytes": 568924,
+        "github_digest": "sha256:e701dbcf5a8c3fb31c1a82a3c7b7da50eb1cceb64b5b9c88db4795f98ec4f72d",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-align-v0.4.0/native-workbench-pack-align-0.4.0.zip"
+      },
+      "manifest_sha256": "81c962222c93356a4f7727b23193c71d7dcd515859e62a179574781f411824d3",
+      "expanded_payload_bytes": 1135895,
+      "compressed_payload_bytes": 558771,
+      "payload_files": 38,
+      "license_tree_bytes": 226285,
+      "runtime_directory_bytes": 0,
+      "compatibility_receipt_bytes": 204,
+      "envelope_bytes": 7149,
+      "envelope_sha256": "36d5a5eadeab5825698477d6dbb583de5e09c5792562e57d4ac090d8de978369",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 503367,
+          "end_inclusive": 568923,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "bam",
+      "version": "0.4.0",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-bam-v0.4.0",
+      "included_in_starter": true,
+      "primary_asset": {
+        "name": "native-workbench-pack-bam-0.4.0.zip",
+        "asset_id": 608299768,
+        "bytes": 1158320,
+        "github_digest": "sha256:b9edc1535996c2e86fdb533328fb8fad78b9168bcb0d0733b73090387c27b61f",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-bam-v0.4.0/native-workbench-pack-bam-0.4.0.zip"
+      },
+      "manifest_sha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888",
+      "expanded_payload_bytes": 3265761,
+      "compressed_payload_bytes": 1144548,
+      "payload_files": 52,
+      "license_tree_bytes": 1289653,
+      "runtime_directory_bytes": 0,
+      "compatibility_receipt_bytes": 202,
+      "envelope_bytes": 9707,
+      "envelope_sha256": "d985451ac428606a1fba09fe403aa0bd6eed8fc06439d6afcf986ed2abbb389a",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 1092763,
+          "end_inclusive": 1158319,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "bedtools",
+      "version": "1.0.0",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-bedtools-v1.0.0",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-bedtools-1.0.0.zip",
+        "asset_id": 609942977,
+        "bytes": 32015063,
+        "github_digest": "sha256:f195c4c25acd1b109b8bd73656d64e12939bea847aa4d95a776fa25129455382",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-bedtools-v1.0.0/native-workbench-pack-bedtools-1.0.0.zip"
+      },
+      "manifest_sha256": "4918fb533a648db4e1c53bd3a71676cef008bd7228a84136e2c4f4724420ead1",
+      "expanded_payload_bytes": 63720476,
+      "compressed_payload_bytes": 32007886,
+      "payload_files": 33,
+      "license_tree_bytes": 22683797,
+      "runtime_directory_bytes": 0,
+      "compatibility_receipt_bytes": 207,
+      "envelope_bytes": 5426,
+      "envelope_sha256": "f970a639170acd8e9ac28781adadec9661a51e5fdfeed1515e2ce97848e9c91c",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 31949506,
+          "end_inclusive": 32015062,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "blast",
+      "version": "1.0.0",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-blast-v1.0.0",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-blast-1.0.0.zip",
+        "asset_id": 610009241,
+        "bytes": 70024863,
+        "github_digest": "sha256:3a907171c210d640a53cff6f2c51813be61b87a859a3a65b987947985f97024c",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-blast-v1.0.0/native-workbench-pack-blast-1.0.0.zip"
+      },
+      "manifest_sha256": "3242e23ba4e5edbec8b288c98d666cb4f0f3c23c9f03fc9d7d4258e4029d90c8",
+      "expanded_payload_bytes": 130286505,
+      "compressed_payload_bytes": 70016216,
+      "payload_files": 39,
+      "license_tree_bytes": 32474213,
+      "runtime_directory_bytes": 0,
+      "compatibility_receipt_bytes": 204,
+      "envelope_bytes": 6477,
+      "envelope_sha256": "efef0b1bdf242059f1b7790a0548297594614924d06e0976ee02ac7f9d580202",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 69959306,
+          "end_inclusive": 70024862,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "bowtie2",
+      "version": "0.5.3",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-bowtie2-v0.5.3",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-bowtie2-0.5.3.zip",
+        "asset_id": 608300246,
+        "bytes": 36396085,
+        "github_digest": "sha256:d9810ddb3ea67bf296efde3c2b4a1d3f5513c5bdb6ba841a67db02f25c3d0a22",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-bowtie2-v0.5.3/native-workbench-pack-bowtie2-0.5.3.zip"
+      },
+      "manifest_sha256": "cdaa52bde3dec022e6716d4fc6b6e78481982f1d6491b5cd21ff4d64d33cec32",
+      "expanded_payload_bytes": 83209391,
+      "compressed_payload_bytes": 36378147,
+      "payload_files": 69,
+      "license_tree_bytes": 15210418,
+      "runtime_directory_bytes": 0,
+      "compatibility_receipt_bytes": 206,
+      "envelope_bytes": 12777,
+      "envelope_sha256": "934f1a1efe60279f3d7515e55f58e817527d945cad0bd5d2882c43a08671d243",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 36330528,
+          "end_inclusive": 36396084,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "bracken",
+      "version": "1.0.0",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-bracken-v1.0.0",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-bracken-1.0.0.zip",
+        "asset_id": 610709552,
+        "bytes": 34837071,
+        "github_digest": "sha256:bfd5ae2ea3ef3e54f3ae5b97530e58bf1aad8562d66ca1c8e190b87472f1d853",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-bracken-v1.0.0/native-workbench-pack-bracken-1.0.0.zip"
+      },
+      "manifest_sha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d",
+      "expanded_payload_bytes": 46124797,
+      "compressed_payload_bytes": 34824772,
+      "payload_files": 60,
+      "license_tree_bytes": 23478877,
+      "runtime_directory_bytes": 0,
+      "compatibility_receipt_bytes": 206,
+      "envelope_bytes": 9531,
+      "envelope_sha256": "e182bb4aaab36085171e89263c66c8b91ef8b658ed9b9afa1b462217654c6a52",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 34771514,
+          "end_inclusive": 34837070,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "bwa",
+      "version": "0.4.0",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-bwa-v0.4.0",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-bwa-0.4.0.zip",
+        "asset_id": 608302358,
+        "bytes": 1870891,
+        "github_digest": "sha256:c80b8c924861c1b768eb9488821bf5e5582f927d722a30dfb1078b999d9d419c",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-bwa-v0.4.0/native-workbench-pack-bwa-0.4.0.zip"
+      },
+      "manifest_sha256": "7d49d9bac3c4c98776f70120915ffa7f2a85ee297787f9c1e45c8b4655ee4a37",
+      "expanded_payload_bytes": 4705311,
+      "compressed_payload_bytes": 1850245,
+      "payload_files": 82,
+      "license_tree_bytes": 1549045,
+      "runtime_directory_bytes": 0,
+      "compatibility_receipt_bytes": 202,
+      "envelope_bytes": 15342,
+      "envelope_sha256": "9f0c3cddddb1ec7ef24c8332c0aaed861ae81c6c7b40ab9505285f075b71e340",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 1805334,
+          "end_inclusive": 1870890,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "deseq2",
+      "version": "1.0.0",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-deseq2-v1.0.0",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-deseq2-1.0.0.zip",
+        "asset_id": 610556586,
+        "bytes": 277504383,
+        "github_digest": "sha256:eccffbcaf3adad6ab1da63ea771fe103a807a88722a56f5db82072cf02c1292d",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-deseq2-v1.0.0/native-workbench-pack-deseq2-1.0.0.zip"
+      },
+      "manifest_sha256": "f5a06708651f14f25e89ca3588ed6bf2f91442e43d635a9fc7ab5af066112ee1",
+      "expanded_payload_bytes": 291058087,
+      "compressed_payload_bytes": 277469904,
+      "payload_files": 162,
+      "license_tree_bytes": 109964723,
+      "runtime_directory_bytes": 158313462,
+      "compatibility_receipt_bytes": 205,
+      "envelope_bytes": 26278,
+      "envelope_sha256": "3888170eaea3f8e177c1d675b8394b8cd3966205c430b1052e3e5e26ff784bba",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 277438826,
+          "end_inclusive": 277504382,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "fastp",
+      "version": "0.4.1",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-fastp-v0.4.1",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-fastp-0.4.1.zip",
+        "asset_id": 608301552,
+        "bytes": 1277199,
+        "github_digest": "sha256:93c32ccd506bb61eed0e901f83f025fed183557587cc5378ad0d40771db4a8cc",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-fastp-v0.4.1/native-workbench-pack-fastp-0.4.1.zip"
+      },
+      "manifest_sha256": "7d18c64a45ebbd78e1d246b660a82d7d1a98166ccfd2c40e3f621cd9fee2a6a6",
+      "expanded_payload_bytes": 3359351,
+      "compressed_payload_bytes": 1264407,
+      "payload_files": 49,
+      "license_tree_bytes": 294727,
+      "runtime_directory_bytes": 0,
+      "compatibility_receipt_bytes": 204,
+      "envelope_bytes": 9059,
+      "envelope_sha256": "ef55745640d1ad07ea59ff1427965464bb2b0b83f4b64d30662e4762d857d455",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 1211642,
+          "end_inclusive": 1277198,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "fastqc",
+      "version": "1.0.0",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-fastqc-v1.0.0",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-fastqc-1.0.0.zip",
+        "asset_id": 609934527,
+        "bytes": 150996821,
+        "github_digest": "sha256:10249aef6fa482fe2d0c37a76625e5664ca40dde3630814bc35e26aea6cd1bc4",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-fastqc-v1.0.0/native-workbench-pack-fastqc-1.0.0.zip"
+      },
+      "manifest_sha256": "1f791b7fb3af5aab35a7033f1b933c40f2dd2bbc6930d68c70cbc626f14653bc",
+      "expanded_payload_bytes": 215578707,
+      "compressed_payload_bytes": 150947807,
+      "payload_files": 210,
+      "license_tree_bytes": 111924300,
+      "runtime_directory_bytes": 101321445,
+      "compatibility_receipt_bytes": 205,
+      "envelope_bytes": 36232,
+      "envelope_sha256": "6319cf0523b9ba4ae487e1fa9adf9a274c61457f219fd487c4b810bd8486881c",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 150931264,
+          "end_inclusive": 150996820,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "featurecounts",
+      "version": "1.0.0",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-featurecounts-v1.0.0",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-featurecounts-1.0.0.zip",
+        "asset_id": 609955304,
+        "bytes": 29829533,
+        "github_digest": "sha256:f3319b6a8b13c30bc31b782008b0283c7688c739da2dd77cf5ab80859ccff4c2",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-featurecounts-v1.0.0/native-workbench-pack-featurecounts-1.0.0.zip"
+      },
+      "manifest_sha256": "f40b334f0eb469a34d92696cf17c5ac2848346add6cdb9d73ca06fab93770716",
+      "expanded_payload_bytes": 33065596,
+      "compressed_payload_bytes": 29823876,
+      "payload_files": 25,
+      "license_tree_bytes": 27696538,
+      "runtime_directory_bytes": 0,
+      "compatibility_receipt_bytes": 212,
+      "envelope_bytes": 4225,
+      "envelope_sha256": "8d119174f3cc9eeb6713941d0af7054d1319c0e8608ab2f27c59c21b55c14450",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 29763976,
+          "end_inclusive": 29829532,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "freebayes",
+      "version": "0.4.0",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-freebayes-v0.4.0",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-freebayes-0.4.0.zip",
+        "asset_id": 608302721,
+        "bytes": 4560176,
+        "github_digest": "sha256:f6f12592c22d6d3ee63f24287d054b317a05551dbe0f6019a88dfd623dd059d0",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-freebayes-v0.4.0/native-workbench-pack-freebayes-0.4.0.zip"
+      },
+      "manifest_sha256": "9ba67c19846368c8d35119ec47404381c2aed6c6fbb693534963e7ec05ea7a7c",
+      "expanded_payload_bytes": 11664027,
+      "compressed_payload_bytes": 4534085,
+      "payload_files": 104,
+      "license_tree_bytes": 3395208,
+      "runtime_directory_bytes": 0,
+      "compatibility_receipt_bytes": 208,
+      "envelope_bytes": 19431,
+      "envelope_sha256": "99f852470cef8aee7749dc342381fdf96386c1dbca8691493eff569de5d06114",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 4494619,
+          "end_inclusive": 4560175,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "gatk",
+      "version": "1.0.0",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-gatk-v1.0.0",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-gatk-1.0.0.zip",
+        "asset_id": 610265585,
+        "bytes": 681725138,
+        "github_digest": "sha256:e9eb3a4966f83d667ebb424612aaedd07236bac98c3462d4efbe02c55166bb24",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-gatk-v1.0.0/native-workbench-pack-gatk-1.0.0.zip"
+      },
+      "manifest_sha256": "4d876053d922628f8c97896268a32c72a648b6c51b93d3364beecc641293e713",
+      "expanded_payload_bytes": 809627097,
+      "compressed_payload_bytes": 681605932,
+      "payload_files": 500,
+      "license_tree_bytes": 249872077,
+      "runtime_directory_bytes": 130895997,
+      "compatibility_receipt_bytes": 203,
+      "envelope_bytes": 89678,
+      "envelope_sha256": "8b768b3ba478266554ccf8b9e99d3a96816f0bf48f6a790011b4fbacc73131d5",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 611066,
+      "http_ranges": [
+        {
+          "start": 681659581,
+          "end_inclusive": 681725137,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 681655881,
+          "end_inclusive": 681655910,
+          "bytes": 30,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 681655911,
+          "end_inclusive": 681655929,
+          "bytes": 19,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 681655930,
+          "end_inclusive": 681677101,
+          "bytes": 21172,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "hisat2",
+      "version": "0.5.3",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-hisat2-v0.5.3",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-hisat2-0.5.3.zip",
+        "asset_id": 608303427,
+        "bytes": 10085384,
+        "github_digest": "sha256:85d02ead1c7205428b22c73b1c7f751786645c4a4d51296cb6fc824623fd6126",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-hisat2-v0.5.3/native-workbench-pack-hisat2-0.5.3.zip"
+      },
+      "manifest_sha256": "06f912deb5926b00a8ca269138b4b3822bb4b3e36d4956e30ca7793655052967",
+      "expanded_payload_bytes": 15656611,
+      "compressed_payload_bytes": 10066108,
+      "payload_files": 74,
+      "license_tree_bytes": 8422761,
+      "runtime_directory_bytes": 0,
+      "compatibility_receipt_bytes": 205,
+      "envelope_bytes": 13632,
+      "envelope_sha256": "a1e2eeaf189f574ff60f1cf8cafbe266daaf3d9bc06051609433f0f7f8341d90",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 10019827,
+          "end_inclusive": 10085383,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "iqtree",
+      "version": "1.0.0",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-iqtree-v1.0.0",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-iqtree-1.0.0.zip",
+        "asset_id": 610515497,
+        "bytes": 248195844,
+        "github_digest": "sha256:d232985959093083cd1f40f6fcb3496a1164f43912a72b8d6c29c900d0069aad",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-iqtree-v1.0.0/native-workbench-pack-iqtree-1.0.0.zip"
+      },
+      "manifest_sha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d",
+      "expanded_payload_bytes": 268416538,
+      "compressed_payload_bytes": 248112218,
+      "payload_files": 320,
+      "license_tree_bytes": 232376563,
+      "runtime_directory_bytes": 0,
+      "compatibility_receipt_bytes": 205,
+      "envelope_bytes": 59194,
+      "envelope_sha256": "57c5a8f9bb258d53d68fffab7a45e35eae6d1f39aca6807e40b7f4cbb6e6e537",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 248130287,
+          "end_inclusive": 248195843,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "kallisto",
+      "version": "1.0.1",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-kallisto-v1.0.1",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-kallisto-1.0.1.zip",
+        "asset_id": 608448235,
+        "bytes": 9433934,
+        "github_digest": "sha256:641cd1f2b05e0951b1f8a58f45d6308ca6206bf86bf90fb74d0daa2860f5eecd",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-kallisto-v1.0.1/native-workbench-pack-kallisto-1.0.1.zip"
+      },
+      "manifest_sha256": "509756b8afb9719a56da60f88ed631a578ee51eb29700bfbf51271aecd00c0c9",
+      "expanded_payload_bytes": 12921332,
+      "compressed_payload_bytes": 9425286,
+      "payload_files": 39,
+      "license_tree_bytes": 7658359,
+      "runtime_directory_bytes": 0,
+      "compatibility_receipt_bytes": 207,
+      "envelope_bytes": 6483,
+      "envelope_sha256": "23b75e0c35edaac2a0ec123ec4c6b33c3a5f944c00b5460f692a91e8b43f5158",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 9368377,
+          "end_inclusive": 9433933,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "kraken2",
+      "version": "1.0.0",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-kraken2-v1.0.0",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-kraken2-1.0.0.zip",
+        "asset_id": 610693558,
+        "bytes": 230928151,
+        "github_digest": "sha256:9feb39546f6af9d718629304d7fc6a5d70d8a015839deef7d4a869e7587a0e91",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-kraken2-v1.0.0/native-workbench-pack-kraken2-1.0.0.zip"
+      },
+      "manifest_sha256": "4c0e1dbe86b43f41c72b7dbdc6c93034d6b6eeb210494bdc8252c110182b677f",
+      "expanded_payload_bytes": 244312190,
+      "compressed_payload_bytes": 230910647,
+      "payload_files": 85,
+      "license_tree_bytes": 218756734,
+      "runtime_directory_bytes": 0,
+      "compatibility_receipt_bytes": 206,
+      "envelope_bytes": 13481,
+      "envelope_sha256": "ab4c180f080253402c56ecd6e8fc32d0f89f8ba4a6334bc8d0e15656d9d0d528",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 230862594,
+          "end_inclusive": 230928150,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "lofreq",
+      "version": "0.5.3",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-lofreq-v0.5.3",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-lofreq-0.5.3.zip",
+        "asset_id": 608303816,
+        "bytes": 56071589,
+        "github_digest": "sha256:16f5c06e27dd2d847d84d51fa62f1619c8e104cd00e3bc9a267dcf6873ed36a7",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-lofreq-v0.5.3/native-workbench-pack-lofreq-0.5.3.zip"
+      },
+      "manifest_sha256": "4a00d450461cb434e04ddd377b901f73f9027e27a38f947238b6b18e9f5d862e",
+      "expanded_payload_bytes": 59718118,
+      "compressed_payload_bytes": 56058540,
+      "payload_files": 57,
+      "license_tree_bytes": 55826251,
+      "runtime_directory_bytes": 0,
+      "compatibility_receipt_bytes": 205,
+      "envelope_bytes": 9647,
+      "envelope_sha256": "2429b4cd5580e2148126e360d420819b96ea720080fc2171ad0420e21f0ade6d",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 56006032,
+          "end_inclusive": 56071588,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "mosdepth",
+      "version": "1.0.0",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-mosdepth-v1.0.0",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-mosdepth-1.0.0.zip",
+        "asset_id": 610485117,
+        "bytes": 39762901,
+        "github_digest": "sha256:b642d231350ef8eba8975a2a493714329f30880daf2e3a90c4faad293f78adfc",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-mosdepth-v1.0.0/native-workbench-pack-mosdepth-1.0.0.zip"
+      },
+      "manifest_sha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94",
+      "expanded_payload_bytes": 44626550,
+      "compressed_payload_bytes": 39754368,
+      "payload_files": 39,
+      "license_tree_bytes": 36910448,
+      "runtime_directory_bytes": 0,
+      "compatibility_receipt_bytes": 207,
+      "envelope_bytes": 6440,
+      "envelope_sha256": "7253c8d6ceed73dcc104171afc022fdba4ca490b8dfae31f1e8cb314dae843af",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 39697344,
+          "end_inclusive": 39762900,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "multiqc",
+      "version": "1.0.0",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-multiqc-v1.0.0",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-multiqc-1.0.0.zip",
+        "asset_id": 609968576,
+        "bytes": 231356965,
+        "github_digest": "sha256:a171da9ac947c7399057da20a8fcddd74201bdb60cfaf030301a1123b0ff9e3e",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-multiqc-v1.0.0/native-workbench-pack-multiqc-1.0.0.zip"
+      },
+      "manifest_sha256": "5651f9519a4dea176a4f70f09ed8b64d016b3747b6c0dce0482ac6e7872f7f83",
+      "expanded_payload_bytes": 244735736,
+      "compressed_payload_bytes": 231331903,
+      "payload_files": 110,
+      "license_tree_bytes": 28813580,
+      "runtime_directory_bytes": 0,
+      "compatibility_receipt_bytes": 206,
+      "envelope_bytes": 18542,
+      "envelope_sha256": "1c8b10ad1001335002e426f67a3185af859a60749e824071e76ced1a9781ea0c",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 231291408,
+          "end_inclusive": 231356964,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "muscle",
+      "version": "0.5.2",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-muscle-v0.5.2",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-muscle-0.5.2.zip",
+        "asset_id": 608304413,
+        "bytes": 30139115,
+        "github_digest": "sha256:c07d3e398f48df683926c0970ef77c3b7d2bdab6426b80c80186f2360ed25258",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-muscle-v0.5.2/native-workbench-pack-muscle-0.5.2.zip"
+      },
+      "manifest_sha256": "085273422c7f26af77d23643efa961f1fb6ecbdee301109af67ba551f41b82c4",
+      "expanded_payload_bytes": 32654529,
+      "compressed_payload_bytes": 30133691,
+      "payload_files": 24,
+      "license_tree_bytes": 28818497,
+      "runtime_directory_bytes": 0,
+      "compatibility_receipt_bytes": 205,
+      "envelope_bytes": 4049,
+      "envelope_sha256": "4180b1b74fc8f940cc702904568dc8f685b41a58e2ca9a104e59f8eb9b65098c",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 30073558,
+          "end_inclusive": 30139114,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "mutect2",
+      "version": "0.5.4",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-mutect2-v0.5.4",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-mutect2-0.5.4.zip",
+        "asset_id": 608305094,
+        "bytes": 683046695,
+        "github_digest": "sha256:25786d85b3679f172331142f890b1bffe5f5e77497b97eb91af855f2858ce08b",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-mutect2-v0.5.4/native-workbench-pack-mutect2-0.5.4.zip"
+      },
+      "manifest_sha256": "bef9c8ee3b35b3b4ead54ed359a019d6592933e5ee84a05e449d014891f7ab3e",
+      "expanded_payload_bytes": 812259058,
+      "compressed_payload_bytes": 682929512,
+      "payload_files": 491,
+      "license_tree_bytes": 249802763,
+      "runtime_directory_bytes": 130895997,
+      "compatibility_receipt_bytes": 206,
+      "envelope_bytes": 88208,
+      "envelope_sha256": "03cfbc1874fa59c27332fa9986974ac9d65ed87fc3ce5e9f3cfbb64e9f5922ac",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 610535,
+      "http_ranges": [
+        {
+          "start": 682981138,
+          "end_inclusive": 683046694,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 682978697,
+          "end_inclusive": 682978726,
+          "bytes": 30,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 682978727,
+          "end_inclusive": 682978745,
+          "bytes": 19,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 682978746,
+          "end_inclusive": 682999386,
+          "bytes": 20641,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "reads",
+      "version": "0.4.0",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-reads-v0.4.0",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-reads-0.4.0.zip",
+        "asset_id": 608307724,
+        "bytes": 486120,
+        "github_digest": "sha256:2dd05fece8deb2b0178d8b1bc2b6830f175b3fbc2f5a4d48f9c9023cbfe6775b",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-reads-v0.4.0/native-workbench-pack-reads-0.4.0.zip"
+      },
+      "manifest_sha256": "65fc3065fb382ffdd13c4b94fa834b26531e63eb87858d84a4c173e567fb73c0",
+      "expanded_payload_bytes": 986070,
+      "compressed_payload_bytes": 475790,
+      "payload_files": 39,
+      "license_tree_bytes": 226285,
+      "runtime_directory_bytes": 0,
+      "compatibility_receipt_bytes": 204,
+      "envelope_bytes": 7296,
+      "envelope_sha256": "8f44dea5d590d47dce0491448fc831adcf51977d5015b32806c15c373124b2b6",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 551677,
+      "http_ranges": [
+        {
+          "start": 420563,
+          "end_inclusive": 486119,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 486119,
+          "bytes": 486120,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "research-variants",
+      "version": "0.4.1",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-research-variants-v0.4.1",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-research-variants-0.4.1.zip",
+        "asset_id": 608308260,
+        "bytes": 19295391,
+        "github_digest": "sha256:a28bfb7df0fbc214e1c6e28005e018974801efaa25ff4d5fe166876432a12c60",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-research-variants-v0.4.1/native-workbench-pack-research-variants-0.4.1.zip"
+      },
+      "manifest_sha256": "c255113ec8391e9f967b28612a7e6052da2d8344327db24fff3eff0f4f3db1f7",
+      "expanded_payload_bytes": 42478103,
+      "compressed_payload_bytes": 19215437,
+      "payload_files": 325,
+      "license_tree_bytes": 3781256,
+      "runtime_directory_bytes": 25230880,
+      "compatibility_receipt_bytes": 216,
+      "envelope_bytes": 59281,
+      "envelope_sha256": "c046251a8f7ea61d13e1ba94bf1f0ccee341673f9e4ffe68dbb1919992e3ba33",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 19229834,
+          "end_inclusive": 19295390,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "seqkit",
+      "version": "0.5.2",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-seqkit-v0.5.2",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-seqkit-0.5.2.zip",
+        "asset_id": 608308821,
+        "bytes": 9191149,
+        "github_digest": "sha256:5a977517e1c0871ca7685d4b87688dfe6cbfa6d66dcb01c695281812dee4fd42",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-seqkit-v0.5.2/native-workbench-pack-seqkit-0.5.2.zip"
+      },
+      "manifest_sha256": "07ba276cd0630d3dabac9b12f6ed0efffe8ba1b133a4b6a727a1e7d9097edfb8",
+      "expanded_payload_bytes": 21387491,
+      "compressed_payload_bytes": 9162518,
+      "payload_files": 133,
+      "license_tree_bytes": 339403,
+      "runtime_directory_bytes": 0,
+      "compatibility_receipt_bytes": 205,
+      "envelope_bytes": 22667,
+      "envelope_sha256": "f6d5c51f9898a6dba7950cadb42bb1322b332052639665963b33bf9ca9180a88",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 9125592,
+          "end_inclusive": 9191148,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "snpeff",
+      "version": "1.0.0",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-snpeff-v1.0.0",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-snpeff-1.0.0.zip",
+        "asset_id": 610520503,
+        "bytes": 498014278,
+        "github_digest": "sha256:9d15121c7e9615d7d31937c8bdfb8983dd680e39077ca137ce69793c5b31b570",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-snpeff-v1.0.0/native-workbench-pack-snpeff-1.0.0.zip"
+      },
+      "manifest_sha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f",
+      "expanded_payload_bytes": 632679319,
+      "compressed_payload_bytes": 497919992,
+      "payload_files": 410,
+      "license_tree_bytes": 404759213,
+      "runtime_directory_bytes": 151378691,
+      "compatibility_receipt_bytes": 205,
+      "envelope_bytes": 72590,
+      "envelope_sha256": "c072c59e5b2f4e11f8a2820717d64495cc3b00e64249f7047f68d5a60837f686",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 497948721,
+          "end_inclusive": 498014277,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "star",
+      "version": "1.0.0",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-star-v1.0.0",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-star-1.0.0.zip",
+        "asset_id": 608438122,
+        "bytes": 16855774,
+        "github_digest": "sha256:edbeefff1c1149b632407f50a8a28847989a34eaa004752b43680fb6e29e4877",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-star-v1.0.0/native-workbench-pack-star-1.0.0.zip"
+      },
+      "manifest_sha256": "d57f83a5109c49aa855748148b4bdf8557c1c8362aa55d2de533f98b9291897d",
+      "expanded_payload_bytes": 21745093,
+      "compressed_payload_bytes": 16832645,
+      "payload_files": 91,
+      "license_tree_bytes": 15522446,
+      "runtime_directory_bytes": 0,
+      "compatibility_receipt_bytes": 203,
+      "envelope_bytes": 16514,
+      "envelope_sha256": "b802a60550229903dde2819ff2cdfba7cdcb489a376bafbfc2552cdd5fc389fb",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 16790217,
+          "end_inclusive": 16855773,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "trimming",
+      "version": "0.4.0",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-trimming-v0.4.0",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-trimming-0.4.0.zip",
+        "asset_id": 608309333,
+        "bytes": 12684590,
+        "github_digest": "sha256:516942d33c978560ce5f5ed5497684951d92efa62cdfbddcd3d7c718235b6df7",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-trimming-v0.4.0/native-workbench-pack-trimming-0.4.0.zip"
+      },
+      "manifest_sha256": "5ebd1c6ae0368cdd6d1fb6a01041bb114c7a099fa8ab0e8836813bb60974d646",
+      "expanded_payload_bytes": 25849355,
+      "compressed_payload_bytes": 12630862,
+      "payload_files": 214,
+      "license_tree_bytes": 284499,
+      "runtime_directory_bytes": 25230880,
+      "compatibility_receipt_bytes": 207,
+      "envelope_bytes": 38841,
+      "envelope_sha256": "b9f188356a8b451e5572fad14dbdecaa123b5053097c3b71775eb785bdbddb2c",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 12619033,
+          "end_inclusive": 12684589,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "vardict",
+      "version": "0.5.3",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-vardict-v0.5.3",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-vardict-0.5.3.zip",
+        "asset_id": 608309756,
+        "bytes": 372591865,
+        "github_digest": "sha256:e1eed3c24d27ddb1b3a6f68acad2e9e8d80230732a9e9c986a686cafeed57a0e",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-vardict-v0.5.3/native-workbench-pack-vardict-0.5.3.zip"
+      },
+      "manifest_sha256": "f43b5dfa5a7ba9a8a476c956499f67576922d171c00eb63ce36cf25e28caf482",
+      "expanded_payload_bytes": 445707693,
+      "compressed_payload_bytes": 372527128,
+      "payload_files": 279,
+      "license_tree_bytes": 324616785,
+      "runtime_directory_bytes": 107933348,
+      "compatibility_receipt_bytes": 206,
+      "envelope_bytes": 47721,
+      "envelope_sha256": "f675f5e2192ed5bceba65085962809d6c4f74fb73c41c79f92e184b22f06f4fa",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 372526308,
+          "end_inclusive": 372591864,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "variant-pipeline",
+      "version": "0.4.0",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-variant-pipeline-v0.4.0",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-variant-pipeline-0.4.0.zip",
+        "asset_id": 608311168,
+        "bytes": 3208822,
+        "github_digest": "sha256:1ab75723215c95629c71946092eb23a908cd40f3baefc0fb47c78890fa4baf4c",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-variant-pipeline-v0.4.0/native-workbench-pack-variant-pipeline-0.4.0.zip"
+      },
+      "manifest_sha256": "c14b3a1804a0a09bc2929653e9c07c9ac7fcdab92d8ed9ef5b1910e9eb86b367",
+      "expanded_payload_bytes": 7270843,
+      "compressed_payload_bytes": 3194280,
+      "payload_files": 56,
+      "license_tree_bytes": 1289653,
+      "runtime_directory_bytes": 0,
+      "compatibility_receipt_bytes": 215,
+      "envelope_bytes": 10326,
+      "envelope_sha256": "0c9ae05427846f332c3b07e005b95a6f1ed33799c173981ec592eb3c93cf81ae",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 3143265,
+          "end_inclusive": 3208821,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "variants",
+      "version": "0.4.0",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-variants-v0.4.0",
+      "included_in_starter": true,
+      "primary_asset": {
+        "name": "native-workbench-pack-variants-0.4.0.zip",
+        "asset_id": 608311572,
+        "bytes": 2506443,
+        "github_digest": "sha256:1b15477061d8736c18ddff71a64b3370cfaa7c674af33c404c7d79b311f1e118",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-variants-v0.4.0/native-workbench-pack-variants-0.4.0.zip"
+      },
+      "manifest_sha256": "ea4b7f0a6c28709e4190b6514c07cbf7bdd58e1a4f2a2d931f2cae3ce6ec3795",
+      "expanded_payload_bytes": 5936888,
+      "compressed_payload_bytes": 2492482,
+      "payload_files": 53,
+      "license_tree_bytes": 1289653,
+      "runtime_directory_bytes": 0,
+      "compatibility_receipt_bytes": 207,
+      "envelope_bytes": 9865,
+      "envelope_sha256": "80b51d176ebe4ca03c23788c0dc3c9bd53d160612f292f35ead498134f91512e",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 2440886,
+          "end_inclusive": 2506442,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "id": "vsearch",
+      "version": "0.5.2",
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/pack-vsearch-v0.5.2",
+      "included_in_starter": false,
+      "primary_asset": {
+        "name": "native-workbench-pack-vsearch-0.5.2.zip",
+        "asset_id": 608311990,
+        "bytes": 3187058,
+        "github_digest": "sha256:86d223d33a3c6ef5136a0b1e08634d9ebfb5dac3a94953dba57da466eb73af85",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/pack-vsearch-v0.5.2/native-workbench-pack-vsearch-0.5.2.zip"
+      },
+      "manifest_sha256": "2971ca612558983b23a259c4e2416ddbc129dbff9fdfeac5d2bbaa17a3a652d8",
+      "expanded_payload_bytes": 7174478,
+      "compressed_payload_bytes": 3162426,
+      "payload_files": 112,
+      "license_tree_bytes": 2812792,
+      "runtime_directory_bytes": 0,
+      "compatibility_receipt_bytes": 206,
+      "envelope_bytes": 18500,
+      "envelope_sha256": "1e4c51189d1e6a56dbfb3e56870347d3b7becfa43182a9fd8e979c4c42a6d211",
+      "verification": {
+        "envelope_crc": true,
+        "directory_paths_and_sizes_match_envelope": true,
+        "payload_hashes_verified": false,
+        "whole_archive_sha256_verified": false,
+        "whole_archive_crc_verified": false
+      },
+      "http_range_bytes_received": 589845,
+      "http_ranges": [
+        {
+          "start": 3121501,
+          "end_inclusive": 3187057,
+          "bytes": 65557,
+          "status": 206,
+          "attempts": 1
+        },
+        {
+          "start": 0,
+          "end_inclusive": 524287,
+          "bytes": 524288,
+          "status": 206,
+          "attempts": 1
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "all_pack_count": 32,
+    "additional_pack_count": 29,
+    "all_pack_download_bytes": 3799806535,
+    "additional_pack_download_bytes": 3795572848,
+    "starter_plus_additional_zip_download_bytes": 3812575669,
+    "all_pack_expanded_payload_bytes": 4643316996,
+    "additional_pack_expanded_payload_bytes": 4632978452,
+    "full_install_payload_bytes": 4669444080,
+    "full_install_payload_files": 4445,
+    "additional_pack_receipt_bytes": 5981,
+    "full_install_with_additional_receipts_bytes": 4669450061,
+    "all_pack_license_tree_bytes": 2222367802,
+    "combined_compressed_payload_bytes": 3811518879,
+    "remote_metadata_bytes_received": 18878783
+  },
+  "scope": {
+    "method": "Explicit HTTP 206 numeric byte ranges read ZIP directories and CRC-checked pack envelopes. Every payload path and uncompressed size is reconciled to the published envelope. Local starter is fully SHA-256/CRC checked, and its three pack payloads are hash-matched to their published envelopes. Each current pack is counted once.",
+    "compressed_size": "Starter plus the additional optional published ZIPs is an exact sum of current download sizes, not the exact size of a newly built combined ZIP. Combined compressed payload bytes omit ZIP headers, filenames and new bundle metadata; no combined archive was built or recompressed.",
+    "installed_size": "Logical file lengths, not filesystem allocation or peak extraction space. Includes unchanged published licenses/source trees and bundled runtimes; excludes separately published source/evidence companions, user references/databases, results, and per-run expanded runtimes. Additional manager receipt bytes are listed separately; a bundle inventory has not been designed.",
+    "limits": "Remote payloads were not downloaded, CRC-tested or hashed. GitHub digest fields are metadata, not independently verified archive hashes in this measurement. No all-pack native execution, startup timing or full-bundle coexistence check was performed. No application, pack, packaging default or release was changed."
+  }
+}

@@ -528,6 +528,16 @@ class PackManager:
         folder = filesystem_path(self.root/'packs')
         if not folder.exists():
             return None
+        direct = folder / (identity+'-'+version)
+        # The native importer publishes canonical directories. Avoid parsing
+        # every preceding pack for each row of a Full-installation status poll.
+        # Retain the legacy discovery fallback and its case-folded collision
+        # detection when the canonical path is absent.
+        if direct.exists() or direct.is_symlink():
+            try:
+                return load_pack(direct/'pack.ini')['manifestSha256']
+            except (OSError, ValueError, KeyError):
+                return 'occupied-invalid-pack-destination'
         canonical = (identity+'-'+version).casefold()
         for child in folder.iterdir():
             if child.name.casefold() == canonical:
@@ -548,14 +558,24 @@ class PackManager:
                 return pack['manifestSha256']
         return None
 
-    def install(self, source_id, pack_id, version, cancel=None, event=None):
+    def install(self, source_id, pack_id, version, cancel=None, event=None,
+                expected_entry=None, expected_source_fingerprint=None):
         with self.lock:
             source = next((item for item in self._sources() if item['id'] == source_id), None)
         require(source is not None, 'Unknown catalogue source')
+        if expected_source_fingerprint is not None:
+            require(key_fingerprint(source['publicKey']) == expected_source_fingerprint,
+                    'Catalogue publisher key differs from the saved setup selection')
         document = self._cached(source)
         require(document is not None, 'Refresh this catalogue before installing a pack')
         entry = next((item for item in document['packs'] if item['id']==pack_id and item['version']==version),None)
         require(entry is not None, 'This pack version is not in the verified catalogue')
+        if expected_entry is not None:
+            # Setup retries must never silently switch even same-version bytes.
+            # Check the exact entry used below, avoiding a cache-check/download race.
+            require(all(entry[key] == expected_entry.get(key) for key in
+                        ('id', 'version', 'size', 'sha256', 'manifestSha256')),
+                    'Catalogue pack bytes differ from the saved setup selection')
         good, reason = compatibility(entry)
         require(good, reason)
         _safe_directory(self.data)

@@ -17,8 +17,8 @@ cat > build/desktop/bridge-manifest.rc <<'RC'
 #include <windows.h>
 1 RT_MANIFEST "workbench.manifest"
 1 VERSIONINFO
-FILEVERSION 0,9,0,0
-PRODUCTVERSION 0,9,0,0
+FILEVERSION 0,10,0,0
+PRODUCTVERSION 0,10,0,0
 FILEFLAGSMASK 0x3fL
 FILEFLAGS 0x0L
 FILEOS VOS_NT_WINDOWS32
@@ -29,11 +29,11 @@ BEGIN
   BLOCK "040904b0"
   BEGIN
    VALUE "FileDescription", "Native Workbench execution bridge\0"
-   VALUE "FileVersion", "0.9.0\0"
+   VALUE "FileVersion", "0.10.0\0"
    VALUE "InternalName", "WorkbenchBridge\0"
    VALUE "OriginalFilename", "WorkbenchBridge.exe\0"
    VALUE "ProductName", "Native Workbench\0"
-   VALUE "ProductVersion", "0.9.0\0"
+   VALUE "ProductVersion", "0.10.0\0"
   END
  END
  BLOCK "VarFileInfo"

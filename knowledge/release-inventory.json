@@ -1,7 +1,7 @@
 {
   "schema": "native-workbench-knowledge/release-inventory",
   "schema_version": 1,
-  "as_of": "2026-10-06",
+  "as_of": "2026-10-07",
   "source_commit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
   "repository": "https://github.com/comparativechrono/workbench",
   "purpose": "Public release handover inventory. This is documentation, not an install catalogue or a trust file.",
@@ -22,9 +22,9 @@
     "application": "development-prerelease",
     "latest_pack_count": 32,
     "published_pack_version_count": 33,
-    "online_catalogue": "not-published-or-configured",
-    "catalogue_source_json": "not-published-or-configured",
-    "signing_key": "requires-maintainer-controlled-external-key",
+    "online_catalogue": "published-and-independently-verified-2026-10-07",
+    "catalogue_source_json": "published-and-bundled-in-0.10.0-candidate",
+    "signing_key": "owner-provisioned-matching-public-fingerprint-successfully-used",
     "windows_gui_validation": "accepted-0.9.0-exact-candidate-native-gates-passed-tester-acceptance-reported",
     "native_windows_long_path_validation": "accepted-0.9.0-starter-five-stage-nested-result-path-regression-passed-limited-scope"
   },
@@ -2363,5 +2363,33 @@
     }
   ],
   "pack_inventory_as_of": "2026-10-04",
-  "pack_inventory_source_commit": "289c4176561fe6c8bbbfba1e225cd65fbafb126d"
+  "pack_inventory_source_commit": "289c4176561fe6c8bbbfba1e225cd65fbafb126d",
+  "catalogue_publication": {
+    "published_at": "2026-10-07T11:58:34Z",
+    "run_id": 37617540915,
+    "source_commit": "9f82aa5d1d9a0a372fc0492b7dff448694af8813",
+    "catalogue_commit": "0048c4e3644aae7ed172d804fff0981982510e7b",
+    "source_key_fingerprint": "8d2093f9fafd71de56fea2038faeb2efa0964767d3235430b06428132cdc8505",
+    "catalogue_url": "https://raw.githubusercontent.com/comparativechrono/workbench/catalogue/catalogue.json",
+    "source_url": "https://raw.githubusercontent.com/comparativechrono/workbench/catalogue/source.json",
+    "evidence": "evidence/catalogue-production-2026-10-07.json",
+    "pack_count": 32,
+    "application_release_created": false
+  },
+  "development_candidate": {
+    "version": "0.10.0",
+    "source_commit": "5a390acd8440856e3f4e32de237322a18bb82d7e",
+    "run_id": 37618824677,
+    "released": false,
+    "status": "all-six-candidate-jobs-passed-accepted-awaiting-publication",
+    "validation": "evidence/tool-setup-0.10.0-validation-2026-10-07.json",
+    "acceptance": "evidence/tool-setup-0.10.0-acceptance-2026-10-07.json",
+    "archive_audit": "evidence/tool-setup-0.10.0-artifact-audit-2026-10-07.json",
+    "live_production_full": {
+      "ordinary_passed": 4,
+      "spaces_passed": 4,
+      "packs": 32,
+      "offline_records": 202
+    }
+  }
 }

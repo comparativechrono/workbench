@@ -201,6 +201,32 @@ class CoreUpdate(unittest.TestCase):
         for name,data in {**new,**preserved}.items():self.assertEqual((base/name).read_bytes(),data)
         self.assertEqual(update.apply(base,out/'update')['status'],'already-installed')
 
+    def test_090_to_0100_preserves_pack_setup_retry_state_and_publisher_trust(self):
+        base=self.parent/'split-090';target=self.parent/'split-0100';out=self.parent/'setup-update'
+        old={'NativeWorkbench.exe':b'090-ui','WorkbenchBridge.exe':b'bridge',
+             'workspace/desktop_host.py':b'090-host','workspace/catalog-sources.json':b'{"sources":[]}'}
+        new={**old,'NativeWorkbench.exe':b'0100-ui','workspace/desktop_host.py':b'0100-host',
+             'workspace/setup_manager.py':b'new-setup-manager',
+             'workspace/setup-profile.json':b'{"schema":1,"id":"official-full"}'}
+        preserved={'packs/optional-1.0.0/pack.ini':b'exact workflow-pinned pack',
+                   'packs/optional-2.0.0/pack.ini':b'exact independently installed newer pack',
+                   'user-data/tool-setup.json':b'{"schema":1,"dismissed":false,"selection":"custom","queue":[{"id":"pending-pack"}]}',
+                   'user-data/catalog-sources.json':b'{"sources":[{"id":"institution","keys":["original-key"]}]}',
+                   'user-data/pack-receipts/optional-2.0.0.json':b'exact original import receipt',
+                   'user-data/saved.json':b'{"packVersion":"1.0.0","manifestSha256":"original-pin"}',
+                   'user-data/references/library.json':b'existing library',
+                   'references/reference.fa':b'>chr1\nACGT\n',
+                   'results/run/workflow.cwl':b'original CWL result'}
+        for name,data in {**old,**preserved}.items():put(base,name,data)
+        for name,data in new.items():put(target,name,data)
+        manifest(base,'0.9.0',old);manifest(target,'0.10.0',new)
+        summary=builder.make(base,target,out)
+        self.assertFalse(summary['migration']);self.assertFalse(summary['packs_changed'])
+        result=update.apply(base,out/'update')
+        self.assertEqual(result['version'],'0.10.0')
+        for name,data in {**new,**preserved}.items():self.assertEqual((base/name).read_bytes(),data)
+        self.assertEqual(update.apply(base,out/'update')['status'],'already-installed')
+
     def test_060_to_070_failure_restores_retired_core_and_original_manifest(self):
         base=self.parent/'rollback-060';target=self.parent/'rollback-070';out=self.parent/'rollback-update'
         old={'NativeWorkbench.exe':b'060-ui','WorkbenchBridge.exe':b'bridge',

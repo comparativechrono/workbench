@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "createdUtc": "2026-10-06T22:12:40.914008+00:00",
+  "scope": "Independent read-only archive/source/inventory audit; no rebuild, native execution or repeated scientific tests.",
+  "candidateSourceCommit": "8cee60655fe726e9d424ddf1b2874728235828ca",
+  "candidateRunId": 37537256084,
+  "candidateArtifactId": 11446932575,
+  "transportRunId": 37538868326,
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "success": true,
+  "checks": [
+    "All three original CI archive hashes, sizes, CRCs, safe member paths and checksum records agree with the pinned candidate.",
+    "Complete baseline/candidate core inventories match; all 143 files in the three Starter packs and their exact pins are unchanged; no unowned starter files present.",
+    "Every archived current source file matches original Git commit 8cee606; all runtime workspace files match source; reviewed 32-pack profile present and production trust remains empty.",
+    "Starter source-availability metadata pins the exact verified source archive and corresponding-source companions.",
+    "Every updater file, replacement and exact target manifest verified; updater private runtime/licences match Starter and transaction code matches candidate source. No pack/user files are core replacements.",
+    "Transfer record identifies original candidate artifact; reconstructed source retains its original pinned archive hash."
+  ],
+  "passed": 6,
+  "failures": [],
+  "skips": [],
+  "archives": [
+    {
+      "file": "native-workbench-0.10.0-starter-windows.zip",
+      "bytes": 17027658,
+      "sha256": "cab50ae315fa2e281844223fc862d7c45565b9c5557005236a7baf3fd13c0cd7",
+      "zipCrc": "passed"
+    },
+    {
+      "file": "native-workbench-0.10.0-update-from-0.9.0.zip",
+      "bytes": 12879332,
+      "sha256": "fdc4a1a15e83419c78e2dd4b88dfc734a7be448d5760f39305c02735cf7c2e7c",
+      "zipCrc": "passed"
+    },
+    {
+      "file": "native-workbench-0.10.0-source.zip",
+      "bytes": 46681070,
+      "sha256": "23765a77a30ae24a3a869b1bc50585010b041b2612c41a67478109d04d059886",
+      "zipCrc": "passed"
+    }
+  ],
+  "baselineSha256": "c2661c144e073c4efdd190ffd186bacd9398b6413b81770d7a057c3947eecf02",
+  "coreFilesVerified": 72,
+  "sourceFilesMatchedToGit": 558,
+  "unchangedStarterPackFiles": 143,
+  "updaterFilesVerified": 56,
+  "updaterReplacementsVerified": 10,
+  "productionCatalogueConfigured": false,
+  "nativeWindowsExecuted": false,
+  "applicationRebuilt": false,
+  "limitations": [
+    "Static verification binds source files and metadata but does not independently rebuild the PE binaries.",
+    "Production trust and live official catalogue setup remain unconfigured."
+  ]
+}

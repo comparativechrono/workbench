@@ -11,44 +11,41 @@ The application does not require Docker, WSL or a system Python installation.
 
 ## Release status
 
-Version **0.9.0 is published as a development prerelease** alongside
-**32 independently versioned tool packs**. The
-[application release](https://github.com/comparativechrono/workbench/releases/tag/app-v0.9.0)
-adds **`workflow.cwl` to analysis results**, routes native and saved DAG
-connections around tool cards, and introduces an original SVG-derived Windows
-icon. It retains the native Tools/Workflow interface, reusable inputs and
-Ensembl archive References finder with offline reuse and provenance.
+**0.10.0 is being prepared for release; publication is pending.** It adds native
+**Full, Starter and Custom tool setup**. Full recommends all **32 current packs**,
+while keeping packs independently installable and leaving **Manage tools** and
+offline ZIP import available for future tools and third-party developers.
 
-The exact user-accepted application archives were promoted without rebuilding.
-Their evidence includes **125 source checks**, **32 workspace plus 9
-References/update checks per Windows path**, a final **9-check feature gate per
-path**, and the full five-stage starter long-path regression. The additional
-**0.8.0 updater passed 13 native checks per path**, preserving 202 existing files
-and verifying 70 core files, with post-update reference/scientific/CWL execution.
-The publication workflow and a separate independent audit verified all **12
-public assets** by anonymous download and checksum; five ZIP CRC checks and all
-three checksum manifests passed. See the [0.9.0 release handover](knowledge/cwl-dag-icon-0.9.0-handover.md)
-for exact identities, retained validator failures and validation limits.
+The official signed catalogue is now published. The new 0.10.0 candidate bundles
+its reviewed public trust and downloads tools only after an explicit request.
+The Starter ZIP is **17.03 MB**; a fresh Full selection downloads another
+**3.80 GB** for the 29 additional packs. Installed tools work offline. References,
+large scientific databases and analysis outputs are separate from tool setup.
+
+The [new candidate run](https://github.com/comparativechrono/workbench/actions/runs/37618824677)
+has passed the native setup, workspace, References, results/CWL/DAG/icon and
+0.9.0 upgrade checks in ordinary and space-containing Windows paths. Live
+production Full installation also passed in both paths: all 32 exact pack
+versions installed through the official signed catalogue, reopened offline and
+retained the expected 202-record alignment/BAM result. BEDTools contributed a
+usable BED workflow input. These checks validate installation/coexistence and
+starter scientific truth, not every optional pack's scientific operation.
+See the [0.10.0 release notes](docs/releases/0.10.0.md) and
+[handover](knowledge/tool-setup-0.10.0-handover.md) for exact scope and status.
+
+The current published application remains the
+[0.9.0 development prerelease](https://github.com/comparativechrono/workbench/releases/tag/app-v0.9.0).
+It includes `workflow.cwl` in analysis results, routed dependency diagrams,
+an SVG-derived Windows icon, the native Tools/Workflow interface and Ensembl
+archive References with offline reuse and provenance. Its
+[release handover](knowledge/cwl-dag-icon-0.9.0-handover.md) retains validated
+archive identities, updater checks and independently verified public downloads.
+Published application and tool-pack assets remain unchanged.
 
 To execute exported CWL separately, provide a CWL engine, Python 3.10+, matching
 tool-pack files and input data; Windows binaries remain Windows binaries. This
 adds no dependency to normal Workbench operation. The
 [CWL guide](knowledge/cwl-results.md) describes the export contract and limits.
-Earlier [0.8.0](knowledge/native-ui-0.8.0-release-handover.md) and
-[0.7.0](knowledge/reference-release-handover.md) release evidence and all published
-tool-pack bytes remain unchanged.
-
-The signed online catalogue and its `source.json` trust file are **not published
-or configured**. They require a maintainer-controlled signing key. Use the offline
-pack import described below until the signed feed is available.
-
-Earlier application and optional-pack evidence retains its original scope.
-The 0.6.0 baseline's 214 automated passes, one Windows-only skip and Linux
-scientific/updater checks are historical results. Separate native Windows pack
-gates validate the published STAR, kallisto, FastQC, MultiQC, featureCounts,
-BEDTools, BLAST, GATK, SnpEff, DESeq2, mosdepth, IQ-TREE, Kraken2 and Bracken
-archives through the released 0.6.0 bridge; this application update does not
-replace those pack versions or rerun every pack's scientific suite.
 
 ## Using the application
 

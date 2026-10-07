@@ -7,7 +7,7 @@ open, diffable files with no proprietary reader or external memory service.
 "Knowledge base" describes this directory; it does not claim compliance with a
 separate standard called Open Knowledge Format.
 
-**Reviewed:** 2026-10-06. **Starting source baseline:**
+**Reviewed:** 2026-10-07. **Starting source baseline:**
 [`8f95caa1f267d19ce72ea3cd7f2396ae66a801c1`](https://github.com/comparativechrono/workbench/commit/8f95caa1f267d19ce72ea3cd7f2396ae66a801c1).
 This handover includes the 0.7 reference-discovery implementation and
 Kraken2/Bracken metagenomics after the annotation,
@@ -82,6 +82,8 @@ verified all 12 assets, five ZIP CRCs and three checksum manifests. See the
 | [Architecture](architecture.md) | Where does each responsibility live, and how does a run work? |
 | [Native UI development](native-ui.md) | How do the three panes, standalone tools and workflow canvas work, and what remains to validate? |
 | [0.9.0 handover](cwl-dag-icon-0.9.0-handover.md) | Which CWL/DAG/icon bytes were accepted and published, and what passed? |
+| [Tool setup](tool-setup.md) | How do Full, Starter and Custom installation work, and what remains before official deployment? |
+| [0.10.0 setup handover](tool-setup-0.10.0-handover.md) | Which exact candidate passed Windows checks, what initially failed, and which signing input still blocks release? |
 | [CWL results](cwl-results.md) | What does an exported workflow contain and what does external execution require? |
 | [0.8.0 release handover](native-ui-0.8.0-release-handover.md) | Which exact native-interface bytes were accepted and published? |
 | [Starter tool semantics](starter-tool-semantics.md) | Which program does each starter operation run, how does SAM become BAM, and what does faidx mean? |

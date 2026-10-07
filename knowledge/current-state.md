@@ -14,10 +14,53 @@ Read this alongside the [release inventory](release-inventory.json) and
 [release handover](cwl-dag-icon-0.9.0-handover.md). Earlier versions and their
 evidence remain unchanged.
 
+## Tool setup development, 0.10.0, 2026-10-07
+
+The user approved Full (recommended), Starter and Custom setup over the existing
+pack manager. Application **0.10.0 is in development, not released**. The native
+setup interface and durable per-pack queue use the 32 current published pack
+identities; application and tool versions remain independent. The small Starter
+retains its unchanged three packs, and Manage tools/offline import remain.
+See [tool setup](tool-setup.md) and the [size assessment](full-bundle-sizing-2026-10-06.md).
+
+The new production-trust candidate is source
+`5a390acd8440856e3f4e32de237322a18bb82d7e`, built once in
+[run 37618824677](https://github.com/comparativechrono/workbench/actions/runs/37618824677).
+Its exact Starter/updater passed **13 setup, 32 workspace, eight References,
+nine results/CWL/DAG/icon and 13 upgrade checks per Windows path**. Each upgrade
+preserved **203 existing files** and verified **72 target core files**. References'
+optional updater helper was not requested; the separate 0.9.0 upgrade suite
+supplies its own evidence. The build source gate passed **152 tests**, with one
+Windows-only skip; the separate Windows pack-manager suite passed all **42**.
+Live production Full passed **four checks in each Windows path**, installing all
+32 exact published pins with the bundled owner trust, reopening offline and
+preserving 202 expected alignment/BAM records. The separate isolated-fixture
+all-pack gate also passed four checks. All six candidate workflow jobs succeeded.
+
+The [new archive audit](evidence/tool-setup-0.10.0-artifact-audit-2026-10-07.json)
+verified all candidate archive hashes/CRCs, 572 Git-matched source files,
+143 unchanged Starter pack files, the reviewed production source and exact
+updater replacements. See the [handover](tool-setup-0.10.0-handover.md),
+[new validation record](evidence/tool-setup-0.10.0-validation-2026-10-07.json) and
+[acceptance record](evidence/tool-setup-0.10.0-acceptance-2026-10-07.json) for final
+promotion status. Earlier candidate `8cee606` and its validator corrections remain
+separate [historical evidence](evidence/tool-setup-0.10.0-validation-2026-10-06.json).
+
+The **official signed catalogue is published and independently verified**.
+Owner-started [run 37617540915](https://github.com/comparativechrono/workbench/actions/runs/37617540915)
+published all 32 exact pins from reviewed `main` at
+`9f82aa5d1d9a0a372fc0492b7dff448694af8813`. The reviewed public source is bundled
+in candidate `5a390acd`; its live production Full gates passed in both paths. The earlier
+empty-trust candidate is historical evidence and is not promoted as the
+production Full installer. [Draft PR #3](https://github.com/comparativechrono/workbench/pull/3)
+retains implementation and evidence; published 0.9.0 and existing pack bytes
+remain unchanged.
+
 ## Catalogue signing infrastructure, 2026-10-07
 
-The protected manual signing/publication infrastructure in
-[PR #4](https://github.com/comparativechrono/workbench/pull/4) passed **56 source
+The protected manual signing/publication infrastructure was merged into `main`
+at `9f82aa5d1d9a0a372fc0492b7dff448694af8813` through
+[PR #4](https://github.com/comparativechrono/workbench/pull/4). It passed **56 source
 checks, zero failures/errors/skips**, in
 [run 37583926483](https://github.com/comparativechrono/workbench/actions/runs/37583926483).
 The [dated evidence](evidence/catalogue-signing-2026-10-07.json) records exact
@@ -26,16 +69,30 @@ historical pack-identity bug and local integration setup errors. These checks
 validate signing cleanup, identity binding and publication safeguards; they do
 not establish a live production catalogue.
 
-The [one-time owner setup guide](../publishing/catalogue-signing.md) is ready.
-Environment protections and secret provisioning require owner access unavailable
-through the development connector; their configuration remains unverified.
-No production key has been created, installed or used here. The application
-source list remains empty, the 0.9.0 runtime is unchanged, and application
-[PR #3](https://github.com/comparativechrono/workbench/pull/3) remains separate.
-There was no new Windows validation or application release in this infrastructure
-gate. After owner provisioning, publish and verify the official catalogue, bundle
-its reviewed public source, and validate a new exact 0.10.0 Windows candidate
-before releasing it.
+The owner subsequently provisioned the key and public fingerprint and started
+[production run 37617540915](https://github.com/comparativechrono/workbench/actions/runs/37617540915).
+Both signing and publication jobs passed, including the same **56 source tests**,
+fresh download and complete validation of **32 archives / 3,799,806,535 bytes**,
+and anonymous public readback. Publication at **2026-10-07T11:58:34Z** created
+catalogue commit `0048c4e3644aae7ed172d804fff0981982510e7b` with immutable signed
+history. The reviewed owner public fingerprint is
+`8d2093f9fafd71de56fea2038faeb2efa0964767d3235430b06428132cdc8505`.
+
+The [independent production audit](evidence/catalogue-production-2026-10-07.json)
+verified nine anonymous documents: three current files, four commit-pinned
+history files, and the exact source lock/profile. Hashes, all 32 pack pins and
+owner identity agree; both the application verifier and a separate
+cryptography/OpenSSL verifier accepted the 3072-bit RSA signature. This was the
+first catalogue publication, with no prior production history to compare.
+No private key was read by the agent. The successful job establishes usable
+signing configuration; environment protection settings are still not exposed to
+the connector for administrative inspection.
+
+The [owner guide](../publishing/catalogue-signing.md) remains the operational
+reference. This catalogue publication does not establish Windows application
+validation or release. The public source is bundled into the new 0.10.0
+candidate, whose exact-package production gates passed before promotion.
+The published 0.9.0 runtime remains unchanged.
 
 ## Published CWL results, DAG routing and icon, 2026-10-06
 
@@ -704,14 +761,14 @@ or human-genome/cohort performance.
 
 ## Unfinished work and safe starting points
 
-1. **Signed catalogue publication and clean installation test.** Pack downloads
-   exist, but no signed online catalogue or `source.json` trust file is published
-   or configured. The starter has an empty default source list. Follow
-   [catalogue publishing](../docs/catalogue-publishing-0.6.md) and
-   [the repository publication guide](../docs/github-publication.md). A
-   maintainer-controlled external signing key and independently checked public
-   fingerprint are required. An unsigned preview, GitHub credentials or this
-   inventory cannot substitute for that trust configuration.
+1. **Production setup candidate and clean installation test.** The official
+   signed 32-pack catalogue and public `source.json` are published and verified;
+   see the [production audit](evidence/catalogue-production-2026-10-07.json).
+   The reviewed source is bundled and exact-package GUI/References/CWL/upgrade
+   gates and live production Full passed for candidate `5a390acd`. Promote the
+   accepted immutable archives and verify release downloads. Publication remains
+   pending. The earlier empty-trust candidate cannot establish the production result.
+   Preserve the catalogue key, published pack bytes and saved version pins.
 2. **Broader desktop acceptance and long paths.** The 0.8.0 gates cover the
    recorded workspace and References interactions at 96 DPI; they do not establish the
    entire desktop, folder-picker interactions, high-DPI or

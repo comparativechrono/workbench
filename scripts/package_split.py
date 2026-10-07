@@ -33,8 +33,8 @@ STARTER=('align-0.4.0','bam-0.4.0','variants-0.4.0')
 RUNTIME_MODULES=('app_version.py','catalog.py','engine.py','example.py','desktop_host.py','desktop_model.py',
                  'service.py','verify_installation.py','pack_checks.py','pack_manager.py',
                  'pack_security.py','core_checks.py','reference_provider.py','reference_manager.py',
-                 'reference_provenance.py','cwl_export.py','dag_routing.py')
-RUNTIME_METADATA=('starter-check-profile.json',)
+                 'reference_provenance.py','cwl_export.py','dag_routing.py','setup_manager.py')
+RUNTIME_METADATA=('starter-check-profile.json','setup-profile.json')
 FIXED_DATE=(2026,10,5,0,0,0)
 
 
@@ -189,6 +189,12 @@ def _build_sources(base,output,legacy,original,contents,companions):
         if path.is_file():selected.append((path,'current/'+name,False))
     for path in sorted(SOURCE.glob('README*')):
         if path.is_file():selected.append((path,'current/'+path.name,False))
+    # The official setup release lock is public build metadata, not credentials.
+    # Do not sweep the publishing directory, which may contain local staging.
+    for name in ('setup-assets.json','setup-catalogue.md','setup-catalogue.UNSIGNED.json','catalogue-signing.md'):
+        setup_metadata=SOURCE/'publishing'/name
+        if setup_metadata.is_file():
+            selected.append((setup_metadata,'current/publishing/'+name,False))
     workflows=SOURCE/'.github/workflows'
     if workflows.is_dir():
         selected.extend((p,'current/'+p.relative_to(SOURCE).as_posix(),False)

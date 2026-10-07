@@ -73,6 +73,9 @@ class Workbench:
         self._pack_worker = None
         self._pack_cancel = threading.Event()
         self._pack_listing = None
+        self._setup_manager = None
+        self._setup_worker = None
+        self._setup_cancel = threading.Event()
         self._pack_operation = {"id": "", "active": False, "status": "idle",
                                 "message": "", "bytes": 0, "total": 0, "cancellable": False}
         self._changing_references = False
@@ -536,6 +539,62 @@ class Workbench:
                 self._pack_operation["message"] = "Cancelling pack operation…"
         return self.pack_state()
 
+    def setup_manager(self):
+        with self.lock:
+            if self._setup_manager is None:
+                from setup_manager import SetupManager
+                self._setup_manager = SetupManager(self.root, self._manager())
+            return self._setup_manager
+
+    def setup_state(self):
+        with self.lock:
+            value = self.setup_manager().snapshot()
+            value.update(self.activity())
+            return value
+
+    def start_setup_operation(self, action, request):
+        with self.lock:
+            self.ensure_editable()
+            manager = self.setup_manager()
+            manager.prepare(action, copy.deepcopy(request))
+            self._changing_packs = True
+            self._setup_cancel = threading.Event()
+
+        def work():
+            try:
+                manager.run(self._setup_cancel)
+            except Exception as error:
+                manager.host_failure(error)
+            finally:
+                with self.lock:
+                    # Completed publications update the catalogue even when a
+                    # later selected download fails or is cancelled.
+                    try:
+                        catalog = load_catalog(self.root)
+                        engine = Engine(self.root, catalog)
+                        self.catalog, self.engine = catalog, engine
+                        self._pack_listing = None
+                    except Exception as error:
+                        manager.host_failure(error)
+                    finally:
+                        self._changing_packs = False
+
+        worker = threading.Thread(target=work, name="workbench-tool-setup", daemon=True)
+        with self.lock:
+            self._setup_worker = worker
+        worker.start()
+        return self.setup_state()
+
+    def cancel_setup_operation(self):
+        with self.lock:
+            self.setup_manager().cancel(self._setup_cancel)
+        return self.setup_state()
+
+    def dismiss_setup(self):
+        with self.lock:
+            self.setup_manager().dismiss()
+        return self.setup_state()
+
     def reference_manager(self):
         # Construction and local snapshots never contact a reference provider.
         with self.lock:
@@ -662,6 +721,9 @@ class Workbench:
             self._pack_cancel.set()
             if self._pack_worker is not None:
                 workers.append(self._pack_worker)
+            self._setup_cancel.set()
+            if self._setup_worker is not None:
+                workers.append(self._setup_worker)
             self._reference_cancel.set()
             if self._reference_worker is not None:
                 workers.append(self._reference_worker)
