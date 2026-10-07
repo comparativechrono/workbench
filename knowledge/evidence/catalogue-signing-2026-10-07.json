@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "recordedDate": "2026-10-07",
+  "repository": "https://github.com/comparativechrono/workbench",
+  "scope": "Protected catalogue signing and public publication infrastructure; source-only validation, not a production deployment or application release.",
+  "pullRequest": "https://github.com/comparativechrono/workbench/pull/4",
+  "source": {
+    "infrastructureCommit": "6e973db73953a5ef1f7d221a79ce94887f2fb366",
+    "baseCommit": "1abd62b49acc841502c9714d12a2470b7e48f8d6",
+    "ciCheckoutCommit": "a1ae1df947bfffc9b301b90ecb5836659bdbde35",
+    "ciCheckoutExplanation": "GitHub's pull-request merge ref combining the infrastructure commit with the recorded main baseline; the exact checkout is printed in the job log.",
+    "publicSetupInputOrigin": "5805b35583eaa498f2beace765e88a4b2f41b19d",
+    "applicationChangesMergedByThisWork": false,
+    "frozenReviewedFileSha256": {
+      "scripts/deploy_setup_catalogue.py": "cd4b39dbccd4abf842daad93b4d5ee87d4588f7f428ede0a28d6c6ce34a053b9",
+      "tests/test_deploy_setup_catalogue.py": "aaf44b4dda0ce76b7f88f100751c0fa8cd27ae40d3cc9d23b9351a73a623d2a0"
+    }
+  },
+  "ci": {
+    "workflow": ".github/workflows/catalogue-publishing-checks.yml",
+    "runId": 37583926483,
+    "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37583926483",
+    "jobId": 112669636287,
+    "jobUrl": "https://github.com/comparativechrono/workbench/actions/runs/37583926483/job/112669636287",
+    "jobName": "test",
+    "runnerLabel": "ubuntu-22.04",
+    "conclusion": "success",
+    "jobStatusAndLogsInspected": true,
+    "aggregate": {"run": 56, "passed": 56, "failures": 0, "errors": 0, "skipped": 0},
+    "suites": [
+      {"command": "python3 -m unittest discover -s tests -p 'test_sign_setup_catalogue.py' -v", "run": 14, "passed": 14, "failures": 0, "errors": 0, "skipped": 0},
+      {"command": "python3 -m unittest discover -s tests -p 'test_deploy_setup_catalogue.py' -v", "run": 25, "passed": 25, "failures": 0, "errors": 0, "skipped": 0},
+      {"command": "python3 -m unittest discover -s tests -p 'test_publish_pack_catalog.py' -v", "run": 11, "passed": 11, "failures": 0, "errors": 0, "skipped": 0},
+      {"command": "python3 -m unittest discover -s tests -p 'test_prepare_setup_catalogue.py' -v", "run": 6, "passed": 6, "failures": 0, "errors": 0, "skipped": 0}
+    ],
+    "trackedWorktreeUnchangedAfterTests": true,
+    "countingNote": "Only this successful CI job is included in the 56-test total. Overlapping local runs and prior application validation are not added. The publisher's expected refusal-to-overwrite diagnostic is part of a passing negative test, not a failed test."
+  },
+  "validationBoundaries": {
+    "newSigningAndDeploymentSuites": "Use the deliberately public existing SDK RSA fixture, real local OpenSSL signing where applicable, and mocked GitHub/public-download transports.",
+    "establishedPublisherSuite": "Uses ephemeral test-only RSA keys for its signing cases; no production key is created or used.",
+    "archivePreparationTests": "Check the reviewed 32-pack profile and asset lock and isolated acquisition/cache cases. This CI job does not download or execute all 32 published packs.",
+    "checkedBehaviors": [
+      "Missing or malformed signing prerequisites and wrong public fingerprints fail closed.",
+      "Private temporary files have restricted permissions, child processes do not inherit the key environment variable, and signing failures clean temporary material without exposing its contents.",
+      "Only the required public documents are accepted; source identity, exact hosts, signatures, reports and reviewed archive pins are verified.",
+      "Every signed historical catalogue contributes immutable pack-version pins; removed and reintroduced versions cannot change their archive identity or URL.",
+      "Malformed or conflicting signed history, stale timestamps, ref races and non-fast-forward updates are rejected.",
+      "A receipt records uncertain or completed ref writes before anonymous verification; bounded stale-download retries do not claim rollback or success.",
+      "Anonymous verification compares exact moving-URL and commit-pinned-history bytes using a mocked transport.",
+      "Authenticated API redirects are rejected and API failures do not expose tokens or response bodies."
+    ]
+  },
+  "retainedDevelopmentDiagnostics": [
+    {
+      "finding": "The first deployment implementation compared new pack pins only with the immediately previous catalogue.",
+      "reproduction": "An in-memory test published 32 packs, removed align in a later catalogue, then restored its unchanged ID/version with a different archive SHA-256 and matching changed lock. The old code accepted the third publication.",
+      "correction": "Accumulate immutable identity tuples from every signature-validated historical payload, reject inconsistent historical repetitions, and compare incoming rows with that complete map before any writes.",
+      "regressions": ["test_removed_pack_version_cannot_be_reintroduced_with_changed_archive", "test_conflicting_pack_identities_in_validly_signed_history_are_rejected"],
+      "status": "Fixed before the recorded infrastructure commit; both regressions passed in the recorded CI job. No production catalogue was affected."
+    },
+    {
+      "finding": "An initial local minimal-main integration omitted publishing/setup-catalogue.UNSIGNED.json, which the deployment tests require.",
+      "correction": "Copy the unchanged public preview fixture from the recorded setup-input origin. It remains unsigned fixture data and establishes no production trust.",
+      "status": "Local integration setup failed before this correction; the complete committed dependency set passed the recorded CI job."
+    },
+    {
+      "finding": "A subsequent local integration attempt ran before the copied lock/profile belonged to the named checkout commit.",
+      "correction": "Test the committed infrastructure checkout. The existing source-identity guard was retained and was not weakened to accept uncommitted inputs.",
+      "status": "The local attempt failed its checkout/committed-input guard; the exact committed PR merge checkout passed the recorded CI job."
+    }
+  ],
+  "productionStatus": {
+    "ownerProvisioningGuide": "publishing/catalogue-signing.md",
+    "environment": "catalogue-production",
+    "environmentProtectionsVerified": false,
+    "secretProvisioning": "unknown; the development connector cannot administer environments or secrets",
+    "productionKeyCreatedInstalledOrUsedByThisWork": false,
+    "productionSigningWorkflowExecuted": false,
+    "productionCataloguePublished": false,
+    "liveProductionCatalogueDownloadsValidated": false,
+    "bundledProductionSource": "workspace/catalog-sources.json remains an empty list",
+    "newWindowsValidationPerformed": false,
+    "newApplicationBuiltOrReleased": false,
+    "publishedApplicationBaseline": "0.9.0",
+    "separateApplicationPullRequest": "https://github.com/comparativechrono/workbench/pull/3",
+    "nextSteps": [
+      "Owner provisions and reviews the protected environment, existing production key and independently reviewed public fingerprint using normal GitHub access.",
+      "Run the protected main-branch catalogue workflow and verify its real publication and anonymous-download receipt.",
+      "Bundle the reviewed published source into a new 0.10.0 candidate, validate its exact Windows archives against the live production catalogue, then publish and independently verify application downloads."
+    ]
+  }
+}
