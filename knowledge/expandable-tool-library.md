@@ -2,9 +2,11 @@
 
 Development started **2026-10-07** from published 0.10.1 documentation baseline
 `3a6e06f8fa05a8ceebed4584bd3433e07f08df52`, on
-`feature/expandable-tool-library`. The next development candidate is **0.11.0**.
+`feature/expandable-tool-library`. The tested development candidate is **0.11.0**.
 Published 0.10.1 and its independent tool packs remain unchanged. This page is
-a development handover, not release acceptance or evidence of a Windows pass.
+a development handover with exact-package Windows evidence, not release or
+tester acceptance. Implementation and validation are ready for tester review
+in [PR #6](https://github.com/comparativechrono/workbench/pull/6).
 
 ## Requested interaction
 
@@ -51,9 +53,8 @@ gate passed **70 tests, no failures or skips** across desktop host (12), modes
 (7) and split packaging (8). Independent review found and corrected a Win32
 expansion-notification issue: repeated toggles can omit notifications after
 `TVIS_EXPANDEDONCE`, so the view now records actual expansion state directly.
-These are source/build findings, not a Windows GUI pass. Exact packaged native
-validation remains pending. No tester acceptance, public release or updater is
-claimed yet.
+These source/build findings are separate from the exact packaged Windows checks
+below. No tester acceptance, public release or updater is claimed yet.
 
 The candidate workflow is `.github/workflows/native-tool-library-candidate.yml`.
 It builds a standalone Windows starter and matching source once, then tests
@@ -62,7 +63,64 @@ workspace checks retain their real starter analysis and workflow interactions;
 the focused library gate covers category navigation and filtering. Gate code
 must read control 104 as a TreeView without changing unrelated ListView tests.
 
+The frozen candidate was built from
+`acfa060c9a400d82509278b657ee37853c7922b0` in
+[run 37678010251](https://github.com/comparativechrono/workbench/actions/runs/37678010251).
+Its existing workspace gate passed **32 checks in each Windows path**, including
+actual tool dragging, compatible port connections and the native minimap2 to
+SAMtools chain preserving all 202 expected alignment records. The first focused
+library gate stopped at its initial collapsed-heading assertion in both paths;
+the run as a whole therefore failed. Those results are retained, not counted as
+focused-library passes.
+
+The helper had treated any nonzero TreeView state as expanded. Final raw state
+inspection returned `16` (`TVIS_BOLD`) for every initial category, with the
+`32` (`TVIS_EXPANDED`) bit absent. The corrected helper masks that bit and
+cross-checks it against independently retrieved item state. The verification-only
+workflow downloads the same frozen starter, checks its SHA-256 and uses fresh
+extractions. It does not rebuild the application.
+
+[Run 37678715894](https://github.com/comparativechrono/workbench/actions/runs/37678715894),
+using validator commit `3c2d5079355e6a056dcdbe39f25b7b7bead7d670`, passed
+**all six focused category checks in each Windows path, with no skips**. These
+cover collapsed headings, pointer and keyboard expansion, search and restoration,
+standalone form selection, distinct workflow selection/add/double-click/drag
+behavior, and an actual offline pack import supplying a new category. The last
+case uses a synthetic pack, not a new published scientific tool.
+
+Independent static audit passed **26 grouped checks**: all 72 core inventory
+entries, 602 source files matched to the exact Git commit, all 143 Starter pack
+files unchanged from published 0.10.1, and unchanged production profile/trust.
+The [validation record](evidence/tool-library-0.11.0-validation-2026-10-07.json)
+binds native reports, screenshots and archives. The
+[static audit](evidence/tool-library-0.11.0-static-audit-2026-10-07.json) has its
+own narrower scope. Creation-time pending status inside immutable build/source
+companions is superseded by these records; do not rewrite those archives.
+
+## Tester download and remaining release work
+
+Download the
+[standalone Windows candidate](https://github.com/comparativechrono/workbench/actions/runs/37678010251/artifacts/11507651323)
+while signed into GitHub. Extract the artifact, then extract its inner
+`native-workbench-0.11.0-starter-windows.zip` into a separate test folder and run
+`NativeWorkbench.exe`. No older installation is required. The artifact is
+retained until 2026-11-06; it is not a permanent release download.
+
+The inner Starter archive is **17,044,022 bytes**, SHA-256
+`e816e2f7cd5efe98af752fbf072fab00344ebaa2b6963795c2fbf4a86b5fa81c`.
+The matching source archive is **46,875,983 bytes**, SHA-256
+`a45ad640f0767bb56458b59ce50d263537e54ebb401a0e809f31a5453adb2f2b`.
+Both are retained by the candidate workflow. Keep the original application
+source and separate validator identities when recording later acceptance.
+
+Before a release, obtain tester acceptance, build and validate an updater from
+the supported published baseline, and follow the established exact-artifact
+promotion/public-download workflow. Do not overlay this Starter onto an existing
+installation or present the candidate as an already validated upgrade.
+
 Live Full downloads, Ensembl downloads and upgrades are outside this layout
 change's candidate gate. Prior passes for those features apply only to their
 recorded artifacts. This UI work does not resolve the separate tester-machine
 bridge/security investigation or establish managed-PC approval.
+Native captures were at 96 DPI; finite hosted screenshots do not establish
+physical-display flicker behavior, touchpad interaction or high-DPI acceptance.

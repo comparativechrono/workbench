@@ -16,8 +16,13 @@ The updater in this release supports **0.10.0**.
 The next **0.11.0 development candidate** replaces the category dropdown/flat
 tool list with native expandable category headings, while retaining standalone
 selection, search, compatible-output filtering and workflow drag-and-drop.
-Work is on `feature/expandable-tool-library`; packaged Windows validation is
-pending. This is not a new release. See the
+Work is on `feature/expandable-tool-library` in [PR #6](https://github.com/comparativechrono/workbench/pull/6).
+The frozen candidate from `acfa060c9a400d82509278b657ee37853c7922b0` passed
+**six category checks and 32 workspace/scientific checks per Windows path**,
+plus 70 source tests and 26 grouped static archive checks. The first category
+gate failure was a validator state-bit error; corrected validator `3c2d507`
+passed against the unchanged application in run `37678715894`. Tester acceptance
+and an updater are still pending. This is not a new release. See the
 [feature handover](expandable-tool-library.md) for the design reference, scope
 and current evidence. Published 0.10.1 remains the download baseline.
 

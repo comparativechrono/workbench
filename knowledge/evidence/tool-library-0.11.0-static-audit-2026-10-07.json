@@ -1,0 +1,219 @@
+{
+  "schema": 1,
+  "audit": "Independent static audit of expandable tool-library 0.11.0 candidate",
+  "observedAt": "2026-10-07T19:57:54.124168+00:00",
+  "sourceCommit": "acfa060c9a400d82509278b657ee37853c7922b0",
+  "pullRequest": 6,
+  "candidateRun": 37678010251,
+  "platform": "Linux; ZIP, SHA-256, source comparison and metadata inspection only",
+  "artifacts": [
+    {
+      "file": "native-workbench-0.11.0-starter-windows.zip",
+      "bytes": 17044022,
+      "sha256": "e816e2f7cd5efe98af752fbf072fab00344ebaa2b6963795c2fbf4a86b5fa81c"
+    },
+    {
+      "file": "native-workbench-0.11.0-source.zip",
+      "bytes": 46875983,
+      "sha256": "a45ad640f0767bb56458b59ce50d263537e54ebb401a0e809f31a5453adb2f2b"
+    }
+  ],
+  "baseline": {
+    "file": "native-workbench-0.10.1-starter-windows.zip",
+    "sha256": "a8c4d374104d62fdf46dbd405e9d5bc36f5e2ea191f573faa63cfb29b433ba79"
+  },
+  "passed": true,
+  "summary": {
+    "checksPassed": 26,
+    "checksFailed": 0,
+    "coreManifestFiles": 72,
+    "exactCurrentSourceFiles": 602,
+    "unchangedStarterPackFiles": 143
+  },
+  "changedCoreFilesFromPublished0101": [
+    "NativeWorkbench.exe",
+    "SOURCE-AVAILABILITY.json",
+    "WorkbenchBridge.exe",
+    "workspace/app_version.py"
+  ],
+  "checks": [
+    {
+      "name": "Provenance identifies exact candidate source and unpublished status",
+      "passed": true,
+      "sourceCommit": "acfa060c9a400d82509278b657ee37853c7922b0"
+    },
+    {
+      "name": "Candidate archive hash: native-workbench-0.11.0-starter-windows.zip",
+      "passed": true,
+      "file": "native-workbench-0.11.0-starter-windows.zip",
+      "bytes": 17044022,
+      "sha256": "e816e2f7cd5efe98af752fbf072fab00344ebaa2b6963795c2fbf4a86b5fa81c"
+    },
+    {
+      "name": "Build provenance archive binding: native-workbench-0.11.0-starter-windows.zip",
+      "passed": true
+    },
+    {
+      "name": "Candidate archive hash: native-workbench-0.11.0-source.zip",
+      "passed": true,
+      "file": "native-workbench-0.11.0-source.zip",
+      "bytes": 46875983,
+      "sha256": "a45ad640f0767bb56458b59ce50d263537e54ebb401a0e809f31a5453adb2f2b"
+    },
+    {
+      "name": "Build provenance archive binding: native-workbench-0.11.0-source.zip",
+      "passed": true
+    },
+    {
+      "name": "Published 0.10.1 starter baseline identity",
+      "passed": true,
+      "bytes": 17032722,
+      "sha256": "a8c4d374104d62fdf46dbd405e9d5bc36f5e2ea191f573faa63cfb29b433ba79"
+    },
+    {
+      "name": "Candidate starter ZIP CRC",
+      "passed": true,
+      "firstBadEntry": null,
+      "entries": 216
+    },
+    {
+      "name": "Candidate starter ZIP path and uniqueness validation",
+      "passed": true,
+      "unsafePaths": [],
+      "duplicates": 0
+    },
+    {
+      "name": "Candidate source ZIP CRC",
+      "passed": true,
+      "firstBadEntry": null,
+      "entries": 605
+    },
+    {
+      "name": "Candidate source ZIP path and uniqueness validation",
+      "passed": true,
+      "unsafePaths": [],
+      "duplicates": 0
+    },
+    {
+      "name": "Published baseline starter ZIP CRC",
+      "passed": true,
+      "firstBadEntry": null,
+      "entries": 216
+    },
+    {
+      "name": "Published baseline starter ZIP path and uniqueness validation",
+      "passed": true,
+      "unsafePaths": [],
+      "duplicates": 0
+    },
+    {
+      "name": "Core manifest hashes and byte sizes",
+      "passed": true,
+      "files": 72,
+      "errors": [],
+      "version": "0.11.0"
+    },
+    {
+      "name": "Core manifest complete inventory",
+      "passed": true,
+      "missing": [],
+      "extra": []
+    },
+    {
+      "name": "Packaged executable matches independently strict-built executable digest",
+      "passed": true,
+      "sha256": "48b665b8f71f24a9e6480f60f4ae6ba0dc5d0da23db68c5489c393dcefa6ac13"
+    },
+    {
+      "name": "Current source inventory hashes and byte sizes",
+      "passed": true,
+      "files": 602,
+      "errors": []
+    },
+    {
+      "name": "Current source inventory complete and unique",
+      "passed": true,
+      "missing": [],
+      "extra": []
+    },
+    {
+      "name": "All packaged current sources match exact Git candidate",
+      "passed": true,
+      "files": 602,
+      "sourceCommit": "acfa060c9a400d82509278b657ee37853c7922b0",
+      "mismatches": []
+    },
+    {
+      "name": "Legacy corresponding-source companion binding",
+      "passed": true,
+      "sha256": "5dac9add19436b336cba483a0f915e39aafed383282c2a019a0dbd3cc3c8668e",
+      "bytes": 44163162
+    },
+    {
+      "name": "Starter corresponding-source metadata binds exact source archive",
+      "passed": true
+    },
+    {
+      "name": "All starter pack bytes unchanged from published 0.10.1",
+      "passed": true,
+      "files": 143,
+      "changed": [],
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "Starter exact pack pins preserved and validated",
+      "passed": true,
+      "packs": [
+        {
+          "id": "align",
+          "version": "0.4.0",
+          "folder": "packs/align-0.4.0",
+          "manifestSha256": "81c962222c93356a4f7727b23193c71d7dcd515859e62a179574781f411824d3",
+          "verified": true
+        },
+        {
+          "id": "bam",
+          "version": "0.4.0",
+          "folder": "packs/bam-0.4.0",
+          "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888",
+          "verified": true
+        },
+        {
+          "id": "variants",
+          "version": "0.4.0",
+          "folder": "packs/variants-0.4.0",
+          "manifestSha256": "ea4b7f0a6c28709e4190b6514c07cbf7bdd58e1a4f2a2d931f2cae3ce6ec3795",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "name": "Production metadata unchanged: workspace/setup-profile.json",
+      "passed": true,
+      "sha256": "4cad899dcc1f6541f6edecc3ace7d0d4dd5d6103b1b16218fece0c0b68d2a4ba"
+    },
+    {
+      "name": "Production metadata unchanged: workspace/catalog-sources.json",
+      "passed": true,
+      "sha256": "240cef994004c040584d3b8806bb361683693b1e7c0e92c9aedeaddc683fbefc"
+    },
+    {
+      "name": "Packaged Python runtime application sources match exact source archive",
+      "passed": true,
+      "files": 18,
+      "mismatches": []
+    },
+    {
+      "name": "No mutable user data or results in starter archive",
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "Does not execute Windows binaries or establish native GUI, integration or scientific behavior.",
+    "Candidate run status and Windows reports are outside this static audit.",
+    "No release publication or public-download verification for 0.11.0 is claimed.",
+    "The strict-build executable digest was supplied independently by the parent agent; this audit matches the packaged binary to that digest and does not rerun the compiler.",
+    "No user-machine security approval or resolution of the separate bridge restriction is established."
+  ]
+}
