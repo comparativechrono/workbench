@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "createdUtc": "2026-10-07T12:12:04.571013+00:00",
+  "scope": "Independent read-only archive/source/inventory audit; no rebuild, native execution or repeated scientific tests.",
+  "candidateSourceCommit": "5a390acd8440856e3f4e32de237322a18bb82d7e",
+  "candidateRunId": 37618824677,
+  "candidateArtifactId": 11481160484,
+  "transportRunId": 37618824677,
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "success": true,
+  "checks": [
+    "Five bounded transport ZIP digests/CRCs verified; source parts reconstruct the exact frozen source SHA-256. All three candidate archive hashes/sizes/CRCs/safe member paths match build records and checksum manifest.",
+    "Complete baseline/candidate core inventories verified; all 143 Starter pack files and pins are unchanged; no unowned application files present.",
+    "Every packaged current source file exactly matches candidate Git objects, and the curated source selection is complete; runtime workspace files match source.",
+    "Packaged production source exactly matches reviewed publisher JSON identity and owner fingerprint; exact 32-pack profile/lock are retained.",
+    "Source availability metadata pins the verified source archive and preserved legacy/pack source companions.",
+    "Updater inventory, exact replacement set/bytes, target manifest, runtime/licences, and transaction source all match the candidate; no pack/user paths are replacements and no files are obsolete."
+  ],
+  "passed": 6,
+  "failures": [],
+  "skips": [],
+  "archives": [
+    {
+      "file": "native-workbench-0.10.0-source.zip",
+      "bytes": 46740582,
+      "sha256": "918adabf39c0f0cbd551b2a30d523f72135be67fe4232a9c8c54ffa6e611133b",
+      "zipCrc": "passed"
+    },
+    {
+      "file": "native-workbench-0.10.0-starter-windows.zip",
+      "bytes": 17028340,
+      "sha256": "659a08911cec65b8dc1ce0dd9f47fea25350a39b619c7f0aea663bae71a871ae",
+      "zipCrc": "passed"
+    },
+    {
+      "file": "native-workbench-0.10.0-update-from-0.9.0.zip",
+      "bytes": 12880361,
+      "sha256": "63d96f514711d0604b6fbfe940a38bfad73900285ec13e75f95397f0d012eacf",
+      "zipCrc": "passed"
+    }
+  ],
+  "baselineSha256": "c2661c144e073c4efdd190ffd186bacd9398b6413b81770d7a057c3947eecf02",
+  "coreFilesVerified": 72,
+  "sourceFilesMatchedToGit": 572,
+  "runtimeWorkspaceFilesMatchedToSource": 21,
+  "unchangedStarterPackFiles": 143,
+  "updaterFilesVerified": 57,
+  "updaterReplacementsVerified": 11,
+  "productionCatalogueConfigured": true,
+  "productionFingerprint": "8d2093f9fafd71de56fea2038faeb2efa0964767d3235430b06428132cdc8505",
+  "productionPublicSourceSha256": "9f4ef018e03ea8a27251927fe59d4656b7619b227814497b4f66947269ee297b",
+  "productionCatalogueCommit": "0048c4e3644aae7ed172d804fff0981982510e7b",
+  "nativeWindowsExecuted": false,
+  "applicationRebuilt": false,
+  "limitations": [
+    "Static verification binds source files and metadata but does not independently rebuild PE binaries.",
+    "User-data preservation is established here only by update scope; actual preservation and live production setup require separate exact-package Windows evidence."
+  ],
+  "transportArtifacts": [
+    {
+      "id": 11481505148,
+      "name": "setup-transfer-source-part-1-5a390acd8440856e3f4e32de237322a18bb82d7e",
+      "bytes": 25166018,
+      "sha256": "af8d3899a5933f85f7cc6cc08865bc02f06bfd0dc4c23f56d858a61cd1029229"
+    },
+    {
+      "id": 11481505135,
+      "name": "setup-transfer-update-5a390acd8440856e3f4e32de237322a18bb82d7e",
+      "bytes": 12880565,
+      "sha256": "6cae48346d073ec70d279efa0ae8bac920afa32ecf9117003036e7635be91891"
+    },
+    {
+      "id": 11481400217,
+      "name": "setup-transfer-starter-5a390acd8440856e3f4e32de237322a18bb82d7e",
+      "bytes": 17028540,
+      "sha256": "ec3b9b2608ac0569bc1342b277fb9cb93d0bd46b3964241274689644c84b23a0"
+    },
+    {
+      "id": 11481310290,
+      "name": "setup-transfer-source-part-2-5a390acd8440856e3f4e32de237322a18bb82d7e",
+      "bytes": 21574952,
+      "sha256": "20a0c5ffb41fd27c8bf80b7df691f05af83eb45252802504ac0cf08a12433924"
+    },
+    {
+      "id": 11481110570,
+      "name": "setup-transfer-metadata-5a390acd8440856e3f4e32de237322a18bb82d7e",
+      "bytes": 3453,
+      "sha256": "f8a421e8a6021a4b30948766ce68f1e586a1c8c2b9d442158ad5914204ab0394"
+    }
+  ]
+}

@@ -5,9 +5,11 @@
 The earlier empty-trust candidate passed the native checks recorded in the
 [0.10.0 handover](tool-setup-0.10.0-handover.md). As of **2026-10-07**, the official
 signed 32-pack catalogue is published and independently verified. Its reviewed
-public source is being bundled into a **new candidate**; exact Windows production
-setup and affected GUI/upgrade checks are pending. Catalogue publication alone
-does not complete the application release.
+public source is bundled in candidate `5a390acd`. Exact-package native setup,
+workspace, References, results/CWL/DAG/icon and 0.9.0 upgrade checks passed in
+ordinary and space-containing Windows paths. Live production Full passed four
+checks in each path using the bundled owner trust and all 32 exact pack pins.
+All six candidate jobs succeeded; application publication remains pending.
 
 ## Installing tools
 
@@ -54,7 +56,7 @@ published 0.9.0 Starter. The new setup interface adds a small core change; its
 exact packaged size must be measured from its own candidate.
 
 A fresh Starter already contains three of the selected packs. The measured
-0.10.0 development Starter is **17,027,658 bytes**; its matching source and updater
+0.10.0 production-trust candidate Starter is **17,028,340 bytes**; its matching source and updater
 identities are in the handover. The remaining 29
 published archives total **3,795,572,848 bytes**. Setup's download estimate counts
 only the missing selection. These numbers exclude reference databases, results,
@@ -88,8 +90,8 @@ lock and preparation report, and both the application and independent
 cryptography/OpenSSL signature verifiers accept the owner key. This is public
 metadata and signature validation; no new Windows result is implied.
 
-The reviewed source is being added to `workspace/catalog-sources.json` for a new
-production candidate. Earlier candidate `8cee606` deliberately had an empty
+The reviewed source is bundled in `workspace/catalog-sources.json` in production
+candidate `5a390acd8440856e3f4e32de237322a18bb82d7e`. Earlier candidate `8cee606` deliberately had an empty
 source list and used isolated fixture trust in the all-pack native gate; its
 passing checks cannot substitute for the new production setup gate. Starter and
 offline imports remain independent of network availability.
@@ -98,8 +100,8 @@ The [owner signing guide](../publishing/catalogue-signing.md) documents the
 protected `catalogue-production` workflow. The successful signing job establishes
 that its configured key and fingerprint work; administrative protection settings
 remain unavailable for connector inspection. Private keys stay outside Git and
-public outputs, and no private key was read by the agent. The application must
-be rebuilt and validated against these exact public trust bytes before release.
+public outputs, and no private key was read by the agent. The new candidate was built with these exact public trust bytes and passed live
+production Full in both Windows paths.
 Existing independent pack/source releases remain the download authorities.
 
 ## Implementation and preservation
@@ -133,8 +135,24 @@ outside the core transaction. The application and updater versions advance to
 
 ## Validation and remaining gates
 
-The [candidate validation record](evidence/tool-setup-0.10.0-validation-2026-10-06.json)
-now records actual `windows-2022` execution of source `8cee606`: per path, **13
+The new [production-candidate validation record](evidence/tool-setup-0.10.0-validation-2026-10-07.json)
+records `windows-2022` execution of source `5a390acd` in
+[run 37618824677](https://github.com/comparativechrono/workbench/actions/runs/37618824677):
+**13 setup, 32 workspace, eight References, nine results/CWL/DAG/icon and 13
+upgrade checks passed per path**. Upgrades preserved 203 files and checked 72
+core files. The source gate passed 152 tests with one Windows-only skip; native
+Windows pack-manager checks passed all 42 tests. References' optional updater
+helper was not requested and is not counted as passed. The independent
+[archive audit](evidence/tool-setup-0.10.0-artifact-audit-2026-10-07.json) checked
+572 exact source files, 143 unchanged Starter pack files and all 11 updater
+replacements. Live production Full passed four checks per Windows path, and the
+separate isolated-fixture all-pack gate passed four. Production runs installed
+all 32 exact pins, reopened offline and preserved 202 expected alignment/BAM
+records. All six workflow jobs succeeded. See the [acceptance record](evidence/tool-setup-0.10.0-acceptance-2026-10-07.json)
+for final promotion status; the application is not released yet.
+
+The earlier [candidate validation record](evidence/tool-setup-0.10.0-validation-2026-10-06.json)
+retains historical `windows-2022` execution of source `8cee606`: per path, **13
 setup, 32 workspace, eight References, nine results/CWL/DAG/icon and 13 upgrade
 checks passed**. The exact upgrade preserved 203 existing files and verified all
 72 target core files. Test scopes overlap; these are not additive unique-test
@@ -187,11 +205,12 @@ and connected pinned workflow, actual reference results and receipts, every
 preserved file hash, idempotent repeat update, and new offline scientific/CWL
 execution. It uses the updater's private interpreter and does not claim native
 updater folder-picker interaction or a live reference download. Its Windows run
-passed in both paths for the earlier empty-trust candidate; repeat affected
-checks for the new candidate containing production trust.
+passed in both paths for both the earlier empty-trust candidate and the new
+production-trust candidate; each record pins its own exact archives.
 
 The candidate workflow must retain input/output hashes, source commit, failures,
 screenshots and native reports. The production signed catalogue is now verified;
-next validate fresh online setup against that exact deployed trust and verify
-public release downloads. Application release and the new candidate's native
-checks remain pending; unavailable checks are not counted as passed.
+fresh online Full setup against that exact deployed trust also passed in both
+Windows paths. Promote the accepted immutable candidate and verify public
+release downloads. Application publication remains pending; fixture-only
+production omissions and unrequested helper checks are not counted as passes.

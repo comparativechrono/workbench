@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "date": "2026-10-07",
+  "status": "accepted for automated immutable promotion; not yet published",
+  "authorization": "Owner previously authorized completion and release; current turn supplied successful production catalogue run. No new manual tester acceptance of rebuilt package is asserted.",
+  "acceptance": {
+    "sourceCommit": "5a390acd8440856e3f4e32de237322a18bb82d7e",
+    "runId": 37618824677,
+    "fingerprint": "8d2093f9fafd71de56fea2038faeb2efa0964767d3235430b06428132cdc8505",
+    "coreFiles": 72,
+    "archives": {
+      "native-workbench-0.10.0-starter-windows.zip": {
+        "bytes": 17028340,
+        "sha256": "659a08911cec65b8dc1ce0dd9f47fea25350a39b619c7f0aea663bae71a871ae"
+      },
+      "native-workbench-0.10.0-update-from-0.9.0.zip": {
+        "bytes": 12880361,
+        "sha256": "63d96f514711d0604b6fbfe940a38bfad73900285ec13e75f95397f0d012eacf"
+      },
+      "native-workbench-0.10.0-source.zip": {
+        "bytes": 46740582,
+        "sha256": "918adabf39c0f0cbd551b2a30d523f72135be67fe4232a9c8c54ffa6e611133b"
+      }
+    },
+    "artifacts": {
+      "candidate": {
+        "id": 11481160484,
+        "file": "candidate.zip",
+        "bytes": 76140018,
+        "sha256": "e6eface1a38dbc94959579d7f14b201a7c5d346c386750bf85731372f7d7146c",
+        "name": "setup-candidate-5a390acd8440856e3f4e32de237322a18bb82d7e"
+      },
+      "ordinary": {
+        "id": 11481740266,
+        "file": "ordinary.zip",
+        "bytes": 7773249,
+        "sha256": "bf0d9ae45f70f267c811d71d3d017347ceef434eb1ffb207067630b966fa73c1",
+        "name": "setup-windows-ordinary-1"
+      },
+      "spaces": {
+        "id": 11480724149,
+        "file": "spaces.zip",
+        "bytes": 7773518,
+        "sha256": "1e337d10a0084fda96642fdb9a05b89d2cdd1eb150ef4d1ac3e3758c30c36a4e",
+        "name": "setup-windows-path with spaces-1"
+      },
+      "full-fixture": {
+        "id": 11481438468,
+        "file": "full-fixture.zip",
+        "bytes": 479917,
+        "sha256": "fc71719153d7f9b3b481893e5438d559c7832cebb61922bf6cf2a6704b1d6f53",
+        "name": "setup-full-coexistence-5a390acd8440856e3f4e32de237322a18bb82d7e-1"
+      },
+      "production-ordinary": {
+        "id": 11481102972,
+        "file": "production-ordinary.zip",
+        "bytes": 467439,
+        "sha256": "bffa519e896f9a0611eca8fa295f51f6a4b6423b87995751bff6c0e3ac7d9d3a",
+        "name": "setup-production-full-ordinary-5a390acd8440856e3f4e32de237322a18bb82d7e-1"
+      },
+      "production-spaces": {
+        "id": 11481568237,
+        "file": "production-spaces.zip",
+        "bytes": 467516,
+        "sha256": "5eebcadb8481d638a42cfc120bc25ae44ed61d4f467c163e3eec7be653eb4fe4",
+        "name": "setup-production-full-path with spaces-5a390acd8440856e3f4e32de237322a18bb82d7e-1"
+      }
+    }
+  },
+  "validation": "tool-setup-0.10.0-validation-2026-10-07.json",
+  "archiveAudit": "tool-setup-0.10.0-artifact-audit-2026-10-07.json",
+  "candidateRebuiltAfterValidation": false
+}

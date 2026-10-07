@@ -13,8 +13,11 @@ Read [architecture](architecture.md) before changing an unfamiliar layer.
 See [tool setup](tool-setup.md) for source, packaging and exact Windows gate commands.
 The official signed catalogue was published and independently verified on 2026-10-07;
 see [production evidence](evidence/catalogue-production-2026-10-07.json). Its public
-source is being bundled into a new candidate; exact Windows production setup and
-affected regression gates remain pending. Application 0.10.0 is not released.
+source is bundled in candidate `5a390acd`; exact-package native setup, workspace,
+References, results/CWL/DAG/icon and 0.9.0 upgrade checks passed in both Windows
+paths. Live production Full also passed four checks in each path, and all six
+candidate workflow jobs succeeded. Application 0.10.0 publication remains pending;
+consult the [handover](tool-setup-0.10.0-handover.md) for exact evidence.
 
 **Release scope, 2026-10-06:** application 0.9.0 is published from the exact
 accepted `beea34a` application candidate without rebuilding. The release tag

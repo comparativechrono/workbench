@@ -1,0 +1,508 @@
+{
+  "schema": 1,
+  "date": "2026-10-07",
+  "createdUtc": "2026-10-07T12:27:01.166585+00:00",
+  "status": "Exact new production-trust candidate validated; application publication pending",
+  "appVersion": "0.10.0",
+  "published": false,
+  "candidateSourceCommit": "5a390acd8440856e3f4e32de237322a18bb82d7e",
+  "candidateRun": "https://github.com/comparativechrono/workbench/actions/runs/37618824677",
+  "archives": {
+    "native-workbench-0.10.0-starter-windows.zip": {
+      "bytes": 17028340,
+      "sha256": "659a08911cec65b8dc1ce0dd9f47fea25350a39b619c7f0aea663bae71a871ae"
+    },
+    "native-workbench-0.10.0-update-from-0.9.0.zip": {
+      "bytes": 12880361,
+      "sha256": "63d96f514711d0604b6fbfe940a38bfad73900285ec13e75f95397f0d012eacf"
+    },
+    "native-workbench-0.10.0-source.zip": {
+      "bytes": 46740582,
+      "sha256": "918adabf39c0f0cbd551b2a30d523f72135be67fe4232a9c8c54ffa6e611133b"
+    }
+  },
+  "sourceChecks": {
+    "ciLinux": {
+      "run": 153,
+      "passed": 152,
+      "skipped": 1,
+      "failures": 0
+    },
+    "nativeWindowsPackManager": {
+      "run": 42,
+      "passed": 42,
+      "skipped": 0,
+      "failures": 0
+    },
+    "localFocusedSetupPackaging": {
+      "passed": 50,
+      "skipped": 0,
+      "failures": 0
+    },
+    "note": "Suite scopes overlap; do not sum as unique checks. The Linux Windows-only skip was executed successfully in the Windows source suite."
+  },
+  "reports": [
+    {
+      "case": "ordinary",
+      "suite": "setup",
+      "path": "setup-evidence/native-setup.json",
+      "sha256": "9677d09f0a8af85a6cc11c5e8f5430978b0016bca61080075261c80c88737990",
+      "success": true,
+      "passed": 13,
+      "checks": [
+        "Exact packaged native first-run setup opens with Full recommended.",
+        "Native Custom checkbox navigation changes the selection and recalculates its download total.",
+        "At the supported minimum window size, setup controls remain within the window and the pack list scrolls.",
+        "Native Starter selection completes and enters the workspace without downloading packs.",
+        "Manage tools remains available and reopens Tool setup after first-run completion.",
+        "The native Starter action persists completed selection and dismissed welcome across an offline private-host restart.",
+        "Packaged backend refresh verifies a test-signed catalogue; startup/status perform no transport.",
+        "Custom batch cancellation retains the first installed pack, removes partial second-pack files and leaves unselected packs absent.",
+        "Restart and Retry restore the saved selection and download only the incomplete pack.",
+        "Corrupt archive bytes are rejected before installation; retry succeeds only with the signed exact bytes.",
+        "Invalid catalogue signature fails closed and preserves the previously verified cache.",
+        "Batch installation preserves existing settings, every preinstalled pack file and all application code.",
+        "After batch installation, an offline native minimap2-to-SAMtools workflow preserves all 202 expected alignment records."
+      ],
+      "skips": [],
+      "unrun": [
+        "Production signed catalogue refresh and clean-client Full installation are not exercised by test-only trust fixtures."
+      ],
+      "startedUtc": "2026-10-07T12:09:19.957277+00:00",
+      "finishedUtc": "2026-10-07T12:09:34.621488+00:00"
+    },
+    {
+      "case": "ordinary",
+      "suite": "workspace",
+      "path": "workspace-evidence/native-ui.json",
+      "sha256": "4ebfbe0e415c956a948cc07a4d94e16f1bce9db82a5deb05c08b33f27ba97f15",
+      "success": true,
+      "passed": 32,
+      "checks": [
+        "Default standalone mode",
+        "Independent preserved tool and workflow graphs",
+        "Compatible graph edge",
+        "Bounded native compatibility preview",
+        "Atomic cycle and semantic type rejection",
+        "Per-tool settings and input retention",
+        "Workflow additions leave ports unbound without automatic source boxes",
+        "Explicit reusable input owns one file editor and connects without duplication",
+        "Native minimap2 alignment chains to SAMtools coordinate-sorted binary BAM using two explicit inputs",
+        "All 202 synthetic mapped proper-pair records, mate flags, sequence, quality and typed tags survive SAM-to-BAM conversion",
+        "Manage tools loads installed packs on its first click without a modal error and reopens cleanly",
+        "First click opens a previously selected workflow-library row in empty tool mode",
+        "Single-click standalone tool form",
+        "Separate queued native double-click notification opens its hit row after selection clears",
+        "Three independent panes with general settings",
+        "Actual mouse drag from tool list onto workflow canvas twice",
+        "Actual compatible output-to-input mouse connection",
+        "Canvas selection displays tool options on right",
+        "General settings remain available in workflow mode",
+        "Standalone input and browsing folder survive workflow mode",
+        "Mode-specific status guidance replaces the previous workflow drag hint",
+        "Workflow graph/selection survives mode switching",
+        "Normal/minimum observed pane separation",
+        "Real repeated option scrolling leaves static text identical to a clean repaint",
+        "Blank-canvas mouse drag pans and reverses the viewport",
+        "Zoom buttons decrease, increase and reset scale; scaled card hit testing selects both tools",
+        "Injected one-unit native Ctrl-wheel deltas accumulate into visible zoom",
+        "Editing a tool immediately before Add input preserves its draft through the nested modal loop",
+        "Native Add input creates one independently editable reference file slot",
+        "Actual mouse connection from an explicit input output socket to a tool input without duplicate file fields",
+        "Header hover close deletes a tool and Undo restores its selection",
+        "Header hover close deletes an explicit input and Undo restores its files"
+      ],
+      "skips": [],
+      "unrun": [],
+      "startedUtc": "2026-10-07T12:09:35.113116+00:00",
+      "finishedUtc": "2026-10-07T12:09:50.531978+00:00"
+    },
+    {
+      "case": "ordinary",
+      "suite": "references",
+      "path": "references-evidence/native-references.json",
+      "sha256": "0612724696f13b9a24d74b04559e0b670e79947705c3d4bacdce7afc2c79b31f",
+      "success": true,
+      "passed": 8,
+      "checks": [
+        "Live release-pinned yeast search and five-product discovery.",
+        "Cancellation after transferred bytes removed only its partial download and published no reference.",
+        "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+        "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+        "Completed CWL export preserves the real downloaded yeast reference receipt, input hash, frozen plan and native output provenance.",
+        "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods.",
+        "Installed application and starter pack integrity checks passed after reference use.",
+        "Native app opened References, displayed local files, selected and downloaded five products through native controls, cancelled through its native button, bound both existing and newly downloaded genomes through compatible native inputs, kept controls separate at normal/minimum size and closed cleanly."
+      ],
+      "skips": [
+        "Optional native core updater gate was not requested."
+      ],
+      "unrun": [],
+      "startedUtc": "2026-10-07T12:09:59.387014+00:00",
+      "finishedUtc": "2026-10-07T12:10:42.531768+00:00"
+    },
+    {
+      "case": "ordinary",
+      "suite": "results",
+      "path": "results-evidence/native-results.json",
+      "sha256": "58c23a012b853df1bd5ee1d5524577b53308b126c44425b4166bef1bbf57ff0a",
+      "success": true,
+      "passed": 9,
+      "checks": [
+        "Exact packaged integrity check and all five starter scientific operations execute without failures or skips.",
+        "Results include a packed CWL v1.2 workflow tied to the frozen plan, real completion record and final export hash.",
+        "CWL source hashes, file roles, scientific parameters, complete output set, pack pins and reference metadata match frozen native provenance.",
+        "Every exported command/copy/binary-pipe definition expands to the actual native bridge argument record.",
+        "All five embedded CWL runners execute independently with packaged private Python and pinned native pack programs.",
+        "Independent CWL replay preserves 202 proper-pair SAM/BAM records and known starter:1351 G>A homozygous SNP truth.",
+        "Saved scientific DAG includes every actual dependency and avoids all unrelated cards with padding, including skipped ranks.",
+        "Packaged executable contains all nine SVG-derived icon resolutions; actual large/small class icons match that resource and differ from Windows default.",
+        "Real native canvas accepts compatible forward and backward connections across manually positioned cards and retains normal/zoomed captures."
+      ],
+      "skips": [],
+      "unrun": [],
+      "startedUtc": "2026-10-07T12:09:50.694448+00:00",
+      "finishedUtc": "2026-10-07T12:09:58.937294+00:00"
+    },
+    {
+      "case": "ordinary",
+      "suite": "update",
+      "path": "update-evidence/native-update.json",
+      "sha256": "5a382b01478b8a4c6066b66ab292e0480e67cb80ad002fde1c6f9f010e369e8d",
+      "success": true,
+      "passed": 13,
+      "checks": [
+        "Frozen baseline, accepted target and updater inventories match the exact archives and manifest identities.",
+        "Published 0.9.0 imports the exact optional reads pack, executes a real reference run, and saves independent settings and pipeline pins offline.",
+        "Native updater installs 0.10.0 and returns already-installed on repeat; every installed core file equals the accepted starter.",
+        "Starter and optional packs, saved settings/pins, existing real results, local registry/receipt and external reference bytes survive unchanged.",
+        "Updated host reloads exact saved pins, selects the preserved compatible reference, and executes offline with its provenance in CWL and completed methods.",
+        "Exact packaged integrity check and all five starter scientific operations execute without failures or skips.",
+        "Results include a packed CWL v1.2 workflow tied to the frozen plan, real completion record and final export hash.",
+        "CWL source hashes, file roles, scientific parameters, complete output set, pack pins and reference metadata match frozen native provenance.",
+        "Every exported command/copy/binary-pipe definition expands to the actual native bridge argument record.",
+        "All five embedded CWL runners execute independently with packaged private Python and pinned native pack programs.",
+        "Independent CWL replay preserves 202 proper-pair SAM/BAM records and known starter:1351 G>A homozygous SNP truth.",
+        "Saved scientific DAG includes every actual dependency and avoids all unrelated cards with padding, including skipped ranks.",
+        "Updater inventories remain intact after execution with its own private runtime."
+      ],
+      "skips": [],
+      "unrun": [],
+      "startedUtc": "2026-10-07T12:10:43.069228+00:00",
+      "finishedUtc": "2026-10-07T12:10:48.403037+00:00",
+      "preservation": {
+        "files": 203,
+        "changes": {},
+        "additions": {
+          "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+        },
+        "fixtureNotice": "Created by this gate from the packaged synthetic FASTA; not downloaded."
+      },
+      "coreFilesVerified": 72
+    },
+    {
+      "case": "spaces",
+      "suite": "setup",
+      "path": "setup-evidence/native-setup.json",
+      "sha256": "8a6fe2c23a95a0bc1889aded66ad1e806e2de0dae6f8c72a42f20889ba787106",
+      "success": true,
+      "passed": 13,
+      "checks": [
+        "Exact packaged native first-run setup opens with Full recommended.",
+        "Native Custom checkbox navigation changes the selection and recalculates its download total.",
+        "At the supported minimum window size, setup controls remain within the window and the pack list scrolls.",
+        "Native Starter selection completes and enters the workspace without downloading packs.",
+        "Manage tools remains available and reopens Tool setup after first-run completion.",
+        "The native Starter action persists completed selection and dismissed welcome across an offline private-host restart.",
+        "Packaged backend refresh verifies a test-signed catalogue; startup/status perform no transport.",
+        "Custom batch cancellation retains the first installed pack, removes partial second-pack files and leaves unselected packs absent.",
+        "Restart and Retry restore the saved selection and download only the incomplete pack.",
+        "Corrupt archive bytes are rejected before installation; retry succeeds only with the signed exact bytes.",
+        "Invalid catalogue signature fails closed and preserves the previously verified cache.",
+        "Batch installation preserves existing settings, every preinstalled pack file and all application code.",
+        "After batch installation, an offline native minimap2-to-SAMtools workflow preserves all 202 expected alignment records."
+      ],
+      "skips": [],
+      "unrun": [
+        "Production signed catalogue refresh and clean-client Full installation are not exercised by test-only trust fixtures."
+      ],
+      "startedUtc": "2026-10-07T12:09:14.744662+00:00",
+      "finishedUtc": "2026-10-07T12:09:29.619469+00:00"
+    },
+    {
+      "case": "spaces",
+      "suite": "workspace",
+      "path": "workspace-evidence/native-ui.json",
+      "sha256": "75ac154a964049e10d5967e47d223680708d42a56aeb7540a84c44870f214c3a",
+      "success": true,
+      "passed": 32,
+      "checks": [
+        "Default standalone mode",
+        "Independent preserved tool and workflow graphs",
+        "Compatible graph edge",
+        "Bounded native compatibility preview",
+        "Atomic cycle and semantic type rejection",
+        "Per-tool settings and input retention",
+        "Workflow additions leave ports unbound without automatic source boxes",
+        "Explicit reusable input owns one file editor and connects without duplication",
+        "Native minimap2 alignment chains to SAMtools coordinate-sorted binary BAM using two explicit inputs",
+        "All 202 synthetic mapped proper-pair records, mate flags, sequence, quality and typed tags survive SAM-to-BAM conversion",
+        "Manage tools loads installed packs on its first click without a modal error and reopens cleanly",
+        "First click opens a previously selected workflow-library row in empty tool mode",
+        "Single-click standalone tool form",
+        "Separate queued native double-click notification opens its hit row after selection clears",
+        "Three independent panes with general settings",
+        "Actual mouse drag from tool list onto workflow canvas twice",
+        "Actual compatible output-to-input mouse connection",
+        "Canvas selection displays tool options on right",
+        "General settings remain available in workflow mode",
+        "Standalone input and browsing folder survive workflow mode",
+        "Mode-specific status guidance replaces the previous workflow drag hint",
+        "Workflow graph/selection survives mode switching",
+        "Normal/minimum observed pane separation",
+        "Real repeated option scrolling leaves static text identical to a clean repaint",
+        "Blank-canvas mouse drag pans and reverses the viewport",
+        "Zoom buttons decrease, increase and reset scale; scaled card hit testing selects both tools",
+        "Injected one-unit native Ctrl-wheel deltas accumulate into visible zoom",
+        "Editing a tool immediately before Add input preserves its draft through the nested modal loop",
+        "Native Add input creates one independently editable reference file slot",
+        "Actual mouse connection from an explicit input output socket to a tool input without duplicate file fields",
+        "Header hover close deletes a tool and Undo restores its selection",
+        "Header hover close deletes an explicit input and Undo restores its files"
+      ],
+      "skips": [],
+      "unrun": [],
+      "startedUtc": "2026-10-07T12:09:30.086646+00:00",
+      "finishedUtc": "2026-10-07T12:09:45.329733+00:00"
+    },
+    {
+      "case": "spaces",
+      "suite": "references",
+      "path": "references-evidence/native-references.json",
+      "sha256": "4286d6e626d2826a2509e4bf2a9f1c0cd594e98ba76691f881076a1295c50afc",
+      "success": true,
+      "passed": 8,
+      "checks": [
+        "Live release-pinned yeast search and five-product discovery.",
+        "Cancellation after transferred bytes removed only its partial download and published no reference.",
+        "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+        "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+        "Completed CWL export preserves the real downloaded yeast reference receipt, input hash, frozen plan and native output provenance.",
+        "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods.",
+        "Installed application and starter pack integrity checks passed after reference use.",
+        "Native app opened References, displayed local files, selected and downloaded five products through native controls, cancelled through its native button, bound both existing and newly downloaded genomes through compatible native inputs, kept controls separate at normal/minimum size and closed cleanly."
+      ],
+      "skips": [
+        "Optional native core updater gate was not requested."
+      ],
+      "unrun": [],
+      "startedUtc": "2026-10-07T12:09:54.510422+00:00",
+      "finishedUtc": "2026-10-07T12:10:32.940759+00:00"
+    },
+    {
+      "case": "spaces",
+      "suite": "results",
+      "path": "results-evidence/native-results.json",
+      "sha256": "51c75758eae2fcff177e9e3e427e50d31c20969d9e711f4b45efad2543b62f89",
+      "success": true,
+      "passed": 9,
+      "checks": [
+        "Exact packaged integrity check and all five starter scientific operations execute without failures or skips.",
+        "Results include a packed CWL v1.2 workflow tied to the frozen plan, real completion record and final export hash.",
+        "CWL source hashes, file roles, scientific parameters, complete output set, pack pins and reference metadata match frozen native provenance.",
+        "Every exported command/copy/binary-pipe definition expands to the actual native bridge argument record.",
+        "All five embedded CWL runners execute independently with packaged private Python and pinned native pack programs.",
+        "Independent CWL replay preserves 202 proper-pair SAM/BAM records and known starter:1351 G>A homozygous SNP truth.",
+        "Saved scientific DAG includes every actual dependency and avoids all unrelated cards with padding, including skipped ranks.",
+        "Packaged executable contains all nine SVG-derived icon resolutions; actual large/small class icons match that resource and differ from Windows default.",
+        "Real native canvas accepts compatible forward and backward connections across manually positioned cards and retains normal/zoomed captures."
+      ],
+      "skips": [],
+      "unrun": [],
+      "startedUtc": "2026-10-07T12:09:45.491654+00:00",
+      "finishedUtc": "2026-10-07T12:09:54.024831+00:00"
+    },
+    {
+      "case": "spaces",
+      "suite": "update",
+      "path": "update-evidence/native-update.json",
+      "sha256": "fbeea85dbc19f1d8a1e25dff58ee18184047b5389ede263a8d855a4aaf3466f7",
+      "success": true,
+      "passed": 13,
+      "checks": [
+        "Frozen baseline, accepted target and updater inventories match the exact archives and manifest identities.",
+        "Published 0.9.0 imports the exact optional reads pack, executes a real reference run, and saves independent settings and pipeline pins offline.",
+        "Native updater installs 0.10.0 and returns already-installed on repeat; every installed core file equals the accepted starter.",
+        "Starter and optional packs, saved settings/pins, existing real results, local registry/receipt and external reference bytes survive unchanged.",
+        "Updated host reloads exact saved pins, selects the preserved compatible reference, and executes offline with its provenance in CWL and completed methods.",
+        "Exact packaged integrity check and all five starter scientific operations execute without failures or skips.",
+        "Results include a packed CWL v1.2 workflow tied to the frozen plan, real completion record and final export hash.",
+        "CWL source hashes, file roles, scientific parameters, complete output set, pack pins and reference metadata match frozen native provenance.",
+        "Every exported command/copy/binary-pipe definition expands to the actual native bridge argument record.",
+        "All five embedded CWL runners execute independently with packaged private Python and pinned native pack programs.",
+        "Independent CWL replay preserves 202 proper-pair SAM/BAM records and known starter:1351 G>A homozygous SNP truth.",
+        "Saved scientific DAG includes every actual dependency and avoids all unrelated cards with padding, including skipped ranks.",
+        "Updater inventories remain intact after execution with its own private runtime."
+      ],
+      "skips": [],
+      "unrun": [],
+      "startedUtc": "2026-10-07T12:10:33.496457+00:00",
+      "finishedUtc": "2026-10-07T12:10:38.902097+00:00",
+      "preservation": {
+        "files": 203,
+        "changes": {},
+        "additions": {
+          "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+        },
+        "fixtureNotice": "Created by this gate from the packaged synthetic FASTA; not downloaded."
+      },
+      "coreFilesVerified": 72
+    },
+    {
+      "case": "full-fixture",
+      "suite": "full-fixture",
+      "path": "native-full.json",
+      "sha256": "b95936e2332e22bd6b0f1099072008ff9b242137c9d47337191f6bcd4b061d33",
+      "success": true,
+      "passed": 4,
+      "checks": [
+        "All 32 current packs coexist after Full setup through signed catalogue verification and the native importer.",
+        "With all 32 packs installed, offline native alignment and SAM-to-BAM analysis preserves all 202 expected records.",
+        "Installed BEDTools contributes a usable BED workflow input through the normal pack-driven input list.",
+        "All 32 installed packs and setup state reopen with socket operations denied; individual-tool selection remains usable."
+      ],
+      "skips": [],
+      "unrun": [
+        "Production signed catalogue refresh and clean-client Full installation are not exercised by test-only trust fixtures."
+      ],
+      "startedUtc": "2026-10-07T12:09:13.143086+00:00",
+      "finishedUtc": "2026-10-07T12:25:08.929552+00:00",
+      "productionTrustValidated": false,
+      "installedPacks": 32,
+      "downloadBytes": 3795572848,
+      "scienceRecords": 202
+    },
+    {
+      "case": "production-ordinary",
+      "suite": "production",
+      "path": "native-production-full.json",
+      "sha256": "6b2f8bc7799c0c9253fb7ef87e52e108da1f64fa15ab578d51855650402d9e93",
+      "success": true,
+      "passed": 4,
+      "checks": [
+        "All 32 current packs coexist after Full setup through signed catalogue verification and the native importer.",
+        "With all 32 packs installed, offline native alignment and SAM-to-BAM analysis preserves all 202 expected records.",
+        "Installed BEDTools contributes a usable BED workflow input through the normal pack-driven input list.",
+        "All 32 installed packs and setup state reopen with socket operations denied; individual-tool selection remains usable."
+      ],
+      "skips": [],
+      "unrun": [],
+      "startedUtc": "2026-10-07T12:09:15.882754+00:00",
+      "finishedUtc": "2026-10-07T12:20:20.186040+00:00",
+      "productionTrustValidated": true,
+      "installedPacks": 32,
+      "downloadBytes": 3795572848,
+      "scienceRecords": 202
+    },
+    {
+      "case": "production-spaces",
+      "suite": "production",
+      "path": "native-production-full.json",
+      "sha256": "b5a6e18ac701d98a9edd43b2830df3c2aee89ce898be2ccd4e11e6d17140b603",
+      "success": true,
+      "passed": 4,
+      "checks": [
+        "All 32 current packs coexist after Full setup through signed catalogue verification and the native importer.",
+        "With all 32 packs installed, offline native alignment and SAM-to-BAM analysis preserves all 202 expected records.",
+        "Installed BEDTools contributes a usable BED workflow input through the normal pack-driven input list.",
+        "All 32 installed packs and setup state reopen with socket operations denied; individual-tool selection remains usable."
+      ],
+      "skips": [],
+      "unrun": [],
+      "startedUtc": "2026-10-07T12:09:13.030590+00:00",
+      "finishedUtc": "2026-10-07T12:25:08.710298+00:00",
+      "productionTrustValidated": true,
+      "installedPacks": 32,
+      "downloadBytes": 3795572848,
+      "scienceRecords": 202
+    }
+  ],
+  "productionTrust": {
+    "fingerprint": "8d2093f9fafd71de56fea2038faeb2efa0964767d3235430b06428132cdc8505",
+    "catalogueCommit": "0048c4e3644aae7ed172d804fff0981982510e7b",
+    "catalogueRun": 37617540915,
+    "packagedSourceUnchangedDuringProductionFull": true
+  },
+  "screenshotsReviewed": [
+    {
+      "file": "ordinary/setup-evidence/setup-full-first-run.bmp",
+      "sha256": "cf023f8d1f72ee9ef7c21da5168685639b36a7ea90a1d261dfdba866e435a4a9"
+    },
+    {
+      "file": "spaces/setup-evidence/setup-minimum-scrolled.bmp",
+      "sha256": "50f1725c241bcfc087d2c9a81dada5b37cb254794ffe29e659bec0f1315f513d"
+    },
+    {
+      "file": "ordinary/references-evidence/references-downloaded-minimum.bmp",
+      "sha256": "aef390401f04d30f6d85534b3d0cfeaaaa3134b74e814dffc990daf996ef2950"
+    },
+    {
+      "file": "spaces/results-evidence/workflow-backward-routing.bmp",
+      "sha256": "b4a2f8b0c7ec378c1d6dca780fb2e1ddbec85966f349951ba283e1b5d812ed22"
+    }
+  ],
+  "visualReview": "Readable native setup at ordinary and minimum sizes; visible Reference products and compatible selector; routed backward edges clear of intervening cards. Still images do not establish all display hardware.",
+  "evidenceArtifacts": {
+    "candidate": {
+      "id": 11481160484,
+      "file": "candidate.zip",
+      "bytes": 76140018,
+      "sha256": "e6eface1a38dbc94959579d7f14b201a7c5d346c386750bf85731372f7d7146c",
+      "name": "setup-candidate-5a390acd8440856e3f4e32de237322a18bb82d7e"
+    },
+    "ordinary": {
+      "id": 11481740266,
+      "file": "ordinary.zip",
+      "bytes": 7773249,
+      "sha256": "bf0d9ae45f70f267c811d71d3d017347ceef434eb1ffb207067630b966fa73c1",
+      "name": "setup-windows-ordinary-1"
+    },
+    "spaces": {
+      "id": 11480724149,
+      "file": "spaces.zip",
+      "bytes": 7773518,
+      "sha256": "1e337d10a0084fda96642fdb9a05b89d2cdd1eb150ef4d1ac3e3758c30c36a4e",
+      "name": "setup-windows-path with spaces-1"
+    },
+    "full-fixture": {
+      "id": 11481438468,
+      "file": "full-fixture.zip",
+      "bytes": 479917,
+      "sha256": "fc71719153d7f9b3b481893e5438d559c7832cebb61922bf6cf2a6704b1d6f53",
+      "name": "setup-full-coexistence-5a390acd8440856e3f4e32de237322a18bb82d7e-1"
+    },
+    "production-ordinary": {
+      "id": 11481102972,
+      "file": "production-ordinary.zip",
+      "bytes": 467439,
+      "sha256": "bffa519e896f9a0611eca8fa295f51f6a4b6423b87995751bff6c0e3ac7d9d3a",
+      "name": "setup-production-full-ordinary-5a390acd8440856e3f4e32de237322a18bb82d7e-1"
+    },
+    "production-spaces": {
+      "id": 11481568237,
+      "file": "production-spaces.zip",
+      "bytes": 467516,
+      "sha256": "5eebcadb8481d638a42cfc120bc25ae44ed61d4f467c163e3eec7be653eb4fe4",
+      "name": "setup-production-full-path with spaces-5a390acd8440856e3f4e32de237322a18bb82d7e-1"
+    }
+  },
+  "limits": [
+    "Native Windows Server 2022 hosted runners, ordinary and space-containing install paths; no physical trackpad or broad high-DPI/proxy survey.",
+    "GUI failure/cancellation/integrity fixtures use isolated test signing; production Full separately uses unchanged packaged trust and real public downloads.",
+    "Offline gates deny Python host socket operations, not all native-subprocess networking through an OS firewall.",
+    "References helper optional historical updater was not requested; migration is separately validated by the exact 0.9.0 updater.",
+    "CWL embedded runners replayed independently with packaged Python; no new stock Windows CWL-engine validation.",
+    "All32 packs installed/discovered; starter scientific truth rerun, not every optional pack scientific fixture.",
+    "Previously reported empty-trust candidate is historical and is not the accepted production package."
+  ]
+}

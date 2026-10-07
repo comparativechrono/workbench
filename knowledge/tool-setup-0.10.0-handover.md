@@ -12,9 +12,42 @@ through [PR #4](https://github.com/comparativechrono/workbench/pull/4). The owne
 then configured the signing key/fingerprint and started the successful
 [production publication run](https://github.com/comparativechrono/workbench/actions/runs/37617540915).
 The signed 32-pack catalogue is published and independently verified. Its public
-source is being bundled into a **new Windows candidate**; those production
-setup and affected regression gates remain pending. The earlier empty-trust
-candidate and its results below retain their historical identities.
+source is bundled into the new exact candidate below. Native setup, workspace,
+References, results/CWL/DAG/icon and 0.9.0 upgrade gates passed in both Windows
+paths. Live production Full passed four checks per path, and the separate
+isolated-fixture all-pack gate also passed four; all six candidate jobs succeeded.
+The earlier empty-trust candidate retains its separate historical identity.
+
+## Production-trust candidate, 2026-10-07
+
+Application source is **`5a390acd8440856e3f4e32de237322a18bb82d7e`**, frozen once in
+[run 37618824677](https://github.com/comparativechrono/workbench/actions/runs/37618824677).
+Candidate artifact **11481160484** contains these exact archives; bounded
+transport artifacts reassemble the same source without rebuilding.
+
+| Archive | Bytes | SHA-256 |
+| --- | ---: | --- |
+| Starter | 17,028,340 | `659a08911cec65b8dc1ce0dd9f47fea25350a39b619c7f0aea663bae71a871ae` |
+| Update from 0.9.0 | 12,880,361 | `63d96f514711d0604b6fbfe940a38bfad73900285ec13e75f95397f0d012eacf` |
+| Matching source | 46,740,582 | `918adabf39c0f0cbd551b2a30d523f72135be67fe4232a9c8c54ffa6e611133b` |
+
+| New exact-candidate gate | Actual result |
+| --- | --- |
+| Build source checks | 152 passed, one native-Windows-only skip; no failures. Separate Windows pack-manager suite: 42 passed. |
+| Native setup, each path | 13 passed; native first-run/profile controls, signed fixture download/cancel/retry/integrity failures, persisted state and offline science. |
+| Native workspace, each path | 32 passed. |
+| References, each path | Eight passed; all five pinned yeast products, integrity/cancellation, compatible native selection, offline reuse and provenance. Optional References updater helper was not requested; it is not a pass. |
+| Results/CWL/DAG/icon, each path | Nine passed. |
+| Upgrade from published 0.9.0, each path | 13 passed; 72 core files verified and 203 existing files unchanged, including optional tools, saved/pinned state, references and actual results. Repeated update and offline scientific/CWL execution passed. |
+| Live production Full, ordinary and spaces | Four passed per path using the unchanged bundled owner trust. All 32 exact published pins installed; BED inputs available; offline reopening and 202-record alignment/BAM truth passed. No skipped/unrun production checks. |
+| All-pack fixture gate | Four passed; isolated test-only trust, all 32 packs and offline 202-record truth. Its production-trust omission remains explicit and is covered separately by the production gates above. |
+| Independent static archive audit | Six grouped checks passed: all archives/transport hashes and CRCs, 72 core files, 572 Git-matched current source files, 143 unchanged Starter pack files, 57 updater inventory files and 11 exact replacements. Packaged production source matches the reviewed owner identity. |
+
+See the [new validation record](evidence/tool-setup-0.10.0-validation-2026-10-07.json),
+[archive audit](evidence/tool-setup-0.10.0-artifact-audit-2026-10-07.json) and
+[acceptance record](evidence/tool-setup-0.10.0-acceptance-2026-10-07.json) for final
+promotion status. Source/GUI/science counts overlap and are not additive unique
+checks. No new physical tester session is implied by this CI validation.
 
 ## Earlier exact candidate and checks
 
@@ -134,13 +167,13 @@ previous catalogue history to compare. Two evidence ZIP hashes and CRCs were
 also checked. The separate audit did not redownload the multi-gigabyte archives;
 it reviewed this run's complete archive/member validation evidence.
 
-The reviewed public source is now being bundled into a **new candidate**.
-Validate its native live production Full setup against the published feed,
-repeat affected GUI/References/CWL and 0.9.0 upgrade gates, then promote the exact
-validated archives with the established immutable-artifact release workflow and
-verify every public download. The earlier empty-trust archive cannot simply be
-announced as a working Full installer. No new Windows candidate result or
-application release is counted as passed in this catalogue audit.
+The reviewed public source is bundled into candidate `5a390acd`; its completed
+native regression and live production Full gates passed as recorded above.
+Promote the exact validated archives with the
+established immutable-artifact release workflow and verify every public
+download. The earlier empty-trust archive cannot be announced as a working Full
+installer. Catalogue auditing itself did not execute Windows; the new candidate
+run supplies separate native evidence. Application release remains pending.
 
 Cancellation/retry retains completed packs; an unfinished archive restarts its
 download. Abrupt process termination can leave unowned staging directories, which

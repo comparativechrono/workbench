@@ -82,11 +82,15 @@
     "cwl_dag_icon_0_9_0_release_validation": "evidence/cwl-dag-icon-0.9.0-release-validation-2026-10-06.json",
     "tool_setup": "tool-setup.md",
     "tool_setup_0_10_0_handover": "tool-setup-0.10.0-handover.md",
-    "tool_setup_0_10_0_validation": "evidence/tool-setup-0.10.0-validation-2026-10-06.json",
-    "tool_setup_0_10_0_artifact_audit": "evidence/tool-setup-0.10.0-artifact-audit-2026-10-06.json",
+    "tool_setup_0_10_0_validation": "evidence/tool-setup-0.10.0-validation-2026-10-07.json",
+    "tool_setup_0_10_0_artifact_audit": "evidence/tool-setup-0.10.0-artifact-audit-2026-10-07.json",
     "tool_setup_0_10_0_full_state": "evidence/tool-setup-0.10.0-full-state-2026-10-06.json",
     "catalogue_signing": "../publishing/catalogue-signing.md",
-    "catalogue_signing_evidence": "evidence/catalogue-signing-2026-10-07.json"
+    "catalogue_signing_evidence": "evidence/catalogue-signing-2026-10-07.json",
+    "tool_setup_0_10_0_prior_validation": "evidence/tool-setup-0.10.0-validation-2026-10-06.json",
+    "tool_setup_0_10_0_prior_artifact_audit": "evidence/tool-setup-0.10.0-artifact-audit-2026-10-06.json",
+    "tool_setup_0_10_0_acceptance": "evidence/tool-setup-0.10.0-acceptance-2026-10-07.json",
+    "catalogue_production_evidence": "evidence/catalogue-production-2026-10-07.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -1010,5 +1014,17 @@
     "guide": "tool-setup.md",
     "official_catalogue": "protected workflow merged through PR #4; pending owner environment/key provisioning, production publication and reviewed source configuration",
     "published_baseline": "0.9.0"
+  },
+  "development_candidate": {
+    "version": "0.10.0",
+    "source_commit": "5a390acd8440856e3f4e32de237322a18bb82d7e",
+    "run_id": 37618824677,
+    "status": "all-six-candidate-jobs-passed-accepted-awaiting-publication",
+    "live_production_full": {
+      "ordinary_passed": 4,
+      "spaces_passed": 4,
+      "packs": 32,
+      "offline_records": 202
+    }
   }
 }
