@@ -107,10 +107,13 @@ def exercise(root, evidence, report):
         roots = tree.roots()
         categories = {tree.label(item): [tree.label(child) for child in tree.children(item)] for item in roots}
         report["initialCategories"] = categories
+        report["initialRootStates"] = [tree.inspect(item) for item in roots]
+        captures.append(ui.capture("library-initial-categories.bmp"))
         require(len(categories) >= 3 and all(categories.values()), "Starter category grouping is missing tools.")
+        require(all(tree.expanded(item) == bool(tree.inspect(item)["itemState"] & 0x20) for item in roots),
+                "Two documented native TreeView queries disagree about category expansion.")
         require(all(not tree.expanded(item) for item in roots), "Fresh library categories must start collapsed.")
         require(len(tree.tools()) == sum(map(len, categories.values())), "Tool appears outside category grouping.")
-        captures.append(ui.capture("library-initial-categories.bmp"))
         check(report, "Fresh exact Starter displays native collapsed categories and program-named tools without a category dropdown.")
 
         def root_named(label):
@@ -224,6 +227,15 @@ def exercise(root, evidence, report):
         check(report, "Categories cannot be dragged into a workflow; child single click selects only, double click/Add/drag each add exactly one tool, and standalone settings survive.")
         report["dpi"] = ui.user.GetDpiForWindow(ui.main)
         report["displayPixels"] = [ui.user.GetSystemMetrics(0), ui.user.GetSystemMetrics(1)]
+    except Exception:
+        # Assertion failures (as distinct from wait timeouts) also need the
+        # displayed state; preserve the original error if diagnostics fail.
+        try:
+            report["failureRootStates"] = [ui.library().inspect(item) for item in ui.library().roots()]
+            captures.append(ui.capture("library-failure.bmp"))
+        except Exception as diagnostic:
+            report["failureCaptureError"] = str(diagnostic)
+        raise
     finally:
         ui.close()
 
@@ -269,6 +281,13 @@ def exercise(root, evidence, report):
             c["text"] == "Library category fixture" for c in ui.controls(ui.child(118))))
         captures.append(ui.capture("library-installed-pack-category.bmp"))
         check(report, "An independently imported pack supplies a new category, category-name search result and working selectable child without changing application code.")
+    except Exception:
+        try:
+            report["failureRootStates"] = [ui.library().inspect(item) for item in ui.library().roots()]
+            captures.append(ui.capture("library-installed-pack-failure.bmp"))
+        except Exception as diagnostic:
+            report["failureCaptureError"] = str(diagnostic)
+        raise
     finally:
         ui.close()
 
@@ -287,6 +306,7 @@ def main():
         "nativeGUILaunched": False, "nativeGUIValidated": False, "checks": [], "skips": [], "captures": [],
         "startedUtc": datetime.now(timezone.utc).isoformat(), "platform": platform.platform(), "python": sys.version,
         "sourceCommit": args.source_commit, "assetName": args.asset_name, "assetSha256": args.asset_sha256,
+        "validatorCommit": os.environ.get("VALIDATOR_COMMIT", args.source_commit),
         "gateSha256": sha256(__file__), "treeHelperSha256": sha256(Path(__file__).with_name("native_tree.py")),
         "appRoot": str(root), "limits": ["Actual reported DPI only; finite screenshots are not a physical-display flicker guarantee.",
             "The existing workspace gate separately verifies compatible port connections and the native 202-record scientific chain."]}

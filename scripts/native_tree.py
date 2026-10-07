@@ -73,9 +73,9 @@ class NativeTree:
         return self.next(0, 9)
 
     def expanded(self, item):
-        return bool(self.send(self.hwnd, 0x1127, item, 0x20))  # TVM_GETITEMSTATE/TVIS_EXPANDED.
+        return bool(self.send(self.hwnd, 0x1127, item, 0x20) & 0x20)  # TVM_GETITEMSTATE/TVIS_EXPANDED.
 
-    def label(self, item):
+    def inspect(self, item):
         class Item(ctypes.Structure):
             _fields_ = [("mask", wintypes.UINT), ("hItem", ctypes.c_void_p),
                         ("state", wintypes.UINT), ("stateMask", wintypes.UINT),
@@ -84,11 +84,19 @@ class NativeTree:
                         ("cChildren", ctypes.c_int), ("lParam", wintypes.LPARAM)]
         offset, text_bytes = ctypes.sizeof(Item), 4096
         def payload(address):
-            value = Item(mask=1, hItem=item, pszText=address + offset, cchTextMax=text_bytes // 2)
+            value = Item(mask=1 | 8, hItem=item, stateMask=0xffff,
+                         pszText=address + offset, cchTextMax=text_bytes // 2)
             return bytes(value) + bytes(text_bytes)
         raw = self._buffer(payload, offset + text_bytes,
                            lambda address: self.send(self.hwnd, 0x113E, 0, address))
-        return raw[offset:].decode("utf-16-le").split("\0", 1)[0]
+        state = Item.from_buffer_copy(raw).state
+        return {"handle": item, "label": raw[offset:].decode("utf-16-le").split("\0", 1)[0],
+                "itemState": state,
+                "messageStateAll": self.send(self.hwnd, 0x1127, item, 0xffff),
+                "messageStateExpanded": self.send(self.hwnd, 0x1127, item, 0x20)}
+
+    def label(self, item):
+        return self.inspect(item)["label"]
 
     def rect(self, item):
         # TVM_GETITEMRECT overlays HTREEITEM on the beginning of RECT.
