@@ -252,10 +252,38 @@ def temporal_panel(ui, panel, name, evidence, panels):
 
 
 def observe(root, evidence, report):
+    # Unlike the workspace/results gates, this observer launches a fresh app
+    # without first creating any user records through the private host. Current
+    # Starter releases therefore offer Tool Setup over the main window. Direct
+    # WM_SETTEXT can still edit the covered search box, but a genuine pointer
+    # click then hits the foreground setup window. Retain the older-package
+    # diagnostic path, whose releases have no setup profile.
+    profile_path = root / "workspace" / "setup-profile.json"
+    data = root / "user-data"
+    setup_path = data / "tool-setup.json"
+    dismissed = json.loads(setup_path.read_text(encoding="utf-8")).get("dismissed", False) if setup_path.is_file() else False
+    previous_records = data.exists() and any(p.name not in {"desktop-host.stderr.txt", "tool-setup.json"} for p in data.iterdir())
+    has_profile = profile_path.is_file() and bool(json.loads(profile_path.read_text(encoding="utf-8")).get("packs"))
+    expect_setup = has_profile and not dismissed and not previous_records
     ui = NativeUI(root, evidence)
     report["nativeWindowsExecuted"] = True
     try:
         ui.wait("scroll gate tool library", lambda: ui.user.IsWindowEnabled(ui.child(410)) and len(ui.library().tools()) > 0)
+        def setup_window():
+            return next((h for h in ui.windows() if ui.label(h, True) == "WorkbenchToolSetup0100"), None)
+        if expect_setup:
+            ui.wait("fresh scroll fixture offers Tool Setup", setup_window)
+        report["startup"] = {"setupExpected": expect_setup, "setupObserved": bool(setup_window()),
+            "windows": [{"class": ui.label(h, True), "title": ui.label(h)} for h in ui.windows()]}
+        if setup_window():
+            setup = setup_window()
+            report["startup"]["capture"] = ui.capture("scroll-first-launch-setup.bmp", setup)
+            button = ui.child(713, setup)
+            ui.wait("scroll fixture Use Workbench available", lambda: button and ui.user.IsWindowEnabled(button))
+            left, top, right, bottom = ui.bounds(button)
+            ui.click_at((left+right)//2, (top+bottom)//2)
+            ui.wait("scroll fixture Tool Setup dismissed", lambda: not setup_window())
+            ui.user.SetForegroundWindow(ui.main)
         # This is the documented supported minimum height, not an undersized
         # artificial viewport; it makes the general-settings panel scrollable.
         ui.user.MoveWindow(ui.main, 0, 0, 1040, 680, True)
@@ -281,6 +309,9 @@ def observe(root, evidence, report):
         ui.click_button(105)
         ui.wait("workflow alignment inspector", form_ready)
         temporal_panel(ui, ui.child(118), "workflow-options", evidence, report["panels"])
+    except Exception:
+        report["failureWindows"] = [{"class": ui.label(h, True), "title": ui.label(h)} for h in ui.windows()]
+        raise
     finally:
         ui.close()
 
