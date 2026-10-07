@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "runId": 37634723095,
+  "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+  "success": true,
+  "nativeWindowsExecuted": true,
+  "artifact": {
+    "id": 11489622944,
+    "name": "setup-patch-production-full-00b53cdded5db3bb176ee7e5a06546b8a0c66fff-1",
+    "bytes": 467522,
+    "sha256": "5a5a332cc1e88bbdf0906720ea8453e49c1f303b29fe25e7c1ed62e60229f99b",
+    "file": "production-full.zip"
+  },
+  "reportSha256": "ebcfd285acfbe48a59bf2ef61927698319fd3e4acfda7555d5b7bfc7917ad41f",
+  "passed": 4,
+  "checks": [
+    "All 32 current packs coexist after Full setup through signed catalogue verification and the native importer.",
+    "With all 32 packs installed, offline native alignment and SAM-to-BAM analysis preserves all 202 expected records.",
+    "Installed BEDTools contributes a usable BED workflow input through the normal pack-driven input list.",
+    "All 32 installed packs and setup state reopen with socket operations denied; individual-tool selection remains usable."
+  ],
+  "skips": [],
+  "unrun": [],
+  "productionTrustValidated": true,
+  "records": 202,
+  "scope": "All current real release packs; catalogue/import/coexistence and starter scientific checks, not every pack scientific fixture.",
+  "review": "Artifact downloaded, size/SHA-256/CRC verified; exact report and all32pin completed state accepted by publication guards. Native execution was performed by the linked Windows job."
+}

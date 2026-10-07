@@ -16,6 +16,36 @@ The [publication record](evidence/tool-setup-0.10.0-publication-2026-10-07.json)
 retain exact release and validation identities. Earlier releases and all existing
 pack bytes remain unchanged.
 
+## Tool Setup corrective patch, 0.10.1, in development
+
+After the 0.10.0 release, testers reported flashing Tool Setup column headers,
+inability to scroll packages, and a generic download failure. The earlier Windows
+passes retain their recorded scope; they did not establish sustained navigation
+while installation was active or the testers' network environment.
+
+Branch `fix/tool-setup-0.10.1` keeps the package list enabled for inspection while
+locking changes to the installation selection, updates changed cells without
+resetting the viewport, and suppresses repeated control updates. The new native
+gate compares the published 0.10.0 package with the patch during repeated idle
+and live-operation polling. Run `37634723095` reproduced disabled navigation,
+viewport/selection resets and header pixel variability in the published baseline.
+Both patched native path cases passed with 391 stable header samples, functioning
+busy wheel navigation and locked checkbox edits. Workspace, References, results
+and 0.10.0 upgrade checks also passed; 204 existing files were preserved per path.
+
+The old download message caught both network and local disk errors. The patch
+reports bounded HTTP/TLS/proxy/DNS/timeout or destination-write causes, naming
+only approved hosts and omitting signed URLs and credentials. Both old and new
+transports successfully fetched the current signed catalogue and a real small
+pack from the development environment; the testers' failure remains undiagnosed.
+This is not a claim that their connection problem is fixed.
+
+The exact candidate and 0.10.0-to-0.10.1 updater are built and reviewed.
+The real production Full installation passed all four checks with all 32 exact
+pins installed and offline reuse verified. Publication is being prepared.
+Published 0.10.0 and pack bytes remain unchanged. See the
+[patch handover](tool-setup-0.10.1-handover.md) for scope and pending checks.
+
 ## Published tool setup, 0.10.0, 2026-10-07
 
 The user approved Full (recommended), Starter and Custom setup over the existing

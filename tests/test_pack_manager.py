@@ -1,14 +1,19 @@
 """Pack distribution trust, archive boundaries, offline use and cancellation."""
 import base64
 import copy
+import errno
 import hashlib
+import http.client
 import io
 import json
 from pathlib import Path
 import stat
+import socket
+import ssl
 import sys
 import tempfile
 import threading
+import traceback
 import unittest
 from unittest.mock import patch
 import zipfile
@@ -161,7 +166,99 @@ class DownloadTransport(unittest.TestCase):
             path=Path(folder)/'x'
             with patch.object(pm.urllib.request.OpenerDirector,'open',return_value=self.Response(b'bad',url='https://evil.invalid/x')):
                 with self.assertRaises(ps.PackError):pm._download('https://example.invalid/a',SOURCE['allowedHosts'],path,100)
-            self.assertEqual(path.read_bytes(),b'')
+            self.assertFalse(path.exists())
+
+    def test_network_failure_categories_keep_private_details_out_of_errors(self):
+        secret='https://user:private-password@proxy.invalid/file?token=private-token'
+        failures = (
+            (pm.urllib.error.HTTPError(secret,407,secret,{},None),'proxy requires authentication'),
+            (pm.urllib.error.HTTPError(secret,403,secret,{},None),'HTTP 403'),
+            (pm.urllib.error.HTTPError(secret,404,secret,{},None),'HTTP 404'),
+            (pm.urllib.error.HTTPError(secret,429,secret,{},None),'HTTP 429'),
+            (pm.urllib.error.HTTPError(secret,503,secret,{},None),'HTTP 503'),
+            (pm.urllib.error.URLError(OSError('Tunnel connection failed: 407 '+secret)),'proxy requires authentication'),
+            (pm.urllib.error.URLError(ssl.SSLCertVerificationError(1,secret)),'certificate could not be verified'),
+            (pm.urllib.error.URLError(ssl.SSLError(1,secret)),'secure HTTPS connection failed'),
+            (pm.urllib.error.URLError(socket.gaierror(-2,secret)),'could not be resolved'),
+            (pm.urllib.error.URLError(TimeoutError(secret)),'timed out'),
+            (pm.urllib.error.URLError(ConnectionRefusedError(secret)),'connection was refused'),
+            (pm.urllib.error.URLError(PermissionError(secret)),'Network access was denied'),
+            (pm.urllib.error.URLError(OSError(errno.ENETUNREACH,secret)),'network request failed'),
+            (pm.urllib.error.URLError(secret),'network request failed'),
+        )
+        for failure, expected in failures:
+            with self.subTest(expected=expected), tempfile.TemporaryDirectory() as folder:
+                with patch.object(pm.urllib.request.OpenerDirector,'open',side_effect=failure):
+                    try:
+                        pm._download('https://example.invalid/a',SOURCE['allowedHosts'],Path(folder)/'x',100)
+                    except ps.PackError as error:
+                        message=str(error)
+                        rendered=''.join(traceback.format_exception(error))
+                    else:
+                        self.fail('Expected a sanitized download error')
+                self.assertIn(expected,message)
+                self.assertIn('example.invalid',message)
+                self.assertNotIn('private-password',rendered)
+                self.assertNotIn('private-token',rendered)
+                self.assertNotIn('proxy.invalid',rendered)
+                self.assertLess(len(message),350)
+                self.assertFalse((Path(folder)/'x').exists())
+
+    def test_redirect_failure_identifies_only_approved_host(self):
+        def failure(opener,request,timeout):
+            redirects=next(h for h in opener.handlers if isinstance(h,pm._Redirects))
+            redirects.redirect_request(request,None,302,'',{},
+                                       'https://assets.example.invalid/private-path?token=private-token')
+            raise pm.urllib.error.URLError(TimeoutError('private-token'))
+        with tempfile.TemporaryDirectory() as folder:
+            with patch.object(pm.urllib.request.OpenerDirector,'open',failure):
+                with self.assertRaises(ps.PackError) as caught:
+                    pm._download('https://example.invalid/a',SOURCE['allowedHosts'],Path(folder)/'x',100)
+            self.assertIn('Download from assets.example.invalid failed',str(caught.exception))
+            self.assertNotIn('private-',str(caught.exception))
+
+    def test_read_failure_is_not_reported_as_local_storage_failure(self):
+        for failure in (TimeoutError('private-token'),ConnectionResetError('private-token'),
+                        http.client.IncompleteRead(b'private-response'),http.client.RemoteDisconnected('private-token')):
+            with self.subTest(failure=type(failure).__name__), tempfile.TemporaryDirectory() as folder:
+                response=self.Response(b'',url='https://assets.example.invalid/a?token=private-token')
+                with patch.object(pm.urllib.request.OpenerDirector,'open',return_value=response),patch.object(response,'read1',side_effect=failure):
+                    with self.assertRaises(ps.PackError) as caught:
+                        pm._download('https://example.invalid/a',SOURCE['allowedHosts'],Path(folder)/'x',100)
+                self.assertIn('Download from assets.example.invalid failed',str(caught.exception))
+                self.assertNotIn('saved',str(caught.exception))
+                self.assertNotIn('private-',str(caught.exception))
+
+    def test_destination_create_failures_are_not_reported_as_network_failures(self):
+        locked=OSError('private-folder');locked.winerror=32
+        failures=((PermissionError(errno.EACCES,'private-folder'),'Write access was denied'),
+                  (OSError(errno.ENOSPC,'private-folder'),'not enough free disk space'),
+                  (FileNotFoundError(errno.ENOENT,'private-folder'),'folder is no longer available'),
+                  (locked,'locked by another process'))
+        for failure,expected in failures:
+            with self.subTest(expected=expected),tempfile.TemporaryDirectory() as folder:
+                with patch.object(pm.urllib.request.OpenerDirector,'open',return_value=self.Response(b'a')),patch.object(Path,'open',side_effect=failure):
+                    with self.assertRaises(ps.PackError) as caught:
+                        pm._download('https://example.invalid/a',SOURCE['allowedHosts'],Path(folder)/'x',100)
+                message=str(caught.exception)
+                self.assertIn('Download could not be saved',message)
+                self.assertIn(expected,message)
+                self.assertNotIn('private-folder',message)
+
+    def test_destination_write_and_flush_failures_are_local(self):
+        class FullDisk(io.BytesIO):
+            def write(self,data):raise OSError(errno.ENOSPC,'private-folder')
+        class DeniedFlush(io.BytesIO):
+            def __exit__(self,*args):
+                super().__exit__(*args)
+                raise PermissionError(errno.EACCES,'private-folder')
+        for output,expected in ((FullDisk(),'not enough free disk space'),(DeniedFlush(),'Write access was denied')):
+            with self.subTest(expected=expected),tempfile.TemporaryDirectory() as folder:
+                with patch.object(pm.urllib.request.OpenerDirector,'open',return_value=self.Response(b'a')),patch.object(Path,'open',return_value=output):
+                    with self.assertRaises(ps.PackError) as caught:
+                        pm._download('https://example.invalid/a',SOURCE['allowedHosts'],Path(folder)/'x',100)
+                self.assertIn('Download could not be saved',str(caught.exception))
+                self.assertIn(expected,str(caught.exception))
 
 
 class WindowsPaths(unittest.TestCase):

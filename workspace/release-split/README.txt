@@ -1,4 +1,4 @@
-Native Workbench 0.10.0 — application and independent tool packs
+Native Workbench 0.10.1 — application and independent tool packs
 
 Extract this complete folder to a location you can write to, then open
 NativeWorkbench.exe. The interface is a native Windows application.
@@ -9,9 +9,9 @@ workflow. Choose the example pipeline to try the bundled tiny scientific data.
 
 Tool setup offers Full (recommended), Starter and Custom selections. Downloads
 start only when requested, using the application's reviewed signed official
-catalogue. This development build does not yet include that production source;
-Starter and offline import remain available. A reviewed source and exact native
-validation are required before official online setup can be released.
+catalogue. Choose Refresh catalogue, review the selection and download size,
+then choose Install selection. The reviewed official source is included.
+Starter and already installed tools work without network access.
 
 Setup shows missing download size and progress. Completed packs remain installed
 if a later transfer fails or is cancelled. Retry keeps the selected versions;

@@ -1,0 +1,347 @@
+{
+  "schema": 1,
+  "kind": "independent-bounded-transfer-candidate-static-audit",
+  "recordedUtc": "2026-10-07T14:17:49.133306+00:00",
+  "success": true,
+  "sourceCommit": "00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+  "workflowRun": "https://github.com/comparativechrono/workbench/actions/runs/37634723095",
+  "workflowStatusAtRetrieval": "in_progress",
+  "nativeWindowsExecutedByThisAudit": false,
+  "nativeStatus": "Pending at task start; this static audit does not infer or certify subsequent native job outcomes.",
+  "releaseStatus": "Unreleased candidate; not public release verification.",
+  "boundedTransferArtifacts": [
+    {
+      "id": 11489390077,
+      "name": "setup-patch-transfer-metadata-00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+      "bytes": 3492,
+      "sha256": "1181345ecee75e405e31dcf789d127109587245625b5acbe4f13542eebde9ff5",
+      "members": [
+        "BUILD-PROVENANCE.json",
+        "BUILD-UPDATE-PROVENANCE.json",
+        "SHA256SUMS.txt",
+        "TRANSPORT-VERIFICATION.json",
+        "source-metadata.json"
+      ],
+      "githubDigestVerified": true,
+      "crcPassed": true
+    },
+    {
+      "id": 11489335083,
+      "name": "setup-patch-transfer-source-part-1-00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+      "bytes": 25166018,
+      "sha256": "fd16dda61aa0a2bdd09f40d1e79837588769e9593ab2ec40019fccdd20a10b72",
+      "members": [
+        "native-workbench-0.10.1-source.zip.part1"
+      ],
+      "githubDigestVerified": true,
+      "crcPassed": true
+    },
+    {
+      "id": 11488840002,
+      "name": "setup-patch-transfer-source-part-2-00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+      "bytes": 21667199,
+      "sha256": "b0554f0f466f9dfe548e4a8d64afd39ef75c5762382b94c457c12c2aa974f923",
+      "members": [
+        "native-workbench-0.10.1-source.zip.part2"
+      ],
+      "githubDigestVerified": true,
+      "crcPassed": true
+    },
+    {
+      "id": 11488625084,
+      "name": "setup-patch-transfer-update-00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+      "bytes": 12859189,
+      "sha256": "eb63094194622cae55efe1dc3b5740b90f53a4a44aa499fd2d5da1c133ebf334",
+      "members": [
+        "native-workbench-0.10.1-update-from-0.10.0.zip"
+      ],
+      "githubDigestVerified": true,
+      "crcPassed": true
+    },
+    {
+      "id": 11488390389,
+      "name": "setup-patch-transfer-starter-00b53cdded5db3bb176ee7e5a06546b8a0c66fff",
+      "bytes": 17032922,
+      "sha256": "e4421d765adc0ce8bd5eb324676b56bfdfa7fa0df9611bd4fa35ab3836f666ff",
+      "members": [
+        "native-workbench-0.10.1-starter-windows.zip"
+      ],
+      "githubDigestVerified": true,
+      "crcPassed": true
+    }
+  ],
+  "fullCandidateArtifact": {
+    "id": 11488695103,
+    "bytes": 76212926,
+    "sha256": "50b995aa56e50d05cfcbf2a3dc59eea60ee4af657e2749191ddf80db75e74822",
+    "downloaded": false,
+    "scope": "GitHub metadata only; bounded transfer artifacts provide independently downloaded frozen members."
+  },
+  "sourceReassembly": {
+    "schema": 1,
+    "sourceArchive": {
+      "file": "native-workbench-0.10.1-source.zip",
+      "bytes": 46832829,
+      "sha256": "4130c105e0ce0956c234718f93926d1f9b3f6bfd81048b8fc6e8823617c583ab"
+    },
+    "sourceTransportParts": [
+      {
+        "file": "native-workbench-0.10.1-source.zip.part1",
+        "bytes": 25165824,
+        "sha256": "e835e1956ba87b64b86047f6d3f73ebb63b126fad0017f8c13f9d0ec6c19e8b5"
+      },
+      {
+        "file": "native-workbench-0.10.1-source.zip.part2",
+        "bytes": 21667005,
+        "sha256": "d3ec794a3dde4cbcce5bcc2f9e81f3eacfa6e8c407b6fc11189d7c2d64ee02a0"
+      }
+    ],
+    "sourceReassembly": "Concatenate part1 then part2 as raw bytes; verify original source SHA-256 before extraction.",
+    "archivesRebuilt": false
+  },
+  "archives": [
+    {
+      "file": "native-workbench-0.10.1-source.zip",
+      "bytes": 46832829,
+      "sha256": "4130c105e0ce0956c234718f93926d1f9b3f6bfd81048b8fc6e8823617c583ab"
+    },
+    {
+      "file": "native-workbench-0.10.1-starter-windows.zip",
+      "bytes": 17032722,
+      "sha256": "a8c4d374104d62fdf46dbd405e9d5bc36f5e2ea191f573faa63cfb29b433ba79"
+    },
+    {
+      "file": "native-workbench-0.10.1-update-from-0.10.0.zip",
+      "bytes": 12858983,
+      "sha256": "fbf1f20d93c1fe781608cba6d48c948979986c06cdb9a4ce5b825b088d2fc3fb"
+    }
+  ],
+  "baseline": {
+    "file": "native-workbench-0.10.0-starter-windows.zip",
+    "bytes": 17028340,
+    "sha256": "659a08911cec65b8dc1ce0dd9f47fea25350a39b619c7f0aea663bae71a871ae"
+  },
+  "sourceFilesCompared": 590,
+  "coreFilesVerified": 72,
+  "unchangedStarterPackFiles": 143,
+  "preservedProductionMetadata": {
+    "workspace/catalog-sources.json": {
+      "sha256": "240cef994004c040584d3b8806bb361683693b1e7c0e92c9aedeaddc683fbefc",
+      "bytes": 1177,
+      "unchanged": true
+    },
+    "workspace/setup-profile.json": {
+      "sha256": "4cad899dcc1f6541f6edecc3ace7d0d4dd5d6103b1b16218fece0c0b68d2a4ba",
+      "bytes": 10101,
+      "unchanged": true
+    },
+    "workspace/starter-check-profile.json": {
+      "sha256": "395cfbd0fead5f36f52022e50827127df003dbbde086d0d9d8940f034c36fcf7",
+      "bytes": 1558,
+      "unchanged": true
+    }
+  },
+  "update": {
+    "baseVersion": "0.10.0",
+    "targetVersion": "0.10.1",
+    "coreChangedPaths": [
+      "NativeWorkbench.exe",
+      "README.txt",
+      "SOURCE-AVAILABILITY.json",
+      "WorkbenchBridge.exe",
+      "workspace/app_version.py",
+      "workspace/pack_manager.py"
+    ],
+    "operationsVerified": 6,
+    "inventoryFilesVerified": 52,
+    "obsolete": []
+  },
+  "checks": [
+    {
+      "check": "workflow source binding",
+      "success": true
+    },
+    {
+      "check": "both build provenance source bindings",
+      "success": true
+    },
+    {
+      "check": "builder claims no native execution",
+      "success": true
+    },
+    {
+      "check": "bounded artifact 11489390077",
+      "success": true
+    },
+    {
+      "check": "bounded artifact 11489335083",
+      "success": true
+    },
+    {
+      "check": "bounded artifact 11488840002",
+      "success": true
+    },
+    {
+      "check": "bounded artifact 11488625084",
+      "success": true
+    },
+    {
+      "check": "bounded artifact 11488390389",
+      "success": true
+    },
+    {
+      "check": "source raw-parts reconstructed exact original bytes",
+      "success": true
+    },
+    {
+      "check": "archive native-workbench-0.10.1-source.zip",
+      "success": true
+    },
+    {
+      "check": "archive native-workbench-0.10.1-starter-windows.zip",
+      "success": true
+    },
+    {
+      "check": "archive native-workbench-0.10.1-update-from-0.10.0.zip",
+      "success": true
+    },
+    {
+      "check": "candidate checksum inventory and contents",
+      "success": true
+    },
+    {
+      "check": "published 0.10.0 baseline bytes",
+      "success": true
+    },
+    {
+      "check": "native-workbench-0.10.1-source.zip CRC and unique member names",
+      "success": true
+    },
+    {
+      "check": "native-workbench-0.10.1-starter-windows.zip CRC and unique member names",
+      "success": true
+    },
+    {
+      "check": "native-workbench-0.10.1-update-from-0.10.0.zip CRC and unique member names",
+      "success": true
+    },
+    {
+      "check": "native-workbench-0.10.0-starter-windows.zip CRC and unique member names",
+      "success": true
+    },
+    {
+      "check": "all source inventory entries equal exact Git commit",
+      "success": true,
+      "detail": {
+        "verified": 590,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "source inventory covers all current members",
+      "success": true
+    },
+    {
+      "check": "source legacy archive hash",
+      "success": true
+    },
+    {
+      "check": "starter72 core entries verified",
+      "success": true,
+      "detail": {
+        "mismatches": []
+      }
+    },
+    {
+      "check": "published baseline72 core entries verified",
+      "success": true,
+      "detail": {
+        "mismatches": []
+      }
+    },
+    {
+      "check": "source pin and metadata agree",
+      "success": true
+    },
+    {
+      "check": "all143 starter pack files unchanged from published0.10.0",
+      "success": true,
+      "detail": {
+        "mismatches": []
+      }
+    },
+    {
+      "check": "unchanged workspace/catalog-sources.json",
+      "success": true
+    },
+    {
+      "check": "unchanged workspace/setup-profile.json",
+      "success": true
+    },
+    {
+      "check": "unchanged workspace/starter-check-profile.json",
+      "success": true
+    },
+    {
+      "check": "official production trust retained",
+      "success": true
+    },
+    {
+      "check": "native licences unchanged",
+      "success": true
+    },
+    {
+      "check": "updater complete inventory",
+      "success": true,
+      "detail": {
+        "verified": 52,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "exact updater base target manifests",
+      "success": true
+    },
+    {
+      "check": "six updater operations exactly equal changed core files",
+      "success": true,
+      "detail": [
+        "NativeWorkbench.exe",
+        "README.txt",
+        "SOURCE-AVAILABILITY.json",
+        "WorkbenchBridge.exe",
+        "workspace/app_version.py",
+        "workspace/pack_manager.py"
+      ]
+    },
+    {
+      "check": "no obsolete paths",
+      "success": true
+    },
+    {
+      "check": "every update replacement equals candidate starter",
+      "success": true,
+      "detail": {
+        "verified": 6,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "updater private runtime equals starter",
+      "success": true,
+      "detail": {
+        "files": 39
+      }
+    },
+    {
+      "check": "updater launcher matches provenance",
+      "success": true
+    },
+    {
+      "check": "update provenance bindings match actual files",
+      "success": true
+    }
+  ],
+  "failedChecks": [],
+  "scope": "Fresh GitHub transfer downloads, size/SHA/CRC verification, exact raw source reassembly, complete source correspondence and starter/updater inventory checks, and production trust/profile/starter-pack byte preservation against the published 0.10.0 baseline. No CI or repository mutations and no native execution."
+}
