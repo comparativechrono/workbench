@@ -11,6 +11,16 @@ an independent second download also passed all hashes/sizes, four ZIP CRCs
 and both checksum manifests.
 The updater in this release supports **0.10.0**.
 
+## Expandable tool library development, 2026-10-07
+
+The next **0.11.0 development candidate** replaces the category dropdown/flat
+tool list with native expandable category headings, while retaining standalone
+selection, search, compatible-output filtering and workflow drag-and-drop.
+Work is on `feature/expandable-tool-library`; packaged Windows validation is
+pending. This is not a new release. See the
+[feature handover](expandable-tool-library.md) for the design reference, scope
+and current evidence. Published 0.10.1 remains the download baseline.
+
 ## Tool Setup corrective patch, 0.10.1
 
 The patch keeps the package list enabled for inspection during installation,

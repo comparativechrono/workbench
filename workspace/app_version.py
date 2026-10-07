@@ -1,4 +1,4 @@
 """Application and distribution-contract versions, independent of tool packs."""
 
-APP_VERSION = "0.10.1"
+APP_VERSION = "0.11.0"
 PACK_API = 1

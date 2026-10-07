@@ -74,6 +74,7 @@ verified all 12 assets, five ZIP CRCs and three checksum manifests. See the
 [0.9.0 handover](cwl-dag-icon-0.9.0-handover.md) and [CWL feature guide](cwl-results.md).
 
 - [Tool Setup 0.10.1 patch handover](tool-setup-0.10.1-handover.md) — scrolling/repaint regression, download diagnostics and exact-candidate evidence; publication status is recorded there.
+- [Expandable tool library](expandable-tool-library.md) — 0.11.0 development candidate with native category browsing; validation and release status are recorded separately from 0.10.1.
 
 ## Reading order
 

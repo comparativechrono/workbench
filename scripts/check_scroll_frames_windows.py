@@ -255,20 +255,16 @@ def observe(root, evidence, report):
     ui = NativeUI(root, evidence)
     report["nativeWindowsExecuted"] = True
     try:
-        ui.wait("scroll gate tool library", lambda: ui.user.IsWindowEnabled(ui.child(410)) and ui.send(ui.child(104), 0x1004) > 0)
+        ui.wait("scroll gate tool library", lambda: ui.user.IsWindowEnabled(ui.child(410)) and len(ui.library().tools()) > 0)
         # This is the documented supported minimum height, not an undersized
         # artificial viewport; it makes the general-settings panel scrollable.
         ui.user.MoveWindow(ui.main, 0, 0, 1040, 680, True)
         report["dpi"] = ui.user.GetDpiForWindow(ui.main)
         report["windowBounds"] = ui.bounds(ui.main)
         ui.set_text(ui.child(102), "Paired-end alignment")
-        ui.wait("unique paired-end tool", lambda: ui.send(ui.child(104), 0x1004) == 1)
+        ui.wait("unique paired-end tool", lambda: len(ui.library().tools()) == 1)
         def click_row():
-            tasks = ui.child(104)
-            left, top, _, _ = ui.bounds(tasks)
-            header = ui.send(tasks, 0x101F)
-            row_y = ui.bounds(header)[3]+11 if header and ui.user.IsWindowVisible(header) else top+13
-            ui.click_at(left+70, row_y)
+            ui.click_at(*ui.library().first_tool_point())
         def form_ready():
             return any(c["class"].lower() == "edit" and c["text"] == "Paired-end alignment" for c in ui.controls(ui.child(118)))
         click_row()

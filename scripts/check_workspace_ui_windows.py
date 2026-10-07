@@ -29,6 +29,7 @@ import traceback
 # Application imports/execution still come exclusively from --app-root.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from check_references_windows import PrivateHost, require, sha256, stop_process_tree, write_json
+from native_tree import NativeTree
 
 
 class NativeUI:
@@ -184,6 +185,25 @@ class NativeUI:
             return True
         self.user.EnumChildWindows(owner, each, 0)
         return found[0] if found else None
+
+    def library(self):
+        if self.label(self.child(104), True) == "SysListView32":
+            # Retain the historical flat-library path only for exact published
+            # baseline diagnostics (e.g. the scroll-frame comparison).
+            ui = self
+            class LegacyLibrary:
+                def tools(self):
+                    return list(range(1, ui.send(ui.child(104), 0x1004) + 1))
+                def first_tool_point(self):
+                    require(len(self.tools()) == 1, "Expected one filtered baseline tool.")
+                    tasks = ui.child(104)
+                    left, top, right, _ = ui.bounds(tasks)
+                    scale = ui.user.GetDpiForWindow(ui.main) / 96
+                    header = ui.send(tasks, 0x101F)
+                    y = ui.bounds(header)[3] + round(11*scale) if header and ui.user.IsWindowVisible(header) else top + round(13*scale)
+                    return left + min(round(70*scale), (right-left)//2), y
+            return LegacyLibrary()
+        return NativeTree(self.user, self.send, self.process.pid, self.child(104))
 
     def bounds(self, hwnd):
         rect = wintypes.RECT()
@@ -541,7 +561,7 @@ def gui_contracts(root, evidence, report):
     captures, geometry = [], []
     try:
         ui.wait("installed native tool library", lambda:
-                ui.user.IsWindowEnabled(ui.child(410)) and ui.send(ui.child(104), 0x1004) > 0)
+                ui.user.IsWindowEnabled(ui.child(410)) and len(ui.library().tools()) > 0)
         ui.click_button(402)
         def manager_window():
             return next((h for h in ui.windows() if ui.label(h, True) == "WorkbenchPackManager060"), None)
@@ -569,14 +589,10 @@ def gui_contracts(root, evidence, report):
         def has_text(value):
             return any(c["text"] == value for c in edits())
         def first_tool_row():
-            tasks = ui.child(104)
-            left, top, right, _ = ui.bounds(tasks)
-            header = ui.send(tasks, 0x101F)  # LVM_GETHEADER, handle result only.
-            first_y = ui.bounds(header)[3] + round(11 * scale) if header and ui.user.IsWindowVisible(header) else top + round(13 * scale)
-            return left + min(round(70 * scale), (right-left)//2), first_y
+            return ui.library().first_tool_point()
         def select_tool(query, *, drag_to=None):
             ui.set_text(ui.child(102), query)
-            ui.wait("filter tool " + query, lambda: ui.send(ui.child(104), 0x1004) == 1)
+            ui.wait("filter tool " + query, lambda: len(ui.library().tools()) == 1)
             start = first_tool_row()
             if drag_to:
                 ui.drag(start, point(ui.child(117), *drag_to))
@@ -684,13 +700,13 @@ def gui_contracts(root, evidence, report):
                 ui.user.IsWindowVisible(ui.child(117)) and ui.user.IsWindowVisible(ui.child(105)))
         select_tool("Coordinate sort")
         ui.wait("select workflow library row without adding a tool", lambda:
-                ui.send(ui.child(104), 0x100C, ctypes.c_size_t(-1).value, 2) == 0)
+                ui.library().selected() == ui.library().tools()[0])
         require(not has_text("Coordinate sort"), "Workflow library selection unexpectedly added a node.")
         ui.click_button(410)
         ui.wait("return to empty standalone workspace with unchanged filter", lambda:
                 ui.user.IsWindowVisible(ui.child(118)) and not ui.user.IsWindowVisible(ui.child(117)))
         require(ui.label(ui.child(102)) == "Coordinate sort", "Switching modes unexpectedly cleared the library filter.")
-        require(ui.send(ui.child(104), 0x1004) == 1, "The selected library row disappeared after mode switch.")
+        require(len(ui.library().tools()) == 1, "The selected library row disappeared after mode switch.")
         ui.click_at(*first_tool_row())
         ui.wait("same library row opens standalone tool on first click", lambda: has_text("Coordinate sort"))
         captures.append(ui.capture("tools-after-workflow-library-selection.bmp"))
@@ -698,17 +714,19 @@ def gui_contracts(root, evidence, report):
         ui.wait("single click opens standalone reference indexing form", lambda: has_text("Index a reference"))
         # Separate native-control notification regression, not a physical drag
         # assertion: a refreshed list can have a hit row but no selected row.
-        # Exercise the ListView's real double-click handler without constructing
+        # Exercise the TreeView's real double-click handler without constructing
         # or injecting a foreign-process NMITEMACTIVATE pointer.
         ui.set_text(ui.child(102), "Coordinate sort")
         ui.wait("filter other tool for native double-click notification regression", lambda:
-                ui.send(ui.child(104), 0x1004) == 1)
-        require(ui.send(ui.child(104), 0x100C, ctypes.c_size_t(-1).value, 2) == ctypes.c_size_t(-1).value,
-                "Notification regression requires an unselected refreshed library row.")
+                len(ui.library().tools()) == 1)
+        # An unchanged filter may preserve selection; explicitly clear the native
+        # caret to retain this existing hit-row-without-selection regression.
+        ui.send(ui.child(104), 0x110B, 9, 0)  # TVM_SELECTITEM/TVGN_CARET.
+        require(not ui.library().selected(), "Notification regression requires an unselected library row.")
         tasks = ui.child(104)
         screen_x, screen_y = first_tool_row()
         origin = wintypes.POINT()
-        require(ui.user.ClientToScreen(tasks, ctypes.byref(origin)), "Could not locate the ListView client origin.")
+        require(ui.user.ClientToScreen(tasks, ctypes.byref(origin)), "Could not locate the TreeView client origin.")
         local_x, local_y = screen_x - origin.x, screen_y - origin.y
         pointer_coordinates = (local_x & 0xffff) | ((local_y & 0xffff) << 16)
         ui.mouse(screen_x, screen_y)
@@ -896,7 +914,7 @@ def gui_contracts(root, evidence, report):
                            "Actual mouse connection from an explicit input output socket to a tool input without duplicate file fields",
                            "Header hover close deletes a tool and Undo restores its selection",
                            "Header hover close deletes an explicit input and Undo restores its files"],
-                "notificationRegression": {"input": "Queued WM_LBUTTONDBLCLK and WM_LBUTTONUP to the real native ListView",
+                "notificationRegression": {"input": "Queued WM_LBUTTONDBLCLK and WM_LBUTTONUP to the real native TreeView",
                                            "scope": "Hit-row activation without prior selection; separate from the SendInput pointer and drag assertions."},
                 "limits": ["DPI coverage is only the actual reported monitor DPI; no simulated WM_DPICHANGED claim.",
                            "Physical trackpad pinch hardware is unavailable on this CI runner; the gesture implementation is not claimed as hardware-validated.",

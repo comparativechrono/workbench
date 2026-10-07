@@ -717,9 +717,13 @@ def gui_smoke(root, evidence):
     try:
         progress("wait for main window", pid=process.pid)
         main = find_window(process.pid, "Native Workbench")
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from native_tree import NativeTree
+        tasks = find_control(main, 104)
+        tree = NativeTree(user, send, process.pid, tasks) if text(tasks, True) == "SysTreeView32" else None
         wait_native_state("wait for native task library", lambda:
             user.IsWindowEnabled(find_control(main, 403))
-            and send(find_control(main, 104), 0x1004) > 0, main)
+            and (len(tree.tools()) > 0 if tree else send(tasks, 0x1004) > 0), main)
         # Reference binding in the three-pane desktop uses its standalone form.
         # The workspace gate separately tests explicitly created reusable inputs.
         # Legacy 0.7 has no mode button and retains its Add-task interaction.
@@ -733,12 +737,19 @@ def gui_smoke(root, evidence):
         send(find_control(main, 102), 0x000C, 0, ctypes.addressof(task_query))
         tasks = find_control(main, 104)
         wait_native_state("filter the native SAMtools reference indexing task", lambda:
-            send(tasks, 0x1004) == 1, main)
+            (len(tree.tools()) == 1 if tree else send(tasks, 0x1004) == 1), main)
         require(user.PostMessageW(tasks, 0x0100, 0x24, 1)
                 and user.PostMessageW(tasks, 0x0101, 0x24, 0xC0000001),
                 "Could not select the native reference indexing task.")  # VK_HOME
+        if tree:
+            # Search expands the category. Home focuses its heading; Down is
+            # actual keyboard navigation to the sole matching tool child.
+            require(user.PostMessageW(tasks, 0x0100, 0x28, 1)
+                    and user.PostMessageW(tasks, 0x0101, 0x28, 0xC0000001),
+                    "Could not navigate to the native reference indexing tool.")
         wait_native_state("select the native reference indexing task", lambda:
-            send(tasks, 0x100C, ctypes.c_size_t(-1).value, 2) == 0, main)
+            (tree.selected() == tree.tools()[0] if tree else
+             send(tasks, 0x100C, ctypes.c_size_t(-1).value, 2) == 0), main)
         if not standalone_button:
             wait_native_state("enable Add selected task", lambda:
                 user.IsWindowEnabled(find_control(main, 105)), main)
