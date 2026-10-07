@@ -3,7 +3,7 @@
   "document_kind": "project-knowledge-index",
   "project": "Native Workbench",
   "repository": "https://github.com/comparativechrono/workbench",
-  "reviewed_on": "2026-10-06",
+  "reviewed_on": "2026-10-07",
   "source_baseline_commit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
   "format": {
     "prose": "UTF-8 Markdown",
@@ -84,7 +84,9 @@
     "tool_setup_0_10_0_handover": "tool-setup-0.10.0-handover.md",
     "tool_setup_0_10_0_validation": "evidence/tool-setup-0.10.0-validation-2026-10-06.json",
     "tool_setup_0_10_0_artifact_audit": "evidence/tool-setup-0.10.0-artifact-audit-2026-10-06.json",
-    "tool_setup_0_10_0_full_state": "evidence/tool-setup-0.10.0-full-state-2026-10-06.json"
+    "tool_setup_0_10_0_full_state": "evidence/tool-setup-0.10.0-full-state-2026-10-06.json",
+    "catalogue_signing": "../publishing/catalogue-signing.md",
+    "catalogue_signing_evidence": "evidence/catalogue-signing-2026-10-07.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -1001,12 +1003,12 @@
     ]
   },
   "tool_setup_development": {
-    "recorded_on": "2026-10-06",
+    "recorded_on": "2026-10-07",
     "version": "0.10.0",
     "branch": "feature/native-tool-setup-0.10.0",
     "status": "in development; no release claim",
     "guide": "tool-setup.md",
-    "official_catalogue": "pending externally provisioned maintainer signing key and reviewed source configuration",
+    "official_catalogue": "protected workflow merged through PR #4; pending owner environment/key provisioning, production publication and reviewed source configuration",
     "published_baseline": "0.9.0"
   }
 }

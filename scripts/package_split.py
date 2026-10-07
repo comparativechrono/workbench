@@ -191,7 +191,7 @@ def _build_sources(base,output,legacy,original,contents,companions):
         if path.is_file():selected.append((path,'current/'+path.name,False))
     # The official setup release lock is public build metadata, not credentials.
     # Do not sweep the publishing directory, which may contain local staging.
-    for name in ('setup-assets.json','setup-catalogue.md','setup-catalogue.UNSIGNED.json'):
+    for name in ('setup-assets.json','setup-catalogue.md','setup-catalogue.UNSIGNED.json','catalogue-signing.md'):
         setup_metadata=SOURCE/'publishing'/name
         if setup_metadata.is_file():
             selected.append((setup_metadata,'current/publishing/'+name,False))

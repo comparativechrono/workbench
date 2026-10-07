@@ -7,7 +7,7 @@ open, diffable files with no proprietary reader or external memory service.
 "Knowledge base" describes this directory; it does not claim compliance with a
 separate standard called Open Knowledge Format.
 
-**Reviewed:** 2026-10-06. **Starting source baseline:**
+**Reviewed:** 2026-10-07. **Starting source baseline:**
 [`8f95caa1f267d19ce72ea3cd7f2396ae66a801c1`](https://github.com/comparativechrono/workbench/commit/8f95caa1f267d19ce72ea3cd7f2396ae66a801c1).
 This handover includes the 0.7 reference-discovery implementation and
 Kraken2/Bracken metagenomics after the annotation,
@@ -91,6 +91,7 @@ verified all 12 assets, five ZIP CRCs and three checksum manifests. See the
 | [Development](development.md) | How do I recover inputs, build, test and resume work? |
 | [Pack development](pack-development.md) | How do I add a real tool without rebuilding the app? |
 | [Validation and releases](validation-and-releases.md) | What establishes correctness, and how are artifacts published and trusted? |
+| [Catalogue signing](../publishing/catalogue-signing.md) | How does the protected official publisher work, and which one-time owner settings remain necessary? |
 | [Roadmap](roadmap.md) | What should be addressed next, and what would count as completion? |
 | [Project index](project.json) | Machine-readable entry points and stable constraints. |
 | [Release inventory](release-inventory.json) | Dated public versions, download assets, checksums and evidence pointers. |

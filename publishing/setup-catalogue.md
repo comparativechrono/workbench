@@ -1,5 +1,12 @@
 # Official setup catalogue preparation
 
+**Status, 2026-10-07:** the protected publishing workflow and concrete
+[owner setup guide](catalogue-signing.md) are merged into `main` through
+[PR #4](https://github.com/comparativechrono/workbench/pull/4). Owner environment
+and key provisioning remain unavailable to the agent and unverified. Application
+0.10.0 is unreleased; its recorded candidate still has an empty production source
+list, and its historical Windows results do not establish live official trust.
+
 The native Full/Starter/Custom setup keeps independently versioned packs. Its
 reviewed selection is `workspace/setup-profile.json`; that file supplies labels,
 estimates and exact pack pins, **not publisher trust**. The corresponding
@@ -58,6 +65,14 @@ production feed, a source definition, or a replacement for catalogue signatures.
 
 ## Production trust remains a maintainer prerequisite
 
+Use the [protected signing guide](catalogue-signing.md) for the current automated
+workflow. The owner must configure environment `catalogue-production`, secret
+`WORKBENCH_CATALOGUE_RSA_PRIVATE_KEY` and the independently reviewed public
+variable `WORKBENCH_CATALOGUE_KEY_FINGERPRINT`. The workflow's presence does not
+create those protections or credentials. No production key was generated or
+provisioned during this work. The direct command below remains the underlying
+publisher interface for a maintainer-controlled external signing process.
+
 The preparation command never generates, reads or uses a signing key. The
 documented publisher requires an existing maintainer-controlled RSA key outside
 the checkout and output directory (2048–4096 bits, exponent 65537). Do not use a
@@ -101,18 +116,27 @@ the install mechanism, but it cannot pass steps 1–4 for production trust or
 establish that the official source is available. The bundled production source
 list remains empty until the real source has been reviewed and deployed.
 
-## Observed readiness, 2026-10-06
+## Observed readiness, 2026-10-07
 
 Initial GitHub inspection before implementation found `main` at
 `1abd62b49acc841502c9714d12a2470b7e48f8d6`, no open pull requests and no
-`catalogue` branch. The source configuration is `[]`; no documented key locator,
-catalogue-signing workflow secret reference, or catalogue-related environment
-configuration was available in this session. No key file was searched for or
-read. The GitHub connector excludes secrets APIs, so secret names/provisioning
-could not be inspected: that is **unknown**, not evidence that no GitHub secret
-exists. A maintainer-provisioned key or the resulting reviewed signed documents
-is the remaining production trust input. See the dated preparation evidence for
-completed acquisition checks; this page is not a live deployment registry.
+`catalogue` branch. At that 2026-10-06 checkpoint, no documented key locator,
+catalogue-signing workflow secret reference or environment configuration was
+available. The source configuration remains `[]`. No production key file was
+searched for or read. The GitHub connector cannot administer environments or
+secrets, so owner provisioning remains **unknown**, not evidence that no GitHub
+secret exists. See the dated preparation evidence for completed acquisition
+checks; this page is not a live deployment registry.
+
+The infrastructure source in PR #4 is
+`6e973db73953a5ef1f7d221a79ce94887f2fb366`.
+[CI run 37583926483](https://github.com/comparativechrono/workbench/actions/runs/37583926483)
+passed 56 source tests (14 signing, 25 deployment, 11 publication and six
+preparation), with no failures or skips. These cover isolated test signing and
+mocked publication/download transports. They do not establish a
+provisioned production environment, published catalogue or application release.
+The owner guide is the concrete next step; once provisioning is confirmed, the
+manual workflow can publish and verify the real signed documents.
 
 Implementation is now retained in [draft PR #3](https://github.com/comparativechrono/workbench/pull/3).
 The exact 0.10.0 candidate passed native setup and 0.9.0 upgrade checks in both

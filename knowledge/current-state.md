@@ -1,6 +1,6 @@
 # Current project state
 
-Snapshot: **2026-10-06**. Application **0.9.0** is published as a development
+Snapshot: **2026-10-07**. Application **0.9.0** is published as a development
 prerelease at [app-v0.9.0](https://github.com/comparativechrono/workbench/releases/tag/app-v0.9.0).
 Release **405123004** was published at **2026-10-06T20:39:35Z**. Its tag and
 [PR #2](https://github.com/comparativechrono/workbench/pull/2) merge point to
@@ -14,7 +14,7 @@ Read this alongside the [release inventory](release-inventory.json) and
 [release handover](cwl-dag-icon-0.9.0-handover.md). Earlier versions and their
 evidence remain unchanged.
 
-## Tool setup development, 0.10.0, 2026-10-06
+## Tool setup development, 0.10.0, 2026-10-07
 
 The user approved Full (recommended), Starter and Custom setup over the existing
 pack manager. Application **0.10.0 is in development, not released**. The native
@@ -32,16 +32,41 @@ successful same-archive rerun remain recorded in the
 [0.10.0 handover](tool-setup-0.10.0-handover.md) and
 [validation evidence](evidence/tool-setup-0.10.0-validation-2026-10-06.json).
 
-Official online setup is **pending deployment**: no maintainer-controlled
-external signing process/key location or independently reviewed official source
-configuration was available. GitHub secret provisioning is unknown. The checked-in
-source list remains empty; no test key or unsigned catalogue is substituted.
+Official online setup is **pending deployment**. The protected publishing
+workflow is now merged into `main`; owner environment/key provisioning remains
+unverified and no independently reviewed official source has been deployed.
+The checked-in source list remains empty; no test key or unsigned catalogue is
+substituted.
 Publishing preparation fully verified all 32 archives and can consume the
 maintainer's external key when provisioned. The resulting reviewed signed source
 must be bundled into a new candidate and pass live production setup before
 release. [Draft PR #3](https://github.com/comparativechrono/workbench/pull/3)
 retains implementation and evidence; published 0.9.0 and existing pack bytes
 remain unchanged.
+
+## Catalogue signing infrastructure, 2026-10-07
+
+The protected manual signing/publication infrastructure was merged into `main`
+at `9f82aa5d1d9a0a372fc0492b7dff448694af8813` through
+[PR #4](https://github.com/comparativechrono/workbench/pull/4). It passed **56 source
+checks, zero failures/errors/skips**, in
+[run 37583926483](https://github.com/comparativechrono/workbench/actions/runs/37583926483).
+The [dated evidence](evidence/catalogue-signing-2026-10-07.json) records exact
+source identities, test-only signing, mocked publication, and the corrected
+historical pack-identity bug and local integration setup errors. These checks
+validate signing cleanup, identity binding and publication safeguards; they do
+not establish a live production catalogue.
+
+The [one-time owner setup guide](../publishing/catalogue-signing.md) is ready.
+Environment protections and secret provisioning require owner access unavailable
+through the development connector; their configuration remains unverified.
+No production key has been created, installed or used here. The application
+source list remains empty, the published 0.9.0 runtime is unchanged, and application
+[PR #3](https://github.com/comparativechrono/workbench/pull/3) remains separate.
+There was no new Windows validation or application release in this infrastructure
+gate. After owner provisioning, publish and verify the official catalogue, bundle
+its reviewed public source, and validate a new exact 0.10.0 Windows candidate
+before releasing it.
 
 ## Published CWL results, DAG routing and icon, 2026-10-06
 

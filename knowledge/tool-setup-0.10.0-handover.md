@@ -1,10 +1,17 @@
 # Native tool setup 0.10.0 handover
 
-Snapshot: **2026-10-06**. Implementation and candidate validation are in
+Snapshot: **2026-10-07**. Implementation and candidate validation are in
 [draft PR #3](https://github.com/comparativechrono/workbench/pull/3).
 **0.10.0 is not released.** Published 0.9.0 and all existing pack releases remain
 unchanged. The implementation offers native Full (recommended), Starter and
 Custom setup while retaining independent packs and Manage tools.
+
+The protected catalogue publishing workflow and
+[owner setup guide](../publishing/catalogue-signing.md) are merged into `main` through
+[PR #4](https://github.com/comparativechrono/workbench/pull/4). Its source-only
+checks passed; owner environment/key provisioning and production publication
+remain unverified. This infrastructure work does not change or rebuild the
+empty-trust application candidate recorded below.
 
 ## Exact candidate and checks
 
@@ -84,18 +91,33 @@ for the 29 packs missing from Starter. Exact pins, licensing and source companio
 remain unchanged. The [preparation record](evidence/setup-catalogue-preparation-2026-10-06.json)
 and [publishing instructions](../publishing/setup-catalogue.md) supply the inputs.
 
-The production source list remains `[]`. No maintainer-controlled catalogue
-signing process/key location or reviewed signed public source was available.
-GitHub secret provisioning is **unknown**, because the connector excludes secrets
-APIs. No private key was searched for, generated or substituted. Repository
+The production source list remains `[]`. No reviewed signed public source or
+usable production signing configuration was available during this work.
+GitHub environment/key provisioning is **unknown**, because the connector cannot
+administer environments or secrets. No production private key was searched for,
+generated or substituted. Repository
 instructions in `docs/catalogue-publishing-0.6.md` require an externally
 provisioned maintainer key and reviewed public trust; the public test key used in
 isolated fixtures cannot satisfy that requirement.
 
-The maintainer must provide access through their protected signing process, or
-the resulting signed `catalogue.json` and public `source.json` plus a reviewed
-public fingerprint. Private keys must not be put in chat, Git or release assets.
-Then publish the signed catalogue at the planned URL, verify it anonymously,
+The 2026-10-07 infrastructure change in
+[PR #4](https://github.com/comparativechrono/workbench/pull/4), source
+`6e973db73953a5ef1f7d221a79ce94887f2fb366`, adds a protected manual signing and
+publication workflow and concrete [owner instructions](../publishing/catalogue-signing.md).
+[CI run 37583926483](https://github.com/comparativechrono/workbench/actions/runs/37583926483)
+passed **56 source tests**: 14 signing, 25 deployment, 11 existing publication and
+six preparation tests, with no failures or skips. These cover isolated test
+signing and mocked publication/download transports; they establish no
+production key provisioning, live catalogue publication or Windows application
+result. The historical native results above remain unchanged.
+
+The owner must configure the protected GitHub environment
+`catalogue-production`, its secret `WORKBENCH_CATALOGUE_RSA_PRIVATE_KEY` and
+independently reviewed public variable `WORKBENCH_CATALOGUE_KEY_FINGERPRINT`,
+following the guide. This administrative setup remains unavailable to the agent
+and unverified. Private keys must not be put in chat, Git or release assets.
+After provisioning, run the workflow from reviewed `main` to publish the signed
+catalogue at the planned URL and verify it anonymously. Then
 bundle the reviewed source and build a **new candidate**. The current empty-trust
 archive cannot simply be announced as a working Full installer. Run the native
 live production setup gate on the newly configured bytes, repeat affected GUI and

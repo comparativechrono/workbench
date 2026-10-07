@@ -4,8 +4,12 @@
 2026-10-06. Published 0.9.0 and all existing pack releases remain unchanged.
 The current exact candidate passed the native checks recorded in the
 [0.10.0 handover](tool-setup-0.10.0-handover.md). Official online setup is pending
-a maintainer-controlled signing process, reviewed source configuration and a new
-candidate validated against that deployed production trust.
+owner provisioning of the protected signing environment, reviewed source
+configuration and a new candidate validated against that deployed production
+trust. As of **2026-10-07**, the publishing workflow and concrete
+[owner guide](../publishing/catalogue-signing.md) are merged into `main` through
+[PR #4](https://github.com/comparativechrono/workbench/pull/4); production setup
+and publication remain unverified.
 
 ## Installing tools
 
@@ -70,17 +74,28 @@ reviewed entry in the application's `workspace/catalog-sources.json`, with ID
 `native-workbench-official`; a user-imported source merely using the same ID is
 insufficient to become the recommended setup source.
 
-The production source list currently remains **empty**. No real catalogue key or
-reviewed signed source document was available during this implementation.
+The production source list currently remains **empty**. No usable production
+signing configuration or reviewed signed source document was available during
+this implementation. The protected workflow's source checks passed at
+`6e973db73953a5ef1f7d221a79ce94887f2fb366` in
+[run 37583926483](https://github.com/comparativechrono/workbench/actions/runs/37583926483):
+56 source tests, no failures or skips. Those isolated tests do not establish
+owner environment/key provisioning, a live official catalogue or new native
+application validation.
 Starter and offline imports work without it; Full and Custom cannot fetch
 missing packs until the official source is deployed. A fixture catalogue can
 exercise the mechanism, but cannot establish official production trust.
 
-Follow [catalogue preparation](../publishing/setup-catalogue.md) to retrieve and
-fully verify the immutable archives, prepare a release map, use the established
-publisher with the maintainer's external RSA key, publish the signed documents,
-review the public fingerprint and bundle the reviewed source. Private keys must
-stay outside the checkout and public outputs. The application must then be
+Follow the [owner signing guide](../publishing/catalogue-signing.md) to provision
+the protected `catalogue-production` environment with secret
+`WORKBENCH_CATALOGUE_RSA_PRIVATE_KEY` and public variable
+`WORKBENCH_CATALOGUE_KEY_FINGERPRINT`. That administrative setup remains
+unavailable to the agent and unverified. The manual workflow then uses
+[catalogue preparation](../publishing/setup-catalogue.md) to retrieve and fully
+verify the immutable archives, signs with the reviewed key, publishes the public
+documents and verifies their anonymous downloads. Private keys must stay outside
+the checkout and public outputs. Bundle the reviewed public source; the
+application must then be
 rebuilt and validated against those exact production trust bytes before release.
 Existing independent pack/source releases remain the download authorities.
 
@@ -97,8 +112,10 @@ browser, listening HTTP server, administrator requirement or system Python.
 `package_split.py` includes the setup module and profile in the core inventory.
 It still bundles exactly the same three Starter packs, outside core ownership.
 The source companion includes the setup code, knowledge pages, workflows and
-only the curated public setup metadata from `publishing/`; that directory is
-not swept for local signing/staging material.
+only the curated public setup metadata and `catalogue-signing.md` owner guide
+from `publishing/`; that directory is not swept for local signing/staging
+material. Adding the guide affects future source companions only; the recorded
+candidate archives remain unchanged.
 
 `scripts/build_update_0100.py` creates the app-only 0.9.0-to-0.10.0 updater from
 one exact starter ZIP and native updater launcher. The published baseline is
