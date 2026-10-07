@@ -1,0 +1,260 @@
+{
+  "schema": 1,
+  "date": "2026-10-07",
+  "runId": 37621511575,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37621511575",
+  "preparationCommit": "f613137da9bb968a897eb736d06cc8c5e25fa008",
+  "workflowJob": "verify-candidate",
+  "conclusion": "success",
+  "promoteJob": "intentionally skipped on read-only verification branch",
+  "artifact": {
+    "id": 11482417302,
+    "bytes": 3913,
+    "sha256": "2f4cdb7ca0365defca7bbbd5fa5da363b1f2b5e038044956a2d184d1054fcd89",
+    "zipCrc": "passed"
+  },
+  "receipt": {
+    "success": true,
+    "phase": "candidate-preparation",
+    "remoteMutations": false,
+    "publicationCommit": null,
+    "verificationCommit": "f613137da9bb968a897eb736d06cc8c5e25fa008",
+    "packagedSourceCommit": "5a390acd8440856e3f4e32de237322a18bb82d7e",
+    "acceptedRunId": 37618824677,
+    "productionPublisherFingerprint": "8d2093f9fafd71de56fea2038faeb2efa0964767d3235430b06428132cdc8505",
+    "productionTrustValidated": true,
+    "preparedAssets": 10,
+    "validationSha256": "f63b8aecda519a62a7283f8611cef8e180dcd0f095acdb9e12deaafbb12ff144",
+    "publicDownloads": [],
+    "releasePublished": false
+  },
+  "releaseValidation": {
+    "schema": 1,
+    "version": "0.10.0",
+    "releaseTag": "app-v0.10.0",
+    "packagedSourceCommit": "5a390acd8440856e3f4e32de237322a18bb82d7e",
+    "publicationCommit": "f613137da9bb968a897eb736d06cc8c5e25fa008",
+    "recordedUtc": "2026-10-07T12:31:06.819597+00:00",
+    "acceptedApplicationArchivesRebuilt": false,
+    "acceptedRunId": 37618824677,
+    "productionPublisherFingerprint": "8d2093f9fafd71de56fea2038faeb2efa0964767d3235430b06428132cdc8505",
+    "productionTrustValidated": true,
+    "acceptedArtifacts": {
+      "candidate": {
+        "id": 11481160484,
+        "file": "candidate.zip",
+        "bytes": 76140018,
+        "sha256": "e6eface1a38dbc94959579d7f14b201a7c5d346c386750bf85731372f7d7146c",
+        "name": "setup-candidate-5a390acd8440856e3f4e32de237322a18bb82d7e"
+      },
+      "ordinary": {
+        "id": 11481740266,
+        "file": "ordinary.zip",
+        "bytes": 7773249,
+        "sha256": "bf0d9ae45f70f267c811d71d3d017347ceef434eb1ffb207067630b966fa73c1",
+        "name": "setup-windows-ordinary-1"
+      },
+      "spaces": {
+        "id": 11480724149,
+        "file": "spaces.zip",
+        "bytes": 7773518,
+        "sha256": "1e337d10a0084fda96642fdb9a05b89d2cdd1eb150ef4d1ac3e3758c30c36a4e",
+        "name": "setup-windows-path with spaces-1"
+      },
+      "full-fixture": {
+        "id": 11481438468,
+        "file": "full-fixture.zip",
+        "bytes": 479917,
+        "sha256": "fc71719153d7f9b3b481893e5438d559c7832cebb61922bf6cf2a6704b1d6f53",
+        "name": "setup-full-coexistence-5a390acd8440856e3f4e32de237322a18bb82d7e-1"
+      },
+      "production-ordinary": {
+        "id": 11481102972,
+        "file": "production-ordinary.zip",
+        "bytes": 467439,
+        "sha256": "bffa519e896f9a0611eca8fa295f51f6a4b6423b87995751bff6c0e3ac7d9d3a",
+        "name": "setup-production-full-ordinary-5a390acd8440856e3f4e32de237322a18bb82d7e-1"
+      },
+      "production-spaces": {
+        "id": 11481568237,
+        "file": "production-spaces.zip",
+        "bytes": 467516,
+        "sha256": "5eebcadb8481d638a42cfc120bc25ae44ed61d4f467c163e3eec7be653eb4fe4",
+        "name": "setup-production-full-path with spaces-5a390acd8440856e3f4e32de237322a18bb82d7e-1"
+      }
+    },
+    "nativeReports": {
+      "ordinary-setup": {
+        "path": "setup-evidence/native-setup.json",
+        "sha256": "9677d09f0a8af85a6cc11c5e8f5430978b0016bca61080075261c80c88737990",
+        "passed": 13,
+        "skips": [],
+        "unrun": [
+          "Production signed catalogue refresh and clean-client Full installation are not exercised by test-only trust fixtures."
+        ],
+        "success": true
+      },
+      "ordinary-workspace": {
+        "path": "workspace-evidence/native-ui.json",
+        "sha256": "4ebfbe0e415c956a948cc07a4d94e16f1bce9db82a5deb05c08b33f27ba97f15",
+        "passed": 32,
+        "skips": [],
+        "unrun": [],
+        "success": true
+      },
+      "ordinary-references": {
+        "path": "references-evidence/native-references.json",
+        "sha256": "0612724696f13b9a24d74b04559e0b670e79947705c3d4bacdce7afc2c79b31f",
+        "passed": 8,
+        "skips": [
+          "Optional native core updater gate was not requested."
+        ],
+        "unrun": [],
+        "success": true
+      },
+      "ordinary-results": {
+        "path": "results-evidence/native-results.json",
+        "sha256": "58c23a012b853df1bd5ee1d5524577b53308b126c44425b4166bef1bbf57ff0a",
+        "passed": 9,
+        "skips": [],
+        "unrun": [],
+        "success": true
+      },
+      "ordinary-update": {
+        "path": "update-evidence/native-update.json",
+        "sha256": "5a382b01478b8a4c6066b66ab292e0480e67cb80ad002fde1c6f9f010e369e8d",
+        "passed": 13,
+        "skips": [],
+        "unrun": [],
+        "success": true
+      },
+      "spaces-setup": {
+        "path": "setup-evidence/native-setup.json",
+        "sha256": "8a6fe2c23a95a0bc1889aded66ad1e806e2de0dae6f8c72a42f20889ba787106",
+        "passed": 13,
+        "skips": [],
+        "unrun": [
+          "Production signed catalogue refresh and clean-client Full installation are not exercised by test-only trust fixtures."
+        ],
+        "success": true
+      },
+      "spaces-workspace": {
+        "path": "workspace-evidence/native-ui.json",
+        "sha256": "75ac154a964049e10d5967e47d223680708d42a56aeb7540a84c44870f214c3a",
+        "passed": 32,
+        "skips": [],
+        "unrun": [],
+        "success": true
+      },
+      "spaces-references": {
+        "path": "references-evidence/native-references.json",
+        "sha256": "4286d6e626d2826a2509e4bf2a9f1c0cd594e98ba76691f881076a1295c50afc",
+        "passed": 8,
+        "skips": [
+          "Optional native core updater gate was not requested."
+        ],
+        "unrun": [],
+        "success": true
+      },
+      "spaces-results": {
+        "path": "results-evidence/native-results.json",
+        "sha256": "51c75758eae2fcff177e9e3e427e50d31c20969d9e711f4b45efad2543b62f89",
+        "passed": 9,
+        "skips": [],
+        "unrun": [],
+        "success": true
+      },
+      "spaces-update": {
+        "path": "update-evidence/native-update.json",
+        "sha256": "fbeea85dbc19f1d8a1e25dff58ee18184047b5389ede263a8d855a4aaf3466f7",
+        "passed": 13,
+        "skips": [],
+        "unrun": [],
+        "success": true
+      },
+      "production-ordinary": {
+        "path": "native-production-full.json",
+        "sha256": "6b2f8bc7799c0c9253fb7ef87e52e108da1f64fa15ab578d51855650402d9e93",
+        "passed": 4,
+        "skips": [],
+        "unrun": [],
+        "success": true
+      },
+      "production-spaces": {
+        "path": "native-production-full.json",
+        "sha256": "b5a6e18ac701d98a9edd43b2830df3c2aee89ce898be2ccd4e11e6d17140b603",
+        "passed": 4,
+        "skips": [],
+        "unrun": [],
+        "success": true
+      },
+      "full-fixture": {
+        "path": "native-full.json",
+        "sha256": "b95936e2332e22bd6b0f1099072008ff9b242137c9d47337191f6bcd4b061d33",
+        "passed": 4,
+        "skips": [],
+        "unrun": [
+          "Production signed catalogue refresh and clean-client Full installation are not exercised by test-only trust fixtures."
+        ],
+        "success": true
+      }
+    },
+    "scope": "Exact new production-trust candidate, ordinary and space-containing native paths, live official Full setup and 0.9.0 migration. No rebuild during publication.",
+    "limits": [
+      "Full setup validates installation/coexistence of all 32 packs and starter scientific truth; it does not rerun every optional pack scientific fixture.",
+      "Offline checks deny Python host socket operations; native subprocesses are not OS-firewalled.",
+      "Physical trackpad, broad high-DPI/multi-monitor deployment and institutional proxies are not validated by these hosted Windows gates.",
+      "Only the published 0.9.0 baseline has an updater in this release.",
+      "Historical test-trust and failed validator evidence remains historical; it does not supply production acceptance."
+    ],
+    "originalCompanions": "All seven original candidate members retain their creation-time bytes and statements. This later validation records final publication readiness.",
+    "assets": [
+      {
+        "file": "BUILD-PROVENANCE.json",
+        "bytes": 1011,
+        "sha256": "9479521ee4d0f1e951f2c18575b4d3bc44acd15d4675a9d75b899421f981ae98"
+      },
+      {
+        "file": "BUILD-UPDATE-PROVENANCE.json",
+        "bytes": 2151,
+        "sha256": "45b1b50b73a82c03aea2586f44c72d230060ec46a451b3ecda10006a5a2586c6"
+      },
+      {
+        "file": "SHA256SUMS.txt",
+        "bytes": 323,
+        "sha256": "2802017a62147ae0975a18490d0379798ddc93c0cca14c672cec9b1b0df953bd"
+      },
+      {
+        "file": "WINDOWS-EVIDENCE.zip",
+        "bytes": 16366037,
+        "sha256": "ba5ee053ee03ccc260f66495fce103cb35e91081136ef308891bc02f5dfccc07"
+      },
+      {
+        "file": "native-workbench-0.10.0-source.zip",
+        "bytes": 46740582,
+        "sha256": "918adabf39c0f0cbd551b2a30d523f72135be67fe4232a9c8c54ffa6e611133b"
+      },
+      {
+        "file": "native-workbench-0.10.0-starter-windows.zip",
+        "bytes": 17028340,
+        "sha256": "659a08911cec65b8dc1ce0dd9f47fea25350a39b619c7f0aea663bae71a871ae"
+      },
+      {
+        "file": "native-workbench-0.10.0-update-from-0.9.0.zip",
+        "bytes": 12880361,
+        "sha256": "63d96f514711d0604b6fbfe940a38bfad73900285ec13e75f95397f0d012eacf"
+      },
+      {
+        "file": "source-metadata.json",
+        "bytes": 1764,
+        "sha256": "056db0472222514182f5fcf2e27c5e5d1a0ef46b50a7592a9b312a372c05b41b"
+      }
+    ]
+  },
+  "applicationReleasePublished": false,
+  "guardTests": {
+    "passed": 23,
+    "failed": 0,
+    "skipped": 0
+  }
+}
