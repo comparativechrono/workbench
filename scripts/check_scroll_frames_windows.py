@@ -267,6 +267,7 @@ def observe(root, evidence, report):
     expect_setup = has_profile and not dismissed and not previous_records
     ui = NativeUI(root, evidence)
     report["nativeWindowsExecuted"] = True
+    observation_failed = False
     try:
         ui.wait("scroll gate tool library", lambda: ui.user.IsWindowEnabled(ui.child(410)) and len(ui.library().tools()) > 0)
         def setup_window():
@@ -284,6 +285,10 @@ def observe(root, evidence, report):
             ui.click_at((left+right)//2, (top+bottom)//2)
             ui.wait("scroll fixture Tool Setup dismissed", lambda: not setup_window())
             ui.user.SetForegroundWindow(ui.main)
+        # Closing the setup window sends an asynchronous setup/dismiss request.
+        # Its window disappears before the host reply re-enables main controls.
+        ui.wait("scroll fixture search and library enabled after setup", lambda:
+                ui.user.IsWindowEnabled(ui.child(102)) and ui.user.IsWindowEnabled(ui.child(104)))
         # This is the documented supported minimum height, not an undersized
         # artificial viewport; it makes the general-settings panel scrollable.
         ui.user.MoveWindow(ui.main, 0, 0, 1040, 680, True)
@@ -304,16 +309,29 @@ def observe(root, evidence, report):
         ui.user.GetParent.restype = wintypes.HWND
         temporal_panel(ui, ui.user.GetParent(ui.child(413)), "general-settings", evidence, report["panels"])
         ui.click_button(411)
-        ui.wait("workflow mode", lambda: ui.user.IsWindowVisible(ui.child(105)))
+        ui.wait("workflow mode", lambda: ui.user.IsWindowVisible(ui.child(105)) and
+                ui.user.IsWindowEnabled(ui.child(102)) and ui.user.IsWindowEnabled(ui.child(104)))
         click_row()
         ui.click_button(105)
         ui.wait("workflow alignment inspector", form_ready)
         temporal_panel(ui, ui.child(118), "workflow-options", evidence, report["panels"])
-    except Exception:
-        report["failureWindows"] = [{"class": ui.label(h, True), "title": ui.label(h)} for h in ui.windows()]
+    except Exception as exc:
+        observation_failed = True
+        report["observationError"] = str(exc)
+        try:
+            report["failureWindows"] = [{"class": ui.label(h, True), "title": ui.label(h)} for h in ui.windows()]
+        except Exception as diagnostic:
+            report["failureWindowDiagnosticError"] = str(diagnostic)
         raise
     finally:
-        ui.close()
+        try:
+            ui.close()
+        except Exception as cleanup:
+            # Keep the first failed assertion/action as the gate's error. The
+            # close helper still terminates its process tree in its own finally.
+            report["cleanupError"] = str(cleanup)
+            if not observation_failed:
+                raise
 
 
 def main():

@@ -730,16 +730,22 @@ def gui_smoke(root, evidence):
         # The workspace gate separately tests explicitly created reusable inputs.
         # Legacy 0.7 has no mode button and retains its Add-task interaction.
         standalone_button = find_control(main, 410)
-        if standalone_button:
+        if standalone_button and user.IsWindowVisible(find_control(main, 105)):
+            # Do not queue a redundant mode request when Tools is already
+            # active. Its old hidden-Add predicate was true before that request
+            # completed, allowing synthetic keys to select a tool while busy.
             require(user.PostMessageW(standalone_button, 0x00F5, 0, 0),
                     "Could not enter native standalone mode.")
             wait_native_state("open native standalone editor", lambda:
-                not user.IsWindowVisible(find_control(main, 105)), main)
+                not user.IsWindowVisible(find_control(main, 105))
+                and user.IsWindowEnabled(find_control(main, 102))
+                and user.IsWindowEnabled(tasks), main)
         task_query = ctypes.create_unicode_buffer("Index a reference")
         send(find_control(main, 102), 0x000C, 0, ctypes.addressof(task_query))
         tasks = find_control(main, 104)
         wait_native_state("filter the native SAMtools reference indexing task", lambda:
-            (len(tree.tools()) == 1 if tree else send(tasks, 0x1004) == 1), main)
+            user.IsWindowEnabled(tasks) and user.IsWindowEnabled(find_control(main, 102))
+            and (len(tree.tools()) == 1 if tree else send(tasks, 0x1004) == 1), main)
         require(user.PostMessageW(tasks, 0x0100, 0x24, 1)
                 and user.PostMessageW(tasks, 0x0101, 0x24, 0xC0000001),
                 "Could not select the native reference indexing task.")  # VK_HOME
