@@ -103,10 +103,73 @@ jobs:
           Path('candidate/BUILD-PROVENANCE.json').write_text(json.dumps({'schema':1,'status':'development candidate; production catalogue deployment is a separate gate','sourceCommit':os.environ['GITHUB_SHA'],'platform':platform.platform(),'compiler':'LLVM-MinGW 20260922 UCRT','compilerArchiveSha256':'bb7bb7654b33d5aa8712acb837c963b2e0c56352560c76105270a3268c665c21','nativeWindowsExecutedByBuilder':False,'productionCatalogueConfigured':any(s['id']=='native-workbench-official' for s in trust),'archives':rows},indent=2)+'\n')
           Path('candidate/SHA256SUMS.txt').write_text(''.join(r['sha256']+'  '+r['file']+'\n' for r in rows))
           PY
+      - name: Prepare bounded transport without changing the frozen archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,json,shutil
+          from pathlib import Path
+          root=Path('candidate')
+          for edition,name in [('starter','native-workbench-0.10.0-starter-windows.zip'),('update','native-workbench-0.10.0-update-from-0.9.0.zip')]:
+            destination=Path('transfer')/edition
+            destination.mkdir(parents=True)
+            shutil.copyfile(root/name,destination/name)
+          source=root/'native-workbench-0.10.0-source.zip'
+          parts=[]
+          with source.open('rb') as stream:
+            while block:=stream.read(24*1024*1024):
+              number=len(parts)+1
+              folder=Path('transfer')/('source-part-'+str(number))
+              folder.mkdir(parents=True)
+              name=source.name+'.part'+str(number)
+              (folder/name).write_bytes(block)
+              parts.append({'file':name,'bytes':len(block),'sha256':hashlib.sha256(block).hexdigest()})
+          assert len(parts)==2, 'Expected two bounded source transport parts; adjust transport before accepting a larger candidate.'
+          metadata=Path('transfer/metadata');metadata.mkdir()
+          for name in ('BUILD-PROVENANCE.json','BUILD-UPDATE-PROVENANCE.json','source-metadata.json','SHA256SUMS.txt'):
+            shutil.copyfile(root/name,metadata/name)
+          record={'schema':1,'sourceArchive':{'file':source.name,'bytes':source.stat().st_size,'sha256':hashlib.sha256(source.read_bytes()).hexdigest()},'sourceTransportParts':parts,'sourceReassembly':'Concatenate part1 then part2 as raw bytes; verify original source SHA-256 before extraction.','archivesRebuilt':False}
+          (metadata/'TRANSPORT-VERIFICATION.json').write_text(json.dumps(record,indent=2)+'\n')
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: setup-candidate-${{ github.sha }}
           path: candidate
+          if-no-files-found: error
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: setup-transfer-starter-${{ github.sha }}
+          path: transfer/starter
+          compression-level: 0
+          if-no-files-found: error
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: setup-transfer-update-${{ github.sha }}
+          path: transfer/update
+          compression-level: 0
+          if-no-files-found: error
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: setup-transfer-source-part-1-${{ github.sha }}
+          path: transfer/source-part-1
+          compression-level: 0
+          if-no-files-found: error
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: setup-transfer-source-part-2-${{ github.sha }}
+          path: transfer/source-part-2
+          compression-level: 0
+          if-no-files-found: error
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: setup-transfer-metadata-${{ github.sha }}
+          path: transfer/metadata
           if-no-files-found: error
           retention-days: 30
 
@@ -260,10 +323,14 @@ jobs:
           retention-days: 30
 
   production-full:
-    if: github.event_name == 'workflow_dispatch' && inputs.production_full
+    if: github.event_name == 'push' || inputs.production_full
     needs: build
     runs-on: windows-2022
     timeout-minutes: 100
+    strategy:
+      fail-fast: false
+      matrix:
+        folder: [ordinary, 'path with spaces']
     steps:
       - uses: actions/checkout@v4
         with:
@@ -277,11 +344,12 @@ jobs:
         shell: pwsh
         env:
           ASSET_SHA256: ${{ needs.build.outputs.asset_sha256 }}
+          CASE_FOLDER: ${{ matrix.folder }}
         run: |
           $ErrorActionPreference = 'Stop'
           $starter = Join-Path $env:RUNNER_TEMP 'setup-candidate/native-workbench-0.10.0-starter-windows.zip'
           if ((Get-FileHash $starter -Algorithm SHA256).Hash -ne $env:ASSET_SHA256) { throw 'Candidate SHA-256 mismatch.' }
-          $destination = Join-Path $env:RUNNER_TEMP 'production Full'
+          $destination = Join-Path (Join-Path $env:RUNNER_TEMP 'production-full') $env:CASE_FOLDER
           Expand-Archive $starter $destination
           $app = Join-Path $destination 'native-workbench'
           & (Join-Path $app 'runtime/python/python.exe') -I scripts/check_setup_windows.py --app-root $app --report "$env:RUNNER_TEMP/production-full-evidence/native-production-full.json" --source-commit '${{ github.sha }}' --asset-sha256 $env:ASSET_SHA256 --production-full
@@ -289,7 +357,7 @@ jobs:
       - if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: setup-production-full-${{ github.sha }}-${{ github.run_attempt }}
+          name: setup-production-full-${{ matrix.folder }}-${{ github.sha }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/production-full-evidence
           if-no-files-found: error
           retention-days: 30

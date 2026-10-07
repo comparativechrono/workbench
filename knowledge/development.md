@@ -11,7 +11,10 @@ Read [architecture](architecture.md) before changing an unfamiliar layer.
 
 **Current development:** application 0.10.0 adds native Full/Starter/Custom tool setup.
 See [tool setup](tool-setup.md) for source, packaging and exact Windows gate commands.
-Official signed-catalogue deployment remains pending; this is not a released version.
+The official signed catalogue was published and independently verified on 2026-10-07;
+see [production evidence](evidence/catalogue-production-2026-10-07.json). Its public
+source is being bundled into a new candidate; exact Windows production setup and
+affected regression gates remain pending. Application 0.10.0 is not released.
 
 **Release scope, 2026-10-06:** application 0.9.0 is published from the exact
 accepted `beea34a` application candidate without rebuilding. The release tag

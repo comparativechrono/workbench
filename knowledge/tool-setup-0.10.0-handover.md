@@ -7,13 +7,16 @@ unchanged. The implementation offers native Full (recommended), Starter and
 Custom setup while retaining independent packs and Manage tools.
 
 The protected catalogue publishing workflow and
-[owner setup guide](../publishing/catalogue-signing.md) are merged into `main` through
-[PR #4](https://github.com/comparativechrono/workbench/pull/4). Its source-only
-checks passed; owner environment/key provisioning and production publication
-remain unverified. This infrastructure work does not change or rebuild the
-empty-trust application candidate recorded below.
+[owner setup guide](../publishing/catalogue-signing.md) were merged into `main`
+through [PR #4](https://github.com/comparativechrono/workbench/pull/4). The owner
+then configured the signing key/fingerprint and started the successful
+[production publication run](https://github.com/comparativechrono/workbench/actions/runs/37617540915).
+The signed 32-pack catalogue is published and independently verified. Its public
+source is being bundled into a **new Windows candidate**; those production
+setup and affected regression gates remain pending. The earlier empty-trust
+candidate and its results below retain their historical identities.
 
-## Exact candidate and checks
+## Earlier exact candidate and checks
 
 Application source is `8cee60655fe726e9d424ddf1b2874728235828ca`.
 [Candidate run 37537256084](https://github.com/comparativechrono/workbench/actions/runs/37537256084)
@@ -46,7 +49,7 @@ inferred from historical releases:
 | References, each Windows path | Eight passed: live pinned yeast discovery/downloads for all five products, compressed/expanded hashes, cancellation, native compatible selection, network-denied reuse and reference provenance in methods/CWL. The helper's optional updater was not requested; it is not counted as passed. |
 | Results/CWL/DAG/icon, each Windows path | Nine passed in the corrected gate, including independent execution of embedded CWL runners, known variant truth, native forward/backward connections and actual icon resources. |
 | 0.9.0 upgrade, each Windows path | 13 passed. All 72 target core files verified; 203 existing files preserved, including an optional pack, settings/pinned workflow, references and actual results. Repeat update and post-update offline scientific/CWL execution passed. |
-| All-pack Windows coexistence | Four passed after downloading the 29 missing real pack archives. All 32 exact pins installed; BED became a usable workflow input, all packs reopened with networking denied and offline analysis preserved 202 expected alignment/BAM records. Isolated test-only catalogue trust; this does not validate the unavailable official signed feed or every pack's scientific operation. |
+| All-pack Windows coexistence | Four passed after downloading the 29 missing real pack archives. All 32 exact pins installed; BED became a usable workflow input, all packs reopened with networking denied and offline analysis preserved 202 expected alignment/BAM records. Isolated test-only catalogue trust; this did not validate the then-unavailable official signed feed or every pack's scientific operation. |
 | Independent archive audit | Six grouped assertions passed: all archive hashes/sizes/CRCs, 72 core files, 558 source files matched to the candidate Git commit, 143 unchanged Starter pack files and 56 updater files including ten exact replacements. No Windows execution or independent executable rebuild is implied by this static audit. |
 
 Counts describe separate suites and include overlapping scientific checks; do not
@@ -83,47 +86,61 @@ bytes. The first failures remain evidence; the initial workflow is not relabelle
 as successful. One superseded verification run was cancelled after a final
 validator-readiness correction; the completed run above is the authoritative rerun.
 
-## Production release blocker and next action
+## Production catalogue and remaining release gate
 
-The reviewed 32-pack download set was fully acquired and statically verified:
-**3,799,806,535 bytes** across all archives, or **3,795,572,848 additional bytes**
-for the 29 packs missing from Starter. Exact pins, licensing and source companions
-remain unchanged. The [preparation record](evidence/setup-catalogue-preparation-2026-10-06.json)
-and [publishing instructions](../publishing/setup-catalogue.md) supply the inputs.
+The reviewed 32-pack download set is **3,799,806,535 bytes** across all archives,
+or **3,795,572,848 additional bytes** for the 29 packs missing from Starter.
+Published pins, licensing and source companions remain unchanged. The earlier
+[preparation record](evidence/setup-catalogue-preparation-2026-10-06.json) remains
+historical evidence; the production workflow freshly reacquired the same files.
 
-The production source list remains `[]`. No reviewed signed public source or
-usable production signing configuration was available during this work.
-GitHub environment/key provisioning is **unknown**, because the connector cannot
-administer environments or secrets. No production private key was searched for,
-generated or substituted. Repository
-instructions in `docs/catalogue-publishing-0.6.md` require an externally
-provisioned maintainer key and reviewed public trust; the public test key used in
-isolated fixtures cannot satisfy that requirement.
+The earlier candidate's source list was `[]` because no reviewed production
+source existed at its build time. Its fixture key was deliberately isolated and
+has not been promoted into production trust. Infrastructure
+[PR #4](https://github.com/comparativechrono/workbench/pull/4), reviewed source
+`6e973db73953a5ef1f7d221a79ce94887f2fb366`, passed **56 isolated source tests** in
+[run 37583926483](https://github.com/comparativechrono/workbench/actions/runs/37583926483).
+That source-only gate did not establish production publication or Windows
+application validation, and its historical scope remains unchanged.
 
-The 2026-10-07 infrastructure change in
-[PR #4](https://github.com/comparativechrono/workbench/pull/4), source
-`6e973db73953a5ef1f7d221a79ce94887f2fb366`, adds a protected manual signing and
-publication workflow and concrete [owner instructions](../publishing/catalogue-signing.md).
-[CI run 37583926483](https://github.com/comparativechrono/workbench/actions/runs/37583926483)
-passed **56 source tests**: 14 signing, 25 deployment, 11 existing publication and
-six preparation tests, with no failures or skips. These cover isolated test
-signing and mocked publication/download transports; they establish no
-production key provisioning, live catalogue publication or Windows application
-result. The historical native results above remain unchanged.
+The owner subsequently created the signing key locally on Windows, supplied its
+public fingerprint, configured GitHub and started
+[run 37617540915](https://github.com/comparativechrono/workbench/actions/runs/37617540915)
+on reviewed main commit `9f82aa5d1d9a0a372fc0492b7dff448694af8813`. Both jobs
+completed successfully. The run repeated **56 source tests with no failures or
+skips**, freshly downloaded and fully checked all 32 archives, signed the
+catalogue, and verified anonymous publication on the first attempt. This records
+the successful protected workflow use; administrative environment protection
+settings are not exposed to the connector for separate inspection. No private
+key was read by the agent or included in repository/public artifacts.
 
-The owner must configure the protected GitHub environment
-`catalogue-production`, its secret `WORKBENCH_CATALOGUE_RSA_PRIVATE_KEY` and
-independently reviewed public variable `WORKBENCH_CATALOGUE_KEY_FINGERPRINT`,
-following the guide. This administrative setup remains unavailable to the agent
-and unverified. Private keys must not be put in chat, Git or release assets.
-After provisioning, run the workflow from reviewed `main` to publish the signed
-catalogue at the planned URL and verify it anonymously. Then
-bundle the reviewed source and build a **new candidate**. The current empty-trust
-archive cannot simply be announced as a working Full installer. Run the native
-live production setup gate on the newly configured bytes, repeat affected GUI and
-upgrade gates, then use the established immutable-artifact release workflow and
-verify every public download. No production setup or release publication is
-counted as passed here.
+| Production identity | Value |
+| --- | --- |
+| Published at | `2026-10-07T11:58:34Z` |
+| Catalogue commit | `0048c4e3644aae7ed172d804fff0981982510e7b` |
+| Owner-confirmed public fingerprint | `8d2093f9fafd71de56fea2038faeb2efa0964767d3235430b06428132cdc8505` |
+| Signed catalogue SHA-256 | `bf4789075e1aaad3d4ef158f879fc3ff94a869985d6324b0e594f69a522a739d` |
+| Public source SHA-256 | `9f4ef018e03ea8a27251927fe59d4656b7619b227814497b4f66947269ee297b` |
+| Immutable history | `history/20261007T115834Z/` at the catalogue commit |
+
+The [independent production audit](evidence/catalogue-production-2026-10-07.json)
+verified nine anonymous documents: current catalogue/source/report, four
+commit-pinned history files, and exact source lock/profile. All document hashes
+and 32 pack pins agree with the run receipt and preparation evidence. Both the
+application verifier and an independent cryptography/OpenSSL implementation
+accepted the 3072-bit RSA signature and owner fingerprint. The catalogue Git
+tree contains exactly seven intended public JSON files; first publication has no
+previous catalogue history to compare. Two evidence ZIP hashes and CRCs were
+also checked. The separate audit did not redownload the multi-gigabyte archives;
+it reviewed this run's complete archive/member validation evidence.
+
+The reviewed public source is now being bundled into a **new candidate**.
+Validate its native live production Full setup against the published feed,
+repeat affected GUI/References/CWL and 0.9.0 upgrade gates, then promote the exact
+validated archives with the established immutable-artifact release workflow and
+verify every public download. The earlier empty-trust archive cannot simply be
+announced as a working Full installer. No new Windows candidate result or
+application release is counted as passed in this catalogue audit.
 
 Cancellation/retry retains completed packs; an unfinished archive restarts its
 download. Abrupt process termination can leave unowned staging directories, which

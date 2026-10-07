@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "auditedAt": "2026-10-07T12:01:51.605802+00:00",
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37617540915",
+  "runId": 37617540915,
+  "runAttempt": 1,
+  "sourceCommit": "9f82aa5d1d9a0a372fc0492b7dff448694af8813",
+  "catalogueCommit": "0048c4e3644aae7ed172d804fff0981982510e7b",
+  "previousCatalogueCommit": null,
+  "publishedAt": "2026-10-07T11:58:34Z",
+  "expectedPublicFingerprint": "8d2093f9fafd71de56fea2038faeb2efa0964767d3235430b06428132cdc8505",
+  "rsaBits": 3072,
+  "independentChecks": {
+    "anonymousDownloads": 9,
+    "publicDocumentsMatchRunReceipt": true,
+    "movingAndCommitPinnedHistoryEqual": true,
+    "sourceLockAndProfileMatchExactCommit": true,
+    "sourceLockAndProfileMatchReceipt": true,
+    "ownerFingerprintMatches": true,
+    "applicationSignatureVerification": true,
+    "cryptographyOpenSslSignatureVerification": true,
+    "cataloguePackPinsMatchLock": 32,
+    "preparationPinsMatchSignedCatalogue": 32,
+    "artifactZipsHashAndCrcChecked": 2,
+    "firstPublicationHasNoPriorCatalogueToCompare": true,
+    "catalogueGitTreeInspected": {
+      "sha": "1ba7f5ba52f1888a43ef5999e039b4fe8faff6c8",
+      "truncated": false,
+      "files": 7,
+      "historyPublicDocuments": 4,
+      "priorCommitParents": [],
+      "unexpectedFiles": []
+    }
+  },
+  "workflowEvidenceReviewed": {
+    "signJobId": 112779426483,
+    "publishJobId": 112780109144,
+    "jobsSucceeded": 2,
+    "sourceTestsPassed": 56,
+    "sourceTestsFailed": 0,
+    "sourceTestsSkipped": 0,
+    "all32ArchivesDownloadedAndFullyValidated": true,
+    "archiveBytes": 3799806535,
+    "packExecution": false,
+    "signingMaterialCleanupStepSucceeded": true,
+    "publicationReceiptAnonymousVerificationAttempts": 1
+  },
+  "publicDownloads": [
+    {
+      "url": "https://raw.githubusercontent.com/comparativechrono/workbench/0048c4e3644aae7ed172d804fff0981982510e7b/history/20261007T115834Z/catalogue.json",
+      "bytes": 29226,
+      "sha256": "bf4789075e1aaad3d4ef158f879fc3ff94a869985d6324b0e594f69a522a739d"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/comparativechrono/workbench/0048c4e3644aae7ed172d804fff0981982510e7b/history/20261007T115834Z/deployment-receipt.json",
+      "bytes": 760,
+      "sha256": "f9a9e2abdf61a944555070e779818b3f1f4398f6401bf97a6840381a479985a3"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/comparativechrono/workbench/0048c4e3644aae7ed172d804fff0981982510e7b/history/20261007T115834Z/publication-report.json",
+      "bytes": 189,
+      "sha256": "ee251c82633d5f95c9eeb552caafe5929e7e0d5ca43e8427a41c415980f16f73"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/comparativechrono/workbench/0048c4e3644aae7ed172d804fff0981982510e7b/history/20261007T115834Z/source.json",
+      "bytes": 1143,
+      "sha256": "9f4ef018e03ea8a27251927fe59d4656b7619b227814497b4f66947269ee297b"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/comparativechrono/workbench/9f82aa5d1d9a0a372fc0492b7dff448694af8813/publishing/setup-assets.json",
+      "bytes": 17053,
+      "sha256": "092a638c3ef8797aa8d841c5dfed3c2619095c46b7a5c571c849a7f3bcc38e7d"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/comparativechrono/workbench/9f82aa5d1d9a0a372fc0492b7dff448694af8813/workspace/setup-profile.json",
+      "bytes": 10101,
+      "sha256": "4cad899dcc1f6541f6edecc3ace7d0d4dd5d6103b1b16218fece0c0b68d2a4ba"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/comparativechrono/workbench/catalogue/catalogue.json",
+      "bytes": 29226,
+      "sha256": "bf4789075e1aaad3d4ef158f879fc3ff94a869985d6324b0e594f69a522a739d"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/comparativechrono/workbench/catalogue/publication-report.json",
+      "bytes": 189,
+      "sha256": "ee251c82633d5f95c9eeb552caafe5929e7e0d5ca43e8427a41c415980f16f73"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/comparativechrono/workbench/catalogue/source.json",
+      "bytes": 1143,
+      "sha256": "9f4ef018e03ea8a27251927fe59d4656b7619b227814497b4f66947269ee297b"
+    }
+  ],
+  "notPerformed": [
+    "No production private-key read or access.",
+    "No environment protection settings audit: connector does not expose administration.",
+    "No repeat multi-gigabyte archive download in this audit; exact archive and member validation is reviewed from this run evidence.",
+    "No application Windows or native UI execution in this audit.",
+    "No application release by this catalogue run."
+  ],
+  "result": "pass"
+}

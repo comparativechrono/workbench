@@ -2,14 +2,12 @@
 
 **Development target: 0.10.0. Not released.** The user approved this direction on
 2026-10-06. Published 0.9.0 and all existing pack releases remain unchanged.
-The current exact candidate passed the native checks recorded in the
-[0.10.0 handover](tool-setup-0.10.0-handover.md). Official online setup is pending
-owner provisioning of the protected signing environment, reviewed source
-configuration and a new candidate validated against that deployed production
-trust. As of **2026-10-07**, the publishing workflow and concrete
-[owner guide](../publishing/catalogue-signing.md) are merged into `main` through
-[PR #4](https://github.com/comparativechrono/workbench/pull/4); production setup
-and publication remain unverified.
+The earlier empty-trust candidate passed the native checks recorded in the
+[0.10.0 handover](tool-setup-0.10.0-handover.md). As of **2026-10-07**, the official
+signed 32-pack catalogue is published and independently verified. Its reviewed
+public source is being bundled into a **new candidate**; exact Windows production
+setup and affected GUI/upgrade checks are pending. Catalogue publication alone
+does not complete the application release.
 
 ## Installing tools
 
@@ -74,29 +72,34 @@ reviewed entry in the application's `workspace/catalog-sources.json`, with ID
 `native-workbench-official`; a user-imported source merely using the same ID is
 insufficient to become the recommended setup source.
 
-The production source list currently remains **empty**. No usable production
-signing configuration or reviewed signed source document was available during
-this implementation. The protected workflow's source checks passed at
-`6e973db73953a5ef1f7d221a79ce94887f2fb366` in
-[run 37583926483](https://github.com/comparativechrono/workbench/actions/runs/37583926483):
-56 source tests, no failures or skips. Those isolated tests do not establish
-owner environment/key provisioning, a live official catalogue or new native
-application validation.
-Starter and offline imports work without it; Full and Custom cannot fetch
-missing packs until the official source is deployed. A fixture catalogue can
-exercise the mechanism, but cannot establish official production trust.
+The owner-started [production run 37617540915](https://github.com/comparativechrono/workbench/actions/runs/37617540915)
+succeeded on reviewed `main` commit `9f82aa5d1d9a0a372fc0492b7dff448694af8813`.
+It repeated **56 source tests**, freshly downloaded and fully validated all 32
+archives, signed the catalogue, published commit
+`0048c4e3644aae7ed172d804fff0981982510e7b`, and verified anonymous downloads.
+The official [catalogue](https://raw.githubusercontent.com/comparativechrono/workbench/catalogue/catalogue.json)
+and [public source](https://raw.githubusercontent.com/comparativechrono/workbench/catalogue/source.json)
+are available. The owner-confirmed fingerprint is
+`8d2093f9fafd71de56fea2038faeb2efa0964767d3235430b06428132cdc8505`.
 
-Follow the [owner signing guide](../publishing/catalogue-signing.md) to provision
-the protected `catalogue-production` environment with secret
-`WORKBENCH_CATALOGUE_RSA_PRIVATE_KEY` and public variable
-`WORKBENCH_CATALOGUE_KEY_FINGERPRINT`. That administrative setup remains
-unavailable to the agent and unverified. The manual workflow then uses
-[catalogue preparation](../publishing/setup-catalogue.md) to retrieve and fully
-verify the immutable archives, signs with the reviewed key, publishes the public
-documents and verifies their anonymous downloads. Private keys must stay outside
-the checkout and public outputs. Bundle the reviewed public source; the
-application must then be
-rebuilt and validated against those exact production trust bytes before release.
+The [independent audit](evidence/catalogue-production-2026-10-07.json) confirms
+that current and commit-pinned history bytes agree, all 32 pins match the source
+lock and preparation report, and both the application and independent
+cryptography/OpenSSL signature verifiers accept the owner key. This is public
+metadata and signature validation; no new Windows result is implied.
+
+The reviewed source is being added to `workspace/catalog-sources.json` for a new
+production candidate. Earlier candidate `8cee606` deliberately had an empty
+source list and used isolated fixture trust in the all-pack native gate; its
+passing checks cannot substitute for the new production setup gate. Starter and
+offline imports remain independent of network availability.
+
+The [owner signing guide](../publishing/catalogue-signing.md) documents the
+protected `catalogue-production` workflow. The successful signing job establishes
+that its configured key and fingerprint work; administrative protection settings
+remain unavailable for connector inspection. Private keys stay outside Git and
+public outputs, and no private key was read by the agent. The application must
+be rebuilt and validated against these exact public trust bytes before release.
 Existing independent pack/source releases remain the download authorities.
 
 ## Implementation and preservation
@@ -184,11 +187,11 @@ and connected pinned workflow, actual reference results and receipts, every
 preserved file hash, idempotent repeat update, and new offline scientific/CWL
 execution. It uses the updater's private interpreter and does not claim native
 updater folder-picker interaction or a live reference download. Its Windows run
-passed in both paths for the current empty-trust candidate; repeat affected
-checks for the future candidate containing production trust.
+passed in both paths for the earlier empty-trust candidate; repeat affected
+checks for the new candidate containing production trust.
 
 The candidate workflow must retain input/output hashes, source commit, failures,
-screenshots and native reports. After the production signed catalogue is
-available, repeat a fresh online setup against that exact deployed trust and
-verify public release downloads. No release, official catalogue availability or
-unavailable native check is asserted by this guide.
+screenshots and native reports. The production signed catalogue is now verified;
+next validate fresh online setup against that exact deployed trust and verify
+public release downloads. Application release and the new candidate's native
+checks remain pending; unavailable checks are not counted as passed.
