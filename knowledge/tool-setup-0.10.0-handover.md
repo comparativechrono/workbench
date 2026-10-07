@@ -1,10 +1,22 @@
 # Native tool setup 0.10.0 handover
 
-Snapshot: **2026-10-07**. Implementation and candidate validation are in
-[draft PR #3](https://github.com/comparativechrono/workbench/pull/3).
-**0.10.0 is not released.** Published 0.9.0 and all existing pack releases remain
-unchanged. The implementation offers native Full (recommended), Starter and
-Custom setup while retaining independent packs and Manage tools.
+Snapshot: **2026-10-07**. **0.10.0 is published** as a development prerelease at
+[app-v0.10.0](https://github.com/comparativechrono/workbench/releases/tag/app-v0.10.0).
+Release **405745578**, published **2026-10-07T12:35:21Z**, promotes the exact
+accepted candidate archives unchanged. [PR #3](https://github.com/comparativechrono/workbench/pull/3)
+and the release tag point to `2e474345dff195b860df39fdde263c840dd1fba3`; packaged
+application source remains `5a390acd8440856e3f4e32de237322a18bb82d7e`.
+Published 0.9.0 and all existing pack releases remain unchanged. The release
+offers native Full (recommended), Starter and Custom setup while retaining
+independent packs and Manage tools. Its updater supports the published 0.9.0 baseline.
+
+The [publication record](evidence/tool-setup-0.10.0-publication-2026-10-07.json)
+and [independent public audit](evidence/tool-setup-0.10.0-public-downloads-2026-10-07.json)
+confirm all **ten public assets**, four ZIP CRCs and both checksum manifests.
+All seven original candidate files, including the application/source/updater
+archives, match the accepted bytes. Source/build companions retain their
+creation-time pending notes; the later final validation/publication records
+supersede those notes without replacing the immutable archives.
 
 The protected catalogue publishing workflow and
 [owner setup guide](../publishing/catalogue-signing.md) were merged into `main`
@@ -119,7 +131,7 @@ bytes. The first failures remain evidence; the initial workflow is not relabelle
 as successful. One superseded verification run was cancelled after a final
 validator-readiness correction; the completed run above is the authoritative rerun.
 
-## Production catalogue and remaining release gate
+## Production catalogue and completed release
 
 The reviewed 32-pack download set is **3,799,806,535 bytes** across all archives,
 or **3,795,572,848 additional bytes** for the 29 packs missing from Starter.
@@ -169,11 +181,11 @@ it reviewed this run's complete archive/member validation evidence.
 
 The reviewed public source is bundled into candidate `5a390acd`; its completed
 native regression and live production Full gates passed as recorded above.
-Promote the exact validated archives with the
-established immutable-artifact release workflow and verify every public
-download. The earlier empty-trust archive cannot be announced as a working Full
-installer. Catalogue auditing itself did not execute Windows; the new candidate
-run supplies separate native evidence. Application release remains pending.
+The established immutable-artifact release workflow promoted the exact validated
+archives and verified all ten public downloads. Independent anonymous download
+verification also passed. The earlier empty-trust archive was not promoted.
+Catalogue/public-download auditing did not execute Windows; the accepted candidate
+run supplies the separate native evidence.
 
 Cancellation/retry retains completed packs; an unfinished archive restarts its
 download. Abrupt process termination can leave unowned staging directories, which

@@ -9,17 +9,21 @@ Commands below run from the repository root unless stated otherwise.
 Paths in angle brackets are placeholders to replace, not files supplied by Git.
 Read [architecture](architecture.md) before changing an unfamiliar layer.
 
-**Current development:** application 0.10.0 adds native Full/Starter/Custom tool setup.
+**Current release:** application 0.10.0 adds native Full/Starter/Custom tool setup.
 See [tool setup](tool-setup.md) for source, packaging and exact Windows gate commands.
 The official signed catalogue was published and independently verified on 2026-10-07;
 see [production evidence](evidence/catalogue-production-2026-10-07.json). Its public
 source is bundled in candidate `5a390acd`; exact-package native setup, workspace,
 References, results/CWL/DAG/icon and 0.9.0 upgrade checks passed in both Windows
 paths. Live production Full also passed four checks in each path, and all six
-candidate workflow jobs succeeded. Application 0.10.0 publication remains pending;
-consult the [handover](tool-setup-0.10.0-handover.md) for exact evidence.
+candidate workflow jobs succeeded. [Application 0.10.0 is published](https://github.com/comparativechrono/workbench/releases/tag/app-v0.10.0)
+from those unchanged archives. Ten public assets, four ZIP CRCs and both checksum
+manifests passed independent download verification. The packaged source remains
+`5a390acd8440856e3f4e32de237322a18bb82d7e`; release tag/PR #3 merge is
+`2e474345dff195b860df39fdde263c840dd1fba3`. Its updater supports 0.9.0 only.
+Consult the [handover](tool-setup-0.10.0-handover.md) for exact evidence.
 
-**Release scope, 2026-10-06:** application 0.9.0 is published from the exact
+**Previous baseline, 2026-10-06:** application 0.9.0 was published from the exact
 accepted `beea34a` application candidate without rebuilding. The release tag
 `app-v0.9.0` and PR #2 merge commit are `1ee61f1`; the separately built updater
 from 0.8.0 has its own exact native gate. Follow the

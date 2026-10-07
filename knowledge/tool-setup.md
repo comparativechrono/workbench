@@ -1,6 +1,6 @@
 # Tool setup: Full, Starter and Custom
 
-**Development target: 0.10.0. Not released.** The user approved this direction on
+**Released: [0.10.0](https://github.com/comparativechrono/workbench/releases/tag/app-v0.10.0), 2026-10-07.** The user approved this direction on
 2026-10-06. Published 0.9.0 and all existing pack releases remain unchanged.
 The earlier empty-trust candidate passed the native checks recorded in the
 [0.10.0 handover](tool-setup-0.10.0-handover.md). As of **2026-10-07**, the official
@@ -9,7 +9,9 @@ public source is bundled in candidate `5a390acd`. Exact-package native setup,
 workspace, References, results/CWL/DAG/icon and 0.9.0 upgrade checks passed in
 ordinary and space-containing Windows paths. Live production Full passed four
 checks in each path using the bundled owner trust and all 32 exact pack pins.
-All six candidate jobs succeeded; application publication remains pending.
+All six candidate jobs succeeded. The accepted archives were published unchanged;
+[independent downloads](evidence/tool-setup-0.10.0-public-downloads-2026-10-07.json)
+verified all ten public assets, four ZIP CRCs and both checksum manifests.
 
 ## Installing tools
 
@@ -55,8 +57,8 @@ The [measured 32-pack assessment](full-bundle-sizing-2026-10-06.md) found a
 published 0.9.0 Starter. The new setup interface adds a small core change; its
 exact packaged size must be measured from its own candidate.
 
-A fresh Starter already contains three of the selected packs. The measured
-0.10.0 production-trust candidate Starter is **17,028,340 bytes**; its matching source and updater
+A fresh Starter already contains three of the selected packs. The
+released 0.10.0 Starter is **17,028,340 bytes**; its matching source and updater
 identities are in the handover. The remaining 29
 published archives total **3,795,572,848 bytes**. Setup's download estimate counts
 only the missing selection. These numbers exclude reference databases, results,
@@ -149,7 +151,8 @@ replacements. Live production Full passed four checks per Windows path, and the
 separate isolated-fixture all-pack gate passed four. Production runs installed
 all 32 exact pins, reopened offline and preserved 202 expected alignment/BAM
 records. All six workflow jobs succeeded. See the [acceptance record](evidence/tool-setup-0.10.0-acceptance-2026-10-07.json)
-for final promotion status; the application is not released yet.
+for the promotion decision and the [publication record](evidence/tool-setup-0.10.0-publication-2026-10-07.json)
+for the completed release. No accepted archive was rebuilt.
 
 The earlier [candidate validation record](evidence/tool-setup-0.10.0-validation-2026-10-06.json)
 retains historical `windows-2022` execution of source `8cee606`: per path, **13
@@ -211,6 +214,7 @@ production-trust candidate; each record pins its own exact archives.
 The candidate workflow must retain input/output hashes, source commit, failures,
 screenshots and native reports. The production signed catalogue is now verified;
 fresh online Full setup against that exact deployed trust also passed in both
-Windows paths. Promote the accepted immutable candidate and verify public
-release downloads. Application publication remains pending; fixture-only
-production omissions and unrequested helper checks are not counted as passes.
+Windows paths. The accepted immutable candidate is now published, and all ten
+public downloads were independently verified. Fixture-only production omissions
+and unrequested helper checks are not counted as passes; the separate production
+Full and updater suites retain their own evidence.

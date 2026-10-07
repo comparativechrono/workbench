@@ -2,7 +2,7 @@
   "schema": "native-workbench-knowledge/release-inventory",
   "schema_version": 1,
   "as_of": "2026-10-07",
-  "source_commit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
+  "source_commit": "5a390acd8440856e3f4e32de237322a18bb82d7e",
   "repository": "https://github.com/comparativechrono/workbench",
   "purpose": "Public release handover inventory. This is documentation, not an install catalogue or a trust file.",
   "is_install_catalogue": false,
@@ -14,9 +14,9 @@
     "readme_url": "https://github.com/comparativechrono/workbench/blob/main/README.md",
     "scope": "Published releases only. Drafts and private metadata are excluded. Historical validation candidates are excluded from current_packs.",
     "interpretation": "A GitHub asset digest checks bytes against recorded metadata; it is not a publisher signature or application-trusted catalogue.",
-    "application_checked_on": "2026-10-06",
-    "application_release_metadata_url": "https://api.github.com/repos/comparativechrono/workbench/releases/tags/app-v0.9.0",
-    "application_method": "All 12 public 0.9.0 assets were anonymously downloaded and checked by the successful publication workflow and a separate independent audit. Expected sizes and SHA-256 values, five ZIP CRCs and all three checksum manifests passed. Six original candidate companions and the separately validated 0.8.0 updater are unchanged. Existing exact-candidate native evidence applies to accepted application bytes; updater run 37527359533 supplies separate native preservation/post-update execution evidence. Public verification did not rerun Windows. Earlier application and pack entries retain their original dates and validation scope."
+    "application_checked_on": "2026-10-07",
+    "application_release_metadata_url": "https://api.github.com/repos/comparativechrono/workbench/releases/tags/app-v0.10.0",
+    "application_method": "All ten public 0.10.0 assets were anonymously downloaded and checked by the successful publication workflow and independently downloaded again. Expected sizes/SHA-256, four ZIP CRCs and both checksum manifests passed. Three accepted archives and all seven original candidate companions remain byte-identical to source5a390acd/run37618824677; ordinary and space-containing exact-package native gates, production Full and 0.9.0 preservation/upgrade evidence apply to those unchanged bytes. Public verification did not rerun Windows. Earlier application/pack records retain their own dates."
   },
   "status": {
     "application": "development-prerelease",
@@ -25,353 +25,124 @@
     "online_catalogue": "published-and-independently-verified-2026-10-07",
     "catalogue_source_json": "published-and-bundled-in-0.10.0-candidate",
     "signing_key": "owner-provisioned-matching-public-fingerprint-successfully-used",
-    "windows_gui_validation": "accepted-0.9.0-exact-candidate-native-gates-passed-tester-acceptance-reported",
-    "native_windows_long_path_validation": "accepted-0.9.0-starter-five-stage-nested-result-path-regression-passed-limited-scope"
+    "windows_gui_validation": "0.10.0-exact-candidate-native-gates-and-production-full-passed-both-paths",
+    "native_windows_long_path_validation": "historical-0.9.0-starter-five-stage-nested-result-path-regression-passed-limited-scope"
   },
   "application": {
-    "version": "0.9.0",
-    "tag": "app-v0.9.0",
-    "release_id": 405123004,
-    "release_url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.9.0",
+    "version": "0.10.0",
+    "tag": "app-v0.10.0",
+    "release_id": 405745578,
+    "release_url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.10.0",
     "prerelease": true,
     "draft": false,
-    "published_at": "2026-10-06T20:39:35Z",
-    "reviewed_on": "2026-10-06",
-    "packaged_source_commit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
-    "release_tag_commit": "1ee61f1e2334bf0049aa4b9227da6f8663fc0c43",
-    "source_commit_distinction": "Published starter, application source and 0.6.0 updater are the exact accepted beea34a candidate bytes. The release-tag/PR-merge commit includes validator, additional 0.8.0 updater, promotion and documentation changes. Accepted application, pack, updater-engine and launcher bytes were not rebuilt or changed.",
+    "published_at": "2026-10-07T12:35:21Z",
+    "reviewed_on": "2026-10-07",
+    "packaged_source_commit": "5a390acd8440856e3f4e32de237322a18bb82d7e",
+    "release_tag_commit": "2e474345dff195b860df39fdde263c840dd1fba3",
+    "source_commit_distinction": "All three accepted archives and seven original candidate companions are unchanged from candidate source5a390acd/run37618824677. The tag/PR3 merge includes promotion and later validation/documentation only; accepted application, packs and updater were not rebuilt.",
     "starter_pack_ids": [
       "align",
       "bam",
       "variants"
     ],
+    "updater_baselines": [
+      "0.9.0"
+    ],
     "assets": [
       {
         "name": "BUILD-PROVENANCE.json",
-        "asset_id": 616601323,
-        "bytes": 940,
-        "github_digest": "sha256:0de10868b19243071cffd7753381516f67bdfe62350b9a57d7f43326919b9a2c",
-        "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/BUILD-PROVENANCE.json",
-        "publisher_anonymous_download_verified_on": "2026-10-06",
-        "independently_downloaded_and_rehashed_on": "2026-10-06"
+        "asset_id": 618646675,
+        "bytes": 1011,
+        "github_digest": "sha256:9479521ee4d0f1e951f2c18575b4d3bc44acd15d4675a9d75b899421f981ae98",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.0/BUILD-PROVENANCE.json",
+        "publisher_anonymous_download_verified_on": "2026-10-07",
+        "independently_downloaded_and_rehashed_on": "2026-10-07"
       },
       {
         "name": "BUILD-UPDATE-PROVENANCE.json",
-        "asset_id": 616601326,
-        "bytes": 2059,
-        "github_digest": "sha256:202c3999ca365a45acb427bcdf8e30d169d84f6f4f308d2a3004515d29a07311",
-        "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/BUILD-UPDATE-PROVENANCE.json",
-        "publisher_anonymous_download_verified_on": "2026-10-06",
-        "independently_downloaded_and_rehashed_on": "2026-10-06"
+        "asset_id": 618646668,
+        "bytes": 2151,
+        "github_digest": "sha256:45b1b50b73a82c03aea2586f44c72d230060ec46a451b3ecda10006a5a2586c6",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.0/BUILD-UPDATE-PROVENANCE.json",
+        "publisher_anonymous_download_verified_on": "2026-10-07",
+        "independently_downloaded_and_rehashed_on": "2026-10-07"
       },
       {
         "name": "EVIDENCE-SHA256SUMS.txt",
-        "asset_id": 616601325,
-        "bytes": 727,
-        "github_digest": "sha256:e8a7b8a297f50f5d6af7356dda493bb1a6d741562ab909e0e988293c56d29174",
-        "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/EVIDENCE-SHA256SUMS.txt",
-        "publisher_anonymous_download_verified_on": "2026-10-06",
-        "independently_downloaded_and_rehashed_on": "2026-10-06"
+        "asset_id": 618646672,
+        "bytes": 528,
+        "github_digest": "sha256:d0ec93d7881900c3f9d27ee487ae0aaf72e5f30a9de842d3f6444f877d51f8b1",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.0/EVIDENCE-SHA256SUMS.txt",
+        "publisher_anonymous_download_verified_on": "2026-10-07",
+        "independently_downloaded_and_rehashed_on": "2026-10-07"
       },
       {
-        "name": "native-workbench-0.9.0-source.zip",
-        "asset_id": 616601356,
-        "bytes": 46423298,
-        "github_digest": "sha256:7bfc3802cad3b476300ae7075214e2c06ee320d987df66945ff0809cb3218824",
-        "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/native-workbench-0.9.0-source.zip",
-        "publisher_anonymous_download_verified_on": "2026-10-06",
-        "independently_downloaded_and_rehashed_on": "2026-10-06"
+        "name": "native-workbench-0.10.0-source.zip",
+        "asset_id": 618646699,
+        "bytes": 46740582,
+        "github_digest": "sha256:918adabf39c0f0cbd551b2a30d523f72135be67fe4232a9c8c54ffa6e611133b",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.0/native-workbench-0.10.0-source.zip",
+        "publisher_anonymous_download_verified_on": "2026-10-07",
+        "independently_downloaded_and_rehashed_on": "2026-10-07"
       },
       {
-        "name": "native-workbench-0.9.0-starter-windows.zip",
-        "asset_id": 616601367,
-        "bytes": 17002821,
-        "github_digest": "sha256:c2661c144e073c4efdd190ffd186bacd9398b6413b81770d7a057c3947eecf02",
-        "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/native-workbench-0.9.0-starter-windows.zip",
-        "publisher_anonymous_download_verified_on": "2026-10-06",
-        "independently_downloaded_and_rehashed_on": "2026-10-06"
+        "name": "native-workbench-0.10.0-starter-windows.zip",
+        "asset_id": 618646702,
+        "bytes": 17028340,
+        "github_digest": "sha256:659a08911cec65b8dc1ce0dd9f47fea25350a39b619c7f0aea663bae71a871ae",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.0/native-workbench-0.10.0-starter-windows.zip",
+        "publisher_anonymous_download_verified_on": "2026-10-07",
+        "independently_downloaded_and_rehashed_on": "2026-10-07"
       },
       {
-        "name": "native-workbench-0.9.0-update-from-0.6.0.zip",
-        "asset_id": 616601364,
-        "bytes": 12951447,
-        "github_digest": "sha256:eed778882bed560e765c1f2c03d6473b2ea07f2b219e4bd81bff7297e67b177d",
-        "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/native-workbench-0.9.0-update-from-0.6.0.zip",
-        "publisher_anonymous_download_verified_on": "2026-10-06",
-        "independently_downloaded_and_rehashed_on": "2026-10-06"
-      },
-      {
-        "name": "native-workbench-0.9.0-update-from-0.8.0.zip",
-        "asset_id": 616601376,
-        "bytes": 12864532,
-        "github_digest": "sha256:caa50ff7807be889fd9f4fbb617a458b1d2b38f397ce365d4fc7fc17a2511d9e",
-        "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/native-workbench-0.9.0-update-from-0.8.0.zip",
-        "publisher_anonymous_download_verified_on": "2026-10-06",
-        "independently_downloaded_and_rehashed_on": "2026-10-06"
+        "name": "native-workbench-0.10.0-update-from-0.9.0.zip",
+        "asset_id": 618646703,
+        "bytes": 12880361,
+        "github_digest": "sha256:63d96f514711d0604b6fbfe940a38bfad73900285ec13e75f95397f0d012eacf",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.0/native-workbench-0.10.0-update-from-0.9.0.zip",
+        "publisher_anonymous_download_verified_on": "2026-10-07",
+        "independently_downloaded_and_rehashed_on": "2026-10-07"
       },
       {
         "name": "RELEASE-VALIDATION.json",
-        "asset_id": 616601329,
-        "bytes": 9033,
-        "github_digest": "sha256:85f979460248df7de872f58613843ed09a868714e7bd6c6b3947e37ca70cfacf",
-        "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/RELEASE-VALIDATION.json",
-        "publisher_anonymous_download_verified_on": "2026-10-06",
-        "independently_downloaded_and_rehashed_on": "2026-10-06"
+        "asset_id": 618646676,
+        "bytes": 8185,
+        "github_digest": "sha256:f9aeca111364de09ad4b3b071fed7c8996b83530ccccfa65d2160e07edb4e27c",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.0/RELEASE-VALIDATION.json",
+        "publisher_anonymous_download_verified_on": "2026-10-07",
+        "independently_downloaded_and_rehashed_on": "2026-10-07"
       },
       {
         "name": "SHA256SUMS.txt",
-        "asset_id": 616601328,
-        "bytes": 320,
-        "github_digest": "sha256:c622bb22bc27fc571d5a9e728d80dabff7fe66d4617e9654aaa0259d212480a1",
-        "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/SHA256SUMS.txt",
-        "publisher_anonymous_download_verified_on": "2026-10-06",
-        "independently_downloaded_and_rehashed_on": "2026-10-06"
+        "asset_id": 618646670,
+        "bytes": 323,
+        "github_digest": "sha256:2802017a62147ae0975a18490d0379798ddc93c0cca14c672cec9b1b0df953bd",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.0/SHA256SUMS.txt",
+        "publisher_anonymous_download_verified_on": "2026-10-07",
+        "independently_downloaded_and_rehashed_on": "2026-10-07"
       },
       {
         "name": "source-metadata.json",
-        "asset_id": 616601399,
-        "bytes": 1763,
-        "github_digest": "sha256:94280fda60803a5ad5598187008ce3e78adf4de751deb450517c24ccb109ddb8",
-        "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/source-metadata.json",
-        "publisher_anonymous_download_verified_on": "2026-10-06",
-        "independently_downloaded_and_rehashed_on": "2026-10-06"
-      },
-      {
-        "name": "UPDATE-SHA256SUMS.txt",
-        "asset_id": 616601351,
-        "bytes": 111,
-        "github_digest": "sha256:12e14bd7ef99d227c8e9a77c583424bb409d096c5fe1a7030cda9e926c0e7e5e",
-        "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/UPDATE-SHA256SUMS.txt",
-        "publisher_anonymous_download_verified_on": "2026-10-06",
-        "independently_downloaded_and_rehashed_on": "2026-10-06"
+        "asset_id": 618646710,
+        "bytes": 1764,
+        "github_digest": "sha256:056db0472222514182f5fcf2e27c5e5d1a0ef46b50a7592a9b312a372c05b41b",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.0/source-metadata.json",
+        "publisher_anonymous_download_verified_on": "2026-10-07",
+        "independently_downloaded_and_rehashed_on": "2026-10-07"
       },
       {
         "name": "WINDOWS-EVIDENCE.zip",
-        "asset_id": 616601353,
-        "bytes": 16852143,
-        "github_digest": "sha256:1d5b22a19be174007e44e52159a4901bba72c09c2fe6651102f96f51ab4e4e4e",
-        "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/WINDOWS-EVIDENCE.zip",
-        "publisher_anonymous_download_verified_on": "2026-10-06",
-        "independently_downloaded_and_rehashed_on": "2026-10-06"
+        "asset_id": 618646694,
+        "bytes": 16369424,
+        "github_digest": "sha256:3edcf17872c2a328d38c84c976a6d59867511c8ab5dea92cc4f1534c58613d37",
+        "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.0/WINDOWS-EVIDENCE.zip",
+        "publisher_anonymous_download_verified_on": "2026-10-07",
+        "independently_downloaded_and_rehashed_on": "2026-10-07"
       }
     ],
-    "validation": {
-      "status": "published; exact accepted-candidate native gates and separate 0.8.0 updater gate passed; publication workflow and independent public-download verification passed",
-      "candidate_source_commit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
-      "candidate_evidence_report": "evidence/cwl-dag-icon-0.9.0-validation-2026-10-06.json",
-      "candidate_artifact_audit": "evidence/cwl-dag-icon-0.9.0-artifact-audit-2026-10-06.json",
-      "initial_validation": {
-        "run_id": 37485987457,
-        "overall_conclusion": "failure",
-        "source_passed": 125,
-        "source_failed": 0,
-        "source_skipped": 0,
-        "source_platform": "Ubuntu 22.04.5",
-        "stock_cwltool_version": "3.3.20260925135507",
-        "stock_cwl_fixture_validated_and_executed": true,
-        "per_windows_path": {
-          "workspace_passed": 32,
-          "references_update_passed": 9,
-          "new_feature_passed": 7,
-          "new_feature_failed": 1,
-          "skipped": 0
-        },
-        "windows_platform": "Windows Server 2022 build 20348",
-        "private_python": "3.13.16",
-        "new_feature_failure": "Canvas-width fixture requirement exceeded the hosted viewport; failed before new connection interactions.",
-        "long_path_regression": {
-          "checks_passed": 3,
-          "failures": 0,
-          "skips": 0,
-          "full_starter_stages": 5,
-          "output_hashes_checked": 20,
-          "long_path_opt_in": false,
-          "original_policy_restored": true
-        }
-      },
-      "focused_verification": {
-        "application_source_commit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
-        "application_rebuilt": false,
-        "validator_commit": "bc972125814c1f24dca86391d0c5f240716a52f3",
-        "run_id": 37489208656,
-        "run_url": "https://github.com/comparativechrono/workbench/actions/runs/37489208656",
-        "status": "passed for the exact candidate; user acceptance recorded; unchanged application archives published",
-        "success": true,
-        "per_windows_path": {
-          "passed": 9,
-          "failed": 0,
-          "skipped": 0,
-          "nativeGUIValidated": true
-        },
-        "reports": [
-          "evidence/cwl-dag-icon-0.9.0-final-ordinary-native-results.json",
-          "evidence/cwl-dag-icon-0.9.0-final-spaces-native-results.json"
-        ],
-        "captures_reviewed": 4,
-        "capture_zooms_percent": [
-          100,
-          83
-        ],
-        "zoom_capture": "BM_CLICK only for the focused zoom capture; separate 32-check workspace gates already passed physical zoom-button interaction.",
-        "fixture_geometry": {
-          "zoom_button_center": [
-            582,
-            732
-          ],
-          "work_area_size": [
-            1024,
-            728
-          ],
-          "hit_window_class": "MSTaskListWClass"
-        },
-        "retained_failed_attempts": [
-          {
-            "run_id": 37485987457,
-            "failure": "Initial canvas-width fixture requirement exceeded the hosted viewport; failed before new connection interactions."
-          },
-          {
-            "run_id": 37487450679,
-            "validator_commit": "3352ef7819294ea1677688368af8bc0253140d0e",
-            "failure": "Viewport fixture corrected, then the validator inspected the wrong selected card; retained screenshot showed the intended connection."
-          },
-          {
-            "run_id": 37488239616,
-            "validator_commit": "a8c939a81ee6bdc0f3bb8f3682d4a415d768d9e8",
-            "failure": "Correct connections and native icons were confirmed; zoom-capture interaction timed out because the button center fell behind the taskbar."
-          }
-        ]
-      },
-      "tester_acceptance": {
-        "recorded_on": "2026-10-06",
-        "user_statement": "Go ahead accept and release, the testers are happy with it",
-        "evidence_type": "user-reported tester acceptance and explicit release authorization",
-        "accepted_candidate_source_commit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
-        "accepted_candidate_starter_sha256": "c2661c144e073c4efdd190ffd186bacd9398b6413b81770d7a057c3947eecf02",
-        "publication_authorized": true,
-        "scope": "Supersedes pending tester review for the exact validated candidate. User-reported acceptance is not a new automated run and does not broaden tested display, hardware, scientific or external-CWL environments.",
-        "record": "evidence/cwl-dag-icon-0.9.0-acceptance-2026-10-06.json"
-      },
-      "updater": {
-        "from_version": "0.6.0",
-        "target_version": "0.9.0",
-        "preservation_gate_passed": true,
-        "from_0_8_0_built_or_tested": true,
-        "from_0_8_0_status": "published unchanged after passing native preservation and post-update scientific/CWL checks",
-        "from_0_8_0": {
-          "from_version": "0.8.0",
-          "target_version": "0.9.0",
-          "archive": "native-workbench-0.9.0-update-from-0.8.0.zip",
-          "bytes": 12864532,
-          "sha256": "caa50ff7807be889fd9f4fbb617a458b1d2b38f397ce365d4fc7fc17a2511d9e",
-          "application_source_commit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
-          "packaging_validation_commit": "648676c4388f1c4dc9f9af0476bf31f9cfca8c92",
-          "run_id": 37527359533,
-          "run_url": "https://github.com/comparativechrono/workbench/actions/runs/37527359533",
-          "status": "passed",
-          "application_rebuilt": false,
-          "all_jobs_passed": 3,
-          "per_windows_path": {
-            "passed": 13,
-            "failed": 0,
-            "skipped": 0,
-            "core_files_verified": 70,
-            "existing_files_preserved": 202,
-            "preserved_file_changes": 0,
-            "repeated_update_idempotent": true
-          },
-          "scientific_evidence": {
-            "alignment_records": 202,
-            "variant_truth": "starter:1351 G>A; GT=1/1",
-            "outputs_independently_hashed": 20,
-            "native_commands_compared": 18,
-            "cwl_runner_replays": 5,
-            "baseline_and_post_update_reference_analysis_passed": true,
-            "post_update_reference_cwl_checked": true
-          },
-          "build_record": "evidence/cwl-dag-icon-0.9.0-update-build-2026-10-06.json",
-          "native_reports": [
-            "evidence/cwl-dag-icon-0.9.0-update-final-ordinary-2026-10-06.json",
-            "evidence/cwl-dag-icon-0.9.0-update-final-spaces-2026-10-06.json"
-          ],
-          "scope": "Native updater CLI/private runtime; synthetic local reference. Host Python socket operations denied, native subprocesses not OS-firewalled. No updater picker UI or live reference download. Embedded-runner replay is not execution through a Windows CWL engine.",
-          "retained_failed_attempts": [
-            {
-              "run_id": 37526784016,
-              "failure": "Failed before update: fixture expected provider display name instead of provider ID.",
-              "passed_per_path": 1
-            },
-            {
-              "run_id": 37527241170,
-              "failure": "Failed before update: saved-workflow fixture omitted explicit reference-input binding.",
-              "passed_per_path": 1
-            }
-          ]
-        }
-      },
-      "publication": {
-        "status": "published; publication workflow and separate independent public-download verification passed",
-        "release_id": 405123004,
-        "release_tag": "app-v0.9.0",
-        "release_url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.9.0",
-        "published_at": "2026-10-06T20:39:35Z",
-        "release_tag_commit": "1ee61f1e2334bf0049aa4b9227da6f8663fc0c43",
-        "prerelease": true,
-        "draft": false,
-        "published": true,
-        "accepted_source_commit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
-        "promotion_policy": "Six accepted candidate members promoted unchanged without rebuilding; separate 0.8.0 updater published unchanged from its successful native gate.",
-        "public_assets_verified": 12,
-        "original_candidate_companions_unchanged": 6,
-        "publication_run_id": 37528064595,
-        "publication_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37528064595",
-        "publication_workflow_conclusion": "success",
-        "promotion_guard_checks_passed": 18,
-        "publication_receipt": "evidence/cwl-dag-icon-0.9.0-publication-receipt-2026-10-06.json",
-        "publication_receipt_sha256": "850642929418095feef3b3a26295b8b190b92e2a7c2eec4dd92a6bca8c80816b",
-        "publication_artifact": {
-          "id": 11443535914,
-          "bytes": 105580300,
-          "sha256": "3140035006f20fcfa71cab0dd11c5073ddb076ed2b15a283349d26c6e361139c",
-          "independently_downloaded_hash_and_crc_verified": true
-        },
-        "public_verification_scope": "Publication workflow and separate independent audit freshly downloaded all 12 canonical asset URLs anonymously and checked size/SHA-256. The independent audit also checked five ZIP CRCs, all three checksum manifests, six unchanged accepted candidate companions and exact validated updater bytes. Native evidence is reused for unchanged application/updater bytes; no new native execution is claimed.",
-        "updater_from_versions": [
-          "0.6.0",
-          "0.8.0"
-        ],
-        "updater_from_0_7_0_supported": false,
-        "handover": "cwl-dag-icon-0.9.0-handover.md",
-        "public_download_record": "evidence/cwl-dag-icon-0.9.0-public-downloads-2026-10-06.json",
-        "release_validation_record": "evidence/cwl-dag-icon-0.9.0-release-validation-2026-10-06.json",
-        "zip_crcs_verified": 5,
-        "checksum_manifests_verified": 3,
-        "independent_public_verification": {
-          "status": "passed",
-          "checked_utc": "2026-10-06T20:43:54.882611+00:00",
-          "assets": 12,
-          "zip_crcs": 5,
-          "checksum_manifests": 3,
-          "original_candidate_members_unchanged": 6,
-          "validated_0_8_0_updater_unchanged": true,
-          "release_metadata_and_tag_unchanged": true,
-          "record": "evidence/cwl-dag-icon-0.9.0-public-downloads-2026-10-06.json",
-          "record_sha256": "4016dafbb342265d62891b8ebb11a41cfc182ce6e958170cebef148612612cb8",
-          "scope": "Fresh anonymous downloads and byte/CRC/checksum verification; reuses exact accepted application and native updater evidence, without claiming new native execution.",
-          "local_recovery": "Truncated local WINDOWS-EVIDENCE.zip recovered by a fresh independently checked download and atomic local replacement; final full audit passed; no remote change."
-        }
-      },
-      "limits": [
-        "125 source checks including stock-CWL fixture execution passed. Final focused verification passed 9 checks per Windows path with no failures or skips; all three earlier failed runs remain diagnostic evidence, not passes.",
-        "Original input hashes are historical provenance; external rebinding is allowed and current bound-file mutation checks do not prove original bytes were present before a rerun.",
-        "Explicit optional executable overrides replace original executable identity; manifest and asset pins still apply and scientific equivalence needs separate evidence.",
-        "CWL typing/runner execution does not reproduce all biological preflight, reference/header checks, Windows process ownership, cancellation or scheduler behavior.",
-        "Windows pack executables are not translated across operating systems; external resources are not embedded, inferred or downloaded.",
-        "Native embedded-runner replay is not execution through a Windows CWL engine.",
-        "Diagram routing avoids card interiors but cannot eliminate all crossings or route every obscured socket in overlapping manual layouts.",
-        "User accepted the exact candidate and authorized publication. Version 0.9.0 is published and all 12 public assets passed publication-workflow and separate independent download checks. Both 0.6.0 and 0.8.0 updater native preservation gates passed; no 0.7.0 updater is supplied."
-      ],
-      "immutable_creation_time_status": "Accepted source/build companions retain their creation-time candidate/pending statements. Later standalone release/public-download records supply final evidence without replacing those archives."
-    }
+    "validation": "evidence/tool-setup-0.10.0-validation-2026-10-07.json",
+    "publication": "evidence/tool-setup-0.10.0-publication-2026-10-07.json",
+    "public_downloads": "evidence/tool-setup-0.10.0-public-downloads-2026-10-07.json"
   },
   "current_packs": [
     {
@@ -2360,6 +2131,353 @@
           "scope": "Read-only recovery of the exact promotion artifact and fresh anonymous downloads of all nine canonical public URLs. Candidate native evidence is reused for unchanged application bytes; no new native execution is claimed."
         }
       }
+    },
+    {
+      "version": "0.9.0",
+      "tag": "app-v0.9.0",
+      "release_id": 405123004,
+      "release_url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.9.0",
+      "prerelease": true,
+      "draft": false,
+      "published_at": "2026-10-06T20:39:35Z",
+      "reviewed_on": "2026-10-06",
+      "packaged_source_commit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
+      "release_tag_commit": "1ee61f1e2334bf0049aa4b9227da6f8663fc0c43",
+      "source_commit_distinction": "Published starter, application source and 0.6.0 updater are the exact accepted beea34a candidate bytes. The release-tag/PR-merge commit includes validator, additional 0.8.0 updater, promotion and documentation changes. Accepted application, pack, updater-engine and launcher bytes were not rebuilt or changed.",
+      "starter_pack_ids": [
+        "align",
+        "bam",
+        "variants"
+      ],
+      "assets": [
+        {
+          "name": "BUILD-PROVENANCE.json",
+          "asset_id": 616601323,
+          "bytes": 940,
+          "github_digest": "sha256:0de10868b19243071cffd7753381516f67bdfe62350b9a57d7f43326919b9a2c",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/BUILD-PROVENANCE.json",
+          "publisher_anonymous_download_verified_on": "2026-10-06",
+          "independently_downloaded_and_rehashed_on": "2026-10-06"
+        },
+        {
+          "name": "BUILD-UPDATE-PROVENANCE.json",
+          "asset_id": 616601326,
+          "bytes": 2059,
+          "github_digest": "sha256:202c3999ca365a45acb427bcdf8e30d169d84f6f4f308d2a3004515d29a07311",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/BUILD-UPDATE-PROVENANCE.json",
+          "publisher_anonymous_download_verified_on": "2026-10-06",
+          "independently_downloaded_and_rehashed_on": "2026-10-06"
+        },
+        {
+          "name": "EVIDENCE-SHA256SUMS.txt",
+          "asset_id": 616601325,
+          "bytes": 727,
+          "github_digest": "sha256:e8a7b8a297f50f5d6af7356dda493bb1a6d741562ab909e0e988293c56d29174",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/EVIDENCE-SHA256SUMS.txt",
+          "publisher_anonymous_download_verified_on": "2026-10-06",
+          "independently_downloaded_and_rehashed_on": "2026-10-06"
+        },
+        {
+          "name": "native-workbench-0.9.0-source.zip",
+          "asset_id": 616601356,
+          "bytes": 46423298,
+          "github_digest": "sha256:7bfc3802cad3b476300ae7075214e2c06ee320d987df66945ff0809cb3218824",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/native-workbench-0.9.0-source.zip",
+          "publisher_anonymous_download_verified_on": "2026-10-06",
+          "independently_downloaded_and_rehashed_on": "2026-10-06"
+        },
+        {
+          "name": "native-workbench-0.9.0-starter-windows.zip",
+          "asset_id": 616601367,
+          "bytes": 17002821,
+          "github_digest": "sha256:c2661c144e073c4efdd190ffd186bacd9398b6413b81770d7a057c3947eecf02",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/native-workbench-0.9.0-starter-windows.zip",
+          "publisher_anonymous_download_verified_on": "2026-10-06",
+          "independently_downloaded_and_rehashed_on": "2026-10-06"
+        },
+        {
+          "name": "native-workbench-0.9.0-update-from-0.6.0.zip",
+          "asset_id": 616601364,
+          "bytes": 12951447,
+          "github_digest": "sha256:eed778882bed560e765c1f2c03d6473b2ea07f2b219e4bd81bff7297e67b177d",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/native-workbench-0.9.0-update-from-0.6.0.zip",
+          "publisher_anonymous_download_verified_on": "2026-10-06",
+          "independently_downloaded_and_rehashed_on": "2026-10-06"
+        },
+        {
+          "name": "native-workbench-0.9.0-update-from-0.8.0.zip",
+          "asset_id": 616601376,
+          "bytes": 12864532,
+          "github_digest": "sha256:caa50ff7807be889fd9f4fbb617a458b1d2b38f397ce365d4fc7fc17a2511d9e",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/native-workbench-0.9.0-update-from-0.8.0.zip",
+          "publisher_anonymous_download_verified_on": "2026-10-06",
+          "independently_downloaded_and_rehashed_on": "2026-10-06"
+        },
+        {
+          "name": "RELEASE-VALIDATION.json",
+          "asset_id": 616601329,
+          "bytes": 9033,
+          "github_digest": "sha256:85f979460248df7de872f58613843ed09a868714e7bd6c6b3947e37ca70cfacf",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/RELEASE-VALIDATION.json",
+          "publisher_anonymous_download_verified_on": "2026-10-06",
+          "independently_downloaded_and_rehashed_on": "2026-10-06"
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "asset_id": 616601328,
+          "bytes": 320,
+          "github_digest": "sha256:c622bb22bc27fc571d5a9e728d80dabff7fe66d4617e9654aaa0259d212480a1",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/SHA256SUMS.txt",
+          "publisher_anonymous_download_verified_on": "2026-10-06",
+          "independently_downloaded_and_rehashed_on": "2026-10-06"
+        },
+        {
+          "name": "source-metadata.json",
+          "asset_id": 616601399,
+          "bytes": 1763,
+          "github_digest": "sha256:94280fda60803a5ad5598187008ce3e78adf4de751deb450517c24ccb109ddb8",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/source-metadata.json",
+          "publisher_anonymous_download_verified_on": "2026-10-06",
+          "independently_downloaded_and_rehashed_on": "2026-10-06"
+        },
+        {
+          "name": "UPDATE-SHA256SUMS.txt",
+          "asset_id": 616601351,
+          "bytes": 111,
+          "github_digest": "sha256:12e14bd7ef99d227c8e9a77c583424bb409d096c5fe1a7030cda9e926c0e7e5e",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/UPDATE-SHA256SUMS.txt",
+          "publisher_anonymous_download_verified_on": "2026-10-06",
+          "independently_downloaded_and_rehashed_on": "2026-10-06"
+        },
+        {
+          "name": "WINDOWS-EVIDENCE.zip",
+          "asset_id": 616601353,
+          "bytes": 16852143,
+          "github_digest": "sha256:1d5b22a19be174007e44e52159a4901bba72c09c2fe6651102f96f51ab4e4e4e",
+          "download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/WINDOWS-EVIDENCE.zip",
+          "publisher_anonymous_download_verified_on": "2026-10-06",
+          "independently_downloaded_and_rehashed_on": "2026-10-06"
+        }
+      ],
+      "validation": {
+        "status": "published; exact accepted-candidate native gates and separate 0.8.0 updater gate passed; publication workflow and independent public-download verification passed",
+        "candidate_source_commit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
+        "candidate_evidence_report": "evidence/cwl-dag-icon-0.9.0-validation-2026-10-06.json",
+        "candidate_artifact_audit": "evidence/cwl-dag-icon-0.9.0-artifact-audit-2026-10-06.json",
+        "initial_validation": {
+          "run_id": 37485987457,
+          "overall_conclusion": "failure",
+          "source_passed": 125,
+          "source_failed": 0,
+          "source_skipped": 0,
+          "source_platform": "Ubuntu 22.04.5",
+          "stock_cwltool_version": "3.3.20260925135507",
+          "stock_cwl_fixture_validated_and_executed": true,
+          "per_windows_path": {
+            "workspace_passed": 32,
+            "references_update_passed": 9,
+            "new_feature_passed": 7,
+            "new_feature_failed": 1,
+            "skipped": 0
+          },
+          "windows_platform": "Windows Server 2022 build 20348",
+          "private_python": "3.13.16",
+          "new_feature_failure": "Canvas-width fixture requirement exceeded the hosted viewport; failed before new connection interactions.",
+          "long_path_regression": {
+            "checks_passed": 3,
+            "failures": 0,
+            "skips": 0,
+            "full_starter_stages": 5,
+            "output_hashes_checked": 20,
+            "long_path_opt_in": false,
+            "original_policy_restored": true
+          }
+        },
+        "focused_verification": {
+          "application_source_commit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
+          "application_rebuilt": false,
+          "validator_commit": "bc972125814c1f24dca86391d0c5f240716a52f3",
+          "run_id": 37489208656,
+          "run_url": "https://github.com/comparativechrono/workbench/actions/runs/37489208656",
+          "status": "passed for the exact candidate; user acceptance recorded; unchanged application archives published",
+          "success": true,
+          "per_windows_path": {
+            "passed": 9,
+            "failed": 0,
+            "skipped": 0,
+            "nativeGUIValidated": true
+          },
+          "reports": [
+            "evidence/cwl-dag-icon-0.9.0-final-ordinary-native-results.json",
+            "evidence/cwl-dag-icon-0.9.0-final-spaces-native-results.json"
+          ],
+          "captures_reviewed": 4,
+          "capture_zooms_percent": [
+            100,
+            83
+          ],
+          "zoom_capture": "BM_CLICK only for the focused zoom capture; separate 32-check workspace gates already passed physical zoom-button interaction.",
+          "fixture_geometry": {
+            "zoom_button_center": [
+              582,
+              732
+            ],
+            "work_area_size": [
+              1024,
+              728
+            ],
+            "hit_window_class": "MSTaskListWClass"
+          },
+          "retained_failed_attempts": [
+            {
+              "run_id": 37485987457,
+              "failure": "Initial canvas-width fixture requirement exceeded the hosted viewport; failed before new connection interactions."
+            },
+            {
+              "run_id": 37487450679,
+              "validator_commit": "3352ef7819294ea1677688368af8bc0253140d0e",
+              "failure": "Viewport fixture corrected, then the validator inspected the wrong selected card; retained screenshot showed the intended connection."
+            },
+            {
+              "run_id": 37488239616,
+              "validator_commit": "a8c939a81ee6bdc0f3bb8f3682d4a415d768d9e8",
+              "failure": "Correct connections and native icons were confirmed; zoom-capture interaction timed out because the button center fell behind the taskbar."
+            }
+          ]
+        },
+        "tester_acceptance": {
+          "recorded_on": "2026-10-06",
+          "user_statement": "Go ahead accept and release, the testers are happy with it",
+          "evidence_type": "user-reported tester acceptance and explicit release authorization",
+          "accepted_candidate_source_commit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
+          "accepted_candidate_starter_sha256": "c2661c144e073c4efdd190ffd186bacd9398b6413b81770d7a057c3947eecf02",
+          "publication_authorized": true,
+          "scope": "Supersedes pending tester review for the exact validated candidate. User-reported acceptance is not a new automated run and does not broaden tested display, hardware, scientific or external-CWL environments.",
+          "record": "evidence/cwl-dag-icon-0.9.0-acceptance-2026-10-06.json"
+        },
+        "updater": {
+          "from_version": "0.6.0",
+          "target_version": "0.9.0",
+          "preservation_gate_passed": true,
+          "from_0_8_0_built_or_tested": true,
+          "from_0_8_0_status": "published unchanged after passing native preservation and post-update scientific/CWL checks",
+          "from_0_8_0": {
+            "from_version": "0.8.0",
+            "target_version": "0.9.0",
+            "archive": "native-workbench-0.9.0-update-from-0.8.0.zip",
+            "bytes": 12864532,
+            "sha256": "caa50ff7807be889fd9f4fbb617a458b1d2b38f397ce365d4fc7fc17a2511d9e",
+            "application_source_commit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
+            "packaging_validation_commit": "648676c4388f1c4dc9f9af0476bf31f9cfca8c92",
+            "run_id": 37527359533,
+            "run_url": "https://github.com/comparativechrono/workbench/actions/runs/37527359533",
+            "status": "passed",
+            "application_rebuilt": false,
+            "all_jobs_passed": 3,
+            "per_windows_path": {
+              "passed": 13,
+              "failed": 0,
+              "skipped": 0,
+              "core_files_verified": 70,
+              "existing_files_preserved": 202,
+              "preserved_file_changes": 0,
+              "repeated_update_idempotent": true
+            },
+            "scientific_evidence": {
+              "alignment_records": 202,
+              "variant_truth": "starter:1351 G>A; GT=1/1",
+              "outputs_independently_hashed": 20,
+              "native_commands_compared": 18,
+              "cwl_runner_replays": 5,
+              "baseline_and_post_update_reference_analysis_passed": true,
+              "post_update_reference_cwl_checked": true
+            },
+            "build_record": "evidence/cwl-dag-icon-0.9.0-update-build-2026-10-06.json",
+            "native_reports": [
+              "evidence/cwl-dag-icon-0.9.0-update-final-ordinary-2026-10-06.json",
+              "evidence/cwl-dag-icon-0.9.0-update-final-spaces-2026-10-06.json"
+            ],
+            "scope": "Native updater CLI/private runtime; synthetic local reference. Host Python socket operations denied, native subprocesses not OS-firewalled. No updater picker UI or live reference download. Embedded-runner replay is not execution through a Windows CWL engine.",
+            "retained_failed_attempts": [
+              {
+                "run_id": 37526784016,
+                "failure": "Failed before update: fixture expected provider display name instead of provider ID.",
+                "passed_per_path": 1
+              },
+              {
+                "run_id": 37527241170,
+                "failure": "Failed before update: saved-workflow fixture omitted explicit reference-input binding.",
+                "passed_per_path": 1
+              }
+            ]
+          }
+        },
+        "publication": {
+          "status": "published; publication workflow and separate independent public-download verification passed",
+          "release_id": 405123004,
+          "release_tag": "app-v0.9.0",
+          "release_url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.9.0",
+          "published_at": "2026-10-06T20:39:35Z",
+          "release_tag_commit": "1ee61f1e2334bf0049aa4b9227da6f8663fc0c43",
+          "prerelease": true,
+          "draft": false,
+          "published": true,
+          "accepted_source_commit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
+          "promotion_policy": "Six accepted candidate members promoted unchanged without rebuilding; separate 0.8.0 updater published unchanged from its successful native gate.",
+          "public_assets_verified": 12,
+          "original_candidate_companions_unchanged": 6,
+          "publication_run_id": 37528064595,
+          "publication_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37528064595",
+          "publication_workflow_conclusion": "success",
+          "promotion_guard_checks_passed": 18,
+          "publication_receipt": "evidence/cwl-dag-icon-0.9.0-publication-receipt-2026-10-06.json",
+          "publication_receipt_sha256": "850642929418095feef3b3a26295b8b190b92e2a7c2eec4dd92a6bca8c80816b",
+          "publication_artifact": {
+            "id": 11443535914,
+            "bytes": 105580300,
+            "sha256": "3140035006f20fcfa71cab0dd11c5073ddb076ed2b15a283349d26c6e361139c",
+            "independently_downloaded_hash_and_crc_verified": true
+          },
+          "public_verification_scope": "Publication workflow and separate independent audit freshly downloaded all 12 canonical asset URLs anonymously and checked size/SHA-256. The independent audit also checked five ZIP CRCs, all three checksum manifests, six unchanged accepted candidate companions and exact validated updater bytes. Native evidence is reused for unchanged application/updater bytes; no new native execution is claimed.",
+          "updater_from_versions": [
+            "0.6.0",
+            "0.8.0"
+          ],
+          "updater_from_0_7_0_supported": false,
+          "handover": "cwl-dag-icon-0.9.0-handover.md",
+          "public_download_record": "evidence/cwl-dag-icon-0.9.0-public-downloads-2026-10-06.json",
+          "release_validation_record": "evidence/cwl-dag-icon-0.9.0-release-validation-2026-10-06.json",
+          "zip_crcs_verified": 5,
+          "checksum_manifests_verified": 3,
+          "independent_public_verification": {
+            "status": "passed",
+            "checked_utc": "2026-10-06T20:43:54.882611+00:00",
+            "assets": 12,
+            "zip_crcs": 5,
+            "checksum_manifests": 3,
+            "original_candidate_members_unchanged": 6,
+            "validated_0_8_0_updater_unchanged": true,
+            "release_metadata_and_tag_unchanged": true,
+            "record": "evidence/cwl-dag-icon-0.9.0-public-downloads-2026-10-06.json",
+            "record_sha256": "4016dafbb342265d62891b8ebb11a41cfc182ce6e958170cebef148612612cb8",
+            "scope": "Fresh anonymous downloads and byte/CRC/checksum verification; reuses exact accepted application and native updater evidence, without claiming new native execution.",
+            "local_recovery": "Truncated local WINDOWS-EVIDENCE.zip recovered by a fresh independently checked download and atomic local replacement; final full audit passed; no remote change."
+          }
+        },
+        "limits": [
+          "125 source checks including stock-CWL fixture execution passed. Final focused verification passed 9 checks per Windows path with no failures or skips; all three earlier failed runs remain diagnostic evidence, not passes.",
+          "Original input hashes are historical provenance; external rebinding is allowed and current bound-file mutation checks do not prove original bytes were present before a rerun.",
+          "Explicit optional executable overrides replace original executable identity; manifest and asset pins still apply and scientific equivalence needs separate evidence.",
+          "CWL typing/runner execution does not reproduce all biological preflight, reference/header checks, Windows process ownership, cancellation or scheduler behavior.",
+          "Windows pack executables are not translated across operating systems; external resources are not embedded, inferred or downloaded.",
+          "Native embedded-runner replay is not execution through a Windows CWL engine.",
+          "Diagram routing avoids card interiors but cannot eliminate all crossings or route every obscured socket in overlapping manual layouts.",
+          "User accepted the exact candidate and authorized publication. Version 0.9.0 is published and all 12 public assets passed publication-workflow and separate independent download checks. Both 0.6.0 and 0.8.0 updater native preservation gates passed; no 0.7.0 updater is supplied."
+        ],
+        "immutable_creation_time_status": "Accepted source/build companions retain their creation-time candidate/pending statements. Later standalone release/public-download records supply final evidence without replacing those archives."
+      },
+      "inventory_as_of": "2026-10-06",
+      "inventory_source_commit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d"
     }
   ],
   "pack_inventory_as_of": "2026-10-04",
@@ -2376,12 +2494,12 @@
     "pack_count": 32,
     "application_release_created": false
   },
-  "development_candidate": {
+  "accepted_application_candidate": {
     "version": "0.10.0",
     "source_commit": "5a390acd8440856e3f4e32de237322a18bb82d7e",
     "run_id": 37618824677,
-    "released": false,
-    "status": "all-six-candidate-jobs-passed-accepted-awaiting-publication",
+    "released": true,
+    "status": "published-exact-accepted-archives-public-downloads-verified",
     "validation": "evidence/tool-setup-0.10.0-validation-2026-10-07.json",
     "acceptance": "evidence/tool-setup-0.10.0-acceptance-2026-10-07.json",
     "archive_audit": "evidence/tool-setup-0.10.0-artifact-audit-2026-10-07.json",
@@ -2390,6 +2508,7 @@
       "spaces_passed": 4,
       "packs": 32,
       "offline_records": 202
-    }
+    },
+    "release_url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.10.0"
   }
 }

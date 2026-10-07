@@ -1,23 +1,25 @@
 # Current project state
 
-Snapshot: **2026-10-07**. Application **0.9.0** is published as a development
-prerelease at [app-v0.9.0](https://github.com/comparativechrono/workbench/releases/tag/app-v0.9.0).
-Release **405123004** was published at **2026-10-06T20:39:35Z**. Its tag and
-[PR #2](https://github.com/comparativechrono/workbench/pull/2) merge point to
-`1ee61f1e2334bf0049aa4b9227da6f8663fc0c43`; packaged application source remains
-**`beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d`**. Accepted application archives were
-promoted unchanged. The additional updater from 0.8.0 was separately built and
-natively validated against that same target. The publication workflow passed,
-and a separate independent audit verified all **12 public assets**, five ZIP
-CRCs and all three checksum manifests.
-Read this alongside the [release inventory](release-inventory.json) and
-[release handover](cwl-dag-icon-0.9.0-handover.md). Earlier versions and their
-evidence remain unchanged.
+Snapshot: **2026-10-07**. Application **0.10.0** is published as a development
+prerelease at [app-v0.10.0](https://github.com/comparativechrono/workbench/releases/tag/app-v0.10.0).
+Release **405745578** was published at **2026-10-07T12:35:21Z**. Its tag and
+[PR #3](https://github.com/comparativechrono/workbench/pull/3) merge point to
+`2e474345dff195b860df39fdde263c840dd1fba3`; packaged application source is
+**`5a390acd8440856e3f4e32de237322a18bb82d7e`**. All seven original candidate files, including the three
+accepted archives, were promoted unchanged. All **ten public
+assets** were independently downloaded and rehashed; **four ZIP CRCs** and both
+checksum manifests passed. The updater in this release supports **0.9.0**.
 
-## Tool setup development, 0.10.0, 2026-10-07
+The [publication record](evidence/tool-setup-0.10.0-publication-2026-10-07.json),
+[independent public audit](evidence/tool-setup-0.10.0-public-downloads-2026-10-07.json),
+[release inventory](release-inventory.json) and [handover](tool-setup-0.10.0-handover.md)
+retain exact release and validation identities. Earlier releases and all existing
+pack bytes remain unchanged.
+
+## Published tool setup, 0.10.0, 2026-10-07
 
 The user approved Full (recommended), Starter and Custom setup over the existing
-pack manager. Application **0.10.0 is in development, not released**. The native
+pack manager. Application **0.10.0 is released**. The native
 setup interface and durable per-pack queue use the 32 current published pack
 identities; application and tool versions remain independent. The small Starter
 retains its unchanged three packs, and Manage tools/offline import remain.
@@ -52,7 +54,7 @@ published all 32 exact pins from reviewed `main` at
 `9f82aa5d1d9a0a372fc0492b7dff448694af8813`. The reviewed public source is bundled
 in candidate `5a390acd`; its live production Full gates passed in both paths. The earlier
 empty-trust candidate is historical evidence and is not promoted as the
-production Full installer. [Draft PR #3](https://github.com/comparativechrono/workbench/pull/3)
+production Full installer. [Merged PR #3](https://github.com/comparativechrono/workbench/pull/3)
 retains implementation and evidence; published 0.9.0 and existing pack bytes
 remain unchanged.
 
@@ -761,14 +763,12 @@ or human-genome/cohort performance.
 
 ## Unfinished work and safe starting points
 
-1. **Production setup candidate and clean installation test.** The official
-   signed 32-pack catalogue and public `source.json` are published and verified;
-   see the [production audit](evidence/catalogue-production-2026-10-07.json).
-   The reviewed source is bundled and exact-package GUI/References/CWL/upgrade
-   gates and live production Full passed for candidate `5a390acd`. Promote the
-   accepted immutable archives and verify release downloads. Publication remains
-   pending. The earlier empty-trust candidate cannot establish the production result.
-   Preserve the catalogue key, published pack bytes and saved version pins.
+1. **Catalogue maintenance and future packs.** Application 0.10.0, the signed
+   32-pack catalogue and reviewed public source are published and verified;
+   production Full and all exact-package gates passed. New official packs must
+   retain the protected publication process and deliberately reviewed profile
+   changes. Preserve the catalogue key, immutable published bytes and saved
+   version pins; Manage tools and offline import remain available for additions.
 2. **Broader desktop acceptance and long paths.** The 0.8.0 gates cover the
    recorded workspace and References interactions at 96 DPI; they do not establish the
    entire desktop, folder-picker interactions, high-DPI or

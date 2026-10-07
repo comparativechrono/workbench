@@ -5,24 +5,26 @@ Choose files and folders, run a tool, or connect compatible tools into a branchi
 pipeline. Analysis data stays on the machine.
 
 The small starter distribution includes **minimap2, SAMtools and BCFtools**.
-Additional tools are installed as independently versioned packs through
-**Manage tools**, either from an approved signed catalogue or an offline ZIP.
+Native **Tool setup** offers all 32 current packs through **Full**, or a smaller
+**Custom** selection. Packs stay independently versioned; **Manage tools** also
+supports approved signed catalogues and offline ZIP import.
 The application does not require Docker, WSL or a system Python installation.
 
 ## Release status
 
-**0.10.0 is being prepared for release; publication is pending.** It adds native
+[**0.10.0 is published as a development prerelease**](https://github.com/comparativechrono/workbench/releases/tag/app-v0.10.0).
+It adds native
 **Full, Starter and Custom tool setup**. Full recommends all **32 current packs**,
 while keeping packs independently installable and leaving **Manage tools** and
 offline ZIP import available for future tools and third-party developers.
 
-The official signed catalogue is now published. The new 0.10.0 candidate bundles
+The official signed catalogue is published. Version 0.10.0 bundles
 its reviewed public trust and downloads tools only after an explicit request.
 The Starter ZIP is **17.03 MB**; a fresh Full selection downloads another
 **3.80 GB** for the 29 additional packs. Installed tools work offline. References,
 large scientific databases and analysis outputs are separate from tool setup.
 
-The [new candidate run](https://github.com/comparativechrono/workbench/actions/runs/37618824677)
+The [exact-package Windows run](https://github.com/comparativechrono/workbench/actions/runs/37618824677)
 has passed the native setup, workspace, References, results/CWL/DAG/icon and
 0.9.0 upgrade checks in ordinary and space-containing Windows paths. Live
 production Full installation also passed in both paths: all 32 exact pack
@@ -30,17 +32,18 @@ versions installed through the official signed catalogue, reopened offline and
 retained the expected 202-record alignment/BAM result. BEDTools contributed a
 usable BED workflow input. These checks validate installation/coexistence and
 starter scientific truth, not every optional pack's scientific operation.
+The [publication workflow](https://github.com/comparativechrono/workbench/actions/runs/37622001333)
+promoted the validated archives without rebuilding and verified all **10 public
+assets** by anonymous download and SHA-256. The updater from 0.9.0 preserved
+203 existing files and verified all 72 target core files in each Windows path.
 See the [0.10.0 release notes](docs/releases/0.10.0.md) and
 [handover](knowledge/tool-setup-0.10.0-handover.md) for exact scope and status.
 
-The current published application remains the
-[0.9.0 development prerelease](https://github.com/comparativechrono/workbench/releases/tag/app-v0.9.0).
-It includes `workflow.cwl` in analysis results, routed dependency diagrams,
+The release retains `workflow.cwl` in analysis results, routed dependency diagrams,
 an SVG-derived Windows icon, the native Tools/Workflow interface and Ensembl
-archive References with offline reuse and provenance. Its
-[release handover](knowledge/cwl-dag-icon-0.9.0-handover.md) retains validated
-archive identities, updater checks and independently verified public downloads.
-Published application and tool-pack assets remain unchanged.
+archive References with offline reuse and provenance. Earlier application
+releases and all published tool-pack assets remain unchanged; their historical
+evidence is retained in the [knowledge base](knowledge/README.md).
 
 To execute exported CWL separately, provide a CWL engine, Python 3.10+, matching
 tool-pack files and input data; Windows binaries remain Windows binaries. This
@@ -49,9 +52,13 @@ adds no dependency to normal Workbench operation. The
 
 ## Using the application
 
-Download the [0.9.0 Windows starter ZIP](https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/native-workbench-0.9.0-starter-windows.zip),
-extract it and run `NativeWorkbench.exe`. Use **File > Check installation** to
-check the target machine.
+Download the [0.10.0 Windows Starter ZIP](https://github.com/comparativechrono/workbench/releases/download/app-v0.10.0/native-workbench-0.10.0-starter-windows.zip),
+extract it and run `NativeWorkbench.exe`. At first launch choose **Full**,
+**Starter** or **Custom**. For Full or Custom, choose **Refresh catalogue**, review
+the tools and download size, then choose **Install selection**. Starter works
+without pack downloads. Use **File > Check installation** to check the target
+machine. See the [tool setup guide](knowledge/tool-setup.md) for cancellation,
+retry and offline use.
 
 Use **Tools** for one operation, or switch to **Workflow** to add reusable input
 cards and connect compatible tool ports. Input cards own the selected files;
@@ -65,7 +72,9 @@ On **Downloaded**, select a reference and a compatible input, then choose
 analysis does not start downloads. cDNA and ncRNA remain distinct products.
 See the [reference guide](docs/reference-discovery-0.7.md).
 
-For another tool, download its `native-workbench-pack-…zip` asset from the
+To add more tools later, reopen **Tool setup** through **Manage tools**, or use
+the manager's catalogue selection. For offline import, download the tool's
+`native-workbench-pack-…zip` asset from the
 [pack releases](https://github.com/comparativechrono/workbench/releases). In
 Workbench, open **Manage tools**, choose **Import pack ZIP**, and select that ZIP.
 The ZIP can be copied to an offline machine before importing; running the tool
@@ -158,17 +167,19 @@ paths. The existing Mutect2 pack remains the somatic calling interface.
 GenomicsDB, Spark, VQSR and Python-dependent GATK tools
 are outside this pack, and human whole-genome performance is not yet established.
 
+### Updating an existing installation
 
-Use the [updater from 0.8.0](https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/native-workbench-0.9.0-update-from-0.8.0.zip)
-or [updater from 0.6.0](https://github.com/comparativechrono/workbench/releases/download/app-v0.9.0/native-workbench-0.9.0-update-from-0.6.0.zip)
-matching the installed version. Close Workbench, extract the updater outside the
+For version **0.9.0**, use the
+[0.10.0 updater](https://github.com/comparativechrono/workbench/releases/download/app-v0.10.0/native-workbench-0.10.0-update-from-0.9.0.zip).
+Close Workbench, extract the updater outside the
 application folder, run `UpdateWorkbench.exe`, and choose the existing
 `native-workbench` folder. Installed packs, saved settings, results and reference
-files are retained. Both native updater CLI preservation gates passed; the
-folder-picker interaction was not part of the automated gate. There is **no
-updater for 0.7.0**. For that version, retain the existing installation and
-extract the 0.9.0 starter into a separate folder; extraction does not migrate data
-automatically.
+files are retained. The native updater CLI preservation gate passed in both
+Windows paths; the folder-picker interaction was not part of the automated gate.
+This updater supports **0.9.0 only**. Earlier 0.6.0 and 0.8.0 installations have
+updaters to 0.9.0 in the [previous release](docs/releases/0.9.0.md). There is no
+updater for 0.7.0: retain that installation and extract the 0.10.0 Starter into
+a separate folder. Extraction does not migrate data automatically.
 
 Saved pipelines retain exact pack versions and manifest hashes. Installing a
 newer pack does not silently change an existing pipeline. Methods descriptions,

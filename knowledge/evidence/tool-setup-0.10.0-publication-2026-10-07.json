@@ -1,0 +1,125 @@
+{
+  "schema": 1,
+  "date": "2026-10-07",
+  "status": "published; publication workflow anonymous verification passed",
+  "release": {
+    "id": 405745578,
+    "tag": "app-v0.10.0",
+    "url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.10.0",
+    "publishedAt": "2026-10-07T12:35:21Z",
+    "draft": false,
+    "prerelease": true
+  },
+  "publicationCommit": "2e474345dff195b860df39fdde263c840dd1fba3",
+  "packagedSourceCommit": "5a390acd8440856e3f4e32de237322a18bb82d7e",
+  "pullRequest": 3,
+  "runId": 37622001333,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37622001333",
+  "jobId": 112794291181,
+  "jobs": [
+    {
+      "id": 112794291181,
+      "name": "promote",
+      "conclusion": "success",
+      "scope": "Publication, exact upload readback and anonymous final downloads"
+    },
+    {
+      "id": 112794293171,
+      "name": "verify-candidate",
+      "conclusion": "skipped",
+      "scope": "Intentionally not run on the publication branch; separate successful preparation run37621511575 supplied this check"
+    }
+  ],
+  "guardTests": {
+    "passed": 23,
+    "failures": 0,
+    "skips": 0
+  },
+  "acceptedArchivesRebuilt": false,
+  "workflowAnonymousDownloadsVerified": 10,
+  "logConfirmation": "{\"published\":\"https://github.com/comparativechrono/workbench/releases/tag/app-v0.10.0\",\"verifiedAssets\":10}",
+  "retainedArtifact": [
+    {
+      "id": 11483005251,
+      "name": "app-v0.10.0-publication-2e474345dff195b860df39fdde263c840dd1fba3-1",
+      "bytes": 92517419,
+      "sha256": "267745aba55241b612ff95b7abc15428aed01f454bf809ab19eed0e8a85610d9",
+      "expiresAt": "2026-11-06T12:35:26Z"
+    }
+  ],
+  "assets": [
+    {
+      "id": 618646675,
+      "file": "BUILD-PROVENANCE.json",
+      "bytes": 1011,
+      "sha256": "9479521ee4d0f1e951f2c18575b4d3bc44acd15d4675a9d75b899421f981ae98",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.0/BUILD-PROVENANCE.json"
+    },
+    {
+      "id": 618646668,
+      "file": "BUILD-UPDATE-PROVENANCE.json",
+      "bytes": 2151,
+      "sha256": "45b1b50b73a82c03aea2586f44c72d230060ec46a451b3ecda10006a5a2586c6",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.0/BUILD-UPDATE-PROVENANCE.json"
+    },
+    {
+      "id": 618646672,
+      "file": "EVIDENCE-SHA256SUMS.txt",
+      "bytes": 528,
+      "sha256": "d0ec93d7881900c3f9d27ee487ae0aaf72e5f30a9de842d3f6444f877d51f8b1",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.0/EVIDENCE-SHA256SUMS.txt"
+    },
+    {
+      "id": 618646699,
+      "file": "native-workbench-0.10.0-source.zip",
+      "bytes": 46740582,
+      "sha256": "918adabf39c0f0cbd551b2a30d523f72135be67fe4232a9c8c54ffa6e611133b",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.0/native-workbench-0.10.0-source.zip"
+    },
+    {
+      "id": 618646702,
+      "file": "native-workbench-0.10.0-starter-windows.zip",
+      "bytes": 17028340,
+      "sha256": "659a08911cec65b8dc1ce0dd9f47fea25350a39b619c7f0aea663bae71a871ae",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.0/native-workbench-0.10.0-starter-windows.zip"
+    },
+    {
+      "id": 618646703,
+      "file": "native-workbench-0.10.0-update-from-0.9.0.zip",
+      "bytes": 12880361,
+      "sha256": "63d96f514711d0604b6fbfe940a38bfad73900285ec13e75f95397f0d012eacf",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.0/native-workbench-0.10.0-update-from-0.9.0.zip"
+    },
+    {
+      "id": 618646676,
+      "file": "RELEASE-VALIDATION.json",
+      "bytes": 8185,
+      "sha256": "f9aeca111364de09ad4b3b071fed7c8996b83530ccccfa65d2160e07edb4e27c",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.0/RELEASE-VALIDATION.json"
+    },
+    {
+      "id": 618646670,
+      "file": "SHA256SUMS.txt",
+      "bytes": 323,
+      "sha256": "2802017a62147ae0975a18490d0379798ddc93c0cca14c672cec9b1b0df953bd",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.0/SHA256SUMS.txt"
+    },
+    {
+      "id": 618646710,
+      "file": "source-metadata.json",
+      "bytes": 1764,
+      "sha256": "056db0472222514182f5fcf2e27c5e5d1a0ef46b50a7592a9b312a372c05b41b",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.0/source-metadata.json"
+    },
+    {
+      "id": 618646694,
+      "file": "WINDOWS-EVIDENCE.zip",
+      "bytes": 16369424,
+      "sha256": "3edcf17872c2a328d38c84c976a6d59867511c8ab5dea92cc4f1534c58613d37",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.10.0/WINDOWS-EVIDENCE.zip"
+    }
+  ],
+  "independentAudit": "tool-setup-0.10.0-public-downloads-2026-10-07.json",
+  "evidenceScope": "Run/job/release/tag metadata and completed publisher log checked through GitHub connector. The publisher verified authenticated uploads and then all canonical anonymous downloads before success. The large retained publication artifact was not downloaded locally; the separate public-download audit covers final public bytes.",
+  "applicationMutationAfterAcceptance": false
+}
