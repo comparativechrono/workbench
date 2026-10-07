@@ -149,7 +149,9 @@ then publish and independently verify public application downloads. Earlier
 empty-trust candidate passes remain valuable regression evidence, but do not
 validate the new trust configuration or constitute a completed release.
 
-Source-only publishing tests use the existing deliberately public test key and
-mock GitHub/public-download transports. They do not establish that the production
-environment exists, that a key has been provisioned, or that a production
+The new source-only signing/deployment tests use the existing deliberately public
+SDK key; the established publisher suite also creates ephemeral test-only keys.
+GitHub/public-download transports are mocked. No production key is created or
+used by these tests, and they do not establish that the production environment
+exists, that a production key has been provisioned, or that a production
 catalogue/app release is live.

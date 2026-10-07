@@ -16,23 +16,26 @@ evidence remain unchanged.
 
 ## Catalogue signing infrastructure, 2026-10-07
 
-The user authorized establishing production catalogue signing and completing the
-0.10.0 release. A separate maintainer workflow now prepares, signs and publishes
-the reviewed official pack catalogue, with restricted key handling, pinned
-actions, public-only artifacts, immutable signed history, race rejection and
-anonymous post-publication verification. See the
-[one-time owner setup and workflow guide](../publishing/catalogue-signing.md).
+The protected manual signing/publication infrastructure in
+[PR #4](https://github.com/comparativechrono/workbench/pull/4) passed **56 source
+checks, zero failures/errors/skips**, in
+[run 37583926483](https://github.com/comparativechrono/workbench/actions/runs/37583926483).
+The [dated evidence](evidence/catalogue-signing-2026-10-07.json) records exact
+source identities, test-only signing, mocked publication, and the corrected
+historical pack-identity bug and local integration setup errors. These checks
+validate signing cleanup, identity binding and publication safeguards; they do
+not establish a live production catalogue.
 
-This infrastructure does not merge the application changes from
-[draft PR #3](https://github.com/comparativechrono/workbench/pull/3), change the
-0.9.0 runtime or publish 0.10.0. The copied setup selection and archive lock are
-public publishing inputs. The application source list remains empty. Production
-environment protection and secret provisioning require owner access unavailable
-through the development connector; whether a secret already exists is unknown.
-No production key has been created, installed or used here. Fixture tests do not
-establish a live production catalogue. After owner setup, publish the catalogue,
-bundle its reviewed public source into a new candidate, validate it on Windows,
-then release and verify public downloads.
+The [one-time owner setup guide](../publishing/catalogue-signing.md) is ready.
+Environment protections and secret provisioning require owner access unavailable
+through the development connector; their configuration remains unverified.
+No production key has been created, installed or used here. The application
+source list remains empty, the 0.9.0 runtime is unchanged, and application
+[PR #3](https://github.com/comparativechrono/workbench/pull/3) remains separate.
+There was no new Windows validation or application release in this infrastructure
+gate. After owner provisioning, publish and verify the official catalogue, bundle
+its reviewed public source, and validate a new exact 0.10.0 Windows candidate
+before releasing it.
 
 ## Published CWL results, DAG routing and icon, 2026-10-06
 
