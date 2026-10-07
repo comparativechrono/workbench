@@ -7,18 +7,23 @@ user actions. The host owns background threads and calls these synchronous APIs.
 from __future__ import annotations
 
 from datetime import datetime, timezone
+import errno
 import hashlib
+import http.client
 import json
 import os
 import ntpath
 from pathlib import Path
 import re
+import socket
+import ssl
 import stat
 import tempfile
 import threading
 import time
 import urllib.error
 import urllib.request
+from urllib.parse import urlsplit
 import zipfile
 
 try:
@@ -183,44 +188,121 @@ def compatibility(item):
 
 
 class _Redirects(urllib.request.HTTPRedirectHandler):
-    def __init__(self, hosts):
+    def __init__(self, hosts, initial_url=None):
         self.hosts = hosts
+        self.host = urlsplit(initial_url).hostname if initial_url else None
     def redirect_request(self, request, fp, code, msg, headers, newurl):
         # GitHub Release assets redirect to short-lived, signed HTTPS URLs.
         # Their query is used for this request only and is never cached/logged.
         https_url(newurl, self.hosts, redirect=True)
+        self.host = urlsplit(newurl).hostname
         return super().redirect_request(request, fp, code, msg, headers, newurl)
+
+
+def _download_error(error, host):
+    """Expose bounded failure categories, never exception text or request URLs."""
+    reason = error
+    for _ in range(4):
+        if not isinstance(reason, urllib.error.URLError) or isinstance(reason, urllib.error.HTTPError):
+            break
+        reason = reason.reason
+    status = reason.code if isinstance(reason, urllib.error.HTTPError) else None
+    # urllib's CONNECT tunnel error wraps a status in OSError rather than
+    # HTTPError. Extract only the bounded numeric status, never its text.
+    if status is None and isinstance(reason, OSError):
+        tunnel = re.match(r'^Tunnel connection failed: ([0-9]{3})\b', str(reason))
+        if tunnel:
+            status = int(tunnel.group(1))
+    prefix = 'Download from ' + host + ' failed. '
+    if type(status) is int and 100 <= status <= 599:
+        if status == 407:
+            detail = 'The proxy requires authentication (HTTP 407). Ask your network administrator about approved access for Workbench.'
+        elif status in (401, 403):
+            detail = 'Access was denied (HTTP ' + str(status) + '). Check access to this host with your network administrator.'
+        elif status == 404:
+            detail = 'The selected download is unavailable (HTTP 404). Refresh the catalogue and retry; report this if it persists.'
+        elif status == 429:
+            detail = 'The service limited download requests (HTTP 429). Wait before retrying.'
+        elif status >= 500:
+            detail = 'The service or proxy returned HTTP ' + str(status) + '. Retry later.'
+        else:
+            detail = 'The service or proxy returned HTTP ' + str(status) + '. Check approved network access or report this status.'
+    elif isinstance(reason, ssl.SSLCertVerificationError):
+        detail = 'The HTTPS certificate could not be verified. Check the Windows date and time; ask your network administrator to check trusted certificates.'
+    elif isinstance(reason, ssl.SSLError):
+        detail = 'The secure HTTPS connection failed. Ask your network administrator to check TLS access to this host.'
+    elif isinstance(reason, socket.gaierror):
+        detail = 'The server or configured proxy name could not be resolved. Check your connection and approved DNS/proxy settings.'
+    elif isinstance(reason, TimeoutError) or getattr(reason, 'winerror', None) == 10060:
+        detail = 'The connection timed out. Check your connection and retry.'
+    elif isinstance(reason, ConnectionRefusedError) or getattr(reason, 'winerror', None) == 10061:
+        detail = 'The connection was refused. Check approved access to this host and your proxy settings.'
+    elif isinstance(reason, (ConnectionError, http.client.IncompleteRead, http.client.RemoteDisconnected)):
+        detail = 'The connection ended before the download completed. Check your connection and retry.'
+    elif isinstance(reason, PermissionError) or getattr(reason, 'winerror', None) == 10013:
+        detail = 'Network access was denied. Ask your network administrator about approved access for Workbench.'
+    else:
+        code = getattr(reason, 'winerror', None) or getattr(reason, 'errno', None)
+        suffix = ' (error ' + str(code) + ')' if type(code) is int and -65535 <= code <= 65535 else ''
+        detail = 'The network request failed' + suffix + '. Check your connection and approved proxy/host access.'
+    return prefix + detail
+
+
+def _download_storage_error(error):
+    code, windows = getattr(error, 'errno', None), getattr(error, 'winerror', None)
+    if code == errno.ENOSPC or windows in (39, 112):
+        detail = 'There is not enough free disk space.'
+    elif windows in (32, 33):
+        detail = 'The temporary download file is locked by another process. Close other Workbench instances and retry.'
+    elif isinstance(error, PermissionError) or code in (errno.EACCES, errno.EPERM, errno.EROFS) or windows == 5:
+        detail = 'Write access was denied. Check that your Workbench folder is writable.'
+    elif isinstance(error, FileNotFoundError):
+        detail = 'The download folder is no longer available. Check that the drive is connected and restart Workbench.'
+    else:
+        detail = 'A local file operation failed. Check free space and write access, then retry.'
+    return 'Download could not be saved in the Workbench user-data folder. ' + detail
 
 
 def _download(url, hosts, destination, limit, cancel=None, event=None, expected_size=None, expected_sha=None):
     https_url(url, hosts)
     cancelled(cancel)
-    opener = urllib.request.build_opener(_Redirects(hosts))
+    redirects = _Redirects(hosts, url)
+    opener = urllib.request.build_opener(redirects)
     request = urllib.request.Request(url, headers={'User-Agent':'NativeWorkbench/' + APP_VERSION, 'Accept-Encoding':'identity'})
     digest = hashlib.sha256()
     count = 0
     started = time.monotonic()
     try:
-        with opener.open(request, timeout=20) as response, Path(destination).open('xb') as output:
+        with opener.open(request, timeout=20) as response:
             require(response.getcode() == 200, 'Download did not return an ordinary file')
             https_url(response.geturl(), hosts, redirect=True)
+            redirects.host = urlsplit(response.geturl()).hostname
             require(response.headers.get('Content-Encoding', 'identity').lower() == 'identity', 'Encoded downloads are not supported')
             length = response.headers.get('Content-Length')
             if length is not None:
                 require(length.isdecimal() and int(length) <= limit, 'Download exceeds the size limit')
                 if expected_size is not None:
                     require(int(length) == expected_size, 'Download size differs from the signed catalogue')
-            while True:
-                cancelled(cancel)
-                require(time.monotonic() - started < 3600, 'Download exceeded the one hour time limit')
-                block = response.read1(min(CHUNK, limit - count + 1))
-                if not block:
-                    break
-                count += len(block)
-                require(count <= limit, 'Download exceeds the size limit')
-                digest.update(block)
-                output.write(block)
-                _event(event, 'downloading', bytes=count, total=expected_size or (int(length) if length else None), cancellable=True)
+            try:
+                with filesystem_path(destination).open('xb') as output:
+                    while True:
+                        cancelled(cancel)
+                        require(time.monotonic() - started < 3600, 'Download exceeded the one hour time limit')
+                        try:
+                            block = response.read1(min(CHUNK, limit - count + 1))
+                        except (urllib.error.URLError, OSError, http.client.HTTPException) as exc:
+                            raise PackError(_download_error(exc, redirects.host)) from None
+                        if not block:
+                            break
+                        count += len(block)
+                        require(count <= limit, 'Download exceeds the size limit')
+                        digest.update(block)
+                        output.write(block)
+                        _event(event, 'downloading', bytes=count, total=expected_size or (int(length) if length else None), cancellable=True)
+            except PackCancelled:
+                raise
+            except OSError as exc:
+                raise PackError(_download_storage_error(exc)) from None
         cancelled(cancel)
         if expected_size is not None:
             require(count == expected_size, 'Incomplete download: size differs from the signed catalogue')
@@ -229,9 +311,9 @@ def _download(url, hosts, destination, limit, cancel=None, event=None, expected_
         return count, digest.hexdigest()
     except PackCancelled:
         raise
-    except (urllib.error.URLError, OSError) as exc:
+    except (urllib.error.URLError, OSError, http.client.HTTPException) as exc:
         # Do not leak signed redirect URLs/proxy credentials into logs or the UI.
-        raise PackError('Download failed. Check the connection and whether the approved host is accessible.') from exc
+        raise PackError(_download_error(exc, redirects.host)) from None
 
 
 def _archive_envelope(value):

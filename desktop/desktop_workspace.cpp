@@ -523,7 +523,8 @@ class Workspace {
   bool setupBusy = false, setupActionPending = false, setupPollPending = false,
        setupRebuilding = false, setupPollFailed = false, setupWelcomeChecked = false,
        setupSelectionLoaded = false;
-  std::string setupProfile = "full", setupRowsFingerprint;
+  std::string setupProfile = "full";
+  Json setupRenderedRows = Json::array();
   std::set<std::string> setupChosen;
   UINT setupDpi = 96;
   UINT dpi = 96;
@@ -1281,7 +1282,10 @@ class Workspace {
     for (HWND h : {setupFull, setupStarter, setupCustom}) EnableWindow(h, idle);
     // Full and Starter still allow scrolling/selection for inspection; the
     // notification handler only changes checks in Custom.
-    EnableWindow(setupList, idle);
+    // The list is also an inspection surface while transfers are active. Keep
+    // scrolling and row selection available; LVN_ITEMCHANGING below prevents
+    // edits to the installation selection while it is locked.
+    EnableWindow(setupList, ready && !closing);
     EnableWindow(setupRefresh, idle && setupState.get("configured").boolean());
     EnableWindow(setupInstall, idle && selectedCount > 0 && available);
     const auto &operation = setupState.get("operation");
@@ -1292,8 +1296,10 @@ class Workspace {
     EnableWindow(setupCancel, ready && setupBusy && !setupActionPending &&
         operation.get("cancellable").boolean(true) && operationStatus != "cancelling");
     EnableWindow(setupClose, !setupBusy && !setupActionPending && !closing);
-    SetWindowTextW(setupInstall, setupProfile == "starter" ? L"Use Starter" :
-        bytes == 0 ? L"Use installed selection" : L"Install selection");
+    const std::wstring installLabel = setupProfile == "starter" ? L"Use Starter" :
+        bytes == 0 ? L"Use installed selection" : L"Install selection";
+    if (control_text(setupInstall) != installLabel)
+      SetWindowTextW(setupInstall, installLabel.c_str());
     std::wstring summary = std::to_wstring(selectedCount) + L" packs selected · " +
         std::to_wstring(installed) + L" already installed · " + setup_size(bytes) +
         L" additional download\nReferences, databases and working space are separate.";
@@ -1301,41 +1307,83 @@ class Workspace {
   }
   void setup_refresh_rows() {
     if (!setupWindow) return;
-    const auto fingerprint = setupState.get("rows").dump() + setupProfile;
-    if (fingerprint == setupRowsFingerprint) {
-      setup_enabled();
-      return;
-    }
-    setupRowsFingerprint = fingerprint;
-    setupRebuilding = true;
-    const int first = ListView_GetTopIndex(setupList);
-    SendMessageW(setupList, WM_SETREDRAW, FALSE, 0);
-    ListView_DeleteAllItems(setupList);
-    int index = 0;
+    Json rendered = Json::array();
     for (const auto &row : setupState.get("rows").array_items()) {
-      auto name = wt(row, "name", getstr(row, "id"));
-      LVITEMW item{};
-      item.mask = LVIF_TEXT;
-      item.iItem = index;
-      item.pszText = name.data();
-      ListView_InsertItem(setupList, &item);
-      auto version = wt(row, "version");
       std::wstring status = row.get("installed").boolean() ? L"Installed" :
           !row.get("available").boolean() ? L"Catalogue needed" :
           !row.get("compatible").boolean(true) ? L"Incompatible" : L"Ready to download";
       const auto queueStatus = getstr(row, "status");
       if (!row.get("installed").boolean() && !queueStatus.empty() && queueStatus != "pending")
         status = wide(queueStatus);
-      auto size = row.get("installed").boolean() ? L"—" : setup_size(row.get("size").integer());
-      ListView_SetItemText(setupList, index, 1, version.data());
-      ListView_SetItemText(setupList, index, 2, status.data());
-      ListView_SetItemText(setupList, index, 3, size.data());
-      ListView_SetCheckState(setupList, index, setup_selected(row));
+      rendered.array_items().push_back(object({
+          {"id", getstr(row, "id")}, {"name", getstr(row, "name", getstr(row, "id"))},
+          {"version", getstr(row, "version")}, {"status", narrow(status)},
+          {"size", narrow(row.get("installed").boolean() ? L"—" : setup_size(row.get("size").integer()))},
+          {"checked", setup_selected(row)}}));
+    }
+    if (rendered.dump() == setupRenderedRows.dump()) {
+      setup_enabled();
+      return;
+    }
+    const auto &previous = setupRenderedRows.array_items();
+    const auto &next = rendered.array_items();
+    bool rebuild = previous.size() != next.size();
+    if (!rebuild)
+      for (size_t i = 0; i < next.size(); ++i)
+        if (getstr(previous[i], "id") != getstr(next[i], "id")) rebuild = true;
+    const int first = ListView_GetTopIndex(setupList);
+    const int selected = ListView_GetNextItem(setupList, -1, LVNI_SELECTED);
+    const int focused = ListView_GetNextItem(setupList, -1, LVNI_FOCUSED);
+    auto old_id = [&](int index) {
+      return index >= 0 && static_cast<size_t>(index) < previous.size()
+          ? getstr(previous[static_cast<size_t>(index)], "id") : std::string{};
+    };
+    const auto topId = old_id(first), selectedId = old_id(selected), focusedId = old_id(focused);
+    RECT oldTop{};
+    const bool hadTop = !topId.empty() && ListView_GetItemRect(setupList, first, &oldTop, LVIR_BOUNDS);
+    const int horizontal = GetScrollPos(setupList, SB_HORZ);
+    setupRebuilding = true;
+    if (rebuild) {
+      SendMessageW(setupList, WM_SETREDRAW, FALSE, 0);
+      ListView_DeleteAllItems(setupList);
+    }
+    int index = 0;
+    for (const auto &row : next) {
+      if (rebuild) {
+        LVITEMW item{};
+        item.iItem = index;
+        ListView_InsertItem(setupList, &item);
+      }
+      int column = 0;
+      for (const auto *field : {"name", "version", "status", "size"}) {
+        if (rebuild || getstr(row, field) != getstr(previous[static_cast<size_t>(index)], field)) {
+          auto value = wt(row, field);
+          ListView_SetItemText(setupList, index, column, value.data());
+        }
+        ++column;
+      }
+      if (ListView_GetCheckState(setupList, index) != row.get("checked").boolean())
+        ListView_SetCheckState(setupList, index, row.get("checked").boolean());
+      if (rebuild) {
+        const auto id = getstr(row, "id");
+        ListView_SetItemState(setupList, index,
+            (id == selectedId ? LVIS_SELECTED : 0) | (id == focusedId ? LVIS_FOCUSED : 0),
+            LVIS_SELECTED | LVIS_FOCUSED);
+      }
       ++index;
     }
-    if (first > 0 && first < index) ListView_EnsureVisible(setupList, first, FALSE);
-    SendMessageW(setupList, WM_SETREDRAW, TRUE, 0);
-    InvalidateRect(setupList, nullptr, FALSE);
+    if (rebuild) {
+      for (size_t i = 0; hadTop && i < next.size(); ++i) {
+        if (getstr(next[i], "id") != topId) continue;
+        RECT current{};
+        if (ListView_GetItemRect(setupList, static_cast<int>(i), &current, LVIR_BOUNDS))
+          ListView_Scroll(setupList, horizontal - GetScrollPos(setupList, SB_HORZ), current.top - oldTop.top);
+        break;
+      }
+      SendMessageW(setupList, WM_SETREDRAW, TRUE, 0);
+      InvalidateRect(setupList, nullptr, FALSE);
+    }
+    setupRenderedRows = std::move(rendered);
     setupRebuilding = false;
     setup_enabled();
   }
@@ -1350,8 +1398,11 @@ class Workspace {
       notice = setupState.get("configured").boolean()
           ? L"Refresh the official catalogue to verify available downloads. Nothing is downloaded until you choose an action."
           : L"Online setup is unavailable: no official catalogue is configured. Use Starter now; Manage tools still supports trusted pack imports.";
+    const auto operationStatus = getstr(operation, "status");
+    if (!getstr(operation, "current").empty() &&
+        (setupBusy || operationStatus == "failed" || operationStatus == "cancelled" || operationStatus == "interrupted"))
+      notice += L" · " + wt(operation, "current");
     if (setupBusy) {
-      if (!getstr(operation, "current").empty()) notice += L" · " + wt(operation, "current");
       if (operation.get("count").integer() > 0)
         notice += L"\n" + std::to_wstring(operation.get("completed").integer()) +
             L" / " + std::to_wstring(operation.get("count").integer()) + L" packs ready";
@@ -1361,10 +1412,12 @@ class Workspace {
     }
     if (control_text(setupNotice) != notice) SetWindowTextW(setupNotice, notice.c_str());
     const auto bytes = operation.get("bytes").integer(), total = operation.get("total").integer();
-    SendMessageW(setupProgress, PBM_SETRANGE32, 0, 1000);
-    SendMessageW(setupProgress, PBM_SETPOS, total > 0 ?
-        static_cast<WPARAM>(std::clamp(1000.0 * bytes / total, 0.0, 1000.0)) : 0, 0);
-    ShowWindow(setupProgress, setupBusy ? SW_SHOW : SW_HIDE);
+    const auto position = total > 0 ?
+        static_cast<WPARAM>(std::clamp(1000.0 * bytes / total, 0.0, 1000.0)) : 0;
+    if (SendMessageW(setupProgress, PBM_GETPOS, 0, 0) != static_cast<LRESULT>(position))
+      SendMessageW(setupProgress, PBM_SETPOS, position, 0);
+    if (!!IsWindowVisible(setupProgress) != setupBusy)
+      ShowWindow(setupProgress, setupBusy ? SW_SHOW : SW_HIDE);
   }
   void setup_layout() {
     if (!setupWindow) return;
@@ -1392,10 +1445,13 @@ class Workspace {
     put(setupClose, w - 166, h - 132, 148, 34);
     put(setupNotice, 18, h - 87, w - 36, 63);
     put(setupProgress, 18, h - 17, w - 36, 7);
-    ListView_SetColumnWidth(setupList, 0, MulDiv(std::max(230, w - 385), setupDpi, 96));
-    ListView_SetColumnWidth(setupList, 1, MulDiv(90, setupDpi, 96));
-    ListView_SetColumnWidth(setupList, 2, MulDiv(160, setupDpi, 96));
-    ListView_SetColumnWidth(setupList, 3, MulDiv(99, setupDpi, 96));
+    int column = 0;
+    for (const int logicalWidth : {std::max(230, w - 385), 90, 160, 99}) {
+      const int desired = MulDiv(logicalWidth, setupDpi, 96);
+      if (ListView_GetColumnWidth(setupList, column) != desired)
+        ListView_SetColumnWidth(setupList, column, desired);
+      ++column;
+    }
     RedrawWindow(setupWindow, nullptr, nullptr, RDW_INVALIDATE | RDW_ALLCHILDREN);
   }
   void setup_command(int id) {
@@ -1448,6 +1504,16 @@ class Workspace {
         return 0;
       case WM_NOTIFY: {
         auto *notice = reinterpret_cast<NMHDR *>(l);
+        if (notice->idFrom == SETUP_LIST && notice->code == LVN_ITEMCHANGING && !app->setupRebuilding) {
+          const auto *change = reinterpret_cast<NMLISTVIEW *>(l);
+          const auto &rows = app->setupState.get("rows").array_items();
+          if (change->iItem >= 0 && static_cast<size_t>(change->iItem) < rows.size() &&
+              (change->uChanged & LVIF_STATE) &&
+              ((change->uOldState ^ change->uNewState) & LVIS_STATEIMAGEMASK))
+            return app->setupProfile != "custom" || rows[static_cast<size_t>(change->iItem)].get("starter").boolean() ||
+                app->setupBusy || app->setupActionPending || app->busy || app->closing ||
+                app->packBusy || app->packActionPending || app->refBusy || app->refActionPending;
+        }
         if (notice->idFrom == SETUP_LIST && notice->code == LVN_ITEMCHANGED && !app->setupRebuilding) {
           const auto *change = reinterpret_cast<NMLISTVIEW *>(l);
           const auto &rows = app->setupState.get("rows").array_items();
@@ -1463,6 +1529,12 @@ class Workspace {
             } else if (ListView_GetCheckState(app->setupList, change->iItem))
               app->setupChosen.insert(getstr(row, "id"));
             else app->setupChosen.erase(getstr(row, "id"));
+            // A local checkbox edit changes the rendered row before the next
+            // backend reply. Keep the cache synchronized so an immediate
+            // profile switch cannot mistake the old checks for current ones.
+            if (static_cast<size_t>(change->iItem) < app->setupRenderedRows.array_items().size())
+              app->setupRenderedRows.array_items()[static_cast<size_t>(change->iItem)]["checked"] =
+                  !!ListView_GetCheckState(app->setupList, change->iItem);
             app->setup_enabled();
           }
         }
@@ -1490,7 +1562,7 @@ class Workspace {
       case WM_CLOSE: app->setup_command(SETUP_CLOSE); return 0;
       case WM_NCDESTROY:
         app->setupWindow = nullptr;
-        app->setupRowsFingerprint.clear();
+        app->setupRenderedRows = Json::array();
         SetWindowLongPtrW(h, GWLP_USERDATA, 0);
         break;
       default: break;
@@ -1519,7 +1591,10 @@ class Workspace {
     GetWindowRect(window, &area);
     setupDpi = dpi;
     const int w = px(920), h = px(720);
-    setupWindow = CreateWindowExW(WS_EX_CONTROLPARENT | WS_EX_COMPOSITED,
+    // The report list provides its own double buffering. Leave its native
+    // header in charge of painting rather than nesting it inside top-level
+    // descendant compositing, which also repaints unchanged child controls.
+    setupWindow = CreateWindowExW(WS_EX_CONTROLPARENT,
         klass.lpszClassName, L"Tool setup · Native Workbench",
         WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN,
         area.left + std::max<LONG>(0, (area.right - area.left - w) / 2),
@@ -1555,6 +1630,7 @@ class Workspace {
     setupClose = button(L"Use Workbench", SETUP_CLOSE, setupWindow);
     setupNotice = make(L"STATIC", L"Loading tool selection...", SS_LEFT | SS_NOPREFIX, SETUP_NOTICE, setupWindow);
     setupProgress = make(PROGRESS_CLASSW, L"Tool installation progress", PBS_SMOOTH, SETUP_PROGRESS, setupWindow);
+    SendMessageW(setupProgress, PBM_SETRANGE32, 0, 1000);
     setup_refresh_rows();
     setup_notice();
     setup_layout();
@@ -1583,9 +1659,11 @@ class Workspace {
       setupWelcomeChecked = true;
       if (result.get("offered").boolean()) show_setup();
     }
-    if (setupWindow)
-      CheckRadioButton(setupWindow, SETUP_FULL, SETUP_CUSTOM,
-          setupProfile == "full" ? SETUP_FULL : setupProfile == "starter" ? SETUP_STARTER : SETUP_CUSTOM);
+    if (setupWindow) {
+      const int selected = setupProfile == "full" ? SETUP_FULL : setupProfile == "starter" ? SETUP_STARTER : SETUP_CUSTOM;
+      if (SendMessageW(GetDlgItem(setupWindow, selected), BM_GETCHECK, 0, 0) != BST_CHECKED)
+        CheckRadioButton(setupWindow, SETUP_FULL, SETUP_CUSTOM, selected);
+    }
     setup_refresh_rows();
     setup_notice();
     enabled();

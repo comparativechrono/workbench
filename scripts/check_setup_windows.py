@@ -244,6 +244,212 @@ def unchanged(before, root, exceptions=()):
             'Setup changed application code, executables or unrelated bundled metadata.')
 
 
+def ui_polling_checks(root, evidence, report, expect_regression=False):
+    """Observe real desktop frames and real setup polling, with no host substitution.
+
+    The control may install completed packs before cancellation. Call this with
+    its own disposable exact extraction. A failure to reach the live operation
+    is a failed prerequisite, never an expected UI regression.
+    """
+    evidence.mkdir(parents=True, exist_ok=True)
+    before = core_hashes(root)
+    ui = NativeUI(root, evidence)
+    observations = {'expectedRegression': expect_regression, 'defects': [], 'navigationDefects': [],
+                    'scope': 'Exact native GUI and production trust; real HTTPS refresh/install briefly followed by cancellation.',
+                    'physicalDisplayCoverage': False, 'productionFullCompleted': False}
+    def record(condition, message, category='navigation'):
+        if not condition:
+            observations['defects'].append(message)
+            if category == 'navigation':
+                observations['navigationDefects'].append(message)
+    def setup_window():
+        return next((h for h in ui.windows() if ui.label(h, True) == 'WorkbenchToolSetup0100'), None)
+    def enabled(identity):
+        return bool(ui.user.IsWindowEnabled(ui.child(identity, owner)))
+    def click(identity):
+        control = ui.child(identity, owner)
+        require(control and enabled(identity), 'Polling gate control is unavailable: ' + str(identity))
+        left, top, right, bottom = ui.bounds(control)
+        ui.click_at((left+right)//2, (top+bottom)//2)
+    def position():
+        return {'top': ui.send(listing, 0x1027),
+                'selected': ui.send(listing, 0x100C, -1, 2),
+                'focused': ui.send(listing, 0x100C, -1, 1),
+                'horizontal': ui.scroll_info(listing, 0)['nPos']}
+    def frames(name, seconds, expected_position=None, busy=False):
+        # BitBlt reads presented pixels; unlike PrintWindow this does not ask
+        # the application to repaint and hide an intermediate blank header.
+        sample = {'seconds': seconds, 'frames': 0, 'headerHashes': {},
+                  'positionChanges': [], 'busySamples': 0, 'disabledSamples': 0,
+                  'notices': [], 'progressStates': [],
+                  'pixelComparison': 'BGR bytes only; undefined BitBlt alpha ignored'}
+        busy_first = busy_last = None
+        boundary = ui.bounds(header)
+        ui.mouse(*ui.bounds(ui.child(706, owner))[:2])
+        deadline = time.monotonic() + seconds
+        while time.monotonic() < deadline:
+            require(ui.process.poll() is None, 'Native GUI exited during sustained observation.')
+            _, pixels = ui.screen_capture(name + '-last.bmp', boundary)
+            bgr = bytearray(len(pixels) // 4 * 3)
+            for channel in range(3):
+                bgr[channel::3] = pixels[channel::4]
+            digest = hashlib.sha256(bgr).hexdigest()
+            sample['headerHashes'][digest] = sample['headerHashes'].get(digest, 0) + 1
+            sample['frames'] += 1
+            if expected_position is not None:
+                observed = position()
+                if observed != expected_position and observed not in sample['positionChanges']:
+                    sample['positionChanges'].append(observed)
+            if not enabled(713):
+                sample['busySamples'] += 1
+                sample['disabledSamples'] += not enabled(705)
+                busy_last = time.monotonic()
+                if busy_first is None:
+                    busy_first = busy_last
+            notice = ui.label(ui.child(707, owner))
+            if not sample['notices'] or sample['notices'][-1] != notice:
+                sample['notices'].append(notice)
+            progress = {'notice': notice, 'position': ui.send(ui.child(708, owner), 0x0408)}
+            if not sample['progressStates'] or sample['progressStates'][-1] != progress:
+                sample['progressStates'].append(progress)
+            time.sleep(.04)
+        sample['observedBusySeconds'] = 0 if busy_first is None else busy_last - busy_first
+        if busy:
+            require(sample['busySamples'] >= 20 and sample['observedBusySeconds'] >= 3,
+                    'Live setup did not remain active long enough to test multiple status polls: ' + json.dumps(sample))
+            require(len(sample['progressStates']) >= 2,
+                    'No changing host status/progress was observed during the active interval; repeated polling was not established.')
+        return sample
+    try:
+        ui.wait('polling gate first-run setup', setup_window)
+        owner = setup_window()
+        ui.wait('polling gate populated list', lambda: ui.child(705, owner) and
+                ui.send(ui.child(705, owner), 0x1004) == 32)
+        listing = ui.child(705, owner)
+        header = ui.send(listing, 0x101F)
+        click(704)
+        ui.wait('polling gate Custom selection', lambda: ui.send(ui.child(704, owner), 0x00F0) == 1)
+        scale = ui.user.GetDpiForWindow(owner) / 96
+        ui.user.MoveWindow(owner, 0, 0, round(830*scale), round(650*scale), True)
+        left, _, right, bottom = ui.bounds(listing)
+        header_bottom = ui.bounds(header)[3]
+        ui.click_at(left + 75, header_bottom + 10)
+        ui.key(listing, 0x24)
+        ui.wait('polling gate first pack selected', lambda: ui.send(listing, 0x100C, -1, 1) == 0)
+        # Select all 32 through normal Custom keyboard interaction. This makes
+        # the later locked-checkbox assertion meaningful: this same checkbox
+        # was editable before the download operation started.
+        for row in range(32):
+            if ui.send(listing, 0x102C, row, 0xF000) != 0x2000:
+                ui.key(listing, 0x20)
+                ui.wait('Custom pack selected ' + str(row), lambda row=row:
+                        ui.send(listing, 0x102C, row, 0xF000) == 0x2000)
+            if row < 31:
+                ui.key(listing, 0x28)
+                ui.wait('Custom focus ' + str(row+1), lambda row=row:
+                        ui.send(listing, 0x100C, -1, 1) == row+1)
+        # No operation is active, so no backend poll can repair stale local
+        # checkbox state. Prime an all-checked rendering, edit Custom, then
+        # immediately return to Full and inspect the actual native checkmarks.
+        click(702)
+        click(704)
+        ui.key(listing, 0x23)
+        ui.wait('Custom final pack focused before immediate profile switch', lambda:
+                ui.send(listing, 0x100C, -1, 1) == 31)
+        ui.key(listing, 0x20)
+        ui.wait('Custom final pack unchecked', lambda: ui.send(listing, 0x102C, 31, 0xF000) == 0x1000)
+        click(702)
+        ui.wait('Full restores every visible check without a status poll', lambda:
+                all(ui.send(listing, 0x102C, row, 0xF000) == 0x2000 for row in range(32)))
+        click(704)
+        ui.wait('Custom retains the previous unchecked choice', lambda:
+                ui.send(listing, 0x102C, 31, 0xF000) == 0x1000)
+        ui.key(listing, 0x23)
+        ui.wait('Custom final pack focused again', lambda: ui.send(listing, 0x100C, -1, 1) == 31)
+        ui.key(listing, 0x20)
+        ui.wait('Custom final pack reselected for the polling probe', lambda:
+                ui.send(listing, 0x102C, 31, 0xF000) == 0x2000)
+        observations['immediateCustomFullChecks'] = True
+        ui.key(listing, 0x23)
+        ui.wait('polling gate can initially reach final row', lambda: ui.send(listing, 0x1027) > 0)
+        time.sleep(.3)
+        idle_position = position()
+        observations['idle'] = frames('setup-idle-header', 3, idle_position)
+        record(len(observations['idle']['headerHashes']) == 1,
+               'Unchanged column header pixels changed during idle sampling.', 'pixels')
+        record(not observations['idle']['positionChanges'], 'Idle setup moved the viewport or selection.')
+        # A genuine wheel input must move the viewport without changing the
+        # highlighted pack. Hold the new viewport through another idle interval.
+        ui.wheel(left + 100, header_bottom + 30, 360)
+        ui.wait('idle setup real wheel scroll', lambda: ui.send(listing, 0x1027) < idle_position['top'])
+        wheel_position = position()
+        observations['idleWheel'] = frames('setup-idle-wheel', 2, wheel_position)
+        record(not observations['idleWheel']['positionChanges'], 'Wheel position was reset while idle.')
+        click(709)
+        ui.wait('live catalogue refresh completed', lambda: enabled(713) and
+                'Official catalogue verified.' in ui.label(ui.child(707, owner)), 120)
+        observations['refreshPosition'] = position()
+        record(observations['refreshPosition'] == wheel_position,
+               'Catalogue row updates lost the exact viewport, highlighted pack or focus.')
+        click(710)
+        ui.wait('live installation starts', lambda: not enabled(713))
+        record(enabled(705), 'Package list is disabled during installation, preventing native scrolling.')
+        # End followed by real wheel navigation exercises the control while the
+        # application is polling. The old build is intentionally still observed
+        # after finding it disabled, so the negative control retains evidence.
+        ui.key(listing, 0x23)
+        time.sleep(.2)
+        busy_end = position()
+        if not expect_regression:
+            require(busy_end['focused'] == 31 and busy_end['selected'] == 31,
+                    'The editable-before-installation final pack was not focused for the locked-checkbox check.')
+        ui.wheel(left + 100, header_bottom + 30, 360)
+        time.sleep(.2)
+        busy_position = position()
+        observations['busyWheel'] = {'before': busy_end, 'after': busy_position}
+        record(busy_position['top'] < busy_end['top'], 'Real mouse wheel cannot scroll the active installation list.')
+        check_state = [ui.send(listing, 0x102C, row, 0xF000) for row in range(32)]
+        ui.key(listing, 0x20)
+        time.sleep(.1)
+        record([ui.send(listing, 0x102C, row, 0xF000) for row in range(32)] == check_state,
+               'A locked installation checkbox changed while setup was active.', 'selection')
+        observations['polling'] = frames('setup-busy-header', 5, busy_position, busy=True)
+        record(not observations['polling']['disabledSamples'], 'Status polling disabled the inspectable package list.')
+        record(not observations['polling']['positionChanges'], 'Status polling changed the viewport, highlighted pack or focus.')
+        record(len(observations['polling']['headerHashes']) == 1,
+               'Unchanged column header pixels changed during active status polling.', 'pixels')
+        # Exercise the native scroll bar as well as wheel and keyboard input.
+        if enabled(705):
+            ui.key(listing, 0x24)
+            ui.wait('busy list Home', lambda: ui.send(listing, 0x1027) == 0)
+            has_horizontal = ui.scroll_info(listing, 0)['nMax'] >= ui.scroll_info(listing, 0)['nPage']
+            ui.click_at(right - round(9*scale), bottom - round((27 if has_horizontal else 9)*scale))
+            time.sleep(.2)
+            record(ui.send(listing, 0x1027) > 0, 'Native vertical scroll-bar arrow did not scroll during setup.')
+        if not enabled(713):
+            ui.wait('active installation is cancellable', lambda: enabled(712), 120)
+            click(712)
+        ui.wait('polling gate cancellation settles', lambda: enabled(713), 120)
+        observations['finalNotice'] = ui.label(ui.child(707, owner))
+        observations['capture'] = ui.capture('setup-polling-final.bmp', owner)
+        unchanged(before, root)
+        observations['headerFlashObserved'] = any(len(observations[key]['headerHashes']) > 1
+                                                   for key in ('idle', 'polling'))
+        write_json(evidence/'setup-polling-observations.json', observations)
+        require(bool(observations['navigationDefects']) if expect_regression else not observations['defects'],
+                ('Published baseline did not reproduce a UI regression.' if expect_regression else
+                 'Native setup polling regressions: ' + '; '.join(observations['defects'])))
+        check(report, 'Published 0.10.0 negative control reproduces setup navigation defects.' if expect_regression else
+              'Native setup keeps header pixels and viewport stable during sustained idle and live polling, supports wheel/scroll-bar navigation while busy, and blocks checkbox edits.')
+        return observations
+    finally:
+        # This disposable probe may fail while work is still cancellable; stop
+        # only its process group without a modal close-confirmation race.
+        write_json(evidence/'setup-polling-observations.json', observations)
+        stop_process_tree(ui.process)
+        ui.user.SetThreadDpiAwarenessContext(ui.previous_dpi)
+
+
 def gui_checks(root, evidence, report):
     ui = NativeUI(root, evidence)
     captures = []
@@ -519,6 +725,8 @@ def main(argv=None):
     parser.add_argument('--asset-sha256', required=True)
     parser.add_argument('--full-catalogue', type=Path)
     parser.add_argument('--production-full', action='store_true')
+    parser.add_argument('--ui-regression-only', action='store_true')
+    parser.add_argument('--expect-ui-regression', action='store_true')
     args = parser.parse_args(argv)
     root, path = args.app_root.resolve(), args.report.resolve()
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -533,14 +741,24 @@ def main(argv=None):
         require(os.name == 'nt', 'Actual native Windows is mandatory; this gate has no passing skip mode.')
         require(Path(sys.executable).resolve() == (root/'runtime/python/python.exe').resolve(),
                 'Run with the exact packaged application private Python.')
-        require(not (args.full_catalogue and args.production_full), 'Select one Full trust scope.')
-        require(read_json(root/'manifest.json')['version'] == '0.10.0', 'Wrong candidate application version.')
+        require(sum((bool(args.full_catalogue), args.production_full, args.ui_regression_only)) <= 1,
+                'Select one setup gate scope.')
+        require(not args.expect_ui_regression or args.ui_regression_only,
+                'The published negative control is a separate UI-only scope.')
+        version = read_json(root/'manifest.json')['version']
+        require(version == ('0.10.0' if args.expect_ui_regression else '0.10.1'), 'Wrong candidate application version.')
+        report['appVersion'] = version
         before = core_hashes(root)
         report['appFiles'] = before
-        if args.full_catalogue or args.production_full:
+        if args.ui_regression_only:
+            report['uiPolling'] = ui_polling_checks(root, path.parent/'polling', report, args.expect_ui_regression)
+        elif args.full_catalogue or args.production_full:
             report['full'] = full_checks(root, path.parent, report, args.full_catalogue)
             report['productionTrustValidated'] = report['full']['productionTrustValidated']
         else:
+            polling_root = path.parent/'polling-app'
+            shutil.copytree(root, polling_root)
+            report['uiPolling'] = ui_polling_checks(polling_root, path.parent/'polling', report)
             report['gui'] = gui_checks(root, path.parent, report)
             host = PrivateHost(root, path.parent, 'persisted-starter', offline=True)
             try:

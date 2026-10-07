@@ -83,7 +83,7 @@ verified all 12 assets, five ZIP CRCs and three checksum manifests. See the
 | [Native UI development](native-ui.md) | How do the three panes, standalone tools and workflow canvas work, and what remains to validate? |
 | [0.9.0 handover](cwl-dag-icon-0.9.0-handover.md) | Which CWL/DAG/icon bytes were accepted and published, and what passed? |
 | [Tool setup](tool-setup.md) | How do Full, Starter and Custom installation work, and what remains before official deployment? |
-| [0.10.0 setup handover](tool-setup-0.10.0-handover.md) | Which exact candidate passed Windows checks, what initially failed, and which signing input still blocks release? |
+| [0.10.0 setup handover](tool-setup-0.10.0-handover.md) | Which exact 0.10.0 files were published, and what did their Windows and public-download checks establish? |
 | [CWL results](cwl-results.md) | What does an exported workflow contain and what does external execution require? |
 | [0.8.0 release handover](native-ui-0.8.0-release-handover.md) | Which exact native-interface bytes were accepted and published? |
 | [Starter tool semantics](starter-tool-semantics.md) | Which program does each starter operation run, how does SAM become BAM, and what does faidx mean? |
