@@ -225,6 +225,67 @@ def exercise(root, evidence, report):
         ui.click_button(410)
         ui.wait("standalone settings after workflow", lambda: has_name("Library selected tool"))
         check(report, "Categories cannot be dragged into a workflow; child single click selects only, double click/Add/drag each add exactly one tool, and standalone settings survive.")
+
+        # Exercise the library itself at the supported minimum size. Prior
+        # scrolling gates concern the option panels, not this new TreeView.
+        ui.user.MoveWindow(ui.main, 0, 0, 1040, 680, True)
+        filter_to("", sum(map(len, categories.values())))
+        for category in tree.roots():
+            if not tree.expanded(category):
+                click_category(category)
+                ui.wait("expand scroll fixture category", lambda category=category: tree.expanded(category))
+        bounds = ui.bounds(tree.hwnd)
+        wheel_point = ((bounds[0]+bounds[2])//2, (bounds[1]+bounds[3])//2)
+        scroll_initial = ui.scroll_info(tree.hwnd)
+        require(scroll_initial["nMax"] + 1 > scroll_initial["nPage"],
+                "Expanded Starter library is not genuinely scrollable at the supported minimum size.")
+        first_root = tree.roots()[0]
+        ui.wheel(*wheel_point, 1200)
+        ui.wait("actual library wheel reaches first category", lambda: tree.next(0, 5) == first_root)
+        first_before = tree.next(0, 5)  # TVGN_FIRSTVISIBLE; no scrolling query side effects.
+        top_state = ui.scroll_info(tree.hwnd)
+        ui.wheel(*wheel_point, -120)
+        ui.wait("actual library wheel scrolls down", lambda:
+                tree.next(0, 5) != first_before and ui.scroll_info(tree.hwnd)["nPos"] > top_state["nPos"])
+        first_down = tree.next(0, 5)
+        down_state = ui.scroll_info(tree.hwnd)
+        captures.append(ui.capture("library-minimum-wheel-down.bmp"))
+        ui.wheel(*wheel_point, 120)
+        ui.wait("opposite library wheel restores first category", lambda:
+                tree.next(0, 5) == first_before and ui.scroll_info(tree.hwnd)["nPos"] == top_state["nPos"])
+        captures.append(ui.capture("library-minimum-wheel-restored.bmp"))
+        ui.wheel(*wheel_point, -120)
+        ui.wait("library nonzero viewport before form commit", lambda: tree.next(0, 5) == first_down)
+        handles_scrolled = tree.roots() + tree.tools()
+        selected_scrolled = tree.selected()
+        first_scrolled = tree.next(0, 5)
+        state_scrolled = ui.scroll_info(tree.hwnd)
+        name_edit = next(c["hwnd"] for c in edits() if c["text"] == "Library selected tool")
+        ui.set_text(name_edit, "Library scrolled tool")
+        # Focus changes alone preserve a draft. Clicking the already-active
+        # Tools mode commits it and obtains fresh private-host snapshots without
+        # changing library mode, filter or catalogue. Recreated inspector HWND
+        # proves a response was rendered, not merely local edit text changed.
+        ui.click_button(410)
+        ui.wait("form commit snapshot rendered while library scrolled", lambda: any(
+            c["text"] == "Library scrolled tool" and c["hwnd"] != name_edit for c in edits()))
+        require(tree.roots() + tree.tools() == handles_scrolled and tree.selected() == selected_scrolled,
+                "Form commit rebuilt the scrolled library or changed its selection.")
+        require(tree.next(0, 5) == first_scrolled and ui.scroll_info(tree.hwnd)["nPos"] == state_scrolled["nPos"],
+                "Unchanged model snapshot moved the library viewport.")
+        require(all(tree.expanded(category) for category in tree.roots()),
+                "Unchanged model snapshot collapsed an expanded category.")
+        captures.append(ui.capture("library-minimum-scrolled-after-commit.bmp"))
+        report["libraryScrolling"] = {
+            "input": "Actual SendInput mouse wheel over the native TreeView",
+            "requestedWindowSize": [1040, 680], "actualWindowBounds": ui.bounds(ui.main),
+            "libraryBounds": ui.bounds(tree.hwnd), "dpi": ui.user.GetDpiForWindow(ui.main),
+            "top": {"firstVisible": tree.label(first_before), "scroll": top_state},
+            "down": {"firstVisible": tree.label(first_down), "scroll": down_state},
+            "afterCommit": {"firstVisible": tree.label(tree.next(0, 5)), "scroll": ui.scroll_info(tree.hwnd)},
+            "stableHandles": len(handles_scrolled), "selectionPreserved": True,
+            "allCategoriesStillExpanded": True, "modelSnapshotObserved": "Inspector edit HWND replaced after explicit commit"}
+        check(report, "At minimum size real library wheel moves down and back; a committed model refresh preserves the scrolled viewport, item handles, selection and expanded categories.")
         report["dpi"] = ui.user.GetDpiForWindow(ui.main)
         report["displayPixels"] = [ui.user.GetSystemMetrics(0), ui.user.GetSystemMetrics(1)]
     except Exception:
