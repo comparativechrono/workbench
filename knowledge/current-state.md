@@ -1,6 +1,6 @@
 # Current project state
 
-Snapshot: **2026-10-06**. Application **0.9.0** is published as a development
+Snapshot: **2026-10-07**. Application **0.9.0** is published as a development
 prerelease at [app-v0.9.0](https://github.com/comparativechrono/workbench/releases/tag/app-v0.9.0).
 Release **405123004** was published at **2026-10-06T20:39:35Z**. Its tag and
 [PR #2](https://github.com/comparativechrono/workbench/pull/2) merge point to
@@ -13,6 +13,26 @@ CRCs and all three checksum manifests.
 Read this alongside the [release inventory](release-inventory.json) and
 [release handover](cwl-dag-icon-0.9.0-handover.md). Earlier versions and their
 evidence remain unchanged.
+
+## Catalogue signing infrastructure, 2026-10-07
+
+The user authorized establishing production catalogue signing and completing the
+0.10.0 release. A separate maintainer workflow now prepares, signs and publishes
+the reviewed official pack catalogue, with restricted key handling, pinned
+actions, public-only artifacts, immutable signed history, race rejection and
+anonymous post-publication verification. See the
+[one-time owner setup and workflow guide](../publishing/catalogue-signing.md).
+
+This infrastructure does not merge the application changes from
+[draft PR #3](https://github.com/comparativechrono/workbench/pull/3), change the
+0.9.0 runtime or publish 0.10.0. The copied setup selection and archive lock are
+public publishing inputs. The application source list remains empty. Production
+environment protection and secret provisioning require owner access unavailable
+through the development connector; whether a secret already exists is unknown.
+No production key has been created, installed or used here. Fixture tests do not
+establish a live production catalogue. After owner setup, publish the catalogue,
+bundle its reviewed public source into a new candidate, validate it on Windows,
+then release and verify public downloads.
 
 ## Published CWL results, DAG routing and icon, 2026-10-06
 

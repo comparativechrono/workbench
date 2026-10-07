@@ -3,7 +3,7 @@
   "document_kind": "project-knowledge-index",
   "project": "Native Workbench",
   "repository": "https://github.com/comparativechrono/workbench",
-  "reviewed_on": "2026-10-06",
+  "reviewed_on": "2026-10-07",
   "source_baseline_commit": "beea34ab29f3e7cb9a7e79dbcfa11c89f40ee59d",
   "format": {
     "prose": "UTF-8 Markdown",
@@ -79,7 +79,8 @@
     "cwl_dag_icon_0_9_0_update_build": "evidence/cwl-dag-icon-0.9.0-update-build-2026-10-06.json",
     "cwl_dag_icon_0_9_0_publication_receipt": "evidence/cwl-dag-icon-0.9.0-publication-receipt-2026-10-06.json",
     "cwl_dag_icon_0_9_0_public_downloads": "evidence/cwl-dag-icon-0.9.0-public-downloads-2026-10-06.json",
-    "cwl_dag_icon_0_9_0_release_validation": "evidence/cwl-dag-icon-0.9.0-release-validation-2026-10-06.json"
+    "cwl_dag_icon_0_9_0_release_validation": "evidence/cwl-dag-icon-0.9.0-release-validation-2026-10-06.json",
+    "catalogue_signing": "../publishing/catalogue-signing.md"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",

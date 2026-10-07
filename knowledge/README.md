@@ -89,6 +89,7 @@ verified all 12 assets, five ZIP CRCs and three checksum manifests. See the
 | [Development](development.md) | How do I recover inputs, build, test and resume work? |
 | [Pack development](pack-development.md) | How do I add a real tool without rebuilding the app? |
 | [Validation and releases](validation-and-releases.md) | What establishes correctness, and how are artifacts published and trusted? |
+| [Catalogue signing](../publishing/catalogue-signing.md) | How does the protected official publisher work, and which one-time owner settings remain necessary? |
 | [Roadmap](roadmap.md) | What should be addressed next, and what would count as completion? |
 | [Project index](project.json) | Machine-readable entry points and stable constraints. |
 | [Release inventory](release-inventory.json) | Dated public versions, download assets, checksums and evidence pointers. |
