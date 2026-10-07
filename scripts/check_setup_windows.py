@@ -16,6 +16,8 @@ import argparse
 import ast
 import base64
 import copy
+import ctypes
+from ctypes import wintypes
 from datetime import datetime, timezone
 import hashlib
 import io
@@ -271,11 +273,39 @@ def ui_polling_checks(root, evidence, report, expect_regression=False):
         require(control and enabled(identity), 'Polling gate control is unavailable: ' + str(identity))
         left, top, right, bottom = ui.bounds(control)
         ui.click_at((left+right)//2, (top+bottom)//2)
+        if identity in (702, 703, 704):
+            # SendInput queues mouse events; a previous row-focus state cannot
+            # acknowledge that the newly clicked profile has been processed.
+            ui.wait('polling gate profile acknowledged ' + str(identity), lambda:
+                    ui.send(control, 0x00F0) == 1)
     def position():
         return {'top': ui.send(listing, 0x1027),
                 'selected': ui.send(listing, 0x100C, -1, 2),
                 'focused': ui.send(listing, 0x100C, -1, 1),
                 'horizontal': ui.scroll_info(listing, 0)['nPos']}
+    class GuiThreadInfo(ctypes.Structure):
+        _fields_ = [('cbSize', wintypes.DWORD), ('flags', wintypes.DWORD),
+                    ('hwndActive', wintypes.HWND), ('hwndFocus', wintypes.HWND),
+                    ('hwndCapture', wintypes.HWND), ('hwndMenuOwner', wintypes.HWND),
+                    ('hwndMoveSize', wintypes.HWND), ('hwndCaret', wintypes.HWND),
+                    ('rcCaret', wintypes.RECT)]
+    ui.user.GetGUIThreadInfo.argtypes = [wintypes.DWORD, ctypes.POINTER(GuiThreadInfo)]
+    ui.user.GetGUIThreadInfo.restype = wintypes.BOOL
+    def focus_listing():
+        # SendInput is asynchronous, and LVIS_FOCUSED remembers a row even
+        # while a radio/default button owns actual keyboard focus. Space must
+        # only be posted after the application thread confirms focus is here.
+        ui.click_at(left + 75, header_bottom + 10)
+        if not enabled(705):
+            return  # Preserve the disabled-list negative control observation.
+        def focused():
+            info = GuiThreadInfo()
+            info.cbSize = ctypes.sizeof(info)
+            thread = ui.user.GetWindowThreadProcessId(owner, None)
+            require(ui.user.GetGUIThreadInfo(thread, ctypes.byref(info)),
+                    'Could not observe the actual native GUI keyboard focus.')
+            return info.hwndFocus == listing
+        ui.wait('polling gate actual keyboard focus in package list', focused)
     def frames(name, seconds, expected_position=None, busy=False):
         # BitBlt reads presented pixels; unlike PrintWindow this does not ask
         # the application to repaint and hide an intermediate blank header.
@@ -333,7 +363,7 @@ def ui_polling_checks(root, evidence, report, expect_regression=False):
         ui.user.MoveWindow(owner, 0, 0, round(830*scale), round(650*scale), True)
         left, _, right, bottom = ui.bounds(listing)
         header_bottom = ui.bounds(header)[3]
-        ui.click_at(left + 75, header_bottom + 10)
+        focus_listing()
         ui.key(listing, 0x24)
         ui.wait('polling gate first pack selected', lambda: ui.send(listing, 0x100C, -1, 1) == 0)
         # Select all 32 through normal Custom keyboard interaction. This makes
@@ -353,6 +383,9 @@ def ui_polling_checks(root, evidence, report, expect_regression=False):
         # immediately return to Full and inspect the actual native checkmarks.
         click(702)
         click(704)
+        # A radio click moves keyboard focus away from the list. Restore it
+        # through normal pointer interaction before posting navigation/Space.
+        focus_listing()
         ui.key(listing, 0x23)
         ui.wait('Custom final pack focused before immediate profile switch', lambda:
                 ui.send(listing, 0x100C, -1, 1) == 31)
@@ -364,6 +397,7 @@ def ui_polling_checks(root, evidence, report, expect_regression=False):
         click(704)
         ui.wait('Custom retains the previous unchecked choice', lambda:
                 ui.send(listing, 0x102C, 31, 0xF000) == 0x1000)
+        focus_listing()
         ui.key(listing, 0x23)
         ui.wait('Custom final pack focused again', lambda: ui.send(listing, 0x100C, -1, 1) == 31)
         ui.key(listing, 0x20)
@@ -385,6 +419,9 @@ def ui_polling_checks(root, evidence, report, expect_regression=False):
         wheel_position = position()
         observations['idleWheel'] = frames('setup-idle-wheel', 2, wheel_position)
         record(not observations['idleWheel']['positionChanges'], 'Wheel position was reset while idle.')
+        if not expect_regression:
+            record(set(observations['idleWheel']['headerHashes']) == set(observations['idle']['headerHashes']),
+                   'The settled idle header changed after wheel navigation.', 'pixels')
         click(709)
         ui.wait('live catalogue refresh completed', lambda: enabled(713) and
                 'Official catalogue verified.' in ui.label(ui.child(707, owner)), 120)
@@ -397,6 +434,7 @@ def ui_polling_checks(root, evidence, report, expect_regression=False):
         # End followed by real wheel navigation exercises the control while the
         # application is polling. The old build is intentionally still observed
         # after finding it disabled, so the negative control retains evidence.
+        focus_listing()
         ui.key(listing, 0x23)
         time.sleep(.2)
         busy_end = position()
@@ -409,15 +447,20 @@ def ui_polling_checks(root, evidence, report, expect_regression=False):
         observations['busyWheel'] = {'before': busy_end, 'after': busy_position}
         record(busy_position['top'] < busy_end['top'], 'Real mouse wheel cannot scroll the active installation list.')
         check_state = [ui.send(listing, 0x102C, row, 0xF000) for row in range(32)]
-        ui.key(listing, 0x20)
-        time.sleep(.1)
-        record([ui.send(listing, 0x102C, row, 0xF000) for row in range(32)] == check_state,
-               'A locked installation checkbox changed while setup was active.', 'selection')
+        observations['lockedCheckboxInteractionExecuted'] = enabled(705)
+        if observations['lockedCheckboxInteractionExecuted']:
+            ui.key(listing, 0x20)
+            time.sleep(.1)
+            record([ui.send(listing, 0x102C, row, 0xF000) for row in range(32)] == check_state,
+                   'A locked installation checkbox changed while setup was active.', 'selection')
         observations['polling'] = frames('setup-busy-header', 5, busy_position, busy=True)
         record(not observations['polling']['disabledSamples'], 'Status polling disabled the inspectable package list.')
         record(not observations['polling']['positionChanges'], 'Status polling changed the viewport, highlighted pack or focus.')
         record(len(observations['polling']['headerHashes']) == 1,
                'Unchanged column header pixels changed during active status polling.', 'pixels')
+        if not expect_regression:
+            record(set(observations['polling']['headerHashes']) == set(observations['idle']['headerHashes']),
+                   'The active-installation header differs from the settled idle header.', 'pixels')
         # Exercise the native scroll bar as well as wheel and keyboard input.
         if enabled(705):
             ui.key(listing, 0x24)
@@ -448,6 +491,9 @@ def ui_polling_checks(root, evidence, report, expect_regression=False):
         write_json(evidence/'setup-polling-observations.json', observations)
         stop_process_tree(ui.process)
         ui.user.SetThreadDpiAwarenessContext(ui.previous_dpi)
+        saved = root/'user-data/tool-setup.json'
+        if saved.is_file():
+            shutil.copy2(saved, evidence/'tool-setup-state.json')
 
 
 def gui_checks(root, evidence, report):
@@ -756,7 +802,9 @@ def main(argv=None):
             report['full'] = full_checks(root, path.parent, report, args.full_catalogue)
             report['productionTrustValidated'] = report['full']['productionTrustValidated']
         else:
-            polling_root = path.parent/'polling-app'
+            # Completed packs can be large even in a short live probe. Keep
+            # its disposable installation outside the uploaded evidence tree.
+            polling_root = path.parent.parent/(path.parent.name + '-polling-app')
             shutil.copytree(root, polling_root)
             report['uiPolling'] = ui_polling_checks(polling_root, path.parent/'polling', report)
             report['gui'] = gui_checks(root, path.parent, report)

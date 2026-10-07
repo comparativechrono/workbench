@@ -60,3 +60,18 @@ installation. The updater gate includes saved setup selection and queue state
 alongside installed tools, settings/pins, references and results. Native results,
 archive identities, failures and later release status must be appended after
 actual checks. No new Windows pass is asserted in this preparation snapshot.
+
+## First candidate execution
+
+Run `37633214062`, source `12b7c89580fd97acc55a731a298d20b01af7473c`,
+compiled successfully: 161 source checks passed and one Windows-only test skipped;
+all 47 pack-manager checks then passed natively on Windows. Both native path
+variants passed workspace 32, results 9, References 8 and update 13 checks.
+The new UI probe failed on both old and patched applications at its immediate
+profile-switch interaction: it posted Space without restoring actual list focus.
+That is a failed probe, not a UI pass or reproduced baseline defect. The validator
+now waits for profile acknowledgment and the actual GUI-thread focus before keys.
+It also compares active header pixels with the settled idle reference and keeps
+the disposable probe application outside retained evidence. No application-code
+change was needed for this probe correction. A new complete candidate run is
+required; the first attempt is not accepted release evidence.
