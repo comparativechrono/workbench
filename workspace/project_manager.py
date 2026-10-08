@@ -129,6 +129,16 @@ def _verify_data(path, expected):
              "Input bytes do not match the project's recorded SHA-256 and size.")
 
 
+def _file_key(path):
+    """One ordinary-file identity across explicit short/long or lexical aliases.
+
+    Resolve only caller-selected paths which already exist, never infer files
+    from a basename or a metadata string. The ordinary-file guard still rejects
+    symbolic links and junctions before resolution.
+    """
+    return os.path.normcase(str(_ordinary(path)))
+
+
 def _copy_verified(source, destination, expected):
     _data_file(source)
     digest, total = hashlib.sha256(), 0
@@ -362,13 +372,21 @@ class ProjectManager:
         graph = {key: value for key, value in graph.items() if key in ("schema", "name", "nextNode", "nextSource", "nodes", "sources")}
         if project_metadata is not None:
             project_metadata = validate_project_metadata(project_metadata)
-        historical = {os.path.normcase(item["boundPath"]): item for item in (project_metadata or {}).get("dependencies", [])
-                      if isinstance(item, dict) and isinstance(item.get("boundPath"), str)}
+        historical = {}
+        for item in (project_metadata or {}).get("dependencies", []):
+            key = _file_key(item["boundPath"])
+            _require(key not in historical, "Historical project metadata contains duplicate aliases for one input file.")
+            historical[key] = item
         reference_metadata = {} if reference_metadata is None else copy.deepcopy(reference_metadata)
         _require(isinstance(reference_metadata, dict) and len(_json_bytes(reference_metadata)) <= MAX_MANIFEST, "Invalid historical reference metadata.")
+        reference_identities = {}
+        for path, receipt in reference_metadata.items():
+            key = _file_key(path)
+            _require(key not in reference_identities, "Historical reference metadata contains duplicate aliases for one input file.")
+            reference_identities[key] = receipt
         if validation_tools is not None:
             _validation_helpers(validation_tools, {node["id"] for node in graph["nodes"]})
-        deps, paths, by_path, pack_rows, frozen, helpers = [], {}, {}, {}, [], {}
+        deps, paths, by_path, pack_rows, frozen, helpers, aliases = [], {}, {}, {}, [], {}, {}
         for node in graph["nodes"]:
             tool = self.engine._tool(node)
             self._verify_pack(tool)
@@ -408,8 +426,8 @@ class ProjectManager:
                         previous = historical[key]
                         _require(all(previous.get(k) == item[k] for k in ("bytes", "sha256")), "Imported project input changed since its historical identity was recorded.")
                         item["references"] = copy.deepcopy(previous.get("references", {}))
-                    if str(path) in reference_metadata:
-                        previous = reference_metadata[str(path)]
+                    if key in reference_identities:
+                        previous = reference_identities[key]
                         _require(isinstance(previous, dict) and isinstance(previous.get("file"), dict) and
                                  previous["file"].get("sha256") == item["sha256"], "Historical reference receipt differs from the selected input bytes.")
                         item["references"] = copy.deepcopy(previous)
@@ -419,6 +437,8 @@ class ProjectManager:
                     deps.append(item)
                     by_path[key] = identity
                     paths[identity] = str(path)
+                for alias in (original, str(Path(original).absolute()), str(path)):
+                    aliases[os.path.normcase(alias)] = TOKEN + by_path[key]
                 source["files"][field] = TOKEN + by_path[key]
         selected = {item["id"] for item in deps} if include_data is True else set()
         if isinstance(include_data, list):
@@ -431,14 +451,13 @@ class ProjectManager:
             item["included"] = item["id"] in selected
         # Mapped sample-table columns may contain original absolute input paths.
         # Preserve their relation to the data without retaining machine paths.
-        replacements = {path: TOKEN + identity for identity, path in paths.items()}
         def portable_metadata(value):
             if isinstance(value, dict):
                 return {key: portable_metadata(item) for key, item in value.items()}
             if isinstance(value, list):
                 return [portable_metadata(item) for item in value]
             if isinstance(value, str):
-                return replacements.get(value, value)
+                return aliases.get(os.path.normcase(value), value)
             return value
         sample_metadata = portable_metadata(sample_metadata)
         manifest = {"schema": 1, "format": "native-workbench-project", "id": uuid.uuid4().hex,

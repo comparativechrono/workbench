@@ -335,6 +335,38 @@ class ProjectTests(unittest.TestCase):
         self.assertNotIn("path", reference["file"])
         self.assertFalse((self.app / "user-data/references/library.json").exists())
 
+    def test_explicit_path_aliases_preserve_sample_and_reference_identity(self):
+        # Ordinary lexical aliases exercise the same raw-vs-resolved mismatch
+        # as Windows' default TEMP path containing RUNNER~1. No links or guessed
+        # file names are involved in mapping the historical identity.
+        alias_folder = self.root / "existing alias folder"
+        alias_folder.mkdir()
+        alias = str(alias_folder / ".." / self.input.name)
+        self.assertNotEqual(alias, str(self.input.resolve()))
+        self.graph["sources"][0]["files"]["sequences"] = alias
+        receipt = {"assembly": "alias-fixture", "file": {"path": alias, "sha256": hashlib.sha256(self.input.read_bytes()).hexdigest()}}
+        preview = self.manager.export_preview(self.graph, include_data=True,
+                    sample_metadata={"raw": alias, "canonical": str(self.input.resolve())},
+                    reference_metadata={alias: receipt})
+        self.assertEqual(preview["manifest"]["sampleMetadata"], {"raw": "nw-input:data-000001", "canonical": "nw-input:data-000001"})
+        self.assertEqual(preview["manifest"]["dependencies"][0]["references"]["assembly"], "alias-fixture")
+        self.manager.export(preview, self.bundle)
+        imported = self.manager.import_project(self.manager.preview_import(self.bundle), alias_folder / ".." / "aliased project")
+        again = self.manager.export_preview(imported["graph"], project_metadata=imported["projectMetadata"])
+        self.assertEqual(again["manifest"]["dependencies"][0]["references"]["assembly"], "alias-fixture")
+        self.assertNotIn(alias, json.dumps(preview["manifest"]))
+
+    def test_duplicate_reference_aliases_rejected_and_wrong_alias_hash_not_accepted(self):
+        alias_folder = self.root / "alias folder"
+        alias_folder.mkdir()
+        alias = str(alias_folder / ".." / self.input.name)
+        receipt = {"assembly": "fixture", "file": {"sha256": hashlib.sha256(self.input.read_bytes()).hexdigest()}}
+        with self.assertRaisesRegex(ValueError, "duplicate aliases"):
+            self.manager.export_preview(self.graph, reference_metadata={str(self.input): receipt, alias: receipt})
+        wrong = {"assembly": "fixture", "file": {"sha256": "f" * 64}}
+        with self.assertRaisesRegex(ValueError, "differs from the selected input bytes"):
+            self.manager.export_preview(self.graph, reference_metadata={alias: wrong})
+
     def test_import_rejects_generic_descriptor_even_if_graph_and_inventory_agree(self):
         self.export()
         def change(data):

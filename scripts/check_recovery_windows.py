@@ -19,6 +19,7 @@ from pathlib import Path
 import platform
 import shutil
 import sys
+import tempfile
 import time
 import traceback
 import zipfile
@@ -398,6 +399,31 @@ def expected_error(host, method, params, fragment):
 
 def project_checks(host, root, graph, original, data, evidence, report):
     archive = evidence / "synthetic-portable-project.zip"
+    # Windows' default temporary directory may use an 8.3 alias even though
+    # ordinary-file validation resolves the long name. Exercise that exact
+    # packaged boundary with data created by this gate, not a mocked path.
+    with tempfile.TemporaryDirectory(prefix="nw-project-alias-") as temporary:
+        alias_graph = copy.deepcopy(graph)
+        alias_input = None
+        for source in alias_graph["sources"]:
+            for field, filename in list(source["files"].items()):
+                target = Path(temporary) / (source["id"] + "-" + Path(filename).name)
+                shutil.copyfile(filename, target)
+                source["files"][field] = str(target)
+                alias_input = alias_input or target
+        require(os.path.normcase(str(alias_input)) != os.path.normcase(str(alias_input.resolve())),
+                "This Windows host did not expose distinct short/long temporary input spellings for the alias regression.")
+        alias_preview = host.call("project/export-preview", {"graph": alias_graph, "include_data": True,
+                                  "sample_metadata": {"file": str(alias_input)}}, timeout=120)
+        alias_archive = evidence / "synthetic-short-path-project.zip"
+        host.call("project/export", {"token": alias_preview["token"], "destination": str(alias_archive)}, timeout=120)
+        with zipfile.ZipFile(alias_archive) as zipped:
+            alias_manifest = json.loads(zipped.read("project.json"))
+        require(alias_manifest["sampleMetadata"]["file"] == "nw-input:data-000001" and
+                json.dumps(str(alias_input), ensure_ascii=False) not in json.dumps(alias_manifest, ensure_ascii=False),
+                "A short-name input alias escaped project metadata tokenization as an absolute machine path.")
+        report["shortPathProjectExport"] = {"distinctSpellingsObserved": True, "samplePathTokenized": True,
+                                             "archiveSha256": sha256(alias_archive)}
     descriptive = {"study": "synthetic-portable-project", "sample_id": "synthetic-sample"}
     preview = host.call("project/export-preview", {"graph": graph, "include_data": True, "sample_metadata": descriptive}, timeout=120)
     require(len(preview["dependencies"]) == 3 and all(row["included"] for row in preview["dependencies"]),
@@ -595,6 +621,8 @@ def gui_checks(root, data, evidence, report):
             job = next(job for job in read_json(root / "user-data/run-queue.json")["jobs"] if job["job_id"] == added[0]["job_id"])
             return job if job["status"] in {"completed", "failed", "cancelled", "interrupted"} else None
         report["nativeRestartScience"] = scientific_truth(root, until("Native explicitly started restart did not complete.", completed, 180))
+        ui.wait("native queue displays completed restart", lambda: queue_rows.text(row, 2) == "completed" and
+                "Status: completed" in ui.label(ui.child(902, queue)))
         report["captures"].append(ui.capture("restart-native-queued-complete.bmp", queue))
         button(queue, 909)
         button(restart, 1208)

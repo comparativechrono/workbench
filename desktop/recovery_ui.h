@@ -333,7 +333,7 @@
       if (result.get("dependencies").is_array()) for (const auto &entry : result.get("dependencies").array_items())
         review_.value += L"\r\n" + wt(entry, "label", getstr(entry, "id")) + L": " + wt(entry, "filename") + L" · " +
             (entry.get("included").boolean() ? L"included" : L"external requirement") + L"\r\nSHA-256: " + wt(entry, "sha256");
-      review_.confirm = L"Choose archive path...";
+      review_.confirm = L"Choose path...";
       if (review_.show()) {
         const auto path = project_save_path();
         if (!path.empty()) {

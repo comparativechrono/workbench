@@ -15,8 +15,11 @@ checks with four Windows-only skips, including actual report-only stock-CWL
 replay, and independent source/runtime archive verification. Initial Windows
 regression gates passed, but the new gate stopped on an incorrect three-step
 validator assumption and isolated source tests stopped on a helper import.
-Those failed observations are retained. A corrected recheck of the same bytes
-is pending; see the [handover](recovery-projects-0.14.0-handover.md).
+Those failed observations are retained. The corrected native gate passed 12
+checks per path. Further Windows source and screenshot review found portable
+short-path metadata defects and a clipped export button label; both are fixed
+in source and a new exact build is required. See the
+[handover](recovery-projects-0.14.0-handover.md).
 Historical source and Windows passes below apply only to their named candidates.
 Published **0.11.0** and production packs/profile/trust remain unchanged.
 This request authorizes development, not a merge, tag or publication. The

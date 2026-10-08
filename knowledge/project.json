@@ -118,7 +118,8 @@
     "recovery_projects_handover": "recovery-projects-0.14.0-handover.md",
     "recovery_projects_source": "evidence/recovery-projects-0.14.0-source-2026-10-08.json",
     "recovery_projects_initial_windows": "evidence/recovery-projects-0.14.0-initial-windows-2026-10-08.json",
-    "recovery_projects_archive_audit": "evidence/recovery-projects-0.14.0-archive-audit-2026-10-08.json"
+    "recovery_projects_archive_audit": "evidence/recovery-projects-0.14.0-archive-audit-2026-10-08.json",
+    "recovery_projects_rechecks": "evidence/recovery-projects-0.14.0-rechecks-2026-10-08.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -1092,7 +1093,7 @@
     "version": "0.14.0",
     "branch": "feature/recovery-projects",
     "starting_commit": "9f5cd4c88634b4cab04cec66b9e43e93e1db0e17",
-    "status": "implementation complete; source and archive checks passed; corrected exact Windows recheck pending; unpublished",
+    "status": "initial exact native recovery gates passed; Windows alias and export caption fixes ready for new build; unpublished",
     "authorization": "Owner requested the final accepted implementation tranche. Development only; no release request.",
     "milestone": 3,
     "scope": [
@@ -1124,7 +1125,12 @@
       "archive_audit": "evidence/recovery-projects-0.14.0-archive-audit-2026-10-08.json",
       "representative_machine_acceptance": "pending",
       "realistic_windows_linux_benchmark": "not performed",
-      "release_update_validation": "not performed"
+      "release_update_validation": "not performed",
+      "corrected_initial_native": {
+        "passed_per_path": 12,
+        "run": "https://github.com/comparativechrono/workbench/actions/runs/37841697478",
+        "scope": "Original archive only; source-only follow-up exposed alias defects and screenshot review a clipped caption. New artifact required."
+      }
     }
   },
   "readiness_performance_development": {

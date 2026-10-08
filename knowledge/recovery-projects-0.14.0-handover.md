@@ -10,7 +10,7 @@ branch. Published 0.11.0 and production packs/profile/trust remain unchanged.
 The [feature guide](recovery-projects.md) records contracts and scope.
 
 [Draft PR #9](https://github.com/comparativechrono/workbench/pull/9) is stacked
-on #8. The frozen application source is
+on #8. The **initial** frozen application source is
 `cd0ed848fd9d9c8728b0d83991511a348c13719e`, tree
 `af1eda87edb7c91f19fbeff0d3ed95972fa712e9`, built in
 [run 37840523641](https://github.com/comparativechrono/workbench/actions/runs/37840523641).
@@ -43,9 +43,23 @@ The isolated Windows source gate also stopped at a missing test-helper import.
 Only validators and test imports are being corrected. The
 [frozen recheck workflow](../.github/workflows/native-recovery-recheck.yml)
 pins the same Starter and both executable hashes, refuses application/build
-changes and records its separate validator commit. **A corrected native pass
-has not yet been obtained.** No old gate or unavailable check is counted as
-passing the new feature.
+changes and records its separate validator commit. The corrected exact-native gate passed **12 checks per path** in
+[run 37841697478](https://github.com/comparativechrono/workbench/actions/runs/37841697478).
+A source-only follow-up confirmed physical scratch ownership but exposed
+Windows short/long-path alias defects in portable metadata and one further
+lexical-path test assumption. Independent screenshot reviews also found a
+clipped export confirmation label and a queue capture taken before UI polling
+showed completion. The [recheck record](evidence/recovery-projects-0.14.0-rechecks-2026-10-08.json)
+retains these failed runs and separates the passing native feature gate.
+
+The portable exporter now canonicalizes explicit file identities while retaining
+raw graph aliases for metadata tokens; duplicate aliases and wrong hashes are
+rejected. Two new regressions cover this. The native caption is shortened, and
+the validator now waits for displayed queue completion and tests actual Windows
+short-path project export. **These application changes require a new build and
+exact-package validation; earlier passes are not transferred to changed bytes.**
+The old frozen recheck workflow remains pinned to its historical archive and
+must not be used to imply a pass for the rebuilt candidate.
 
 Representative Windows machines, high-DPI/physical trackpad observations,
 institutional approval, realistic Windows–Linux benchmarks and release/update

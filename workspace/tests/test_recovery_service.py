@@ -96,7 +96,11 @@ class RecoveryServiceTests(unittest.TestCase):
         self.app = Workbench(self.root, engine=self.engine, catalog={"tools": {}})
         self.host = DesktopHost(self.root, app=self.app, model=self.model)
         self.assertEqual(self.host.dispatch("resources/get", {"graph": original})["policy"]["stepCpus"], {"step-1": 1})
-        self.assertEqual(self.host.dispatch("resources/get", {})["policy"]["temporaryFolder"], str(self.root))
+        saved_temporary = Path(self.host.dispatch("resources/get", {})["policy"]["temporaryFolder"])
+        self.assertTrue(saved_temporary.is_absolute())
+        # Persisted paths are canonical; Windows tempfile may originally use
+        # the same directory's short 8.3 spelling.
+        self.assertTrue(saved_temporary.samefile(self.root))
         self.assertFalse(self.engine.calls)
 
     def test_resource_profiles_bounded_and_unknown_steps_do_not_reserve(self):
