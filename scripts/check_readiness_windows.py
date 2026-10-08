@@ -281,6 +281,10 @@ def gui_checks(root, evidence, report):
         ui.wait("example workflow loaded", lambda: "Starter example" in ui.label(ui.child(101)))
         if not ui.user.IsWindowVisible(ui.child(111)):
             ui.click_button(412)  # General settings in workflow mode.
+        # A pointer click queues the panel transition and any preceding model
+        # commit. Wait for the same visible/enabled edit a person must use.
+        ui.wait("output folder edit ready", lambda:
+                ui.user.IsWindowVisible(ui.child(111)) and ui.user.IsWindowEnabled(ui.child(111)))
         destination = evidence / "gui-diagnostic-exports"
         destination.mkdir()
         ui.set_text(ui.child(111), str(destination))
