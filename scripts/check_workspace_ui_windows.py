@@ -68,6 +68,11 @@ class NativeUI:
         u.SendMessageTimeoutW.restype = wintypes.LPARAM
         u.PostMessageW.argtypes = [wintypes.HWND, wintypes.UINT, wintypes.WPARAM, wintypes.LPARAM]
         u.MoveWindow.argtypes = [wintypes.HWND, ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_int, wintypes.BOOL]
+        u.SystemParametersInfoW.argtypes = [wintypes.UINT, wintypes.UINT, ctypes.c_void_p, wintypes.UINT]
+        u.GetForegroundWindow.restype = wintypes.HWND
+        u.WindowFromPoint.argtypes, u.WindowFromPoint.restype = [wintypes.POINT], wintypes.HWND
+        u.GetAncestor.argtypes, u.GetAncestor.restype = [wintypes.HWND, wintypes.UINT], wintypes.HWND
+        u.IsChild.argtypes = [wintypes.HWND, wintypes.HWND]
         u.ShowWindow.argtypes = [wintypes.HWND, ctypes.c_int]
         u.SetForegroundWindow.argtypes = [wintypes.HWND]
         u.GetDC.argtypes = [wintypes.HWND]
@@ -104,6 +109,8 @@ class NativeUI:
         try:
             self.wait("native main window", lambda: self.find_main())
             u.ShowWindow(self.main, 9)
+            bounds = self.bounds(self.main)
+            self.fit_window(bounds[2] - bounds[0], bounds[3] - bounds[1])
             u.SetForegroundWindow(self.main)
         except Exception:
             stop_process_tree(self.process)
@@ -152,7 +159,7 @@ class NativeUI:
         self.wait("native edit ready for input", lambda:
                   self.user.IsWindowVisible(hwnd) and self.user.IsWindowEnabled(hwnd))
         left, top, right, bottom = self.bounds(hwnd)
-        self.click_at((left + right) // 2, (top + bottom) // 2)
+        self.click_at((left + right) // 2, (top + bottom) // 2, expected=hwnd)
         buffer = ctypes.create_unicode_buffer(str(value))
         require(self.send(hwnd, 0x000C, 0, ctypes.addressof(buffer)), "Could not set native edit text.")
 
@@ -214,6 +221,37 @@ class NativeUI:
         require(self.user.GetWindowRect(hwnd, ctypes.byref(rect)), "Could not measure native control.")
         return [rect.left, rect.top, rect.right, rect.bottom]
 
+    def work_area(self):
+        area = wintypes.RECT()
+        require(self.user.SystemParametersInfoW(0x0030, 0, ctypes.byref(area), 0),
+                "Could not inspect the desktop work area.")  # SPI_GETWORKAREA excludes the taskbar.
+        return [area.left, area.top, area.right, area.bottom]
+
+    def fit_window(self, width, height):
+        """Place the test window above the taskbar; retain observed dimensions.
+
+        The application's minimum width can exceed a small CI desktop. Do not
+        invent a larger desktop: each pointer target must still be visible and
+        hit the tested process. Native min/max sizing remains in force.
+        """
+        left, top, right, bottom = self.work_area()
+        require(self.user.MoveWindow(self.main, left, top, min(width, right-left), min(height, bottom-top), True),
+                "Could not position the native window in the desktop work area.")
+        actual = self.bounds(self.main)
+        require(actual[1] >= top and actual[3] <= bottom,
+                "The native window's minimum height does not fit above this desktop's taskbar.")
+        self.progress("native window positioned above taskbar", requestedSize=[width, height],
+                      workArea=[left, top, right, bottom], actualWindowBounds=actual,
+                      horizontalClipping=actual[0] < left or actual[2] > right)
+
+    def desktop_evidence(self, phase, **details):
+        """Retain actual displayed pixels and owned windows, including overlays."""
+        foreground = self.user.GetForegroundWindow()
+        observed = [{"hwnd": hwnd, "class": self.label(hwnd, True), "text": self.label(hwnd),
+                     "bounds": self.bounds(hwnd)} for hwnd in self.windows()]
+        self.progress(phase, foreground=foreground, workArea=self.work_area(), windows=observed, **details)
+        self.screen_capture("visible-desktop-failure.bmp", [0, 0, self.user.GetSystemMetrics(0), self.user.GetSystemMetrics(1)])
+
     def controls(self, owner=None):
         found = []
         @self.callback
@@ -237,6 +275,7 @@ class NativeUI:
             time.sleep(.1)
         if self.main:
             self.capture("failure.bmp")
+            self.desktop_evidence(phase + " desktop timeout")
             self.progress(phase + " timed out", controls=self.controls())
         raise TimeoutError(phase)
 
@@ -248,7 +287,7 @@ class NativeUI:
         # physical clicks on the same library row leaves Windows' double-click
         # sequence intact and does not reproduce a person's mode switch.
         left, top, right, bottom = self.bounds(hwnd)
-        self.click_at((left + right) // 2, (top + bottom) // 2)
+        self.click_at((left + right) // 2, (top + bottom) // 2, expected=hwnd)
 
     def key(self, hwnd, code):
         self.post(hwnd, 0x0100, code, 1)
@@ -271,7 +310,24 @@ class NativeUI:
         require(self.user.GetScrollInfo(hwnd, bar, ctypes.byref(value)), "Could not inspect native scroll state.")
         return {key: getattr(value, key) for key in ("nMin", "nMax", "nPage", "nPos")}
 
-    def click_at(self, x, y):
+    def click_at(self, x, y, expected=None):
+        # PrintWindow can show a perfectly drawn control under the taskbar or
+        # another top-level window. Check its actual screen hit before clicking.
+        if expected:
+            top_window = self.user.GetAncestor(expected, 2)  # GA_ROOT.
+            if self.user.GetForegroundWindow() != top_window:
+                self.user.SetForegroundWindow(top_window)
+                self.wait("native input window in foreground", lambda:
+                          self.user.GetForegroundWindow() == top_window)
+        target = self.user.WindowFromPoint(wintypes.POINT(x, y))
+        owner = wintypes.DWORD()
+        self.user.GetWindowThreadProcessId(target, ctypes.byref(owner))
+        left, top, right, bottom = self.work_area()
+        expected_hit = not expected or target == expected or self.user.IsChild(expected, target)
+        if not (left <= x < right and top <= y < bottom and owner.value == self.process.pid and expected_hit):
+            self.desktop_evidence("pointer target is occluded or outside work area", pointer=[x, y],
+                                  hitWindow=target, hitProcess=owner.value, expectedWindow=expected)
+            raise AssertionError("Native pointer target is not an unobscured application surface.")
         self.mouse(x, y)
         self.mouse(x, y, 2)
         self.mouse(x, y, 4)
@@ -582,7 +638,7 @@ def gui_contracts(root, evidence, report):
                 manager_window() and ui.send(ui.child(503, manager_window()), 0x1004) >= 3)
         ui.send(ui.child(513, manager_window()), 0x00F5)
         ui.wait("return from reopened Manage tools", lambda: not manager_window())
-        ui.user.MoveWindow(ui.main, 0, 0, 1280, 900, True)
+        ui.fit_window(1280, 900)
         dpi = ui.user.GetDpiForWindow(ui.main)
         scale = dpi / 96
         def point(hwnd, x, y):
@@ -786,7 +842,7 @@ def gui_contracts(root, evidence, report):
         require(ui.label(ui.child(119)) == "Select a tool, choose its inputs and options, then run it locally.",
                 "Standalone status retained an instruction from workflow editing.")
         measure("tool", "restored")
-        ui.user.MoveWindow(ui.main, 0, 0, 1100, 740, True)
+        ui.fit_window(1100, 740)
         time.sleep(.2)
         measure("tool", "requested1100x740")
         captures.append(ui.capture("tools-minimum.bmp"))

@@ -287,7 +287,7 @@ def gui_checks(root, evidence, report):
             ui.send(ui.child(713, welcome), 0x00F5)
             ui.wait("first launch closed", lambda: not setup())
         ui.wait("native tools ready", lambda: ui.user.IsWindowEnabled(ui.child(410)) and len(ui.library().tools()) > 0)
-        ui.user.MoveWindow(ui.main, 0, 0, 1280, 900, True)
+        ui.fit_window(1280, 900)
         ui.post(ui.main, 0x0111, 302)  # Established File > Open example workflow.
         ui.wait("example workflow loaded", lambda: "Starter example" in ui.label(ui.child(101)))
         if not ui.user.IsWindowVisible(ui.child(111)):

@@ -102,7 +102,7 @@ def exercise(root, evidence, report):
         ui.wait("native expandable library ready", lambda: ui.user.IsWindowEnabled(ui.child(410)) and len(ui.library().tools()) > 0)
         require(ui.label(ui.child(104), True) == "SysTreeView32", "Library is not a native TreeView.")
         require(not ui.child(103), "Obsolete category dropdown remains.")
-        ui.user.MoveWindow(ui.main, 0, 0, 1280, 900, True)
+        ui.fit_window(1280, 900)
         tree = ui.library()
         roots = tree.roots()
         categories = {tree.label(item): [tree.label(child) for child in tree.children(item)] for item in roots}
@@ -228,7 +228,7 @@ def exercise(root, evidence, report):
 
         # Exercise the library itself at the supported minimum size. Prior
         # scrolling gates concern the option panels, not this new TreeView.
-        ui.user.MoveWindow(ui.main, 0, 0, 1040, 680, True)
+        ui.fit_window(1040, 680)
         filter_to("", sum(map(len, categories.values())))
         for category in tree.roots():
             if not tree.expanded(category):
