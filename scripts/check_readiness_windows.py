@@ -87,7 +87,19 @@ def performance_checks(folder, record, report):
     require(value["interpretation"]["inclusiveTotalsOverlapPhases"] is True and
             "not resident set size" in value["interpretation"]["nativeMemoryMeaning"],
             "Performance scope is not explicit about overlap and committed memory.")
-    stages, pipes = 0, 0
+    # These are the immutable Starter 0.4.0 manifest stage identities. Its
+    # BCFtools call uses intermediate files, not a binary producer/sink pipe.
+    # Pipeline accounting is exercised separately by WindowsPerformanceChecks,
+    # built from the same production process_pipeline.cpp.
+    expected_stages = {
+        "align/paired-end": [("check-pairs", "exec"), ("align", "exec")],
+        "bam/prepare": [(name, "exec") for name in
+                        ("name-sort", "fixmate", "coordinate-sort", "mark-duplicates", "index-bam", "flagstat", "alignment-stats")],
+        "variants/call": [("copy-reference", "copy")] + [(name, "exec") for name in
+                          ("index-reference", "pileup", "call", "normalize", "filter", "index-variants", "variant-stats")],
+        "variants/statistics": [("statistics", "exec")],
+    }
+    stages, pipes, copies = 0, 0, 0
     require(len(value["steps"]) == 5, "Performance omitted a workflow step.")
     for step in value["steps"]:
         require(step["status"] == "success" and step["elapsedSeconds"] >= 0, "Missing successful step measurement.")
@@ -99,9 +111,12 @@ def performance_checks(folder, record, report):
         backend = step["backendMetrics"]
         require(backend["available"] and backend["data"]["source"] == "windows-job-object",
                 "Native command metrics were unavailable in the exact package.")
+        require([(stage["id"], stage["kind"]) for stage in backend["data"]["stages"]] == expected_stages[step["tool"]],
+                "Native metrics omitted or changed an immutable Starter command stage.")
         for stage in backend["data"]["stages"]:
             if stage["kind"] == "copy":
                 require(stage["resources"] is None, "Copy operation fabricated native process counters.")
+                copies += 1
                 continue
             metrics = stage["resources"]
             require(stage["status"] == "success" and metrics["coverage"] == "complete" and
@@ -116,11 +131,13 @@ def performance_checks(folder, record, report):
                     "Native process accounting scope differs from its command kind.")
             stages += 1
             pipes += stage["kind"] == "pipe"
-    require(stages >= 4 and pipes >= 1, "Scientific execution did not exercise combined binary-pipeline accounting.")
+    require(stages == 17 and pipes == 0 and copies == 1,
+            "Native measurement stage counts differ from the immutable Starter 0.4.0 workflows.")
     report["performance"] = {"sha256": sha256(path), "commandStages": stages, "pipelineStages": pipes,
-                             "system": value["system"], "memoryKind": "committed; not RSS"}
+                             "copyStages": copies, "system": value["system"], "memoryKind": "committed; not RSS",
+                             "pipelineCoverage": "No binary pipe in the pinned Starter workflows; separate native performance helper exercises production pipeline accounting."}
     shutil.copyfile(path, Path(report["evidenceRoot"]) / "performance.json")
-    check(report, "Frozen five-step run binds phase timings, input sizes and real Windows Job Object CPU/committed-memory measurements, including a binary pipeline.")
+    check(report, "Frozen five-step Starter run binds phase timings, input sizes and real Windows Job Object CPU/committed-memory measurements for all 17 exec stages; its one copy has no fabricated process counters.")
 
 
 def host_checks(root, evidence, report):

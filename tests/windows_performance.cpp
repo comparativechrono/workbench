@@ -25,6 +25,45 @@ std::wstring self() {
     require(length && length < path.size(), "Cannot locate performance test executable");
     return std::wstring(path.data(), length);
 }
+bool report_job_membership() {
+    // With NULL, Windows queries the calling process's immediate job even in a
+    // nested hierarchy. This observes membership independently of the runner's
+    // numeric accounting snapshot; console/OS descendants must remain in scope.
+    // https://learn.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-queryinformationjobobject
+    struct Members { DWORD assigned, count; ULONG_PTR ids[128]; } members{};
+    if (!QueryInformationJobObject(nullptr, JobObjectBasicProcessIdList, &members, sizeof(members), nullptr)) {
+        const auto error = "scope-error:" + std::to_string(GetLastError()) + "\n";
+        write(GetStdHandle(STD_ERROR_HANDLE), error.data(), static_cast<DWORD>(error.size()));
+        return false;
+    }
+    if (members.count > 128 || members.assigned != members.count) return false;
+    bool own_pid_found = false;
+    std::string images = "[";
+    for (DWORD i = 0; i < members.count; ++i) {
+        if (i) images += ',';
+        const auto pid = static_cast<DWORD>(members.ids[i]);
+        own_pid_found = own_pid_found || pid == GetCurrentProcessId();
+        std::wstring name;
+        DWORD error = ERROR_SUCCESS;
+        const auto process = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, pid);
+        if (process) {
+            std::vector<wchar_t> path(32768);
+            DWORD length = static_cast<DWORD>(path.size());
+            if (QueryFullProcessImageNameW(process, 0, path.data(), &length)) name.assign(path.data(), length);
+            else error = GetLastError();
+            CloseHandle(process);
+        } else error = GetLastError();
+        images += "{\"pid\":" + std::to_string(pid) + ",\"image\":" +
+            (name.empty() ? "null" : bw::json_string(name)) + ",\"image_error\":" +
+            (error ? std::to_string(error) : "null") + "}";
+    }
+    images += ']';
+    const auto probe = "{\"caller_pid\":" + std::to_string(GetCurrentProcessId()) +
+        ",\"assigned\":" + std::to_string(members.assigned) + ",\"listed\":" + std::to_string(members.count) +
+        ",\"own_pid_found\":" + (own_pid_found ? "true" : "false") + ",\"members\":" + images + "}";
+    const auto lines = "scope-count:" + std::to_string(members.count) + "\nscope-members:" + probe + "\n";
+    return write(GetStdHandle(STD_ERROR_HANDLE), lines.data(), static_cast<DWORD>(lines.size())) && own_pid_found;
+}
 int child(int argc, wchar_t** argv) {
     const std::wstring mode = argv[2];
     if (mode == L"quiet-wait") { Sleep(INFINITE); return 41; }
@@ -53,6 +92,7 @@ int child(int argc, wchar_t** argv) {
         return write(GetStdHandle(STD_OUTPUT_HANDLE), pid.data(), static_cast<DWORD>(pid.size())) ? 0 : 45;
     }
     if (mode != L"work") return 46;
+    if (argc > 4 && std::wstring(argv[4]) == L"--probe-job" && !report_job_membership()) return 49;
     auto* memory = static_cast<volatile unsigned char*>(VirtualAlloc(nullptr, ALLOCATION, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE));
     if (!memory) return 47;
     for (SIZE_T i = 0; i < ALLOCATION; i += 4096) memory[i] = static_cast<unsigned char>(i / 4096);
@@ -68,8 +108,11 @@ void measured(const bw::ProcessPerformance& value, DWORD processes, bool memory 
     require(value.launched && value.wall_available, "Missing command wall time");
     require(value.accounting_available && value.memory_available, "Job accounting query was unavailable");
     require(!value.accounting_error && !value.memory_error, "Successful accounting retained a query error");
-    if (value.processes_total != processes)
-        throw std::runtime_error("Job accounting has incorrect process-tree scope: expected " +
+    // A Job Object accounts for all associated processes, including OS-created
+    // console hosts and other descendants, not just our explicit CreateProcess
+    // calls. The independent immediate-job probe below retains their identities.
+    if (value.processes_total < processes)
+        throw std::runtime_error("Job accounting omitted an explicit process: expected at least " +
             std::to_string(processes) + ", observed " + std::to_string(value.processes_total) +
             "; snapshot=" + bw::process_performance_json(value));
     require(value.user_ticks >= 0 && value.kernel_ticks >= 0, "Negative Windows CPU accounting");
@@ -86,10 +129,12 @@ int wmain(int argc, wchar_t** argv) {
     if (argc >= 3 && std::wstring(argv[1]) == L"--child") return child(argc, argv);
     std::wstring folder, active_name;
     std::vector<std::string> observations;
+    std::string active_membership;
     bw::ProcessPerformance active_performance;
     bool has_active = false;
-    auto observation = [](const std::wstring& name, const bw::ProcessPerformance& value) {
-        return "{\"check\":" + bw::json_string(name) + ",\"performance\":" + bw::process_performance_json(value) + "}";
+    auto observation = [&](const std::wstring& name, const bw::ProcessPerformance& value) {
+        return "{\"check\":" + bw::json_string(name) + ",\"performance\":" + bw::process_performance_json(value) +
+            (active_membership.empty() ? "" : ",\"membership_probe\":" + active_membership) + "}";
     };
     auto report_json = [&](const std::wstring& error = std::wstring{}) {
         std::string report = "{\"schema\":1,\"native_windows_execution\":true,\"passed\":" +
@@ -111,22 +156,36 @@ int wmain(int argc, wchar_t** argv) {
         bw::Cancel cancel{false};
         auto save = [&](const wchar_t* name, const bw::ProcessPerformance& value) {
             observations.push_back(observation(name, value));
-            has_active = false;
+            has_active = false; active_membership.clear();
         };
         auto command = [&](const wchar_t* name, const std::wstring& mode, const std::wstring& code = L"0",
                 const bw::Log& log = bw::Log{}, DWORD timeout = 10000, bw::ProcessPerformance* performance = nullptr) {
             const auto base = bw::join(folder, name);
-            active_name = name; active_performance = {}; has_active = true;
+            active_name = name; active_performance = {}; has_active = true; active_membership.clear();
             auto* measured = performance ? performance : &active_performance;
             try {
-                const auto result = bw::execute(binary, {L"--child", mode, code}, base + L".stdout", base + L".stderr",
+                std::vector<std::wstring> arguments{L"--child", mode, code};
+                if (active_name == L"exec-success") arguments.push_back(L"--probe-job");
+                const auto result = bw::execute(binary, arguments, base + L".stdout", base + L".stderr",
                     cancel, log, timeout, folder, measured);
                 active_performance = *measured;
                 return result;
             } catch (...) { active_performance = *measured; throw; }
         };
         auto result = command(L"exec-success", L"work");
+        const auto membership_log = bw::read_file(bw::join(folder, L"exec-success.stderr"));
+        const auto members_begin = membership_log.find("scope-members:");
+        if (members_begin != std::string::npos) {
+            const auto begin = members_begin + std::string("scope-members:").size();
+            const auto end = membership_log.find('\n', begin);
+            active_membership = membership_log.substr(begin, end == std::string::npos ? end : end - begin);
+        }
         require(!result.exit_code && !result.cancelled && !result.performance.pipeline, "Exec outcome changed");
+        require(!active_membership.empty() && membership_log.find("scope-count:") == 0 &&
+            active_membership.find("\"own_pid_found\":true") != std::string::npos, "Immediate-job membership did not contain the fixture process");
+        const auto member_count = std::stoul(membership_log.substr(std::string("scope-count:").size()));
+        require(member_count > 0 && member_count <= result.performance.processes_total,
+            "Accounting omitted a process independently observed in the command's immediate job");
         require(bw::read_file(bw::join(folder, L"exec-success.stdout")) == "measured output\n", "Exec output changed");
         measured(result.performance, 1, true); save(L"exec-success", result.performance);
         result = command(L"exec-failure", L"work", L"17");
@@ -137,7 +196,7 @@ int wmain(int argc, wchar_t** argv) {
                 const std::wstring& code = L"0", const bw::Log& log = bw::Log{}, DWORD timeout = 10000,
                 bw::ProcessPerformance* performance = nullptr) {
             const auto base = bw::join(folder, name);
-            active_name = name; active_performance = {}; has_active = true;
+            active_name = name; active_performance = {}; has_active = true; active_membership.clear();
             auto* measured = performance ? performance : &active_performance;
             try {
                 const auto result = bw::execute_pipeline(binary, {L"--child", producer, code}, binary, {L"--child", sink},
@@ -191,7 +250,7 @@ int wmain(int argc, wchar_t** argv) {
             threw = std::string(error.what()) == "deliberate observer failure";
         }
         require(threw && interrupted_exec.launched && interrupted_exec.accounting_available &&
-            interrupted_exec.memory_available && interrupted_exec.processes_total == 1 && interrupted_exec.processes_active == 1,
+            interrupted_exec.memory_available && interrupted_exec.processes_total >= 1 && interrupted_exec.processes_active >= 1,
             "Exec exception discarded the live child's accounting");
         require(bw::process_performance_json(interrupted_exec).find("\"coverage\":\"partial\"") != std::string::npos,
             "Exec exception claimed complete coverage");
@@ -211,7 +270,7 @@ int wmain(int argc, wchar_t** argv) {
         }
         active_name = L"pipeline-start-exception"; active_performance = interrupted; has_active = true;
         require(threw && interrupted.launched && interrupted.accounting_available && interrupted.memory_available &&
-            interrupted.processes_total == 1 && interrupted.processes_active == 1,
+            interrupted.processes_total >= 1 && interrupted.processes_active >= 1,
             "Partial-start exception discarded the live sink's accounting");
         require(bw::process_performance_json(interrupted).find("\"coverage\":\"partial\"") != std::string::npos,
             "Partial-start exception claimed complete coverage");

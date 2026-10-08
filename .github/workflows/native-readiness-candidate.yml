@@ -268,5 +268,6 @@ jobs:
             ${{ runner.temp }}/workspace-evidence
             ${{ runner.temp }}/readiness-evidence
             ${{ runner.temp }}/performance-evidence
+            ${{ runner.temp }}/${{ matrix.folder }}/performance helper output
           if-no-files-found: error
           retention-days: 30
