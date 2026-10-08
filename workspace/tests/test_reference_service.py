@@ -177,11 +177,13 @@ class ReferenceServiceTests(unittest.TestCase):
                     ("download", {"selection_id": "x", "file_ids": ["x", "x"], "destination": str(self.root)}),
                     ("download", {"selection_id": "x", "file_ids": ["https://arbitrary.example"], "destination": str(self.root)}),
                     ("download", {"selection_id": "x", "file_ids": ["x"], "destination": "relative"}),
+                    ("download", {"selection_id": "x", "file_ids": ["x"], "destination": str(self.root / "missing-custom-destination")}),
                     ("status", {"refresh": True}), ("open", {"record_id": "ready", "path": str(self.root)})]
         for action, params in requests:
             with self.subTest(action=action, params=params), self.assertRaises(ValueError):
                 self.host.dispatch("references/" + action, params)
         self.assertFalse(self.manager.calls)
+        self.assertFalse((self.root / "missing-custom-destination").exists())
 
     def test_explicit_use_binds_only_selected_field_and_is_undoable(self):
         self.host.dispatch("model", {"action": "add_tool", "payload": {"toolId": "fixture/reference"}})
@@ -239,7 +241,10 @@ class ReferenceServiceTests(unittest.TestCase):
                       headers={"Content-Length": str(len(compressed))})
         transport.add(folders["dna"] + "CHECKSUMS", f'{_bsd_update(0, compressed)} 1 {names["dna"]}\n')
         self.app._reference_manager = ReferenceManager(self.root, provider.EnsemblArchiveProvider(transport))
-        destination = self.root / "user-data" / "references"
+        # Use the same published path as the native UI. Windows may resolve
+        # the application's root from a short 8.3 spelling to a long spelling.
+        destination = Path(self.app._reference_manager.snapshot()["default_destination"])
+        self.assertEqual(destination.resolve(), (self.app.data / "references").resolve())
         self.assertFalse(destination.exists())
         self.assertEqual(self.host.dispatch("references/list", {})["local"], [])
         self.assertFalse(transport.calls)

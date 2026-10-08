@@ -252,7 +252,7 @@ class ReferenceTransferMixin:
                  'Selected references exceed the compressed download limit.')
 
     def download(self, selection_id, file_ids, destination, cancel=None, event=None):
-        from reference_manager import _require, _cancelled, _directory, _ordinary, filesystem_path, KINDS, uuid
+        from reference_manager import _require, _cancelled, _directory, _ordinary, _no_links, filesystem_path, KINDS, uuid
         _require(self._operation_lock.acquire(blocking=False), 'Another reference operation is already running.')
         self._pause.clear()
         try:
@@ -269,13 +269,16 @@ class ReferenceTransferMixin:
             _require(isinstance(destination, str) and destination and len(destination) < 32700 and Path(destination).is_absolute(),
                      'Choose an absolute reference destination folder.')
             _cancelled(cancel)
-            # UI paths are ordinary Windows paths; self.data uses extended
-            # paths for long-path IO. Compare the same filesystem form before
-            # deciding whether this is our lazily created managed destination.
-            destination_path = filesystem_path(destination).absolute()
-            destination_path = _directory(destination_path, create=destination_path == self.data)
-            pending_root = self._pending_root()
-            _require(destination_path != pending_root and pending_root not in destination_path.parents,
+            # UI paths may use ordinary or 8.3 spellings while self.data uses
+            # extended long paths. Reject links before resolving the existing
+            # ancestors for physical path comparison; retain the IO spelling.
+            destination_path = _no_links(filesystem_path(destination).absolute())
+            managed_path = _no_links(self.data)
+            destination_identity = destination_path.resolve(strict=False)
+            is_managed = destination_identity == managed_path.resolve(strict=False)
+            destination_path = _directory(destination_path, create=is_managed)
+            pending_root = self._pending_root().resolve(strict=False)
+            _require(destination_identity != pending_root and pending_root not in destination_identity.parents,
                      'Choose a reference destination outside incomplete download staging.')
             self._disk(destination_path, sum(item.get('bytes') or 0 for item in items))
             identity = uuid.uuid4().hex

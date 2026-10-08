@@ -3270,7 +3270,7 @@ class Workspace {
         ES_AUTOVSCROLL | WS_VSCROLL, REF_DETAILS, refWindow, WS_EX_CLIENTEDGE);
     SendMessageW(refDetails, EM_SETLIMITTEXT, 256 * 1024, 0);
     refDestinationLabel = make(L"STATIC", L"Save to", SS_LEFT, 652, refWindow);
-    refDestination = make(L"EDIT", root + L"\\user-data\\references", WS_TABSTOP |
+    refDestination = make(L"EDIT", L"", WS_TABSTOP |
         ES_AUTOHSCROLL, REF_DESTINATION, refWindow, WS_EX_CLIENTEDGE);
     refBrowse = button(L"Choose folder...", REF_BROWSE, refWindow);
     refDownload = button(L"Download selected", REF_DOWNLOAD, refWindow);

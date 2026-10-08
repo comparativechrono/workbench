@@ -409,6 +409,10 @@ def gui_checks(root, evidence, report):
         references = window('References · Native Workbench')
         provider = ui.child(620, references)
         ui.wait('two native providers loaded offline', lambda: ui.send(provider, 0x0146) == 2 and ui.user.IsWindowEnabled(provider))
+        initial_destination = ui.label(ui.child(609, references))
+        require(initial_destination and Path(initial_destination).samefile(report['guiFixture']['defaultDestination']),
+                'First native References open did not load the persisted relocated library destination.')
+        report['nativeLibraryDefault'] = {'firstOpen': initial_destination, 'expected': report['guiFixture']['defaultDestination']}
         names = []
         for index in range(2):
             buffer = ctypes.create_unicode_buffer(1024)
@@ -426,7 +430,11 @@ def gui_checks(root, evidence, report):
         ui.wait('native exact NCBI assembly row', lambda: species.count() == 1 and ui.user.IsWindowEnabled(ui.child(606, references)), seconds=120)
         button(references, 606)
         products = NativeList(ui, ui.child(607, references))
-        ui.wait('three native NCBI reference products', lambda: products.count() == 3 and ui.user.IsWindowEnabled(ui.child(611, references)), seconds=120)
+        ui.wait('three native NCBI reference products', lambda: products.count() == 3 and ui.user.IsWindowEnabled(ui.child(607, references)), seconds=120)
+        require(not ui.user.IsWindowEnabled(ui.child(611, references)), 'Native download enabled before any explicit file selection.')
+        products.click(0)
+        ui.key(ui.child(607, references), 0x20)  # Space toggles the focused native checkbox.
+        ui.wait('explicit native genome selection enables download', lambda: ui.user.IsWindowEnabled(ui.child(611, references)))
         text = ui.label(ui.child(608, references))
         require('GCF_000146045.2' in text and 'NCBI' in text, 'Native discovery detail omitted exact assembly/provider identity.')
         capture('references-native-ncbi-discovery', references)
@@ -490,6 +498,10 @@ def gui_checks(root, evidence, report):
         ui.wait('reopened reference list response applied', lambda: ui.send(ui.child(620, references), 0x0146) == 2 and
                 ui.user.IsWindowVisible(ui.child(604, references)) and ui.user.IsWindowEnabled(ui.child(604, references)))
         require(not ui.user.IsWindowEnabled(ui.child(627, references)), 'A real server list refresh revived the invalidated native review token.')
+        reopened_destination = ui.label(ui.child(609, references))
+        require(reopened_destination and Path(reopened_destination).samefile(report['guiFixture']['defaultDestination']),
+                'Reopened native References lost the persisted relocated library destination.')
+        report['nativeLibraryDefault']['reopened'] = reopened_destination
         require({record['id'] for record in manager.snapshot()['local']} == before, 'Closing or reopening stale review imported data.')
         tab(3)
         for identity, file in zip((660, 661), files):

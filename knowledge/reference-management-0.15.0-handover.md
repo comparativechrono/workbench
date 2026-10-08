@@ -67,3 +67,14 @@ executable signing and institutional deployment, scientific Linux CWL profiles,
 realistic Windows–Linux benchmarks and representative-machine acceptance.
 Existing SDK templates, validators, signed catalogues and offline pack imports
 are already present. Do not describe that entire developer toolkit as absent.
+
+The second candidate, `8ff5cf18b957905bbb92a0a08e21a6871ae49712`,
+passed all nine live-reference checks in both Windows paths but was also rejected
+in [run 37854004440](https://github.com/comparativechrono/workbench/actions/runs/37854004440).
+Its [recheck evidence](evidence/reference-management-0.15.0-rechecks-2026-10-08.json)
+retains 430 source passes/four skips, successful archive verification and the
+newly reached Windows failures. Native NCBI discovery worked; the validator had
+incorrectly required Download to enable before selecting a file. A later service
+source check exposed a short-versus-resolved Windows default-path comparison.
+Screenshot review also found the GUI initially displayed the old default folder
+after relocation. All three are corrected for another exact-package recheck.

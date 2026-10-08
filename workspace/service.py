@@ -1372,9 +1372,15 @@ class Workbench:
                     raise ValueError("Use short plain-text reference metadata.")
                 metadata[key] = value.strip()
         if action in ("download", "import-preview", "relocate-preview"):
+            from pack_manager import filesystem_path
             destination = Path(short_text(result.get("destination"), "reference destination folder", 30000))
-            managed_default = destination == self.data / "references" and not destination.exists()
-            if not destination.is_absolute() or not (destination.is_dir() or managed_default):
+            # Windows UI paths can use a short or ordinary spelling while the
+            # application root has already been resolved. Compare filesystem
+            # identities without changing the reviewed/user-facing path.
+            io_destination = filesystem_path(destination)
+            managed_default = (io_destination.resolve() == filesystem_path(self.data / "references").resolve()
+                               and not io_destination.exists())
+            if not destination.is_absolute() or not (io_destination.is_dir() or managed_default):
                 raise ValueError("Choose an existing absolute reference destination folder.")
             result["destination"] = str(destination)
         return result

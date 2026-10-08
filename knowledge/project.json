@@ -129,7 +129,8 @@
     "reference_management_ncbi_linux": "evidence/reference-management-0.15.0-ncbi-linux-2026-10-08.json",
     "reference_management_initial_source": "evidence/reference-management-0.15.0-initial-source-2026-10-08.json",
     "reference_management_initial_windows": "evidence/reference-management-0.15.0-initial-windows-2026-10-08.json",
-    "reference_management_initial_archive_audit": "evidence/reference-management-0.15.0-initial-archive-audit-2026-10-08.json"
+    "reference_management_initial_archive_audit": "evidence/reference-management-0.15.0-initial-archive-audit-2026-10-08.json",
+    "reference_management_rechecks": "evidence/reference-management-0.15.0-rechecks-2026-10-08.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -1103,7 +1104,7 @@
     "version": "0.15.0",
     "branch": "feature/reference-management",
     "starting_commit": "38917349449ce56a45d3e0f4f41b7d2a38621c6d",
-    "status": "first exact Windows candidate rejected; three defects corrected for rebuild; unpublished",
+    "status": "two exact candidates rejected; remaining path/UI fixes and validator correction ready for rebuild; unpublished",
     "authorization": "Owner requested remaining accepted groups one at a time. This first group is reference management; publication is not authorized by the earlier unmet broader-completion condition.",
     "scope": [
       "resumable reference downloads",
