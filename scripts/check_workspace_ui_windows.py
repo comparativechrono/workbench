@@ -145,8 +145,12 @@ class NativeUI:
         # row clicks separated only by WM_SETTEXT are interpreted by Windows as
         # a double-click at the unchanged pointer location, unlike a person
         # clicking the search field before editing it.
-        require(hwnd and self.user.IsWindowVisible(hwnd) and self.user.IsWindowEnabled(hwnd),
-                "The native edit is not available for user input.")
+        require(hwnd, "The native edit does not exist.")
+        # A preceding model commit can temporarily disable this same edit.
+        # Match click_button's bounded availability wait; never send text to a
+        # hidden/disabled control or bypass the actual native input path.
+        self.wait("native edit ready for input", lambda:
+                  self.user.IsWindowVisible(hwnd) and self.user.IsWindowEnabled(hwnd))
         left, top, right, bottom = self.bounds(hwnd)
         self.click_at((left + right) // 2, (top + bottom) // 2)
         buffer = ctypes.create_unicode_buffer(str(value))

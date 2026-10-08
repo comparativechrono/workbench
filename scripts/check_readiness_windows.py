@@ -100,6 +100,7 @@ def performance_checks(folder, record, report):
         "variants/statistics": [("statistics", "exec")],
     }
     stages, pipes, copies = 0, 0, 0
+    partial_stages = []
     require(len(value["steps"]) == 5, "Performance omitted a workflow step.")
     for step in value["steps"]:
         require(step["status"] == "success" and step["elapsedSeconds"] >= 0, "Missing successful step measurement.")
@@ -119,25 +120,35 @@ def performance_checks(folder, record, report):
                 copies += 1
                 continue
             metrics = stage["resources"]
-            require(stage["status"] == "success" and metrics["coverage"] == "complete" and
-                    metrics["accounting_available"] and metrics["memory_available"],
-                    "Successful native process tree lacks complete accounting.")
+            require(stage["status"] == "success" and metrics["accounting_available"] and
+                    metrics["memory_available"] and not metrics["accounting_error"] and not metrics["memory_error"],
+                    "Successful native command lacks available resource accounting.")
+            active = metrics["processes_active_at_snapshot"]
+            require(0 <= active <= metrics["processes_total"] and
+                    metrics["coverage"] == ("partial" if active else "complete"),
+                    "Native resource coverage does not reflect the processes still active before job cleanup.")
             require(metrics["user_cpu_seconds"] >= 0 and metrics["kernel_cpu_seconds"] >= 0 and
                     metrics["peak_job_memory_bytes"] > 0 and metrics["wall_ms"] >= 0 and
-                    metrics["processes_active_at_snapshot"] == 0 and metrics["memory_kind"] == "committed" and
+                    metrics["memory_kind"] == "committed" and
                     metrics["snapshot"] == "before-job-close", "Invalid native process resource observations.")
             expected_scope = "pipeline-process-tree" if stage["kind"] == "pipe" else "command-process-tree"
             require(metrics["scope"] == expected_scope and metrics["processes_total"] >= (2 if stage["kind"] == "pipe" else 1),
                     "Native process accounting scope differs from its command kind.")
             stages += 1
             pipes += stage["kind"] == "pipe"
+            if active:
+                partial_stages.append({"stepId": step["id"], "tool": step["tool"], "stageId": stage["id"],
+                                       "processesActiveAtSnapshot": active, "processesTotal": metrics["processes_total"]})
     require(stages == 17 and pipes == 0 and copies == 1,
             "Native measurement stage counts differ from the immutable Starter 0.4.0 workflows.")
     report["performance"] = {"sha256": sha256(path), "commandStages": stages, "pipelineStages": pipes,
                              "copyStages": copies, "system": value["system"], "memoryKind": "committed; not RSS",
+                             "completeStageCount": stages - len(partial_stages), "partialStageCount": len(partial_stages),
+                             "partialStages": partial_stages,
+                             "coverageScope": "Counters are sampled before job cleanup. Stages with remaining active descendants are explicitly partial, not complete process-lifetime totals.",
                              "pipelineCoverage": "No binary pipe in the pinned Starter workflows; separate native performance helper exercises production pipeline accounting."}
     shutil.copyfile(path, Path(report["evidenceRoot"]) / "performance.json")
-    check(report, "Frozen five-step Starter run binds phase timings, input sizes and real Windows Job Object CPU/committed-memory measurements for all 17 exec stages; its one copy has no fabricated process counters.")
+    check(report, "Frozen five-step Starter run binds phase timings, input sizes and real Windows Job Object measurements for all 17 exec stages, labels any live-descendant snapshot partial and leaves its copy without fabricated process counters.")
 
 
 def host_checks(root, evidence, report):
