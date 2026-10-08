@@ -100,6 +100,10 @@ class DesktopModel:
         available = {}
         for tool in self.catalog["tools"].values():
             for port in tool.get("ports", []):
+                # This declared port requires producer provenance, so an
+                # arbitrary external file can never satisfy its contract.
+                if tool.get('requiresReferenceIndex', {}).get('port') == port['id']:
+                    continue
                 fields = self._file_schema(port.get("fields", []))
                 if not fields or any(field.get("type") not in ("file", "files", "directory") for field in fields):
                     continue

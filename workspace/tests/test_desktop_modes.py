@@ -201,9 +201,9 @@ class DesktopModeTests(unittest.TestCase):
         self.assertEqual(self.app.get_run(identity)["graph"], single)
         for method, params in (("workspace/mode", {"mode": "workflow"}),
                                ("workspace/tool", {"toolId": "fixture/process"})):
-            with self.assertRaisesRegex(ValueError, "active analysis"):
-                self.host.dispatch(method, params)
-        self.assertEqual(self.host.graph(), single)
+            self.host.dispatch(method, params)
+        self.assertEqual(self.app.get_run(identity)["graph"], single)
+        self.assertTrue(self.host.snapshot()["workspace_editable"])
         self.host.dispatch("cancel", {"run_id": identity})
         self.app.runs[identity]["_worker"].join(2)
         self.assertEqual(len(self.mode("workflow")["nodes"]), 2)

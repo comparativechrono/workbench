@@ -102,7 +102,9 @@
     "expandable_tool_library_publication": "evidence/tool-library-0.11.0-publication-2026-10-08.json",
     "expandable_tool_library_public_downloads": "evidence/tool-library-0.11.0-public-downloads-2026-10-08.json",
     "expandable_tool_library_preparation": "evidence/tool-library-0.11.0-preparation-2026-10-08.json",
-    "readiness_performance": "readiness-performance.md"
+    "readiness_performance": "readiness-performance.md",
+    "batch_workflows": "batch-workflows.md",
+    "reference_indexes": "reference-indexes.md"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -1072,6 +1074,43 @@
     "public_downloads": "evidence/tool-library-0.11.0-public-downloads-2026-10-08.json"
   },
   "active_development": {
+    "recorded_on": "2026-10-08",
+    "version": "0.13.0",
+    "branch": "feature/batch-queue-indexes",
+    "starting_commit": "dc7c8e9ea78f12d6229150c48af8c60d6632046b",
+    "base_branch": "feature/readiness-performance",
+    "status": "implementation integrated; source and exact native candidate validation in progress; unpublished",
+    "authorization": "Owner requested implementation of the next accepted tranche; release not requested.",
+    "milestone": 2,
+    "scope": [
+      "explicit sample tables and per-sample mapping",
+      "independent sample batches and explicit combined metrics/text reports",
+      "durable serial queue with immutable plans and paused restart",
+      "verified reusable minimap2 short-read indexes"
+    ],
+    "handover": "batch-workflows.md",
+    "index_contract": "reference-indexes.md",
+    "roadmap": "roadmap.md",
+    "published_baseline": "0.11.0",
+    "published_assets_changed": false,
+    "release_authorized": false,
+    "released": false,
+    "updater_built": false,
+    "additional_candidate_pack": {
+      "id": "align",
+      "version": "0.4.1",
+      "min_app_version": "0.13.0",
+      "published": false,
+      "preserves_published": "align 0.4.0"
+    },
+    "later_accepted_milestones": [
+      "verified completed-step restart",
+      "resource-bounded concurrency",
+      "portable projects"
+    ],
+    "evidence_scope": "Source, exact native hosted Windows execution, physical device acceptance and realistic benchmarking remain separate claims."
+  },
+  "readiness_performance_development": {
     "recorded_on": "2026-10-08",
     "version": "0.12.0",
     "branch": "feature/readiness-performance",

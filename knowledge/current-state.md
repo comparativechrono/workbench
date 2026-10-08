@@ -1,6 +1,22 @@
 # Current project state
 
-## Active development: 0.12.0, unpublished
+## Active development: 0.13.0, unpublished
+
+On **2026-10-08** the owner requested the next accepted tranche. Work continues
+on `feature/batch-queue-indexes`, stacked on the 0.12.0 review branch at
+`dc7c8e9ea78f12d6229150c48af8c60d6632046b`. It adds explicit sample-table mapping,
+independent sample batches and combined reports, a durable serial queue, and
+verified reusable minimap2 short-read indexes. The new `align` **0.4.1** candidate
+sits beside immutable **0.4.0**; saved pins remain unchanged. The published
+32-pack setup profile and catalogue trust remain unchanged.
+
+See [batch workflows and queue](batch-workflows.md) and
+[reference-index contracts](reference-indexes.md). Source integration is under
+validation; exact packaged Windows results will be recorded here when available.
+This request authorizes development, not publication. Neither 0.12.0 nor 0.13.0
+has been released, and published 0.11.0 remains the baseline.
+
+## Previous tranche: 0.12.0, unpublished
 
 On **2026-10-08** the owner accepted the [broader feature roadmap](roadmap.md).
 The first milestone is in progress on `feature/readiness-performance`, based on
@@ -30,8 +46,9 @@ this is not complete small-screen acceptance.
 Windows–Linux benchmark and release/update gates remain outstanding. No 0.12.0
 updater was built or tested; live reference downloads and Full online setup were
 not rerun by this candidate workflow. Published 0.11.0 below remains unchanged.
-Sample batching, durable queues, reusable indexes, verified restart and bounded
-concurrency remain subsequent accepted work, not completed features.
+Sample batching, durable queues and reusable indexes are the active 0.13.0
+tranche above. Verified completed-step restart and bounded concurrency remain
+subsequent accepted work.
 
 ## Published baseline: 0.11.0
 

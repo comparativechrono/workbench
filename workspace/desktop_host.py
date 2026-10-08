@@ -119,7 +119,7 @@ class DesktopHost:
             if key == "mode" and value not in ("tool", "workflow"):
                 raise ValueError("Choose tool or workflow mode.")
             with self.app.lock:
-                self.app.ensure_editable()
+                self.app.ensure_model_editable()
                 with self.model_lock:
                     if key == "toolId":
                         # Resolve before touching the current selection. Failed
@@ -212,7 +212,7 @@ class DesktopHost:
             source_id = short_text(params.get("source_id"), "reference input source", 100)
             field_id = short_text(params.get("field_id"), "reference input field", 100)
             with self.app.lock:
-                self.app.ensure_editable()
+                self.app.ensure_model_editable()
                 with self.model_lock:
                     self.model.use_reference(resource, source_id, field_id)
                 result = self.app.reference_state()
@@ -226,7 +226,7 @@ class DesktopHost:
             read_only = action in ("select", "snapshot") or action == "use_output" and not payload.get("toolId")
             with self.app.lock:
                 if not read_only:
-                    self.app.ensure_editable()
+                    self.app.ensure_model_editable()
                 with self.model_lock:
                     self.model.dispatch(action, payload)
                 return self.snapshot()
@@ -234,6 +234,50 @@ class DesktopHost:
             if set(params) - {"graph", "output_folder"}:
                 raise ValueError("Unknown readiness request field.")
             return self.app.review(copy.deepcopy(params.get("graph", self.graph())), params.get("output_folder"))
+        if method == "sample/table":
+            if set(params) != {"path"}:
+                raise ValueError("Choose a sample table file.")
+            return self.app.import_sample_table(params["path"])
+        if method == "sample/targets":
+            if set(params) - {"graph"}:
+                raise ValueError("Unknown sample targets field.")
+            from sample_table import binding_targets
+            return binding_targets(self.app.engine, copy.deepcopy(params.get("graph", self.graph())))
+        if method == "sample/preview":
+            if (set(params) - {"graph", "table", "table_token", "bindings", "parameter_bindings", "mode", "shared_sources", "combined_target"}
+                    or "bindings" not in params or (("table" in params) == ("table_token" in params))):
+                raise ValueError("Choose a sample table and explicit input mappings.")
+            return self.app.preview_batch(dict(params, graph=copy.deepcopy(params.get("graph", self.graph()))))
+        if method.startswith("queue/"):
+            action = method.split("/", 1)[1]
+            if action == "add":
+                if set(params) - {"graph", "output_folder"}:
+                    raise ValueError("Unknown queue request field.")
+                return self.app.enqueue(dict(params, graph=copy.deepcopy(params.get("graph", self.graph()))))
+            if action == "add-batch":
+                if set(params) != {"token", "output_folder"}:
+                    raise ValueError("Review a sample batch before queueing it.")
+                return self.app.enqueue(params, batch=True)
+            if action == "cancel":
+                if set(params) != {"job_id"}:
+                    raise ValueError("Choose a queued job to cancel.")
+                return self.app.cancel_queued(params["job_id"])
+            if params:
+                raise ValueError("Unknown queue request field.")
+            actions = {"status": self.app.queue_state, "start": self.app.start_queue, "pause": self.app.pause_queue}
+            if action not in actions:
+                raise ValueError("Unknown queue action.")
+            return actions[action]()
+        if method in ("index/list", "index/verify"):
+            from reference_indexes import ReferenceIndexStore
+            store = ReferenceIndexStore(self.app.root)
+            if method == "index/list":
+                if params:
+                    raise ValueError("Unknown reference index request field.")
+                return store.list()
+            if set(params) != {"key"}:
+                raise ValueError("Choose an index to verify.")
+            return store.verify(short_text(params["key"], "reference index key", 100))
         if method == "diagnostics/review":
             if set(params) - {"run_id"}:
                 raise ValueError("Unknown diagnostic review field.")
@@ -265,7 +309,7 @@ class DesktopHost:
         if method == "saved":
             return self.app.saved_summaries()
         if method == "save":
-            self.app.ensure_editable()
+            self.app.ensure_model_editable()
             request = copy.deepcopy(params)
             if request.get("kind") == "pipeline":
                 request.setdefault("graph", self.graph())
@@ -298,7 +342,7 @@ class DesktopHost:
             if item is None:
                 raise ValueError("The selected saved item is no longer available.")
             with self.app.lock:
-                self.app.ensure_editable()
+                self.app.ensure_model_editable()
                 with self.model_lock:
                     if kind == "pipeline":
                         self._workflow_model.dispatch("load_graph", {"graph": item["graph"], "template": True})
@@ -309,7 +353,7 @@ class DesktopHost:
         if method == "example":
             from example import make_example
             with self.app.lock:
-                self.app.ensure_editable()
+                self.app.ensure_model_editable()
                 graph = make_example(self.app.root, self.app.catalog)
                 with self.model_lock:
                     self._workflow_model.dispatch("load_graph", {"graph": graph, "template": False})
@@ -386,11 +430,31 @@ def serve(host, input_stream, output_stream):
             except (ValueError, UnicodeError, TypeError, RecursionError) as exc:
                 send(None, error=exc)
                 continue
-            if method in ("review", "import", "diagnostics/save"):
-                if not capacity.acquire(blocking=False):
-                    send(identity, error="A review, tool import or diagnostic save is still running. Wait before trying again.")
+            if method == "queue/cancel":
+                try:
+                    if set(params) != {"job_id"}:
+                        raise ValueError("Choose a queued job to cancel.")
+                    immediate = host.app.cancel_queued_immediate(params["job_id"])
+                except Exception as error:
+                    send(identity, error=error)
                     continue
-                if method == "review" and "graph" not in params:
+                if immediate is not None:
+                    send(identity, result=immediate)
+                    continue
+            if method in ("review", "import", "diagnostics/save", "sample/table", "sample/preview", "sample/targets", "queue/add", "queue/add-batch", "queue/cancel", "index/list", "index/verify"):
+                if not capacity.acquire(blocking=False):
+                    if method == "queue/cancel":
+                        try:
+                            immediate = host.app.cancel_queued_immediate(params["job_id"])
+                            if immediate is not None:
+                                send(identity, result=immediate)
+                                continue
+                        except Exception as error:
+                            send(identity, error=error)
+                            continue
+                    send(identity, error="Two background requests are still running. Wait before trying again.")
+                    continue
+                if method in ("review", "sample/preview", "sample/targets", "queue/add") and "graph" not in params:
                     # Snapshot at command receipt, after preceding model edits,
                     # rather than at the background worker's scheduling time.
                     params = dict(params, graph=host.graph())

@@ -75,6 +75,9 @@ enum {
   ZOOM_IN,
   ZOOM_RESET,
   REVIEW_DIAGNOSTICS,
+  SHOW_SAMPLES,
+  SHOW_QUEUE,
+  SHOW_INDEXES,
   PACK_SEARCH = 501,
   PACK_FILTER,
   PACK_LIST,
@@ -121,6 +124,16 @@ enum {
   SETUP_CANCEL,
   SETUP_CLOSE,
   PACK_SETUP,
+  SAMPLE_PATH = 801,
+  SAMPLE_BROWSE, SAMPLE_LOAD, SAMPLE_TARGETS, SAMPLE_COLUMN, SAMPLE_SHARED,
+  SAMPLE_PREVIEW, SAMPLE_ROWS, SAMPLE_NOTICE, SAMPLE_OUTPUT, SAMPLE_OUTPUT_BROWSE,
+  SAMPLE_QUEUE, SAMPLE_CLOSE,
+  SAMPLE_MODE,
+  QUEUE_LIST = 901,
+  QUEUE_DETAILS, QUEUE_ADD, QUEUE_START, QUEUE_PAUSE, QUEUE_CANCEL,
+  QUEUE_RESULTS, QUEUE_NOTICE, QUEUE_CLOSE,
+  INDEX_LIST = 1001,
+  INDEX_DETAILS, INDEX_REFRESH, INDEX_VERIFY, INDEX_NOTICE, INDEX_CLOSE,
   FIELD_BASE = 2000
 };
 std::wstring wide(const std::string &s) { return bw::utf16(s); }
@@ -488,6 +501,28 @@ class Workspace {
       centerHeading{}, rightHeading{}, nameLabel{}, inputLabel{}, inputHelp{},
       outputLabel{}, outputHelp{}, referenceHelp{}, generalPanel{};
   HWND addInput{}, zoomOut{}, zoomIn{}, zoomReset{};
+  HWND samplesButton{}, queueButton{};
+  struct Auxiliary {
+    Workspace *app = nullptr;
+    int kind = 0;
+    HWND window{};
+    UINT dpi = 96;
+    HFONT font{};
+    std::map<int, HWND> controls;
+    bool rebuilding = false;
+    unsigned generation = 0;
+  } samplesView, queueView, indexesView;
+  Json sampleGraph = Json::object(), sampleTable = Json::object(),
+       sampleTargets = Json::array(), sampleTargetSchema = Json::object(), samplePreview = Json::object(),
+       queueState = Json::object(), indexState = Json::object();
+  std::vector<std::string> sampleColumns;
+  std::map<size_t, std::string> sampleMappings;
+  std::set<std::string> sampleSharedSources;
+  std::map<std::string, Json> verifiedIndexes;
+  std::string queueRendered, sampleToken;
+  bool samplePending = false, queuePending = false, queuePollPending = false,
+       queuePollFailed = false, indexPending = false, queuePreparing = false, queueRunning = false;
+  ULONGLONG lastQueuePoll = 0;
   HWND setupWindow{}, setupIntro{}, setupFull{}, setupStarter{}, setupCustom{},
       setupHelp{}, setupList{}, setupTotal{}, setupNotice{}, setupProgress{},
       setupRefresh{}, setupInstall{}, setupRetry{}, setupCancel{}, setupClose{}, packSetup{};
@@ -507,6 +542,9 @@ class Workspace {
        refOperation = Json::object(), refTargets = Json::array();
   Json setupState = object({{"rows", Json::array()}, {"operation", Json::object()}});
   std::map<long long, std::string> pending;
+  std::map<long long, unsigned> pendingViews;
+  std::map<long long, std::string> pendingIndexVerifications;
+  std::set<long long> concurrentRequests;
   long long nextRequest = 1, activeRequest = 0;
   std::deque<Json> outgoing;
   std::string submittedFields;
@@ -696,20 +734,664 @@ class Workspace {
     host.send(request);
     enabled();
   }
+  bool slow_request_pending() const {
+    const auto found = pending.find(activeRequest);
+    if (found == pending.end()) return false;
+    const auto &method = found->second;
+    return method == "review" || method == "diagnostics/save" ||
+           method.rfind("sample/", 0) == 0 || method.rfind("index/", 0) == 0 ||
+           method == "queue/add" || method == "queue/add-batch";
+  }
+  bool cancellation_pending() const {
+    for (const auto &request : pending)
+      if (request.second == "cancel" || request.second == "queue/cancel") return true;
+    return false;
+  }
+  bool analysis_active() const { return busy || queuePreparing || queueRunning; }
   long long send(const std::string &method, Json params = Json::object()) {
     long long id = nextRequest++;
     pending[id] = method;
-    outgoing.push_back(object(
-        {{"id", id}, {"method", method}, {"params", std::move(params)}}));
+    if (method.rfind("sample/", 0) == 0) pendingViews[id] = samplesView.generation;
+    else if (method.rfind("index/", 0) == 0) pendingViews[id] = indexesView.generation;
+    if (method == "index/verify") pendingIndexVerifications[id] = getstr(params, "key");
+    Json request = object({{"id", id}, {"method", method}, {"params", std::move(params)}});
+    // Keep model mutations ordered. Only bounded monitoring, cancellation and
+    // shutdown can pass a slow read/hash operation; replies retain exact IDs.
+    if (slow_request_pending() && (method == "status" || method == "queue/status" ||
+        method == "cancel" || method == "queue/cancel" || method == "queue/pause" || method == "shutdown")) {
+      concurrentRequests.insert(id);
+      host.send(request);
+      enabled();
+      return id;
+    }
+    outgoing.push_back(std::move(request));
     pump();
     return id;
   }
   void model(const std::string &action, Json payload = Json::object()) {
-    if (!ready || busy || packBusy || packActionPending || refBusy ||
+    if (!ready || packBusy || packActionPending || refBusy ||
         refActionPending || setupBusy || setupActionPending || showingHistory)
       return;
     send("model",
          object({{"action", action}, {"payload", std::move(payload)}}));
+  }
+  HWND aux(const Auxiliary &view, int id) const {
+    const auto found = view.controls.find(id);
+    return found == view.controls.end() ? nullptr : found->second;
+  }
+  HWND aux_make(Auxiliary &view, int id, const wchar_t *klass,
+                const std::wstring &label, DWORD style, DWORD ex = 0) {
+    HWND h = make(klass, label, style, id, view.window, ex);
+    view.controls[id] = h;
+    SendMessageW(h, WM_SETFONT, reinterpret_cast<WPARAM>(view.font), FALSE);
+    return h;
+  }
+  void aux_text(Auxiliary &view, int id, const std::wstring &value) {
+    HWND h = aux(view, id);
+    if (h && control_text(h) != value) SetWindowTextW(h, value.c_str());
+  }
+  void aux_columns(Auxiliary &view, int id,
+                   const std::vector<std::pair<std::wstring, int>> &columns) {
+    HWND list = aux(view, id);
+    while (ListView_DeleteColumn(list, 0)) {}
+    int index = 0;
+    for (const auto &entry : columns) {
+      LVCOLUMNW column{};
+      column.mask = LVCF_TEXT | LVCF_WIDTH;
+      column.pszText = const_cast<wchar_t *>(entry.first.c_str());
+      column.cx = MulDiv(entry.second, view.dpi, 96);
+      ListView_InsertColumn(list, index++, &column);
+    }
+  }
+  void aux_row(HWND list, int index, const std::vector<std::wstring> &values) {
+    if (index >= ListView_GetItemCount(list)) {
+      LVITEMW item{};
+      item.mask = LVIF_TEXT;
+      item.iItem = index;
+      item.pszText = const_cast<wchar_t *>(values.front().c_str());
+      ListView_InsertItem(list, &item);
+    }
+    for (size_t column = 0; column < values.size(); ++column) {
+      wchar_t previous[8192]{};
+      ListView_GetItemText(list, index, static_cast<int>(column), previous, 8192);
+      if (values[column] != previous)
+        ListView_SetItemText(list, index, static_cast<int>(column),
+                            const_cast<wchar_t *>(values[column].c_str()));
+    }
+  }
+  const Json &queue_selected() const {
+    static const Json empty = Json::object();
+    if (!queueView.window) return empty;
+    const int row = ListView_GetNextItem(aux(queueView, QUEUE_LIST), -1, LVNI_SELECTED);
+    const auto &jobs = queueState.get("jobs").array_items();
+    return row >= 0 && static_cast<size_t>(row) < jobs.size() ? jobs[row] : empty;
+  }
+  const Json &index_selected() const {
+    static const Json empty = Json::object();
+    if (!indexesView.window) return empty;
+    const int row = ListView_GetNextItem(aux(indexesView, INDEX_LIST), -1, LVNI_SELECTED);
+    const auto &entries = indexState.get("entries").array_items();
+    return row >= 0 && static_cast<size_t>(row) < entries.size() ? entries[row] : empty;
+  }
+  void auxiliary_enabled() {
+    const bool idle = ready && !closing && !activeRequest && outgoing.empty();
+    const bool responsive = ready && !closing && (idle || slow_request_pending());
+    const bool edit = idle && !setupBusy && !setupActionPending && !packBusy &&
+                      !packActionPending && !refBusy && !refActionPending && !showingHistory;
+    if (samplesView.window) {
+      for (int id : {SAMPLE_PATH, SAMPLE_BROWSE, SAMPLE_LOAD, SAMPLE_TARGETS, SAMPLE_MODE,
+                     SAMPLE_OUTPUT, SAMPLE_OUTPUT_BROWSE})
+        EnableWindow(aux(samplesView, id), idle && !samplePending);
+      const int target = ListView_GetNextItem(aux(samplesView, SAMPLE_TARGETS), -1, LVNI_SELECTED);
+      EnableWindow(aux(samplesView, SAMPLE_COLUMN), idle && !samplePending && target >= 0 && !sampleColumns.empty());
+      EnableWindow(aux(samplesView, SAMPLE_PREVIEW), idle && !samplePending && sampleTable.contains("rows") && !sampleTargets.array_items().empty());
+      EnableWindow(aux(samplesView, SAMPLE_QUEUE), edit && !samplePending && !queuePending && !sampleToken.empty() && samplePreview.get("valid").boolean());
+    }
+    if (queueView.window) {
+      const auto &job = queue_selected();
+      const auto status_ = getstr(job, "status");
+      bool waiting = false;
+      for (const auto &item : queueState.get("jobs").array_items())
+        waiting = waiting || getstr(item, "status") == "queued";
+      EnableWindow(aux(queueView, QUEUE_ADD), edit && !queuePending && !queuePreparing && !graph().get("nodes").array_items().empty());
+      EnableWindow(aux(queueView, QUEUE_START), edit && !busy && !queueRunning && !queuePending && !queuePreparing && waiting);
+      EnableWindow(aux(queueView, QUEUE_PAUSE), responsive && !queuePending && !queueState.get("scheduled").array_items().empty());
+      EnableWindow(aux(queueView, QUEUE_CANCEL), responsive && !queuePending && !cancellation_pending() &&
+                   (status_ == "queued" || status_ == "running" || status_ == "preparing"));
+      EnableWindow(aux(queueView, QUEUE_RESULTS), idle && !getstr(job, "started_at").empty() && !getstr(job, "run_id").empty() && !getstr(job, "folder").empty());
+    }
+    if (indexesView.window) {
+      EnableWindow(aux(indexesView, INDEX_REFRESH), idle && !indexPending);
+      EnableWindow(aux(indexesView, INDEX_VERIFY), idle && !indexPending && !getstr(index_selected(), "key").empty());
+    }
+  }
+  void sample_invalidate() {
+    const bool hadPreview = samplePreview.contains("mode");
+    sampleToken.clear();
+    samplePreview = Json::object();
+    if (hadPreview && aux(samplesView, SAMPLE_ROWS)) {
+      ListView_DeleteAllItems(aux(samplesView, SAMPLE_ROWS));
+      aux_text(samplesView, SAMPLE_NOTICE, L"The mappings changed. Preview the analyses again before queueing.");
+    }
+    aux_text(samplesView, SAMPLE_QUEUE, L"Queue reviewed analyses");
+    auxiliary_enabled();
+  }
+  void sample_selection() {
+    if (!samplesView.window || samplesView.rebuilding) return;
+    const int row = ListView_GetNextItem(aux(samplesView, SAMPLE_TARGETS), -1, LVNI_SELECTED);
+    samplesView.rebuilding = true;
+    int choice = 0;
+    if (row >= 0) {
+      const auto mapping = sampleMappings.find(static_cast<size_t>(row));
+      if (mapping != sampleMappings.end())
+        for (size_t i = 0; i < sampleColumns.size(); ++i)
+          if (sampleColumns[i] == mapping->second) choice = static_cast<int>(i) + 1;
+    }
+    SendMessageW(aux(samplesView, SAMPLE_COLUMN), CB_SETCURSEL, choice, 0);
+    const Json &target = row >= 0 && static_cast<size_t>(row) < sampleTargets.array_items().size()
+                            ? sampleTargets.array_items()[row] : Json();
+    const auto type = getstr(target, "sourceType"), source = getstr(target, "sourceId");
+    const bool eligible = !source.empty() && type != "pair" && type != "reads" &&
+        type != "sam" && type != "bam" && type != "sam-rna" && type != "bam-rna" &&
+        type != "vcf" && type != "vcf-pass" && type != "bcf" && type != "bcf-likelihoods";
+    const bool shared = !choice && (target.get("shared").boolean() || sampleSharedSources.count(source));
+    SendMessageW(aux(samplesView, SAMPLE_SHARED), BM_SETCHECK, shared ? BST_CHECKED : BST_UNCHECKED, 0);
+    EnableWindow(aux(samplesView, SAMPLE_SHARED), eligible && !choice && !target.get("shared").boolean() && !samplePending);
+    aux_text(samplesView, -4, row < 0 ? L"Select a workflow input or option to map its column." :
+        L"Current value: " + wt(target, "value", "(empty)") + (shared ? L"\r\nShared resource; no sample pooling." : L""));
+    samplesView.rebuilding = false;
+    auxiliary_enabled();
+  }
+  void sample_mapping_rows() {
+    if (!samplesView.window) return;
+    HWND list = aux(samplesView, SAMPLE_TARGETS);
+    samplesView.rebuilding = true;
+    for (size_t i = 0; i < sampleTargets.array_items().size(); ++i) {
+      const auto &target = sampleTargets.array_items()[i];
+      const bool parameter = target.contains("nodeId");
+      const auto mapping = sampleMappings.find(i);
+      const bool shared = target.get("shared").boolean() || sampleSharedSources.count(getstr(target, "sourceId"));
+      aux_row(list, static_cast<int>(i), {
+          (parameter ? wt(target, "nodeId") + L" · " : L"") + wt(target, "label"),
+          mapping == sampleMappings.end() ? (shared ? L"Shared workflow value" : L"Keep workflow value") : wide(mapping->second)});
+    }
+    while (ListView_GetItemCount(list) > static_cast<int>(sampleTargets.array_items().size()))
+      ListView_DeleteItem(list, ListView_GetItemCount(list) - 1);
+    samplesView.rebuilding = false;
+    sample_selection();
+  }
+  void sample_table_rows() {
+    if (!samplesView.window) return;
+    sample_invalidate();
+    sampleColumns.clear();
+    HWND combo = aux(samplesView, SAMPLE_COLUMN), list = aux(samplesView, SAMPLE_ROWS);
+    SendMessageW(combo, CB_RESETCONTENT, 0, 0);
+    SendMessageW(combo, CB_ADDSTRING, 0, reinterpret_cast<LPARAM>(L"Keep workflow value"));
+    std::vector<std::pair<std::wstring, int>> columns;
+    for (const auto &column : sampleTable.get("columns").array_items()) {
+      sampleColumns.push_back(text(column));
+      const auto label = wide(text(column));
+      SendMessageW(combo, CB_ADDSTRING, 0, reinterpret_cast<LPARAM>(label.c_str()));
+      columns.emplace_back(label, 180);
+    }
+    ListView_DeleteAllItems(list);
+    aux_columns(samplesView, SAMPLE_ROWS, columns);
+    const auto &rows = sampleTable.get("rows").array_items();
+    for (size_t i = 0; i < std::min<size_t>(100, rows.size()); ++i) {
+      std::vector<std::wstring> values;
+      for (const auto &column : sampleColumns) values.push_back(wt(rows[i], column.c_str()));
+      aux_row(list, static_cast<int>(i), values);
+    }
+    for (auto it = sampleMappings.begin(); it != sampleMappings.end();) {
+      if (std::find(sampleColumns.begin(), sampleColumns.end(), it->second) == sampleColumns.end()) it = sampleMappings.erase(it);
+      else ++it;
+    }
+    // Sample-identity options are declared by packs, never inferred from labels.
+    for (size_t i = 0; i < sampleTargets.array_items().size(); ++i)
+      if (sampleTargets.array_items()[i].get("binding").boolean()) sampleMappings[i] = "sample_id";
+    aux_text(samplesView, SAMPLE_NOTICE, L"Loaded " + std::to_wstring(sampleTable.get("rowCount").integer(static_cast<long long>(rows.size()))) +
+        L" samples. Showing the first " + std::to_wstring(std::min<size_t>(100, rows.size())) +
+        L" rows. Map input columns, then preview the analyses.\r\nRelative paths use the table's folder. This uses the workspace copy fixed when Samples opened.");
+    sample_mapping_rows();
+  }
+  void sample_preview_rows(const Json &value) {
+    samplePreview = value;
+    sampleToken = value.get("valid").boolean() ? getstr(value, "token") : "";
+    if (!samplesView.window) return;
+    HWND list = aux(samplesView, SAMPLE_ROWS);
+    ListView_DeleteAllItems(list);
+    aux_columns(samplesView, SAMPLE_ROWS, {{L"Sample", 180}, {L"Preview", 120}, {L"Detail", 440}});
+    int row = 0;
+    for (const auto &sample : value.get("samples").array_items()) {
+      std::wstring issues;
+      for (const auto &issue : value.get("errors").array_items())
+        if (getstr(issue, "sampleId") == getstr(sample, "sampleId")) issues += wt(issue, "message") + L" ";
+      if (issues.empty()) issues = std::to_wstring(sample.get("nodeCount").integer()) + L" workflow steps";
+      aux_row(list, row++, {wt(sample, "sampleId"), sample.get("valid").boolean() ? L"Valid" : L"Needs attention", issues});
+    }
+    std::wstring notice = wt(value, "notice") + L"\r\n";
+    for (const auto &error : value.get("errors").array_items())
+      notice += wt(error, "sampleId") + L" " + wt(error, "message") + L"\r\n";
+    for (const auto &warning : value.get("warnings").array_items())
+      notice += warning.is_string() ? wide(warning.string()) + L"\r\n" : wt(warning, "message") + L"\r\n";
+    for (const char *key : {"errors_omitted", "warnings_omitted"})
+      if (value.get(key).integer() > 0) notice += std::to_wstring(value.get(key).integer()) + L" additional " +
+          (std::string(key) == "errors_omitted" ? L"errors" : L"warnings") + L" omitted; narrow the table to inspect them.\r\n";
+    if (!sampleToken.empty()) notice += L"Review the rows and output folder. Queueing freezes each analysis; Start queued begins execution.";
+    aux_text(samplesView, SAMPLE_NOTICE, lines(notice));
+    aux_text(samplesView, SAMPLE_QUEUE, getstr(value, "mode") == "combined" ? L"Queue one combined report" :
+        L"Queue " + std::to_wstring(value.get("sampleCount").integer()) + L" independent analyses");
+    auxiliary_enabled();
+  }
+  void queue_send(const std::string &method, Json request = Json::object()) {
+    if (method == "queue/status") queuePollPending = true;
+    else queuePending = true;
+    send(method, std::move(request));
+  }
+  void queue_selection() {
+    if (!queueView.window || queueView.rebuilding) return;
+    const auto &job = queue_selected();
+    std::wstring details = getstr(job, "job_id").empty() ? L"Select an analysis to inspect its frozen identity and results." :
+        L"Analysis: " + wt(job, "name") + L"\r\nSample: " + wt(job, "sample_id") +
+        L"\r\nStatus: " + wt(job, "status") + L" — " + wt(job, "message") +
+        L"\r\nResult folder: " + wt(job, "folder") + L"\r\nFrozen plan SHA-256: " + wt(job, "plan_sha256") +
+        L"\r\nQueued: " + wt(job, "created_at") + L"\r\nBatch: " + wt(job, "batch_id") +
+        L"\r\nExact inputs, sample metadata and options are stored with this frozen analysis.";
+    aux_text(queueView, QUEUE_DETAILS, details);
+    auxiliary_enabled();
+  }
+  void queue_response(const Json &value) {
+    const auto previousSelected = getstr(queue_selected(), "job_id");
+    queueState = value;
+    queuePreparing = value.get("preparing").boolean();
+    queueRunning = value.get("queue_running").boolean();
+    busy = value.get("active").boolean();
+    if (!getstr(value, "active_run").empty()) runId = getstr(value, "active_run");
+    const auto &jobs = value.get("jobs").array_items();
+    int waiting = 0, completed = 0;
+    for (const auto &job : jobs) {
+      waiting += getstr(job, "status") == "queued";
+      completed += getstr(job, "status") == "completed";
+    }
+    aux_text(queueView, QUEUE_NOTICE,
+        (queuePreparing ? L"Freezing inputs and exact tool versions... " : L"") +
+        std::to_wstring(waiting) + L" waiting · " + std::to_wstring(completed) + L" completed. " +
+        (value.get("paused").boolean() ? L"Queue paused. " : L"Queue started. ") +
+        wt(value, "error") + L"\r\nPause lets the current analysis finish. New additions need Start queued. Queued analyses survive restart.");
+    const auto label = L"Queue (" + std::to_wstring(waiting) + L")";
+    if (queueButton && control_text(queueButton) != label) SetWindowTextW(queueButton, label.c_str());
+    Json visibleRows = Json::array();
+    for (const auto &job : jobs)
+      visibleRows.array_items().push_back(object({{"id", getstr(job, "job_id")}, {"sample", getstr(job, "sample_id")},
+          {"name", getstr(job, "name")}, {"status", getstr(job, "status")}, {"created", getstr(job, "created_at")}}));
+    const auto rowKey = visibleRows.dump();
+    if (queueView.window && rowKey != queueRendered) {
+      HWND list = aux(queueView, QUEUE_LIST);
+      queueView.rebuilding = true;
+      int row = 0, selectedRow = -1;
+      for (const auto &job : jobs) {
+        aux_row(list, row, {wt(job, "sample_id"), wt(job, "name"), wt(job, "status"), wt(job, "created_at")});
+        if (getstr(job, "job_id") == previousSelected) selectedRow = row;
+        ++row;
+      }
+      while (ListView_GetItemCount(list) > row) ListView_DeleteItem(list, ListView_GetItemCount(list) - 1);
+      if (selectedRow < 0 && row) selectedRow = 0;
+      if (selectedRow >= 0 && ListView_GetNextItem(list, -1, LVNI_SELECTED) != selectedRow)
+        ListView_SetItemState(list, selectedRow, LVIS_SELECTED | LVIS_FOCUSED, LVIS_SELECTED | LVIS_FOCUSED);
+      queueRendered = rowKey;
+      queueView.rebuilding = false;
+    }
+    queue_selection();
+    auxiliary_enabled();
+  }
+  void index_selection() {
+    if (!indexesView.window || indexesView.rebuilding) return;
+    const auto &entry = index_selected(), &identity = entry.get("identity");
+    const auto key = getstr(entry, "key");
+    std::wstring detail = key.empty() ? L"Select an index. Verify rehashes its files; listing alone does not verify their bytes." :
+        L"Index: " + wide(key) + L"\r\nReference SHA-256: " + wt(identity.get("reference"), "sha256") +
+        L"\r\nReference bytes: " + wt(identity.get("reference"), "bytes") +
+        L"\r\nTool: " + wt(identity, "indexTool") + L" · Pack " + wt(identity.get("pack"), "packId") +
+        L" " + wt(identity.get("pack"), "packVersion") + L"\r\nManifest SHA-256: " + wt(identity.get("pack"), "manifestSha256") +
+        L"\r\nIndex options: " + wide(identity.get("parameters").dump()) +
+        L"\r\nExecutables: " + wide(identity.get("executables").dump()) +
+        L"\r\n" + wt(entry, "note");
+    const auto found = verifiedIndexes.find(key);
+    if (found != verifiedIndexes.end() && getstr(entry, "status") != "invalid")
+      detail += L"\r\nVerified file inventory: " + wide(found->second.get("files").dump());
+    aux_text(indexesView, INDEX_DETAILS, detail);
+    auxiliary_enabled();
+  }
+  void index_rows() {
+    if (!indexesView.window) return;
+    indexesView.rebuilding = true;
+    HWND list = aux(indexesView, INDEX_LIST);
+    int row = 0;
+    for (const auto &entry : indexState.get("entries").array_items()) {
+      const auto &identity = entry.get("identity");
+      aux_row(list, row++, {wt(identity, "indexTool"), wt(identity.get("pack"), "packVersion"),
+          getstr(entry, "status") != "invalid" && verifiedIndexes.count(getstr(entry, "key")) ? L"Verified this session" : wt(entry, "status"),
+          wt(identity.get("reference"), "sha256")});
+    }
+    while (ListView_GetItemCount(list) > row) ListView_DeleteItem(list, ListView_GetItemCount(list) - 1);
+    if (row && ListView_GetNextItem(list, -1, LVNI_SELECTED) < 0)
+      ListView_SetItemState(list, 0, LVIS_SELECTED | LVIS_FOCUSED, LVIS_SELECTED | LVIS_FOCUSED);
+    indexesView.rebuilding = false;
+    aux_text(indexesView, INDEX_NOTICE, indexState.get("truncated").boolean() ?
+        L"Showing the first 256 cached indexes. Verify selected checks the complete file inventory." :
+        L"Indexes are reused only when reference bytes, tool version and options match. Verify checks the file inventory.");
+    index_selection();
+  }
+  void sample_mode() {
+    sample_invalidate();
+    sampleMappings.clear();
+    sampleTargets = Json::array();
+    const bool combined = SendMessageW(aux(samplesView, SAMPLE_MODE), CB_GETCURSEL, 0, 0) == 1;
+    if (combined && sampleTargetSchema.get("combined").is_array()) sampleTargets = sampleTargetSchema.get("combined");
+    else if (combined) sampleTargets = Json::array();
+    else {
+      for (const char *key : {"files", "parameters"})
+        for (const auto &target : sampleTargetSchema.get(key).array_items())
+          sampleTargets.array_items().push_back(target);
+      if (!sampleColumns.empty())
+        for (size_t i = 0; i < sampleTargets.array_items().size(); ++i)
+          if (sampleTargets.array_items()[i].get("binding").boolean()) sampleMappings[i] = "sample_id";
+    }
+    aux_text(samplesView, -2, combined ? L"Choose one report input and its table column" : L"Map workflow inputs and options to table columns");
+    aux_text(samplesView, SAMPLE_NOTICE, combined ?
+        L"One report analysis receives the listed report files. This does not pool reads or infer a statistical design. Other required inputs must already be set." :
+        L"Each sample gets its own analysis and result folder. Reference inputs retain their shared workflow values. Map the read files explicitly.");
+    if (combined && sampleTargets.array_items().empty())
+      aux_text(samplesView, SAMPLE_NOTICE, L"This workflow has no compatible combined-report input. Choose a report tool with an input that accepts multiple metrics or text reports.");
+    ListView_DeleteAllItems(aux(samplesView, SAMPLE_TARGETS));
+    sample_mapping_rows();
+  }
+  void auxiliary_layout(Auxiliary &view) {
+    if (!view.window || view.controls.empty()) return;
+    RECT rect{};
+    GetClientRect(view.window, &rect);
+    const int w = MulDiv(rect.right, 96, view.dpi), h = MulDiv(rect.bottom, 96, view.dpi);
+    auto put = [&](int id, int x, int y, int cw, int ch) {
+      SetWindowPos(aux(view, id), nullptr, MulDiv(x, view.dpi, 96), MulDiv(y, view.dpi, 96),
+          MulDiv(std::max(1, cw), view.dpi, 96), MulDiv(std::max(1, ch), view.dpi, 96),
+          SWP_NOZORDER | SWP_NOACTIVATE | SWP_NOREDRAW | SWP_NOCOPYBITS);
+    };
+    if (view.kind == SHOW_SAMPLES) {
+      put(-1, 18, 12, w - 264, 38);
+      put(SAMPLE_MODE, w - 234, 14, 216, 220);
+      put(SAMPLE_PATH, 18, 58, w - 232, 30);
+      put(SAMPLE_BROWSE, w - 204, 58, 90, 30);
+      put(SAMPLE_LOAD, w - 104, 58, 86, 30);
+      put(-2, 18, 100, w - 36, 22);
+      put(SAMPLE_TARGETS, 18, 126, w / 2 - 26, 142);
+      put(-3, w / 2 + 8, 126, w / 2 - 26, 22);
+      put(SAMPLE_COLUMN, w / 2 + 8, 152, w / 2 - 26, 250);
+      put(SAMPLE_SHARED, w / 2 + 8, 192, w / 2 - 26, 30);
+      put(-4, w / 2 + 8, 228, w / 2 - 26, 40);
+      put(SAMPLE_ROWS, 18, 282, w - 36, std::max(72, h - 438));
+      put(SAMPLE_NOTICE, 18, h - 144, w - 36, 58);
+      put(SAMPLE_OUTPUT, 18, h - 78, w - 202, 30);
+      put(SAMPLE_OUTPUT_BROWSE, w - 174, h - 78, 156, 30);
+      put(SAMPLE_PREVIEW, 18, h - 40, 122, 30);
+      put(SAMPLE_QUEUE, 152, h - 40, 280, 30);
+      put(SAMPLE_CLOSE, w - 108, h - 40, 90, 30);
+    } else if (view.kind == SHOW_QUEUE) {
+      put(-1, 18, 14, w - 36, 40);
+      put(QUEUE_LIST, 18, 64, w - 36, std::max(90, h - 314));
+      put(QUEUE_DETAILS, 18, h - 240, w - 36, 126);
+      put(QUEUE_NOTICE, 18, h - 104, w - 36, 52);
+      put(QUEUE_ADD, 18, h - 42, 150, 30);
+      put(QUEUE_START, 180, h - 42, 116, 30);
+      put(QUEUE_PAUSE, 308, h - 42, 184, 30);
+      put(QUEUE_CANCEL, 504, h - 42, 120, 30);
+      put(QUEUE_RESULTS, 636, h - 42, 110, 30);
+      put(QUEUE_CLOSE, w - 102, h - 42, 84, 30);
+    } else {
+      put(-1, 18, 14, w - 36, 40);
+      put(INDEX_LIST, 18, 64, w - 36, std::max(90, h - 288));
+      put(INDEX_DETAILS, 18, h - 212, w - 36, 118);
+      put(INDEX_NOTICE, 18, h - 84, w - 36, 38);
+      put(INDEX_REFRESH, 18, h - 40, 108, 30);
+      put(INDEX_VERIFY, 138, h - 40, 160, 30);
+      put(INDEX_CLOSE, w - 108, h - 40, 90, 30);
+    }
+    RedrawWindow(view.window, nullptr, nullptr, RDW_INVALIDATE | RDW_ALLCHILDREN);
+  }
+  void auxiliary_command(Auxiliary &view, int id, int notification) {
+    if (view.rebuilding) return;
+    if (id == SAMPLE_CLOSE || id == QUEUE_CLOSE || id == INDEX_CLOSE || id == IDCANCEL) {
+      DestroyWindow(view.window);
+      return;
+    }
+    if (view.kind == SHOW_SAMPLES) {
+      if (id == SAMPLE_MODE && notification == CBN_SELCHANGE) { sample_mode(); return; }
+      if (id == SAMPLE_COLUMN && notification == CBN_SELCHANGE) {
+        int row = ListView_GetNextItem(aux(view, SAMPLE_TARGETS), -1, LVNI_SELECTED);
+        const int column = static_cast<int>(SendMessageW(aux(view, SAMPLE_COLUMN), CB_GETCURSEL, 0, 0));
+        if (row >= 0) {
+          sample_invalidate();
+          if (SendMessageW(aux(view, SAMPLE_MODE), CB_GETCURSEL, 0, 0) == 1) sampleMappings.clear();
+          if (column > 0 && static_cast<size_t>(column) <= sampleColumns.size()) {
+            sampleMappings[row] = sampleColumns[column - 1];
+            sampleSharedSources.erase(getstr(sampleTargets.array_items()[row], "sourceId"));
+          }
+          else sampleMappings.erase(row);
+          sample_mapping_rows();
+        }
+        return;
+      }
+      if (id == SAMPLE_SHARED) {
+        const int row = ListView_GetNextItem(aux(view, SAMPLE_TARGETS), -1, LVNI_SELECTED);
+        if (row >= 0 && static_cast<size_t>(row) < sampleTargets.array_items().size()) {
+          const auto source = getstr(sampleTargets.array_items()[row], "sourceId");
+          if (SendMessageW(aux(view, SAMPLE_SHARED), BM_GETCHECK, 0, 0) == BST_CHECKED) sampleSharedSources.insert(source);
+          else sampleSharedSources.erase(source);
+          sample_invalidate();
+          sample_mapping_rows();
+        }
+        return;
+      }
+      if (id == SAMPLE_PATH && notification == EN_CHANGE) {
+        sampleTable = Json::object(); sampleColumns.clear(); sample_invalidate();
+        if (aux(view, SAMPLE_ROWS)) ListView_DeleteAllItems(aux(view, SAMPLE_ROWS));
+        aux_text(view, SAMPLE_NOTICE, L"Load this table before previewing. Changing the path does not import its contents automatically.");
+        return;
+      }
+      if (!ready || closing || samplePending) return;
+      if (id == SAMPLE_BROWSE) {
+        const auto path = pick(view.window, false, false, L"Sample tables|*.csv;*.tsv|All files|*.*", L"Choose a CSV or TSV sample table", control_text(inputFolder));
+        if (!path.empty()) aux_text(view, SAMPLE_PATH, path);
+      } else if (id == SAMPLE_LOAD) {
+        sample_invalidate(); samplePending = true;
+        send("sample/table", object({{"path", narrow(control_text(aux(view, SAMPLE_PATH)))}}));
+      } else if (id == SAMPLE_OUTPUT_BROWSE) {
+        const auto path = pick(view.window, true, false, L"", L"Choose the parent folder for sample results", control_text(aux(view, SAMPLE_OUTPUT)));
+        if (!path.empty()) aux_text(view, SAMPLE_OUTPUT, path);
+      } else if (id == SAMPLE_PREVIEW) {
+        Json bindings = Json::array(), parameters = Json::array(), shared = Json::array(), combined = Json::object();
+        const bool combinedMode = SendMessageW(aux(view, SAMPLE_MODE), CB_GETCURSEL, 0, 0) == 1;
+        for (const auto &mapping : sampleMappings) {
+          if (mapping.first >= sampleTargets.array_items().size()) continue;
+          const auto &target = sampleTargets.array_items()[mapping.first];
+          if (combinedMode) combined = object({{"nodeId", getstr(target, "nodeId")}, {"portId", getstr(target, "portId")}, {"column", mapping.second}});
+          else if (target.contains("nodeId")) parameters.array_items().push_back(object({{"nodeId", getstr(target, "nodeId")}, {"parameterId", getstr(target, "parameterId")}, {"column", mapping.second}}));
+          else bindings.array_items().push_back(object({{"sourceId", getstr(target, "sourceId")}, {"fieldId", getstr(target, "fieldId")}, {"column", mapping.second}}));
+        }
+        for (const auto &source : sampleSharedSources) shared.array_items().push_back(source);
+        Json request = object({{"graph", sampleGraph}, {"table_token", getstr(sampleTable, "table_token")},
+            {"bindings", bindings}, {"parameter_bindings", parameters}, {"shared_sources", shared},
+            {"mode", combinedMode ? "combined" : "independent"}});
+        if (combinedMode) request["combined_target"] = combined;
+        sample_invalidate(); samplePending = true;
+        aux_text(view, SAMPLE_NOTICE, L"Checking the mapped analyses. Nothing is queued or running yet...");
+        send("sample/preview", request);
+      } else if (id == SAMPLE_QUEUE && !sampleToken.empty()) {
+        const auto token = sampleToken;
+        sample_invalidate();
+        queue_send("queue/add-batch", object({{"token", token}, {"output_folder", narrow(control_text(aux(view, SAMPLE_OUTPUT)))}}));
+        aux_text(view, SAMPLE_NOTICE, L"Freezing the reviewed analyses. Open Queue to inspect them and explicitly start execution.");
+        show_auxiliary(SHOW_QUEUE);
+      }
+    } else if (view.kind == SHOW_QUEUE && ready && !closing && !queuePending) {
+      if (id == QUEUE_ADD) {
+        commit_all();
+        queue_send("queue/add", object({{"output_folder", narrow(control_text(output))}}));
+      } else if (id == QUEUE_START) queue_send("queue/start");
+      else if (id == QUEUE_PAUSE) queue_send("queue/pause");
+      else if (id == QUEUE_CANCEL && !getstr(queue_selected(), "job_id").empty())
+        queue_send("queue/cancel", object({{"job_id", getstr(queue_selected(), "job_id")}}));
+      else if (id == QUEUE_RESULTS && !getstr(queue_selected(), "run_id").empty())
+        send("open", object({{"run_id", getstr(queue_selected(), "run_id")}}));
+    } else if (view.kind == SHOW_INDEXES && ready && !closing && !indexPending) {
+      if (id == INDEX_REFRESH) {
+        indexPending = true; verifiedIndexes.clear(); send("index/list");
+      } else if (id == INDEX_VERIFY && !getstr(index_selected(), "key").empty()) {
+        const auto key = getstr(index_selected(), "key");
+        indexPending = true;
+        verifiedIndexes.erase(key);
+        index_rows();
+        aux_text(view, INDEX_NOTICE, L"Rehashing the complete index inventory. This may take time for a large reference...");
+        send("index/verify", object({{"key", key}}));
+      }
+    }
+    auxiliary_enabled();
+  }
+  static LRESULT CALLBACK auxiliary_proc(HWND h, UINT message_, WPARAM w, LPARAM l) {
+    auto *view = reinterpret_cast<Auxiliary *>(GetWindowLongPtrW(h, GWLP_USERDATA));
+    if (message_ == WM_NCCREATE) {
+      view = static_cast<Auxiliary *>(reinterpret_cast<CREATESTRUCTW *>(l)->lpCreateParams);
+      view->window = h;
+      SetWindowLongPtrW(h, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(view));
+    }
+    if (!view) return DefWindowProcW(h, message_, w, l);
+    auto *app = view->app;
+    try {
+      switch (message_) {
+      case WM_COMMAND: app->auxiliary_command(*view, LOWORD(w), HIWORD(w)); return 0;
+      case WM_NOTIFY: {
+        const auto *notice = reinterpret_cast<NMHDR *>(l);
+        if (!view->rebuilding && notice->code == LVN_ITEMCHANGED) {
+          if (notice->idFrom == SAMPLE_TARGETS) app->sample_selection();
+          else if (notice->idFrom == QUEUE_LIST) app->queue_selection();
+          else if (notice->idFrom == INDEX_LIST) app->index_selection();
+        }
+        return 0;
+      }
+      case WM_SIZE: app->auxiliary_layout(*view); return 0;
+      case WM_DPICHANGED: {
+        view->dpi = HIWORD(w);
+        HFONT old = view->font;
+        view->font = CreateFontW(-MulDiv(14, view->dpi, 96), 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE,
+            DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, DEFAULT_PITCH, L"Segoe UI");
+        for (const auto &control : view->controls) SendMessageW(control.second, WM_SETFONT, reinterpret_cast<WPARAM>(view->font), FALSE);
+        if (old) DeleteObject(old);
+        const auto *rect = reinterpret_cast<RECT *>(l);
+        SetWindowPos(h, nullptr, rect->left, rect->top, rect->right - rect->left, rect->bottom - rect->top, SWP_NOZORDER | SWP_NOACTIVATE);
+        app->auxiliary_layout(*view);
+        return 0;
+      }
+      case WM_GETMINMAXINFO: {
+        auto *info = reinterpret_cast<MINMAXINFO *>(l);
+        MONITORINFO monitor{sizeof(monitor)};
+        GetMonitorInfoW(MonitorFromWindow(h, MONITOR_DEFAULTTONEAREST), &monitor);
+        info->ptMinTrackSize = {std::min<LONG>(MulDiv(view->kind == SHOW_QUEUE ? 900 : 740, view->dpi, 96), monitor.rcWork.right - monitor.rcWork.left),
+            std::min<LONG>(MulDiv(view->kind == SHOW_SAMPLES ? 600 : 480, view->dpi, 96), monitor.rcWork.bottom - monitor.rcWork.top)};
+        return 0;
+      }
+      case WM_CTLCOLORSTATIC:
+      case WM_CTLCOLOREDIT:
+      case WM_CTLCOLORBTN: {
+        HDC dc = reinterpret_cast<HDC>(w);
+        SetTextColor(dc, INK);
+        SetBkColor(dc, message_ == WM_CTLCOLOREDIT ? PAPER : BACK);
+        return reinterpret_cast<LRESULT>(message_ == WM_CTLCOLOREDIT ? app->paper : app->background);
+      }
+      case WM_CLOSE: DestroyWindow(h); return 0;
+      case WM_NCDESTROY:
+        view->window = nullptr; view->controls.clear();
+        if (view->font) DeleteObject(view->font);
+        view->font = nullptr;
+        SetWindowLongPtrW(h, GWLP_USERDATA, 0);
+        return DefWindowProcW(h, message_, w, l);
+      default: break;
+      }
+    } catch (const std::exception &error) {
+      MessageBoxW(h, wide(error.what()).c_str(), L"Native Workbench", MB_OK | MB_ICONERROR);
+    }
+    return DefWindowProcW(h, message_, w, l);
+  }
+  void show_auxiliary(int kind) {
+    Auxiliary &view = kind == SHOW_SAMPLES ? samplesView : kind == SHOW_QUEUE ? queueView : indexesView;
+    if (view.window) { ShowWindow(view.window, SW_RESTORE); SetForegroundWindow(view.window); return; }
+    view.app = this; view.kind = kind; view.dpi = dpi; ++view.generation;
+    view.font = CreateFontW(-px(14), 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE,
+        DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, DEFAULT_PITCH, L"Segoe UI");
+    WNDCLASSEXW klass{sizeof(klass)};
+    klass.lpfnWndProc = auxiliary_proc; klass.hInstance = instance;
+    klass.hCursor = LoadCursorW(nullptr, IDC_ARROW); klass.hbrBackground = background;
+    klass.lpszClassName = L"WorkbenchAnalysisLibrary0130";
+    RegisterClassExW(&klass);
+    RECT owner{}; GetWindowRect(window, &owner);
+    MONITORINFO monitor{sizeof(monitor)};
+    if (!GetMonitorInfoW(MonitorFromWindow(window, MONITOR_DEFAULTTONEAREST), &monitor))
+      SystemParametersInfoW(SPI_GETWORKAREA, 0, &monitor.rcWork, 0);
+    const RECT area = monitor.rcWork;
+    const int w = std::min<int>(px(940), area.right - area.left),
+              h = std::min<int>(px(kind == SHOW_SAMPLES ? 680 : 590), area.bottom - area.top);
+    const wchar_t *title = kind == SHOW_SAMPLES ? L"Samples · Native Workbench" : kind == SHOW_QUEUE ?
+        L"Analysis queue · Native Workbench" : L"Reference indexes · Native Workbench";
+    view.window = CreateWindowExW(WS_EX_CONTROLPARENT, klass.lpszClassName, title,
+        WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN,
+        std::clamp<int>(owner.left + (owner.right - owner.left - w) / 2, area.left, area.right - w),
+        std::clamp<int>(owner.top + (owner.bottom - owner.top - h) / 2, area.top, area.bottom - h),
+        w, h, window, nullptr, instance, &view);
+    if (!view.window) throw std::runtime_error("Could not create the analysis library window.");
+    auto label = [&](int id, const wchar_t *value) { return aux_make(view, id, L"STATIC", value, SS_LEFT); };
+    auto action = [&](int id, const wchar_t *value) { return aux_make(view, id, L"BUTTON", value, WS_TABSTOP | BS_PUSHBUTTON); };
+    auto edit = [&](int id, const std::wstring &value, bool multiline) {
+      return aux_make(view, id, L"EDIT", value, WS_TABSTOP | (multiline ? ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL : ES_AUTOHSCROLL), WS_EX_CLIENTEDGE);
+    };
+    auto list = [&](int id) {
+      HWND hlist = aux_make(view, id, WC_LISTVIEWW, L"", WS_TABSTOP | LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS, WS_EX_CLIENTEDGE);
+      ListView_SetExtendedListViewStyle(hlist, LVS_EX_FULLROWSELECT | LVS_EX_DOUBLEBUFFER | LVS_EX_LABELTIP);
+      return hlist;
+    };
+    if (kind == SHOW_SAMPLES) {
+      sampleGraph = Json::object(); sampleTable = Json::object(); sampleTargetSchema = Json::object();
+      sampleTargets = Json::array(); sampleColumns.clear(); sampleMappings.clear(); sampleSharedSources.clear(); sampleToken.clear();
+      label(-1, L"Load a sample table and map its columns. Preview before queueing any analysis.");
+      HWND mode = aux_make(view, SAMPLE_MODE, L"COMBOBOX", L"", WS_TABSTOP | CBS_DROPDOWNLIST | WS_VSCROLL);
+      for (const wchar_t *value : {L"Independent samples", L"Combined reports"}) SendMessageW(mode, CB_ADDSTRING, 0, reinterpret_cast<LPARAM>(value));
+      SendMessageW(mode, CB_SETCURSEL, 0, 0);
+      edit(SAMPLE_PATH, L"", false); action(SAMPLE_BROWSE, L"Browse..."); action(SAMPLE_LOAD, L"Load table");
+      label(-2, L"Map workflow inputs and options to table columns"); list(SAMPLE_TARGETS);
+      aux_columns(view, SAMPLE_TARGETS, {{L"Workflow input / option", 272}, {L"Table column", 180}});
+      label(-3, L"Column for the selected input / option");
+      aux_make(view, SAMPLE_COLUMN, L"COMBOBOX", L"", WS_TABSTOP | CBS_DROPDOWNLIST | WS_VSCROLL);
+      aux_make(view, SAMPLE_SHARED, L"BUTTON", L"Keep one shared resource", WS_TABSTOP | BS_AUTOCHECKBOX);
+      label(-4, L"Select an input or option to map its column."); list(SAMPLE_ROWS);
+      edit(SAMPLE_NOTICE, L"Choose a CSV or TSV file with a unique sample_id column. Read 1 and read 2 must be mapped separately.", true);
+      edit(SAMPLE_OUTPUT, control_text(output), false); action(SAMPLE_OUTPUT_BROWSE, L"Output folder...");
+      action(SAMPLE_PREVIEW, L"Preview analyses"); action(SAMPLE_QUEUE, L"Queue reviewed analyses"); action(SAMPLE_CLOSE, L"Close");
+      samplePending = true; send("sample/targets");
+    } else if (kind == SHOW_QUEUE) {
+      queueRendered.clear();
+      label(-1, L"Each queued analysis freezes its files, options and tool versions. You can keep editing the workspace.");
+      list(QUEUE_LIST); aux_columns(view, QUEUE_LIST, {{L"Sample", 140}, {L"Analysis", 270}, {L"Status", 120}, {L"Queued", 200}});
+      edit(QUEUE_DETAILS, L"Select an analysis to inspect its frozen identity.", true); label(QUEUE_NOTICE, L"Loading the durable queue...");
+      action(QUEUE_ADD, L"Queue current analysis"); action(QUEUE_START, L"Start queued"); action(QUEUE_PAUSE, L"Pause after current job");
+      action(QUEUE_CANCEL, L"Cancel selected"); action(QUEUE_RESULTS, L"View results"); action(QUEUE_CLOSE, L"Close");
+      queue_response(queueState);
+      if (!queuePollPending && !queuePending) queue_send("queue/status");
+    } else {
+      label(-1, L"Reference indexes are created by explicit workflow tools and reused when their exact identity matches.");
+      list(INDEX_LIST); aux_columns(view, INDEX_LIST, {{L"Tool", 110}, {L"Pack version", 100}, {L"Integrity", 180}, {L"Reference SHA-256", 420}});
+      edit(INDEX_DETAILS, L"Select an index to inspect its reference, tool and options.", true); label(INDEX_NOTICE, L"Loading cached indexes...");
+      action(INDEX_REFRESH, L"Refresh"); action(INDEX_VERIFY, L"Verify selected"); action(INDEX_CLOSE, L"Close");
+      verifiedIndexes.clear(); indexPending = true; send("index/list");
+    }
+    auxiliary_layout(view); auxiliary_enabled();
+    ShowWindow(view.window, SW_SHOW); SetForegroundWindow(view.window);
   }
   const Json &graph() const {
     static const Json empty =
@@ -823,7 +1505,7 @@ class Workspace {
   void pack_enabled() {
     if (!packWindow)
       return;
-    const bool idle = ready && !busy && !closing && !setupBusy && !setupActionPending && !packBusy && !refBusy &&
+    const bool idle = ready && !analysis_active() && !closing && !setupBusy && !setupActionPending && !packBusy && !refBusy &&
                       !refActionPending &&
                       !packActionPending;
     const auto &item = selected_pack();
@@ -1011,7 +1693,7 @@ class Workspace {
     ListView_SetColumnWidth(packList, 3, MulDiv(92, packDpi, 96));
   }
   void pack_command(int id, int notification) {
-    if (id == PACK_SETUP && ready && !busy && !closing) {
+    if (id == PACK_SETUP && ready && !analysis_active() && !closing) {
       show_setup();
       if (!setupPollPending && !setupActionPending) setup_send("setup/status");
       return;
@@ -1031,7 +1713,7 @@ class Workspace {
       pack_send("packs/cancel");
       return;
     }
-    if (!ready || busy || closing || packBusy || packActionPending ||
+    if (!ready || analysis_active() || closing || packBusy || packActionPending ||
         refBusy || refActionPending || setupBusy || setupActionPending)
       return;
     if (id == PACK_REFRESH) {
@@ -1281,7 +1963,7 @@ class Workspace {
   void setup_enabled() {
     if (!setupWindow)
       return;
-    const bool idle = ready && !busy && !closing && !packBusy &&
+    const bool idle = ready && !analysis_active() && !closing && !packBusy &&
         !packActionPending && !refBusy && !refActionPending &&
         !setupBusy && !setupActionPending;
     bool available = true;
@@ -1486,7 +2168,7 @@ class Workspace {
       setup_send("setup/cancel");
       return;
     }
-    if (!ready || busy || closing || packBusy || packActionPending ||
+    if (!ready || analysis_active() || closing || packBusy || packActionPending ||
         refBusy || refActionPending || setupBusy || setupActionPending) return;
     if (id == SETUP_FULL || id == SETUP_STARTER || id == SETUP_CUSTOM) {
       setupProfile = id == SETUP_FULL ? "full" : id == SETUP_STARTER ? "starter" : "custom";
@@ -1530,7 +2212,7 @@ class Workspace {
               (change->uChanged & LVIF_STATE) &&
               ((change->uOldState ^ change->uNewState) & LVIS_STATEIMAGEMASK))
             return app->setupProfile != "custom" || rows[static_cast<size_t>(change->iItem)].get("starter").boolean() ||
-                app->setupBusy || app->setupActionPending || app->busy || app->closing ||
+                app->setupBusy || app->setupActionPending || app->analysis_active() || app->closing ||
                 app->packBusy || app->packActionPending || app->refBusy || app->refActionPending;
         }
         if (notice->idFrom == SETUP_LIST && notice->code == LVN_ITEMCHANGED && !app->setupRebuilding) {
@@ -1740,7 +2422,7 @@ class Workspace {
   void reference_enabled() {
     if (!refWindow)
       return;
-    const bool idle = ready && !busy && !closing && !setupBusy && !setupActionPending && !packBusy &&
+    const bool idle = ready && !analysis_active() && !closing && !setupBusy && !setupActionPending && !packBusy &&
                       !packActionPending && !refBusy && !refActionPending &&
                       !activeRequest && outgoing.empty();
     for (HWND h : {refRelease, refQuery, refSearch, refSpecies, refFiles,
@@ -1822,7 +2504,7 @@ class Workspace {
       return;
     SendMessageW(refTarget, CB_RESETCONTENT, 0, 0);
     const auto &record = reference_local_record(), &file = reference_local_file();
-    if (ready && !refBusy && !refActionPending && !packBusy && !busy && !setupBusy && !setupActionPending &&
+    if (ready && !refBusy && !refActionPending && !packBusy && !analysis_active() && !setupBusy && !setupActionPending &&
         !closing && !showingHistory && !getstr(file, "id").empty() &&
         record.get("available").boolean(true))
       reference_send("references/targets", object({{"record_id", getstr(record, "id")},
@@ -2064,7 +2746,7 @@ class Workspace {
       reference_send("references/cancel");
       return;
     }
-    if (!ready || busy || closing || packBusy || packActionPending ||
+    if (!ready || analysis_active() || closing || packBusy || packActionPending ||
         refBusy || refActionPending || setupBusy || setupActionPending)
       return;
     if ((id == REF_QUERY && notification == EN_CHANGE) || id == REF_RELEASE)
@@ -2373,6 +3055,9 @@ class Workspace {
              {FILE_SAVE_PRESET, L"Save selected tool settings..."},
              {FILE_LOAD, L"Load saved pipeline or settings..."},
              {FILE_HISTORY, L"Recorded results..."},
+             {SHOW_SAMPLES, L"Samples..."},
+             {SHOW_QUEUE, L"Analysis queue..."},
+             {SHOW_INDEXES, L"Reference indexes..."},
              {FILE_IMPORT, L"Manage tools..."},
              {TOOL_SETUP, L"Tool setup..."},
              {MANAGE_REFERENCES, L"References..."},
@@ -2392,6 +3077,8 @@ class Workspace {
     saveCurrent = button(L"Save settings...", SAVE_CURRENT);
     loadCurrent = button(L"Load saved...", LOAD_CURRENT);
     resultsList = make(L"BUTTON", L"Results", WS_TABSTOP | BS_OWNERDRAW, RESULTS_LIST);
+    samplesButton = make(L"BUTTON", L"Samples...", WS_TABSTOP | BS_OWNERDRAW, SHOW_SAMPLES);
+    queueButton = make(L"BUTTON", L"Queue (0)", WS_TABSTOP | BS_OWNERDRAW, SHOW_QUEUE);
     resetLayout = button(L"Arrange", RESET_LAYOUT);
     addInput = button(L"Add input...", ADD_INPUT);
     zoomOut = button(L"−", ZOOM_OUT);
@@ -2491,6 +3178,8 @@ class Workspace {
     const bool general = !showingHistory && (!workflowMode || generalVisible || selected.empty());
     place(modeTools, 216, 7, 90, 34);
     place(modeWorkflow, 314, 7, 110, 34);
+    place(samplesButton, 432, 7, 106, 34);
+    place(queueButton, 546, 7, 132, 34);
     place(resultsList, width - 112, 7, 96, 34);
     place(toolsHeading, 16, 64, 200, 24);
     place(search, 12, 98, left - 24, 32);
@@ -2533,13 +3222,13 @@ class Workspace {
     place(run, center + 12, footer, 118, 32);
     SetWindowTextW(run, workflowMode ? L"Run workflow" : L"Run tool");
     place(review, center + 138, footer, 84, 32);
-    place(cancel, center + 230, footer, 98, 32);
+    place(cancel, 686, 7, 110, 34);
     ShowWindow(cancel, busy ? SW_SHOW : SW_HIDE);
     place(zoomOut, center + centerWidth - 150, footer, 34, 32);
     place(zoomReset, center + centerWidth - 110, footer, 62, 32);
     place(zoomIn, center + centerWidth - 42, footer, 34, 32);
     for (HWND h : {zoomOut, zoomReset, zoomIn})
-      ShowWindow(h, canvas && !busy ? SW_SHOW : SW_HIDE);
+      ShowWindow(h, canvas ? SW_SHOW : SW_HIDE);
     place(saveCurrent, canvas ? center + centerWidth - 248 : width - right + 12,
           canvas ? 59 : footer, canvas ? 126 : 146, 32);
     place(loadCurrent, canvas ? center + centerWidth - 114 : width - right + 166,
@@ -2582,10 +3271,12 @@ class Workspace {
       {referenceHelp, 14, 472 - generalScroll, w, 42}});
   }
   void enabled() {
-    bool edit = ready && !busy && !setupBusy && !setupActionPending && !packBusy && !packActionPending &&
+    bool edit = ready && !setupBusy && !setupActionPending && !packBusy && !packActionPending &&
                 !refBusy && !refActionPending &&
                 !showingHistory && !closing &&
                 !activeRequest && outgoing.empty();
+    const bool browseAuxiliary = ready && !closing &&
+        ((!activeRequest && outgoing.empty()) || slow_request_pending());
     for (HWND h :
          {name, search, tasks, steps, remove, undo, up, down,
           modeTools, modeWorkflow, generalSettings, saveCurrent, loadCurrent,
@@ -2594,18 +3285,20 @@ class Workspace {
     EnableWindow(add, edit && !library_tool(TreeView_GetSelection(tasks)).empty());
     for (HWND h : {zoomOut, zoomReset, zoomIn}) {
       EnableWindow(h, ready && !closing);
-      ShowWindow(h, (workflowMode || showingHistory) && !busy ? SW_SHOW : SW_HIDE);
+      ShowWindow(h, workflowMode || showingHistory ? SW_SHOW : SW_HIDE);
     }
     EnableWindow(undo, edit && state.get("canUndo").boolean());
-    EnableWindow(run, edit && !graph().get("nodes").array_items().empty());
+    EnableWindow(run, edit && !analysis_active() && !graph().get("nodes").array_items().empty());
     EnableWindow(review, ready && !activeRequest && outgoing.empty());
-    EnableWindow(resultsList, ready && !busy && !activeRequest && outgoing.empty());
-    EnableWindow(cancel, busy && !closing);
+    EnableWindow(resultsList, ready && !activeRequest && outgoing.empty());
+    EnableWindow(samplesButton, browseAuxiliary && !showingHistory && !graph().get("nodes").array_items().empty());
+    EnableWindow(queueButton, browseAuxiliary);
+    EnableWindow(cancel, busy && !closing && !cancellation_pending());
     ShowWindow(cancel, busy ? SW_SHOW : SW_HIDE);
-    EnableWindow(output, !busy && !setupBusy && !setupActionPending && !packBusy && !packActionPending && !refBusy && !refActionPending);
-    EnableWindow(browse, !busy && !setupBusy && !setupActionPending && !packBusy && !packActionPending && !refBusy && !refActionPending);
-    EnableWindow(manageTools, ready && !busy && !closing && !showingHistory);
-    EnableWindow(manageReferences, ready && !busy && !closing && !showingHistory);
+    EnableWindow(output, edit);
+    EnableWindow(browse, edit);
+    EnableWindow(manageTools, ready && !analysis_active() && !closing && !showingHistory);
+    EnableWindow(manageReferences, ready && !analysis_active() && !closing && !showingHistory);
     for (const auto &f : fields) {
       EnableWindow(f.h, edit || f.kind.rfind("historical-", 0) == 0);
       if (f.button)
@@ -2613,18 +3306,23 @@ class Workspace {
     }
     HMENU m = GetMenu(window);
     for (UINT id : {FILE_NEW, FILE_EXAMPLE, FILE_SAVE_PIPELINE,
-                    FILE_SAVE_PRESET, FILE_LOAD, FILE_CHECK})
+                    FILE_SAVE_PRESET, FILE_LOAD})
       EnableMenuItem(m, id, MF_BYCOMMAND | (edit ? MF_ENABLED : MF_GRAYED));
     EnableMenuItem(m, FILE_IMPORT, MF_BYCOMMAND |
-                   (ready && !busy && !closing && !showingHistory ? MF_ENABLED : MF_GRAYED));
+                   (ready && !analysis_active() && !closing && !showingHistory ? MF_ENABLED : MF_GRAYED));
     EnableMenuItem(m, MANAGE_REFERENCES, MF_BYCOMMAND |
-                   (ready && !busy && !closing && !showingHistory ? MF_ENABLED : MF_GRAYED));
+                   (ready && !analysis_active() && !closing && !showingHistory ? MF_ENABLED : MF_GRAYED));
     EnableMenuItem(m, TOOL_SETUP, MF_BYCOMMAND |
-                   (ready && !busy && !closing ? MF_ENABLED : MF_GRAYED));
+                   (ready && !analysis_active() && !closing ? MF_ENABLED : MF_GRAYED));
+    EnableMenuItem(m, FILE_CHECK, MF_BYCOMMAND | (edit && !analysis_active() ? MF_ENABLED : MF_GRAYED));
+    EnableMenuItem(m, SHOW_SAMPLES, MF_BYCOMMAND | (browseAuxiliary && !showingHistory && !graph().get("nodes").array_items().empty() ? MF_ENABLED : MF_GRAYED));
+    for (UINT id : {SHOW_QUEUE, SHOW_INDEXES})
+      EnableMenuItem(m, id, MF_BYCOMMAND | (browseAuxiliary ? MF_ENABLED : MF_GRAYED));
     DrawMenuBar(window);
     pack_enabled();
     reference_enabled();
     setup_enabled();
+    auxiliary_enabled();
   }
   const LibraryRow *library_row(HTREEITEM item) const {
     if (!item) return nullptr;
@@ -3151,7 +3849,7 @@ class Workspace {
     return narrow(control_text(f.h));
   }
   void commit(Field &f) {
-    if (rebuilding || busy || showingHistory)
+    if (rebuilding || showingHistory)
       return;
     const auto value = field_value(f);
     if (value == narrow(f.initial))
@@ -3167,7 +3865,7 @@ class Workspace {
       model("rename_step", object({{"nodeId", f.node}, {"name", value}}));
   }
   void commit_all() {
-    if (rebuilding || busy || showingHistory || !ready)
+    if (rebuilding || showingHistory || !ready)
       return;
     Json params = Json::object(), files = Json::object(),
          payload = getstr(state.get("inspector"), "kind") == "source"
@@ -3473,19 +4171,36 @@ class Workspace {
   }
   void response(const Json &response_) {
     long long id = response_.get("id").integer();
-    if (id != activeRequest)
-      return;
-    activeRequest = 0;
+    const bool concurrent = concurrentRequests.erase(id) != 0;
+    if (id != activeRequest && !concurrent) return;
+    if (id == activeRequest) activeRequest = 0;
     const auto found = pending.find(id);
     std::string method = found == pending.end() ? "" : found->second;
     if (found != pending.end())
       pending.erase(found);
+    std::string verificationKey;
+    const auto verification = pendingIndexVerifications.find(id);
+    if (verification != pendingIndexVerifications.end()) {
+      verificationKey = verification->second;
+      pendingIndexVerifications.erase(verification);
+    }
+    const auto viewContext = pendingViews.find(id);
+    if (viewContext != pendingViews.end()) {
+      Auxiliary &view = method.rfind("sample/", 0) == 0 ? samplesView : indexesView;
+      const bool current = view.window && viewContext->second == view.generation;
+      pendingViews.erase(viewContext);
+      if (!current) return; // A closed/reopened dialog must not inherit stale rows or preview tokens.
+    }
     if (method == "setup/status")
       setupPollPending = false;
     else if (method.rfind("setup/", 0) == 0)
       setupActionPending = false;
     if (method == "status")
       pollPending = false;
+    if (method == "queue/status") queuePollPending = false;
+    else if (method.rfind("queue/", 0) == 0) queuePending = false;
+    if (method.rfind("sample/", 0) == 0) samplePending = false;
+    if (method.rfind("index/", 0) == 0) indexPending = false;
     if (method == "packs/status")
       packPollPending = false;
     if (method.rfind("packs/", 0) == 0 && method != "packs/list" &&
@@ -3496,6 +4211,21 @@ class Workspace {
     else if (method.rfind("references/", 0) == 0)
       refActionPending = false;
     if (!response_.get("ok").boolean()) {
+      if (method.rfind("sample/", 0) == 0 || method.rfind("queue/", 0) == 0 || method.rfind("index/", 0) == 0) {
+        const auto error = wt(response_, "error", "The local operation returned an error.");
+        Auxiliary &view = method.rfind("sample/", 0) == 0 ? samplesView : method.rfind("queue/", 0) == 0 ? queueView : indexesView;
+        if (method == "index/verify") {
+          verifiedIndexes.erase(verificationKey);
+          index_rows();
+        }
+        aux_text(view, view.kind == SHOW_SAMPLES ? SAMPLE_NOTICE : view.kind == SHOW_QUEUE ? QUEUE_NOTICE : INDEX_NOTICE, error);
+        if (method.rfind("sample/", 0) == 0) sample_invalidate();
+        if (method != "queue/status" || !queuePollFailed)
+          MessageBoxW(view.window ? view.window : window, error.c_str(), L"Native Workbench", MB_OK | MB_ICONERROR);
+        if (method == "queue/status") queuePollFailed = true;
+        enabled();
+        return;
+      }
       if (method.rfind("setup/", 0) == 0) {
         setupState["notice"] = getstr(response_, "error", "Tool setup returned an error.");
         setupState["operation"]["message"] = getstr(response_, "error", "Tool setup returned an error.");
@@ -3540,11 +4270,20 @@ class Workspace {
         send("shutdown");
         return;
       }
+      if (concurrent) {
+        message(wt(response_, "error", "The local monitoring or cancellation request failed."));
+        enabled();
+        return;
+      }
       reviewThenRun = false;
       submittedFields.clear();
       pendingCanvasDrop = false;
+      for (const auto &request : outgoing) {
+        pending.erase(request.get("id").integer());
+        pendingViews.erase(request.get("id").integer());
+        pendingIndexVerifications.erase(request.get("id").integer());
+      }
       outgoing.clear();
-      pending.clear();
       message(wt(response_, "error", "The local engine returned an error."));
       if (method == "init")
         ready = false;
@@ -3552,7 +4291,26 @@ class Workspace {
       return;
     }
     const auto &result = response_.get("result");
-    if (method.rfind("setup/", 0) == 0) {
+    if (method == "sample/targets") {
+      sampleGraph = state.get("graph");
+      sampleTargetSchema = result;
+      if (samplesView.window) sample_mode();
+    } else if (method == "sample/table") {
+      sampleTable = result;
+      sample_table_rows();
+    } else if (method == "sample/preview") {
+      sample_preview_rows(result);
+    } else if (method.rfind("queue/", 0) == 0) {
+      queuePollFailed = false;
+      queue_response(result);
+    } else if (method == "index/list") {
+      indexState = result;
+      index_rows();
+    } else if (method == "index/verify") {
+      verifiedIndexes[getstr(result, "key")] = result;
+      index_rows();
+      aux_text(indexesView, INDEX_NOTICE, L"The selected index matched its complete file inventory. Execution rechecks it before reuse.");
+    } else if (method.rfind("setup/", 0) == 0) {
       setup_response(method, result);
     } else if (method.rfind("packs/", 0) == 0) {
       pack_response(method, result);
@@ -3574,6 +4332,7 @@ class Workspace {
              object({{"output_folder", narrow(control_text(output))}}));
       } else if (!setupWelcomeChecked && !setupPollPending)
         setup_send("setup/status");
+      if (!queuePollPending) queue_send("queue/status");
     } else if (method == "model" || method == "load" || method == "example" ||
                method == "workspace/mode" || method == "workspace/tool") {
       submittedFields.clear();
@@ -3690,6 +4449,12 @@ class Workspace {
     // typing; the next explicit operation commits it transactionally.
     if (id == NAME || id == OUTPUT || id == INPUT_FOLDER || id == SEARCH)
       return;
+    if ((id == SHOW_SAMPLES || id == SHOW_QUEUE || id == SHOW_INDEXES) && ready && !closing) {
+      if (id == SHOW_SAMPLES && showingHistory) return;
+      commit_all();
+      show_auxiliary(id);
+      return;
+    }
     if (id == GENERAL_SETTINGS) {
       commit_all();
       generalVisible = !generalVisible;
@@ -3728,8 +4493,10 @@ class Workspace {
         SetWindowTextW(output, path.c_str());
       return;
     }
-    if (id == CANCEL && !runId.empty()) {
-      send("cancel", object({{"run_id", runId}}));
+    if (id == CANCEL && !runId.empty() && !cancellation_pending()) {
+      if (!getstr(queueState, "active_job").empty() && getstr(queueState, "active_run") == runId)
+        queue_send("queue/cancel", object({{"job_id", getstr(queueState, "active_job")}}));
+      else send("cancel", object({{"run_id", runId}}));
       return;
     }
     if (id == BACK_WORKSPACE) {
@@ -3768,18 +4535,18 @@ class Workspace {
       save(false);
       return;
     }
-    if ((id == FILE_IMPORT || id == MANAGE_TOOLS) && ready && !busy &&
+    if ((id == FILE_IMPORT || id == MANAGE_TOOLS) && ready && !analysis_active() &&
         !showingHistory && !closing) {
       commit_all();
       show_pack_manager();
       return;
     }
-    if (id == TOOL_SETUP && ready && !busy && !closing) {
+    if (id == TOOL_SETUP && ready && !analysis_active() && !closing) {
       show_setup();
       if (!setupPollPending && !setupActionPending) setup_send("setup/status");
       return;
     }
-    if (id == MANAGE_REFERENCES && ready && !busy && !showingHistory && !closing) {
+    if (id == MANAGE_REFERENCES && ready && !analysis_active() && !showingHistory && !closing) {
       if (!refBusy && !refActionPending && !packBusy && !packActionPending)
         commit_all();
       show_references();
@@ -3790,7 +4557,7 @@ class Workspace {
       send("diagnostics/review", identity.empty() ? object({}) : object({{"run_id", identity}}));
       return;
     }
-    if (busy || setupBusy || setupActionPending || packBusy || packActionPending || refBusy || refActionPending || showingHistory) {
+    if (setupBusy || setupActionPending || packBusy || packActionPending || refBusy || refActionPending || showingHistory) {
       if (id == REVIEW || id == VIEW_METHODS)
         show_text(
             L"Recorded methods",
@@ -3799,6 +4566,7 @@ class Workspace {
                       "Methods are saved in the run folder.")));
       return;
     }
+    if ((id == RUN || id == FILE_CHECK) && analysis_active()) return;
     commit_all();
     switch (id) {
     case MODE_TOOLS:
@@ -4038,7 +4806,7 @@ class Workspace {
       return 0;
     }
     case WM_KEYDOWN:
-      if (w == VK_ESCAPE && !busy && !showingHistory &&
+      if (w == VK_ESCAPE && !showingHistory &&
           !getstr(state, "pendingSource").empty()) {
         model("select", object({{"nodeId", selected}}));
         status_text(L"Showing all tools.");
@@ -4127,7 +4895,12 @@ class Workspace {
         close_host_window();
         return 0;
       }
-      if (ready && !runId.empty() && busy && !pollPending &&
+      if (ready && !closing && !queuePollPending && !queuePending && ((!activeRequest && outgoing.empty()) || slow_request_pending()) &&
+          GetTickCount64() - lastQueuePoll > (queuePollFailed ? 5000 : busy || queuePreparing ? 650 : 2000)) {
+        lastQueuePoll = GetTickCount64();
+        queue_send("queue/status");
+      }
+      if (ready && !runId.empty() && busy && !pollPending && ((!activeRequest && outgoing.empty()) || slow_request_pending()) &&
           GetTickCount64() - lastPoll > 350) {
         lastPoll = GetTickCount64();
         pollPending = true;
@@ -4276,12 +5049,13 @@ class Workspace {
         if (MessageBoxW(window,
                         L"An analysis is running. Cancel it and close "
                         L"Workbench?\n\nChoose No to keep the analysis and "
-                        L"window open.",
+                        L"window open. Queued analyses remain saved for the next session.",
                         L"Close Native Workbench",
                         MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2) != IDYES)
           return 0;
         closing = true;
         closeStarted = GetTickCount64();
+        queue_send("queue/pause");
         send("cancel", object({{"run_id", runId}}));
         status_text(
             L"Cancelling and saving the interrupted run before closing...");
@@ -4406,6 +5180,9 @@ public:
     MSG msg{};
     while (GetMessageW(&msg, nullptr, 0, 0) > 0) {
       if (!(setupWindow && IsDialogMessageW(setupWindow, &msg)) &&
+          !(samplesView.window && IsDialogMessageW(samplesView.window, &msg)) &&
+          !(queueView.window && IsDialogMessageW(queueView.window, &msg)) &&
+          !(indexesView.window && IsDialogMessageW(indexesView.window, &msg)) &&
           !(refWindow && IsDialogMessageW(refWindow, &msg)) &&
           !(packWindow && IsDialogMessageW(packWindow, &msg)) &&
           !IsDialogMessageW(h, &msg)) {

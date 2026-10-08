@@ -9,7 +9,20 @@ Commands below run from the repository root unless stated otherwise.
 Paths in angle brackets are placeholders to replace, not files supplied by Git.
 Read [architecture](architecture.md) before changing an unfamiliar layer.
 
-**Current release:** application 0.10.0 adds native Full/Starter/Custom tool setup.
+**Current development:** unpublished 0.13.0 on `feature/batch-queue-indexes`
+extends the unmerged 0.12.0 candidate. Published 0.11.0 remains the baseline.
+The [batch/queue](batch-workflows.md) and [index](reference-indexes.md) guides
+describe the new contracts. The exact candidate workflow is
+[`native-batch-candidate.yml`](../.github/workflows/native-batch-candidate.yml):
+it recovers immutable 0.6.0 runtime/source inputs, stages a separate align 0.4.1
+pack, builds matching source/starter archives, and runs independent native gates
+on those bytes. `package_split.py stage --extra-pack-dir <align-0.4.1>` records
+the complete additional pack inventory separately from the unchanged three
+Starter pins. The pack ZIP requires app 0.13.0. No updater is built by this
+candidate workflow. Do not modify the production setup profile to publish a
+development pack or infer release authorization from this build runbook.
+
+**Historical release, 2026-10-07:** application 0.10.0 adds native Full/Starter/Custom tool setup.
 See [tool setup](tool-setup.md) for source, packaging and exact Windows gate commands.
 The official signed catalogue was published and independently verified on 2026-10-07;
 see [production evidence](evidence/catalogue-production-2026-10-07.json). Its public

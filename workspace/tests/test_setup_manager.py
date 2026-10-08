@@ -251,6 +251,22 @@ class SetupTests(unittest.TestCase):
             self.setup.prepare("refresh", {})
         self.assertFalse(self.requests)
 
+    def test_startup_queue_lock_does_not_suppress_welcome_but_real_queue_does(self):
+        from run_queue import RunQueue
+        data = self.root / "user-data"
+        data.mkdir(exist_ok=True)
+        store = RunQueue(data)
+        try:
+            fresh = SetupManager(self.root, self.manager)
+            self.assertFalse(fresh.previous_user)
+            self.assertTrue(fresh.snapshot()["offered"])
+            store.add([{"graph": {"name": "Explicit first analysis"}}], "1" * 32)
+            returning = SetupManager(self.root, self.manager)
+            self.assertTrue(returning.previous_user)
+            self.assertFalse(returning.snapshot()["offered"])
+        finally:
+            store.close()
+
     def test_first_run_detection_ignores_launch_log_but_preserves_existing_workspace(self):
         data = self.root / "user-data"
         data.mkdir(exist_ok=True)

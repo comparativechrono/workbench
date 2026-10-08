@@ -209,3 +209,44 @@ Installation checks establish fixture behavior and integrity. A Linux reference
 adapter must report its substituted binary hashes and cannot claim that Windows
 execution occurred. New packs must include meaningful native fixture checks so
 the same assertions can be exercised through **Check installation** on Windows.
+
+## Explicit reusable minimap2 indexes (application 0.13.0)
+
+A new pack version may declare `referenceIndex` on an index builder or
+`requiresReferenceIndex` on its consumer. These schema fields require a
+distribution `minAppVersion` of at least `0.13.0`; older application parsers
+reject the extension. Existing published pack manifests must not be changed.
+The first supported format is `minimap2-sr-v1` and semantic type
+`minimap2-sr-index`, not the generic `index` type.
+
+Builder metadata:
+
+```json
+"referenceIndex": {
+  "format": "minimap2-sr-v1", "tool": "minimap2",
+  "referencePort": "reference", "outputPort": "index"
+}
+```
+
+It requires exactly one ordinary `reference` file port and one nonempty
+`minimap2-sr-index` file output; the named executable must actually occur in its
+manifest steps. The complete reference, pack, command, executable, parameter
+and output inventory participates in the cache identity. The command remains
+in the manifest; metadata cannot add or rewrite a command. Selecting this
+explicit operation requests verified local reuse, which must be explained in
+its description and methods.
+
+Consumer metadata:
+
+```json
+"requiresReferenceIndex": {
+  "format": "minimap2-sr-v1", "tool": "minimap2", "port": "index"
+}
+```
+
+The index port must be one required file. It accepts only the matching builder's
+graph output, with identical indexing/mapping executable ID, version and SHA-256.
+Raw external `.mmi` files have no proven preset/tool identity and are rejected.
+This initial contract does not add general directory outputs or imply support
+for STAR/BWA/other index formats. See
+[the implementation and provenance guide](../knowledge/reference-indexes.md).

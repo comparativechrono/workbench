@@ -50,7 +50,7 @@ POINT canvas_world(POINT p) const {
   return {canvas_units(p.x) + dagX, canvas_units(p.y) + dagY};
 }
 bool canvas_editable() const {
-  return ready && !busy && !packBusy && !packActionPending && !refBusy &&
+  return ready && !setupBusy && !setupActionPending && !packBusy && !packActionPending && !refBusy &&
          !refActionPending && !showingHistory && !closing && workflowMode;
 }
 bool canvas_positioned(const std::string &id) const {

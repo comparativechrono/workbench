@@ -244,7 +244,7 @@ raise SystemExit(main(["--app-root", sys.argv[2]]))
         self.assertEqual(result["methods_planned"], "Planned methods")
         self.assertFalse(host.app.runs[identity]["_worker"].is_alive())
 
-    def test_historical_run_selection_does_not_unlock_model_or_second_run(self):
+    def test_historical_run_selection_allows_next_draft_but_not_second_run(self):
         host = self.host()
         host.app.history.append({"run_id": "old", "status": "completed", "events": []})
         identity = host.dispatch("run", {"output_folder": str(self.root)})["run_id"]
@@ -252,8 +252,10 @@ raise SystemExit(main(["--app-root", sys.argv[2]]))
         historical = host.dispatch("status", {"run_id": "old"})
         self.assertEqual(historical["status"], "completed")
         self.assertEqual(historical["active_run"], identity)
-        with self.assertRaisesRegex(ValueError, "active analysis"):
-            host.dispatch("model", {"action": "rename", "payload": {"name": "changed"}})
+        frozen = host.app.get_run(identity)["graph"]
+        host.dispatch("model", {"action": "rename", "payload": {"name": "changed"}})
+        self.assertEqual(host.graph()["name"], "changed")
+        self.assertEqual(host.app.get_run(identity)["graph"], frozen)
         with self.assertRaisesRegex(ValueError, "active analysis"):
             host.dispatch("run", {"output_folder": str(self.root)})
         self.assertEqual(host.dispatch("model", {"action": "snapshot"})["active_run"], identity)

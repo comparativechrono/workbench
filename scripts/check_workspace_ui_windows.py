@@ -650,10 +650,16 @@ def gui_contracts(root, evidence, report):
             return any(c["text"] == value for c in edits())
         def first_tool_row():
             return ui.library().first_tool_point()
-        def select_tool(query, *, drag_to=None):
+        def select_tool(query, *, drag_to=None, exact_label=None):
             ui.set_text(ui.child(102), query)
-            ui.wait("filter tool " + query, lambda: len(ui.library().tools()) == 1)
-            start = first_tool_row()
+            def choices():
+                library = ui.library()
+                return [item for item in library.tools() if not exact_label or library.label(item) == exact_label]
+            ui.wait("filter tool " + query, lambda: len(choices()) == 1)
+            # The 0.13 candidate also exposes an explicitly indexed alignment.
+            # Select the actual ordinary-operation label for the unchanged
+            # scroll regression, rather than assuming a search has one result.
+            start = ui.library().point(choices()[0]) if exact_label else first_tool_row()
             if drag_to:
                 ui.drag(start, point(ui.child(117), *drag_to))
             else:
@@ -705,7 +711,7 @@ def gui_contracts(root, evidence, report):
             ui.wait("new workflow input owns its file form", lambda: has_text(label))
 
         def scroll_rendering_check():
-            select_tool("Paired-end alignment")
+            select_tool("Paired-end alignment", exact_label="minimap2 — Paired-end alignment (SAM)")
             ui.wait("long paired-end tool form available for rendering regression", lambda: has_text("Paired-end alignment"))
             form = ui.child(118)
             state = ui.scroll_info(form)
