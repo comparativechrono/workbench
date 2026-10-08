@@ -596,7 +596,13 @@ def gui_checks(root, evidence, report):
         write_json(evidence / "samples-native-controls.json", ui.controls(samples))
         ui.send(ui.child(812, samples), 0x00F5)
         def added_jobs():
-            jobs = [job for job in read_json(root / "user-data/run-queue.json")["jobs"] if job["job_id"] not in before]
+            state = read_json(root / "user-data/run-queue.json")
+            jobs = [job for job in state["jobs"] if job["job_id"] not in before]
+            if state.get("error") or any(job["status"] in TERMINAL for job in jobs):
+                write_json(evidence / "gui-preparation-failure.json", state)
+                observed = [{key: job[key] for key in ("job_id", "status", "message", "folder")} for job in jobs]
+                raise AssertionError("Native sample preparation failed before explicit Start: " +
+                                     json.dumps({"error": state.get("error"), "jobs": observed}))
             return jobs if len(jobs) == 2 and all(job["status"] == "queued" for job in jobs) else None
         ui.wait("native batch frozen without starting", added_jobs)
         added = added_jobs()
@@ -689,7 +695,21 @@ def gui_checks(root, evidence, report):
             report["failureCaptureError"] = str(capture_error)
         raise
     finally:
-        ui.close()
+        try:
+            ui.close()
+        finally:
+            # The GUI has its own host and can fail after the earlier host
+            # checks passed. Preserve that final synthetic queue/history too,
+            # after shutdown, including preparation errors without run.json.
+            for name in ("run-queue.json", "runs.json"):
+                source = root / "user-data" / name
+                if source.exists():
+                    try:
+                        target = evidence / ("gui-final-" + name)
+                        write_json(target, read_json(source))
+                        report.setdefault("guiFinalReceipts", []).append({"file": target.name, "sha256": sha256(target)})
+                    except Exception as capture_error:
+                        report.setdefault("guiFinalReceiptErrors", []).append({"file": name, "error": str(capture_error)})
 
 
 def main():
