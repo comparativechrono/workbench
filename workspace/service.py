@@ -6,6 +6,7 @@ validation, persistence and native runner implementation in this module.
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -24,6 +25,12 @@ MAX_PUBLIC_LOG_BYTES = 256 * 1024
 MAX_RECENT_BYTES = 3 * 1024 * 1024
 MAX_HISTORY_BYTES = 12 * 1024 * 1024
 MAX_SAVED_BYTES = 12 * 1024 * 1024
+MAX_RESOURCE_BYTES = 128 * 1024
+MAX_REVIEW_BYTES = 16 * 1024 * 1024
+RESOURCE_NOTICE = ("CPU reservations control admission of independent steps, not an operating-system CPU limit. "
+                   "A step with no reservation runs alone. Memory and temporary-storage requirements remain unknown. "
+                   "Reservations apply only to this exact workflow; editing it clears them for the new draft. "
+                   "Queued plans retain their frozen settings.")
 
 def atomic_json(path, value, *, retry_sharing=False):
     path = Path(path)
@@ -71,6 +78,7 @@ class Workbench:
         self.lock = threading.RLock()
         self.dialog_lock = threading.Lock()
         self._history_write_lock = threading.Lock()
+        self._resource_write_lock = threading.Lock()
         self._processes = set()
         self._closing = False
         self._changing_packs = False
@@ -95,6 +103,10 @@ class Workbench:
         self._last_readiness = None
         self._batch_previews = {}
         self._sample_tables = {}
+        self._restart_previews = {}
+        self._project_export_previews = {}
+        self._project_import_previews = {}
+        self._project_contexts = {}
         self._queue_prepare_worker = None
         self._queue_prepare_cancel = threading.Event()
         self._queue_worker = None
@@ -111,6 +123,10 @@ class Workbench:
         self.history = self.read_json(self.history_path, [])
         from run_queue import RunQueue
         self.run_queue = RunQueue(self.data)
+        self.resource_path = self.data / "resource-settings.json"
+        self._resource_state = None
+        self._resource_error = ""
+        self._load_resources()
         # A previous host cannot still own an active run after a normal restart.
         # Keep these records explicitly interrupted; never infer success.
         for run in self.history:
@@ -299,6 +315,22 @@ class Workbench:
         if hasattr(self.engine, "review"):
             from readiness import build_readiness
             result = build_readiness(self.engine, graph, output_folder)
+            from execution_resources import storage
+            try:
+                policy = self.resource_policy(graph)
+                resource = {"policy": policy, "memoryBytes": None, "temporaryBytes": None, "notice": RESOURCE_NOTICE}
+                if policy["temporaryFolder"]:
+                    resource["temporaryStorage"] = storage(policy["temporaryFolder"])
+                result["readiness"]["resources"] = resource
+                result["readiness"]["checks"].append({"code": "execution_resources", "label": "CPU and temporary storage", "status": "passed",
+                    "message": "The CPU admission policy is valid. " + ("The selected temporary folder exists and has available space. " if policy["temporaryFolder"] else "Temporary files use the result folder. ") + "Memory and storage requirements are unknown; this is not an analysis execution check."})
+            except (ValueError, OSError, TypeError, KeyError) as error:
+                message = str(error)
+                result["readiness"]["checks"].append({"code": "execution_resources", "label": "CPU and temporary storage", "status": "failed", "message": message})
+                result["readiness"].update(status="blocked", summary="Correct the resource settings before preparing this analysis.")
+                result.setdefault("errors", []).append({"message": message, "code": "execution_resources"})
+                result.setdefault("issues", []).append({"severity": "error", "message": message, "code": "execution_resources"})
+                result["valid"] = result["ok"] = False
             with self.lock:
                 self._last_readiness = copy.deepcopy(result["readiness"])
             return result
@@ -350,6 +382,239 @@ class Workbench:
             raise
         return {"path": str(path), "uploaded": False}
 
+    @staticmethod
+    def _graph_key(graph):
+        if not isinstance(graph, dict):
+            raise ValueError("Choose a workflow for CPU reservations.")
+        raw = json.dumps(graph, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf-8")
+        if len(raw) > 2 * 1024 * 1024:
+            raise ValueError("The workflow is too large for resource settings.")
+        return hashlib.sha256(raw).hexdigest()
+
+    def _load_resources(self):
+        from execution_resources import normalize
+        default = normalize(None)
+        self._resource_state = {"schema": 1, "defaults": {key: default[key] for key in
+                                ("cpuBudget", "maxParallel", "temporaryFolder")}, "profiles": []}
+        try:
+            if not self.resource_path.exists() and not self.resource_path.is_symlink():
+                return
+            if self.resource_path.is_symlink() or self.resource_path.stat().st_size > MAX_RESOURCE_BYTES:
+                raise ValueError("Invalid resource settings file.")
+            value = strict_json(self.resource_path.read_text(encoding="utf-8"))
+            if (not isinstance(value, dict) or set(value) != {"schema", "defaults", "profiles"}
+                    or type(value["schema"]) is not int or value["schema"] != 1
+                    or not isinstance(value["defaults"], dict)
+                    or set(value["defaults"]) != {"cpuBudget", "maxParallel", "temporaryFolder"}
+                    or not isinstance(value["profiles"], list) or len(value["profiles"]) > 4):
+                raise ValueError("Invalid saved resource settings.")
+            # Parse stored syntax without confusing a removed scratch folder or
+            # smaller new host with corrupt state. Runtime review rejects an
+            # unavailable choice, and the user can explicitly replace it.
+            normalize(dict(value["defaults"], stepCpus={}), check_environment=False)
+            keys = set()
+            for profile in value["profiles"]:
+                if (not isinstance(profile, dict) or set(profile) != {"graphSha256", "stepCpus"}
+                        or not re.fullmatch(r"[0-9a-f]{64}", str(profile["graphSha256"]))
+                        or profile["graphSha256"] in keys):
+                    raise ValueError("Invalid saved workflow resource profile.")
+                keys.add(profile["graphSha256"])
+                normalize(dict(value["defaults"], stepCpus=profile["stepCpus"]), check_environment=False)
+            self._resource_state = value
+        except (ValueError, TypeError, OSError, KeyError, RecursionError) as error:
+            self._resource_error = "Saved resource settings cannot be used. Preserve user-data/resource-settings.json for recovery. " + str(error)
+
+    def resource_state(self, graph=None):
+        key = self._graph_key(graph) if graph is not None else None
+        with self.lock:
+            policy = copy.deepcopy(self._resource_state["defaults"])
+            profile = next((item for item in self._resource_state["profiles"] if item["graphSha256"] == key), None)
+            policy["stepCpus"] = copy.deepcopy(profile["stepCpus"]) if profile else {}
+            return {"policy": policy, "graph_sha256": key, "logical_cpus": max(1, os.cpu_count() or 1),
+                    "notice": RESOURCE_NOTICE, "error": self._resource_error}
+
+    def resource_policy(self, graph, *, check_environment=True):
+        result = self.resource_state(graph)
+        if result["error"]:
+            raise ValueError(result["error"])
+        from execution_resources import normalize
+        return normalize(result["policy"], nodes=graph.get("nodes", []), check_environment=check_environment)
+
+    def set_resources(self, graph, policy):
+        from execution_resources import normalize
+        key = self._graph_key(graph)
+        value = normalize(copy.deepcopy(policy), nodes=graph.get("nodes", []))
+        with self._resource_write_lock:
+            with self.lock:
+                self.run_queue.ready()
+                self.ensure_model_editable()
+                if self._resource_error:
+                    raise ValueError(self._resource_error)
+                state = copy.deepcopy(self._resource_state)
+            state["defaults"] = {field: value[field] for field in ("cpuBudget", "maxParallel", "temporaryFolder")}
+            # Old profiles may reserve more than the newly reduced CPU budget;
+            # discard those profiles rather than silently resizing reservations.
+            state["profiles"] = [profile for profile in state["profiles"]
+                                 if profile["graphSha256"] != key and all(n <= value["cpuBudget"] for n in profile["stepCpus"].values())]
+            if value["stepCpus"]:
+                state["profiles"].append({"graphSha256": key, "stepCpus": value["stepCpus"]})
+            state["profiles"] = state["profiles"][-4:]
+            if len(json.dumps(state, ensure_ascii=False).encode("utf-8")) > MAX_RESOURCE_BYTES:
+                raise ValueError("Resource settings exceed the supported size.")
+            if self.resource_path.is_symlink():
+                raise ValueError("Resource settings must not be a symbolic link.")
+            atomic_json(self.resource_path, state, retry_sharing=True)
+            with self.lock:
+                self._resource_state = state
+        return self.resource_state(graph)
+
+    def _store_preview(self, collection, value):
+        size = len(json.dumps(value, ensure_ascii=False, allow_nan=False).encode("utf-8"))
+        if size > MAX_REVIEW_BYTES:
+            raise ValueError("This review exceeds the supported size. Choose a smaller project.")
+        with self.lock:
+            now = time.monotonic()
+            for token, item in list(collection.items()):
+                if now - item[0] >= 900:
+                    del collection[token]
+            while collection and (len(collection) >= 4 or sum(item[2] for item in collection.values()) + size > 32 * 1024 * 1024):
+                del collection[next(iter(collection))]
+            token = secrets.token_urlsafe(32)
+            collection[token] = (now, copy.deepcopy(value), size)
+        return token
+
+    def _preview(self, collection, token, *, consume=False):
+        token = short_text(token, "review token", 100)
+        with self.lock:
+            item = collection.get(token)
+            if item is None or time.monotonic() - item[0] >= 900:
+                collection.pop(token, None)
+                raise ValueError("This review expired. Review the selection again.")
+            if consume:
+                del collection[token]
+            return copy.deepcopy(item[1])
+
+    def review_restart(self, identity):
+        identity = short_text(identity, "run identity", 200)
+        with self.lock:
+            run = self.get_run(identity)
+            if run.get("status") not in ("completed", "failed", "cancelled", "interrupted"):
+                raise ValueError("Choose a finished or interrupted run to review for restart.")
+            graph = copy.deepcopy(run.get("graph"))
+            folder = run.get("folder")
+        if not isinstance(graph, dict) or not folder:
+            raise ValueError("This run has no recorded workflow and result folder for restart.")
+        policy = self.resource_policy(graph)
+        review = self.engine.review_restart(graph, folder, resource_policy=policy)
+        token = self._store_preview(self._restart_previews,
+                                    {"graph": graph, "review": review, "policy": policy, "run_id": identity})
+        nodes = [{key: item[key] for key in ("id", "action", "reason") if key in item} for item in review.get("nodes", [])]
+        return {"token": token, "source_run_id": identity, "source_folder": folder, "policy": policy, "nodes": nodes,
+                "reuse_count": sum(node.get("action") == "reuse" for node in nodes),
+                "rerun_count": sum(node.get("action") != "reuse" for node in nodes),
+                "notice": "Only verified completed steps are reused, with copies in a new result folder. Queueing does not run the workflow. Source evidence is checked again before use."}
+
+    def remember_project(self, graph, result):
+        key = self._graph_key(graph)
+        context = {"sampleMetadata": copy.deepcopy(result.get("sampleMetadata")),
+                   "projectMetadata": copy.deepcopy(result.get("projectMetadata"))}
+        if len(json.dumps(context, ensure_ascii=False).encode("utf-8")) > MAX_REVIEW_BYTES:
+            raise ValueError("Imported project context exceeds the supported size.")
+        with self.lock:
+            self._project_contexts.pop(key, None)
+            self._project_contexts[key] = context
+            while len(self._project_contexts) > 4:
+                del self._project_contexts[next(iter(self._project_contexts))]
+
+    def _project_context(self, graph):
+        key = self._graph_key(graph)
+        with self.lock:
+            return copy.deepcopy(self._project_contexts.get(key, {}))
+
+    def _result_export(self, identity):
+        from engine import _io_path, _ordinary, digest_file, canonical
+        from recovery import _source
+        identity = short_text(identity, "result identity", 200)
+        run = self.get_run(identity)
+        if run.get("status") not in ("completed", "failed", "cancelled", "interrupted") or not run.get("folder"):
+            raise ValueError("Choose a finished or interrupted recorded result for export.")
+        plan, record, _ = _source(run["folder"])
+        if run.get("id") is not None and run["id"] != plan["id"]:
+            raise ValueError("The selected result identity differs from its saved plan.")
+        if canonical(plan.get("batch")) != canonical(record.get("batch")):
+            raise ValueError("The saved result sample metadata differs from its frozen plan.")
+        for path, expected in plan.get("inputs", {}).items():
+            source = _ordinary(path)
+            if (_io_path(source).stat().st_size != expected.get("bytes")
+                    or digest_file(source) != expected.get("sha256")):
+                raise ValueError("An original result input changed. Export the current draft to describe new input bytes.")
+        return copy.deepcopy(plan["graph"]), copy.deepcopy(plan.get("batch")), plan
+
+    def project_preview(self, request, *, importing=False):
+        from project_manager import ProjectManager
+        manager = ProjectManager(self.engine)
+        if importing:
+            preview = manager.preview_import(short_text(request.get("path"), "project archive", 30000))
+            collection = self._project_import_previews
+        else:
+            if "run_id" in request:
+                graph, sample, source_plan = self._result_export(request["run_id"])
+                project_context = source_plan.get("project")
+                reference_metadata = source_plan.get("references", {})
+                validation_tools = {node["id"]: copy.deepcopy(node["validationTools"]["samtools"])
+                                    for node in source_plan.get("nodes", []) if node.get("validationTools", {}).get("samtools")}
+            else:
+                graph = copy.deepcopy(request["graph"])
+                context = self._project_context(graph)
+                sample = copy.deepcopy(request.get("sample_metadata", context.get("sampleMetadata")))
+                project_context = context.get("projectMetadata")
+                reference_metadata = None
+                validation_tools = None
+            options = {"include_data": copy.deepcopy(request.get("include_data", False)), "sample_metadata": sample}
+            if project_context is not None:
+                options["project_metadata"] = copy.deepcopy(project_context)
+            if reference_metadata is not None:
+                options["reference_metadata"] = copy.deepcopy(reference_metadata)
+                options["validation_tools"] = validation_tools
+            preview = manager.export_preview(graph, **options)
+            preview["summary"]["source"] = "recorded-result" if "run_id" in request else "current-workflow"
+            preview["summary"]["sample_metadata"] = copy.deepcopy(sample)
+            preview["summary"]["metadata_notice"] = "Sample metadata describes the original selection; importing a project does not configure or start a sample batch."
+            collection = self._project_export_previews
+        token = self._store_preview(collection, preview)
+        return dict(copy.deepcopy(preview["summary"]), token=token)
+
+    def project_resolve(self, token, mappings):
+        from project_manager import ProjectManager
+        if not isinstance(mappings, dict) or len(mappings) > 1024:
+            raise ValueError("Choose explicit project file mappings.")
+        previous = self._preview(self._project_import_previews, token)
+        merged = dict(previous.get("mappings", {}))
+        merged.update(copy.deepcopy(mappings))
+        current = ProjectManager(self.engine).preview_import(previous["archive"], mappings=merged)
+        if current["archiveSha256"] != previous["archiveSha256"]:
+            raise ValueError("The project archive changed after review. Inspect it again.")
+        # Replace the old preview only after the replacement is verified.
+        self._preview(self._project_import_previews, token, consume=True)
+        new_token = self._store_preview(self._project_import_previews, current)
+        return dict(copy.deepcopy(current["summary"]), token=new_token)
+
+    def project_commit(self, token, destination, *, importing=False):
+        from project_manager import ProjectManager
+        with self.lock:
+            self.run_queue.ready()
+            self.ensure_model_editable()
+        collection = self._project_import_previews if importing else self._project_export_previews
+        preview = self._preview(collection, token, consume=True)
+        manager = ProjectManager(self.engine)
+        target = short_text(destination, "project destination", 30000)
+        # A failed write requires a new review; never replay an uncertain commit.
+        return manager.import_project(preview, target) if importing else manager.export(preview, target)
+
+    def open_project(self, folder):
+        from project_manager import ProjectManager
+        return ProjectManager(self.engine).open_project(short_text(folder, "project folder", 30000))
+
     def queue_state(self):
         result = self.run_queue.snapshot()
         result["jobs"] = [{key: value for key, value in job.items() if key not in ("metadata", "files")}
@@ -395,12 +660,17 @@ class Workbench:
                 table = copy.deepcopy(item[1])
         else:
             table = copy.deepcopy(request["table"])
+        policy = self.resource_policy(request["graph"])
+        project_context = self._project_context(request["graph"]).get("projectMetadata")
         result = preview_batch(self.engine, copy.deepcopy(request["graph"]), table,
                                copy.deepcopy(request["bindings"]),
                                parameter_bindings=copy.deepcopy(request.get("parameter_bindings")),
                                mode=request.get("mode", "independent"), shared_sources=copy.deepcopy(request.get("shared_sources", [])),
                                combined_target=copy.deepcopy(request.get("combined_target")))
         if result.get("valid"):
+            context_key = self._graph_key(request["graph"])
+            if project_context is not None and any(self._graph_key(sample["graph"]) != context_key for sample in result["samples"]):
+                result.setdefault("warnings", []).append({"message": "This batch changes the imported project workflow. Its historical project context is not attached to changed sample graphs; actual sample file hashes and selected batch metadata are recorded normally."})
             if len(result["samples"]) > 200:
                 raise ValueError("Choose at most 200 independent samples per queued batch.")
             size = len(json.dumps(result["samples"], ensure_ascii=False).encode("utf-8"))
@@ -412,7 +682,7 @@ class Workbench:
                 while self._batch_previews and (len(self._batch_previews) >= 4 or sum(item[2] for item in self._batch_previews.values()) + size > 32 * 1024 * 1024):
                     self._batch_previews.pop(next(iter(self._batch_previews)))
                 token = secrets.token_urlsafe(32)
-                self._batch_previews[token] = (now, copy.deepcopy(result["samples"]), size)
+                self._batch_previews[token] = (now, copy.deepcopy(result["samples"]), size, policy, project_context, context_key)
             result["token"] = token
         result["samples"] = [{"sampleId": sample["sampleId"], "valid": sample.get("valid", True),
                                "nodeCount": len(sample.get("graph", {}).get("nodes", []))}
@@ -430,10 +700,14 @@ class Workbench:
             result[key + "_omitted"] = len(items) - len(shown)
         return result
 
-    def enqueue(self, request, *, batch=False):
+    def enqueue(self, request, *, batch=False, restart=False):
         from run_queue import ordinary_directory, freeze_plan, utc
         output = ordinary_directory(short_text(request.get("output_folder"), "output folder", 30000))
-        token = short_text(request.get("token"), "batch preview token", 100) if batch else None
+        token = short_text(request.get("token"), "run preview token", 100) if batch or restart else None
+        restart_preview = self._preview(self._restart_previews, token) if restart else None
+        captured_policy = self.resource_policy(request.get("graph")) if not batch and not restart else None
+        project_context = self._project_context(request["graph"]).get("projectMetadata") if not batch and not restart else None
+        context_key = self._graph_key(request["graph"]) if not batch and not restart else None
         with self.lock:
             self.run_queue.ready()
             self.ensure_model_editable()
@@ -445,6 +719,15 @@ class Workbench:
                     self._batch_previews.pop(token, None)
                     raise ValueError("This sample preview expired. Review the sample table again.")
                 samples = copy.deepcopy(item[1])
+                captured_policy = copy.deepcopy(item[3])
+                project_context = copy.deepcopy(item[4])
+                context_key = item[5]
+            elif restart:
+                # Reserve below with queue admission so a concurrent duplicate
+                # token cannot prepare a second unintended restart.
+                restart_preview = self._preview(self._restart_previews, token)
+                samples = [{"graph": copy.deepcopy(restart_preview["graph"])}]
+                captured_policy = copy.deepcopy(restart_preview["policy"])
             else:
                 graph = copy.deepcopy(request.get("graph"))
                 if not isinstance(graph, dict):
@@ -467,6 +750,8 @@ class Workbench:
         with self.lock:
             if batch:
                 self._batch_previews.pop(token, None)
+            if restart:
+                self._restart_previews.pop(token, None)
         identities = [job["job_id"] for job in jobs]
 
         def work():
@@ -474,7 +759,11 @@ class Workbench:
                 for sample, job in zip(samples, jobs):
                     if cancel.is_set():
                         raise InterruptedError("Cancelled while preparing the batch.")
-                    kwargs = {"cancel": cancel}
+                    kwargs = {"cancel": cancel, "resource_policy": copy.deepcopy(captured_policy)}
+                    if project_context is not None and self._graph_key(sample["graph"]) == context_key:
+                        kwargs["project_metadata"] = copy.deepcopy(project_context)
+                    if restart:
+                        kwargs["restart_from"] = copy.deepcopy(restart_preview["review"])
                     if batch:
                         kwargs["run_metadata"] = {"batchId": batch_id, "sampleId": sample["sampleId"],
                                                   "metadata": copy.deepcopy(sample.get("metadata", {}))}
@@ -690,6 +979,9 @@ class Workbench:
                 self.history = history
 
     def start(self, request, check=False):
+        graph = copy.deepcopy(request.get("graph")) if not check else None
+        policy = self.resource_policy(graph, check_environment=False) if not check else None
+        project_context = self._project_context(graph).get("projectMetadata") if not check else None
         output = Path(short_text(request.get("output_folder"), "output folder", 30000))
         if not output.is_absolute() or not output.is_dir():
             raise ValueError("Choose an existing absolute output folder.")
@@ -745,7 +1037,10 @@ class Workbench:
                     run.update({k: v for k, v in result.items() if k != "type"})
                     run["status"] = "cancelled" if result.get("cancelled") else "completed" if result.get("success") else "failed"
                 else:
-                    plan = self.engine.prepare(copy.deepcopy(request.get("graph")), output, cancel=run["_cancel"])
+                    kwargs = {"cancel": run["_cancel"], "resource_policy": policy}
+                    if project_context is not None:
+                        kwargs["project_metadata"] = copy.deepcopy(project_context)
+                    plan = self.engine.prepare(graph, output, **kwargs)
                     with self.lock:
                         run["folder"] = str(plan.get("folder", plan.get("run_folder", "")))
                         run["graph"] = copy.deepcopy(plan.get("graph", {}))

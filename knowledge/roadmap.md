@@ -23,6 +23,12 @@ Its implementation and recorded hosted Windows gates are complete in
 [candidate handover](batch-queue-indexes-0.13.0-handover.md). Representative-machine
 acceptance and release/update validation remain separate from that result.
 
+The owner has now requested the final implementation tranche, milestone 3.
+It targets unpublished **0.14.0** on `feature/recovery-projects`, starting from
+`9f5cd4c88634b4cab04cec66b9e43e93e1db0e17` on the unmerged 0.13.0 branch.
+See [recovery, resources and portable projects](recovery-projects.md).
+This does not declare the further accepted work or benchmark programme complete.
+
 | Milestone | Accepted scope | Completion evidence |
 | --- | --- | --- |
 | 1 — Measurement and readiness | Local performance records, an understandable readiness report, reviewable diagnostic export and representative-machine validation. | Exact packaged Windows evidence for successful, failed and cancelled work; preserved scientific output; documented timing/counter scope and unavailable values; reviewed JSON equals exported JSON; private-data canaries absent; installation, readiness and scientific execution clearly distinguished. A separate matched Windows–Linux benchmark protocol records hardware, versions, parameters and data identities. |

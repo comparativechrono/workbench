@@ -216,6 +216,8 @@ def make_record(plan):
             "steps": steps,
             "interpretation": {"clock": "monotonic-perf-counter", "elapsedUnit": "seconds",
                 "inclusiveTotalsOverlapPhases": True,
+                "parallelStepDurationsOverlap": True,
+                "cpuReservationMeaning": "Declared admission allocation, not OS CPU enforcement or observed utilisation; unknown requirements run exclusively.",
                 "backendRunnerScope": "Bridge invocation including native checks, command stages and result collection; not pure scientific compute time.",
                 "nativeMemoryMeaning": "Peak Job Object committed memory, not resident set size (RSS).",
                 "cpuAndMemoryAggregation": "Per native command stage only; no summed peak-memory or estimated CPU totals.",

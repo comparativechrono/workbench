@@ -44,7 +44,7 @@ class Engine:
         self.active = 0
         self.maximum_active = 0
 
-    def prepare(self, graph, output, cancel=None, run_metadata=None):
+    def prepare(self, graph, output, cancel=None, run_metadata=None, resource_policy=None, restart_from=None):
         self.preparing.set()
         while not self.prepare_release.wait(.01):
             if cancel.is_set():

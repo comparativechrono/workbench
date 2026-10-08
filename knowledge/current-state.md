@@ -1,6 +1,21 @@
 # Current project state
 
-## Active development: 0.13.0, unpublished
+## Active development: 0.14.0, unpublished
+
+On **2026-10-08** the owner requested the final implementation tranche in the
+accepted [roadmap](roadmap.md). Work is on `feature/recovery-projects`, stacked
+on unpublished 0.13.0 at `9f5cd4c88634b4cab04cec66b9e43e93e1db0e17`.
+The scope is verified restart at completed-step boundaries, declared CPU
+admission budgets for concurrent DAG steps, and portable project bundles.
+See [recovery, resources and projects](recovery-projects.md).
+
+Implementation and validation are in progress. Historical source and Windows
+passes below apply to their named candidates, not to changed 0.14.0 bytes.
+Published **0.11.0** and production packs/profile/trust remain unchanged.
+This request authorizes development, not a merge, tag or publication. The
+0.12.0 and 0.13.0 review branches remain unmerged and unpublished.
+
+## Previous tranche: 0.13.0, unpublished
 
 On **2026-10-08** the owner requested the next accepted tranche. Work continues
 on `feature/batch-queue-indexes`, stacked on the 0.12.0 review branch at

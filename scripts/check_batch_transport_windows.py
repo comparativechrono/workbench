@@ -183,13 +183,16 @@ def run_gui(root, evidence, report, job):
 
 
 def main():
+    global VERSION
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--app-root", type=Path, required=True)
     parser.add_argument("--report", type=Path, required=True)
     parser.add_argument("--source-commit", required=True)
     parser.add_argument("--asset-sha256", required=True)
     parser.add_argument("--asset-name", required=True)
+    parser.add_argument("--app-version", default=VERSION)
     args = parser.parse_args()
+    VERSION = args.app_version
     root, target = args.app_root.resolve(), args.report.resolve()
     evidence = target.parent
     evidence.mkdir(parents=True, exist_ok=True)
