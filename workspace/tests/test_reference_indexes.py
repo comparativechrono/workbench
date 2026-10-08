@@ -48,7 +48,7 @@ class FixtureBackend:
 
 
 def fixture_pack(root):
-    original=(ROOT/'pack-examples/align.ini').read_text()
+    original=(ROOT/'pack-examples/align.ini').read_text(encoding='utf-8')
     pack=parse_pack(original)
     for executable in pack['tools'].values():
         payload=('synthetic-'+executable['id']).encode()
@@ -103,12 +103,12 @@ class ReferenceIndexTests(unittest.TestCase):
         receipt=self.store.verify(index['key'])
         self.assertEqual(receipt['identity']['reference']['sha256'],digest_file(self.reference))
         self.assertIn('indexing command was not run',second['methods'])
-        exported=json.loads((Path(second_plan['folder'])/'workflow.cwl').read_text())
+        exported=json.loads((Path(second_plan['folder'])/'workflow.cwl').read_text(encoding='utf-8'))
         self.assertEqual(definition_sha256(exported),second_plan['workflowExport']['definitionSha256'])
         self.assertIn('build-sr-index',json.dumps(exported))
         self.assertIn('reused',json.dumps(exported['$graph'][0]['nw:execution']))
         self.assertEqual(second['outputs']['step-1::index']['referenceIndex']['key'],index['key'])
-        metrics=json.loads((Path(second_plan['folder'])/'performance.json').read_text())
+        metrics=json.loads((Path(second_plan['folder'])/'performance.json').read_text(encoding='utf-8'))
         self.assertIn('reference_index_reused_without_native_command',json.dumps(metrics['steps'][0]))
 
     def test_reference_and_parameters_make_distinct_builds(self):
@@ -152,7 +152,7 @@ class ReferenceIndexTests(unittest.TestCase):
 
     def test_malformed_receipt_is_an_invalid_row_not_a_broken_library(self):
         _,_,index=self.built();folder=self.store.root/index['key'];path=folder/'index.json'
-        original=path.read_text()
+        original=path.read_text(encoding='utf-8')
         for raw in ('[]','{"schema":NaN}','{"schema":true}'):
             path.write_text(raw)
             self.assertEqual(self.store.list()['entries'][0]['status'],'invalid')
@@ -265,7 +265,7 @@ class ReferenceIndexTests(unittest.TestCase):
         plan=self.engine.prepare(self.graph(),self.root,run_metadata=metadata)
         metadata['metadata']['columns']['condition']='changed'
         self.assertEqual(plan['batch']['metadata']['columns']['condition'],'test')
-        exported=json.loads((Path(plan['folder'])/'workflow.cwl').read_text())
+        exported=json.loads((Path(plan['folder'])/'workflow.cwl').read_text(encoding='utf-8'))
         self.assertEqual(json.loads(exported['$graph'][0]['nw:batch']),plan['batch'])
         run=self.engine.execute(plan);self.assertTrue(run['success'],run)
         self.assertEqual(run['batch'],plan['batch'])

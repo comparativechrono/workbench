@@ -35,7 +35,48 @@ TERMINAL = {"completed", "failed", "cancelled", "interrupted"}
 
 
 def read_json(path):
-    return json.loads(Path(path).read_text(encoding="utf-8"))
+    path = Path(path)
+    if os.name != "nt":
+        return json.loads(path.read_text(encoding="utf-8"))
+    # This independent observer must not deny DELETE sharing while the app
+    # atomically replaces its queue receipt. The CRT-backed Path.open does not
+    # grant that share mode and can either fail itself or obstruct the writer.
+    # An open handle pins one complete old/new snapshot across a rename. There
+    # is deliberately no retry that could conceal an application write error.
+    kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+    kernel.CreateFileW.argtypes = [wintypes.LPCWSTR, wintypes.DWORD, wintypes.DWORD,
+                                  ctypes.c_void_p, wintypes.DWORD, wintypes.DWORD, wintypes.HANDLE]
+    kernel.CreateFileW.restype = wintypes.HANDLE
+    kernel.GetFileSizeEx.argtypes = [wintypes.HANDLE, ctypes.POINTER(ctypes.c_longlong)]
+    kernel.GetFileSizeEx.restype = wintypes.BOOL
+    kernel.ReadFile.argtypes = [wintypes.HANDLE, ctypes.c_void_p, wintypes.DWORD,
+                               ctypes.POINTER(wintypes.DWORD), ctypes.c_void_p]
+    kernel.ReadFile.restype = wintypes.BOOL
+    kernel.CloseHandle.argtypes = [wintypes.HANDLE]
+    kernel.CloseHandle.restype = wintypes.BOOL
+    name = str(path.absolute())
+    if not name.startswith("\\\\?\\"):
+        name = "\\\\?\\UNC\\" + name[2:] if name.startswith("\\\\") else "\\\\?\\" + name
+    handle = kernel.CreateFileW(name, 0x80000000, 0x1 | 0x2 | 0x4, None, 3, 0x80, None)
+    if handle == ctypes.c_void_p(-1).value:
+        raise ctypes.WinError(ctypes.get_last_error())
+    try:
+        size = ctypes.c_longlong()
+        if not kernel.GetFileSizeEx(handle, ctypes.byref(size)):
+            raise ctypes.WinError(ctypes.get_last_error())
+        require(0 <= size.value <= 64 * 1024 * 1024, "Native evidence JSON exceeds its bounded snapshot size.")
+        pieces, remaining = [], size.value
+        while remaining:
+            buffer = ctypes.create_string_buffer(min(65536, remaining))
+            count = wintypes.DWORD()
+            if not kernel.ReadFile(handle, buffer, len(buffer), ctypes.byref(count), None):
+                raise ctypes.WinError(ctypes.get_last_error())
+            require(count.value > 0, "Native evidence snapshot ended before its declared size.")
+            pieces.append(buffer.raw[:count.value])
+            remaining -= count.value
+        return json.loads(b"".join(pieces).decode("utf-8"))
+    finally:
+        kernel.CloseHandle(handle)
 
 
 def check(report, description):
@@ -222,6 +263,11 @@ def host_checks(root, evidence, report):
         corruption_checks(host, graph, output, evidence, report)
         cancellation_checks(host, graph, output, root, evidence, report)
         index_checks(host, graph, output, root, evidence, report, catalog)
+        setup = host.call("setup/status")
+        require((root / "user-data/run-queue.json").is_file() and setup["offered"] is False,
+                "Persisted queue/results must be recognised as a returning installation.")
+        report["returningInstallation"] = {"persistentQueuePresent": True, "setupOffered": setup["offered"],
+                                            "reason": "The host gate has already created real queue, run and reference-index records."}
         report["networkSocketOperationsDeniedForHost"] = True
     finally:
         host.close()
@@ -450,12 +496,14 @@ def gui_checks(root, evidence, report):
             return next((handle for handle in ui.windows() if ui.label(handle) == title), None)
         def setup():
             return next((handle for handle in ui.windows() if ui.label(handle, True) == "WorkbenchToolSetup0100"), None)
-        ui.wait("fresh native setup window", setup)
-        welcome = setup()
-        ui.wait("Use Workbench enabled", lambda: ui.user.IsWindowEnabled(ui.child(713, welcome)))
-        ui.send(ui.child(713, welcome), 0x00F5)
-        ui.wait("native setup closed", lambda: not setup())
-        ui.wait("native tool library ready", lambda: ui.user.IsWindowEnabled(ui.child(410)) and ui.library().tools())
+        # Host/scientific checks deliberately precede this GUI check in the
+        # same extraction so its verified indexes and durable jobs can be used.
+        # Real persisted records make this a returning installation; fresh
+        # welcome behavior remains independently required by the library gate.
+        require(report["returningInstallation"]["setupOffered"] is False,
+                "Native batch UI gate requires its recorded returning-installation state.")
+        ui.wait("returning native workspace ready", lambda: ui.user.IsWindowEnabled(ui.child(410)) and ui.library().tools())
+        require(not setup(), "A returning installation unexpectedly opened first-launch Tool Setup.")
         ui.fit_window(1280, 900)
         ui.post(ui.main, 0x0111, 302)
         ui.wait("native example loaded", lambda: "Starter example" in ui.label(ui.child(101)))
