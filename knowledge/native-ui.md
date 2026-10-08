@@ -1,5 +1,10 @@
 # Native interface development
 
+**New development, 2026-10-07:** the [expandable tool library](expandable-tool-library.md)
+replaces the dropdown/flat list below with native category headings in the next
+0.11.0 candidate. Its validation status is separate from the historical native
+interface results recorded on this page; published 0.10.1 remains unchanged.
+
 **Status recorded: 2026-10-06.** The Galaxy-inspired interface is published in
 application **0.8.0**, a development prerelease. Work started from
 `7c6f2437842788daf9918ac2194ef859b153092c` on `ui/galaxy-native-workspace`;

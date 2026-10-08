@@ -447,7 +447,7 @@ def gui_checks(root, evidence, report):
     ui = NativeUI(root, evidence)
     report['nativeGUILaunched'] = True
     try:
-        ui.wait('native library ready for results gate', lambda: ui.user.IsWindowEnabled(ui.child(410)) and ui.send(ui.child(104), 0x1004) > 0)
+        ui.wait('native library ready for results gate', lambda: ui.user.IsWindowEnabled(ui.child(410)) and len(ui.library().tools()) > 0)
         ui.user.MoveWindow(ui.main, 0, 0, 1280, 900, True)
         icons = icon_checks(ui, root, evidence)
         write_json(evidence / 'native-icon-checks.json', icons)
@@ -492,12 +492,8 @@ def gui_checks(root, evidence, report):
         write_json(evidence / 'routing-fixture-geometry.json', geometry)
         def add_card(name, x, y):
             ui.set_text(ui.child(102), 'Coordinate sort')
-            ui.wait('single coordinate-sort library row', lambda: ui.send(ui.child(104), 0x1004) == 1)
-            tasks = ui.child(104)
-            left, top, right, _ = ui.bounds(tasks)
-            header = ui.send(tasks, 0x101F)
-            first_y = ui.bounds(header)[3]+round(11*scale) if header and ui.user.IsWindowVisible(header) else top+round(13*scale)
-            ui.drag((left+min(round(70*scale), (right-left)//2), first_y), point(x+120, y+20))
+            ui.wait('single coordinate-sort library row', lambda: len(ui.library().tools()) == 1)
+            ui.drag(ui.library().first_tool_point(), point(x+120, y+20))
             ui.wait('new routing fixture tool', lambda: has_name('Coordinate sort'))
             edit = next(row for row in edits() if row['text'] == 'Coordinate sort')
             ui.set_text(edit['hwnd'], name)

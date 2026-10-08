@@ -11,6 +11,27 @@ an independent second download also passed all hashes/sizes, four ZIP CRCs
 and both checksum manifests.
 The updater in this release supports **0.10.0**.
 
+## Expandable tool library release preparation, 2026-10-08
+
+The owner explicitly requested **“Please release 0.11.0 properly.”** Release
+authorization is recorded; publication is pending the immutable promotion and
+public-download checks. [PR #6](https://github.com/comparativechrono/workbench/pull/6)
+contains the feature and release preparation.
+
+Frozen application source `acfa060c9a400d82509278b657ee37853c7922b0` passed **7 library,
+32 workspace, 8 References, 9 results and 3 scroll-panel checks per Windows path**.
+The separate updater from published **0.10.1** passed **13 checks per path**,
+preserving 204 existing files and verifying 72 core files. Final native
+regressions ran at `0c880d1060f22edb7e9c663743a1966a2f8f2eea`, without rebuilding the app.
+The source gate passed 70 checks; updater source checks passed 17.
+
+The [release summary](evidence/tool-library-0.11.0-release-summary.json) and
+[acceptance lock](evidence/tool-library-0.11.0-release-lock.json) bind the original
+reports, artifacts, helper identities, failed attempts and limits. See the
+[release notes](../docs/releases/0.11.0.md) for fresh installation and updater
+instructions. Published 0.10.1 remains the public baseline until promotion is
+verified. Prior candidate-only pending statements below are historical.
+
 ## Tool Setup corrective patch, 0.10.1
 
 The patch keeps the package list enabled for inspection during installation,

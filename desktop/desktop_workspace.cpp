@@ -17,6 +17,7 @@
 #include <shellapi.h>
 #include <shobjidl.h>
 #include <sstream>
+#include <uxtheme.h>
 #include <windowsx.h>
 
 namespace {
@@ -29,8 +30,7 @@ constexpr COLORREF BACK = RGB(246, 247, 248), PAPER = RGB(255, 255, 255),
 enum {
   NAME = 101,
   SEARCH,
-  CATEGORY,
-  TASKS,
+  TASKS = 104,
   ADD,
   STEPS,
   REMOVE,
@@ -471,7 +471,7 @@ class Workspace {
   HINSTANCE instance{};
   HICON appIcon{}, appSmallIcon{};
   ATOM appWindowClass{}, appSurfaceClass{};
-  HWND window{}, name{}, search{}, category{}, tasks{}, add{}, clearFilter{},
+  HWND window{}, name{}, search{}, tasks{}, add{}, clearFilter{},
       steps{}, remove{}, undo{}, up{}, down{}, output{}, browse{}, run{},
       cancel{}, review{}, back{}, dag{}, form{}, status{}, manageTools{},
       packWindow{}, packSearch{}, packFilter{}, packList{}, packDetails{},
@@ -535,7 +535,25 @@ class Workspace {
   std::vector<Field> fields;
   std::vector<HWND> formControls;
   std::map<int, size_t> fieldIds;
-  std::vector<std::string> taskIds, stepIds;
+  struct LibraryRow {
+    std::wstring category, label;
+    std::string toolId;
+    std::string key() const {
+      return toolId.empty() ? "category:" + narrow(category) : "tool:" + toolId;
+    }
+    bool operator==(const LibraryRow &other) const {
+      return category == other.category && label == other.label && toolId == other.toolId;
+    }
+  };
+  struct LibraryView { std::string selected, first; };
+  std::vector<LibraryRow> libraryRows;
+  std::map<std::string, HTREEITEM> libraryItems;
+  std::map<std::wstring, bool> libraryExpanded;
+  std::map<bool, LibraryView> libraryViews;
+  bool libraryFiltered = false, libraryWorkflow = false, libraryRendered = false;
+  std::wstring libraryQuery;
+  std::string librarySource, libraryInspectorTool;
+  std::vector<std::string> stepIds;
   std::vector<size_t> packRows;
   std::vector<std::pair<size_t, size_t>> refLocalRows;
   std::vector<Hit> hits;
@@ -1205,7 +1223,7 @@ class Workspace {
     packBusy = packOperation.get("active").boolean();
     if (result.contains("model")) {
       snapshot(result.get("model"));
-      refresh_tasks(true);
+      refresh_tasks();
     }
     const bool operationResponse = method == "packs/status" ||
         method == "packs/install" || method == "packs/import" || method == "packs/refresh";
@@ -1653,7 +1671,7 @@ class Workspace {
     }
     if (result.contains("model")) {
       snapshot(result.get("model"));
-      refresh_tasks(true);
+      refresh_tasks();
     }
     if (!setupWelcomeChecked && method == "setup/status") {
       setupWelcomeChecked = true;
@@ -2405,21 +2423,23 @@ class Workspace {
                   WS_EX_CLIENTEDGE);
     SendMessageW(search, EM_SETCUEBANNER, FALSE,
                  reinterpret_cast<LPARAM>(L"Search tools"));
-    category = make(L"COMBOBOX", L"",
-                    WS_TABSTOP | CBS_DROPDOWNLIST | WS_VSCROLL, CATEGORY);
-    tasks = make(WC_LISTVIEWW, L"Available tasks",
-                 WS_TABSTOP | LVS_REPORT | LVS_NOCOLUMNHEADER | LVS_SINGLESEL | LVS_SHOWSELALWAYS,
+    tasks = make(WC_TREEVIEWW, L"Tool library",
+                 WS_TABSTOP | TVS_HASBUTTONS | TVS_LINESATROOT |
+                     TVS_SHOWSELALWAYS | TVS_FULLROWSELECT | TVS_NOHSCROLL,
                  TASKS, nullptr, WS_EX_CLIENTEDGE);
-    ListView_SetExtendedListViewStyle(
-        tasks, LVS_EX_FULLROWSELECT | LVS_EX_DOUBLEBUFFER | LVS_EX_LABELTIP);
+    SendMessageW(tasks, CCM_SETUNICODEFORMAT, TRUE, 0);
+    TreeView_SetExtendedStyle(tasks, TVS_EX_DOUBLEBUFFER, TVS_EX_DOUBLEBUFFER);
+    TreeView_SetBkColor(tasks, PAPER);
+    TreeView_SetTextColor(tasks, INK);
+    TreeView_SetItemHeight(tasks, px(30));
+    TreeView_SetIndent(tasks, px(16));
+    SetWindowTheme(tasks, L"Explorer", nullptr);
+    SetWindowSubclass(tasks, library_proc, 1, reinterpret_cast<DWORD_PTR>(this));
     LVCOLUMNW col{};
     col.mask = LVCF_TEXT | LVCF_WIDTH;
-    col.pszText = const_cast<wchar_t *>(L"Task library");
-    col.cx = px(195);
-    ListView_InsertColumn(tasks, 0, &col);
     add = button(L"Add to workflow", ADD);
     manageTools = button(L"Manage tools...", MANAGE_TOOLS);
-    clearFilter = button(L"Show all tasks", CLEAR_FILTER);
+    clearFilter = button(L"Show all tools", CLEAR_FILTER);
     steps = make(WC_LISTVIEWW, L"Pipeline steps by dependency level",
                  WS_TABSTOP | LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS,
                  STEPS, nullptr, WS_EX_CLIENTEDGE);
@@ -2472,12 +2492,11 @@ class Workspace {
     place(resultsList, width - 112, 7, 96, 34);
     place(toolsHeading, 16, 64, 200, 24);
     place(search, 12, 98, left - 24, 32);
-    place(category, 12, 140, left - 24, 240);
     const bool filtering = workflowMode && !getstr(state, "pendingSource").empty();
-    place(clearFilter, 12, 180, left - 24, 30);
+    place(clearFilter, 12, 140, left - 24, 30);
     ShowWindow(clearFilter, filtering ? SW_SHOW : SW_HIDE);
-    place(tasks, 12, filtering ? 216 : 182, left - 24,
-          std::max(100, height - (filtering ? 216 : 182) - (workflowMode ? 166 : 84)));
+    place(tasks, 12, filtering ? 180 : 140, left - 24,
+          std::max(100, height - (filtering ? 180 : 140) - (workflowMode ? 166 : 84)));
     place(addInput, 12, height - 154, left - 24, 32);
     ShowWindow(addInput, workflowMode && !showingHistory ? SW_SHOW : SW_HIDE);
     place(add, 12, height - 114, left - 24, 32);
@@ -2530,7 +2549,8 @@ class Workspace {
     ShowWindow(back, showingHistory ? SW_SHOW : SW_HIDE);
     for (HWND h : {run, review}) ShowWindow(h, showingHistory ? SW_HIDE : SW_SHOW);
     place(status, 12, height - 24, width - 24, 22);
-    ListView_SetColumnWidth(tasks, 0, px(left - 46));
+    if (TreeView_GetItemHeight(tasks) != px(30)) TreeView_SetItemHeight(tasks, px(30));
+    if (static_cast<int>(TreeView_GetIndent(tasks)) != px(16)) TreeView_SetIndent(tasks, px(16));
     layout_fields();
     InvalidateRect(dag, nullptr, FALSE);
     InvalidateRect(window, nullptr, TRUE);
@@ -2565,10 +2585,11 @@ class Workspace {
                 !showingHistory && !closing &&
                 !activeRequest && outgoing.empty();
     for (HWND h :
-         {name, search, category, tasks, add, steps, remove, undo, up, down,
+         {name, search, tasks, steps, remove, undo, up, down,
           modeTools, modeWorkflow, generalSettings, saveCurrent, loadCurrent,
           resetLayout, inputFolder, browseInput, addInput})
       EnableWindow(h, edit);
+    EnableWindow(add, edit && !library_tool(TreeView_GetSelection(tasks)).empty());
     for (HWND h : {zoomOut, zoomReset, zoomIn}) {
       EnableWindow(h, ready && !closing);
       ShowWindow(h, (workflowMode || showingHistory) && !busy ? SW_SHOW : SW_HIDE);
@@ -2603,59 +2624,204 @@ class Workspace {
     reference_enabled();
     setup_enabled();
   }
-  void refresh_tasks(bool categories = false) {
-    rebuilding = true;
-    std::string keepTool;
-    const int previous = ListView_GetNextItem(tasks, -1, LVNI_SELECTED);
-    if (previous >= 0 && static_cast<size_t>(previous) < taskIds.size())
-      keepTool = taskIds[static_cast<size_t>(previous)];
-    // An empty standalone session must not inherit a selected library row
-    // from Workflow mode: clicking that row needs to open its first form.
-    if (!workflowMode)
-      keepTool = getstr(state.get("inspector").get("tool"), "id");
-    if (categories) {
-      SendMessageW(category, CB_RESETCONTENT, 0, 0);
-      SendMessageW(category, CB_ADDSTRING, 0,
-                   reinterpret_cast<LPARAM>(L"All categories"));
-      std::set<std::wstring> cats;
-      for (const auto &entry : catalog.get("tools").object_items())
-        cats.insert(wt(entry.second, "category", "Other"));
-      for (const auto &cat : cats)
-        SendMessageW(category, CB_ADDSTRING, 0,
-                     reinterpret_cast<LPARAM>(cat.c_str()));
-      SendMessageW(category, CB_SETCURSEL, 0, 0);
+  const LibraryRow *library_row(HTREEITEM item) const {
+    if (!item) return nullptr;
+    TVITEMW value{};
+    value.mask = TVIF_PARAM;
+    value.hItem = item;
+    if (!SendMessageW(tasks, TVM_GETITEMW, 0, reinterpret_cast<LPARAM>(&value)) ||
+        value.lParam <= 0 || static_cast<size_t>(value.lParam) > libraryRows.size())
+      return nullptr;
+    return &libraryRows[static_cast<size_t>(value.lParam) - 1];
+  }
+  std::string library_tool(HTREEITEM item) const {
+    const auto *row = library_row(item);
+    return row ? row->toolId : std::string();
+  }
+  std::string library_key(HTREEITEM item) const {
+    const auto *row = library_row(item);
+    return row ? row->key() : std::string();
+  }
+  void library_toggle(HTREEITEM item) {
+    const auto *row = library_row(item);
+    if (!row || !row->toolId.empty()) return;
+    TreeView_SelectItem(tasks, item);
+    TreeView_Expand(tasks, item, TVE_TOGGLE);
+    // Programmatic expansion may omit ITEMEXPANDED after EXPANDEDONCE is set.
+    if (!libraryFiltered)
+      libraryExpanded[row->category] =
+          (TreeView_GetItemState(tasks, item, TVIS_EXPANDED) & TVIS_EXPANDED) != 0;
+  }
+  static LRESULT CALLBACK library_proc(HWND h, UINT message_, WPARAM w, LPARAM l,
+                                       UINT_PTR, DWORD_PTR context) {
+    auto *app = reinterpret_cast<Workspace *>(context);
+    if (message_ == WM_GETDLGCODE) {
+      const auto *key = reinterpret_cast<const MSG *>(l);
+      if (key && key->message == WM_KEYDOWN &&
+          (key->wParam == VK_RETURN || key->wParam == VK_SPACE))
+        return DLGC_WANTMESSAGE;
     }
-    const auto query = lower(control_text(search)),
-               cat = control_text(category);
-    ListView_DeleteAllItems(tasks);
-    taskIds.clear();
+    if (message_ == WM_LBUTTONDOWN || message_ == WM_LBUTTONDBLCLK) {
+      TVHITTESTINFO hit{};
+      hit.pt = {GET_X_LPARAM(l), GET_Y_LPARAM(l)};
+      TreeView_HitTest(h, &hit);
+      const auto *row = app->library_row(hit.hItem);
+      if (row && row->toolId.empty() &&
+          (hit.flags & (TVHT_ONITEM | TVHT_ONITEMBUTTON | TVHT_ONITEMRIGHT))) {
+        SetFocus(h);
+        // The double-click's first down already toggled this category.
+        if (message_ == WM_LBUTTONDOWN) app->library_toggle(hit.hItem);
+        return 0;
+      }
+      if (row && !row->toolId.empty() && message_ == WM_LBUTTONDBLCLK) {
+        app->add_task(hit.hItem);
+        return 0;
+      }
+    }
+    if (message_ == WM_KEYDOWN && (w == VK_RETURN || w == VK_SPACE)) {
+      HTREEITEM item = TreeView_GetSelection(h);
+      const auto *row = app->library_row(item);
+      if (row && row->toolId.empty()) app->library_toggle(item);
+      else if (row && w == VK_RETURN) app->add_task(item);
+      return 0;
+    }
+    if (message_ == WM_NCDESTROY)
+      RemoveWindowSubclass(h, library_proc, 1);
+    return DefSubclassProc(h, message_, w, l);
+  }
+  void refresh_tasks() {
+    LibraryView view{library_key(TreeView_GetSelection(tasks)),
+                     library_key(TreeView_GetFirstVisible(tasks))};
+    if (libraryRendered && !libraryFiltered) {
+      libraryViews[libraryWorkflow] = view;
+      for (HTREEITEM item = TreeView_GetRoot(tasks); item;
+           item = TreeView_GetNextSibling(tasks, item)) {
+        const auto *row = library_row(item);
+        if (row) libraryExpanded[row->category] =
+            (TreeView_GetItemState(tasks, item, TVIS_EXPANDED) & TVIS_EXPANDED) != 0;
+      }
+    }
+    const auto query = lower(control_text(search));
+    const auto source = workflowMode ? getstr(state, "pendingSource") : std::string();
+    const bool filtered = !query.empty() || !source.empty();
+    const bool modeChanged = libraryRendered && libraryWorkflow != workflowMode;
+    if (modeChanged || (libraryFiltered && !filtered))
+      view = libraryViews[workflowMode];
+    const auto inspectorTool = workflowMode ? std::string() :
+        getstr(state.get("inspector").get("tool"), "id");
+    const bool toolChanged = !workflowMode && inspectorTool != libraryInspectorTool;
+    // Loading or clearing a standalone session must not leave a different tool
+    // highlighted. Ordinary option edits preserve category navigation.
+    if (toolChanged) {
+      if (!inspectorTool.empty()) view.selected = "tool:" + inspectorTool;
+      else if (view.selected.rfind("tool:", 0) == 0) view.selected.clear();
+    } else if (view.selected.empty() && !inspectorTool.empty()) {
+      view.selected = "tool:" + inspectorTool;
+    }
     std::set<std::string> compatible;
     if (state.get("compatibleTools").is_array())
       for (const auto &c : state.get("compatibleTools").array_items())
         compatible.insert(text(c));
-    const bool filtered = workflowMode && !getstr(state, "pendingSource").empty();
+    std::vector<LibraryRow> tools;
     for (const auto &entry : catalog.get("tools").object_items()) {
       const auto &t = entry.second;
       std::wstring label = wt(t, "displayName", getstr(t, "name")),
                    categoryName = wt(t, "category", "Other");
+      if (categoryName.empty()) categoryName = L"Other";
       if (!query.empty() &&
-          lower(label + L" " + wt(t, "packId") + L" " + wt(t, "description") + L" " + wt(t, "searchTerms"))
+          lower(label + L" " + categoryName + L" " + wt(t, "packId") + L" " +
+                wt(t, "description") + L" " + wt(t, "searchTerms"))
                   .find(query) == std::wstring::npos)
         continue;
-      if (!cat.empty() && cat != L"All categories" && cat != categoryName)
-        continue;
-      if (filtered && !compatible.count(entry.first))
-        continue;
-      LVITEMW row{};
-      row.mask = LVIF_TEXT;
-      row.iItem = static_cast<int>(taskIds.size());
-      row.pszText = label.data();
-      ListView_InsertItem(tasks, &row);
-      if (entry.first == keepTool)
-        ListView_SetItemState(tasks, row.iItem, LVIS_SELECTED, LVIS_SELECTED);
-      taskIds.push_back(entry.first);
+      if (!source.empty() && !compatible.count(entry.first)) continue;
+      tools.push_back({categoryName, label, entry.first});
     }
-    rebuilding = false;
+    std::sort(tools.begin(), tools.end(), [](const auto &a, const auto &b) {
+      const auto ac = lower(a.category), bc = lower(b.category);
+      if (ac != bc) return ac < bc;
+      if (a.category != b.category) return a.category < b.category;
+      const auto al = lower(a.label), bl = lower(b.label);
+      return al != bl ? al < bl : a.toolId < b.toolId;
+    });
+    std::vector<LibraryRow> rows;
+    std::wstring previousCategory;
+    for (const auto &tool : tools) {
+      if (rows.empty() || previousCategory != tool.category) {
+        rows.push_back({tool.category, tool.category, {}});
+        previousCategory = tool.category;
+      }
+      rows.push_back(tool);
+    }
+    const bool filterChanged = libraryQuery != query || librarySource != source;
+    const bool changed = !libraryRendered || rows != libraryRows || filterChanged;
+    // Model snapshots arrive after each edit. An unchanged catalogue/filter
+    // must not rebuild the tree, lose its viewport, or flash the category text.
+    if (!changed && !modeChanged && !toolChanged) return;
+    const bool wasRebuilding = rebuilding;
+    rebuilding = true;
+    SendMessageW(tasks, WM_SETREDRAW, FALSE, 0);
+    if (changed) {
+      std::map<std::wstring, bool> visibleExpanded;
+      if (libraryFiltered && filtered && !filterChanged)
+        for (HTREEITEM item = TreeView_GetRoot(tasks); item;
+             item = TreeView_GetNextSibling(tasks, item)) {
+          const auto *row = library_row(item);
+          if (row) visibleExpanded[row->category] =
+              (TreeView_GetItemState(tasks, item, TVIS_EXPANDED) & TVIS_EXPANDED) != 0;
+        }
+      TreeView_DeleteAllItems(tasks);
+      libraryRows = std::move(rows);
+      libraryItems.clear();
+      HTREEITEM parent = TVI_ROOT;
+      for (size_t i = 0; i < libraryRows.size(); ++i) {
+        auto &row = libraryRows[i];
+        TVINSERTSTRUCTW insert{};
+        insert.hParent = row.toolId.empty() ? TVI_ROOT : parent;
+        insert.hInsertAfter = TVI_LAST;
+        insert.item.mask = TVIF_TEXT | TVIF_PARAM | TVIF_STATE;
+        insert.item.pszText = row.label.data();
+        insert.item.lParam = static_cast<LPARAM>(i + 1);
+        insert.item.stateMask = TVIS_BOLD;
+        insert.item.state = row.toolId.empty() ? TVIS_BOLD : 0;
+        auto item = reinterpret_cast<HTREEITEM>(SendMessageW(
+            tasks, TVM_INSERTITEMW, 0, reinterpret_cast<LPARAM>(&insert)));
+        libraryItems[row.key()] = item;
+        if (row.toolId.empty()) parent = item;
+      }
+      for (HTREEITEM item = TreeView_GetRoot(tasks); item;
+           item = TreeView_GetNextSibling(tasks, item)) {
+        const auto *row = library_row(item);
+        const auto kept = visibleExpanded.find(row->category);
+        const bool expand = filtered ? (kept == visibleExpanded.end() || kept->second)
+                                     : libraryExpanded[row->category];
+        if (expand) TreeView_Expand(tasks, item, TVE_EXPAND);
+      }
+    }
+    libraryQuery = query;
+    librarySource = source;
+    libraryFiltered = filtered;
+    libraryWorkflow = workflowMode;
+    if (!workflowMode) libraryInspectorTool = inspectorTool;
+    libraryRendered = true;
+    auto chosen = libraryItems.find(view.selected);
+    HTREEITEM selection = chosen == libraryItems.end() ? nullptr : chosen->second;
+    // Preserve a collapsed group rather than opening it just because its old
+    // child was selected in another mode or before searching.
+    if (selection) {
+      HTREEITEM parent = TreeView_GetParent(tasks, selection);
+      if (parent && !(TreeView_GetItemState(tasks, parent, TVIS_EXPANDED) & TVIS_EXPANDED))
+        selection = parent;
+    }
+    if (TreeView_GetSelection(tasks) != selection) TreeView_SelectItem(tasks, selection);
+    const auto first = libraryItems.find(view.first);
+    if (first != libraryItems.end()) {
+      HTREEITEM item = first->second, parent = TreeView_GetParent(tasks, item);
+      if (parent && !(TreeView_GetItemState(tasks, parent, TVIS_EXPANDED) & TVIS_EXPANDED)) item = parent;
+      TreeView_SelectSetFirstVisible(tasks, item);
+    }
+    SendMessageW(tasks, WM_SETREDRAW, TRUE, 0);
+    RedrawWindow(tasks, nullptr, nullptr, RDW_INVALIDATE | RDW_ERASE);
+    rebuilding = wasRebuilding;
   }
   void refresh_steps() {
     rebuilding = true;
@@ -3173,20 +3339,20 @@ class Workspace {
     InvalidateRect(dag, nullptr, FALSE);
     enabled();
   }
-  void add_task(int i = -1) {
-    if (i < 0)
-      i = ListView_GetNextItem(tasks, -1, LVNI_SELECTED);
-    if (i < 0 || static_cast<size_t>(i) >= taskIds.size())
+  void add_task(HTREEITEM item = nullptr) {
+    if (rebuilding || !IsWindowEnabled(tasks)) return;
+    const auto toolId = library_tool(item ? item : TreeView_GetSelection(tasks));
+    if (toolId.empty()) return;
+    if (!workflowMode && toolId == getstr(state.get("inspector").get("tool"), "id"))
       return;
     commit_all();
     if (!workflowMode) {
-      send("workspace/tool", object({{"toolId", taskIds[static_cast<size_t>(i)]}}));
+      send("workspace/tool", object({{"toolId", toolId}}));
       return;
     }
     const auto pendingSource = getstr(state, "pendingSource");
-    Json payload = object({{"toolId", taskIds[static_cast<size_t>(i)]}});
-    if (!pendingSource.empty())
-      payload["fromRef"] = pendingSource;
+    Json payload = object({{"toolId", toolId}});
+    if (!pendingSource.empty()) payload["fromRef"] = pendingSource;
     model("add_tool", payload);
   }
   void add_workflow_input() {
@@ -3397,7 +3563,7 @@ class Workspace {
       if (result.contains("catalog"))
         catalog = result.get("catalog");
       snapshot(result);
-      refresh_tasks(true);
+      refresh_tasks();
       status_text(L"Ready. All computation remains on this computer.");
       if (autoCheck) {
         setupWelcomeChecked = true;
@@ -3417,7 +3583,7 @@ class Workspace {
         pendingCanvasDrop = false;
       }
       if (!getstr(state, "pendingSource").empty())
-        status_text(L"Task library now shows tools compatible with the "
+        status_text(L"Tool library now shows tools compatible with the "
                     L"selected named output.");
       else if (method == "workspace/mode" || method == "workspace/tool")
         status_text(workflowMode
@@ -3495,15 +3661,12 @@ class Workspace {
     }
     if (id == SEARCH && notification == EN_CHANGE) {
       refresh_tasks();
-      return;
-    }
-    if (id == CATEGORY && notification == CBN_SELCHANGE) {
-      refresh_tasks();
+      enabled();
       return;
     }
     // Native edit notifications are not actions. Keep the draft intact while
     // typing; the next explicit operation commits it transactionally.
-    if (id == NAME || id == OUTPUT || id == INPUT_FOLDER || id == SEARCH || id == CATEGORY)
+    if (id == NAME || id == OUTPUT || id == INPUT_FOLDER || id == SEARCH)
       return;
     if (id == GENERAL_SETTINGS) {
       commit_all();
@@ -3851,7 +4014,7 @@ class Workspace {
       if (w == VK_ESCAPE && !busy && !showingHistory &&
           !getstr(state, "pendingSource").empty()) {
         model("select", object({{"nodeId", selected}}));
-        status_text(L"Showing all tasks.");
+        status_text(L"Showing all tools.");
         return 0;
       }
       break;
@@ -3860,31 +4023,26 @@ class Workspace {
       return 0;
     case WM_NOTIFY: {
       auto *n = reinterpret_cast<NMHDR *>(l);
-      if (n->idFrom == TASKS && n->code == LVN_ITEMCHANGED && !rebuilding && !workflowMode) {
-        const auto *item = reinterpret_cast<NMLISTVIEW *>(l);
-        if ((item->uNewState & LVIS_SELECTED) && !(item->uOldState & LVIS_SELECTED) &&
-            item->iItem >= 0 && static_cast<size_t>(item->iItem) < taskIds.size())
-          add_task(item->iItem);
+      if (n->idFrom == TASKS && n->code == TVN_SELCHANGEDW && !rebuilding) {
+        const auto *item = reinterpret_cast<NMTREEVIEWW *>(l);
+        if (libraryFiltered && !library_tool(item->itemNew.hItem).empty())
+          libraryViews[workflowMode].selected = library_key(item->itemNew.hItem);
+        if (!workflowMode) add_task(item->itemNew.hItem);
+        enabled();
         return 0;
       }
-      if (n->idFrom == TASKS && n->code == NM_DBLCLK) {
-        // A refreshed library can receive a double-click before the new row
-        // becomes selected. Activate the actual clicked row, not stale state.
-        const auto *item = reinterpret_cast<NMITEMACTIVATE *>(l);
-        int row = item->iItem;
-        if (row < 0) {
-          LVHITTESTINFO hit{};
-          hit.pt = item->ptAction;
-          row = ListView_SubItemHitTest(tasks, &hit);
-        }
-        if (!rebuilding && row >= 0)
-          add_task(row);
+      if (n->idFrom == TASKS && n->code == TVN_ITEMEXPANDEDW && !rebuilding) {
+        const auto *item = reinterpret_cast<NMTREEVIEWW *>(l);
+        const auto *row = library_row(item->itemNew.hItem);
+        if (row && row->toolId.empty() && !libraryFiltered)
+          libraryExpanded[row->category] = (item->itemNew.state & TVIS_EXPANDED) != 0;
         return 0;
       }
-      if (n->idFrom == TASKS && n->code == LVN_BEGINDRAG && workflowMode) {
-        int i = reinterpret_cast<NMLISTVIEW *>(l)->iItem;
-        if (i >= 0 && static_cast<size_t>(i) < taskIds.size()) {
-          dragTool = taskIds[static_cast<size_t>(i)];
+      if (n->idFrom == TASKS && n->code == TVN_BEGINDRAGW && workflowMode && !rebuilding) {
+        const auto *item = reinterpret_cast<NMTREEVIEWW *>(l);
+        const auto toolId = library_tool(item->itemNew.hItem);
+        if (!toolId.empty()) {
+          dragTool = toolId;
           SetCapture(window);
           status_text(L"Drop on the workflow canvas to add this tool.");
         }
@@ -4290,7 +4448,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE, PWSTR, int) {
       CoUninitialize();
       throw std::runtime_error("Windows could not initialize drawing.");
     }
-    INITCOMMONCONTROLSEX controls{sizeof(controls), ICC_LISTVIEW_CLASSES |
+    INITCOMMONCONTROLSEX controls{sizeof(controls), ICC_LISTVIEW_CLASSES | ICC_TREEVIEW_CLASSES |
                                                         ICC_STANDARD_CLASSES |
                                                         ICC_TAB_CLASSES |
                                                         ICC_PROGRESS_CLASS};

@@ -1,0 +1,190 @@
+{
+  "schema": 1,
+  "recordedAt": "2026-10-07T20:05:12.638487+00:00",
+  "project": "Native Workbench",
+  "version": "0.11.0",
+  "status": "development candidate validated for tester review; not accepted or released",
+  "published": false,
+  "testerAccepted": false,
+  "updaterBuilt": false,
+  "sourceCommit": "acfa060c9a400d82509278b657ee37853c7922b0",
+  "validatorCommit": "3c2d5079355e6a056dcdbe39f25b7b7bead7d670",
+  "pullRequest": "https://github.com/comparativechrono/workbench/pull/6",
+  "candidateRun": 37678010251,
+  "finalVerificationRun": 37678715894,
+  "archives": [
+    {
+      "file": "native-workbench-0.11.0-starter-windows.zip",
+      "bytes": 17044022,
+      "sha256": "e816e2f7cd5efe98af752fbf072fab00344ebaa2b6963795c2fbf4a86b5fa81c"
+    },
+    {
+      "file": "native-workbench-0.11.0-source.zip",
+      "bytes": 46875983,
+      "sha256": "a45ad640f0767bb56458b59ce50d263537e54ebb401a0e809f31a5453adb2f2b"
+    }
+  ],
+  "appSha256": "48b665b8f71f24a9e6480f60f4ae6ba0dc5d0da23db68c5489c393dcefa6ac13",
+  "download": {
+    "url": "https://github.com/comparativechrono/workbench/actions/runs/37678010251/artifacts/11507651323",
+    "artifactId": 11507651323,
+    "expiresAt": "2026-11-06",
+    "kind": "GitHub Actions artifact containing standalone Starter ZIP; GitHub sign-in required"
+  },
+  "sourceChecks": {
+    "platform": "Linux",
+    "passed": 70,
+    "failed": 0,
+    "skipped": 0,
+    "scope": "Run locally and repeated by the candidate build job; source checks are not native Windows execution.",
+    "suites": {
+      "desktop_host": 12,
+      "desktop_modes": 11,
+      "workflow_inputs": 11,
+      "pack_service": 6,
+      "setup_manager": 15,
+      "setup_service": 7,
+      "split_release": 8
+    }
+  },
+  "build": {
+    "compiler": "LLVM-MinGW 20260922 UCRT",
+    "compilerArchiveSha256": "bb7bb7654b33d5aa8712acb837c963b2e0c56352560c76105270a3268c665c21",
+    "strictWarningsPassed": true,
+    "independentLocalDesktopBuildMatchesPackagedHash": true,
+    "nativeWindowsExecutedByBuilder": false
+  },
+  "reports": [
+    {
+      "pathVariant": "ordinary",
+      "stage": "initial-library",
+      "file": "tool-library-0.11.0-ordinary-initial-library-2026-10-07.json",
+      "sha256": "11e63cf96957f0e778b065199ded9c726364eabe2ef86bf908282738ba8000a2",
+      "success": false,
+      "passed": 0,
+      "skips": [],
+      "runId": 37678010251,
+      "platform": "Windows-2022Server-10.0.20348-SP0",
+      "capturesVerified": 1
+    },
+    {
+      "pathVariant": "ordinary",
+      "stage": "workspace",
+      "file": "tool-library-0.11.0-ordinary-workspace-2026-10-07.json",
+      "sha256": "f9ae55647b66a71f0935b8582469e84dd9aa83368d6c7e027b90a896ad3e6744",
+      "success": true,
+      "passed": 32,
+      "skips": [],
+      "runId": 37678010251,
+      "platform": "Windows-2022Server-10.0.20348-SP0",
+      "capturesVerified": 0
+    },
+    {
+      "pathVariant": "ordinary",
+      "stage": "final-library",
+      "file": "tool-library-0.11.0-ordinary-final-library-2026-10-07.json",
+      "sha256": "29f72f575c4e21548fc201f3e6a685de20efa02fe233c4cafc84de18acccb0f1",
+      "success": true,
+      "passed": 6,
+      "skips": [],
+      "runId": 37678715894,
+      "platform": "Windows-2022Server-10.0.20348-SP0",
+      "capturesVerified": 8
+    },
+    {
+      "pathVariant": "spaces",
+      "stage": "initial-library",
+      "file": "tool-library-0.11.0-spaces-initial-library-2026-10-07.json",
+      "sha256": "d667da046b0bf699021ef7711c0ce0b2292834cf1c54b05e5598c202dcee08f8",
+      "success": false,
+      "passed": 0,
+      "skips": [],
+      "runId": 37678010251,
+      "platform": "Windows-2022Server-10.0.20348-SP0",
+      "capturesVerified": 1
+    },
+    {
+      "pathVariant": "spaces",
+      "stage": "workspace",
+      "file": "tool-library-0.11.0-spaces-workspace-2026-10-07.json",
+      "sha256": "d3cf36550b1bed77bdf42704a439f8c183f9f8ce2c7d00852746a46a23fb4b69",
+      "success": true,
+      "passed": 32,
+      "skips": [],
+      "runId": 37678010251,
+      "platform": "Windows-2022Server-10.0.20348-SP0",
+      "capturesVerified": 0
+    },
+    {
+      "pathVariant": "spaces",
+      "stage": "final-library",
+      "file": "tool-library-0.11.0-spaces-final-library-2026-10-07.json",
+      "sha256": "e8ee80c8884be94391b225beb0c471d5c6711038bd67699d57b0de84b92d27d2",
+      "success": true,
+      "passed": 6,
+      "skips": [],
+      "runId": 37678715894,
+      "platform": "Windows-2022Server-10.0.20348-SP0",
+      "capturesVerified": 8
+    }
+  ],
+  "staticAudit": {
+    "file": "tool-library-0.11.0-static-audit-2026-10-07.json",
+    "sha256": "ee1a44e484724254f62ce9505829e9664f481b2507b2da70e1e520a93c13e498",
+    "groupedChecksPassed": 26,
+    "failed": 0,
+    "coreEntries": 72,
+    "exactSourceFiles": 602,
+    "unchangedStarterPackFiles": 143
+  },
+  "failedInitialAttempt": {
+    "runId": 37678010251,
+    "overallRunPassed": false,
+    "failure": "Fresh library categories must start collapsed.",
+    "focusedChecksCompletedPerPath": 0,
+    "existingWorkspaceChecksPassedPerPath": 32,
+    "diagnosis": "Validator converted a nonzero TreeView state to bool without masking TVIS_EXPANDED. The unchanged application returned state 16 (TVIS_BOLD), with expansion bit 32 absent, independently confirmed by item-state reads and initial screenshots in the corrected run.",
+    "correction": "Explicitly mask TVIS_EXPANDED; cross-check state via TVM_GETITEMW; capture raw initial state and screenshots before assertions.",
+    "applicationRebuiltForCorrection": false
+  },
+  "nativeEvidenceArtifacts": [
+    {
+      "runId": 37678010251,
+      "pathVariant": "ordinary",
+      "artifactId": 11508505527,
+      "sha256": "d7d814fa0ec988e76dab8fb993e6b9227f1c8cda8c0d67031921e993e7e31c03"
+    },
+    {
+      "runId": 37678010251,
+      "pathVariant": "spaces",
+      "artifactId": 11508380589,
+      "sha256": "4ccf9793503276d622868ea8dc1479a53e3b7d36d732748691b2b85681689b02"
+    },
+    {
+      "runId": 37678715894,
+      "pathVariant": "ordinary",
+      "artifactId": 11507976693,
+      "sha256": "48996310a819b1affa0c8d03804cae5eb6fc9f8ad57392825dfdcee9add35f12"
+    },
+    {
+      "runId": 37678715894,
+      "pathVariant": "spaces",
+      "artifactId": 11509095498,
+      "sha256": "e77a7e08a7f9ef5b383466e6cbbb424030861ca56e7eee72ca3d5972ed2bc5dd"
+    }
+  ],
+  "review": {
+    "independentSourceReview": true,
+    "independentFinalEvidenceAudit": true,
+    "nativeExpandedCategoryScreenshotReviewed": true,
+    "galaxyReference": "https://training.galaxyproject.org/training-material/topics/introduction/images/galaxy_interface.png"
+  },
+  "limits": [
+    "Windows Server 2022 hosted sessions at 96 DPI; no physical-display flicker, touchpad, high-DPI or multi-monitor acceptance claim.",
+    "Six library groups and 32 workspace groups are separate suites repeated once per installation path, not 76 different test cases.",
+    "Imported new-category pack is a synthetic offline fixture; this change does not rerun production Full/all-32-pack downloads, Ensembl or upgrades.",
+    "No updater or in-place upgrade from published 0.10.1 has been built or validated for 0.11.0.",
+    "No resolution or institutional approval is established for the separate tester-machine bridge/security issue.",
+    "The immutable build/source companions retain their creation-time pending-validation wording; this later record supersedes that status without changing their bytes."
+  ]
+}

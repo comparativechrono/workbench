@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "success": false,
+  "nativeWindowsExecuted": true,
+  "nativeGUILaunched": true,
+  "nativeGUIValidated": false,
+  "checks": [],
+  "skips": [],
+  "captures": [
+    {
+      "path": "library-first-launch-setup.bmp",
+      "width": 920,
+      "height": 720,
+      "sha256": "cf023f8d1f72ee9ef7c21da5168685639b36a7ea90a1d261dfdba866e435a4a9"
+    }
+  ],
+  "startedUtc": "2026-10-07T19:55:48.300026+00:00",
+  "platform": "Windows-2022Server-10.0.20348-SP0",
+  "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+  "sourceCommit": "acfa060c9a400d82509278b657ee37853c7922b0",
+  "assetName": "native-workbench-0.11.0-starter-windows.zip",
+  "assetSha256": "e816e2f7cd5efe98af752fbf072fab00344ebaa2b6963795c2fbf4a86b5fa81c",
+  "gateSha256": "819a0e04373dc73e6a257af8e63464f45a55e829aab39f793bc95a9c3103861f",
+  "treeHelperSha256": "ea68ed4430a67eedd6b7bed56f3b62a8c408367c0cd5f4d4c7c90ff2b3930d5f",
+  "appRoot": "D:\\a\\_temp\\path with spaces\\library\\native-workbench",
+  "limits": [
+    "Actual reported DPI only; finite screenshots are not a physical-display flicker guarantee.",
+    "The existing workspace gate separately verifies compatible port connections and the native 202-record scientific chain."
+  ],
+  "appSha256": "48b665b8f71f24a9e6480f60f4ae6ba0dc5d0da23db68c5489c393dcefa6ac13",
+  "applicationFiles": {
+    "NativeWorkbench.exe": "48b665b8f71f24a9e6480f60f4ae6ba0dc5d0da23db68c5489c393dcefa6ac13",
+    "WorkbenchBridge.exe": "e4b39a0e166d2ca3af5d8699ecfd24d7a3970ba8818e48fee5439b0622c74d03",
+    "workspace\\app_version.py": "65013b9ffa4be2f3544f168338d89123e7d780b2639f581953b6555fc9415cae",
+    "workspace\\catalog.py": "c35ceca347672fd77ea15419dc4869dca4c1819d979d566a5f049b8632608735",
+    "workspace\\core_checks.py": "431598722c8c261683e123b255d008210abedb13e90e68d7bec0e6b1df905d70",
+    "workspace\\cwl_export.py": "18ea65dcb6283da4b060f0d50e3419362d0be3739b8a831092e1c855b8553ecc",
+    "workspace\\dag_routing.py": "eb79a385a6426e8ce9778124620fe48c69e8c6ca3a7a9351b95780c99e869fe4",
+    "workspace\\desktop_host.py": "925448ad0f5f8e710f54003ff9217ae7d95bb9e9cf27ca1615f978fa966dd517",
+    "workspace\\desktop_model.py": "e8bc084508607f97f40b2db802c1b5d420b15cb66e0f9b9b9b77b83064479c86",
+    "workspace\\engine.py": "8275b8058fae82a538bd127634531fc2d1a8f0daf8bd95dc00d8bd1b35553b27",
+    "workspace\\example.py": "fb558de8dc3f49f68550af3e08d768e8a99c5cd9e8d466ca357dcecc3dd699b3",
+    "workspace\\pack_checks.py": "687a775f637ad12e55a04fac6c05292174c457bd551455f0dbffeb15d1f544a1",
+    "workspace\\pack_manager.py": "282b8370cccd6d86d00f6d2a85fe99669eb1d9b9953a9327c65c323a4a780b5d",
+    "workspace\\pack_security.py": "2d1fa4a4267f5cecb0d583c7b43fc59dc8645125c59e3db69c4d6fa307ff6cc0",
+    "workspace\\reference_manager.py": "3df9269e3bd89a822a18c323af36f474887b185cb261399f55409354240d2bd9",
+    "workspace\\reference_provenance.py": "9175cbb21fd983816a1b8b0effdae09ebaa11990fccdc06e4446c13f56ac5971",
+    "workspace\\reference_provider.py": "30f160e22d2f8a89bac4f1d52bf4ec6709a7f331f1bb6000e78707e559fdc816",
+    "workspace\\service.py": "0f907378ed5c046426d713b3cd22d12e92fef2733f54c5af0266510303c6bf91",
+    "workspace\\setup_manager.py": "fb150bd38b8feb0cc9052444faf529d4fa65ed66832d3685bf85b78fc20ed3d4",
+    "workspace\\verify_installation.py": "1e2a11141609f23d4e6b5d771d01ab67199a4839f36f2174bfa2f10b70c0f23d"
+  },
+  "initialCategories": {
+    "Alignment": [
+      "minimap2 — Paired-end alignment (SAM)",
+      "minimap2 — Single-end alignment (SAM)"
+    ],
+    "Alignment processing": [
+      "SAMtools — Alignment flag summary",
+      "SAMtools — Alignment statistics",
+      "SAMtools — Coordinate sort to BAM (SAM/BAM input)",
+      "SAMtools — FASTA lookup index (.fai)",
+      "SAMtools — Fix mate information",
+      "SAMtools — Index a BAM",
+      "SAMtools — Mark duplicates",
+      "SAMtools — Merge aligned lanes",
+      "SAMtools — Name sort to BAM (SAM/BAM input)",
+      "SAMtools — Prepare paired alignments"
+    ],
+    "Reporting": [
+      "Combine statistics reports"
+    ],
+    "Variant calling": [
+      "BCFtools — Calculate genotype likelihoods",
+      "BCFtools — Call from genotype likelihoods",
+      "BCFtools — Call variants from a BAM",
+      "BCFtools — Index a compressed VCF",
+      "BCFtools — Label low-quality calls",
+      "BCFtools — Normalize variants",
+      "BCFtools — Variant statistics"
+    ]
+  },
+  "error": "Fresh library categories must start collapsed.",
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_tool_library_windows.py\", line 300, in main\n    exercise(root, target.parent, report)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_tool_library_windows.py\", line 111, in exercise\n    require(all(not tree.expanded(item) for item in roots), \"Fresh library categories must start collapsed.\")\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_references_windows.py\", line 47, in require\n    raise AssertionError(message)\nAssertionError: Fresh library categories must start collapsed.\n",
+  "completedUtc": "2026-10-07T19:55:49.561340+00:00",
+  "passed": 0
+}
