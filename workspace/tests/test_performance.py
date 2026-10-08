@@ -13,6 +13,7 @@ import subprocess
 import sys
 import tempfile
 import threading
+from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
@@ -309,6 +310,49 @@ class PerformanceTests(unittest.TestCase):
         self.engine.execute(plan, event=event)
         self.assertEqual([step["status"] for step in observed[0]["steps"]], ["running", "not_run"])
         self.assertEqual([step["status"] for step in observed[1]["steps"]], ["success", "running"])
+
+    def test_system_information_works_with_all_socket_audits_denied(self):
+        # A subprocess owns the irreversible audit hook. Even gethostname is
+        # denied, matching the real offline Windows gate that exposed this bug.
+        code = '''
+import json, socket, sys
+from unittest.mock import patch
+sys.path.insert(0, sys.argv[1])
+import performance
+def deny_socket(event, args):
+    if event.startswith("socket."):
+        raise PermissionError("offline fixture denies socket activity")
+sys.addaudithook(deny_socket)
+try:
+    socket.gethostname()
+except PermissionError:
+    pass
+else:
+    raise AssertionError("fixture must deny hostname lookup")
+with patch("platform.uname", side_effect=AssertionError("platform.uname consults host identity")):
+    report = performance.system_information()
+assert report["os"]["name"] and report["architecture"], report
+assert report["os"]["release"] and report["os"]["version"], report
+assert not {"hostname", "nodename", "username", "environment"}.intersection(report)
+print(json.dumps(report))
+'''
+        result = subprocess.run([sys.executable, "-I", "-c", code, str(Path(__file__).resolve().parents[1])],
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, timeout=20)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertTrue(json.loads(result.stdout)["architecture"])
+
+    def test_windows_kernel_identity_uses_numeric_version_and_native_architecture(self):
+        import ctypes
+        def native_information(pointer):
+            information = pointer._obj
+            self.assertEqual(ctypes.sizeof(information), 48 if ctypes.sizeof(ctypes.c_void_p) == 8 else 36)
+            information.architecture = 12  # Native ARM64, independent of interpreter bitness.
+        library = SimpleNamespace(GetNativeSystemInfo=native_information)
+        with patch.object(performance.os, "name", "nt"), \
+             patch.object(performance.sys, "getwindowsversion", return_value=SimpleNamespace(major=10, minor=0, build=20348), create=True), \
+             patch.object(ctypes, "WinDLL", return_value=library, create=True):
+            identity = performance.safe_system_identity()
+        self.assertEqual(identity, {"os": {"name": "Windows", "release": "10.0", "version": "10.0.20348"}, "architecture": "ARM64"})
 
 
 if __name__ == "__main__":

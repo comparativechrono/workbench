@@ -14,19 +14,20 @@ import itertools
 import json
 import os
 from pathlib import Path
-import platform
 import re
+import secrets
 import stat
 import sys
-import uuid
 import zipfile
 
 try:
     from .app_version import APP_VERSION, PACK_API
     from .pack_manager import filesystem_path, ordinary_windows_path
+    from .performance import safe_system_identity
 except ImportError:
     from app_version import APP_VERSION, PACK_API
     from pack_manager import filesystem_path, ordinary_windows_path
+    from performance import safe_system_identity
 
 MAX_RECORDS = 256
 MAX_CHECKS = 4096
@@ -131,8 +132,9 @@ def _memory_bytes():
 
 
 def _system():
-    # Never use platform.node(), platform.platform(), environment or processor
-    # strings. Linux release strings can include locally chosen suffixes.
+    # platform.machine()/system() also collect the hostname through uname() on
+    # Windows. Query the native identity helper instead; keep only the allowlisted
+    # architecture, not POSIX version/release strings with locally chosen text.
     family = {'win32': 'Windows', 'linux': 'Linux', 'darwin': 'macOS'}.get(sys.platform, 'other')
     version = None
     if sys.platform == 'win32':
@@ -141,9 +143,10 @@ def _system():
             version = f'{current.major}.{current.minor}.{current.build}'
         except (AttributeError, OSError):
             pass
+    machine = _mapping(safe_system_identity()).get('architecture')
     architecture = {'amd64': 'x86-64', 'x86_64': 'x86-64', 'x86': 'x86',
                     'i386': 'x86', 'i686': 'x86', 'arm64': 'arm64', 'aarch64': 'arm64'}.get(
-                        platform.machine().lower(), 'other')
+                        machine.lower() if type(machine) is str else '', 'other')
     return {'os': family, 'version': _matched(version, SYSTEM_VERSION),
             'architecture': architecture,
             'logicalCpuCount': _integer(os.cpu_count(), 65536, 1),
@@ -353,7 +356,7 @@ def export_report(report, destination_parent):
             archive.writestr(info, value)
     payload = memory.getvalue()
     with _directory(destination_parent) as (parent, directory_fd):
-        name = 'native-workbench-diagnostics-' + uuid.uuid4().hex + '.zip'
+        name = 'native-workbench-diagnostics-' + secrets.token_hex(16) + '.zip'
         location = parent / name
         flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, 'O_BINARY', 0) | getattr(os, 'O_NOFOLLOW', 0)
         kwargs = {'dir_fd': directory_fd} if directory_fd is not None else {}

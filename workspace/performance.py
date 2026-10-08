@@ -10,7 +10,7 @@ from contextlib import contextmanager
 import copy
 import math
 import os
-import platform
+import sys
 import time
 
 try:
@@ -51,8 +51,58 @@ def measure(target, name, clock=None):
         target[name]["elapsedSeconds"] = elapsed(start, clock)
 
 
+def _native_architecture():
+    """Ask the kernel directly; platform.uname() also looks up a hostname."""
+    try:
+        if os.name != "nt":
+            return os.uname().machine
+        import ctypes
+        class ProcessorInfo(ctypes.Structure):
+            _fields_ = [("architecture", ctypes.c_uint16), ("reserved", ctypes.c_uint16)]
+        class ProcessorUnion(ctypes.Union):
+            _anonymous_ = ("processor",)
+            _fields_ = [("oemId", ctypes.c_uint32), ("processor", ProcessorInfo)]
+        class SystemInfo(ctypes.Structure):
+            _anonymous_ = ("processor",)
+            _fields_ = [("processor", ProcessorUnion), ("pageSize", ctypes.c_uint32),
+                        ("minimumAddress", ctypes.c_void_p), ("maximumAddress", ctypes.c_void_p),
+                        ("activeProcessorMask", ctypes.c_size_t), ("processorCount", ctypes.c_uint32),
+                        ("processorType", ctypes.c_uint32), ("allocationGranularity", ctypes.c_uint32),
+                        ("processorLevel", ctypes.c_uint16), ("processorRevision", ctypes.c_uint16)]
+        information = SystemInfo()
+        # The API has no failure return. An unmodified/unknown architecture is
+        # unavailable, rather than accidentally reporting the zero value x86.
+        information.architecture = 0xffff
+        function = ctypes.WinDLL("kernel32", use_last_error=True).GetNativeSystemInfo
+        function.argtypes = [ctypes.POINTER(SystemInfo)]
+        function.restype = None
+        function(ctypes.byref(information))
+        return {0: "x86", 5: "ARM", 6: "IA64", 9: "AMD64", 12: "ARM64"}.get(information.architecture)
+    except (AttributeError, OSError, ValueError):
+        return None
+
+
+def safe_system_identity():
+    """Kernel version and architecture without socket, host or environment calls.
+
+    Windows version numbers are kernel API values, not inferred marketing names.
+    POSIX uname's nodename is deliberately never serialized or returned.
+    """
+    identity = {"name": "Windows" if os.name == "nt" else sys.platform, "release": None, "version": None}
+    try:
+        if os.name == "nt":
+            version = sys.getwindowsversion()
+            identity.update(release=f"{version.major}.{version.minor}", version=f"{version.major}.{version.minor}.{version.build}")
+        else:
+            version = os.uname()
+            identity.update(name=version.sysname, release=version.release, version=version.version)
+    except (AttributeError, OSError, ValueError):
+        pass
+    return {"os": identity, "architecture": _native_architecture()}
+
+
 def system_information():
-    """General hardware/OS facts only: deliberately no host, user or paths."""
+    """General local hardware/OS facts; no socket, host, user or path lookup."""
     memory = None
     try:
         if os.name == "nt":
@@ -76,10 +126,11 @@ def system_information():
     except (AttributeError, OSError, ValueError):
         pass
     count = os.cpu_count()
-    return {"os": {"name": platform.system(), "release": platform.release(), "version": platform.version()},
-            "architecture": platform.machine(), "logicalCpuCount": count,
+    identity = safe_system_identity()
+    return {**identity, "logicalCpuCount": count,
             "physicalMemoryBytes": memory,
-            "unavailable": [name for name, value in (("logicalCpuCount", count), ("physicalMemoryBytes", memory)) if value is None]}
+            "unavailable": [name for name, value in (("logicalCpuCount", count), ("physicalMemoryBytes", memory),
+                ("architecture", identity["architecture"]), ("os.release", identity["os"]["release"]), ("os.version", identity["os"]["version"])) if value is None]}
 
 
 def unavailable_metrics(reason="runner_did_not_report_resource_metrics"):

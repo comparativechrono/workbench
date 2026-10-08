@@ -68,7 +68,10 @@ void measured(const bw::ProcessPerformance& value, DWORD processes, bool memory 
     require(value.launched && value.wall_available, "Missing command wall time");
     require(value.accounting_available && value.memory_available, "Job accounting query was unavailable");
     require(!value.accounting_error && !value.memory_error, "Successful accounting retained a query error");
-    require(value.processes_total == processes, "Job accounting has incorrect process-tree scope");
+    if (value.processes_total != processes)
+        throw std::runtime_error("Job accounting has incorrect process-tree scope: expected " +
+            std::to_string(processes) + ", observed " + std::to_string(value.processes_total) +
+            "; snapshot=" + bw::process_performance_json(value));
     require(value.user_ticks >= 0 && value.kernel_ticks >= 0, "Negative Windows CPU accounting");
     if (memory) {
         require(value.wall_ms >= 100, "Timed work has an inconsistent command duration");
@@ -81,20 +84,46 @@ struct CommaDecimal : std::numpunct<char> { char do_decimal_point() const overri
 
 int wmain(int argc, wchar_t** argv) {
     if (argc >= 3 && std::wstring(argv[1]) == L"--child") return child(argc, argv);
+    std::wstring folder, active_name;
+    std::vector<std::string> observations;
+    bw::ProcessPerformance active_performance;
+    bool has_active = false;
+    auto observation = [](const std::wstring& name, const bw::ProcessPerformance& value) {
+        return "{\"check\":" + bw::json_string(name) + ",\"performance\":" + bw::process_performance_json(value) + "}";
+    };
+    auto report_json = [&](const std::wstring& error = std::wstring{}) {
+        std::string report = "{\"schema\":1,\"native_windows_execution\":true,\"passed\":" +
+            std::to_string(observations.size()) + ",\"failed\":" + (error.empty() ? "0" : "1") +
+            ",\"skipped\":0,\"error\":" + (error.empty() ? "null" : bw::json_string(error)) + ",\"observations\":[";
+        for (size_t i = 0; i < observations.size(); ++i) { if (i) report += ','; report += observations[i]; }
+        report += "],\"failed_observation\":" + (error.empty() || !has_active ? "null" : observation(active_name, active_performance)) + "}\n";
+        return report;
+    };
+    auto write_report = [&](const std::string& report) {
+        if (!folder.empty()) bw::write_file_new(bw::join(folder, L"performance-validation.json"), report);
+        if (argc == 4 && std::wstring(argv[2]) == L"--report") bw::write_file_new(argv[3], report);
+    };
     try {
         require(argc == 2 || (argc == 4 && std::wstring(argv[2]) == L"--report"),
             "Usage: WindowsPerformanceChecks.exe OUTPUT_PARENT [--report NEW_REPORT_FILE]");
-        const auto binary = self(), folder = bw::unique_directory(argv[1], L"performance-native-checks");
+        const auto binary = self();
+        folder = bw::unique_directory(argv[1], L"performance-native-checks");
         bw::Cancel cancel{false};
-        std::vector<std::string> observations;
         auto save = [&](const wchar_t* name, const bw::ProcessPerformance& value) {
-            observations.push_back("{\"check\":" + bw::json_string(name) + ",\"performance\":" + bw::process_performance_json(value) + "}");
+            observations.push_back(observation(name, value));
+            has_active = false;
         };
         auto command = [&](const wchar_t* name, const std::wstring& mode, const std::wstring& code = L"0",
                 const bw::Log& log = bw::Log{}, DWORD timeout = 10000, bw::ProcessPerformance* performance = nullptr) {
             const auto base = bw::join(folder, name);
-            return bw::execute(binary, {L"--child", mode, code}, base + L".stdout", base + L".stderr",
-                cancel, log, timeout, folder, performance);
+            active_name = name; active_performance = {}; has_active = true;
+            auto* measured = performance ? performance : &active_performance;
+            try {
+                const auto result = bw::execute(binary, {L"--child", mode, code}, base + L".stdout", base + L".stderr",
+                    cancel, log, timeout, folder, measured);
+                active_performance = *measured;
+                return result;
+            } catch (...) { active_performance = *measured; throw; }
         };
         auto result = command(L"exec-success", L"work");
         require(!result.exit_code && !result.cancelled && !result.performance.pipeline, "Exec outcome changed");
@@ -108,9 +137,15 @@ int wmain(int argc, wchar_t** argv) {
                 const std::wstring& code = L"0", const bw::Log& log = bw::Log{}, DWORD timeout = 10000,
                 bw::ProcessPerformance* performance = nullptr) {
             const auto base = bw::join(folder, name);
-            return bw::execute_pipeline(binary, {L"--child", producer, code}, binary, {L"--child", sink},
-                base + L".stdout", base + L".producer.stderr", base + L".sink.stderr",
-                cancel, log, timeout, folder, performance);
+            active_name = name; active_performance = {}; has_active = true;
+            auto* measured = performance ? performance : &active_performance;
+            try {
+                const auto result = bw::execute_pipeline(binary, {L"--child", producer, code}, binary, {L"--child", sink},
+                    base + L".stdout", base + L".producer.stderr", base + L".sink.stderr",
+                    cancel, log, timeout, folder, measured);
+                active_performance = *measured;
+                return result;
+            } catch (...) { active_performance = *measured; throw; }
         };
         auto piped = pipe(L"pipe-success", L"work", L"sink");
         require(!piped.producer_exit_code && !piped.sink_exit_code && !piped.cancelled && piped.performance.pipeline,
@@ -174,6 +209,7 @@ int wmain(int argc, wchar_t** argv) {
         } catch (const std::exception& error) {
             threw = std::string(error.what()).find("Cannot start pipeline executable") != std::string::npos;
         }
+        active_name = L"pipeline-start-exception"; active_performance = interrupted; has_active = true;
         require(threw && interrupted.launched && interrupted.accounting_available && interrupted.memory_available &&
             interrupted.processes_total == 1 && interrupted.processes_active == 1,
             "Partial-start exception discarded the live sink's accounting");
@@ -207,6 +243,7 @@ int wmain(int argc, wchar_t** argv) {
 
         bw::ProcessPerformance unavailable; unavailable.launched = true;
         { bw::JobPerformanceCapture invalid(INVALID_HANDLE_VALUE, unavailable); invalid.capture(); }
+        active_name = L"unavailable-query"; active_performance = unavailable; has_active = true;
         require(!unavailable.accounting_available && !unavailable.memory_available &&
             unavailable.accounting_error == ERROR_INVALID_HANDLE && unavailable.memory_error == ERROR_INVALID_HANDLE,
             "Unavailable counters were silently reported as zero");
@@ -221,18 +258,16 @@ int wmain(int argc, wchar_t** argv) {
         std::locale::global(std::locale(previous, new CommaDecimal));
         const auto locale_json = bw::process_performance_json(decimal);
         std::locale::global(previous);
+        active_name = L"locale-independent-json"; active_performance = decimal; has_active = true;
         require(locale_json.find("\"user_cpu_seconds\":0.1234567") != std::string::npos, "Locale corrupted JSON CPU seconds");
         save(L"locale-independent-json", decimal);
 
-        std::string report = "{\"schema\":1,\"native_windows_execution\":true,\"passed\":" +
-            std::to_string(observations.size()) + ",\"failed\":0,\"skipped\":0,\"observations\":[";
-        for (size_t i = 0; i < observations.size(); ++i) { if (i) report += ','; report += observations[i]; }
-        report += "]}\n";
-        bw::write_file_new(bw::join(folder, L"performance-validation.json"), report);
-        if (argc == 4) bw::write_file_new(argv[3], report);
+        write_report(report_json());
         std::wprintf(L"PASS: %zu native Windows performance checks. Results: %ls\n", observations.size(), folder.c_str());
         return 0;
     } catch (const std::exception& error) {
+        try { write_report(report_json(bw::utf16(error.what()))); }
+        catch (const std::exception& report_error) { std::fprintf(stderr, "Cannot retain failed report: %s\n", report_error.what()); }
         std::fprintf(stderr, "FAIL: %s\n", error.what()); return 1;
     }
 }
