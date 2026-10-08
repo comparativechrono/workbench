@@ -264,7 +264,18 @@ class RecoveryExecutionTests(unittest.TestCase):
         self.assertEqual(marker.read_bytes(), b'keep')
         folders = [Path(request['temporary_folder']) for request in self.backend.requests]
         self.assertEqual(len(set(folders)), 3)
-        self.assertTrue(all(path.is_relative_to(scratch / ('native-workbench-' + plan['id'])) for path in folders))
+        # Windows TEMP can spell the same directory with an 8.3 name while
+        # production canonicalizes it. Verify filesystem identity, not the
+        # lexical spelling of an otherwise identical owned parent.
+        owned = scratch / ('native-workbench-' + plan['id'])
+        self.assertEqual({path.name for path in folders}, {'S1', 'S2', 'S3'})
+        physical_identity = all(engine._io_path(path.parent).samefile(engine._io_path(owned)) for path in folders)
+        lexical_containment = all(path.is_relative_to(owned) for path in folders)
+        if not lexical_containment:
+            print(json.dumps({'testObservation': 'temporary folder spelling differs from the same filesystem directory',
+                              'lexicalContainment': lexical_containment, 'physicalParentIdentity': physical_identity,
+                              'stepFolderNames': sorted(path.name for path in folders)}), flush=True)
+        self.assertTrue(physical_identity)
 
     def test_invalid_or_unavailable_resource_settings_fail_before_new_result(self):
         for policy in ({'cpuBudget': True}, {'cpuBudget': 5}, {'cpuBudget': 0}, {'maxParallel': 33},

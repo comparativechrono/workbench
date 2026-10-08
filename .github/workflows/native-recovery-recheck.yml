@@ -35,6 +35,7 @@ jobs:
       FROZEN_DESKTOP_SHA256: 4017b774c66824ec55151b7ac788c8788784462a6f9212d4280ba6a32ec1c3e8
       FROZEN_BRIDGE_SHA256: 086792e16bebdc535a3f30f9f0626379253a66f910de0b2bd9d19e6e289e330a
       CASE_FOLDER: ${{ matrix.folder }}
+      SOURCE_ONLY_RECHECK: ${{ contains(github.event.head_commit.message, '[source-only recheck]') }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -65,6 +66,8 @@ jobs:
             starterSha256 = $env:FROZEN_STARTER_SHA256
             changedPaths = $changed
             archiveRebuilt = $false
+            nativeRecoveryGateRequested = $env:SOURCE_ONLY_RECHECK -ne 'true'
+            skippedNativeGateIsNotPass = $true
             reusedBuildIsNotNewPass = $true
             scope = 'Corrected recovery/resource/project validator and isolated Windows source suites only. Process accounting, readiness, batch/index, library, workspace, independent pack and delayed-host transport observations remain separate records from the original frozen build run.'
           } | ConvertTo-Json -Depth 8 | Set-Content -Encoding utf8 (Join-Path $evidence 'RECHECK-PROVENANCE.json')
@@ -95,7 +98,7 @@ jobs:
             if ((Get-FileHash (Join-Path $app 'WorkbenchBridge.exe') -Algorithm SHA256).Hash -ne $env:FROZEN_BRIDGE_SHA256) { throw 'Frozen bridge executable SHA-256 mismatch.' }
           }
       - name: Recheck exact-package recovery, resource admission, offline projects and native interfaces
-        if: always() && !cancelled() && steps.prepare.outcome == 'success'
+        if: always() && !cancelled() && steps.prepare.outcome == 'success' && !contains(github.event.head_commit.message, '[source-only recheck]')
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
@@ -109,18 +112,13 @@ jobs:
         run: |
           $ErrorActionPreference = 'Stop'
           $app = Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'recovery-recheck/native-workbench'
-          & (Join-Path $app 'runtime/python/python.exe') -I workspace/tests/test_recovery_execution.py
-          if ($LASTEXITCODE -ne 0) { throw 'Windows test_recovery_execution source regression failed.' }
-          & (Join-Path $app 'runtime/python/python.exe') -I workspace/tests/test_project_manager.py
-          if ($LASTEXITCODE -ne 0) { throw 'Windows test_project_manager source regression failed.' }
-          & (Join-Path $app 'runtime/python/python.exe') -I workspace/tests/test_recovery_service.py
-          if ($LASTEXITCODE -ne 0) { throw 'Windows test_recovery_service source regression failed.' }
-          & (Join-Path $app 'runtime/python/python.exe') -I workspace/tests/test_run_queue.py
-          if ($LASTEXITCODE -ne 0) { throw 'Windows test_run_queue source regression failed.' }
-          & (Join-Path $app 'runtime/python/python.exe') -I workspace/tests/test_reference_indexes.py
-          if ($LASTEXITCODE -ne 0) { throw 'Windows test_reference_indexes source regression failed.' }
-          & (Join-Path $app 'runtime/python/python.exe') -I workspace/tests/test_diagnostics.py
-          if ($LASTEXITCODE -ne 0) { throw 'Windows test_diagnostics source regression failed.' }
+          $failed = @()
+          foreach ($suite in @('test_recovery_execution', 'test_project_manager', 'test_recovery_service', 'test_run_queue', 'test_reference_indexes', 'test_diagnostics')) {
+            Write-Output "Independent Windows source suite: $suite"
+            & (Join-Path $app 'runtime/python/python.exe') -I "workspace/tests/$suite.py"
+            if ($LASTEXITCODE -ne 0) { $failed += $suite }
+          }
+          if ($failed.Count -ne 0) { throw ('Windows source regressions failed: ' + ($failed -join ', ')) }
       - name: Retain original-archive provenance and every successful or failed observation
         if: always()
         uses: actions/upload-artifact@v4
