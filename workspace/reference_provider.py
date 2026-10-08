@@ -123,19 +123,38 @@ class _ArchiveRedirect(urllib.request.HTTPRedirectHandler):
         return super().redirect_request(req, fp, code, msg, headers, newurl)
 
 
+def range_headers(headers, method='GET'):
+    """Accept only the deliberately narrow resumable-download header contract."""
+    if headers is None or headers == {}:
+        return {}
+    if (not isinstance(headers, dict) or set(headers) != {'Range', 'If-Range'} or method != 'GET'
+            or not isinstance(headers['Range'], str)
+            or not re.fullmatch(r'bytes=[0-9]{1,15}-', headers['Range'])
+            or not isinstance(headers['If-Range'], str)
+            or len(headers['If-Range']) > 500
+            or any(ord(c) < 32 or ord(c) == 127 for c in headers['If-Range'])):
+        raise ReferenceProviderError('Invalid reference resume headers')
+    validator = headers['If-Range']
+    if not (re.fullmatch(r'"[^"\\]+"', validator) or
+            re.fullmatch(r'[A-Z][a-z]{2}, [0-9]{2} [A-Z][a-z]{2} [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} GMT', validator)):
+        raise ReferenceProviderError('Reference resume requires a strong ETag or HTTP modification date')
+    return dict(headers)
+
+
 class RestrictedEnsemblHTTPS:
     """Standard-library HTTPS transport, preserving OS proxy/TLS validation."""
     def __init__(self, timeout=20):
         self.timeout = timeout
 
-    def open_url(self, url, method='GET', cancel=None):
+    def open_url(self, url, method='GET', cancel=None, headers=None):
         object_path = validate_url(url)
         if method not in ('GET', 'HEAD'):
             raise ReferenceProviderError('Reference transport only permits GET and HEAD')
         cancelled(cancel)
+        extra = range_headers(headers, method)
         request = urllib.request.Request(url, method=method, headers={
             'User-Agent': 'NativeWorkbench-reference-discovery/1',
-            'Accept-Encoding': 'identity',
+            'Accept-Encoding': 'identity', **extra,
         })
         opener = urllib.request.build_opener(_ArchiveRedirect(url, cancel))
         try:
@@ -150,7 +169,7 @@ class RestrictedEnsemblHTTPS:
             cancelled(cancel)
             if validate_url(response.geturl()) != object_path:
                 raise ReferenceProviderError('Ensembl response changed the pinned archive object')
-            if response.getcode() != 200:
+            if response.getcode() not in ((200, 206) if extra else (200,)):
                 raise ReferenceHTTPError(response.getcode(), url)
             if response.headers.get('Content-Encoding', 'identity').lower() not in ('', 'identity'):
                 raise ReferenceProviderError('Unexpected HTTP content encoding for an Ensembl reference')
@@ -197,8 +216,8 @@ def _read_metadata(opener, url, cancel, max_bytes):
         return b''.join(chunks)
 
 
-def open_url(url, method='GET', cancel=None):
-    return RestrictedEnsemblHTTPS().open_url(url, method=method, cancel=cancel)
+def open_url(url, method='GET', cancel=None, headers=None):
+    return RestrictedEnsemblHTTPS().open_url(url, method=method, cancel=cancel, headers=headers)
 
 
 def read_metadata(url, cancel=None, max_bytes=MAX_METADATA_BYTES):
@@ -253,9 +272,10 @@ class EnsemblArchiveProvider:
                 'max_release': MAX_RELEASE, 'notice': NOTICE,
                 'data_notice_url': DATA_NOTICE_URL, 'transition_url': TRANSITION_URL}
 
-    def open_url(self, url, method='GET', cancel=None):
+    def open_url(self, url, method='GET', cancel=None, headers=None):
         validate_url(url)
-        return self.transport.open_url(url, method=method, cancel=cancel)
+        extra = range_headers(headers, method)
+        return self.transport.open_url(url, method=method, cancel=cancel, **({'headers': extra} if extra else {}))
 
     def read_metadata(self, url, cancel=None, max_bytes=MAX_METADATA_BYTES):
         validate_url(url)

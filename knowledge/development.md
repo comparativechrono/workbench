@@ -9,7 +9,18 @@ Commands below run from the repository root unless stated otherwise.
 Paths in angle brackets are placeholders to replace, not files supplied by Git.
 Read [architecture](architecture.md) before changing an unfamiliar layer.
 
-**Current development:** unpublished 0.14.0 on `feature/recovery-projects`
+**Current development:** unpublished 0.15.0 on `feature/reference-management`
+extends the frozen 0.14.0 review candidate. The
+[reference-management guide](reference-management.md) defines resumable transfer,
+local import, copy/verify relocation and bounded NCBI RefSeq lookup contracts.
+The exact candidate workflow is
+[`native-reference-management-candidate.yml`](../.github/workflows/native-reference-management-candidate.yml).
+It retains the immutable build inputs and adds live Ensembl/NCBI and focused
+reference management gates alongside affected native regression gates. Runtime
+modules `reference_transfer.py`, `reference_library.py` and `reference_ncbi.py`
+must be included by `package_split.py`. No updater or release is implied.
+
+**Previous tranche:** unpublished 0.14.0 on `feature/recovery-projects`
 extends the unmerged 0.13.0 candidate. The [recovery/resources/projects guide](recovery-projects.md)
 defines its contracts. The exact candidate workflow is
 [`native-recovery-candidate.yml`](../.github/workflows/native-recovery-candidate.yml).

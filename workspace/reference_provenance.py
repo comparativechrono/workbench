@@ -55,25 +55,47 @@ def methods_text(references, paths, *, verified):
         accession = record.get("assembly_accession") or (species.get("assembly_accession", "") if isinstance(species, dict) else "")
         item = record.get("file", {})
         provider = record.get("provider_name") or ("Ensembl archive" if record.get("provider") == "ensembl-archive" else record.get("provider", "Reference provider"))
-        identity = f"{provider}, release {record.get('release', '')}; {name}; assembly {assembly}"
+        imported = record.get('origin') == 'local-import' or record.get('provider') == 'local-import'
+        if imported:
+            identity = f"Local reference import; user-declared species {name or 'unspecified'}; assembly {assembly or 'unspecified'}"
+            if record.get('release'):
+                identity += '; user-declared release ' + str(record['release'])
+        elif record.get('provider') == 'ncbi-refseq':
+            identity = f"{provider}; {name}; assembly {assembly}"
+        else:
+            identity = f"{provider}, release {record.get('release', '')}; {name}; assembly {assembly}"
         if accession:
-            identity += f" ({accession})"
+            identity += f" (accession {accession})" if record.get('provider') == 'ncbi-refseq' else f" ({accession})"
         filename = item.get("filename") or Path(path).name
         line = f"Reference data: {item.get('label', item.get('kind', 'local reference'))}: {identity}; file {filename}."
         detail = item.get("detail")
         if isinstance(detail, str) and detail:
             line += " " + detail.rstrip(".") + "."
-        retrieved = record.get("downloaded_at") or record.get("retrieved_at")
+        if record.get('provider') == 'ncbi-refseq':
+            annotation = record.get('annotation') or item.get('annotation') or (species.get('annotation') if isinstance(species, dict) else None)
+            if isinstance(annotation, dict):
+                parts = [str(annotation[key]) for key in ('name',) if annotation.get(key)]
+                if annotation.get('provider'):
+                    parts.append('provider ' + str(annotation['provider']))
+                if annotation.get('release_date'):
+                    parts.append('release date ' + str(annotation['release_date']))
+                if parts:
+                    line += ' Observed annotation: ' + '; '.join(parts) + '.'
+            line += ' NCBI annotation metadata and files are a retrieved snapshot; annotations may change without a new assembly accession.'
+        imported_at = record.get('imported_at') if imported else None
+        if imported_at:
+            line += ' Imported locally ' + str(imported_at).split('T', 1)[0] + '. Descriptive metadata was supplied by the user, not authenticated by a reference provider.'
+        retrieved = None if imported else record.get("downloaded_at") or record.get("retrieved_at")
         if retrieved:
             line += " Retrieved " + str(retrieved).split("T", 1)[0] + "."
-        source = item.get("source_url") or item.get("url")
+        source = record.get('source') if imported else item.get("source_url") or item.get("url")
         if source:
-            line += " Source: " + source
+            line += (' User-declared source: ' if imported else ' Source: ') + source
         lines.append(line)
     if not lines:
         return ""
     if verified:
-        lines.append("Reference input SHA-256 hashes were checked against local download receipts when this run was prepared. Exact identities and download evidence are retained in reference-provenance.json and plan.json.")
+        lines.append("Reference input SHA-256 hashes were checked against local reference receipts when this run was prepared. Exact identities and retrieval or import evidence are retained in reference-provenance.json and plan.json.")
     else:
-        lines.append("Reference identities above come from local download receipts. Input SHA-256 hashes will be checked against those receipts before execution.")
+        lines.append("Reference identities above come from local reference receipts. Input SHA-256 hashes will be checked against those receipts before execution.")
     return "\n\n".join(lines)

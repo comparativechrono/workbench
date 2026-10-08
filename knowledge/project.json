@@ -122,7 +122,11 @@
     "recovery_projects_rechecks": "evidence/recovery-projects-0.14.0-rechecks-2026-10-08.json",
     "recovery_projects_final_source": "evidence/recovery-projects-0.14.0-final-source-2026-10-08.json",
     "recovery_projects_final_windows": "evidence/recovery-projects-0.14.0-final-windows-2026-10-08.json",
-    "recovery_projects_final_archive_audit": "evidence/recovery-projects-0.14.0-final-archive-audit-2026-10-08.json"
+    "recovery_projects_final_archive_audit": "evidence/recovery-projects-0.14.0-final-archive-audit-2026-10-08.json",
+    "reference_management": "reference-management.md",
+    "reference_management_handover": "reference-management-0.15.0-handover.md",
+    "reference_management_local_source": "evidence/reference-management-0.15.0-local-source-2026-10-08.json",
+    "reference_management_ncbi_linux": "evidence/reference-management-0.15.0-ncbi-linux-2026-10-08.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -1093,66 +1097,37 @@
   },
   "active_development": {
     "recorded_on": "2026-10-08",
-    "version": "0.14.0",
-    "branch": "feature/recovery-projects",
-    "starting_commit": "9f5cd4c88634b4cab04cec66b9e43e93e1db0e17",
-    "status": "implementation and recorded hosted validation complete; ready for tester review; unpublished",
-    "authorization": "Owner requested the final accepted implementation tranche. Development only; no release request.",
-    "milestone": 3,
+    "version": "0.15.0",
+    "branch": "feature/reference-management",
+    "starting_commit": "38917349449ce56a45d3e0f4f41b7d2a38621c6d",
+    "status": "implementation and local source checks complete; exact Windows validation pending; unpublished",
+    "authorization": "Owner requested remaining accepted groups one at a time. This first group is reference management; publication is not authorized by the earlier unmet broader-completion condition.",
     "scope": [
-      "verified completed-step restart",
-      "declared CPU admission budgets for parallel DAG execution",
-      "portable project bundles"
+      "resumable reference downloads",
+      "reviewed local reference imports",
+      "verified library relocation retaining original paths",
+      "NCBI RefSeq versioned assembly lookup"
     ],
-    "handover": "recovery-projects-0.14.0-handover.md",
-    "feature_guide": "recovery-projects.md",
+    "feature_guide": "reference-management.md",
+    "handover": "reference-management-0.15.0-handover.md",
     "published_baseline": "0.11.0",
     "published_assets_changed": false,
     "release_authorized": false,
     "released": false,
     "updater_built": false,
-    "evidence_scope": "Source, exact hosted Windows, external Linux CWL fixture, representative-machine acceptance and realistic benchmarks are distinct claims.",
-    "pull_request": "https://github.com/comparativechrono/workbench/pull/9",
-    "pull_request_state": "draft",
-    "tested_source_commit": "0e2d5cbcbf1786d6e1723f8466b4b6b94da04802",
-    "build_run": "https://github.com/comparativechrono/workbench/actions/runs/37842857764",
-    "starter_sha256": "4ed5b3827cc0c0f4f34b8b9405458d4f15e058147b549afa383fb3f8b81f531f",
     "verification_progress": {
       "source": {
-        "passed": 289,
-        "skipped": 4,
+        "passed": 422,
+        "skipped": 6,
         "failed": 0,
-        "errors": 0,
-        "evidence": "evidence/recovery-projects-0.14.0-final-source-2026-10-08.json"
+        "scope": "Local Linux source preflight; four Windows-only skips and two unavailable external stock CWL checks",
+        "evidence": "evidence/reference-management-0.15.0-local-source-2026-10-08.json"
       },
-      "initial_windows": "Failed validator assumptions/imports; corrected frozen-native gate passed, then Windows source and visual checks exposed alias/caption issues. Retained historical evidence; superseded by the final rebuilt candidate.",
-      "archive_audit": "evidence/recovery-projects-0.14.0-final-archive-audit-2026-10-08.json",
+      "exact_packaged_windows": "pending",
       "representative_machine_acceptance": "pending",
       "realistic_windows_linux_benchmark": "not performed",
-      "release_update_validation": "not performed",
-      "corrected_initial_native": {
-        "passed_per_path": 12,
-        "run": "https://github.com/comparativechrono/workbench/actions/runs/37841697478",
-        "scope": "Original archive only; source-only follow-up exposed alias defects and screenshot review a clipped caption. New artifact required."
-      },
-      "final_windows": {
-        "run_conclusion": "success",
-        "focused_feature_checks_per_path": 12,
-        "source_passed_per_path": 126,
-        "source_skipped_per_path": 3,
-        "evidence": "evidence/recovery-projects-0.14.0-final-windows-2026-10-08.json",
-        "scope": "Exact final Starter, both Windows paths; prior native regression gates passed. Instrumented abrupt-termination and delayed-host fixtures separately labelled."
-      },
-      "final_visual_review": {
-        "captures_per_path": 6,
-        "paths": 2,
-        "dpi": 96,
-        "status": "passed for observed settled captures; export caption and completed queue capture verified",
-        "limits": "No high-DPI, physical-trackpad, multi-monitor or temporal rendering acceptance implied."
-      }
-    },
-    "starter_candidate_download": "https://github.com/comparativechrono/workbench/actions/runs/37842857764/artifacts/11578890349",
-    "candidate_download_limit": "Temporary Actions artifact retained for 30 days; may require GitHub sign-in; not a release asset."
+      "release_update_validation": "not performed"
+    }
   },
   "readiness_performance_development": {
     "recorded_on": "2026-10-08",
@@ -1299,5 +1274,68 @@
       "published_baseline_upgrade": "not built or tested for 0.13.0",
       "live_reference_downloads_and_full_setup": "not rerun for this candidate"
     }
+  },
+  "recovery_projects_development": {
+    "recorded_on": "2026-10-08",
+    "version": "0.14.0",
+    "branch": "feature/recovery-projects",
+    "starting_commit": "9f5cd4c88634b4cab04cec66b9e43e93e1db0e17",
+    "status": "implementation and recorded hosted validation complete; ready for tester review; unpublished",
+    "authorization": "Owner requested the final accepted implementation tranche. Development only; no release request.",
+    "milestone": 3,
+    "scope": [
+      "verified completed-step restart",
+      "declared CPU admission budgets for parallel DAG execution",
+      "portable project bundles"
+    ],
+    "handover": "recovery-projects-0.14.0-handover.md",
+    "feature_guide": "recovery-projects.md",
+    "published_baseline": "0.11.0",
+    "published_assets_changed": false,
+    "release_authorized": false,
+    "released": false,
+    "updater_built": false,
+    "evidence_scope": "Source, exact hosted Windows, external Linux CWL fixture, representative-machine acceptance and realistic benchmarks are distinct claims.",
+    "pull_request": "https://github.com/comparativechrono/workbench/pull/9",
+    "pull_request_state": "draft",
+    "tested_source_commit": "0e2d5cbcbf1786d6e1723f8466b4b6b94da04802",
+    "build_run": "https://github.com/comparativechrono/workbench/actions/runs/37842857764",
+    "starter_sha256": "4ed5b3827cc0c0f4f34b8b9405458d4f15e058147b549afa383fb3f8b81f531f",
+    "verification_progress": {
+      "source": {
+        "passed": 289,
+        "skipped": 4,
+        "failed": 0,
+        "errors": 0,
+        "evidence": "evidence/recovery-projects-0.14.0-final-source-2026-10-08.json"
+      },
+      "initial_windows": "Failed validator assumptions/imports; corrected frozen-native gate passed, then Windows source and visual checks exposed alias/caption issues. Retained historical evidence; superseded by the final rebuilt candidate.",
+      "archive_audit": "evidence/recovery-projects-0.14.0-final-archive-audit-2026-10-08.json",
+      "representative_machine_acceptance": "pending",
+      "realistic_windows_linux_benchmark": "not performed",
+      "release_update_validation": "not performed",
+      "corrected_initial_native": {
+        "passed_per_path": 12,
+        "run": "https://github.com/comparativechrono/workbench/actions/runs/37841697478",
+        "scope": "Original archive only; source-only follow-up exposed alias defects and screenshot review a clipped caption. New artifact required."
+      },
+      "final_windows": {
+        "run_conclusion": "success",
+        "focused_feature_checks_per_path": 12,
+        "source_passed_per_path": 126,
+        "source_skipped_per_path": 3,
+        "evidence": "evidence/recovery-projects-0.14.0-final-windows-2026-10-08.json",
+        "scope": "Exact final Starter, both Windows paths; prior native regression gates passed. Instrumented abrupt-termination and delayed-host fixtures separately labelled."
+      },
+      "final_visual_review": {
+        "captures_per_path": 6,
+        "paths": 2,
+        "dpi": 96,
+        "status": "passed for observed settled captures; export caption and completed queue capture verified",
+        "limits": "No high-DPI, physical-trackpad, multi-monitor or temporal rendering acceptance implied."
+      }
+    },
+    "starter_candidate_download": "https://github.com/comparativechrono/workbench/actions/runs/37842857764/artifacts/11578890349",
+    "candidate_download_limit": "Temporary Actions artifact retained for 30 days; may require GitHub sign-in; not a release asset."
   }
 }

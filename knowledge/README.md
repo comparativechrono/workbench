@@ -1,6 +1,11 @@
 # Native Workbench knowledge base
 
-**Active development, 2026-10-08:** the final implementation tranche targets
+**Active development, 2026-10-08:** the first remaining group is unpublished
+**0.15.0** [reference management](reference-management.md), on
+`feature/reference-management`. See its
+[handover](reference-management-0.15.0-handover.md) for current evidence.
+
+The previous three-tranche implementation culminated in
 unpublished **0.14.0** on `feature/recovery-projects`: [verified restart,
 resource budgets and portable projects](recovery-projects.md). It is stacked on
 unpublished 0.13.0 [batches, queue and indexes](batch-queue-indexes-0.13.0-handover.md)

@@ -96,6 +96,7 @@ class Workbench:
         self._reference_worker = None
         self._reference_cancel = threading.Event()
         self._reference_listing = None
+        self._reference_review = None
         self._reference_operation = {"id": "", "active": False, "status": "idle",
                                      "message": "", "bytes": 0, "total": 0, "cancellable": False}
         self.runs = {}
@@ -980,8 +981,6 @@ class Workbench:
 
     def start(self, request, check=False):
         graph = copy.deepcopy(request.get("graph")) if not check else None
-        policy = self.resource_policy(graph, check_environment=False) if not check else None
-        project_context = self._project_context(graph).get("projectMetadata") if not check else None
         output = Path(short_text(request.get("output_folder"), "output folder", 30000))
         if not output.is_absolute() or not output.is_dir():
             raise ValueError("Choose an existing absolute output folder.")
@@ -995,6 +994,10 @@ class Workbench:
                 raise ValueError("Wait for the reference operation to finish or cancel it before starting an analysis.")
             if self.active():
                 raise ValueError("An analysis is already running. Wait for it to finish or cancel it first.")
+            if not check and not isinstance(graph, dict):
+                raise ValueError("Choose an analysis workflow before starting.")
+            policy = self.resource_policy(graph, check_environment=False) if not check else None
+            project_context = self._project_context(graph).get("projectMetadata") if not check else None
             identity = uuid.uuid4().hex
             run = {"run_id": identity, "status": "preparing", "events": [], "nodes": [],
                    "folder": "", "message": "Preparing installation checks" if check else "Preparing analysis",
@@ -1292,20 +1295,36 @@ class Workbench:
                 self._reference_listing = self.reference_manager().snapshot()
             result = copy.deepcopy(self._reference_listing)
             result["operation"] = copy.deepcopy(self._reference_operation)
+            review = self._reference_review
+            if review is not None and time.monotonic() - review["created"] > 15 * 60:
+                self._reference_review = review = None
+            result["review"] = (dict(copy.deepcopy(review["review"]), kind=review["kind"], token=review["token"])
+                                if review is not None else None)
             result.update(self.activity())
             return result
 
     def reference_request(self, action, request):
         """Accept named provider choices, never client-supplied download URLs."""
-        fields = {"search": {"release", "query"}, "discover": {"release", "species_id"},
-                  "download": {"selection_id", "file_ids", "destination"}}
+        fields = {"search": {"provider_id", "release", "query"},
+                  "discover": {"provider_id", "release", "species_id"},
+                  "download": {"selection_id", "file_ids", "destination"},
+                  "resume": {"job_id"}, "discard": {"job_id"},
+                  "import-preview": {"files", "metadata", "destination"},
+                  "relocate-preview": {"destination"},
+                  "import": {"token"}, "relocate": {"token"}}
         if action not in fields or not isinstance(request, dict) or set(request) - fields[action]:
             raise ValueError("Unknown reference operation or request field.")
         result = copy.deepcopy(request)
         if action in ("search", "discover"):
-            release = result.setdefault("release", 116)
-            if type(release) is not int or not 1 <= release <= 9999:
-                raise ValueError("Choose a numeric Ensembl archive release.")
+            provider = result.setdefault("provider_id", "ensembl-archive")
+            if provider not in ("ensembl-archive", "ncbi-refseq"):
+                raise ValueError("Choose an available reference provider.")
+            release = result.setdefault("release", 116 if provider == "ensembl-archive" else "assembly")
+            if provider == "ensembl-archive":
+                if type(release) is not int or not 1 <= release <= 9999:
+                    raise ValueError("Choose a numeric Ensembl archive release.")
+            elif release != "assembly":
+                raise ValueError("Choose the versioned RefSeq assembly lookup.")
         if action == "search":
             query = result.setdefault("query", "")
             if not isinstance(query, str) or len(query) > 200 or any(ord(c) < 32 or ord(c) == 127 for c in query):
@@ -1313,15 +1332,46 @@ class Workbench:
             result["query"] = query.strip()
         elif action == "discover":
             species = result.get("species_id")
-            if not isinstance(species, str) or re.fullmatch(r"[a-z0-9_]{1,100}", species) is None:
+            pattern = r"GCF_[0-9]{9}\.[1-9][0-9]*" if result["provider_id"] == "ncbi-refseq" else r"[a-z0-9_]{1,100}"
+            if not isinstance(species, str) or re.fullmatch(pattern, species) is None:
                 raise ValueError("Choose a species from the reference search results.")
-        else:
+        elif action == "download":
             result["selection_id"] = short_text(result.get("selection_id"), "reference selection", 100)
             identities = result.get("file_ids")
             if (not isinstance(identities, list) or not 1 <= len(identities) <= 20
                     or any(not isinstance(value, str) or re.fullmatch(r"[A-Za-z0-9_.-]{1,100}", value) is None for value in identities)
                     or len(identities) != len(set(identities))):
                 raise ValueError("Choose one or more distinct files from the discovered reference.")
+        elif action in ("resume", "discard"):
+            job_id = result.get("job_id")
+            if not isinstance(job_id, str) or re.fullmatch(r"[0-9a-f]{32}", job_id) is None:
+                raise ValueError("Choose a pending reference download.")
+        elif action in ("import", "relocate"):
+            result["token"] = short_text(result.get("token"), "reference review", 100)
+        elif action == "import-preview":
+            files = result.get("files")
+            kinds = {"genome", "annotation", "cdna", "ncrna", "protein"}
+            if (not isinstance(files, list) or not 1 <= len(files) <= 5
+                    or any(not isinstance(item, dict) or set(item) != {"kind", "path"}
+                           or not isinstance(item.get("kind"), str) or item["kind"] not in kinds for item in files)
+                    or len({item["kind"] for item in files}) != len(files)):
+                raise ValueError("Choose distinct reference roles for one to five local files.")
+            for item in files:
+                path = Path(short_text(item.get("path"), "local reference file", 30000))
+                if not path.is_absolute() or not path.is_file():
+                    raise ValueError("Choose an existing absolute local reference file.")
+                item["path"] = str(path)
+            metadata = result.setdefault("metadata", {})
+            limits = {"label": 240, "species": 240, "assembly": 240,
+                      "assembly_accession": 100, "source": 1000, "release": 240}
+            if not isinstance(metadata, dict) or set(metadata) - set(limits):
+                raise ValueError("Unknown local reference metadata field.")
+            for key, value in metadata.items():
+                if (not isinstance(value, str) or len(value) > limits[key]
+                        or any(ord(c) < 32 or ord(c) == 127 for c in value)):
+                    raise ValueError("Use short plain-text reference metadata.")
+                metadata[key] = value.strip()
+        if action in ("download", "import-preview", "relocate-preview"):
             destination = Path(short_text(result.get("destination"), "reference destination folder", 30000))
             managed_default = destination == self.data / "references" and not destination.exists()
             if not destination.is_absolute() or not (destination.is_dir() or managed_default):
@@ -1334,6 +1384,15 @@ class Workbench:
         with self.lock:
             self.ensure_editable()
             manager = self.reference_manager()
+            reviewed = None
+            if action in ("import", "relocate"):
+                review = self._reference_review
+                if (review is None or review["token"] != request["token"] or review["kind"] != action
+                        or time.monotonic() - review["created"] > 15 * 60):
+                    raise ValueError("This reference review is no longer available. Review it again before continuing.")
+                reviewed = copy.deepcopy(review["review"])
+            if action not in ("search", "discover"):
+                self._reference_review = None
             self._reference_listing = manager.snapshot()
             self._changing_references = True
             cancel = self._reference_cancel = threading.Event()
@@ -1354,22 +1413,52 @@ class Workbench:
                     if cancel.is_set():
                         raise InterruptedError("Reference operation cancelled.")
                     if action == "search":
-                        manager.search(request["release"], request["query"], cancel=cancel, event=progress)
+                        options = {"provider_id": request["provider_id"]} if request["provider_id"] != "ensembl-archive" else {}
+                        manager.search(request["release"], request["query"], cancel=cancel, event=progress, **options)
                     elif action == "discover":
-                        manager.discover(request["release"], request["species_id"], cancel=cancel, event=progress)
-                    else:
+                        options = {"provider_id": request["provider_id"]} if request["provider_id"] != "ensembl-archive" else {}
+                        manager.discover(request["release"], request["species_id"], cancel=cancel, event=progress, **options)
+                    elif action == "download":
                         manager.download(request["selection_id"], request["file_ids"], request["destination"],
                                          cancel=cancel, event=progress)
+                    elif action == "resume":
+                        manager.resume(request["job_id"], cancel=cancel, event=progress)
+                    elif action == "discard":
+                        manager.discard(request["job_id"])
+                    elif action in ("import-preview", "relocate-preview"):
+                        preview = (manager.preview_import(request["files"], request["metadata"], request["destination"],
+                                                          cancel=cancel, event=progress)
+                                   if action == "import-preview" else
+                                   manager.preview_relocation(request["destination"], cancel=cancel, event=progress))
+                        if cancel.is_set():
+                            raise InterruptedError("Reference review cancelled.")
+                        if len(json.dumps(preview, ensure_ascii=True).encode("utf-8")) > 3 * 1024 * 1024:
+                            raise ValueError("The reference review is too large for this interface.")
+                        with self.lock:
+                            self._reference_review = {"token": secrets.token_urlsafe(24), "kind": action.split("-", 1)[0],
+                                                      "review": copy.deepcopy(preview), "created": time.monotonic()}
+                    elif action == "import":
+                        manager.import_local(reviewed, cancel=cancel, event=progress)
+                    elif action == "relocate":
+                        manager.relocate_library(reviewed, cancel=cancel, event=progress)
                     with self.lock:
                         self._reference_listing = manager.snapshot()
                         self._reference_operation.update(status="completed", success=True,
                             message={"search": "Species search completed. Choose a species to discover its files.",
                                      "discover": "Reference files discovered. Review the assembly and files before downloading.",
-                                     "download": "Reference download completed. The local files are ready to use."}[action])
+                                     "download": "Reference download completed. The local files are ready to use.",
+                                     "resume": "Reference download completed. The local files are ready to use.",
+                                     "discard": "Incomplete download discarded. Ready references are unchanged.",
+                                     "import-preview": "Local files verified for review. Confirm to copy them into the library.",
+                                     "relocate-preview": "Library move reviewed. Confirm to copy, verify and switch locations; originals are retained.",
+                                     "import": "Local references copied and verified. Their declared source metadata is recorded.",
+                                     "relocate": "Library location changed after verification. Original files were retained for existing workflows."}[action])
                 except Exception as error:
                     with self.lock:
+                        from reference_manager import ReferencePaused
+                        paused = isinstance(error, ReferencePaused)
                         cancelled = isinstance(error, InterruptedError)
-                        self._reference_operation.update(status="cancelled" if cancelled else "failed",
+                        self._reference_operation.update(status="paused" if paused else "cancelled" if cancelled else "failed",
                                                          success=False, message=str(error))
                 finally:
                     with self.lock:
@@ -1390,6 +1479,16 @@ class Workbench:
                     raise ValueError("The completed reference is being recorded. Wait for it to finish.")
                 self._reference_cancel.set()
                 self._reference_operation["message"] = "Cancelling reference operation…"
+        return self.reference_state()
+
+    def pause_reference_operation(self):
+        with self.lock:
+            operation = self._reference_operation
+            if (not operation["active"] or operation.get("action") not in ("download", "resume")
+                    or not operation.get("cancellable", True)):
+                raise ValueError("There is no active reference transfer to pause.")
+            self.reference_manager().pause()
+            operation["message"] = "Pausing download; verified partial bytes will be retained."
         return self.reference_state()
 
     def shutdown(self, grace=10):

@@ -25,6 +25,8 @@ import zlib
 from pack_manager import filesystem_path, ordinary_windows_path
 from pack_security import strict_json, PackError
 from reference_provider import EnsemblArchiveProvider, ReferenceCancelled
+from reference_transfer import ReferenceTransferMixin, ReferencePaused
+from reference_library import ReferenceLibraryMixin
 
 CHUNK = 1024 * 1024
 MAX_DOWNLOAD_BYTES = 100 * 1024**3
@@ -160,12 +162,20 @@ def _public(value):
     return result
 
 
-class ReferenceManager:
+class ReferenceManager(ReferenceLibraryMixin, ReferenceTransferMixin):
     def __init__(self, app_root, provider=None):
         self.root = filesystem_path(app_root).absolute()
         self.data = self.root / 'user-data' / 'references'
         self.registry = self.data / 'library.json'
         self.provider = provider if provider is not None else EnsemblArchiveProvider()
+        self.providers = {self.provider.descriptor()['id']: self.provider}
+        if provider is None:
+            from reference_ncbi import NCBIRefSeqProvider
+            ncbi = NCBIRefSeqProvider()
+            self.providers[ncbi.descriptor()['id']] = ncbi
+        self._active_provider = self.provider.descriptor()['id']
+        self._pause = threading.Event()
+        self._active_job = None
         self.lock = threading.RLock()
         self._operation_lock = threading.Lock()
         self._releases = []
@@ -193,7 +203,8 @@ class ReferenceManager:
             seen.add(record['id'])
             ids, names = set(), set()
             for file in record['files']:
-                _require(isinstance(file, dict) and file.get('id') in KINDS and file.get('kind') in KINDS and
+                _require(isinstance(file, dict) and isinstance(file.get('id'), str) and isinstance(file.get('kind'), str) and
+                         file['id'] in KINDS and file['kind'] in KINDS and
                          file['id'] not in ids and type(file.get('bytes')) is int and file['bytes'] > 0 and
                          isinstance(file.get('sha256'), str) and SHA.fullmatch(file['sha256']) and
                          isinstance(file.get('path'), str), 'Damaged local reference file record.')
@@ -226,33 +237,44 @@ class ReferenceManager:
                 records.append(record)
             records.reverse()
             omitted = len(all_records) - len(records)
-            return {'schema': 1, 'providers': [deepcopy(self.provider.descriptor())],
+            return {'schema': 1, 'providers': [deepcopy(p.descriptor()) for p in self.providers.values()],
+                    'active_provider': self._active_provider, 'pending': self._pending_snapshot(),
                     'releases': deepcopy(self._releases), 'species': deepcopy(self._species),
                     'discovery': _public(self._discovery), 'local': records, 'omitted_local': omitted,
-                    'default_destination': _ordinary(self.data),
+                    'default_destination': self._default_destination(),
                     'notice': 'Public reference discovery and downloads connect only when requested. '
                               'Downloaded files remain local. Ensembl archive releases are not the new Ensembl platform.' +
                               (f' Showing the newest {len(records)} bundles; {omitted} older bundles remain on disk.' if omitted else '')}
 
-    def search(self, release, query, cancel=None, event=None):
+    def _get_provider(self, provider_id=None):
+        provider_id = provider_id or self.provider.descriptor()['id']
+        _require(isinstance(provider_id, str) and provider_id in self.providers, 'Choose an available reference provider.')
+        return self.providers[provider_id]
+
+    def search(self, release, query, cancel=None, event=None, provider_id=None):
         _cancelled(cancel)
-        releases = self.provider.releases(cancel=cancel, event=event)
-        species = self.provider.species(release, query=query, cancel=cancel, event=event)
+        provider = self._get_provider(provider_id)
+        releases = provider.releases(cancel=cancel, event=event)
+        species = provider.species(release, query=query, cancel=cancel, event=event)
         _cancelled(cancel)
         with self.lock:
+            self._active_provider = provider.descriptor()['id']
             self._releases, self._species = deepcopy(releases), deepcopy(species)
             self._discovery = None
         return self.snapshot()
 
-    def discover(self, release, species_id, cancel=None, event=None):
+    def discover(self, release, species_id, cancel=None, event=None, provider_id=None):
         _cancelled(cancel)
-        discovery = deepcopy(self.provider.discover(release, species_id, cancel=cancel, event=event))
+        provider = self._get_provider(provider_id)
+        discovery = deepcopy(provider.discover(release, species_id, cancel=cancel, event=event))
+        _require(isinstance(discovery, dict) and discovery.get('provider') == provider.descriptor()['id'], 'Provider discovery identity does not match the selected provider.')
         _require(isinstance(discovery, dict) and isinstance(discovery.get('files'), list) and
                  1 <= len(discovery['files']) <= len(KINDS), 'Provider found no supported reference files.')
         selection_id = uuid.uuid4().hex
         discovery['selection_id'] = selection_id
         _cancelled(cancel)
         with self.lock:
+            self._active_provider = provider.descriptor()['id']
             self._discovery = discovery
             self._selections[selection_id] = deepcopy(discovery)
             # Bounded session selections; old UI requests must rediscover explicitly.
@@ -270,9 +292,9 @@ class ReferenceManager:
 
     def _verify_file(self, file):
         path = _no_links(file['path'])
-        _require(path.is_file(), 'A downloaded reference file is missing: ' + file['filename'])
+        _require(path.is_file(), 'A registered reference file is missing: ' + file['filename'])
         info = path.stat()
-        _require(info.st_size == file['bytes'], 'A downloaded reference file has changed: ' + file['filename'])
+        _require(info.st_size == file['bytes'], 'A registered reference file has changed: ' + file['filename'])
         return path
 
     def _record(self, record_id):
@@ -291,7 +313,8 @@ class ReferenceManager:
             return {**_public({'files': [file]})['files'][0], 'record_id': record['id'], 'record_label': record.get('label', ''),
                     **{key: deepcopy(record.get(key)) for key in
                        ('provider', 'release', 'species', 'assembly', 'assembly_accession',
-                        'receipt_path', 'receipt_sha256', 'downloaded_at')}}
+                        'receipt_path', 'receipt_sha256', 'downloaded_at', 'origin', 'provider_name',
+                        'imported_at', 'user_declared', 'source', 'relocated_at', 'previous_location')}}
 
     def record_folder(self, record_id):
         with self.lock:
@@ -300,17 +323,19 @@ class ReferenceManager:
     def provenance_for_path(self, path, sha256=None):
         key = os.path.normcase(_ordinary(filesystem_path(path).resolve()))
         with self.lock:
-            for record in self._records():
+            for record in [*self._records(), *self._previous_records()]:
                 for file in record['files']:
                     if os.path.normcase(_ordinary(filesystem_path(file['path']).resolve())) != key:
                         continue
-                    result = self.resolve_file(record['id'], file['id'])
+                    self._verify_record(record)
+                    self._verify_file(file)
                     if sha256 is not None:
                         _require(sha256 == file['sha256'],
-                                 'A downloaded reference changed after retrieval. Restore the file or select an independent local copy.')
+                                 'A registered reference changed after retrieval. Restore the file or select an independent local copy.')
                     return {key: deepcopy(record.get(key)) for key in
                             ('provider', 'release', 'species', 'assembly', 'assembly_accession',
-                             'receipt_path', 'receipt_sha256', 'downloaded_at', 'source_catalog')} | {
+                             'receipt_path', 'receipt_sha256', 'downloaded_at', 'source_catalog', 'origin',
+                             'provider_name', 'imported_at', 'user_declared', 'source', 'relocated_at', 'previous_location')} | {
                                 'record_id': record['id'], 'record_label': record.get('label', ''),
                                 'file': _public({'files': [file]})['files'][0]}
         return None
@@ -319,194 +344,3 @@ class ReferenceManager:
     def _disk(path, needed=0):
         _require(shutil.disk_usage(path).free >= needed + DISK_FLOOR,
                  'There is not enough free disk space for this reference download.')
-
-    def _download_file(self, item, folder, cancel, event, completed, expected_total, expanded_total):
-        filename = _filename(item.get('filename'))
-        _require(filename.endswith('.gz'), 'Only provider-resolved gzip reference files are supported.')
-        name = _filename(filename[:-3])
-        _require(item.get('id') in KINDS and item.get('kind') in KINDS,
-                 'Provider supplied an unknown reference type.')
-        size = item.get('bytes', item.get('size'))
-        _require(size is None or type(size) is int and 0 < size <= MAX_DOWNLOAD_BYTES,
-                 'Reference download exceeds the supported size.')
-        checksum = item.get('checksum')
-        _require(isinstance(checksum, dict) and checksum.get('algorithm') == 'bsd-sum' and
-                 type(checksum.get('value')) is int and 0 <= checksum['value'] <= 65535 and
-                 type(checksum.get('blocks')) is int and checksum['blocks'] > 0,
-                 'Provider supplied no supported integrity checksum.')
-        _cancelled(cancel)
-        compressed_hash, expanded_hash = hashlib.sha256(), hashlib.sha256()
-        compressed = expanded = bsd = members = 0
-        decompressor = zlib.decompressobj(16 + zlib.MAX_WBITS)
-        prefix = bytearray()
-        started, last_progress, last_disk = time.monotonic(), 0.0, 0
-        target = folder / name
-        with self.provider.open_url(item['url'], cancel=cancel) as response, target.open('xb') as output:
-            _require(response.getcode() == 200, 'Reference server did not return an ordinary file.')
-            _require(response.headers.get('Content-Encoding', 'identity').lower() == 'identity',
-                     'Reference server returned unsupported HTTP encoding.')
-            length = response.headers.get('Content-Length')
-            if length is not None:
-                _require(length.isdecimal() and 0 < int(length) <= MAX_DOWNLOAD_BYTES,
-                         'Reference server returned an invalid or excessive content length.')
-                length = int(length)
-                _require(size is None or length == size, 'Reference size changed since discovery; discover files again.')
-            effective_url = response.geturl()
-            response_info = {'etag': response.headers.get('ETag'), 'last_modified': response.headers.get('Last-Modified')}
-            while True:
-                _cancelled(cancel)
-                _require(time.monotonic() - started < 48 * 3600, 'Reference download exceeded its 48-hour limit.')
-                block = response.read(CHUNK)
-                if not block:
-                    break
-                compressed += len(block)
-                _require(completed + compressed <= MAX_DOWNLOAD_BYTES, 'Selected references exceed the compressed download limit.')
-                _require(length is None or compressed <= length, 'Reference server sent more bytes than declared.')
-                _require(size is None or compressed <= size, 'Reference server sent more bytes than discovered.')
-                compressed_hash.update(block)
-                bsd = _bsd_update(bsd, block)
-                pending = block
-                while pending:
-                    _cancelled(cancel)
-                    if decompressor.eof:
-                        decompressor = zlib.decompressobj(16 + zlib.MAX_WBITS)
-                    try:
-                        plain = decompressor.decompress(pending, CHUNK)
-                    except zlib.error as exc:
-                        raise ReferenceError('Downloaded gzip data is corrupt or its CRC check failed: ' + filename) from exc
-                    pending = decompressor.unused_data if decompressor.eof else decompressor.unconsumed_tail
-                    if decompressor.eof:
-                        members += 1
-                    expanded += len(plain)
-                    _require(expanded_total + expanded <= MAX_EXPANDED_BYTES,
-                             'Expanded reference files exceed the supported size limit.')
-                    if len(prefix) < 65536:
-                        prefix.extend(plain[:65536 - len(prefix)])
-                    if plain:
-                        if expanded - last_disk >= 8 * CHUNK or last_disk == 0:
-                            self._disk(folder, len(plain))
-                            last_disk = expanded
-                        expanded_hash.update(plain)
-                        output.write(plain)
-                now = time.monotonic()
-                if now - last_progress >= .15:
-                    _event(event, 'downloading', message='Downloading and checking ' + item.get('label', filename),
-                           filename=filename, bytes=completed + compressed, total=expected_total,
-                           expanded_bytes=expanded_total + expanded, cancellable=True)
-                    last_progress = now
-            _require(compressed > 0 and (length is None or compressed == length) and
-                     (size is None or compressed == size), 'Reference download was truncated; no reference was added.')
-            _require(decompressor.eof and members > 0, 'Downloaded gzip file is incomplete; no reference was added.')
-            _require(bsd == checksum['value'] and (compressed + 1023) // 1024 == checksum['blocks'],
-                     'Reference does not match the provider BSD checksum; no reference was added.')
-            _check_format(prefix, item['kind'], filename)
-            output.flush()
-            os.fsync(output.fileno())
-        _cancelled(cancel)
-        return {**deepcopy(item), 'id': item['id'], 'kind': item['kind'], 'label': item.get('label', item['kind']),
-                'filename': name, 'source_filename': filename, 'bytes': expanded,
-                'sha256': expanded_hash.hexdigest(), 'compressed_bytes': compressed,
-                'compressed_sha256': compressed_hash.hexdigest(), 'source_url': item['url'],
-                'effective_url': effective_url, 'checksum': deepcopy(checksum),
-                'checksum_manifest': deepcopy(item.get('checksum_manifest')),
-                'sequence_choice': item.get('sequence_scope', item.get('sequence_choice', item.get('sequence_set'))),
-                'masking': item.get('masking'), 'format': item.get('format', 'gtf' if item['kind'] == 'annotation' else 'fasta'),
-                'validation': {'gzip_crc': 'passed', 'provider_bsd_sum': 'passed', 'format_header': 'passed (basic prefix only)',
-                               'sha256': 'computed locally; not a publisher signature'}, **response_info}
-
-    def download(self, selection_id, file_ids, destination, cancel=None, event=None):
-        _require(self._operation_lock.acquire(blocking=False), 'Another reference download is already running.')
-        try:
-            return self._download(selection_id, file_ids, destination, cancel, event)
-        finally:
-            self._operation_lock.release()
-
-    def _download(self, selection_id, file_ids, destination, cancel, event):
-        with self.lock:
-            selection = deepcopy(self._selections.get(selection_id)) if isinstance(selection_id, str) else None
-        _require(selection is not None, 'This reference selection expired. Discover its files again.')
-        _require(isinstance(file_ids, list) and 1 <= len(file_ids) <= len(KINDS) and
-                 all(isinstance(value, str) for value in file_ids) and len(set(file_ids)) == len(file_ids),
-                 'Select one or more distinct reference files.')
-        by_id = {file['id']: file for file in selection['files']}
-        _require(all(identity in by_id for identity in file_ids), 'A requested file was not in this reference discovery.')
-        items = [by_id[identity] for identity in file_ids]
-        names = [_filename(item['filename'])[:-3].casefold() for item in items]
-        _require(len(set(names)) == len(names) and 'reference.json' not in names, 'Provider filenames collide.')
-        _require(isinstance(destination, str) and destination and len(destination) < 32700 and
-                 Path(destination).is_absolute(), 'Choose an absolute reference destination folder.')
-        _cancelled(cancel)
-        destination_path = filesystem_path(destination).absolute()
-        destination_path = _directory(destination_path, create=destination_path == self.data)
-        expected = [item.get('bytes', item.get('size')) for item in items]
-        _require(all(size is None or type(size) is int and 0 < size <= MAX_DOWNLOAD_BYTES for size in expected),
-                 'Provider supplied an invalid reference size.')
-        known_total = sum(size for size in expected if size is not None)
-        _require(known_total <= MAX_DOWNLOAD_BYTES, 'Selected references exceed the compressed download limit.')
-        expected_total = known_total if all(size is not None for size in expected) else None
-        self._disk(destination_path, known_total)
-        identity = uuid.uuid4().hex
-        final = destination_path / ('ref-' + identity[:16])
-        _require(not final.exists() and not final.is_symlink(), 'Reference destination already exists; existing files were preserved.')
-        temporary = Path(tempfile.mkdtemp(prefix='_ref-', dir=destination_path))
-        published = registered = False
-        try:
-            files, completed, expanded = [], 0, 0
-            for item in items:
-                file = self._download_file(item, temporary, cancel, event, completed, expected_total, expanded)
-                file['path'] = _ordinary(final / file['filename'])
-                files.append(file)
-                completed += file['compressed_bytes']; expanded += file['bytes']
-            _cancelled(cancel)
-            record = {key: deepcopy(value) for key, value in selection.items() if key not in {'files', 'selection_id'}}
-            species = selection.get('species', 'Reference')
-            species_name = species.get('name', species.get('id', 'Reference')) if isinstance(species, dict) else str(species)
-            assembly = selection.get('assembly') or (species.get('assembly', '') if isinstance(species, dict) else '')
-            record.update(schema=1, id=identity, label=selection.get('label') or
-                          (species_name + (' — ' + assembly if assembly else '') +
-                           ' — release ' + str(selection.get('release', ''))),
-                          folder=_ordinary(final), receipt_path=_ordinary(final / 'reference.json'), files=files,
-                          downloaded_at=datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
-                          integrity_notice='Provider BSD checksums detect transfer errors; local SHA-256 records file identity. Neither is a publisher signature.')
-            raw = _json_bytes(record)
-            _require(len(raw) <= MAX_RECEIPT_BYTES, 'Reference provenance is unexpectedly large.')
-            with (temporary / 'reference.json').open('xb') as stream:
-                stream.write(raw); stream.flush(); os.fsync(stream.fileno())
-            record['receipt_sha256'] = hashlib.sha256(raw).hexdigest()
-            with self.lock:
-                _directory(self.data, create=True)
-                lockpath = self.data / '_publish.lock'
-                _no_links(lockpath)
-                try:
-                    lockfd = os.open(lockpath, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
-                except FileExistsError as exc:
-                    raise ReferenceError('Another Workbench instance is updating the reference library. '
-                                         'Retry after it finishes. A lock left after an interrupted update may need removal.') from exc
-                try:
-                    os.close(lockfd)
-                    records = self._records()
-                    _require(len(records) < MAX_RECORDS, 'The local reference library is full.')
-                    _require(not final.exists() and not final.is_symlink(),
-                             'Reference destination already exists; existing files were preserved.')
-                    _directory(destination_path)
-                    _cancelled(cancel)
-                    _event(event, 'publishing', message='Adding the verified reference to your local library.',
-                           bytes=completed, total=expected_total, cancellable=False)
-                    os.rename(temporary, final)
-                    published = True
-                    _atomic_json(self.registry, {'schema': 1, 'records': [*records, record]})
-                    registered = True
-                finally:
-                    lockpath.unlink(missing_ok=True)
-            return self.snapshot()
-        except (ReferenceError, ReferenceCancelled):
-            if published and not registered:
-                shutil.rmtree(final, ignore_errors=True)
-            raise
-        except (OSError, ValueError) as exc:
-            if published and not registered:
-                shutil.rmtree(final, ignore_errors=True)
-            raise ReferenceError('Reference retrieval failed. Check the connection, destination permissions and available disk space.') from exc
-        finally:
-            if temporary.exists():
-                shutil.rmtree(temporary, ignore_errors=True)

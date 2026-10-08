@@ -1,7 +1,7 @@
 # Current architecture
 
 This describes the reference-discovery, native interface and results-export
-implementation, with the recovery/resources/projects extension under development on 2026-10-08.
+implementation, with reference-management extensions under development on 2026-10-08.
 Versioned release paragraphs retain their historical evidence. It is a map of
 the implementation, not a claim that every deployment or scientific use has been
 validated. Start with [the knowledge index](README.md).
@@ -60,7 +60,7 @@ pipes are handled by the native runner, including both subprocess outcomes.
 
 The GUI build target is `build/desktop/DesktopWorkbench.exe`; the release
 packager installs it as `NativeWorkbench.exe`. All three native build resource
-versions are 0.14.0 in the active development tree; published 0.11.0 is unchanged. Application version is maintained in `workspace/app_version.py`
+versions are 0.15.0 in the active development tree; published 0.11.0 is unchanged. Application version is maintained in `workspace/app_version.py`
 and release metadata, independently of pack versions and pack API compatibility.
 
 ## Responsibilities and source map
@@ -84,6 +84,7 @@ and release metadata, independently of pack versions and pack API compatibility.
 | [`workspace/pack_manager.py`](../workspace/pack_manager.py), [`pack_security.py`](../workspace/pack_security.py) | Offline archive validation, signed catalogue client, downloads, inventories and trust checks. |
 | [`workspace/setup_manager.py`](../workspace/setup_manager.py), [`setup-profile.json`](../workspace/setup-profile.json) | 0.10 development: Full/Starter/Custom selection, durable pinned installation queue and progress over the existing trusted pack manager. |
 | [`workspace/reference_provider.py`](../workspace/reference_provider.py), [`reference_manager.py`](../workspace/reference_manager.py), [`reference_provenance.py`](../workspace/reference_provenance.py) | Explicit public-reference discovery, verified local downloads, offline library and frozen input provenance. |
+| [`workspace/reference_transfer.py`](../workspace/reference_transfer.py), [`reference_library.py`](../workspace/reference_library.py), [`reference_ncbi.py`](../workspace/reference_ncbi.py) | Persistent resumable compressed staging, reviewed local imports and copy/verify library relocation, and versioned NCBI RefSeq assembly lookup. |
 | [`workspace/verify_installation.py`](../workspace/verify_installation.py), [`core_checks.py`](../workspace/core_checks.py), [`pack_checks.py`](../workspace/pack_checks.py) | Installation integrity, starter checks and declarative pack scientific assertions. |
 | [`scripts/package_split.py`](../scripts/package_split.py), [`apply_core_update.py`](../scripts/apply_core_update.py) | Separate core/starter/pack packaging and transactional core update ownership. |
 | [`scripts/`](../scripts/) and [`tools/`](../tools/) | Tool-specific source preparation, portability patches, native builds, adapters and pack generation. |
@@ -98,7 +99,7 @@ adapters; do not add a bespoke GUI for each tool.
 
 Four different version concepts must remain distinct:
 
-* application version, development 0.14.0 (published 0.11.0);
+* application version, development 0.15.0 (published 0.11.0);
 * pack API, currently 1;
 * execution manifest format, currently 2;
 * each pack's own version and each executable's upstream/build version.

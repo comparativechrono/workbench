@@ -285,7 +285,7 @@ class ReferenceManagerTests(unittest.TestCase):
             self.manager.snapshot()
     def test_failed_registry_transaction_cleans_own_bundle_only(self):
         marker = self.destination / 'keep.txt'; marker.write_text('keep')
-        with patch('reference_manager._atomic_json', side_effect=OSError('write denied')), self.assertRaises(ReferenceError):
+        with patch.object(self.manager, '_write_library', side_effect=OSError('write denied')), self.assertRaises(ReferenceError):
             self.download(['genome'])
         self.assertEqual(list(self.destination.iterdir()), [marker])
         self.assertEqual(self.manager.snapshot()['local'], [])
@@ -297,13 +297,16 @@ class ReferenceManagerTests(unittest.TestCase):
         result = self.manager.snapshot()
         self.assertEqual(len(result['local']), 1)
         self.assertTrue(result['local'][0]['available'])
-    def test_another_instance_publication_lock_preserved(self):
+    def test_another_instance_publication_lease_preserved_and_old_marker_does_not_block(self):
+        from reference_transfer import file_lease
         self.manager.data.mkdir(parents=True)
-        lock = self.manager.data / '_publish.lock'; lock.write_text('other instance')
-        with self.assertRaisesRegex(ReferenceError, 'Another Workbench'):
-            self.download(['genome'])
-        self.assertEqual(lock.read_text(), 'other instance')
+        lock = self.manager.data / '_publish.lock'; lock.write_text('old interrupted instance')
+        with file_lease(self.manager.data / '_library.lease'):
+            with self.assertRaisesRegex(ReferenceError, 'Another Workbench'):
+                self.download(['genome'])
+        self.assertEqual(lock.read_text(), 'old interrupted instance')
         self.assert_no_download()
+        self.assertEqual(len(self.download(['genome'])['local']), 1)
     def test_snapshot_bounds_response_and_reports_omitted_records(self):
         self.download(['genome'])
         with patch('reference_manager.MAX_SNAPSHOT_LOCAL_BYTES', 1):

@@ -1,6 +1,23 @@
 # Current project state
 
-## Active development: 0.14.0, unpublished
+## Active development: 0.15.0 reference management, unpublished
+
+On **2026-10-08** the owner requested the remaining accepted work one group at a
+time. The first group is reference management: resumable downloads, local import,
+safe library relocation and NCBI RefSeq assembly discovery. Work is on
+`feature/reference-management`, based on `38917349449ce56a45d3e0f4f41b7d2a38621c6d`.
+See the [feature contract](reference-management.md) and
+[candidate handover](reference-management-0.15.0-handover.md).
+
+Implementation and local source validation are complete: 422 checks passed with
+six recorded skips, including two external CWL checks unavailable locally.
+Pinned strict native compilation and live Linux NCBI three-file integrity checks
+passed. Exact packaged Windows gates and screenshot review are pending; no new
+Windows pass or release is claimed yet. The 0.14.0 candidate and published 0.11.0 remain unchanged.
+This set does not complete every remaining roadmap group. The earlier release
+request was conditional on broader completion, which was not established.
+
+## Previous implementation tranche: 0.14.0, unpublished
 
 On **2026-10-08** the owner requested the final implementation tranche in the
 accepted [roadmap](roadmap.md). Work is on `feature/recovery-projects`, stacked
