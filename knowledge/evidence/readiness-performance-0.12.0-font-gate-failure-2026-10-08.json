@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "date": "2026-10-08",
+  "sourceCommit": "b1cad939a3f325e64bc4a328490d6446d19d563c",
+  "runId": 37807762935,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37807762935",
+  "status": "candidate failed an invalid cross-process font measurement added to the UI gate",
+  "supersededIntermediateRun": {"runId": 37807561910, "sourceCommit": "eb2196c0bd8087c9cc9fca39b05f4797767ba926", "conclusion": "cancelled", "usedAsAcceptanceEvidence": false},
+  "error": "Cannot select the actual native introduction font.",
+  "cause": "The harness obtained WM_GETFONT from the application and tried to select that foreign-process HFONT into its own drawing context. GDI object handles are private to their creating process.",
+  "primaryDocumentation": "https://learn.microsoft.com/en-us/windows/desktop/SysInfo/gdi-objects",
+  "correction": "Remove the invalid optional cross-process measurement, retain native captures for independent visual review and retain all original readiness/diagnostic functional and real pointer checks. No font-size approximation or fake numerical pass is substituted.",
+  "productionCodeChangedByCorrection": false,
+  "passedPerPath": {"nativeResourceHelper": 14, "readinessHostAndScience": 4, "library": 7, "workspace": 32, "windowsDiagnosticSource": 10},
+  "windowsSourceSkipPerPath": {"count": 1, "reason": "POSIX-only symlink check"},
+  "downloadedNativeArtifacts": [
+    {"path": "ordinary", "id": 11563751925, "bytes": 2404949, "sha256": "2af4c1632f2b50ed4041f9f867834119480f2efc9836a53437002377026af133"},
+    {"path": "path with spaces", "id": 11563493711, "bytes": 2404094, "sha256": "c2ba1194fbe0f78f5cf71a5d84af13216113633e88e285045e6e2a3668bb74d7"}
+  ],
+  "artifactSizeSha256AndZipCrcVerified": true,
+  "guiAcceptanceComplete": false,
+  "published": false
+}

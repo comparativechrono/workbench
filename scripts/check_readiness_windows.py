@@ -272,50 +272,6 @@ def menu_command(ui, label):
     ui.post(ui.main, 0x0111, result)
 
 
-def modal_intro_geometry(ui, modal, previous_text=None):
-    """Measure wrapping in the real static label's font and available width."""
-    label = ui.child(104, modal)
-    require(label and ui.user.IsWindowVisible(label), "Native modal introduction is missing.")
-    available = wintypes.RECT()
-    require(ui.user.GetClientRect(label, ctypes.byref(available)), "Cannot measure native modal introduction.")
-    dc = ui.user.GetDC(label)
-    require(dc, "Cannot obtain the native label drawing context.")
-    previous_font = None
-    invalid_font = ctypes.c_void_p(-1).value  # HGDI_ERROR.
-    ui.user.DrawTextW.argtypes = [wintypes.HDC, wintypes.LPWSTR, ctypes.c_int,
-                                 ctypes.POINTER(wintypes.RECT), wintypes.UINT]
-    def measured(text):
-        rectangle = wintypes.RECT(0, 0, available.right - available.left, 0)
-        buffer = ctypes.create_unicode_buffer(text)
-        # DT_CALCRECT | DT_WORDBREAK | DT_NOPREFIX measures, without painting.
-        require(ui.user.DrawTextW(dc, buffer, -1, ctypes.byref(rectangle), 0x0C10) > 0,
-                "Native introductory text could not be measured.")
-        return rectangle.bottom - rectangle.top
-    try:
-        font = ui.send(label, 0x0031)  # WM_GETFONT, the actual font assigned by the app.
-        require(font, "Native introduction does not expose its assigned font.")
-        previous_font = ui.gdi.SelectObject(dc, font)
-        require(previous_font not in (None, 0, invalid_font), "Cannot select the actual native introduction font.")
-        text = ui.label(label)
-        height = measured(text)
-        capacity = available.bottom - available.top
-        require(height <= capacity, "Native modal introduction wraps beyond its visible label height.")
-        result = {"text": text, "width": available.right - available.left,
-                  "availableHeight": capacity, "measuredHeight": height,
-                  "dpi": ui.user.GetDpiForWindow(modal),
-                  "method": "DrawTextW DT_CALCRECT/DT_WORDBREAK with the actual static control font"}
-        if previous_text is not None:
-            previous_height = measured(previous_text)
-            require(previous_height > capacity, "The recorded clipping regression did not reproduce at this font and width.")
-            result["previousLabelRegression"] = {"text": previous_text, "measuredHeight": previous_height,
-                                                  "wouldClip": True}
-        return result
-    finally:
-        if previous_font not in (None, 0, invalid_font):
-            ui.gdi.SelectObject(dc, previous_font)
-        ui.user.ReleaseDC(label, dc)
-
-
 def gui_checks(root, evidence, report):
     ui = NativeUI(root, evidence)
     report["nativeGUILaunched"] = True
@@ -350,8 +306,9 @@ def gui_checks(root, evidence, report):
         text = ui.label(ui.child(105, modal))
         require("Ready for preparation" in text and "deferred" in text.lower() and "Successful tool execution" in text,
                 "Native readiness modal omitted readiness limits or planned-method review.")
-        report["readinessIntroGeometry"] = modal_intro_geometry(ui, modal,
-            "Review this analysis. Installation checks do not guarantee that the selected data or workflow will run successfully.")
+        # Retain actual native pixels for visual review of introductory text
+        # fit. A WM_GETFONT handle belongs to the application process and cannot
+        # provide a valid cross-process DrawText measurement in this helper.
         report["captures"] = [ui.capture("readiness-native.bmp", modal)]
         write_json(evidence / "readiness-native-controls.json", ui.controls(modal))
         ui.send(ui.child(2, modal), 0x00F5)
@@ -360,7 +317,6 @@ def gui_checks(root, evidence, report):
         ui.wait("diagnostic preview modal", lambda: window("Review diagnostic report"))
         modal = window("Review diagnostic report")
         require(ui.label(ui.child(1, modal)) == "Save diagnostic ZIP", "Diagnostic review lacks an explicit Save action.")
-        report["diagnosticIntroGeometry"] = modal_intro_geometry(ui, modal)
         preview = ui.label(ui.child(105, modal)).replace("\r\n", "\n")
         require(json.loads(preview)["kind"] == "native-workbench-diagnostics", "Native diagnostic preview is not its structured report.")
         report["captures"].append(ui.capture("diagnostics-native-preview.bmp", modal))
