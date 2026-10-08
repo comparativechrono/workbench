@@ -1,12 +1,11 @@
-name: Recheck the frozen 0.13.0 candidate with corrected validators
+name: Diagnose exact frozen queue persistence and receipt observation
 
 on:
   push:
     branches: [feature/batch-queue-indexes]
     paths:
-      - scripts/check_batch_windows.py
-      - workspace/tests/test_reference_indexes.py
-      - .github/workflows/native-batch-recheck.yml
+      - scripts/check_queue_observer_windows.py
+      - .github/workflows/native-queue-observer-diagnostic.yml
   workflow_dispatch:
 
 permissions:
@@ -14,14 +13,14 @@ permissions:
   actions: read
 
 concurrency:
-  group: native-batch-recheck-${{ github.ref }}
+  group: native-queue-observer-diagnostic-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   native:
-    if: github.event_name == 'workflow_dispatch' || (contains(github.event.head_commit.message, '[frozen candidate recheck]') && !contains(github.event.head_commit.message, '[queue diagnostic]'))
+    if: github.event_name == 'workflow_dispatch' || (contains(github.event.head_commit.message, '[frozen candidate recheck]') && contains(github.event.head_commit.message, '[queue diagnostic]'))
     runs-on: windows-2022
-    timeout-minutes: 25
+    timeout-minutes: 10
     strategy:
       fail-fast: false
       matrix:
@@ -51,7 +50,7 @@ jobs:
             $_ -notmatch '^\.github/'
           })
           if ($rejected.Count -ne 0) { throw ('Frozen candidate reuse refused: application/build inputs changed: ' + ($rejected -join ', ')) }
-          $evidence = Join-Path $env:RUNNER_TEMP 'batch-recheck-evidence'
+          $evidence = Join-Path $env:RUNNER_TEMP 'queue-observer-evidence'
           New-Item -ItemType Directory -Force -Path $evidence | Out-Null
           @{
             schema = 1
@@ -62,7 +61,7 @@ jobs:
             changedPaths = $changed
             archiveRebuilt = $false
             reusedBuildIsNotNewPass = $true
-            scope = 'Corrected batch validator and Windows reference-index source tests only. Resource, readiness, library, workspace, independent pack and delayed-host transport observations remain separate records from the original frozen build run.'
+            scope = 'Focused 24-cycle queue storage and live-receipt observation diagnostic. Exact candidate full-gate observations remain separate records; this is not a repeated full-suite pass.'
           } | ConvertTo-Json -Depth 8 | Set-Content -Encoding utf8 (Join-Path $evidence 'RECHECK-PROVENANCE.json')
       - uses: actions/download-artifact@v4
         with:
@@ -82,28 +81,20 @@ jobs:
           if ((Get-FileHash $starter -Algorithm SHA256).Hash -ne $env:FROZEN_STARTER_SHA256) { throw 'Frozen starter SHA-256 mismatch.' }
           $record = @($provenance.archives | Where-Object file -eq 'native-workbench-0.13.0-starter-windows.zip')
           if ($record.Count -ne 1 -or $record[0].sha256 -ne $env:FROZEN_STARTER_SHA256) { throw 'Original build provenance does not bind the expected starter.' }
-          Expand-Archive $starter (Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'batch-recheck')
-      - name: Recheck exact-package samples, queue, scientific indexing and native interfaces
+          Expand-Archive $starter (Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'queue-observer')
+      - name: Diagnose 24 alternating unobserved and live-observed exact-host queue cycles
         if: always() && !cancelled() && steps.prepare.outcome == 'success'
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
-          $app = Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'batch-recheck/native-workbench'
-          & (Join-Path $app 'runtime/python/python.exe') -I scripts/check_batch_windows.py --app-root $app --report "$env:RUNNER_TEMP/batch-recheck-evidence/native-batch.json" --source-commit $env:FROZEN_COMMIT --asset-sha256 $env:FROZEN_STARTER_SHA256 --asset-name 'native-workbench-0.13.0-starter-windows.zip'
-          if ($LASTEXITCODE -ne 0) { throw 'Frozen exact-package batch gate failed.' }
-      - name: Correctly encoded Windows reference-index source regressions
-        if: always() && !cancelled() && steps.prepare.outcome == 'success'
-        shell: pwsh
-        run: |
-          $ErrorActionPreference = 'Stop'
-          $app = Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'batch-recheck/native-workbench'
-          & (Join-Path $app 'runtime/python/python.exe') -I workspace/tests/test_reference_indexes.py
-          if ($LASTEXITCODE -ne 0) { throw 'Windows reference-index source regression failed.' }
+          $app = Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'queue-observer/native-workbench'
+          & (Join-Path $app 'runtime/python/python.exe') -I scripts/check_queue_observer_windows.py --app-root $app --report "$env:RUNNER_TEMP/queue-observer-evidence/queue-observer.json" --source-commit $env:FROZEN_COMMIT --asset-sha256 $env:FROZEN_STARTER_SHA256
+          if ($LASTEXITCODE -ne 0) { throw 'Focused queue diagnostic found an unexpected failure; inspect retained exact job messages.' }
       - name: Retain original-archive provenance and every successful or failed observation
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: batch-recheck-windows-${{ matrix.folder }}-${{ github.run_attempt }}
-          path: ${{ runner.temp }}/batch-recheck-evidence
+          name: queue-observer-windows-${{ matrix.folder }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/queue-observer-evidence
           if-no-files-found: error
           retention-days: 30
