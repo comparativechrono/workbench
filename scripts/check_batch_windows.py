@@ -104,9 +104,13 @@ def queue_state(host):
     # Public status intentionally omits sample metadata and file inventories. Read
     # the actual persistent receipt independently, without altering its bytes.
     state = host.call("queue/status")
-    persisted = read_json(host.gate_queue_state_path) if host.gate_queue_state_path.exists() else {"jobs": []}
-    by_id = {job["job_id"]: job for job in persisted["jobs"]}
-    state["jobs"] = [{**by_id.get(job["job_id"], {}), **job} for job in state["jobs"]]
+    # Live status comes entirely from the production RPC. Detailed inventories
+    # are needed only for frozen-plan assertions while the queue is idle; avoid
+    # opening the writer's files during preparation or execution at all.
+    if not state["preparing"] and not state["queue_running"]:
+        persisted = read_json(host.gate_queue_state_path) if host.gate_queue_state_path.exists() else {"jobs": []}
+        by_id = {job["job_id"]: job for job in persisted["jobs"]}
+        state["jobs"] = [{**by_id.get(job["job_id"], {}), **job} for job in state["jobs"]]
     return state
 
 
@@ -270,7 +274,22 @@ def host_checks(root, evidence, report):
                                             "reason": "The host gate has already created real queue, run and reference-index records."}
         report["networkSocketOperationsDeniedForHost"] = True
     finally:
-        host.close()
+        try:
+            host.close()
+        finally:
+            # Capture every outcome only after the exact host has relinquished
+            # its files. These are synthetic gate records, never user history.
+            # This preserves an earlier preparation/execution failure even when
+            # no per-run run.json was created and no later assertion was reached.
+            for name in ("run-queue.json", "runs.json"):
+                source = root / "user-data" / name
+                if source.exists():
+                    try:
+                        target = evidence / ("host-final-" + name)
+                        write_json(target, read_json(source))
+                        report.setdefault("hostFinalReceipts", []).append({"file": target.name, "sha256": sha256(target)})
+                    except Exception as capture_error:
+                        report.setdefault("hostFinalReceiptErrors", []).append({"file": name, "error": str(capture_error)})
 
 
 def combined_checks(host, completed, catalog, output, evidence, report):
@@ -296,7 +315,11 @@ def combined_checks(host, completed, catalog, output, evidence, report):
     queue_ready(host)
     host.call("queue/start")
     job = wait_jobs(host, set(added))[0]
-    require(job["status"] == "completed", "Explicit combined report job failed.")
+    observed = {key: job[key] for key in ("job_id", "status", "message", "folder")}
+    report["combinedJob"] = observed
+    write_json(evidence / "combined-job.json", observed)
+    write_json(evidence / "combined-run-state.json", host.call("run/get", {"run_id": job["job_id"]}))
+    require(job["status"] == "completed", "Explicit combined report job failed: " + json.dumps(observed))
     record = read_json(Path(job["folder"]) / "run.json")
     plan = read_json(Path(job["folder"]) / "plan.json")
     require(len(plan["graph"]["sources"]) == 2 and record["batch"] == plan["batch"] and
@@ -369,6 +392,13 @@ def cancellation_checks(host, graph, output, root, evidence, report):
     host.call("queue/start")
     def running():
         state = queue_state(host)
+        observed = next(job for job in state["jobs"] if job["job_id"] == first["job_id"])
+        if observed["status"] in TERMINAL:
+            details = {key: observed[key] for key in ("job_id", "status", "message", "folder")}
+            report["cancellationEarlyOutcome"] = details
+            write_json(evidence / "cancellation-early-job.json", details)
+            write_json(evidence / "cancellation-early-run-state.json", host.call("run/get", {"run_id": first["job_id"]}))
+            raise AssertionError("Queued cancellation fixture terminated before its native bridge was observed: " + json.dumps(details))
         return state if state["active_job"] == first["job_id"] and list(Path(first["folder"]).glob("*/bridge-request.json")) else None
     until("Cancellable queued job did not reach its native bridge.", running)
     host.call("example")
