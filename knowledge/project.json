@@ -3,7 +3,7 @@
   "document_kind": "project-knowledge-index",
   "project": "Native Workbench",
   "repository": "https://github.com/comparativechrono/workbench",
-  "reviewed_on": "2026-10-07",
+  "reviewed_on": "2026-10-08",
   "source_baseline_commit": "5a390acd8440856e3f4e32de237322a18bb82d7e",
   "format": {
     "prose": "UTF-8 Markdown",
@@ -95,7 +95,10 @@
     "tool_setup_0_10_0_public_downloads": "evidence/tool-setup-0.10.0-public-downloads-2026-10-07.json",
     "tool_setup_0_10_0_preparation": "evidence/tool-setup-0.10.0-preparation-2026-10-07.json",
     "expandable_tool_library": "expandable-tool-library.md",
-    "expandable_tool_library_validation": "evidence/tool-library-0.11.0-validation-2026-10-07.json"
+    "expandable_tool_library_validation": "evidence/tool-library-0.11.0-validation-2026-10-07.json",
+    "expandable_tool_library_release_notes": "../docs/releases/0.11.0.md",
+    "expandable_tool_library_release_summary": "evidence/tool-library-0.11.0-release-summary.json",
+    "expandable_tool_library_release_lock": "evidence/tool-library-0.11.0-release-lock.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -1040,12 +1043,19 @@
     "recorded_on": "2026-10-07",
     "version": "0.11.0",
     "branch": "feature/expandable-tool-library",
-    "status": "exact-candidate-validated-awaiting-tester-acceptance",
+    "status": "validated-release-authorized-publication-pending",
     "packaged_source_commit": "acfa060c9a400d82509278b657ee37853c7922b0",
     "validator_commit": "3c2d5079355e6a056dcdbe39f25b7b7bead7d670",
     "guide": "expandable-tool-library.md",
     "published_baseline": "0.10.1",
     "released": false,
-    "updater_built": false
+    "updater_built": true,
+    "release_authorized": true,
+    "updater_baseline": "0.10.1",
+    "final_validator_commit": "0c880d1060f22edb7e9c663743a1966a2f8f2eea",
+    "release_lock": "evidence/tool-library-0.11.0-release-lock.json",
+    "release_summary": "evidence/tool-library-0.11.0-release-summary.json",
+    "updater_run": 37683536378,
+    "final_native_run": 37685190036
   }
 }

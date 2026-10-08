@@ -1,0 +1,136 @@
+{
+  "schema": 1,
+  "recordedOn": "2026-10-08",
+  "version": "0.11.0",
+  "status": "validated-release-authorized-publication-pending",
+  "sourceCommit": "acfa060c9a400d82509278b657ee37853c7922b0",
+  "releaseAuthorized": true,
+  "authorization": {
+    "source": "Current owner message",
+    "message": "Please release 0.11.0 properly",
+    "scope": "Publish the validated 0.11.0 feature and supported updater. This is authorization, not a claim of additional manual tester observations."
+  },
+  "immutableApplication": true,
+  "updaterBaseline": "0.10.1",
+  "lock": "tool-library-0.11.0-release-lock.json",
+  "native": {
+    "platform": "GitHub Actions windows-2022; observed 96 DPI",
+    "paths": [
+      "ordinary",
+      "path with spaces"
+    ],
+    "checksPerPath": {
+      "workspace": 32,
+      "library": 7,
+      "references": 8,
+      "results": 9,
+      "scrollPanelGroups": 3,
+      "update": 13
+    },
+    "runs": {
+      "originalCandidate": 37678010251,
+      "correctedCategories": 37678715894,
+      "updater": 37683536378,
+      "finalRegressions": 37685190036
+    },
+    "updater": {
+      "preservedFiles": 204,
+      "verifiedCoreFiles": 72,
+      "obsoleteFiles": 0,
+      "replacements": 4,
+      "repeat": "already-installed",
+      "postUpdateOfflineScience": true
+    },
+    "science": {
+      "alignmentRecords": 202,
+      "variant": "starter:1351 G>A; GT 1/1",
+      "CWL": "embedded exported runner replay; not a Windows cwltool invocation"
+    },
+    "references": {
+      "liveDownload": true,
+      "ensemblRelease": 116,
+      "species": "Saccharomyces cerevisiae",
+      "types": [
+        "genome FASTA",
+        "GTF",
+        "cDNA",
+        "ncRNA",
+        "protein"
+      ],
+      "compressedAndExpandedHashes": true,
+      "cancellationCleanup": true,
+      "offlineReuse": true,
+      "compatibleGUIBinding": true,
+      "provenance": true,
+      "optionalEmbeddedUpdaterSkipped": "Optional native core updater gate was not requested.",
+      "separateUpdaterGatePassed": true
+    },
+    "scroll": {
+      "framesPerPath": 960,
+      "unexpectedFrames": 0,
+      "endpointFailures": 0,
+      "precisionWheelCasesPerPath": 18
+    }
+  },
+  "sourceChecks": {
+    "application": {
+      "passed": 70,
+      "failures": 0,
+      "skips": 0,
+      "platform": "Linux"
+    },
+    "updater": {
+      "passed": 17,
+      "platform": "Linux"
+    },
+    "compiler": "Pinned LLVM-MinGW 20260922 UCRT strict-warning cross-build"
+  },
+  "priorAudits": {
+    "staticGroupedChecks": 26,
+    "gitMatchedSourceFiles": 602,
+    "unchangedStarterPackFiles": 143,
+    "coreFiles": 72,
+    "updaterGroupedChecks": 42,
+    "finalNativeGroupedChecks": 67,
+    "screenshotHashes": 66,
+    "note": "Performed before interruption during this release task; final publisher rechecks exact archived receipts and source bindings. Counts overlap and are not a sum of unique application tests."
+  },
+  "failedAttempts": [
+    {
+      "run": 37678010251,
+      "conclusion": "failure",
+      "reason": "Focused category helper confused TVIS_BOLD 16 with TVIS_EXPANDED 32. Workspace 32 per path passed. Corrected validator passed against unchanged application.",
+      "correctedBy": 37678715894
+    },
+    {
+      "run": 37683806376,
+      "conclusion": "failure",
+      "validator": "5789a041a5fd0d0a0b44da5a769687cfc0d7d42d",
+      "passedPerPath": {
+        "library": 7,
+        "results": 9
+      },
+      "reason": "References helper version allowlist ended at 0.10.1; scroll helper clicked while first-launch Tool Setup covered main window.",
+      "correctedBy": 37685190036
+    },
+    {
+      "run": 37684476703,
+      "conclusion": "failure",
+      "validator": "74ac2e49575c4ef78aca96c02a6983b3d88452d1",
+      "passedPerPath": {
+        "library": 7,
+        "results": 9,
+        "referencesBackend": 7
+      },
+      "reason": "Helper changed to an already-selected mode without waiting for readiness; scroll helper did not wait for controls to re-enable after setup dismissal. Cleanup timeout masked its assertion. Final helper waits for actual readiness and preserves original observation errors.",
+      "correctedBy": 37685190036
+    }
+  ],
+  "limits": [
+    "Finite hosted Windows 96-DPI observations; physical trackpad pinch, high-DPI/multi-monitor behavior and managed-PC approval were not tested.",
+    "Full downloads of all 32 packs were not rerun for 0.11.0; pack bytes and production trust/profile are unchanged from the published baseline.",
+    "Updater native CLI/private-runtime preservation was tested; its folder-picker interaction was not part of that automated gate.",
+    "User-reported Heimdal bridge blocking is a separate institutional approval issue, not resolved or bypassed by this release.",
+    "Original immutable build/source companions retain creation-time pending-validation wording; later exact-hash release evidence supersedes it."
+  ]
+}

@@ -1,0 +1,361 @@
+{
+  "schema": 1,
+  "sourceCommit": "acfa060c9a400d82509278b657ee37853c7922b0",
+  "prNumber": 6,
+  "coreFiles": 72,
+  "authorization": {
+    "message": "Please release 0.11.0 properly",
+    "authorized": true,
+    "date": "2026-10-07"
+  },
+  "archives": {
+    "native-workbench-0.11.0-starter-windows.zip": {
+      "bytes": 17044022,
+      "sha256": "e816e2f7cd5efe98af752fbf072fab00344ebaa2b6963795c2fbf4a86b5fa81c"
+    },
+    "native-workbench-0.11.0-source.zip": {
+      "bytes": 46875983,
+      "sha256": "a45ad640f0767bb56458b59ce50d263537e54ebb401a0e809f31a5453adb2f2b"
+    },
+    "native-workbench-0.11.0-update-from-0.10.1.zip": {
+      "bytes": 12857609,
+      "sha256": "720d79aac5ddfd15dd3d06096950f3e56eff911981643eb6440ecb0f9911ecfe"
+    }
+  },
+  "runs": {
+    "candidate": {
+      "id": 37678010251,
+      "sourceCommit": "acfa060c9a400d82509278b657ee37853c7922b0",
+      "path": ".github/workflows/native-tool-library-candidate.yml",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "id": 112986418456,
+          "name": "build",
+          "conclusion": "success",
+          "nonSuccessSteps": []
+        },
+        {
+          "id": 112986888068,
+          "name": "native (ordinary)",
+          "conclusion": "failure",
+          "nonSuccessSteps": [
+            {
+              "name": "Native expandable categories, search, selection, scrolling and installed-pack refresh",
+              "conclusion": "failure"
+            }
+          ]
+        },
+        {
+          "id": 112986888194,
+          "name": "native (path with spaces)",
+          "conclusion": "failure",
+          "nonSuccessSteps": [
+            {
+              "name": "Native expandable categories, search, selection, scrolling and installed-pack refresh",
+              "conclusion": "failure"
+            }
+          ]
+        }
+      ]
+    },
+    "categories": {
+      "id": 37678715894,
+      "sourceCommit": "3c2d5079355e6a056dcdbe39f25b7b7bead7d670",
+      "path": ".github/workflows/native-tool-library-verify.yml",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 112988861775,
+          "name": "native (path with spaces)",
+          "conclusion": "success",
+          "nonSuccessSteps": []
+        },
+        {
+          "id": 112988861990,
+          "name": "native (ordinary)",
+          "conclusion": "success",
+          "nonSuccessSteps": []
+        }
+      ]
+    },
+    "updater": {
+      "id": 37683536378,
+      "sourceCommit": "f13e2c6dde1c1792405617af943dc706dfd42176",
+      "path": ".github/workflows/native-update-0.11.0.yml",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 113005384378,
+          "name": "build",
+          "conclusion": "success",
+          "nonSuccessSteps": []
+        },
+        {
+          "id": 113005564920,
+          "name": "native (ordinary)",
+          "conclusion": "success",
+          "nonSuccessSteps": []
+        },
+        {
+          "id": 113005564977,
+          "name": "native (path with spaces)",
+          "conclusion": "success",
+          "nonSuccessSteps": []
+        }
+      ]
+    },
+    "regressions": {
+      "id": 37685190036,
+      "sourceCommit": "0c880d1060f22edb7e9c663743a1966a2f8f2eea",
+      "path": ".github/workflows/native-library-release-check.yml",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 113011077214,
+          "name": "native (ordinary)",
+          "conclusion": "success",
+          "nonSuccessSteps": []
+        },
+        {
+          "id": 113011077667,
+          "name": "native (path with spaces)",
+          "conclusion": "success",
+          "nonSuccessSteps": []
+        }
+      ]
+    }
+  },
+  "artifacts": {
+    "candidate": {
+      "id": 11507920876,
+      "name": "tool-library-candidate-acfa060c9a400d82509278b657ee37853c7922b0",
+      "bytes": 63424882,
+      "sha256": "ab2ceafc3515cbf5dd0af9f9d1815358bb3c0fab99cdec57b45bade2490d7218",
+      "run": "candidate",
+      "file": "candidate.zip"
+    },
+    "workspace-ordinary": {
+      "id": 11508505527,
+      "name": "tool-library-windows-ordinary-1",
+      "bytes": 862356,
+      "sha256": "d7d814fa0ec988e76dab8fb993e6b9227f1c8cda8c0d67031921e993e7e31c03",
+      "run": "candidate",
+      "file": "workspace-ordinary.zip"
+    },
+    "workspace-spaces": {
+      "id": 11508380589,
+      "name": "tool-library-windows-path with spaces-1",
+      "bytes": 860361,
+      "sha256": "4ccf9793503276d622868ea8dc1479a53e3b7d36d732748691b2b85681689b02",
+      "run": "candidate",
+      "file": "workspace-spaces.zip"
+    },
+    "library-ordinary": {
+      "id": 11507976693,
+      "name": "tool-library-verified-ordinary-1",
+      "bytes": 1313443,
+      "sha256": "48996310a819b1affa0c8d03804cae5eb6fc9f8ad57392825dfdcee9add35f12",
+      "run": "categories",
+      "file": "library-ordinary.zip"
+    },
+    "library-spaces": {
+      "id": 11509095498,
+      "name": "tool-library-verified-path with spaces-1",
+      "bytes": 1312501,
+      "sha256": "e77a7e08a7f9ef5b383466e6cbbb424030861ca56e7eee72ca3d5972ed2bc5dd",
+      "run": "categories",
+      "file": "library-spaces.zip"
+    },
+    "updater": {
+      "id": 11510267028,
+      "name": "update-0.11.0-from-0.10.1-f13e2c6dde1c1792405617af943dc706dfd42176",
+      "bytes": 12860880,
+      "sha256": "e6b4f9058fe65c9b56d89362b2687fa1e6ff8cd97a5bd446cbe9e9eb76825395",
+      "run": "updater",
+      "file": "updater.zip"
+    },
+    "update-ordinary": {
+      "id": 11509398431,
+      "name": "update-0.11.0-ordinary-1",
+      "bytes": 287931,
+      "sha256": "9b822b46eeba49c83a124ede986a51a006ca641192fc5cfea1fc32c5f85c6a07",
+      "run": "updater",
+      "file": "update-ordinary.zip"
+    },
+    "update-spaces": {
+      "id": 11510092713,
+      "name": "update-0.11.0-path with spaces-1",
+      "bytes": 288266,
+      "sha256": "dbbdb09cd753c63b3aa22ab5cec5c84410cc2c8a98942dc4cee6736b9b75981c",
+      "run": "updater",
+      "file": "update-spaces.zip"
+    },
+    "regressions-ordinary": {
+      "id": 11510906175,
+      "name": "tool-library-release-checks-ordinary-1",
+      "bytes": 2412375,
+      "sha256": "7fc115455e28848a272769214272f7dc8a03a153647030f1f5e6434ae8cf17de",
+      "run": "regressions",
+      "file": "regressions-ordinary.zip"
+    },
+    "regressions-spaces": {
+      "id": 11510444954,
+      "name": "tool-library-release-checks-path with spaces-1",
+      "bytes": 2413585,
+      "sha256": "e75d7fcc05f5842ac1c4c274027a3f6a442eadb8886b2dd1cbb3c272ee2e5c00",
+      "run": "regressions",
+      "file": "regressions-spaces.zip"
+    }
+  },
+  "reports": {
+    "ordinary-workspace": {
+      "kind": "workspace",
+      "artifact": "workspace-ordinary",
+      "path": "workspace-evidence/native-ui.json",
+      "sha256": "f9ae55647b66a71f0935b8582469e84dd9aa83368d6c7e027b90a896ad3e6744",
+      "passed": 32,
+      "sourceCommit": "acfa060c9a400d82509278b657ee37853c7922b0",
+      "validatorCommit": "acfa060c9a400d82509278b657ee37853c7922b0",
+      "gate": "scripts/check_workspace_ui_windows.py",
+      "gateCommit": "acfa060c9a400d82509278b657ee37853c7922b0",
+      "skips": []
+    },
+    "ordinary-library": {
+      "kind": "library",
+      "artifact": "regressions-ordinary",
+      "path": "library-evidence/native-tool-library.json",
+      "sha256": "e13aa7aba961da484de57183a6214b41ad9f66c87aae4e3e73482d33acfb095b",
+      "passed": 7,
+      "sourceCommit": "acfa060c9a400d82509278b657ee37853c7922b0",
+      "validatorCommit": "0c880d1060f22edb7e9c663743a1966a2f8f2eea",
+      "gate": "scripts/check_tool_library_windows.py",
+      "gateCommit": "0c880d1060f22edb7e9c663743a1966a2f8f2eea",
+      "skips": []
+    },
+    "ordinary-results": {
+      "kind": "results",
+      "artifact": "regressions-ordinary",
+      "path": "results-evidence/native-results.json",
+      "sha256": "9edf58e638163cfa92589047e7b874df96a81fc05e23a6c744edd29e14e9c8c8",
+      "passed": 9,
+      "sourceCommit": "acfa060c9a400d82509278b657ee37853c7922b0",
+      "validatorCommit": "0c880d1060f22edb7e9c663743a1966a2f8f2eea",
+      "gate": "scripts/check_results_windows.py",
+      "gateCommit": "0c880d1060f22edb7e9c663743a1966a2f8f2eea",
+      "skips": []
+    },
+    "ordinary-references": {
+      "kind": "references",
+      "artifact": "regressions-ordinary",
+      "path": "references-evidence/native-references.json",
+      "sha256": "12de4da1ad259d05d92052b87b770c3e1c2c6c6c7710d864cf7ddf2198da1ac4",
+      "passed": 8,
+      "sourceCommit": "acfa060c9a400d82509278b657ee37853c7922b0",
+      "validatorCommit": "0c880d1060f22edb7e9c663743a1966a2f8f2eea",
+      "gate": "scripts/check_references_windows.py",
+      "gateCommit": "0c880d1060f22edb7e9c663743a1966a2f8f2eea",
+      "skips": [
+        "Optional native core updater gate was not requested."
+      ]
+    },
+    "ordinary-scroll": {
+      "kind": "scroll",
+      "artifact": "regressions-ordinary",
+      "path": "scroll-evidence/native-scroll.json",
+      "sha256": "e06c8b38b59da8ea9ef3ea62a1d3fd21c3dac65e2c4aa823e4d8f05029b238a6",
+      "passed": 3,
+      "sourceCommit": "acfa060c9a400d82509278b657ee37853c7922b0",
+      "validatorCommit": "0c880d1060f22edb7e9c663743a1966a2f8f2eea",
+      "gate": "scripts/check_scroll_frames_windows.py",
+      "gateCommit": "0c880d1060f22edb7e9c663743a1966a2f8f2eea",
+      "skips": []
+    },
+    "ordinary-update": {
+      "kind": "update",
+      "artifact": "update-ordinary",
+      "path": "update-native.json",
+      "sha256": "0ea5a1af1d05017893dc8471cac39cc0f5d1be6c9ffcb7c33ad86fa626b0f481",
+      "passed": 13,
+      "sourceCommit": "acfa060c9a400d82509278b657ee37853c7922b0",
+      "validatorCommit": "f13e2c6dde1c1792405617af943dc706dfd42176",
+      "gate": "scripts/check_update_0110_windows.py",
+      "gateCommit": "f13e2c6dde1c1792405617af943dc706dfd42176",
+      "skips": []
+    },
+    "spaces-workspace": {
+      "kind": "workspace",
+      "artifact": "workspace-spaces",
+      "path": "workspace-evidence/native-ui.json",
+      "sha256": "d3cf36550b1bed77bdf42704a439f8c183f9f8ce2c7d00852746a46a23fb4b69",
+      "passed": 32,
+      "sourceCommit": "acfa060c9a400d82509278b657ee37853c7922b0",
+      "validatorCommit": "acfa060c9a400d82509278b657ee37853c7922b0",
+      "gate": "scripts/check_workspace_ui_windows.py",
+      "gateCommit": "acfa060c9a400d82509278b657ee37853c7922b0",
+      "skips": []
+    },
+    "spaces-library": {
+      "kind": "library",
+      "artifact": "regressions-spaces",
+      "path": "library-evidence/native-tool-library.json",
+      "sha256": "7d38bce001bb9e635492fdc46eab7b1bbc39709fa552f03c12f7ebb0736f4e93",
+      "passed": 7,
+      "sourceCommit": "acfa060c9a400d82509278b657ee37853c7922b0",
+      "validatorCommit": "0c880d1060f22edb7e9c663743a1966a2f8f2eea",
+      "gate": "scripts/check_tool_library_windows.py",
+      "gateCommit": "0c880d1060f22edb7e9c663743a1966a2f8f2eea",
+      "skips": []
+    },
+    "spaces-results": {
+      "kind": "results",
+      "artifact": "regressions-spaces",
+      "path": "results-evidence/native-results.json",
+      "sha256": "df20e87a5407fc6145dca9ea357b22e349104515ab794ce6466a7bd61f6fbd7a",
+      "passed": 9,
+      "sourceCommit": "acfa060c9a400d82509278b657ee37853c7922b0",
+      "validatorCommit": "0c880d1060f22edb7e9c663743a1966a2f8f2eea",
+      "gate": "scripts/check_results_windows.py",
+      "gateCommit": "0c880d1060f22edb7e9c663743a1966a2f8f2eea",
+      "skips": []
+    },
+    "spaces-references": {
+      "kind": "references",
+      "artifact": "regressions-spaces",
+      "path": "references-evidence/native-references.json",
+      "sha256": "0f5feae7dc846a9acffab0aba985108f59c53da442c301740c8b850e715b527f",
+      "passed": 8,
+      "sourceCommit": "acfa060c9a400d82509278b657ee37853c7922b0",
+      "validatorCommit": "0c880d1060f22edb7e9c663743a1966a2f8f2eea",
+      "gate": "scripts/check_references_windows.py",
+      "gateCommit": "0c880d1060f22edb7e9c663743a1966a2f8f2eea",
+      "skips": [
+        "Optional native core updater gate was not requested."
+      ]
+    },
+    "spaces-scroll": {
+      "kind": "scroll",
+      "artifact": "regressions-spaces",
+      "path": "scroll-evidence/native-scroll.json",
+      "sha256": "ff105481219c68a6c9fa5d32e132a8a1962e123046187faea8da452978df9939",
+      "passed": 3,
+      "sourceCommit": "acfa060c9a400d82509278b657ee37853c7922b0",
+      "validatorCommit": "0c880d1060f22edb7e9c663743a1966a2f8f2eea",
+      "gate": "scripts/check_scroll_frames_windows.py",
+      "gateCommit": "0c880d1060f22edb7e9c663743a1966a2f8f2eea",
+      "skips": []
+    },
+    "spaces-update": {
+      "kind": "update",
+      "artifact": "update-spaces",
+      "path": "update-native.json",
+      "sha256": "b07e2139f454257c869512f6a8f106a7f6f8b7746576398a6c2de16c002ced13",
+      "passed": 13,
+      "sourceCommit": "acfa060c9a400d82509278b657ee37853c7922b0",
+      "validatorCommit": "f13e2c6dde1c1792405617af943dc706dfd42176",
+      "gate": "scripts/check_update_0110_windows.py",
+      "gateCommit": "f13e2c6dde1c1792405617af943dc706dfd42176",
+      "skips": []
+    }
+  }
+}

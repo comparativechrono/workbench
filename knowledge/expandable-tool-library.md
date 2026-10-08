@@ -1,5 +1,18 @@
 # Expandable native tool library
 
+## Release preparation update, 2026-10-08
+
+The owner has authorized release of 0.11.0. The exact candidate now has a
+validated updater from published 0.10.1. Final native gates passed 7 library,
+32 workspace, 8 References, 9 results, 3 scrolling groups and 13 upgrade checks
+per ordinary/space-containing Windows path. Live Ensembl downloads were rerun.
+The [release summary](evidence/tool-library-0.11.0-release-summary.json) and
+[release lock](evidence/tool-library-0.11.0-release-lock.json) supersede the
+historical pending-acceptance/updater statements below. Public promotion is
+still pending. See [0.11.0 notes](../docs/releases/0.11.0.md).
+
+## Original development handover, 2026-10-07
+
 Development started **2026-10-07** from published 0.10.1 documentation baseline
 `3a6e06f8fa05a8ceebed4584bd3433e07f08df52`, on
 `feature/expandable-tool-library`. The tested development candidate is **0.11.0**.

@@ -12,6 +12,14 @@ The application does not require Docker, WSL or a system Python installation.
 
 ## Release status
 
+**0.11.0 is validated and authorized for publication.** It adds expandable
+native tool categories, preserves search and workflow interaction, and includes
+a validated updater from 0.10.1. Public promotion/download verification is still
+pending; use the published baseline below until the release record is updated.
+See the [0.11.0 release notes](docs/releases/0.11.0.md) and
+[handover](knowledge/expandable-tool-library.md).
+
+
 [**0.10.1 is published as a development prerelease**](https://github.com/comparativechrono/workbench/releases/tag/app-v0.10.1).
 It fixes Tool Setup scrolling and repeated header redraws, preserves navigation
 while packs install, and replaces generic download errors with specific network
