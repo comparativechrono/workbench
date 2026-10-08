@@ -325,11 +325,30 @@ def corruption_checks(host, graph, output, evidence, report):
             "Failure did not pause the remaining frozen queue.")
     host.call("queue/start")
     failed.extend(wait_jobs(host, {altered_plan["job_id"]}))
-    require(all(job["status"] == "failed" for job in failed), "Changed input or queued companion did not fail closed.")
+    observed = [{key: job[key] for key in ("job_id", "status", "message", "folder")} for job in failed]
+    report["failClosed"] = observed
+    write_json(evidence / "corruption-queue-results.json", observed)
+    write_json(evidence / "corruption-persisted-queue.json", read_json(host.gate_queue_state_path))
+    history_path = host.gate_queue_state_path.with_name("runs.json")
+    if history_path.exists():
+        history = read_json(history_path)
+        identities = {job["job_id"] for job in failed}
+        write_json(evidence / "corruption-persisted-history.json", [run for run in history if run.get("run_id") in identities])
+    for job in failed:
+        write_json(evidence / ("corruption-run-state-" + job["job_id"] + ".json"),
+                   host.call("run/get", {"run_id": job["job_id"]}))
+    require(all(job["status"] == "failed" for job in failed), "Changed input or queued companion did not fail closed: " + json.dumps(observed))
+    input_failure = next(job for job in failed if job["job_id"] == altered_input["job_id"])
+    companion_failure = next(job for job in failed if job["job_id"] == altered_plan["job_id"])
+    require("queued preparation file changed: methods-planned.txt" in companion_failure["message"].lower(),
+            "Corrupt companion failed for an unexpected reason: " + json.dumps(observed))
     require(not (Path(altered_plan["folder"]) / "run.json").exists(), "Corrupt prepared companion reached execution.")
-    run = read_json(Path(altered_input["folder"]) / "run.json")
-    require(not run["success"] and not run["outputs"] and "changed" in json.dumps(run).lower(), "Changed sample produced accepted scientific output.")
-    report["failClosed"] = [{key: job[key] for key in ("job_id", "status", "message")} for job in failed]
+    run_path = Path(altered_input["folder"]) / "run.json"
+    require(run_path.is_file(), "Changed-input job did not enter the expected engine integrity check: " + json.dumps(observed))
+    run = read_json(run_path)
+    require(not run["success"] and not run["outputs"] and
+            any("external input changed after the plan was frozen" in node.get("message", "").lower() for node in run["nodes"]),
+            "Changed sample was not rejected by the intended frozen input-integrity check: " + json.dumps(observed))
     check(report, "Changing an input after freezing or altering a prepared companion fails closed; neither produces accepted outputs and corrupt preparation never enters execution.")
 
 
