@@ -280,9 +280,8 @@ def modal_intro_geometry(ui, modal, previous_text=None):
     require(ui.user.GetClientRect(label, ctypes.byref(available)), "Cannot measure native modal introduction.")
     dc = ui.user.GetDC(label)
     require(dc, "Cannot obtain the native label drawing context.")
-    font = ui.send(label, 0x0031)  # WM_GETFONT, the actual font assigned by the app.
-    require(font, "Native introduction does not expose its assigned font.")
-    previous_font = ui.gdi.SelectObject(dc, font)
+    previous_font = None
+    invalid_font = ctypes.c_void_p(-1).value  # HGDI_ERROR.
     ui.user.DrawTextW.argtypes = [wintypes.HDC, wintypes.LPWSTR, ctypes.c_int,
                                  ctypes.POINTER(wintypes.RECT), wintypes.UINT]
     def measured(text):
@@ -293,6 +292,10 @@ def modal_intro_geometry(ui, modal, previous_text=None):
                 "Native introductory text could not be measured.")
         return rectangle.bottom - rectangle.top
     try:
+        font = ui.send(label, 0x0031)  # WM_GETFONT, the actual font assigned by the app.
+        require(font, "Native introduction does not expose its assigned font.")
+        previous_font = ui.gdi.SelectObject(dc, font)
+        require(previous_font not in (None, 0, invalid_font), "Cannot select the actual native introduction font.")
         text = ui.label(label)
         height = measured(text)
         capacity = available.bottom - available.top
@@ -308,7 +311,8 @@ def modal_intro_geometry(ui, modal, previous_text=None):
                                                   "wouldClip": True}
         return result
     finally:
-        ui.gdi.SelectObject(dc, previous_font)
+        if previous_font not in (None, 0, invalid_font):
+            ui.gdi.SelectObject(dc, previous_font)
         ui.user.ReleaseDC(label, dc)
 
 
