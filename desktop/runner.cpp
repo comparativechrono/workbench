@@ -1,5 +1,6 @@
 #include "workbench.h"
 #include "child_environment.h"
+#include "process_performance.h"
 
 #include <algorithm>
 #include <array>
@@ -204,6 +205,7 @@ struct Stage {
     DWORD exit_code = 0;
     ULONGLONG elapsed_ms = 0;
     std::wstring sha256;
+    ProcessPerformance performance;
 };
 
 std::string input_json(const InputInfo& input) {
@@ -240,6 +242,7 @@ std::string manifest(const Request& request, const InputInfo& input, const Input
             << ",\"exit_code\":" << (stage.finished ? std::to_string(stage.exit_code) : "null")
             << ",\"cancelled\":" << (stage.cancelled ? "true" : "false")
             << ",\"elapsed_ms\":" << stage.elapsed_ms
+            << ",\"performance\":" << process_performance_json(stage.performance)
             << ",\"stderr\":" << json_string(stage.stderr_path)
             << ",\"output\":" << json_string(stage.final)
             << ",\"published\":" << (stage.published ? "true" : "false")
@@ -284,8 +287,11 @@ std::wstring quote_argument(const std::wstring& argument) {
 
 ProcessResult execute(const std::wstring& executable, const std::vector<std::wstring>& args,
     const std::wstring& stdout_file, const std::wstring& stderr_file, Cancel& cancel, const Log& log, DWORD timeout_ms,
-    const std::wstring& working_directory) {
-    if (cancel.load()) return {ERROR_CANCELLED, true};
+    const std::wstring& working_directory, ProcessPerformance* performance) {
+    ProcessPerformance local_performance;
+    ProcessPerformance& measured = performance ? *performance : local_performance;
+    measured = {};
+    if (cancel.load()) return {ERROR_CANCELLED, true, measured};
     std::wstring binary = absolute_path(executable);
     const std::wstring child_directory = working_directory.empty() ? std::wstring{} : absolute_path(working_directory);
     std::wstring command = quote_argument(binary);
@@ -303,6 +309,7 @@ ProcessResult execute(const std::wstring& executable, const std::vector<std::wst
     if (!null_input.valid()) fail(L"Cannot open process input");
     Handle job(CreateJobObjectW(nullptr, nullptr));
     if (!job.valid()) fail(L"Cannot create process job");
+    JobPerformanceCapture metrics(job.get(), measured);
     JOBOBJECT_EXTENDED_LIMIT_INFORMATION limits{};
     limits.BasicLimitInformation.LimitFlags = JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE;
     if (!SetInformationJobObject(job.get(), JobObjectExtendedLimitInformation, &limits, sizeof(limits)))
@@ -322,6 +329,7 @@ ProcessResult execute(const std::wstring& executable, const std::vector<std::wst
     PROCESS_INFORMATION information{};
     emit(log, L"Running: " + command);
     ULONGLONG started = GetTickCount64();
+    metrics.begin(started);
     auto environment = pack_child_environment();
     if (!CreateProcessW(binary.c_str(), command.data(), nullptr, nullptr, TRUE,
         EXTENDED_STARTUPINFO_PRESENT | CREATE_SUSPENDED | CREATE_NO_WINDOW | CREATE_UNICODE_ENVIRONMENT, environment.data(),
@@ -334,6 +342,7 @@ ProcessResult execute(const std::wstring& executable, const std::vector<std::wst
         WaitForSingleObject(process.get(), 5000);
         fail(L"Windows did not permit the tool to enter its cancellable process job", code);
     }
+    metrics.assigned();
     // All exceptions after assignment close the job and kill the entire tree.
     if (ResumeThread(thread.get()) == static_cast<DWORD>(-1)) fail(L"Cannot resume tool process");
     thread.reset();
@@ -359,6 +368,7 @@ ProcessResult execute(const std::wstring& executable, const std::vector<std::wst
                 exited = true; exited_at = GetTickCount64();
                 // A command has ended. Do not leave detached descendants keeping
                 // pipes or files open after the main executable has returned.
+                metrics.capture();
                 job.reset();
             }
         }
@@ -370,7 +380,7 @@ ProcessResult execute(const std::wstring& executable, const std::vector<std::wst
     flush_close(output, stdout_file); flush_close(errors, stderr_file);
     emit(log, L"Tool exit code: " + std::to_wstring(exit_code));
     if (timed_out) throw std::runtime_error("The validation command exceeded its time limit.");
-    return {exit_code, cancelled || cancel.load()};
+    return {exit_code, cancelled || cancel.load(), measured};
 }
 
 Result run_job(const Request& request, Cancel& cancel, const Log& log, const Phase& report_phase) {
@@ -448,7 +458,8 @@ Result run_job(const Request& request, Cancel& cancel, const Log& log, const Pha
             ULONGLONG stage_start = GetTickCount64();
             stage.started = true;
             ProcessResult process;
-            try { process = execute(stage.tool.path, stage.args, stage.partial, stage.stderr_path, cancel, record_log); }
+            try { process = execute(stage.tool.path, stage.args, stage.partial, stage.stderr_path,
+                cancel, record_log, 0, {}, &stage.performance); }
             catch (...) { stage.elapsed_ms = GetTickCount64() - stage_start; throw; }
             stage.elapsed_ms = GetTickCount64() - stage_start;
             stage.finished = true; stage.exit_code = process.exit_code; stage.cancelled = process.cancelled;

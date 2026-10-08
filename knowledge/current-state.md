@@ -1,5 +1,21 @@
 # Current project state
 
+## Active development: 0.12.0, unpublished
+
+On **2026-10-08** the owner accepted the [broader feature roadmap](roadmap.md).
+The first milestone is in progress on `feature/readiness-performance`, based on
+`82729febfcfab1c43bd9c9798d03c80f595545cb`: explicit run readiness, scoped local
+performance records and review-before-save diagnostic ZIPs. See the
+[feature guide and validation handover](readiness-performance.md).
+
+The working implementation is separate from published 0.11.0. At this snapshot,
+packaged Windows validation, representative-machine acceptance and release work
+for 0.12.0 are not complete. Existing native passes below apply to their recorded
+0.11.0 bytes. Sample batching, durable queues, reusable indexes, verified restart
+and bounded concurrency remain subsequent accepted work, not completed features.
+
+## Published baseline: 0.11.0
+
 Snapshot: **2026-10-08**. Application **0.11.0 is published** as a development
 prerelease at [app-v0.11.0](https://github.com/comparativechrono/workbench/releases/tag/app-v0.11.0).
 Release **406281343** was published at **2026-10-08T00:36:31Z**.

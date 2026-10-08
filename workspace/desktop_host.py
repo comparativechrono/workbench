@@ -231,7 +231,17 @@ class DesktopHost:
                     self.model.dispatch(action, payload)
                 return self.snapshot()
         if method == "review":
-            return self.app.review(copy.deepcopy(params.get("graph", self.graph())))
+            if set(params) - {"graph", "output_folder"}:
+                raise ValueError("Unknown readiness request field.")
+            return self.app.review(copy.deepcopy(params.get("graph", self.graph())), params.get("output_folder"))
+        if method == "diagnostics/review":
+            if set(params) - {"run_id"}:
+                raise ValueError("Unknown diagnostic review field.")
+            return self.app.review_diagnostics(params.get("run_id"))
+        if method == "diagnostics/save":
+            if set(params) != {"token", "output_folder"}:
+                raise ValueError("Choose a reviewed diagnostic report and output folder.")
+            return self.app.save_diagnostics(params["token"], params["output_folder"])
         if method in ("run", "check"):
             with self.app.lock:
                 self.app.ensure_editable()
@@ -376,9 +386,9 @@ def serve(host, input_stream, output_stream):
             except (ValueError, UnicodeError, TypeError, RecursionError) as exc:
                 send(None, error=exc)
                 continue
-            if method in ("review", "import"):
+            if method in ("review", "import", "diagnostics/save"):
                 if not capacity.acquire(blocking=False):
-                    send(identity, error="A review or tool import is still running. Wait before trying again.")
+                    send(identity, error="A review, tool import or diagnostic save is still running. Wait before trying again.")
                     continue
                 if method == "review" and "graph" not in params:
                     # Snapshot at command receipt, after preceding model edits,

@@ -74,6 +74,7 @@ enum {
   ZOOM_OUT,
   ZOOM_IN,
   ZOOM_RESET,
+  REVIEW_DIAGNOSTICS,
   PACK_SEARCH = 501,
   PACK_FILTER,
   PACK_LIST,
@@ -2378,7 +2379,8 @@ class Workspace {
              {FILE_CHECK, L"Check installation"},
              {FILE_EXIT, L"Exit"}})
       AppendMenuW(file, MF_STRING, pair.first, pair.second);
-    AppendMenuW(view, MF_STRING, VIEW_METHODS, L"Planned methods...");
+    AppendMenuW(view, MF_STRING, VIEW_METHODS, L"Readiness and planned methods...");
+    AppendMenuW(view, MF_STRING, REVIEW_DIAGNOSTICS, L"Review diagnostics...");
     AppendMenuW(view, MF_STRING, VIEW_LOG, L"Run log...");
     AppendMenuW(view, MF_STRING, OPEN_RESULTS, L"Open results folder");
     AppendMenuW(menu, MF_POPUP, reinterpret_cast<UINT_PTR>(file), L"File");
@@ -2417,7 +2419,7 @@ class Workspace {
     manageReferences = button(L"References...", MANAGE_REFERENCES);
     run = make(L"BUTTON", L"Run tool", WS_TABSTOP | BS_OWNERDRAW, RUN);
     cancel = button(L"Cancel run", CANCEL);
-    review = button(L"Methods", REVIEW);
+    review = button(L"Readiness", REVIEW);
     back = button(L"Back to workspace", BACK_WORKSPACE);
     search = make(L"EDIT", L"", WS_TABSTOP | ES_AUTOHSCROLL, SEARCH, nullptr,
                   WS_EX_CLIENTEDGE);
@@ -3591,6 +3593,13 @@ class Workspace {
                         : L"Select a tool, choose its inputs and options, then run it locally.");
     } else if (method == "review") {
       std::wstring content;
+      if (result.contains("readiness")) {
+        const auto &readiness = result.get("readiness");
+        content = wt(readiness, "summary") + L"\n\n";
+        for (const auto &check : readiness.get("checks").array_items())
+          content += wt(check, "label") + L" [" + wt(check, "status") +
+                     L"]\n" + wt(check, "message") + L"\n\n";
+      }
       for (const auto &issue : result.get("issues").array_items())
         content += wt(issue, "severity") + L": " + wt(issue, "message") + L"\n";
       content += L"\n" + wt(result, "methods");
@@ -3600,14 +3609,28 @@ class Workspace {
       m.owner = window;
       m.font = font;
       m.mode = 2;
-      m.title = L"Review planned methods";
-      m.message = L"Review the selected tools, settings and input "
-                  L"provenance before running.";
+      m.title = L"Readiness and planned methods";
+      m.message = L"Review this analysis. Installation checks do not guarantee "
+                  L"that the selected data or workflow will run successfully.";
       m.value = content;
       m.confirm =
           start && result.get("valid").boolean() ? L"Run analysis" : L"Done";
       if (m.show() && start && result.get("valid").boolean())
         send("run", object({{"output_folder", narrow(control_text(output))}}));
+    } else if (method == "diagnostics/review") {
+      Modal m;
+      m.owner = window;
+      m.font = font;
+      m.mode = 2;
+      m.title = L"Review diagnostic report";
+      m.message = L"Review the report, then save it to the selected output folder. Nothing is uploaded.";
+      m.value = wt(result, "preview");
+      m.confirm = L"Save diagnostic ZIP";
+      if (m.show())
+        send("diagnostics/save", object({{"token", getstr(result, "token")},
+             {"output_folder", narrow(control_text(output))}}));
+    } else if (method == "diagnostics/save") {
+      show_text(L"Diagnostic report saved", L"Saved locally. Nothing was uploaded.\n\n" + wt(result, "path"));
     } else if (method == "run" || method == "check") {
       runId = getstr(result, "run_id");
       busy = true;
@@ -3763,6 +3786,11 @@ class Workspace {
       show_references();
       return;
     }
+    if (id == REVIEW_DIAGNOSTICS && ready && !closing) {
+      const auto identity = showingHistory ? getstr(historyRun, "run_id") : runId;
+      send("diagnostics/review", identity.empty() ? object({}) : object({{"run_id", identity}}));
+      return;
+    }
     if (busy || setupBusy || setupActionPending || packBusy || packActionPending || refBusy || refActionPending || showingHistory) {
       if (id == REVIEW || id == VIEW_METHODS)
         show_text(
@@ -3800,12 +3828,12 @@ class Workspace {
       break;
     case RUN:
       reviewThenRun = true;
-      send("review");
+      send("review", object({{"output_folder", narrow(control_text(output))}}));
       break;
     case REVIEW:
     case VIEW_METHODS:
       reviewThenRun = false;
-      send("review");
+      send("review", object({{"output_folder", narrow(control_text(output))}}));
       break;
     case FILE_NEW:
       canvas_reset_positions();

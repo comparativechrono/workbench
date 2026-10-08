@@ -101,7 +101,8 @@
     "expandable_tool_library_release_lock": "evidence/tool-library-0.11.0-release-lock.json",
     "expandable_tool_library_publication": "evidence/tool-library-0.11.0-publication-2026-10-08.json",
     "expandable_tool_library_public_downloads": "evidence/tool-library-0.11.0-public-downloads-2026-10-08.json",
-    "expandable_tool_library_preparation": "evidence/tool-library-0.11.0-preparation-2026-10-08.json"
+    "expandable_tool_library_preparation": "evidence/tool-library-0.11.0-preparation-2026-10-08.json",
+    "readiness_performance": "readiness-performance.md"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -1069,5 +1070,34 @@
     "preparation_run": 37708488034,
     "publication_record": "evidence/tool-library-0.11.0-publication-2026-10-08.json",
     "public_downloads": "evidence/tool-library-0.11.0-public-downloads-2026-10-08.json"
+  },
+  "active_development": {
+    "recorded_on": "2026-10-08",
+    "version": "0.12.0",
+    "branch": "feature/readiness-performance",
+    "starting_commit": "82729febfcfab1c43bd9c9798d03c80f595545cb",
+    "status": "in development; unpublished; packaged Windows validation and representative-machine acceptance pending",
+    "authorization": "Owner accepted the full proposed feature programme and instructed development to begin.",
+    "milestone": 1,
+    "scope": [
+      "explicit run readiness",
+      "scoped local performance records",
+      "reviewable local diagnostic export"
+    ],
+    "handover": "readiness-performance.md",
+    "roadmap": "roadmap.md",
+    "published_baseline": "0.11.0",
+    "published_assets_changed": false,
+    "later_accepted_milestones": [
+      "sample table, general batch workflows, durable queue and reusable indexes",
+      "verified completed-step restart, resource-bounded concurrency and portable projects"
+    ],
+    "cross_cutting_acceptance": [
+      "high-DPI displays",
+      "keyboard accessibility",
+      "physical trackpads",
+      "managed Windows machines"
+    ],
+    "evidence_scope": "Do not transfer historical native results to changed bytes. Unavailable or skipped checks are not passes."
   }
 }
