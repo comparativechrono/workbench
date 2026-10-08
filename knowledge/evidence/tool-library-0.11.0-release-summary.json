@@ -2,7 +2,7 @@
   "schema": 1,
   "recordedOn": "2026-10-08",
   "version": "0.11.0",
-  "status": "validated-release-authorized-publication-pending",
+  "status": "published-exact-accepted-archives-public-downloads-verified",
   "sourceCommit": "acfa060c9a400d82509278b657ee37853c7922b0",
   "releaseAuthorized": true,
   "authorization": {
@@ -132,5 +132,14 @@
     "Updater native CLI/private-runtime preservation was tested; its folder-picker interaction was not part of that automated gate.",
     "User-reported Heimdal bridge blocking is a separate institutional approval issue, not resolved or bypassed by this release.",
     "Original immutable build/source companions retain creation-time pending-validation wording; later exact-hash release evidence supersedes it."
-  ]
+  ],
+  "releasePublished": true,
+  "releaseId": 406281343,
+  "releaseUrl": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.11.0",
+  "publicationCommit": "a97af2d02a3a6f4623ceec0f06f69fa10d04cbb6",
+  "publishedAt": "2026-10-08T00:36:31Z",
+  "publicationRun": 37708604434,
+  "preparationRun": 37708488034,
+  "publicationRecord": "tool-library-0.11.0-publication-2026-10-08.json",
+  "publicDownloads": "tool-library-0.11.0-public-downloads-2026-10-08.json"
 }

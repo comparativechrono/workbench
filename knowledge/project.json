@@ -4,7 +4,7 @@
   "project": "Native Workbench",
   "repository": "https://github.com/comparativechrono/workbench",
   "reviewed_on": "2026-10-08",
-  "source_baseline_commit": "5a390acd8440856e3f4e32de237322a18bb82d7e",
+  "source_baseline_commit": "acfa060c9a400d82509278b657ee37853c7922b0",
   "format": {
     "prose": "UTF-8 Markdown",
     "data": "JSON",
@@ -98,7 +98,10 @@
     "expandable_tool_library_validation": "evidence/tool-library-0.11.0-validation-2026-10-07.json",
     "expandable_tool_library_release_notes": "../docs/releases/0.11.0.md",
     "expandable_tool_library_release_summary": "evidence/tool-library-0.11.0-release-summary.json",
-    "expandable_tool_library_release_lock": "evidence/tool-library-0.11.0-release-lock.json"
+    "expandable_tool_library_release_lock": "evidence/tool-library-0.11.0-release-lock.json",
+    "expandable_tool_library_publication": "evidence/tool-library-0.11.0-publication-2026-10-08.json",
+    "expandable_tool_library_public_downloads": "evidence/tool-library-0.11.0-public-downloads-2026-10-08.json",
+    "expandable_tool_library_preparation": "evidence/tool-library-0.11.0-preparation-2026-10-08.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -149,8 +152,8 @@
     }
   },
   "historical_source_baseline_commit": "8f95caa1f267d19ce72ea3cd7f2396ae66a801c1",
-  "release_tag_commit": "2e474345dff195b860df39fdde263c840dd1fba3",
-  "source_commit_scope": "Published 0.10.0 packaged application source. The later release tag/PR3 merge includes promotion and validation/documentation changes without rebuilding accepted application bytes. Historical releases retain their own identities.",
+  "release_tag_commit": "a97af2d02a3a6f4623ceec0f06f69fa10d04cbb6",
+  "source_commit_scope": "Published 0.11.0 packaged application source. The tag/PR6 merge includes separate updater, validation and publication sources; accepted app/source archives were not rebuilt.",
   "native_ui_development": {
     "recorded_on": "2026-10-06",
     "version": "0.8.0",
@@ -1027,28 +1030,30 @@
     "release_url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.10.0"
   },
   "accepted_application_candidate": {
-    "version": "0.10.0",
-    "source_commit": "5a390acd8440856e3f4e32de237322a18bb82d7e",
-    "run_id": 37618824677,
+    "version": "0.11.0",
+    "source_commit": "acfa060c9a400d82509278b657ee37853c7922b0",
+    "run_id": 37678010251,
+    "candidate_run_conclusion": "failure; successful build/workspace reused, corrected category and final gates passed separately",
+    "final_native_run_id": 37685190036,
+    "updater_run_id": 37683536378,
     "status": "published-exact-accepted-archives-public-downloads-verified",
-    "live_production_full": {
-      "ordinary_passed": 4,
-      "spaces_passed": 4,
-      "packs": 32,
-      "offline_records": 202
-    },
-    "release_url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.10.0"
+    "release_url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.11.0",
+    "release_tag_commit": "a97af2d02a3a6f4623ceec0f06f69fa10d04cbb6",
+    "released": true,
+    "updater_baseline": "0.10.1",
+    "publication": "evidence/tool-library-0.11.0-publication-2026-10-08.json",
+    "public_downloads": "evidence/tool-library-0.11.0-public-downloads-2026-10-08.json"
   },
   "expandable_tool_library_development": {
     "recorded_on": "2026-10-07",
     "version": "0.11.0",
     "branch": "feature/expandable-tool-library",
-    "status": "validated-release-authorized-publication-pending",
+    "status": "published-exact-accepted-archives-public-downloads-verified",
     "packaged_source_commit": "acfa060c9a400d82509278b657ee37853c7922b0",
     "validator_commit": "3c2d5079355e6a056dcdbe39f25b7b7bead7d670",
     "guide": "expandable-tool-library.md",
     "published_baseline": "0.10.1",
-    "released": false,
+    "released": true,
     "updater_built": true,
     "release_authorized": true,
     "updater_baseline": "0.10.1",
@@ -1056,6 +1061,13 @@
     "release_lock": "evidence/tool-library-0.11.0-release-lock.json",
     "release_summary": "evidence/tool-library-0.11.0-release-summary.json",
     "updater_run": 37683536378,
-    "final_native_run": 37685190036
+    "final_native_run": 37685190036,
+    "release_tag": "app-v0.11.0",
+    "release_url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.11.0",
+    "release_tag_commit": "a97af2d02a3a6f4623ceec0f06f69fa10d04cbb6",
+    "publication_run": 37708604434,
+    "preparation_run": 37708488034,
+    "publication_record": "evidence/tool-library-0.11.0-publication-2026-10-08.json",
+    "public_downloads": "evidence/tool-library-0.11.0-public-downloads-2026-10-08.json"
   }
 }

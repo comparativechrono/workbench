@@ -1,36 +1,56 @@
 # Current project state
 
-Snapshot: **2026-10-07**. Application **0.10.1** is published as a development
-prerelease at [app-v0.10.1](https://github.com/comparativechrono/workbench/releases/tag/app-v0.10.1).
-Release **405862679** was published at **2026-10-07T14:38:46Z**. Its tag and
-[PR #5](https://github.com/comparativechrono/workbench/pull/5) merge point to
-`28b1ff621f7fdafe6162a3d7ce1d7984962a290b`; packaged application source is
-`00b53cdded5db3bb176ee7e5a06546b8a0c66fff`. The accepted archives were promoted
-unchanged. Publication run `37638350825` verified all ten public assets;
-an independent second download also passed all hashes/sizes, four ZIP CRCs
-and both checksum manifests.
-The updater in this release supports **0.10.0**.
+Snapshot: **2026-10-08**. Application **0.11.0 is published** as a development
+prerelease at [app-v0.11.0](https://github.com/comparativechrono/workbench/releases/tag/app-v0.11.0).
+Release **406281343** was published at **2026-10-08T00:36:31Z**.
+Its tag and [PR #6](https://github.com/comparativechrono/workbench/pull/6) merge
+point to `a97af2d02a3a6f4623ceec0f06f69fa10d04cbb6`; packaged application source is
+`acfa060c9a400d82509278b657ee37853c7922b0`. Accepted application/source/updater
+archives were promoted unchanged; no application rebuild occurred.
 
-## Expandable tool library release preparation, 2026-10-08
+The tool library uses expandable native categories from installed pack metadata,
+with multiple open sections, search restoration and stable selection/scrolling.
+Standalone tool forms and workflow Add/double-click/drag behavior remain.
 
-The owner explicitly requested **“Please release 0.11.0 properly.”** Release
-authorization is recorded; publication is pending the immutable promotion and
-public-download checks. [PR #6](https://github.com/comparativechrono/workbench/pull/6)
-contains the feature and release preparation.
+Exact Windows checks passed in ordinary and space-containing paths:
+**7 library, 32 workspace, 8 References, 9 results and 3 scrolling panel groups**
+per path. The new updater from published **0.10.1** passed **13 checks per path**,
+preserving 204 existing files and verifying 72 core files. Live Ensembl five-type
+downloads, cancellation, independent hashes, compatible GUI input binding,
+offline native reuse and provenance were rerun. The Linux source gate passed
+70 checks and updater source checks passed 17.
 
-Frozen application source `acfa060c9a400d82509278b657ee37853c7922b0` passed **7 library,
-32 workspace, 8 References, 9 results and 3 scroll-panel checks per Windows path**.
-The separate updater from published **0.10.1** passed **13 checks per path**,
-preserving 204 existing files and verifying 72 core files. Final native
-regressions ran at `0c880d1060f22edb7e9c663743a1966a2f8f2eea`, without rebuilding the app.
-The source gate passed 70 checks; updater source checks passed 17.
+Read-only [preparation run 37708488034](https://github.com/comparativechrono/workbench/actions/runs/37708488034)
+and [publication run 37708604434](https://github.com/comparativechrono/workbench/actions/runs/37708604434)
+passed. Both ran 11 promotion guard tests. Publication verified all **11 public
+assets** by anonymous download; the independent second audit checked all asset
+sizes/hashes, four ZIP CRCs and three checksum manifests. Publication checks
+reuse the exact-package native runs and do not claim new Windows execution.
 
-The [release summary](evidence/tool-library-0.11.0-release-summary.json) and
-[acceptance lock](evidence/tool-library-0.11.0-release-lock.json) bind the original
-reports, artifacts, helper identities, failed attempts and limits. See the
-[release notes](../docs/releases/0.11.0.md) for fresh installation and updater
-instructions. Published 0.10.1 remains the public baseline until promotion is
-verified. Prior candidate-only pending statements below are historical.
+The [release summary](evidence/tool-library-0.11.0-release-summary.json),
+[acceptance lock](evidence/tool-library-0.11.0-release-lock.json),
+[publication record](evidence/tool-library-0.11.0-publication-2026-10-08.json),
+[public audit](evidence/tool-library-0.11.0-public-downloads-2026-10-08.json),
+[release inventory](release-inventory.json) and
+[release notes](../docs/releases/0.11.0.md) retain exact identities and limits.
+The [feature handover](expandable-tool-library.md) preserves the failed validator
+attempts separately from the passing final gates. The owner explicitly requested
+“Please release 0.11.0 properly”; no extra manual tester observations are inferred.
+
+Hosted native observations were at 96 DPI; physical trackpad, high-DPI and
+multi-monitor behavior remain unvalidated. All 32 pack downloads were not
+repeated for this layout change. Packs and production trust/profile retain
+their previously published identities. The separate tester-machine Heimdal
+bridge approval issue is not resolved or bypassed by this release.
+
+## Published 0.10.1 baseline
+
+Application **0.10.1** remains available unchanged at
+[app-v0.10.1](https://github.com/comparativechrono/workbench/releases/tag/app-v0.10.1).
+Its updater supports 0.10.0; the new 0.11.0 updater supports 0.10.1.
+Release 405862679 was published at 2026-10-07T14:38:46Z from packaged source
+`00b53cdded5db3bb176ee7e5a06546b8a0c66fff`, with tag/PR5 merge
+`28b1ff621f7fdafe6162a3d7ce1d7984962a290b`. Historical evidence follows.
 
 ## Tool Setup corrective patch, 0.10.1
 

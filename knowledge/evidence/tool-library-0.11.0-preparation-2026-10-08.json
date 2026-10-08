@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "recordedOn": "2026-10-08",
+  "version": "0.11.0",
+  "success": true,
+  "phase": "read-only-release-preparation",
+  "runId": 37708488034,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37708488034",
+  "jobId": 113088477327,
+  "commit": "32eb999fb36992c8b78a9d0afec9d67a0e2e6e0d",
+  "tree": "7c975f61a121a624fa077e48cd19348ba575916b",
+  "featureHead": "f3e6aee6a3e7323fb7630c0472ac413b136dc9b1",
+  "permissions": {
+    "contents": "read",
+    "actions": "read"
+  },
+  "guardTests": {
+    "passed": 11,
+    "failed": 0
+  },
+  "preparedAssets": 11,
+  "remoteMutations": false,
+  "releasePublished": false,
+  "validationSha256": "65f39b8441ee59831c1e84fbd08c17580be979ae24967bcb7f6b95a2705b2ee4",
+  "artifacts": [
+    {
+      "id": 11520553183,
+      "bytes": 4691,
+      "sha256": "703a082b2718776883bdf513a357ab8e6c91de38b682f6a0597846b2c20cee46"
+    },
+    {
+      "id": 11520543102,
+      "bytes": 87369428,
+      "sha256": "c6a395dea097694e37a48973b63950ca8db2c8cec40987e81b9cd6415bf8d2a6"
+    }
+  ],
+  "scope": "Fresh retrieval and verification of ten pinned CI artifacts and twelve native reports, archive/source/core/updater correspondence and eleven prepared public files. Reuses completed Windows executions; does not rerun the application."
+}

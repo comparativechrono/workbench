@@ -1,0 +1,256 @@
+{
+  "schema": 1,
+  "audit": "Independent anonymous public download audit of Native Workbench 0.11.0",
+  "observedUtc": "2026-10-08T00:37:31.616198+00:00",
+  "release": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.11.0",
+  "releaseId": 406281343,
+  "publishedAt": "2026-10-08T00:36:31Z",
+  "tag": "app-v0.11.0",
+  "publicationCommit": "a97af2d02a3a6f4623ceec0f06f69fa10d04cbb6",
+  "packagedSourceCommit": "acfa060c9a400d82509278b657ee37853c7922b0",
+  "anonymousDownloads": true,
+  "authorizationHeaderSent": false,
+  "assets": [
+    {
+      "file": "BUILD-PROVENANCE.json",
+      "assetId": 620233661,
+      "bytes": 1819,
+      "sha256": "abd40db717e42956cd91dad94a93139678e5024f5247be329e709d2fbcd14b83",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.11.0/BUILD-PROVENANCE.json",
+      "finalHost": "release-assets.githubusercontent.com",
+      "passed": true
+    },
+    {
+      "file": "BUILD-UPDATE-PROVENANCE.json",
+      "assetId": 620233657,
+      "bytes": 2684,
+      "sha256": "653ccf3a21b5d135a460073567c23f991e6ea756cc899973df52c0195853b51f",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.11.0/BUILD-UPDATE-PROVENANCE.json",
+      "finalHost": "release-assets.githubusercontent.com",
+      "passed": true
+    },
+    {
+      "file": "EVIDENCE-SHA256SUMS.txt",
+      "assetId": 620233659,
+      "bytes": 616,
+      "sha256": "d7092dd681366005dcabe5df5f546d765e7c18351a0382143c226abbba71b37c",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.11.0/EVIDENCE-SHA256SUMS.txt",
+      "finalHost": "release-assets.githubusercontent.com",
+      "passed": true
+    },
+    {
+      "file": "RELEASE-VALIDATION.json",
+      "assetId": 620233660,
+      "bytes": 13987,
+      "sha256": "e06849b18b3221e58bf1eff2705fa45eaa99ddf2b09ca0d22a388702ca607b94",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.11.0/RELEASE-VALIDATION.json",
+      "finalHost": "release-assets.githubusercontent.com",
+      "passed": true
+    },
+    {
+      "file": "SHA256SUMS.txt",
+      "assetId": 620233658,
+      "bytes": 211,
+      "sha256": "c1104ff776ef5de2632ca13a8b2cf9ac69eba8906bc0cc53c33c94b5073b2a6e",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.11.0/SHA256SUMS.txt",
+      "finalHost": "release-assets.githubusercontent.com",
+      "passed": true
+    },
+    {
+      "file": "UPDATE-SHA256SUMS.txt",
+      "assetId": 620233677,
+      "bytes": 113,
+      "sha256": "e3db50d122f90a67a76b486d56e68138bb61296a522631cc22986ecce45636df",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.11.0/UPDATE-SHA256SUMS.txt",
+      "finalHost": "release-assets.githubusercontent.com",
+      "passed": true
+    },
+    {
+      "file": "WINDOWS-EVIDENCE.zip",
+      "assetId": 620233678,
+      "bytes": 10569000,
+      "sha256": "77685c237366cc609d88570aa3419a7b2e7008cdb5d8811c68680f2fda59b250",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.11.0/WINDOWS-EVIDENCE.zip",
+      "finalHost": "release-assets.githubusercontent.com",
+      "passed": true
+    },
+    {
+      "file": "native-workbench-0.11.0-source.zip",
+      "assetId": 620233682,
+      "bytes": 46875983,
+      "sha256": "a45ad640f0767bb56458b59ce50d263537e54ebb401a0e809f31a5453adb2f2b",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.11.0/native-workbench-0.11.0-source.zip",
+      "finalHost": "release-assets.githubusercontent.com",
+      "passed": true
+    },
+    {
+      "file": "native-workbench-0.11.0-starter-windows.zip",
+      "assetId": 620233681,
+      "bytes": 17044022,
+      "sha256": "e816e2f7cd5efe98af752fbf072fab00344ebaa2b6963795c2fbf4a86b5fa81c",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.11.0/native-workbench-0.11.0-starter-windows.zip",
+      "finalHost": "release-assets.githubusercontent.com",
+      "passed": true
+    },
+    {
+      "file": "native-workbench-0.11.0-update-from-0.10.1.zip",
+      "assetId": 620233683,
+      "bytes": 12857609,
+      "sha256": "720d79aac5ddfd15dd3d06096950f3e56eff911981643eb6440ecb0f9911ecfe",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.11.0/native-workbench-0.11.0-update-from-0.10.1.zip",
+      "finalHost": "release-assets.githubusercontent.com",
+      "passed": true
+    },
+    {
+      "file": "source-metadata.json",
+      "assetId": 620233691,
+      "bytes": 1764,
+      "sha256": "2c09a01d1b8db7257e631d8e43f2130f454ca90ddca2c9352c421392606420fb",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.11.0/source-metadata.json",
+      "finalHost": "release-assets.githubusercontent.com",
+      "passed": true
+    }
+  ],
+  "zipChecks": [
+    {
+      "file": "WINDOWS-EVIDENCE.zip",
+      "entries": 324,
+      "crcPassed": true,
+      "safeUniquePaths": true
+    },
+    {
+      "file": "native-workbench-0.11.0-source.zip",
+      "entries": 605,
+      "crcPassed": true,
+      "safeUniquePaths": true
+    },
+    {
+      "file": "native-workbench-0.11.0-starter-windows.zip",
+      "entries": 216,
+      "crcPassed": true,
+      "safeUniquePaths": true
+    },
+    {
+      "file": "native-workbench-0.11.0-update-from-0.10.1.zip",
+      "entries": 51,
+      "crcPassed": true,
+      "safeUniquePaths": true
+    }
+  ],
+  "checksumChecks": [
+    {
+      "file": "SHA256SUMS.txt",
+      "entries": 2,
+      "passed": true
+    },
+    {
+      "file": "UPDATE-SHA256SUMS.txt",
+      "entries": 1,
+      "passed": true
+    },
+    {
+      "file": "EVIDENCE-SHA256SUMS.txt",
+      "entries": 7,
+      "passed": true
+    }
+  ],
+  "nativeReports": [
+    {
+      "case": "ordinary-workspace",
+      "passed": 32,
+      "skips": [],
+      "sha256": "f9ae55647b66a71f0935b8582469e84dd9aa83368d6c7e027b90a896ad3e6744",
+      "identityVerified": true
+    },
+    {
+      "case": "ordinary-library",
+      "passed": 7,
+      "skips": [],
+      "sha256": "e13aa7aba961da484de57183a6214b41ad9f66c87aae4e3e73482d33acfb095b",
+      "identityVerified": true
+    },
+    {
+      "case": "ordinary-results",
+      "passed": 9,
+      "skips": [],
+      "sha256": "9edf58e638163cfa92589047e7b874df96a81fc05e23a6c744edd29e14e9c8c8",
+      "identityVerified": true
+    },
+    {
+      "case": "ordinary-references",
+      "passed": 8,
+      "skips": [
+        "Optional native core updater gate was not requested."
+      ],
+      "sha256": "12de4da1ad259d05d92052b87b770c3e1c2c6c6c7710d864cf7ddf2198da1ac4",
+      "identityVerified": true
+    },
+    {
+      "case": "ordinary-scroll",
+      "passed": 3,
+      "skips": [],
+      "sha256": "e06c8b38b59da8ea9ef3ea62a1d3fd21c3dac65e2c4aa823e4d8f05029b238a6",
+      "identityVerified": true
+    },
+    {
+      "case": "ordinary-update",
+      "passed": 13,
+      "skips": [],
+      "sha256": "0ea5a1af1d05017893dc8471cac39cc0f5d1be6c9ffcb7c33ad86fa626b0f481",
+      "identityVerified": true
+    },
+    {
+      "case": "spaces-workspace",
+      "passed": 32,
+      "skips": [],
+      "sha256": "d3cf36550b1bed77bdf42704a439f8c183f9f8ce2c7d00852746a46a23fb4b69",
+      "identityVerified": true
+    },
+    {
+      "case": "spaces-library",
+      "passed": 7,
+      "skips": [],
+      "sha256": "7d38bce001bb9e635492fdc46eab7b1bbc39709fa552f03c12f7ebb0736f4e93",
+      "identityVerified": true
+    },
+    {
+      "case": "spaces-results",
+      "passed": 9,
+      "skips": [],
+      "sha256": "df20e87a5407fc6145dca9ea357b22e349104515ab794ce6466a7bd61f6fbd7a",
+      "identityVerified": true
+    },
+    {
+      "case": "spaces-references",
+      "passed": 8,
+      "skips": [
+        "Optional native core updater gate was not requested."
+      ],
+      "sha256": "0f5feae7dc846a9acffab0aba985108f59c53da442c301740c8b850e715b527f",
+      "identityVerified": true
+    },
+    {
+      "case": "spaces-scroll",
+      "passed": 3,
+      "skips": [],
+      "sha256": "ff105481219c68a6c9fa5d32e132a8a1962e123046187faea8da452978df9939",
+      "identityVerified": true
+    },
+    {
+      "case": "spaces-update",
+      "passed": 13,
+      "skips": [],
+      "sha256": "b07e2139f454257c869512f6a8f106a7f6f8b7746576398a6c2de16c002ced13",
+      "identityVerified": true
+    }
+  ],
+  "retainedNativeArtifacts": 8,
+  "retainedNativeReports": 12,
+  "success": true,
+  "completedUtc": "2026-10-08T00:39:58.974325+00:00",
+  "scope": "Independent anonymous downloads, remote metadata, frozen archive identities, ZIP CRCs, checksum manifests, exact retained CI artifact/report bytes and source/publication distinction. Does not rerun Windows.",
+  "limitations": [
+    "No new native Windows execution or user-machine security approval.",
+    "Physical display, high-DPI, managed-network and all-32-pack scientific behavior are outside this download audit."
+  ]
+}

@@ -1,15 +1,27 @@
 # Expandable native tool library
 
-## Release preparation update, 2026-10-08
+## Released 0.11.0, 2026-10-08
 
-The owner has authorized release of 0.11.0. The exact candidate now has a
-validated updater from published 0.10.1. Final native gates passed 7 library,
-32 workspace, 8 References, 9 results, 3 scrolling groups and 13 upgrade checks
-per ordinary/space-containing Windows path. Live Ensembl downloads were rerun.
-The [release summary](evidence/tool-library-0.11.0-release-summary.json) and
-[release lock](evidence/tool-library-0.11.0-release-lock.json) supersede the
-historical pending-acceptance/updater statements below. Public promotion is
-still pending. See [0.11.0 notes](../docs/releases/0.11.0.md).
+[Version 0.11.0 is published](https://github.com/comparativechrono/workbench/releases/tag/app-v0.11.0) as a development
+prerelease. It provides both a standalone Starter and a validated updater from
+0.10.1. [PR #6](https://github.com/comparativechrono/workbench/pull/6) merged at
+`a97af2d02a3a6f4623ceec0f06f69fa10d04cbb6`; the packaged application remains source
+`acfa060c9a400d82509278b657ee37853c7922b0`.
+
+Final native gates passed 7 library, 32 workspace, 8 References, 9 results,
+3 scrolling panel groups and 13 upgrade checks per ordinary/space-containing
+Windows path. Each upgrade preserved 204 existing files and verified 72 core
+files. Live Ensembl downloads were rerun. Publication and an independent second
+download verified all eleven public assets, their checksum manifests and ZIPs.
+
+The [release summary](evidence/tool-library-0.11.0-release-summary.json),
+[acceptance lock](evidence/tool-library-0.11.0-release-lock.json),
+[publication record](evidence/tool-library-0.11.0-publication-2026-10-08.json) and
+[public audit](evidence/tool-library-0.11.0-public-downloads-2026-10-08.json)
+supersede the original pending acceptance/updater/publication statements below.
+Those statements are retained as dated development history. See the
+[0.11.0 notes](../docs/releases/0.11.0.md) for installation, update instructions,
+failed helper attempts and validation limits.
 
 ## Original development handover, 2026-10-07
 
