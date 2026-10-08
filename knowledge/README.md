@@ -4,7 +4,9 @@
 [feature roadmap](roadmap.md). Unpublished **0.12.0** begins with
 [readiness, performance records and diagnostic export](readiness-performance.md)
 on `feature/readiness-performance`. Published 0.11.0 remains the baseline;
-implementation, source checks and native/release evidence are kept separate.
+the first implementation tranche has passed its recorded exact-candidate checks
+and screenshot review in [draft PR #7](https://github.com/comparativechrono/workbench/pull/7).
+Representative-machine acceptance, benchmarking and release work remain separate.
 
 This is the durable handover for people and agents continuing Native Workbench.
 It records why the project exists, how it works, how to extend it, and which

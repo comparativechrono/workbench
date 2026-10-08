@@ -1,0 +1,1959 @@
+{
+  "schema": 1,
+  "kind": "independent-candidate-archive-audit",
+  "status": "passed-with-scope-limits",
+  "candidateDisposition": "exact development candidate archive verification; not a release or standalone UI acceptance",
+  "sourceCommit": "eaa691d55a3659a793086ce272b826bcba1cabea",
+  "workflowRun": 37808653384,
+  "auditedAtUtc": "2026-10-08T16:28:12.979321+00:00",
+  "applicationVersion": "0.12.0",
+  "platform": "Linux archive/source inspection; not Windows execution",
+  "artifacts": [
+    {
+      "file": "source1.zip",
+      "artifactId": 11564785193,
+      "artifactName": "readiness-transfer-source-part-1-eaa691d55a3659a793086ce272b826bcba1cabea",
+      "sourceCommit": "eaa691d55a3659a793086ce272b826bcba1cabea",
+      "workflowRun": 37808653384,
+      "bytes": 25166018,
+      "sha256": "29e8b2eb2e0933870ef57b2b3e263611eb5e44ef8d52ff6d7efb22ff7ceba9a4",
+      "expectedBytes": 25166018,
+      "expectedSha256": "29e8b2eb2e0933870ef57b2b3e263611eb5e44ef8d52ff6d7efb22ff7ceba9a4",
+      "sizeVerified": true,
+      "hashVerified": true,
+      "crcVerified": true,
+      "members": [
+        "native-workbench-0.12.0-source.zip.part1"
+      ]
+    },
+    {
+      "file": "metadata.zip",
+      "artifactId": 11564505751,
+      "artifactName": "readiness-transfer-metadata-eaa691d55a3659a793086ce272b826bcba1cabea",
+      "sourceCommit": "eaa691d55a3659a793086ce272b826bcba1cabea",
+      "workflowRun": 37808653384,
+      "bytes": 2700,
+      "sha256": "ab9fdd5a58589fc3cbb4686e315eecfc62c9116cd43ffe4865b892cd110acde7",
+      "expectedBytes": 2700,
+      "expectedSha256": "ab9fdd5a58589fc3cbb4686e315eecfc62c9116cd43ffe4865b892cd110acde7",
+      "sizeVerified": true,
+      "hashVerified": true,
+      "crcVerified": true,
+      "members": [
+        "BUILD-PROVENANCE.json",
+        "TRANSPORT-VERIFICATION.json",
+        "SHA256SUMS.txt",
+        "source-metadata.json"
+      ]
+    },
+    {
+      "file": "source2.zip",
+      "artifactId": 11563936643,
+      "artifactName": "readiness-transfer-source-part-2-eaa691d55a3659a793086ce272b826bcba1cabea",
+      "sourceCommit": "eaa691d55a3659a793086ce272b826bcba1cabea",
+      "workflowRun": 37808653384,
+      "bytes": 21866963,
+      "sha256": "d5b6c56c4d6d78e176b2d21023c5995c763e6df41998cbe46b641f225008f2ed",
+      "expectedBytes": 21866963,
+      "expectedSha256": "d5b6c56c4d6d78e176b2d21023c5995c763e6df41998cbe46b641f225008f2ed",
+      "sizeVerified": true,
+      "hashVerified": true,
+      "crcVerified": true,
+      "members": [
+        "native-workbench-0.12.0-source.zip.part2"
+      ]
+    },
+    {
+      "file": "starter.zip",
+      "artifactId": 11563074832,
+      "artifactName": "readiness-transfer-starter-eaa691d55a3659a793086ce272b826bcba1cabea",
+      "sourceCommit": "eaa691d55a3659a793086ce272b826bcba1cabea",
+      "workflowRun": 37808653384,
+      "bytes": 17066410,
+      "sha256": "31812ddb41f134c7d8d5085e7038c5639f45bc2dbba3ed79be518c64566f302c",
+      "expectedBytes": 17066410,
+      "expectedSha256": "31812ddb41f134c7d8d5085e7038c5639f45bc2dbba3ed79be518c64566f302c",
+      "sizeVerified": true,
+      "hashVerified": true,
+      "crcVerified": true,
+      "members": [
+        "native-workbench-0.12.0-starter-windows.zip"
+      ]
+    }
+  ],
+  "sourceTransport": {
+    "schema": 1,
+    "sourceArchive": {
+      "file": "native-workbench-0.12.0-source.zip",
+      "bytes": 47032593,
+      "sha256": "11aabcb94fc7f879ad2103c65f8f3ab722efce496615a00bcb3ab75aa5b496a8"
+    },
+    "sourceTransportParts": [
+      {
+        "file": "native-workbench-0.12.0-source.zip.part1",
+        "bytes": 25165824,
+        "sha256": "931e82d33d21a597a0a06afe7fac6c4c5f876458a43f07fd2ac48a7ea8653b58"
+      },
+      {
+        "file": "native-workbench-0.12.0-source.zip.part2",
+        "bytes": 21866769,
+        "sha256": "4b787ff695b0acb1d5017ad3144b07e968aef86e785fc958fb005b5e28100166"
+      }
+    ],
+    "sourceReassembly": "Concatenate part1 then part2 as raw bytes; verify original source SHA-256 before extraction.",
+    "archivesRebuilt": false,
+    "partHashesVerified": true,
+    "originalArchiveReassembledByteExactly": true
+  },
+  "archives": [
+    {
+      "file": "native-workbench-0.12.0-source.zip",
+      "bytes": 47032593,
+      "sha256": "11aabcb94fc7f879ad2103c65f8f3ab722efce496615a00bcb3ab75aa5b496a8",
+      "crcVerified": true,
+      "sizeVerified": true,
+      "hashVerified": true
+    },
+    {
+      "file": "native-workbench-0.12.0-starter-windows.zip",
+      "bytes": 17066210,
+      "sha256": "746ca78169a211310c6eab14c80f69c3d5477049f5e982299d9788ef53989c40",
+      "crcVerified": true,
+      "sizeVerified": true,
+      "hashVerified": true
+    }
+  ],
+  "checksumManifestVerified": true,
+  "coreInventory": {
+    "entriesVerified": 75,
+    "exactArchiveInventory": true,
+    "files": [
+      {
+        "path": "LICENSE",
+        "bytes": 1216,
+        "sha256": "8fc4c4b462aafaf8349f53b191ceea7496d39c49463224aaa05d366fbb406682"
+      },
+      {
+        "path": "NativeWorkbench.exe",
+        "bytes": 1476096,
+        "sha256": "29b83d7649134b298459489090885c3b6ad07bcfd39f0501d5bc996ecee82134"
+      },
+      {
+        "path": "README.txt",
+        "bytes": 2672,
+        "sha256": "5a2edefb8676d0395d3681f33e357ba28682efacc849286d4d8b17d4499612b7"
+      },
+      {
+        "path": "SOURCE-AVAILABILITY.json",
+        "bytes": 2370,
+        "sha256": "bc6192e6cd9e02daf9de175f29543186e82c83d0411483d67b7bb6c1f5ffe1a1"
+      },
+      {
+        "path": "WorkbenchBridge.exe",
+        "bytes": 1550848,
+        "sha256": "575ccfbff5773cd88662665181fb08d62e2408e31f22a04c001187c11b5df659"
+      },
+      {
+        "path": "check-windows.cmd",
+        "bytes": 90,
+        "sha256": "29c22321d2e722ff8886ada3297ba86cd56c65ad21e7a303b648ec420a9e12c5"
+      },
+      {
+        "path": "check-workspace-windows.cmd",
+        "bytes": 152,
+        "sha256": "9e821a18fe1446c9fbeaa5bae87b9839ea6d61b02e1a2c99533556ca03a784d5"
+      },
+      {
+        "path": "examples/starter/reads1.fastq",
+        "bytes": 22011,
+        "sha256": "33053fdfd6ca5abbe34883f869958a2e621e7d513ada06f401e91ad256e9cc21"
+      },
+      {
+        "path": "examples/starter/reads2.fastq",
+        "bytes": 22011,
+        "sha256": "18b5ceeefb0115120830005a21808489f2c471c78af4aaaf724cdf99697a80e1"
+      },
+      {
+        "path": "examples/starter/reference.fa",
+        "bytes": 3059,
+        "sha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee"
+      },
+      {
+        "path": "examples/starter/truth.json",
+        "bytes": 261,
+        "sha256": "dbef1c9f40205f38fb8c51cd2109db009a006e8ae15485235aff31263a85f977"
+      },
+      {
+        "path": "runtime/licenses/native/COPYING",
+        "bytes": 2326,
+        "sha256": "99a69660981156c21336fdb5661f89341b013c94e4bf9e1c7467b4745718397f"
+      },
+      {
+        "path": "runtime/licenses/native/COPYING.MinGW-w64-runtime.txt",
+        "bytes": 12155,
+        "sha256": "1db8da07b436c68833c0673ffee3d9fcb2526047f3820b81661865dfedc79a1f"
+      },
+      {
+        "path": "runtime/licenses/native/COPYING.MinGW-w64.txt",
+        "bytes": 5905,
+        "sha256": "f38e6194bd3bfa1b654f118e5acefe0aead437bbe669eee43957ccc65a7127f1"
+      },
+      {
+        "path": "runtime/licenses/native/COPYING.winpthreads.txt",
+        "bytes": 2883,
+        "sha256": "63263614cdd29f2f93cba85e992f041b31f9fc7b4033692f31269489a8a1b177"
+      },
+      {
+        "path": "runtime/licenses/native/LLVM-Apache-2.0-with-exceptions.txt",
+        "bytes": 15141,
+        "sha256": "8d85c1057d742e597985c7d4e6320b015a9139385cff4cbae06ffc0ebe89afee"
+      },
+      {
+        "path": "runtime/python/LICENSE.txt",
+        "bytes": 33861,
+        "sha256": "62bec384df47b0328307db41455ff6ea2559e5546b394ac69148561b21703120"
+      },
+      {
+        "path": "runtime/python/_asyncio.pyd",
+        "bytes": 72928,
+        "sha256": "6654dfbf4cc92609801f35022acaddd3fc19e6c777b7771b0f0a68f5813889a8"
+      },
+      {
+        "path": "runtime/python/_bz2.pyd",
+        "bytes": 86752,
+        "sha256": "6da4d453852346299e983b458f3ec2f0db3b5f765998ba3f45c91b4a1549037b"
+      },
+      {
+        "path": "runtime/python/_ctypes.pyd",
+        "bytes": 134368,
+        "sha256": "5bcddf4c374c4d247e1e4a61f3347159c36c5785fe43bdae11a4e6c9ea2c0166"
+      },
+      {
+        "path": "runtime/python/_decimal.pyd",
+        "bytes": 286944,
+        "sha256": "eeb278dfbdb305bb5af916ed79e878943e25dc4bd6e99ec17abb7b3fd9f935d5"
+      },
+      {
+        "path": "runtime/python/_elementtree.pyd",
+        "bytes": 136416,
+        "sha256": "34968e3aebdb3e89cb1472b75b04986ce1bbf27d290f4154d77649cc17c41fab"
+      },
+      {
+        "path": "runtime/python/_hashlib.pyd",
+        "bytes": 69344,
+        "sha256": "4d3eb9d9492d626c7bb10cfe5ab233a9195ec7b27e92b465b287e7a24fc8266c"
+      },
+      {
+        "path": "runtime/python/_lzma.pyd",
+        "bytes": 159456,
+        "sha256": "2b4dcb12c0420ffced4b91968ae4eff6cb585f0f07490160c6da47da63064a99"
+      },
+      {
+        "path": "runtime/python/_multiprocessing.pyd",
+        "bytes": 38112,
+        "sha256": "5017bb9dd0d5ab6d7c0f007763d7906d33464f0b436ac6577f1f4fffd5c98986"
+      },
+      {
+        "path": "runtime/python/_overlapped.pyd",
+        "bytes": 57568,
+        "sha256": "3f393b2ce1fe5973fc45e49dffcf51405fa875cdb284cf96b2f0d4b93b08765c"
+      },
+      {
+        "path": "runtime/python/_queue.pyd",
+        "bytes": 35552,
+        "sha256": "79c196a0804b152fc48b4055387f4352838e41c28863a0c946e7a98137e681e1"
+      },
+      {
+        "path": "runtime/python/_socket.pyd",
+        "bytes": 86752,
+        "sha256": "c5936292083189e0675a96ddd0e38235726f1c58195cec64eb0085b9c479ddce"
+      },
+      {
+        "path": "runtime/python/_sqlite3.pyd",
+        "bytes": 131296,
+        "sha256": "95d5b99f696cb33550534e8be80d31003db8b8a27062dfd6b09fdba4bb92f812"
+      },
+      {
+        "path": "runtime/python/_ssl.pyd",
+        "bytes": 190688,
+        "sha256": "30ff82a3ea0c675ddc99e6b14f71ca750f06e77d6653e2da3d7d35b7ef0fc2ed"
+      },
+      {
+        "path": "runtime/python/_uuid.pyd",
+        "bytes": 27872,
+        "sha256": "0d6fcf704721d4bae58cc754b15a3f8c36907b718874f6d7cbbaa363a14618b1"
+      },
+      {
+        "path": "runtime/python/_wmi.pyd",
+        "bytes": 39648,
+        "sha256": "f88c322f871aef92de562278bd25c34c6e758642669d5512a22ed972840317b1"
+      },
+      {
+        "path": "runtime/python/_zoneinfo.pyd",
+        "bytes": 51424,
+        "sha256": "b687deba154399bf6e44963e46abff518c3f987ae4fde087a3c891a1a1f08fdd"
+      },
+      {
+        "path": "runtime/python/libcrypto-3.dll",
+        "bytes": 6021880,
+        "sha256": "75495fe0e079ab00d49be740d3c710a0b94e3f74f9648cb7cc9f768fc7f52319"
+      },
+      {
+        "path": "runtime/python/libffi-8.dll",
+        "bytes": 39696,
+        "sha256": "eff52743773eb550fcc6ce3efc37c85724502233b6b002a35496d828bd7b280a"
+      },
+      {
+        "path": "runtime/python/libssl-3.dll",
+        "bytes": 1308920,
+        "sha256": "8957182a9c385bfd9f3f790921de2ddc614cf91f99edbed4e9e5446a46504e32"
+      },
+      {
+        "path": "runtime/python/pyexpat.pyd",
+        "bytes": 200416,
+        "sha256": "3865fae84ff0f274c049e737731cd8aa184fae208af5b4c0d0cfc42a38f79cea"
+      },
+      {
+        "path": "runtime/python/python.cat",
+        "bytes": 578227,
+        "sha256": "297a28dea041bad442aca6d7cb92957627501870e3c5cb7c642afb83563ee9c1"
+      },
+      {
+        "path": "runtime/python/python.exe",
+        "bytes": 105696,
+        "sha256": "31fe10b4ed82a2f960af0ef9931f46a4b84ff286f8b6ffd9dee098cf4f10f17f"
+      },
+      {
+        "path": "runtime/python/python3.dll",
+        "bytes": 72416,
+        "sha256": "a1a32b2475675e784d9b34d33d3a8f3e4afaa563da1feb784b0dd69fc4d8f9dc"
+      },
+      {
+        "path": "runtime/python/python313._pth",
+        "bytes": 16,
+        "sha256": "6132a387c961a643beab61b8b426cfd73c366c6f6ad2d5aadc5ccf225776b399"
+      },
+      {
+        "path": "runtime/python/python313.dll",
+        "bytes": 6142176,
+        "sha256": "3b29bf9ff39bed8f660f5b935f19657f7ce7f145009851741b11364f6ebcb862"
+      },
+      {
+        "path": "runtime/python/python313.zip",
+        "bytes": 3837053,
+        "sha256": "33c48dd2c3031d27784950aaee96d3d65f916e3c43dd3637ace333a7b9e8021a"
+      },
+      {
+        "path": "runtime/python/pythonw.exe",
+        "bytes": 104160,
+        "sha256": "435e222945e1a110559fb71b5ebff8c3d698689b5e5eee0371815c1141d72738"
+      },
+      {
+        "path": "runtime/python/select.pyd",
+        "bytes": 32992,
+        "sha256": "17df388a7aa42e7f066b80aa4f77cbbba9286495e6f3508425806be6766d122b"
+      },
+      {
+        "path": "runtime/python/sqlite3.dll",
+        "bytes": 1584864,
+        "sha256": "2e3cf1b96e8afc679ee8bd69d6bde3aeb797b48b297b9cafd0eb9fd578eaafb5"
+      },
+      {
+        "path": "runtime/python/unicodedata.pyd",
+        "bytes": 712416,
+        "sha256": "d113047658f92d893bf4ee2da81ffbd624ec5c485733c02e116fac1b9a1b964c"
+      },
+      {
+        "path": "runtime/python/vcruntime140.dll",
+        "bytes": 178616,
+        "sha256": "d1f4225df2cd877dbf130d5668a021dce3f94118455ff5ec952061c30afc9ce7"
+      },
+      {
+        "path": "runtime/python/vcruntime140_1.dll",
+        "bytes": 50112,
+        "sha256": "a7146c08f89fe5b04541ab507cdb59ff7b44534d4ba3c668a426c6450a03434e"
+      },
+      {
+        "path": "runtime/python/winsound.pyd",
+        "bytes": 31968,
+        "sha256": "8450de54438b1698556b794400c3114b78ede8c10b13dcf263d646ef639ae7d1"
+      },
+      {
+        "path": "start-windows.cmd",
+        "bytes": 82,
+        "sha256": "c2aa627ff0408a928a7ca413cdc610e8a7cf8af649065e4b4c33b16f18a92a52"
+      },
+      {
+        "path": "workspace/app_version.py",
+        "bytes": 118,
+        "sha256": "0c6be504b22ad6ed6332ca0f837f0109f6d5230b29c4a0ea1f83f9cd03c5d4a7"
+      },
+      {
+        "path": "workspace/catalog-sources.json",
+        "bytes": 1177,
+        "sha256": "240cef994004c040584d3b8806bb361683693b1e7c0e92c9aedeaddc683fbefc"
+      },
+      {
+        "path": "workspace/catalog.py",
+        "bytes": 59063,
+        "sha256": "c35ceca347672fd77ea15419dc4869dca4c1819d979d566a5f049b8632608735"
+      },
+      {
+        "path": "workspace/core_checks.py",
+        "bytes": 8609,
+        "sha256": "431598722c8c261683e123b255d008210abedb13e90e68d7bec0e6b1df905d70"
+      },
+      {
+        "path": "workspace/cwl_export.py",
+        "bytes": 24669,
+        "sha256": "18ea65dcb6283da4b060f0d50e3419362d0be3739b8a831092e1c855b8553ecc"
+      },
+      {
+        "path": "workspace/dag_routing.py",
+        "bytes": 4572,
+        "sha256": "eb79a385a6426e8ce9778124620fe48c69e8c6ca3a7a9351b95780c99e869fe4"
+      },
+      {
+        "path": "workspace/desktop_host.py",
+        "bytes": 21795,
+        "sha256": "fb52cd9a30158d003a944b108699cb405beb81cae134dcd7e9578267d42ab05e"
+      },
+      {
+        "path": "workspace/desktop_model.py",
+        "bytes": 40496,
+        "sha256": "e8bc084508607f97f40b2db802c1b5d420b15cb66e0f9b9b9b77b83064479c86"
+      },
+      {
+        "path": "workspace/diagnostics.py",
+        "bytes": 18088,
+        "sha256": "fa743c69179a13b66dc000348a3e2954616a349163f1103a8cd9f50d61793124"
+      },
+      {
+        "path": "workspace/engine.py",
+        "bytes": 99467,
+        "sha256": "058171e498981d294026fae93ac52a3ffca9288f363c041000de0eb5e7dd87f4"
+      },
+      {
+        "path": "workspace/example.py",
+        "bytes": 5200,
+        "sha256": "fb558de8dc3f49f68550af3e08d768e8a99c5cd9e8d466ca357dcecc3dd699b3"
+      },
+      {
+        "path": "workspace/pack_checks.py",
+        "bytes": 19786,
+        "sha256": "687a775f637ad12e55a04fac6c05292174c457bd551455f0dbffeb15d1f544a1"
+      },
+      {
+        "path": "workspace/pack_manager.py",
+        "bytes": 39320,
+        "sha256": "282b8370cccd6d86d00f6d2a85fe99669eb1d9b9953a9327c65c323a4a780b5d"
+      },
+      {
+        "path": "workspace/pack_security.py",
+        "bytes": 4191,
+        "sha256": "2d1fa4a4267f5cecb0d583c7b43fc59dc8645125c59e3db69c4d6fa307ff6cc0"
+      },
+      {
+        "path": "workspace/performance.py",
+        "bytes": 12229,
+        "sha256": "273e67bd687682b764696c06b4ebd114da07fd7e2f128f92887654ba3f4dc9d2"
+      },
+      {
+        "path": "workspace/readiness.py",
+        "bytes": 10493,
+        "sha256": "e8fdbaba0aa430a539e9214b711e14466e9597456527ec33eed687f898c33676"
+      },
+      {
+        "path": "workspace/reference_manager.py",
+        "bytes": 28150,
+        "sha256": "3df9269e3bd89a822a18c323af36f474887b185cb261399f55409354240d2bd9"
+      },
+      {
+        "path": "workspace/reference_provenance.py",
+        "bytes": 3927,
+        "sha256": "9175cbb21fd983816a1b8b0effdae09ebaa11990fccdc06e4446c13f56ac5971"
+      },
+      {
+        "path": "workspace/reference_provider.py",
+        "bytes": 21669,
+        "sha256": "30f160e22d2f8a89bac4f1d52bf4ec6709a7f331f1bb6000e78707e559fdc816"
+      },
+      {
+        "path": "workspace/service.py",
+        "bytes": 41040,
+        "sha256": "ef909174a5e4d29932bbdfd81430ad570059f34549ebb32d5be63982cef5501c"
+      },
+      {
+        "path": "workspace/setup-profile.json",
+        "bytes": 10101,
+        "sha256": "4cad899dcc1f6541f6edecc3ace7d0d4dd5d6103b1b16218fece0c0b68d2a4ba"
+      },
+      {
+        "path": "workspace/setup_manager.py",
+        "bytes": 22292,
+        "sha256": "fb150bd38b8feb0cc9052444faf529d4fa65ed66832d3685bf85b78fc20ed3d4"
+      },
+      {
+        "path": "workspace/starter-check-profile.json",
+        "bytes": 1558,
+        "sha256": "395cfbd0fead5f36f52022e50827127df003dbbde086d0d9d8940f034c36fcf7"
+      },
+      {
+        "path": "workspace/verify_installation.py",
+        "bytes": 24546,
+        "sha256": "1e2a11141609f23d4e6b5d771d01ab67199a4839f36f2174bfa2f10b70c0f23d"
+      }
+    ]
+  },
+  "sourceInventory": {
+    "entriesVerified": 645,
+    "gitMatchedFiles": 645,
+    "comparisonCommit": "eaa691d55a3659a793086ce272b826bcba1cabea",
+    "comparison": "Git blob object identity from exact commit, not current working tree",
+    "exactArchiveInventory": true,
+    "inventorySha256": "273039377af934f7e1d29400d5bc8885bd5bd6afe85a9aa40e4315256605009e",
+    "legacySourceSha256": "5dac9add19436b336cba483a0f915e39aafed383282c2a019a0dbd3cc3c8668e",
+    "legacySourceBytes": 44163162,
+    "sourceAvailabilityMatchesArchive": true
+  },
+  "preservedRuntimeBaseline": {
+    "file": "native-workbench-0.6.0-starter-windows.zip",
+    "bytes": 16871065,
+    "sha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+    "crcVerified": true,
+    "manifestSha256": "d1d6e19eff4a066d16540913f433d1455818e37f3fc9c83a48437337dacdc891",
+    "packFilesByteEqual": 143,
+    "runtimeFilesByteEqual": 39,
+    "files": [
+      {
+        "path": "packs/align-0.4.0/PACK-README.md",
+        "bytes": 522,
+        "sha256": "4887780ed15d3cc383ec8438f308fbf064e7f65626928680145a50443aa31f66"
+      },
+      {
+        "path": "packs/align-0.4.0/bin/minimap2.exe",
+        "bytes": 606354,
+        "sha256": "06bf0815a79552ffcb1291046c7828f2bf8b11d9ad7fe0d9309283e966e973fa"
+      },
+      {
+        "path": "packs/align-0.4.0/bin/paircheck.exe",
+        "bytes": 299154,
+        "sha256": "4f2dda7e26b5c115a7edee936a8a059eb55ece244931b2799a62cebfcd44ecd4"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/Cosmocc-3.3.10-README.md",
+        "bytes": 14863,
+        "sha256": "d0f502e2022b147c95f074f4c5069fde1d1bfbec861d34de46b8cde8e06e4c9b"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/Cosmopolitan-LICENSE-3.3.10",
+        "bytes": 759,
+        "sha256": "188101f17152d898b65719a4c4fc501aa71c16649cc37ebab534bcb3511c6127"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/Native-Workbench-MIT.txt",
+        "bytes": 1216,
+        "sha256": "8fc4c4b462aafaf8349f53b191ceea7496d39c49463224aaa05d366fbb406682"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/ape-loader-3.3.10-ISC-header.txt",
+        "bytes": 1836,
+        "sha256": "f68ed60f7f93609e20d3a9d61a15e35bce298c90accf39e44d6c7cd2e964c9a6"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/cosmopolitan-3.3.10/LICENSE",
+        "bytes": 759,
+        "sha256": "188101f17152d898b65719a4c4fc501aa71c16649cc37ebab534bcb3511c6127"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.fdlibm",
+        "bytes": 336,
+        "sha256": "5238b63cbd39512ff69bf9cb2ce054c7bd416030cdb0d3aea1af2ac0e47b2894"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.freebsd",
+        "bytes": 6109,
+        "sha256": "4ce916521645614401dd3f625bd534a2281c5e494fe50a631718de1a7c3fb064"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.musl",
+        "bytes": 6204,
+        "sha256": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.openbsd",
+        "bytes": 19445,
+        "sha256": "89094132def44cf6f815a6527633d3cd673ccf82be8975fd9b717412517fd884"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.optimized-routines",
+        "bytes": 13491,
+        "sha256": "fb9dee614d78bd7e408174cce841b5d5d50b1f46d2b806124c4923e37859211f"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/libc/intrin/armopt.c",
+        "bytes": 109,
+        "sha256": "858985a8e6fbe9cfe264479a178989d7535112c734024764927e19eff8d6b22a"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/libc/intrin/musl.c",
+        "bytes": 101,
+        "sha256": "1f74213f9cdc74844b125f841d72c29ecde8ec490e941050bcd5bc28499d551e"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/libc/log/err.c",
+        "bytes": 5730,
+        "sha256": "477bcfc04d773fda8b1d0b5b5a33dff62892deea8da759371592ef4a62a1d6dc"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/libc/str/smoothsort.c",
+        "bytes": 7981,
+        "sha256": "15bcb6ed194bb990e0bd50d5ecd0f8e3d7bac33e0cff935ca69f5fe27abe355c"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/libc/str/strlcpy.c",
+        "bytes": 2713,
+        "sha256": "538a04c2ba5fdaf976f9ecc2bc0f88650d65fa5e4fd574d70c04a374dc4068f6"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/libc/str/todd.c",
+        "bytes": 124,
+        "sha256": "835e7eecbdc9b030b3d3623afcc55d89197bd4fd243378690573f829116ab5f8"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/third_party/gdtoa/gdtoa.c",
+        "bytes": 19547,
+        "sha256": "258ca8e769fda751b15e7e4ad02302d210745aa2e3524932e66bace1bab349af"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/third_party/gdtoa/gdtoa.internal.h",
+        "bytes": 15838,
+        "sha256": "bfcc967fdc6992454eeee1b47807b1af06b113353f969f80fe27b276a9b9cc97"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/third_party/gdtoa/notice.c",
+        "bytes": 204,
+        "sha256": "3f5cefed7918c2094199e5b51f1d8a260a9cf0a625dd5bb6401bb9d2dd81b989"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/third_party/puff/puff.c",
+        "bytes": 40453,
+        "sha256": "4435ebd8f4ac8c26c0c1080c985a91e2359ac3495ce22d2bf1be08101d5ee215"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/cosmopolitan-3.3.10/third_party/nsync/LICENSE.txt",
+        "bytes": 11358,
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/cosmopolitan-3.3.10/third_party/zlib/LICENSE",
+        "bytes": 2971,
+        "sha256": "49337b3c5dd49bc752db59acfbe6b96f6f710749e6f2e1d1caf7a33712ed9bd7"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/cosmopolitan-3.3.10/third_party/zlib/LICENSE.chromium",
+        "bytes": 1536,
+        "sha256": "368cca1106be99d39ecd32a38d8305585d802a475effb66380b91ffc9bcf709b"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/cosmopolitan-3.3.10/third_party/zlib/LICENSE.zlib",
+        "bytes": 1002,
+        "sha256": "845efc77857d485d91fb3e0b884aaa929368c717ae8186b66fe1ed2495753243"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/minimap2-MIT-LICENSE",
+        "bytes": 1140,
+        "sha256": "b68a701dea24796190ef9e860ff56e79d578c96183722cf4ec3738793e8e75f4"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/minimap2-embedded-runtime-notices.txt",
+        "bytes": 1717,
+        "sha256": "9b12488a3fd9041ecbbcd75f199337e3a9d434a877d1e23589ac91ddf17ff063"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/provenance.json",
+        "bytes": 7329,
+        "sha256": "7bc4c9061703d0a41e5a8c1eaae675193c7fc2ee3169d0bd1d169d9858256a37"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/seqtk-MIT-LICENSE",
+        "bytes": 1086,
+        "sha256": "506c5701a91dbd753aaab8f34639ec98e038685dbb40d943f63465e291e739d8"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/seqtk-embedded-runtime-notices.txt",
+        "bytes": 1918,
+        "sha256": "90c25a6ac2ca4865b23ce5711df435cadcbd4c58831c923696c7f37d20681c03"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/windows-runtime/COPYING",
+        "bytes": 2326,
+        "sha256": "99a69660981156c21336fdb5661f89341b013c94e4bf9e1c7467b4745718397f"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/windows-runtime/COPYING.MinGW-w64-runtime.txt",
+        "bytes": 12155,
+        "sha256": "1db8da07b436c68833c0673ffee3d9fcb2526047f3820b81661865dfedc79a1f"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/windows-runtime/COPYING.MinGW-w64.txt",
+        "bytes": 5905,
+        "sha256": "f38e6194bd3bfa1b654f118e5acefe0aead437bbe669eee43957ccc65a7127f1"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/windows-runtime/COPYING.winpthreads.txt",
+        "bytes": 2883,
+        "sha256": "63263614cdd29f2f93cba85e992f041b31f9fc7b4033692f31269489a8a1b177"
+      },
+      {
+        "path": "packs/align-0.4.0/licenses/windows-runtime/LLVM-Apache-2.0-with-exceptions.txt",
+        "bytes": 15141,
+        "sha256": "8d85c1057d742e597985c7d4e6320b015a9139385cff4cbae06ffc0ebe89afee"
+      },
+      {
+        "path": "packs/align-0.4.0/pack.ini",
+        "bytes": 3580,
+        "sha256": "81c962222c93356a4f7727b23193c71d7dcd515859e62a179574781f411824d3"
+      },
+      {
+        "path": "packs/bam-0.4.0/PACK-README.md",
+        "bytes": 1234,
+        "sha256": "c26155cd7b142452d1324184820cbefcbb247ae8098ddaeaf46385d8a7138760"
+      },
+      {
+        "path": "packs/bam-0.4.0/bin/samtools.exe",
+        "bytes": 1966226,
+        "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/Cosmocc-3.3.10-README.md",
+        "bytes": 14863,
+        "sha256": "d0f502e2022b147c95f074f4c5069fde1d1bfbec861d34de46b8cde8e06e4c9b"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/Cosmopolitan-LICENSE-3.3.10",
+        "bytes": 759,
+        "sha256": "188101f17152d898b65719a4c4fc501aa71c16649cc37ebab534bcb3511c6127"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/Native-Workbench-MIT.txt",
+        "bytes": 1216,
+        "sha256": "8fc4c4b462aafaf8349f53b191ceea7496d39c49463224aaa05d366fbb406682"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/ape-loader-3.3.10-ISC-header.txt",
+        "bytes": 1836,
+        "sha256": "f68ed60f7f93609e20d3a9d61a15e35bce298c90accf39e44d6c7cd2e964c9a6"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/cosmopolitan-3.3.10/LICENSE",
+        "bytes": 759,
+        "sha256": "188101f17152d898b65719a4c4fc501aa71c16649cc37ebab534bcb3511c6127"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.fdlibm",
+        "bytes": 336,
+        "sha256": "5238b63cbd39512ff69bf9cb2ce054c7bd416030cdb0d3aea1af2ac0e47b2894"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.freebsd",
+        "bytes": 6109,
+        "sha256": "4ce916521645614401dd3f625bd534a2281c5e494fe50a631718de1a7c3fb064"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.musl",
+        "bytes": 6204,
+        "sha256": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.openbsd",
+        "bytes": 19445,
+        "sha256": "89094132def44cf6f815a6527633d3cd673ccf82be8975fd9b717412517fd884"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.optimized-routines",
+        "bytes": 13491,
+        "sha256": "fb9dee614d78bd7e408174cce841b5d5d50b1f46d2b806124c4923e37859211f"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/libc/intrin/armopt.c",
+        "bytes": 109,
+        "sha256": "858985a8e6fbe9cfe264479a178989d7535112c734024764927e19eff8d6b22a"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/libc/intrin/musl.c",
+        "bytes": 101,
+        "sha256": "1f74213f9cdc74844b125f841d72c29ecde8ec490e941050bcd5bc28499d551e"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/libc/log/err.c",
+        "bytes": 5730,
+        "sha256": "477bcfc04d773fda8b1d0b5b5a33dff62892deea8da759371592ef4a62a1d6dc"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/libc/str/smoothsort.c",
+        "bytes": 7981,
+        "sha256": "15bcb6ed194bb990e0bd50d5ecd0f8e3d7bac33e0cff935ca69f5fe27abe355c"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/libc/str/strlcpy.c",
+        "bytes": 2713,
+        "sha256": "538a04c2ba5fdaf976f9ecc2bc0f88650d65fa5e4fd574d70c04a374dc4068f6"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/libc/str/todd.c",
+        "bytes": 124,
+        "sha256": "835e7eecbdc9b030b3d3623afcc55d89197bd4fd243378690573f829116ab5f8"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/third_party/gdtoa/gdtoa.c",
+        "bytes": 19547,
+        "sha256": "258ca8e769fda751b15e7e4ad02302d210745aa2e3524932e66bace1bab349af"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/third_party/gdtoa/gdtoa.internal.h",
+        "bytes": 15838,
+        "sha256": "bfcc967fdc6992454eeee1b47807b1af06b113353f969f80fe27b276a9b9cc97"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/third_party/gdtoa/notice.c",
+        "bytes": 204,
+        "sha256": "3f5cefed7918c2094199e5b51f1d8a260a9cf0a625dd5bb6401bb9d2dd81b989"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/third_party/puff/puff.c",
+        "bytes": 40453,
+        "sha256": "4435ebd8f4ac8c26c0c1080c985a91e2359ac3495ce22d2bf1be08101d5ee215"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/cosmopolitan-3.3.10/third_party/nsync/LICENSE.txt",
+        "bytes": 11358,
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/cosmopolitan-3.3.10/third_party/zlib/LICENSE",
+        "bytes": 2971,
+        "sha256": "49337b3c5dd49bc752db59acfbe6b96f6f710749e6f2e1d1caf7a33712ed9bd7"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/cosmopolitan-3.3.10/third_party/zlib/LICENSE.chromium",
+        "bytes": 1536,
+        "sha256": "368cca1106be99d39ecd32a38d8305585d802a475effb66380b91ffc9bcf709b"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/cosmopolitan-3.3.10/third_party/zlib/LICENSE.zlib",
+        "bytes": 1002,
+        "sha256": "845efc77857d485d91fb3e0b884aaa929368c717ae8186b66fe1ed2495753243"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/minimap2-MIT-LICENSE",
+        "bytes": 1140,
+        "sha256": "b68a701dea24796190ef9e860ff56e79d578c96183722cf4ec3738793e8e75f4"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/minimap2-embedded-runtime-notices.txt",
+        "bytes": 1717,
+        "sha256": "9b12488a3fd9041ecbbcd75f199337e3a9d434a877d1e23589ac91ddf17ff063"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/provenance.json",
+        "bytes": 7329,
+        "sha256": "7bc4c9061703d0a41e5a8c1eaae675193c7fc2ee3169d0bd1d169d9858256a37"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/seqtk-MIT-LICENSE",
+        "bytes": 1086,
+        "sha256": "506c5701a91dbd753aaab8f34639ec98e038685dbb40d943f63465e291e739d8"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/seqtk-embedded-runtime-notices.txt",
+        "bytes": 1918,
+        "sha256": "90c25a6ac2ca4865b23ce5711df435cadcbd4c58831c923696c7f37d20681c03"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/variant-tools/BUILD-NOTES.txt",
+        "bytes": 703,
+        "sha256": "0072c041c5b8f12cb7133bdef45c49226a86baf4129dc8496b450690d2833512"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/variant-tools/bcftools-1.24.txt",
+        "bytes": 41065,
+        "sha256": "100dc370e44ccfecd7644d74f983e7cdf1c527bb99a5f8b6c1e0be1a6fcc78f7"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/variant-tools/bcftools-embedded-runtime-notices.txt",
+        "bytes": 2573,
+        "sha256": "39b0a948f3f2de4e4ffc1cafe7fa6d4f3a37ba65bb381829845dc06555f27275"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/variant-tools/cosmopolitan-heapsort.c.txt",
+        "bytes": 7903,
+        "sha256": "6bd63ab8b1ae093a8d88fc2732bccf2907d149b49a5ece7b6a7d5e8d2c07f18d"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/variant-tools/cosmopolitan-mergesort.c.txt",
+        "bytes": 11025,
+        "sha256": "ca0a61fdff2ea5b838ef143023ef137e3d4fa3be55f09397a6edc3867e5f5158"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/variant-tools/cosmopolitan-opensort.c.txt",
+        "bytes": 123,
+        "sha256": "fcff4746f05f7fa57a50d3c436a4cdda5a543776e03dd7a32ae6771fb81eec36"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/variant-tools/cosmopolitan-qsort.c.txt",
+        "bytes": 8568,
+        "sha256": "f20d90a0f4c9a5ec08fdc1d0c91d804d2a2067b51b98bd4d4fddfce73eb9d0b2"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/variant-tools/cosmopolitan-strftime.c.txt",
+        "bytes": 16880,
+        "sha256": "28e72f7e5b6cc82544d230f3945242a89370f2767acf0da5862a637983b580ac"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/variant-tools/htscodecs-1.6.7.txt",
+        "bytes": 2160,
+        "sha256": "d17f1bae81abcca5928c2ee0adbc7d4429cc5ad8649d195e011a69f1c3b6b2ad"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/variant-tools/htslib-1.24.txt",
+        "bytes": 3540,
+        "sha256": "62a9257fa98697f92cf0fee949d59c8afa150b61be210b1f34f5a1bdc6aeb6dd"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/variant-tools/lz4.txt",
+        "bytes": 1311,
+        "sha256": "d15d99c8dc6b0ec22174c0e563a95bc40f9363ca7f9d9d793bb5c5a8e8d0af71"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/variant-tools/runtime-notices-provenance.json",
+        "bytes": 1811,
+        "sha256": "04b6af612d1cb980d354522351468821c27e45cf61114af2cca3a899795d419c"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/variant-tools/samtools-1.24.txt",
+        "bytes": 1706,
+        "sha256": "3567b264a6bd25b207b7a66b5c6a3d913a7766488cb3596c595e0caef937016d"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/variant-tools/samtools-embedded-runtime-notices.txt",
+        "bytes": 2368,
+        "sha256": "2d40b38dde3bf98bed8e871b9c7f040ba8f20d4bb7af6e70b1fb72dd37a2e501"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/variant-tools/source-header-notices.txt",
+        "bytes": 961632,
+        "sha256": "02e6b80ba9c084c34adadd09876311e03231d723ea4bfd1a05c25fae8c2072a2"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/windows-runtime/COPYING",
+        "bytes": 2326,
+        "sha256": "99a69660981156c21336fdb5661f89341b013c94e4bf9e1c7467b4745718397f"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/windows-runtime/COPYING.MinGW-w64-runtime.txt",
+        "bytes": 12155,
+        "sha256": "1db8da07b436c68833c0673ffee3d9fcb2526047f3820b81661865dfedc79a1f"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/windows-runtime/COPYING.MinGW-w64.txt",
+        "bytes": 5905,
+        "sha256": "f38e6194bd3bfa1b654f118e5acefe0aead437bbe669eee43957ccc65a7127f1"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/windows-runtime/COPYING.winpthreads.txt",
+        "bytes": 2883,
+        "sha256": "63263614cdd29f2f93cba85e992f041b31f9fc7b4033692f31269489a8a1b177"
+      },
+      {
+        "path": "packs/bam-0.4.0/licenses/windows-runtime/LLVM-Apache-2.0-with-exceptions.txt",
+        "bytes": 15141,
+        "sha256": "8d85c1057d742e597985c7d4e6320b015a9139385cff4cbae06ffc0ebe89afee"
+      },
+      {
+        "path": "packs/bam-0.4.0/pack.ini",
+        "bytes": 8648,
+        "sha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+      },
+      {
+        "path": "packs/variants-0.4.0/PACK-README.md",
+        "bytes": 964,
+        "sha256": "8db3838071483cc6882a4bd27ac4745029423a18dcfc09cb07e31d3b4a060c05"
+      },
+      {
+        "path": "packs/variants-0.4.0/bin/bcftools.exe",
+        "bytes": 2669180,
+        "sha256": "e2f53c05048fa1de94149e87203ba9c4c73be548196097fbe2f1426c3d1d556f"
+      },
+      {
+        "path": "packs/variants-0.4.0/bin/samtools.exe",
+        "bytes": 1966226,
+        "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/Cosmocc-3.3.10-README.md",
+        "bytes": 14863,
+        "sha256": "d0f502e2022b147c95f074f4c5069fde1d1bfbec861d34de46b8cde8e06e4c9b"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/Cosmopolitan-LICENSE-3.3.10",
+        "bytes": 759,
+        "sha256": "188101f17152d898b65719a4c4fc501aa71c16649cc37ebab534bcb3511c6127"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/Native-Workbench-MIT.txt",
+        "bytes": 1216,
+        "sha256": "8fc4c4b462aafaf8349f53b191ceea7496d39c49463224aaa05d366fbb406682"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/ape-loader-3.3.10-ISC-header.txt",
+        "bytes": 1836,
+        "sha256": "f68ed60f7f93609e20d3a9d61a15e35bce298c90accf39e44d6c7cd2e964c9a6"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/cosmopolitan-3.3.10/LICENSE",
+        "bytes": 759,
+        "sha256": "188101f17152d898b65719a4c4fc501aa71c16649cc37ebab534bcb3511c6127"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.fdlibm",
+        "bytes": 336,
+        "sha256": "5238b63cbd39512ff69bf9cb2ce054c7bd416030cdb0d3aea1af2ac0e47b2894"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.freebsd",
+        "bytes": 6109,
+        "sha256": "4ce916521645614401dd3f625bd534a2281c5e494fe50a631718de1a7c3fb064"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.musl",
+        "bytes": 6204,
+        "sha256": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.openbsd",
+        "bytes": 19445,
+        "sha256": "89094132def44cf6f815a6527633d3cd673ccf82be8975fd9b717412517fd884"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.optimized-routines",
+        "bytes": 13491,
+        "sha256": "fb9dee614d78bd7e408174cce841b5d5d50b1f46d2b806124c4923e37859211f"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/libc/intrin/armopt.c",
+        "bytes": 109,
+        "sha256": "858985a8e6fbe9cfe264479a178989d7535112c734024764927e19eff8d6b22a"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/libc/intrin/musl.c",
+        "bytes": 101,
+        "sha256": "1f74213f9cdc74844b125f841d72c29ecde8ec490e941050bcd5bc28499d551e"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/libc/log/err.c",
+        "bytes": 5730,
+        "sha256": "477bcfc04d773fda8b1d0b5b5a33dff62892deea8da759371592ef4a62a1d6dc"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/libc/str/smoothsort.c",
+        "bytes": 7981,
+        "sha256": "15bcb6ed194bb990e0bd50d5ecd0f8e3d7bac33e0cff935ca69f5fe27abe355c"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/libc/str/strlcpy.c",
+        "bytes": 2713,
+        "sha256": "538a04c2ba5fdaf976f9ecc2bc0f88650d65fa5e4fd574d70c04a374dc4068f6"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/libc/str/todd.c",
+        "bytes": 124,
+        "sha256": "835e7eecbdc9b030b3d3623afcc55d89197bd4fd243378690573f829116ab5f8"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/third_party/gdtoa/gdtoa.c",
+        "bytes": 19547,
+        "sha256": "258ca8e769fda751b15e7e4ad02302d210745aa2e3524932e66bace1bab349af"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/third_party/gdtoa/gdtoa.internal.h",
+        "bytes": 15838,
+        "sha256": "bfcc967fdc6992454eeee1b47807b1af06b113353f969f80fe27b276a9b9cc97"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/third_party/gdtoa/notice.c",
+        "bytes": 204,
+        "sha256": "3f5cefed7918c2094199e5b51f1d8a260a9cf0a625dd5bb6401bb9d2dd81b989"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/cosmopolitan-3.3.10/notice-source/third_party/puff/puff.c",
+        "bytes": 40453,
+        "sha256": "4435ebd8f4ac8c26c0c1080c985a91e2359ac3495ce22d2bf1be08101d5ee215"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/cosmopolitan-3.3.10/third_party/nsync/LICENSE.txt",
+        "bytes": 11358,
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/cosmopolitan-3.3.10/third_party/zlib/LICENSE",
+        "bytes": 2971,
+        "sha256": "49337b3c5dd49bc752db59acfbe6b96f6f710749e6f2e1d1caf7a33712ed9bd7"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/cosmopolitan-3.3.10/third_party/zlib/LICENSE.chromium",
+        "bytes": 1536,
+        "sha256": "368cca1106be99d39ecd32a38d8305585d802a475effb66380b91ffc9bcf709b"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/cosmopolitan-3.3.10/third_party/zlib/LICENSE.zlib",
+        "bytes": 1002,
+        "sha256": "845efc77857d485d91fb3e0b884aaa929368c717ae8186b66fe1ed2495753243"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/minimap2-MIT-LICENSE",
+        "bytes": 1140,
+        "sha256": "b68a701dea24796190ef9e860ff56e79d578c96183722cf4ec3738793e8e75f4"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/minimap2-embedded-runtime-notices.txt",
+        "bytes": 1717,
+        "sha256": "9b12488a3fd9041ecbbcd75f199337e3a9d434a877d1e23589ac91ddf17ff063"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/provenance.json",
+        "bytes": 7329,
+        "sha256": "7bc4c9061703d0a41e5a8c1eaae675193c7fc2ee3169d0bd1d169d9858256a37"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/seqtk-MIT-LICENSE",
+        "bytes": 1086,
+        "sha256": "506c5701a91dbd753aaab8f34639ec98e038685dbb40d943f63465e291e739d8"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/seqtk-embedded-runtime-notices.txt",
+        "bytes": 1918,
+        "sha256": "90c25a6ac2ca4865b23ce5711df435cadcbd4c58831c923696c7f37d20681c03"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/variant-tools/BUILD-NOTES.txt",
+        "bytes": 703,
+        "sha256": "0072c041c5b8f12cb7133bdef45c49226a86baf4129dc8496b450690d2833512"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/variant-tools/bcftools-1.24.txt",
+        "bytes": 41065,
+        "sha256": "100dc370e44ccfecd7644d74f983e7cdf1c527bb99a5f8b6c1e0be1a6fcc78f7"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/variant-tools/bcftools-embedded-runtime-notices.txt",
+        "bytes": 2573,
+        "sha256": "39b0a948f3f2de4e4ffc1cafe7fa6d4f3a37ba65bb381829845dc06555f27275"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/variant-tools/cosmopolitan-heapsort.c.txt",
+        "bytes": 7903,
+        "sha256": "6bd63ab8b1ae093a8d88fc2732bccf2907d149b49a5ece7b6a7d5e8d2c07f18d"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/variant-tools/cosmopolitan-mergesort.c.txt",
+        "bytes": 11025,
+        "sha256": "ca0a61fdff2ea5b838ef143023ef137e3d4fa3be55f09397a6edc3867e5f5158"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/variant-tools/cosmopolitan-opensort.c.txt",
+        "bytes": 123,
+        "sha256": "fcff4746f05f7fa57a50d3c436a4cdda5a543776e03dd7a32ae6771fb81eec36"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/variant-tools/cosmopolitan-qsort.c.txt",
+        "bytes": 8568,
+        "sha256": "f20d90a0f4c9a5ec08fdc1d0c91d804d2a2067b51b98bd4d4fddfce73eb9d0b2"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/variant-tools/cosmopolitan-strftime.c.txt",
+        "bytes": 16880,
+        "sha256": "28e72f7e5b6cc82544d230f3945242a89370f2767acf0da5862a637983b580ac"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/variant-tools/htscodecs-1.6.7.txt",
+        "bytes": 2160,
+        "sha256": "d17f1bae81abcca5928c2ee0adbc7d4429cc5ad8649d195e011a69f1c3b6b2ad"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/variant-tools/htslib-1.24.txt",
+        "bytes": 3540,
+        "sha256": "62a9257fa98697f92cf0fee949d59c8afa150b61be210b1f34f5a1bdc6aeb6dd"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/variant-tools/lz4.txt",
+        "bytes": 1311,
+        "sha256": "d15d99c8dc6b0ec22174c0e563a95bc40f9363ca7f9d9d793bb5c5a8e8d0af71"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/variant-tools/runtime-notices-provenance.json",
+        "bytes": 1811,
+        "sha256": "04b6af612d1cb980d354522351468821c27e45cf61114af2cca3a899795d419c"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/variant-tools/samtools-1.24.txt",
+        "bytes": 1706,
+        "sha256": "3567b264a6bd25b207b7a66b5c6a3d913a7766488cb3596c595e0caef937016d"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/variant-tools/samtools-embedded-runtime-notices.txt",
+        "bytes": 2368,
+        "sha256": "2d40b38dde3bf98bed8e871b9c7f040ba8f20d4bb7af6e70b1fb72dd37a2e501"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/variant-tools/source-header-notices.txt",
+        "bytes": 961632,
+        "sha256": "02e6b80ba9c084c34adadd09876311e03231d723ea4bfd1a05c25fae8c2072a2"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/windows-runtime/COPYING",
+        "bytes": 2326,
+        "sha256": "99a69660981156c21336fdb5661f89341b013c94e4bf9e1c7467b4745718397f"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/windows-runtime/COPYING.MinGW-w64-runtime.txt",
+        "bytes": 12155,
+        "sha256": "1db8da07b436c68833c0673ffee3d9fcb2526047f3820b81661865dfedc79a1f"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/windows-runtime/COPYING.MinGW-w64.txt",
+        "bytes": 5905,
+        "sha256": "f38e6194bd3bfa1b654f118e5acefe0aead437bbe669eee43957ccc65a7127f1"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/windows-runtime/COPYING.winpthreads.txt",
+        "bytes": 2883,
+        "sha256": "63263614cdd29f2f93cba85e992f041b31f9fc7b4033692f31269489a8a1b177"
+      },
+      {
+        "path": "packs/variants-0.4.0/licenses/windows-runtime/LLVM-Apache-2.0-with-exceptions.txt",
+        "bytes": 15141,
+        "sha256": "8d85c1057d742e597985c7d4e6320b015a9139385cff4cbae06ffc0ebe89afee"
+      },
+      {
+        "path": "packs/variants-0.4.0/pack.ini",
+        "bytes": 10865,
+        "sha256": "ea4b7f0a6c28709e4190b6514c07cbf7bdd58e1a4f2a2d931f2cae3ce6ec3795"
+      },
+      {
+        "path": "runtime/licenses/native/COPYING",
+        "bytes": 2326,
+        "sha256": "99a69660981156c21336fdb5661f89341b013c94e4bf9e1c7467b4745718397f"
+      },
+      {
+        "path": "runtime/licenses/native/COPYING.MinGW-w64-runtime.txt",
+        "bytes": 12155,
+        "sha256": "1db8da07b436c68833c0673ffee3d9fcb2526047f3820b81661865dfedc79a1f"
+      },
+      {
+        "path": "runtime/licenses/native/COPYING.MinGW-w64.txt",
+        "bytes": 5905,
+        "sha256": "f38e6194bd3bfa1b654f118e5acefe0aead437bbe669eee43957ccc65a7127f1"
+      },
+      {
+        "path": "runtime/licenses/native/COPYING.winpthreads.txt",
+        "bytes": 2883,
+        "sha256": "63263614cdd29f2f93cba85e992f041b31f9fc7b4033692f31269489a8a1b177"
+      },
+      {
+        "path": "runtime/licenses/native/LLVM-Apache-2.0-with-exceptions.txt",
+        "bytes": 15141,
+        "sha256": "8d85c1057d742e597985c7d4e6320b015a9139385cff4cbae06ffc0ebe89afee"
+      },
+      {
+        "path": "runtime/python/LICENSE.txt",
+        "bytes": 33861,
+        "sha256": "62bec384df47b0328307db41455ff6ea2559e5546b394ac69148561b21703120"
+      },
+      {
+        "path": "runtime/python/_asyncio.pyd",
+        "bytes": 72928,
+        "sha256": "6654dfbf4cc92609801f35022acaddd3fc19e6c777b7771b0f0a68f5813889a8"
+      },
+      {
+        "path": "runtime/python/_bz2.pyd",
+        "bytes": 86752,
+        "sha256": "6da4d453852346299e983b458f3ec2f0db3b5f765998ba3f45c91b4a1549037b"
+      },
+      {
+        "path": "runtime/python/_ctypes.pyd",
+        "bytes": 134368,
+        "sha256": "5bcddf4c374c4d247e1e4a61f3347159c36c5785fe43bdae11a4e6c9ea2c0166"
+      },
+      {
+        "path": "runtime/python/_decimal.pyd",
+        "bytes": 286944,
+        "sha256": "eeb278dfbdb305bb5af916ed79e878943e25dc4bd6e99ec17abb7b3fd9f935d5"
+      },
+      {
+        "path": "runtime/python/_elementtree.pyd",
+        "bytes": 136416,
+        "sha256": "34968e3aebdb3e89cb1472b75b04986ce1bbf27d290f4154d77649cc17c41fab"
+      },
+      {
+        "path": "runtime/python/_hashlib.pyd",
+        "bytes": 69344,
+        "sha256": "4d3eb9d9492d626c7bb10cfe5ab233a9195ec7b27e92b465b287e7a24fc8266c"
+      },
+      {
+        "path": "runtime/python/_lzma.pyd",
+        "bytes": 159456,
+        "sha256": "2b4dcb12c0420ffced4b91968ae4eff6cb585f0f07490160c6da47da63064a99"
+      },
+      {
+        "path": "runtime/python/_multiprocessing.pyd",
+        "bytes": 38112,
+        "sha256": "5017bb9dd0d5ab6d7c0f007763d7906d33464f0b436ac6577f1f4fffd5c98986"
+      },
+      {
+        "path": "runtime/python/_overlapped.pyd",
+        "bytes": 57568,
+        "sha256": "3f393b2ce1fe5973fc45e49dffcf51405fa875cdb284cf96b2f0d4b93b08765c"
+      },
+      {
+        "path": "runtime/python/_queue.pyd",
+        "bytes": 35552,
+        "sha256": "79c196a0804b152fc48b4055387f4352838e41c28863a0c946e7a98137e681e1"
+      },
+      {
+        "path": "runtime/python/_socket.pyd",
+        "bytes": 86752,
+        "sha256": "c5936292083189e0675a96ddd0e38235726f1c58195cec64eb0085b9c479ddce"
+      },
+      {
+        "path": "runtime/python/_sqlite3.pyd",
+        "bytes": 131296,
+        "sha256": "95d5b99f696cb33550534e8be80d31003db8b8a27062dfd6b09fdba4bb92f812"
+      },
+      {
+        "path": "runtime/python/_ssl.pyd",
+        "bytes": 190688,
+        "sha256": "30ff82a3ea0c675ddc99e6b14f71ca750f06e77d6653e2da3d7d35b7ef0fc2ed"
+      },
+      {
+        "path": "runtime/python/_uuid.pyd",
+        "bytes": 27872,
+        "sha256": "0d6fcf704721d4bae58cc754b15a3f8c36907b718874f6d7cbbaa363a14618b1"
+      },
+      {
+        "path": "runtime/python/_wmi.pyd",
+        "bytes": 39648,
+        "sha256": "f88c322f871aef92de562278bd25c34c6e758642669d5512a22ed972840317b1"
+      },
+      {
+        "path": "runtime/python/_zoneinfo.pyd",
+        "bytes": 51424,
+        "sha256": "b687deba154399bf6e44963e46abff518c3f987ae4fde087a3c891a1a1f08fdd"
+      },
+      {
+        "path": "runtime/python/libcrypto-3.dll",
+        "bytes": 6021880,
+        "sha256": "75495fe0e079ab00d49be740d3c710a0b94e3f74f9648cb7cc9f768fc7f52319"
+      },
+      {
+        "path": "runtime/python/libffi-8.dll",
+        "bytes": 39696,
+        "sha256": "eff52743773eb550fcc6ce3efc37c85724502233b6b002a35496d828bd7b280a"
+      },
+      {
+        "path": "runtime/python/libssl-3.dll",
+        "bytes": 1308920,
+        "sha256": "8957182a9c385bfd9f3f790921de2ddc614cf91f99edbed4e9e5446a46504e32"
+      },
+      {
+        "path": "runtime/python/pyexpat.pyd",
+        "bytes": 200416,
+        "sha256": "3865fae84ff0f274c049e737731cd8aa184fae208af5b4c0d0cfc42a38f79cea"
+      },
+      {
+        "path": "runtime/python/python.cat",
+        "bytes": 578227,
+        "sha256": "297a28dea041bad442aca6d7cb92957627501870e3c5cb7c642afb83563ee9c1"
+      },
+      {
+        "path": "runtime/python/python.exe",
+        "bytes": 105696,
+        "sha256": "31fe10b4ed82a2f960af0ef9931f46a4b84ff286f8b6ffd9dee098cf4f10f17f"
+      },
+      {
+        "path": "runtime/python/python3.dll",
+        "bytes": 72416,
+        "sha256": "a1a32b2475675e784d9b34d33d3a8f3e4afaa563da1feb784b0dd69fc4d8f9dc"
+      },
+      {
+        "path": "runtime/python/python313._pth",
+        "bytes": 16,
+        "sha256": "6132a387c961a643beab61b8b426cfd73c366c6f6ad2d5aadc5ccf225776b399"
+      },
+      {
+        "path": "runtime/python/python313.dll",
+        "bytes": 6142176,
+        "sha256": "3b29bf9ff39bed8f660f5b935f19657f7ce7f145009851741b11364f6ebcb862"
+      },
+      {
+        "path": "runtime/python/python313.zip",
+        "bytes": 3837053,
+        "sha256": "33c48dd2c3031d27784950aaee96d3d65f916e3c43dd3637ace333a7b9e8021a"
+      },
+      {
+        "path": "runtime/python/pythonw.exe",
+        "bytes": 104160,
+        "sha256": "435e222945e1a110559fb71b5ebff8c3d698689b5e5eee0371815c1141d72738"
+      },
+      {
+        "path": "runtime/python/select.pyd",
+        "bytes": 32992,
+        "sha256": "17df388a7aa42e7f066b80aa4f77cbbba9286495e6f3508425806be6766d122b"
+      },
+      {
+        "path": "runtime/python/sqlite3.dll",
+        "bytes": 1584864,
+        "sha256": "2e3cf1b96e8afc679ee8bd69d6bde3aeb797b48b297b9cafd0eb9fd578eaafb5"
+      },
+      {
+        "path": "runtime/python/unicodedata.pyd",
+        "bytes": 712416,
+        "sha256": "d113047658f92d893bf4ee2da81ffbd624ec5c485733c02e116fac1b9a1b964c"
+      },
+      {
+        "path": "runtime/python/vcruntime140.dll",
+        "bytes": 178616,
+        "sha256": "d1f4225df2cd877dbf130d5668a021dce3f94118455ff5ec952061c30afc9ce7"
+      },
+      {
+        "path": "runtime/python/vcruntime140_1.dll",
+        "bytes": 50112,
+        "sha256": "a7146c08f89fe5b04541ab507cdb59ff7b44534d4ba3c668a426c6450a03434e"
+      },
+      {
+        "path": "runtime/python/winsound.pyd",
+        "bytes": 31968,
+        "sha256": "8450de54438b1698556b794400c3114b78ede8c10b13dcf263d646ef639ae7d1"
+      }
+    ]
+  },
+  "starterPacks": [
+    {
+      "id": "align",
+      "version": "0.4.0",
+      "folder": "packs/align-0.4.0",
+      "manifestSha256": "81c962222c93356a4f7727b23193c71d7dcd515859e62a179574781f411824d3"
+    },
+    {
+      "id": "bam",
+      "version": "0.4.0",
+      "folder": "packs/bam-0.4.0",
+      "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+    },
+    {
+      "id": "variants",
+      "version": "0.4.0",
+      "folder": "packs/variants-0.4.0",
+      "manifestSha256": "ea4b7f0a6c28709e4190b6514c07cbf7bdd58e1a4f2a2d931f2cae3ce6ec3795"
+    }
+  ],
+  "setupProfile": {
+    "sha256": "4cad899dcc1f6541f6edecc3ace7d0d4dd5d6103b1b16218fece0c0b68d2a4ba",
+    "packCount": 32,
+    "pins": [
+      {
+        "id": "align",
+        "version": "0.4.0",
+        "name": "minimap2 alignment",
+        "size": 568924,
+        "sha256": "e701dbcf5a8c3fb31c1a82a3c7b7da50eb1cceb64b5b9c88db4795f98ec4f72d",
+        "manifestSha256": "81c962222c93356a4f7727b23193c71d7dcd515859e62a179574781f411824d3",
+        "starter": true
+      },
+      {
+        "id": "bam",
+        "version": "0.4.0",
+        "name": "SAMtools alignment files",
+        "size": 1158320,
+        "sha256": "b9edc1535996c2e86fdb533328fb8fad78b9168bcb0d0733b73090387c27b61f",
+        "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888",
+        "starter": true
+      },
+      {
+        "id": "bedtools",
+        "version": "1.0.0",
+        "name": "BEDTools",
+        "size": 32015063,
+        "sha256": "f195c4c25acd1b109b8bd73656d64e12939bea847aa4d95a776fa25129455382",
+        "manifestSha256": "4918fb533a648db4e1c53bd3a71676cef008bd7228a84136e2c4f4724420ead1",
+        "starter": false
+      },
+      {
+        "id": "blast",
+        "version": "1.0.0",
+        "name": "NCBI BLAST+",
+        "size": 70024863,
+        "sha256": "3a907171c210d640a53cff6f2c51813be61b87a859a3a65b987947985f97024c",
+        "manifestSha256": "3242e23ba4e5edbec8b288c98d666cb4f0f3c23c9f03fc9d7d4258e4029d90c8",
+        "starter": false
+      },
+      {
+        "id": "bowtie2",
+        "version": "0.5.3",
+        "name": "Bowtie 2",
+        "size": 36396085,
+        "sha256": "d9810ddb3ea67bf296efde3c2b4a1d3f5513c5bdb6ba841a67db02f25c3d0a22",
+        "manifestSha256": "cdaa52bde3dec022e6716d4fc6b6e78481982f1d6491b5cd21ff4d64d33cec32",
+        "starter": false
+      },
+      {
+        "id": "bracken",
+        "version": "1.0.0",
+        "name": "Bracken",
+        "size": 34837071,
+        "sha256": "bfd5ae2ea3ef3e54f3ae5b97530e58bf1aad8562d66ca1c8e190b87472f1d853",
+        "manifestSha256": "f8c171ba9313c768de646c88959f1c16660f27f305a5bd0e7e8f2a007c63b14d",
+        "starter": false
+      },
+      {
+        "id": "bwa",
+        "version": "0.4.0",
+        "name": "BWA",
+        "size": 1870891,
+        "sha256": "c80b8c924861c1b768eb9488821bf5e5582f927d722a30dfb1078b999d9d419c",
+        "manifestSha256": "7d49d9bac3c4c98776f70120915ffa7f2a85ee297787f9c1e45c8b4655ee4a37",
+        "starter": false
+      },
+      {
+        "id": "deseq2",
+        "version": "1.0.0",
+        "name": "DESeq2 and tximport",
+        "size": 277504383,
+        "sha256": "eccffbcaf3adad6ab1da63ea771fe103a807a88722a56f5db82072cf02c1292d",
+        "manifestSha256": "f5a06708651f14f25e89ca3588ed6bf2f91442e43d635a9fc7ab5af066112ee1",
+        "starter": false
+      },
+      {
+        "id": "fastp",
+        "version": "0.4.1",
+        "name": "fastp",
+        "size": 1277199,
+        "sha256": "93c32ccd506bb61eed0e901f83f025fed183557587cc5378ad0d40771db4a8cc",
+        "manifestSha256": "7d18c64a45ebbd78e1d246b660a82d7d1a98166ccfd2c40e3f621cd9fee2a6a6",
+        "starter": false
+      },
+      {
+        "id": "fastqc",
+        "version": "1.0.0",
+        "name": "FastQC",
+        "size": 150996821,
+        "sha256": "10249aef6fa482fe2d0c37a76625e5664ca40dde3630814bc35e26aea6cd1bc4",
+        "manifestSha256": "1f791b7fb3af5aab35a7033f1b933c40f2dd2bbc6930d68c70cbc626f14653bc",
+        "starter": false
+      },
+      {
+        "id": "featurecounts",
+        "version": "1.0.0",
+        "name": "featureCounts",
+        "size": 29829533,
+        "sha256": "f3319b6a8b13c30bc31b782008b0283c7688c739da2dd77cf5ab80859ccff4c2",
+        "manifestSha256": "f40b334f0eb469a34d92696cf17c5ac2848346add6cdb9d73ca06fab93770716",
+        "starter": false
+      },
+      {
+        "id": "freebayes",
+        "version": "0.4.0",
+        "name": "FreeBayes",
+        "size": 4560176,
+        "sha256": "f6f12592c22d6d3ee63f24287d054b317a05551dbe0f6019a88dfd623dd059d0",
+        "manifestSha256": "9ba67c19846368c8d35119ec47404381c2aed6c6fbb693534963e7ec05ea7a7c",
+        "starter": false
+      },
+      {
+        "id": "gatk",
+        "version": "1.0.0",
+        "name": "GATK germline",
+        "size": 681725138,
+        "sha256": "e9eb3a4966f83d667ebb424612aaedd07236bac98c3462d4efbe02c55166bb24",
+        "manifestSha256": "4d876053d922628f8c97896268a32c72a648b6c51b93d3364beecc641293e713",
+        "starter": false
+      },
+      {
+        "id": "hisat2",
+        "version": "0.5.3",
+        "name": "HISAT2",
+        "size": 10085384,
+        "sha256": "85d02ead1c7205428b22c73b1c7f751786645c4a4d51296cb6fc824623fd6126",
+        "manifestSha256": "06f912deb5926b00a8ca269138b4b3822bb4b3e36d4956e30ca7793655052967",
+        "starter": false
+      },
+      {
+        "id": "iqtree",
+        "version": "1.0.0",
+        "name": "IQ-TREE",
+        "size": 248195844,
+        "sha256": "d232985959093083cd1f40f6fcb3496a1164f43912a72b8d6c29c900d0069aad",
+        "manifestSha256": "d6eb92f6840cfa4073e781f92fecd1163c26dc902e0f4c58efe8cfe234b4dc1d",
+        "starter": false
+      },
+      {
+        "id": "kallisto",
+        "version": "1.0.1",
+        "name": "kallisto",
+        "size": 9433934,
+        "sha256": "641cd1f2b05e0951b1f8a58f45d6308ca6206bf86bf90fb74d0daa2860f5eecd",
+        "manifestSha256": "509756b8afb9719a56da60f88ed631a578ee51eb29700bfbf51271aecd00c0c9",
+        "starter": false
+      },
+      {
+        "id": "kraken2",
+        "version": "1.0.0",
+        "name": "Kraken2",
+        "size": 230928151,
+        "sha256": "9feb39546f6af9d718629304d7fc6a5d70d8a015839deef7d4a869e7587a0e91",
+        "manifestSha256": "4c0e1dbe86b43f41c72b7dbdc6c93034d6b6eeb210494bdc8252c110182b677f",
+        "starter": false
+      },
+      {
+        "id": "lofreq",
+        "version": "0.5.3",
+        "name": "LoFreq",
+        "size": 56071589,
+        "sha256": "16f5c06e27dd2d847d84d51fa62f1619c8e104cd00e3bc9a267dcf6873ed36a7",
+        "manifestSha256": "4a00d450461cb434e04ddd377b901f73f9027e27a38f947238b6b18e9f5d862e",
+        "starter": false
+      },
+      {
+        "id": "mosdepth",
+        "version": "1.0.0",
+        "name": "mosdepth",
+        "size": 39762901,
+        "sha256": "b642d231350ef8eba8975a2a493714329f30880daf2e3a90c4faad293f78adfc",
+        "manifestSha256": "7eeb9cabf863568fe651d716d776293aa812e04cc23f032c2fa6c4e807c92b94",
+        "starter": false
+      },
+      {
+        "id": "multiqc",
+        "version": "1.0.0",
+        "name": "MultiQC",
+        "size": 231356965,
+        "sha256": "a171da9ac947c7399057da20a8fcddd74201bdb60cfaf030301a1123b0ff9e3e",
+        "manifestSha256": "5651f9519a4dea176a4f70f09ed8b64d016b3747b6c0dce0482ac6e7872f7f83",
+        "starter": false
+      },
+      {
+        "id": "muscle",
+        "version": "0.5.2",
+        "name": "MUSCLE",
+        "size": 30139115,
+        "sha256": "c07d3e398f48df683926c0970ef77c3b7d2bdab6426b80c80186f2360ed25258",
+        "manifestSha256": "085273422c7f26af77d23643efa961f1fb6ecbdee301109af67ba551f41b82c4",
+        "starter": false
+      },
+      {
+        "id": "mutect2",
+        "version": "0.5.4",
+        "name": "GATK Mutect2",
+        "size": 683046695,
+        "sha256": "25786d85b3679f172331142f890b1bffe5f5e77497b97eb91af855f2858ce08b",
+        "manifestSha256": "bef9c8ee3b35b3b4ead54ed359a019d6592933e5ee84a05e449d014891f7ab3e",
+        "starter": false
+      },
+      {
+        "id": "reads",
+        "version": "0.4.0",
+        "name": "Read quality",
+        "size": 486120,
+        "sha256": "2dd05fece8deb2b0178d8b1bc2b6830f175b3fbc2f5a4d48f9c9023cbfe6775b",
+        "manifestSha256": "65fc3065fb382ffdd13c4b94fa834b26531e63eb87858d84a4c173e567fb73c0",
+        "starter": false
+      },
+      {
+        "id": "research-variants",
+        "version": "0.4.1",
+        "name": "Research variants",
+        "size": 19295391,
+        "sha256": "a28bfb7df0fbc214e1c6e28005e018974801efaa25ff4d5fe166876432a12c60",
+        "manifestSha256": "c255113ec8391e9f967b28612a7e6052da2d8344327db24fff3eff0f4f3db1f7",
+        "starter": false
+      },
+      {
+        "id": "seqkit",
+        "version": "0.5.2",
+        "name": "SeqKit",
+        "size": 9191149,
+        "sha256": "5a977517e1c0871ca7685d4b87688dfe6cbfa6d66dcb01c695281812dee4fd42",
+        "manifestSha256": "07ba276cd0630d3dabac9b12f6ed0efffe8ba1b133a4b6a727a1e7d9097edfb8",
+        "starter": false
+      },
+      {
+        "id": "snpeff",
+        "version": "1.0.0",
+        "name": "SnpEff and SnpSift",
+        "size": 498014278,
+        "sha256": "9d15121c7e9615d7d31937c8bdfb8983dd680e39077ca137ce69793c5b31b570",
+        "manifestSha256": "5640770cb9e7aed897ce411834c65e952d5dca2f162606c9fb53d3c775b6483f",
+        "starter": false
+      },
+      {
+        "id": "star",
+        "version": "1.0.0",
+        "name": "STAR",
+        "size": 16855774,
+        "sha256": "edbeefff1c1149b632407f50a8a28847989a34eaa004752b43680fb6e29e4877",
+        "manifestSha256": "d57f83a5109c49aa855748148b4bdf8557c1c8362aa55d2de533f98b9291897d",
+        "starter": false
+      },
+      {
+        "id": "trimming",
+        "version": "0.4.0",
+        "name": "Read trimming",
+        "size": 12684590,
+        "sha256": "516942d33c978560ce5f5ed5497684951d92efa62cdfbddcd3d7c718235b6df7",
+        "manifestSha256": "5ebd1c6ae0368cdd6d1fb6a01041bb114c7a099fa8ab0e8836813bb60974d646",
+        "starter": false
+      },
+      {
+        "id": "vardict",
+        "version": "0.5.3",
+        "name": "VarDictJava",
+        "size": 372591865,
+        "sha256": "e1eed3c24d27ddb1b3a6f68acad2e9e8d80230732a9e9c986a686cafeed57a0e",
+        "manifestSha256": "f43b5dfa5a7ba9a8a476c956499f67576922d171c00eb63ce36cf25e28caf482",
+        "starter": false
+      },
+      {
+        "id": "variant-pipeline",
+        "version": "0.4.0",
+        "name": "Variant pipeline",
+        "size": 3208822,
+        "sha256": "1ab75723215c95629c71946092eb23a908cd40f3baefc0fb47c78890fa4baf4c",
+        "manifestSha256": "c14b3a1804a0a09bc2929653e9c07c9ac7fcdab92d8ed9ef5b1910e9eb86b367",
+        "starter": false
+      },
+      {
+        "id": "variants",
+        "version": "0.4.0",
+        "name": "BCFtools variants",
+        "size": 2506443,
+        "sha256": "1b15477061d8736c18ddff71a64b3370cfaa7c674af33c404c7d79b311f1e118",
+        "manifestSha256": "ea4b7f0a6c28709e4190b6514c07cbf7bdd58e1a4f2a2d931f2cae3ce6ec3795",
+        "starter": true
+      },
+      {
+        "id": "vsearch",
+        "version": "0.5.2",
+        "name": "VSEARCH",
+        "size": 3187058,
+        "sha256": "86d223d33a3c6ef5136a0b1e08634d9ebfb5dac3a94953dba57da466eb73af85",
+        "manifestSha256": "2971ca612558983b23a259c4e2416ddbc129dbff9fdfeac5d2bbaa17a3a652d8",
+        "starter": false
+      }
+    ]
+  },
+  "catalogueSources": {
+    "sha256": "240cef994004c040584d3b8806bb361683693b1e7c0e92c9aedeaddc683fbefc",
+    "unchangedPublishedTrust": true
+  },
+  "newAndAffectedRuntimeModules": [
+    {
+      "path": "workspace/performance.py",
+      "bytes": 12229,
+      "sha256": "273e67bd687682b764696c06b4ebd114da07fd7e2f128f92887654ba3f4dc9d2",
+      "matchesExactSourceCommit": true
+    },
+    {
+      "path": "workspace/readiness.py",
+      "bytes": 10493,
+      "sha256": "e8fdbaba0aa430a539e9214b711e14466e9597456527ec33eed687f898c33676",
+      "matchesExactSourceCommit": true
+    },
+    {
+      "path": "workspace/diagnostics.py",
+      "bytes": 18088,
+      "sha256": "fa743c69179a13b66dc000348a3e2954616a349163f1103a8cd9f50d61793124",
+      "matchesExactSourceCommit": true
+    },
+    {
+      "path": "workspace/engine.py",
+      "bytes": 99467,
+      "sha256": "058171e498981d294026fae93ac52a3ffca9288f363c041000de0eb5e7dd87f4",
+      "matchesExactSourceCommit": true
+    },
+    {
+      "path": "workspace/desktop_host.py",
+      "bytes": 21795,
+      "sha256": "fb52cd9a30158d003a944b108699cb405beb81cae134dcd7e9578267d42ab05e",
+      "matchesExactSourceCommit": true
+    },
+    {
+      "path": "workspace/service.py",
+      "bytes": 41040,
+      "sha256": "ef909174a5e4d29932bbdfd81430ad570059f34549ebb32d5be63982cef5501c",
+      "matchesExactSourceCommit": true
+    },
+    {
+      "path": "workspace/app_version.py",
+      "bytes": 118,
+      "sha256": "0c6be504b22ad6ed6332ca0f837f0109f6d5230b29c4a0ea1f83f9cd03c5d4a7",
+      "matchesExactSourceCommit": true
+    }
+  ],
+  "nativeBinaries": [
+    {
+      "path": "NativeWorkbench.exe",
+      "bytes": 1476096,
+      "sha256": "29b83d7649134b298459489090885c3b6ad07bcfd39f0501d5bc996ecee82134",
+      "peMachine": "AMD64"
+    },
+    {
+      "path": "WorkbenchBridge.exe",
+      "bytes": 1550848,
+      "sha256": "575ccfbff5773cd88662665181fb08d62e2408e31f22a04c001187c11b5df659",
+      "peMachine": "AMD64"
+    }
+  ],
+  "publication": {
+    "published": false,
+    "updaterBuilt": false
+  },
+  "missingChecks": [
+    "This audit does not execute native Windows code or assess screenshots.",
+    "No all-pack downloads, physical PC/trackpad/high-DPI checks or Linux scientific comparison performed in this archive audit.",
+    "WindowsPerformanceChecks.exe transport was not independently downloaded here; its identity remains build provenance only."
+  ],
+  "transportIncidents": [],
+  "runtimeModuleSourceClosure": {
+    "modulesVerified": 21,
+    "sourceCommit": "eaa691d55a3659a793086ce272b826bcba1cabea",
+    "allPackagedWorkspacePythonModulesMatchSourceArchive": true,
+    "files": [
+      {
+        "path": "workspace/app_version.py",
+        "bytes": 118,
+        "sha256": "0c6be504b22ad6ed6332ca0f837f0109f6d5230b29c4a0ea1f83f9cd03c5d4a7",
+        "matchesExactSourceCommit": true
+      },
+      {
+        "path": "workspace/catalog.py",
+        "bytes": 59063,
+        "sha256": "c35ceca347672fd77ea15419dc4869dca4c1819d979d566a5f049b8632608735",
+        "matchesExactSourceCommit": true
+      },
+      {
+        "path": "workspace/core_checks.py",
+        "bytes": 8609,
+        "sha256": "431598722c8c261683e123b255d008210abedb13e90e68d7bec0e6b1df905d70",
+        "matchesExactSourceCommit": true
+      },
+      {
+        "path": "workspace/cwl_export.py",
+        "bytes": 24669,
+        "sha256": "18ea65dcb6283da4b060f0d50e3419362d0be3739b8a831092e1c855b8553ecc",
+        "matchesExactSourceCommit": true
+      },
+      {
+        "path": "workspace/dag_routing.py",
+        "bytes": 4572,
+        "sha256": "eb79a385a6426e8ce9778124620fe48c69e8c6ca3a7a9351b95780c99e869fe4",
+        "matchesExactSourceCommit": true
+      },
+      {
+        "path": "workspace/desktop_host.py",
+        "bytes": 21795,
+        "sha256": "fb52cd9a30158d003a944b108699cb405beb81cae134dcd7e9578267d42ab05e",
+        "matchesExactSourceCommit": true
+      },
+      {
+        "path": "workspace/desktop_model.py",
+        "bytes": 40496,
+        "sha256": "e8bc084508607f97f40b2db802c1b5d420b15cb66e0f9b9b9b77b83064479c86",
+        "matchesExactSourceCommit": true
+      },
+      {
+        "path": "workspace/diagnostics.py",
+        "bytes": 18088,
+        "sha256": "fa743c69179a13b66dc000348a3e2954616a349163f1103a8cd9f50d61793124",
+        "matchesExactSourceCommit": true
+      },
+      {
+        "path": "workspace/engine.py",
+        "bytes": 99467,
+        "sha256": "058171e498981d294026fae93ac52a3ffca9288f363c041000de0eb5e7dd87f4",
+        "matchesExactSourceCommit": true
+      },
+      {
+        "path": "workspace/example.py",
+        "bytes": 5200,
+        "sha256": "fb558de8dc3f49f68550af3e08d768e8a99c5cd9e8d466ca357dcecc3dd699b3",
+        "matchesExactSourceCommit": true
+      },
+      {
+        "path": "workspace/pack_checks.py",
+        "bytes": 19786,
+        "sha256": "687a775f637ad12e55a04fac6c05292174c457bd551455f0dbffeb15d1f544a1",
+        "matchesExactSourceCommit": true
+      },
+      {
+        "path": "workspace/pack_manager.py",
+        "bytes": 39320,
+        "sha256": "282b8370cccd6d86d00f6d2a85fe99669eb1d9b9953a9327c65c323a4a780b5d",
+        "matchesExactSourceCommit": true
+      },
+      {
+        "path": "workspace/pack_security.py",
+        "bytes": 4191,
+        "sha256": "2d1fa4a4267f5cecb0d583c7b43fc59dc8645125c59e3db69c4d6fa307ff6cc0",
+        "matchesExactSourceCommit": true
+      },
+      {
+        "path": "workspace/performance.py",
+        "bytes": 12229,
+        "sha256": "273e67bd687682b764696c06b4ebd114da07fd7e2f128f92887654ba3f4dc9d2",
+        "matchesExactSourceCommit": true
+      },
+      {
+        "path": "workspace/readiness.py",
+        "bytes": 10493,
+        "sha256": "e8fdbaba0aa430a539e9214b711e14466e9597456527ec33eed687f898c33676",
+        "matchesExactSourceCommit": true
+      },
+      {
+        "path": "workspace/reference_manager.py",
+        "bytes": 28150,
+        "sha256": "3df9269e3bd89a822a18c323af36f474887b185cb261399f55409354240d2bd9",
+        "matchesExactSourceCommit": true
+      },
+      {
+        "path": "workspace/reference_provenance.py",
+        "bytes": 3927,
+        "sha256": "9175cbb21fd983816a1b8b0effdae09ebaa11990fccdc06e4446c13f56ac5971",
+        "matchesExactSourceCommit": true
+      },
+      {
+        "path": "workspace/reference_provider.py",
+        "bytes": 21669,
+        "sha256": "30f160e22d2f8a89bac4f1d52bf4ec6709a7f331f1bb6000e78707e559fdc816",
+        "matchesExactSourceCommit": true
+      },
+      {
+        "path": "workspace/service.py",
+        "bytes": 41040,
+        "sha256": "ef909174a5e4d29932bbdfd81430ad570059f34549ebb32d5be63982cef5501c",
+        "matchesExactSourceCommit": true
+      },
+      {
+        "path": "workspace/setup_manager.py",
+        "bytes": 22292,
+        "sha256": "fb150bd38b8feb0cc9052444faf529d4fa65ed66832d3685bf85b78fc20ed3d4",
+        "matchesExactSourceCommit": true
+      },
+      {
+        "path": "workspace/verify_installation.py",
+        "bytes": 24546,
+        "sha256": "1e2a11141609f23d4e6b5d771d01ab67199a4839f36f2174bfa2f10b70c0f23d",
+        "matchesExactSourceCommit": true
+      }
+    ]
+  }
+}

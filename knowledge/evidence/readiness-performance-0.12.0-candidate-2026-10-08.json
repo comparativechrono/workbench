@@ -1,0 +1,986 @@
+{
+  "schema": 1,
+  "kind": "exact-packaged-development-candidate-validation",
+  "date": "2026-10-08",
+  "status": "defined automated gates and independent native screenshot review passed; tester and release acceptance pending",
+  "appVersion": "0.12.0",
+  "published": false,
+  "updaterBuilt": false,
+  "sourceCommit": "eaa691d55a3659a793086ce272b826bcba1cabea",
+  "runId": 37808653384,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37808653384",
+  "pullRequest": "https://github.com/comparativechrono/workbench/pull/7",
+  "jobs": [
+    {
+      "id": 113419474467,
+      "name": "build",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 113420065423,
+      "name": "native (ordinary)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 113420065533,
+      "name": "native (path with spaces)",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "archives": [
+    {
+      "file": "native-workbench-0.12.0-source.zip",
+      "bytes": 47032593,
+      "sha256": "11aabcb94fc7f879ad2103c65f8f3ab722efce496615a00bcb3ab75aa5b496a8",
+      "crcVerified": true,
+      "sizeVerified": true,
+      "hashVerified": true
+    },
+    {
+      "file": "native-workbench-0.12.0-starter-windows.zip",
+      "bytes": 17066210,
+      "sha256": "746ca78169a211310c6eab14c80f69c3d5477049f5e982299d9788ef53989c40",
+      "crcVerified": true,
+      "sizeVerified": true,
+      "hashVerified": true
+    }
+  ],
+  "artifactAudit": "readiness-performance-0.12.0-artifact-audit-2026-10-08.json",
+  "ciSource": {
+    "suites": [
+      {
+        "path": "workspace/tests/test_desktop_host.py",
+        "tests": 12,
+        "skipped": 0
+      },
+      {
+        "path": "workspace/tests/test_desktop_modes.py",
+        "tests": 11,
+        "skipped": 0
+      },
+      {
+        "path": "workspace/tests/test_workflow_inputs.py",
+        "tests": 11,
+        "skipped": 0
+      },
+      {
+        "path": "workspace/tests/test_pack_service.py",
+        "tests": 6,
+        "skipped": 0
+      },
+      {
+        "path": "workspace/tests/test_setup_manager.py",
+        "tests": 15,
+        "skipped": 0
+      },
+      {
+        "path": "workspace/tests/test_setup_service.py",
+        "tests": 7,
+        "skipped": 0
+      },
+      {
+        "path": "tests/test_split_release.py",
+        "tests": 8,
+        "skipped": 0
+      },
+      {
+        "path": "workspace/tests/test_readiness.py",
+        "tests": 16,
+        "skipped": 0
+      },
+      {
+        "path": "workspace/tests/test_readiness_service.py",
+        "tests": 6,
+        "skipped": 0
+      },
+      {
+        "path": "workspace/tests/test_performance.py",
+        "tests": 18,
+        "skipped": 0
+      },
+      {
+        "path": "workspace/tests/test_diagnostics.py",
+        "tests": 11,
+        "skipped": 2
+      },
+      {
+        "path": "workspace/tests/test_engine_paths.py",
+        "tests": 7,
+        "skipped": 0
+      },
+      {
+        "path": "workspace/tests/test_cwl_results.py",
+        "tests": 5,
+        "skipped": 0
+      },
+      {
+        "path": "workspace/tests/test_cwl_export.py",
+        "tests": 14,
+        "skipped": 1
+      }
+    ],
+    "passed": 144,
+    "skipped": 3,
+    "failedSuites": 0,
+    "skipReasons": [
+      "Two diagnostic cases are Windows-specific and ran separately on Windows.",
+      "Optional independent cwltool unavailable."
+    ],
+    "scope": "Different selection from initial local 151+3 record; do not add totals."
+  },
+  "crossCompilation": {
+    "compiler": "LLVM-MinGW 20260922 UCRT",
+    "strictWarnings": true,
+    "desktopBridgeAndHelperBuilt": true,
+    "nativeExecutionByLinuxBuilder": false
+  },
+  "nativeCases": [
+    {
+      "pathCase": "ordinary",
+      "artifact": {
+        "id": 11563693064,
+        "name": "readiness-windows-ordinary-1",
+        "size_in_bytes": 2453129,
+        "digest": "sha256:574748047e3c79f4121dfb6a2cf2339cef5f6dd6cc8390cda74c5e00a4066d76"
+      },
+      "downloadSizeSha256AndZipCrcVerified": true,
+      "reports": {
+        "readiness": {
+          "file": "readiness-evidence/native-readiness.json",
+          "sha256": "c87a1488032322144abd293ecc10c71e8fa679aaaf4adaa68ee91839a4ae0100",
+          "passed": 5
+        },
+        "resourceHelper": {
+          "file": "performance-evidence/native-performance.json",
+          "sha256": "4af3be4ea4ffc7181b93df3ac39de2dd80c5333c123f862ee4e6ed47cab3cfe6",
+          "passed": 14
+        },
+        "workspace": {
+          "file": "workspace-evidence/native-ui.json",
+          "sha256": "e031e53d50d8f80d34e444b4450fad8fec33aa2f51aa811be299b509014959d6",
+          "passed": 32
+        },
+        "library": {
+          "file": "library-evidence/native-tool-library.json",
+          "sha256": "027687b2cc6c5ffaaf3e6d4af84c79bc4226cb08bac422513df590eb7ab395bc",
+          "passed": 7
+        }
+      },
+      "windowsDiagnosticSource": {
+        "passed": 10,
+        "skipped": 1,
+        "skipReason": "POSIX-only symlink check"
+      },
+      "platform": "Windows-2022Server-10.0.20348-SP0",
+      "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+      "dpi": 96,
+      "readinessChecks": [
+        "Readiness blocks missing input/destination, leaves no probe, preserves incomplete legacy previews and explicitly defers execution and complete integrity checks.",
+        "Real native minimap2/SAMtools/BCFtools starter workflow retains 202 paired alignments and starter:1351 G>A, GT=1/1 with independently checked output hashes.",
+        "Frozen five-step Starter run binds phase timings, input sizes and real Windows Job Object measurements for all 17 exec stages, labels any live-descendant snapshot partial and leaves its copy without fabricated process counters.",
+        "Explicit diagnostic Save writes only the reviewed JSON and checksum/README, excludes synthetic private names and rejects token reuse without another export.",
+        "Native Readiness modal and diagnostics preview/save controls work; Close saves nothing and explicit Save preserves the exact displayed JSON."
+      ],
+      "performance": {
+        "sha256": "dc59589e1be50e0397e2e5e8dca5449101e957234bc0d243b94a2c0acce29f6f",
+        "commandStages": 17,
+        "pipelineStages": 0,
+        "copyStages": 1,
+        "system": {
+          "os": {
+            "name": "Windows",
+            "release": "10.0",
+            "version": "10.0.20348"
+          },
+          "architecture": "AMD64",
+          "logicalCpuCount": 4,
+          "physicalMemoryBytes": 17174360064,
+          "unavailable": []
+        },
+        "memoryKind": "committed; not RSS",
+        "completeStageCount": 17,
+        "partialStageCount": 0,
+        "partialStages": [],
+        "coverageScope": "Counters are sampled before job cleanup. Stages with remaining active descendants are explicitly partial, not complete process-lifetime totals.",
+        "pipelineCoverage": "No binary pipe in the pinned Starter workflows; separate native performance helper exercises production pipeline accounting."
+      },
+      "diagnosticExport": {
+        "file": "native-workbench-diagnostics-7d3fe5431205b566aa8bc9d7dcd059b0.zip",
+        "sha256": "864113af86bc94376ce119aa1c8260d51b7c21688652fa2905ba9130148e564b",
+        "bytes": 1797
+      },
+      "captures": [
+        {
+          "path": "readiness-native.bmp",
+          "width": 720,
+          "height": 530,
+          "sha256": "66fb05e2663f80a2ca985ec8b44c831a06f646f1869a1e1d457ab7e79c405e9a"
+        },
+        {
+          "path": "diagnostics-native-preview.bmp",
+          "width": 720,
+          "height": 530,
+          "sha256": "1f5bc4ed7d8689b69546563c2fe42a1ab3a6f4db1147df8c31cd8cef0919ae11"
+        }
+      ],
+      "geometry": {
+        "workArea": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "actualWindowBounds": [
+          0,
+          0,
+          1040,
+          728
+        ],
+        "horizontalClipping": true
+      },
+      "helperObservations": [
+        {
+          "check": "exec-success",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "command-process-tree",
+            "wall_ms": 157,
+            "user_cpu_seconds": 0.125,
+            "kernel_cpu_seconds": 0.015625,
+            "peak_job_memory_bytes": 23945216,
+            "memory_kind": "committed",
+            "processes_total": 2,
+            "processes_active_at_snapshot": 0,
+            "accounting_available": true,
+            "memory_available": true,
+            "coverage": "complete",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        },
+        {
+          "check": "exec-failure",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "command-process-tree",
+            "wall_ms": 140,
+            "user_cpu_seconds": 0.125,
+            "kernel_cpu_seconds": 0.0,
+            "peak_job_memory_bytes": 23941120,
+            "memory_kind": "committed",
+            "processes_total": 2,
+            "processes_active_at_snapshot": 0,
+            "accounting_available": true,
+            "memory_available": true,
+            "coverage": "complete",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        },
+        {
+          "check": "pipe-success",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "pipeline-process-tree",
+            "wall_ms": 141,
+            "user_cpu_seconds": 0.109375,
+            "kernel_cpu_seconds": 0.03125,
+            "peak_job_memory_bytes": 31064064,
+            "memory_kind": "committed",
+            "processes_total": 4,
+            "processes_active_at_snapshot": 0,
+            "accounting_available": true,
+            "memory_available": true,
+            "coverage": "complete",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        },
+        {
+          "check": "pipe-failure",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "pipeline-process-tree",
+            "wall_ms": 141,
+            "user_cpu_seconds": 0.09375,
+            "kernel_cpu_seconds": 0.046875,
+            "peak_job_memory_bytes": 31068160,
+            "memory_kind": "committed",
+            "processes_total": 4,
+            "processes_active_at_snapshot": 0,
+            "accounting_available": true,
+            "memory_available": true,
+            "coverage": "complete",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        },
+        {
+          "check": "exec-cancel",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "command-process-tree",
+            "wall_ms": 46,
+            "user_cpu_seconds": 0.015625,
+            "kernel_cpu_seconds": 0.0,
+            "peak_job_memory_bytes": 7106560,
+            "memory_kind": "committed",
+            "processes_total": 2,
+            "processes_active_at_snapshot": 0,
+            "accounting_available": true,
+            "memory_available": true,
+            "coverage": "complete",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        },
+        {
+          "check": "pipe-cancel",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "pipeline-process-tree",
+            "wall_ms": 47,
+            "user_cpu_seconds": 0.03125,
+            "kernel_cpu_seconds": 0.0,
+            "peak_job_memory_bytes": 14254080,
+            "memory_kind": "committed",
+            "processes_total": 4,
+            "processes_active_at_snapshot": 0,
+            "accounting_available": true,
+            "memory_available": true,
+            "coverage": "complete",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        },
+        {
+          "check": "exec-timeout",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "command-process-tree",
+            "wall_ms": 125,
+            "user_cpu_seconds": 0.015625,
+            "kernel_cpu_seconds": 0.0,
+            "peak_job_memory_bytes": 7127040,
+            "memory_kind": "committed",
+            "processes_total": 2,
+            "processes_active_at_snapshot": 0,
+            "accounting_available": true,
+            "memory_available": true,
+            "coverage": "complete",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        },
+        {
+          "check": "pipe-timeout",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "pipeline-process-tree",
+            "wall_ms": 125,
+            "user_cpu_seconds": 0.03125,
+            "kernel_cpu_seconds": 0.0,
+            "peak_job_memory_bytes": 14323712,
+            "memory_kind": "committed",
+            "processes_total": 4,
+            "processes_active_at_snapshot": 0,
+            "accounting_available": true,
+            "memory_available": true,
+            "coverage": "complete",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        },
+        {
+          "check": "exec-observer-exception",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "command-process-tree",
+            "wall_ms": 32,
+            "user_cpu_seconds": 0.015625,
+            "kernel_cpu_seconds": 0.0,
+            "peak_job_memory_bytes": 7127040,
+            "memory_kind": "committed",
+            "processes_total": 2,
+            "processes_active_at_snapshot": 2,
+            "accounting_available": true,
+            "memory_available": true,
+            "coverage": "partial",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        },
+        {
+          "check": "pipeline-start-exception",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "pipeline-process-tree",
+            "wall_ms": 0,
+            "user_cpu_seconds": 0.0,
+            "kernel_cpu_seconds": 0.0,
+            "peak_job_memory_bytes": 401408,
+            "memory_kind": "committed",
+            "processes_total": 1,
+            "processes_active_at_snapshot": 1,
+            "accounting_available": true,
+            "memory_available": true,
+            "coverage": "partial",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        },
+        {
+          "check": "live-descendant-partial-coverage-and-cleanup",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "command-process-tree",
+            "wall_ms": 31,
+            "user_cpu_seconds": 0.0,
+            "kernel_cpu_seconds": 0.03125,
+            "peak_job_memory_bytes": 7827456,
+            "memory_kind": "committed",
+            "processes_total": 4,
+            "processes_active_at_snapshot": 2,
+            "accounting_available": true,
+            "memory_available": true,
+            "coverage": "partial",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        },
+        {
+          "check": "cancel-before-start",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "command-process-tree",
+            "wall_ms": null,
+            "user_cpu_seconds": null,
+            "kernel_cpu_seconds": null,
+            "peak_job_memory_bytes": null,
+            "memory_kind": "committed",
+            "processes_total": null,
+            "processes_active_at_snapshot": null,
+            "accounting_available": false,
+            "memory_available": false,
+            "coverage": "not-started",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        },
+        {
+          "check": "unavailable-query",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "command-process-tree",
+            "wall_ms": null,
+            "user_cpu_seconds": null,
+            "kernel_cpu_seconds": null,
+            "peak_job_memory_bytes": null,
+            "memory_kind": "committed",
+            "processes_total": null,
+            "processes_active_at_snapshot": null,
+            "accounting_available": false,
+            "memory_available": false,
+            "coverage": "unavailable",
+            "snapshot": "before-job-close",
+            "accounting_error": 6,
+            "memory_error": 6
+          }
+        },
+        {
+          "check": "locale-independent-json",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "command-process-tree",
+            "wall_ms": null,
+            "user_cpu_seconds": 0.1234567,
+            "kernel_cpu_seconds": 0.0,
+            "peak_job_memory_bytes": null,
+            "memory_kind": "committed",
+            "processes_total": 0,
+            "processes_active_at_snapshot": 0,
+            "accounting_available": true,
+            "memory_available": false,
+            "coverage": "partial",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        }
+      ]
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifact": {
+        "id": 11564176587,
+        "name": "readiness-windows-path with spaces-1",
+        "size_in_bytes": 2452774,
+        "digest": "sha256:0eb035fcc985485b5705d6a53b6fc703e3121085ab75b411b70a79702e2483d4"
+      },
+      "downloadSizeSha256AndZipCrcVerified": true,
+      "reports": {
+        "readiness": {
+          "file": "readiness-evidence/native-readiness.json",
+          "sha256": "ad24e0344041fe781536f9316de031f23d4411e251d73c76308a80a946c2c769",
+          "passed": 5
+        },
+        "resourceHelper": {
+          "file": "performance-evidence/native-performance.json",
+          "sha256": "0befbdd556c31781335ef8c3213088e02e5202edcbe2ae9a81df494adf1b6b0a",
+          "passed": 14
+        },
+        "workspace": {
+          "file": "workspace-evidence/native-ui.json",
+          "sha256": "b264db868e98c9befdfb757f21093d2f2eb1df4f2fc5db3e68657ecfba8976b5",
+          "passed": 32
+        },
+        "library": {
+          "file": "library-evidence/native-tool-library.json",
+          "sha256": "7f957f7992bb7b94fa2d6576e54084e46f11a6ceb13a7d4e01be568c0d2e4825",
+          "passed": 7
+        }
+      },
+      "windowsDiagnosticSource": {
+        "passed": 10,
+        "skipped": 1,
+        "skipReason": "POSIX-only symlink check"
+      },
+      "platform": "Windows-2022Server-10.0.20348-SP0",
+      "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+      "dpi": 96,
+      "readinessChecks": [
+        "Readiness blocks missing input/destination, leaves no probe, preserves incomplete legacy previews and explicitly defers execution and complete integrity checks.",
+        "Real native minimap2/SAMtools/BCFtools starter workflow retains 202 paired alignments and starter:1351 G>A, GT=1/1 with independently checked output hashes.",
+        "Frozen five-step Starter run binds phase timings, input sizes and real Windows Job Object measurements for all 17 exec stages, labels any live-descendant snapshot partial and leaves its copy without fabricated process counters.",
+        "Explicit diagnostic Save writes only the reviewed JSON and checksum/README, excludes synthetic private names and rejects token reuse without another export.",
+        "Native Readiness modal and diagnostics preview/save controls work; Close saves nothing and explicit Save preserves the exact displayed JSON."
+      ],
+      "performance": {
+        "sha256": "90613cc561f32aef6c1acc5a3152eb51d30157257ee9eb604373453ae722b162",
+        "commandStages": 17,
+        "pipelineStages": 0,
+        "copyStages": 1,
+        "system": {
+          "os": {
+            "name": "Windows",
+            "release": "10.0",
+            "version": "10.0.20348"
+          },
+          "architecture": "AMD64",
+          "logicalCpuCount": 4,
+          "physicalMemoryBytes": 17174360064,
+          "unavailable": []
+        },
+        "memoryKind": "committed; not RSS",
+        "completeStageCount": 16,
+        "partialStageCount": 1,
+        "partialStages": [
+          {
+            "stepId": "step-2",
+            "tool": "bam/prepare",
+            "stageId": "alignment-stats",
+            "processesActiveAtSnapshot": 1,
+            "processesTotal": 2
+          }
+        ],
+        "coverageScope": "Counters are sampled before job cleanup. Stages with remaining active descendants are explicitly partial, not complete process-lifetime totals.",
+        "pipelineCoverage": "No binary pipe in the pinned Starter workflows; separate native performance helper exercises production pipeline accounting."
+      },
+      "diagnosticExport": {
+        "file": "native-workbench-diagnostics-5c750a234229a4ac4887351e1d1fcd2a.zip",
+        "sha256": "864113af86bc94376ce119aa1c8260d51b7c21688652fa2905ba9130148e564b",
+        "bytes": 1797
+      },
+      "captures": [
+        {
+          "path": "readiness-native.bmp",
+          "width": 720,
+          "height": 530,
+          "sha256": "26ddbbfb0e6ae840d05b3a1abfb4f53fc62e5ae3fd47075336ad2b8bcfc8189b"
+        },
+        {
+          "path": "diagnostics-native-preview.bmp",
+          "width": 720,
+          "height": 530,
+          "sha256": "1f5bc4ed7d8689b69546563c2fe42a1ab3a6f4db1147df8c31cd8cef0919ae11"
+        }
+      ],
+      "geometry": {
+        "workArea": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "actualWindowBounds": [
+          0,
+          0,
+          1040,
+          728
+        ],
+        "horizontalClipping": true
+      },
+      "helperObservations": [
+        {
+          "check": "exec-success",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "command-process-tree",
+            "wall_ms": 140,
+            "user_cpu_seconds": 0.109375,
+            "kernel_cpu_seconds": 0.015625,
+            "peak_job_memory_bytes": 23924736,
+            "memory_kind": "committed",
+            "processes_total": 2,
+            "processes_active_at_snapshot": 0,
+            "accounting_available": true,
+            "memory_available": true,
+            "coverage": "complete",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        },
+        {
+          "check": "exec-failure",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "command-process-tree",
+            "wall_ms": 141,
+            "user_cpu_seconds": 0.109375,
+            "kernel_cpu_seconds": 0.015625,
+            "peak_job_memory_bytes": 23928832,
+            "memory_kind": "committed",
+            "processes_total": 2,
+            "processes_active_at_snapshot": 0,
+            "accounting_available": true,
+            "memory_available": true,
+            "coverage": "complete",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        },
+        {
+          "check": "pipe-success",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "pipeline-process-tree",
+            "wall_ms": 140,
+            "user_cpu_seconds": 0.140625,
+            "kernel_cpu_seconds": 0.0,
+            "peak_job_memory_bytes": 31039488,
+            "memory_kind": "committed",
+            "processes_total": 4,
+            "processes_active_at_snapshot": 0,
+            "accounting_available": true,
+            "memory_available": true,
+            "coverage": "complete",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        },
+        {
+          "check": "pipe-failure",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "pipeline-process-tree",
+            "wall_ms": 141,
+            "user_cpu_seconds": 0.140625,
+            "kernel_cpu_seconds": 0.0,
+            "peak_job_memory_bytes": 31055872,
+            "memory_kind": "committed",
+            "processes_total": 4,
+            "processes_active_at_snapshot": 0,
+            "accounting_available": true,
+            "memory_available": true,
+            "coverage": "complete",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        },
+        {
+          "check": "exec-cancel",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "command-process-tree",
+            "wall_ms": 47,
+            "user_cpu_seconds": 0.015625,
+            "kernel_cpu_seconds": 0.0,
+            "peak_job_memory_bytes": 7118848,
+            "memory_kind": "committed",
+            "processes_total": 2,
+            "processes_active_at_snapshot": 0,
+            "accounting_available": true,
+            "memory_available": true,
+            "coverage": "complete",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        },
+        {
+          "check": "pipe-cancel",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "pipeline-process-tree",
+            "wall_ms": 47,
+            "user_cpu_seconds": 0.015625,
+            "kernel_cpu_seconds": 0.015625,
+            "peak_job_memory_bytes": 14229504,
+            "memory_kind": "committed",
+            "processes_total": 4,
+            "processes_active_at_snapshot": 0,
+            "accounting_available": true,
+            "memory_available": true,
+            "coverage": "complete",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        },
+        {
+          "check": "exec-timeout",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "command-process-tree",
+            "wall_ms": 125,
+            "user_cpu_seconds": 0.015625,
+            "kernel_cpu_seconds": 0.0,
+            "peak_job_memory_bytes": 7106560,
+            "memory_kind": "committed",
+            "processes_total": 2,
+            "processes_active_at_snapshot": 0,
+            "accounting_available": true,
+            "memory_available": true,
+            "coverage": "complete",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        },
+        {
+          "check": "pipe-timeout",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "pipeline-process-tree",
+            "wall_ms": 125,
+            "user_cpu_seconds": 0.03125,
+            "kernel_cpu_seconds": 0.0,
+            "peak_job_memory_bytes": 14254080,
+            "memory_kind": "committed",
+            "processes_total": 4,
+            "processes_active_at_snapshot": 0,
+            "accounting_available": true,
+            "memory_available": true,
+            "coverage": "complete",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        },
+        {
+          "check": "exec-observer-exception",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "command-process-tree",
+            "wall_ms": 31,
+            "user_cpu_seconds": 0.015625,
+            "kernel_cpu_seconds": 0.0,
+            "peak_job_memory_bytes": 7114752,
+            "memory_kind": "committed",
+            "processes_total": 2,
+            "processes_active_at_snapshot": 2,
+            "accounting_available": true,
+            "memory_available": true,
+            "coverage": "partial",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        },
+        {
+          "check": "pipeline-start-exception",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "pipeline-process-tree",
+            "wall_ms": 0,
+            "user_cpu_seconds": 0.0,
+            "kernel_cpu_seconds": 0.0,
+            "peak_job_memory_bytes": 401408,
+            "memory_kind": "committed",
+            "processes_total": 1,
+            "processes_active_at_snapshot": 1,
+            "accounting_available": true,
+            "memory_available": true,
+            "coverage": "partial",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        },
+        {
+          "check": "live-descendant-partial-coverage-and-cleanup",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "command-process-tree",
+            "wall_ms": 31,
+            "user_cpu_seconds": 0.0,
+            "kernel_cpu_seconds": 0.03125,
+            "peak_job_memory_bytes": 7831552,
+            "memory_kind": "committed",
+            "processes_total": 4,
+            "processes_active_at_snapshot": 2,
+            "accounting_available": true,
+            "memory_available": true,
+            "coverage": "partial",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        },
+        {
+          "check": "cancel-before-start",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "command-process-tree",
+            "wall_ms": null,
+            "user_cpu_seconds": null,
+            "kernel_cpu_seconds": null,
+            "peak_job_memory_bytes": null,
+            "memory_kind": "committed",
+            "processes_total": null,
+            "processes_active_at_snapshot": null,
+            "accounting_available": false,
+            "memory_available": false,
+            "coverage": "not-started",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        },
+        {
+          "check": "unavailable-query",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "command-process-tree",
+            "wall_ms": null,
+            "user_cpu_seconds": null,
+            "kernel_cpu_seconds": null,
+            "peak_job_memory_bytes": null,
+            "memory_kind": "committed",
+            "processes_total": null,
+            "processes_active_at_snapshot": null,
+            "accounting_available": false,
+            "memory_available": false,
+            "coverage": "unavailable",
+            "snapshot": "before-job-close",
+            "accounting_error": 6,
+            "memory_error": 6
+          }
+        },
+        {
+          "check": "locale-independent-json",
+          "performance": {
+            "schema": 1,
+            "source": "windows-job-object",
+            "scope": "command-process-tree",
+            "wall_ms": null,
+            "user_cpu_seconds": 0.1234567,
+            "kernel_cpu_seconds": 0.0,
+            "peak_job_memory_bytes": null,
+            "memory_kind": "committed",
+            "processes_total": 0,
+            "processes_active_at_snapshot": 0,
+            "accounting_available": true,
+            "memory_available": false,
+            "coverage": "partial",
+            "snapshot": "before-job-close",
+            "accounting_error": null,
+            "memory_error": null
+          }
+        }
+      ]
+    }
+  ],
+  "visualReview": {
+    "reviewers": 2,
+    "method": "Independent assistant inspection of actual native PrintWindow captures from both final Windows paths; not user acceptance.",
+    "passed": [
+      "Readiness introduction fully visible on one line; prior clipping is absent.",
+      "Diagnostic notice and Save diagnostic ZIP button label fit.",
+      "Dialog titles, scrollable report and footer controls are visible."
+    ],
+    "limits": [
+      "Only observed 96 DPI and 720x530 dialogs; physical high-DPI/trackpad/multimonitor acceptance remains pending.",
+      "Main application minimum width 1040 exceeds hosted desktop width 1024 by 16 pixels; this is recorded, not a full small-screen acceptance pass."
+    ],
+    "pointerAndControlScope": "Main navigation/buttons use actual SendInput with work-area/foreground/hit-target checks. Modal Close/Save actions use native BM_CLICK messages; exact rendered preview/export bytes and control labels are checked."
+  },
+  "nativeLogObservation": "Library logs retain transient Could not measure native control exceptions in ctypes enumeration while the asynchronous form is recreated. Later bounded state predicates and all seven library behavioral assertions succeeded; these are not additional passes or evidence for every transient frame.",
+  "releaseLimitations": [
+    "No 0.12.0 release/tag or updater was created; published 0.11.0 remains unchanged.",
+    "Upgrade from 0.11.0 and preservation checks for a 0.12.0 updater remain to be built and run before release.",
+    "Live Ensembl download and full online setup release gates were not rerun in this candidate workflow.",
+    "Hosted synthetic fixtures do not establish representative-machine performance, realistic-data capacity, Windows-Linux equivalence or institutional endpoint approval.",
+    "Windows peak Job Object committed memory is not RSS. Spaced-path run has one correctly partial pre-cleanup snapshot; it is not reported as complete."
+  ],
+  "retainedPriorEvidence": [
+    "readiness-performance-0.12.0-fifth-failure-2026-10-08.json",
+    "readiness-performance-0.12.0-font-gate-failure-2026-10-08.json",
+    "readiness-performance-0.12.0-fourth-failure-2026-10-08.json",
+    "readiness-performance-0.12.0-initial-failure-2026-10-08.json",
+    "readiness-performance-0.12.0-second-failure-2026-10-08.json",
+    "readiness-performance-0.12.0-sixth-visual-finding-2026-10-08.json",
+    "readiness-performance-0.12.0-source-2026-10-08.json",
+    "readiness-performance-0.12.0-third-failure-2026-10-08.json"
+  ],
+  "nextWork": [
+    "Tester acceptance on representative Windows systems and benchmark protocol/data selection.",
+    "Sample table, general batch workflows, durable queue and reusable reference index contracts."
+  ]
+}

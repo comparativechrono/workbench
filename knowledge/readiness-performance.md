@@ -5,9 +5,13 @@ on `feature/readiness-performance`, based on
 `82729febfcfab1c43bd9c9798d03c80f595545cb`. Published 0.11.0 and its accepted
 archives remain unchanged. The owner accepted the broader
 [development programme](roadmap.md); this is the first bounded milestone.
-No packaged Windows evidence is recorded for this milestone at this snapshot.
-Add exact build/run identities and results when available; do not transfer the
-0.11.0 passes to changed application bytes.
+The implementation is under review in [draft PR #7](https://github.com/comparativechrono/workbench/pull/7).
+The exact packaged candidate now passes its defined automated gates and independent
+screenshot review; see the [final candidate evidence](evidence/readiness-performance-0.12.0-candidate-2026-10-08.json)
+and [archive audit](evidence/readiness-performance-0.12.0-artifact-audit-2026-10-08.json).
+The initial offline hostname failure and a clipped native introduction were fixed;
+unsuccessful attempts and a rejected font-measurement approach are retained below.
+This is a reviewable development candidate, not tester acceptance or a release.
 
 ## Purpose and scope
 
@@ -116,7 +120,10 @@ The report allows application/pack versions, manifest identities, a fixed
 public pack-ID vocabulary, broad OS/architecture/CPU/RAM information, run/step
 status and readiness status counts. Other pack identifiers become `third-party`.
 These labels and identities do not authenticate a publisher or prove installation
-integrity. Unknown values remain unknown.
+integrity. Unknown values remain unknown. System identification uses native
+kernel APIs without `platform.uname()` or hostname/socket calls. Diagnostic
+filenames use random tokens without importing `uuid`, whose cold import also
+invokes platform identification on the bundled Python versions.
 
 Excluded fields include scientific-file contents and hashes, sample/workflow
 names, arbitrary identifiers or labels, filenames/paths, logs, commands,
@@ -165,19 +172,24 @@ python3 workspace/tests/test_diagnostics.py
 python3 workspace/tests/test_readiness_service.py
 ```
 
-The diagnostics source check initially passed eight Linux cases with two
-explicitly unrun Windows cases (junction rejection and a destination longer
-than 300 characters). The Windows suite has a separately skipped POSIX symlink
-case. These are platform distinctions, not interchangeable passes. An independent
-review identified an ordinary-path Windows I/O regression risk; export was
-corrected to use the established extended-path helpers before packaging.
-Subsequent validation should record its exact source and current test counts.
+The Windows diagnostic suites now exercise junction rejection and a destination
+longer than 300 characters; their POSIX symlink case remains explicitly skipped
+on Windows. Linux instead skips the two Windows-specific cases. These are
+platform distinctions, not interchangeable passes. An independent review
+identified an ordinary-path Windows I/O regression risk; export was corrected to
+use the established extended-path helpers before packaging. Added cold-process
+regressions deny every socket audit operation and forbid `platform.uname()`
+during system measurement and diagnostic review/export.
 
 The native resource fixture is `tests/windows_performance.cpp`, built with
-`tests/build_windows_performance.sh`. Its execution on Windows, packaged
-application checks and native dialog interactions require separate evidence.
-Cross-compilation alone is not a native pass. Root release/build records should
-retain failures, unavailable counters and all ordinary/spaced-path results.
+`tests/build_windows_performance.sh`. It has executed successfully on Windows,
+including separate command and binary-pipeline accounting; the failure records
+retain the exact runs and assertions. The packaged native host/scientific and
+diagnostic-save checks have also passed within otherwise unsuccessful runs.
+The final native dialog gate also passed. Main navigation uses real pointer
+input with visible target checks; modal Close/Save uses native button messages.
+Cross-compilation, host protocol checks, native control interaction and visual
+review remain separate evidence; physical keyboard/pointer acceptance is pending.
 
 Before a release, validate the exact candidate's successful scientific workflow,
 blocked readiness, failed/cancelled stages, resource coverage and result/CWL
@@ -187,8 +199,72 @@ historical evidence only for unchanged artefacts and explicitly stated scopes.
 Representative physical-machine, high-DPI, keyboard, trackpad and institutional
 acceptance remains separate from hosted Windows checks.
 
-## Current source evidence, 2026-10-08
+## Source and candidate evidence, 2026-10-08
 
-The consolidated [source record](evidence/readiness-performance-0.12.0-source-2026-10-08.json) contains **151 passed, three skipped, no failed suites** across 15 focused/regression suites. Two skips require Windows diagnostic paths; one requires optional independent `cwltool`. The desktop, bridge and 14-case process-accounting helper passed strict pinned cross-compilation. These are not Windows execution passes. Native candidate workflow execution remains pending.
+The initial consolidated [source record](evidence/readiness-performance-0.12.0-source-2026-10-08.json)
+contains **151 passed, three skipped, no failed suites** across 15 focused/regression
+suites. It predates the added offline regressions. Two skips require Windows
+diagnostic paths; one requires optional independent `cwltool`. The desktop,
+bridge and process-accounting helper passed strict pinned cross-compilation;
+those compilation results are not Windows execution passes.
+
+The final candidate's [Linux build job](https://github.com/comparativechrono/workbench/actions/runs/37808653384/job/113419474467)
+records **144 passed and three skipped** across 14 suites, including the later
+performance/offline and diagnostics checks. Its suite selection omits the ten
+pack-version checks present in the initial consolidated record. Keep these
+observations separate; their totals must not be added or described as a rerun
+of an identical suite. A later consolidated local total has not been established
+by this record.
+
+| Retained candidate attempt | Finding and correction; final status |
+| --- | --- |
+| [Initial failure](evidence/readiness-performance-0.12.0-initial-failure-2026-10-08.json) | `platform.*` attempted `socket.gethostname` in the strict offline host. Native system APIs and cold-import regressions replace that path without relaxing the offline gate. Raw failed resource snapshots were added to investigate the separate process-count mismatch. |
+| [Second failure](evidence/readiness-performance-0.12.0-second-failure-2026-10-08.json) | Offline scientific execution passed. The helper assumed exactly one process, and the Starter gate assumed a binary-pipe stage absent from its actual manifests. Measurements were preserved; process membership was investigated and real binary-pipe coverage remains in its separate helper. |
+| [Third failure](evidence/readiness-performance-0.12.0-third-failure-2026-10-08.json) | Native resource and host/scientific checks passed. The additional process was independently identified as Windows `conhost.exe`, correctly included in whole-job accounting. Native GUI editing failed an availability/timing condition. |
+| [Fourth failure](evidence/readiness-performance-0.12.0-fourth-failure-2026-10-08.json) | A pre-job-close snapshot contained an active descendant and correctly reported partial coverage. Validation now checks that distinction explicitly, preserving all command/scientific assertions. GUI timing remained unresolved. |
+| [Fifth failure](evidence/readiness-performance-0.12.0-fifth-failure-2026-10-08.json) | Native resources, known scientific truth, host diagnostic preview/save and library checks passed. Pointer clicks did not open the Readiness and Manage tools dialogs. The retained capture places the application beyond the hosted desktop's usable work area; the harness was corrected to record actual hit targets and desktop captures. These interactions passed in the subsequent corrected harness. |
+| [Sixth candidate visual finding](evidence/readiness-performance-0.12.0-sixth-visual-finding-2026-10-08.json) | All automated checks passed, but independent screenshot review found a clipped readiness introduction. The sentence was shortened while full readiness limits remain in the report. |
+| [Font-measurement gate failure](evidence/readiness-performance-0.12.0-font-gate-failure-2026-10-08.json) | An added measurement incorrectly tried to use another process's private GDI font handle. That invalid optional test was removed; actual native captures, functional checks and independent visual review establish the final wording. The intermediate cancelled run is not acceptance evidence. |
+
+The exact native Starter observations retain the expected paired alignments and
+known variant truth, output hashes and command-stage identities. They do not
+establish realistic-data capacity or Windows–Linux performance equivalence.
+The [final candidate evidence](evidence/readiness-performance-0.12.0-candidate-2026-10-08.json)
+records source `eaa691d55a3659a793086ce272b826bcba1cabea` and successful
+[run 37808653384](https://github.com/comparativechrono/workbench/actions/runs/37808653384).
+Both ordinary and space-containing paths passed 14 native process-resource,
+five readiness/diagnostic, seven library and 32 workspace checks. The Windows
+diagnostic source suite passed ten with one explicitly skipped POSIX case per
+path. The successful Starter measurements cover 17 command stages and one copy;
+no process counters are invented for the copy. The spaced-path run contains one
+correctly partial snapshot (a descendant was still active before job cleanup).
+
+Two independent assistant reviews of the final 720×530 native dialog captures
+confirmed that the readiness introduction, diagnostic notice and Save label fit.
+This is observed 96-DPI evidence, not tester acceptance. The 1024-pixel-wide
+hosted desktop clips 16 pixels of the main window's minimum width; real pointer
+targets remain explicitly checked. Library logs retain transient control-enumeration
+exceptions while forms are recreated; subsequent bounded predicates and all seven
+behavioral assertions passed. Neither observation is hidden as broader UI acceptance.
+
+The [archive audit](evidence/readiness-performance-0.12.0-artifact-audit-2026-10-08.json)
+independently verifies the transported ZIPs, both original archive hashes/CRCs,
+645 exact-commit source files, 75 core entries and all 21 runtime Python modules.
+143 starter pack files and 39 private-runtime files are byte-identical to the
+verified baseline; the production 32-pack profile and catalogue trust are unchanged.
+
+| Candidate archive | SHA-256 |
+| --- | --- |
+| `native-workbench-0.12.0-starter-windows.zip` | `746ca78169a211310c6eab14c80f69c3d5477049f5e982299d9788ef53989c40` |
+| `native-workbench-0.12.0-source.zip` | `11aabcb94fc7f879ad2103c65f8f3ab722efce496615a00bcb3ab75aa5b496a8` |
+
+These are retained GitHub Actions candidate artifacts, not public release assets;
+artifact retention is 30 days. Download from the named run before expiry, or use
+the recorded source and established build workflow to create a new candidate
+whose bytes require their own validation. No 0.12.0 release or updater exists.
+Before release, obtain representative-machine acceptance and run the established
+upgrade/preservation and reference/setup release gates. The matched realistic-data
+Windows–Linux benchmark remains future work. The next implementation milestone is
+sample tables, general batch workflows, a durable queue and reusable reference indexes.
 
 Native stage wall time uses the existing `GetTickCount64` clock (typically 10–16 ms resolution), covering launch through the pre-cleanup snapshot. It excludes later hashing/reporting and remaining cleanup. CPU counter units of 100 ns do not promise that measurement accuracy.
