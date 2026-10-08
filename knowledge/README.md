@@ -7,9 +7,12 @@ unpublished 0.13.0 [batches, queue and indexes](batch-queue-indexes-0.13.0-hando
 in [draft PR #8](https://github.com/comparativechrono/workbench/pull/8), which in
 turn builds on 0.12.0 [readiness, measurements and diagnostics](readiness-performance.md)
 in [draft PR #7](https://github.com/comparativechrono/workbench/pull/7).
-Published **0.11.0** remains the baseline. New implementation and validation are
-in progress; representative-machine acceptance, benchmarking and release work
-remain separate. See [current state](current-state.md) for exact evidence.
+The final 0.14.0 implementation and recorded hosted validation are complete in
+[draft PR #9](https://github.com/comparativechrono/workbench/pull/9); see its
+[candidate handover and download](recovery-projects-0.14.0-handover.md).
+Published **0.11.0** remains the baseline. Representative-machine acceptance,
+benchmarking and release/update work remain separate. See
+[current state](current-state.md) for exact evidence.
 
 This is the durable handover for people and agents continuing Native Workbench.
 It records why the project exists, how it works, how to extend it, and which

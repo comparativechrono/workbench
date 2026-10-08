@@ -50,9 +50,11 @@ adds no dependency to normal Workbench operation. See the
 [CWL guide](knowledge/cwl-results.md).
 
 Development for the accepted roadmap is on unpublished review branches.
-The final implementation tranche targets **0.14.0** with [verified workflow
+The final implementation tranche is ready for tester review as unpublished
+**0.14.0**, with [verified workflow
 restart, declared resource budgets and portable projects](knowledge/recovery-projects.md).
-See [current development status](knowledge/current-state.md) for evidence and
+See the [candidate handover and download](knowledge/recovery-projects-0.14.0-handover.md)
+and [current development status](knowledge/current-state.md) for evidence and
 limits; these features are not in the published 0.11.0 download below.
 
 ## Using the application

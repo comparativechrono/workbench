@@ -10,15 +10,24 @@ admission budgets for concurrent DAG steps, and portable project bundles.
 See [recovery, resources and projects](recovery-projects.md).
 
 Implementation is in [draft PR #9](https://github.com/comparativechrono/workbench/pull/9).
-Frozen source `cd0ed848fd9d9c8728b0d83991511a348c13719e` passed 287 CI source
-checks with four Windows-only skips, including actual report-only stock-CWL
-replay, and independent source/runtime archive verification. Initial Windows
-regression gates passed, but the new gate stopped on an incorrect three-step
-validator assumption and isolated source tests stopped on a helper import.
-Those failed observations are retained. The corrected native gate passed 12
-checks per path. Further Windows source and screenshot review found portable
-short-path metadata defects and a clipped export button label; both are fixed
-in source and a new exact build is required. See the
+Final packaged source `0e2d5cbcbf1786d6e1723f8466b4b6b94da04802` passed
+[run 37842857764](https://github.com/comparativechrono/workbench/actions/runs/37842857764):
+**289 source checks with four skips**, including actual report-only stock-CWL
+replay. Each Windows path passed **12 recovery/resource/project/interface,
+11 batch/index, 14 resource, five readiness/diagnostic, seven library and 32
+workspace checks**, plus independent pack import/science and three separately
+instrumented transport checks. Windows source suites passed 126 with three
+skips per path. Independent archive verification checked 689 exact source files,
+82 core files and unchanged published packs/runtime/trust.
+
+Earlier failures exposed validator assumptions/imports and genuine Windows
+short-path metadata defects; screenshot review found a clipped export label.
+All were corrected and the final archive rerun. Both sets of six final captures
+were reviewed at 96 DPI. Failed attempts remain recorded. **Implementation and
+recorded hosted validation are complete; representative-machine acceptance,
+realistic benchmarking and release/update work remain.** No 0.14.0 updater was
+built or tested; live reference downloads and Full online setup were not rerun.
+See exact downloads, evidence and retained validation limitations in the
 [handover](recovery-projects-0.14.0-handover.md).
 Historical source and Windows passes below apply only to their named candidates.
 Published **0.11.0** and production packs/profile/trust remain unchanged.
@@ -89,8 +98,8 @@ Windows–Linux benchmark and release/update gates remain outstanding. No 0.12.0
 updater was built or tested; live reference downloads and Full online setup were
 not rerun by this candidate workflow. Published 0.11.0 below remains unchanged.
 Sample batching, durable queues and reusable indexes are the active 0.13.0
-tranche above. Verified completed-step restart and bounded concurrency remain
-subsequent accepted work.
+tranche above. Verified completed-step restart and bounded concurrency are
+implemented in the 0.14.0 candidate above.
 
 ## Published baseline: 0.11.0
 
