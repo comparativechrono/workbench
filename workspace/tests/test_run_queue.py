@@ -2,6 +2,7 @@
 import copy
 import hashlib
 import json
+import os
 from pathlib import Path
 import sys
 import subprocess
@@ -16,6 +17,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from run_queue import RunQueue, freeze_plan, load_plan, strict_json
 from service import Workbench
 from desktop_host import DesktopHost
+import file_io
 
 
 def wait_for(check, timeout=4):
@@ -229,6 +231,198 @@ class QueueTests(unittest.TestCase):
         self.assertEqual(self.app.run_queue.path.read_bytes(), before)
         self.assertEqual(self.app.run_queue.snapshot(), snapshot)
         self.assertEqual(list(self.app.data.glob("run-queue.json.*.tmp")), [])
+
+    def test_transient_windows_receipt_conflict_commits_once_without_reexecuting(self):
+        identity = self.add()
+        original = os.replace
+        denied = []
+        error = PermissionError("fixture Windows receipt reader")
+        error.winerror = 5
+        def replace(source, destination):
+            if Path(destination).name == self.app.run_queue.path.name and len(denied) < 2:
+                denied.append(str(source))
+                raise error
+            return original(source, destination)
+        with patch("file_io.WINDOWS", True), patch("file_io.os.replace", side_effect=replace), \
+                patch("file_io.sleep") as sleeping:
+            self.app.start_queue()
+            state = self.finish()
+        self.assertEqual([job["status"] for job in state["jobs"]], ["completed"])
+        self.assertEqual(len(self.engine.calls), 1)
+        self.assertEqual(denied[0], denied[1])
+        self.assertEqual(sleeping.call_count, 2)
+        self.assertEqual(strict_json(self.app.run_queue.path.read_bytes())["jobs"][0]["job_id"], identity)
+
+    def test_persistent_windows_queue_and_history_conflicts_preserve_committed_state(self):
+        identity = self.add()
+        old_run = {"run_id": "history-fixture", "status": "completed", "events": [], "name": "Before"}
+        self.app.persist_run(old_run)
+        error = PermissionError("fixture persistent Windows reader")
+        error.winerror = 32
+        for kind, path, action, snapshot in (
+                ("queue", self.app.run_queue.path,
+                 lambda: self.app.run_queue.update([identity], message="Not committed"), self.app.run_queue.snapshot),
+                ("history", self.app.history_path,
+                 lambda: self.app.persist_run(dict(old_run, name="Not committed")), lambda: copy.deepcopy(self.app.history))):
+            with self.subTest(receipt=kind):
+                before, memory = path.read_bytes(), snapshot()
+                with patch("file_io.WINDOWS", True), patch("file_io.os.replace", side_effect=error) as replacing, \
+                        patch("file_io.sleep") as sleeping:
+                    with self.assertRaises(PermissionError):
+                        action()
+                self.assertEqual(replacing.call_count, len(file_io.REPLACE_DELAYS) + 1)
+                self.assertEqual([call.args[0] for call in sleeping.call_args_list], list(file_io.REPLACE_DELAYS))
+                self.assertEqual(path.read_bytes(), before)
+                self.assertEqual(snapshot(), memory)
+                self.assertEqual(list(path.parent.glob(path.name + ".*.tmp")), [])
+        self.assertEqual(self.engine.calls, [])
+
+    def test_receipt_retry_applies_only_to_selected_windows_errors(self):
+        source, destination = self.root / "staged", self.root / "receipt"
+        source.write_bytes(b"new")
+        destination.write_bytes(b"old")
+        for windows, code in ((False, 5), (True, 2), (True, 112), (True, None)):
+            with self.subTest(windows=windows, winerror=code):
+                error = OSError("fixture permanent or non-Windows error")
+                if code is not None:
+                    error.winerror = code
+                with patch("file_io.WINDOWS", windows), patch("file_io.os.replace", side_effect=error) as replacing, \
+                        patch("file_io.sleep") as sleeping:
+                    with self.assertRaises(OSError):
+                        file_io.replace_file(source, destination)
+                self.assertEqual(replacing.call_count, 1)
+                sleeping.assert_not_called()
+                self.assertEqual(source.read_bytes(), b"new")
+                self.assertEqual(destination.read_bytes(), b"old")
+        for code in (5, 32, 33):
+            with self.subTest(transient_winerror=code):
+                error = OSError("fixture sharing error")
+                error.winerror = code
+                with patch("file_io.WINDOWS", True), patch("file_io.os.replace", side_effect=[error, None]) as replacing, \
+                        patch("file_io.sleep"):
+                    file_io.replace_file(source, destination)
+                self.assertEqual(replacing.call_count, 2)
+
+    def test_cancel_and_status_remain_responsive_during_queue_receipt_retry(self):
+        identity = self.add()
+        entered, release = threading.Event(), threading.Event()
+        original = os.replace
+        failed = False
+        def replace(source, destination):
+            nonlocal failed
+            if Path(destination).name == self.app.run_queue.path.name and not failed:
+                failed = True
+                error = PermissionError("fixture reader holds queue receipt")
+                error.winerror = 33
+                raise error
+            return original(source, destination)
+        def sleeping(delay):
+            entered.set()
+            if not release.wait(3):
+                raise AssertionError("No fixture release")
+        with patch("file_io.WINDOWS", True), patch("file_io.os.replace", side_effect=replace), \
+                patch("file_io.sleep", side_effect=sleeping):
+            self.app.start_queue()
+            try:
+                self.assertTrue(entered.wait(2))
+                started = time.monotonic()
+                self.assertTrue(self.host.dispatch("queue/status", {})["queue_running"])
+                self.assertIsNotNone(self.app.cancel_queued_immediate(identity))
+                self.assertTrue(self.app.runs[identity]["_cancel"].is_set())
+                self.assertLess(time.monotonic() - started, .5)
+            finally:
+                release.set()
+        self.assertEqual(self.finish()["jobs"][0]["status"], "cancelled")
+        self.assertLessEqual(len(self.engine.calls), 1)
+
+    def _open_windows_receipt_reader(self, path):
+        import ctypes
+        from ctypes import wintypes
+        kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+        kernel.CreateFileW.argtypes = [wintypes.LPCWSTR, wintypes.DWORD, wintypes.DWORD,
+                                      ctypes.c_void_p, wintypes.DWORD, wintypes.DWORD, wintypes.HANDLE]
+        kernel.CreateFileW.restype = wintypes.HANDLE
+        kernel.CloseHandle.argtypes = [wintypes.HANDLE]
+        kernel.CloseHandle.restype = wintypes.BOOL
+        name = str(path.resolve())
+        if not name.startswith("\\\\?\\"):
+            name = "\\\\?\\UNC\\" + name[2:] if name.startswith("\\\\") else "\\\\?\\" + name
+        handle = kernel.CreateFileW(name, 0x80000000, 7, None, 3, 0x80, None)
+        if handle == ctypes.c_void_p(-1).value:
+            raise ctypes.WinError(ctypes.get_last_error())
+        def close():
+            self.assertTrue(kernel.CloseHandle(handle))
+        return close
+
+    @unittest.skipUnless(os.name == "nt", "Requires native Windows held-reader semantics")
+    def test_native_windows_short_queue_and_history_readers_allow_atomic_commit(self):
+        identity = self.add()
+        old_run = {"run_id": "history-fixture", "status": "completed", "events": [], "name": "Before"}
+        self.app.persist_run(old_run)
+        for kind, path, action, snapshot in (
+                ("queue", self.app.run_queue.path,
+                 lambda: self.app.run_queue.update([identity], message="Committed after reader closed"), self.app.run_queue.snapshot),
+                ("history", self.app.history_path,
+                 lambda: self.app.persist_run(dict(old_run, name="After reader closed")), lambda: copy.deepcopy(self.app.history))):
+            with self.subTest(receipt=kind):
+                before, memory = path.read_bytes(), snapshot()
+                close = self._open_windows_receipt_reader(path)
+                denied, errors, attempts = threading.Event(), [], []
+                original = os.replace
+                def observing_replace(source, destination):
+                    try:
+                        result = original(source, destination)
+                        attempts.append(None)
+                        return result
+                    except OSError as error:
+                        attempts.append(error.winerror)
+                        denied.set()
+                        raise
+                def write():
+                    try:
+                        action()
+                    except Exception as error:
+                        errors.append(error)
+                with patch("file_io.os.replace", side_effect=observing_replace):
+                    worker = threading.Thread(target=write)
+                    worker.start()
+                    try:
+                        self.assertTrue(denied.wait(2), "Held reader did not exercise the Windows retry path")
+                    finally:
+                        close()
+                        worker.join(3)
+                self.assertFalse(worker.is_alive())
+                self.assertEqual(errors, [])
+                self.assertIn(attempts[0], (5, 32, 33))
+                self.assertIsNone(attempts[-1])
+                self.assertNotEqual(path.read_bytes(), before)
+                self.assertNotEqual(snapshot(), memory)
+                self.assertEqual(list(path.parent.glob(path.name + ".*.tmp")), [])
+        self.assertEqual(self.engine.calls, [])
+
+    @unittest.skipUnless(os.name == "nt", "Requires native Windows held-reader semantics")
+    def test_native_windows_persistent_queue_and_history_readers_fail_without_mutation(self):
+        identity = self.add()
+        old_run = {"run_id": "history-fixture", "status": "completed", "events": [], "name": "Before"}
+        self.app.persist_run(old_run)
+        for kind, path, action, snapshot in (
+                ("queue", self.app.run_queue.path,
+                 lambda: self.app.run_queue.update([identity], message="Not committed"), self.app.run_queue.snapshot),
+                ("history", self.app.history_path,
+                 lambda: self.app.persist_run(dict(old_run, name="Not committed")), lambda: copy.deepcopy(self.app.history))):
+            with self.subTest(receipt=kind):
+                before, memory = path.read_bytes(), snapshot()
+                close = self._open_windows_receipt_reader(path)
+                try:
+                    with self.assertRaises(OSError) as caught:
+                        action()
+                    self.assertIn(caught.exception.winerror, (5, 32, 33))
+                finally:
+                    close()
+                self.assertEqual(path.read_bytes(), before)
+                self.assertEqual(snapshot(), memory)
+                self.assertEqual(list(path.parent.glob(path.name + ".*.tmp")), [])
+        self.assertEqual(self.engine.calls, [])
 
     def test_store_commit_does_not_hold_status_or_app_lock(self):
         self.add()

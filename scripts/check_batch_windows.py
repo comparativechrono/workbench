@@ -21,6 +21,7 @@ import platform
 import shutil
 import subprocess
 import sys
+import threading
 import time
 import traceback
 
@@ -267,6 +268,7 @@ def host_checks(root, evidence, report):
         corruption_checks(host, graph, output, evidence, report)
         cancellation_checks(host, graph, output, root, evidence, report)
         index_checks(host, graph, output, root, evidence, report, catalog)
+        receipt_reader_checks(host, root, output, evidence, report, catalog)
         setup = host.call("setup/status")
         require((root / "user-data/run-queue.json").is_file() and setup["offered"] is False,
                 "Persisted queue/results must be recognised as a returning installation.")
@@ -290,6 +292,130 @@ def host_checks(root, evidence, report):
                         report.setdefault("hostFinalReceipts", []).append({"file": target.name, "sha256": sha256(target)})
                     except Exception as capture_error:
                         report.setdefault("hostFinalReceiptErrors", []).append({"file": name, "error": str(capture_error)})
+
+
+class HeldReceiptReader:
+    """Real Windows read handle, including DELETE sharing; no app patch."""
+    def __init__(self, path):
+        self.kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+        self.kernel.CreateFileW.argtypes = [wintypes.LPCWSTR, wintypes.DWORD, wintypes.DWORD,
+                                          ctypes.c_void_p, wintypes.DWORD, wintypes.DWORD, wintypes.HANDLE]
+        self.kernel.CreateFileW.restype = wintypes.HANDLE
+        self.kernel.CloseHandle.argtypes = [wintypes.HANDLE]
+        self.kernel.CloseHandle.restype = wintypes.BOOL
+        name = str(Path(path).absolute())
+        if not name.startswith("\\\\?\\"):
+            name = "\\\\?\\UNC\\" + name[2:] if name.startswith("\\\\") else "\\\\?\\" + name
+        self.handle = self.kernel.CreateFileW(name, 0x80000000, 7, None, 3, 0x80, None)
+        if self.handle == ctypes.c_void_p(-1).value:
+            raise ctypes.WinError(ctypes.get_last_error())
+        self.lock = threading.Lock()
+        self.released = None
+        self.error = None
+
+    def close(self):
+        with self.lock:
+            if self.handle is not None:
+                if not self.kernel.CloseHandle(self.handle):
+                    self.error = str(ctypes.WinError(ctypes.get_last_error()))
+                self.handle = None
+                self.released = time.monotonic()
+
+
+def receipt_reader_checks(host, root, output, evidence, report, catalog):
+    # These are real external handles on the unchanged packaged host's queue
+    # and run history. No methods are wrapped and no runtime module is patched.
+    # Ordinary Windows rename can be blocked even by a DELETE-sharing reader.
+    metrics = []
+    for number in (1, 2):
+        path = evidence / ("receipt-reader-metric-%d.txt" % number)
+        path.write_text("Synthetic receipt-reader check\t%d\n" % number, encoding="utf-8")
+        metrics.append(path)
+    tool = catalog["tools"]["builtin/report"]
+    graph = {"schema": 1, "name": "Receipt reader overlap", "nextSource": 3, "nextNode": 2,
+             "sources": [{"id": "input-%d" % number, "type": "metrics", "label": "Metric %d" % number,
+                          "files": {"metrics": str(path)}} for number, path in enumerate(metrics, 1)],
+             "nodes": [{"id": "step-1", "tool": "builtin/report", "label": "Receipt overlap report",
+                        "inputs": {"metrics": ["input-1", "input-2"]}, "params": copy.deepcopy(tool["defaults"]),
+                        "pin": {key: tool[key] for key in ("packId", "packVersion", "manifestSha256")}}]}
+    queue_path, history_path = root / "user-data/run-queue.json", root / "user-data/runs.json"
+    observation = {"applicationPatched": False, "sharing": ["READ", "WRITE", "DELETE"]}
+    report["receiptReaderOverlap"] = observation
+    require(not host.call("queue/status")["queue_running"], "Receipt overlap check requires an idle host.")
+    held = HeldReceiptReader(queue_path)
+    started = time.monotonic()
+    release = threading.Timer(.2, held.close)
+    release.start()
+    try:
+        added = host.call("queue/add", {"graph": graph, "output_folder": str(output)})["added"]
+        elapsed = time.monotonic() - started
+        require(held.released is not None and held.error is None and elapsed >= .18,
+                "Queue admission did not overlap the briefly held external receipt reader.")
+        observation["queueBriefReader"] = {"releasedAfterSeconds": held.released - started,
+                                            "admissionSeconds": elapsed, "added": added}
+    finally:
+        release.cancel()
+        release.join(timeout=2)
+        held.close()
+    prepared = queue_ready(host)
+    job = next(job for job in prepared["jobs"] if job["job_id"] in added)
+    require(job["status"] == "queued", "Queue preparation did not commit after its external reader closed: " + json.dumps(job))
+    observation["frozenCompanions"] = frozen_hashes(job)
+
+    held = HeldReceiptReader(history_path)
+    started = time.monotonic()
+    try:
+        host.call("queue/start")
+        time.sleep(.12)
+        active = host.call("queue/status")
+        observation["historyWhileHeld"] = {"queueRunning": active["queue_running"], "activeJob": active["active_job"],
+                                            "runFilePresent": (Path(job["folder"]) / "run.json").exists()}
+        require(active["queue_running"] and active["active_job"] == job["job_id"] and
+                not observation["historyWhileHeld"]["runFilePresent"],
+                "History receipt reader did not overlap initial execution commit: " + json.dumps(active))
+    finally:
+        held.close()
+        observation["historyReaderReleasedAfterSeconds"] = held.released - started
+    require(held.error is None, "History receipt reader did not close cleanly.")
+    finished = wait_jobs(host, set(added))[0]
+    observation["completedJob"] = finished
+    require(finished["status"] == "completed", "Queued report failed after its history reader closed: " + json.dumps(finished))
+    run = read_json(Path(job["folder"]) / "run.json")
+    require(run["success"] and run["outputs"], "Receipt overlap report has no successful execution record.")
+    for value in run["outputs"].values():
+        require(all(sha256(path) == value["sha256"][name] for name, path in value["files"].items()),
+                "Receipt overlap report changed its recorded outputs.")
+
+    before = read_json(queue_path)
+    before_hash = sha256(queue_path)
+    before_folders = {path.name for path in output.iterdir()}
+    held = HeldReceiptReader(queue_path)
+    started = time.monotonic()
+    error = None
+    try:
+        try:
+            host.call("queue/add", {"graph": graph, "output_folder": str(output)})
+        except ValueError as failure:
+            error = str(failure)
+        elapsed = time.monotonic() - started
+        observation["persistentQueueReader"] = {"error": error, "admissionSeconds": elapsed,
+                                                "beforeSha256": before_hash, "afterSha256": sha256(queue_path)}
+        require(error is not None and "run-queue.json" in error and
+                any("[WinError %d]" % code in error for code in (5, 32, 33)) and .45 <= elapsed < 5,
+                "A persistent queue reader did not produce a bounded, explicit Windows sharing failure: " + str(error))
+        require(read_json(queue_path) == before and sha256(queue_path) == before_hash and
+                {path.name for path in output.iterdir()} == before_folders,
+                "Failed queue admission changed an existing receipt or created an uncommitted plan.")
+        status = host.call("queue/status")
+        require(not status["preparing"] and not status["queue_running"] and not status["error"] and
+                [job["job_id"] for job in status["jobs"]] == [job["job_id"] for job in before["jobs"]],
+                "A failed queue commit mutated in-memory jobs or left the host busy.")
+    finally:
+        held.close()
+        write_json(evidence / "receipt-reader-overlap.json", observation)
+    require(held.error is None, "Persistent receipt reader did not close cleanly.")
+    require(not list((root / "user-data").glob("run-queue.json.*.tmp")), "Failed queue commit left temporary receipt files.")
+    check(report, "Exact packaged queue and history commits survive brief real external read handles; a persistent handle exhausts the bounded Windows wait with an explicit sharing error, preserves existing jobs/bytes, creates no plan and leaves the host responsive.")
 
 
 def combined_checks(host, completed, catalog, output, evidence, report):

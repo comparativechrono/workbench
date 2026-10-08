@@ -18,13 +18,14 @@ import uuid
 
 from catalog import load_catalog, load_pack
 from engine import Engine
+from file_io import replace_file
 
 MAX_PUBLIC_LOG_BYTES = 256 * 1024
 MAX_RECENT_BYTES = 3 * 1024 * 1024
 MAX_HISTORY_BYTES = 12 * 1024 * 1024
 MAX_SAVED_BYTES = 12 * 1024 * 1024
 
-def atomic_json(path, value):
+def atomic_json(path, value, *, retry_sharing=False):
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_name(path.name + "." + uuid.uuid4().hex + ".tmp")
@@ -32,7 +33,10 @@ def atomic_json(path, value):
         with tmp.open("x", encoding="utf-8", newline="\n") as stream:
             json.dump(value, stream, indent=2, ensure_ascii=False, allow_nan=False)
             stream.write("\n")
-        os.replace(tmp, path)
+        if retry_sharing:
+            replace_file(tmp, path)
+        else:
+            os.replace(tmp, path)
     finally:
         tmp.unlink(missing_ok=True)
 
@@ -681,7 +685,7 @@ class Workbench:
                     continue
                 history.append(item)
                 size += length
-            atomic_json(self.history_path, history)
+            atomic_json(self.history_path, history, retry_sharing=True)
             with self.lock:
                 self.history = history
 

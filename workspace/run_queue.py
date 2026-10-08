@@ -15,6 +15,8 @@ import secrets
 import threading
 from datetime import datetime, timezone
 
+from file_io import replace_file
+
 MAX_JOBS = 200
 MAX_STATE_BYTES = 4 * 1024 * 1024
 MAX_PLAN_BYTES = 16 * 1024 * 1024
@@ -219,7 +221,7 @@ class RunQueue:
                 stream.write(raw)
                 stream.flush()
                 os.fsync(stream.fileno())
-            os.replace(physical(tmp), physical(self.path))
+            replace_file(physical(tmp), physical(self.path))
             if os.name != "nt":
                 descriptor = os.open(self.data, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0))
                 try:
