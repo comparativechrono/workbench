@@ -2465,6 +2465,13 @@ class Workspace {
     refReview = Json::object();
     reference_notice();
   }
+  Json reference_release_value() const {
+    const auto release = control_text(refRelease);
+    if (!release.empty() && std::all_of(release.begin(), release.end(),
+        [](wchar_t c) { return c >= L'0' && c <= L'9'; }))
+      return std::stoi(release);
+    return narrow(release);
+  }
   const Json &reference_provider() const {
     static const Json empty;
     const auto index = SendMessageW(refProvider, CB_GETCURSEL, 0, 0);
@@ -2993,8 +3000,18 @@ class Workspace {
     if (!ready || analysis_active() || closing || packBusy || packActionPending ||
         refBusy || refActionPending || setupBusy || setupActionPending)
       return;
-    if ((id == REF_QUERY && notification == EN_CHANGE) || id == REF_RELEASE)
+    if (id == REF_QUERY && notification == EN_CHANGE)
       return;
+    if (id == REF_RELEASE) {
+      if (notification == CBN_SELCHANGE) {
+        refRebuilding = true;
+        refState["species"] = Json::array(); refState["discovery"] = nullptr;
+        ListView_DeleteAllItems(refSpecies); ListView_DeleteAllItems(refFiles);
+        refRebuilding = false;
+        reference_details();
+      }
+      return;
+    }
     if (id == REF_PROVIDER && notification == CBN_SELCHANGE) {
       refRebuilding = true;
       reference_provider_controls(true);
@@ -3043,18 +3060,14 @@ class Workspace {
           L"Discard unfinished download", MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2) == IDYES)
         reference_send("references/discard", object({{"job_id", getstr(job, "id")}}));
     } else if (id == REF_SEARCH || (id == IDOK && TabCtrl_GetCurSel(refTab) == 0)) {
-      const auto release = control_text(refRelease);
-      if (release.empty())
+      if (control_text(refRelease).empty())
         return;
-      Json releaseValue = narrow(release);
-      if (std::all_of(release.begin(), release.end(), [](wchar_t c) { return c >= L'0' && c <= L'9'; }))
-        releaseValue = std::stoi(release);
-      reference_send("references/search", object({{"provider_id", getstr(reference_provider(), "id")}, {"release", releaseValue},
+      reference_send("references/search", object({{"provider_id", getstr(reference_provider(), "id")}, {"release", reference_release_value()},
                                                    {"query", narrow(control_text(refQuery))}}));
     } else if (id == REF_DISCOVER) {
       const auto &species = reference_selected_species();
       if (!getstr(species, "id").empty())
-        reference_send("references/discover", object({{"provider_id", getstr(reference_provider(), "id")}, {"release", species.get("release")},
+        reference_send("references/discover", object({{"provider_id", getstr(reference_provider(), "id")}, {"release", reference_release_value()},
                             {"species_id", getstr(species, "id")}}));
     } else if (id == REF_BROWSE) {
       const auto path = pick(refWindow, true, false, L"", L"Choose where to store reference downloads");

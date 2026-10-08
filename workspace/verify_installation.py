@@ -260,12 +260,24 @@ def check_frontend(root):
                     require(node.func.attr not in {'bind','listen','serve_forever'}, 'Desktop module creates a network listener: '+path.name)
             # Explicit pack and reference providers may retrieve public data.
             # Both remain outbound clients, never listeners or browser hosts.
-            permitted = {'http', 'urllib', 'socket'} if path.name in {'pack_manager.py', 'reference_provider.py'} else set()
-            if path.name in {'pack_security.py', 'catalog.py', 'reference_manager.py'}:
+            permitted = {'http', 'urllib', 'socket'} if path.name in {'pack_manager.py', 'reference_provider.py', 'reference_ncbi.py'} else set()
+            if path.name in {'pack_security.py', 'catalog.py', 'reference_manager.py', 'project_manager.py'}:
                 require(all(name == 'urllib.parse' or name.startswith('urllib.parse.')
                             for name in full_imports if name == 'urllib' or name.startswith('urllib.')),
                         path.name+' may only import URL parsing, not a network client')
                 permitted = {'urllib'}
+            if path.name == 'reference_transfer.py':
+                # Range orchestration handles a provider response that ends
+                # early. It needs this exception class, not an HTTP client.
+                for node in ast.walk(tree):
+                    if isinstance(node, ast.Import):
+                        require(not any(alias.name == 'http' or alias.name.startswith('http.') for alias in node.names),
+                                'reference_transfer.py may only import the HTTPException class, not an HTTP client')
+                    elif isinstance(node, ast.ImportFrom) and node.module and node.module.split('.')[0] == 'http':
+                        require(node.level == 0 and node.module == 'http.client' and len(node.names) == 1 and
+                                node.names[0].name == 'HTTPException',
+                                'reference_transfer.py may only import the HTTPException class, not an HTTP client')
+                permitted = {'http'}
             require(not any(name == 'http.server' or name.startswith('http.server.') for name in full_imports), 'Desktop module imports an HTTP listener: '+path.name)
             require(not (imports & blocked) - permitted, f'Desktop module imports a network/browser component: {path.name}')
             modules.append(path.name)

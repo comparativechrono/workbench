@@ -12,8 +12,10 @@ See the [feature contract](reference-management.md) and
 Implementation and local source validation are complete: 422 checks passed with
 six recorded skips, including two external CWL checks unavailable locally.
 Pinned strict native compilation and live Linux NCBI three-file integrity checks
-passed. Exact packaged Windows gates and screenshot review are pending; no new
-Windows pass or release is claimed yet. The 0.14.0 candidate and published 0.11.0 remain unchanged.
+passed. The first packaged Windows candidate exposed three defects and was
+rejected; fixes and an exact rebuilt recheck are in progress. Its partial passes
+and unreached checks are recorded in the handover. No release is claimed.
+The 0.14.0 candidate and published 0.11.0 remain unchanged.
 This set does not complete every remaining roadmap group. The earlier release
 request was conditional on broader completion, which was not established.
 

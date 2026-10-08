@@ -42,9 +42,25 @@ independently verifying upstream MD5, gzip integrity and compressed/expanded
 SHA-256. The observed annotation was SGD R64-5-1, dated 2026-07-10. This is a
 retrieved annotation snapshot, not an immutable assembly annotation release.
 
-Exact packaged Windows execution and native screenshot review remain pending.
-Existing 0.14.0 passes apply only to its named artifacts. Source tests, strict
-cross-compilation and live Linux provider checks are not packaged Windows passes.
+The first exact candidate, commit `5592604a101fdfc2db4f2055399e7e54f7684b21`,
+failed [run 37853140376](https://github.com/comparativechrono/workbench/actions/runs/37853140376).
+Its [source checks](evidence/reference-management-0.15.0-initial-source-2026-10-08.json)
+passed 424 with four Windows-only skips, including the stock CWL report replay;
+its [archive audit](evidence/reference-management-0.15.0-initial-archive-audit-2026-10-08.json)
+verified exact identity. [Both native paths](evidence/reference-management-0.15.0-initial-windows-2026-10-08.json)
+exposed three defects: ordinary versus extended Windows default-destination paths,
+NCBI Find files sending an accession instead of the lookup selector, and an
+installation check misclassifying pure URL parsing and requiring explicit rules
+for the new reference modules. Those defects were corrected for the rebuilt candidate. The source workflow
+now checks the exact runtime-module inventory and rejects disallowed networking,
+while preserving the narrow pure-parser and exception-only imports.
+
+Each path passed six live Ensembl and six management/host checks before failure.
+All existing configured native regression gates passed. The Windows source step
+stopped after provider and manager suites: 42 passed, one error, and the remaining
+12 suites were not executed. Partial results are not acceptance. Exact packaged
+rechecks and final screenshot review remain required. Existing 0.14.0 passes apply
+only to its named artifacts.
 
 Remaining groups after this set include curated workflows/results improvements,
 executable signing and institutional deployment, scientific Linux CWL profiles,

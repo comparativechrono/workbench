@@ -12,6 +12,7 @@ import unittest
 
 SOURCE = Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(SOURCE/'workspace'))
+sys.path.insert(0,str(SOURCE/'tests'))
 from catalog import load_catalog
 from core_checks import run_starter_checks
 from engine import Engine
@@ -79,14 +80,15 @@ class CoreChecksTests(unittest.TestCase):
             with self.subTest(code=code), self.assertRaises(VerificationError):
                 check_frontend(self.root)
         client.unlink()
-        reference = self.root/'workspace/reference_provider.py'
-        reference.write_text('import urllib.request\nimport http.client\n')
-        self.assertFalse(check_frontend(self.root)['requiresBrowser'])
-        for code in ('from http import server\n', 'import webbrowser\n', 'socket.listen(1)\n'):
-            reference.write_text(code)
-            with self.subTest(reference_client=code), self.assertRaises(VerificationError):
-                check_frontend(self.root)
-        reference.unlink()
+        for name in ('reference_provider.py', 'reference_ncbi.py'):
+            reference = self.root/'workspace'/name
+            reference.write_text('import urllib.request\nimport http.client\n')
+            self.assertFalse(check_frontend(self.root)['requiresBrowser'])
+            for code in ('from http import server\n', 'import webbrowser\n', 'socket.listen(1)\n'):
+                reference.write_text(code)
+                with self.subTest(reference_client=name, code=code), self.assertRaises(VerificationError):
+                    check_frontend(self.root)
+            reference.unlink()
         helper=self.root/'workspace/pack_security.py'
         helper.write_text('from urllib.parse import urlsplit\n')
         self.assertFalse(check_frontend(self.root)['requiresBrowser'])
@@ -113,6 +115,44 @@ class CoreChecksTests(unittest.TestCase):
             stream.write('\nimport urllib.request\n')
         with self.assertRaisesRegex(VerificationError,'URL parsing'):
             check_frontend(self.root)
+    def test_all_packaged_runtime_modules_pass_static_frontend_boundary(self):
+        # Exercise the packager's actual module inventory, so a new module
+        # cannot evade this installation-check regression through a stale list.
+        sys.path.insert(0, str(SOURCE/'scripts'))
+        from package_split import RUNTIME_MODULES
+        (self.root/'manifest.json').write_text('{"interface":"native-win32"}')
+        for name in RUNTIME_MODULES:
+            shutil.copyfile(SOURCE/'workspace'/name, self.root/'workspace'/name)
+        result = check_frontend(self.root)
+        self.assertEqual(set(result['modules']), set(RUNTIME_MODULES))
+        self.assertFalse(result['requiresBrowser'])
+    def test_project_path_encoding_does_not_allow_network_clients(self):
+        (self.root/'manifest.json').write_text('{"interface":"native-win32"}')
+        for name in ('desktop_host.py', 'desktop_model.py', 'service.py'):
+            (self.root/'workspace'/name).write_text('import json\n')
+        helper = self.root/'workspace/project_manager.py'
+        for code in ('from urllib.parse import quote\n', 'import urllib.parse\n'):
+            helper.write_text(code)
+            self.assertFalse(check_frontend(self.root)['requiresBrowser'])
+        for code in ('import urllib.request\n', 'from urllib import request\n',
+                     'from urllib.request import urlopen\n', 'import urllib\n'):
+            helper.write_text(code)
+            with self.subTest(code=code), self.assertRaisesRegex(VerificationError, 'URL parsing'):
+                check_frontend(self.root)
+    def test_reference_transfer_can_only_import_http_exception_class(self):
+        (self.root/'manifest.json').write_text('{"interface":"native-win32"}')
+        for name in ('desktop_host.py', 'desktop_model.py', 'service.py'):
+            (self.root/'workspace'/name).write_text('import json\n')
+        helper = self.root/'workspace/reference_transfer.py'
+        helper.write_text('from http.client import HTTPException\n')
+        self.assertFalse(check_frontend(self.root)['requiresBrowser'])
+        for code in ('import http.client\n', 'from http import client\n',
+                     'from http.client import HTTPConnection\n', 'from http.client import HTTPException, HTTPSConnection\n',
+                     'import urllib.request\n', 'import socket\n', 'from http import server\n',
+                     'import webbrowser\n', 'connection.listen(1)\n'):
+            helper.write_text(code)
+            with self.subTest(code=code), self.assertRaises(VerificationError):
+                check_frontend(self.root)
     def test_missing_optional_starter_is_skip_and_example_explains_installation(self):
         shutil.copyfile(SOURCE/'workspace/starter-check-profile.json',self.root/'workspace/starter-check-profile.json')
         catalog=load_catalog(self.root)

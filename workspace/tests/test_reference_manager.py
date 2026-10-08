@@ -113,9 +113,22 @@ class ReferenceManagerTests(unittest.TestCase):
     def test_default_destination_is_created_only_for_explicit_download(self):
         default = self.manager.snapshot()['default_destination']
         self.assertFalse(Path(default).exists())
+        if os.name == 'nt':
+            # The native UI receives the ordinary spelling, while the manager
+            # retains a long-path IO spelling. Both identify the same default.
+            self.assertNotEqual(str(self.manager.data), default)
+            from pack_manager import filesystem_path
+            self.assertEqual(filesystem_path(default), self.manager.data)
         result = self.manager.download(self.selection(), ['genome'], default)
         self.assertTrue(Path(result['local'][0]['folder']).is_relative_to(Path(default)))
         self.assertTrue(Path(default, 'library.json').is_file())
+    def test_nondefault_missing_destination_is_not_created(self):
+        destination = self.destination / 'not created'
+        with self.assertRaisesRegex(ReferenceError, 'existing reference destination'):
+            self.manager.download(self.selection(), ['genome'], str(destination))
+        self.assertFalse(destination.exists())
+        self.assertFalse(self.manager.data.exists())
+        self.assertEqual(self.manager.snapshot()['local'], [])
     def test_explicit_search_preserves_release_and_species(self):
         result = self.manager.search(116, 'test')
         self.assertEqual(result['releases'], [116, 115])

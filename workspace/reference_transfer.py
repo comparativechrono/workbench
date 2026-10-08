@@ -7,7 +7,7 @@ from contextlib import contextmanager
 from copy import deepcopy
 from datetime import datetime, timezone
 import hashlib
-import http.client
+from http.client import HTTPException
 import os
 from pathlib import Path
 import re
@@ -141,7 +141,7 @@ class ReferenceTransferMixin:
 
     def _orphan_record(self, job, final, cancel=None, hashes=True):
         from reference_manager import _read_json, _require, _directory, _no_links, _ordinary, MAX_RECEIPT_BYTES, CHUNK
-        _directory(final)
+        final = _directory(final)
         record, raw = _read_json(final / 'reference.json', MAX_RECEIPT_BYTES)
         _require(isinstance(record, dict) and job.get('publication_sha256') and hashlib.sha256(raw).hexdigest() == job['publication_sha256'] and
                  record.get('id') == job['id'] and record.get('folder') == _ordinary(final) and
@@ -198,14 +198,14 @@ class ReferenceTransferMixin:
         return result
 
     def _remove_job(self, identity, job=None):
-        from reference_manager import _directory, _no_links, _require
+        from reference_manager import _directory, _no_links, _require, filesystem_path
         folder = _directory(self._job_path(identity))
         # No recursive traversal of untrusted links, including discarded corrupt jobs.
         for child in folder.iterdir():
             _no_links(child)
             _require(child.is_file(), 'Pending reference contains an unexpected folder; existing files were preserved.')
         if job is not None and job.get('publication_sha256'):
-            final = Path(job['destination']) / ('ref-' + identity[:16])
+            final = filesystem_path(job['destination']) / ('ref-' + identity[:16])
             if final.exists() and not any(r['id'] == identity for r in self._records()):
                 self._orphan_record(job, final, hashes=False)
                 shutil.rmtree(final)
@@ -252,7 +252,7 @@ class ReferenceTransferMixin:
                  'Selected references exceed the compressed download limit.')
 
     def download(self, selection_id, file_ids, destination, cancel=None, event=None):
-        from reference_manager import _require, _cancelled, _directory, _ordinary, KINDS, uuid
+        from reference_manager import _require, _cancelled, _directory, _ordinary, filesystem_path, KINDS, uuid
         _require(self._operation_lock.acquire(blocking=False), 'Another reference operation is already running.')
         self._pause.clear()
         try:
@@ -269,7 +269,11 @@ class ReferenceTransferMixin:
             _require(isinstance(destination, str) and destination and len(destination) < 32700 and Path(destination).is_absolute(),
                      'Choose an absolute reference destination folder.')
             _cancelled(cancel)
-            destination_path = _directory(destination, create=Path(destination) == self.data)
+            # UI paths are ordinary Windows paths; self.data uses extended
+            # paths for long-path IO. Compare the same filesystem form before
+            # deciding whether this is our lazily created managed destination.
+            destination_path = filesystem_path(destination).absolute()
+            destination_path = _directory(destination_path, create=destination_path == self.data)
             pending_root = self._pending_root()
             _require(destination_path != pending_root and pending_root not in destination_path.parents,
                      'Choose a reference destination outside incomplete download staging.')
@@ -572,7 +576,7 @@ class ReferenceTransferMixin:
             if not registered:
                 self._remove_job(job['id'], job)
             raise
-        except (OSError, http.client.HTTPException, ReferenceProviderError) as exc:
+        except (OSError, HTTPException, ReferenceProviderError) as exc:
             if not registered:
                 job.update(status='interrupted', error=str(exc)[:500]); self._save_job(job)
             raise ReferenceError('Reference retrieval interrupted. Resume the retained download or discard it. ' + str(exc)[:300]) from exc

@@ -59,6 +59,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          # Only these five frontend-boundary cases are run from core_checks here;
+          # its separate Linux portable-binary scientific adapter is not available.
+          python3 tests/test_core_checks.py \
+            CoreChecksTests.test_only_explicit_download_clients_can_import_network_and_never_listener \
+            CoreChecksTests.test_real_catalogue_citation_parser_passes_frontend_client_boundary \
+            CoreChecksTests.test_all_packaged_runtime_modules_pass_static_frontend_boundary \
+            CoreChecksTests.test_project_path_encoding_does_not_allow_network_clients \
+            CoreChecksTests.test_reference_transfer_can_only_import_http_exception_class
           python3 workspace/tests/test_reference_provider.py
           python3 workspace/tests/test_reference_manager.py
           python3 workspace/tests/test_reference_service.py
@@ -332,7 +340,7 @@ jobs:
           $app = Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'transport/native-workbench'
           & (Join-Path $app 'runtime/python/python.exe') -I scripts/check_batch_transport_windows.py --app-root $app --report "$env:RUNNER_TEMP/transport-evidence/native-transport.json" --source-commit '${{ github.sha }}' --asset-sha256 $env:ASSET_SHA256 --asset-name 'native-workbench-0.15.0-starter-windows.zip' --app-version '0.15.0'
           if ($LASTEXITCODE -ne 0) { throw 'Native delayed-host transport fixture failed; this is separate from untouched exact-package scientific checks.' }
-      - name: Windows queue/index lease recovery and diagnostic filesystem regressions
+      - name: Windows reference, installation, queue and filesystem source regressions
         if: always() && !cancelled() && steps.prepare.outcome == 'success'
         shell: pwsh
         env:
@@ -340,6 +348,9 @@ jobs:
         run: |
           $ErrorActionPreference = 'Stop'
           $app = Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'readiness/native-workbench'
+          $env:NW_APP_ROOT = $app
+          & (Join-Path $app 'runtime/python/python.exe') -I tests/test_core_checks.py
+          if ($LASTEXITCODE -ne 0) { throw 'Windows full core-check suite failed; its Linux scientific adapter is explicitly unavailable here.' }
           & (Join-Path $app 'runtime/python/python.exe') -I workspace/tests/test_reference_provider.py
           if ($LASTEXITCODE -ne 0) { throw 'Windows reference provider source regression failed.' }
           & (Join-Path $app 'runtime/python/python.exe') -I workspace/tests/test_reference_manager.py
