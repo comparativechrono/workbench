@@ -114,7 +114,11 @@
     "batch_queue_indexes_final_windows": "evidence/batch-queue-indexes-0.13.0-final-windows-2026-10-08.json",
     "batch_queue_indexes_final_archive_audit": "evidence/batch-queue-indexes-0.13.0-final-archive-audit-2026-10-08.json",
     "batch_queue_indexes_queue_diagnostic": "evidence/batch-queue-indexes-0.13.0-queue-diagnostic-2026-10-08.json",
-    "recovery_projects": "recovery-projects.md"
+    "recovery_projects": "recovery-projects.md",
+    "recovery_projects_handover": "recovery-projects-0.14.0-handover.md",
+    "recovery_projects_source": "evidence/recovery-projects-0.14.0-source-2026-10-08.json",
+    "recovery_projects_initial_windows": "evidence/recovery-projects-0.14.0-initial-windows-2026-10-08.json",
+    "recovery_projects_archive_audit": "evidence/recovery-projects-0.14.0-archive-audit-2026-10-08.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -1088,7 +1092,7 @@
     "version": "0.14.0",
     "branch": "feature/recovery-projects",
     "starting_commit": "9f5cd4c88634b4cab04cec66b9e43e93e1db0e17",
-    "status": "implementation and validation in progress",
+    "status": "implementation complete; source and archive checks passed; corrected exact Windows recheck pending; unpublished",
     "authorization": "Owner requested the final accepted implementation tranche. Development only; no release request.",
     "milestone": 3,
     "scope": [
@@ -1103,7 +1107,25 @@
     "release_authorized": false,
     "released": false,
     "updater_built": false,
-    "evidence_scope": "Source, exact hosted Windows, external Linux CWL fixture, representative-machine acceptance and realistic benchmarks are distinct claims."
+    "evidence_scope": "Source, exact hosted Windows, external Linux CWL fixture, representative-machine acceptance and realistic benchmarks are distinct claims.",
+    "pull_request": "https://github.com/comparativechrono/workbench/pull/9",
+    "pull_request_state": "draft",
+    "tested_source_commit": "cd0ed848fd9d9c8728b0d83991511a348c13719e",
+    "build_run": "https://github.com/comparativechrono/workbench/actions/runs/37840523641",
+    "starter_sha256": "f5b347a1e379f48bd5b72950bc331f25be39a9764f6342ab066f5cb62bfe1837",
+    "verification_progress": {
+      "source": {
+        "passed": 287,
+        "skipped": 4,
+        "failed": 0,
+        "evidence": "evidence/recovery-projects-0.14.0-source-2026-10-08.json"
+      },
+      "initial_windows": "Failed new validator assumptions/imports; existing regression gates passed per recorded evidence. Frozen corrected recheck pending.",
+      "archive_audit": "evidence/recovery-projects-0.14.0-archive-audit-2026-10-08.json",
+      "representative_machine_acceptance": "pending",
+      "realistic_windows_linux_benchmark": "not performed",
+      "release_update_validation": "not performed"
+    }
   },
   "readiness_performance_development": {
     "recorded_on": "2026-10-08",

@@ -95,8 +95,8 @@ def restart_checks(host, root, data, evidence, report):
     source_hash = sha256(folder / "run.json")
     review = host.call("restart/review", {"run_id": original["job_id"]}, timeout=120)
     write_json(evidence / "completed-restart-review.json", review)
-    require(review_actions(review) == {"step-1": "reuse", "step-2": "reuse", "step-3": "reuse"},
-            "An unchanged completed chain did not verify all three completed steps.")
+    require(review_actions(review) == {"step-1": "reuse", "step-2": "reuse", "step-3": "reuse", "step-4": "reuse", "step-5": "run"},
+            "An unchanged completed chain did not verify four native steps and rebuild the path-bearing report.")
     restarted = queue_review(host, review, output)
     host.call("queue/start")
     restarted = wait_jobs(host, {restarted["job_id"]})[0]
@@ -104,35 +104,38 @@ def restart_checks(host, root, data, evidence, report):
     recovered = read_json(Path(restarted["folder"]) / "run.json")
     require(Path(restarted["folder"]) != folder and sha256(folder / "run.json") == source_hash,
             "Restart mutated the original result rather than preparing a new result folder.")
-    require({key: value["sha256"] for key, value in recovered["outputs"].items()} ==
-            {key: value["sha256"] for key, value in original_record["outputs"].items()},
+    require({key: value["sha256"] for key, value in recovered["outputs"].items() if not key.startswith("step-5::")} ==
+            {key: value["sha256"] for key, value in original_record["outputs"].items() if not key.startswith("step-5::")},
             "Verified restart changed completed scientific output bytes.")
-    require(all(node.get("recovery", {}).get("action") == "reused" for node in recovered["nodes"]),
+    require(all(node.get("recovery", {}).get("action") == "reused" for node in recovered["nodes"] if node["id"] != "step-5"),
             "Reused completed steps are not explicitly distinguished in the result record.")
+    rebuilt_report = next(node for node in recovered["nodes"] if node["id"] == "step-5")
+    require(rebuilt_report["status"] == "success" and rebuilt_report.get("recovery", {}).get("action") != "reused",
+            "The builtin report did not rebuild for the new result paths.")
     metrics = read_json(Path(restarted["folder"]) / "performance.json")
     require(all(not item["backendMetrics"]["available"] for item in metrics["steps"]),
             "A reused step fabricated new native resource measurements.")
-    check(report, "An explicit reviewed restart creates a new paused plan; Start reuses three verified completed outputs byte-for-byte, preserves the source result, retains known scientific truth and does not fabricate native measurements.")
+    check(report, "An explicit reviewed restart creates a new paused plan; Start reuses four verified completed native steps byte-for-byte, rebuilds the path-bearing report and preserves the source result, retains known scientific truth and does not fabricate native measurements.")
 
     decisions = {}
     changed = copy.deepcopy(graph)
     changed["nodes"][0]["params"]["sample"] = "changed-synthetic-sample"
     decisions["parameters"] = engine.review_restart(changed, str(folder))
-    require(review_actions(decisions["parameters"]) == {"step-1": "run", "step-2": "run", "step-3": "run"},
+    require(review_actions(decisions["parameters"]) == {identity: "run" for identity in ("step-1", "step-2", "step-3", "step-4", "step-5")},
             "Changed alignment parameters did not invalidate its descendants.")
     alternate = copy.deepcopy(graph)
     current = alternate["nodes"][0]["pin"]["packVersion"]
     other = next(tool for tool in catalog["toolVersions"]["align/paired-end"] if tool["packVersion"] != current)
     alternate["nodes"][0]["pin"] = {key: other[key] for key in ("packId", "packVersion", "manifestSha256")}
     decisions["pins"] = engine.review_restart(alternate, str(folder))
-    require(review_actions(decisions["pins"]) == {"step-1": "run", "step-2": "run", "step-3": "run"},
+    require(review_actions(decisions["pins"]) == {identity: "run" for identity in ("step-1", "step-2", "step-3", "step-4", "step-5")},
             "A changed exact pack pin did not invalidate its descendants.")
     reads = Path(next(source for source in graph["sources"] if source["type"] == "pair")["files"]["reads1"])
     original_reads = reads.read_bytes()
     try:
         reads.write_bytes(original_reads + b"\n")
         decisions["input"] = engine.review_restart(graph, str(folder))
-        require(review_actions(decisions["input"]) == {"step-1": "run", "step-2": "run", "step-3": "run"},
+        require(review_actions(decisions["input"]) == {identity: "run" for identity in ("step-1", "step-2", "step-3", "step-4", "step-5")},
                 "Changed input bytes did not invalidate the consumer and its descendants.")
     finally:
         reads.write_bytes(original_reads)
@@ -141,7 +144,7 @@ def restart_checks(host, root, data, evidence, report):
     try:
         bam.write_bytes(original_bam + b"changed")
         decisions["output"] = engine.review_restart(graph, str(folder))
-        require(review_actions(decisions["output"]) == {"step-1": "reuse", "step-2": "run", "step-3": "run"},
+        require(review_actions(decisions["output"]) == {"step-1": "reuse", "step-2": "run", "step-3": "run", "step-4": "run", "step-5": "run"},
                 "Changed BAM output did not invalidate exactly its producing step and descendants.")
     finally:
         bam.write_bytes(original_bam)
@@ -210,7 +213,7 @@ def fault_checks(root, data, evidence, report):
         observed = next(row for row in state["jobs"] if row["job_id"] == job["job_id"])
         require(state["paused"] and observed["status"] == "interrupted", "Abruptly abandoned work was automatically resumed or not labelled interrupted.")
         review = host.call("restart/review", {"run_id": job["job_id"]}, timeout=120)
-        require(review_actions(review) == {"step-1": "reuse", "step-2": "run", "step-3": "run"},
+        require(review_actions(review) == {"step-1": "reuse", "step-2": "run", "step-3": "run", "step-4": "run", "step-5": "run"},
                 "Restart did not reuse only the completed verified ancestor after abrupt termination.")
         fault["review"] = review
         restarted = queue_review(host, review, output)
@@ -525,14 +528,14 @@ def gui_checks(root, data, evidence, report):
         ui.wait("native resource policy", lambda: window("Resources · Native Workbench"))
         resources = window("Resources · Native Workbench")
         rows = NativeList(ui, ui.child(1105, resources))
-        ui.wait("resource steps loaded", lambda: rows.count() == 3 and ui.user.IsWindowEnabled(ui.child(1109, resources)))
+        ui.wait("resource steps loaded", lambda: rows.count() == 5 and ui.user.IsWindowEnabled(ui.child(1109, resources)))
         ui.set_text(ui.child(1101, resources), "2")
         ui.set_text(ui.child(1102, resources), "2")
         rows.click(0)
         ui.set_text(ui.child(1106, resources), "1")
         button(resources, 1107)
         ui.wait("explicit first-step reservation shown", lambda: rows.text(0, 1) == "1")
-        require("Unknown" in rows.text(1, 1) and "Unknown" in rows.text(2, 1), "Native resource editor guessed unassigned reservations.")
+        require(all("Unknown" in rows.text(index, 1) for index in range(1, 5)), "Native resource editor guessed unassigned reservations.")
         scratch = data / "gui-temporary"
         scratch.mkdir()
         ui.set_text(ui.child(1103, resources), str(scratch))
@@ -564,8 +567,8 @@ def gui_checks(root, data, evidence, report):
         ui.wait("native restart review", lambda: window("Restart analysis · Native Workbench"))
         restart = window("Restart analysis · Native Workbench")
         decisions = NativeList(ui, ui.child(1201, restart))
-        ui.wait("three verified restart decisions", lambda: decisions.count() == 3 and ui.user.IsWindowEnabled(ui.child(1206, restart)))
-        require(all(decisions.text(index, 1) == "reuse" for index in range(3)), "Native restart omitted verified reuse decisions.")
+        ui.wait("five reviewed restart decisions", lambda: decisions.count() == 5 and ui.user.IsWindowEnabled(ui.child(1206, restart)))
+        require([decisions.text(index, 1) for index in range(5)] == ["reuse", "reuse", "reuse", "reuse", "run"], "Native restart omitted verified reuse and report-rebuild decisions.")
         output = data / "gui-restart-results"
         output.mkdir()
         ui.set_text(ui.child(1203, restart), str(output))
@@ -694,6 +697,7 @@ def main():
         report["success"] = True
     except Exception as error:
         report.update(error=str(error), traceback=traceback.format_exc())
+        print(json.dumps({"gateError": str(error)[:8000], "traceback": report["traceback"]}), flush=True)
     finally:
         report.update(completedUtc=datetime.now(timezone.utc).isoformat(), passed=len(report["checks"]),
                       failed=0 if report["success"] else 1, skipped=len(report["skips"]))

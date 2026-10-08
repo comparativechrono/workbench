@@ -9,8 +9,15 @@ The scope is verified restart at completed-step boundaries, declared CPU
 admission budgets for concurrent DAG steps, and portable project bundles.
 See [recovery, resources and projects](recovery-projects.md).
 
-Implementation and validation are in progress. Historical source and Windows
-passes below apply to their named candidates, not to changed 0.14.0 bytes.
+Implementation is in [draft PR #9](https://github.com/comparativechrono/workbench/pull/9).
+Frozen source `cd0ed848fd9d9c8728b0d83991511a348c13719e` passed 287 CI source
+checks with four Windows-only skips, including actual report-only stock-CWL
+replay, and independent source/runtime archive verification. Initial Windows
+regression gates passed, but the new gate stopped on an incorrect three-step
+validator assumption and isolated source tests stopped on a helper import.
+Those failed observations are retained. A corrected recheck of the same bytes
+is pending; see the [handover](recovery-projects-0.14.0-handover.md).
+Historical source and Windows passes below apply only to their named candidates.
 Published **0.11.0** and production packs/profile/trust remain unchanged.
 This request authorizes development, not a merge, tag or publication. The
 0.12.0 and 0.13.0 review branches remain unmerged and unpublished.

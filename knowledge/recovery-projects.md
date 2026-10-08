@@ -75,13 +75,17 @@ project folder; opening that folder after moving it rebinds included/copied data
 relative to its current location. After reopening the application, use **Open
 project** to restore those bindings and metadata; ordinary saved workflow
 templates are a separate feature. Already queued project jobs retain their
-frozen context across application restart. Imported reference receipts retain historical
+frozen context across application restart. The imported folder has a complete
+integrity inventory: keep new analysis results elsewhere, because added, missing
+or changed files prevent reopening. Historical project context follows the exact
+opened graph; graph edits and rebound batch inputs do not inherit it automatically.
+Imported reference receipts retain historical
 provenance; they do not authenticate a publisher or register a downloaded
 reference in the local library.
 
 The initial contract covers explicitly bound, semantically typed ordinary
 scientific input files (for example FASTA, FASTQ, BAM, VCF, BED and metrics).
-Generic `file` ports, directories and database descriptors are rejected because
+Generic `file` workflow inputs, directories and database descriptors are rejected because
 their full external dependencies cannot yet be established. This conservative
 boundary also excludes some ordinary generic-file operations; it is not a claim
 that all 32 packs can be bundled. Those types need an explicit closure contract. Archive

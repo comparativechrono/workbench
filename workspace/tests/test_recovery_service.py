@@ -12,6 +12,7 @@ import unittest
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 from service import Workbench
 from desktop_host import DesktopHost
 from test_run_queue import Engine as QueueEngine, Model, wait_for

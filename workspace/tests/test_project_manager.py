@@ -15,6 +15,7 @@ import zipfile
 from urllib.parse import unquote, urlparse
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 from catalog import load_catalog
 from engine import Engine, pin_for
 import project_manager

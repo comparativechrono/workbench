@@ -1,0 +1,288 @@
+{
+  "schema": 1,
+  "recordedOn": "2026-10-08",
+  "version": "0.14.0",
+  "published": false,
+  "sourceCommit": "cd0ed848fd9d9c8728b0d83991511a348c13719e",
+  "runId": 37840523641,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37840523641",
+  "conclusion": "failure",
+  "scope": "Initial exact packaged Windows gates; passing older gates retained separately from new recovery and isolated source failures.",
+  "starterSha256": "f5b347a1e379f48bd5b72950bc331f25be39a9764f6342ab066f5cb62bfe1837",
+  "paths": {
+    "ordinary": {
+      "jobId": 113529177116,
+      "conclusion": "failure",
+      "artifact": {
+        "id": 11578145311,
+        "name": "recovery-windows-ordinary-1",
+        "size_in_bytes": 6012506,
+        "url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11578145311",
+        "archive_download_url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11578145311/zip",
+        "expired": false,
+        "created_at": "2026-10-08T20:38:07Z",
+        "expires_at": "2026-11-07T20:38:03Z",
+        "updated_at": "2026-10-08T20:38:07Z",
+        "digest": "sha256:d62326bac1fe5af4a34f2fbbe1aa41c56fedba6a90230958f20b519c9b6efa9a",
+        "workflow_run": {
+          "id": 37840523641,
+          "repository_id": 1403436005,
+          "head_repository_id": 1403436005,
+          "head_branch": "feature/recovery-projects",
+          "head_sha": "cd0ed848fd9d9c8728b0d83991511a348c13719e"
+        }
+      },
+      "downloadSizeSha256AndZipCrcVerified": true,
+      "reports": [
+        {
+          "path": "performance-evidence/native-performance.json",
+          "sha256": "3c42bdc409ec0cd715a09881d43d31ece1cec1d52ab08cf13744d71ed91bfece",
+          "bytes": 6725,
+          "passed": 14,
+          "failed": 0,
+          "skipped": 0,
+          "error": null
+        },
+        {
+          "path": "readiness-evidence/native-readiness.json",
+          "sha256": "630247a74e82cfdb562727acd76f80ea6ddf88fd9456221c02b7034ff06836c1",
+          "bytes": 8358,
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "success": true,
+          "nativeGUILaunched": true,
+          "nativeGUIValidated": true
+        },
+        {
+          "path": "batch-evidence/native-align-pack.json",
+          "sha256": "16fb2e0897563062cbfb9b5548a4f8e20dddcc71aafecc6a6b7d041e70f717da",
+          "bytes": 1485,
+          "success": true,
+          "scientificChecks": {
+            "schema": 1,
+            "folder": "D:\\a\\_temp\\ordinary\\pack-import\\native-workbench\\results\\pack-checks-20261008-203717-6d76d693",
+            "checks": [
+              {
+                "id": "align/paired-mapping-known-answer@0.4.1",
+                "pin": {
+                  "packId": "align",
+                  "packVersion": "0.4.1",
+                  "manifestSha256": "7f8f36efbfd6a8255a98eabb06746fbcc5bbdb872f392a65ca3e79a586d04939"
+                },
+                "status": "passed",
+                "folder": "D:\\a\\_temp\\ordinary\\pack-import\\native-workbench\\results\\pack-checks-20261008-203717-6d76d693\\run-20261008-203717-ac3916a5"
+              }
+            ],
+            "nativeWindowsExecuted": true,
+            "passed": 1,
+            "failed": 0,
+            "cancelled": false,
+            "success": true,
+            "message": "1 of 1 additional pack checks passed."
+          },
+          "duplicateVersionRejected": true
+        },
+        {
+          "path": "batch-evidence/native-batch.json",
+          "sha256": "5764b0f274d4e986fd408f379afcc378632e612a1bfde8f0f2676fb80161aea4",
+          "bytes": 35421,
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0,
+          "success": true,
+          "nativeGUILaunched": true,
+          "nativeGUIValidated": true
+        },
+        {
+          "path": "recovery-evidence/native-recovery.json",
+          "sha256": "b61334e7cd2f19b8f3299641879f72567e5697d79fce63fc148b2568b0fc5269",
+          "bytes": 8962,
+          "passed": 0,
+          "failed": 1,
+          "skipped": 0,
+          "success": false,
+          "error": "An unchanged completed chain did not verify all three completed steps.",
+          "nativeGUILaunched": false,
+          "nativeGUIValidated": false
+        },
+        {
+          "path": "transport-evidence/native-transport.json",
+          "sha256": "e6286a87f9d6bebfc426fe0f8876f75d3c97f6ca5f98b24ff5f405a236e058f7",
+          "bytes": 2668,
+          "passed": 3,
+          "failed": 0,
+          "success": true,
+          "nativeGUILaunched": true,
+          "nativeGUIValidated": true
+        },
+        {
+          "path": "library-evidence/native-tool-library.json",
+          "sha256": "f21c1de1c6dbc6a599324148d6bf41a377c6090028ca63be7c11526b0f29ae7c",
+          "bytes": 11030,
+          "passed": 7,
+          "success": true,
+          "nativeGUILaunched": true,
+          "nativeGUIValidated": true
+        },
+        {
+          "path": "workspace-evidence/native-ui.json",
+          "sha256": "8dfbefeddb2a1d281bf1f6b8cdd3d30c87f2749416821f1188a8bdfd32f3ee44",
+          "bytes": 23649,
+          "passed": 32,
+          "success": true,
+          "nativeGUILaunched": true,
+          "nativeGUIValidated": true
+        }
+      ],
+      "newRecoveryGate": {
+        "passed": 0,
+        "failed": 1,
+        "cause": "Validator expected three steps; actual Starter graph has four native steps plus a path-bearing builtin report. The recorded review correctly proposes reuse for steps 1\u20134 and rebuild for report step 5."
+      },
+      "windowsSourceGate": {
+        "status": "failed before tests ran",
+        "error": "ModuleNotFoundError: No module named 'test_pack_versions'",
+        "cause": "Isolated -I execution omits the test script directory; corrected tests explicitly insert their helper directory. No unavailable source tests counted as passed."
+      }
+    },
+    "spaces": {
+      "jobId": 113529177232,
+      "conclusion": "failure",
+      "artifact": {
+        "id": 11577218327,
+        "name": "recovery-windows-path with spaces-1",
+        "size_in_bytes": 6013407,
+        "url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11577218327",
+        "archive_download_url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11577218327/zip",
+        "expired": false,
+        "created_at": "2026-10-08T20:38:05Z",
+        "expires_at": "2026-11-07T20:38:02Z",
+        "updated_at": "2026-10-08T20:38:05Z",
+        "digest": "sha256:50c1f76db18aacc52351bfbaa7afe4a4b509bb9d1f815efa191fe157e2966266",
+        "workflow_run": {
+          "id": 37840523641,
+          "repository_id": 1403436005,
+          "head_repository_id": 1403436005,
+          "head_branch": "feature/recovery-projects",
+          "head_sha": "cd0ed848fd9d9c8728b0d83991511a348c13719e"
+        }
+      },
+      "downloadSizeSha256AndZipCrcVerified": true,
+      "reports": [
+        {
+          "path": "performance-evidence/native-performance.json",
+          "sha256": "08acec2c990b0579ba8f1746d5434581b7b39e6f627d4aad1fcc6533dbf8592f",
+          "bytes": 6725,
+          "passed": 14,
+          "failed": 0,
+          "skipped": 0,
+          "error": null
+        },
+        {
+          "path": "readiness-evidence/native-readiness.json",
+          "sha256": "f5609d00e840ff3db680da38a1b2aecaffafedda49fa8212c46dce2cb03b5028",
+          "bytes": 8349,
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "success": true,
+          "nativeGUILaunched": true,
+          "nativeGUIValidated": true
+        },
+        {
+          "path": "batch-evidence/native-align-pack.json",
+          "sha256": "eef598c3d47815a61b489653aa594ed03eec049f849fa3ba2661b09ed68afb4e",
+          "bytes": 1509,
+          "success": true,
+          "scientificChecks": {
+            "schema": 1,
+            "folder": "D:\\a\\_temp\\path with spaces\\pack-import\\native-workbench\\results\\pack-checks-20261008-203713-41ea309a",
+            "checks": [
+              {
+                "id": "align/paired-mapping-known-answer@0.4.1",
+                "pin": {
+                  "packId": "align",
+                  "packVersion": "0.4.1",
+                  "manifestSha256": "7f8f36efbfd6a8255a98eabb06746fbcc5bbdb872f392a65ca3e79a586d04939"
+                },
+                "status": "passed",
+                "folder": "D:\\a\\_temp\\path with spaces\\pack-import\\native-workbench\\results\\pack-checks-20261008-203713-41ea309a\\run-20261008-203713-4da3df2f"
+              }
+            ],
+            "nativeWindowsExecuted": true,
+            "passed": 1,
+            "failed": 0,
+            "cancelled": false,
+            "success": true,
+            "message": "1 of 1 additional pack checks passed."
+          },
+          "duplicateVersionRejected": true
+        },
+        {
+          "path": "batch-evidence/native-batch.json",
+          "sha256": "7fc2cf537ffaf343e7f9d3e65da75ad54f3a81c24accfba1be39acaf5f770b99",
+          "bytes": 35435,
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0,
+          "success": true,
+          "nativeGUILaunched": true,
+          "nativeGUIValidated": true
+        },
+        {
+          "path": "recovery-evidence/native-recovery.json",
+          "sha256": "86731e7f75e2c2cf712e3107079686d3cbc0cfbd55f4a03050d3bde414841ffb",
+          "bytes": 8962,
+          "passed": 0,
+          "failed": 1,
+          "skipped": 0,
+          "success": false,
+          "error": "An unchanged completed chain did not verify all three completed steps.",
+          "nativeGUILaunched": false,
+          "nativeGUIValidated": false
+        },
+        {
+          "path": "transport-evidence/native-transport.json",
+          "sha256": "fb088c2553f58303d4084b2116796166b7fa76525aba7f32620a438cd37de348",
+          "bytes": 2668,
+          "passed": 3,
+          "failed": 0,
+          "success": true,
+          "nativeGUILaunched": true,
+          "nativeGUIValidated": true
+        },
+        {
+          "path": "library-evidence/native-tool-library.json",
+          "sha256": "1bab16ef916978b957f0344a09f4b927796bc4453f47dc5e61e8fc459379f39a",
+          "bytes": 11038,
+          "passed": 7,
+          "success": true,
+          "nativeGUILaunched": true,
+          "nativeGUIValidated": true
+        },
+        {
+          "path": "workspace-evidence/native-ui.json",
+          "sha256": "1ac1b51c85ea2e045e4058b8ef8537f704cb11e300ab67f2ee6e89b904445432",
+          "bytes": 23697,
+          "passed": 32,
+          "success": true,
+          "nativeGUILaunched": true,
+          "nativeGUIValidated": true
+        }
+      ],
+      "newRecoveryGate": {
+        "passed": 0,
+        "failed": 1,
+        "cause": "Validator expected three steps; actual Starter graph has four native steps plus a path-bearing builtin report. The recorded review correctly proposes reuse for steps 1\u20134 and rebuild for report step 5."
+      },
+      "windowsSourceGate": {
+        "status": "failed before tests ran",
+        "error": "ModuleNotFoundError: No module named 'test_pack_versions'",
+        "cause": "Isolated -I execution omits the test script directory; corrected tests explicitly insert their helper directory. No unavailable source tests counted as passed."
+      }
+    }
+  },
+  "nativeWindowsExecuted": true,
+  "remaining": "Corrected validator recheck against unchanged candidate bytes required; no new References/live-download/update/Full/benchmark claim."
+}
