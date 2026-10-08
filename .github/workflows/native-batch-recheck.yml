@@ -27,9 +27,9 @@ jobs:
       matrix:
         folder: [ordinary, 'path with spaces']
     env:
-      FROZEN_COMMIT: 80e9071caf4e5862ae0e862921fd747f47ab23ea
-      FROZEN_RUN: '37819501574'
-      FROZEN_STARTER_SHA256: 3790af14624dc87bd808bc5c3c7508f98a45284c25a0576cdf6a75fbe1de8bab
+      FROZEN_COMMIT: 0ceca7b9c1762542f8fb665a6695b998d32f311e
+      FROZEN_RUN: '37828085808'
+      FROZEN_STARTER_SHA256: 7bf98515d9403e851fcc189f022fed0386fbcdbfa6857823699d4170fc076c75
       CASE_FOLDER: ${{ matrix.folder }}
     steps:
       - uses: actions/checkout@v4
@@ -66,8 +66,8 @@ jobs:
           } | ConvertTo-Json -Depth 8 | Set-Content -Encoding utf8 (Join-Path $evidence 'RECHECK-PROVENANCE.json')
       - uses: actions/download-artifact@v4
         with:
-          name: batch-candidate-80e9071caf4e5862ae0e862921fd747f47ab23ea
-          run-id: 37819501574
+          name: batch-candidate-0ceca7b9c1762542f8fb665a6695b998d32f311e
+          run-id: 37828085808
           github-token: ${{ github.token }}
           path: ${{ runner.temp }}/frozen-batch-candidate
       - name: Verify the original provenance and pinned archive, then extract afresh

@@ -1,0 +1,203 @@
+{
+  "schema": 1,
+  "recordedOn": "2026-10-08",
+  "version": "0.13.0",
+  "published": false,
+  "sourceCommit": "0ceca7b9c1762542f8fb665a6695b998d32f311e",
+  "runId": 37828085808,
+  "jobId": 113486021884,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37828085808",
+  "jobConclusion": "success",
+  "platform": "Linux GitHub Actions build runner",
+  "scope": "Affected source and packaging suites executed before packaging the candidate with bounded Windows queue/history sharing retries. Source checks do not establish Windows filesystem behavior; native checks are separate.",
+  "totals": {
+    "tests": 222,
+    "passed": 217,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 5
+  },
+  "suites": [
+    {
+      "command": "python3 workspace/tests/test_sample_table.py",
+      "total": 26,
+      "seconds": 0.125,
+      "skipped": 0,
+      "passed": 26,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "command": "python3 workspace/tests/test_run_queue.py",
+      "total": 28,
+      "seconds": 0.597,
+      "skipped": 2,
+      "passed": 26,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "command": "python3 workspace/tests/test_reference_indexes.py",
+      "total": 19,
+      "seconds": 1.086,
+      "skipped": 0,
+      "passed": 19,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "command": "python3 workspace/tests/test_desktop_host.py",
+      "total": 12,
+      "seconds": 0.253,
+      "skipped": 0,
+      "passed": 12,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "command": "python3 workspace/tests/test_desktop_modes.py",
+      "total": 11,
+      "seconds": 0.307,
+      "skipped": 0,
+      "passed": 11,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "command": "python3 workspace/tests/test_workflow_inputs.py",
+      "total": 11,
+      "seconds": 0.155,
+      "skipped": 0,
+      "passed": 11,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "command": "python3 workspace/tests/test_pack_service.py",
+      "total": 6,
+      "seconds": 0.029,
+      "skipped": 0,
+      "passed": 6,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "command": "python3 workspace/tests/test_setup_manager.py",
+      "total": 16,
+      "seconds": 0.618,
+      "skipped": 0,
+      "passed": 16,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "command": "python3 workspace/tests/test_setup_service.py",
+      "total": 7,
+      "seconds": 0.033,
+      "skipped": 0,
+      "passed": 7,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "command": "python3 tests/test_split_release.py",
+      "total": 9,
+      "seconds": 0.19,
+      "skipped": 0,
+      "passed": 9,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "command": "python3 workspace/tests/test_readiness.py",
+      "total": 16,
+      "seconds": 0.083,
+      "skipped": 0,
+      "passed": 16,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "command": "python3 workspace/tests/test_readiness_service.py",
+      "total": 6,
+      "seconds": 0.017,
+      "skipped": 0,
+      "passed": 6,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "command": "python3 workspace/tests/test_performance.py",
+      "total": 18,
+      "seconds": 0.639,
+      "skipped": 0,
+      "passed": 18,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "command": "python3 workspace/tests/test_diagnostics.py",
+      "total": 11,
+      "seconds": 0.108,
+      "skipped": 2,
+      "passed": 9,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "command": "python3 workspace/tests/test_engine_paths.py",
+      "total": 7,
+      "seconds": 0.167,
+      "skipped": 0,
+      "passed": 7,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "command": "python3 workspace/tests/test_cwl_results.py",
+      "total": 5,
+      "seconds": 0.12,
+      "skipped": 0,
+      "passed": 5,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "command": "python3 workspace/tests/test_cwl_export.py",
+      "total": 14,
+      "seconds": 0.598,
+      "skipped": 1,
+      "passed": 13,
+      "failures": 0,
+      "errors": 0
+    }
+  ],
+  "skips": [
+    {
+      "suite": "workspace/tests/test_run_queue.py",
+      "count": 2,
+      "reason": "Real Windows held-reader replacement semantics require Windows."
+    },
+    {
+      "suite": "workspace/tests/test_diagnostics.py",
+      "count": 2,
+      "reason": "Actual Windows junction and extended-path handling require Windows."
+    },
+    {
+      "suite": "workspace/tests/test_cwl_export.py",
+      "count": 1,
+      "reason": "NW_CWLTOOL not set; independent CWL validation/execution unavailable in this source gate."
+    }
+  ],
+  "nativeBuild": {
+    "desktop": true,
+    "bridge": true,
+    "crossCompiled": true,
+    "executedOnLinux": false
+  },
+  "limits": [
+    "No skipped check is counted as passed.",
+    "Initial-candidate counts are separate; repeated suites are not added as unique coverage.",
+    "Native Windows results and archive integrity audits are recorded separately."
+  ]
+}

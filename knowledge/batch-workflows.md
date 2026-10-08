@@ -110,6 +110,11 @@ empty queue. Keep `user-data/run-queue.json`, the results and available diagnost
 evidence for recovery. Do not overwrite the file or mark an uncertain job complete.
 Queue updates use atomic replacement and file synchronization; this does not
 promise recovery from physical disk damage or arbitrary filesystem corruption.
+On Windows, a short-lived reader can obstruct atomic receipt replacement. Queue
+and run-history commits retry only that prepared rename, up to nine attempts
+with 550 ms total retry waits for sharing/access errors. Persistent errors still
+propagate, preserving the previously committed file and state. The retry never
+restarts an analysis and does not remove the destination as a fallback.
 
 ## Bounds and implementation map
 
@@ -133,3 +138,5 @@ windows. Source lifecycle/negative controls live in
 `workspace/tests/test_run_queue.py` and `workspace/tests/test_sample_table.py`.
 Exact packaged Windows checks are defined separately in
 `scripts/check_batch_windows.py`; their existence alone is not a pass claim.
+The [candidate handover](batch-queue-indexes-0.13.0-handover.md) binds their
+recorded outcomes to the exact packaged application and validator revisions.

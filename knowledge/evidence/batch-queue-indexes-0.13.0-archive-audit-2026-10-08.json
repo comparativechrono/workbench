@@ -1,0 +1,139 @@
+{
+  "schema": 1,
+  "runId": 37819501574,
+  "sourceCommit": "80e9071caf4e5862ae0e862921fd747f47ab23ea",
+  "scope": "Independent downloaded archive and exact source identity audit only",
+  "nativeWindowsExecuted": false,
+  "published": false,
+  "success": true,
+  "checks": [
+    "Four downloaded bounded GitHub artifacts match declared sizes/digests and pass ZIP CRC/name checks.",
+    "Inner Starter and reassembled source archives match build and independent transport metadata.",
+    "All 659 current source files match their inventory and exact git commit; embedded legacy source, CRC and runtime source-companion pin verified.",
+    "Complete Starter inventory, all published pack files/private runtime files, runtime Python source correspondence and production 32-pack profile/trust preserved.",
+    "New align 0.4.1 contracts/assets/self-check verified with unchanged legacy operations, binaries, licenses and exact minimum-app declaration; standalone ZIP verification remains separate.",
+    "Packaged application and bridge are native AMD64 PE files; this inspection does not establish Windows execution."
+  ],
+  "failures": [],
+  "limits": [
+    "Independent pack ZIP not downloaded from the large aggregate artifact; its declaration is checked against the bundled additional pack. Native import gate checks the actual independent ZIP."
+  ],
+  "transportArtifacts": [
+    {
+      "id": 11569341218,
+      "name": "batch-transfer-metadata-80e9071caf4e5862ae0e862921fd747f47ab23ea",
+      "bytes": 5771,
+      "sha256": "4a2d902583d8de1a64ee4c954e18b48c98dcf92e662de3607e4f53c23835f5de",
+      "zipCrc": "passed"
+    },
+    {
+      "id": 11569230861,
+      "name": "batch-transfer-source-part-1-80e9071caf4e5862ae0e862921fd747f47ab23ea",
+      "bytes": 25166018,
+      "sha256": "ab1573c610c8cb7ca35742dead773d189ed5bfbf1463c3033ff21fed6d2abf2c",
+      "zipCrc": "passed"
+    },
+    {
+      "id": 11568981263,
+      "name": "batch-transfer-source-part-2-80e9071caf4e5862ae0e862921fd747f47ab23ea",
+      "bytes": 21983604,
+      "sha256": "459d2ec1287223ec8c646c94e893e1f739a6fe54b65598ed559f0afd57ca9911",
+      "zipCrc": "passed"
+    },
+    {
+      "id": 11568941222,
+      "name": "batch-transfer-starter-80e9071caf4e5862ae0e862921fd747f47ab23ea",
+      "bytes": 17713655,
+      "sha256": "ba030a8c4c62e3f38c5ddf7b9e650aafcd4ea66f6ab0268568bb672293c0d86c",
+      "zipCrc": "passed"
+    }
+  ],
+  "archives": [
+    {
+      "file": "native-workbench-0.13.0-starter-windows.zip",
+      "bytes": 17713455,
+      "sha256": "3790af14624dc87bd808bc5c3c7508f98a45284c25a0576cdf6a75fbe1de8bab",
+      "verified": true
+    },
+    {
+      "file": "native-workbench-0.13.0-source.zip",
+      "bytes": 47149234,
+      "sha256": "364a090b1af47f627b4e819a75f0fdfeef863351f012d456e576aae60e10a146",
+      "verified": true
+    },
+    {
+      "file": "native-workbench-pack-align-0.4.1.zip",
+      "bytes": 575862,
+      "sha256": "3a08cf061f0b62c5502d1420115db3fcae2b04bf695ad3cfd1c3063de0fafa02",
+      "verified": false
+    }
+  ],
+  "source": {
+    "currentFiles": 659,
+    "everyCurrentFileMatchesCommit": true,
+    "legacyBytes": 44163162,
+    "legacySha256": "5dac9add19436b336cba483a0f915e39aafed383282c2a019a0dbd3cc3c8668e",
+    "legacyCrc": "passed"
+  },
+  "starter": {
+    "coreFiles": 78,
+    "totalFiles": 265,
+    "preservedPublishedPackFiles": 143,
+    "preservedPrivateRuntimeFiles": 39,
+    "runtimeModulesMatchSource": 24,
+    "publishedStarterPins": [
+      {
+        "id": "align",
+        "version": "0.4.0",
+        "folder": "packs/align-0.4.0",
+        "manifestSha256": "81c962222c93356a4f7727b23193c71d7dcd515859e62a179574781f411824d3"
+      },
+      {
+        "id": "bam",
+        "version": "0.4.0",
+        "folder": "packs/bam-0.4.0",
+        "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+      },
+      {
+        "id": "variants",
+        "version": "0.4.0",
+        "folder": "packs/variants-0.4.0",
+        "manifestSha256": "ea4b7f0a6c28709e4190b6514c07cbf7bdd58e1a4f2a2d931f2cae3ce6ec3795"
+      }
+    ],
+    "officialSetupPacks": 32,
+    "setupProfileAndTrustUnchanged": true,
+    "containsUserData": false
+  },
+  "additionalPack": {
+    "id": "align",
+    "version": "0.4.1",
+    "minAppVersionDeclared": "0.13.0",
+    "manifestSha256": "7f8f36efbfd6a8255a98eabb06746fbcc5bbdb872f392a65ca3e79a586d04939",
+    "files": 43,
+    "toolBinaryBytesUnchanged": true,
+    "legacyOperationsUnchanged": true,
+    "newOperations": [
+      "build-sr-index",
+      "single-end-indexed",
+      "paired-end-indexed"
+    ],
+    "declaredInstallationChecks": 1,
+    "expectedMappedProperPairRecords": 202,
+    "standalonePackZipVerified": false
+  },
+  "nativeExecutables": {
+    "NativeWorkbench.exe": {
+      "bytes": 1579520,
+      "sha256": "cdf18a87871d3321fa64f542b42dfff3e3cdb914fad98a4fe40c5f917b3ec5a3",
+      "machine": "AMD64",
+      "executed": false
+    },
+    "WorkbenchBridge.exe": {
+      "bytes": 1550848,
+      "sha256": "6afcf2c8bb1ca836fafa1fc594954dd2fa8877e627b548bf721183090d958806",
+      "machine": "AMD64",
+      "executed": false
+    }
+  }
+}

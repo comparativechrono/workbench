@@ -1,0 +1,172 @@
+{
+  "schema": 1,
+  "runId": 37828085808,
+  "sourceCommit": "0ceca7b9c1762542f8fb665a6695b998d32f311e",
+  "scope": "Independent downloaded archive and exact source identity audit only",
+  "nativeWindowsExecuted": false,
+  "published": false,
+  "success": true,
+  "checks": [
+    "Four downloaded bounded GitHub artifacts match declared sizes/digests and pass ZIP CRC/name checks.",
+    "Inner Starter and reassembled source archives match build and independent transport metadata.",
+    "All 663 current source files match their inventory and exact git commit; embedded legacy source, CRC and runtime source-companion pin verified.",
+    "Complete Starter inventory, all published pack files/private runtime files, runtime Python source correspondence and production 32-pack profile/trust preserved.",
+    "New align 0.4.1 contracts/assets/self-check verified with unchanged legacy operations, binaries, licenses and exact minimum-app declaration; standalone ZIP verification remains separate.",
+    "Packaged application and bridge are native AMD64 PE files; this inspection does not establish Windows execution."
+  ],
+  "failures": [],
+  "limits": [
+    "Independent pack ZIP not downloaded from the large aggregate artifact; its declaration is checked against the bundled additional pack. Native import gate checks the actual independent ZIP.",
+    "This artifact audit does not establish that the Windows atomic-write change passes runtime regressions; the exact rebuilt Windows candidate is validated separately."
+  ],
+  "previousCandidateSourceComparison": {
+    "sourceCommit": "80e9071caf4e5862ae0e862921fd747f47ab23ea",
+    "changedPaths": [
+      ".github/workflows/native-batch-candidate.yml",
+      ".github/workflows/native-batch-recheck.yml",
+      ".github/workflows/native-queue-observer-diagnostic.yml",
+      "scripts/check_batch_windows.py",
+      "scripts/check_queue_observer_windows.py",
+      "scripts/package_split.py",
+      "workspace/file_io.py",
+      "workspace/run_queue.py",
+      "workspace/service.py",
+      "workspace/tests/test_reference_indexes.py",
+      "workspace/tests/test_run_queue.py"
+    ],
+    "onlyExplicitlyReviewedPathsChanged": true,
+    "nativeUISourceUnchanged": true,
+    "scientificPackRecipeUnchanged": true,
+    "nativeExecutableBytesUnchanged": true,
+    "additionalPackIdentityAndMetadataUnchanged": true,
+    "previousIndependentAuditSha256": "5a315dff44cd60ea5918e209102afd021d93cfd6b896040958eb3d3d27059d8b"
+  },
+  "transportArtifacts": [
+    {
+      "id": 11571663304,
+      "name": "batch-transfer-source-part-1-0ceca7b9c1762542f8fb665a6695b998d32f311e",
+      "bytes": 25166018,
+      "sha256": "101b64d6a9c910b09f59314909c3d93c35d2ed27fa7084dbd0bf912c33989eff",
+      "zipCrc": "passed"
+    },
+    {
+      "id": 11571568778,
+      "name": "batch-transfer-source-part-2-0ceca7b9c1762542f8fb665a6695b998d32f311e",
+      "bytes": 21999965,
+      "sha256": "e36b301ddff51ae47e93b30bbf8aae616589d86795efe9da0053d6ba40929eb2",
+      "zipCrc": "passed"
+    },
+    {
+      "id": 11571374220,
+      "name": "batch-transfer-starter-0ceca7b9c1762542f8fb665a6695b998d32f311e",
+      "bytes": 17714530,
+      "sha256": "4d21ec28709ccf28066ef1f3adc5b6329080c36fda928e73923d518fb30862f1",
+      "zipCrc": "passed"
+    },
+    {
+      "id": 11571324642,
+      "name": "batch-transfer-metadata-0ceca7b9c1762542f8fb665a6695b998d32f311e",
+      "bytes": 5774,
+      "sha256": "6aba265e2bb804cc2e4d950a98b38a20af5f7a33add23add76de3780cad97371",
+      "zipCrc": "passed"
+    }
+  ],
+  "archives": [
+    {
+      "file": "native-workbench-0.13.0-starter-windows.zip",
+      "bytes": 17714330,
+      "sha256": "7bf98515d9403e851fcc189f022fed0386fbcdbfa6857823699d4170fc076c75",
+      "verified": true
+    },
+    {
+      "file": "native-workbench-0.13.0-source.zip",
+      "bytes": 47165595,
+      "sha256": "3bd021f0ba9be8255b1710487cfd2a94ed8ff0d3c2b69ea6487bc1f7a5819b23",
+      "verified": true
+    },
+    {
+      "file": "native-workbench-pack-align-0.4.1.zip",
+      "bytes": 575862,
+      "sha256": "3a08cf061f0b62c5502d1420115db3fcae2b04bf695ad3cfd1c3063de0fafa02",
+      "verified": false
+    }
+  ],
+  "source": {
+    "currentFiles": 663,
+    "everyCurrentFileMatchesCommit": true,
+    "legacyBytes": 44163162,
+    "legacySha256": "5dac9add19436b336cba483a0f915e39aafed383282c2a019a0dbd3cc3c8668e",
+    "legacyCrc": "passed"
+  },
+  "packagedAtomicWriteHelper": {
+    "path": "workspace/file_io.py",
+    "sha256": "ab6034e617504c8c264c9c53201174fdae88440765db114f01ce39eafcb2d67e",
+    "matchesExactSourceCommit": true,
+    "executed": false
+  },
+  "starter": {
+    "coreFiles": 79,
+    "totalFiles": 266,
+    "preservedPublishedPackFiles": 143,
+    "preservedPrivateRuntimeFiles": 39,
+    "runtimeModulesMatchSource": 25,
+    "publishedStarterPins": [
+      {
+        "id": "align",
+        "version": "0.4.0",
+        "folder": "packs/align-0.4.0",
+        "manifestSha256": "81c962222c93356a4f7727b23193c71d7dcd515859e62a179574781f411824d3"
+      },
+      {
+        "id": "bam",
+        "version": "0.4.0",
+        "folder": "packs/bam-0.4.0",
+        "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+      },
+      {
+        "id": "variants",
+        "version": "0.4.0",
+        "folder": "packs/variants-0.4.0",
+        "manifestSha256": "ea4b7f0a6c28709e4190b6514c07cbf7bdd58e1a4f2a2d931f2cae3ce6ec3795"
+      }
+    ],
+    "officialSetupPacks": 32,
+    "setupProfileAndTrustUnchanged": true,
+    "containsUserData": false
+  },
+  "additionalPack": {
+    "id": "align",
+    "version": "0.4.1",
+    "minAppVersionDeclared": "0.13.0",
+    "manifestSha256": "7f8f36efbfd6a8255a98eabb06746fbcc5bbdb872f392a65ca3e79a586d04939",
+    "files": 43,
+    "toolBinaryBytesUnchanged": true,
+    "legacyOperationsUnchanged": true,
+    "newOperations": [
+      "build-sr-index",
+      "single-end-indexed",
+      "paired-end-indexed"
+    ],
+    "declaredInstallationChecks": 1,
+    "expectedMappedProperPairRecords": 202,
+    "standalonePackZipVerified": false
+  },
+  "nativeExecutables": {
+    "NativeWorkbench.exe": {
+      "bytes": 1579520,
+      "sha256": "cdf18a87871d3321fa64f542b42dfff3e3cdb914fad98a4fe40c5f917b3ec5a3",
+      "machine": "AMD64",
+      "executed": false
+    },
+    "WorkbenchBridge.exe": {
+      "bytes": 1550848,
+      "sha256": "6afcf2c8bb1ca836fafa1fc594954dd2fa8877e627b548bf721183090d958806",
+      "machine": "AMD64",
+      "executed": false
+    }
+  },
+  "recordedOn": "2026-10-08",
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37828085808",
+  "sourceTree": "eec563dee93e331f87549ad2ae435131babea71d",
+  "auditScriptSha256": "9a4f5ea4f4adbccdcc1694d6a35fe08f1bb6d6a593bb3f578371a424197365f4"
+}

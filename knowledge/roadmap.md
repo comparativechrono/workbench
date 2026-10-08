@@ -18,6 +18,10 @@ its combined-analysis mode initially covers explicitly selected multi-input
 metrics/text reports. Neither implies generic cohort pooling or reusable indexes
 for every aligner. See [batch workflows](batch-workflows.md) and
 [reference indexes](reference-indexes.md) for exact limits and evidence.
+Its implementation and recorded hosted Windows gates are complete in
+[draft PR #8](https://github.com/comparativechrono/workbench/pull/8); see the
+[candidate handover](batch-queue-indexes-0.13.0-handover.md). Representative-machine
+acceptance and release/update validation remain separate from that result.
 
 | Milestone | Accepted scope | Completion evidence |
 | --- | --- | --- |

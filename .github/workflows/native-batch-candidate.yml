@@ -16,7 +16,7 @@ jobs:
   build:
     # A validator-only replay is guarded by native-batch-recheck.yml against the
     # frozen source commit. Reuse is not recorded as a fresh build pass.
-    if: ${{ !contains(github.event.head_commit.message, '[frozen candidate recheck]') }}
+    if: ${{ !contains(github.event.head_commit.message, '[frozen candidate recheck]') && !contains(github.event.head_commit.message, '[validation evidence]') }}
     runs-on: ubuntu-22.04
     timeout-minutes: 25
     outputs:

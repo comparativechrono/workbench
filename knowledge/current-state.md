@@ -10,9 +10,26 @@ verified reusable minimap2 short-read indexes. The new `align` **0.4.1** candida
 sits beside immutable **0.4.0**; saved pins remain unchanged. The published
 32-pack setup profile and catalogue trust remain unchanged.
 
-See [batch workflows and queue](batch-workflows.md) and
-[reference-index contracts](reference-indexes.md). Source integration is under
-validation; exact packaged Windows results will be recorded here when available.
+See [batch workflows and queue](batch-workflows.md),
+[reference-index contracts](reference-indexes.md) and the
+[candidate handover](batch-queue-indexes-0.13.0-handover.md). Implementation is in
+[draft PR #8](https://github.com/comparativechrono/workbench/pull/8).
+The final candidate from `0ceca7b9c1762542f8fb665a6695b998d32f311e` passed
+[run 37828085808](https://github.com/comparativechrono/workbench/actions/runs/37828085808):
+**217 source checks with five skips** and **11 batch/queue/index/interface,
+14 resource, five readiness/diagnostic, seven library and 32 workspace checks
+per Windows path**. Independent pack import and three separately instrumented
+transport checks also passed. Windows source suites separately passed 28 queue,
+18 index with one privilege skip, and ten diagnostics with one POSIX-only skip.
+
+A deterministic Windows check exposed receipt replacement failing while a reader
+held the file open. The final candidate adds bounded retries for queue/history
+commits; exact packaged checks prove brief conflicts recover and persistent
+conflicts preserve old bytes and jobs. Earlier failed runs remain recorded; the
+diagnostic does not reconstruct every missing historical error message.
+The final archive audit verified 663 source files, 79 core files and unchanged
+published packs/runtime/trust. **Implementation and the recorded hosted gates
+are complete; representative-machine acceptance and release work remain.**
 This request authorizes development, not publication. Neither 0.12.0 nor 0.13.0
 has been released, and published 0.11.0 remains the baseline.
 

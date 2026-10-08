@@ -10,6 +10,9 @@ on `feature/readiness-performance`. Published 0.11.0 remains the baseline;
 the first implementation tranche has passed its recorded exact-candidate checks
 and screenshot review in [draft PR #7](https://github.com/comparativechrono/workbench/pull/7).
 Representative-machine acceptance, benchmarking and release work remain separate.
+The second tranche is implemented in [draft PR #8](https://github.com/comparativechrono/workbench/pull/8);
+its [candidate handover](batch-queue-indexes-0.13.0-handover.md) records exact bytes,
+source/native observations, retained failures and remaining acceptance work.
 
 This is the durable handover for people and agents continuing Native Workbench.
 It records why the project exists, how it works, how to extend it, and which

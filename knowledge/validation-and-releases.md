@@ -21,6 +21,13 @@ this candidate. Record actual results in [current state](current-state.md) and
 dated evidence before calling the candidate validated. This workflow publishes
 temporary Actions artifacts, not a GitHub release.
 
+The [0.13.0 handover](batch-queue-indexes-0.13.0-handover.md) records the passing
+final candidate and retained initial failures. The final exact-package gate also
+holds real external queue/history read handles: short conflicts must commit
+after release; a persistent conflict must preserve the old receipt and jobs,
+leave no new plan, and report failure within the tested bounded wait. Controlled
+source tests and native filesystem tests remain distinct evidence.
+
 ## Scrolling frames, 0.8 candidate
 
 `scripts/check_scroll_frames_windows.py` complements the settled-image comparison
