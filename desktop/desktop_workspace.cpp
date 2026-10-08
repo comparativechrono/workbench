@@ -3610,8 +3610,7 @@ class Workspace {
       m.font = font;
       m.mode = 2;
       m.title = L"Readiness and planned methods";
-      m.message = L"Review this analysis. Installation checks do not guarantee "
-                  L"that the selected data or workflow will run successfully.";
+      m.message = L"Review analysis readiness. Installation checks do not guarantee a successful run.";
       m.value = content;
       m.confirm =
           start && result.get("valid").boolean() ? L"Run analysis" : L"Done";

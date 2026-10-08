@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "date": "2026-10-08",
+  "status": "all automated gates passed; independent screenshot review found a clipped readiness introduction",
+  "sourceCommit": "12f19a81e516f66b342466ec6e1da500a5510b8a",
+  "runId": 37806622222,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37806622222",
+  "starterSha256": "b1db3956a6ced2ad42f1ba41b894491eeff757709ea200340956c679a0cfd1d8",
+  "nativePassedPerPath": {"resourceHelper": 14, "readinessAndDiagnostics": 5, "library": 7, "workspace": 32, "windowsDiagnosticSource": 10},
+  "windowsSourceSkipPerPath": {"count": 1, "reason": "POSIX-only symlink check"},
+  "ciSource": {"suites": 14, "passed": 144, "skipped": 3, "failedSuites": 0},
+  "independentlyDownloadedNativeArtifacts": [
+    {"path": "ordinary", "id": 11562523626, "bytes": 2453530, "sha256": "7f60c0871169c054020f747037cf115dcef44430ca537df7cdd4abf1ea09964a"},
+    {"path": "path with spaces", "id": 11563242292, "bytes": 2453144, "sha256": "da9dba6aaf8c4a420a55db17be843b7ed927f282a27d7d5481ec7647b565952c"}
+  ],
+  "artifactSizeSha256AndZipCrcVerified": true,
+  "visualFinding": {
+    "capture": "readiness-evidence/readiness-native.bmp",
+    "ordinaryCaptureSha256": "8beb31b919286fcb325c03d3dcc0b3221ef5297c552923c3c8cae5f78af57cc6",
+    "dpi": 96,
+    "description": "The introductory STATIC label wraps onto a second line; successfully is clipped by its fixed 30-pixel height. The readiness body, title and footer fit. Diagnostic notice and Save button fit.",
+    "reviewers": 2,
+    "correction": "Shorten the introduction and measure native label rendering with the actual control font/width in the next gate; preserve the full readiness limitations in the scrollable report."
+  },
+  "hostedDisplayLimit": "1024x728 work area; application minimum width1040 clips16 pixels horizontally. Tested pointer targets are checked against actual screen hit targets. This is not full small-screen acceptance.",
+  "guiAcceptanceComplete": false,
+  "published": false
+}
