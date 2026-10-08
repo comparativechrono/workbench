@@ -9,17 +9,23 @@ safe library relocation and NCBI RefSeq assembly discovery. Work is on
 See the [feature contract](reference-management.md) and
 [candidate handover](reference-management-0.15.0-handover.md).
 
-Implementation and local source validation are complete: 422 checks passed with
-six recorded skips, including two external CWL checks unavailable locally.
-Pinned strict native compilation and live Linux NCBI three-file integrity checks
-passed. The frozen candidate now passes all nine live and ten reference-management
-checks in both Windows paths, with all 22 reference captures reviewed. A source
-mock and an ordinary batch UI test still require corrected validators and a
-recheck against the same application bytes. Prior failures remain in the handover.
-No release is claimed.
-The 0.14.0 candidate and published 0.11.0 remain unchanged.
-This set does not complete every remaining roadmap group. The earlier release
-request was conditional on broader completion, which was not established.
+Implementation and recorded hosted validation are complete in
+[draft PR #10](https://github.com/comparativechrono/workbench/pull/10).
+Frozen application `46bbb39dda2cc5bb08c30af494cb340f976acf3b` passed nine live
+reference and ten reference-management/interface checks per Windows path, with
+all 22 new reference captures reviewed at 96 DPI. Its Linux build passed 430
+source checks/four skips. A successful validator-only frozen-archive recheck
+ran all 15 Windows source suites: 274 passes/four explicit skips per path,
+and all 11 batch checks. Other exact native regression gates and independent
+archive verification passed; failed earlier attempts remain recorded.
+
+See the handover for exact downloads, hashes and combined evidence. This is
+unpublished 0.15.0, ready for tester review. Representative-machine acceptance,
+realistic benchmarking and release/update work remain separate. No 0.15.0
+updater or baseline upgrade was tested. Published 0.11.0, production pack/trust
+bytes and the frozen 0.14.0 candidate remain unchanged. This set does not
+complete the entire roadmap or satisfy the earlier broader-completion release
+condition.
 
 ## Previous implementation tranche: 0.14.0, unpublished
 

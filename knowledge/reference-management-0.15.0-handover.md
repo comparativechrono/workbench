@@ -1,6 +1,52 @@
 # Reference management: 0.15.0 handover
 
-Status on 2026-10-08: **implementation complete; exact Windows validation pending; unpublished**.
+Status on 2026-10-08: **first reference-management group implemented and hosted Windows validation complete; unpublished and ready for tester review**.
+
+## Verified candidate and downloads
+
+[Draft PR #10](https://github.com/comparativechrono/workbench/pull/10) contains
+this first remaining group. The frozen application source is
+`46bbb39dda2cc5bb08c30af494cb340f976acf3b`, tree
+`6b1641f7f915a93d8a007933aa6cba62cafc10e9`. Final validation combines the exact
+feature checks in [build run 37855047291](https://github.com/comparativechrono/workbench/actions/runs/37855047291)
+with the successful [frozen-archive recheck 37857029068](https://github.com/comparativechrono/workbench/actions/runs/37857029068).
+The latter corrects only validators, at `016b14109c50dcce36e635586781b5bb5e19d79b`;
+application bytes were not rebuilt. Earlier failures remain recorded below.
+
+- [Windows Starter test download](https://github.com/comparativechrono/workbench/actions/runs/37855047291/artifacts/11583866299): **17,817,278 bytes** for the inner ZIP.
+- [Complete candidate bundle with matching source](https://github.com/comparativechrono/workbench/actions/runs/37855047291/artifacts/11583697066).
+- [Final combined validation evidence](evidence/reference-management-0.15.0-final-validation-2026-10-08.json).
+
+Actions downloads are temporary (retained until 2026-11-07) and may require
+GitHub sign-in. The Starter artifact wraps the application ZIP in another ZIP;
+extract both layers and open `native-workbench/NativeWorkbench.exe` in a fresh
+test folder. This is not a published release or an updater.
+
+| Inner archive | SHA-256 |
+| --- | --- |
+| `native-workbench-0.15.0-starter-windows.zip` | `ce3bcc9c5634dd90f024ecf20f0308a144641c67e0c11c205501518773f6a4c2` |
+| `native-workbench-0.15.0-source.zip` | `0b501b428cbe88b6d3b7cb601f5aa88e029cc20a1ac9903ff4663fee142b1df2` |
+
+The frozen Linux build passed **430 checks with four skips** across 29 invocations,
+including five specifically named frontend-boundary checks. Both Windows paths
+passed **nine live reference** and **ten management/interface** checks. All 22
+new reference screenshots were reviewed at 96 DPI. The successful recheck ran
+all 15 Windows source suites: **274 passes and four explicit skips per path**,
+plus all **11 batch/index/interface checks**. Other exact frozen gates passed
+14 process/resource, five readiness, 12 recovery, seven library, 32 workspace,
+independent pack import/science and three separately instrumented transport checks.
+Independent downloads verified hashes/CRC, 710 matching source files, all 85 core
+files, and unchanged published packs/private runtime/32-pack profile/trust.
+
+The four Windows skips are the Linux-only core adapter, unavailable Windows
+stock-CWL replay, POSIX diagnostics symlink case and privileged index symlink
+case. They are not passes. Stock report-only CWL replay passed separately on
+Linux; no scientific Windows–Linux parity claim follows. Hosted checks do not
+replace representative-PC, high-DPI, trackpad or institutional acceptance.
+No 0.15.0 updater, published-baseline upgrade or public release was performed.
+Published **0.11.0** and `main` remain unchanged; the broader roadmap remains open.
+
+## Development and retained earlier evidence
 
 The owner asked to implement the remaining accepted groups one at a time.
 This first group covers resumable reference downloads, importing local references,

@@ -19,6 +19,9 @@ It retains the immutable build inputs and adds live Ensembl/NCBI and focused
 reference management gates alongside affected native regression gates. Runtime
 modules `reference_transfer.py`, `reference_library.py` and `reference_ncbi.py`
 must be included by `package_split.py`. No updater or release is implied.
+The [frozen reference recheck](../.github/workflows/native-reference-management-recheck.yml)
+rejects production/build differences, pins the original archive/executables and
+reruns corrected batch/source validators without rebuilding application bytes.
 
 **Previous tranche:** unpublished 0.14.0 on `feature/recovery-projects`
 extends the unmerged 0.13.0 candidate. The [recovery/resources/projects guide](recovery-projects.md)

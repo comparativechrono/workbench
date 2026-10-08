@@ -133,7 +133,8 @@
     "reference_management_rechecks": "evidence/reference-management-0.15.0-rechecks-2026-10-08.json",
     "reference_management_frozen_source": "evidence/reference-management-0.15.0-frozen-source-2026-10-08.json",
     "reference_management_frozen_archive_audit": "evidence/reference-management-0.15.0-frozen-archive-audit-2026-10-08.json",
-    "reference_management_frozen_windows": "evidence/reference-management-0.15.0-frozen-windows-2026-10-08.json"
+    "reference_management_frozen_windows": "evidence/reference-management-0.15.0-frozen-windows-2026-10-08.json",
+    "reference_management_final_validation": "evidence/reference-management-0.15.0-final-validation-2026-10-08.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -1107,7 +1108,7 @@
     "version": "0.15.0",
     "branch": "feature/reference-management",
     "starting_commit": "38917349449ce56a45d3e0f4f41b7d2a38621c6d",
-    "status": "exact reference feature gates passed both Windows paths; validator-only regression rechecks pending; unpublished",
+    "status": "reference-management implementation and recorded hosted validation complete; unpublished candidate ready for tester review",
     "authorization": "Owner requested remaining accepted groups one at a time. This first group is reference management; publication is not authorized by the earlier unmet broader-completion condition.",
     "scope": [
       "resumable reference downloads",
@@ -1124,20 +1125,35 @@
     "updater_built": false,
     "verification_progress": {
       "source": {
-        "passed": 422,
-        "skipped": 6,
+        "passed": 430,
+        "skipped": 4,
         "failed": 0,
-        "scope": "Local Linux source preflight; four Windows-only skips and two unavailable external stock CWL checks",
-        "evidence": "evidence/reference-management-0.15.0-local-source-2026-10-08.json"
+        "scope": "Frozen Linux build29invocations including5namedcoreboundarytests",
+        "evidence": "evidence/reference-management-0.15.0-frozen-source-2026-10-08.json"
       },
-      "exact_packaged_windows": "Live9 and management10 passed perpath; remaining provenance-test and ordinary batch-validator corrections require frozen-archive recheck.",
+      "exact_packaged_windows": {
+        "status": "passed combined frozen candidate and corrected-validator evidence",
+        "live_reference_checks_per_path": 9,
+        "management_checks_per_path": 10,
+        "windows_source_passed_per_path": 274,
+        "windows_source_skipped_per_path": 4,
+        "batch_checks_per_path": 11,
+        "visual_captures_reviewed": 22,
+        "dpi": 96,
+        "evidence": "evidence/reference-management-0.15.0-final-validation-2026-10-08.json"
+      },
       "representative_machine_acceptance": "pending",
       "realistic_windows_linux_benchmark": "not performed",
       "release_update_validation": "not performed"
     },
     "pull_request": "https://github.com/comparativechrono/workbench/pull/10",
     "candidate_source_commit": "46bbb39dda2cc5bb08c30af494cb340f976acf3b",
-    "candidate_build_run": "https://github.com/comparativechrono/workbench/actions/runs/37855047291"
+    "candidate_build_run": "https://github.com/comparativechrono/workbench/actions/runs/37855047291",
+    "candidate_source_tree": "6b1641f7f915a93d8a007933aa6cba62cafc10e9",
+    "validator_commit": "016b14109c50dcce36e635586781b5bb5e19d79b",
+    "recheck_run": "https://github.com/comparativechrono/workbench/actions/runs/37857029068",
+    "starter_sha256": "ce3bcc9c5634dd90f024ecf20f0308a144641c67e0c11c205501518773f6a4c2",
+    "starter_download": "https://github.com/comparativechrono/workbench/actions/runs/37855047291/artifacts/11583866299"
   },
   "readiness_performance_development": {
     "recorded_on": "2026-10-08",

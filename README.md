@@ -50,9 +50,10 @@ adds no dependency to normal Workbench operation. See the
 [CWL guide](knowledge/cwl-results.md).
 
 Development for the accepted roadmap is on unpublished review branches.
-The next set, **0.15.0 reference management**, adds resumable downloads, local
-reference import, library relocation and NCBI RefSeq assembly lookup; see its
-[development handover](knowledge/reference-management-0.15.0-handover.md).
+The first remaining set, **0.15.0 reference management**, is implemented and
+validated on hosted Windows: resumable downloads, local reference import, library
+relocation and NCBI RefSeq assembly lookup. See its
+[tester download and evidence](knowledge/reference-management-0.15.0-handover.md).
 The completed initial three tranches culminate in unpublished
 **0.14.0**, with [verified workflow
 restart, declared resource budgets and portable projects](knowledge/recovery-projects.md).

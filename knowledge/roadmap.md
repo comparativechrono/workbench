@@ -43,7 +43,9 @@ and a bounded NCBI RefSeq accession provider. See the
 [feature contract](reference-management.md) and
 [handover](reference-management-0.15.0-handover.md). The original three
 implementation tranches were not the entire accepted suggestion list; each
-remaining group retains its own completion and validation evidence.
+remaining group retains its own completion and validation evidence. The reference
+group is now implemented and hosted-Windows validated in draft PR #10;
+representative-machine acceptance and publication remain separate.
 
 | Milestone | Accepted scope | Completion evidence |
 | --- | --- | --- |
