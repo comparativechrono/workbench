@@ -49,7 +49,7 @@ class ReferenceProvenanceTests(unittest.TestCase):
         self.assertIn("Assembly1 (GCA_000000001.1)", methods)
         self.assertIn("will be checked", methods)
         self.assertNotIn("were checked", methods)
-        lookup.assert_called_once_with(self.root, {self.path})
+        lookup.assert_called_once_with(self.root.resolve(), {self.path})
 
     def test_frozen_hash_receipt_and_methods_survive_library_removal(self):
         def lookup(root, paths, evidence=None):

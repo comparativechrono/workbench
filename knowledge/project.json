@@ -130,7 +130,10 @@
     "reference_management_initial_source": "evidence/reference-management-0.15.0-initial-source-2026-10-08.json",
     "reference_management_initial_windows": "evidence/reference-management-0.15.0-initial-windows-2026-10-08.json",
     "reference_management_initial_archive_audit": "evidence/reference-management-0.15.0-initial-archive-audit-2026-10-08.json",
-    "reference_management_rechecks": "evidence/reference-management-0.15.0-rechecks-2026-10-08.json"
+    "reference_management_rechecks": "evidence/reference-management-0.15.0-rechecks-2026-10-08.json",
+    "reference_management_frozen_source": "evidence/reference-management-0.15.0-frozen-source-2026-10-08.json",
+    "reference_management_frozen_archive_audit": "evidence/reference-management-0.15.0-frozen-archive-audit-2026-10-08.json",
+    "reference_management_frozen_windows": "evidence/reference-management-0.15.0-frozen-windows-2026-10-08.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -1104,7 +1107,7 @@
     "version": "0.15.0",
     "branch": "feature/reference-management",
     "starting_commit": "38917349449ce56a45d3e0f4f41b7d2a38621c6d",
-    "status": "two exact candidates rejected; remaining path/UI fixes and validator correction ready for rebuild; unpublished",
+    "status": "exact reference feature gates passed both Windows paths; validator-only regression rechecks pending; unpublished",
     "authorization": "Owner requested remaining accepted groups one at a time. This first group is reference management; publication is not authorized by the earlier unmet broader-completion condition.",
     "scope": [
       "resumable reference downloads",
@@ -1127,12 +1130,14 @@
         "scope": "Local Linux source preflight; four Windows-only skips and two unavailable external stock CWL checks",
         "evidence": "evidence/reference-management-0.15.0-local-source-2026-10-08.json"
       },
-      "exact_packaged_windows": "Initial run 37853140376 failed three gates; fixes require rebuilt exact candidate recheck. Partial checks and unreached suites retained.",
+      "exact_packaged_windows": "Live9 and management10 passed perpath; remaining provenance-test and ordinary batch-validator corrections require frozen-archive recheck.",
       "representative_machine_acceptance": "pending",
       "realistic_windows_linux_benchmark": "not performed",
       "release_update_validation": "not performed"
     },
-    "pull_request": "https://github.com/comparativechrono/workbench/pull/10"
+    "pull_request": "https://github.com/comparativechrono/workbench/pull/10",
+    "candidate_source_commit": "46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+    "candidate_build_run": "https://github.com/comparativechrono/workbench/actions/runs/37855047291"
   },
   "readiness_performance_development": {
     "recorded_on": "2026-10-08",

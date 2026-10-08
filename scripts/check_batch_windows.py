@@ -765,6 +765,27 @@ def gui_checks(root, evidence, report):
         ui.send(ui.child(909, queue), 0x00F5)
         ui.wait("Queue closed", lambda: not window("Analysis queue · Native Workbench"))
         ui.click_button(410)
+        # Tools mode is committed by an asynchronous host response. Its native
+        # controls can be rebuilt between the navigation click and the next
+        # input; a previously obtained search HWND is not proof of readiness.
+        # Wait for the visible new mode and its current, hit-testable search
+        # control, then keep set_text's real pointer/foreground safeguards.
+        def tools_search_ready():
+            search, form = ui.child(102), ui.child(118)
+            if not (search and form and ui.user.IsWindowVisible(search) and
+                    ui.user.IsWindowEnabled(search) and ui.user.IsWindowVisible(form)):
+                return False
+            if not any(control["text"] == "Choose a tool to begin" for control in ui.controls(form)):
+                return False
+            if ui.label(ui.child(113)) != "Run tool":
+                return False
+            rect = wintypes.RECT()
+            if not ui.user.GetWindowRect(search, ctypes.byref(rect)):
+                return False  # Replaced during this bounded readiness probe.
+            hit = ui.user.WindowFromPoint(wintypes.POINT((rect.left + rect.right) // 2,
+                                                        (rect.top + rect.bottom) // 2))
+            return hit == search and search == ui.child(102)
+        ui.wait("Tools mode and current search ready after workflow", tools_search_ready)
         ui.set_text(ui.child(102), "Combine statistics reports")
         ui.wait("native combined-report tool available", lambda: len(ui.library().tools()) == 1)
         ui.click_at(*ui.library().first_tool_point(), expected=ui.child(104))

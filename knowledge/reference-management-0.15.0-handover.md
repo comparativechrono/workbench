@@ -78,3 +78,18 @@ incorrectly required Download to enable before selecting a file. A later service
 source check exposed a short-versus-resolved Windows default-path comparison.
 Screenshot review also found the GUI initially displayed the old default folder
 after relocation. All three are corrected for another exact-package recheck.
+
+The frozen application candidate is now
+`46bbb39dda2cc5bb08c30af494cb340f976acf3b`, from
+[run 37855047291](https://github.com/comparativechrono/workbench/actions/runs/37855047291).
+Both Windows paths passed **nine live reference checks and ten reference-management
+checks**, including all native interactions. All 22 reference captures were
+reviewed at 96 DPI with no blocking visual defects.
+[Source](evidence/reference-management-0.15.0-frozen-source-2026-10-08.json),
+[archive](evidence/reference-management-0.15.0-frozen-archive-audit-2026-10-08.json)
+and [native evidence](evidence/reference-management-0.15.0-frozen-windows-2026-10-08.json)
+retain the exact identities and scope. The overall run still failed: one source
+mock compared short and canonical root spellings, and the ordinary batch validator
+interacted with the search control during an asynchronous Tools transition.
+The next recheck corrects only these validators and reuses the same archived
+application bytes; ten unreached Windows source suites must also execute.

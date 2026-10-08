@@ -12,9 +12,11 @@ See the [feature contract](reference-management.md) and
 Implementation and local source validation are complete: 422 checks passed with
 six recorded skips, including two external CWL checks unavailable locally.
 Pinned strict native compilation and live Linux NCBI three-file integrity checks
-passed. The first packaged Windows candidate exposed three defects and was
-rejected; fixes and an exact rebuilt recheck are in progress. Its partial passes
-and unreached checks are recorded in the handover. No release is claimed.
+passed. The frozen candidate now passes all nine live and ten reference-management
+checks in both Windows paths, with all 22 reference captures reviewed. A source
+mock and an ordinary batch UI test still require corrected validators and a
+recheck against the same application bytes. Prior failures remain in the handover.
+No release is claimed.
 The 0.14.0 candidate and published 0.11.0 remain unchanged.
 This set does not complete every remaining roadmap group. The earlier release
 request was conditional on broader completion, which was not established.
