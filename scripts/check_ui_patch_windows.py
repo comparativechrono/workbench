@@ -64,6 +64,26 @@ def pointer_click(ui, control):
     ui.click_at((left + right) // 2, (top + bottom) // 2, expected=control)
 
 
+def clear_focused_edit(ui, keys, control):
+    """Use standard single-line Edit keys and observe selection before deletion."""
+    require(keys.focus() == control and ui.user.IsWindowEnabled(control),
+            'Keyboard replacement requires the already-focused available edit.')
+    length = len(ui.label(control).encode('utf-16-le')) // 2
+    require(length < 65536, 'Keyboard fixture exceeds EM_GETSEL packed range.')
+    keys.key(0x24)  # Home.
+    ui.wait('native keyboard Home places caret at start', lambda:
+            keys.focus() == control and ui.send(control, 0x00B0) == 0)
+    keys.key(0x23, 0x10)  # Shift+End.
+    ui.wait('native keyboard selection spans edit', lambda:
+            keys.focus() == control and ui.send(control, 0x00B0) == (length << 16))
+    keys.key(0x08)
+    ui.wait('native keyboard edit cleared', lambda:
+            keys.focus() == control and not ui.label(control))
+    return {'controlId': ui.user.GetDlgCtrlID(control), 'originalUtf16Length': length,
+            'homeSelection': [0, 0], 'fullSelection': [0, length],
+            'emptyAfterBackspace': True, 'focusRetained': True, 'pointerIntervention': False}
+
+
 class PatchUI(NativeUI):
     def fit_window(self, width, height):
         # NativeUI normally resizes immediately. Record real startup geometry
@@ -122,7 +142,7 @@ def seed_fresh_result(root, evidence, external, report):
 def fixed_layout(ui, mode):
     bounds, area = ui.bounds(ui.main), ui.work_area()
     require(inside(bounds, area), 'Native window clips outside the actual monitor work area.')
-    identities = [102, 104, 402, 410, 411, 417, 424, 425, 114, 116, 415, 416]
+    identities = [102, 104, 402, 410, 411, 417, 424, 425, 113, 115, 415, 416]
     if mode == 'workflow':
         identities += [419, 105, 412, 107, 108, 418, 420, 421, 422]
     measured = []
@@ -180,6 +200,11 @@ def desktop_scenarios(root, evidence, report, label):
             # Any result/reference record marks an installation as an existing
             # user. Exercise pristine first-open setup before creating the
             # scientific search fixture, then reopen the same installation.
+            # A persisted dismissal precedes the asynchronous UI reply; closing
+            # before edit controls return can legitimately ask to cancel setup.
+            ui.wait('setup dismissal reply completed', lambda:
+                    ui.user.IsWindowEnabled(ui.child(410)) and
+                    ui.user.IsWindowEnabled(ui.child(102)))
             ui.close()
             ui = None
             seed_fresh_result(root, evidence, evidence / 'fresh external reference', report)
@@ -191,7 +216,8 @@ def desktop_scenarios(root, evidence, report, label):
         search = ui.child(102)
         pointer_click(ui, search)
         ui.wait('library keyboard focus', lambda: keys.focus() == search)
-        keys.key(0x41, 0x11)
+        report.setdefault('keyboardEdits', []).append({
+            'stage': label + '-library-before-filter', **clear_focused_edit(ui, keys, search)})
         keys.text('reference')
         ui.wait('keyboard library filter', lambda: ui.label(search) == 'reference' and ui.library().tools())
         keys.key(0x09)
@@ -201,8 +227,8 @@ def desktop_scenarios(root, evidence, report, label):
                 ui.user.IsWindowEnabled(next_focus), 'Tab reached an unavailable or foreign control.')
         keys.key(0x09, 0x10)
         ui.wait('Shift+Tab restores search', lambda: keys.focus() == search)
-        keys.key(0x41, 0x11)
-        keys.key(0x08)
+        report['keyboardEdits'].append({
+            'stage': label + '-library-after-tab', **clear_focused_edit(ui, keys, search)})
         ui.wait('keyboard filter cleared', lambda: not ui.label(search) and ui.library().tools())
         passed(report, label + '-library-keyboard', label + ': library filtering and Tab/Shift+Tab preserve real enabled focus.')
         layouts = []
@@ -233,7 +259,8 @@ def desktop_scenarios(root, evidence, report, label):
                     ui.user.IsWindowEnabled(ui.child(1502, owner)))
             require(inside(ui.bounds(owner), ui.work_area()), 'Results dialog clips outside work area.')
             # No pointer/refocus/SetFocus intervention is allowed after opening.
-            keys.key(0x41, 0x11)
+            report['keyboardEdits'].append({
+                'stage': label + '-results-' + case, **clear_focused_edit(ui, keys, query)})
             keys.text(query_text)
             ui.wait('query entered by keyboard', lambda: ui.label(query) == query_text)
             keys.key(0x09)
