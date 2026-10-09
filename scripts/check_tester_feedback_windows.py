@@ -11,12 +11,14 @@ import argparse
 from contextlib import contextmanager
 import csv
 import ctypes
+from ctypes import wintypes
 import hashlib
 import json
 import os
 from pathlib import Path
 import platform
 import re
+import shutil
 import sys
 import time
 import traceback
@@ -88,6 +90,35 @@ class FeedbackUI(PatchUI):
             self.screen_capture('feedback-wait-timeout.bmp', self.bounds(self.main))
             self.progress(phase + ' timed out', controls=self.controls())
         raise TimeoutError(phase)
+
+    def close(self):
+        """Require clean exit, recording a blocking dialog before cleanup."""
+        try:
+            if self.main and self.process.poll() is None:
+                self.post(self.main, 0x0010)
+                try:
+                    require(self.process.wait(timeout=30) == 0, 'Native desktop did not close cleanly.')
+                except Exception:
+                    report = getattr(self, 'gate_report', None)
+                    try:
+                        rows = self.top_windows()
+                        if report is not None:
+                            report.setdefault('closeFailures', []).append({'windows': rows})
+                        for index, row in enumerate(rows):
+                            if report is not None:
+                                visible_capture(self, report, 'feedback-close-failure-%d' % index, row['handle'])
+                            else:
+                                self.screen_capture('feedback-close-failure-%d.bmp' % index, self.bounds(row['handle']))
+                    except Exception as capture_error:
+                        if report is not None:
+                            report.setdefault('failureCaptureErrors', []).append(str(capture_error))
+                    raise
+        finally:
+            stop_process_tree(self.process)
+            self.user.SetThreadDpiAwarenessContext(self.previous_dpi)
+            log = self.root / 'user-data/desktop-host.stderr.txt'
+            if log.is_file():
+                shutil.copyfile(log, self.evidence / 'ui-desktop-host.stderr.txt')
 
 
 @contextmanager
@@ -227,7 +258,43 @@ def button(ui, owner, identity):
     control = ui.child(identity, owner)
     ui.wait('available native action ' + str(identity), lambda:
             control and ui.user.IsWindowVisible(control) and ui.user.IsWindowEnabled(control))
+    top = ui.user.GetAncestor(control, 2)
+    if ui.user.GetForegroundWindow() != top:
+        ui.user.SetForegroundWindow(top)
+        ui.wait('button owner in foreground', lambda: ui.user.GetForegroundWindow() == top)
+    # A closing native dialog/async reply may temporarily cover or disable its
+    # owner after IsWindowVisible has already changed. Wait for the same actual
+    # hit-test contract as click_at, then retain that strict check at input time.
+    observations, stable_since = [], None
+    def ready():
+        nonlocal stable_since
+        row = pointer_state(ui, control)
+        row['elapsedMs'] = round((time.monotonic() - started) * 1000, 3)
+        observations.append(row)
+        stable_since = (stable_since or time.monotonic()) if row['ready'] else None
+        return stable_since is not None and time.monotonic() - stable_since >= .1
+    started = time.monotonic()
+    ui.wait('native action hit target settled ' + str(identity), ready, seconds=5)
+    if hasattr(ui, 'gate_report'):
+        ui.gate_report.setdefault('pointerReadiness', []).append({'controlId': identity, 'observations': observations})
     pointer_click(ui, control)
+
+
+def pointer_state(ui, control):
+    left, top, right, bottom = ui.bounds(control)
+    x, y = (left + right) // 2, (top + bottom) // 2
+    hit = ui.user.WindowFromPoint(wintypes.POINT(x, y))
+    process = wintypes.DWORD()
+    ui.user.GetWindowThreadProcessId(hit, ctypes.byref(process))
+    area = ui.work_area()
+    available = bool(ui.user.IsWindowVisible(control) and ui.user.IsWindowEnabled(control))
+    owned = process.value == ui.process.pid
+    expected = bool(hit == control or ui.user.IsChild(control, hit))
+    visible = area[0] <= x < area[2] and area[1] <= y < area[3]
+    return {'point': [x, y], 'hitWindow': hit, 'hitProcess': process.value,
+            'expectedWindow': control, 'available': available, 'owned': owned,
+            'expectedHit': expected, 'insideWorkArea': visible,
+            'ready': available and owned and expected and visible}
 
 
 def edit(ui, keys, control, value):
@@ -260,6 +327,7 @@ def choose(ui, keys, control, value):
 
 def prepare_desktop(root, evidence, report):
     ui = FeedbackUI(root, evidence)
+    ui.gate_report = report
     report['nativeGUILaunched'] = report['nativeWindowsExecuted'] = True
     require(inside(ui.initial_bounds, ui.initial_work_area), 'Unmodified startup window exceeds work area.')
     report.setdefault('startups', []).append({'bounds': ui.initial_bounds, 'workArea': ui.initial_work_area,
@@ -325,7 +393,7 @@ def run_button_observations(ui, report):
 
 
 def samples_blank_access(ui, report):
-    ui.click_button(424)
+    button(ui, ui.main, 424)
     title, editor_title = 'Samples · Native Workbench', 'Sample table editor · Native Workbench'
     ui.wait('Samples available without an analysis graph', lambda: window(ui, title))
     owner = window(ui, title)
@@ -573,7 +641,7 @@ def samples_roundtrip(ui, root, evidence, report):
     # The separate workflow regression gate exercises the menu pointer itself.
     ui.post(ui.main, 0x0111, 302)
     ui.wait('bundled Starter graph loaded', lambda: 'Starter example' in ui.label(ui.child(101)))
-    ui.click_button(424)
+    button(ui, ui.main, 424)
     title, editor_title = 'Samples · Native Workbench', 'Sample table editor · Native Workbench'
     ui.wait('Samples opened', lambda: window(ui, title))
     samples = window(ui, title)
@@ -656,7 +724,7 @@ def samples_roundtrip(ui, root, evidence, report):
     ui.wait('used complete native row', lambda: rows.count() == 1 and rows.text(0) == 'nativeCreated')
     button(ui, samples, 813)
     ui.wait('Samples closed', lambda: not window(ui, title))
-    ui.click_button(424)
+    button(ui, ui.main, 424)
     ui.wait('Samples reopened', lambda: window(ui, title))
     samples = window(ui, title)
     edit(ui, keys, ui.child(801, samples), str(destination))
@@ -756,6 +824,16 @@ def samples_roundtrip(ui, root, evidence, report):
     sam = Path(record['outputs']['step-1::sam']['files']['sam']).read_text()
     require(any('SM:starter' in line for line in sam.splitlines() if line.startswith('@RG')),
             'Explicit native sample name mapping did not reach the actual alignment.')
+    listing = NativeList(ui, ui.child(901, queue))
+    ui.wait('native queue completion and idle controls', lambda:
+            listing.count() == 1 and listing.text(0, 2) == 'completed' and
+            '1 completed.' in ui.label(ui.child(908, queue)) and
+            ui.user.IsWindowEnabled(ui.child(113)) and not ui.user.IsWindowEnabled(ui.child(114)))
+    report['nativeQueueCompletion'] = {'rowStatus': listing.text(0, 2),
+        'notice': ui.label(ui.child(908, queue)),
+        'runEnabled': bool(ui.user.IsWindowEnabled(ui.child(113))),
+        'cancelEnabled': bool(ui.user.IsWindowEnabled(ui.child(114)))}
+    report['nativeSampleScience']['sampleId'] = 'starter'
     visible_capture(ui, report, 'samples-example-completed', queue)
     passed(report, 'samples-example-native-science',
            'Explicit Queue then Start produces 202 proper-pair alignments and the known starter:1351 G>A homozygous SNP with sample/CWL/output provenance.')

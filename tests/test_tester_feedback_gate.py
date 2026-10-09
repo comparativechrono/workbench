@@ -136,6 +136,28 @@ class FeedbackGateTests(unittest.TestCase):
         self.assertFalse(report['success'])
         self.assertEqual(report['failed'], 1)
 
+    def test_pointer_readiness_never_accepts_an_overlay_from_another_process(self):
+        def pid(handle, target):
+            target._obj.value = 99
+        ui = SimpleNamespace(bounds=lambda h: [10, 10, 90, 40], work_area=lambda: [0, 0, 100, 100],
+            process=SimpleNamespace(pid=42), user=SimpleNamespace(WindowFromPoint=lambda p: 7,
+                GetWindowThreadProcessId=pid, IsWindowVisible=lambda h: True, IsWindowEnabled=lambda h: True,
+                IsChild=lambda parent, child: True))
+        state = gate.pointer_state(ui, 7)
+        self.assertFalse(state['ready'])
+        self.assertFalse(state['owned'])
+
+    def test_pointer_readiness_requires_the_enabled_expected_surface(self):
+        def pid(handle, target):
+            target._obj.value = 42
+        ui = SimpleNamespace(bounds=lambda h: [10, 10, 90, 40], work_area=lambda: [0, 0, 100, 100],
+            process=SimpleNamespace(pid=42), user=SimpleNamespace(WindowFromPoint=lambda p: 7,
+                GetWindowThreadProcessId=pid, IsWindowVisible=lambda h: True, IsWindowEnabled=lambda h: True,
+                IsChild=lambda parent, child: False))
+        self.assertTrue(gate.pointer_state(ui, 7)['ready'])
+        ui.user.IsWindowEnabled = lambda h: False
+        self.assertFalse(gate.pointer_state(ui, 7)['ready'])
+
 
 if __name__ == '__main__':
     unittest.main()
