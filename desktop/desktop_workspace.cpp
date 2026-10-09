@@ -1,5 +1,6 @@
 #include "desktop_ipc.h"
 #include "record_list.h"
+#include "workspace_layout.h"
 #include "resource.h"
 #include "dag_routing.h"
 #include "workbench.h"
@@ -1459,6 +1460,7 @@ class Workspace {
     }
     auxiliary_layout(view); auxiliary_enabled();
     ShowWindow(view.window, SW_SHOW); SetForegroundWindow(view.window);
+    if (kind == SHOW_RESULTS) SetFocus(aux(view, RESULTS_QUERY));
   }
   const Json &graph() const {
     static const Json empty =
@@ -3561,18 +3563,21 @@ class Workspace {
     GetClientRect(window, &rc);
     width = std::max(1, MulDiv(rc.right, 96, dpi));
     height = std::max(1, MulDiv(rc.bottom, 96, dpi));
-    const int left = 232, right = 320, center = left + 1,
-              centerWidth = std::max(250, width - left - right - 2),
-              rightX = width - right + 16, rightWidth = right - 32,
-              bodyHeight = std::max(160, height - 174), footer = height - 64;
+    const auto geometry = workspace_layout::for_client(width, height);
+    const int left = geometry.left, right = geometry.right, center = geometry.center,
+              centerWidth = geometry.centerWidth, rightX = geometry.rightX,
+              rightWidth = geometry.rightWidth, bodyHeight = geometry.bodyHeight;
+    auto place_control = [&](HWND h, workspace_layout::Rect bounds) {
+      place(h, bounds.x, bounds.y, bounds.width, bounds.height);
+    };
     const bool canvas = workflowMode || showingHistory;
     const bool general = !showingHistory && (!workflowMode || generalVisible || selected.empty());
-    place(modeTools, 216, 7, 90, 34);
-    place(modeWorkflow, 314, 7, 110, 34);
-    place(samplesButton, 432, 7, 106, 34);
-    place(queueButton, 546, 7, 132, 34);
-    place(resultsList, width - 112, 7, 96, 34);
-    place(toolsHeading, 16, 64, 200, 24);
+    place_control(modeTools, geometry.toolsMode);
+    place_control(modeWorkflow, geometry.workflowMode);
+    place_control(samplesButton, geometry.samples);
+    place_control(queueButton, geometry.queue);
+    place_control(resultsList, geometry.results);
+    place(toolsHeading, 16, 64, left - 32, 24);
     place(search, 12, 98, left - 24, 32);
     const bool filtering = workflowMode && !getstr(state, "pendingSource").empty();
     place(clearFilter, 12, 140, left - 24, 30);
@@ -3605,29 +3610,27 @@ class Workspace {
     ShowWindow(steps, SW_HIDE);
     ShowWindow(up, SW_HIDE);
     ShowWindow(down, SW_HIDE);
-    place(remove, width - right + 12, footer, 84, 32);
-    place(undo, width - right + 104, footer, 72, 32);
-    place(resetLayout, width - right + 184, footer, 120, 32);
+    place_control(remove, geometry.remove);
+    place_control(undo, geometry.undo);
+    place_control(resetLayout, geometry.reset);
     for (HWND h : {remove, undo, resetLayout})
       ShowWindow(h, workflowMode && !showingHistory ? SW_SHOW : SW_HIDE);
-    place(run, center + 12, footer, 118, 32);
+    place_control(run, geometry.run);
     SetWindowTextW(run, workflowMode ? L"Run workflow" : L"Run tool");
-    place(review, center + 138, footer, 84, 32);
-    place(cancel, 686, 7, 110, 34);
+    place_control(review, geometry.readiness);
+    place_control(cancel, geometry.cancel);
     ShowWindow(cancel, busy ? SW_SHOW : SW_HIDE);
-    place(zoomOut, center + centerWidth - 150, footer, 34, 32);
-    place(zoomReset, center + centerWidth - 110, footer, 62, 32);
-    place(zoomIn, center + centerWidth - 42, footer, 34, 32);
+    place_control(zoomOut, geometry.zoomOut);
+    place_control(zoomReset, geometry.zoomReset);
+    place_control(zoomIn, geometry.zoomIn);
     for (HWND h : {zoomOut, zoomReset, zoomIn})
       ShowWindow(h, canvas ? SW_SHOW : SW_HIDE);
-    place(saveCurrent, canvas ? center + centerWidth - 248 : width - right + 12,
-          canvas ? 59 : footer, canvas ? 126 : 146, 32);
-    place(loadCurrent, canvas ? center + centerWidth - 114 : width - right + 166,
-          canvas ? 59 : footer, canvas ? 102 : 142, 32);
+    place_control(saveCurrent, canvas ? geometry.saveWorkflow : geometry.saveSettings);
+    place_control(loadCurrent, canvas ? geometry.loadWorkflow : geometry.loadSettings);
     ShowWindow(saveCurrent, showingHistory ? SW_HIDE : SW_SHOW);
     ShowWindow(loadCurrent, showingHistory ? SW_HIDE : SW_SHOW);
     SetWindowTextW(saveCurrent, workflowMode ? L"Save workflow..." : L"Save settings...");
-    place(back, center + 12, footer, 180, 32);
+    place_control(back, geometry.back);
     ShowWindow(back, showingHistory ? SW_SHOW : SW_HIDE);
     for (HWND h : {run, review}) ShowWindow(h, showingHistory ? SW_HIDE : SW_SHOW);
     place(status, 12, height - 24, width - 24, 22);
@@ -5273,7 +5276,12 @@ class Workspace {
       return 0;
     case WM_GETMINMAXINFO: {
       auto *p = reinterpret_cast<MINMAXINFO *>(l);
-      p->ptMinTrackSize = {px(1040), px(680)};
+      MONITORINFO monitor{sizeof(monitor)};
+      if (!GetMonitorInfoW(MonitorFromWindow(window, MONITOR_DEFAULTTONEAREST), &monitor))
+        SystemParametersInfoW(SPI_GETWORKAREA, 0, &monitor.rcWork, 0);
+      p->ptMinTrackSize = {
+          std::min<LONG>(px(workspace_layout::minimum_width), monitor.rcWork.right - monitor.rcWork.left),
+          std::min<LONG>(px(workspace_layout::minimum_height), monitor.rcWork.bottom - monitor.rcWork.top)};
       return 0;
     }
     case WM_KEYDOWN:
@@ -5440,7 +5448,8 @@ class Workspace {
       RECT header{0, 0, r.right, px(48)};
       HBRUSH navy = CreateSolidBrush(NAVY);
       FillRect(dc, &header, navy); DeleteObject(navy);
-      RECT center{px(233), px(49), px(width - 321), px(height - 28)};
+      const auto geometry = workspace_layout::for_client(width, height);
+      RECT center{px(geometry.center), px(49), px(width - geometry.right - 1), px(height - 28)};
       FillRect(dc, &center, paper);
       SetBkMode(dc, TRANSPARENT); SetTextColor(dc, PAPER);
       SelectObject(dc, bold);
@@ -5448,7 +5457,7 @@ class Workspace {
       DrawTextW(dc, L"Native Workbench", -1, &brand, DT_LEFT | DT_VCENTER | DT_SINGLELINE);
       HPEN pen = CreatePen(PS_SOLID, 1, BORDER);
       HGDIOBJ old = SelectObject(dc, pen);
-      for (int x : {232, width - 320}) {
+      for (int x : {geometry.left, width - geometry.right}) {
         MoveToEx(dc, px(x), px(48), nullptr); LineTo(dc, px(x), px(height - 28));
       }
       MoveToEx(dc, 0, px(height - 28), nullptr); LineTo(dc, r.right, px(height - 28));
@@ -5642,11 +5651,14 @@ public:
       throw std::runtime_error("Could not register workspace surface.");
     RECT area{};
     SystemParametersInfoW(SPI_GETWORKAREA, 0, &area, 0);
+    dpi = GetDpiForSystem();
+    const auto initial = workspace_layout::centered_window(
+        {area.left, area.top, area.right - area.left, area.bottom - area.top},
+        px(workspace_layout::preferred_width), px(workspace_layout::preferred_height));
     HWND h = CreateWindowExW(
         WS_EX_CONTROLPARENT, windowClass.c_str(), L"Native Workbench",
-        WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN, CW_USEDEFAULT, CW_USEDEFAULT,
-        std::min<LONG>(1240, area.right - area.left),
-        std::min<LONG>(880, area.bottom - area.top), nullptr, nullptr, inst,
+        WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN, initial.x, initial.y,
+        initial.width, initial.height, nullptr, nullptr, inst,
         this);
     if (!h)
       return 1;

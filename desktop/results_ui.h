@@ -15,10 +15,20 @@
   }
   void results_enabled(bool idle) {
     if (!resultsView.window) return;
-    EnableWindow(aux(resultsView, RESULTS_SEARCH), idle);
     const bool selectedRun = idle && !getstr(results_selected(), "run_id").empty();
-    EnableWindow(aux(resultsView, RESULTS_VIEW), selectedRun);
-    EnableWindow(aux(resultsView, RESULTS_OPEN), selectedRun && !getstr(results_selected(), "folder").empty());
+    auto enable = [&](int id, bool value) {
+      HWND control = aux(resultsView, id);
+      // Disabling a focused Win32 button clears keyboard focus. Search starts
+      // asynchronously and also reads the selected summary, so move to the
+      // always-available query before disabling, not when either reply arrives.
+      // Replies must not steal focus back from a different control or window.
+      if (!value && control && GetFocus() == control)
+        SetFocus(aux(resultsView, RESULTS_QUERY));
+      EnableWindow(control, value);
+    };
+    enable(RESULTS_SEARCH, idle);
+    enable(RESULTS_VIEW, selectedRun);
+    enable(RESULTS_OPEN, selectedRun && !getstr(results_selected(), "folder").empty());
   }
   template<class Put> void results_layout(Auxiliary &, int w, int h, Put put) {
     const int listHeight = std::max(96, (h - 260) / 3);
