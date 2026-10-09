@@ -1,0 +1,298 @@
+{
+  "schema": 1,
+  "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+  "status": "passed",
+  "scope": "24 exact final Starter/upgraded curated-results captures visually inspected; static hosted96DPI, not high-DPI, physical trackpad or multi-monitor acceptance. Separate results and temporal scrolling evidence is in the release regression record.",
+  "reviews": [
+    {
+      "schema": 1,
+      "reviewedOn": "2026-10-09",
+      "case": "ordinary",
+      "kind": "candidate",
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "runId": 37952018931,
+      "assetSha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073",
+      "status": "passed",
+      "dpi": 96,
+      "captures": [
+        {
+          "path": "curated-native-catalogue.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "ea4f2ec25c0dd698869a3bba5572b0feed7aa03d7531178beb91d85f0f5fa9c4"
+        },
+        {
+          "path": "curated-native-loaded-workflow.bmp",
+          "width": 1040,
+          "height": 728,
+          "sha256": "48af1a4e0080b0006e267e123163962b17712336e4e24f48a1e725380f1efa50"
+        },
+        {
+          "path": "results-native-filtered-summary.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "b2b77525cc47472a5c16bdf05d617ddc107120754fdc6656d86d14ab27cf5e80"
+        },
+        {
+          "path": "results-native-failed-preparation.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "6192dc6aacf5c9721612b92b6d36bfaa4320258fafa75e0d51c1807d34dfd1e2"
+        },
+        {
+          "path": "results-native-failure-guidance.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "3f2b48463f979b47dfcec20ff40dae7fc8528af4e2120a341406e120964c8343"
+        },
+        {
+          "path": "results-native-empty-search.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "9f64c6c24f3c8bed991091f43d3491ac6737013af7121612ee57bf0a7fb7e38d"
+        }
+      ],
+      "scope": "Six exact native captures independently inspected. No unintended overlap or clipping in fixed controls. Catalogue/detail panes intentionally scroll; the graph viewport clips off-screen nodes and abbreviates titles. Results Tools column uses ellipses. Failure guidance and no-QC-threshold wording are readable, and empty search clears content and disables result actions. No high-DPI, multi-monitor, physical-trackpad or temporal claim."
+    },
+    {
+      "schema": 1,
+      "reviewedUtc": "2026-10-09T15:37:07.830307+00:00",
+      "reviewer": "critical_review",
+      "workflowRun": 37952018931,
+      "pathCase": "spaces",
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "nativeReport": "final-candidate/native-spaces/curated-evidence/native-curated.json",
+      "nativeReportSha256": "49950af459c79245471e732a5ec5085e074fde67a73866547447485b2ab65e6e",
+      "dpi": 96,
+      "capturesReviewed": 6,
+      "result": "pass",
+      "blockingFindings": [],
+      "captures": [
+        {
+          "path": "curated-native-catalogue.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "ea4f2ec25c0dd698869a3bba5572b0feed7aa03d7531178beb91d85f0f5fa9c4",
+          "reviewedFormat": "PNG converted from BMP without changing dimensions or RGB pixels",
+          "captureHashVerified": true,
+          "pixelIdentityVerified": true,
+          "result": "pass",
+          "finding": "Workflow names, availability, section labels and all action buttons are readable and separated. Longer requirement and notice text continues inside visible scroll panes; bottom-line clipping is viewport scrolling, not a fixed control overlap."
+        },
+        {
+          "path": "curated-native-loaded-workflow.bmp",
+          "width": 1040,
+          "height": 728,
+          "sha256": "48af1a4e0080b0006e267e123163962b17712336e4e24f48a1e725380f1efa50",
+          "reviewedFormat": "PNG converted from BMP without changing dimensions or RGB pixels",
+          "captureHashVerified": true,
+          "pixelIdentityVerified": true,
+          "result": "pass",
+          "finding": "Navigation, workflow actions, tool-option labels and connected-source buttons are readable without overlap. Node-title ellipses and the right edge of the partially visible DAG node occur within the explicitly scrollable canvas."
+        },
+        {
+          "path": "results-native-filtered-summary.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "4c4a4ff2d1084e1cacc5239043c0d9411916a9dd8d34203db92b0c164aaf224e",
+          "reviewedFormat": "PNG converted from BMP without changing dimensions or RGB pixels",
+          "captureHashVerified": true,
+          "pixelIdentityVerified": true,
+          "result": "pass",
+          "finding": "Search, selected analysis, status, sample, started time, measured-result disclaimer and actions are readable. The long Tools cell is ellipsized and remaining metrics continue in the visible summary scroll pane."
+        },
+        {
+          "path": "results-native-failed-preparation.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "c41d5d7b9dcd9064d580a09ce6a7d0f3b8a23ec0b36537a89ff3e2101f997fb1",
+          "reviewedFormat": "PNG converted from BMP without changing dimensions or RGB pixels",
+          "captureHashVerified": true,
+          "pixelIdentityVerified": true,
+          "result": "pass",
+          "finding": "Missing-input diagnosis, missing scientific-evidence notice and next steps are readable. Action states are consistent with the shown failed preparation; no labels or buttons overlap."
+        },
+        {
+          "path": "results-native-failure-guidance.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "807f25ddfe743255ab12438370635327b65009506d4c4208fe4608aa5b721231",
+          "reviewedFormat": "PNG converted from BMP without changing dimensions or RGB pixels",
+          "captureHashVerified": true,
+          "pixelIdentityVerified": true,
+          "result": "pass",
+          "finding": "Scrolled guidance displays the missing path, restore-or-rerun advice and no-invented-threshold interpretation clearly. Wrapped lines stay inside the summary pane and footer/actions remain separate."
+        },
+        {
+          "path": "results-native-empty-search.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "9f64c6c24f3c8bed991091f43d3491ac6737013af7121612ee57bf0a7fb7e38d",
+          "reviewedFormat": "PNG converted from BMP without changing dimensions or RGB pixels",
+          "captureHashVerified": true,
+          "pixelIdentityVerified": true,
+          "result": "pass",
+          "finding": "Empty search shows no stale selected row or summary, gives the clear-search instruction, and disables both result actions. Fixed labels and buttons remain readable."
+        }
+      ],
+      "limits": [
+        "Visual review is limited to these six retained hosted Windows captures at 96 DPI.",
+        "Intentional scroll-pane and DAG viewport clipping and list-cell ellipses are distinguished from fixed-control overlap.",
+        "This review does not establish high-DPI, multi-monitor, physical-trackpad or representative-PC acceptance.",
+        "Images alone do not establish functional behavior; native assertions remain in the separately retained updater and curated reports."
+      ],
+      "originalCapturesModified": false,
+      "starterSha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073",
+      "artifactMetadata": {
+        "id": 11625973983,
+        "name": "curated-windows-path with spaces-1",
+        "bytes": 27215801,
+        "digest": "sha256:91ca6e891d02e8095400ccd3990d5bfc3824a304ac5281b9522317158c26266d",
+        "source": "final-candidate/github-metadata-final.json"
+      }
+    },
+    {
+      "schema": 1,
+      "reviewedOn": "2026-10-09",
+      "case": "ordinary",
+      "kind": "update",
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "runId": 37952583789,
+      "assetSha256": "d75d5129e9b9feaef70faa62d5ea91049c0162df8c7bdc74c7bc81d1933eec8f",
+      "status": "passed",
+      "dpi": 96,
+      "captures": [
+        {
+          "path": "curated-native-catalogue.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "ea4f2ec25c0dd698869a3bba5572b0feed7aa03d7531178beb91d85f0f5fa9c4"
+        },
+        {
+          "path": "curated-native-loaded-workflow.bmp",
+          "width": 1040,
+          "height": 728,
+          "sha256": "e7e78723091f8f82f6dc6694897d81d8412ec2b9dc0d0ea4bdbdecb92d53cc5a"
+        },
+        {
+          "path": "results-native-filtered-summary.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "b6f825e454933fd6d16ef7bc0e34e11fa68ca76b6c6243abc6f468f2fb266d88"
+        },
+        {
+          "path": "results-native-failed-preparation.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "033947e44c1274c14e7598c4163243ddbb69fcb279c810f8bb88f1172cccfb99"
+        },
+        {
+          "path": "results-native-failure-guidance.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "8871ba623ad10ce8149b825c1727e4c453246401698db6bdb12e99df8418fbf5"
+        },
+        {
+          "path": "results-native-empty-search.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "9f64c6c24f3c8bed991091f43d3491ac6737013af7121612ee57bf0a7fb7e38d"
+        }
+      ],
+      "scope": "Six exact native captures independently inspected. No unintended overlap or clipping in fixed controls. Catalogue/detail panes intentionally scroll; the graph viewport clips off-screen nodes and abbreviates titles. Results Tools column uses ellipses. Failure guidance and no-QC-threshold wording are readable, and empty search clears content and disables result actions. No high-DPI, multi-monitor, physical-trackpad or temporal claim."
+    },
+    {
+      "schema": 1,
+      "reviewedUtc": "2026-10-09T15:35:55.924842+00:00",
+      "reviewer": "critical_review",
+      "workflowRun": 37952583789,
+      "pathCase": "spaces",
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+      "updateSha256": "d75d5129e9b9feaef70faa62d5ea91049c0162df8c7bdc74c7bc81d1933eec8f",
+      "nativeReport": "final-update/update-spaces/curated/native-curated.json",
+      "nativeReportSha256": "1e5f2f2f17bd09c95fa563c21cdf7c66dcc36c6b7561026cb63491f0c8ce1860",
+      "dpi": 96,
+      "capturesReviewed": 6,
+      "result": "pass",
+      "blockingFindings": [],
+      "captures": [
+        {
+          "path": "curated-native-catalogue.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "ea4f2ec25c0dd698869a3bba5572b0feed7aa03d7531178beb91d85f0f5fa9c4",
+          "reviewedFormat": "PNG converted from BMP without changing dimensions or RGB pixels",
+          "captureHashVerified": true,
+          "pixelIdentityVerified": true,
+          "result": "pass",
+          "finding": "Workflow names, availability, section labels and all action buttons are readable and separated. Longer requirement and notice text continues inside visible scroll panes; bottom-line clipping is viewport scrolling, not a fixed control overlap."
+        },
+        {
+          "path": "curated-native-loaded-workflow.bmp",
+          "width": 1040,
+          "height": 728,
+          "sha256": "e7e78723091f8f82f6dc6694897d81d8412ec2b9dc0d0ea4bdbdecb92d53cc5a",
+          "reviewedFormat": "PNG converted from BMP without changing dimensions or RGB pixels",
+          "captureHashVerified": true,
+          "pixelIdentityVerified": true,
+          "result": "pass",
+          "finding": "Navigation, workflow actions, tool-option labels and connected-source buttons are readable without overlap. Node-title ellipses and the right edge of the partially visible DAG node occur within the explicitly scrollable canvas."
+        },
+        {
+          "path": "results-native-filtered-summary.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "c9a6381eda46932073fa3adde912d957ec5f80463fdf090cd8f73a05dc0bd14b",
+          "reviewedFormat": "PNG converted from BMP without changing dimensions or RGB pixels",
+          "captureHashVerified": true,
+          "pixelIdentityVerified": true,
+          "result": "pass",
+          "finding": "Search, selected analysis, status, sample, started time, measured-result disclaimer and actions are readable. The long Tools cell is ellipsized and remaining metrics continue in the visible summary scroll pane."
+        },
+        {
+          "path": "results-native-failed-preparation.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "e824fed84a8c539d43838d9f897ce778a816abaf615d5e7550869688348f6051",
+          "reviewedFormat": "PNG converted from BMP without changing dimensions or RGB pixels",
+          "captureHashVerified": true,
+          "pixelIdentityVerified": true,
+          "result": "pass",
+          "finding": "Missing-input diagnosis, missing scientific-evidence notice and next steps are readable. Action states are consistent with the shown failed preparation; no labels or buttons overlap."
+        },
+        {
+          "path": "results-native-failure-guidance.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "32e1c9c44b78f42e4158826f3f25527028c27e013797ba8fcf6d86796b52e6a5",
+          "reviewedFormat": "PNG converted from BMP without changing dimensions or RGB pixels",
+          "captureHashVerified": true,
+          "pixelIdentityVerified": true,
+          "result": "pass",
+          "finding": "Scrolled guidance displays the missing path, restore-or-rerun advice and no-invented-threshold interpretation clearly. Wrapped lines stay inside the summary pane and footer/actions remain separate."
+        },
+        {
+          "path": "results-native-empty-search.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "9f64c6c24f3c8bed991091f43d3491ac6737013af7121612ee57bf0a7fb7e38d",
+          "reviewedFormat": "PNG converted from BMP without changing dimensions or RGB pixels",
+          "captureHashVerified": true,
+          "pixelIdentityVerified": true,
+          "result": "pass",
+          "finding": "Empty search shows no stale selected row or summary, gives the clear-search instruction, and disables both result actions. Fixed labels and buttons remain readable."
+        }
+      ],
+      "limits": [
+        "Visual review is limited to these six retained hosted Windows captures at 96 DPI.",
+        "Intentional scroll-pane and DAG viewport clipping and list-cell ellipses are distinguished from fixed-control overlap.",
+        "This review does not establish high-DPI, multi-monitor, physical-trackpad or representative-PC acceptance.",
+        "Images alone do not establish functional behavior; native assertions remain in the separately retained updater and curated reports."
+      ],
+      "originalCapturesModified": false,
+      "starterSha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073",
+      "updateReportSha256": "d8f37d80f4f020b212321861da74ae8eabeac32c638d2b31bca1a46e557d5273"
+    }
+  ]
+}

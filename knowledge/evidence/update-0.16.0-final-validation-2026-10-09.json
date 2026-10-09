@@ -1,0 +1,1402 @@
+{
+  "schema": 1,
+  "date": "2026-10-09",
+  "applicationVersion": "0.16.0",
+  "baseVersion": "0.11.0",
+  "scope": "Exact published 0.11.0 to frozen e855 0.16.0 updater validation in ordinary and space-containing native Windows paths.",
+  "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+  "validatorCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+  "runId": 37952583789,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37952583789",
+  "workflow": ".github/workflows/native-update-0.16.0.yml",
+  "status": "passed",
+  "success": true,
+  "nativeWindowsExecuted": true,
+  "published": false,
+  "archives": {
+    "native-workbench-0.16.0-starter-windows.zip": {
+      "bytes": 17846873,
+      "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+    },
+    "native-workbench-0.16.0-source.zip": {
+      "bytes": 47848425,
+      "sha256": "f746f00a82675c2cf52364a3b4d040721c6d06ac5605488efbdc0376ef5b7e44"
+    },
+    "native-workbench-pack-align-0.4.1.zip": {
+      "bytes": 575862,
+      "sha256": "3a08cf061f0b62c5502d1420115db3fcae2b04bf695ad3cfd1c3063de0fafa02"
+    },
+    "native-workbench-0.16.0-update-from-0.11.0.zip": {
+      "bytes": 13199905,
+      "sha256": "d75d5129e9b9feaef70faa62d5ea91049c0162df8c7bdc74c7bc81d1933eec8f"
+    }
+  },
+  "baseline": {
+    "file": "baseline-0.11.0.zip",
+    "bytes": 17044022,
+    "sha256": "e816e2f7cd5efe98af752fbf072fab00344ebaa2b6963795c2fbf4a86b5fa81c"
+  },
+  "candidateTransport": {
+    "file": "local-validation/release-0.16.0/final-candidate/candidate.zip",
+    "runId": 37952018931,
+    "id": 11626720550,
+    "bytes": 65972456,
+    "sha256": "2c17413e96cf113c4ddb007651ac45b471d74ba4b3b5aaeb0a579bd5009308cd"
+  },
+  "jobs": [
+    {
+      "id": 113894885400,
+      "name": "build",
+      "conclusion": "success",
+      "nonSuccessSteps": []
+    },
+    {
+      "id": 113895037811,
+      "name": "native (path with spaces)",
+      "conclusion": "success",
+      "nonSuccessSteps": []
+    },
+    {
+      "id": 113895037909,
+      "name": "native (ordinary)",
+      "conclusion": "success",
+      "nonSuccessSteps": []
+    }
+  ],
+  "artifacts": {
+    "updater": {
+      "id": 11627055274,
+      "name": "update-0.16.0-from-0.11.0-0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+      "bytes": 13209330,
+      "sha256": "516865ba8ba98350aa5eb75bdbc85d6830936fb26e70ecddcee3772a36dff2b0",
+      "run": "updater",
+      "file": "updater.zip"
+    },
+    "update-spaces": {
+      "id": 11626751095,
+      "name": "update-0.16.0-path with spaces-1",
+      "bytes": 823117,
+      "sha256": "8597b46472db64d3c54f266e41d80c8f99ba2495a9ec4a9b6140bf17feb3b134",
+      "run": "updater",
+      "file": "update-spaces.zip"
+    },
+    "update-ordinary": {
+      "id": 11626423134,
+      "name": "update-0.16.0-ordinary-1",
+      "bytes": 822343,
+      "sha256": "c4e9923ccdd6c48a928836d2798d0836fabcb67dc8b778f1dfba08c7dd5eeb43",
+      "run": "updater",
+      "file": "update-ordinary.zip"
+    }
+  },
+  "logs": {
+    "build-job.log": {
+      "bytes": 45180,
+      "sha256": "8961014c20de01fea87b7bf0d5dff12b458687e30a236cd978674420a7427b2a"
+    },
+    "ordinary-job.log": {
+      "bytes": 62832,
+      "sha256": "0d70a4d4b3f4979b494d74b5cf23efb3e55811d8472ae386cd3fbff46a0e2d8e"
+    },
+    "spaces-job.log": {
+      "bytes": 62897,
+      "sha256": "96424aeb5d2d904bcb96cf105bfb7e76c4408893be05cd0d285d43ea30cefa8d"
+    },
+    "github-jobs.json": {
+      "bytes": 5021,
+      "sha256": "1bb7afd28a62db6da9b8830e7072547c01f43ced7b05f51c166afef54d8dad53"
+    }
+  },
+  "sourceChecks": {
+    "total": 24,
+    "passed": 24,
+    "failed": 0,
+    "skipped": 0,
+    "suites": [
+      {
+        "path": "tests/test_core_update.py",
+        "passed": 17
+      },
+      {
+        "path": "tests/test_build_update_0160.py",
+        "passed": 7
+      }
+    ],
+    "log": {
+      "file": "build-job.log",
+      "bytes": 45180,
+      "sha256": "8961014c20de01fea87b7bf0d5dff12b458687e30a236cd978674420a7427b2a"
+    }
+  },
+  "build": {
+    "provenance": {
+      "member": "BUILD-UPDATE-PROVENANCE.json",
+      "bytes": 8838,
+      "sha256": "7032c4bdfe1253d72d1377d71905091a6b331e254921ef59aa12e35f1d093ccf"
+    },
+    "originalProvenance": {
+      "schema": 1,
+      "createdUtc": "2026-10-09T15:33:28.453963+00:00",
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "packagingCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+      "workflowRun": "37952583789",
+      "platform": "Linux-6.8.0-1064-azure-x86_64-with-glibc2.35",
+      "applicationRebuilt": false,
+      "nativeWindowsExecutedByBuilder": false,
+      "baseVersion": "0.11.0",
+      "targetVersion": "0.16.0",
+      "inputs": [
+        {
+          "file": "native-workbench-0.16.0-starter-windows.zip",
+          "bytes": 17846873,
+          "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+        },
+        {
+          "file": "baseline.zip",
+          "bytes": 17044022,
+          "sha256": "e816e2f7cd5efe98af752fbf072fab00344ebaa2b6963795c2fbf4a86b5fa81c"
+        },
+        {
+          "file": "UpdateWorkbench.exe",
+          "bytes": 409600,
+          "sha256": "49194449d7bb7cf29e55dcc3b27bcf1a4fb279e86acfe547905dfdd6f7370e9f"
+        }
+      ],
+      "baselineUrl": "https://github.com/comparativechrono/workbench/releases/download/app-v0.11.0/native-workbench-0.11.0-starter-windows.zip",
+      "baselineSha256": "e816e2f7cd5efe98af752fbf072fab00344ebaa2b6963795c2fbf4a86b5fa81c",
+      "starterSha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073",
+      "updateSha256": "d75d5129e9b9feaef70faa62d5ea91049c0162df8c7bdc74c7bc81d1933eec8f",
+      "archive": {
+        "file": "native-workbench-0.16.0-update-from-0.11.0.zip",
+        "bytes": 13199905,
+        "sha256": "d75d5129e9b9feaef70faa62d5ea91049c0162df8c7bdc74c7bc81d1933eec8f"
+      },
+      "baseManifestSha256": "a74af3967f609fff938e2b19402b7f426a0253d0756b3f69446f484530a5c764",
+      "targetManifestSha256": "7ea7e55caae3d60f1e2844eaee69f785088e23e04fde08d8db0cf7982794898f",
+      "launcherSha256": "49194449d7bb7cf29e55dcc3b27bcf1a4fb279e86acfe547905dfdd6f7370e9f",
+      "launcherSourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "updaterImplementationSha256": {
+        "apply_core_update.py": "38e923197054780548eb626d61c476303d340f4365a423dbbe1e0ebda7fd8592",
+        "apply_desktop_update.py": "25ad5c874b0f89aa6c13adf0c6350e3c174daff604c2d2312398fb740d5e210b",
+        "make_core_update.py": "fcfc2dd369a285f1028a058c51314daa97e7ba1a170b8459472173f83884373e"
+      },
+      "coreFilesVerified": 87,
+      "unchangedPackFiles": 143,
+      "excludedAdditionalPackFiles": {
+        "packs/align-0.4.1/PACK-README.md": "c92e13990c5c74775ecf25274ae37e1468c2677ad75e9ccb489e5e54878a0c26",
+        "packs/align-0.4.1/bin/minimap2.exe": "06bf0815a79552ffcb1291046c7828f2bf8b11d9ad7fe0d9309283e966e973fa",
+        "packs/align-0.4.1/bin/paircheck.exe": "4f2dda7e26b5c115a7edee936a8a059eb55ece244931b2799a62cebfcd44ecd4",
+        "packs/align-0.4.1/fixtures/reads1.fastq": "33053fdfd6ca5abbe34883f869958a2e621e7d513ada06f401e91ad256e9cc21",
+        "packs/align-0.4.1/fixtures/reads2.fastq": "18b5ceeefb0115120830005a21808489f2c471c78af4aaaf724cdf99697a80e1",
+        "packs/align-0.4.1/fixtures/reference.fa": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+        "packs/align-0.4.1/licenses/Cosmocc-3.3.10-README.md": "d0f502e2022b147c95f074f4c5069fde1d1bfbec861d34de46b8cde8e06e4c9b",
+        "packs/align-0.4.1/licenses/Cosmopolitan-LICENSE-3.3.10": "188101f17152d898b65719a4c4fc501aa71c16649cc37ebab534bcb3511c6127",
+        "packs/align-0.4.1/licenses/Native-Workbench-MIT.txt": "8fc4c4b462aafaf8349f53b191ceea7496d39c49463224aaa05d366fbb406682",
+        "packs/align-0.4.1/licenses/ape-loader-3.3.10-ISC-header.txt": "f68ed60f7f93609e20d3a9d61a15e35bce298c90accf39e44d6c7cd2e964c9a6",
+        "packs/align-0.4.1/licenses/cosmopolitan-3.3.10/LICENSE": "188101f17152d898b65719a4c4fc501aa71c16649cc37ebab534bcb3511c6127",
+        "packs/align-0.4.1/licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.fdlibm": "5238b63cbd39512ff69bf9cb2ce054c7bd416030cdb0d3aea1af2ac0e47b2894",
+        "packs/align-0.4.1/licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.freebsd": "4ce916521645614401dd3f625bd534a2281c5e494fe50a631718de1a7c3fb064",
+        "packs/align-0.4.1/licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.musl": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af",
+        "packs/align-0.4.1/licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.openbsd": "89094132def44cf6f815a6527633d3cd673ccf82be8975fd9b717412517fd884",
+        "packs/align-0.4.1/licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.optimized-routines": "fb9dee614d78bd7e408174cce841b5d5d50b1f46d2b806124c4923e37859211f",
+        "packs/align-0.4.1/licenses/cosmopolitan-3.3.10/notice-source/libc/intrin/armopt.c": "858985a8e6fbe9cfe264479a178989d7535112c734024764927e19eff8d6b22a",
+        "packs/align-0.4.1/licenses/cosmopolitan-3.3.10/notice-source/libc/intrin/musl.c": "1f74213f9cdc74844b125f841d72c29ecde8ec490e941050bcd5bc28499d551e",
+        "packs/align-0.4.1/licenses/cosmopolitan-3.3.10/notice-source/libc/log/err.c": "477bcfc04d773fda8b1d0b5b5a33dff62892deea8da759371592ef4a62a1d6dc",
+        "packs/align-0.4.1/licenses/cosmopolitan-3.3.10/notice-source/libc/str/smoothsort.c": "15bcb6ed194bb990e0bd50d5ecd0f8e3d7bac33e0cff935ca69f5fe27abe355c",
+        "packs/align-0.4.1/licenses/cosmopolitan-3.3.10/notice-source/libc/str/strlcpy.c": "538a04c2ba5fdaf976f9ecc2bc0f88650d65fa5e4fd574d70c04a374dc4068f6",
+        "packs/align-0.4.1/licenses/cosmopolitan-3.3.10/notice-source/libc/str/todd.c": "835e7eecbdc9b030b3d3623afcc55d89197bd4fd243378690573f829116ab5f8",
+        "packs/align-0.4.1/licenses/cosmopolitan-3.3.10/notice-source/third_party/gdtoa/gdtoa.c": "258ca8e769fda751b15e7e4ad02302d210745aa2e3524932e66bace1bab349af",
+        "packs/align-0.4.1/licenses/cosmopolitan-3.3.10/notice-source/third_party/gdtoa/gdtoa.internal.h": "bfcc967fdc6992454eeee1b47807b1af06b113353f969f80fe27b276a9b9cc97",
+        "packs/align-0.4.1/licenses/cosmopolitan-3.3.10/notice-source/third_party/gdtoa/notice.c": "3f5cefed7918c2094199e5b51f1d8a260a9cf0a625dd5bb6401bb9d2dd81b989",
+        "packs/align-0.4.1/licenses/cosmopolitan-3.3.10/notice-source/third_party/puff/puff.c": "4435ebd8f4ac8c26c0c1080c985a91e2359ac3495ce22d2bf1be08101d5ee215",
+        "packs/align-0.4.1/licenses/cosmopolitan-3.3.10/third_party/nsync/LICENSE.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+        "packs/align-0.4.1/licenses/cosmopolitan-3.3.10/third_party/zlib/LICENSE": "49337b3c5dd49bc752db59acfbe6b96f6f710749e6f2e1d1caf7a33712ed9bd7",
+        "packs/align-0.4.1/licenses/cosmopolitan-3.3.10/third_party/zlib/LICENSE.chromium": "368cca1106be99d39ecd32a38d8305585d802a475effb66380b91ffc9bcf709b",
+        "packs/align-0.4.1/licenses/cosmopolitan-3.3.10/third_party/zlib/LICENSE.zlib": "845efc77857d485d91fb3e0b884aaa929368c717ae8186b66fe1ed2495753243",
+        "packs/align-0.4.1/licenses/minimap2-MIT-LICENSE": "b68a701dea24796190ef9e860ff56e79d578c96183722cf4ec3738793e8e75f4",
+        "packs/align-0.4.1/licenses/minimap2-embedded-runtime-notices.txt": "9b12488a3fd9041ecbbcd75f199337e3a9d434a877d1e23589ac91ddf17ff063",
+        "packs/align-0.4.1/licenses/provenance.json": "7bc4c9061703d0a41e5a8c1eaae675193c7fc2ee3169d0bd1d169d9858256a37",
+        "packs/align-0.4.1/licenses/seqtk-MIT-LICENSE": "506c5701a91dbd753aaab8f34639ec98e038685dbb40d943f63465e291e739d8",
+        "packs/align-0.4.1/licenses/seqtk-embedded-runtime-notices.txt": "90c25a6ac2ca4865b23ce5711df435cadcbd4c58831c923696c7f37d20681c03",
+        "packs/align-0.4.1/licenses/windows-runtime/COPYING": "99a69660981156c21336fdb5661f89341b013c94e4bf9e1c7467b4745718397f",
+        "packs/align-0.4.1/licenses/windows-runtime/COPYING.MinGW-w64-runtime.txt": "1db8da07b436c68833c0673ffee3d9fcb2526047f3820b81661865dfedc79a1f",
+        "packs/align-0.4.1/licenses/windows-runtime/COPYING.MinGW-w64.txt": "f38e6194bd3bfa1b654f118e5acefe0aead437bbe669eee43957ccc65a7127f1",
+        "packs/align-0.4.1/licenses/windows-runtime/COPYING.winpthreads.txt": "63263614cdd29f2f93cba85e992f041b31f9fc7b4033692f31269489a8a1b177",
+        "packs/align-0.4.1/licenses/windows-runtime/LLVM-Apache-2.0-with-exceptions.txt": "8d85c1057d742e597985c7d4e6320b015a9139385cff4cbae06ffc0ebe89afee",
+        "packs/align-0.4.1/pack.ini": "7f8f36efbfd6a8255a98eabb06746fbcc5bbdb872f392a65ca3e79a586d04939",
+        "packs/align-0.4.1/workbench-checks.json": "9aba69715c792f7a95fca42426decc2b895305af0f03cb22cd92acc37f5deb90",
+        "packs/align-0.4.1/workbench-schema.json": "414460f4b438dd507233612873ea19a06b91489d66586b21afffcf846c9b682c"
+      },
+      "additionalPacksInstalledByUpdater": false,
+      "productionTrustUnchanged": true,
+      "setupSelectionUnchanged": true,
+      "result": {
+        "base_version": "0.11.0",
+        "target_version": "0.16.0",
+        "migration": false,
+        "replacement_files": 31,
+        "obsolete_files": 0,
+        "blob_bytes": 4097788,
+        "packs_changed": false
+      },
+      "scope": "Core update derived from the hash-pinned candidate without rebuilding the app. Existing packs and user files remain independent; align 0.4.1 is not installed by this updater and requires explicit separate import. Requires native Windows validation."
+    }
+  },
+  "paths": {
+    "ordinary": {
+      "artifact": {
+        "id": 11626423134,
+        "name": "update-0.16.0-ordinary-1",
+        "bytes": 822343,
+        "sha256": "c4e9923ccdd6c48a928836d2798d0836fabcb67dc8b778f1dfba08c7dd5eeb43",
+        "run": "updater",
+        "file": "update-ordinary.zip"
+      },
+      "report": {
+        "member": "update-native.json",
+        "bytes": 25903,
+        "sha256": "92de2f53263e964d073618f49ed6b11fad231ba3b3fccea083874ae1b1bccb15"
+      },
+      "gate": {
+        "path": "scripts/check_update_0160_windows.py",
+        "commit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+        "sha256": "cf804b3a690e00802b2abe909cc46121f310d9206272e217894cd471bde13b7f"
+      },
+      "originalReport": {
+        "schema": 1,
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "validationCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+        "workflowRun": "37952583789",
+        "gateSha256": "cf804b3a690e00802b2abe909cc46121f310d9206272e217894cd471bde13b7f",
+        "startedUtc": "2026-10-09T15:33:49.381467+00:00",
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "pythonVersion": "3.13.16",
+        "nativeWindowsHost": true,
+        "nativeWindowsExecuted": true,
+        "success": true,
+        "baseVersion": "0.11.0",
+        "appVersion": "0.16.0",
+        "starterSha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073",
+        "baselineSha256": "e816e2f7cd5efe98af752fbf072fab00344ebaa2b6963795c2fbf4a86b5fa81c",
+        "updateSha256": "d75d5129e9b9feaef70faa62d5ea91049c0162df8c7bdc74c7bc81d1933eec8f",
+        "scope": "Native updater CLI/private runtime, 0.11 data preservation, legacy result interpretation, optional pack absence and explicit import, curated native science/results GUI, and scientific/CWL checks; no updater picker UI or live reference download.",
+        "networkScope": "Private-host Python socket operations denied by audit hook; native subprocesses are not OS-firewalled.",
+        "checks": [
+          "Frozen baseline, accepted target and updater inventories match the exact archives and manifest identities.",
+          "Published 0.11.0 imports the exact optional reads pack, executes a real reference run, and saves independent settings and pipeline pins offline.",
+          "Native updater installs 0.16.0 and returns already-installed on repeat; every installed core file equals the accepted starter.",
+          "Starter and optional packs, saved settings/pins, completed setup selection/queue, existing real results, local registry/receipt and external reference bytes survive unchanged.",
+          "Updated host reloads exact saved pins, searches and honestly summarizes the actual 0.11 result, selects its preserved compatible reference, and executes offline with provenance in CWL and completed methods.",
+          "The upgraded app passes all seven real installation checks with align 0.4.1 absent; additional pack declarations do not change core ownership.",
+          "Reviewing an explicitly pinned reusable-index operation without align 0.4.1 blocks execution, names the exact version and advises explicit pack installation without changing the draft.",
+          "Explicit separate align 0.4.1 import installs its exact 43 files alongside preserved versions and resolves the reviewed index operation without changing a graph pin.",
+          "The same upgraded installation passes the unchanged 11-check curated gate, both known-answer native workflows, result search/reopen/failure diagnosis and six real GUI captures.",
+          "New curated runs and result interpretation leave every previous 0.11 scientific result and external reference file unchanged.",
+          "Exact packaged integrity check and all five starter scientific operations execute without failures or skips.",
+          "Results include a packed CWL v1.2 workflow tied to the frozen plan, real completion record and final export hash.",
+          "CWL source hashes, file roles, scientific parameters, complete output set, pack pins and reference metadata match frozen native provenance.",
+          "Every exported command/copy/binary-pipe definition expands to the actual native bridge argument record.",
+          "All five embedded CWL runners execute independently with packaged private Python and pinned native pack programs.",
+          "Independent CWL replay preserves 202 proper-pair SAM/BAM records and known starter:1351 G>A homozygous SNP truth.",
+          "Saved scientific DAG includes every actual dependency and avoids all unrelated cards with padding, including skipped ranks.",
+          "Updater inventories remain intact after execution with its own private runtime."
+        ],
+        "failures": [],
+        "skips": [],
+        "baselineReferenceRun": {
+          "folder": "D:\\a\\_temp\\ordinary\\baseline\\native-workbench\\results\\existing-reference-run\\run-20261009-153350-537d3351",
+          "nativeWindowsExecuted": true,
+          "contigs": 1,
+          "referenceSha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+          "runSha256": "c53df911ec2d48276a5224058fecf9970760be1ea001503ea6091545ac54a543",
+          "cwlChecked": false
+        },
+        "baselineRunId": "ffeed8fbf8094266936c1d66e4d9541a",
+        "updateAttempts": {
+          "install": {
+            "status": "installed",
+            "version": "0.16.0",
+            "migration": false,
+            "files_verified": 87,
+            "removed_files": 0,
+            "backup": "D:\\a\\_temp\\ordinary\\baseline\\native-workbench\\updates\\core-0.16.0-20261009-153351-b3ce6fd0\\backup",
+            "packs_changed": false,
+            "source_and_evidence_preserved": true
+          },
+          "repeat": {
+            "status": "already-installed",
+            "version": "0.16.0",
+            "files_verified": 87
+          }
+        },
+        "coreFilesVerified": 87,
+        "preservation": {
+          "files": 204,
+          "changes": {},
+          "additions": {
+            "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+          },
+          "fixtureNotice": "Created by this gate from the packaged synthetic FASTA; not downloaded."
+        },
+        "legacyResultSummary": {
+          "id": "ffeed8fbf8094266936c1d66e4d9541a",
+          "status": "completed",
+          "metrics": 0
+        },
+        "updatedReferenceRun": {
+          "folder": "D:\\a\\_temp\\ordinary\\baseline\\native-workbench\\results\\updated-reference-run\\run-20261009-153352-4b8362e3",
+          "nativeWindowsExecuted": true,
+          "contigs": 1,
+          "referenceSha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+          "runSha256": "49f492d378e71d78d151567bcce6386939cb991d07d1eed12c5f8e473c363123",
+          "cwlChecked": true
+        },
+        "withoutAdditionalPack": {
+          "present": false,
+          "installationChecks": 7,
+          "packFiles": 182
+        },
+        "manualAdditionalPackImport": {
+          "sha256": "3a08cf061f0b62c5502d1420115db3fcae2b04bf695ad3cfd1c3063de0fafa02",
+          "addedFiles": 43,
+          "existingPackFilesPreserved": 182
+        },
+        "curated": {
+          "schema": 1,
+          "success": true,
+          "appVersion": "0.16.0",
+          "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+          "assetName": "native-workbench-0.16.0-update-from-0.11.0.zip",
+          "assetSha256": "d75d5129e9b9feaef70faa62d5ea91049c0162df8c7bdc74c7bc81d1933eec8f",
+          "gateSha256": "6824624ab6be6ea685428a585956f78039ef97e2a9dac37ecb67def5b2fa24d1",
+          "platform": "Windows-2022Server-10.0.20348-SP0",
+          "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+          "startedUtc": "2026-10-09T15:33:55.352846+00:00",
+          "nativeWindowsExecuted": true,
+          "nativeGUILaunched": true,
+          "nativeGUIValidated": true,
+          "checks": [
+            "Offline catalogue exposes both synthetic workflows, known answers and available exact 0.4.0 dependency pins beside align 0.4.1.",
+            "alignment-qc: editable exact-pin graph executes through native tools with known synthetic alignment truth and hash-bound result measurements.",
+            "variant-calling: editable exact-pin graph executes through native tools with known synthetic alignment truth and hash-bound result measurements.",
+            "Result search filters recorded names case-insensitively, explicit sample and tool metadata; an unmatched query returns no records.",
+            "A deliberately changed result file is reported unavailable and contributes no trusted metrics; restoring its original bytes restores the summary.",
+            "A fresh private application process restores both results and reconstructs the same scientific summaries from persisted evidence.",
+            "Missing align 0.4.0 disables both curated workflows with exact-version guidance and preserves the draft; installed align 0.4.1 is never substituted.",
+            "An explicitly selected missing read path fails preparation, retains its actual cause and submitted analysis name, and supplies actionable input guidance without scientific metrics or a QC verdict.",
+            "Native curated window lists both workflows, shows exact pins and synthetic expected answers, and loads an editable workflow.",
+            "A fresh native desktop finds the named failed preparation and displays its recorded missing-file error, failed execution state and explicit corrective input guidance.",
+            "Native results search selects the recorded variant run, renders sample/tool versions and scientific metrics, and disables View for an empty result set."
+          ],
+          "skips": [],
+          "captures": [
+            {
+              "path": "curated-native-catalogue.bmp",
+              "width": 940,
+              "height": 680,
+              "sha256": "ea4f2ec25c0dd698869a3bba5572b0feed7aa03d7531178beb91d85f0f5fa9c4"
+            },
+            {
+              "path": "curated-native-loaded-workflow.bmp",
+              "width": 1040,
+              "height": 728,
+              "sha256": "e7e78723091f8f82f6dc6694897d81d8412ec2b9dc0d0ea4bdbdecb92d53cc5a"
+            },
+            {
+              "path": "results-native-filtered-summary.bmp",
+              "width": 940,
+              "height": 680,
+              "sha256": "b6f825e454933fd6d16ef7bc0e34e11fa68ca76b6c6243abc6f468f2fb266d88"
+            },
+            {
+              "path": "results-native-failed-preparation.bmp",
+              "width": 940,
+              "height": 680,
+              "sha256": "033947e44c1274c14e7598c4163243ddbb69fcb279c810f8bb88f1172cccfb99"
+            },
+            {
+              "path": "results-native-failure-guidance.bmp",
+              "width": 940,
+              "height": 680,
+              "sha256": "8871ba623ad10ce8149b825c1727e4c453246401698db6bdb12e99df8418fbf5"
+            },
+            {
+              "path": "results-native-empty-search.bmp",
+              "width": 940,
+              "height": 680,
+              "sha256": "9f64c6c24f3c8bed991091f43d3491ac6737013af7121612ee57bf0a7fb7e38d"
+            }
+          ],
+          "limits": [
+            "Small bundled synthetic inputs and exact pack pins; no clinical accuracy, biological dataset or capacity claim.",
+            "Metrics are recorded measurements with explicit source identities, not inferred sample QC pass/fail.",
+            "Private scientific hosts deny Python socket operations; this is not operating-system firewall isolation.",
+            "Hosted display DPI only; physical trackpad, high DPI, multi-monitor and institutional acceptance remain separate."
+          ],
+          "appFiles": {
+            "NativeWorkbench.exe": "4c09aa5b0ebc850e4659041b6daf4769723d6bb16a112c0e9caeb11f0088ef52",
+            "WorkbenchBridge.exe": "6eadbad2c19aa0193f52b6b6c0b10ae63cbd86052a116eb166d5ab5c5259c36f",
+            "workspace\\app_version.py": "c3273cb842be050edf6a65d3c7034c2e8628191656794bc15115fd936c8cdd0c",
+            "workspace\\catalog.py": "8269f3ff23500c8f5b3321d475573b94f960d0534271cf724a8ac3621adc311f",
+            "workspace\\core_checks.py": "431598722c8c261683e123b255d008210abedb13e90e68d7bec0e6b1df905d70",
+            "workspace\\curated_workflows.py": "0f476e0e49b08d8cb27f3c38c3bb3ecad9b2590ed8bbe4b351a4e92145b4f23d",
+            "workspace\\cwl_export.py": "5773f89433bc11f3cc9708e33994ec80f7c7bf8f6465c9ac8bb8da11c8181596",
+            "workspace\\dag_routing.py": "eb79a385a6426e8ce9778124620fe48c69e8c6ca3a7a9351b95780c99e869fe4",
+            "workspace\\desktop_host.py": "8b1cda931bfda3bcabce1020eb282ea2bd2d47301f220dd8e9d10e994faf0ed5",
+            "workspace\\desktop_model.py": "3904ae9e38fe214110e472167c292b183c39dca60ce01407c3533474227597f6",
+            "workspace\\diagnostics.py": "fa743c69179a13b66dc000348a3e2954616a349163f1103a8cd9f50d61793124",
+            "workspace\\engine.py": "888927ee7019a5317db0458d34a72f2989fd6e6dc0b49e61a0f15fe96ccf8363",
+            "workspace\\example.py": "fb558de8dc3f49f68550af3e08d768e8a99c5cd9e8d466ca357dcecc3dd699b3",
+            "workspace\\execution_resources.py": "33329a740602199f2931b90fde638a0780ed6fa28d2cf15aa15518d8ee8bdae9",
+            "workspace\\file_io.py": "ab6034e617504c8c264c9c53201174fdae88440765db114f01ce39eafcb2d67e",
+            "workspace\\pack_checks.py": "d1fac03179b5c1d6a851e1a1f72433ffe16b183fb085608b6a34c6c7873c7a97",
+            "workspace\\pack_manager.py": "282b8370cccd6d86d00f6d2a85fe99669eb1d9b9953a9327c65c323a4a780b5d",
+            "workspace\\pack_security.py": "2d1fa4a4267f5cecb0d583c7b43fc59dc8645125c59e3db69c4d6fa307ff6cc0",
+            "workspace\\performance.py": "8f2e985ae95cf1856de64a5e051f681b0e78a9974dc312d0daf55331a523c5b6",
+            "workspace\\project_manager.py": "f01946694516b4a4fbe98ef8b14715a3e0e446d385b94438a26afc713ec86cdf",
+            "workspace\\readiness.py": "e8fdbaba0aa430a539e9214b711e14466e9597456527ec33eed687f898c33676",
+            "workspace\\recovery.py": "568d48098fe7fb01cfa800ac1fd52373d4d1bbff689f49207242065f9901d6b5",
+            "workspace\\reference_indexes.py": "fb6b20dd123f4d83896edc364868da6fdf779f915e4ae2e9e110cce1c1740203",
+            "workspace\\reference_library.py": "2416af2e3fb9aa80bcf1473037f4e248f9099600eb06ee707fee4b525b11baf2",
+            "workspace\\reference_manager.py": "af980e1ded0e01eb214424d29147043a21762b4e4708cf675dd0e8b183464cf6",
+            "workspace\\reference_ncbi.py": "1b1dec1af7c8cefbf94a49c6508ecfeacd2d93b89d3f72c041b18b04e526f5e9",
+            "workspace\\reference_provenance.py": "e2915eb46e3ca86cbf89297dadeec48925f2c9a667e85057bc3b9986e2735ac9",
+            "workspace\\reference_provider.py": "3bf51daae305ef16c0cff0a6bc2b65f76bc6013f7b1456da07fa8d869c5f0832",
+            "workspace\\reference_transfer.py": "105662115fbc1e477e40d898417a04ef81d1015241512af33b2d30a100ccde8d",
+            "workspace\\results_summary.py": "f132010ee4c50ad0d135ac62899c910bd9a747b56a58dc9fa30fe32cc0279ce1",
+            "workspace\\run_queue.py": "2dbb8387ba758259a68dc213ade820be027529e4f1d622e101ed96367c97cf6c",
+            "workspace\\sample_table.py": "a3ce7ac6f31fd044adf6abc90d7c8b83b5a57630212ebca973022ba4a7570f4e",
+            "workspace\\service.py": "5d229633b7bd90555c06c8e1bccf49930a8f9e0d84fa658b3aa29929da65f39b",
+            "workspace\\setup_manager.py": "4432c2c6c6091ebe4aeb57e29555e4d21cbe34b9d3ad8a2fef58fa13022fb853",
+            "workspace\\verify_installation.py": "dc33c51ebd52f9a812dfa6df0fcd083a04d144769edc0caa50147edab32358cf"
+          },
+          "failedPreparation": {
+            "id": "190b793b3a754f259216b6b2bc1915bb",
+            "name": "Missing input training diagnosis",
+            "missingInput": "D:\\a\\_temp\\update-evidence\\curated\\explicitly-selected-missing-reads1.fastq",
+            "message": "Select an existing ordinary file: D:\\a\\_temp\\update-evidence\\curated\\explicitly-selected-missing-reads1.fastq",
+            "action": "Restore the exact recorded input bytes at their original paths, or prepare a new run with explicitly selected replacement inputs. Do not edit recorded hashes.",
+            "stage": "preparation",
+            "nativeScientificStepsExecuted": 0
+          },
+          "scientificRuns": {
+            "alignment-qc": {
+              "id": "f650548f7f2142949f2dc48d3ccfacae",
+              "folder": "D:\\a\\_temp\\update-evidence\\curated\\scientific-results\\run-20261009-153355-adcbe82c",
+              "planSha256": "0bef13f470c2c4dc15701369d5c767bff07fb9495d15051c9d812262e502641a",
+              "runSha256": "fe98dff4b1394a0fef47571da76b6769855e11f7ace3d8fcd77e0dbe4ee5099a",
+              "answer": {
+                "alignmentRecords": 202,
+                "mappedProperPairs": 202,
+                "sample": "starter",
+                "reference": "starter:3000"
+              },
+              "outputHashes": {
+                "step-1::sam": {
+                  "sam": "03fd121c45a1e7994368dacafaaddc20d829168b4e516346bcfdc24e45f60b09"
+                },
+                "step-1::pair-check": {
+                  "pair-check": "2c25256e25928cff40cffb9069f201138ae4bd083e3ab626b82cd55099e1c436"
+                },
+                "step-2::bam": {
+                  "bam": "578b74f2c8eadc58300de8f808e766859ad0a68bdfdba944c0be24240844040b"
+                },
+                "step-2::duplicate-stats": {
+                  "duplicate-stats": "6367de7ad874a1736e962f0fc99f7606c52457c909636cebbc8786169ab10348"
+                },
+                "step-2::flagstat": {
+                  "flagstat": "b9b7e24ae5f0f1f69ef4feb916513d0acc088f3d18b8d75664c38e5ce092cf8f"
+                },
+                "step-2::alignment-stats": {
+                  "alignment-stats": "c4ea83478420ffa398f69914a76ff4040ab4816be8b968bb82cb50c3dc804f89"
+                },
+                "step-2::bam-index": {
+                  "bam-index": "dd964650654e1b15792160162bdcb14e31c877ee1f75ccb980007fb9472ea111"
+                },
+                "step-2::names": {
+                  "names": "6c3233a916fc238e86dc003a7437e9dfc67887e2c7baa63190d64c15272de0d2"
+                },
+                "step-2::fixed": {
+                  "fixed": "6f14624033379d3e0c6ce401ccbcbd4ab5b7419e5211f05e2f9586003ed55d2e"
+                },
+                "step-2::coordinates": {
+                  "coordinates": "567de21a6c94ccb532fbb17acf89f0ef2f4c195ea67abefb92c850b742dc9e9c"
+                },
+                "step-3::report": {
+                  "report": "4c26156f20d414717b3d9636ac42e8ddee12f8cbda11734b77574c4d07b51115"
+                }
+              },
+              "expectedSummaryMetrics": {
+                "samtools.stats.raw_total_sequences": 202,
+                "samtools.stats.reads_mapped": 202,
+                "samtools.stats.average_length": 100,
+                "samtools.flagstat.total.qc_passed": 202,
+                "samtools.flagstat.mapped.qc_passed": 202
+              }
+            },
+            "variant-calling": {
+              "id": "01be9b46712849a39273e62fc6ebfb0e",
+              "folder": "D:\\a\\_temp\\update-evidence\\curated\\scientific-results\\run-20261009-153356-89a12776",
+              "planSha256": "a0495e0036b91dd8dc248a257c818b698456924ca715149fdc1b47c6c952f9a5",
+              "runSha256": "0836fc0c223e276dce3a94ee1fdc9c35963e43ba543c909ad46b9157ab788909",
+              "answer": {
+                "alignmentRecords": 202,
+                "mappedProperPairs": 202,
+                "sample": "starter",
+                "reference": "starter:3000",
+                "variant": "starter:1351 G>A GT=1/1"
+              },
+              "outputHashes": {
+                "step-1::sam": {
+                  "sam": "03fd121c45a1e7994368dacafaaddc20d829168b4e516346bcfdc24e45f60b09"
+                },
+                "step-1::pair-check": {
+                  "pair-check": "2c25256e25928cff40cffb9069f201138ae4bd083e3ab626b82cd55099e1c436"
+                },
+                "step-2::bam": {
+                  "bam": "684ca96b8cb258a1a7f015356cbe7ffaeddad8b4a76dc0965c68cd1a87748a6b"
+                },
+                "step-2::duplicate-stats": {
+                  "duplicate-stats": "747a9c425b4e99888c6264baeddc34e0a9cdae16e15b930e74f1ae6aa6828b15"
+                },
+                "step-2::flagstat": {
+                  "flagstat": "b9b7e24ae5f0f1f69ef4feb916513d0acc088f3d18b8d75664c38e5ce092cf8f"
+                },
+                "step-2::alignment-stats": {
+                  "alignment-stats": "3aea11dae176942d9c7c1a4edfc369d65d6a20956743c4592d70ef5d377817d1"
+                },
+                "step-2::bam-index": {
+                  "bam-index": "12dc637cc0b108e8a2cd735e97b6d19bbe548454a3e0e8f38989084340224b8c"
+                },
+                "step-2::names": {
+                  "names": "e662b6e4781b16d531dbdef7aed014ee20e2b9f8d39d75725ed8197991ab68f3"
+                },
+                "step-2::fixed": {
+                  "fixed": "c8626e8d49b3ad691440769ae38025c9ae454be4e80b42220dd81acfee9c83bd"
+                },
+                "step-2::coordinates": {
+                  "coordinates": "23ee07c5dc966d99252cec9effddb46dcc3fb26f9c9c9a773498948921bb0a06"
+                },
+                "step-3::variants": {
+                  "variants": "e228fd54b9300f905aeadce4289c6faa0cf4ddf265a45d34ab136325ecd243b1"
+                },
+                "step-3::variant-stats": {
+                  "variant-stats": "3566c6e3b716726ac5f04d6bbbdab7607b4a3f8e748e884695813692294d64ed"
+                },
+                "step-3::variants-index": {
+                  "variants-index": "725f277f70558ea6e9b00f5ee791e08eff8407ab90478414e84ecda1e600e988"
+                },
+                "step-3::pileup": {
+                  "pileup": "67848a7452efa5a4e5eec88b8bac27c4843d7a12266d1abda1352f166dcc5b69"
+                },
+                "step-3::calls": {
+                  "calls": "3336246a825638081e479fe2042341a650f23c691cd233704b4669751a80afc8"
+                },
+                "step-3::normalized": {
+                  "normalized": "4d35c77c749403df0d9415648eec7e17ff3d34a04badbd4f73776f726d34adf9"
+                },
+                "step-3::reference": {
+                  "reference": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee"
+                },
+                "step-3::reference-index": {
+                  "reference-index": "6bf365006e0d9d03de4e0fbfdfc082c6e5bee611888e54450bc2516614ae95a3"
+                },
+                "step-4::statistics": {
+                  "statistics": "3566c6e3b716726ac5f04d6bbbdab7607b4a3f8e748e884695813692294d64ed"
+                },
+                "step-5::report": {
+                  "report": "4da4367cae573527af695d67b7170ad045df8e027ccf050d247d6fe58ca89391"
+                }
+              },
+              "expectedSummaryMetrics": {
+                "samtools.stats.raw_total_sequences": 202,
+                "samtools.stats.reads_mapped": 202,
+                "samtools.stats.average_length": 100,
+                "samtools.flagstat.total.qc_passed": 202,
+                "samtools.flagstat.mapped.qc_passed": 202,
+                "bcftools.stats.number_of_records": 1,
+                "bcftools.stats.number_of_snps": 1,
+                "bcftools.stats.number_of_indels": 0,
+                "bcftools.stats.number_of_samples": 1
+              }
+            }
+          },
+          "networkSocketOperationsDeniedInScientificHosts": true,
+          "dpi": 96,
+          "completedUtc": "2026-10-09T15:34:00.718415+00:00",
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0
+        },
+        "legacyResultAndReferenceFilesPreservedAfterNewFeatures": 17,
+        "dag": {
+          "cards": 7,
+          "edges": 8,
+          "segments": 18,
+          "skipRankEdges": 2,
+          "paddingChecked": 9,
+          "sha256": "91b94a4a526281f848fdf090a1bac59e50a3be244910b9678675b21c265dfbc6"
+        },
+        "science": {
+          "networkSocketOperationsDeniedForHost": true,
+          "nativeWindowsExecuted": true,
+          "nativeCommandsCompared": 18,
+          "outputsIndependentlyHashed": 20,
+          "cwlRunnerReplays": [
+            {
+              "step": "step_1",
+              "scriptSha256": "39e0360c49b2e1bf1478a6d5b5f398f4fbe9f18f3fdb6e7584a03aba855b8da2",
+              "exitCode": 0,
+              "outputs": [
+                {
+                  "id": "sam",
+                  "sha256": "03fd121c45a1e7994368dacafaaddc20d829168b4e516346bcfdc24e45f60b09"
+                },
+                {
+                  "id": "pair-check",
+                  "sha256": "2c25256e25928cff40cffb9069f201138ae4bd083e3ab626b82cd55099e1c436"
+                }
+              ]
+            },
+            {
+              "step": "step_2",
+              "scriptSha256": "62e20f8334aa67d2d904f25083834af4df53e881bdef3cb320c37a169787dd3f",
+              "exitCode": 0,
+              "outputs": [
+                {
+                  "id": "bam",
+                  "sha256": "5c577d0798667f9f30d3e93e4e078a9bc9ed609dc7d178b9bf2dba4b5859c9d9"
+                },
+                {
+                  "id": "duplicate-stats",
+                  "sha256": "226313f0085c02deb259bd24a437c26c8ac87a2cfd510465509b1f8cc8b705b3"
+                },
+                {
+                  "id": "flagstat",
+                  "sha256": "b9b7e24ae5f0f1f69ef4feb916513d0acc088f3d18b8d75664c38e5ce092cf8f"
+                },
+                {
+                  "id": "alignment-stats",
+                  "sha256": "450d9b9fd90e1115c0a50a24a62044ee3cba6d03e8ba3890a1c2253463fcf21f"
+                },
+                {
+                  "id": "bam-index",
+                  "sha256": "9b9c6f74e98d26f6fb37124b30e92c77c44d9ef58fb2244807f4926b85e220ef"
+                },
+                {
+                  "id": "names",
+                  "sha256": "7a4914d72c42e8a9f826054224c40e6cf177991e0ec6c1e419ffc365be5852b1"
+                },
+                {
+                  "id": "fixed",
+                  "sha256": "c60215caed7efe152de1ed44acf9c977e5605ec1419f8e4bacce8db1ff1ec799"
+                },
+                {
+                  "id": "coordinates",
+                  "sha256": "608dd4eff5691244e964015ab37c21e7379cdfc70e9ddc1405ff29ddccdb60c3"
+                }
+              ]
+            },
+            {
+              "step": "step_3",
+              "scriptSha256": "55ed0a4315f34b073402058068dda3d17fd5a1cd420a1af227d34a56d9b3c019",
+              "exitCode": 0,
+              "outputs": [
+                {
+                  "id": "variants",
+                  "sha256": "5e0acb4652ec2cb683683496035c8baff51d088e447be4ac8f1d33c7742841e2"
+                },
+                {
+                  "id": "variant-stats",
+                  "sha256": "b5ca20bcdcd605ca341d24e0bde6c4e3b685a527f975b882b3626e5bbecc999a"
+                },
+                {
+                  "id": "variants-index",
+                  "sha256": "44b73415cc9d2de6e6c5305c2515cdd88179361b77527bc324ec255895bf8920"
+                },
+                {
+                  "id": "pileup",
+                  "sha256": "9f9ce36a49917c099094b691495c7a74f37fb9520bec50b026ddae0b37f3debf"
+                },
+                {
+                  "id": "calls",
+                  "sha256": "8ddd52a387abde4e13c1d4078d8a655594886167e53e34ff3faee083ba45f324"
+                },
+                {
+                  "id": "normalized",
+                  "sha256": "2aa0058286094fa5e059517f1fd2adcb95b906b9735299e0032a265735fbff59"
+                },
+                {
+                  "id": "reference",
+                  "sha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee"
+                },
+                {
+                  "id": "reference-index",
+                  "sha256": "6bf365006e0d9d03de4e0fbfdfc082c6e5bee611888e54450bc2516614ae95a3"
+                }
+              ]
+            },
+            {
+              "step": "step_4",
+              "scriptSha256": "ec2896685a5c666104cb21d2bb8c8ffa93cd895c1d1b0908cb92078528177967",
+              "exitCode": 0,
+              "outputs": [
+                {
+                  "id": "statistics",
+                  "sha256": "b5ca20bcdcd605ca341d24e0bde6c4e3b685a527f975b882b3626e5bbecc999a"
+                }
+              ]
+            },
+            {
+              "step": "step_5",
+              "scriptSha256": "03bc8f86144fe2d9e85d18dc898bedfb0f44c545654e542c32beae82c11b190a",
+              "exitCode": 0,
+              "outputs": [
+                {
+                  "id": "report",
+                  "sha256": "9b2ff4371cd64660897343936eab933fb680e5c8cc6c3cbc4eecf80b1d6e93c9"
+                }
+              ]
+            }
+          ],
+          "alignmentRecords": 202,
+          "variantTruth": "starter:1351 G>A; GT=1/1",
+          "scope": "Native private-host execution plus embedded-runner replay; not a Windows cwltool invocation."
+        },
+        "passed": 18,
+        "finishedUtc": "2026-10-09T15:34:04.101027+00:00"
+      },
+      "retainedNestedReport": {
+        "member": "curated/native-curated.json",
+        "bytes": 14644,
+        "sha256": "e7e64f6dc5ba0777a62ec85585a972aa3fd89729c18c2dcc0ae8b1b3fb8cbbc2"
+      },
+      "independentPreservationAudit": {
+        "before": {
+          "bytes": 28832,
+          "sha256": "d85eb8e982035142b4c172a1ee9249f8f4e6953b2c3a153f9ba82b1522b2db35"
+        },
+        "after": {
+          "bytes": 28929,
+          "sha256": "2052106eb34598c24fa998618a17745a92123a1c0a22de911bac7280ea415a25"
+        },
+        "unchangedFiles": 204,
+        "changes": {},
+        "additions": {
+          "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+        },
+        "additionMeaning": "One NUL byte in the ephemeral user-data/session.lock; no prior file changed.",
+        "baselineAndUpdatedRunRecordHashesVerified": true,
+        "legacyResultIdMatchesBaseline": true
+      }
+    },
+    "spaces": {
+      "artifact": {
+        "id": 11626751095,
+        "name": "update-0.16.0-path with spaces-1",
+        "bytes": 823117,
+        "sha256": "8597b46472db64d3c54f266e41d80c8f99ba2495a9ec4a9b6140bf17feb3b134",
+        "run": "updater",
+        "file": "update-spaces.zip"
+      },
+      "report": {
+        "member": "update-native.json",
+        "bytes": 25927,
+        "sha256": "d8f37d80f4f020b212321861da74ae8eabeac32c638d2b31bca1a46e557d5273"
+      },
+      "gate": {
+        "path": "scripts/check_update_0160_windows.py",
+        "commit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+        "sha256": "cf804b3a690e00802b2abe909cc46121f310d9206272e217894cd471bde13b7f"
+      },
+      "originalReport": {
+        "schema": 1,
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "validationCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+        "workflowRun": "37952583789",
+        "gateSha256": "cf804b3a690e00802b2abe909cc46121f310d9206272e217894cd471bde13b7f",
+        "startedUtc": "2026-10-09T15:33:52.971130+00:00",
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "pythonVersion": "3.13.16",
+        "nativeWindowsHost": true,
+        "nativeWindowsExecuted": true,
+        "success": true,
+        "baseVersion": "0.11.0",
+        "appVersion": "0.16.0",
+        "starterSha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073",
+        "baselineSha256": "e816e2f7cd5efe98af752fbf072fab00344ebaa2b6963795c2fbf4a86b5fa81c",
+        "updateSha256": "d75d5129e9b9feaef70faa62d5ea91049c0162df8c7bdc74c7bc81d1933eec8f",
+        "scope": "Native updater CLI/private runtime, 0.11 data preservation, legacy result interpretation, optional pack absence and explicit import, curated native science/results GUI, and scientific/CWL checks; no updater picker UI or live reference download.",
+        "networkScope": "Private-host Python socket operations denied by audit hook; native subprocesses are not OS-firewalled.",
+        "checks": [
+          "Frozen baseline, accepted target and updater inventories match the exact archives and manifest identities.",
+          "Published 0.11.0 imports the exact optional reads pack, executes a real reference run, and saves independent settings and pipeline pins offline.",
+          "Native updater installs 0.16.0 and returns already-installed on repeat; every installed core file equals the accepted starter.",
+          "Starter and optional packs, saved settings/pins, completed setup selection/queue, existing real results, local registry/receipt and external reference bytes survive unchanged.",
+          "Updated host reloads exact saved pins, searches and honestly summarizes the actual 0.11 result, selects its preserved compatible reference, and executes offline with provenance in CWL and completed methods.",
+          "The upgraded app passes all seven real installation checks with align 0.4.1 absent; additional pack declarations do not change core ownership.",
+          "Reviewing an explicitly pinned reusable-index operation without align 0.4.1 blocks execution, names the exact version and advises explicit pack installation without changing the draft.",
+          "Explicit separate align 0.4.1 import installs its exact 43 files alongside preserved versions and resolves the reviewed index operation without changing a graph pin.",
+          "The same upgraded installation passes the unchanged 11-check curated gate, both known-answer native workflows, result search/reopen/failure diagnosis and six real GUI captures.",
+          "New curated runs and result interpretation leave every previous 0.11 scientific result and external reference file unchanged.",
+          "Exact packaged integrity check and all five starter scientific operations execute without failures or skips.",
+          "Results include a packed CWL v1.2 workflow tied to the frozen plan, real completion record and final export hash.",
+          "CWL source hashes, file roles, scientific parameters, complete output set, pack pins and reference metadata match frozen native provenance.",
+          "Every exported command/copy/binary-pipe definition expands to the actual native bridge argument record.",
+          "All five embedded CWL runners execute independently with packaged private Python and pinned native pack programs.",
+          "Independent CWL replay preserves 202 proper-pair SAM/BAM records and known starter:1351 G>A homozygous SNP truth.",
+          "Saved scientific DAG includes every actual dependency and avoids all unrelated cards with padding, including skipped ranks.",
+          "Updater inventories remain intact after execution with its own private runtime."
+        ],
+        "failures": [],
+        "skips": [],
+        "baselineReferenceRun": {
+          "folder": "D:\\a\\_temp\\path with spaces\\baseline\\native-workbench\\results\\existing-reference-run\\run-20261009-153354-e29e7ce5",
+          "nativeWindowsExecuted": true,
+          "contigs": 1,
+          "referenceSha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+          "runSha256": "480d142adaa2cf4932f3e05514ea6b57fce00a466505a3b6da5fcfab7d34a11d",
+          "cwlChecked": false
+        },
+        "baselineRunId": "1e1bc62557d1402582c918e0e24d1c35",
+        "updateAttempts": {
+          "install": {
+            "status": "installed",
+            "version": "0.16.0",
+            "migration": false,
+            "files_verified": 87,
+            "removed_files": 0,
+            "backup": "D:\\a\\_temp\\path with spaces\\baseline\\native-workbench\\updates\\core-0.16.0-20261009-153355-051e9efb\\backup",
+            "packs_changed": false,
+            "source_and_evidence_preserved": true
+          },
+          "repeat": {
+            "status": "already-installed",
+            "version": "0.16.0",
+            "files_verified": 87
+          }
+        },
+        "coreFilesVerified": 87,
+        "preservation": {
+          "files": 204,
+          "changes": {},
+          "additions": {
+            "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+          },
+          "fixtureNotice": "Created by this gate from the packaged synthetic FASTA; not downloaded."
+        },
+        "legacyResultSummary": {
+          "id": "1e1bc62557d1402582c918e0e24d1c35",
+          "status": "completed",
+          "metrics": 0
+        },
+        "updatedReferenceRun": {
+          "folder": "D:\\a\\_temp\\path with spaces\\baseline\\native-workbench\\results\\updated-reference-run\\run-20261009-153356-cae265ba",
+          "nativeWindowsExecuted": true,
+          "contigs": 1,
+          "referenceSha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+          "runSha256": "4b724e6d4dda580c3c43da7d499303c98b8ba9b9973ce802c1e6cfa391011947",
+          "cwlChecked": true
+        },
+        "withoutAdditionalPack": {
+          "present": false,
+          "installationChecks": 7,
+          "packFiles": 182
+        },
+        "manualAdditionalPackImport": {
+          "sha256": "3a08cf061f0b62c5502d1420115db3fcae2b04bf695ad3cfd1c3063de0fafa02",
+          "addedFiles": 43,
+          "existingPackFilesPreserved": 182
+        },
+        "curated": {
+          "schema": 1,
+          "success": true,
+          "appVersion": "0.16.0",
+          "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+          "assetName": "native-workbench-0.16.0-update-from-0.11.0.zip",
+          "assetSha256": "d75d5129e9b9feaef70faa62d5ea91049c0162df8c7bdc74c7bc81d1933eec8f",
+          "gateSha256": "6824624ab6be6ea685428a585956f78039ef97e2a9dac37ecb67def5b2fa24d1",
+          "platform": "Windows-2022Server-10.0.20348-SP0",
+          "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+          "startedUtc": "2026-10-09T15:33:59.290066+00:00",
+          "nativeWindowsExecuted": true,
+          "nativeGUILaunched": true,
+          "nativeGUIValidated": true,
+          "checks": [
+            "Offline catalogue exposes both synthetic workflows, known answers and available exact 0.4.0 dependency pins beside align 0.4.1.",
+            "alignment-qc: editable exact-pin graph executes through native tools with known synthetic alignment truth and hash-bound result measurements.",
+            "variant-calling: editable exact-pin graph executes through native tools with known synthetic alignment truth and hash-bound result measurements.",
+            "Result search filters recorded names case-insensitively, explicit sample and tool metadata; an unmatched query returns no records.",
+            "A deliberately changed result file is reported unavailable and contributes no trusted metrics; restoring its original bytes restores the summary.",
+            "A fresh private application process restores both results and reconstructs the same scientific summaries from persisted evidence.",
+            "Missing align 0.4.0 disables both curated workflows with exact-version guidance and preserves the draft; installed align 0.4.1 is never substituted.",
+            "An explicitly selected missing read path fails preparation, retains its actual cause and submitted analysis name, and supplies actionable input guidance without scientific metrics or a QC verdict.",
+            "Native curated window lists both workflows, shows exact pins and synthetic expected answers, and loads an editable workflow.",
+            "A fresh native desktop finds the named failed preparation and displays its recorded missing-file error, failed execution state and explicit corrective input guidance.",
+            "Native results search selects the recorded variant run, renders sample/tool versions and scientific metrics, and disables View for an empty result set."
+          ],
+          "skips": [],
+          "captures": [
+            {
+              "path": "curated-native-catalogue.bmp",
+              "width": 940,
+              "height": 680,
+              "sha256": "ea4f2ec25c0dd698869a3bba5572b0feed7aa03d7531178beb91d85f0f5fa9c4"
+            },
+            {
+              "path": "curated-native-loaded-workflow.bmp",
+              "width": 1040,
+              "height": 728,
+              "sha256": "e7e78723091f8f82f6dc6694897d81d8412ec2b9dc0d0ea4bdbdecb92d53cc5a"
+            },
+            {
+              "path": "results-native-filtered-summary.bmp",
+              "width": 940,
+              "height": 680,
+              "sha256": "c9a6381eda46932073fa3adde912d957ec5f80463fdf090cd8f73a05dc0bd14b"
+            },
+            {
+              "path": "results-native-failed-preparation.bmp",
+              "width": 940,
+              "height": 680,
+              "sha256": "e824fed84a8c539d43838d9f897ce778a816abaf615d5e7550869688348f6051"
+            },
+            {
+              "path": "results-native-failure-guidance.bmp",
+              "width": 940,
+              "height": 680,
+              "sha256": "32e1c9c44b78f42e4158826f3f25527028c27e013797ba8fcf6d86796b52e6a5"
+            },
+            {
+              "path": "results-native-empty-search.bmp",
+              "width": 940,
+              "height": 680,
+              "sha256": "9f64c6c24f3c8bed991091f43d3491ac6737013af7121612ee57bf0a7fb7e38d"
+            }
+          ],
+          "limits": [
+            "Small bundled synthetic inputs and exact pack pins; no clinical accuracy, biological dataset or capacity claim.",
+            "Metrics are recorded measurements with explicit source identities, not inferred sample QC pass/fail.",
+            "Private scientific hosts deny Python socket operations; this is not operating-system firewall isolation.",
+            "Hosted display DPI only; physical trackpad, high DPI, multi-monitor and institutional acceptance remain separate."
+          ],
+          "appFiles": {
+            "NativeWorkbench.exe": "4c09aa5b0ebc850e4659041b6daf4769723d6bb16a112c0e9caeb11f0088ef52",
+            "WorkbenchBridge.exe": "6eadbad2c19aa0193f52b6b6c0b10ae63cbd86052a116eb166d5ab5c5259c36f",
+            "workspace\\app_version.py": "c3273cb842be050edf6a65d3c7034c2e8628191656794bc15115fd936c8cdd0c",
+            "workspace\\catalog.py": "8269f3ff23500c8f5b3321d475573b94f960d0534271cf724a8ac3621adc311f",
+            "workspace\\core_checks.py": "431598722c8c261683e123b255d008210abedb13e90e68d7bec0e6b1df905d70",
+            "workspace\\curated_workflows.py": "0f476e0e49b08d8cb27f3c38c3bb3ecad9b2590ed8bbe4b351a4e92145b4f23d",
+            "workspace\\cwl_export.py": "5773f89433bc11f3cc9708e33994ec80f7c7bf8f6465c9ac8bb8da11c8181596",
+            "workspace\\dag_routing.py": "eb79a385a6426e8ce9778124620fe48c69e8c6ca3a7a9351b95780c99e869fe4",
+            "workspace\\desktop_host.py": "8b1cda931bfda3bcabce1020eb282ea2bd2d47301f220dd8e9d10e994faf0ed5",
+            "workspace\\desktop_model.py": "3904ae9e38fe214110e472167c292b183c39dca60ce01407c3533474227597f6",
+            "workspace\\diagnostics.py": "fa743c69179a13b66dc000348a3e2954616a349163f1103a8cd9f50d61793124",
+            "workspace\\engine.py": "888927ee7019a5317db0458d34a72f2989fd6e6dc0b49e61a0f15fe96ccf8363",
+            "workspace\\example.py": "fb558de8dc3f49f68550af3e08d768e8a99c5cd9e8d466ca357dcecc3dd699b3",
+            "workspace\\execution_resources.py": "33329a740602199f2931b90fde638a0780ed6fa28d2cf15aa15518d8ee8bdae9",
+            "workspace\\file_io.py": "ab6034e617504c8c264c9c53201174fdae88440765db114f01ce39eafcb2d67e",
+            "workspace\\pack_checks.py": "d1fac03179b5c1d6a851e1a1f72433ffe16b183fb085608b6a34c6c7873c7a97",
+            "workspace\\pack_manager.py": "282b8370cccd6d86d00f6d2a85fe99669eb1d9b9953a9327c65c323a4a780b5d",
+            "workspace\\pack_security.py": "2d1fa4a4267f5cecb0d583c7b43fc59dc8645125c59e3db69c4d6fa307ff6cc0",
+            "workspace\\performance.py": "8f2e985ae95cf1856de64a5e051f681b0e78a9974dc312d0daf55331a523c5b6",
+            "workspace\\project_manager.py": "f01946694516b4a4fbe98ef8b14715a3e0e446d385b94438a26afc713ec86cdf",
+            "workspace\\readiness.py": "e8fdbaba0aa430a539e9214b711e14466e9597456527ec33eed687f898c33676",
+            "workspace\\recovery.py": "568d48098fe7fb01cfa800ac1fd52373d4d1bbff689f49207242065f9901d6b5",
+            "workspace\\reference_indexes.py": "fb6b20dd123f4d83896edc364868da6fdf779f915e4ae2e9e110cce1c1740203",
+            "workspace\\reference_library.py": "2416af2e3fb9aa80bcf1473037f4e248f9099600eb06ee707fee4b525b11baf2",
+            "workspace\\reference_manager.py": "af980e1ded0e01eb214424d29147043a21762b4e4708cf675dd0e8b183464cf6",
+            "workspace\\reference_ncbi.py": "1b1dec1af7c8cefbf94a49c6508ecfeacd2d93b89d3f72c041b18b04e526f5e9",
+            "workspace\\reference_provenance.py": "e2915eb46e3ca86cbf89297dadeec48925f2c9a667e85057bc3b9986e2735ac9",
+            "workspace\\reference_provider.py": "3bf51daae305ef16c0cff0a6bc2b65f76bc6013f7b1456da07fa8d869c5f0832",
+            "workspace\\reference_transfer.py": "105662115fbc1e477e40d898417a04ef81d1015241512af33b2d30a100ccde8d",
+            "workspace\\results_summary.py": "f132010ee4c50ad0d135ac62899c910bd9a747b56a58dc9fa30fe32cc0279ce1",
+            "workspace\\run_queue.py": "2dbb8387ba758259a68dc213ade820be027529e4f1d622e101ed96367c97cf6c",
+            "workspace\\sample_table.py": "a3ce7ac6f31fd044adf6abc90d7c8b83b5a57630212ebca973022ba4a7570f4e",
+            "workspace\\service.py": "5d229633b7bd90555c06c8e1bccf49930a8f9e0d84fa658b3aa29929da65f39b",
+            "workspace\\setup_manager.py": "4432c2c6c6091ebe4aeb57e29555e4d21cbe34b9d3ad8a2fef58fa13022fb853",
+            "workspace\\verify_installation.py": "dc33c51ebd52f9a812dfa6df0fcd083a04d144769edc0caa50147edab32358cf"
+          },
+          "failedPreparation": {
+            "id": "11faab32f04241509f6b15698fe6f7c3",
+            "name": "Missing input training diagnosis",
+            "missingInput": "D:\\a\\_temp\\update-evidence\\curated\\explicitly-selected-missing-reads1.fastq",
+            "message": "Select an existing ordinary file: D:\\a\\_temp\\update-evidence\\curated\\explicitly-selected-missing-reads1.fastq",
+            "action": "Restore the exact recorded input bytes at their original paths, or prepare a new run with explicitly selected replacement inputs. Do not edit recorded hashes.",
+            "stage": "preparation",
+            "nativeScientificStepsExecuted": 0
+          },
+          "scientificRuns": {
+            "alignment-qc": {
+              "id": "ffeb695553d144879f3d896a15442fb7",
+              "folder": "D:\\a\\_temp\\update-evidence\\curated\\scientific-results\\run-20261009-153359-a54fa86f",
+              "planSha256": "e32e601adc823151f7f74a5f2fc23ffbff42384ea95b9de81d6e5e53b0ea8a49",
+              "runSha256": "fc1b3006fbd3c584459c2e580d9f8e6200026507424c55859254584c7a979f27",
+              "answer": {
+                "alignmentRecords": 202,
+                "mappedProperPairs": 202,
+                "sample": "starter",
+                "reference": "starter:3000"
+              },
+              "outputHashes": {
+                "step-1::sam": {
+                  "sam": "c1ae4cbca80f14f10de6b76df02be97aad54462f29ad0667351d547eacd15051"
+                },
+                "step-1::pair-check": {
+                  "pair-check": "2c25256e25928cff40cffb9069f201138ae4bd083e3ab626b82cd55099e1c436"
+                },
+                "step-2::bam": {
+                  "bam": "ee36fb5cf1eeda873aaff649ac96ea8434f7b5f8b0fcefb4d862e0413037c76d"
+                },
+                "step-2::duplicate-stats": {
+                  "duplicate-stats": "0a70d4fce7d09d6beb11a610926f6cb0a343a3b55c935708b6515dfd5a9a26c8"
+                },
+                "step-2::flagstat": {
+                  "flagstat": "b9b7e24ae5f0f1f69ef4feb916513d0acc088f3d18b8d75664c38e5ce092cf8f"
+                },
+                "step-2::alignment-stats": {
+                  "alignment-stats": "4d17eaeef88b7853071b5eb4122f62355a33727823762023158a3c6d6164dbfa"
+                },
+                "step-2::bam-index": {
+                  "bam-index": "427b798d4b6f93fa1a460daadab1a45b6f37c75b9b2cf6a72c680b1e0ee62b64"
+                },
+                "step-2::names": {
+                  "names": "c2d52eac70a8d56435e4447832fae6fc6cbd4c1576a8a37049c34bd824d432f9"
+                },
+                "step-2::fixed": {
+                  "fixed": "cfa8c411ba208d6469d59b451ef04649d54f21f200be646d56d9a2f579d328dc"
+                },
+                "step-2::coordinates": {
+                  "coordinates": "2edd56426c92c2c55d71d44f04e95e9819fc709e9ea89035e8b283741def84fd"
+                },
+                "step-3::report": {
+                  "report": "6d02d145dba287a2848dc5f3695203568768fe8ccc724fba7c9530e37b58431e"
+                }
+              },
+              "expectedSummaryMetrics": {
+                "samtools.stats.raw_total_sequences": 202,
+                "samtools.stats.reads_mapped": 202,
+                "samtools.stats.average_length": 100,
+                "samtools.flagstat.total.qc_passed": 202,
+                "samtools.flagstat.mapped.qc_passed": 202
+              }
+            },
+            "variant-calling": {
+              "id": "32aef4460abb41e19ebde7f5795323f1",
+              "folder": "D:\\a\\_temp\\update-evidence\\curated\\scientific-results\\run-20261009-153400-9d51f4a4",
+              "planSha256": "5edbef92763879033b3dd9e8e3ec7d52b2221b52d829945690cd49f6cc649055",
+              "runSha256": "6ced9198681528e318d9931f7b41f4b250c228b165c29f489008f2f2b43f8a99",
+              "answer": {
+                "alignmentRecords": 202,
+                "mappedProperPairs": 202,
+                "sample": "starter",
+                "reference": "starter:3000",
+                "variant": "starter:1351 G>A GT=1/1"
+              },
+              "outputHashes": {
+                "step-1::sam": {
+                  "sam": "c1ae4cbca80f14f10de6b76df02be97aad54462f29ad0667351d547eacd15051"
+                },
+                "step-1::pair-check": {
+                  "pair-check": "2c25256e25928cff40cffb9069f201138ae4bd083e3ab626b82cd55099e1c436"
+                },
+                "step-2::bam": {
+                  "bam": "31275182f27ea042f44438fa18642147b482f9ba2bfa6a66d46101b438e113f1"
+                },
+                "step-2::duplicate-stats": {
+                  "duplicate-stats": "846348b5b51fc7c0bb5ea6ee8299bb85a7449b308eac0cfde22e511c252ef2f8"
+                },
+                "step-2::flagstat": {
+                  "flagstat": "b9b7e24ae5f0f1f69ef4feb916513d0acc088f3d18b8d75664c38e5ce092cf8f"
+                },
+                "step-2::alignment-stats": {
+                  "alignment-stats": "6a01b992ff5e65e5b77cac4ec81f6749490bae6ebbd579063655111fec2e5051"
+                },
+                "step-2::bam-index": {
+                  "bam-index": "e191b6e288e28cdb8e6d7bf14eb391c6c3f26d57e8c83f2cba92a0ed94e0e374"
+                },
+                "step-2::names": {
+                  "names": "a0691de4efd675257f054e3d907635205556b4a68fb32b52bd50a1a729684ac8"
+                },
+                "step-2::fixed": {
+                  "fixed": "4ac9355162d17297d816d63eda2bc0056074ca4f2c806deb02223cba06ea2ced"
+                },
+                "step-2::coordinates": {
+                  "coordinates": "4b55d90ae1b480abd0510f882c65f2c63b0ed43d834ab4c242a4b549dc9a8566"
+                },
+                "step-3::variants": {
+                  "variants": "020667fe4a4e84bb26de7088a5374703d65929c4d117000bfaa2c06845962de1"
+                },
+                "step-3::variant-stats": {
+                  "variant-stats": "59cced3cf96baa2fd80235f367fde121143a8125920ac67aa3e7e34d4695a92b"
+                },
+                "step-3::variants-index": {
+                  "variants-index": "ad7cf30901627cf5f031f20e232c5eaee100efe61ffeb0e7f3ab9d25f7d986c8"
+                },
+                "step-3::pileup": {
+                  "pileup": "07f9afd636e503435e51afe35aa1a3fca3d8bb789592c634b154c7ff999f294a"
+                },
+                "step-3::calls": {
+                  "calls": "b30b35154e4f02b9b69c4ac7d7fa89f2939e927560edeffcd7a563104aefcba2"
+                },
+                "step-3::normalized": {
+                  "normalized": "3d17aca9f91c6b4292855e26929c39994f4d3c6818c2d25290c75a5d56313031"
+                },
+                "step-3::reference": {
+                  "reference": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee"
+                },
+                "step-3::reference-index": {
+                  "reference-index": "6bf365006e0d9d03de4e0fbfdfc082c6e5bee611888e54450bc2516614ae95a3"
+                },
+                "step-4::statistics": {
+                  "statistics": "59cced3cf96baa2fd80235f367fde121143a8125920ac67aa3e7e34d4695a92b"
+                },
+                "step-5::report": {
+                  "report": "e67a52a7253502492df36c8b2a581d4bcffa6a73c5581f316c8f2d02c28b962e"
+                }
+              },
+              "expectedSummaryMetrics": {
+                "samtools.stats.raw_total_sequences": 202,
+                "samtools.stats.reads_mapped": 202,
+                "samtools.stats.average_length": 100,
+                "samtools.flagstat.total.qc_passed": 202,
+                "samtools.flagstat.mapped.qc_passed": 202,
+                "bcftools.stats.number_of_records": 1,
+                "bcftools.stats.number_of_snps": 1,
+                "bcftools.stats.number_of_indels": 0,
+                "bcftools.stats.number_of_samples": 1
+              }
+            }
+          },
+          "networkSocketOperationsDeniedInScientificHosts": true,
+          "dpi": 96,
+          "completedUtc": "2026-10-09T15:34:04.828272+00:00",
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0
+        },
+        "legacyResultAndReferenceFilesPreservedAfterNewFeatures": 17,
+        "dag": {
+          "cards": 7,
+          "edges": 8,
+          "segments": 18,
+          "skipRankEdges": 2,
+          "paddingChecked": 9,
+          "sha256": "91b94a4a526281f848fdf090a1bac59e50a3be244910b9678675b21c265dfbc6"
+        },
+        "science": {
+          "networkSocketOperationsDeniedForHost": true,
+          "nativeWindowsExecuted": true,
+          "nativeCommandsCompared": 18,
+          "outputsIndependentlyHashed": 20,
+          "cwlRunnerReplays": [
+            {
+              "step": "step_1",
+              "scriptSha256": "39e0360c49b2e1bf1478a6d5b5f398f4fbe9f18f3fdb6e7584a03aba855b8da2",
+              "exitCode": 0,
+              "outputs": [
+                {
+                  "id": "sam",
+                  "sha256": "c1ae4cbca80f14f10de6b76df02be97aad54462f29ad0667351d547eacd15051"
+                },
+                {
+                  "id": "pair-check",
+                  "sha256": "2c25256e25928cff40cffb9069f201138ae4bd083e3ab626b82cd55099e1c436"
+                }
+              ]
+            },
+            {
+              "step": "step_2",
+              "scriptSha256": "62e20f8334aa67d2d904f25083834af4df53e881bdef3cb320c37a169787dd3f",
+              "exitCode": 0,
+              "outputs": [
+                {
+                  "id": "bam",
+                  "sha256": "8c2c2b1c617ee9976ffefe4f5c00f624acc9825e30be3c6b0f607fd5bd2ac071"
+                },
+                {
+                  "id": "duplicate-stats",
+                  "sha256": "3de863695ef8a8bbdc601f239bd304d7ecd1165272f903e4bc132821de90ef82"
+                },
+                {
+                  "id": "flagstat",
+                  "sha256": "b9b7e24ae5f0f1f69ef4feb916513d0acc088f3d18b8d75664c38e5ce092cf8f"
+                },
+                {
+                  "id": "alignment-stats",
+                  "sha256": "450d9b9fd90e1115c0a50a24a62044ee3cba6d03e8ba3890a1c2253463fcf21f"
+                },
+                {
+                  "id": "bam-index",
+                  "sha256": "0edd48bba7122ca67ca5a6f4cbac40fbc7e29725d610f6a2c23986302f0b1cb1"
+                },
+                {
+                  "id": "names",
+                  "sha256": "2b6781ae67bf6d44d529d6bb3c0cf225fd293ecf49001b614affb55eec019d1c"
+                },
+                {
+                  "id": "fixed",
+                  "sha256": "8be17e6762a8bae66e56954aa81d3513ad8f6c01e9264df8f1ee30595eb2ffe4"
+                },
+                {
+                  "id": "coordinates",
+                  "sha256": "32e3205d9e2494da57f710eebaa66cc3379d150b428bfb4752d8d85545fb3bb6"
+                }
+              ]
+            },
+            {
+              "step": "step_3",
+              "scriptSha256": "55ed0a4315f34b073402058068dda3d17fd5a1cd420a1af227d34a56d9b3c019",
+              "exitCode": 0,
+              "outputs": [
+                {
+                  "id": "variants",
+                  "sha256": "a1bfc5a58ba413caef0323d03ed74acb1f83095f4690bbdb1dc9f655086d56f5"
+                },
+                {
+                  "id": "variant-stats",
+                  "sha256": "b5ca20bcdcd605ca341d24e0bde6c4e3b685a527f975b882b3626e5bbecc999a"
+                },
+                {
+                  "id": "variants-index",
+                  "sha256": "44b73415cc9d2de6e6c5305c2515cdd88179361b77527bc324ec255895bf8920"
+                },
+                {
+                  "id": "pileup",
+                  "sha256": "9f9ce36a49917c099094b691495c7a74f37fb9520bec50b026ddae0b37f3debf"
+                },
+                {
+                  "id": "calls",
+                  "sha256": "091bb6f07ad7c1557488c8dcb99176b844b397a61530bc76092ee2e46b55bcfb"
+                },
+                {
+                  "id": "normalized",
+                  "sha256": "1ab42090328a7c06bcb5da3b4e177676dfb1bc92f93e3ab95f6fc6992d144604"
+                },
+                {
+                  "id": "reference",
+                  "sha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee"
+                },
+                {
+                  "id": "reference-index",
+                  "sha256": "6bf365006e0d9d03de4e0fbfdfc082c6e5bee611888e54450bc2516614ae95a3"
+                }
+              ]
+            },
+            {
+              "step": "step_4",
+              "scriptSha256": "ec2896685a5c666104cb21d2bb8c8ffa93cd895c1d1b0908cb92078528177967",
+              "exitCode": 0,
+              "outputs": [
+                {
+                  "id": "statistics",
+                  "sha256": "b5ca20bcdcd605ca341d24e0bde6c4e3b685a527f975b882b3626e5bbecc999a"
+                }
+              ]
+            },
+            {
+              "step": "step_5",
+              "scriptSha256": "03bc8f86144fe2d9e85d18dc898bedfb0f44c545654e542c32beae82c11b190a",
+              "exitCode": 0,
+              "outputs": [
+                {
+                  "id": "report",
+                  "sha256": "9b2ff4371cd64660897343936eab933fb680e5c8cc6c3cbc4eecf80b1d6e93c9"
+                }
+              ]
+            }
+          ],
+          "alignmentRecords": 202,
+          "variantTruth": "starter:1351 G>A; GT=1/1",
+          "scope": "Native private-host execution plus embedded-runner replay; not a Windows cwltool invocation."
+        },
+        "passed": 18,
+        "finishedUtc": "2026-10-09T15:34:08.465900+00:00"
+      },
+      "retainedNestedReport": {
+        "member": "curated/native-curated.json",
+        "bytes": 14644,
+        "sha256": "1e5f2f2f17bd09c95fa563c21cdf7c66dcc36c6b7561026cb63491f0c8ce1860"
+      },
+      "independentPreservationAudit": {
+        "before": {
+          "bytes": 28832,
+          "sha256": "aee8a269cd4fe7f0f85955b30c69e0a9d9da39f54ed0f69bd30d374812c3b1ae"
+        },
+        "after": {
+          "bytes": 28929,
+          "sha256": "c4df6dc5fdb7ed6e76f2899c870fe89b8cb39cd5b6cdbb76ec3157b1def011cf"
+        },
+        "unchangedFiles": 204,
+        "changes": {},
+        "additions": {
+          "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+        },
+        "additionMeaning": "One NUL byte in the ephemeral user-data/session.lock; no prior file changed.",
+        "baselineAndUpdatedRunRecordHashesVerified": true,
+        "legacyResultIdMatchesBaseline": true
+      }
+    }
+  },
+  "independentChecks": {
+    "publisherVerification": {
+      "verifyCandidate": true,
+      "collectReports": true,
+      "reports": {
+        "ordinary-update": {
+          "path": "update-native.json",
+          "artifact": "update-ordinary",
+          "sha256": "92de2f53263e964d073618f49ed6b11fad231ba3b3fccea083874ae1b1bccb15",
+          "passed": 18,
+          "skips": [],
+          "kind": "update",
+          "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+          "gateCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+          "success": true,
+          "reportRecordsSourceCommit": true,
+          "reportRecordsGateHash": true,
+          "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+        },
+        "spaces-update": {
+          "path": "update-native.json",
+          "artifact": "update-spaces",
+          "sha256": "d8f37d80f4f020b212321861da74ae8eabeac32c638d2b31bca1a46e557d5273",
+          "passed": 18,
+          "skips": [],
+          "kind": "update",
+          "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+          "gateCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+          "success": true,
+          "reportRecordsSourceCommit": true,
+          "reportRecordsGateHash": true,
+          "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+        }
+      },
+      "sourceFilesMatchedToFrozenGit": 748,
+      "coreFiles": 87
+    },
+    "transportDigestsAndSizesMatchGitHubMetadata": true,
+    "allZipCrcChecksPassed": true,
+    "allNestedOriginalReportsEqualEmbeddedRecords": true,
+    "captureHashesVerified": 12,
+    "both204FilePreservationInventoriesCompared": true,
+    "publishedBaselineIdentityVerified": true,
+    "secondReviewer": "audit_project_state independently ran the same publisher checks and compared both preservation inventories and retained run hashes; no mismatch found.",
+    "visualReview": "Actual screenshot appearance is recorded separately; this record verifies capture identities and native GUI assertions."
+  },
+  "lockSections": {
+    "file": "local-validation/release-0.16.0/final-update/final-updater-lock-sections.json",
+    "bytes": 4479,
+    "sha256": "3fd0bd7778da22e5283b9ed39935c7e433f2c3ee8843de7c88545de05f2152ab"
+  },
+  "limits": [
+    "This is updater acceptance evidence. Candidate scientific/native gates and positive long-path regression are independently recorded before publication.",
+    "Native updater command-line mode and private runtime were exercised; its interactive installation picker was not tested.",
+    "References and known scientific answers are packaged synthetic training fixtures; no live download, clinical thresholds or representative cohort validation is claimed.",
+    "The updater preserves existing packs and excludes align 0.4.1; the separate 43-file ZIP was installed only by an explicit import during each gate.",
+    "Python host socket operations were denied by an audit hook; native subprocesses were not OS-firewalled.",
+    "Five exported CWL embedded runners were replayed natively; no Windows cwltool or scientific Linux parity is claimed.",
+    "Finite hosted Windows checks and 96-DPI captures do not establish physical hardware, high-DPI, institutional proxy or endpoint-security acceptance."
+  ],
+  "publicationAcceptance": "Passed final updater gates only. This record does not perform or assert publication."
+}

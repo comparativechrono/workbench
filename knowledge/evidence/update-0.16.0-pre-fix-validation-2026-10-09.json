@@ -1,0 +1,549 @@
+{
+  "schema": 1,
+  "date": "2026-10-09",
+  "applicationVersion": "0.16.0",
+  "baseVersion": "0.11.0",
+  "scope": "Exact published 0.11.0 to frozen 0.16.0 native update validation in ordinary and space-containing Windows paths.",
+  "sourceCommit": "7a9aca71ddd4816b51dbe693873f42fa50a6b746",
+  "validatorCommit": "d66401191005db0bdf32b1f76d3fe3318fa14ad4",
+  "runId": 37949918855,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37949918855",
+  "workflow": ".github/workflows/native-update-0.16.0.yml",
+  "status": "passed",
+  "success": true,
+  "nativeWindowsExecuted": true,
+  "published": false,
+  "priorFailedAttempt": "update-0.16.0-first-validation-2026-10-09.json",
+  "priorFailureResolution": {
+    "applicationChanged": false,
+    "action": "The updater validator checks the frozen provider display name in methods while retaining exact provider ID, assembly, receipt, reference hash and CWL assertions. The earlier failed run remains a separate failure."
+  },
+  "archives": {
+    "native-workbench-0.16.0-update-from-0.11.0.zip": {
+      "bytes": 13193325,
+      "sha256": "b0ac85144deaca9008df11d025b157ca6be6977874c19637a6a525da573d2395"
+    },
+    "native-workbench-0.16.0-starter-windows.zip": {
+      "bytes": 17846720,
+      "sha256": "1ff91bdb386171aeb166fec4fce4ad23e31287dc9e9695167db113994f416131"
+    }
+  },
+  "baselineSha256": "e816e2f7cd5efe98af752fbf072fab00344ebaa2b6963795c2fbf4a86b5fa81c",
+  "jobs": [
+    {
+      "id": 113885721089,
+      "name": "build",
+      "conclusion": "success",
+      "nonSuccessSteps": []
+    },
+    {
+      "id": 113885886834,
+      "name": "native (ordinary)",
+      "conclusion": "success",
+      "nonSuccessSteps": []
+    },
+    {
+      "id": 113885886898,
+      "name": "native (path with spaces)",
+      "conclusion": "success",
+      "nonSuccessSteps": []
+    }
+  ],
+  "artifacts": {
+    "updater": {
+      "id": 11626200202,
+      "name": "update-0.16.0-from-0.11.0-d66401191005db0bdf32b1f76d3fe3318fa14ad4",
+      "bytes": 13202750,
+      "sha256": "03256fbb2c57eac6eb63d915ffcf7cfd3a4782d86edbe3ea4857cbf209394433",
+      "run": "updater",
+      "file": "updater.zip"
+    },
+    "update-ordinary": {
+      "id": 11625846229,
+      "name": "update-0.16.0-ordinary-1",
+      "bytes": 823417,
+      "sha256": "935ade3e4f8424aa7947f32317af04247319b0f67488cc609bcbc8528d0c7958",
+      "run": "updater",
+      "file": "update-ordinary.zip"
+    },
+    "update-spaces": {
+      "id": 11625716497,
+      "name": "update-0.16.0-path with spaces-1",
+      "bytes": 823987,
+      "sha256": "85f79104b2c26bfc2fa31319bf23351696828b7c29cd24705b45cb95004263d0",
+      "run": "updater",
+      "file": "update-spaces.zip"
+    }
+  },
+  "build": {
+    "applicationRebuilt": false,
+    "nativeWindowsExecutedByBuilder": false,
+    "sourceCommit": "7a9aca71ddd4816b51dbe693873f42fa50a6b746",
+    "packagingCommit": "d66401191005db0bdf32b1f76d3fe3318fa14ad4",
+    "workflowRun": "37949918855",
+    "provenance": {
+      "member": "BUILD-UPDATE-PROVENANCE.json",
+      "bytes": 8838,
+      "sha256": "0477a56f23abe6c7eafce81be3503b3ecb181d186a8ab42d928a44e3b80a0b7f"
+    },
+    "baseManifestSha256": "a74af3967f609fff938e2b19402b7f426a0253d0756b3f69446f484530a5c764",
+    "targetManifestSha256": "e252fc916dd10177560864b0049f6dc5b493c9a88a6a5d5c4a03b4a6a6d20129",
+    "launcherSha256": "49194449d7bb7cf29e55dcc3b27bcf1a4fb279e86acfe547905dfdd6f7370e9f",
+    "coreFilesVerified": 87,
+    "unchangedPackFiles": 143,
+    "additionalPacksInstalledByUpdater": false,
+    "productionTrustUnchanged": true,
+    "setupSelectionUnchanged": true,
+    "result": {
+      "base_version": "0.11.0",
+      "target_version": "0.16.0",
+      "migration": false,
+      "replacement_files": 30,
+      "obsolete_files": 0,
+      "blob_bytes": 4077607,
+      "packs_changed": false
+    }
+  },
+  "paths": {
+    "ordinary": {
+      "artifact": {
+        "id": 11625846229,
+        "name": "update-0.16.0-ordinary-1",
+        "bytes": 823417,
+        "sha256": "935ade3e4f8424aa7947f32317af04247319b0f67488cc609bcbc8528d0c7958",
+        "run": "updater",
+        "file": "update-ordinary.zip"
+      },
+      "report": {
+        "member": "update-native.json",
+        "bytes": 25903,
+        "sha256": "a5b8cc24e629ffc160949a1fb8f7e72dea0821ca9e76a0bde0d519842c96fd43"
+      },
+      "gate": {
+        "path": "scripts/check_update_0160_windows.py",
+        "commit": "d66401191005db0bdf32b1f76d3fe3318fa14ad4",
+        "sha256": "cf804b3a690e00802b2abe909cc46121f310d9206272e217894cd471bde13b7f"
+      },
+      "platform": "Windows-2022Server-10.0.20348-SP0",
+      "pythonVersion": "3.13.16",
+      "nativeWindowsHost": true,
+      "nativeWindowsExecuted": true,
+      "success": true,
+      "passed": 18,
+      "failures": [],
+      "skips": [],
+      "checks": [
+        "Frozen baseline, accepted target and updater inventories match the exact archives and manifest identities.",
+        "Published 0.11.0 imports the exact optional reads pack, executes a real reference run, and saves independent settings and pipeline pins offline.",
+        "Native updater installs 0.16.0 and returns already-installed on repeat; every installed core file equals the accepted starter.",
+        "Starter and optional packs, saved settings/pins, completed setup selection/queue, existing real results, local registry/receipt and external reference bytes survive unchanged.",
+        "Updated host reloads exact saved pins, searches and honestly summarizes the actual 0.11 result, selects its preserved compatible reference, and executes offline with provenance in CWL and completed methods.",
+        "The upgraded app passes all seven real installation checks with align 0.4.1 absent; additional pack declarations do not change core ownership.",
+        "Reviewing an explicitly pinned reusable-index operation without align 0.4.1 blocks execution, names the exact version and advises explicit pack installation without changing the draft.",
+        "Explicit separate align 0.4.1 import installs its exact 43 files alongside preserved versions and resolves the reviewed index operation without changing a graph pin.",
+        "The same upgraded installation passes the unchanged 11-check curated gate, both known-answer native workflows, result search/reopen/failure diagnosis and six real GUI captures.",
+        "New curated runs and result interpretation leave every previous 0.11 scientific result and external reference file unchanged.",
+        "Exact packaged integrity check and all five starter scientific operations execute without failures or skips.",
+        "Results include a packed CWL v1.2 workflow tied to the frozen plan, real completion record and final export hash.",
+        "CWL source hashes, file roles, scientific parameters, complete output set, pack pins and reference metadata match frozen native provenance.",
+        "Every exported command/copy/binary-pipe definition expands to the actual native bridge argument record.",
+        "All five embedded CWL runners execute independently with packaged private Python and pinned native pack programs.",
+        "Independent CWL replay preserves 202 proper-pair SAM/BAM records and known starter:1351 G>A homozygous SNP truth.",
+        "Saved scientific DAG includes every actual dependency and avoids all unrelated cards with padding, including skipped ranks.",
+        "Updater inventories remain intact after execution with its own private runtime."
+      ],
+      "updateAttempts": {
+        "install": {
+          "status": "installed",
+          "version": "0.16.0",
+          "migration": false,
+          "files_verified": 87,
+          "removed_files": 0,
+          "packs_changed": false,
+          "source_and_evidence_preserved": true
+        },
+        "repeat": {
+          "status": "already-installed",
+          "version": "0.16.0",
+          "files_verified": 87
+        }
+      },
+      "coreFilesVerified": 87,
+      "preservation": {
+        "files": 204,
+        "changes": {},
+        "additions": {
+          "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+        },
+        "fixtureNotice": "Created by this gate from the packaged synthetic FASTA; not downloaded."
+      },
+      "legacyResultSummary": {
+        "id": "430daebaa2ed4d399963992bf049158d",
+        "status": "completed",
+        "metrics": 0
+      },
+      "updatedReference": {
+        "success": true,
+        "cwlChecked": true,
+        "provider": "synthetic-validation-fixture",
+        "providerName": "Synthetic update fixture",
+        "referenceSha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+        "receiptSha256": "da76eb3c6ae860a48721bb6e3752881065af48de760c77722c6ea3b257204752",
+        "planSha256": "4ccbac14694202a87e6b3b24a57c89408491eb255574edd33dd870acfbce99e6"
+      },
+      "withoutAdditionalPack": {
+        "present": false,
+        "installationChecks": 7,
+        "packFiles": 182
+      },
+      "manualAdditionalPackImport": {
+        "sha256": "3a08cf061f0b62c5502d1420115db3fcae2b04bf695ad3cfd1c3063de0fafa02",
+        "addedFiles": 43,
+        "existingPackFilesPreserved": 182
+      },
+      "legacyResultAndReferenceFilesPreservedAfterNewFeatures": 17,
+      "curated": {
+        "report": {
+          "member": "curated/native-curated.json",
+          "bytes": 14644,
+          "sha256": "7260067c48911b1b52d0793b4f45bf690dc03866e2a9499564f5a6d863d69075"
+        },
+        "gate": {
+          "path": "scripts/check_curated_windows.py",
+          "commit": "7a9aca71ddd4816b51dbe693873f42fa50a6b746",
+          "sha256": "6824624ab6be6ea685428a585956f78039ef97e2a9dac37ecb67def5b2fa24d1"
+        },
+        "passed": 11,
+        "failed": 0,
+        "skipped": 0,
+        "nativeWindowsExecuted": true,
+        "nativeGUIValidated": true,
+        "dpi": 96,
+        "captures": [
+          {
+            "path": "curated-native-catalogue.bmp",
+            "width": 940,
+            "height": 680,
+            "sha256": "ea4f2ec25c0dd698869a3bba5572b0feed7aa03d7531178beb91d85f0f5fa9c4"
+          },
+          {
+            "path": "curated-native-loaded-workflow.bmp",
+            "width": 1040,
+            "height": 728,
+            "sha256": "e7e78723091f8f82f6dc6694897d81d8412ec2b9dc0d0ea4bdbdecb92d53cc5a"
+          },
+          {
+            "path": "results-native-filtered-summary.bmp",
+            "width": 940,
+            "height": 680,
+            "sha256": "ca6b5674d922aa0086ecfd416f543a51a5613cce50979bd5d45433f6c37b2fa1"
+          },
+          {
+            "path": "results-native-failed-preparation.bmp",
+            "width": 940,
+            "height": 680,
+            "sha256": "f79ffd64c9e76f76badbb264932c30d6faa65231d3396d8908de5520eda618f6"
+          },
+          {
+            "path": "results-native-failure-guidance.bmp",
+            "width": 940,
+            "height": 680,
+            "sha256": "585d4f7a37f1758fa575ff6a88e48aa9d18929de3f75b9fd4efacec322dc5b95"
+          },
+          {
+            "path": "results-native-empty-search.bmp",
+            "width": 940,
+            "height": 680,
+            "sha256": "9f64c6c24f3c8bed991091f43d3491ac6737013af7121612ee57bf0a7fb7e38d"
+          }
+        ],
+        "scientificRuns": [
+          {
+            "workflow": "alignment-qc",
+            "id": "a13c156621bc4762a512258c7965ec31",
+            "planSha256": "2287cf396d7c4b2fa372ec0857617e14a2de591173f640d6ebfa1b1a3301324d",
+            "runSha256": "1b6e060cf9ba43b2bf1837258e3809220848575de726418d470084d415cfa5aa",
+            "knownAnswer": {
+              "alignmentRecords": 202,
+              "mappedProperPairs": 202,
+              "sample": "starter",
+              "reference": "starter:3000"
+            },
+            "outputsRehashed": 11,
+            "recordedMetrics": {
+              "samtools.stats.raw_total_sequences": 202,
+              "samtools.stats.reads_mapped": 202,
+              "samtools.stats.average_length": 100,
+              "samtools.flagstat.total.qc_passed": 202,
+              "samtools.flagstat.mapped.qc_passed": 202
+            }
+          },
+          {
+            "workflow": "variant-calling",
+            "id": "48e1428293964ecbb2bf2f93c3bc6247",
+            "planSha256": "658050c257acb8c6e8ee9bbabc3f336de5ae90acea08d396964aec224b3beecc",
+            "runSha256": "59d5d63d3adf80e8e75dadf6d53efa4a86b4afbc1162f49f077dcb7497657c81",
+            "knownAnswer": {
+              "alignmentRecords": 202,
+              "mappedProperPairs": 202,
+              "sample": "starter",
+              "reference": "starter:3000",
+              "variant": "starter:1351 G>A GT=1/1"
+            },
+            "outputsRehashed": 20,
+            "recordedMetrics": {
+              "samtools.stats.raw_total_sequences": 202,
+              "samtools.stats.reads_mapped": 202,
+              "samtools.stats.average_length": 100,
+              "samtools.flagstat.total.qc_passed": 202,
+              "samtools.flagstat.mapped.qc_passed": 202,
+              "bcftools.stats.number_of_records": 1,
+              "bcftools.stats.number_of_snps": 1,
+              "bcftools.stats.number_of_indels": 0,
+              "bcftools.stats.number_of_samples": 1
+            }
+          }
+        ]
+      },
+      "additionalScience": {
+        "nativeWindowsExecuted": true,
+        "nativeCommandsCompared": 18,
+        "outputsIndependentlyHashed": 20,
+        "embeddedCwlRunnerReplays": 5,
+        "alignmentRecords": 202,
+        "variantTruth": "starter:1351 G>A; GT=1/1",
+        "scope": "Native private-host execution plus embedded-runner replay; not a Windows cwltool invocation."
+      }
+    },
+    "spaces": {
+      "artifact": {
+        "id": 11625716497,
+        "name": "update-0.16.0-path with spaces-1",
+        "bytes": 823987,
+        "sha256": "85f79104b2c26bfc2fa31319bf23351696828b7c29cd24705b45cb95004263d0",
+        "run": "updater",
+        "file": "update-spaces.zip"
+      },
+      "report": {
+        "member": "update-native.json",
+        "bytes": 25927,
+        "sha256": "42cfb250ebd779785a3ea1fc2207daf71cc1243723c952fda1d2481e9db7ecba"
+      },
+      "gate": {
+        "path": "scripts/check_update_0160_windows.py",
+        "commit": "d66401191005db0bdf32b1f76d3fe3318fa14ad4",
+        "sha256": "cf804b3a690e00802b2abe909cc46121f310d9206272e217894cd471bde13b7f"
+      },
+      "platform": "Windows-2022Server-10.0.20348-SP0",
+      "pythonVersion": "3.13.16",
+      "nativeWindowsHost": true,
+      "nativeWindowsExecuted": true,
+      "success": true,
+      "passed": 18,
+      "failures": [],
+      "skips": [],
+      "checks": [
+        "Frozen baseline, accepted target and updater inventories match the exact archives and manifest identities.",
+        "Published 0.11.0 imports the exact optional reads pack, executes a real reference run, and saves independent settings and pipeline pins offline.",
+        "Native updater installs 0.16.0 and returns already-installed on repeat; every installed core file equals the accepted starter.",
+        "Starter and optional packs, saved settings/pins, completed setup selection/queue, existing real results, local registry/receipt and external reference bytes survive unchanged.",
+        "Updated host reloads exact saved pins, searches and honestly summarizes the actual 0.11 result, selects its preserved compatible reference, and executes offline with provenance in CWL and completed methods.",
+        "The upgraded app passes all seven real installation checks with align 0.4.1 absent; additional pack declarations do not change core ownership.",
+        "Reviewing an explicitly pinned reusable-index operation without align 0.4.1 blocks execution, names the exact version and advises explicit pack installation without changing the draft.",
+        "Explicit separate align 0.4.1 import installs its exact 43 files alongside preserved versions and resolves the reviewed index operation without changing a graph pin.",
+        "The same upgraded installation passes the unchanged 11-check curated gate, both known-answer native workflows, result search/reopen/failure diagnosis and six real GUI captures.",
+        "New curated runs and result interpretation leave every previous 0.11 scientific result and external reference file unchanged.",
+        "Exact packaged integrity check and all five starter scientific operations execute without failures or skips.",
+        "Results include a packed CWL v1.2 workflow tied to the frozen plan, real completion record and final export hash.",
+        "CWL source hashes, file roles, scientific parameters, complete output set, pack pins and reference metadata match frozen native provenance.",
+        "Every exported command/copy/binary-pipe definition expands to the actual native bridge argument record.",
+        "All five embedded CWL runners execute independently with packaged private Python and pinned native pack programs.",
+        "Independent CWL replay preserves 202 proper-pair SAM/BAM records and known starter:1351 G>A homozygous SNP truth.",
+        "Saved scientific DAG includes every actual dependency and avoids all unrelated cards with padding, including skipped ranks.",
+        "Updater inventories remain intact after execution with its own private runtime."
+      ],
+      "updateAttempts": {
+        "install": {
+          "status": "installed",
+          "version": "0.16.0",
+          "migration": false,
+          "files_verified": 87,
+          "removed_files": 0,
+          "packs_changed": false,
+          "source_and_evidence_preserved": true
+        },
+        "repeat": {
+          "status": "already-installed",
+          "version": "0.16.0",
+          "files_verified": 87
+        }
+      },
+      "coreFilesVerified": 87,
+      "preservation": {
+        "files": 204,
+        "changes": {},
+        "additions": {
+          "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+        },
+        "fixtureNotice": "Created by this gate from the packaged synthetic FASTA; not downloaded."
+      },
+      "legacyResultSummary": {
+        "id": "4c1f49fc7f0941bdb9d5981e8986c3cd",
+        "status": "completed",
+        "metrics": 0
+      },
+      "updatedReference": {
+        "success": true,
+        "cwlChecked": true,
+        "provider": "synthetic-validation-fixture",
+        "providerName": "Synthetic update fixture",
+        "referenceSha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+        "receiptSha256": "b06427e2e75439e7d3c8afee1c2cdc99ad81d70b03c362f988d19f18e95db41a",
+        "planSha256": "9af3f91b9a0061f10f239e542a435cf7c40f84db9b869efa0f1c3caa9c7eb5fd"
+      },
+      "withoutAdditionalPack": {
+        "present": false,
+        "installationChecks": 7,
+        "packFiles": 182
+      },
+      "manualAdditionalPackImport": {
+        "sha256": "3a08cf061f0b62c5502d1420115db3fcae2b04bf695ad3cfd1c3063de0fafa02",
+        "addedFiles": 43,
+        "existingPackFilesPreserved": 182
+      },
+      "legacyResultAndReferenceFilesPreservedAfterNewFeatures": 17,
+      "curated": {
+        "report": {
+          "member": "curated/native-curated.json",
+          "bytes": 14644,
+          "sha256": "9710af932e4fbee083b9c858f6fc7238741d89796fd9545a187cd0574ba0f77c"
+        },
+        "gate": {
+          "path": "scripts/check_curated_windows.py",
+          "commit": "7a9aca71ddd4816b51dbe693873f42fa50a6b746",
+          "sha256": "6824624ab6be6ea685428a585956f78039ef97e2a9dac37ecb67def5b2fa24d1"
+        },
+        "passed": 11,
+        "failed": 0,
+        "skipped": 0,
+        "nativeWindowsExecuted": true,
+        "nativeGUIValidated": true,
+        "dpi": 96,
+        "captures": [
+          {
+            "path": "curated-native-catalogue.bmp",
+            "width": 940,
+            "height": 680,
+            "sha256": "ea4f2ec25c0dd698869a3bba5572b0feed7aa03d7531178beb91d85f0f5fa9c4"
+          },
+          {
+            "path": "curated-native-loaded-workflow.bmp",
+            "width": 1040,
+            "height": 728,
+            "sha256": "e7e78723091f8f82f6dc6694897d81d8412ec2b9dc0d0ea4bdbdecb92d53cc5a"
+          },
+          {
+            "path": "results-native-filtered-summary.bmp",
+            "width": 940,
+            "height": 680,
+            "sha256": "d19ae9bb2d615915ff7e28bf2d1c8f3f2ce613634a0d27cb3442c76fcf64e7e6"
+          },
+          {
+            "path": "results-native-failed-preparation.bmp",
+            "width": 940,
+            "height": 680,
+            "sha256": "015ea4c7198e7454bec248b4f2e275a6280f8cc3b6f5421b18a20cc2b8fed2a1"
+          },
+          {
+            "path": "results-native-failure-guidance.bmp",
+            "width": 940,
+            "height": 680,
+            "sha256": "bf719b35326b59e609f10840140c9dc2e47f3671344465847af770ee32f16db5"
+          },
+          {
+            "path": "results-native-empty-search.bmp",
+            "width": 940,
+            "height": 680,
+            "sha256": "9f64c6c24f3c8bed991091f43d3491ac6737013af7121612ee57bf0a7fb7e38d"
+          }
+        ],
+        "scientificRuns": [
+          {
+            "workflow": "alignment-qc",
+            "id": "c0748b4fee36465fb769e18c7ec4ca40",
+            "planSha256": "167163a02417af96d88bedcfed84ce350daaf11bb29b672474eaadcbe84d4193",
+            "runSha256": "169a199d1f932938041ecd0ee3e7ef37bb17bfdd573db6d190c5d6dd0321f477",
+            "knownAnswer": {
+              "alignmentRecords": 202,
+              "mappedProperPairs": 202,
+              "sample": "starter",
+              "reference": "starter:3000"
+            },
+            "outputsRehashed": 11,
+            "recordedMetrics": {
+              "samtools.stats.raw_total_sequences": 202,
+              "samtools.stats.reads_mapped": 202,
+              "samtools.stats.average_length": 100,
+              "samtools.flagstat.total.qc_passed": 202,
+              "samtools.flagstat.mapped.qc_passed": 202
+            }
+          },
+          {
+            "workflow": "variant-calling",
+            "id": "0b5520faaa614a6aa659599ec0a429ed",
+            "planSha256": "c43c58e6cd432b81ba55db9d21fb4dd8f7b0d9a047f5e90e96d4b63ad4f88120",
+            "runSha256": "96b56c43554063d55997d72e6edfb996e72bdc1647c2ce9f1633557faf935f69",
+            "knownAnswer": {
+              "alignmentRecords": 202,
+              "mappedProperPairs": 202,
+              "sample": "starter",
+              "reference": "starter:3000",
+              "variant": "starter:1351 G>A GT=1/1"
+            },
+            "outputsRehashed": 20,
+            "recordedMetrics": {
+              "samtools.stats.raw_total_sequences": 202,
+              "samtools.stats.reads_mapped": 202,
+              "samtools.stats.average_length": 100,
+              "samtools.flagstat.total.qc_passed": 202,
+              "samtools.flagstat.mapped.qc_passed": 202,
+              "bcftools.stats.number_of_records": 1,
+              "bcftools.stats.number_of_snps": 1,
+              "bcftools.stats.number_of_indels": 0,
+              "bcftools.stats.number_of_samples": 1
+            }
+          }
+        ]
+      },
+      "additionalScience": {
+        "nativeWindowsExecuted": true,
+        "nativeCommandsCompared": 18,
+        "outputsIndependentlyHashed": 20,
+        "embeddedCwlRunnerReplays": 5,
+        "alignmentRecords": 202,
+        "variantTruth": "starter:1351 G>A; GT=1/1",
+        "scope": "Native private-host execution plus embedded-runner replay; not a Windows cwltool invocation."
+      }
+    }
+  },
+  "independentChecks": [
+    "All three downloaded updater/native artifact ZIP identities and CRCs match authoritative GitHub metadata.",
+    "Publisher verification matches all candidate source bytes and installed core inventory to frozen source; every updater inventory entry and replacement blob matches the accepted target.",
+    "Both original updater reports match their exact source/gate hashes and contain no failures or skips; their nested curated reports equal the separately retained originals.",
+    "All twelve retained curated screenshots match the nested report SHA-256 values; image interpretation is recorded separately by the reviewers.",
+    "Both reference plans retain their provider ID and display name and match completed methods/CWL; both exact scientific workflow output inventories were independently rehashed from the retained native evidence."
+  ],
+  "limits": [
+    "Native updater CLI/private runtime was exercised; updater folder-picker interaction was not tested.",
+    "The local reference receipt is a transparent synthetic fixture; this gate did not retrieve a live reference.",
+    "The scientific checks use bundled synthetic known answers, not clinical validation or realistic-cohort benchmarking.",
+    "Embedded CWL runners replayed native commands; this is not execution through a Windows cwltool installation.",
+    "Python host socket operations were denied; native subprocesses were not operating-system firewalled.",
+    "Native GUI captures are at hosted 96 DPI; physical trackpad, high DPI, multi-monitor and representative institutional acceptance remain separate."
+  ],
+  "publicationAcceptance": {
+    "accepted": false,
+    "reason": "The 7a9aca7 target subsequently failed the full disabled-policy long-path release gate because additional pack self-check nesting created a 291-character native working directory. These successful scoped updater/UI results apply only to that old target and do not validate the corrected a447997 candidate.",
+    "replacementSourceCommit": "a44799723a280cca18c989e74e4c9ff7e1807a5e"
+  }
+}
