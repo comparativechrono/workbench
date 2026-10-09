@@ -281,6 +281,9 @@ class AcceptanceContracts(unittest.TestCase):
         self.assertNotIn('Set-ExecutionPolicy', script)
         self.assertNotIn('-ExecutionPolicy', script)
         self.assertNotIn('SignTool', script)
+        self.assertIn("[IO.Path]::Combine($PSHOME, 'Modules', $moduleName, $moduleName + '.psd1')", script)
+        self.assertIn('Import-Module -Name $modulePath -ErrorAction Stop', script)
+        self.assertNotIn('$env:PSModulePath =', script)
 
     def test_signature_targets_include_extensionless_pe_update_blobs(self):
         pe = bytearray(80)
@@ -313,6 +316,13 @@ class AcceptanceContracts(unittest.TestCase):
         self.assertEqual(result, {'stage': 'root-check', 'errorType': value['errorType'],
                                   'scriptLine': 50, 'exitCode': 2})
         self.assertNotIn('private', json.dumps(result))
+
+    def test_system_module_load_failure_remains_diagnosable(self):
+        value = {'schemaVersion': 1, 'stage': 'system-modules',
+                 'errorType': 'System.IO.FileNotFoundException', 'scriptLine': 59}
+        result = acceptance.collector_diagnostic(('NW_SIGNATURE_DIAGNOSTIC ' + json.dumps(value)).encode(), 2)
+        self.assertEqual(result['stage'], 'system-modules')
+        self.assertEqual(result['errorType'], 'System.IO.FileNotFoundException')
 
     def test_collector_diagnostic_rejects_raw_paths_extra_fields_and_unbounded_output(self):
         good = {'schemaVersion': 1, 'stage': 'root-check',

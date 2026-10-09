@@ -68,6 +68,13 @@ class DeploymentUIGateEvidenceTests(unittest.TestCase):
         (folder / 'other.json').write_text('{}', encoding='utf-8')
         self.assertNotEqual(gate.tree_hashes(folder), baseline)
 
+    def test_preservation_diagnostics_distinguish_added_deleted_and_changed_files(self):
+        self.assertEqual(gate.tree_difference({'retained': 'same', 'edited': 'old', 'deleted': 'gone'},
+                                             {'retained': 'same', 'edited': 'new', 'added': 'new-file'}),
+                         {'added': {'before': None, 'after': 'new-file'},
+                          'deleted': {'before': 'gone', 'after': None},
+                          'edited': {'before': 'old', 'after': 'new'}})
+
     def test_preservation_permits_only_the_exact_legacy_session_lock_addition(self):
         before = {'user-data/saved.json': 'unchanged', 'external/reference.fa': 'unchanged-reference'}
         after = dict(before, **{'user-data/session.lock': hashlib.sha256(b'\0').hexdigest()})

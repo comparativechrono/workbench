@@ -447,7 +447,7 @@ def collector_diagnostic(stdout, returncode, launch_error=None):
             value = json.loads(line[len(prefix):], object_pairs_hook=unique_object)
             require(isinstance(value, dict) and set(value) == {'schemaVersion', 'stage', 'errorType', 'scriptLine'}
                     and value['schemaVersion'] == 1, 'Invalid collector diagnostic.')
-            require(value['stage'] in ('startup', 'root-check', 'manifest-check', 'inventory-check',
+            require(value['stage'] in ('startup', 'system-modules', 'root-check', 'manifest-check', 'inventory-check',
                     'output-check', 'signature-observation', 'write-observations'), 'Invalid diagnostic stage.')
             require(isinstance(value['errorType'], str) and len(value['errorType']) <= 160 and
                     re.fullmatch(r'(?:System\.|Microsoft\.)[A-Za-z0-9_.+`]+', value['errorType']),

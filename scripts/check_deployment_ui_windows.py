@@ -74,6 +74,11 @@ def tree_hashes(root):
             for path in sorted(root.rglob('*')) if path.is_file()}
 
 
+def tree_difference(before, after):
+    return {name: {'before': before.get(name), 'after': after.get(name)}
+            for name in sorted(set(before) | set(after)) if before.get(name) != after.get(name)}
+
+
 def verify_preserved(before, after):
     changes = {name: {'before': value, 'after': after.get(name)}
                for name, value in before.items() if after.get(name) != value}
@@ -470,7 +475,9 @@ def run(args, report):
     base, external = work / 'baseline/native-workbench', work / 'external references'
     invalid = work / 'not a Workbench installation'
     invalid.mkdir()
-    (invalid / 'keep.txt').write_text('Invalid folder must remain unchanged.\n', encoding='utf-8')
+    # Explicit bytes prevent Windows text-mode CRLF translation from making
+    # the preservation oracle disagree with its own freshly created fixture.
+    (invalid / 'keep.txt').write_bytes(b'Invalid folder must remain unchanged.\n')
     target_manifest = read_json(target / 'manifest.json')
     require(target_manifest['version'] == '0.16.0' and len(target_manifest['files']) == 87, 'Unexpected published target manifest.')
     verify_inventory(target, target_manifest['files'])
@@ -487,11 +494,16 @@ def run(args, report):
     passed(report, 'baseline-fixtures', 'Published 0.11.0 executes a local native SAMtools reference result and saves independent settings plus connected pipeline pins.')
     baseline_snapshot = tree_hashes(base)
     external_snapshot = tree_hashes(external)
+    invalid_snapshot = tree_hashes(invalid)
+    report['unchangedScenarioEvidence'] = {}
     for scenario in ('cancel', 'invalid'):
         updater_scenario(update, evidence, report, scenario, base, invalid)
-        require(tree_hashes(base) == baseline_snapshot and tree_hashes(external) == external_snapshot and
-                tree_hashes(invalid) == {'keep.txt': hashlib.sha256(b'Invalid folder must remain unchanged.\n').hexdigest()},
-                'Cancellation or invalid-folder handling changed fixture files.')
+        differences = {name: tree_difference(before, tree_hashes(folder)) for name, folder, before in
+                       [('installation', base, baseline_snapshot), ('externalReference', external, external_snapshot),
+                        ('invalidSelection', invalid, invalid_snapshot)]}
+        report['unchangedScenarioEvidence'][scenario] = differences
+        require(not any(differences.values()),
+                'Cancellation or invalid-folder handling changed fixture files: ' + json.dumps(differences))
         passed(report, 'updater-' + scenario, 'Published folder picker ' + ('cancels with Escape' if scenario == 'cancel' else 'rejects a real non-installation folder, explains the required files, reopens for retry and allows Escape') + ' with every baseline/reference/invalid-folder file unchanged.')
     updater_scenario(update, evidence, report, 'install', base, invalid)
     verify_inventory(base, target_manifest['files'])
@@ -512,8 +524,11 @@ def run(args, report):
     passed(report, 'updater-install', 'Selecting the actual baseline through the published folder picker displays success, commits all 87 exact Starter core files, and preserves every recorded pack/user/result/reference file.')
     installed_snapshot = tree_hashes(base)
     updater_scenario(update, evidence, report, 'repeat', base, invalid)
-    require(tree_hashes(base) == installed_snapshot and tree_hashes(external) == external_snapshot,
-            'Repeating through the folder picker changed the installed state or created another transaction.')
+    differences = {'installation': tree_difference(installed_snapshot, tree_hashes(base)),
+                   'externalReference': tree_difference(external_snapshot, tree_hashes(external))}
+    report['unchangedScenarioEvidence']['repeat'] = differences
+    require(not any(differences.values()),
+            'Repeating through the folder picker changed the installed state: ' + json.dumps(differences))
     passed(report, 'updater-repeat', 'Repeating the update through the same real picker displays success and leaves all installation/reference files and the single transaction unchanged.')
     host = PrivateHost(base, evidence, 'updated-fixture-readback', offline=True)
     try:

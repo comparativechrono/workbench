@@ -9,17 +9,100 @@
       "runId": 37974469974,
       "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37974469974",
       "result": "failed",
-      "sourceTests": {"passed": 80, "failed": 0, "skipped": 0},
-      "bundle": {"bytes": 126484004, "sha256": "c938da7c2d707a45526e98d9d05520f701dc3449b0124687ddd0afe5ff78fb48", "manifestSha256": "269f495b33010cc293c6759517698be4ac68e41295911b9069863ee02c3efe61"},
+      "sourceTests": {
+        "passed": 80,
+        "failed": 0,
+        "skipped": 0
+      },
+      "bundle": {
+        "bytes": 126484004,
+        "sha256": "c938da7c2d707a45526e98d9d05520f701dc3449b0124687ddd0afe5ff78fb48",
+        "manifestSha256": "269f495b33010cc293c6759517698be4ac68e41295911b9069863ee02c3efe61"
+      },
       "windows": [
-        {"pathCase": "ordinary", "jobId": 113969235536, "artifactId": 11636629862, "artifactSha256": "9ffc431ad04fc84ab30b126a2c770746cc859b2b2c4b9149682aa6889eb7d02c"},
-        {"pathCase": "path with spaces", "jobId": 113969235433, "artifactId": 11638288411, "artifactSha256": "b33d7d47dedc3d5e43d96de58ab231fb8b86731e07223380ddc268f613c4da13"}
+        {
+          "pathCase": "ordinary",
+          "jobId": 113969235536,
+          "artifactId": 11636629862,
+          "artifactSha256": "9ffc431ad04fc84ab30b126a2c770746cc859b2b2c4b9149682aa6889eb7d02c"
+        },
+        {
+          "pathCase": "path with spaces",
+          "jobId": 113969235433,
+          "artifactId": 11638288411,
+          "artifactSha256": "b33d7d47dedc3d5e43d96de58ab231fb8b86731e07223380ddc268f613c4da13"
+        }
       ],
-      "passedScopeBothPaths": ["complete extracted bundle verification", "actual packaged verify.cmd", "manual report initialisation with all checks untested", "274-file external test-copy preparation"],
+      "passedScopeBothPaths": [
+        "complete extracted bundle verification",
+        "actual packaged verify.cmd",
+        "manual report initialisation with all checks untested",
+        "274-file external test-copy preparation"
+      ],
       "failure": "Signature collector returned nonzero and retained only a generic unavailable reason. Root cause was not established by this attempt.",
-      "skippedBothPaths": ["native updater and desktop gate", "curated workflow/results regression", "final immutable-bundle recheck"],
+      "skippedBothPaths": [
+        "native updater and desktop gate",
+        "curated workflow/results regression",
+        "final immutable-bundle recheck"
+      ],
       "manualAcceptance": "not-tested",
       "followup": "Add bounded collector stage/type/line diagnostics and run independent Windows scopes even when another scope fails. Do not bypass security policy or infer a native pass."
+    },
+    {
+      "toolkitCommit": "d46373ca61323762f03477732217d0459a92dc8a",
+      "runId": 37975088967,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37975088967",
+      "result": "failed",
+      "sourceTests": {
+        "passed": 83,
+        "failed": 0,
+        "skipped": 0
+      },
+      "bundle": {
+        "sha256": "4858fa886d51beb8db0b8fe87e74482dca56e597aa4b55cf68f5ae2a9e43973e",
+        "manifestSha256": "2d25c7e32bf3cb39dfdd440e444ada5d0820bbb3ae379123abf73d00f6cdf84f"
+      },
+      "windows": [
+        {
+          "pathCase": "ordinary",
+          "jobId": 113971366836,
+          "artifactId": 11638209597,
+          "artifactSha256": "1f604efff399e1795186458694fe7988c1b09eafd1c606938581e6b6adf82017"
+        },
+        {
+          "pathCase": "path with spaces",
+          "jobId": 113971367019,
+          "artifactId": 11637594600,
+          "artifactSha256": "2522b5caca7f2884c908e24fe08ff68c4862b418922a73086f6a7bd384411773"
+        }
+      ],
+      "passedScopeBothPaths": [
+        "83 source checks in shared bundle job",
+        "complete kit verification and packaged verify.cmd",
+        "274-file external copy and untested report",
+        "exact Starter/updater extracted-file comparison",
+        "published 0.11.0 native local-reference result and saved preset/pipeline fixtures",
+        "11 curated workflow/results checks with six captures",
+        "final immutable-bundle verification",
+        "all nine manual acceptance checks remain not-tested"
+      ],
+      "nativeFailure": {
+        "checksCompleted": 2,
+        "captures": 1,
+        "nativeWindowsExecuted": true,
+        "nativeGUILaunched": true,
+        "nativeGUIValidated": false,
+        "reason": "Cancellation fixture equality assertion compared Windows write_text CRLF bytes against a literal LF digest. Later updater and desktop scenarios were not reached."
+      },
+      "signatureFailure": {
+        "stage": "manifest-check",
+        "errorType": "System.Management.Automation.CommandNotFoundException",
+        "scriptLine": 58,
+        "exitCode": 2,
+        "command": "Get-FileHash"
+      },
+      "manualAcceptance": "not-tested",
+      "followup": "Correct portable fixture bytes and signature collector command availability, then repeat exact-kit Windows gates. No published application bytes or security policy changed."
     }
   ]
 }

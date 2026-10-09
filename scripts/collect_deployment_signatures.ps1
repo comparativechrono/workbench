@@ -47,6 +47,16 @@ function Test-PortableExecutable([string]$Path, [long]$Length) {
 }
 
 try {
+    # A Windows PowerShell grandchild of pwsh -> Python can inherit the pwsh
+    # module search path and resolve shared names to incompatible PS7 modules.
+    # Select only the modules shipped with this system PowerShell by exact
+    # manifest path. This does not modify policy, trust or PSModulePath.
+    # https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_psmodulepath
+    $diagnosticStage = 'system-modules'
+    foreach ($moduleName in @('Microsoft.PowerShell.Management', 'Microsoft.PowerShell.Utility', 'Microsoft.PowerShell.Security')) {
+        $modulePath = [IO.Path]::Combine($PSHOME, 'Modules', $moduleName, $moduleName + '.psd1')
+        Import-Module -Name $modulePath -ErrorAction Stop
+    }
     $diagnosticStage = 'root-check'
     Assert-NoReparse $BundleRoot
     $root = [IO.Path]::GetFullPath($BundleRoot).TrimEnd('\', '/')
@@ -150,6 +160,7 @@ try {
         toolkitCommit = $manifest.toolkitCommit
         observedAt = [DateTime]::UtcNow.ToString('o')
         method = 'Get-AuthenticodeSignature -LiteralPath, under unchanged current Windows policy and trust configuration'
+        moduleResolution = 'Management, Utility and Security modules are selected by their exact built-in manifests under the running system Windows PowerShell installation; inherited module search paths are not used to select them.'
         selectionScope = 'Inventoried PE content, including extensionless updater blobs, plus .exe/.dll/.pyd paths. Script formats (.py/.cmd/.ps1) and other inventory kinds are not checked by this collector.'
         trustLimit = 'Status is an observation, not institutional approval. Offline or restricted trust resolution can be unavailable; checksums do not establish publisher identity. No execution policy, trust store or security control was changed.'
         files = @($observations)
@@ -168,12 +179,17 @@ try {
 catch {
     # No error message, invocation text, stack or file path is exported. The
     # invoking Python helper accepts only this small, explicitly typed record.
-    $diagnostic = [ordered]@{
-        schemaVersion = 1
-        stage = $diagnosticStage
-        errorType = $_.Exception.GetType().FullName
-        scriptLine = [int]$_.InvocationInfo.ScriptLineNumber
+    # Do not depend on Utility/ConvertTo-Json here: module initialization itself
+    # may be the failure. Values are fixed stage labels, a checked public .NET
+    # type identifier and an integer, never an exception message or path.
+    $errorType = $_.Exception.GetType().FullName
+    if ($errorType.Length -gt 160 -or $errorType -cnotmatch '^(System\.|Microsoft\.)[A-Za-z0-9_.+`]+$') {
+        $errorType = 'System.Exception'
     }
-    [Console]::Out.WriteLine('NW_SIGNATURE_DIAGNOSTIC ' + ($diagnostic | ConvertTo-Json -Compress))
+    $scriptLine = [int]$_.InvocationInfo.ScriptLineNumber
+    if ($scriptLine -lt 0 -or $scriptLine -gt 100000) { $scriptLine = 0 }
+    [Console]::Out.WriteLine('NW_SIGNATURE_DIAGNOSTIC {"schemaVersion":1,"stage":"' +
+        $diagnosticStage + '","errorType":"' + $errorType + '","scriptLine":' +
+        $scriptLine.ToString([Globalization.CultureInfo]::InvariantCulture) + '}')
     exit 2
 }
