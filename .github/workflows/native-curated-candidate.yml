@@ -61,6 +61,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          # Portable parser/list-selection checks cover the async empty state;
+          # actual Windows dialog behavior remains a separate exact-package gate.
+          mkdir -p build
+          c++ -std=c++17 -O2 -Wall -Wextra -Werror -DDESKTOP_JSON_ONLY -Idesktop tests/test_desktop_json.cpp desktop/desktop_ipc.cpp -o build/test_desktop_json
+          build/test_desktop_json
           # Only these five frontend-boundary cases are run from core_checks here;
           # its separate Linux portable-binary scientific adapter is not available.
           python3 tests/test_core_checks.py \

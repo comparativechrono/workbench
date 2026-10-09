@@ -1,4 +1,5 @@
 #include "desktop_ipc.h"
+#include "record_list.h"
 #include "resource.h"
 #include "dag_routing.h"
 #include "workbench.h"

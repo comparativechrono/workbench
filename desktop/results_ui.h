@@ -1,5 +1,5 @@
 // Included inside Workspace: searchable recorded results and evidence summaries.
-  Json resultsRecords = Json::object();
+  Json resultsRecords = object({{"runs", Json::array()}});
   std::string resultsRequested;
   std::set<long long> standaloneResultSummaries;
 
@@ -11,10 +11,7 @@
   }
 
   const Json &results_selected() const {
-    static const Json empty = Json::object();
-    const int row = selected_row(resultsView, RESULTS_RUNS);
-    const auto &entries = resultsRecords.get("runs").array_items();
-    return row >= 0 && static_cast<size_t>(row) < entries.size() ? entries[row] : empty;
+    return desktop::selected_record(resultsRecords, "runs", selected_row(resultsView, RESULTS_RUNS));
   }
   void results_enabled(bool idle) {
     if (!resultsView.window) return;
@@ -39,7 +36,7 @@
   }
   template<class Label, class Action, class Edit, class List>
   void results_controls(Auxiliary &view, Label label, Action action, Edit edit, List list) {
-    resultsRecords = Json::object(); resultsRequested.clear();
+    resultsRecords = object({{"runs", Json::array()}}); resultsRequested.clear();
     label(-1, L"Find recorded analyses by name, sample, tool or status. Select a result to read recorded measurements, unavailable evidence and any next steps.");
     label(-2, L"Search");
     edit(RESULTS_QUERY, L"", false);
@@ -71,6 +68,8 @@
   }
   void results_rows(const Json &value) {
     if (!resultsView.window) return;
+    if (!value.get("runs").is_array())
+      throw std::runtime_error("The local results search returned no run list. Search again and check the application files.");
     const auto previous = getstr(results_selected(), "run_id");
     resultsRecords = value; resultsRequested.clear();
     resultsView.rebuilding = true;

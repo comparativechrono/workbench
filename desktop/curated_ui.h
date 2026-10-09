@@ -1,11 +1,8 @@
 // Included inside Workspace: explicit, local synthetic training workflows.
-  Json curatedCatalogue = Json::object();
+  Json curatedCatalogue = object({{"workflows", Json::array()}});
 
   const Json &curated_selected() const {
-    static const Json empty = Json::object();
-    const int row = selected_row(curatedView, CURATED_LIST);
-    const auto &entries = curatedCatalogue.get("workflows").array_items();
-    return row >= 0 && static_cast<size_t>(row) < entries.size() ? entries[row] : empty;
+    return desktop::selected_record(curatedCatalogue, "workflows", selected_row(curatedView, CURATED_LIST));
   }
   void curated_enabled(bool idle, bool edit) {
     if (!curatedView.window) return;
@@ -32,7 +29,7 @@
   }
   template<class Label, class Action, class Edit, class List>
   void curated_controls(Auxiliary &view, Label label, Action action, Edit edit, List list) {
-    curatedCatalogue = Json::object();
+    curatedCatalogue = object({{"workflows", Json::array()}});
     label(-1, L"Small synthetic training workflows with known answers. Review the inputs and exact tool requirements, then explicitly load a workflow to edit and run locally.");
     label(-2, L"Training workflows"); label(-3, L"Inputs, expected answers and requirements");
     list(CURATED_LIST);
@@ -51,7 +48,7 @@
     std::wstring details = wt(entry, "details");
     if (details.empty() && !getstr(entry, "id").empty()) {
       details = wt(entry, "name") + L"\n\n" + wt(entry, "description", getstr(entry, "summary"));
-      for (const auto &issue : entry.get("issues").array_items())
+      if (entry.get("issues").is_array()) for (const auto &issue : entry.get("issues").array_items())
         details += L"\n\n" + (issue.is_string() ? wide(issue.string()) : wt(issue, "message"));
     }
     aux_text(curatedView, CURATED_DETAILS, lines(details.empty() ? L"Select a training workflow to review its inputs and expected answers." : details));
@@ -66,6 +63,8 @@
   }
   void curated_rows(const Json &value) {
     if (!curatedView.window) return;
+    if (!value.get("workflows").is_array())
+      throw std::runtime_error("The local workflow catalogue returned no workflow list. Refresh the catalogue and check the application files.");
     const auto previous = getstr(curated_selected(), "id");
     curatedCatalogue = value;
     curatedView.rebuilding = true;
@@ -101,7 +100,8 @@
       send("examples/list");
     } else if (id == CURATED_SETUP && IsWindowEnabled(aux(curatedView, CURATED_SETUP))) {
       requiredPack = Json::object();
-      for (const auto &requirement : curated_selected().get("requirements").array_items())
+      const auto &requirements = curated_selected().get("requirements");
+      if (requirements.is_array()) for (const auto &requirement : requirements.array_items())
         if (!requirement.get("available").boolean() && getstr(requirement, "packId") != "builtin") {
           requiredPack = requirement;
           break;

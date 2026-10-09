@@ -2,8 +2,8 @@
 
 **Current extension, 2026-10-09:** unpublished 0.16.0 adds application-owned exactly pinned synthetic workflows (`curated_workflows.py`) and read-only provenance-checked results (`results_summary.py`). The native catalogue/search dialogs use the existing private host. See the [feature contract](curated-workflows-results.md) and [handover](curated-workflows-results-0.16.0-handover.md); old versioned paragraphs below retain their original scope.
 
-This describes the reference-discovery, native interface and results-export
-implementation, with reference-management extensions under development on 2026-10-08.
+This describes the current implementation, including the prior 0.15.0 reference-management
+extensions and the 0.16.0 curated-workflow/results additions.
 Versioned release paragraphs retain their historical evidence. It is a map of
 the implementation, not a claim that every deployment or scientific use has been
 validated. Start with [the knowledge index](README.md).
@@ -62,7 +62,7 @@ pipes are handled by the native runner, including both subprocess outcomes.
 
 The GUI build target is `build/desktop/DesktopWorkbench.exe`; the release
 packager installs it as `NativeWorkbench.exe`. All three native build resource
-versions are 0.15.0 in the active development tree; published 0.11.0 is unchanged. Application version is maintained in `workspace/app_version.py`
+versions are 0.16.0 in the active development tree; published 0.11.0 is unchanged. Application version is maintained in `workspace/app_version.py`
 and release metadata, independently of pack versions and pack API compatibility.
 
 ## Responsibilities and source map
@@ -75,6 +75,8 @@ and release metadata, independently of pack versions and pack API compatibility.
 | [`workspace/desktop_model.py`](../workspace/desktop_model.py) | UI-independent editing actions, compatible connections, selection, input provenance and ranked graph snapshots. |
 | [`workspace/service.py`](../workspace/service.py) | Shared lifecycle, background work, history, saved pipelines/presets, pack operations and installation checks. |
 | [`workspace/catalog.py`](../workspace/catalog.py) | Strict manifest/schema parsing, installed operation discovery, semantic types and exact-version resolution. |
+| [`workspace/curated_workflows.py`](../workspace/curated_workflows.py) | Local synthetic training catalogue, exact pack requirements, fixture-byte verification and editable graph creation. |
+| [`workspace/results_summary.py`](../workspace/results_summary.py) | Metadata-only result search and bounded, provenance-checked scientific measurements with explicit unavailable evidence and failure guidance. |
 | [`workspace/engine.py`](../workspace/engine.py) | Graph validation, biological preflight, plan freezing, hashing, scheduling, native backend, methods and SVG/report generation. |
 | [`workspace/sample_table.py`](../workspace/sample_table.py) | Bounded CSV/TSV parsing, explicit column bindings, isolated per-sample graph copies and combined-report previews. |
 | [`workspace/run_queue.py`](../workspace/run_queue.py) | Durable queue receipt, OS ownership lease, frozen plan/companion inventory and atomic state persistence. |
@@ -101,7 +103,7 @@ adapters; do not add a bespoke GUI for each tool.
 
 Four different version concepts must remain distinct:
 
-* application version, development 0.15.0 (published 0.11.0);
+* application version, development 0.16.0 (published 0.11.0);
 * pack API, currently 1;
 * execution manifest format, currently 2;
 * each pack's own version and each executable's upstream/build version.
@@ -169,10 +171,10 @@ prove reference sequence identity.
 Graph layout uses dependency ranks: sources start at rank zero and each operation
 is one rank below its deepest dependency. Consumers of one output appear at the
 same level when their other dependencies allow it. Display ordering within a
-rank does not change edges. Execution is currently
-`sequential-independent-branches`: independent branches are supported but run
-sequentially, not concurrently. Descendants of a failed step are blocked; other
-independent branches can still run. Cancellation is recorded explicitly.
+rank does not change edges. Execution uses the `resource-budgeted-ready-dag`
+scheduler introduced in 0.14.0: ready independent steps can run concurrently
+within the frozen resource policy. Descendants of a failed step are blocked;
+other independent branches can still run. Cancellation is recorded explicitly.
 
 Preparation validates the graph, resolves exact pack identities, freezes
 parameters and validation helpers, hashes external inputs, and creates a new

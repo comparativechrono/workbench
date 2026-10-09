@@ -4,6 +4,7 @@
 // c++ -std=c++17 -O2 -Wall -Wextra -Werror -DDESKTOP_JSON_ONLY -Idesktop tests/test_desktop_json.cpp desktop/desktop_ipc.cpp -o build/test_desktop_json
 // build/test_desktop_json
 #include "desktop_ipc.h"
+#include "record_list.h"
 #include <algorithm>
 #include <cassert>
 #include <iostream>
@@ -34,6 +35,32 @@ int main() {
     assert(Json(1.5).integer(7) == 7);
     rejects([] { Json number(std::numeric_limits<double>::infinity()); });
     rejects([] { Json number(std::numeric_limits<double>::quiet_NaN()); });
+
+    // Native catalogue/results callbacks run before their first async reply.
+    // They also retain a briefly stale selection when a new search has no
+    // matches. Exercise the exact shared selector used by both Windows views.
+    for (const char* key : {"workflows", "runs"}) {
+        for (const auto& before_reply : {Json(), Json::object(), Json::parse("{\"notice\":\"loading\"}")}) {
+            assert(desktop::selected_record(before_reply, key, -1).is_object());
+            assert(desktop::selected_record(before_reply, key, 0).get("id").is_null());
+        }
+        Json records = Json::Object{{key, Json::array()}};
+        assert(!desktop::selected_record(records, key, -1).get("available").boolean());
+        assert(desktop::selected_record(records, key, 0).get("id").is_null());
+        records[key] = Json::Array{Json::Object{{"id", "first"}, {"available", true}},
+                                  Json::Object{{"id", "second"}, {"available", false}}};
+        assert(desktop::selected_record(records, key, 0).get("id").string() == "first");
+        assert(desktop::selected_record(records, key, 1).get("id").string() == "second");
+        assert(desktop::selected_record(records, key, -1).get("id").is_null());
+        assert(desktop::selected_record(records, key, 2).get("id").is_null());
+        assert(desktop::selected_record(records, key, std::numeric_limits<int>::max()).get("id").is_null());
+        records[key] = Json::array(); // An empty search after the second row was selected.
+        assert(desktop::selected_record(records, key, 1).get("id").is_null());
+        for (const auto& invalid_rows : {Json(), Json("invalid"), Json::object(), Json(Json::Array{Json("invalid")})}) {
+            records[key] = invalid_rows;
+            assert(desktop::selected_record(records, key, 0).get("id").is_null());
+        }
+    }
 
     const std::vector<std::string> invalid = {
         "", "{}x", "NaN", "Infinity", "01", "1.", ".1", "1e", "1e+", "-", "+1",
@@ -94,5 +121,5 @@ int main() {
     oversized.feed(block.data(), block.size(), [](std::string) {});
     rejects([&] { oversized.feed("x\n", 2, [](std::string) {}); });
 
-    std::cout << "Desktop JSON and pipe framing tests passed (portable; Windows lifecycle not executed).\n";
+    std::cout << "Desktop JSON, record selection and pipe framing tests passed (portable; Windows lifecycle not executed).\n";
 }

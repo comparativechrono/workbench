@@ -11,7 +11,7 @@ Commands below run from the repository root unless stated otherwise.
 Paths in angle brackets are placeholders to replace, not files supplied by Git.
 Read [architecture](architecture.md) before changing an unfamiliar layer.
 
-**Current development:** unpublished 0.15.0 on `feature/reference-management`
+**Previous set:** unpublished 0.15.0 on `feature/reference-management`
 extends the frozen 0.14.0 review candidate. The
 [reference-management guide](reference-management.md) defines resumable transfer,
 local import, copy/verify relocation and bounded NCBI RefSeq lookup contracts.

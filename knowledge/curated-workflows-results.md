@@ -2,7 +2,7 @@
 
 The 2026-10-09 set builds on reference-management review head
 `f45622f8915a3fa80c0904fcd97c216e0b5980f3`, on
-`feature/curated-workflows-results`. Repository and remote inspection found no
+`feature/curated-workflows-results`. Initial repository and remote inspection found no
 saved implementation of this set. The handover established the scope but no
 candidate version. This implementation assigns **0.16.0** to distinguish its
 bytes from the frozen 0.15.0 reference-management candidate. Published 0.11.0

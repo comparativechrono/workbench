@@ -44,6 +44,18 @@ was saved; **0.16.0** distinguishes the new implementation from the frozen
 reference-management 0.15.0 package. Published **0.11.0** remains unchanged.
 See the [feature contract](curated-workflows-results.md) for scope and interfaces.
 
+## Second attempted candidate
+
+`23cf175cd03baededcc5a97ea597f55f68d5c9ae`, built in
+[run 37940096315](https://github.com/comparativechrono/workbench/actions/runs/37940096315),
+passed 474 CI source tests with four Windows-only skips. Both Windows paths passed
+the two curated scientific workflows, known answers, measured summaries, search,
+persistence, changed-output rejection, missing dependencies and actual input-failure
+guidance. Native catalogue initialization still threw `Expected a JSON array`
+before a catalogue reply arrived; this candidate is also rejected. The native
+fix must tolerate absent rows during loading and empty selections in both dialogs.
+The [second independent archive audit](evidence/curated-workflows-results-0.16.0-second-archive-audit-2026-10-09.json) passed.
+
 ## Evidence to complete before delivery
 
 - Exact tested source commit and corresponding source/Starter archive hashes.
