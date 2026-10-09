@@ -366,6 +366,32 @@ class DesktopHost:
             return self.app.cancel(identity)
         if method == "history":
             return self.app.recent(summaries=True)
+        if method == "results/search":
+            if set(params) - {"query"}:
+                raise ValueError("Unknown results search field.")
+            return self.app.search_results(params.get("query", ""))
+        if method == "results/summary":
+            if set(params) != {"id"}:
+                raise ValueError("Choose a recorded result to summarize.")
+            return self.app.result_summary(params["id"])
+        if method == "examples/list":
+            if params:
+                raise ValueError("Unknown curated workflow catalogue field.")
+            from curated_workflows import list_catalogue
+            with self.app.lock:
+                return list_catalogue(self.app.root, self.app.catalog)
+        if method == "examples/load":
+            if set(params) != {"id"}:
+                raise ValueError("Choose a curated workflow to load.")
+            identity = short_text(params["id"], "curated workflow id", 100)
+            from curated_workflows import load_workflow
+            with self.app.lock:
+                self.app.ensure_model_editable()
+                graph = load_workflow(self.app.root, self.app.catalog, identity)
+                with self.model_lock:
+                    self._workflow_model.dispatch("load_graph", {"graph": graph, "template": False})
+                    self._select_mode("workflow")
+                return self.snapshot()
         if method == "saved":
             return self.app.saved_summaries()
         if method == "save":
@@ -501,7 +527,7 @@ def serve(host, input_stream, output_stream):
                 if immediate is not None:
                     send(identity, result=immediate)
                     continue
-            if method in ("review", "import", "diagnostics/save", "sample/table", "sample/preview", "sample/targets", "queue/add", "queue/add-batch", "queue/cancel", "index/list", "index/verify", "resources/set", "restart/review", "restart/queue", "project/export-preview", "project/inspect", "project/resolve", "project/export", "project/import", "project/open"):
+            if method in ("review", "import", "diagnostics/save", "sample/table", "sample/preview", "sample/targets", "queue/add", "queue/add-batch", "queue/cancel", "index/list", "index/verify", "resources/set", "restart/review", "restart/queue", "project/export-preview", "project/inspect", "project/resolve", "project/export", "project/import", "project/open", "results/summary"):
                 if not capacity.acquire(blocking=False):
                     if method == "queue/cancel":
                         try:

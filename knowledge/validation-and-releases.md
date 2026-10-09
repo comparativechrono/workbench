@@ -1,5 +1,9 @@
 # Validation, releases and publisher trust
 
+## Curated workflows/results candidate, 0.16.0
+
+Use [native-curated-candidate.yml](../.github/workflows/native-curated-candidate.yml) for the exact unpublished source/Starter build, ordinary/spaced Windows scientific/interface checks and relevant regressions. Recorded QC measurements must retain output provenance; missing/corrupted data must not become zero or a QC pass. Fixture expected answers are separate from biological acceptance criteria. Independently audit downloaded archives with `scripts/audit_curated_candidate.py`, and review final screenshots. Record actual results, failures and skips in the [handover](curated-workflows-results-0.16.0-handover.md); previous 0.15.0 results are not evidence for new bytes.
+
 ## Reference-management candidate, 0.15.0
 
 The [candidate workflow](../.github/workflows/native-reference-management-candidate.yml)

@@ -187,6 +187,31 @@ class Workbench:
             if self._changing_references:
                 raise ValueError("Wait for the reference operation to finish or cancel it.")
 
+    def search_results(self, query=""):
+        """Search recorded metadata without scanning scientific output files."""
+        from results_summary import search_entry, matches
+        if not isinstance(query, str) or len(query) > 500 or any(ord(c) < 32 for c in query):
+            raise ValueError("Use a results search of at most 500 characters.")
+        with self.lock:
+            items = list(reversed(list(self.runs.values()))) + [
+                run for run in self.history if run.get("run_id") not in self.runs]
+            entries = [search_entry(run) for run in items]
+        selected = [entry for entry in entries if matches(entry, query)]
+        runs, size = [], 0
+        for entry in selected:
+            length = len(json.dumps(entry, ensure_ascii=True).encode("utf-8"))
+            if size + length > MAX_RECENT_BYTES:
+                continue
+            runs.append(entry)
+            size += length
+        return {"runs": runs, "omitted": len(selected) - len(runs),
+                "note": "Search covers recorded names, samples, states and tools. Full outputs remain in each result folder."}
+
+    def result_summary(self, identity):
+        from results_summary import build_summary
+        identity = short_text(identity, "recorded run id", 200)
+        return build_summary(self.get_run(identity))
+
     def ensure_editable(self):
         with self.lock:
             self.run_queue.ready()
@@ -1003,6 +1028,12 @@ class Workbench:
                    "folder": "", "message": "Preparing installation checks" if check else "Preparing analysis",
                    "started_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
                    "_cancel": threading.Event(), "_cancel_file": self.data / ("cancel-" + identity)}
+            # A preparation failure still needs a searchable identity and the
+            # submitted draft for diagnosis. This is not a frozen execution plan.
+            run["name"] = "Installation checks" if check else (str(graph.get("name") or "Untitled analysis")[:200])
+            if not check:
+                run["graph"] = copy.deepcopy(graph)
+                run["graph_status"] = "submitted"
             self.runs[identity] = run
             self.persist_run(run)
         def emit(event):
@@ -1047,6 +1078,7 @@ class Workbench:
                     with self.lock:
                         run["folder"] = str(plan.get("folder", plan.get("run_folder", "")))
                         run["graph"] = copy.deepcopy(plan.get("graph", {}))
+                        run["graph_status"] = "prepared"
                         run["methods_planned"] = plan.get("methods", "")
                         run["status"] = "running"
                     self.persist_run(run)

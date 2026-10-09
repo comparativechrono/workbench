@@ -1,5 +1,7 @@
 # Native Workbench knowledge base
 
+**Current set, 2026-10-09:** unpublished **0.16.0** [curated workflows and recorded results](curated-workflows-results.md), on `feature/curated-workflows-results`, builds on the unmerged reference-management head. [Current handover](curated-workflows-results-0.16.0-handover.md) records evidence and limitations.
+
 **Active development, 2026-10-08:** the first remaining group is unpublished
 **0.15.0** [reference management](reference-management.md), on
 `feature/reference-management`. See its

@@ -1,5 +1,9 @@
 # Current project state
 
+## Active set: 0.16.0, unpublished
+
+Curated synthetic workflows and native recorded-result summaries/search are under development on `feature/curated-workflows-results`, based on reference-management head `f45622f8915a3fa80c0904fcd97c216e0b5980f3`. The [feature contract](curated-workflows-results.md) and [handover](curated-workflows-results-0.16.0-handover.md) separate new evidence from earlier results. Published 0.11.0 is unchanged; no merge, updater or release is implied.
+
 ## Active development: 0.15.0 reference management, unpublished
 
 On **2026-10-08** the owner requested the remaining accepted work one group at a

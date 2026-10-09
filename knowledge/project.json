@@ -3,7 +3,7 @@
   "document_kind": "project-knowledge-index",
   "project": "Native Workbench",
   "repository": "https://github.com/comparativechrono/workbench",
-  "reviewed_on": "2026-10-08",
+  "reviewed_on": "2026-10-09",
   "source_baseline_commit": "acfa060c9a400d82509278b657ee37853c7922b0",
   "format": {
     "prose": "UTF-8 Markdown",
@@ -134,7 +134,9 @@
     "reference_management_frozen_source": "evidence/reference-management-0.15.0-frozen-source-2026-10-08.json",
     "reference_management_frozen_archive_audit": "evidence/reference-management-0.15.0-frozen-archive-audit-2026-10-08.json",
     "reference_management_frozen_windows": "evidence/reference-management-0.15.0-frozen-windows-2026-10-08.json",
-    "reference_management_final_validation": "evidence/reference-management-0.15.0-final-validation-2026-10-08.json"
+    "reference_management_final_validation": "evidence/reference-management-0.15.0-final-validation-2026-10-08.json",
+    "curated_workflows_results": "curated-workflows-results.md",
+    "curated_workflows_results_handover": "curated-workflows-results-0.16.0-handover.md"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -1363,5 +1365,25 @@
     },
     "starter_candidate_download": "https://github.com/comparativechrono/workbench/actions/runs/37842857764/artifacts/11578890349",
     "candidate_download_limit": "Temporary Actions artifact retained for 30 days; may require GitHub sign-in; not a release asset."
+  },
+  "curated_workflows_results_development": {
+    "recorded_on": "2026-10-09",
+    "version": "0.16.0",
+    "branch": "feature/curated-workflows-results",
+    "starting_commit": "f45622f8915a3fa80c0904fcd97c216e0b5980f3",
+    "status": "implementation and validation in progress; unpublished",
+    "scope": [
+      "two synthetic training workflows: alignment with QC and variant calling",
+      "exact dependencies and expected answers",
+      "native recorded measurements, searchable results and failure guidance"
+    ],
+    "handover": "curated-workflows-results-0.16.0-handover.md",
+    "feature_guide": "curated-workflows-results.md",
+    "published_baseline": "0.11.0",
+    "published_assets_changed": false,
+    "release_authorized": false,
+    "released": false,
+    "updater_built": false,
+    "version_decision": "No saved next-set version found; new candidate assigned 0.16.0 to distinguish it from frozen reference-management 0.15.0."
   }
 }

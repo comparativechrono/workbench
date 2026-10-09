@@ -1,5 +1,7 @@
 # Current architecture
 
+**Current extension, 2026-10-09:** unpublished 0.16.0 adds application-owned exactly pinned synthetic workflows (`curated_workflows.py`) and read-only provenance-checked results (`results_summary.py`). The native catalogue/search dialogs use the existing private host. See the [feature contract](curated-workflows-results.md) and [handover](curated-workflows-results-0.16.0-handover.md); old versioned paragraphs below retain their original scope.
+
 This describes the reference-discovery, native interface and results-export
 implementation, with reference-management extensions under development on 2026-10-08.
 Versioned release paragraphs retain their historical evidence. It is a map of
