@@ -15,6 +15,7 @@ import json
 import os
 from pathlib import Path
 import platform
+import shutil
 import subprocess
 import sys
 import time
@@ -25,9 +26,87 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from build_update_0160 import (ALIGN_SHA, BASELINE_SHA, SOURCE_COMMIT, STARTER_SHA,
                                pack_hashes, verify_inventory)
 from check_update_090_windows import (PACK_SHA, read_json, preserved_files,
-                                      synthetic_reference, local_reference_run)
+                                      synthetic_reference)
 from check_references_windows import PrivateHost, require, sha256, write_json
 from check_results_windows import scientific_checks
+
+
+
+def local_reference_run(host, base, evidence, record, label, *, cwl=False):
+    listed = host.call('references/list')['local']
+    require(any(item['id'] == record['id'] and item['available'] and
+                item['receipt_sha256'] == record['receipt_sha256'] for item in listed),
+            'Preserved local reference was not available offline.')
+    host.call('workspace/tool', {'toolId': 'bam/reference-index'})
+    targets = host.call('references/targets', {'record_id': record['id'], 'file_id': 'genome'})['targets']
+    require(len(targets) == 1 and targets[0]['type'] == 'reference', 'Local reference lacks compatible input.')
+    target = targets[0]
+    host.call('references/use', {'record_id': record['id'], 'file_id': 'genome',
+                                'source_id': target['source_id'], 'field_id': target['field_id']})
+    review = host.call('review')
+    require(review['valid'], 'Preserved reference failed review: ' + json.dumps(review.get('issues')))
+    output = base / 'results' / label
+    output.mkdir(parents=True)
+    started = host.call('run', {'output_folder': str(output)})
+    deadline = time.monotonic() + 120
+    while time.monotonic() < deadline:
+        result = host.call('run/get', {'run_id': started['run_id']})
+        if result['status'] not in ('preparing', 'running', 'cancelling'):
+            break
+        time.sleep(.1)
+    else:
+        raise TimeoutError('Offline native reference indexing did not finish.')
+    require(result['status'] == 'completed' and result.get('success'), 'Offline reference analysis failed.')
+    folder = Path(result['folder'])
+    # Keep the actual run/receipt evidence even if a later oracle assertion
+    # fails; a display-name mismatch must remain diagnosable without rerunning.
+    write_json(evidence / (label + '-result.json'), result)
+    for name in ('plan.json', 'run.json', 'methods-completed.txt', 'reference-provenance.json', 'workflow.cwl'):
+        if (folder / name).is_file():
+            shutil.copyfile(folder / name, evidence / (label + '-' + name))
+    indexes = list(folder.rglob('*.fai'))
+    require(len(indexes) == 1, 'Native SAMtools failed to create one private reference index.')
+    actual = [(row[0], int(row[1])) for line in indexes[0].read_text(encoding='utf-8').splitlines()
+              if (row := line.split('\t'))]
+    expected = []
+    for line in Path(record['files'][0]['path']).read_text(encoding='utf-8').splitlines():
+        if line.startswith('>'):
+            expected.append([line[1:].split()[0], 0])
+        elif line.strip():
+            expected[-1][1] += len(line.strip())
+    require(actual == [tuple(row) for row in expected], 'Native reference index differs from FASTA truth.')
+    require(not Path(record['files'][0]['path'] + '.fai').exists(), 'Analysis modified external reference directory.')
+    plan, run = read_json(folder / 'plan.json'), read_json(folder / 'run.json')
+    genome = record['files'][0]
+    frozen = plan['references'][genome['path']]
+    require(frozen['file']['sha256'] == genome['sha256'] and
+            sha256(genome['path']) == genome['sha256'], 'Run lost or changed the preserved reference.')
+    require(all(frozen[key] == record[key] for key in
+                ('provider', 'release', 'species', 'assembly', 'assembly_accession',
+                 'receipt_path', 'receipt_sha256', 'downloaded_at')),
+            'Frozen run changed the preserved reference identity or receipt.')
+    # 0.11 methods used the provider ID. The independently tested 0.15/0.16
+    # provenance contract additionally retains and displays its human name.
+    # Keep the original ID assertions above, and check the actual frozen name
+    # instead of requiring old presentation text from a newer application.
+    if cwl:
+        require(frozen.get('provider_name') == record['provider_name'],
+                'Updated run lost the preserved provider display name.')
+    provider_text = frozen.get('provider_name') or frozen['provider']
+    methods = (folder / 'methods-completed.txt').read_text(encoding='utf-8')
+    for token in (provider_text, 'release ' + record['release'], record['species']['name'],
+                  'assembly ' + record['assembly'], genome['filename']):
+        require(token in methods, 'Completed methods lost reference provenance: ' + token)
+    if cwl:
+        exported = read_json(folder / 'workflow.cwl')
+        main = exported['$graph'][0]
+        require(exported['cwlVersion'] == 'v1.2' and json.loads(main['nw:references']) == plan['references'] and
+                main['nw:execution']['success'] is True and main['nw:planSha256'] == run['planSha256'] and
+                run['workflowExport']['sha256'] == sha256(folder / 'workflow.cwl'),
+                'Updated reference analysis did not export preserved provenance in successful CWL.')
+        shutil.copyfile(folder / 'workflow.cwl', evidence / 'updated-reference-workflow.cwl')
+    return {'folder': str(folder), 'nativeWindowsExecuted': True, 'contigs': len(expected),
+            'referenceSha256': genome['sha256'], 'runSha256': sha256(folder / 'run.json'), 'cwlChecked': cwl}
 
 
 
