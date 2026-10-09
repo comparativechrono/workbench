@@ -1,12 +1,12 @@
 # Native Workbench knowledge base
 
-**Current set, 2026-10-09:** unpublished **0.16.0** [curated workflows and recorded results](curated-workflows-results.md), on `feature/curated-workflows-results`, builds on the unmerged reference-management head. [Current handover](curated-workflows-results-0.16.0-handover.md) records evidence and limitations.
+**Current set, 2026-10-09:** unpublished **0.16.0** [curated workflows and recorded results](curated-workflows-results.md), on `feature/curated-workflows-results`, builds on the unmerged reference-management head. [Current handover](curated-workflows-results-0.16.0-handover.md) records the completed hosted validation, exact downloads and remaining limitations.
 
 **Previous set, 2026-10-08:** the first remaining group was unpublished
 **0.15.0** [reference management](reference-management.md), on
 `feature/reference-management`. Its implementation and recorded hosted validation
 are complete; see its [handover](reference-management-0.15.0-handover.md) for
-that candidate's evidence. The current 0.16.0 candidate requires separate validation.
+that candidate's evidence. The current 0.16.0 candidate has its own separate recorded validation.
 
 The previous three-tranche implementation culminated in
 unpublished **0.14.0** on `feature/recovery-projects`: [verified restart,

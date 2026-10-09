@@ -1,0 +1,2281 @@
+{
+  "schema": 1,
+  "date": "2026-10-09",
+  "applicationVersion": "0.16.0",
+  "branch": "feature/curated-workflows-results",
+  "sourceCommit": "7a9aca71ddd4816b51dbe693873f42fa50a6b746",
+  "runId": 37941573921,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37941573921",
+  "status": "Unpublished development candidate; all configured source and exact packaged Windows gates passed.",
+  "candidateValidated": true,
+  "published": false,
+  "updaterBuilt": false,
+  "buildSucceeded": true,
+  "buildProvenance": {
+    "schema": 1,
+    "status": "unpublished development candidate; exact native Windows validation pending",
+    "appVersion": "0.16.0",
+    "sourceCommit": "7a9aca71ddd4816b51dbe693873f42fa50a6b746",
+    "platform": "Linux-6.8.0-1064-azure-x86_64-with-glibc2.35",
+    "compiler": "LLVM-MinGW 20260922 UCRT",
+    "compilerArchiveSha256": "bb7bb7654b33d5aa8712acb837c963b2e0c56352560c76105270a3268c665c21",
+    "runtimeBaselineSha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a",
+    "sourceBaselineSha256": "427a9b42f2528984350479e8b0155e4ef4f0159fa6f240cc1aa84a5ec2e0e60a",
+    "nativeWindowsExecutedByBuilder": false,
+    "published": false,
+    "updaterBuilt": false,
+    "preservedSetupProfileSha256": "4cad899dcc1f6541f6edecc3ace7d0d4dd5d6103b1b16218fece0c0b68d2a4ba",
+    "preservedCatalogueSourcesSha256": "240cef994004c040584d3b8806bb361683693b1e7c0e92c9aedeaddc683fbefc",
+    "sourceCorrespondence": {
+      "sourceCommit": "7a9aca71ddd4816b51dbe693873f42fa50a6b746",
+      "currentFilesMatchCommit": 734,
+      "runtimeModulesMatchSource": 33,
+      "preservedPublishedRuntimeAndPackFiles": 182,
+      "sourceArchiveSha256": "8fc6a510d178632f12259a3e6e6b115c2c6c40562906eecc5a5557a7a9a361de",
+      "starterArchiveSha256": "1ff91bdb386171aeb166fec4fce4ad23e31287dc9e9695167db113994f416131",
+      "zipCrc": "passed"
+    },
+    "starterPacks": [
+      {
+        "id": "align",
+        "version": "0.4.0",
+        "folder": "packs/align-0.4.0",
+        "manifestSha256": "81c962222c93356a4f7727b23193c71d7dcd515859e62a179574781f411824d3"
+      },
+      {
+        "id": "bam",
+        "version": "0.4.0",
+        "folder": "packs/bam-0.4.0",
+        "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+      },
+      {
+        "id": "variants",
+        "version": "0.4.0",
+        "folder": "packs/variants-0.4.0",
+        "manifestSha256": "ea4b7f0a6c28709e4190b6514c07cbf7bdd58e1a4f2a2d931f2cae3ce6ec3795"
+      }
+    ],
+    "additionalPacks": [
+      {
+        "id": "align",
+        "version": "0.4.1",
+        "folder": "packs/align-0.4.1",
+        "manifestSha256": "7f8f36efbfd6a8255a98eabb06746fbcc5bbdb872f392a65ca3e79a586d04939",
+        "files": [
+          {
+            "path": "PACK-README.md",
+            "size": 1825,
+            "sha256": "c92e13990c5c74775ecf25274ae37e1468c2677ad75e9ccb489e5e54878a0c26"
+          },
+          {
+            "path": "bin/minimap2.exe",
+            "size": 606354,
+            "sha256": "06bf0815a79552ffcb1291046c7828f2bf8b11d9ad7fe0d9309283e966e973fa"
+          },
+          {
+            "path": "bin/paircheck.exe",
+            "size": 299154,
+            "sha256": "4f2dda7e26b5c115a7edee936a8a059eb55ece244931b2799a62cebfcd44ecd4"
+          },
+          {
+            "path": "fixtures/reads1.fastq",
+            "size": 22011,
+            "sha256": "33053fdfd6ca5abbe34883f869958a2e621e7d513ada06f401e91ad256e9cc21"
+          },
+          {
+            "path": "fixtures/reads2.fastq",
+            "size": 22011,
+            "sha256": "18b5ceeefb0115120830005a21808489f2c471c78af4aaaf724cdf99697a80e1"
+          },
+          {
+            "path": "fixtures/reference.fa",
+            "size": 3059,
+            "sha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee"
+          },
+          {
+            "path": "licenses/Cosmocc-3.3.10-README.md",
+            "size": 14863,
+            "sha256": "d0f502e2022b147c95f074f4c5069fde1d1bfbec861d34de46b8cde8e06e4c9b"
+          },
+          {
+            "path": "licenses/Cosmopolitan-LICENSE-3.3.10",
+            "size": 759,
+            "sha256": "188101f17152d898b65719a4c4fc501aa71c16649cc37ebab534bcb3511c6127"
+          },
+          {
+            "path": "licenses/Native-Workbench-MIT.txt",
+            "size": 1216,
+            "sha256": "8fc4c4b462aafaf8349f53b191ceea7496d39c49463224aaa05d366fbb406682"
+          },
+          {
+            "path": "licenses/ape-loader-3.3.10-ISC-header.txt",
+            "size": 1836,
+            "sha256": "f68ed60f7f93609e20d3a9d61a15e35bce298c90accf39e44d6c7cd2e964c9a6"
+          },
+          {
+            "path": "licenses/cosmopolitan-3.3.10/LICENSE",
+            "size": 759,
+            "sha256": "188101f17152d898b65719a4c4fc501aa71c16649cc37ebab534bcb3511c6127"
+          },
+          {
+            "path": "licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.fdlibm",
+            "size": 336,
+            "sha256": "5238b63cbd39512ff69bf9cb2ce054c7bd416030cdb0d3aea1af2ac0e47b2894"
+          },
+          {
+            "path": "licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.freebsd",
+            "size": 6109,
+            "sha256": "4ce916521645614401dd3f625bd534a2281c5e494fe50a631718de1a7c3fb064"
+          },
+          {
+            "path": "licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.musl",
+            "size": 6204,
+            "sha256": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af"
+          },
+          {
+            "path": "licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.openbsd",
+            "size": 19445,
+            "sha256": "89094132def44cf6f815a6527633d3cd673ccf82be8975fd9b717412517fd884"
+          },
+          {
+            "path": "licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.optimized-routines",
+            "size": 13491,
+            "sha256": "fb9dee614d78bd7e408174cce841b5d5d50b1f46d2b806124c4923e37859211f"
+          },
+          {
+            "path": "licenses/cosmopolitan-3.3.10/notice-source/libc/intrin/armopt.c",
+            "size": 109,
+            "sha256": "858985a8e6fbe9cfe264479a178989d7535112c734024764927e19eff8d6b22a"
+          },
+          {
+            "path": "licenses/cosmopolitan-3.3.10/notice-source/libc/intrin/musl.c",
+            "size": 101,
+            "sha256": "1f74213f9cdc74844b125f841d72c29ecde8ec490e941050bcd5bc28499d551e"
+          },
+          {
+            "path": "licenses/cosmopolitan-3.3.10/notice-source/libc/log/err.c",
+            "size": 5730,
+            "sha256": "477bcfc04d773fda8b1d0b5b5a33dff62892deea8da759371592ef4a62a1d6dc"
+          },
+          {
+            "path": "licenses/cosmopolitan-3.3.10/notice-source/libc/str/smoothsort.c",
+            "size": 7981,
+            "sha256": "15bcb6ed194bb990e0bd50d5ecd0f8e3d7bac33e0cff935ca69f5fe27abe355c"
+          },
+          {
+            "path": "licenses/cosmopolitan-3.3.10/notice-source/libc/str/strlcpy.c",
+            "size": 2713,
+            "sha256": "538a04c2ba5fdaf976f9ecc2bc0f88650d65fa5e4fd574d70c04a374dc4068f6"
+          },
+          {
+            "path": "licenses/cosmopolitan-3.3.10/notice-source/libc/str/todd.c",
+            "size": 124,
+            "sha256": "835e7eecbdc9b030b3d3623afcc55d89197bd4fd243378690573f829116ab5f8"
+          },
+          {
+            "path": "licenses/cosmopolitan-3.3.10/notice-source/third_party/gdtoa/gdtoa.c",
+            "size": 19547,
+            "sha256": "258ca8e769fda751b15e7e4ad02302d210745aa2e3524932e66bace1bab349af"
+          },
+          {
+            "path": "licenses/cosmopolitan-3.3.10/notice-source/third_party/gdtoa/gdtoa.internal.h",
+            "size": 15838,
+            "sha256": "bfcc967fdc6992454eeee1b47807b1af06b113353f969f80fe27b276a9b9cc97"
+          },
+          {
+            "path": "licenses/cosmopolitan-3.3.10/notice-source/third_party/gdtoa/notice.c",
+            "size": 204,
+            "sha256": "3f5cefed7918c2094199e5b51f1d8a260a9cf0a625dd5bb6401bb9d2dd81b989"
+          },
+          {
+            "path": "licenses/cosmopolitan-3.3.10/notice-source/third_party/puff/puff.c",
+            "size": 40453,
+            "sha256": "4435ebd8f4ac8c26c0c1080c985a91e2359ac3495ce22d2bf1be08101d5ee215"
+          },
+          {
+            "path": "licenses/cosmopolitan-3.3.10/third_party/nsync/LICENSE.txt",
+            "size": 11358,
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+          },
+          {
+            "path": "licenses/cosmopolitan-3.3.10/third_party/zlib/LICENSE",
+            "size": 2971,
+            "sha256": "49337b3c5dd49bc752db59acfbe6b96f6f710749e6f2e1d1caf7a33712ed9bd7"
+          },
+          {
+            "path": "licenses/cosmopolitan-3.3.10/third_party/zlib/LICENSE.chromium",
+            "size": 1536,
+            "sha256": "368cca1106be99d39ecd32a38d8305585d802a475effb66380b91ffc9bcf709b"
+          },
+          {
+            "path": "licenses/cosmopolitan-3.3.10/third_party/zlib/LICENSE.zlib",
+            "size": 1002,
+            "sha256": "845efc77857d485d91fb3e0b884aaa929368c717ae8186b66fe1ed2495753243"
+          },
+          {
+            "path": "licenses/minimap2-MIT-LICENSE",
+            "size": 1140,
+            "sha256": "b68a701dea24796190ef9e860ff56e79d578c96183722cf4ec3738793e8e75f4"
+          },
+          {
+            "path": "licenses/minimap2-embedded-runtime-notices.txt",
+            "size": 1717,
+            "sha256": "9b12488a3fd9041ecbbcd75f199337e3a9d434a877d1e23589ac91ddf17ff063"
+          },
+          {
+            "path": "licenses/provenance.json",
+            "size": 7329,
+            "sha256": "7bc4c9061703d0a41e5a8c1eaae675193c7fc2ee3169d0bd1d169d9858256a37"
+          },
+          {
+            "path": "licenses/seqtk-MIT-LICENSE",
+            "size": 1086,
+            "sha256": "506c5701a91dbd753aaab8f34639ec98e038685dbb40d943f63465e291e739d8"
+          },
+          {
+            "path": "licenses/seqtk-embedded-runtime-notices.txt",
+            "size": 1918,
+            "sha256": "90c25a6ac2ca4865b23ce5711df435cadcbd4c58831c923696c7f37d20681c03"
+          },
+          {
+            "path": "licenses/windows-runtime/COPYING",
+            "size": 2326,
+            "sha256": "99a69660981156c21336fdb5661f89341b013c94e4bf9e1c7467b4745718397f"
+          },
+          {
+            "path": "licenses/windows-runtime/COPYING.MinGW-w64-runtime.txt",
+            "size": 12155,
+            "sha256": "1db8da07b436c68833c0673ffee3d9fcb2526047f3820b81661865dfedc79a1f"
+          },
+          {
+            "path": "licenses/windows-runtime/COPYING.MinGW-w64.txt",
+            "size": 5905,
+            "sha256": "f38e6194bd3bfa1b654f118e5acefe0aead437bbe669eee43957ccc65a7127f1"
+          },
+          {
+            "path": "licenses/windows-runtime/COPYING.winpthreads.txt",
+            "size": 2883,
+            "sha256": "63263614cdd29f2f93cba85e992f041b31f9fc7b4033692f31269489a8a1b177"
+          },
+          {
+            "path": "licenses/windows-runtime/LLVM-Apache-2.0-with-exceptions.txt",
+            "size": 15141,
+            "sha256": "8d85c1057d742e597985c7d4e6320b015a9139385cff4cbae06ffc0ebe89afee"
+          },
+          {
+            "path": "pack.ini",
+            "size": 8813,
+            "sha256": "7f8f36efbfd6a8255a98eabb06746fbcc5bbdb872f392a65ca3e79a586d04939"
+          },
+          {
+            "path": "workbench-checks.json",
+            "size": 826,
+            "sha256": "9aba69715c792f7a95fca42426decc2b895305af0f03cb22cd92acc37f5deb90"
+          },
+          {
+            "path": "workbench-schema.json",
+            "size": 7100,
+            "sha256": "414460f4b438dd507233612873ea19a06b91489d66586b21afffcf846c9b682c"
+          }
+        ]
+      }
+    ],
+    "archives": [
+      {
+        "file": "native-workbench-0.16.0-source.zip",
+        "bytes": 47765332,
+        "sha256": "8fc6a510d178632f12259a3e6e6b115c2c6c40562906eecc5a5557a7a9a361de"
+      },
+      {
+        "file": "native-workbench-0.16.0-starter-windows.zip",
+        "bytes": 17846720,
+        "sha256": "1ff91bdb386171aeb166fec4fce4ad23e31287dc9e9695167db113994f416131"
+      },
+      {
+        "file": "native-workbench-pack-align-0.4.1.zip",
+        "bytes": 575862,
+        "sha256": "3a08cf061f0b62c5502d1420115db3fcae2b04bf695ad3cfd1c3063de0fafa02"
+      }
+    ],
+    "nativePerformanceHelper": {
+      "file": "WindowsPerformanceChecks.exe",
+      "sha256": "25504fd28d9f6537b7d465cadd4175feb9759b7c6accbd03622b07aa5908429c"
+    }
+  },
+  "buildSourceChecks": {
+    "jobId": 113856998678,
+    "jobUrl": "https://github.com/comparativechrono/workbench/actions/runs/37941573921/job/113856998678",
+    "scope": "Linux source and independent stock-CWL checks",
+    "success": true,
+    "invocations": 32,
+    "total": 478,
+    "passed": 474,
+    "failed": 0,
+    "skipped": 4,
+    "log": {
+      "file": "build-job.log",
+      "bytes": 105247,
+      "sha256": "40ff80eed3c2f8092da09a55c109ddc23724666e2b9e1b687527a3c70fb03336"
+    },
+    "suites": [
+      {
+        "script": "tests/test_core_checks.py",
+        "total": 5,
+        "passed": 5,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.457,
+        "selection": "Five explicit static frontend-boundary checks; not the separate Linux portable-binary scientific adapter."
+      },
+      {
+        "script": "workspace/tests/test_curated_workflows.py",
+        "total": 12,
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.144
+      },
+      {
+        "script": "workspace/tests/test_results_summary.py",
+        "total": 26,
+        "passed": 26,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.152
+      },
+      {
+        "script": "workspace/tests/test_curated_service.py",
+        "total": 6,
+        "passed": 6,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.02
+      },
+      {
+        "script": "workspace/tests/test_reference_provider.py",
+        "total": 18,
+        "passed": 18,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.013
+      },
+      {
+        "script": "workspace/tests/test_reference_manager.py",
+        "total": 26,
+        "passed": 26,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.321
+      },
+      {
+        "script": "workspace/tests/test_reference_service.py",
+        "total": 10,
+        "passed": 10,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.11
+      },
+      {
+        "script": "workspace/tests/test_reference_provenance.py",
+        "total": 6,
+        "passed": 6,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.055
+      },
+      {
+        "script": "workspace/tests/test_reference_resume.py",
+        "total": 19,
+        "passed": 19,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 4.442
+      },
+      {
+        "script": "workspace/tests/test_reference_library.py",
+        "total": 26,
+        "passed": 26,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.245
+      },
+      {
+        "script": "workspace/tests/test_reference_ncbi.py",
+        "total": 19,
+        "passed": 19,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.011
+      },
+      {
+        "script": "workspace/tests/test_reference_management_service.py",
+        "total": 12,
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.073
+      },
+      {
+        "script": "workspace/tests/test_recovery_execution.py",
+        "total": 26,
+        "passed": 26,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.983
+      },
+      {
+        "script": "workspace/tests/test_project_manager.py",
+        "total": 29,
+        "passed": 29,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 7.698
+      },
+      {
+        "script": "workspace/tests/test_recovery_service.py",
+        "total": 16,
+        "passed": 16,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.142
+      },
+      {
+        "script": "workspace/tests/test_sample_table.py",
+        "total": 26,
+        "passed": 26,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.118
+      },
+      {
+        "script": "workspace/tests/test_run_queue.py",
+        "total": 28,
+        "passed": 26,
+        "failed": 0,
+        "skipped": 2,
+        "seconds": 0.589,
+        "skipScope": "Two native Windows held-reader semantics cases require Windows."
+      },
+      {
+        "script": "workspace/tests/test_reference_indexes.py",
+        "total": 19,
+        "passed": 19,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 1.04
+      },
+      {
+        "script": "workspace/tests/test_desktop_host.py",
+        "total": 12,
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.297
+      },
+      {
+        "script": "workspace/tests/test_desktop_modes.py",
+        "total": 11,
+        "passed": 11,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.29
+      },
+      {
+        "script": "workspace/tests/test_workflow_inputs.py",
+        "total": 11,
+        "passed": 11,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.144
+      },
+      {
+        "script": "workspace/tests/test_pack_service.py",
+        "total": 6,
+        "passed": 6,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.029
+      },
+      {
+        "script": "workspace/tests/test_setup_manager.py",
+        "total": 16,
+        "passed": 16,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.648
+      },
+      {
+        "script": "workspace/tests/test_setup_service.py",
+        "total": 7,
+        "passed": 7,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.032
+      },
+      {
+        "script": "tests/test_split_release.py",
+        "total": 9,
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.187
+      },
+      {
+        "script": "workspace/tests/test_readiness.py",
+        "total": 16,
+        "passed": 16,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.074
+      },
+      {
+        "script": "workspace/tests/test_readiness_service.py",
+        "total": 6,
+        "passed": 6,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.017
+      },
+      {
+        "script": "workspace/tests/test_performance.py",
+        "total": 18,
+        "passed": 18,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.625
+      },
+      {
+        "script": "workspace/tests/test_diagnostics.py",
+        "total": 11,
+        "passed": 9,
+        "failed": 0,
+        "skipped": 2,
+        "seconds": 0.101,
+        "skipScope": "Native Windows junction and extended-path IO cases require Windows."
+      },
+      {
+        "script": "workspace/tests/test_engine_paths.py",
+        "total": 7,
+        "passed": 7,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.176
+      },
+      {
+        "script": "workspace/tests/test_cwl_results.py",
+        "total": 5,
+        "passed": 5,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 0.114
+      },
+      {
+        "script": "workspace/tests/test_cwl_export.py",
+        "total": 14,
+        "passed": 14,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 5.269
+      }
+    ]
+  },
+  "curatedScope": {
+    "hostAndScientificChecksPerPath": 8,
+    "nativeGUIChecksPerPath": 3,
+    "nativeGUIValidated": true,
+    "ordinaryAndSpaceContainingPaths": true
+  },
+  "priorAttempts": [
+    "curated-workflows-results-0.16.0-initial-windows-2026-10-09.json",
+    "curated-workflows-results-0.16.0-second-attempt-2026-10-09.json"
+  ],
+  "independentArchiveAudit": "curated-workflows-results-0.16.0-final-archive-audit-2026-10-09.json",
+  "paths": {
+    "ordinary": {
+      "pathCase": "ordinary",
+      "jobId": 113857829811,
+      "jobConclusion": "success",
+      "nativeSourceChecks": {
+        "jobId": 113857829811,
+        "jobUrl": "https://github.com/comparativechrono/workbench/actions/runs/37941573921/job/113857829811",
+        "scope": "Native Windows source tests using the exact bundled Python",
+        "success": true,
+        "invocations": 18,
+        "total": 322,
+        "passed": 318,
+        "failed": 0,
+        "skipped": 4,
+        "log": {
+          "file": "ordinary-job.log",
+          "bytes": 127135,
+          "sha256": "a543c03a830e81c3f07d9a7203e823eff37e8463eb4369f99435f6de453d691c"
+        },
+        "suites": [
+          {
+            "script": "tests/test_core_checks.py",
+            "total": 13,
+            "passed": 12,
+            "failed": 0,
+            "skipped": 1,
+            "seconds": 0.875,
+            "skipScope": "The separate scientific validation adapter executes portable binaries on Linux only."
+          },
+          {
+            "script": "workspace/tests/test_curated_workflows.py",
+            "total": 12,
+            "passed": 12,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 0.358
+          },
+          {
+            "script": "workspace/tests/test_results_summary.py",
+            "total": 26,
+            "passed": 26,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 0.686
+          },
+          {
+            "script": "workspace/tests/test_curated_service.py",
+            "total": 6,
+            "passed": 6,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 0.056
+          },
+          {
+            "script": "workspace/tests/test_reference_provider.py",
+            "total": 18,
+            "passed": 18,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 0.013
+          },
+          {
+            "script": "workspace/tests/test_reference_manager.py",
+            "total": 26,
+            "passed": 26,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 2.241
+          },
+          {
+            "script": "workspace/tests/test_reference_service.py",
+            "total": 10,
+            "passed": 10,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 0.279
+          },
+          {
+            "script": "workspace/tests/test_reference_provenance.py",
+            "total": 6,
+            "passed": 6,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 0.311
+          },
+          {
+            "script": "workspace/tests/test_reference_resume.py",
+            "total": 19,
+            "passed": 19,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 22.638
+          },
+          {
+            "script": "workspace/tests/test_reference_library.py",
+            "total": 26,
+            "passed": 26,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 1.657
+          },
+          {
+            "script": "workspace/tests/test_reference_ncbi.py",
+            "total": 19,
+            "passed": 19,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 0.012
+          },
+          {
+            "script": "workspace/tests/test_reference_management_service.py",
+            "total": 12,
+            "passed": 12,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 0.237
+          },
+          {
+            "script": "workspace/tests/test_recovery_execution.py",
+            "total": 26,
+            "passed": 26,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 5.159
+          },
+          {
+            "script": "workspace/tests/test_project_manager.py",
+            "total": 29,
+            "passed": 28,
+            "failed": 0,
+            "skipped": 1,
+            "seconds": 2.459,
+            "skipScope": "Independent stock-CWL replay is a Linux execution profile and is not counted as a Windows pass."
+          },
+          {
+            "script": "workspace/tests/test_recovery_service.py",
+            "total": 16,
+            "passed": 16,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 0.604
+          },
+          {
+            "script": "workspace/tests/test_diagnostics.py",
+            "total": 11,
+            "passed": 10,
+            "failed": 0,
+            "skipped": 1,
+            "seconds": 0.279,
+            "skipScope": "POSIX symlink destination test; native Windows junction handling is checked separately."
+          },
+          {
+            "script": "workspace/tests/test_run_queue.py",
+            "total": 28,
+            "passed": 28,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 3.135
+          },
+          {
+            "script": "workspace/tests/test_reference_indexes.py",
+            "total": 19,
+            "passed": 18,
+            "failed": 0,
+            "skipped": 1,
+            "seconds": 5.168,
+            "skipScope": "Creating Windows test symlinks may require privileges; ordinary-path native index gate is separate."
+          }
+        ]
+      },
+      "artifact": {
+        "id": 11622060614,
+        "name": "curated-windows-ordinary-1",
+        "size_in_bytes": 27212332,
+        "digest": "sha256:87c0dd728630bbec4055cf587cf1b33b90cb6eeac9c9dff5259bc1672b1b1d8f",
+        "created_at": "2026-10-09T14:11:02Z",
+        "expires_at": "2026-11-08T14:10:49Z"
+      },
+      "downloadVerification": {
+        "file": "ordinary-windows.zip",
+        "bytes": 27212332,
+        "sha256": "87c0dd728630bbec4055cf587cf1b33b90cb6eeac9c9dff5259bc1672b1b1d8f",
+        "matchesGitHubDigest": true,
+        "matchesGitHubSize": true
+      },
+      "gates": {
+        "curated": {
+          "report": "curated-evidence/native-curated.json",
+          "file": "native-curated.json",
+          "bytes": 14609,
+          "sha256": "fb192848d3b68d76231eb3011c9e331dd41e759756d05fd422be8dc280aa5162",
+          "success": true,
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": true,
+          "gateSha256": "6824624ab6be6ea685428a585956f78039ef97e2a9dac37ecb67def5b2fa24d1"
+        },
+        "referencesLive": {
+          "report": "reference-live-evidence/native-references-live.json",
+          "file": "native-references-live.json",
+          "bytes": 20717,
+          "sha256": "d32a0fe10c5ba3245194731d2faa3cff571d0d8dc5d7787fc7f869a6e28ff28a",
+          "success": true,
+          "passed": 9,
+          "failed": 0,
+          "skipped": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": false,
+          "gateSha256": "6e61ffe14fc6c6bcb4838fa4d142d28ff3e7d5eee71c9fbaa479717a715031c0"
+        },
+        "referenceManagement": {
+          "report": "reference-management-evidence/native-reference-management.json",
+          "file": "native-reference-management.json",
+          "bytes": 25492,
+          "sha256": "ab06027bea14e4f41abb86e117921c6e4006ed18fa1577afc5bc08a2fc6566ca",
+          "success": true,
+          "passed": 10,
+          "failed": 0,
+          "skipped": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": true,
+          "gateSha256": "6e61ffe14fc6c6bcb4838fa4d142d28ff3e7d5eee71c9fbaa479717a715031c0"
+        },
+        "performance": {
+          "report": "performance-evidence/native-performance.json",
+          "file": "native-performance.json",
+          "bytes": 6724,
+          "sha256": "d4c3dda767712ff7598b1d22f834a06436594d1bd52a60b2b58d8ea48d92fa5c",
+          "success": true,
+          "passed": 14,
+          "failed": 0,
+          "skipped": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": null,
+          "gateSha256": null
+        },
+        "readiness": {
+          "report": "readiness-evidence/native-readiness.json",
+          "file": "native-readiness.json",
+          "bytes": 8891,
+          "sha256": "ae30a9f904e02cf592c5f1649d76ee1a942cef81ef44240836011eb27ee3ed1c",
+          "success": true,
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": true,
+          "gateSha256": "60483711e84717bd0676fb400d86e9e01a0e7e4b45cf2c9184bb1fba5dc7aa3f"
+        },
+        "alignPackImport": {
+          "report": "batch-evidence/native-align-pack.json",
+          "file": "native-align-pack.json",
+          "bytes": 1485,
+          "sha256": "7e906cce850ee3e2e66da51d7b51ea0c9484c723dcebe7ab26964982e67b99e1",
+          "success": true,
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": null,
+          "gateSha256": null
+        },
+        "batch": {
+          "report": "batch-evidence/native-batch.json",
+          "file": "native-batch.json",
+          "bytes": 35954,
+          "sha256": "5d83f29b35f389a864641fec057dd44b8fee2bc72bc52f4569c12991f1a6dd87",
+          "success": true,
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": true,
+          "gateSha256": "779b7354a87ee9f62482820ecede482281834278e07f086cd2bfa11134b5caf8"
+        },
+        "recovery": {
+          "report": "recovery-evidence/native-recovery.json",
+          "file": "native-recovery.json",
+          "bytes": 75663,
+          "sha256": "fb2b6558365cca0ff6769869cc6e28addbd59a5a5db828cd6bb2715bb86d62d5",
+          "success": true,
+          "passed": 12,
+          "failed": 0,
+          "skipped": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": true,
+          "gateSha256": "ef75ee62dcf73bbf9a0a7d7f047d74c972f6e5c23b874afc37cecafe3f021edb"
+        },
+        "transport": {
+          "report": "transport-evidence/native-transport.json",
+          "file": "native-transport.json",
+          "bytes": 2667,
+          "sha256": "49d4c172480c09607bf67f7d28a602f1f1e113e868d18e8255866425a0a7af3e",
+          "success": true,
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "nativeWindowsExecuted": null,
+          "nativeGUIValidated": true,
+          "gateSha256": "62cd88c99ce694c6509443c276519dab087a9bff4e8d64edb82381c7732584d7"
+        },
+        "library": {
+          "report": "library-evidence/native-tool-library.json",
+          "file": "native-tool-library.json",
+          "bytes": 11566,
+          "sha256": "4f09d96e3702914f1bb83db389887ddfd6ca25c5ff20493aab5f75cd5c795c7e",
+          "success": true,
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": true,
+          "gateSha256": "ed419575da77af7c88742e6eed12243b958df5e0ad36e6edeeaa61d0bf9f875f"
+        },
+        "workspace": {
+          "report": "workspace-evidence/native-ui.json",
+          "file": "native-ui.json",
+          "bytes": 24184,
+          "sha256": "468a7427251fed07ce51ab14078db1f958869ebbe73507d62915f81580a47933",
+          "success": true,
+          "passed": 32,
+          "failed": 0,
+          "skipped": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": true,
+          "gateSha256": "30a38a4f5bc8d5a5af93eee80560963f87e4ef019a3e98ec9780f1964d847d13"
+        }
+      },
+      "curatedReport": {
+        "schema": 1,
+        "success": true,
+        "appVersion": "0.16.0",
+        "sourceCommit": "7a9aca71ddd4816b51dbe693873f42fa50a6b746",
+        "assetName": "native-workbench-0.16.0-starter-windows.zip",
+        "assetSha256": "1ff91bdb386171aeb166fec4fce4ad23e31287dc9e9695167db113994f416131",
+        "gateSha256": "6824624ab6be6ea685428a585956f78039ef97e2a9dac37ecb67def5b2fa24d1",
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+        "startedUtc": "2026-10-09T14:07:37.534451+00:00",
+        "nativeWindowsExecuted": true,
+        "nativeGUILaunched": true,
+        "nativeGUIValidated": true,
+        "checks": [
+          "Offline catalogue exposes both synthetic workflows, known answers and available exact 0.4.0 dependency pins beside align 0.4.1.",
+          "alignment-qc: editable exact-pin graph executes through native tools with known synthetic alignment truth and hash-bound result measurements.",
+          "variant-calling: editable exact-pin graph executes through native tools with known synthetic alignment truth and hash-bound result measurements.",
+          "Result search filters recorded names case-insensitively, explicit sample and tool metadata; an unmatched query returns no records.",
+          "A deliberately changed result file is reported unavailable and contributes no trusted metrics; restoring its original bytes restores the summary.",
+          "A fresh private application process restores both results and reconstructs the same scientific summaries from persisted evidence.",
+          "Missing align 0.4.0 disables both curated workflows with exact-version guidance and preserves the draft; installed align 0.4.1 is never substituted.",
+          "An explicitly selected missing read path fails preparation, retains its actual cause and submitted analysis name, and supplies actionable input guidance without scientific metrics or a QC verdict.",
+          "Native curated window lists both workflows, shows exact pins and synthetic expected answers, and loads an editable workflow.",
+          "A fresh native desktop finds the named failed preparation and displays its recorded missing-file error, failed execution state and explicit corrective input guidance.",
+          "Native results search selects the recorded variant run, renders sample/tool versions and scientific metrics, and disables View for an empty result set."
+        ],
+        "skips": [],
+        "captures": [
+          {
+            "path": "curated-native-catalogue.bmp",
+            "width": 940,
+            "height": 680,
+            "sha256": "ea4f2ec25c0dd698869a3bba5572b0feed7aa03d7531178beb91d85f0f5fa9c4"
+          },
+          {
+            "path": "curated-native-loaded-workflow.bmp",
+            "width": 1040,
+            "height": 728,
+            "sha256": "48af1a4e0080b0006e267e123163962b17712336e4e24f48a1e725380f1efa50"
+          },
+          {
+            "path": "results-native-filtered-summary.bmp",
+            "width": 940,
+            "height": 680,
+            "sha256": "ec7bf43ebd62dd30b1f61ef643529271b1234375df60944efc4e53463c199f33"
+          },
+          {
+            "path": "results-native-failed-preparation.bmp",
+            "width": 940,
+            "height": 680,
+            "sha256": "3046de85e7d199d171c4b3ea1d149c73d82c4763328f47bf56f73bc2f94f340d"
+          },
+          {
+            "path": "results-native-failure-guidance.bmp",
+            "width": 940,
+            "height": 680,
+            "sha256": "6ed9a20caf8e2702c6b8cb4e126e793245eb39d65cca7744ede3e9997c80258d"
+          },
+          {
+            "path": "results-native-empty-search.bmp",
+            "width": 940,
+            "height": 680,
+            "sha256": "9f64c6c24f3c8bed991091f43d3491ac6737013af7121612ee57bf0a7fb7e38d"
+          }
+        ],
+        "limits": [
+          "Small bundled synthetic inputs and exact pack pins; no clinical accuracy, biological dataset or capacity claim.",
+          "Metrics are recorded measurements with explicit source identities, not inferred sample QC pass/fail.",
+          "Private scientific hosts deny Python socket operations; this is not operating-system firewall isolation.",
+          "Hosted display DPI only; physical trackpad, high DPI, multi-monitor and institutional acceptance remain separate."
+        ],
+        "appFiles": {
+          "NativeWorkbench.exe": "4c09aa5b0ebc850e4659041b6daf4769723d6bb16a112c0e9caeb11f0088ef52",
+          "WorkbenchBridge.exe": "6eadbad2c19aa0193f52b6b6c0b10ae63cbd86052a116eb166d5ab5c5259c36f",
+          "workspace\\app_version.py": "c3273cb842be050edf6a65d3c7034c2e8628191656794bc15115fd936c8cdd0c",
+          "workspace\\catalog.py": "8269f3ff23500c8f5b3321d475573b94f960d0534271cf724a8ac3621adc311f",
+          "workspace\\core_checks.py": "431598722c8c261683e123b255d008210abedb13e90e68d7bec0e6b1df905d70",
+          "workspace\\curated_workflows.py": "0f476e0e49b08d8cb27f3c38c3bb3ecad9b2590ed8bbe4b351a4e92145b4f23d",
+          "workspace\\cwl_export.py": "5773f89433bc11f3cc9708e33994ec80f7c7bf8f6465c9ac8bb8da11c8181596",
+          "workspace\\dag_routing.py": "eb79a385a6426e8ce9778124620fe48c69e8c6ca3a7a9351b95780c99e869fe4",
+          "workspace\\desktop_host.py": "8b1cda931bfda3bcabce1020eb282ea2bd2d47301f220dd8e9d10e994faf0ed5",
+          "workspace\\desktop_model.py": "3904ae9e38fe214110e472167c292b183c39dca60ce01407c3533474227597f6",
+          "workspace\\diagnostics.py": "fa743c69179a13b66dc000348a3e2954616a349163f1103a8cd9f50d61793124",
+          "workspace\\engine.py": "888927ee7019a5317db0458d34a72f2989fd6e6dc0b49e61a0f15fe96ccf8363",
+          "workspace\\example.py": "fb558de8dc3f49f68550af3e08d768e8a99c5cd9e8d466ca357dcecc3dd699b3",
+          "workspace\\execution_resources.py": "33329a740602199f2931b90fde638a0780ed6fa28d2cf15aa15518d8ee8bdae9",
+          "workspace\\file_io.py": "ab6034e617504c8c264c9c53201174fdae88440765db114f01ce39eafcb2d67e",
+          "workspace\\pack_checks.py": "687a775f637ad12e55a04fac6c05292174c457bd551455f0dbffeb15d1f544a1",
+          "workspace\\pack_manager.py": "282b8370cccd6d86d00f6d2a85fe99669eb1d9b9953a9327c65c323a4a780b5d",
+          "workspace\\pack_security.py": "2d1fa4a4267f5cecb0d583c7b43fc59dc8645125c59e3db69c4d6fa307ff6cc0",
+          "workspace\\performance.py": "8f2e985ae95cf1856de64a5e051f681b0e78a9974dc312d0daf55331a523c5b6",
+          "workspace\\project_manager.py": "f01946694516b4a4fbe98ef8b14715a3e0e446d385b94438a26afc713ec86cdf",
+          "workspace\\readiness.py": "e8fdbaba0aa430a539e9214b711e14466e9597456527ec33eed687f898c33676",
+          "workspace\\recovery.py": "568d48098fe7fb01cfa800ac1fd52373d4d1bbff689f49207242065f9901d6b5",
+          "workspace\\reference_indexes.py": "fb6b20dd123f4d83896edc364868da6fdf779f915e4ae2e9e110cce1c1740203",
+          "workspace\\reference_library.py": "2416af2e3fb9aa80bcf1473037f4e248f9099600eb06ee707fee4b525b11baf2",
+          "workspace\\reference_manager.py": "af980e1ded0e01eb214424d29147043a21762b4e4708cf675dd0e8b183464cf6",
+          "workspace\\reference_ncbi.py": "1b1dec1af7c8cefbf94a49c6508ecfeacd2d93b89d3f72c041b18b04e526f5e9",
+          "workspace\\reference_provenance.py": "e2915eb46e3ca86cbf89297dadeec48925f2c9a667e85057bc3b9986e2735ac9",
+          "workspace\\reference_provider.py": "3bf51daae305ef16c0cff0a6bc2b65f76bc6013f7b1456da07fa8d869c5f0832",
+          "workspace\\reference_transfer.py": "105662115fbc1e477e40d898417a04ef81d1015241512af33b2d30a100ccde8d",
+          "workspace\\results_summary.py": "f132010ee4c50ad0d135ac62899c910bd9a747b56a58dc9fa30fe32cc0279ce1",
+          "workspace\\run_queue.py": "2dbb8387ba758259a68dc213ade820be027529e4f1d622e101ed96367c97cf6c",
+          "workspace\\sample_table.py": "a3ce7ac6f31fd044adf6abc90d7c8b83b5a57630212ebca973022ba4a7570f4e",
+          "workspace\\service.py": "5d229633b7bd90555c06c8e1bccf49930a8f9e0d84fa658b3aa29929da65f39b",
+          "workspace\\setup_manager.py": "4432c2c6c6091ebe4aeb57e29555e4d21cbe34b9d3ad8a2fef58fa13022fb853",
+          "workspace\\verify_installation.py": "dc33c51ebd52f9a812dfa6df0fcd083a04d144769edc0caa50147edab32358cf"
+        },
+        "failedPreparation": {
+          "id": "4a09f4a380874ee1bd625763029e6f65",
+          "name": "Missing input training diagnosis",
+          "missingInput": "D:\\a\\_temp\\curated-evidence\\explicitly-selected-missing-reads1.fastq",
+          "message": "Select an existing ordinary file: D:\\a\\_temp\\curated-evidence\\explicitly-selected-missing-reads1.fastq",
+          "action": "Restore the exact recorded input bytes at their original paths, or prepare a new run with explicitly selected replacement inputs. Do not edit recorded hashes.",
+          "stage": "preparation",
+          "nativeScientificStepsExecuted": 0
+        },
+        "scientificRuns": {
+          "alignment-qc": {
+            "id": "f58fc5ec475f4206987be3169d3ca388",
+            "folder": "D:\\a\\_temp\\curated-evidence\\scientific-results\\run-20261009-140738-928c0a73",
+            "planSha256": "caa35cca8ac44a29c235c6673ef6e81ec95668a48434a260790cd3939628d362",
+            "runSha256": "a471d33fc9d2c05b60f1dede21320e234167f4c49ffe4dd79891d1bb2bcbe327",
+            "answer": {
+              "alignmentRecords": 202,
+              "mappedProperPairs": 202,
+              "sample": "starter",
+              "reference": "starter:3000"
+            },
+            "outputHashes": {
+              "step-1::sam": {
+                "sam": "0e37e33120b3e732e2bac24e9961daed1930ea4b04304533bcc4bed0b1c8cf3a"
+              },
+              "step-1::pair-check": {
+                "pair-check": "2c25256e25928cff40cffb9069f201138ae4bd083e3ab626b82cd55099e1c436"
+              },
+              "step-2::bam": {
+                "bam": "000a94b8a4608890a2bbc5a74b96783ddbdc3f604609c9b2758d17c63df1c166"
+              },
+              "step-2::duplicate-stats": {
+                "duplicate-stats": "487e8b5192ac057bc37dd767ad4d7eb79a99115e34dcbd16b84019501f6c5796"
+              },
+              "step-2::flagstat": {
+                "flagstat": "b9b7e24ae5f0f1f69ef4feb916513d0acc088f3d18b8d75664c38e5ce092cf8f"
+              },
+              "step-2::alignment-stats": {
+                "alignment-stats": "9c5ceaa5b992d62841f64c61edab3c12da659b0d86195589b0fd2b7e363a3b0b"
+              },
+              "step-2::bam-index": {
+                "bam-index": "36f1e21e88e92a4a25823ed7a5c27b00b724fb86ea9cbad4fb57af14b69e424f"
+              },
+              "step-2::names": {
+                "names": "95bffe270fff65f73859233650a0b61ccf87360de433b0975079d2f4358515db"
+              },
+              "step-2::fixed": {
+                "fixed": "238cf00c602655b268111c14ff1bc4aadc35bb36293f0387748f59584dca3320"
+              },
+              "step-2::coordinates": {
+                "coordinates": "68a08878a112583d5b10e8e0f6ae8ca70ba015ddff20681a93b1a1829e453324"
+              },
+              "step-3::report": {
+                "report": "95f8594885b7a26e3a804f35d80acac0e6ce585e94319c135d88bc8adc15e2a3"
+              }
+            },
+            "expectedSummaryMetrics": {
+              "samtools.stats.raw_total_sequences": 202,
+              "samtools.stats.reads_mapped": 202,
+              "samtools.stats.average_length": 100,
+              "samtools.flagstat.total.qc_passed": 202,
+              "samtools.flagstat.mapped.qc_passed": 202
+            }
+          },
+          "variant-calling": {
+            "id": "096382d0332741eca19e702a2c7e58ec",
+            "folder": "D:\\a\\_temp\\curated-evidence\\scientific-results\\run-20261009-140738-169bc832",
+            "planSha256": "5457dbf710ca6d179f90708c7ff9272974be678da46df494cfd218fe88ba66a2",
+            "runSha256": "e05efdcbd8050e3ab575afaf535f3442442abcc2f425a70b68a7593bc441af24",
+            "answer": {
+              "alignmentRecords": 202,
+              "mappedProperPairs": 202,
+              "sample": "starter",
+              "reference": "starter:3000",
+              "variant": "starter:1351 G>A GT=1/1"
+            },
+            "outputHashes": {
+              "step-1::sam": {
+                "sam": "0e37e33120b3e732e2bac24e9961daed1930ea4b04304533bcc4bed0b1c8cf3a"
+              },
+              "step-1::pair-check": {
+                "pair-check": "2c25256e25928cff40cffb9069f201138ae4bd083e3ab626b82cd55099e1c436"
+              },
+              "step-2::bam": {
+                "bam": "ce61863d3d47d57f7926e775fd461543fed26a6d96bf3dc769d38aa0b67f1a15"
+              },
+              "step-2::duplicate-stats": {
+                "duplicate-stats": "70e1a77fdc50acca88b775ea930019ba32d4e8af34bc8264b96859a73537c8c6"
+              },
+              "step-2::flagstat": {
+                "flagstat": "b9b7e24ae5f0f1f69ef4feb916513d0acc088f3d18b8d75664c38e5ce092cf8f"
+              },
+              "step-2::alignment-stats": {
+                "alignment-stats": "1e140f9ec9ef8a1d82e1d980d975636bc53e60ec9e84e4fa49b89b9e933be0da"
+              },
+              "step-2::bam-index": {
+                "bam-index": "96f33f19a8f284d809058d9355f268093e06f2ff8c8646bfae0e6f50e5153a0c"
+              },
+              "step-2::names": {
+                "names": "083e3d5c70fddf90dadb9a52b6f324d42ab23dd415552765f5b14ae264c8b554"
+              },
+              "step-2::fixed": {
+                "fixed": "4a5dda58c1b3b77c103fc98f5e5e08ccdecbcba3d2e4293a9322d12d5a5f04f1"
+              },
+              "step-2::coordinates": {
+                "coordinates": "981d896986b5ea9ab00fece71d26facd834ceb2dcef7ab59a12dda0534790fc8"
+              },
+              "step-3::variants": {
+                "variants": "64bc66d945ecff25e7c9526718b92721e26a114fc36a156b78dfeda201cc90f7"
+              },
+              "step-3::variant-stats": {
+                "variant-stats": "6d93d8360a80b7a22c1fab243498dfc8eb7e7c8178607ee881ac3501ee1fd55b"
+              },
+              "step-3::variants-index": {
+                "variants-index": "f063ea1651ecc3849a00fdd9261a5660f34e0647d95a75cd45cfb24df94b9f1e"
+              },
+              "step-3::pileup": {
+                "pileup": "e9b972b4f2ad0d119c95a8f540028e58a249b2370d98ad16015efb2a6189c779"
+              },
+              "step-3::calls": {
+                "calls": "868d9bd52898ef2846d7a8ef8308036e1cd3ad4306a9b7cca9ea882560d874b6"
+              },
+              "step-3::normalized": {
+                "normalized": "cca1acd9c761b00492a37dd68ac64ee53c05bf9a928ac0ea27326d9be5835670"
+              },
+              "step-3::reference": {
+                "reference": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee"
+              },
+              "step-3::reference-index": {
+                "reference-index": "6bf365006e0d9d03de4e0fbfdfc082c6e5bee611888e54450bc2516614ae95a3"
+              },
+              "step-4::statistics": {
+                "statistics": "6d93d8360a80b7a22c1fab243498dfc8eb7e7c8178607ee881ac3501ee1fd55b"
+              },
+              "step-5::report": {
+                "report": "8798a069ab62fe471cbcf6e687e7e8bdf393d35507cddc761e6790190c240ac9"
+              }
+            },
+            "expectedSummaryMetrics": {
+              "samtools.stats.raw_total_sequences": 202,
+              "samtools.stats.reads_mapped": 202,
+              "samtools.stats.average_length": 100,
+              "samtools.flagstat.total.qc_passed": 202,
+              "samtools.flagstat.mapped.qc_passed": 202,
+              "bcftools.stats.number_of_records": 1,
+              "bcftools.stats.number_of_snps": 1,
+              "bcftools.stats.number_of_indels": 0,
+              "bcftools.stats.number_of_samples": 1
+            }
+          }
+        },
+        "networkSocketOperationsDeniedInScientificHosts": true,
+        "dpi": 96,
+        "completedUtc": "2026-10-09T14:07:42.868723+00:00",
+        "passed": 11,
+        "failed": 0,
+        "skipped": 0
+      },
+      "curatedCaptures": [
+        {
+          "file": "curated-native-catalogue.bmp",
+          "bytes": 2556854,
+          "sha256": "ea4f2ec25c0dd698869a3bba5572b0feed7aa03d7531178beb91d85f0f5fa9c4"
+        },
+        {
+          "file": "curated-native-loaded-workflow.bmp",
+          "bytes": 3028534,
+          "sha256": "48af1a4e0080b0006e267e123163962b17712336e4e24f48a1e725380f1efa50"
+        },
+        {
+          "file": "results-native-empty-search.bmp",
+          "bytes": 2556854,
+          "sha256": "9f64c6c24f3c8bed991091f43d3491ac6737013af7121612ee57bf0a7fb7e38d"
+        },
+        {
+          "file": "results-native-failed-preparation.bmp",
+          "bytes": 2556854,
+          "sha256": "3046de85e7d199d171c4b3ea1d149c73d82c4763328f47bf56f73bc2f94f340d"
+        },
+        {
+          "file": "results-native-failure-guidance.bmp",
+          "bytes": 2556854,
+          "sha256": "6ed9a20caf8e2702c6b8cb4e126e793245eb39d65cca7744ede3e9997c80258d"
+        },
+        {
+          "file": "results-native-filtered-summary.bmp",
+          "bytes": 2556854,
+          "sha256": "ec7bf43ebd62dd30b1f61ef643529271b1234375df60944efc4e53463c199f33"
+        }
+      ],
+      "curatedSummaries": [
+        {
+          "file": "alignment-qc-summary.json",
+          "bytes": 18387,
+          "sha256": "6c260d121a62aedd78a133edae9c95ef507d2b63c940d127c7e1dd725d061699"
+        },
+        {
+          "file": "changed-output-summary.json",
+          "bytes": 25386,
+          "sha256": "7fe6631cd87a049252f5b1ae75d3e400f2e7750afd30ab50ebe83b50713037fe"
+        },
+        {
+          "file": "missing-input-failed-summary.json",
+          "bytes": 3161,
+          "sha256": "4f16a37c375cadc89acebecdd446501ea680ecbe7ae4844e6c8ddd26033fe845"
+        },
+        {
+          "file": "variant-calling-summary.json",
+          "bytes": 27958,
+          "sha256": "a9e0c3a0d1105726b524e69e8677c6aac31bc365f7d2e420f3edc96f3e7124d0"
+        }
+      ]
+    },
+    "spaces": {
+      "pathCase": "path with spaces",
+      "jobId": 113857829894,
+      "jobConclusion": "success",
+      "nativeSourceChecks": {
+        "jobId": 113857829894,
+        "jobUrl": "https://github.com/comparativechrono/workbench/actions/runs/37941573921/job/113857829894",
+        "scope": "Native Windows source tests using the exact bundled Python",
+        "success": true,
+        "invocations": 18,
+        "total": 322,
+        "passed": 318,
+        "failed": 0,
+        "skipped": 4,
+        "log": {
+          "file": "spaces-job.log",
+          "bytes": 125389,
+          "sha256": "3d1894cba898fd664a9774350f1d0997f2aecda77adfaea526c22e6003a8eab0"
+        },
+        "suites": [
+          {
+            "script": "tests/test_core_checks.py",
+            "total": 13,
+            "passed": 12,
+            "failed": 0,
+            "skipped": 1,
+            "seconds": 0.915,
+            "skipScope": "The separate scientific validation adapter executes portable binaries on Linux only."
+          },
+          {
+            "script": "workspace/tests/test_curated_workflows.py",
+            "total": 12,
+            "passed": 12,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 0.359
+          },
+          {
+            "script": "workspace/tests/test_results_summary.py",
+            "total": 26,
+            "passed": 26,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 0.709
+          },
+          {
+            "script": "workspace/tests/test_curated_service.py",
+            "total": 6,
+            "passed": 6,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 0.052
+          },
+          {
+            "script": "workspace/tests/test_reference_provider.py",
+            "total": 18,
+            "passed": 18,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 0.013
+          },
+          {
+            "script": "workspace/tests/test_reference_manager.py",
+            "total": 26,
+            "passed": 26,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 2.488
+          },
+          {
+            "script": "workspace/tests/test_reference_service.py",
+            "total": 10,
+            "passed": 10,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 0.286
+          },
+          {
+            "script": "workspace/tests/test_reference_provenance.py",
+            "total": 6,
+            "passed": 6,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 0.328
+          },
+          {
+            "script": "workspace/tests/test_reference_resume.py",
+            "total": 19,
+            "passed": 19,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 25.456
+          },
+          {
+            "script": "workspace/tests/test_reference_library.py",
+            "total": 26,
+            "passed": 26,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 1.788
+          },
+          {
+            "script": "workspace/tests/test_reference_ncbi.py",
+            "total": 19,
+            "passed": 19,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 0.012
+          },
+          {
+            "script": "workspace/tests/test_reference_management_service.py",
+            "total": 12,
+            "passed": 12,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 0.275
+          },
+          {
+            "script": "workspace/tests/test_recovery_execution.py",
+            "total": 26,
+            "passed": 26,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 6.011
+          },
+          {
+            "script": "workspace/tests/test_project_manager.py",
+            "total": 29,
+            "passed": 28,
+            "failed": 0,
+            "skipped": 1,
+            "seconds": 2.535,
+            "skipScope": "Independent stock-CWL replay is a Linux execution profile and is not counted as a Windows pass."
+          },
+          {
+            "script": "workspace/tests/test_recovery_service.py",
+            "total": 16,
+            "passed": 16,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 0.636
+          },
+          {
+            "script": "workspace/tests/test_diagnostics.py",
+            "total": 11,
+            "passed": 10,
+            "failed": 0,
+            "skipped": 1,
+            "seconds": 0.306,
+            "skipScope": "POSIX symlink destination test; native Windows junction handling is checked separately."
+          },
+          {
+            "script": "workspace/tests/test_run_queue.py",
+            "total": 28,
+            "passed": 28,
+            "failed": 0,
+            "skipped": 0,
+            "seconds": 3.233
+          },
+          {
+            "script": "workspace/tests/test_reference_indexes.py",
+            "total": 19,
+            "passed": 18,
+            "failed": 0,
+            "skipped": 1,
+            "seconds": 5.689,
+            "skipScope": "Creating Windows test symlinks may require privileges; ordinary-path native index gate is separate."
+          }
+        ]
+      },
+      "artifact": {
+        "id": 11621414963,
+        "name": "curated-windows-path with spaces-1",
+        "size_in_bytes": 27215484,
+        "digest": "sha256:bc5d4c608c4830e69a64905c2ed2046d0d27ed8f194bbe2b1842a315d383902b",
+        "created_at": "2026-10-09T14:11:11Z",
+        "expires_at": "2026-11-08T14:10:57Z"
+      },
+      "downloadVerification": {
+        "file": "spaces-windows.zip",
+        "bytes": 27215484,
+        "sha256": "bc5d4c608c4830e69a64905c2ed2046d0d27ed8f194bbe2b1842a315d383902b",
+        "matchesGitHubDigest": true,
+        "matchesGitHubSize": true
+      },
+      "gates": {
+        "curated": {
+          "report": "curated-evidence/native-curated.json",
+          "file": "native-curated.json",
+          "bytes": 14609,
+          "sha256": "9b1cb6ddbc7d1d5f6ddc9c5807aaa0ba9f654e42da7783aa7a12bf115716226f",
+          "success": true,
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": true,
+          "gateSha256": "6824624ab6be6ea685428a585956f78039ef97e2a9dac37ecb67def5b2fa24d1"
+        },
+        "referencesLive": {
+          "report": "reference-live-evidence/native-references-live.json",
+          "file": "native-references-live.json",
+          "bytes": 20717,
+          "sha256": "e1152a6608555359a8dcc8516ac80f3c515055ba33d281076c02cd70ef3fe30d",
+          "success": true,
+          "passed": 9,
+          "failed": 0,
+          "skipped": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": false,
+          "gateSha256": "6e61ffe14fc6c6bcb4838fa4d142d28ff3e7d5eee71c9fbaa479717a715031c0"
+        },
+        "referenceManagement": {
+          "report": "reference-management-evidence/native-reference-management.json",
+          "file": "native-reference-management.json",
+          "bytes": 25492,
+          "sha256": "a4bb1acfadaf86c68a6cee44c6a669ae669e562da5da6bb7fa1b5742924b95bc",
+          "success": true,
+          "passed": 10,
+          "failed": 0,
+          "skipped": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": true,
+          "gateSha256": "6e61ffe14fc6c6bcb4838fa4d142d28ff3e7d5eee71c9fbaa479717a715031c0"
+        },
+        "performance": {
+          "report": "performance-evidence/native-performance.json",
+          "file": "native-performance.json",
+          "bytes": 6724,
+          "sha256": "742744eb28d0e18182da82e49ee0c2ee5b8b7ae22bd49778eb0bb9fe98b73980",
+          "success": true,
+          "passed": 14,
+          "failed": 0,
+          "skipped": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": null,
+          "gateSha256": null
+        },
+        "readiness": {
+          "report": "readiness-evidence/native-readiness.json",
+          "file": "native-readiness.json",
+          "bytes": 8883,
+          "sha256": "930640535f785d1dc14c6238e368dce44614c0a0399259e1ad59aed0516c55ce",
+          "success": true,
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": true,
+          "gateSha256": "60483711e84717bd0676fb400d86e9e01a0e7e4b45cf2c9184bb1fba5dc7aa3f"
+        },
+        "alignPackImport": {
+          "report": "batch-evidence/native-align-pack.json",
+          "file": "native-align-pack.json",
+          "bytes": 1509,
+          "sha256": "fb90c70c9ae774bbbeb59be36f5415f6150c96a70ae729e651b90a0ec2c22785",
+          "success": true,
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": null,
+          "gateSha256": null
+        },
+        "batch": {
+          "report": "batch-evidence/native-batch.json",
+          "file": "native-batch.json",
+          "bytes": 35971,
+          "sha256": "9c90ce7668e05bef8892efd2e70f804fc7a7160567cd3cbd8dca2385c42bce2e",
+          "success": true,
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": true,
+          "gateSha256": "779b7354a87ee9f62482820ecede482281834278e07f086cd2bfa11134b5caf8"
+        },
+        "recovery": {
+          "report": "recovery-evidence/native-recovery.json",
+          "file": "native-recovery.json",
+          "bytes": 75867,
+          "sha256": "15391358ad7c38d0b69771a148ce577a9439e613804fb4c992a4c07f759fd176",
+          "success": true,
+          "passed": 12,
+          "failed": 0,
+          "skipped": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": true,
+          "gateSha256": "ef75ee62dcf73bbf9a0a7d7f047d74c972f6e5c23b874afc37cecafe3f021edb"
+        },
+        "transport": {
+          "report": "transport-evidence/native-transport.json",
+          "file": "native-transport.json",
+          "bytes": 2668,
+          "sha256": "a71544a2ef18e0c7d9dfc0c3def3016cd990a1e059b93fa48332f7e81a30d31a",
+          "success": true,
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "nativeWindowsExecuted": null,
+          "nativeGUIValidated": true,
+          "gateSha256": "62cd88c99ce694c6509443c276519dab087a9bff4e8d64edb82381c7732584d7"
+        },
+        "library": {
+          "report": "library-evidence/native-tool-library.json",
+          "file": "native-tool-library.json",
+          "bytes": 11574,
+          "sha256": "cb7a94edb48341ac271ad49bcb9eb903329c12824403e203abaa72b5989e6c0a",
+          "success": true,
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": true,
+          "gateSha256": "ed419575da77af7c88742e6eed12243b958df5e0ad36e6edeeaa61d0bf9f875f"
+        },
+        "workspace": {
+          "report": "workspace-evidence/native-ui.json",
+          "file": "native-ui.json",
+          "bytes": 24233,
+          "sha256": "6083ce7dc7f94e10b2848ce4589438ea0b7afbc09f103735bddfa0a2ea0949aa",
+          "success": true,
+          "passed": 32,
+          "failed": 0,
+          "skipped": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": true,
+          "gateSha256": "30a38a4f5bc8d5a5af93eee80560963f87e4ef019a3e98ec9780f1964d847d13"
+        }
+      },
+      "curatedReport": {
+        "schema": 1,
+        "success": true,
+        "appVersion": "0.16.0",
+        "sourceCommit": "7a9aca71ddd4816b51dbe693873f42fa50a6b746",
+        "assetName": "native-workbench-0.16.0-starter-windows.zip",
+        "assetSha256": "1ff91bdb386171aeb166fec4fce4ad23e31287dc9e9695167db113994f416131",
+        "gateSha256": "6824624ab6be6ea685428a585956f78039ef97e2a9dac37ecb67def5b2fa24d1",
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+        "startedUtc": "2026-10-09T14:07:39.353429+00:00",
+        "nativeWindowsExecuted": true,
+        "nativeGUILaunched": true,
+        "nativeGUIValidated": true,
+        "checks": [
+          "Offline catalogue exposes both synthetic workflows, known answers and available exact 0.4.0 dependency pins beside align 0.4.1.",
+          "alignment-qc: editable exact-pin graph executes through native tools with known synthetic alignment truth and hash-bound result measurements.",
+          "variant-calling: editable exact-pin graph executes through native tools with known synthetic alignment truth and hash-bound result measurements.",
+          "Result search filters recorded names case-insensitively, explicit sample and tool metadata; an unmatched query returns no records.",
+          "A deliberately changed result file is reported unavailable and contributes no trusted metrics; restoring its original bytes restores the summary.",
+          "A fresh private application process restores both results and reconstructs the same scientific summaries from persisted evidence.",
+          "Missing align 0.4.0 disables both curated workflows with exact-version guidance and preserves the draft; installed align 0.4.1 is never substituted.",
+          "An explicitly selected missing read path fails preparation, retains its actual cause and submitted analysis name, and supplies actionable input guidance without scientific metrics or a QC verdict.",
+          "Native curated window lists both workflows, shows exact pins and synthetic expected answers, and loads an editable workflow.",
+          "A fresh native desktop finds the named failed preparation and displays its recorded missing-file error, failed execution state and explicit corrective input guidance.",
+          "Native results search selects the recorded variant run, renders sample/tool versions and scientific metrics, and disables View for an empty result set."
+        ],
+        "skips": [],
+        "captures": [
+          {
+            "path": "curated-native-catalogue.bmp",
+            "width": 940,
+            "height": 680,
+            "sha256": "ea4f2ec25c0dd698869a3bba5572b0feed7aa03d7531178beb91d85f0f5fa9c4"
+          },
+          {
+            "path": "curated-native-loaded-workflow.bmp",
+            "width": 1040,
+            "height": 728,
+            "sha256": "48af1a4e0080b0006e267e123163962b17712336e4e24f48a1e725380f1efa50"
+          },
+          {
+            "path": "results-native-filtered-summary.bmp",
+            "width": 940,
+            "height": 680,
+            "sha256": "fd684826b7a117f9376a950d266cd670d9bcbf79fe1aefa931cbdfb5de7c895e"
+          },
+          {
+            "path": "results-native-failed-preparation.bmp",
+            "width": 940,
+            "height": 680,
+            "sha256": "f7af843dc95e53560cf4ea0785d83c40997cf3574f44c4f6b85649899e4dafbc"
+          },
+          {
+            "path": "results-native-failure-guidance.bmp",
+            "width": 940,
+            "height": 680,
+            "sha256": "bd1bb4e5d4448423abc54ce469ceea8ce02683c579194f94af05b6055af0e1e9"
+          },
+          {
+            "path": "results-native-empty-search.bmp",
+            "width": 940,
+            "height": 680,
+            "sha256": "9f64c6c24f3c8bed991091f43d3491ac6737013af7121612ee57bf0a7fb7e38d"
+          }
+        ],
+        "limits": [
+          "Small bundled synthetic inputs and exact pack pins; no clinical accuracy, biological dataset or capacity claim.",
+          "Metrics are recorded measurements with explicit source identities, not inferred sample QC pass/fail.",
+          "Private scientific hosts deny Python socket operations; this is not operating-system firewall isolation.",
+          "Hosted display DPI only; physical trackpad, high DPI, multi-monitor and institutional acceptance remain separate."
+        ],
+        "appFiles": {
+          "NativeWorkbench.exe": "4c09aa5b0ebc850e4659041b6daf4769723d6bb16a112c0e9caeb11f0088ef52",
+          "WorkbenchBridge.exe": "6eadbad2c19aa0193f52b6b6c0b10ae63cbd86052a116eb166d5ab5c5259c36f",
+          "workspace\\app_version.py": "c3273cb842be050edf6a65d3c7034c2e8628191656794bc15115fd936c8cdd0c",
+          "workspace\\catalog.py": "8269f3ff23500c8f5b3321d475573b94f960d0534271cf724a8ac3621adc311f",
+          "workspace\\core_checks.py": "431598722c8c261683e123b255d008210abedb13e90e68d7bec0e6b1df905d70",
+          "workspace\\curated_workflows.py": "0f476e0e49b08d8cb27f3c38c3bb3ecad9b2590ed8bbe4b351a4e92145b4f23d",
+          "workspace\\cwl_export.py": "5773f89433bc11f3cc9708e33994ec80f7c7bf8f6465c9ac8bb8da11c8181596",
+          "workspace\\dag_routing.py": "eb79a385a6426e8ce9778124620fe48c69e8c6ca3a7a9351b95780c99e869fe4",
+          "workspace\\desktop_host.py": "8b1cda931bfda3bcabce1020eb282ea2bd2d47301f220dd8e9d10e994faf0ed5",
+          "workspace\\desktop_model.py": "3904ae9e38fe214110e472167c292b183c39dca60ce01407c3533474227597f6",
+          "workspace\\diagnostics.py": "fa743c69179a13b66dc000348a3e2954616a349163f1103a8cd9f50d61793124",
+          "workspace\\engine.py": "888927ee7019a5317db0458d34a72f2989fd6e6dc0b49e61a0f15fe96ccf8363",
+          "workspace\\example.py": "fb558de8dc3f49f68550af3e08d768e8a99c5cd9e8d466ca357dcecc3dd699b3",
+          "workspace\\execution_resources.py": "33329a740602199f2931b90fde638a0780ed6fa28d2cf15aa15518d8ee8bdae9",
+          "workspace\\file_io.py": "ab6034e617504c8c264c9c53201174fdae88440765db114f01ce39eafcb2d67e",
+          "workspace\\pack_checks.py": "687a775f637ad12e55a04fac6c05292174c457bd551455f0dbffeb15d1f544a1",
+          "workspace\\pack_manager.py": "282b8370cccd6d86d00f6d2a85fe99669eb1d9b9953a9327c65c323a4a780b5d",
+          "workspace\\pack_security.py": "2d1fa4a4267f5cecb0d583c7b43fc59dc8645125c59e3db69c4d6fa307ff6cc0",
+          "workspace\\performance.py": "8f2e985ae95cf1856de64a5e051f681b0e78a9974dc312d0daf55331a523c5b6",
+          "workspace\\project_manager.py": "f01946694516b4a4fbe98ef8b14715a3e0e446d385b94438a26afc713ec86cdf",
+          "workspace\\readiness.py": "e8fdbaba0aa430a539e9214b711e14466e9597456527ec33eed687f898c33676",
+          "workspace\\recovery.py": "568d48098fe7fb01cfa800ac1fd52373d4d1bbff689f49207242065f9901d6b5",
+          "workspace\\reference_indexes.py": "fb6b20dd123f4d83896edc364868da6fdf779f915e4ae2e9e110cce1c1740203",
+          "workspace\\reference_library.py": "2416af2e3fb9aa80bcf1473037f4e248f9099600eb06ee707fee4b525b11baf2",
+          "workspace\\reference_manager.py": "af980e1ded0e01eb214424d29147043a21762b4e4708cf675dd0e8b183464cf6",
+          "workspace\\reference_ncbi.py": "1b1dec1af7c8cefbf94a49c6508ecfeacd2d93b89d3f72c041b18b04e526f5e9",
+          "workspace\\reference_provenance.py": "e2915eb46e3ca86cbf89297dadeec48925f2c9a667e85057bc3b9986e2735ac9",
+          "workspace\\reference_provider.py": "3bf51daae305ef16c0cff0a6bc2b65f76bc6013f7b1456da07fa8d869c5f0832",
+          "workspace\\reference_transfer.py": "105662115fbc1e477e40d898417a04ef81d1015241512af33b2d30a100ccde8d",
+          "workspace\\results_summary.py": "f132010ee4c50ad0d135ac62899c910bd9a747b56a58dc9fa30fe32cc0279ce1",
+          "workspace\\run_queue.py": "2dbb8387ba758259a68dc213ade820be027529e4f1d622e101ed96367c97cf6c",
+          "workspace\\sample_table.py": "a3ce7ac6f31fd044adf6abc90d7c8b83b5a57630212ebca973022ba4a7570f4e",
+          "workspace\\service.py": "5d229633b7bd90555c06c8e1bccf49930a8f9e0d84fa658b3aa29929da65f39b",
+          "workspace\\setup_manager.py": "4432c2c6c6091ebe4aeb57e29555e4d21cbe34b9d3ad8a2fef58fa13022fb853",
+          "workspace\\verify_installation.py": "dc33c51ebd52f9a812dfa6df0fcd083a04d144769edc0caa50147edab32358cf"
+        },
+        "failedPreparation": {
+          "id": "d91fbff29d7e447fabdb1c318456e2ef",
+          "name": "Missing input training diagnosis",
+          "missingInput": "D:\\a\\_temp\\curated-evidence\\explicitly-selected-missing-reads1.fastq",
+          "message": "Select an existing ordinary file: D:\\a\\_temp\\curated-evidence\\explicitly-selected-missing-reads1.fastq",
+          "action": "Restore the exact recorded input bytes at their original paths, or prepare a new run with explicitly selected replacement inputs. Do not edit recorded hashes.",
+          "stage": "preparation",
+          "nativeScientificStepsExecuted": 0
+        },
+        "scientificRuns": {
+          "alignment-qc": {
+            "id": "076afba888b341e6b61ab64b3e6797a1",
+            "folder": "D:\\a\\_temp\\curated-evidence\\scientific-results\\run-20261009-140739-3423aa5a",
+            "planSha256": "f28ae3142cc3961ec888491e40430d8f3435150f759701df1a9c4bca86a61039",
+            "runSha256": "93a040e62a6cd3da337ec67e2930d7c44e64b1aeb45210d02f1a350f80940bb5",
+            "answer": {
+              "alignmentRecords": 202,
+              "mappedProperPairs": 202,
+              "sample": "starter",
+              "reference": "starter:3000"
+            },
+            "outputHashes": {
+              "step-1::sam": {
+                "sam": "b2e647ee2ce77c83c0fa4771f7060888448cff882349ef49ac9309febcb420d0"
+              },
+              "step-1::pair-check": {
+                "pair-check": "2c25256e25928cff40cffb9069f201138ae4bd083e3ab626b82cd55099e1c436"
+              },
+              "step-2::bam": {
+                "bam": "fcbcf9e8b984d4be75edb6732e687a25bca5dcbf0527c3765d0929a30a1300c1"
+              },
+              "step-2::duplicate-stats": {
+                "duplicate-stats": "33139b21aac782e3bd2ee66d3013cfe86c1ee84ae321aa89fb2809482fbdb35b"
+              },
+              "step-2::flagstat": {
+                "flagstat": "b9b7e24ae5f0f1f69ef4feb916513d0acc088f3d18b8d75664c38e5ce092cf8f"
+              },
+              "step-2::alignment-stats": {
+                "alignment-stats": "ae2052f2434994395027aa6294681f606bda680e118247ee454c52b3c8d21d0c"
+              },
+              "step-2::bam-index": {
+                "bam-index": "12dc637cc0b108e8a2cd735e97b6d19bbe548454a3e0e8f38989084340224b8c"
+              },
+              "step-2::names": {
+                "names": "c0a068e8ab9380348b2936af8a5445df0a36dfcb5daf9e22017c85413439e9c4"
+              },
+              "step-2::fixed": {
+                "fixed": "c62275b0d056c1be3d73745a5998996069a24da9a16c6f3e7803ffc2df223c92"
+              },
+              "step-2::coordinates": {
+                "coordinates": "f90278b3e93c990b5199f00520cbb0a74eb9244c10ae2928e0608318af2aaee3"
+              },
+              "step-3::report": {
+                "report": "d678ebfc7aaf43c827623ffcdb0633768ad3bed5998393c3885890668d560e4d"
+              }
+            },
+            "expectedSummaryMetrics": {
+              "samtools.stats.raw_total_sequences": 202,
+              "samtools.stats.reads_mapped": 202,
+              "samtools.stats.average_length": 100,
+              "samtools.flagstat.total.qc_passed": 202,
+              "samtools.flagstat.mapped.qc_passed": 202
+            }
+          },
+          "variant-calling": {
+            "id": "dc654ab1ff80455983af228acc9f6bb9",
+            "folder": "D:\\a\\_temp\\curated-evidence\\scientific-results\\run-20261009-140740-44b6027e",
+            "planSha256": "ce67710370070d04a89661051457510c83b163354f770f2144fdb92ddc6aef8b",
+            "runSha256": "5a2f2df4a211962ad417a52e4e8db69b8507494b3a3c5a973dd5931f68301771",
+            "answer": {
+              "alignmentRecords": 202,
+              "mappedProperPairs": 202,
+              "sample": "starter",
+              "reference": "starter:3000",
+              "variant": "starter:1351 G>A GT=1/1"
+            },
+            "outputHashes": {
+              "step-1::sam": {
+                "sam": "b2e647ee2ce77c83c0fa4771f7060888448cff882349ef49ac9309febcb420d0"
+              },
+              "step-1::pair-check": {
+                "pair-check": "2c25256e25928cff40cffb9069f201138ae4bd083e3ab626b82cd55099e1c436"
+              },
+              "step-2::bam": {
+                "bam": "ea954cf8a8d916bccd762105cedf664fc4eae7058d82c2b92b660ed3c40783df"
+              },
+              "step-2::duplicate-stats": {
+                "duplicate-stats": "2804d30b417fd745d603a2f25cb43ba14ef5d94e79922d79b980ff7c52503e77"
+              },
+              "step-2::flagstat": {
+                "flagstat": "b9b7e24ae5f0f1f69ef4feb916513d0acc088f3d18b8d75664c38e5ce092cf8f"
+              },
+              "step-2::alignment-stats": {
+                "alignment-stats": "659e2d6ec3b10683bcdcdc1c3172d4dc6388e1163b0443459ccf4881f2a8e639"
+              },
+              "step-2::bam-index": {
+                "bam-index": "80f1fc277b7e90a03a7c5838011f943ff924d8bf50d477e5a483937ee2769d7a"
+              },
+              "step-2::names": {
+                "names": "f983de5ce6598616c697f6d57620c8966616b2ac1c4399c72f2ae0cd848eab78"
+              },
+              "step-2::fixed": {
+                "fixed": "c1de3ca43ef120c3682a3869acd431c4c97c6834f9e3c7b43bea382a0c61e00e"
+              },
+              "step-2::coordinates": {
+                "coordinates": "667d4ff93ea34e7a8448692b0b0642079f84c902ed5e93d2268da2330808d87a"
+              },
+              "step-3::variants": {
+                "variants": "3e92ba67441f3d4791263bd23fd0c1d622c107bf5c91c45c3eca6754086513b2"
+              },
+              "step-3::variant-stats": {
+                "variant-stats": "585b953f38b4394f438ea153f184e46c4554c7337ae6628b3dbae587be68c96b"
+              },
+              "step-3::variants-index": {
+                "variants-index": "179a1e0489d6d60c393c0d813208b9e282cd883adaea53c2fc56b0d67b4c2d0d"
+              },
+              "step-3::pileup": {
+                "pileup": "53440ae255f3d89abfed4eb8af27e9ffbab5998b9ba397597f8d0bfce828bde4"
+              },
+              "step-3::calls": {
+                "calls": "ea1f35aefd556c45992879bfb7718c9e1b06c010d50840537b9c0f31146b2bf6"
+              },
+              "step-3::normalized": {
+                "normalized": "aa866fc9f6dedcb5ffbfe15e977dbb7032f1662ffec5a5f087563200824125d4"
+              },
+              "step-3::reference": {
+                "reference": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee"
+              },
+              "step-3::reference-index": {
+                "reference-index": "6bf365006e0d9d03de4e0fbfdfc082c6e5bee611888e54450bc2516614ae95a3"
+              },
+              "step-4::statistics": {
+                "statistics": "585b953f38b4394f438ea153f184e46c4554c7337ae6628b3dbae587be68c96b"
+              },
+              "step-5::report": {
+                "report": "39040063580df674b6675478a3e215b786cf12f0caad02dd7ba1f4978c0751c7"
+              }
+            },
+            "expectedSummaryMetrics": {
+              "samtools.stats.raw_total_sequences": 202,
+              "samtools.stats.reads_mapped": 202,
+              "samtools.stats.average_length": 100,
+              "samtools.flagstat.total.qc_passed": 202,
+              "samtools.flagstat.mapped.qc_passed": 202,
+              "bcftools.stats.number_of_records": 1,
+              "bcftools.stats.number_of_snps": 1,
+              "bcftools.stats.number_of_indels": 0,
+              "bcftools.stats.number_of_samples": 1
+            }
+          }
+        },
+        "networkSocketOperationsDeniedInScientificHosts": true,
+        "dpi": 96,
+        "completedUtc": "2026-10-09T14:07:44.764390+00:00",
+        "passed": 11,
+        "failed": 0,
+        "skipped": 0
+      },
+      "curatedCaptures": [
+        {
+          "file": "curated-native-catalogue.bmp",
+          "bytes": 2556854,
+          "sha256": "ea4f2ec25c0dd698869a3bba5572b0feed7aa03d7531178beb91d85f0f5fa9c4"
+        },
+        {
+          "file": "curated-native-loaded-workflow.bmp",
+          "bytes": 3028534,
+          "sha256": "48af1a4e0080b0006e267e123163962b17712336e4e24f48a1e725380f1efa50"
+        },
+        {
+          "file": "results-native-empty-search.bmp",
+          "bytes": 2556854,
+          "sha256": "9f64c6c24f3c8bed991091f43d3491ac6737013af7121612ee57bf0a7fb7e38d"
+        },
+        {
+          "file": "results-native-failed-preparation.bmp",
+          "bytes": 2556854,
+          "sha256": "f7af843dc95e53560cf4ea0785d83c40997cf3574f44c4f6b85649899e4dafbc"
+        },
+        {
+          "file": "results-native-failure-guidance.bmp",
+          "bytes": 2556854,
+          "sha256": "bd1bb4e5d4448423abc54ce469ceea8ce02683c579194f94af05b6055af0e1e9"
+        },
+        {
+          "file": "results-native-filtered-summary.bmp",
+          "bytes": 2556854,
+          "sha256": "fd684826b7a117f9376a950d266cd670d9bcbf79fe1aefa931cbdfb5de7c895e"
+        }
+      ],
+      "curatedSummaries": [
+        {
+          "file": "alignment-qc-summary.json",
+          "bytes": 18387,
+          "sha256": "8b6bf50cd012b01499cff4c5f189503f08455aca292759476db9d47024cc56db"
+        },
+        {
+          "file": "changed-output-summary.json",
+          "bytes": 25386,
+          "sha256": "8e3c9ec8ed357853e87ab519e603d33677d6c396a9f9f984bbfb89999ce7f04a"
+        },
+        {
+          "file": "missing-input-failed-summary.json",
+          "bytes": 3161,
+          "sha256": "22838c8c3d34ffd4da959bd2573164da3025eda302ef85ed5214792f01c45f30"
+        },
+        {
+          "file": "variant-calling-summary.json",
+          "bytes": 27958,
+          "sha256": "f03d2a6602740d189fafdf65e13886badd4870d5d1b66ad3afe0f44f080cb798"
+        }
+      ]
+    }
+  },
+  "limits": [
+    "Recorded source, scientific/backend and native GUI passes apply to this exact candidate and the hosted environments; they are not release/updater or institutional acceptance.",
+    "The separate native transport and abrupt-interruption checks have the instrumentation scopes recorded by their own reports.",
+    "Synthetic fixture truth does not establish biological or clinical validity, realistic-data capacity, physical display coverage, or release/updater acceptance.",
+    "Legacy library capture retained ignored ctypes controls-enumeration warnings: four ordinary and two spaced; no exhaustive enumeration claim."
+  ],
+  "githubJobs": [
+    {
+      "id": 113856998678,
+      "name": "build",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 37941573921,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Recover immutable runtime, corresponding source and compiler",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Compile the native application with strict warnings",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Install independent CWL reference runner for tests only",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Verify affected source and packaging contracts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Freeze one standalone candidate and its matching source",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Prepare bounded transport without rebuilding the frozen archives",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 26
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 27
+        }
+      ]
+    },
+    {
+      "id": 113857829811,
+      "name": "native (ordinary)",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 37941573921,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/download-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Verify and separately extract the exact candidate for independent gates",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Exact curated workflows, native science, persistent results search and native result details",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Exact packaged live Ensembl and NCBI references, cancellation, offline reuse and provenance",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Exact packaged resumable transfers, reviewed local imports, safe relocation and native References",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Native process accounting, pipeline failure, cancellation, timeout and cleanup",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Exact packaged readiness, scientific measurements and diagnostic review/save",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Import the exact independent align 0.4.1 candidate ZIP and execute its declared scientific check",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Frozen batch plans, durable queue, real reusable indexes and native sample/queue interfaces",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Verified completed-step restart, declared resource admission and portable offline projects",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Separately labelled native delayed-host transport and cancellation fixture",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        },
+        {
+          "name": "Windows reference, installation, queue and filesystem source regressions",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14
+        },
+        {
+          "name": "Native expandable categories, search, selection, scrolling and installed-pack refresh",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        },
+        {
+          "name": "Recheck native workspace, workflow interactions and starter scientific chain",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16
+        },
+        {
+          "name": "Retain successful and failed reports and desktop captures",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 17
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 34
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 35
+        }
+      ]
+    },
+    {
+      "id": 113857829894,
+      "name": "native (path with spaces)",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 37941573921,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/download-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Verify and separately extract the exact candidate for independent gates",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Exact curated workflows, native science, persistent results search and native result details",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Exact packaged live Ensembl and NCBI references, cancellation, offline reuse and provenance",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Exact packaged resumable transfers, reviewed local imports, safe relocation and native References",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Native process accounting, pipeline failure, cancellation, timeout and cleanup",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Exact packaged readiness, scientific measurements and diagnostic review/save",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Import the exact independent align 0.4.1 candidate ZIP and execute its declared scientific check",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Frozen batch plans, durable queue, real reusable indexes and native sample/queue interfaces",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Verified completed-step restart, declared resource admission and portable offline projects",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Separately labelled native delayed-host transport and cancellation fixture",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        },
+        {
+          "name": "Windows reference, installation, queue and filesystem source regressions",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14
+        },
+        {
+          "name": "Native expandable categories, search, selection, scrolling and installed-pack refresh",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        },
+        {
+          "name": "Recheck native workspace, workflow interactions and starter scientific chain",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16
+        },
+        {
+          "name": "Retain successful and failed reports and desktop captures",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 17
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 34
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 35
+        }
+      ]
+    }
+  ],
+  "githubJobRecord": {
+    "file": "github-jobs-final.json",
+    "bytes": 10067,
+    "sha256": "deca50450b78b92138fcd22414743de579ed28a60fb26a7ddc38b73e30cbf0d4"
+  },
+  "portableCppSourceCheck": {
+    "success": true,
+    "test": "tests/test_desktop_json.cpp",
+    "compile": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -DDESKTOP_JSON_ONLY -Idesktop tests/test_desktop_json.cpp desktop/desktop_ipc.cpp -o build/test_desktop_json",
+    "execute": "build/test_desktop_json",
+    "message": "Desktop JSON, record selection and pipe framing tests passed (portable; Windows lifecycle not executed).",
+    "scope": "Portable JSON parser, pipe framing and shared record-selection regression including initial empty asynchronous catalogue/results states; no Windows lifecycle execution."
+  },
+  "independentArchiveAuditIdentity": {
+    "file": "independent-artifact-audit.json",
+    "bytes": 7425,
+    "sha256": "a3236fd24ac0838e231c46fdace427037bc44277d8ebdfae257c99b240a10263",
+    "success": true
+  },
+  "diagnosticWarnings": {
+    "scope": "Legacy native library capture controls enumeration",
+    "ordinaryIgnoredCtypesCallbacks": 4,
+    "spacesIgnoredCtypesCallbacks": 2,
+    "effect": "Functional assertions passed; no exhaustive control-enumeration claim. New curated/results captures separately reviewed."
+  },
+  "visualReview": "curated-workflows-results-0.16.0-final-visual-review-2026-10-09.json"
+}

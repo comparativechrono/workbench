@@ -4,14 +4,16 @@
 
 Curated synthetic workflows and native recorded-result summaries/search are
 implemented on `feature/curated-workflows-results`, based on reference-management
-head `f45622f8915a3fa80c0904fcd97c216e0b5980f3`. Candidate validation is still in
-progress: source/build checks have passed, but the new native curated/results
-gate is being debugged and has no final pass. Other candidate gates have passed
-or remain in progress; they do not establish completion of this set. The
-[feature contract](curated-workflows-results.md) and
-[handover](curated-workflows-results-0.16.0-handover.md) retain exact candidate
-identities, failed attempts and remaining evidence. Published 0.11.0 is unchanged;
-no merge, updater or release is implied.
+head `f45622f8915a3fa80c0904fcd97c216e0b5980f3`. Exact candidate
+`7a9aca71ddd4816b51dbe693873f42fa50a6b746` passed all configured hosted Windows
+gates in ordinary and space-containing paths, including 11 curated checks per
+path. Source checks passed (474 Linux; 318 Windows per path, each with four
+explicit skips); downloaded archive/source audit and 12 new-feature screenshot
+reviews passed. The [handover](curated-workflows-results-0.16.0-handover.md)
+records exact hashes, downloads, failed attempts, skips and limits.
+[Draft PR #11](https://github.com/comparativechrono/workbench/pull/11) is ready
+for review. Published 0.11.0 is unchanged; nothing is merged or released.
+Representative-PC and release/updater acceptance remain separate.
 
 ## Previous set: 0.15.0 reference management, unpublished
 

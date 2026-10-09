@@ -136,7 +136,10 @@
     "reference_management_frozen_windows": "evidence/reference-management-0.15.0-frozen-windows-2026-10-08.json",
     "reference_management_final_validation": "evidence/reference-management-0.15.0-final-validation-2026-10-08.json",
     "curated_workflows_results": "curated-workflows-results.md",
-    "curated_workflows_results_handover": "curated-workflows-results-0.16.0-handover.md"
+    "curated_workflows_results_handover": "curated-workflows-results-0.16.0-handover.md",
+    "curated_workflows_results_validation": "evidence/curated-workflows-results-0.16.0-final-validation-2026-10-09.json",
+    "curated_workflows_results_archive_audit": "evidence/curated-workflows-results-0.16.0-final-archive-audit-2026-10-09.json",
+    "curated_workflows_results_visual_review": "evidence/curated-workflows-results-0.16.0-final-visual-review-2026-10-09.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -1371,7 +1374,7 @@
     "version": "0.16.0",
     "branch": "feature/curated-workflows-results",
     "starting_commit": "f45622f8915a3fa80c0904fcd97c216e0b5980f3",
-    "status": "implementation and validation in progress; unpublished",
+    "status": "implementation, exact hosted Windows validation, independent archive audit and static screenshot review complete; unpublished draft review candidate",
     "scope": [
       "two synthetic training workflows: alignment with QC and variant calling",
       "exact dependencies and expected answers",
@@ -1384,6 +1387,31 @@
     "release_authorized": false,
     "released": false,
     "updater_built": false,
-    "version_decision": "No saved next-set version found; new candidate assigned 0.16.0 to distinguish it from frozen reference-management 0.15.0."
+    "version_decision": "No saved next-set version found; new candidate assigned 0.16.0 to distinguish it from frozen reference-management 0.15.0.",
+    "tested_source_commit": "7a9aca71ddd4816b51dbe693873f42fa50a6b746",
+    "build_run": "https://github.com/comparativechrono/workbench/actions/runs/37941573921",
+    "pull_request": "https://github.com/comparativechrono/workbench/pull/11",
+    "pull_request_state": "draft",
+    "starter_sha256": "1ff91bdb386171aeb166fec4fce4ad23e31287dc9e9695167db113994f416131",
+    "source_sha256": "8fc6a510d178632f12259a3e6e6b115c2c6c40562906eecc5a5557a7a9a361de",
+    "verification_progress": {
+      "source": {
+        "linux_passed": 474,
+        "linux_skipped": 4,
+        "windows_passed_per_path": 318,
+        "windows_skipped_per_path": 4,
+        "portable_native_regression": "passed"
+      },
+      "native_curated_per_path": 11,
+      "all_configured_native_regressions": "passed on the same archive, both paths",
+      "visual_review": "six captures per path, hosted 96 DPI; passed",
+      "representative_machine_acceptance": "pending",
+      "scientific_linux_cwl": "pending",
+      "realistic_windows_linux_benchmark": "not performed",
+      "release_updater_validation": "not performed",
+      "signing_institutional_deployment": "separate outstanding work"
+    },
+    "starter_candidate_download": "https://github.com/comparativechrono/workbench/actions/runs/37941573921/artifacts/11620934453",
+    "candidate_download_limit": "Temporary Actions artifacts expire 2026-11-08; may require GitHub sign-in; not a release asset."
   }
 }

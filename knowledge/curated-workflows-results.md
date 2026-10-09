@@ -20,7 +20,7 @@ example remains available.
 | Workflow | Inputs and operation | Expected answers |
 | --- | --- | --- |
 | Alignment with QC | Bundled artificial reference and 101 matched FASTQ read pairs; minimap2 paired alignment, SAMtools preparation and attributed statistics report. | 202 mapped, properly paired alignment records, a sorted/duplicate-marked BAM and CSI index; raw pair validation, flag counts and alignment statistics. |
-| Variant calling | The same synthetic inputs, followed by diploid BCFtools calling and statistics. | The fixture's explicitly recorded SNP/allele/genotype and retained raw VCF/statistics. These are training truth checks, not biological validation or quality thresholds. |
+| Variant calling | The same synthetic inputs, followed by diploid BCFtools calling and statistics. | One recorded SNP, `starter:1351 G>A GT=1/1`, with retained raw VCF/statistics. These are training truth checks, not biological validation or quality thresholds. |
 
 `workspace/curated_workflows.py` fixes all pack versions and manifest hashes.
 The catalogue selects published `align`, `bam` and `variants` **0.4.0**, even
