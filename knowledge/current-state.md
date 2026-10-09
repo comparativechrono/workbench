@@ -1,5 +1,42 @@
 # Current project state
 
+## Active development: unpublished deployment and acceptance companion
+
+Snapshot: **2026-10-09**. [Draft PR #14](https://github.com/comparativechrono/workbench/pull/14)
+implements a verified offline kit, exact file/executable/runtime/licence inventories,
+structured manual reports, actual Authenticode observations and a native updater
+folder-picker/desktop gate around unchanged published **0.16.0**.
+
+Exact observations are complete for tooling commit
+1a7d1e5f70e3ca710c9b3f6b1313353e8d46cc78 in
+[run 37979351047](https://github.com/comparativechrono/workbench/actions/runs/37979351047).
+All 87 Linux companion source tests passed. Each ordinary/spaced Windows path
+recorded **14 native passes and two failed fresh/upgraded Results Escape checks**,
+plus 11 curated passes. CI remains failed. No control had focus after keyboard
+Search. A real pointer click into the query then Escape closed the window, but
+that diagnostic does not pass the original requirement. The visible Close fallback
+was not needed or tested in the final run.
+
+Exact archive/source audit passed and all 54 captures were reviewed. The hosted
+1024×768 desktop, 1024×728 work area at 96 DPI, is narrower than the app's 1040
+minimum width; its right edge is clipped. Bounded resize assertions do not imply
+narrow-display acceptance. Actual signature observations cover 72 file occurrences
+per path: 60 Valid and 12 NotSigned in the runner's trust context, not IT approval.
+All 10 manual acceptance items remain not-tested.
+
+The [handover](deployment-acceptance-handover.md),
+[final evidence](evidence/deployment-acceptance-final-2026-10-09.json) and
+[attempt history](evidence/deployment-acceptance-attempts-2026-10-09.json) preserve
+the exact identities and failed observations. Full raw reports/screenshots remain
+in the hashed Actions artifacts; aggregate receipts were recovered through GitHub
+after the local workspace executor disconnected during delivery.
+
+Next application work is a separately versioned Results focus/Escape fix and
+narrow-display handling or an explicit support boundary. Representative-PC,
+high-DPI, multiple-monitor, physical-trackpad and managed-machine observations,
+IT approval and signing remain outstanding. Benchmarking is separate; scientific
+Linux CWL and SDK/build recovery remain later sets.
+
 ## Published application: 0.16.0
 
 Snapshot: **2026-10-09**. Application **0.16.0** is published

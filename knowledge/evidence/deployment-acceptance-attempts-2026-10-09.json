@@ -329,6 +329,52 @@
       },
       "followup": "Wait for the same actual focus postconditions after physical clicks; retain screen-hit/ownership checks, no click retries or synthetic SetFocus. Repeat full observations, preserving the separately observed published Escape failure.",
       "manualAcceptance": "not-tested"
+    },
+    {
+      "toolkitCommit": "1a7d1e5f70e3ca710c9b3f6b1313353e8d46cc78",
+      "runId": 37979351047,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37979351047",
+      "result": "complete-observations-with-failed-keyboard-acceptance",
+      "workflowConclusion": "failure",
+      "sourceTests": {
+        "passed": 87,
+        "failed": 0,
+        "skipped": 0
+      },
+      "bundle": {
+        "sha256": "756489dce12acee16beee3d90da9142cb84e75a5580cabf4392490ce1f4107fa",
+        "manifestSha256": "9e9fd96a0ad6e5bfe44d4803b97c8241534f67f176f8688588616388847fe650"
+      },
+      "windows": [
+        {
+          "pathCase": "ordinary",
+          "jobId": 113985773070,
+          "artifactId": 11639996891,
+          "artifactSha256": "e5ed812e02c891607fecc99dc55fffd83e7ce3c33bc93327232974f23719fb96",
+          "nativePassed": 14,
+          "nativeFailed": 2,
+          "observationsCompleted": true,
+          "curatedPassed": 11,
+          "signatureObservations": 72,
+          "manualNotTested": 10
+        },
+        {
+          "pathCase": "spaces",
+          "jobId": 113985773101,
+          "artifactId": 11640790831,
+          "artifactSha256": "f1cb68078cfc0893af581fd253e0c244bfdfbe90772323d5d796b155c26b68cf",
+          "nativePassed": 14,
+          "nativeFailed": 2,
+          "observationsCompleted": true,
+          "curatedPassed": 11,
+          "signatureObservations": 72,
+          "manualNotTested": 10
+        }
+      ],
+      "nativeFailure": "Results Escape after keyboard Search failed on fresh and upgraded published 0.16.0 in both paths. No control had focus before or after Escape. Explicit pointer focus into the query then Escape closed; that diagnostic does not pass the original requirement. The internal application cause is not established. Visible Close fallback was not needed/tested.",
+      "layoutLimitation": "Published minimum width 1040 exceeds the hosted 1024-pixel desktop/work area; right edge clipped. Bounded resize assertions are not acceptance on that narrower display.",
+      "manualAcceptance": "not-tested",
+      "finalEvidence": "deployment-acceptance-final-2026-10-09.json"
     }
   ],
   "localPreviewExcluded": {
@@ -336,5 +382,18 @@
     "sha256": "59a30bdc54102a7eb556495dc8bf6985775fee4a2e2e1272648af020239a5a26",
     "status": "rejected-by-acceptance-helper",
     "reason": "Uncommitted knowledge edits made toolkitDirty true despite included toolkit files matching Git. This local preview is not the clean CI artifact and is excluded from tester evidence."
+  },
+  "branchRepair": {
+    "transientCommit": "24f915c3bb63a9014e882e691a2dc6b550aa0a6b",
+    "status": "corrected-and-excluded-from-delivered-history",
+    "reason": "A GitData tree call lacked its base tree and briefly moved the work branch to an incomplete two-file tree. An expected-head lease immediately restored the complete local index tree. Main, releases and local files were unchanged.",
+    "deliveredCheckpoint": "1a7d1e5f70e3ca710c9b3f6b1313353e8d46cc78",
+    "verifiedFullTree": "6ef5ac330f7ea7026d382312641e70e1e91d01c9",
+    "prevention": "Require the exact existing base tree and verify every expected path/mode/blob before moving a branch ref."
+  },
+  "deliveryRecovery": {
+    "problem": "Workspace executor disconnected after validation, local documentation preparation and independent count/hash review.",
+    "recoveredThrough": "GitHub API using the exact existing branch tree, stored artifact metadata, completed review observations and original reports retained in Actions.",
+    "limits": "Original report copies and detailed per-image receipts could not be read from the disconnected local workspace. Durable aggregate receipts reference exact artifact hashes and known native report hashes; no unavailable values are invented. Original reports/screenshots remain downloadable until 2026-11-08."
   }
 }
