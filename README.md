@@ -12,6 +12,8 @@ The application does not require Docker, WSL or a system Python installation.
 
 ## Release status
 
+Unpublished **0.16.0** adds curated training workflows and recorded-result summaries/search. See [draft PR #11](https://github.com/comparativechrono/workbench/pull/11) and its [validated candidate handover](knowledge/curated-workflows-results-0.16.0-handover.md) for review downloads and limits.
+
 [**0.11.0 is published as a development prerelease**](https://github.com/comparativechrono/workbench/releases/tag/app-v0.11.0).
 The tool library now shows expandable category headings supplied by installed
 packs. Multiple categories can stay open; search reveals matches and clearing

@@ -1,0 +1,190 @@
+{
+  "schema": 1,
+  "runId": 37938879718,
+  "sourceCommit": "1226947256e8d31124a45227d22933c5d4a6b08e",
+  "scope": "Independent downloaded archive and exact source identity audit only",
+  "nativeWindowsExecuted": false,
+  "published": false,
+  "success": true,
+  "checks": [
+    "Four downloaded bounded GitHub artifacts match declared sizes/digests and pass ZIP CRC/name checks.",
+    "Inner Starter and reassembled source archives match build and independent transport metadata.",
+    "All 728 current source files match their inventory and exact git commit; embedded legacy source, CRC and runtime source-companion pin verified.",
+    "Complete Starter inventory, all published pack files/private runtime files, runtime Python source correspondence and production 32-pack profile/trust preserved.",
+    "New align 0.4.1 contracts/assets/self-check verified with unchanged legacy operations, binaries, licenses and exact minimum-app declaration; standalone ZIP verification remains separate.",
+    "Packaged application and bridge are native AMD64 PE files; this inspection does not establish Windows execution."
+  ],
+  "failures": [],
+  "limits": [
+    "Independent pack ZIP not downloaded from the large aggregate artifact; its declaration is checked against the bundled additional pack. Native import gate checks the actual independent ZIP."
+  ],
+  "appVersion": "0.16.0",
+  "previousCandidateSourceComparison": {
+    "sourceCommit": "f45622f8915a3fa80c0904fcd97c216e0b5980f3",
+    "changedPaths": [
+      ".github/workflows/native-curated-candidate.yml",
+      "desktop/build_bridge.sh",
+      "desktop/build_desktop_workspace.sh",
+      "desktop/build_workspace_update_launcher.sh",
+      "desktop/curated_ui.h",
+      "desktop/desktop_workspace.cpp",
+      "desktop/results_ui.h",
+      "knowledge/README.md",
+      "knowledge/architecture.md",
+      "knowledge/curated-workflows-results-0.16.0-handover.md",
+      "knowledge/curated-workflows-results.md",
+      "knowledge/current-state.md",
+      "knowledge/development.md",
+      "knowledge/evidence/curated-workflows-results-0.16.0-local-source-2026-10-09.json",
+      "knowledge/project.json",
+      "knowledge/roadmap.md",
+      "knowledge/validation-and-releases.md",
+      "scripts/audit_curated_candidate.py",
+      "scripts/check_curated_windows.py",
+      "scripts/package_split.py",
+      "workspace/app_version.py",
+      "workspace/curated_workflows.py",
+      "workspace/desktop_host.py",
+      "workspace/results_summary.py",
+      "workspace/service.py",
+      "workspace/tests/test_curated_service.py",
+      "workspace/tests/test_curated_workflows.py",
+      "workspace/tests/test_results_summary.py"
+    ],
+    "scientificPackRecipeAndProductionTrustUnchanged": true
+  },
+  "transportArtifacts": [
+    {
+      "id": 11620751364,
+      "name": "curated-transfer-source-part-2-1226947256e8d31124a45227d22933c5d4a6b08e",
+      "bytes": 22561969,
+      "sha256": "57952cb630cc3874a1b5341eb51c2ab056cedc6424f3f8821c9dd6f53d129bbe",
+      "zipCrc": "passed"
+    },
+    {
+      "id": 11620441563,
+      "name": "curated-transfer-starter-1226947256e8d31124a45227d22933c5d4a6b08e",
+      "bytes": 17845727,
+      "sha256": "5720466f6ac0d5482584bd808411a09de30fbe0c25e1843ba947900a5cdc5abc",
+      "zipCrc": "passed"
+    },
+    {
+      "id": 11620431496,
+      "name": "curated-transfer-source-part-1-1226947256e8d31124a45227d22933c5d4a6b08e",
+      "bytes": 25166018,
+      "sha256": "be402e91cd8e60d55f20a66262828ff882a94fc54d0702982b7916d5caa408ce",
+      "zipCrc": "passed"
+    },
+    {
+      "id": 11620381627,
+      "name": "curated-transfer-metadata-1226947256e8d31124a45227d22933c5d4a6b08e",
+      "bytes": 5903,
+      "sha256": "893dc27e0101d5d32eebdbddc13f0daeb8dc54b9b4f8f03c462518015304cc07",
+      "zipCrc": "passed"
+    }
+  ],
+  "archives": [
+    {
+      "file": "native-workbench-0.16.0-starter-windows.zip",
+      "bytes": 17845527,
+      "sha256": "0cb3f991e9312abe67a9c5e99e00b41cfcae74676f7e0da34743ac182d9e5f50",
+      "verified": true
+    },
+    {
+      "file": "native-workbench-0.16.0-source.zip",
+      "bytes": 47727599,
+      "sha256": "ba5ab916fab48dcc7e79ceec18bdb84be4bfb106a3a5edce1c39af2254a4bb82",
+      "verified": true
+    },
+    {
+      "file": "native-workbench-pack-align-0.4.1.zip",
+      "bytes": 575862,
+      "sha256": "3a08cf061f0b62c5502d1420115db3fcae2b04bf695ad3cfd1c3063de0fafa02",
+      "verified": false
+    }
+  ],
+  "source": {
+    "currentFiles": 728,
+    "everyCurrentFileMatchesCommit": true,
+    "completeCommittedSourceSelection": true,
+    "legacyBytes": 44163162,
+    "legacySha256": "5dac9add19436b336cba483a0f915e39aafed383282c2a019a0dbd3cc3c8668e",
+    "legacyCrc": "passed"
+  },
+  "packagedAtomicWriteHelper": {
+    "path": "workspace/file_io.py",
+    "sha256": "ab6034e617504c8c264c9c53201174fdae88440765db114f01ce39eafcb2d67e",
+    "matchesExactSourceCommit": true,
+    "executed": false
+  },
+  "starter": {
+    "coreFiles": 87,
+    "totalFiles": 274,
+    "preservedPublishedPackFiles": 143,
+    "preservedPrivateRuntimeFiles": 39,
+    "runtimeModulesMatchSource": 33,
+    "runtimeInventoryMatchesCommittedContract": true,
+    "publishedStarterPins": [
+      {
+        "id": "align",
+        "version": "0.4.0",
+        "folder": "packs/align-0.4.0",
+        "manifestSha256": "81c962222c93356a4f7727b23193c71d7dcd515859e62a179574781f411824d3"
+      },
+      {
+        "id": "bam",
+        "version": "0.4.0",
+        "folder": "packs/bam-0.4.0",
+        "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+      },
+      {
+        "id": "variants",
+        "version": "0.4.0",
+        "folder": "packs/variants-0.4.0",
+        "manifestSha256": "ea4b7f0a6c28709e4190b6514c07cbf7bdd58e1a4f2a2d931f2cae3ce6ec3795"
+      }
+    ],
+    "officialSetupPacks": 32,
+    "setupProfileAndTrustUnchanged": true,
+    "containsUserData": false
+  },
+  "additionalPack": {
+    "id": "align",
+    "version": "0.4.1",
+    "minAppVersionDeclared": "0.13.0",
+    "manifestSha256": "7f8f36efbfd6a8255a98eabb06746fbcc5bbdb872f392a65ca3e79a586d04939",
+    "files": 43,
+    "toolBinaryBytesUnchanged": true,
+    "legacyOperationsUnchanged": true,
+    "newOperations": [
+      "build-sr-index",
+      "single-end-indexed",
+      "paired-end-indexed"
+    ],
+    "declaredInstallationChecks": 1,
+    "expectedMappedProperPairRecords": 202,
+    "standalonePackZipVerified": false
+  },
+  "nativeExecutables": {
+    "NativeWorkbench.exe": {
+      "bytes": 1741824,
+      "sha256": "2ed4ab9c5cddb9d431ed5c3b740ef02c6504ccfcf883482597783a778d038516",
+      "machine": "AMD64",
+      "executed": false
+    },
+    "WorkbenchBridge.exe": {
+      "bytes": 1550848,
+      "sha256": "6eadbad2c19aa0193f52b6b6c0b10ae63cbd86052a116eb166d5ab5c5259c36f",
+      "machine": "AMD64",
+      "executed": false
+    }
+  },
+  "priorLocalTransportAttempt": {
+    "status": "rejected before source or archive acceptance",
+    "artifact": "starter-outer.zip",
+    "bytesObserved": 8339456,
+    "bytesExpected": 17845727,
+    "sha256Observed": "2b156dd9ac0478ba06205e704fa77c2b8b072f7690c5ad23eb8f68544c552af2",
+    "failure": "Incomplete local download failed ZIP and transport integrity checks. Downloaded again; exact GitHub digest verified before extraction and successful audit. No candidate bytes changed."
+  }
+}

@@ -1,0 +1,325 @@
+{
+  "schema": 1,
+  "recordedOn": "2026-10-09",
+  "sourceScope": "Local precommit working tree on verified base f45622f8915a3fa80c0904fcd97c216e0b5980f3; frozen CI source/archives require separate evidence",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "python": "3.12.14",
+  "nativeWindowsExecuted": false,
+  "published": false,
+  "passed": 467,
+  "skipped": 6,
+  "failed": 0,
+  "invocations": 33,
+  "checks": [
+    {
+      "command": "python3 tests/test_core_checks.py CoreChecksTests.test_only_explicit_download_clients_can_import_network_and_never_listener CoreChecksTests.test_real_catalogue_citation_parser_passes_frontend_client_boundary CoreChecksTests.test_all_packaged_runtime_modules_pass_static_frontend_boundary CoreChecksTests.test_project_path_encoding_does_not_allow_network_clients CoreChecksTests.test_reference_transfer_can_only_import_http_exception_class",
+      "exitCode": 0,
+      "tests": 5,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.373s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_curated_workflows.py",
+      "exitCode": 0,
+      "tests": 12,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": "............\n----------------------------------------------------------------------\nRan 12 tests in 0.100s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_results_summary.py",
+      "exitCode": 0,
+      "tests": 21,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": "test_changed_missing_methods_are_not_labelled_verified (__main__.ResultsSummaryTests.test_changed_missing_methods_are_not_labelled_verified) ... ok\ntest_changed_report_never_displays_old_or_new_numbers (__main__.ResultsSummaryTests.test_changed_report_never_displays_old_or_new_numbers) ... ok\ntest_comparison_bcftools_stats_sets_are_explicitly_unsupported (__main__.ResultsSummaryTests.test_comparison_bcftools_stats_sets_are_explicitly_unsupported) ... ok\ntest_crlf_reports_and_methods_are_supported (__main__.ResultsSummaryTests.test_crlf_reports_and_methods_are_supported) ... ok\ntest_failed_step_does_not_use_even_hash_verified_output (__main__.ResultsSummaryTests.test_failed_step_does_not_use_even_hash_verified_output) ... ok\ntest_failure_before_preparation_has_actionable_details (__main__.ResultsSummaryTests.test_failure_before_preparation_has_actionable_details) ... ok\ntest_guidance_follows_recorded_failure_and_preserves_message (__main__.ResultsSummaryTests.test_guidance_follows_recorded_failure_and_preserves_message) ... ok\ntest_malformed_partial_and_duplicate_summary_rows_are_not_zero (__main__.ResultsSummaryTests.test_malformed_partial_and_duplicate_summary_rows_are_not_zero) ... ok\ntest_malformed_recorded_steps_are_unavailable_without_crashing (__main__.ResultsSummaryTests.test_malformed_recorded_steps_are_unavailable_without_crashing) ... ok\ntest_missing_changed_malformed_and_unbound_plan_disable_metrics (__main__.ResultsSummaryTests.test_missing_changed_malformed_and_unbound_plan_disable_metrics) ... ok\ntest_missing_file_is_unavailable_without_losing_other_reports (__main__.ResultsSummaryTests.test_missing_file_is_unavailable_without_losing_other_reports) ... ok\ntest_missing_identity_is_not_inferred_from_filename_or_run_name (__main__.ResultsSummaryTests.test_missing_identity_is_not_inferred_from_filename_or_run_name) ... ok\ntest_oversized_or_duplicate_sample_declarations_cannot_expand_response (__main__.ResultsSummaryTests.test_oversized_or_duplicate_sample_declarations_cannot_expand_response) ... ok\ntest_recorded_pin_and_global_output_must_match_frozen_step (__main__.ResultsSummaryTests.test_recorded_pin_and_global_output_must_match_frozen_step) ... ok\ntest_records_literal_measurements_identity_pins_and_exact_sources (__main__.ResultsSummaryTests.test_records_literal_measurements_identity_pins_and_exact_sources) ... ok\ntest_report_cannot_be_relabelled_as_another_steps_output (__main__.ResultsSummaryTests.test_report_cannot_be_relabelled_as_another_steps_output) ... ok\ntest_report_path_cannot_escape_result_folder (__main__.ResultsSummaryTests.test_report_path_cannot_escape_result_folder) ... ok\ntest_report_size_and_aggregate_count_are_bounded (__main__.ResultsSummaryTests.test_report_size_and_aggregate_count_are_bounded) ... ok\ntest_search_carries_recorded_timestamp_and_bounded_metadata (__main__.ResultsSummaryTests.test_search_carries_recorded_timestamp_and_bounded_metadata) ... ok\ntest_search_matches_metadata_terms_without_reading_any_file (__main__.ResultsSummaryTests.test_search_matches_metadata_terms_without_reading_any_file) ... ok\ntest_summary_budget_omits_explicitly_and_does_not_read_scientific_inputs (__main__.ResultsSummaryTests.test_summary_budget_omits_explicitly_and_does_not_read_scientific_inputs) ... ok\n\n----------------------------------------------------------------------\nRan 21 tests in 0.093s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_curated_service.py",
+      "exitCode": 0,
+      "tests": 6,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.009s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_reference_provider.py",
+      "exitCode": 0,
+      "tests": 18,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": "..................\n----------------------------------------------------------------------\nRan 18 tests in 0.009s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_reference_manager.py",
+      "exitCode": 0,
+      "tests": 26,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": "..........................\n----------------------------------------------------------------------\nRan 26 tests in 0.162s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_reference_service.py",
+      "exitCode": 0,
+      "tests": 10,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": "..........\n----------------------------------------------------------------------\nRan 10 tests in 0.082s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_reference_provenance.py",
+      "exitCode": 0,
+      "tests": 6,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.034s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_reference_resume.py",
+      "exitCode": 0,
+      "tests": 19,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": "...................\n----------------------------------------------------------------------\nRan 19 tests in 3.167s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_reference_library.py",
+      "exitCode": 0,
+      "tests": 26,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": "..........................\n----------------------------------------------------------------------\nRan 26 tests in 0.149s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_reference_ncbi.py",
+      "exitCode": 0,
+      "tests": 19,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": "...................\n----------------------------------------------------------------------\nRan 19 tests in 0.007s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_reference_management_service.py",
+      "exitCode": 0,
+      "tests": 12,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": "test_cancel_discards_incomplete_work_and_pause_requires_active_transfer (__main__.ReferenceManagementServiceTests.test_cancel_discards_incomplete_work_and_pause_requires_active_transfer) ... ok\ntest_discard_invalidates_review_without_touching_completed_references (__main__.ReferenceManagementServiceTests.test_discard_invalidates_review_without_touching_completed_references) ... ok\ntest_expired_and_superseded_reviews_cannot_commit (__main__.ReferenceManagementServiceTests.test_expired_and_superseded_reviews_cannot_commit) ... ok\ntest_invalid_local_file_requests_rejected_before_worker_starts (__main__.ReferenceManagementServiceTests.test_invalid_local_file_requests_rejected_before_worker_starts) ... ok\ntest_missing_analysis_graph_reports_validation_error_without_starting (__main__.ReferenceManagementServiceTests.test_missing_analysis_graph_reports_validation_error_without_starting) ... ok\ntest_pause_retains_pending_work_and_resume_is_explicit (__main__.ReferenceManagementServiceTests.test_pause_retains_pending_work_and_resume_is_explicit) ... ok\ntest_preview_never_imports_or_changes_graph_and_requires_one_use_token (__main__.ReferenceManagementServiceTests.test_preview_never_imports_or_changes_graph_and_requires_one_use_token) ... ok\ntest_real_import_and_relocation_keep_offline_old_and_new_path_provenance (__main__.ReferenceManagementServiceTests.test_real_import_and_relocation_keep_offline_old_and_new_path_provenance) ... ok\ntest_relocation_uses_explicit_review_and_keeps_graph_paths (__main__.ReferenceManagementServiceTests.test_relocation_uses_explicit_review_and_keeps_graph_paths) ... ok\ntest_review_response_cannot_change_private_commit (__main__.ReferenceManagementServiceTests.test_review_response_cannot_change_private_commit) ... ok\ntest_source_change_after_real_review_is_rejected_without_import (__main__.ReferenceManagementServiceTests.test_source_change_after_real_review_is_rejected_without_import) ... ok\ntest_versioned_refseq_lookup_is_distinct_from_archive_release (__main__.ReferenceManagementServiceTests.test_versioned_refseq_lookup_is_distinct_from_archive_release) ... ok\n\n----------------------------------------------------------------------\nRan 12 tests in 0.066s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_recovery_execution.py",
+      "exitCode": 0,
+      "tests": 26,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": "..........................\n----------------------------------------------------------------------\nRan 26 tests in 0.644s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_project_manager.py",
+      "exitCode": 0,
+      "tests": 29,
+      "skipped": 1,
+      "failures": 0,
+      "errors": 0,
+      "log": ".../opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/zipfile/__init__.py:1625: UserWarning: Duplicate name: 'workflow.cwl'\n  return self._open_to_write(zinfo, force_zip64=force_zip64)\n.....................s....\n----------------------------------------------------------------------\nRan 29 tests in 0.403s\n\nOK (skipped=1)\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_recovery_service.py",
+      "exitCode": 0,
+      "tests": 16,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": "................\n----------------------------------------------------------------------\nRan 16 tests in 0.122s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_sample_table.py",
+      "exitCode": 0,
+      "tests": 26,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": "..........................\n----------------------------------------------------------------------\nRan 26 tests in 0.091s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_run_queue.py",
+      "exitCode": 0,
+      "tests": 28,
+      "skipped": 2,
+      "failures": 0,
+      "errors": 0,
+      "log": "test_abrupt_process_exit_releases_os_lock_and_marks_preparation_interrupted (__main__.QueueTests.test_abrupt_process_exit_releases_os_lock_and_marks_preparation_interrupted) ... ok\ntest_active_cancel_bypasses_two_saturated_slow_workers (__main__.QueueTests.test_active_cancel_bypasses_two_saturated_slow_workers) ... ok\ntest_added_output_or_prior_run_marker_refuses_rerun (__main__.QueueTests.test_added_output_or_prior_run_marker_refuses_rerun) ... ok\ntest_batch_preparation_failure_never_queues_a_partial_batch (__main__.QueueTests.test_batch_preparation_failure_never_queues_a_partial_batch) ... ok\ntest_batch_preview_token_is_immutable_single_use_and_retains_frozen_metadata (__main__.QueueTests.test_batch_preview_token_is_immutable_single_use_and_retains_frozen_metadata) ... ok\ntest_cancel_and_status_remain_responsive_during_queue_receipt_retry (__main__.QueueTests.test_cancel_and_status_remain_responsive_during_queue_receipt_retry) ... ok\ntest_cancel_pending_does_not_cancel_other_jobs (__main__.QueueTests.test_cancel_pending_does_not_cancel_other_jobs) ... ok\ntest_cancel_preparing_is_responsive_and_never_becomes_ready (__main__.QueueTests.test_cancel_preparing_is_responsive_and_never_becomes_ready) ... ok\ntest_corrupt_state_is_retained_and_all_execution_fails_closed (__main__.QueueTests.test_corrupt_state_is_retained_and_all_execution_fails_closed) ... ok\ntest_enqueue_freezes_graph_without_starting_and_serial_start_runs_only_selected_jobs (__main__.QueueTests.test_enqueue_freezes_graph_without_starting_and_serial_start_runs_only_selected_jobs) ... ok\ntest_legacy_run_and_queue_share_execution_guard (__main__.QueueTests.test_legacy_run_and_queue_share_execution_guard) ... ok\ntest_native_windows_persistent_queue_and_history_readers_fail_without_mutation (__main__.QueueTests.test_native_windows_persistent_queue_and_history_readers_fail_without_mutation) ... skipped 'Requires native Windows held-reader semantics'\ntest_native_windows_short_queue_and_history_readers_allow_atomic_commit (__main__.QueueTests.test_native_windows_short_queue_and_history_readers_allow_atomic_commit) ... skipped 'Requires native Windows held-reader semantics'\ntest_pause_leaves_active_job_running_and_cancel_pauses_next (__main__.QueueTests.test_pause_leaves_active_job_running_and_cancel_pauses_next) ... ok\ntest_pending_cancel_is_reserved_before_start_even_during_slow_disk_write (__main__.QueueTests.test_pending_cancel_is_reserved_before_start_even_during_slow_disk_write) ... ok\ntest_persistent_windows_queue_and_history_conflicts_preserve_committed_state (__main__.QueueTests.test_persistent_windows_queue_and_history_conflicts_preserve_committed_state) ... ok\ntest_plan_companion_mutation_fails_before_engine_and_pauses_remaining (__main__.QueueTests.test_plan_companion_mutation_fails_before_engine_and_pauses_remaining) ... ok\ntest_preparing_cancel_bypasses_two_saturated_slow_workers (__main__.QueueTests.test_preparing_cancel_bypasses_two_saturated_slow_workers) ... ok\ntest_receipt_retry_applies_only_to_selected_windows_errors (__main__.QueueTests.test_receipt_retry_applies_only_to_selected_windows_errors) ... ok\ntest_reopen_keeps_pending_jobs_paused_and_converts_abandoned_job_to_interrupted (__main__.QueueTests.test_reopen_keeps_pending_jobs_paused_and_converts_abandoned_job_to_interrupted) ... ok\ntest_second_host_is_read_only_and_does_not_relabel_live_run (__main__.QueueTests.test_second_host_is_read_only_and_does_not_relabel_live_run) ... ok\ntest_shutdown_waits_for_queue_admission_then_cancels_without_execution (__main__.QueueTests.test_shutdown_waits_for_queue_admission_then_cancels_without_execution) ... ok\ntest_state_disk_failure_leaves_previous_bytes_and_memory_intact (__main__.QueueTests.test_state_disk_failure_leaves_previous_bytes_and_memory_intact) ... ok\ntest_store_commit_does_not_hold_status_or_app_lock (__main__.QueueTests.test_store_commit_does_not_hold_status_or_app_lock) ... ok\ntest_table_token_bounds_response_and_keeps_import_bytes_after_file_edit (__main__.QueueTests.test_table_token_bounds_response_and_keeps_import_bytes_after_file_edit) ... ok\ntest_transient_windows_receipt_conflict_commits_once_without_reexecuting (__main__.QueueTests.test_transient_windows_receipt_conflict_commits_once_without_reexecuting) ... ok\ntest_unicode_metadata_uses_same_canonical_budget_as_frozen_plan (__main__.QueueTests.test_unicode_metadata_uses_same_canonical_budget_as_frozen_plan) ... ok\ntest_wide_table_and_many_preview_issues_are_byte_bounded_with_omissions (__main__.QueueTests.test_wide_table_and_many_preview_issues_are_byte_bounded_with_omissions) ... ok\n\n----------------------------------------------------------------------\nRan 28 tests in 0.511s\n\nOK (skipped=2)\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_reference_indexes.py",
+      "exitCode": 0,
+      "tests": 19,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": "...................\n----------------------------------------------------------------------\nRan 19 tests in 0.675s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_desktop_host.py",
+      "exitCode": 0,
+      "tests": 12,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": "test_eof_cancels_and_joins_preparation (__main__.DesktopHostTests.test_eof_cancels_and_joins_preparation) ... ok\ntest_eof_cancels_execution_and_preserves_frozen_graph (__main__.DesktopHostTests.test_eof_cancels_execution_and_preserves_frozen_graph) ... ok\ntest_historical_run_selection_allows_next_draft_but_not_second_run (__main__.DesktopHostTests.test_historical_run_selection_allows_next_draft_but_not_second_run) ... ok\ntest_large_log_is_bounded_and_omissions_are_explicit (__main__.DesktopHostTests.test_large_log_is_bounded_and_omissions_are_explicit) ... ok\ntest_native_host_modules_do_not_import_network_or_browser_transport (__main__.DesktopHostTests.test_native_host_modules_do_not_import_network_or_browser_transport) ... ok\ntest_oversized_frame_is_drained_once_without_executing_its_suffix (__main__.DesktopHostTests.test_oversized_frame_is_drained_once_without_executing_its_suffix) ... ok\ntest_preset_from_node_uses_committed_params_and_rejects_obsolete_pin (__main__.DesktopHostTests.test_preset_from_node_uses_committed_params_and_rejects_obsolete_pin) ... ok\ntest_production_host_startup_and_core_rpc_with_network_audit_denial (__main__.DesktopHostTests.test_production_host_startup_and_core_rpc_with_network_audit_denial) ... ok\ntest_protocol_rejects_bad_frames_and_continues_without_arbitrary_commands (__main__.DesktopHostTests.test_protocol_rejects_bad_frames_and_continues_without_arbitrary_commands) ... ok\ntest_review_and_run_observe_preceding_model_commit (__main__.DesktopHostTests.test_review_and_run_observe_preceding_model_commit) ... ok\ntest_saved_size_limit_preserves_existing_file (__main__.DesktopHostTests.test_saved_size_limit_preserves_existing_file) ... ok\ntest_shutdown_terminates_tracked_native_bridge_if_it_does_not_finish (__main__.DesktopHostTests.test_shutdown_terminates_tracked_native_bridge_if_it_does_not_finish) ... ok\n\n----------------------------------------------------------------------\nRan 12 tests in 0.250s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_desktop_modes.py",
+      "exitCode": 0,
+      "tests": 11,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": "test_canvas_target_capacity_and_bounded_large_snapshot (__main__.DesktopModeTests.test_canvas_target_capacity_and_bounded_large_snapshot) ... ok\ntest_canvas_targets_match_type_state_and_cycle_validation (__main__.DesktopModeTests.test_canvas_targets_match_type_state_and_cycle_validation) ... ok\ntest_failed_pipeline_load_leaves_mode_and_both_sessions_unchanged (__main__.DesktopModeTests.test_failed_pipeline_load_leaves_mode_and_both_sessions_unchanged) ... ok\ntest_injected_model_remains_active_workflow_for_existing_callers (__main__.DesktopModeTests.test_injected_model_remains_active_workflow_for_existing_callers) ... ok\ntest_pack_refresh_and_import_update_every_session_without_changing_pins (__main__.DesktopModeTests.test_pack_refresh_and_import_update_every_session_without_changing_pins) ... ok\ntest_pipeline_load_and_example_select_workflow_and_preset_applies_active_tool (__main__.DesktopModeTests.test_pipeline_load_and_example_select_workflow_and_preset_applies_active_tool) ... ok\ntest_reference_and_pack_busy_flags_block_mode_and_tool_switches (__main__.DesktopModeTests.test_reference_and_pack_busy_flags_block_mode_and_tool_switches) ... ok\ntest_reference_targets_and_binding_follow_active_session_only (__main__.DesktopModeTests.test_reference_targets_and_binding_follow_active_session_only) ... ok\ntest_review_run_and_busy_switching_use_the_active_graph (__main__.DesktopModeTests.test_review_run_and_busy_switching_use_the_active_graph) ... ok\ntest_startup_and_strict_workspace_requests_preserve_current_selection (__main__.DesktopModeTests.test_startup_and_strict_workspace_requests_preserve_current_selection) ... ok\ntest_tool_sessions_preserve_files_params_and_undo_without_touching_workflow (__main__.DesktopModeTests.test_tool_sessions_preserve_files_params_and_undo_without_touching_workflow) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.211s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_workflow_inputs.py",
+      "exitCode": 0,
+      "tests": 11,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": "test_accepted_sam_input_is_named_and_typed_separately_from_bam (__main__.WorkflowInputTests.test_accepted_sam_input_is_named_and_typed_separately_from_bam) ... ok\ntest_changing_workflow_tool_never_fills_unconnected_ports_implicitly (__main__.WorkflowInputTests.test_changing_workflow_tool_never_fills_unconnected_ports_implicitly) ... ok\ntest_detached_input_remains_editable_after_saving_a_connected_pipeline (__main__.WorkflowInputTests.test_detached_input_remains_editable_after_saving_a_connected_pipeline) ... ok\ntest_detached_input_schema_survives_template_load_without_file_values (__main__.WorkflowInputTests.test_detached_input_schema_survives_template_load_without_file_values) ... ok\ntest_explicit_reference_can_be_bound_before_tools_and_shared_without_duplicate_editors (__main__.WorkflowInputTests.test_explicit_reference_can_be_bound_before_tools_and_shared_without_duplicate_editors) ... ok\ntest_input_and_tool_forms_reject_cross_object_edits_atomically (__main__.WorkflowInputTests.test_input_and_tool_forms_reject_cross_object_edits_atomically) ... ok\ntest_pair_roles_remain_stable_across_receivers_and_bind_as_one_atomic_pair (__main__.WorkflowInputTests.test_pair_roles_remain_stable_across_receivers_and_bind_as_one_atomic_pair) ... ok\ntest_remove_input_disconnects_all_consumers_and_undo_preserves_bound_files (__main__.WorkflowInputTests.test_remove_input_disconnects_all_consumers_and_undo_preserves_bound_files) ... ok\ntest_saved_workflow_and_legacy_graph_keep_pins_sources_and_connections (__main__.WorkflowInputTests.test_saved_workflow_and_legacy_graph_keep_pins_sources_and_connections) ... ok\ntest_standalone_fields_remain_available_and_do_not_change_workflow (__main__.WorkflowInputTests.test_standalone_fields_remain_available_and_do_not_change_workflow) ... ok\ntest_workflow_tools_start_unconnected_without_automatic_file_boxes (__main__.WorkflowInputTests.test_workflow_tools_start_unconnected_without_automatic_file_boxes) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.101s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_pack_service.py",
+      "exitCode": 0,
+      "tests": 6,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.029s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_setup_manager.py",
+      "exitCode": 0,
+      "tests": 16,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": "................\n----------------------------------------------------------------------\nRan 16 tests in 0.480s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_setup_service.py",
+      "exitCode": 0,
+      "tests": 7,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": ".......\n----------------------------------------------------------------------\nRan 7 tests in 0.031s\n\nOK\n"
+    },
+    {
+      "command": "python3 tests/test_split_release.py",
+      "exitCode": 0,
+      "tests": 9,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": ".........\n----------------------------------------------------------------------\nRan 9 tests in 0.147s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_readiness.py",
+      "exitCode": 0,
+      "tests": 16,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": "................\n----------------------------------------------------------------------\nRan 16 tests in 0.048s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_readiness_service.py",
+      "exitCode": 0,
+      "tests": 6,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.014s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_performance.py",
+      "exitCode": 0,
+      "tests": 18,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": "test_actual_synthetic_subprocess_chain_preserves_output_and_binds_metrics (__main__.PerformanceTests.test_actual_synthetic_subprocess_chain_preserves_output_and_binds_metrics) ... ok\ntest_builtin_report_measures_local_work_without_claiming_native_counters (__main__.PerformanceTests.test_builtin_report_measures_local_work_without_claiming_native_counters) ... ok\ntest_cancel_before_execution_has_no_started_steps (__main__.PerformanceTests.test_cancel_before_execution_has_no_started_steps) ... ok\ntest_cancellation_during_backend_marks_later_steps_unrun (__main__.PerformanceTests.test_cancellation_during_backend_marks_later_steps_unrun) ... ok\ntest_changed_input_failure_is_distinct_from_backend_or_scientific_failure (__main__.PerformanceTests.test_changed_input_failure_is_distinct_from_backend_or_scientific_failure) ... ok\ntest_exception_retains_partial_phase_and_never_claims_missing_metrics (__main__.PerformanceTests.test_exception_retains_partial_phase_and_never_claims_missing_metrics) ... ok\ntest_failed_backend_and_blocked_descendant_do_not_get_zero_measurements (__main__.PerformanceTests.test_failed_backend_and_blocked_descendant_do_not_get_zero_measurements) ... ok\ntest_monotonic_phases_separate_backend_preflight_and_hashing (__main__.PerformanceTests.test_monotonic_phases_separate_backend_preflight_and_hashing) ... ok\ntest_native_counter_fixture_is_bounded_and_committed_memory_not_rss (__main__.PerformanceTests.test_native_counter_fixture_is_bounded_and_committed_memory_not_rss) ... ok\ntest_older_valid_plan_has_explicitly_unavailable_preparation (__main__.PerformanceTests.test_older_valid_plan_has_explicitly_unavailable_preparation) ... ok\ntest_partial_native_counter_coverage_is_preserved_without_inventing_values (__main__.PerformanceTests.test_partial_native_counter_coverage_is_preserved_without_inventing_values) ... ok\ntest_phase_cancellation_preserves_elapsed_without_using_wall_clock (__main__.PerformanceTests.test_phase_cancellation_preserves_elapsed_without_using_wall_clock) ... ok\ntest_preflight_failure_and_cancellation_keep_their_own_partial_duration (__main__.PerformanceTests.test_preflight_failure_and_cancellation_keep_their_own_partial_duration) ... ok\ntest_prepared_record_is_path_free_and_preparation_is_frozen (__main__.PerformanceTests.test_prepared_record_is_path_free_and_preparation_is_frozen) ... ok\ntest_record_during_execution_distinguishes_running_from_unstarted_steps (__main__.PerformanceTests.test_record_during_execution_distinguishes_running_from_unstarted_steps) ... ok\ntest_successful_exit_missing_output_is_measured_as_output_validation_failure (__main__.PerformanceTests.test_successful_exit_missing_output_is_measured_as_output_validation_failure) ... ok\ntest_system_information_works_with_all_socket_audits_denied (__main__.PerformanceTests.test_system_information_works_with_all_socket_audits_denied) ... ok\ntest_windows_kernel_identity_uses_numeric_version_and_native_architecture (__main__.PerformanceTests.test_windows_kernel_identity_uses_numeric_version_and_native_architecture) ... ok\n\n----------------------------------------------------------------------\nRan 18 tests in 0.664s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_diagnostics.py",
+      "exitCode": 0,
+      "tests": 11,
+      "skipped": 2,
+      "failures": 0,
+      "errors": 0,
+      "log": ".........ss\n----------------------------------------------------------------------\nRan 11 tests in 0.082s\n\nOK (skipped=2)\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_engine_paths.py",
+      "exitCode": 0,
+      "tests": 7,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": "test_frozen_plan_and_upstream_hash_protections_are_not_weakened (__main__.EnginePathTests.test_frozen_plan_and_upstream_hash_protections_are_not_weakened) ... ok\ntest_hardlink_input_identity_remains_rejected_at_long_paths (__main__.EnginePathTests.test_hardlink_input_identity_remains_rejected_at_long_paths) ... ok\ntest_long_sequence_and_interval_readers_use_the_same_io_boundary (__main__.EnginePathTests.test_long_sequence_and_interval_readers_use_the_same_io_boundary) ... ok\ntest_result_containment_and_manifest_checks_are_not_weakened (__main__.EnginePathTests.test_result_containment_and_manifest_checks_are_not_weakened) ... ok\ntest_successful_backend_long_outputs_are_hashed_consumed_and_reported (__main__.EnginePathTests.test_successful_backend_long_outputs_are_hashed_consumed_and_reported) ... ok\ntest_symbolic_input_and_output_ancestors_remain_rejected (__main__.EnginePathTests.test_symbolic_input_and_output_ancestors_remain_rejected) ... ok\ntest_windows_helper_imports_work_in_package_style_without_workspace_sys_path (__main__.EnginePathTests.test_windows_helper_imports_work_in_package_style_without_workspace_sys_path) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.129s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_cwl_results.py",
+      "exitCode": 0,
+      "tests": 5,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.071s\n\nOK\n"
+    },
+    {
+      "command": "python3 workspace/tests/test_cwl_export.py",
+      "exitCode": 0,
+      "tests": 14,
+      "skipped": 1,
+      "failures": 0,
+      "errors": 0,
+      "log": "........s.....\n----------------------------------------------------------------------\nRan 14 tests in 0.406s\n\nOK (skipped=1)\n"
+    },
+    {
+      "command": "python3 -m py_compile scripts/check_tool_library_windows.py scripts/native_tree.py scripts/check_workspace_ui_windows.py scripts/check_readiness_windows.py scripts/check_batch_windows.py scripts/check_batch_transport_windows.py scripts/check_recovery_windows.py scripts/check_reference_management_windows.py scripts/check_curated_windows.py",
+      "exitCode": 0,
+      "tests": null,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "log": ""
+    }
+  ],
+  "nativeCrossBuild": {
+    "desktop": "passed",
+    "bridge": "passed",
+    "compilerArchiveSha256": "bb7bb7654b33d5aa8712acb837c963b2e0c56352560c76105270a3268c665c21",
+    "flags": "-Wall -Wextra -Werror",
+    "nativeExecution": false,
+    "developmentCorrection": "First desktop build rejected two unused parameters in new layout helpers; fixed and strict rebuild passed."
+  },
+  "skipReasons": [
+    "Two native Windows held-reader cases",
+    "Two native Windows junction/extended-path cases",
+    "Two external stock-CWL validation/replay cases; runner unavailable locally. CI installs its pinned test-only runner."
+  ]
+}

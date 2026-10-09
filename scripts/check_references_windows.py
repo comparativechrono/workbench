@@ -193,8 +193,10 @@ def run_reference_checks(root, evidence, report, args):
         # Explicitly reviewed versions only. The 0.15.0 reference-management
         # gate reuses these live-provider/offline/scientific assertions and
         # exercises its changed native References layout in a separate gate.
-        require(manifest_version in {"0.7.0", "0.8.0", "0.9.0", "0.10.0", "0.10.1", "0.11.0", "0.15.0"},
-                "This gate supports the reviewed 0.7.0, 0.8.0, 0.9.0, 0.10.0, 0.10.1 0.11.0 and 0.15.0 reference contracts only.")
+        # The 0.16.0 candidate retains those reference contracts. Version support
+        # enables validation; it does not establish a pass or a published release.
+        require(manifest_version in {"0.7.0", "0.8.0", "0.9.0", "0.10.0", "0.10.1", "0.11.0", "0.15.0", "0.16.0"},
+                "This gate supports the reviewed 0.7.0, 0.8.0, 0.9.0, 0.10.0, 0.10.1, 0.11.0, 0.15.0 and 0.16.0 reference contracts only.")
         require(initial["app_version"] == manifest_version,
                 "The private host version differs from the exact installed application manifest.")
         state = host.call("references/list")

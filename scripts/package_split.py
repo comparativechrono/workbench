@@ -30,7 +30,7 @@ VERSION=APP_VERSION
 # A core feature release must not silently raise every tool's installation floor.
 PACK_MIN_APP_VERSION='0.6.0'
 STARTER=('align-0.4.0','bam-0.4.0','variants-0.4.0')
-RUNTIME_MODULES=('app_version.py','catalog.py','engine.py','example.py','desktop_host.py','desktop_model.py',
+RUNTIME_MODULES=('app_version.py','catalog.py','engine.py','example.py','curated_workflows.py','results_summary.py','desktop_host.py','desktop_model.py',
                  'service.py','verify_installation.py','pack_checks.py','pack_manager.py',
                  'pack_security.py','core_checks.py','reference_provider.py','reference_manager.py',
                  'reference_provenance.py','reference_transfer.py','reference_library.py','reference_ncbi.py','cwl_export.py','dag_routing.py','setup_manager.py',

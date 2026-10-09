@@ -1,0 +1,186 @@
+{
+  "schema": 1,
+  "date": "2026-10-09",
+  "sourceCommit": "7a9aca71ddd4816b51dbe693873f42fa50a6b746",
+  "runId": 37941573921,
+  "assetSha256": "1ff91bdb386171aeb166fec4fce4ad23e31287dc9e9695167db113994f416131",
+  "success": true,
+  "scope": "Static new-feature screenshot review, both Windows path layouts at hosted 96 DPI",
+  "ordinary": {
+    "dpi": 96,
+    "captures": [
+      {
+        "path": "curated-native-catalogue.bmp",
+        "width": 940,
+        "height": 680,
+        "sha256": "ea4f2ec25c0dd698869a3bba5572b0feed7aa03d7531178beb91d85f0f5fa9c4",
+        "review": "passed",
+        "finding": "Two workflow names, availability and action buttons readable; inputs/expected answers visible; long details/notice use visible native scrollbars.",
+        "displayConversion": "PNG pixels equal original BMP"
+      },
+      {
+        "path": "curated-native-loaded-workflow.bmp",
+        "width": 1040,
+        "height": 728,
+        "sha256": "48af1a4e0080b0006e267e123163962b17712336e4e24f48a1e725380f1efa50",
+        "review": "passed",
+        "finding": "Editable graph and tool options present; toolbar and footer readable; graph clipping/ellipses reflect the scrollable canvas viewport.",
+        "displayConversion": "PNG pixels equal original BMP"
+      },
+      {
+        "path": "results-native-filtered-summary.bmp",
+        "width": 940,
+        "height": 680,
+        "sha256": "ec7bf43ebd62dd30b1f61ef643529271b1234375df60944efc4e53463c199f33",
+        "review": "passed",
+        "finding": "Search, selected analysis, status, sample, timestamp and measured counts readable. Long tool column is intentionally ellipsized; full summary is scrollable.",
+        "displayConversion": "PNG pixels equal original BMP"
+      },
+      {
+        "path": "results-native-failed-preparation.bmp",
+        "width": 940,
+        "height": 680,
+        "sha256": "3046de85e7d199d171c4b3ea1d149c73d82c4763328f47bf56f73bc2f94f340d",
+        "review": "passed",
+        "finding": "Failed execution state, real missing-file error and next action readable; missing results-folder action disabled.",
+        "displayConversion": "PNG pixels equal original BMP"
+      },
+      {
+        "path": "results-native-failure-guidance.bmp",
+        "width": 940,
+        "height": 680,
+        "sha256": "6ed9a20caf8e2702c6b8cb4e126e793245eb39d65cca7744ede3e9997c80258d",
+        "review": "passed",
+        "finding": "Scrolled error/action and no-invented-QC-threshold interpretation visible without overlap.",
+        "displayConversion": "PNG pixels equal original BMP"
+      },
+      {
+        "path": "results-native-empty-search.bmp",
+        "width": 940,
+        "height": 680,
+        "sha256": "9f64c6c24f3c8bed991091f43d3491ac6737013af7121612ee57bf0a7fb7e38d",
+        "review": "passed",
+        "finding": "Clear empty-state explanation; View and Open buttons visibly disabled; Search and Close readable.",
+        "displayConversion": "PNG pixels equal original BMP"
+      }
+    ]
+  },
+  "spaces": {
+    "schema": 1,
+    "reviewedUtc": "2026-10-09T14:13:50.158223+00:00",
+    "reviewType": "Independent visual inspection of six exact-candidate spaced-path Windows captures",
+    "sourceCommit": "7a9aca71ddd4816b51dbe693873f42fa50a6b746",
+    "appVersion": "0.16.0",
+    "assetName": "native-workbench-0.16.0-starter-windows.zip",
+    "assetSha256": "1ff91bdb386171aeb166fec4fce4ad23e31287dc9e9695167db113994f416131",
+    "nativeGateReport": "spaces-windows/curated-evidence/native-curated.json",
+    "nativeGateReportSha256": "9b1cb6ddbc7d1d5f6ddc9c5807aaa0ba9f654e42da7783aa7a12bf115716226f",
+    "platform": "Windows-2022Server-10.0.20348-SP0",
+    "dpi": 96,
+    "status": "pass",
+    "reviewedCaptures": 6,
+    "summary": "No visible control overlap or clipped fixed labels/action text. Observed partial long text, card labels and table cells are explained by scrollable viewports or explicit ellipses.",
+    "captures": [
+      {
+        "capture": "curated-native-catalogue.bmp",
+        "reviewedImage": "curated-native-catalogue.png",
+        "width": 940,
+        "height": 680,
+        "bmpSha256": "ea4f2ec25c0dd698869a3bba5572b0feed7aa03d7531178beb91d85f0f5fa9c4",
+        "bmpHashMatchesGate": true,
+        "pngSha256": "b1fb28280bd1131cdee1f75c2c461f48787a17a62cf7bfa2aeacb107ef47a048",
+        "pngPixelsMatchBmp": true,
+        "status": "pass",
+        "findings": [
+          "Two workflow names, requirements states, section labels and all four action buttons are readable and separated.",
+          "Input descriptions and fixture expected answers are readable. Further details and the longer training notice continue within visible vertical-scroll panes; their lower-edge clipping is viewport behavior, not lost fixed labels."
+        ]
+      },
+      {
+        "capture": "curated-native-loaded-workflow.bmp",
+        "reviewedImage": "curated-native-loaded-workflow.png",
+        "width": 1040,
+        "height": 728,
+        "bmpSha256": "48af1a4e0080b0006e267e123163962b17712336e4e24f48a1e725380f1efa50",
+        "bmpHashMatchesGate": true,
+        "pngSha256": "4f41b4c54d41005cde964455cd84b9d3cb93c9a29c4e12df8b1c6af4b3cef29e",
+        "pngPixelsMatchBmp": true,
+        "status": "pass",
+        "findings": [
+          "Navigation, workflow controls, input/source connections, selected-tool fields, action buttons and loaded-workflow status are readable without overlap.",
+          "The 100% workflow canvas extends beyond its viewport with horizontal and vertical scrollbars; card headings use ellipses. These are intentional navigation/truncation treatments. The complete DAG is not visible in this single capture."
+        ]
+      },
+      {
+        "capture": "results-native-filtered-summary.bmp",
+        "reviewedImage": "results-native-filtered-summary.png",
+        "width": 940,
+        "height": 680,
+        "bmpSha256": "fd684826b7a117f9376a950d266cd670d9bcbf79fe1aefa931cbdfb5de7c895e",
+        "bmpHashMatchesGate": true,
+        "pngSha256": "5ea59d2529ef5abe49eba569d8df17ca756d0837ea0a6652b779a4584c6605f8",
+        "pngPixelsMatchBmp": true,
+        "status": "pass",
+        "findings": [
+          "Search query, selected completed result, sample, start time, summary heading and result actions are readable.",
+          "Recorded metric counts are visible with the explicit no-QC-verdict label. Tools cell text is ellipsized to its column and remaining summary details continue in a vertical-scroll pane."
+        ]
+      },
+      {
+        "capture": "results-native-failed-preparation.bmp",
+        "reviewedImage": "results-native-failed-preparation.png",
+        "width": 940,
+        "height": 680,
+        "bmpSha256": "f7af843dc95e53560cf4ea0785d83c40997cf3574f44c4f6b85649899e4dafbc",
+        "bmpHashMatchesGate": true,
+        "pngSha256": "bb29d043d9f37f05e74e98e8d82580dd55cd0e23a6390a8bcec48bad6e0930e9",
+        "pngPixelsMatchBmp": true,
+        "status": "pass",
+        "findings": [
+          "The named failed result and failed execution state are visible. The actual missing-file cause and corrective replacement-input guidance fit inside the summary pane.",
+          "The folder action is visibly disabled for preparation failure. Long tool-list text uses table ellipsis; additional explanation continues below the scrollable summary viewport."
+        ]
+      },
+      {
+        "capture": "results-native-failure-guidance.bmp",
+        "reviewedImage": "results-native-failure-guidance.png",
+        "width": 940,
+        "height": 680,
+        "bmpSha256": "bd1bb4e5d4448423abc54ce469ceea8ce02683c579194f94af05b6055af0e1e9",
+        "bmpHashMatchesGate": true,
+        "pngSha256": "9fe6228d5b2e93478ea27ad25c643fbeaaf79ff41907ece007b3dc77820ffc0f",
+        "pngPixelsMatchBmp": true,
+        "status": "pass",
+        "findings": [
+          "The scrolled summary visibly shows the missing-input cause, complete corrective action, unavailable measurements and interpretation limits.",
+          "Wrapping stays within the text pane, and fixed search/status/action controls remain unobstructed."
+        ]
+      },
+      {
+        "capture": "results-native-empty-search.bmp",
+        "reviewedImage": "results-native-empty-search.png",
+        "width": 940,
+        "height": 680,
+        "bmpSha256": "9f64c6c24f3c8bed991091f43d3491ac6737013af7121612ee57bf0a7fb7e38d",
+        "bmpHashMatchesGate": true,
+        "pngSha256": "4a1b093a180f88c9da6a7c2bfbd0146b6b14f72555508f0883b77b06c34def1b",
+        "pngPixelsMatchBmp": true,
+        "status": "pass",
+        "findings": [
+          "The unmatched query, empty table, explicit no-matching-result message and zero-result notice are readable.",
+          "View saved workflow and Open results folder are visibly disabled; Search and Close remain available. No prior result details remain visible."
+        ]
+      }
+    ],
+    "limits": [
+      "Static hosted Windows Server 2022 captures at 96 DPI only; no high-DPI, smaller-screen, multi-monitor, physical trackpad or representative-machine acceptance claim.",
+      "Visual review does not independently execute interactions, inspect intermediate repaint frames or prove keyboard/scroll behavior; the separately recorded native gate covers its stated interactions.",
+      "Only the visible portions of long details and the workflow canvas were inspected; this review does not claim the complete DAG or every scrolled line was visible.",
+      "Scientific correctness and full suite results remain the separately recorded gate evidence; visual legibility is not biological or clinical validation."
+    ]
+  },
+  "limits": [
+    "Long details and DAG intentionally use scrollable viewports; no full graph visibility at one zoom implied.",
+    "No high-DPI, physical trackpad, multi-monitor, temporal-rendering or representative-PC acceptance inferred."
+  ]
+}

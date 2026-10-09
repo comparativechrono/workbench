@@ -1,5 +1,9 @@
 # Development roadmap
 
+## Current set, 2026-10-09
+
+The owner requested the next curated-workflows/results group: two synthetic training workflows (alignment with QC and variant calling), exact requirements and missing-dependency guidance, native measured QC/results, search and actionable failures. Work began from reference-management review head `f45622f8915a3fa80c0904fcd97c216e0b5980f3`. Initial inspection found no saved next-set version or implementation; 0.16.0 was assigned as the new unpublished candidate identity. The features, exact hosted Windows validation, archive audit and screenshot review are complete in draft PR #11; the candidate remains unpublished. See the [feature guide](curated-workflows-results.md) and [evidence handover](curated-workflows-results-0.16.0-handover.md). Earlier release and acceptance limitations remain open.
+
 ## Accepted programme, 2026-10-08
 
 The owner accepted the feature programme below with “Great. We should do all

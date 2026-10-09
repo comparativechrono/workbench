@@ -1,5 +1,7 @@
 # Development and recovery runbook
 
+**Current set:** unpublished 0.16.0 curated workflows/results, on `feature/curated-workflows-results`. Runtime modules `curated_workflows.py` and `results_summary.py` are packaged explicitly. `native-curated-candidate.yml` builds matching source/Starter archives and validates the exact Windows package in both path layouts. See the [feature contract](curated-workflows-results.md) and [handover](curated-workflows-results-0.16.0-handover.md).
+
 Reviewed against source commit `9368c22058a3fe3cd434e7185fcaf5ff3fd6ce22` on
 2026-10-04. Recovery, packaging and updater instructions were updated for the
 0.7.0 reference-discovery working tree on 2026-10-05, based on repository
@@ -9,7 +11,7 @@ Commands below run from the repository root unless stated otherwise.
 Paths in angle brackets are placeholders to replace, not files supplied by Git.
 Read [architecture](architecture.md) before changing an unfamiliar layer.
 
-**Current development:** unpublished 0.15.0 on `feature/reference-management`
+**Previous set:** unpublished 0.15.0 on `feature/reference-management`
 extends the frozen 0.14.0 review candidate. The
 [reference-management guide](reference-management.md) defines resumable transfer,
 local import, copy/verify relocation and bounded NCBI RefSeq lookup contracts.

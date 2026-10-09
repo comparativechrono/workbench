@@ -1,10 +1,25 @@
 # Current project state
 
-## Active development: 0.15.0 reference management, unpublished
+## Active set: 0.16.0, unpublished
+
+Curated synthetic workflows and native recorded-result summaries/search are
+implemented on `feature/curated-workflows-results`, based on reference-management
+head `f45622f8915a3fa80c0904fcd97c216e0b5980f3`. Exact candidate
+`7a9aca71ddd4816b51dbe693873f42fa50a6b746` passed all configured hosted Windows
+gates in ordinary and space-containing paths, including 11 curated checks per
+path. Source checks passed (474 Linux; 318 Windows per path, each with four
+explicit skips); downloaded archive/source audit and 12 new-feature screenshot
+reviews passed. The [handover](curated-workflows-results-0.16.0-handover.md)
+records exact hashes, downloads, failed attempts, skips and limits.
+[Draft PR #11](https://github.com/comparativechrono/workbench/pull/11) is ready
+for review. Published 0.11.0 is unchanged; nothing is merged or released.
+Representative-PC and release/updater acceptance remain separate.
+
+## Previous set: 0.15.0 reference management, unpublished
 
 On **2026-10-08** the owner requested the remaining accepted work one group at a
-time. The first group is reference management: resumable downloads, local import,
-safe library relocation and NCBI RefSeq assembly discovery. Work is on
+time. The first group was reference management: resumable downloads, local import,
+safe library relocation and NCBI RefSeq assembly discovery. It is retained on
 `feature/reference-management`, based on `38917349449ce56a45d3e0f4f41b7d2a38621c6d`.
 See the [feature contract](reference-management.md) and
 [candidate handover](reference-management-0.15.0-handover.md).
@@ -19,9 +34,11 @@ ran all 15 Windows source suites: 274 passes/four explicit skips per path,
 and all 11 batch checks. Other exact native regression gates and independent
 archive verification passed; failed earlier attempts remain recorded.
 
-See the handover for exact downloads, hashes and combined evidence. This is
-unpublished 0.15.0, ready for tester review. Representative-machine acceptance,
-realistic benchmarking and release/update work remain separate. No 0.15.0
+See the handover for exact downloads, hashes and combined evidence. These are
+the prior 0.15.0 candidate's results; they do not validate the new 0.16.0 bytes.
+The unpublished 0.15.0 candidate remains ready for tester review.
+Representative-machine acceptance, realistic benchmarking and release/update
+work remain separate. No 0.15.0
 updater or baseline upgrade was tested. Published 0.11.0, production pack/trust
 bytes and the frozen 0.14.0 candidate remain unchanged. This set does not
 complete the entire roadmap or satisfy the earlier broader-completion release
