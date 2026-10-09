@@ -13,8 +13,8 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  SOURCE_COMMIT: 7a9aca71ddd4816b51dbe693873f42fa50a6b746
-  STARTER_SHA256: 1ff91bdb386171aeb166fec4fce4ad23e31287dc9e9695167db113994f416131
+  SOURCE_COMMIT: e855dc4396e0c16ae35f4e840eb9cc734adb4441
+  STARTER_SHA256: f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073
   STARTER_ASSET: native-workbench-0.16.0-starter-windows.zip
 
 jobs:
@@ -33,8 +33,8 @@ jobs:
       - name: Retrieve the accepted frozen standalone candidate without rebuilding
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
-          name: curated-transfer-starter-7a9aca71ddd4816b51dbe693873f42fa50a6b746
-          run-id: 37941573921
+          name: curated-transfer-starter-e855dc4396e0c16ae35f4e840eb9cc734adb4441
+          run-id: 37952018931
           github-token: ${{ github.token }}
           path: ${{ runner.temp }}/frozen-candidate
       - name: Verify frozen archive and extract isolated regression applications
@@ -64,7 +64,7 @@ jobs:
           $evidence = Join-Path $env:RUNNER_TEMP 'release-regression-evidence'
           New-Item -ItemType Directory -Force $evidence | Out-Null
           @{ schema = 1; success = $true; sourceCommit = $env:SOURCE_COMMIT; validatorCommit = '${{ github.sha }}';
-             candidateRun = 37941573921; assetName = $env:STARTER_ASSET; assetSha256 = $env:STARTER_SHA256;
+             candidateRun = 37952018931; assetName = $env:STARTER_ASSET; assetSha256 = $env:STARTER_SHA256;
              appVersion = '0.16.0'; installationCase = $env:CASE_FOLDER; validatorSha256 = $validators;
              rebuilt = $false; scope = 'Frozen archive identity and unchanged validator identities; gate outcomes are separate reports.' } |
             ConvertTo-Json -Depth 5 | Set-Content (Join-Path $evidence 'frozen-inputs.json')
@@ -113,8 +113,8 @@ jobs:
       - name: Retrieve the same accepted frozen standalone candidate
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
-          name: curated-transfer-starter-7a9aca71ddd4816b51dbe693873f42fa50a6b746
-          run-id: 37941573921
+          name: curated-transfer-starter-e855dc4396e0c16ae35f4e840eb9cc734adb4441
+          run-id: 37952018931
           github-token: ${{ github.token }}
           path: ${{ runner.temp }}/frozen-candidate
       - name: Recheck full scientific results with Windows long-path opt-in disabled
@@ -124,7 +124,7 @@ jobs:
           $starter = Join-Path $env:RUNNER_TEMP ('frozen-candidate/' + $env:STARTER_ASSET)
           if ((Get-FileHash $starter -Algorithm SHA256).Hash -ne $env:STARTER_SHA256) { throw 'Accepted Starter SHA-256 mismatch.' }
           $validators = @{
-            'scripts/check_long_paths_0160_windows.py' = '5de1cc348169824a6fb8e9f9ece9fa860e46ccf13bf8274e7b86464c78f62bec'
+            'scripts/check_long_paths_0160_windows.py' = 'a4bb843413f78e7ef1c05e03c646d685833f3534a9342cbf04b2f0bf46ad9429'
             'scripts/check_references_windows.py' = '5920501af2272bce364afc3b28733a4f0fb4b7291aabaca42a683f4706b485b0'
           }
           foreach ($path in $validators.Keys) {
@@ -138,7 +138,7 @@ jobs:
           $evidence = Join-Path $env:RUNNER_TEMP 'long-path-evidence'
           New-Item -ItemType Directory -Force $evidence | Out-Null
           @{ schema = 1; success = $true; sourceCommit = $env:SOURCE_COMMIT; validatorCommit = '${{ github.sha }}';
-             candidateRun = 37941573921; assetName = $env:STARTER_ASSET; assetSha256 = $env:STARTER_SHA256;
+             candidateRun = 37952018931; assetName = $env:STARTER_ASSET; assetSha256 = $env:STARTER_SHA256;
              appVersion = '0.16.0'; validatorSha256 = $validators; rebuilt = $false;
              scope = 'Current frozen package only; no previous-package negative control or GUI claim.' } |
             ConvertTo-Json -Depth 5 | Set-Content (Join-Path $evidence 'frozen-inputs.json')

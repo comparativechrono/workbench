@@ -25,9 +25,9 @@ BASELINE_SHA = 'e816e2f7cd5efe98af752fbf072fab00344ebaa2b6963795c2fbf4a86b5fa81c
 BASELINE_BYTES = 17044022
 BASELINE_URL = ('https://github.com/comparativechrono/workbench/releases/download/app-v0.11.0/'
                 'native-workbench-0.11.0-starter-windows.zip')
-SOURCE_COMMIT = '7a9aca71ddd4816b51dbe693873f42fa50a6b746'
-STARTER_SHA = '1ff91bdb386171aeb166fec4fce4ad23e31287dc9e9695167db113994f416131'
-STARTER_BYTES = 17846720
+SOURCE_COMMIT = 'e855dc4396e0c16ae35f4e840eb9cc734adb4441'
+STARTER_SHA = 'f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073'
+STARTER_BYTES = 17846873
 ALIGN_SHA = '3a08cf061f0b62c5502d1420115db3fcae2b04bf695ad3cfd1c3063de0fafa02'
 ALIGN_MANIFEST_SHA = '7f8f36efbfd6a8255a98eabb06746fbcc5bbdb872f392a65ca3e79a586d04939'
 UPDATE_NAME = 'native-workbench-0.16.0-update-from-0.11.0.zip'

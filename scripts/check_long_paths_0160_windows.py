@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Check 0.16.0 scientific execution with Windows long-path opt-in off.
 
-Release-specific diagnostic copy of check_long_paths_windows.py. Preserve every
-original scientific assertion, including overall installation success, and retain
-additional-pack failure records and logs that the older starter-only fixture did
-not collect. An additional-pack failure is still a failed gate.
+Release-specific copy of check_long_paths_windows.py. Preserve every original
+scientific assertion, retain additional-pack diagnostics, and independently check
+the pinned alignment self-check's completed graph and known-answer SAM. An
+additional-pack failure is still a failed gate.
 
 The workflow changes only a disposable CI runner's policy before starting this
 fresh private interpreter. This gate does not change policy, patch application
@@ -104,6 +104,73 @@ def retain_additional_pack_evidence(run, evidence, report):
             result["errors"].append(str(error))
 
 
+def check_additional_pack_success(run, evidence, report):
+    """Verify the exact extra pack operation that exposed the nested-cwd bug."""
+    packs = run.get('pack_checks', {})
+    require(packs.get('nativeWindowsExecuted') is True and packs.get('success') is True
+            and packs.get('passed') == 1 and packs.get('failed') == 0 and not packs.get('cancelled'),
+            'The additional native alignment pack check must pass without cancellation or failures.')
+    checks = packs.get('checks', [])
+    expected_pin = {'packId': 'align', 'packVersion': '0.4.1',
+                    'manifestSha256': '7f8f36efbfd6a8255a98eabb06746fbcc5bbdb872f392a65ca3e79a586d04939'}
+    require(len(checks) == 1 and checks[0].get('id') == 'align/paired-mapping-known-answer@0.4.1'
+            and checks[0].get('status') == 'passed' and checks[0].get('pin') == expected_pin,
+            'The additional check must execute the exact pinned align 0.4.1 known-answer operation.')
+    require(not report['additionalPackDiagnostics']['errors'],
+            'The additional pack diagnostic evidence could not be retained completely.')
+    retained = evidence/'additional-pack-diagnostics'/'0'
+    graph = read_json(retained/'run.json')
+    plan = read_json(retained/'plan.json')
+    require(graph.get('status') == 'success' and graph.get('success') is True
+            and graph.get('folder') == checks[0]['folder'] and graph.get('planSha256') == plan['sha256'],
+            'The retained additional pack graph must bind its completed frozen plan and recorded folder.')
+    nodes = graph.get('nodes', [])
+    require(len(nodes) == 1 and nodes[0].get('id') == 'step-1' and nodes[0].get('tool') == 'align/paired-end'
+            and nodes[0].get('status') == 'success' and nodes[0].get('pin') == expected_pin,
+            'The additional pack graph must successfully execute its one pinned alignment step.')
+    native_folder = nodes[0]['folder']
+    require(ntpath.isabs(native_folder) and not native_folder.startswith('\\\\?\\') and len(native_folder) < 260,
+            'The additional native working directory must remain an ordinary absolute path below MAX_PATH.')
+    native = read_json(Path(native_folder)/'run.json')
+    steps = native.get('steps', [])
+    require(native.get('status') == 'success' and [step.get('id') for step in steps] == ['check-pairs', 'align']
+            and all(step.get('status') == 'success' and step.get('exit_code') == 0
+                    and step.get('working_directory') == native_folder for step in steps),
+            'Pair validation and minimap2 must both actually finish in the bounded native working directory.')
+    outputs = graph['outputs']
+    require(set(outputs) == {'step-1::sam', 'step-1::pair-check'},
+            'The additional alignment graph must retain its SAM and paired-read validation outputs.')
+    output_files = []
+    for product in outputs.values():
+        for field, path in product['files'].items():
+            require(not path.startswith('\\\\?\\') and io_path(path).is_file()
+                    and digest(path) == product['sha256'][field],
+                    'An additional pack output failed independent rehashing or changed its ordinary identity.')
+            output_files.append({'output': product['id'], 'field': field, 'characters': len(path),
+                                 'sha256': product['sha256'][field]})
+    sam = outputs['step-1::sam']
+    sam_path = sam['files']['sam']
+    require(len(sam_path) > 260 and not Path(sam_path).is_file(),
+            'The additional known-answer SAM must cross the disabled-policy ordinary I/O boundary.')
+    artifact = next((item for item in native.get('artifacts', []) if item.get('id') == 'sam'), {})
+    require(artifact.get('checked') is True and artifact.get('path') == sam_path
+            and artifact.get('sha256') == sam['sha256']['sam']
+            and artifact.get('bytes') == io_path(sam_path).stat().st_size,
+            'The additional SAM must match the native bridge artifact identity and byte count.')
+    text = io_path(sam_path).read_text(encoding='utf-8')
+    rows = [line.split('\t') for line in text.splitlines() if line and not line.startswith('@')]
+    require(len(rows) == 202 and all(len(row) >= 11 and int(row[1]) & 1 and int(row[1]) & 2
+            and not int(row[1]) & (4 | 256 | 2048) and row[2] == 'starter' for row in rows),
+            'The additional known-answer SAM must contain 202 primary mapped proper-pair records on starter.')
+    require(any(line.startswith('@SQ\tSN:starter\tLN:3000') for line in text.splitlines()),
+            'The additional known-answer SAM lost its 3000-base synthetic reference dictionary.')
+    report['additionalAlignment'] = {'checkId': checks[0]['id'], 'pin': expected_pin,
+        'graphRecordSha256': digest(retained/'run.json'), 'nativeWorkingDirectoryCharacters': len(native_folder),
+        'samCharacters': len(sam_path), 'samSha256': sam['sha256']['sam'],
+        'alignmentRecords': len(rows), 'mappedProperPairs': len(rows), 'outputFiles': output_files}
+    report['checks'].append('The exact align 0.4.1 additional pack check passes with a native working directory below MAX_PATH; its >260-character SAM independently rehashes and contains 202 primary mapped proper-pair records.')
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--app-root', type=Path, required=True)
@@ -119,7 +186,7 @@ def main(argv=None):
               'assetSha256':args.asset_sha256, 'gateSha256':digest(__file__), 'startedUtc':datetime.now(timezone.utc).isoformat(),
               'platform':platform.platform(), 'python':sys.version, 'checks':[], 'skips':[],
               'expectedApplicationFailure':args.expect_missing_output, 'nativeWindowsExecuted':False,
-              'scope':'Exact packaged private host and complete starter installation-check chain; no GUI claim.'}
+              'scope':'Exact packaged private host, complete starter chain and pinned additional alignment installation check; no GUI claim.'}
     host = None
     try:
         require(os.name == 'nt', 'This gate requires native Windows; unavailable checks cannot pass.')
@@ -200,6 +267,7 @@ def main(argv=None):
         else:
             require(run['status']=='completed' and run.get('success') and starter['passed']==1 and starter['failed']==0,
                     'The full Check installation operation failed: '+str(run.get('message')))
+            check_additional_pack_success(run, evidence, report)
             require(len(graph_record['nodes'])==5 and all(node['status']=='success' for node in graph_record['nodes']),
                     'Alignment, SAMtools preparation, BCFtools calling/statistics and combined reporting must all succeed.')
             output_files=[]

@@ -23,7 +23,10 @@ TAG = 'app-v' + VERSION
 BRANCH = 'release/app-' + VERSION
 ROOT = Path(__file__).resolve().parents[1]
 LOCK_PATH = ROOT / 'knowledge/evidence/curated-workflows-0.16.0-release-lock.json'
-SOURCE = '7a9aca71ddd4816b51dbe693873f42fa50a6b746'
+SOURCE = 'e855dc4396e0c16ae35f4e840eb9cc734adb4441'
+CANDIDATE_RUN = 37952018931
+CANDIDATE_ARTIFACT = {'id': 11626720550, 'bytes': 65972456,
+                      'sha256': '2c17413e96cf113c4ddb007651ac45b471d74ba4b3b5aaeb0a579bd5009308cd'}
 STARTER = 'native-workbench-0.16.0-starter-windows.zip'
 SOURCES = 'native-workbench-0.16.0-source.zip'
 UPDATE = 'native-workbench-0.16.0-update-from-0.11.0.zip'
@@ -33,10 +36,12 @@ PROFILE_SHA = '4cad899dcc1f6541f6edecc3ace7d0d4dd5d6103b1b16218fece0c0b68d2a4ba'
 FINGERPRINT = '8d2093f9fafd71de56fea2038faeb2efa0964767d3235430b06428132cdc8505'
 ALIGN = 'native-workbench-pack-align-0.4.1.zip'
 CORE_FILES = 87
+SOURCE_FILES = 748
+LONG_PATH_CHECKS = 4
 ALIGN_MANIFEST = '7f8f36efbfd6a8255a98eabb06746fbcc5bbdb872f392a65ca3e79a586d04939'
 FROZEN_ARCHIVES = {
-    STARTER: {'bytes': 17846720, 'sha256': '1ff91bdb386171aeb166fec4fce4ad23e31287dc9e9695167db113994f416131'},
-    SOURCES: {'bytes': 47765332, 'sha256': '8fc6a510d178632f12259a3e6e6b115c2c6c40562906eecc5a5557a7a9a361de'},
+    STARTER: {'bytes': 17846873, 'sha256': 'f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073'},
+    SOURCES: {'bytes': 47848425, 'sha256': 'f746f00a82675c2cf52364a3b4d040721c6d06ac5605488efbdc0376ef5b7e44'},
     ALIGN: {'bytes': 575862, 'sha256': '3a08cf061f0b62c5502d1420115db3fcae2b04bf695ad3cfd1c3063de0fafa02'},
 }
 CANDIDATE_MEMBERS = {STARTER, SOURCES, ALIGN, 'BUILD-PROVENANCE.json', 'source-metadata.json',
@@ -46,13 +51,15 @@ ASSET_NAMES = CANDIDATE_MEMBERS - {'WindowsPerformanceChecks.exe'} | {UPDATE, 'B
     'UPDATE-SHA256SUMS.txt', 'WINDOWS-EVIDENCE.zip', 'RELEASE-VALIDATION.json', 'EVIDENCE-SHA256SUMS.txt'}
 UPDATER_FILES = {'scripts/build_update_0160.py', 'scripts/check_update_0160_windows.py',
                  'tests/test_build_update_0160.py', '.github/workflows/native-update-0.16.0.yml'}
-RELEASE_CHECK_FILES = {'.github/workflows/native-curated-release-check.yml'}
+RELEASE_CHECK_FILES = {'.github/workflows/native-curated-release-check.yml',
+                       'scripts/check_scroll_frames_0160_windows.py',
+                       'scripts/check_long_paths_0160_windows.py'}
 NON_APP = UPDATER_FILES | RELEASE_CHECK_FILES | {'README.md', 'scripts/publish_app_0160.py',
     'tests/test_publish_app_0160.py', '.github/workflows/publish-app-0.16.0.yml'}
 REPORT_COUNTS = {'curated': 11, 'reference-live': 9, 'reference-management': 10,
                  'recovery': 12, 'batch': 11, 'readiness': 5, 'library': 7,
                  'workspace': 32, 'transport': 3, 'performance': 14, 'align-pack': 1,
-                 'results': 9, 'scroll': 3, 'update': 13}
+                 'results': 9, 'scroll': 3, 'update': 18}
 REPORT_GATES = {
     'curated': 'scripts/check_curated_windows.py',
     'reference-live': 'scripts/check_reference_management_windows.py',
@@ -61,8 +68,8 @@ REPORT_GATES = {
     'readiness': 'scripts/check_readiness_windows.py', 'library': 'scripts/check_tool_library_windows.py',
     'workspace': 'scripts/check_workspace_ui_windows.py', 'transport': 'scripts/check_batch_transport_windows.py',
     'performance': 'tests/windows_performance.cpp', 'align-pack': 'scripts/check_pack_release_windows.py',
-    'results': 'scripts/check_results_windows.py', 'scroll': 'scripts/check_scroll_frames_windows.py',
-    'update': 'scripts/check_update_0160_windows.py', 'long-paths': 'scripts/check_long_paths_windows.py',
+    'results': 'scripts/check_results_windows.py', 'scroll': 'scripts/check_scroll_frames_0160_windows.py',
+    'update': 'scripts/check_update_0160_windows.py', 'long-paths': 'scripts/check_long_paths_0160_windows.py',
 }
 
 def require(value, message):
@@ -97,7 +104,7 @@ def acceptance_lock():
         require(lock['archives'][name] == identity, 'Frozen candidate archive lock differs: ' + name)
     require(set(lock.get('runs', {})) == {'candidate', 'updater', 'regressions'},
             'Incomplete run acceptance.')
-    require(lock['runs']['candidate']['id'] == 37941573921 and lock['runs']['candidate']['sourceCommit'] == SOURCE
+    require(lock['runs']['candidate']['id'] == CANDIDATE_RUN and lock['runs']['candidate']['sourceCommit'] == SOURCE
             and lock['runs']['updater']['sourceCommit'] == lock['updaterSourceCommit'], 'Frozen run identity differs.')
     for key, item in lock['runs'].items():
         expected_path = {'candidate': '.github/workflows/native-curated-candidate.yml',
@@ -110,10 +117,8 @@ def acceptance_lock():
     expected_artifacts = {'candidate', 'native-ordinary', 'native-spaces', 'updater', 'update-ordinary',
                           'update-spaces', 'regressions-ordinary', 'regressions-spaces', 'long-paths'}
     require(set(lock.get('artifacts', {})) == expected_artifacts, 'Incomplete artifact acceptance.')
-    require(lock['artifacts']['candidate']['id'] == 11621489330, 'Frozen candidate aggregate artifact differs.')
-    require(lock['artifacts']['candidate']['bytes'] == 65891317
-            and lock['artifacts']['candidate']['sha256'] == '9aab1bac997122fbf2c5418075bf4f2e35a2af442b06810b29656824e4ff020d',
-            'Frozen candidate transport differs.')
+    require(all(lock['artifacts']['candidate'].get(key) == value for key, value in CANDIDATE_ARTIFACT.items()),
+            'Frozen candidate aggregate artifact or transport differs.')
     ids, files = set(), set()
     for item in lock['artifacts'].values():
         require(type(item.get('id')) is int and item['id'] > 0 and item['id'] not in ids
@@ -127,13 +132,14 @@ def acceptance_lock():
             and {(item.get('case'), item.get('kind')) for item in lock['reports'].values()} == expected_reports,
             'Incomplete report acceptance.')
     for item in lock['reports'].values():
-        expected_passed = 3 if item['kind'] == 'long-paths' else REPORT_COUNTS[item['kind']]
+        expected_passed = LONG_PATH_CHECKS if item['kind'] == 'long-paths' else REPORT_COUNTS[item['kind']]
         expected_run = 'updater' if item['kind'] == 'update' else 'regressions' if item['kind'] in ('results', 'scroll', 'long-paths') else 'candidate'
         require(item.get('artifact') in lock['artifacts'] and exact_hash(item.get('sha256'))
                 and type(item.get('passed')) is int and item['passed'] >= expected_passed
                 and item.get('sourceCommit') == SOURCE and exact_hash(item.get('gateCommit'), 40)
                 and item.get('skips') == [] and item.get('gate') == REPORT_GATES[item['kind']]
                 and item.get('validatorCommit') == lock['runs'][expected_run]['sourceCommit']
+                and item.get('gateCommit') == lock['runs'][expected_run]['sourceCommit']
                 and lock['artifacts'][item['artifact']]['run'] == expected_run,
                 'Incomplete report binding.')
         require(item.get('artifact') == ('long-paths' if item['kind'] == 'long-paths' else
@@ -344,7 +350,7 @@ def verify_candidate(blobs, lock):
         recovery = json.loads(archive.read('SOURCE-RECOVERY.json'))
         require(recovery['release'] == VERSION, 'Source recovery version differs.')
         entries = recovery['current_source_files']
-        require(len(entries) == 734 and len(entries) == len({item['path'] for item in entries})
+        require(len(entries) == SOURCE_FILES and len(entries) == len({item['path'] for item in entries})
                 and {name for name in archive.namelist() if name.startswith('current/')} == {item['path'] for item in entries},
                 'Incomplete or duplicate source inventory entries.')
         for item in entries:
@@ -394,7 +400,8 @@ def check_report(raw, spec, core_files, lock):
     report = json.loads(raw)
     kind = spec['kind']
     artifact_run = lock['runs'][lock['artifacts'][spec['artifact']]['run']]
-    require(spec['validatorCommit'] == artifact_run['sourceCommit'], 'Validator and retained artifact run differ.')
+    require(spec['validatorCommit'] == spec['gateCommit'] == artifact_run['sourceCommit'],
+            'Validator, helper source and retained artifact run differ.')
     require(report.get('failed', 0) == 0 and not report.get('failures') and not report.get('error'),
             'Native report contains failures.')
     if kind == 'performance':
@@ -421,9 +428,8 @@ def check_report(raw, spec, core_files, lock):
     require(report.get('success') is True and report.get('passed') == spec['passed']
             and report.get('skips', []) == spec['skips'], 'Native report did not pass its locked scope.')
     require(report.get('sourceCommit') == SOURCE, 'Report source identity differs.')
-    if kind != 'long-paths':
-        require(report.get('gateSha256') == sha(source_bytes(spec['gate'], spec['gateCommit'])),
-                'Report gate identity differs.')
+    require(report.get('gateSha256') == sha(source_bytes(spec['gate'], spec['gateCommit'])),
+            'Report gate identity differs.')
     if kind == 'transport':
         require(report.get('nativeGUILaunched') is True and report.get('nativeGUIValidated') is True
                 and report.get('fixtureOnly') is True
@@ -480,9 +486,21 @@ def check_report(raw, spec, core_files, lock):
             require(report.get('longPathsEnabled') == 0 and report.get('expectedApplicationFailure') is False
                     and report.get('policyProbe', {}).get('ordinaryIsFile') is False
                     and report.get('policyProbe', {}).get('extendedIsFile') is True
+                    and report.get('applicationCheck', {}).get('status') == 'completed'
+                    and report.get('applicationCheck', {}).get('corePassed') == 7
                     and report.get('applicationCheck', {}).get('starterPassed') == 1
                     and report.get('applicationCheck', {}).get('starterFailed') == 0,
                     'Positive long-path regression did not pass.')
+            additional = report.get('additionalAlignment', {})
+            require(additional.get('checkId') == 'align/paired-mapping-known-answer@0.4.1'
+                    and additional.get('pin') == {'packId': 'align', 'packVersion': '0.4.1', 'manifestSha256': ALIGN_MANIFEST}
+                    and type(additional.get('nativeWorkingDirectoryCharacters')) is int
+                    and 0 < additional['nativeWorkingDirectoryCharacters'] < 260
+                    and type(additional.get('samCharacters')) is int and additional['samCharacters'] > 260
+                    and additional.get('alignmentRecords') == 202 and additional.get('mappedProperPairs') == 202
+                    and exact_hash(additional.get('graphRecordSha256')) and exact_hash(additional.get('samSha256'))
+                    and report.get('additionalPackDiagnostics', {}).get('errors') == [],
+                    'Additional alignment long-path known-answer evidence did not pass.')
     return report
 
 def collect_reports(blobs, lock, core_files):
@@ -503,6 +521,16 @@ def collect_reports(blobs, lock, core_files):
                 policy = json.loads(archive.read(prefix + 'policy-setup.json'))
                 require(policy.get('requestedValue') == 0 and policy.get('restored') is True,
                         'Disposable runner long-path policy was not restored.')
+                for item in report.get('outputFiles', []):
+                    require(sha(archive.read(prefix + item['evidenceFile'].replace('\\', '/'))) == item['sha256'],
+                            'Retained long-path output hash differs.')
+                for item in report['additionalPackDiagnostics'].get('files', []):
+                    retained = archive.read(prefix + item['file'].replace('\\', '/'))
+                    require(len(retained) == item['bytes'] and sha(retained) == item['sha256'],
+                            'Retained additional-pack diagnostic identity differs.')
+                require(sha(archive.read(prefix + 'additional-pack-diagnostics/0/run.json'))
+                        == report['additionalAlignment']['graphRecordSha256'],
+                        'Retained additional alignment graph differs.')
             if spec['kind'] == 'update':
                 require(json.loads(archive.read(prefix + 'curated/native-curated.json')) == report['curated'],
                         'Nested upgraded-app report differs from its retained original.')

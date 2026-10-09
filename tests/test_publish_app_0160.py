@@ -30,16 +30,16 @@ def valid_lock():
         ('candidate', p.SOURCE, '.github/workflows/native-curated-candidate.yml'),
         ('updater', updater, '.github/workflows/native-update-0.16.0.yml'),
         ('regressions', regression, '.github/workflows/native-curated-release-check.yml')), 1):
-        lock['runs'][key] = {'id': 37941573921 if key == 'candidate' else index,
+        lock['runs'][key] = {'id': p.CANDIDATE_RUN if key == 'candidate' else index,
             'sourceCommit': commit, 'path': path, 'conclusion': 'success',
             'jobs': [{'id': index, 'name': 'test', 'conclusion': 'success', 'nonSuccessSteps': []}]}
     roles = {'candidate': 'candidate', 'native-ordinary': 'candidate', 'native-spaces': 'candidate',
              'updater': 'updater', 'update-ordinary': 'updater', 'update-spaces': 'updater',
              'regressions-ordinary': 'regressions', 'regressions-spaces': 'regressions', 'long-paths': 'regressions'}
     for index, (key, run) in enumerate(roles.items(), 100):
-        lock['artifacts'][key] = {'id': 11621489330 if key == 'candidate' else index, 'run': run,
-            'bytes': 65891317 if key == 'candidate' else 100,
-            'sha256': '9aab1bac997122fbf2c5418075bf4f2e35a2af442b06810b29656824e4ff020d' if key == 'candidate' else 'a' * 64,
+        lock['artifacts'][key] = {'id': p.CANDIDATE_ARTIFACT['id'] if key == 'candidate' else index, 'run': run,
+            'bytes': p.CANDIDATE_ARTIFACT['bytes'] if key == 'candidate' else 100,
+            'sha256': p.CANDIDATE_ARTIFACT['sha256'] if key == 'candidate' else 'a' * 64,
             'name': key, 'file': key + '.zip'}
     for case in ('ordinary', 'spaces'):
         for kind, passed in p.REPORT_COUNTS.items():
@@ -50,8 +50,8 @@ def valid_lock():
                 'sourceCommit': p.SOURCE, 'validatorCommit': lock['runs'][run]['sourceCommit'],
                 'gateCommit': lock['runs'][run]['sourceCommit'], 'gate': p.REPORT_GATES[kind]}
     lock['reports']['long-paths'] = {'case': 'long-paths', 'kind': 'long-paths', 'artifact': 'long-paths',
-        'path': 'native-long-paths.json', 'sha256': 'a' * 64, 'passed': 3, 'skips': [],
-        'sourceCommit': p.SOURCE, 'validatorCommit': regression, 'gateCommit': p.SOURCE,
+        'path': 'native-long-paths.json', 'sha256': 'a' * 64, 'passed': p.LONG_PATH_CHECKS, 'skips': [],
+        'sourceCommit': p.SOURCE, 'validatorCommit': regression, 'gateCommit': regression,
         'gate': p.REPORT_GATES['long-paths']}
     return lock
 
@@ -73,12 +73,14 @@ class PromotionGuards(unittest.TestCase):
             lambda v: v.update(sourceCommit='0' * 40),
             lambda v: v['archives'][p.STARTER].update(sha256='0' * 64),
             lambda v: v['archives'].pop(p.ALIGN),
-            lambda v: v['artifacts']['candidate'].update(id=11621489331),
+            lambda v: v['artifacts']['candidate'].update(id=p.CANDIDATE_ARTIFACT['id'] + 1),
             lambda v: v['artifacts']['candidate'].update(sha256='0' * 64),
             lambda v: v['reports'].pop('ordinary-curated'),
             lambda v: v['reports']['spaces-curated'].update(artifact='native-ordinary'),
             lambda v: v['reports']['ordinary-update'].update(passed=0),
             lambda v: v['reports']['ordinary-results'].update(gate='scripts/other.py'),
+            lambda v: v['reports']['ordinary-scroll'].update(gateCommit=p.SOURCE),
+            lambda v: v['reports']['long-paths'].update(gateCommit=p.SOURCE),
             lambda v: v['reports']['ordinary-workspace'].update(skips=['GUI unavailable']),
             lambda v: v['artifacts']['native-ordinary'].update(id=v['artifacts']['candidate']['id']),
             lambda v: v['authorization'].update(authorized=False),
@@ -134,6 +136,18 @@ class PromotionGuards(unittest.TestCase):
             client.api.side_effect = [{'object': {'sha': 'd' * 40}}, pr]
             with self.assertRaises(ValueError): p.verify_merged(client, 'd' * 40, valid_lock())
 
+    def test_release_regression_helpers_must_match_the_successful_run(self):
+        published = 'd' * 40
+        helpers = ('scripts/check_scroll_frames_0160_windows.py', 'scripts/check_long_paths_0160_windows.py')
+        for helper in helpers:
+            def source(path, commit):
+                return b'changed' if path == helper and commit == published else b'accepted'
+            with self.subTest(helper=helper), patch.object(p.subprocess, 'run'), \
+                    patch.object(p.subprocess, 'check_output', return_value=helper + '\n'), \
+                    patch.object(p, 'source_bytes', side_effect=source):
+                with self.assertRaisesRegex(ValueError, 'Validated helper'):
+                    p.verify_source_identity(published, valid_lock())
+
     def test_wrong_branch_stops_before_network_and_existing_tag_is_never_replaced(self):
         args = types.SimpleNamespace(publish_sha='d' * 40)
         with patch.dict(p.os.environ, {'GITHUB_REPOSITORY': p.REPOSITORY, 'GITHUB_REF': 'refs/heads/main', 'GITHUB_SHA': args.publish_sha}, clear=True), \
@@ -177,6 +191,36 @@ class PromotionGuards(unittest.TestCase):
                 patch.object(p, 'prepare', side_effect=ValueError('Native report identity differs')):
                 with self.assertRaisesRegex(ValueError, 'Native report identity'): p.publish(args)
                 self.assertTrue(all(call.args[1:] == () for call in client.api.call_args_list))
+
+    def test_long_path_gate_requires_additional_pack_truth_and_bounded_child_directory(self):
+        lock = valid_lock(); spec = lock['reports']['long-paths']
+        base = {'success': True, 'nativeWindowsExecuted': True, 'passed': p.LONG_PATH_CHECKS,
+                'failed': 0, 'skips': [], 'sourceCommit': p.SOURCE, 'gateSha256': p.sha(b'gate'),
+                'assetSha256': p.FROZEN_ARCHIVES[p.STARTER]['sha256'],
+                'longPathsEnabled': 0, 'expectedApplicationFailure': False,
+                'policyProbe': {'ordinaryIsFile': False, 'extendedIsFile': True},
+                'applicationCheck': {'status': 'completed', 'corePassed': 7, 'starterPassed': 1, 'starterFailed': 0},
+                'additionalAlignment': {'checkId': 'align/paired-mapping-known-answer@0.4.1',
+                    'pin': {'packId': 'align', 'packVersion': '0.4.1', 'manifestSha256': p.ALIGN_MANIFEST},
+                    'nativeWorkingDirectoryCharacters': 254, 'samCharacters': 263,
+                    'alignmentRecords': 202, 'mappedProperPairs': 202,
+                    'graphRecordSha256': 'a' * 64, 'samSha256': 'b' * 64},
+                'additionalPackDiagnostics': {'errors': []}}
+        mutations = (None, lambda r: r.pop('additionalAlignment'), lambda r: r.pop('gateSha256'),
+            lambda r: r['additionalAlignment'].update(nativeWorkingDirectoryCharacters=291),
+            lambda r: r['additionalAlignment'].update(mappedProperPairs=0),
+            lambda r: r['additionalAlignment']['pin'].update(packVersion='0.4.0'),
+            lambda r: r['additionalPackDiagnostics'].update(errors=['Missing diagnostic']),
+            lambda r: r.update(expectedApplicationFailure=True))
+        for mutate in mutations:
+            report = copy.deepcopy(base)
+            if mutate: mutate(report)
+            raw = json.dumps(report).encode(); bound = {**spec, 'sha256': p.sha(raw)}
+            with self.subTest(mutation=mutate), patch.object(p, 'source_bytes', return_value=b'gate'):
+                if mutate:
+                    with self.assertRaises(ValueError): p.check_report(raw, bound, {}, lock)
+                else:
+                    self.assertEqual(p.check_report(raw, bound, {}, lock), report)
 
     def test_update_kind_requires_update_evidence_even_when_identity_fields_are_missing(self):
         lock = valid_lock(); spec = lock['reports']['ordinary-update']
