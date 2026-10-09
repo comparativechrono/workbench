@@ -3,6 +3,7 @@ import importlib.util
 import hashlib
 from pathlib import Path
 import tempfile
+from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 import zipfile
@@ -85,6 +86,26 @@ class DeploymentUIGateEvidenceTests(unittest.TestCase):
                     {'user-data/saved.json': 'unchanged'}]:
             with self.assertRaisesRegex(AssertionError, 'changed existing files'):
                 gate.verify_preserved(before, bad)
+
+    def test_message_box_button_uses_observed_label_and_ownership_not_id_one(self):
+        # Exact regression shape from the Windows Server 2022 warning: OK has
+        # ID 2, while the folder picker's separate confirmation has ID 1.
+        controls = [{'id': 2, 'class': 'Button', 'text': 'OK', 'hwnd': 201},
+                    {'id': 65535, 'class': 'Static', 'text': 'Warning', 'hwnd': 202}]
+        enabled = {201}
+        ui = SimpleNamespace(windows=lambda: [100], controls=lambda owner: controls,
+                             user=SimpleNamespace(IsWindowVisible=lambda hwnd: True,
+                                                  IsWindowEnabled=lambda hwnd: hwnd in enabled))
+        self.assertEqual(gate.unique_button(ui, 100, 'OK'), 201)
+        with self.assertRaisesRegex(AssertionError, 'gate-owned'):
+            gate.unique_button(ui, 999, 'OK')
+        enabled.clear()
+        with self.assertRaisesRegex(AssertionError, 'one visible enabled'):
+            gate.unique_button(ui, 100, 'OK')
+        enabled.update((201, 203))
+        controls.append({'id': 1, 'class': 'Button', 'text': '&OK', 'hwnd': 203})
+        with self.assertRaisesRegex(AssertionError, 'one visible enabled'):
+            gate.unique_button(ui, 100, 'OK')
 
     def test_cli_rejects_input_overlap_before_creating_a_report_or_running_windows(self):
         bundle = self.root / 'immutable-kit'

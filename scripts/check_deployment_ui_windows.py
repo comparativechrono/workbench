@@ -79,6 +79,16 @@ def tree_difference(before, after):
             for name in sorted(set(before) | set(after)) if before.get(name) != after.get(name)}
 
 
+def unique_button(ui, owner, text):
+    """Resolve the actual owned dialog button, without assuming MessageBox IDs."""
+    require(owner in ui.windows(), 'The requested button owner is not an observed gate-owned window.')
+    matches = [row['hwnd'] for row in ui.controls(owner)
+               if row['class'] == 'Button' and row['text'].replace('&', '') == text and
+               ui.user.IsWindowVisible(row['hwnd']) and ui.user.IsWindowEnabled(row['hwnd'])]
+    require(len(matches) == 1, 'Expected one visible enabled ' + text + ' button in the observed dialog.')
+    return matches[0]
+
+
 def verify_preserved(before, after):
     changes = {name: {'before': value, 'after': after.get(name)}
                for name, value in before.items() if after.get(name) != value}
@@ -357,7 +367,7 @@ def updater_scenario(update, evidence, report, mode, base, invalid):
             require('does not contain the expected Workbench installation' in text and
                     'NativeWorkbench.exe and manifest.json' in text, 'Invalid-folder guidance is missing.')
             capture(ui, report, 'updater-invalid-warning.bmp', warning)
-            ui.click(ui.child(1, warning))
+            ui.click(unique_button(ui, warning, 'OK'))
             picker = ui.wait_window(PICKER_TITLE)
             ui.main = picker
             capture(ui, report, 'updater-invalid-retry-picker.bmp', picker)
@@ -371,7 +381,7 @@ def updater_scenario(update, evidence, report, mode, base, invalid):
             require('The Workbench update is installed.' in text and 'NativeWorkbench.exe' in text,
                     'Published updater did not show its actual success dialog: ' + text)
             capture(ui, report, 'updater-' + mode + '-success.bmp', success)
-            ui.click(ui.child(1, success))
+            ui.click(unique_button(ui, success, 'OK'))
         require(ui.process.wait(timeout=30) == 0, 'Published updater did not exit successfully.')
     except Exception:
         for number, window in enumerate(ui.windows()):

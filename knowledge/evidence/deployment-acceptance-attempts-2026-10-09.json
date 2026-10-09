@@ -103,6 +103,52 @@
       },
       "manualAcceptance": "not-tested",
       "followup": "Correct portable fixture bytes and signature collector command availability, then repeat exact-kit Windows gates. No published application bytes or security policy changed."
+    },
+    {
+      "toolkitCommit": "de0fca66b774b2882beee8c9b2e5104f36a400d3",
+      "runId": 37975634597,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37975634597",
+      "result": "failed",
+      "sourceTests": {
+        "passed": 85,
+        "failed": 0,
+        "skipped": 0
+      },
+      "bundle": {
+        "sha256": "eb18c44a7dcc48a74688dd8cf599c278962271ce640ca9057d0255c417f8f15a",
+        "manifestSha256": "b2820d3c7a41057084d72ec6b8f1f7657e91ab671abfef7c5f026eef9e36714d"
+      },
+      "windows": [
+        {
+          "pathCase": "ordinary",
+          "jobId": 113973206844,
+          "artifactId": 11638786185,
+          "artifactSha256": "fdd24390c5ef80a9f4e72154e37b9bd80bc0315c7ea0aa7e2069e77e5a7ba5bd"
+        },
+        {
+          "pathCase": "path with spaces",
+          "jobId": 113973206718,
+          "artifactId": 11639445184,
+          "artifactSha256": "1b398dac95a1d8223407bf3fc2f32d85eba28592a49d598cf23a9b6c7816d579"
+        }
+      ],
+      "passedScopeBothPaths": [
+        "complete kit and packaged launcher verification",
+        "external copy and all manual checks untested",
+        "exact extracted Starter/updater identities",
+        "native 0.11.0 fixtures",
+        "actual updater cancellation with unchanged three fixture trees",
+        "11 curated workflow/results checks",
+        "72 actual Authenticode observations: 60 Valid, 12 NotSigned",
+        "final immutable-kit verification"
+      ],
+      "nativeFailure": {
+        "checksCompleted": 3,
+        "captures": 4,
+        "reason": "The invalid-folder warning correctly appeared, but test driver assumed its OK control ID was 1. Actual owned control evidence showed OK as ID 2. Install, repeat and desktop scenarios were not reached."
+      },
+      "followup": "Use the unique observed enabled visible OK button within the exact owned message window, preserving actual pointer hit and foreground checks. Repeat both path gates.",
+      "manualAcceptance": "not-tested"
     }
   ]
 }
