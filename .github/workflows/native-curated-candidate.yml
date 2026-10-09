@@ -2,7 +2,7 @@ name: Native Windows curated workflows and results candidate
 
 on:
   push:
-    branches: [feature/curated-workflows-results]
+    branches: [feature/curated-workflows-results, release/fix-app-0.16.0]
   workflow_dispatch:
 
 permissions:
@@ -98,6 +98,7 @@ jobs:
           python3 workspace/tests/test_setup_manager.py
           python3 workspace/tests/test_setup_service.py
           python3 tests/test_split_release.py
+          python3 tests/test_pack_checks.py
           python3 workspace/tests/test_readiness.py
           python3 workspace/tests/test_readiness_service.py
           python3 workspace/tests/test_performance.py
@@ -419,6 +420,8 @@ jobs:
           $env:NW_APP_ROOT = $app
           & (Join-Path $app 'runtime/python/python.exe') -I tests/test_core_checks.py
           if ($LASTEXITCODE -ne 0) { throw 'Windows full core-check suite failed; its Linux scientific adapter is explicitly unavailable here.' }
+          & (Join-Path $app 'runtime/python/python.exe') -I tests/test_pack_checks.py
+          if ($LASTEXITCODE -ne 0) { throw 'Windows pack-check nesting and scientific assertion regressions failed.' }
           & (Join-Path $app 'runtime/python/python.exe') -I workspace/tests/test_curated_workflows.py
           if ($LASTEXITCODE -ne 0) { throw 'Windows curated workflow source regression failed.' }
           & (Join-Path $app 'runtime/python/python.exe') -I workspace/tests/test_results_summary.py
