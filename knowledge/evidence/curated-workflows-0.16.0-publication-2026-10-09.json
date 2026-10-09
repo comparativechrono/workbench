@@ -1,0 +1,1461 @@
+{
+  "schema": 1,
+  "date": "2026-10-09",
+  "repository": "comparativechrono/workbench",
+  "release": {
+    "url": "https://api.github.com/repos/comparativechrono/workbench/releases/408075619",
+    "assets_url": "https://api.github.com/repos/comparativechrono/workbench/releases/408075619/assets",
+    "upload_url": "https://uploads.github.com/repos/comparativechrono/workbench/releases/408075619/assets{?name,label}",
+    "html_url": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.16.0",
+    "id": 408075619,
+    "author": {
+      "login": "github-actions[bot]",
+      "id": 41898282,
+      "node_id": "MDM6Qm90NDE4OTgyODI=",
+      "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/github-actions%5Bbot%5D",
+      "html_url": "https://github.com/apps/github-actions",
+      "followers_url": "https://api.github.com/users/github-actions%5Bbot%5D/followers",
+      "following_url": "https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}",
+      "gists_url": "https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/github-actions%5Bbot%5D/subscriptions",
+      "organizations_url": "https://api.github.com/users/github-actions%5Bbot%5D/orgs",
+      "repos_url": "https://api.github.com/users/github-actions%5Bbot%5D/repos",
+      "events_url": "https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/github-actions%5Bbot%5D/received_events",
+      "type": "Bot",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "node_id": "RE_kwDOU6a75c4YUr1j",
+    "tag_name": "app-v0.16.0",
+    "target_commitish": "60243d45a81a6ef7e16e4a0ee719f4aa2e4f74c9",
+    "name": "Native Workbench 0.16.0",
+    "draft": false,
+    "immutable": false,
+    "prerelease": true,
+    "created_at": "2026-10-09T15:53:28Z",
+    "updated_at": "2026-10-09T15:54:56Z",
+    "published_at": "2026-10-09T15:54:56Z",
+    "assets": [
+      {
+        "url": "https://api.github.com/repos/comparativechrono/workbench/releases/assets/625429123",
+        "id": 625429123,
+        "node_id": "RA_kwDOU6a75c4lR0qD",
+        "name": "align-0.4.1-metadata.json",
+        "label": "",
+        "uploader": {
+          "login": "github-actions[bot]",
+          "id": 41898282,
+          "node_id": "MDM6Qm90NDE4OTgyODI=",
+          "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/github-actions%5Bbot%5D",
+          "html_url": "https://github.com/apps/github-actions",
+          "followers_url": "https://api.github.com/users/github-actions%5Bbot%5D/followers",
+          "following_url": "https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}",
+          "gists_url": "https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/github-actions%5Bbot%5D/subscriptions",
+          "organizations_url": "https://api.github.com/users/github-actions%5Bbot%5D/orgs",
+          "repos_url": "https://api.github.com/users/github-actions%5Bbot%5D/repos",
+          "events_url": "https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/github-actions%5Bbot%5D/received_events",
+          "type": "Bot",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "content_type": "application/json",
+        "state": "uploaded",
+        "size": 707,
+        "digest": "sha256:3a1310431f81e3f424e2eaed6490e5928fcc4dcff0f4512429cdf95fba35a15a",
+        "download_count": 0,
+        "created_at": "2026-10-09T15:54:45Z",
+        "updated_at": "2026-10-09T15:54:45Z",
+        "browser_download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/align-0.4.1-metadata.json"
+      },
+      {
+        "url": "https://api.github.com/repos/comparativechrono/workbench/releases/assets/625429069",
+        "id": 625429069,
+        "node_id": "RA_kwDOU6a75c4lR0pN",
+        "name": "BUILD-PROVENANCE.json",
+        "label": "",
+        "uploader": {
+          "login": "github-actions[bot]",
+          "id": 41898282,
+          "node_id": "MDM6Qm90NDE4OTgyODI=",
+          "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/github-actions%5Bbot%5D",
+          "html_url": "https://github.com/apps/github-actions",
+          "followers_url": "https://api.github.com/users/github-actions%5Bbot%5D/followers",
+          "following_url": "https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}",
+          "gists_url": "https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/github-actions%5Bbot%5D/subscriptions",
+          "organizations_url": "https://api.github.com/users/github-actions%5Bbot%5D/orgs",
+          "repos_url": "https://api.github.com/users/github-actions%5Bbot%5D/repos",
+          "events_url": "https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/github-actions%5Bbot%5D/received_events",
+          "type": "Bot",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "content_type": "application/json",
+        "state": "uploaded",
+        "size": 11402,
+        "digest": "sha256:5929a1f261ac571b61ac5886fc135f749e398e861ee81963d7512739feddc927",
+        "download_count": 0,
+        "created_at": "2026-10-09T15:54:44Z",
+        "updated_at": "2026-10-09T15:54:45Z",
+        "browser_download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/BUILD-PROVENANCE.json"
+      },
+      {
+        "url": "https://api.github.com/repos/comparativechrono/workbench/releases/assets/625429073",
+        "id": 625429073,
+        "node_id": "RA_kwDOU6a75c4lR0pR",
+        "name": "BUILD-UPDATE-PROVENANCE.json",
+        "label": "",
+        "uploader": {
+          "login": "github-actions[bot]",
+          "id": 41898282,
+          "node_id": "MDM6Qm90NDE4OTgyODI=",
+          "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/github-actions%5Bbot%5D",
+          "html_url": "https://github.com/apps/github-actions",
+          "followers_url": "https://api.github.com/users/github-actions%5Bbot%5D/followers",
+          "following_url": "https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}",
+          "gists_url": "https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/github-actions%5Bbot%5D/subscriptions",
+          "organizations_url": "https://api.github.com/users/github-actions%5Bbot%5D/orgs",
+          "repos_url": "https://api.github.com/users/github-actions%5Bbot%5D/repos",
+          "events_url": "https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/github-actions%5Bbot%5D/received_events",
+          "type": "Bot",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "content_type": "application/json",
+        "state": "uploaded",
+        "size": 8838,
+        "digest": "sha256:7032c4bdfe1253d72d1377d71905091a6b331e254921ef59aa12e35f1d093ccf",
+        "download_count": 0,
+        "created_at": "2026-10-09T15:54:44Z",
+        "updated_at": "2026-10-09T15:54:45Z",
+        "browser_download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/BUILD-UPDATE-PROVENANCE.json"
+      },
+      {
+        "url": "https://api.github.com/repos/comparativechrono/workbench/releases/assets/625429071",
+        "id": 625429071,
+        "node_id": "RA_kwDOU6a75c4lR0pP",
+        "name": "EVIDENCE-SHA256SUMS.txt",
+        "label": "",
+        "uploader": {
+          "login": "github-actions[bot]",
+          "id": 41898282,
+          "node_id": "MDM6Qm90NDE4OTgyODI=",
+          "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/github-actions%5Bbot%5D",
+          "html_url": "https://github.com/apps/github-actions",
+          "followers_url": "https://api.github.com/users/github-actions%5Bbot%5D/followers",
+          "following_url": "https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}",
+          "gists_url": "https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/github-actions%5Bbot%5D/subscriptions",
+          "organizations_url": "https://api.github.com/users/github-actions%5Bbot%5D/orgs",
+          "repos_url": "https://api.github.com/users/github-actions%5Bbot%5D/repos",
+          "events_url": "https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/github-actions%5Bbot%5D/received_events",
+          "type": "Bot",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "content_type": "text/plain; charset=utf-8",
+        "state": "uploaded",
+        "size": 708,
+        "digest": "sha256:607cf78bb55e5f2ed929ff74955eb663fb09786b38f0e7608f05cd87623197ec",
+        "download_count": 0,
+        "created_at": "2026-10-09T15:54:44Z",
+        "updated_at": "2026-10-09T15:54:45Z",
+        "browser_download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/EVIDENCE-SHA256SUMS.txt"
+      },
+      {
+        "url": "https://api.github.com/repos/comparativechrono/workbench/releases/assets/625429127",
+        "id": 625429127,
+        "node_id": "RA_kwDOU6a75c4lR0qH",
+        "name": "native-workbench-0.16.0-source.zip",
+        "label": "",
+        "uploader": {
+          "login": "github-actions[bot]",
+          "id": 41898282,
+          "node_id": "MDM6Qm90NDE4OTgyODI=",
+          "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/github-actions%5Bbot%5D",
+          "html_url": "https://github.com/apps/github-actions",
+          "followers_url": "https://api.github.com/users/github-actions%5Bbot%5D/followers",
+          "following_url": "https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}",
+          "gists_url": "https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/github-actions%5Bbot%5D/subscriptions",
+          "organizations_url": "https://api.github.com/users/github-actions%5Bbot%5D/orgs",
+          "repos_url": "https://api.github.com/users/github-actions%5Bbot%5D/repos",
+          "events_url": "https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/github-actions%5Bbot%5D/received_events",
+          "type": "Bot",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "content_type": "application/zip",
+        "state": "uploaded",
+        "size": 47848425,
+        "digest": "sha256:f746f00a82675c2cf52364a3b4d040721c6d06ac5605488efbdc0376ef5b7e44",
+        "download_count": 0,
+        "created_at": "2026-10-09T15:54:45Z",
+        "updated_at": "2026-10-09T15:54:47Z",
+        "browser_download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-0.16.0-source.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/comparativechrono/workbench/releases/assets/625429131",
+        "id": 625429131,
+        "node_id": "RA_kwDOU6a75c4lR0qL",
+        "name": "native-workbench-0.16.0-starter-windows.zip",
+        "label": "",
+        "uploader": {
+          "login": "github-actions[bot]",
+          "id": 41898282,
+          "node_id": "MDM6Qm90NDE4OTgyODI=",
+          "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/github-actions%5Bbot%5D",
+          "html_url": "https://github.com/apps/github-actions",
+          "followers_url": "https://api.github.com/users/github-actions%5Bbot%5D/followers",
+          "following_url": "https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}",
+          "gists_url": "https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/github-actions%5Bbot%5D/subscriptions",
+          "organizations_url": "https://api.github.com/users/github-actions%5Bbot%5D/orgs",
+          "repos_url": "https://api.github.com/users/github-actions%5Bbot%5D/repos",
+          "events_url": "https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/github-actions%5Bbot%5D/received_events",
+          "type": "Bot",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "content_type": "application/zip",
+        "state": "uploaded",
+        "size": 17846873,
+        "digest": "sha256:f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073",
+        "download_count": 0,
+        "created_at": "2026-10-09T15:54:45Z",
+        "updated_at": "2026-10-09T15:54:46Z",
+        "browser_download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-0.16.0-starter-windows.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/comparativechrono/workbench/releases/assets/625429147",
+        "id": 625429147,
+        "node_id": "RA_kwDOU6a75c4lR0qb",
+        "name": "native-workbench-0.16.0-update-from-0.11.0.zip",
+        "label": "",
+        "uploader": {
+          "login": "github-actions[bot]",
+          "id": 41898282,
+          "node_id": "MDM6Qm90NDE4OTgyODI=",
+          "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/github-actions%5Bbot%5D",
+          "html_url": "https://github.com/apps/github-actions",
+          "followers_url": "https://api.github.com/users/github-actions%5Bbot%5D/followers",
+          "following_url": "https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}",
+          "gists_url": "https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/github-actions%5Bbot%5D/subscriptions",
+          "organizations_url": "https://api.github.com/users/github-actions%5Bbot%5D/orgs",
+          "repos_url": "https://api.github.com/users/github-actions%5Bbot%5D/repos",
+          "events_url": "https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/github-actions%5Bbot%5D/received_events",
+          "type": "Bot",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "content_type": "application/zip",
+        "state": "uploaded",
+        "size": 13199905,
+        "digest": "sha256:d75d5129e9b9feaef70faa62d5ea91049c0162df8c7bdc74c7bc81d1933eec8f",
+        "download_count": 0,
+        "created_at": "2026-10-09T15:54:45Z",
+        "updated_at": "2026-10-09T15:54:46Z",
+        "browser_download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-0.16.0-update-from-0.11.0.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/comparativechrono/workbench/releases/assets/625429158",
+        "id": 625429158,
+        "node_id": "RA_kwDOU6a75c4lR0qm",
+        "name": "native-workbench-pack-align-0.4.1.zip",
+        "label": "",
+        "uploader": {
+          "login": "github-actions[bot]",
+          "id": 41898282,
+          "node_id": "MDM6Qm90NDE4OTgyODI=",
+          "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/github-actions%5Bbot%5D",
+          "html_url": "https://github.com/apps/github-actions",
+          "followers_url": "https://api.github.com/users/github-actions%5Bbot%5D/followers",
+          "following_url": "https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}",
+          "gists_url": "https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/github-actions%5Bbot%5D/subscriptions",
+          "organizations_url": "https://api.github.com/users/github-actions%5Bbot%5D/orgs",
+          "repos_url": "https://api.github.com/users/github-actions%5Bbot%5D/repos",
+          "events_url": "https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/github-actions%5Bbot%5D/received_events",
+          "type": "Bot",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "content_type": "application/zip",
+        "state": "uploaded",
+        "size": 575862,
+        "digest": "sha256:3a08cf061f0b62c5502d1420115db3fcae2b04bf695ad3cfd1c3063de0fafa02",
+        "download_count": 0,
+        "created_at": "2026-10-09T15:54:46Z",
+        "updated_at": "2026-10-09T15:54:46Z",
+        "browser_download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-pack-align-0.4.1.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/comparativechrono/workbench/releases/assets/625429068",
+        "id": 625429068,
+        "node_id": "RA_kwDOU6a75c4lR0pM",
+        "name": "RELEASE-VALIDATION.json",
+        "label": "",
+        "uploader": {
+          "login": "github-actions[bot]",
+          "id": 41898282,
+          "node_id": "MDM6Qm90NDE4OTgyODI=",
+          "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/github-actions%5Bbot%5D",
+          "html_url": "https://github.com/apps/github-actions",
+          "followers_url": "https://api.github.com/users/github-actions%5Bbot%5D/followers",
+          "following_url": "https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}",
+          "gists_url": "https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/github-actions%5Bbot%5D/subscriptions",
+          "organizations_url": "https://api.github.com/users/github-actions%5Bbot%5D/orgs",
+          "repos_url": "https://api.github.com/users/github-actions%5Bbot%5D/repos",
+          "events_url": "https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/github-actions%5Bbot%5D/received_events",
+          "type": "Bot",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "content_type": "application/json",
+        "state": "uploaded",
+        "size": 28177,
+        "digest": "sha256:2ca86c9a5a7e9435131b214a1edc1170f2275270b573ef0759c8b8fe29be4ee0",
+        "download_count": 0,
+        "created_at": "2026-10-09T15:54:44Z",
+        "updated_at": "2026-10-09T15:54:45Z",
+        "browser_download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/RELEASE-VALIDATION.json"
+      },
+      {
+        "url": "https://api.github.com/repos/comparativechrono/workbench/releases/assets/625429070",
+        "id": 625429070,
+        "node_id": "RA_kwDOU6a75c4lR0pO",
+        "name": "SHA256SUMS.txt",
+        "label": "",
+        "uploader": {
+          "login": "github-actions[bot]",
+          "id": 41898282,
+          "node_id": "MDM6Qm90NDE4OTgyODI=",
+          "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/github-actions%5Bbot%5D",
+          "html_url": "https://github.com/apps/github-actions",
+          "followers_url": "https://api.github.com/users/github-actions%5Bbot%5D/followers",
+          "following_url": "https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}",
+          "gists_url": "https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/github-actions%5Bbot%5D/subscriptions",
+          "organizations_url": "https://api.github.com/users/github-actions%5Bbot%5D/orgs",
+          "repos_url": "https://api.github.com/users/github-actions%5Bbot%5D/repos",
+          "events_url": "https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/github-actions%5Bbot%5D/received_events",
+          "type": "Bot",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "content_type": "text/plain; charset=utf-8",
+        "state": "uploaded",
+        "size": 315,
+        "digest": "sha256:7f2e129d8a74b2078cf9f6118274617959193e8a7180f42a5dfefd5fdc212d89",
+        "download_count": 0,
+        "created_at": "2026-10-09T15:54:44Z",
+        "updated_at": "2026-10-09T15:54:45Z",
+        "browser_download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/SHA256SUMS.txt"
+      },
+      {
+        "url": "https://api.github.com/repos/comparativechrono/workbench/releases/assets/625429192",
+        "id": 625429192,
+        "node_id": "RA_kwDOU6a75c4lR0rI",
+        "name": "source-metadata.json",
+        "label": "",
+        "uploader": {
+          "login": "github-actions[bot]",
+          "id": 41898282,
+          "node_id": "MDM6Qm90NDE4OTgyODI=",
+          "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/github-actions%5Bbot%5D",
+          "html_url": "https://github.com/apps/github-actions",
+          "followers_url": "https://api.github.com/users/github-actions%5Bbot%5D/followers",
+          "following_url": "https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}",
+          "gists_url": "https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/github-actions%5Bbot%5D/subscriptions",
+          "organizations_url": "https://api.github.com/users/github-actions%5Bbot%5D/orgs",
+          "repos_url": "https://api.github.com/users/github-actions%5Bbot%5D/repos",
+          "events_url": "https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/github-actions%5Bbot%5D/received_events",
+          "type": "Bot",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "content_type": "application/json",
+        "state": "uploaded",
+        "size": 1764,
+        "digest": "sha256:7f5a01279149b00fb88730b559fe352bf4bb017bfba77ac483e81bee6943d60b",
+        "download_count": 0,
+        "created_at": "2026-10-09T15:54:46Z",
+        "updated_at": "2026-10-09T15:54:46Z",
+        "browser_download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/source-metadata.json"
+      },
+      {
+        "url": "https://api.github.com/repos/comparativechrono/workbench/releases/assets/625429107",
+        "id": 625429107,
+        "node_id": "RA_kwDOU6a75c4lR0pz",
+        "name": "UPDATE-SHA256SUMS.txt",
+        "label": "",
+        "uploader": {
+          "login": "github-actions[bot]",
+          "id": 41898282,
+          "node_id": "MDM6Qm90NDE4OTgyODI=",
+          "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/github-actions%5Bbot%5D",
+          "html_url": "https://github.com/apps/github-actions",
+          "followers_url": "https://api.github.com/users/github-actions%5Bbot%5D/followers",
+          "following_url": "https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}",
+          "gists_url": "https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/github-actions%5Bbot%5D/subscriptions",
+          "organizations_url": "https://api.github.com/users/github-actions%5Bbot%5D/orgs",
+          "repos_url": "https://api.github.com/users/github-actions%5Bbot%5D/repos",
+          "events_url": "https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/github-actions%5Bbot%5D/received_events",
+          "type": "Bot",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "content_type": "text/plain; charset=utf-8",
+        "state": "uploaded",
+        "size": 113,
+        "digest": "sha256:5dd4c37d323e3663d4e8b2aaa4a32a8e6a537f044de849298718357eae061abd",
+        "download_count": 0,
+        "created_at": "2026-10-09T15:54:45Z",
+        "updated_at": "2026-10-09T15:54:45Z",
+        "browser_download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/UPDATE-SHA256SUMS.txt"
+      },
+      {
+        "url": "https://api.github.com/repos/comparativechrono/workbench/releases/assets/625429112",
+        "id": 625429112,
+        "node_id": "RA_kwDOU6a75c4lR0p4",
+        "name": "WINDOWS-EVIDENCE.zip",
+        "label": "",
+        "uploader": {
+          "login": "github-actions[bot]",
+          "id": 41898282,
+          "node_id": "MDM6Qm90NDE4OTgyODI=",
+          "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/github-actions%5Bbot%5D",
+          "html_url": "https://github.com/apps/github-actions",
+          "followers_url": "https://api.github.com/users/github-actions%5Bbot%5D/followers",
+          "following_url": "https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}",
+          "gists_url": "https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/github-actions%5Bbot%5D/subscriptions",
+          "organizations_url": "https://api.github.com/users/github-actions%5Bbot%5D/orgs",
+          "repos_url": "https://api.github.com/users/github-actions%5Bbot%5D/repos",
+          "events_url": "https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/github-actions%5Bbot%5D/received_events",
+          "type": "Bot",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "content_type": "application/zip",
+        "state": "uploaded",
+        "size": 55121741,
+        "digest": "sha256:588f4689090755cde03e6866bb07c83aa74b7b8e41ac5676e08a5093c8b8282b",
+        "download_count": 0,
+        "created_at": "2026-10-09T15:54:45Z",
+        "updated_at": "2026-10-09T15:54:48Z",
+        "browser_download_url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/WINDOWS-EVIDENCE.zip"
+      }
+    ],
+    "tarball_url": "https://api.github.com/repos/comparativechrono/workbench/tarball/app-v0.16.0",
+    "zipball_url": "https://api.github.com/repos/comparativechrono/workbench/zipball/app-v0.16.0",
+    "body": "# Native Workbench 0.16.0\n\n**Development prerelease.** Exact package validation and remaining limits are recorded below.\n\nThis development prerelease brings together the work developed after 0.11.0:\nreadiness and diagnostics, sample batches and queues, reusable indexes, verified\nrestart and resource scheduling, portable projects, reference management, and\ncurated training workflows with native results summaries.\n\n## What is new\n\n- **Curated training workflows:** alignment with QC and variant calling, using\n  small bundled synthetic inputs. Review exact tool requirements and expected\n  answers before explicitly loading a workflow. Missing dependencies identify\n  the exact required version.\n- **Native results:** search recorded analyses by name, sample, tool or status;\n  inspect recorded SAMtools/BCFtools measurements, provenance and actionable\n  failure guidance. Changed or unavailable evidence stays unavailable. Workbench\n  does not invent sample QC pass thresholds.\n- **Readiness and diagnostics:** review preparation checks and deferred work\n  before execution; inspect local timing/resource records and explicitly review\n  a bounded diagnostic export. There are no automatic diagnostic uploads.\n- **Samples, queues and indexes:** map CSV/TSV sample columns explicitly, preview\n  independent analyses or supported combined reports, and queue frozen plans.\n  Reuse verified minimap2 short-read indexes with the additional align 0.4.1 pack.\n- **Recovery and portable projects:** restart from verified completed steps;\n  schedule ready independent steps within declared CPU admission budgets; export\n  and import projects with exact dependencies, provenance and explicit same-byte\n  input mapping. This is not within-tool checkpointing or a hard operating-system\n  CPU cap.\n- **Reference management:** resume verified downloads, review local-reference\n  imports, relocate the library through copy/verify operations, and discover NCBI\n  RefSeq assemblies alongside the existing Ensembl archive provider. Analysis\n  continues to consume explicit local inputs.\n- **Pack self-check paths:** additional pack workflows now run beside their\n  installation-check report directory. Removing 37 characters of unnecessary\n  nesting fixes the validated long-result-path case while retaining report and\n  output provenance. Native child working directories of 260 characters or more\n  remain unsupported.\n\nThe original bundled example, standalone tool mode, saved workflow pins and\nexpandable tool library remain available. Existing published tool-pack bytes and\nthe 32-pack setup profile/publisher trust are unchanged.\n\n## Downloads and installation\n\nThe\n[release page](https://github.com/comparativechrono/workbench/releases/tag/app-v0.16.0)\nprovides these archives and their matching validation/source evidence.\n\n- [Windows Starter ZIP](https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-0.16.0-starter-windows.zip), **17,846,873 bytes**. Extract into a new folder and run `NativeWorkbench.exe`. No older installation is needed.\n- [Updater from 0.11.0](https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-0.16.0-update-from-0.11.0.zip), **13,199,905 bytes**.\n- [Matching application source](https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-0.16.0-source.zip), **47,848,425 bytes**.\n- [Additional align 0.4.1 pack](https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-pack-align-0.4.1.zip), **575,862 bytes**, for explicit offline import where it is not already installed.\n\nFor an existing **published 0.11.0** installation, close Workbench, extract the\nupdater outside the application folder, run `UpdateWorkbench.exe`, and select\nthe existing `native-workbench` folder. The updater changes core application\nfiles and preserves installed packs, saved settings, exact workflow pins, setup\nstate, existing results and local/external references. Do not overlay the Starter\nonto an existing installation. The native update/verification path passed; the interactive folder picker was not exercised. This updater does not target the unpublished\n0.12\u20130.15 tester candidates or older published versions.\n\nA fresh Starter includes the original align/bam/variants 0.4.0 packs and the\nadditional align 0.4.1 pack side by side. The updater does not silently install\nthat additional pack. After updating, import its ZIP through **Manage tools \u2192\nImport pack ZIP** when reusable-index workflows need it. Full/Custom setup still\nuses the unchanged published profile. Saved workflows retain their exact pins;\nthe curated training workflows use the published 0.4.0 packs.\n\nNormal application use requires neither Docker, WSL, a browser nor system Python.\nThe optional pack ZIP is checksummed; offline import does not authenticate a new\npublisher merely from that checksum.\n\n## Exact package and validation\n\nThe corrected application and matching source were built at\n`e855dc4396e0c16ae35f4e840eb9cc734adb4441` in\n[candidate run 37952018931](https://github.com/comparativechrono/workbench/actions/runs/37952018931).\nThese exact accepted archives are promoted without rebuilding. The release tag\nadditionally includes release tooling, notes and evidence; packaged application source and publication\nsource are recorded separately.\n\n| Archive | SHA-256 |\n| --- | --- |\n| Starter | `f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073` |\n| Application source | `f746f00a82675c2cf52364a3b4d040721c6d06ac5605488efbdc0376ef5b7e44` |\n| Updater from 0.11.0 | `d75d5129e9b9feaef70faa62d5ea91049c0162df8c7bdc74c7bc81d1933eec8f` |\n| Additional align pack | `3a08cf061f0b62c5502d1420115db3fcae2b04bf695ad3cfd1c3063de0fafa02` |\n\nThe [complete candidate artifact 11626720550](https://github.com/comparativechrono/workbench/actions/runs/37952018931/artifacts/11626720550)\nis **65,972,456 bytes**, SHA-256\n`2c17413e96cf113c4ddb007651ac45b471d74ba4b3b5aaeb0a579bd5009308cd`.\nIts downloaded identity and ZIP CRCs passed verification. All **748** current\nsource files match the exact Git commit and source inventory. The package\ncontains 87 core files and 33 Python runtime modules; the 143 published pack\nfiles and 39 private-runtime files remain unchanged.\n\nThe corrected Linux source selection passed **488 tests**, with four explicit\nWindows-only skips. Windows source checks passed **332 tests per path**, with\nfour platform/privilege skips per path. All candidate, updater and release-check\njobs passed on these exact archives in ordinary and space-containing paths.\n\n| Native scope | Passed per path |\n| --- | ---: |\n| Curated workflows and recorded-result interface | 11 |\n| Live references / reference-management operations | 9 / 10 |\n| Process/resource accounting / readiness diagnostics | 14 / 5 |\n| Batches, queue and reusable indexes / recovery and projects | 11 / 12 |\n| Instrumented transport / tool library / workspace | 3 / 7 / 32 |\n| Results/CWL/DAG/icon / scrolling panels | 9 / 3 |\n| Updater from published 0.11.0 | 18 |\n\nThe [updater run](https://github.com/comparativechrono/workbench/actions/runs/37952583789)\nverified all 87 core files, installation/repeat behavior and preservation of\n204 existing files, including saved pins, setup state, results and references.\nIt also reran the 11 curated checks and six interface captures on each upgraded\ninstallation. Updater packaging/validation commit:\n`0e92d969e13fb7fe96b972bdb71b433f834dbbbe`.\n\nThe [release regressions](https://github.com/comparativechrono/workbench/actions/runs/37952595124)\npassed four long-path checks with opt-in disabled and restored afterward. Both\nthe Starter chain and extra alignment check completed with 254-character native\nworking directories and 268-character SAM paths; the additional SAM contained\nall 202 expected mapped proper-pair records. Scrolling observed 960 frames,\n300 endpoint transitions and 18 precision-wheel cases per path with no failures.\n\nTwenty-four final Starter/upgraded curated-result screenshots and 24 additional\nresults/scroll captures were reviewed at 96 DPI. Both synthetic workflows\nretained 202 alignment records; variant calling produced `starter:1351 G>A GT=1/1`.\nMeasurements are displayed without invented QC thresholds. The\n[release handover](https://github.com/comparativechrono/workbench/blob/main/knowledge/curated-workflows-0.16.0-release-handover.md)\nrecords hashes, exact report scopes, source skips and remaining limits.\n\nThe earlier `7a9aca7` candidate was rejected for publication when the additional\nalign self-check exceeded the supported native working-directory length. The\n`a447997` replacement fixed that application issue, but two new Windows source\nassertions compared short and long aliases of the same temporary directory.\nThe final `e855dc4` source resolves that test fixture's path before comparison;\nit does not alter the application fix. Historical failures and their exact\nscope are retained in the [release handover](https://github.com/comparativechrono/workbench/blob/main/knowledge/curated-workflows-0.16.0-release-handover.md).\n\nThe publication workflow records exact archive/source/native identities in\n`RELEASE-VALIDATION.json` and verifies every public asset after publication. Its\npublic-download receipt is retained with the publication workflow run.\n\n## Scope and limits\n\nThis is a development prerelease for research and teaching. Synthetic known\nanswers establish the stated fixture behavior, not biological or clinical\nvalidation, realistic workload capacity or a Windows\u2013Linux performance claim.\n\nRepresentative-PC, high-DPI, multi-monitor and physical-trackpad acceptance,\nscientific Linux CWL validation, realistic benchmarking, executable signing and\ninstitutional deployment remain separate outstanding work. Existing endpoint\nsecurity policies still apply. Hosted checks do not establish institutional\napproval.\n\nThe legacy library capture helper emitted ignored control-enumeration warnings;\nfunctional assertions passed, and final new-feature captures were reviewed separately.\nOffline host checks deny Python socket operations; native\nsubprocesses are not described as operating-system-firewalled. Full downloads of\nall 32 optional packs were not repeated, and unchanged optional scientific tools\nwere not all revalidated for this application release.\n"
+  },
+  "tag": {
+    "ref": "refs/tags/app-v0.16.0",
+    "node_id": "REF_kwDOU6a75bVyZWZzL3RhZ3MvYXBwLXYwLjE2LjA",
+    "url": "https://api.github.com/repos/comparativechrono/workbench/git/refs/tags/app-v0.16.0",
+    "object": {
+      "sha": "60243d45a81a6ef7e16e4a0ee719f4aa2e4f74c9",
+      "type": "commit",
+      "url": "https://api.github.com/repos/comparativechrono/workbench/git/commits/60243d45a81a6ef7e16e4a0ee719f4aa2e4f74c9"
+    }
+  },
+  "run": {
+    "id": 37955110070,
+    "url": "https://github.com/comparativechrono/workbench/actions/runs/37955110070",
+    "path": ".github/workflows/publish-app-0.16.0.yml",
+    "head_sha": "60243d45a81a6ef7e16e4a0ee719f4aa2e4f74c9",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "jobs": [
+    {
+      "id": 113903528947,
+      "name": "promote",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 37955110070,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Check promotion refusal guards without network writes",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Verify and promote the exact accepted archives without rebuilding",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Retain compact publication receipt and exact final asset identities",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Retain prepared release and final public download evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        }
+      ]
+    },
+    {
+      "id": 113903530888,
+      "name": "verify-candidate",
+      "status": "completed",
+      "conclusion": "skipped",
+      "run_id": 37955110070,
+      "logs_url": null,
+      "steps": null
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 11627971500,
+      "name": "app-v0.16.0-publication-60243d45a81a6ef7e16e4a0ee719f4aa2e4f74c9-1",
+      "size_in_bytes": 133951612,
+      "url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11627971500",
+      "archive_download_url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11627971500/zip",
+      "expired": false,
+      "created_at": "2026-10-09T15:55:08Z",
+      "expires_at": "2026-11-08T15:55:03Z",
+      "updated_at": "2026-10-09T15:55:08Z",
+      "digest": "sha256:9dadf36d85fe4b36eb32e8bee37a7e681a97aba5c4651d8d924afa84cfa6f10d",
+      "workflow_run": {
+        "id": 37955110070,
+        "repository_id": 1403436005,
+        "head_repository_id": 1403436005,
+        "head_branch": "release/app-0.16.0",
+        "head_sha": "60243d45a81a6ef7e16e4a0ee719f4aa2e4f74c9"
+      }
+    },
+    {
+      "id": 11627502153,
+      "name": "app-v0.16.0-publication-receipt-60243d45a81a6ef7e16e4a0ee719f4aa2e4f74c9-1",
+      "size_in_bytes": 7116,
+      "url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11627502153",
+      "archive_download_url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11627502153/zip",
+      "expired": false,
+      "created_at": "2026-10-09T15:55:03Z",
+      "expires_at": "2026-11-08T15:55:02Z",
+      "updated_at": "2026-10-09T15:55:03Z",
+      "digest": "sha256:e0f96bcaa822e9060a367cd63ba43e72d82f2bbc68fff6be40516b7bef110354",
+      "workflow_run": {
+        "id": 37955110070,
+        "repository_id": 1403436005,
+        "head_repository_id": 1403436005,
+        "head_branch": "release/app-0.16.0",
+        "head_sha": "60243d45a81a6ef7e16e4a0ee719f4aa2e4f74c9"
+      }
+    }
+  ],
+  "integratedPRs": [
+    {
+      "pr": 7,
+      "sha": "ac317d9ff9b30119426846cc838b2f4c6f77b546",
+      "merged": true,
+      "message": "Pull Request successfully merged"
+    },
+    {
+      "pr": 8,
+      "sha": "1926434ea9814d8e293a00362cee8c02f923304b",
+      "merged": true,
+      "message": "Pull Request successfully merged"
+    },
+    {
+      "pr": 9,
+      "sha": "fb109ab0557e030d160ebc38b20ec2bcb3388448",
+      "merged": true,
+      "message": "Pull Request successfully merged"
+    },
+    {
+      "pr": 10,
+      "sha": "f70d139a9c729cdcc12cc58c0dfa5578d4ba1f3e",
+      "merged": true,
+      "message": "Pull Request successfully merged"
+    },
+    {
+      "pr": 11,
+      "sha": "b73eaf0bbec9c996770b08058c6dee12fa30d4d3",
+      "merged": true,
+      "message": "Pull Request successfully merged"
+    },
+    {
+      "pr": 12,
+      "sha": "60243d45a81a6ef7e16e4a0ee719f4aa2e4f74c9",
+      "merged": true,
+      "message": "Pull Request successfully merged"
+    }
+  ],
+  "releasePR": {
+    "number": 12,
+    "url": "https://github.com/comparativechrono/workbench/pull/12",
+    "head": "release/prepare-app-0.16.0",
+    "head_sha": "ae003d1b8db67ccf1959108e78009e49315b0822",
+    "base": "main",
+    "merged": true,
+    "merge_commit_sha": "60243d45a81a6ef7e16e4a0ee719f4aa2e4f74c9"
+  },
+  "scope": "Exact accepted archives promoted without rebuild. verify-candidate job intentionally skipped on publication branch; all promote steps succeeded. Existing release assets and catalogue/trust not replaced.",
+  "publisherReceipt": {
+    "success": true,
+    "phase": "completed",
+    "publicationCommit": "60243d45a81a6ef7e16e4a0ee719f4aa2e4f74c9",
+    "packagedSourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+    "releaseId": 408075619,
+    "releaseDraft": false,
+    "releasePublished": true,
+    "remoteMutations": [
+      {
+        "action": "create-tag",
+        "status": "confirmed",
+        "tag": "app-v0.16.0"
+      },
+      {
+        "action": "create-draft",
+        "status": "confirmed"
+      },
+      {
+        "action": "upload-assets",
+        "status": "confirmed",
+        "files": [
+          "BUILD-PROVENANCE.json",
+          "BUILD-UPDATE-PROVENANCE.json",
+          "EVIDENCE-SHA256SUMS.txt",
+          "RELEASE-VALIDATION.json",
+          "SHA256SUMS.txt",
+          "UPDATE-SHA256SUMS.txt",
+          "WINDOWS-EVIDENCE.zip",
+          "align-0.4.1-metadata.json",
+          "native-workbench-0.16.0-source.zip",
+          "native-workbench-0.16.0-starter-windows.zip",
+          "native-workbench-0.16.0-update-from-0.11.0.zip",
+          "native-workbench-pack-align-0.4.1.zip",
+          "source-metadata.json"
+        ]
+      },
+      {
+        "action": "publish-draft",
+        "status": "confirmed"
+      }
+    ],
+    "publicDownloads": [
+      {
+        "file": "BUILD-PROVENANCE.json",
+        "bytes": 11402,
+        "sha256": "5929a1f261ac571b61ac5886fc135f749e398e861ee81963d7512739feddc927",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/BUILD-PROVENANCE.json"
+      },
+      {
+        "file": "BUILD-UPDATE-PROVENANCE.json",
+        "bytes": 8838,
+        "sha256": "7032c4bdfe1253d72d1377d71905091a6b331e254921ef59aa12e35f1d093ccf",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/BUILD-UPDATE-PROVENANCE.json"
+      },
+      {
+        "file": "EVIDENCE-SHA256SUMS.txt",
+        "bytes": 708,
+        "sha256": "607cf78bb55e5f2ed929ff74955eb663fb09786b38f0e7608f05cd87623197ec",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/EVIDENCE-SHA256SUMS.txt"
+      },
+      {
+        "file": "RELEASE-VALIDATION.json",
+        "bytes": 28177,
+        "sha256": "2ca86c9a5a7e9435131b214a1edc1170f2275270b573ef0759c8b8fe29be4ee0",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/RELEASE-VALIDATION.json"
+      },
+      {
+        "file": "SHA256SUMS.txt",
+        "bytes": 315,
+        "sha256": "7f2e129d8a74b2078cf9f6118274617959193e8a7180f42a5dfefd5fdc212d89",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/SHA256SUMS.txt"
+      },
+      {
+        "file": "UPDATE-SHA256SUMS.txt",
+        "bytes": 113,
+        "sha256": "5dd4c37d323e3663d4e8b2aaa4a32a8e6a537f044de849298718357eae061abd",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/UPDATE-SHA256SUMS.txt"
+      },
+      {
+        "file": "WINDOWS-EVIDENCE.zip",
+        "bytes": 55121741,
+        "sha256": "588f4689090755cde03e6866bb07c83aa74b7b8e41ac5676e08a5093c8b8282b",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/WINDOWS-EVIDENCE.zip"
+      },
+      {
+        "file": "align-0.4.1-metadata.json",
+        "bytes": 707,
+        "sha256": "3a1310431f81e3f424e2eaed6490e5928fcc4dcff0f4512429cdf95fba35a15a",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/align-0.4.1-metadata.json"
+      },
+      {
+        "file": "native-workbench-0.16.0-source.zip",
+        "bytes": 47848425,
+        "sha256": "f746f00a82675c2cf52364a3b4d040721c6d06ac5605488efbdc0376ef5b7e44",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-0.16.0-source.zip"
+      },
+      {
+        "file": "native-workbench-0.16.0-starter-windows.zip",
+        "bytes": 17846873,
+        "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-0.16.0-starter-windows.zip"
+      },
+      {
+        "file": "native-workbench-0.16.0-update-from-0.11.0.zip",
+        "bytes": 13199905,
+        "sha256": "d75d5129e9b9feaef70faa62d5ea91049c0162df8c7bdc74c7bc81d1933eec8f",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-0.16.0-update-from-0.11.0.zip"
+      },
+      {
+        "file": "native-workbench-pack-align-0.4.1.zip",
+        "bytes": 575862,
+        "sha256": "3a08cf061f0b62c5502d1420115db3fcae2b04bf695ad3cfd1c3063de0fafa02",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-pack-align-0.4.1.zip"
+      },
+      {
+        "file": "source-metadata.json",
+        "bytes": 1764,
+        "sha256": "7f5a01279149b00fb88730b559fe352bf4bb017bfba77ac483e81bee6943d60b",
+        "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/source-metadata.json"
+      }
+    ],
+    "recordedUtc": "2026-10-09T15:54:57.063374+00:00",
+    "tagCreated": true,
+    "verificationOnly": false,
+    "release": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.16.0"
+  },
+  "publisherReceiptSha256": "71be503b134909c3e233e69f4cee409b8f159d4a4542666a5f722597403113dc",
+  "releaseValidation": {
+    "schema": 1,
+    "version": "0.16.0",
+    "releaseTag": "app-v0.16.0",
+    "packagedSourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+    "updaterPackagingCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+    "publicationCommit": "60243d45a81a6ef7e16e4a0ee719f4aa2e4f74c9",
+    "recordedUtc": "2026-10-09T15:54:39.406326+00:00",
+    "acceptedApplicationArchivesRebuilt": false,
+    "acceptedRuns": {
+      "candidate": {
+        "id": 37952018931,
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "path": ".github/workflows/native-curated-candidate.yml",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 113892947692,
+            "name": "build",
+            "conclusion": "success",
+            "nonSuccessSteps": []
+          },
+          {
+            "id": 113893784479,
+            "name": "native (ordinary)",
+            "conclusion": "success",
+            "nonSuccessSteps": []
+          },
+          {
+            "id": 113893784628,
+            "name": "native (path with spaces)",
+            "conclusion": "success",
+            "nonSuccessSteps": []
+          }
+        ]
+      },
+      "updater": {
+        "id": 37952583789,
+        "sourceCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+        "path": ".github/workflows/native-update-0.16.0.yml",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 113894885400,
+            "name": "build",
+            "conclusion": "success",
+            "nonSuccessSteps": []
+          },
+          {
+            "id": 113895037811,
+            "name": "native (path with spaces)",
+            "conclusion": "success",
+            "nonSuccessSteps": []
+          },
+          {
+            "id": 113895037909,
+            "name": "native (ordinary)",
+            "conclusion": "success",
+            "nonSuccessSteps": []
+          }
+        ]
+      },
+      "regressions": {
+        "id": 37952595124,
+        "sourceCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+        "path": ".github/workflows/native-curated-release-check.yml",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 113894924531,
+            "name": "native-long-paths",
+            "conclusion": "success",
+            "nonSuccessSteps": []
+          },
+          {
+            "id": 113894924830,
+            "name": "native (ordinary)",
+            "conclusion": "success",
+            "nonSuccessSteps": []
+          },
+          {
+            "id": 113894924980,
+            "name": "native (path with spaces)",
+            "conclusion": "success",
+            "nonSuccessSteps": []
+          }
+        ]
+      }
+    },
+    "acceptedArtifacts": {
+      "candidate": {
+        "id": 11626720550,
+        "name": "curated-candidate-e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "bytes": 65972456,
+        "sha256": "2c17413e96cf113c4ddb007651ac45b471d74ba4b3b5aaeb0a579bd5009308cd",
+        "run": "candidate",
+        "file": "candidate.zip"
+      },
+      "native-ordinary": {
+        "id": 11626173789,
+        "name": "curated-windows-ordinary-1",
+        "bytes": 27213132,
+        "sha256": "ba2f64c5e38fd357444c9abb7a62d4f92d69130aa0edbcf65785623dc5bbc071",
+        "run": "candidate",
+        "file": "native-ordinary.zip"
+      },
+      "native-spaces": {
+        "id": 11625973983,
+        "name": "curated-windows-path with spaces-1",
+        "bytes": 27215801,
+        "sha256": "91ca6e891d02e8095400ccd3990d5bfc3824a304ac5281b9522317158c26266d",
+        "run": "candidate",
+        "file": "native-spaces.zip"
+      },
+      "updater": {
+        "id": 11627055274,
+        "name": "update-0.16.0-from-0.11.0-0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+        "bytes": 13209330,
+        "sha256": "516865ba8ba98350aa5eb75bdbc85d6830936fb26e70ecddcee3772a36dff2b0",
+        "run": "updater",
+        "file": "updater.zip"
+      },
+      "update-spaces": {
+        "id": 11626751095,
+        "name": "update-0.16.0-path with spaces-1",
+        "bytes": 823117,
+        "sha256": "8597b46472db64d3c54f266e41d80c8f99ba2495a9ec4a9b6140bf17feb3b134",
+        "run": "updater",
+        "file": "update-spaces.zip"
+      },
+      "update-ordinary": {
+        "id": 11626423134,
+        "name": "update-0.16.0-ordinary-1",
+        "bytes": 822343,
+        "sha256": "c4e9923ccdd6c48a928836d2798d0836fabcb67dc8b778f1dfba08c7dd5eeb43",
+        "run": "updater",
+        "file": "update-ordinary.zip"
+      },
+      "regressions-ordinary": {
+        "id": 11627370082,
+        "name": "curated-release-checks-ordinary-1",
+        "bytes": 583278,
+        "sha256": "2303cc1b9d64c12a1608997b5bee43c561e26e64734f14607d506672c9440213",
+        "run": "regressions",
+        "file": "regressions-ordinary.zip"
+      },
+      "regressions-spaces": {
+        "id": 11626711216,
+        "name": "curated-release-checks-path with spaces-1",
+        "bytes": 582709,
+        "sha256": "5f4e67ce91099437bf41fdbe55ce519397730d2cc962cdb153536cc6bc02759d",
+        "run": "regressions",
+        "file": "regressions-spaces.zip"
+      },
+      "long-paths": {
+        "id": 11626736090,
+        "name": "curated-release-long-paths-1",
+        "bytes": 97732,
+        "sha256": "85287a53db206a6a6eb7753f3427998d7d35946395ccf10c0b91fab361db2dcd",
+        "run": "regressions",
+        "file": "long-paths.zip"
+      }
+    },
+    "nativeReports": {
+      "ordinary-curated": {
+        "path": "curated-evidence/native-curated.json",
+        "artifact": "native-ordinary",
+        "sha256": "32e64dc568a000d68be8ef22d9759d189ea204aa5b559977e8fa192be40779c5",
+        "passed": 11,
+        "skips": [],
+        "kind": "curated",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-reference-live": {
+        "path": "reference-live-evidence/native-references-live.json",
+        "artifact": "native-ordinary",
+        "sha256": "56ee54b01dea1035b8adb8838b3e738f93d1d93b63fa1cb3226ecfe687869788",
+        "passed": 9,
+        "skips": [],
+        "kind": "reference-live",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-reference-management": {
+        "path": "reference-management-evidence/native-reference-management.json",
+        "artifact": "native-ordinary",
+        "sha256": "7aa25e6c98e74d8896512ec2c7c09e8ed7fe5669ab068ed9e18aa3ce0eb2e5d1",
+        "passed": 10,
+        "skips": [],
+        "kind": "reference-management",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-recovery": {
+        "path": "recovery-evidence/native-recovery.json",
+        "artifact": "native-ordinary",
+        "sha256": "1f8689851debcfd88ebc7b8d0a47e779b3e4fda2a914095833525a89d12c151b",
+        "passed": 12,
+        "skips": [],
+        "kind": "recovery",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-batch": {
+        "path": "batch-evidence/native-batch.json",
+        "artifact": "native-ordinary",
+        "sha256": "d22a1639e210be09c4af38baba8a9b18f7bdac1893605c19473cc564e47bd6f8",
+        "passed": 11,
+        "skips": [],
+        "kind": "batch",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-readiness": {
+        "path": "readiness-evidence/native-readiness.json",
+        "artifact": "native-ordinary",
+        "sha256": "24a7c94cb916fb7289e26d6ae6ae46f4dec9a6f93b975008f2899b1dfd08cbaf",
+        "passed": 5,
+        "skips": [],
+        "kind": "readiness",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-library": {
+        "path": "library-evidence/native-tool-library.json",
+        "artifact": "native-ordinary",
+        "sha256": "4a38e77b561b56c92ad9ae09fc53e754f9559fc220107aeb2733d771b8d9aeaa",
+        "passed": 7,
+        "skips": [],
+        "kind": "library",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-workspace": {
+        "path": "workspace-evidence/native-ui.json",
+        "artifact": "native-ordinary",
+        "sha256": "1234675be45a06a3d772f4cff707b2eb7b2e011782e7cb8787157425433f3a41",
+        "passed": 32,
+        "skips": [],
+        "kind": "workspace",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-transport": {
+        "path": "transport-evidence/native-transport.json",
+        "artifact": "native-ordinary",
+        "sha256": "841ae8d384829ebb008b204a621b0039193b3697a303d7126e7dafe12cef5f76",
+        "passed": 3,
+        "skips": [],
+        "kind": "transport",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-performance": {
+        "path": "performance-evidence/native-performance.json",
+        "artifact": "native-ordinary",
+        "sha256": "9fab9a39a8f7734e282e689319cca243d0736cb3681cbcd24c2fa562747eb20b",
+        "passed": 14,
+        "skips": [],
+        "kind": "performance",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": false,
+        "reportRecordsGateHash": false,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-align-pack": {
+        "path": "batch-evidence/native-align-pack.json",
+        "artifact": "native-ordinary",
+        "sha256": "8ca7c29a018960dae6d56ca5a46a256bab6bfee399a108879fdae723bd147452",
+        "passed": 1,
+        "skips": [],
+        "kind": "align-pack",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": false,
+        "reportRecordsGateHash": false,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-curated": {
+        "path": "curated-evidence/native-curated.json",
+        "artifact": "native-spaces",
+        "sha256": "49950af459c79245471e732a5ec5085e074fde67a73866547447485b2ab65e6e",
+        "passed": 11,
+        "skips": [],
+        "kind": "curated",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-reference-live": {
+        "path": "reference-live-evidence/native-references-live.json",
+        "artifact": "native-spaces",
+        "sha256": "281bdaecd1b68c5385cfd8d31c360ac12308868ec0ae06ba8a9ab1d48a243773",
+        "passed": 9,
+        "skips": [],
+        "kind": "reference-live",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-reference-management": {
+        "path": "reference-management-evidence/native-reference-management.json",
+        "artifact": "native-spaces",
+        "sha256": "a0dfc54b5e1d7fb4d691f30b7d4657486af875f401c2487bd04662fbd0cfc9d4",
+        "passed": 10,
+        "skips": [],
+        "kind": "reference-management",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-recovery": {
+        "path": "recovery-evidence/native-recovery.json",
+        "artifact": "native-spaces",
+        "sha256": "f6f8aadd8b878ad7fe9a33313d0cee4d2c29815217ba3cc57488d218aa0453a9",
+        "passed": 12,
+        "skips": [],
+        "kind": "recovery",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-batch": {
+        "path": "batch-evidence/native-batch.json",
+        "artifact": "native-spaces",
+        "sha256": "cbb9ba1cd09f54e1a23aa373ee71da99cde74005df5bdf27961a0ddfb255b675",
+        "passed": 11,
+        "skips": [],
+        "kind": "batch",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-readiness": {
+        "path": "readiness-evidence/native-readiness.json",
+        "artifact": "native-spaces",
+        "sha256": "18a8389668efc65a88a9f4b40989bad437f1c16e78f818c9b231875f9f5dd8f6",
+        "passed": 5,
+        "skips": [],
+        "kind": "readiness",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-library": {
+        "path": "library-evidence/native-tool-library.json",
+        "artifact": "native-spaces",
+        "sha256": "06c6046ee4a673e4df74868a594404cd03a290cf0828e5d0dbe46b7a5757d91c",
+        "passed": 7,
+        "skips": [],
+        "kind": "library",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-workspace": {
+        "path": "workspace-evidence/native-ui.json",
+        "artifact": "native-spaces",
+        "sha256": "ec6af6c78488af0bebde8d9e69875b02340fd9714e6f1372b5903b082a434d1e",
+        "passed": 32,
+        "skips": [],
+        "kind": "workspace",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-transport": {
+        "path": "transport-evidence/native-transport.json",
+        "artifact": "native-spaces",
+        "sha256": "65cc39b69de26e6e5f72a97a2f5702830efe443066465079d5f64e87dd204f9f",
+        "passed": 3,
+        "skips": [],
+        "kind": "transport",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-performance": {
+        "path": "performance-evidence/native-performance.json",
+        "artifact": "native-spaces",
+        "sha256": "659b4e60e91eabcccceb4b0a81e55e26e25465d2dff5b76797e3a068a9d217d0",
+        "passed": 14,
+        "skips": [],
+        "kind": "performance",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": false,
+        "reportRecordsGateHash": false,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-align-pack": {
+        "path": "batch-evidence/native-align-pack.json",
+        "artifact": "native-spaces",
+        "sha256": "919889ca8e848e67e7318c7300b459e7a49d2c3daf24e67896c3cffddb63b484",
+        "passed": 1,
+        "skips": [],
+        "kind": "align-pack",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": false,
+        "reportRecordsGateHash": false,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-update": {
+        "path": "update-native.json",
+        "artifact": "update-ordinary",
+        "sha256": "92de2f53263e964d073618f49ed6b11fad231ba3b3fccea083874ae1b1bccb15",
+        "passed": 18,
+        "skips": [],
+        "kind": "update",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-update": {
+        "path": "update-native.json",
+        "artifact": "update-spaces",
+        "sha256": "d8f37d80f4f020b212321861da74ae8eabeac32c638d2b31bca1a46e557d5273",
+        "passed": 18,
+        "skips": [],
+        "kind": "update",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-results": {
+        "path": "results-evidence/native-results.json",
+        "artifact": "regressions-ordinary",
+        "sha256": "81f1271f7777b230b442fe81edec2f3cc3a6356a2ec5be3882731492560c6e29",
+        "passed": 9,
+        "skips": [],
+        "kind": "results",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-scroll": {
+        "path": "scroll-evidence/native-scroll.json",
+        "artifact": "regressions-ordinary",
+        "sha256": "94cfc54a0dd08ca820464ba0f70d2c1854e68bc7544365b84ed9d2fe776bb7a9",
+        "passed": 3,
+        "skips": [],
+        "kind": "scroll",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-results": {
+        "path": "results-evidence/native-results.json",
+        "artifact": "regressions-spaces",
+        "sha256": "0f3c62c8a80c3c7553d063bf927d9a87035a47eb27723aa6cc4896e2a45e0a0c",
+        "passed": 9,
+        "skips": [],
+        "kind": "results",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-scroll": {
+        "path": "scroll-evidence/native-scroll.json",
+        "artifact": "regressions-spaces",
+        "sha256": "3eb6dd2847df3268f92e0da71e44e024009b2f9a0bb3321693b90e54112830fd",
+        "passed": 3,
+        "skips": [],
+        "kind": "scroll",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "long-paths-long-paths": {
+        "path": "native-long-paths.json",
+        "artifact": "long-paths",
+        "sha256": "4985c6075d9724a01985b1a7ea3939b96749968102bf2d1858a7da051d91d5fd",
+        "passed": 4,
+        "skips": [],
+        "kind": "long-paths",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      }
+    },
+    "productionPublisherFingerprint": "8d2093f9fafd71de56fea2038faeb2efa0964767d3235430b06428132cdc8505",
+    "productionTrustUnchanged": true,
+    "scope": "Exact cumulative 0.16.0 candidate and matching source, independent align 0.4.1 ZIP, exact updater from published 0.11.0, native Windows evidence in ordinary and space-containing paths and positive long-path regression; no rebuilding during publication.",
+    "limits": [
+      "Earlier failed candidates and validator attempts remain in the repository handover; this release promotes only the exact frozen accepted application bytes.",
+      "Synthetic training fixture answers and recorded QC measurements are not biological acceptance thresholds or clinical validation.",
+      "No new all-32-pack Full download or complete optional-pack scientific rerun is claimed; pack payloads and publisher trust are unchanged.",
+      "Offline gates deny Python host socket operations; native subprocesses are not OS-firewalled.",
+      "Finite hosted Windows captures do not establish physical trackpad, high-DPI, institutional proxy or endpoint-security approval.",
+      "Updater supports only published 0.11.0. It preserves existing packs and does not install align 0.4.1; the separate ZIP requires explicit import. Its interactive picker was not tested.",
+      "Executable signing, scientific Linux CWL parity, realistic Windows-Linux benchmarking and representative-machine acceptance remain separate."
+    ],
+    "originalCompanions": "Frozen candidate and updater companions retain their creation-time bytes. Original checksum files are retained separately; this release record supersedes their pending validation status.",
+    "assets": [
+      {
+        "file": "BUILD-PROVENANCE.json",
+        "bytes": 11402,
+        "sha256": "5929a1f261ac571b61ac5886fc135f749e398e861ee81963d7512739feddc927"
+      },
+      {
+        "file": "BUILD-UPDATE-PROVENANCE.json",
+        "bytes": 8838,
+        "sha256": "7032c4bdfe1253d72d1377d71905091a6b331e254921ef59aa12e35f1d093ccf"
+      },
+      {
+        "file": "SHA256SUMS.txt",
+        "bytes": 315,
+        "sha256": "7f2e129d8a74b2078cf9f6118274617959193e8a7180f42a5dfefd5fdc212d89"
+      },
+      {
+        "file": "UPDATE-SHA256SUMS.txt",
+        "bytes": 113,
+        "sha256": "5dd4c37d323e3663d4e8b2aaa4a32a8e6a537f044de849298718357eae061abd"
+      },
+      {
+        "file": "WINDOWS-EVIDENCE.zip",
+        "bytes": 55121741,
+        "sha256": "588f4689090755cde03e6866bb07c83aa74b7b8e41ac5676e08a5093c8b8282b"
+      },
+      {
+        "file": "align-0.4.1-metadata.json",
+        "bytes": 707,
+        "sha256": "3a1310431f81e3f424e2eaed6490e5928fcc4dcff0f4512429cdf95fba35a15a"
+      },
+      {
+        "file": "native-workbench-0.16.0-source.zip",
+        "bytes": 47848425,
+        "sha256": "f746f00a82675c2cf52364a3b4d040721c6d06ac5605488efbdc0376ef5b7e44"
+      },
+      {
+        "file": "native-workbench-0.16.0-starter-windows.zip",
+        "bytes": 17846873,
+        "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+      },
+      {
+        "file": "native-workbench-0.16.0-update-from-0.11.0.zip",
+        "bytes": 13199905,
+        "sha256": "d75d5129e9b9feaef70faa62d5ea91049c0162df8c7bdc74c7bc81d1933eec8f"
+      },
+      {
+        "file": "native-workbench-pack-align-0.4.1.zip",
+        "bytes": 575862,
+        "sha256": "3a08cf061f0b62c5502d1420115db3fcae2b04bf695ad3cfd1c3063de0fafa02"
+      },
+      {
+        "file": "source-metadata.json",
+        "bytes": 1764,
+        "sha256": "7f5a01279149b00fb88730b559fe352bf4bb017bfba77ac483e81bee6943d60b"
+      }
+    ]
+  }
+}

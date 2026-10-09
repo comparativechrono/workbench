@@ -1,0 +1,1059 @@
+{
+  "schema": 1,
+  "recordedUtc": "2026-10-09T16:00:31.725936+00:00",
+  "success": true,
+  "scope": "Independent anonymous downloads of every published 0.16.0 asset using curl without credentials, compared to GitHub release metadata, successful publisher receipt and frozen acceptance lock. Downloaded native evidence was rechecked without rerunning the application.",
+  "releaseId": 408075619,
+  "release": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.16.0",
+  "releaseTag": "app-v0.16.0",
+  "releaseDraft": false,
+  "prerelease": true,
+  "publishedUtc": "2026-10-09T15:54:56Z",
+  "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+  "publicationCommit": "60243d45a81a6ef7e16e4a0ee719f4aa2e4f74c9",
+  "publicationRunId": 37955110070,
+  "publicationRun": "https://github.com/comparativechrono/workbench/actions/runs/37955110070",
+  "remoteWrites": false,
+  "downloadMethod": {
+    "program": "curl",
+    "authentication": "none",
+    "configDisabled": true,
+    "httpsOnly": true,
+    "concurrency": 4,
+    "scope": "13 exact canonical release browser_download_url values"
+  },
+  "downloadedAssets": 13,
+  "downloadedBytes": 134644830,
+  "assets": [
+    {
+      "file": "align-0.4.1-metadata.json",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/align-0.4.1-metadata.json",
+      "httpStatus": 200,
+      "bytes": 707,
+      "sha256": "3a1310431f81e3f424e2eaed6490e5928fcc4dcff0f4512429cdf95fba35a15a",
+      "assetId": 625429123,
+      "anonymous": true
+    },
+    {
+      "file": "BUILD-PROVENANCE.json",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/BUILD-PROVENANCE.json",
+      "httpStatus": 200,
+      "bytes": 11402,
+      "sha256": "5929a1f261ac571b61ac5886fc135f749e398e861ee81963d7512739feddc927",
+      "assetId": 625429069,
+      "anonymous": true
+    },
+    {
+      "file": "BUILD-UPDATE-PROVENANCE.json",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/BUILD-UPDATE-PROVENANCE.json",
+      "httpStatus": 200,
+      "bytes": 8838,
+      "sha256": "7032c4bdfe1253d72d1377d71905091a6b331e254921ef59aa12e35f1d093ccf",
+      "assetId": 625429073,
+      "anonymous": true
+    },
+    {
+      "file": "EVIDENCE-SHA256SUMS.txt",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/EVIDENCE-SHA256SUMS.txt",
+      "httpStatus": 200,
+      "bytes": 708,
+      "sha256": "607cf78bb55e5f2ed929ff74955eb663fb09786b38f0e7608f05cd87623197ec",
+      "assetId": 625429071,
+      "anonymous": true
+    },
+    {
+      "file": "native-workbench-0.16.0-source.zip",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-0.16.0-source.zip",
+      "httpStatus": 200,
+      "bytes": 47848425,
+      "sha256": "f746f00a82675c2cf52364a3b4d040721c6d06ac5605488efbdc0376ef5b7e44",
+      "assetId": 625429127,
+      "anonymous": true
+    },
+    {
+      "file": "native-workbench-0.16.0-starter-windows.zip",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-0.16.0-starter-windows.zip",
+      "httpStatus": 200,
+      "bytes": 17846873,
+      "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073",
+      "assetId": 625429131,
+      "anonymous": true
+    },
+    {
+      "file": "native-workbench-0.16.0-update-from-0.11.0.zip",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-0.16.0-update-from-0.11.0.zip",
+      "httpStatus": 200,
+      "bytes": 13199905,
+      "sha256": "d75d5129e9b9feaef70faa62d5ea91049c0162df8c7bdc74c7bc81d1933eec8f",
+      "assetId": 625429147,
+      "anonymous": true
+    },
+    {
+      "file": "native-workbench-pack-align-0.4.1.zip",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-pack-align-0.4.1.zip",
+      "httpStatus": 200,
+      "bytes": 575862,
+      "sha256": "3a08cf061f0b62c5502d1420115db3fcae2b04bf695ad3cfd1c3063de0fafa02",
+      "assetId": 625429158,
+      "anonymous": true
+    },
+    {
+      "file": "RELEASE-VALIDATION.json",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/RELEASE-VALIDATION.json",
+      "httpStatus": 200,
+      "bytes": 28177,
+      "sha256": "2ca86c9a5a7e9435131b214a1edc1170f2275270b573ef0759c8b8fe29be4ee0",
+      "assetId": 625429068,
+      "anonymous": true
+    },
+    {
+      "file": "SHA256SUMS.txt",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/SHA256SUMS.txt",
+      "httpStatus": 200,
+      "bytes": 315,
+      "sha256": "7f2e129d8a74b2078cf9f6118274617959193e8a7180f42a5dfefd5fdc212d89",
+      "assetId": 625429070,
+      "anonymous": true
+    },
+    {
+      "file": "source-metadata.json",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/source-metadata.json",
+      "httpStatus": 200,
+      "bytes": 1764,
+      "sha256": "7f5a01279149b00fb88730b559fe352bf4bb017bfba77ac483e81bee6943d60b",
+      "assetId": 625429192,
+      "anonymous": true
+    },
+    {
+      "file": "UPDATE-SHA256SUMS.txt",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/UPDATE-SHA256SUMS.txt",
+      "httpStatus": 200,
+      "bytes": 113,
+      "sha256": "5dd4c37d323e3663d4e8b2aaa4a32a8e6a537f044de849298718357eae061abd",
+      "assetId": 625429107,
+      "anonymous": true
+    },
+    {
+      "file": "WINDOWS-EVIDENCE.zip",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/WINDOWS-EVIDENCE.zip",
+      "httpStatus": 200,
+      "bytes": 55121741,
+      "sha256": "588f4689090755cde03e6866bb07c83aa74b7b8e41ac5676e08a5093c8b8282b",
+      "assetId": 625429112,
+      "anonymous": true
+    }
+  ],
+  "apiMetadata": {
+    "file": "local-validation/release-0.16.0/publication/metadata.json",
+    "bytes": 41961,
+    "sha256": "5ef2239acae09256e9228c2978e231c1e23ac57471d5b172a8fbbef52057233e"
+  },
+  "publisherReceiptArtifact": {
+    "id": 11627502153,
+    "workflowRun": {
+      "id": 37955110070,
+      "repository_id": 1403436005,
+      "head_repository_id": 1403436005,
+      "head_branch": "release/app-0.16.0",
+      "head_sha": "60243d45a81a6ef7e16e4a0ee719f4aa2e4f74c9"
+    },
+    "bytes": 7116,
+    "sha256": "e0f96bcaa822e9060a367cd63ba43e72d82f2bbc68fff6be40516b7bef110354"
+  },
+  "publisherReceipt": {
+    "member": "public-download-verification.json",
+    "bytes": 5067,
+    "sha256": "71be503b134909c3e233e69f4cee409b8f159d4a4542666a5f722597403113dc",
+    "original": {
+      "success": true,
+      "phase": "completed",
+      "publicationCommit": "60243d45a81a6ef7e16e4a0ee719f4aa2e4f74c9",
+      "packagedSourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "releaseId": 408075619,
+      "releaseDraft": false,
+      "releasePublished": true,
+      "remoteMutations": [
+        {
+          "action": "create-tag",
+          "status": "confirmed",
+          "tag": "app-v0.16.0"
+        },
+        {
+          "action": "create-draft",
+          "status": "confirmed"
+        },
+        {
+          "action": "upload-assets",
+          "status": "confirmed",
+          "files": [
+            "BUILD-PROVENANCE.json",
+            "BUILD-UPDATE-PROVENANCE.json",
+            "EVIDENCE-SHA256SUMS.txt",
+            "RELEASE-VALIDATION.json",
+            "SHA256SUMS.txt",
+            "UPDATE-SHA256SUMS.txt",
+            "WINDOWS-EVIDENCE.zip",
+            "align-0.4.1-metadata.json",
+            "native-workbench-0.16.0-source.zip",
+            "native-workbench-0.16.0-starter-windows.zip",
+            "native-workbench-0.16.0-update-from-0.11.0.zip",
+            "native-workbench-pack-align-0.4.1.zip",
+            "source-metadata.json"
+          ]
+        },
+        {
+          "action": "publish-draft",
+          "status": "confirmed"
+        }
+      ],
+      "publicDownloads": [
+        {
+          "file": "BUILD-PROVENANCE.json",
+          "bytes": 11402,
+          "sha256": "5929a1f261ac571b61ac5886fc135f749e398e861ee81963d7512739feddc927",
+          "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/BUILD-PROVENANCE.json"
+        },
+        {
+          "file": "BUILD-UPDATE-PROVENANCE.json",
+          "bytes": 8838,
+          "sha256": "7032c4bdfe1253d72d1377d71905091a6b331e254921ef59aa12e35f1d093ccf",
+          "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/BUILD-UPDATE-PROVENANCE.json"
+        },
+        {
+          "file": "EVIDENCE-SHA256SUMS.txt",
+          "bytes": 708,
+          "sha256": "607cf78bb55e5f2ed929ff74955eb663fb09786b38f0e7608f05cd87623197ec",
+          "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/EVIDENCE-SHA256SUMS.txt"
+        },
+        {
+          "file": "RELEASE-VALIDATION.json",
+          "bytes": 28177,
+          "sha256": "2ca86c9a5a7e9435131b214a1edc1170f2275270b573ef0759c8b8fe29be4ee0",
+          "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/RELEASE-VALIDATION.json"
+        },
+        {
+          "file": "SHA256SUMS.txt",
+          "bytes": 315,
+          "sha256": "7f2e129d8a74b2078cf9f6118274617959193e8a7180f42a5dfefd5fdc212d89",
+          "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/SHA256SUMS.txt"
+        },
+        {
+          "file": "UPDATE-SHA256SUMS.txt",
+          "bytes": 113,
+          "sha256": "5dd4c37d323e3663d4e8b2aaa4a32a8e6a537f044de849298718357eae061abd",
+          "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/UPDATE-SHA256SUMS.txt"
+        },
+        {
+          "file": "WINDOWS-EVIDENCE.zip",
+          "bytes": 55121741,
+          "sha256": "588f4689090755cde03e6866bb07c83aa74b7b8e41ac5676e08a5093c8b8282b",
+          "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/WINDOWS-EVIDENCE.zip"
+        },
+        {
+          "file": "align-0.4.1-metadata.json",
+          "bytes": 707,
+          "sha256": "3a1310431f81e3f424e2eaed6490e5928fcc4dcff0f4512429cdf95fba35a15a",
+          "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/align-0.4.1-metadata.json"
+        },
+        {
+          "file": "native-workbench-0.16.0-source.zip",
+          "bytes": 47848425,
+          "sha256": "f746f00a82675c2cf52364a3b4d040721c6d06ac5605488efbdc0376ef5b7e44",
+          "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-0.16.0-source.zip"
+        },
+        {
+          "file": "native-workbench-0.16.0-starter-windows.zip",
+          "bytes": 17846873,
+          "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073",
+          "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-0.16.0-starter-windows.zip"
+        },
+        {
+          "file": "native-workbench-0.16.0-update-from-0.11.0.zip",
+          "bytes": 13199905,
+          "sha256": "d75d5129e9b9feaef70faa62d5ea91049c0162df8c7bdc74c7bc81d1933eec8f",
+          "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-0.16.0-update-from-0.11.0.zip"
+        },
+        {
+          "file": "native-workbench-pack-align-0.4.1.zip",
+          "bytes": 575862,
+          "sha256": "3a08cf061f0b62c5502d1420115db3fcae2b04bf695ad3cfd1c3063de0fafa02",
+          "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-pack-align-0.4.1.zip"
+        },
+        {
+          "file": "source-metadata.json",
+          "bytes": 1764,
+          "sha256": "7f5a01279149b00fb88730b559fe352bf4bb017bfba77ac483e81bee6943d60b",
+          "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/source-metadata.json"
+        }
+      ],
+      "recordedUtc": "2026-10-09T15:54:57.063374+00:00",
+      "tagCreated": true,
+      "verificationOnly": false,
+      "release": "https://github.com/comparativechrono/workbench/releases/tag/app-v0.16.0"
+    }
+  },
+  "frozenArchiveIdentities": {
+    "native-workbench-0.16.0-starter-windows.zip": {
+      "bytes": 17846873,
+      "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+    },
+    "native-workbench-0.16.0-source.zip": {
+      "bytes": 47848425,
+      "sha256": "f746f00a82675c2cf52364a3b4d040721c6d06ac5605488efbdc0376ef5b7e44"
+    },
+    "native-workbench-pack-align-0.4.1.zip": {
+      "bytes": 575862,
+      "sha256": "3a08cf061f0b62c5502d1420115db3fcae2b04bf695ad3cfd1c3063de0fafa02"
+    },
+    "native-workbench-0.16.0-update-from-0.11.0.zip": {
+      "bytes": 13199905,
+      "sha256": "d75d5129e9b9feaef70faa62d5ea91049c0162df8c7bdc74c7bc81d1933eec8f"
+    }
+  },
+  "allPublicIdentitiesMatchApiAndPublisherReceipt": true,
+  "zipChecks": [
+    {
+      "file": "native-workbench-0.16.0-source.zip",
+      "members": 751,
+      "crcPassed": true,
+      "uniqueSafeMemberNames": true
+    },
+    {
+      "file": "native-workbench-0.16.0-starter-windows.zip",
+      "members": 274,
+      "crcPassed": true,
+      "uniqueSafeMemberNames": true
+    },
+    {
+      "file": "native-workbench-0.16.0-update-from-0.11.0.zip",
+      "members": 78,
+      "crcPassed": true,
+      "uniqueSafeMemberNames": true
+    },
+    {
+      "file": "native-workbench-pack-align-0.4.1.zip",
+      "members": 44,
+      "crcPassed": true,
+      "uniqueSafeMemberNames": true
+    },
+    {
+      "file": "WINDOWS-EVIDENCE.zip",
+      "members": 498,
+      "crcPassed": true,
+      "uniqueSafeMemberNames": true
+    },
+    {
+      "file": "WINDOWS-EVIDENCE.zip!original-ci-artifacts/native-ordinary.zip",
+      "members": 1242,
+      "crcPassed": true,
+      "uniqueSafeMemberNames": true
+    },
+    {
+      "file": "WINDOWS-EVIDENCE.zip!original-ci-artifacts/native-spaces.zip",
+      "members": 1242,
+      "crcPassed": true,
+      "uniqueSafeMemberNames": true
+    },
+    {
+      "file": "WINDOWS-EVIDENCE.zip!original-ci-artifacts/update-spaces.zip",
+      "members": 294,
+      "crcPassed": true,
+      "uniqueSafeMemberNames": true
+    },
+    {
+      "file": "WINDOWS-EVIDENCE.zip!original-ci-artifacts/update-ordinary.zip",
+      "members": 294,
+      "crcPassed": true,
+      "uniqueSafeMemberNames": true
+    },
+    {
+      "file": "WINDOWS-EVIDENCE.zip!original-ci-artifacts/regressions-ordinary.zip",
+      "members": 154,
+      "crcPassed": true,
+      "uniqueSafeMemberNames": true
+    },
+    {
+      "file": "WINDOWS-EVIDENCE.zip!original-ci-artifacts/regressions-spaces.zip",
+      "members": 154,
+      "crcPassed": true,
+      "uniqueSafeMemberNames": true
+    },
+    {
+      "file": "WINDOWS-EVIDENCE.zip!original-ci-artifacts/long-paths.zip",
+      "members": 41,
+      "crcPassed": true,
+      "uniqueSafeMemberNames": true
+    }
+  ],
+  "checksumInventories": {
+    "SHA256SUMS.txt": {
+      "entries": 3,
+      "files": [
+        "native-workbench-0.16.0-source.zip",
+        "native-workbench-0.16.0-starter-windows.zip",
+        "native-workbench-pack-align-0.4.1.zip"
+      ],
+      "allIdentitiesMatch": true
+    },
+    "UPDATE-SHA256SUMS.txt": {
+      "entries": 1,
+      "files": [
+        "native-workbench-0.16.0-update-from-0.11.0.zip"
+      ],
+      "allIdentitiesMatch": true
+    },
+    "EVIDENCE-SHA256SUMS.txt": {
+      "entries": 8,
+      "files": [
+        "BUILD-PROVENANCE.json",
+        "BUILD-UPDATE-PROVENANCE.json",
+        "RELEASE-VALIDATION.json",
+        "SHA256SUMS.txt",
+        "UPDATE-SHA256SUMS.txt",
+        "WINDOWS-EVIDENCE.zip",
+        "align-0.4.1-metadata.json",
+        "source-metadata.json"
+      ],
+      "allIdentitiesMatch": true
+    }
+  },
+  "sourceCorrespondence": {
+    "packagedSourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+    "allCurrentSourceFilesComparedToGit": 748,
+    "packagedPythonModulesComparedToSourceCompanion": 33,
+    "coreManifestFilesVerified": 87,
+    "starterSourceAvailabilityEqualsPublicSourceMetadata": true,
+    "sourceMetadataIdentityMatchesSourceZip": true,
+    "recoveryCompanionReferences": 7,
+    "legacySourceAliasReferences": 175,
+    "publishedIndependentAlignMetadataMatchesFrozenZip": true,
+    "publicationContainsNoUnvalidatedApplicationChange": true
+  },
+  "nativeEvidence": {
+    "publicEvidenceArchive": {
+      "bytes": 55121741,
+      "sha256": "588f4689090755cde03e6866bb07c83aa74b7b8e41ac5676e08a5093c8b8282b"
+    },
+    "acceptedPromotionLockMatchesRepositoryAndPublicationCommit": true,
+    "retainedOriginalArtifacts": {
+      "native-ordinary": {
+        "file": "native-ordinary.zip",
+        "id": 11626173789,
+        "bytes": 27213132,
+        "sha256": "ba2f64c5e38fd357444c9abb7a62d4f92d69130aa0edbcf65785623dc5bbc071"
+      },
+      "native-spaces": {
+        "file": "native-spaces.zip",
+        "id": 11625973983,
+        "bytes": 27215801,
+        "sha256": "91ca6e891d02e8095400ccd3990d5bfc3824a304ac5281b9522317158c26266d"
+      },
+      "update-spaces": {
+        "file": "update-spaces.zip",
+        "id": 11626751095,
+        "bytes": 823117,
+        "sha256": "8597b46472db64d3c54f266e41d80c8f99ba2495a9ec4a9b6140bf17feb3b134"
+      },
+      "update-ordinary": {
+        "file": "update-ordinary.zip",
+        "id": 11626423134,
+        "bytes": 822343,
+        "sha256": "c4e9923ccdd6c48a928836d2798d0836fabcb67dc8b778f1dfba08c7dd5eeb43"
+      },
+      "regressions-ordinary": {
+        "file": "regressions-ordinary.zip",
+        "id": 11627370082,
+        "bytes": 583278,
+        "sha256": "2303cc1b9d64c12a1608997b5bee43c561e26e64734f14607d506672c9440213"
+      },
+      "regressions-spaces": {
+        "file": "regressions-spaces.zip",
+        "id": 11626711216,
+        "bytes": 582709,
+        "sha256": "5f4e67ce91099437bf41fdbe55ce519397730d2cc962cdb153536cc6bc02759d"
+      },
+      "long-paths": {
+        "file": "long-paths.zip",
+        "id": 11626736090,
+        "bytes": 97732,
+        "sha256": "85287a53db206a6a6eb7753f3427998d7d35946395ccf10c0b91fab361db2dcd"
+      }
+    },
+    "reportCount": 29,
+    "allReportsAndRetainedCapturesRevalidated": true,
+    "reports": {
+      "ordinary-curated": {
+        "path": "curated-evidence/native-curated.json",
+        "artifact": "native-ordinary",
+        "sha256": "32e64dc568a000d68be8ef22d9759d189ea204aa5b559977e8fa192be40779c5",
+        "passed": 11,
+        "skips": [],
+        "kind": "curated",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-reference-live": {
+        "path": "reference-live-evidence/native-references-live.json",
+        "artifact": "native-ordinary",
+        "sha256": "56ee54b01dea1035b8adb8838b3e738f93d1d93b63fa1cb3226ecfe687869788",
+        "passed": 9,
+        "skips": [],
+        "kind": "reference-live",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-reference-management": {
+        "path": "reference-management-evidence/native-reference-management.json",
+        "artifact": "native-ordinary",
+        "sha256": "7aa25e6c98e74d8896512ec2c7c09e8ed7fe5669ab068ed9e18aa3ce0eb2e5d1",
+        "passed": 10,
+        "skips": [],
+        "kind": "reference-management",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-recovery": {
+        "path": "recovery-evidence/native-recovery.json",
+        "artifact": "native-ordinary",
+        "sha256": "1f8689851debcfd88ebc7b8d0a47e779b3e4fda2a914095833525a89d12c151b",
+        "passed": 12,
+        "skips": [],
+        "kind": "recovery",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-batch": {
+        "path": "batch-evidence/native-batch.json",
+        "artifact": "native-ordinary",
+        "sha256": "d22a1639e210be09c4af38baba8a9b18f7bdac1893605c19473cc564e47bd6f8",
+        "passed": 11,
+        "skips": [],
+        "kind": "batch",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-readiness": {
+        "path": "readiness-evidence/native-readiness.json",
+        "artifact": "native-ordinary",
+        "sha256": "24a7c94cb916fb7289e26d6ae6ae46f4dec9a6f93b975008f2899b1dfd08cbaf",
+        "passed": 5,
+        "skips": [],
+        "kind": "readiness",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-library": {
+        "path": "library-evidence/native-tool-library.json",
+        "artifact": "native-ordinary",
+        "sha256": "4a38e77b561b56c92ad9ae09fc53e754f9559fc220107aeb2733d771b8d9aeaa",
+        "passed": 7,
+        "skips": [],
+        "kind": "library",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-workspace": {
+        "path": "workspace-evidence/native-ui.json",
+        "artifact": "native-ordinary",
+        "sha256": "1234675be45a06a3d772f4cff707b2eb7b2e011782e7cb8787157425433f3a41",
+        "passed": 32,
+        "skips": [],
+        "kind": "workspace",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-transport": {
+        "path": "transport-evidence/native-transport.json",
+        "artifact": "native-ordinary",
+        "sha256": "841ae8d384829ebb008b204a621b0039193b3697a303d7126e7dafe12cef5f76",
+        "passed": 3,
+        "skips": [],
+        "kind": "transport",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-performance": {
+        "path": "performance-evidence/native-performance.json",
+        "artifact": "native-ordinary",
+        "sha256": "9fab9a39a8f7734e282e689319cca243d0736cb3681cbcd24c2fa562747eb20b",
+        "passed": 14,
+        "skips": [],
+        "kind": "performance",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": false,
+        "reportRecordsGateHash": false,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-align-pack": {
+        "path": "batch-evidence/native-align-pack.json",
+        "artifact": "native-ordinary",
+        "sha256": "8ca7c29a018960dae6d56ca5a46a256bab6bfee399a108879fdae723bd147452",
+        "passed": 1,
+        "skips": [],
+        "kind": "align-pack",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": false,
+        "reportRecordsGateHash": false,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-curated": {
+        "path": "curated-evidence/native-curated.json",
+        "artifact": "native-spaces",
+        "sha256": "49950af459c79245471e732a5ec5085e074fde67a73866547447485b2ab65e6e",
+        "passed": 11,
+        "skips": [],
+        "kind": "curated",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-reference-live": {
+        "path": "reference-live-evidence/native-references-live.json",
+        "artifact": "native-spaces",
+        "sha256": "281bdaecd1b68c5385cfd8d31c360ac12308868ec0ae06ba8a9ab1d48a243773",
+        "passed": 9,
+        "skips": [],
+        "kind": "reference-live",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-reference-management": {
+        "path": "reference-management-evidence/native-reference-management.json",
+        "artifact": "native-spaces",
+        "sha256": "a0dfc54b5e1d7fb4d691f30b7d4657486af875f401c2487bd04662fbd0cfc9d4",
+        "passed": 10,
+        "skips": [],
+        "kind": "reference-management",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-recovery": {
+        "path": "recovery-evidence/native-recovery.json",
+        "artifact": "native-spaces",
+        "sha256": "f6f8aadd8b878ad7fe9a33313d0cee4d2c29815217ba3cc57488d218aa0453a9",
+        "passed": 12,
+        "skips": [],
+        "kind": "recovery",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-batch": {
+        "path": "batch-evidence/native-batch.json",
+        "artifact": "native-spaces",
+        "sha256": "cbb9ba1cd09f54e1a23aa373ee71da99cde74005df5bdf27961a0ddfb255b675",
+        "passed": 11,
+        "skips": [],
+        "kind": "batch",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-readiness": {
+        "path": "readiness-evidence/native-readiness.json",
+        "artifact": "native-spaces",
+        "sha256": "18a8389668efc65a88a9f4b40989bad437f1c16e78f818c9b231875f9f5dd8f6",
+        "passed": 5,
+        "skips": [],
+        "kind": "readiness",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-library": {
+        "path": "library-evidence/native-tool-library.json",
+        "artifact": "native-spaces",
+        "sha256": "06c6046ee4a673e4df74868a594404cd03a290cf0828e5d0dbe46b7a5757d91c",
+        "passed": 7,
+        "skips": [],
+        "kind": "library",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-workspace": {
+        "path": "workspace-evidence/native-ui.json",
+        "artifact": "native-spaces",
+        "sha256": "ec6af6c78488af0bebde8d9e69875b02340fd9714e6f1372b5903b082a434d1e",
+        "passed": 32,
+        "skips": [],
+        "kind": "workspace",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-transport": {
+        "path": "transport-evidence/native-transport.json",
+        "artifact": "native-spaces",
+        "sha256": "65cc39b69de26e6e5f72a97a2f5702830efe443066465079d5f64e87dd204f9f",
+        "passed": 3,
+        "skips": [],
+        "kind": "transport",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-performance": {
+        "path": "performance-evidence/native-performance.json",
+        "artifact": "native-spaces",
+        "sha256": "659b4e60e91eabcccceb4b0a81e55e26e25465d2dff5b76797e3a068a9d217d0",
+        "passed": 14,
+        "skips": [],
+        "kind": "performance",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": false,
+        "reportRecordsGateHash": false,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-align-pack": {
+        "path": "batch-evidence/native-align-pack.json",
+        "artifact": "native-spaces",
+        "sha256": "919889ca8e848e67e7318c7300b459e7a49d2c3daf24e67896c3cffddb63b484",
+        "passed": 1,
+        "skips": [],
+        "kind": "align-pack",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "success": true,
+        "reportRecordsSourceCommit": false,
+        "reportRecordsGateHash": false,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-update": {
+        "path": "update-native.json",
+        "artifact": "update-ordinary",
+        "sha256": "92de2f53263e964d073618f49ed6b11fad231ba3b3fccea083874ae1b1bccb15",
+        "passed": 18,
+        "skips": [],
+        "kind": "update",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-update": {
+        "path": "update-native.json",
+        "artifact": "update-spaces",
+        "sha256": "d8f37d80f4f020b212321861da74ae8eabeac32c638d2b31bca1a46e557d5273",
+        "passed": 18,
+        "skips": [],
+        "kind": "update",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-results": {
+        "path": "results-evidence/native-results.json",
+        "artifact": "regressions-ordinary",
+        "sha256": "81f1271f7777b230b442fe81edec2f3cc3a6356a2ec5be3882731492560c6e29",
+        "passed": 9,
+        "skips": [],
+        "kind": "results",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "ordinary-scroll": {
+        "path": "scroll-evidence/native-scroll.json",
+        "artifact": "regressions-ordinary",
+        "sha256": "94cfc54a0dd08ca820464ba0f70d2c1854e68bc7544365b84ed9d2fe776bb7a9",
+        "passed": 3,
+        "skips": [],
+        "kind": "scroll",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-results": {
+        "path": "results-evidence/native-results.json",
+        "artifact": "regressions-spaces",
+        "sha256": "0f3c62c8a80c3c7553d063bf927d9a87035a47eb27723aa6cc4896e2a45e0a0c",
+        "passed": 9,
+        "skips": [],
+        "kind": "results",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "spaces-scroll": {
+        "path": "scroll-evidence/native-scroll.json",
+        "artifact": "regressions-spaces",
+        "sha256": "3eb6dd2847df3268f92e0da71e44e024009b2f9a0bb3321693b90e54112830fd",
+        "passed": 3,
+        "skips": [],
+        "kind": "scroll",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      },
+      "long-paths-long-paths": {
+        "path": "native-long-paths.json",
+        "artifact": "long-paths",
+        "sha256": "4985c6075d9724a01985b1a7ea3939b96749968102bf2d1858a7da051d91d5fd",
+        "passed": 4,
+        "skips": [],
+        "kind": "long-paths",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "gateCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+        "success": true,
+        "reportRecordsSourceCommit": true,
+        "reportRecordsGateHash": true,
+        "identityBinding": "Exact original report hash, artifact digest and completed CI run; available report fields and retained helper source are separately checked."
+      }
+    },
+    "validationSourcesMatchedToGit": 14,
+    "helperSourceFilesMatchedToGit": 454,
+    "acceptedRuns": {
+      "candidate": {
+        "id": 37952018931,
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "path": ".github/workflows/native-curated-candidate.yml",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 113892947692,
+            "name": "build",
+            "conclusion": "success",
+            "nonSuccessSteps": []
+          },
+          {
+            "id": 113893784479,
+            "name": "native (ordinary)",
+            "conclusion": "success",
+            "nonSuccessSteps": []
+          },
+          {
+            "id": 113893784628,
+            "name": "native (path with spaces)",
+            "conclusion": "success",
+            "nonSuccessSteps": []
+          }
+        ]
+      },
+      "updater": {
+        "id": 37952583789,
+        "sourceCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+        "path": ".github/workflows/native-update-0.16.0.yml",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 113894885400,
+            "name": "build",
+            "conclusion": "success",
+            "nonSuccessSteps": []
+          },
+          {
+            "id": 113895037811,
+            "name": "native (path with spaces)",
+            "conclusion": "success",
+            "nonSuccessSteps": []
+          },
+          {
+            "id": 113895037909,
+            "name": "native (ordinary)",
+            "conclusion": "success",
+            "nonSuccessSteps": []
+          }
+        ]
+      },
+      "regressions": {
+        "id": 37952595124,
+        "sourceCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+        "path": ".github/workflows/native-curated-release-check.yml",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 113894924531,
+            "name": "native-long-paths",
+            "conclusion": "success",
+            "nonSuccessSteps": []
+          },
+          {
+            "id": 113894924830,
+            "name": "native (ordinary)",
+            "conclusion": "success",
+            "nonSuccessSteps": []
+          },
+          {
+            "id": 113894924980,
+            "name": "native (path with spaces)",
+            "conclusion": "success",
+            "nonSuccessSteps": []
+          }
+        ]
+      }
+    },
+    "retainedPromotionRunVerification": {
+      "candidate": {
+        "id": 37952018931,
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 113892947692,
+            "name": "build",
+            "conclusion": "success"
+          },
+          {
+            "id": 113893784479,
+            "name": "native (ordinary)",
+            "conclusion": "success"
+          },
+          {
+            "id": 113893784628,
+            "name": "native (path with spaces)",
+            "conclusion": "success"
+          }
+        ]
+      },
+      "updater": {
+        "id": 37952583789,
+        "sourceCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 113894885400,
+            "name": "build",
+            "conclusion": "success"
+          },
+          {
+            "id": 113895037811,
+            "name": "native (path with spaces)",
+            "conclusion": "success"
+          },
+          {
+            "id": 113895037909,
+            "name": "native (ordinary)",
+            "conclusion": "success"
+          }
+        ]
+      },
+      "regressions": {
+        "id": 37952595124,
+        "sourceCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 113894924531,
+            "name": "native-long-paths",
+            "conclusion": "success"
+          },
+          {
+            "id": 113894924830,
+            "name": "native (ordinary)",
+            "conclusion": "success"
+          },
+          {
+            "id": 113894924980,
+            "name": "native (path with spaces)",
+            "conclusion": "success"
+          }
+        ]
+      }
+    }
+  },
+  "releaseValidation": {
+    "file": "RELEASE-VALIDATION.json",
+    "bytes": 28177,
+    "sha256": "2ca86c9a5a7e9435131b214a1edc1170f2275270b573ef0759c8b8fe29be4ee0",
+    "sourcePublicationUpdaterAndRunsMatchLock": true,
+    "all11PreValidationAssetsMatch": true,
+    "originalReceiptCompanionsEqualPublicBytes": true,
+    "nativeReportsEqualRevalidatedOriginals": true
+  },
+  "limits": [
+    "This verification downloads and inspects immutable accepted payload identities and retained evidence. It does not repeat native scientific or GUI execution after publication.",
+    "Original creation-time companions remain byte-identical, including pending-status language; RELEASE-VALIDATION.json supplies final acceptance and publication identity.",
+    "Source recovery lists seven exact pack companion references and 175 legacy aliases. Those optional pack archives were not newly downloaded in this public-release audit.",
+    "Release tag and metadata were supplied from the captured GitHub API response; asset bodies were independently downloaded anonymously from every canonical public URL.",
+    "Prerelease limitations in RELEASE-VALIDATION.json remain applicable; public download integrity does not broaden the validated scientific or machine scope."
+  ]
+}

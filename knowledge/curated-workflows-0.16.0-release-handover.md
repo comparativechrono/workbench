@@ -1,18 +1,18 @@
 # Native Workbench 0.16.0 release handover
 
-Status on **2026-10-09: exact final validation accepted; publication pending**.
-All three candidate, updater and release-regression jobs passed in their
-respective runs. Independent archive/source/report checks and final screenshot
-reviews passed. Read-only publication preparation passed. Feature PRs #7–#11 have been merged
-into main with their recorded heads; release PR #12 and publication remain
-pending. No public 0.16.0 download is claimed yet; the last verified published
-application remains **0.11.0**.
+Status on **2026-10-09: published development prerelease; public downloads verified**.
+[Native Workbench 0.16.0](https://github.com/comparativechrono/workbench/releases/tag/app-v0.16.0)
+was published at **2026-10-09T15:54:56Z**, release ID **408075619**.
+All exact candidate, updater and release-regression jobs passed. Feature PRs
+#7–#11 and release PR #12 are merged. The immutable tag targets
+`60243d45a81a6ef7e16e4a0ee719f4aa2e4f74c9`, distinct from packaged source
+`e855dc4396e0c16ae35f4e840eb9cc734adb4441`. Publication downloaded and verified
+all 13 public assets without rebuilding the accepted archives.
 
 The user authorized a new release on 2026-10-09 with the exact instruction:
 **“Great lets do a new release at this point”**. The intended channel is a
 **development prerelease**, matching the existing 0.11.0 release channel. The
-new immutable tag is intended to be `app-v0.16.0`; existing published assets must
-not be overwritten.
+immutable tag is `app-v0.16.0`; previous published assets were not overwritten.
 
 The [candidate handover](curated-workflows-results-0.16.0-handover.md) remains
 the historical record of the earlier unpublished review scope, its limits and
@@ -47,9 +47,9 @@ files. The align ZIP is unchanged. This inspection does not establish Windows
 execution.
 
 The accepted exact bytes must be promoted without rebuilding. Release-tooling/validator commits and the final publication
-commit are separate from the packaged application-source commit. Actions
-downloads are temporary and may require sign-in; no public release download has
-yet been verified.
+commit are separate from the packaged application-source commit. Original Actions
+downloads are temporary and may require sign-in. The final archives and durable
+evidence are now available from the public release above.
 
 ## Historical candidate: not the publication input
 
@@ -207,11 +207,11 @@ bytes.
   [24 final curated/results visual reviews](evidence/curated-workflows-0.16.0-release-visual-review-2026-10-09.json)
   and 24 additional results/scroll captures. No earlier candidate passes are inherited.
 - **Integration:** [PR #12](https://github.com/comparativechrono/workbench/pull/12)
-  remains draft pending the exact acceptance lock and read-only preparation.
-  Stacked implementation PRs #7–#11 remain to be integrated.
-- **Publication:** pending read-only preparation, merged-main identity, new tag/release,
-  and verification of all public downloads. Acceptance lock and subsequent
-  receipt/public audit will bind those actual outcomes; they are not assumed here.
+  is merged at `60243d45a81a6ef7e16e4a0ee719f4aa2e4f74c9`; the final lock and read-only preparation passed.
+  Implementation PRs #7–#11 were merged first with their exact recorded heads.
+- **Publication:** completed in [run 37955110070](https://github.com/comparativechrono/workbench/actions/runs/37955110070).
+  All 13 assets passed anonymous public-download checks. The new tag and release
+  retain the accepted archives unchanged; the actual receipt is recorded below.
 
 ## Limits that remain after release checks
 
@@ -228,4 +228,18 @@ optional scientific tools revalidated for this application release.
 
 ## Hosted publication preparation
 
-[Read-only preparation run 37954220037](https://github.com/comparativechrono/workbench/actions/runs/37954220037) passed at `1527a2ca0bbca760735b2e34920c72b397ab5d54`, including all 16 publisher guard tests, online identities and preparation of 13 assets. The publication job was intentionally skipped on this verification branch. The downloaded compact receipt passed size, SHA-256 and ZIP CRC checks and records no remote release mutations. The [preparation record](evidence/curated-workflows-0.16.0-release-preparation-2026-10-09.json) retains artifacts, receipt and feature merge identities. PR #12 and public promotion remain the final delivery steps.
+[Read-only preparation run 37954220037](https://github.com/comparativechrono/workbench/actions/runs/37954220037) passed at `1527a2ca0bbca760735b2e34920c72b397ab5d54`, including all 16 publisher guard tests, online identities and preparation of 13 assets. The publication job was intentionally skipped on this verification branch. The downloaded compact receipt passed size, SHA-256 and ZIP CRC checks and records no remote release mutations. The [preparation record](evidence/curated-workflows-0.16.0-release-preparation-2026-10-09.json) retains artifacts, receipt and feature merge identities. PR #12 was subsequently merged and public promotion completed.
+
+## Final publication
+
+[Publication run 37955110070](https://github.com/comparativechrono/workbench/actions/runs/37955110070)
+passed all promotion steps at the merged release commit above. The verification-only
+job was intentionally skipped on the publication branch. The publisher created a
+new tag and draft, verified all 13 uploaded assets, published the development
+prerelease without changing the latest-release channel, and verified every public
+asset by anonymous download. The [publication record](evidence/curated-workflows-0.16.0-publication-2026-10-09.json)
+retains actual release/asset IDs, hashes, run steps, merge identities, receipt and
+final `RELEASE-VALIDATION.json`. The [independent download audit](evidence/curated-workflows-0.16.0-public-downloads-2026-10-09.json)
+records a second download and archive/checksum/source check. Historical candidate
+and creation-time provenance files are retained unchanged; this final record
+supersedes their pending publication status.

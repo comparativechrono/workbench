@@ -1,8 +1,59 @@
 # Validation, releases and publisher trust
 
-## Curated workflows/results candidate, 0.16.0
+## Published curated workflows/results release, 0.16.0
 
-Use [native-curated-candidate.yml](../.github/workflows/native-curated-candidate.yml) for the exact unpublished source/Starter build, ordinary/spaced Windows scientific/interface checks and relevant regressions. Recorded QC measurements must retain output provenance; missing/corrupted data must not become zero or a QC pass. Fixture expected answers are separate from biological acceptance criteria. Independently audit downloaded archives with `scripts/audit_curated_candidate.py`, and review final screenshots. Record actual results, failures and skips in the [handover](curated-workflows-results-0.16.0-handover.md); previous 0.15.0 results are not evidence for new bytes.
+The exact packaged source is `e855dc4396e0c16ae35f4e840eb9cc734adb4441`.
+[Candidate run 37952018931](https://github.com/comparativechrono/workbench/actions/runs/37952018931)
+passed 488 Linux source tests/four Windows-only skips and 332 Windows tests/four
+platform or privilege skips per path, plus exact packaged native feature and
+regression gates. The [candidate workflow](../.github/workflows/native-curated-candidate.yml)
+builds one matching source/Starter pair. The independent audit matches its
+748 current source files to Git and checks archive/core/pack/runtime identities.
+
+[Updater run 37952583789](https://github.com/comparativechrono/workbench/actions/runs/37952583789)
+derives the core update from that frozen Starter without rebuilding the app.
+Its 18 main checks per Windows path start with actual published 0.11.0 private
+runtime behavior and preserve old results, references, settings and packs.
+Eleven nested curated checks and seven installation checks without the extra
+pack are separately scoped. Explicit import of align 0.4.1 is verified; the
+updater does not install it implicitly. The folder picker is not covered.
+
+[Release-check run 37952595124](https://github.com/comparativechrono/workbench/actions/runs/37952595124)
+runs results/CWL/DAG/icon and scrolling gates in ordinary/spaced paths and a
+four-check positive long-path gate. The release-specific `_0160` validators
+retain frame assertions and require both Starter and extra-pack scientific
+truth with disabled long-path opt-in and restored runner policy. The additional
+alignment uses a 254-character native cwd and 268-character SAM path; native
+working directories at or above 260 characters remain unsupported.
+
+The [release lock](evidence/curated-workflows-0.16.0-release-lock.json) binds exact
+archives, run/job/step conclusions, original report hashes, helper-source commits
+and screenshot identities. `scripts/publish_app_0160.py` verifies the complete
+lock in a read-only preparation, requires the exact merged main/PR12 identity,
+refuses existing tag/release replacement, promotes accepted bytes unchanged and
+rehashes every public asset after publication.
+[Publication run 37955110070](https://github.com/comparativechrono/workbench/actions/runs/37955110070)
+verified all 13 assets. Publication/tag commit is
+`60243d45a81a6ef7e16e4a0ee719f4aa2e4f74c9`, distinct from the packaged source; actual
+download evidence is in the [receipt](evidence/curated-workflows-0.16.0-public-downloads-2026-10-09.json).
+
+See the [release handover](curated-workflows-0.16.0-release-handover.md),
+[archive audit](evidence/curated-workflows-0.16.0-release-archive-audit-2026-10-09.json),
+[updater evidence](evidence/update-0.16.0-final-validation-2026-10-09.json),
+[release regressions](evidence/curated-workflows-0.16.0-release-regression-final-2026-10-09.json)
+and [visual review](evidence/curated-workflows-0.16.0-release-visual-review-2026-10-09.json).
+Recorded QC measurements require valid output provenance; missing/corrupt data
+does not become zero or a QC pass. Fixture answers remain separate from
+biological acceptance thresholds. Hosted 96-DPI, CLI updater and offline
+private-host checks retain their documented limits.
+
+## Historical candidate validation protocols
+
+The candidate sections below retain their original named bytes, scope and
+publication status. Their earlier pending/release statements are historical.
+The rejected `7a9aca7` and superseded `a447997` 0.16 candidates, old updater
+attempts and original immutable source companions remain retained; no old pass
+is relabelled as validation of the final `e855dc4` archives.
 
 ## Reference-management candidate, 0.15.0
 

@@ -12,60 +12,54 @@ The application does not require Docker, WSL or a system Python installation.
 
 ## Release status
 
-Unpublished **0.16.0** adds curated training workflows and recorded-result summaries/search. See [draft PR #11](https://github.com/comparativechrono/workbench/pull/11) and its [validated candidate handover](knowledge/curated-workflows-results-0.16.0-handover.md) for review downloads and limits.
+[**0.16.0 is published as a development prerelease**](https://github.com/comparativechrono/workbench/releases/tag/app-v0.16.0).
+It brings together readiness and diagnostics, sample batches and queues,
+reusable indexes, verified restart, resource scheduling, portable projects,
+reference management, and curated training workflows with native results.
+The two synthetic workflows explain exact tool requirements and expected
+answers. Results show recorded measurements, searchable analyses and useful
+failure guidance without inventing sample QC pass thresholds.
 
-[**0.11.0 is published as a development prerelease**](https://github.com/comparativechrono/workbench/releases/tag/app-v0.11.0).
-The tool library now shows expandable category headings supplied by installed
-packs. Multiple categories can stay open; search reveals matches and clearing
-it restores the browsing state. Standalone tool selection, workflow Add,
-double-click, drag-and-drop and keyboard navigation are retained.
+The **17.85 MB Starter** (17,846,873 bytes) is a fresh installation. The separate
+**13.20 MB updater** (13,199,905 bytes) upgrades published **0.11.0** while
+preserving installed packs, saved settings/pins, setup state, results and
+references. A fresh Starter includes the original align/bam/variants 0.4.0
+packs and additional align 0.4.1 side by side. The updater leaves the additional
+pack for explicit [offline ZIP import](https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-pack-align-0.4.1.zip).
+The 32-pack Full/Custom profile and production trust remain unchanged.
 
-The standalone Starter ZIP is **17.04 MB** and includes minimap2, SAMtools and
-BCFtools. Full and Custom setup still retrieve independently versioned packs.
-The separate **12.86 MB updater from 0.10.1** preserves user data. A fresh
-installation does not require an older release.
+The exact application passed its native candidate and release checks in ordinary
+and space-containing Windows paths. The updater passed 18 checks per path,
+verifying all 87 core files and preserving 204 existing files. A separate
+four-check long-path gate passed the Starter chain and additional align
+self-check with machine long-path opt-in disabled and restored afterward.
+Native child working directories of 260 characters or more remain unsupported.
 
-The exact application passed Windows library, workspace, live References,
-results/CWL/DAG/icon and temporal scrolling checks in ordinary and
-space-containing paths. The updater passed 13 checks per path, preserving
-204 existing files and verifying 72 core files. Existing pack bytes and
-production trust/profile remain unchanged.
+[Publication run 37955110070](https://github.com/comparativechrono/workbench/actions/runs/37955110070)
+promoted the accepted application archives without rebuilding and verified all
+13 public assets by anonymous download. Packaged source is
+`e855dc4396e0c16ae35f4e840eb9cc734adb4441`; release/tooling source is recorded
+separately. See the [release notes](docs/releases/0.16.0.md),
+[release handover](knowledge/curated-workflows-0.16.0-release-handover.md) and
+[public-download receipt](knowledge/evidence/curated-workflows-0.16.0-public-downloads-2026-10-09.json).
 
-[Publication run 37708604434](https://github.com/comparativechrono/workbench/actions/runs/37708604434)
-promoted the accepted archives without rebuilding and verified all eleven
-public assets by anonymous download. A separate download audit verified their
-sizes, SHA-256 hashes, ZIP CRCs and three checksum manifests. See the
-[0.11.0 release notes](docs/releases/0.11.0.md),
-[feature handover](knowledge/expandable-tool-library.md) and
-[public-download evidence](knowledge/evidence/tool-library-0.11.0-public-downloads-2026-10-08.json).
+These are finite hosted Windows checks at 96 DPI. Representative PCs, physical
+trackpads, high-DPI/multi-monitor displays, scientific Linux CWL validation,
+realistic benchmarking, executable signing and institutional deployment remain
+separate work. Synthetic truth is not biological or clinical validation.
+Full downloads of all 32 optional packs were not repeated. Existing endpoint
+security policies, including the reported Heimdal bridge block, remain an
+organisation approval matter.
 
-These are finite hosted Windows checks at 96 DPI, not physical trackpad,
-high-DPI/multi-monitor or institutional security approval. Full downloads of
-all 32 packs were not repeated for this UI change. The separate reported
-Heimdal bridge block remains an organisation approval matter.
-
-The release retains `workflow.cwl` in analysis results, routed dependency
-diagrams, an SVG-derived Windows icon and Ensembl archive References with
-offline reuse and provenance. To execute exported CWL separately, provide
-the documented CWL engine, Python, matching tool packs and input data; this
-adds no dependency to normal Workbench operation. See the
-[CWL guide](knowledge/cwl-results.md).
-
-Development for the accepted roadmap is on unpublished review branches.
-The first remaining set, **0.15.0 reference management**, is implemented and
-validated on hosted Windows: resumable downloads, local reference import, library
-relocation and NCBI RefSeq assembly lookup. See its
-[tester download and evidence](knowledge/reference-management-0.15.0-handover.md).
-The completed initial three tranches culminate in unpublished
-**0.14.0**, with [verified workflow
-restart, declared resource budgets and portable projects](knowledge/recovery-projects.md).
-See the [candidate handover and download](knowledge/recovery-projects-0.14.0-handover.md)
-and [current development status](knowledge/current-state.md) for evidence and
-limits; these features are not in the published 0.11.0 download below.
+Results retain `workflow.cwl`, dependency diagrams, methods and provenance.
+Separate CWL execution requires the documented engine, Python, matching packs
+and inputs; normal Workbench operation gains no such dependency. See the
+[CWL guide](knowledge/cwl-results.md) and
+[current development status](knowledge/current-state.md).
 
 ## Using the application
 
-Download the [0.11.0 Windows Starter ZIP](https://github.com/comparativechrono/workbench/releases/download/app-v0.11.0/native-workbench-0.11.0-starter-windows.zip),
+Download the [0.16.0 Windows Starter ZIP](https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-0.16.0-starter-windows.zip),
 extract it and run `NativeWorkbench.exe`. At first launch choose **Full**,
 **Starter** or **Custom**. For Full or Custom, choose **Refresh catalogue**, review
 the tools and download size, then choose **Install selection**. Starter works
@@ -78,12 +72,17 @@ cards and connect compatible tool ports. Input cards own the selected files;
 tool cards own their options and connections. See the
 [native interface guide](knowledge/native-ui.md).
 
-Open **References** to search the **Ensembl archive**, choose a numbered release
-and species/assembly, find files and explicitly download the required products.
+Open **File → Curated workflows...** to review the synthetic training inputs,
+expected answers and exact dependencies before loading an editable workflow.
+Use **Results** to search recorded analyses, measurements, raw outputs and
+failure guidance. See the [workflow/results guide](knowledge/curated-workflows-results.md).
+
+Open **References** for Ensembl archive or NCBI RefSeq discovery, resumable
+downloads, reviewed local-reference import and verified library relocation.
 On **Downloaded**, select a reference and a compatible input, then choose
 **Use for input**. The local library works offline; loading or running an
 analysis does not start downloads. cDNA and ncRNA remain distinct products.
-See the [reference guide](docs/reference-discovery-0.7.md).
+See the [reference-management guide](knowledge/reference-management.md).
 
 To add more tools later, reopen **Tool setup** through **Manage tools**, or use
 the manager's catalogue selection. For offline import, download the tool's
@@ -97,8 +96,8 @@ does not require a network connection. The starter already includes the `align`,
 ### More optional tools
 
 These additions cover widely used QC, counting, interval and similarity-search
-operations. They are independent downloads; the starter distribution is
-unchanged. Installed packs use additional disk space.
+operations. They are independent downloads; installing one does not replace the bundled
+starter tools. Installed packs use additional disk space.
 
 | Pack | What it adds |
 | --- | --- |
@@ -115,8 +114,8 @@ viewer. The desktop app does not launch a browser to run these tools.
 
 ### Annotation, expression, coverage and phylogenetics
 
-These optional packs connect to existing tools without changing the 0.6.0
-application or its three-tool starter:
+These optional packs connect to existing tools without replacing the bundled
+starter tools:
 
 | Pack | What it adds |
 | --- | --- |
@@ -182,21 +181,28 @@ are outside this pack, and human whole-genome performance is not yet established
 
 ### Updating an existing installation
 
-For version **0.10.1**, use the
-[0.11.0 updater](https://github.com/comparativechrono/workbench/releases/download/app-v0.11.0/native-workbench-0.11.0-update-from-0.10.1.zip).
+For published **0.11.0**, use the
+[0.16.0 updater](https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-0.16.0-update-from-0.11.0.zip).
 Close Workbench, extract the updater outside the application folder, run
 `UpdateWorkbench.exe`, and choose the existing `native-workbench` folder.
 Installed packs, saved settings/workflow pins, setup state, results and reference
 files are retained. Native CLI preservation passed in both Windows paths;
-the folder-picker interaction was not part of that automated gate.
+the interactive folder picker was not part of that automated gate.
 
-This updater supports **0.10.1 only**. From 0.10.0, first use the
+This updater supports **published 0.11.0 only**, including installations with
+additional packs; it does not target the unpublished 0.12–0.15 candidates.
+Import the separate align 0.4.1 ZIP explicitly if reusable-index workflows need
+it. Existing saved workflows keep their exact versions.
+
+From 0.10.1, first use the
+[0.11.0 updater](https://github.com/comparativechrono/workbench/releases/download/app-v0.11.0/native-workbench-0.11.0-update-from-0.10.1.zip).
+From 0.10.0, first use the
 [0.10.1 updater](https://github.com/comparativechrono/workbench/releases/download/app-v0.10.1/native-workbench-0.10.1-update-from-0.10.0.zip).
 From 0.9.0, first use the
 [0.10.0 updater](https://github.com/comparativechrono/workbench/releases/download/app-v0.10.0/native-workbench-0.10.0-update-from-0.9.0.zip).
 Earlier 0.6.0 and 0.8.0 installations have updaters to 0.9.0 in the
 [earlier release](docs/releases/0.9.0.md). There is no updater for 0.7.0:
-retain that installation and extract the 0.11.0 Starter into a separate folder.
+retain that installation and extract the 0.16.0 Starter into a separate folder.
 Extraction does not migrate data automatically. Do not overlay the Starter
 onto an existing installation.
 

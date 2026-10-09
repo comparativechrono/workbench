@@ -1,6 +1,76 @@
 # Current project state
 
-## Active set: 0.16.0, unpublished
+## Published application: 0.16.0
+
+Snapshot: **2026-10-09**. Application **0.16.0** is published
+as a [development prerelease](https://github.com/comparativechrono/workbench/releases/tag/app-v0.16.0).
+Release ID **408075619**, published at **2026-10-09T15:54:56Z**;
+immutable tag/merged [PR #12](https://github.com/comparativechrono/workbench/pull/12)
+commit `60243d45a81a6ef7e16e4a0ee719f4aa2e4f74c9`. Packaged application/source commit is
+`e855dc4396e0c16ae35f4e840eb9cc734adb4441`. The accepted archives were promoted
+without rebuilding. The owner authorized this release on 2026-10-09 with
+“Great lets do a new release at this point”; no additional tester acceptance
+is inferred from that authorization.
+
+This release includes readiness/diagnostics, batches/queues/indexes,
+restart/resource scheduling/portable projects, reference management and the
+two curated synthetic workflows with native measured results/search/failure
+guidance. The pack self-check fix removes unnecessary report-directory nesting;
+child working directories at or above 260 characters remain unsupported.
+
+[Candidate run 37952018931](https://github.com/comparativechrono/workbench/actions/runs/37952018931)
+passed 488 Linux source tests/four Windows-only skips and 332 Windows source
+tests/four platform or privilege skips per path. Both Windows paths passed the
+11 curated checks and the recorded reference, performance, readiness, batch,
+recovery, transport, library, workspace and independent-pack gates.
+[Release regressions 37952595124](https://github.com/comparativechrono/workbench/actions/runs/37952595124)
+passed nine results/CWL/DAG/icon and three scrolling checks per path, plus four
+positive long-path checks with policy restoration. The additional alignment
+used a 254-character native working directory and 268-character SAM path and
+retained 202 mapped proper-pair records.
+
+[Updater run 37952583789](https://github.com/comparativechrono/workbench/actions/runs/37952583789)
+passed 18 main checks per path from published 0.11.0, verified 87 core files and
+preserved 204 existing files; the only expected addition was a one-NUL-byte
+session lock. Each upgraded installation also passed 11 nested curated checks
+and seven installation checks with align 0.4.1 absent. These nested scopes are
+not summed into an inflated test total. Separate explicit import added the
+43 align 0.4.1 files while preserving 182 installed pack files. The updater
+folder picker and live reference downloads were not part of this gate.
+
+The archive audit verified 748 exact Git source files, 87 core files and
+33 runtime modules; 143 published pack files and 39 private-runtime files,
+production trust and the 32-pack profile are unchanged. Twenty-four final
+Starter/upgraded curated-result captures and 24 additional results/scroll
+captures were reviewed at 96 DPI.
+
+[Publication run 37955110070](https://github.com/comparativechrono/workbench/actions/runs/37955110070)
+verified all **13 public assets** by anonymous download. Release/tooling source,
+native evidence and asset identities are recorded separately in
+`RELEASE-VALIDATION.json`. See the
+[release handover](curated-workflows-0.16.0-release-handover.md),
+[acceptance lock](evidence/curated-workflows-0.16.0-release-lock.json),
+[archive audit](evidence/curated-workflows-0.16.0-release-archive-audit-2026-10-09.json),
+[updater evidence](evidence/update-0.16.0-final-validation-2026-10-09.json),
+[release regressions](evidence/curated-workflows-0.16.0-release-regression-final-2026-10-09.json)
+and [public-download receipt](evidence/curated-workflows-0.16.0-public-downloads-2026-10-09.json).
+
+Representative-PC/high-DPI/multi-monitor/physical-trackpad acceptance,
+scientific Linux CWL validation, realistic Windows–Linux benchmarks, executable
+signing and institutional deployment remain outstanding. Synthetic fixtures do
+not establish biological/clinical fitness or realistic capacity. No new download
+of all 32 optional packs or full scientific rerun of every optional tool is claimed.
+
+## Historical implementation and release records
+
+The sections below retain their original dates, candidate identities and
+authorization/validation scope. Their references to unpublished branches,
+draft reviews, pending release gates or the then-current 0.11.0 baseline are
+historical. Features from 0.12–0.15 are now included in 0.16.0; those candidate
+versions were not separately published. The earlier `7a9aca7` and `a447997`
+0.16.0 candidates were superseded, and their passes do not validate `e855dc4`.
+
+## Historical review candidate: 0.16.0 before release fixes
 
 Curated synthetic workflows and native recorded-result summaries/search are
 implemented on `feature/curated-workflows-results`, based on reference-management
@@ -145,7 +215,7 @@ Sample batching, durable queues and reusable indexes are the active 0.13.0
 tranche above. Verified completed-step restart and bounded concurrency are
 implemented in the 0.14.0 candidate above.
 
-## Published baseline: 0.11.0
+## Historical published baseline: 0.11.0
 
 Snapshot: **2026-10-08**. Application **0.11.0 is published** as a development
 prerelease at [app-v0.11.0](https://github.com/comparativechrono/workbench/releases/tag/app-v0.11.0).
