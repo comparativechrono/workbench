@@ -92,6 +92,19 @@ High-DPI, multi-monitor, physical-trackpad and managed-PC acceptance require
 observations from those environments. A hosted 96-DPI capture does not close
 them. Benchmarking and scientific Linux CWL execution are separate work.
 
+## Known observations in the published application
+
+Hosted tests of the unchanged 0.16.0 application found that **Escape after a
+keyboard search did not close the Results window**. Use its visible **Close**
+button when necessary. Keep the failed Escape observation in the report;
+successful use of Close does not make that keyboard check pass. The internal
+cause and behavior on representative PCs still need investigation.
+
+The hosted desktop was 1024 pixels wide at 96 DPI, while the application's
+minimum width was 1040 pixels, leaving its right window edge clipped. Check
+the actual available display area and scaling on each target machine. The
+hosted resize observations do not establish acceptance on that narrower display.
+
 ## Maintainer build
 
 Retrieve the four canonical archives in the input lock and verify their sizes

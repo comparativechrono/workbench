@@ -107,6 +107,22 @@ class DeploymentUIGateEvidenceTests(unittest.TestCase):
         with self.assertRaisesRegex(AssertionError, 'one visible enabled'):
             gate.unique_button(ui, 100, 'OK')
 
+    def test_completed_observations_retain_failed_requirement_and_incomplete_runs_cannot_pass(self):
+        report = {'nativeGUIObservationsCompleted': True,
+                  'scenarios': [{'status': 'pass'}, {'status': 'failed'}, {'status': 'pass'}]}
+        gate.finalize_report(report)
+        self.assertTrue(report['nativeGUIObservationsCompleted'])
+        self.assertFalse(report['success'])
+        self.assertFalse(report['nativeGUIValidated'])
+        self.assertEqual((report['passed'], report['failed'], report['blocked']), (2, 1, 0))
+        report['scenarios'] = [{'status': 'pass'}]
+        report['nativeGUIObservationsCompleted'] = False
+        gate.finalize_report(report)
+        self.assertFalse(report['success'])
+        report['nativeGUIObservationsCompleted'] = True
+        gate.finalize_report(report)
+        self.assertTrue(report['success'])
+
     def test_cli_rejects_input_overlap_before_creating_a_report_or_running_windows(self):
         bundle = self.root / 'immutable-kit'
         bundle.mkdir()

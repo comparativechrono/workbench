@@ -324,6 +324,41 @@ def passed(report, identity, note, **details):
     print(json.dumps({'passed': len(report['checks']), 'id': identity}), flush=True)
 
 
+def failed(report, identity, note, **details):
+    report['scenarios'].append({'id': identity, 'status': 'failed', 'observedAt': utc(), 'note': note, **details})
+    print(json.dumps({'failed': identity, 'note': note}), flush=True)
+
+
+def finalize_report(report):
+    """Completed observation collection must never turn a product failure green."""
+    report['passed'] = sum(row['status'] == 'pass' for row in report['scenarios'])
+    report['failed'] = sum(row['status'] == 'failed' for row in report['scenarios'])
+    report['blocked'] = sum(row['status'] == 'blocked' for row in report['scenarios'])
+    report['success'] = bool(report.get('nativeGUIObservationsCompleted') and report['passed'] and
+                             all(row['status'] == 'pass' for row in report['scenarios']))
+    report['nativeGUIValidated'] = report['success']
+
+
+def focus_observation(ui, keys, owner):
+    focus = keys.focus()
+    return {'foregroundWindow': ui.user.GetForegroundWindow(), 'resultsWindow': owner,
+            'focusWindow': focus, 'focusControlId': ui.user.GetDlgCtrlID(focus) if focus else None,
+            'focusClass': ui.label(focus, True) if focus else None,
+            'focusEnabled': bool(ui.user.IsWindowEnabled(focus)) if focus else None,
+            'focusInsideResults': bool(focus and ui.user.IsChild(owner, focus))}
+
+
+def observe_close(ui, window, seconds=5):
+    deadline = time.monotonic() + seconds
+    while time.monotonic() < deadline:
+        require(ui.process.poll() is None and ui.user.IsWindowVisible(ui.main),
+                'Closing the results window unexpectedly closed the application.')
+        if not window():
+            return True
+        time.sleep(.1)
+    return False
+
+
 def seed_baseline(base, evidence, external):
     record = synthetic_reference(base, external)
     host = PrivateHost(base, evidence, 'baseline-fixtures', offline=True)
@@ -488,9 +523,47 @@ def desktop_scenarios(root, evidence, report, label):
                 'No matching recorded analyses. Clear the search and press Search to show recent runs.')
         require(not ui.user.IsWindowEnabled(ui.child(1505, owner)), 'Empty result search left View enabled.')
         capture(ui, report, label + '-results-keyboard.bmp', owner)
+        passed(report, label + '-results-keyboard', label + ': keyboard query, Tab and Space operate results search, report zero matches and disable View.')
+        observation = {'beforeEscape': focus_observation(ui, keys, owner)}
+        report.setdefault('resultsEscape', {})[label] = observation
         keys.key(0x1B)
-        ui.wait('Escape closes results and retains the desktop', lambda: not window() and ui.user.IsWindowVisible(ui.main))
-        passed(report, label + '-results-keyboard-escape', label + ': keyboard query, Tab and Space operate results search; Escape closes only the results window.')
+        closed = observe_close(ui, window)
+        observation.update(closedAfterKeyboardSearch=closed, afterEscape=focus_observation(ui, keys, owner))
+        if closed:
+            passed(report, label + '-results-escape', label + ': Escape immediately after keyboard search closes only the results window.')
+        else:
+            failed(report, label + '-results-escape', label + ': real Escape after keyboard Search leaves the published results window open; this keyboard acceptance requirement failed.')
+            capture(ui, report, label + '-results-escape-failed.bmp', owner)
+            screen, _ = ui.screen_capture(label + '-results-escape-visible-screen.bmp', ui.bounds(owner))
+            screen['dpi'] = ui.user.GetDpiForWindow(owner)
+            report['captures'].append(screen)
+            limitation = ('Published 0.16.0 results-window Escape after keyboard Search failed in this gate. '
+                          'Any subsequent focus diagnostic or Close-button workaround does not satisfy that failed requirement.')
+            if limitation not in report['limits']:
+                report['limits'].append(limitation)
+            # Diagnose a possible focus loss without replacing the failed
+            # natural keyboard interaction above. This is a separate physical
+            # click into the query, followed by a second genuine Escape key.
+            left, top, right, bottom = ui.bounds(query)
+            ui.click_at((left + right) // 2, (top + bottom) // 2, expected=query)
+            diagnostic = {'scope': 'Additional explicit-focus diagnostic; does not replace original failed Escape.',
+                          'beforeEscape': focus_observation(ui, keys, owner)}
+            require(diagnostic['beforeEscape']['focusWindow'] == query, 'Diagnostic pointer click did not focus the query.')
+            keys.key(0x1B)
+            diagnostic['closed'] = observe_close(ui, window)
+            diagnostic['afterEscape'] = focus_observation(ui, keys, owner)
+            observation['explicitQueryFocusDiagnostic'] = diagnostic
+            if not diagnostic['closed']:
+                capture(ui, report, label + '-results-focused-escape-failed.bmp', owner)
+                close_button = unique_button(ui, owner, 'Close')
+                left, top, right, bottom = ui.bounds(close_button)
+                ui.click_at((left + right) // 2, (top + bottom) // 2, expected=close_button)
+                ui.wait('visible Close button closes results and retains desktop', lambda:
+                        not window() and ui.user.IsWindowVisible(ui.main))
+                observation['visibleCloseButtonFallback'] = {'tested': True, 'closed': True}
+                passed(report, label + '-results-close-fallback', label + ': after the recorded Escape failure, physically clicking the visible Close button closes results and retains the desktop.')
+            else:
+                observation['visibleCloseButtonFallback'] = {'tested': False}
     except Exception:
         for number, window in enumerate(ui.windows()):
             capture(ui, report, label + '-failure-%d.bmp' % number, window)
@@ -610,7 +683,8 @@ def run(args, report):
     if args.bundle_root:
         verify_bundle(args.bundle_root, args.bundle_manifest_sha256)
     report['observedDpi'] = sorted({row['dpi'] for row in report['captures']})
-    report['nativeWindowsExecuted'] = report['nativeGUIValidated'] = True
+    report['nativeWindowsExecuted'] = True
+    report['nativeGUIObservationsCompleted'] = True
 
 
 def main():
@@ -628,10 +702,10 @@ def main():
               'sourceCommit': args.source_commit, 'gateCommit': args.gate_commit, 'gateSha256': sha256(__file__),
               'platform': platform.platform(), 'startedUtc': utc(), 'archives': {}, 'checks': [],
               'scenarios': [], 'captures': [], 'skips': [], 'limits': list(LIMITS),
-              'nativeWindowsExecuted': False, 'nativeGUILaunched': False, 'nativeGUIValidated': False}
+              'nativeWindowsExecuted': False, 'nativeGUILaunched': False, 'nativeGUIValidated': False,
+              'nativeGUIObservationsCompleted': False}
     try:
         run(args, report)
-        report['success'] = True
     except Exception as error:
         report['failure'] = str(error)
         report['traceback'] = traceback.format_exc()
@@ -639,7 +713,7 @@ def main():
                                     'observedAt': utc(), 'note': 'Native gate did not complete; review retained raw diagnostics.'})
     finally:
         report['finishedUtc'] = utc()
-        report['passed'] = len(report['checks'])
+        finalize_report(report)
         write_json(args.report, report)
         if args.bundle_manifest_sha256:
             require(re.fullmatch('[0-9a-f]{64}', args.bundle_manifest_sha256), 'Invalid bundle manifest identity.')

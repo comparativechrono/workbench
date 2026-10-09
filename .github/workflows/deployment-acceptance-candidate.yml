@@ -136,10 +136,15 @@ jobs:
           $python = Join-Path $app 'runtime/python/python.exe'
           $evidence = Join-Path $env:RUNNER_TEMP 'deployment-evidence'
           & $python -I -B scripts/check_deployment_ui_windows.py --bundle-root $bundle --app-root $app --baseline-archive (Join-Path $bundle 'archives/native-workbench-0.11.0-starter-windows.zip') --update-root (Join-Path $bundle 'updater') --starter-archive (Join-Path $bundle 'archives/native-workbench-0.16.0-starter-windows.zip') --update-archive (Join-Path $bundle 'archives/native-workbench-0.16.0-update-from-0.11.0.zip') --work (Join-Path $case 'ui-work') --report (Join-Path $evidence 'native-ui/native-deployment-ui.json') --source-commit e855dc4396e0c16ae35f4e840eb9cc734adb4441 --gate-commit $env:GITHUB_SHA
-          if ($LASTEXITCODE -ne 0) { throw 'Native deployment interaction gate failed' }
+          $nativeExit = $LASTEXITCODE
           $helper = Join-Path $bundle 'toolkit/scripts/deployment_acceptance.py'
-          & $python -I -B $helper import-automated --bundle-root $bundle --report (Join-Path $evidence 'acceptance.json') --automated-report (Join-Path $evidence 'native-ui/native-deployment-gate.json')
-          if ($LASTEXITCODE -ne 0) { throw 'Automated observation import failed' }
+          $summary = Join-Path $evidence 'native-ui/native-deployment-gate.json'
+          if (Test-Path $summary) {
+            & $python -I -B $helper import-automated --bundle-root $bundle --report (Join-Path $evidence 'acceptance.json') --automated-report $summary
+            if ($LASTEXITCODE -ne 0) { throw 'Automated observation import failed' }
+          }
+          if ($nativeExit -ne 0) { throw 'Native deployment interaction checks failed; observed failures remain in the retained reports' }
+          if (-not (Test-Path $summary)) { throw 'Completed native gate omitted its bounded summary' }
       - name: Run curated science and results on a separate copy of the frozen Starter
         if: ${{ !cancelled() && steps.prepare.conclusion == 'success' }}
         shell: pwsh

@@ -240,6 +240,50 @@
       "layoutLimitation": "The hosted desktop is 1024 pixels wide; the published application minimum width is 1040, leaving its edge clipped. This run does not establish acceptance on that narrower display.",
       "followup": "Match the exact published empty-results text while retaining the zero-row and disabled-action assertions; repeat both complete path gates.",
       "manualAcceptance": "not-tested"
+    },
+    {
+      "toolkitCommit": "a03250e0b6f27aadff8de639d040d08ade534ad6",
+      "runId": 37977108820,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37977108820",
+      "result": "failed",
+      "sourceTests": {
+        "passed": 86,
+        "failed": 0,
+        "skipped": 0
+      },
+      "bundle": {
+        "sha256": "3917d980897a52e66c808d11c939d63cd1b942b3ec9538aa9ca8cb741ed248ee",
+        "manifestSha256": "c125edc238ce54244de155e6332743e541f8d59acbfb0b230aa9185bca5b4a89"
+      },
+      "windows": [
+        {
+          "pathCase": "ordinary",
+          "jobId": 113978236167,
+          "artifactId": 11638928140,
+          "artifactSha256": "0a936184c20054b76acc9bb3da4d2fceffe688568d647ba68f5ca42d8bd892aa"
+        },
+        {
+          "pathCase": "path with spaces",
+          "jobId": 113978236207,
+          "artifactId": 11639437444,
+          "artifactSha256": "1377f78cade96eb8606bedfca9eee845ef485b2674cf2350c588ddacdd93f171"
+        }
+      ],
+      "passedScopeBothPaths": [
+        "kit preparation and actual updater scopes",
+        "fresh Starter selection, keyboard focus and resizing",
+        "keyboard results search produced zero rows, correct published guidance and disabled View",
+        "11 curated workflow/results checks",
+        "72 Authenticode observations",
+        "final immutable-kit and manual-untested checks"
+      ],
+      "nativeFailure": {
+        "checksCompleted": 10,
+        "captures": 15,
+        "reason": "Actual Escape after the keyboard results search did not close the published Results window in either path. Upgraded desktop observations were not reached. Unlike earlier test-oracle mistakes, this is retained as an observed keyboard behavior failure; the internal mechanism is not established."
+      },
+      "followup": "Keep Escape failed, capture focus/foreground and a separately focused diagnostic, close through the actual visible Close control when necessary, and finish upgraded desktop observations. Import failed automated observations without changing manual status. Keep CI nonzero for failed acceptance; do not alter frozen app bytes.",
+      "manualAcceptance": "not-tested"
     }
   ],
   "localPreviewExcluded": {
