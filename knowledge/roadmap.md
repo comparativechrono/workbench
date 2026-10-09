@@ -1,5 +1,34 @@
 # Development roadmap
 
+## Active set: Windows acceptance and deployment preparation
+
+The owner accepted this bounded set on **2026-10-09** with “okay, lets do that”.
+[Draft PR #14](https://github.com/comparativechrono/workbench/pull/14) implements
+an unpublished companion around unchanged published **0.16.0**: verified offline
+kit, file/executable/runtime/licence inventories, structured tester reporting and
+native updater folder-picker/desktop checks. It does not create a new app release.
+
+Exact observations and 54 screenshot reviews are complete for tooling commit
+1a7d1e5f70e3ca710c9b3f6b1313353e8d46cc78,
+[run 37979351047](https://github.com/comparativechrono/workbench/actions/runs/37979351047).
+All 87 source tests passed. Each Windows path recorded 14 native passes,
+**two failed Results Escape checks**, 11 curated passes and 72 signature
+observations. CI remains failed and all 10 manual acceptance items remain untested.
+The 1040-pixel minimum app width also clips on the hosted 1024-pixel desktop.
+The [handover](deployment-acceptance-handover.md) owns exact evidence and limits.
+
+**Next development action:** fix Results keyboard focus/Escape in a separately
+versioned application candidate; address or explicitly bound narrow-display
+behavior. Preserve published 0.16.0 bytes and repeat exact ordinary/spaced gates
+for any changed app. Successful integrity and science checks do not waive the
+failed desktop requirement.
+
+Representative-PC/high-DPI/multiple-monitor/physical-trackpad and managed-machine
+observations remain outstanding. Signing needs a controlled identity, and
+institutional deployment needs actual IT approval. Benchmarking is handled
+separately. Scientific Linux CWL profiles and SDK/build-recovery consolidation
+remain later sets.
+
 ## Current release and remaining work
 
 The owner authorized a new release on 2026-10-09 with

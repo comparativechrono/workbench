@@ -1,5 +1,25 @@
 # Native Workbench knowledge base
 
+**Active development, 2026-10-09:**
+[Draft PR #14](https://github.com/comparativechrono/workbench/pull/14) contains the
+unpublished Windows acceptance and deployment companion for unchanged published
+**0.16.0**. Implementation, exact-kit observations and 54 screenshot reviews are
+complete. Tooling commit: 1a7d1e5f70e3ca710c9b3f6b1313353e8d46cc78;
+[final run](https://github.com/comparativechrono/workbench/actions/runs/37979351047).
+All 87 companion source tests passed. Each Windows path recorded 14 native passes,
+**two failed Results Escape checks**, and 11 curated passes. CI remains failed.
+The hosted 1024-pixel desktop also clips the app's 1040-pixel minimum width.
+
+Start with the [companion handover](deployment-acceptance-handover.md),
+[tester guide](../docs/deployment-acceptance.md) and
+[IT review guide](../docs/institutional-deployment.md). All 10 manual checks remain
+untested; representative PCs, high DPI, multiple monitors, physical trackpads,
+managed-machine approval and signing remain external work. Next application work
+is a separately versioned keyboard focus/Escape fix and narrow-display handling
+or an explicit supported-display boundary. Benchmarking is separate; scientific
+Linux CWL and SDK/build recovery remain later sets. The published record below is
+unchanged.
+
 **Current release, 2026-10-09:**
 [0.16.0 development prerelease](https://github.com/comparativechrono/workbench/releases/tag/app-v0.16.0),
 packaged source `e855dc4396e0c16ae35f4e840eb9cc734adb4441`.

@@ -1,0 +1,241 @@
+{
+  "schemaVersion": 1,
+  "kind": "deployment-acceptance-visual-review",
+  "recordedOn": "2026-10-09",
+  "toolkitCommit": "1a7d1e5f70e3ca710c9b3f6b1313353e8d46cc78",
+  "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+  "bundleManifestSha256": "9e9fd96a0ad6e5bfe44d4803b97c8241534f67f176f8688588616388847fe650",
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37979351047",
+  "complete": true,
+  "totalCapturesReviewed": 54,
+  "native": {
+    "capturesReviewed": 42,
+    "uniqueCaptureHashes": 28,
+    "reviewCounts": {
+      "boundedVisualPass": 18,
+      "knownFinding": 24
+    },
+    "method": "All 42 images reviewed on six contact sheets; nine significant captures also reviewed at full resolution. These are visual classifications, not native gate pass counts.",
+    "allCaptureHashesBytesDimensionsMatchNativeReports": true,
+    "filesPerPath": [
+      {
+        "path": "native-ui/updater-cancel-picker.bmp",
+        "review": "bounded-visual-pass"
+      },
+      {
+        "path": "native-ui/updater-invalid-picker.bmp",
+        "review": "bounded-visual-pass"
+      },
+      {
+        "path": "native-ui/updater-invalid-warning.bmp",
+        "review": "bounded-visual-pass"
+      },
+      {
+        "path": "native-ui/updater-invalid-retry-picker.bmp",
+        "review": "bounded-visual-pass"
+      },
+      {
+        "path": "native-ui/updater-install-picker.bmp",
+        "review": "bounded-visual-pass"
+      },
+      {
+        "path": "native-ui/updater-install-success.bmp",
+        "review": "bounded-visual-pass"
+      },
+      {
+        "path": "native-ui/updater-repeat-picker.bmp",
+        "review": "bounded-visual-pass"
+      },
+      {
+        "path": "native-ui/updater-repeat-success.bmp",
+        "review": "bounded-visual-pass"
+      },
+      {
+        "path": "native-ui/fresh-first-open-starter.bmp",
+        "review": "bounded-visual-pass"
+      },
+      {
+        "path": "native-ui/fresh-keyboard-focus.bmp",
+        "review": "known-minimum-width-clipping"
+      },
+      {
+        "path": "native-ui/fresh-resize-1040x680.bmp",
+        "review": "known-minimum-width-clipping"
+      },
+      {
+        "path": "native-ui/fresh-resize-1280x900.bmp",
+        "review": "known-minimum-width-clipping"
+      },
+      {
+        "path": "native-ui/fresh-results-keyboard.bmp",
+        "review": "known-results-focus-failure"
+      },
+      {
+        "path": "native-ui/fresh-results-escape-failed.bmp",
+        "review": "known-results-focus-failure"
+      },
+      {
+        "path": "native-ui/fresh-results-escape-visible-screen.bmp",
+        "review": "known-results-focus-failure"
+      },
+      {
+        "path": "native-ui/upgraded-keyboard-focus.bmp",
+        "review": "known-minimum-width-clipping"
+      },
+      {
+        "path": "native-ui/upgraded-resize-1040x680.bmp",
+        "review": "known-minimum-width-clipping"
+      },
+      {
+        "path": "native-ui/upgraded-resize-1280x900.bmp",
+        "review": "known-minimum-width-clipping"
+      },
+      {
+        "path": "native-ui/upgraded-results-keyboard.bmp",
+        "review": "known-results-focus-failure"
+      },
+      {
+        "path": "native-ui/upgraded-results-escape-failed.bmp",
+        "review": "known-results-focus-failure"
+      },
+      {
+        "path": "native-ui/upgraded-results-escape-visible-screen.bmp",
+        "review": "known-results-focus-failure"
+      }
+    ],
+    "fullResolution": [
+      {
+        "case": "ordinary",
+        "files": [
+          "fresh-first-open-starter.bmp",
+          "fresh-keyboard-focus.bmp",
+          "fresh-resize-1040x680.bmp",
+          "fresh-results-escape-visible-screen.bmp",
+          "upgraded-results-escape-visible-screen.bmp"
+        ]
+      },
+      {
+        "case": "spaces",
+        "files": [
+          "upgraded-resize-1280x900.bmp",
+          "fresh-results-escape-visible-screen.bmp",
+          "upgraded-results-escape-visible-screen.bmp",
+          "updater-repeat-picker.bmp"
+        ]
+      }
+    ],
+    "findings": [
+      "Updater warning/success/picker text and actions fit; Starter setup shows the selected installed Starter and no download requirement.",
+      "Main window minimum width 1040 exceeds the observed 1024-pixel work area by 16 pixels. Requested 1280x900 yields actual 1040x728.",
+      "Results layout is readable, but Search then Escape leaves the foreground window open with null focus. The query-focus diagnostic then closes on Escape; the visible Close fallback was not tested.",
+      "No additional fixed-control overlap observed. Long tree/path text truncates within viewports; settings use a scrolling panel."
+    ]
+  },
+  "curated": {
+    "capturesReviewed": 12,
+    "method": "All six captures per path inspected individually at their recorded dimensions.",
+    "allCaptureHashesDimensionsMatchReports": true,
+    "filesPerPath": [
+      {
+        "path": "curated/curated-native-catalogue.bmp"
+      },
+      {
+        "path": "curated/curated-native-loaded-workflow.bmp"
+      },
+      {
+        "path": "curated/results-native-filtered-summary.bmp"
+      },
+      {
+        "path": "curated/results-native-failed-preparation.bmp"
+      },
+      {
+        "path": "curated/results-native-failure-guidance.bmp"
+      },
+      {
+        "path": "curated/results-native-empty-search.bmp"
+      }
+    ],
+    "findings": [
+      "Catalogue labels, synthetic inputs, expected answers and dependency availability are readable; long content uses visible scroll areas.",
+      "Loaded editable workflow and selected tool/options are readable; graph labels use ellipses and the graph viewport scrolls. The 1040-wide main window retains the known desktop-width limitation.",
+      "Results show recorded measurements without a QC verdict, actionable missing-input guidance, and correct disabled actions for unavailable or unmatched results. Dialog controls fit without additional overlap."
+    ]
+  },
+  "paths": [
+    {
+      "case": "ordinary",
+      "artifact": {
+        "id": 11639996891,
+        "url": "https://github.com/comparativechrono/workbench/actions/runs/37979351047/artifacts/11639996891",
+        "bytes": 1062332,
+        "sha256": "e5ed812e02c891607fecc99dc55fffd83e7ce3c33bc93327232974f23719fb96",
+        "expiresAt": "2026-11-08T19:20:16Z"
+      },
+      "nativeReport": {
+        "path": "native-ui/native-deployment-ui.json",
+        "bytes": 27847,
+        "sha256": "2390156dea79001009ab8316387d79312740e9b84525db0d3d41ae2392314e32",
+        "toolkitCommit": "1a7d1e5f70e3ca710c9b3f6b1313353e8d46cc78",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "bundleManifestSha256": "9e9fd96a0ad6e5bfe44d4803b97c8241534f67f176f8688588616388847fe650",
+        "passed": 14,
+        "failed": 2,
+        "blocked": 0,
+        "skipped": 0,
+        "nativeGUIObservationsCompleted": true,
+        "nativeGUIValidated": false,
+        "success": false,
+        "failedScenarios": [
+          "fresh-results-escape",
+          "upgraded-results-escape"
+        ],
+        "captures": 21,
+        "coreFilesVerified": 87,
+        "preservedFiles": 163,
+        "freshInstalledPackFilesUnchanged": 186
+      },
+      "curatedReportPath": "curated/native-curated.json"
+    },
+    {
+      "case": "spaces",
+      "artifact": {
+        "id": 11640790831,
+        "url": "https://github.com/comparativechrono/workbench/actions/runs/37979351047/artifacts/11640790831",
+        "bytes": 1064359,
+        "sha256": "f1cb68078cfc0893af581fd253e0c244bfdfbe90772323d5d796b155c26b68cf",
+        "expiresAt": "2026-11-08T19:20:15Z"
+      },
+      "nativeReport": {
+        "path": "native-ui/native-deployment-ui.json",
+        "bytes": 27887,
+        "sha256": "279b9a98f86821263eb03bab133b7d50c0a924ea34db58b74c696a0fddb5a5b6",
+        "toolkitCommit": "1a7d1e5f70e3ca710c9b3f6b1313353e8d46cc78",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "bundleManifestSha256": "9e9fd96a0ad6e5bfe44d4803b97c8241534f67f176f8688588616388847fe650",
+        "passed": 14,
+        "failed": 2,
+        "blocked": 0,
+        "skipped": 0,
+        "nativeGUIObservationsCompleted": true,
+        "nativeGUIValidated": false,
+        "success": false,
+        "failedScenarios": [
+          "fresh-results-escape",
+          "upgraded-results-escape"
+        ],
+        "captures": 21,
+        "coreFilesVerified": 87,
+        "preservedFiles": 163,
+        "freshInstalledPackFilesUnchanged": 186
+      },
+      "curatedReportPath": "curated/native-curated.json"
+    }
+  ],
+  "allLayoutPass": false,
+  "keyboardAcceptancePassed": false,
+  "limits": [
+    "Hosted 96-DPI geometry only; no high-DPI/representative-PC acceptance.",
+    "Screenshot review does not replace interaction assertions; both native gates retain 14 passes and 2 failures.",
+    "Per-file hashes/dimensions were verified against original reports before workspace failure; their complete index could not be recovered for this receipt. Original image metadata and BMPs remain in the exact hashed artifacts. No unavailable per-file values are fabricated."
+  ]
+}

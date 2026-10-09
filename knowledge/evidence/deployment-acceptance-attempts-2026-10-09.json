@@ -1,0 +1,399 @@
+{
+  "schemaVersion": 1,
+  "kind": "deployment-acceptance-attempt-history",
+  "applicationVersion": "0.16.0",
+  "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+  "attempts": [
+    {
+      "toolkitCommit": "f248b1f6f751fbfe5746b1a53c2554de58545cfd",
+      "runId": 37974469974,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37974469974",
+      "result": "failed",
+      "sourceTests": {
+        "passed": 80,
+        "failed": 0,
+        "skipped": 0
+      },
+      "bundle": {
+        "bytes": 126484004,
+        "sha256": "c938da7c2d707a45526e98d9d05520f701dc3449b0124687ddd0afe5ff78fb48",
+        "manifestSha256": "269f495b33010cc293c6759517698be4ac68e41295911b9069863ee02c3efe61"
+      },
+      "windows": [
+        {
+          "pathCase": "ordinary",
+          "jobId": 113969235536,
+          "artifactId": 11636629862,
+          "artifactSha256": "9ffc431ad04fc84ab30b126a2c770746cc859b2b2c4b9149682aa6889eb7d02c"
+        },
+        {
+          "pathCase": "path with spaces",
+          "jobId": 113969235433,
+          "artifactId": 11638288411,
+          "artifactSha256": "b33d7d47dedc3d5e43d96de58ab231fb8b86731e07223380ddc268f613c4da13"
+        }
+      ],
+      "passedScopeBothPaths": [
+        "complete extracted bundle verification",
+        "actual packaged verify.cmd",
+        "manual report initialisation with all checks untested",
+        "274-file external test-copy preparation"
+      ],
+      "failure": "Signature collector returned nonzero and retained only a generic unavailable reason. Root cause was not established by this attempt.",
+      "skippedBothPaths": [
+        "native updater and desktop gate",
+        "curated workflow/results regression",
+        "final immutable-bundle recheck"
+      ],
+      "manualAcceptance": "not-tested",
+      "followup": "Add bounded collector stage/type/line diagnostics and run independent Windows scopes even when another scope fails. Do not bypass security policy or infer a native pass."
+    },
+    {
+      "toolkitCommit": "d46373ca61323762f03477732217d0459a92dc8a",
+      "runId": 37975088967,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37975088967",
+      "result": "failed",
+      "sourceTests": {
+        "passed": 83,
+        "failed": 0,
+        "skipped": 0
+      },
+      "bundle": {
+        "sha256": "4858fa886d51beb8db0b8fe87e74482dca56e597aa4b55cf68f5ae2a9e43973e",
+        "manifestSha256": "2d25c7e32bf3cb39dfdd440e444ada5d0820bbb3ae379123abf73d00f6cdf84f"
+      },
+      "windows": [
+        {
+          "pathCase": "ordinary",
+          "jobId": 113971366836,
+          "artifactId": 11638209597,
+          "artifactSha256": "1f604efff399e1795186458694fe7988c1b09eafd1c606938581e6b6adf82017"
+        },
+        {
+          "pathCase": "path with spaces",
+          "jobId": 113971367019,
+          "artifactId": 11637594600,
+          "artifactSha256": "2522b5caca7f2884c908e24fe08ff68c4862b418922a73086f6a7bd384411773"
+        }
+      ],
+      "passedScopeBothPaths": [
+        "83 source checks in shared bundle job",
+        "complete kit verification and packaged verify.cmd",
+        "274-file external copy and untested report",
+        "exact Starter/updater extracted-file comparison",
+        "published 0.11.0 native local-reference result and saved preset/pipeline fixtures",
+        "11 curated workflow/results checks with six captures",
+        "final immutable-bundle verification",
+        "all nine manual acceptance checks remain not-tested"
+      ],
+      "nativeFailure": {
+        "checksCompleted": 2,
+        "captures": 1,
+        "nativeWindowsExecuted": true,
+        "nativeGUILaunched": true,
+        "nativeGUIValidated": false,
+        "reason": "Cancellation fixture equality assertion compared Windows write_text CRLF bytes against a literal LF digest. Later updater and desktop scenarios were not reached."
+      },
+      "signatureFailure": {
+        "stage": "manifest-check",
+        "errorType": "System.Management.Automation.CommandNotFoundException",
+        "scriptLine": 58,
+        "exitCode": 2,
+        "command": "Get-FileHash"
+      },
+      "manualAcceptance": "not-tested",
+      "followup": "Correct portable fixture bytes and signature collector command availability, then repeat exact-kit Windows gates. No published application bytes or security policy changed."
+    },
+    {
+      "toolkitCommit": "de0fca66b774b2882beee8c9b2e5104f36a400d3",
+      "runId": 37975634597,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37975634597",
+      "result": "failed",
+      "sourceTests": {
+        "passed": 85,
+        "failed": 0,
+        "skipped": 0
+      },
+      "bundle": {
+        "sha256": "eb18c44a7dcc48a74688dd8cf599c278962271ce640ca9057d0255c417f8f15a",
+        "manifestSha256": "b2820d3c7a41057084d72ec6b8f1f7657e91ab671abfef7c5f026eef9e36714d"
+      },
+      "windows": [
+        {
+          "pathCase": "ordinary",
+          "jobId": 113973206844,
+          "artifactId": 11638786185,
+          "artifactSha256": "fdd24390c5ef80a9f4e72154e37b9bd80bc0315c7ea0aa7e2069e77e5a7ba5bd"
+        },
+        {
+          "pathCase": "path with spaces",
+          "jobId": 113973206718,
+          "artifactId": 11639445184,
+          "artifactSha256": "1b398dac95a1d8223407bf3fc2f32d85eba28592a49d598cf23a9b6c7816d579"
+        }
+      ],
+      "passedScopeBothPaths": [
+        "complete kit and packaged launcher verification",
+        "external copy and all manual checks untested",
+        "exact extracted Starter/updater identities",
+        "native 0.11.0 fixtures",
+        "actual updater cancellation with unchanged three fixture trees",
+        "11 curated workflow/results checks",
+        "72 actual Authenticode observations: 60 Valid, 12 NotSigned",
+        "final immutable-kit verification"
+      ],
+      "nativeFailure": {
+        "checksCompleted": 3,
+        "captures": 4,
+        "reason": "The invalid-folder warning correctly appeared, but test driver assumed its OK control ID was 1. Actual owned control evidence showed OK as ID 2. Install, repeat and desktop scenarios were not reached."
+      },
+      "followup": "Use the unique observed enabled visible OK button within the exact owned message window, preserving actual pointer hit and foreground checks. Repeat both path gates.",
+      "manualAcceptance": "not-tested"
+    },
+    {
+      "toolkitCommit": "60959a2af7f3fbf4f6dfa1db37442a390d11d309",
+      "runId": 37976012013,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37976012013",
+      "result": "failed",
+      "sourceTests": {
+        "passed": 86,
+        "failed": 0,
+        "skipped": 0
+      },
+      "bundle": {
+        "sha256": "b11436762fb756781a2758d0bd834a9b2c2b6b99b3b24ef8e7b24f02036ced1b",
+        "manifestSha256": "ca02589c6efd0bba5d43af9896754f3ba56358b32137b893ee00e8508fd4f101"
+      },
+      "windows": [
+        {
+          "pathCase": "ordinary",
+          "jobId": 113974530338,
+          "artifactId": 11638811733,
+          "artifactSha256": "57924e55041323975a942e93d251ea7de43ea0937e6aafd3f57a18cea561d5f9"
+        },
+        {
+          "pathCase": "path with spaces",
+          "jobId": 113974530437,
+          "artifactId": 11638382069,
+          "artifactSha256": "b58f1cfd1c9cd46335afeb44474c2da7cfab2281c44d8f76defe0b95323dc272"
+        }
+      ],
+      "passedScopeBothPaths": [
+        "kit, launcher and external copy preparation",
+        "seven actual updater/input/fixture scopes including cancel, invalid selection, install, repeat and upgraded fixture readback",
+        "87 exact core files and 163 preserved fixture files; only allowed new one-NUL session lock",
+        "11 curated workflow/results checks",
+        "72 Authenticode observations (60 Valid, 12 NotSigned)",
+        "final immutable-kit and manual-untested checks"
+      ],
+      "nativeFailure": {
+        "checksCompleted": 7,
+        "captures": 10,
+        "reason": "The expected first-launch Tool Setup dialog obscured the fresh desktop search. The pointer visibility guard correctly refused the click; keyboard/resize/results desktop scopes were not reached."
+      },
+      "followup": "Select the offline Starter through the observed first-launch dialog, activate Use Workbench and wait for the dialog to close before desktop interactions. Retain physical hit guards and actual desktop bounds.",
+      "manualAcceptance": "not-tested"
+    },
+    {
+      "toolkitCommit": "87e6a807129fea0fa1a4f511ea07de403f5580bc",
+      "runId": 37976608710,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37976608710",
+      "result": "failed",
+      "sourceTests": {
+        "passed": 86,
+        "failed": 0,
+        "skipped": 0
+      },
+      "bundle": {
+        "sha256": "4ea298481e884b5b7005016057b0fa98ec8f84fdbc6937f8f2a62664ac15613b",
+        "manifestSha256": "de523fd6b86637a1cfa6d10e65d5fb3bd8856432a5a138eb4da919a910f7ae04"
+      },
+      "windows": [
+        {
+          "pathCase": "ordinary",
+          "jobId": 113976535298,
+          "artifactId": 11638662969,
+          "artifactSha256": "94cd6ad68aa87bd472803beb4277c6afda7c1a494ee870ff94cf11f22c783eae"
+        },
+        {
+          "pathCase": "path with spaces",
+          "jobId": 113976535218,
+          "artifactId": 11639606848,
+          "artifactSha256": "d8ab2ea0162936d35bbd1cbb28ffee93610d5adc03fce859927abf00a06ab265"
+        }
+      ],
+      "passedScopeBothPaths": [
+        "kit, launcher and external copy preparation",
+        "seven exact updater/input/fixture scopes",
+        "fresh real Starter selection and Use Workbench without installs or pack changes",
+        "fresh keyboard filtering and Tab/Shift+Tab focus",
+        "fresh resize observations at actual display bounds",
+        "11 curated workflow/results checks",
+        "72 Authenticode observations (60 Valid, 12 NotSigned)",
+        "final immutable-kit and manual-untested checks"
+      ],
+      "nativeFailure": {
+        "checksCompleted": 10,
+        "captures": 14,
+        "reason": "Results search produced the correct empty list and published text No matching recorded analyses. The validator incorrectly expected No matching result and timed out. Escape and upgraded desktop checks were not reached."
+      },
+      "layoutLimitation": "The hosted desktop is 1024 pixels wide; the published application minimum width is 1040, leaving its edge clipped. This run does not establish acceptance on that narrower display.",
+      "followup": "Match the exact published empty-results text while retaining the zero-row and disabled-action assertions; repeat both complete path gates.",
+      "manualAcceptance": "not-tested"
+    },
+    {
+      "toolkitCommit": "a03250e0b6f27aadff8de639d040d08ade534ad6",
+      "runId": 37977108820,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37977108820",
+      "result": "failed",
+      "sourceTests": {
+        "passed": 86,
+        "failed": 0,
+        "skipped": 0
+      },
+      "bundle": {
+        "sha256": "3917d980897a52e66c808d11c939d63cd1b942b3ec9538aa9ca8cb741ed248ee",
+        "manifestSha256": "c125edc238ce54244de155e6332743e541f8d59acbfb0b230aa9185bca5b4a89"
+      },
+      "windows": [
+        {
+          "pathCase": "ordinary",
+          "jobId": 113978236167,
+          "artifactId": 11638928140,
+          "artifactSha256": "0a936184c20054b76acc9bb3da4d2fceffe688568d647ba68f5ca42d8bd892aa"
+        },
+        {
+          "pathCase": "path with spaces",
+          "jobId": 113978236207,
+          "artifactId": 11639437444,
+          "artifactSha256": "1377f78cade96eb8606bedfca9eee845ef485b2674cf2350c588ddacdd93f171"
+        }
+      ],
+      "passedScopeBothPaths": [
+        "kit preparation and actual updater scopes",
+        "fresh Starter selection, keyboard focus and resizing",
+        "keyboard results search produced zero rows, correct published guidance and disabled View",
+        "11 curated workflow/results checks",
+        "72 Authenticode observations",
+        "final immutable-kit and manual-untested checks"
+      ],
+      "nativeFailure": {
+        "checksCompleted": 10,
+        "captures": 15,
+        "reason": "Actual Escape after the keyboard results search did not close the published Results window in either path. Upgraded desktop observations were not reached. Unlike earlier test-oracle mistakes, this is retained as an observed keyboard behavior failure; the internal mechanism is not established."
+      },
+      "followup": "Keep Escape failed, capture focus/foreground and a separately focused diagnostic, close through the actual visible Close control when necessary, and finish upgraded desktop observations. Import failed automated observations without changing manual status. Keep CI nonzero for failed acceptance; do not alter frozen app bytes.",
+      "manualAcceptance": "not-tested"
+    },
+    {
+      "toolkitCommit": "795cfa0b1f8bf2897b065356299309a187b5b790",
+      "runId": 37977917921,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37977917921",
+      "result": "failed-incomplete-observation-collection",
+      "sourceTests": {
+        "passed": 87,
+        "failed": 0,
+        "skipped": 0
+      },
+      "bundle": {
+        "sha256": "d562e120c350ea49374adcdf8aa05451ba03d4fa2f83c4c9a7dc24b45a277437",
+        "manifestSha256": "79bc8fa312bf785a17ecb5526a9e333216e4df741fccb97e2b8fe08db0f43398"
+      },
+      "windows": [
+        {
+          "pathCase": "ordinary",
+          "jobId": 113980902173,
+          "artifactId": 11639458449,
+          "artifactSha256": "097b3dde8f10c29c9dd227a7447e80f14c274578d1e121d11dadebe62b4e4f4e"
+        },
+        {
+          "pathCase": "path with spaces",
+          "jobId": 113980902005,
+          "artifactId": 11639039233,
+          "artifactSha256": "b26074d63ae4c6ea8aae9d04aeffda6df5a7f33e82de733a9b5ce026002ad833"
+        }
+      ],
+      "passedScopeBothPaths": [
+        "kit preparation and actual updater scopes",
+        "fresh Starter selection",
+        "failed automated summary imported with manual acceptance unchanged",
+        "11 curated workflow/results checks",
+        "72 Authenticode observations",
+        "final immutable-kit and manual-untested checks"
+      ],
+      "nativeFailure": {
+        "passed": 8,
+        "failed": 1,
+        "observationsCompleted": false,
+        "reason": "The driver asserted library focus immediately after queued SendInput pointer events. The focus had not yet advanced. Remaining desktop scopes were not reached in this attempt."
+      },
+      "followup": "Wait for the same actual focus postconditions after physical clicks; retain screen-hit/ownership checks, no click retries or synthetic SetFocus. Repeat full observations, preserving the separately observed published Escape failure.",
+      "manualAcceptance": "not-tested"
+    },
+    {
+      "toolkitCommit": "1a7d1e5f70e3ca710c9b3f6b1313353e8d46cc78",
+      "runId": 37979351047,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37979351047",
+      "result": "complete-observations-with-failed-keyboard-acceptance",
+      "workflowConclusion": "failure",
+      "sourceTests": {
+        "passed": 87,
+        "failed": 0,
+        "skipped": 0
+      },
+      "bundle": {
+        "sha256": "756489dce12acee16beee3d90da9142cb84e75a5580cabf4392490ce1f4107fa",
+        "manifestSha256": "9e9fd96a0ad6e5bfe44d4803b97c8241534f67f176f8688588616388847fe650"
+      },
+      "windows": [
+        {
+          "pathCase": "ordinary",
+          "jobId": 113985773070,
+          "artifactId": 11639996891,
+          "artifactSha256": "e5ed812e02c891607fecc99dc55fffd83e7ce3c33bc93327232974f23719fb96",
+          "nativePassed": 14,
+          "nativeFailed": 2,
+          "observationsCompleted": true,
+          "curatedPassed": 11,
+          "signatureObservations": 72,
+          "manualNotTested": 10
+        },
+        {
+          "pathCase": "spaces",
+          "jobId": 113985773101,
+          "artifactId": 11640790831,
+          "artifactSha256": "f1cb68078cfc0893af581fd253e0c244bfdfbe90772323d5d796b155c26b68cf",
+          "nativePassed": 14,
+          "nativeFailed": 2,
+          "observationsCompleted": true,
+          "curatedPassed": 11,
+          "signatureObservations": 72,
+          "manualNotTested": 10
+        }
+      ],
+      "nativeFailure": "Results Escape after keyboard Search failed on fresh and upgraded published 0.16.0 in both paths. No control had focus before or after Escape. Explicit pointer focus into the query then Escape closed; that diagnostic does not pass the original requirement. The internal application cause is not established. Visible Close fallback was not needed/tested.",
+      "layoutLimitation": "Published minimum width 1040 exceeds the hosted 1024-pixel desktop/work area; right edge clipped. Bounded resize assertions are not acceptance on that narrower display.",
+      "manualAcceptance": "not-tested",
+      "finalEvidence": "deployment-acceptance-final-2026-10-09.json"
+    }
+  ],
+  "localPreviewExcluded": {
+    "toolkitCommit": "de0fca66b774b2882beee8c9b2e5104f36a400d3",
+    "sha256": "59a30bdc54102a7eb556495dc8bf6985775fee4a2e2e1272648af020239a5a26",
+    "status": "rejected-by-acceptance-helper",
+    "reason": "Uncommitted knowledge edits made toolkitDirty true despite included toolkit files matching Git. This local preview is not the clean CI artifact and is excluded from tester evidence."
+  },
+  "branchRepair": {
+    "transientCommit": "24f915c3bb63a9014e882e691a2dc6b550aa0a6b",
+    "status": "corrected-and-excluded-from-delivered-history",
+    "reason": "A GitData tree call lacked its base tree and briefly moved the work branch to an incomplete two-file tree. An expected-head lease immediately restored the complete local index tree. Main, releases and local files were unchanged.",
+    "deliveredCheckpoint": "1a7d1e5f70e3ca710c9b3f6b1313353e8d46cc78",
+    "verifiedFullTree": "6ef5ac330f7ea7026d382312641e70e1e91d01c9",
+    "prevention": "Require the exact existing base tree and verify every expected path/mode/blob before moving a branch ref."
+  },
+  "deliveryRecovery": {
+    "problem": "Workspace executor disconnected after validation, local documentation preparation and independent count/hash review.",
+    "recoveredThrough": "GitHub API using the exact existing branch tree, stored artifact metadata, completed review observations and original reports retained in Actions.",
+    "limits": "Original report copies and detailed per-image receipts could not be read from the disconnected local workspace. Durable aggregate receipts reference exact artifact hashes and known native report hashes; no unavailable values are invented. Original reports/screenshots remain downloadable until 2026-11-08."
+  }
+}
