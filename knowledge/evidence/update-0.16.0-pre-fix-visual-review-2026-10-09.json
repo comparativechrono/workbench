@@ -1,0 +1,152 @@
+{
+  "schema": 1,
+  "sourceCommit": "7a9aca71ddd4816b51dbe693873f42fa50a6b746",
+  "runId": 37949918855,
+  "reviews": [
+    {
+      "schema": 1,
+      "reviewedOn": "2026-10-09",
+      "case": "ordinary",
+      "sourceCommit": "7a9aca71ddd4816b51dbe693873f42fa50a6b746",
+      "validatorCommit": "d66401191005db0bdf32b1f76d3fe3318fa14ad4",
+      "runId": 37949918855,
+      "updateSha256": "b0ac85144deaca9008df11d025b157ca6be6977874c19637a6a525da573d2395",
+      "status": "passed",
+      "captures": [
+        {
+          "path": "curated-native-catalogue.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "ea4f2ec25c0dd698869a3bba5572b0feed7aa03d7531178beb91d85f0f5fa9c4"
+        },
+        {
+          "path": "curated-native-loaded-workflow.bmp",
+          "width": 1040,
+          "height": 728,
+          "sha256": "e7e78723091f8f82f6dc6694897d81d8412ec2b9dc0d0ea4bdbdecb92d53cc5a"
+        },
+        {
+          "path": "results-native-filtered-summary.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "ca6b5674d922aa0086ecfd416f543a51a5613cce50979bd5d45433f6c37b2fa1"
+        },
+        {
+          "path": "results-native-failed-preparation.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "f79ffd64c9e76f76badbb264932c30d6faa65231d3396d8908de5520eda618f6"
+        },
+        {
+          "path": "results-native-failure-guidance.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "585d4f7a37f1758fa575ff6a88e48aa9d18929de3f75b9fd4efacec322dc5b95"
+        },
+        {
+          "path": "results-native-empty-search.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "9f64c6c24f3c8bed991091f43d3491ac6737013af7121612ee57bf0a7fb7e38d"
+        }
+      ],
+      "scope": "Six exact native post-upgrade captures inspected at96DPI. No overlapping fixed controls or unintended label/button clipping. Intentional scroll panes, graph viewport clipping/title ellipses and results tool-column ellipsis remain. Failure guidance and no-QC-threshold interpretation readable; empty search clears results and disables actions. No physical trackpad, high-DPI, multi-monitor or temporal claim."
+    },
+    {
+      "schema": 1,
+      "reviewedUtc": "2026-10-09T15:16:00.587400+00:00",
+      "reviewer": "critical_review",
+      "workflowRun": 37949918855,
+      "pathCase": "spaces",
+      "sourceCommit": "7a9aca71ddd4816b51dbe693873f42fa50a6b746",
+      "validatorCommit": "d66401191005db0bdf32b1f76d3fe3318fa14ad4",
+      "updateSha256": "b0ac85144deaca9008df11d025b157ca6be6977874c19637a6a525da573d2395",
+      "nativeReport": "update-spaces/curated/native-curated.json",
+      "nativeReportSha256": "9710af932e4fbee083b9c858f6fc7238741d89796fd9545a187cd0574ba0f77c",
+      "dpi": 96,
+      "capturesReviewed": 6,
+      "result": "pass",
+      "blockingFindings": [],
+      "captures": [
+        {
+          "path": "curated-native-catalogue.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "ea4f2ec25c0dd698869a3bba5572b0feed7aa03d7531178beb91d85f0f5fa9c4",
+          "reviewedFormat": "PNG converted from BMP without changing dimensions or RGB pixels",
+          "captureHashVerified": true,
+          "pixelIdentityVerified": true,
+          "result": "pass",
+          "finding": "Workflow names, availability, section labels and all action buttons are readable and separated. Longer requirement and notice text continues inside visible scroll panes; bottom-line clipping is viewport scrolling, not a fixed control overlap."
+        },
+        {
+          "path": "curated-native-loaded-workflow.bmp",
+          "width": 1040,
+          "height": 728,
+          "sha256": "e7e78723091f8f82f6dc6694897d81d8412ec2b9dc0d0ea4bdbdecb92d53cc5a",
+          "reviewedFormat": "PNG converted from BMP without changing dimensions or RGB pixels",
+          "captureHashVerified": true,
+          "pixelIdentityVerified": true,
+          "result": "pass",
+          "finding": "Navigation, workflow actions, tool-option labels and connected-source buttons are readable without overlap. Node-title ellipses and the right edge of the partially visible DAG node occur within the explicitly scrollable canvas."
+        },
+        {
+          "path": "results-native-filtered-summary.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "d19ae9bb2d615915ff7e28bf2d1c8f3f2ce613634a0d27cb3442c76fcf64e7e6",
+          "reviewedFormat": "PNG converted from BMP without changing dimensions or RGB pixels",
+          "captureHashVerified": true,
+          "pixelIdentityVerified": true,
+          "result": "pass",
+          "finding": "Search, selected analysis, status, sample, started time, measured-result disclaimer and actions are readable. The long Tools cell is ellipsized and remaining metrics continue in the visible summary scroll pane."
+        },
+        {
+          "path": "results-native-failed-preparation.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "015ea4c7198e7454bec248b4f2e275a6280f8cc3b6f5421b18a20cc2b8fed2a1",
+          "reviewedFormat": "PNG converted from BMP without changing dimensions or RGB pixels",
+          "captureHashVerified": true,
+          "pixelIdentityVerified": true,
+          "result": "pass",
+          "finding": "Missing-input diagnosis, missing scientific-evidence notice and next steps are readable. Action states are consistent with the shown failed preparation; no labels or buttons overlap."
+        },
+        {
+          "path": "results-native-failure-guidance.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "bf719b35326b59e609f10840140c9dc2e47f3671344465847af770ee32f16db5",
+          "reviewedFormat": "PNG converted from BMP without changing dimensions or RGB pixels",
+          "captureHashVerified": true,
+          "pixelIdentityVerified": true,
+          "result": "pass",
+          "finding": "Scrolled guidance displays the missing path, restore-or-rerun advice and no-invented-threshold interpretation clearly. Wrapped lines stay inside the summary pane and footer/actions remain separate."
+        },
+        {
+          "path": "results-native-empty-search.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "9f64c6c24f3c8bed991091f43d3491ac6737013af7121612ee57bf0a7fb7e38d",
+          "reviewedFormat": "PNG converted from BMP without changing dimensions or RGB pixels",
+          "captureHashVerified": true,
+          "pixelIdentityVerified": true,
+          "result": "pass",
+          "finding": "Empty search shows no stale selected row or summary, gives the clear-search instruction, and disables both result actions. Fixed labels and buttons remain readable."
+        }
+      ],
+      "limits": [
+        "Visual review is limited to these six retained hosted Windows captures at 96 DPI.",
+        "Intentional scroll-pane and DAG viewport clipping and list-cell ellipses are distinguished from fixed-control overlap.",
+        "This review does not establish high-DPI, multi-monitor, physical-trackpad or representative-PC acceptance.",
+        "Images alone do not establish functional behavior; native assertions remain in the separately retained updater and curated reports."
+      ],
+      "originalCapturesModified": false
+    }
+  ],
+  "publicationAcceptance": {
+    "accepted": false,
+    "reason": "The 7a9aca7 target subsequently failed the full disabled-policy long-path release gate because additional pack self-check nesting created a 291-character native working directory. These successful scoped updater/UI results apply only to that old target and do not validate the corrected a447997 candidate.",
+    "replacementSourceCommit": "a44799723a280cca18c989e74e4c9ff7e1807a5e"
+  }
+}

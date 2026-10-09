@@ -1,0 +1,392 @@
+{
+  "schema": 1,
+  "date": "2026-10-09",
+  "applicationVersion": "0.16.0",
+  "baseVersion": "0.11.0",
+  "scope": "Rejected first native updater validation; retained partial successes do not establish release acceptance.",
+  "runId": 37949425935,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37949425935",
+  "workflow": ".github/workflows/native-update-0.16.0.yml",
+  "sourceCommit": "7a9aca71ddd4816b51dbe693873f42fa50a6b746",
+  "validatorCommit": "f231ade2bd2c1602f4a7725c10f15bedda61149e",
+  "status": "failed",
+  "acceptedForRelease": false,
+  "published": false,
+  "build": {
+    "conclusion": "success",
+    "applicationRebuilt": false,
+    "nativeWindowsExecutedByBuilder": false,
+    "updaterArchive": {
+      "file": "native-workbench-0.16.0-update-from-0.11.0.zip",
+      "bytes": 13193325,
+      "sha256": "53d74f49733a926336533d3bdbb46d7153e26fdc5f1086e53c6a7fc9a96350b9"
+    },
+    "starterSha256": "1ff91bdb386171aeb166fec4fce4ad23e31287dc9e9695167db113994f416131",
+    "baselineSha256": "e816e2f7cd5efe98af752fbf072fab00344ebaa2b6963795c2fbf4a86b5fa81c",
+    "targetManifestSha256": "e252fc916dd10177560864b0049f6dc5b493c9a88a6a5d5c4a03b4a6a6d20129",
+    "baseManifestSha256": "a74af3967f609fff938e2b19402b7f426a0253d0756b3f69446f484530a5c764",
+    "launcherSha256": "49194449d7bb7cf29e55dcc3b27bcf1a4fb279e86acfe547905dfdd6f7370e9f",
+    "log": {
+      "file": "build-job.log",
+      "bytes": 44953,
+      "sha256": "90b82f27b558036380315231965dd0fc36c2c6dc0979156590465a2d90422332"
+    }
+  },
+  "jobs": [
+    {
+      "id": 113884045456,
+      "name": "build",
+      "conclusion": "success",
+      "nonSuccessSteps": []
+    },
+    {
+      "id": 113884196835,
+      "name": "native (path with spaces)",
+      "conclusion": "failure",
+      "nonSuccessSteps": [
+        {
+          "name": "Validate native upgrade, preservation, optional import, curated science and GUI",
+          "conclusion": "failure"
+        }
+      ]
+    },
+    {
+      "id": 113884196948,
+      "name": "native (ordinary)",
+      "conclusion": "failure",
+      "nonSuccessSteps": [
+        {
+          "name": "Validate native upgrade, preservation, optional import, curated science and GUI",
+          "conclusion": "failure"
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 11625795659,
+      "name": "update-0.16.0-from-0.11.0-f231ade2bd2c1602f4a7725c10f15bedda61149e",
+      "bytes": 13202750,
+      "sha256": "47563832f67e2a16b368bc57d421d9d2f4156a4d7abbd9bb5a0f6380537af31b"
+    },
+    {
+      "id": 11625700763,
+      "name": "update-0.16.0-ordinary-1",
+      "bytes": 48593,
+      "sha256": "b0ba0a420ce1848aa6674d9d9bdfff836c4232623ff43313d6ec06e5b2e2adb0"
+    },
+    {
+      "id": 11624549651,
+      "name": "update-0.16.0-path with spaces-1",
+      "bytes": 48674,
+      "sha256": "179213ad6de83f96531324e5bcf6c6aa528af9e399f703875aa87172849b38cb"
+    }
+  ],
+  "paths": {
+    "ordinary": {
+      "artifactId": 11625700763,
+      "artifactIdentityVerified": true,
+      "zipCrc": "passed",
+      "report": {
+        "member": "update-native.json",
+        "bytes": 4535,
+        "sha256": "c8571fa6fd64adb8c81eaa3982812fa2dbecefb54652eb365c62959fdd3dd671"
+      },
+      "jobLog": {
+        "file": "ordinary-job.log",
+        "bytes": 30175,
+        "sha256": "d49b6ed6bc9611ee66884d06f1cacd4081f669bf98fad6dc2875d0e23f238270"
+      },
+      "platform": "Windows-2022Server-10.0.20348-SP0",
+      "pythonVersion": "3.13.16",
+      "nativeWindowsHost": true,
+      "rawNativeWindowsExecutedFlag": false,
+      "success": false,
+      "checksPassedBeforeFailure": 4,
+      "failureCount": 1,
+      "skips": [],
+      "completedChecks": [
+        "Frozen baseline, accepted target and updater inventories match the exact archives and manifest identities.",
+        "Published 0.11.0 imports the exact optional reads pack, executes a real reference run, and saves independent settings and pipeline pins offline.",
+        "Native updater installs 0.16.0 and returns already-installed on repeat; every installed core file equals the accepted starter.",
+        "Starter and optional packs, saved settings/pins, completed setup selection/queue, existing real results, local registry/receipt and external reference bytes survive unchanged."
+      ],
+      "error": "Completed methods lost reference provenance: synthetic-validation-fixture",
+      "nativeUpdateActions": {
+        "install": {
+          "status": "installed",
+          "version": "0.16.0",
+          "migration": false,
+          "files_verified": 87,
+          "removed_files": 0,
+          "packs_changed": false,
+          "source_and_evidence_preserved": true
+        },
+        "repeat": {
+          "status": "already-installed",
+          "version": "0.16.0",
+          "files_verified": 87
+        }
+      },
+      "coreFilesVerified": 87,
+      "preservation": {
+        "files": 204,
+        "changes": {},
+        "additions": {
+          "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+        },
+        "fixtureNotice": "Created by this gate from the packaged synthetic FASTA; not downloaded."
+      },
+      "legacyResultSummary": {
+        "id": "8bee49ad2d9940ee880b30ba43f0380d",
+        "status": "completed",
+        "metrics": 0
+      },
+      "referenceEvidence": {
+        "existing": {
+          "publicStatus": "completed",
+          "runStatus": "success",
+          "planHashMatchesRun": true,
+          "provider": "synthetic-validation-fixture",
+          "providerName": null,
+          "methodsReferenceLine": "Reference data: Genome FASTA: synthetic-validation-fixture, release 1; Synthetic starter; assembly starter-fixture; file synthetic-reference.fa. Retrieved 2026-10-06.",
+          "referenceSha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+          "receiptSha256": "da76eb3c6ae860a48721bb6e3752881065af48de760c77722c6ea3b257204752"
+        },
+        "updated": {
+          "publicStatus": "completed",
+          "runStatus": "success",
+          "planHashMatchesRun": true,
+          "provider": "synthetic-validation-fixture",
+          "providerName": "Synthetic update fixture",
+          "methodsReferenceLine": "Reference data: Genome FASTA: Synthetic update fixture, release 1; Synthetic starter; assembly starter-fixture; file synthetic-reference.fa. Retrieved 2026-10-06.",
+          "referenceSha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+          "receiptSha256": "da76eb3c6ae860a48721bb6e3752881065af48de760c77722c6ea3b257204752"
+        }
+      },
+      "retainedEvidence": [
+        {
+          "member": "existing-reference-run-plan.json",
+          "bytes": 11027,
+          "sha256": "706b5d4bc2244bc61499f8ced7727e86f0b052f3089c71a3f650070d18005fce"
+        },
+        {
+          "member": "existing-reference-run-run.json",
+          "bytes": 6057,
+          "sha256": "aa059bf126fc4dd67caa3d8c5e20d3105d58063790e7a8f71f8703b7027a8d6f"
+        },
+        {
+          "member": "existing-reference-run-methods-completed.txt",
+          "bytes": 859,
+          "sha256": "605aa79fdbdce3f1d2cebb21b665b8a9cc86215205edda3f1052793554b0a22c"
+        },
+        {
+          "member": "existing-reference-run-reference-provenance.json",
+          "bytes": 1103,
+          "sha256": "be6601be142186bceed6b302c4d2c626ae2c37dc9f935be9730f776e8c84524d"
+        },
+        {
+          "member": "existing-reference-run-workflow.cwl",
+          "bytes": 27241,
+          "sha256": "046192778b92665d66ed09a92a495add932634ca5a632d4282d5cd2ce2ab7b07"
+        },
+        {
+          "member": "updated-reference-run-plan.json",
+          "bytes": 12964,
+          "sha256": "49764ba69395d86f0364b72cc561f374dbe6a090557c4760dc564627a13011aa"
+        },
+        {
+          "member": "updated-reference-run-run.json",
+          "bytes": 6921,
+          "sha256": "9a75213ccac83fa0a00f866048546c4d15f84875de91aaa65dbfc5abc3d3d83a"
+        },
+        {
+          "member": "updated-reference-run-methods-completed.txt",
+          "bytes": 959,
+          "sha256": "913bd6b3e12fb294229f0679512b83e01e31d407fe4510e923cd057894cb70f4"
+        },
+        {
+          "member": "updated-reference-run-reference-provenance.json",
+          "bytes": 1315,
+          "sha256": "e7d38281581a14216351eab08604af882502fd7c77901fcc050160f0afe76f80"
+        },
+        {
+          "member": "updated-reference-run-workflow.cwl",
+          "bytes": 28066,
+          "sha256": "d715efe8ea532b47b3502263cf9734ca7fc0967b8e86ab8cfeabe2bfb39c400d"
+        }
+      ],
+      "gateSha256": "04348c31f86ced208268596004c278db2b983afa7d4809a3f482109279b092cb"
+    },
+    "spaces": {
+      "artifactId": 11624549651,
+      "artifactIdentityVerified": true,
+      "zipCrc": "passed",
+      "report": {
+        "member": "update-native.json",
+        "bytes": 4551,
+        "sha256": "118ec47e47ca55d9b74a711e47f007f03aa018cdaae2bb8a8753d27aa0e13251"
+      },
+      "jobLog": {
+        "file": "spaces-job.log",
+        "bytes": 30229,
+        "sha256": "017d801860a9688add7f8ec3e12fc21f3b8133fc85203037d35d793925fff6fe"
+      },
+      "platform": "Windows-2022Server-10.0.20348-SP0",
+      "pythonVersion": "3.13.16",
+      "nativeWindowsHost": true,
+      "rawNativeWindowsExecutedFlag": false,
+      "success": false,
+      "checksPassedBeforeFailure": 4,
+      "failureCount": 1,
+      "skips": [],
+      "completedChecks": [
+        "Frozen baseline, accepted target and updater inventories match the exact archives and manifest identities.",
+        "Published 0.11.0 imports the exact optional reads pack, executes a real reference run, and saves independent settings and pipeline pins offline.",
+        "Native updater installs 0.16.0 and returns already-installed on repeat; every installed core file equals the accepted starter.",
+        "Starter and optional packs, saved settings/pins, completed setup selection/queue, existing real results, local registry/receipt and external reference bytes survive unchanged."
+      ],
+      "error": "Completed methods lost reference provenance: synthetic-validation-fixture",
+      "nativeUpdateActions": {
+        "install": {
+          "status": "installed",
+          "version": "0.16.0",
+          "migration": false,
+          "files_verified": 87,
+          "removed_files": 0,
+          "packs_changed": false,
+          "source_and_evidence_preserved": true
+        },
+        "repeat": {
+          "status": "already-installed",
+          "version": "0.16.0",
+          "files_verified": 87
+        }
+      },
+      "coreFilesVerified": 87,
+      "preservation": {
+        "files": 204,
+        "changes": {},
+        "additions": {
+          "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+        },
+        "fixtureNotice": "Created by this gate from the packaged synthetic FASTA; not downloaded."
+      },
+      "legacyResultSummary": {
+        "id": "d663a547fc7c41749e6dcaee1837d0ef",
+        "status": "completed",
+        "metrics": 0
+      },
+      "referenceEvidence": {
+        "existing": {
+          "publicStatus": "completed",
+          "runStatus": "success",
+          "planHashMatchesRun": true,
+          "provider": "synthetic-validation-fixture",
+          "providerName": null,
+          "methodsReferenceLine": "Reference data: Genome FASTA: synthetic-validation-fixture, release 1; Synthetic starter; assembly starter-fixture; file synthetic-reference.fa. Retrieved 2026-10-06.",
+          "referenceSha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+          "receiptSha256": "b06427e2e75439e7d3c8afee1c2cdc99ad81d70b03c362f988d19f18e95db41a"
+        },
+        "updated": {
+          "publicStatus": "completed",
+          "runStatus": "success",
+          "planHashMatchesRun": true,
+          "provider": "synthetic-validation-fixture",
+          "providerName": "Synthetic update fixture",
+          "methodsReferenceLine": "Reference data: Genome FASTA: Synthetic update fixture, release 1; Synthetic starter; assembly starter-fixture; file synthetic-reference.fa. Retrieved 2026-10-06.",
+          "referenceSha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+          "receiptSha256": "b06427e2e75439e7d3c8afee1c2cdc99ad81d70b03c362f988d19f18e95db41a"
+        }
+      },
+      "retainedEvidence": [
+        {
+          "member": "existing-reference-run-plan.json",
+          "bytes": 11099,
+          "sha256": "c954e80a52340608e449e3d78abfafeacaa170999b6b162858f1eaf532fca61f"
+        },
+        {
+          "member": "existing-reference-run-run.json",
+          "bytes": 6131,
+          "sha256": "197244bb25f2a71ab1aaf42f5cf4de62792e54a546219da78236f9aa859a7887"
+        },
+        {
+          "member": "existing-reference-run-methods-completed.txt",
+          "bytes": 859,
+          "sha256": "605aa79fdbdce3f1d2cebb21b665b8a9cc86215205edda3f1052793554b0a22c"
+        },
+        {
+          "member": "existing-reference-run-reference-provenance.json",
+          "bytes": 1127,
+          "sha256": "fcc6c6c66e094f76a1ccfc562a766040df19b72b5f0da0a0c189c0feef65b19b"
+        },
+        {
+          "member": "existing-reference-run-workflow.cwl",
+          "bytes": 27355,
+          "sha256": "74ad99c4e90b3ccbd83faec3522d09ce3b75abb09263aeb420fb97fefb59d313"
+        },
+        {
+          "member": "updated-reference-run-plan.json",
+          "bytes": 13038,
+          "sha256": "04bf204edb9eacd270a635fd99ed5a4c9aecf427a651d162fdee4b2d9f6be354"
+        },
+        {
+          "member": "updated-reference-run-run.json",
+          "bytes": 7001,
+          "sha256": "d19308a9c5849e7e1a50b6ed0f49e9b81de65241f35c5bae11a7429e29b9752c"
+        },
+        {
+          "member": "updated-reference-run-methods-completed.txt",
+          "bytes": 959,
+          "sha256": "913bd6b3e12fb294229f0679512b83e01e31d407fe4510e923cd057894cb70f4"
+        },
+        {
+          "member": "updated-reference-run-reference-provenance.json",
+          "bytes": 1339,
+          "sha256": "a2e8b4ce0ea7dbfeacc8c63f26ce0ba24c9ca5a0d6d07976160d90a69c3bac92"
+        },
+        {
+          "member": "updated-reference-run-workflow.cwl",
+          "bytes": 28186,
+          "sha256": "ce8f7739b4855fe3d59440cf508cc06bb50b28a410c8c7d9e5afa03b0bcbc6b2"
+        }
+      ],
+      "gateSha256": "04348c31f86ced208268596004c278db2b983afa7d4809a3f482109279b092cb"
+    }
+  },
+  "diagnosis": {
+    "classification": "Validator expectation differs from the frozen application provider display-name contract.",
+    "recordedError": "Completed methods lost reference provenance: synthetic-validation-fixture",
+    "oldExpectedMethodsToken": "synthetic-validation-fixture",
+    "retainedProviderId": "synthetic-validation-fixture",
+    "retainedProviderDisplayName": "Synthetic update fixture",
+    "baselineBehavior": "The 0.11 reference plan omits provider_name and its completed methods display the provider ID.",
+    "targetBehavior": "The frozen 0.16 reference plan retains both provider and provider_name; its completed methods display provider_name while preserving the provider ID in structured provenance.",
+    "failingHelper": "scripts/check_update_090_windows.py:local_reference_run",
+    "explanation": "The reused older helper required the provider ID to appear in prose even though the target application correctly used its retained display name. Both paths failed that assertion after a successful native reference-index operation. The failure remains a failed full gate.",
+    "frozenProviderMethodsImplementationSha256": "e2915eb46e3ca86cbf89297dadeec48925f2c9a667e85057bc3b9986e2735ac9"
+  },
+  "correction": {
+    "validatorCommit": "d66401191005db0bdf32b1f76d3fe3318fa14ad4",
+    "changedFiles": [
+      "scripts/check_update_0160_windows.py"
+    ],
+    "applicationChanged": false,
+    "frozenApplicationSourceCommit": "7a9aca71ddd4816b51dbe693873f42fa50a6b746",
+    "action": "Give the 0.16 updater validator its own reference oracle: retain exact provider/assembly/receipt assertions, assert the preserved provider_name on the target, and require the methods token actually selected by the frozen reference evidence. The historical 0.9 validator is unchanged.",
+    "acceptanceStatus": "Requires a separate successful ordinary/spaced native rerun; no result from that rerun is inferred here."
+  },
+  "unreachedGates": [
+    "Updated reference CWL assertions after the provider-text assertion",
+    "Missing additional align 0.4.1 installation checks and actionable dependency review",
+    "Explicit independent align 0.4.1 import and preservation",
+    "Curated workflows and recorded-results native GUI checks on the upgraded installation",
+    "Post-feature historical-result/reference preservation and additional scientific/CWL checks"
+  ],
+  "limits": [
+    "Synthetic local reference receipt was created by the gate; it was not downloaded.",
+    "Four recorded checks passed per Windows path before one failure; neither complete native updater job passed.",
+    "The raw report nativeWindowsExecuted flag is false because its final full-gate completion marker was never reached; successful native install/repeat and reference operations remain individually recorded.",
+    "No updater picker UI, live reference retrieval or broader deployment acceptance is established."
+  ]
+}

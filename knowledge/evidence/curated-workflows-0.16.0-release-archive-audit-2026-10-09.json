@@ -1,0 +1,253 @@
+{
+  "schema": 1,
+  "runId": 37952018931,
+  "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+  "scope": "Independent downloaded archive and exact source identity audit of final e855dc4 frozen candidate only; native execution and release acceptance are separate evidence.",
+  "nativeWindowsExecuted": false,
+  "published": false,
+  "success": true,
+  "checks": [
+    "Downloaded aggregate matches GitHub metadata; ZIP CRC/name checks pass and all extracted members match exactly.",
+    "Inner Starter and source archives match the aggregate members and build metadata.",
+    "All 748 current source files match their inventory and exact git commit; embedded legacy source, CRC and runtime source-companion pin verified.",
+    "Complete Starter inventory, all published pack files/private runtime files, runtime Python source correspondence and production 32-pack profile/trust preserved.",
+    "New align 0.4.1 contracts/assets/self-check verified with unchanged legacy operations, binaries, licenses and exact minimum-app declaration; standalone ZIP inventory and all 43 bundled counterparts independently verified.",
+    "Packaged application and bridge are native AMD64 PE files; this inspection does not establish Windows execution.",
+    "Independent align 0.4.1 ZIP passes CRC/name/inventory checks and all 43 files match the bundled pack exactly; immutable ZIP SHA-256 retained."
+  ],
+  "failures": [],
+  "limits": [
+    "No native Windows application was executed by this local archive audit. Hosted native reports must separately establish exact packaged Windows behavior.",
+    "The Linux source suites are source-test evidence, not a packaged Windows or release/updater acceptance claim.",
+    "Historical archive or native passes for previous source/Starter hashes were not inherited. This audit compared all final source and archive bytes again."
+  ],
+  "appVersion": "0.16.0",
+  "previousCandidateSourceComparison": {
+    "sourceCommit": "f45622f8915a3fa80c0904fcd97c216e0b5980f3",
+    "changedPaths": [
+      ".github/workflows/native-curated-candidate.yml",
+      ".github/workflows/native-curated-release-check.yml",
+      ".github/workflows/native-update-0.16.0.yml",
+      ".github/workflows/publish-app-0.16.0.yml",
+      "README.md",
+      "desktop/build_bridge.sh",
+      "desktop/build_desktop_workspace.sh",
+      "desktop/build_workspace_update_launcher.sh",
+      "desktop/curated_ui.h",
+      "desktop/desktop_workspace.cpp",
+      "desktop/record_list.h",
+      "desktop/results_ui.h",
+      "docs/releases/0.16.0.md",
+      "knowledge/README.md",
+      "knowledge/architecture.md",
+      "knowledge/curated-workflows-results-0.16.0-handover.md",
+      "knowledge/curated-workflows-results.md",
+      "knowledge/current-state.md",
+      "knowledge/development.md",
+      "knowledge/evidence/curated-workflows-results-0.16.0-final-archive-audit-2026-10-09.json",
+      "knowledge/evidence/curated-workflows-results-0.16.0-final-validation-2026-10-09.json",
+      "knowledge/evidence/curated-workflows-results-0.16.0-final-visual-review-2026-10-09.json",
+      "knowledge/evidence/curated-workflows-results-0.16.0-initial-archive-audit-2026-10-09.json",
+      "knowledge/evidence/curated-workflows-results-0.16.0-initial-source-2026-10-09.json",
+      "knowledge/evidence/curated-workflows-results-0.16.0-initial-windows-2026-10-09.json",
+      "knowledge/evidence/curated-workflows-results-0.16.0-local-source-2026-10-09.json",
+      "knowledge/evidence/curated-workflows-results-0.16.0-second-archive-audit-2026-10-09.json",
+      "knowledge/evidence/curated-workflows-results-0.16.0-second-attempt-2026-10-09.json",
+      "knowledge/project.json",
+      "knowledge/roadmap.md",
+      "knowledge/validation-and-releases.md",
+      "scripts/audit_curated_candidate.py",
+      "scripts/build_update_0160.py",
+      "scripts/check_curated_windows.py",
+      "scripts/check_long_paths_0160_windows.py",
+      "scripts/check_references_windows.py",
+      "scripts/check_scroll_frames_0160_windows.py",
+      "scripts/check_update_0160_windows.py",
+      "scripts/package_split.py",
+      "scripts/publish_app_0160.py",
+      "tests/test_build_update_0160.py",
+      "tests/test_desktop_json.cpp",
+      "tests/test_pack_checks.py",
+      "tests/test_publish_app_0160.py",
+      "workspace/app_version.py",
+      "workspace/curated_workflows.py",
+      "workspace/desktop_host.py",
+      "workspace/pack_checks.py",
+      "workspace/results_summary.py",
+      "workspace/service.py",
+      "workspace/tests/test_curated_service.py",
+      "workspace/tests/test_curated_workflows.py",
+      "workspace/tests/test_results_summary.py"
+    ],
+    "scientificPackRecipeAndProductionTrustUnchanged": true
+  },
+  "transportArtifacts": [
+    {
+      "id": 11626720550,
+      "name": "curated-candidate-e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "bytes": 65972456,
+      "sha256": "2c17413e96cf113c4ddb007651ac45b471d74ba4b3b5aaeb0a579bd5009308cd",
+      "zipCrc": "passed",
+      "membersCompared": 8,
+      "archivesRebuilt": false
+    }
+  ],
+  "archives": [
+    {
+      "file": "native-workbench-0.16.0-starter-windows.zip",
+      "bytes": 17846873,
+      "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073",
+      "verified": true
+    },
+    {
+      "file": "native-workbench-0.16.0-source.zip",
+      "bytes": 47848425,
+      "sha256": "f746f00a82675c2cf52364a3b4d040721c6d06ac5605488efbdc0376ef5b7e44",
+      "verified": true
+    },
+    {
+      "file": "native-workbench-pack-align-0.4.1.zip",
+      "bytes": 575862,
+      "sha256": "3a08cf061f0b62c5502d1420115db3fcae2b04bf695ad3cfd1c3063de0fafa02",
+      "verified": true
+    }
+  ],
+  "source": {
+    "currentFiles": 748,
+    "everyCurrentFileMatchesCommit": true,
+    "completeCommittedSourceSelection": true,
+    "legacyBytes": 44163162,
+    "legacySha256": "5dac9add19436b336cba483a0f915e39aafed383282c2a019a0dbd3cc3c8668e",
+    "legacyCrc": "passed"
+  },
+  "packagedAtomicWriteHelper": {
+    "path": "workspace/file_io.py",
+    "sha256": "ab6034e617504c8c264c9c53201174fdae88440765db114f01ce39eafcb2d67e",
+    "matchesExactSourceCommit": true,
+    "executed": false
+  },
+  "starter": {
+    "coreFiles": 87,
+    "totalFiles": 274,
+    "preservedPublishedPackFiles": 143,
+    "preservedPrivateRuntimeFiles": 39,
+    "runtimeModulesMatchSource": 33,
+    "runtimeInventoryMatchesCommittedContract": true,
+    "publishedStarterPins": [
+      {
+        "id": "align",
+        "version": "0.4.0",
+        "folder": "packs/align-0.4.0",
+        "manifestSha256": "81c962222c93356a4f7727b23193c71d7dcd515859e62a179574781f411824d3"
+      },
+      {
+        "id": "bam",
+        "version": "0.4.0",
+        "folder": "packs/bam-0.4.0",
+        "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+      },
+      {
+        "id": "variants",
+        "version": "0.4.0",
+        "folder": "packs/variants-0.4.0",
+        "manifestSha256": "ea4b7f0a6c28709e4190b6514c07cbf7bdd58e1a4f2a2d931f2cae3ce6ec3795"
+      }
+    ],
+    "officialSetupPacks": 32,
+    "setupProfileAndTrustUnchanged": true,
+    "containsUserData": false
+  },
+  "additionalPack": {
+    "id": "align",
+    "version": "0.4.1",
+    "minAppVersionDeclared": "0.13.0",
+    "manifestSha256": "7f8f36efbfd6a8255a98eabb06746fbcc5bbdb872f392a65ca3e79a586d04939",
+    "files": 43,
+    "toolBinaryBytesUnchanged": true,
+    "legacyOperationsUnchanged": true,
+    "newOperations": [
+      "build-sr-index",
+      "single-end-indexed",
+      "paired-end-indexed"
+    ],
+    "declaredInstallationChecks": 1,
+    "expectedMappedProperPairRecords": 202,
+    "standalonePackZipVerified": true,
+    "standaloneZipMembers": 44,
+    "standaloneMatchesBundledFiles": 43,
+    "metadata": {
+      "path": "local-validation/release-0.16.0/final-candidate/unpacked/align-0.4.1-metadata.json",
+      "bytes": 707,
+      "sha256": "3a1310431f81e3f424e2eaed6490e5928fcc4dcff0f4512429cdf95fba35a15a"
+    }
+  },
+  "nativeExecutables": {
+    "NativeWorkbench.exe": {
+      "bytes": 1745408,
+      "sha256": "4c09aa5b0ebc850e4659041b6daf4769723d6bb16a112c0e9caeb11f0088ef52",
+      "machine": "AMD64",
+      "executed": false
+    },
+    "WorkbenchBridge.exe": {
+      "bytes": 1550848,
+      "sha256": "6eadbad2c19aa0193f52b6b6c0b10ae63cbd86052a116eb166d5ab5c5259c36f",
+      "machine": "AMD64",
+      "executed": false
+    }
+  },
+  "date": "2026-10-09",
+  "status": "archive-audit-passed",
+  "archiveAuditPassed": true,
+  "acceptedForRelease": false,
+  "verificationMethod": {
+    "localScript": {
+      "path": "local-validation/release-0.16.0/final-candidate/audit-aggregate-local.py",
+      "bytes": 20058,
+      "sha256": "22d62893590a84924a05770c2e12b245c54bbdb284059b5ea27becfc5be789fe"
+    },
+    "originalReusableAuditor": {
+      "path": "scripts/audit_curated_candidate.py",
+      "bytes": 21616,
+      "sha256": "4ca59d3768926340506af6c68eb7e2623321bed72f6ed4742a9fafed1ccee27d"
+    },
+    "adaptation": "Reused complete source-selection, exact git cat-file --batch correspondence, manifest/runtime/preservation and PE checks with direct aggregate metadata/member validation. No bounded transport metadata was synthesized and no archive was rebuilt. Additional standalone pack verification was performed separately and included in this report."
+  },
+  "baselineArchive": {
+    "path": "build-inputs/starter.zip",
+    "bytes": 16871065,
+    "sha256": "16fa802304c734b5721d838ff38b7e90ed36ccfc185a22239859cc3762af695a"
+  },
+  "metadata": {
+    "path": "local-validation/release-0.16.0/final-candidate/github-metadata-initial.json",
+    "bytes": 14834,
+    "sha256": "575bbb17b15cb59957581fad52651c53eaa043b3aa2fc355fad5b7cd6ad8ad1f"
+  },
+  "buildProvenance": {
+    "path": "local-validation/release-0.16.0/final-candidate/unpacked/BUILD-PROVENANCE.json",
+    "bytes": 11402,
+    "sha256": "5929a1f261ac571b61ac5886fc135f749e398e861ee81963d7512739feddc927"
+  },
+  "sourceMetadata": {
+    "path": "local-validation/release-0.16.0/final-candidate/unpacked/source-metadata.json",
+    "bytes": 1764,
+    "sha256": "7f5a01279149b00fb88730b559fe352bf4bb017bfba77ac483e81bee6943d60b"
+  },
+  "linuxSourceChecks": {
+    "jobId": 113892947692,
+    "log": {
+      "path": "local-validation/release-0.16.0/final-candidate/build-job.log",
+      "bytes": 105672,
+      "sha256": "ea0c601e359a349f3b6ad7dc9b817528b6da0ef9f884acacd55220b786a58c38"
+    },
+    "suitesCompleted": 33,
+    "total": 492,
+    "passed": 488,
+    "skips": 4,
+    "failures": 0,
+    "nativeWindowsExecution": false
+  },
+  "historicalEvidenceNotInherited": [
+    "7a9aca71ddd4816b51dbe693873f42fa50a6b746",
+    "a44799723a280cca18c989e74e4c9ff7e1807a5e"
+  ]
+}

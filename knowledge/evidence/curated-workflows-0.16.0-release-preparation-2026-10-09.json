@@ -1,0 +1,164 @@
+{
+  "schema": 1,
+  "status": "accepted",
+  "run": {
+    "id": 37954220037,
+    "url": "https://github.com/comparativechrono/workbench/actions/runs/37954220037",
+    "head_sha": "1527a2ca0bbca760735b2e34920c72b397ab5d54",
+    "status": "completed",
+    "conclusion": "success",
+    "path": ".github/workflows/publish-app-0.16.0.yml"
+  },
+  "jobs": [
+    {
+      "id": 113900479931,
+      "name": "verify-candidate",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 37954220037,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Check publication and read-only refusal guards",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Verify exact accepted candidate and prepare release without remote writes",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Retain compact preparation evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Retain exact prepared release for review",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        }
+      ]
+    },
+    {
+      "id": 113900483436,
+      "name": "promote",
+      "status": "completed",
+      "conclusion": "skipped",
+      "run_id": 37954220037,
+      "logs_url": null,
+      "steps": null
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 11627740867,
+      "name": "app-v0.16.0-prepared-release-1527a2ca0bbca760735b2e34920c72b397ab5d54-1",
+      "size_in_bytes": 134645109,
+      "url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11627740867",
+      "archive_download_url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11627740867/zip",
+      "expired": false,
+      "created_at": "2026-10-09T15:47:14Z",
+      "expires_at": "2026-11-08T15:47:13Z",
+      "updated_at": "2026-10-09T15:47:14Z",
+      "digest": "sha256:f11ee478f09ca88bf16040b8f7d7c37fb8f98432d41b785bec36164b03b00741",
+      "workflow_run": {
+        "id": 37954220037,
+        "repository_id": 1403436005,
+        "head_repository_id": 1403436005,
+        "head_branch": "release/verify-app-0.16.0",
+        "head_sha": "1527a2ca0bbca760735b2e34920c72b397ab5d54"
+      }
+    },
+    {
+      "id": 11627476253,
+      "name": "app-v0.16.0-preparation-evidence-1527a2ca0bbca760735b2e34920c72b397ab5d54-1",
+      "size_in_bytes": 6000,
+      "url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11627476253",
+      "archive_download_url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11627476253/zip",
+      "expired": false,
+      "created_at": "2026-10-09T15:47:12Z",
+      "expires_at": "2026-11-08T15:47:12Z",
+      "updated_at": "2026-10-09T15:47:12Z",
+      "digest": "sha256:beae14fe214884fb7aa0ef55b4741d5514c78dd9283df62459dec2fb10acae17",
+      "workflow_run": {
+        "id": 37954220037,
+        "repository_id": 1403436005,
+        "head_repository_id": 1403436005,
+        "head_branch": "release/verify-app-0.16.0",
+        "head_sha": "1527a2ca0bbca760735b2e34920c72b397ab5d54"
+      }
+    }
+  ],
+  "scope": "Read-only online run/artifact/source/report verification and preparation of 13 assets; promote job intentionally skipped by verification-branch condition. No tag/release/asset mutation.",
+  "integratedFeaturePRs": [
+    {
+      "pr": 7,
+      "sha": "ac317d9ff9b30119426846cc838b2f4c6f77b546",
+      "merged": true,
+      "message": "Pull Request successfully merged"
+    },
+    {
+      "pr": 8,
+      "sha": "1926434ea9814d8e293a00362cee8c02f923304b",
+      "merged": true,
+      "message": "Pull Request successfully merged"
+    },
+    {
+      "pr": 9,
+      "sha": "fb109ab0557e030d160ebc38b20ec2bcb3388448",
+      "merged": true,
+      "message": "Pull Request successfully merged"
+    },
+    {
+      "pr": 10,
+      "sha": "f70d139a9c729cdcc12cc58c0dfa5578d4ba1f3e",
+      "merged": true,
+      "message": "Pull Request successfully merged"
+    },
+    {
+      "pr": 11,
+      "sha": "b73eaf0bbec9c996770b08058c6dee12fa30d4d3",
+      "merged": true,
+      "message": "Pull Request successfully merged"
+    }
+  ],
+  "receipt": {
+    "success": true,
+    "phase": "candidate-preparation",
+    "remoteMutations": false,
+    "verificationCommit": "1527a2ca0bbca760735b2e34920c72b397ab5d54",
+    "packagedSourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+    "preparedAssets": 13,
+    "releasePublished": false,
+    "validationSha256": "88a2e42cd036668f1279030415319069109ba057dc9df332f2bfef22fbed0549"
+  }
+}

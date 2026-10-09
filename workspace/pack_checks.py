@@ -306,7 +306,12 @@ def run_pack_checks(root, catalog, output_parent, event=None, cancel=None, backe
                             sources.append({'id':source_id,'label':port['label'],'type':port['type'],'files':files})
                             inputs[port_id].append(source_id)
                     graph = {'schema':1,'name':'Pack self-check: '+name,'nodes':[{'id':'step-1','tool':tool['id'],'pin':pin_for(tool),'params':case.get('params',{}),'inputs':inputs}], 'sources':sources,'nextNode':2,'nextSource':len(sources)+1}
-                    plan = engine.prepare(graph,folder,cancel=cancel)
+                    # Keep graph runs beside this report, as starter checks do.
+                    # Nesting them below pack-checks adds an unnecessary path
+                    # component to native working directories. Engine.prepare
+                    # still allocates each run exclusively, and the report
+                    # retains its exact result-folder/provenance references.
+                    plan = engine.prepare(graph,output_parent,cancel=cancel)
                     result = engine.execute(plan,event=tool_event,cancel=cancel)
                     entry['folder'] = result.get('folder',plan['folder'])
                     require(result.get('success') is True and result['status']=='success', 'Tool did not complete: '+str(result.get('message',result.get('status'))))

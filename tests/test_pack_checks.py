@@ -41,7 +41,7 @@ class CopyBackend:
 class PackChecksTests(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory(prefix='pack-check-tests-')
-        self.root = Path(self.temporary.name)
+        self.root = Path(self.temporary.name).resolve()
         self.pack = self.root / 'packs' / 'fixture-1.0.0'
         self.pack.mkdir(parents=True)
         (self.pack / 'unused.exe').write_bytes(b'declared integrity fixture; never executed')
@@ -122,6 +122,40 @@ destination=copied
         self.assertEqual(run['outputs']['step-1::copied']['sha256']['copied'],
                          digest_file(self.fixture))
         persisted = json.loads((Path(result['folder']) / 'pack-checks.json').read_text())
+        self.assertEqual(persisted, result)
+
+    def test_check_runs_share_installation_parent_without_report_path_prefix(self):
+        second = copy.deepcopy(self.spec['checks'][0])
+        second['id'] = 'independent-copy'
+        self.spec['checks'].append(second)
+        self.write_pack()
+        # Exercise real Engine preparation and recorded backend destinations in
+        # a long path with spaces. The copy backend is only a runner contract
+        # fixture; native CreateProcess behavior has its separate Windows gate.
+        output_parent = self.root / 'installation checks' / ('nested output ' * 5).rstrip()
+        output_parent.mkdir(parents=True)
+        backend = CopyBackend()
+        result = run_pack_checks(self.root, self.catalog, output_parent, backend=backend)
+        self.assertTrue(result['success'], result)
+        self.assertEqual((result['passed'], result['failed']), (2, 0))
+        report_folder = Path(result['folder'])
+        self.assertEqual(report_folder.parent, output_parent)
+        self.assertTrue(report_folder.name.startswith('pack-checks-'))
+        folders = {Path(case['folder']) for case in result['checks']}
+        self.assertEqual(len(folders), 2)
+        for case, call in zip(result['checks'], backend.calls):
+            folder = Path(case['folder'])
+            self.assertEqual(folder.parent, output_parent)
+            self.assertNotIn(report_folder, folder.parents)
+            self.assertEqual(Path(call['output_folder']), folder / 'S1')
+            plan = json.loads((folder / 'plan.json').read_text())
+            run = json.loads((folder / 'run.json').read_text())
+            self.assertEqual(plan['folder'], str(folder))
+            self.assertEqual(run['planSha256'], plan['sha256'])
+            copied = run['outputs']['step-1::copied']
+            self.assertTrue(Path(copied['files']['copied']).is_relative_to(folder))
+            self.assertEqual(copied['sha256']['copied'], digest_file(self.fixture))
+        persisted = json.loads((report_folder / 'pack-checks.json').read_text())
         self.assertEqual(persisted, result)
 
     def test_fixture_tamper_is_rejected_before_execution(self):

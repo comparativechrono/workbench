@@ -1,0 +1,962 @@
+{
+  "schema": 1,
+  "date": "2026-10-09",
+  "applicationVersion": "0.16.0",
+  "status": "exact-package-regressions-passed",
+  "published": false,
+  "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+  "build": {
+    "candidateRunId": 37952018931,
+    "assetName": "native-workbench-0.16.0-starter-windows.zip",
+    "assetBytes": 17846873,
+    "assetSha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073",
+    "rebuiltDuringRegressions": false
+  },
+  "validationRun": {
+    "id": 37952595124,
+    "url": "https://github.com/comparativechrono/workbench/actions/runs/37952595124",
+    "validatorCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+    "workflow": ".github/workflows/native-curated-release-check.yml",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "id": 113894924531,
+        "name": "native-long-paths",
+        "conclusion": "success",
+        "nonSuccessSteps": []
+      },
+      {
+        "id": 113894924830,
+        "name": "native (ordinary)",
+        "conclusion": "success",
+        "nonSuccessSteps": []
+      },
+      {
+        "id": 113894924980,
+        "name": "native (path with spaces)",
+        "conclusion": "success",
+        "nonSuccessSteps": []
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "case": "ordinary",
+      "path": "local-validation/release-0.16.0/final-regressions/ordinary.zip",
+      "bytes": 583278,
+      "sha256": "2303cc1b9d64c12a1608997b5bee43c561e26e64734f14607d506672c9440213",
+      "id": 11627370082,
+      "name": "curated-release-checks-ordinary-1",
+      "zipCrc": "passed",
+      "extractedFilesCompared": 154
+    },
+    {
+      "case": "spaces",
+      "path": "local-validation/release-0.16.0/final-regressions/spaces.zip",
+      "bytes": 582709,
+      "sha256": "5f4e67ce91099437bf41fdbe55ce519397730d2cc962cdb153536cc6bc02759d",
+      "id": 11626711216,
+      "name": "curated-release-checks-path with spaces-1",
+      "zipCrc": "passed",
+      "extractedFilesCompared": 154
+    },
+    {
+      "case": "long-paths",
+      "path": "local-validation/release-0.16.0/final-regressions/long-paths.zip",
+      "bytes": 97732,
+      "sha256": "85287a53db206a6a6eb7753f3427998d7d35946395ccf10c0b91fab361db2dcd",
+      "id": 11626736090,
+      "name": "curated-release-long-paths-1",
+      "zipCrc": "passed",
+      "extractedFilesCompared": 41
+    }
+  ],
+  "cases": {
+    "ordinary": {
+      "frozenInputs": {
+        "path": "local-validation/release-0.16.0/final-regressions/ordinary/release-regression-evidence/frozen-inputs.json",
+        "bytes": 1029,
+        "sha256": "5eda7ee724dee6f4a2796fb2644261da0ddf48d98c276f9050c81e8c32b61e54"
+      },
+      "rebuilt": false,
+      "reports": [
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/ordinary/results-evidence/native-results.json",
+          "bytes": 14514,
+          "sha256": "81f1271f7777b230b442fe81edec2f3cc3a6356a2ec5be3882731492560c6e29",
+          "kind": "results",
+          "success": true,
+          "passed": 9,
+          "skips": [],
+          "nativeWindowsExecuted": true,
+          "startedUtc": "2026-10-09T15:33:28.951326+00:00",
+          "completedUtc": "2026-10-09T15:33:38.074233+00:00",
+          "gateSha256": "5c318c45c297dc7b267724db4db3abfc5c42d9dfc93805a5377a055d3f88747b",
+          "nativeGUIValidated": true,
+          "dpi": 96,
+          "checks": [
+            "Exact packaged integrity check and all five starter scientific operations execute without failures or skips.",
+            "Results include a packed CWL v1.2 workflow tied to the frozen plan, real completion record and final export hash.",
+            "CWL source hashes, file roles, scientific parameters, complete output set, pack pins and reference metadata match frozen native provenance.",
+            "Every exported command/copy/binary-pipe definition expands to the actual native bridge argument record.",
+            "All five embedded CWL runners execute independently with packaged private Python and pinned native pack programs.",
+            "Independent CWL replay preserves 202 proper-pair SAM/BAM records and known starter:1351 G>A homozygous SNP truth.",
+            "Saved scientific DAG includes every actual dependency and avoids all unrelated cards with padding, including skipped ranks.",
+            "Packaged executable contains all nine SVG-derived icon resolutions; actual large/small class icons match that resource and differ from Windows default.",
+            "Real native canvas accepts compatible forward and backward connections across manually positioned cards and retains normal/zoomed captures."
+          ],
+          "science": {
+            "networkSocketOperationsDeniedForHost": true,
+            "nativeWindowsExecuted": true,
+            "nativeCommandsCompared": 18,
+            "outputsIndependentlyHashed": 20,
+            "cwlRunnerReplays": [
+              {
+                "step": "step_1",
+                "scriptSha256": "39e0360c49b2e1bf1478a6d5b5f398f4fbe9f18f3fdb6e7584a03aba855b8da2",
+                "exitCode": 0,
+                "outputs": [
+                  {
+                    "id": "sam",
+                    "sha256": "384906a92425bee10c40bc496a426d0bed5ad4ba5093a300426632c4f6158a4a"
+                  },
+                  {
+                    "id": "pair-check",
+                    "sha256": "2c25256e25928cff40cffb9069f201138ae4bd083e3ab626b82cd55099e1c436"
+                  }
+                ]
+              },
+              {
+                "step": "step_2",
+                "scriptSha256": "62e20f8334aa67d2d904f25083834af4df53e881bdef3cb320c37a169787dd3f",
+                "exitCode": 0,
+                "outputs": [
+                  {
+                    "id": "bam",
+                    "sha256": "b6aa73eaa55127fa69ee60aa600cb3c0106c5ccfd31288239c75ffb694bcc913"
+                  },
+                  {
+                    "id": "duplicate-stats",
+                    "sha256": "ba1bdd9564807a35c3d61c7031fb7b0f3dda4c8860857681abcd837319cc17d5"
+                  },
+                  {
+                    "id": "flagstat",
+                    "sha256": "b9b7e24ae5f0f1f69ef4feb916513d0acc088f3d18b8d75664c38e5ce092cf8f"
+                  },
+                  {
+                    "id": "alignment-stats",
+                    "sha256": "1ee9e0419ba5b58b6f3b44d9bac66cb9000d875c438f0f80f921bb91ef6bd42f"
+                  },
+                  {
+                    "id": "bam-index",
+                    "sha256": "c2e15d40ab0eea0bf5f687d88d5884262b3841abda03a4f8a5a398fdead6c84f"
+                  },
+                  {
+                    "id": "names",
+                    "sha256": "ac60cb6240393dd7e286776d69f60e34c44aa491ab4ae96d92e4bb3bdb049087"
+                  },
+                  {
+                    "id": "fixed",
+                    "sha256": "73cf477e2bc5e53ab53675c7e881a090b6bb3a2f86f6f134e6c2f7d1763d6779"
+                  },
+                  {
+                    "id": "coordinates",
+                    "sha256": "83034b8787818194e0207a8ccf5ae51264de86a7f19998159c9b03d473aad143"
+                  }
+                ]
+              },
+              {
+                "step": "step_3",
+                "scriptSha256": "55ed0a4315f34b073402058068dda3d17fd5a1cd420a1af227d34a56d9b3c019",
+                "exitCode": 0,
+                "outputs": [
+                  {
+                    "id": "variants",
+                    "sha256": "239c0f577459b8707770b4cfd5d4a80709ebae8ffe458b0d95eeabb6e463b510"
+                  },
+                  {
+                    "id": "variant-stats",
+                    "sha256": "9866c402ffa8ba537d96585d674e4885432760ab9ae4fd6f3d0b5c4d910f0389"
+                  },
+                  {
+                    "id": "variants-index",
+                    "sha256": "5f35c431e02b536130515dbbc6ae1ef3ed93a8169aecc02c0959440a0d9c2995"
+                  },
+                  {
+                    "id": "pileup",
+                    "sha256": "d86b912a562ab79c490285b090e1e8c706c13c2eb48e82fc2b3cb14b085e3700"
+                  },
+                  {
+                    "id": "calls",
+                    "sha256": "931f1da7502452fd4b651ab9e33492925577a42194d0543712d346d1a88a1e90"
+                  },
+                  {
+                    "id": "normalized",
+                    "sha256": "aaf6c729c0cc0b1e7679dc8858efae16f9b154459f9f327346a86554570176ca"
+                  },
+                  {
+                    "id": "reference",
+                    "sha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee"
+                  },
+                  {
+                    "id": "reference-index",
+                    "sha256": "6bf365006e0d9d03de4e0fbfdfc082c6e5bee611888e54450bc2516614ae95a3"
+                  }
+                ]
+              },
+              {
+                "step": "step_4",
+                "scriptSha256": "ec2896685a5c666104cb21d2bb8c8ffa93cd895c1d1b0908cb92078528177967",
+                "exitCode": 0,
+                "outputs": [
+                  {
+                    "id": "statistics",
+                    "sha256": "9866c402ffa8ba537d96585d674e4885432760ab9ae4fd6f3d0b5c4d910f0389"
+                  }
+                ]
+              },
+              {
+                "step": "step_5",
+                "scriptSha256": "03bc8f86144fe2d9e85d18dc898bedfb0f44c545654e542c32beae82c11b190a",
+                "exitCode": 0,
+                "outputs": [
+                  {
+                    "id": "report",
+                    "sha256": "b569d609e69bb325827f26ca2f11f77070a580a9cf6a88c1b1e5ab79dfb9f5e0"
+                  }
+                ]
+              }
+            ],
+            "alignmentRecords": 202,
+            "variantTruth": "starter:1351 G>A; GT=1/1",
+            "scope": "Native private-host execution plus embedded-runner replay; not a Windows cwltool invocation."
+          },
+          "hashedEvidenceFilesVerified": 21,
+          "hashedCapturesVerified": 3
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/ordinary/scroll-evidence/native-scroll.json",
+          "bytes": 320537,
+          "sha256": "94cfc54a0dd08ca820464ba0f70d2c1854e68bc7544365b84ed9d2fe776bb7a9",
+          "kind": "scroll",
+          "success": true,
+          "passed": 3,
+          "skips": [],
+          "nativeWindowsExecuted": true,
+          "startedUtc": "2026-10-09T15:33:38.600748+00:00",
+          "completedUtc": "2026-10-09T15:34:20.843921+00:00",
+          "gateSha256": "e93a5c199415ee7231f052f640352f0c8fa90093946f237ac01840ba97baeed2",
+          "dpi": 96,
+          "panels": [
+            {
+              "panel": "standalone-options",
+              "frames": 320,
+              "unexpectedFrames": 0,
+              "endpointFailures": 0,
+              "requestedEndpointTransitions": 100,
+              "observedEndpointTransitions": 100,
+              "precisionCasesPassed": 6,
+              "hashedCapturesVerified": 3
+            },
+            {
+              "panel": "general-settings",
+              "frames": 320,
+              "unexpectedFrames": 0,
+              "endpointFailures": 0,
+              "requestedEndpointTransitions": 100,
+              "observedEndpointTransitions": 100,
+              "precisionCasesPassed": 6,
+              "hashedCapturesVerified": 3
+            },
+            {
+              "panel": "workflow-options",
+              "frames": 320,
+              "unexpectedFrames": 0,
+              "endpointFailures": 0,
+              "requestedEndpointTransitions": 100,
+              "observedEndpointTransitions": 100,
+              "precisionCasesPassed": 6,
+              "hashedCapturesVerified": 3
+            }
+          ],
+          "totalSampledFrames": 960,
+          "observedEndpointTransitions": 300,
+          "precisionCasesPassed": 18
+        }
+      ]
+    },
+    "spaces": {
+      "frozenInputs": {
+        "path": "local-validation/release-0.16.0/final-regressions/spaces/release-regression-evidence/frozen-inputs.json",
+        "bytes": 1037,
+        "sha256": "f5179d44aa3fa4b395172e0b9117a2cc1fc1d2c22118233fe7f983a257a68e3c"
+      },
+      "rebuilt": false,
+      "reports": [
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/spaces/results-evidence/native-results.json",
+          "bytes": 14513,
+          "sha256": "0f3c62c8a80c3c7553d063bf927d9a87035a47eb27723aa6cc4896e2a45e0a0c",
+          "kind": "results",
+          "success": true,
+          "passed": 9,
+          "skips": [],
+          "nativeWindowsExecuted": true,
+          "startedUtc": "2026-10-09T15:33:33.586329+00:00",
+          "completedUtc": "2026-10-09T15:33:42.301840+00:00",
+          "gateSha256": "5c318c45c297dc7b267724db4db3abfc5c42d9dfc93805a5377a055d3f88747b",
+          "nativeGUIValidated": true,
+          "dpi": 96,
+          "checks": [
+            "Exact packaged integrity check and all five starter scientific operations execute without failures or skips.",
+            "Results include a packed CWL v1.2 workflow tied to the frozen plan, real completion record and final export hash.",
+            "CWL source hashes, file roles, scientific parameters, complete output set, pack pins and reference metadata match frozen native provenance.",
+            "Every exported command/copy/binary-pipe definition expands to the actual native bridge argument record.",
+            "All five embedded CWL runners execute independently with packaged private Python and pinned native pack programs.",
+            "Independent CWL replay preserves 202 proper-pair SAM/BAM records and known starter:1351 G>A homozygous SNP truth.",
+            "Saved scientific DAG includes every actual dependency and avoids all unrelated cards with padding, including skipped ranks.",
+            "Packaged executable contains all nine SVG-derived icon resolutions; actual large/small class icons match that resource and differ from Windows default.",
+            "Real native canvas accepts compatible forward and backward connections across manually positioned cards and retains normal/zoomed captures."
+          ],
+          "science": {
+            "networkSocketOperationsDeniedForHost": true,
+            "nativeWindowsExecuted": true,
+            "nativeCommandsCompared": 18,
+            "outputsIndependentlyHashed": 20,
+            "cwlRunnerReplays": [
+              {
+                "step": "step_1",
+                "scriptSha256": "39e0360c49b2e1bf1478a6d5b5f398f4fbe9f18f3fdb6e7584a03aba855b8da2",
+                "exitCode": 0,
+                "outputs": [
+                  {
+                    "id": "sam",
+                    "sha256": "80e13553ea0241e38cf7f688b4f4ac04e1b7d9da18f209802c460a63c9457af4"
+                  },
+                  {
+                    "id": "pair-check",
+                    "sha256": "2c25256e25928cff40cffb9069f201138ae4bd083e3ab626b82cd55099e1c436"
+                  }
+                ]
+              },
+              {
+                "step": "step_2",
+                "scriptSha256": "62e20f8334aa67d2d904f25083834af4df53e881bdef3cb320c37a169787dd3f",
+                "exitCode": 0,
+                "outputs": [
+                  {
+                    "id": "bam",
+                    "sha256": "27667a43f46a56c7a76c5a8c6a39cfbc779416c6c38e1731694c54864334ffc8"
+                  },
+                  {
+                    "id": "duplicate-stats",
+                    "sha256": "fb5e420d76e011dd6f9268581e7df4a44bea9761096e6e202ed2f9a84be4362d"
+                  },
+                  {
+                    "id": "flagstat",
+                    "sha256": "b9b7e24ae5f0f1f69ef4feb916513d0acc088f3d18b8d75664c38e5ce092cf8f"
+                  },
+                  {
+                    "id": "alignment-stats",
+                    "sha256": "1ee9e0419ba5b58b6f3b44d9bac66cb9000d875c438f0f80f921bb91ef6bd42f"
+                  },
+                  {
+                    "id": "bam-index",
+                    "sha256": "8604b6641c7a4d0fd5713d3768d8202c81f4ac57465baf1912888b7c08c1d9c6"
+                  },
+                  {
+                    "id": "names",
+                    "sha256": "666416166a49478d0f78087d745efce4c69bde04d063690c8a88c0bc4d7e42ef"
+                  },
+                  {
+                    "id": "fixed",
+                    "sha256": "13cbf55ca85cc8c849110852ca06b79430b745151c78ea669f00f78bcecceef6"
+                  },
+                  {
+                    "id": "coordinates",
+                    "sha256": "b315f1291129d6993ff558cbada4741abe11b878d8ef9a247d7e5ccd85dfc68e"
+                  }
+                ]
+              },
+              {
+                "step": "step_3",
+                "scriptSha256": "55ed0a4315f34b073402058068dda3d17fd5a1cd420a1af227d34a56d9b3c019",
+                "exitCode": 0,
+                "outputs": [
+                  {
+                    "id": "variants",
+                    "sha256": "21ff25ea85eecf7d3965cc90150eee1f0dbe6b41595bba6fe571d43bffb8dc93"
+                  },
+                  {
+                    "id": "variant-stats",
+                    "sha256": "9866c402ffa8ba537d96585d674e4885432760ab9ae4fd6f3d0b5c4d910f0389"
+                  },
+                  {
+                    "id": "variants-index",
+                    "sha256": "5f35c431e02b536130515dbbc6ae1ef3ed93a8169aecc02c0959440a0d9c2995"
+                  },
+                  {
+                    "id": "pileup",
+                    "sha256": "d86b912a562ab79c490285b090e1e8c706c13c2eb48e82fc2b3cb14b085e3700"
+                  },
+                  {
+                    "id": "calls",
+                    "sha256": "e3cf57d074ddfd1a5fc9fbd24793209d58eb1437ae9864804bbb7644aa496417"
+                  },
+                  {
+                    "id": "normalized",
+                    "sha256": "1b86790112731c22942bedc19580d6e0bb98b0d44d7a414892fffba610c7ef00"
+                  },
+                  {
+                    "id": "reference",
+                    "sha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee"
+                  },
+                  {
+                    "id": "reference-index",
+                    "sha256": "6bf365006e0d9d03de4e0fbfdfc082c6e5bee611888e54450bc2516614ae95a3"
+                  }
+                ]
+              },
+              {
+                "step": "step_4",
+                "scriptSha256": "ec2896685a5c666104cb21d2bb8c8ffa93cd895c1d1b0908cb92078528177967",
+                "exitCode": 0,
+                "outputs": [
+                  {
+                    "id": "statistics",
+                    "sha256": "9866c402ffa8ba537d96585d674e4885432760ab9ae4fd6f3d0b5c4d910f0389"
+                  }
+                ]
+              },
+              {
+                "step": "step_5",
+                "scriptSha256": "03bc8f86144fe2d9e85d18dc898bedfb0f44c545654e542c32beae82c11b190a",
+                "exitCode": 0,
+                "outputs": [
+                  {
+                    "id": "report",
+                    "sha256": "b569d609e69bb325827f26ca2f11f77070a580a9cf6a88c1b1e5ab79dfb9f5e0"
+                  }
+                ]
+              }
+            ],
+            "alignmentRecords": 202,
+            "variantTruth": "starter:1351 G>A; GT=1/1",
+            "scope": "Native private-host execution plus embedded-runner replay; not a Windows cwltool invocation."
+          },
+          "hashedEvidenceFilesVerified": 21,
+          "hashedCapturesVerified": 3
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/spaces/scroll-evidence/native-scroll.json",
+          "bytes": 320528,
+          "sha256": "3eb6dd2847df3268f92e0da71e44e024009b2f9a0bb3321693b90e54112830fd",
+          "kind": "scroll",
+          "success": true,
+          "passed": 3,
+          "skips": [],
+          "nativeWindowsExecuted": true,
+          "startedUtc": "2026-10-09T15:33:42.764280+00:00",
+          "completedUtc": "2026-10-09T15:34:22.878738+00:00",
+          "gateSha256": "e93a5c199415ee7231f052f640352f0c8fa90093946f237ac01840ba97baeed2",
+          "dpi": 96,
+          "panels": [
+            {
+              "panel": "standalone-options",
+              "frames": 320,
+              "unexpectedFrames": 0,
+              "endpointFailures": 0,
+              "requestedEndpointTransitions": 100,
+              "observedEndpointTransitions": 100,
+              "precisionCasesPassed": 6,
+              "hashedCapturesVerified": 3
+            },
+            {
+              "panel": "general-settings",
+              "frames": 320,
+              "unexpectedFrames": 0,
+              "endpointFailures": 0,
+              "requestedEndpointTransitions": 100,
+              "observedEndpointTransitions": 100,
+              "precisionCasesPassed": 6,
+              "hashedCapturesVerified": 3
+            },
+            {
+              "panel": "workflow-options",
+              "frames": 320,
+              "unexpectedFrames": 0,
+              "endpointFailures": 0,
+              "requestedEndpointTransitions": 100,
+              "observedEndpointTransitions": 100,
+              "precisionCasesPassed": 6,
+              "hashedCapturesVerified": 3
+            }
+          ],
+          "totalSampledFrames": 960,
+          "observedEndpointTransitions": 300,
+          "precisionCasesPassed": 18
+        }
+      ]
+    },
+    "long-paths": {
+      "frozenInputs": {
+        "path": "local-validation/release-0.16.0/final-regressions/long-paths/frozen-inputs.json",
+        "bytes": 752,
+        "sha256": "03265409ee030e54dcab002dcee3fd4e05b028cf8996e38864977df43905e810"
+      },
+      "rebuilt": false,
+      "reports": [
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/long-paths/native-long-paths.json",
+          "bytes": 12054,
+          "sha256": "4985c6075d9724a01985b1a7ea3939b96749968102bf2d1858a7da051d91d5fd",
+          "kind": "long-paths",
+          "success": true,
+          "passed": 4,
+          "skips": [],
+          "nativeWindowsExecuted": true,
+          "startedUtc": "2026-10-09T15:33:30.039936+00:00",
+          "completedUtc": "2026-10-09T15:33:32.709529+00:00",
+          "gateSha256": "a4bb843413f78e7ef1c05e03c646d685833f3534a9342cbf04b2f0bf46ad9429",
+          "checks": [
+            "Long-path opt-in is disabled and a real >260-character file requires explicit extended I/O.",
+            "The exact align 0.4.1 additional pack check passes with a native working directory below MAX_PATH; its >260-character SAM independently rehashes and contains 202 primary mapped proper-pair records.",
+            "All 7 exact-package integrity checks and the full five-step native starter scientific oracle pass with Windows long-path opt-in disabled.",
+            "Every completed long-path result is present and independently rehashed; native alignments, BAM preparation, variant truth and report creation all pass."
+          ],
+          "applicationCheck": {
+            "status": "completed",
+            "corePassed": 7,
+            "starterPassed": 1,
+            "starterFailed": 0,
+            "starterSkipped": 0
+          },
+          "policyProbe": {
+            "characters": 287,
+            "ordinaryIsFile": false,
+            "extendedIsFile": true
+          },
+          "policyRestoration": {
+            "previousValue": 1,
+            "restoredValue": 1,
+            "restored": true,
+            "observedValue": 0,
+            "requestedValue": 0,
+            "scope": "Disposable hosted CI runner only; no application or user-machine policy changes"
+          },
+          "policyEvidence": {
+            "path": "local-validation/release-0.16.0/final-regressions/long-paths/policy-setup.json",
+            "bytes": 214,
+            "sha256": "1b83c54e5cb057ff9470581511008abf910d7615256461d73ed138c7f04bbf82"
+          },
+          "starterNativeWorkingDirectoryCharacters": 254,
+          "starterAlignmentOutput": {
+            "characters": 268,
+            "bytes": 69141,
+            "sha256": "2ac15e71f432bc6dab26a11fbe84b87040f193c3f87545401f20bf945c25d064",
+            "ordinaryIsFile": false,
+            "extendedIsFile": true
+          },
+          "additionalAlignment": {
+            "checkId": "align/paired-mapping-known-answer@0.4.1",
+            "pin": {
+              "packId": "align",
+              "packVersion": "0.4.1",
+              "manifestSha256": "7f8f36efbfd6a8255a98eabb06746fbcc5bbdb872f392a65ca3e79a586d04939"
+            },
+            "graphRecordSha256": "62ba41be5a0fd0cc94251596888822e1686de15fbd79c613e840e7c08fee3d91",
+            "nativeWorkingDirectoryCharacters": 254,
+            "samCharacters": 268,
+            "samSha256": "04d4041e1c560d7c2881d4b8401b1963a7045c7d0e58a376dc96f509aee06521",
+            "alignmentRecords": 202,
+            "mappedProperPairs": 202,
+            "outputFiles": [
+              {
+                "output": "step-1::sam",
+                "field": "sam",
+                "characters": 268,
+                "sha256": "04d4041e1c560d7c2881d4b8401b1963a7045c7d0e58a376dc96f509aee06521"
+              },
+              {
+                "output": "step-1::pair-check",
+                "field": "pair-check",
+                "characters": 270,
+                "sha256": "2c25256e25928cff40cffb9069f201138ae4bd083e3ab626b82cd55099e1c436"
+              }
+            ]
+          },
+          "additionalPackChecks": {
+            "schema": 1,
+            "folder": "D:\\a\\_temp\\frozen synthetic check\\synthetic nested results xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\\installation-20261009-153330-df9646bc\\pack-checks-20261009-153332-2b2ea648",
+            "checks": [
+              {
+                "id": "align/paired-mapping-known-answer@0.4.1",
+                "pin": {
+                  "packId": "align",
+                  "packVersion": "0.4.1",
+                  "manifestSha256": "7f8f36efbfd6a8255a98eabb06746fbcc5bbdb872f392a65ca3e79a586d04939"
+                },
+                "status": "passed",
+                "folder": "D:\\a\\_temp\\frozen synthetic check\\synthetic nested results xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\\installation-20261009-153330-df9646bc\\run-20261009-153332-f30639f1"
+              }
+            ],
+            "nativeWindowsExecuted": true,
+            "passed": 1,
+            "failed": 0,
+            "cancelled": false,
+            "success": true,
+            "message": "1 of 1 additional pack checks passed."
+          },
+          "hashedStarterOutputsVerified": 20,
+          "hashedAdditionalDiagnosticsVerified": 13
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Windows Server 2022 hosted runners at 96 DPI; representative workplace hardware and alternate DPI/display setups are outside this evidence.",
+    "Scrolling records finite desktop samples with child edits/buttons masked; it cannot exclude transient flashes between samples or establish physical trackpad behavior.",
+    "Native CWL embedded-runner replay is checked; this is not a Windows cwltool invocation.",
+    "The disposable CI runner alone changed LongPathsEnabled and restored it. This does not establish arbitrary >260-character native working-directory support."
+  ],
+  "priorRejectedEvidence": "knowledge/evidence/curated-workflows-0.16.0-release-regression-rejected-2026-10-09.json",
+  "visualReview": {
+    "path": "local-validation/release-0.16.0/final-regressions/visual-review.json",
+    "bytes": 15381,
+    "sha256": "cadf4e62ac505b0441b80934052e801a8178b9c885a43806c5bd1ae7adeb9f95",
+    "review": {
+      "schema": 1,
+      "reviewDateUtc": "2026-10-09",
+      "workflowRunId": 37952595124,
+      "validatorCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+      "candidateSourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "candidateArchive": "native-workbench-0.16.0-starter-windows.zip",
+      "candidateArchiveSha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073",
+      "reviewType": "Independent read-only manual visual inspection of final-candidate native Windows captures",
+      "priorVerdictInherited": false,
+      "imageCount": 24,
+      "dpi": 96,
+      "visibleDefectsObserved": [],
+      "visualReviewPassedWithinScope": true,
+      "observations": [
+        "Individually displayed and reviewed all 24 final-candidate files at original size: 3 results captures plus 9 clean scroll-panel captures in each path case.",
+        "Tools and Workflow surfaces show coherent columns and readable controls within captured bounds.",
+        "Backward workflow connections route around task cards clearly at both 100% and 83% zoom.",
+        "Standalone options, general settings, and workflow options preserve consistent spacing and control alignment at top, notch, and bottom positions.",
+        "Partial rows at viewport top and bottom are consistent with the scroll offset; long folder values clip inside text fields and long task titles use ellipses.",
+        "Report identities for both path cases match the supplied final candidate source commit and archive SHA256."
+      ],
+      "limitations": [
+        "Static screenshot review does not establish absence of transient flashing between sampled frames.",
+        "Limited to retained capture bounds at 96 DPI; no claim about other DPI values, display sizes, window sizes, or physical wheel and trackpad behavior.",
+        "Does not exercise controls or dialogs beyond those shown in the captures.",
+        "This scoped visual review is one component of release evidence and does not independently establish scientific correctness, update safety, or long-path execution correctness.",
+        "No verdict from the earlier rejected candidate was inherited; the actual final-candidate image files were inspected anew."
+      ],
+      "reports": [
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/ordinary/results-evidence/native-results.json",
+          "sha256": "81f1271f7777b230b442fe81edec2f3cc3a6356a2ec5be3882731492560c6e29",
+          "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+          "assetSha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073",
+          "success": true,
+          "passed": 9
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/ordinary/scroll-evidence/native-scroll.json",
+          "sha256": "94cfc54a0dd08ca820464ba0f70d2c1854e68bc7544365b84ed9d2fe776bb7a9",
+          "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+          "assetSha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073",
+          "success": true,
+          "passed": 3
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/spaces/results-evidence/native-results.json",
+          "sha256": "0f3c62c8a80c3c7553d063bf927d9a87035a47eb27723aa6cc4896e2a45e0a0c",
+          "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+          "assetSha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073",
+          "success": true,
+          "passed": 9
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/spaces/scroll-evidence/native-scroll.json",
+          "sha256": "3eb6dd2847df3268f92e0da71e44e024009b2f9a0bb3321693b90e54112830fd",
+          "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+          "assetSha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073",
+          "success": true,
+          "passed": 3
+        }
+      ],
+      "images": [
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/ordinary/results-evidence/application-icon-normal.bmp",
+          "sha256": "60236143c3730430c7ad17f230eac42abefa9d033ef3c431da9df12ed9d03bef",
+          "dimensions": [
+            1044,
+            788
+          ],
+          "reviewed": true,
+          "method": "Individual image displayed at original size",
+          "finding": "No visible overlap, stale drawing, missing control, or unexpected blank region within this capture."
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/ordinary/results-evidence/workflow-backward-routing-zoomed.bmp",
+          "sha256": "cdf9cefd72fd8d31c32684b187c64df38d43b2fbbf4024e86e749a0f768bfb02",
+          "dimensions": [
+            1044,
+            788
+          ],
+          "reviewed": true,
+          "method": "Individual image displayed at original size",
+          "finding": "No visible overlap, stale drawing, missing control, or unexpected blank region within this capture."
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/ordinary/results-evidence/workflow-backward-routing.bmp",
+          "sha256": "7e370aaaf335e08c9ba1dd9957a2d780bb1fdcebdf195fa2e1f3c9cb907851bb",
+          "dimensions": [
+            1044,
+            788
+          ],
+          "reviewed": true,
+          "method": "Individual image displayed at original size",
+          "finding": "No visible overlap, stale drawing, missing control, or unexpected blank region within this capture."
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/ordinary/scroll-evidence/general-settings-clean-bottom.bmp",
+          "sha256": "4fc405cbb99cf44c9e393071825132c8f7286b4536d3cbc7436bec98840cc0df",
+          "dimensions": [
+            292,
+            441
+          ],
+          "reviewed": true,
+          "method": "Individual image displayed at original size",
+          "finding": "No visible overlap, stale drawing, missing control, or unexpected blank region within this capture."
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/ordinary/scroll-evidence/general-settings-clean-notch.bmp",
+          "sha256": "e53114e0c4db24b470096d569598fa131fa69e0eb1ae6e4ba627f1138de02c82",
+          "dimensions": [
+            292,
+            441
+          ],
+          "reviewed": true,
+          "method": "Individual image displayed at original size",
+          "finding": "No visible overlap, stale drawing, missing control, or unexpected blank region within this capture."
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/ordinary/scroll-evidence/general-settings-clean-top.bmp",
+          "sha256": "3d860da6f8fb7920d13159d28f0fa4ceccaa1b42f06ac05906ab0c0540d87f20",
+          "dimensions": [
+            292,
+            441
+          ],
+          "reviewed": true,
+          "method": "Individual image displayed at original size",
+          "finding": "No visible overlap, stale drawing, missing control, or unexpected blank region within this capture."
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/ordinary/scroll-evidence/standalone-options-clean-bottom.bmp",
+          "sha256": "cca49fe44ec6d6b0a1cfc42eea05362d8eddf1db3a4f78ce8c33ea869ecdf61b",
+          "dimensions": [
+            444,
+            441
+          ],
+          "reviewed": true,
+          "method": "Individual image displayed at original size",
+          "finding": "No visible overlap, stale drawing, missing control, or unexpected blank region within this capture."
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/ordinary/scroll-evidence/standalone-options-clean-notch.bmp",
+          "sha256": "5e54cbb1f1d8264ff2c6a351693c8645fb5d1cc54bb384fa15e71dbc58a47a26",
+          "dimensions": [
+            444,
+            441
+          ],
+          "reviewed": true,
+          "method": "Individual image displayed at original size",
+          "finding": "No visible overlap, stale drawing, missing control, or unexpected blank region within this capture."
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/ordinary/scroll-evidence/standalone-options-clean-top.bmp",
+          "sha256": "a2e850840d97438d169a27c0b7bfc6c05e39227a75b73ce1b76742df964a566e",
+          "dimensions": [
+            444,
+            441
+          ],
+          "reviewed": true,
+          "method": "Individual image displayed at original size",
+          "finding": "No visible overlap, stale drawing, missing control, or unexpected blank region within this capture."
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/ordinary/scroll-evidence/workflow-options-clean-bottom.bmp",
+          "sha256": "b3faee9fa876d25503ff58eb4fe55424f5d9530c10a511d30a47ca7d4f2a3734",
+          "dimensions": [
+            292,
+            441
+          ],
+          "reviewed": true,
+          "method": "Individual image displayed at original size",
+          "finding": "No visible overlap, stale drawing, missing control, or unexpected blank region within this capture."
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/ordinary/scroll-evidence/workflow-options-clean-notch.bmp",
+          "sha256": "cb81e2cfea8d76f69f7950c777044ec6e8b85e59dbc914d68a8f5af7c57cea2d",
+          "dimensions": [
+            292,
+            441
+          ],
+          "reviewed": true,
+          "method": "Individual image displayed at original size",
+          "finding": "No visible overlap, stale drawing, missing control, or unexpected blank region within this capture."
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/ordinary/scroll-evidence/workflow-options-clean-top.bmp",
+          "sha256": "e202b36a1812542a14433dd719076acf339920f6d5e7f9aa4a2bc371d3128356",
+          "dimensions": [
+            292,
+            441
+          ],
+          "reviewed": true,
+          "method": "Individual image displayed at original size",
+          "finding": "No visible overlap, stale drawing, missing control, or unexpected blank region within this capture."
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/spaces/results-evidence/application-icon-normal.bmp",
+          "sha256": "66c8b9852d9e7699fa8b15e6bd51ff38e0d3c61caff6d834902c941dfd61f6d5",
+          "dimensions": [
+            1044,
+            788
+          ],
+          "reviewed": true,
+          "method": "Individual image displayed at original size",
+          "finding": "No visible overlap, stale drawing, missing control, or unexpected blank region within this capture."
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/spaces/results-evidence/workflow-backward-routing-zoomed.bmp",
+          "sha256": "cdf9cefd72fd8d31c32684b187c64df38d43b2fbbf4024e86e749a0f768bfb02",
+          "dimensions": [
+            1044,
+            788
+          ],
+          "reviewed": true,
+          "method": "Individual image displayed at original size",
+          "finding": "No visible overlap, stale drawing, missing control, or unexpected blank region within this capture."
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/spaces/results-evidence/workflow-backward-routing.bmp",
+          "sha256": "7e370aaaf335e08c9ba1dd9957a2d780bb1fdcebdf195fa2e1f3c9cb907851bb",
+          "dimensions": [
+            1044,
+            788
+          ],
+          "reviewed": true,
+          "method": "Individual image displayed at original size",
+          "finding": "No visible overlap, stale drawing, missing control, or unexpected blank region within this capture."
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/spaces/scroll-evidence/general-settings-clean-bottom.bmp",
+          "sha256": "4dfc5ca31e696dcf51a458086d37ac3ecf8846c437b7a083b56463a8981a1cf1",
+          "dimensions": [
+            292,
+            441
+          ],
+          "reviewed": true,
+          "method": "Individual image displayed at original size",
+          "finding": "No visible overlap, stale drawing, missing control, or unexpected blank region within this capture."
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/spaces/scroll-evidence/general-settings-clean-notch.bmp",
+          "sha256": "b394443d27aa7264b9841fda0ed3993cdcba613d3766c03bd9c47688d5ec8a54",
+          "dimensions": [
+            292,
+            441
+          ],
+          "reviewed": true,
+          "method": "Individual image displayed at original size",
+          "finding": "No visible overlap, stale drawing, missing control, or unexpected blank region within this capture."
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/spaces/scroll-evidence/general-settings-clean-top.bmp",
+          "sha256": "f2437c43c338c85b657e5a4986ce5fc859d0e45f91d008fe4f8a6c93cd2b3aef",
+          "dimensions": [
+            292,
+            441
+          ],
+          "reviewed": true,
+          "method": "Individual image displayed at original size",
+          "finding": "No visible overlap, stale drawing, missing control, or unexpected blank region within this capture."
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/spaces/scroll-evidence/standalone-options-clean-bottom.bmp",
+          "sha256": "cca49fe44ec6d6b0a1cfc42eea05362d8eddf1db3a4f78ce8c33ea869ecdf61b",
+          "dimensions": [
+            444,
+            441
+          ],
+          "reviewed": true,
+          "method": "Individual image displayed at original size",
+          "finding": "No visible overlap, stale drawing, missing control, or unexpected blank region within this capture."
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/spaces/scroll-evidence/standalone-options-clean-notch.bmp",
+          "sha256": "5e54cbb1f1d8264ff2c6a351693c8645fb5d1cc54bb384fa15e71dbc58a47a26",
+          "dimensions": [
+            444,
+            441
+          ],
+          "reviewed": true,
+          "method": "Individual image displayed at original size",
+          "finding": "No visible overlap, stale drawing, missing control, or unexpected blank region within this capture."
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/spaces/scroll-evidence/standalone-options-clean-top.bmp",
+          "sha256": "a2e850840d97438d169a27c0b7bfc6c05e39227a75b73ce1b76742df964a566e",
+          "dimensions": [
+            444,
+            441
+          ],
+          "reviewed": true,
+          "method": "Individual image displayed at original size",
+          "finding": "No visible overlap, stale drawing, missing control, or unexpected blank region within this capture."
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/spaces/scroll-evidence/workflow-options-clean-bottom.bmp",
+          "sha256": "b3faee9fa876d25503ff58eb4fe55424f5d9530c10a511d30a47ca7d4f2a3734",
+          "dimensions": [
+            292,
+            441
+          ],
+          "reviewed": true,
+          "method": "Individual image displayed at original size",
+          "finding": "No visible overlap, stale drawing, missing control, or unexpected blank region within this capture."
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/spaces/scroll-evidence/workflow-options-clean-notch.bmp",
+          "sha256": "cb81e2cfea8d76f69f7950c777044ec6e8b85e59dbc914d68a8f5af7c57cea2d",
+          "dimensions": [
+            292,
+            441
+          ],
+          "reviewed": true,
+          "method": "Individual image displayed at original size",
+          "finding": "No visible overlap, stale drawing, missing control, or unexpected blank region within this capture."
+        },
+        {
+          "path": "local-validation/release-0.16.0/final-regressions/spaces/scroll-evidence/workflow-options-clean-top.bmp",
+          "sha256": "e202b36a1812542a14433dd719076acf339920f6d5e7f9aa4a2bc371d3128356",
+          "dimensions": [
+            292,
+            441
+          ],
+          "reviewed": true,
+          "method": "Individual image displayed at original size",
+          "finding": "No visible overlap, stale drawing, missing control, or unexpected blank region within this capture."
+        }
+      ]
+    }
+  },
+  "lockSections": {
+    "path": "local-validation/release-0.16.0/final-regressions/lock-sections.json",
+    "sha256": "19cb6846ab2eb028c377fa2cf57c72b75ea45f9526f9df9ddb2b1cc244704053"
+  }
+}

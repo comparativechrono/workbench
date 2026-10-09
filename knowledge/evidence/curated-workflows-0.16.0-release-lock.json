@@ -1,0 +1,593 @@
+{
+  "schema": 1,
+  "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+  "coreFiles": 87,
+  "prNumber": 12,
+  "featureBranch": "release/prepare-app-0.16.0",
+  "updaterSourceCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+  "authorization": {
+    "authorized": true,
+    "message": "Great lets do a new release at this point",
+    "date": "2026-10-09"
+  },
+  "archives": {
+    "native-workbench-0.16.0-starter-windows.zip": {
+      "bytes": 17846873,
+      "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+    },
+    "native-workbench-0.16.0-source.zip": {
+      "bytes": 47848425,
+      "sha256": "f746f00a82675c2cf52364a3b4d040721c6d06ac5605488efbdc0376ef5b7e44"
+    },
+    "native-workbench-pack-align-0.4.1.zip": {
+      "bytes": 575862,
+      "sha256": "3a08cf061f0b62c5502d1420115db3fcae2b04bf695ad3cfd1c3063de0fafa02"
+    },
+    "native-workbench-0.16.0-update-from-0.11.0.zip": {
+      "bytes": 13199905,
+      "sha256": "d75d5129e9b9feaef70faa62d5ea91049c0162df8c7bdc74c7bc81d1933eec8f"
+    }
+  },
+  "runs": {
+    "candidate": {
+      "id": 37952018931,
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "path": ".github/workflows/native-curated-candidate.yml",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 113892947692,
+          "name": "build",
+          "conclusion": "success",
+          "nonSuccessSteps": []
+        },
+        {
+          "id": 113893784479,
+          "name": "native (ordinary)",
+          "conclusion": "success",
+          "nonSuccessSteps": []
+        },
+        {
+          "id": 113893784628,
+          "name": "native (path with spaces)",
+          "conclusion": "success",
+          "nonSuccessSteps": []
+        }
+      ]
+    },
+    "updater": {
+      "id": 37952583789,
+      "sourceCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+      "path": ".github/workflows/native-update-0.16.0.yml",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 113894885400,
+          "name": "build",
+          "conclusion": "success",
+          "nonSuccessSteps": []
+        },
+        {
+          "id": 113895037811,
+          "name": "native (path with spaces)",
+          "conclusion": "success",
+          "nonSuccessSteps": []
+        },
+        {
+          "id": 113895037909,
+          "name": "native (ordinary)",
+          "conclusion": "success",
+          "nonSuccessSteps": []
+        }
+      ]
+    },
+    "regressions": {
+      "id": 37952595124,
+      "sourceCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+      "path": ".github/workflows/native-curated-release-check.yml",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 113894924531,
+          "name": "native-long-paths",
+          "conclusion": "success",
+          "nonSuccessSteps": []
+        },
+        {
+          "id": 113894924830,
+          "name": "native (ordinary)",
+          "conclusion": "success",
+          "nonSuccessSteps": []
+        },
+        {
+          "id": 113894924980,
+          "name": "native (path with spaces)",
+          "conclusion": "success",
+          "nonSuccessSteps": []
+        }
+      ]
+    }
+  },
+  "artifacts": {
+    "candidate": {
+      "id": 11626720550,
+      "name": "curated-candidate-e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "bytes": 65972456,
+      "sha256": "2c17413e96cf113c4ddb007651ac45b471d74ba4b3b5aaeb0a579bd5009308cd",
+      "run": "candidate",
+      "file": "candidate.zip"
+    },
+    "native-ordinary": {
+      "id": 11626173789,
+      "name": "curated-windows-ordinary-1",
+      "bytes": 27213132,
+      "sha256": "ba2f64c5e38fd357444c9abb7a62d4f92d69130aa0edbcf65785623dc5bbc071",
+      "run": "candidate",
+      "file": "native-ordinary.zip"
+    },
+    "native-spaces": {
+      "id": 11625973983,
+      "name": "curated-windows-path with spaces-1",
+      "bytes": 27215801,
+      "sha256": "91ca6e891d02e8095400ccd3990d5bfc3824a304ac5281b9522317158c26266d",
+      "run": "candidate",
+      "file": "native-spaces.zip"
+    },
+    "updater": {
+      "id": 11627055274,
+      "name": "update-0.16.0-from-0.11.0-0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+      "bytes": 13209330,
+      "sha256": "516865ba8ba98350aa5eb75bdbc85d6830936fb26e70ecddcee3772a36dff2b0",
+      "run": "updater",
+      "file": "updater.zip"
+    },
+    "update-spaces": {
+      "id": 11626751095,
+      "name": "update-0.16.0-path with spaces-1",
+      "bytes": 823117,
+      "sha256": "8597b46472db64d3c54f266e41d80c8f99ba2495a9ec4a9b6140bf17feb3b134",
+      "run": "updater",
+      "file": "update-spaces.zip"
+    },
+    "update-ordinary": {
+      "id": 11626423134,
+      "name": "update-0.16.0-ordinary-1",
+      "bytes": 822343,
+      "sha256": "c4e9923ccdd6c48a928836d2798d0836fabcb67dc8b778f1dfba08c7dd5eeb43",
+      "run": "updater",
+      "file": "update-ordinary.zip"
+    },
+    "regressions-ordinary": {
+      "id": 11627370082,
+      "name": "curated-release-checks-ordinary-1",
+      "bytes": 583278,
+      "sha256": "2303cc1b9d64c12a1608997b5bee43c561e26e64734f14607d506672c9440213",
+      "run": "regressions",
+      "file": "regressions-ordinary.zip"
+    },
+    "regressions-spaces": {
+      "id": 11626711216,
+      "name": "curated-release-checks-path with spaces-1",
+      "bytes": 582709,
+      "sha256": "5f4e67ce91099437bf41fdbe55ce519397730d2cc962cdb153536cc6bc02759d",
+      "run": "regressions",
+      "file": "regressions-spaces.zip"
+    },
+    "long-paths": {
+      "id": 11626736090,
+      "name": "curated-release-long-paths-1",
+      "bytes": 97732,
+      "sha256": "85287a53db206a6a6eb7753f3427998d7d35946395ccf10c0b91fab361db2dcd",
+      "run": "regressions",
+      "file": "long-paths.zip"
+    }
+  },
+  "reports": {
+    "ordinary-curated": {
+      "case": "ordinary",
+      "kind": "curated",
+      "artifact": "native-ordinary",
+      "path": "curated-evidence/native-curated.json",
+      "sha256": "32e64dc568a000d68be8ef22d9759d189ea204aa5b559977e8fa192be40779c5",
+      "passed": 11,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gate": "scripts/check_curated_windows.py",
+      "gateSha256": "6824624ab6be6ea685428a585956f78039ef97e2a9dac37ecb67def5b2fa24d1"
+    },
+    "ordinary-reference-live": {
+      "case": "ordinary",
+      "kind": "reference-live",
+      "artifact": "native-ordinary",
+      "path": "reference-live-evidence/native-references-live.json",
+      "sha256": "56ee54b01dea1035b8adb8838b3e738f93d1d93b63fa1cb3226ecfe687869788",
+      "passed": 9,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gate": "scripts/check_reference_management_windows.py",
+      "gateSha256": "6e61ffe14fc6c6bcb4838fa4d142d28ff3e7d5eee71c9fbaa479717a715031c0"
+    },
+    "ordinary-reference-management": {
+      "case": "ordinary",
+      "kind": "reference-management",
+      "artifact": "native-ordinary",
+      "path": "reference-management-evidence/native-reference-management.json",
+      "sha256": "7aa25e6c98e74d8896512ec2c7c09e8ed7fe5669ab068ed9e18aa3ce0eb2e5d1",
+      "passed": 10,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gate": "scripts/check_reference_management_windows.py",
+      "gateSha256": "6e61ffe14fc6c6bcb4838fa4d142d28ff3e7d5eee71c9fbaa479717a715031c0"
+    },
+    "ordinary-recovery": {
+      "case": "ordinary",
+      "kind": "recovery",
+      "artifact": "native-ordinary",
+      "path": "recovery-evidence/native-recovery.json",
+      "sha256": "1f8689851debcfd88ebc7b8d0a47e779b3e4fda2a914095833525a89d12c151b",
+      "passed": 12,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gate": "scripts/check_recovery_windows.py",
+      "gateSha256": "ef75ee62dcf73bbf9a0a7d7f047d74c972f6e5c23b874afc37cecafe3f021edb"
+    },
+    "ordinary-batch": {
+      "case": "ordinary",
+      "kind": "batch",
+      "artifact": "native-ordinary",
+      "path": "batch-evidence/native-batch.json",
+      "sha256": "d22a1639e210be09c4af38baba8a9b18f7bdac1893605c19473cc564e47bd6f8",
+      "passed": 11,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gate": "scripts/check_batch_windows.py",
+      "gateSha256": "779b7354a87ee9f62482820ecede482281834278e07f086cd2bfa11134b5caf8"
+    },
+    "ordinary-readiness": {
+      "case": "ordinary",
+      "kind": "readiness",
+      "artifact": "native-ordinary",
+      "path": "readiness-evidence/native-readiness.json",
+      "sha256": "24a7c94cb916fb7289e26d6ae6ae46f4dec9a6f93b975008f2899b1dfd08cbaf",
+      "passed": 5,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gate": "scripts/check_readiness_windows.py",
+      "gateSha256": "60483711e84717bd0676fb400d86e9e01a0e7e4b45cf2c9184bb1fba5dc7aa3f"
+    },
+    "ordinary-library": {
+      "case": "ordinary",
+      "kind": "library",
+      "artifact": "native-ordinary",
+      "path": "library-evidence/native-tool-library.json",
+      "sha256": "4a38e77b561b56c92ad9ae09fc53e754f9559fc220107aeb2733d771b8d9aeaa",
+      "passed": 7,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gate": "scripts/check_tool_library_windows.py",
+      "gateSha256": "ed419575da77af7c88742e6eed12243b958df5e0ad36e6edeeaa61d0bf9f875f"
+    },
+    "ordinary-workspace": {
+      "case": "ordinary",
+      "kind": "workspace",
+      "artifact": "native-ordinary",
+      "path": "workspace-evidence/native-ui.json",
+      "sha256": "1234675be45a06a3d772f4cff707b2eb7b2e011782e7cb8787157425433f3a41",
+      "passed": 32,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gate": "scripts/check_workspace_ui_windows.py",
+      "gateSha256": "30a38a4f5bc8d5a5af93eee80560963f87e4ef019a3e98ec9780f1964d847d13"
+    },
+    "ordinary-transport": {
+      "case": "ordinary",
+      "kind": "transport",
+      "artifact": "native-ordinary",
+      "path": "transport-evidence/native-transport.json",
+      "sha256": "841ae8d384829ebb008b204a621b0039193b3697a303d7126e7dafe12cef5f76",
+      "passed": 3,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gate": "scripts/check_batch_transport_windows.py",
+      "gateSha256": "62cd88c99ce694c6509443c276519dab087a9bff4e8d64edb82381c7732584d7"
+    },
+    "ordinary-performance": {
+      "case": "ordinary",
+      "kind": "performance",
+      "artifact": "native-ordinary",
+      "path": "performance-evidence/native-performance.json",
+      "sha256": "9fab9a39a8f7734e282e689319cca243d0736cb3681cbcd24c2fa562747eb20b",
+      "passed": 14,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gate": "tests/windows_performance.cpp",
+      "gateSha256": "6c562c1b71dc8e824dbf116f463902a3773d824c950d354413c41199c8cb9ff4"
+    },
+    "ordinary-align-pack": {
+      "case": "ordinary",
+      "kind": "align-pack",
+      "artifact": "native-ordinary",
+      "path": "batch-evidence/native-align-pack.json",
+      "sha256": "8ca7c29a018960dae6d56ca5a46a256bab6bfee399a108879fdae723bd147452",
+      "passed": 1,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gate": "scripts/check_pack_release_windows.py",
+      "gateSha256": "2536557dfcafdfce9bff806d7b34b31371766b16343a2ee505c53c6376191639"
+    },
+    "spaces-curated": {
+      "case": "spaces",
+      "kind": "curated",
+      "artifact": "native-spaces",
+      "path": "curated-evidence/native-curated.json",
+      "sha256": "49950af459c79245471e732a5ec5085e074fde67a73866547447485b2ab65e6e",
+      "passed": 11,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gate": "scripts/check_curated_windows.py",
+      "gateSha256": "6824624ab6be6ea685428a585956f78039ef97e2a9dac37ecb67def5b2fa24d1"
+    },
+    "spaces-reference-live": {
+      "case": "spaces",
+      "kind": "reference-live",
+      "artifact": "native-spaces",
+      "path": "reference-live-evidence/native-references-live.json",
+      "sha256": "281bdaecd1b68c5385cfd8d31c360ac12308868ec0ae06ba8a9ab1d48a243773",
+      "passed": 9,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gate": "scripts/check_reference_management_windows.py",
+      "gateSha256": "6e61ffe14fc6c6bcb4838fa4d142d28ff3e7d5eee71c9fbaa479717a715031c0"
+    },
+    "spaces-reference-management": {
+      "case": "spaces",
+      "kind": "reference-management",
+      "artifact": "native-spaces",
+      "path": "reference-management-evidence/native-reference-management.json",
+      "sha256": "a0dfc54b5e1d7fb4d691f30b7d4657486af875f401c2487bd04662fbd0cfc9d4",
+      "passed": 10,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gate": "scripts/check_reference_management_windows.py",
+      "gateSha256": "6e61ffe14fc6c6bcb4838fa4d142d28ff3e7d5eee71c9fbaa479717a715031c0"
+    },
+    "spaces-recovery": {
+      "case": "spaces",
+      "kind": "recovery",
+      "artifact": "native-spaces",
+      "path": "recovery-evidence/native-recovery.json",
+      "sha256": "f6f8aadd8b878ad7fe9a33313d0cee4d2c29815217ba3cc57488d218aa0453a9",
+      "passed": 12,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gate": "scripts/check_recovery_windows.py",
+      "gateSha256": "ef75ee62dcf73bbf9a0a7d7f047d74c972f6e5c23b874afc37cecafe3f021edb"
+    },
+    "spaces-batch": {
+      "case": "spaces",
+      "kind": "batch",
+      "artifact": "native-spaces",
+      "path": "batch-evidence/native-batch.json",
+      "sha256": "cbb9ba1cd09f54e1a23aa373ee71da99cde74005df5bdf27961a0ddfb255b675",
+      "passed": 11,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gate": "scripts/check_batch_windows.py",
+      "gateSha256": "779b7354a87ee9f62482820ecede482281834278e07f086cd2bfa11134b5caf8"
+    },
+    "spaces-readiness": {
+      "case": "spaces",
+      "kind": "readiness",
+      "artifact": "native-spaces",
+      "path": "readiness-evidence/native-readiness.json",
+      "sha256": "18a8389668efc65a88a9f4b40989bad437f1c16e78f818c9b231875f9f5dd8f6",
+      "passed": 5,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gate": "scripts/check_readiness_windows.py",
+      "gateSha256": "60483711e84717bd0676fb400d86e9e01a0e7e4b45cf2c9184bb1fba5dc7aa3f"
+    },
+    "spaces-library": {
+      "case": "spaces",
+      "kind": "library",
+      "artifact": "native-spaces",
+      "path": "library-evidence/native-tool-library.json",
+      "sha256": "06c6046ee4a673e4df74868a594404cd03a290cf0828e5d0dbe46b7a5757d91c",
+      "passed": 7,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gate": "scripts/check_tool_library_windows.py",
+      "gateSha256": "ed419575da77af7c88742e6eed12243b958df5e0ad36e6edeeaa61d0bf9f875f"
+    },
+    "spaces-workspace": {
+      "case": "spaces",
+      "kind": "workspace",
+      "artifact": "native-spaces",
+      "path": "workspace-evidence/native-ui.json",
+      "sha256": "ec6af6c78488af0bebde8d9e69875b02340fd9714e6f1372b5903b082a434d1e",
+      "passed": 32,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gate": "scripts/check_workspace_ui_windows.py",
+      "gateSha256": "30a38a4f5bc8d5a5af93eee80560963f87e4ef019a3e98ec9780f1964d847d13"
+    },
+    "spaces-transport": {
+      "case": "spaces",
+      "kind": "transport",
+      "artifact": "native-spaces",
+      "path": "transport-evidence/native-transport.json",
+      "sha256": "65cc39b69de26e6e5f72a97a2f5702830efe443066465079d5f64e87dd204f9f",
+      "passed": 3,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gate": "scripts/check_batch_transport_windows.py",
+      "gateSha256": "62cd88c99ce694c6509443c276519dab087a9bff4e8d64edb82381c7732584d7"
+    },
+    "spaces-performance": {
+      "case": "spaces",
+      "kind": "performance",
+      "artifact": "native-spaces",
+      "path": "performance-evidence/native-performance.json",
+      "sha256": "659b4e60e91eabcccceb4b0a81e55e26e25465d2dff5b76797e3a068a9d217d0",
+      "passed": 14,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gate": "tests/windows_performance.cpp",
+      "gateSha256": "6c562c1b71dc8e824dbf116f463902a3773d824c950d354413c41199c8cb9ff4"
+    },
+    "spaces-align-pack": {
+      "case": "spaces",
+      "kind": "align-pack",
+      "artifact": "native-spaces",
+      "path": "batch-evidence/native-align-pack.json",
+      "sha256": "919889ca8e848e67e7318c7300b459e7a49d2c3daf24e67896c3cffddb63b484",
+      "passed": 1,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gateCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "gate": "scripts/check_pack_release_windows.py",
+      "gateSha256": "2536557dfcafdfce9bff806d7b34b31371766b16343a2ee505c53c6376191639"
+    },
+    "ordinary-update": {
+      "case": "ordinary",
+      "kind": "update",
+      "artifact": "update-ordinary",
+      "path": "update-native.json",
+      "sha256": "92de2f53263e964d073618f49ed6b11fad231ba3b3fccea083874ae1b1bccb15",
+      "passed": 18,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+      "gateCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+      "gate": "scripts/check_update_0160_windows.py",
+      "gateSha256": "cf804b3a690e00802b2abe909cc46121f310d9206272e217894cd471bde13b7f"
+    },
+    "spaces-update": {
+      "case": "spaces",
+      "kind": "update",
+      "artifact": "update-spaces",
+      "path": "update-native.json",
+      "sha256": "d8f37d80f4f020b212321861da74ae8eabeac32c638d2b31bca1a46e557d5273",
+      "passed": 18,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+      "gateCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+      "gate": "scripts/check_update_0160_windows.py",
+      "gateSha256": "cf804b3a690e00802b2abe909cc46121f310d9206272e217894cd471bde13b7f"
+    },
+    "ordinary-results": {
+      "case": "ordinary",
+      "kind": "results",
+      "artifact": "regressions-ordinary",
+      "path": "results-evidence/native-results.json",
+      "sha256": "81f1271f7777b230b442fe81edec2f3cc3a6356a2ec5be3882731492560c6e29",
+      "passed": 9,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+      "gateCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+      "gate": "scripts/check_results_windows.py",
+      "gateSha256": "5c318c45c297dc7b267724db4db3abfc5c42d9dfc93805a5377a055d3f88747b"
+    },
+    "ordinary-scroll": {
+      "case": "ordinary",
+      "kind": "scroll",
+      "artifact": "regressions-ordinary",
+      "path": "scroll-evidence/native-scroll.json",
+      "sha256": "94cfc54a0dd08ca820464ba0f70d2c1854e68bc7544365b84ed9d2fe776bb7a9",
+      "passed": 3,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+      "gateCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+      "gate": "scripts/check_scroll_frames_0160_windows.py",
+      "gateSha256": "e93a5c199415ee7231f052f640352f0c8fa90093946f237ac01840ba97baeed2"
+    },
+    "spaces-results": {
+      "case": "spaces",
+      "kind": "results",
+      "artifact": "regressions-spaces",
+      "path": "results-evidence/native-results.json",
+      "sha256": "0f3c62c8a80c3c7553d063bf927d9a87035a47eb27723aa6cc4896e2a45e0a0c",
+      "passed": 9,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+      "gateCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+      "gate": "scripts/check_results_windows.py",
+      "gateSha256": "5c318c45c297dc7b267724db4db3abfc5c42d9dfc93805a5377a055d3f88747b"
+    },
+    "spaces-scroll": {
+      "case": "spaces",
+      "kind": "scroll",
+      "artifact": "regressions-spaces",
+      "path": "scroll-evidence/native-scroll.json",
+      "sha256": "3eb6dd2847df3268f92e0da71e44e024009b2f9a0bb3321693b90e54112830fd",
+      "passed": 3,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+      "gateCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+      "gate": "scripts/check_scroll_frames_0160_windows.py",
+      "gateSha256": "e93a5c199415ee7231f052f640352f0c8fa90093946f237ac01840ba97baeed2"
+    },
+    "long-paths-long-paths": {
+      "case": "long-paths",
+      "kind": "long-paths",
+      "artifact": "long-paths",
+      "path": "native-long-paths.json",
+      "sha256": "4985c6075d9724a01985b1a7ea3939b96749968102bf2d1858a7da051d91d5fd",
+      "passed": 4,
+      "skips": [],
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "validatorCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+      "gateCommit": "0e92d969e13fb7fe96b972bdb71b433f834dbbbe",
+      "gate": "scripts/check_long_paths_0160_windows.py",
+      "gateSha256": "a4bb843413f78e7ef1c05e03c646d685833f3534a9342cbf04b2f0bf46ad9429"
+    }
+  }
+}

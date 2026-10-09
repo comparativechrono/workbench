@@ -1,0 +1,681 @@
+{
+  "schema": 1,
+  "date": "2026-10-09",
+  "applicationVersion": "0.16.0",
+  "scope": "Rejected release-regression validation of the exact historical 7a9aca7 Starter package, including a diagnostic rerun without rebuilding the application.",
+  "status": "rejected-release-candidate",
+  "acceptedForRelease": false,
+  "published": false,
+  "sourceCommit": "7a9aca71ddd4816b51dbe693873f42fa50a6b746",
+  "build": {
+    "candidateRunId": 37941573921,
+    "assetName": "native-workbench-0.16.0-starter-windows.zip",
+    "assetBytes": 17846720,
+    "assetSha256": "1ff91bdb386171aeb166fec4fce4ad23e31287dc9e9695167db113994f416131",
+    "rebuiltDuringTheseRuns": false
+  },
+  "workflow": ".github/workflows/native-curated-release-check.yml",
+  "attempts": {
+    "first": {
+      "runId": 37949426177,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37949426177",
+      "validatorCommit": "f231ade2bd2c1602f4a7725c10f15bedda61149e",
+      "sourceCommit": "7a9aca71ddd4816b51dbe693873f42fa50a6b746",
+      "overallConclusion": "failure",
+      "metadata": {
+        "path": "local-validation/release-0.16.0/regression-first-run.json",
+        "bytes": 7858,
+        "sha256": "566a1416b747c09094453e6d941b4f7e6089dfc408fda81120f82c825b59200a"
+      },
+      "jobs": [
+        {
+          "id": 113884034351,
+          "name": "native (path with spaces)",
+          "conclusion": "failure",
+          "nonSuccessSteps": [
+            {
+              "name": "Observe displayed scrolling frames and precision wheel routing",
+              "conclusion": "failure"
+            }
+          ]
+        },
+        {
+          "id": 113884034677,
+          "name": "native (ordinary)",
+          "conclusion": "failure",
+          "nonSuccessSteps": [
+            {
+              "name": "Observe displayed scrolling frames and precision wheel routing",
+              "conclusion": "failure"
+            }
+          ]
+        },
+        {
+          "id": 113884034969,
+          "name": "native-long-paths",
+          "conclusion": "failure",
+          "nonSuccessSteps": [
+            {
+              "name": "Recheck full scientific results with Windows long-path opt-in disabled",
+              "conclusion": "failure"
+            }
+          ]
+        }
+      ],
+      "artifacts": [
+        {
+          "case": "ordinary",
+          "id": 11625391306,
+          "name": "curated-release-checks-ordinary-1",
+          "path": "local-validation/release-0.16.0/regression-first-ordinary.zip",
+          "bytes": 571439,
+          "sha256": "9aba31552798aa1365e063c27e436b494f90ecc5898f4349598ca95183a66d93",
+          "zipCrc": "passed",
+          "extractedFilesCompared": 147
+        },
+        {
+          "case": "spaces",
+          "id": 11625715801,
+          "name": "curated-release-checks-path with spaces-1",
+          "path": "local-validation/release-0.16.0/regression-first-spaces.zip",
+          "bytes": 571063,
+          "sha256": "c17503c843f09c917fe0fe6468e4f575061986c9658cfc1b02a975225d7aa3e9",
+          "zipCrc": "passed",
+          "extractedFilesCompared": 147
+        },
+        {
+          "case": "longpaths",
+          "id": 11625031355,
+          "name": "curated-release-long-paths-1",
+          "path": "local-validation/release-0.16.0/regression-first-longpaths.zip",
+          "bytes": 19916,
+          "sha256": "84610b417c5cd17d9b5c3e936a2a6f105eec3517f98c2036cd1fb3ba028248c3",
+          "zipCrc": "passed",
+          "extractedFilesCompared": 8
+        }
+      ],
+      "cases": {
+        "ordinary": {
+          "frozenInputs": {
+            "path": "local-validation/release-0.16.0/regression-first-ordinary/release-regression-evidence/frozen-inputs.json",
+            "bytes": 1024,
+            "sha256": "a00901140fdbbd0f82903ca375d6ecdf7c91a9973717fa33d3a6c31a4b6484b9"
+          },
+          "rebuilt": false,
+          "gateHashesVerifiedAtValidatorCommit": {
+            "scripts/check_results_windows.py": "5c318c45c297dc7b267724db4db3abfc5c42d9dfc93805a5377a055d3f88747b",
+            "scripts/check_workspace_ui_windows.py": "30a38a4f5bc8d5a5af93eee80560963f87e4ef019a3e98ec9780f1964d847d13",
+            "scripts/check_references_windows.py": "5920501af2272bce364afc3b28733a4f0fb4b7291aabaca42a683f4706b485b0",
+            "scripts/check_scroll_frames_windows.py": "3e5e5b47fb513b3e47269facc5d7cd7a8697e5c9edc54dc3be9385fa95a4f490"
+          },
+          "reports": [
+            {
+              "path": "local-validation/release-0.16.0/regression-first-ordinary/results-evidence/native-results.json",
+              "bytes": 14514,
+              "sha256": "458698a3739d4432593a1517d0a6e1b2b69695ee98e40731636ad12b1200ed34",
+              "success": true,
+              "passed": 9,
+              "failed": 0,
+              "skips": [],
+              "nativeWindowsExecuted": true,
+              "nativeGUIValidated": true,
+              "startedUtc": "2026-10-09T15:08:23.345781+00:00",
+              "completedUtc": "2026-10-09T15:08:32.509068+00:00",
+              "gateSha256": "5c318c45c297dc7b267724db4db3abfc5c42d9dfc93805a5377a055d3f88747b",
+              "hashedEvidenceFilesVerified": 21,
+              "hashedCapturesVerified": 3
+            },
+            {
+              "path": "local-validation/release-0.16.0/regression-first-ordinary/scroll-evidence/native-scroll.json",
+              "bytes": 2451,
+              "sha256": "176b98e2afe33806411000282a363b54bf15d9a1c25f23d55265123761e86891",
+              "success": false,
+              "skips": [],
+              "error": "unique paired-end tool",
+              "nativeWindowsExecuted": true,
+              "startedUtc": "2026-10-09T15:08:33.021314+00:00",
+              "completedUtc": "2026-10-09T15:09:04.480595+00:00",
+              "gateSha256": "3e5e5b47fb513b3e47269facc5d7cd7a8697e5c9edc54dc3be9385fa95a4f490",
+              "frameCollectionCompleted": false
+            }
+          ]
+        },
+        "spaces": {
+          "frozenInputs": {
+            "path": "local-validation/release-0.16.0/regression-first-spaces/release-regression-evidence/frozen-inputs.json",
+            "bytes": 1032,
+            "sha256": "570f5034601e0a30d1364c29707ba1b34d3cdaf22e9eea76a29d40fd48ca67e7"
+          },
+          "rebuilt": false,
+          "gateHashesVerifiedAtValidatorCommit": {
+            "scripts/check_workspace_ui_windows.py": "30a38a4f5bc8d5a5af93eee80560963f87e4ef019a3e98ec9780f1964d847d13",
+            "scripts/check_references_windows.py": "5920501af2272bce364afc3b28733a4f0fb4b7291aabaca42a683f4706b485b0",
+            "scripts/check_results_windows.py": "5c318c45c297dc7b267724db4db3abfc5c42d9dfc93805a5377a055d3f88747b",
+            "scripts/check_scroll_frames_windows.py": "3e5e5b47fb513b3e47269facc5d7cd7a8697e5c9edc54dc3be9385fa95a4f490"
+          },
+          "reports": [
+            {
+              "path": "local-validation/release-0.16.0/regression-first-spaces/results-evidence/native-results.json",
+              "bytes": 14514,
+              "sha256": "c83a3fae0bd01884c470d5c4bfb09d949e99ff5b3e1bb7b50512046d84f84662",
+              "success": true,
+              "passed": 9,
+              "failed": 0,
+              "skips": [],
+              "nativeWindowsExecuted": true,
+              "nativeGUIValidated": true,
+              "startedUtc": "2026-10-09T15:08:21.490049+00:00",
+              "completedUtc": "2026-10-09T15:08:29.833893+00:00",
+              "gateSha256": "5c318c45c297dc7b267724db4db3abfc5c42d9dfc93805a5377a055d3f88747b",
+              "hashedEvidenceFilesVerified": 21,
+              "hashedCapturesVerified": 3
+            },
+            {
+              "path": "local-validation/release-0.16.0/regression-first-spaces/scroll-evidence/native-scroll.json",
+              "bytes": 2451,
+              "sha256": "35e65e9b9f4897b7faf7b5b3503145bfa63353059930f2995cb40e3398b0f901",
+              "success": false,
+              "skips": [],
+              "error": "unique paired-end tool",
+              "nativeWindowsExecuted": true,
+              "startedUtc": "2026-10-09T15:08:30.282534+00:00",
+              "completedUtc": "2026-10-09T15:09:01.553364+00:00",
+              "gateSha256": "3e5e5b47fb513b3e47269facc5d7cd7a8697e5c9edc54dc3be9385fa95a4f490",
+              "frameCollectionCompleted": false
+            }
+          ]
+        },
+        "longpaths": {
+          "frozenInputs": {
+            "path": "local-validation/release-0.16.0/regression-first-longpaths/frozen-inputs.json",
+            "bytes": 747,
+            "sha256": "d1aec3b99ddc4ddc3a4cb5ec6e22563fd68f201e2b2045849082a52c89889664"
+          },
+          "rebuilt": false,
+          "gateHashesVerifiedAtValidatorCommit": {
+            "scripts/check_references_windows.py": "5920501af2272bce364afc3b28733a4f0fb4b7291aabaca42a683f4706b485b0",
+            "scripts/check_long_paths_windows.py": "8c325d0cc981e26f134377ecb1b717e3f9c71233bfdf4c5e60aa929fc3f334f3"
+          },
+          "reports": [
+            {
+              "path": "local-validation/release-0.16.0/regression-first-longpaths/native-long-paths.json",
+              "bytes": 2812,
+              "sha256": "13719ceafaaf8f836c53417c80826de2de49166b9746b1d87624b87ec01a23b7",
+              "success": false,
+              "passed": 1,
+              "skips": [],
+              "error": "The full Check installation operation failed: 7 of 7 application/integrity checks passed. Starter scientific check passed. 0 of 1 additional pack checks passed.",
+              "nativeWindowsExecuted": true,
+              "startedUtc": "2026-10-09T15:08:22.855779+00:00",
+              "completedUtc": "2026-10-09T15:08:25.717982+00:00",
+              "applicationCheck": {
+                "status": "failed",
+                "corePassed": 7,
+                "starterPassed": 1,
+                "starterFailed": 0,
+                "starterSkipped": 0
+              },
+              "policyProbe": {
+                "characters": 287,
+                "ordinaryIsFile": false,
+                "extendedIsFile": true
+              },
+              "scope": "Exact packaged private host and complete starter installation-check chain; no GUI claim.",
+              "starterNativeWorkingDirectoryCharacters": 254,
+              "starterAlignmentOutput": {
+                "characters": 268,
+                "bytes": 69141,
+                "sha256": "2ac15e71f432bc6dab26a11fbe84b87040f193c3f87545401f20bf945c25d064",
+                "ordinaryIsFile": false,
+                "extendedIsFile": true
+              }
+            },
+            {
+              "path": "local-validation/release-0.16.0/regression-first-longpaths/installation-service-result.json",
+              "bytes": 47587,
+              "sha256": "e0933f9a55c72f94affcc2895dbb3cebd1c62fc82a94a1d5ddb5747980810f15",
+              "success": false,
+              "status": "failed",
+              "passed": 8,
+              "failed": 0,
+              "nativeWindowsExecuted": true
+            },
+            {
+              "path": "local-validation/release-0.16.0/regression-first-longpaths/policy-setup.json",
+              "bytes": 214,
+              "sha256": "d44d90978c670f4fda439456cdf565b622f95ba11787cd5ad8fbe448b6eb121b",
+              "policy": {
+                "requestedValue": 0,
+                "observedValue": 0,
+                "restored": true,
+                "scope": "Disposable hosted CI runner only; no application or user-machine policy changes",
+                "restoredValue": 1,
+                "previousValue": 1
+              }
+            }
+          ]
+        }
+      }
+    },
+    "diagnostic": {
+      "runId": 37950614935,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37950614935",
+      "validatorCommit": "bdf053aaabe5b0ef7b254cd509c40f1d7b205593",
+      "sourceCommit": "7a9aca71ddd4816b51dbe693873f42fa50a6b746",
+      "overallConclusion": "failure",
+      "metadata": {
+        "path": "local-validation/release-0.16.0/regression-diagnostic-run.json",
+        "bytes": 7855,
+        "sha256": "ac23e0b0ff89e09bbfc7bbf50ebf5bd4c05f6215ebca95909c0aa35ef5159cf4"
+      },
+      "jobs": [
+        {
+          "id": 113888108890,
+          "name": "native-long-paths",
+          "conclusion": "failure",
+          "nonSuccessSteps": [
+            {
+              "name": "Recheck full scientific results with Windows long-path opt-in disabled",
+              "conclusion": "failure"
+            }
+          ]
+        },
+        {
+          "id": 113888109148,
+          "name": "native (ordinary)",
+          "conclusion": "success",
+          "nonSuccessSteps": []
+        },
+        {
+          "id": 113888109176,
+          "name": "native (path with spaces)",
+          "conclusion": "success",
+          "nonSuccessSteps": []
+        }
+      ],
+      "artifacts": [
+        {
+          "case": "ordinary",
+          "id": 11625767364,
+          "name": "curated-release-checks-ordinary-1",
+          "path": "local-validation/release-0.16.0/regression-diagnostic-ordinary.zip",
+          "bytes": 584309,
+          "sha256": "1d82d1c94c5625fa55b484cab24e08bb4703b122678313f3caeb2f98e90a479f",
+          "zipCrc": "passed",
+          "extractedFilesCompared": 154
+        },
+        {
+          "case": "spaces",
+          "id": 11625902864,
+          "name": "curated-release-checks-path with spaces-1",
+          "path": "local-validation/release-0.16.0/regression-diagnostic-spaces.zip",
+          "bytes": 584264,
+          "sha256": "796b3c4c31c3a1d776413d1a11cfbdc15e102f980f04af99f675c116eaf6a1b0",
+          "zipCrc": "passed",
+          "extractedFilesCompared": 154
+        },
+        {
+          "case": "longpaths",
+          "id": 11626086254,
+          "name": "curated-release-long-paths-1",
+          "path": "local-validation/release-0.16.0/regression-diagnostic-longpaths.zip",
+          "bytes": 34203,
+          "sha256": "e3c10e3829cae487eb2fa84c4a9f1cf425dfdb644592c0db94bb84892f209121",
+          "zipCrc": "passed",
+          "extractedFilesCompared": 19
+        }
+      ],
+      "cases": {
+        "ordinary": {
+          "frozenInputs": {
+            "path": "local-validation/release-0.16.0/regression-diagnostic-ordinary/release-regression-evidence/frozen-inputs.json",
+            "bytes": 1029,
+            "sha256": "b703122c2aaba76278fc71575197b8458880a27d11bcfc89052930c7e360511c"
+          },
+          "rebuilt": false,
+          "gateHashesVerifiedAtValidatorCommit": {
+            "scripts/check_scroll_frames_0160_windows.py": "e93a5c199415ee7231f052f640352f0c8fa90093946f237ac01840ba97baeed2",
+            "scripts/check_references_windows.py": "5920501af2272bce364afc3b28733a4f0fb4b7291aabaca42a683f4706b485b0",
+            "scripts/check_results_windows.py": "5c318c45c297dc7b267724db4db3abfc5c42d9dfc93805a5377a055d3f88747b",
+            "scripts/check_workspace_ui_windows.py": "30a38a4f5bc8d5a5af93eee80560963f87e4ef019a3e98ec9780f1964d847d13"
+          },
+          "reports": [
+            {
+              "path": "local-validation/release-0.16.0/regression-diagnostic-ordinary/results-evidence/native-results.json",
+              "bytes": 14513,
+              "sha256": "05c29f3a07b71d6d6994ccd8e79ee2efdab30dbd6f4a61fee95457fc1555d74d",
+              "success": true,
+              "passed": 9,
+              "failed": 0,
+              "skips": [],
+              "nativeWindowsExecuted": true,
+              "nativeGUIValidated": true,
+              "startedUtc": "2026-10-09T15:17:42.218574+00:00",
+              "completedUtc": "2026-10-09T15:17:49.871366+00:00",
+              "gateSha256": "5c318c45c297dc7b267724db4db3abfc5c42d9dfc93805a5377a055d3f88747b",
+              "hashedEvidenceFilesVerified": 21,
+              "hashedCapturesVerified": 3
+            },
+            {
+              "path": "local-validation/release-0.16.0/regression-diagnostic-ordinary/scroll-evidence/native-scroll.json",
+              "bytes": 320517,
+              "sha256": "fc2927b03beb040f53bf82ef98d06a5126a04a1b1718a50c44c7fa5dc2d503e1",
+              "success": true,
+              "passed": 3,
+              "skips": [],
+              "nativeWindowsExecuted": true,
+              "startedUtc": "2026-10-09T15:17:50.225908+00:00",
+              "completedUtc": "2026-10-09T15:18:29.591522+00:00",
+              "gateSha256": "e93a5c199415ee7231f052f640352f0c8fa90093946f237ac01840ba97baeed2",
+              "measurements": {
+                "panels": 3,
+                "sampledFrames": 960,
+                "requestedEndpointTransitions": 300,
+                "observedEndpointTransitions": 300,
+                "unexpectedFrames": 0,
+                "endpointFailures": 0,
+                "precisionCases": 18,
+                "precisionCasesPassed": 18,
+                "hashedReferenceCapturesVerified": 9
+              },
+              "toolSelection": {
+                "expectedLabel": "minimap2 — Paired-end alignment (SAM)",
+                "visibleLabels": [
+                  "minimap2 — Paired-end alignment (SAM)",
+                  "minimap2 — Paired-end alignment with verified index (SAM)"
+                ],
+                "reason": "The standard and verified-index alignment operations are distinct library rows."
+              },
+              "scope": "Displayed static text/background during finite scrolling; child edits/buttons masked; actual reported DPI only",
+              "dpi": 96
+            }
+          ]
+        },
+        "spaces": {
+          "frozenInputs": {
+            "path": "local-validation/release-0.16.0/regression-diagnostic-spaces/release-regression-evidence/frozen-inputs.json",
+            "bytes": 1037,
+            "sha256": "67beb68a3233bd23d3d008e86597793511fd11d35a8d30616d758a5439049fb2"
+          },
+          "rebuilt": false,
+          "gateHashesVerifiedAtValidatorCommit": {
+            "scripts/check_results_windows.py": "5c318c45c297dc7b267724db4db3abfc5c42d9dfc93805a5377a055d3f88747b",
+            "scripts/check_scroll_frames_0160_windows.py": "e93a5c199415ee7231f052f640352f0c8fa90093946f237ac01840ba97baeed2",
+            "scripts/check_workspace_ui_windows.py": "30a38a4f5bc8d5a5af93eee80560963f87e4ef019a3e98ec9780f1964d847d13",
+            "scripts/check_references_windows.py": "5920501af2272bce364afc3b28733a4f0fb4b7291aabaca42a683f4706b485b0"
+          },
+          "reports": [
+            {
+              "path": "local-validation/release-0.16.0/regression-diagnostic-spaces/results-evidence/native-results.json",
+              "bytes": 14514,
+              "sha256": "8b65b6a427a8e0cadf53faf25c48bc87f61f30bcb45e5fdca8383e055919c513",
+              "success": true,
+              "passed": 9,
+              "failed": 0,
+              "skips": [],
+              "nativeWindowsExecuted": true,
+              "nativeGUIValidated": true,
+              "startedUtc": "2026-10-09T15:17:42.214968+00:00",
+              "completedUtc": "2026-10-09T15:17:51.484470+00:00",
+              "gateSha256": "5c318c45c297dc7b267724db4db3abfc5c42d9dfc93805a5377a055d3f88747b",
+              "hashedEvidenceFilesVerified": 21,
+              "hashedCapturesVerified": 3
+            },
+            {
+              "path": "local-validation/release-0.16.0/regression-diagnostic-spaces/scroll-evidence/native-scroll.json",
+              "bytes": 320546,
+              "sha256": "ef4758d853c46479d0c6cbdbccb86e99b14b9ed8eb1e50dc7030bb711e8cb43e",
+              "success": true,
+              "passed": 3,
+              "skips": [],
+              "nativeWindowsExecuted": true,
+              "startedUtc": "2026-10-09T15:17:52.009324+00:00",
+              "completedUtc": "2026-10-09T15:18:34.107930+00:00",
+              "gateSha256": "e93a5c199415ee7231f052f640352f0c8fa90093946f237ac01840ba97baeed2",
+              "measurements": {
+                "panels": 3,
+                "sampledFrames": 960,
+                "requestedEndpointTransitions": 300,
+                "observedEndpointTransitions": 300,
+                "unexpectedFrames": 0,
+                "endpointFailures": 0,
+                "precisionCases": 18,
+                "precisionCasesPassed": 18,
+                "hashedReferenceCapturesVerified": 9
+              },
+              "toolSelection": {
+                "expectedLabel": "minimap2 — Paired-end alignment (SAM)",
+                "visibleLabels": [
+                  "minimap2 — Paired-end alignment (SAM)",
+                  "minimap2 — Paired-end alignment with verified index (SAM)"
+                ],
+                "reason": "The standard and verified-index alignment operations are distinct library rows."
+              },
+              "scope": "Displayed static text/background during finite scrolling; child edits/buttons masked; actual reported DPI only",
+              "dpi": 96
+            }
+          ]
+        },
+        "longpaths": {
+          "frozenInputs": {
+            "path": "local-validation/release-0.16.0/regression-diagnostic-longpaths/frozen-inputs.json",
+            "bytes": 752,
+            "sha256": "626c2a5e2abfa549c98a66ab1fb52b7c0b52f6297953a0e47fdc6e4a773aeded"
+          },
+          "rebuilt": false,
+          "gateHashesVerifiedAtValidatorCommit": {
+            "scripts/check_long_paths_0160_windows.py": "5de1cc348169824a6fb8e9f9ece9fa860e46ccf13bf8274e7b86464c78f62bec",
+            "scripts/check_references_windows.py": "5920501af2272bce364afc3b28733a4f0fb4b7291aabaca42a683f4706b485b0"
+          },
+          "reports": [
+            {
+              "path": "local-validation/release-0.16.0/regression-diagnostic-longpaths/native-long-paths.json",
+              "bytes": 7673,
+              "sha256": "0c6f509c86f605130c8fcc9f16ac33d0de2edf5182d1a716b53f21d17dcd5689",
+              "success": false,
+              "passed": 1,
+              "skips": [],
+              "error": "The full Check installation operation failed: 7 of 7 application/integrity checks passed. Starter scientific check passed. 0 of 1 additional pack checks passed.",
+              "nativeWindowsExecuted": true,
+              "startedUtc": "2026-10-09T15:17:41.593016+00:00",
+              "completedUtc": "2026-10-09T15:17:44.380840+00:00",
+              "gateSha256": "5de1cc348169824a6fb8e9f9ece9fa860e46ccf13bf8274e7b86464c78f62bec",
+              "applicationCheck": {
+                "status": "failed",
+                "corePassed": 7,
+                "starterPassed": 1,
+                "starterFailed": 0,
+                "starterSkipped": 0
+              },
+              "policyProbe": {
+                "characters": 287,
+                "ordinaryIsFile": false,
+                "extendedIsFile": true
+              },
+              "scope": "Exact packaged private host and complete starter installation-check chain; no GUI claim.",
+              "starterNativeWorkingDirectoryCharacters": 254,
+              "starterAlignmentOutput": {
+                "characters": 268,
+                "bytes": 69141,
+                "sha256": "2ac15e71f432bc6dab26a11fbe84b87040f193c3f87545401f20bf945c25d064",
+                "ordinaryIsFile": false,
+                "extendedIsFile": true
+              }
+            },
+            {
+              "path": "local-validation/release-0.16.0/regression-diagnostic-longpaths/installation-service-result.json",
+              "bytes": 47587,
+              "sha256": "56773c5bce52b5e54c4270623f34f99e786f9ce2420472720432f77678e60b50",
+              "success": false,
+              "status": "failed",
+              "passed": 8,
+              "failed": 0,
+              "nativeWindowsExecuted": true
+            },
+            {
+              "path": "local-validation/release-0.16.0/regression-diagnostic-longpaths/policy-setup.json",
+              "bytes": 214,
+              "sha256": "01c29ab7f3b3d3135fa536b36c3d0783eda7d17b4d4a41ad5579e0bfc4afc4b6",
+              "policy": {
+                "requestedValue": 0,
+                "restoredValue": 1,
+                "previousValue": 1,
+                "observedValue": 0,
+                "restored": true,
+                "scope": "Disposable hosted CI runner only; no application or user-machine policy changes"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "rejection": {
+    "failedOperation": "Check installation: additional align 0.4.1 scientific check",
+    "checkId": "align/paired-mapping-known-answer@0.4.1",
+    "overallError": "The full Check installation operation failed: 7 of 7 application/integrity checks passed. Starter scientific check passed. 0 of 1 additional pack checks passed.",
+    "nativeErrorVerbatim": "Cannot start D:\\a\\_temp\\long-path-frozen\\native-workbench\\packs\\align-0.4.1\\bin\\paircheck.exe: The directory name is invalid. Intermediate files and diagnostics are retained in D:\\a\\_temp\\frozen synthetic check\\synthetic nested results xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\\installation-20261009-151741-271505ab\\pack-checks-20261009-151744-bd9a29b3\\run-20261009-151744-15df9e7b\\S1\\analysis-20261009-151744-7160-0.",
+    "failedNativeStep": {
+      "id": "check-pairs",
+      "label": "Validate paired FASTQ records",
+      "toolId": "paircheck",
+      "executable": "D:\\a\\_temp\\long-path-frozen\\native-workbench\\packs\\align-0.4.1\\bin\\paircheck.exe",
+      "workingDirectory": "D:\\a\\_temp\\frozen synthetic check\\synthetic nested results xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\\installation-20261009-151741-271505ab\\pack-checks-20261009-151744-bd9a29b3\\run-20261009-151744-15df9e7b\\S1\\analysis-20261009-151744-7160-0",
+      "workingDirectoryCharacters": 291,
+      "exitCode": null,
+      "processCoverage": "not-started"
+    },
+    "pack": {
+      "id": "align",
+      "version": "0.4.1",
+      "name": "Read alignment",
+      "manifest_sha256": "7f8f36efbfd6a8255a98eabb06746fbcc5bbdb872f392a65ca3e79a586d04939",
+      "integrity_verified": true
+    },
+    "tools": [
+      {
+        "id": "minimap2",
+        "version": "2.28-r1209",
+        "path": "D:\\a\\_temp\\long-path-frozen\\native-workbench\\packs\\align-0.4.1\\bin\\minimap2.exe",
+        "sha256": "06bf0815a79552ffcb1291046c7828f2bf8b11d9ad7fe0d9309283e966e973fa"
+      },
+      {
+        "id": "paircheck",
+        "version": "1.0.1",
+        "path": "D:\\a\\_temp\\long-path-frozen\\native-workbench\\packs\\align-0.4.1\\bin\\paircheck.exe",
+        "sha256": "4f2dda7e26b5c115a7edee936a8a059eb55ece244931b2799a62cebfcd44ecd4"
+      }
+    ],
+    "observations": [
+      "Seven application/integrity checks and the full starter scientific check passed; the overall installation check remained failed because the additional pack check failed.",
+      "The failed native record and log show paircheck launch failing with an invalid directory before the command started. The following alignment step remained pending; no completed final outputs were recorded for this additional pack check.",
+      "The recorded additional-pack working directory has 291 characters and contains a pack-checks-* directory between the installation folder and graph run folder. The starter command working directory has 254 characters.",
+      "Input identities and pack executable/asset hashes verified before launch; the failure is not a reported scientific mismatch or a changed fixture."
+    ],
+    "diagnosis": "The additional installation pack-check path introduces an unnecessary nested pack-checks-* directory. The longer native process working directory exceeds the supported Windows process-launch path boundary in this fixture and CreateProcess rejects it. This source-level diagnosis is supported by the retained failed native record and command log; no corrected-build native pass is claimed here.",
+    "diagnosticFiles": [
+      {
+        "path": "local-validation/release-0.16.0/regression-diagnostic-longpaths/additional-pack-diagnostics/0/graph.json",
+        "bytes": 1193,
+        "sha256": "f8f66db846da4ebbc7c719d3eecfe8d635e8df061f872a8f96748fba42e85fb6"
+      },
+      {
+        "path": "local-validation/release-0.16.0/regression-diagnostic-longpaths/additional-pack-diagnostics/0/methods-completed.txt",
+        "bytes": 359,
+        "sha256": "bde0d30d8a3d3b064b664632e911405d6348b6a4035eb0d56dad2815784be9cc"
+      },
+      {
+        "path": "local-validation/release-0.16.0/regression-diagnostic-longpaths/additional-pack-diagnostics/0/methods-planned.txt",
+        "bytes": 919,
+        "sha256": "5e753049c9d4e57609c0cd4eb914b29341cfb373282df6b3c356c30c39ca5e3e"
+      },
+      {
+        "path": "local-validation/release-0.16.0/regression-diagnostic-longpaths/additional-pack-diagnostics/0/performance.json",
+        "bytes": 6353,
+        "sha256": "5b4ae49d3be0f1b049eca9e10601e2925fbb95d5aa8961283bf2cab98fc43cd1"
+      },
+      {
+        "path": "local-validation/release-0.16.0/regression-diagnostic-longpaths/additional-pack-diagnostics/0/plan.json",
+        "bytes": 14656,
+        "sha256": "03efa705906cdcd4dd841e3219286f5ac634a257acd2e95afd083705eb14b81f"
+      },
+      {
+        "path": "local-validation/release-0.16.0/regression-diagnostic-longpaths/additional-pack-diagnostics/0/run.json",
+        "bytes": 3311,
+        "sha256": "b0ea3a924ed539bda2a1a905bdb3ec43ee3df767d502e063c97fdde88ea16db4"
+      },
+      {
+        "path": "local-validation/release-0.16.0/regression-diagnostic-longpaths/additional-pack-diagnostics/0/S1/bridge-request.json",
+        "bytes": 1260,
+        "sha256": "f98518717f98ab6eacf0b43dfab8d8ba0283249bb4609fe8ae30060912aff285"
+      },
+      {
+        "path": "local-validation/release-0.16.0/regression-diagnostic-longpaths/additional-pack-diagnostics/0/S1/analysis-20261009-151744-7160-0/read-pairs.json",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "local-validation/release-0.16.0/regression-diagnostic-longpaths/additional-pack-diagnostics/0/S1/analysis-20261009-151744-7160-0/run.json",
+        "bytes": 10291,
+        "sha256": "4f7ee48aed4ac3ae99a157316da5ead5da21b2288e4a3c7ea15a552daedf70cc"
+      },
+      {
+        "path": "local-validation/release-0.16.0/regression-diagnostic-longpaths/additional-pack-diagnostics/0/S1/analysis-20261009-151744-7160-0/workbench.log",
+        "bytes": 1244,
+        "sha256": "05b6cb8785490afc19be47383451194817a8c0c32167e9019fa2e75eb9f33300"
+      },
+      {
+        "path": "local-validation/release-0.16.0/regression-diagnostic-longpaths/additional-pack-diagnostics/0/S1/analysis-20261009-151744-7160-0/logs/check-pairs.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "diagnosticBytes": 39586,
+    "diagnosticCollectionErrors": []
+  },
+  "scrollFixtureCorrection": {
+    "firstFailure": "unique paired-end tool",
+    "cause": "The broad paired-end search exposes both standard and verified-index alignment rows. The historical fixture incorrectly required one total row and failed before scrolling frame collection.",
+    "correction": "The version-local 0.16 validator selects the exact standard Paired-end alignment (SAM) label and retains the scrolling assertions. The application bytes remain unchanged.",
+    "diagnosticOutcome": "Both ordinary and space-containing cases passed the three panel checks on the same historical Starter bytes. These scrolling passes do not override the independent long-path installation failure.",
+    "localReview": {
+      "path": "local-validation/release-0.16.0/regression-gate-local-review.json",
+      "bytes": 570,
+      "sha256": "137b5afbdc6e998c8f66f2b1fe40e8168f0be0dce1620c71db6fb312ce970c52"
+    }
+  },
+  "retainedSummaries": [
+    {
+      "path": "local-validation/release-0.16.0/regression-first-summary.json",
+      "bytes": 5816,
+      "sha256": "9a449adda6666fafc6b857e9a6c53c1262a0ead26afe918185646c9b9cd92a26"
+    },
+    {
+      "path": "local-validation/release-0.16.0/regression-diagnostic-longpaths-summary.json",
+      "bytes": 2340,
+      "sha256": "ced31e01d3f8617ad45756de2eeef16c4ffd72266915b2efb89428c4c2223749"
+    }
+  ],
+  "verification": {
+    "archivesVerified": 6,
+    "archiveChecks": "SHA-256 and byte count matched retained GitHub artifact metadata; ZIP CRCs passed; every retained extracted member was compared byte-for-byte with its archive.",
+    "gateChecks": "Every frozen-input validator hash was compared with the named validator commit via git show.",
+    "reportChecks": "First and diagnostic summary report identities were recomputed; successful results-report evidence lists, diagnostic scroll reference captures and all 11 retained additional-pack diagnostic files were rehashed.",
+    "nativeExecution": "Hosted Windows reports are the native execution evidence. Local verification only parses and hashes downloaded evidence; it does not execute Windows applications."
+  },
+  "acceptanceImpact": {
+    "historicalCandidateSource": "7a9aca71ddd4816b51dbe693873f42fa50a6b746",
+    "historicalSuccessfulCandidateRunId": 37941573921,
+    "historicalSuccessfulUpdaterRunId": 37949918855,
+    "historicalPassesRemainRecorded": true,
+    "passesInheritedByFutureBuild": false,
+    "requiredNextEvidence": "Fix the additional pack-check output nesting, freeze new source and archive hashes, then rerun exact candidate, release-regression and baseline-updater gates against the new bytes. Historical 7a9aca7 candidate, updater and partial regression passes do not validate the new build."
+  },
+  "limits": [
+    "The first long-path attempt did not retain the failed additional pack command records; the diagnostic attempt supplies those records and identifies the launch error.",
+    "Long-path policy was changed only on disposable hosted runners, observed at zero and restored to its original value of one in both attempts. No application or user-machine policy modification is implied.",
+    "The long-path check is a private-host/scientific execution check, not a GUI claim. The starter alignment output evidence is partial success within an overall failed installation check.",
+    "Scrolling evidence covers finite sampled desktop frames at the reported DPI, with child controls masked. It does not exclude all between-sample transients or establish physical trackpad/display behavior.",
+    "This record does not claim a fix passed, approve release, publish artifacts or transfer any prior pass to newly built application bytes."
+  ]
+}
