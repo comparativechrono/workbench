@@ -1,10 +1,13 @@
-name: Recheck frozen 0.16.1 native keyboard and displayed frames
+name: Recheck frozen 0.16.1 tester feedback and native patch
 
 on:
   push:
     branches: [fix/native-ui-0.16.1]
     paths:
       - 'scripts/check_ui_patch_windows.py'
+      - 'scripts/check_tester_feedback_windows.py'
+      - 'tests/test_ui_patch_gate.py'
+      - 'tests/test_tester_feedback_gate.py'
       - '.github/workflows/native-ui-patch-recheck.yml'
   workflow_dispatch:
 
@@ -17,12 +20,25 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  SOURCE_COMMIT: 8938e709b041106e8a46e1447383e8e9ba3e0cb9
-  STARTER_SHA256: 7dfed53de2279f51deaea405dbfd29b36cddb733e5a20c43b3112f27a7728a8e
-  UPDATE_SHA256: f2dc435495f43d837e80837f3ba83ff7b6963294219d5bc88bc8fb0e5d82effd
+  SOURCE_COMMIT: 73778e00461e2b83c07b9ea97df2b9c5d4b6317d
+  STARTER_SHA256: 1291f93b5ece3c4da34eb2f2e29fccc83b6d87ec5fb73abf28bfd9cc8f155b75
+  UPDATE_SHA256: 86dd3d9796099b366a9e01012acc50d00d501a1fdaab89b7119236b44db4b4d8
 
 jobs:
+  validator:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Check validator contracts
+        run: |
+          python3 tests/test_ui_patch_gate.py
+          python3 tests/test_tester_feedback_gate.py
+          python3 -m py_compile scripts/check_ui_patch_windows.py scripts/check_tester_feedback_windows.py
   native:
+    needs: validator
     runs-on: windows-2022
     timeout-minutes: 30
     strategy:
@@ -35,11 +51,11 @@ jobs:
           ref: ${{ github.sha }}
           fetch-depth: 0
           persist-credentials: false
-      - name: Retrieve the exact third candidate without rebuilding
+      - name: Retrieve the exact tester feedback candidate without rebuilding
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
-          name: ui-patch-candidate-8938e709b041106e8a46e1447383e8e9ba3e0cb9
-          run-id: 37988570028
+          name: ui-patch-candidate-73778e00461e2b83c07b9ea97df2b9c5d4b6317d
+          run-id: 37997370988
           github-token: ${{ github.token }}
           path: ${{ runner.temp }}/frozen-patch-candidate
       - name: Verify unchanged production sources and frozen application identities
@@ -49,7 +65,7 @@ jobs:
           CASE_FOLDER: ${{ matrix.folder }}
         run: |
           $ErrorActionPreference = 'Stop'
-          git diff --exit-code $env:SOURCE_COMMIT -- desktop workspace scripts/build_ui_patch_candidate.py scripts/package_split.py scripts/make_core_update.py scripts/apply_core_update.py scripts/apply_desktop_update.py
+          git diff --exit-code $env:SOURCE_COMMIT -- desktop workspace examples scripts/build_ui_patch_candidate.py scripts/package_split.py scripts/make_core_update.py scripts/apply_core_update.py scripts/apply_desktop_update.py
           if ($LASTEXITCODE -ne 0) { throw 'Production or packaging source changed; use a new candidate build instead of a frozen recheck.' }
           $candidate = Join-Path $env:RUNNER_TEMP 'frozen-patch-candidate'
           $starter = Join-Path $candidate 'native-workbench-0.16.1-starter-windows.zip'
@@ -57,7 +73,7 @@ jobs:
           $source = Join-Path $candidate 'native-workbench-0.16.1-source.zip'
           if ((Get-FileHash $starter -Algorithm SHA256).Hash -ne $env:STARTER_SHA256) { throw 'Frozen Starter identity mismatch.' }
           if ((Get-FileHash $updater -Algorithm SHA256).Hash -ne $env:UPDATE_SHA256) { throw 'Frozen updater identity mismatch.' }
-          if ((Get-FileHash $source -Algorithm SHA256).Hash -ne '48523c0e7090f661442bec2999c1658a1532ad7a5fa7fe882b1081b23452acc7') { throw 'Frozen source companion identity mismatch.' }
+          if ((Get-FileHash $source -Algorithm SHA256).Hash -ne '0accfb48b8b7b3193b4c72e76c45c404db7979d877ce0805d2687d5a849fe1f1') { throw 'Frozen source companion identity mismatch.' }
           $provenance = Get-Content (Join-Path $candidate 'BUILD-PROVENANCE.json') -Raw | ConvertFrom-Json
           if ($provenance.sourceCommit -ne $env:SOURCE_COMMIT -or $provenance.appVersion -ne '0.16.1') { throw 'Frozen build provenance mismatch.' }
           $baseline = Join-Path $env:RUNNER_TEMP 'baseline-0.16.0.zip'
@@ -65,13 +81,14 @@ jobs:
           if ((Get-FileHash $baseline -Algorithm SHA256).Hash -ne 'f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073') { throw 'Published baseline identity mismatch.' }
           $case = Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER
           Expand-Archive $starter (Join-Path $case 'patch')
+          Expand-Archive $starter (Join-Path $case 'feedback')
           Expand-Archive $updater (Join-Path $case 'updater')
           $evidence = Join-Path $env:RUNNER_TEMP 'patch-recheck-evidence'
           New-Item -ItemType Directory -Path $evidence | Out-Null
           @{ schema = 1; kind = 'frozen-ui-patch-recheck-inputs'; sourceCommit = $env:SOURCE_COMMIT;
-             gateCommit = $env:GITHUB_SHA; candidateRun = 37988570028; appVersion = '0.16.1';
+             gateCommit = $env:GITHUB_SHA; candidateRun = 37997370988; appVersion = '0.16.1';
              starterSha256 = $env:STARTER_SHA256; updateSha256 = $env:UPDATE_SHA256;
-             sourceSha256 = '48523c0e7090f661442bec2999c1658a1532ad7a5fa7fe882b1081b23452acc7';
+             sourceSha256 = '0accfb48b8b7b3193b4c72e76c45c404db7979d877ce0805d2687d5a849fe1f1';
              rebuilt = $false; installationCase = $env:CASE_FOLDER;
              scope = 'Frozen archive and source identities only; native interaction and displayed-frame observations are separate.' } |
             ConvertTo-Json -Depth 4 | Set-Content (Join-Path $evidence 'frozen-inputs.json')
@@ -87,6 +104,17 @@ jobs:
           $candidate = Join-Path $env:RUNNER_TEMP 'frozen-patch-candidate'
           & (Join-Path $app 'runtime/python/python.exe') -I -B scripts/check_ui_patch_windows.py --app-root $app --baseline-archive (Join-Path $env:RUNNER_TEMP 'baseline-0.16.0.zip') --update-root (Join-Path $case 'updater') --starter-archive (Join-Path $candidate 'native-workbench-0.16.1-starter-windows.zip') --update-archive (Join-Path $candidate 'native-workbench-0.16.1-update-from-0.16.0.zip') --starter-sha256 $env:STARTER_SHA256 --update-sha256 $env:UPDATE_SHA256 --source-commit $env:SOURCE_COMMIT --gate-commit $env:GITHUB_SHA --work (Join-Path $case 'patch-gate-work') --report "$env:RUNNER_TEMP/patch-recheck-evidence/patch/native-ui-patch.json"
           if ($LASTEXITCODE -ne 0) { throw 'Frozen native patch recheck failed; retained observations must not be treated as passes.' }
+      - name: Observe Run repaint, category viewport, separate Methods and sample table editing
+        if: always() && !cancelled() && steps.prepare.outcome == 'success'
+        shell: pwsh
+        env:
+          CASE_FOLDER: ${{ matrix.folder }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $app = Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'feedback/native-workbench'
+          $candidate = Join-Path $env:RUNNER_TEMP 'frozen-patch-candidate'
+          & (Join-Path $app 'runtime/python/python.exe') -I -B scripts/check_tester_feedback_windows.py --app-root $app --report "$env:RUNNER_TEMP/patch-recheck-evidence/feedback/native-tester-feedback.json" --source-commit $env:SOURCE_COMMIT --gate-commit $env:GITHUB_SHA --asset-sha256 $env:STARTER_SHA256 --asset-name 'native-workbench-0.16.1-starter-windows.zip' --starter-archive (Join-Path $candidate 'native-workbench-0.16.1-starter-windows.zip') --app-version 0.16.1
+          if ($LASTEXITCODE -ne 0) { throw 'Tester feedback regression failed; temporal observations and failures are retained.' }
       - name: Retain checks, failures and actual displayed frames
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

@@ -22,6 +22,7 @@ sys.dont_write_bytecode = True
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from build_update_090 import extract
 from build_update_0160 import verify_inventory
+from apply_core_update import core_inventory
 from check_references_windows import PrivateHost, require, sha256, write_json
 from check_update_090_windows import read_json, preserved_files, synthetic_reference
 from check_update_0160_windows import local_reference_run
@@ -48,6 +49,21 @@ def validate_identities(args):
     for name in ('starter_sha256', 'update_sha256'):
         require(re.fullmatch('[0-9a-f]{64}', getattr(args, name)), 'Exact candidate archive SHA-256 required.')
     require(args.starter_sha256 != BASELINE_SHA, 'Candidate must differ from the published baseline.')
+
+
+def verify_candidate_core(root, manifest):
+    """Count only the validated inventory from the already verified Starter."""
+    require(manifest.get('version') == TARGET_VERSION, 'Unexpected candidate target manifest.')
+    inventory = core_inventory(manifest)
+    verify_inventory(root, inventory.values())
+    return len(inventory)
+
+
+def verify_core_transaction(transaction, expected_files):
+    require(transaction.get('status') == 'installed' and transaction.get('version') == TARGET_VERSION and
+            type(transaction.get('files_verified')) is int and transaction['files_verified'] == expected_files and
+            transaction.get('packs_changed') is False,
+            'Packaged launcher did not finish a verified core update.')
 
 
 def inside(inner, outer):
@@ -370,8 +386,7 @@ def run(args, report):
     # the preservation oracle disagree with its own freshly created fixture.
     (invalid / 'keep.txt').write_bytes(b'Invalid folder must remain unchanged.\n')
     target_manifest = read_json(target / 'manifest.json')
-    require(target_manifest['version'] == TARGET_VERSION and len(target_manifest['files']) == 87, 'Unexpected candidate target manifest.')
-    verify_inventory(target, target_manifest['files'])
+    target_core_files = verify_candidate_core(target, target_manifest)
     verify_inventory(base, read_json(base / 'manifest.json')['files'])
     verify_inventory(update, read_json(update / 'update-inventory.json')['files'])
     report['updaterLauncherSha256'] = sha256(update / 'UpdateWorkbench.exe')
@@ -406,13 +421,11 @@ def run(args, report):
     transactions = list((base / 'updates').glob('core-*/update-result.json'))
     require(len(transactions) == 1, 'Expected one real committed updater transaction.')
     transaction = read_json(transactions[0])
-    require(transaction['status'] == 'installed' and transaction['version'] == TARGET_VERSION and
-            transaction['files_verified'] == 87 and transaction['packs_changed'] is False,
-            'Packaged launcher did not finish a verified core update.')
+    verify_core_transaction(transaction, target_core_files)
     report['transaction'] = transaction
-    report['coreFilesVerified'] = 87
+    report['coreFilesVerified'] = target_core_files
     report['preservedFiles'] = len(preserved)
-    passed(report, 'updater-install', 'Selecting the actual baseline through the published folder picker displays success, commits all 87 exact Starter core files, and preserves every recorded pack/user/result/reference file.')
+    passed(report, 'updater-install', 'Selecting the actual baseline through the published folder picker displays success, commits all ' + str(target_core_files) + ' exact Starter core files, and preserves every recorded pack/user/result/reference file.')
     installed_snapshot = tree_hashes(base)
     updater_scenario(update, evidence, report, 'repeat', base, invalid)
     differences = {'installation': tree_difference(installed_snapshot, tree_hashes(base)),

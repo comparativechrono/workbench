@@ -8,7 +8,10 @@ on:
       - 'workspace/**'
       - 'scripts/**'
       - '!scripts/check_ui_patch_windows.py'
+      - '!scripts/check_tester_feedback_windows.py'
       - 'tests/**'
+      - '!tests/test_ui_patch_gate.py'
+      - '!tests/test_tester_feedback_gate.py'
   workflow_dispatch:
 
 permissions:

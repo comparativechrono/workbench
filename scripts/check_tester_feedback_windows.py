@@ -449,11 +449,12 @@ def methods_and_missing_input(ui, report):
     ui.wait('separate planned Methods dialog', lambda: window(ui, 'Planned methods'))
     owner = window(ui, 'Planned methods')
     body = ui.label(ui.child(105, owner))
-    require('SAMtools' in body and ('sort' in body.lower()) and len(body) > 100,
-            'Methods does not expose the selected scientific operation.')
-    require('Readiness' not in ui.label(owner), 'Methods remains hidden under readiness.')
     report['methods'] = {'title': ui.label(owner), 'text': body,
                           'textSha256': hashlib.sha256(body.encode()).hexdigest()}
+    require('samtools 1.24 (pack bam 0.4.0)' in body.lower() and
+            'coordinate sort' in body.lower() and len(body) > 100,
+            'Methods does not expose the selected scientific operation.')
+    require('Readiness' not in ui.label(owner), 'Methods remains hidden under readiness.')
     visible_capture(ui, report, 'separate-planned-methods', owner)
     button(ui, owner, 2)
     ui.wait('planned Methods closed', lambda: not window(ui, 'Planned methods'))

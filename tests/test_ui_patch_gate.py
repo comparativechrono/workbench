@@ -1,5 +1,6 @@
 """Portable evidence guards; these are not Windows UI acceptance tests."""
 import importlib.util
+import hashlib
 from pathlib import Path
 from types import SimpleNamespace
 import tempfile
@@ -13,6 +14,43 @@ SPEC.loader.exec_module(gate)
 
 
 class UIPatchGateTests(unittest.TestCase):
+    def test_candidate_inventory_growth_requires_matching_verified_transaction_count(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest = {'schema_version': 2, 'ownership': 'core', 'pack_management': 'independent',
+                        'interface': 'native-win32', 'requires_browser': False,
+                        'transport': 'anonymous-pipes', 'manifest_includes_itself': False,
+                        'version': gate.TARGET_VERSION, 'files': []}
+
+            def add_file(name):
+                data = ('fixture ' + name).encode()
+                path = root / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(data)
+                manifest['files'].append({'path': name, 'bytes': len(data),
+                                          'sha256': hashlib.sha256(data).hexdigest()})
+
+            for name in ['NativeWorkbench.exe', 'WorkbenchBridge.exe', 'workspace/desktop_host.py'] + [
+                    'workspace/fixture_%d.py' % i for i in range(84)]:
+                add_file(name)
+            self.assertEqual(gate.verify_candidate_core(root, manifest), 87)
+            for name in ['workspace/sample_table_editor.py', 'examples/starter/samples.csv',
+                         'examples/starter/samples-README.txt']:
+                add_file(name)
+            expected = gate.verify_candidate_core(root, manifest)
+            self.assertEqual(expected, 90)
+            transaction = {'status': 'installed', 'version': gate.TARGET_VERSION,
+                           'files_verified': expected, 'packs_changed': False}
+            gate.verify_core_transaction(transaction, expected)
+            for change in [{'files_verified': 87}, {'files_verified': 89}, {'files_verified': 91},
+                           {'files_verified': '90'}, {'status': 'already-installed'},
+                           {'version': '0.16.0'}, {'packs_changed': True}]:
+                with self.subTest(change=change), self.assertRaises(AssertionError):
+                    gate.verify_core_transaction(dict(transaction, **change), expected)
+            (root / 'workspace/sample_table_editor.py').write_bytes(b'changed')
+            with self.assertRaisesRegex(ValueError, 'Frozen input differs'):
+                gate.verify_candidate_core(root, manifest)
+
     def test_rejects_missing_or_unpinned_candidate_identities(self):
         good = dict(source_commit='1' * 40, gate_commit='2' * 40,
                     starter_sha256='a' * 64, update_sha256='b' * 64)
