@@ -1,6 +1,27 @@
 # Development roadmap
 
-## Active set: native keyboard and narrow-display patch
+## Active set: tester-feedback revision of unpublished 0.16.1
+
+The existing [draft PR #15](https://github.com/comparativechrono/workbench/pull/15)
+continues from `8cd3457745da52d38b5470c9ae917c8394ca46b0`, with published 0.16.0
+unchanged. The bounded revision addresses Run/poll redraw flashing, category
+expansion viewport anchoring and collapse black flash; restores separate Methods
+while keeping Run preflight and removing the primary Readiness button; and adds
+native sample-table New/Edit/Save as CSV/TSV plus a verified one-row Starter
+example. File columns, base folders and mapping stay explicit. This does not add
+runtime/memory forecasts or fabricate independent replicates.
+
+Implementation and validation are pending. The next delivery requires new exact
+source/native/archive/temporal/screenshot evidence in ordinary and spaced Windows
+paths, including the existing 19-check patch scope and 65 other native checks plus
+new tester-feedback and batch gates. Keep the previous candidate's receipts
+unchanged: its 141 source passes and 84 native checks per path apply only to
+`8938e709` archives. The [new handover](tester-feedback-0.16.1-handover.md) records
+the plan and evidence boundary. No merge or release is included. Benchmarking is
+separate, and external acceptance/signing/IT, scientific Linux CWL and SDK/build
+recovery remain outstanding.
+
+## Prior set: native keyboard and narrow-display patch
 
 [Draft PR #15](https://github.com/comparativechrono/workbench/pull/15) carries the
 unpublished **0.16.1** follow-up on `fix/native-ui-0.16.1`, stacked on
@@ -8,8 +29,9 @@ unpublished **0.16.1** follow-up on `fix/native-ui-0.16.1`, stacked on
 `8938e709b041106e8a46e1447383e8e9ba3e0cb9` addresses the observed Results
 keyboard focus/Escape defect and the clipped initial window on a 1024-pixel
 desktop. It retains the three-pane layout and uses the monitor work area for
-placement and minimum-size bounds. This set is ready as an unpublished draft
-review candidate. Published **0.16.0** is unchanged; nothing is merged or released.
+placement and minimum-size bounds. That candidate completed its unpublished
+draft-review validation before the
+active tester-feedback revision. Published **0.16.0** is unchanged; nothing is merged or released.
 
 [Run 37988570028](https://github.com/comparativechrono/workbench/actions/runs/37988570028)
 passed 141 source tests and 84 native checks per Windows path, and the independent

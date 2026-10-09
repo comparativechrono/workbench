@@ -1,6 +1,33 @@
 # Current project state
 
-## Active development: unpublished native keyboard and narrow-display patch
+## Active development: tester-feedback revision of unpublished 0.16.1
+
+Snapshot: **2026-10-09**. [Draft PR #15](https://github.com/comparativechrono/workbench/pull/15)
+continues on `fix/native-ui-0.16.1` from verified head
+`8cd3457745da52d38b5470c9ae917c8394ca46b0`, still based on the unmerged deployment
+companion branch at `f74d90229be6a78d6ad0c0076c54c04bb7e7cae2`. The application
+remains an unpublished **0.16.1** candidate; published **0.16.0**, `main` and
+published assets are unchanged.
+
+Implementation is in progress for the reported Run flashing/redundant polling
+redraws, category expansion viewport anchoring and collapse black flash. Methods
+will again be a separate action; the primary Readiness button is removed while
+Run preflight remains. Runtime/memory forecasting is outside this scope. Native
+Samples gains New, Edit and Save as CSV/TSV with a verified one-row Starter
+example, explicit file columns/base folder/mapping, and no invented independent
+replicates.
+
+The [new handover](tester-feedback-0.16.1-handover.md) owns this revision's scope
+and pending evidence. A new candidate commit, source/archive audit and exact
+ordinary/spaced Windows results are required, including the existing patch and
+regression scopes plus new tester-feedback, batch, temporal and screenshot
+checks. No results for this new revision are recorded yet. The following 141
+source/84 native passes and visual receipts describe only the earlier `8938e709`
+archives; they do not validate new bytes. No merge or release is part of this
+work. Benchmarking is separate; representative-machine acceptance, signing/IT,
+scientific Linux CWL and SDK/build recovery remain outstanding.
+
+## Prior unpublished candidate: native keyboard and narrow-display patch
 
 Snapshot: **2026-10-09**. [Draft PR #15](https://github.com/comparativechrono/workbench/pull/15)
 contains **0.16.1** on `fix/native-ui-0.16.1`, stacked on
@@ -8,8 +35,9 @@ contains **0.16.1** on `fix/native-ui-0.16.1`, stacked on
 `8938e709b041106e8a46e1447383e8e9ba3e0cb9`;
 [candidate run 37988570028](https://github.com/comparativechrono/workbench/actions/runs/37988570028)
 passed 141 source tests and 84 native checks per Windows path; the independent
-archive/source audit and settled 96-DPI visual review passed. The unpublished
-candidate is ready for draft review. Published 0.16.0 and the original deployment
+archive/source audit and settled 96-DPI visual review passed. That unpublished
+candidate completed draft-review validation before this tester-feedback revision.
+Published 0.16.0 and the original deployment
 companion's failed observations remain unchanged. Nothing is merged or released.
 
 The patch restores Results query focus before disabling a focused action, keeps

@@ -1,4 +1,4 @@
-name: Native Windows 0.16.1 keyboard and display patch candidate
+name: Native Windows 0.16.1 tester feedback candidate
 
 on:
   push:
@@ -68,6 +68,7 @@ jobs:
           python3 tests/test_core_update.py
           python3 tests/test_deployment_ui_gate.py
           python3 tests/test_ui_patch_gate.py
+          python3 tests/test_tester_feedback_gate.py
           python3 workspace/tests/test_curated_workflows.py
           python3 workspace/tests/test_results_summary.py
           python3 workspace/tests/test_curated_service.py
@@ -75,7 +76,11 @@ jobs:
           python3 workspace/tests/test_desktop_modes.py
           python3 workspace/tests/test_workflow_inputs.py
           python3 workspace/tests/test_cwl_results.py
-          python3 -m py_compile scripts/build_ui_patch_candidate.py scripts/check_ui_patch_windows.py
+          python3 workspace/tests/test_sample_table.py
+          python3 workspace/tests/test_sample_table_editor.py
+          python3 workspace/tests/test_readiness.py
+          python3 workspace/tests/test_readiness_service.py
+          python3 -m py_compile scripts/build_ui_patch_candidate.py scripts/check_ui_patch_windows.py scripts/check_tester_feedback_windows.py
       - name: Freeze one Starter, matching source and core-only updater
         id: package
         shell: bash
@@ -197,7 +202,7 @@ jobs:
           Invoke-WebRequest -Uri 'https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-0.16.0-starter-windows.zip' -OutFile $baseline
           if ((Get-FileHash $baseline -Algorithm SHA256).Hash -ne 'f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073') { throw 'Published baseline identity mismatch.' }
           $case = Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER
-          foreach ($gate in @('patch', 'curated', 'workspace', 'reference-management', 'results', 'scroll')) {
+          foreach ($gate in @('patch', 'feedback', 'batch', 'readiness', 'curated', 'workspace', 'reference-management', 'results', 'scroll')) {
             Expand-Archive $starter (Join-Path $case $gate)
           }
           Expand-Archive $updater (Join-Path $case 'updater')
@@ -214,6 +219,39 @@ jobs:
           $app = Join-Path $case 'patch/native-workbench'
           & (Join-Path $app 'runtime/python/python.exe') -I -B scripts/check_ui_patch_windows.py --app-root $app --baseline-archive (Join-Path $env:RUNNER_TEMP 'baseline-0.16.0.zip') --update-root (Join-Path $case 'updater') --starter-archive (Join-Path $env:RUNNER_TEMP 'patch-candidate/${{ needs.build.outputs.starter_name }}') --update-archive (Join-Path $env:RUNNER_TEMP 'patch-candidate/${{ needs.build.outputs.update_name }}') --starter-sha256 $env:STARTER_SHA256 --update-sha256 $env:UPDATE_SHA256 --source-commit $env:GITHUB_SHA --gate-commit $env:GITHUB_SHA --work (Join-Path $case 'patch-gate-work') --report "$env:RUNNER_TEMP/patch-evidence/patch/native-ui-patch.json"
           if ($LASTEXITCODE -ne 0) { throw 'Native patch acceptance failed; retained observations must not be treated as passes.' }
+      - name: Visible redraw frames, category viewport, separate Methods and editable sample tables
+        if: always() && !cancelled() && steps.prepare.outcome == 'success'
+        shell: pwsh
+        env:
+          CASE_FOLDER: ${{ matrix.folder }}
+          STARTER_SHA256: ${{ needs.build.outputs.starter_sha256 }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $app = Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'feedback/native-workbench'
+          & (Join-Path $app 'runtime/python/python.exe') -I -B scripts/check_tester_feedback_windows.py --app-root $app --report "$env:RUNNER_TEMP/patch-evidence/feedback/native-tester-feedback.json" --source-commit $env:GITHUB_SHA --gate-commit $env:GITHUB_SHA --asset-sha256 $env:STARTER_SHA256 --asset-name '${{ needs.build.outputs.starter_name }}' --starter-archive (Join-Path $env:RUNNER_TEMP 'patch-candidate/${{ needs.build.outputs.starter_name }}') --app-version 0.16.1
+          if ($LASTEXITCODE -ne 0) { throw 'Tester feedback regression failed; temporal observations and failures are retained.' }
+      - name: Existing sample mappings, frozen queues, batch science and native Samples controls
+        if: always() && !cancelled() && steps.prepare.outcome == 'success'
+        shell: pwsh
+        env:
+          CASE_FOLDER: ${{ matrix.folder }}
+          STARTER_SHA256: ${{ needs.build.outputs.starter_sha256 }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $app = Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'batch/native-workbench'
+          & (Join-Path $app 'runtime/python/python.exe') -I -B scripts/check_batch_windows.py --app-root $app --report "$env:RUNNER_TEMP/patch-evidence/batch/native-batch.json" --source-commit $env:GITHUB_SHA --asset-sha256 $env:STARTER_SHA256 --asset-name '${{ needs.build.outputs.starter_name }}' --app-version 0.16.1
+          if ($LASTEXITCODE -ne 0) { throw 'Sample mapping, queue and batch regression failed.' }
+      - name: Methods separation, retained Run preparation checks and explicit diagnostics
+        if: always() && !cancelled() && steps.prepare.outcome == 'success'
+        shell: pwsh
+        env:
+          CASE_FOLDER: ${{ matrix.folder }}
+          STARTER_SHA256: ${{ needs.build.outputs.starter_sha256 }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $app = Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'readiness/native-workbench'
+          & (Join-Path $app 'runtime/python/python.exe') -I -B scripts/check_readiness_windows.py --app-root $app --report "$env:RUNNER_TEMP/patch-evidence/readiness/native-readiness.json" --source-commit $env:GITHUB_SHA --asset-sha256 $env:STARTER_SHA256 --asset-name '${{ needs.build.outputs.starter_name }}' --app-version 0.16.1
+          if ($LASTEXITCODE -ne 0) { throw 'Methods, Run preparation and diagnostics regression failed.' }
       - name: Curated scientific answers and native searchable result summaries
         if: always() && !cancelled() && steps.prepare.outcome == 'success'
         shell: pwsh

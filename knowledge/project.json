@@ -158,7 +158,8 @@
     "ui_patch_0_16_1_source_validation": "evidence/ui-patch-0.16.1-source-validation-2026-10-09.json",
     "ui_patch_0_16_1_archive_audit": "evidence/ui-patch-0.16.1-archive-audit-2026-10-09.json",
     "ui_patch_0_16_1_native_validation": "evidence/ui-patch-0.16.1-native-validation-2026-10-09.json",
-    "ui_patch_0_16_1_visual_review": "evidence/ui-patch-0.16.1-visual-review-2026-10-09.json"
+    "ui_patch_0_16_1_visual_review": "evidence/ui-patch-0.16.1-visual-review-2026-10-09.json",
+    "tester_feedback_0_16_1_handover": "tester-feedback-0.16.1-handover.md"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -1171,6 +1172,69 @@
   },
   "active_development": {
     "recorded_on": "2026-10-09",
+    "kind": "tester-feedback-revision",
+    "application_version": "0.16.1",
+    "branch": "fix/native-ui-0.16.1",
+    "starting_commit": "8cd3457745da52d38b5470c9ae917c8394ca46b0",
+    "base_branch": "feature/deployment-acceptance",
+    "base_commit": "f74d90229be6a78d6ad0c0076c54c04bb7e7cae2",
+    "base_pull_request": "https://github.com/comparativechrono/workbench/pull/14",
+    "pull_request": "https://github.com/comparativechrono/workbench/pull/15",
+    "pull_request_state": "draft",
+    "status": "tester-feedback implementation in progress; new candidate validation pending",
+    "authorization": "Implement the new tester-feedback revision within the existing unpublished review candidate.",
+    "release_authorized": false,
+    "released": false,
+    "published_baseline": "0.16.0",
+    "published_assets_changed": false,
+    "candidate_commit": null,
+    "application_source_commit": null,
+    "application_rebuilt": false,
+    "scope": [
+      "Address Run flashing and redundant unchanged-status polling redraws while retaining meaningful state updates and action guards",
+      "Preserve viewport anchoring on category expansion and address collapse black flashing",
+      "Restore separate Methods and remove the primary Readiness button while keeping Run preflight; no runtime or memory forecasts",
+      "Native Samples New/Edit/Save as CSV/TSV with explicit file columns, base folders and mapping",
+      "Verified one-row synthetic Starter example without invented independent replicates",
+      "New exact source/native/archive/temporal/screenshot evidence for this revision"
+    ],
+    "handover": "tester-feedback-0.16.1-handover.md",
+    "prior_candidate_handover": "ui-patch-0.16.1-handover.md",
+    "prior_candidate_application_source_commit": "8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+    "prior_candidate_validator_commit": "69022689e686b2cacdc98dbdbef728e664941e67",
+    "evidence_boundary": "Previous 141 source passes, 84 native checks per path, 19 repeated patch checks per path, archive audit and settled visual review apply only to the prior 8938e709 archives. No previous pass tests this revision.",
+    "verification_progress": {
+      "status": "implementation in progress; no source/native/temporal/visual passes recorded for new bytes",
+      "candidate_build": "pending",
+      "source_tests": "pending",
+      "exact_packaged_windows": "pending in ordinary and space-containing paths",
+      "planned_native_scope": {
+        "existing_patch_checks_per_path": 19,
+        "other_existing_checks_per_path": 65,
+        "additional": [
+          "tester-feedback native and temporal gate",
+          "Samples editor and batch regression"
+        ]
+      },
+      "archive_source_audit": "pending",
+      "temporal_review": "pending",
+      "screenshot_review": "pending",
+      "representative_machine_acceptance": "not established"
+    },
+    "known_limits": [
+      "Unpublished 0.16.1 revision only; no merge or release. Published 0.16.0 and all historical receipt files remain unchanged.",
+      "New candidate bytes require new evidence; prior passes and settled screenshots are not transferred.",
+      "Finite temporal sampling does not establish zero flicker or exclude shorter unsampled transients.",
+      "The Starter example is one synthetic sample; repeated rows are not independent biological replicates.",
+      "Prior source geometry had busy Cancel/Results overlap below 908 logical client pixels and footer overlap below 902. Changed controls require fresh layout review, not an inherited fit claim.",
+      "Representative-PC, high-DPI, multiple-monitor, physical-trackpad and managed-machine acceptance remain outstanding.",
+      "Executable signing requires a controlled identity and institutional deployment requires actual IT approval.",
+      "Scientific Linux CWL and SDK/build recovery remain later sets; benchmarking is handled separately."
+    ],
+    "next_action": "Finish implementation, freeze the new candidate, run the planned source/exact Windows/temporal gates and archive audit, review captures, and save the new evidence in draft PR15 without modifying earlier receipt files."
+  },
+  "ui_patch_0_16_1_development": {
+    "recorded_on": "2026-10-09",
     "kind": "native-keyboard-narrow-display-patch",
     "application_version": "0.16.1",
     "application_rebuilt": true,
@@ -1908,9 +1972,10 @@
       "version": "0.16.1",
       "branch": "fix/native-ui-0.16.1",
       "pull_request": "https://github.com/comparativechrono/workbench/pull/15",
-      "status": "ready unpublished patch review candidate; recorded hosted validation complete within its stated scope",
+      "status": "preceding UI patch validated on its exact archives; further tester-feedback revision in progress with new validation pending",
       "handover": "ui-patch-0.16.1-handover.md",
-      "scope": "The original companion observations, including failed Results Escape checks, remain unchanged."
+      "scope": "The original companion observations, including failed Results Escape checks, remain unchanged.",
+      "active_handover": "tester-feedback-0.16.1-handover.md"
     }
   }
 }

@@ -134,7 +134,7 @@ enum {
   SAMPLE_BROWSE, SAMPLE_LOAD, SAMPLE_TARGETS, SAMPLE_COLUMN, SAMPLE_SHARED,
   SAMPLE_PREVIEW, SAMPLE_ROWS, SAMPLE_NOTICE, SAMPLE_OUTPUT, SAMPLE_OUTPUT_BROWSE,
   SAMPLE_QUEUE, SAMPLE_CLOSE,
-  SAMPLE_MODE,
+  SAMPLE_MODE, SAMPLE_NEW, SAMPLE_EDIT, SAMPLE_EXAMPLE,
   QUEUE_LIST = 901,
   QUEUE_DETAILS, QUEUE_ADD, QUEUE_START, QUEUE_PAUSE, QUEUE_CANCEL,
   QUEUE_RESULTS, QUEUE_NOTICE, QUEUE_CLOSE,
@@ -151,6 +151,12 @@ enum {
   SHOW_CURATED = 1430, SHOW_RESULTS, VIEW_RESULT_SUMMARY,
   RESULTS_QUERY = 1501, RESULTS_SEARCH, RESULTS_RUNS, RESULTS_DETAILS,
   RESULTS_VIEW, RESULTS_OPEN, RESULTS_NOTICE, RESULTS_CLOSE,
+  SHOW_SAMPLE_EDITOR = 1590,
+  SAMPLE_EDITOR_GRID = 1601, SAMPLE_EDITOR_COLUMN, SAMPLE_EDITOR_VALUE, SAMPLE_EDITOR_FILE,
+  SAMPLE_EDITOR_FILE_COLUMN, SAMPLE_EDITOR_BASE, SAMPLE_EDITOR_BASE_BROWSE,
+  SAMPLE_EDITOR_ADD_ROW, SAMPLE_EDITOR_REMOVE_ROW, SAMPLE_EDITOR_ADD_COLUMN,
+  SAMPLE_EDITOR_RENAME_COLUMN, SAMPLE_EDITOR_REMOVE_COLUMN, SAMPLE_EDITOR_SAVE,
+  SAMPLE_EDITOR_USE, SAMPLE_EDITOR_CANCEL, SAMPLE_EDITOR_NOTICE,
   FIELD_BASE = 2000
 };
 std::wstring wide(const std::string &s) { return bw::utf16(s); }
@@ -640,13 +646,40 @@ class Workspace {
     if (!h)
       throw std::runtime_error("Could not create a Windows interface control.");
     SendMessageW(h, WM_SETFONT, reinterpret_cast<WPARAM>(font), FALSE);
+    if (lstrcmpiW(klass, L"BUTTON") == 0 && (style & BS_TYPEMASK) == BS_OWNERDRAW)
+      SetWindowSubclass(h, owner_button_proc, 1, 0);
     return h;
+  }
+  static LRESULT CALLBACK owner_button_proc(HWND h, UINT message_, WPARAM w, LPARAM l,
+                                            UINT_PTR, DWORD_PTR) {
+    // WM_DRAWITEM paints the complete background and label into one buffer.
+    // A separate default erase exposes a blank frame during hover/focus changes.
+    if (message_ == WM_ERASEBKGND) return 1;
+    if (message_ == WM_NCDESTROY) RemoveWindowSubclass(h, owner_button_proc, 1);
+    return DefSubclassProc(h, message_, w, l);
   }
   HWND button(const wchar_t *s, int id, HWND p = nullptr) {
     return make(L"BUTTON", s, WS_TABSTOP | BS_PUSHBUTTON, id, p);
   }
+  static void enable_control(HWND h, bool value) {
+    if (h && (IsWindowEnabled(h) != FALSE) != value) EnableWindow(h, value);
+  }
+  static void show_control(HWND h, bool value) {
+    // Check this window's own style, not an ancestor's visibility during setup.
+    if (h && ((GetWindowLongPtrW(h, GWL_STYLE) & WS_VISIBLE) != 0) != value)
+      ShowWindow(h, value ? SW_SHOW : SW_HIDE);
+  }
+  static void label_control(HWND h, const std::wstring &value) {
+    if (h && control_text(h) != value) SetWindowTextW(h, value.c_str());
+  }
   void place(HWND h, int x, int y, int w, int hgt) {
-    MoveWindow(h, px(x), px(y), px(std::max(1, w)), px(std::max(1, hgt)), TRUE);
+    RECT previous{};
+    GetWindowRect(h, &previous);
+    MapWindowPoints(nullptr, GetParent(h), reinterpret_cast<POINT *>(&previous), 2);
+    const int cx = px(x), cy = px(y), cw = px(std::max(1, w)), ch = px(std::max(1, hgt));
+    if (previous.left != cx || previous.top != cy ||
+        previous.right - previous.left != cw || previous.bottom - previous.top != ch)
+      MoveWindow(h, cx, cy, cw, ch, TRUE);
   }
   struct PanelPlacement { HWND h; int x, y, w, height; };
   void place_panel(HWND panel, const std::vector<PanelPlacement> &items) {
@@ -748,7 +781,7 @@ class Workspace {
                 MB_OK | MB_ICONERROR);
   }
   void status_text(const std::wstring &value) {
-    SetWindowTextW(status, value.c_str());
+    label_control(status, value);
   }
   void pump() {
     if (activeRequest || outgoing.empty())
@@ -787,7 +820,8 @@ class Workspace {
   long long send(const std::string &method, Json params = Json::object()) {
     long long id = nextRequest++;
     pending[id] = method;
-    if (method.rfind("sample/", 0) == 0) pendingViews[id] = samplesView.generation;
+    if (sample_editor_method(method)) pendingViews[id] = sampleEditorView.generation;
+    else if (method.rfind("sample/", 0) == 0) pendingViews[id] = samplesView.generation;
     else if (method.rfind("index/", 0) == 0) pendingViews[id] = indexesView.generation;
     else if (method.rfind("resources/", 0) == 0) pendingViews[id] = resourcesView.generation;
     else if (method.rfind("restart/", 0) == 0) pendingViews[id] = restartView.generation;
@@ -883,14 +917,25 @@ class Workspace {
     recovery_enabled(idle, edit);
     curated_enabled(idle, edit);
     results_enabled(ready && !closing && ui_request_idle());
+    sample_editor_enabled(ready && !closing && ui_request_idle());
     if (samplesView.window) {
+      const bool sampleIdle = ready && !closing && ui_request_idle() && !samplePending && !sampleEditorView.window;
       for (int id : {SAMPLE_PATH, SAMPLE_BROWSE, SAMPLE_LOAD, SAMPLE_TARGETS, SAMPLE_MODE,
-                     SAMPLE_OUTPUT, SAMPLE_OUTPUT_BROWSE})
-        EnableWindow(aux(samplesView, id), idle && !samplePending);
+                     SAMPLE_OUTPUT, SAMPLE_OUTPUT_BROWSE, SAMPLE_NEW, SAMPLE_EXAMPLE})
+        enable_control(aux(samplesView, id), sampleIdle);
+      enable_control(aux(samplesView, SAMPLE_EDIT), sampleIdle && !getstr(sampleTable, "table_token").empty());
       const int target = ListView_GetNextItem(aux(samplesView, SAMPLE_TARGETS), -1, LVNI_SELECTED);
-      EnableWindow(aux(samplesView, SAMPLE_COLUMN), idle && !samplePending && target >= 0 && !sampleColumns.empty());
-      EnableWindow(aux(samplesView, SAMPLE_PREVIEW), idle && !samplePending && sampleTable.contains("rows") && !sampleTargets.array_items().empty());
-      EnableWindow(aux(samplesView, SAMPLE_QUEUE), edit && !samplePending && !queuePending && !sampleToken.empty() && samplePreview.get("valid").boolean());
+      const Json &mappedTarget = target >= 0 && static_cast<size_t>(target) < sampleTargets.array_items().size()
+          ? sampleTargets.array_items()[target] : Json();
+      const auto mappedType = getstr(mappedTarget, "sourceType"), mappedSource = getstr(mappedTarget, "sourceId");
+      const bool canShare = !mappedSource.empty() && mappedType != "pair" && mappedType != "reads" &&
+          mappedType != "sam" && mappedType != "bam" && mappedType != "sam-rna" && mappedType != "bam-rna" &&
+          mappedType != "vcf" && mappedType != "vcf-pass" && mappedType != "bcf" && mappedType != "bcf-likelihoods";
+      enable_control(aux(samplesView, SAMPLE_SHARED), sampleIdle && canShare && !mappedTarget.get("shared").boolean() &&
+          !sampleMappings.count(static_cast<size_t>(std::max(0, target))));
+      enable_control(aux(samplesView, SAMPLE_COLUMN), sampleIdle && target >= 0 && !sampleColumns.empty());
+      enable_control(aux(samplesView, SAMPLE_PREVIEW), sampleIdle && !getstr(sampleTable, "table_token").empty() && !sampleTargets.array_items().empty());
+      enable_control(aux(samplesView, SAMPLE_QUEUE), sampleIdle && edit && !queuePending && !sampleToken.empty() && samplePreview.get("valid").boolean());
     }
     if (queueView.window) {
       const auto &job = queue_selected();
@@ -997,7 +1042,9 @@ class Workspace {
       if (sampleTargets.array_items()[i].get("binding").boolean()) sampleMappings[i] = "sample_id";
     aux_text(samplesView, SAMPLE_NOTICE, L"Loaded " + std::to_wstring(sampleTable.get("rowCount").integer(static_cast<long long>(rows.size()))) +
         L" samples. Showing the first " + std::to_wstring(std::min<size_t>(100, rows.size())) +
-        L" rows. Map input columns, then preview the analyses.\r\nRelative paths use the table's folder. This uses the workspace copy fixed when Samples opened.");
+        L" rows; Edit table opens all rows within the editor limits. Map input columns, then preview.\r\nRelative-path base: " + wt(sampleTable, "baseDirectory", "the loaded table folder") + L". Workspace copy fixed when Samples opened.");
+    if (sampleGraph.get("nodes").array_items().empty())
+      aux_text(samplesView, SAMPLE_NOTICE, L"The table is loaded. Save it with Edit table → Save as. Select a tool or workflow, then reopen Samples to map its inputs and preview analyses.");
     sample_mapping_rows();
   }
   void sample_preview_rows(const Json &value) {
@@ -1147,7 +1194,9 @@ class Workspace {
     aux_text(samplesView, SAMPLE_NOTICE, combined ?
         L"One report analysis receives the listed report files. This does not pool reads or infer a statistical design. Other required inputs must already be set." :
         L"Each sample gets its own analysis and result folder. Reference inputs retain their shared workflow values. Map the read files explicitly.");
-    if (combined && sampleTargets.array_items().empty())
+    if (sampleGraph.get("nodes").array_items().empty())
+      aux_text(samplesView, SAMPLE_NOTICE, L"Create, edit or save a table now. Select a tool or workflow, then reopen Samples to map its inputs and preview analyses.");
+    else if (combined && sampleTargets.array_items().empty())
       aux_text(samplesView, SAMPLE_NOTICE, L"This workflow has no compatible combined-report input. Choose a report tool with an input that accepts multiple metrics or text reports.");
     ListView_DeleteAllItems(aux(samplesView, SAMPLE_TARGETS));
     sample_mapping_rows();
@@ -1162,7 +1211,9 @@ class Workspace {
           MulDiv(std::max(1, cw), view.dpi, 96), MulDiv(std::max(1, ch), view.dpi, 96),
           SWP_NOZORDER | SWP_NOACTIVATE | SWP_NOREDRAW | SWP_NOCOPYBITS);
     };
-    if (view.kind == SHOW_CURATED) {
+    if (view.kind == SHOW_SAMPLE_EDITOR) {
+      sample_editor_layout(w, h, put);
+    } else if (view.kind == SHOW_CURATED) {
       curated_layout(view, w, h, put);
     } else if (view.kind == SHOW_RESULTS) {
       results_layout(view, w, h, put);
@@ -1174,13 +1225,16 @@ class Workspace {
       put(SAMPLE_PATH, 18, 58, w - 232, 30);
       put(SAMPLE_BROWSE, w - 204, 58, 90, 30);
       put(SAMPLE_LOAD, w - 104, 58, 86, 30);
-      put(-2, 18, 100, w - 36, 22);
-      put(SAMPLE_TARGETS, 18, 126, w / 2 - 26, 142);
-      put(-3, w / 2 + 8, 126, w / 2 - 26, 22);
-      put(SAMPLE_COLUMN, w / 2 + 8, 152, w / 2 - 26, 250);
-      put(SAMPLE_SHARED, w / 2 + 8, 192, w / 2 - 26, 30);
-      put(-4, w / 2 + 8, 228, w / 2 - 26, 40);
-      put(SAMPLE_ROWS, 18, 282, w - 36, std::max(72, h - 438));
+      put(SAMPLE_NEW, 18, 98, 112, 30);
+      put(SAMPLE_EDIT, 142, 98, 112, 30);
+      put(SAMPLE_EXAMPLE, 266, 98, 154, 30);
+      put(-2, 18, 140, w - 36, 22);
+      put(SAMPLE_TARGETS, 18, 166, w / 2 - 26, 132);
+      put(-3, w / 2 + 8, 166, w / 2 - 26, 22);
+      put(SAMPLE_COLUMN, w / 2 + 8, 192, w / 2 - 26, 250);
+      put(SAMPLE_SHARED, w / 2 + 8, 226, w / 2 - 26, 30);
+      put(-4, w / 2 + 8, 262, w / 2 - 26, 40);
+      put(SAMPLE_ROWS, 18, 312, w - 36, std::max(64, h - 468));
       put(SAMPLE_NOTICE, 18, h - 144, w - 36, 58);
       put(SAMPLE_OUTPUT, 18, h - 78, w - 202, 30);
       put(SAMPLE_OUTPUT_BROWSE, w - 174, h - 78, 156, 30);
@@ -1211,6 +1265,8 @@ class Workspace {
   }
   void auxiliary_command(Auxiliary &view, int id, int notification) {
     if (view.rebuilding) return;
+    if (view.kind == SHOW_SAMPLE_EDITOR) { sample_editor_command(id, notification); return; }
+    if (view.kind == SHOW_SAMPLES && (id == SAMPLE_CLOSE || id == IDCANCEL) && !sample_editor_close()) return;
     if (id == SAMPLE_CLOSE || id == QUEUE_CLOSE || id == INDEX_CLOSE ||
         id == RESOURCE_CLOSE || id == RESTART_CLOSE || id == PROJECT_CLOSE ||
         id == CURATED_CLOSE || id == RESULTS_CLOSE || id == IDCANCEL) {
@@ -1258,13 +1314,16 @@ class Workspace {
         return;
       }
       if (id == SAMPLE_PATH && notification == EN_CHANGE) {
-        sampleTable = Json::object(); sampleColumns.clear(); sample_invalidate();
-        if (aux(view, SAMPLE_ROWS)) ListView_DeleteAllItems(aux(view, SAMPLE_ROWS));
-        aux_text(view, SAMPLE_NOTICE, L"Load this table before previewing. Changing the path does not import its contents automatically.");
+        sample_invalidate();
+        aux_text(view, SAMPLE_NOTICE, sampleTable.contains("rows") ?
+            L"This path has not been loaded. The previously loaded table remains in use until Load table succeeds." :
+            L"Load this table before previewing. Changing the path does not import its contents automatically.");
         return;
       }
-      if (!ready || closing || samplePending) return;
-      if (id == SAMPLE_BROWSE) {
+      if (!ready || closing || samplePending || sampleEditorView.window) return;
+      if (id == SAMPLE_NEW || id == SAMPLE_EDIT || id == SAMPLE_EXAMPLE) {
+        show_sample_editor(id);
+      } else if (id == SAMPLE_BROWSE) {
         const auto path = pick(view.window, false, false, L"Sample tables|*.csv;*.tsv|All files|*.*", L"Choose a CSV or TSV sample table", control_text(inputFolder));
         if (!path.empty()) aux_text(view, SAMPLE_PATH, path);
       } else if (id == SAMPLE_LOAD) {
@@ -1337,12 +1396,25 @@ class Workspace {
       case WM_NOTIFY: {
         const auto *notice = reinterpret_cast<NMHDR *>(l);
         if (!view->rebuilding && notice->code == LVN_ITEMCHANGED) {
-          if (notice->idFrom == SAMPLE_TARGETS) app->sample_selection();
+          if (notice->idFrom == SAMPLE_EDITOR_GRID) {
+            const auto *change = reinterpret_cast<NMLISTVIEW *>(l);
+            if ((change->uChanged & LVIF_STATE) && ((change->uOldState ^ change->uNewState) & LVIS_SELECTED) &&
+                (change->uNewState & LVIS_SELECTED) && change->iItem >= 0) {
+              app->sampleEditorRow = change->iItem; app->sample_editor_selection();
+            }
+          } else if (notice->idFrom == SAMPLE_TARGETS) app->sample_selection();
           else if (notice->idFrom == QUEUE_LIST) app->queue_selection();
           else if (notice->idFrom == INDEX_LIST) app->index_selection();
           else if (notice->idFrom == CURATED_LIST) app->curated_selection();
           else if (notice->idFrom == RESULTS_RUNS) app->results_selection();
           else if (notice->idFrom == RESOURCE_LIST || notice->idFrom == RESTART_LIST || notice->idFrom == PROJECT_LIST) app->recovery_selection(*view);
+        }
+        if (notice->idFrom == SAMPLE_EDITOR_GRID && notice->code == NM_DBLCLK) {
+          const auto *click = reinterpret_cast<NMITEMACTIVATE *>(l);
+          if (click->iItem >= 0) {
+            app->sampleEditorRow = click->iItem; app->sampleEditorColumn = click->iSubItem;
+            app->sample_editor_selection(); SetFocus(app->aux(*view, SAMPLE_EDITOR_VALUE));
+          }
         }
         return 0;
       }
@@ -1363,8 +1435,8 @@ class Workspace {
         auto *info = reinterpret_cast<MINMAXINFO *>(l);
         MONITORINFO monitor{sizeof(monitor)};
         GetMonitorInfoW(MonitorFromWindow(h, MONITOR_DEFAULTTONEAREST), &monitor);
-        info->ptMinTrackSize = {std::min<LONG>(MulDiv(view->kind == SHOW_QUEUE ? 900 : view->kind == SHOW_PROJECTS ? 820 : 740, view->dpi, 96), monitor.rcWork.right - monitor.rcWork.left),
-            std::min<LONG>(MulDiv(view->kind == SHOW_SAMPLES ? 600 : view->kind == SHOW_PROJECTS ? 580 : 480, view->dpi, 96), monitor.rcWork.bottom - monitor.rcWork.top)};
+        info->ptMinTrackSize = {std::min<LONG>(MulDiv(view->kind == SHOW_QUEUE ? 900 : view->kind == SHOW_SAMPLE_EDITOR ? 900 : view->kind == SHOW_PROJECTS ? 820 : 740, view->dpi, 96), monitor.rcWork.right - monitor.rcWork.left),
+            std::min<LONG>(MulDiv(view->kind == SHOW_SAMPLES || view->kind == SHOW_SAMPLE_EDITOR ? 640 : view->kind == SHOW_PROJECTS ? 580 : 480, view->dpi, 96), monitor.rcWork.bottom - monitor.rcWork.top)};
         return 0;
       }
       case WM_CTLCOLORSTATIC:
@@ -1375,7 +1447,10 @@ class Workspace {
         SetBkColor(dc, message_ == WM_CTLCOLOREDIT ? PAPER : BACK);
         return reinterpret_cast<LRESULT>(message_ == WM_CTLCOLOREDIT ? app->paper : app->background);
       }
-      case WM_CLOSE: DestroyWindow(h); return 0;
+      case WM_CLOSE:
+        if (view->kind == SHOW_SAMPLE_EDITOR) { app->sample_editor_close(); return 0; }
+        if (view->kind == SHOW_SAMPLES && !app->sample_editor_close()) return 0;
+        DestroyWindow(h); return 0;
       case WM_NCDESTROY:
         view->window = nullptr; view->controls.clear();
         if (view->font) DeleteObject(view->font);
@@ -1390,7 +1465,7 @@ class Workspace {
     return DefWindowProcW(h, message_, w, l);
   }
   void show_auxiliary(int kind) {
-    Auxiliary &view = kind == SHOW_CURATED ? curatedView : kind == SHOW_RESULTS ? resultsView : auxiliary_view(kind);
+    Auxiliary &view = kind == SHOW_SAMPLE_EDITOR ? sampleEditorView : kind == SHOW_CURATED ? curatedView : kind == SHOW_RESULTS ? resultsView : auxiliary_view(kind);
     if (view.window) { ShowWindow(view.window, SW_RESTORE); SetForegroundWindow(view.window); return; }
     view.app = this; view.kind = kind; view.dpi = dpi; ++view.generation;
     view.font = CreateFontW(-px(14), 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE,
@@ -1406,8 +1481,8 @@ class Workspace {
       SystemParametersInfoW(SPI_GETWORKAREA, 0, &monitor.rcWork, 0);
     const RECT area = monitor.rcWork;
     const int w = std::min<int>(px(940), area.right - area.left),
-              h = std::min<int>(px(kind == SHOW_SAMPLES || kind == SHOW_CURATED || kind == SHOW_RESULTS ? 680 : 590), area.bottom - area.top);
-    const wchar_t *title = kind == SHOW_CURATED ? L"Curated workflows · Native Workbench" :
+              h = std::min<int>(px(kind == SHOW_SAMPLES || kind == SHOW_SAMPLE_EDITOR || kind == SHOW_CURATED || kind == SHOW_RESULTS ? 680 : 590), area.bottom - area.top);
+    const wchar_t *title = kind == SHOW_SAMPLE_EDITOR ? L"Sample table editor · Native Workbench" : kind == SHOW_CURATED ? L"Curated workflows · Native Workbench" :
         kind == SHOW_RESULTS ? L"Recorded results · Native Workbench" : kind == SHOW_SAMPLES ? L"Samples · Native Workbench" : kind == SHOW_QUEUE ?
         L"Analysis queue · Native Workbench" : kind == SHOW_RESOURCES ? L"Resources · Native Workbench" :
         kind == SHOW_RESTART ? L"Restart analysis · Native Workbench" : kind == SHOW_PROJECTS ?
@@ -1416,7 +1491,7 @@ class Workspace {
         WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN,
         std::clamp<int>(owner.left + (owner.right - owner.left - w) / 2, area.left, area.right - w),
         std::clamp<int>(owner.top + (owner.bottom - owner.top - h) / 2, area.top, area.bottom - h),
-        w, h, window, nullptr, instance, &view);
+        w, h, kind == SHOW_SAMPLE_EDITOR ? samplesView.window : window, nullptr, instance, &view);
     if (!view.window) throw std::runtime_error("Could not create the analysis library window.");
     auto label = [&](int id, const wchar_t *value) { return aux_make(view, id, L"STATIC", value, SS_LEFT); };
     auto action = [&](int id, const wchar_t *value) { return aux_make(view, id, L"BUTTON", value, WS_TABSTOP | BS_PUSHBUTTON); };
@@ -1428,20 +1503,24 @@ class Workspace {
       ListView_SetExtendedListViewStyle(hlist, LVS_EX_FULLROWSELECT | LVS_EX_DOUBLEBUFFER | LVS_EX_LABELTIP);
       return hlist;
     };
-    if (kind == SHOW_CURATED) {
+    if (kind == SHOW_SAMPLE_EDITOR) {
+      sample_editor_controls(view, label, action, edit, list);
+    } else if (kind == SHOW_CURATED) {
       curated_controls(view, label, action, edit, list);
     } else if (kind == SHOW_RESULTS) {
       results_controls(view, label, action, edit, list);
     } else if (kind >= SHOW_RESOURCES && kind <= SHOW_PROJECTS) {
       recovery_controls(view, label, action, edit, list);
     } else if (kind == SHOW_SAMPLES) {
+      sampleLoadedPath.clear();
       sampleGraph = Json::object(); sampleTable = Json::object(); sampleTargetSchema = Json::object();
       sampleTargets = Json::array(); sampleColumns.clear(); sampleMappings.clear(); sampleSharedSources.clear(); sampleToken.clear();
-      label(-1, L"Load a sample table and map its columns. Preview before queueing any analysis.");
+      label(-1, L"Create, edit or load a sample table, then map its columns. Preview before queueing any analysis.");
       HWND mode = aux_make(view, SAMPLE_MODE, L"COMBOBOX", L"", WS_TABSTOP | CBS_DROPDOWNLIST | WS_VSCROLL);
       for (const wchar_t *value : {L"Independent samples", L"Combined reports"}) SendMessageW(mode, CB_ADDSTRING, 0, reinterpret_cast<LPARAM>(value));
       SendMessageW(mode, CB_SETCURSEL, 0, 0);
       edit(SAMPLE_PATH, L"", false); action(SAMPLE_BROWSE, L"Browse..."); action(SAMPLE_LOAD, L"Load table");
+      action(SAMPLE_NEW, L"New table..."); action(SAMPLE_EDIT, L"Edit table..."); action(SAMPLE_EXAMPLE, L"Example table...");
       label(-2, L"Map workflow inputs and options to table columns"); list(SAMPLE_TARGETS);
       aux_columns(view, SAMPLE_TARGETS, {{L"Workflow input / option", 272}, {L"Table column", 180}});
       label(-3, L"Column for the selected input / option");
@@ -3466,7 +3545,7 @@ class Workspace {
              {FILE_CHECK, L"Check installation"},
              {FILE_EXIT, L"Exit"}})
       AppendMenuW(file, MF_STRING, pair.first, pair.second);
-    AppendMenuW(view, MF_STRING, VIEW_METHODS, L"Readiness and planned methods...");
+    AppendMenuW(view, MF_STRING, VIEW_METHODS, L"Planned methods...");
     AppendMenuW(view, MF_STRING, REVIEW_DIAGNOSTICS, L"Review diagnostics...");
     AppendMenuW(view, MF_STRING, VIEW_LOG, L"Run log...");
     AppendMenuW(view, MF_STRING, VIEW_RESULT_SUMMARY, L"Recorded result summary...");
@@ -3509,7 +3588,7 @@ class Workspace {
     manageReferences = button(L"References...", MANAGE_REFERENCES);
     run = make(L"BUTTON", L"Run tool", WS_TABSTOP | BS_OWNERDRAW, RUN);
     cancel = button(L"Cancel run", CANCEL);
-    review = button(L"Readiness", REVIEW);
+    review = button(L"Methods", REVIEW);
     back = button(L"Back to workspace", BACK_WORKSPACE);
     search = make(L"EDIT", L"", WS_TABSTOP | ES_AUTOHSCROLL, SEARCH, nullptr,
                   WS_EX_CLIENTEDGE);
@@ -3571,8 +3650,11 @@ class Workspace {
   void layout() {
     RECT rc{};
     GetClientRect(window, &rc);
-    width = std::max(1, MulDiv(rc.right, 96, dpi));
-    height = std::max(1, MulDiv(rc.bottom, 96, dpi));
+    const int newWidth = std::max(1, MulDiv(rc.right, 96, dpi));
+    const int newHeight = std::max(1, MulDiv(rc.bottom, 96, dpi));
+    const bool resized = width != newWidth || height != newHeight;
+    width = newWidth;
+    height = newHeight;
     const auto geometry = workspace_layout::for_client(width, height);
     const int left = geometry.left, right = geometry.right, center = geometry.center,
               centerWidth = geometry.centerWidth, rightX = geometry.rightX,
@@ -3591,64 +3673,63 @@ class Workspace {
     place(search, 12, 98, left - 24, 32);
     const bool filtering = workflowMode && !getstr(state, "pendingSource").empty();
     place(clearFilter, 12, 140, left - 24, 30);
-    ShowWindow(clearFilter, filtering ? SW_SHOW : SW_HIDE);
+    show_control(clearFilter, filtering);
     place(tasks, 12, filtering ? 180 : 140, left - 24,
           std::max(100, height - (filtering ? 180 : 140) - (workflowMode ? 166 : 84)));
     place(addInput, 12, height - 154, left - 24, 32);
-    ShowWindow(addInput, workflowMode && !showingHistory ? SW_SHOW : SW_HIDE);
+    show_control(addInput, workflowMode && !showingHistory);
     place(add, 12, height - 114, left - 24, 32);
-    ShowWindow(add, workflowMode && !showingHistory ? SW_SHOW : SW_HIDE);
+    show_control(add, workflowMode && !showingHistory);
     place(manageTools, 12, height - 72, left - 24, 32);
     place(centerHeading, center + 16, 65, centerWidth - (canvas ? 258 : 32), 26);
-    SetWindowTextW(centerHeading, showingHistory ? L"Recorded results" :
+    label_control(centerHeading, showingHistory ? L"Recorded results" :
                    workflowMode ? L"Workflow" : L"Run a tool");
     place(rightHeading, rightX, 65, rightWidth - (workflowMode ? 145 : 0), 26);
-    SetWindowTextW(rightHeading, general ? L"General settings" : L"Tool options");
-    if (!general && getstr(state.get("inspector"), "kind") == "source")
-      SetWindowTextW(rightHeading, L"Input options");
+    label_control(rightHeading, general ? L"General settings" :
+        getstr(state.get("inspector"), "kind") == "source" ? L"Input options" : L"Tool options");
     place(generalSettings, width - 157, 59, 141, 32);
-    SetWindowTextW(generalSettings, general ? L"Tool options" : L"General settings");
-    ShowWindow(generalSettings, workflowMode && !showingHistory ? SW_SHOW : SW_HIDE);
+    label_control(generalSettings, general ? L"Tool options" : L"General settings");
+    show_control(generalSettings, workflowMode && !showingHistory);
     place(generalPanel, width - right + 1, 102, right - 2, bodyHeight);
-    ShowWindow(generalPanel, general ? SW_SHOW : SW_HIDE);
+    show_control(generalPanel, general);
     layout_general();
     place(dag, center, 102, centerWidth, bodyHeight);
-    ShowWindow(dag, canvas ? SW_SHOW : SW_HIDE);
+    show_control(dag, canvas);
     place(form, canvas ? width - right + 1 : center, 102,
           canvas ? right - 2 : centerWidth, bodyHeight);
-    ShowWindow(form, !canvas || !general ? SW_SHOW : SW_HIDE);
-    ShowWindow(steps, SW_HIDE);
-    ShowWindow(up, SW_HIDE);
-    ShowWindow(down, SW_HIDE);
+    show_control(form, !canvas || !general);
+    show_control(steps, false);
+    show_control(up, false);
+    show_control(down, false);
     place_control(remove, geometry.remove);
     place_control(undo, geometry.undo);
     place_control(resetLayout, geometry.reset);
     for (HWND h : {remove, undo, resetLayout})
-      ShowWindow(h, workflowMode && !showingHistory ? SW_SHOW : SW_HIDE);
+      show_control(h, workflowMode && !showingHistory);
     place_control(run, geometry.run);
-    SetWindowTextW(run, workflowMode ? L"Run workflow" : L"Run tool");
+    label_control(run, workflowMode ? L"Run workflow" : L"Run tool");
     place_control(review, geometry.readiness);
     place_control(cancel, geometry.cancel);
-    ShowWindow(cancel, busy ? SW_SHOW : SW_HIDE);
+    show_control(cancel, busy);
     place_control(zoomOut, geometry.zoomOut);
     place_control(zoomReset, geometry.zoomReset);
     place_control(zoomIn, geometry.zoomIn);
     for (HWND h : {zoomOut, zoomReset, zoomIn})
-      ShowWindow(h, canvas ? SW_SHOW : SW_HIDE);
+      show_control(h, canvas);
     place_control(saveCurrent, canvas ? geometry.saveWorkflow : geometry.saveSettings);
     place_control(loadCurrent, canvas ? geometry.loadWorkflow : geometry.loadSettings);
-    ShowWindow(saveCurrent, showingHistory ? SW_HIDE : SW_SHOW);
-    ShowWindow(loadCurrent, showingHistory ? SW_HIDE : SW_SHOW);
-    SetWindowTextW(saveCurrent, workflowMode ? L"Save workflow..." : L"Save settings...");
+    show_control(saveCurrent, !showingHistory);
+    show_control(loadCurrent, !showingHistory);
+    label_control(saveCurrent, workflowMode ? L"Save workflow..." : L"Save settings...");
     place_control(back, geometry.back);
-    ShowWindow(back, showingHistory ? SW_SHOW : SW_HIDE);
-    for (HWND h : {run, review}) ShowWindow(h, showingHistory ? SW_HIDE : SW_SHOW);
+    show_control(back, showingHistory);
+    for (HWND h : {run, review}) show_control(h, !showingHistory);
     place(status, 12, height - 24, width - 24, 22);
     if (TreeView_GetItemHeight(tasks) != px(30)) TreeView_SetItemHeight(tasks, px(30));
     if (static_cast<int>(TreeView_GetIndent(tasks)) != px(16)) TreeView_SetIndent(tasks, px(16));
     layout_fields();
     InvalidateRect(dag, nullptr, FALSE);
-    InvalidateRect(window, nullptr, TRUE);
+    if (resized) InvalidateRect(window, nullptr, FALSE);
   }
   void layout_general() {
     if (!generalPanel) return;
@@ -3680,56 +3761,63 @@ class Workspace {
                 !showingHistory && !closing &&
                 ui_request_idle();
     const bool browseAuxiliary = ready && !closing &&
-        ((!activeRequest && outgoing.empty()) || slow_request_pending());
+        (ui_request_idle() || slow_request_pending());
     for (HWND h :
-         {name, search, tasks, steps, remove, undo, up, down,
+         {name, search, tasks, steps, remove, up, down,
           modeTools, modeWorkflow, generalSettings, saveCurrent, loadCurrent,
           resetLayout, inputFolder, browseInput, addInput})
-      EnableWindow(h, edit);
-    EnableWindow(add, edit && !library_tool(TreeView_GetSelection(tasks)).empty());
+      enable_control(h, edit);
+    enable_control(add, edit && !library_tool(TreeView_GetSelection(tasks)).empty());
     for (HWND h : {zoomOut, zoomReset, zoomIn}) {
-      EnableWindow(h, ready && !closing);
-      ShowWindow(h, workflowMode || showingHistory ? SW_SHOW : SW_HIDE);
+      enable_control(h, ready && !closing);
+      show_control(h, workflowMode || showingHistory);
     }
-    EnableWindow(undo, edit && state.get("canUndo").boolean());
-    EnableWindow(run, edit && !analysis_active() && !graph().get("nodes").array_items().empty());
-    EnableWindow(review, ready && !activeRequest && outgoing.empty());
-    EnableWindow(resultsList, ready && !activeRequest && outgoing.empty());
-    EnableWindow(samplesButton, browseAuxiliary && !showingHistory && !graph().get("nodes").array_items().empty());
-    EnableWindow(queueButton, browseAuxiliary);
-    EnableWindow(cancel, busy && !closing && !cancellation_pending());
-    ShowWindow(cancel, busy ? SW_SHOW : SW_HIDE);
-    EnableWindow(output, edit);
-    EnableWindow(browse, edit);
-    EnableWindow(manageTools, ready && !analysis_active() && !closing && !showingHistory);
-    EnableWindow(manageReferences, ready && !analysis_active() && !closing && !showingHistory);
+    enable_control(undo, edit && state.get("canUndo").boolean());
+    enable_control(run, edit && !analysis_active() && !graph().get("nodes").array_items().empty());
+    enable_control(review, ready && !closing && ui_request_idle());
+    enable_control(resultsList, ready && !closing && ui_request_idle());
+    enable_control(samplesButton, browseAuxiliary && !showingHistory);
+    enable_control(queueButton, browseAuxiliary);
+    enable_control(cancel, busy && !closing && !cancellation_pending());
+    show_control(cancel, busy);
+    enable_control(output, edit);
+    enable_control(browse, edit);
+    enable_control(manageTools, ready && !analysis_active() && !closing && !showingHistory);
+    enable_control(manageReferences, ready && !analysis_active() && !closing && !showingHistory);
     for (const auto &f : fields) {
-      EnableWindow(f.h, edit || f.kind.rfind("historical-", 0) == 0);
+      enable_control(f.h, edit || f.kind.rfind("historical-", 0) == 0);
       if (f.button)
-        EnableWindow(f.button, edit);
+        enable_control(f.button, edit);
     }
     HMENU m = GetMenu(window);
+    bool menuChanged = false;
+    auto menu_enable = [&](UINT id, bool available) {
+      const UINT previous = GetMenuState(m, id, MF_BYCOMMAND);
+      if (previous != static_cast<UINT>(-1) &&
+          ((previous & (MF_DISABLED | MF_GRAYED)) == 0) != available) {
+        EnableMenuItem(m, id, MF_BYCOMMAND | (available ? MF_ENABLED : MF_GRAYED));
+        menuChanged = true;
+      }
+    };
     for (UINT id : {FILE_NEW, FILE_EXAMPLE, FILE_SAVE_PIPELINE,
                     FILE_SAVE_PRESET, FILE_LOAD})
-      EnableMenuItem(m, id, MF_BYCOMMAND | (edit ? MF_ENABLED : MF_GRAYED));
-    EnableMenuItem(m, FILE_IMPORT, MF_BYCOMMAND |
-                   (ready && !analysis_active() && !closing && !showingHistory ? MF_ENABLED : MF_GRAYED));
-    EnableMenuItem(m, MANAGE_REFERENCES, MF_BYCOMMAND |
-                   (ready && !analysis_active() && !closing && !showingHistory ? MF_ENABLED : MF_GRAYED));
-    EnableMenuItem(m, TOOL_SETUP, MF_BYCOMMAND |
-                   (ready && !analysis_active() && !closing ? MF_ENABLED : MF_GRAYED));
-    EnableMenuItem(m, FILE_CHECK, MF_BYCOMMAND | (edit && !analysis_active() ? MF_ENABLED : MF_GRAYED));
-    EnableMenuItem(m, SHOW_SAMPLES, MF_BYCOMMAND | (browseAuxiliary && !showingHistory && !graph().get("nodes").array_items().empty() ? MF_ENABLED : MF_GRAYED));
+      menu_enable(id, edit);
+    menu_enable(FILE_IMPORT, ready && !analysis_active() && !closing && !showingHistory);
+    menu_enable(MANAGE_REFERENCES, ready && !analysis_active() && !closing && !showingHistory);
+    menu_enable(TOOL_SETUP, ready && !analysis_active() && !closing);
+    menu_enable(FILE_CHECK, edit && !analysis_active());
+    menu_enable(SHOW_SAMPLES, browseAuxiliary && !showingHistory);
     for (UINT id : {SHOW_QUEUE, SHOW_INDEXES, SHOW_RESOURCES, SHOW_PROJECTS})
-      EnableMenuItem(m, id, MF_BYCOMMAND | (browseAuxiliary ? MF_ENABLED : MF_GRAYED));
-    EnableMenuItem(m, SHOW_CURATED, MF_BYCOMMAND | (browseAuxiliary ? MF_ENABLED : MF_GRAYED));
-    EnableMenuItem(m, FILE_HISTORY, MF_BYCOMMAND | (browseAuxiliary ? MF_ENABLED : MF_GRAYED));
-    EnableMenuItem(m, SHOW_RESULTS, MF_BYCOMMAND | (browseAuxiliary ? MF_ENABLED : MF_GRAYED));
-    EnableMenuItem(m, VIEW_RESULT_SUMMARY, MF_BYCOMMAND | (browseAuxiliary &&
-        !(showingHistory ? getstr(historyRun, "run_id") : runId).empty() ? MF_ENABLED : MF_GRAYED));
-    EnableMenuItem(m, SHOW_RESTART, MF_BYCOMMAND |
-        (browseAuxiliary && !(showingHistory ? getstr(historyRun, "run_id") : runId).empty() && !analysis_active() ? MF_ENABLED : MF_GRAYED));
-    DrawMenuBar(window);
+      menu_enable(id, browseAuxiliary);
+    menu_enable(SHOW_CURATED, browseAuxiliary);
+    menu_enable(FILE_HISTORY, browseAuxiliary);
+    menu_enable(SHOW_RESULTS, browseAuxiliary);
+    menu_enable(VIEW_METHODS, ready && !closing && ui_request_idle());
+    menu_enable(VIEW_RESULT_SUMMARY, browseAuxiliary &&
+        !(showingHistory ? getstr(historyRun, "run_id") : runId).empty());
+    menu_enable(SHOW_RESTART, browseAuxiliary &&
+        !(showingHistory ? getstr(historyRun, "run_id") : runId).empty() && !analysis_active());
+    if (menuChanged) DrawMenuBar(window);
     pack_enabled();
     reference_enabled();
     setup_enabled();
@@ -3753,16 +3841,39 @@ class Workspace {
     const auto *row = library_row(item);
     return row ? row->key() : std::string();
   }
-  void library_toggle(HTREEITEM item) {
+  void library_expand(HTREEITEM item, UINT action) {
     const auto *row = library_row(item);
     if (!row || !row->toolId.empty()) return;
-    TreeView_SelectItem(tasks, item);
-    TreeView_Expand(tasks, item, TVE_TOGGLE);
+    const auto category = row->category;
+    HTREEITEM anchor = TreeView_GetFirstVisible(tasks);
+    const bool visible = (GetWindowLongPtrW(tasks, GWL_STYLE) & WS_VISIBLE) != 0;
+    // Native expansion scrolls to expose the new children. Keep the user's
+    // existing viewport instead, and present the expand/restore as one update.
+    if (visible) SendMessageW(tasks, WM_SETREDRAW, FALSE, 0);
+    if (TreeView_GetSelection(tasks) != item) TreeView_SelectItem(tasks, item);
+    TreeView_Expand(tasks, item, action);
+    // A collapsed group's old first-visible child is no longer a valid anchor.
+    // Walk to its visible ancestor; native bottom clamping remains in force.
+    if (anchor) {
+      for (HTREEITEM parent = TreeView_GetParent(tasks, anchor); parent;
+           parent = TreeView_GetParent(tasks, parent))
+        if (!(TreeView_GetItemState(tasks, parent, TVIS_EXPANDED) & TVIS_EXPANDED))
+          anchor = parent;
+      if (TreeView_GetFirstVisible(tasks) != anchor)
+        TreeView_SelectSetFirstVisible(tasks, anchor);
+    }
+    if (visible) {
+      SendMessageW(tasks, WM_SETREDRAW, TRUE, 0);
+      // The tree already uses TVS_EX_DOUBLEBUFFER. Redraw its changed rows and
+      // background together, without forcing intermediate erase/paint cycles.
+      RedrawWindow(tasks, nullptr, nullptr, RDW_INVALIDATE | RDW_ERASE | RDW_FRAME);
+    }
     // Programmatic expansion may omit ITEMEXPANDED after EXPANDEDONCE is set.
     if (!libraryFiltered)
-      libraryExpanded[row->category] =
+      libraryExpanded[category] =
           (TreeView_GetItemState(tasks, item, TVIS_EXPANDED) & TVIS_EXPANDED) != 0;
   }
+  void library_toggle(HTREEITEM item) { library_expand(item, TVE_TOGGLE); }
   static LRESULT CALLBACK library_proc(HWND h, UINT message_, WPARAM w, LPARAM l,
                                        UINT_PTR, DWORD_PTR context) {
     auto *app = reinterpret_cast<Workspace *>(context);
@@ -3795,6 +3906,15 @@ class Workspace {
       if (row && row->toolId.empty()) app->library_toggle(item);
       else if (row && w == VK_RETURN) app->add_task(item);
       return 0;
+    }
+    if (message_ == WM_KEYDOWN && (w == VK_LEFT || w == VK_RIGHT)) {
+      HTREEITEM item = TreeView_GetSelection(h);
+      const auto *row = app->library_row(item);
+      const bool expanded = (TreeView_GetItemState(h, item, TVIS_EXPANDED) & TVIS_EXPANDED) != 0;
+      if (row && row->toolId.empty() && ((w == VK_LEFT && expanded) || (w == VK_RIGHT && !expanded))) {
+        app->library_expand(item, w == VK_LEFT ? TVE_COLLAPSE : TVE_EXPAND);
+        return 0;
+      }
     }
     if (message_ == WM_NCDESTROY)
       RemoveWindowSubclass(h, library_proc, 1);
@@ -4438,6 +4558,10 @@ class Workspace {
     const bool previousMode = workflowMode;
     state = std::move(value);
     workflowMode = getstr(state, "mode", "tool") == "workflow";
+    if (previousMode != workflowMode) {
+      InvalidateRect(modeTools, nullptr, FALSE);
+      InvalidateRect(modeWorkflow, nullptr, FALSE);
+    }
     if (state.contains("catalog"))
       catalog = state.get("catalog");
     selected =
@@ -4607,7 +4731,7 @@ class Workspace {
     }
     const auto viewContext = pendingViews.find(id);
     if (viewContext != pendingViews.end()) {
-      Auxiliary &view = method.rfind("examples/", 0) == 0 ? curatedView :
+      Auxiliary &view = sample_editor_method(method) ? sampleEditorView : method.rfind("examples/", 0) == 0 ? curatedView :
           method.rfind("results/", 0) == 0 ? resultsView : auxiliary_method(method);
       const bool current = view.window && viewContext->second == view.generation;
       pendingViews.erase(viewContext);
@@ -4624,6 +4748,7 @@ class Workspace {
         return;
       }
     }
+    if (sample_editor_method(method)) { sample_editor_response(method, response_); return; }
     if (method == "setup/status")
       setupPollPending = false;
     else if (method.rfind("setup/", 0) == 0)
@@ -4672,7 +4797,9 @@ class Workspace {
           verifiedIndexes.erase(verificationKey);
           index_rows();
         }
-        aux_text(view, view.kind == SHOW_SAMPLES ? SAMPLE_NOTICE : view.kind == SHOW_QUEUE ? QUEUE_NOTICE : INDEX_NOTICE, error);
+        if (method == "sample/table" && sampleTable.contains("rows")) sample_table_rows();
+        aux_text(view, view.kind == SHOW_SAMPLES ? SAMPLE_NOTICE : view.kind == SHOW_QUEUE ? QUEUE_NOTICE : INDEX_NOTICE,
+            method == "sample/table" && sampleTable.contains("rows") ? error + L"\r\nThe previous table remains loaded; choose another path or edit that table." : error);
         if (method.rfind("sample/", 0) == 0) sample_invalidate();
         if (method != "queue/status" || !queuePollFailed)
           MessageBoxW(view.window ? view.window : window, error.c_str(), L"Native Workbench", MB_OK | MB_ICONERROR);
@@ -4762,6 +4889,7 @@ class Workspace {
       sampleTargetSchema = result;
       if (samplesView.window) sample_mode();
     } else if (method == "sample/table") {
+      sampleLoadedPath = narrow(control_text(aux(samplesView, SAMPLE_PATH)));
       sampleTable = result;
       sample_table_rows();
     } else if (method == "sample/preview") {
@@ -4816,6 +4944,14 @@ class Workspace {
         status_text(workflowMode
                         ? L"Drag tools onto the canvas. Select a tool to edit its options."
                         : L"Select a tool, choose its inputs and options, then run it locally.");
+    } else if (method == "methods/preview") {
+      std::wstring content = wt(result, "methods", "No planned methods are available.");
+      if (!result.get("issues").array_items().empty()) {
+        content += L"\n\nWorkflow issues\n";
+        for (const auto &issue : result.get("issues").array_items())
+          content += wt(issue, "severity") + L": " + wt(issue, "message") + L"\n";
+      }
+      show_text(L"Planned methods", content);
     } else if (method == "review") {
       std::wstring content;
       if (result.contains("readiness")) {
@@ -4834,8 +4970,8 @@ class Workspace {
       m.owner = window;
       m.font = font;
       m.mode = 2;
-      m.title = L"Readiness and planned methods";
-      m.message = L"Review analysis readiness. Installation checks do not guarantee a successful run.";
+      m.title = L"Review and run";
+      m.message = L"Check the inputs and planned analysis before running.";
       m.value = content;
       m.confirm =
           start && result.get("valid").boolean() ? L"Run analysis" : L"Done";
@@ -5081,7 +5217,7 @@ class Workspace {
     case REVIEW:
     case VIEW_METHODS:
       reviewThenRun = false;
-      send("review", object({{"output_folder", narrow(control_text(output))}}));
+      send("methods/preview");
       break;
     case FILE_NEW:
       canvas_reset_positions();
@@ -5110,6 +5246,7 @@ class Workspace {
 #include "recovery_ui.h"
 #include "curated_ui.h"
 #include "results_ui.h"
+#include "sample_editor_ui.h"
 #include "workflow_canvas.h"
   void panel_mouse_wheel(HWND panel, WPARAM w) {
     // Precision wheels can report less than one logical pixel of movement.
@@ -5253,6 +5390,7 @@ class Workspace {
         setupActionPending = false;
         refBusy = false;
         refActionPending = false;
+        sampleEditorPending = false;
         status_text(L"The local engine stopped. Restart Workbench; "
                     L"incomplete runs remain recorded.");
         if (closing)
@@ -5283,6 +5421,9 @@ class Workspace {
                      r->bottom - r->top, SWP_NOZORDER | SWP_NOACTIVATE);
       }
       layout();
+      // Logical dimensions can remain unchanged across a DPI transition.
+      // The parent-painted brand and separators still need the new scale.
+      InvalidateRect(window, nullptr, FALSE);
       return 0;
     case WM_GETMINMAXINFO: {
       auto *p = reinterpret_cast<MINMAXINFO *>(l);
@@ -5423,6 +5564,16 @@ class Workspace {
     }
     case WM_DRAWITEM: {
       const auto *item = reinterpret_cast<DRAWITEMSTRUCT *>(l);
+      if (item->CtlType != ODT_BUTTON) break;
+      const int buttonWidth = item->rcItem.right - item->rcItem.left;
+      const int buttonHeight = item->rcItem.bottom - item->rcItem.top;
+      HDC buffer = CreateCompatibleDC(item->hDC);
+      HBITMAP bitmap = buffer ? CreateCompatibleBitmap(item->hDC,
+          std::max(1, buttonWidth), std::max(1, buttonHeight)) : nullptr;
+      HGDIOBJ previousBitmap = bitmap ? SelectObject(buffer, bitmap) : nullptr;
+      HDC dc = bitmap ? buffer : item->hDC;
+      const int savedDc = SaveDC(dc);
+      if (bitmap) SetWindowOrgEx(dc, item->rcItem.left, item->rcItem.top, nullptr);
       const bool primary = item->CtlID == RUN;
       const bool active = (item->CtlID == MODE_TOOLS && !workflowMode) ||
                           (item->CtlID == MODE_WORKFLOW && workflowMode);
@@ -5431,22 +5582,28 @@ class Workspace {
                       active ? RGB(68, 81, 105) : NAVY;
       if (item->itemState & ODS_SELECTED) fill = RGB(33, 65, 92);
       HBRUSH brush = CreateSolidBrush(fill);
-      FillRect(item->hDC, &item->rcItem, brush);
+      FillRect(dc, &item->rcItem, brush);
       DeleteObject(brush);
-      SetBkMode(item->hDC, TRANSPARENT);
-      SetTextColor(item->hDC, disabled ? RGB(216, 221, 228) : PAPER);
-      SelectObject(item->hDC, bold);
+      SetBkMode(dc, TRANSPARENT);
+      SetTextColor(dc, disabled ? RGB(216, 221, 228) : PAPER);
+      SelectObject(dc, bold);
       RECT r = item->rcItem;
       const auto label = control_text(item->hwndItem);
-      DrawTextW(item->hDC, label.c_str(), -1, &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+      DrawTextW(dc, label.c_str(), -1, &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
       if (active) {
         RECT underline = r; underline.top = underline.bottom - px(3);
         HBRUSH line = CreateSolidBrush(RGB(141, 199, 233));
-        FillRect(item->hDC, &underline, line); DeleteObject(line);
+        FillRect(dc, &underline, line); DeleteObject(line);
       }
       if (item->itemState & ODS_FOCUS) {
-        InflateRect(&r, -px(4), -px(4)); DrawFocusRect(item->hDC, &r);
+        InflateRect(&r, -px(4), -px(4)); DrawFocusRect(dc, &r);
       }
+      if (bitmap)
+        BitBlt(item->hDC, item->rcItem.left, item->rcItem.top, buttonWidth, buttonHeight,
+               dc, item->rcItem.left, item->rcItem.top, SRCCOPY);
+      if (savedDc) RestoreDC(dc, savedDc);
+      if (bitmap) { SelectObject(buffer, previousBitmap); DeleteObject(bitmap); }
+      if (buffer) DeleteDC(buffer);
       return TRUE;
     }
     case WM_PAINT: {
@@ -5480,6 +5637,7 @@ class Workspace {
     case WM_CLOSE:
       if (closing)
         return 0;
+      if (!sample_editor_close()) return 0;
       if (setupBusy || setupActionPending) {
         if (setupBusy && !setupState.get("operation").get("cancellable").boolean(true)) {
           MessageBoxW(window, L"A tool installation is being committed. Please wait for it to finish.",
@@ -5677,6 +5835,7 @@ public:
     MSG msg{};
     while (GetMessageW(&msg, nullptr, 0, 0) > 0) {
       if (!(setupWindow && IsDialogMessageW(setupWindow, &msg)) &&
+          !(sampleEditorView.window && IsDialogMessageW(sampleEditorView.window, &msg)) &&
           !(samplesView.window && IsDialogMessageW(samplesView.window, &msg)) &&
           !(queueView.window && IsDialogMessageW(queueView.window, &msg)) &&
           !(indexesView.window && IsDialogMessageW(indexesView.window, &msg)) &&

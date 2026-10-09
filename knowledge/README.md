@@ -1,22 +1,19 @@
 # Native Workbench knowledge base
 
-**Unpublished review candidate, 2026-10-09:**
-[Draft PR #15](https://github.com/comparativechrono/workbench/pull/15) is ready for
-review with the **0.16.1** keyboard and narrow-display patch, stacked on the
-unmerged deployment companion PR #14. Application source is
-`8938e709b041106e8a46e1447383e8e9ba3e0cb9`; final validator source is
-`69022689e686b2cacdc98dbdbef728e664941e67`.
+**Active tester-feedback revision, 2026-10-09:**
+[Draft PR #15](https://github.com/comparativechrono/workbench/pull/15) remains
+unpublished **0.16.1**. Development resumes from
+`8cd3457745da52d38b5470c9ae917c8394ca46b0` to address Run/polling flashing,
+category expansion anchoring and collapse flashing, restore separate Methods
+while retaining Run preflight, and add native sample-table New/Edit/Save as
+CSV/TSV with a verified one-row Starter example. File columns, base folders and
+mapping remain explicit; the example does not supply independent replicates.
 
-The candidate passed **141 source tests and 84 native checks per Windows path**,
-plus archive/source verification and settled 96-DPI visual review. The final
-validator repeated 19 checks per path on unchanged archives, within the same
-84-check scope. See the [handover](ui-patch-0.16.1-handover.md),
-[native evidence](evidence/ui-patch-0.16.1-native-validation-2026-10-09.json) and
-[visual review](evidence/ui-patch-0.16.1-visual-review-2026-10-09.json) for exact
-identities, retained attempts and the corrected screenshot interpretation.
-Immediate resize frames can retain old geometry; this does not establish
-zero flicker, high-DPI or representative-PC acceptance. Nothing is merged or
-released; published **0.16.0** remains unchanged.
+Implementation and new exact-package validation are **pending**. Start with the
+[new handover](tester-feedback-0.16.1-handover.md). The preceding
+[UI-patch evidence](ui-patch-0.16.1-handover.md)—141 source passes and 84 native
+checks per path—applies only to the prior `8938e709` archives, not this revision.
+Nothing is merged or released; published **0.16.0** remains unchanged.
 
 **Deployment companion baseline:**
 [Draft PR #14](https://github.com/comparativechrono/workbench/pull/14) contains the
@@ -33,7 +30,7 @@ Start with the [companion handover](deployment-acceptance-handover.md),
 [IT review guide](../docs/institutional-deployment.md). All 10 manual checks remain
 untested; representative PCs, high DPI, multiple monitors, physical trackpads,
 managed-machine approval and signing remain external work. Its failed keyboard
-and narrow-display observations prompted the 0.16.1 review candidate above;
+and narrow-display observations prompted the preceding 0.16.1 UI patch;
 the companion evidence remains unchanged. Benchmarking is separate; scientific
 Linux CWL and SDK/build recovery remain later sets. The published record below is
 unchanged.

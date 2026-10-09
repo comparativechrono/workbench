@@ -307,20 +307,32 @@ def gui_checks(root, evidence, report):
         destination = evidence / "gui-diagnostic-exports"
         destination.mkdir()
         ui.set_text(ui.child(111), str(destination))
-        require(ui.label(ui.child(115)) == "Readiness", "Native footer did not expose Readiness.")
+        require(ui.label(ui.child(115)) == "Methods", "Native footer did not expose separate Methods.")
         ui.click_button(115)
-        ui.wait("readiness modal", lambda: window("Readiness and planned methods"))
-        modal = window("Readiness and planned methods")
+        ui.wait("planned methods modal", lambda: window("Planned methods"))
+        modal = window("Planned methods")
+        text = ui.label(ui.child(105, modal))
+        require("minimap2" in text and "Ready for preparation" not in text,
+                "Separate Methods did not show the planned scientific methods independently of readiness.")
+        report["captures"] = [ui.capture("methods-native.bmp", modal)]
+        write_json(evidence / "methods-native-controls.json", ui.controls(modal))
+        ui.send(ui.child(2, modal), 0x00F5)
+        ui.wait("planned methods modal closed", lambda: not window("Planned methods"))
+        require(not list(destination.iterdir()), "Methods preview created output files.")
+        ui.click_button(113)
+        ui.wait("Run preflight review", lambda: window("Review and run"))
+        modal = window("Review and run")
         text = ui.label(ui.child(105, modal))
         require("Ready for preparation" in text and "deferred" in text.lower() and "Successful tool execution" in text,
-                "Native readiness modal omitted readiness limits or planned-method review.")
+                "Run preflight omitted readiness limits or planned-method review.")
         # Retain actual native pixels for visual review of introductory text
         # fit. A WM_GETFONT handle belongs to the application process and cannot
         # provide a valid cross-process DrawText measurement in this helper.
-        report["captures"] = [ui.capture("readiness-native.bmp", modal)]
-        write_json(evidence / "readiness-native-controls.json", ui.controls(modal))
+        report["captures"].append(ui.capture("run-preflight-native.bmp", modal))
+        write_json(evidence / "run-preflight-native-controls.json", ui.controls(modal))
         ui.send(ui.child(2, modal), 0x00F5)
-        ui.wait("readiness modal closed", lambda: not window("Readiness and planned methods"))
+        ui.wait("Run preflight cancelled", lambda: not window("Review and run"))
+        require(not list(destination.iterdir()), "Cancelled Run preflight created an analysis.")
         menu_command(ui, "Review diagnostics...")
         ui.wait("diagnostic preview modal", lambda: window("Review diagnostic report"))
         modal = window("Review diagnostic report")
@@ -343,7 +355,7 @@ def gui_checks(root, evidence, report):
         ui.send(ui.child(1, window("Diagnostic report saved")), 0x00F5)
         report["dpi"] = ui.user.GetDpiForWindow(ui.main)
         report["nativeGUIValidated"] = True
-        check(report, "Native Readiness modal and diagnostics preview/save controls work; Close saves nothing and explicit Save preserves the exact displayed JSON.")
+        check(report, "Native Methods is separate, Run retains preparation checks, and diagnostics preview/save controls work; Close saves nothing and explicit Save preserves the exact displayed JSON.")
     finally:
         ui.close()
 
