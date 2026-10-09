@@ -6,6 +6,7 @@ for methods, graph diagrams and execution; no client command or shell is accepte
 from __future__ import annotations
 
 import copy
+from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 import gzip
 import hashlib
 import html
@@ -22,13 +23,15 @@ from decimal import Decimal
 
 try:
     from .catalog import resolve_tool
-    from . import performance, reference_indexes
+    from . import performance, reference_indexes, recovery, execution_resources
     from .cwl_export import definition_sha256, export_workflow, update_run_status
     from .reference_provenance import collect_references, used_paths, methods_text as reference_methods
 except ImportError:
     from catalog import resolve_tool
     import performance
     import reference_indexes
+    import recovery
+    import execution_resources
     from cwl_export import definition_sha256, export_workflow, update_run_status
     from reference_provenance import collect_references, used_paths, methods_text as reference_methods
 
@@ -339,7 +342,9 @@ class NativeBackend:
 
     def run(self, request, event, cancel):
         request_path = Path(request["output_folder"]) / "bridge-request.json"
-        write_json(request_path, request)
+        # Temporary environment is host-owned orchestration, not an extension
+        # of the bridge's strictly enumerated native request schema.
+        write_json(request_path, {key: value for key, value in request.items() if key != 'temporary_folder'})
         stopped = threading.Event()
         def watch():
             while not stopped.wait(0.1):
@@ -351,10 +356,14 @@ class NativeBackend:
         process = None
         result = None
         try:
+            environment = None
+            if request.get('temporary_folder'):
+                environment = dict(os.environ)
+                environment.update(TMP=request['temporary_folder'], TEMP=request['temporary_folder'], TMPDIR=request['temporary_folder'])
             process = self._spawn([str(self.app_root / "WorkbenchBridge.exe"), "run", "--request", str(request_path)],
                                        cwd=None if os.name == "nt" else str(self.app_root), stdin=subprocess.DEVNULL,
                                        stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-                                       text=True, encoding="utf-8", errors="replace",
+                                       text=True, encoding="utf-8", errors="replace", env=environment,
                                        creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
             for line in process.stdout:
                 try:
@@ -428,6 +437,10 @@ class Engine:
         self.catalog = catalog
         self.tools = catalog["tools"]
         self.backend = backend or NativeBackend(self.app_root)
+        # Cache publication retains its interprocess lease. Serializing builders
+        # inside this engine avoids treating two ready local consumers of the
+        # same index as conflicting application processes.
+        self._index_build_lock = threading.Lock()
 
     def _tool(self, node, optional=False):
         try:
@@ -663,7 +676,7 @@ class Engine:
             groups.setdefault(rank[identity], []).append(identity)
         return [{"rank": level, "nodes": identities} for level, identities in sorted(groups.items())]
 
-    def methods(self, graph, completed=False, statuses=None, references=None, index_actions=None):
+    def methods(self, graph, completed=False, statuses=None, references=None, index_actions=None, recovered=None):
         nodes = {n["id"]: n for n in graph.get("nodes", []) if isinstance(n, dict)}
         sources = {s["id"]: s for s in graph.get("sources", []) if isinstance(s, dict)}
         try:
@@ -686,7 +699,9 @@ class Engine:
             operation = node_name(node, tool)
             verbs = "was performed" if completed else "will be performed"
             line = f"Step {display_id(identity)} ({operation}) {verbs} using {versions or tool['name']} (pack {tool.get('packId', 'builtin')} {tool.get('packVersion', '')})."
-            if completed and (index_actions or {}).get(identity)=='reused':
+            if completed and identity in (recovered or set()):
+                line = f"Step {display_id(identity)} ({operation}) reused verified completed output bytes previously produced using {versions or tool['name']} (pack {tool.get('packId', 'builtin')} {tool.get('packVersion', '')}). The scientific command was not run in this analysis."
+            elif completed and (index_actions or {}).get(identity)=='reused':
                 line=f"Step {display_id(identity)} ({operation}) reused a verified reference index previously produced using {versions or tool['name']} (pack {tool.get('packId', 'builtin')} {tool.get('packVersion', '')}). The indexing command was not run in this analysis."
             description = (tool.get("methodsDescription") or tool.get("description", "")).strip()
             if description:
@@ -736,7 +751,7 @@ class Engine:
                     citations.append(text)
         if citations:
             lines.append("Tool references:\n" + "\n".join(citations))
-        lines.append("Operations run locally in dependency order. Independent branches are scheduled sequentially. The run record records exact packs, parameters, input identities, outputs and completion states.")
+        lines.append("Operations run locally in dependency order under the frozen scheduling policy. CPU reservations govern admission, not operating-system CPU limits; unknown requirements run exclusively. The run record records exact packs, parameters, input identities, outputs and completion states.")
         return "\n\n".join(lines) + "\n"
 
     def save_pipeline(self, graph):
@@ -829,9 +844,24 @@ class Engine:
             value = graph.get(field, minimum)
             graph[field] = max(minimum, value if isinstance(value, int) and 0 < value < 1000000000 else minimum)
 
-    def prepare(self, graph, output_parent, cancel=None, index_policy='reuse', run_metadata=None):
+    def prepare(self, graph, output_parent, cancel=None, index_policy='reuse', run_metadata=None, resource_policy=None, restart_from=None, project_metadata=None, _preview=False):
+        if restart_from is not None:
+            source_folder = restart_from.get('sourceFolder') if isinstance(restart_from, dict) else restart_from
+            prior, _, _ = recovery._source(source_folder)
+            if run_metadata is None:
+                run_metadata = prior.get('batch')
+            if project_metadata is None:
+                project_metadata = prior.get('project')
+            if index_policy == 'reuse':
+                index_policy = prior.get('referenceIndexPolicy', 'reuse')
         if index_policy not in ('reuse','rebuild'):
             raise ValueError('Unknown reference index reuse policy.')
+        if project_metadata is not None:
+            try:
+                from .project_manager import validate_project_metadata
+            except ImportError:
+                from project_manager import validate_project_metadata
+            project_metadata = validate_project_metadata(project_metadata)
         if run_metadata is not None:
             if (not isinstance(run_metadata,dict) or set(run_metadata)!={'batchId','sampleId','metadata'} or
                     not isinstance(run_metadata['batchId'],str) or not re.fullmatch(r'[0-9a-f]{32}',run_metadata['batchId']) or
@@ -848,6 +878,7 @@ class Engine:
             review = self.validate(graph)
             if not review["ok"]:
                 raise ValueError("; ".join(i["message"] for i in review["errors"]))
+            resource_policy = execution_resources.normalize(resource_policy, graph['nodes'])
         with performance.measure(measurements["phases"], "freezing"):
             parent = Path(output_parent).absolute()
             if not _io_path(parent).is_dir() or _io_path(parent).is_symlink():
@@ -857,6 +888,9 @@ class Engine:
                 if physical.is_symlink() or (hasattr(physical, "is_junction") and physical.is_junction()):
                     raise ValueError("The output folder must not use symbolic links or junctions.")
             parent = _resolved_path(parent)
+            storage_evidence = {'output': execution_resources.storage(parent)}
+            if resource_policy['temporaryFolder']:
+                storage_evidence['temporary'] = execution_resources.storage(resource_policy['temporaryFolder'])
             nodes = {n["id"]: n for n in graph["nodes"]}
             _, dependencies = self._topology(graph)
             frozen_nodes = []
@@ -873,8 +907,16 @@ class Engine:
                     # Header inspection is part of the analysis contract too. Freeze
                     # the helper before execution so later installations cannot
                     # change which SAMtools inspects the selected BAMs.
-                    frozen['validationTools'] = {'samtools': self._samtools_selection(tool)}
+                    helper = ((project_metadata or {}).get('validationTools', {}).get(identity)
+                              or self._samtools_selection(tool))
+                    frozen['validationTools'] = {'samtools': copy.deepcopy(helper)}
+                    if project_metadata is not None:
+                        self._samtools(frozen)
                 frozen_nodes.append(frozen)
+            if project_metadata is not None:
+                required = {node['id'] for node in frozen_nodes if node.get('validationTools')}
+                if set(project_metadata['validationTools']) != required:
+                    raise ValueError('Historical project validation helpers differ from this workflow.')
         with performance.measure(measurements["phases"], "input_hashing"):
             evidence = {}
             used_sources = {r for n in graph["nodes"] for rs in n.get("inputs", {}).values() for r in rs if "::" not in r}
@@ -903,6 +945,13 @@ class Engine:
                         if (before.st_size, before.st_mtime_ns) != (after.st_size, after.st_mtime_ns):
                             raise ValueError("An input changed while preparing the run: " + str(path))
                         evidence[str(path)] = {"path": str(path), "bytes": after.st_size, "mtime_ns": after.st_mtime_ns, "sha256": checksum}
+            if project_metadata is not None:
+                bound = {str(_resolved_path(item['boundPath'])): item for item in project_metadata['dependencies']}
+                if set(bound) != set(evidence) or len(bound) != len(project_metadata['dependencies']):
+                    raise ValueError('Historical project files differ from this workflow’s actual input bindings.')
+                for path, item in bound.items():
+                    if any(evidence[path][key] != item[key] for key in ('bytes', 'sha256')):
+                        raise ValueError('A historical project input differs from its recorded bytes: ' + path)
         with performance.measure(measurements["phases"], "reference_provenance"):
             references = collect_references(self.app_root, evidence, evidence=evidence)
             for path, reference in references.items():
@@ -914,11 +963,19 @@ class Engine:
             self._counters(graph)
             run_id = "run-" + datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S") + "-" + uuid.uuid4().hex[:8]
             folder = parent / run_id
-            plan = {"schema": 1, "id": run_id, "created": utc(), "folder": str(folder), "graph": graph, "nodes": frozen_nodes, "inputs": evidence, "references": references, "warnings": review["warnings"], "scheduler": "sequential-independent-branches", "methods": self.methods(graph, references=references)}
+            plan = {"schema": 1, "id": run_id, "created": utc(), "folder": str(folder), "graph": graph, "nodes": frozen_nodes, "inputs": evidence, "references": references, "warnings": review["warnings"], "scheduler": "resource-budgeted-ready-dag", "methods": self.methods(graph, references=references)}
+            plan['resources'] = resource_policy
+            plan['storageReadiness'] = storage_evidence
+            if project_metadata is not None:
+                plan['project'] = project_metadata
+                plan['methods'] += '\nImported project '+project_metadata['id']+' (manifest SHA-256 '+project_metadata['manifestSha256']+'). The frozen project section retains descriptive sample metadata and historical reference receipts separately from the current local reference library. Input bytes were verified; those receipts do not authenticate a publisher or create a local reference registration.\n'
             plan['referenceIndexPolicy']=index_policy
             if run_metadata is not None:
                 plan['batch']=run_metadata
                 plan['methods']+='\nBatch '+run_metadata['batchId']+', sample '+run_metadata['sampleId']+'. The frozen plan and CWL retain the selected sample-table metadata and file bindings.\n'
+            if restart_from is not None:
+                plan['recovery'] = recovery.review(self, plan, restart_from, cancel)
+                plan['methods'] += '\nCompleted-step restart from '+plan['recovery']['sourceRunId']+'. Only selected verified complete products will be copied into this new result; other steps will run. No within-tool checkpoint is resumed.\n'
             workflow = export_workflow(plan, self.app_root)
         measurements.update(status="completed", elapsedSeconds=performance.elapsed(preparation_started, time.perf_counter))
         plan["performancePreparation"] = measurements
@@ -927,6 +984,8 @@ class Engine:
         plan["workflowExport"] = {"file": "workflow.cwl", "format": "CWL v1.2", "definitionSha256": definition_sha256(workflow)}
         plan["sha256"] = hashlib.sha256(canonical(plan).encode("utf-8")).hexdigest()
         workflow["$graph"][0]["nw:planSha256"] = plan["sha256"]
+        if _preview:
+            return plan
         _io_path(folder).mkdir(mode=0o700)
         write_json(folder / "plan.json", plan)
         write_json(folder / "graph.json", graph)
@@ -937,6 +996,13 @@ class Engine:
         _io_path(folder / "pipeline.svg").write_text(self.diagram(plan), encoding="utf-8")
         write_json(folder / "performance.json", performance.make_record(plan))
         return plan
+
+    def review_restart(self, graph, source_folder, cancel=None, resource_policy=None):
+        source, _, _ = recovery._source(source_folder)
+        return self.prepare(graph, Path(source_folder).absolute().parent, cancel=cancel,
+                            index_policy=source.get('referenceIndexPolicy', 'reuse'),
+                            run_metadata=source.get('batch'), resource_policy=resource_policy,
+                            restart_from=source_folder, _preview=True)['recovery']
 
     def _assert_disjoint_hashes(self, graph, evidence):
         sources = {s["id"]: s for s in graph["sources"]}
@@ -1143,6 +1209,145 @@ class Engine:
         return {"alignmentHeaders": len(headers), "referenceChecks": reference_checks, "sequenceChecks": sequence_checks,
                 "validationTools":copy.deepcopy(node.get('validationTools', {}))}
 
+    def _execute_node(self, plan, node, available_outputs, event, cancel, measurement, temporary_root):
+        identity = node['id']
+        folder = Path(plan['folder'])
+        sources = {source['id']: source for source in plan['graph']['sources']}
+        node_names = {item['id']: item['label'] for item in plan['nodes']}
+        outputs = available_outputs
+        measured_step = copy.deepcopy(measurement)
+        entry = {'id': identity, 'name': node['label'], 'tool': node['tool']['id'],
+                 'pin': pin_for(node['tool']), 'started': utc(), 'status': 'running',
+                 'inputs': node['inputs'], 'outputs': {}}
+        started = time.perf_counter()
+        try:
+            if cancel.is_set():
+                raise InterruptedError('Cancelled before this step started.')
+            with performance.measure(measured_step["phases"], "input_verification"):
+                trusted = resolve_tool(self.catalog, node["tool"]["id"], pin_for(node["tool"]))
+                if trusted is None or canonical(trusted) != canonical(node["tool"]):
+                    raise ValueError("The installed operation differs from the frozen plan.")
+                self._verify_manifest(node["tool"])
+                values = self._resolve_values(node, sources, outputs)
+                for value in values.values():
+                    for filename in str(value).splitlines():
+                        if filename in plan["inputs"]:
+                            evidence = plan["inputs"][filename]
+                            if not _io_path(filename).is_file() or digest_file(filename, cancel) != evidence["sha256"]:
+                                raise ValueError("An external input changed after the plan was frozen: " + filename)
+                for refs in node["inputs"].values():
+                    for ref in refs:
+                        if ref in outputs:
+                            for key, filename in outputs[ref]["files"].items():
+                                if digest_file(filename, cancel) != outputs[ref]["sha256"][key]:
+                                    raise ValueError("An upstream output changed before it could be consumed: " + ref)
+                step_folder = folder / display_id(identity)
+                _io_path(step_folder).mkdir()
+            decision = next((item for item in plan.get('recovery', {}).get('nodes', []) if item['id'] == identity), None)
+            if decision and decision['action'] == 'reuse':
+                recovery.verify_source(plan['recovery'])
+                recovery.verify_tool_bytes(self, node, cancel)
+                with performance.measure(measured_step['phases'], 'output_validation_and_hashing'):
+                    entry['outputs'] = recovery.copy_outputs(decision, step_folder, cancel)
+                entry.update(status='success', folder=str(step_folder), message='Reused verified completed output bytes.',
+                             recovery={'action': 'reused', 'sourceRunId': plan['recovery']['sourceRunId'],
+                                       'sourcePlanSha256': plan['recovery']['sourcePlanSha256']})
+                if decision.get('referenceIndex'):
+                    entry['referenceIndex'] = copy.deepcopy(decision['referenceIndex'])
+                measured_step['backendMetrics'] = performance.unavailable_metrics('completed_step_reused_without_native_command')
+                measured_step['phases']['scientific_preflight']['status'] = 'not_applicable'
+                measured_step['phases']['backend_runner']['status'] = 'not_applicable'
+                return entry, measured_step
+            if node["tool"].get("builtin") or node["tool"]["id"] == "builtin/report":
+                measured_step["phases"]["scientific_preflight"]["status"] = "not_applicable"
+                measured_step["backendMetrics"] = performance.unavailable_metrics("builtin_operation_without_native_command")
+                with performance.measure(measured_step["phases"], "backend_runner"):
+                    result = self._report(node, values, step_folder, outputs, sources, node_names)
+            else:
+                with performance.measure(measured_step["phases"], "scientific_preflight"):
+                    input_types = {}
+                    for refs in node["inputs"].values():
+                        for ref in refs:
+                            descriptor = sources.get(ref) or outputs.get(ref)
+                            if descriptor:
+                                for filename in descriptor.get("files", {}).values():
+                                    input_types[str(_resolved_path(filename))] = descriptor["type"]
+                    entry["preflight"] = self._preflight(node, values, cancel, input_types)
+                if node['tool'].get('requiresReferenceIndex'):
+                    contract=node['tool']['requiresReferenceIndex']
+                    for ref in node['inputs'][contract['port']]:
+                        reference_indexes.compatible(node['tool'],outputs.get(ref,{}).get('referenceIndex'))
+                measured_step["backendMetrics"] = performance.unavailable_metrics()
+                with performance.measure(measured_step["phases"], "backend_runner"):
+                    request = {"app_root": str(self.app_root), "pack_folder": str(_resolved_path(self.app_root / node["tool"]["packFolder"])), "pack_sha256": node["tool"]["manifestSha256"], "workflow_id": node["tool"]["workflowId"], "output_folder": str(step_folder), "values": values, "cancel_file": str(folder / "cancel.request")}
+                    if temporary_root:
+                        temporary = temporary_root / display_id(identity)
+                        _io_path(temporary).mkdir()
+                        request['temporary_folder'] = str(temporary)
+                    run_backend=lambda:self.backend.run(request, lambda item: event(dict(item, nodeId=identity)), cancel)
+                    if node['tool'].get('referenceIndex'):
+                        contract=node['tool']['referenceIndex']
+                        port=next(p for p in node['tool']['ports'] if p['id']==contract['referencePort'])
+                        reference_path=values[port['manifestInputs'][0]]
+                        expected=plan['inputs'].get(reference_path,{}).get('sha256')
+                        if expected is None:
+                            producer=outputs[node['inputs'][port['id']][0]]
+                            expected=next(producer['sha256'][key] for key,path in producer['files'].items() if path==reference_path)
+                        while not self._index_build_lock.acquire(timeout=0.1):
+                            if cancel.is_set():
+                                raise InterruptedError('Cancelled while waiting for reference-index preparation.')
+                        try:
+                            if cancel.is_set():
+                                raise InterruptedError('Cancelled before reference-index preparation.')
+                            result,index_evidence=reference_indexes.ReferenceIndexStore(self.app_root).run(
+                                self.app_root,node,values,step_folder,run_backend,cancel,plan.get('referenceIndexPolicy','reuse'),expected)
+                        finally:
+                            self._index_build_lock.release()
+                        if index_evidence is not None:
+                            entry['referenceIndex']=index_evidence
+                    else:
+                        result=run_backend()
+                if entry.get('referenceIndex',{}).get('action')=='reused':
+                    measured_step['backendMetrics']=performance.unavailable_metrics('reference_index_reused_without_native_command')
+                else:
+                    measured_step["backendMetrics"] = performance.native_metrics(result.get("performance"))
+            entry.update(status="success" if result.get("success") else "cancelled" if result.get("cancelled") else "failed", message=result.get("message", ""), folder=result.get("folder", str(step_folder)))
+            if entry["status"] == "success":
+                with performance.measure(measured_step["phases"], "output_validation_and_hashing"):
+                    actual_folder = _resolved_path(entry["folder"])
+                    if not actual_folder.is_relative_to(_resolved_path(step_folder)):
+                        raise ValueError("Runner returned a result outside this step's private folder.")
+                    for output in node["tool"].get("outputs", []):
+                        files, hashes = {}, {}
+                        for key, relative in output.get("files", {}).items():
+                            path = _safe_relative(actual_folder, relative)
+                            if not _io_path(path).is_file():
+                                raise ValueError("The runner did not produce declared output " + output["id"] + ": " + str(path))
+                            if node["tool"].get("schemaAsset") and output["type"] in {"fasta-nucleotide", "fasta-protein", "msa-nucleotide", "msa-protein", "fasta-nucleotide-abundance", "id-list"}:
+                                declared = next((f for f in output.get("fields", []) if f["id"] == key), {})
+                                evidence = _sequence_evidence(path, output["type"], [output["type"]], output.get("state", {}), cancel, allow_empty=not declared.get("nonempty", True))
+                                entry.setdefault("outputValidation", {})[key] = evidence
+                            files[key] = str(path)
+                            hashes[key] = digest_file(path, cancel)
+                            if entry.get('referenceIndex'):
+                                expected=entry['referenceIndex']['files'][relative]
+                                if hashes[key]!=expected['sha256'] or _io_path(path).stat().st_size!=expected['bytes']:
+                                    raise ValueError('The registered reference index changed before output publication.')
+                        ref = identity + "::" + output["id"]
+                        item = {"id": ref, "label": output.get("label", output["id"]), "type": output["type"], "state": output.get("state", {}), "files": files, "sha256": hashes, "producer": identity, "manifestOutputs": output.get("manifestOutputs", list(files))}
+                        if entry.get('referenceIndex'):
+                            item['referenceIndex']=copy.deepcopy(entry['referenceIndex'])
+                        entry["outputs"][ref] = item
+        except InterruptedError as exc:
+            entry.update(status='cancelled', message=str(exc), outputs={})
+        except Exception as exc:
+            entry.update(status='failed', message=str(exc), outputs={})
+        finally:
+            entry['finished'] = utc()
+            measured_step['status'] = entry['status']
+            measured_step['elapsedSeconds'] = performance.elapsed(started, time.perf_counter)
+        return entry, measured_step
+
     def execute(self, plan, event=None, cancel=None):
         execution_started = time.perf_counter()
         event = event or (lambda item: None)
@@ -1169,13 +1374,13 @@ class Engine:
         measurements["status"] = "running"
         measurements["execution"]["status"] = "running"
         measured_steps = {step["id"]: step for step in measurements["steps"]}
-        sources = {s["id"]: s for s in plan["graph"]["sources"]}
-        node_names = {n["id"]: n["label"] for n in plan["nodes"]}
         outputs, statuses = {}, {}
         record = {"schema": 1, "id": plan["id"], "planSha256": claimed, "name": plan["graph"].get("name", "Workspace"), "folder": str(folder), "started": utc(), "status": "running", "nodes": [], "outputs": {}, "scheduler": plan["scheduler"]}
         record["references"] = copy.deepcopy(plan.get("references", {}))
         if 'batch' in plan:
             record['batch']=copy.deepcopy(plan['batch'])
+        if 'project' in plan:
+            record['project'] = copy.deepcopy(plan['project'])
         workflow = update_run_status(workflow, record)
         write_json(folder / "workflow.cwl", workflow)
         record["workflowExport"] = dict(plan["workflowExport"], sha256=digest_file(folder / "workflow.cwl"))
@@ -1183,137 +1388,107 @@ class Engine:
         measurements["execution"]["phases"]["startup"] = {"status": "completed", "elapsedSeconds": performance.elapsed(execution_started, time.perf_counter)}
         write_json(folder / "performance.json", measurements)
         event({"type": "run", "status": "running", "folder": str(folder)})
-        for node in plan["nodes"]:
-            identity = node["id"]
-            measured_step = measured_steps[identity]
-            step_started = None
-            entry = {"id": identity, "name": node["label"], "tool": node["tool"]["id"], "pin": pin_for(node["tool"]), "started": utc(), "status": "pending", "inputs": node["inputs"], "outputs": {}}
-            record["nodes"].append(entry)
-            if cancel.is_set():
-                entry.update(status="cancelled", message="Cancelled before this step started.")
-            elif any(statuses.get(dep) != "success" for dep in node["dependencies"]):
-                entry.update(status="blocked", message="An upstream step did not complete successfully.")
-            else:
-                entry["status"] = "running"
-                step_started = time.perf_counter()
-                measured_step["status"] = "running"
-                write_json(folder / "run.json", record)
-                write_json(folder / "performance.json", measurements)
-                event({"type": "step", "nodeId": identity, "status": "running"})
-                try:
-                    with performance.measure(measured_step["phases"], "input_verification"):
-                        trusted = resolve_tool(self.catalog, node["tool"]["id"], pin_for(node["tool"]))
-                        if trusted is None or canonical(trusted) != canonical(node["tool"]):
-                            raise ValueError("The installed operation differs from the frozen plan.")
-                        self._verify_manifest(node["tool"])
-                        values = self._resolve_values(node, sources, outputs)
-                        for value in values.values():
-                            for filename in str(value).splitlines():
-                                if filename in plan["inputs"]:
-                                    evidence = plan["inputs"][filename]
-                                    if not _io_path(filename).is_file() or digest_file(filename, cancel) != evidence["sha256"]:
-                                        raise ValueError("An external input changed after the plan was frozen: " + filename)
-                        for refs in node["inputs"].values():
-                            for ref in refs:
-                                if ref in outputs:
-                                    for key, filename in outputs[ref]["files"].items():
-                                        if digest_file(filename, cancel) != outputs[ref]["sha256"][key]:
-                                            raise ValueError("An upstream output changed before it could be consumed: " + ref)
-                        step_folder = folder / display_id(identity)
-                        _io_path(step_folder).mkdir()
-                    if node["tool"].get("builtin") or node["tool"]["id"] == "builtin/report":
-                        measured_step["phases"]["scientific_preflight"]["status"] = "not_applicable"
-                        measured_step["backendMetrics"] = performance.unavailable_metrics("builtin_operation_without_native_command")
-                        with performance.measure(measured_step["phases"], "backend_runner"):
-                            result = self._report(node, values, step_folder, outputs, sources, node_names)
-                    else:
-                        with performance.measure(measured_step["phases"], "scientific_preflight"):
-                            input_types = {}
-                            for refs in node["inputs"].values():
-                                for ref in refs:
-                                    descriptor = sources.get(ref) or outputs.get(ref)
-                                    if descriptor:
-                                        for filename in descriptor.get("files", {}).values():
-                                            input_types[str(_resolved_path(filename))] = descriptor["type"]
-                            entry["preflight"] = self._preflight(node, values, cancel, input_types)
-                        if node['tool'].get('requiresReferenceIndex'):
-                            contract=node['tool']['requiresReferenceIndex']
-                            for ref in node['inputs'][contract['port']]:
-                                reference_indexes.compatible(node['tool'],outputs.get(ref,{}).get('referenceIndex'))
-                        measured_step["backendMetrics"] = performance.unavailable_metrics()
-                        with performance.measure(measured_step["phases"], "backend_runner"):
-                            request = {"app_root": str(self.app_root), "pack_folder": str(_resolved_path(self.app_root / node["tool"]["packFolder"])), "pack_sha256": node["tool"]["manifestSha256"], "workflow_id": node["tool"]["workflowId"], "output_folder": str(step_folder), "values": values, "cancel_file": str(folder / "cancel.request")}
-                            run_backend=lambda:self.backend.run(request, lambda item: event(dict(item, nodeId=identity)), cancel)
-                            if node['tool'].get('referenceIndex'):
-                                contract=node['tool']['referenceIndex']
-                                port=next(p for p in node['tool']['ports'] if p['id']==contract['referencePort'])
-                                reference_path=values[port['manifestInputs'][0]]
-                                expected=plan['inputs'].get(reference_path,{}).get('sha256')
-                                if expected is None:
-                                    producer=outputs[node['inputs'][port['id']][0]]
-                                    expected=next(producer['sha256'][key] for key,path in producer['files'].items() if path==reference_path)
-                                result,index_evidence=reference_indexes.ReferenceIndexStore(self.app_root).run(
-                                    self.app_root,node,values,step_folder,run_backend,cancel,plan.get('referenceIndexPolicy','reuse'),expected)
-                                if index_evidence is not None:
-                                    entry['referenceIndex']=index_evidence
-                            else:
-                                result=run_backend()
-                        if entry.get('referenceIndex',{}).get('action')=='reused':
-                            measured_step['backendMetrics']=performance.unavailable_metrics('reference_index_reused_without_native_command')
-                        else:
-                            measured_step["backendMetrics"] = performance.native_metrics(result.get("performance"))
-                    entry.update(status="success" if result.get("success") else "cancelled" if result.get("cancelled") else "failed", message=result.get("message", ""), folder=result.get("folder", str(step_folder)))
-                    if entry["status"] == "success":
-                        with performance.measure(measured_step["phases"], "output_validation_and_hashing"):
-                            actual_folder = _resolved_path(entry["folder"])
-                            if not actual_folder.is_relative_to(_resolved_path(step_folder)):
-                                raise ValueError("Runner returned a result outside this step's private folder.")
-                            for output in node["tool"].get("outputs", []):
-                                files, hashes = {}, {}
-                                for key, relative in output.get("files", {}).items():
-                                    path = _safe_relative(actual_folder, relative)
-                                    if not _io_path(path).is_file():
-                                        raise ValueError("The runner did not produce declared output " + output["id"] + ": " + str(path))
-                                    if node["tool"].get("schemaAsset") and output["type"] in {"fasta-nucleotide", "fasta-protein", "msa-nucleotide", "msa-protein", "fasta-nucleotide-abundance", "id-list"}:
-                                        declared = next((f for f in output.get("fields", []) if f["id"] == key), {})
-                                        evidence = _sequence_evidence(path, output["type"], [output["type"]], output.get("state", {}), cancel, allow_empty=not declared.get("nonempty", True))
-                                        entry.setdefault("outputValidation", {})[key] = evidence
-                                    files[key] = str(path)
-                                    hashes[key] = digest_file(path, cancel)
-                                    if entry.get('referenceIndex'):
-                                        expected=entry['referenceIndex']['files'][relative]
-                                        if hashes[key]!=expected['sha256'] or _io_path(path).stat().st_size!=expected['bytes']:
-                                            raise ValueError('The registered reference index changed before output publication.')
-                                ref = identity + "::" + output["id"]
-                                item = {"id": ref, "label": output.get("label", output["id"]), "type": output["type"], "state": output.get("state", {}), "files": files, "sha256": hashes, "producer": identity, "manifestOutputs": output.get("manifestOutputs", list(files))}
-                                if entry.get('referenceIndex'):
-                                    item['referenceIndex']=copy.deepcopy(entry['referenceIndex'])
-                                entry["outputs"][ref] = item
-                            outputs.update(entry["outputs"])
-                except InterruptedError as exc:
-                    entry.update(status="cancelled", message=str(exc))
-                except Exception as exc:
-                    entry.update(status="failed", message=str(exc), outputs={})
-            measured_step["status"] = entry["status"]
-            if step_started is not None:
-                measured_step["elapsedSeconds"] = performance.elapsed(step_started, time.perf_counter)
-            write_json(folder / "performance.json", measurements)
-            entry["finished"] = utc()
-            statuses[identity] = entry["status"]
-            record["outputs"] = outputs
-            write_json(folder / "run.json", record)
-            event({"type": "step", "nodeId": identity, "status": entry["status"], "message": entry.get("message", "")})
+        policy = execution_resources.normalize(plan.get('resources'), plan['nodes'])
+        record['resources'] = copy.deepcopy(policy)
+        record['resourceScope'] = 'CPU admission reservations, not OS CPU limits; unknown requirements are exclusive. Memory and temporary expansion are unknown.'
+        if 'recovery' in plan:
+            record['recovery'] = {key: copy.deepcopy(value) for key, value in plan['recovery'].items() if key != 'nodes'}
+        temporary_root = None
+        if policy['temporaryFolder']:
+            execution_resources.storage(policy['temporaryFolder'])
+            temporary_root = Path(policy['temporaryFolder']) / ('native-workbench-' + plan['id'])
+            _io_path(temporary_root).mkdir(mode=0o700)
+            record['temporaryStorage'] = {'folder': str(temporary_root), 'cleanup': 'Preserved for inspection; only this run-owned subfolder was created.'}
+        execution_resources.storage(folder)
+        pending = list(plan['nodes'])
+        active = {}
+        used_cpus = 0
+        entries = {}
+        event_lock = threading.Lock()
+        original_event = event
+        def serialized_event(item):
+            with event_lock:
+                original_event(item)
+        event = serialized_event
+        def persist():
+            record['nodes'] = [entries[node['id']] for node in plan['nodes'] if node['id'] in entries]
+            record['outputs'] = outputs
+            write_json(folder / 'run.json', record)
+            write_json(folder / 'performance.json', measurements)
+        def finish(entry, measurement):
+            identity = entry['id']
+            entries[identity] = entry
+            measured_steps[identity].clear()
+            measured_steps[identity].update(measurement)
+            statuses[identity] = entry['status']
+            if entry['status'] == 'success':
+                outputs.update(entry['outputs'])
+            persist()
+            event({'type': 'step', 'nodeId': identity, 'status': entry['status'], 'message': entry.get('message', '')})
+        with ThreadPoolExecutor(max_workers=policy['maxParallel'], thread_name_prefix='workbench-step') as executor:
+            try:
+                while pending or active:
+                    for node in list(pending):
+                        identity = node['id']
+                        if cancel.is_set() or any(statuses.get(dep) in {'failed', 'blocked', 'cancelled'} for dep in node['dependencies']):
+                            pending.remove(node)
+                            status = 'cancelled' if cancel.is_set() else 'blocked'
+                            entry = {'id': identity, 'name': node['label'], 'tool': node['tool']['id'], 'pin': pin_for(node['tool']),
+                                     'inputs': node['inputs'], 'outputs': {}, 'status': status, 'finished': utc(),
+                                     'message': 'Cancelled before this step started.' if status == 'cancelled' else 'An upstream step did not complete successfully.'}
+                            measured = copy.deepcopy(measured_steps[identity]); measured['status'] = status
+                            finish(entry, measured)
+                            continue
+                        if any(statuses.get(dep) != 'success' for dep in node['dependencies']):
+                            continue
+                        reserved = execution_resources.reservation(policy, identity)
+                        if len(active) >= policy['maxParallel'] or used_cpus + reserved['cpus'] > policy['cpuBudget']:
+                            continue
+                        pending.remove(node)
+                        measured_steps[identity]['status'] = 'running'
+                        measured_steps[identity]['reservation'] = reserved
+                        entries[identity] = {'id': identity, 'name': node['label'], 'tool': node['tool']['id'],
+                                             'pin': pin_for(node['tool']), 'inputs': node['inputs'], 'outputs': {},
+                                             'status': 'running', 'started': utc(), 'reservation': reserved}
+                        persist()
+                        event({'type': 'step', 'nodeId': identity, 'status': 'running'})
+                        if cancel.is_set():
+                            # Cancellation can arrive through the admission event before a worker begins.
+                            pending.insert(0, node)
+                            continue
+                        future = executor.submit(self._execute_node, plan, copy.deepcopy(node), copy.deepcopy(outputs),
+                                                 event, cancel, measured_steps[identity], temporary_root)
+                        active[future] = (identity, reserved)
+                        used_cpus += reserved['cpus']
+                    if active:
+                        completed, _ = wait(active, timeout=0.1, return_when=FIRST_COMPLETED)
+                        for future in completed:
+                            identity, reserved = active.pop(future)
+                            used_cpus -= reserved['cpus']
+                            entry, measured = future.result()
+                            entry['reservation'] = reserved
+                            finish(entry, measured)
+                    elif pending and not cancel.is_set():
+                        raise ValueError('No pending workflow step can be admitted under this resource policy.')
+            except BaseException:
+                # Release every admitted native process before propagating a
+                # record-write or orchestration failure to the durable queue.
+                cancel.set()
+                raise
         with performance.measure(measurements["execution"]["phases"], "finalization"):
             record["finished"] = utc()
             record["status"] = "cancelled" if cancel.is_set() or any(v == "cancelled" for v in statuses.values()) else "success" if all(v == "success" for v in statuses.values()) else "failed"
             record["success"] = record["status"] == "success"
             record["methods"] = self.methods(plan["graph"], completed=True, statuses=statuses, references=plan.get("references", {}),
-                                              index_actions={entry['id']:entry['referenceIndex']['action'] for entry in record['nodes'] if entry.get('referenceIndex')})
+                                              index_actions={entry['id']:entry['referenceIndex']['action'] for entry in record['nodes'] if entry.get('referenceIndex')},
+                                              recovered={entry['id'] for entry in record['nodes'] if entry.get('recovery', {}).get('action') == 'reused'})
             if 'batch' in plan:
                 record['methods']+='\nBatch '+plan['batch']['batchId']+', sample '+plan['batch']['sampleId']+'. The frozen plan and CWL retain the selected sample-table metadata and file bindings.\n'
+            if 'project' in plan:
+                record['methods'] += '\nImported project '+plan['project']['id']+' (manifest SHA-256 '+plan['project']['manifestSha256']+'). Historical reference receipts and descriptive sample metadata are retained in the project section of the frozen plan, run record and CWL. Input bytes were verified; historical descriptions are not publisher authentication or a new local reference-library registration.\n'
             for entry in record['nodes']:
                 index=entry.get('referenceIndex')
-                if entry['status']=='success' and index:
+                if entry['status']=='success' and index and not entry.get('recovery'):
                     action='reused after verifying the complete stored inventory; the indexing command was not run' if index['action']=='reused' else 'built and registered with a complete verified inventory'
                     record['methods']+='\nReference index at step '+display_id(entry['id'])+' was '+action+'. Identity SHA-256: '+index['key']+'. Reference SHA-256: '+index['identity']['reference']['sha256']+'.\n'
             _io_path(folder / "methods-completed.txt").write_text(record["methods"], encoding="utf-8")

@@ -49,6 +49,14 @@ the documented CWL engine, Python, matching tool packs and input data; this
 adds no dependency to normal Workbench operation. See the
 [CWL guide](knowledge/cwl-results.md).
 
+Development for the accepted roadmap is on unpublished review branches.
+The final implementation tranche is ready for tester review as unpublished
+**0.14.0**, with [verified workflow
+restart, declared resource budgets and portable projects](knowledge/recovery-projects.md).
+See the [candidate handover and download](knowledge/recovery-projects-0.14.0-handover.md)
+and [current development status](knowledge/current-state.md) for evidence and
+limits; these features are not in the published 0.11.0 download below.
+
 ## Using the application
 
 Download the [0.11.0 Windows Starter ZIP](https://github.com/comparativechrono/workbench/releases/download/app-v0.11.0/native-workbench-0.11.0-starter-windows.zip),

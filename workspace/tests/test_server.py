@@ -50,7 +50,7 @@ class FakeEngine:
         self.calls.append(("save_preset", copy.deepcopy(node)))
         return {"tool": node["tool"], "params": {"threads": "2"}}
 
-    def prepare(self, graph, output, cancel=None):
+    def prepare(self, graph, output, cancel=None, resource_policy=None):
         self.calls.append(("prepare", copy.deepcopy(graph)))
         if self.failure:
             raise ValueError(self.failure)

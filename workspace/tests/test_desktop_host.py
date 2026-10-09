@@ -86,7 +86,7 @@ class WaitingEngine:
         self.preparing = threading.Event()
         self.running = threading.Event()
         self.cancelled = threading.Event()
-    def prepare(self, graph, output, cancel):
+    def prepare(self, graph, output, cancel, resource_policy=None):
         self.preparing.set()
         if self.block_prepare:
             if not cancel.wait(5):

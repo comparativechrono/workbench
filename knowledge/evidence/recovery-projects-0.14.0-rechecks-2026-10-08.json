@@ -1,0 +1,286 @@
+{
+  "schema": 1,
+  "recordedOn": "2026-10-08",
+  "version": "0.14.0",
+  "published": false,
+  "packagedSourceCommit": "cd0ed848fd9d9c8728b0d83991511a348c13719e",
+  "starterSha256": "f5b347a1e379f48bd5b72950bc331f25be39a9764f6342ab066f5cb62bfe1837",
+  "superseded": "Application path-alias fix and native export-caption fix require a new candidate; these passes apply only to the original archive.",
+  "runs": [
+    {
+      "runId": 37841697478,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37841697478",
+      "validatorCommit": "506d0eb20b8e4feb49530a7dd0051c77f4f689d6",
+      "overall": "failure",
+      "archiveRebuilt": false,
+      "paths": {
+        "ordinary": {
+          "jobId": 113532385737,
+          "nativeGate": {
+            "passed": 12,
+            "failed": 0,
+            "skipped": 0,
+            "reportSha256": "f4845e95fabc35b47fc21791763e96bc1dc18c1234fcef0b0c581be00bca5834",
+            "reportBytes": 75142,
+            "checks": [
+              "An explicit reviewed restart creates a new paused plan; Start reuses four verified completed native steps byte-for-byte, rebuilds the path-bearing report and preserves the source result, retains known scientific truth and does not fabricate native measurements.",
+              "Production Engine reviews invalidate changed input bytes, parameters and exact pack pins with their descendants; a tampered intermediate BAM invalidates its producer and descendants while the verified ancestor remains reusable.",
+              "Real native independent branches obey CPU-slot and maximum-step admission limits, unknown requirements run exclusively, and two explicitly reserved branches overlap; the queued policy stays frozen after settings change, with separate temporary directories and 80,800 records per branch. These are admission observations, not benchmarks.",
+              "Cancellation reaches both active native branches and the durable queue records the job as cancelled; no branch remains marked running.",
+              "A deliberately changed frozen input fails both consumers, blocks their dependent BAM step and pauses the queue without silently retrying analysis.",
+              "An explicitly selected three-input project contains CWL, relative file identities and exact pack requirements without executables; offline import and a second folder move preserve input bytes, project/sample metadata in plan/run/CWL/methods and the known native scientific result.",
+              "An external-data project reports all absent inputs, rejects an incorrect explicit mapping and imports only byte-identical mappings; an unavailable exact pack version stays unresolved without substitution or download.",
+              "Project inspection rejects a checksum-tampered member, parent traversal and a case-colliding archive before extraction; no outside file is created.",
+              "A separately labelled abrupt-termination fixture leaves a paused interrupted job; after exact service bytes are restored, explicit restart reuses only its verified completed ancestor and produces the expected 202 alignments and homozygous SNP.",
+              "Native Resources edits CPU budget, maximum parallel steps, one explicit reservation and temporary storage; Save persists those values and leaves other step requirements visibly unknown.",
+              "Native recorded-result Restart shows each verified reuse decision, queues without running, and explicit Queue Start creates a scientifically correct new result.",
+              "Native Projects keeps Import disabled for missing data, verifies all three explicit file mappings, confirms import into a new editable draft without analysis, and shows a cancellable export preview with file hashes and exact pack requirements."
+            ],
+            "nativeGUIValidated": true,
+            "dpi": 96,
+            "limits": [
+              "Synthetic scientific truth and declared CPU admission observations; not CPU enforcement, realistic-data capacity or Windows/Linux benchmarking.",
+              "Abrupt termination uses a separately labelled callback barrier extraction; service bytes are restored before exact-host restart.",
+              "Hosted display DPI only; physical trackpad, high DPI, multi-monitor and institutional endpoint acceptance are not established."
+            ],
+            "captures": [
+              {
+                "path": "resources-native-saved.bmp",
+                "width": 940,
+                "height": 590,
+                "sha256": "f47f84bb79b958eaa37fb259460ecfd5dd38d47c269fd074cf938888de5e7d29"
+              },
+              {
+                "path": "restart-native-reviewed.bmp",
+                "width": 940,
+                "height": 590,
+                "sha256": "b3dc133b5008f8be69038c9c4d4d6052e34ba1ca532b5e194d457af859a9c044"
+              },
+              {
+                "path": "restart-native-queued-complete.bmp",
+                "width": 940,
+                "height": 590,
+                "sha256": "c58c81c3858025db7d9379b667ce3bca9a50a5dd9ea69defbdccb38163226714"
+              },
+              {
+                "path": "project-native-missing-inputs.bmp",
+                "width": 940,
+                "height": 590,
+                "sha256": "67b42ddf163d7cb84de5a3fcffa9b8a998d5a73ebf327db63403317ee2b03a17"
+              },
+              {
+                "path": "project-native-mapped-ready.bmp",
+                "width": 940,
+                "height": 590,
+                "sha256": "6c2ce151d1f1fca351e1b9780e0f9ebbb9d0173331e75c7f945aec0e99232eb6"
+              },
+              {
+                "path": "project-native-export-review.bmp",
+                "width": 720,
+                "height": 530,
+                "sha256": "ee89297b941857c8f2b88a19b503ff064248a9f03b29a593e95bc234d9aea963"
+              }
+            ]
+          },
+          "artifact": {
+            "id": 11578131252,
+            "name": "recovery-recheck-windows-ordinary-1",
+            "size_in_bytes": 418219,
+            "url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11578131252",
+            "archive_download_url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11578131252/zip",
+            "expired": false,
+            "created_at": "2026-10-08T20:45:22Z",
+            "expires_at": "2026-11-07T20:45:20Z",
+            "updated_at": "2026-10-08T20:45:22Z",
+            "digest": "sha256:92bb252cc8a81b768c268d509580ea20bf57f121f1bab13cac5a395256d8786a",
+            "workflow_run": {
+              "id": 37841697478,
+              "repository_id": 1403436005,
+              "head_repository_id": 1403436005,
+              "head_branch": "feature/recovery-projects",
+              "head_sha": "506d0eb20b8e4feb49530a7dd0051c77f4f689d6"
+            }
+          },
+          "downloadSizeSha256AndZipCrcVerified": true,
+          "sourceGate": {
+            "suite": "test_recovery_execution.py",
+            "total": 26,
+            "passed": 25,
+            "failures": 1,
+            "errors": 0,
+            "skipped": 0,
+            "cause": "Scratch test used lexical containment despite Windows short/long names identifying the same directory. Later source run confirms samefile identity and exact S1/S2/S3 directories."
+          }
+        },
+        "spaces": {
+          "jobId": 113532386066,
+          "nativeGate": {
+            "passed": 12,
+            "failed": 0,
+            "skipped": 0,
+            "reportSha256": "2adb134752de0bae1a2eace6909ac3ea4bf214a5a1f2193548979ae066ac0c5e",
+            "reportBytes": 75351,
+            "checks": [
+              "An explicit reviewed restart creates a new paused plan; Start reuses four verified completed native steps byte-for-byte, rebuilds the path-bearing report and preserves the source result, retains known scientific truth and does not fabricate native measurements.",
+              "Production Engine reviews invalidate changed input bytes, parameters and exact pack pins with their descendants; a tampered intermediate BAM invalidates its producer and descendants while the verified ancestor remains reusable.",
+              "Real native independent branches obey CPU-slot and maximum-step admission limits, unknown requirements run exclusively, and two explicitly reserved branches overlap; the queued policy stays frozen after settings change, with separate temporary directories and 80,800 records per branch. These are admission observations, not benchmarks.",
+              "Cancellation reaches both active native branches and the durable queue records the job as cancelled; no branch remains marked running.",
+              "A deliberately changed frozen input fails both consumers, blocks their dependent BAM step and pauses the queue without silently retrying analysis.",
+              "An explicitly selected three-input project contains CWL, relative file identities and exact pack requirements without executables; offline import and a second folder move preserve input bytes, project/sample metadata in plan/run/CWL/methods and the known native scientific result.",
+              "An external-data project reports all absent inputs, rejects an incorrect explicit mapping and imports only byte-identical mappings; an unavailable exact pack version stays unresolved without substitution or download.",
+              "Project inspection rejects a checksum-tampered member, parent traversal and a case-colliding archive before extraction; no outside file is created.",
+              "A separately labelled abrupt-termination fixture leaves a paused interrupted job; after exact service bytes are restored, explicit restart reuses only its verified completed ancestor and produces the expected 202 alignments and homozygous SNP.",
+              "Native Resources edits CPU budget, maximum parallel steps, one explicit reservation and temporary storage; Save persists those values and leaves other step requirements visibly unknown.",
+              "Native recorded-result Restart shows each verified reuse decision, queues without running, and explicit Queue Start creates a scientifically correct new result.",
+              "Native Projects keeps Import disabled for missing data, verifies all three explicit file mappings, confirms import into a new editable draft without analysis, and shows a cancellable export preview with file hashes and exact pack requirements."
+            ],
+            "nativeGUIValidated": true,
+            "dpi": 96,
+            "limits": [
+              "Synthetic scientific truth and declared CPU admission observations; not CPU enforcement, realistic-data capacity or Windows/Linux benchmarking.",
+              "Abrupt termination uses a separately labelled callback barrier extraction; service bytes are restored before exact-host restart.",
+              "Hosted display DPI only; physical trackpad, high DPI, multi-monitor and institutional endpoint acceptance are not established."
+            ],
+            "captures": [
+              {
+                "path": "resources-native-saved.bmp",
+                "width": 940,
+                "height": 590,
+                "sha256": "5cc1b0a6bfd5eeddaff722af0fd4669e09fe403241e881920cee07863c11550d"
+              },
+              {
+                "path": "restart-native-reviewed.bmp",
+                "width": 940,
+                "height": 590,
+                "sha256": "7745c6bdb05645c0f69e6ebaca05a19e54e0896c035d5d56314819a5db7db0d8"
+              },
+              {
+                "path": "restart-native-queued-complete.bmp",
+                "width": 940,
+                "height": 590,
+                "sha256": "ced272524d382774e62c7a724dc5420d5f1d5e6c5b1080aa3f7f51ec56b790a9"
+              },
+              {
+                "path": "project-native-missing-inputs.bmp",
+                "width": 940,
+                "height": 590,
+                "sha256": "67b42ddf163d7cb84de5a3fcffa9b8a998d5a73ebf327db63403317ee2b03a17"
+              },
+              {
+                "path": "project-native-mapped-ready.bmp",
+                "width": 940,
+                "height": 590,
+                "sha256": "f0e49191e68211ca1356adcb33b5050beaeb97f000fe7a67a8f573ad435e9b8e"
+              },
+              {
+                "path": "project-native-export-review.bmp",
+                "width": 720,
+                "height": 530,
+                "sha256": "ee89297b941857c8f2b88a19b503ff064248a9f03b29a593e95bc234d9aea963"
+              }
+            ]
+          },
+          "artifact": {
+            "id": 11577353897,
+            "name": "recovery-recheck-windows-path with spaces-1",
+            "size_in_bytes": 418679,
+            "url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11577353897",
+            "archive_download_url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11577353897/zip",
+            "expired": false,
+            "created_at": "2026-10-08T20:45:13Z",
+            "expires_at": "2026-11-07T20:45:11Z",
+            "updated_at": "2026-10-08T20:45:13Z",
+            "digest": "sha256:91771141e20ec23e6adcefe66059462e5aea0d16a6590dca0bcfca5fadbe4016",
+            "workflow_run": {
+              "id": 37841697478,
+              "repository_id": 1403436005,
+              "head_repository_id": 1403436005,
+              "head_branch": "feature/recovery-projects",
+              "head_sha": "506d0eb20b8e4feb49530a7dd0051c77f4f689d6"
+            }
+          },
+          "downloadSizeSha256AndZipCrcVerified": true,
+          "sourceGate": {
+            "suite": "test_recovery_execution.py",
+            "total": 26,
+            "passed": 25,
+            "failures": 1,
+            "errors": 0,
+            "skipped": 0,
+            "cause": "Scratch test used lexical containment despite Windows short/long names identifying the same directory. Later source run confirms samefile identity and exact S1/S2/S3 directories."
+          }
+        }
+      },
+      "visualReview": {
+        "reviewers": 2,
+        "scope": "Six captures per path at reported hosted 96 DPI",
+        "finding": "Export confirmation label clipped at 126-pixel button; shorten Choose archive path... to Choose path....",
+        "queueCaptureLimit": "File named queued-complete still showed queued before polling refresh; no displayed completion claim. Scientific completion was separately asserted. Final validator waits for row and details completion before capture."
+      }
+    },
+    {
+      "runId": 37842131282,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37842131282",
+      "validatorCommit": "9642a424e7680ea1a79cdad4a86eb6663d1f423f",
+      "overall": "failure",
+      "archiveRebuilt": false,
+      "nativeGateRequested": false,
+      "nativeGateStatus": "explicitly skipped, not a new pass",
+      "jobIds": {
+        "ordinary": 113533858946,
+        "spaces": 113533859290
+      },
+      "sourceSuitesPerPath": [
+        {
+          "suite": "recovery_execution",
+          "passed": 26,
+          "failed": 0,
+          "skipped": 0,
+          "observation": "lexicalContainment=false, physicalParentIdentity=true, S1/S2/S3"
+        },
+        {
+          "suite": "project_manager",
+          "passed": 24,
+          "failures": 1,
+          "errors": 1,
+          "skipped": 1,
+          "findings": [
+            "Sample metadata preserved the original Windows short-name absolute path instead of a portable dependency token.",
+            "Historical reference metadata keyed by a short-name alias lost assembly when queried through the canonical long path."
+          ],
+          "correction": "Canonicalize only explicit existing ordinary-file identities, retain graph path aliases for token substitution, reject duplicate aliases and wrong hashes. Added two focused regressions."
+        },
+        {
+          "suite": "recovery_service",
+          "passed": 15,
+          "failures": 1,
+          "errors": 0,
+          "skipped": 0,
+          "finding": "Test compared canonical saved temporary path to its short-name spelling; corrected to absolute-path and samefile assertions."
+        },
+        {
+          "suite": "run_queue",
+          "passed": 28,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "reference_indexes",
+          "passed": 18,
+          "failed": 0,
+          "skipped": 1,
+          "skipReason": "Windows symlink creation privilege unavailable"
+        },
+        {
+          "suite": "diagnostics",
+          "passed": 10,
+          "failed": 0,
+          "skipped": 1,
+          "skipReason": "POSIX-only symlink test"
+        }
+      ],
+      "stockCwlOnWindows": "Optional Linux profile test skipped; Linux build evidence is separate."
+    }
+  ],
+  "additionalDiagnosticLimit": "Initial library jobs emitted an ignored ctypes controls-enumeration GetWindowRect exception during a view transition; all seven named functional assertions completed successfully. This does not establish exhaustive control enumeration or a separate application defect."
+}

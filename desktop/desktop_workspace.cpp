@@ -78,6 +78,7 @@ enum {
   SHOW_SAMPLES,
   SHOW_QUEUE,
   SHOW_INDEXES,
+  SHOW_RESOURCES, SHOW_RESTART, SHOW_PROJECTS,
   PACK_SEARCH = 501,
   PACK_FILTER,
   PACK_LIST,
@@ -134,6 +135,12 @@ enum {
   QUEUE_RESULTS, QUEUE_NOTICE, QUEUE_CLOSE,
   INDEX_LIST = 1001,
   INDEX_DETAILS, INDEX_REFRESH, INDEX_VERIFY, INDEX_NOTICE, INDEX_CLOSE,
+  RESOURCE_CPU = 1101, RESOURCE_PARALLEL, RESOURCE_TEMP, RESOURCE_BROWSE,
+  RESOURCE_LIST, RESOURCE_RESERVATION, RESOURCE_ASSIGN, RESOURCE_NOTICE, RESOURCE_APPLY, RESOURCE_CLOSE,
+  RESTART_LIST = 1201, RESTART_DETAILS, RESTART_OUTPUT, RESTART_BROWSE, RESTART_REVIEW, RESTART_QUEUE, RESTART_NOTICE, RESTART_CLOSE,
+  PROJECT_ARCHIVE = 1301, PROJECT_BROWSE, PROJECT_INSPECT, PROJECT_LIST, PROJECT_PATH, PROJECT_MAP_BROWSE,
+  PROJECT_MAP, PROJECT_DETAILS, PROJECT_OUTPUT, PROJECT_OUTPUT_BROWSE, PROJECT_INCLUDE_DATA, PROJECT_EXPORT,
+  PROJECT_IMPORT, PROJECT_NOTICE, PROJECT_CLOSE, PROJECT_OPEN,
   FIELD_BASE = 2000
 };
 std::wstring wide(const std::string &s) { return bw::utf16(s); }
@@ -511,7 +518,7 @@ class Workspace {
     std::map<int, HWND> controls;
     bool rebuilding = false;
     unsigned generation = 0;
-  } samplesView, queueView, indexesView;
+  } samplesView, queueView, indexesView, resourcesView, restartView, projectsView;
   Json sampleGraph = Json::object(), sampleTable = Json::object(),
        sampleTargets = Json::array(), sampleTargetSchema = Json::object(), samplePreview = Json::object(),
        queueState = Json::object(), indexState = Json::object();
@@ -740,7 +747,9 @@ class Workspace {
     const auto &method = found->second;
     return method == "review" || method == "diagnostics/save" ||
            method.rfind("sample/", 0) == 0 || method.rfind("index/", 0) == 0 ||
-           method == "queue/add" || method == "queue/add-batch";
+           method == "queue/add" || method == "queue/add-batch" ||
+           method.rfind("restart/", 0) == 0 || method.rfind("project/", 0) == 0 ||
+           method == "resources/set";
   }
   bool cancellation_pending() const {
     for (const auto &request : pending)
@@ -753,6 +762,9 @@ class Workspace {
     pending[id] = method;
     if (method.rfind("sample/", 0) == 0) pendingViews[id] = samplesView.generation;
     else if (method.rfind("index/", 0) == 0) pendingViews[id] = indexesView.generation;
+    else if (method.rfind("resources/", 0) == 0) pendingViews[id] = resourcesView.generation;
+    else if (method.rfind("restart/", 0) == 0) pendingViews[id] = restartView.generation;
+    else if (method.rfind("project/", 0) == 0) pendingViews[id] = projectsView.generation;
     if (method == "index/verify") pendingIndexVerifications[id] = getstr(params, "key");
     Json request = object({{"id", id}, {"method", method}, {"params", std::move(params)}});
     // Keep model mutations ordered. Only bounded monitoring, cancellation and
@@ -838,6 +850,7 @@ class Workspace {
     const bool responsive = ready && !closing && (idle || slow_request_pending());
     const bool edit = idle && !setupBusy && !setupActionPending && !packBusy &&
                       !packActionPending && !refBusy && !refActionPending && !showingHistory;
+    recovery_enabled(idle, edit);
     if (samplesView.window) {
       for (int id : {SAMPLE_PATH, SAMPLE_BROWSE, SAMPLE_LOAD, SAMPLE_TARGETS, SAMPLE_MODE,
                      SAMPLE_OUTPUT, SAMPLE_OUTPUT_BROWSE})
@@ -854,7 +867,8 @@ class Workspace {
       for (const auto &item : queueState.get("jobs").array_items())
         waiting = waiting || getstr(item, "status") == "queued";
       EnableWindow(aux(queueView, QUEUE_ADD), edit && !queuePending && !queuePreparing && !graph().get("nodes").array_items().empty());
-      EnableWindow(aux(queueView, QUEUE_START), edit && !busy && !queueRunning && !queuePending && !queuePreparing && waiting);
+      EnableWindow(aux(queueView, QUEUE_START), idle && !setupBusy && !setupActionPending && !packBusy &&
+          !packActionPending && !refBusy && !refActionPending && !busy && !queueRunning && !queuePending && !queuePreparing && waiting);
       EnableWindow(aux(queueView, QUEUE_PAUSE), responsive && !queuePending && !queueState.get("scheduled").array_items().empty());
       EnableWindow(aux(queueView, QUEUE_CANCEL), responsive && !queuePending && !cancellation_pending() &&
                    (status_ == "queued" || status_ == "running" || status_ == "preparing"));
@@ -1116,7 +1130,9 @@ class Workspace {
           MulDiv(std::max(1, cw), view.dpi, 96), MulDiv(std::max(1, ch), view.dpi, 96),
           SWP_NOZORDER | SWP_NOACTIVATE | SWP_NOREDRAW | SWP_NOCOPYBITS);
     };
-    if (view.kind == SHOW_SAMPLES) {
+    if (view.kind >= SHOW_RESOURCES && view.kind <= SHOW_PROJECTS) {
+      recovery_layout(view, w, h, put);
+    } else if (view.kind == SHOW_SAMPLES) {
       put(-1, 18, 12, w - 264, 38);
       put(SAMPLE_MODE, w - 234, 14, 216, 220);
       put(SAMPLE_PATH, 18, 58, w - 232, 30);
@@ -1159,8 +1175,13 @@ class Workspace {
   }
   void auxiliary_command(Auxiliary &view, int id, int notification) {
     if (view.rebuilding) return;
-    if (id == SAMPLE_CLOSE || id == QUEUE_CLOSE || id == INDEX_CLOSE || id == IDCANCEL) {
+    if (id == SAMPLE_CLOSE || id == QUEUE_CLOSE || id == INDEX_CLOSE ||
+        id == RESOURCE_CLOSE || id == RESTART_CLOSE || id == PROJECT_CLOSE || id == IDCANCEL) {
       DestroyWindow(view.window);
+      return;
+    }
+    if (view.kind >= SHOW_RESOURCES && view.kind <= SHOW_PROJECTS) {
+      recovery_command(view, id, notification);
       return;
     }
     if (view.kind == SHOW_SAMPLES) {
@@ -1274,6 +1295,7 @@ class Workspace {
           if (notice->idFrom == SAMPLE_TARGETS) app->sample_selection();
           else if (notice->idFrom == QUEUE_LIST) app->queue_selection();
           else if (notice->idFrom == INDEX_LIST) app->index_selection();
+          else if (notice->idFrom == RESOURCE_LIST || notice->idFrom == RESTART_LIST || notice->idFrom == PROJECT_LIST) app->recovery_selection(*view);
         }
         return 0;
       }
@@ -1294,8 +1316,8 @@ class Workspace {
         auto *info = reinterpret_cast<MINMAXINFO *>(l);
         MONITORINFO monitor{sizeof(monitor)};
         GetMonitorInfoW(MonitorFromWindow(h, MONITOR_DEFAULTTONEAREST), &monitor);
-        info->ptMinTrackSize = {std::min<LONG>(MulDiv(view->kind == SHOW_QUEUE ? 900 : 740, view->dpi, 96), monitor.rcWork.right - monitor.rcWork.left),
-            std::min<LONG>(MulDiv(view->kind == SHOW_SAMPLES ? 600 : 480, view->dpi, 96), monitor.rcWork.bottom - monitor.rcWork.top)};
+        info->ptMinTrackSize = {std::min<LONG>(MulDiv(view->kind == SHOW_QUEUE ? 900 : view->kind == SHOW_PROJECTS ? 820 : 740, view->dpi, 96), monitor.rcWork.right - monitor.rcWork.left),
+            std::min<LONG>(MulDiv(view->kind == SHOW_SAMPLES ? 600 : view->kind == SHOW_PROJECTS ? 580 : 480, view->dpi, 96), monitor.rcWork.bottom - monitor.rcWork.top)};
         return 0;
       }
       case WM_CTLCOLORSTATIC:
@@ -1321,7 +1343,7 @@ class Workspace {
     return DefWindowProcW(h, message_, w, l);
   }
   void show_auxiliary(int kind) {
-    Auxiliary &view = kind == SHOW_SAMPLES ? samplesView : kind == SHOW_QUEUE ? queueView : indexesView;
+    Auxiliary &view = auxiliary_view(kind);
     if (view.window) { ShowWindow(view.window, SW_RESTORE); SetForegroundWindow(view.window); return; }
     view.app = this; view.kind = kind; view.dpi = dpi; ++view.generation;
     view.font = CreateFontW(-px(14), 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE,
@@ -1339,7 +1361,9 @@ class Workspace {
     const int w = std::min<int>(px(940), area.right - area.left),
               h = std::min<int>(px(kind == SHOW_SAMPLES ? 680 : 590), area.bottom - area.top);
     const wchar_t *title = kind == SHOW_SAMPLES ? L"Samples · Native Workbench" : kind == SHOW_QUEUE ?
-        L"Analysis queue · Native Workbench" : L"Reference indexes · Native Workbench";
+        L"Analysis queue · Native Workbench" : kind == SHOW_RESOURCES ? L"Resources · Native Workbench" :
+        kind == SHOW_RESTART ? L"Restart analysis · Native Workbench" : kind == SHOW_PROJECTS ?
+        L"Portable projects · Native Workbench" : L"Reference indexes · Native Workbench";
     view.window = CreateWindowExW(WS_EX_CONTROLPARENT, klass.lpszClassName, title,
         WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN,
         std::clamp<int>(owner.left + (owner.right - owner.left - w) / 2, area.left, area.right - w),
@@ -1356,7 +1380,9 @@ class Workspace {
       ListView_SetExtendedListViewStyle(hlist, LVS_EX_FULLROWSELECT | LVS_EX_DOUBLEBUFFER | LVS_EX_LABELTIP);
       return hlist;
     };
-    if (kind == SHOW_SAMPLES) {
+    if (kind >= SHOW_RESOURCES && kind <= SHOW_PROJECTS) {
+      recovery_controls(view, label, action, edit, list);
+    } else if (kind == SHOW_SAMPLES) {
       sampleGraph = Json::object(); sampleTable = Json::object(); sampleTargetSchema = Json::object();
       sampleTargets = Json::array(); sampleColumns.clear(); sampleMappings.clear(); sampleSharedSources.clear(); sampleToken.clear();
       label(-1, L"Load a sample table and map its columns. Preview before queueing any analysis.");
@@ -3058,6 +3084,9 @@ class Workspace {
              {SHOW_SAMPLES, L"Samples..."},
              {SHOW_QUEUE, L"Analysis queue..."},
              {SHOW_INDEXES, L"Reference indexes..."},
+             {SHOW_RESOURCES, L"Resource settings..."},
+             {SHOW_RESTART, L"Restart recorded analysis..."},
+             {SHOW_PROJECTS, L"Portable projects..."},
              {FILE_IMPORT, L"Manage tools..."},
              {TOOL_SETUP, L"Tool setup..."},
              {MANAGE_REFERENCES, L"References..."},
@@ -3316,8 +3345,10 @@ class Workspace {
                    (ready && !analysis_active() && !closing ? MF_ENABLED : MF_GRAYED));
     EnableMenuItem(m, FILE_CHECK, MF_BYCOMMAND | (edit && !analysis_active() ? MF_ENABLED : MF_GRAYED));
     EnableMenuItem(m, SHOW_SAMPLES, MF_BYCOMMAND | (browseAuxiliary && !showingHistory && !graph().get("nodes").array_items().empty() ? MF_ENABLED : MF_GRAYED));
-    for (UINT id : {SHOW_QUEUE, SHOW_INDEXES})
+    for (UINT id : {SHOW_QUEUE, SHOW_INDEXES, SHOW_RESOURCES, SHOW_PROJECTS})
       EnableMenuItem(m, id, MF_BYCOMMAND | (browseAuxiliary ? MF_ENABLED : MF_GRAYED));
+    EnableMenuItem(m, SHOW_RESTART, MF_BYCOMMAND |
+        (browseAuxiliary && !(showingHistory ? getstr(historyRun, "run_id") : runId).empty() && !analysis_active() ? MF_ENABLED : MF_GRAYED));
     DrawMenuBar(window);
     pack_enabled();
     reference_enabled();
@@ -3674,6 +3705,7 @@ class Workspace {
                 L"editable workspace is preserved.");
       form_action(L"Show recorded methods", "historical-methods");
       form_action(L"Open results folder", "historical-open");
+      form_action(L"Review verified restart...", "historical-restart");
     } else if (selected.empty() || inspector.is_null()) {
       form_text(workflowMode ? L"Build a workflow" : L"Choose a tool to begin", true);
       form_text(workflowMode
@@ -3995,6 +4027,8 @@ class Workspace {
           wt(historyRun, "methods",
              getstr(historyRun, "methods_planned",
                     "Recorded methods are available in the run folder.")));
+    else if (f.kind == "historical-restart")
+      show_auxiliary(SHOW_RESTART);
     else if (f.kind == "historical-open")
       send("open", object({{"run_id", getstr(historyRun, "run_id")}}));
     else if (f.kind == "manage-required-pack") {
@@ -4186,10 +4220,19 @@ class Workspace {
     }
     const auto viewContext = pendingViews.find(id);
     if (viewContext != pendingViews.end()) {
-      Auxiliary &view = method.rfind("sample/", 0) == 0 ? samplesView : indexesView;
+      Auxiliary &view = auxiliary_method(method);
       const bool current = view.window && viewContext->second == view.generation;
       pendingViews.erase(viewContext);
-      if (!current) return; // A closed/reopened dialog must not inherit stale rows or preview tokens.
+      if (!current) {
+        // A completed import changes the model even if its dialog was closed.
+        // Read-only rows and preview tokens still belong to the old generation.
+        if (response_.get("ok").boolean() && (method == "project/import" || method == "project/open") &&
+            response_.get("result").contains("model")) {
+          showingHistory = false; historyRun = Json::object();
+          snapshot(response_.get("result").get("model")); canvas_reset_positions();
+        }
+        return;
+      }
     }
     if (method == "setup/status")
       setupPollPending = false;
@@ -4201,6 +4244,9 @@ class Workspace {
     else if (method.rfind("queue/", 0) == 0) queuePending = false;
     if (method.rfind("sample/", 0) == 0) samplePending = false;
     if (method.rfind("index/", 0) == 0) indexPending = false;
+    if (method.rfind("resources/", 0) == 0) resourcePending = false;
+    if (method.rfind("restart/", 0) == 0) restartPending = false;
+    if (method.rfind("project/", 0) == 0) projectPending = false;
     if (method == "packs/status")
       packPollPending = false;
     if (method.rfind("packs/", 0) == 0 && method != "packs/list" &&
@@ -4211,6 +4257,11 @@ class Workspace {
     else if (method.rfind("references/", 0) == 0)
       refActionPending = false;
     if (!response_.get("ok").boolean()) {
+      if (recovery_method(method)) {
+        recovery_error(method, wt(response_, "error", "The local operation returned an error."));
+        enabled();
+        return;
+      }
       if (method.rfind("sample/", 0) == 0 || method.rfind("queue/", 0) == 0 || method.rfind("index/", 0) == 0) {
         const auto error = wt(response_, "error", "The local operation returned an error.");
         Auxiliary &view = method.rfind("sample/", 0) == 0 ? samplesView : method.rfind("queue/", 0) == 0 ? queueView : indexesView;
@@ -4291,7 +4342,9 @@ class Workspace {
       return;
     }
     const auto &result = response_.get("result");
-    if (method == "sample/targets") {
+    if (recovery_method(method)) {
+      recovery_response(method, result);
+    } else if (method == "sample/targets") {
       sampleGraph = state.get("graph");
       sampleTargetSchema = result;
       if (samplesView.window) sample_mode();
@@ -4449,7 +4502,8 @@ class Workspace {
     // typing; the next explicit operation commits it transactionally.
     if (id == NAME || id == OUTPUT || id == INPUT_FOLDER || id == SEARCH)
       return;
-    if ((id == SHOW_SAMPLES || id == SHOW_QUEUE || id == SHOW_INDEXES) && ready && !closing) {
+    if ((id == SHOW_SAMPLES || id == SHOW_QUEUE || id == SHOW_INDEXES ||
+         id == SHOW_RESOURCES || id == SHOW_RESTART || id == SHOW_PROJECTS) && ready && !closing) {
       if (id == SHOW_SAMPLES && showingHistory) return;
       commit_all();
       show_auxiliary(id);
@@ -4626,6 +4680,7 @@ class Workspace {
       break;
     }
   }
+#include "recovery_ui.h"
 #include "workflow_canvas.h"
   void panel_mouse_wheel(HWND panel, WPARAM w) {
     // Precision wheels can report less than one logical pixel of movement.
@@ -5183,6 +5238,9 @@ public:
           !(samplesView.window && IsDialogMessageW(samplesView.window, &msg)) &&
           !(queueView.window && IsDialogMessageW(queueView.window, &msg)) &&
           !(indexesView.window && IsDialogMessageW(indexesView.window, &msg)) &&
+          !(resourcesView.window && IsDialogMessageW(resourcesView.window, &msg)) &&
+          !(restartView.window && IsDialogMessageW(restartView.window, &msg)) &&
+          !(projectsView.window && IsDialogMessageW(projectsView.window, &msg)) &&
           !(refWindow && IsDialogMessageW(refWindow, &msg)) &&
           !(packWindow && IsDialogMessageW(packWindow, &msg)) &&
           !IsDialogMessageW(h, &msg)) {

@@ -1,0 +1,173 @@
+{
+  "schema": 1,
+  "recordedOn": "2026-10-08",
+  "scope": "Final source checks on Linux, distinct from exact packaged Windows execution",
+  "sourceCommit": "0e2d5cbcbf1786d6e1723f8466b4b6b94da04802",
+  "sourceTree": "23d18a92094331614b7846d15c6f91f751cd5964",
+  "runId": 37842857764,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37842857764",
+  "jobId": 113536323913,
+  "success": true,
+  "published": false,
+  "suites": [
+    {
+      "command": "python3 workspace/tests/test_recovery_execution.py",
+      "total": 26,
+      "seconds": 1.066,
+      "skipped": 0,
+      "passed": 26
+    },
+    {
+      "command": "python3 workspace/tests/test_project_manager.py",
+      "total": 29,
+      "seconds": 2.74,
+      "skipped": 0,
+      "passed": 29
+    },
+    {
+      "command": "python3 workspace/tests/test_recovery_service.py",
+      "total": 16,
+      "seconds": 0.148,
+      "skipped": 0,
+      "passed": 16
+    },
+    {
+      "command": "python3 workspace/tests/test_sample_table.py",
+      "total": 26,
+      "seconds": 0.124,
+      "skipped": 0,
+      "passed": 26
+    },
+    {
+      "command": "python3 workspace/tests/test_run_queue.py",
+      "total": 28,
+      "seconds": 0.567,
+      "skipped": 2,
+      "passed": 26
+    },
+    {
+      "command": "python3 workspace/tests/test_reference_indexes.py",
+      "total": 19,
+      "seconds": 1.097,
+      "skipped": 0,
+      "passed": 19
+    },
+    {
+      "command": "python3 workspace/tests/test_desktop_host.py",
+      "total": 12,
+      "seconds": 0.25,
+      "skipped": 0,
+      "passed": 12
+    },
+    {
+      "command": "python3 workspace/tests/test_desktop_modes.py",
+      "total": 11,
+      "seconds": 0.317,
+      "skipped": 0,
+      "passed": 11
+    },
+    {
+      "command": "python3 workspace/tests/test_workflow_inputs.py",
+      "total": 11,
+      "seconds": 0.153,
+      "skipped": 0,
+      "passed": 11
+    },
+    {
+      "command": "python3 workspace/tests/test_pack_service.py",
+      "total": 6,
+      "seconds": 0.029,
+      "skipped": 0,
+      "passed": 6
+    },
+    {
+      "command": "python3 workspace/tests/test_setup_manager.py",
+      "total": 16,
+      "seconds": 0.608,
+      "skipped": 0,
+      "passed": 16
+    },
+    {
+      "command": "python3 workspace/tests/test_setup_service.py",
+      "total": 7,
+      "seconds": 0.032,
+      "skipped": 0,
+      "passed": 7
+    },
+    {
+      "command": "python3 tests/test_split_release.py",
+      "total": 9,
+      "seconds": 0.189,
+      "skipped": 0,
+      "passed": 9
+    },
+    {
+      "command": "python3 workspace/tests/test_readiness.py",
+      "total": 16,
+      "seconds": 0.08,
+      "skipped": 0,
+      "passed": 16
+    },
+    {
+      "command": "python3 workspace/tests/test_readiness_service.py",
+      "total": 6,
+      "seconds": 0.017,
+      "skipped": 0,
+      "passed": 6
+    },
+    {
+      "command": "python3 workspace/tests/test_performance.py",
+      "total": 18,
+      "seconds": 0.627,
+      "skipped": 0,
+      "passed": 18
+    },
+    {
+      "command": "python3 workspace/tests/test_diagnostics.py",
+      "total": 11,
+      "seconds": 0.097,
+      "skipped": 2,
+      "passed": 9
+    },
+    {
+      "command": "python3 workspace/tests/test_engine_paths.py",
+      "total": 7,
+      "seconds": 0.173,
+      "skipped": 0,
+      "passed": 7
+    },
+    {
+      "command": "python3 workspace/tests/test_cwl_results.py",
+      "total": 5,
+      "seconds": 0.134,
+      "skipped": 0,
+      "passed": 5
+    },
+    {
+      "command": "python3 workspace/tests/test_cwl_export.py",
+      "total": 14,
+      "seconds": 5.398,
+      "skipped": 0,
+      "passed": 14
+    }
+  ],
+  "testOnlyCwltool": "3.3.20260925135507",
+  "stockCwlExecution": {
+    "executed": true,
+    "scope": "Relocated report-only portable fixture, original input paths deleted, counts 11 and 22 retained without pooling; does not establish Linux scientific equivalence."
+  },
+  "limits": [
+    "Four skipped tests require native Windows held-reader or junction/extended-path behavior; native source suites are recorded separately.",
+    "No realistic Windows/Linux performance benchmark, representative-machine acceptance, updater or release gate is implied."
+  ],
+  "totals": {
+    "total": 293,
+    "passed": 289,
+    "skipped": 4,
+    "failed": 0,
+    "errors": 0
+  },
+  "version": "0.14.0",
+  "platform": "GitHub-hosted Linux build runner",
+  "jobConclusion": "success"
+}

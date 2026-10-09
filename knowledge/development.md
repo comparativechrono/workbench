@@ -9,7 +9,16 @@ Commands below run from the repository root unless stated otherwise.
 Paths in angle brackets are placeholders to replace, not files supplied by Git.
 Read [architecture](architecture.md) before changing an unfamiliar layer.
 
-**Current development:** unpublished 0.13.0 on `feature/batch-queue-indexes`
+**Current development:** unpublished 0.14.0 on `feature/recovery-projects`
+extends the unmerged 0.13.0 candidate. The [recovery/resources/projects guide](recovery-projects.md)
+defines its contracts. The exact candidate workflow is
+[`native-recovery-candidate.yml`](../.github/workflows/native-recovery-candidate.yml).
+It retains immutable build inputs, a separate align 0.4.1 candidate pack and
+independent archive extractions for each Windows gate. It builds no updater
+and publishes nothing. New runtime modules must be listed in
+`scripts/package_split.py` as well as retained in the matching source archive.
+
+**Previous tranche:** unpublished 0.13.0 on `feature/batch-queue-indexes`
 extends the unmerged 0.12.0 candidate. Published 0.11.0 remains the baseline.
 The [batch/queue](batch-workflows.md) and [index](reference-indexes.md) guides
 describe the new contracts. The exact candidate workflow is

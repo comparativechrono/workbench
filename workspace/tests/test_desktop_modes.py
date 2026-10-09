@@ -45,7 +45,7 @@ class WaitingEngine:
     def review(self, graph):
         return {"graph": copy.deepcopy(graph)}
 
-    def prepare(self, graph, output, cancel):
+    def prepare(self, graph, output, cancel, resource_policy=None):
         folder = Path(output) / "run-fixture"
         folder.mkdir(exist_ok=True)
         return {"folder": str(folder), "graph": graph, "methods": "Fixture methods"}

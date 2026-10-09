@@ -234,6 +234,65 @@ class DesktopHost:
             if set(params) - {"graph", "output_folder"}:
                 raise ValueError("Unknown readiness request field.")
             return self.app.review(copy.deepcopy(params.get("graph", self.graph())), params.get("output_folder"))
+        if method in ("resources/get", "resources/set"):
+            allowed = {"graph"} if method == "resources/get" else {"graph", "policy"}
+            if set(params) - allowed or method == "resources/set" and "policy" not in params:
+                raise ValueError("Unknown resource settings field.")
+            graph = copy.deepcopy(params.get("graph", self.graph()))
+            return self.app.resource_state(graph) if method == "resources/get" else self.app.set_resources(graph, params["policy"])
+        if method == "restart/review":
+            if set(params) != {"run_id"}:
+                raise ValueError("Choose a recorded run to review for restart.")
+            return self.app.review_restart(params["run_id"])
+        if method == "restart/queue":
+            if set(params) != {"token", "output_folder"}:
+                raise ValueError("Review a restart and choose its new output folder.")
+            return self.app.enqueue(params, restart=True)
+        if method.startswith("project/"):
+            action = method.split("/", 1)[1]
+            if action == "export-preview":
+                if (set(params) - {"graph", "run_id", "include_data", "sample_metadata"}
+                        or "run_id" in params and ("graph" in params or "sample_metadata" in params)):
+                    raise ValueError("Choose a current workflow or a recorded result for project export.")
+                return self.app.project_preview(params if "run_id" in params else dict(params, graph=copy.deepcopy(params.get("graph", self.graph()))))
+            if action == "inspect":
+                if set(params) != {"path"}:
+                    raise ValueError("Choose a project archive to inspect.")
+                return self.app.project_preview(params, importing=True)
+            if action == "resolve":
+                if set(params) != {"token", "mappings"}:
+                    raise ValueError("Choose reviewed project inputs and explicit file mappings.")
+                return self.app.project_resolve(params["token"], params["mappings"])
+            if action == "export":
+                if set(params) != {"token", "destination"}:
+                    raise ValueError("Choose a reviewed project and a new archive destination.")
+                return self.app.project_commit(params["token"], params["destination"])
+            if action in ("import", "open"):
+                allowed = {"token", "destination_folder"} if action == "import" else {"folder"}
+                if set(params) != allowed:
+                    raise ValueError("Choose a reviewed project and its destination folder.")
+                self.app.ensure_model_editable()
+                before = self.app._graph_key(self.graph())
+                result = (self.app.project_commit(params["token"], params["destination_folder"], importing=True)
+                          if action == "import" else self.app.open_project(params["folder"]))
+                graph = result.pop("graph")
+                with self.app.lock:
+                    self.app.ensure_model_editable()
+                    with self.model_lock:
+                        if self.app._graph_key(self.model.graph) == before:
+                            self._workflow_model.dispatch("load_graph", {"graph": graph, "template": False})
+                            self._select_mode("workflow")
+                            result["model_loaded"] = True
+                        else:
+                            result["model_loaded"] = False
+                            result["notice"] = "The draft changed while the project was being verified. The project remains saved; open it when ready to replace the draft."
+                    result["model"] = self.snapshot()
+                    if result["model_loaded"]:
+                        # Snapshot normalizes display counters. Bind context to
+                        # the actual loaded draft, not its pre-normalized copy.
+                        self.app.remember_project(result["model"]["graph"], result)
+                return result
+            raise ValueError("Unknown project action.")
         if method == "sample/table":
             if set(params) != {"path"}:
                 raise ValueError("Choose a sample table file.")
@@ -287,12 +346,11 @@ class DesktopHost:
                 raise ValueError("Choose a reviewed diagnostic report and output folder.")
             return self.app.save_diagnostics(params["token"], params["output_folder"])
         if method in ("run", "check"):
-            with self.app.lock:
-                self.app.ensure_editable()
-                request = {"output_folder": params.get("output_folder")}
-                if method == "run":
-                    request["graph"] = copy.deepcopy(params.get("graph", self.graph()))
-                return self.app.start(request, check=method == "check")
+            self.app.ensure_editable()
+            request = {"output_folder": params.get("output_folder")}
+            if method == "run":
+                request["graph"] = copy.deepcopy(params.get("graph", self.graph()))
+            return self.app.start(request, check=method == "check")
         if method in ("status", "run/get"):
             if params.get("run_id"):
                 result = self.app.get_run(params["run_id"])
@@ -441,7 +499,7 @@ def serve(host, input_stream, output_stream):
                 if immediate is not None:
                     send(identity, result=immediate)
                     continue
-            if method in ("review", "import", "diagnostics/save", "sample/table", "sample/preview", "sample/targets", "queue/add", "queue/add-batch", "queue/cancel", "index/list", "index/verify"):
+            if method in ("review", "import", "diagnostics/save", "sample/table", "sample/preview", "sample/targets", "queue/add", "queue/add-batch", "queue/cancel", "index/list", "index/verify", "resources/set", "restart/review", "restart/queue", "project/export-preview", "project/inspect", "project/resolve", "project/export", "project/import", "project/open"):
                 if not capacity.acquire(blocking=False):
                     if method == "queue/cancel":
                         try:
@@ -454,7 +512,8 @@ def serve(host, input_stream, output_stream):
                             continue
                     send(identity, error="Two background requests are still running. Wait before trying again.")
                     continue
-                if method in ("review", "sample/preview", "sample/targets", "queue/add") and "graph" not in params:
+                if (method in ("review", "sample/preview", "sample/targets", "queue/add", "resources/set", "project/export-preview")
+                        and "graph" not in params and "run_id" not in params):
                     # Snapshot at command receipt, after preceding model edits,
                     # rather than at the background worker's scheduling time.
                     params = dict(params, graph=host.graph())

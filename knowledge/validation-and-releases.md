@@ -1,5 +1,36 @@
 # Validation, releases and publisher trust
 
+## Recovery, resource budgets and portable projects, 0.14.0
+
+The [candidate workflow](../.github/workflows/native-recovery-candidate.yml)
+builds matching source/Starter archives and preserves published pack/runtime,
+profile and trust identities. The [feature guide](recovery-projects.md) defines
+explicit CPU admission rather than OS CPU enforcement, completed-step restart
+rather than within-tool checkpoints, and bounded offline project imports.
+The [handover](recovery-projects-0.14.0-handover.md) records current status.
+Final source `0e2d5cbcbf1786d6e1723f8466b4b6b94da04802` passed
+[run 37842857764](https://github.com/comparativechrono/workbench/actions/runs/37842857764)
+with 289 source passes/four skips and all configured exact Windows gates in
+both paths. The handover links the final source, Windows and independent archive
+records and retains superseded failed runs. This is an unpublished tester
+candidate; no baseline upgrade, updater or release gate is implied.
+
+The recovery gate must distinguish unmodified packaged application execution
+from a separate instrumented abrupt-interruption fixture. Restart evidence
+requires changed-input/parameter/pin/output invalidation, original-result
+preservation and meaningful scientific output assertions. Concurrency checks
+must observe actual independent native step overlap and declared-budget limits;
+small fixtures do not constitute a capacity or speed benchmark. Project checks
+cover missing exact dependencies, explicit same-byte mapping, moved folders,
+integrity failures and offline execution without installing or substituting
+packs. External stock-CWL Linux fixture execution is a separate bounded claim.
+
+Independent downloaded-archive inspection uses
+[`audit_recovery_candidate.py`](../scripts/audit_recovery_candidate.py), exact
+commit file comparisons, complete runtime inventories, transport/inner hashes
+and ZIP CRCs. It performs no native execution and publishes nothing.
+No update or release gate is implied by candidate validation.
+
 ## Batch, queue and reusable-index candidate, 0.13.0
 
 The [candidate workflow](../.github/workflows/native-batch-candidate.yml) binds

@@ -1,7 +1,7 @@
 # Current architecture
 
 This describes the reference-discovery, native interface and results-export
-implementation, with the batch/queue/index extension reviewed on 2026-10-08.
+implementation, with the recovery/resources/projects extension under development on 2026-10-08.
 Versioned release paragraphs retain their historical evidence. It is a map of
 the implementation, not a claim that every deployment or scientific use has been
 validated. Start with [the knowledge index](README.md).
@@ -60,7 +60,7 @@ pipes are handled by the native runner, including both subprocess outcomes.
 
 The GUI build target is `build/desktop/DesktopWorkbench.exe`; the release
 packager installs it as `NativeWorkbench.exe`. All three native build resource
-versions are 0.13.0 in the active development tree; published 0.11.0 is unchanged. Application version is maintained in `workspace/app_version.py`
+versions are 0.14.0 in the active development tree; published 0.11.0 is unchanged. Application version is maintained in `workspace/app_version.py`
 and release metadata, independently of pack versions and pack API compatibility.
 
 ## Responsibilities and source map
@@ -98,7 +98,7 @@ adapters; do not add a bespoke GUI for each tool.
 
 Four different version concepts must remain distinct:
 
-* application version, development 0.13.0 (published 0.11.0);
+* application version, development 0.14.0 (published 0.11.0);
 * pack API, currently 1;
 * execution manifest format, currently 2;
 * each pack's own version and each executable's upstream/build version.
@@ -135,8 +135,11 @@ are immutable while queued; execution updates outcome and performance records.
 Start arms the jobs waiting at that moment; later
 additions need another Start. Reopening is paused, interrupted jobs stay
 interrupted, and a failure pauses later jobs. Draft graph edits remain available
-while a frozen job runs. This is a serial queue, not completed-step restart or
-parallel execution. See [batch workflows](batch-workflows.md).
+while a frozen job runs. Jobs remain serial in the queue. Within one job, the 0.14.0 scheduler admits
+ready DAG steps according to declared CPU reservations and maximum concurrency.
+Restart prepares a new result using verified completed products from an earlier
+run. See [batch workflows](batch-workflows.md) and the
+[recovery/resource contracts](recovery-projects.md).
 
 The optional `referenceIndex` / `requiresReferenceIndex` pack schema contracts
 currently support verified minimap2 short-read indexes. An explicit builder

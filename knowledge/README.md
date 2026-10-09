@@ -1,18 +1,18 @@
 # Native Workbench knowledge base
 
-**Active development, 2026-10-08:** the owner accepted the
-[feature roadmap](roadmap.md). The next tranche targets unpublished **0.13.0**:
-[sample batches and a durable queue](batch-workflows.md), plus
-[verified reusable indexes](reference-indexes.md), on
-`feature/batch-queue-indexes`. It builds on unpublished **0.12.0**
-[readiness, performance records and diagnostic export](readiness-performance.md)
-on `feature/readiness-performance`. Published 0.11.0 remains the baseline;
-the first implementation tranche has passed its recorded exact-candidate checks
-and screenshot review in [draft PR #7](https://github.com/comparativechrono/workbench/pull/7).
-Representative-machine acceptance, benchmarking and release work remain separate.
-The second tranche is implemented in [draft PR #8](https://github.com/comparativechrono/workbench/pull/8);
-its [candidate handover](batch-queue-indexes-0.13.0-handover.md) records exact bytes,
-source/native observations, retained failures and remaining acceptance work.
+**Active development, 2026-10-08:** the final implementation tranche targets
+unpublished **0.14.0** on `feature/recovery-projects`: [verified restart,
+resource budgets and portable projects](recovery-projects.md). It is stacked on
+unpublished 0.13.0 [batches, queue and indexes](batch-queue-indexes-0.13.0-handover.md)
+in [draft PR #8](https://github.com/comparativechrono/workbench/pull/8), which in
+turn builds on 0.12.0 [readiness, measurements and diagnostics](readiness-performance.md)
+in [draft PR #7](https://github.com/comparativechrono/workbench/pull/7).
+The final 0.14.0 implementation and recorded hosted validation are complete in
+[draft PR #9](https://github.com/comparativechrono/workbench/pull/9); see its
+[candidate handover and download](recovery-projects-0.14.0-handover.md).
+Published **0.11.0** remains the baseline. Representative-machine acceptance,
+benchmarking and release/update work remain separate. See
+[current state](current-state.md) for exact evidence.
 
 This is the durable handover for people and agents continuing Native Workbench.
 It records why the project exists, how it works, how to extend it, and which
