@@ -3,8 +3,10 @@
 Status on **2026-10-09: exact final validation accepted; publication pending**.
 All three candidate, updater and release-regression jobs passed in their
 respective runs. Independent archive/source/report checks and final screenshot
-reviews passed. No public release download or merge is claimed yet; the last
-verified published application remains **0.11.0**.
+reviews passed. Read-only publication preparation passed. Feature PRs #7–#11 have been merged
+into main with their recorded heads; release PR #12 and publication remain
+pending. No public 0.16.0 download is claimed yet; the last verified published
+application remains **0.11.0**.
 
 The user authorized a new release on 2026-10-09 with the exact instruction:
 **“Great lets do a new release at this point”**. The intended channel is a
@@ -223,3 +225,7 @@ candidate evidence. The prior library capture helper's ignored enumeration
 warnings are retained; functional checks do not imply exhaustive visual
 coverage. The unchanged 32-pack catalogue was not fully downloaded or all
 optional scientific tools revalidated for this application release.
+
+## Hosted publication preparation
+
+[Read-only preparation run 37954220037](https://github.com/comparativechrono/workbench/actions/runs/37954220037) passed at `1527a2ca0bbca760735b2e34920c72b397ab5d54`, including all 16 publisher guard tests, online identities and preparation of 13 assets. The publication job was intentionally skipped on this verification branch. The downloaded compact receipt passed size, SHA-256 and ZIP CRC checks and records no remote release mutations. The [preparation record](evidence/curated-workflows-0.16.0-release-preparation-2026-10-09.json) retains artifacts, receipt and feature merge identities. PR #12 and public promotion remain the final delivery steps.
