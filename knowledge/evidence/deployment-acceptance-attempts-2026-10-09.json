@@ -193,6 +193,53 @@
       },
       "followup": "Select the offline Starter through the observed first-launch dialog, activate Use Workbench and wait for the dialog to close before desktop interactions. Retain physical hit guards and actual desktop bounds.",
       "manualAcceptance": "not-tested"
+    },
+    {
+      "toolkitCommit": "87e6a807129fea0fa1a4f511ea07de403f5580bc",
+      "runId": 37976608710,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37976608710",
+      "result": "failed",
+      "sourceTests": {
+        "passed": 86,
+        "failed": 0,
+        "skipped": 0
+      },
+      "bundle": {
+        "sha256": "4ea298481e884b5b7005016057b0fa98ec8f84fdbc6937f8f2a62664ac15613b",
+        "manifestSha256": "de523fd6b86637a1cfa6d10e65d5fb3bd8856432a5a138eb4da919a910f7ae04"
+      },
+      "windows": [
+        {
+          "pathCase": "ordinary",
+          "jobId": 113976535298,
+          "artifactId": 11638662969,
+          "artifactSha256": "94cd6ad68aa87bd472803beb4277c6afda7c1a494ee870ff94cf11f22c783eae"
+        },
+        {
+          "pathCase": "path with spaces",
+          "jobId": 113976535218,
+          "artifactId": 11639606848,
+          "artifactSha256": "d8ab2ea0162936d35bbd1cbb28ffee93610d5adc03fce859927abf00a06ab265"
+        }
+      ],
+      "passedScopeBothPaths": [
+        "kit, launcher and external copy preparation",
+        "seven exact updater/input/fixture scopes",
+        "fresh real Starter selection and Use Workbench without installs or pack changes",
+        "fresh keyboard filtering and Tab/Shift+Tab focus",
+        "fresh resize observations at actual display bounds",
+        "11 curated workflow/results checks",
+        "72 Authenticode observations (60 Valid, 12 NotSigned)",
+        "final immutable-kit and manual-untested checks"
+      ],
+      "nativeFailure": {
+        "checksCompleted": 10,
+        "captures": 14,
+        "reason": "Results search produced the correct empty list and published text No matching recorded analyses. The validator incorrectly expected No matching result and timed out. Escape and upgraded desktop checks were not reached."
+      },
+      "layoutLimitation": "The hosted desktop is 1024 pixels wide; the published application minimum width is 1040, leaving its edge clipped. This run does not establish acceptance on that narrower display.",
+      "followup": "Match the exact published empty-results text while retaining the zero-row and disabled-action assertions; repeat both complete path gates.",
+      "manualAcceptance": "not-tested"
     }
   ],
   "localPreviewExcluded": {

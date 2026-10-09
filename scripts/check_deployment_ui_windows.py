@@ -483,7 +483,9 @@ def desktop_scenarios(root, evidence, report, label):
         ui.wait('Tab reaches result Search button', lambda: keys.focus() == ui.child(1502, owner))
         keys.key(0x20)
         ui.wait('keyboard search reports no results', lambda: ui.send(ui.child(1503, owner), 0x1004) == 0 and
-                'No matching result' in ui.label(ui.child(1504, owner)))
+                ui.user.IsWindowEnabled(ui.child(1502, owner)) and
+                ui.label(ui.child(1504, owner)) ==
+                'No matching recorded analyses. Clear the search and press Search to show recent runs.')
         require(not ui.user.IsWindowEnabled(ui.child(1505, owner)), 'Empty result search left View enabled.')
         capture(ui, report, label + '-results-keyboard.bmp', owner)
         keys.key(0x1B)
