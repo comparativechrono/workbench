@@ -1,0 +1,129 @@
+{
+  "schema": 1,
+  "kind": "source-checks",
+  "date": "2026-10-08",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "python": "3.12.14",
+  "nativeWindowsExecution": false,
+  "suites": [
+    {
+      "path": "workspace/tests/test_performance.py",
+      "exitCode": 0,
+      "tests": 16,
+      "skips": 0
+    },
+    {
+      "path": "workspace/tests/test_readiness.py",
+      "exitCode": 0,
+      "tests": 16,
+      "skips": 0
+    },
+    {
+      "path": "workspace/tests/test_diagnostics.py",
+      "exitCode": 0,
+      "tests": 10,
+      "skips": 2
+    },
+    {
+      "path": "workspace/tests/test_readiness_service.py",
+      "exitCode": 0,
+      "tests": 6,
+      "skips": 0
+    },
+    {
+      "path": "workspace/tests/test_desktop_host.py",
+      "exitCode": 0,
+      "tests": 12,
+      "skips": 0
+    },
+    {
+      "path": "workspace/tests/test_desktop_modes.py",
+      "exitCode": 0,
+      "tests": 11,
+      "skips": 0
+    },
+    {
+      "path": "workspace/tests/test_workflow_inputs.py",
+      "exitCode": 0,
+      "tests": 11,
+      "skips": 0
+    },
+    {
+      "path": "workspace/tests/test_engine_paths.py",
+      "exitCode": 0,
+      "tests": 7,
+      "skips": 0
+    },
+    {
+      "path": "workspace/tests/test_pack_versions.py",
+      "exitCode": 0,
+      "tests": 10,
+      "skips": 0
+    },
+    {
+      "path": "workspace/tests/test_cwl_export.py",
+      "exitCode": 0,
+      "tests": 14,
+      "skips": 1
+    },
+    {
+      "path": "workspace/tests/test_cwl_results.py",
+      "exitCode": 0,
+      "tests": 5,
+      "skips": 0
+    },
+    {
+      "path": "workspace/tests/test_pack_service.py",
+      "exitCode": 0,
+      "tests": 6,
+      "skips": 0
+    },
+    {
+      "path": "workspace/tests/test_setup_manager.py",
+      "exitCode": 0,
+      "tests": 15,
+      "skips": 0
+    },
+    {
+      "path": "workspace/tests/test_setup_service.py",
+      "exitCode": 0,
+      "tests": 7,
+      "skips": 0
+    },
+    {
+      "path": "tests/test_split_release.py",
+      "exitCode": 0,
+      "tests": 8,
+      "skips": 0
+    }
+  ],
+  "passed": 151,
+  "skipped": 3,
+  "failedSuites": 0,
+  "limitations": [
+    "Windows-only diagnostic junction/long-path checks deferred to Windows candidate.",
+    "Optional independent cwltool not installed locally.",
+    "These are source checks and synthetic subprocess assertions, not native Windows acceptance or performance benchmarks."
+  ],
+  "crossCompilation": {
+    "status": "passed",
+    "compiler": "LLVM-MinGW 20260922 UCRT",
+    "flags": "C++17 -O2 -Wall -Wextra -Werror",
+    "nativeExecution": false,
+    "outputs": [
+      {
+        "file": "build/desktop/DesktopWorkbench.exe",
+        "sha256": "21a2ac0bd894f505488f120d06a46aa342932b1e89751d6bcfbaea19658d8b88"
+      },
+      {
+        "file": "build/desktop/WorkbenchBridge.exe",
+        "sha256": "575ccfbff5773cd88662665181fb08d62e2408e31f22a04c001187c11b5df659"
+      },
+      {
+        "file": "build/performance-checks/WindowsPerformanceChecks.exe",
+        "sha256": "c3ed78275cbaf0145660bf16199ed321b332e468c37bd339e3cb62f574899062"
+      }
+    ],
+    "environmentRecovery": "Initial compiler commands failed before compilation because extracted libLLVM was truncated; restored its missing bytes from the verified pinned compiler archive. All three strict builds then passed."
+  }
+}

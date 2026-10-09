@@ -1,4 +1,77 @@
-# Remaining work and suggested next steps
+# Development roadmap
+
+## Accepted programme, 2026-10-08
+
+The owner accepted the feature programme below with “Great. We should do all
+of these. Lets start working through them.” Development starts with a bounded
+measurement/readiness milestone on `feature/readiness-performance`, based on
+`82729febfcfab1c43bd9c9798d03c80f595545cb`, targeting **0.12.0**. This is
+development authorization, not evidence that the features or a release are
+complete. Published **0.11.0** and all published pack bytes remain unchanged.
+See the [active feature guide](readiness-performance.md) and
+[current state](current-state.md) for implementation and validation status.
+
+| Milestone | Accepted scope | Completion evidence |
+| --- | --- | --- |
+| 1 — Measurement and readiness | Local performance records, an understandable readiness report, reviewable diagnostic export and representative-machine validation. | Exact packaged Windows evidence for successful, failed and cancelled work; preserved scientific output; documented timing/counter scope and unavailable values; reviewed JSON equals exported JSON; private-data canaries absent; installation, readiness and scientific execution clearly distinguished. A separate matched Windows–Linux benchmark protocol records hardware, versions, parameters and data identities. |
+| 2 — Routine multi-sample work | A sample table, general batch workflows, a durable run queue and reusable reference indexes. | Previewed sample/read-pair mapping; independent per-sample and explicitly combined analyses; exact frozen queued plans surviving restart while the next workflow remains editable; index identity and completeness verified before reuse. Saved pins and existing results survive migration. |
+| 3 — Recovery and efficient execution | Verified restart at completed-step boundaries, resource-budgeted parallel execution and portable project bundles. | Fault-injected interruption/restart preserves scientific outcomes, reuses only verified completed products and invalidates changed dependencies; scheduler respects declared budgets/cancellation; project import reports missing or incompatible dependencies without silent substitution. |
+
+High-DPI displays, keyboard navigation, physical trackpads and managed Windows
+machines are acceptance work across **every** milestone. Hosted 96-DPI checks
+remain useful evidence for their recorded environment; they do not establish
+all of these deployment scenarios. No endpoint-security control should be
+disabled to obtain a pass.
+
+### Accepted feature contracts
+
+| Feature | Intended behaviour and boundaries |
+| --- | --- |
+| Sample table and batch workflows | Import CSV/TSV sample names, paired reads, conditions, replicates and references. Preview pairing and reject ambiguity. Preserve sample identity and distinguish independent sample runs from deliberate pooling or cohort analysis. Existing pack-specific sample sheets do not establish a general application batch model. |
+| Safe restart | Reuse only completed steps whose inputs, parameters, exact tool/manifest pin, reference identities and declared outputs still match. Begin at step boundaries; resuming within a scientific executable requires that tool's own supported checkpoint contract. |
+| Durable queue | Queue immutable analyses with exact settings and software versions, monitor/cancel individual jobs, and edit the next workflow while one runs. Preserve queued state across reopen; never silently repin a saved or queued workflow. |
+| Resource controls | Start with a total CPU budget, selected temporary-storage location, free-space checks and honest memory/storage guidance. Add bounded concurrency only after reliable measurements and admission rules exist. Unknown requirements must remain unknown. |
+| Reusable reference indexes | Build once and register reference hash, indexing tool, version, options and a complete output inventory. Reject incompatible or incomplete indexes. Typed directory products and changed pack commands need explicit versioned contracts and migration tests. |
+| Readiness report | Make graph/input checks, selected pack definitions, output access/storage, deferred integrity/scientific checks and actual tool execution distinct. “Check installation” passing must not imply the user's analysis can run. |
+| Performance and diagnostics | Retain measurements locally with their scopes, versions and missing values. Separate preparation/hashing/orchestration from native command stages. Diagnostic sharing is an explicit review-and-save action, with no automatic upload or broad log/data collection. |
+| Curated workflows and results | Supply tested workflows with small redistributable example datasets, explanations and expected answers. Add native sample-level QC summaries, searchable results and useful failure explanations with links to raw outputs and methods. Preserve exact tool pins. |
+
+### Further accepted work
+
+- **Reference management:** resumable large downloads, importing existing local
+  references, safe library relocation and additional providers. Retain explicit
+  retrieval, complete-file integrity and assembly/annotation compatibility.
+- **Portable projects:** bundles containing workflows, sample metadata, exact
+  pack/reference requirements and optionally data. Provide a guided missing-file
+  resolution process and tested Linux execution profiles for exported CWL.
+  Existing CWL export is not blanket proof of Linux scientific equivalence.
+- **Institutional deployment:** executable signing, bundled executable/dependency
+  inventories, offline deployment packages and IT approval documentation. Signing
+  does not guarantee acceptance by endpoint-security software.
+- **Pack developer toolkit:** templates, metadata/schema validation, scientific
+  fixture checks, packaging checks and documented Windows–Linux comparisons.
+  Third-party contributions retain independent versions, trust and licensing.
+
+### Benchmark programme
+
+Use direct matched-tool comparisons and complete workflow comparisons to
+separate upstream execution from application overhead. Pin versions, datasets,
+references, parameters and threads; use the same physical hardware with separate
+Windows/Linux installations where practical. Record hardware/storage and OS
+configuration. Measure first-use installation/downloads separately from offline
+analysis, repeat cold/warm runs, and evaluate meaningful scientific outputs with
+predeclared equivalence criteria. Document memory-counter differences rather
+than comparing Windows committed-memory peaks directly to Linux maximum RSS.
+Preserve failed, cancelled and unavailable measurements. Small installation
+fixtures do not establish realistic cohort capacity or performance parity.
+
+## Historical backlog, 2026-10-05
+
+The original dated planning record follows unchanged. Its proposed catalogue
+publication was subsequently completed; the signed 32-pack catalogue and
+application 0.11.0 are already published. Items here describe their original
+date, not current release blockers. Resolve current implementation questions
+against the active milestone and maintained state above.
 
 Snapshot: 2026-10-05. These are proposed priorities derived from the current
 gaps, not a promise of functionality or authorization for external actions.

@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "date": "2026-10-08",
+  "status": "third candidate failed one GUI validator timing assumption; application scientific/host checks passed",
+  "sourceCommit": "d5fd177686b1923358581fe83e18d18107e4cdce",
+  "runId": 37803624194,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37803624194",
+  "artifact": {
+    "id": 11561094317,
+    "sha256": "f629ebfe1f499c5144e3f3ab9715369b1fc2a1205f39873ee035eaff5854ce26"
+  },
+  "perPathPassed": {
+    "nativeResourceHelper": 14,
+    "readinessScientificPerformanceAndHostDiagnostics": 4,
+    "workspace": 32,
+    "library": 7,
+    "windowsDiagnosticSource": 10
+  },
+  "perPathSkipped": {
+    "windowsDiagnosticSource": 1,
+    "reason": "POSIX-only symlink check"
+  },
+  "guiFailure": "The native edit is not available for user input.",
+  "correction": "Wait until the output-folder edit is visible and enabled after the queued General settings pointer click/model commit; keep actual pointer interaction and edit availability checks.",
+  "actualJobMembership": {
+    "caller_pid": 4796,
+    "assigned": 2,
+    "listed": 2,
+    "own_pid_found": true,
+    "members": [
+      {
+        "pid": 4796,
+        "image": "D:\\a\\_temp\\readiness-candidate\\WindowsPerformanceChecks.exe",
+        "image_error": null
+      },
+      {
+        "pid": 4588,
+        "image": "C:\\Windows\\System32\\conhost.exe",
+        "image_error": null
+      }
+    ]
+  },
+  "scope": "No production change. The independently observed second member is Windows conhost.exe. Whole-job resource counts correctly include it. GUI readiness/diagnostic save remains unvalidated until the corrected gate completes."
+}

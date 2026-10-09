@@ -147,6 +147,7 @@ class SplitRelease(unittest.TestCase):
         self.assertTrue({'reference_provider.py','reference_manager.py','reference_provenance.py'}<=set(package.RUNTIME_MODULES))
         self.assertTrue({'cwl_export.py','dag_routing.py'}<=set(package.RUNTIME_MODULES))
         self.assertIn('setup_manager.py',package.RUNTIME_MODULES)
+        self.assertTrue({'performance.py','readiness.py','diagnostics.py'}<=set(package.RUNTIME_MODULES))
         self.assertIn('setup-profile.json',package.RUNTIME_METADATA)
         self.assertNotIn('server.py',package.RUNTIME_MODULES)
         self.assertEqual(package.STARTER,('align-0.4.0','bam-0.4.0','variants-0.4.0'))

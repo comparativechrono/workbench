@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "date": "2026-10-08",
+  "status": "fifth candidate: host/scientific checks passed; native pointer checks failed",
+  "sourceCommit": "eed59a3dfd371c34151d29c8bf9da7c25e5a1423",
+  "runId": 37805032952,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37805032952",
+  "artifacts": [
+    {"path": "ordinary", "id": 11563535147, "bytes": 1751540, "sha256": "ad96c939e036b7b5ec563c37d9be4f9195b04f6f6ba01860c55ddfc493ce1408"},
+    {"path": "path with spaces", "id": 11562008481, "bytes": 1752384, "sha256": "69394c5e269e18beabce1920d0124d7e03816629cc717ad39c3eb14c744c83cb"}
+  ],
+  "passedPerPath": {
+    "nativeResourceHelper": 14,
+    "readinessHostAndScientificGroups": 4,
+    "library": 7,
+    "workspaceHostBeforeGuiFailure": 10,
+    "windowsDiagnosticSource": 10
+  },
+  "windowsSourceSkipPerPath": {"count": 1, "reason": "POSIX-only symlink check"},
+  "failedGuiChecks": ["Readiness dialog did not open after pointer click", "Manage tools dialog did not open after pointer click"],
+  "observations": [
+    "The ordinary readiness failure capture shows a 1044 by 788 application window on a 1024 by 768 hosted desktop; Readiness bounds are [379,716,463,748].",
+    "PrintWindow captures the application surface, not occluding desktop/taskbar windows. Previous pointer assertions checked physical desktop bounds only.",
+    "The next harness revision must constrain window placement to the actual work area and record pointer hit targets and real desktop failure captures. This is not evidence of a successful native dialog interaction."
+  ],
+  "productionCodeChanged": false,
+  "guiPreviewAndSaveValidated": false,
+  "published": false
+}

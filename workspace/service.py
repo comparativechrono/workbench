@@ -86,6 +86,8 @@ class Workbench:
         self._reference_operation = {"id": "", "active": False, "status": "idle",
                                      "message": "", "bytes": 0, "total": 0, "cancellable": False}
         self.runs = {}
+        self._diagnostic_previews = {}
+        self._last_readiness = None
         self.last_seen = time.monotonic()
         self.token = secrets.token_urlsafe(32)
         self.saved_path = self.data / "saved.json"
@@ -260,13 +262,60 @@ class Workbench:
         finally:
             self.dialog_lock.release()
 
-    def review(self, graph):
+    def review(self, graph, output_folder=None):
         if hasattr(self.engine, "review"):
-            return self.engine.review(graph)
+            from readiness import build_readiness
+            result = build_readiness(self.engine, graph, output_folder)
+            with self.lock:
+                self._last_readiness = copy.deepcopy(result["readiness"])
+            return result
         result = self.engine.validate(graph)
         issues = [{"severity": "error", "message": str(e)} for e in result.get("errors", [])]
         issues += [{"severity": "warning", "message": str(e)} for e in result.get("warnings", [])]
         return {"valid": result.get("ok", False), "issues": issues, "methods": result.get("methods", "")}
+
+    def review_diagnostics(self, run_id=None):
+        """Freeze a bounded report for explicit local review; collect no files."""
+        from diagnostics import build_report, preview_text
+        if run_id is not None:
+            run_id = short_text(run_id, "run identity", 200)
+        with self.lock:
+            run = self.get_run(run_id) if run_id else None
+            # A last workspace review is not evidence about a historical run.
+            readiness = None if run_id else copy.deepcopy(self._last_readiness)
+            report = build_report(self.root, self.catalog, run, readiness)
+            preview = preview_text(report)
+            now = time.monotonic()
+            self._diagnostic_previews = {key: value for key, value in self._diagnostic_previews.items()
+                                         if now - value[0] < 900}
+            while len(self._diagnostic_previews) >= 4:
+                self._diagnostic_previews.pop(next(iter(self._diagnostic_previews)))
+            token = secrets.token_urlsafe(32)
+            self._diagnostic_previews[token] = (now, copy.deepcopy(report))
+        return {"token": token, "preview": preview,
+                "notice": "Review this exact report before saving. It contains software versions and broad system information, but no files, paths, sample names, logs or commands. Readiness counts describe the most recent review and may precede later edits. Nothing is uploaded."}
+
+    def save_diagnostics(self, token, output_folder):
+        """Export only the immutable report that this host previously previewed."""
+        from diagnostics import export_report
+        token = short_text(token, "diagnostic preview token", 100)
+        destination = short_text(output_folder, "diagnostic output folder", 30000)
+        with self.lock:
+            item = self._diagnostic_previews.get(token)
+            if item is None or time.monotonic() - item[0] >= 900:
+                self._diagnostic_previews.pop(token, None)
+                raise ValueError("This diagnostic preview expired. Review a new report before saving.")
+            # Reserve this one-shot token, then release the execution lock before
+            # destination I/O. Slow storage must not block run status/cancellation.
+            del self._diagnostic_previews[token]
+        try:
+            path = export_report(copy.deepcopy(item[1]), destination)
+        except Exception:
+            with self.lock:
+                if time.monotonic() - item[0] < 900 and len(self._diagnostic_previews) < 4:
+                    self._diagnostic_previews[token] = item
+            raise
+        return {"path": str(path), "uploaded": False}
 
     def public_run(self, run):
         public = {key: copy.deepcopy(value) for key, value in run.items() if not key.startswith("_")}

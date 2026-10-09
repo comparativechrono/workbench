@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "date": "2026-10-08",
+  "status": "second candidate native validation failed on two fixture assumptions; retained without converting unavailable checks into passes",
+  "sourceCommit": "f571946549d8905ced930bd1f38b22528439c667",
+  "runId": 37802529160,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37802529160",
+  "published": false,
+  "ordinaryArtifact": {
+    "id": 11560548577,
+    "sha256": "e532ba9488e0ef3f0de90d9931fc3e178b89877b924568bd7a7c260fd696dd29"
+  },
+  "nativeAccountingFailure": {
+    "schema": 1,
+    "native_windows_execution": true,
+    "passed": 0,
+    "failed": 1,
+    "skipped": 0,
+    "error": "Job accounting has incorrect process-tree scope: expected 1, observed 2; snapshot={\"schema\":1,\"source\":\"windows-job-object\",\"scope\":\"command-process-tree\",\"wall_ms\":141,\"user_cpu_seconds\":0.1093750,\"kernel_cpu_seconds\":0.0156250,\"peak_job_memory_bytes\":23924736,\"memory_kind\":\"committed\",\"processes_total\":2,\"processes_active_at_snapshot\":0,\"accounting_available\":true,\"memory_available\":true,\"coverage\":\"complete\",\"snapshot\":\"before-job-close\",\"accounting_error\":null,\"memory_error\":null}",
+    "observations": [],
+    "failed_observation": {
+      "check": "exec-success",
+      "performance": {
+        "schema": 1,
+        "source": "windows-job-object",
+        "scope": "command-process-tree",
+        "wall_ms": 141,
+        "user_cpu_seconds": 0.109375,
+        "kernel_cpu_seconds": 0.015625,
+        "peak_job_memory_bytes": 23924736,
+        "memory_kind": "committed",
+        "processes_total": 2,
+        "processes_active_at_snapshot": 0,
+        "accounting_available": true,
+        "memory_available": true,
+        "coverage": "complete",
+        "snapshot": "before-job-close",
+        "accounting_error": null,
+        "memory_error": null
+      }
+    }
+  },
+  "scientificReadinessFailure": "Scientific execution did not exercise combined binary-pipeline accounting.",
+  "perPathResults": {
+    "paths": [
+      "ordinary",
+      "path with spaces"
+    ],
+    "workspacePassed": 32,
+    "libraryPassed": 7,
+    "readinessGatePassedBeforeFailure": 2,
+    "windowsDiagnosticSourcePassed": 10,
+    "windowsDiagnosticSourceSkipped": 1,
+    "skip": "POSIX-only symlink check"
+  },
+  "conclusions": [
+    "The offline host regression is fixed; all socket audit operations remained denied and known 202-alignment/SNP-truth scientific checks passed.",
+    "Actual first command reports two Job Object processes, complete coverage and nonzero CPU/committed memory. Exact-one helper assumption requires correction based on process-tree membership, not changing measured values.",
+    "The Starter workflows use explicit intermediate files, so they do not exercise a binary-pipe stage. Their actual command stages are measured; binary-pipe accounting requires the separate native helper.",
+    "Diagnostic GUI preview/save was not yet reached by the failed readiness gate and is not counted as passed."
+  ]
+}

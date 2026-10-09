@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "date": "2026-10-08",
+  "status": "fourth candidate validation failed on conservative snapshot coverage and UI automation timing",
+  "sourceCommit": "c4cb72b6e316dc6bdf984f53051e0171ae8cf609",
+  "runId": 37804257110,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37804257110",
+  "ordinaryArtifact": {
+    "id": 11561369925,
+    "sha256": "071d7c6e59fa26632eae110dd1ea98bf0efabfe28cde21b835ea0dda0dc1c347"
+  },
+  "ordinaryPassed": {
+    "nativeResourceHelper": 14,
+    "workspace": 32,
+    "library": 6,
+    "readinessBeforeFailure": 2,
+    "windowsDiagnosticSource": 10
+  },
+  "spacesPassed": {
+    "nativeResourceHelper": 14,
+    "workspace": 32,
+    "library": 7,
+    "readinessBeforeFailure": 2,
+    "windowsDiagnosticSource": 10
+  },
+  "windowsSourceSkipPerPath": {
+    "count": 1,
+    "reason": "POSIX-only symlink check"
+  },
+  "partialSnapshots": [
+    {
+      "tool": "variants/statistics",
+      "stage": "statistics",
+      "resources": {
+        "schema": 1,
+        "source": "windows-job-object",
+        "scope": "command-process-tree",
+        "coverage": "partial",
+        "memory_kind": "committed",
+        "snapshot": "before-job-close",
+        "wall_ms": 31,
+        "user_cpu_seconds": 0.015625,
+        "kernel_cpu_seconds": 0.03125,
+        "peak_job_memory_bytes": 10272768,
+        "processes_total": 2,
+        "processes_active_at_snapshot": 1,
+        "accounting_error": null,
+        "memory_error": null,
+        "accounting_available": true,
+        "memory_available": true
+      }
+    }
+  ],
+  "corrections": [
+    "Require coverage=partial when a process remains active at the pre-job-close snapshot, and complete when none remains; never change raw values or label partial data complete.",
+    "Keep all 17 exact command identities, real CPU/memory queries, scientific truth, output hashes and root-process-count assertions.",
+    "Wait for the actual native edit to be visible/enabled before pointer editing, matching the existing button wait behavior."
+  ],
+  "productionCodeChanged": false,
+  "guiPreviewAndSaveValidated": false
+}

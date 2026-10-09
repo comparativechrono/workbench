@@ -179,7 +179,8 @@ int result(const bw::Result& value, const std::string& extra = "") {
     emit(std::string("{\"type\":\"result\",\"success\":") + (value.success ? "true" : "false") +
         ",\"cancelled\":" + (value.cancelled ? "true" : "false") +
         ",\"folder\":" + bw::json_string(value.folder) + ",\"message\":" + bw::json_string(value.message) +
-        ",\"outputs\":" + paths_json(value.outputs) + extra + "}");
+        ",\"outputs\":" + paths_json(value.outputs) +
+        (value.performance_json.empty() ? "" : ",\"performance\":" + value.performance_json) + extra + "}");
     return value.cancelled ? 2 : value.success ? 0 : 1;
 }
 std::wstring field(const bridgejson::Value& object, const char* key, bool optional = false) {

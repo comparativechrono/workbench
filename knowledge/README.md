@@ -1,5 +1,13 @@
 # Native Workbench knowledge base
 
+**Active development, 2026-10-08:** the owner accepted the
+[feature roadmap](roadmap.md). Unpublished **0.12.0** begins with
+[readiness, performance records and diagnostic export](readiness-performance.md)
+on `feature/readiness-performance`. Published 0.11.0 remains the baseline;
+the first implementation tranche has passed its recorded exact-candidate checks
+and screenshot review in [draft PR #7](https://github.com/comparativechrono/workbench/pull/7).
+Representative-machine acceptance, benchmarking and release work remain separate.
+
 This is the durable handover for people and agents continuing Native Workbench.
 It records why the project exists, how it works, how to extend it, and which
 claims the evidence supports. It is stored as plain UTF-8 Markdown and JSON:
@@ -96,6 +104,7 @@ verified all 12 assets, five ZIP CRCs and three checksum manifests. See the
 | [Validation and releases](validation-and-releases.md) | What establishes correctness, and how are artifacts published and trusted? |
 | [Catalogue signing](../publishing/catalogue-signing.md) | How does the protected official publisher work, and which one-time owner settings remain necessary? |
 | [Roadmap](roadmap.md) | What should be addressed next, and what would count as completion? |
+| [Readiness and performance development](readiness-performance.md) | What does the first accepted roadmap milestone implement, and which measurements/privacy/validation limits apply? |
 | [Project index](project.json) | Machine-readable entry points and stable constraints. |
 | [Release inventory](release-inventory.json) | Dated public versions, download assets, checksums and evidence pointers. |
 

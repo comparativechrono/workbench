@@ -1,4 +1,5 @@
 #include "workbench.h"
+#include "process_performance.h"
 
 #include <algorithm>
 #include <array>
@@ -176,7 +177,26 @@ struct Stage {
     DWORD exit_code = 0, producer_exit_code = 0, sink_exit_code = 0;
     ULONGLONG elapsed_ms = 0;
     bool has_exit_code = false, has_pipeline_exit_codes = false;
+    ProcessPerformance performance;
 };
+
+std::string stage_performance_json(const Stage& stage) {
+    if (stage.definition.kind == L"copy") return "null";
+    return process_performance_json(stage.performance);
+}
+
+std::string workflow_performance_json(const std::vector<Stage>& stages) {
+    std::ostringstream out;
+    out << "{\"schema\":1,\"source\":\"windows-job-object\",\"scope\":\"workflow-command-stages\",\"stages\":[";
+    for (size_t i = 0; i < stages.size(); ++i) {
+        if (i) out << ',';
+        const auto& stage = stages[i];
+        out << "{\"id\":" << json_string(stage.definition.id) << ",\"kind\":" << json_string(stage.definition.kind)
+            << ",\"status\":" << json_string(stage.status) << ",\"resources\":" << stage_performance_json(stage) << '}';
+    }
+    out << "]}";
+    return out.str();
+}
 
 std::vector<std::wstring> file_list(const std::wstring& text) {
     std::vector<std::wstring> paths;
@@ -284,6 +304,7 @@ std::string report_json(const WorkflowRequest& request, const Workflow* workflow
             << ",\"finished_utc\":" << (stage.finished.empty() ? "null" : json_string(stage.finished))
             << ",\"elapsed_ms\":" << stage.elapsed_ms << ",\"exit_code\":"
             << (stage.has_exit_code ? std::to_string(stage.exit_code) : "null")
+            << ",\"performance\":" << stage_performance_json(stage)
             << ",\"executable\":" << json_string(stage.tool.path) << ",\"tool_id\":" << json_string(stage.tool.id)
             << ",\"arguments\":[";
         for (size_t j = 0; j < stage.argv.size(); ++j) { if (j) out << ','; out << json_string(stage.argv[j]); }
@@ -481,6 +502,7 @@ Result run_workflow(const WorkflowRequest& request, Cancel& cancel, const Log& l
             require(safe_component(definition.id) && step_ids.insert(lower(definition.id)).second,
                 L"A workflow step identifier is unsafe or duplicated.");
             Stage stage; stage.definition = definition;
+            stage.performance.pipeline = definition.kind == L"pipe";
             if (definition.kind == L"exec" || definition.kind == L"pipe") {
                 auto tool = std::find_if(request.pack.tools.begin(), request.pack.tools.end(),
                     [&](const Tool& candidate) { return candidate.id == definition.tool; });
@@ -530,7 +552,7 @@ Result run_workflow(const WorkflowRequest& request, Cancel& cancel, const Log& l
             } else if (stage.definition.kind == L"pipe") {
                 const auto process = execute_pipeline(stage.tool.path, stage.argv, stage.sink_tool.path,
                     stage.sink_argv, stage.stdout_path, stage.stderr_path, stage.sink_stderr_path,
-                    cancel, record, 0, result.folder);
+                    cancel, record, 0, result.folder, &stage.performance);
                 stage.producer_exit_code = process.producer_exit_code;
                 stage.sink_exit_code = process.sink_exit_code;
                 stage.has_pipeline_exit_codes = true;
@@ -543,7 +565,7 @@ Result run_workflow(const WorkflowRequest& request, Cancel& cancel, const Log& l
                     stage.stderr_path + L" and " + stage.sink_stderr_path + L".");
             } else {
                 const auto process = execute(stage.tool.path, stage.argv, stage.stdout_path, stage.stderr_path,
-                    cancel, record, 0, result.folder);
+                    cancel, record, 0, result.folder, &stage.performance);
                 stage.exit_code = process.exit_code; stage.has_exit_code = true;
                 if (process.cancelled) { result.cancelled = true; fail(L"Workflow cancelled."); }
                 require(process.exit_code == 0, stage.definition.label + L" failed with exit code " +
@@ -594,6 +616,7 @@ Result run_workflow(const WorkflowRequest& request, Cancel& cancel, const Log& l
         }
         phase(report_phase, result.cancelled ? L"Cancelled" : L"Failed");
     }
+    result.performance_json = workflow_performance_json(stages);
     return result;
 }
 } // namespace bw

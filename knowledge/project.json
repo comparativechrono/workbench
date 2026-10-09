@@ -101,7 +101,8 @@
     "expandable_tool_library_release_lock": "evidence/tool-library-0.11.0-release-lock.json",
     "expandable_tool_library_publication": "evidence/tool-library-0.11.0-publication-2026-10-08.json",
     "expandable_tool_library_public_downloads": "evidence/tool-library-0.11.0-public-downloads-2026-10-08.json",
-    "expandable_tool_library_preparation": "evidence/tool-library-0.11.0-preparation-2026-10-08.json"
+    "expandable_tool_library_preparation": "evidence/tool-library-0.11.0-preparation-2026-10-08.json",
+    "readiness_performance": "readiness-performance.md"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -1069,5 +1070,62 @@
     "preparation_run": 37708488034,
     "publication_record": "evidence/tool-library-0.11.0-publication-2026-10-08.json",
     "public_downloads": "evidence/tool-library-0.11.0-public-downloads-2026-10-08.json"
+  },
+  "active_development": {
+    "recorded_on": "2026-10-08",
+    "version": "0.12.0",
+    "branch": "feature/readiness-performance",
+    "starting_commit": "82729febfcfab1c43bd9c9798d03c80f595545cb",
+    "status": "first implementation tranche and exact candidate gates complete; draft PR #7; unpublished; representative-machine, benchmark and release acceptance pending",
+    "authorization": "Owner accepted the full proposed feature programme and instructed development to begin.",
+    "milestone": 1,
+    "scope": [
+      "explicit run readiness",
+      "scoped local performance records",
+      "reviewable local diagnostic export"
+    ],
+    "handover": "readiness-performance.md",
+    "roadmap": "roadmap.md",
+    "published_baseline": "0.11.0",
+    "published_assets_changed": false,
+    "later_accepted_milestones": [
+      "sample table, general batch workflows, durable queue and reusable indexes",
+      "verified completed-step restart, resource-bounded concurrency and portable projects"
+    ],
+    "cross_cutting_acceptance": [
+      "high-DPI displays",
+      "keyboard accessibility",
+      "physical trackpads",
+      "managed Windows machines"
+    ],
+    "evidence_scope": "Do not transfer historical native results to changed bytes. Unavailable or skipped checks are not passes.",
+    "pull_request": "https://github.com/comparativechrono/workbench/pull/7",
+    "pull_request_state": "draft",
+    "source_evidence": "evidence/readiness-performance-0.12.0-source-2026-10-08.json",
+    "retained_candidate_failures": [
+      "evidence/readiness-performance-0.12.0-initial-failure-2026-10-08.json",
+      "evidence/readiness-performance-0.12.0-second-failure-2026-10-08.json",
+      "evidence/readiness-performance-0.12.0-third-failure-2026-10-08.json",
+      "evidence/readiness-performance-0.12.0-fourth-failure-2026-10-08.json",
+      "evidence/readiness-performance-0.12.0-fifth-failure-2026-10-08.json",
+      "evidence/readiness-performance-0.12.0-sixth-visual-finding-2026-10-08.json",
+      "evidence/readiness-performance-0.12.0-font-gate-failure-2026-10-08.json"
+    ],
+    "verification_progress": {
+      "offline_hostname_regression": "fixed; strict socket audit gate retained; cold-import regressions added",
+      "native_subchecks": "Final exact candidate: 14 process-resource, 5 readiness/diagnostic, 7 library and 32 workspace checks passed per path; 10 Windows diagnostic source checks passed with one POSIX-only skip.",
+      "remaining_native_gate": "Defined hosted Windows gates and independent 96-DPI dialog screenshot reviews passed; broader device acceptance and release-specific gates remain.",
+      "source_scope": "Initial local consolidated and later CI suite selections differ; preserve each result without adding counts.",
+      "final_candidate_evidence": {
+        "path": "evidence/readiness-performance-0.12.0-candidate-2026-10-08.json",
+        "status": "passed within recorded scope; candidate only"
+      },
+      "representative_machine_acceptance": "pending",
+      "artifact_audit": "evidence/readiness-performance-0.12.0-artifact-audit-2026-10-08.json",
+      "realistic_windows_linux_benchmark": "not performed",
+      "updater_built": false
+    },
+    "tested_source_commit": "eaa691d55a3659a793086ce272b826bcba1cabea",
+    "tested_run": "https://github.com/comparativechrono/workbench/actions/runs/37808653384"
   }
 }

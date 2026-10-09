@@ -22,10 +22,12 @@ from decimal import Decimal
 
 try:
     from .catalog import resolve_tool
+    from . import performance
     from .cwl_export import definition_sha256, export_workflow, update_run_status
     from .reference_provenance import collect_references, used_paths, methods_text as reference_methods
 except ImportError:
     from catalog import resolve_tool
+    import performance
     from cwl_export import definition_sha256, export_workflow, update_run_status
     from reference_provenance import collect_references, used_paths, methods_text as reference_methods
 
@@ -814,74 +816,83 @@ class Engine:
             graph[field] = max(minimum, value if isinstance(value, int) and 0 < value < 1000000000 else minimum)
 
     def prepare(self, graph, output_parent, cancel=None):
-        graph = copy.deepcopy(graph)
-        review = self.validate(graph)
-        if not review["ok"]:
-            raise ValueError("; ".join(i["message"] for i in review["errors"]))
-        parent = Path(output_parent).absolute()
-        if not _io_path(parent).is_dir() or _io_path(parent).is_symlink():
-            raise ValueError("Select an existing output folder.")
-        for ancestor in [parent] + list(parent.parents):
-            physical = _io_path(ancestor)
-            if physical.is_symlink() or (hasattr(physical, "is_junction") and physical.is_junction()):
-                raise ValueError("The output folder must not use symbolic links or junctions.")
-        parent = _resolved_path(parent)
-        nodes = {n["id"]: n for n in graph["nodes"]}
-        _, dependencies = self._topology(graph)
-        frozen_nodes = []
-        for identity in review["order"]:
-            node = nodes[identity]
-            tool = copy.deepcopy(self._tool(node))
-            self._verify_manifest(tool)
-            _check_path_policy(tool, [parent] + [parent / relative for output in tool.get('outputs', [])
-                                               for relative in output.get('files', {}).values()])
-            node["pin"] = pin_for(tool)
-            node["params"] = {p["id"]: _parameter(p, node.get("params", {}).get(p["id"], _field_default(p))) for p in tool.get("params", [])}
-            frozen = {"id": identity, "tool": tool, "params": copy.deepcopy(node["params"]), "label": node_name(node, tool), "inputs": copy.deepcopy(node.get("inputs", {})), "dependencies": sorted(dependencies[identity])}
-            if self._alignment_ports(tool):
-                # Header inspection is part of the analysis contract too. Freeze
-                # the helper before execution so later installations cannot
-                # change which SAMtools inspects the selected BAMs.
-                frozen['validationTools'] = {'samtools': self._samtools_selection(tool)}
-            frozen_nodes.append(frozen)
-        evidence = {}
-        used_sources = {r for n in graph["nodes"] for rs in n.get("inputs", {}).values() for r in rs if "::" not in r}
-        for source in graph["sources"]:
-            if source["id"] not in used_sources:
-                continue
-            for key, filename in source.get("files", {}).items():
-                path = _ordinary(filename)
-                if source.get("type") in ALIGNMENT_TYPES | {"vcf", "vcf-pass", "bcf"}:
-                    rna = source.get('type', '').endswith('-rna')
-                    signature, _ = _head(path)
-                    if signature.startswith(b"BAM\x01"):
-                        source["type"] = "bam-rna" if rna else "bam"
-                    elif signature.startswith(b"BCF\x02"):
-                        source["type"] = "bcf"
-                    elif signature.startswith(b"##fileformat=VCF"):
-                        # PASS-only is a declared subset, not established by a header.
-                        source["type"] = "vcf"
-                    elif source.get("type") in ALIGNMENT_TYPES:
-                        source["type"] = "sam-rna" if rna else "sam"
-                source["files"][key] = str(path)
-                if str(path) not in evidence:
-                    before = _io_path(path).stat()
-                    checksum = digest_file(path, cancel)
-                    after = _io_path(path).stat()
-                    if (before.st_size, before.st_mtime_ns) != (after.st_size, after.st_mtime_ns):
-                        raise ValueError("An input changed while preparing the run: " + str(path))
-                    evidence[str(path)] = {"path": str(path), "bytes": after.st_size, "mtime_ns": after.st_mtime_ns, "sha256": checksum}
-        references = collect_references(self.app_root, evidence, evidence=evidence)
-        for path, reference in references.items():
-            evidence[path]["reference"] = copy.deepcopy(reference)
-        self._assert_disjoint_hashes(graph, evidence)
-        if cancel is not None and cancel.is_set():
-            raise InterruptedError("Cancelled before creating the run.")
-        self._counters(graph)
-        run_id = "run-" + datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S") + "-" + uuid.uuid4().hex[:8]
-        folder = parent / run_id
-        plan = {"schema": 1, "id": run_id, "created": utc(), "folder": str(folder), "graph": graph, "nodes": frozen_nodes, "inputs": evidence, "references": references, "warnings": review["warnings"], "scheduler": "sequential-independent-branches", "methods": self.methods(graph, references=references)}
-        workflow = export_workflow(plan, self.app_root)
+        preparation_started = time.perf_counter()
+        measurements = performance.preparation()
+        with performance.measure(measurements["phases"], "validation"):
+            graph = copy.deepcopy(graph)
+            review = self.validate(graph)
+            if not review["ok"]:
+                raise ValueError("; ".join(i["message"] for i in review["errors"]))
+        with performance.measure(measurements["phases"], "freezing"):
+            parent = Path(output_parent).absolute()
+            if not _io_path(parent).is_dir() or _io_path(parent).is_symlink():
+                raise ValueError("Select an existing output folder.")
+            for ancestor in [parent] + list(parent.parents):
+                physical = _io_path(ancestor)
+                if physical.is_symlink() or (hasattr(physical, "is_junction") and physical.is_junction()):
+                    raise ValueError("The output folder must not use symbolic links or junctions.")
+            parent = _resolved_path(parent)
+            nodes = {n["id"]: n for n in graph["nodes"]}
+            _, dependencies = self._topology(graph)
+            frozen_nodes = []
+            for identity in review["order"]:
+                node = nodes[identity]
+                tool = copy.deepcopy(self._tool(node))
+                self._verify_manifest(tool)
+                _check_path_policy(tool, [parent] + [parent / relative for output in tool.get('outputs', [])
+                                                   for relative in output.get('files', {}).values()])
+                node["pin"] = pin_for(tool)
+                node["params"] = {p["id"]: _parameter(p, node.get("params", {}).get(p["id"], _field_default(p))) for p in tool.get("params", [])}
+                frozen = {"id": identity, "tool": tool, "params": copy.deepcopy(node["params"]), "label": node_name(node, tool), "inputs": copy.deepcopy(node.get("inputs", {})), "dependencies": sorted(dependencies[identity])}
+                if self._alignment_ports(tool):
+                    # Header inspection is part of the analysis contract too. Freeze
+                    # the helper before execution so later installations cannot
+                    # change which SAMtools inspects the selected BAMs.
+                    frozen['validationTools'] = {'samtools': self._samtools_selection(tool)}
+                frozen_nodes.append(frozen)
+        with performance.measure(measurements["phases"], "input_hashing"):
+            evidence = {}
+            used_sources = {r for n in graph["nodes"] for rs in n.get("inputs", {}).values() for r in rs if "::" not in r}
+            for source in graph["sources"]:
+                if source["id"] not in used_sources:
+                    continue
+                for key, filename in source.get("files", {}).items():
+                    path = _ordinary(filename)
+                    if source.get("type") in ALIGNMENT_TYPES | {"vcf", "vcf-pass", "bcf"}:
+                        rna = source.get('type', '').endswith('-rna')
+                        signature, _ = _head(path)
+                        if signature.startswith(b"BAM\x01"):
+                            source["type"] = "bam-rna" if rna else "bam"
+                        elif signature.startswith(b"BCF\x02"):
+                            source["type"] = "bcf"
+                        elif signature.startswith(b"##fileformat=VCF"):
+                            # PASS-only is a declared subset, not established by a header.
+                            source["type"] = "vcf"
+                        elif source.get("type") in ALIGNMENT_TYPES:
+                            source["type"] = "sam-rna" if rna else "sam"
+                    source["files"][key] = str(path)
+                    if str(path) not in evidence:
+                        before = _io_path(path).stat()
+                        checksum = digest_file(path, cancel)
+                        after = _io_path(path).stat()
+                        if (before.st_size, before.st_mtime_ns) != (after.st_size, after.st_mtime_ns):
+                            raise ValueError("An input changed while preparing the run: " + str(path))
+                        evidence[str(path)] = {"path": str(path), "bytes": after.st_size, "mtime_ns": after.st_mtime_ns, "sha256": checksum}
+        with performance.measure(measurements["phases"], "reference_provenance"):
+            references = collect_references(self.app_root, evidence, evidence=evidence)
+            for path, reference in references.items():
+                evidence[path]["reference"] = copy.deepcopy(reference)
+            self._assert_disjoint_hashes(graph, evidence)
+            if cancel is not None and cancel.is_set():
+                raise InterruptedError("Cancelled before creating the run.")
+        with performance.measure(measurements["phases"], "export"):
+            self._counters(graph)
+            run_id = "run-" + datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S") + "-" + uuid.uuid4().hex[:8]
+            folder = parent / run_id
+            plan = {"schema": 1, "id": run_id, "created": utc(), "folder": str(folder), "graph": graph, "nodes": frozen_nodes, "inputs": evidence, "references": references, "warnings": review["warnings"], "scheduler": "sequential-independent-branches", "methods": self.methods(graph, references=references)}
+            workflow = export_workflow(plan, self.app_root)
+        measurements.update(status="completed", elapsedSeconds=performance.elapsed(preparation_started, time.perf_counter))
+        plan["performancePreparation"] = measurements
         # Bind the executable export to the frozen plan without a circular hash:
         # its definition excludes only the plan digest and execution outcome.
         plan["workflowExport"] = {"file": "workflow.cwl", "format": "CWL v1.2", "definitionSha256": definition_sha256(workflow)}
@@ -895,6 +906,7 @@ class Engine:
             write_json(folder / "reference-provenance.json", {"schema": 1, "inputs": references})
         _io_path(folder / "methods-planned.txt").write_text(plan["methods"], encoding="utf-8")
         _io_path(folder / "pipeline.svg").write_text(self.diagram(plan), encoding="utf-8")
+        write_json(folder / "performance.json", performance.make_record(plan))
         return plan
 
     def _assert_disjoint_hashes(self, graph, evidence):
@@ -1098,6 +1110,7 @@ class Engine:
                 "validationTools":copy.deepcopy(node.get('validationTools', {}))}
 
     def execute(self, plan, event=None, cancel=None):
+        execution_started = time.perf_counter()
         event = event or (lambda item: None)
         cancel = cancel or threading.Event()
         plan = copy.deepcopy(plan)
@@ -1118,6 +1131,10 @@ class Engine:
         if (definition_sha256(workflow) != plan["workflowExport"]["definitionSha256"]
                 or workflow["$graph"][0].get("nw:planSha256") != claimed):
             raise ValueError("The CWL workflow export does not match the frozen execution plan.")
+        measurements = performance.make_record(plan)
+        measurements["status"] = "running"
+        measurements["execution"]["status"] = "running"
+        measured_steps = {step["id"]: step for step in measurements["steps"]}
         sources = {s["id"]: s for s in plan["graph"]["sources"]}
         node_names = {n["id"]: n["label"] for n in plan["nodes"]}
         outputs, statuses = {}, {}
@@ -1127,9 +1144,13 @@ class Engine:
         write_json(folder / "workflow.cwl", workflow)
         record["workflowExport"] = dict(plan["workflowExport"], sha256=digest_file(folder / "workflow.cwl"))
         write_json(folder / "run.json", record)
+        measurements["execution"]["phases"]["startup"] = {"status": "completed", "elapsedSeconds": performance.elapsed(execution_started, time.perf_counter)}
+        write_json(folder / "performance.json", measurements)
         event({"type": "run", "status": "running", "folder": str(folder)})
         for node in plan["nodes"]:
             identity = node["id"]
+            measured_step = measured_steps[identity]
+            step_started = None
             entry = {"id": identity, "name": node["label"], "tool": node["tool"]["id"], "pin": pin_for(node["tool"]), "started": utc(), "status": "pending", "inputs": node["inputs"], "outputs": {}}
             record["nodes"].append(entry)
             if cancel.is_set():
@@ -1138,78 +1159,101 @@ class Engine:
                 entry.update(status="blocked", message="An upstream step did not complete successfully.")
             else:
                 entry["status"] = "running"
+                step_started = time.perf_counter()
+                measured_step["status"] = "running"
                 write_json(folder / "run.json", record)
+                write_json(folder / "performance.json", measurements)
                 event({"type": "step", "nodeId": identity, "status": "running"})
                 try:
-                    trusted = resolve_tool(self.catalog, node["tool"]["id"], pin_for(node["tool"]))
-                    if trusted is None or canonical(trusted) != canonical(node["tool"]):
-                        raise ValueError("The installed operation differs from the frozen plan.")
-                    self._verify_manifest(node["tool"])
-                    values = self._resolve_values(node, sources, outputs)
-                    for value in values.values():
-                        for filename in str(value).splitlines():
-                            if filename in plan["inputs"]:
-                                evidence = plan["inputs"][filename]
-                                if not _io_path(filename).is_file() or digest_file(filename, cancel) != evidence["sha256"]:
-                                    raise ValueError("An external input changed after the plan was frozen: " + filename)
-                    for refs in node["inputs"].values():
-                        for ref in refs:
-                            if ref in outputs:
-                                for key, filename in outputs[ref]["files"].items():
-                                    if digest_file(filename, cancel) != outputs[ref]["sha256"][key]:
-                                        raise ValueError("An upstream output changed before it could be consumed: " + ref)
-                    step_folder = folder / display_id(identity)
-                    _io_path(step_folder).mkdir()
-                    if node["tool"].get("builtin") or node["tool"]["id"] == "builtin/report":
-                        result = self._report(node, values, step_folder, outputs, sources, node_names)
-                    else:
-                        input_types = {}
+                    with performance.measure(measured_step["phases"], "input_verification"):
+                        trusted = resolve_tool(self.catalog, node["tool"]["id"], pin_for(node["tool"]))
+                        if trusted is None or canonical(trusted) != canonical(node["tool"]):
+                            raise ValueError("The installed operation differs from the frozen plan.")
+                        self._verify_manifest(node["tool"])
+                        values = self._resolve_values(node, sources, outputs)
+                        for value in values.values():
+                            for filename in str(value).splitlines():
+                                if filename in plan["inputs"]:
+                                    evidence = plan["inputs"][filename]
+                                    if not _io_path(filename).is_file() or digest_file(filename, cancel) != evidence["sha256"]:
+                                        raise ValueError("An external input changed after the plan was frozen: " + filename)
                         for refs in node["inputs"].values():
                             for ref in refs:
-                                descriptor = sources.get(ref) or outputs.get(ref)
-                                if descriptor:
-                                    for filename in descriptor.get("files", {}).values():
-                                        input_types[str(_resolved_path(filename))] = descriptor["type"]
-                        entry["preflight"] = self._preflight(node, values, cancel, input_types)
-                        request = {"app_root": str(self.app_root), "pack_folder": str(_resolved_path(self.app_root / node["tool"]["packFolder"])), "pack_sha256": node["tool"]["manifestSha256"], "workflow_id": node["tool"]["workflowId"], "output_folder": str(step_folder), "values": values, "cancel_file": str(folder / "cancel.request")}
-                        result = self.backend.run(request, lambda item: event(dict(item, nodeId=identity)), cancel)
+                                if ref in outputs:
+                                    for key, filename in outputs[ref]["files"].items():
+                                        if digest_file(filename, cancel) != outputs[ref]["sha256"][key]:
+                                            raise ValueError("An upstream output changed before it could be consumed: " + ref)
+                        step_folder = folder / display_id(identity)
+                        _io_path(step_folder).mkdir()
+                    if node["tool"].get("builtin") or node["tool"]["id"] == "builtin/report":
+                        measured_step["phases"]["scientific_preflight"]["status"] = "not_applicable"
+                        measured_step["backendMetrics"] = performance.unavailable_metrics("builtin_operation_without_native_command")
+                        with performance.measure(measured_step["phases"], "backend_runner"):
+                            result = self._report(node, values, step_folder, outputs, sources, node_names)
+                    else:
+                        with performance.measure(measured_step["phases"], "scientific_preflight"):
+                            input_types = {}
+                            for refs in node["inputs"].values():
+                                for ref in refs:
+                                    descriptor = sources.get(ref) or outputs.get(ref)
+                                    if descriptor:
+                                        for filename in descriptor.get("files", {}).values():
+                                            input_types[str(_resolved_path(filename))] = descriptor["type"]
+                            entry["preflight"] = self._preflight(node, values, cancel, input_types)
+                        measured_step["backendMetrics"] = performance.unavailable_metrics()
+                        with performance.measure(measured_step["phases"], "backend_runner"):
+                            request = {"app_root": str(self.app_root), "pack_folder": str(_resolved_path(self.app_root / node["tool"]["packFolder"])), "pack_sha256": node["tool"]["manifestSha256"], "workflow_id": node["tool"]["workflowId"], "output_folder": str(step_folder), "values": values, "cancel_file": str(folder / "cancel.request")}
+                            result = self.backend.run(request, lambda item: event(dict(item, nodeId=identity)), cancel)
+                        measured_step["backendMetrics"] = performance.native_metrics(result.get("performance"))
                     entry.update(status="success" if result.get("success") else "cancelled" if result.get("cancelled") else "failed", message=result.get("message", ""), folder=result.get("folder", str(step_folder)))
                     if entry["status"] == "success":
-                        actual_folder = _resolved_path(entry["folder"])
-                        if not actual_folder.is_relative_to(_resolved_path(step_folder)):
-                            raise ValueError("Runner returned a result outside this step's private folder.")
-                        for output in node["tool"].get("outputs", []):
-                            files, hashes = {}, {}
-                            for key, relative in output.get("files", {}).items():
-                                path = _safe_relative(actual_folder, relative)
-                                if not _io_path(path).is_file():
-                                    raise ValueError("The runner did not produce declared output " + output["id"] + ": " + str(path))
-                                if node["tool"].get("schemaAsset") and output["type"] in {"fasta-nucleotide", "fasta-protein", "msa-nucleotide", "msa-protein", "fasta-nucleotide-abundance", "id-list"}:
-                                    declared = next((f for f in output.get("fields", []) if f["id"] == key), {})
-                                    evidence = _sequence_evidence(path, output["type"], [output["type"]], output.get("state", {}), cancel, allow_empty=not declared.get("nonempty", True))
-                                    entry.setdefault("outputValidation", {})[key] = evidence
-                                files[key] = str(path)
-                                hashes[key] = digest_file(path, cancel)
-                            ref = identity + "::" + output["id"]
-                            item = {"id": ref, "label": output.get("label", output["id"]), "type": output["type"], "state": output.get("state", {}), "files": files, "sha256": hashes, "producer": identity, "manifestOutputs": output.get("manifestOutputs", list(files))}
-                            entry["outputs"][ref] = item
-                        outputs.update(entry["outputs"])
+                        with performance.measure(measured_step["phases"], "output_validation_and_hashing"):
+                            actual_folder = _resolved_path(entry["folder"])
+                            if not actual_folder.is_relative_to(_resolved_path(step_folder)):
+                                raise ValueError("Runner returned a result outside this step's private folder.")
+                            for output in node["tool"].get("outputs", []):
+                                files, hashes = {}, {}
+                                for key, relative in output.get("files", {}).items():
+                                    path = _safe_relative(actual_folder, relative)
+                                    if not _io_path(path).is_file():
+                                        raise ValueError("The runner did not produce declared output " + output["id"] + ": " + str(path))
+                                    if node["tool"].get("schemaAsset") and output["type"] in {"fasta-nucleotide", "fasta-protein", "msa-nucleotide", "msa-protein", "fasta-nucleotide-abundance", "id-list"}:
+                                        declared = next((f for f in output.get("fields", []) if f["id"] == key), {})
+                                        evidence = _sequence_evidence(path, output["type"], [output["type"]], output.get("state", {}), cancel, allow_empty=not declared.get("nonempty", True))
+                                        entry.setdefault("outputValidation", {})[key] = evidence
+                                    files[key] = str(path)
+                                    hashes[key] = digest_file(path, cancel)
+                                ref = identity + "::" + output["id"]
+                                item = {"id": ref, "label": output.get("label", output["id"]), "type": output["type"], "state": output.get("state", {}), "files": files, "sha256": hashes, "producer": identity, "manifestOutputs": output.get("manifestOutputs", list(files))}
+                                entry["outputs"][ref] = item
+                            outputs.update(entry["outputs"])
                 except InterruptedError as exc:
                     entry.update(status="cancelled", message=str(exc))
                 except Exception as exc:
                     entry.update(status="failed", message=str(exc), outputs={})
+            measured_step["status"] = entry["status"]
+            if step_started is not None:
+                measured_step["elapsedSeconds"] = performance.elapsed(step_started, time.perf_counter)
+            write_json(folder / "performance.json", measurements)
             entry["finished"] = utc()
             statuses[identity] = entry["status"]
             record["outputs"] = outputs
             write_json(folder / "run.json", record)
             event({"type": "step", "nodeId": identity, "status": entry["status"], "message": entry.get("message", "")})
-        record["finished"] = utc()
-        record["status"] = "cancelled" if cancel.is_set() or any(v == "cancelled" for v in statuses.values()) else "success" if all(v == "success" for v in statuses.values()) else "failed"
-        record["success"] = record["status"] == "success"
-        record["methods"] = self.methods(plan["graph"], completed=True, statuses=statuses, references=plan.get("references", {}))
-        _io_path(folder / "methods-completed.txt").write_text(record["methods"], encoding="utf-8")
-        write_json(folder / "workflow.cwl", update_run_status(workflow, record))
-        record["workflowExport"]["sha256"] = digest_file(folder / "workflow.cwl")
+        with performance.measure(measurements["execution"]["phases"], "finalization"):
+            record["finished"] = utc()
+            record["status"] = "cancelled" if cancel.is_set() or any(v == "cancelled" for v in statuses.values()) else "success" if all(v == "success" for v in statuses.values()) else "failed"
+            record["success"] = record["status"] == "success"
+            record["methods"] = self.methods(plan["graph"], completed=True, statuses=statuses, references=plan.get("references", {}))
+            _io_path(folder / "methods-completed.txt").write_text(record["methods"], encoding="utf-8")
+            write_json(folder / "workflow.cwl", update_run_status(workflow, record))
+            record["workflowExport"]["sha256"] = digest_file(folder / "workflow.cwl")
+        measurements["status"] = record["status"]
+        measurements["execution"].update(status=record["status"], elapsedSeconds=performance.elapsed(execution_started, time.perf_counter))
+        write_json(folder / "performance.json", measurements)
+        # This final pointer is added after CWL outcome serialization: the CWL
+        # file and performance sidecar cannot acquire circular reciprocal hashes.
+        record["performance"] = {"file": "performance.json", "schema": 1, "sha256": digest_file(folder / "performance.json")}
         write_json(folder / "run.json", record)
         event({"type": "run", "status": record["status"], "folder": str(folder)})
         return record

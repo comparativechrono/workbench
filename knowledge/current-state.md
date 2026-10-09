@@ -1,5 +1,40 @@
 # Current project state
 
+## Active development: 0.12.0, unpublished
+
+On **2026-10-08** the owner accepted the [broader feature roadmap](roadmap.md).
+The first milestone is in progress on `feature/readiness-performance`, based on
+`82729febfcfab1c43bd9c9798d03c80f595545cb`: explicit run readiness, scoped local
+performance records and review-before-save diagnostic ZIPs. See the
+[feature guide and validation handover](readiness-performance.md).
+
+The first implementation tranche is ready for tester review in [draft PR #7](https://github.com/comparativechrono/workbench/pull/7).
+Exact candidate source `eaa691d55a3659a793086ce272b826bcba1cabea` passed
+[run 37808653384](https://github.com/comparativechrono/workbench/actions/runs/37808653384):
+**144 source checks passed, three skipped**; each Windows path passed **14 native
+resource, five readiness/diagnostic, seven library and 32 workspace checks**.
+Windows diagnostic source checks separately passed ten with one POSIX-only skip.
+Two independent screenshot reviews confirmed the corrected readiness introduction
+and diagnostic Save controls fit at the observed 96 DPI. Earlier failed attempts,
+the fixed offline hostname regression and the rejected cross-process font test
+remain recorded rather than being counted as successful checks.
+
+The [candidate evidence](evidence/readiness-performance-0.12.0-candidate-2026-10-08.json)
+and [independent archive audit](evidence/readiness-performance-0.12.0-artifact-audit-2026-10-08.json)
+bind exact source, starter bytes, native reports, limits and preserved pack/runtime
+identities. One pre-cleanup resource snapshot in the spaced-path run is correctly
+partial. The hosted desktop clips 16 pixels of the main window's minimum width;
+this is not complete small-screen acceptance.
+
+**0.12.0 remains unpublished.** Representative-machine acceptance, a realistic
+Windows–Linux benchmark and release/update gates remain outstanding. No 0.12.0
+updater was built or tested; live reference downloads and Full online setup were
+not rerun by this candidate workflow. Published 0.11.0 below remains unchanged.
+Sample batching, durable queues, reusable indexes, verified restart and bounded
+concurrency remain subsequent accepted work, not completed features.
+
+## Published baseline: 0.11.0
+
 Snapshot: **2026-10-08**. Application **0.11.0 is published** as a development
 prerelease at [app-v0.11.0](https://github.com/comparativechrono/workbench/releases/tag/app-v0.11.0).
 Release **406281343** was published at **2026-10-08T00:36:31Z**.

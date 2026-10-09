@@ -9,6 +9,7 @@
 #define NOMINMAX
 #include <windows.h>
 #include <atomic>
+#include <cstdint>
 #include <functional>
 #include <string>
 #include <vector>
@@ -32,11 +33,27 @@ struct Result {
     bool cancelled = false;
     std::wstring folder, message;
     std::vector<std::wstring> outputs;
+    // Optional machine-readable command-stage measurements, not a sum of peaks.
+    std::string performance_json;
 };
-struct ProcessResult { DWORD exit_code = 0; bool cancelled = false; };
+struct ProcessPerformance {
+    bool pipeline = false, launched = false, wall_available = false;
+    bool accounting_available = false, memory_available = false;
+    ULONGLONG wall_ms = 0;
+    LONGLONG user_ticks = 0, kernel_ticks = 0;
+    uint64_t peak_job_memory_bytes = 0;
+    DWORD processes_total = 0, processes_active = 0;
+    DWORD accounting_error = ERROR_SUCCESS, memory_error = ERROR_SUCCESS;
+};
+struct ProcessResult {
+    DWORD exit_code = 0;
+    bool cancelled = false;
+    ProcessPerformance performance;
+};
 struct PipelineProcessResult {
     DWORD producer_exit_code = 0, sink_exit_code = 0;
     bool cancelled = false;
+    ProcessPerformance performance;
 };
 struct WorkflowRequest {
     Pack pack;
@@ -71,15 +88,18 @@ Pack import_pack(const std::wstring& app_root, const std::wstring& source, const
 // runner.cpp: no shell. Each child belongs to a kill-on-close Job Object.
 // stdout_file is newly created (CREATE_NEW); stderr_file is also newly created.
 // Runtime status and decoded stderr lines are passed to log. Timeout 0 means none.
+// Optional performance receives a conservative pre-cleanup snapshot even when
+// execution throws. A pipe shares one job; its peak must not be counted twice.
 ProcessResult execute(const std::wstring& executable, const std::vector<std::wstring>& args,
     const std::wstring& stdout_file, const std::wstring& stderr_file,
-    Cancel&, const Log&, DWORD timeout_ms = 0, const std::wstring& working_directory = {});
+    Cancel&, const Log&, DWORD timeout_ms = 0, const std::wstring& working_directory = {},
+    ProcessPerformance* performance = nullptr);
 std::wstring quote_argument(const std::wstring&);
 PipelineProcessResult execute_pipeline(const std::wstring& producer, const std::vector<std::wstring>& producer_args,
     const std::wstring& sink, const std::vector<std::wstring>& sink_args,
     const std::wstring& stdout_file, const std::wstring& producer_stderr_file,
     const std::wstring& sink_stderr_file, Cancel&, const Log&, DWORD timeout_ms = 0,
-    const std::wstring& working_directory = {});
+    const std::wstring& working_directory = {}, ProcessPerformance* performance = nullptr);
 Result run_job(const Request&, Cancel&, const Log&, const Phase&);
 Result run_workflow(const WorkflowRequest&, Cancel&, const Log&, const Phase&);
 Result validate_modular_installation(const std::wstring& app_root, const std::wstring& output_parent,

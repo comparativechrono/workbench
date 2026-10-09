@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "date": "2026-10-08",
+  "status": "failed initial candidate retained; corrections in progress",
+  "sourceCommit": "dc71e70e0ceed9b77d229bfc8c72ae09b5b47bf8",
+  "runId": 37801438232,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37801438232",
+  "published": false,
+  "archives": [
+    {
+      "file": "native-workbench-0.12.0-source.zip",
+      "bytes": 47016941,
+      "sha256": "5385d52c47aa1a57cf3272ec06747169244ed5822c23730c105a1c41115b6a60"
+    },
+    {
+      "file": "native-workbench-0.12.0-starter-windows.zip",
+      "bytes": 17065477,
+      "sha256": "db3e070b7926ddff1f326a757d8fe0398396440a5ba06bc69d50a751e3f98336"
+    }
+  ],
+  "independentArchiveDownloads": {
+    "starterAndSourceSha256AndZipCrcVerified": true,
+    "localRecovery": "One source transport part arrived truncated locally; resumed from the provided download reference and verified its exact GitHub artifact SHA-256 before reassembly."
+  },
+  "nativeResults": [
+    {
+      "path": "ordinary",
+      "gates": {
+        "library-evidence": {
+          "success": true,
+          "passed": 7,
+          "reportSha256": "70947c1cd6b2e8f581db43b64b1117e532909bed2a5090a025d6e3abe844b7f8"
+        },
+        "workspace-evidence": {
+          "success": false,
+          "passed": 8,
+          "reportSha256": "cdc4269275c39e145481fe1d66b0f882f88fd345a1ddf6e5e3b84e4298f23180"
+        },
+        "readiness-evidence": {
+          "success": false,
+          "passed": 1,
+          "reportSha256": "0b969744334c7552009f2a9cd9bc9306b612aa0c4e76408df20a47f087e43266"
+        }
+      },
+      "offlineFailure": "OFFLINE GATE: socket.gethostname",
+      "windowsDiagnosticSourceTests": {
+        "passed": 9,
+        "skipped": 1,
+        "skip": "POSIX-only symlink check"
+      }
+    },
+    {
+      "path": "path with spaces",
+      "gates": {
+        "library-evidence": {
+          "success": true,
+          "passed": 7,
+          "reportSha256": "983246a5e20a629e19b9259b2a5a0e1964937124d43ead7fd86203a61f9eb216"
+        },
+        "workspace-evidence": {
+          "success": false,
+          "passed": 8,
+          "reportSha256": "13502c64c9929b4580672c420a97ac3dbbf80e59755edc4bd888275fd683b1fa"
+        },
+        "readiness-evidence": {
+          "success": false,
+          "passed": 1,
+          "reportSha256": "eda88ec9490dcd2557d96afb9a9ff26e988066b8766f6aaec8a2a2813b4801d8"
+        }
+      },
+      "offlineFailure": "OFFLINE GATE: socket.gethostname",
+      "windowsDiagnosticSourceTests": {
+        "passed": 9,
+        "skipped": 1,
+        "skip": "POSIX-only symlink check"
+      }
+    }
+  ],
+  "failures": [
+    {
+      "component": "system information",
+      "finding": "platform.* uses platform.uname(), which calls socket.gethostname. Strict offline host blocked it before run preparation.",
+      "correction": "Use kernel OS/version/architecture APIs without hostname/socket calls. Add socket-audit regressions. Keep offline gate unchanged."
+    },
+    {
+      "component": "native accounting helper",
+      "finding": "First case failed exact process-count assertion; initial helper did not preserve raw failed measurements.",
+      "correction": "Retain raw snapshots and precise expected/actual values before assertions; investigate measured Windows behavior before deciding on production or assertion changes."
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 #include "workbench.h"
 #include "child_environment.h"
+#include "process_performance.h"
 
 #include <algorithm>
 #include <array>
@@ -251,8 +252,11 @@ PipelineProcessResult execute_pipeline(const std::wstring& producer, const std::
     const std::wstring& sink, const std::vector<std::wstring>& sink_args,
     const std::wstring& stdout_file, const std::wstring& producer_stderr_file,
     const std::wstring& sink_stderr_file, Cancel& cancel, const Log& log, DWORD timeout_ms,
-    const std::wstring& working_directory) {
-    if (cancel.load()) return {ERROR_CANCELLED, ERROR_CANCELLED, true};
+    const std::wstring& working_directory, ProcessPerformance* performance) {
+    ProcessPerformance local_performance;
+    ProcessPerformance& measured = performance ? *performance : local_performance;
+    measured = {}; measured.pipeline = true;
+    if (cancel.load()) return {ERROR_CANCELLED, ERROR_CANCELLED, true, measured};
     const auto producer_binary = absolute(producer), sink_binary = absolute(sink);
     const auto directory = working_directory.empty() ? std::wstring{} : absolute(working_directory);
     const auto producer_command = command_line(producer_binary, producer_args);
@@ -273,12 +277,15 @@ PipelineProcessResult execute_pipeline(const std::wstring& producer, const std::
     if (!null_input.valid()) fail(L"Cannot open pipeline input");
     Diagnostics producer_diagnostics(log, L"[producer] "), sink_diagnostics(log, L"[sink] ");
     Session session;
-    if (cancel.load()) return {ERROR_CANCELLED, ERROR_CANCELLED, true};
+    JobPerformanceCapture metrics(session.job.get(), measured);
+    if (cancel.load()) return {ERROR_CANCELLED, ERROR_CANCELLED, true, measured};
     emit(log, L"Pipeline producer: " + producer_command);
     emit(log, L"Pipeline sink: " + sink_command);
     const auto started = GetTickCount64();
+    metrics.begin(started);
     start(session.sink, session.job.get(), sink_binary, sink_command,
           transfer.read.get(), sink_output.write.get(), sink_error.write.get(), directory);
+    metrics.assigned();
     start(session.producer, session.job.get(), producer_binary, producer_command,
           null_input.get(), transfer.write.get(), producer_error.write.get(), directory);
     // Children own exactly their three standard handles. Closing every parent's
@@ -300,6 +307,7 @@ PipelineProcessResult execute_pipeline(const std::wstring& producer, const std::
             exited_at = GetTickCount64();
             // Main processes have both exited. Kill remaining descendants that
             // might otherwise keep a stderr/stdout handle or output file open.
+            metrics.capture();
             session.job.reset();
         }
         if (!complete && !terminated) {
@@ -331,6 +339,6 @@ PipelineProcessResult execute_pipeline(const std::wstring& producer, const std::
     emit(log, L"Pipeline exit codes: producer=" + std::to_wstring(session.producer.exit_code) +
               L", sink=" + std::to_wstring(session.sink.exit_code));
     if (timed_out) throw std::runtime_error("The pipeline exceeded its time limit.");
-    return {session.producer.exit_code, session.sink.exit_code, cancelled || cancel.load()};
+    return {session.producer.exit_code, session.sink.exit_code, cancelled || cancel.load(), measured};
 }
 } // namespace bw
