@@ -2,7 +2,7 @@ name: Native Windows frozen 0.16.0 release checks
 
 on:
   push:
-    branches: [release/update-app-0.16.0]
+    branches: [release/check-app-0.16.0]
 
 permissions:
   contents: read
@@ -48,7 +48,7 @@ jobs:
           if ((Get-FileHash $starter -Algorithm SHA256).Hash -ne $env:STARTER_SHA256) { throw 'Accepted Starter SHA-256 mismatch.' }
           $validators = @{
             'scripts/check_results_windows.py' = '5c318c45c297dc7b267724db4db3abfc5c42d9dfc93805a5377a055d3f88747b'
-            'scripts/check_scroll_frames_windows.py' = '3e5e5b47fb513b3e47269facc5d7cd7a8697e5c9edc54dc3be9385fa95a4f490'
+            'scripts/check_scroll_frames_0160_windows.py' = 'e93a5c199415ee7231f052f640352f0c8fa90093946f237ac01840ba97baeed2'
             'scripts/check_workspace_ui_windows.py' = '30a38a4f5bc8d5a5af93eee80560963f87e4ef019a3e98ec9780f1964d847d13'
             'scripts/check_references_windows.py' = '5920501af2272bce364afc3b28733a4f0fb4b7291aabaca42a683f4706b485b0'
           }
@@ -86,7 +86,7 @@ jobs:
         run: |
           $ErrorActionPreference = 'Stop'
           $app = Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'scroll/native-workbench'
-          & (Join-Path $app 'runtime/python/python.exe') -I scripts/check_scroll_frames_windows.py --app-root $app --report "$env:RUNNER_TEMP/scroll-evidence/native-scroll.json" --source-commit $env:SOURCE_COMMIT --asset-sha256 $env:STARTER_SHA256
+          & (Join-Path $app 'runtime/python/python.exe') -I scripts/check_scroll_frames_0160_windows.py --app-root $app --report "$env:RUNNER_TEMP/scroll-evidence/native-scroll.json" --source-commit $env:SOURCE_COMMIT --asset-sha256 $env:STARTER_SHA256
           if ($LASTEXITCODE -ne 0) { throw 'Frozen 0.16.0 native scrolling release check failed.' }
       - name: Retain exact reports and native captures even on failure
         if: always()
@@ -124,7 +124,7 @@ jobs:
           $starter = Join-Path $env:RUNNER_TEMP ('frozen-candidate/' + $env:STARTER_ASSET)
           if ((Get-FileHash $starter -Algorithm SHA256).Hash -ne $env:STARTER_SHA256) { throw 'Accepted Starter SHA-256 mismatch.' }
           $validators = @{
-            'scripts/check_long_paths_windows.py' = '8c325d0cc981e26f134377ecb1b717e3f9c71233bfdf4c5e60aa929fc3f334f3'
+            'scripts/check_long_paths_0160_windows.py' = '5de1cc348169824a6fb8e9f9ece9fa860e46ccf13bf8274e7b86464c78f62bec'
             'scripts/check_references_windows.py' = '5920501af2272bce364afc3b28733a4f0fb4b7291aabaca42a683f4706b485b0'
           }
           foreach ($path in $validators.Keys) {
@@ -154,7 +154,7 @@ jobs:
             $setup | ConvertTo-Json | Set-Content (Join-Path $evidence 'policy-setup.json')
             # The exact private Python and every app child start after the policy
             # change, avoiding a process-cached Windows long-path policy value.
-            & (Join-Path $app 'runtime/python/python.exe') -I scripts/check_long_paths_windows.py --app-root $app --output-root (Join-Path $env:RUNNER_TEMP 'frozen synthetic check') --report (Join-Path $evidence 'native-long-paths.json') --source-commit $env:SOURCE_COMMIT --asset-sha256 $env:STARTER_SHA256
+            & (Join-Path $app 'runtime/python/python.exe') -I scripts/check_long_paths_0160_windows.py --app-root $app --output-root (Join-Path $env:RUNNER_TEMP 'frozen synthetic check') --report (Join-Path $evidence 'native-long-paths.json') --source-commit $env:SOURCE_COMMIT --asset-sha256 $env:STARTER_SHA256
             if ($LASTEXITCODE -ne 0) { throw 'Frozen 0.16.0 long-path scientific regression failed.' }
           } finally {
             if ($hadValue) {
