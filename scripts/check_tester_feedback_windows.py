@@ -8,6 +8,7 @@ are bounded observations, not proof of zero flicker on other hardware.
 from __future__ import annotations
 
 import argparse
+from contextlib import contextmanager
 import csv
 import ctypes
 import hashlib
@@ -26,7 +27,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from check_batch_windows import NativeList, scientific_truth
 from check_deployment_ui_windows import (Keyboard, failed, finalize_report,
     passed, tree_hashes, unique_button, utc, verify_extracted)
-from check_references_windows import PrivateHost, require, sha256, write_json
+from check_references_windows import PrivateHost, require, sha256, stop_process_tree, write_json
 from check_scroll_frames_windows import DisplayFrames
 from check_ui_patch_windows import PatchUI, clear_focused_edit, inside, pointer_click
 
@@ -36,6 +37,70 @@ LIMITS = [
     'Tree overflow uses explicitly identified test-only packs imported through the normal validated importer; Starter categories are separately observed.',
     'Synthetic Starter batch truth is not a benchmark, clinical validation or biological QC pass threshold.',
 ]
+
+
+class FeedbackUI(PatchUI):
+    """Recognize only explicitly expected native common dialogs in this gate."""
+    expected_dialog_titles = frozenset()
+
+    @contextmanager
+    def common_dialog(self, title):
+        previous = self.expected_dialog_titles
+        self.expected_dialog_titles = previous | {title}
+        try:
+            yield
+        finally:
+            self.expected_dialog_titles = previous
+
+    def wait(self, phase, predicate, seconds=30):
+        self.progress(phase)
+        deadline = time.monotonic() + seconds
+        while time.monotonic() < deadline:
+            require(self.process.poll() is None, 'Native desktop exited unexpectedly.')
+            unexpected = [handle for handle in self.windows()
+                          if self.label(handle, True) == '#32770' and
+                          self.label(handle) not in self.expected_dialog_titles]
+            require(not unexpected, 'Unexpected native dialog: ' + json.dumps([
+                {'title': self.label(handle), 'controls': self.controls(handle)} for handle in unexpected]))
+            if predicate():
+                return
+            time.sleep(.1)
+        # Preserve displayed pixels without asking the app to repair its paint.
+        if self.main:
+            self.screen_capture('feedback-wait-timeout.bmp', self.bounds(self.main))
+            self.progress(phase + ' timed out', controls=self.controls())
+        raise TimeoutError(phase)
+
+
+@contextmanager
+def observed_desktop(ui, report, scope):
+    """Cleanup cannot replace the first failed assertion with a close timeout."""
+    primary = None
+    try:
+        yield ui
+    except Exception as error:
+        primary = error
+        report.setdefault('primaryFailures', []).append({
+            'scope': scope, 'error': str(error), 'traceback': traceback.format_exc()})
+        try:
+            for index, owner in enumerate(ui.windows()):
+                visible_capture(ui, report, scope + '-failure-%d' % index, owner)
+        except Exception as capture_error:
+            report.setdefault('failureCaptureErrors', []).append(str(capture_error))
+        # Only the gate-owned disposable process is terminated after a failure.
+        # Successful scenarios still require the ordinary clean-close contract.
+        try:
+            stop_process_tree(ui.process)
+        except Exception as cleanup_error:
+            report.setdefault('cleanupErrors', []).append(str(cleanup_error))
+        raise
+    finally:
+        try:
+            ui.close()
+        except Exception as cleanup_error:
+            if primary is None:
+                raise
+            report.setdefault('cleanupErrors', []).append(str(cleanup_error))
 
 
 def validate_identities(args):
@@ -175,7 +240,7 @@ def choose(ui, keys, control, value):
 
 
 def prepare_desktop(root, evidence, report):
-    ui = PatchUI(root, evidence)
+    ui = FeedbackUI(root, evidence)
     report['nativeGUILaunched'] = report['nativeWindowsExecuted'] = True
     require(inside(ui.initial_bounds, ui.initial_work_area), 'Unmodified startup window exceeds work area.')
     report.setdefault('startups', []).append({'bounds': ui.initial_bounds, 'workArea': ui.initial_work_area,
@@ -477,9 +542,10 @@ def methods_and_missing_input(ui, report):
 
 
 def confirm(ui, title):
-    ui.wait(title, lambda: window(ui, title))
-    pointer_click(ui, unique_button(ui, window(ui, title), 'Yes'))
-    ui.wait(title + ' closed', lambda: not window(ui, title))
+    with ui.common_dialog(title):
+        ui.wait(title, lambda: window(ui, title))
+        pointer_click(ui, unique_button(ui, window(ui, title), 'Yes'))
+        ui.wait(title + ' closed', lambda: not window(ui, title))
 
 
 def samples_roundtrip(ui, root, evidence, report):
@@ -540,23 +606,25 @@ def samples_roundtrip(ui, root, evidence, report):
     destination = evidence / 'saved table with spaces.tsv'
     button(ui, owner, 1613)
     picker_title = 'Save a new sample table'
-    ui.wait('native Save As cancellation picker', lambda: window(ui, picker_title))
-    keys.key(0x1B)
-    ui.wait('native Save As cancelled', lambda: not window(ui, picker_title))
+    with ui.common_dialog(picker_title):
+        ui.wait('native Save As cancellation picker', lambda: window(ui, picker_title))
+        keys.key(0x1B)
+        ui.wait('native Save As cancelled', lambda: not window(ui, picker_title))
     require(grid.count() == 1 and grid.text(0) == 'nativeCreated' and not destination.exists(),
             'Cancelling Save As lost the complete editor draft or wrote the target.')
     button(ui, owner, 1613)
-    ui.wait('native Save As picker', lambda: window(ui, picker_title))
-    picker = window(ui, picker_title)
-    keys.key(0x4E, 0x12)  # Alt+N: documented File name field shortcut.
-    filename = keys.focus()
-    require(ui.label(filename, True).lower() == 'edit', 'Save As did not focus its native filename edit.')
-    clear_focused_edit(ui, keys, filename)
-    keys.text(str(destination))
-    ui.wait('actual selected save filename', lambda: ui.label(filename) == str(destination))
-    button(ui, picker, 1)
-    ui.wait('complete new table saved', lambda: not window(ui, picker_title) and destination.is_file()
-            and 'Saved as a new table' in ui.label(ui.child(1616, owner)))
+    with ui.common_dialog(picker_title):
+        ui.wait('native Save As picker', lambda: window(ui, picker_title))
+        picker = window(ui, picker_title)
+        keys.key(0x4E, 0x12)  # Alt+N: documented File name field shortcut.
+        filename = keys.focus()
+        require(ui.label(filename, True).lower() == 'edit', 'Save As did not focus its native filename edit.')
+        clear_focused_edit(ui, keys, filename)
+        keys.text(str(destination))
+        ui.wait('actual selected save filename', lambda: ui.label(filename) == str(destination))
+        button(ui, picker, 1)
+        ui.wait('complete new table saved', lambda: not window(ui, picker_title) and destination.is_file()
+                and 'Saved as a new table' in ui.label(ui.child(1616, owner)))
     with destination.open(encoding='utf-8-sig', newline='') as stream:
         saved = list(csv.DictReader(stream, delimiter='\t'))
     require(saved == [values], 'Saved TSV differs from the complete edited table.')
@@ -595,13 +663,16 @@ def samples_roundtrip(ui, root, evidence, report):
     bad.write_bytes(b'sample_id,read1\nduplicate,a\nduplicate,b\n')
     edit(ui, keys, ui.child(801, samples), str(bad))
     button(ui, samples, 803)
-    ui.wait('failed sample import message', lambda: window(ui, 'Native Workbench'))
-    failure = window(ui, 'Native Workbench')
-    report['rejectedImportMessage'] = '\n'.join(row['text'] for row in ui.controls(failure))
-    visible_capture(ui, report, 'samples-invalid-import', failure)
-    pointer_click(ui, unique_button(ui, failure, 'OK'))
-    ui.wait('failed import returns to existing table', lambda: not window(ui, 'Native Workbench')
-            and ui.user.IsWindowEnabled(ui.child(816, samples)))
+    with ui.common_dialog('Native Workbench'):
+        ui.wait('failed sample import message', lambda: window(ui, 'Native Workbench'))
+        failure = window(ui, 'Native Workbench')
+        report['rejectedImportMessage'] = '\n'.join(row['text'] for row in ui.controls(failure))
+        require(any(word in report['rejectedImportMessage'].lower() for word in ('duplicate', 'unique')),
+                'Import did not explain the deliberately duplicated sample identity.')
+        visible_capture(ui, report, 'samples-invalid-import', failure)
+        pointer_click(ui, unique_button(ui, failure, 'OK'))
+        ui.wait('failed import returns to existing table', lambda: not window(ui, 'Native Workbench')
+                and ui.user.IsWindowEnabled(ui.child(816, samples)))
     require(rows.count() == 1 and rows.text(0) == 'nativeCreated' and sha256(destination) == saved_hash,
             'Failed sample import discarded the previously loaded table or changed its source bytes.')
     passed(report, 'samples-cancel-and-invalid-import',
@@ -688,27 +759,16 @@ def run(args, report):
     require(report['appVersion'] == args.app_version, 'Unexpected candidate application version.')
     original_core = {name: sha256(root / name) for name in ('NativeWorkbench.exe', 'WorkbenchBridge.exe')}
     ui = prepare_desktop(root, evidence, report)
-    try:
+    with observed_desktop(ui, report, 'feedback'):
         samples_blank_access(ui, report)
         run_button_observations(ui, report)
         tree_real_categories(ui, report)
         methods_and_missing_input(ui, report)
         samples_roundtrip(ui, root, evidence, report)
-    except Exception:
-        for index, owner in enumerate(ui.windows()):
-            visible_capture(ui, report, 'feedback-failure-%d' % index, owner)
-        raise
-    finally:
-        ui.close()
     import_overflow(root, evidence, report)
     ui = prepare_desktop(root, evidence, report)
-    try:
+    with observed_desktop(ui, report, 'overflow'):
         tree_overflow(ui, report)
-    except Exception:
-        visible_capture(ui, report, 'overflow-failure')
-        raise
-    finally:
-        ui.close()
     require({name: sha256(root / name) for name in original_core} == original_core,
             'Gate modified packaged application executables.')
     report['archive']['postGateExtractedFilesVerified'] = verify_extracted(args.starter_archive, root)

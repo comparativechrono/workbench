@@ -24,6 +24,47 @@ def paint(raw, x, y, width, height, color, stride=40):
 
 
 class FeedbackGateTests(unittest.TestCase):
+    def fake_ui(self, title='Remove sample row'):
+        ui = gate.FeedbackUI.__new__(gate.FeedbackUI)
+        ui.process = SimpleNamespace(poll=lambda: None)
+        ui.progress = lambda *args, **kwargs: None
+        ui.windows = lambda: [4]
+        ui.label = lambda handle, klass=False: '#32770' if klass else title
+        ui.controls = lambda owner: []
+        return ui
+
+    def test_expected_native_confirmation_is_allowed_only_in_its_context(self):
+        ui = self.fake_ui()
+        with ui.common_dialog('Remove sample row'):
+            ui.wait('expected confirmation', lambda: True)
+        with self.assertRaisesRegex(AssertionError, 'Unexpected native dialog'):
+            ui.wait('unplanned confirmation', lambda: True)
+
+    def test_allowing_delete_does_not_allow_another_native_error(self):
+        ui = self.fake_ui('Unexpected application failure')
+        with ui.common_dialog('Remove sample row'):
+            with self.assertRaisesRegex(AssertionError, 'Unexpected application failure'):
+                ui.wait('expected confirmation', lambda: True)
+
+    def test_failed_dialog_scope_does_not_leave_future_dialogs_permitted(self):
+        ui = self.fake_ui()
+        with self.assertRaises(ValueError):
+            with ui.common_dialog('Remove sample row'):
+                raise ValueError('failed interaction')
+        self.assertEqual(ui.expected_dialog_titles, frozenset())
+
+    def test_primary_assertion_is_retained_if_cleanup_also_fails(self):
+        ui = SimpleNamespace(windows=lambda: [], process=object(),
+                             close=lambda: (_ for _ in ()).throw(RuntimeError('cleanup failed')))
+        report = {}
+        with patch.object(gate, 'stop_process_tree') as stop:
+            with self.assertRaisesRegex(AssertionError, 'original failure'):
+                with gate.observed_desktop(ui, report, 'scenario'):
+                    raise AssertionError('original failure')
+            stop.assert_called_once_with(ui.process)
+        self.assertEqual(report['primaryFailures'][0]['error'], 'original failure')
+        self.assertEqual(report['cleanupErrors'], ['cleanup failed'])
+
     def test_reported_black_rectangle_is_rejected_by_pixel_oracle(self):
         raw = pixels()
         paint(raw, 8, 8, 24, 16, (0, 0, 0, 99))
