@@ -1,6 +1,24 @@
 # Native Workbench knowledge base
 
-**Active development, 2026-10-09:**
+**Unpublished review candidate, 2026-10-09:**
+[Draft PR #15](https://github.com/comparativechrono/workbench/pull/15) is ready for
+review with the **0.16.1** keyboard and narrow-display patch, stacked on the
+unmerged deployment companion PR #14. Application source is
+`8938e709b041106e8a46e1447383e8e9ba3e0cb9`; final validator source is
+`69022689e686b2cacdc98dbdbef728e664941e67`.
+
+The candidate passed **141 source tests and 84 native checks per Windows path**,
+plus archive/source verification and settled 96-DPI visual review. The final
+validator repeated 19 checks per path on unchanged archives, within the same
+84-check scope. See the [handover](ui-patch-0.16.1-handover.md),
+[native evidence](evidence/ui-patch-0.16.1-native-validation-2026-10-09.json) and
+[visual review](evidence/ui-patch-0.16.1-visual-review-2026-10-09.json) for exact
+identities, retained attempts and the corrected screenshot interpretation.
+Immediate resize frames can retain old geometry; this does not establish
+zero flicker, high-DPI or representative-PC acceptance. Nothing is merged or
+released; published **0.16.0** remains unchanged.
+
+**Deployment companion baseline:**
 [Draft PR #14](https://github.com/comparativechrono/workbench/pull/14) contains the
 unpublished Windows acceptance and deployment companion for unchanged published
 **0.16.0**. Implementation, exact-kit observations and 54 screenshot reviews are
@@ -14,9 +32,9 @@ Start with the [companion handover](deployment-acceptance-handover.md),
 [tester guide](../docs/deployment-acceptance.md) and
 [IT review guide](../docs/institutional-deployment.md). All 10 manual checks remain
 untested; representative PCs, high DPI, multiple monitors, physical trackpads,
-managed-machine approval and signing remain external work. Next application work
-is a separately versioned keyboard focus/Escape fix and narrow-display handling
-or an explicit supported-display boundary. Benchmarking is separate; scientific
+managed-machine approval and signing remain external work. Its failed keyboard
+and narrow-display observations prompted the 0.16.1 review candidate above;
+the companion evidence remains unchanged. Benchmarking is separate; scientific
 Linux CWL and SDK/build recovery remain later sets. The published record below is
 unchanged.
 
@@ -132,6 +150,7 @@ verified all 12 assets, five ZIP CRCs and three checksum manifests. See the
 | --- | --- |
 | [Purpose and decisions](purpose-and-decisions.md) | Who is this for, what approach was chosen, and what must not be lost? |
 | [Current state](current-state.md) | What is released, tested, limited or unfinished? |
+| [Native UI patch 0.16.1](ui-patch-0.16.1-handover.md) | What changed after the deployment checks, and which exact candidate evidence and limits apply? |
 | [Architecture](architecture.md) | Where does each responsibility live, and how does a run work? |
 | [Native UI development](native-ui.md) | How do the three panes, standalone tools and workflow canvas work, and what remains to validate? |
 | [0.9.0 handover](cwl-dag-icon-0.9.0-handover.md) | Which CWL/DAG/icon bytes were accepted and published, and what passed? |

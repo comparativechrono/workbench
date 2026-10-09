@@ -1,0 +1,277 @@
+{
+  "schema": 1,
+  "recordedOn": "2026-10-09",
+  "kind": "native UI patch candidate attempt history",
+  "attempts": [
+    {
+      "attempt": 1,
+      "sourceCommit": "5e2bc368c5ea869ff794ad9d90a40480b6fd06fe",
+      "gateCommit": "5e2bc368c5ea869ff794ad9d90a40480b6fd06fe",
+      "runId": 37986650814,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37986650814",
+      "conclusion": "failure",
+      "candidateDeliveredAsAccepted": false,
+      "sourceTests": {
+        "pythonSuites": 13,
+        "passed": 141,
+        "failed": 0,
+        "skipped": 0,
+        "cppJson": "passed",
+        "strictNativeBuilds": 3
+      },
+      "paths": {
+        "ordinary": {
+          "patchPassed": 11,
+          "patchFailed": 2,
+          "failedScenarios": [
+            {
+              "id": "fresh-desktop-incomplete",
+              "status": "failed",
+              "observedAt": "2026-10-09T20:25:34.186661Z",
+              "note": "Command '['D:\\\\a\\\\_temp\\\\ordinary\\\\patch\\\\native-workbench\\\\NativeWorkbench.exe']' timed out after 30 seconds"
+            },
+            {
+              "id": "upgraded-desktop-incomplete",
+              "status": "failed",
+              "observedAt": "2026-10-09T20:25:35.075797Z",
+              "note": "Missing fixed control: 114"
+            }
+          ],
+          "startupBounds": {
+            "fresh": {
+              "windowBounds": [
+                0,
+                0,
+                1024,
+                728
+              ],
+              "workArea": [
+                0,
+                0,
+                1024,
+                728
+              ],
+              "capturedBeforeDriverResize": true
+            },
+            "upgraded": {
+              "windowBounds": [
+                0,
+                0,
+                1024,
+                728
+              ],
+              "workArea": [
+                0,
+                0,
+                1024,
+                728
+              ],
+              "capturedBeforeDriverResize": true
+            }
+          },
+          "otherScopes": {
+            "curated": 11,
+            "workspace": 32,
+            "referenceManagement": 10,
+            "resultsReplayDagIcon": 9,
+            "scrollPanels": 3
+          },
+          "configuredSkips": 0,
+          "evidenceArtifact": {
+            "id": 11643856040,
+            "url": "https://github.com/comparativechrono/workbench/actions/runs/37986650814/artifacts/11643856040",
+            "sha256": "0ebab09fd9f2b254f07fde054f0be9302ffa137171c9ee15eac3d61ce0253aac"
+          },
+          "reportSha256": "8dbb2dd367ec11e9c19ecf71e58c49539d611d2e3819d2d88c27a8d9f8f9bb23"
+        },
+        "spaces": {
+          "patchPassed": 10,
+          "patchFailed": 2,
+          "failedScenarios": [
+            {
+              "id": "fresh-desktop-incomplete",
+              "status": "failed",
+              "observedAt": "2026-10-09T20:25:31.303530Z",
+              "note": "Command '['D:\\\\a\\\\_temp\\\\path with spaces\\\\patch\\\\native-workbench\\\\NativeWorkbench.exe']' timed out after 30 seconds"
+            },
+            {
+              "id": "upgraded-desktop-incomplete",
+              "status": "failed",
+              "observedAt": "2026-10-09T20:26:02.364363Z",
+              "note": "keyboard filter cleared"
+            }
+          ],
+          "startupBounds": {
+            "fresh": {
+              "windowBounds": [
+                0,
+                0,
+                1024,
+                728
+              ],
+              "workArea": [
+                0,
+                0,
+                1024,
+                728
+              ],
+              "capturedBeforeDriverResize": true
+            },
+            "upgraded": {
+              "windowBounds": [
+                0,
+                0,
+                1024,
+                728
+              ],
+              "workArea": [
+                0,
+                0,
+                1024,
+                728
+              ],
+              "capturedBeforeDriverResize": true
+            }
+          },
+          "otherScopes": {
+            "curated": 11,
+            "workspace": 32,
+            "referenceManagement": 10,
+            "resultsReplayDagIcon": 9,
+            "scrollPanels": 3
+          },
+          "configuredSkips": 0,
+          "evidenceArtifact": {
+            "id": 11643562317,
+            "url": "https://github.com/comparativechrono/workbench/actions/runs/37986650814/artifacts/11643562317",
+            "sha256": "f56beb667c6b4cc79a1de60eedd1de482316bb57c6c902af50a3e7e7c90360e1"
+          },
+          "reportSha256": "77c10095c3b81ae840012f3d4d26b1af6149071ae55126b938a84126efa37a0c"
+        }
+      },
+      "remediation": [
+        "Correct layout IDs from hidden Cancel/Back (114/116) to visible Run/Readiness (113/115).",
+        "Wait for enabled editing controls after the asynchronous setup dismissal reply before closing the fresh app. Persisted setup state alone is insufficient.",
+        "Replace unobserved Ctrl+A/Backspace assumption with real Home/Shift+End, observed EM_GETSEL endpoints and observed deletion. No pointer fallback or direct text mutation."
+      ],
+      "limits": [
+        "Neither first path reached the new Results keyboard Search/Escape assertions.",
+        "The spaced-path filter-clear timeout left query text reference; focus and selection were not recorded, so its root cause is unproven.",
+        "Fresh close timed out while setup dismissal reply could still be pending; native WM_CLOSE confirms cancellation in that state. No cancellation dialog capture survived cleanup."
+      ],
+      "preservedEvidence": [
+        "ui-patch-0.16.1-attempt-1-ordinary.json",
+        "ui-patch-0.16.1-attempt-1-spaces.json",
+        "ui-patch-0.16.1-archive-audit-2026-10-09-attempt-1.json",
+        "ui-patch-0.16.1-transport-2026-10-09-attempt-1.json",
+        "ui-patch-0.16.1-build-provenance-2026-10-09-attempt-1.json"
+      ]
+    },
+    {
+      "attempt": 2,
+      "sourceCommit": "473428671cbb75505c163a9a761caf84e73dfdd9",
+      "gateCommit": "473428671cbb75505c163a9a761caf84e73dfdd9",
+      "runId": 37987546291,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37987546291",
+      "conclusion": "failure",
+      "candidateDeliveredAsAccepted": false,
+      "sourceTests": {
+        "pythonSuites": 13,
+        "passed": 141,
+        "failed": 0,
+        "skipped": 0,
+        "cppJson": "passed",
+        "strictNativeBuilds": 3
+      },
+      "paths": {
+        "ordinary": {
+          "patchPassed": 19,
+          "patchFailed": 0,
+          "failedScenarios": [],
+          "otherScopes": {
+            "curated": 11,
+            "workspace": 32,
+            "referenceManagement": 10,
+            "resultsReplayDagIcon": 9,
+            "scrollPanels": 3
+          },
+          "configuredSkips": 0,
+          "evidenceArtifact": {
+            "id": 11643827296,
+            "url": "https://github.com/comparativechrono/workbench/actions/runs/37987546291/artifacts/11643827296",
+            "sha256": "ad09b359cb486bc8cc5e2952e20c167e42dc4f3c8e37311446c3ec98a25045e2"
+          },
+          "reportSha256": "9a889932ab7d10c1a3cb5a53167d01040e06a6218198c66827ba572bb4843391"
+        },
+        "spaces": {
+          "patchPassed": 11,
+          "patchFailed": 2,
+          "failedScenarios": [
+            {
+              "id": "fresh-desktop-incomplete",
+              "status": "failed",
+              "observedAt": "2026-10-09T20:33:17.215036Z",
+              "note": "Tab advances from library search"
+            },
+            {
+              "id": "upgraded-desktop-incomplete",
+              "status": "failed",
+              "observedAt": "2026-10-09T20:33:48.292330Z",
+              "note": "native keyboard Home places caret at start"
+            }
+          ],
+          "otherScopes": {
+            "curated": 11,
+            "workspace": 32,
+            "referenceManagement": 10,
+            "resultsReplayDagIcon": 9,
+            "scrollPanels": 3
+          },
+          "configuredSkips": 0,
+          "evidenceArtifact": {
+            "id": 11643583954,
+            "url": "https://github.com/comparativechrono/workbench/actions/runs/37987546291/artifacts/11643583954",
+            "sha256": "c87ad7da38c2817fcb2298b4052dae81c2bac8019b366e08339c4cd1cd64fb8c"
+          },
+          "reportSha256": "2b946c55df2d929c26737bc063571009df724fcae95beff3822277bb99421725"
+        }
+      },
+      "remediation": [
+        "Native code review found that periodic read-only queue/status polling disabled focused main editing/navigation controls and could displace Results Search focus. The individual historical timeout causes were not directly captured.",
+        "The next application revision treats only queue/status with no queued actions as nonblocking for main edit and Results availability; all other guards and FIFO serialization remain. Queued actions immediately refresh availability.",
+        "The next native gate samples focus and enabled state for 2.4 seconds on library search, its Tab target and Results Search, without input/refocus, and records failure focus state."
+      ],
+      "limits": [
+        "Ordinary fresh/upgraded empty/populated Results Search and immediate Escape all passed without pointer intervention.",
+        "Both spaced-path desktop scopes timed out before reaching Results. Do not transfer ordinary passes to that path.",
+        "Source-derived smaller-work-area limits remain; this attempt is not high-DPI or representative-machine acceptance."
+      ]
+    },
+    {
+      "attempt": 3,
+      "sourceCommit": "8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+      "gateCommit": "8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+      "runId": 37988570028,
+      "conclusion": "success",
+      "sourcePassed": 141,
+      "nativePassedPerPath": 84,
+      "nativeFailedPerPath": 0,
+      "configuredSkips": 0,
+      "nativeEvidence": "ui-patch-0.16.1-native-validation-2026-10-09.json",
+      "archiveEvidence": "ui-patch-0.16.1-archive-audit-2026-10-09.json",
+      "publicationStatus": "unpublished review candidate"
+    }
+  ],
+  "frozenValidatorRecheck": {
+    "sourceCommit": "8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+    "gateCommit": "69022689e686b2cacdc98dbdbef728e664941e67",
+    "runId": 37989535317,
+    "conclusion": "success",
+    "repeatedChecksPerPath": 19,
+    "failures": 0,
+    "skips": 0,
+    "archivesRebuilt": false,
+    "purpose": "Observe visible desktop resize frames before PrintWindow and after passive delays; repeat the same updater and keyboard checks.",
+    "originalVisualInterpretation": "An initial full-frame missing-control interpretation was incorrect; byte-derived crops from the original captures show both controls. Corrected receipts retain this review correction."
+  }
+}

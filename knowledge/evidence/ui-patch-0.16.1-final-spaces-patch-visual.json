@@ -1,0 +1,788 @@
+{
+  "schema": 1,
+  "kind": "native-ui-patch-visual-review",
+  "reviewedAt": "2026-10-09T21:00:34.712767+00:00",
+  "case": "path with spaces",
+  "runId": 37989535317,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37989535317",
+  "appVersion": "0.16.1",
+  "sourceCommit": "8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+  "gateCommit": "69022689e686b2cacdc98dbdbef728e664941e67",
+  "archives": {
+    "starter": {
+      "name": "native-workbench-0.16.1-starter-windows.zip",
+      "bytes": 17847594,
+      "sha256": "7dfed53de2279f51deaea405dbfd29b36cddb733e5a20c43b3112f27a7728a8e"
+    },
+    "baseline": {
+      "name": "baseline-0.16.0.zip",
+      "bytes": 17846873,
+      "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+    },
+    "update": {
+      "name": "native-workbench-0.16.1-update-from-0.16.0.zip",
+      "bytes": 12982946,
+      "sha256": "f2dc435495f43d837e80837f3ba83ff7b6963294219d5bc88bc8fb0e5d82effd"
+    }
+  },
+  "nativeReport": {
+    "path": "patch/native-ui-patch.json",
+    "sha256": "8ca213093e3ca8830e3918bbff7e2f4582a1481b745a5a92b1252c950558db80",
+    "passed": 19,
+    "failed": 0,
+    "success": true
+  },
+  "captureCount": 41,
+  "uniqueCaptureHashes": 23,
+  "individuallyInspectedFiles": 24,
+  "duplicateFilesCoveredByHashEquality": 17,
+  "allCaptureHashesAndDimensionsMatchReport": true,
+  "allRenderedPngPixelsMatchBmp": true,
+  "observedDpi": [
+    96
+  ],
+  "actualWindowSizes": [
+    [
+      960,
+      680
+    ],
+    [
+      1024,
+      728
+    ]
+  ],
+  "summary": {
+    "settledLayoutAcceptable": true,
+    "observedInitialResizeTransient": true,
+    "zeroFlickerClaim": false,
+    "finding": "Fresh tool immediate visible resize frame retains preceding geometry; it settles by the 250ms sample. All later tool samples and all workflow/upgraded visible samples show the expected fixed controls. General settings and Readiness are present in all identical fresh workflow samples, independently confirmed in crops from source pixels. No persistent clipping or missing control was found in the settled reviewed frames."
+  },
+  "visibleFrameSeries": [
+    {
+      "series": "fresh-tool-960",
+      "immediate": "initial resize transient",
+      "settledFromMilliseconds": 250,
+      "laterThreeFramesIdentical": true
+    },
+    {
+      "series": "fresh-workflow-960",
+      "allFourFramesIdentical": true,
+      "headingAndReadinessPresent": true
+    },
+    {
+      "series": "upgraded-tool-960",
+      "allFourFramesIdentical": true
+    },
+    {
+      "series": "upgraded-workflow-960",
+      "allFourFramesIdentical": true,
+      "headingAndReadinessPresent": true
+    }
+  ],
+  "limits": [
+    "Finite static samples do not establish zero flicker or exclude between-frame transients.",
+    "Visible frames were captured before PrintWindow at immediate, 250ms, 750ms and 1250ms targets without pointer/key input or forced repaint during the series.",
+    "Requested 1280x900 was clamped to actual 1024x728; no 1280-pixel desktop claim.",
+    "Only the hosted 96-DPI display is covered; high-DPI, multiple monitors, physical trackpads and representative-PC acceptance remain separate.",
+    "This review covers only the 41 patch captures for the spaced-path recheck; it does not re-review other regression suites or erase earlier observations."
+  ],
+  "files": [
+    {
+      "path": "patch/fresh-first-open-starter.bmp",
+      "sha256": "8340249724a191191909cbaa3700aa5cd8b95ea201ea6867de664dbe05cddae6",
+      "bytes": 2649654,
+      "width": 920,
+      "height": 720,
+      "dpi": 96,
+      "method": "PrintWindow via NativeUI.capture",
+      "reviewMethod": "individual lossless PNG inspection",
+      "reviewedEquivalent": "patch/fresh-first-open-starter.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Starter radio selected; installed-pack count and zero-byte additional download visible; setup instructions and Use Workbench fit."
+      ]
+    },
+    {
+      "path": "patch/fresh-results-empty.bmp",
+      "sha256": "feb6d244e84713edf729775ca34a1e7ffadb2f75d224848a687ad9098ed68e57",
+      "bytes": 2556854,
+      "width": 940,
+      "height": 680,
+      "dpi": 96,
+      "method": "PrintWindow via NativeUI.capture",
+      "reviewMethod": "individual lossless PNG inspection",
+      "reviewedEquivalent": "patch/fresh-results-empty.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "No-match explanation, selected query, Search and Close are readable; empty-result actions visibly disabled."
+      ]
+    },
+    {
+      "path": "patch/fresh-results-populated.bmp",
+      "sha256": "45e76ccfe54f4fa61c08a2f6ec662af7ad035e2d641767a9d528bd37fd70e610",
+      "bytes": 2556854,
+      "width": 940,
+      "height": 680,
+      "dpi": 96,
+      "method": "PrintWindow via NativeUI.capture",
+      "reviewMethod": "individual lossless PNG inspection",
+      "reviewedEquivalent": "patch/fresh-results-populated.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Completed SAMtools reference result, provenance/evidence limitations, and explicit no-QC-pass/fail text are readable; Tools column truncation and details scrolling are intentional."
+      ]
+    },
+    {
+      "path": "patch/fresh-tool-1024x728.bmp",
+      "sha256": "c3a8c6e1874e94ae365bc91c00fb7d92863977f5e092ebac0364ff2c55a03257",
+      "bytes": 2981942,
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "method": "PrintWindow via NativeUI.capture",
+      "reviewMethod": "individual lossless PNG inspection",
+      "reviewedEquivalent": "patch/fresh-tool-1024x728.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Visible text and fixed controls fit the captured window; overflow in editable paths and scrollable content remains within its viewport."
+      ]
+    },
+    {
+      "path": "patch/fresh-tool-1280x900.bmp",
+      "sha256": "c3a8c6e1874e94ae365bc91c00fb7d92863977f5e092ebac0364ff2c55a03257",
+      "bytes": 2981942,
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "method": "PrintWindow via NativeUI.capture",
+      "reviewMethod": "SHA-256-identical to individually inspected frame",
+      "reviewedEquivalent": "patch/fresh-tool-1024x728.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Visible text and fixed controls fit the captured window; overflow in editable paths and scrollable content remains within its viewport."
+      ]
+    },
+    {
+      "path": "patch/fresh-tool-960-visible-1250ms.bmp",
+      "sha256": "59b93253a791946e87e43fc2b589e8765f389aaa02b78daf8eaaa1142d80425b",
+      "bytes": 2611254,
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "method": "visible desktop BitBlt before PrintWindow",
+      "reviewMethod": "SHA-256-identical to individually inspected frame",
+      "reviewedEquivalent": "patch/fresh-tool-960-visible-250ms.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Visible text and fixed controls fit the captured window; overflow in editable paths and scrollable content remains within its viewport."
+      ]
+    },
+    {
+      "path": "patch/fresh-tool-960-visible-250ms.bmp",
+      "sha256": "59b93253a791946e87e43fc2b589e8765f389aaa02b78daf8eaaa1142d80425b",
+      "bytes": 2611254,
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "method": "visible desktop BitBlt before PrintWindow",
+      "reviewMethod": "individual lossless PNG inspection",
+      "reviewedEquivalent": "patch/fresh-tool-960-visible-250ms.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Visible text and fixed controls fit the captured window; overflow in editable paths and scrollable content remains within its viewport."
+      ]
+    },
+    {
+      "path": "patch/fresh-tool-960-visible-750ms.bmp",
+      "sha256": "59b93253a791946e87e43fc2b589e8765f389aaa02b78daf8eaaa1142d80425b",
+      "bytes": 2611254,
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "method": "visible desktop BitBlt before PrintWindow",
+      "reviewMethod": "SHA-256-identical to individually inspected frame",
+      "reviewedEquivalent": "patch/fresh-tool-960-visible-250ms.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Visible text and fixed controls fit the captured window; overflow in editable paths and scrollable content remains within its viewport."
+      ]
+    },
+    {
+      "path": "patch/fresh-tool-960-visible-immediate.bmp",
+      "sha256": "a56ecd68cfdaff5652e2e71990218164261062a5af4bf083e04f866ee51ef04d",
+      "bytes": 2611254,
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "method": "visible desktop BitBlt before PrintWindow",
+      "reviewMethod": "individual lossless PNG inspection",
+      "reviewedEquivalent": "patch/fresh-tool-960-visible-immediate.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "initial-resize-transient-observed",
+      "findings": [
+        "Immediate visible frame retains part of the preceding wider/taller layout, clipping right and footer content during resize; the 250/750/1250ms frames settle without input or forced redraw."
+      ]
+    },
+    {
+      "path": "patch/fresh-tool-960x680.bmp",
+      "sha256": "de1f7ac665e3f43e866b4575092b2b36a6ab19aa83d2ba6995d2f5031b6f1ff3",
+      "bytes": 2611254,
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "method": "PrintWindow via NativeUI.capture",
+      "reviewMethod": "individual lossless PNG inspection",
+      "reviewedEquivalent": "patch/fresh-tool-960x680.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Visible text and fixed controls fit the captured window; overflow in editable paths and scrollable content remains within its viewport."
+      ]
+    },
+    {
+      "path": "patch/fresh-workflow-1024x728.bmp",
+      "sha256": "8f4bc58a259358b4395f570396d5f38758e12b7fc952bb37afcc3015fb2c28ff",
+      "bytes": 2981942,
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "method": "PrintWindow via NativeUI.capture",
+      "reviewMethod": "individual lossless PNG inspection",
+      "reviewedEquivalent": "patch/fresh-workflow-1024x728.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Visible text and fixed controls fit the captured window; overflow in editable paths and scrollable content remains within its viewport."
+      ]
+    },
+    {
+      "path": "patch/fresh-workflow-1280x900.bmp",
+      "sha256": "8f4bc58a259358b4395f570396d5f38758e12b7fc952bb37afcc3015fb2c28ff",
+      "bytes": 2981942,
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "method": "PrintWindow via NativeUI.capture",
+      "reviewMethod": "SHA-256-identical to individually inspected frame",
+      "reviewedEquivalent": "patch/fresh-workflow-1024x728.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Visible text and fixed controls fit the captured window; overflow in editable paths and scrollable content remains within its viewport."
+      ]
+    },
+    {
+      "path": "patch/fresh-workflow-960-visible-1250ms.bmp",
+      "sha256": "69ea1fa93f20ad51526fb97f6ff6b8a19e81866392d6b65fd1ba4658d481d0d4",
+      "bytes": 2611254,
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "method": "visible desktop BitBlt before PrintWindow",
+      "reviewMethod": "individual lossless PNG inspection",
+      "reviewedEquivalent": "patch/fresh-workflow-960-visible-1250ms.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "General settings heading and Readiness button are present, as are navigation, workflow save/load and zoom/footer controls; scrollable panel content remains bounded."
+      ]
+    },
+    {
+      "path": "patch/fresh-workflow-960-visible-250ms.bmp",
+      "sha256": "69ea1fa93f20ad51526fb97f6ff6b8a19e81866392d6b65fd1ba4658d481d0d4",
+      "bytes": 2611254,
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "method": "visible desktop BitBlt before PrintWindow",
+      "reviewMethod": "SHA-256-identical to individually inspected frame",
+      "reviewedEquivalent": "patch/fresh-workflow-960-visible-1250ms.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "General settings heading and Readiness button are present, as are navigation, workflow save/load and zoom/footer controls; scrollable panel content remains bounded."
+      ]
+    },
+    {
+      "path": "patch/fresh-workflow-960-visible-750ms.bmp",
+      "sha256": "69ea1fa93f20ad51526fb97f6ff6b8a19e81866392d6b65fd1ba4658d481d0d4",
+      "bytes": 2611254,
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "method": "visible desktop BitBlt before PrintWindow",
+      "reviewMethod": "SHA-256-identical to individually inspected frame",
+      "reviewedEquivalent": "patch/fresh-workflow-960-visible-1250ms.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "General settings heading and Readiness button are present, as are navigation, workflow save/load and zoom/footer controls; scrollable panel content remains bounded."
+      ]
+    },
+    {
+      "path": "patch/fresh-workflow-960-visible-immediate.bmp",
+      "sha256": "69ea1fa93f20ad51526fb97f6ff6b8a19e81866392d6b65fd1ba4658d481d0d4",
+      "bytes": 2611254,
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "method": "visible desktop BitBlt before PrintWindow",
+      "reviewMethod": "individual lossless PNG inspection",
+      "reviewedEquivalent": "patch/fresh-workflow-960-visible-immediate.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "General settings heading and Readiness button are present, as are navigation, workflow save/load and zoom/footer controls; scrollable panel content remains bounded."
+      ]
+    },
+    {
+      "path": "patch/fresh-workflow-960x680.bmp",
+      "sha256": "e75a9395e87003a4c22ca3ae8fdbef7c81cff65cd69208e4544bf1537d713f6b",
+      "bytes": 2611254,
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "method": "PrintWindow via NativeUI.capture",
+      "reviewMethod": "individual lossless PNG inspection",
+      "reviewedEquivalent": "patch/fresh-workflow-960x680.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "General settings heading and Readiness button are present, as are navigation, workflow save/load and zoom/footer controls; scrollable panel content remains bounded."
+      ]
+    },
+    {
+      "path": "patch/updater-cancel-picker.bmp",
+      "sha256": "3d59014a88c9d07cd265c9a315c024a1c344e6802c88b82ea3e7397203e77718",
+      "bytes": 1200054,
+      "width": 625,
+      "height": 480,
+      "dpi": 96,
+      "method": "PrintWindow via NativeUI.capture",
+      "reviewMethod": "individual lossless PNG inspection",
+      "reviewedEquivalent": "patch/updater-cancel-picker.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Native folder-picker or message text and action controls are legible; folder columns and breadcrumbs use the native scrolling/truncation behavior."
+      ]
+    },
+    {
+      "path": "patch/updater-install-picker.bmp",
+      "sha256": "c7e4fbe60b83d868d66d3feca4f6da9f2df40401ec8224377faffa46869ce87f",
+      "bytes": 1200054,
+      "width": 625,
+      "height": 480,
+      "dpi": 96,
+      "method": "PrintWindow via NativeUI.capture",
+      "reviewMethod": "individual lossless PNG inspection",
+      "reviewedEquivalent": "patch/updater-install-picker.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Native folder-picker or message text and action controls are legible; folder columns and breadcrumbs use the native scrolling/truncation behavior."
+      ]
+    },
+    {
+      "path": "patch/updater-install-success.bmp",
+      "sha256": "2357dc7e12a5d30970a335f342ce658d3a76ceb1fbae7c66d2eed89c55b174ef",
+      "bytes": 290034,
+      "width": 405,
+      "height": 179,
+      "dpi": 96,
+      "method": "PrintWindow via NativeUI.capture",
+      "reviewMethod": "individual lossless PNG inspection",
+      "reviewedEquivalent": "patch/updater-install-success.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Native folder-picker or message text and action controls are legible; folder columns and breadcrumbs use the native scrolling/truncation behavior."
+      ]
+    },
+    {
+      "path": "patch/updater-invalid-picker.bmp",
+      "sha256": "46221868a5cab1290bceab6ddf41a0ca09d9ea98f5494c4407b335c5e2db28fa",
+      "bytes": 1200054,
+      "width": 625,
+      "height": 480,
+      "dpi": 96,
+      "method": "PrintWindow via NativeUI.capture",
+      "reviewMethod": "individual lossless PNG inspection",
+      "reviewedEquivalent": "patch/updater-invalid-picker.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Native folder-picker or message text and action controls are legible; folder columns and breadcrumbs use the native scrolling/truncation behavior."
+      ]
+    },
+    {
+      "path": "patch/updater-invalid-retry-picker.bmp",
+      "sha256": "c7e4fbe60b83d868d66d3feca4f6da9f2df40401ec8224377faffa46869ce87f",
+      "bytes": 1200054,
+      "width": 625,
+      "height": 480,
+      "dpi": 96,
+      "method": "PrintWindow via NativeUI.capture",
+      "reviewMethod": "SHA-256-identical to individually inspected frame",
+      "reviewedEquivalent": "patch/updater-install-picker.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Native folder-picker or message text and action controls are legible; folder columns and breadcrumbs use the native scrolling/truncation behavior."
+      ]
+    },
+    {
+      "path": "patch/updater-invalid-warning.bmp",
+      "sha256": "0e52f8bac762d6f7e77dcdc7c9152b4f1f5f1435cc6a04bceb9817e25b028381",
+      "bytes": 301878,
+      "width": 393,
+      "height": 192,
+      "dpi": 96,
+      "method": "PrintWindow via NativeUI.capture",
+      "reviewMethod": "individual lossless PNG inspection",
+      "reviewedEquivalent": "patch/updater-invalid-warning.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Native folder-picker or message text and action controls are legible; folder columns and breadcrumbs use the native scrolling/truncation behavior."
+      ]
+    },
+    {
+      "path": "patch/updater-repeat-picker.bmp",
+      "sha256": "0c2c55b85a834a0f3ca40a160ea5ca8344fa08e6ac187bce1f495b4e66f1bb4c",
+      "bytes": 1200054,
+      "width": 625,
+      "height": 480,
+      "dpi": 96,
+      "method": "PrintWindow via NativeUI.capture",
+      "reviewMethod": "individual lossless PNG inspection",
+      "reviewedEquivalent": "patch/updater-repeat-picker.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Native folder-picker or message text and action controls are legible; folder columns and breadcrumbs use the native scrolling/truncation behavior."
+      ]
+    },
+    {
+      "path": "patch/updater-repeat-success.bmp",
+      "sha256": "2357dc7e12a5d30970a335f342ce658d3a76ceb1fbae7c66d2eed89c55b174ef",
+      "bytes": 290034,
+      "width": 405,
+      "height": 179,
+      "dpi": 96,
+      "method": "PrintWindow via NativeUI.capture",
+      "reviewMethod": "SHA-256-identical to individually inspected frame",
+      "reviewedEquivalent": "patch/updater-install-success.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Native folder-picker or message text and action controls are legible; folder columns and breadcrumbs use the native scrolling/truncation behavior."
+      ]
+    },
+    {
+      "path": "patch/upgraded-results-empty.bmp",
+      "sha256": "feb6d244e84713edf729775ca34a1e7ffadb2f75d224848a687ad9098ed68e57",
+      "bytes": 2556854,
+      "width": 940,
+      "height": 680,
+      "dpi": 96,
+      "method": "PrintWindow via NativeUI.capture",
+      "reviewMethod": "SHA-256-identical to individually inspected frame",
+      "reviewedEquivalent": "patch/fresh-results-empty.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "No-match explanation, selected query, Search and Close are readable; empty-result actions visibly disabled."
+      ]
+    },
+    {
+      "path": "patch/upgraded-results-populated.bmp",
+      "sha256": "1514c00bb92f53b1a24cad62a9df2dc51988473af0cf019f2c7f309ceed54d3c",
+      "bytes": 2556854,
+      "width": 940,
+      "height": 680,
+      "dpi": 96,
+      "method": "PrintWindow via NativeUI.capture",
+      "reviewMethod": "individual lossless PNG inspection",
+      "reviewedEquivalent": "patch/upgraded-results-populated.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Completed SAMtools reference result, provenance/evidence limitations, and explicit no-QC-pass/fail text are readable; Tools column truncation and details scrolling are intentional."
+      ]
+    },
+    {
+      "path": "patch/upgraded-tool-1024x728.bmp",
+      "sha256": "664dd2620da7b8e035bcab1ce9201bdfbaad21846cba19af63dcea1d9f3fd933",
+      "bytes": 2981942,
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "method": "PrintWindow via NativeUI.capture",
+      "reviewMethod": "individual lossless PNG inspection",
+      "reviewedEquivalent": "patch/upgraded-tool-1024x728.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Visible text and fixed controls fit the captured window; overflow in editable paths and scrollable content remains within its viewport."
+      ]
+    },
+    {
+      "path": "patch/upgraded-tool-1280x900.bmp",
+      "sha256": "664dd2620da7b8e035bcab1ce9201bdfbaad21846cba19af63dcea1d9f3fd933",
+      "bytes": 2981942,
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "method": "PrintWindow via NativeUI.capture",
+      "reviewMethod": "SHA-256-identical to individually inspected frame",
+      "reviewedEquivalent": "patch/upgraded-tool-1024x728.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Visible text and fixed controls fit the captured window; overflow in editable paths and scrollable content remains within its viewport."
+      ]
+    },
+    {
+      "path": "patch/upgraded-tool-960-visible-1250ms.bmp",
+      "sha256": "230ca62ee16e4595b0dedae34b3f575bf187d5e0221a94da1ed051aad931d005",
+      "bytes": 2611254,
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "method": "visible desktop BitBlt before PrintWindow",
+      "reviewMethod": "SHA-256-identical to individually inspected frame",
+      "reviewedEquivalent": "patch/upgraded-tool-960-visible-immediate.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Visible text and fixed controls fit the captured window; overflow in editable paths and scrollable content remains within its viewport."
+      ]
+    },
+    {
+      "path": "patch/upgraded-tool-960-visible-250ms.bmp",
+      "sha256": "230ca62ee16e4595b0dedae34b3f575bf187d5e0221a94da1ed051aad931d005",
+      "bytes": 2611254,
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "method": "visible desktop BitBlt before PrintWindow",
+      "reviewMethod": "SHA-256-identical to individually inspected frame",
+      "reviewedEquivalent": "patch/upgraded-tool-960-visible-immediate.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Visible text and fixed controls fit the captured window; overflow in editable paths and scrollable content remains within its viewport."
+      ]
+    },
+    {
+      "path": "patch/upgraded-tool-960-visible-750ms.bmp",
+      "sha256": "230ca62ee16e4595b0dedae34b3f575bf187d5e0221a94da1ed051aad931d005",
+      "bytes": 2611254,
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "method": "visible desktop BitBlt before PrintWindow",
+      "reviewMethod": "SHA-256-identical to individually inspected frame",
+      "reviewedEquivalent": "patch/upgraded-tool-960-visible-immediate.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Visible text and fixed controls fit the captured window; overflow in editable paths and scrollable content remains within its viewport."
+      ]
+    },
+    {
+      "path": "patch/upgraded-tool-960-visible-immediate.bmp",
+      "sha256": "230ca62ee16e4595b0dedae34b3f575bf187d5e0221a94da1ed051aad931d005",
+      "bytes": 2611254,
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "method": "visible desktop BitBlt before PrintWindow",
+      "reviewMethod": "individual lossless PNG inspection",
+      "reviewedEquivalent": "patch/upgraded-tool-960-visible-immediate.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Visible text and fixed controls fit the captured window; overflow in editable paths and scrollable content remains within its viewport."
+      ]
+    },
+    {
+      "path": "patch/upgraded-tool-960x680.bmp",
+      "sha256": "2ca1d833e18cf971a809bce8fcf3c37e7f7cfff8c947d0318c05158df0545520",
+      "bytes": 2611254,
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "method": "PrintWindow via NativeUI.capture",
+      "reviewMethod": "individual lossless PNG inspection",
+      "reviewedEquivalent": "patch/upgraded-tool-960x680.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Visible text and fixed controls fit the captured window; overflow in editable paths and scrollable content remains within its viewport."
+      ]
+    },
+    {
+      "path": "patch/upgraded-workflow-1024x728.bmp",
+      "sha256": "bf867adca3d445797086b507f621c75e08cb428b1ffc58135b5520ba2fe092ee",
+      "bytes": 2981942,
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "method": "PrintWindow via NativeUI.capture",
+      "reviewMethod": "individual lossless PNG inspection",
+      "reviewedEquivalent": "patch/upgraded-workflow-1024x728.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Visible text and fixed controls fit the captured window; overflow in editable paths and scrollable content remains within its viewport."
+      ]
+    },
+    {
+      "path": "patch/upgraded-workflow-1280x900.bmp",
+      "sha256": "bf867adca3d445797086b507f621c75e08cb428b1ffc58135b5520ba2fe092ee",
+      "bytes": 2981942,
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "method": "PrintWindow via NativeUI.capture",
+      "reviewMethod": "SHA-256-identical to individually inspected frame",
+      "reviewedEquivalent": "patch/upgraded-workflow-1024x728.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "Visible text and fixed controls fit the captured window; overflow in editable paths and scrollable content remains within its viewport."
+      ]
+    },
+    {
+      "path": "patch/upgraded-workflow-960-visible-1250ms.bmp",
+      "sha256": "7b83b022d9c7c2783a7ac2679d0a7bfa6957d06778bbea1ebf732be7f2fe32f0",
+      "bytes": 2611254,
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "method": "visible desktop BitBlt before PrintWindow",
+      "reviewMethod": "SHA-256-identical to individually inspected frame",
+      "reviewedEquivalent": "patch/upgraded-workflow-960-visible-immediate.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "General settings heading and Readiness button are present, as are navigation, workflow save/load and zoom/footer controls; scrollable panel content remains bounded."
+      ]
+    },
+    {
+      "path": "patch/upgraded-workflow-960-visible-250ms.bmp",
+      "sha256": "7b83b022d9c7c2783a7ac2679d0a7bfa6957d06778bbea1ebf732be7f2fe32f0",
+      "bytes": 2611254,
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "method": "visible desktop BitBlt before PrintWindow",
+      "reviewMethod": "SHA-256-identical to individually inspected frame",
+      "reviewedEquivalent": "patch/upgraded-workflow-960-visible-immediate.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "General settings heading and Readiness button are present, as are navigation, workflow save/load and zoom/footer controls; scrollable panel content remains bounded."
+      ]
+    },
+    {
+      "path": "patch/upgraded-workflow-960-visible-750ms.bmp",
+      "sha256": "7b83b022d9c7c2783a7ac2679d0a7bfa6957d06778bbea1ebf732be7f2fe32f0",
+      "bytes": 2611254,
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "method": "visible desktop BitBlt before PrintWindow",
+      "reviewMethod": "SHA-256-identical to individually inspected frame",
+      "reviewedEquivalent": "patch/upgraded-workflow-960-visible-immediate.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "General settings heading and Readiness button are present, as are navigation, workflow save/load and zoom/footer controls; scrollable panel content remains bounded."
+      ]
+    },
+    {
+      "path": "patch/upgraded-workflow-960-visible-immediate.bmp",
+      "sha256": "7b83b022d9c7c2783a7ac2679d0a7bfa6957d06778bbea1ebf732be7f2fe32f0",
+      "bytes": 2611254,
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "method": "visible desktop BitBlt before PrintWindow",
+      "reviewMethod": "individual lossless PNG inspection",
+      "reviewedEquivalent": "patch/upgraded-workflow-960-visible-immediate.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "General settings heading and Readiness button are present, as are navigation, workflow save/load and zoom/footer controls; scrollable panel content remains bounded."
+      ]
+    },
+    {
+      "path": "patch/upgraded-workflow-960x680.bmp",
+      "sha256": "a1658c6a1b75ceaf77793611e19e2dcf76716184072cbcaa131b01e78dc41086",
+      "bytes": 2611254,
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "method": "PrintWindow via NativeUI.capture",
+      "reviewMethod": "individual lossless PNG inspection",
+      "reviewedEquivalent": "patch/upgraded-workflow-960x680.bmp",
+      "captureManifestMatch": true,
+      "pngPixelsMatchBmp": true,
+      "outcome": "acceptable-observed-frame",
+      "findings": [
+        "General settings heading and Readiness button are present, as are navigation, workflow save/load and zoom/footer controls; scrollable panel content remains bounded."
+      ]
+    }
+  ]
+}

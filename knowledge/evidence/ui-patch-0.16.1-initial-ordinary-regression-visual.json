@@ -1,0 +1,414 @@
+{
+  "schema": 1,
+  "kind": "independent-regression-visual-review",
+  "recordedUtc": "2026-10-09T20:48:12.582447+00:00",
+  "sourceCommit": "8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+  "workflowRun": 37988570028,
+  "installationCase": "ordinary",
+  "appVersion": "0.16.1",
+  "assetSha256": "7dfed53de2279f51deaea405dbfd29b36cddb733e5a20c43b3112f27a7728a8e",
+  "scope": "All original BMP captures under the ordinary-path curated, workspace and results evidence directories; visual layout, control visibility and readability only.",
+  "reviewMethod": "All 27 exact final-candidate captures individually viewed at original pixel resolution through lossless PNG conversions. Parent reviewer inspected curated/results; delegated independent reviewer inspected workspace. Original BMP bytes were unchanged and independently matched to report hashes and dimensions.",
+  "captureCount": 27,
+  "passed": 27,
+  "blockingDefects": [],
+  "summary": "No blocking overlap, unreadable fixed label, missing fixed action or visible redraw defect was observed in the supplied captures. Scrollable panes and graph viewports intentionally clip offscreen content.",
+  "sourceReports": [
+    {
+      "path": "local-validation/ui-patch-final-ordinary/curated/native-curated.json",
+      "sha256": "12ec7261baa5e9565921880c2621bfc8d52981b900fa82e0dc72bf16bbef4dff",
+      "sourceCommit": "8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+      "assetSha256": "7dfed53de2279f51deaea405dbfd29b36cddb733e5a20c43b3112f27a7728a8e",
+      "gateSha256": "6824624ab6be6ea685428a585956f78039ef97e2a9dac37ecb67def5b2fa24d1",
+      "reportedSuccess": true,
+      "reportedPassedChecks": 11,
+      "dpi": 96,
+      "captureCount": 6,
+      "allCaptureHashesAndDimensionsMatch": true
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/workspace/native-workspace.json",
+      "sha256": "8778b6553e9ff5d05e29d1f3e7b5e953ed08516583641cd6c364f57bcb50f0df",
+      "sourceCommit": "8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+      "assetSha256": "7dfed53de2279f51deaea405dbfd29b36cddb733e5a20c43b3112f27a7728a8e",
+      "gateSha256": "30a38a4f5bc8d5a5af93eee80560963f87e4ef019a3e98ec9780f1964d847d13",
+      "reportedSuccess": true,
+      "reportedPassedChecks": 32,
+      "dpi": 96,
+      "captureCount": 18,
+      "allCaptureHashesAndDimensionsMatch": true
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/results/native-results.json",
+      "sha256": "36db4b6bd8293287d4541330443076a409498325e56b497e49382c8619865321",
+      "sourceCommit": "8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+      "assetSha256": "7dfed53de2279f51deaea405dbfd29b36cddb733e5a20c43b3112f27a7728a8e",
+      "gateSha256": "5c318c45c297dc7b267724db4db3abfc5c42d9dfc93805a5377a055d3f88747b",
+      "reportedSuccess": true,
+      "reportedPassedChecks": 9,
+      "dpi": 96,
+      "captureCount": 3,
+      "allCaptureHashesAndDimensionsMatch": true
+    }
+  ],
+  "limits": [
+    "Evidence is limited to the supplied ordinary-path captures at reported 96 DPI. No spaces-path, high-DPI, multiple-monitor or representative-PC acceptance is inferred.",
+    "Workspace scenario filenames minimum and 1280 are labels, not measured window sizes: the 15 main workspace images are 1024x728, manager is 830x700 and two option crops are 452x489. This subset does not establish a 960-pixel outer-window view.",
+    "Curated captures are five 940x680 auxiliary windows and one 1024x728 main workspace. The three Results/DAG/icon captures are 1044x788, so rendered-control inspection does not establish their desktop work-area containment.",
+    "Scroll-pane text, long path edit values, list-column labels and graph card titles can be clipped or ellipsized within their controls; offscreen content and full scrolling ranges were not inferred from still images.",
+    "Still images do not independently establish keyboard focus, successful actions, physical input behavior, temporal scrolling, absence of flicker, or scientific correctness. Those claims belong to separately recorded functional evidence.",
+    "This review covers these three visual subsets only and is not an overall CI, release or deployment acceptance decision."
+  ],
+  "captures": [
+    {
+      "path": "local-validation/ui-patch-final-ordinary/curated/curated-native-catalogue.bmp",
+      "sha256": "6f12f0607ddf2f23a569d306983ba7b577e75ba6479aae781172aec09c8b9689",
+      "width": 940,
+      "height": 680,
+      "findings": [
+        "Workflow choices, description, requirements heading and bottom actions are readable and separated.",
+        "Description and notice panes show scrollbars; partial text at their lower viewport edges is expected."
+      ],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged.",
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": []
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/curated/curated-native-loaded-workflow.bmp",
+      "sha256": "9c9b7c1ba5da05f6f46c69fd07385d19a03900c531024940e5fb5df2d6cc7587",
+      "width": 1024,
+      "height": 728,
+      "findings": [
+        "Main toolbar, workflow actions, footer and right inspector controls are visible without overlap.",
+        "Workflow cards extend beyond the horizontal canvas viewport; its scrollbars and ellipsized card headings are expected."
+      ],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged.",
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": []
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/curated/results-native-empty-search.bmp",
+      "sha256": "ee53bf91460b5b2457fa75f88fb0301109df352bdc1936d8c49ddcd2f1d4036b",
+      "width": 940,
+      "height": 680,
+      "findings": [
+        "Search field, empty-state explanation and Close action are readable; unavailable result actions are visibly disabled."
+      ],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged.",
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": []
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/curated/results-native-failed-preparation.bmp",
+      "sha256": "054fc3760edbdbd8d62829576853479203fc21e2eb52b3d9bc75e0a5f98827af",
+      "width": 940,
+      "height": 680,
+      "findings": [
+        "Failed execution, missing-input cause and corrective guidance are readable; search and footer actions remain separated.",
+        "Long tool metadata is ellipsized within its table column; summary continues through a scrollable viewport."
+      ],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged.",
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": []
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/curated/results-native-failure-guidance.bmp",
+      "sha256": "f399ae8e4808e7b7bc1139278a3234260f5c938042720ae4ffdd3502ad75dd4e",
+      "width": 940,
+      "height": 680,
+      "findings": [
+        "Scrolled missing-input guidance and the statement that measurements are not a QC pass/fail assessment are readable.",
+        "The summary is intentionally scrolled; fixed search and footer controls remain visible."
+      ],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged.",
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": []
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/curated/results-native-filtered-summary.bmp",
+      "sha256": "9ae7338dfda3acc875e4b4f44d09ab682385aedc3fa753437587c3412259c8f7",
+      "width": 940,
+      "height": 680,
+      "findings": [
+        "Selected completed run, sample, status and recorded measurements are readable; search and footer actions are separated.",
+        "Additional measurements continue below the scrollable summary viewport; long tool metadata is ellipsized within its table column."
+      ],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged.",
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": []
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/results/application-icon-normal.bmp",
+      "sha256": "f0d0a67d899f2adff387a7dd0bfad1b72794ae0e801b1eb097fc6e5bcb9e6e9a",
+      "width": 1044,
+      "height": 788,
+      "findings": [
+        "Application icon is visible; toolbar, empty tool panel, general settings and footer controls are readable and separated.",
+        "Long path edit values extend beyond their horizontal text viewport."
+      ],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged.",
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": []
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/results/workflow-backward-routing-zoomed.bmp",
+      "sha256": "d9f479ee213fddb393c075bda74176232abde2f73fe432721b1e9ac7a7fd770b",
+      "width": 1044,
+      "height": 788,
+      "findings": [
+        "At 83% zoom, the three cards and connection routes remain clear; fixed controls and right inspector remain readable.",
+        "Long card and library labels are intentionally shortened; no desktop work-area fit conclusion is drawn from this 1044x788 capture."
+      ],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged.",
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": []
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/results/workflow-backward-routing.bmp",
+      "sha256": "41b99833cd2d9b67fcdb796b1b762d3e2bf68453d6ea48cfd94f79a62a600450",
+      "width": 1044,
+      "height": 788,
+      "findings": [
+        "Three cards, forward/backward connection routes, inspector and fixed toolbar/footer controls are visible without control overlap.",
+        "Long card and library labels are intentionally shortened; no desktop work-area fit conclusion is drawn from this 1044x788 capture."
+      ],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged.",
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": []
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/workspace/manage-tools-first-open.bmp",
+      "sha256": "631a87569860b749a4a24e94d16b4207922ddb28aeb1e67e1fbc3dd8f5a335f8",
+      "width": 830,
+      "height": 700,
+      "visualStatus": "passed-within-observed-scope",
+      "findings": [
+        "Pack rows, version/status columns and scrollable description are readable.",
+        "Install/import/setup/catalogue/refresh/close controls are contained and separated; disabled controls are visually distinct."
+      ],
+      "blockingDefects": [],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged."
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/workspace/options-scroll-screen-before-redraw.bmp",
+      "sha256": "4b220e42923f76fbbe546d66cc517d04a4be660921069951acb175a918e4bcf3",
+      "width": 452,
+      "height": 489,
+      "visualStatus": "passed-within-observed-scope",
+      "findings": [
+        "Scrolled option labels, paired-read fields and Browse buttons are readable and aligned.",
+        "Partial title above and help below are clipped by the captured scrolling viewport; no overlapping fields or paint corruption observed."
+      ],
+      "blockingDefects": [],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged."
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/workspace/options-scroll-screen-clean-redraw.bmp",
+      "sha256": "4b220e42923f76fbbe546d66cc517d04a4be660921069951acb175a918e4bcf3",
+      "width": 452,
+      "height": 489,
+      "visualStatus": "passed-within-observed-scope",
+      "findings": [
+        "Clean-redraw capture has the same readable paired-read field layout as the before-redraw capture.",
+        "Top/bottom clipping remains confined to the scrolling viewport; no visible redraw artifact observed."
+      ],
+      "blockingDefects": [],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged."
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/workspace/tools-after-workflow-library-selection.bmp",
+      "sha256": "dcf35e44ff9611ce06091fa9abcf8168f85d481118095fa140f19300a67483e6",
+      "width": 1024,
+      "height": 728,
+      "visualStatus": "passed-within-observed-scope",
+      "findings": [
+        "Tools mode retains a readable coordinate-sort editor and separate General settings pane.",
+        "Header navigation, Run tool/Readiness and Save settings/Load saved remain visible without overlap; long library labels and input paths are bounded by their controls."
+      ],
+      "blockingDefects": [],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged."
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/workspace/tools-double-click-notification.bmp",
+      "sha256": "dcf35e44ff9611ce06091fa9abcf8168f85d481118095fa140f19300a67483e6",
+      "width": 1024,
+      "height": 728,
+      "visualStatus": "passed-within-observed-scope",
+      "findings": [
+        "Coordinate-sort editor and General settings remain visually stable in the captured post-notification state.",
+        "All fixed navigation and footer actions are contained; no modal overlay, misplaced control or paint corruption is visible."
+      ],
+      "blockingDefects": [],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged."
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/workspace/tools-minimum.bmp",
+      "sha256": "bacef30269d19fd845a1715614c24989833380f2a7ae8df010a3e29593b87d10",
+      "width": 1024,
+      "height": 728,
+      "visualStatus": "passed-within-observed-scope",
+      "findings": [
+        "Reference-index description wraps readably, with name/reference fields and Browse control separated.",
+        "Fixed header and footer buttons fit the captured 1024 x 728 window; lower options/help use their scrollable panes."
+      ],
+      "blockingDefects": [],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged."
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/workspace/tools-reference-1280.bmp",
+      "sha256": "581e6001ef37cb571ae2673cb5593a02a951a00c4631db0b615ea770023e6062",
+      "width": 1024,
+      "height": 728,
+      "visualStatus": "passed-within-observed-scope",
+      "findings": [
+        "Reference-index editor is scrolled, with visible reference input, description and named outputs readable.",
+        "Header/footer remain contained; the filename does not establish a 1280-pixel window because the actual image is 1024 x 728."
+      ],
+      "blockingDefects": [],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged."
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/workspace/workflow-connected-1280.bmp",
+      "sha256": "60a2328714ea01772e78b19372f6f6573946b1d4e1e7f85a72b7b5d257c89576",
+      "width": 1024,
+      "height": 728,
+      "visualStatus": "passed-within-observed-scope",
+      "findings": [
+        "Two coordinate-sort cards and their orthogonal connection are readable in the graph viewport.",
+        "Save/load, Run/Readiness, zoom and Remove/Undo/Arrange controls are separated and contained; actual capture is 1024 x 728."
+      ],
+      "blockingDefects": [],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged."
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/workspace/workflow-explicit-input-connected.bmp",
+      "sha256": "61d7be389594d37909948e1ed4d0fd4a3b4ca0a9364f3000f29690a002d2c8d6",
+      "width": 1024,
+      "height": 728,
+      "visualStatus": "passed-within-observed-scope",
+      "findings": [
+        "Reusable-genome source and visible connection into the reference-index operation are clear.",
+        "Right editor labels and source-selection control are readable; partially visible graph cards/outputs remain confined to the scrollable graph viewport."
+      ],
+      "blockingDefects": [],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged."
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/workspace/workflow-explicit-reference-input.bmp",
+      "sha256": "f0a0fa75d7710b9f2151cffdf0902aa123750639217bf7f4d3e8a6f5ffdd2a8d",
+      "width": 1024,
+      "height": 728,
+      "visualStatus": "passed-within-observed-scope",
+      "findings": [
+        "Reference-source card, input name, reference field, Browse and Choose from References controls are readable.",
+        "Offscreen portions of other graph cards are viewport clipping; fixed workspace controls remain contained."
+      ],
+      "blockingDefects": [],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged."
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/workspace/workflow-first-selected.bmp",
+      "sha256": "b26d31ff3f7afb744f70eb6c6d95625aa36e2f4ea1f77a88fec7a457d27cbe5e",
+      "width": 1024,
+      "height": 728,
+      "visualStatus": "passed-within-observed-scope",
+      "findings": [
+        "Selected first coordinate-sort card, delete affordance and routed link to the second card are readable.",
+        "Right options wrap cleanly; the lower Use this output action is partially below its scrolling viewport, while fixed footer actions remain fully visible."
+      ],
+      "blockingDefects": [],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged."
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/workspace/workflow-general-settings.bmp",
+      "sha256": "3d7bec0357e7999e2375b0ddb02d338e6d3ed2d16212c1e579859717156f19f7",
+      "width": 1024,
+      "height": 728,
+      "visualStatus": "passed-within-observed-scope",
+      "findings": [
+        "General settings heading, analysis name, input/output fields and reference action are readable.",
+        "Graph selection/link remain clear; bottom help is clipped only at the settings scroll boundary, and fixed footers do not overlap."
+      ],
+      "blockingDefects": [],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged."
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/workspace/workflow-minimum.bmp",
+      "sha256": "7fe65462ce65148a7b15b8ad9a216e489aad38d1917f45d8e803c393bd224f91",
+      "width": 1024,
+      "height": 728,
+      "visualStatus": "passed-within-observed-scope",
+      "findings": [
+        "Connected workflow cards, selected-tool information and visible source controls remain readable.",
+        "All fixed header/footer actions fit this actual 1024 x 728 capture; this image alone does not establish a 960-pixel outer window."
+      ],
+      "blockingDefects": [],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged."
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/workspace/workflow-panned.bmp",
+      "sha256": "2c37fe0ececc8d8903996fa2af8cdc030fe9b4f82442c40fb9550aacf93bdc08",
+      "width": 1024,
+      "height": 728,
+      "visualStatus": "passed-within-observed-scope",
+      "findings": [
+        "Panned first card and its connection remain readable.",
+        "The second card extends past the right graph viewport as expected during panning; fixed buttons and right editor remain separated."
+      ],
+      "blockingDefects": [],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged."
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/workspace/workflow-source-delete-hover.bmp",
+      "sha256": "1a06f9ef035360cfd33b3be75f6df5327ccb6c5dcf763e8e72996afe4f4f3088",
+      "width": 1024,
+      "height": 728,
+      "visualStatus": "passed-within-observed-scope",
+      "findings": [
+        "Red source-delete affordance is distinct and contained within the source-card header.",
+        "Selected-source editor remains readable; graph clipping is limited to viewport edges and workspace footer buttons remain fully visible."
+      ],
+      "blockingDefects": [],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged."
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/workspace/workflow-source-delete-undone.bmp",
+      "sha256": "dcf54904f8e3676c7b254b8b30f66c783e673e7c17e2453208bfff6d412b7bbf",
+      "width": 1024,
+      "height": 728,
+      "visualStatus": "passed-within-observed-scope",
+      "findings": [
+        "Restored reusable-genome source, connection and selected-source fields are visually intact.",
+        "Undo focus indication is visible without overlap; graph contents retain expected viewport clipping."
+      ],
+      "blockingDefects": [],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged."
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/workspace/workflow-tool-delete-hover.bmp",
+      "sha256": "47d9b8e6a82f18f9f3a730c10ffb435593ffd3f1e284cfd5ddc7a30ab2b20314",
+      "width": 1024,
+      "height": 728,
+      "visualStatus": "passed-within-observed-scope",
+      "findings": [
+        "Red tool-delete affordance is clear and contained within the selected card.",
+        "Connection and options text remain readable; partially offscreen second card is graph viewport clipping, not a fixed-layout defect."
+      ],
+      "blockingDefects": [],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged."
+    },
+    {
+      "path": "local-validation/ui-patch-final-ordinary/workspace/workflow-zoomed-out.bmp",
+      "sha256": "5fe454059012eb1d286eb9f0e19faa96f065041ef913e15f325f6de1e93700e9",
+      "width": 1024,
+      "height": 728,
+      "visualStatus": "passed-within-observed-scope",
+      "findings": [
+        "Both workflow cards and their connection fit the graph viewport at displayed 83% zoom.",
+        "Long card name uses visible ellipsis at reduced scale; header, editor and fixed navigation/footer controls remain readable and separated."
+      ],
+      "blockingDefects": [],
+      "reviewMethod": "Individual original-resolution view of lossless PNG conversion of this exact final-candidate frame; original BMP unchanged."
+    }
+  ]
+}

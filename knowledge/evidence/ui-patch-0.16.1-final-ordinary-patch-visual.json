@@ -1,0 +1,860 @@
+{
+  "schema": 1,
+  "kind": "native-ui-patch-passive-visual-review",
+  "reviewedUtc": "2026-10-09T21:02:31.554099+00:00",
+  "sourceCommit": "8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+  "gateCommit": "69022689e686b2cacdc98dbdbef728e664941e67",
+  "gateSha256": "580289dbe0093bf143bc20af31996d7596ccd1727f45b601b05096b951016bde",
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37989535317",
+  "pathCase": "ordinary",
+  "nativeReportSha256": "ff10be809d74fa6a7cd031110b8152175bd5cfdb51bd126acaa679925ac930d3",
+  "captureCount": 41,
+  "directlyInspectedUniqueCount": 26,
+  "byteIdenticalCopyCount": 15,
+  "allOriginalHashesAndDimensionsVerified": true,
+  "reviewCompleted": true,
+  "boundedSettledVisualReviewPassed": true,
+  "remainingPersistentOmissionObserved": false,
+  "summary": "All 41 original captures reviewed: 26 unique images individually inspected via lossless PNG conversion and 15 identical copies matched by SHA-256. Four immediate resize frames show transient older-layout pixels. All 12 later passive frames show the complete small-window layout; each series remains byte-identical after its first settled sample. General settings and Readiness are visible. Results, setup and updater dialogs are readable. This is not a zero-flicker claim.",
+  "captureMethodCounts": {
+    "PrintWindow": 25,
+    "visible desktop BitBlt before PrintWindow": 16
+  },
+  "passiveSeries": [
+    {
+      "installation": "fresh",
+      "mode": "tool",
+      "initialTransitionFrame": {
+        "path": "fresh-tool-960-visible-immediate.bmp",
+        "width": 960,
+        "height": 680,
+        "sha256": "d952a198fd0ec6b3c01f1444234dbb2273a30ddf759464365a789b49e7b79225",
+        "method": "visible desktop BitBlt before PrintWindow",
+        "dpi": 96,
+        "secondsAfterResizeObservation": 0.05506589999998823
+      },
+      "firstSettledFrame": {
+        "path": "fresh-tool-960-visible-250ms.bmp",
+        "width": 960,
+        "height": 680,
+        "sha256": "ec756fa75d74f2229a1e3aed55d206146c5587d79e43b0f17d96b544b8ee5205",
+        "method": "visible desktop BitBlt before PrintWindow",
+        "dpi": 96,
+        "secondsAfterResizeObservation": 0.333839399999988
+      },
+      "laterFrames": [
+        {
+          "path": "fresh-tool-960-visible-750ms.bmp",
+          "width": 960,
+          "height": 680,
+          "sha256": "ec756fa75d74f2229a1e3aed55d206146c5587d79e43b0f17d96b544b8ee5205",
+          "method": "visible desktop BitBlt before PrintWindow",
+          "dpi": 96,
+          "secondsAfterResizeObservation": 0.8674695999999926
+        },
+        {
+          "path": "fresh-tool-960-visible-1250ms.bmp",
+          "width": 960,
+          "height": 680,
+          "sha256": "ec756fa75d74f2229a1e3aed55d206146c5587d79e43b0f17d96b544b8ee5205",
+          "method": "visible desktop BitBlt before PrintWindow",
+          "dpi": 96,
+          "secondsAfterResizeObservation": 1.4004401999999914
+        }
+      ],
+      "laterFramesByteIdenticalToFirstSettled": true,
+      "inputOrForcedRedrawBetweenFrames": false,
+      "priorPrintWindow": false,
+      "settledGeneralSettingsVisible": true,
+      "settledReadinessVisible": true,
+      "settledFixedNavigationContained": true
+    },
+    {
+      "installation": "fresh",
+      "mode": "workflow",
+      "initialTransitionFrame": {
+        "path": "fresh-workflow-960-visible-immediate.bmp",
+        "width": 960,
+        "height": 680,
+        "sha256": "cbb0d6d74c4392b55a0cf5671968a323679a666911747af18fbb14000d97d81b",
+        "method": "visible desktop BitBlt before PrintWindow",
+        "dpi": 96,
+        "secondsAfterResizeObservation": 0.03439489999999523
+      },
+      "firstSettledFrame": {
+        "path": "fresh-workflow-960-visible-250ms.bmp",
+        "width": 960,
+        "height": 680,
+        "sha256": "a885db69a62ba4aa2a19dda01b0ae4c83896eb2129b9fa116ae100137f5bdd4d",
+        "method": "visible desktop BitBlt before PrintWindow",
+        "dpi": 96,
+        "secondsAfterResizeObservation": 0.3013561000000209
+      },
+      "laterFrames": [
+        {
+          "path": "fresh-workflow-960-visible-750ms.bmp",
+          "width": 960,
+          "height": 680,
+          "sha256": "a885db69a62ba4aa2a19dda01b0ae4c83896eb2129b9fa116ae100137f5bdd4d",
+          "method": "visible desktop BitBlt before PrintWindow",
+          "dpi": 96,
+          "secondsAfterResizeObservation": 0.8333352000000218
+        },
+        {
+          "path": "fresh-workflow-960-visible-1250ms.bmp",
+          "width": 960,
+          "height": 680,
+          "sha256": "a885db69a62ba4aa2a19dda01b0ae4c83896eb2129b9fa116ae100137f5bdd4d",
+          "method": "visible desktop BitBlt before PrintWindow",
+          "dpi": 96,
+          "secondsAfterResizeObservation": 1.3699794999999995
+        }
+      ],
+      "laterFramesByteIdenticalToFirstSettled": true,
+      "inputOrForcedRedrawBetweenFrames": false,
+      "priorPrintWindow": false,
+      "settledGeneralSettingsVisible": true,
+      "settledReadinessVisible": true,
+      "settledFixedNavigationContained": true
+    },
+    {
+      "installation": "upgraded",
+      "mode": "tool",
+      "initialTransitionFrame": {
+        "path": "upgraded-tool-960-visible-immediate.bmp",
+        "width": 960,
+        "height": 680,
+        "sha256": "89a00b895b4431363cf365a5c2781dd0a71efdb005f36d57bb0bf01745dc82d9",
+        "method": "visible desktop BitBlt before PrintWindow",
+        "dpi": 96,
+        "secondsAfterResizeObservation": 0.054278500000009444
+      },
+      "firstSettledFrame": {
+        "path": "upgraded-tool-960-visible-250ms.bmp",
+        "width": 960,
+        "height": 680,
+        "sha256": "994679b689ef41f82e0acc11801d53ad411934b0d8b0cc7ba1111c565bc9381b",
+        "method": "visible desktop BitBlt before PrintWindow",
+        "dpi": 96,
+        "secondsAfterResizeObservation": 0.319595100000015
+      },
+      "laterFrames": [
+        {
+          "path": "upgraded-tool-960-visible-750ms.bmp",
+          "width": 960,
+          "height": 680,
+          "sha256": "994679b689ef41f82e0acc11801d53ad411934b0d8b0cc7ba1111c565bc9381b",
+          "method": "visible desktop BitBlt before PrintWindow",
+          "dpi": 96,
+          "secondsAfterResizeObservation": 0.8517031000000088
+        },
+        {
+          "path": "upgraded-tool-960-visible-1250ms.bmp",
+          "width": 960,
+          "height": 680,
+          "sha256": "994679b689ef41f82e0acc11801d53ad411934b0d8b0cc7ba1111c565bc9381b",
+          "method": "visible desktop BitBlt before PrintWindow",
+          "dpi": 96,
+          "secondsAfterResizeObservation": 1.3679955000000064
+        }
+      ],
+      "laterFramesByteIdenticalToFirstSettled": true,
+      "inputOrForcedRedrawBetweenFrames": false,
+      "priorPrintWindow": false,
+      "settledGeneralSettingsVisible": true,
+      "settledReadinessVisible": true,
+      "settledFixedNavigationContained": true
+    },
+    {
+      "installation": "upgraded",
+      "mode": "workflow",
+      "initialTransitionFrame": {
+        "path": "upgraded-workflow-960-visible-immediate.bmp",
+        "width": 960,
+        "height": 680,
+        "sha256": "67bd989100dadd3c9208010e918610262f0f5ef90c47a5a917eb257414008dc8",
+        "method": "visible desktop BitBlt before PrintWindow",
+        "dpi": 96,
+        "secondsAfterResizeObservation": 0.05071170000002212
+      },
+      "firstSettledFrame": {
+        "path": "upgraded-workflow-960-visible-250ms.bmp",
+        "width": 960,
+        "height": 680,
+        "sha256": "b6428d5a38e6ad6e8442942c9afbf7fee7c87d011dffc85d2ba48b597c5cff75",
+        "method": "visible desktop BitBlt before PrintWindow",
+        "dpi": 96,
+        "secondsAfterResizeObservation": 0.3171520000000214
+      },
+      "laterFrames": [
+        {
+          "path": "upgraded-workflow-960-visible-750ms.bmp",
+          "width": 960,
+          "height": 680,
+          "sha256": "b6428d5a38e6ad6e8442942c9afbf7fee7c87d011dffc85d2ba48b597c5cff75",
+          "method": "visible desktop BitBlt before PrintWindow",
+          "dpi": 96,
+          "secondsAfterResizeObservation": 0.8501714999999876
+        },
+        {
+          "path": "upgraded-workflow-960-visible-1250ms.bmp",
+          "width": 960,
+          "height": 680,
+          "sha256": "b6428d5a38e6ad6e8442942c9afbf7fee7c87d011dffc85d2ba48b597c5cff75",
+          "method": "visible desktop BitBlt before PrintWindow",
+          "dpi": 96,
+          "secondsAfterResizeObservation": 1.3818390000000136
+        }
+      ],
+      "laterFramesByteIdenticalToFirstSettled": true,
+      "inputOrForcedRedrawBetweenFrames": false,
+      "priorPrintWindow": false,
+      "settledGeneralSettingsVisible": true,
+      "settledReadinessVisible": true,
+      "settledFixedNavigationContained": true
+    }
+  ],
+  "limits": [
+    "Observed Windows Server 2022 at 96 DPI only. Representative-PC, high-DPI, multiple-monitor and physical-trackpad acceptance remain separate.",
+    "Immediate samples occurred about 34-55 ms after resize observation; first settled samples about 301-334 ms; final samples about 1368-1400 ms. Filename timing labels are nominal. No exact universal repaint deadline is inferred.",
+    "The four immediate transition frames are retained, so this review does not claim zero flicker or prove what occurred between samples.",
+    "Requested 1280x900 was bounded to 1024x728. Actual reviewed workspace sizes are 960x680 and 1024x728.",
+    "25 PrintWindow captures request paint and are not equivalent to visible-screen pixels. Sixteen passive screen frames precede PrintWindow for their series.",
+    "The earlier full-frame interpretation that General settings and Readiness were missing from original run 37988570028 was a review error. Exact original-image crops show both controls; corrected receipts retain the retraction. This recheck adds passive resize evidence rather than fixing an established application omission."
+  ],
+  "captures": [
+    {
+      "artifactPath": "patch/updater-cancel-picker.bmp",
+      "bytes": 1200054,
+      "sha256": "712f8edb492d9145b2d646dc1b0a2ceaaf26fbf8e0865fffd6d5a85048548257",
+      "width": 625,
+      "height": 480,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Native folder-picker title, Folder field, Update this Workbench and Cancel controls are legible and contained. Shell list/breadcrumb truncation uses normal scroll/ellipsis behavior."
+      ],
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    },
+    {
+      "artifactPath": "patch/updater-invalid-picker.bmp",
+      "bytes": 1200054,
+      "sha256": "46221868a5cab1290bceab6ddf41a0ca09d9ea98f5494c4407b335c5e2db28fa",
+      "width": 625,
+      "height": 480,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Native folder-picker title, Folder field, Update this Workbench and Cancel controls are legible and contained. Shell list/breadcrumb truncation uses normal scroll/ellipsis behavior."
+      ],
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    },
+    {
+      "artifactPath": "patch/updater-invalid-warning.bmp",
+      "bytes": 301878,
+      "sha256": "0e52f8bac762d6f7e77dcdc7c9152b4f1f5f1435cc6a04bceb9817e25b028381",
+      "width": 393,
+      "height": 192,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Invalid-folder explanation, required application files and OK are legible and contained."
+      ],
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    },
+    {
+      "artifactPath": "patch/updater-invalid-retry-picker.bmp",
+      "bytes": 1200054,
+      "sha256": "c7e4fbe60b83d868d66d3feca4f6da9f2df40401ec8224377faffa46869ce87f",
+      "width": 625,
+      "height": 480,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Native folder-picker title, Folder field, Update this Workbench and Cancel controls are legible and contained. Shell list/breadcrumb truncation uses normal scroll/ellipsis behavior."
+      ],
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    },
+    {
+      "artifactPath": "patch/updater-install-picker.bmp",
+      "bytes": 1200054,
+      "sha256": "c7e4fbe60b83d868d66d3feca4f6da9f2df40401ec8224377faffa46869ce87f",
+      "width": 625,
+      "height": 480,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Native folder-picker title, Folder field, Update this Workbench and Cancel controls are legible and contained. Shell list/breadcrumb truncation uses normal scroll/ellipsis behavior."
+      ],
+      "reviewMethod": "SHA-256-identical to a directly inspected capture from this recheck",
+      "identicalTo": "patch/updater-invalid-retry-picker.bmp"
+    },
+    {
+      "artifactPath": "patch/updater-install-success.bmp",
+      "bytes": 290034,
+      "sha256": "2357dc7e12a5d30970a335f342ce658d3a76ceb1fbae7c66d2eed89c55b174ef",
+      "width": 405,
+      "height": 179,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Update completion explanation and OK are legible and contained."
+      ],
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    },
+    {
+      "artifactPath": "patch/updater-repeat-picker.bmp",
+      "bytes": 1200054,
+      "sha256": "0c2c55b85a834a0f3ca40a160ea5ca8344fa08e6ac187bce1f495b4e66f1bb4c",
+      "width": 625,
+      "height": 480,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Native folder-picker title, Folder field, Update this Workbench and Cancel controls are legible and contained. Shell list/breadcrumb truncation uses normal scroll/ellipsis behavior."
+      ],
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    },
+    {
+      "artifactPath": "patch/updater-repeat-success.bmp",
+      "bytes": 290034,
+      "sha256": "2357dc7e12a5d30970a335f342ce658d3a76ceb1fbae7c66d2eed89c55b174ef",
+      "width": 405,
+      "height": 179,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Update completion explanation and OK are legible and contained."
+      ],
+      "reviewMethod": "SHA-256-identical to a directly inspected capture from this recheck",
+      "identicalTo": "patch/updater-install-success.bmp"
+    },
+    {
+      "artifactPath": "patch/fresh-first-open-starter.bmp",
+      "bytes": 2649654,
+      "sha256": "8340249724a191191909cbaa3700aa5cd8b95ea201ea6867de664dbe05cddae6",
+      "width": 920,
+      "height": 720,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Starter radio, installed-pack rows, zero additional download and Use Workbench action are readable and contained. Pack list is scrollable."
+      ],
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    },
+    {
+      "artifactPath": "patch/fresh-tool-960-visible-immediate.bmp",
+      "bytes": 2611254,
+      "sha256": "d952a198fd0ec6b3c01f1444234dbb2273a30ddf759464365a789b49e7b79225",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "visible desktop BitBlt before PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Immediate post-resize frame retains prior larger-layout positions, with right/bottom content truncated in the new 960x680 captured viewport. This transition frame is preserved; later passive frames show the fitted small-window layout."
+      ],
+      "secondsAfterResizeObservation": 0.05506589999998823,
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    },
+    {
+      "artifactPath": "patch/fresh-tool-960-visible-250ms.bmp",
+      "bytes": 2611254,
+      "sha256": "ec756fa75d74f2229a1e3aed55d206146c5587d79e43b0f17d96b544b8ee5205",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "visible desktop BitBlt before PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Settled visible-screen frame shows General settings and Readiness, readable three-pane layout and fixed navigation contained in the 960x680 window. General settings remains vertically scrollable.",
+        "Captured before any PrintWindow, with no input or forced redraw between passive frames. The 250/750/1250-labelled frames in this series are byte-identical; actual elapsed times are recorded separately."
+      ],
+      "secondsAfterResizeObservation": 0.333839399999988,
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    },
+    {
+      "artifactPath": "patch/fresh-tool-960-visible-750ms.bmp",
+      "bytes": 2611254,
+      "sha256": "ec756fa75d74f2229a1e3aed55d206146c5587d79e43b0f17d96b544b8ee5205",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "visible desktop BitBlt before PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Settled visible-screen frame shows General settings and Readiness, readable three-pane layout and fixed navigation contained in the 960x680 window. General settings remains vertically scrollable.",
+        "Captured before any PrintWindow, with no input or forced redraw between passive frames. The 250/750/1250-labelled frames in this series are byte-identical; actual elapsed times are recorded separately."
+      ],
+      "secondsAfterResizeObservation": 0.8674695999999926,
+      "reviewMethod": "SHA-256-identical to a directly inspected capture from this recheck",
+      "identicalTo": "patch/fresh-tool-960-visible-250ms.bmp"
+    },
+    {
+      "artifactPath": "patch/fresh-tool-960-visible-1250ms.bmp",
+      "bytes": 2611254,
+      "sha256": "ec756fa75d74f2229a1e3aed55d206146c5587d79e43b0f17d96b544b8ee5205",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "visible desktop BitBlt before PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Settled visible-screen frame shows General settings and Readiness, readable three-pane layout and fixed navigation contained in the 960x680 window. General settings remains vertically scrollable.",
+        "Captured before any PrintWindow, with no input or forced redraw between passive frames. The 250/750/1250-labelled frames in this series are byte-identical; actual elapsed times are recorded separately."
+      ],
+      "secondsAfterResizeObservation": 1.4004401999999914,
+      "reviewMethod": "SHA-256-identical to a directly inspected capture from this recheck",
+      "identicalTo": "patch/fresh-tool-960-visible-250ms.bmp"
+    },
+    {
+      "artifactPath": "patch/fresh-tool-960x680.bmp",
+      "bytes": 2611254,
+      "sha256": "8b09cb967f77d071a66c553901def59090d0557ad056e1871deb49203521d383",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane layout, General settings heading, Readiness and fixed navigation are present and readable. Scrolling remains available for lower General settings content; long paths stay within horizontally scrolling fields.",
+        "PrintWindow is a requested paint capture and does not itself establish visible-screen behavior."
+      ],
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    },
+    {
+      "artifactPath": "patch/fresh-tool-1024x728.bmp",
+      "bytes": 2981942,
+      "sha256": "2b87af3f3a97897f60dbbe10ac93409f215f2073a69569bc75d8506091782495",
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane layout, General settings heading, Readiness and fixed navigation are present and readable. Scrolling remains available for lower General settings content; long paths stay within horizontally scrolling fields.",
+        "PrintWindow is a requested paint capture and does not itself establish visible-screen behavior."
+      ],
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    },
+    {
+      "artifactPath": "patch/fresh-tool-1280x900.bmp",
+      "bytes": 2981942,
+      "sha256": "2b87af3f3a97897f60dbbe10ac93409f215f2073a69569bc75d8506091782495",
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane layout, General settings heading, Readiness and fixed navigation are present and readable. Scrolling remains available for lower General settings content; long paths stay within horizontally scrolling fields.",
+        "PrintWindow is a requested paint capture and does not itself establish visible-screen behavior.",
+        "Requested size is encoded in filename; actual capture is 1024x728 and matches the corresponding 1024 capture. No 1280x900 desktop coverage is claimed."
+      ],
+      "reviewMethod": "SHA-256-identical to a directly inspected capture from this recheck",
+      "identicalTo": "patch/fresh-tool-1024x728.bmp"
+    },
+    {
+      "artifactPath": "patch/fresh-workflow-960-visible-immediate.bmp",
+      "bytes": 2611254,
+      "sha256": "cbb0d6d74c4392b55a0cf5671968a323679a666911747af18fbb14000d97d81b",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "visible desktop BitBlt before PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Immediate post-resize frame retains prior larger-layout positions, with right/bottom content truncated in the new 960x680 captured viewport. This transition frame is preserved; later passive frames show the fitted small-window layout."
+      ],
+      "secondsAfterResizeObservation": 0.03439489999999523,
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    },
+    {
+      "artifactPath": "patch/fresh-workflow-960-visible-250ms.bmp",
+      "bytes": 2611254,
+      "sha256": "a885db69a62ba4aa2a19dda01b0ae4c83896eb2129b9fa116ae100137f5bdd4d",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "visible desktop BitBlt before PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Settled visible-screen frame shows General settings and Readiness, readable three-pane layout and fixed navigation contained in the 960x680 window. General settings remains vertically scrollable.",
+        "Captured before any PrintWindow, with no input or forced redraw between passive frames. The 250/750/1250-labelled frames in this series are byte-identical; actual elapsed times are recorded separately."
+      ],
+      "secondsAfterResizeObservation": 0.3013561000000209,
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    },
+    {
+      "artifactPath": "patch/fresh-workflow-960-visible-750ms.bmp",
+      "bytes": 2611254,
+      "sha256": "a885db69a62ba4aa2a19dda01b0ae4c83896eb2129b9fa116ae100137f5bdd4d",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "visible desktop BitBlt before PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Settled visible-screen frame shows General settings and Readiness, readable three-pane layout and fixed navigation contained in the 960x680 window. General settings remains vertically scrollable.",
+        "Captured before any PrintWindow, with no input or forced redraw between passive frames. The 250/750/1250-labelled frames in this series are byte-identical; actual elapsed times are recorded separately."
+      ],
+      "secondsAfterResizeObservation": 0.8333352000000218,
+      "reviewMethod": "SHA-256-identical to a directly inspected capture from this recheck",
+      "identicalTo": "patch/fresh-workflow-960-visible-250ms.bmp"
+    },
+    {
+      "artifactPath": "patch/fresh-workflow-960-visible-1250ms.bmp",
+      "bytes": 2611254,
+      "sha256": "a885db69a62ba4aa2a19dda01b0ae4c83896eb2129b9fa116ae100137f5bdd4d",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "visible desktop BitBlt before PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Settled visible-screen frame shows General settings and Readiness, readable three-pane layout and fixed navigation contained in the 960x680 window. General settings remains vertically scrollable.",
+        "Captured before any PrintWindow, with no input or forced redraw between passive frames. The 250/750/1250-labelled frames in this series are byte-identical; actual elapsed times are recorded separately."
+      ],
+      "secondsAfterResizeObservation": 1.3699794999999995,
+      "reviewMethod": "SHA-256-identical to a directly inspected capture from this recheck",
+      "identicalTo": "patch/fresh-workflow-960-visible-250ms.bmp"
+    },
+    {
+      "artifactPath": "patch/fresh-workflow-960x680.bmp",
+      "bytes": 2611254,
+      "sha256": "923a668a99bc12ed70ad62ac982ac6265676d2d37d4f654908e9f96dd032bd54",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane layout, General settings heading, Readiness and fixed navigation are present and readable. Scrolling remains available for lower General settings content; long paths stay within horizontally scrolling fields.",
+        "PrintWindow is a requested paint capture and does not itself establish visible-screen behavior."
+      ],
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    },
+    {
+      "artifactPath": "patch/fresh-workflow-1024x728.bmp",
+      "bytes": 2981942,
+      "sha256": "8064626754940779d6a029a97ce9b20622decab4ce7fc81066fbd37b7d435ed8",
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane layout, General settings heading, Readiness and fixed navigation are present and readable. Scrolling remains available for lower General settings content; long paths stay within horizontally scrolling fields.",
+        "PrintWindow is a requested paint capture and does not itself establish visible-screen behavior."
+      ],
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    },
+    {
+      "artifactPath": "patch/fresh-workflow-1280x900.bmp",
+      "bytes": 2981942,
+      "sha256": "8064626754940779d6a029a97ce9b20622decab4ce7fc81066fbd37b7d435ed8",
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane layout, General settings heading, Readiness and fixed navigation are present and readable. Scrolling remains available for lower General settings content; long paths stay within horizontally scrolling fields.",
+        "PrintWindow is a requested paint capture and does not itself establish visible-screen behavior.",
+        "Requested size is encoded in filename; actual capture is 1024x728 and matches the corresponding 1024 capture. No 1280x900 desktop coverage is claimed."
+      ],
+      "reviewMethod": "SHA-256-identical to a directly inspected capture from this recheck",
+      "identicalTo": "patch/fresh-workflow-1024x728.bmp"
+    },
+    {
+      "artifactPath": "patch/fresh-results-empty.bmp",
+      "bytes": 2556854,
+      "sha256": "feb6d244e84713edf729775ca34a1e7ffadb2f75d224848a687ad9098ed68e57",
+      "width": 940,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Empty search guidance and query selection are readable. View/Open actions are disabled and Close fits."
+      ],
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    },
+    {
+      "artifactPath": "patch/fresh-results-populated.bmp",
+      "bytes": 2556854,
+      "sha256": "fd1224e59a935ea36c3562025211d3386507911f3d78339551378cbd79cb9bad",
+      "width": 940,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Completed SAMtools result, unavailable-measurement explanation and explicit no-QC-threshold statement are readable. Query selection and enabled actions are visible; longer Tools text ellipsizes and summary scrolls."
+      ],
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    },
+    {
+      "artifactPath": "patch/upgraded-tool-960-visible-immediate.bmp",
+      "bytes": 2611254,
+      "sha256": "89a00b895b4431363cf365a5c2781dd0a71efdb005f36d57bb0bf01745dc82d9",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "visible desktop BitBlt before PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Immediate post-resize frame retains prior larger-layout positions, with right/bottom content truncated in the new 960x680 captured viewport. This transition frame is preserved; later passive frames show the fitted small-window layout."
+      ],
+      "secondsAfterResizeObservation": 0.054278500000009444,
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    },
+    {
+      "artifactPath": "patch/upgraded-tool-960-visible-250ms.bmp",
+      "bytes": 2611254,
+      "sha256": "994679b689ef41f82e0acc11801d53ad411934b0d8b0cc7ba1111c565bc9381b",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "visible desktop BitBlt before PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Settled visible-screen frame shows General settings and Readiness, readable three-pane layout and fixed navigation contained in the 960x680 window. General settings remains vertically scrollable.",
+        "Captured before any PrintWindow, with no input or forced redraw between passive frames. The 250/750/1250-labelled frames in this series are byte-identical; actual elapsed times are recorded separately."
+      ],
+      "secondsAfterResizeObservation": 0.319595100000015,
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    },
+    {
+      "artifactPath": "patch/upgraded-tool-960-visible-750ms.bmp",
+      "bytes": 2611254,
+      "sha256": "994679b689ef41f82e0acc11801d53ad411934b0d8b0cc7ba1111c565bc9381b",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "visible desktop BitBlt before PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Settled visible-screen frame shows General settings and Readiness, readable three-pane layout and fixed navigation contained in the 960x680 window. General settings remains vertically scrollable.",
+        "Captured before any PrintWindow, with no input or forced redraw between passive frames. The 250/750/1250-labelled frames in this series are byte-identical; actual elapsed times are recorded separately."
+      ],
+      "secondsAfterResizeObservation": 0.8517031000000088,
+      "reviewMethod": "SHA-256-identical to a directly inspected capture from this recheck",
+      "identicalTo": "patch/upgraded-tool-960-visible-250ms.bmp"
+    },
+    {
+      "artifactPath": "patch/upgraded-tool-960-visible-1250ms.bmp",
+      "bytes": 2611254,
+      "sha256": "994679b689ef41f82e0acc11801d53ad411934b0d8b0cc7ba1111c565bc9381b",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "visible desktop BitBlt before PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Settled visible-screen frame shows General settings and Readiness, readable three-pane layout and fixed navigation contained in the 960x680 window. General settings remains vertically scrollable.",
+        "Captured before any PrintWindow, with no input or forced redraw between passive frames. The 250/750/1250-labelled frames in this series are byte-identical; actual elapsed times are recorded separately."
+      ],
+      "secondsAfterResizeObservation": 1.3679955000000064,
+      "reviewMethod": "SHA-256-identical to a directly inspected capture from this recheck",
+      "identicalTo": "patch/upgraded-tool-960-visible-250ms.bmp"
+    },
+    {
+      "artifactPath": "patch/upgraded-tool-960x680.bmp",
+      "bytes": 2611254,
+      "sha256": "c7d50a308d162a0f2a3729527b0a4377375f5a347faf3a1da06159dd8e0a8344",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane layout, General settings heading, Readiness and fixed navigation are present and readable. Scrolling remains available for lower General settings content; long paths stay within horizontally scrolling fields.",
+        "PrintWindow is a requested paint capture and does not itself establish visible-screen behavior."
+      ],
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    },
+    {
+      "artifactPath": "patch/upgraded-tool-1024x728.bmp",
+      "bytes": 2981942,
+      "sha256": "7e0a9b27500b3b0a219c824f204aed0211b1d424bf39127b3dbada63e28f3bb6",
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane layout, General settings heading, Readiness and fixed navigation are present and readable. Scrolling remains available for lower General settings content; long paths stay within horizontally scrolling fields.",
+        "PrintWindow is a requested paint capture and does not itself establish visible-screen behavior."
+      ],
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    },
+    {
+      "artifactPath": "patch/upgraded-tool-1280x900.bmp",
+      "bytes": 2981942,
+      "sha256": "7e0a9b27500b3b0a219c824f204aed0211b1d424bf39127b3dbada63e28f3bb6",
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane layout, General settings heading, Readiness and fixed navigation are present and readable. Scrolling remains available for lower General settings content; long paths stay within horizontally scrolling fields.",
+        "PrintWindow is a requested paint capture and does not itself establish visible-screen behavior.",
+        "Requested size is encoded in filename; actual capture is 1024x728 and matches the corresponding 1024 capture. No 1280x900 desktop coverage is claimed."
+      ],
+      "reviewMethod": "SHA-256-identical to a directly inspected capture from this recheck",
+      "identicalTo": "patch/upgraded-tool-1024x728.bmp"
+    },
+    {
+      "artifactPath": "patch/upgraded-workflow-960-visible-immediate.bmp",
+      "bytes": 2611254,
+      "sha256": "67bd989100dadd3c9208010e918610262f0f5ef90c47a5a917eb257414008dc8",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "visible desktop BitBlt before PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Immediate post-resize frame retains prior larger-layout positions, with right/bottom content truncated in the new 960x680 captured viewport. This transition frame is preserved; later passive frames show the fitted small-window layout."
+      ],
+      "secondsAfterResizeObservation": 0.05071170000002212,
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    },
+    {
+      "artifactPath": "patch/upgraded-workflow-960-visible-250ms.bmp",
+      "bytes": 2611254,
+      "sha256": "b6428d5a38e6ad6e8442942c9afbf7fee7c87d011dffc85d2ba48b597c5cff75",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "visible desktop BitBlt before PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Settled visible-screen frame shows General settings and Readiness, readable three-pane layout and fixed navigation contained in the 960x680 window. General settings remains vertically scrollable.",
+        "Captured before any PrintWindow, with no input or forced redraw between passive frames. The 250/750/1250-labelled frames in this series are byte-identical; actual elapsed times are recorded separately."
+      ],
+      "secondsAfterResizeObservation": 0.3171520000000214,
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    },
+    {
+      "artifactPath": "patch/upgraded-workflow-960-visible-750ms.bmp",
+      "bytes": 2611254,
+      "sha256": "b6428d5a38e6ad6e8442942c9afbf7fee7c87d011dffc85d2ba48b597c5cff75",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "visible desktop BitBlt before PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Settled visible-screen frame shows General settings and Readiness, readable three-pane layout and fixed navigation contained in the 960x680 window. General settings remains vertically scrollable.",
+        "Captured before any PrintWindow, with no input or forced redraw between passive frames. The 250/750/1250-labelled frames in this series are byte-identical; actual elapsed times are recorded separately."
+      ],
+      "secondsAfterResizeObservation": 0.8501714999999876,
+      "reviewMethod": "SHA-256-identical to a directly inspected capture from this recheck",
+      "identicalTo": "patch/upgraded-workflow-960-visible-250ms.bmp"
+    },
+    {
+      "artifactPath": "patch/upgraded-workflow-960-visible-1250ms.bmp",
+      "bytes": 2611254,
+      "sha256": "b6428d5a38e6ad6e8442942c9afbf7fee7c87d011dffc85d2ba48b597c5cff75",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "visible desktop BitBlt before PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Settled visible-screen frame shows General settings and Readiness, readable three-pane layout and fixed navigation contained in the 960x680 window. General settings remains vertically scrollable.",
+        "Captured before any PrintWindow, with no input or forced redraw between passive frames. The 250/750/1250-labelled frames in this series are byte-identical; actual elapsed times are recorded separately."
+      ],
+      "secondsAfterResizeObservation": 1.3818390000000136,
+      "reviewMethod": "SHA-256-identical to a directly inspected capture from this recheck",
+      "identicalTo": "patch/upgraded-workflow-960-visible-250ms.bmp"
+    },
+    {
+      "artifactPath": "patch/upgraded-workflow-960x680.bmp",
+      "bytes": 2611254,
+      "sha256": "cf3c8fc4d819f101d8ee8209796b8dd0b40754ccecf53cac4ae765eba2b0ebec",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane layout, General settings heading, Readiness and fixed navigation are present and readable. Scrolling remains available for lower General settings content; long paths stay within horizontally scrolling fields.",
+        "PrintWindow is a requested paint capture and does not itself establish visible-screen behavior."
+      ],
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    },
+    {
+      "artifactPath": "patch/upgraded-workflow-1024x728.bmp",
+      "bytes": 2981942,
+      "sha256": "3ca3a1d1509f8eed014518e28b15f0bea1931bc4b3760483fa2e7f03e1f6ed5d",
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane layout, General settings heading, Readiness and fixed navigation are present and readable. Scrolling remains available for lower General settings content; long paths stay within horizontally scrolling fields.",
+        "PrintWindow is a requested paint capture and does not itself establish visible-screen behavior."
+      ],
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    },
+    {
+      "artifactPath": "patch/upgraded-workflow-1280x900.bmp",
+      "bytes": 2981942,
+      "sha256": "3ca3a1d1509f8eed014518e28b15f0bea1931bc4b3760483fa2e7f03e1f6ed5d",
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane layout, General settings heading, Readiness and fixed navigation are present and readable. Scrolling remains available for lower General settings content; long paths stay within horizontally scrolling fields.",
+        "PrintWindow is a requested paint capture and does not itself establish visible-screen behavior.",
+        "Requested size is encoded in filename; actual capture is 1024x728 and matches the corresponding 1024 capture. No 1280x900 desktop coverage is claimed."
+      ],
+      "reviewMethod": "SHA-256-identical to a directly inspected capture from this recheck",
+      "identicalTo": "patch/upgraded-workflow-1024x728.bmp"
+    },
+    {
+      "artifactPath": "patch/upgraded-results-empty.bmp",
+      "bytes": 2556854,
+      "sha256": "feb6d244e84713edf729775ca34a1e7ffadb2f75d224848a687ad9098ed68e57",
+      "width": 940,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Empty search guidance and query selection are readable. View/Open actions are disabled and Close fits."
+      ],
+      "reviewMethod": "SHA-256-identical to a directly inspected capture from this recheck",
+      "identicalTo": "patch/fresh-results-empty.bmp"
+    },
+    {
+      "artifactPath": "patch/upgraded-results-populated.bmp",
+      "bytes": 2556854,
+      "sha256": "0a2143e9f99a6c11e1b5e02805bba825f64a3fc551b11df67a1134e9886faf67",
+      "width": 940,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Completed SAMtools result, unavailable-measurement explanation and explicit no-QC-threshold statement are readable. Query selection and enabled actions are visible; longer Tools text ellipsizes and summary scrolls."
+      ],
+      "reviewMethod": "Individual lossless PNG visual inspection of original BMP pixels"
+    }
+  ]
+}

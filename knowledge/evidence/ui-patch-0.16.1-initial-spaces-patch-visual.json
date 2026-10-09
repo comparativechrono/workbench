@@ -1,0 +1,635 @@
+{
+  "schema": 1,
+  "kind": "native-ui-patch-visual-review",
+  "reviewedUtc": "2026-10-09T20:49:39.754027+00:00",
+  "sourceCommit": "8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+  "gateCommit": "8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37988570028",
+  "pathCase": "spaces",
+  "nativeReportSha256": "8a68db3567081fbe7fbf43d7ada03a9fbcf979b4bbe844394a24cef87e884bd7",
+  "captureCount": 29,
+  "directlyInspectedCount": 18,
+  "byteIdenticalToAlreadyInspectedCount": 11,
+  "allOriginalHashesAndDimensionsVerified": true,
+  "reviewCompleted": true,
+  "visualAcceptanceEstablished": true,
+  "followUpRequired": false,
+  "summary": "All 29 exact candidate patch captures reviewed. Window and fixed-control geometry fit at 960x680 and 1024x728; Results/updater/setup content is readable. Direct crops from the original fresh-workflow visible BMP confirm General settings and Readiness are present. The earlier full-frame omission interpretation was incorrect and is retracted. This establishes bounded static review only, not universal visual acceptance.",
+  "attributionCorrection": "The earlier full-frame visual interpretation incorrectly reported absent General settings and Readiness, initially also misattributing the filename. Exact crops from each original fresh-workflow-960-visible.bmp contain both elements. No omission or repaint-timing defect is established by those frames.",
+  "keyboardEvidence": [
+    {
+      "installation": "fresh",
+      "resultState": "empty",
+      "resultCount": 0,
+      "initialQueryFocusRequiredByPassingGate": true,
+      "initialQueryFocusEvidence": "Passing scenario includes native initial query-focus assertion before keyboard editing; no pointer/refocus intervention after open.",
+      "beforeEscape": {
+        "foregroundWindow": 590522,
+        "resultsWindow": 590522,
+        "focusWindow": 917994,
+        "focusControlId": 1501,
+        "focusClass": "Edit",
+        "focusEnabled": true,
+        "focusInsideResults": true
+      },
+      "searchFocusRetention": {
+        "controlId": 1502,
+        "samples": 117,
+        "durationSeconds": 2.416374300000001,
+        "focusRetained": true,
+        "enabledThroughoutSamples": true,
+        "inputOrRefocusDuringObservation": false,
+        "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+      },
+      "closedImmediatelyAfterSearch": true,
+      "pointerInterventionAfterOpen": false
+    },
+    {
+      "installation": "fresh",
+      "resultState": "populated",
+      "resultCount": 1,
+      "initialQueryFocusRequiredByPassingGate": true,
+      "initialQueryFocusEvidence": "Passing scenario includes native initial query-focus assertion before keyboard editing; no pointer/refocus intervention after open.",
+      "beforeEscape": {
+        "foregroundWindow": 656058,
+        "resultsWindow": 656058,
+        "focusWindow": 590454,
+        "focusControlId": 1501,
+        "focusClass": "Edit",
+        "focusEnabled": true,
+        "focusInsideResults": true
+      },
+      "searchFocusRetention": {
+        "controlId": 1502,
+        "samples": 117,
+        "durationSeconds": 2.417807099999976,
+        "focusRetained": true,
+        "enabledThroughoutSamples": true,
+        "inputOrRefocusDuringObservation": false,
+        "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+      },
+      "closedImmediatelyAfterSearch": true,
+      "pointerInterventionAfterOpen": false
+    },
+    {
+      "installation": "upgraded",
+      "resultState": "empty",
+      "resultCount": 0,
+      "initialQueryFocusRequiredByPassingGate": true,
+      "initialQueryFocusEvidence": "Passing scenario includes native initial query-focus assertion before keyboard editing; no pointer/refocus intervention after open.",
+      "beforeEscape": {
+        "foregroundWindow": 721594,
+        "resultsWindow": 721594,
+        "focusWindow": 852656,
+        "focusControlId": 1501,
+        "focusClass": "Edit",
+        "focusEnabled": true,
+        "focusInsideResults": true
+      },
+      "searchFocusRetention": {
+        "controlId": 1502,
+        "samples": 117,
+        "durationSeconds": 2.4177595000000167,
+        "focusRetained": true,
+        "enabledThroughoutSamples": true,
+        "inputOrRefocusDuringObservation": false,
+        "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+      },
+      "closedImmediatelyAfterSearch": true,
+      "pointerInterventionAfterOpen": false
+    },
+    {
+      "installation": "upgraded",
+      "resultState": "populated",
+      "resultCount": 1,
+      "initialQueryFocusRequiredByPassingGate": true,
+      "initialQueryFocusEvidence": "Passing scenario includes native initial query-focus assertion before keyboard editing; no pointer/refocus intervention after open.",
+      "beforeEscape": {
+        "foregroundWindow": 787130,
+        "resultsWindow": 787130,
+        "focusWindow": 656024,
+        "focusControlId": 1501,
+        "focusClass": "Edit",
+        "focusEnabled": true,
+        "focusInsideResults": true
+      },
+      "searchFocusRetention": {
+        "controlId": 1502,
+        "samples": 117,
+        "durationSeconds": 2.417945599999996,
+        "focusRetained": true,
+        "enabledThroughoutSamples": true,
+        "inputOrRefocusDuringObservation": false,
+        "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+      },
+      "closedImmediatelyAfterSearch": true,
+      "pointerInterventionAfterOpen": false
+    }
+  ],
+  "limitations": [
+    "Observed Windows Server 2022 at 96 DPI only; no representative-PC, high-DPI, multiple-monitor or physical-trackpad acceptance.",
+    "25 captures use PrintWindow and four use screen BitBlt; screen captures in this gate were taken after PrintWindow. Static captures do not establish temporal repaint quality.",
+    "Actual workspace sizes are 960x680 and 1024x728. Requested 1280x900 was bounded to 1024x728.",
+    "Keyboard assertions come from the exact native gate report and source contract, not screenshot pixels.",
+    "Screenshots show scrollable panels at their captured offsets, not every field or list row."
+  ],
+  "captures": [
+    {
+      "artifactPath": "patch/updater-cancel-picker.bmp",
+      "bytes": 1200054,
+      "sha256": "3d59014a88c9d07cd265c9a315c024a1c344e6802c88b82ea3e7397203e77718",
+      "width": 625,
+      "height": 480,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Native folder picker title, Folder entry, Update this Workbench and Cancel actions are legible. Shell list columns and long breadcrumb components scroll/ellipsize normally."
+      ],
+      "reviewMethod": "Direct visual inspection of exact final capture at captured resolution"
+    },
+    {
+      "artifactPath": "patch/updater-invalid-picker.bmp",
+      "bytes": 1200054,
+      "sha256": "46221868a5cab1290bceab6ddf41a0ca09d9ea98f5494c4407b335c5e2db28fa",
+      "width": 625,
+      "height": 480,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Native folder picker title, Folder entry, Update this Workbench and Cancel actions are legible. Shell list columns and long breadcrumb components scroll/ellipsize normally."
+      ],
+      "reviewMethod": "Direct visual inspection of exact final capture at captured resolution"
+    },
+    {
+      "artifactPath": "patch/updater-invalid-warning.bmp",
+      "bytes": 301878,
+      "sha256": "0e52f8bac762d6f7e77dcdc7c9152b4f1f5f1435cc6a04bceb9817e25b028381",
+      "width": 393,
+      "height": 192,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Invalid-folder explanation, required installation files and OK action are readable and contained."
+      ],
+      "reviewMethod": "Byte-identical to directly visually inspected capture from this exact candidate/run",
+      "identicalTo": {
+        "pathCase": "ordinary",
+        "artifactPath": "patch/updater-invalid-warning.bmp"
+      }
+    },
+    {
+      "artifactPath": "patch/updater-invalid-retry-picker.bmp",
+      "bytes": 1200054,
+      "sha256": "c7e4fbe60b83d868d66d3feca4f6da9f2df40401ec8224377faffa46869ce87f",
+      "width": 625,
+      "height": 480,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Native folder picker title, Folder entry, Update this Workbench and Cancel actions are legible. Shell list columns and long breadcrumb components scroll/ellipsize normally."
+      ],
+      "reviewMethod": "Direct visual inspection of exact final capture at captured resolution"
+    },
+    {
+      "artifactPath": "patch/updater-install-picker.bmp",
+      "bytes": 1200054,
+      "sha256": "c7e4fbe60b83d868d66d3feca4f6da9f2df40401ec8224377faffa46869ce87f",
+      "width": 625,
+      "height": 480,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Native folder picker title, Folder entry, Update this Workbench and Cancel actions are legible. Shell list columns and long breadcrumb components scroll/ellipsize normally."
+      ],
+      "reviewMethod": "Byte-identical to directly visually inspected capture from this exact candidate/run",
+      "identicalTo": {
+        "pathCase": "spaces",
+        "artifactPath": "patch/updater-invalid-retry-picker.bmp"
+      }
+    },
+    {
+      "artifactPath": "patch/updater-install-success.bmp",
+      "bytes": 290034,
+      "sha256": "2357dc7e12a5d30970a335f342ce658d3a76ceb1fbae7c66d2eed89c55b174ef",
+      "width": 405,
+      "height": 179,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Update completion explanation and OK action are readable and contained."
+      ],
+      "reviewMethod": "Byte-identical to directly visually inspected capture from this exact candidate/run",
+      "identicalTo": {
+        "pathCase": "ordinary",
+        "artifactPath": "patch/updater-install-success.bmp"
+      }
+    },
+    {
+      "artifactPath": "patch/updater-repeat-picker.bmp",
+      "bytes": 1200054,
+      "sha256": "262b739ad8281e1ef3a4b8e5a350458cdab733e71448f70d961ba827080daa8a",
+      "width": 625,
+      "height": 480,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Native folder picker title, Folder entry, Update this Workbench and Cancel actions are legible. Shell list columns and long breadcrumb components scroll/ellipsize normally."
+      ],
+      "reviewMethod": "Direct visual inspection of exact final capture at captured resolution"
+    },
+    {
+      "artifactPath": "patch/updater-repeat-success.bmp",
+      "bytes": 290034,
+      "sha256": "2357dc7e12a5d30970a335f342ce658d3a76ceb1fbae7c66d2eed89c55b174ef",
+      "width": 405,
+      "height": 179,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Update completion explanation and OK action are readable and contained."
+      ],
+      "reviewMethod": "Byte-identical to directly visually inspected capture from this exact candidate/run",
+      "identicalTo": {
+        "pathCase": "ordinary",
+        "artifactPath": "patch/updater-install-success.bmp"
+      }
+    },
+    {
+      "artifactPath": "patch/fresh-first-open-starter.bmp",
+      "bytes": 2649654,
+      "sha256": "8340249724a191191909cbaa3700aa5cd8b95ea201ea6867de664dbe05cddae6",
+      "width": 920,
+      "height": 720,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Starter radio is selected; installed pack rows, offline explanation, zero additional download and Use Workbench action are readable. List is scrollable."
+      ],
+      "reviewMethod": "Byte-identical to directly visually inspected capture from this exact candidate/run",
+      "identicalTo": {
+        "pathCase": "ordinary",
+        "artifactPath": "patch/fresh-first-open-starter.bmp"
+      }
+    },
+    {
+      "artifactPath": "patch/fresh-tool-960x680.bmp",
+      "bytes": 2611254,
+      "sha256": "de1f7ac665e3f43e866b4575092b2b36a6ab19aa83d2ba6995d2f5031b6f1ff3",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane workspace, tool library categories, top navigation and fixed bottom controls are readable and contained. General settings retain their vertical scrollbar; long paths scroll horizontally within edits.",
+        "At 960 by 680 the lower References control is partly below the General settings viewport; vertical scrolling is the intended access path, while fixed navigation remains fully visible."
+      ],
+      "reviewMethod": "Direct visual inspection of exact final capture at captured resolution"
+    },
+    {
+      "artifactPath": "patch/fresh-tool-960-visible.bmp",
+      "bytes": 2611254,
+      "sha256": "e1b6dc672590f450317e3a4cfaf56a01be4727bf7f3e5961dd4900a51639e740",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "screen BitBlt; no PrintWindow repaint",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane workspace, tool library categories, top navigation and fixed bottom controls are readable and contained. General settings retain their vertical scrollbar; long paths scroll horizontally within edits.",
+        "At 960 by 680 the lower References control is partly below the General settings viewport; vertical scrolling is the intended access path, while fixed navigation remains fully visible."
+      ],
+      "reviewMethod": "Direct visual inspection of exact final capture at captured resolution"
+    },
+    {
+      "artifactPath": "patch/fresh-tool-1024x728.bmp",
+      "bytes": 2981942,
+      "sha256": "c3a8c6e1874e94ae365bc91c00fb7d92863977f5e092ebac0364ff2c55a03257",
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane workspace, tool library categories, top navigation and fixed bottom controls are readable and contained. General settings retain their vertical scrollbar; long paths scroll horizontally within edits."
+      ],
+      "reviewMethod": "Direct visual inspection of exact final capture at captured resolution"
+    },
+    {
+      "artifactPath": "patch/fresh-tool-1280x900.bmp",
+      "bytes": 2981942,
+      "sha256": "c3a8c6e1874e94ae365bc91c00fb7d92863977f5e092ebac0364ff2c55a03257",
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane workspace, tool library categories, top navigation and fixed bottom controls are readable and contained. General settings retain their vertical scrollbar; long paths scroll horizontally within edits.",
+        "Filename records a requested size; actual image is 1024 by 728, byte-identical to the corresponding 1024 capture. No 1280 by 900 desktop coverage is claimed."
+      ],
+      "reviewMethod": "Byte-identical to directly visually inspected capture from this exact candidate/run",
+      "identicalTo": {
+        "pathCase": "spaces",
+        "artifactPath": "patch/fresh-tool-1024x728.bmp"
+      }
+    },
+    {
+      "artifactPath": "patch/fresh-workflow-960x680.bmp",
+      "bytes": 2611254,
+      "sha256": "e75a9395e87003a4c22ca3ae8fdbef7c81cff65cd69208e4544bf1537d713f6b",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane workspace, tool library categories, top navigation and fixed bottom controls are readable and contained. General settings retain their vertical scrollbar; long paths scroll horizontally within edits.",
+        "At 960 by 680 the lower References control is partly below the General settings viewport; vertical scrolling is the intended access path, while fixed navigation remains fully visible."
+      ],
+      "reviewMethod": "Direct visual inspection of exact final capture at captured resolution"
+    },
+    {
+      "artifactPath": "patch/fresh-workflow-960-visible.bmp",
+      "bytes": 2611254,
+      "sha256": "5bc8931eb784c90d6e891abce007d82829b587cc465a82bedc97645c8dfcee26",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "screen BitBlt; no PrintWindow repaint",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Exact original-image crops confirm General settings and Readiness are visible; prior full-frame omission finding is retracted.",
+        "Three-pane workspace and fixed navigation fit the captured minimum window; General settings retains its scrollbar."
+      ],
+      "reviewMethod": "Direct visual inspection of exact final capture at captured resolution"
+    },
+    {
+      "artifactPath": "patch/fresh-workflow-1024x728.bmp",
+      "bytes": 2981942,
+      "sha256": "8f4bc58a259358b4395f570396d5f38758e12b7fc952bb37afcc3015fb2c28ff",
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane workspace, tool library categories, top navigation and fixed bottom controls are readable and contained. General settings retain their vertical scrollbar; long paths scroll horizontally within edits."
+      ],
+      "reviewMethod": "Direct visual inspection of exact final capture at captured resolution"
+    },
+    {
+      "artifactPath": "patch/fresh-workflow-1280x900.bmp",
+      "bytes": 2981942,
+      "sha256": "8f4bc58a259358b4395f570396d5f38758e12b7fc952bb37afcc3015fb2c28ff",
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane workspace, tool library categories, top navigation and fixed bottom controls are readable and contained. General settings retain their vertical scrollbar; long paths scroll horizontally within edits.",
+        "Filename records a requested size; actual image is 1024 by 728, byte-identical to the corresponding 1024 capture. No 1280 by 900 desktop coverage is claimed."
+      ],
+      "reviewMethod": "Byte-identical to directly visually inspected capture from this exact candidate/run",
+      "identicalTo": {
+        "pathCase": "spaces",
+        "artifactPath": "patch/fresh-workflow-1024x728.bmp"
+      }
+    },
+    {
+      "artifactPath": "patch/fresh-results-empty.bmp",
+      "bytes": 2556854,
+      "sha256": "feb6d244e84713edf729775ca34a1e7ffadb2f75d224848a687ad9098ed68e57",
+      "width": 940,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Empty state and actionable search guidance are readable; query selection/focus is visible; View/Open are visibly disabled and Close fits."
+      ],
+      "reviewMethod": "Byte-identical to directly visually inspected capture from this exact candidate/run",
+      "identicalTo": {
+        "pathCase": "ordinary",
+        "artifactPath": "patch/fresh-results-empty.bmp"
+      }
+    },
+    {
+      "artifactPath": "patch/fresh-results-populated.bmp",
+      "bytes": 2556854,
+      "sha256": "142f634cb77ed1394bdaf2a492e7b72e0ea2a04e7b9bf137c0637bb3e43427fe",
+      "width": 940,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Selected completed SAMtools reference-index run, unavailable-measurement explanation and no-QC-threshold statement are readable. Tools-cell ellipsis is intentional; the summary is vertically scrollable. Query selection/focus and bottom actions are visible."
+      ],
+      "reviewMethod": "Direct visual inspection of exact final capture at captured resolution"
+    },
+    {
+      "artifactPath": "patch/upgraded-tool-960x680.bmp",
+      "bytes": 2611254,
+      "sha256": "2ca1d833e18cf971a809bce8fcf3c37e7f7cfff8c947d0318c05158df0545520",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane workspace, tool library categories, top navigation and fixed bottom controls are readable and contained. General settings retain their vertical scrollbar; long paths scroll horizontally within edits.",
+        "At 960 by 680 the lower References control is partly below the General settings viewport; vertical scrolling is the intended access path, while fixed navigation remains fully visible."
+      ],
+      "reviewMethod": "Direct visual inspection of exact final capture at captured resolution"
+    },
+    {
+      "artifactPath": "patch/upgraded-tool-960-visible.bmp",
+      "bytes": 2611254,
+      "sha256": "13ed5e23bf128a3140614650e9d36ca63d7ae95b80589b268f4f19d0418bd5d8",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "screen BitBlt; no PrintWindow repaint",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane workspace, tool library categories, top navigation and fixed bottom controls are readable and contained. General settings retain their vertical scrollbar; long paths scroll horizontally within edits.",
+        "At 960 by 680 the lower References control is partly below the General settings viewport; vertical scrolling is the intended access path, while fixed navigation remains fully visible."
+      ],
+      "reviewMethod": "Direct visual inspection of exact final capture at captured resolution"
+    },
+    {
+      "artifactPath": "patch/upgraded-tool-1024x728.bmp",
+      "bytes": 2981942,
+      "sha256": "664dd2620da7b8e035bcab1ce9201bdfbaad21846cba19af63dcea1d9f3fd933",
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane workspace, tool library categories, top navigation and fixed bottom controls are readable and contained. General settings retain their vertical scrollbar; long paths scroll horizontally within edits."
+      ],
+      "reviewMethod": "Direct visual inspection of exact final capture at captured resolution"
+    },
+    {
+      "artifactPath": "patch/upgraded-tool-1280x900.bmp",
+      "bytes": 2981942,
+      "sha256": "664dd2620da7b8e035bcab1ce9201bdfbaad21846cba19af63dcea1d9f3fd933",
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane workspace, tool library categories, top navigation and fixed bottom controls are readable and contained. General settings retain their vertical scrollbar; long paths scroll horizontally within edits.",
+        "Filename records a requested size; actual image is 1024 by 728, byte-identical to the corresponding 1024 capture. No 1280 by 900 desktop coverage is claimed."
+      ],
+      "reviewMethod": "Byte-identical to directly visually inspected capture from this exact candidate/run",
+      "identicalTo": {
+        "pathCase": "spaces",
+        "artifactPath": "patch/upgraded-tool-1024x728.bmp"
+      }
+    },
+    {
+      "artifactPath": "patch/upgraded-workflow-960x680.bmp",
+      "bytes": 2611254,
+      "sha256": "a1658c6a1b75ceaf77793611e19e2dcf76716184072cbcaa131b01e78dc41086",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane workspace, tool library categories, top navigation and fixed bottom controls are readable and contained. General settings retain their vertical scrollbar; long paths scroll horizontally within edits.",
+        "At 960 by 680 the lower References control is partly below the General settings viewport; vertical scrolling is the intended access path, while fixed navigation remains fully visible."
+      ],
+      "reviewMethod": "Direct visual inspection of exact final capture at captured resolution"
+    },
+    {
+      "artifactPath": "patch/upgraded-workflow-960-visible.bmp",
+      "bytes": 2611254,
+      "sha256": "3594f74614b0341233bf1f92b46fec21c41695ca81d5e6bb8ff62e505866cb26",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "screen BitBlt; no PrintWindow repaint",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane workspace, tool library categories, top navigation and fixed bottom controls are readable and contained. General settings retain their vertical scrollbar; long paths scroll horizontally within edits.",
+        "At 960 by 680 the lower References control is partly below the General settings viewport; vertical scrolling is the intended access path, while fixed navigation remains fully visible."
+      ],
+      "reviewMethod": "Direct visual inspection of exact final capture at captured resolution"
+    },
+    {
+      "artifactPath": "patch/upgraded-workflow-1024x728.bmp",
+      "bytes": 2981942,
+      "sha256": "bf867adca3d445797086b507f621c75e08cb428b1ffc58135b5520ba2fe092ee",
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane workspace, tool library categories, top navigation and fixed bottom controls are readable and contained. General settings retain their vertical scrollbar; long paths scroll horizontally within edits."
+      ],
+      "reviewMethod": "Direct visual inspection of exact final capture at captured resolution"
+    },
+    {
+      "artifactPath": "patch/upgraded-workflow-1280x900.bmp",
+      "bytes": 2981942,
+      "sha256": "bf867adca3d445797086b507f621c75e08cb428b1ffc58135b5520ba2fe092ee",
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Three-pane workspace, tool library categories, top navigation and fixed bottom controls are readable and contained. General settings retain their vertical scrollbar; long paths scroll horizontally within edits.",
+        "Filename records a requested size; actual image is 1024 by 728, byte-identical to the corresponding 1024 capture. No 1280 by 900 desktop coverage is claimed."
+      ],
+      "reviewMethod": "Byte-identical to directly visually inspected capture from this exact candidate/run",
+      "identicalTo": {
+        "pathCase": "spaces",
+        "artifactPath": "patch/upgraded-workflow-1024x728.bmp"
+      }
+    },
+    {
+      "artifactPath": "patch/upgraded-results-empty.bmp",
+      "bytes": 2556854,
+      "sha256": "feb6d244e84713edf729775ca34a1e7ffadb2f75d224848a687ad9098ed68e57",
+      "width": 940,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Empty state and actionable search guidance are readable; query selection/focus is visible; View/Open are visibly disabled and Close fits."
+      ],
+      "reviewMethod": "Byte-identical to directly visually inspected capture from this exact candidate/run",
+      "identicalTo": {
+        "pathCase": "ordinary",
+        "artifactPath": "patch/fresh-results-empty.bmp"
+      }
+    },
+    {
+      "artifactPath": "patch/upgraded-results-populated.bmp",
+      "bytes": 2556854,
+      "sha256": "fef30272238c4ffc05e0b4396982929be74ec1bc48a9b58bbd54ae5c8956712a",
+      "width": 940,
+      "height": 680,
+      "dpi": 96,
+      "captureMethod": "PrintWindow",
+      "reviewStatus": "reviewed",
+      "findings": [
+        "Selected completed SAMtools reference-index run, unavailable-measurement explanation and no-QC-threshold statement are readable. Tools-cell ellipsis is intentional; the summary is vertically scrollable. Query selection/focus and bottom actions are visible."
+      ],
+      "reviewMethod": "Direct visual inspection of exact final capture at captured resolution"
+    }
+  ],
+  "observedIssues": [],
+  "reviewCorrections": [
+    {
+      "correctedUtc": "2026-10-09T20:59:56.054664+00:00",
+      "priorInterpretation": "General settings and Readiness were absent in fresh-workflow-960-visible.bmp.",
+      "correctedFinding": "Both elements are visibly present in crops extracted from the exact original BMP. The prior full-frame interpretation was incorrect.",
+      "priorInterpretationRetracted": true,
+      "originalArtifactPath": "patch/fresh-workflow-960-visible.bmp",
+      "originalSha256": "5bc8931eb784c90d6e891abce007d82829b587cc465a82bedc97645c8dfcee26",
+      "regionCoordinates": {
+        "General settings": [
+          640,
+          110,
+          795,
+          145
+        ],
+        "Readiness": [
+          345,
+          603,
+          448,
+          643
+        ]
+      },
+      "cropEvidence": [
+        {
+          "path": "patch/review-original-heading-crop.png",
+          "sha256": "19adb2f64e20e94225af041909a9570f1caa274d7c29b455c56e67f4850f0ddb"
+        },
+        {
+          "path": "patch/review-original-readiness-crop.png",
+          "sha256": "5b0682e2b7fec102de296e1ca4c949b852f4936a63e232a014d43f3c0a0ccc41"
+        }
+      ]
+    }
+  ]
+}

@@ -153,7 +153,12 @@
     "deployment_acceptance_guide": "../docs/deployment-acceptance.md",
     "institutional_deployment_guide": "../docs/institutional-deployment.md",
     "deployment_input_lock": "../packaging/deployment-0.16.0-lock.json",
-    "deployment_final_evidence": "evidence/deployment-acceptance-final-2026-10-09.json"
+    "deployment_final_evidence": "evidence/deployment-acceptance-final-2026-10-09.json",
+    "ui_patch_0_16_1_handover": "ui-patch-0.16.1-handover.md",
+    "ui_patch_0_16_1_source_validation": "evidence/ui-patch-0.16.1-source-validation-2026-10-09.json",
+    "ui_patch_0_16_1_archive_audit": "evidence/ui-patch-0.16.1-archive-audit-2026-10-09.json",
+    "ui_patch_0_16_1_native_validation": "evidence/ui-patch-0.16.1-native-validation-2026-10-09.json",
+    "ui_patch_0_16_1_visual_review": "evidence/ui-patch-0.16.1-visual-review-2026-10-09.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -1166,78 +1171,180 @@
   },
   "active_development": {
     "recorded_on": "2026-10-09",
-    "kind": "deployment-acceptance-companion",
-    "application_version": "0.16.0",
-    "application_rebuilt": false,
-    "application_source_commit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
-    "branch": "feature/deployment-acceptance",
-    "status": "complete-observations-with-failed-keyboard-acceptance",
-    "authorization": "okay, lets do that",
-    "authorization_date": "2026-10-09",
+    "kind": "native-keyboard-narrow-display-patch",
+    "application_version": "0.16.1",
+    "application_rebuilt": true,
+    "application_source_commit": "8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+    "branch": "fix/native-ui-0.16.1",
+    "base_branch": "feature/deployment-acceptance",
+    "base_pull_request": "https://github.com/comparativechrono/workbench/pull/14",
+    "starting_commit": "f74d90229be6a78d6ad0c0076c54c04bb7e7cae2",
+    "status": "implementation and recorded source/native/archive/settled-visual validation complete; ready as an unpublished draft review candidate",
+    "authorization": "Continuation to repair the desktop defects observed in the accepted Windows acceptance and deployment set; unpublished review only.",
     "release_authorized": false,
     "released": false,
+    "published_baseline": "0.16.0",
     "published_assets_changed": false,
-    "pull_request": "https://github.com/comparativechrono/workbench/pull/14",
+    "pull_request": "https://github.com/comparativechrono/workbench/pull/15",
     "pull_request_state": "draft",
-    "candidate_commit": "1a7d1e5f70e3ca710c9b3f6b1313353e8d46cc78",
+    "candidate_commit": "8938e709b041106e8a46e1447383e8e9ba3e0cb9",
     "scope": [
-      "Verified offline companion from four exact published archives",
-      "Executable/runtime/licence inventories with explicit unknowns",
-      "Manual reports and separate imported automation",
-      "Actual Authenticode observations without signing or policy changes",
-      "Actual updater folder-picker and bounded native desktop checks"
+      "Results keyboard focus and immediate Escape after Search on fresh and upgraded installations",
+      "Read-only queue/status polling preserves edit focus when no outgoing actions exist; mutation guards and FIFO ordering remain",
+      "Monitor-work-area initial placement and minimum bounds, including the observed 1024-pixel desktop",
+      "New Starter, matching source companion and core-only 0.16.0-to-0.16.1 updater",
+      "Exact ordinary/spaced Windows validation, source/archive audit and screenshot review"
     ],
-    "handover": "deployment-acceptance-handover.md",
-    "acceptance_guide": "../docs/deployment-acceptance.md",
-    "institutional_review_guide": "../docs/institutional-deployment.md",
-    "input_lock": "../packaging/deployment-0.16.0-lock.json",
-    "evidence": "evidence/deployment-acceptance-final-2026-10-09.json",
-    "archive_audit": "evidence/deployment-acceptance-archive-audit-2026-10-09.json",
-    "visual_review": "evidence/deployment-acceptance-visual-review-2026-10-09.json",
-    "attempt_history": "evidence/deployment-acceptance-attempts-2026-10-09.json",
+    "handover": "ui-patch-0.16.1-handover.md",
+    "companion_baseline_handover": "deployment-acceptance-handover.md",
     "verification_progress": {
-      "status": "Complete observations; CI failed",
-      "current_run": "https://github.com/comparativechrono/workbench/actions/runs/37979351047",
+      "status": "third candidate source/native/archive checks and settled 96-DPI visual review passed; final validator recheck passed on unchanged archives",
+      "current_run": "https://github.com/comparativechrono/workbench/actions/runs/37988570028",
       "source_tests": {
-        "passed": 87,
+        "python_suites": 13,
+        "passed": 141,
         "failed": 0,
         "skipped": 0,
-        "platform": "ubuntu-22.04"
+        "source_commit": "8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+        "evidence": "evidence/ui-patch-0.16.1-source-validation-2026-10-09.json"
       },
-      "each_windows_path": {
-        "native_passed": 14,
-        "native_failed": 2,
-        "native_blocked": 0,
-        "native_skipped": 0,
-        "curated_passed": 11,
-        "signature_files": 72,
-        "signature_valid": 60,
-        "signature_not_signed": 12,
-        "manual_not_tested": 10
+      "native_build": {
+        "executables": 3,
+        "strict_warnings": "passed",
+        "cpp_json_check": "passed"
       },
-      "screenshots_reviewed": 54
-    },
-    "download": {
-      "file": "native-workbench-0.16.0-deployment-toolkit.zip",
-      "bytes": 126494957,
-      "sha256": "7e4fca6d814ad17aa82980db6ca735e9b3f191b1fd1a9e5b885e926290ab5cc5",
-      "id": 11641200131,
-      "url": "https://github.com/comparativechrono/workbench/actions/runs/37979351047/artifacts/11641200131",
-      "expiresAt": "2026-11-08T19:19:03Z"
+      "exact_packaged_windows": {
+        "status": "passed",
+        "passed_each_path": 84,
+        "paths": [
+          "ordinary",
+          "spaces"
+        ],
+        "scope": "Third candidate exact Starter and updater, distinct from retained failed attempts.",
+        "evidence": "evidence/ui-patch-0.16.1-native-validation-2026-10-09.json"
+      },
+      "archive_source_audit": {
+        "status": "passed",
+        "git_source_files": 787,
+        "packaged_python_source_matches": 33,
+        "core_files": 87,
+        "unchanged_pack_files": 186,
+        "unchanged_runtime_files": 39,
+        "evidence": "evidence/ui-patch-0.16.1-archive-audit-2026-10-09.json"
+      },
+      "screenshot_review": {
+        "status": "passed for recorded settled hosted 96-DPI observations",
+        "corrected_interpretation": "Crops derived from the original third-run image bytes show General settings and Readiness present. The earlier full-frame omission interpretation was incorrect and is not evidence of product defect or transient absence.",
+        "passive_capture_observation": "Visible captures before PrintWindow show fixed controls settled by the first requested 250-ms frame (about 0.3 seconds elapsed), unchanged at 750/1250 ms. Immediate frames can retain old geometry.",
+        "scope": "Settled observations in both Windows paths. Immediate resize frames can retain old geometry; finite samples do not establish zero flicker or exclude shorter unsampled transients. High-DPI, physical-trackpad and representative-PC acceptance remain outstanding.",
+        "evidence": "evidence/ui-patch-0.16.1-visual-review-2026-10-09.json"
+      },
+      "validator_recheck": {
+        "status": "passed",
+        "run": "https://github.com/comparativechrono/workbench/actions/runs/37989535317",
+        "validator_commit": "69022689e686b2cacdc98dbdbef728e664941e67",
+        "application_source_commit": "8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+        "repeated_checks_each_path": 19,
+        "paths": [
+          "ordinary",
+          "spaces"
+        ],
+        "application_rebuilt": false,
+        "scope": "Repeats the patch gate on the same frozen archives. These 19 checks are within the existing 84 native checks per path, not 103 unique checks."
+      },
+      "representative_machine_acceptance": "not established"
     },
     "known_limits": [
-      "Results Escape after keyboard Search failed on fresh and upgraded published 0.16.0 in both paths. No control had focus before or after Escape. Explicit pointer focus into the query then Escape closed; that diagnostic does not pass the original requirement. The internal application cause is not established. Visible Close fallback was not needed/tested.",
-      "Published minimum width 1040 exceeds the hosted 1024-pixel desktop/work area; right edge clipped. Bounded resize assertions are not acceptance on that narrower display.",
-      "All 10 manual acceptance items remain not-tested. Representative PCs, high DPI and transitions, multiple monitors, physical trackpads, Unicode/path-limit target-PC observations and managed-machine security/IT approval remain outstanding.",
-      "Python socket operations were denied in scientific hosts; no OS network isolation, realistic workload capacity, biological/clinical validation or benchmark is claimed.",
-      "Other migration routes, all optional packs and all earlier application suites were not rerun for the unchanged application. Scientific Linux CWL and SDK/build recovery remain later sets; benchmarking is separate."
+      "Draft review candidate only; no merge or release. Published 0.16.0 and the deployment companion original failures remain unchanged.",
+      "Previous source, native and science passes do not validate the rebuilt 0.16.1 archives.",
+      "Layout targets the observed 96-DPI desktop with a 960-pixel outer minimum width. Source review identifies busy Cancel/Results overlap below 908 logical client pixels and possible footer overlap below 902. Smaller work areas and high DPI remain unvalidated; monitor clamping is not acceptance of every resulting layout.",
+      "Representative PCs, high DPI and transitions, multiple monitors, physical trackpads and managed-machine acceptance remain outstanding.",
+      "Executable signing needs a controlled identity; institutional deployment requires actual IT approval.",
+      "Scientific Linux CWL and SDK/build recovery remain later sets. Benchmarking is handled separately."
     ],
-    "next_action": "Review the companion; fix Results keyboard focus/Escape in a separately versioned application candidate, address or explicitly bound narrow-display behavior, preserve published bytes and repeat exact ordinary/spaced native gates.",
-    "delivery_recovery": {
-      "problem": "Workspace executor disconnected after validation, local documentation preparation and independent count/hash review.",
-      "recoveredThrough": "GitHub API using the exact existing branch tree, stored artifact metadata, completed review observations and original reports retained in Actions.",
-      "limits": "Original report copies and detailed per-image receipts could not be read from the disconnected local workspace. Durable aggregate receipts reference exact artifact hashes and known native report hashes; no unavailable values are invented. Original reports/screenshots remain downloadable until 2026-11-08."
-    }
+    "next_action": "Review the unpublished draft candidate and perform the outstanding representative-PC acceptance. No merge or release is authorized by this delivery.",
+    "validation_attempts": [
+      {
+        "candidate_commit": "5e2bc368c5ea869ff794ad9d90a40480b6fd06fe",
+        "run": "https://github.com/comparativechrono/workbench/actions/runs/37986650814",
+        "status": "failed native gate; retained historical attempt",
+        "source_tests": {
+          "python_suites": 13,
+          "passed": 141,
+          "failed": 0,
+          "skipped": 0,
+          "scope": "Candidate build at 5e2bc368c5ea869ff794ad9d90a40480b6fd06fe"
+        },
+        "native_build": {
+          "executables": 3,
+          "strict_warnings": "passed",
+          "cpp_json_check": "passed"
+        },
+        "ui_gate": {
+          "ordinary": {
+            "passed": 11,
+            "failed": 2
+          },
+          "spaces": {
+            "passed": 10,
+            "failed": 2
+          }
+        },
+        "other_checks_each_path": {
+          "curated": 11,
+          "workspace": 32,
+          "reference_management": 10,
+          "results": 9,
+          "scroll": 3,
+          "total": 65
+        },
+        "follow_up": "Validator fixes correct control IDs and wait for the Setup dismissal reply before app closure. The spaced-path filter-clear failure cause remains unproven; explicit Home/Shift+End selection makes the next attempt observable.",
+        "scope": "These passes and failures describe the first candidate only and are not transferred to subsequent archives."
+      },
+      {
+        "candidate_commit": "473428671cbb75505c163a9a761caf84e73dfdd9",
+        "run": "https://github.com/comparativechrono/workbench/actions/runs/37987546291",
+        "status": "ordinary path passed; spaced-path native patch gate failed; retained historical attempt",
+        "ordinary_all_configured_checks_passed": 84,
+        "spaces_patch_gate": {
+          "passed": 11,
+          "failed": 2,
+          "failed_observations": [
+            "library Tab focus before Results",
+            "library Home focus before Results"
+          ]
+        },
+        "other_checks_each_path": {
+          "curated": 11,
+          "workspace": 32,
+          "reference_management": 10,
+          "results": 9,
+          "scroll": 3,
+          "total": 65
+        },
+        "follow_up": "Third candidate changes read-only queue/status polling to avoid disabling edits when no outgoing actions exist; mutation guards and FIFO remain. Passive 2.4-second focus holds span polling intervals without refocusing.",
+        "evidence_preservation": "Original reports and archive audits retained in the attempt history.",
+        "scope": "The ordinary-path pass does not waive the spaced-path failures or validate subsequent rebuilt archives."
+      }
+    ],
+    "archives": [
+      {
+        "file": "native-workbench-0.16.1-source.zip",
+        "bytes": 48078770,
+        "sha256": "48523c0e7090f661442bec2999c1658a1532ad7a5fa7fe882b1081b23452acc7"
+      },
+      {
+        "file": "native-workbench-0.16.1-starter-windows.zip",
+        "bytes": 17847594,
+        "sha256": "7dfed53de2279f51deaea405dbfd29b36cddb733e5a20c43b3112f27a7728a8e"
+      },
+      {
+        "file": "native-workbench-0.16.1-update-from-0.16.0.zip",
+        "bytes": 12982946,
+        "sha256": "f2dc435495f43d837e80837f3ba83ff7b6963294219d5bc88bc8fb0e5d82effd"
+      }
+    ],
+    "validator_commit": "69022689e686b2cacdc98dbdbef728e664941e67"
   },
   "readiness_performance_development": {
     "recorded_on": "2026-10-08",
@@ -1722,5 +1829,88 @@
     "published_at": "2026-10-09T15:54:56Z",
     "prerelease": true,
     "draft": false
+  },
+  "deployment_acceptance_development": {
+    "recorded_on": "2026-10-09",
+    "kind": "deployment-acceptance-companion",
+    "application_version": "0.16.0",
+    "application_rebuilt": false,
+    "application_source_commit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+    "branch": "feature/deployment-acceptance",
+    "status": "complete-observations-with-failed-keyboard-acceptance",
+    "authorization": "okay, lets do that",
+    "authorization_date": "2026-10-09",
+    "release_authorized": false,
+    "released": false,
+    "published_assets_changed": false,
+    "pull_request": "https://github.com/comparativechrono/workbench/pull/14",
+    "pull_request_state": "draft",
+    "candidate_commit": "1a7d1e5f70e3ca710c9b3f6b1313353e8d46cc78",
+    "scope": [
+      "Verified offline companion from four exact published archives",
+      "Executable/runtime/licence inventories with explicit unknowns",
+      "Manual reports and separate imported automation",
+      "Actual Authenticode observations without signing or policy changes",
+      "Actual updater folder-picker and bounded native desktop checks"
+    ],
+    "handover": "deployment-acceptance-handover.md",
+    "acceptance_guide": "../docs/deployment-acceptance.md",
+    "institutional_review_guide": "../docs/institutional-deployment.md",
+    "input_lock": "../packaging/deployment-0.16.0-lock.json",
+    "evidence": "evidence/deployment-acceptance-final-2026-10-09.json",
+    "archive_audit": "evidence/deployment-acceptance-archive-audit-2026-10-09.json",
+    "visual_review": "evidence/deployment-acceptance-visual-review-2026-10-09.json",
+    "attempt_history": "evidence/deployment-acceptance-attempts-2026-10-09.json",
+    "verification_progress": {
+      "status": "Complete observations; CI failed",
+      "current_run": "https://github.com/comparativechrono/workbench/actions/runs/37979351047",
+      "source_tests": {
+        "passed": 87,
+        "failed": 0,
+        "skipped": 0,
+        "platform": "ubuntu-22.04"
+      },
+      "each_windows_path": {
+        "native_passed": 14,
+        "native_failed": 2,
+        "native_blocked": 0,
+        "native_skipped": 0,
+        "curated_passed": 11,
+        "signature_files": 72,
+        "signature_valid": 60,
+        "signature_not_signed": 12,
+        "manual_not_tested": 10
+      },
+      "screenshots_reviewed": 54
+    },
+    "download": {
+      "file": "native-workbench-0.16.0-deployment-toolkit.zip",
+      "bytes": 126494957,
+      "sha256": "7e4fca6d814ad17aa82980db6ca735e9b3f191b1fd1a9e5b885e926290ab5cc5",
+      "id": 11641200131,
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37979351047/artifacts/11641200131",
+      "expiresAt": "2026-11-08T19:19:03Z"
+    },
+    "known_limits": [
+      "Results Escape after keyboard Search failed on fresh and upgraded published 0.16.0 in both paths. No control had focus before or after Escape. Explicit pointer focus into the query then Escape closed; that diagnostic does not pass the original requirement. The internal application cause is not established. Visible Close fallback was not needed/tested.",
+      "Published minimum width 1040 exceeds the hosted 1024-pixel desktop/work area; right edge clipped. Bounded resize assertions are not acceptance on that narrower display.",
+      "All 10 manual acceptance items remain not-tested. Representative PCs, high DPI and transitions, multiple monitors, physical trackpads, Unicode/path-limit target-PC observations and managed-machine security/IT approval remain outstanding.",
+      "Python socket operations were denied in scientific hosts; no OS network isolation, realistic workload capacity, biological/clinical validation or benchmark is claimed.",
+      "Other migration routes, all optional packs and all earlier application suites were not rerun for the unchanged application. Scientific Linux CWL and SDK/build recovery remain later sets; benchmarking is separate."
+    ],
+    "delivery_recovery": {
+      "problem": "Workspace executor disconnected after validation, local documentation preparation and independent count/hash review.",
+      "recoveredThrough": "GitHub API using the exact existing branch tree, stored artifact metadata, completed review observations and original reports retained in Actions.",
+      "limits": "Original report copies and detailed per-image receipts could not be read from the disconnected local workspace. Durable aggregate receipts reference exact artifact hashes and known native report hashes; no unavailable values are invented. Original reports/screenshots remain downloadable until 2026-11-08."
+    },
+    "historical_next_action": "Review the companion; fix Results keyboard focus/Escape in a separately versioned application candidate, address or explicitly bound narrow-display behavior, preserve published bytes and repeat exact ordinary/spaced native gates.",
+    "follow_up": {
+      "version": "0.16.1",
+      "branch": "fix/native-ui-0.16.1",
+      "pull_request": "https://github.com/comparativechrono/workbench/pull/15",
+      "status": "ready unpublished patch review candidate; recorded hosted validation complete within its stated scope",
+      "handover": "ui-patch-0.16.1-handover.md",
+      "scope": "The original companion observations, including failed Results Escape checks, remain unchanged."
+    }
   }
 }

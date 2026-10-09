@@ -1,6 +1,95 @@
 # Current project state
 
-## Active development: unpublished deployment and acceptance companion
+## Active development: unpublished native keyboard and narrow-display patch
+
+Snapshot: **2026-10-09**. [Draft PR #15](https://github.com/comparativechrono/workbench/pull/15)
+contains **0.16.1** on `fix/native-ui-0.16.1`, stacked on
+`feature/deployment-acceptance` and draft PR #14. Candidate source is
+`8938e709b041106e8a46e1447383e8e9ba3e0cb9`;
+[candidate run 37988570028](https://github.com/comparativechrono/workbench/actions/runs/37988570028)
+passed 141 source tests and 84 native checks per Windows path; the independent
+archive/source audit and settled 96-DPI visual review passed. The unpublished
+candidate is ready for draft review. Published 0.16.0 and the original deployment
+companion's failed observations remain unchanged. Nothing is merged or released.
+
+The patch restores Results query focus before disabling a focused action, keeps
+asynchronous replies from taking focus from another control, and requires actual
+keyboard Search followed by Escape on fresh and upgraded installations. It also
+uses monitor work-area bounds for initial placement and minimum size, with a
+960×680 logical minimum and a compact three-pane layout for the observed narrow
+desktop. Scientific operations, saved pins, pack/runtime bytes, setup profile and
+catalogue trust retain their existing contracts.
+
+The third revision also makes read-only `queue/status` requests nonblocking for
+editing and Results focus only when no outgoing actions are queued. Other busy
+guards and FIFO command ordering remain; queuing a mutation immediately refreshes
+control availability. The native gate now observes passive focus holds for
+2.4 seconds across polling intervals without restoring focus during the hold.
+This behavior passed the third candidate's native checks, with separately
+recorded source, archive and visual evidence.
+
+The target is the observed 96-DPI desktop and a 960-pixel outer minimum width.
+Source review identifies busy Cancel/Results overlap below **908 logical client
+pixels** and possible footer overlap below **902**. Smaller work areas and high
+DPI remain unvalidated; clamping to a work area does not establish acceptance of
+every resulting layout.
+
+The [patch handover](ui-patch-0.16.1-handover.md) records the implementation and
+required evidence. The candidate builds a new Starter, matching source archive
+and core-only 0.16.0→0.16.1 updater. Its own
+[source evidence](evidence/ui-patch-0.16.1-source-validation-2026-10-09.json)
+records 141 passes in 13 Python suites, no failures or skips, the C++ JSON check
+and all three strict-warning native builds. The
+[archive audit](evidence/ui-patch-0.16.1-archive-audit-2026-10-09.json) verifies
+787 Git source files, 33 packaged Python/source matches, 87 core files, 186
+unchanged pack files and 39 unchanged private-runtime files. Archive hashes are
+recorded in that receipt and the handover.
+
+The [native validation record](evidence/ui-patch-0.16.1-native-validation-2026-10-09.json)
+and [final visual review](evidence/ui-patch-0.16.1-visual-review-2026-10-09.json)
+bind the original candidate run and the final validator-only recheck to these
+same archives. Settled observations passed in both Windows paths at 96 DPI.
+
+The earlier interpretation that original post-resize screenshots omitted
+General settings/Readiness was incorrect: crops taken from the original image
+bytes show both. It is not evidence of a product defect or transient absence.
+The [validator-only recheck](https://github.com/comparativechrono/workbench/actions/runs/37989535317)
+at `69022689e686b2cacdc98dbdbef728e664941e67` passed the same 19 patch checks per
+path using the unchanged `8938e709` archives. This is a repeat within the 84-check
+scope, not 103 unique checks. Passive visible captures taken before PrintWindow
+show the fixed controls settled by the first requested 250-ms frame (about
+0.3 seconds elapsed); later 750/1250-ms observations were unchanged. Immediate
+frames can retain the old geometry, a bounded resize observation rather than a
+missing-control finding. These samples establish the recorded settled layout;
+they do not establish zero flicker or exclude shorter unsampled transients.
+
+Representative-PC,
+high-DPI, multi-monitor, physical-trackpad and managed-machine acceptance,
+executable signing and IT approval remain outstanding. Scientific Linux CWL and
+SDK/build recovery remain later sets; benchmarking is handled separately.
+
+The first candidate, `5e2bc368c5ea869ff794ad9d90a40480b6fd06fe`, remains a
+failed attempt in [run 37986650814](https://github.com/comparativechrono/workbench/actions/runs/37986650814).
+Its build passed **141 source tests in 13 Python suites**, with no failures or
+skips, the C++ JSON check and all three strict-warning native builds. The new UI
+gate recorded **11 passes/two failures** in the ordinary path and **10 passes/two
+failures** in the spaced path. Each path separately passed 65 existing checks:
+11 curated, 32 workspace, 10 reference-management, nine results and three scroll
+checks. Validator corrections use the proper control IDs and wait for the Setup
+dismissal reply before app closure. The spaced-path filter-clear failure's cause
+is unproven; explicit Home/Shift+End selection makes the next attempt observable.
+These results remain tied to the first candidate, not the new archives.
+
+The second candidate, `473428671cbb75505c163a9a761caf84e73dfdd9`, also remains a
+failed attempt in [run 37987546291](https://github.com/comparativechrono/workbench/actions/runs/37987546291).
+The ordinary path passed all 84 configured checks. In the spaced path, the patch
+gate recorded **11 passes/two failures**, at library Tab and Home focus before
+Results opened; the 65 existing checks passed in both paths. Those reports and
+archive audits remain retained. The third candidate adds the polling fix and
+passive focus observations; the earlier ordinary-path pass does not waive the
+spaced-path failures or validate the new bytes.
+
+## Deployment and acceptance companion baseline
 
 Snapshot: **2026-10-09**. [Draft PR #14](https://github.com/comparativechrono/workbench/pull/14)
 implements a verified offline kit, exact file/executable/runtime/licence inventories,
@@ -31,8 +120,9 @@ the exact identities and failed observations. Full raw reports/screenshots remai
 in the hashed Actions artifacts; aggregate receipts were recovered through GitHub
 after the local workspace executor disconnected during delivery.
 
-Next application work is a separately versioned Results focus/Escape fix and
-narrow-display handling or an explicit support boundary. Representative-PC,
+These observations prompted the separately versioned 0.16.1 Results focus/Escape
+and narrow-display review candidate above. Its own hosted validation is separate;
+the original companion's failures are not relabelled as passes. Representative-PC,
 high-DPI, multiple-monitor, physical-trackpad and managed-machine observations,
 IT approval and signing remain outstanding. Benchmarking is separate; scientific
 Linux CWL and SDK/build recovery remain later sets.

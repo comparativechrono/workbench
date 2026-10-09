@@ -1,6 +1,49 @@
 # Development roadmap
 
-## Active set: Windows acceptance and deployment preparation
+## Active set: native keyboard and narrow-display patch
+
+[Draft PR #15](https://github.com/comparativechrono/workbench/pull/15) carries the
+unpublished **0.16.1** follow-up on `fix/native-ui-0.16.1`, stacked on
+`feature/deployment-acceptance` and draft PR #14. Candidate source
+`8938e709b041106e8a46e1447383e8e9ba3e0cb9` addresses the observed Results
+keyboard focus/Escape defect and the clipped initial window on a 1024-pixel
+desktop. It retains the three-pane layout and uses the monitor work area for
+placement and minimum-size bounds. This set is ready as an unpublished draft
+review candidate. Published **0.16.0** is unchanged; nothing is merged or released.
+
+[Run 37988570028](https://github.com/comparativechrono/workbench/actions/runs/37988570028)
+passed 141 source tests and 84 native checks per Windows path, and the independent
+archive/source audit passed. These are the third candidate's own results.
+The [validator-only recheck](https://github.com/comparativechrono/workbench/actions/runs/37989535317)
+at `69022689e686b2cacdc98dbdbef728e664941e67` also passed the same 19 patch checks
+per path without rebuilding the application. These are repeated observations
+within the 84-check scope. Crops from the original screenshots corrected the
+earlier full-frame interpretation: General settings and Readiness were present.
+Passive visible captures before PrintWindow show settled fixed controls by the
+first 250-ms capture (about 0.3 seconds elapsed), unchanged at 750/1250 ms;
+immediate frames can retain old geometry. Settled 96-DPI visual review passed;
+these samples do not establish zero flicker or exclude shorter unsampled
+transients. The [native record](evidence/ui-patch-0.16.1-native-validation-2026-10-09.json),
+[visual review](evidence/ui-patch-0.16.1-visual-review-2026-10-09.json) and
+[patch handover](ui-patch-0.16.1-handover.md) retain exact evidence and limits.
+
+The third revision additionally keeps read-only `queue/status` polling from
+disabling editing when no outgoing actions are queued. Mutation guards and FIFO
+ordering remain, with availability refreshed immediately when queuing a mutation.
+Passive 2.4-second focus holds now span polling intervals without refocusing.
+This follows a second attempt with all 84 checks passing in the ordinary path but
+two spaced-path failures at library Tab/Home focus before Results opened. All 65
+existing checks per path passed; the failed attempt and its audits remain retained.
+
+The first candidate's failed native gate and 141 source passes remain separate
+in the handover. The validator now uses corrected control IDs, waits for Setup
+dismissal and makes filter clearing observable; the spaced-path filter-clear
+failure's cause remains unproven. Layout scope is the observed 96-DPI desktop
+with a 960-pixel outer minimum width. Source review identifies busy Cancel/Results
+overlap below 908 logical client pixels and possible footer overlap below 902;
+smaller work areas and high DPI require further work and validation.
+
+## Windows acceptance and deployment companion baseline
 
 The owner accepted this bounded set on **2026-10-09** with “okay, lets do that”.
 [Draft PR #14](https://github.com/comparativechrono/workbench/pull/14) implements
@@ -17,11 +60,10 @@ observations. CI remains failed and all 10 manual acceptance items remain untest
 The 1040-pixel minimum app width also clips on the hosted 1024-pixel desktop.
 The [handover](deployment-acceptance-handover.md) owns exact evidence and limits.
 
-**Next development action:** fix Results keyboard focus/Escape in a separately
-versioned application candidate; address or explicitly bound narrow-display
-behavior. Preserve published 0.16.0 bytes and repeat exact ordinary/spaced gates
-for any changed app. Successful integrity and science checks do not waive the
-failed desktop requirement.
+These failures prompted the 0.16.1 review candidate above. The companion and
+its original observations remain available for review; successful integrity and
+science checks do not waive the failed desktop requirement or establish that the
+new patch passes.
 
 Representative-PC/high-DPI/multiple-monitor/physical-trackpad and managed-machine
 observations remain outstanding. Signing needs a controlled identity, and

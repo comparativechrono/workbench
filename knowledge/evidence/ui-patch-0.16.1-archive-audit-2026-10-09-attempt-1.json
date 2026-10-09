@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "kind": "independent downloaded-archive audit",
+  "sourceCommit": "5e2bc368c5ea869ff794ad9d90a40480b6fd06fe",
+  "run": 37986650814,
+  "archives": [
+    {
+      "file": "native-workbench-0.16.1-source.zip",
+      "bytes": 48077614,
+      "sha256": "2752898cee34786fc7603475d713ffd588ae4bbe95ee6f948f938c7fef30f2b3"
+    },
+    {
+      "file": "native-workbench-0.16.1-starter-windows.zip",
+      "bytes": 17847426,
+      "sha256": "469460c1f221698cc48c803d5fe4e09dabf32c15c64c26c498946ff4f992b92d"
+    },
+    {
+      "file": "native-workbench-0.16.1-update-from-0.16.0.zip",
+      "bytes": 12982786,
+      "sha256": "64396999b4c0196f0b94eb00ae9b7ad90128cfffaa641398ba27808bc3425e31"
+    }
+  ],
+  "zipCrc": "passed",
+  "sourceGitFilesVerified": 787,
+  "runtimeSourceFilesVerified": 33,
+  "coreFilesVerified": 87,
+  "publishedPreservedFiles": {
+    "runtime/": 39,
+    "packs/": 186
+  },
+  "changedCoreFiles": [
+    "NativeWorkbench.exe",
+    "SOURCE-AVAILABILITY.json",
+    "WorkbenchBridge.exe",
+    "workspace/app_version.py"
+  ],
+  "packPinsUnchanged": true,
+  "productionTrustUnchanged": true,
+  "setupSelectionUnchanged": true,
+  "legacySourceSha256": "5dac9add19436b336cba483a0f915e39aafed383282c2a019a0dbd3cc3c8668e",
+  "starterArchiveFiles": 274,
+  "updaterInventoryFiles": 50,
+  "updaterOperations": 4,
+  "updaterTargetExactlyMatchesStarter": true,
+  "sourceCompanionPinnedByStarter": true,
+  "nativeExecutables": {
+    "DesktopWorkbench.exe": "8d0dac644f2318f60307f2357d2e9e41db0f8d3c81fbc454af6e08e287d5ef25",
+    "WorkbenchBridge.exe": "3eb4b9bb0387cda22194c72ccd4aafcf161fe848c0b4cb823c6c41e7d57ae6bc",
+    "UpdateWorkbench.exe": "1b765bedcd0c3494f8bf40e204f80c16aa1b8e13cebb2a77b0fe54a9d934c0b6"
+  },
+  "scope": "Downloaded archive byte, inventory and source correspondence; native execution results remain separate.",
+  "baselineArchive": {
+    "file": "native-workbench-0.16.0-starter-windows.zip",
+    "bytes": 17846873,
+    "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073",
+    "publishedUrl": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-0.16.0-starter-windows.zip",
+    "recoveredFrom": {
+      "run": 37952018931,
+      "artifactId": 11626865241,
+      "wrapperSha256": "be1d8b77301f443f87b8eb19c23786473680e32f7c96bdea548e7b37a63a9975"
+    },
+    "downloadHashVerified": true
+  },
+  "compilerInput": {
+    "file": "llvm-mingw-20260922-ucrt-ubuntu-22.04-x86_64.tar.xz",
+    "bytes": 83924028,
+    "sha256": "bb7bb7654b33d5aa8712acb837c963b2e0c56352560c76105270a3268c665c21",
+    "url": "https://github.com/mstorsjo/llvm-mingw/releases/download/20260922/llvm-mingw-20260922-ucrt-ubuntu-22.04-x86_64.tar.xz",
+    "verificationScope": "Pinned archive hash verified by build job; not independently downloaded by archive auditor."
+  },
+  "nativeValidationStatusAtAudit": "pending; this receipt establishes static archive/source correspondence only"
+}
