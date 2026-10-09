@@ -260,11 +260,27 @@ def desktop_scenarios(root, evidence, report, label):
                 row = fixed_layout(ui, mode)
                 row.update(mode=mode, requestedSize=[width, height])
                 layouts.append(row)
-                capture(ui, report, label + '-' + mode + '-%dx%d.bmp' % (width, height))
                 if width == 960:
-                    frame, _ = ui.screen_capture(label + '-' + mode + '-960-visible.bmp', ui.bounds(ui.main))
-                    frame['dpi'] = ui.user.GetDpiForWindow(ui.main)
-                    report['captures'].append(frame)
+                    # Observe the displayed desktop before PrintWindow can
+                    # request a separate render. Later samples allow natural
+                    # post-resize painting; no input or forced redraw occurs.
+                    started = time.monotonic()
+                    series = []
+                    for phase, delay in [('immediate', 0), ('250ms', .25),
+                                         ('750ms', .5), ('1250ms', .5)]:
+                        if delay:
+                            time.sleep(delay)
+                        frame, _ = ui.screen_capture(
+                            label + '-' + mode + '-960-visible-' + phase + '.bmp', ui.bounds(ui.main))
+                        frame['dpi'] = ui.user.GetDpiForWindow(ui.main)
+                        frame['method'] = 'visible desktop BitBlt before PrintWindow'
+                        frame['secondsAfterResizeObservation'] = time.monotonic() - started
+                        report['captures'].append(frame)
+                        series.append(frame)
+                    report.setdefault('passiveResizeCaptureSeries', []).append({
+                        'installation': label, 'mode': mode, 'requestedSize': [width, height],
+                        'inputOrForcedRedrawBetweenFrames': False, 'frames': series})
+                capture(ui, report, label + '-' + mode + '-%dx%d.bmp' % (width, height))
         report.setdefault('layouts', {})[label] = layouts
         passed(report, label + '-layout', label + ': both three-pane modes, navigation and fixed footer controls fit actual work-area bounds without button overlap at every observed size.')
         for case, query_text, expected_count in [('empty', 'patch-no-matching-result', 0), ('populated', 'SAMtools', 1)]:

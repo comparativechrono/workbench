@@ -1,0 +1,97 @@
+name: Recheck frozen 0.16.1 native keyboard and displayed frames
+
+on:
+  push:
+    branches: [fix/native-ui-0.16.1]
+    paths:
+      - 'scripts/check_ui_patch_windows.py'
+      - '.github/workflows/native-ui-patch-recheck.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: native-ui-patch-recheck-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  SOURCE_COMMIT: 8938e709b041106e8a46e1447383e8e9ba3e0cb9
+  STARTER_SHA256: 7dfed53de2279f51deaea405dbfd29b36cddb733e5a20c43b3112f27a7728a8e
+  UPDATE_SHA256: f2dc435495f43d837e80837f3ba83ff7b6963294219d5bc88bc8fb0e5d82effd
+
+jobs:
+  native:
+    runs-on: windows-2022
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        folder: [ordinary, 'path with spaces']
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Retrieve the exact third candidate without rebuilding
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: ui-patch-candidate-8938e709b041106e8a46e1447383e8e9ba3e0cb9
+          run-id: 37988570028
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/frozen-patch-candidate
+      - name: Verify unchanged production sources and frozen application identities
+        id: prepare
+        shell: pwsh
+        env:
+          CASE_FOLDER: ${{ matrix.folder }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          git diff --exit-code $env:SOURCE_COMMIT -- desktop workspace scripts/build_ui_patch_candidate.py scripts/package_split.py scripts/make_core_update.py scripts/apply_core_update.py scripts/apply_desktop_update.py
+          if ($LASTEXITCODE -ne 0) { throw 'Production or packaging source changed; use a new candidate build instead of a frozen recheck.' }
+          $candidate = Join-Path $env:RUNNER_TEMP 'frozen-patch-candidate'
+          $starter = Join-Path $candidate 'native-workbench-0.16.1-starter-windows.zip'
+          $updater = Join-Path $candidate 'native-workbench-0.16.1-update-from-0.16.0.zip'
+          $source = Join-Path $candidate 'native-workbench-0.16.1-source.zip'
+          if ((Get-FileHash $starter -Algorithm SHA256).Hash -ne $env:STARTER_SHA256) { throw 'Frozen Starter identity mismatch.' }
+          if ((Get-FileHash $updater -Algorithm SHA256).Hash -ne $env:UPDATE_SHA256) { throw 'Frozen updater identity mismatch.' }
+          if ((Get-FileHash $source -Algorithm SHA256).Hash -ne '48523c0e7090f661442bec2999c1658a1532ad7a5fa7fe882b1081b23452acc7') { throw 'Frozen source companion identity mismatch.' }
+          $provenance = Get-Content (Join-Path $candidate 'BUILD-PROVENANCE.json') -Raw | ConvertFrom-Json
+          if ($provenance.sourceCommit -ne $env:SOURCE_COMMIT -or $provenance.appVersion -ne '0.16.1') { throw 'Frozen build provenance mismatch.' }
+          $baseline = Join-Path $env:RUNNER_TEMP 'baseline-0.16.0.zip'
+          Invoke-WebRequest -Uri 'https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-0.16.0-starter-windows.zip' -OutFile $baseline
+          if ((Get-FileHash $baseline -Algorithm SHA256).Hash -ne 'f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073') { throw 'Published baseline identity mismatch.' }
+          $case = Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER
+          Expand-Archive $starter (Join-Path $case 'patch')
+          Expand-Archive $updater (Join-Path $case 'updater')
+          $evidence = Join-Path $env:RUNNER_TEMP 'patch-recheck-evidence'
+          New-Item -ItemType Directory -Path $evidence | Out-Null
+          @{ schema = 1; kind = 'frozen-ui-patch-recheck-inputs'; sourceCommit = $env:SOURCE_COMMIT;
+             gateCommit = $env:GITHUB_SHA; candidateRun = 37988570028; appVersion = '0.16.1';
+             starterSha256 = $env:STARTER_SHA256; updateSha256 = $env:UPDATE_SHA256;
+             sourceSha256 = '48523c0e7090f661442bec2999c1658a1532ad7a5fa7fe882b1081b23452acc7';
+             rebuilt = $false; installationCase = $env:CASE_FOLDER;
+             scope = 'Frozen archive and source identities only; native interaction and displayed-frame observations are separate.' } |
+            ConvertTo-Json -Depth 4 | Set-Content (Join-Path $evidence 'frozen-inputs.json')
+      - name: Observe exact native updater, keyboard focus, layout and passive displayed frames
+        if: always() && !cancelled() && steps.prepare.outcome == 'success'
+        shell: pwsh
+        env:
+          CASE_FOLDER: ${{ matrix.folder }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $case = Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER
+          $app = Join-Path $case 'patch/native-workbench'
+          $candidate = Join-Path $env:RUNNER_TEMP 'frozen-patch-candidate'
+          & (Join-Path $app 'runtime/python/python.exe') -I -B scripts/check_ui_patch_windows.py --app-root $app --baseline-archive (Join-Path $env:RUNNER_TEMP 'baseline-0.16.0.zip') --update-root (Join-Path $case 'updater') --starter-archive (Join-Path $candidate 'native-workbench-0.16.1-starter-windows.zip') --update-archive (Join-Path $candidate 'native-workbench-0.16.1-update-from-0.16.0.zip') --starter-sha256 $env:STARTER_SHA256 --update-sha256 $env:UPDATE_SHA256 --source-commit $env:SOURCE_COMMIT --gate-commit $env:GITHUB_SHA --work (Join-Path $case 'patch-gate-work') --report "$env:RUNNER_TEMP/patch-recheck-evidence/patch/native-ui-patch.json"
+          if ($LASTEXITCODE -ne 0) { throw 'Frozen native patch recheck failed; retained observations must not be treated as passes.' }
+      - name: Retain checks, failures and actual displayed frames
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ui-patch-recheck-${{ matrix.folder }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/patch-recheck-evidence
+          if-no-files-found: error
+          retention-days: 30

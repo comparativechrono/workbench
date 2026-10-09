@@ -7,8 +7,8 @@ on:
       - 'desktop/**'
       - 'workspace/**'
       - 'scripts/**'
+      - '!scripts/check_ui_patch_windows.py'
       - 'tests/**'
-      - '.github/workflows/native-ui-patch-candidate.yml'
   workflow_dispatch:
 
 permissions:
