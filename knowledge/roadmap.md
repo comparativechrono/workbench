@@ -35,6 +35,18 @@ and release work. Milestones 1–3 are implemented on stacked review branches,
 not published releases or completed representative-machine acceptance.
 This does not declare the further accepted work or benchmark programme complete.
 
+The owner then requested the remaining groups one at a time. The first is
+**reference management**, targeting unpublished 0.15.0 on
+`feature/reference-management` from `38917349449ce56a45d3e0f4f41b7d2a38621c6d`.
+It covers resumable downloads, reviewed local import, verified library relocation
+and a bounded NCBI RefSeq accession provider. See the
+[feature contract](reference-management.md) and
+[handover](reference-management-0.15.0-handover.md). The original three
+implementation tranches were not the entire accepted suggestion list; each
+remaining group retains its own completion and validation evidence. The reference
+group is now implemented and hosted-Windows validated in draft PR #10;
+representative-machine acceptance and publication remain separate.
+
 | Milestone | Accepted scope | Completion evidence |
 | --- | --- | --- |
 | 1 — Measurement and readiness | Local performance records, an understandable readiness report, reviewable diagnostic export and representative-machine validation. | Exact packaged Windows evidence for successful, failed and cancelled work; preserved scientific output; documented timing/counter scope and unavailable values; reviewed JSON equals exported JSON; private-data canaries absent; installation, readiness and scientific execution clearly distinguished. A separate matched Windows–Linux benchmark protocol records hardware, versions, parameters and data identities. |

@@ -1,0 +1,196 @@
+{
+  "schema": 1,
+  "runId": 37855047291,
+  "sourceCommit": "46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+  "scope": "Independent downloaded archive and exact source identity audit only",
+  "nativeWindowsExecuted": false,
+  "published": false,
+  "success": true,
+  "checks": [
+    "Four downloaded bounded GitHub artifacts match declared sizes/digests and pass ZIP CRC/name checks.",
+    "Inner Starter and reassembled source archives match build and independent transport metadata.",
+    "All 710 current source files match their inventory and exact git commit; embedded legacy source, CRC and runtime source-companion pin verified.",
+    "Complete Starter inventory, all published pack files/private runtime files, runtime Python source correspondence and production 32-pack profile/trust preserved.",
+    "New align 0.4.1 contracts/assets/self-check verified with unchanged legacy operations, binaries, licenses and exact minimum-app declaration; standalone ZIP verification remains separate.",
+    "Packaged application and bridge are native AMD64 PE files; this inspection does not establish Windows execution."
+  ],
+  "failures": [],
+  "limits": [
+    "Independent pack ZIP not downloaded from the large aggregate artifact; its declaration is checked against the bundled additional pack. Native import gate checks the actual independent ZIP."
+  ],
+  "previousCandidateSourceComparison": {
+    "sourceCommit": "38917349449ce56a45d3e0f4f41b7d2a38621c6d",
+    "changedPaths": [
+      ".github/workflows/native-reference-management-candidate.yml",
+      "README.md",
+      "desktop/build_bridge.sh",
+      "desktop/build_desktop_workspace.sh",
+      "desktop/build_workspace_update_launcher.sh",
+      "desktop/desktop_workspace.cpp",
+      "knowledge/README.md",
+      "knowledge/architecture.md",
+      "knowledge/current-state.md",
+      "knowledge/development.md",
+      "knowledge/evidence/reference-management-0.15.0-initial-archive-audit-2026-10-08.json",
+      "knowledge/evidence/reference-management-0.15.0-initial-source-2026-10-08.json",
+      "knowledge/evidence/reference-management-0.15.0-initial-windows-2026-10-08.json",
+      "knowledge/evidence/reference-management-0.15.0-local-source-2026-10-08.json",
+      "knowledge/evidence/reference-management-0.15.0-ncbi-linux-2026-10-08.json",
+      "knowledge/evidence/reference-management-0.15.0-rechecks-2026-10-08.json",
+      "knowledge/project.json",
+      "knowledge/reference-management-0.15.0-handover.md",
+      "knowledge/reference-management.md",
+      "knowledge/roadmap.md",
+      "knowledge/validation-and-releases.md",
+      "scripts/audit_reference_management_candidate.py",
+      "scripts/check_reference_management_windows.py",
+      "scripts/check_references_windows.py",
+      "scripts/package_split.py",
+      "tests/test_core_checks.py",
+      "workspace/app_version.py",
+      "workspace/desktop_host.py",
+      "workspace/reference_library.py",
+      "workspace/reference_manager.py",
+      "workspace/reference_ncbi.py",
+      "workspace/reference_provenance.py",
+      "workspace/reference_provider.py",
+      "workspace/reference_transfer.py",
+      "workspace/service.py",
+      "workspace/tests/test_reference_library.py",
+      "workspace/tests/test_reference_management_service.py",
+      "workspace/tests/test_reference_manager.py",
+      "workspace/tests/test_reference_ncbi.py",
+      "workspace/tests/test_reference_provenance.py",
+      "workspace/tests/test_reference_provider.py",
+      "workspace/tests/test_reference_resume.py",
+      "workspace/tests/test_reference_service.py",
+      "workspace/verify_installation.py"
+    ],
+    "scientificPackRecipeAndProductionTrustUnchanged": true
+  },
+  "transportArtifacts": [
+    {
+      "id": 11583866299,
+      "name": "reference-management-transfer-starter-46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+      "bytes": 17817478,
+      "sha256": "969dfeb29a69dedb0463959de2a946f4809cc6a9932342dc0d1240b1e1b69bb3",
+      "zipCrc": "passed"
+    },
+    {
+      "id": 11583642242,
+      "name": "reference-management-transfer-source-part-1-46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+      "bytes": 25166018,
+      "sha256": "42c575952b95d3c7ffde0bf2f4a6fe7180748a499e4ea0116a02479e0b21a12e",
+      "zipCrc": "passed"
+    },
+    {
+      "id": 11583577481,
+      "name": "reference-management-transfer-metadata-46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+      "bytes": 5772,
+      "sha256": "1ed8078c422b17b1cca5ae511a0dfdf0149c969846184537fac4d9ab77de5058",
+      "zipCrc": "passed"
+    },
+    {
+      "id": 11583339641,
+      "name": "reference-management-transfer-source-part-2-46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+      "bytes": 22444551,
+      "sha256": "84d94b4d3a2b3a4f8337f026a00f92b1212acd12e1ebfbc2d74d9860d5505260",
+      "zipCrc": "passed"
+    }
+  ],
+  "archives": [
+    {
+      "file": "native-workbench-0.15.0-starter-windows.zip",
+      "bytes": 17817278,
+      "sha256": "ce3bcc9c5634dd90f024ecf20f0308a144641c67e0c11c205501518773f6a4c2",
+      "verified": true
+    },
+    {
+      "file": "native-workbench-0.15.0-source.zip",
+      "bytes": 47610181,
+      "sha256": "0b501b428cbe88b6d3b7cb601f5aa88e029cc20a1ac9903ff4663fee142b1df2",
+      "verified": true
+    },
+    {
+      "file": "native-workbench-pack-align-0.4.1.zip",
+      "bytes": 575862,
+      "sha256": "3a08cf061f0b62c5502d1420115db3fcae2b04bf695ad3cfd1c3063de0fafa02",
+      "verified": false
+    }
+  ],
+  "source": {
+    "currentFiles": 710,
+    "everyCurrentFileMatchesCommit": true,
+    "legacyBytes": 44163162,
+    "legacySha256": "5dac9add19436b336cba483a0f915e39aafed383282c2a019a0dbd3cc3c8668e",
+    "legacyCrc": "passed"
+  },
+  "packagedAtomicWriteHelper": {
+    "path": "workspace/file_io.py",
+    "sha256": "ab6034e617504c8c264c9c53201174fdae88440765db114f01ce39eafcb2d67e",
+    "matchesExactSourceCommit": true,
+    "executed": false
+  },
+  "starter": {
+    "coreFiles": 85,
+    "totalFiles": 272,
+    "preservedPublishedPackFiles": 143,
+    "preservedPrivateRuntimeFiles": 39,
+    "runtimeModulesMatchSource": 31,
+    "publishedStarterPins": [
+      {
+        "id": "align",
+        "version": "0.4.0",
+        "folder": "packs/align-0.4.0",
+        "manifestSha256": "81c962222c93356a4f7727b23193c71d7dcd515859e62a179574781f411824d3"
+      },
+      {
+        "id": "bam",
+        "version": "0.4.0",
+        "folder": "packs/bam-0.4.0",
+        "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+      },
+      {
+        "id": "variants",
+        "version": "0.4.0",
+        "folder": "packs/variants-0.4.0",
+        "manifestSha256": "ea4b7f0a6c28709e4190b6514c07cbf7bdd58e1a4f2a2d931f2cae3ce6ec3795"
+      }
+    ],
+    "officialSetupPacks": 32,
+    "setupProfileAndTrustUnchanged": true,
+    "containsUserData": false
+  },
+  "additionalPack": {
+    "id": "align",
+    "version": "0.4.1",
+    "minAppVersionDeclared": "0.13.0",
+    "manifestSha256": "7f8f36efbfd6a8255a98eabb06746fbcc5bbdb872f392a65ca3e79a586d04939",
+    "files": 43,
+    "toolBinaryBytesUnchanged": true,
+    "legacyOperationsUnchanged": true,
+    "newOperations": [
+      "build-sr-index",
+      "single-end-indexed",
+      "paired-end-indexed"
+    ],
+    "declaredInstallationChecks": 1,
+    "expectedMappedProperPairRecords": 202,
+    "standalonePackZipVerified": false
+  },
+  "nativeExecutables": {
+    "NativeWorkbench.exe": {
+      "bytes": 1712640,
+      "sha256": "3e374c9b12e694cf8d8f9e2ce2e5eaf88abad9adf9d8e81d8ad16c16428dcdcb",
+      "machine": "AMD64",
+      "executed": false
+    },
+    "WorkbenchBridge.exe": {
+      "bytes": 1550848,
+      "sha256": "e1e99d5d0fe88cacd91852bbf302f9bfe414745e911362c73c8dd724fbbf7a9d",
+      "machine": "AMD64",
+      "executed": false
+    }
+  },
+  "recordedOn": "2026-10-08"
+}

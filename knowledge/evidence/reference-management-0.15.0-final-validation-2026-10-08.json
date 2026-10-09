@@ -1,0 +1,719 @@
+{
+  "schema": 1,
+  "recordedOn": "2026-10-08",
+  "version": "0.15.0",
+  "published": false,
+  "status": "Implementation and recorded hosted validation complete; ready for tester review",
+  "referenceGroupComplete": true,
+  "entireRoadmapComplete": false,
+  "releaseAuthorized": false,
+  "sourceCommit": "46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+  "sourceTree": "6b1641f7f915a93d8a007933aa6cba62cafc10e9",
+  "starter": {
+    "file": "native-workbench-0.15.0-starter-windows.zip",
+    "bytes": 17817278,
+    "sha256": "ce3bcc9c5634dd90f024ecf20f0308a144641c67e0c11c205501518773f6a4c2",
+    "verified": true
+  },
+  "sourceArchive": {
+    "file": "native-workbench-0.15.0-source.zip",
+    "bytes": 47610181,
+    "sha256": "0b501b428cbe88b6d3b7cb601f5aa88e029cc20a1ac9903ff4663fee142b1df2",
+    "verified": true
+  },
+  "buildRunId": 37855047291,
+  "buildRunConclusion": "failure",
+  "buildRunFailureScope": "Reference feature and other gates passed; corrected provenance expectation and ordinary batch transition are established by the separate successful frozen-archive recheck.",
+  "validatorCommit": "016b14109c50dcce36e635586781b5bb5e19d79b",
+  "recheckRunId": 37857029068,
+  "recheckRunUrl": "https://github.com/comparativechrono/workbench/actions/runs/37857029068",
+  "recheckConclusion": "success",
+  "archivesRebuilt": false,
+  "sourceChecks": {
+    "linuxPassed": 430,
+    "linuxSkipped": 4,
+    "linuxInvocations": 29,
+    "scope": "Original frozen build; one invocation is only five named installation-boundary methods, not the full Linux core-check suite."
+  },
+  "cases": [
+    {
+      "path": "ordinary",
+      "recheckArtifact": {
+        "id": 11585080459,
+        "url": "https://github.com/comparativechrono/workbench/actions/runs/37857029068/artifacts/11585080459",
+        "bytes": 2261387,
+        "sha256": "d485a21445687e3151ad3bfb5d52c9ad04e3adf9fc2828fcd2e2c26c494b42b7",
+        "officialSizeDigestAndCrcVerified": true
+      },
+      "provenance": {
+        "packagedSourceCommit": "46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+        "packagedBuildArtifact": "11583697066",
+        "changedPaths": [
+          ".github/workflows/native-reference-management-recheck.yml",
+          "knowledge/current-state.md",
+          "knowledge/evidence/reference-management-0.15.0-frozen-archive-audit-2026-10-08.json",
+          "knowledge/evidence/reference-management-0.15.0-frozen-source-2026-10-08.json",
+          "knowledge/evidence/reference-management-0.15.0-frozen-windows-2026-10-08.json",
+          "knowledge/project.json",
+          "knowledge/reference-management-0.15.0-handover.md",
+          "scripts/check_batch_windows.py",
+          "workspace/tests/test_reference_provenance.py"
+        ],
+        "scope": "Corrected exact-package batch interface validator and all 15 isolated Windows source invocations only. Live reference, reference management, recovery, readiness, process accounting, library, workspace, independent pack and instrumented transport observations remain separate records from the original frozen build run.",
+        "validatorCommit": "016b14109c50dcce36e635586781b5bb5e19d79b",
+        "schema": 1,
+        "archiveRebuilt": false,
+        "packagedBuildRun": "37855047291",
+        "starterSha256": "ce3bcc9c5634dd90f024ecf20f0308a144641c67e0c11c205501518773f6a4c2",
+        "reusedBuildIsNotNewPass": true
+      },
+      "source": {
+        "total": 278,
+        "passed": 274,
+        "skipped": 4,
+        "failures": 0,
+        "errors": 0,
+        "invocations": 15,
+        "suites": [
+          {
+            "file": "tests/test_core_checks.py",
+            "log": "test_core_checks.log",
+            "exitCode": 0,
+            "total": 13,
+            "passed": 12,
+            "skipped": 1,
+            "skipDetails": [
+              "test_real_starter_pipeline_calls_truth_and_reports_reference_evidence (__main__.CoreChecksTests.test_real_starter_pipeline_calls_truth_and_reports_reference_evidence) ... skipped 'This validation adapter executes portable binaries on Linux only'"
+            ],
+            "logIdentity": {
+              "bytes": 2255,
+              "sha256": "fe9851450ee63eac697c4ce0d514ec8b90b598ef5ddabc2ce61a5f4d560e552a"
+            }
+          },
+          {
+            "file": "workspace/tests/test_reference_provider.py",
+            "log": "test_reference_provider.log",
+            "exitCode": 0,
+            "total": 18,
+            "passed": 18,
+            "skipped": 0,
+            "skipDetails": [],
+            "logIdentity": {
+              "bytes": 2658,
+              "sha256": "b95faefc621a44d0899c215e33643b8c09b985535d14196a148da2a9d2f123b2"
+            }
+          },
+          {
+            "file": "workspace/tests/test_reference_manager.py",
+            "log": "test_reference_manager.log",
+            "exitCode": 0,
+            "total": 26,
+            "passed": 26,
+            "skipped": 0,
+            "skipDetails": [],
+            "logIdentity": {
+              "bytes": 3988,
+              "sha256": "1f2f0487386d5396720d94cb7ebeab75bec8ac1b50abc228c689743133265dfb"
+            }
+          },
+          {
+            "file": "workspace/tests/test_reference_service.py",
+            "log": "test_reference_service.log",
+            "exitCode": 0,
+            "total": 10,
+            "passed": 10,
+            "skipped": 0,
+            "skipDetails": [],
+            "logIdentity": {
+              "bytes": 1744,
+              "sha256": "764e0763e1963059448b0e1a286d677b88fc38495578a0700e6444e2737e8ff9"
+            }
+          },
+          {
+            "file": "workspace/tests/test_reference_provenance.py",
+            "log": "test_reference_provenance.log",
+            "exitCode": 0,
+            "total": 6,
+            "passed": 6,
+            "skipped": 0,
+            "skipDetails": [],
+            "logIdentity": {
+              "bytes": 1127,
+              "sha256": "890c9f787b1137c8875572e746baf36803d18f6f448c27c902d5fa1efe5647e8"
+            }
+          },
+          {
+            "file": "workspace/tests/test_reference_resume.py",
+            "log": "test_reference_resume.log",
+            "exitCode": 0,
+            "total": 19,
+            "passed": 19,
+            "skipped": 0,
+            "skipDetails": [],
+            "logIdentity": {
+              "bytes": 2736,
+              "sha256": "a0ad5920a527bfd405efeb51429f8026df7707bd71107ea04790e8f7c199e8d3"
+            }
+          },
+          {
+            "file": "workspace/tests/test_reference_library.py",
+            "log": "test_reference_library.log",
+            "exitCode": 0,
+            "total": 26,
+            "passed": 26,
+            "skipped": 0,
+            "skipDetails": [],
+            "logIdentity": {
+              "bytes": 4106,
+              "sha256": "7005dad32e12db351f95d87380974a051c8bcbdafffedf93b6967006ab20d629"
+            }
+          },
+          {
+            "file": "workspace/tests/test_reference_ncbi.py",
+            "log": "test_reference_ncbi.log",
+            "exitCode": 0,
+            "total": 19,
+            "passed": 19,
+            "skipped": 0,
+            "skipDetails": [],
+            "logIdentity": {
+              "bytes": 2726,
+              "sha256": "550b59aee2a342b00581eec79d92afde351568f1d1f4261e87f0b5ccb5876d13"
+            }
+          },
+          {
+            "file": "workspace/tests/test_reference_management_service.py",
+            "log": "test_reference_management_service.log",
+            "exitCode": 0,
+            "total": 12,
+            "passed": 12,
+            "skipped": 0,
+            "skipDetails": [],
+            "logIdentity": {
+              "bytes": 2234,
+              "sha256": "a5a7d08c920e440d53029b2aa48e1bd10f1ddc536874255c39aaf5f6ac0d03c7"
+            }
+          },
+          {
+            "file": "workspace/tests/test_recovery_execution.py",
+            "log": "test_recovery_execution.log",
+            "exitCode": 0,
+            "total": 26,
+            "passed": 26,
+            "skipped": 0,
+            "skipDetails": [],
+            "logIdentity": {
+              "bytes": 4800,
+              "sha256": "50d1d59e77aa9e3f20a0ac9801946473e16c913326afb69c921a55b163c0ebec"
+            }
+          },
+          {
+            "file": "workspace/tests/test_project_manager.py",
+            "log": "test_project_manager.log",
+            "exitCode": 0,
+            "total": 29,
+            "passed": 28,
+            "skipped": 1,
+            "skipDetails": [
+              "test_stock_cwl_report_replay_after_project_relocation (__main__.ProjectTests.test_stock_cwl_report_replay_after_project_relocation) ... skipped 'Stock CWL engine is unavailable; Linux replay is not counted as passed.'"
+            ],
+            "logIdentity": {
+              "bytes": 4680,
+              "sha256": "c09b766b1cf382d6241bc70e5f99cb256cf25f1c74165a12733d3e3d43968307"
+            }
+          },
+          {
+            "file": "workspace/tests/test_recovery_service.py",
+            "log": "test_recovery_service.log",
+            "exitCode": 0,
+            "total": 16,
+            "passed": 16,
+            "skipped": 0,
+            "skipDetails": [],
+            "logIdentity": {
+              "bytes": 2938,
+              "sha256": "591178e9fafffcec8a56aafed6072943fc77455f44935e157444789e719ca24e"
+            }
+          },
+          {
+            "file": "workspace/tests/test_diagnostics.py",
+            "log": "test_diagnostics.log",
+            "exitCode": 0,
+            "total": 11,
+            "passed": 10,
+            "skipped": 1,
+            "skipDetails": [
+              "test_symlink_destination_or_ancestor_cannot_redirect_export (__main__.DiagnosticsTests.test_symlink_destination_or_ancestor_cannot_redirect_export) ... skipped 'POSIX symlink test; Windows junction test is separate'"
+            ],
+            "logIdentity": {
+              "bytes": 1999,
+              "sha256": "471fdcd6ee8e4ce3d056f13faaa6dd2c6a0ef80d7ecb1128cfc0eeb320d1c524"
+            }
+          },
+          {
+            "file": "workspace/tests/test_run_queue.py",
+            "log": "test_run_queue.log",
+            "exitCode": 0,
+            "total": 28,
+            "passed": 28,
+            "skipped": 0,
+            "skipDetails": [],
+            "logIdentity": {
+              "bytes": 4634,
+              "sha256": "582fa6da90c723ed5fa00ce65d64e6f374694f3a3c6f098b09e62fdd973f9059"
+            }
+          },
+          {
+            "file": "workspace/tests/test_reference_indexes.py",
+            "log": "test_reference_indexes.log",
+            "exitCode": 0,
+            "total": 19,
+            "passed": 18,
+            "skipped": 1,
+            "skipDetails": [
+              "test_symlink_store_is_rejected (__main__.ReferenceIndexTests.test_symlink_store_is_rejected) ... skipped 'Creating a Windows test symlink may require privileges; native gate checks ordinary paths.'"
+            ],
+            "logIdentity": {
+              "bytes": 3089,
+              "sha256": "8ade2004434e172a34ba22b635e5e490d2a1418129383ce2f39c111abd739153"
+            }
+          }
+        ]
+      },
+      "batch": {
+        "passed": 11,
+        "bytes": 35834,
+        "sha256": "c5c7907b5a0a0a4a06c5590f3729e4b092004c5ea0359ccf23ef489b24fa711e",
+        "report": {
+          "success": true,
+          "passed": 11,
+          "checks": [
+            "CSV preview requires explicit paired-read and sample-parameter mappings, retains metadata/shared reference and creates no plans or runs before Queue.",
+            "Two immutable plans and exact companion hashes survive editing and clean shutdown/reopen, remain paused and retain historical align 0.4.0 pins beside 0.4.1.",
+            "Explicit Start executes both frozen samples serially with independent read groups, 202 proper-pair alignments, known homozygous SNP and verified CWL/performance/output provenance.",
+            "Explicit combined-report mode maps two separately named sample reports into one declared many-valued report port, retains all row metadata and verifies resulting files without pooling biological reads.",
+            "Changing an input after freezing or altering a prepared companion fails closed; neither produces accepted outputs and corrupt preparation never enters execution.",
+            "During native execution the draft remains editable without mutating the frozen plan; Cancel stops that job, pauses its successor, and explicit Start runs the successor successfully.",
+            "Real minimap2 index build/reuse binds exact references, pack/executable/options and inventory; indexed and ordinary SAM records are identical, changed reference/options create distinct indexes, and reuse reports no invented native counters.",
+            "Corrupt stored index and a modified builder executable both fail closed even when a matching cache identity exists; verified candidate bytes are restored after the negative checks.",
+            "Exact packaged queue and history commits survive brief real external read handles; a persistent handle exhausts the bounded Windows wait with an explicit sharing error, preserves existing jobs/bytes, creates no plan and leaves the host responsive.",
+            "Actual native Samples imports CSV, maps mate columns, previews before queueing; Queue displays frozen identity, cancels one waiting sample and explicitly starts the other with known scientific output; native combined mode previews one explicitly mapped report job.",
+            "Native Reference indexes lists three distinct cached identities without claiming verification; explicit Verify rehashes the inventory and updates the selected entry."
+          ],
+          "skips": [],
+          "sourceCommit": "46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+          "assetSha256": "ce3bcc9c5634dd90f024ecf20f0308a144641c67e0c11c205501518773f6a4c2",
+          "gateSha256": "779b7354a87ee9f62482820ecede482281834278e07f086cd2bfa11134b5caf8",
+          "platform": "Windows-2022Server-10.0.20348-SP0",
+          "captures": [
+            {
+              "path": "samples-native-preview.bmp",
+              "width": 940,
+              "height": 680,
+              "sha256": "3f05f4f3da186879a05d78105578164b42315a3061596153fda7fe11de4632a9"
+            },
+            {
+              "path": "queue-native-paused.bmp",
+              "width": 940,
+              "height": 590,
+              "sha256": "7f6dc84bed0dad2f18d93671eda94f860edaa034e2b46b0aecf1cecacdd1d801"
+            },
+            {
+              "path": "queue-native-completed.bmp",
+              "width": 940,
+              "height": 590,
+              "sha256": "308238632e9296aed9846a7722c78e71559df58d9c78a33d6c9cceb0a07d12da"
+            },
+            {
+              "path": "samples-native-combined-preview.bmp",
+              "width": 940,
+              "height": 680,
+              "sha256": "d878f12f4b9141079712eccf979c4e123888b72f42d5a5e2c088f13946a0672c"
+            },
+            {
+              "path": "reference-indexes-native-verified.bmp",
+              "width": 940,
+              "height": 590,
+              "sha256": "10bdecc23c1077588c3a2fb60db6cf75c14a1c546b93ad86883b239d0375e44b"
+            }
+          ],
+          "limits": [
+            "Synthetic Starter scientific truth and bounded cancellation fixture; not realistic-data capacity or Windows/Linux benchmarking.",
+            "Observed hosted display DPI only; physical trackpad, high DPI, multi-monitor and institutional endpoint acceptance are not established."
+          ]
+        }
+      },
+      "retainedExactBuildRunObservations": {
+        "runId": 37855047291,
+        "evidence": "reference-management-0.15.0-frozen-windows-2026-10-08.json",
+        "liveReferenceChecks": 9,
+        "referenceManagementChecks": 10,
+        "performanceChecks": 14,
+        "readinessChecks": 5,
+        "recoveryChecks": 12,
+        "libraryChecks": 7,
+        "workspaceChecks": 32,
+        "instrumentedTransportChecks": 3,
+        "independentPackImportAndScience": "passed",
+        "notReexecutedByRecheck": true
+      }
+    },
+    {
+      "path": "spaces",
+      "recheckArtifact": {
+        "id": 11584866055,
+        "url": "https://github.com/comparativechrono/workbench/actions/runs/37857029068/artifacts/11584866055",
+        "bytes": 2263460,
+        "sha256": "16cb800130de84f24324dd9d53de84a9a13110b761dac2b20513c64881901df2",
+        "officialSizeDigestAndCrcVerified": true
+      },
+      "provenance": {
+        "validatorCommit": "016b14109c50dcce36e635586781b5bb5e19d79b",
+        "packagedBuildArtifact": "11583697066",
+        "starterSha256": "ce3bcc9c5634dd90f024ecf20f0308a144641c67e0c11c205501518773f6a4c2",
+        "changedPaths": [
+          ".github/workflows/native-reference-management-recheck.yml",
+          "knowledge/current-state.md",
+          "knowledge/evidence/reference-management-0.15.0-frozen-archive-audit-2026-10-08.json",
+          "knowledge/evidence/reference-management-0.15.0-frozen-source-2026-10-08.json",
+          "knowledge/evidence/reference-management-0.15.0-frozen-windows-2026-10-08.json",
+          "knowledge/project.json",
+          "knowledge/reference-management-0.15.0-handover.md",
+          "scripts/check_batch_windows.py",
+          "workspace/tests/test_reference_provenance.py"
+        ],
+        "archiveRebuilt": false,
+        "scope": "Corrected exact-package batch interface validator and all 15 isolated Windows source invocations only. Live reference, reference management, recovery, readiness, process accounting, library, workspace, independent pack and instrumented transport observations remain separate records from the original frozen build run.",
+        "packagedSourceCommit": "46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+        "packagedBuildRun": "37855047291",
+        "schema": 1,
+        "reusedBuildIsNotNewPass": true
+      },
+      "source": {
+        "total": 278,
+        "passed": 274,
+        "skipped": 4,
+        "failures": 0,
+        "errors": 0,
+        "invocations": 15,
+        "suites": [
+          {
+            "log": "test_core_checks.log",
+            "file": "tests/test_core_checks.py",
+            "exitCode": 0,
+            "total": 13,
+            "passed": 12,
+            "skipped": 1,
+            "skipDetails": [
+              "test_real_starter_pipeline_calls_truth_and_reports_reference_evidence (__main__.CoreChecksTests.test_real_starter_pipeline_calls_truth_and_reports_reference_evidence) ... skipped 'This validation adapter executes portable binaries on Linux only'"
+            ],
+            "logIdentity": {
+              "bytes": 2255,
+              "sha256": "d98d99f75fd8eb1bf614b7f13c79f519222d1c6268072cb63992bb3f781bcffa"
+            }
+          },
+          {
+            "log": "test_reference_provider.log",
+            "file": "workspace/tests/test_reference_provider.py",
+            "exitCode": 0,
+            "total": 18,
+            "passed": 18,
+            "skipped": 0,
+            "skipDetails": [],
+            "logIdentity": {
+              "bytes": 2658,
+              "sha256": "49dac832e285d1f2d34df967894ec7adb460046c8e384305259efd6af11d5d99"
+            }
+          },
+          {
+            "log": "test_reference_manager.log",
+            "file": "workspace/tests/test_reference_manager.py",
+            "exitCode": 0,
+            "total": 26,
+            "passed": 26,
+            "skipped": 0,
+            "skipDetails": [],
+            "logIdentity": {
+              "bytes": 3988,
+              "sha256": "608c9c598a72b22250ebb9758d6e81292439e8f86b75d913adcdfefa52507e4e"
+            }
+          },
+          {
+            "log": "test_reference_service.log",
+            "file": "workspace/tests/test_reference_service.py",
+            "exitCode": 0,
+            "total": 10,
+            "passed": 10,
+            "skipped": 0,
+            "skipDetails": [],
+            "logIdentity": {
+              "bytes": 1744,
+              "sha256": "a9f66a575a4e185f0e5a6bdd6e967ec1ab6cc73424690098ccce27c3a8d60e07"
+            }
+          },
+          {
+            "log": "test_reference_provenance.log",
+            "file": "workspace/tests/test_reference_provenance.py",
+            "exitCode": 0,
+            "total": 6,
+            "passed": 6,
+            "skipped": 0,
+            "skipDetails": [],
+            "logIdentity": {
+              "bytes": 1127,
+              "sha256": "17edb15e2abf8efd42d97d96e028660decf48417577e64088828120003b953b9"
+            }
+          },
+          {
+            "log": "test_reference_resume.log",
+            "file": "workspace/tests/test_reference_resume.py",
+            "exitCode": 0,
+            "total": 19,
+            "passed": 19,
+            "skipped": 0,
+            "skipDetails": [],
+            "logIdentity": {
+              "bytes": 2736,
+              "sha256": "3f0ca360a6bdc96269780a484317c3fa782fedc0c771dadfe18c9abe4af6d9a5"
+            }
+          },
+          {
+            "log": "test_reference_library.log",
+            "file": "workspace/tests/test_reference_library.py",
+            "exitCode": 0,
+            "total": 26,
+            "passed": 26,
+            "skipped": 0,
+            "skipDetails": [],
+            "logIdentity": {
+              "bytes": 4106,
+              "sha256": "f8dc0e8838f36867549891fedac6f0c67d5daee6ae4287094be2ff21889edb59"
+            }
+          },
+          {
+            "log": "test_reference_ncbi.log",
+            "file": "workspace/tests/test_reference_ncbi.py",
+            "exitCode": 0,
+            "total": 19,
+            "passed": 19,
+            "skipped": 0,
+            "skipDetails": [],
+            "logIdentity": {
+              "bytes": 2726,
+              "sha256": "7dd2c1642645660c8a779e22dd064e8ec6efb516f9f89578b45c394e3fc3b11c"
+            }
+          },
+          {
+            "log": "test_reference_management_service.log",
+            "file": "workspace/tests/test_reference_management_service.py",
+            "exitCode": 0,
+            "total": 12,
+            "passed": 12,
+            "skipped": 0,
+            "skipDetails": [],
+            "logIdentity": {
+              "bytes": 2234,
+              "sha256": "9f505b4c1fffec422989113211f61003dd3e919452ba0b528052cca6d1b5b823"
+            }
+          },
+          {
+            "log": "test_recovery_execution.log",
+            "file": "workspace/tests/test_recovery_execution.py",
+            "exitCode": 0,
+            "total": 26,
+            "passed": 26,
+            "skipped": 0,
+            "skipDetails": [],
+            "logIdentity": {
+              "bytes": 4799,
+              "sha256": "fad09ee8b6d5b26ec43a9aa43b8cea2a692b71ac1e40953f3587120deb53ad51"
+            }
+          },
+          {
+            "log": "test_project_manager.log",
+            "file": "workspace/tests/test_project_manager.py",
+            "exitCode": 0,
+            "total": 29,
+            "passed": 28,
+            "skipped": 1,
+            "skipDetails": [
+              "test_stock_cwl_report_replay_after_project_relocation (__main__.ProjectTests.test_stock_cwl_report_replay_after_project_relocation) ... skipped 'Stock CWL engine is unavailable; Linux replay is not counted as passed.'"
+            ],
+            "logIdentity": {
+              "bytes": 4680,
+              "sha256": "79aa0e4dd93846c50ea1a830e97f2a612f570aca73cb549fb778511d2786574b"
+            }
+          },
+          {
+            "log": "test_recovery_service.log",
+            "file": "workspace/tests/test_recovery_service.py",
+            "exitCode": 0,
+            "total": 16,
+            "passed": 16,
+            "skipped": 0,
+            "skipDetails": [],
+            "logIdentity": {
+              "bytes": 2938,
+              "sha256": "fdcdcd4035560846264a730e46c153f2f93ad60280e74e66f75c7909b9662557"
+            }
+          },
+          {
+            "log": "test_diagnostics.log",
+            "file": "workspace/tests/test_diagnostics.py",
+            "exitCode": 0,
+            "total": 11,
+            "passed": 10,
+            "skipped": 1,
+            "skipDetails": [
+              "test_symlink_destination_or_ancestor_cannot_redirect_export (__main__.DiagnosticsTests.test_symlink_destination_or_ancestor_cannot_redirect_export) ... skipped 'POSIX symlink test; Windows junction test is separate'"
+            ],
+            "logIdentity": {
+              "bytes": 1999,
+              "sha256": "b300981f32e34ea311e3ceaa301cc6daf83668c994e10abddefa980768b4c4d1"
+            }
+          },
+          {
+            "log": "test_run_queue.log",
+            "file": "workspace/tests/test_run_queue.py",
+            "exitCode": 0,
+            "total": 28,
+            "passed": 28,
+            "skipped": 0,
+            "skipDetails": [],
+            "logIdentity": {
+              "bytes": 4634,
+              "sha256": "cf0eeaccaa35e08780bbe56d2f1523e954ab313f6f08e17c40c6db8640e84050"
+            }
+          },
+          {
+            "log": "test_reference_indexes.log",
+            "file": "workspace/tests/test_reference_indexes.py",
+            "exitCode": 0,
+            "total": 19,
+            "passed": 18,
+            "skipped": 1,
+            "skipDetails": [
+              "test_symlink_store_is_rejected (__main__.ReferenceIndexTests.test_symlink_store_is_rejected) ... skipped 'Creating a Windows test symlink may require privileges; native gate checks ordinary paths.'"
+            ],
+            "logIdentity": {
+              "bytes": 3089,
+              "sha256": "60c548dd9d1c823ad627d27866a3627611d2aa986c27f993e7d19d4e89bd3b3f"
+            }
+          }
+        ]
+      },
+      "batch": {
+        "passed": 11,
+        "bytes": 35850,
+        "sha256": "fd6b2d0eb2e98836ef6373ff43a10b5c27120b8c04430253df4025bc4b88f9f8",
+        "report": {
+          "success": true,
+          "passed": 11,
+          "checks": [
+            "CSV preview requires explicit paired-read and sample-parameter mappings, retains metadata/shared reference and creates no plans or runs before Queue.",
+            "Two immutable plans and exact companion hashes survive editing and clean shutdown/reopen, remain paused and retain historical align 0.4.0 pins beside 0.4.1.",
+            "Explicit Start executes both frozen samples serially with independent read groups, 202 proper-pair alignments, known homozygous SNP and verified CWL/performance/output provenance.",
+            "Explicit combined-report mode maps two separately named sample reports into one declared many-valued report port, retains all row metadata and verifies resulting files without pooling biological reads.",
+            "Changing an input after freezing or altering a prepared companion fails closed; neither produces accepted outputs and corrupt preparation never enters execution.",
+            "During native execution the draft remains editable without mutating the frozen plan; Cancel stops that job, pauses its successor, and explicit Start runs the successor successfully.",
+            "Real minimap2 index build/reuse binds exact references, pack/executable/options and inventory; indexed and ordinary SAM records are identical, changed reference/options create distinct indexes, and reuse reports no invented native counters.",
+            "Corrupt stored index and a modified builder executable both fail closed even when a matching cache identity exists; verified candidate bytes are restored after the negative checks.",
+            "Exact packaged queue and history commits survive brief real external read handles; a persistent handle exhausts the bounded Windows wait with an explicit sharing error, preserves existing jobs/bytes, creates no plan and leaves the host responsive.",
+            "Actual native Samples imports CSV, maps mate columns, previews before queueing; Queue displays frozen identity, cancels one waiting sample and explicitly starts the other with known scientific output; native combined mode previews one explicitly mapped report job.",
+            "Native Reference indexes lists three distinct cached identities without claiming verification; explicit Verify rehashes the inventory and updates the selected entry."
+          ],
+          "skips": [],
+          "sourceCommit": "46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+          "assetSha256": "ce3bcc9c5634dd90f024ecf20f0308a144641c67e0c11c205501518773f6a4c2",
+          "gateSha256": "779b7354a87ee9f62482820ecede482281834278e07f086cd2bfa11134b5caf8",
+          "platform": "Windows-2022Server-10.0.20348-SP0",
+          "captures": [
+            {
+              "path": "samples-native-preview.bmp",
+              "width": 940,
+              "height": 680,
+              "sha256": "3f05f4f3da186879a05d78105578164b42315a3061596153fda7fe11de4632a9"
+            },
+            {
+              "path": "queue-native-paused.bmp",
+              "width": 940,
+              "height": 590,
+              "sha256": "8bdfe09fd41847b5a801e49c7b5ce3dc61692f8c435e16567c14ec657a6957ba"
+            },
+            {
+              "path": "queue-native-completed.bmp",
+              "width": 940,
+              "height": 590,
+              "sha256": "21ad5ba110ffbf79ea86fee7bd3d3071a8930c52647e63499d7a45c5fdcd082b"
+            },
+            {
+              "path": "samples-native-combined-preview.bmp",
+              "width": 940,
+              "height": 680,
+              "sha256": "e2d876c73deb8409ba9d16a00b339fe2f92ff2ea9f6599fc96b533dfe6c80bb0"
+            },
+            {
+              "path": "reference-indexes-native-verified.bmp",
+              "width": 940,
+              "height": 590,
+              "sha256": "10bdecc23c1077588c3a2fb60db6cf75c14a1c546b93ad86883b239d0375e44b"
+            }
+          ],
+          "limits": [
+            "Synthetic Starter scientific truth and bounded cancellation fixture; not realistic-data capacity or Windows/Linux benchmarking.",
+            "Observed hosted display DPI only; physical trackpad, high DPI, multi-monitor and institutional endpoint acceptance are not established."
+          ]
+        }
+      },
+      "retainedExactBuildRunObservations": {
+        "runId": 37855047291,
+        "evidence": "reference-management-0.15.0-frozen-windows-2026-10-08.json",
+        "liveReferenceChecks": 9,
+        "referenceManagementChecks": 10,
+        "performanceChecks": 14,
+        "readinessChecks": 5,
+        "recoveryChecks": 12,
+        "libraryChecks": 7,
+        "workspaceChecks": 32,
+        "instrumentedTransportChecks": 3,
+        "independentPackImportAndScience": "passed",
+        "notReexecutedByRecheck": true
+      }
+    }
+  ],
+  "visualReview": {
+    "ordinary": "Root reviewed all eleven reference captures at their original dimensions.",
+    "spaces": "Independent native UI owner reviewed all eleven reference captures at their original dimensions.",
+    "dpi": 96,
+    "blockingFindings": [],
+    "observations": [
+      "All four native tabs and two review dialogs fit without overlap or clipped action captions.",
+      "Saved relocated destination is visibly restored; local file inputs, compatible target and explicit review actions are readable.",
+      "Edited-review confirmation is disabled with a clear notice; fresh preview and final imported/relocated states agree with assertions."
+    ],
+    "minorPresentationLimits": [
+      "Existing size formatter rounds tiny GTF files to 0 KB; file bytes and hashes are separately verified.",
+      "Initial Downloads view retains the last operation notice until the next operation."
+    ],
+    "limits": [
+      "Static settled captures do not establish temporal repaint, other DPI, physical trackpad or representative-machine acceptance."
+    ]
+  },
+  "archivesIndependentlyVerified": true,
+  "publishedStateRechecked": {
+    "main": "82729febfcfab1c43bd9c9798d03c80f595545cb",
+    "latestApp": "0.11.0",
+    "published": true,
+    "prerelease": true,
+    "assets": 11,
+    "unchanged": true
+  },
+  "limits": [
+    "Hosted Windows Server 2022, ordinary and spaced paths, 96 DPI and synthetic science fixtures; representative PCs, high DPI, physical trackpads and institutional endpoint approval remain separate acceptance work.",
+    "No 0.15.0 updater, published-baseline upgrade, Full online setup of all 32 packs, release promotion or public release download validation was performed.",
+    "Report-only stock Linux CWL replay passed in the frozen Linux build; scientific Windows/Linux parity and realistic performance benchmarks were not performed.",
+    "Library regression control enumeration reported ignored transient GetWindowRect callback exceptions; all seven functional assertions passed, but exhaustive enumeration is not established.",
+    "Reference relocation retains original files for saved/frozen paths; it does not reclaim disk space. A hard kill during expansion/import/relocation can leave unregistered staging folders.",
+    "Actions artifacts are temporary test downloads retained for 30 days and may require GitHub sign-in; they are not released assets."
+  ]
+}

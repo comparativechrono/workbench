@@ -184,9 +184,9 @@ class DesktopHost:
             return result
         if method.startswith("references/"):
             action = method.split("/", 1)[1]
-            if action in ("search", "discover", "download"):
+            if action in ("search", "discover", "download", "resume", "discard", "import-preview", "import", "relocate-preview", "relocate"):
                 return self.app.start_reference_operation(action, params)
-            allowed = {"list": set(), "status": set(), "cancel": set(), "open": {"record_id"},
+            allowed = {"list": set(), "status": set(), "cancel": set(), "pause": set(), "open": {"record_id"},
                        "targets": {"record_id", "file_id"},
                        "use": {"record_id", "file_id", "source_id", "field_id"}}
             if action not in allowed or set(params) != allowed[action]:
@@ -195,6 +195,8 @@ class DesktopHost:
                 return self.app.reference_state()
             if action == "cancel":
                 return self.app.cancel_reference_operation()
+            if action == "pause":
+                return self.app.pause_reference_operation()
             record_id = short_text(params.get("record_id"), "local reference", 100)
             manager = self.app.reference_manager()
             if action == "open":

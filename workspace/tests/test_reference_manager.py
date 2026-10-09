@@ -113,9 +113,22 @@ class ReferenceManagerTests(unittest.TestCase):
     def test_default_destination_is_created_only_for_explicit_download(self):
         default = self.manager.snapshot()['default_destination']
         self.assertFalse(Path(default).exists())
+        if os.name == 'nt':
+            # The native UI receives the ordinary spelling, while the manager
+            # retains a long-path IO spelling. Both identify the same default.
+            self.assertNotEqual(str(self.manager.data), default)
+            from pack_manager import filesystem_path
+            self.assertEqual(filesystem_path(default), self.manager.data)
         result = self.manager.download(self.selection(), ['genome'], default)
         self.assertTrue(Path(result['local'][0]['folder']).is_relative_to(Path(default)))
         self.assertTrue(Path(default, 'library.json').is_file())
+    def test_nondefault_missing_destination_is_not_created(self):
+        destination = self.destination / 'not created'
+        with self.assertRaisesRegex(ReferenceError, 'existing reference destination'):
+            self.manager.download(self.selection(), ['genome'], str(destination))
+        self.assertFalse(destination.exists())
+        self.assertFalse(self.manager.data.exists())
+        self.assertEqual(self.manager.snapshot()['local'], [])
     def test_explicit_search_preserves_release_and_species(self):
         result = self.manager.search(116, 'test')
         self.assertEqual(result['releases'], [116, 115])
@@ -285,7 +298,7 @@ class ReferenceManagerTests(unittest.TestCase):
             self.manager.snapshot()
     def test_failed_registry_transaction_cleans_own_bundle_only(self):
         marker = self.destination / 'keep.txt'; marker.write_text('keep')
-        with patch('reference_manager._atomic_json', side_effect=OSError('write denied')), self.assertRaises(ReferenceError):
+        with patch.object(self.manager, '_write_library', side_effect=OSError('write denied')), self.assertRaises(ReferenceError):
             self.download(['genome'])
         self.assertEqual(list(self.destination.iterdir()), [marker])
         self.assertEqual(self.manager.snapshot()['local'], [])
@@ -297,13 +310,16 @@ class ReferenceManagerTests(unittest.TestCase):
         result = self.manager.snapshot()
         self.assertEqual(len(result['local']), 1)
         self.assertTrue(result['local'][0]['available'])
-    def test_another_instance_publication_lock_preserved(self):
+    def test_another_instance_publication_lease_preserved_and_old_marker_does_not_block(self):
+        from reference_transfer import file_lease
         self.manager.data.mkdir(parents=True)
-        lock = self.manager.data / '_publish.lock'; lock.write_text('other instance')
-        with self.assertRaisesRegex(ReferenceError, 'Another Workbench'):
-            self.download(['genome'])
-        self.assertEqual(lock.read_text(), 'other instance')
+        lock = self.manager.data / '_publish.lock'; lock.write_text('old interrupted instance')
+        with file_lease(self.manager.data / '_library.lease'):
+            with self.assertRaisesRegex(ReferenceError, 'Another Workbench'):
+                self.download(['genome'])
+        self.assertEqual(lock.read_text(), 'old interrupted instance')
         self.assert_no_download()
+        self.assertEqual(len(self.download(['genome'])['local']), 1)
     def test_snapshot_bounds_response_and_reports_omitted_records(self):
         self.download(['genome'])
         with patch('reference_manager.MAX_SNAPSHOT_LOCAL_BYTES', 1):

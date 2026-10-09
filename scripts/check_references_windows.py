@@ -190,10 +190,11 @@ def run_reference_checks(root, evidence, report, args):
         initial = host.call("init")
         report["appVersion"] = initial["app_version"]
         manifest_version = json.loads((root / "manifest.json").read_text(encoding="utf-8"))["version"]
-        # The frozen 0.11.0 library candidate retains the 0.10.1 reference
-        # implementation byte-for-byte; its native tool selection is rechecked.
-        require(manifest_version in {"0.7.0", "0.8.0", "0.9.0", "0.10.0", "0.10.1", "0.11.0"},
-                "This gate supports the reviewed 0.7.0, 0.8.0, 0.9.0, 0.10.0, 0.10.1 and 0.11.0 reference contracts only.")
+        # Explicitly reviewed versions only. The 0.15.0 reference-management
+        # gate reuses these live-provider/offline/scientific assertions and
+        # exercises its changed native References layout in a separate gate.
+        require(manifest_version in {"0.7.0", "0.8.0", "0.9.0", "0.10.0", "0.10.1", "0.11.0", "0.15.0"},
+                "This gate supports the reviewed 0.7.0, 0.8.0, 0.9.0, 0.10.0, 0.10.1 0.11.0 and 0.15.0 reference contracts only.")
         require(initial["app_version"] == manifest_version,
                 "The private host version differs from the exact installed application manifest.")
         state = host.call("references/list")

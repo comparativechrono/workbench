@@ -1,0 +1,766 @@
+{
+  "schema": 1,
+  "recordedOn": "2026-10-08",
+  "version": "0.15.0",
+  "published": false,
+  "sourceCommit": "5592604a101fdfc2db4f2055399e7e54f7684b21",
+  "runId": 37853140376,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37853140376",
+  "runConclusion": "failure",
+  "accepted": false,
+  "starterSha256": "d765f02ed56d9fe5477846f0ad672b03c3d58c90db1be04ea317c88f0a51d04a",
+  "jobs": [
+    {
+      "id": 113570867552,
+      "name": "build",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 37853140376,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Recover immutable runtime, corresponding source and compiler",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Compile the native application with strict warnings",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Install independent CWL reference runner for tests only",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Verify affected source and packaging contracts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Freeze one standalone candidate and its matching source",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Prepare bounded transport without rebuilding the frozen archives",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 26
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 27
+        }
+      ]
+    },
+    {
+      "id": 113571545235,
+      "name": "native (path with spaces)",
+      "status": "completed",
+      "conclusion": "failure",
+      "run_id": 37853140376,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/download-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Verify and separately extract the exact candidate for independent gates",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Exact packaged live Ensembl and NCBI references, cancellation, offline reuse and provenance",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 5
+        },
+        {
+          "name": "Exact packaged resumable transfers, reviewed local imports, safe relocation and native References",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 6
+        },
+        {
+          "name": "Native process accounting, pipeline failure, cancellation, timeout and cleanup",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Exact packaged readiness, scientific measurements and diagnostic review/save",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Import the exact independent align 0.4.1 candidate ZIP and execute its declared scientific check",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Frozen batch plans, durable queue, real reusable indexes and native sample/queue interfaces",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Verified completed-step restart, declared resource admission and portable offline projects",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Separately labelled native delayed-host transport and cancellation fixture",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Windows queue/index lease recovery and diagnostic filesystem regressions",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 13
+        },
+        {
+          "name": "Native expandable categories, search, selection, scrolling and installed-pack refresh",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14
+        },
+        {
+          "name": "Recheck native workspace, workflow interactions and starter scientific chain",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        },
+        {
+          "name": "Retain successful and failed reports and desktop captures",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 32
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 33
+        }
+      ]
+    },
+    {
+      "id": 113571545269,
+      "name": "native (ordinary)",
+      "status": "completed",
+      "conclusion": "failure",
+      "run_id": 37853140376,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/download-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Verify and separately extract the exact candidate for independent gates",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Exact packaged live Ensembl and NCBI references, cancellation, offline reuse and provenance",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 5
+        },
+        {
+          "name": "Exact packaged resumable transfers, reviewed local imports, safe relocation and native References",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 6
+        },
+        {
+          "name": "Native process accounting, pipeline failure, cancellation, timeout and cleanup",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Exact packaged readiness, scientific measurements and diagnostic review/save",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Import the exact independent align 0.4.1 candidate ZIP and execute its declared scientific check",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Frozen batch plans, durable queue, real reusable indexes and native sample/queue interfaces",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Verified completed-step restart, declared resource admission and portable offline projects",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Separately labelled native delayed-host transport and cancellation fixture",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Windows queue/index lease recovery and diagnostic filesystem regressions",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 13
+        },
+        {
+          "name": "Native expandable categories, search, selection, scrolling and installed-pack refresh",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14
+        },
+        {
+          "name": "Recheck native workspace, workflow interactions and starter scientific chain",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        },
+        {
+          "name": "Retain successful and failed reports and desktop captures",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 32
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 33
+        }
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "schema": 1,
+      "runId": 37853140376,
+      "sourceCommit": "5592604a101fdfc2db4f2055399e7e54f7684b21",
+      "jobId": 113571545269,
+      "pathCase": "ordinary",
+      "jobConclusion": "failure",
+      "nativePlatform": "Windows Server 2022; GitHub windows-2022 20261004.326.1",
+      "rawLog": "ordinary-113571545269.log",
+      "suites": [
+        {
+          "file": "workspace/tests/test_reference_provider.py",
+          "total": 18,
+          "passed": 18,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0,
+          "seconds": 0.013,
+          "outcome": "OK"
+        },
+        {
+          "file": "workspace/tests/test_reference_manager.py",
+          "total": 25,
+          "passed": 24,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 1,
+          "seconds": 2.36,
+          "outcome": "FAILED"
+        }
+      ],
+      "notExecuted": [
+        "workspace/tests/test_reference_service.py",
+        "workspace/tests/test_reference_provenance.py",
+        "workspace/tests/test_reference_resume.py",
+        "workspace/tests/test_reference_library.py",
+        "workspace/tests/test_reference_ncbi.py",
+        "workspace/tests/test_reference_management_service.py",
+        "workspace/tests/test_recovery_execution.py",
+        "workspace/tests/test_project_manager.py",
+        "workspace/tests/test_recovery_service.py",
+        "workspace/tests/test_diagnostics.py",
+        "workspace/tests/test_run_queue.py",
+        "workspace/tests/test_reference_indexes.py"
+      ],
+      "totals": {
+        "total": 43,
+        "passed": 42,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 1
+      },
+      "gates": [
+        {
+          "name": "Exact packaged live Ensembl and NCBI references, cancellation, offline reuse and provenance",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 5
+        },
+        {
+          "name": "Exact packaged resumable transfers, reviewed local imports, safe relocation and native References",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 6
+        },
+        {
+          "name": "Native process accounting, pipeline failure, cancellation, timeout and cleanup",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Exact packaged readiness, scientific measurements and diagnostic review/save",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Import the exact independent align 0.4.1 candidate ZIP and execute its declared scientific check",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Frozen batch plans, durable queue, real reusable indexes and native sample/queue interfaces",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Verified completed-step restart, declared resource admission and portable offline projects",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Separately labelled native delayed-host transport and cancellation fixture",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Windows queue/index lease recovery and diagnostic filesystem regressions",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 13
+        },
+        {
+          "name": "Native expandable categories, search, selection, scrolling and installed-pack refresh",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14
+        },
+        {
+          "name": "Recheck native workspace, workflow interactions and starter scientific chain",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        }
+      ],
+      "failures": [
+        {
+          "scope": "live references",
+          "passedBeforeFailure": 6,
+          "reason": "Production installation checker rejects project_manager.py urllib.parse as a network/browser import.",
+          "ncbiLiveExecuted": false
+        },
+        {
+          "scope": "reference management",
+          "passedBeforeFailure": 6,
+          "reason": "Native NCBI Search succeeds but Find files raises Choose the versioned RefSeq assembly lookup.",
+          "remainingGuiChecksExecuted": false
+        },
+        {
+          "scope": "Windows source",
+          "reason": "Managed default reference destination is not created: ordinary/extended Windows path comparison differs.",
+          "test": "test_reference_manager.ReferenceManagerTests.test_default_destination_is_created_only_for_explicit_download"
+        }
+      ],
+      "limitations": [
+        "Two/three ignored ctypes control-enumeration callback exceptions (Could not measure native control) occurred during separate library gate; its seven asserted checks passed. This does not establish exhaustive transitional control enumeration."
+      ],
+      "artifact": {
+        "id": 11582204910,
+        "url": "https://github.com/comparativechrono/workbench/actions/runs/37853140376/artifacts/11582204910",
+        "bytes": 11174266,
+        "sha256": "446c7570405a13d51dbe18fb3c1146f2461a2376121453a22e8ccdc567cdc53d",
+        "officialSizeDigestAndCrcVerified": true
+      },
+      "newReferenceReports": {
+        "live": {
+          "file": "reference-live-evidence/native-references-live.json",
+          "bytes": 9688,
+          "sha256": "46f4138cf2ae06f296debd3a2ee6a8af2ec4c75b2a9ed4de2db8ec18f443452e",
+          "summary": {
+            "success": false,
+            "passed": 6,
+            "checks": [
+              "Live release-pinned yeast search and five-product discovery.",
+              "Cancellation after transferred bytes removed only its partial download and published no reference.",
+              "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+              "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+              "Completed CWL export preserves the real downloaded yeast reference receipt, input hash, frozen plan and native output provenance.",
+              "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods."
+            ],
+            "failure": {
+              "type": "AssertionError",
+              "message": "Released application installation integrity checks failed.",
+              "traceback": "Traceback (most recent call last):\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_reference_management_windows.py\", line 621, in main\n    run_reference_checks(root, evidence, report, args)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_references_windows.py\", line 381, in run_reference_checks\n    require(installation.get(\"success\"), \"Released application installation integrity checks failed.\")\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_references_windows.py\", line 47, in require\n    raise AssertionError(message)\nAssertionError: Released application installation integrity checks failed.\n"
+            },
+            "sourceCommit": "5592604a101fdfc2db4f2055399e7e54f7684b21",
+            "assetSha256": "d765f02ed56d9fe5477846f0ad672b03c3d58c90db1be04ea317c88f0a51d04a",
+            "gateSha256": "9fe325d22b932714af2ae00b99cfc2e55c544091b04194c4981bcaab355c6c9e"
+          }
+        },
+        "management": {
+          "file": "reference-management-evidence/native-reference-management.json",
+          "bytes": 22210,
+          "sha256": "0e8b85764e6accebf944a2596d899825159dd604a3dd80e0740055739de16716",
+          "summary": {
+            "success": false,
+            "passed": 6,
+            "checks": [
+              "Exact packaged transfer code pauses after a production chunk, publishes no incomplete record, reopens and rehashes its checkpoint, truncates an uncheckpointed crash suffix and resumes with exact Range/If-Range into independently verified complete bytes; deterministic provider fixture only.",
+              "Malformed Content-Range and changed entity validators are never appended; deterministic responses force a fresh full request whose final bytes still match the independently pinned fixture.",
+              "Changed checkpointed compressed bytes and malformed checkpoint JSON fail closed; explicit discard removes only pending state and preserves ready bundles and unrelated user content.",
+              "Socket-denied exact private host reviews without copying; stale/replayed review tokens and changed reviewed files fail closed; explicit confirmation copies FASTA and gzip GTF with independently checked source/expanded hashes and clearly user-declared provenance.",
+              "Socket-denied typed selection rejects GTF for a FASTA input; reviewed relocation copies and verifies the library while retaining old paths/receipts and exact queued companions. The previously frozen old-path plan then executes native SAMtools with the correct FASTA dictionary and unchanged reference provenance in methods, plan, results and CWL.",
+              "A fresh socket-denied private host reopens the relocated local library and offers its verified FASTA to a compatible native tool without contacting either provider."
+            ],
+            "failure": {
+              "type": "AssertionError",
+              "message": "Unexpected native dialog: [[{\"id\": 2, \"class\": \"Button\", \"text\": \"OK\", \"bounds\": [597, 434, 672, 457], \"hwnd\": 66322}, {\"id\": 20, \"class\": \"Static\", \"text\": \"\", \"bounds\": [373, 369, 405, 401], \"hwnd\": 66324}, {\"id\": 65535, \"class\": \"Static\", \"text\": \"Choose the versioned RefSeq assembly lookup.\", \"bounds\": [414, 379, 659, 394], \"hwnd\": 66326}]]",
+              "traceback": "Traceback (most recent call last):\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_reference_management_windows.py\", line 626, in main\n    gui_checks(root, evidence, report)\n    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_reference_management_windows.py\", line 429, in gui_checks\n    ui.wait('three native NCBI reference products', lambda: products.count() == 3 and ui.user.IsWindowEnabled(ui.child(611, references)), seconds=120)\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_workspace_ui_windows.py\", line 272, in wait\n    require(not dialogs, \"Unexpected native dialog: \" + json.dumps([self.controls(h) for h in dialogs]))\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_references_windows.py\", line 47, in require\n    raise AssertionError(message)\nAssertionError: Unexpected native dialog: [[{\"id\": 2, \"class\": \"Button\", \"text\": \"OK\", \"bounds\": [597, 434, 672, 457], \"hwnd\": 66322}, {\"id\": 20, \"class\": \"Static\", \"text\": \"\", \"bounds\": [373, 369, 405, 401], \"hwnd\": 66324}, {\"id\": 65535, \"class\": \"Static\", \"text\": \"Choose the versioned RefSeq assembly lookup.\", \"bounds\": [414, 379, 659, 394], \"hwnd\": 66326}]]\n"
+            },
+            "sourceCommit": "5592604a101fdfc2db4f2055399e7e54f7684b21",
+            "assetSha256": "d765f02ed56d9fe5477846f0ad672b03c3d58c90db1be04ea317c88f0a51d04a",
+            "gateSha256": "9fe325d22b932714af2ae00b99cfc2e55c544091b04194c4981bcaab355c6c9e"
+          }
+        }
+      }
+    },
+    {
+      "schema": 1,
+      "runId": 37853140376,
+      "sourceCommit": "5592604a101fdfc2db4f2055399e7e54f7684b21",
+      "jobId": 113571545235,
+      "pathCase": "spaces",
+      "jobConclusion": "failure",
+      "nativePlatform": "Windows Server 2022; GitHub windows-2022 20261004.326.1",
+      "rawLog": "spaces-113571545235.log",
+      "suites": [
+        {
+          "file": "workspace/tests/test_reference_provider.py",
+          "total": 18,
+          "passed": 18,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0,
+          "seconds": 0.006,
+          "outcome": "OK"
+        },
+        {
+          "file": "workspace/tests/test_reference_manager.py",
+          "total": 25,
+          "passed": 24,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 1,
+          "seconds": 1.555,
+          "outcome": "FAILED"
+        }
+      ],
+      "notExecuted": [
+        "workspace/tests/test_reference_service.py",
+        "workspace/tests/test_reference_provenance.py",
+        "workspace/tests/test_reference_resume.py",
+        "workspace/tests/test_reference_library.py",
+        "workspace/tests/test_reference_ncbi.py",
+        "workspace/tests/test_reference_management_service.py",
+        "workspace/tests/test_recovery_execution.py",
+        "workspace/tests/test_project_manager.py",
+        "workspace/tests/test_recovery_service.py",
+        "workspace/tests/test_diagnostics.py",
+        "workspace/tests/test_run_queue.py",
+        "workspace/tests/test_reference_indexes.py"
+      ],
+      "totals": {
+        "total": 43,
+        "passed": 42,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 1
+      },
+      "gates": [
+        {
+          "name": "Exact packaged live Ensembl and NCBI references, cancellation, offline reuse and provenance",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 5
+        },
+        {
+          "name": "Exact packaged resumable transfers, reviewed local imports, safe relocation and native References",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 6
+        },
+        {
+          "name": "Native process accounting, pipeline failure, cancellation, timeout and cleanup",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Exact packaged readiness, scientific measurements and diagnostic review/save",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Import the exact independent align 0.4.1 candidate ZIP and execute its declared scientific check",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Frozen batch plans, durable queue, real reusable indexes and native sample/queue interfaces",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Verified completed-step restart, declared resource admission and portable offline projects",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Separately labelled native delayed-host transport and cancellation fixture",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Windows queue/index lease recovery and diagnostic filesystem regressions",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 13
+        },
+        {
+          "name": "Native expandable categories, search, selection, scrolling and installed-pack refresh",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14
+        },
+        {
+          "name": "Recheck native workspace, workflow interactions and starter scientific chain",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        }
+      ],
+      "failures": [
+        {
+          "scope": "live references",
+          "passedBeforeFailure": 6,
+          "reason": "Production installation checker rejects project_manager.py urllib.parse as a network/browser import.",
+          "ncbiLiveExecuted": false
+        },
+        {
+          "scope": "reference management",
+          "passedBeforeFailure": 6,
+          "reason": "Native NCBI Search succeeds but Find files raises Choose the versioned RefSeq assembly lookup.",
+          "remainingGuiChecksExecuted": false
+        },
+        {
+          "scope": "Windows source",
+          "reason": "Managed default reference destination is not created: ordinary/extended Windows path comparison differs.",
+          "test": "test_reference_manager.ReferenceManagerTests.test_default_destination_is_created_only_for_explicit_download"
+        }
+      ],
+      "limitations": [
+        "Two/three ignored ctypes control-enumeration callback exceptions (Could not measure native control) occurred during separate library gate; its seven asserted checks passed. This does not establish exhaustive transitional control enumeration."
+      ],
+      "artifact": {
+        "id": 11582723599,
+        "url": "https://github.com/comparativechrono/workbench/actions/runs/37853140376/artifacts/11582723599",
+        "bytes": 11175882,
+        "sha256": "bfe02d34946d0bc9edf9985ce207974ee4e87ef9a333b5659857b2d1763003e1",
+        "officialSizeDigestAndCrcVerified": true
+      },
+      "newReferenceReports": {
+        "live": {
+          "file": "reference-live-evidence/native-references-live.json",
+          "bytes": 9688,
+          "sha256": "9adfa47aa4a23542dce4cb61990947e7aead22353ed1b912fea308102a1530cc",
+          "summary": {
+            "success": false,
+            "passed": 6,
+            "checks": [
+              "Live release-pinned yeast search and five-product discovery.",
+              "Cancellation after transferred bytes removed only its partial download and published no reference.",
+              "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+              "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+              "Completed CWL export preserves the real downloaded yeast reference receipt, input hash, frozen plan and native output provenance.",
+              "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods."
+            ],
+            "failure": {
+              "type": "AssertionError",
+              "message": "Released application installation integrity checks failed.",
+              "traceback": "Traceback (most recent call last):\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_reference_management_windows.py\", line 621, in main\n    run_reference_checks(root, evidence, report, args)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_references_windows.py\", line 381, in run_reference_checks\n    require(installation.get(\"success\"), \"Released application installation integrity checks failed.\")\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_references_windows.py\", line 47, in require\n    raise AssertionError(message)\nAssertionError: Released application installation integrity checks failed.\n"
+            },
+            "sourceCommit": "5592604a101fdfc2db4f2055399e7e54f7684b21",
+            "assetSha256": "d765f02ed56d9fe5477846f0ad672b03c3d58c90db1be04ea317c88f0a51d04a",
+            "gateSha256": "9fe325d22b932714af2ae00b99cfc2e55c544091b04194c4981bcaab355c6c9e"
+          }
+        },
+        "management": {
+          "file": "reference-management-evidence/native-reference-management.json",
+          "bytes": 22210,
+          "sha256": "9dba732aea4f140729a2d00c8820a15e19340b573f5984a20b30624330fe358e",
+          "summary": {
+            "success": false,
+            "passed": 6,
+            "checks": [
+              "Exact packaged transfer code pauses after a production chunk, publishes no incomplete record, reopens and rehashes its checkpoint, truncates an uncheckpointed crash suffix and resumes with exact Range/If-Range into independently verified complete bytes; deterministic provider fixture only.",
+              "Malformed Content-Range and changed entity validators are never appended; deterministic responses force a fresh full request whose final bytes still match the independently pinned fixture.",
+              "Changed checkpointed compressed bytes and malformed checkpoint JSON fail closed; explicit discard removes only pending state and preserves ready bundles and unrelated user content.",
+              "Socket-denied exact private host reviews without copying; stale/replayed review tokens and changed reviewed files fail closed; explicit confirmation copies FASTA and gzip GTF with independently checked source/expanded hashes and clearly user-declared provenance.",
+              "Socket-denied typed selection rejects GTF for a FASTA input; reviewed relocation copies and verifies the library while retaining old paths/receipts and exact queued companions. The previously frozen old-path plan then executes native SAMtools with the correct FASTA dictionary and unchanged reference provenance in methods, plan, results and CWL.",
+              "A fresh socket-denied private host reopens the relocated local library and offers its verified FASTA to a compatible native tool without contacting either provider."
+            ],
+            "failure": {
+              "type": "AssertionError",
+              "message": "Unexpected native dialog: [[{\"id\": 2, \"class\": \"Button\", \"text\": \"OK\", \"bounds\": [619, 455, 694, 478], \"hwnd\": 66388}, {\"id\": 20, \"class\": \"Static\", \"text\": \"\", \"bounds\": [395, 390, 427, 422], \"hwnd\": 66390}, {\"id\": 65535, \"class\": \"Static\", \"text\": \"Choose the versioned RefSeq assembly lookup.\", \"bounds\": [436, 400, 681, 415], \"hwnd\": 66392}]]",
+              "traceback": "Traceback (most recent call last):\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_reference_management_windows.py\", line 626, in main\n    gui_checks(root, evidence, report)\n    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_reference_management_windows.py\", line 429, in gui_checks\n    ui.wait('three native NCBI reference products', lambda: products.count() == 3 and ui.user.IsWindowEnabled(ui.child(611, references)), seconds=120)\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_workspace_ui_windows.py\", line 272, in wait\n    require(not dialogs, \"Unexpected native dialog: \" + json.dumps([self.controls(h) for h in dialogs]))\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_references_windows.py\", line 47, in require\n    raise AssertionError(message)\nAssertionError: Unexpected native dialog: [[{\"id\": 2, \"class\": \"Button\", \"text\": \"OK\", \"bounds\": [619, 455, 694, 478], \"hwnd\": 66388}, {\"id\": 20, \"class\": \"Static\", \"text\": \"\", \"bounds\": [395, 390, 427, 422], \"hwnd\": 66390}, {\"id\": 65535, \"class\": \"Static\", \"text\": \"Choose the versioned RefSeq assembly lookup.\", \"bounds\": [436, 400, 681, 415], \"hwnd\": 66392}]]\n"
+            },
+            "sourceCommit": "5592604a101fdfc2db4f2055399e7e54f7684b21",
+            "assetSha256": "d765f02ed56d9fe5477846f0ad672b03c3d58c90db1be04ea317c88f0a51d04a",
+            "gateSha256": "9fe325d22b932714af2ae00b99cfc2e55c544091b04194c4981bcaab355c6c9e"
+          }
+        }
+      }
+    }
+  ],
+  "diagnosis": [
+    "Windows ordinary and extended destination spellings were compared before canonicalization, preventing lazy creation of the managed default reference destination.",
+    "Native NCBI Find files incorrectly sent the assembly accession as the lookup release selector. The provider requires the explicit assembly selector, separate from pinned dataset identity.",
+    "The installation frontend check classified project_manager URL parsing as network access and needed explicit classification of the new reference provider and transfer exception-only import. This check must continue rejecting real analysis-network and listener imports."
+  ],
+  "limits": [
+    "Live and management suites each passed six checks before failure; later checks were not reached.",
+    "Windows source execution stopped after two suites; twelve remaining suites were not executed in this run.",
+    "Partial passes do not establish feature completion. No release or updater was built."
+  ]
+}

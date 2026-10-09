@@ -1,0 +1,60 @@
+{
+  "utc": "2026-10-08T21:51:40.578100+00:00",
+  "platform": "linux",
+  "accession": "GCF_000146045.2",
+  "annotation": {
+    "name": "SGD R64-5-1",
+    "provider": "SGD",
+    "release_date": "2026-07-10",
+    "status": "Full Annotation"
+  },
+  "source_catalog": {
+    "url": "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession/GCF_000146045.2/dataset_report",
+    "sha256": "eea3ad4615328e7cf871868e85cc305c5e836ee8d4be4b37ba85b8be6d85b926",
+    "directory_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/",
+    "directory_sha256": "0759f52a5d93afcdccd228d361d04499bad512442799c04b9611a09e425601d2"
+  },
+  "files": [
+    {
+      "kind": "genome",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_genomic.fna.gz",
+      "compressed_bytes": 3843460,
+      "compressed_sha256": "1ec41f951b35f2752d5065edeafe6972455609d4383fb36dae12519a60b27a73",
+      "expanded_bytes": 12310392,
+      "expanded_sha256": "fe42735d3e6242f8c40b457a232940e34ef15eb4502717e54a34ed118face4c1",
+      "upstream_md5": "88c38b957b721dfc50e6c4df03b6242e",
+      "checksum_manifest_sha256": "faaed4109ac4412d716f2b0bc2dbce15299133671e3f22f2c95a58d3a890347e",
+      "first_line": ">NC_001133.9 Saccharomyces cerevisiae S288C chromosome I, complete sequence"
+    },
+    {
+      "kind": "annotation",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_genomic.gtf.gz",
+      "compressed_bytes": 2293663,
+      "compressed_sha256": "b43af4bd39ae4d53afe6addb957b448ebdcfba48dd7c18066259b3322fbc8b8c",
+      "expanded_bytes": 27121814,
+      "expanded_sha256": "16da5a5d60a6bd3fdd00eda8dbab64bbbe92294d88ee0a9ac7c3415cd6da1546",
+      "upstream_md5": "09dc355fe3f22fca157d1c4afd7253f8",
+      "checksum_manifest_sha256": "faaed4109ac4412d716f2b0bc2dbce15299133671e3f22f2c95a58d3a890347e",
+      "first_line": "#gtf-version 2.2"
+    },
+    {
+      "kind": "protein",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_protein.faa.gz",
+      "compressed_bytes": 1848181,
+      "compressed_sha256": "43b97707ae1a08a4b30c200aba6e5c39be47c674321b096478065a2400b1494e",
+      "expanded_bytes": 3400039,
+      "expanded_sha256": "a376bcbd87c6caa8c0d81c2b1feb2d04246b438023bab3ced3821a61db718aac",
+      "upstream_md5": "ead80d943dc55bc55731be41620fb641",
+      "checksum_manifest_sha256": "faaed4109ac4412d716f2b0bc2dbce15299133671e3f22f2c95a58d3a890347e",
+      "first_line": ">NP_001018029.1 Coq21p [Saccharomyces cerevisiae S288C]"
+    }
+  ],
+  "gtf_identity_headers": [
+    "#!genome-build R64",
+    "#!genome-build-accession NCBI_Assembly:GCF_000146045.2",
+    "#!annotation-source SGD R64-5-1"
+  ],
+  "gtf_identity_headers_match_discovery": true,
+  "scope": "Live Linux NCBI provider/transport checks; not manager integration or exact packaged Windows execution",
+  "recordedOn": "2026-10-08"
+}

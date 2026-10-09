@@ -252,6 +252,25 @@ class ProviderTests(unittest.TestCase):
                     rp.RestrictedEnsemblHTTPS().open_url(url)
                 self.assertTrue(response.closed)
 
+    def test_resume_transport_preserves_bounded_range_headers(self):
+        url = rp.BASE_URL + 'release-116/fasta/file.gz'
+        response = Response(b'abc', url, {'Content-Length': '3', 'Content-Range': 'bytes 10-12/13', 'ETag': '"one"'}, code=206)
+        with patch('urllib.request.build_opener') as factory:
+            factory.return_value.open.return_value = response
+            with rp.RestrictedEnsemblHTTPS().open_url(url, headers={'Range': 'bytes=10-', 'If-Range': '"one"'}) as got:
+                self.assertEqual(got.getcode(), 206)
+            request = factory.return_value.open.call_args.args[0]
+            self.assertEqual(request.get_header('Range'), 'bytes=10-')
+            self.assertEqual(request.get_header('If-range'), '"one"')
+        for headers in ({'Authorization': 'secret'}, {'Range': 'bytes=1-'},
+                        {'Range': 'bytes=1-2', 'If-Range': '"one"'},
+                        {'Range': 'bytes=1-', 'If-Range': 'W/"weak"'},
+                        {'Range': 'bytes=1-', 'If-Range': '"bad\r\nheader"'}):
+            with self.subTest(headers=headers), patch('urllib.request.build_opener') as factory:
+                with self.assertRaises(rp.ReferenceProviderError):
+                    rp.RestrictedEnsemblHTTPS().open_url(url, headers=headers)
+                factory.assert_not_called()
+
 
 if __name__ == '__main__':
     unittest.main()

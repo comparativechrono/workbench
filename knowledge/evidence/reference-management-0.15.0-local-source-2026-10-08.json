@@ -1,0 +1,297 @@
+{
+  "schema": 1,
+  "recordedOn": "2026-10-08",
+  "version": "0.15.0",
+  "published": false,
+  "scope": "Local Linux source preflight, prior to immutable candidate packaging; no native Windows claim",
+  "suites": [
+    {
+      "suite": "workspace/tests/test_reference_provider.py",
+      "exit_code": 0,
+      "total": 18,
+      "skipped": 0,
+      "elapsed": 0.123,
+      "passed": 18
+    },
+    {
+      "suite": "workspace/tests/test_reference_manager.py",
+      "exit_code": 0,
+      "total": 25,
+      "skipped": 0,
+      "elapsed": 0.35,
+      "passed": 25
+    },
+    {
+      "suite": "workspace/tests/test_reference_service.py",
+      "exit_code": 0,
+      "total": 10,
+      "skipped": 0,
+      "elapsed": 0.222,
+      "passed": 10
+    },
+    {
+      "suite": "workspace/tests/test_reference_provenance.py",
+      "exit_code": 0,
+      "total": 6,
+      "skipped": 0,
+      "elapsed": 0.169,
+      "passed": 6
+    },
+    {
+      "suite": "workspace/tests/test_reference_resume.py",
+      "exit_code": 0,
+      "total": 19,
+      "skipped": 0,
+      "elapsed": 3.614,
+      "passed": 19
+    },
+    {
+      "suite": "workspace/tests/test_reference_library.py",
+      "exit_code": 0,
+      "total": 26,
+      "skipped": 0,
+      "elapsed": 0.309,
+      "passed": 26
+    },
+    {
+      "suite": "workspace/tests/test_reference_ncbi.py",
+      "exit_code": 0,
+      "total": 19,
+      "skipped": 0,
+      "elapsed": 0.138,
+      "passed": 19
+    },
+    {
+      "suite": "workspace/tests/test_reference_management_service.py",
+      "exit_code": 0,
+      "total": 12,
+      "skipped": 0,
+      "elapsed": 0.203,
+      "passed": 12
+    },
+    {
+      "suite": "workspace/tests/test_recovery_execution.py",
+      "exit_code": 0,
+      "total": 26,
+      "skipped": 0,
+      "elapsed": 0.923,
+      "passed": 26
+    },
+    {
+      "suite": "workspace/tests/test_project_manager.py",
+      "exit_code": 0,
+      "total": 29,
+      "skipped": 1,
+      "elapsed": 0.631,
+      "passed": 28
+    },
+    {
+      "suite": "workspace/tests/test_recovery_service.py",
+      "exit_code": 0,
+      "total": 16,
+      "skipped": 0,
+      "elapsed": 0.279,
+      "passed": 16
+    },
+    {
+      "suite": "workspace/tests/test_sample_table.py",
+      "command": [
+        "python",
+        "workspace/tests/test_sample_table.py"
+      ],
+      "exit_code": 0,
+      "total": 26,
+      "skipped": 0,
+      "passed": 26
+    },
+    {
+      "suite": "workspace/tests/test_run_queue.py",
+      "exit_code": 0,
+      "total": 28,
+      "skipped": 2,
+      "elapsed": 0.672,
+      "passed": 26
+    },
+    {
+      "suite": "workspace/tests/test_reference_indexes.py",
+      "exit_code": 0,
+      "total": 19,
+      "skipped": 0,
+      "elapsed": 0.899,
+      "passed": 19
+    },
+    {
+      "suite": "workspace/tests/test_desktop_host.py",
+      "exit_code": 0,
+      "total": 12,
+      "skipped": 0,
+      "elapsed": 0.4,
+      "passed": 12
+    },
+    {
+      "suite": "workspace/tests/test_desktop_modes.py",
+      "exit_code": 0,
+      "total": 11,
+      "skipped": 0,
+      "elapsed": 0.297,
+      "passed": 11
+    },
+    {
+      "suite": "workspace/tests/test_workflow_inputs.py",
+      "command": [
+        "python",
+        "workspace/tests/test_workflow_inputs.py"
+      ],
+      "exit_code": 0,
+      "total": 11,
+      "skipped": 0,
+      "passed": 11
+    },
+    {
+      "suite": "workspace/tests/test_pack_service.py",
+      "exit_code": 0,
+      "total": 6,
+      "skipped": 0,
+      "elapsed": 0.14,
+      "passed": 6
+    },
+    {
+      "suite": "workspace/tests/test_setup_manager.py",
+      "exit_code": 0,
+      "total": 16,
+      "skipped": 0,
+      "elapsed": 0.656,
+      "passed": 16
+    },
+    {
+      "suite": "workspace/tests/test_setup_service.py",
+      "command": [
+        "python",
+        "workspace/tests/test_setup_service.py"
+      ],
+      "exit_code": 0,
+      "total": 7,
+      "skipped": 0,
+      "passed": 7
+    },
+    {
+      "suite": "tests/test_split_release.py",
+      "exit_code": 0,
+      "total": 9,
+      "skipped": 0,
+      "elapsed": 0.296,
+      "passed": 9
+    },
+    {
+      "suite": "workspace/tests/test_readiness.py",
+      "command": [
+        "python",
+        "workspace/tests/test_readiness.py"
+      ],
+      "exit_code": 0,
+      "total": 16,
+      "skipped": 0,
+      "passed": 16
+    },
+    {
+      "suite": "workspace/tests/test_readiness_service.py",
+      "exit_code": 0,
+      "total": 6,
+      "skipped": 0,
+      "elapsed": 0.159,
+      "passed": 6
+    },
+    {
+      "suite": "workspace/tests/test_performance.py",
+      "command": [
+        "python",
+        "workspace/tests/test_performance.py"
+      ],
+      "exit_code": 0,
+      "total": 18,
+      "skipped": 0,
+      "passed": 18
+    },
+    {
+      "suite": "workspace/tests/test_diagnostics.py",
+      "exit_code": 0,
+      "total": 11,
+      "skipped": 2,
+      "elapsed": 0.193,
+      "passed": 9
+    },
+    {
+      "suite": "workspace/tests/test_engine_paths.py",
+      "command": [
+        "python",
+        "workspace/tests/test_engine_paths.py"
+      ],
+      "exit_code": 0,
+      "total": 7,
+      "skipped": 0,
+      "passed": 7
+    },
+    {
+      "suite": "workspace/tests/test_cwl_results.py",
+      "command": [
+        "python",
+        "workspace/tests/test_cwl_results.py"
+      ],
+      "exit_code": 0,
+      "total": 5,
+      "skipped": 0,
+      "passed": 5
+    },
+    {
+      "suite": "workspace/tests/test_cwl_export.py",
+      "exit_code": 0,
+      "total": 14,
+      "skipped": 1,
+      "elapsed": 0.52,
+      "passed": 13
+    }
+  ],
+  "totals": {
+    "total": 428,
+    "passed": 422,
+    "skipped": 6,
+    "failedSuites": []
+  },
+  "retainedInitialHarnessFailure": {
+    "cause": "Initial local harness incorrectly applied isolated -I mode to seven historical suites whose helpers require the test directory. Rerun only these with the documented workflow invocation; no application/test changes.",
+    "failedImports": [
+      "workspace/tests/test_sample_table.py",
+      "workspace/tests/test_workflow_inputs.py",
+      "workspace/tests/test_setup_service.py",
+      "workspace/tests/test_readiness.py",
+      "workspace/tests/test_performance.py",
+      "workspace/tests/test_engine_paths.py",
+      "workspace/tests/test_cwl_results.py"
+    ]
+  },
+  "limits": [
+    "Optional stock CWL runner unavailable locally; exact CI installs pinned runner. Windows-only checks run separately."
+  ],
+  "independentSourceAudit": {
+    "passed": 82,
+    "failed": 0,
+    "skipped": 0,
+    "scope": "Separate audit agent source checks; overlapping suites, not additional unique test total.",
+    "fixedFindings": [
+      "orphan checkpoint atomic-write files no longer block resume",
+      "publication-before-registration crash recovers only after exact receipt/file verification",
+      "malformed pending IDs become damaged state without breaking ready library",
+      "recovered publication cancellation boundary",
+      "NCBI observed annotation wording distinct from assembly identity"
+    ]
+  },
+  "runtimeSources": {
+    "workspace/reference_provider.py": "3bf51daae305ef16c0cff0a6bc2b65f76bc6013f7b1456da07fa8d869c5f0832",
+    "workspace/reference_library.py": "2416af2e3fb9aa80bcf1473037f4e248f9099600eb06ee707fee4b525b11baf2",
+    "workspace/reference_manager.py": "af980e1ded0e01eb214424d29147043a21762b4e4708cf675dd0e8b183464cf6",
+    "workspace/reference_transfer.py": "1825666f4c112a09ee546018293e3f52c35e69f301723c1da5de0007697f3a43",
+    "workspace/reference_indexes.py": "fb6b20dd123f4d83896edc364868da6fdf779f915e4ae2e9e110cce1c1740203",
+    "workspace/reference_ncbi.py": "1b1dec1af7c8cefbf94a49c6508ecfeacd2d93b89d3f72c041b18b04e526f5e9",
+    "workspace/reference_provenance.py": "e2915eb46e3ca86cbf89297dadeec48925f2c9a667e85057bc3b9986e2735ac9"
+  }
+}

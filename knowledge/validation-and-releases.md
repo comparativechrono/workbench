@@ -1,5 +1,30 @@
 # Validation, releases and publisher trust
 
+## Reference-management candidate, 0.15.0
+
+The [candidate workflow](../.github/workflows/native-reference-management-candidate.yml)
+builds one matching source/Starter pair and runs separate exact Windows gates in
+ordinary and spaced paths. New evidence must distinguish live provider downloads,
+deterministic Range/checkpoint fixtures, offline local operations and native GUI
+interaction. The [feature guide](reference-management.md) defines the contracts;
+the [handover](reference-management-0.15.0-handover.md) records actual results.
+
+Resume validation must reject changed prefix/discovery identities, never append
+an invalid range and never expose partial bytes as a ready input. Import and
+relocation require reviewed source/receipt identities, rehashed copies, atomic
+registry changes and cancellation/failure preservation. Relocation must retain
+old paths and frozen-plan/provenance bytes. NCBI assembly identity must remain
+distinct from mutable annotation observations, and imported metadata must remain
+explicitly user-declared. Neither a source pass nor a Linux provider download is
+an exact packaged Windows or release/upgrade pass.
+
+The accepted development candidate combines exact feature evidence from run
+37855047291 with validator-only recheck 37857029068. The latter passed batch and
+all 15 Windows source invocations on the unchanged Starter. Original failures,
+skips, unchanged archive identity and separate scopes are retained in the
+[final combined record](evidence/reference-management-0.15.0-final-validation-2026-10-08.json).
+This completes the recorded hosted gates, not publication or baseline-upgrade validation.
+
 ## Recovery, resource budgets and portable projects, 0.14.0
 
 The [candidate workflow](../.github/workflows/native-recovery-candidate.yml)

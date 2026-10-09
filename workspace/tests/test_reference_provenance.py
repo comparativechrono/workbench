@@ -49,7 +49,7 @@ class ReferenceProvenanceTests(unittest.TestCase):
         self.assertIn("Assembly1 (GCA_000000001.1)", methods)
         self.assertIn("will be checked", methods)
         self.assertNotIn("were checked", methods)
-        lookup.assert_called_once_with(self.root, {self.path})
+        lookup.assert_called_once_with(self.root.resolve(), {self.path})
 
     def test_frozen_hash_receipt_and_methods_survive_library_removal(self):
         def lookup(root, paths, evidence=None):
@@ -67,6 +67,26 @@ class ReferenceProvenanceTests(unittest.TestCase):
         self.assertEqual(result["references"], self.references)
         self.assertIn("Assembly1", result["methods"])
         self.assertIn("Ensembl archive", (Path(plan["folder"]) / "methods-completed.txt").read_text())
+
+    def test_ncbi_snapshot_annotation_and_accession_survive_frozen_run(self):
+        self.reference.update(provider='ncbi-refseq', provider_name='NCBI RefSeq assembly lookup',
+                              release='GCF_000146045.2', assembly='R64', assembly_accession='GCF_000146045.2')
+        self.reference['file']['annotation'] = {'name': 'SGD R64-5-1', 'provider': 'SGD', 'release_date': '2026-07-10'}
+        self.reference['file']['source_url'] = 'https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_genomic.fna.gz'
+        with patch('engine.collect_references', return_value=self.references):
+            plan = self.engine.prepare(self.graph, self.root)
+        frozen = json.loads((Path(plan['folder']) / 'reference-provenance.json').read_text())
+        self.assertEqual(frozen['inputs'][self.path]['file']['annotation'], self.reference['file']['annotation'])
+        with patch('engine.collect_references', side_effect=AssertionError('No new provider or library lookup')):
+            result = self.engine.execute(plan)
+        self.assertTrue(result['success'])
+        for text in (plan['methods'], result['methods'], (Path(plan['folder']) / 'methods-completed.txt').read_text()):
+            self.assertIn('accession GCF_000146045.2', text)
+            self.assertIn('Observed annotation: SGD R64-5-1; provider SGD; release date 2026-07-10', text)
+            self.assertIn('retrieved snapshot', text)
+            self.assertIn('may change without a new assembly accession', text)
+            self.assertNotIn('release GCF_000146045.2', text)
+        self.assertEqual(result['references'][self.path]['file']['annotation'], self.reference['file']['annotation'])
 
     def test_known_changed_reference_prevents_run_creation(self):
         with patch("engine.collect_references", side_effect=ValueError("Reference file has changed")):

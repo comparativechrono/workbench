@@ -111,6 +111,9 @@ enum {
   REF_PROGRESS,
   REF_NOTICE,
   REF_CLOSE,
+  REF_PROVIDER, REF_PENDING, REF_RESUME, REF_DISCARD, REF_PAUSE,
+  REF_IMPORT_PREVIEW, REF_RELOCATE, REF_REVIEW,
+  REF_IMPORT_PATH = 660, REF_IMPORT_BROWSE = 665, REF_IMPORT_METADATA = 670,
   TOOL_SETUP = 701,
   SETUP_FULL,
   SETUP_STARTER,
@@ -502,7 +505,11 @@ class Workspace {
       refRelease{}, refQuery{}, refSearch{}, refSpecies{}, refDiscover{},
       refFiles{}, refDetails{}, refDestinationLabel{}, refDestination{},
       refBrowse{}, refDownload{}, refLocal{}, refTargetLabel{}, refTarget{},
-      refUse{}, refOpen{}, refCancel{}, refProgress{}, refNotice{}, refClose{};
+      refUse{}, refOpen{}, refCancel{}, refProgress{}, refNotice{}, refClose{},
+      refProviderLabel{}, refProvider{}, refPending{}, refResume{}, refDiscard{},
+      refPause{}, refImportPreview{}, refRelocate{}, refReviewButton{};
+  std::vector<HWND> refImportPaths, refImportBrowse, refImportLabels,
+      refImportMetadata, refImportMetadataLabels;
   HWND modeTools{}, modeWorkflow{}, generalSettings{}, inputFolder{}, browseInput{},
       saveCurrent{}, loadCurrent{}, resultsList{}, resetLayout{}, toolsHeading{},
       centerHeading{}, rightHeading{}, nameLabel{}, inputLabel{}, inputHelp{},
@@ -544,9 +551,10 @@ class Workspace {
        packState = object({{"packs", Json::array()}, {"sources", Json::array()},
                            {"errors", Json::array()}}),
        packOperation = Json::object(),
-       refState = object({{"releases", Json::array()}, {"species", Json::array()},
+       refState = object({{"providers", Json::array()}, {"pending", Json::array()},
+                          {"releases", Json::array()}, {"species", Json::array()},
                           {"local", Json::array()}, {"discovery", nullptr}}),
-       refOperation = Json::object(), refTargets = Json::array();
+       refOperation = Json::object(), refTargets = Json::array(), refReview = Json::object();
   Json setupState = object({{"rows", Json::array()}, {"operation", Json::object()}});
   std::map<long long, std::string> pending;
   std::map<long long, unsigned> pendingViews;
@@ -565,7 +573,7 @@ class Workspace {
        packRebuilding = false, packReloadAfterOperation = false,
        packListAfterOperation = false, packPollFailed = false;
   bool refBusy = false, refActionPending = false, refPollPending = false,
-       refRebuilding = false, refPollFailed = false;
+       refRebuilding = false, refPollFailed = false, refReviewOpen = false;
   bool setupBusy = false, setupActionPending = false, setupPollPending = false,
        setupRebuilding = false, setupPollFailed = false, setupWelcomeChecked = false,
        setupSelectionLoaded = false;
@@ -609,6 +617,8 @@ class Workspace {
   ULONGLONG lastPoll = 0;
   ULONGLONG lastPackPoll = 0;
   ULONGLONG lastRefPoll = 0;
+  std::vector<std::string> refPendingIds;
+  std::set<std::string> refInvalidReviewTokens;
   ULONGLONG lastSetupPoll = 0;
   bool pollPending = false;
   int px(int n) const { return MulDiv(n, static_cast<int>(dpi), 96); }
@@ -2445,15 +2455,138 @@ class Workspace {
     send(method, std::move(params));
     enabled();
   }
+  void reference_text(HWND control, const std::wstring &value) {
+    if (control && control_text(control) != value)
+      SetWindowTextW(control, value.c_str());
+  }
+  void reference_invalidate_review() {
+    const auto token = getstr(refReview, "token");
+    if (!token.empty()) refInvalidReviewTokens.insert(token);
+    refReview = Json::object();
+    reference_notice();
+  }
+  Json reference_release_value() const {
+    const auto release = control_text(refRelease);
+    if (!release.empty() && std::all_of(release.begin(), release.end(),
+        [](wchar_t c) { return c >= L'0' && c <= L'9'; }))
+      return std::stoi(release);
+    return narrow(release);
+  }
+  const Json &reference_provider() const {
+    static const Json empty;
+    const auto index = SendMessageW(refProvider, CB_GETCURSEL, 0, 0);
+    const auto &providers = refState.get("providers").array_items();
+    return index >= 0 && static_cast<size_t>(index) < providers.size()
+        ? providers[static_cast<size_t>(index)] : empty;
+  }
+  const Json &reference_pending() const {
+    static const Json empty;
+    const int row = ListView_GetNextItem(refPending, -1, LVNI_SELECTED);
+    if (row < 0 || static_cast<size_t>(row) >= refPendingIds.size()) return empty;
+    for (const auto &job : refState.get("pending").array_items())
+      if (getstr(job, "id") == refPendingIds[static_cast<size_t>(row)]) return job;
+    return empty;
+  }
+  void reference_provider_controls(bool resetRelease) {
+    const auto &provider = reference_provider();
+    const auto wanted = resetRelease ? wide(text(provider.get("default_release")))
+                                    : control_text(refRelease);
+    SendMessageW(refRelease, CB_RESETCONTENT, 0, 0);
+    Json releases = provider.get("releases");
+    if (!releases.is_array()) {
+      if (provider.get("default_release").is_string()) {
+        releases = Json::array(); releases.array_items().push_back(provider.get("default_release"));
+      } else if (provider.get("min_release").is_number() && provider.get("max_release").is_number()) {
+        releases = Json::array();
+        const auto minimum = provider.get("min_release").integer(), maximum = provider.get("max_release").integer();
+        for (auto value = maximum; value >= minimum && maximum - value < 256; --value)
+          releases.array_items().push_back(static_cast<int>(value));
+      } else releases = refState.get("releases");
+    }
+    int selectedIndex = 0, count = 0;
+    for (const auto &release : releases.array_items()) {
+      const auto label = wide(text(release));
+      SendMessageW(refRelease, CB_ADDSTRING, 0, reinterpret_cast<LPARAM>(label.c_str()));
+      if (label == wanted) selectedIndex = count;
+      ++count;
+    }
+    if (!count) {
+      const auto label = wanted.empty() ? L"116" : wanted;
+      SendMessageW(refRelease, CB_ADDSTRING, 0, reinterpret_cast<LPARAM>(label.c_str()));
+    }
+    SendMessageW(refRelease, CB_SETCURSEL, selectedIndex, 0);
+    reference_text(refReleaseLabel, wt(provider, "release_label", "Release"));
+    const auto hint = wt(provider, "search_label", "Species name, e.g. human or Saccharomyces");
+    SendMessageW(refQuery, EM_SETCUEBANNER, FALSE, reinterpret_cast<LPARAM>(hint.c_str()));
+  }
+  void reference_review() {
+    if (!refWindow || refBusy || refActionPending || getstr(refReview, "token").empty()) return;
+    const auto kind = getstr(refReview, "kind"), token = getstr(refReview, "token");
+    if (kind != "import" && kind != "relocate") return;
+    const bool importing = kind == "import";
+    Modal modal;
+    modal.owner = refWindow; modal.font = refFont; modal.dpi = refDpi; modal.mode = 2;
+    modal.title = importing ? L"Review local reference import" : L"Review library relocation";
+    modal.message = importing ? L"Review the declared identity and verified files before importing."
+                              : L"Review the copy and library switch. Original files will be retained.";
+    modal.confirm = importing ? L"Import files" : L"Copy and switch";
+    modal.value = wt(refReview, "notice") + L"\n\nDestination: " + wt(refReview, "destination") + L"\n";
+    const auto &metadata = refReview.get("metadata");
+    for (const auto &field : {"label", "species", "assembly", "assembly_accession", "source", "release"})
+      if (!metadata.get(field).is_null()) modal.value += wide(field) + L": " + wide(text(metadata.get(field))) + L"\n";
+    modal.value += importing
+        ? L"\nMetadata is your declaration. File hashes establish exact bytes, not publisher identity.\n"
+        : L"\nSaved workflows and queued plans may still use original paths. No original files will be removed.\n";
+    const Json noItems = Json::array();
+    const auto &files = refReview.get("files").is_array() ? refReview.get("files") : noItems;
+    for (const auto &file : files.array_items()) {
+      modal.value += L"\n" + wt(file, "label", getstr(file, "kind", getstr(file, "name"))) +
+          L"\nOriginal: " + wt(file, "path", getstr(file, "source")) + L"\n";
+      if (file.get("compressed").boolean())
+        modal.value += L"Original gzip bytes: " + wide(text(file.get("source_bytes"))) +
+                       L"\nOriginal gzip SHA-256: " + wt(file, "source_sha256") + L"\n";
+      modal.value += L"Library file: " + wt(file, "filename") + L"\n";
+      if (file.contains("bytes")) modal.value += L"Expanded file bytes: " + wide(text(file.get("bytes"))) + L"\n";
+      if (!getstr(file, "sha256").empty()) modal.value += L"Expanded file SHA-256: " + wt(file, "sha256") + L"\n";
+    }
+    const auto &records = refReview.get("records").is_array() ? refReview.get("records") : noItems;
+    for (const auto &record : records.array_items()) {
+      modal.value += L"\n" + wt(record, "label", getstr(record, "id")) + L"\nOriginal: " + wt(record, "folder") + L"\n";
+      if (record.get("files").is_array())
+        for (const auto &file : record.get("files").array_items())
+          modal.value += wt(file, "filename") + L" · " + download_size(file.get("bytes").integer()) +
+                         L"\nSHA-256: " + wt(file, "sha256") + L"\n";
+    }
+    if (refReview.contains("bytes")) modal.value += L"\nTotal data: " + download_size(refReview.get("bytes").integer());
+    if (refReview.contains("bundles")) modal.value += L"\nBundles: " + wide(text(refReview.get("bundles")));
+    struct Reviewing { bool &flag; explicit Reviewing(bool &value) : flag(value) { flag = true; } ~Reviewing() { flag = false; } } guard(refReviewOpen);
+    if (modal.show() && refWindow && getstr(refReview, "token") == token && !refBusy && !refActionPending) {
+      reference_invalidate_review();
+      reference_send(importing ? "references/import" : "references/relocate", object({{"token", token}}));
+    }
+    reference_enabled();
+  }
   void reference_enabled() {
     if (!refWindow)
       return;
     const bool idle = ready && !analysis_active() && !closing && !setupBusy && !setupActionPending && !packBusy &&
                       !packActionPending && !refBusy && !refActionPending &&
                       !activeRequest && outgoing.empty();
-    for (HWND h : {refRelease, refQuery, refSearch, refSpecies, refFiles,
-                   refDestination, refBrowse, refLocal, refTarget})
+    for (HWND h : {refProvider, refRelease, refQuery, refSearch, refSpecies, refFiles,
+                   refDestination, refBrowse, refLocal, refTarget, refPending, refRelocate})
       EnableWindow(h, idle);
+    bool hasImport = false;
+    for (HWND h : refImportPaths) {
+      EnableWindow(h, idle);
+      hasImport = hasImport || !control_text(h).empty();
+    }
+    for (HWND h : refImportBrowse) EnableWindow(h, idle);
+    for (HWND h : refImportMetadata) EnableWindow(h, idle);
+    EnableWindow(refImportPreview, idle && hasImport && !control_text(refDestination).empty());
+    EnableWindow(refReviewButton, idle && !getstr(refReview, "token").empty());
+    const auto &pending = reference_pending();
+    EnableWindow(refResume, idle && !getstr(pending, "id").empty() && pending.get("resumable").boolean());
+    EnableWindow(refDiscard, idle && !getstr(pending, "id").empty());
     EnableWindow(refDiscover, idle &&
                  !getstr(reference_selected_species(), "id").empty());
     bool checked = false;
@@ -2470,27 +2603,50 @@ class Workspace {
                  !refTargets.array_items().empty());
     EnableWindow(refCancel, ready && refBusy && !refActionPending &&
                  refOperation.get("cancellable").boolean(true) &&
-                 getstr(refOperation, "status") != "cancelling");
+                 getstr(refOperation, "status") != "cancelling" &&
+                 getstr(refOperation, "status") != "pausing");
+    const auto action = getstr(refOperation, "action");
+    EnableWindow(refPause, ready && refBusy && !refActionPending &&
+                 (action == "download" || action == "resume") &&
+                 refOperation.get("cancellable").boolean(true) &&
+                 getstr(refOperation, "status") != "cancelling" &&
+                 getstr(refOperation, "status") != "pausing");
   }
   void reference_details() {
     if (!refWindow)
       return;
     std::wstring value;
-    if (TabCtrl_GetCurSel(refTab) == 1) {
+    const int tab = TabCtrl_GetCurSel(refTab);
+    if (tab == 2) {
+      const auto &job = reference_pending();
+      value = getstr(job, "id").empty()
+          ? L"Paused and interrupted downloads remain here until resumed or discarded. No incomplete file is available as an input."
+          : wt(job, "label") + L"\nProvider: " + wt(job, "provider") + L"\nStatus: " + wt(job, "status") +
+            L"\nDestination: " + wt(job, "destination") + L"\n" + wt(job, "error");
+      if (!getstr(job, "id").empty())
+        value += job.get("resumable").boolean()
+            ? L"\nResume verifies saved transfer identity before continuing."
+            : L"\nThis transfer cannot currently be resumed. Inspect the error before discarding it.";
+    } else if (tab == 3) {
+      value = L"Choose one file for each needed resource role. Plain FASTA/GTF and gzip files are supported. "
+              L"Files are copied into a verified library bundle; originals are preserved. "
+              L"Your metadata is recorded as user-declared, without a publisher claim.";
+    } else if (tab == 1) {
       const auto &record = reference_local_record(), &file = reference_local_file();
       if (!getstr(record, "id").empty()) {
         if (!record.get("available").boolean(true))
           value = L"Unavailable: " + wt(record, "error", "This reference bundle needs attention.") + L"\n";
         value += reference_species(record) + L"  ·  " + wt(record, "assembly") +
-                L"  ·  Ensembl release " + wt(record, "release") +
+                L"  ·  " + wt(record, "provider_name", getstr(record, "provider", "Reference")) + L" / " + wt(record, "release") +
                 L"\nAssembly accession: " + wt(record, "assembly_accession", "Not recorded") +
                 L"\n" + wt(file, "path") + L"\nSHA-256: " + wt(file, "sha256") +
                 L"\nDownload record: " + wt(record, "receipt_path");
-        for (const auto &warning : record.get("warnings").array_items())
-          value += L"\nWarning: " + wide(text(warning));
+        if (record.get("warnings").is_array())
+          for (const auto &warning : record.get("warnings").array_items())
+            value += L"\nWarning: " + wide(text(warning));
+        if (!getstr(record, "integrity_notice").empty()) value += L"\n" + wt(record, "integrity_notice");
       } else
-        value = L"No downloaded reference files yet. Find a species on the Find online tab, "
-                L"then select the files to download. Existing downloads can be used offline.";
+        value = L"No local reference files yet. Find and download references online, or import your own FASTA/GTF files.";
       const auto omitted = refState.get("omitted_local").integer();
       if (omitted > 0)
         value += L"\nLibrary display limit: " + std::to_wstring(omitted) +
@@ -2502,18 +2658,19 @@ class Workspace {
         const auto &species = discovery.get("species");
         value = reference_species(discovery) + L"  ·  " +
                 wt(discovery, "assembly", getstr(species, "assembly")) +
-                L"  ·  Ensembl release " + wt(discovery, "release") +
+                L"  ·  " + wt(reference_provider(), "name", "Reference") + L" / " + wt(discovery, "release") +
                 L"\nAssembly accession: " + wt(discovery, "assembly_accession",
                     getstr(species, "assembly_accession", "Not recorded")) + L"\n" + value;
-        for (const auto &warning : discovery.get("warnings").array_items())
-          value += L"\nWarning: " + wide(text(warning));
+        if (discovery.get("warnings").is_array())
+          for (const auto &warning : discovery.get("warnings").array_items())
+            value += L"\nWarning: " + wide(text(warning));
         const int row = ListView_GetNextItem(refFiles, -1, LVNI_SELECTED);
         const auto &files = discovery.get("files").array_items();
         if (row >= 0 && static_cast<size_t>(row) < files.size()) {
           const auto &file = files[static_cast<size_t>(row)];
           value += L"\n" + wt(file, "filename") + L"\n" + wt(file, "detail");
-          value += L"\nIntegrity: Ensembl CHECKSUMS (BSD sum) and gzip CRC are checked; "
-                   L"local SHA-256 hashes are recorded. BSD sum is not a cryptographic signature.";
+          value += L"\nPublished transfer checksums and gzip integrity are checked; local SHA-256 hashes "
+                   L"record exact bytes. Transfer checksums are not publisher signatures.";
         }
       }
       if (value.empty())
@@ -2521,7 +2678,7 @@ class Workspace {
                 L"are tied to the selected release and assembly. Downloads are unpacked to "
                 L"plain local files with a provenance record.";
     }
-    SetWindowTextW(refDetails, lines(value).c_str());
+    reference_text(refDetails, lines(value));
     reference_enabled();
   }
   void reference_targets() {
@@ -2541,23 +2698,59 @@ class Workspace {
     if (!refWindow)
       return;
     refRebuilding = true;
-    if (previous.get("releases").dump() != refState.get("releases").dump()) {
-      auto selectedRelease = control_text(refRelease);
-      SendMessageW(refRelease, CB_RESETCONTENT, 0, 0);
-      int selectedIndex = -1, index = 0;
-      for (const auto &release : refState.get("releases").array_items()) {
-        auto label = wide(release.is_object() ? getstr(release, "release", getstr(release, "id"))
-                                             : text(release));
-        SendMessageW(refRelease, CB_ADDSTRING, 0, reinterpret_cast<LPARAM>(label.c_str()));
-        if (label == selectedRelease || (selectedRelease.empty() && label == L"116"))
-          selectedIndex = index;
+    const bool providersChanged = previous.get("providers").dump() != refState.get("providers").dump();
+    if (providersChanged) {
+      const auto active = getstr(refState, "active_provider");
+      SendMessageW(refProvider, CB_RESETCONTENT, 0, 0);
+      int chosen = 0, index = 0;
+      for (const auto &provider : refState.get("providers").array_items()) {
+        const auto label = wt(provider, "name", getstr(provider, "id"));
+        SendMessageW(refProvider, CB_ADDSTRING, 0, reinterpret_cast<LPARAM>(label.c_str()));
+        if (getstr(provider, "id") == active) chosen = index;
         ++index;
       }
-      if (index == 0) {
-        SendMessageW(refRelease, CB_ADDSTRING, 0, reinterpret_cast<LPARAM>(L"116"));
-        index = 1;
+      SendMessageW(refProvider, CB_SETCURSEL, chosen, 0);
+    }
+    if (providersChanged || previous.get("releases").dump() != refState.get("releases").dump())
+      reference_provider_controls(providersChanged);
+    if (previous.get("default_destination").dump() != refState.get("default_destination").dump() &&
+        (control_text(refDestination).empty() ||
+         control_text(refDestination) == wt(previous, "default_destination") || previous.get("local").is_null()))
+      reference_text(refDestination, wt(refState, "default_destination", narrow(root + L"\\user-data\\references")));
+    const auto &jobs = refState.get("pending").array_items();
+    std::vector<std::string> ids;
+    for (const auto &job : jobs) ids.push_back(getstr(job, "id"));
+    const bool pendingChanged = ids != refPendingIds;
+    std::string keepJob;
+    const int oldSelected = ListView_GetNextItem(refPending, -1, LVNI_SELECTED);
+    if (oldSelected >= 0 && static_cast<size_t>(oldSelected) < refPendingIds.size())
+      keepJob = refPendingIds[static_cast<size_t>(oldSelected)];
+    if (pendingChanged) {
+      SendMessageW(refPending, WM_SETREDRAW, FALSE, 0);
+      ListView_DeleteAllItems(refPending);
+      refPendingIds = ids;
+    }
+    for (size_t index = 0; index < jobs.size(); ++index) {
+      const auto &job = jobs[index];
+      const auto row = static_cast<int>(index);
+      std::vector<std::wstring> cells{wt(job, "label", getstr(job, "id")), wt(job, "status"),
+          download_size(job.get("bytes").integer()) + L" / " + download_size(job.get("total").integer())};
+      if (pendingChanged) {
+        LVITEMW item{}; item.mask = LVIF_TEXT; item.iItem = row; item.pszText = cells[0].data();
+        ListView_InsertItem(refPending, &item);
       }
-      SendMessageW(refRelease, CB_SETCURSEL, selectedIndex < 0 ? 0 : selectedIndex, 0);
+      for (size_t column = 0; column < cells.size(); ++column) {
+        wchar_t existing[4096]{};
+        ListView_GetItemText(refPending, row, static_cast<int>(column), existing, 4096);
+        if (cells[column] != existing)
+          ListView_SetItemText(refPending, row, static_cast<int>(column), cells[column].data());
+      }
+      if (pendingChanged && ((keepJob.empty() && index == 0) || getstr(job, "id") == keepJob))
+        ListView_SetItemState(refPending, row, LVIS_SELECTED | LVIS_FOCUSED, LVIS_SELECTED | LVIS_FOCUSED);
+    }
+    if (pendingChanged) {
+      SendMessageW(refPending, WM_SETREDRAW, TRUE, 0);
+      RedrawWindow(refPending, nullptr, nullptr, RDW_INVALIDATE | RDW_ALLCHILDREN);
     }
     if (previous.get("species").dump() != refState.get("species").dump()) {
       ListView_DeleteAllItems(refSpecies);
@@ -2653,7 +2846,11 @@ class Workspace {
       return;
     auto value = wt(refOperation, "message", getstr(refState, "notice"));
     if (value.empty())
-      value = L"Search and download contact Ensembl. Analysis files stay on this computer.";
+      value = L"Search and download contact the selected provider. Local library operations stay offline.";
+    if (!getstr(refReview, "token").empty())
+      value = L"Review is ready. Choose Review changes to confirm; nothing has been imported or relocated yet.";
+    else if (!refBusy && refInvalidReviewTokens.count(getstr(refState.get("review"), "token")))
+      value = L"The previous review was invalidated. Check the current selection again before confirming changes.";
     const auto omitted = refState.get("omitted_local").integer();
     if (omitted > 0)
       value += L"  " + std::to_wstring(omitted) +
@@ -2663,86 +2860,101 @@ class Workspace {
     if (refBusy && bytes > 0)
       value += L"  " + download_size(bytes) +
                (total > 0 ? L" / " + download_size(total) : L"");
-    SetWindowTextW(refNotice, value.c_str());
-    SendMessageW(refProgress, PBM_SETRANGE32, 0, 1000);
-    SendMessageW(refProgress, PBM_SETPOS,
-                 total > 0 ? static_cast<WPARAM>(std::clamp(
+    reference_text(refNotice, value);
+    const auto position = total > 0 ? static_cast<WPARAM>(std::clamp(
                    1000.0 * static_cast<double>(bytes) / static_cast<double>(total),
-                   0.0, 1000.0)) : 0, 0);
+                   0.0, 1000.0)) : 0;
+    if (static_cast<WPARAM>(SendMessageW(refProgress, PBM_GETPOS, 0, 0)) != position)
+      SendMessageW(refProgress, PBM_SETPOS, position, 0);
     ShowWindow(refProgress, refBusy ? SW_SHOW : SW_HIDE);
-    SetWindowTextW(refClose, refBusy ? L"Hide" : L"Close");
+    reference_text(refClose, refBusy ? L"Hide" : L"Close");
+    const auto action = getstr(refOperation, "action");
+    reference_text(refCancel, action == "download" || action == "resume" ? L"Cancel + discard" : L"Cancel operation");
   }
   void reference_layout() {
-    if (!refWindow)
-      return;
-    RECT rect{};
-    GetClientRect(refWindow, &rect);
+    if (!refWindow) return;
+    RECT rect{}; GetClientRect(refWindow, &rect);
     const int w = MulDiv(rect.right, 96, refDpi), h = MulDiv(rect.bottom, 96, refDpi);
     auto put = [&](HWND control, int x, int y, int cw, int ch) {
       MoveWindow(control, MulDiv(x, refDpi, 96), MulDiv(y, refDpi, 96),
-                 MulDiv(std::max(1, cw), refDpi, 96),
-                 MulDiv(std::max(1, ch), refDpi, 96), TRUE);
+                 MulDiv(std::max(1, cw), refDpi, 96), MulDiv(std::max(1, ch), refDpi, 96), TRUE);
     };
-    const bool local = TabCtrl_GetCurSel(refTab) == 1;
+    const int tab = TabCtrl_GetCurSel(refTab);
+    const bool online = tab == 0, local = tab == 1, downloads = tab == 2, importing = tab == 3;
     put(refTab, 18, 14, w - 36, 30);
     put(refIntro, 18, 54, w - 36, 43);
-    SetWindowTextW(refIntro, local
-      ? L"Downloaded references are local files. Select one, choose a compatible input in "
-        L"your current workspace, then Use for input."
-      : L"Ensembl archive · release-pinned genomes and annotations. Release 116 is the final "
-        L"classic release; newer Ensembl data is not included in this provider.");
-    // Reserve the details panel and two visible gaps before sizing the lists.
-    // Independent bottom offsets previously overlapped details and destination
-    // controls by 15 logical pixels, including at the minimum window size.
-    const int destinationTop = h - 119, detailsHeight = 76,
-              onlineDetailsTop = destinationTop - 12 - detailsHeight,
-              available = std::max(0, onlineDetailsTop - 12 - 190),
-              speciesHeight = available * 2 / 5,
-              filesTop = 190 + speciesHeight, filesHeight = available - speciesHeight;
-    put(refReleaseLabel, 18, 107, 56, 28);
-    put(refRelease, 78, 104, 84, 250);
-    put(refQuery, 174, 104, w - 302, 32);
-    put(refSearch, w - 116, 104, 98, 32);
-    put(refSpecies, 18, 148, w - 36, speciesHeight);
-    put(refDiscover, 18, 154 + speciesHeight, 132, 30);
-    put(refFiles, 18, filesTop, w - 36, filesHeight);
-    put(refLocal, 18, 104, w - 36, h - 360);
-    put(refDetails, 18, onlineDetailsTop, w - 36, detailsHeight);
-    if (local) {
-      put(refDetails, 18, h - 244, w - 36, 114);
-      put(refTargetLabel, 18, h - 116, 116, 30);
-      put(refTarget, 138, h - 119, w - 432, 240);
-      put(refUse, w - 282, h - 119, 128, 32);
-      put(refOpen, w - 142, h - 119, 124, 32);
-    } else {
-      put(refDestinationLabel, 18, destinationTop + 3, 66, 30);
-      put(refDestination, 88, destinationTop, w - 400, 32);
-      put(refBrowse, w - 300, destinationTop, 128, 32);
-      put(refDownload, w - 160, destinationTop, 142, 32);
+    reference_text(refIntro, local
+      ? L"Local references work offline. Select a file and a compatible workspace input. Relocation copies and verifies your library, then switches its location; originals remain."
+      : downloads ? L"Pause keeps partial downloads for later. Cancel discards the active partial download. Resume verifies saved identity; Discard removes only the selected unfinished transfer."
+      : importing ? L"Import existing reference files without a network connection. Enter their identity as your own declaration, choose files, then review before importing."
+      : getstr(reference_provider(), "id") == "ensembl-archive"
+          ? L"Ensembl archive: release-pinned genomes and annotations. Release 116 is the final classic release. Search contacts the selected provider; analysis remains local."
+          : L"Choose a provider and search explicitly. NCBI RefSeq requires a versioned assembly accession, for example GCF_000146045.2. No network request occurs when changing providers.");
+    const int destinationTop = h - 134, detailsHeight = 76,
+              detailsTop = destinationTop - 12 - detailsHeight,
+              speciesHeight = std::max(56, (detailsTop - 244) * 2 / 5),
+              filesTop = 190 + speciesHeight + 40;
+    put(refProviderLabel, 18, 107, 66, 28);
+    put(refProvider, 88, 104, 250, 260);
+    put(refReleaseLabel, 350, 107, 124, 28);
+    put(refRelease, 480, 104, w - 498, 250);
+    put(refQuery, 18, 146, w - 146, 32);
+    put(refSearch, w - 116, 146, 98, 32);
+    put(refSpecies, 18, 190, w - 36, speciesHeight);
+    put(refDiscover, 18, 196 + speciesHeight, 132, 30);
+    put(refFiles, 18, filesTop, w - 36, detailsTop - 12 - filesTop);
+    put(refLocal, 18, 104, w - 36, h - 390);
+    put(refRelocate, 18, h - 276, 184, 32);
+    put(refPending, 18, 104, w - 36, h - 385);
+    put(refResume, 18, h - 269, 142, 32);
+    put(refDiscard, 172, h - 269, 158, 32);
+    put(refDetails, 18, local ? h - 232 : downloads ? h - 225 : importing ? h - 214 : detailsTop,
+        w - 36, local ? 86 : downloads ? 79 : importing ? 68 : detailsHeight);
+    put(refTargetLabel, 18, destinationTop + 3, 116, 30);
+    put(refTarget, 138, destinationTop, w - 432, 240);
+    put(refUse, w - 282, destinationTop, 128, 32);
+    put(refOpen, w - 142, destinationTop, 124, 32);
+    put(refDestinationLabel, 18, destinationTop + 3, 66, 30);
+    put(refDestination, 88, destinationTop, w - 420, 32);
+    put(refBrowse, w - 320, destinationTop, 128, 32);
+    put(refDownload, w - 180, destinationTop, 162, 32);
+    put(refImportPreview, w - 180, destinationTop, 162, 32);
+    const int half = (w - 48) / 2;
+    for (size_t i = 0; i < refImportMetadata.size(); ++i) {
+      const int x = 18 + static_cast<int>(i % 2) * (half + 12), y = 104 + static_cast<int>(i / 2) * 36;
+      put(refImportMetadataLabels[i], x, y + 3, 110, 28);
+      put(refImportMetadata[i], x + 112, y, half - 112, 30);
     }
-    put(refNotice, 18, h - 74, w - 278, 50);
-    put(refCancel, w - 252, h - 74, 128, 32);
-    put(refClose, w - 112, h - 74, 94, 32);
-    put(refProgress, 18, h - 15, w - 36, 6);
-    for (HWND control : {refReleaseLabel, refRelease, refQuery, refSearch, refSpecies,
-                         refDiscover, refFiles, refDestinationLabel, refDestination,
-                         refBrowse, refDownload})
-      ShowWindow(control, local ? SW_HIDE : SW_SHOW);
-    for (HWND control : {refLocal, refTargetLabel, refTarget, refUse, refOpen})
+    for (size_t i = 0; i < refImportPaths.size(); ++i) {
+      const int y = 222 + static_cast<int>(i) * 36;
+      put(refImportLabels[i], 18, y + 3, 140, 28);
+      put(refImportPaths[i], 160, y, w - 318, 30);
+      put(refImportBrowse[i], w - 146, y, 128, 30);
+    }
+    put(refNotice, 18, h - 92, w - 36, 38);
+    put(refReviewButton, 18, h - 44, 168, 30);
+    put(refPause, w - 406, h - 44, 118, 30);
+    put(refCancel, w - 276, h - 44, 152, 30);
+    put(refClose, w - 112, h - 44, 94, 30);
+    put(refProgress, 18, h - 7, w - 36, 5);
+    for (HWND control : {refProviderLabel, refProvider, refReleaseLabel, refRelease, refQuery,
+                         refSearch, refSpecies, refDiscover, refFiles, refDownload})
+      ShowWindow(control, online ? SW_SHOW : SW_HIDE);
+    for (HWND control : {refDestinationLabel, refDestination, refBrowse})
+      ShowWindow(control, online || importing ? SW_SHOW : SW_HIDE);
+    for (HWND control : {refLocal, refTargetLabel, refTarget, refUse, refOpen, refRelocate})
       ShowWindow(control, local ? SW_SHOW : SW_HIDE);
-    auto column = [&](HWND list, int at, int size) {
-      ListView_SetColumnWidth(list, at, MulDiv(size, refDpi, 96));
-    };
-    column(refSpecies, 0, (w - 70) / 2);
-    column(refSpecies, 1, (w - 70) / 4);
-    column(refSpecies, 2, (w - 70) / 4);
-    column(refFiles, 0, 210);
-    column(refFiles, 1, std::max(220, w - 366));
-    column(refFiles, 2, 98);
-    column(refLocal, 0, std::max(180, (w - 170) / 3));
-    column(refLocal, 1, std::max(180, (w - 170) / 3));
-    column(refLocal, 2, std::max(180, (w - 170) / 3));
-    column(refLocal, 3, 98);
+    for (HWND control : {refPending, refResume, refDiscard})
+      ShowWindow(control, downloads ? SW_SHOW : SW_HIDE);
+    ShowWindow(refImportPreview, importing ? SW_SHOW : SW_HIDE);
+    for (const auto &controls : {refImportPaths, refImportBrowse, refImportLabels, refImportMetadata, refImportMetadataLabels})
+      for (HWND control : controls) ShowWindow(control, importing ? SW_SHOW : SW_HIDE);
+    auto column = [&](HWND list, int at, int size) { ListView_SetColumnWidth(list, at, MulDiv(size, refDpi, 96)); };
+    column(refSpecies, 0, (w - 70) / 2); column(refSpecies, 1, (w - 70) / 4); column(refSpecies, 2, (w - 70) / 4);
+    column(refFiles, 0, 210); column(refFiles, 1, std::max(220, w - 366)); column(refFiles, 2, 98);
+    column(refLocal, 0, std::max(180, (w - 170) / 3)); column(refLocal, 1, std::max(180, (w - 170) / 3));
+    column(refLocal, 2, std::max(180, (w - 170) / 3)); column(refLocal, 3, 98);
+    column(refPending, 0, w - 390); column(refPending, 1, 140); column(refPending, 2, 200);
   }
   void reference_fonts() {
     HFONT replacement = CreateFontW(-MulDiv(14, refDpi, 96), 0, 0, 0, FW_NORMAL,
@@ -2764,7 +2976,20 @@ class Workspace {
       return;
     }
     if (id == REF_DESTINATION || id == REF_TARGET) {
+      if (id == REF_DESTINATION && notification == EN_CHANGE) reference_invalidate_review();
       reference_enabled();
+      return;
+    }
+    if ((id >= REF_IMPORT_PATH && id < REF_IMPORT_PATH + 5) ||
+        (id >= REF_IMPORT_METADATA && id < REF_IMPORT_METADATA + 6)) {
+      if (notification == EN_CHANGE) reference_invalidate_review();
+      reference_enabled();
+      return;
+    }
+    if (id == REF_PAUSE && refBusy && !refActionPending &&
+        refOperation.get("cancellable").boolean(true) &&
+        (getstr(refOperation, "action") == "download" || getstr(refOperation, "action") == "resume")) {
+      reference_send("references/pause");
       return;
     }
     if (id == REF_CANCEL && refBusy && !refActionPending &&
@@ -2775,18 +3000,74 @@ class Workspace {
     if (!ready || analysis_active() || closing || packBusy || packActionPending ||
         refBusy || refActionPending || setupBusy || setupActionPending)
       return;
-    if ((id == REF_QUERY && notification == EN_CHANGE) || id == REF_RELEASE)
+    if (id == REF_QUERY && notification == EN_CHANGE)
       return;
-    if (id == REF_SEARCH || (id == IDOK && TabCtrl_GetCurSel(refTab) == 0)) {
-      const auto release = control_text(refRelease);
-      if (release.empty())
+    if (id == REF_RELEASE) {
+      if (notification == CBN_SELCHANGE) {
+        refRebuilding = true;
+        refState["species"] = Json::array(); refState["discovery"] = nullptr;
+        ListView_DeleteAllItems(refSpecies); ListView_DeleteAllItems(refFiles);
+        refRebuilding = false;
+        reference_details();
+      }
+      return;
+    }
+    if (id == REF_PROVIDER && notification == CBN_SELCHANGE) {
+      refRebuilding = true;
+      reference_provider_controls(true);
+      reference_text(refQuery, L"");
+      refState["species"] = Json::array(); refState["discovery"] = nullptr;
+      ListView_DeleteAllItems(refSpecies); ListView_DeleteAllItems(refFiles);
+      refRebuilding = false;
+      reference_layout(); reference_details();
+      return;
+    }
+    if (id == REF_REVIEW) {
+      reference_review(); return;
+    }
+    if (id >= REF_IMPORT_BROWSE && id < REF_IMPORT_BROWSE + 5) {
+      const auto index = static_cast<size_t>(id - REF_IMPORT_BROWSE);
+      const auto path = pick(refWindow, false, false,
+          index == 1 ? L"Annotation GTF|*.gtf;*.gtf.gz|All files|*.*"
+                     : L"FASTA files|*.fa;*.fasta;*.fna;*.faa;*.fa.gz;*.fasta.gz;*.fna.gz;*.faa.gz|All files|*.*",
+          L"Choose a local reference file");
+      if (!path.empty()) reference_text(refImportPaths[index], path);
+    } else if (id == REF_IMPORT_PREVIEW) {
+      Json files = Json::array(), metadata = Json::object();
+      const std::vector<std::string> kinds{"genome", "annotation", "cdna", "ncrna", "protein"},
+          names{"label", "species", "assembly", "assembly_accession", "source", "release"};
+      for (size_t i = 0; i < kinds.size(); ++i)
+        if (!control_text(refImportPaths[i]).empty())
+          files.array_items().push_back(object({{"kind", kinds[i]}, {"path", narrow(control_text(refImportPaths[i]))}}));
+      for (size_t i = 0; i < names.size(); ++i)
+        metadata[names[i]] = narrow(control_text(refImportMetadata[i]));
+      reference_invalidate_review();
+      reference_send("references/import-preview", object({{"files", files}, {"metadata", metadata},
+          {"destination", narrow(control_text(refDestination))}}));
+    } else if (id == REF_RELOCATE) {
+      const auto destination = pick(refWindow, true, false, L"", L"Choose a new reference library location");
+      if (!destination.empty()) {
+        reference_invalidate_review();
+        reference_send("references/relocate-preview", object({{"destination", narrow(destination)}}));
+      }
+    } else if (id == REF_RESUME || id == REF_DISCARD) {
+      const auto &job = reference_pending();
+      if (getstr(job, "id").empty()) return;
+      if (id == REF_RESUME)
+        reference_send("references/resume", object({{"job_id", getstr(job, "id")}}));
+      else if (MessageBoxW(refWindow,
+          L"Discard this unfinished download and its partial files? Completed reference bundles will be preserved.",
+          L"Discard unfinished download", MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2) == IDYES)
+        reference_send("references/discard", object({{"job_id", getstr(job, "id")}}));
+    } else if (id == REF_SEARCH || (id == IDOK && TabCtrl_GetCurSel(refTab) == 0)) {
+      if (control_text(refRelease).empty())
         return;
-      reference_send("references/search", object({{"release", std::stoi(release)},
+      reference_send("references/search", object({{"provider_id", getstr(reference_provider(), "id")}, {"release", reference_release_value()},
                                                    {"query", narrow(control_text(refQuery))}}));
     } else if (id == REF_DISCOVER) {
       const auto &species = reference_selected_species();
       if (!getstr(species, "id").empty())
-        reference_send("references/discover", object({{"release", species.get("release")},
+        reference_send("references/discover", object({{"provider_id", getstr(reference_provider(), "id")}, {"release", reference_release_value()},
                             {"species_id", getstr(species, "id")}}));
     } else if (id == REF_BROWSE) {
       const auto path = pick(refWindow, true, false, L"", L"Choose where to store reference downloads");
@@ -2855,7 +3136,7 @@ class Workspace {
             const auto *change = reinterpret_cast<NMLISTVIEW *>(l);
             if ((change->uNewState & LVIS_SELECTED) && !(change->uOldState & LVIS_SELECTED))
               app->reference_targets();
-          } else if (notice->idFrom == REF_FILES || notice->idFrom == REF_SPECIES)
+          } else if (notice->idFrom == REF_FILES || notice->idFrom == REF_SPECIES || notice->idFrom == REF_PENDING)
             app->reference_details();
         }
         return 0;
@@ -2865,7 +3146,7 @@ class Workspace {
         return 0;
       case WM_ACTIVATE:
         if (LOWORD(w) != WA_INACTIVE && app->refTab &&
-            TabCtrl_GetCurSel(app->refTab) == 1 && !app->refActionPending)
+            TabCtrl_GetCurSel(app->refTab) == 1 && !app->refActionPending && !app->refReviewOpen)
           app->reference_targets();
         break;
       case WM_DPICHANGED: {
@@ -2896,7 +3177,10 @@ class Workspace {
       case WM_NCDESTROY:
         app->refWindow = nullptr;
         app->refLocalRows.clear();
+        app->refPendingIds.clear();
         app->refTargets = Json::array();
+        app->refImportPaths.clear(); app->refImportBrowse.clear(); app->refImportLabels.clear();
+        app->refImportMetadata.clear(); app->refImportMetadataLabels.clear();
         SetWindowLongPtrW(h, GWLP_USERDATA, 0);
         return DefWindowProcW(h, m, w, l);
       default:
@@ -2941,13 +3225,15 @@ class Workspace {
       throw std::runtime_error("Could not open reference discovery.");
     refRebuilding = true;
     refTab = make(WC_TABCONTROLW, L"Reference views", WS_TABSTOP, REF_TAB, refWindow);
-    for (const auto *label : {L"Find online", L"Downloaded"}) {
+    for (const auto *label : {L"Find online", L"Local library", L"Downloads", L"Import local"}) {
       TCITEMW item{};
       item.mask = TCIF_TEXT;
       item.pszText = const_cast<wchar_t *>(label);
       TabCtrl_InsertItem(refTab, TabCtrl_GetItemCount(refTab), &item);
     }
     refIntro = make(L"STATIC", L"", SS_LEFT | SS_NOPREFIX, 650, refWindow);
+    refProviderLabel = make(L"STATIC", L"Provider", SS_LEFT, 654, refWindow);
+    refProvider = make(L"COMBOBOX", L"", WS_TABSTOP | CBS_DROPDOWNLIST | WS_VSCROLL, REF_PROVIDER, refWindow);
     refReleaseLabel = make(L"STATIC", L"Release", SS_LEFT, 651, refWindow);
     refRelease = make(L"COMBOBOX", L"", WS_TABSTOP | CBS_DROPDOWNLIST | WS_VSCROLL,
                       REF_RELEASE, refWindow);
@@ -2984,20 +3270,47 @@ class Workspace {
         ES_AUTOVSCROLL | WS_VSCROLL, REF_DETAILS, refWindow, WS_EX_CLIENTEDGE);
     SendMessageW(refDetails, EM_SETLIMITTEXT, 256 * 1024, 0);
     refDestinationLabel = make(L"STATIC", L"Save to", SS_LEFT, 652, refWindow);
-    refDestination = make(L"EDIT", root + L"\\user-data\\references", WS_TABSTOP |
+    refDestination = make(L"EDIT", L"", WS_TABSTOP |
         ES_AUTOHSCROLL, REF_DESTINATION, refWindow, WS_EX_CLIENTEDGE);
     refBrowse = button(L"Choose folder...", REF_BROWSE, refWindow);
     refDownload = button(L"Download selected", REF_DOWNLOAD, refWindow);
     refLocal = list(L"Downloaded reference files", REF_LOCAL, false,
                      {L"Species", L"Assembly · release", L"Reference file", L"Size"});
+    refPending = list(L"Unfinished reference downloads", REF_PENDING, false,
+                      {L"Reference", L"Status", L"Downloaded / total"});
+    refResume = button(L"Resume selected", REF_RESUME, refWindow);
+    refDiscard = button(L"Discard selected...", REF_DISCARD, refWindow);
+    refRelocate = button(L"Relocate library...", REF_RELOCATE, refWindow);
+    const std::vector<std::wstring> metadataLabels{L"Library label", L"Species", L"Assembly", L"Accession (opt.)", L"Source", L"Release / version"},
+        fileLabels{L"Genome FASTA", L"Annotation GTF", L"cDNA FASTA", L"ncRNA FASTA", L"Protein FASTA"};
+    for (size_t i = 0; i < metadataLabels.size(); ++i) {
+      refImportMetadataLabels.push_back(make(L"STATIC", metadataLabels[i], SS_LEFT,
+          680 + static_cast<int>(i), refWindow));
+      HWND edit = make(L"EDIT", L"", WS_TABSTOP | ES_AUTOHSCROLL,
+          REF_IMPORT_METADATA + static_cast<int>(i), refWindow, WS_EX_CLIENTEDGE);
+      SendMessageW(edit, EM_SETLIMITTEXT, 2048, 0);
+      refImportMetadata.push_back(edit);
+    }
+    for (size_t i = 0; i < fileLabels.size(); ++i) {
+      refImportLabels.push_back(make(L"STATIC", fileLabels[i], SS_LEFT, 690 + static_cast<int>(i), refWindow));
+      HWND edit = make(L"EDIT", L"", WS_TABSTOP | ES_AUTOHSCROLL,
+          REF_IMPORT_PATH + static_cast<int>(i), refWindow, WS_EX_CLIENTEDGE);
+      SendMessageW(edit, EM_SETLIMITTEXT, 32768, 0);
+      refImportPaths.push_back(edit);
+      refImportBrowse.push_back(button(L"Choose file...", REF_IMPORT_BROWSE + static_cast<int>(i), refWindow));
+    }
+    refImportPreview = button(L"Check for import", REF_IMPORT_PREVIEW, refWindow);
     refTargetLabel = make(L"STATIC", L"Workspace input", SS_LEFT, 653, refWindow);
     refTarget = make(L"COMBOBOX", L"", WS_TABSTOP | CBS_DROPDOWNLIST | WS_VSCROLL,
                      REF_TARGET, refWindow);
     refUse = button(L"Use for input", REF_USE, refWindow);
     refOpen = button(L"Open folder", REF_OPEN, refWindow);
+    refPause = button(L"Pause download", REF_PAUSE, refWindow);
     refCancel = button(L"Cancel operation", REF_CANCEL, refWindow);
+    refReviewButton = button(L"Review changes...", REF_REVIEW, refWindow);
     refProgress = make(PROGRESS_CLASSW, L"Reference download progress", PBS_SMOOTH,
                        REF_PROGRESS, refWindow);
+    SendMessageW(refProgress, PBM_SETRANGE32, 0, 1000);
     refNotice = make(L"STATIC", L"Loading local references...", SS_LEFT | SS_NOPREFIX,
                      REF_NOTICE, refWindow);
     refClose = button(L"Close", REF_CLOSE, refWindow);
@@ -3012,6 +3325,14 @@ class Workspace {
   }
   void reference_response(const std::string &method, const Json &result) {
     refPollFailed = false;
+    if (result.contains("review")) {
+      const auto &review = result.get("review");
+      // The service keeps a review until it is consumed or replaced. Editing a
+      // native form invalidates that exact token locally, including after this
+      // window is reopened or an already-requested status reply arrives.
+      refReview = refInvalidReviewTokens.count(getstr(review, "token"))
+          ? Json::object() : review;
+    }
     if (result.contains("operation"))
       refOperation = result.get("operation");
     const bool wasBusy = refBusy;
@@ -3020,6 +3341,8 @@ class Workspace {
       Json previous = refState;
       refState = result;
       reference_refresh(previous);
+      if (refWindow && previous.get("providers").dump() != refState.get("providers").dump())
+        reference_layout();
     }
     if (result.contains("model"))
       snapshot(result.get("model"));
@@ -3049,21 +3372,26 @@ class Workspace {
             refWindow ? refWindow : window, L"open", path.c_str(), nullptr, nullptr, SW_SHOWNORMAL)) <= 32)
         message(L"Windows could not open the reference folder.");
     } else if (method == "references/use") {
-      status_text(L"The downloaded reference is assigned to the selected workspace input.");
+      status_text(L"The local reference is assigned to the selected workspace input.");
       if (refWindow)
-        SetWindowTextW(refNotice, L"Reference assigned. Its download provenance will be retained with the run.");
+        reference_text(refNotice, L"Reference assigned. Its recorded provenance will be retained with the run.");
     } else {
       reference_notice();
       if (refBusy)
         status_text(L"References: " + wt(refOperation, "message"));
       else if (wasBusy && !getstr(refOperation, "message").empty())
         status_text(wt(refOperation, "message"));
-      if ((wasBusy || method == "references/download") && !refBusy &&
-          getstr(refOperation, "action") == "download" &&
+      const auto action = getstr(refOperation, "action");
+      if ((wasBusy || method == "references/download" || method == "references/resume" ||
+           method == "references/import" || method == "references/relocate") && !refBusy &&
+          (action == "download" || action == "resume" || action == "import" || action == "relocate") &&
           refOperation.get("success").boolean() && refWindow) {
         TabCtrl_SetCurSel(refTab, 1);
         reference_layout();
         reference_targets();
+      }
+      if (wasBusy && !refBusy && getstr(refOperation, "status") == "paused" && refWindow) {
+        TabCtrl_SetCurSel(refTab, 2); reference_layout(); reference_details();
       }
     }
     reference_enabled();
@@ -5062,20 +5390,24 @@ class Workspace {
       }
       if (refBusy || refActionPending) {
         if (refBusy && !refOperation.get("cancellable").boolean(true)) {
-          MessageBoxW(window, L"The reference download record is being saved. Please wait "
+          MessageBoxW(window, L"The reference library change is being committed. Please wait "
                       L"for it to finish before closing Workbench.",
-                      L"Finishing reference download", MB_OK | MB_ICONINFORMATION);
+                      L"Finishing reference operation", MB_OK | MB_ICONINFORMATION);
           return 0;
         }
-        if (MessageBoxW(window, L"A reference operation is in progress. Cancel it and close "
-                        L"Workbench?\n\nCompleted references will be preserved.",
+        const bool pauseDownload = refBusy && (getstr(refOperation, "action") == "download" ||
+                                               getstr(refOperation, "action") == "resume");
+        if (MessageBoxW(window, pauseDownload
+                        ? L"Pause the reference download and close Workbench?\n\nPartial downloads will be retained for explicit Resume. Completed references will be preserved."
+                        : L"A reference operation is in progress. Cancel it and close Workbench?\n\nCompleted references and original files will be preserved.",
                         L"Close Native Workbench",
                         MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2) != IDYES)
           return 0;
         closing = true;
         closeStarted = GetTickCount64();
-        reference_send("references/cancel");
-        status_text(L"Cancelling the reference operation before closing...");
+        reference_send(pauseDownload ? "references/pause" : "references/cancel");
+        status_text(pauseDownload ? L"Pausing the reference download before closing..."
+                                  : L"Cancelling the reference operation before closing...");
         enabled();
         return 0;
       }

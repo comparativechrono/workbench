@@ -1,0 +1,2634 @@
+{
+  "schema": 1,
+  "recordedOn": "2026-10-08",
+  "version": "0.15.0",
+  "published": false,
+  "sourceCommit": "46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+  "sourceTree": "6b1641f7f915a93d8a007933aa6cba62cafc10e9",
+  "runId": 37855047291,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37855047291",
+  "runConclusion": "failure",
+  "referenceFeatureGatesPassed": true,
+  "candidateFullyAccepted": false,
+  "starterSha256": "ce3bcc9c5634dd90f024ecf20f0308a144641c67e0c11c205501518773f6a4c2",
+  "jobs": [
+    {
+      "id": 113577098548,
+      "name": "build",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 37855047291,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Recover immutable runtime, corresponding source and compiler",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Compile the native application with strict warnings",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Install independent CWL reference runner for tests only",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Verify affected source and packaging contracts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Freeze one standalone candidate and its matching source",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Prepare bounded transport without rebuilding the frozen archives",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 26
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 27
+        }
+      ]
+    },
+    {
+      "id": 113577783270,
+      "name": "native (path with spaces)",
+      "status": "completed",
+      "conclusion": "failure",
+      "run_id": 37855047291,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/download-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Verify and separately extract the exact candidate for independent gates",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Exact packaged live Ensembl and NCBI references, cancellation, offline reuse and provenance",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Exact packaged resumable transfers, reviewed local imports, safe relocation and native References",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Native process accounting, pipeline failure, cancellation, timeout and cleanup",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Exact packaged readiness, scientific measurements and diagnostic review/save",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Import the exact independent align 0.4.1 candidate ZIP and execute its declared scientific check",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Frozen batch plans, durable queue, real reusable indexes and native sample/queue interfaces",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Verified completed-step restart, declared resource admission and portable offline projects",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Separately labelled native delayed-host transport and cancellation fixture",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Windows reference, installation, queue and filesystem source regressions",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 13
+        },
+        {
+          "name": "Native expandable categories, search, selection, scrolling and installed-pack refresh",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14
+        },
+        {
+          "name": "Recheck native workspace, workflow interactions and starter scientific chain",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        },
+        {
+          "name": "Retain successful and failed reports and desktop captures",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 32
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 33
+        }
+      ]
+    },
+    {
+      "id": 113577783324,
+      "name": "native (ordinary)",
+      "status": "completed",
+      "conclusion": "failure",
+      "run_id": 37855047291,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/download-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Verify and separately extract the exact candidate for independent gates",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Exact packaged live Ensembl and NCBI references, cancellation, offline reuse and provenance",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Exact packaged resumable transfers, reviewed local imports, safe relocation and native References",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Native process accounting, pipeline failure, cancellation, timeout and cleanup",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Exact packaged readiness, scientific measurements and diagnostic review/save",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Import the exact independent align 0.4.1 candidate ZIP and execute its declared scientific check",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Frozen batch plans, durable queue, real reusable indexes and native sample/queue interfaces",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 10
+        },
+        {
+          "name": "Verified completed-step restart, declared resource admission and portable offline projects",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Separately labelled native delayed-host transport and cancellation fixture",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Windows reference, installation, queue and filesystem source regressions",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 13
+        },
+        {
+          "name": "Native expandable categories, search, selection, scrolling and installed-pack refresh",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14
+        },
+        {
+          "name": "Recheck native workspace, workflow interactions and starter scientific chain",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        },
+        {
+          "name": "Retain successful and failed reports and desktop captures",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 32
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 33
+        }
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "path": "ordinary",
+      "artifact": {
+        "id": 11584440163,
+        "url": "https://github.com/comparativechrono/workbench/actions/runs/37855047291/artifacts/11584440163",
+        "bytes": 26760678,
+        "sha256": "04ddc568a266c1404ae20eab3dc7dbc2109ec31b0a74658d253d4326152dcb82",
+        "officialSizeDigestAndCrcVerified": true
+      },
+      "reports": {
+        "live": {
+          "file": "reference-live-evidence/native-references-live.json",
+          "bytes": 20503,
+          "sha256": "43c2de5f47d98c7e1aeb33c4a2c4cea7579005c2f85486542071dce0b142619e",
+          "report": {
+            "schema": 1,
+            "success": true,
+            "suite": "live",
+            "appVersion": "0.15.0",
+            "sourceCommit": "46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+            "assetName": "native-workbench-0.15.0-starter-windows.zip",
+            "assetSha256": "ce3bcc9c5634dd90f024ecf20f0308a144641c67e0c11c205501518773f6a4c2",
+            "gateSha256": "6e61ffe14fc6c6bcb4838fa4d142d28ff3e7d5eee71c9fbaa479717a715031c0",
+            "platform": "Windows-2022Server-10.0.20348-SP0",
+            "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+            "startedUtc": "2026-10-08T22:43:52.712686+00:00",
+            "nativeWindowsExecuted": true,
+            "nativeGUILaunched": false,
+            "nativeGUIValidated": false,
+            "checks": [
+              "Live release-pinned yeast search and five-product discovery.",
+              "Cancellation after transferred bytes removed only its partial download and published no reference.",
+              "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+              "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+              "Completed CWL export preserves the real downloaded yeast reference receipt, input hash, frozen plan and native output provenance.",
+              "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods.",
+              "Installed application and starter pack integrity checks passed after reference use.",
+              "Live NCBI exact GCF_000146045.2 lookup discovers genome, GTF and protein only; all three downloaded compressed/expanded identities match independently dated pins with MD5 and gzip verification and observed annotation metadata retained.",
+              "A socket-denied fresh host reuses the downloaded NCBI genome through its compatible FASTA input and retains provider/accession provenance in reviewed methods."
+            ],
+            "skips": [],
+            "captures": [],
+            "limits": [
+              "Only the named hosted Windows image, ordinary/spaced path case and observed desktop DPI are established.",
+              "Deterministic hostile transfer cases inject only a gate-owned provider response boundary, not live upstream responses.",
+              "RefSeq dated hashes bind observed annotation bytes; a versioned assembly does not make its annotation directory immutable.",
+              "No updater, release promotion, institutional endpoint acceptance or realistic scientific benchmark is exercised."
+            ],
+            "appFiles": {
+              "NativeWorkbench.exe": "3e374c9b12e694cf8d8f9e2ce2e5eaf88abad9adf9d8e81d8ad16c16428dcdcb",
+              "WorkbenchBridge.exe": "e1e99d5d0fe88cacd91852bbf302f9bfe414745e911362c73c8dd724fbbf7a9d",
+              "workspace\\app_version.py": "5aca6d5165ccc3d40e11086fb988f64390ba3b929150e30a88ea015f8a852965",
+              "workspace\\catalog.py": "8269f3ff23500c8f5b3321d475573b94f960d0534271cf724a8ac3621adc311f",
+              "workspace\\core_checks.py": "431598722c8c261683e123b255d008210abedb13e90e68d7bec0e6b1df905d70",
+              "workspace\\cwl_export.py": "5773f89433bc11f3cc9708e33994ec80f7c7bf8f6465c9ac8bb8da11c8181596",
+              "workspace\\dag_routing.py": "eb79a385a6426e8ce9778124620fe48c69e8c6ca3a7a9351b95780c99e869fe4",
+              "workspace\\desktop_host.py": "d3bff49a4436d57b153af9ff270003bf4eef8a7d44245c07d61bb834ea74db74",
+              "workspace\\desktop_model.py": "3904ae9e38fe214110e472167c292b183c39dca60ce01407c3533474227597f6",
+              "workspace\\diagnostics.py": "fa743c69179a13b66dc000348a3e2954616a349163f1103a8cd9f50d61793124",
+              "workspace\\engine.py": "888927ee7019a5317db0458d34a72f2989fd6e6dc0b49e61a0f15fe96ccf8363",
+              "workspace\\example.py": "fb558de8dc3f49f68550af3e08d768e8a99c5cd9e8d466ca357dcecc3dd699b3",
+              "workspace\\execution_resources.py": "33329a740602199f2931b90fde638a0780ed6fa28d2cf15aa15518d8ee8bdae9",
+              "workspace\\file_io.py": "ab6034e617504c8c264c9c53201174fdae88440765db114f01ce39eafcb2d67e",
+              "workspace\\pack_checks.py": "687a775f637ad12e55a04fac6c05292174c457bd551455f0dbffeb15d1f544a1",
+              "workspace\\pack_manager.py": "282b8370cccd6d86d00f6d2a85fe99669eb1d9b9953a9327c65c323a4a780b5d",
+              "workspace\\pack_security.py": "2d1fa4a4267f5cecb0d583c7b43fc59dc8645125c59e3db69c4d6fa307ff6cc0",
+              "workspace\\performance.py": "8f2e985ae95cf1856de64a5e051f681b0e78a9974dc312d0daf55331a523c5b6",
+              "workspace\\project_manager.py": "f01946694516b4a4fbe98ef8b14715a3e0e446d385b94438a26afc713ec86cdf",
+              "workspace\\readiness.py": "e8fdbaba0aa430a539e9214b711e14466e9597456527ec33eed687f898c33676",
+              "workspace\\recovery.py": "568d48098fe7fb01cfa800ac1fd52373d4d1bbff689f49207242065f9901d6b5",
+              "workspace\\reference_indexes.py": "fb6b20dd123f4d83896edc364868da6fdf779f915e4ae2e9e110cce1c1740203",
+              "workspace\\reference_library.py": "2416af2e3fb9aa80bcf1473037f4e248f9099600eb06ee707fee4b525b11baf2",
+              "workspace\\reference_manager.py": "af980e1ded0e01eb214424d29147043a21762b4e4708cf675dd0e8b183464cf6",
+              "workspace\\reference_ncbi.py": "1b1dec1af7c8cefbf94a49c6508ecfeacd2d93b89d3f72c041b18b04e526f5e9",
+              "workspace\\reference_provenance.py": "e2915eb46e3ca86cbf89297dadeec48925f2c9a667e85057bc3b9986e2735ac9",
+              "workspace\\reference_provider.py": "3bf51daae305ef16c0cff0a6bc2b65f76bc6013f7b1456da07fa8d869c5f0832",
+              "workspace\\reference_transfer.py": "105662115fbc1e477e40d898417a04ef81d1015241512af33b2d30a100ccde8d",
+              "workspace\\run_queue.py": "2dbb8387ba758259a68dc213ade820be027529e4f1d622e101ed96367c97cf6c",
+              "workspace\\sample_table.py": "a3ce7ac6f31fd044adf6abc90d7c8b83b5a57630212ebca973022ba4a7570f4e",
+              "workspace\\service.py": "fe64f8c177ca8ddb5f98773f6cbfbef99d1df53ae9c634227bde57c1d5c5725e",
+              "workspace\\setup_manager.py": "4432c2c6c6091ebe4aeb57e29555e4d21cbe34b9d3ad8a2fef58fa13022fb853",
+              "workspace\\verify_installation.py": "dc33c51ebd52f9a812dfa6df0fcd083a04d144769edc0caa50147edab32358cf"
+            },
+            "phase": "Installed application and starter pack integrity checks passed after reference use.",
+            "passed": 9,
+            "updatedUtc": "2026-10-08T22:44:09.694276+00:00",
+            "cancelAtBytes": 1048576,
+            "downloads": [
+              {
+                "id": "genome",
+                "bytes": 12360704,
+                "sha256": "35cc97fccb91762c7a1f0f71b4adb1037b143d48b63fbd3b3f8bad45e5afa44c",
+                "compressed_bytes": 3784201,
+                "compressed_sha256": "a9953096d6a041a01a4cb5352b0232ee9373bf4c050fb23cb7ae673b2e1bb528",
+                "independentPinnedIdentity": true
+              },
+              {
+                "id": "annotation",
+                "bytes": 10463408,
+                "sha256": "8c43c98a3a0db24c9e53fd9d460f096c48de0eabefd955fd25d044c948692623",
+                "compressed_bytes": 595453,
+                "compressed_sha256": "253bd4013785b3c85a6a488bd541c12d8264aa4989046c3530d0d9ea2ecc931e",
+                "independentPinnedIdentity": true
+              },
+              {
+                "id": "cdna",
+                "bytes": 11714100,
+                "sha256": "0a60e3a655949edbed2e774deae38b896e78e623a45809eafe66d15f7062cf4d",
+                "compressed_bytes": 3806426,
+                "compressed_sha256": "3cc5b6bb7ff166cffac5c45317dad7052d06431f43f709ed14b33779702dc6a4",
+                "independentPinnedIdentity": true
+              },
+              {
+                "id": "ncrna",
+                "bytes": 205371,
+                "sha256": "e875aea40e6bfbf9811b73f30a459439fda48d5165fbaea4c2e4a7859e9c3753",
+                "compressed_bytes": 35424,
+                "compressed_sha256": "096064f75fc4c8eaf2845e52dd6d56e1e398f8da434abd8436cfaa2d71a3f604",
+                "independentPinnedIdentity": true
+              },
+              {
+                "id": "protein",
+                "bytes": 5873944,
+                "sha256": "fec10d61996147cbc29ed4587ed0bdeb4e4f5576d66896400b226f2d2d4815a4",
+                "compressed_bytes": 2700059,
+                "compressed_sha256": "67ae76c720e52cec167378ec2b8cb5c5929360fc30de31abb37ae1035ef8455c",
+                "independentPinnedIdentity": true
+              }
+            ],
+            "recordId": "f554ac814eaf4a6e8852d158ca370c50",
+            "referenceReceiptSha256": "394191b838b3984380e6a435642312efe87211c2261fc2a78a302ce520424aa1",
+            "cwlReference": {
+              "file": "reference-workflow.cwl",
+              "sha256": "93d5fd1e86e03794e14b20e0dcfc767e36351faf631f1214cd03e0931f4f5535",
+              "planSha256": "dbe5604da7b95b23affd469c6810458473b379fa3c0b4513e6d4f87d2eeef0ce",
+              "referenceInputs": 1
+            },
+            "nativeIndex": {
+              "contigs": 17,
+              "bases": 12157105,
+              "sha256": "65163e1e9c8cb7b63f43befd8294019b11fba0c18dd37c801e9d356e71e391c3",
+              "dictionary": [
+                [
+                  "I",
+                  230218
+                ],
+                [
+                  "II",
+                  813184
+                ],
+                [
+                  "III",
+                  316620
+                ],
+                [
+                  "IV",
+                  1531933
+                ],
+                [
+                  "V",
+                  576874
+                ],
+                [
+                  "VI",
+                  270161
+                ],
+                [
+                  "VII",
+                  1090940
+                ],
+                [
+                  "VIII",
+                  562643
+                ],
+                [
+                  "IX",
+                  439888
+                ],
+                [
+                  "X",
+                  745751
+                ],
+                [
+                  "XI",
+                  666816
+                ],
+                [
+                  "XII",
+                  1078177
+                ],
+                [
+                  "XIII",
+                  924431
+                ],
+                [
+                  "XIV",
+                  784333
+                ],
+                [
+                  "XV",
+                  1091291
+                ],
+                [
+                  "XVI",
+                  948066
+                ],
+                [
+                  "Mito",
+                  85779
+                ]
+              ]
+            },
+            "installation": {
+              "passed": 7,
+              "failed": 0
+            },
+            "ncbiLive": {
+              "record": {
+                "annotation": {
+                  "name": "SGD R64-5-1",
+                  "provider": "SGD",
+                  "release_date": "2026-07-10",
+                  "status": "Full Annotation"
+                },
+                "assembly": "R64",
+                "assembly_accession": "GCF_000146045.2",
+                "data_notice_url": "https://www.ncbi.nlm.nih.gov/home/about/policies/",
+                "documentation_url": "https://www.ncbi.nlm.nih.gov/datasets/docs/v2/data-processing/policies-annotation/genomeftp/",
+                "downloaded_at": "2026-10-08T22:44:14.226837Z",
+                "files": [
+                  {
+                    "annotation": {
+                      "name": "SGD R64-5-1",
+                      "provider": "SGD",
+                      "release_date": "2026-07-10",
+                      "status": "Full Annotation"
+                    },
+                    "assembly": "R64",
+                    "bytes": 12310392,
+                    "checksum": {
+                      "algorithm": "md5",
+                      "manifest_sha256": "faaed4109ac4412d716f2b0bc2dbce15299133671e3f22f2c95a58d3a890347e",
+                      "manifest_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/md5checksums.txt",
+                      "value": "88c38b957b721dfc50e6c4df03b6242e"
+                    },
+                    "checksum_manifest": {
+                      "sha256": "faaed4109ac4412d716f2b0bc2dbce15299133671e3f22f2c95a58d3a890347e",
+                      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/md5checksums.txt"
+                    },
+                    "compressed_bytes": 3843460,
+                    "compressed_sha256": "1ec41f951b35f2752d5065edeafe6972455609d4383fb36dae12519a60b27a73",
+                    "detail": "Complete genomic sequence file; eukaryotic repeats may be masked to lowercase. Sequence identifiers and case are preserved.",
+                    "effective_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_genomic.fna.gz",
+                    "etag": null,
+                    "filename": "GCF_000146045.2_R64_genomic.fna",
+                    "format": "fasta",
+                    "id": "genome",
+                    "kind": "genome",
+                    "label": "Genome FASTA",
+                    "last_modified": "Mon, 09 Apr 2018 04:20:18 GMT",
+                    "masking": "provider supplied; case preserved",
+                    "path": "D:\\a\\_temp\\reference-live-evidence\\ncbi-live-downloads\\ref-ce82d7f173ba4d33\\GCF_000146045.2_R64_genomic.fna",
+                    "sequence_choice": "NCBI assembly genomic sequence file",
+                    "sequence_scope": "NCBI assembly genomic sequence file",
+                    "sha256": "fe42735d3e6242f8c40b457a232940e34ef15eb4502717e54a34ed118face4c1",
+                    "size": 3843460,
+                    "source_filename": "GCF_000146045.2_R64_genomic.fna.gz",
+                    "source_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_genomic.fna.gz",
+                    "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_genomic.fna.gz",
+                    "validation": {
+                      "format_header": "passed (basic prefix only)",
+                      "gzip_crc": "passed",
+                      "provider_md5": "passed",
+                      "sha256": "computed locally; not a publisher signature"
+                    }
+                  },
+                  {
+                    "annotation": {
+                      "name": "SGD R64-5-1",
+                      "provider": "SGD",
+                      "release_date": "2026-07-10",
+                      "status": "Full Annotation"
+                    },
+                    "assembly": "R64",
+                    "bytes": 27121814,
+                    "checksum": {
+                      "algorithm": "md5",
+                      "manifest_sha256": "faaed4109ac4412d716f2b0bc2dbce15299133671e3f22f2c95a58d3a890347e",
+                      "manifest_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/md5checksums.txt",
+                      "value": "09dc355fe3f22fca157d1c4afd7253f8"
+                    },
+                    "checksum_manifest": {
+                      "sha256": "faaed4109ac4412d716f2b0bc2dbce15299133671e3f22f2c95a58d3a890347e",
+                      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/md5checksums.txt"
+                    },
+                    "compressed_bytes": 2293663,
+                    "compressed_sha256": "b43af4bd39ae4d53afe6addb957b448ebdcfba48dd7c18066259b3322fbc8b8c",
+                    "detail": "Observed GTF annotation for this exact assembly; NCBI may update annotation without changing the assembly accession.",
+                    "effective_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_genomic.gtf.gz",
+                    "etag": null,
+                    "filename": "GCF_000146045.2_R64_genomic.gtf",
+                    "format": "gtf",
+                    "id": "annotation",
+                    "kind": "annotation",
+                    "label": "Gene annotations (GTF)",
+                    "last_modified": "Sat, 11 Jul 2026 00:51:46 GMT",
+                    "masking": null,
+                    "path": "D:\\a\\_temp\\reference-live-evidence\\ncbi-live-downloads\\ref-ce82d7f173ba4d33\\GCF_000146045.2_R64_genomic.gtf",
+                    "sequence_choice": null,
+                    "sha256": "16da5a5d60a6bd3fdd00eda8dbab64bbbe92294d88ee0a9ac7c3415cd6da1546",
+                    "size": 2293663,
+                    "source_filename": "GCF_000146045.2_R64_genomic.gtf.gz",
+                    "source_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_genomic.gtf.gz",
+                    "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_genomic.gtf.gz",
+                    "validation": {
+                      "format_header": "passed (basic prefix only)",
+                      "gzip_crc": "passed",
+                      "provider_md5": "passed",
+                      "sha256": "computed locally; not a publisher signature"
+                    }
+                  },
+                  {
+                    "annotation": {
+                      "name": "SGD R64-5-1",
+                      "provider": "SGD",
+                      "release_date": "2026-07-10",
+                      "status": "Full Annotation"
+                    },
+                    "assembly": "R64",
+                    "bytes": 3400039,
+                    "checksum": {
+                      "algorithm": "md5",
+                      "manifest_sha256": "faaed4109ac4412d716f2b0bc2dbce15299133671e3f22f2c95a58d3a890347e",
+                      "manifest_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/md5checksums.txt",
+                      "value": "ead80d943dc55bc55731be41620fb641"
+                    },
+                    "checksum_manifest": {
+                      "sha256": "faaed4109ac4412d716f2b0bc2dbce15299133671e3f22f2c95a58d3a890347e",
+                      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/md5checksums.txt"
+                    },
+                    "compressed_bytes": 1848181,
+                    "compressed_sha256": "43b97707ae1a08a4b30c200aba6e5c39be47c674321b096478065a2400b1494e",
+                    "detail": "Accessioned protein products annotated on this assembly; combined RNA files are not included.",
+                    "effective_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_protein.faa.gz",
+                    "etag": null,
+                    "filename": "GCF_000146045.2_R64_protein.faa",
+                    "format": "fasta",
+                    "id": "protein",
+                    "kind": "protein",
+                    "label": "Protein sequences",
+                    "last_modified": "Sat, 11 Jul 2026 00:51:46 GMT",
+                    "masking": null,
+                    "path": "D:\\a\\_temp\\reference-live-evidence\\ncbi-live-downloads\\ref-ce82d7f173ba4d33\\GCF_000146045.2_R64_protein.faa",
+                    "sequence_choice": null,
+                    "sha256": "a376bcbd87c6caa8c0d81c2b1feb2d04246b438023bab3ced3821a61db718aac",
+                    "size": 1848181,
+                    "source_filename": "GCF_000146045.2_R64_protein.faa.gz",
+                    "source_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_protein.faa.gz",
+                    "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_protein.faa.gz",
+                    "validation": {
+                      "format_header": "passed (basic prefix only)",
+                      "gzip_crc": "passed",
+                      "provider_md5": "passed",
+                      "sha256": "computed locally; not a publisher signature"
+                    }
+                  }
+                ],
+                "folder": "D:\\a\\_temp\\reference-live-evidence\\ncbi-live-downloads\\ref-ce82d7f173ba4d33",
+                "id": "ce82d7f173ba4d33bfc62b1feb81d805",
+                "integrity_notice": "Provider transfer checksums detect transfer errors; local SHA-256 records file identity. Neither is a publisher signature.",
+                "label": "Saccharomyces cerevisiae S288C \u2014 R64 \u2014 release GCF_000146045.2",
+                "notice": "Look up an exact versioned RefSeq assembly accession, for example GCF_000146045.2. Genome FASTA, GTF and protein are offered when present. NCBI may update annotations for the same assembly; observed annotation metadata and downloaded file hashes are retained. Combined RNA files are not offered as cDNA or ncRNA. Analysis files stay on this computer.",
+                "provider": "ncbi-refseq",
+                "provider_name": "NCBI RefSeq assembly lookup",
+                "receipt_path": "D:\\a\\_temp\\reference-live-evidence\\ncbi-live-downloads\\ref-ce82d7f173ba4d33\\reference.json",
+                "receipt_sha256": "d0125cf646e437b63672670692b630d2f082c43433826d73d21221da93dcadc9",
+                "release": "GCF_000146045.2",
+                "schema": 1,
+                "source_catalog": {
+                  "directory_sha256": "0759f52a5d93afcdccd228d361d04499bad512442799c04b9611a09e425601d2",
+                  "directory_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/",
+                  "sha256": "eea3ad4615328e7cf871868e85cc305c5e836ee8d4be4b37ba85b8be6d85b926",
+                  "url": "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession/GCF_000146045.2/dataset_report"
+                },
+                "species": {
+                  "annotation": {
+                    "name": "SGD R64-5-1",
+                    "provider": "SGD",
+                    "release_date": "2026-07-10",
+                    "status": "Full Annotation"
+                  },
+                  "assembly": "R64",
+                  "assembly_accession": "GCF_000146045.2",
+                  "assembly_status": "current",
+                  "division": "RefSeq",
+                  "genebuild": "SGD R64-5-1",
+                  "id": "GCF_000146045.2",
+                  "name": "Saccharomyces cerevisiae S288C",
+                  "release": "GCF_000146045.2",
+                  "taxon_id": 559292
+                },
+                "warnings": [],
+                "available": true,
+                "status": "ready",
+                "error": ""
+              },
+              "independentPinsDate": "2026-10-08",
+              "expected": {
+                "genome": {
+                  "compressed_bytes": 3843460,
+                  "compressed_sha256": "1ec41f951b35f2752d5065edeafe6972455609d4383fb36dae12519a60b27a73",
+                  "bytes": 12310392,
+                  "sha256": "fe42735d3e6242f8c40b457a232940e34ef15eb4502717e54a34ed118face4c1"
+                },
+                "annotation": {
+                  "compressed_bytes": 2293663,
+                  "compressed_sha256": "b43af4bd39ae4d53afe6addb957b448ebdcfba48dd7c18066259b3322fbc8b8c",
+                  "bytes": 27121814,
+                  "sha256": "16da5a5d60a6bd3fdd00eda8dbab64bbbe92294d88ee0a9ac7c3415cd6da1546"
+                },
+                "protein": {
+                  "compressed_bytes": 1848181,
+                  "compressed_sha256": "43b97707ae1a08a4b30c200aba6e5c39be47c674321b096478065a2400b1494e",
+                  "bytes": 3400039,
+                  "sha256": "a376bcbd87c6caa8c0d81c2b1feb2d04246b438023bab3ced3821a61db718aac"
+                }
+              }
+            },
+            "finishedUtc": "2026-10-08T22:44:14.542921+00:00"
+          }
+        },
+        "management": {
+          "file": "reference-management-evidence/native-reference-management.json",
+          "bytes": 25278,
+          "sha256": "66203e16703731962196cd5a61fd3da792a116bec4dd979f9f382c752e5cd603",
+          "report": {
+            "schema": 1,
+            "success": true,
+            "suite": "management",
+            "appVersion": "0.15.0",
+            "sourceCommit": "46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+            "assetName": "native-workbench-0.15.0-starter-windows.zip",
+            "assetSha256": "ce3bcc9c5634dd90f024ecf20f0308a144641c67e0c11c205501518773f6a4c2",
+            "gateSha256": "6e61ffe14fc6c6bcb4838fa4d142d28ff3e7d5eee71c9fbaa479717a715031c0",
+            "platform": "Windows-2022Server-10.0.20348-SP0",
+            "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+            "startedUtc": "2026-10-08T22:44:14.879313+00:00",
+            "nativeWindowsExecuted": true,
+            "nativeGUILaunched": true,
+            "nativeGUIValidated": true,
+            "checks": [
+              "Exact packaged transfer code pauses after a production chunk, publishes no incomplete record, reopens and rehashes its checkpoint, truncates an uncheckpointed crash suffix and resumes with exact Range/If-Range into independently verified complete bytes; deterministic provider fixture only.",
+              "Malformed Content-Range and changed entity validators are never appended; deterministic responses force a fresh full request whose final bytes still match the independently pinned fixture.",
+              "Changed checkpointed compressed bytes and malformed checkpoint JSON fail closed; explicit discard removes only pending state and preserves ready bundles and unrelated user content.",
+              "Socket-denied exact private host reviews without copying; stale/replayed review tokens and changed reviewed files fail closed; explicit confirmation copies FASTA and gzip GTF with independently checked source/expanded hashes and clearly user-declared provenance.",
+              "Socket-denied typed selection rejects GTF for a FASTA input; reviewed relocation copies and verifies the library while retaining old paths/receipts and exact queued companions. The previously frozen old-path plan then executes native SAMtools with the correct FASTA dictionary and unchanged reference provenance in methods, plan, results and CWL.",
+              "A fresh socket-denied private host reopens the relocated local library and offers its verified FASTA to a compatible native tool without contacting either provider.",
+              "Native References provider selector offers labelled Ensembl archive and NCBI lookup; ordinary control interaction discovers the exact versioned RefSeq assembly and its three products with assembly/provider details visible.",
+              "Actual native Downloads lists durable paused live Ensembl transfers; Pause retains one resumed transfer, explicit Resume completes the independently pinned genome, and confirmed Discard removes the other partial transfer without changing ready references.",
+              "Native Import local edits explicit roles/metadata and previews hashes without copying; editing metadata invalidates confirmation even after a real close/reopen server refresh, and a fresh explicit preview includes the edited declaration. Closing review imports nothing; confirmation then creates one verified bundle. Local library refresh lists both imported products and offers/uses its FASTA in a compatible standalone SAMtools input, with the exact bound path independently read back from the native inspector.",
+              "Native Relocate library chooses an existing directory, presents exact destination/file hashes and original-retention notice, and explicit Copy and switch moves the active library only after all copies verify."
+            ],
+            "skips": [],
+            "captures": [
+              {
+                "path": "references-native-ncbi-discovery.bmp",
+                "width": 960,
+                "height": 728,
+                "sha256": "112f4356c273183fcbfd900c558cc93d0bf06fa1c4bb5e54920b3385a21fc0e0"
+              },
+              {
+                "path": "references-native-paused-downloads.bmp",
+                "width": 960,
+                "height": 728,
+                "sha256": "2beba8e06e99debd45a98e325b7666ed93bec3e6c61d4cfbc9d7c1939cc562be"
+              },
+              {
+                "path": "references-native-pause-confirmed.bmp",
+                "width": 960,
+                "height": 728,
+                "sha256": "aaf52bc7f58e5437b306ec6146913a97ddc48cf7c1ccb801362f20b5bf4dda95"
+              },
+              {
+                "path": "references-native-downloads-cleared.bmp",
+                "width": 960,
+                "height": 728,
+                "sha256": "637032e4efe4a3100f4378242a8d7545a97833a983834d5e1864577d80515ddb"
+              },
+              {
+                "path": "references-native-edited-review-disabled.bmp",
+                "width": 960,
+                "height": 728,
+                "sha256": "767f78b4ff29c32c833a647dca28ac785a8577781255ea05f9ceb167db1a1ca3"
+              },
+              {
+                "path": "references-native-import-fields.bmp",
+                "width": 960,
+                "height": 728,
+                "sha256": "7a680846dc3c44d120ff18ad92cd500f925a58455f1f0c7f8bd9f02ea0825ba4"
+              },
+              {
+                "path": "references-native-import-review.bmp",
+                "width": 720,
+                "height": 530,
+                "sha256": "69b05485864df69588b8cce351d2f283402cb369d77fddb742e466952689a6e5"
+              },
+              {
+                "path": "references-native-local-compatible-input.bmp",
+                "width": 960,
+                "height": 728,
+                "sha256": "8a83d294f1c7c06080b90de4d1828703295a4a0ab9ec9a146959413432bd1f93"
+              },
+              {
+                "path": "references-native-bound-input.bmp",
+                "width": 960,
+                "height": 728,
+                "sha256": "1ccb3e07973322415504e2a8e20169a66d39b0c0ce70f37255d4fe338e7a77d8"
+              },
+              {
+                "path": "references-native-relocation-review.bmp",
+                "width": 720,
+                "height": 530,
+                "sha256": "379579704e203935ade139aed81e5bc096d4d6b3de52cc74c067abf436eda228"
+              },
+              {
+                "path": "references-native-relocation-complete.bmp",
+                "width": 960,
+                "height": 728,
+                "sha256": "1caad498e52a7771473f88ffa4532f3a56f4c5eba0ae59fc917eba52d4cae22f"
+              }
+            ],
+            "limits": [
+              "Only the named hosted Windows image, ordinary/spaced path case and observed desktop DPI are established.",
+              "Deterministic hostile transfer cases inject only a gate-owned provider response boundary, not live upstream responses.",
+              "RefSeq dated hashes bind observed annotation bytes; a versioned assembly does not make its annotation directory immutable.",
+              "No updater, release promotion, institutional endpoint acceptance or realistic scientific benchmark is exercised."
+            ],
+            "appFiles": {
+              "NativeWorkbench.exe": "3e374c9b12e694cf8d8f9e2ce2e5eaf88abad9adf9d8e81d8ad16c16428dcdcb",
+              "WorkbenchBridge.exe": "e1e99d5d0fe88cacd91852bbf302f9bfe414745e911362c73c8dd724fbbf7a9d",
+              "workspace\\app_version.py": "5aca6d5165ccc3d40e11086fb988f64390ba3b929150e30a88ea015f8a852965",
+              "workspace\\catalog.py": "8269f3ff23500c8f5b3321d475573b94f960d0534271cf724a8ac3621adc311f",
+              "workspace\\core_checks.py": "431598722c8c261683e123b255d008210abedb13e90e68d7bec0e6b1df905d70",
+              "workspace\\cwl_export.py": "5773f89433bc11f3cc9708e33994ec80f7c7bf8f6465c9ac8bb8da11c8181596",
+              "workspace\\dag_routing.py": "eb79a385a6426e8ce9778124620fe48c69e8c6ca3a7a9351b95780c99e869fe4",
+              "workspace\\desktop_host.py": "d3bff49a4436d57b153af9ff270003bf4eef8a7d44245c07d61bb834ea74db74",
+              "workspace\\desktop_model.py": "3904ae9e38fe214110e472167c292b183c39dca60ce01407c3533474227597f6",
+              "workspace\\diagnostics.py": "fa743c69179a13b66dc000348a3e2954616a349163f1103a8cd9f50d61793124",
+              "workspace\\engine.py": "888927ee7019a5317db0458d34a72f2989fd6e6dc0b49e61a0f15fe96ccf8363",
+              "workspace\\example.py": "fb558de8dc3f49f68550af3e08d768e8a99c5cd9e8d466ca357dcecc3dd699b3",
+              "workspace\\execution_resources.py": "33329a740602199f2931b90fde638a0780ed6fa28d2cf15aa15518d8ee8bdae9",
+              "workspace\\file_io.py": "ab6034e617504c8c264c9c53201174fdae88440765db114f01ce39eafcb2d67e",
+              "workspace\\pack_checks.py": "687a775f637ad12e55a04fac6c05292174c457bd551455f0dbffeb15d1f544a1",
+              "workspace\\pack_manager.py": "282b8370cccd6d86d00f6d2a85fe99669eb1d9b9953a9327c65c323a4a780b5d",
+              "workspace\\pack_security.py": "2d1fa4a4267f5cecb0d583c7b43fc59dc8645125c59e3db69c4d6fa307ff6cc0",
+              "workspace\\performance.py": "8f2e985ae95cf1856de64a5e051f681b0e78a9974dc312d0daf55331a523c5b6",
+              "workspace\\project_manager.py": "f01946694516b4a4fbe98ef8b14715a3e0e446d385b94438a26afc713ec86cdf",
+              "workspace\\readiness.py": "e8fdbaba0aa430a539e9214b711e14466e9597456527ec33eed687f898c33676",
+              "workspace\\recovery.py": "568d48098fe7fb01cfa800ac1fd52373d4d1bbff689f49207242065f9901d6b5",
+              "workspace\\reference_indexes.py": "fb6b20dd123f4d83896edc364868da6fdf779f915e4ae2e9e110cce1c1740203",
+              "workspace\\reference_library.py": "2416af2e3fb9aa80bcf1473037f4e248f9099600eb06ee707fee4b525b11baf2",
+              "workspace\\reference_manager.py": "af980e1ded0e01eb214424d29147043a21762b4e4708cf675dd0e8b183464cf6",
+              "workspace\\reference_ncbi.py": "1b1dec1af7c8cefbf94a49c6508ecfeacd2d93b89d3f72c041b18b04e526f5e9",
+              "workspace\\reference_provenance.py": "e2915eb46e3ca86cbf89297dadeec48925f2c9a667e85057bc3b9986e2735ac9",
+              "workspace\\reference_provider.py": "3bf51daae305ef16c0cff0a6bc2b65f76bc6013f7b1456da07fa8d869c5f0832",
+              "workspace\\reference_transfer.py": "105662115fbc1e477e40d898417a04ef81d1015241512af33b2d30a100ccde8d",
+              "workspace\\run_queue.py": "2dbb8387ba758259a68dc213ade820be027529e4f1d622e101ed96367c97cf6c",
+              "workspace\\sample_table.py": "a3ce7ac6f31fd044adf6abc90d7c8b83b5a57630212ebca973022ba4a7570f4e",
+              "workspace\\service.py": "fe64f8c177ca8ddb5f98773f6cbfbef99d1df53ae9c634227bde57c1d5c5725e",
+              "workspace\\setup_manager.py": "4432c2c6c6091ebe4aeb57e29555e4d21cbe34b9d3ad8a2fef58fa13022fb853",
+              "workspace\\verify_installation.py": "dc33c51ebd52f9a812dfa6df0fcd083a04d144769edc0caa50147edab32358cf"
+            },
+            "localImport": {
+              "record": {
+                "assembly": "fixture-v1",
+                "assembly_accession": "LOCAL-FIXTURE",
+                "files": [
+                  {
+                    "bytes": 3059,
+                    "filename": "local-reference.fa",
+                    "format": "fasta",
+                    "id": "genome",
+                    "kind": "genome",
+                    "label": "Genome FASTA",
+                    "original_path": "D:\\a\\_temp\\reference-management-evidence\\local-reference-inputs\\local-reference.fa",
+                    "path": "D:\\a\\_temp\\reference-management-evidence\\local-library\\ref-d611568145c14912\\local-reference.fa",
+                    "sha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+                    "source_bytes": 3059,
+                    "source_filename": "local-reference.fa",
+                    "source_sha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+                    "validation": {
+                      "format_header": "passed (basic prefix only)",
+                      "gzip_crc": "not applicable",
+                      "sha256": "computed locally; not a publisher signature"
+                    }
+                  },
+                  {
+                    "bytes": 54,
+                    "compressed_bytes": 64,
+                    "compressed_sha256": "707050fe5651316d172a38447b7f16a65ea2f2fd177b7c0780640b93eed1536f",
+                    "filename": "local-annotation.gtf",
+                    "format": "gtf",
+                    "id": "annotation",
+                    "kind": "annotation",
+                    "label": "Gene annotation GTF",
+                    "original_path": "D:\\a\\_temp\\reference-management-evidence\\local-reference-inputs\\local-annotation.gtf.gz",
+                    "path": "D:\\a\\_temp\\reference-management-evidence\\local-library\\ref-d611568145c14912\\local-annotation.gtf",
+                    "sha256": "91848fdd3b858a542345b55c02a59a62ed6d119f8cd998290e2fbe1fa436b1e0",
+                    "source_bytes": 64,
+                    "source_filename": "local-annotation.gtf.gz",
+                    "source_sha256": "707050fe5651316d172a38447b7f16a65ea2f2fd177b7c0780640b93eed1536f",
+                    "validation": {
+                      "format_header": "passed (basic prefix only)",
+                      "gzip_crc": "passed",
+                      "sha256": "computed locally; not a publisher signature"
+                    }
+                  }
+                ],
+                "folder": "D:\\a\\_temp\\reference-management-evidence\\local-library\\ref-d611568145c14912",
+                "id": "d611568145c149128adb208ec15949d7",
+                "imported_at": "2026-10-08T22:44:19.631480Z",
+                "integrity_notice": "Files are copied into a verified local bundle. Species, assembly and source are user-declared, not provider-authenticated. Original files are retained. Basic FASTA/GTF checks do not establish biological compatibility.",
+                "label": "Synthetic local import",
+                "origin": "local-import",
+                "provider": "local-import",
+                "provider_name": "Local reference import",
+                "receipt_path": "D:\\a\\_temp\\reference-management-evidence\\local-library\\ref-d611568145c14912\\reference.json",
+                "receipt_sha256": "430ac94f8f784cca95dcd4b9090de06e5c4860da6e4c6e807f64b18c730ab829",
+                "release": "2026-test",
+                "schema": 1,
+                "source": "Local laboratory fixture; user supplied",
+                "species": "Synthetic scientific fixture",
+                "user_declared": {
+                  "assembly": "fixture-v1",
+                  "assembly_accession": "LOCAL-FIXTURE",
+                  "label": "Synthetic local import",
+                  "release": "2026-test",
+                  "source": "Local laboratory fixture; user supplied",
+                  "species": "Synthetic scientific fixture"
+                },
+                "available": true,
+                "status": "ready",
+                "error": ""
+              },
+              "originalHashes": {
+                "D:\\a\\_temp\\reference-management-evidence\\local-reference-inputs\\local-reference.fa": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+                "D:\\a\\_temp\\reference-management-evidence\\local-reference-inputs\\local-annotation.gtf.gz": "707050fe5651316d172a38447b7f16a65ea2f2fd177b7c0780640b93eed1536f"
+              },
+              "staleTokenError": "references/import: This reference review is no longer available. Review it again before continuing.",
+              "changedFileError": "Local reference bytes changed since review; review it again.",
+              "reusedTokenError": "references/import: This reference review is no longer available. Review it again before continuing."
+            },
+            "relocation": {
+              "oldPaths": {
+                "genome": "D:\\a\\_temp\\reference-management-evidence\\local-library\\ref-d611568145c14912\\local-reference.fa",
+                "annotation": "D:\\a\\_temp\\reference-management-evidence\\local-library\\ref-d611568145c14912\\local-annotation.gtf"
+              },
+              "newRecord": {
+                "assembly": "fixture-v1",
+                "assembly_accession": "LOCAL-FIXTURE",
+                "files": [
+                  {
+                    "bytes": 3059,
+                    "filename": "local-reference.fa",
+                    "format": "fasta",
+                    "id": "genome",
+                    "kind": "genome",
+                    "label": "Genome FASTA",
+                    "original_path": "D:\\a\\_temp\\reference-management-evidence\\local-reference-inputs\\local-reference.fa",
+                    "path": "D:\\a\\_temp\\reference-management-evidence\\relocated-library\\ref-d611568145c14912-bc9012c3\\local-reference.fa",
+                    "sha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+                    "source_bytes": 3059,
+                    "source_filename": "local-reference.fa",
+                    "source_sha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+                    "validation": {
+                      "format_header": "passed (basic prefix only)",
+                      "gzip_crc": "not applicable",
+                      "sha256": "computed locally; not a publisher signature"
+                    }
+                  },
+                  {
+                    "bytes": 54,
+                    "compressed_bytes": 64,
+                    "compressed_sha256": "707050fe5651316d172a38447b7f16a65ea2f2fd177b7c0780640b93eed1536f",
+                    "filename": "local-annotation.gtf",
+                    "format": "gtf",
+                    "id": "annotation",
+                    "kind": "annotation",
+                    "label": "Gene annotation GTF",
+                    "original_path": "D:\\a\\_temp\\reference-management-evidence\\local-reference-inputs\\local-annotation.gtf.gz",
+                    "path": "D:\\a\\_temp\\reference-management-evidence\\relocated-library\\ref-d611568145c14912-bc9012c3\\local-annotation.gtf",
+                    "sha256": "91848fdd3b858a542345b55c02a59a62ed6d119f8cd998290e2fbe1fa436b1e0",
+                    "source_bytes": 64,
+                    "source_filename": "local-annotation.gtf.gz",
+                    "source_sha256": "707050fe5651316d172a38447b7f16a65ea2f2fd177b7c0780640b93eed1536f",
+                    "validation": {
+                      "format_header": "passed (basic prefix only)",
+                      "gzip_crc": "passed",
+                      "sha256": "computed locally; not a publisher signature"
+                    }
+                  }
+                ],
+                "folder": "D:\\a\\_temp\\reference-management-evidence\\relocated-library\\ref-d611568145c14912-bc9012c3",
+                "id": "d611568145c149128adb208ec15949d7",
+                "imported_at": "2026-10-08T22:44:19.631480Z",
+                "integrity_notice": "Files are copied into a verified local bundle. Species, assembly and source are user-declared, not provider-authenticated. Original files are retained. Basic FASTA/GTF checks do not establish biological compatibility.",
+                "label": "Synthetic local import",
+                "origin": "local-import",
+                "previous_location": {
+                  "folder": "D:\\a\\_temp\\reference-management-evidence\\local-library\\ref-d611568145c14912",
+                  "receipt_path": "D:\\a\\_temp\\reference-management-evidence\\local-library\\ref-d611568145c14912\\reference.json",
+                  "receipt_sha256": "430ac94f8f784cca95dcd4b9090de06e5c4860da6e4c6e807f64b18c730ab829"
+                },
+                "provider": "local-import",
+                "provider_name": "Local reference import",
+                "receipt_path": "D:\\a\\_temp\\reference-management-evidence\\relocated-library\\ref-d611568145c14912-bc9012c3\\reference.json",
+                "receipt_sha256": "b03be90ba105c5005c6b4a5c85daaa7414350cac669a542a6fc681bfb4a9b891",
+                "release": "2026-test",
+                "relocated_at": "2026-10-08T22:44:19.831936Z",
+                "schema": 1,
+                "source": "Local laboratory fixture; user supplied",
+                "species": "Synthetic scientific fixture",
+                "user_declared": {
+                  "assembly": "fixture-v1",
+                  "assembly_accession": "LOCAL-FIXTURE",
+                  "label": "Synthetic local import",
+                  "release": "2026-test",
+                  "source": "Local laboratory fixture; user supplied",
+                  "species": "Synthetic scientific fixture"
+                },
+                "available": true,
+                "status": "ready",
+                "error": ""
+              },
+              "oldReceiptSha256": "430ac94f8f784cca95dcd4b9090de06e5c4860da6e4c6e807f64b18c730ab829",
+              "queuedJob": {
+                "job_id": "c9a019666777f9c12b5111d6dcb3c32d",
+                "run_id": "c9a019666777f9c12b5111d6dcb3c32d",
+                "batch_id": "cfdb778d356a312e90388b97b5e8e010",
+                "sample_id": "",
+                "metadata": {},
+                "name": "Index a reference",
+                "status": "queued",
+                "folder": "D:\\a\\_temp\\reference-management-evidence\\frozen-reference-results\\run-20261008-224419-6928c3cb",
+                "plan_sha256": "8e9642dbabf7a103e4e6e63fb1d9462ac5361254811188b893acc6c2a7076899",
+                "files": {
+                  "graph.json": "ff3068efae267dc0d564ebe0d14e4243e96f79df20d3e9bc722d89605d0d0a33",
+                  "methods-planned.txt": "93db845a56699a2789cfdfcb262c0a8ead7e034bd1f66a4ae6df18ca92e633a8",
+                  "performance.json": "af8e0741bf1987dc480ea68e29d21025dea78a708bd451545df2d9642a4d2e9a",
+                  "pipeline.svg": "dfe7476ba2c209e064da6f60dfde98a570da24af6e90f06a0575cc1ac29b134b",
+                  "plan.json": "ba9358d9844fefcaded8146e4678bcf5418409d4af0a07cfa5fdec17213907e2",
+                  "reference-provenance.json": "c90a7cb3cd94b78620e81a9c50b5a772d2e98f98306051fb110997b0410b5723",
+                  "workflow.cwl": "6ecaf1449e5deb81d01fcdde017951254b570547a7ea9f11bcbd9dcbed657534"
+                },
+                "created_at": "2026-10-08T22:44:19.713Z",
+                "started_at": "",
+                "finished_at": "",
+                "message": "Ready. Choose Start queue to execute this frozen plan."
+              },
+              "frozenCompanions": {
+                "graph.json": "ff3068efae267dc0d564ebe0d14e4243e96f79df20d3e9bc722d89605d0d0a33",
+                "methods-planned.txt": "93db845a56699a2789cfdfcb262c0a8ead7e034bd1f66a4ae6df18ca92e633a8",
+                "performance.json": "af8e0741bf1987dc480ea68e29d21025dea78a708bd451545df2d9642a4d2e9a",
+                "pipeline.svg": "dfe7476ba2c209e064da6f60dfde98a570da24af6e90f06a0575cc1ac29b134b",
+                "plan.json": "ba9358d9844fefcaded8146e4678bcf5418409d4af0a07cfa5fdec17213907e2",
+                "reference-provenance.json": "c90a7cb3cd94b78620e81a9c50b5a772d2e98f98306051fb110997b0410b5723",
+                "workflow.cwl": "6ecaf1449e5deb81d01fcdde017951254b570547a7ea9f11bcbd9dcbed657534"
+              },
+              "completedJob": {
+                "job_id": "c9a019666777f9c12b5111d6dcb3c32d",
+                "run_id": "c9a019666777f9c12b5111d6dcb3c32d",
+                "batch_id": "cfdb778d356a312e90388b97b5e8e010",
+                "sample_id": "",
+                "metadata": {},
+                "name": "Index a reference",
+                "status": "completed",
+                "folder": "D:\\a\\_temp\\reference-management-evidence\\frozen-reference-results\\run-20261008-224419-6928c3cb",
+                "plan_sha256": "8e9642dbabf7a103e4e6e63fb1d9462ac5361254811188b893acc6c2a7076899",
+                "files": {
+                  "graph.json": "ff3068efae267dc0d564ebe0d14e4243e96f79df20d3e9bc722d89605d0d0a33",
+                  "methods-planned.txt": "93db845a56699a2789cfdfcb262c0a8ead7e034bd1f66a4ae6df18ca92e633a8",
+                  "performance.json": "af8e0741bf1987dc480ea68e29d21025dea78a708bd451545df2d9642a4d2e9a",
+                  "pipeline.svg": "dfe7476ba2c209e064da6f60dfde98a570da24af6e90f06a0575cc1ac29b134b",
+                  "plan.json": "ba9358d9844fefcaded8146e4678bcf5418409d4af0a07cfa5fdec17213907e2",
+                  "reference-provenance.json": "c90a7cb3cd94b78620e81a9c50b5a772d2e98f98306051fb110997b0410b5723",
+                  "workflow.cwl": "6ecaf1449e5deb81d01fcdde017951254b570547a7ea9f11bcbd9dcbed657534"
+                },
+                "created_at": "2026-10-08T22:44:19.713Z",
+                "started_at": "2026-10-08T22:44:19.885Z",
+                "finished_at": "2026-10-08T22:44:20.034Z",
+                "message": "Complete"
+              },
+              "indexDictionary": [
+                [
+                  "starter",
+                  3000
+                ]
+              ]
+            },
+            "guiFixture": {
+              "files": [
+                {
+                  "kind": "genome",
+                  "path": "D:\\a\\_temp\\reference-management-evidence\\local-reference-inputs\\local-reference.fa"
+                },
+                {
+                  "kind": "annotation",
+                  "path": "D:\\a\\_temp\\reference-management-evidence\\local-reference-inputs\\local-annotation.gtf.gz"
+                }
+              ],
+              "metadata": {
+                "label": "Synthetic local import",
+                "species": "Synthetic scientific fixture",
+                "assembly": "fixture-v1",
+                "assembly_accession": "LOCAL-FIXTURE",
+                "source": "Local laboratory fixture; user supplied",
+                "release": "2026-test"
+              },
+              "defaultDestination": "D:\\a\\_temp\\reference-management-evidence\\relocated-library"
+            },
+            "nativePendingFixture": [
+              {
+                "id": "33bdd72a48524fb193c64f11db80cd79",
+                "status": "paused",
+                "provider": "ensembl-archive",
+                "label": "Saccharomyces cerevisiae",
+                "destination": "D:\\a\\_temp\\reference-management-evidence\\relocated-library",
+                "bytes": 1048576,
+                "total": 3784201,
+                "files": [
+                  {
+                    "id": "genome",
+                    "filename": "Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa.gz"
+                  }
+                ],
+                "error": "",
+                "resumable": true
+              },
+              {
+                "id": "7942605c96fb4b858ef68d4809b085fe",
+                "status": "paused",
+                "provider": "ensembl-archive",
+                "label": "Saccharomyces cerevisiae",
+                "destination": "D:\\a\\_temp\\reference-management-evidence\\relocated-library",
+                "bytes": 1048576,
+                "total": 3784201,
+                "files": [
+                  {
+                    "id": "genome",
+                    "filename": "Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa.gz"
+                  }
+                ],
+                "error": "",
+                "resumable": true
+              }
+            ],
+            "nativeLibraryDefault": {
+              "firstOpen": "D:\\a\\_temp\\reference-management-evidence\\relocated-library",
+              "expected": "D:\\a\\_temp\\reference-management-evidence\\relocated-library",
+              "reopened": "D:\\a\\_temp\\reference-management-evidence\\relocated-library"
+            },
+            "nativeProviders": [
+              "Ensembl archive",
+              "NCBI RefSeq assembly lookup"
+            ],
+            "nativeReviewInvalidation": {
+              "metadataEdited": "label",
+              "serverRefresh": "references/list on close and reopen",
+              "invalidatedReviewStayedDisabled": true,
+              "freshPreviewExplicitlyRequested": true,
+              "reviewedLabel": "Native GUI imported fixture after edit"
+            },
+            "nativeReferenceBinding": {
+              "tool": "bam/reference-index",
+              "path": "D:\\a\\_temp\\reference-management-evidence\\relocated-library\\ref-7467a89332ce48cd\\local-reference.fa",
+              "sha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+              "nativeNotice": "Reference assigned. Its recorded provenance will be retained with the run.",
+              "inspectorEdits": [
+                {
+                  "id": 2008,
+                  "class": "Edit",
+                  "text": "Index a reference",
+                  "bounds": [
+                    253,
+                    352,
+                    674,
+                    386
+                  ],
+                  "hwnd": 131750
+                },
+                {
+                  "id": 2018,
+                  "class": "Edit",
+                  "text": "D:\\a\\_temp\\reference-management-evidence\\relocated-library\\ref-7467a89332ce48cd\\local-reference.fa",
+                  "bounds": [
+                    253,
+                    528,
+                    580,
+                    562
+                  ],
+                  "hwnd": 131740
+                }
+              ]
+            },
+            "dpi": 96,
+            "passed": 10,
+            "finishedUtc": "2026-10-08T22:44:40.471613+00:00"
+          }
+        },
+        "batch": {
+          "file": "batch-evidence/native-batch.json",
+          "bytes": 35953,
+          "sha256": "bf802d6e0fcf159d95b1bdca3d9c0e9652cb74d8252fbd563ae5a508829d9d5e",
+          "summary": {
+            "success": false,
+            "passed": 9,
+            "failed": 1,
+            "skipped": 0,
+            "checks": [
+              "CSV preview requires explicit paired-read and sample-parameter mappings, retains metadata/shared reference and creates no plans or runs before Queue.",
+              "Two immutable plans and exact companion hashes survive editing and clean shutdown/reopen, remain paused and retain historical align 0.4.0 pins beside 0.4.1.",
+              "Explicit Start executes both frozen samples serially with independent read groups, 202 proper-pair alignments, known homozygous SNP and verified CWL/performance/output provenance.",
+              "Explicit combined-report mode maps two separately named sample reports into one declared many-valued report port, retains all row metadata and verifies resulting files without pooling biological reads.",
+              "Changing an input after freezing or altering a prepared companion fails closed; neither produces accepted outputs and corrupt preparation never enters execution.",
+              "During native execution the draft remains editable without mutating the frozen plan; Cancel stops that job, pauses its successor, and explicit Start runs the successor successfully.",
+              "Real minimap2 index build/reuse binds exact references, pack/executable/options and inventory; indexed and ordinary SAM records are identical, changed reference/options create distinct indexes, and reuse reports no invented native counters.",
+              "Corrupt stored index and a modified builder executable both fail closed even when a matching cache identity exists; verified candidate bytes are restored after the negative checks.",
+              "Exact packaged queue and history commits survive brief real external read handles; a persistent handle exhausts the bounded Windows wait with an explicit sharing error, preserves existing jobs/bytes, creates no plan and leaves the host responsive."
+            ],
+            "skips": [],
+            "error": "Native pointer target is not an unobscured application surface.",
+            "traceback": "Traceback (most recent call last):\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_batch_windows.py\", line 869, in main\n    gui_checks(root, evidence, report)\n    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_batch_windows.py\", line 768, in gui_checks\n    ui.set_text(ui.child(102), \"Combine statistics reports\")\n    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_workspace_ui_windows.py\", line 162, in set_text\n    self.click_at((left + right) // 2, (top + bottom) // 2, expected=hwnd)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_workspace_ui_windows.py\", line 330, in click_at\n    raise AssertionError(\"Native pointer target is not an unobscured application surface.\")\nAssertionError: Native pointer target is not an unobscured application surface.\n",
+            "limits": [
+              "Synthetic Starter scientific truth and bounded cancellation fixture; not realistic-data capacity or Windows/Linux benchmarking.",
+              "Observed hosted display DPI only; physical trackpad, high DPI, multi-monitor and institutional endpoint acceptance are not established."
+            ],
+            "sourceCommit": "46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+            "assetSha256": "ce3bcc9c5634dd90f024ecf20f0308a144641c67e0c11c205501518773f6a4c2",
+            "gateSha256": "b063617d02bfb647f70eec9bc4cd314da6f2f347fc66f5af5555b8d5625260f4",
+            "platform": "Windows-2022Server-10.0.20348-SP0"
+          }
+        },
+        "pack": {
+          "file": "batch-evidence/native-align-pack.json",
+          "bytes": 1485,
+          "sha256": "df657d8177aeb8394e0702e1a49e2938ab7c22fbde7a77b1baf61da6e9f3fed1",
+          "summary": {
+            "success": true
+          }
+        },
+        "performance": {
+          "file": "performance-evidence/native-performance.json",
+          "bytes": 6737,
+          "sha256": "dfb7b8ef9ebe4f4a0afc68182516b1f05a2c75e34274f7f21556e0ea1ea389ed",
+          "summary": {
+            "passed": 14,
+            "failed": 0,
+            "skipped": 0,
+            "error": null
+          }
+        },
+        "readiness": {
+          "file": "readiness-evidence/native-readiness.json",
+          "bytes": 8483,
+          "sha256": "0d6560f618f56e96d7b8ceb085d4393b26872e1aca8675d8bbb12802310d5290",
+          "summary": {
+            "success": true,
+            "passed": 5,
+            "failed": 0,
+            "skipped": 0,
+            "checks": [
+              "Readiness blocks missing input/destination, leaves no probe, preserves incomplete legacy previews and explicitly defers execution and complete integrity checks.",
+              "Real native minimap2/SAMtools/BCFtools starter workflow retains 202 paired alignments and starter:1351 G>A, GT=1/1 with independently checked output hashes.",
+              "Frozen five-step Starter run binds phase timings, input sizes and real Windows Job Object measurements for all 17 exec stages, labels any live-descendant snapshot partial and leaves its copy without fabricated process counters.",
+              "Explicit diagnostic Save writes only the reviewed JSON and checksum/README, excludes synthetic private names and rejects token reuse without another export.",
+              "Native Readiness modal and diagnostics preview/save controls work; Close saves nothing and explicit Save preserves the exact displayed JSON."
+            ],
+            "skips": [],
+            "limits": [
+              "Synthetic small-data gate, not a Windows-versus-Linux benchmark or large-data capacity estimate.",
+              "Display assertions cover only the observed runner DPI; physical trackpad, multiple displays and institutional endpoint acceptance are not tested."
+            ],
+            "sourceCommit": "46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+            "assetSha256": "ce3bcc9c5634dd90f024ecf20f0308a144641c67e0c11c205501518773f6a4c2",
+            "gateSha256": "60483711e84717bd0676fb400d86e9e01a0e7e4b45cf2c9184bb1fba5dc7aa3f",
+            "platform": "Windows-2022Server-10.0.20348-SP0",
+            "dpi": 96
+          }
+        },
+        "recovery": {
+          "file": "recovery-evidence/native-recovery.json",
+          "bytes": 75449,
+          "sha256": "b6218d3fc18e207c66ae7334f411b1c68d87649ae601a4c878be73d9e64210ec",
+          "summary": {
+            "success": true,
+            "passed": 12,
+            "failed": 0,
+            "skipped": 0,
+            "checks": [
+              "An explicit reviewed restart creates a new paused plan; Start reuses four verified completed native steps byte-for-byte, rebuilds the path-bearing report and preserves the source result, retains known scientific truth and does not fabricate native measurements.",
+              "Production Engine reviews invalidate changed input bytes, parameters and exact pack pins with their descendants; a tampered intermediate BAM invalidates its producer and descendants while the verified ancestor remains reusable.",
+              "Real native independent branches obey CPU-slot and maximum-step admission limits, unknown requirements run exclusively, and two explicitly reserved branches overlap; the queued policy stays frozen after settings change, with separate temporary directories and 80,800 records per branch. These are admission observations, not benchmarks.",
+              "Cancellation reaches both active native branches and the durable queue records the job as cancelled; no branch remains marked running.",
+              "A deliberately changed frozen input fails both consumers, blocks their dependent BAM step and pauses the queue without silently retrying analysis.",
+              "An explicitly selected three-input project contains CWL, relative file identities and exact pack requirements without executables; offline import and a second folder move preserve input bytes, project/sample metadata in plan/run/CWL/methods and the known native scientific result.",
+              "An external-data project reports all absent inputs, rejects an incorrect explicit mapping and imports only byte-identical mappings; an unavailable exact pack version stays unresolved without substitution or download.",
+              "Project inspection rejects a checksum-tampered member, parent traversal and a case-colliding archive before extraction; no outside file is created.",
+              "A separately labelled abrupt-termination fixture leaves a paused interrupted job; after exact service bytes are restored, explicit restart reuses only its verified completed ancestor and produces the expected 202 alignments and homozygous SNP.",
+              "Native Resources edits CPU budget, maximum parallel steps, one explicit reservation and temporary storage; Save persists those values and leaves other step requirements visibly unknown.",
+              "Native recorded-result Restart shows each verified reuse decision, queues without running, and explicit Queue Start creates a scientifically correct new result.",
+              "Native Projects keeps Import disabled for missing data, verifies all three explicit file mappings, confirms import into a new editable draft without analysis, and shows a cancellable export preview with file hashes and exact pack requirements."
+            ],
+            "skips": [],
+            "limits": [
+              "Synthetic scientific truth and declared CPU admission observations; not CPU enforcement, realistic-data capacity or Windows/Linux benchmarking.",
+              "Abrupt termination uses a separately labelled callback barrier extraction; service bytes are restored before exact-host restart.",
+              "Hosted display DPI only; physical trackpad, high DPI, multi-monitor and institutional endpoint acceptance are not established."
+            ],
+            "sourceCommit": "46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+            "assetSha256": "ce3bcc9c5634dd90f024ecf20f0308a144641c67e0c11c205501518773f6a4c2",
+            "gateSha256": "ef75ee62dcf73bbf9a0a7d7f047d74c972f6e5c23b874afc37cecafe3f021edb",
+            "platform": "Windows-2022Server-10.0.20348-SP0",
+            "dpi": 96
+          }
+        },
+        "library": {
+          "file": "library-evidence/native-tool-library.json",
+          "bytes": 11352,
+          "sha256": "a792511a965094d6c40c99e3a2bde88050683dbb71a9e57cd92d7116b978f7d6",
+          "summary": {
+            "success": true,
+            "passed": 7,
+            "checks": [
+              "Fresh exact Starter displays native collapsed categories and program-named tools without a category dropdown.",
+              "Category pointer, Left/Right, Space and Enter toggle headings without opening tools or adding nodes.",
+              "Search reveals collapsed tools and empty results, and restores repeated open/closed choices when cleared.",
+              "A child opens its standalone form on one click; editing that form preserves native tree handles and selection.",
+              "Categories cannot be dragged into a workflow; child single click selects only, double click/Add/drag each add exactly one tool, and standalone settings survive.",
+              "At minimum size real library wheel moves down and back; a committed model refresh preserves the scrolled viewport, item handles, selection and expanded categories.",
+              "An independently imported pack supplies a new category, category-name search result and working selectable child without changing application code."
+            ],
+            "skips": [],
+            "limits": [
+              "Actual reported DPI only; finite screenshots are not a physical-display flicker guarantee.",
+              "The existing workspace gate separately verifies compatible port connections and the native 202-record scientific chain."
+            ],
+            "sourceCommit": "46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+            "assetSha256": "ce3bcc9c5634dd90f024ecf20f0308a144641c67e0c11c205501518773f6a4c2",
+            "gateSha256": "ed419575da77af7c88742e6eed12243b958df5e0ad36e6edeeaa61d0bf9f875f",
+            "platform": "Windows-2022Server-10.0.20348-SP0",
+            "dpi": 96
+          }
+        },
+        "workspace": {
+          "file": "workspace-evidence/native-ui.json",
+          "bytes": 23971,
+          "sha256": "42b5efb7254e1ee77541072ca8f754ee28b87d00c25a47b38b46c7dbf60364e3",
+          "summary": {
+            "success": true,
+            "passed": 32,
+            "checks": [
+              "Default standalone mode",
+              "Independent preserved tool and workflow graphs",
+              "Compatible graph edge",
+              "Bounded native compatibility preview",
+              "Atomic cycle and semantic type rejection",
+              "Per-tool settings and input retention",
+              "Workflow additions leave ports unbound without automatic source boxes",
+              "Explicit reusable input owns one file editor and connects without duplication",
+              "Native minimap2 alignment chains to SAMtools coordinate-sorted binary BAM using two explicit inputs",
+              "All 202 synthetic mapped proper-pair records, mate flags, sequence, quality and typed tags survive SAM-to-BAM conversion",
+              "Manage tools loads installed packs on its first click without a modal error and reopens cleanly",
+              "First click opens a previously selected workflow-library row in empty tool mode",
+              "Single-click standalone tool form",
+              "Separate queued native double-click notification opens its hit row after selection clears",
+              "Three independent panes with general settings",
+              "Actual mouse drag from tool list onto workflow canvas twice",
+              "Actual compatible output-to-input mouse connection",
+              "Canvas selection displays tool options on right",
+              "General settings remain available in workflow mode",
+              "Standalone input and browsing folder survive workflow mode",
+              "Mode-specific status guidance replaces the previous workflow drag hint",
+              "Workflow graph/selection survives mode switching",
+              "Normal/minimum observed pane separation",
+              "Real repeated option scrolling leaves static text identical to a clean repaint",
+              "Blank-canvas mouse drag pans and reverses the viewport",
+              "Zoom buttons decrease, increase and reset scale; scaled card hit testing selects both tools",
+              "Injected one-unit native Ctrl-wheel deltas accumulate into visible zoom",
+              "Editing a tool immediately before Add input preserves its draft through the nested modal loop",
+              "Native Add input creates one independently editable reference file slot",
+              "Actual mouse connection from an explicit input output socket to a tool input without duplicate file fields",
+              "Header hover close deletes a tool and Undo restores its selection",
+              "Header hover close deletes an explicit input and Undo restores its files"
+            ],
+            "skips": [],
+            "sourceCommit": "46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+            "assetSha256": "ce3bcc9c5634dd90f024ecf20f0308a144641c67e0c11c205501518773f6a4c2",
+            "gateSha256": "30a38a4f5bc8d5a5af93eee80560963f87e4ef019a3e98ec9780f1964d847d13",
+            "platform": "Windows-2022Server-10.0.20348-SP0"
+          }
+        },
+        "transport": {
+          "file": "transport-evidence/native-transport.json",
+          "bytes": 2668,
+          "sha256": "107ece12d035025f03dd5c85370d24edf8282bfdb65f7cbfc726982d2379b72a",
+          "summary": {
+            "success": true,
+            "passed": 3,
+            "failed": 0,
+            "checks": [
+              "Actual native queue cancellation and status updates pass a blocked index read; the real local job records cancellation before the delay is released.",
+              "Closing/reopening the index dialog discards its old response by generation; only a new explicit Verify updates the fresh view.",
+              "Native close completes with a pending read and preserves the cancelled queue record; remaining private-host work is contained by the owning desktop process tree."
+            ],
+            "limits": [
+              "Separate candidate extraction: exact native executable, deliberately instrumented private host index read. This does not claim unchanged-host execution during the transport fixture.",
+              "Synthetic cancellation fixture, not throughput or realistic-data benchmarking; hosted display only."
+            ],
+            "sourceCommit": "46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+            "assetSha256": "ce3bcc9c5634dd90f024ecf20f0308a144641c67e0c11c205501518773f6a4c2",
+            "gateSha256": "62cd88c99ce694c6509443c276519dab087a9bff4e8d64edb82381c7732584d7",
+            "platform": "Windows-2022Server-10.0.20348-SP0"
+          }
+        }
+      }
+    },
+    {
+      "path": "spaces",
+      "artifact": {
+        "id": 11583369155,
+        "url": "https://github.com/comparativechrono/workbench/actions/runs/37855047291/artifacts/11583369155",
+        "bytes": 26733378,
+        "sha256": "9516aab2f2b96a149116477b1585773c2da10db18f67a4c642cee0e87c8b178a",
+        "officialSizeDigestAndCrcVerified": true
+      },
+      "reports": {
+        "live": {
+          "file": "reference-live-evidence/native-references-live.json",
+          "bytes": 20503,
+          "sha256": "19ccf9d5394d1b6f0c248065a8730fdc4cb1e95bff78a0efcfdb3e1752bde14f",
+          "report": {
+            "schema": 1,
+            "success": true,
+            "suite": "live",
+            "appVersion": "0.15.0",
+            "sourceCommit": "46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+            "assetName": "native-workbench-0.15.0-starter-windows.zip",
+            "assetSha256": "ce3bcc9c5634dd90f024ecf20f0308a144641c67e0c11c205501518773f6a4c2",
+            "gateSha256": "6e61ffe14fc6c6bcb4838fa4d142d28ff3e7d5eee71c9fbaa479717a715031c0",
+            "platform": "Windows-2022Server-10.0.20348-SP0",
+            "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+            "startedUtc": "2026-10-08T22:43:53.366956+00:00",
+            "nativeWindowsExecuted": true,
+            "nativeGUILaunched": false,
+            "nativeGUIValidated": false,
+            "checks": [
+              "Live release-pinned yeast search and five-product discovery.",
+              "Cancellation after transferred bytes removed only its partial download and published no reference.",
+              "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+              "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+              "Completed CWL export preserves the real downloaded yeast reference receipt, input hash, frozen plan and native output provenance.",
+              "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods.",
+              "Installed application and starter pack integrity checks passed after reference use.",
+              "Live NCBI exact GCF_000146045.2 lookup discovers genome, GTF and protein only; all three downloaded compressed/expanded identities match independently dated pins with MD5 and gzip verification and observed annotation metadata retained.",
+              "A socket-denied fresh host reuses the downloaded NCBI genome through its compatible FASTA input and retains provider/accession provenance in reviewed methods."
+            ],
+            "skips": [],
+            "captures": [],
+            "limits": [
+              "Only the named hosted Windows image, ordinary/spaced path case and observed desktop DPI are established.",
+              "Deterministic hostile transfer cases inject only a gate-owned provider response boundary, not live upstream responses.",
+              "RefSeq dated hashes bind observed annotation bytes; a versioned assembly does not make its annotation directory immutable.",
+              "No updater, release promotion, institutional endpoint acceptance or realistic scientific benchmark is exercised."
+            ],
+            "appFiles": {
+              "NativeWorkbench.exe": "3e374c9b12e694cf8d8f9e2ce2e5eaf88abad9adf9d8e81d8ad16c16428dcdcb",
+              "WorkbenchBridge.exe": "e1e99d5d0fe88cacd91852bbf302f9bfe414745e911362c73c8dd724fbbf7a9d",
+              "workspace\\app_version.py": "5aca6d5165ccc3d40e11086fb988f64390ba3b929150e30a88ea015f8a852965",
+              "workspace\\catalog.py": "8269f3ff23500c8f5b3321d475573b94f960d0534271cf724a8ac3621adc311f",
+              "workspace\\core_checks.py": "431598722c8c261683e123b255d008210abedb13e90e68d7bec0e6b1df905d70",
+              "workspace\\cwl_export.py": "5773f89433bc11f3cc9708e33994ec80f7c7bf8f6465c9ac8bb8da11c8181596",
+              "workspace\\dag_routing.py": "eb79a385a6426e8ce9778124620fe48c69e8c6ca3a7a9351b95780c99e869fe4",
+              "workspace\\desktop_host.py": "d3bff49a4436d57b153af9ff270003bf4eef8a7d44245c07d61bb834ea74db74",
+              "workspace\\desktop_model.py": "3904ae9e38fe214110e472167c292b183c39dca60ce01407c3533474227597f6",
+              "workspace\\diagnostics.py": "fa743c69179a13b66dc000348a3e2954616a349163f1103a8cd9f50d61793124",
+              "workspace\\engine.py": "888927ee7019a5317db0458d34a72f2989fd6e6dc0b49e61a0f15fe96ccf8363",
+              "workspace\\example.py": "fb558de8dc3f49f68550af3e08d768e8a99c5cd9e8d466ca357dcecc3dd699b3",
+              "workspace\\execution_resources.py": "33329a740602199f2931b90fde638a0780ed6fa28d2cf15aa15518d8ee8bdae9",
+              "workspace\\file_io.py": "ab6034e617504c8c264c9c53201174fdae88440765db114f01ce39eafcb2d67e",
+              "workspace\\pack_checks.py": "687a775f637ad12e55a04fac6c05292174c457bd551455f0dbffeb15d1f544a1",
+              "workspace\\pack_manager.py": "282b8370cccd6d86d00f6d2a85fe99669eb1d9b9953a9327c65c323a4a780b5d",
+              "workspace\\pack_security.py": "2d1fa4a4267f5cecb0d583c7b43fc59dc8645125c59e3db69c4d6fa307ff6cc0",
+              "workspace\\performance.py": "8f2e985ae95cf1856de64a5e051f681b0e78a9974dc312d0daf55331a523c5b6",
+              "workspace\\project_manager.py": "f01946694516b4a4fbe98ef8b14715a3e0e446d385b94438a26afc713ec86cdf",
+              "workspace\\readiness.py": "e8fdbaba0aa430a539e9214b711e14466e9597456527ec33eed687f898c33676",
+              "workspace\\recovery.py": "568d48098fe7fb01cfa800ac1fd52373d4d1bbff689f49207242065f9901d6b5",
+              "workspace\\reference_indexes.py": "fb6b20dd123f4d83896edc364868da6fdf779f915e4ae2e9e110cce1c1740203",
+              "workspace\\reference_library.py": "2416af2e3fb9aa80bcf1473037f4e248f9099600eb06ee707fee4b525b11baf2",
+              "workspace\\reference_manager.py": "af980e1ded0e01eb214424d29147043a21762b4e4708cf675dd0e8b183464cf6",
+              "workspace\\reference_ncbi.py": "1b1dec1af7c8cefbf94a49c6508ecfeacd2d93b89d3f72c041b18b04e526f5e9",
+              "workspace\\reference_provenance.py": "e2915eb46e3ca86cbf89297dadeec48925f2c9a667e85057bc3b9986e2735ac9",
+              "workspace\\reference_provider.py": "3bf51daae305ef16c0cff0a6bc2b65f76bc6013f7b1456da07fa8d869c5f0832",
+              "workspace\\reference_transfer.py": "105662115fbc1e477e40d898417a04ef81d1015241512af33b2d30a100ccde8d",
+              "workspace\\run_queue.py": "2dbb8387ba758259a68dc213ade820be027529e4f1d622e101ed96367c97cf6c",
+              "workspace\\sample_table.py": "a3ce7ac6f31fd044adf6abc90d7c8b83b5a57630212ebca973022ba4a7570f4e",
+              "workspace\\service.py": "fe64f8c177ca8ddb5f98773f6cbfbef99d1df53ae9c634227bde57c1d5c5725e",
+              "workspace\\setup_manager.py": "4432c2c6c6091ebe4aeb57e29555e4d21cbe34b9d3ad8a2fef58fa13022fb853",
+              "workspace\\verify_installation.py": "dc33c51ebd52f9a812dfa6df0fcd083a04d144769edc0caa50147edab32358cf"
+            },
+            "phase": "Installed application and starter pack integrity checks passed after reference use.",
+            "passed": 9,
+            "updatedUtc": "2026-10-08T22:44:08.294908+00:00",
+            "cancelAtBytes": 1048576,
+            "downloads": [
+              {
+                "id": "genome",
+                "bytes": 12360704,
+                "sha256": "35cc97fccb91762c7a1f0f71b4adb1037b143d48b63fbd3b3f8bad45e5afa44c",
+                "compressed_bytes": 3784201,
+                "compressed_sha256": "a9953096d6a041a01a4cb5352b0232ee9373bf4c050fb23cb7ae673b2e1bb528",
+                "independentPinnedIdentity": true
+              },
+              {
+                "id": "annotation",
+                "bytes": 10463408,
+                "sha256": "8c43c98a3a0db24c9e53fd9d460f096c48de0eabefd955fd25d044c948692623",
+                "compressed_bytes": 595453,
+                "compressed_sha256": "253bd4013785b3c85a6a488bd541c12d8264aa4989046c3530d0d9ea2ecc931e",
+                "independentPinnedIdentity": true
+              },
+              {
+                "id": "cdna",
+                "bytes": 11714100,
+                "sha256": "0a60e3a655949edbed2e774deae38b896e78e623a45809eafe66d15f7062cf4d",
+                "compressed_bytes": 3806426,
+                "compressed_sha256": "3cc5b6bb7ff166cffac5c45317dad7052d06431f43f709ed14b33779702dc6a4",
+                "independentPinnedIdentity": true
+              },
+              {
+                "id": "ncrna",
+                "bytes": 205371,
+                "sha256": "e875aea40e6bfbf9811b73f30a459439fda48d5165fbaea4c2e4a7859e9c3753",
+                "compressed_bytes": 35424,
+                "compressed_sha256": "096064f75fc4c8eaf2845e52dd6d56e1e398f8da434abd8436cfaa2d71a3f604",
+                "independentPinnedIdentity": true
+              },
+              {
+                "id": "protein",
+                "bytes": 5873944,
+                "sha256": "fec10d61996147cbc29ed4587ed0bdeb4e4f5576d66896400b226f2d2d4815a4",
+                "compressed_bytes": 2700059,
+                "compressed_sha256": "67ae76c720e52cec167378ec2b8cb5c5929360fc30de31abb37ae1035ef8455c",
+                "independentPinnedIdentity": true
+              }
+            ],
+            "recordId": "6fcd529335124d53b12fdef61776d5c7",
+            "referenceReceiptSha256": "55ae223622292139b85eb68d10e90f887560605d46782987457d0d0b17f447e4",
+            "cwlReference": {
+              "file": "reference-workflow.cwl",
+              "sha256": "24e55f1781ee893bfc9a1920a6e981577e57f39d21ef7e76e791c02f2e488a1e",
+              "planSha256": "0db64bf32d873d25f132f5fb84d155ccbf36b23fc5e0f2f31cf16b400355d671",
+              "referenceInputs": 1
+            },
+            "nativeIndex": {
+              "contigs": 17,
+              "bases": 12157105,
+              "sha256": "65163e1e9c8cb7b63f43befd8294019b11fba0c18dd37c801e9d356e71e391c3",
+              "dictionary": [
+                [
+                  "I",
+                  230218
+                ],
+                [
+                  "II",
+                  813184
+                ],
+                [
+                  "III",
+                  316620
+                ],
+                [
+                  "IV",
+                  1531933
+                ],
+                [
+                  "V",
+                  576874
+                ],
+                [
+                  "VI",
+                  270161
+                ],
+                [
+                  "VII",
+                  1090940
+                ],
+                [
+                  "VIII",
+                  562643
+                ],
+                [
+                  "IX",
+                  439888
+                ],
+                [
+                  "X",
+                  745751
+                ],
+                [
+                  "XI",
+                  666816
+                ],
+                [
+                  "XII",
+                  1078177
+                ],
+                [
+                  "XIII",
+                  924431
+                ],
+                [
+                  "XIV",
+                  784333
+                ],
+                [
+                  "XV",
+                  1091291
+                ],
+                [
+                  "XVI",
+                  948066
+                ],
+                [
+                  "Mito",
+                  85779
+                ]
+              ]
+            },
+            "installation": {
+              "passed": 7,
+              "failed": 0
+            },
+            "ncbiLive": {
+              "record": {
+                "annotation": {
+                  "name": "SGD R64-5-1",
+                  "provider": "SGD",
+                  "release_date": "2026-07-10",
+                  "status": "Full Annotation"
+                },
+                "assembly": "R64",
+                "assembly_accession": "GCF_000146045.2",
+                "data_notice_url": "https://www.ncbi.nlm.nih.gov/home/about/policies/",
+                "documentation_url": "https://www.ncbi.nlm.nih.gov/datasets/docs/v2/data-processing/policies-annotation/genomeftp/",
+                "downloaded_at": "2026-10-08T22:44:09.842546Z",
+                "files": [
+                  {
+                    "annotation": {
+                      "name": "SGD R64-5-1",
+                      "provider": "SGD",
+                      "release_date": "2026-07-10",
+                      "status": "Full Annotation"
+                    },
+                    "assembly": "R64",
+                    "bytes": 12310392,
+                    "checksum": {
+                      "algorithm": "md5",
+                      "manifest_sha256": "faaed4109ac4412d716f2b0bc2dbce15299133671e3f22f2c95a58d3a890347e",
+                      "manifest_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/md5checksums.txt",
+                      "value": "88c38b957b721dfc50e6c4df03b6242e"
+                    },
+                    "checksum_manifest": {
+                      "sha256": "faaed4109ac4412d716f2b0bc2dbce15299133671e3f22f2c95a58d3a890347e",
+                      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/md5checksums.txt"
+                    },
+                    "compressed_bytes": 3843460,
+                    "compressed_sha256": "1ec41f951b35f2752d5065edeafe6972455609d4383fb36dae12519a60b27a73",
+                    "detail": "Complete genomic sequence file; eukaryotic repeats may be masked to lowercase. Sequence identifiers and case are preserved.",
+                    "effective_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_genomic.fna.gz",
+                    "etag": null,
+                    "filename": "GCF_000146045.2_R64_genomic.fna",
+                    "format": "fasta",
+                    "id": "genome",
+                    "kind": "genome",
+                    "label": "Genome FASTA",
+                    "last_modified": "Mon, 09 Apr 2018 04:20:18 GMT",
+                    "masking": "provider supplied; case preserved",
+                    "path": "D:\\a\\_temp\\reference-live-evidence\\ncbi-live-downloads\\ref-cfdf5cd4d91d4bba\\GCF_000146045.2_R64_genomic.fna",
+                    "sequence_choice": "NCBI assembly genomic sequence file",
+                    "sequence_scope": "NCBI assembly genomic sequence file",
+                    "sha256": "fe42735d3e6242f8c40b457a232940e34ef15eb4502717e54a34ed118face4c1",
+                    "size": 3843460,
+                    "source_filename": "GCF_000146045.2_R64_genomic.fna.gz",
+                    "source_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_genomic.fna.gz",
+                    "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_genomic.fna.gz",
+                    "validation": {
+                      "format_header": "passed (basic prefix only)",
+                      "gzip_crc": "passed",
+                      "provider_md5": "passed",
+                      "sha256": "computed locally; not a publisher signature"
+                    }
+                  },
+                  {
+                    "annotation": {
+                      "name": "SGD R64-5-1",
+                      "provider": "SGD",
+                      "release_date": "2026-07-10",
+                      "status": "Full Annotation"
+                    },
+                    "assembly": "R64",
+                    "bytes": 27121814,
+                    "checksum": {
+                      "algorithm": "md5",
+                      "manifest_sha256": "faaed4109ac4412d716f2b0bc2dbce15299133671e3f22f2c95a58d3a890347e",
+                      "manifest_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/md5checksums.txt",
+                      "value": "09dc355fe3f22fca157d1c4afd7253f8"
+                    },
+                    "checksum_manifest": {
+                      "sha256": "faaed4109ac4412d716f2b0bc2dbce15299133671e3f22f2c95a58d3a890347e",
+                      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/md5checksums.txt"
+                    },
+                    "compressed_bytes": 2293663,
+                    "compressed_sha256": "b43af4bd39ae4d53afe6addb957b448ebdcfba48dd7c18066259b3322fbc8b8c",
+                    "detail": "Observed GTF annotation for this exact assembly; NCBI may update annotation without changing the assembly accession.",
+                    "effective_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_genomic.gtf.gz",
+                    "etag": null,
+                    "filename": "GCF_000146045.2_R64_genomic.gtf",
+                    "format": "gtf",
+                    "id": "annotation",
+                    "kind": "annotation",
+                    "label": "Gene annotations (GTF)",
+                    "last_modified": "Sat, 11 Jul 2026 00:51:46 GMT",
+                    "masking": null,
+                    "path": "D:\\a\\_temp\\reference-live-evidence\\ncbi-live-downloads\\ref-cfdf5cd4d91d4bba\\GCF_000146045.2_R64_genomic.gtf",
+                    "sequence_choice": null,
+                    "sha256": "16da5a5d60a6bd3fdd00eda8dbab64bbbe92294d88ee0a9ac7c3415cd6da1546",
+                    "size": 2293663,
+                    "source_filename": "GCF_000146045.2_R64_genomic.gtf.gz",
+                    "source_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_genomic.gtf.gz",
+                    "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_genomic.gtf.gz",
+                    "validation": {
+                      "format_header": "passed (basic prefix only)",
+                      "gzip_crc": "passed",
+                      "provider_md5": "passed",
+                      "sha256": "computed locally; not a publisher signature"
+                    }
+                  },
+                  {
+                    "annotation": {
+                      "name": "SGD R64-5-1",
+                      "provider": "SGD",
+                      "release_date": "2026-07-10",
+                      "status": "Full Annotation"
+                    },
+                    "assembly": "R64",
+                    "bytes": 3400039,
+                    "checksum": {
+                      "algorithm": "md5",
+                      "manifest_sha256": "faaed4109ac4412d716f2b0bc2dbce15299133671e3f22f2c95a58d3a890347e",
+                      "manifest_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/md5checksums.txt",
+                      "value": "ead80d943dc55bc55731be41620fb641"
+                    },
+                    "checksum_manifest": {
+                      "sha256": "faaed4109ac4412d716f2b0bc2dbce15299133671e3f22f2c95a58d3a890347e",
+                      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/md5checksums.txt"
+                    },
+                    "compressed_bytes": 1848181,
+                    "compressed_sha256": "43b97707ae1a08a4b30c200aba6e5c39be47c674321b096478065a2400b1494e",
+                    "detail": "Accessioned protein products annotated on this assembly; combined RNA files are not included.",
+                    "effective_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_protein.faa.gz",
+                    "etag": null,
+                    "filename": "GCF_000146045.2_R64_protein.faa",
+                    "format": "fasta",
+                    "id": "protein",
+                    "kind": "protein",
+                    "label": "Protein sequences",
+                    "last_modified": "Sat, 11 Jul 2026 00:51:46 GMT",
+                    "masking": null,
+                    "path": "D:\\a\\_temp\\reference-live-evidence\\ncbi-live-downloads\\ref-cfdf5cd4d91d4bba\\GCF_000146045.2_R64_protein.faa",
+                    "sequence_choice": null,
+                    "sha256": "a376bcbd87c6caa8c0d81c2b1feb2d04246b438023bab3ced3821a61db718aac",
+                    "size": 1848181,
+                    "source_filename": "GCF_000146045.2_R64_protein.faa.gz",
+                    "source_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_protein.faa.gz",
+                    "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_protein.faa.gz",
+                    "validation": {
+                      "format_header": "passed (basic prefix only)",
+                      "gzip_crc": "passed",
+                      "provider_md5": "passed",
+                      "sha256": "computed locally; not a publisher signature"
+                    }
+                  }
+                ],
+                "folder": "D:\\a\\_temp\\reference-live-evidence\\ncbi-live-downloads\\ref-cfdf5cd4d91d4bba",
+                "id": "cfdf5cd4d91d4bbabc2a74846e21fe93",
+                "integrity_notice": "Provider transfer checksums detect transfer errors; local SHA-256 records file identity. Neither is a publisher signature.",
+                "label": "Saccharomyces cerevisiae S288C \u2014 R64 \u2014 release GCF_000146045.2",
+                "notice": "Look up an exact versioned RefSeq assembly accession, for example GCF_000146045.2. Genome FASTA, GTF and protein are offered when present. NCBI may update annotations for the same assembly; observed annotation metadata and downloaded file hashes are retained. Combined RNA files are not offered as cDNA or ncRNA. Analysis files stay on this computer.",
+                "provider": "ncbi-refseq",
+                "provider_name": "NCBI RefSeq assembly lookup",
+                "receipt_path": "D:\\a\\_temp\\reference-live-evidence\\ncbi-live-downloads\\ref-cfdf5cd4d91d4bba\\reference.json",
+                "receipt_sha256": "74b0947be362bc3c3b59875c24740787cd8e7d48b8b5a8909e81799722187546",
+                "release": "GCF_000146045.2",
+                "schema": 1,
+                "source_catalog": {
+                  "directory_sha256": "0759f52a5d93afcdccd228d361d04499bad512442799c04b9611a09e425601d2",
+                  "directory_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/",
+                  "sha256": "eea3ad4615328e7cf871868e85cc305c5e836ee8d4be4b37ba85b8be6d85b926",
+                  "url": "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession/GCF_000146045.2/dataset_report"
+                },
+                "species": {
+                  "annotation": {
+                    "name": "SGD R64-5-1",
+                    "provider": "SGD",
+                    "release_date": "2026-07-10",
+                    "status": "Full Annotation"
+                  },
+                  "assembly": "R64",
+                  "assembly_accession": "GCF_000146045.2",
+                  "assembly_status": "current",
+                  "division": "RefSeq",
+                  "genebuild": "SGD R64-5-1",
+                  "id": "GCF_000146045.2",
+                  "name": "Saccharomyces cerevisiae S288C",
+                  "release": "GCF_000146045.2",
+                  "taxon_id": 559292
+                },
+                "warnings": [],
+                "available": true,
+                "status": "ready",
+                "error": ""
+              },
+              "independentPinsDate": "2026-10-08",
+              "expected": {
+                "genome": {
+                  "compressed_bytes": 3843460,
+                  "compressed_sha256": "1ec41f951b35f2752d5065edeafe6972455609d4383fb36dae12519a60b27a73",
+                  "bytes": 12310392,
+                  "sha256": "fe42735d3e6242f8c40b457a232940e34ef15eb4502717e54a34ed118face4c1"
+                },
+                "annotation": {
+                  "compressed_bytes": 2293663,
+                  "compressed_sha256": "b43af4bd39ae4d53afe6addb957b448ebdcfba48dd7c18066259b3322fbc8b8c",
+                  "bytes": 27121814,
+                  "sha256": "16da5a5d60a6bd3fdd00eda8dbab64bbbe92294d88ee0a9ac7c3415cd6da1546"
+                },
+                "protein": {
+                  "compressed_bytes": 1848181,
+                  "compressed_sha256": "43b97707ae1a08a4b30c200aba6e5c39be47c674321b096478065a2400b1494e",
+                  "bytes": 3400039,
+                  "sha256": "a376bcbd87c6caa8c0d81c2b1feb2d04246b438023bab3ced3821a61db718aac"
+                }
+              }
+            },
+            "finishedUtc": "2026-10-08T22:44:10.270901+00:00"
+          }
+        },
+        "management": {
+          "file": "reference-management-evidence/native-reference-management.json",
+          "bytes": 25278,
+          "sha256": "63bbf657d843215a63946a38f0f34f4fe8b9c959e32d69f77ace985e3a47f4d4",
+          "report": {
+            "schema": 1,
+            "success": true,
+            "suite": "management",
+            "appVersion": "0.15.0",
+            "sourceCommit": "46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+            "assetName": "native-workbench-0.15.0-starter-windows.zip",
+            "assetSha256": "ce3bcc9c5634dd90f024ecf20f0308a144641c67e0c11c205501518773f6a4c2",
+            "gateSha256": "6e61ffe14fc6c6bcb4838fa4d142d28ff3e7d5eee71c9fbaa479717a715031c0",
+            "platform": "Windows-2022Server-10.0.20348-SP0",
+            "python": "3.13.16 (tags/v3.13.16:cbc944f, Sep 30 2026, 19:17:50) [MSC v.1944 64 bit (AMD64)]",
+            "startedUtc": "2026-10-08T22:44:10.790494+00:00",
+            "nativeWindowsExecuted": true,
+            "nativeGUILaunched": true,
+            "nativeGUIValidated": true,
+            "checks": [
+              "Exact packaged transfer code pauses after a production chunk, publishes no incomplete record, reopens and rehashes its checkpoint, truncates an uncheckpointed crash suffix and resumes with exact Range/If-Range into independently verified complete bytes; deterministic provider fixture only.",
+              "Malformed Content-Range and changed entity validators are never appended; deterministic responses force a fresh full request whose final bytes still match the independently pinned fixture.",
+              "Changed checkpointed compressed bytes and malformed checkpoint JSON fail closed; explicit discard removes only pending state and preserves ready bundles and unrelated user content.",
+              "Socket-denied exact private host reviews without copying; stale/replayed review tokens and changed reviewed files fail closed; explicit confirmation copies FASTA and gzip GTF with independently checked source/expanded hashes and clearly user-declared provenance.",
+              "Socket-denied typed selection rejects GTF for a FASTA input; reviewed relocation copies and verifies the library while retaining old paths/receipts and exact queued companions. The previously frozen old-path plan then executes native SAMtools with the correct FASTA dictionary and unchanged reference provenance in methods, plan, results and CWL.",
+              "A fresh socket-denied private host reopens the relocated local library and offers its verified FASTA to a compatible native tool without contacting either provider.",
+              "Native References provider selector offers labelled Ensembl archive and NCBI lookup; ordinary control interaction discovers the exact versioned RefSeq assembly and its three products with assembly/provider details visible.",
+              "Actual native Downloads lists durable paused live Ensembl transfers; Pause retains one resumed transfer, explicit Resume completes the independently pinned genome, and confirmed Discard removes the other partial transfer without changing ready references.",
+              "Native Import local edits explicit roles/metadata and previews hashes without copying; editing metadata invalidates confirmation even after a real close/reopen server refresh, and a fresh explicit preview includes the edited declaration. Closing review imports nothing; confirmation then creates one verified bundle. Local library refresh lists both imported products and offers/uses its FASTA in a compatible standalone SAMtools input, with the exact bound path independently read back from the native inspector.",
+              "Native Relocate library chooses an existing directory, presents exact destination/file hashes and original-retention notice, and explicit Copy and switch moves the active library only after all copies verify."
+            ],
+            "skips": [],
+            "captures": [
+              {
+                "path": "references-native-ncbi-discovery.bmp",
+                "width": 960,
+                "height": 728,
+                "sha256": "112f4356c273183fcbfd900c558cc93d0bf06fa1c4bb5e54920b3385a21fc0e0"
+              },
+              {
+                "path": "references-native-paused-downloads.bmp",
+                "width": 960,
+                "height": 728,
+                "sha256": "2beba8e06e99debd45a98e325b7666ed93bec3e6c61d4cfbc9d7c1939cc562be"
+              },
+              {
+                "path": "references-native-pause-confirmed.bmp",
+                "width": 960,
+                "height": 728,
+                "sha256": "aaf52bc7f58e5437b306ec6146913a97ddc48cf7c1ccb801362f20b5bf4dda95"
+              },
+              {
+                "path": "references-native-downloads-cleared.bmp",
+                "width": 960,
+                "height": 728,
+                "sha256": "637032e4efe4a3100f4378242a8d7545a97833a983834d5e1864577d80515ddb"
+              },
+              {
+                "path": "references-native-edited-review-disabled.bmp",
+                "width": 960,
+                "height": 728,
+                "sha256": "767f78b4ff29c32c833a647dca28ac785a8577781255ea05f9ceb167db1a1ca3"
+              },
+              {
+                "path": "references-native-import-fields.bmp",
+                "width": 960,
+                "height": 728,
+                "sha256": "7a680846dc3c44d120ff18ad92cd500f925a58455f1f0c7f8bd9f02ea0825ba4"
+              },
+              {
+                "path": "references-native-import-review.bmp",
+                "width": 720,
+                "height": 530,
+                "sha256": "69b05485864df69588b8cce351d2f283402cb369d77fddb742e466952689a6e5"
+              },
+              {
+                "path": "references-native-local-compatible-input.bmp",
+                "width": 960,
+                "height": 728,
+                "sha256": "64fbd7cfd5f7d8384d88c4b60f97096e8a8b480d20ba67679997ba36d1b6dcbb"
+              },
+              {
+                "path": "references-native-bound-input.bmp",
+                "width": 960,
+                "height": 728,
+                "sha256": "ed4890f5589d4668d38cd81295b09a9ca49d29962f6dc7a380fbdfc4c4d9c5bc"
+              },
+              {
+                "path": "references-native-relocation-review.bmp",
+                "width": 720,
+                "height": 530,
+                "sha256": "703690a7d09232ae9ed036efb5edcac3923018722bc9c8a45e76ca73e5747f07"
+              },
+              {
+                "path": "references-native-relocation-complete.bmp",
+                "width": 960,
+                "height": 728,
+                "sha256": "62026d006d722a448484f26101771a69979fe26afcab056240e987796fe0a725"
+              }
+            ],
+            "limits": [
+              "Only the named hosted Windows image, ordinary/spaced path case and observed desktop DPI are established.",
+              "Deterministic hostile transfer cases inject only a gate-owned provider response boundary, not live upstream responses.",
+              "RefSeq dated hashes bind observed annotation bytes; a versioned assembly does not make its annotation directory immutable.",
+              "No updater, release promotion, institutional endpoint acceptance or realistic scientific benchmark is exercised."
+            ],
+            "appFiles": {
+              "NativeWorkbench.exe": "3e374c9b12e694cf8d8f9e2ce2e5eaf88abad9adf9d8e81d8ad16c16428dcdcb",
+              "WorkbenchBridge.exe": "e1e99d5d0fe88cacd91852bbf302f9bfe414745e911362c73c8dd724fbbf7a9d",
+              "workspace\\app_version.py": "5aca6d5165ccc3d40e11086fb988f64390ba3b929150e30a88ea015f8a852965",
+              "workspace\\catalog.py": "8269f3ff23500c8f5b3321d475573b94f960d0534271cf724a8ac3621adc311f",
+              "workspace\\core_checks.py": "431598722c8c261683e123b255d008210abedb13e90e68d7bec0e6b1df905d70",
+              "workspace\\cwl_export.py": "5773f89433bc11f3cc9708e33994ec80f7c7bf8f6465c9ac8bb8da11c8181596",
+              "workspace\\dag_routing.py": "eb79a385a6426e8ce9778124620fe48c69e8c6ca3a7a9351b95780c99e869fe4",
+              "workspace\\desktop_host.py": "d3bff49a4436d57b153af9ff270003bf4eef8a7d44245c07d61bb834ea74db74",
+              "workspace\\desktop_model.py": "3904ae9e38fe214110e472167c292b183c39dca60ce01407c3533474227597f6",
+              "workspace\\diagnostics.py": "fa743c69179a13b66dc000348a3e2954616a349163f1103a8cd9f50d61793124",
+              "workspace\\engine.py": "888927ee7019a5317db0458d34a72f2989fd6e6dc0b49e61a0f15fe96ccf8363",
+              "workspace\\example.py": "fb558de8dc3f49f68550af3e08d768e8a99c5cd9e8d466ca357dcecc3dd699b3",
+              "workspace\\execution_resources.py": "33329a740602199f2931b90fde638a0780ed6fa28d2cf15aa15518d8ee8bdae9",
+              "workspace\\file_io.py": "ab6034e617504c8c264c9c53201174fdae88440765db114f01ce39eafcb2d67e",
+              "workspace\\pack_checks.py": "687a775f637ad12e55a04fac6c05292174c457bd551455f0dbffeb15d1f544a1",
+              "workspace\\pack_manager.py": "282b8370cccd6d86d00f6d2a85fe99669eb1d9b9953a9327c65c323a4a780b5d",
+              "workspace\\pack_security.py": "2d1fa4a4267f5cecb0d583c7b43fc59dc8645125c59e3db69c4d6fa307ff6cc0",
+              "workspace\\performance.py": "8f2e985ae95cf1856de64a5e051f681b0e78a9974dc312d0daf55331a523c5b6",
+              "workspace\\project_manager.py": "f01946694516b4a4fbe98ef8b14715a3e0e446d385b94438a26afc713ec86cdf",
+              "workspace\\readiness.py": "e8fdbaba0aa430a539e9214b711e14466e9597456527ec33eed687f898c33676",
+              "workspace\\recovery.py": "568d48098fe7fb01cfa800ac1fd52373d4d1bbff689f49207242065f9901d6b5",
+              "workspace\\reference_indexes.py": "fb6b20dd123f4d83896edc364868da6fdf779f915e4ae2e9e110cce1c1740203",
+              "workspace\\reference_library.py": "2416af2e3fb9aa80bcf1473037f4e248f9099600eb06ee707fee4b525b11baf2",
+              "workspace\\reference_manager.py": "af980e1ded0e01eb214424d29147043a21762b4e4708cf675dd0e8b183464cf6",
+              "workspace\\reference_ncbi.py": "1b1dec1af7c8cefbf94a49c6508ecfeacd2d93b89d3f72c041b18b04e526f5e9",
+              "workspace\\reference_provenance.py": "e2915eb46e3ca86cbf89297dadeec48925f2c9a667e85057bc3b9986e2735ac9",
+              "workspace\\reference_provider.py": "3bf51daae305ef16c0cff0a6bc2b65f76bc6013f7b1456da07fa8d869c5f0832",
+              "workspace\\reference_transfer.py": "105662115fbc1e477e40d898417a04ef81d1015241512af33b2d30a100ccde8d",
+              "workspace\\run_queue.py": "2dbb8387ba758259a68dc213ade820be027529e4f1d622e101ed96367c97cf6c",
+              "workspace\\sample_table.py": "a3ce7ac6f31fd044adf6abc90d7c8b83b5a57630212ebca973022ba4a7570f4e",
+              "workspace\\service.py": "fe64f8c177ca8ddb5f98773f6cbfbef99d1df53ae9c634227bde57c1d5c5725e",
+              "workspace\\setup_manager.py": "4432c2c6c6091ebe4aeb57e29555e4d21cbe34b9d3ad8a2fef58fa13022fb853",
+              "workspace\\verify_installation.py": "dc33c51ebd52f9a812dfa6df0fcd083a04d144769edc0caa50147edab32358cf"
+            },
+            "localImport": {
+              "record": {
+                "assembly": "fixture-v1",
+                "assembly_accession": "LOCAL-FIXTURE",
+                "files": [
+                  {
+                    "bytes": 3059,
+                    "filename": "local-reference.fa",
+                    "format": "fasta",
+                    "id": "genome",
+                    "kind": "genome",
+                    "label": "Genome FASTA",
+                    "original_path": "D:\\a\\_temp\\reference-management-evidence\\local-reference-inputs\\local-reference.fa",
+                    "path": "D:\\a\\_temp\\reference-management-evidence\\local-library\\ref-7c5c55f6269b4a6c\\local-reference.fa",
+                    "sha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+                    "source_bytes": 3059,
+                    "source_filename": "local-reference.fa",
+                    "source_sha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+                    "validation": {
+                      "format_header": "passed (basic prefix only)",
+                      "gzip_crc": "not applicable",
+                      "sha256": "computed locally; not a publisher signature"
+                    }
+                  },
+                  {
+                    "bytes": 54,
+                    "compressed_bytes": 64,
+                    "compressed_sha256": "707050fe5651316d172a38447b7f16a65ea2f2fd177b7c0780640b93eed1536f",
+                    "filename": "local-annotation.gtf",
+                    "format": "gtf",
+                    "id": "annotation",
+                    "kind": "annotation",
+                    "label": "Gene annotation GTF",
+                    "original_path": "D:\\a\\_temp\\reference-management-evidence\\local-reference-inputs\\local-annotation.gtf.gz",
+                    "path": "D:\\a\\_temp\\reference-management-evidence\\local-library\\ref-7c5c55f6269b4a6c\\local-annotation.gtf",
+                    "sha256": "91848fdd3b858a542345b55c02a59a62ed6d119f8cd998290e2fbe1fa436b1e0",
+                    "source_bytes": 64,
+                    "source_filename": "local-annotation.gtf.gz",
+                    "source_sha256": "707050fe5651316d172a38447b7f16a65ea2f2fd177b7c0780640b93eed1536f",
+                    "validation": {
+                      "format_header": "passed (basic prefix only)",
+                      "gzip_crc": "passed",
+                      "sha256": "computed locally; not a publisher signature"
+                    }
+                  }
+                ],
+                "folder": "D:\\a\\_temp\\reference-management-evidence\\local-library\\ref-7c5c55f6269b4a6c",
+                "id": "7c5c55f6269b4a6c9375cbcd6ee3e2ee",
+                "imported_at": "2026-10-08T22:44:16.788785Z",
+                "integrity_notice": "Files are copied into a verified local bundle. Species, assembly and source are user-declared, not provider-authenticated. Original files are retained. Basic FASTA/GTF checks do not establish biological compatibility.",
+                "label": "Synthetic local import",
+                "origin": "local-import",
+                "provider": "local-import",
+                "provider_name": "Local reference import",
+                "receipt_path": "D:\\a\\_temp\\reference-management-evidence\\local-library\\ref-7c5c55f6269b4a6c\\reference.json",
+                "receipt_sha256": "0eb25f6bff39e3f82a023c0004ff935aeb3937acfbc05e107244c6c1e3bf9fcf",
+                "release": "2026-test",
+                "schema": 1,
+                "source": "Local laboratory fixture; user supplied",
+                "species": "Synthetic scientific fixture",
+                "user_declared": {
+                  "assembly": "fixture-v1",
+                  "assembly_accession": "LOCAL-FIXTURE",
+                  "label": "Synthetic local import",
+                  "release": "2026-test",
+                  "source": "Local laboratory fixture; user supplied",
+                  "species": "Synthetic scientific fixture"
+                },
+                "available": true,
+                "status": "ready",
+                "error": ""
+              },
+              "originalHashes": {
+                "D:\\a\\_temp\\reference-management-evidence\\local-reference-inputs\\local-reference.fa": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+                "D:\\a\\_temp\\reference-management-evidence\\local-reference-inputs\\local-annotation.gtf.gz": "707050fe5651316d172a38447b7f16a65ea2f2fd177b7c0780640b93eed1536f"
+              },
+              "staleTokenError": "references/import: This reference review is no longer available. Review it again before continuing.",
+              "changedFileError": "Local reference bytes changed since review; review it again.",
+              "reusedTokenError": "references/import: This reference review is no longer available. Review it again before continuing."
+            },
+            "relocation": {
+              "oldPaths": {
+                "genome": "D:\\a\\_temp\\reference-management-evidence\\local-library\\ref-7c5c55f6269b4a6c\\local-reference.fa",
+                "annotation": "D:\\a\\_temp\\reference-management-evidence\\local-library\\ref-7c5c55f6269b4a6c\\local-annotation.gtf"
+              },
+              "newRecord": {
+                "assembly": "fixture-v1",
+                "assembly_accession": "LOCAL-FIXTURE",
+                "files": [
+                  {
+                    "bytes": 3059,
+                    "filename": "local-reference.fa",
+                    "format": "fasta",
+                    "id": "genome",
+                    "kind": "genome",
+                    "label": "Genome FASTA",
+                    "original_path": "D:\\a\\_temp\\reference-management-evidence\\local-reference-inputs\\local-reference.fa",
+                    "path": "D:\\a\\_temp\\reference-management-evidence\\relocated-library\\ref-7c5c55f6269b4a6c-c1cca6d2\\local-reference.fa",
+                    "sha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+                    "source_bytes": 3059,
+                    "source_filename": "local-reference.fa",
+                    "source_sha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+                    "validation": {
+                      "format_header": "passed (basic prefix only)",
+                      "gzip_crc": "not applicable",
+                      "sha256": "computed locally; not a publisher signature"
+                    }
+                  },
+                  {
+                    "bytes": 54,
+                    "compressed_bytes": 64,
+                    "compressed_sha256": "707050fe5651316d172a38447b7f16a65ea2f2fd177b7c0780640b93eed1536f",
+                    "filename": "local-annotation.gtf",
+                    "format": "gtf",
+                    "id": "annotation",
+                    "kind": "annotation",
+                    "label": "Gene annotation GTF",
+                    "original_path": "D:\\a\\_temp\\reference-management-evidence\\local-reference-inputs\\local-annotation.gtf.gz",
+                    "path": "D:\\a\\_temp\\reference-management-evidence\\relocated-library\\ref-7c5c55f6269b4a6c-c1cca6d2\\local-annotation.gtf",
+                    "sha256": "91848fdd3b858a542345b55c02a59a62ed6d119f8cd998290e2fbe1fa436b1e0",
+                    "source_bytes": 64,
+                    "source_filename": "local-annotation.gtf.gz",
+                    "source_sha256": "707050fe5651316d172a38447b7f16a65ea2f2fd177b7c0780640b93eed1536f",
+                    "validation": {
+                      "format_header": "passed (basic prefix only)",
+                      "gzip_crc": "passed",
+                      "sha256": "computed locally; not a publisher signature"
+                    }
+                  }
+                ],
+                "folder": "D:\\a\\_temp\\reference-management-evidence\\relocated-library\\ref-7c5c55f6269b4a6c-c1cca6d2",
+                "id": "7c5c55f6269b4a6c9375cbcd6ee3e2ee",
+                "imported_at": "2026-10-08T22:44:16.788785Z",
+                "integrity_notice": "Files are copied into a verified local bundle. Species, assembly and source are user-declared, not provider-authenticated. Original files are retained. Basic FASTA/GTF checks do not establish biological compatibility.",
+                "label": "Synthetic local import",
+                "origin": "local-import",
+                "previous_location": {
+                  "folder": "D:\\a\\_temp\\reference-management-evidence\\local-library\\ref-7c5c55f6269b4a6c",
+                  "receipt_path": "D:\\a\\_temp\\reference-management-evidence\\local-library\\ref-7c5c55f6269b4a6c\\reference.json",
+                  "receipt_sha256": "0eb25f6bff39e3f82a023c0004ff935aeb3937acfbc05e107244c6c1e3bf9fcf"
+                },
+                "provider": "local-import",
+                "provider_name": "Local reference import",
+                "receipt_path": "D:\\a\\_temp\\reference-management-evidence\\relocated-library\\ref-7c5c55f6269b4a6c-c1cca6d2\\reference.json",
+                "receipt_sha256": "536ddeb2637cc396fdc7074311e1cf7ebe269a3e0ffb27eaf81d67831e9f6f56",
+                "release": "2026-test",
+                "relocated_at": "2026-10-08T22:44:17.027489Z",
+                "schema": 1,
+                "source": "Local laboratory fixture; user supplied",
+                "species": "Synthetic scientific fixture",
+                "user_declared": {
+                  "assembly": "fixture-v1",
+                  "assembly_accession": "LOCAL-FIXTURE",
+                  "label": "Synthetic local import",
+                  "release": "2026-test",
+                  "source": "Local laboratory fixture; user supplied",
+                  "species": "Synthetic scientific fixture"
+                },
+                "available": true,
+                "status": "ready",
+                "error": ""
+              },
+              "oldReceiptSha256": "0eb25f6bff39e3f82a023c0004ff935aeb3937acfbc05e107244c6c1e3bf9fcf",
+              "queuedJob": {
+                "job_id": "5d097ab565c787b7b0eb4b4901faa34d",
+                "run_id": "5d097ab565c787b7b0eb4b4901faa34d",
+                "batch_id": "03bda51b69744e99458c6ea1d032df40",
+                "sample_id": "",
+                "metadata": {},
+                "name": "Index a reference",
+                "status": "queued",
+                "folder": "D:\\a\\_temp\\reference-management-evidence\\frozen-reference-results\\run-20261008-224416-e4093989",
+                "plan_sha256": "55f2e7a1b6ce7db0499b63956a9c1cf8c5ade27a81bc00041d5cc63b63636bc9",
+                "files": {
+                  "graph.json": "a786b1f73860e5f7e1039c85fb86414a379d3913c0d365d9bf73ea54f517af6a",
+                  "methods-planned.txt": "93db845a56699a2789cfdfcb262c0a8ead7e034bd1f66a4ae6df18ca92e633a8",
+                  "performance.json": "fd09d63ba977e66a2d6f4f664ad58b7a3d10263365501c99825d0746e08f8bfe",
+                  "pipeline.svg": "dfe7476ba2c209e064da6f60dfde98a570da24af6e90f06a0575cc1ac29b134b",
+                  "plan.json": "447b8ea63e4f5c69570c50e6104383f699a88cc89fdda72956e0bee9db488f8a",
+                  "reference-provenance.json": "c824eeb439bfc868c0bff72d2055eb7c61f91dcfd10421c1c16129d85ed3c4e9",
+                  "workflow.cwl": "a639a8c5703c7c368f32946a58c5ee376b31bee6b5aa0b983f9bdf33d23c4a26"
+                },
+                "created_at": "2026-10-08T22:44:16.898Z",
+                "started_at": "",
+                "finished_at": "",
+                "message": "Ready. Choose Start queue to execute this frozen plan."
+              },
+              "frozenCompanions": {
+                "graph.json": "a786b1f73860e5f7e1039c85fb86414a379d3913c0d365d9bf73ea54f517af6a",
+                "methods-planned.txt": "93db845a56699a2789cfdfcb262c0a8ead7e034bd1f66a4ae6df18ca92e633a8",
+                "performance.json": "fd09d63ba977e66a2d6f4f664ad58b7a3d10263365501c99825d0746e08f8bfe",
+                "pipeline.svg": "dfe7476ba2c209e064da6f60dfde98a570da24af6e90f06a0575cc1ac29b134b",
+                "plan.json": "447b8ea63e4f5c69570c50e6104383f699a88cc89fdda72956e0bee9db488f8a",
+                "reference-provenance.json": "c824eeb439bfc868c0bff72d2055eb7c61f91dcfd10421c1c16129d85ed3c4e9",
+                "workflow.cwl": "a639a8c5703c7c368f32946a58c5ee376b31bee6b5aa0b983f9bdf33d23c4a26"
+              },
+              "completedJob": {
+                "job_id": "5d097ab565c787b7b0eb4b4901faa34d",
+                "run_id": "5d097ab565c787b7b0eb4b4901faa34d",
+                "batch_id": "03bda51b69744e99458c6ea1d032df40",
+                "sample_id": "",
+                "metadata": {},
+                "name": "Index a reference",
+                "status": "completed",
+                "folder": "D:\\a\\_temp\\reference-management-evidence\\frozen-reference-results\\run-20261008-224416-e4093989",
+                "plan_sha256": "55f2e7a1b6ce7db0499b63956a9c1cf8c5ade27a81bc00041d5cc63b63636bc9",
+                "files": {
+                  "graph.json": "a786b1f73860e5f7e1039c85fb86414a379d3913c0d365d9bf73ea54f517af6a",
+                  "methods-planned.txt": "93db845a56699a2789cfdfcb262c0a8ead7e034bd1f66a4ae6df18ca92e633a8",
+                  "performance.json": "fd09d63ba977e66a2d6f4f664ad58b7a3d10263365501c99825d0746e08f8bfe",
+                  "pipeline.svg": "dfe7476ba2c209e064da6f60dfde98a570da24af6e90f06a0575cc1ac29b134b",
+                  "plan.json": "447b8ea63e4f5c69570c50e6104383f699a88cc89fdda72956e0bee9db488f8a",
+                  "reference-provenance.json": "c824eeb439bfc868c0bff72d2055eb7c61f91dcfd10421c1c16129d85ed3c4e9",
+                  "workflow.cwl": "a639a8c5703c7c368f32946a58c5ee376b31bee6b5aa0b983f9bdf33d23c4a26"
+                },
+                "created_at": "2026-10-08T22:44:16.898Z",
+                "started_at": "2026-10-08T22:44:17.081Z",
+                "finished_at": "2026-10-08T22:44:17.238Z",
+                "message": "Complete"
+              },
+              "indexDictionary": [
+                [
+                  "starter",
+                  3000
+                ]
+              ]
+            },
+            "guiFixture": {
+              "files": [
+                {
+                  "kind": "genome",
+                  "path": "D:\\a\\_temp\\reference-management-evidence\\local-reference-inputs\\local-reference.fa"
+                },
+                {
+                  "kind": "annotation",
+                  "path": "D:\\a\\_temp\\reference-management-evidence\\local-reference-inputs\\local-annotation.gtf.gz"
+                }
+              ],
+              "metadata": {
+                "label": "Synthetic local import",
+                "species": "Synthetic scientific fixture",
+                "assembly": "fixture-v1",
+                "assembly_accession": "LOCAL-FIXTURE",
+                "source": "Local laboratory fixture; user supplied",
+                "release": "2026-test"
+              },
+              "defaultDestination": "D:\\a\\_temp\\reference-management-evidence\\relocated-library"
+            },
+            "nativePendingFixture": [
+              {
+                "id": "1ccbf11d76644d149bd540d4fbe1e3a1",
+                "status": "paused",
+                "provider": "ensembl-archive",
+                "label": "Saccharomyces cerevisiae",
+                "destination": "D:\\a\\_temp\\reference-management-evidence\\relocated-library",
+                "bytes": 1048576,
+                "total": 3784201,
+                "files": [
+                  {
+                    "id": "genome",
+                    "filename": "Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa.gz"
+                  }
+                ],
+                "error": "",
+                "resumable": true
+              },
+              {
+                "id": "6b9e27d346d94236a7fdbd3e34b27933",
+                "status": "paused",
+                "provider": "ensembl-archive",
+                "label": "Saccharomyces cerevisiae",
+                "destination": "D:\\a\\_temp\\reference-management-evidence\\relocated-library",
+                "bytes": 1048576,
+                "total": 3784201,
+                "files": [
+                  {
+                    "id": "genome",
+                    "filename": "Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa.gz"
+                  }
+                ],
+                "error": "",
+                "resumable": true
+              }
+            ],
+            "nativeLibraryDefault": {
+              "firstOpen": "D:\\a\\_temp\\reference-management-evidence\\relocated-library",
+              "expected": "D:\\a\\_temp\\reference-management-evidence\\relocated-library",
+              "reopened": "D:\\a\\_temp\\reference-management-evidence\\relocated-library"
+            },
+            "nativeProviders": [
+              "Ensembl archive",
+              "NCBI RefSeq assembly lookup"
+            ],
+            "nativeReviewInvalidation": {
+              "metadataEdited": "label",
+              "serverRefresh": "references/list on close and reopen",
+              "invalidatedReviewStayedDisabled": true,
+              "freshPreviewExplicitlyRequested": true,
+              "reviewedLabel": "Native GUI imported fixture after edit"
+            },
+            "nativeReferenceBinding": {
+              "tool": "bam/reference-index",
+              "path": "D:\\a\\_temp\\reference-management-evidence\\relocated-library\\ref-319a31e468024403\\local-reference.fa",
+              "sha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+              "nativeNotice": "Reference assigned. Its recorded provenance will be retained with the run.",
+              "inspectorEdits": [
+                {
+                  "id": 2008,
+                  "class": "Edit",
+                  "text": "Index a reference",
+                  "bounds": [
+                    253,
+                    352,
+                    674,
+                    386
+                  ],
+                  "hwnd": 131692
+                },
+                {
+                  "id": 2018,
+                  "class": "Edit",
+                  "text": "D:\\a\\_temp\\reference-management-evidence\\relocated-library\\ref-319a31e468024403\\local-reference.fa",
+                  "bounds": [
+                    253,
+                    528,
+                    580,
+                    562
+                  ],
+                  "hwnd": 131682
+                }
+              ]
+            },
+            "dpi": 96,
+            "passed": 10,
+            "finishedUtc": "2026-10-08T22:44:34.155863+00:00"
+          }
+        },
+        "batch": {
+          "file": "batch-evidence/native-batch.json",
+          "bytes": 35750,
+          "sha256": "2aea646fdc68ff519a6161a537ccc440fbe50d04e383aeefa0a113e870b13b3b",
+          "summary": {
+            "success": true,
+            "passed": 11,
+            "failed": 0,
+            "skipped": 0,
+            "checks": [
+              "CSV preview requires explicit paired-read and sample-parameter mappings, retains metadata/shared reference and creates no plans or runs before Queue.",
+              "Two immutable plans and exact companion hashes survive editing and clean shutdown/reopen, remain paused and retain historical align 0.4.0 pins beside 0.4.1.",
+              "Explicit Start executes both frozen samples serially with independent read groups, 202 proper-pair alignments, known homozygous SNP and verified CWL/performance/output provenance.",
+              "Explicit combined-report mode maps two separately named sample reports into one declared many-valued report port, retains all row metadata and verifies resulting files without pooling biological reads.",
+              "Changing an input after freezing or altering a prepared companion fails closed; neither produces accepted outputs and corrupt preparation never enters execution.",
+              "During native execution the draft remains editable without mutating the frozen plan; Cancel stops that job, pauses its successor, and explicit Start runs the successor successfully.",
+              "Real minimap2 index build/reuse binds exact references, pack/executable/options and inventory; indexed and ordinary SAM records are identical, changed reference/options create distinct indexes, and reuse reports no invented native counters.",
+              "Corrupt stored index and a modified builder executable both fail closed even when a matching cache identity exists; verified candidate bytes are restored after the negative checks.",
+              "Exact packaged queue and history commits survive brief real external read handles; a persistent handle exhausts the bounded Windows wait with an explicit sharing error, preserves existing jobs/bytes, creates no plan and leaves the host responsive.",
+              "Actual native Samples imports CSV, maps mate columns, previews before queueing; Queue displays frozen identity, cancels one waiting sample and explicitly starts the other with known scientific output; native combined mode previews one explicitly mapped report job.",
+              "Native Reference indexes lists three distinct cached identities without claiming verification; explicit Verify rehashes the inventory and updates the selected entry."
+            ],
+            "skips": [],
+            "limits": [
+              "Synthetic Starter scientific truth and bounded cancellation fixture; not realistic-data capacity or Windows/Linux benchmarking.",
+              "Observed hosted display DPI only; physical trackpad, high DPI, multi-monitor and institutional endpoint acceptance are not established."
+            ],
+            "sourceCommit": "46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+            "assetSha256": "ce3bcc9c5634dd90f024ecf20f0308a144641c67e0c11c205501518773f6a4c2",
+            "gateSha256": "b063617d02bfb647f70eec9bc4cd314da6f2f347fc66f5af5555b8d5625260f4",
+            "platform": "Windows-2022Server-10.0.20348-SP0",
+            "dpi": 96
+          }
+        },
+        "pack": {
+          "file": "batch-evidence/native-align-pack.json",
+          "bytes": 1509,
+          "sha256": "e5bbea2b59ce49a582df4bf59775078f9909041f140d29b6a97fc6a02ee7e0c3",
+          "summary": {
+            "success": true
+          }
+        },
+        "performance": {
+          "file": "performance-evidence/native-performance.json",
+          "bytes": 6737,
+          "sha256": "b8022f7d11856a47372e4dda9196dfccb37492dfd301797111ff5ad2c9d91bc7",
+          "summary": {
+            "passed": 14,
+            "failed": 0,
+            "skipped": 0,
+            "error": null
+          }
+        },
+        "readiness": {
+          "file": "readiness-evidence/native-readiness.json",
+          "bytes": 8483,
+          "sha256": "da7ae74dacf15984f0dd0b0195832cd9d510f5128d9db63949ce183734be2b8a",
+          "summary": {
+            "success": true,
+            "passed": 5,
+            "failed": 0,
+            "skipped": 0,
+            "checks": [
+              "Readiness blocks missing input/destination, leaves no probe, preserves incomplete legacy previews and explicitly defers execution and complete integrity checks.",
+              "Real native minimap2/SAMtools/BCFtools starter workflow retains 202 paired alignments and starter:1351 G>A, GT=1/1 with independently checked output hashes.",
+              "Frozen five-step Starter run binds phase timings, input sizes and real Windows Job Object measurements for all 17 exec stages, labels any live-descendant snapshot partial and leaves its copy without fabricated process counters.",
+              "Explicit diagnostic Save writes only the reviewed JSON and checksum/README, excludes synthetic private names and rejects token reuse without another export.",
+              "Native Readiness modal and diagnostics preview/save controls work; Close saves nothing and explicit Save preserves the exact displayed JSON."
+            ],
+            "skips": [],
+            "limits": [
+              "Synthetic small-data gate, not a Windows-versus-Linux benchmark or large-data capacity estimate.",
+              "Display assertions cover only the observed runner DPI; physical trackpad, multiple displays and institutional endpoint acceptance are not tested."
+            ],
+            "sourceCommit": "46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+            "assetSha256": "ce3bcc9c5634dd90f024ecf20f0308a144641c67e0c11c205501518773f6a4c2",
+            "gateSha256": "60483711e84717bd0676fb400d86e9e01a0e7e4b45cf2c9184bb1fba5dc7aa3f",
+            "platform": "Windows-2022Server-10.0.20348-SP0",
+            "dpi": 96
+          }
+        },
+        "recovery": {
+          "file": "recovery-evidence/native-recovery.json",
+          "bytes": 75651,
+          "sha256": "c619a114af16e175ec4bf7e67e8f21003830e396d5fc5ef9dd24a8bf8151d04b",
+          "summary": {
+            "success": true,
+            "passed": 12,
+            "failed": 0,
+            "skipped": 0,
+            "checks": [
+              "An explicit reviewed restart creates a new paused plan; Start reuses four verified completed native steps byte-for-byte, rebuilds the path-bearing report and preserves the source result, retains known scientific truth and does not fabricate native measurements.",
+              "Production Engine reviews invalidate changed input bytes, parameters and exact pack pins with their descendants; a tampered intermediate BAM invalidates its producer and descendants while the verified ancestor remains reusable.",
+              "Real native independent branches obey CPU-slot and maximum-step admission limits, unknown requirements run exclusively, and two explicitly reserved branches overlap; the queued policy stays frozen after settings change, with separate temporary directories and 80,800 records per branch. These are admission observations, not benchmarks.",
+              "Cancellation reaches both active native branches and the durable queue records the job as cancelled; no branch remains marked running.",
+              "A deliberately changed frozen input fails both consumers, blocks their dependent BAM step and pauses the queue without silently retrying analysis.",
+              "An explicitly selected three-input project contains CWL, relative file identities and exact pack requirements without executables; offline import and a second folder move preserve input bytes, project/sample metadata in plan/run/CWL/methods and the known native scientific result.",
+              "An external-data project reports all absent inputs, rejects an incorrect explicit mapping and imports only byte-identical mappings; an unavailable exact pack version stays unresolved without substitution or download.",
+              "Project inspection rejects a checksum-tampered member, parent traversal and a case-colliding archive before extraction; no outside file is created.",
+              "A separately labelled abrupt-termination fixture leaves a paused interrupted job; after exact service bytes are restored, explicit restart reuses only its verified completed ancestor and produces the expected 202 alignments and homozygous SNP.",
+              "Native Resources edits CPU budget, maximum parallel steps, one explicit reservation and temporary storage; Save persists those values and leaves other step requirements visibly unknown.",
+              "Native recorded-result Restart shows each verified reuse decision, queues without running, and explicit Queue Start creates a scientifically correct new result.",
+              "Native Projects keeps Import disabled for missing data, verifies all three explicit file mappings, confirms import into a new editable draft without analysis, and shows a cancellable export preview with file hashes and exact pack requirements."
+            ],
+            "skips": [],
+            "limits": [
+              "Synthetic scientific truth and declared CPU admission observations; not CPU enforcement, realistic-data capacity or Windows/Linux benchmarking.",
+              "Abrupt termination uses a separately labelled callback barrier extraction; service bytes are restored before exact-host restart.",
+              "Hosted display DPI only; physical trackpad, high DPI, multi-monitor and institutional endpoint acceptance are not established."
+            ],
+            "sourceCommit": "46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+            "assetSha256": "ce3bcc9c5634dd90f024ecf20f0308a144641c67e0c11c205501518773f6a4c2",
+            "gateSha256": "ef75ee62dcf73bbf9a0a7d7f047d74c972f6e5c23b874afc37cecafe3f021edb",
+            "platform": "Windows-2022Server-10.0.20348-SP0",
+            "dpi": 96
+          }
+        },
+        "library": {
+          "file": "library-evidence/native-tool-library.json",
+          "bytes": 11360,
+          "sha256": "59918754ad481d0bc48f9893d574f24521760d69acdbe502e7099e313e9293b1",
+          "summary": {
+            "success": true,
+            "passed": 7,
+            "checks": [
+              "Fresh exact Starter displays native collapsed categories and program-named tools without a category dropdown.",
+              "Category pointer, Left/Right, Space and Enter toggle headings without opening tools or adding nodes.",
+              "Search reveals collapsed tools and empty results, and restores repeated open/closed choices when cleared.",
+              "A child opens its standalone form on one click; editing that form preserves native tree handles and selection.",
+              "Categories cannot be dragged into a workflow; child single click selects only, double click/Add/drag each add exactly one tool, and standalone settings survive.",
+              "At minimum size real library wheel moves down and back; a committed model refresh preserves the scrolled viewport, item handles, selection and expanded categories.",
+              "An independently imported pack supplies a new category, category-name search result and working selectable child without changing application code."
+            ],
+            "skips": [],
+            "limits": [
+              "Actual reported DPI only; finite screenshots are not a physical-display flicker guarantee.",
+              "The existing workspace gate separately verifies compatible port connections and the native 202-record scientific chain."
+            ],
+            "sourceCommit": "46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+            "assetSha256": "ce3bcc9c5634dd90f024ecf20f0308a144641c67e0c11c205501518773f6a4c2",
+            "gateSha256": "ed419575da77af7c88742e6eed12243b958df5e0ad36e6edeeaa61d0bf9f875f",
+            "platform": "Windows-2022Server-10.0.20348-SP0",
+            "dpi": 96
+          }
+        },
+        "workspace": {
+          "file": "workspace-evidence/native-ui.json",
+          "bytes": 24019,
+          "sha256": "b5274b9c5c5c3e7bcbc2a76c1994e21d4d10faccb468f92948803b3428a8a123",
+          "summary": {
+            "success": true,
+            "passed": 32,
+            "checks": [
+              "Default standalone mode",
+              "Independent preserved tool and workflow graphs",
+              "Compatible graph edge",
+              "Bounded native compatibility preview",
+              "Atomic cycle and semantic type rejection",
+              "Per-tool settings and input retention",
+              "Workflow additions leave ports unbound without automatic source boxes",
+              "Explicit reusable input owns one file editor and connects without duplication",
+              "Native minimap2 alignment chains to SAMtools coordinate-sorted binary BAM using two explicit inputs",
+              "All 202 synthetic mapped proper-pair records, mate flags, sequence, quality and typed tags survive SAM-to-BAM conversion",
+              "Manage tools loads installed packs on its first click without a modal error and reopens cleanly",
+              "First click opens a previously selected workflow-library row in empty tool mode",
+              "Single-click standalone tool form",
+              "Separate queued native double-click notification opens its hit row after selection clears",
+              "Three independent panes with general settings",
+              "Actual mouse drag from tool list onto workflow canvas twice",
+              "Actual compatible output-to-input mouse connection",
+              "Canvas selection displays tool options on right",
+              "General settings remain available in workflow mode",
+              "Standalone input and browsing folder survive workflow mode",
+              "Mode-specific status guidance replaces the previous workflow drag hint",
+              "Workflow graph/selection survives mode switching",
+              "Normal/minimum observed pane separation",
+              "Real repeated option scrolling leaves static text identical to a clean repaint",
+              "Blank-canvas mouse drag pans and reverses the viewport",
+              "Zoom buttons decrease, increase and reset scale; scaled card hit testing selects both tools",
+              "Injected one-unit native Ctrl-wheel deltas accumulate into visible zoom",
+              "Editing a tool immediately before Add input preserves its draft through the nested modal loop",
+              "Native Add input creates one independently editable reference file slot",
+              "Actual mouse connection from an explicit input output socket to a tool input without duplicate file fields",
+              "Header hover close deletes a tool and Undo restores its selection",
+              "Header hover close deletes an explicit input and Undo restores its files"
+            ],
+            "skips": [],
+            "sourceCommit": "46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+            "assetSha256": "ce3bcc9c5634dd90f024ecf20f0308a144641c67e0c11c205501518773f6a4c2",
+            "gateSha256": "30a38a4f5bc8d5a5af93eee80560963f87e4ef019a3e98ec9780f1964d847d13",
+            "platform": "Windows-2022Server-10.0.20348-SP0"
+          }
+        },
+        "transport": {
+          "file": "transport-evidence/native-transport.json",
+          "bytes": 2668,
+          "sha256": "4c4578294ca38874aea8677cf929a7e0099282f571a447b54e292e8814c32c4c",
+          "summary": {
+            "success": true,
+            "passed": 3,
+            "failed": 0,
+            "checks": [
+              "Actual native queue cancellation and status updates pass a blocked index read; the real local job records cancellation before the delay is released.",
+              "Closing/reopening the index dialog discards its old response by generation; only a new explicit Verify updates the fresh view.",
+              "Native close completes with a pending read and preserves the cancelled queue record; remaining private-host work is contained by the owning desktop process tree."
+            ],
+            "limits": [
+              "Separate candidate extraction: exact native executable, deliberately instrumented private host index read. This does not claim unchanged-host execution during the transport fixture.",
+              "Synthetic cancellation fixture, not throughput or realistic-data benchmarking; hosted display only."
+            ],
+            "sourceCommit": "46bbb39dda2cc5bb08c30af494cb340f976acf3b",
+            "assetSha256": "ce3bcc9c5634dd90f024ecf20f0308a144641c67e0c11c205501518773f6a4c2",
+            "gateSha256": "62cd88c99ce694c6509443c276519dab087a9bff4e8d64edb82381c7732584d7",
+            "platform": "Windows-2022Server-10.0.20348-SP0"
+          }
+        }
+      }
+    }
+  ],
+  "visualReview": {
+    "ordinary": "Root reviewed all eleven reference captures at their original dimensions.",
+    "spaces": "Independent native UI owner reviewed all eleven reference captures at their original dimensions.",
+    "dpi": 96,
+    "blockingFindings": [],
+    "observations": [
+      "All four native tabs and two review dialogs fit without overlap or clipped action captions.",
+      "Saved relocated destination is visibly restored; local file inputs, compatible target and explicit review actions are readable.",
+      "Edited-review confirmation is disabled with a clear notice; fresh preview and final imported/relocated states agree with assertions."
+    ],
+    "minorPresentationLimits": [
+      "Existing size formatter rounds tiny GTF files to 0 KB; file bytes and hashes are separately verified.",
+      "Initial Downloads view retains the last operation notice until the next operation."
+    ],
+    "limits": [
+      "Static settled captures do not establish temporal repaint, other DPI, physical trackpad or representative-machine acceptance."
+    ]
+  },
+  "remainingGateFindings": [
+    "Windows provenance mock expects an unresolved short root spelling while the engine correctly uses the resolved equivalent. Exact input-path set and one-call requirement remain valid; test needs canonical root expectation.",
+    "Ordinary batch gate passed nine checks including scientific outputs, then a native pointer guard rejected a stale or obscured search control immediately after switching to Tools. The failure capture shows an unobscured settled Tools view. A bounded transition check is required before the next interaction."
+  ],
+  "limits": [
+    "Source step stopped after five invocations: 71 passed, one declared Linux-adapter skip, one mock-argument failure; remaining ten suites were not executed.",
+    "The ordinary batch gate did not complete. Spaced-path batch passed eleven checks; neither substitutes for a successful ordinary-path recheck.",
+    "No updater, publication, baseline upgrade, realistic benchmark or institutional acceptance was performed."
+  ]
+}

@@ -1,0 +1,323 @@
+{
+  "schema": 1,
+  "runId": 37853140376,
+  "jobId": 113570867552,
+  "sourceCommit": "5592604a101fdfc2db4f2055399e7e54f7684b21",
+  "platform": "ubuntu-22.04 GitHub-hosted build/source checks",
+  "nativeWindowsExecuted": false,
+  "jobConclusion": "success",
+  "totals": {
+    "total": 428,
+    "passed": 424,
+    "skipped": 4,
+    "failures": 0,
+    "errors": 0,
+    "suites": 28
+  },
+  "stockCwlRunner": {
+    "installed": "cwltool==3.3.20260925135507",
+    "reportOnlyPortableReplayPassed": true,
+    "scientificLinuxParityEstablished": false
+  },
+  "suites": [
+    {
+      "file": "workspace/tests/test_reference_provider.py",
+      "total": 18,
+      "seconds": 0.014,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 18,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_reference_manager.py",
+      "total": 25,
+      "seconds": 0.338,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 25,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_reference_service.py",
+      "total": 10,
+      "seconds": 0.111,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 10,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_reference_provenance.py",
+      "total": 6,
+      "seconds": 0.056,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 6,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_reference_resume.py",
+      "total": 19,
+      "seconds": 4.391,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 19,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_reference_library.py",
+      "total": 26,
+      "seconds": 0.267,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 26,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_reference_ncbi.py",
+      "total": 19,
+      "seconds": 0.014,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 19,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_reference_management_service.py",
+      "total": 12,
+      "seconds": 0.075,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 12,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_recovery_execution.py",
+      "total": 26,
+      "seconds": 1.03,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 26,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_project_manager.py",
+      "total": 29,
+      "seconds": 4.425,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 29,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_recovery_service.py",
+      "total": 16,
+      "seconds": 0.146,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 16,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_sample_table.py",
+      "total": 26,
+      "seconds": 0.125,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 26,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_run_queue.py",
+      "total": 28,
+      "seconds": 0.568,
+      "outcome": "OK",
+      "skipped": 2,
+      "passed": 26,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_reference_indexes.py",
+      "total": 19,
+      "seconds": 1.066,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 19,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_desktop_host.py",
+      "total": 12,
+      "seconds": 0.261,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 12,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_desktop_modes.py",
+      "total": 11,
+      "seconds": 0.309,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 11,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_workflow_inputs.py",
+      "total": 11,
+      "seconds": 0.151,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 11,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_pack_service.py",
+      "total": 6,
+      "seconds": 0.029,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 6,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_setup_manager.py",
+      "total": 16,
+      "seconds": 0.612,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 16,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_setup_service.py",
+      "total": 7,
+      "seconds": 0.032,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 7,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "tests/test_split_release.py",
+      "total": 9,
+      "seconds": 0.193,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 9,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_readiness.py",
+      "total": 16,
+      "seconds": 0.08,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 16,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_readiness_service.py",
+      "total": 6,
+      "seconds": 0.017,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 6,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_performance.py",
+      "total": 18,
+      "seconds": 0.631,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 18,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_diagnostics.py",
+      "total": 11,
+      "seconds": 0.099,
+      "outcome": "OK",
+      "skipped": 2,
+      "passed": 9,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_engine_paths.py",
+      "total": 7,
+      "seconds": 0.172,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 7,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_cwl_results.py",
+      "total": 5,
+      "seconds": 0.113,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 5,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "workspace/tests/test_cwl_export.py",
+      "total": 14,
+      "seconds": 5.409,
+      "outcome": "OK",
+      "skipped": 0,
+      "passed": 14,
+      "failures": 0,
+      "errors": 0
+    }
+  ],
+  "skipDetails": [
+    {
+      "file": "workspace/tests/test_run_queue.py",
+      "count": 2,
+      "reason": "Requires native Windows held-reader semantics",
+      "basis": "Verbose run log and unchanged test decorators."
+    },
+    {
+      "file": "workspace/tests/test_diagnostics.py",
+      "count": 2,
+      "reason": "Actual Windows junction handling and Windows extended-path IO require Windows.",
+      "basis": "Two skips counted in non-verbose log; their conditional decorators independently inspected in exact source."
+    }
+  ],
+  "rawLog": "build-113570867552.log",
+  "recordedOn": "2026-10-08",
+  "version": "0.15.0",
+  "sourceTree": "ac0ddb40938468b5c0fa576e21748f45fe4c3bbf",
+  "published": false
+}

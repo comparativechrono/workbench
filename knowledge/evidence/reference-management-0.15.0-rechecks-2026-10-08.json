@@ -1,0 +1,1500 @@
+{
+  "schema": 1,
+  "recordedOn": "2026-10-08",
+  "version": "0.15.0",
+  "published": false,
+  "accepted": false,
+  "runId": 37854004440,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37854004440",
+  "sourceCommit": "8ff5cf18b957905bbb92a0a08e21a6871ae49712",
+  "sourceTree": "e991313d2458dbf05166f40b27234d7abababa6e",
+  "runConclusion": "failure",
+  "source": {
+    "schema": 1,
+    "runId": 37854004440,
+    "jobId": 113573689461,
+    "sourceCommit": "8ff5cf18b957905bbb92a0a08e21a6871ae49712",
+    "platform": "ubuntu-22.04 GitHub-hosted build/source checks",
+    "nativeWindowsExecuted": false,
+    "jobConclusion": "success",
+    "totals": {
+      "total": 434,
+      "passed": 430,
+      "skipped": 4,
+      "failures": 0,
+      "errors": 0,
+      "invocations": 29
+    },
+    "stockCwlRunner": {
+      "installed": "cwltool==3.3.20260925135507",
+      "reportOnlyPortableReplayPassed": true,
+      "scientificLinuxParityEstablished": false
+    },
+    "suites": [
+      {
+        "file": "tests/test_core_checks.py",
+        "total": 5,
+        "seconds": 0.414,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 5,
+        "failures": 0,
+        "errors": 0,
+        "scope": "Five explicitly named frontend-boundary methods only; full core suite and its Linux scientific adapter were not run in this builder invocation.",
+        "methods": [
+          "test_only_explicit_download_clients_can_import_network_and_never_listener",
+          "test_real_catalogue_citation_parser_passes_frontend_client_boundary",
+          "test_all_packaged_runtime_modules_pass_static_frontend_boundary",
+          "test_project_path_encoding_does_not_allow_network_clients",
+          "test_reference_transfer_can_only_import_http_exception_class"
+        ]
+      },
+      {
+        "file": "workspace/tests/test_reference_provider.py",
+        "total": 18,
+        "seconds": 0.014,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 18,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_reference_manager.py",
+        "total": 26,
+        "seconds": 0.354,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 26,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_reference_service.py",
+        "total": 10,
+        "seconds": 0.11,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 10,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_reference_provenance.py",
+        "total": 6,
+        "seconds": 0.057,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 6,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_reference_resume.py",
+        "total": 19,
+        "seconds": 4.508,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 19,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_reference_library.py",
+        "total": 26,
+        "seconds": 0.273,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 26,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_reference_ncbi.py",
+        "total": 19,
+        "seconds": 0.013,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 19,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_reference_management_service.py",
+        "total": 12,
+        "seconds": 0.076,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 12,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_recovery_execution.py",
+        "total": 26,
+        "seconds": 1.08,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 26,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_project_manager.py",
+        "total": 29,
+        "seconds": 9.327,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 29,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_recovery_service.py",
+        "total": 16,
+        "seconds": 0.15,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 16,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_sample_table.py",
+        "total": 26,
+        "seconds": 0.123,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 26,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_run_queue.py",
+        "total": 28,
+        "seconds": 0.576,
+        "outcome": "OK",
+        "skipped": 2,
+        "passed": 26,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_reference_indexes.py",
+        "total": 19,
+        "seconds": 1.084,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 19,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_desktop_host.py",
+        "total": 12,
+        "seconds": 0.259,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 12,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_desktop_modes.py",
+        "total": 11,
+        "seconds": 0.301,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 11,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_workflow_inputs.py",
+        "total": 11,
+        "seconds": 0.157,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 11,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_pack_service.py",
+        "total": 6,
+        "seconds": 0.03,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 6,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_setup_manager.py",
+        "total": 16,
+        "seconds": 0.611,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 16,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_setup_service.py",
+        "total": 7,
+        "seconds": 0.033,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 7,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "tests/test_split_release.py",
+        "total": 9,
+        "seconds": 0.198,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 9,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_readiness.py",
+        "total": 16,
+        "seconds": 0.079,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 16,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_readiness_service.py",
+        "total": 6,
+        "seconds": 0.017,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 6,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_performance.py",
+        "total": 18,
+        "seconds": 0.648,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 18,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_diagnostics.py",
+        "total": 11,
+        "seconds": 0.1,
+        "outcome": "OK",
+        "skipped": 2,
+        "passed": 9,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_engine_paths.py",
+        "total": 7,
+        "seconds": 0.183,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 7,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_cwl_results.py",
+        "total": 5,
+        "seconds": 0.122,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 5,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "file": "workspace/tests/test_cwl_export.py",
+        "total": 14,
+        "seconds": 5.56,
+        "outcome": "OK",
+        "skipped": 0,
+        "passed": 14,
+        "failures": 0,
+        "errors": 0
+      }
+    ],
+    "skipDetails": [
+      {
+        "file": "workspace/tests/test_run_queue.py",
+        "count": 2,
+        "reason": "Requires native Windows held-reader semantics",
+        "basis": "Verbose run log and exact-source decorators."
+      },
+      {
+        "file": "workspace/tests/test_diagnostics.py",
+        "count": 2,
+        "reason": "Actual Windows junction handling and Windows extended-path IO require Windows.",
+        "basis": "Two skips counted in non-verbose log; conditional decorators independently inspected in exact source."
+      }
+    ],
+    "rawLog": "build-113573689461.log"
+  },
+  "archiveAudit": {
+    "schema": 1,
+    "runId": 37854004440,
+    "sourceCommit": "8ff5cf18b957905bbb92a0a08e21a6871ae49712",
+    "scope": "Independent downloaded archive and exact source identity audit only",
+    "nativeWindowsExecuted": false,
+    "published": false,
+    "success": true,
+    "checks": [
+      "Four downloaded bounded GitHub artifacts match declared sizes/digests and pass ZIP CRC/name checks.",
+      "Inner Starter and reassembled source archives match build and independent transport metadata.",
+      "All 709 current source files match their inventory and exact git commit; embedded legacy source, CRC and runtime source-companion pin verified.",
+      "Complete Starter inventory, all published pack files/private runtime files, runtime Python source correspondence and production 32-pack profile/trust preserved.",
+      "New align 0.4.1 contracts/assets/self-check verified with unchanged legacy operations, binaries, licenses and exact minimum-app declaration; standalone ZIP verification remains separate.",
+      "Packaged application and bridge are native AMD64 PE files; this inspection does not establish Windows execution."
+    ],
+    "failures": [],
+    "limits": [
+      "Independent pack ZIP not downloaded from the large aggregate artifact; its declaration is checked against the bundled additional pack. Native import gate checks the actual independent ZIP."
+    ],
+    "previousCandidateSourceComparison": {
+      "sourceCommit": "38917349449ce56a45d3e0f4f41b7d2a38621c6d",
+      "changedPaths": [
+        ".github/workflows/native-reference-management-candidate.yml",
+        "README.md",
+        "desktop/build_bridge.sh",
+        "desktop/build_desktop_workspace.sh",
+        "desktop/build_workspace_update_launcher.sh",
+        "desktop/desktop_workspace.cpp",
+        "knowledge/README.md",
+        "knowledge/architecture.md",
+        "knowledge/current-state.md",
+        "knowledge/development.md",
+        "knowledge/evidence/reference-management-0.15.0-initial-archive-audit-2026-10-08.json",
+        "knowledge/evidence/reference-management-0.15.0-initial-source-2026-10-08.json",
+        "knowledge/evidence/reference-management-0.15.0-initial-windows-2026-10-08.json",
+        "knowledge/evidence/reference-management-0.15.0-local-source-2026-10-08.json",
+        "knowledge/evidence/reference-management-0.15.0-ncbi-linux-2026-10-08.json",
+        "knowledge/project.json",
+        "knowledge/reference-management-0.15.0-handover.md",
+        "knowledge/reference-management.md",
+        "knowledge/roadmap.md",
+        "knowledge/validation-and-releases.md",
+        "scripts/audit_reference_management_candidate.py",
+        "scripts/check_reference_management_windows.py",
+        "scripts/check_references_windows.py",
+        "scripts/package_split.py",
+        "tests/test_core_checks.py",
+        "workspace/app_version.py",
+        "workspace/desktop_host.py",
+        "workspace/reference_library.py",
+        "workspace/reference_manager.py",
+        "workspace/reference_ncbi.py",
+        "workspace/reference_provenance.py",
+        "workspace/reference_provider.py",
+        "workspace/reference_transfer.py",
+        "workspace/service.py",
+        "workspace/tests/test_reference_library.py",
+        "workspace/tests/test_reference_management_service.py",
+        "workspace/tests/test_reference_manager.py",
+        "workspace/tests/test_reference_ncbi.py",
+        "workspace/tests/test_reference_provenance.py",
+        "workspace/tests/test_reference_provider.py",
+        "workspace/tests/test_reference_resume.py",
+        "workspace/tests/test_reference_service.py",
+        "workspace/verify_installation.py"
+      ],
+      "scientificPackRecipeAndProductionTrustUnchanged": true
+    },
+    "transportArtifacts": [
+      {
+        "id": 11582793510,
+        "name": "reference-management-transfer-metadata-8ff5cf18b957905bbb92a0a08e21a6871ae49712",
+        "bytes": 5770,
+        "sha256": "30d7e026fb812213b4d258563069da4cc77b4c3f7e349c89aefae6230b93f53a",
+        "zipCrc": "passed"
+      },
+      {
+        "id": 11582169375,
+        "name": "reference-management-transfer-source-part-2-8ff5cf18b957905bbb92a0a08e21a6871ae49712",
+        "bytes": 22432824,
+        "sha256": "ffd13625dc0129a19a71b94337501faf561d437f0c180dfed9525794997fe402",
+        "zipCrc": "passed"
+      },
+      {
+        "id": 11582089647,
+        "name": "reference-management-transfer-starter-8ff5cf18b957905bbb92a0a08e21a6871ae49712",
+        "bytes": 17817496,
+        "sha256": "1b4eecde06cd35bad36d8ff3fbc1adb6bb32f0e8963fa01c7498be800fd8328b",
+        "zipCrc": "passed"
+      },
+      {
+        "id": 11582074582,
+        "name": "reference-management-transfer-source-part-1-8ff5cf18b957905bbb92a0a08e21a6871ae49712",
+        "bytes": 25166018,
+        "sha256": "262ffdbf00ff6916337e928be6e066ad1e6382cac9bb4f26ee11c657d98a195b",
+        "zipCrc": "passed"
+      }
+    ],
+    "archives": [
+      {
+        "file": "native-workbench-0.15.0-starter-windows.zip",
+        "bytes": 17817296,
+        "sha256": "9d8fd8bb35e8afdcf64138a88d2e9f96e03972a362532c078d6589fa79326389",
+        "verified": true
+      },
+      {
+        "file": "native-workbench-0.15.0-source.zip",
+        "bytes": 47598454,
+        "sha256": "3680c0e7782615f8413cc33fcb8d91f95e23806e58cb53fadab72eadf6e91eb8",
+        "verified": true
+      },
+      {
+        "file": "native-workbench-pack-align-0.4.1.zip",
+        "bytes": 575862,
+        "sha256": "3a08cf061f0b62c5502d1420115db3fcae2b04bf695ad3cfd1c3063de0fafa02",
+        "verified": false
+      }
+    ],
+    "source": {
+      "currentFiles": 709,
+      "everyCurrentFileMatchesCommit": true,
+      "legacyBytes": 44163162,
+      "legacySha256": "5dac9add19436b336cba483a0f915e39aafed383282c2a019a0dbd3cc3c8668e",
+      "legacyCrc": "passed"
+    },
+    "packagedAtomicWriteHelper": {
+      "path": "workspace/file_io.py",
+      "sha256": "ab6034e617504c8c264c9c53201174fdae88440765db114f01ce39eafcb2d67e",
+      "matchesExactSourceCommit": true,
+      "executed": false
+    },
+    "starter": {
+      "coreFiles": 85,
+      "totalFiles": 272,
+      "preservedPublishedPackFiles": 143,
+      "preservedPrivateRuntimeFiles": 39,
+      "runtimeModulesMatchSource": 31,
+      "publishedStarterPins": [
+        {
+          "id": "align",
+          "version": "0.4.0",
+          "folder": "packs/align-0.4.0",
+          "manifestSha256": "81c962222c93356a4f7727b23193c71d7dcd515859e62a179574781f411824d3"
+        },
+        {
+          "id": "bam",
+          "version": "0.4.0",
+          "folder": "packs/bam-0.4.0",
+          "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+        },
+        {
+          "id": "variants",
+          "version": "0.4.0",
+          "folder": "packs/variants-0.4.0",
+          "manifestSha256": "ea4b7f0a6c28709e4190b6514c07cbf7bdd58e1a4f2a2d931f2cae3ce6ec3795"
+        }
+      ],
+      "officialSetupPacks": 32,
+      "setupProfileAndTrustUnchanged": true,
+      "containsUserData": false
+    },
+    "additionalPack": {
+      "id": "align",
+      "version": "0.4.1",
+      "minAppVersionDeclared": "0.13.0",
+      "manifestSha256": "7f8f36efbfd6a8255a98eabb06746fbcc5bbdb872f392a65ca3e79a586d04939",
+      "files": 43,
+      "toolBinaryBytesUnchanged": true,
+      "legacyOperationsUnchanged": true,
+      "newOperations": [
+        "build-sr-index",
+        "single-end-indexed",
+        "paired-end-indexed"
+      ],
+      "declaredInstallationChecks": 1,
+      "expectedMappedProperPairRecords": 202,
+      "standalonePackZipVerified": false
+    },
+    "nativeExecutables": {
+      "NativeWorkbench.exe": {
+        "bytes": 1712640,
+        "sha256": "0ceb57e283d711315aecc2ea1b96a308b029a2757f26fa1b074a4f7460766661",
+        "machine": "AMD64",
+        "executed": false
+      },
+      "WorkbenchBridge.exe": {
+        "bytes": 1550848,
+        "sha256": "e1e99d5d0fe88cacd91852bbf302f9bfe414745e911362c73c8dd724fbbf7a9d",
+        "machine": "AMD64",
+        "executed": false
+      }
+    }
+  },
+  "jobs": [
+    {
+      "id": 113573689461,
+      "name": "build",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 37854004440,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Recover immutable runtime, corresponding source and compiler",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Compile the native application with strict warnings",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Install independent CWL reference runner for tests only",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Verify affected source and packaging contracts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Freeze one standalone candidate and its matching source",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Prepare bounded transport without rebuilding the frozen archives",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 26
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 27
+        }
+      ]
+    },
+    {
+      "id": 113574374635,
+      "name": "native (ordinary)",
+      "status": "completed",
+      "conclusion": "failure",
+      "run_id": 37854004440,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/download-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Verify and separately extract the exact candidate for independent gates",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Exact packaged live Ensembl and NCBI references, cancellation, offline reuse and provenance",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Exact packaged resumable transfers, reviewed local imports, safe relocation and native References",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 6
+        },
+        {
+          "name": "Native process accounting, pipeline failure, cancellation, timeout and cleanup",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Exact packaged readiness, scientific measurements and diagnostic review/save",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Import the exact independent align 0.4.1 candidate ZIP and execute its declared scientific check",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Frozen batch plans, durable queue, real reusable indexes and native sample/queue interfaces",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Verified completed-step restart, declared resource admission and portable offline projects",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Separately labelled native delayed-host transport and cancellation fixture",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Windows reference, installation, queue and filesystem source regressions",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 13
+        },
+        {
+          "name": "Native expandable categories, search, selection, scrolling and installed-pack refresh",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14
+        },
+        {
+          "name": "Recheck native workspace, workflow interactions and starter scientific chain",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        },
+        {
+          "name": "Retain successful and failed reports and desktop captures",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 32
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 33
+        }
+      ]
+    },
+    {
+      "id": 113574374766,
+      "name": "native (path with spaces)",
+      "status": "completed",
+      "conclusion": "failure",
+      "run_id": 37854004440,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/download-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Verify and separately extract the exact candidate for independent gates",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Exact packaged live Ensembl and NCBI references, cancellation, offline reuse and provenance",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Exact packaged resumable transfers, reviewed local imports, safe relocation and native References",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 6
+        },
+        {
+          "name": "Native process accounting, pipeline failure, cancellation, timeout and cleanup",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Exact packaged readiness, scientific measurements and diagnostic review/save",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Import the exact independent align 0.4.1 candidate ZIP and execute its declared scientific check",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Frozen batch plans, durable queue, real reusable indexes and native sample/queue interfaces",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Verified completed-step restart, declared resource admission and portable offline projects",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Separately labelled native delayed-host transport and cancellation fixture",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Windows reference, installation, queue and filesystem source regressions",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 13
+        },
+        {
+          "name": "Native expandable categories, search, selection, scrolling and installed-pack refresh",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14
+        },
+        {
+          "name": "Recheck native workspace, workflow interactions and starter scientific chain",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        },
+        {
+          "name": "Retain successful and failed reports and desktop captures",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 32
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 33
+        }
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "schema": 1,
+      "runId": 37854004440,
+      "sourceCommit": "8ff5cf18b957905bbb92a0a08e21a6871ae49712",
+      "jobId": 113574374635,
+      "pathCase": "ordinary",
+      "jobConclusion": "failure",
+      "nativePlatform": "Windows Server 2022; GitHub windows-2022 20261004.326.1",
+      "rawLog": "ordinary-113574374635.log",
+      "suites": [
+        {
+          "file": "tests/test_core_checks.py",
+          "total": 13,
+          "passed": 12,
+          "skipped": 1,
+          "failures": 0,
+          "errors": 0,
+          "seconds": 0.492,
+          "outcome": "OK"
+        },
+        {
+          "file": "workspace/tests/test_reference_provider.py",
+          "total": 18,
+          "passed": 18,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0,
+          "seconds": 0.007,
+          "outcome": "OK"
+        },
+        {
+          "file": "workspace/tests/test_reference_manager.py",
+          "total": 26,
+          "passed": 26,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0,
+          "seconds": 1.996,
+          "outcome": "OK"
+        },
+        {
+          "file": "workspace/tests/test_reference_service.py",
+          "total": 10,
+          "passed": 9,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 1,
+          "seconds": 0.076,
+          "outcome": "FAILED"
+        }
+      ],
+      "notExecuted": [
+        "workspace/tests/test_reference_provenance.py",
+        "workspace/tests/test_reference_resume.py",
+        "workspace/tests/test_reference_library.py",
+        "workspace/tests/test_reference_ncbi.py",
+        "workspace/tests/test_reference_management_service.py",
+        "workspace/tests/test_recovery_execution.py",
+        "workspace/tests/test_project_manager.py",
+        "workspace/tests/test_recovery_service.py",
+        "workspace/tests/test_diagnostics.py",
+        "workspace/tests/test_run_queue.py",
+        "workspace/tests/test_reference_indexes.py"
+      ],
+      "totals": {
+        "total": 67,
+        "passed": 65,
+        "skipped": 1,
+        "failures": 0,
+        "errors": 1
+      },
+      "skipDetails": [
+        {
+          "file": "tests/test_core_checks.py",
+          "count": 1,
+          "test": "test_real_starter_pipeline_calls_truth_and_reports_reference_evidence",
+          "reason": "This validation adapter executes portable binaries on Linux only",
+          "basis": "Native total skip count in log plus inspected exact-source decorator."
+        }
+      ],
+      "gates": [
+        {
+          "name": "Exact packaged live Ensembl and NCBI references, cancellation, offline reuse and provenance",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Exact packaged resumable transfers, reviewed local imports, safe relocation and native References",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 6
+        },
+        {
+          "name": "Native process accounting, pipeline failure, cancellation, timeout and cleanup",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Exact packaged readiness, scientific measurements and diagnostic review/save",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Import the exact independent align 0.4.1 candidate ZIP and execute its declared scientific check",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Frozen batch plans, durable queue, real reusable indexes and native sample/queue interfaces",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Verified completed-step restart, declared resource admission and portable offline projects",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Separately labelled native delayed-host transport and cancellation fixture",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Windows reference, installation, queue and filesystem source regressions",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 13
+        },
+        {
+          "name": "Native expandable categories, search, selection, scrolling and installed-pack refresh",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14
+        },
+        {
+          "name": "Recheck native workspace, workflow interactions and starter scientific chain",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        }
+      ],
+      "liveReferenceGate": {
+        "success": true,
+        "passed": 9,
+        "scope": "Live Ensembl five products, cancellation, socket-denied SAMtools/provenance/CWL/installation, live NCBI three pinned products and socket-denied typed reuse."
+      },
+      "failures": [
+        {
+          "scope": "reference management",
+          "passedBeforeFailure": 6,
+          "reason": "Validator assumed the Download button would be enabled without checking a product. Native discovery completed with three unchecked rows; explicit user choice was required. Validator corrected to assert disabled, select a row and toggle its checkbox with Space.",
+          "remainingGuiChecksExecuted": false
+        },
+        {
+          "scope": "Windows source",
+          "reason": "Service-level managed default reference destination validation compares ordinary and extended Windows paths, rejecting the missing default folder before the corrected manager is called.",
+          "test": "test_reference_service.ReferenceServiceTests.test_real_manager_provider_and_host_complete_local_binding"
+        }
+      ],
+      "additionalObservedGuiIssue": {
+        "source": "Screenshot/control JSON review from initial run37853140376, same native initialization remained in this rebuilt commit",
+        "reason": "Initial native References destination stayed at application user-data/references instead of the persisted relocated library default; production initialization and first/reopened native assertions added for next candidate.",
+        "automatedRegressionExecuted": false
+      },
+      "limitations": [
+        "Two ignored ctypes control-enumeration callback exceptions (Could not measure native control) occurred during separate library gate; its seven asserted checks passed. Exhaustive transitional control enumeration is not established."
+      ],
+      "artifact": {
+        "id": 11582459454,
+        "bytes": 19192996,
+        "sha256": "d7af1999b5b80d7482e22fb1befd39e80a911b872e93ce5294b29594dd4c7065",
+        "officialSizeDigestAndCrcVerified": true
+      },
+      "newReferenceReports": {
+        "live": {
+          "file": "reference-live-evidence/native-references-live.json",
+          "bytes": 20503,
+          "sha256": "092e8bf7091f150863a51bfe6398d0bdaae26ee569275251bf081c7b0d7ab419",
+          "summary": {
+            "success": true,
+            "passed": 9,
+            "checks": [
+              "Live release-pinned yeast search and five-product discovery.",
+              "Cancellation after transferred bytes removed only its partial download and published no reference.",
+              "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+              "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+              "Completed CWL export preserves the real downloaded yeast reference receipt, input hash, frozen plan and native output provenance.",
+              "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods.",
+              "Installed application and starter pack integrity checks passed after reference use.",
+              "Live NCBI exact GCF_000146045.2 lookup discovers genome, GTF and protein only; all three downloaded compressed/expanded identities match independently dated pins with MD5 and gzip verification and observed annotation metadata retained.",
+              "A socket-denied fresh host reuses the downloaded NCBI genome through its compatible FASTA input and retains provider/accession provenance in reviewed methods."
+            ],
+            "sourceCommit": "8ff5cf18b957905bbb92a0a08e21a6871ae49712",
+            "assetSha256": "9d8fd8bb35e8afdcf64138a88d2e9f96e03972a362532c078d6589fa79326389",
+            "appFiles": {
+              "NativeWorkbench.exe": "0ceb57e283d711315aecc2ea1b96a308b029a2757f26fa1b074a4f7460766661",
+              "WorkbenchBridge.exe": "e1e99d5d0fe88cacd91852bbf302f9bfe414745e911362c73c8dd724fbbf7a9d",
+              "workspace\\app_version.py": "5aca6d5165ccc3d40e11086fb988f64390ba3b929150e30a88ea015f8a852965",
+              "workspace\\catalog.py": "8269f3ff23500c8f5b3321d475573b94f960d0534271cf724a8ac3621adc311f",
+              "workspace\\core_checks.py": "431598722c8c261683e123b255d008210abedb13e90e68d7bec0e6b1df905d70",
+              "workspace\\cwl_export.py": "5773f89433bc11f3cc9708e33994ec80f7c7bf8f6465c9ac8bb8da11c8181596",
+              "workspace\\dag_routing.py": "eb79a385a6426e8ce9778124620fe48c69e8c6ca3a7a9351b95780c99e869fe4",
+              "workspace\\desktop_host.py": "d3bff49a4436d57b153af9ff270003bf4eef8a7d44245c07d61bb834ea74db74",
+              "workspace\\desktop_model.py": "3904ae9e38fe214110e472167c292b183c39dca60ce01407c3533474227597f6",
+              "workspace\\diagnostics.py": "fa743c69179a13b66dc000348a3e2954616a349163f1103a8cd9f50d61793124",
+              "workspace\\engine.py": "888927ee7019a5317db0458d34a72f2989fd6e6dc0b49e61a0f15fe96ccf8363",
+              "workspace\\example.py": "fb558de8dc3f49f68550af3e08d768e8a99c5cd9e8d466ca357dcecc3dd699b3",
+              "workspace\\execution_resources.py": "33329a740602199f2931b90fde638a0780ed6fa28d2cf15aa15518d8ee8bdae9",
+              "workspace\\file_io.py": "ab6034e617504c8c264c9c53201174fdae88440765db114f01ce39eafcb2d67e",
+              "workspace\\pack_checks.py": "687a775f637ad12e55a04fac6c05292174c457bd551455f0dbffeb15d1f544a1",
+              "workspace\\pack_manager.py": "282b8370cccd6d86d00f6d2a85fe99669eb1d9b9953a9327c65c323a4a780b5d",
+              "workspace\\pack_security.py": "2d1fa4a4267f5cecb0d583c7b43fc59dc8645125c59e3db69c4d6fa307ff6cc0",
+              "workspace\\performance.py": "8f2e985ae95cf1856de64a5e051f681b0e78a9974dc312d0daf55331a523c5b6",
+              "workspace\\project_manager.py": "f01946694516b4a4fbe98ef8b14715a3e0e446d385b94438a26afc713ec86cdf",
+              "workspace\\readiness.py": "e8fdbaba0aa430a539e9214b711e14466e9597456527ec33eed687f898c33676",
+              "workspace\\recovery.py": "568d48098fe7fb01cfa800ac1fd52373d4d1bbff689f49207242065f9901d6b5",
+              "workspace\\reference_indexes.py": "fb6b20dd123f4d83896edc364868da6fdf779f915e4ae2e9e110cce1c1740203",
+              "workspace\\reference_library.py": "2416af2e3fb9aa80bcf1473037f4e248f9099600eb06ee707fee4b525b11baf2",
+              "workspace\\reference_manager.py": "af980e1ded0e01eb214424d29147043a21762b4e4708cf675dd0e8b183464cf6",
+              "workspace\\reference_ncbi.py": "1b1dec1af7c8cefbf94a49c6508ecfeacd2d93b89d3f72c041b18b04e526f5e9",
+              "workspace\\reference_provenance.py": "e2915eb46e3ca86cbf89297dadeec48925f2c9a667e85057bc3b9986e2735ac9",
+              "workspace\\reference_provider.py": "3bf51daae305ef16c0cff0a6bc2b65f76bc6013f7b1456da07fa8d869c5f0832",
+              "workspace\\reference_transfer.py": "9ac8d6f8ffdd94cd62de7036097df51afbc64bdc9e8de27b11f4ea6b741e4b93",
+              "workspace\\run_queue.py": "2dbb8387ba758259a68dc213ade820be027529e4f1d622e101ed96367c97cf6c",
+              "workspace\\sample_table.py": "a3ce7ac6f31fd044adf6abc90d7c8b83b5a57630212ebca973022ba4a7570f4e",
+              "workspace\\service.py": "a4cae46a62112906ee471fbdf65117a438f28b293a9996da717793145d731b16",
+              "workspace\\setup_manager.py": "4432c2c6c6091ebe4aeb57e29555e4d21cbe34b9d3ad8a2fef58fa13022fb853",
+              "workspace\\verify_installation.py": "dc33c51ebd52f9a812dfa6df0fcd083a04d144769edc0caa50147edab32358cf"
+            },
+            "gateSha256": "9fe325d22b932714af2ae00b99cfc2e55c544091b04194c4981bcaab355c6c9e"
+          }
+        },
+        "management": {
+          "file": "reference-management-evidence/native-reference-management.json",
+          "bytes": 21185,
+          "sha256": "0b811a13e74ea17282717091e0280459f5166621efb13b4ca1d060c1d0f13971",
+          "summary": {
+            "success": false,
+            "passed": 6,
+            "checks": [
+              "Exact packaged transfer code pauses after a production chunk, publishes no incomplete record, reopens and rehashes its checkpoint, truncates an uncheckpointed crash suffix and resumes with exact Range/If-Range into independently verified complete bytes; deterministic provider fixture only.",
+              "Malformed Content-Range and changed entity validators are never appended; deterministic responses force a fresh full request whose final bytes still match the independently pinned fixture.",
+              "Changed checkpointed compressed bytes and malformed checkpoint JSON fail closed; explicit discard removes only pending state and preserves ready bundles and unrelated user content.",
+              "Socket-denied exact private host reviews without copying; stale/replayed review tokens and changed reviewed files fail closed; explicit confirmation copies FASTA and gzip GTF with independently checked source/expanded hashes and clearly user-declared provenance.",
+              "Socket-denied typed selection rejects GTF for a FASTA input; reviewed relocation copies and verifies the library while retaining old paths/receipts and exact queued companions. The previously frozen old-path plan then executes native SAMtools with the correct FASTA dictionary and unchanged reference provenance in methods, plan, results and CWL.",
+              "A fresh socket-denied private host reopens the relocated local library and offers its verified FASTA to a compatible native tool without contacting either provider."
+            ],
+            "failure": {
+              "type": "TimeoutError",
+              "message": "three native NCBI reference products",
+              "traceback": "Traceback (most recent call last):\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_reference_management_windows.py\", line 626, in main\n    gui_checks(root, evidence, report)\n    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_reference_management_windows.py\", line 429, in gui_checks\n    ui.wait('three native NCBI reference products', lambda: products.count() == 3 and ui.user.IsWindowEnabled(ui.child(611, references)), seconds=120)\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_workspace_ui_windows.py\", line 280, in wait\n    raise TimeoutError(phase)\nTimeoutError: three native NCBI reference products\n"
+            },
+            "sourceCommit": "8ff5cf18b957905bbb92a0a08e21a6871ae49712",
+            "assetSha256": "9d8fd8bb35e8afdcf64138a88d2e9f96e03972a362532c078d6589fa79326389",
+            "appFiles": {
+              "NativeWorkbench.exe": "0ceb57e283d711315aecc2ea1b96a308b029a2757f26fa1b074a4f7460766661",
+              "WorkbenchBridge.exe": "e1e99d5d0fe88cacd91852bbf302f9bfe414745e911362c73c8dd724fbbf7a9d",
+              "workspace\\app_version.py": "5aca6d5165ccc3d40e11086fb988f64390ba3b929150e30a88ea015f8a852965",
+              "workspace\\catalog.py": "8269f3ff23500c8f5b3321d475573b94f960d0534271cf724a8ac3621adc311f",
+              "workspace\\core_checks.py": "431598722c8c261683e123b255d008210abedb13e90e68d7bec0e6b1df905d70",
+              "workspace\\cwl_export.py": "5773f89433bc11f3cc9708e33994ec80f7c7bf8f6465c9ac8bb8da11c8181596",
+              "workspace\\dag_routing.py": "eb79a385a6426e8ce9778124620fe48c69e8c6ca3a7a9351b95780c99e869fe4",
+              "workspace\\desktop_host.py": "d3bff49a4436d57b153af9ff270003bf4eef8a7d44245c07d61bb834ea74db74",
+              "workspace\\desktop_model.py": "3904ae9e38fe214110e472167c292b183c39dca60ce01407c3533474227597f6",
+              "workspace\\diagnostics.py": "fa743c69179a13b66dc000348a3e2954616a349163f1103a8cd9f50d61793124",
+              "workspace\\engine.py": "888927ee7019a5317db0458d34a72f2989fd6e6dc0b49e61a0f15fe96ccf8363",
+              "workspace\\example.py": "fb558de8dc3f49f68550af3e08d768e8a99c5cd9e8d466ca357dcecc3dd699b3",
+              "workspace\\execution_resources.py": "33329a740602199f2931b90fde638a0780ed6fa28d2cf15aa15518d8ee8bdae9",
+              "workspace\\file_io.py": "ab6034e617504c8c264c9c53201174fdae88440765db114f01ce39eafcb2d67e",
+              "workspace\\pack_checks.py": "687a775f637ad12e55a04fac6c05292174c457bd551455f0dbffeb15d1f544a1",
+              "workspace\\pack_manager.py": "282b8370cccd6d86d00f6d2a85fe99669eb1d9b9953a9327c65c323a4a780b5d",
+              "workspace\\pack_security.py": "2d1fa4a4267f5cecb0d583c7b43fc59dc8645125c59e3db69c4d6fa307ff6cc0",
+              "workspace\\performance.py": "8f2e985ae95cf1856de64a5e051f681b0e78a9974dc312d0daf55331a523c5b6",
+              "workspace\\project_manager.py": "f01946694516b4a4fbe98ef8b14715a3e0e446d385b94438a26afc713ec86cdf",
+              "workspace\\readiness.py": "e8fdbaba0aa430a539e9214b711e14466e9597456527ec33eed687f898c33676",
+              "workspace\\recovery.py": "568d48098fe7fb01cfa800ac1fd52373d4d1bbff689f49207242065f9901d6b5",
+              "workspace\\reference_indexes.py": "fb6b20dd123f4d83896edc364868da6fdf779f915e4ae2e9e110cce1c1740203",
+              "workspace\\reference_library.py": "2416af2e3fb9aa80bcf1473037f4e248f9099600eb06ee707fee4b525b11baf2",
+              "workspace\\reference_manager.py": "af980e1ded0e01eb214424d29147043a21762b4e4708cf675dd0e8b183464cf6",
+              "workspace\\reference_ncbi.py": "1b1dec1af7c8cefbf94a49c6508ecfeacd2d93b89d3f72c041b18b04e526f5e9",
+              "workspace\\reference_provenance.py": "e2915eb46e3ca86cbf89297dadeec48925f2c9a667e85057bc3b9986e2735ac9",
+              "workspace\\reference_provider.py": "3bf51daae305ef16c0cff0a6bc2b65f76bc6013f7b1456da07fa8d869c5f0832",
+              "workspace\\reference_transfer.py": "9ac8d6f8ffdd94cd62de7036097df51afbc64bdc9e8de27b11f4ea6b741e4b93",
+              "workspace\\run_queue.py": "2dbb8387ba758259a68dc213ade820be027529e4f1d622e101ed96367c97cf6c",
+              "workspace\\sample_table.py": "a3ce7ac6f31fd044adf6abc90d7c8b83b5a57630212ebca973022ba4a7570f4e",
+              "workspace\\service.py": "a4cae46a62112906ee471fbdf65117a438f28b293a9996da717793145d731b16",
+              "workspace\\setup_manager.py": "4432c2c6c6091ebe4aeb57e29555e4d21cbe34b9d3ad8a2fef58fa13022fb853",
+              "workspace\\verify_installation.py": "dc33c51ebd52f9a812dfa6df0fcd083a04d144769edc0caa50147edab32358cf"
+            },
+            "gateSha256": "9fe325d22b932714af2ae00b99cfc2e55c544091b04194c4981bcaab355c6c9e"
+          }
+        }
+      }
+    },
+    {
+      "schema": 1,
+      "runId": 37854004440,
+      "sourceCommit": "8ff5cf18b957905bbb92a0a08e21a6871ae49712",
+      "jobId": 113574374766,
+      "pathCase": "spaces",
+      "jobConclusion": "failure",
+      "nativePlatform": "Windows Server 2022; GitHub windows-2022 20261004.326.1",
+      "rawLog": "spaces-113574374766.log",
+      "suites": [
+        {
+          "file": "tests/test_core_checks.py",
+          "total": 13,
+          "passed": 12,
+          "skipped": 1,
+          "failures": 0,
+          "errors": 0,
+          "seconds": 0.496,
+          "outcome": "OK"
+        },
+        {
+          "file": "workspace/tests/test_reference_provider.py",
+          "total": 18,
+          "passed": 18,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0,
+          "seconds": 0.007,
+          "outcome": "OK"
+        },
+        {
+          "file": "workspace/tests/test_reference_manager.py",
+          "total": 26,
+          "passed": 26,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0,
+          "seconds": 2.5,
+          "outcome": "OK"
+        },
+        {
+          "file": "workspace/tests/test_reference_service.py",
+          "total": 10,
+          "passed": 9,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 1,
+          "seconds": 0.08,
+          "outcome": "FAILED"
+        }
+      ],
+      "notExecuted": [
+        "workspace/tests/test_reference_provenance.py",
+        "workspace/tests/test_reference_resume.py",
+        "workspace/tests/test_reference_library.py",
+        "workspace/tests/test_reference_ncbi.py",
+        "workspace/tests/test_reference_management_service.py",
+        "workspace/tests/test_recovery_execution.py",
+        "workspace/tests/test_project_manager.py",
+        "workspace/tests/test_recovery_service.py",
+        "workspace/tests/test_diagnostics.py",
+        "workspace/tests/test_run_queue.py",
+        "workspace/tests/test_reference_indexes.py"
+      ],
+      "totals": {
+        "total": 67,
+        "passed": 65,
+        "skipped": 1,
+        "failures": 0,
+        "errors": 1
+      },
+      "skipDetails": [
+        {
+          "file": "tests/test_core_checks.py",
+          "count": 1,
+          "test": "test_real_starter_pipeline_calls_truth_and_reports_reference_evidence",
+          "reason": "This validation adapter executes portable binaries on Linux only",
+          "basis": "Native total skip count in log plus inspected exact-source decorator."
+        }
+      ],
+      "gates": [
+        {
+          "name": "Exact packaged live Ensembl and NCBI references, cancellation, offline reuse and provenance",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Exact packaged resumable transfers, reviewed local imports, safe relocation and native References",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 6
+        },
+        {
+          "name": "Native process accounting, pipeline failure, cancellation, timeout and cleanup",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Exact packaged readiness, scientific measurements and diagnostic review/save",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Import the exact independent align 0.4.1 candidate ZIP and execute its declared scientific check",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Frozen batch plans, durable queue, real reusable indexes and native sample/queue interfaces",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Verified completed-step restart, declared resource admission and portable offline projects",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Separately labelled native delayed-host transport and cancellation fixture",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Windows reference, installation, queue and filesystem source regressions",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 13
+        },
+        {
+          "name": "Native expandable categories, search, selection, scrolling and installed-pack refresh",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14
+        },
+        {
+          "name": "Recheck native workspace, workflow interactions and starter scientific chain",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        }
+      ],
+      "liveReferenceGate": {
+        "success": true,
+        "passed": 9,
+        "scope": "Live Ensembl five products, cancellation, socket-denied SAMtools/provenance/CWL/installation, live NCBI three pinned products and socket-denied typed reuse."
+      },
+      "failures": [
+        {
+          "scope": "reference management",
+          "passedBeforeFailure": 6,
+          "reason": "Validator assumed the Download button would be enabled without checking a product. Native discovery completed with three unchecked rows; explicit user choice was required. Validator corrected to assert disabled, select a row and toggle its checkbox with Space.",
+          "remainingGuiChecksExecuted": false
+        },
+        {
+          "scope": "Windows source",
+          "reason": "Service-level managed default reference destination validation compares ordinary and extended Windows paths, rejecting the missing default folder before the corrected manager is called.",
+          "test": "test_reference_service.ReferenceServiceTests.test_real_manager_provider_and_host_complete_local_binding"
+        }
+      ],
+      "additionalObservedGuiIssue": {
+        "source": "Screenshot/control JSON review from initial run37853140376, same native initialization remained in this rebuilt commit",
+        "reason": "Initial native References destination stayed at application user-data/references instead of the persisted relocated library default; production initialization and first/reopened native assertions added for next candidate.",
+        "automatedRegressionExecuted": false
+      },
+      "limitations": [
+        "Two ignored ctypes control-enumeration callback exceptions (Could not measure native control) occurred during separate library gate; its seven asserted checks passed. Exhaustive transitional control enumeration is not established."
+      ],
+      "artifact": {
+        "id": 11583093756,
+        "bytes": 13512704,
+        "sha256": "b9797e8c4ef56e3c5e76b2e936ed67761d49efed1f5e817741c59cc1e8de0fb9",
+        "officialSizeDigestAndCrcVerified": true
+      },
+      "newReferenceReports": {
+        "live": {
+          "file": "reference-live-evidence/native-references-live.json",
+          "bytes": 20503,
+          "sha256": "2a29a1dc423c27700887774dfdff4a5f24492a2ae569a52f1fe2ca7ab47b87c2",
+          "summary": {
+            "success": true,
+            "passed": 9,
+            "checks": [
+              "Live release-pinned yeast search and five-product discovery.",
+              "Cancellation after transferred bytes removed only its partial download and published no reference.",
+              "Five reference files unpacked atomically with matching receipts; all five independently pinned compressed and expanded hashes agree.",
+              "Socket-denied restart listed local references, matched a typed input and generated reference-aware methods.",
+              "Completed CWL export preserves the real downloaded yeast reference receipt, input hash, frozen plan and native output provenance.",
+              "Offline native SAMtools indexed all 17 yeast contigs and preserved the reference, frozen identities and completed methods.",
+              "Installed application and starter pack integrity checks passed after reference use.",
+              "Live NCBI exact GCF_000146045.2 lookup discovers genome, GTF and protein only; all three downloaded compressed/expanded identities match independently dated pins with MD5 and gzip verification and observed annotation metadata retained.",
+              "A socket-denied fresh host reuses the downloaded NCBI genome through its compatible FASTA input and retains provider/accession provenance in reviewed methods."
+            ],
+            "sourceCommit": "8ff5cf18b957905bbb92a0a08e21a6871ae49712",
+            "assetSha256": "9d8fd8bb35e8afdcf64138a88d2e9f96e03972a362532c078d6589fa79326389",
+            "appFiles": {
+              "NativeWorkbench.exe": "0ceb57e283d711315aecc2ea1b96a308b029a2757f26fa1b074a4f7460766661",
+              "WorkbenchBridge.exe": "e1e99d5d0fe88cacd91852bbf302f9bfe414745e911362c73c8dd724fbbf7a9d",
+              "workspace\\app_version.py": "5aca6d5165ccc3d40e11086fb988f64390ba3b929150e30a88ea015f8a852965",
+              "workspace\\catalog.py": "8269f3ff23500c8f5b3321d475573b94f960d0534271cf724a8ac3621adc311f",
+              "workspace\\core_checks.py": "431598722c8c261683e123b255d008210abedb13e90e68d7bec0e6b1df905d70",
+              "workspace\\cwl_export.py": "5773f89433bc11f3cc9708e33994ec80f7c7bf8f6465c9ac8bb8da11c8181596",
+              "workspace\\dag_routing.py": "eb79a385a6426e8ce9778124620fe48c69e8c6ca3a7a9351b95780c99e869fe4",
+              "workspace\\desktop_host.py": "d3bff49a4436d57b153af9ff270003bf4eef8a7d44245c07d61bb834ea74db74",
+              "workspace\\desktop_model.py": "3904ae9e38fe214110e472167c292b183c39dca60ce01407c3533474227597f6",
+              "workspace\\diagnostics.py": "fa743c69179a13b66dc000348a3e2954616a349163f1103a8cd9f50d61793124",
+              "workspace\\engine.py": "888927ee7019a5317db0458d34a72f2989fd6e6dc0b49e61a0f15fe96ccf8363",
+              "workspace\\example.py": "fb558de8dc3f49f68550af3e08d768e8a99c5cd9e8d466ca357dcecc3dd699b3",
+              "workspace\\execution_resources.py": "33329a740602199f2931b90fde638a0780ed6fa28d2cf15aa15518d8ee8bdae9",
+              "workspace\\file_io.py": "ab6034e617504c8c264c9c53201174fdae88440765db114f01ce39eafcb2d67e",
+              "workspace\\pack_checks.py": "687a775f637ad12e55a04fac6c05292174c457bd551455f0dbffeb15d1f544a1",
+              "workspace\\pack_manager.py": "282b8370cccd6d86d00f6d2a85fe99669eb1d9b9953a9327c65c323a4a780b5d",
+              "workspace\\pack_security.py": "2d1fa4a4267f5cecb0d583c7b43fc59dc8645125c59e3db69c4d6fa307ff6cc0",
+              "workspace\\performance.py": "8f2e985ae95cf1856de64a5e051f681b0e78a9974dc312d0daf55331a523c5b6",
+              "workspace\\project_manager.py": "f01946694516b4a4fbe98ef8b14715a3e0e446d385b94438a26afc713ec86cdf",
+              "workspace\\readiness.py": "e8fdbaba0aa430a539e9214b711e14466e9597456527ec33eed687f898c33676",
+              "workspace\\recovery.py": "568d48098fe7fb01cfa800ac1fd52373d4d1bbff689f49207242065f9901d6b5",
+              "workspace\\reference_indexes.py": "fb6b20dd123f4d83896edc364868da6fdf779f915e4ae2e9e110cce1c1740203",
+              "workspace\\reference_library.py": "2416af2e3fb9aa80bcf1473037f4e248f9099600eb06ee707fee4b525b11baf2",
+              "workspace\\reference_manager.py": "af980e1ded0e01eb214424d29147043a21762b4e4708cf675dd0e8b183464cf6",
+              "workspace\\reference_ncbi.py": "1b1dec1af7c8cefbf94a49c6508ecfeacd2d93b89d3f72c041b18b04e526f5e9",
+              "workspace\\reference_provenance.py": "e2915eb46e3ca86cbf89297dadeec48925f2c9a667e85057bc3b9986e2735ac9",
+              "workspace\\reference_provider.py": "3bf51daae305ef16c0cff0a6bc2b65f76bc6013f7b1456da07fa8d869c5f0832",
+              "workspace\\reference_transfer.py": "9ac8d6f8ffdd94cd62de7036097df51afbc64bdc9e8de27b11f4ea6b741e4b93",
+              "workspace\\run_queue.py": "2dbb8387ba758259a68dc213ade820be027529e4f1d622e101ed96367c97cf6c",
+              "workspace\\sample_table.py": "a3ce7ac6f31fd044adf6abc90d7c8b83b5a57630212ebca973022ba4a7570f4e",
+              "workspace\\service.py": "a4cae46a62112906ee471fbdf65117a438f28b293a9996da717793145d731b16",
+              "workspace\\setup_manager.py": "4432c2c6c6091ebe4aeb57e29555e4d21cbe34b9d3ad8a2fef58fa13022fb853",
+              "workspace\\verify_installation.py": "dc33c51ebd52f9a812dfa6df0fcd083a04d144769edc0caa50147edab32358cf"
+            },
+            "gateSha256": "9fe325d22b932714af2ae00b99cfc2e55c544091b04194c4981bcaab355c6c9e"
+          }
+        },
+        "management": {
+          "file": "reference-management-evidence/native-reference-management.json",
+          "bytes": 21185,
+          "sha256": "7e28e1af26893f2808ebc8b7d1e46602f320cac5d6a3d4bd0209d713fd20016d",
+          "summary": {
+            "success": false,
+            "passed": 6,
+            "checks": [
+              "Exact packaged transfer code pauses after a production chunk, publishes no incomplete record, reopens and rehashes its checkpoint, truncates an uncheckpointed crash suffix and resumes with exact Range/If-Range into independently verified complete bytes; deterministic provider fixture only.",
+              "Malformed Content-Range and changed entity validators are never appended; deterministic responses force a fresh full request whose final bytes still match the independently pinned fixture.",
+              "Changed checkpointed compressed bytes and malformed checkpoint JSON fail closed; explicit discard removes only pending state and preserves ready bundles and unrelated user content.",
+              "Socket-denied exact private host reviews without copying; stale/replayed review tokens and changed reviewed files fail closed; explicit confirmation copies FASTA and gzip GTF with independently checked source/expanded hashes and clearly user-declared provenance.",
+              "Socket-denied typed selection rejects GTF for a FASTA input; reviewed relocation copies and verifies the library while retaining old paths/receipts and exact queued companions. The previously frozen old-path plan then executes native SAMtools with the correct FASTA dictionary and unchanged reference provenance in methods, plan, results and CWL.",
+              "A fresh socket-denied private host reopens the relocated local library and offers its verified FASTA to a compatible native tool without contacting either provider."
+            ],
+            "failure": {
+              "type": "TimeoutError",
+              "message": "three native NCBI reference products",
+              "traceback": "Traceback (most recent call last):\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_reference_management_windows.py\", line 626, in main\n    gui_checks(root, evidence, report)\n    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_reference_management_windows.py\", line 429, in gui_checks\n    ui.wait('three native NCBI reference products', lambda: products.count() == 3 and ui.user.IsWindowEnabled(ui.child(611, references)), seconds=120)\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_workspace_ui_windows.py\", line 280, in wait\n    raise TimeoutError(phase)\nTimeoutError: three native NCBI reference products\n"
+            },
+            "sourceCommit": "8ff5cf18b957905bbb92a0a08e21a6871ae49712",
+            "assetSha256": "9d8fd8bb35e8afdcf64138a88d2e9f96e03972a362532c078d6589fa79326389",
+            "appFiles": {
+              "NativeWorkbench.exe": "0ceb57e283d711315aecc2ea1b96a308b029a2757f26fa1b074a4f7460766661",
+              "WorkbenchBridge.exe": "e1e99d5d0fe88cacd91852bbf302f9bfe414745e911362c73c8dd724fbbf7a9d",
+              "workspace\\app_version.py": "5aca6d5165ccc3d40e11086fb988f64390ba3b929150e30a88ea015f8a852965",
+              "workspace\\catalog.py": "8269f3ff23500c8f5b3321d475573b94f960d0534271cf724a8ac3621adc311f",
+              "workspace\\core_checks.py": "431598722c8c261683e123b255d008210abedb13e90e68d7bec0e6b1df905d70",
+              "workspace\\cwl_export.py": "5773f89433bc11f3cc9708e33994ec80f7c7bf8f6465c9ac8bb8da11c8181596",
+              "workspace\\dag_routing.py": "eb79a385a6426e8ce9778124620fe48c69e8c6ca3a7a9351b95780c99e869fe4",
+              "workspace\\desktop_host.py": "d3bff49a4436d57b153af9ff270003bf4eef8a7d44245c07d61bb834ea74db74",
+              "workspace\\desktop_model.py": "3904ae9e38fe214110e472167c292b183c39dca60ce01407c3533474227597f6",
+              "workspace\\diagnostics.py": "fa743c69179a13b66dc000348a3e2954616a349163f1103a8cd9f50d61793124",
+              "workspace\\engine.py": "888927ee7019a5317db0458d34a72f2989fd6e6dc0b49e61a0f15fe96ccf8363",
+              "workspace\\example.py": "fb558de8dc3f49f68550af3e08d768e8a99c5cd9e8d466ca357dcecc3dd699b3",
+              "workspace\\execution_resources.py": "33329a740602199f2931b90fde638a0780ed6fa28d2cf15aa15518d8ee8bdae9",
+              "workspace\\file_io.py": "ab6034e617504c8c264c9c53201174fdae88440765db114f01ce39eafcb2d67e",
+              "workspace\\pack_checks.py": "687a775f637ad12e55a04fac6c05292174c457bd551455f0dbffeb15d1f544a1",
+              "workspace\\pack_manager.py": "282b8370cccd6d86d00f6d2a85fe99669eb1d9b9953a9327c65c323a4a780b5d",
+              "workspace\\pack_security.py": "2d1fa4a4267f5cecb0d583c7b43fc59dc8645125c59e3db69c4d6fa307ff6cc0",
+              "workspace\\performance.py": "8f2e985ae95cf1856de64a5e051f681b0e78a9974dc312d0daf55331a523c5b6",
+              "workspace\\project_manager.py": "f01946694516b4a4fbe98ef8b14715a3e0e446d385b94438a26afc713ec86cdf",
+              "workspace\\readiness.py": "e8fdbaba0aa430a539e9214b711e14466e9597456527ec33eed687f898c33676",
+              "workspace\\recovery.py": "568d48098fe7fb01cfa800ac1fd52373d4d1bbff689f49207242065f9901d6b5",
+              "workspace\\reference_indexes.py": "fb6b20dd123f4d83896edc364868da6fdf779f915e4ae2e9e110cce1c1740203",
+              "workspace\\reference_library.py": "2416af2e3fb9aa80bcf1473037f4e248f9099600eb06ee707fee4b525b11baf2",
+              "workspace\\reference_manager.py": "af980e1ded0e01eb214424d29147043a21762b4e4708cf675dd0e8b183464cf6",
+              "workspace\\reference_ncbi.py": "1b1dec1af7c8cefbf94a49c6508ecfeacd2d93b89d3f72c041b18b04e526f5e9",
+              "workspace\\reference_provenance.py": "e2915eb46e3ca86cbf89297dadeec48925f2c9a667e85057bc3b9986e2735ac9",
+              "workspace\\reference_provider.py": "3bf51daae305ef16c0cff0a6bc2b65f76bc6013f7b1456da07fa8d869c5f0832",
+              "workspace\\reference_transfer.py": "9ac8d6f8ffdd94cd62de7036097df51afbc64bdc9e8de27b11f4ea6b741e4b93",
+              "workspace\\run_queue.py": "2dbb8387ba758259a68dc213ade820be027529e4f1d622e101ed96367c97cf6c",
+              "workspace\\sample_table.py": "a3ce7ac6f31fd044adf6abc90d7c8b83b5a57630212ebca973022ba4a7570f4e",
+              "workspace\\service.py": "a4cae46a62112906ee471fbdf65117a438f28b293a9996da717793145d731b16",
+              "workspace\\setup_manager.py": "4432c2c6c6091ebe4aeb57e29555e4d21cbe34b9d3ad8a2fef58fa13022fb853",
+              "workspace\\verify_installation.py": "dc33c51ebd52f9a812dfa6df0fcd083a04d144769edc0caa50147edab32358cf"
+            },
+            "gateSha256": "9fe325d22b932714af2ae00b99cfc2e55c544091b04194c4981bcaab355c6c9e"
+          }
+        }
+      }
+    }
+  ],
+  "diagnosis": [
+    "Native NCBI discovery succeeded, but the new validator incorrectly expected Download to enable before any file was checked. The gate now asserts it is initially disabled, explicitly toggles the genome checkbox and then requires it to enable.",
+    "A newly reached service source regression exposed ordinary 8.3 versus resolved long Windows path comparison before the manager call. Service and transfer now compare canonical identities while retaining the requested IO/display spelling and rejecting links before transfer resolution.",
+    "Independent inspection of captured native controls found the saved relocated default folder was not populated on first References open. The native edit now initializes empty and is populated from the saved backend destination; first-open and reopen assertions were added."
+  ],
+  "visualInspection": {
+    "reviewer": "root",
+    "ordinaryFailureCapture": "reference-management-evidence/reference-management-failure-0.bmp",
+    "observation": "Three NCBI rows are visible and unchecked; disabled Download is correct. Saved destination is visibly the old app-local default, which requires a separate UI fix."
+  },
+  "limits": [
+    "Live provider suites fully passed; management stopped after six checks and does not establish native management completion.",
+    "Windows source stopped after four invocations: 65 passed, one Linux-adapter skip, one service error. Eleven remaining source suites were not executed.",
+    "No release or updater was built."
+  ]
+}
