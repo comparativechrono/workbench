@@ -284,6 +284,51 @@
       },
       "followup": "Keep Escape failed, capture focus/foreground and a separately focused diagnostic, close through the actual visible Close control when necessary, and finish upgraded desktop observations. Import failed automated observations without changing manual status. Keep CI nonzero for failed acceptance; do not alter frozen app bytes.",
       "manualAcceptance": "not-tested"
+    },
+    {
+      "toolkitCommit": "795cfa0b1f8bf2897b065356299309a187b5b790",
+      "runId": 37977917921,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37977917921",
+      "result": "failed-incomplete-observation-collection",
+      "sourceTests": {
+        "passed": 87,
+        "failed": 0,
+        "skipped": 0
+      },
+      "bundle": {
+        "sha256": "d562e120c350ea49374adcdf8aa05451ba03d4fa2f83c4c9a7dc24b45a277437",
+        "manifestSha256": "79bc8fa312bf785a17ecb5526a9e333216e4df741fccb97e2b8fe08db0f43398"
+      },
+      "windows": [
+        {
+          "pathCase": "ordinary",
+          "jobId": 113980902173,
+          "artifactId": 11639458449,
+          "artifactSha256": "097b3dde8f10c29c9dd227a7447e80f14c274578d1e121d11dadebe62b4e4f4e"
+        },
+        {
+          "pathCase": "path with spaces",
+          "jobId": 113980902005,
+          "artifactId": 11639039233,
+          "artifactSha256": "b26074d63ae4c6ea8aae9d04aeffda6df5a7f33e82de733a9b5ce026002ad833"
+        }
+      ],
+      "passedScopeBothPaths": [
+        "kit preparation and actual updater scopes",
+        "fresh Starter selection",
+        "failed automated summary imported with manual acceptance unchanged",
+        "11 curated workflow/results checks",
+        "72 Authenticode observations",
+        "final immutable-kit and manual-untested checks"
+      ],
+      "nativeFailure": {
+        "passed": 8,
+        "failed": 1,
+        "observationsCompleted": false,
+        "reason": "The driver asserted library focus immediately after queued SendInput pointer events. The focus had not yet advanced. Remaining desktop scopes were not reached in this attempt."
+      },
+      "followup": "Wait for the same actual focus postconditions after physical clicks; retain screen-hit/ownership checks, no click retries or synthetic SetFocus. Repeat full observations, preserving the separately observed published Escape failure.",
+      "manualAcceptance": "not-tested"
     }
   ],
   "localPreviewExcluded": {

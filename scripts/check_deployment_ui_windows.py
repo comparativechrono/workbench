@@ -465,12 +465,12 @@ def desktop_scenarios(root, evidence, report, label):
         search = ui.child(102)
         left, top, right, bottom = ui.bounds(search)
         ui.click_at((left + right) // 2, (top + bottom) // 2, expected=search)
-        require(keys.focus() == search, 'Pointer selection did not give search keyboard focus.')
+        ui.wait('physical library click delivers search focus', lambda: keys.focus() == search)
         keys.key(0x41, 0x11)
         keys.text('reference')
         ui.wait('real keyboard library search', lambda: ui.label(search) == 'reference' and ui.library().tools())
         keys.key(0x09)
-        ui.wait('Tab advances focus', lambda: keys.focus() != search)
+        ui.wait('Tab advances focus', lambda: keys.focus() not in (None, search))
         next_focus = keys.focus()
         require(ui.user.IsChild(ui.main, next_focus) and ui.user.IsWindowVisible(next_focus) and
                 ui.user.IsWindowEnabled(next_focus), 'Tab moved to unavailable or foreign control.')
@@ -512,6 +512,7 @@ def desktop_scenarios(root, evidence, report, label):
         query = ui.child(1501, owner)
         left, top, right, bottom = ui.bounds(query)
         ui.click_at((left + right) // 2, (top + bottom) // 2, expected=query)
+        ui.wait('physical results click delivers query focus', lambda: keys.focus() == query)
         keys.text('deployment-no-matching-result')
         ui.wait('results query entered by real keyboard', lambda: ui.label(query) == 'deployment-no-matching-result')
         keys.key(0x09)
@@ -546,6 +547,7 @@ def desktop_scenarios(root, evidence, report, label):
             # click into the query, followed by a second genuine Escape key.
             left, top, right, bottom = ui.bounds(query)
             ui.click_at((left + right) // 2, (top + bottom) // 2, expected=query)
+            ui.wait('diagnostic physical click delivers query focus', lambda: keys.focus() == query)
             diagnostic = {'scope': 'Additional explicit-focus diagnostic; does not replace original failed Escape.',
                           'beforeEscape': focus_observation(ui, keys, owner)}
             require(diagnostic['beforeEscape']['focusWindow'] == query, 'Diagnostic pointer click did not focus the query.')
