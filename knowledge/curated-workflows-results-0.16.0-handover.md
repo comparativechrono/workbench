@@ -1,5 +1,11 @@
 # Curated workflows and results: 0.16.0 handover
 
+Current status: the owner subsequently authorized publication. The corrected final
+0.16.0 archives are published and validated in the
+[release handover](curated-workflows-0.16.0-release-handover.md). The candidate
+identities and unpublished-only authorization below are preserved as historical
+records and do not describe the current release.
+
 Status on 2026-10-09: **implemented and validated within the recorded hosted scope; unpublished review candidate**.
 
 Review: [draft PR #11](https://github.com/comparativechrono/workbench/pull/11), branch `feature/curated-workflows-results`, based on reference-management head `f45622f8915a3fa80c0904fcd97c216e0b5980f3`.

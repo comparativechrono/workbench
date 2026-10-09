@@ -1,10 +1,35 @@
 # Development roadmap
 
-## Current set, 2026-10-09
+## Current release and remaining work
 
-The owner requested the next curated-workflows/results group: two synthetic training workflows (alignment with QC and variant calling), exact requirements and missing-dependency guidance, native measured QC/results, search and actionable failures. Work began from reference-management review head `f45622f8915a3fa80c0904fcd97c216e0b5980f3`. Initial inspection found no saved next-set version or implementation; 0.16.0 was assigned as the new unpublished candidate identity. The features, exact hosted Windows validation, archive audit and screenshot review are complete in draft PR #11; the candidate remains unpublished. See the [feature guide](curated-workflows-results.md) and [evidence handover](curated-workflows-results-0.16.0-handover.md). Earlier release and acceptance limitations remain open.
+The owner authorized a new release on 2026-10-09 with
+“Great lets do a new release at this point”.
+[0.16.0 is published as a development prerelease](https://github.com/comparativechrono/workbench/releases/tag/app-v0.16.0)
+on **2026-10-09**, from packaged source
+`e855dc4396e0c16ae35f4e840eb9cc734adb4441`. The release combines the implemented
+measurement/readiness, multi-sample, recovery/resource/project, reference-management
+and curated-workflow/results groups. Each retains its explicit contracts and
+exact hosted validation; publication does not declare the whole programme complete.
 
-## Accepted programme, 2026-10-08
+The initial curated catalogue contains two synthetic training workflows:
+alignment with QC and variant calling, with exact dependencies, expected
+answers and missing-dependency guidance. Native results display recorded
+measurements, search and actionable failures without invented QC thresholds.
+The [release handover](curated-workflows-0.16.0-release-handover.md) records
+source/native/updater/publication evidence, rejected attempts and remaining limits.
+
+Representative Windows PCs, high-DPI/multi-monitor/physical-trackpad acceptance,
+scientific Linux CWL validation, realistic matched Windows–Linux benchmarking,
+executable signing/institutional deployment and further pack-developer tooling
+remain separate work. The exact published 0.11.0→0.16.0 updater and release
+gates are complete within their recorded scope. Small synthetic known answers
+do not establish realistic capacity, performance parity or biological fitness.
+
+## Historical acceptance and implementation sequence, 2026-10-08
+
+The following chronology retains the authorization and unpublished branch status
+at the time each tranche began. Its future-tense and release-pending statements
+are historical; current completion and remaining acceptance work are above.
 
 The owner accepted the feature programme below with “Great. We should do all
 of these. Lets start working through them.” Development starts with a bounded

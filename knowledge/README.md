@@ -1,26 +1,34 @@
 # Native Workbench knowledge base
 
-**Current set, 2026-10-09:** unpublished **0.16.0** [curated workflows and recorded results](curated-workflows-results.md), on `feature/curated-workflows-results`, builds on the unmerged reference-management head. [Current handover](curated-workflows-results-0.16.0-handover.md) records the completed hosted validation, exact downloads and remaining limitations.
+**Current release, 2026-10-09:**
+[0.16.0 development prerelease](https://github.com/comparativechrono/workbench/releases/tag/app-v0.16.0),
+packaged source `e855dc4396e0c16ae35f4e840eb9cc734adb4441`.
+Start with the [release handover](curated-workflows-0.16.0-release-handover.md),
+[current state](current-state.md), [release notes](../docs/releases/0.16.0.md)
+and [public-download receipt](evidence/curated-workflows-0.16.0-public-downloads-2026-10-09.json).
 
-**Previous set, 2026-10-08:** the first remaining group was unpublished
-**0.15.0** [reference management](reference-management.md), on
-`feature/reference-management`. Its implementation and recorded hosted validation
-are complete; see its [handover](reference-management-0.15.0-handover.md) for
-that candidate's evidence. The current 0.16.0 candidate has its own separate recorded validation.
+The cumulative release includes [readiness and diagnostics](readiness-performance.md),
+[sample batches and queue](batch-workflows.md), [reusable indexes](reference-indexes.md),
+[restart, resource budgets and portable projects](recovery-projects.md),
+[reference management](reference-management.md), and
+[curated workflows and recorded results](curated-workflows-results.md).
+Published packs/profile/trust remain unchanged; additional align 0.4.1 is a
+separate explicit import for upgraded installations.
 
-The previous three-tranche implementation culminated in
-unpublished **0.14.0** on `feature/recovery-projects`: [verified restart,
-resource budgets and portable projects](recovery-projects.md). It is stacked on
-unpublished 0.13.0 [batches, queue and indexes](batch-queue-indexes-0.13.0-handover.md)
-in [draft PR #8](https://github.com/comparativechrono/workbench/pull/8), which in
-turn builds on 0.12.0 [readiness, measurements and diagnostics](readiness-performance.md)
-in [draft PR #7](https://github.com/comparativechrono/workbench/pull/7).
-The final 0.14.0 implementation and recorded hosted validation are complete in
-[draft PR #9](https://github.com/comparativechrono/workbench/pull/9); see its
-[candidate handover and download](recovery-projects-0.14.0-handover.md).
-Published **0.11.0** remains the baseline. Representative-machine acceptance,
-benchmarking and release/update work remain separate. See
-[current state](current-state.md) for exact evidence.
+Exact evidence: [release lock](evidence/curated-workflows-0.16.0-release-lock.json),
+[archive audit](evidence/curated-workflows-0.16.0-release-archive-audit-2026-10-09.json),
+[native release checks](evidence/curated-workflows-0.16.0-release-regression-final-2026-10-09.json),
+[updater](evidence/update-0.16.0-final-validation-2026-10-09.json) and
+[visual review](evidence/curated-workflows-0.16.0-release-visual-review-2026-10-09.json).
+The [roadmap](roadmap.md) retains representative-PC, scientific Linux CWL,
+benchmarking, signing and institutional work as outstanding.
+
+The [original 0.16 candidate](curated-workflows-results-0.16.0-handover.md),
+[0.15](reference-management-0.15.0-handover.md),
+[0.14](recovery-projects-0.14.0-handover.md) and
+[0.13](batch-queue-indexes-0.13.0-handover.md) handovers remain historical records
+of those exact bytes and their original unpublished review scopes. They do not
+replace the corrected release's own acceptance evidence.
 
 This is the durable handover for people and agents continuing Native Workbench.
 It records why the project exists, how it works, how to extend it, and which
@@ -29,7 +37,7 @@ open, diffable files with no proprietary reader or external memory service.
 "Knowledge base" describes this directory; it does not claim compliance with a
 separate standard called Open Knowledge Format.
 
-**Reviewed:** 2026-10-07. **Starting source baseline:**
+**Historical review:** 2026-10-07. **Historical starting source baseline:**
 [`8f95caa1f267d19ce72ea3cd7f2396ae66a801c1`](https://github.com/comparativechrono/workbench/commit/8f95caa1f267d19ce72ea3cd7f2396ae66a801c1).
 This handover includes the 0.7 reference-discovery implementation and
 Kraken2/Bracken metagenomics after the annotation,
