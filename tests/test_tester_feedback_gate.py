@@ -31,7 +31,29 @@ class FeedbackGateTests(unittest.TestCase):
         ui.windows = lambda: [4]
         ui.label = lambda handle, klass=False: '#32770' if klass else title
         ui.controls = lambda owner: []
+        ui.top_windows = lambda: [{'handle': 4, 'title': title, 'class': '#32770'}]
         return ui
+
+    def test_destroyed_caption_is_not_requeried_as_an_unexpected_dialog(self):
+        ui = gate.FeedbackUI.__new__(gate.FeedbackUI)
+        alive = [True]
+        ui.windows = lambda: [4]
+        def caption(handle, text, size):
+            text.value = 'Remove sample row'
+            alive[0] = False  # Destruction raced the caption snapshot.
+        ui.user = SimpleNamespace(IsWindow=lambda handle: alive[0], IsWindowVisible=lambda handle: True,
+            GetClassNameW=lambda handle, text, size: setattr(text, 'value', '#32770'),
+            GetWindowTextW=caption)
+        ui.label = lambda *args: self.fail('Top-level captions must not send WM_GETTEXT')
+        self.assertEqual(ui.top_windows(), [])
+
+    def test_live_visible_common_caption_is_preserved_in_snapshot(self):
+        ui = gate.FeedbackUI.__new__(gate.FeedbackUI)
+        ui.windows = lambda: [4]
+        ui.user = SimpleNamespace(IsWindow=lambda handle: True, IsWindowVisible=lambda handle: True,
+            GetClassNameW=lambda handle, text, size: setattr(text, 'value', '#32770'),
+            GetWindowTextW=lambda handle, text, size: setattr(text, 'value', 'Real error'))
+        self.assertEqual(ui.top_windows(), [{'handle': 4, 'class': '#32770', 'title': 'Real error'}])
 
     def test_expected_native_confirmation_is_allowed_only_in_its_context(self):
         ui = self.fake_ui()
@@ -103,7 +125,8 @@ class FeedbackGateTests(unittest.TestCase):
                 gate.validate_identities(args)
 
     def test_main_window_is_not_mistaken_for_same_title_error_dialog(self):
-        ui = SimpleNamespace(main=1, windows=lambda: [1, 2], label=lambda handle: 'Native Workbench')
+        ui = SimpleNamespace(main=1, top_windows=lambda: [
+            {'handle': handle, 'title': 'Native Workbench', 'class': '#32770'} for handle in [1, 2]])
         self.assertEqual(gate.window(ui, 'Native Workbench'), 2)
 
     def test_failed_temporal_scope_cannot_become_success(self):

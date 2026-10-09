@@ -52,16 +52,34 @@ class FeedbackUI(PatchUI):
         finally:
             self.expected_dialog_titles = previous
 
+    def top_windows(self):
+        """Snapshot owned captions without messaging a dialog being destroyed.
+
+        GetWindowTextW reads another process's top-level caption from Windows;
+        it does not use the strict WM_GETTEXT path needed for child edit values.
+        Recheck liveness/visibility after reading before classifying a dialog.
+        """
+        rows = []
+        for handle in self.windows():
+            live = lambda: (self.user.IsWindow(ctypes.c_void_p(handle)) and
+                            self.user.IsWindowVisible(handle))
+            if not live():
+                continue
+            title, klass = ctypes.create_unicode_buffer(8192), ctypes.create_unicode_buffer(256)
+            self.user.GetClassNameW(handle, klass, len(klass))
+            self.user.GetWindowTextW(handle, title, len(title))
+            if live():
+                rows.append({'handle': handle, 'title': title.value, 'class': klass.value})
+        return rows
+
     def wait(self, phase, predicate, seconds=30):
         self.progress(phase)
         deadline = time.monotonic() + seconds
         while time.monotonic() < deadline:
             require(self.process.poll() is None, 'Native desktop exited unexpectedly.')
-            unexpected = [handle for handle in self.windows()
-                          if self.label(handle, True) == '#32770' and
-                          self.label(handle) not in self.expected_dialog_titles]
-            require(not unexpected, 'Unexpected native dialog: ' + json.dumps([
-                {'title': self.label(handle), 'controls': self.controls(handle)} for handle in unexpected]))
+            unexpected = [row for row in self.top_windows()
+                          if row['class'] == '#32770' and row['title'] not in self.expected_dialog_titles]
+            require(not unexpected, 'Unexpected native dialog: ' + json.dumps(unexpected))
             if predicate():
                 return
             time.sleep(.1)
@@ -201,7 +219,8 @@ def visible_capture(ui, report, name, owner=None):
 
 
 def window(ui, title):
-    return next((handle for handle in ui.windows() if handle != ui.main and ui.label(handle) == title), None)
+    return next((row['handle'] for row in ui.top_windows()
+                 if row['handle'] != ui.main and row['title'] == title), None)
 
 
 def button(ui, owner, identity):
