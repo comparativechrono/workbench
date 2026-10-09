@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "artifactWrappers": [
+    {
+      "id": 11647676250,
+      "name": "ui-patch-source-part-1-73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+      "bytes": 25166018,
+      "sha256": "14761ce1667506dd69d97bf72bd032ef732ca5894edfea0232dd11d9922f158b"
+    },
+    {
+      "id": 11647666153,
+      "name": "ui-patch-metadata-73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+      "bytes": 5724,
+      "sha256": "8702f4afbe2221017fd2712b95306b3e0c67efdd5b01f8f2957ad129bc5f2475"
+    },
+    {
+      "id": 11647641125,
+      "name": "ui-patch-source-part-2-73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+      "bytes": 23105219,
+      "sha256": "185f45eb4dc979d28b3f21ee714bcef04e3bd5a7f71dcc5689257a17aa7ef930"
+    },
+    {
+      "id": 11647591236,
+      "name": "ui-patch-updater-73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+      "bytes": 13042470,
+      "sha256": "fe681f6c8a2ed61cbda52570d8fb252ded285d60bb3bd54d5f5d0a69c3eb022e"
+    },
+    {
+      "id": 11647526336,
+      "name": "ui-patch-starter-73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+      "bytes": 17879804,
+      "sha256": "05bf013a76b20adeee331c386e18d0f3b6a48784df2c2f627f8601e7e670efa0"
+    }
+  ],
+  "sourceReassembled": {
+    "file": "native-workbench-0.16.1-source.zip",
+    "bytes": 48270849,
+    "sha256": "0accfb48b8b7b3193b4c72e76c45c404db7979d877ce0805d2687d5a849fe1f1"
+  }
+}

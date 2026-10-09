@@ -159,7 +159,21 @@
     "ui_patch_0_16_1_archive_audit": "evidence/ui-patch-0.16.1-archive-audit-2026-10-09.json",
     "ui_patch_0_16_1_native_validation": "evidence/ui-patch-0.16.1-native-validation-2026-10-09.json",
     "ui_patch_0_16_1_visual_review": "evidence/ui-patch-0.16.1-visual-review-2026-10-09.json",
-    "tester_feedback_0_16_1_handover": "tester-feedback-0.16.1-handover.md"
+    "tester_feedback_0_16_1_handover": "tester-feedback-0.16.1-handover.md",
+    "tester_feedback_0_16_1_source_validation": "evidence/tester-feedback-0.16.1-source-validation-2026-10-09.json",
+    "tester_feedback_0_16_1_archive_audit": "evidence/tester-feedback-0.16.1-archive-audit-2026-10-09.json",
+    "tester_feedback_0_16_1_attempts": "evidence/tester-feedback-0.16.1-attempts-2026-10-09.json",
+    "tester_feedback_0_16_1_artifacts": "evidence/tester-feedback-0.16.1-artifacts-2026-10-09.json",
+    "tester_feedback_0_16_1_transport": "evidence/tester-feedback-0.16.1-transport-2026-10-09.json",
+    "tester_feedback_0_16_1_regression_visual_ordinary": "evidence/tester-feedback-0.16.1-regression-visual-ordinary-2026-10-09.json",
+    "tester_feedback_0_16_1_regression_visual_spaces": "evidence/tester-feedback-0.16.1-regression-visual-spaces-2026-10-09.json",
+    "tester_feedback_0_16_1_patch_visual_ordinary": "evidence/tester-feedback-0.16.1-patch-visual-ordinary-2026-10-09.json",
+    "tester_feedback_0_16_1_patch_visual_spaces": "evidence/tester-feedback-0.16.1-patch-visual-spaces-2026-10-09.json",
+    "tester_feedback_0_16_1_native_validation": "evidence/tester-feedback-0.16.1-native-validation-2026-10-09.json",
+    "tester_feedback_0_16_1_independent_validation": "evidence/tester-feedback-0.16.1-independent-validation-2026-10-09.json",
+    "tester_feedback_0_16_1_original_report_manifest": "evidence/tester-feedback-0.16.1-raw-index-2026-10-09.json",
+    "tester_feedback_0_16_1_feedback_visual_ordinary": "evidence/tester-feedback-0.16.1-feedback-visual-ordinary-2026-10-09.json",
+    "tester_feedback_0_16_1_feedback_visual_spaces": "evidence/tester-feedback-0.16.1-feedback-visual-spaces-2026-10-09.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -1181,15 +1195,15 @@
     "base_pull_request": "https://github.com/comparativechrono/workbench/pull/14",
     "pull_request": "https://github.com/comparativechrono/workbench/pull/15",
     "pull_request_state": "draft",
-    "status": "tester-feedback implementation in progress; new candidate validation pending",
+    "status": "implementation and recorded source/native/archive/temporal/visual validation complete; ready as an unpublished draft review candidate",
     "authorization": "Implement the new tester-feedback revision within the existing unpublished review candidate.",
     "release_authorized": false,
     "released": false,
     "published_baseline": "0.16.0",
     "published_assets_changed": false,
-    "candidate_commit": null,
-    "application_source_commit": null,
-    "application_rebuilt": false,
+    "candidate_commit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+    "application_source_commit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+    "application_rebuilt": true,
     "scope": [
       "Address Run flashing and redundant unchanged-status polling redraws while retaining meaningful state updates and action guards",
       "Preserve viewport anchoring on category expansion and address collapse black flashing",
@@ -1204,22 +1218,103 @@
     "prior_candidate_validator_commit": "69022689e686b2cacdc98dbdbef728e664941e67",
     "evidence_boundary": "Previous 141 source passes, 84 native checks per path, 19 repeated patch checks per path, archive audit and settled visual review apply only to the prior 8938e709 archives. No previous pass tests this revision.",
     "verification_progress": {
-      "status": "implementation in progress; no source/native/temporal/visual passes recorded for new bytes",
-      "candidate_build": "pending",
-      "source_tests": "pending",
-      "exact_packaged_windows": "pending in ordinary and space-containing paths",
-      "planned_native_scope": {
-        "existing_patch_checks_per_path": 19,
-        "other_existing_checks_per_path": 65,
-        "additional": [
-          "tester-feedback native and temporal gate",
-          "Samples editor and batch regression"
+      "status": "recorded source/archive/native and bounded visual validation complete",
+      "candidate_build": "passed; frozen archives from application source 73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+      "source_tests": {
+        "passed": 220,
+        "suites": 18,
+        "failed": 0,
+        "configured_skips": 0,
+        "cpp_json": "passed",
+        "strict_native_builds": 3
+      },
+      "archive_source_audit": "passed",
+      "completed_regression_checks_per_path": 81,
+      "completed_regression_scopes": {
+        "batch": 11,
+        "curated": 11,
+        "readiness": 5,
+        "reference_management": 10,
+        "results": 9,
+        "scroll": 3,
+        "workspace": 32
+      },
+      "patch_checks_per_path": 19,
+      "patch_repeats": "19 passed per path in validator rechecks on identical archives; repeated observations add no unique coverage",
+      "feedback_checks_per_path": {
+        "required": 13,
+        "passed": 13,
+        "failed": 0,
+        "status": "passed",
+        "prior_partial_attempt_passes": [
+          {
+            "ordinary": 5,
+            "spaces": 5
+          },
+          {
+            "ordinary": 7,
+            "spaces": 7
+          },
+          {
+            "ordinary": 7,
+            "spaces": 7
+          },
+          {
+            "ordinary": 7,
+            "spaces": 11
+          }
         ]
       },
-      "archive_source_audit": "pending",
-      "temporal_review": "pending",
-      "screenshot_review": "pending",
-      "representative_machine_acceptance": "not established"
+      "regression_visual_capture_files": 112,
+      "regression_visual_review": "passed within recorded 96-DPI viewports",
+      "temporal_review": {
+        "series_per_path": 41,
+        "ordinary_frames": 1510,
+        "spaces_frames": 1306,
+        "sampled_black_blocks": 0,
+        "unexpected_stable_differences": 0,
+        "limit": "finite samples, not zero flicker"
+      },
+      "representative_machine_acceptance": "not established",
+      "patch_visual_review": {
+        "capture_files": 82,
+        "unique_images": 43,
+        "exact_byte_duplicates": 39,
+        "status": "settled acceptable; immediate Tools-resize old geometry/right-bottom clipping until first later sample about 0.30\u20130.32 seconds; workflow series stable"
+      },
+      "unique_native_checks_per_path": 113,
+      "validator_source_tests": {
+        "passed": 23,
+        "patch": 8,
+        "feedback": 15,
+        "separate_from_application_tests": true
+      },
+      "observed_display": {
+        "dpi": 96,
+        "workspace_sizes": [
+          [
+            960,
+            680
+          ],
+          [
+            1024,
+            728
+          ]
+        ],
+        "samples_size": [
+          940,
+          680
+        ]
+      },
+      "feedback_visual_review": {
+        "status": "passed within captured 96-DPI scope",
+        "capture_files": 192,
+        "unique_bmp_hashes": 51,
+        "direct_views": 52,
+        "exact_hash_reuses": 140,
+        "all_capture_hashes_dimensions_and_lossless_pixels_verified": true,
+        "unexpected_layout_defects_observed": false
+      }
     },
     "known_limits": [
       "Unpublished 0.16.1 revision only; no merge or release. Published 0.16.0 and all historical receipt files remain unchanged.",
@@ -1231,7 +1326,20 @@
       "Executable signing requires a controlled identity and institutional deployment requires actual IT approval.",
       "Scientific Linux CWL and SDK/build recovery remain later sets; benchmarking is handled separately."
     ],
-    "next_action": "Finish implementation, freeze the new candidate, run the planned source/exact Windows/temporal gates and archive audit, review captures, and save the new evidence in draft PR15 without modifying earlier receipt files."
+    "next_action": "Review draft PR #15 and test the exact candidate on representative PCs; preserve recorded source/archive evidence and bounded display/temporal limits. No merge or release in this delivery.",
+    "validator_commit": "f9e7120196ddd284d33c0e8221b78fbf4529058f",
+    "validator_run": 37999874335,
+    "validator_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37999874335",
+    "source_build_run": 37997370988,
+    "validator_run_status": "success",
+    "evidence_delivery": {
+      "repository_contents": "Focused sanitized receipts and original-report SHA-256 manifest with artifact locations; no full raw JSON blobs.",
+      "excluded": "Opaque session/cache/review tokens and detailed runner/input records.",
+      "reason": "Automatic approval review rejected unfiltered raw report uploads; rejected blobs were not referenced in a commit.",
+      "original_reports": "Preserved in local validation workspace and original GitHub Actions artifacts.",
+      "artifact_expiry": "2026-11-08",
+      "limit": "Original-report hashes do not preserve access to raw content after artifact expiry."
+    }
   },
   "ui_patch_0_16_1_development": {
     "recorded_on": "2026-10-09",
@@ -1742,7 +1850,7 @@
         "candidate_download_limit": "Temporary Actions artifacts expire 2026-11-08; may require GitHub sign-in; not a release asset."
       }
     ],
-    "historical_scope": "The retained 7a review candidate and prior 0.12–0.15 records describe their original dated validation/authorization. They do not supply passes for the final e855 release.",
+    "historical_scope": "The retained 7a review candidate and prior 0.12\u20130.15 records describe their original dated validation/authorization. They do not supply passes for the final e855 release.",
     "release_id": 408075619,
     "published_at": "2026-10-09T15:54:56Z",
     "prerelease": true,
@@ -1972,7 +2080,7 @@
       "version": "0.16.1",
       "branch": "fix/native-ui-0.16.1",
       "pull_request": "https://github.com/comparativechrono/workbench/pull/15",
-      "status": "preceding UI patch validated on its exact archives; further tester-feedback revision in progress with new validation pending",
+      "status": "Preceding UI patch and subsequent tester-feedback revision have their own completed exact-package validation; deployment companion failed observations remain unchanged.",
       "handover": "ui-patch-0.16.1-handover.md",
       "scope": "The original companion observations, including failed Results Escape checks, remain unchanged.",
       "active_handover": "tester-feedback-0.16.1-handover.md"

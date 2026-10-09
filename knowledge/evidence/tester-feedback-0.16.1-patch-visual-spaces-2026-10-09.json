@@ -1,0 +1,845 @@
+{
+  "schema": 1,
+  "reviewedUtc": "2026-10-09T22:27:51.566827+00:00",
+  "scope": "Recheck1 native UI patch gate screenshots and temporal/focus/layout records only; tester-feedback gate excluded.",
+  "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+  "gateCommit": "91bb99e1aa22acfafa626f813cf15d475ba7e7e9",
+  "gateSha256": "4e6a847fc580e3788a6b63952260092e80b3beb1f088abd66f0e74c4f5c4a7dc",
+  "githubRunId": 37997995825,
+  "githubRunUrl": "https://github.com/comparativechrono/workbench/actions/runs/37997995825",
+  "archives": {
+    "starter": {
+      "name": "native-workbench-0.16.1-starter-windows.zip",
+      "bytes": 17879604,
+      "sha256": "1291f93b5ece3c4da34eb2f2e29fccc83b6d87ec5fb73abf28bfd9cc8f155b75"
+    },
+    "baseline": {
+      "name": "baseline-0.16.0.zip",
+      "bytes": 17846873,
+      "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+    },
+    "update": {
+      "name": "native-workbench-0.16.1-update-from-0.16.0.zip",
+      "bytes": 13042264,
+      "sha256": "86dd3d9796099b366a9e01012acc50d00d501a1fdaab89b7119236b44db4b4d8"
+    }
+  },
+  "reportSha256": "f3ce48046f1c809c2c3e05562040fbe7246f89111153b2580ed963a46ba364b7",
+  "gateCounts": {
+    "passed": 19,
+    "failed": 0,
+    "blocked": 0
+  },
+  "captureCount": 41,
+  "uniqueBmpSha256Count": 24,
+  "combinedReviewCoverage": {
+    "captures": 82,
+    "uniqueBmpHashesIndividuallyViewed": 43,
+    "uiGateReviewIndividualViews": 36,
+    "criticalReviewIndividualViews": 7,
+    "remainingCapturesCoveredByExactDuplicateHashes": 39
+  },
+  "result": "No persistent fixed-control layout blocker found in settled captures. Immediate Tools resize transients are explicitly observed for fresh and upgraded installations.",
+  "method": "Each of 43 unique BMP hash representatives across both paths was individually viewed as a lossless original-resolution PNG; the remaining 39 captures were covered by verified identical BMP hashes. Every BMP hash and dimension matches native-ui-patch.json, and every corresponding PNG was verified RGB-pixel-identical to its BMP. Recorded fixed-control bounds and button non-overlap were independently rechecked.",
+  "limitations": [
+    "These finite still frames do not establish zero flicker; immediate Tools resize frames show old geometry before settling.",
+    "The nominal 250/750/1250 ms filenames are sampling targets; use recorded elapsed times in each temporal series.",
+    "Only 96 DPI and actual 960 by 680 / 1024 by 728 main-window sizes were observed; requested 1280 by 900 was clamped to the hosted work area. No high-DPI transition or multi-monitor validation is claimed.",
+    "Partially visible References controls are within scrollable settings content, not fixed footer controls. Long folder paths are clipped inside edit fields.",
+    "Focus holds are sampled for about 2.4 seconds; they do not instrument exact queue poll counts or every possible intervening event.",
+    "Updater observations cover this exact published 0.16.0 to candidate 0.16.1 path and synthetic fixtures; no broad release/updater acceptance or representative-PC acceptance is inferred.",
+    "Scientific, realistic workload, physical trackpad, institutional security and signing checks are outside this review."
+  ],
+  "originalVisualReceiptSha256": "7da41dca1ab49b804a4de290c350542f6cfff0fa4ba52abd353a68a2cf10a391",
+  "evidenceMinimization": "Focused receipt retains exact report/capture hashes and layout observations. Runtime window handles, local storage paths and redundant raw observations are omitted. Original BMPs remain in Actions artifacts.",
+  "reportArtifactRelativeName": "patch/native-ui-patch.json",
+  "observations": {
+    "startupBounds": {
+      "fresh": {
+        "windowBounds": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "workArea": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "capturedBeforeDriverResize": true,
+        "reopenedAfterFixture": [
+          0,
+          0,
+          1024,
+          728
+        ]
+      },
+      "upgraded": {
+        "windowBounds": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "workArea": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "capturedBeforeDriverResize": true
+      }
+    },
+    "startupSetup": {
+      "fresh": {
+        "observed": true,
+        "starterSelected": true,
+        "dismissed": true,
+        "queuedInstalls": 0,
+        "unchangedPackFiles": 186
+      },
+      "upgraded": {
+        "observed": false
+      }
+    },
+    "layoutValidation": {
+      "recordsRechecked": 12,
+      "allRecordedFixedControlsInsideWindowAndWorkArea": true,
+      "recordedFixedButtonsDoNotOverlap": true,
+      "observedWindowSizes": [
+        [
+          960,
+          680
+        ],
+        [
+          1024,
+          728
+        ]
+      ],
+      "requested1280x900ClampedTo1024x728": true
+    },
+    "passiveResizeCaptureSeries": [
+      {
+        "installation": "fresh",
+        "mode": "tool",
+        "method": "Visible desktop BitBlt before PrintWindow",
+        "inputOrForcedRedrawBetweenFrames": false,
+        "frames": [
+          {
+            "path": "fresh-tool-960-visible-immediate.bmp",
+            "width": 960,
+            "height": 680,
+            "sha256": "ffc72b5c1a16f33727e12da786c943e4a7c32b483f745facb2293911b0129f3e",
+            "method": "visible desktop BitBlt before PrintWindow",
+            "dpi": 96,
+            "secondsAfterResizeObservation": 0.05035019999991164
+          },
+          {
+            "path": "fresh-tool-960-visible-250ms.bmp",
+            "width": 960,
+            "height": 680,
+            "sha256": "e1adb86a17a4a11a5d5df3d81c6ef0d503c7bfc20687c72a1345f25ced1bb084",
+            "method": "visible desktop BitBlt before PrintWindow",
+            "dpi": 96,
+            "secondsAfterResizeObservation": 0.3153227999999899
+          },
+          {
+            "path": "fresh-tool-960-visible-750ms.bmp",
+            "width": 960,
+            "height": 680,
+            "sha256": "e1adb86a17a4a11a5d5df3d81c6ef0d503c7bfc20687c72a1345f25ced1bb084",
+            "method": "visible desktop BitBlt before PrintWindow",
+            "dpi": 96,
+            "secondsAfterResizeObservation": 0.8486908999999514
+          },
+          {
+            "path": "fresh-tool-960-visible-1250ms.bmp",
+            "width": 960,
+            "height": 680,
+            "sha256": "e1adb86a17a4a11a5d5df3d81c6ef0d503c7bfc20687c72a1345f25ced1bb084",
+            "method": "visible desktop BitBlt before PrintWindow",
+            "dpi": 96,
+            "secondsAfterResizeObservation": 1.380647999999951
+          }
+        ],
+        "finding": "Immediate resize transient; first later sample is settled and later three captures are byte-identical.",
+        "firstSettledSampleSeconds": 0.3153227999999899
+      },
+      {
+        "installation": "fresh",
+        "mode": "workflow",
+        "method": "Visible desktop BitBlt before PrintWindow",
+        "inputOrForcedRedrawBetweenFrames": false,
+        "frames": [
+          {
+            "path": "fresh-workflow-960-visible-immediate.bmp",
+            "width": 960,
+            "height": 680,
+            "sha256": "00febc0f5eb6e1fca56f114152f93d20eea982efc87253ddfa04065c24fb8361",
+            "method": "visible desktop BitBlt before PrintWindow",
+            "dpi": 96,
+            "secondsAfterResizeObservation": 0.035709099999962746
+          },
+          {
+            "path": "fresh-workflow-960-visible-250ms.bmp",
+            "width": 960,
+            "height": 680,
+            "sha256": "00febc0f5eb6e1fca56f114152f93d20eea982efc87253ddfa04065c24fb8361",
+            "method": "visible desktop BitBlt before PrintWindow",
+            "dpi": 96,
+            "secondsAfterResizeObservation": 0.2983431999999766
+          },
+          {
+            "path": "fresh-workflow-960-visible-750ms.bmp",
+            "width": 960,
+            "height": 680,
+            "sha256": "00febc0f5eb6e1fca56f114152f93d20eea982efc87253ddfa04065c24fb8361",
+            "method": "visible desktop BitBlt before PrintWindow",
+            "dpi": 96,
+            "secondsAfterResizeObservation": 0.8321439999999711
+          },
+          {
+            "path": "fresh-workflow-960-visible-1250ms.bmp",
+            "width": 960,
+            "height": 680,
+            "sha256": "00febc0f5eb6e1fca56f114152f93d20eea982efc87253ddfa04065c24fb8361",
+            "method": "visible desktop BitBlt before PrintWindow",
+            "dpi": 96,
+            "secondsAfterResizeObservation": 1.3732407999999623
+          }
+        ],
+        "finding": "All four sampled workflow frames are byte-identical and display settled fixed controls.",
+        "firstSettledSampleSeconds": 0.035709099999962746
+      },
+      {
+        "installation": "upgraded",
+        "mode": "tool",
+        "method": "Visible desktop BitBlt before PrintWindow",
+        "inputOrForcedRedrawBetweenFrames": false,
+        "frames": [
+          {
+            "path": "upgraded-tool-960-visible-immediate.bmp",
+            "width": 960,
+            "height": 680,
+            "sha256": "b2a43f28a1698a87fcb081bed89036ff54ca6cb18e31bb44006dbe3af65bc345",
+            "method": "visible desktop BitBlt before PrintWindow",
+            "dpi": 96,
+            "secondsAfterResizeObservation": 0.03203840000003311
+          },
+          {
+            "path": "upgraded-tool-960-visible-250ms.bmp",
+            "width": 960,
+            "height": 680,
+            "sha256": "a821f192b67260a9632483548b3235ed4c318a420105cca697da10e8555577d8",
+            "method": "visible desktop BitBlt before PrintWindow",
+            "dpi": 96,
+            "secondsAfterResizeObservation": 0.29799980000007054
+          },
+          {
+            "path": "upgraded-tool-960-visible-750ms.bmp",
+            "width": 960,
+            "height": 680,
+            "sha256": "a821f192b67260a9632483548b3235ed4c318a420105cca697da10e8555577d8",
+            "method": "visible desktop BitBlt before PrintWindow",
+            "dpi": 96,
+            "secondsAfterResizeObservation": 0.8301234000000477
+          },
+          {
+            "path": "upgraded-tool-960-visible-1250ms.bmp",
+            "width": 960,
+            "height": 680,
+            "sha256": "a821f192b67260a9632483548b3235ed4c318a420105cca697da10e8555577d8",
+            "method": "visible desktop BitBlt before PrintWindow",
+            "dpi": 96,
+            "secondsAfterResizeObservation": 1.359887800000024
+          }
+        ],
+        "finding": "Immediate resize transient; first later sample is settled and later three captures are byte-identical.",
+        "firstSettledSampleSeconds": 0.29799980000007054
+      },
+      {
+        "installation": "upgraded",
+        "mode": "workflow",
+        "method": "Visible desktop BitBlt before PrintWindow",
+        "inputOrForcedRedrawBetweenFrames": false,
+        "frames": [
+          {
+            "path": "upgraded-workflow-960-visible-immediate.bmp",
+            "width": 960,
+            "height": 680,
+            "sha256": "97b40379004cf7c375e4da97f82252b6c386f39ddd24d77acf3a6df67345ef95",
+            "method": "visible desktop BitBlt before PrintWindow",
+            "dpi": 96,
+            "secondsAfterResizeObservation": 0.03237320000005184
+          },
+          {
+            "path": "upgraded-workflow-960-visible-250ms.bmp",
+            "width": 960,
+            "height": 680,
+            "sha256": "97b40379004cf7c375e4da97f82252b6c386f39ddd24d77acf3a6df67345ef95",
+            "method": "visible desktop BitBlt before PrintWindow",
+            "dpi": 96,
+            "secondsAfterResizeObservation": 0.2997685000000274
+          },
+          {
+            "path": "upgraded-workflow-960-visible-750ms.bmp",
+            "width": 960,
+            "height": 680,
+            "sha256": "97b40379004cf7c375e4da97f82252b6c386f39ddd24d77acf3a6df67345ef95",
+            "method": "visible desktop BitBlt before PrintWindow",
+            "dpi": 96,
+            "secondsAfterResizeObservation": 0.8317842000000155
+          },
+          {
+            "path": "upgraded-workflow-960-visible-1250ms.bmp",
+            "width": 960,
+            "height": 680,
+            "sha256": "97b40379004cf7c375e4da97f82252b6c386f39ddd24d77acf3a6df67345ef95",
+            "method": "visible desktop BitBlt before PrintWindow",
+            "dpi": 96,
+            "secondsAfterResizeObservation": 1.3634283000000096
+          }
+        ],
+        "finding": "All four sampled workflow frames are byte-identical and display settled fixed controls.",
+        "firstSettledSampleSeconds": 0.03237320000005184
+      }
+    ]
+  },
+  "captures": [
+    {
+      "sha256": "2a9fbf07858fa17654cb82d1d3c025650b498d9f7be729f4000d639b9c75f920",
+      "width": 625,
+      "height": 480,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "98cffb2c7b5b7fd39683816661ee67737421269c72299915c0e4bce758ccae36",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Individual original-resolution view",
+      "finding": "Native folder picker title, navigation, Folder edit, Update this Workbench and Cancel controls are visible and separated.",
+      "artifactRelativeName": "patch/updater-cancel-picker.bmp",
+      "reviewRepresentative": "updater-cancel-picker"
+    },
+    {
+      "sha256": "a18eb0aa91a9805af20fc7604158b1a4de0ec08a5c72cf2604ba7921751e8928",
+      "width": 625,
+      "height": 480,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "29231363937106abe2b73129fe2979a48532bf5bc6d103264dd5f8d63a9451b8",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Individual original-resolution view",
+      "finding": "Native folder picker title, navigation, Folder edit, Update this Workbench and Cancel controls are visible and separated.",
+      "artifactRelativeName": "patch/updater-invalid-picker.bmp",
+      "reviewRepresentative": "updater-invalid-picker"
+    },
+    {
+      "sha256": "0e52f8bac762d6f7e77dcdc7c9152b4f1f5f1435cc6a04bceb9817e25b028381",
+      "width": 393,
+      "height": 192,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "c8138905a8e41f876f7eadd97a0c7c513c25e59e2bb69d6f48ba51669457f3be",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Exact BMP SHA-256 duplicate of individually viewed representative",
+      "finding": "Warning clearly identifies an invalid installation and names NativeWorkbench.exe and manifest.json; OK is visible.",
+      "artifactRelativeName": "patch/updater-invalid-warning.bmp",
+      "reviewRepresentative": "updater-invalid-warning"
+    },
+    {
+      "sha256": "d67930f28758d3244ae5a7d0f7ef7e0be540d40f0aa8821011f89ea220941cda",
+      "width": 625,
+      "height": 480,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "503dd555e33b8409260723656c9888e4d657e88ca74bda9e64ce521953b9518a",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Exact BMP SHA-256 duplicate of individually viewed representative",
+      "finding": "Native folder picker title, navigation, Folder edit, Update this Workbench and Cancel controls are visible and separated.",
+      "artifactRelativeName": "patch/updater-invalid-retry-picker.bmp",
+      "reviewRepresentative": "updater-install-picker"
+    },
+    {
+      "sha256": "d67930f28758d3244ae5a7d0f7ef7e0be540d40f0aa8821011f89ea220941cda",
+      "width": 625,
+      "height": 480,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "503dd555e33b8409260723656c9888e4d657e88ca74bda9e64ce521953b9518a",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Individual original-resolution view",
+      "finding": "Native folder picker title, navigation, Folder edit, Update this Workbench and Cancel controls are visible and separated.",
+      "artifactRelativeName": "patch/updater-install-picker.bmp",
+      "reviewRepresentative": "updater-install-picker"
+    },
+    {
+      "sha256": "2357dc7e12a5d30970a335f342ce658d3a76ceb1fbae7c66d2eed89c55b174ef",
+      "width": 405,
+      "height": 179,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "3215451344a709b3a273ed3870c9dbdc08b04d97e86d2020ebd1cebe62f556df",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Exact BMP SHA-256 duplicate of individually viewed representative",
+      "finding": "Update success message and next instruction are readable; OK fits.",
+      "artifactRelativeName": "patch/updater-install-success.bmp",
+      "reviewRepresentative": "updater-install-success"
+    },
+    {
+      "sha256": "ed8e52eb88be59b63aa71dd930476956c3531ff7db57957877e772f2e901e434",
+      "width": 625,
+      "height": 480,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "2aafc17b169b37cc2946be7ecb7b66770ea873c6cd7dddcf81bdad3837c68756",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Individual original-resolution view",
+      "finding": "Native folder picker title, navigation, Folder edit, Update this Workbench and Cancel controls are visible and separated.",
+      "artifactRelativeName": "patch/updater-repeat-picker.bmp",
+      "reviewRepresentative": "updater-repeat-picker"
+    },
+    {
+      "sha256": "2357dc7e12a5d30970a335f342ce658d3a76ceb1fbae7c66d2eed89c55b174ef",
+      "width": 405,
+      "height": 179,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "3215451344a709b3a273ed3870c9dbdc08b04d97e86d2020ebd1cebe62f556df",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Exact BMP SHA-256 duplicate of individually viewed representative",
+      "finding": "Update success message and next instruction are readable; OK fits.",
+      "artifactRelativeName": "patch/updater-repeat-success.bmp",
+      "reviewRepresentative": "updater-install-success"
+    },
+    {
+      "sha256": "8340249724a191191909cbaa3700aa5cd8b95ea201ea6867de664dbe05cddae6",
+      "width": 920,
+      "height": 720,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "ddec2412044f6cc744053984ef37a15182dd4756e30bd025d3de3fa358eede6a",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Exact BMP SHA-256 duplicate of individually viewed representative",
+      "finding": "Starter is selected; setup choices, scrollable pack list, installed/selected counts, offline explanation and bottom actions fit.",
+      "artifactRelativeName": "patch/fresh-first-open-starter.bmp",
+      "reviewRepresentative": "fresh-first-open-starter"
+    },
+    {
+      "sha256": "ffc72b5c1a16f33727e12da786c943e4a7c32b483f745facb2293911b0129f3e",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "a2ad2538788b57f9c91c27a9cc52630fd3bedf559a8e2b941d5af2da0198e079",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Individual original-resolution view",
+      "finding": "Immediate resize transient: previous larger child layout remains visible inside the resized window, clipping Results at the right and action/settings controls at the bottom. Search placeholder is not visible in this frame. Later passive frames are settled.",
+      "artifactRelativeName": "patch/fresh-tool-960-visible-immediate.bmp",
+      "reviewRepresentative": "fresh-tool-960-visible-immediate"
+    },
+    {
+      "sha256": "e1adb86a17a4a11a5d5df3d81c6ef0d503c7bfc20687c72a1345f25ced1bb084",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "85dcf3ec504c85ae85b2878c15eadd8099a7a893b603ee2303035ae4ae9faae3",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Exact BMP SHA-256 duplicate of individually viewed representative",
+      "finding": "Settled three-pane layout: fixed navigation, Methods and bottom actions fit. The References button is partially below the scrollable settings viewport; long paths remain inside their edit fields.",
+      "artifactRelativeName": "patch/fresh-tool-960-visible-250ms.bmp",
+      "reviewRepresentative": "fresh-tool-960-visible-1250ms"
+    },
+    {
+      "sha256": "e1adb86a17a4a11a5d5df3d81c6ef0d503c7bfc20687c72a1345f25ced1bb084",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "85dcf3ec504c85ae85b2878c15eadd8099a7a893b603ee2303035ae4ae9faae3",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Exact BMP SHA-256 duplicate of individually viewed representative",
+      "finding": "Settled three-pane layout: fixed navigation, Methods and bottom actions fit. The References button is partially below the scrollable settings viewport; long paths remain inside their edit fields.",
+      "artifactRelativeName": "patch/fresh-tool-960-visible-750ms.bmp",
+      "reviewRepresentative": "fresh-tool-960-visible-1250ms"
+    },
+    {
+      "sha256": "e1adb86a17a4a11a5d5df3d81c6ef0d503c7bfc20687c72a1345f25ced1bb084",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "85dcf3ec504c85ae85b2878c15eadd8099a7a893b603ee2303035ae4ae9faae3",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Individual original-resolution view",
+      "finding": "Settled three-pane layout: fixed navigation, Methods and bottom actions fit. The References button is partially below the scrollable settings viewport; long paths remain inside their edit fields.",
+      "artifactRelativeName": "patch/fresh-tool-960-visible-1250ms.bmp",
+      "reviewRepresentative": "fresh-tool-960-visible-1250ms"
+    },
+    {
+      "sha256": "843ce639009c96c11c1799e020d09b7d691c15555240dde6e5d2e00598580a6a",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "cb42c73dc3812936eb5f18559f07a6a097c4abc973f5f6ed4469dbef77c28052",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Individual original-resolution view",
+      "finding": "Settled three-pane layout: fixed navigation, Methods and bottom actions fit. The References button is partially below the scrollable settings viewport; long paths remain inside their edit fields.",
+      "artifactRelativeName": "patch/fresh-tool-960x680.bmp",
+      "reviewRepresentative": "fresh-tool-960x680"
+    },
+    {
+      "sha256": "e705f0d8367a690c40bc2b597d0e70c37be9a65a0b4f7460352f85cfc880f0a2",
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "9aa86b720cdc9acbd3db5914a46d411ad80003723fba16570d16805add9c7586",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Individual original-resolution view",
+      "finding": "Three-pane layout has readable separate fixed header/footer controls. General settings and Methods are visible. Captures named 1280x900 are actually 1024 by 728.",
+      "artifactRelativeName": "patch/fresh-tool-1024x728.bmp",
+      "reviewRepresentative": "fresh-tool-1024x728"
+    },
+    {
+      "sha256": "e705f0d8367a690c40bc2b597d0e70c37be9a65a0b4f7460352f85cfc880f0a2",
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "9aa86b720cdc9acbd3db5914a46d411ad80003723fba16570d16805add9c7586",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Exact BMP SHA-256 duplicate of individually viewed representative",
+      "finding": "Three-pane layout has readable separate fixed header/footer controls. General settings and Methods are visible. Captures named 1280x900 are actually 1024 by 728.",
+      "artifactRelativeName": "patch/fresh-tool-1280x900.bmp",
+      "reviewRepresentative": "fresh-tool-1024x728"
+    },
+    {
+      "sha256": "00febc0f5eb6e1fca56f114152f93d20eea982efc87253ddfa04065c24fb8361",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "86602b13c84ad609cfb93eadd89c06df8f737652388d8c1d05989af4b7445057",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Exact BMP SHA-256 duplicate of individually viewed representative",
+      "finding": "Settled three-pane layout: fixed navigation, Methods and bottom actions fit. The References button is partially below the scrollable settings viewport; long paths remain inside their edit fields.",
+      "artifactRelativeName": "patch/fresh-workflow-960-visible-immediate.bmp",
+      "reviewRepresentative": "fresh-workflow-960-visible-1250ms"
+    },
+    {
+      "sha256": "00febc0f5eb6e1fca56f114152f93d20eea982efc87253ddfa04065c24fb8361",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "86602b13c84ad609cfb93eadd89c06df8f737652388d8c1d05989af4b7445057",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Exact BMP SHA-256 duplicate of individually viewed representative",
+      "finding": "Settled three-pane layout: fixed navigation, Methods and bottom actions fit. The References button is partially below the scrollable settings viewport; long paths remain inside their edit fields.",
+      "artifactRelativeName": "patch/fresh-workflow-960-visible-250ms.bmp",
+      "reviewRepresentative": "fresh-workflow-960-visible-1250ms"
+    },
+    {
+      "sha256": "00febc0f5eb6e1fca56f114152f93d20eea982efc87253ddfa04065c24fb8361",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "86602b13c84ad609cfb93eadd89c06df8f737652388d8c1d05989af4b7445057",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Exact BMP SHA-256 duplicate of individually viewed representative",
+      "finding": "Settled three-pane layout: fixed navigation, Methods and bottom actions fit. The References button is partially below the scrollable settings viewport; long paths remain inside their edit fields.",
+      "artifactRelativeName": "patch/fresh-workflow-960-visible-750ms.bmp",
+      "reviewRepresentative": "fresh-workflow-960-visible-1250ms"
+    },
+    {
+      "sha256": "00febc0f5eb6e1fca56f114152f93d20eea982efc87253ddfa04065c24fb8361",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "86602b13c84ad609cfb93eadd89c06df8f737652388d8c1d05989af4b7445057",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Individual original-resolution view",
+      "finding": "Settled three-pane layout: fixed navigation, Methods and bottom actions fit. The References button is partially below the scrollable settings viewport; long paths remain inside their edit fields.",
+      "artifactRelativeName": "patch/fresh-workflow-960-visible-1250ms.bmp",
+      "reviewRepresentative": "fresh-workflow-960-visible-1250ms"
+    },
+    {
+      "sha256": "5f46e0f80e9cf581a093c40df68175d0c1df1f8c433ccb3287b639b1cb391a33",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "13dd098b63e9c8862b7c7b0b46f3ddfc7add94bfc56d6526e38eb58590d3a687",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Individual original-resolution view",
+      "finding": "Settled three-pane layout: fixed navigation, Methods and bottom actions fit. The References button is partially below the scrollable settings viewport; long paths remain inside their edit fields.",
+      "artifactRelativeName": "patch/fresh-workflow-960x680.bmp",
+      "reviewRepresentative": "fresh-workflow-960x680"
+    },
+    {
+      "sha256": "574fab14162aaa05efaade2b515a97cec06799e443e803ea54b7a3c313b4f6fc",
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "78e757698d820a411ac14db9c40fef2ba8c192b8b222a35c1de6d98298ac9cda",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Individual original-resolution view",
+      "finding": "Three-pane layout has readable separate fixed header/footer controls. General settings and Methods are visible. Captures named 1280x900 are actually 1024 by 728.",
+      "artifactRelativeName": "patch/fresh-workflow-1024x728.bmp",
+      "reviewRepresentative": "fresh-workflow-1024x728"
+    },
+    {
+      "sha256": "574fab14162aaa05efaade2b515a97cec06799e443e803ea54b7a3c313b4f6fc",
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "78e757698d820a411ac14db9c40fef2ba8c192b8b222a35c1de6d98298ac9cda",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Exact BMP SHA-256 duplicate of individually viewed representative",
+      "finding": "Three-pane layout has readable separate fixed header/footer controls. General settings and Methods are visible. Captures named 1280x900 are actually 1024 by 728.",
+      "artifactRelativeName": "patch/fresh-workflow-1280x900.bmp",
+      "reviewRepresentative": "fresh-workflow-1024x728"
+    },
+    {
+      "sha256": "feb6d244e84713edf729775ca34a1e7ffadb2f75d224848a687ad9098ed68e57",
+      "width": 940,
+      "height": 680,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "2c3b4032f3a7f3d42f84d9659cc01c11fad0691cb156940c1d8ebbbf29afbf23",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Exact BMP SHA-256 duplicate of individually viewed representative",
+      "finding": "Search query is visible; empty table and actionable no-matching-results summary fit. Unavailable result actions are disabled and Close is visible.",
+      "artifactRelativeName": "patch/fresh-results-empty.bmp",
+      "reviewRepresentative": "fresh-results-empty"
+    },
+    {
+      "sha256": "63ae38dd4b5d33ccf7e0d0f9f9ace2ea7334de80021c1fef805eb16606545d57",
+      "width": 940,
+      "height": 680,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "11e48badfa70d1ea484f68526feec7bb18e867e283f95bbc37e6c879c3b878ca",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Individual original-resolution view",
+      "finding": "SAMtools query and one completed reference-index result are visible. Summary explicitly distinguishes execution success from QC assessment and reports unavailable scientific measurements; action buttons fit.",
+      "artifactRelativeName": "patch/fresh-results-populated.bmp",
+      "reviewRepresentative": "fresh-results-populated"
+    },
+    {
+      "sha256": "b2a43f28a1698a87fcb081bed89036ff54ca6cb18e31bb44006dbe3af65bc345",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "3e2b4984a9321976714fc54b33a47d534ddfa8c7fb8ecdf384acfc4690d9665e",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Individual original-resolution view",
+      "finding": "Immediate resize transient: previous larger child layout remains visible inside the resized window, clipping Results at the right and action/settings controls at the bottom. Search placeholder is not visible in this frame. Later passive frames are settled.",
+      "artifactRelativeName": "patch/upgraded-tool-960-visible-immediate.bmp",
+      "reviewRepresentative": "upgraded-tool-960-visible-immediate"
+    },
+    {
+      "sha256": "a821f192b67260a9632483548b3235ed4c318a420105cca697da10e8555577d8",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "bd2bbe5e6014a8ff6459d6070f8909deb8dd538d1c677bb05dcc1ea52acf812b",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Exact BMP SHA-256 duplicate of individually viewed representative",
+      "finding": "Settled three-pane layout: fixed navigation, Methods and bottom actions fit. The References button is partially below the scrollable settings viewport; long paths remain inside their edit fields.",
+      "artifactRelativeName": "patch/upgraded-tool-960-visible-250ms.bmp",
+      "reviewRepresentative": "upgraded-tool-960-visible-1250ms"
+    },
+    {
+      "sha256": "a821f192b67260a9632483548b3235ed4c318a420105cca697da10e8555577d8",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "bd2bbe5e6014a8ff6459d6070f8909deb8dd538d1c677bb05dcc1ea52acf812b",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Exact BMP SHA-256 duplicate of individually viewed representative",
+      "finding": "Settled three-pane layout: fixed navigation, Methods and bottom actions fit. The References button is partially below the scrollable settings viewport; long paths remain inside their edit fields.",
+      "artifactRelativeName": "patch/upgraded-tool-960-visible-750ms.bmp",
+      "reviewRepresentative": "upgraded-tool-960-visible-1250ms"
+    },
+    {
+      "sha256": "a821f192b67260a9632483548b3235ed4c318a420105cca697da10e8555577d8",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "bd2bbe5e6014a8ff6459d6070f8909deb8dd538d1c677bb05dcc1ea52acf812b",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Individual original-resolution view",
+      "finding": "Settled three-pane layout: fixed navigation, Methods and bottom actions fit. The References button is partially below the scrollable settings viewport; long paths remain inside their edit fields.",
+      "artifactRelativeName": "patch/upgraded-tool-960-visible-1250ms.bmp",
+      "reviewRepresentative": "upgraded-tool-960-visible-1250ms"
+    },
+    {
+      "sha256": "6c0ac5fd6fa98c139386aaa6e6bf0395a06bbe6bf5f81ece90f9139e28699dfc",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "fb1d5d4b243ccb33525d9900c4b2c43fc8cdad1f107f6a30f21d515386398ea9",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Individual original-resolution view",
+      "finding": "Settled three-pane layout: fixed navigation, Methods and bottom actions fit. The References button is partially below the scrollable settings viewport; long paths remain inside their edit fields.",
+      "artifactRelativeName": "patch/upgraded-tool-960x680.bmp",
+      "reviewRepresentative": "upgraded-tool-960x680"
+    },
+    {
+      "sha256": "09d0c73a2747260dcd117e4d7d00f05b7fb68a3dddcfddded8db553c952339eb",
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "7bdc1e84d418772636ee5be1c1efcec96b01a0041a04e73920a9c937c83ed30f",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Individual original-resolution view",
+      "finding": "Three-pane layout has readable separate fixed header/footer controls. General settings and Methods are visible. Captures named 1280x900 are actually 1024 by 728.",
+      "artifactRelativeName": "patch/upgraded-tool-1024x728.bmp",
+      "reviewRepresentative": "upgraded-tool-1024x728"
+    },
+    {
+      "sha256": "09d0c73a2747260dcd117e4d7d00f05b7fb68a3dddcfddded8db553c952339eb",
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "7bdc1e84d418772636ee5be1c1efcec96b01a0041a04e73920a9c937c83ed30f",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Exact BMP SHA-256 duplicate of individually viewed representative",
+      "finding": "Three-pane layout has readable separate fixed header/footer controls. General settings and Methods are visible. Captures named 1280x900 are actually 1024 by 728.",
+      "artifactRelativeName": "patch/upgraded-tool-1280x900.bmp",
+      "reviewRepresentative": "upgraded-tool-1024x728"
+    },
+    {
+      "sha256": "97b40379004cf7c375e4da97f82252b6c386f39ddd24d77acf3a6df67345ef95",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "1e93a531c41d82586384c20c5a1b9cce38c27880e028be06d062df84b4fa20e7",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Exact BMP SHA-256 duplicate of individually viewed representative",
+      "finding": "Settled three-pane layout: fixed navigation, Methods and bottom actions fit. The References button is partially below the scrollable settings viewport; long paths remain inside their edit fields.",
+      "artifactRelativeName": "patch/upgraded-workflow-960-visible-immediate.bmp",
+      "reviewRepresentative": "upgraded-workflow-960-visible-1250ms"
+    },
+    {
+      "sha256": "97b40379004cf7c375e4da97f82252b6c386f39ddd24d77acf3a6df67345ef95",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "1e93a531c41d82586384c20c5a1b9cce38c27880e028be06d062df84b4fa20e7",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Exact BMP SHA-256 duplicate of individually viewed representative",
+      "finding": "Settled three-pane layout: fixed navigation, Methods and bottom actions fit. The References button is partially below the scrollable settings viewport; long paths remain inside their edit fields.",
+      "artifactRelativeName": "patch/upgraded-workflow-960-visible-250ms.bmp",
+      "reviewRepresentative": "upgraded-workflow-960-visible-1250ms"
+    },
+    {
+      "sha256": "97b40379004cf7c375e4da97f82252b6c386f39ddd24d77acf3a6df67345ef95",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "1e93a531c41d82586384c20c5a1b9cce38c27880e028be06d062df84b4fa20e7",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Exact BMP SHA-256 duplicate of individually viewed representative",
+      "finding": "Settled three-pane layout: fixed navigation, Methods and bottom actions fit. The References button is partially below the scrollable settings viewport; long paths remain inside their edit fields.",
+      "artifactRelativeName": "patch/upgraded-workflow-960-visible-750ms.bmp",
+      "reviewRepresentative": "upgraded-workflow-960-visible-1250ms"
+    },
+    {
+      "sha256": "97b40379004cf7c375e4da97f82252b6c386f39ddd24d77acf3a6df67345ef95",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "1e93a531c41d82586384c20c5a1b9cce38c27880e028be06d062df84b4fa20e7",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Individual original-resolution view",
+      "finding": "Settled three-pane layout: fixed navigation, Methods and bottom actions fit. The References button is partially below the scrollable settings viewport; long paths remain inside their edit fields.",
+      "artifactRelativeName": "patch/upgraded-workflow-960-visible-1250ms.bmp",
+      "reviewRepresentative": "upgraded-workflow-960-visible-1250ms"
+    },
+    {
+      "sha256": "a7870965ae4b0c935ede34d83445346e9debc4e601ea3f7f8bf38eab80947bbe",
+      "width": 960,
+      "height": 680,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "cff449849c68e81bab01c6fb1d2e97206ccc187facfd4d08efd2ff6b1865f763",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Individual original-resolution view",
+      "finding": "Settled three-pane layout: fixed navigation, Methods and bottom actions fit. The References button is partially below the scrollable settings viewport; long paths remain inside their edit fields.",
+      "artifactRelativeName": "patch/upgraded-workflow-960x680.bmp",
+      "reviewRepresentative": "upgraded-workflow-960x680"
+    },
+    {
+      "sha256": "d51e69ae96423b732cb1aab90903b7ad61724c8ac9148d2b4091e3172bb8e0a2",
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "33efc7103d399b349f07dfc59a266456a70cb1afe267f2e4e98923d2496027d2",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Individual original-resolution view",
+      "finding": "Three-pane layout has readable separate fixed header/footer controls. General settings and Methods are visible. Captures named 1280x900 are actually 1024 by 728.",
+      "artifactRelativeName": "patch/upgraded-workflow-1024x728.bmp",
+      "reviewRepresentative": "upgraded-workflow-1024x728"
+    },
+    {
+      "sha256": "d51e69ae96423b732cb1aab90903b7ad61724c8ac9148d2b4091e3172bb8e0a2",
+      "width": 1024,
+      "height": 728,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "33efc7103d399b349f07dfc59a266456a70cb1afe267f2e4e98923d2496027d2",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Exact BMP SHA-256 duplicate of individually viewed representative",
+      "finding": "Three-pane layout has readable separate fixed header/footer controls. General settings and Methods are visible. Captures named 1280x900 are actually 1024 by 728.",
+      "artifactRelativeName": "patch/upgraded-workflow-1280x900.bmp",
+      "reviewRepresentative": "upgraded-workflow-1024x728"
+    },
+    {
+      "sha256": "feb6d244e84713edf729775ca34a1e7ffadb2f75d224848a687ad9098ed68e57",
+      "width": 940,
+      "height": 680,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "2c3b4032f3a7f3d42f84d9659cc01c11fad0691cb156940c1d8ebbbf29afbf23",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Exact BMP SHA-256 duplicate of individually viewed representative",
+      "finding": "Search query is visible; empty table and actionable no-matching-results summary fit. Unavailable result actions are disabled and Close is visible.",
+      "artifactRelativeName": "patch/upgraded-results-empty.bmp",
+      "reviewRepresentative": "fresh-results-empty"
+    },
+    {
+      "sha256": "ef1de5fa595e550cfbc447e6598e7e1a928fb5849db06be4b6bbc83795f40b1e",
+      "width": 940,
+      "height": 680,
+      "dpi": 96,
+      "nativeReportHashAndDimensionsMatched": true,
+      "pngSha256": "9fb7ed8083874717cae458a8661ed8ab4ac7972e126afecec35e97762666c007",
+      "pngPixelsMatchOriginal": true,
+      "reviewMethod": "Exact BMP SHA-256 duplicate of individually viewed representative",
+      "finding": "SAMtools query and one completed reference-index result are visible. Summary explicitly distinguishes execution success from QC assessment and reports unavailable scientific measurements; action buttons fit.",
+      "artifactRelativeName": "patch/upgraded-results-populated.bmp",
+      "reviewRepresentative": "upgraded-results-populated"
+    }
+  ]
+}

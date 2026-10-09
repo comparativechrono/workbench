@@ -1,0 +1,132 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "kind": "independent downloaded-archive audit",
+  "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+  "run": 37997370988,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37997370988",
+  "archives": [
+    {
+      "file": "native-workbench-0.16.1-source.zip",
+      "bytes": 48270849,
+      "sha256": "0accfb48b8b7b3193b4c72e76c45c404db7979d877ce0805d2687d5a849fe1f1"
+    },
+    {
+      "file": "native-workbench-0.16.1-starter-windows.zip",
+      "bytes": 17879604,
+      "sha256": "1291f93b5ece3c4da34eb2f2e29fccc83b6d87ec5fb73abf28bfd9cc8f155b75"
+    },
+    {
+      "file": "native-workbench-0.16.1-update-from-0.16.0.zip",
+      "bytes": 13042264,
+      "sha256": "86dd3d9796099b366a9e01012acc50d00d501a1fdaab89b7119236b44db4b4d8"
+    }
+  ],
+  "artifactWrappers": [
+    {
+      "id": 11647526336,
+      "name": "ui-patch-starter-73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+      "bytes": 17879804,
+      "sha256": "05bf013a76b20adeee331c386e18d0f3b6a48784df2c2f627f8601e7e670efa0",
+      "githubApiDigestMatched": true
+    },
+    {
+      "id": 11647591236,
+      "name": "ui-patch-updater-73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+      "bytes": 13042470,
+      "sha256": "fe681f6c8a2ed61cbda52570d8fb252ded285d60bb3bd54d5f5d0a69c3eb022e",
+      "githubApiDigestMatched": true
+    },
+    {
+      "id": 11647641125,
+      "name": "ui-patch-source-part-2-73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+      "bytes": 23105219,
+      "sha256": "185f45eb4dc979d28b3f21ee714bcef04e3bd5a7f71dcc5689257a17aa7ef930",
+      "githubApiDigestMatched": true
+    },
+    {
+      "id": 11647666153,
+      "name": "ui-patch-metadata-73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+      "bytes": 5724,
+      "sha256": "8702f4afbe2221017fd2712b95306b3e0c67efdd5b01f8f2957ad129bc5f2475",
+      "githubApiDigestMatched": true
+    },
+    {
+      "id": 11647676250,
+      "name": "ui-patch-source-part-1-73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+      "bytes": 25166018,
+      "sha256": "14761ce1667506dd69d97bf72bd032ef732ca5894edfea0232dd11d9922f158b",
+      "githubApiDigestMatched": true
+    }
+  ],
+  "transportParts": [
+    {
+      "file": "native-workbench-0.16.1-source.zip.part1",
+      "bytes": 25165824,
+      "sha256": "ae9180ed9fccd48b883970e2265504d94bf4760fb89b1b7be3077ffe7341b89a"
+    },
+    {
+      "file": "native-workbench-0.16.1-source.zip.part2",
+      "bytes": 23105025,
+      "sha256": "deb4720fdad700f58eabf4bc4c74564ff430f7482e69c9d4e748e1ac057c6746"
+    }
+  ],
+  "orderedSourceReassemblyVerified": true,
+  "zipCrc": "passed",
+  "zipPathsAndDuplicateNames": "passed",
+  "sourceGitFilesVerified": 826,
+  "runtimeSourceFilesVerified": 34,
+  "exampleSourceFilesVerified": 2,
+  "coreFilesVerified": 90,
+  "starterArchiveFiles": 277,
+  "publishedPreservedFiles": {
+    "runtime/": 39,
+    "packs/": 186
+  },
+  "packPinsUnchanged": true,
+  "productionTrustUnchanged": true,
+  "setupSelectionUnchanged": true,
+  "legacySourceSha256": "5dac9add19436b336cba483a0f915e39aafed383282c2a019a0dbd3cc3c8668e",
+  "legacyNestedZipCrc": "passed",
+  "changedCoreFiles": [
+    "NativeWorkbench.exe",
+    "SOURCE-AVAILABILITY.json",
+    "WorkbenchBridge.exe",
+    "examples/starter/samples-README.txt",
+    "examples/starter/samples.csv",
+    "workspace/app_version.py",
+    "workspace/desktop_host.py",
+    "workspace/sample_table_editor.py",
+    "workspace/service.py"
+  ],
+  "changedExistingCoreFiles": [
+    "NativeWorkbench.exe",
+    "SOURCE-AVAILABILITY.json",
+    "WorkbenchBridge.exe",
+    "workspace/app_version.py",
+    "workspace/desktop_host.py",
+    "workspace/service.py"
+  ],
+  "addedCoreFiles": [
+    "examples/starter/samples-README.txt",
+    "examples/starter/samples.csv",
+    "workspace/sample_table_editor.py"
+  ],
+  "updaterInventoryFiles": 55,
+  "updaterOperations": 9,
+  "updaterTargetExactlyMatchesStarter": true,
+  "sourceCompanionPinnedByStarter": true,
+  "baseManifestSha256": "7ea7e55caae3d60f1e2844eaee69f785088e23e04fde08d8db0cf7982794898f",
+  "targetManifestSha256": "99edccb918eddf876207bc0dac9951b353181794b292566c61d992f1880d91f6",
+  "nativeExecutables": {
+    "DesktopWorkbench.exe": "58d3f18c4791b27c8d62612da9d900334a9b3bc171a7b2ac24b22b4d749e7bfc",
+    "WorkbenchBridge.exe": "3eb4b9bb0387cda22194c72ccd4aafcf161fe848c0b4cb823c6c41e7d57ae6bc",
+    "UpdateWorkbench.exe": "1b765bedcd0c3494f8bf40e204f80c16aa1b8e13cebb2a77b0fe54a9d934c0b6"
+  },
+  "scope": "Downloaded archive bytes, inventories and committed-source correspondence; application execution remains separate.",
+  "limits": [
+    "Combined candidate artifact wrapper was not downloaded; five bounded transfer wrappers were independently verified.",
+    "No native execution, signing assessment or build reproducibility claim is established by this audit."
+  ],
+  "auditScriptSha256": "f3a5979e66d8e66381118b627978436cfa3216bdb5dffc73705b42bcda9c33e3"
+}

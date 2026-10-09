@@ -1,0 +1,74 @@
+[
+  {
+    "id": 11647676250,
+    "name": "ui-patch-source-part-1-73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+    "size_in_bytes": 25166018,
+    "expired": false,
+    "created_at": "2026-10-09T22:07:19Z",
+    "expires_at": "2026-11-08T22:07:18Z",
+    "digest": "sha256:14761ce1667506dd69d97bf72bd032ef732ca5894edfea0232dd11d9922f158b",
+    "runId": 37997370988,
+    "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+    "downloadUrl": "https://github.com/comparativechrono/workbench/actions/runs/37997370988/artifacts/11647676250"
+  },
+  {
+    "id": 11647666153,
+    "name": "ui-patch-metadata-73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+    "size_in_bytes": 5724,
+    "expired": false,
+    "created_at": "2026-10-09T22:07:21Z",
+    "expires_at": "2026-11-08T22:07:20Z",
+    "digest": "sha256:8702f4afbe2221017fd2712b95306b3e0c67efdd5b01f8f2957ad129bc5f2475",
+    "runId": 37997370988,
+    "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+    "downloadUrl": "https://github.com/comparativechrono/workbench/actions/runs/37997370988/artifacts/11647666153"
+  },
+  {
+    "id": 11647641125,
+    "name": "ui-patch-source-part-2-73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+    "size_in_bytes": 23105219,
+    "expired": false,
+    "created_at": "2026-10-09T22:07:20Z",
+    "expires_at": "2026-11-08T22:07:19Z",
+    "digest": "sha256:185f45eb4dc979d28b3f21ee714bcef04e3bd5a7f71dcc5689257a17aa7ef930",
+    "runId": 37997370988,
+    "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+    "downloadUrl": "https://github.com/comparativechrono/workbench/actions/runs/37997370988/artifacts/11647641125"
+  },
+  {
+    "id": 11647591236,
+    "name": "ui-patch-updater-73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+    "size_in_bytes": 13042470,
+    "expired": false,
+    "created_at": "2026-10-09T22:07:18Z",
+    "expires_at": "2026-11-08T22:07:17Z",
+    "digest": "sha256:fe681f6c8a2ed61cbda52570d8fb252ded285d60bb3bd54d5f5d0a69c3eb022e",
+    "runId": 37997370988,
+    "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+    "downloadUrl": "https://github.com/comparativechrono/workbench/actions/runs/37997370988/artifacts/11647591236"
+  },
+  {
+    "id": 11647531259,
+    "name": "ui-patch-candidate-73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+    "size_in_bytes": 79207959,
+    "expired": false,
+    "created_at": "2026-10-09T22:07:15Z",
+    "expires_at": "2026-11-08T22:07:11Z",
+    "digest": "sha256:73aae1e16c7857b68fbaa22515bfb93f773cbd5626fddf2cf084041730b3f422",
+    "runId": 37997370988,
+    "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+    "downloadUrl": "https://github.com/comparativechrono/workbench/actions/runs/37997370988/artifacts/11647531259"
+  },
+  {
+    "id": 11647526336,
+    "name": "ui-patch-starter-73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+    "size_in_bytes": 17879804,
+    "expired": false,
+    "created_at": "2026-10-09T22:07:16Z",
+    "expires_at": "2026-11-08T22:07:15Z",
+    "digest": "sha256:05bf013a76b20adeee331c386e18d0f3b6a48784df2c2f627f8601e7e670efa0",
+    "runId": 37997370988,
+    "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+    "downloadUrl": "https://github.com/comparativechrono/workbench/actions/runs/37997370988/artifacts/11647526336"
+  }
+]

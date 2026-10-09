@@ -1,19 +1,26 @@
 # Native Workbench knowledge base
 
 **Active tester-feedback revision, 2026-10-09:**
-[Draft PR #15](https://github.com/comparativechrono/workbench/pull/15) remains
-unpublished **0.16.1**. Development resumes from
-`8cd3457745da52d38b5470c9ae917c8394ca46b0` to address Run/polling flashing,
-category expansion anchoring and collapse flashing, restore separate Methods
-while retaining Run preflight, and add native sample-table New/Edit/Save as
-CSV/TSV with a verified one-row Starter example. File columns, base folders and
-mapping remain explicit; the example does not supply independent replicates.
+[Draft PR #15](https://github.com/comparativechrono/workbench/pull/15) contains
+unpublished **0.16.1** application source
+`73778e00461e2b83c07b9ea97df2b9c5d4b6317d`: reduced Run/poll redraws,
+anchored category expansion/collapse, separate Methods with Run preflight, and
+native Samples New/Edit/Save as CSV/TSV with a verified one-row Starter example.
 
-Implementation and new exact-package validation are **pending**. Start with the
-[new handover](tester-feedback-0.16.1-handover.md). The preceding
-[UI-patch evidence](ui-patch-0.16.1-handover.md)—141 source passes and 84 native
-checks per path—applies only to the prior `8938e709` archives, not this revision.
-Nothing is merged or released; published **0.16.0** remains unchanged.
+The exact archives passed **220 source tests**, strict native builds and the
+archive/source audit. Native Windows checks passed **113 per path**: 81 regression,
+19 patch and 13 tester-feedback checks. Validator-only tests passed **23**,
+separately from application tests. Final validator
+`f9e7120196ddd284d33c0e8221b78fbf4529058f`,
+[run 37999874335](https://github.com/comparativechrono/workbench/actions/runs/37999874335),
+uses the unchanged application archives. Regression, settled patch and final
+feedback visual reviews passed within their recorded 96-DPI scope. The candidate
+is ready for **unpublished draft review**. The bounded immediate Tools-resize
+transient and all four partial attempts are retained. Focused, sanitized receipts
+and original-report hashes are saved; raw reports remain in expiring Actions
+artifacts.
+Start with the [handover](tester-feedback-0.16.1-handover.md).
+Published **0.16.0** remains unchanged; nothing is merged or released.
 
 **Deployment companion baseline:**
 [Draft PR #14](https://github.com/comparativechrono/workbench/pull/14) contains the

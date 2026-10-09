@@ -3,29 +3,72 @@
 ## Active development: tester-feedback revision of unpublished 0.16.1
 
 Snapshot: **2026-10-09**. [Draft PR #15](https://github.com/comparativechrono/workbench/pull/15)
-continues on `fix/native-ui-0.16.1` from verified head
-`8cd3457745da52d38b5470c9ae917c8394ca46b0`, still based on the unmerged deployment
-companion branch at `f74d90229be6a78d6ad0c0076c54c04bb7e7cae2`. The application
-remains an unpublished **0.16.1** candidate; published **0.16.0**, `main` and
-published assets are unchanged.
+continues on `fix/native-ui-0.16.1`, based on the unmerged deployment companion
+branch at `f74d90229be6a78d6ad0c0076c54c04bb7e7cae2`. Application source is
+`73778e00461e2b83c07b9ea97df2b9c5d4b6317d`. It remains unpublished **0.16.1**;
+published **0.16.0**, `main` and published assets are unchanged.
 
-Implementation is in progress for the reported Run flashing/redundant polling
-redraws, category expansion viewport anchoring and collapse black flash. Methods
-will again be a separate action; the primary Readiness button is removed while
-Run preflight remains. Runtime/memory forecasting is outside this scope. Native
-Samples gains New, Edit and Save as CSV/TSV with a verified one-row Starter
-example, explicit file columns/base folder/mapping, and no invented independent
-replicates.
+Implementation addresses Run flashing/redundant polling redraws and category
+expansion anchoring/collapse redraws. Methods is separate again; the primary
+Readiness button is removed while Run preflight remains. Native Samples provides
+New, Edit and Save as CSV/TSV plus a verified one-row Starter example. File
+columns, base folders and mapping remain explicit. This adds no runtime/memory
+forecast or independent biological replicates.
 
-The [new handover](tester-feedback-0.16.1-handover.md) owns this revision's scope
-and pending evidence. A new candidate commit, source/archive audit and exact
-ordinary/spaced Windows results are required, including the existing patch and
-regression scopes plus new tester-feedback, batch, temporal and screenshot
-checks. No results for this new revision are recorded yet. The following 141
-source/84 native passes and visual receipts describe only the earlier `8938e709`
-archives; they do not validate new bytes. No merge or release is part of this
-work. Benchmarking is separate; representative-machine acceptance, signing/IT,
-scientific Linux CWL and SDK/build recovery remain outstanding.
+The [handover](tester-feedback-0.16.1-handover.md) and new evidence bind this
+revision's exact Starter, matching source and updater. **220 source tests in 18
+suites** passed with no configured skips, together with the C++ JSON check and
+three strict native builds. The independent archive/source audit passed. Seven
+Windows regression scopes passed **81 checks per path** (11 batch, 11 curated,
+five readiness, 10 references, nine results, three scroll and 32 workspace).
+Their **112 capture files** were reviewed at original resolution or through
+explicitly recorded exact-byte equivalence; no blocking regression layout defect
+was observed within those 96-DPI viewports.
+
+Final validator `f9e7120196ddd284d33c0e8221b78fbf4529058f` completed
+[run 37999874335](https://github.com/comparativechrono/workbench/actions/runs/37999874335)
+with **19 patch and 13 tester-feedback checks passed per path** on unchanged
+archives. Together with the 81 regression checks, this is **113 unique configured
+checks per path**. Repeated patch observations do not add unique coverage. The
+**23 portable validator tests** (eight patch, 15 feedback) passed separately from
+the 220 application source tests. All four earlier partial attempts and their
+focused failure receipts and original-report hashes remain in the [attempt record](evidence/tester-feedback-0.16.1-attempts-2026-10-09.json).
+
+The complete feedback gate exercised Samples without a workflow, editing and
+CSV/TSV roundtrip, discarded/rejected edits, explicit one-row example mapping,
+and actual queued science: 202 proper-pair alignments and the known homozygous
+starter:1351 G>A SNP with sample/CWL/output provenance. Its 41 temporal series
+per path contain 1,510 ordinary and 1,306 spaced-path frames, with no sampled
+black block or unexpected stable difference. These are finite observations,
+not a zero-flicker claim. The [native record](evidence/tester-feedback-0.16.1-native-validation-2026-10-09.json)
+links focused, sanitized receipts, original-report hashes and artifact locations.
+
+Patch visual review covered 82 capture files (43 unique images and 39 exact-byte
+duplicates). Settled controls fit; immediate Tools resize frames can retain old
+geometry and clip the right/bottom edge until the first later sample, about
+0.30–0.32 seconds. Workflow samples were stable. This bounded resize observation
+is separate from Run/category flashing acceptance. Final feedback visual review
+passed for all **192 capture files**: 51 unique BMP hashes, 52 direct views and
+140 verified exact-hash reuses. Hashes, dimensions and lossless PNG pixels match
+the native reports; no unexpected layout defect was observed within the captured
+viewports. [Ordinary receipt](evidence/tester-feedback-0.16.1-feedback-visual-ordinary-2026-10-09.json),
+[spaces receipt](evidence/tester-feedback-0.16.1-feedback-visual-spaces-2026-10-09.json).
+Observed workspace sizes are 960×680 and 1024×728 at 96 DPI;
+the Samples window is 940×680. Broader display acceptance is not established.
+
+The revision is ready as an unpublished draft review candidate. Evidence is
+minimized for repository delivery: focused, sanitized results and original-report
+SHA-256 values are retained, while opaque tokens and detailed runner/input records
+are excluded. Full originals remain in the local validation workspace and Actions
+artifacts, scheduled to expire on **2026-11-08**; hashes do not preserve access to
+raw content after expiry. The handover records the automatic upload-review
+rejection and the resulting evidence boundary.
+
+Earlier `8938e709` source/native/visual receipts remain historical and do not
+validate this revision. No merge or release is part of this work. Benchmarking is
+separate; representative-machine/high-DPI/multiple-monitor/physical-trackpad and
+managed-machine acceptance, signing/IT, scientific Linux CWL and SDK/build
+recovery remain outstanding.
 
 ## Prior unpublished candidate: native keyboard and narrow-display patch
 

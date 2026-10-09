@@ -2,24 +2,38 @@
 
 ## Active set: tester-feedback revision of unpublished 0.16.1
 
-The existing [draft PR #15](https://github.com/comparativechrono/workbench/pull/15)
-continues from `8cd3457745da52d38b5470c9ae917c8394ca46b0`, with published 0.16.0
-unchanged. The bounded revision addresses Run/poll redraw flashing, category
-expansion viewport anchoring and collapse black flash; restores separate Methods
-while keeping Run preflight and removing the primary Readiness button; and adds
-native sample-table New/Edit/Save as CSV/TSV plus a verified one-row Starter
-example. File columns, base folders and mapping stay explicit. This does not add
-runtime/memory forecasts or fabricate independent replicates.
+The [draft PR #15](https://github.com/comparativechrono/workbench/pull/15)
+revision is implemented in application source
+`73778e00461e2b83c07b9ea97df2b9c5d4b6317d`, with published 0.16.0 unchanged.
+It addresses Run/poll redraws and category expansion anchoring/collapse redraws,
+restores separate Methods while keeping Run preflight and removing the primary
+Readiness button, and adds native Samples New/Edit/Save as CSV/TSV plus a verified
+one-row Starter example. File columns, base folders and mapping stay explicit;
+there are no runtime/memory forecasts or invented independent replicates.
 
-Implementation and validation are pending. The next delivery requires new exact
-source/native/archive/temporal/screenshot evidence in ordinary and spaced Windows
-paths, including the existing 19-check patch scope and 65 other native checks plus
-new tester-feedback and batch gates. Keep the previous candidate's receipts
-unchanged: its 141 source passes and 84 native checks per path apply only to
-`8938e709` archives. The [new handover](tester-feedback-0.16.1-handover.md) records
-the plan and evidence boundary. No merge or release is included. Benchmarking is
-separate, and external acceptance/signing/IT, scientific Linux CWL and SDK/build
-recovery remain outstanding.
+Source validation (**220 tests, 18 suites**), three strict native builds and the
+independent archive/source audit passed. Final native coverage is **113 checks
+per Windows path**: 81 completed regressions, 19 patch checks and 13 feedback
+checks. Validator `f9e7120196ddd284d33c0e8221b78fbf4529058f`,
+[run 37999874335](https://github.com/comparativechrono/workbench/actions/runs/37999874335),
+passed on unchanged application archives, with 23 separate portable gate tests.
+Repeated patch checks add no unique coverage. Four earlier partial attempts remain documented through focused failure
+summaries and original-report hashes.
+
+Visual review is complete for 112 regression, 82 patch and 192 final feedback
+capture files. The feedback review covers 51 unique BMP hashes through 52 direct
+views and 140 verified exact-hash reuses, with no unexpected layout defect within
+the captured 96-DPI viewports. Keep the bounded immediate Tools-resize
+old-geometry observation until the first later sample (~0.30–0.32 s), observed-size
+limits, and the distinction between finite temporal samples and zero flicker.
+
+The [handover](tester-feedback-0.16.1-handover.md) is ready for unpublished draft
+review. Durable focused, sanitized receipts and original-report hashes replace
+raw JSON uploads; full originals remain in Actions artifacts that expire on
+2026-11-08. Tokens and detailed runner/input records are excluded from repository
+delivery. No merge or release is included. Benchmarking is separate; external
+acceptance, signing/IT, scientific Linux CWL and SDK/build recovery remain
+outstanding.
 
 ## Prior set: native keyboard and narrow-display patch
 

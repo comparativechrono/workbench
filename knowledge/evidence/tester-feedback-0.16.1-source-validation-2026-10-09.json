@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+  "run": 37997370988,
+  "job": 114046733988,
+  "pythonTests": 220,
+  "pythonSuites": 18,
+  "suiteCounts": [
+    5,
+    11,
+    9,
+    17,
+    9,
+    7,
+    7,
+    12,
+    26,
+    6,
+    12,
+    11,
+    11,
+    5,
+    26,
+    24,
+    16,
+    6
+  ],
+  "configuredSkips": 0,
+  "cxxJson": "passed",
+  "strictNativeBuilds": [
+    "desktop",
+    "bridge",
+    "updater"
+  ],
+  "buildLogSha256": "8df9412f0159a06edc5d7069272e05b8b01520295cd63428423e60fd2c918052",
+  "scope": "Configured Linux source tests and cross-compilation only; packaged Windows runs recorded separately."
+}
