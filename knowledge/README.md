@@ -1,12 +1,18 @@
 # Native Workbench knowledge base
 
 **Active development, 2026-10-08:** the owner accepted the
-[feature roadmap](roadmap.md). Unpublished **0.12.0** begins with
+[feature roadmap](roadmap.md). The next tranche targets unpublished **0.13.0**:
+[sample batches and a durable queue](batch-workflows.md), plus
+[verified reusable indexes](reference-indexes.md), on
+`feature/batch-queue-indexes`. It builds on unpublished **0.12.0**
 [readiness, performance records and diagnostic export](readiness-performance.md)
 on `feature/readiness-performance`. Published 0.11.0 remains the baseline;
 the first implementation tranche has passed its recorded exact-candidate checks
 and screenshot review in [draft PR #7](https://github.com/comparativechrono/workbench/pull/7).
 Representative-machine acceptance, benchmarking and release work remain separate.
+The second tranche is implemented in [draft PR #8](https://github.com/comparativechrono/workbench/pull/8);
+its [candidate handover](batch-queue-indexes-0.13.0-handover.md) records exact bytes,
+source/native observations, retained failures and remaining acceptance work.
 
 This is the durable handover for people and agents continuing Native Workbench.
 It records why the project exists, how it works, how to extend it, and which

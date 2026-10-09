@@ -117,6 +117,7 @@ class SetupServiceTests(unittest.TestCase):
 
     def test_corrupt_optional_setup_state_does_not_prevent_app_initialization(self):
         (self.root / "user-data/tool-setup.json").write_text("invalid JSON")
+        self.app.shutdown(grace=1)
         app = Workbench(self.root, catalog={"packs": [], "tools": {}})
         host = DesktopHost(self.root, app=app)
         try:

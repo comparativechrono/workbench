@@ -258,7 +258,7 @@ def _execution(run):
     if run is None:
         return {'status': 'planned', 'description': 'Prepared workflow; execution has not completed.'}
     result = {key: copy.deepcopy(run[key]) for key in ('status', 'success', 'started', 'finished', 'planSha256') if key in run}
-    result['recordJson'] = _metadata({key: run[key] for key in ('id', 'status', 'success', 'started', 'finished', 'planSha256', 'nodes', 'outputs') if key in run})
+    result['recordJson'] = _metadata({key: run[key] for key in ('id', 'status', 'success', 'started', 'finished', 'planSha256', 'nodes', 'outputs', 'batch') if key in run})
     return result
 
 
@@ -298,6 +298,10 @@ def export_workflow(plan, app_root, run=None):
             'nw:created': plan.get('created', ''), 'nw:execution': _execution(run),
             'nw:references': _metadata(plan.get('references', {})),
             'nw:scheduler': plan.get('scheduler', 'sequential-independent-branches')}
+    if 'batch' in plan:
+        main['nw:batch'] = _metadata(plan['batch'])
+    if 'referenceIndexPolicy' in plan:
+        main['nw:referenceIndexPolicy'] = plan['referenceIndexPolicy']
     main['inputs']['nw_python'] = {'type': 'string', 'default': 'python3', 'label': 'Python 3.10+ executable for CWL runner'}
     processes, links, manifests = [], {}, {}
     used = {ref for node in nodes.values() for refs in node['inputs'].values() for ref in refs if '::' not in ref}

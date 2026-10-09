@@ -1,7 +1,8 @@
 # Current architecture
 
 This describes the reference-discovery, native interface and results-export
-implementation, reviewed through the 0.9.0 release on 2026-10-06. It is a map of
+implementation, with the batch/queue/index extension reviewed on 2026-10-08.
+Versioned release paragraphs retain their historical evidence. It is a map of
 the implementation, not a claim that every deployment or scientific use has been
 validated. Start with [the knowledge index](README.md).
 
@@ -59,7 +60,7 @@ pipes are handled by the native runner, including both subprocess outcomes.
 
 The GUI build target is `build/desktop/DesktopWorkbench.exe`; the release
 packager installs it as `NativeWorkbench.exe`. All three native build resource
-versions are 0.10.0 in the setup development tree; published 0.9.0 is unchanged. Application version is maintained in `workspace/app_version.py`
+versions are 0.13.0 in the active development tree; published 0.11.0 is unchanged. Application version is maintained in `workspace/app_version.py`
 and release metadata, independently of pack versions and pack API compatibility.
 
 ## Responsibilities and source map
@@ -73,6 +74,9 @@ and release metadata, independently of pack versions and pack API compatibility.
 | [`workspace/service.py`](../workspace/service.py) | Shared lifecycle, background work, history, saved pipelines/presets, pack operations and installation checks. |
 | [`workspace/catalog.py`](../workspace/catalog.py) | Strict manifest/schema parsing, installed operation discovery, semantic types and exact-version resolution. |
 | [`workspace/engine.py`](../workspace/engine.py) | Graph validation, biological preflight, plan freezing, hashing, scheduling, native backend, methods and SVG/report generation. |
+| [`workspace/sample_table.py`](../workspace/sample_table.py) | Bounded CSV/TSV parsing, explicit column bindings, isolated per-sample graph copies and combined-report previews. |
+| [`workspace/run_queue.py`](../workspace/run_queue.py) | Durable queue receipt, OS ownership lease, frozen plan/companion inventory and atomic state persistence. |
+| [`workspace/reference_indexes.py`](../workspace/reference_indexes.py) | Content-addressed index identities, complete inventory verification, crash-released per-key lease and verified copy into results. |
 | [`workspace/cwl_export.py`](../workspace/cwl_export.py) | 0.9: frozen packed CWL definitions and embedded independent runner; original execution-outcome metadata. |
 | [`workspace/dag_routing.py`](../workspace/dag_routing.py), [`desktop/dag_routing.h`](../desktop/dag_routing.h) | 0.9: orthogonal routes around diagram cards for saved SVG/native presentation. |
 | [`desktop/bridge.cpp`](../desktop/bridge.cpp), [`pack_model.cpp`](../desktop/pack_model.cpp), [`packs.cpp`](../desktop/packs.cpp) | Native bridge commands, execution manifest contract, discovery and local pack import. |
@@ -94,7 +98,7 @@ adapters; do not add a bespoke GUI for each tool.
 
 Four different version concepts must remain distinct:
 
-* application version, development 0.10.0 (published 0.9.0);
+* application version, development 0.13.0 (published 0.11.0);
 * pack API, currently 1;
 * execution manifest format, currently 2;
 * each pack's own version and each executable's upstream/build version.
@@ -123,6 +127,25 @@ Historical IDs such as `align`, `bam` and `variants` are stable identities, not
 names to normalize to product branding.
 
 ## Graph semantics, execution and provenance
+
+The native Samples window previews explicit column mappings against a snapshot
+of the current graph. An expiring private token retains the complete preview;
+only Queue prepares and hashes each plan. Jobs and their preparation companions
+are immutable while queued; execution updates outcome and performance records.
+Start arms the jobs waiting at that moment; later
+additions need another Start. Reopening is paused, interrupted jobs stay
+interrupted, and a failure pauses later jobs. Draft graph edits remain available
+while a frozen job runs. This is a serial queue, not completed-step restart or
+parallel execution. See [batch workflows](batch-workflows.md).
+
+The optional `referenceIndex` / `requiresReferenceIndex` pack schema contracts
+currently support verified minimap2 short-read indexes. An explicit builder
+step reuses only a complete matching identity, with full file and executable
+hash checks, or builds and registers the declared output. Each result retains
+its own copy. Frozen CWL still includes the builder command for independent
+replay; execution metadata and methods distinguish actual building from reuse.
+See [reference indexes](reference-indexes.md). These additions do not repin old
+graphs or replace the published align 0.4.0 pack.
 
 A graph has named external sources and operation nodes. Inputs refer either to
 `input-<number>` or to `step-<number>::<output-id>`. An input port holds a list of
@@ -229,8 +252,9 @@ screenshot equality; see the [native UI guide](native-ui.md).
 
 Analysis commands consume local inputs and write local outputs. The explicit
 pack catalogue/download client and reference provider can make outbound HTTPS
-requests; neither creates a listener. The signed public pack catalogue is not
-yet configured. Reference discovery needs no executable-pack catalogue trust
+requests; neither creates a listener. The signed public pack catalogue and owner
+trust are bundled; candidate development preserves those production trust bytes.
+Reference discovery needs no executable-pack catalogue trust
 file and must not be confused with installing code.
 
 The 0.7 native References window uses Ensembl archive releases 100–116. Search,

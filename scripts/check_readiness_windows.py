@@ -67,7 +67,7 @@ def performance_checks(folder, record, report):
             "Final run does not bind the exact performance record.")
     value, plan = read_json(path), read_json(folder / "plan.json")
     require(value["schema"] == 1 and value["kind"] == "native-workbench-performance" and
-            value["appVersion"] == "0.12.0" and value["status"] == "success" and
+            value["appVersion"] == report["appVersion"] and value["status"] == "success" and
             value["planSha256"] == record["planSha256"] == plan["sha256"] and value["runId"] == record["id"],
             "Performance identity does not match the frozen run.")
     require(value["system"]["os"]["name"] == "Windows" and value["system"]["logicalCpuCount"] > 0 and
@@ -87,7 +87,8 @@ def performance_checks(folder, record, report):
     require(value["interpretation"]["inclusiveTotalsOverlapPhases"] is True and
             "not resident set size" in value["interpretation"]["nativeMemoryMeaning"],
             "Performance scope is not explicit about overlap and committed memory.")
-    # These are the immutable Starter 0.4.0 manifest stage identities. Its
+    # These ordinary-operation stage identities are unchanged in align 0.4.1
+    # beside the published Starter 0.4.0 manifests. Their
     # BCFtools call uses intermediate files, not a binary producer/sink pipe.
     # Pipeline accounting is exercised separately by WindowsPerformanceChecks,
     # built from the same production process_pipeline.cpp.
@@ -113,7 +114,7 @@ def performance_checks(folder, record, report):
         require(backend["available"] and backend["data"]["source"] == "windows-job-object",
                 "Native command metrics were unavailable in the exact package.")
         require([(stage["id"], stage["kind"]) for stage in backend["data"]["stages"]] == expected_stages[step["tool"]],
-                "Native metrics omitted or changed an immutable Starter command stage.")
+                "Native metrics omitted or changed an expected ordinary Starter command stage.")
         for stage in backend["data"]["stages"]:
             if stage["kind"] == "copy":
                 require(stage["resources"] is None, "Copy operation fabricated native process counters.")
@@ -140,9 +141,10 @@ def performance_checks(folder, record, report):
                 partial_stages.append({"stepId": step["id"], "tool": step["tool"], "stageId": stage["id"],
                                        "processesActiveAtSnapshot": active, "processesTotal": metrics["processes_total"]})
     require(stages == 17 and pipes == 0 and copies == 1,
-            "Native measurement stage counts differ from the immutable Starter 0.4.0 workflows.")
+            "Native measurement stage counts differ from the expected ordinary Starter workflows.")
     report["performance"] = {"sha256": sha256(path), "commandStages": stages, "pipelineStages": pipes,
                              "copyStages": copies, "system": value["system"], "memoryKind": "committed; not RSS",
+                             "actualPins": [{"tool": step["tool"], "pin": step["pin"]} for step in value["steps"]],
                              "completeStageCount": stages - len(partial_stages), "partialStageCount": len(partial_stages),
                              "partialStages": partial_stages,
                              "coverageScope": "Counters are sampled before job cleanup. Stages with remaining active descendants are explicitly partial, not complete process-lifetime totals.",
@@ -154,8 +156,14 @@ def performance_checks(folder, record, report):
 def host_checks(root, evidence, report):
     host = PrivateHost(root, evidence, "readiness-host", offline=True)
     try:
-        require(host.call("init")["app_version"] == "0.12.0", "Incorrect packaged candidate version.")
+        require(host.call("init")["app_version"] == report["appVersion"], "Incorrect packaged candidate version.")
         graph = host.call("example")["graph"]
+        manifest = read_json(root / "manifest.json")
+        available_align = [pack for pack in manifest["starter_packs"] + manifest.get("additional_packs", []) if pack["id"] == "align"]
+        latest_align = max(available_align, key=lambda pack: tuple(map(int, pack["version"].split("."))))
+        require(graph["nodes"][0]["pin"]["packVersion"] == latest_align["version"] and
+                graph["nodes"][0]["pin"]["manifestSha256"] == latest_align["manifestSha256"],
+                "New example did not select the exact newest installed ordinary alignment; saved pins are checked separately.")
         graph["name"] = CANARIES[2]
         fixture = root / "examples/starter"
         profile = read_json(root / "workspace/starter-check-profile.json")
@@ -347,11 +355,12 @@ def main():
     parser.add_argument("--source-commit", required=True)
     parser.add_argument("--asset-sha256", required=True)
     parser.add_argument("--asset-name", required=True)
+    parser.add_argument("--app-version", default="0.12.0")
     args = parser.parse_args()
     root, report_path = args.app_root.resolve(), args.report.resolve()
     evidence = report_path.parent
     evidence.mkdir(parents=True, exist_ok=True)
-    report = {"schema": 1, "success": False, "appVersion": "0.12.0", "sourceCommit": args.source_commit,
+    report = {"schema": 1, "success": False, "appVersion": args.app_version, "sourceCommit": args.source_commit,
               "assetName": args.asset_name, "assetSha256": args.asset_sha256, "gateSha256": sha256(__file__),
               "platform": platform.platform(), "python": sys.version, "evidenceRoot": str(evidence),
               "startedUtc": datetime.now(timezone.utc).isoformat(), "nativeWindowsExecuted": False,

@@ -18,13 +18,14 @@ import uuid
 
 from catalog import load_catalog, load_pack
 from engine import Engine
+from file_io import replace_file
 
 MAX_PUBLIC_LOG_BYTES = 256 * 1024
 MAX_RECENT_BYTES = 3 * 1024 * 1024
 MAX_HISTORY_BYTES = 12 * 1024 * 1024
 MAX_SAVED_BYTES = 12 * 1024 * 1024
 
-def atomic_json(path, value):
+def atomic_json(path, value, *, retry_sharing=False):
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_name(path.name + "." + uuid.uuid4().hex + ".tmp")
@@ -32,7 +33,10 @@ def atomic_json(path, value):
         with tmp.open("x", encoding="utf-8", newline="\n") as stream:
             json.dump(value, stream, indent=2, ensure_ascii=False, allow_nan=False)
             stream.write("\n")
-        os.replace(tmp, path)
+        if retry_sharing:
+            replace_file(tmp, path)
+        else:
+            os.replace(tmp, path)
     finally:
         tmp.unlink(missing_ok=True)
 
@@ -66,6 +70,7 @@ class Workbench:
         self.engine = engine or Engine(self.root, self.catalog)
         self.lock = threading.RLock()
         self.dialog_lock = threading.Lock()
+        self._history_write_lock = threading.Lock()
         self._processes = set()
         self._closing = False
         self._changing_packs = False
@@ -88,15 +93,28 @@ class Workbench:
         self.runs = {}
         self._diagnostic_previews = {}
         self._last_readiness = None
+        self._batch_previews = {}
+        self._sample_tables = {}
+        self._queue_prepare_worker = None
+        self._queue_prepare_cancel = threading.Event()
+        self._queue_worker = None
+        self._queue_scheduled = []
+        self._queue_current = None
+        self._queue_preparing = False
+        self._queue_cancelling = set()
+        self._queue_admission = threading.Event()
+        self._queue_admission.set()
         self.last_seen = time.monotonic()
         self.token = secrets.token_urlsafe(32)
         self.saved_path = self.data / "saved.json"
         self.history_path = self.data / "runs.json"
         self.history = self.read_json(self.history_path, [])
+        from run_queue import RunQueue
+        self.run_queue = RunQueue(self.data)
         # A previous host cannot still own an active run after a normal restart.
         # Keep these records explicitly interrupted; never infer success.
         for run in self.history:
-            if run.get("status") in ("preparing", "running", "cancelling"):
+            if self.run_queue.owned and run.get("status") in ("preparing", "running", "cancelling"):
                 run["status"] = "interrupted"
                 run["message"] = "The previous workbench session ended before completion. Inspect the recorded run folder."
 
@@ -110,7 +128,8 @@ class Workbench:
 
     def active(self):
         with self.lock:
-            return any(run["status"] in ("preparing", "running", "cancelling") for run in self.runs.values())
+            return (self._queue_preparing or self._queue_worker is not None
+                    or any(run["status"] in ("preparing", "running", "cancelling") for run in self.runs.values()))
 
     def activity(self):
         with self.lock:
@@ -118,7 +137,9 @@ class Workbench:
                              if r["status"] in ("preparing", "running", "cancelling")), None)
             return {"active": identity is not None, "active_run": identity,
                     "changing_packs": self._changing_packs,
-                    "changing_references": self._changing_references, "closing": self._closing}
+                    "changing_references": self._changing_references, "closing": self._closing,
+                    "queue_preparing": self._queue_preparing, "queue_running": self._queue_worker is not None,
+                    "workspace_editable": not (self._closing or self._changing_packs or self._changing_references)}
 
     def recent(self, summaries=False):
         with self.lock:
@@ -139,8 +160,19 @@ class Workbench:
             return {"runs": runs, "omitted": len(items) - len(runs),
                     "note": "Older or large recent records may be omitted here. Full results remain in their recorded folders."}
 
+    def ensure_model_editable(self):
+        """Edits target the next graph, never the immutable executing plan."""
+        with self.lock:
+            if self._closing:
+                raise ValueError("The workbench is closing.")
+            if self._changing_packs:
+                raise ValueError("Wait for the pack operation to finish.")
+            if self._changing_references:
+                raise ValueError("Wait for the reference operation to finish or cancel it.")
+
     def ensure_editable(self):
         with self.lock:
+            self.run_queue.ready()
             if self._closing:
                 raise ValueError("The workbench is closing.")
             if self._changing_packs:
@@ -173,6 +205,7 @@ class Workbench:
         return result
 
     def save(self, request):
+        self.run_queue.ready()
         name = short_text(request.get("name"), "saved name")
         kind = request.get("kind")
         if kind == "pipeline":
@@ -317,6 +350,304 @@ class Workbench:
             raise
         return {"path": str(path), "uploaded": False}
 
+    def queue_state(self):
+        result = self.run_queue.snapshot()
+        result["jobs"] = [{key: value for key, value in job.items() if key not in ("metadata", "files")}
+                          for job in result["jobs"]]
+        with self.lock:
+            result.update(paused=not bool(self._queue_scheduled or self._queue_worker),
+                          scheduled=list(self._queue_scheduled), preparing=self._queue_preparing,
+                          active_job=self._queue_current)
+            result.update(self.activity())
+        return result
+
+    def import_sample_table(self, path):
+        from sample_table import read_table
+        table = read_table(short_text(path, "sample table path", 30000))
+        size = len(json.dumps(table, ensure_ascii=False).encode("utf-8"))
+        with self.lock:
+            now = time.monotonic()
+            self._sample_tables = {key: value for key, value in self._sample_tables.items() if now - value[0] < 900}
+            while self._sample_tables and (len(self._sample_tables) >= 4 or sum(item[2] for item in self._sample_tables.values()) + size > 32 * 1024 * 1024):
+                self._sample_tables.pop(next(iter(self._sample_tables)))
+            token = secrets.token_urlsafe(32)
+            self._sample_tables[token] = (now, table, size)
+        summary = {key: copy.deepcopy(value) for key, value in table.items() if key != "rows"}
+        rows, total = [], 0
+        for row in table["rows"][:100]:
+            length = len(json.dumps(row, ensure_ascii=True).encode("utf-8"))
+            if total + length > 256 * 1024:
+                break
+            rows.append(copy.deepcopy(row))
+            total += length
+        summary.update(table_token=token, rowCount=len(table["rows"]), rows=rows,
+                       preview_omitted=len(table["rows"]) - len(rows))
+        return summary
+
+    def preview_batch(self, request):
+        from sample_table import preview_batch
+        if "table_token" in request:
+            token = short_text(request["table_token"], "sample table token", 100)
+            with self.lock:
+                item = self._sample_tables.get(token)
+                if item is None or time.monotonic() - item[0] >= 900:
+                    raise ValueError("This sample table preview expired. Import the table again.")
+                table = copy.deepcopy(item[1])
+        else:
+            table = copy.deepcopy(request["table"])
+        result = preview_batch(self.engine, copy.deepcopy(request["graph"]), table,
+                               copy.deepcopy(request["bindings"]),
+                               parameter_bindings=copy.deepcopy(request.get("parameter_bindings")),
+                               mode=request.get("mode", "independent"), shared_sources=copy.deepcopy(request.get("shared_sources", [])),
+                               combined_target=copy.deepcopy(request.get("combined_target")))
+        if result.get("valid"):
+            if len(result["samples"]) > 200:
+                raise ValueError("Choose at most 200 independent samples per queued batch.")
+            size = len(json.dumps(result["samples"], ensure_ascii=False).encode("utf-8"))
+            if size > 32 * 1024 * 1024:
+                raise ValueError("This expanded sample batch is too large. Review fewer samples at a time.")
+            with self.lock:
+                now = time.monotonic()
+                self._batch_previews = {key: value for key, value in self._batch_previews.items() if now - value[0] < 900}
+                while self._batch_previews and (len(self._batch_previews) >= 4 or sum(item[2] for item in self._batch_previews.values()) + size > 32 * 1024 * 1024):
+                    self._batch_previews.pop(next(iter(self._batch_previews)))
+                token = secrets.token_urlsafe(32)
+                self._batch_previews[token] = (now, copy.deepcopy(result["samples"]), size)
+            result["token"] = token
+        result["samples"] = [{"sampleId": sample["sampleId"], "valid": sample.get("valid", True),
+                               "nodeCount": len(sample.get("graph", {}).get("nodes", []))}
+                              for sample in result.get("samples", [])]
+        for key in ("errors", "warnings"):
+            shown, size = [], 0
+            items = result.get(key, [])
+            for item in items:
+                length = len(json.dumps(item, ensure_ascii=True).encode("utf-8"))
+                if len(shown) >= 200 or size + length > 256 * 1024:
+                    break
+                shown.append(item)
+                size += length
+            result[key] = shown
+            result[key + "_omitted"] = len(items) - len(shown)
+        return result
+
+    def enqueue(self, request, *, batch=False):
+        from run_queue import ordinary_directory, freeze_plan, utc
+        output = ordinary_directory(short_text(request.get("output_folder"), "output folder", 30000))
+        token = short_text(request.get("token"), "batch preview token", 100) if batch else None
+        with self.lock:
+            self.run_queue.ready()
+            self.ensure_model_editable()
+            if self._queue_preparing:
+                raise ValueError("Another batch is being prepared. Wait for it to finish or cancel it.")
+            if batch:
+                item = self._batch_previews.get(token)
+                if item is None or time.monotonic() - item[0] >= 900:
+                    self._batch_previews.pop(token, None)
+                    raise ValueError("This sample preview expired. Review the sample table again.")
+                samples = copy.deepcopy(item[1])
+            else:
+                graph = copy.deepcopy(request.get("graph"))
+                if not isinstance(graph, dict):
+                    raise ValueError("Choose a workflow to queue.")
+                samples = [{"graph": graph}]
+            if not samples or len(samples) > 200:
+                raise ValueError("Choose between one and 200 samples to queue.")
+            self._queue_preparing = True
+            self._queue_admission.clear()
+            cancel = self._queue_prepare_cancel = threading.Event()
+            engine = self.engine
+            batch_id = secrets.token_hex(16)
+        try:
+            jobs = self.run_queue.add(samples, batch_id)
+        except Exception:
+            with self.lock:
+                self._queue_preparing = False
+                self._queue_admission.set()
+            raise
+        with self.lock:
+            if batch:
+                self._batch_previews.pop(token, None)
+        identities = [job["job_id"] for job in jobs]
+
+        def work():
+            try:
+                for sample, job in zip(samples, jobs):
+                    if cancel.is_set():
+                        raise InterruptedError("Cancelled while preparing the batch.")
+                    kwargs = {"cancel": cancel}
+                    if batch:
+                        kwargs["run_metadata"] = {"batchId": batch_id, "sampleId": sample["sampleId"],
+                                                  "metadata": copy.deepcopy(sample.get("metadata", {}))}
+                    plan = engine.prepare(copy.deepcopy(sample["graph"]), output, **kwargs)
+                    frozen = freeze_plan(plan)
+                    self.run_queue.update([job["job_id"]], **frozen)
+                if cancel.is_set():
+                    raise InterruptedError("Cancelled while preparing the batch.")
+                self.run_queue.update(identities, status="queued", message="Ready. Choose Start queue to execute this frozen plan.")
+                if cancel.is_set():
+                    raise InterruptedError("Cancelled while preparing the batch.")
+            except Exception as error:
+                try:
+                    self.run_queue.update(identities, status="cancelled" if cancel.is_set() else "failed",
+                                          finished_at=utc(), message=str(error)[:2000])
+                except Exception as storage_error:
+                    self.run_queue.error = "The run queue could not record preparation failure. " + str(storage_error)
+            finally:
+                with self.lock:
+                    self._queue_preparing = False
+                    self._queue_prepare_worker = None
+        worker = threading.Thread(target=work, name="workbench-queue-prepare", daemon=False)
+        with self.lock:
+            self._queue_prepare_worker = worker
+            worker.start()
+            self._queue_admission.set()
+        result = self.queue_state()
+        result["added"] = identities
+        result["batch_id"] = batch_id
+        return result
+
+    def start_queue(self):
+        with self.lock:
+            self.ensure_editable()
+            snapshot = self.run_queue.snapshot()
+            identities = [job["job_id"] for job in snapshot["jobs"] if job["status"] == "queued" and job["job_id"] not in self._queue_cancelling]
+            if not identities:
+                raise ValueError("There are no prepared queued analyses to start.")
+            self._queue_scheduled = identities
+            worker = threading.Thread(target=self._run_queued, name="workbench-run-queue", daemon=False)
+            self._queue_worker = worker
+            worker.start()
+        return self.queue_state()
+
+    def pause_queue(self):
+        self.run_queue.ready()
+        with self.lock:
+            self._queue_scheduled = []
+        return self.queue_state()
+
+    def cancel_queued_immediate(self, identity):
+        """Signal active/preparing work without storage or the slow RPC pool.
+
+        A queued job returns None, so its durable cancellation stays off the
+        protocol reader. Classification and signalling share the execution lock;
+        a state race can never fall through to disk work on this fast path.
+        """
+        identity = short_text(identity, "queued job identity", 100)
+        self.run_queue.ready()
+        with self.lock:
+            job = next((job for job in self.run_queue.snapshot()["jobs"] if job["job_id"] == identity), None)
+            if job is None:
+                raise ValueError("The selected queued job is no longer recorded.")
+            if identity == self._queue_current:
+                self._queue_scheduled = []
+                run = self.runs.get(identity)
+                if run is not None:
+                    run["_cancel"].set()
+                    run["status"] = "cancelling"
+                return self.queue_state()
+            if job["status"] == "preparing":
+                self._queue_prepare_cancel.set()
+                return self.queue_state()
+            if job["status"] != "queued":
+                return self.queue_state()
+            return None
+
+    def cancel_queued(self, identity):
+        identity = short_text(identity, "queued job identity", 100)
+        self.run_queue.ready()
+        with self.lock:
+            job = next((job for job in self.run_queue.snapshot()["jobs"] if job["job_id"] == identity), None)
+            if job is None:
+                raise ValueError("The selected queued job is no longer recorded.")
+            if identity == self._queue_current:
+                self._queue_scheduled = []
+                run = self.runs.get(identity)
+                if run:
+                    run["_cancel"].set()
+                    run["status"] = "cancelling"
+                return self.queue_state()
+            if job["status"] == "preparing":
+                self._queue_prepare_cancel.set()
+                return self.queue_state()
+            if job["status"] != "queued":
+                return self.queue_state()
+            self._queue_scheduled = [value for value in self._queue_scheduled if value != identity]
+            self._queue_cancelling.add(identity)
+        from run_queue import utc
+        try:
+            self.run_queue.update([identity], status="cancelled", finished_at=utc(), message="Cancelled before execution.")
+        finally:
+            with self.lock:
+                self._queue_cancelling.discard(identity)
+        return self.queue_state()
+
+    def _run_queued(self):
+        from run_queue import load_plan, utc
+        try:
+            while True:
+                with self.lock:
+                    if self._closing or not self._queue_scheduled:
+                        break
+                    identity = self._queue_scheduled.pop(0)
+                    job = next(job for job in self.run_queue.snapshot()["jobs"] if job["job_id"] == identity)
+                    if job["status"] != "queued" or identity in self._queue_cancelling:
+                        continue
+                    self._queue_current = identity
+                    run = {"run_id": identity, "queue_job_id": identity, "status": "running", "events": [],
+                           "nodes": [], "folder": job["folder"], "name": job["name"], "message": "Verifying queued plan",
+                           "started_at": utc(), "_cancel": threading.Event(),
+                           "_cancel_file": self.data / ("cancel-" + identity)}
+                    self.runs[identity] = run
+                def emit(event):
+                    if not isinstance(event, dict):
+                        event = {"type": "log", "message": str(event)}
+                    with self.lock:
+                        run["events"].append(copy.deepcopy(event))
+                        run["events"] = run["events"][-1500:]
+                        if event.get("type") == "phase":
+                            run["message"] = event.get("message", "")
+                        if event.get("type") == "step" and event.get("nodeId"):
+                            node = next((node for node in run["nodes"] if node.get("id") == event["nodeId"]), None)
+                            if node is None:
+                                node = {"id": event["nodeId"]}
+                                run["nodes"].append(node)
+                            node.update({key: value for key, value in event.items() if key in ("status", "message", "name", "folder")})
+                try:
+                    self.run_queue.update([identity], status="running", started_at=run["started_at"], message="Verifying and executing frozen plan.")
+                    plan = load_plan(job, run["_cancel"])
+                    with self.lock:
+                        run.update(graph=copy.deepcopy(plan["graph"]), methods_planned=plan.get("methods", ""))
+                        if "batch" in plan:
+                            run["batch"] = copy.deepcopy(plan["batch"])
+                    self.persist_run(run)
+                    result = self.engine.execute(plan, event=emit, cancel=run["_cancel"])
+                    with self.lock:
+                        run.update({key: value for key, value in result.items() if key not in ("run_id", "events") and not key.startswith("_")})
+                        status = str(result.get("status", "failed"))
+                        run["status"] = "completed" if status in ("success", "succeeded", "complete", "completed") else "cancelled" if status == "cancelled" else "failed"
+                except Exception as error:
+                    with self.lock:
+                        run["status"] = "cancelled" if run["_cancel"].is_set() else "failed"
+                        run["message"] = str(error)
+                        emit({"type": "error", "message": str(error)})
+                finally:
+                    with self.lock:
+                        run["finished_at"] = utc()
+                        if run["status"] != "completed":
+                            self._queue_scheduled = []
+                    run["_cancel_file"].unlink(missing_ok=True)
+                    self.persist_run(run)
+                    self.run_queue.update([identity], status=run["status"], finished_at=run["finished_at"], message=str(run.get("message", ""))[:2000])
+                    with self.lock:
+                        self._queue_current = None
+        except Exception as error:
+            self.run_queue.error = "The run queue could not safely continue. " + str(error)
+        finally:
+            with self.lock:
+                self._queue_scheduled = []
+                self._queue_current = None
+                self._queue_worker = None
+
     def public_run(self, run):
         public = {key: copy.deepcopy(value) for key, value in run.items() if not key.startswith("_")}
         events, size = [], 0
@@ -341,24 +672,29 @@ class Workbench:
         raise ValueError("This run is not recorded in this workbench.")
 
     def persist_run(self, run):
-        public = self.public_run(run)
-        public["events_omitted"] += max(0, len(public.get("events", [])) - 100)
-        public["events"] = public.get("events", [])[-100:]
-        candidates = [public, *[r for r in self.history if r.get("run_id") != run["run_id"]]][:200]
-        self.history, size = [], 0
-        for item in candidates:
-            length = len(json.dumps(item, ensure_ascii=True).encode("utf-8"))
-            if self.history and size + length > MAX_HISTORY_BYTES:
-                continue
-            self.history.append(item)
-            size += length
-        atomic_json(self.history_path, self.history)
+        with self._history_write_lock:
+            with self.lock:
+                public = self.public_run(run)
+                public["events_omitted"] += max(0, len(public.get("events", [])) - 100)
+                public["events"] = public.get("events", [])[-100:]
+                candidates = [public, *[r for r in self.history if r.get("run_id") != run["run_id"]]][:200]
+            history, size = [], 0
+            for item in candidates:
+                length = len(json.dumps(item, ensure_ascii=True).encode("utf-8"))
+                if history and size + length > MAX_HISTORY_BYTES:
+                    continue
+                history.append(item)
+                size += length
+            atomic_json(self.history_path, history, retry_sharing=True)
+            with self.lock:
+                self.history = history
 
     def start(self, request, check=False):
         output = Path(short_text(request.get("output_folder"), "output folder", 30000))
         if not output.is_absolute() or not output.is_dir():
             raise ValueError("Choose an existing absolute output folder.")
         with self.lock:
+            self.run_queue.ready()
             if self._closing:
                 raise ValueError("The workbench is closing.")
             if self._changing_packs:
@@ -415,7 +751,7 @@ class Workbench:
                         run["graph"] = copy.deepcopy(plan.get("graph", {}))
                         run["methods_planned"] = plan.get("methods", "")
                         run["status"] = "running"
-                        self.persist_run(run)
+                    self.persist_run(run)
                     result = self.engine.execute(plan, event=emit, cancel=run["_cancel"])
                     with self.lock:
                         run.update({k: v for k, v in result.items() if k not in ("run_id", "events") and not k.startswith("_")})
@@ -442,6 +778,8 @@ class Workbench:
             if run is None:
                 raise ValueError("This run is no longer active.")
             if run["status"] in ("preparing", "running", "cancelling"):
+                if identity == self._queue_current:
+                    self._queue_scheduled = []
                 run["_cancel"].set()
                 run["_cancel_file"].touch()
                 run["status"] = "cancelling"
@@ -641,6 +979,7 @@ class Workbench:
 
     def dismiss_setup(self):
         with self.lock:
+            self.run_queue.ready()
             self.setup_manager().dismiss()
         return self.setup_state()
 
@@ -767,6 +1106,11 @@ class Workbench:
         with self.lock:
             self._closing = True
             workers = []
+            self._queue_scheduled = []
+            self._queue_prepare_cancel.set()
+            for worker in (self._queue_prepare_worker, self._queue_worker):
+                if worker is not None:
+                    workers.append(worker)
             self._pack_cancel.set()
             if self._pack_worker is not None:
                 workers.append(self._pack_worker)
@@ -784,6 +1128,11 @@ class Workbench:
                 if run.get("_worker"):
                     workers.append(run["_worker"])
         deadline = time.monotonic() + max(0, grace)
+        admitted = self._queue_admission.wait(timeout=max(0, deadline - time.monotonic()))
+        with self.lock:
+            for worker in (self._queue_prepare_worker, self._queue_worker):
+                if worker is not None and worker not in workers:
+                    workers.append(worker)
         for worker in workers:
             worker.join(timeout=max(0, deadline - time.monotonic()))
         backend = getattr(self.engine, "backend", None)
@@ -806,4 +1155,7 @@ class Workbench:
         for worker in workers:
             if worker.is_alive():
                 worker.join(timeout=3)
-        return not any(worker.is_alive() for worker in workers)
+        clean = admitted and not any(worker.is_alive() for worker in workers)
+        if clean:
+            self.run_queue.close()
+        return clean

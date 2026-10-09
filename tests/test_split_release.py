@@ -71,6 +71,22 @@ class SplitRelease(unittest.TestCase):
             self.assertEqual(set(zipped.namelist()),expected)
             self.assertIn('pack/licenses/source.tar.gz',expected)
 
+    def test_new_pack_floor_does_not_raise_legacy_packs_and_rejects_older_apps(self):
+        from pack_manager import compatibility
+        import pack_manager
+        output=self.root/'new-contract.zip'
+        record=package.build_pack(self.pack,output,min_app_version='0.13.0')
+        with zipfile.ZipFile(output) as zipped:
+            envelope=json.loads(zipped.read('workbench-pack.json'))
+        self.assertEqual(record['minAppVersion'],'0.13.0')
+        with mock.patch.object(pack_manager,'APP_VERSION','0.12.0'):
+            self.assertFalse(compatibility(envelope)[0])
+        with mock.patch.object(pack_manager,'APP_VERSION','0.13.0'):
+            self.assertTrue(compatibility(envelope)[0])
+        with self.assertRaises(ValueError):
+            package.build_pack(self.pack,self.root/'bad-floor.zip',min_app_version='latest')
+        self.assertFalse((self.root/'bad-floor.zip').exists())
+
     def test_pack_publisher_rejects_undeclared_runtime_and_links(self):
         put(self.pack,'bin/extra.dll',b'undeclared')
         with self.assertRaises(ValueError):package.build_pack(self.pack,self.root/'bad.zip')
@@ -148,6 +164,7 @@ class SplitRelease(unittest.TestCase):
         self.assertTrue({'cwl_export.py','dag_routing.py'}<=set(package.RUNTIME_MODULES))
         self.assertIn('setup_manager.py',package.RUNTIME_MODULES)
         self.assertTrue({'performance.py','readiness.py','diagnostics.py'}<=set(package.RUNTIME_MODULES))
+        self.assertTrue({'sample_table.py','run_queue.py','reference_indexes.py'}<=set(package.RUNTIME_MODULES))
         self.assertIn('setup-profile.json',package.RUNTIME_METADATA)
         self.assertNotIn('server.py',package.RUNTIME_MODULES)
         self.assertEqual(package.STARTER,('align-0.4.0','bam-0.4.0','variants-0.4.0'))
@@ -195,6 +212,25 @@ class SplitRelease(unittest.TestCase):
             self.assertIn('native-workbench/SOURCE-AVAILABILITY.json',zipped.namelist())
             for name in package.NATIVE_NOTICE_FILES:self.assertIn('native-workbench/runtime/licenses/native/'+name,zipped.namelist())
             self.assertEqual(len([n for n in zipped.namelist() if n.endswith('/pack.ini')]),3)
+        # Additional candidate packs are explicit, separate from immutable
+        # Starter pins, and bound to their complete inventory before archiving.
+        extra=self.root/'additional-example';fake_pack(extra,'example','2.0.0')
+        extra_app=self.root/'with-extra'
+        with mock.patch.object(package,'SOURCE',source):
+            package.stage(base,extra_app,artifact,extra_pack_dirs=[extra])
+        extra_manifest=json.loads((extra_app/'manifest.json').read_text())
+        self.assertEqual(extra_manifest['starter_packs'],result['starter_packs'])
+        self.assertEqual(extra_manifest['additional_packs'][0]['version'],'2.0.0')
+        extra_zip=self.root/'extra-starter.zip';package.starter_archive(extra_app,extra_zip)
+        with zipfile.ZipFile(extra_zip) as zipped:
+            self.assertEqual(len([n for n in zipped.namelist() if n.endswith('/pack.ini')]),4)
+        put(extra_app,'packs/example-2.0.0/licenses/LICENSE.txt',b'changed unnoticed license')
+        with self.assertRaises(ValueError):package.starter_archive(extra_app,self.root/'changed-extra.zip')
+        for number,extras in enumerate(([extra,extra],[base/'packs'/package.STARTER[0]])):
+            destination=self.root/('bad-extra-'+str(number))
+            with mock.patch.object(package,'SOURCE',source),self.assertRaises(ValueError):
+                package.stage(base,destination,artifact,extra_pack_dirs=extras)
+            self.assertFalse(destination.exists())
         put(app,'results/private-patient-data.txt',b'never release this')
         with self.assertRaises(ValueError):package.starter_archive(app,self.root/'rejected.zip')
         self.assertFalse((self.root/'rejected.zip').exists())

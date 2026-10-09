@@ -91,6 +91,7 @@ class LocalTransportTests(unittest.TestCase):
         for run in self.app.runs.values():
             if "_worker" in run:
                 run["_worker"].join(5)
+        self.app.shutdown(grace=1)
         self.http.shutdown()
         self.http.server_close()
         self.thread.join(5)
@@ -283,9 +284,13 @@ class LocalTransportTests(unittest.TestCase):
 
     def test_recorded_running_status_is_interrupted_on_restart(self):
         server.atomic_json(self.app.history_path, [{"run_id": "old-run", "status": "running", "folder": str(self.root)}])
+        self.app.shutdown(grace=1)
         restarted = server.Workbench(self.root, engine=self.engine, catalog=self.catalog)
-        self.assertEqual(restarted.get_run("old-run")["status"], "interrupted")
-        self.assertFalse(restarted.active())
+        try:
+            self.assertEqual(restarted.get_run("old-run")["status"], "interrupted")
+            self.assertFalse(restarted.active())
+        finally:
+            restarted.shutdown(grace=1)
 
     def test_invalid_output_folder_and_unknown_run_are_rejected(self):
         for output in ("relative", str(self.root / "missing"), str(self.app.web / "app.js")):

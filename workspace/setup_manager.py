@@ -87,10 +87,11 @@ class SetupManager:
         return value
 
     def _previous_user(self):
-        # Startup creates user-data and its stderr log. Neither means the user
-        # has configured an installation. Existing records/preferences do.
+        # Startup creates user-data, its stderr log and the OS queue lock.
+        # None means the user configured an installation. Real queue records
+        # and other existing records/preferences do.
         data = self.root / "user-data"
-        ignored = {"desktop-host.stderr.txt", "tool-setup.json"}
+        ignored = {"desktop-host.stderr.txt", "tool-setup.json", "run-queue.lock"}
         return data.exists() and any(path.name not in ignored for path in data.iterdir())
 
     def _restore(self, value):

@@ -1,5 +1,33 @@
 # Validation, releases and publisher trust
 
+## Batch, queue and reusable-index candidate, 0.13.0
+
+The [candidate workflow](../.github/workflows/native-batch-candidate.yml) binds
+one standalone Windows archive and its corresponding source to exact commit and
+SHA-256 identities. The [batch gate](../scripts/check_batch_windows.py) separately
+checks explicit sample mapping, paused queue persistence, frozen plan/input
+integrity, serial execution and cancellation, known synthetic alignment/variant
+truth, real minimap2 index build/reuse/corruption behavior, and the native
+Samples/Queue/Reference indexes controls. It retains failures and captures in
+ordinary and space-containing paths. Source subprocess-death tests exercise
+queue ownership and index lease recovery; a clean reopen check alone is not
+evidence for abrupt interruption.
+
+Existing readiness, process accounting, tool-library and workspace gates run
+against separate extractions of the same archive. Counts from these scopes must
+remain distinct. No benchmark, physical display/trackpad acceptance, live
+reference download, production Full setup or updater pass may be inferred from
+this candidate. Record actual results in [current state](current-state.md) and
+dated evidence before calling the candidate validated. This workflow publishes
+temporary Actions artifacts, not a GitHub release.
+
+The [0.13.0 handover](batch-queue-indexes-0.13.0-handover.md) records the passing
+final candidate and retained initial failures. The final exact-package gate also
+holds real external queue/history read handles: short conflicts must commit
+after release; a persistent conflict must preserve the old receipt and jobs,
+leave no new plan, and report failure within the tested bounded wait. Controlled
+source tests and native filesystem tests remain distinct evidence.
+
 ## Scrolling frames, 0.8 candidate
 
 `scripts/check_scroll_frames_windows.py` complements the settled-image comparison

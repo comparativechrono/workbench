@@ -102,7 +102,18 @@
     "expandable_tool_library_publication": "evidence/tool-library-0.11.0-publication-2026-10-08.json",
     "expandable_tool_library_public_downloads": "evidence/tool-library-0.11.0-public-downloads-2026-10-08.json",
     "expandable_tool_library_preparation": "evidence/tool-library-0.11.0-preparation-2026-10-08.json",
-    "readiness_performance": "readiness-performance.md"
+    "readiness_performance": "readiness-performance.md",
+    "batch_workflows": "batch-workflows.md",
+    "reference_indexes": "reference-indexes.md",
+    "batch_queue_indexes_handover": "batch-queue-indexes-0.13.0-handover.md",
+    "batch_queue_indexes_source": "evidence/batch-queue-indexes-0.13.0-source-2026-10-08.json",
+    "batch_queue_indexes_initial_windows": "evidence/batch-queue-indexes-0.13.0-initial-windows-2026-10-08.json",
+    "batch_queue_indexes_rechecks": "evidence/batch-queue-indexes-0.13.0-rechecks-2026-10-08.json",
+    "batch_queue_indexes_archive_audit": "evidence/batch-queue-indexes-0.13.0-archive-audit-2026-10-08.json",
+    "batch_queue_indexes_final_source": "evidence/batch-queue-indexes-0.13.0-final-source-2026-10-08.json",
+    "batch_queue_indexes_final_windows": "evidence/batch-queue-indexes-0.13.0-final-windows-2026-10-08.json",
+    "batch_queue_indexes_final_archive_audit": "evidence/batch-queue-indexes-0.13.0-final-archive-audit-2026-10-08.json",
+    "batch_queue_indexes_queue_diagnostic": "evidence/batch-queue-indexes-0.13.0-queue-diagnostic-2026-10-08.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -1072,6 +1083,95 @@
     "public_downloads": "evidence/tool-library-0.11.0-public-downloads-2026-10-08.json"
   },
   "active_development": {
+    "recorded_on": "2026-10-08",
+    "version": "0.13.0",
+    "branch": "feature/batch-queue-indexes",
+    "starting_commit": "dc7c8e9ea78f12d6229150c48af8c60d6632046b",
+    "base_branch": "feature/readiness-performance",
+    "status": "implementation and recorded exact hosted Windows gates complete; draft PR #8; unpublished; representative-machine and release/update acceptance pending",
+    "authorization": "Owner requested implementation of the next accepted tranche; release not requested.",
+    "milestone": 2,
+    "scope": [
+      "explicit sample tables and per-sample mapping",
+      "independent sample batches and explicit combined metrics/text reports",
+      "durable serial queue with immutable plans and paused restart",
+      "verified reusable minimap2 short-read indexes"
+    ],
+    "handover": "batch-queue-indexes-0.13.0-handover.md",
+    "index_contract": "reference-indexes.md",
+    "roadmap": "roadmap.md",
+    "published_baseline": "0.11.0",
+    "published_assets_changed": false,
+    "release_authorized": false,
+    "released": false,
+    "updater_built": false,
+    "additional_candidate_pack": {
+      "id": "align",
+      "version": "0.4.1",
+      "min_app_version": "0.13.0",
+      "published": false,
+      "preserves_published": "align 0.4.0"
+    },
+    "later_accepted_milestones": [
+      "verified completed-step restart",
+      "resource-bounded concurrency",
+      "portable projects"
+    ],
+    "evidence_scope": "Source, exact native hosted Windows execution, physical device acceptance and realistic benchmarking remain separate claims.",
+    "pull_request": "https://github.com/comparativechrono/workbench/pull/8",
+    "pull_request_state": "draft",
+    "feature_guide": "batch-workflows.md",
+    "tested_source_commit": "0ceca7b9c1762542f8fb665a6695b998d32f311e",
+    "build_run": "https://github.com/comparativechrono/workbench/actions/runs/37828085808",
+    "latest_complete_native_run": "https://github.com/comparativechrono/workbench/actions/runs/37828085808",
+    "starter_sha256": "7bf98515d9403e851fcc189f022fed0386fbcdbfa6857823699d4170fc076c75",
+    "verification_progress": {
+      "source": {
+        "passed": 217,
+        "skipped": 5,
+        "failed": 0,
+        "evidence": "evidence/batch-queue-indexes-0.13.0-final-source-2026-10-08.json"
+      },
+      "native_per_path": {
+        "batch_queue_indexes_gui": 11,
+        "resource": 14,
+        "readiness_diagnostics_gui": 5,
+        "library": 7,
+        "workspace": 32,
+        "separate_instrumented_transport": 3,
+        "independent_pack_import_and_declared_scientific_check": "passed",
+        "evidence": "evidence/batch-queue-indexes-0.13.0-final-windows-2026-10-08.json"
+      },
+      "windows_source_per_path": {
+        "queue": {
+          "passed": 28,
+          "skipped": 0
+        },
+        "indexes": {
+          "passed": 18,
+          "skipped": 1,
+          "skip_reason": "Windows symlink creation privilege unavailable"
+        },
+        "diagnostics": {
+          "passed": 10,
+          "skipped": 1,
+          "skip_reason": "POSIX-only symlink case"
+        }
+      },
+      "archive_audit": "evidence/batch-queue-indexes-0.13.0-final-archive-audit-2026-10-08.json",
+      "queue_storage_correction": "Confirmed Windows held-reader replacement hazard; bounded retry of same prepared rename only. Exact packaged short-reader and persistent-error checks passed. Historical missing error messages not reconstructed.",
+      "historical_evidence_retained": [
+        "evidence/batch-queue-indexes-0.13.0-initial-windows-2026-10-08.json",
+        "evidence/batch-queue-indexes-0.13.0-rechecks-2026-10-08.json",
+        "evidence/batch-queue-indexes-0.13.0-queue-diagnostic-2026-10-08.json"
+      ],
+      "representative_machine_acceptance": "pending",
+      "realistic_windows_linux_benchmark": "not performed",
+      "published_baseline_upgrade": "not built or tested for 0.13.0",
+      "live_reference_downloads_and_full_setup": "not rerun for this candidate"
+    }
+  },
+  "readiness_performance_development": {
     "recorded_on": "2026-10-08",
     "version": "0.12.0",
     "branch": "feature/readiness-performance",

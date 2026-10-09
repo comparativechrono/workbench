@@ -20,7 +20,7 @@ sys.dont_write_bytecode=True
 SOURCE=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(SOURCE/'workspace'))
 sys.path.insert(0,str(SOURCE/'scripts'))
-from catalog import load_pack
+from catalog import load_pack, VERSION as VERSION_PATTERN
 from app_version import APP_VERSION
 from apply_core_update import NATIVE_NOTICE_FILES, core_inventory, core_path, ordinary_root
 from apply_desktop_update import digest, inside, read_json, require, sha, verify
@@ -34,7 +34,7 @@ RUNTIME_MODULES=('app_version.py','catalog.py','engine.py','example.py','desktop
                  'service.py','verify_installation.py','pack_checks.py','pack_manager.py',
                  'pack_security.py','core_checks.py','reference_provider.py','reference_manager.py',
                  'reference_provenance.py','cwl_export.py','dag_routing.py','setup_manager.py',
-                 'performance.py','readiness.py','diagnostics.py')
+                 'performance.py','readiness.py','diagnostics.py','sample_table.py','run_queue.py','reference_indexes.py','file_io.py')
 RUNTIME_METADATA=('starter-check-profile.json','setup-profile.json')
 FIXED_DATE=(2026,10,5,0,0,0)
 
@@ -99,16 +99,18 @@ def pack_inventory(folder):
     return pack,members,inventory
 
 
-def build_pack(folder,output):
+def build_pack(folder,output,min_app_version=PACK_MIN_APP_VERSION):
+    require(isinstance(min_app_version,str) and VERSION_PATTERN.fullmatch(min_app_version),
+            'Invalid minimum application version')
     folder=ordinary_root(folder);pack,members,inventory=pack_inventory(folder)
     envelope={'schema':1,'id':pack['id'],'version':pack['version'],'packApi':1,
-              'minAppVersion':PACK_MIN_APP_VERSION,'platform':'windows-x86_64',
+              'minAppVersion':min_app_version,'platform':'windows-x86_64',
               'manifestSha256':pack['manifestSha256'],'files':inventory}
     archive=_archive(output,[(p,'pack/'+p.relative_to(folder).as_posix(),False) for p in members],
                      [('workbench-pack.json',envelope)])
     return {'id':pack['id'],'name':pack['name'],'version':pack['version'],
             'description':pack['description'],'toolVersions':{key:value['version'] for key,value in pack['tools'].items()},
-            'platform':'windows-x86_64','packApi':1,'minAppVersion':PACK_MIN_APP_VERSION,
+            'platform':'windows-x86_64','packApi':1,'minAppVersion':min_app_version,
             'manifestSha256':pack['manifestSha256'],'size':archive['bytes'],
             'sha256':archive['sha256'],'file':archive['file'],'expandedBytes':sum(i['size'] for i in inventory)}
 
@@ -214,7 +216,7 @@ def _build_sources(base,output,legacy,original,contents,companions):
             'legacySourceAliases':len(contents['restore_from_runtime'])}
 
 
-def stage(base,app,source_artifact):
+def stage(base,app,source_artifact,extra_pack_dirs=()):
     base=ordinary_root(base);app=Path(app).absolute()
     require(not app.exists(),'Select an empty new application staging folder')
     require(not app.is_relative_to(base) and not base.is_relative_to(app),'Staging overlaps the frozen baseline')
@@ -246,6 +248,17 @@ def stage(base,app,source_artifact):
             and '/' not in source_artifact['file'] and '\\' not in source_artifact['file']
             and source_artifact['file'].endswith('.zip') and type(source_artifact['bytes']) is int
             and source_artifact['bytes']>0, 'Invalid source companion identity')
+    require(isinstance(extra_pack_dirs,(tuple,list)) and len(extra_pack_dirs)<=32,
+            'Too many additional bundled packs')
+    extra=[];extra_folders=set()
+    for root in extra_pack_dirs:
+        root=ordinary_root(root);pack,_,entries=pack_inventory(root)
+        folder=pack['id']+'-'+pack['version']
+        require(folder not in STARTER and folder not in extra_folders,
+                'An additional pack cannot replace or duplicate a bundled version')
+        require(not root.is_relative_to(app) and not app.is_relative_to(root),
+                'Additional pack staging overlaps the application')
+        extra_folders.add(folder);extra.append((root,folder,pack,entries))
     app.mkdir(parents=True)
     for origin,name in ((SOURCE/'build/desktop/DesktopWorkbench.exe','NativeWorkbench.exe'),
                         (SOURCE/'build/desktop/WorkbenchBridge.exe','WorkbenchBridge.exe'),(SOURCE/'LICENSE','LICENSE')):
@@ -270,6 +283,14 @@ def stage(base,app,source_artifact):
         copied=load_pack(app/'packs'/folder/'pack.ini')
         require(copied['manifestSha256']==pack['manifestSha256'],'Starter pack manifest changed')
         starter.append({'id':pack['id'],'version':pack['version'],'folder':'packs/'+folder,'manifestSha256':pack['manifestSha256']})
+    additional=[]
+    for original,folder,pack,entries in extra:
+        copy_tree(original,app/'packs'/folder)
+        copied,_,copied_entries=pack_inventory(app/'packs'/folder)
+        require(copied['manifestSha256']==pack['manifestSha256'] and copied_entries==entries,
+                'Additional pack bytes changed during staging')
+        additional.append({'id':pack['id'],'version':pack['version'],'folder':'packs/'+folder,
+                           'manifestSha256':pack['manifestSha256'],'files':entries})
     availability={'schema':1,'applicationVersion':VERSION,'sourceArtifact':source_artifact,
                   'delivery':'Separate release asset, alongside application and tool pack ZIPs. Source recovery references require the exact listed companion packs. No network fetch occurs while running tools.',
                   'notices':'Application LICENSE, Python runtime LICENSE.txt, and native MinGW-w64, winpthreads and LLVM notices under runtime/licenses/native are installed. Each tool pack retains its complete license and corresponding-source tree.'}
@@ -282,18 +303,30 @@ def stage(base,app,source_artifact):
     manifest={'schema_version':2,'version':VERSION,'ownership':'core','pack_management':'independent',
               'manifest_includes_itself':False,'platform':'windows-x86_64','interface':'native-win32',
               'transport':'anonymous-pipes','requires_browser':False,'network_listener':False,
-              'native_windows_integration_tested':False,'starter_packs':starter,'files':inventory}
+              'native_windows_integration_tested':False,'starter_packs':starter,'additional_packs':additional,'files':inventory}
     core_inventory(manifest)
     (app/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
     return {'version':VERSION,'app_root':str(app),'core_files':len(inventory),'core_bytes':sum(i['bytes'] for i in inventory),
-            'starter_packs':starter,'installed_bytes':sum(p.stat().st_size for p in files(app))}
+            'starter_packs':starter,'additional_packs':additional,'installed_bytes':sum(p.stat().st_size for p in files(app))}
 
 
 def starter_archive(app,output):
     app=ordinary_root(app);manifest=read_json(app/'manifest.json')
     inventory=core_inventory(manifest)
     for name,entry in inventory.items():verify(inside(app,name),entry['sha256'],entry['bytes'])
-    require({p.name for p in (app/'packs').iterdir()}==set(STARTER),'Starter pack inventory differs')
+    additional=manifest.get('additional_packs',[])
+    require(isinstance(additional,list) and len(additional)<=32,'Invalid additional pack inventory')
+    additional_folders=set()
+    for pin in additional:
+        require(isinstance(pin,dict) and set(pin)=={'id','version','folder','manifestSha256','files'},
+                'Invalid additional pack pin')
+        require(isinstance(pin['id'],str) and isinstance(pin['version'],str), 'Invalid additional pack identity')
+        folder=pin['id']+'-'+pin['version']
+        require(pin['folder']=='packs/'+folder and folder not in STARTER and folder not in additional_folders
+                and '/' not in folder and '\\' not in folder and folder not in ('.','..'),
+                'Invalid or repeated additional pack destination')
+        additional_folders.add(folder)
+    require({p.name for p in (app/'packs').iterdir()}==set(STARTER)|additional_folders,'Starter pack inventory differs')
     expected=set(inventory)|{'manifest.json'}
     pins={entry['folder']:entry for entry in manifest.get('starter_packs',[])}
     for folder in STARTER:
@@ -301,6 +334,12 @@ def starter_archive(app,output):
         require('packs/'+folder in pins and pins['packs/'+folder]['manifestSha256']==pack['manifestSha256'],
                 'Starter pack pin differs from release profile')
         expected.update(path.relative_to(app).as_posix() for path in members)
+    for pin in additional:
+        pack,pack_files,entries=pack_inventory(app/pin['folder'])
+        require((pack['id'],pack['version'],pack['manifestSha256'])==
+                (pin['id'],pin['version'],pin['manifestSha256']) and entries==pin['files'],
+                'Additional pack identity or complete file inventory changed')
+        expected.update(path.relative_to(app).as_posix() for path in pack_files)
     members=files(app)
     require({p.relative_to(app).as_posix() for p in members}==expected,
             'Uninventoried files entered starter staging; user data cannot be included in a release')
@@ -311,18 +350,18 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     sub=parser.add_subparsers(dest='command',required=True)
     command=sub.add_parser('sources');command.add_argument('--base-root',type=Path,required=True);command.add_argument('--base-source-archive',type=Path);command.add_argument('--output',type=Path,required=True);command.add_argument('--metadata',type=Path,required=True)
-    command=sub.add_parser('stage');command.add_argument('--base-root',type=Path,required=True);command.add_argument('--app-root',type=Path,required=True);command.add_argument('--source-metadata',type=Path,required=True)
+    command=sub.add_parser('stage');command.add_argument('--base-root',type=Path,required=True);command.add_argument('--app-root',type=Path,required=True);command.add_argument('--source-metadata',type=Path,required=True);command.add_argument('--extra-pack-dir',type=Path,action='append',default=[])
     command=sub.add_parser('starter');command.add_argument('--app-root',type=Path,required=True);command.add_argument('--output',type=Path,required=True)
-    command=sub.add_parser('pack');command.add_argument('--pack-root',type=Path,required=True);command.add_argument('--output',type=Path,required=True)
+    command=sub.add_parser('pack');command.add_argument('--pack-root',type=Path,required=True);command.add_argument('--output',type=Path,required=True);command.add_argument('--min-app-version',default=PACK_MIN_APP_VERSION)
     args=parser.parse_args()
     if args.command=='sources':
         require(not args.metadata.exists(),'Source metadata output already exists')
         result=build_sources(args.base_root,args.output,args.base_source_archive)
         args.metadata.parent.mkdir(parents=True,exist_ok=True)
         args.metadata.write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
-    elif args.command=='stage':result=stage(args.base_root,args.app_root,read_json(args.source_metadata))
+    elif args.command=='stage':result=stage(args.base_root,args.app_root,read_json(args.source_metadata),args.extra_pack_dir)
     elif args.command=='starter':result=starter_archive(args.app_root,args.output)
-    else:result=build_pack(args.pack_root,args.output)
+    else:result=build_pack(args.pack_root,args.output,args.min_app_version)
     print(json.dumps(result,indent=2))
 
 

@@ -22,12 +22,13 @@ from decimal import Decimal
 
 try:
     from .catalog import resolve_tool
-    from . import performance
+    from . import performance, reference_indexes
     from .cwl_export import definition_sha256, export_workflow, update_run_status
     from .reference_provenance import collect_references, used_paths, methods_text as reference_methods
 except ImportError:
     from catalog import resolve_tool
     import performance
+    import reference_indexes
     from cwl_export import definition_sha256, export_workflow, update_run_status
     from reference_provenance import collect_references, used_paths, methods_text as reference_methods
 
@@ -561,6 +562,17 @@ class Engine:
                             raise ValueError("Incompatible input: " + str(desc.get("type")) + " cannot feed " + str(port.get("type")) + ".")
                         if ref.startswith(identity + "::"):
                             raise ValueError("A tool cannot consume its own output.")
+                        contract=tool.get('requiresReferenceIndex')
+                        if contract and port['id']==contract['port']:
+                            if '::' not in ref:
+                                raise ValueError('Connect the verified Build short-read reference index output; an arbitrary .mmi file is not supported.')
+                            producer=self._tool(nodes[ref.split('::',1)[0]])
+                            built=producer.get('referenceIndex',{})
+                            expected=next((e for e in tool['executables'] if e['id']==contract['tool']),None)
+                            actual=next((e for e in producer.get('executables',[]) if e['id']==built.get('tool')),None)
+                            if (built.get('format')!=contract['format'] or built.get('outputPort')!=ref.split('::',1)[1] or
+                                    not actual or not expected or any(actual.get(k)!=expected.get(k) for k in ('id','version','sha256'))):
+                                raise ValueError('The index producer is incompatible with this exact mapping tool and format.')
                         required_state = port.get("requiredState", {})
                         known_state = desc.get("state", {}) if "::" in ref else {}
                         for key, value in required_state.items():
@@ -604,7 +616,7 @@ class Engine:
                             continue
                         if ref in sources:
                             source = sources[ref]
-                            if source.get("type") in ("reference", "fasta", "reference-index", "metrics", "report", "text", "json"):
+                            if source.get("type") in ("reference", "fasta", "reference-index", "minimap2-sr-index", "metrics", "report", "text", "json"):
                                 continue
                             files = source.get("files", {})
                             keys = {os.path.normcase(str(Path(p).absolute())) for p in files.values() if isinstance(p, str) and p} if isinstance(files, dict) else set()
@@ -626,7 +638,7 @@ class Engine:
                     for ref in node.get("inputs", {}).get(port["id"], []):
                         if port.get("type") == "reference":
                             explicit_reference.update({ref} if ref in sources else reference_lineages.get(ref.split("::", 1)[0], set()))
-                        elif port.get("type") in ALIGNMENT_TYPES and "::" in ref:
+                        elif port.get("type") in ALIGNMENT_TYPES | {'minimap2-sr-index'} and "::" in ref:
                             alignment_reference.update(reference_lineages.get(ref.split("::", 1)[0], set()))
                 if explicit_reference and alignment_reference and explicit_reference != alignment_reference:
                     error("The alignment and this operation use different reference input slots. Connect the same reference slot throughout the pipeline.", identity)
@@ -651,7 +663,7 @@ class Engine:
             groups.setdefault(rank[identity], []).append(identity)
         return [{"rank": level, "nodes": identities} for level, identities in sorted(groups.items())]
 
-    def methods(self, graph, completed=False, statuses=None, references=None):
+    def methods(self, graph, completed=False, statuses=None, references=None, index_actions=None):
         nodes = {n["id"]: n for n in graph.get("nodes", []) if isinstance(n, dict)}
         sources = {s["id"]: s for s in graph.get("sources", []) if isinstance(s, dict)}
         try:
@@ -674,6 +686,8 @@ class Engine:
             operation = node_name(node, tool)
             verbs = "was performed" if completed else "will be performed"
             line = f"Step {display_id(identity)} ({operation}) {verbs} using {versions or tool['name']} (pack {tool.get('packId', 'builtin')} {tool.get('packVersion', '')})."
+            if completed and (index_actions or {}).get(identity)=='reused':
+                line=f"Step {display_id(identity)} ({operation}) reused a verified reference index previously produced using {versions or tool['name']} (pack {tool.get('packId', 'builtin')} {tool.get('packVersion', '')}). The indexing command was not run in this analysis."
             description = (tool.get("methodsDescription") or tool.get("description", "")).strip()
             if description:
                 line += " " + description
@@ -815,7 +829,18 @@ class Engine:
             value = graph.get(field, minimum)
             graph[field] = max(minimum, value if isinstance(value, int) and 0 < value < 1000000000 else minimum)
 
-    def prepare(self, graph, output_parent, cancel=None):
+    def prepare(self, graph, output_parent, cancel=None, index_policy='reuse', run_metadata=None):
+        if index_policy not in ('reuse','rebuild'):
+            raise ValueError('Unknown reference index reuse policy.')
+        if run_metadata is not None:
+            if (not isinstance(run_metadata,dict) or set(run_metadata)!={'batchId','sampleId','metadata'} or
+                    not isinstance(run_metadata['batchId'],str) or not re.fullmatch(r'[0-9a-f]{32}',run_metadata['batchId']) or
+                    not clean_text(run_metadata['sampleId'],128) or not run_metadata['sampleId'] or
+                    not isinstance(run_metadata['metadata'],dict) or
+                    len(canonical(run_metadata).encode('utf-8'))>16*1024):
+                raise ValueError('Invalid frozen batch metadata.')
+            safe_json(run_metadata)
+            run_metadata=copy.deepcopy(run_metadata)
         preparation_started = time.perf_counter()
         measurements = performance.preparation()
         with performance.measure(measurements["phases"], "validation"):
@@ -890,6 +915,10 @@ class Engine:
             run_id = "run-" + datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S") + "-" + uuid.uuid4().hex[:8]
             folder = parent / run_id
             plan = {"schema": 1, "id": run_id, "created": utc(), "folder": str(folder), "graph": graph, "nodes": frozen_nodes, "inputs": evidence, "references": references, "warnings": review["warnings"], "scheduler": "sequential-independent-branches", "methods": self.methods(graph, references=references)}
+            plan['referenceIndexPolicy']=index_policy
+            if run_metadata is not None:
+                plan['batch']=run_metadata
+                plan['methods']+='\nBatch '+run_metadata['batchId']+', sample '+run_metadata['sampleId']+'. The frozen plan and CWL retain the selected sample-table metadata and file bindings.\n'
             workflow = export_workflow(plan, self.app_root)
         measurements.update(status="completed", elapsedSeconds=performance.elapsed(preparation_started, time.perf_counter))
         plan["performancePreparation"] = measurements
@@ -1055,6 +1084,11 @@ class Engine:
         reference_path = reference_values[0] if reference_values and needs_reference else None
         reference = _fasta_dictionary(reference_path, cancel) if reference_path else None
         sequence_checks = self._schema_preflight(node, values, cancel, input_types, reference) if node["tool"].get("schemaAsset") else []
+        if node['tool'].get('referenceIndex'):
+            port=next(p for p in node['tool']['ports'] if p['id']==node['tool']['referenceIndex']['referencePort'])
+            path=values[port['manifestInputs'][0]]
+            sequence_checks.append(_sequence_evidence(path,'fasta-nucleotide',['fasta-nucleotide'],{'compression':'none'},cancel))
+            _fasta_dictionary(path,cancel)
         if not required:
             return {"sequenceChecks": sequence_checks} if sequence_checks else None
         executable = self._samtools(node)
@@ -1140,6 +1174,8 @@ class Engine:
         outputs, statuses = {}, {}
         record = {"schema": 1, "id": plan["id"], "planSha256": claimed, "name": plan["graph"].get("name", "Workspace"), "folder": str(folder), "started": utc(), "status": "running", "nodes": [], "outputs": {}, "scheduler": plan["scheduler"]}
         record["references"] = copy.deepcopy(plan.get("references", {}))
+        if 'batch' in plan:
+            record['batch']=copy.deepcopy(plan['batch'])
         workflow = update_run_status(workflow, record)
         write_json(folder / "workflow.cwl", workflow)
         record["workflowExport"] = dict(plan["workflowExport"], sha256=digest_file(folder / "workflow.cwl"))
@@ -1200,11 +1236,32 @@ class Engine:
                                         for filename in descriptor.get("files", {}).values():
                                             input_types[str(_resolved_path(filename))] = descriptor["type"]
                             entry["preflight"] = self._preflight(node, values, cancel, input_types)
+                        if node['tool'].get('requiresReferenceIndex'):
+                            contract=node['tool']['requiresReferenceIndex']
+                            for ref in node['inputs'][contract['port']]:
+                                reference_indexes.compatible(node['tool'],outputs.get(ref,{}).get('referenceIndex'))
                         measured_step["backendMetrics"] = performance.unavailable_metrics()
                         with performance.measure(measured_step["phases"], "backend_runner"):
                             request = {"app_root": str(self.app_root), "pack_folder": str(_resolved_path(self.app_root / node["tool"]["packFolder"])), "pack_sha256": node["tool"]["manifestSha256"], "workflow_id": node["tool"]["workflowId"], "output_folder": str(step_folder), "values": values, "cancel_file": str(folder / "cancel.request")}
-                            result = self.backend.run(request, lambda item: event(dict(item, nodeId=identity)), cancel)
-                        measured_step["backendMetrics"] = performance.native_metrics(result.get("performance"))
+                            run_backend=lambda:self.backend.run(request, lambda item: event(dict(item, nodeId=identity)), cancel)
+                            if node['tool'].get('referenceIndex'):
+                                contract=node['tool']['referenceIndex']
+                                port=next(p for p in node['tool']['ports'] if p['id']==contract['referencePort'])
+                                reference_path=values[port['manifestInputs'][0]]
+                                expected=plan['inputs'].get(reference_path,{}).get('sha256')
+                                if expected is None:
+                                    producer=outputs[node['inputs'][port['id']][0]]
+                                    expected=next(producer['sha256'][key] for key,path in producer['files'].items() if path==reference_path)
+                                result,index_evidence=reference_indexes.ReferenceIndexStore(self.app_root).run(
+                                    self.app_root,node,values,step_folder,run_backend,cancel,plan.get('referenceIndexPolicy','reuse'),expected)
+                                if index_evidence is not None:
+                                    entry['referenceIndex']=index_evidence
+                            else:
+                                result=run_backend()
+                        if entry.get('referenceIndex',{}).get('action')=='reused':
+                            measured_step['backendMetrics']=performance.unavailable_metrics('reference_index_reused_without_native_command')
+                        else:
+                            measured_step["backendMetrics"] = performance.native_metrics(result.get("performance"))
                     entry.update(status="success" if result.get("success") else "cancelled" if result.get("cancelled") else "failed", message=result.get("message", ""), folder=result.get("folder", str(step_folder)))
                     if entry["status"] == "success":
                         with performance.measure(measured_step["phases"], "output_validation_and_hashing"):
@@ -1223,8 +1280,14 @@ class Engine:
                                         entry.setdefault("outputValidation", {})[key] = evidence
                                     files[key] = str(path)
                                     hashes[key] = digest_file(path, cancel)
+                                    if entry.get('referenceIndex'):
+                                        expected=entry['referenceIndex']['files'][relative]
+                                        if hashes[key]!=expected['sha256'] or _io_path(path).stat().st_size!=expected['bytes']:
+                                            raise ValueError('The registered reference index changed before output publication.')
                                 ref = identity + "::" + output["id"]
                                 item = {"id": ref, "label": output.get("label", output["id"]), "type": output["type"], "state": output.get("state", {}), "files": files, "sha256": hashes, "producer": identity, "manifestOutputs": output.get("manifestOutputs", list(files))}
+                                if entry.get('referenceIndex'):
+                                    item['referenceIndex']=copy.deepcopy(entry['referenceIndex'])
                                 entry["outputs"][ref] = item
                             outputs.update(entry["outputs"])
                 except InterruptedError as exc:
@@ -1244,7 +1307,15 @@ class Engine:
             record["finished"] = utc()
             record["status"] = "cancelled" if cancel.is_set() or any(v == "cancelled" for v in statuses.values()) else "success" if all(v == "success" for v in statuses.values()) else "failed"
             record["success"] = record["status"] == "success"
-            record["methods"] = self.methods(plan["graph"], completed=True, statuses=statuses, references=plan.get("references", {}))
+            record["methods"] = self.methods(plan["graph"], completed=True, statuses=statuses, references=plan.get("references", {}),
+                                              index_actions={entry['id']:entry['referenceIndex']['action'] for entry in record['nodes'] if entry.get('referenceIndex')})
+            if 'batch' in plan:
+                record['methods']+='\nBatch '+plan['batch']['batchId']+', sample '+plan['batch']['sampleId']+'. The frozen plan and CWL retain the selected sample-table metadata and file bindings.\n'
+            for entry in record['nodes']:
+                index=entry.get('referenceIndex')
+                if entry['status']=='success' and index:
+                    action='reused after verifying the complete stored inventory; the indexing command was not run' if index['action']=='reused' else 'built and registered with a complete verified inventory'
+                    record['methods']+='\nReference index at step '+display_id(entry['id'])+' was '+action+'. Identity SHA-256: '+index['key']+'. Reference SHA-256: '+index['identity']['reference']['sha256']+'.\n'
             _io_path(folder / "methods-completed.txt").write_text(record["methods"], encoding="utf-8")
             write_json(folder / "workflow.cwl", update_run_status(workflow, record))
             record["workflowExport"]["sha256"] = digest_file(folder / "workflow.cwl")

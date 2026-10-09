@@ -28,7 +28,8 @@ TYPES = {
     'vcf': 'Variant calls (VCF)', 'vcf-pass': 'PASS variant calls (VCF)',
     'bcf': 'Variant calls (BCF)', 'bcf-likelihoods': 'Genotype likelihoods (BCF)',
     'metrics': 'Statistics or quality metrics', 'report': 'HTML report',
-    'index': 'Index file', 'text': 'Text file', 'file': 'Other file',
+    'index': 'Index file', 'minimap2-sr-index': 'Verified minimap2 short-read index',
+    'text': 'Text file', 'file': 'Other file',
     'directory': 'Folder', 'script': 'Report supporting asset',
     'fasta-nucleotide': 'Nucleotide sequences (FASTA)',
     'fasta-protein': 'Protein sequences (FASTA)',
@@ -597,7 +598,7 @@ def _validate_workbench_schema(document,pack):
     require(isinstance(definitions,dict) and set(definitions)==set(pack['workflows']),'Workbench schema must cover every pack workflow exactly once')
     normalized={}
     for identity,definition in definitions.items():
-        _schema_object(definition,{'category','ports','outputs','methods','citations','pathPolicy','parameterConstraints','parameterRanges'},'Workflow metadata')
+        _schema_object(definition,{'category','ports','outputs','methods','citations','pathPolicy','parameterConstraints','parameterRanges','referenceIndex','requiresReferenceIndex'},'Workflow metadata')
         category=definition.get('category',document['category'])
         require(_clean(category,100),'Invalid workflow category')
         methods=definition.get('methods','')
@@ -704,6 +705,33 @@ def _validate_workbench_schema(document,pack):
             parsed_outputs.append(result)
         require(seen_outputs==set(outputs),'Workbench metadata omits manifest outputs')
         normalized[identity]={'category':category,'ports':parsed_ports,'outputs':parsed_outputs,'methods':methods,'citations':citations+_schema_citations(definition.get('citations',[]))}
+        for key in ('referenceIndex','requiresReferenceIndex'):
+            if key not in definition:
+                continue
+            require(not all(k in definition for k in ('referenceIndex','requiresReferenceIndex')),
+                    'An index builder cannot also consume an index')
+            index=definition[key]
+            allowed={'format','tool','referencePort','outputPort'} if key=='referenceIndex' else {'format','tool','port'}
+            _schema_object(index,allowed,'Reference index contract')
+            require(set(index)==allowed and index.get('format')=='minimap2-sr-v1' and index.get('tool') in pack['tools'],
+                    'Unsupported or incomplete reference index contract')
+            used_tools={step.get(k) for step in workflow['steps'] for k in ('tool','sinkTool')}
+            require(index['tool'] in used_tools,'Reference index tool must execute in this operation')
+            if key=='referenceIndex':
+                require(len(parsed_ports)==1 and parsed_ports[0]['id']==index['referencePort'] and
+                        parsed_ports[0]['type']=='reference' and len(parsed_ports[0]['fields'])==1 and
+                        parsed_ports[0]['fields'][0]['type']=='file' and parsed_ports[0]['min']==1 and
+                        len(parsed_outputs)==1 and parsed_outputs[0]['id']==index['outputPort'] and
+                        parsed_outputs[0]['type']=='minimap2-sr-index' and len(parsed_outputs[0]['fields'])==1,
+                        'Reference index builder needs one reference file and one minimap2 index output')
+                require(all(field['nonempty'] for output in parsed_outputs for field in output['fields']),
+                        'Reference index outputs must be nonempty')
+            else:
+                matches=[p for p in parsed_ports if p['id']==index['port']]
+                require(len(matches)==1 and matches[0]['type']=='minimap2-sr-index' and
+                        len(matches[0]['fields'])==1 and matches[0]['min']==matches[0]['max']==1,
+                        'Index consumer needs one required minimap2 index file')
+            normalized[identity][key]=dict(index)
         if 'pathPolicy' in definition:
             normalized[identity]['pathPolicy']=_schema_path_policy(definition['pathPolicy'])
         if 'parameterConstraints' in definition:
@@ -782,6 +810,9 @@ def _apply_workbench_schema(pack,workflow,data):
     data['methodsDescription']=metadata['methods']
     data['citations']=metadata['citations']
     data['schemaAsset']=dict(pack['workbenchSchemaAsset'])
+    for key in ('referenceIndex','requiresReferenceIndex'):
+        if key in metadata:
+            data[key]=dict(metadata[key])
     if 'pathPolicy' in metadata:
         data['pathPolicy']=dict(metadata['pathPolicy'])
     if 'parameterConstraints' in metadata:
