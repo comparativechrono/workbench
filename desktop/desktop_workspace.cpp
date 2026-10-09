@@ -774,6 +774,15 @@ class Workspace {
       if (request.second == "cancel" || request.second == "queue/cancel") return true;
     return false;
   }
+  bool ui_request_idle() const {
+    // Queue polling updates activity widgets, not the editable graph. It must
+    // not disable focused controls every two seconds. Queued actions still
+    // block editing immediately and execute through the existing FIFO pump.
+    if (!outgoing.empty()) return false;
+    if (!activeRequest) return true;
+    const auto found = pending.find(activeRequest);
+    return found != pending.end() && found->second == "queue/status";
+  }
   bool analysis_active() const { return busy || queuePreparing || queueRunning; }
   long long send(const std::string &method, Json params = Json::object()) {
     long long id = nextRequest++;
@@ -797,7 +806,8 @@ class Workspace {
       return id;
     }
     outgoing.push_back(std::move(request));
-    pump();
+    if (activeRequest) enabled();
+    else pump();
     return id;
   }
   void model(const std::string &action, Json payload = Json::object()) {
@@ -872,7 +882,7 @@ class Workspace {
                       !packActionPending && !refBusy && !refActionPending && !showingHistory;
     recovery_enabled(idle, edit);
     curated_enabled(idle, edit);
-    results_enabled(idle);
+    results_enabled(ready && !closing && ui_request_idle());
     if (samplesView.window) {
       for (int id : {SAMPLE_PATH, SAMPLE_BROWSE, SAMPLE_LOAD, SAMPLE_TARGETS, SAMPLE_MODE,
                      SAMPLE_OUTPUT, SAMPLE_OUTPUT_BROWSE})
@@ -3668,7 +3678,7 @@ class Workspace {
     bool edit = ready && !setupBusy && !setupActionPending && !packBusy && !packActionPending &&
                 !refBusy && !refActionPending &&
                 !showingHistory && !closing &&
-                !activeRequest && outgoing.empty();
+                ui_request_idle();
     const bool browseAuxiliary = ready && !closing &&
         ((!activeRequest && outgoing.empty()) || slow_request_pending());
     for (HWND h :

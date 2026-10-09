@@ -84,6 +84,22 @@ def clear_focused_edit(ui, keys, control):
             'emptyAfterBackspace': True, 'focusRetained': True, 'pointerIntervention': False}
 
 
+def retain_keyboard_focus(ui, keys, control, seconds=2.4):
+    """Passively sample across the normal two-second queue-poll interval."""
+    started, samples = time.monotonic(), 0
+    while time.monotonic() - started < seconds:
+        require(keys.focus() == control and ui.user.IsWindowEnabled(control),
+                'Background activity displaced or disabled the focused control: ' +
+                str(ui.user.GetDlgCtrlID(control)))
+        samples += 1
+        time.sleep(.02)
+    return {'controlId': ui.user.GetDlgCtrlID(control), 'samples': samples,
+            'durationSeconds': time.monotonic() - started,
+            'focusRetained': True, 'enabledThroughoutSamples': True,
+            'inputOrRefocusDuringObservation': False,
+            'limit': 'Sampled observations across the normal poll interval; exact poll count is not instrumented.'}
+
+
 class PatchUI(NativeUI):
     def fit_window(self, width, height):
         # NativeUI normally resizes immediately. Record real startup geometry
@@ -220,11 +236,14 @@ def desktop_scenarios(root, evidence, report, label):
             'stage': label + '-library-before-filter', **clear_focused_edit(ui, keys, search)})
         keys.text('reference')
         ui.wait('keyboard library filter', lambda: ui.label(search) == 'reference' and ui.library().tools())
+        retention = report.setdefault('libraryFocusRetention', {}).setdefault(label, {})
+        retention['search'] = retain_keyboard_focus(ui, keys, search)
         keys.key(0x09)
         ui.wait('Tab advances from library search', lambda: keys.focus() not in (None, search))
         next_focus = keys.focus()
         require(ui.user.IsChild(ui.main, next_focus) and ui.user.IsWindowVisible(next_focus) and
                 ui.user.IsWindowEnabled(next_focus), 'Tab reached an unavailable or foreign control.')
+        retention['afterTab'] = retain_keyboard_focus(ui, keys, next_focus)
         keys.key(0x09, 0x10)
         ui.wait('Shift+Tab restores search', lambda: keys.focus() == search)
         report['keyboardEdits'].append({
@@ -269,6 +288,7 @@ def desktop_scenarios(root, evidence, report, label):
             ui.wait('Shift+Tab restores query', lambda: keys.focus() == query)
             keys.key(0x09)
             ui.wait('Tab returns to Search', lambda: keys.focus() == ui.child(1502, owner))
+            held_search = retain_keyboard_focus(ui, keys, ui.child(1502, owner))
             keys.key(0x20)
             ui.wait('keyboard Search returns with retained query focus', lambda:
                     keys.focus() == query and ui.user.IsWindowEnabled(ui.child(1502, owner)) and
@@ -278,6 +298,7 @@ def desktop_scenarios(root, evidence, report, label):
             require(bool(ui.user.IsWindowEnabled(ui.child(1505, owner))) == bool(expected_count),
                     'View availability differs from actual selected results.')
             observation = {'query': query_text, 'resultCount': expected_count,
+                           'searchFocusRetention': held_search,
                            'beforeEscape': focus_observation(ui, keys, owner),
                            'pointerInterventionAfterOpen': False}
             capture(ui, report, label + '-results-' + case + '.bmp', owner)
@@ -289,6 +310,17 @@ def desktop_scenarios(root, evidence, report, label):
             passed(report, label + '-results-' + case, label + ': ' + case + ' Search retains query focus; immediate Escape closes only Results without pointer intervention.')
     except Exception:
         if ui is not None:
+            try:
+                focus = keys.focus()
+                report.setdefault('desktopFailureFocus', {})[label] = {
+                    'focusWindow': focus,
+                    'focusControlId': ui.user.GetDlgCtrlID(focus) if focus else None,
+                    'focusEnabled': bool(ui.user.IsWindowEnabled(focus)) if focus else False,
+                    'searchEnabled': bool(ui.user.IsWindowEnabled(ui.child(102))),
+                    'searchText': ui.label(ui.child(102)),
+                    'searchSelection': ui.send(ui.child(102), 0x00B0)}
+            except Exception as focus_error:
+                report.setdefault('desktopFailureFocus', {})[label] = {'observationError': str(focus_error)}
             for number, owner in enumerate(ui.windows()):
                 capture(ui, report, label + '-failure-%d.bmp' % number, owner)
         raise
