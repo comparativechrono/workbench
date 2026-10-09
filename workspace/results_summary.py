@@ -113,8 +113,15 @@ def _bounded_read(path, limit, root=None):
             data = stream.read(limit + 1)
             after = os.fstat(stream.fileno())
         final = physical.stat()
-        identity = lambda item: (item.st_dev, item.st_ino, item.st_size, item.st_mtime_ns, item.st_ctime_ns)
-        if not (identity(before) == identity(opened) == identity(after) == identity(final)):
+        # Windows CPython currently reports creation time in path stat's ctime
+        # and change time in fstat's ctime (cpython issue #157671). Compare ctime
+        # before/after only within the same API. Device/inode, length and mtime
+        # still bind the opened handle to the pathname across the complete read.
+        identity = lambda item: (item.st_dev, item.st_ino, item.st_size, item.st_mtime_ns)
+        stable = lambda first, last: (identity(first) == identity(last)
+                                     and first.st_ctime_ns == last.st_ctime_ns)
+        if (not stable(before, final) or not stable(opened, after)
+                or identity(before) != identity(opened)):
             raise Unavailable("changed_file", "The file changed while its summary was being read.")
         if len(data) > limit:
             raise Unavailable("read_limit", "The file exceeds the bounded summary read limit.")

@@ -6,9 +6,11 @@ behavior. The packaged Windows gate separately exercises the real tool outputs.
 import copy
 import hashlib
 import json
+import os
 from pathlib import Path
 import sys
 import tempfile
+from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
@@ -345,6 +347,90 @@ class ResultsSummaryTests(unittest.TestCase):
         summary = summaries.build_summary(self.record)
         self.assertIn("unbound_output", self.codes(summary))
         self.assertFalse(any(item["step_id"] == "step-1" for item in summary["metrics"]))
+
+    def test_path_creation_time_and_handle_change_time_may_differ(self):
+        # Windows CPython issue #157671: path stat ctime is creation time while
+        # handle fstat ctime is change time. Stable readings from the two APIs
+        # must not be compared as though those timestamps mean the same thing.
+        original_fstat = os.fstat
+        def handle_stat(descriptor):
+            value = original_fstat(descriptor)
+            fields = {key: getattr(value, key) for key in
+                      ("st_dev", "st_ino", "st_size", "st_mtime_ns", "st_ctime_ns")}
+            fields["st_ctime_ns"] += 1000000000
+            return SimpleNamespace(**fields)
+        with patch.object(summaries.os, "fstat", side_effect=handle_stat):
+            summary = summaries.build_summary(self.record)
+        self.assertFalse(summary["unavailable"])
+        self.assertEqual(self.metrics(summary)["samtools.stats.raw_total_sequences"], 202)
+        self.assertEqual([item["status"] for item in summary["artifacts"] if item["kind"].startswith("methods")], ["verified", "verified"])
+
+    def test_open_handle_still_must_match_path_identity_size_and_mtime(self):
+        original_fstat = os.fstat
+        for changed in ("st_dev", "st_ino", "st_size", "st_mtime_ns"):
+            with self.subTest(field=changed):
+                def handle_stat(descriptor):
+                    value = original_fstat(descriptor)
+                    fields = {key: getattr(value, key) for key in
+                              ("st_dev", "st_ino", "st_size", "st_mtime_ns", "st_ctime_ns")}
+                    fields[changed] += 1
+                    return SimpleNamespace(**fields)
+                with patch.object(summaries.os, "fstat", side_effect=handle_stat):
+                    with self.assertRaises(summaries.Unavailable) as failure:
+                        summaries._bounded_read(self.product_path(), 10000, self.folder)
+                self.assertEqual(failure.exception.code, "changed_file")
+
+    def test_same_handle_change_time_mutation_remains_rejected(self):
+        original_fstat = os.fstat
+        calls = 0
+        def handle_stat(descriptor):
+            nonlocal calls
+            calls += 1
+            value = original_fstat(descriptor)
+            fields = {key: getattr(value, key) for key in
+                      ("st_dev", "st_ino", "st_size", "st_mtime_ns", "st_ctime_ns")}
+            fields["st_ctime_ns"] += calls
+            return SimpleNamespace(**fields)
+        with patch.object(summaries.os, "fstat", side_effect=handle_stat):
+            with self.assertRaises(summaries.Unavailable) as failure:
+                summaries._bounded_read(self.product_path(), 10000, self.folder)
+        self.assertEqual(failure.exception.code, "changed_file")
+
+    def test_actual_content_mutation_during_read_remains_rejected(self):
+        path = self.product_path()
+        before = path.stat()
+        original_open = open
+        class MutatingReader:
+            def __init__(self, *args, **kwargs):
+                self.stream = original_open(*args, **kwargs)
+            def __enter__(self):
+                return self
+            def __exit__(self, *args):
+                self.stream.close()
+            def fileno(self):
+                return self.stream.fileno()
+            def read(self, limit):
+                data = self.stream.read(limit)
+                # Same-size alteration after the reader obtains the original
+                # bytes: their SHA alone would miss this concurrent mutation.
+                path.write_bytes(data.replace(b"202", b"999"))
+                os.utime(path, ns=(before.st_atime_ns, before.st_mtime_ns + 2000000000))
+                return data
+        with patch.object(summaries, "open", MutatingReader, create=True):
+            with self.assertRaises(summaries.Unavailable) as failure:
+                summaries._bounded_read(path, 10000, self.folder)
+        self.assertEqual(failure.exception.code, "changed_file")
+
+    def test_native_metadata_after_prior_write_can_be_read_unchanged(self):
+        # Runs on the actual platform, including both packaged Windows paths.
+        # Prior changes can separate Windows creation time from change time;
+        # an unchanged current report must nevertheless remain readable.
+        path = self.product_path()
+        expected = path.read_bytes()
+        previous = path.stat()
+        path.write_bytes(expected)
+        os.utime(path, ns=(previous.st_atime_ns, previous.st_mtime_ns + 1000000000))
+        self.assertEqual(summaries._bounded_read(path, 10000, self.folder), expected)
 
 
 if __name__ == "__main__":

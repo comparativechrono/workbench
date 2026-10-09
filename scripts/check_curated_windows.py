@@ -164,9 +164,10 @@ def host_checks(root, evidence, report, version):
             run = complete(host, output)
             records[identity] = science(root, run, identity, evidence)
             summary = host.call("results/summary", {"id": run["run_id"]})
+            # Retain unavailable/error details before an assertion can stop the gate.
+            write_json(evidence / (identity + "-summary.json"), summary)
             records[identity]["expectedSummaryMetrics"] = check_summary(summary, identity)
             summaries[identity] = summary
-            write_json(evidence / (identity + "-summary.json"), summary)
             check(report, identity + ": editable exact-pin graph executes through native tools with known synthetic alignment truth and hash-bound result measurements.")
         for query, expected in (("VARIANT-CALLING", {records["variant-calling"]["id"]}),
                                 ("starter", {item["id"] for item in records.values()}),
