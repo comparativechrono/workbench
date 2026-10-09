@@ -98,6 +98,7 @@ jobs:
           name: deployment-kit-${{ github.sha }}
           path: ${{ runner.temp }}/deployment-download
       - name: Verify the exact kit and initialise an untested machine report
+        id: prepare
         shell: pwsh
         env:
           CASE_FOLDER: ${{ matrix.folder }}
@@ -122,11 +123,8 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'Untested machine report creation failed' }
           & $python -I -B $helper prepare --bundle-root $bundle --report (Join-Path $evidence 'acceptance.json') --work-root (Join-Path $case 'tester-copy')
           if ($LASTEXITCODE -ne 0) { throw 'Verified disposable test copy failed' }
-          & $python -I -B $helper signatures --bundle-root $bundle --report (Join-Path $evidence 'acceptance.json')
-          if ($LASTEXITCODE -ne 0) { throw 'Signature observation collection failed' }
-          $report = Get-Content (Join-Path $evidence 'acceptance.json') -Raw | ConvertFrom-Json
-          if ($report.signatures.status -ne 'observed') { throw 'Hosted Windows signature observations were unavailable; retain the explicit report' }
       - name: Exercise the real updater folder picker and native desktop
+        if: ${{ !cancelled() && steps.prepare.conclusion == 'success' }}
         shell: pwsh
         env:
           CASE_FOLDER: ${{ matrix.folder }}
@@ -143,6 +141,7 @@ jobs:
           & $python -I -B $helper import-automated --bundle-root $bundle --report (Join-Path $evidence 'acceptance.json') --automated-report (Join-Path $evidence 'native-ui/native-deployment-gate.json')
           if ($LASTEXITCODE -ne 0) { throw 'Automated observation import failed' }
       - name: Run curated science and results on a separate copy of the frozen Starter
+        if: ${{ !cancelled() && steps.prepare.conclusion == 'success' }}
         shell: pwsh
         env:
           CASE_FOLDER: ${{ matrix.folder }}
@@ -156,7 +155,23 @@ jobs:
           $python = Join-Path $app 'runtime/python/python.exe'
           & $python -I -B scripts/check_curated_windows.py --app-root $app --report (Join-Path $env:RUNNER_TEMP 'deployment-evidence/curated/native-curated.json') --source-commit e855dc4396e0c16ae35f4e840eb9cc734adb4441 --asset-sha256 f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073 --asset-name native-workbench-0.16.0-starter-windows.zip --app-version 0.16.0
           if ($LASTEXITCODE -ne 0) { throw 'Frozen Starter curated regression failed' }
+      - name: Collect actual Windows signature observations
+        if: ${{ !cancelled() && steps.prepare.conclusion == 'success' }}
+        shell: pwsh
+        env:
+          CASE_FOLDER: ${{ matrix.folder }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $bundle = Join-Path $env:RUNNER_TEMP ($env:CASE_FOLDER + '/kit/native-workbench-deployment-0.16.0')
+          $python = Join-Path $bundle 'native-workbench/runtime/python/python.exe'
+          $reportPath = Join-Path $env:RUNNER_TEMP 'deployment-evidence/acceptance.json'
+          & $python -I -B (Join-Path $bundle 'toolkit/scripts/deployment_acceptance.py') signatures --bundle-root $bundle --report $reportPath
+          $collectorExit = $LASTEXITCODE
+          $report = Get-Content $reportPath -Raw | ConvertFrom-Json
+          $report.signatures | ConvertTo-Json -Depth 6
+          if ($collectorExit -ne 0 -or $report.signatures.status -ne 'observed') { throw 'Signature observations unavailable; inspect the retained bounded diagnostic' }
       - name: Verify the immutable kit remains unchanged and manual acceptance remains untested
+        if: ${{ !cancelled() && steps.prepare.conclusion == 'success' }}
         shell: pwsh
         env:
           CASE_FOLDER: ${{ matrix.folder }}

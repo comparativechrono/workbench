@@ -7,6 +7,7 @@ param(
     [Parameter(Mandatory = $true)][string]$OutputPath
 )
 $ErrorActionPreference = 'Stop'
+$diagnosticStage = 'startup'
 
 function Assert-NoReparse([string]$Path) {
     $item = Get-Item -LiteralPath $Path -Force
@@ -46,8 +47,10 @@ function Test-PortableExecutable([string]$Path, [long]$Length) {
 }
 
 try {
+    $diagnosticStage = 'root-check'
     Assert-NoReparse $BundleRoot
     $root = [IO.Path]::GetFullPath($BundleRoot).TrimEnd('\', '/')
+    $diagnosticStage = 'manifest-check'
     $manifestPath = Join-Path $root 'deployment-manifest.json'
     Assert-NoReparse $manifestPath
     $manifestItem = Get-Item -LiteralPath $manifestPath
@@ -64,6 +67,7 @@ try {
     if ($files.Count -lt 1 -or $files.Count -gt 20000) { throw 'Invalid inventory size.' }
     $seen = New-Object 'System.Collections.Generic.HashSet[string]' ([StringComparer]::OrdinalIgnoreCase)
     $inventory = @()
+    $diagnosticStage = 'inventory-check'
     # Validate and hash the COMPLETE manifest inventory before signature helpers.
     foreach ($entry in $files) {
         $relative = [string]$entry.path
@@ -91,6 +95,7 @@ try {
             $inventory += $entry
         }
     }
+    $diagnosticStage = 'output-check'
     $output = [IO.Path]::GetFullPath($OutputPath)
     if ($output.Equals($root, [StringComparison]::OrdinalIgnoreCase) -or
         $output.StartsWith($root + '\', [StringComparison]::OrdinalIgnoreCase) -or
@@ -100,6 +105,7 @@ try {
     $parent = [IO.Path]::GetDirectoryName($output)
     Assert-NoReparse $parent
     $observations = @()
+    $diagnosticStage = 'signature-observation'
     foreach ($entry in $inventory) {
         $observedAt = [DateTime]::UtcNow.ToString('o')
         $status = 'Unavailable'
@@ -148,6 +154,7 @@ try {
         trustLimit = 'Status is an observation, not institutional approval. Offline or restricted trust resolution can be unavailable; checksums do not establish publisher identity. No execution policy, trust store or security control was changed.'
         files = @($observations)
     }
+    $diagnosticStage = 'write-observations'
     $text = $report | ConvertTo-Json -Depth 12
     $encoding = New-Object System.Text.UTF8Encoding($false)
     $stream = New-Object IO.FileStream($output, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write, [IO.FileShare]::None)
@@ -159,6 +166,14 @@ try {
     exit 0
 }
 catch {
-    Write-Error 'Signature observations unavailable: integrity, path, execution policy or platform prerequisites could not be satisfied. No policy was changed.' -ErrorAction Continue
+    # No error message, invocation text, stack or file path is exported. The
+    # invoking Python helper accepts only this small, explicitly typed record.
+    $diagnostic = [ordered]@{
+        schemaVersion = 1
+        stage = $diagnosticStage
+        errorType = $_.Exception.GetType().FullName
+        scriptLine = [int]$_.InvocationInfo.ScriptLineNumber
+    }
+    [Console]::Out.WriteLine('NW_SIGNATURE_DIAGNOSTIC ' + ($diagnostic | ConvertTo-Json -Compress))
     exit 2
 }

@@ -402,17 +402,21 @@ def collect_signatures(report_path, report, bundle):
     powershell = Path(system.value) / 'WindowsPowerShell/v1.0/powershell.exe'
     output = outside_bundle(Path(report_path).with_name(Path(report_path).stem + '-signatures.json'), bundle)
     require(not output.exists(), 'Signature observation file already exists; choose a new report name.')
+    launch_error = None
     try:
         result = subprocess.run([str(powershell), '-NoLogo', '-NoProfile', '-NonInteractive', '-File',
             str(bundle['root'] / collector), '-BundleRoot', str(bundle['root']),
             '-ManifestSha256', bundle['manifestSha256'], '-OutputPath', str(output)],
-            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=300, check=False)
-    except (OSError, subprocess.TimeoutExpired):
+            stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, timeout=300, check=False)
+    except (OSError, subprocess.TimeoutExpired) as error:
         result = None
+        launch_error = type(error).__name__
     if result is None or result.returncode != 0 or not output.is_file():
         report['signatures'] = {'status': 'unavailable', 'observedAt': utc_now(),
             'reason': 'The signature collector could not complete under the existing system policy/trust context. No policy was changed.',
-            'collectorSha256': bundle['filesByPath'][collector]['sha256']}
+            'collectorSha256': bundle['filesByPath'][collector]['sha256'],
+            'diagnostic': collector_diagnostic(result.stdout if result is not None else b'',
+                result.returncode if result is not None else None, launch_error)}
         return
     value = read_json(output)
     expected = signature_targets(bundle)
@@ -426,6 +430,35 @@ def collect_signatures(report_path, report, bundle):
     report['signatures'] = {'status': 'observed', 'observedAt': utc_now(), 'file': output.name,
         'sha256': sha256(output), 'collectorSha256': bundle['filesByPath'][collector]['sha256'],
         'fileCount': len(rows), 'scope': 'Actual Windows Authenticode observations for inventoried PE content (including extensionless updater blobs) and .exe/.dll/.pyd paths. Script formats (.py/.cmd/.ps1) and other inventory kinds are not checked by this collector. This is not publisher approval or institutional acceptance; unavailable and unsigned statuses remain explicit.'}
+
+
+def collector_diagnostic(stdout, returncode, launch_error=None):
+    """Export only a bounded stage/type/line record, never PowerShell output."""
+    diagnostic = {'stage': 'collector-launch', 'errorType':
+        launch_error if launch_error in ('OSError', 'FileNotFoundError', 'PermissionError', 'TimeoutExpired')
+        else 'NoStructuredDiagnostic', 'scriptLine': None, 'exitCode': returncode}
+    if not isinstance(stdout, bytes) or len(stdout) > 4096:
+        return diagnostic
+    prefix = 'NW_SIGNATURE_DIAGNOSTIC '
+    for line in stdout.decode('utf-8', errors='replace').splitlines():
+        if not line.startswith(prefix) or len(line) > 1024:
+            continue
+        try:
+            value = json.loads(line[len(prefix):], object_pairs_hook=unique_object)
+            require(isinstance(value, dict) and set(value) == {'schemaVersion', 'stage', 'errorType', 'scriptLine'}
+                    and value['schemaVersion'] == 1, 'Invalid collector diagnostic.')
+            require(value['stage'] in ('startup', 'root-check', 'manifest-check', 'inventory-check',
+                    'output-check', 'signature-observation', 'write-observations'), 'Invalid diagnostic stage.')
+            require(isinstance(value['errorType'], str) and len(value['errorType']) <= 160 and
+                    re.fullmatch(r'(?:System\.|Microsoft\.)[A-Za-z0-9_.+`]+', value['errorType']),
+                    'Invalid diagnostic exception type.')
+            require(type(value['scriptLine']) is int and 0 <= value['scriptLine'] <= 100000,
+                    'Invalid diagnostic line.')
+        except (ValueError, TypeError):
+            continue
+        return {'stage': value['stage'], 'errorType': value['errorType'],
+                'scriptLine': value['scriptLine'], 'exitCode': returncode}
+    return diagnostic
 
 
 def signature_targets(bundle):

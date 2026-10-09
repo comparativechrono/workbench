@@ -50,6 +50,25 @@ def utc():
     return datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
 
 
+def validate_destinations(args):
+    """Refuse immutable/input overlap before creating any report directory."""
+    app, updater, work, report = (getattr(args, name).resolve()
+                                 for name in ('app_root', 'update_root', 'work', 'report'))
+    if args.bundle_root:
+        bundle = args.bundle_root.resolve()
+        require(all(not path.is_relative_to(bundle) for path in (app, work, report)),
+                'Disposable app, work and report destinations must be outside the immutable bundle.')
+    require(all(not report.is_relative_to(root) for root in (app, updater)),
+            'Report destination must be outside application and updater inputs.')
+    archives = [getattr(args, name).resolve() for name in
+                ('starter_archive', 'baseline_archive', 'update_archive')]
+    require(report not in archives, 'Report destination must not replace an input archive.')
+    require(not report.is_relative_to(work), 'Report destination must be outside the new disposable work directory.')
+    require(not work.exists() and all(not work.is_relative_to(root) and not root.is_relative_to(work)
+                                     for root in (app, updater)),
+            'Use a new work directory separate from application and updater inputs.')
+
+
 def tree_hashes(root):
     return {path.relative_to(root).as_posix(): sha256(path)
             for path in sorted(root.rglob('*')) if path.is_file()}
@@ -537,6 +556,7 @@ def main():
     parser.add_argument('--bundle-manifest-sha256')
     parser.add_argument('--bundle-root', type=Path)
     args = parser.parse_args()
+    validate_destinations(args)
     args.report.parent.mkdir(parents=True, exist_ok=True)
     report = {'schema': 1, 'kind': 'native-deployment-ui', 'success': False,
               'sourceCommit': args.source_commit, 'gateCommit': args.gate_commit, 'gateSha256': sha256(__file__),

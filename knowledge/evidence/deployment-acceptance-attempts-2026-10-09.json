@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "kind": "deployment-acceptance-attempt-history",
+  "applicationVersion": "0.16.0",
+  "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+  "attempts": [
+    {
+      "toolkitCommit": "f248b1f6f751fbfe5746b1a53c2554de58545cfd",
+      "runId": 37974469974,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37974469974",
+      "result": "failed",
+      "sourceTests": {"passed": 80, "failed": 0, "skipped": 0},
+      "bundle": {"bytes": 126484004, "sha256": "c938da7c2d707a45526e98d9d05520f701dc3449b0124687ddd0afe5ff78fb48", "manifestSha256": "269f495b33010cc293c6759517698be4ac68e41295911b9069863ee02c3efe61"},
+      "windows": [
+        {"pathCase": "ordinary", "jobId": 113969235536, "artifactId": 11636629862, "artifactSha256": "9ffc431ad04fc84ab30b126a2c770746cc859b2b2c4b9149682aa6889eb7d02c"},
+        {"pathCase": "path with spaces", "jobId": 113969235433, "artifactId": 11638288411, "artifactSha256": "b33d7d47dedc3d5e43d96de58ab231fb8b86731e07223380ddc268f613c4da13"}
+      ],
+      "passedScopeBothPaths": ["complete extracted bundle verification", "actual packaged verify.cmd", "manual report initialisation with all checks untested", "274-file external test-copy preparation"],
+      "failure": "Signature collector returned nonzero and retained only a generic unavailable reason. Root cause was not established by this attempt.",
+      "skippedBothPaths": ["native updater and desktop gate", "curated workflow/results regression", "final immutable-bundle recheck"],
+      "manualAcceptance": "not-tested",
+      "followup": "Add bounded collector stage/type/line diagnostics and run independent Windows scopes even when another scope fails. Do not bypass security policy or infer a native pass."
+    }
+  ]
+}

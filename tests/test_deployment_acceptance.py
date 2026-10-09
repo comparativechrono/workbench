@@ -305,6 +305,28 @@ class AcceptanceContracts(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'four identified'):
             acceptance.verify_bundle(self.root)
 
+    def test_collector_diagnostic_retains_only_stage_type_and_line(self):
+        value = {'schemaVersion': 1, 'stage': 'root-check',
+                 'errorType': 'System.Management.Automation.MethodException', 'scriptLine': 50}
+        raw = ('Unexpected private path C:\\Users\\private\\work\nNW_SIGNATURE_DIAGNOSTIC ' + json.dumps(value)).encode()
+        result = acceptance.collector_diagnostic(raw, 2)
+        self.assertEqual(result, {'stage': 'root-check', 'errorType': value['errorType'],
+                                  'scriptLine': 50, 'exitCode': 2})
+        self.assertNotIn('private', json.dumps(result))
+
+    def test_collector_diagnostic_rejects_raw_paths_extra_fields_and_unbounded_output(self):
+        good = {'schemaVersion': 1, 'stage': 'root-check',
+                'errorType': 'System.Management.Automation.MethodException', 'scriptLine': 50}
+        bad = [dict(good, message='C:\\Users\\private'), dict(good, errorType='C:\\Users\\private'),
+               dict(good, stage='C:\\Users\\private'), dict(good, scriptLine=-1)]
+        for value in bad:
+            with self.subTest(value=value):
+                result = acceptance.collector_diagnostic(('NW_SIGNATURE_DIAGNOSTIC ' + json.dumps(value)).encode(), 2)
+                self.assertEqual(result['errorType'], 'NoStructuredDiagnostic')
+                self.assertNotIn('private', json.dumps(result))
+        self.assertEqual(acceptance.collector_diagnostic(b'x' * 4097, 1)['stage'], 'collector-launch')
+        self.assertEqual(acceptance.collector_diagnostic(b'', None, 'TimeoutExpired')['errorType'], 'TimeoutExpired')
+
 
 if __name__ == '__main__':
     unittest.main()

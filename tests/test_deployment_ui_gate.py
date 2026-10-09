@@ -4,6 +4,7 @@ import hashlib
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 import zipfile
 
 SPEC = importlib.util.spec_from_file_location('deployment_ui_gate',
@@ -77,6 +78,41 @@ class DeploymentUIGateEvidenceTests(unittest.TestCase):
                     {'user-data/saved.json': 'unchanged'}]:
             with self.assertRaisesRegex(AssertionError, 'changed existing files'):
                 gate.verify_preserved(before, bad)
+
+    def test_cli_rejects_input_overlap_before_creating_a_report_or_running_windows(self):
+        bundle = self.root / 'immutable-kit'
+        bundle.mkdir()
+        sentinel = bundle / 'retained.txt'
+        sentinel.write_bytes(b'immutable')
+        app, updater, work = self.root / 'app-copy', bundle / 'updater', self.root / 'work'
+        archive = self.root / 'starter.zip'
+        archive.write_bytes(b'published-archive-sentinel')
+        defaults = {'app-root': app, 'baseline-archive': self.root / 'baseline.zip',
+                    'update-root': updater, 'starter-archive': archive,
+                    'update-archive': self.root / 'update.zip', 'work': work,
+                    'report': self.root / 'evidence' / 'report.json', 'bundle-root': bundle,
+                    'source-commit': gate.SOURCE_COMMIT, 'gate-commit': 'a' * 40}
+        cases = [
+            {'report': bundle / 'new-evidence' / 'report.json'},
+            {'work': bundle / 'new-work'},
+            {'app-root': bundle / 'native-workbench'},
+            {'report': app / 'new-evidence' / 'report.json'},
+            {'report': updater / 'new-evidence' / 'report.json'},
+            {'report': archive},
+            {'report': work / 'new-evidence' / 'report.json'},
+        ]
+        before = gate.tree_hashes(self.root)
+        for changes in cases:
+            values = dict(defaults, **changes)
+            argv = ['gate.py'] + [part for name, value in values.items()
+                                  for part in ('--' + name, str(value))]
+            with self.subTest(changes=changes), patch('sys.argv', argv), patch.object(gate, 'run') as run:
+                with self.assertRaises(AssertionError):
+                    gate.main()
+                run.assert_not_called()
+                self.assertEqual(gate.tree_hashes(self.root), before)
+                self.assertEqual(sorted(path.relative_to(self.root).as_posix()
+                                        for path in self.root.rglob('*') if path.is_dir()), ['immutable-kit'])
 
 
 if __name__ == '__main__':
