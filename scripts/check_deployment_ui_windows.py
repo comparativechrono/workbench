@@ -396,6 +396,37 @@ def desktop_scenarios(root, evidence, report, label):
     keys = Keyboard(ui)
     try:
         ui.wait(label + ' desktop ready', lambda: ui.user.IsWindowEnabled(ui.child(410)) and ui.library().tools())
+        setup_window = lambda: next((h for h in ui.windows() if ui.label(h) == 'Tool setup · Native Workbench'), None)
+        # A genuinely fresh installation normally offers setup above the main
+        # window. Its normal Starter/Use Workbench controls must be exercised
+        # before attempting to interact with the obscured library beneath it.
+        if label == 'fresh':
+            ui.wait('fresh installation offers its native tool setup', setup_window)
+        else:
+            ui.wait('upgraded desktop startup requests complete', lambda: ui.user.IsWindowEnabled(ui.child(417)))
+        setup = setup_window()
+        report.setdefault('startupSetup', {})[label] = {'observed': bool(setup)}
+        if setup:
+            pack_snapshot = tree_hashes(root / 'packs')
+            starter = unique_button(ui, setup, 'Starter')
+            left, top, right, bottom = ui.bounds(starter)
+            ui.click_at((left + right) // 2, (top + bottom) // 2, expected=starter)
+            ui.wait('Starter radio visibly selected', lambda: ui.send(starter, 0x00F0) == 1)  # BM_GETCHECK.
+            capture(ui, report, label + '-first-open-starter.bmp', setup)
+            use = unique_button(ui, setup, 'Use Workbench')
+            left, top, right, bottom = ui.bounds(use)
+            ui.click_at((left + right) // 2, (top + bottom) // 2, expected=use)
+            state_path = root / 'user-data/tool-setup.json'
+            ui.wait('Use Workbench closes setup and records dismissal', lambda:
+                    not setup_window() and state_path.is_file() and read_json(state_path)['dismissed'])
+            state = read_json(state_path)
+            require(not state['queue'] and not state['operation']['active'] and
+                    state['operation']['status'] == 'idle' and tree_hashes(root / 'packs') == pack_snapshot,
+                    'Continuing from first-open setup queued work or changed installed packs.')
+            report['startupSetup'][label].update(starterRadioSelected=True, dismissed=True,
+                                                queuedInstalls=0, installedPackFilesUnchanged=len(pack_snapshot))
+            passed(report, label + '-first-open-setup', label + ': actual first-open setup accepts the Starter radio and Use Workbench, with no queued installs or changed installed pack files.')
+        ui.wait(label + ' unobscured desktop ready', lambda: ui.user.IsWindowEnabled(ui.child(417)))
         search = ui.child(102)
         left, top, right, bottom = ui.bounds(search)
         ui.click_at((left + right) // 2, (top + bottom) // 2, expected=search)
@@ -427,8 +458,16 @@ def desktop_scenarios(root, evidence, report, label):
                         bounds[0] <= rect[0] < rect[2] <= bounds[2] and bounds[1] <= rect[1] < rect[3] <= bounds[3],
                         'Fixed library/navigation control lies outside resized desktop: ' + str(identity))
                 measured.append({'id': identity, 'bounds': rect})
-            layouts.append({'requestedSize': [width, height], 'windowBounds': bounds, 'controls': measured})
+            area = ui.work_area()
+            layouts.append({'requestedSize': [width, height], 'windowBounds': bounds, 'controls': measured,
+                            'workArea': area, 'horizontalClipping': bounds[0] < area[0] or bounds[2] > area[2]})
             capture(ui, report, label + '-resize-%dx%d.bmp' % (width, height))
+        if any(row['horizontalClipping'] for row in layouts):
+            limitation = ('The observed desktop is narrower than the published application minimum width; '
+                          'the window edge is horizontally clipped. Requested and actual sizes are recorded; '
+                          'these checks do not establish acceptance on that narrower display.')
+            if limitation not in report['limits']:
+                report['limits'].append(limitation)
         passed(report, label + '-resize', label + ': library and fixed navigation remain visible within both observed resized windows.', layouts=layouts)
         ui.click_button(417)
         title = 'Recorded results · Native Workbench'
@@ -586,7 +625,7 @@ def main():
     report = {'schema': 1, 'kind': 'native-deployment-ui', 'success': False,
               'sourceCommit': args.source_commit, 'gateCommit': args.gate_commit, 'gateSha256': sha256(__file__),
               'platform': platform.platform(), 'startedUtc': utc(), 'archives': {}, 'checks': [],
-              'scenarios': [], 'captures': [], 'skips': [], 'limits': LIMITS,
+              'scenarios': [], 'captures': [], 'skips': [], 'limits': list(LIMITS),
               'nativeWindowsExecuted': False, 'nativeGUILaunched': False, 'nativeGUIValidated': False}
     try:
         run(args, report)
@@ -606,7 +645,7 @@ def main():
                        'toolkitCommit': args.gate_commit, 'bundleManifestSha256': args.bundle_manifest_sha256,
                        'observedAt': report['finishedUtc'], 'checks': [
                            {key: row[key] for key in ('id', 'status', 'observedAt', 'note')} for row in report['scenarios']],
-                       'limits': LIMITS}
+                       'limits': report['limits']}
             write_json(args.report.parent / 'native-deployment-gate.json', summary)
     print(json.dumps({'success': report['success'], 'passed': report['passed'], 'report': str(args.report)}), flush=True)
     return 0 if report['success'] else 1

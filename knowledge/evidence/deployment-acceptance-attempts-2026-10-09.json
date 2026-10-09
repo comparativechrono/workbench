@@ -149,6 +149,56 @@
       },
       "followup": "Use the unique observed enabled visible OK button within the exact owned message window, preserving actual pointer hit and foreground checks. Repeat both path gates.",
       "manualAcceptance": "not-tested"
+    },
+    {
+      "toolkitCommit": "60959a2af7f3fbf4f6dfa1db37442a390d11d309",
+      "runId": 37976012013,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37976012013",
+      "result": "failed",
+      "sourceTests": {
+        "passed": 86,
+        "failed": 0,
+        "skipped": 0
+      },
+      "bundle": {
+        "sha256": "b11436762fb756781a2758d0bd834a9b2c2b6b99b3b24ef8e7b24f02036ced1b",
+        "manifestSha256": "ca02589c6efd0bba5d43af9896754f3ba56358b32137b893ee00e8508fd4f101"
+      },
+      "windows": [
+        {
+          "pathCase": "ordinary",
+          "jobId": 113974530338,
+          "artifactId": 11638811733,
+          "artifactSha256": "57924e55041323975a942e93d251ea7de43ea0937e6aafd3f57a18cea561d5f9"
+        },
+        {
+          "pathCase": "path with spaces",
+          "jobId": 113974530437,
+          "artifactId": 11638382069,
+          "artifactSha256": "b58f1cfd1c9cd46335afeb44474c2da7cfab2281c44d8f76defe0b95323dc272"
+        }
+      ],
+      "passedScopeBothPaths": [
+        "kit, launcher and external copy preparation",
+        "seven actual updater/input/fixture scopes including cancel, invalid selection, install, repeat and upgraded fixture readback",
+        "87 exact core files and 163 preserved fixture files; only allowed new one-NUL session lock",
+        "11 curated workflow/results checks",
+        "72 Authenticode observations (60 Valid, 12 NotSigned)",
+        "final immutable-kit and manual-untested checks"
+      ],
+      "nativeFailure": {
+        "checksCompleted": 7,
+        "captures": 10,
+        "reason": "The expected first-launch Tool Setup dialog obscured the fresh desktop search. The pointer visibility guard correctly refused the click; keyboard/resize/results desktop scopes were not reached."
+      },
+      "followup": "Select the offline Starter through the observed first-launch dialog, activate Use Workbench and wait for the dialog to close before desktop interactions. Retain physical hit guards and actual desktop bounds.",
+      "manualAcceptance": "not-tested"
     }
-  ]
+  ],
+  "localPreviewExcluded": {
+    "toolkitCommit": "de0fca66b774b2882beee8c9b2e5104f36a400d3",
+    "sha256": "59a30bdc54102a7eb556495dc8bf6985775fee4a2e2e1272648af020239a5a26",
+    "status": "rejected-by-acceptance-helper",
+    "reason": "Uncommitted knowledge edits made toolkitDirty true despite included toolkit files matching Git. This local preview is not the clean CI artifact and is excluded from tester evidence."
+  }
 }
