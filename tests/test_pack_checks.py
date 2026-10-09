@@ -41,7 +41,7 @@ class CopyBackend:
 class PackChecksTests(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory(prefix='pack-check-tests-')
-        self.root = Path(self.temporary.name)
+        self.root = Path(self.temporary.name).resolve()
         self.pack = self.root / 'packs' / 'fixture-1.0.0'
         self.pack.mkdir(parents=True)
         (self.pack / 'unused.exe').write_bytes(b'declared integrity fixture; never executed')
