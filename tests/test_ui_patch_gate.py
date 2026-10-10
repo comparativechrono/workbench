@@ -14,6 +14,23 @@ SPEC.loader.exec_module(gate)
 
 
 class UIPatchGateTests(unittest.TestCase):
+    def test_resize_tool_readiness_requires_visible_owned_actual_hit(self):
+        state = {'hit': 7, 'process': 12, 'visible': True, 'enabled': True}
+        def owner(handle, output):
+            output._obj.value = state['process']
+        ui = SimpleNamespace(process=SimpleNamespace(pid=12), work_area=lambda: [0, 0, 1024, 728],
+            user=SimpleNamespace(WindowFromPoint=lambda point: state['hit'],
+                GetWindowThreadProcessId=owner, IsWindowVisible=lambda h: state['visible'],
+                IsWindowEnabled=lambda h: state['enabled'], IsChild=lambda parent, child: False))
+        self.assertTrue(gate.resize_tool_pointer_ready(ui, 7, [97, 238]))
+        for key, value in [('hit', 5), ('process', 99), ('visible', False), ('enabled', False)]:
+            previous = state[key]
+            state[key] = value
+            with self.subTest(key=key):
+                self.assertFalse(gate.resize_tool_pointer_ready(ui, 7, [97, 238]))
+            state[key] = previous
+        self.assertFalse(gate.resize_tool_pointer_ready(ui, 7, [1024, 238]))
+
     def test_resize_source_witness_requires_distinct_source_pixels(self):
         self.assertEqual(gate.resize_pixel_state(b'old', b'new', b'old'), 'source-geometry')
         self.assertEqual(gate.resize_pixel_state(b'new', b'new', b'old'), 'target')

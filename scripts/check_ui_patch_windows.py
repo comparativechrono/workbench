@@ -7,6 +7,7 @@ published deployment gate remains separate and unchanged. No policy changes.
 from __future__ import annotations
 import argparse
 import ctypes
+from ctypes import wintypes
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -195,20 +196,41 @@ def region_bytes(raw, canvas, rectangle):
     return visible_bytes(raw, spans)
 
 
-def resize_scenarios(ui, report, label, mode, *, expect_defect=False):
+def resize_tool_pointer_ready(ui, control, point):
+    """The catalogue can answer while its asynchronous tree refresh is hidden."""
+    x, y = point
+    hit = ui.user.WindowFromPoint(wintypes.POINT(x, y))
+    owner = wintypes.DWORD()
+    ui.user.GetWindowThreadProcessId(hit, ctypes.byref(owner))
+    left, top, right, bottom = ui.work_area()
+    return bool(ui.user.IsWindowVisible(control) and ui.user.IsWindowEnabled(control) and
+                left <= x < right and top <= y < bottom and owner.value == ui.process.pid and
+                (hit == control or ui.user.IsChild(control, hit)))
+
+
+def resize_scenarios(ui, report, label, mode, keys, *, expect_defect=False):
     """Actual shrink/grow, with passive references and no corrective repaint."""
     if mode == 'tool':
         # Use the same populated, nested native form in the old negative control
         # and both candidate installations; an empty form is a weaker oracle.
         ui.set_text(ui.child(102), 'Index a reference')
         ui.wait('one resize reference-index operation', lambda: len(ui.library().tools()) == 1)
+        stable_since = None
+        def ready():
+            nonlocal stable_since
+            available = resize_tool_pointer_ready(ui, ui.child(104), ui.library().first_tool_point())
+            stable_since = (stable_since or time.monotonic()) if available else None
+            return stable_since is not None and time.monotonic() - stable_since >= .1
+        ui.wait('resize operation row visible and hit-ready', ready, seconds=5)
         ui.click_at(*ui.library().first_tool_point(), expected=ui.child(104))
         ui.wait('populated resize tool form', lambda:
                 ui.user.IsWindowEnabled(ui.child(113)) and
                 any('Index a reference' in control['text'] for control in ui.controls(ui.child(118))))
         ui.set_text(ui.child(102), '')
         ui.wait('resize library filter cleared', lambda: not ui.label(ui.child(102)))
-        Keyboard(ui).key(0x09)  # Move the caret out of the edit before references.
+        # Reuse this desktop's keyboard driver: constructing another binds new
+        # ctypes structure types to its shared DLL and breaks later focus reads.
+        keys.key(0x09)  # Move the caret out of the edit before references.
     area = ui.work_area()
     require(area[2] - area[0] >= 1024 and area[3] - area[1] >= 728,
             'Resize regression requires the real 1024 by 728 work area.')
@@ -471,7 +493,7 @@ def desktop_scenarios(root, evidence, report, label):
             ui.click_button(button)
             ui.wait(mode + ' controls ready', lambda: ui.user.IsWindowEnabled(ui.child(417)) and
                     (mode != 'workflow' or ui.user.IsWindowVisible(ui.child(420))))
-            resize_scenarios(ui, report, label, mode)
+            resize_scenarios(ui, report, label, mode, keys)
             for width, height in [(960, 680), (1024, 728), (1280, 900)]:
                 ui.fit_window(width, height)
                 row = fixed_layout(ui, mode)
@@ -686,6 +708,7 @@ def run_resize_only(args, report):
     report['coreFilesVerified'] = verify_candidate_core(root, manifest)
     packs = tree_hashes(root / 'packs')
     ui = PatchUI(root, evidence)
+    keys = Keyboard(ui)
     report['nativeWindowsExecuted'] = report['nativeGUILaunched'] = True
     try:
         ui.wait('resize-control desktop ready', lambda:
@@ -699,7 +722,8 @@ def run_resize_only(args, report):
                 not setup_window() and ui.user.IsWindowEnabled(ui.child(417)))
         ui.click_button(410)
         ui.wait('resize-control Tools ready', lambda: ui.user.IsWindowEnabled(ui.child(417)))
-        resize_scenarios(ui, report, 'previous', 'tool', expect_defect=args.expect_known_resize_defect)
+        resize_scenarios(ui, report, 'previous', 'tool', keys,
+                         expect_defect=args.expect_known_resize_defect)
     finally:
         ui.close()
     verify_inventory(root, manifest['files'])

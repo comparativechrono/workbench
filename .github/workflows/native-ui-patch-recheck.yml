@@ -1,9 +1,16 @@
 name: Recheck frozen 0.16.1 tester feedback and native patch
 
 on:
-  # Historical frozen-archive recipe. A production change needs the candidate
-  # build and its complete native matrix, not a recheck of the old bytes.
-  # Before reuse, explicitly pin this recipe to the intended frozen candidate.
+  # Validator-only changes reuse these exact archives. Production and packaging
+  # changes fail the source guard and require a new complete candidate build.
+  push:
+    branches: [fix/native-ui-0.16.1]
+    paths:
+      - .github/workflows/native-ui-patch-recheck.yml
+      - scripts/check_ui_patch_windows.py
+      - scripts/check_tester_feedback_windows.py
+      - tests/test_ui_patch_gate.py
+      - tests/test_tester_feedback_gate.py
   workflow_dispatch:
 
 permissions:
@@ -15,9 +22,9 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  SOURCE_COMMIT: 73778e00461e2b83c07b9ea97df2b9c5d4b6317d
-  STARTER_SHA256: 1291f93b5ece3c4da34eb2f2e29fccc83b6d87ec5fb73abf28bfd9cc8f155b75
-  UPDATE_SHA256: 86dd3d9796099b366a9e01012acc50d00d501a1fdaab89b7119236b44db4b4d8
+  SOURCE_COMMIT: 51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e
+  STARTER_SHA256: 7fd59d5b021867991506e98ef94c5b239245030fb9da55d77accf8d8e2d43682
+  UPDATE_SHA256: 35bbd786043561ea40a1a12f941da8f370f26fc9df63cd2904dbee16a18bbda5
 
 jobs:
   validator:
@@ -49,10 +56,18 @@ jobs:
       - name: Retrieve the exact tester feedback candidate without rebuilding
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
-          name: ui-patch-candidate-73778e00461e2b83c07b9ea97df2b9c5d4b6317d
-          run-id: 37997370988
+          name: ui-patch-candidate-51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e
+          run-id: 38041029923
           github-token: ${{ github.token }}
           path: ${{ runner.temp }}/frozen-patch-candidate
+      - name: Retrieve the previously tested Starter for the resize negative control
+        if: matrix.folder == 'ordinary'
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: ui-patch-starter-73778e00461e2b83c07b9ea97df2b9c5d4b6317d
+          run-id: 37997370988
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/previous-resize-candidate
       - name: Verify unchanged production sources and frozen application identities
         id: prepare
         shell: pwsh
@@ -68,7 +83,7 @@ jobs:
           $source = Join-Path $candidate 'native-workbench-0.16.1-source.zip'
           if ((Get-FileHash $starter -Algorithm SHA256).Hash -ne $env:STARTER_SHA256) { throw 'Frozen Starter identity mismatch.' }
           if ((Get-FileHash $updater -Algorithm SHA256).Hash -ne $env:UPDATE_SHA256) { throw 'Frozen updater identity mismatch.' }
-          if ((Get-FileHash $source -Algorithm SHA256).Hash -ne '0accfb48b8b7b3193b4c72e76c45c404db7979d877ce0805d2687d5a849fe1f1') { throw 'Frozen source companion identity mismatch.' }
+          if ((Get-FileHash $source -Algorithm SHA256).Hash -ne '92daf78ad2bfc69d221c7274c69d7918e963dfe6e41405ee36ddf768c8f2e387') { throw 'Frozen source companion identity mismatch.' }
           $provenance = Get-Content (Join-Path $candidate 'BUILD-PROVENANCE.json') -Raw | ConvertFrom-Json
           if ($provenance.sourceCommit -ne $env:SOURCE_COMMIT -or $provenance.appVersion -ne '0.16.1') { throw 'Frozen build provenance mismatch.' }
           $baseline = Join-Path $env:RUNNER_TEMP 'baseline-0.16.0.zip'
@@ -81,12 +96,25 @@ jobs:
           $evidence = Join-Path $env:RUNNER_TEMP 'patch-recheck-evidence'
           New-Item -ItemType Directory -Path $evidence | Out-Null
           @{ schema = 1; kind = 'frozen-ui-patch-recheck-inputs'; sourceCommit = $env:SOURCE_COMMIT;
-             gateCommit = $env:GITHUB_SHA; candidateRun = 37997370988; appVersion = '0.16.1';
+             gateCommit = $env:GITHUB_SHA; candidateRun = 38041029923; appVersion = '0.16.1';
              starterSha256 = $env:STARTER_SHA256; updateSha256 = $env:UPDATE_SHA256;
-             sourceSha256 = '0accfb48b8b7b3193b4c72e76c45c404db7979d877ce0805d2687d5a849fe1f1';
+             sourceSha256 = '92daf78ad2bfc69d221c7274c69d7918e963dfe6e41405ee36ddf768c8f2e387';
              rebuilt = $false; installationCase = $env:CASE_FOLDER;
              scope = 'Frozen archive and source identities only; native interaction and displayed-frame observations are separate.' } |
             ConvertTo-Json -Depth 4 | Set-Content (Join-Path $evidence 'frozen-inputs.json')
+      - name: Require reproduction of the previous Tools resize defect
+        if: always() && !cancelled() && steps.prepare.outcome == 'success' && matrix.folder == 'ordinary'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $oldArchive = Join-Path $env:RUNNER_TEMP 'previous-resize-candidate/native-workbench-0.16.1-starter-windows.zip'
+          $oldSha = '1291f93b5ece3c4da34eb2f2e29fccc83b6d87ec5fb73abf28bfd9cc8f155b75'
+          if ((Get-FileHash $oldArchive -Algorithm SHA256).Hash -ne $oldSha) { throw 'Resize negative-control archive identity mismatch.' }
+          $oldRoot = Join-Path $env:RUNNER_TEMP 'resize-negative-control'
+          Expand-Archive $oldArchive $oldRoot
+          $app = Join-Path $oldRoot 'native-workbench'
+          & (Join-Path $app 'runtime/python/python.exe') -I -B scripts/check_ui_patch_windows.py --resize-only --expect-known-resize-defect --app-root $app --starter-archive $oldArchive --starter-sha256 $oldSha --source-commit '73778e00461e2b83c07b9ea97df2b9c5d4b6317d' --gate-commit $env:GITHUB_SHA --report "$env:RUNNER_TEMP/patch-recheck-evidence/resize-negative/native-resize-negative.json"
+          if ($LASTEXITCODE -ne 0) { throw 'Previous resize defect was not established; retain this result and do not claim the before/after comparison passed.' }
       - name: Observe exact native updater, keyboard focus, layout and passive displayed frames
         if: always() && !cancelled() && steps.prepare.outcome == 'success'
         shell: pwsh
