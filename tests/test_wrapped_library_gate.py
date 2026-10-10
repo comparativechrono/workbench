@@ -131,6 +131,16 @@ class WrappedLibraryGateTests(unittest.TestCase):
         tree.rect = lambda item: [120, -180, 800, 600]
         tree.send = lambda *args: 1
         self.assertEqual(tree.point(1), (160, 250))
+        # A native coarse scrollbar can live beyond the clipping parent. Its
+        # absence may widen the child's client, never the visible text column.
+        def wider_client(hwnd, pointer):
+            client(hwnd, pointer)
+            pointer._obj.right = 197 if hwnd == 4 else 180
+            return True
+        tree.user.GetClientRect = wider_client
+        self.assertEqual(tree.client_bounds(), [100, -200, 297, 700])
+        self.assertEqual(tree.visible_bounds(), [100, 50, 280, 450])
+        self.assertEqual(tree.point(1), (160, 250))
 
     def test_first_visible_uses_real_clipped_rows_without_scroll_repair(self):
         tree = gate.NativeTree.__new__(gate.NativeTree)

@@ -1,12 +1,8 @@
 name: Diagnose frozen library viewport and recheck focused navigation
 
 on:
-  push:
-    branches: [fix/native-ui-0.16.1]
-    paths:
-      - '.github/workflows/native-library-viewport-probe.yml'
-      - 'scripts/check_library_viewport_probe_windows.py'
-      - 'scripts/check_wrapped_library_windows.py'
+  # Historical frozen-archive diagnostic. New application changes use the
+  # full candidate workflow; keep this exact source/archive pairing intact.
   workflow_dispatch:
 
 permissions:

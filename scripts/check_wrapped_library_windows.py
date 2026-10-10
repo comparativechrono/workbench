@@ -359,7 +359,8 @@ def check_row(ui, tree, item, reference, title, description, report, name):
     client, row = tree.visible_bounds(), tree.rect(item, False)
     scale = ui.user.GetDpiForWindow(ui.main) / 96
     px = lambda n: round(n * scale)
-    # Contract: reserve one native scrollbar width, whether already present or not.
+    # Contract: draw within the visible column, even if the native child is
+    # wider so its own coarse scrollbar is clipped outside the pixel viewport.
     style = ui.user.GetWindowLongPtrW(tree.hwnd, -16)
     indent = ui.send(tree.hwnd, 0x1106)  # TVM_GETINDENT.
     drawing_client = tree.client_bounds()
@@ -369,7 +370,7 @@ def check_row(ui, tree, item, reference, title, description, report, name):
     # A pixel viewport's client already reserves its own scrollbar. The
     # historical direct TreeView reserves space while its scrollbar is hidden.
     reserve = 0 if tree.viewport() != tree.hwnd or style & 0x00200000 else scrollbar
-    width = drawing_client[2] - text_left - px(6) - reserve
+    width = client[2] - text_left - px(6) - reserve
     require(width >= 50, 'Text column is too narrow to validate.')
     title_lines, description_lines = reference.lines(title, width, 700), reference.lines(description, width, 400)
     needed = px(6) + len(title_lines) * reference.line_heights[700] + (px(3) if description else 0) + len(description_lines) * reference.line_heights[400] + px(6)

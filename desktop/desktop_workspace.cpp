@@ -3631,7 +3631,7 @@ class Workspace {
     tasks = make(WC_TREEVIEWW, L"Tool library",
                  WS_TABSTOP | TVS_HASBUTTONS | TVS_LINESATROOT |
                      TVS_SHOWSELALWAYS | TVS_FULLROWSELECT | TVS_NOHSCROLL |
-                     TVS_NOTOOLTIPS | TVS_NONEVENHEIGHT | TVS_NOSCROLL,
+                     TVS_NOTOOLTIPS | TVS_NONEVENHEIGHT,
                  TASKS, libraryViewport);
     SendMessageW(tasks, CCM_SETUNICODEFORMAT, TRUE, 0);
     TreeView_SetExtendedStyle(tasks, TVS_EX_DOUBLEBUFFER, TVS_EX_DOUBLEBUFFER);
@@ -3903,9 +3903,10 @@ class Workspace {
   }
   int library_text_right() const {
     RECT client{};
-    GetClientRect(tasks, &client);
+    GetClientRect(libraryViewport, &client);
     // The viewport reserves its scrollbar even with collapsed categories;
-    // the native child itself has no scrollbars or extra horizontal inset.
+    // text uses that exact visible width. The child's own native scrollbar
+    // remains outside this clipping viewport so coarse item scrolling works.
     return client.right - px(6);
   }
   const LibraryPosition *library_position_for(HTREEITEM item) const {
@@ -3959,8 +3960,12 @@ class Workspace {
     // child window supplies enough room for the largest row, while the outer
     // viewport scrolls pixels through that row. Native item/hit rectangles
     // remain real screen geometry: no translated painting or fake messages.
+    // TVS_NOSCROLL also disables TVGN_FIRSTVISIBLE on native Windows. Keep
+    // native coarse scrolling enabled, but put its scrollbar beyond the
+    // parent's clip. The extra width remains bounded and never affects wrap.
+    const int childWidth = viewWidth + GetSystemMetricsForDpi(SM_CXVSCROLL, dpi);
     const int childHeight = viewHeight + libraryLargestRow;
-    SetWindowPos(tasks, nullptr, 0, 0, viewWidth, childHeight,
+    SetWindowPos(tasks, nullptr, 0, 0, childWidth, childHeight,
                  SWP_NOZORDER | SWP_NOACTIVATE | SWP_NOREDRAW | SWP_NOCOPYBITS);
     int childTop = 0;
     if (const auto anchor = library_anchor()) {
@@ -3970,7 +3975,7 @@ class Workspace {
       if (position && TreeView_GetItemRect(tasks, anchor, &row, FALSE))
         childTop = -(row.top + libraryScroll - position->top);
     }
-    SetWindowPos(tasks, nullptr, 0, childTop, viewWidth, childHeight,
+    SetWindowPos(tasks, nullptr, 0, childTop, childWidth, childHeight,
                  SWP_NOZORDER | SWP_NOACTIVATE | SWP_NOREDRAW | SWP_NOCOPYBITS);
     if (visible) SendMessageW(tasks, WM_SETREDRAW, TRUE, 0);
     libraryPlacing = false;
@@ -4118,7 +4123,7 @@ class Workspace {
     if (!row) return CDRF_DODEFAULT;
     RECT bounds{}, client{};
     if (!TreeView_GetItemRect(tasks, item, &bounds, FALSE)) return CDRF_SKIPDEFAULT;
-    GetClientRect(tasks, &client);
+    GetClientRect(libraryViewport, &client);
     bounds.left = 0; bounds.right = client.right;
     const bool selected_ = TreeView_GetSelection(tasks) == item;
     const bool focused = GetFocus() == tasks;
