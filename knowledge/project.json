@@ -2098,33 +2098,104 @@
     "base_commit": "f74d90229be6a78d6ad0c0076c54c04bb7e7cae2",
     "pull_request": "https://github.com/comparativechrono/workbench/pull/15",
     "pull_request_state": "draft",
-    "status": "implementation and exact-candidate validation pending",
+    "status": "implemented; bounded concurrent-resize comparison supports prevention of observed mixed layouts; strict single-transition negative control remains unreproduced",
     "authorization": "Fix the remaining Tools-window resize defect; unpublished review candidate only.",
     "release_authorized": false,
     "released": false,
     "published_baseline": "0.16.0",
     "published_assets_changed": false,
-    "application_source_commit": null,
-    "archives": [],
+    "application_source_commit": "51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e",
+    "archives": [
+      {
+        "file": "native-workbench-0.16.1-source.zip",
+        "bytes": 48380545,
+        "sha256": "92daf78ad2bfc69d221c7274c69d7918e963dfe6e41405ee36ddf768c8f2e387"
+      },
+      {
+        "file": "native-workbench-0.16.1-starter-windows.zip",
+        "bytes": 17879852,
+        "sha256": "7fd59d5b021867991506e98ef94c5b239245030fb9da55d77accf8d8e2d43682"
+      },
+      {
+        "file": "native-workbench-0.16.1-update-from-0.16.0.zip",
+        "bytes": 13042517,
+        "sha256": "35bbd786043561ea40a1a12f941da8f370f26fc9df63cd2904dbee16a18bbda5"
+      }
+    ],
     "handover": "resize-redraw-0.16.1-handover.md",
     "prior_handover": "tester-feedback-0.16.1-handover.md",
     "prior_application_source_commit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
     "prior_starter_sha256": "1291f93b5ece3c4da34eb2f2e29fccc83b6d87ec5fb73abf28bfd9cc8f155b75",
     "prior_observation": "Immediate Tools resize frames displayed the previous layout/right-bottom clipping although native bounds were already correct; the visible image was corrected by the first later sample about 0.30-0.32 seconds, not an exact duration measurement.",
     "verification_progress": {
-      "source_tests": "pending",
-      "strict_native_builds": "pending",
-      "archive_source_audit": "pending",
-      "passive_old_new_resize_comparison": "pending: old package on fresh ordinary path; corrected package on fresh/upgraded ordinary/spaced paths",
-      "existing_native_regressions": "pending on new archives",
-      "screenshot_review": "pending"
+      "source_tests": {
+        "passed": 235,
+        "suites": 18,
+        "configured_skips": 0,
+        "validator_tests_included": true
+      },
+      "strict_native_builds": 3,
+      "cpp_json": "passed",
+      "archive_source_audit": "passed",
+      "existing_native_regressions_per_path": 81,
+      "patch_checks_per_path": 23,
+      "feedback_checks_per_path": 13,
+      "unique_native_checks_per_path": 117,
+      "native_count_scope": "Completed scopes across the original run and unchanged-archive recheck; repetitions add no unique coverage, and neither overall workflow is claimed successful.",
+      "candidate_resize": "All sampled post-DwmFlush frames matched target in Tools/Workflow, fresh/upgraded, ordinary/spaced paths; pre-wait transients remain.",
+      "old_negative_control": "Six transitions and 88 frames on fresh ordinary path; five immediate pre-wait non-target frames, no post-wait stale/non-target frames. Strict reproduction requirement failed.",
+      "bounded_additional_diagnostic": {
+        "status": "completed observation; bounded mixed-layout difference confirmed visually",
+        "old_frames": 46,
+        "old_mixed_layout_frames": 14,
+        "corrected_frames": 64,
+        "corrected_mixed_layout_frames": 0,
+        "bursts_per_package": 3,
+        "resizes_per_burst": 12,
+        "native_gui_validated": false,
+        "performance_comparison": false
+      },
+      "screenshot_review": "194 recheck patch captures verified through 69 unique views and 125 hash duplicates; settled layout readable, 24 immediate transitional captures retained. Separate final concurrent-resize visual review confirms old mixed layouts and complete corrected endpoints.",
+      "final_validator_source_tests": {
+        "passed": 31,
+        "patch": 16,
+        "feedback": 15,
+        "overlaps_source_and_recheck_totals": true
+      },
+      "final_repeated_observations": {
+        "resize_frames": 697,
+        "resize_transitions": 48,
+        "post_wait_frames": 649,
+        "post_wait_non_target_frames": 0,
+        "immediate_non_target_frames": 21,
+        "feedback_frames": 2610,
+        "feedback_black_blocks": 0,
+        "feedback_unexpected_stable_changes": 0,
+        "scope": "Final run only; repeats do not add unique coverage."
+      }
     },
     "known_limits": [
-      "Previous passes apply only to previous bytes.",
-      "Finite sampling cannot establish zero flicker.",
+      "Strict single-transition old post-compositor stale layout was not reproduced, so the overall workflow remains failed. The bounded concurrent-resize difference does not quantify the original lag or prove universal behavior.",
+      "Pre-wait frames may retain previous geometry or newly exposed black bands. Finite sampling cannot establish zero flicker.",
+      "Observed hosted display is 96 DPI at 960x680 and 1024x728; a 1280x900 request was clamped.",
       "Representative-PC/high-DPI/multiple-monitor/physical-trackpad/managed-machine acceptance remains outstanding.",
-      "Signing/IT approval, scientific Linux CWL and SDK/build recovery remain separate; benchmarking is managed separately."
+      "Signing/IT approval, scientific Linux CWL and SDK/build recovery remain separate; benchmarking is managed separately.",
+      "Actions downloads expire 2026-11-09; original-report hashes do not preserve raw content access."
     ],
-    "next_action": "Complete and freeze the bounded resize fix, build matching archives, validate them and update the draft review without merging or releasing."
+    "next_action": "Review the exact unpublished candidate and retain the strict negative-control failure, bounded concurrent-resize evidence and outstanding representative-machine acceptance. No merge or release.",
+    "source_build_run": 38041029923,
+    "validator_commit": "20514d31650f71d4ab99dd9450a747823a995667",
+    "validator_run": 38042425723,
+    "validator_run_status": "failed: unchanged strict old negative-control requirement not reproduced; candidate gates passed",
+    "evidence": {
+      "source": "evidence/resize-redraw-0.16.1-source-validation-2026-10-10.json",
+      "archives": "evidence/resize-redraw-0.16.1-archive-audit-2026-10-10.json",
+      "attempt1": "evidence/resize-redraw-0.16.1-attempt1-2026-10-10.json",
+      "attempt1_visual": "evidence/resize-redraw-0.16.1-attempt1-visual-review-2026-10-10.json",
+      "recheck": "evidence/resize-redraw-0.16.1-recheck-2026-10-10.json",
+      "recheck_visual": "evidence/resize-redraw-0.16.1-recheck-visual-review-2026-10-10.json",
+      "observation": "evidence/resize-redraw-0.16.1-observation-2026-10-10.json",
+      "observation_visual": "evidence/resize-redraw-0.16.1-observation-visual-review-2026-10-10.json"
+    }
   }
 }

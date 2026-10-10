@@ -2,25 +2,43 @@
 
 ## Active development: Tools resize correction, 2026-10-10
 
-The owner requested a fix for the remaining visual defect while resizing Tools:
-controls can display their previous layout and clip the right/bottom edge even
-after their native bounds have changed. The [resize handover](resize-redraw-0.16.1-handover.md) owns
-this bounded follow-up. It starts at `93c0a6b1189781fb8df960b025a512ed73461240`
-on `fix/native-ui-0.16.1` in [draft PR #15](https://github.com/comparativechrono/workbench/pull/15),
-still based on `feature/deployment-acceptance` at
-`f74d90229be6a78d6ad0c0076c54c04bb7e7cae2`.
+Application source `51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e` implements the
+bounded correction in [draft PR #15](https://github.com/comparativechrono/workbench/pull/15)
+on `fix/native-ui-0.16.1`, based on `feature/deployment-acceptance` at
+`f74d90229be6a78d6ad0c0076c54c04bb7e7cae2`. The version remains unpublished
+**0.16.1**. Resizing now places the controls and their children without drawing
+intermediate layouts, then repaints the complete window. Minimize preserves the
+normal layout dimensions and panel scroll positions. Existing Run/category
+behavior, separate Methods, Samples editing and workflows remain in scope.
 
-The candidate remains unpublished **0.16.1**. Implementation and new validation
-are in progress; a new application-source identity and archive hashes are not
-yet recorded. Required evidence includes a passive old-package resize comparison on a fresh
-ordinary-path installation, then corrected-package captures on fresh and upgraded
-installations in ordinary and spaced paths, relevant source checks, existing
-native regressions, exact archive/source correspondence and screenshot review. The old observation had corrected itself by the first later
-sample at about 0.30–0.32 seconds; that interval is not an exact defect duration.
-Prior passes below remain evidence only for their named archives.
-No merge or release is part of this follow-up; published **0.16.0** is unchanged.
+The [resize handover](resize-redraw-0.16.1-handover.md) binds the new Starter,
+matching source and updater to **235 source checks in 18 suites**, three strict
+native builds and the independent archive/source audit. **117 distinct native
+checks per path** passed across the original build run and unchanged-archive
+recheck: 81 existing regressions, 23 patch/resize checks and 13 feedback checks.
+Repeated gates add no unique coverage; source totals include validator tests.
 
-## Active development: tester-feedback revision of unpublished 0.16.1
+Candidate passive samples after `DwmFlush` showed the target layout in Tools and
+Workflow modes, fresh and upgraded installations, ordinary and spaced paths.
+Pre-wait frames can still show the previous layout or newly exposed black bands.
+The strict old-package single-transition comparison also had no post-wait stale
+frames, so that negative-control requirement remains failed. A separate bounded
+comparison sampled three bursts of 12 concurrent resizes per package: the old
+package had **14 mixed-layout frames among 46 samples**; the corrected package
+had **zero among 64**. Independent screenshot review confirmed duplicated and
+shifted controls in old mixed frames, while retained corrected frames show whole
+endpoint layouts. This supports the narrow paint-ordering correction; unequal
+observation durations do not establish a speed improvement or universal behavior.
+The final workflow still fails the unchanged strict negative-control requirement.
+The earlier roughly 0.3-second observation remains an upper sampled interval,
+not an exact lag measurement. Finite frame samples cannot prove zero flicker.
+
+Published **0.16.0**, `main`, published assets and earlier historical evidence are
+unchanged. No merge or release is included. Representative-PC/high-DPI/multiple-
+monitor/physical-trackpad acceptance and the separately managed benchmarking,
+signing/IT, scientific Linux CWL and SDK work remain outstanding.
+
+## Previous tester-feedback candidate of unpublished 0.16.1
 
 Snapshot: **2026-10-09**. [Draft PR #15](https://github.com/comparativechrono/workbench/pull/15)
 continues on `fix/native-ui-0.16.1`, based on the unmerged deployment companion

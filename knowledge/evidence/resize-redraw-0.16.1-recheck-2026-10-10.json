@@ -1,0 +1,888 @@
+{
+  "schema": 1,
+  "kind": "focused native resize recheck receipt",
+  "status": "candidate checks passed; required old-package defect reproduction failed",
+  "workflowSuccess": false,
+  "differentialResizeFixProven": false,
+  "sourceCommit": "51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e",
+  "gateCommit": "6a4f2c37a98706b478af994e099e3a24c01ba0d7",
+  "run": 38041764557,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/38041764557",
+  "frozenCandidateRun": 38041029923,
+  "applicationRebuiltForRecheck": false,
+  "archives": [
+    {
+      "file": "native-workbench-0.16.1-source.zip",
+      "bytes": 48380545,
+      "sha256": "92daf78ad2bfc69d221c7274c69d7918e963dfe6e41405ee36ddf768c8f2e387"
+    },
+    {
+      "file": "native-workbench-0.16.1-starter-windows.zip",
+      "bytes": 17879852,
+      "sha256": "7fd59d5b021867991506e98ef94c5b239245030fb9da55d77accf8d8e2d43682"
+    },
+    {
+      "file": "native-workbench-0.16.1-update-from-0.16.0.zip",
+      "bytes": 13042517,
+      "sha256": "35bbd786043561ea40a1a12f941da8f370f26fc9df63cd2904dbee16a18bbda5"
+    }
+  ],
+  "installations": [
+    {
+      "installation": "ordinary",
+      "observedDpi": [
+        96
+      ],
+      "artifact": {
+        "id": 11665703419,
+        "bytes": 8998634,
+        "sha256": "34ed17d3056e9e6bc7d0273d9eb3e26a4e765cdad29414435cd723b188bf8d97",
+        "githubApiDigestMatched": true,
+        "zipCrc": "passed",
+        "expiresUtc": "2026-11-09T09:35:25Z",
+        "url": "https://github.com/comparativechrono/workbench/actions/runs/38041764557/artifacts/11665703419"
+      },
+      "candidateRecheck": {
+        "patch": {
+          "report": {
+            "file": "native-ui-patch.json",
+            "bytes": 353553,
+            "sha256": "909421cdfaea396bf3acf7dabf3e919be97bcae74dce345f4157c895bb458c42"
+          },
+          "passed": 23,
+          "failed": 0,
+          "blocked": 0,
+          "skips": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": true,
+          "gateSha256": "7458de380772051bcfba12140baf6e7299c2a7d39bdaa04a189394ea6c10f15e",
+          "scenarioIds": [
+            "candidate-input-identities",
+            "baseline-fixtures",
+            "updater-cancel",
+            "updater-invalid",
+            "updater-install",
+            "updater-repeat",
+            "upgraded-fixture-readback",
+            "fresh-startup-bounds",
+            "fresh-starter-setup",
+            "fresh-result-fixture",
+            "fresh-library-keyboard",
+            "fresh-tool-temporal-resize",
+            "fresh-workflow-temporal-resize",
+            "fresh-layout",
+            "fresh-results-empty",
+            "fresh-results-populated",
+            "upgraded-startup-bounds",
+            "upgraded-library-keyboard",
+            "upgraded-tool-temporal-resize",
+            "upgraded-workflow-temporal-resize",
+            "upgraded-layout",
+            "upgraded-results-empty",
+            "upgraded-results-populated"
+          ],
+          "temporalResize": [
+            {
+              "installation": "fresh",
+              "mode": "tool",
+              "transitions": 6,
+              "frames": 87,
+              "immediateFrames": 6,
+              "postCompositorFrames": 81,
+              "postCompositorSourceFrames": 0,
+              "postCompositorNonTargetFrames": 0,
+              "immediateNonTargetFrames": 5,
+              "allTransitionsSamplingComplete": true,
+              "allTransitionsReachedTarget": true,
+              "requestedSizes": [
+                [
+                  960,
+                  680
+                ],
+                [
+                  1024,
+                  728
+                ]
+              ],
+              "totalSeriesSeconds": 2.755544,
+              "maximumCaptureGapMs": 53.664,
+              "moveWindowMs": {
+                "minimum": 10.588,
+                "maximum": 10.943
+              },
+              "immediateCaptureStartMsAfterReturn": {
+                "minimum": 0.001,
+                "maximum": 0.003
+              },
+              "immediateCaptureEndMsAfterReturn": {
+                "minimum": 23.97,
+                "maximum": 39.669
+              },
+              "firstPostCompositorCaptureStartMsAfterReturn": {
+                "minimum": 37.463,
+                "maximum": 53.666
+              },
+              "firstPostCompositorCaptureEndMsAfterReturn": {
+                "minimum": 56.14,
+                "maximum": 72.888
+              }
+            },
+            {
+              "installation": "fresh",
+              "mode": "workflow",
+              "transitions": 6,
+              "frames": 86,
+              "immediateFrames": 6,
+              "postCompositorFrames": 80,
+              "postCompositorSourceFrames": 0,
+              "postCompositorNonTargetFrames": 0,
+              "immediateNonTargetFrames": 6,
+              "allTransitionsSamplingComplete": true,
+              "allTransitionsReachedTarget": true,
+              "requestedSizes": [
+                [
+                  960,
+                  680
+                ],
+                [
+                  1024,
+                  728
+                ]
+              ],
+              "totalSeriesSeconds": 2.838277,
+              "maximumCaptureGapMs": 93.939,
+              "moveWindowMs": {
+                "minimum": 15.636,
+                "maximum": 17.899
+              },
+              "immediateCaptureStartMsAfterReturn": {
+                "minimum": 0.001,
+                "maximum": 0.001
+              },
+              "immediateCaptureEndMsAfterReturn": {
+                "minimum": 18.717,
+                "maximum": 36.698
+              },
+              "firstPostCompositorCaptureStartMsAfterReturn": {
+                "minimum": 34.396,
+                "maximum": 50.418
+              },
+              "firstPostCompositorCaptureEndMsAfterReturn": {
+                "minimum": 52.572,
+                "maximum": 68.559
+              }
+            },
+            {
+              "installation": "upgraded",
+              "mode": "tool",
+              "transitions": 6,
+              "frames": 88,
+              "immediateFrames": 6,
+              "postCompositorFrames": 82,
+              "postCompositorSourceFrames": 0,
+              "postCompositorNonTargetFrames": 0,
+              "immediateNonTargetFrames": 4,
+              "allTransitionsSamplingComplete": true,
+              "allTransitionsReachedTarget": true,
+              "requestedSizes": [
+                [
+                  960,
+                  680
+                ],
+                [
+                  1024,
+                  728
+                ]
+              ],
+              "totalSeriesSeconds": 2.777109,
+              "maximumCaptureGapMs": 58.274,
+              "moveWindowMs": {
+                "minimum": 10.289,
+                "maximum": 11.38
+              },
+              "immediateCaptureStartMsAfterReturn": {
+                "minimum": 0.001,
+                "maximum": 0.001
+              },
+              "immediateCaptureEndMsAfterReturn": {
+                "minimum": 23.413,
+                "maximum": 43.885
+              },
+              "firstPostCompositorCaptureStartMsAfterReturn": {
+                "minimum": 37.399,
+                "maximum": 58.275
+              },
+              "firstPostCompositorCaptureEndMsAfterReturn": {
+                "minimum": 55.898,
+                "maximum": 76.566
+              }
+            },
+            {
+              "installation": "upgraded",
+              "mode": "workflow",
+              "transitions": 6,
+              "frames": 87,
+              "immediateFrames": 6,
+              "postCompositorFrames": 81,
+              "postCompositorSourceFrames": 0,
+              "postCompositorNonTargetFrames": 0,
+              "immediateNonTargetFrames": 3,
+              "allTransitionsSamplingComplete": true,
+              "allTransitionsReachedTarget": true,
+              "requestedSizes": [
+                [
+                  960,
+                  680
+                ],
+                [
+                  1024,
+                  728
+                ]
+              ],
+              "totalSeriesSeconds": 2.773161,
+              "maximumCaptureGapMs": 52.925,
+              "moveWindowMs": {
+                "minimum": 16.27,
+                "maximum": 17.883
+              },
+              "immediateCaptureStartMsAfterReturn": {
+                "minimum": 0.001,
+                "maximum": 0.002
+              },
+              "immediateCaptureEndMsAfterReturn": {
+                "minimum": 18.697,
+                "maximum": 39.323
+              },
+              "firstPostCompositorCaptureStartMsAfterReturn": {
+                "minimum": 33.185,
+                "maximum": 52.926
+              },
+              "firstPostCompositorCaptureEndMsAfterReturn": {
+                "minimum": 51.565,
+                "maximum": 81.844
+              }
+            }
+          ],
+          "passiveVisibleResizeSeries": 4,
+          "passiveVisibleResizeCaptureCount": 16
+        },
+        "feedback": {
+          "report": {
+            "file": "native-tester-feedback.json",
+            "bytes": 599242,
+            "sha256": "dfd206ffcf400fe9f5f7a67a4c31b2face7e90ae5090f5f7453b424becb55d0b"
+          },
+          "passed": 13,
+          "failed": 0,
+          "blocked": 0,
+          "skips": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": true,
+          "gateSha256": "dc63dd2a47ea2555fd0ceb47a96fcbafc9da915a2b188288e428bda8a0d1f751",
+          "scenarioIds": [
+            "samples-without-workflow",
+            "run-temporal-960",
+            "run-temporal-1024",
+            "starter-category-temporal-960",
+            "starter-category-temporal-1024",
+            "separate-methods",
+            "run-missing-input",
+            "samples-create-edit-save-reopen",
+            "samples-cancel-and-invalid-import",
+            "samples-example-preview",
+            "samples-example-native-science",
+            "overflow-anchor-temporal-960",
+            "overflow-anchor-temporal-1024"
+          ],
+          "temporalFeedback": [
+            {
+              "group": "run",
+              "series": 6,
+              "frames": 832,
+              "elapsedSeconds": 26.777921,
+              "maximumWithinSeriesCaptureGapMs": 62.758,
+              "blackBlockFrames": 0,
+              "unexpectedStableFrames": 0,
+              "allSeriesSamplingComplete": true
+            },
+            {
+              "group": "starterCategories",
+              "series": 12,
+              "frames": 247,
+              "elapsedSeconds": 9.896126,
+              "maximumWithinSeriesCaptureGapMs": 63.554,
+              "blackBlockFrames": 0,
+              "unexpectedStableFrames": 0,
+              "allSeriesSamplingComplete": true
+            },
+            {
+              "group": "overflowCategories",
+              "series": 23,
+              "frames": 495,
+              "elapsedSeconds": 18.86723,
+              "maximumWithinSeriesCaptureGapMs": 77.866,
+              "blackBlockFrames": 0,
+              "unexpectedStableFrames": 0,
+              "allSeriesSamplingComplete": true
+            }
+          ],
+          "archiveFilesVerifiedBefore": 277,
+          "archiveFilesVerifiedAfter": 277
+        }
+      },
+      "priorSameArchiveRegressions": [
+        {
+          "group": "batch",
+          "run": 38041029923,
+          "report": {
+            "file": "native-batch.json",
+            "bytes": 36092,
+            "sha256": "6c62cfb8391cbd94bc29d566587debfce453ea0d9b327ea1118d89c04f4aa399"
+          },
+          "passed": 11,
+          "failed": 0,
+          "skips": 0
+        },
+        {
+          "group": "readiness",
+          "run": 38041029923,
+          "report": {
+            "file": "native-readiness.json",
+            "bytes": 9034,
+            "sha256": "60040f03e32dfc158fa888b0f36fe38bedcdeff2bac59f579fdb002c9750d6e3"
+          },
+          "passed": 5,
+          "failed": 0,
+          "skips": 0
+        },
+        {
+          "group": "curated",
+          "run": 38041029923,
+          "report": {
+            "file": "native-curated.json",
+            "bytes": 14747,
+            "sha256": "18a53b91c648b039660afb5ace090992972e5cd8b5f3b85df0dd3ca34f0f1022"
+          },
+          "passed": 11,
+          "failed": 0,
+          "skips": 0
+        },
+        {
+          "group": "workspace",
+          "run": 38041029923,
+          "report": {
+            "file": "native-workspace.json",
+            "bytes": 24315,
+            "sha256": "b4c04e8dc7a6b16297260a835ce913a07426a111be288b986274ccd775a72316"
+          },
+          "passed": 32,
+          "failed": 0,
+          "skips": 0
+        },
+        {
+          "group": "reference-management",
+          "run": 38041029923,
+          "report": {
+            "file": "native-reference-management.json",
+            "bytes": 25813,
+            "sha256": "3b6620e1b71954232321040cf74753c6064403a3ea1db3e3e96b47a0c64c43dc"
+          },
+          "passed": 10,
+          "failed": 0,
+          "skips": 0
+        },
+        {
+          "group": "results",
+          "run": 38041029923,
+          "report": {
+            "file": "native-results.json",
+            "bytes": 14511,
+            "sha256": "a69b9bb57354751c378066c9cdd3ed7ee6d1f9f6982f37ba9f4c5b4b77f29ecd"
+          },
+          "passed": 9,
+          "failed": 0,
+          "skips": 0
+        },
+        {
+          "group": "scroll",
+          "run": 38041029923,
+          "report": {
+            "file": "native-scroll.json",
+            "bytes": 320517,
+            "sha256": "3f610538c1029689dbb66e4975222864aa49b74ea123e7179843ed9fb892b476"
+          },
+          "passed": 3,
+          "failed": 0,
+          "skips": 0
+        }
+      ],
+      "uniqueCandidateChecksPassed": 117
+    },
+    {
+      "installation": "spaces",
+      "observedDpi": [
+        96
+      ],
+      "artifact": {
+        "id": 11666471998,
+        "bytes": 8103889,
+        "sha256": "ecac32bd6099da1195b38be726def23718f52be0e96fb721256e25f4bfe88360",
+        "githubApiDigestMatched": true,
+        "zipCrc": "passed",
+        "expiresUtc": "2026-11-09T09:35:25Z",
+        "url": "https://github.com/comparativechrono/workbench/actions/runs/38041764557/artifacts/11666471998"
+      },
+      "candidateRecheck": {
+        "patch": {
+          "report": {
+            "file": "native-ui-patch.json",
+            "bytes": 353886,
+            "sha256": "98670910503c4e643df95d8628ab514fa3e6978db830b888c7fc0a09d622644f"
+          },
+          "passed": 23,
+          "failed": 0,
+          "blocked": 0,
+          "skips": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": true,
+          "gateSha256": "7458de380772051bcfba12140baf6e7299c2a7d39bdaa04a189394ea6c10f15e",
+          "scenarioIds": [
+            "candidate-input-identities",
+            "baseline-fixtures",
+            "updater-cancel",
+            "updater-invalid",
+            "updater-install",
+            "updater-repeat",
+            "upgraded-fixture-readback",
+            "fresh-startup-bounds",
+            "fresh-starter-setup",
+            "fresh-result-fixture",
+            "fresh-library-keyboard",
+            "fresh-tool-temporal-resize",
+            "fresh-workflow-temporal-resize",
+            "fresh-layout",
+            "fresh-results-empty",
+            "fresh-results-populated",
+            "upgraded-startup-bounds",
+            "upgraded-library-keyboard",
+            "upgraded-tool-temporal-resize",
+            "upgraded-workflow-temporal-resize",
+            "upgraded-layout",
+            "upgraded-results-empty",
+            "upgraded-results-populated"
+          ],
+          "temporalResize": [
+            {
+              "installation": "fresh",
+              "mode": "tool",
+              "transitions": 6,
+              "frames": 88,
+              "immediateFrames": 6,
+              "postCompositorFrames": 82,
+              "postCompositorSourceFrames": 0,
+              "postCompositorNonTargetFrames": 0,
+              "immediateNonTargetFrames": 2,
+              "allTransitionsSamplingComplete": true,
+              "allTransitionsReachedTarget": true,
+              "requestedSizes": [
+                [
+                  960,
+                  680
+                ],
+                [
+                  1024,
+                  728
+                ]
+              ],
+              "totalSeriesSeconds": 2.786669,
+              "maximumCaptureGapMs": 55.887,
+              "moveWindowMs": {
+                "minimum": 14.475,
+                "maximum": 17.147
+              },
+              "immediateCaptureStartMsAfterReturn": {
+                "minimum": 0.001,
+                "maximum": 0.003
+              },
+              "immediateCaptureEndMsAfterReturn": {
+                "minimum": 21.324,
+                "maximum": 43.108
+              },
+              "firstPostCompositorCaptureStartMsAfterReturn": {
+                "minimum": 33.434,
+                "maximum": 55.889
+              },
+              "firstPostCompositorCaptureEndMsAfterReturn": {
+                "minimum": 53.057,
+                "maximum": 76.729
+              }
+            },
+            {
+              "installation": "fresh",
+              "mode": "workflow",
+              "transitions": 6,
+              "frames": 87,
+              "immediateFrames": 6,
+              "postCompositorFrames": 81,
+              "postCompositorSourceFrames": 0,
+              "postCompositorNonTargetFrames": 0,
+              "immediateNonTargetFrames": 2,
+              "allTransitionsSamplingComplete": true,
+              "allTransitionsReachedTarget": true,
+              "requestedSizes": [
+                [
+                  960,
+                  680
+                ],
+                [
+                  1024,
+                  728
+                ]
+              ],
+              "totalSeriesSeconds": 2.812199,
+              "maximumCaptureGapMs": 60.053,
+              "moveWindowMs": {
+                "minimum": 22.04,
+                "maximum": 28.903
+              },
+              "immediateCaptureStartMsAfterReturn": {
+                "minimum": 0.001,
+                "maximum": 0.001
+              },
+              "immediateCaptureEndMsAfterReturn": {
+                "minimum": 23.645,
+                "maximum": 47.045
+              },
+              "firstPostCompositorCaptureStartMsAfterReturn": {
+                "minimum": 35.482,
+                "maximum": 60.054
+              },
+              "firstPostCompositorCaptureEndMsAfterReturn": {
+                "minimum": 55.551,
+                "maximum": 80.333
+              }
+            },
+            {
+              "installation": "upgraded",
+              "mode": "tool",
+              "transitions": 6,
+              "frames": 89,
+              "immediateFrames": 6,
+              "postCompositorFrames": 83,
+              "postCompositorSourceFrames": 0,
+              "postCompositorNonTargetFrames": 0,
+              "immediateNonTargetFrames": 2,
+              "allTransitionsSamplingComplete": true,
+              "allTransitionsReachedTarget": true,
+              "requestedSizes": [
+                [
+                  960,
+                  680
+                ],
+                [
+                  1024,
+                  728
+                ]
+              ],
+              "totalSeriesSeconds": 2.810005,
+              "maximumCaptureGapMs": 47.649,
+              "moveWindowMs": {
+                "minimum": 15.604,
+                "maximum": 17.393
+              },
+              "immediateCaptureStartMsAfterReturn": {
+                "minimum": 0.001,
+                "maximum": 0.001
+              },
+              "immediateCaptureEndMsAfterReturn": {
+                "minimum": 25.121,
+                "maximum": 34.636
+              },
+              "firstPostCompositorCaptureStartMsAfterReturn": {
+                "minimum": 37.044,
+                "maximum": 46.789
+              },
+              "firstPostCompositorCaptureEndMsAfterReturn": {
+                "minimum": 58.147,
+                "maximum": 66.434
+              }
+            },
+            {
+              "installation": "upgraded",
+              "mode": "workflow",
+              "transitions": 6,
+              "frames": 85,
+              "immediateFrames": 6,
+              "postCompositorFrames": 79,
+              "postCompositorSourceFrames": 0,
+              "postCompositorNonTargetFrames": 0,
+              "immediateNonTargetFrames": 0,
+              "allTransitionsSamplingComplete": true,
+              "allTransitionsReachedTarget": true,
+              "requestedSizes": [
+                [
+                  960,
+                  680
+                ],
+                [
+                  1024,
+                  728
+                ]
+              ],
+              "totalSeriesSeconds": 2.77577,
+              "maximumCaptureGapMs": 63.293,
+              "moveWindowMs": {
+                "minimum": 22.962,
+                "maximum": 29.661
+              },
+              "immediateCaptureStartMsAfterReturn": {
+                "minimum": 0.001,
+                "maximum": 0.584
+              },
+              "immediateCaptureEndMsAfterReturn": {
+                "minimum": 24.218,
+                "maximum": 51.14
+              },
+              "firstPostCompositorCaptureStartMsAfterReturn": {
+                "minimum": 36.546,
+                "maximum": 63.294
+              },
+              "firstPostCompositorCaptureEndMsAfterReturn": {
+                "minimum": 57.333,
+                "maximum": 84.313
+              }
+            }
+          ],
+          "passiveVisibleResizeSeries": 4,
+          "passiveVisibleResizeCaptureCount": 16
+        },
+        "feedback": {
+          "report": {
+            "file": "native-tester-feedback.json",
+            "bytes": 554040,
+            "sha256": "5107ff7866fa0db7916ad01b36dc36818cddbd70da48ee15be4f5bc49dd8e3b2"
+          },
+          "passed": 13,
+          "failed": 0,
+          "blocked": 0,
+          "skips": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": true,
+          "gateSha256": "dc63dd2a47ea2555fd0ceb47a96fcbafc9da915a2b188288e428bda8a0d1f751",
+          "scenarioIds": [
+            "samples-without-workflow",
+            "run-temporal-960",
+            "run-temporal-1024",
+            "starter-category-temporal-960",
+            "starter-category-temporal-1024",
+            "separate-methods",
+            "run-missing-input",
+            "samples-create-edit-save-reopen",
+            "samples-cancel-and-invalid-import",
+            "samples-example-preview",
+            "samples-example-native-science",
+            "overflow-anchor-temporal-960",
+            "overflow-anchor-temporal-1024"
+          ],
+          "temporalFeedback": [
+            {
+              "group": "run",
+              "series": 6,
+              "frames": 835,
+              "elapsedSeconds": 26.796391,
+              "maximumWithinSeriesCaptureGapMs": 78.211,
+              "blackBlockFrames": 0,
+              "unexpectedStableFrames": 0,
+              "allSeriesSamplingComplete": true
+            },
+            {
+              "group": "starterCategories",
+              "series": 12,
+              "frames": 191,
+              "elapsedSeconds": 10.078164,
+              "maximumWithinSeriesCaptureGapMs": 78.241,
+              "blackBlockFrames": 0,
+              "unexpectedStableFrames": 0,
+              "allSeriesSamplingComplete": true
+            },
+            {
+              "group": "overflowCategories",
+              "series": 23,
+              "frames": 369,
+              "elapsedSeconds": 19.201683,
+              "maximumWithinSeriesCaptureGapMs": 77.964,
+              "blackBlockFrames": 0,
+              "unexpectedStableFrames": 0,
+              "allSeriesSamplingComplete": true
+            }
+          ],
+          "archiveFilesVerifiedBefore": 277,
+          "archiveFilesVerifiedAfter": 277
+        }
+      },
+      "priorSameArchiveRegressions": [
+        {
+          "group": "batch",
+          "run": 38041029923,
+          "report": {
+            "file": "native-batch.json",
+            "bytes": 36110,
+            "sha256": "713d60b234f5342c677467d5526f7478ac263f90a8830078903641d576797e6a"
+          },
+          "passed": 11,
+          "failed": 0,
+          "skips": 0
+        },
+        {
+          "group": "readiness",
+          "run": 38041029923,
+          "report": {
+            "file": "native-readiness.json",
+            "bytes": 9034,
+            "sha256": "532141d52db78efe3380f833c76ba2807915381733b87f7513e2ee5f27c1641b"
+          },
+          "passed": 5,
+          "failed": 0,
+          "skips": 0
+        },
+        {
+          "group": "curated",
+          "run": 38041029923,
+          "report": {
+            "file": "native-curated.json",
+            "bytes": 14747,
+            "sha256": "c182c08547618b91cf4751964c82eed8d43434067a7c22ca83c2ddc2e828917f"
+          },
+          "passed": 11,
+          "failed": 0,
+          "skips": 0
+        },
+        {
+          "group": "workspace",
+          "run": 38041029923,
+          "report": {
+            "file": "native-workspace.json",
+            "bytes": 24364,
+            "sha256": "f6af5ee0ebdbcb8bd388d0c03bd10e713a9207ee5edc2fe7f567e0217e11eb7c"
+          },
+          "passed": 32,
+          "failed": 0,
+          "skips": 0
+        },
+        {
+          "group": "reference-management",
+          "run": 38041029923,
+          "report": {
+            "file": "native-reference-management.json",
+            "bytes": 25814,
+            "sha256": "229b69d453a31674dae4d48299d7882fff8d57227e8a7c778dc242052d8b541e"
+          },
+          "passed": 10,
+          "failed": 0,
+          "skips": 0
+        },
+        {
+          "group": "results",
+          "run": 38041029923,
+          "report": {
+            "file": "native-results.json",
+            "bytes": 14511,
+            "sha256": "b487aeb91518e2eb1d1c3913d216dec18f39bdc08dec72720597d55b4a285a0d"
+          },
+          "passed": 9,
+          "failed": 0,
+          "skips": 0
+        },
+        {
+          "group": "scroll",
+          "run": 38041029923,
+          "report": {
+            "file": "native-scroll.json",
+            "bytes": 320554,
+            "sha256": "b2be1c9b83059315c35b6112cccb74a5c84dd035f1e8cded15833e2b4c76b8fa"
+          },
+          "passed": 3,
+          "failed": 0,
+          "skips": 0
+        }
+      ],
+      "uniqueCandidateChecksPassed": 117
+    }
+  ],
+  "limits": [
+    "The required negative-control assertion failed because the old package showed no post-compositor stale-geometry frames. This workflow is not an overall pass and does not establish a differential fix.",
+    "Immediate pre-compositor frames include old or mixed geometry in both old and new packages; they are retained separately and excluded from the post-compositor acceptance assertion.",
+    "Finite captured observations at 96 DPI on hosted Windows; representative PCs, high DPI, multiple monitors and physical trackpads remain untested.",
+    "117 unique candidate checks per path combine 81 unchanged-archive regressions from the first run with 23 patch and 13 feedback checks from this recheck. Repeated checks are not added.",
+    "Raw reports remain in expiring Actions artifacts; this receipt preserves their exact hashes and selected counts without session tokens, machine paths, logs or private metadata."
+  ],
+  "negativeControl": {
+    "installation": "ordinary",
+    "report": {
+      "file": "native-resize-negative.json",
+      "bytes": 70030,
+      "sha256": "1fa8f00d58b75363d5d45f9d8956ce31bed52890abcffc85c8ea0ed2a386190c"
+    },
+    "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+    "gateCommit": "6a4f2c37a98706b478af994e099e3a24c01ba0d7",
+    "passed": 0,
+    "failed": 1,
+    "blocked": 0,
+    "skips": 0,
+    "negativeControlValidated": false,
+    "failure": "The exact old-package source-geometry defect was not reproduced.",
+    "temporalResize": [
+      {
+        "installation": "previous",
+        "mode": "tool",
+        "transitions": 6,
+        "frames": 88,
+        "immediateFrames": 6,
+        "postCompositorFrames": 82,
+        "postCompositorSourceFrames": 0,
+        "postCompositorNonTargetFrames": 0,
+        "immediateNonTargetFrames": 5,
+        "allTransitionsSamplingComplete": true,
+        "allTransitionsReachedTarget": true,
+        "requestedSizes": [
+          [
+            960,
+            680
+          ],
+          [
+            1024,
+            728
+          ]
+        ],
+        "totalSeriesSeconds": 2.796731,
+        "maximumCaptureGapMs": 57.888,
+        "moveWindowMs": {
+          "minimum": 6.299,
+          "maximum": 6.786
+        },
+        "immediateCaptureStartMsAfterReturn": {
+          "minimum": 0.001,
+          "maximum": 0.002
+        },
+        "immediateCaptureEndMsAfterReturn": {
+          "minimum": 28.565,
+          "maximum": 44.649
+        },
+        "firstPostCompositorCaptureStartMsAfterReturn": {
+          "minimum": 42.081,
+          "maximum": 57.889
+        },
+        "firstPostCompositorCaptureEndMsAfterReturn": {
+          "minimum": 60.272,
+          "maximum": 76.119
+        }
+      }
+    ],
+    "archive": {
+      "name": "native-workbench-0.16.1-starter-windows.zip",
+      "bytes": 17879604,
+      "sha256": "1291f93b5ece3c4da34eb2f2e29fccc83b6d87ec5fb73abf28bfd9cc8f155b75"
+    },
+    "totalFrames": 88
+  }
+}

@@ -1,16 +1,19 @@
 # Native Workbench knowledge base
 
-**Active resize correction, 2026-10-10:** the owner requested a fix for the
-remaining Tools-window resize defect: controls can briefly display their previous
-layout and clip the right/bottom edge. Work continues in [draft PR #15](https://github.com/comparativechrono/workbench/pull/15)
-on `fix/native-ui-0.16.1`, starting at
-`93c0a6b1189781fb8df960b025a512ed73461240`. The version remains unpublished
-**0.16.1**. New source, exact archives, passive resize observations and regression
-validation are **pending**; earlier passes do not validate changed bytes.
-Start with the [resize handover](resize-redraw-0.16.1-handover.md).
-Published **0.16.0** and the historical records below remain unchanged.
+**Active resize correction, 2026-10-10:** implemented in unpublished **0.16.1**
+application source `51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e` in
+[draft PR #15](https://github.com/comparativechrono/workbench/pull/15).
+The app places the complete resized layout before painting it. A bounded resize
+comparison recorded 14 mixed-layout frames in the old package and none in the
+corrected package; screenshot review confirmed the difference. **235 source
+checks** and **117 distinct native checks per Windows path** passed across the
+recorded runs; exact archive/source correspondence passed. The separate strict
+single-transition negative control remains unreproduced, so the workflow is not
+green and no exact lag-duration or zero-flicker claim is made. Start with the [resize handover](resize-redraw-0.16.1-handover.md)
+for exact identities, failed attempts and evidence limits. Published **0.16.0**
+remains unchanged; nothing is merged or released.
 
-**Active tester-feedback revision, 2026-10-09:**
+**Previous tester-feedback candidate, 2026-10-09:**
 [Draft PR #15](https://github.com/comparativechrono/workbench/pull/15) contains
 unpublished **0.16.1** application source
 `73778e00461e2b83c07b9ea97df2b9c5d4b6317d`: reduced Run/poll redraws,

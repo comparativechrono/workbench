@@ -1,0 +1,1199 @@
+{
+  "schema": 1,
+  "reviewedUtc": "2026-10-10T09:33:46.434660+00:00",
+  "scope": "Attempt 1 Tools/Workflow resize and fixed-layout screenshots only; this is not a full native gate pass.",
+  "method": "Every BMP hash and dimension verified against native report. Every one of 52 unique BMP representatives directly viewed as an RGB-pixel-identical lossless PNG; 116 further capture records covered by exact BMP hashes.",
+  "capturesReviewed": 168,
+  "uniqueImagesDirectlyViewed": 52,
+  "exactHashReuses": 116,
+  "observations": [
+    "Settled 960x680 and 1024x728 Tools and Workflow layouts keep fixed buttons, header controls and footer within the captured window. No new persistent layout blocker observed.",
+    "Reference inputs, explanatory text and References button can be partly clipped at the lower edge of their scrolling panels; these are scrollable content rather than clipped fixed footer controls. Long paths are clipped within edit controls.",
+    "Immediate pre-compositor shrink images can retain old large-window geometry and clip right/bottom content. Immediate grow images can show black newly exposed right/bottom bands. These are retained observations, not clean-frame passes.",
+    "All reported post-compositor comparison frames matched settled target regions in both paths. First such captured reads begin about 34 to 67 ms after MoveWindow returned, depending on transition; this bounds observations rather than measuring an exact repaint duration.",
+    "The separate old-style immediate captures taken after native geometry inspection were visibly settled in the images reviewed."
+  ],
+  "limits": [
+    "The full patch report failed later Results checks due to the validator ctypes Keyboard rebinding defect. This visual scope does not turn that attempt into a gate pass.",
+    "Automated pixel oracle compares static text and selected buttons; edit interiors, tree, status and nonclient chrome are excluded. All screenshots were also reviewed at full window scale.",
+    "Finite hosted Windows 96-DPI samples do not prove zero flicker or exclude changes between captured frames.",
+    "Old-archive negative control did not reach sampling on attempt 1; no differential reproduction claim is made by this receipt.",
+    "Only resize and fixed Tools/Workflow captures are in this review; updater dialogs and other feature captures are excluded."
+  ],
+  "paths": {
+    "ordinary": {
+      "sourceCommit": "51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e",
+      "gateCommit": "51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e",
+      "gateSha256": "9bf5ce0aee6bb240167e48087ea332aff53813bafbccd713dbfdf82e24434e09",
+      "reportSha256": "4f7278fa57a5892d7fea3f74358ac2fdb750709f40579e4182cdd2211cebc17e",
+      "archives": {
+        "starter": {
+          "name": "native-workbench-0.16.1-starter-windows.zip",
+          "bytes": 17879852,
+          "sha256": "7fd59d5b021867991506e98ef94c5b239245030fb9da55d77accf8d8e2d43682"
+        },
+        "baseline": {
+          "name": "baseline-0.16.0.zip",
+          "bytes": 17846873,
+          "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+        },
+        "update": {
+          "name": "native-workbench-0.16.1-update-from-0.16.0.zip",
+          "bytes": 13042517,
+          "sha256": "35bbd786043561ea40a1a12f941da8f370f26fc9df63cd2904dbee16a18bbda5"
+        }
+      },
+      "wholePatchGateCounts": {
+        "passed": 19,
+        "failed": 2
+      },
+      "resizeGroups": [
+        {
+          "installation": "fresh",
+          "mode": "tool",
+          "transitions": 6,
+          "frames": 88,
+          "postCompositorNonTargetFrames": 0,
+          "immediateNonTargetFrames": 4,
+          "firstPostCompositorCaptureStartMsRange": [
+            42.008,
+            61.97
+          ],
+          "maxCaptureGapMs": 61.966
+        },
+        {
+          "installation": "fresh",
+          "mode": "workflow",
+          "transitions": 6,
+          "frames": 85,
+          "postCompositorNonTargetFrames": 0,
+          "immediateNonTargetFrames": 3,
+          "firstPostCompositorCaptureStartMsRange": [
+            35.579,
+            66.154
+          ],
+          "maxCaptureGapMs": 66.153
+        },
+        {
+          "installation": "upgraded",
+          "mode": "tool",
+          "transitions": 6,
+          "frames": 86,
+          "postCompositorNonTargetFrames": 0,
+          "immediateNonTargetFrames": 5,
+          "firstPostCompositorCaptureStartMsRange": [
+            42.467,
+            58.932
+          ],
+          "maxCaptureGapMs": 58.931
+        },
+        {
+          "installation": "upgraded",
+          "mode": "workflow",
+          "transitions": 6,
+          "frames": 88,
+          "postCompositorNonTargetFrames": 0,
+          "immediateNonTargetFrames": 3,
+          "firstPostCompositorCaptureStartMsRange": [
+            34.156,
+            62.819
+          ],
+          "maxCaptureGapMs": 62.817
+        }
+      ],
+      "captures": [
+        {
+          "path": "ordinary/fresh-tool-resize-reference-1024x728.bmp",
+          "sha256": "47932329766b40fe74fde283ffd2cc4c6fe3bbb22641150021be94be3116210c",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-tool-resize-reference-960x680.bmp",
+          "sha256": "5909d842d1893bd8dff835f8d9671d7b9a7dc3f90e5967c7e0397f3aff860266",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-tool-resize-00-frame-000.bmp",
+          "sha256": "47932329766b40fe74fde283ffd2cc4c6fe3bbb22641150021be94be3116210c",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-tool-resize-00-last.bmp",
+          "sha256": "47932329766b40fe74fde283ffd2cc4c6fe3bbb22641150021be94be3116210c",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-tool-resize-01-frame-000.bmp",
+          "sha256": "12fda3f35d9c4698baf301fb906b6d642d14c97cf2ee2f091eb197148e5fa81e",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-tool-resize-01-last.bmp",
+          "sha256": "5909d842d1893bd8dff835f8d9671d7b9a7dc3f90e5967c7e0397f3aff860266",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-tool-resize-02-frame-000.bmp",
+          "sha256": "5e3ca4dbf044cb1452d5e1acf44e262be479f3f6890996cce48e0bb2dbadb2ec",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-tool-resize-02-last.bmp",
+          "sha256": "47932329766b40fe74fde283ffd2cc4c6fe3bbb22641150021be94be3116210c",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-tool-resize-03-frame-000.bmp",
+          "sha256": "12fda3f35d9c4698baf301fb906b6d642d14c97cf2ee2f091eb197148e5fa81e",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-tool-resize-03-last.bmp",
+          "sha256": "5909d842d1893bd8dff835f8d9671d7b9a7dc3f90e5967c7e0397f3aff860266",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-tool-resize-04-frame-000.bmp",
+          "sha256": "5e3ca4dbf044cb1452d5e1acf44e262be479f3f6890996cce48e0bb2dbadb2ec",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-tool-resize-04-last.bmp",
+          "sha256": "47932329766b40fe74fde283ffd2cc4c6fe3bbb22641150021be94be3116210c",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-tool-resize-05-frame-000.bmp",
+          "sha256": "5909d842d1893bd8dff835f8d9671d7b9a7dc3f90e5967c7e0397f3aff860266",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-tool-resize-05-last.bmp",
+          "sha256": "5909d842d1893bd8dff835f8d9671d7b9a7dc3f90e5967c7e0397f3aff860266",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-tool-960-visible-immediate.bmp",
+          "sha256": "dd01e6ea7377c7dc935bf7bced7459fb820f5bd8e9ecfd30ea69d8b3e891f4e4",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "ordinary/fresh-tool-960-visible-250ms.bmp",
+          "sha256": "dd01e6ea7377c7dc935bf7bced7459fb820f5bd8e9ecfd30ea69d8b3e891f4e4",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "ordinary/fresh-tool-960-visible-750ms.bmp",
+          "sha256": "dd01e6ea7377c7dc935bf7bced7459fb820f5bd8e9ecfd30ea69d8b3e891f4e4",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "ordinary/fresh-tool-960-visible-1250ms.bmp",
+          "sha256": "dd01e6ea7377c7dc935bf7bced7459fb820f5bd8e9ecfd30ea69d8b3e891f4e4",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "ordinary/fresh-tool-960x680.bmp",
+          "sha256": "dbb80274b5d831c33a58cf1d2f5da85fcc9c44ba91984f8a19093ceb3929beb4",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "ordinary/fresh-tool-1024x728.bmp",
+          "sha256": "44d359c9865c15bc557aed66b9d6d372bb7a1503482c0f44505472a4824a92d6",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-tool-1280x900.bmp",
+          "sha256": "44d359c9865c15bc557aed66b9d6d372bb7a1503482c0f44505472a4824a92d6",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-workflow-resize-reference-1024x728.bmp",
+          "sha256": "708a8d90510f0ddeea5dc48417eaa868c8da52669fe8dfc7f10eb7a349895633",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-workflow-resize-reference-960x680.bmp",
+          "sha256": "e1696675811ba102156bbf4be3cd31d47ed60ad9b183a6b9cbb27bc5c15cd530",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-workflow-resize-00-frame-000.bmp",
+          "sha256": "708a8d90510f0ddeea5dc48417eaa868c8da52669fe8dfc7f10eb7a349895633",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-workflow-resize-00-last.bmp",
+          "sha256": "708a8d90510f0ddeea5dc48417eaa868c8da52669fe8dfc7f10eb7a349895633",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-workflow-resize-01-frame-000.bmp",
+          "sha256": "cc70f8a604a7981c3e43e96690fde7a8652de9fbe7321588ba5e70410006c9e8",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-workflow-resize-01-last.bmp",
+          "sha256": "e1696675811ba102156bbf4be3cd31d47ed60ad9b183a6b9cbb27bc5c15cd530",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-workflow-resize-02-frame-000.bmp",
+          "sha256": "708a8d90510f0ddeea5dc48417eaa868c8da52669fe8dfc7f10eb7a349895633",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-workflow-resize-02-last.bmp",
+          "sha256": "708a8d90510f0ddeea5dc48417eaa868c8da52669fe8dfc7f10eb7a349895633",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-workflow-resize-03-frame-000.bmp",
+          "sha256": "cc70f8a604a7981c3e43e96690fde7a8652de9fbe7321588ba5e70410006c9e8",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-workflow-resize-03-last.bmp",
+          "sha256": "e1696675811ba102156bbf4be3cd31d47ed60ad9b183a6b9cbb27bc5c15cd530",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-workflow-resize-04-frame-000.bmp",
+          "sha256": "708a8d90510f0ddeea5dc48417eaa868c8da52669fe8dfc7f10eb7a349895633",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-workflow-resize-04-last.bmp",
+          "sha256": "708a8d90510f0ddeea5dc48417eaa868c8da52669fe8dfc7f10eb7a349895633",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-workflow-resize-05-frame-000.bmp",
+          "sha256": "cc70f8a604a7981c3e43e96690fde7a8652de9fbe7321588ba5e70410006c9e8",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-workflow-resize-05-last.bmp",
+          "sha256": "e1696675811ba102156bbf4be3cd31d47ed60ad9b183a6b9cbb27bc5c15cd530",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-workflow-960-visible-immediate.bmp",
+          "sha256": "2c1a4d733122042d2aa54bd239176002262fc929852a825f725ffc05fce36df3",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "ordinary/fresh-workflow-960-visible-250ms.bmp",
+          "sha256": "2c1a4d733122042d2aa54bd239176002262fc929852a825f725ffc05fce36df3",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "ordinary/fresh-workflow-960-visible-750ms.bmp",
+          "sha256": "2c1a4d733122042d2aa54bd239176002262fc929852a825f725ffc05fce36df3",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "ordinary/fresh-workflow-960-visible-1250ms.bmp",
+          "sha256": "2c1a4d733122042d2aa54bd239176002262fc929852a825f725ffc05fce36df3",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "ordinary/fresh-workflow-960x680.bmp",
+          "sha256": "7ce8b927bb6a800dbac880691e233d5d249443ba458ed228ec39f2e05366b6eb",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "ordinary/fresh-workflow-1024x728.bmp",
+          "sha256": "2ccb5de37ec35781a8c379e5b429a9920ad03bd4e045e038015581a216259c4c",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/fresh-workflow-1280x900.bmp",
+          "sha256": "2ccb5de37ec35781a8c379e5b429a9920ad03bd4e045e038015581a216259c4c",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-tool-resize-reference-1024x728.bmp",
+          "sha256": "3f1d106c61aaaed8a5f52da4ab4d0b7a528bd33b2b8a8a81ebb37c2737cb0270",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-tool-resize-reference-960x680.bmp",
+          "sha256": "8c57f342b26605262104ff529eb73dc3b7c302d0c823a911bf51cd4ac13119f8",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-tool-resize-00-frame-000.bmp",
+          "sha256": "3f1d106c61aaaed8a5f52da4ab4d0b7a528bd33b2b8a8a81ebb37c2737cb0270",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-tool-resize-00-last.bmp",
+          "sha256": "3f1d106c61aaaed8a5f52da4ab4d0b7a528bd33b2b8a8a81ebb37c2737cb0270",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-tool-resize-01-frame-000.bmp",
+          "sha256": "2de87fc173a8c48319b0c078efbd4a8ab5e1749ef531a0b5274e2274b61c93ee",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-tool-resize-01-last.bmp",
+          "sha256": "8c57f342b26605262104ff529eb73dc3b7c302d0c823a911bf51cd4ac13119f8",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-tool-resize-02-frame-000.bmp",
+          "sha256": "c22286324e76c1dd5265035479bb751d1083b60a672170b73de94eb6f17efbfb",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-tool-resize-02-last.bmp",
+          "sha256": "3f1d106c61aaaed8a5f52da4ab4d0b7a528bd33b2b8a8a81ebb37c2737cb0270",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-tool-resize-03-frame-000.bmp",
+          "sha256": "2de87fc173a8c48319b0c078efbd4a8ab5e1749ef531a0b5274e2274b61c93ee",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-tool-resize-03-last.bmp",
+          "sha256": "8c57f342b26605262104ff529eb73dc3b7c302d0c823a911bf51cd4ac13119f8",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-tool-resize-04-frame-000.bmp",
+          "sha256": "c22286324e76c1dd5265035479bb751d1083b60a672170b73de94eb6f17efbfb",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-tool-resize-04-last.bmp",
+          "sha256": "3f1d106c61aaaed8a5f52da4ab4d0b7a528bd33b2b8a8a81ebb37c2737cb0270",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-tool-resize-05-frame-000.bmp",
+          "sha256": "2de87fc173a8c48319b0c078efbd4a8ab5e1749ef531a0b5274e2274b61c93ee",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-tool-resize-05-last.bmp",
+          "sha256": "8c57f342b26605262104ff529eb73dc3b7c302d0c823a911bf51cd4ac13119f8",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-tool-960-visible-immediate.bmp",
+          "sha256": "528957aa345df4b7ace939a1a2002606bc722ca90e0d4d534b06498f00c2214a",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "ordinary/upgraded-tool-960-visible-250ms.bmp",
+          "sha256": "528957aa345df4b7ace939a1a2002606bc722ca90e0d4d534b06498f00c2214a",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "ordinary/upgraded-tool-960-visible-750ms.bmp",
+          "sha256": "528957aa345df4b7ace939a1a2002606bc722ca90e0d4d534b06498f00c2214a",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "ordinary/upgraded-tool-960-visible-1250ms.bmp",
+          "sha256": "528957aa345df4b7ace939a1a2002606bc722ca90e0d4d534b06498f00c2214a",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "ordinary/upgraded-tool-960x680.bmp",
+          "sha256": "e3b0ecb123d6900bcd523483307efc903b591d4dec3d24c2f5e7cc44a0b26d62",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "ordinary/upgraded-tool-1024x728.bmp",
+          "sha256": "004da4f429f48220d10bcb61a61e4a91e1f4415f2633370d318d1d3679f7bc8d",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-tool-1280x900.bmp",
+          "sha256": "004da4f429f48220d10bcb61a61e4a91e1f4415f2633370d318d1d3679f7bc8d",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-workflow-resize-reference-1024x728.bmp",
+          "sha256": "d63a85314e0cf02646869c16a1d3a44c5ec8659647655d784ab0a9b34cd209ac",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-workflow-resize-reference-960x680.bmp",
+          "sha256": "a319bc52f5eb8d6cd03158881885d99cce2c8c6a0eddd87b948f0e5b3320e61a",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-workflow-resize-00-frame-000.bmp",
+          "sha256": "d63a85314e0cf02646869c16a1d3a44c5ec8659647655d784ab0a9b34cd209ac",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-workflow-resize-00-last.bmp",
+          "sha256": "d63a85314e0cf02646869c16a1d3a44c5ec8659647655d784ab0a9b34cd209ac",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-workflow-resize-01-frame-000.bmp",
+          "sha256": "31a91278330499539b56f09ffaf2ef1fd1bc4dd46bea1eac1192a4977f54bb7b",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-workflow-resize-01-last.bmp",
+          "sha256": "a319bc52f5eb8d6cd03158881885d99cce2c8c6a0eddd87b948f0e5b3320e61a",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-workflow-resize-02-frame-000.bmp",
+          "sha256": "d63a85314e0cf02646869c16a1d3a44c5ec8659647655d784ab0a9b34cd209ac",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-workflow-resize-02-last.bmp",
+          "sha256": "d63a85314e0cf02646869c16a1d3a44c5ec8659647655d784ab0a9b34cd209ac",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-workflow-resize-03-frame-000.bmp",
+          "sha256": "31a91278330499539b56f09ffaf2ef1fd1bc4dd46bea1eac1192a4977f54bb7b",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-workflow-resize-03-last.bmp",
+          "sha256": "a319bc52f5eb8d6cd03158881885d99cce2c8c6a0eddd87b948f0e5b3320e61a",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-workflow-resize-04-frame-000.bmp",
+          "sha256": "d63a85314e0cf02646869c16a1d3a44c5ec8659647655d784ab0a9b34cd209ac",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-workflow-resize-04-last.bmp",
+          "sha256": "d63a85314e0cf02646869c16a1d3a44c5ec8659647655d784ab0a9b34cd209ac",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-workflow-resize-05-frame-000.bmp",
+          "sha256": "31a91278330499539b56f09ffaf2ef1fd1bc4dd46bea1eac1192a4977f54bb7b",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-workflow-resize-05-last.bmp",
+          "sha256": "a319bc52f5eb8d6cd03158881885d99cce2c8c6a0eddd87b948f0e5b3320e61a",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-workflow-960-visible-immediate.bmp",
+          "sha256": "ac475698a4d9a9374520725ca73c233807d888ac5f43d416a169c88833931a3e",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "ordinary/upgraded-workflow-960-visible-250ms.bmp",
+          "sha256": "ac475698a4d9a9374520725ca73c233807d888ac5f43d416a169c88833931a3e",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "ordinary/upgraded-workflow-960-visible-750ms.bmp",
+          "sha256": "ac475698a4d9a9374520725ca73c233807d888ac5f43d416a169c88833931a3e",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "ordinary/upgraded-workflow-960-visible-1250ms.bmp",
+          "sha256": "ac475698a4d9a9374520725ca73c233807d888ac5f43d416a169c88833931a3e",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "ordinary/upgraded-workflow-960x680.bmp",
+          "sha256": "1e05fca6c0eb9ea45b19c975661662943ab4f639e4e2d512d680ded610cb0d18",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "ordinary/upgraded-workflow-1024x728.bmp",
+          "sha256": "d14fccb506ebc71503320fe0f1e4b925ee0d7aeda47f4a992a5a17aa9e419285",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "ordinary/upgraded-workflow-1280x900.bmp",
+          "sha256": "d14fccb506ebc71503320fe0f1e4b925ee0d7aeda47f4a992a5a17aa9e419285",
+          "width": 1024,
+          "height": 728
+        }
+      ]
+    },
+    "spaces": {
+      "sourceCommit": "51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e",
+      "gateCommit": "51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e",
+      "gateSha256": "9bf5ce0aee6bb240167e48087ea332aff53813bafbccd713dbfdf82e24434e09",
+      "reportSha256": "907c71d17c89f5188e99ecf0bcfbcdbe44d6abc5e703202c1e817809f78cc487",
+      "archives": {
+        "starter": {
+          "name": "native-workbench-0.16.1-starter-windows.zip",
+          "bytes": 17879852,
+          "sha256": "7fd59d5b021867991506e98ef94c5b239245030fb9da55d77accf8d8e2d43682"
+        },
+        "baseline": {
+          "name": "baseline-0.16.0.zip",
+          "bytes": 17846873,
+          "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+        },
+        "update": {
+          "name": "native-workbench-0.16.1-update-from-0.16.0.zip",
+          "bytes": 13042517,
+          "sha256": "35bbd786043561ea40a1a12f941da8f370f26fc9df63cd2904dbee16a18bbda5"
+        }
+      },
+      "wholePatchGateCounts": {
+        "passed": 19,
+        "failed": 2
+      },
+      "resizeGroups": [
+        {
+          "installation": "fresh",
+          "mode": "tool",
+          "transitions": 6,
+          "frames": 85,
+          "postCompositorNonTargetFrames": 0,
+          "immediateNonTargetFrames": 3,
+          "firstPostCompositorCaptureStartMsRange": [
+            34.885,
+            60.54
+          ],
+          "maxCaptureGapMs": 60.539
+        },
+        {
+          "installation": "fresh",
+          "mode": "workflow",
+          "transitions": 6,
+          "frames": 90,
+          "postCompositorNonTargetFrames": 0,
+          "immediateNonTargetFrames": 3,
+          "firstPostCompositorCaptureStartMsRange": [
+            35.036,
+            52.222
+          ],
+          "maxCaptureGapMs": 52.221
+        },
+        {
+          "installation": "upgraded",
+          "mode": "tool",
+          "transitions": 6,
+          "frames": 88,
+          "postCompositorNonTargetFrames": 0,
+          "immediateNonTargetFrames": 3,
+          "firstPostCompositorCaptureStartMsRange": [
+            34.502,
+            58.947
+          ],
+          "maxCaptureGapMs": 58.946
+        },
+        {
+          "installation": "upgraded",
+          "mode": "workflow",
+          "transitions": 6,
+          "frames": 89,
+          "postCompositorNonTargetFrames": 0,
+          "immediateNonTargetFrames": 0,
+          "firstPostCompositorCaptureStartMsRange": [
+            34.462,
+            56.557
+          ],
+          "maxCaptureGapMs": 56.556
+        }
+      ],
+      "captures": [
+        {
+          "path": "spaces/fresh-tool-resize-reference-1024x728.bmp",
+          "sha256": "9e95e2c12c115df00423743beb932e073e13770c14318c884cafdbedd5a01158",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-tool-resize-reference-960x680.bmp",
+          "sha256": "4ed413daf2c8ecef3571f02a7e7d6d8189b6838db4ff4c1b8d3665a2bd92bd5d",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-tool-resize-00-frame-000.bmp",
+          "sha256": "1736dd3bbac458377e9568f00141d0bca11ca9157f3d86cb121ac342f94e063e",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-tool-resize-00-last.bmp",
+          "sha256": "9e95e2c12c115df00423743beb932e073e13770c14318c884cafdbedd5a01158",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-tool-resize-01-frame-000.bmp",
+          "sha256": "4ed413daf2c8ecef3571f02a7e7d6d8189b6838db4ff4c1b8d3665a2bd92bd5d",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-tool-resize-01-last.bmp",
+          "sha256": "4ed413daf2c8ecef3571f02a7e7d6d8189b6838db4ff4c1b8d3665a2bd92bd5d",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-tool-resize-02-frame-000.bmp",
+          "sha256": "1736dd3bbac458377e9568f00141d0bca11ca9157f3d86cb121ac342f94e063e",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-tool-resize-02-last.bmp",
+          "sha256": "9e95e2c12c115df00423743beb932e073e13770c14318c884cafdbedd5a01158",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-tool-resize-03-frame-000.bmp",
+          "sha256": "fe31e99f1873432d5f54cd3054ddaf5a74094695804ed99d4ff171a6b5be8c81",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-tool-resize-03-last.bmp",
+          "sha256": "4ed413daf2c8ecef3571f02a7e7d6d8189b6838db4ff4c1b8d3665a2bd92bd5d",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-tool-resize-04-frame-000.bmp",
+          "sha256": "9e95e2c12c115df00423743beb932e073e13770c14318c884cafdbedd5a01158",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-tool-resize-04-last.bmp",
+          "sha256": "9e95e2c12c115df00423743beb932e073e13770c14318c884cafdbedd5a01158",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-tool-resize-05-frame-000.bmp",
+          "sha256": "4ed413daf2c8ecef3571f02a7e7d6d8189b6838db4ff4c1b8d3665a2bd92bd5d",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-tool-resize-05-last.bmp",
+          "sha256": "4ed413daf2c8ecef3571f02a7e7d6d8189b6838db4ff4c1b8d3665a2bd92bd5d",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-tool-960-visible-immediate.bmp",
+          "sha256": "7e9d66573975aaa844361ed21c07516672cddd4f7b1be5e8dda54aa98290a373",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "spaces/fresh-tool-960-visible-250ms.bmp",
+          "sha256": "7e9d66573975aaa844361ed21c07516672cddd4f7b1be5e8dda54aa98290a373",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "spaces/fresh-tool-960-visible-750ms.bmp",
+          "sha256": "7e9d66573975aaa844361ed21c07516672cddd4f7b1be5e8dda54aa98290a373",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "spaces/fresh-tool-960-visible-1250ms.bmp",
+          "sha256": "7e9d66573975aaa844361ed21c07516672cddd4f7b1be5e8dda54aa98290a373",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "spaces/fresh-tool-960x680.bmp",
+          "sha256": "45162be7c84bc5a6b379b4c679b7a91a3dba41fcaa583c418e5638504d55e43c",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "spaces/fresh-tool-1024x728.bmp",
+          "sha256": "6c0a067e7456da43943af40d160d9c7058b78c21884a4bdec03f917718095732",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-tool-1280x900.bmp",
+          "sha256": "6c0a067e7456da43943af40d160d9c7058b78c21884a4bdec03f917718095732",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-workflow-resize-reference-1024x728.bmp",
+          "sha256": "997e6c4ab929b108a25d322f1c30f64be8bb38aa709585ab8fdfd5fc5b9632ab",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-workflow-resize-reference-960x680.bmp",
+          "sha256": "35776f50824eb5787d72a35ff62760b2f9c360c083aaa67fe054a007eb657dcc",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-workflow-resize-00-frame-000.bmp",
+          "sha256": "997e6c4ab929b108a25d322f1c30f64be8bb38aa709585ab8fdfd5fc5b9632ab",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-workflow-resize-00-last.bmp",
+          "sha256": "997e6c4ab929b108a25d322f1c30f64be8bb38aa709585ab8fdfd5fc5b9632ab",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-workflow-resize-01-frame-000.bmp",
+          "sha256": "66147700e0f76894f3fa5beb33db8efef170b07d8158e0ec04db4bb280cd6a03",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-workflow-resize-01-last.bmp",
+          "sha256": "35776f50824eb5787d72a35ff62760b2f9c360c083aaa67fe054a007eb657dcc",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-workflow-resize-02-frame-000.bmp",
+          "sha256": "997e6c4ab929b108a25d322f1c30f64be8bb38aa709585ab8fdfd5fc5b9632ab",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-workflow-resize-02-last.bmp",
+          "sha256": "997e6c4ab929b108a25d322f1c30f64be8bb38aa709585ab8fdfd5fc5b9632ab",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-workflow-resize-03-frame-000.bmp",
+          "sha256": "66147700e0f76894f3fa5beb33db8efef170b07d8158e0ec04db4bb280cd6a03",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-workflow-resize-03-last.bmp",
+          "sha256": "35776f50824eb5787d72a35ff62760b2f9c360c083aaa67fe054a007eb657dcc",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-workflow-resize-04-frame-000.bmp",
+          "sha256": "f94239482d1a0fb9787f9080748654ac97f7d5c826c9f2cb0f88eee54eb88c90",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-workflow-resize-04-last.bmp",
+          "sha256": "997e6c4ab929b108a25d322f1c30f64be8bb38aa709585ab8fdfd5fc5b9632ab",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-workflow-resize-05-frame-000.bmp",
+          "sha256": "35776f50824eb5787d72a35ff62760b2f9c360c083aaa67fe054a007eb657dcc",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-workflow-resize-05-last.bmp",
+          "sha256": "35776f50824eb5787d72a35ff62760b2f9c360c083aaa67fe054a007eb657dcc",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-workflow-960-visible-immediate.bmp",
+          "sha256": "a340221fd79cfb9bb28125ddd694cbe6150e5435831855d0f5215a5e659695ca",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "spaces/fresh-workflow-960-visible-250ms.bmp",
+          "sha256": "a340221fd79cfb9bb28125ddd694cbe6150e5435831855d0f5215a5e659695ca",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "spaces/fresh-workflow-960-visible-750ms.bmp",
+          "sha256": "a340221fd79cfb9bb28125ddd694cbe6150e5435831855d0f5215a5e659695ca",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "spaces/fresh-workflow-960-visible-1250ms.bmp",
+          "sha256": "a340221fd79cfb9bb28125ddd694cbe6150e5435831855d0f5215a5e659695ca",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "spaces/fresh-workflow-960x680.bmp",
+          "sha256": "5f46e0f80e9cf581a093c40df68175d0c1df1f8c433ccb3287b639b1cb391a33",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "spaces/fresh-workflow-1024x728.bmp",
+          "sha256": "574fab14162aaa05efaade2b515a97cec06799e443e803ea54b7a3c313b4f6fc",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/fresh-workflow-1280x900.bmp",
+          "sha256": "574fab14162aaa05efaade2b515a97cec06799e443e803ea54b7a3c313b4f6fc",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-tool-resize-reference-1024x728.bmp",
+          "sha256": "45cad66048b178300ffbd457cda1b476782f05e48e83bcf52edd124053825a09",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-tool-resize-reference-960x680.bmp",
+          "sha256": "7a8b2ce5a62d9e3d93096c2c42f13a29dd7a32b83cc9e36035537bbe0927fdf2",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-tool-resize-00-frame-000.bmp",
+          "sha256": "1ccb92efd227b21c3043e1394e4596eb8d2034ded4bb42489703aff2c87f005f",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-tool-resize-00-last.bmp",
+          "sha256": "45cad66048b178300ffbd457cda1b476782f05e48e83bcf52edd124053825a09",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-tool-resize-01-frame-000.bmp",
+          "sha256": "157cb9013fa18cf15cf1d7470041257fee977849614c6d685bf93cc5afd86a2e",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-tool-resize-01-last.bmp",
+          "sha256": "7a8b2ce5a62d9e3d93096c2c42f13a29dd7a32b83cc9e36035537bbe0927fdf2",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-tool-resize-02-frame-000.bmp",
+          "sha256": "45cad66048b178300ffbd457cda1b476782f05e48e83bcf52edd124053825a09",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-tool-resize-02-last.bmp",
+          "sha256": "45cad66048b178300ffbd457cda1b476782f05e48e83bcf52edd124053825a09",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-tool-resize-03-frame-000.bmp",
+          "sha256": "157cb9013fa18cf15cf1d7470041257fee977849614c6d685bf93cc5afd86a2e",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-tool-resize-03-last.bmp",
+          "sha256": "7a8b2ce5a62d9e3d93096c2c42f13a29dd7a32b83cc9e36035537bbe0927fdf2",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-tool-resize-04-frame-000.bmp",
+          "sha256": "45cad66048b178300ffbd457cda1b476782f05e48e83bcf52edd124053825a09",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-tool-resize-04-last.bmp",
+          "sha256": "45cad66048b178300ffbd457cda1b476782f05e48e83bcf52edd124053825a09",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-tool-resize-05-frame-000.bmp",
+          "sha256": "7a8b2ce5a62d9e3d93096c2c42f13a29dd7a32b83cc9e36035537bbe0927fdf2",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-tool-resize-05-last.bmp",
+          "sha256": "7a8b2ce5a62d9e3d93096c2c42f13a29dd7a32b83cc9e36035537bbe0927fdf2",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-tool-960-visible-immediate.bmp",
+          "sha256": "879cf5f08bfd95fa1ddd570a7717bbe23802d6b5b6bdc97e665f12388ace8ef4",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "spaces/upgraded-tool-960-visible-250ms.bmp",
+          "sha256": "879cf5f08bfd95fa1ddd570a7717bbe23802d6b5b6bdc97e665f12388ace8ef4",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "spaces/upgraded-tool-960-visible-750ms.bmp",
+          "sha256": "879cf5f08bfd95fa1ddd570a7717bbe23802d6b5b6bdc97e665f12388ace8ef4",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "spaces/upgraded-tool-960-visible-1250ms.bmp",
+          "sha256": "879cf5f08bfd95fa1ddd570a7717bbe23802d6b5b6bdc97e665f12388ace8ef4",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "spaces/upgraded-tool-960x680.bmp",
+          "sha256": "70e6feecb8d21b1fa4ffe0b61fa3f8013c8333a1ac96d9d88abda47698d76649",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "spaces/upgraded-tool-1024x728.bmp",
+          "sha256": "0db9b17c6e43274faf23eefea6c8e7c24986d6ac0d8e7ded5a593934963c8664",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-tool-1280x900.bmp",
+          "sha256": "0db9b17c6e43274faf23eefea6c8e7c24986d6ac0d8e7ded5a593934963c8664",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-workflow-resize-reference-1024x728.bmp",
+          "sha256": "426c0724b87337fab2849780fc80518f8440a3a8ec8a831cc47e95416e4bda92",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-workflow-resize-reference-960x680.bmp",
+          "sha256": "d73f4daf1169d90e82984ac5721a802b7ca5139e1da51f3291aba9af5e0bd0ec",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-workflow-resize-00-frame-000.bmp",
+          "sha256": "426c0724b87337fab2849780fc80518f8440a3a8ec8a831cc47e95416e4bda92",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-workflow-resize-00-last.bmp",
+          "sha256": "426c0724b87337fab2849780fc80518f8440a3a8ec8a831cc47e95416e4bda92",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-workflow-resize-01-frame-000.bmp",
+          "sha256": "d73f4daf1169d90e82984ac5721a802b7ca5139e1da51f3291aba9af5e0bd0ec",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-workflow-resize-01-last.bmp",
+          "sha256": "d73f4daf1169d90e82984ac5721a802b7ca5139e1da51f3291aba9af5e0bd0ec",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-workflow-resize-02-frame-000.bmp",
+          "sha256": "426c0724b87337fab2849780fc80518f8440a3a8ec8a831cc47e95416e4bda92",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-workflow-resize-02-last.bmp",
+          "sha256": "426c0724b87337fab2849780fc80518f8440a3a8ec8a831cc47e95416e4bda92",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-workflow-resize-03-frame-000.bmp",
+          "sha256": "d73f4daf1169d90e82984ac5721a802b7ca5139e1da51f3291aba9af5e0bd0ec",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-workflow-resize-03-last.bmp",
+          "sha256": "d73f4daf1169d90e82984ac5721a802b7ca5139e1da51f3291aba9af5e0bd0ec",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-workflow-resize-04-frame-000.bmp",
+          "sha256": "426c0724b87337fab2849780fc80518f8440a3a8ec8a831cc47e95416e4bda92",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-workflow-resize-04-last.bmp",
+          "sha256": "426c0724b87337fab2849780fc80518f8440a3a8ec8a831cc47e95416e4bda92",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-workflow-resize-05-frame-000.bmp",
+          "sha256": "d73f4daf1169d90e82984ac5721a802b7ca5139e1da51f3291aba9af5e0bd0ec",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-workflow-resize-05-last.bmp",
+          "sha256": "d73f4daf1169d90e82984ac5721a802b7ca5139e1da51f3291aba9af5e0bd0ec",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-workflow-960-visible-immediate.bmp",
+          "sha256": "22fa076be71639192c9bf57bd407255858c527afc0883ffc56ebeea3e1e7bd22",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "spaces/upgraded-workflow-960-visible-250ms.bmp",
+          "sha256": "22fa076be71639192c9bf57bd407255858c527afc0883ffc56ebeea3e1e7bd22",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "spaces/upgraded-workflow-960-visible-750ms.bmp",
+          "sha256": "22fa076be71639192c9bf57bd407255858c527afc0883ffc56ebeea3e1e7bd22",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "spaces/upgraded-workflow-960-visible-1250ms.bmp",
+          "sha256": "22fa076be71639192c9bf57bd407255858c527afc0883ffc56ebeea3e1e7bd22",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "spaces/upgraded-workflow-960x680.bmp",
+          "sha256": "a7870965ae4b0c935ede34d83445346e9debc4e601ea3f7f8bf38eab80947bbe",
+          "width": 960,
+          "height": 680
+        },
+        {
+          "path": "spaces/upgraded-workflow-1024x728.bmp",
+          "sha256": "d51e69ae96423b732cb1aab90903b7ad61724c8ac9148d2b4091e3172bb8e0a2",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "spaces/upgraded-workflow-1280x900.bmp",
+          "sha256": "d51e69ae96423b732cb1aab90903b7ad61724c8ac9148d2b4091e3172bb8e0a2",
+          "width": 1024,
+          "height": 728
+        }
+      ]
+    }
+  }
+}
