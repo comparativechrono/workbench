@@ -174,7 +174,7 @@ def resize_regions(ui, rectangle):
         if not ui.user.IsWindowVisible(control['hwnd']):
             continue
         identity, klass = control['id'], control['class']
-        if not ((klass == 'Static' and identity != 119) or
+        if not ((klass == 'Static' and identity not in (119, 430)) or
                 (klass == 'Button' and identity in buttons)):
             continue
         a, b, c, d = control['bounds']
@@ -519,8 +519,18 @@ def fixed_layout(ui, mode):
         handle = ui.child(identity)
         require(handle and ui.user.IsWindowVisible(handle), 'Missing fixed control: ' + str(identity))
         rect = ui.bounds(handle)
+        extra = {}
+        if identity == 104:
+            library = ui.library()
+            if hasattr(library, 'viewport') and library.viewport() != handle:
+                # The pixel-scrolling child deliberately extends beyond its
+                # clipping parent. The visible pane, not its backing child,
+                # must remain wholly inside the actual window and work area.
+                extra = {'nativeChildBounds': rect, 'viewportControlId': 430,
+                         'visibleClientBounds': library.visible_bounds()}
+                rect = ui.bounds(library.viewport())
         require(inside(rect, bounds) and inside(rect, area), 'Fixed control clips: ' + str(identity))
-        measured.append({'id': identity, 'class': ui.label(handle, True), 'bounds': rect})
+        measured.append({'id': identity, 'class': ui.label(handle, True), 'bounds': rect, **extra})
     buttons = [row for row in measured if row['class'] == 'Button']
     for index, a in enumerate(buttons):
         for b in buttons[index + 1:]:

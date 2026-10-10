@@ -297,7 +297,7 @@ def hover_no_tooltip(ui, tree, item, report, name):
     u.GetWindowLongPtrW.argtypes, u.GetWindowLongPtrW.restype = [wintypes.HWND, ctypes.c_int], ctypes.c_ssize_t
     style = u.GetWindowLongPtrW(tree.hwnd, -16)
     require(style & 0x80, 'Native tree has not disabled tooltip behavior.')  # TVS_NOTOOLTIPS
-    rect = intersect(tree.rect(item, False), client_box(ui, tree.hwnd))
+    rect = intersect(tree.rect(item, False), tree.visible_bounds())
     ui.mouse(rect[0] + min(50, (rect[2] - rect[0]) // 2), (rect[1] + rect[3]) // 2)
     samples, start = [], time.monotonic()
     while time.monotonic() - start < 2:
@@ -340,7 +340,7 @@ def line_coverage(rows, require_complete=False):
 
 def wheel_line_into_view(ui, tree, item, offset, line_height):
     """Reveal a line using ordinary wheel input, never EnsureVisible or repair."""
-    client = client_box(ui, tree.hwnd)
+    client = tree.visible_bounds()
     for _ in range(100):
         top = tree.rect(item, False)[1] + offset
         if client[1] <= top and top + line_height <= client[3]:
@@ -356,26 +356,44 @@ def check_row(ui, tree, item, reference, title, description, report, name):
     search = ui.bounds(ui.child(102))
     ui.mouse(search[0] + 4, search[1] + 4)
     time.sleep(.2)
-    client, row = client_box(ui, tree.hwnd), tree.rect(item, False)
+    client, row = tree.visible_bounds(), tree.rect(item, False)
     scale = ui.user.GetDpiForWindow(ui.main) / 96
     px = lambda n: round(n * scale)
     # Contract: reserve one native scrollbar width, whether already present or not.
     style = ui.user.GetWindowLongPtrW(tree.hwnd, -16)
     indent = ui.send(tree.hwnd, 0x1106)  # TVM_GETINDENT.
-    text_left = client[0] + indent * (2 if tree.next(item, 3) else 1) + px(4)
+    drawing_client = tree.client_bounds()
+    text_left = drawing_client[0] + indent * (2 if tree.next(item, 3) else 1) + px(4)
     ui.user.GetSystemMetricsForDpi.argtypes = [ctypes.c_int, wintypes.UINT]
     scrollbar = ui.user.GetSystemMetricsForDpi(2, ui.user.GetDpiForWindow(ui.main))
-    width = client[2] - text_left - px(6) - (0 if style & 0x00200000 else scrollbar)
+    # A pixel viewport's client already reserves its own scrollbar. The
+    # historical direct TreeView reserves space while its scrollbar is hidden.
+    reserve = 0 if tree.viewport() != tree.hwnd or style & 0x00200000 else scrollbar
+    width = drawing_client[2] - text_left - px(6) - reserve
     require(width >= 50, 'Text column is too narrow to validate.')
     title_lines, description_lines = reference.lines(title, width, 700), reference.lines(description, width, 400)
     needed = px(6) + len(title_lines) * reference.line_heights[700] + (px(3) if description else 0) + len(description_lines) * reference.line_heights[400] + px(6)
     require(row[3] - row[1] >= needed, 'Native row is shorter than the complete wrapped title and description.')
+    viewport_geometry = None
+    if tree.viewport() != tree.hwnd:
+        viewport = tree.client_bounds(tree.viewport())
+        logical_rows = [item for category in tree.roots()
+                        for item in [category] + (tree.children(category) if tree.expanded(category) else [])]
+        maximum_row = max(tree.item_height(item) for item in logical_rows)
+        require(drawing_client[0] <= viewport[0] and drawing_client[1] <= viewport[1] and
+                drawing_client[2] >= viewport[2] and drawing_client[3] >= viewport[3],
+                'Native backing tree does not cover its complete clipping viewport.')
+        require(drawing_client[3] - drawing_client[1] <= viewport[3] - viewport[1] + maximum_row,
+                'Native backing tree exceeds its viewport-plus-largest-row height bound.')
+        viewport_geometry = {'viewportClient': viewport, 'nativeChildClient': drawing_client,
+                             'largestNativeVisibleRowHeight': maximum_row,
+                             'scrollInfo': ui.scroll_info(tree.viewport())}
     capture, actual = ui.screen_capture(name + '-displayed.bmp', client)
     report['captures'].append(capture)
     observations = {'name': name, 'title': title, 'description': description,
         'client': client, 'row': row, 'textColumn': [text_left, width], 'requiredHeight': needed,
         'titleLines': title_lines, 'descriptionLines': description_lines,
-        'font': reference.identity, 'lineHeights': reference.line_heights, 'blocks': []}
+        'font': reference.identity, 'lineHeights': reference.line_heights, 'viewportGeometry': viewport_geometry, 'blocks': []}
     report.setdefault('renderedRows', []).append(observations)
     y = row[1] + px(6)
     for label, lines, weight, color in [('title', title_lines, 700, (32, 44, 62)),
@@ -471,11 +489,11 @@ def exercise(root, evidence, report):
             passed(report, 'unbroken-token', 'Oversized name/description tokens wrap within the actual column without dropping or clipping their ends.')
             filter_to(ui, tree, 'FINAL LONG DESCRIPTION ANSWER')
             item = tree.tools()[0]
-            before = ui.scroll_info(tree.hwnd)
+            before = ui.scroll_info(tree.viewport())
             first, last = check_complete_row(ui, tree, item, reference, LONG_NAME, LONG_DESCRIPTION, report, 'long-description')
-            client = client_box(ui, tree.hwnd)
+            client = tree.visible_bounds()
             require(first['row'][3] - first['row'][1] > client[3] - client[1], 'Maximum-length fixture did not exceed the viewport.')
-            require(ui.scroll_info(tree.hwnd)['nPos'] > before['nPos'] and last['row'][1] < client[1],
+            require(ui.scroll_info(tree.viewport())['nPos'] > before['nPos'] and last['row'][1] < client[1],
                     'Long row did not scroll through its own content.')
             # Click an actual lower description line, not an offscreen row midpoint.
             bottom = last['blocks'][-1]['visible']

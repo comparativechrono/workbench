@@ -676,7 +676,9 @@ def gui_contracts(root, evidence, report):
             by_id = {c["id"]: c for c in rows if c["id"] > 0}
             for identity in (102, 104, 410, 411, 118):
                 require(identity in by_id, "Missing visible native control: " + str(identity))
-            tools, form = by_id[104]["bounds"], by_id[118]["bounds"]
+            library = ui.library()
+            tools = library.visible_bounds() if hasattr(library, 'visible_bounds') else by_id[104]["bounds"]
+            form = by_id[118]["bounds"]
             require(tools[2] <= form[0], "Tool library overlaps the selected tool form.")
             if mode == "tool":
                 for identity in (101, 413, 111, 403):
@@ -688,7 +690,7 @@ def gui_contracts(root, evidence, report):
                 canvas = by_id[117]["bounds"]
                 require(tools[2] <= canvas[0] and canvas[2] <= form[0], "Workflow panes overlap.")
             geometry.append({"mode": mode, "requestedSize": size, "actualWindowBounds": ui.bounds(ui.main),
-                             "dpi": ui.user.GetDpiForWindow(ui.main), "controls": rows})
+                             "dpi": ui.user.GetDpiForWindow(ui.main), "visibleToolPane": tools, "controls": rows})
         def add_input(label):
             ui.click_button(419)
             def modal_window():

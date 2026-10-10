@@ -112,6 +112,43 @@ class WrappedLibraryGateTests(unittest.TestCase):
         with self.assertRaisesRegex(AssertionError, 'Wrapping changed'):
             gate.line_coverage(observations, require_complete=True)
 
+    def test_visible_pane_intersects_oversized_child_with_actual_parent(self):
+        tree = gate.NativeTree.__new__(gate.NativeTree)
+        tree.hwnd = 4
+        def client(hwnd, pointer):
+            pointer._obj.right = 180
+            pointer._obj.bottom = 900 if hwnd == 4 else 400
+            return True
+        def screen(hwnd, pointer):
+            pointer._obj.x = 100
+            pointer._obj.y = -200 if hwnd == 4 else 50
+            return True
+        tree.user = SimpleNamespace(GetClientRect=client, ClientToScreen=screen,
+            GetParent=lambda hwnd: 9, GetDlgCtrlID=lambda hwnd: 430)
+        self.assertEqual(tree.viewport(), 9)
+        self.assertEqual(tree.client_bounds(), [100, -200, 280, 700])
+        self.assertEqual(tree.visible_bounds(), [100, 50, 280, 450])
+        tree.rect = lambda item: [120, -180, 800, 600]
+        tree.send = lambda *args: 1
+        self.assertEqual(tree.point(1), (160, 250))
+
+    def test_first_visible_uses_real_clipped_rows_without_scroll_repair(self):
+        tree = gate.NativeTree.__new__(gate.NativeTree)
+        tree.visible_bounds = lambda: [100, 50, 280, 450]
+        rows = {10: [120, -120, 270, -20], 11: [120, -20, 270, 50],
+                12: [120, 50, 270, 300], 13: [120, 300, 270, 600]}
+        calls = []
+        def next_item(item=0, relation=0):
+            calls.append((item, relation))
+            self.assertIn(relation, (5, 6))
+            return 10 if relation == 5 else item + 1 if item < 13 else 0
+        tree.next = next_item
+        tree.rect = lambda item: rows[item]
+        self.assertEqual(tree.first_visible(), 12)
+        self.assertEqual(calls, [(0, 5), (10, 6), (11, 6)])
+        tree.visible_bounds = lambda: [100, 299, 280, 450]
+        self.assertEqual(tree.first_visible(), 12)  # A genuinely visible one-pixel strip counts.
+
     def test_tall_native_row_click_is_clipped_to_actual_visible_client(self):
         tree = gate.NativeTree.__new__(gate.NativeTree)
         tree.hwnd = 4
@@ -123,7 +160,7 @@ class WrappedLibraryGateTests(unittest.TestCase):
         def screen(hwnd, pointer):
             pointer._obj.x, pointer._obj.y = 100, 50
             return True
-        tree.user = SimpleNamespace(GetClientRect=client, ClientToScreen=screen)
+        tree.user = SimpleNamespace(GetClientRect=client, ClientToScreen=screen, GetParent=lambda hwnd: 0)
         self.assertEqual(tree.point(1), (160, 250))
         tree.rect = lambda item: [120, 500, 900, 900]
         with self.assertRaisesRegex(AssertionError, 'no usable visible'):

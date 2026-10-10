@@ -83,6 +83,7 @@ enum {
   SHOW_QUEUE,
   SHOW_INDEXES,
   SHOW_RESOURCES, SHOW_RESTART, SHOW_PROJECTS,
+  LIBRARY_VIEWPORT = 430,
   PACK_SEARCH = 501,
   PACK_FILTER,
   PACK_LIST,
@@ -529,7 +530,7 @@ class Workspace {
       saveCurrent{}, loadCurrent{}, resultsList{}, resetLayout{}, toolsHeading{},
       centerHeading{}, rightHeading{}, nameLabel{}, inputLabel{}, inputHelp{},
       outputLabel{}, outputHelp{}, referenceHelp{}, generalPanel{};
-  HWND addInput{}, zoomOut{}, zoomIn{}, zoomReset{};
+  HWND addInput{}, zoomOut{}, zoomIn{}, zoomReset{}, libraryViewport{};
   HWND samplesButton{}, queueButton{};
   struct Auxiliary {
     Workspace *app = nullptr;
@@ -609,7 +610,7 @@ class Workspace {
     std::wstring category, label, description, accessible;
     std::string toolId;
     std::vector<std::wstring> titleLines, descriptionLines;
-    int titleLineHeight = 0, descriptionLineHeight = 0;
+    int titleLineHeight = 0, descriptionLineHeight = 0, height = 30;
     std::string key() const {
       return toolId.empty() ? "category:" + narrow(category) : "tool:" + toolId;
     }
@@ -628,6 +629,13 @@ class Workspace {
   std::string librarySource, libraryInspectorTool;
   int libraryLayoutWidth = -1;
   bool libraryHighContrast = false;
+  struct LibraryPosition { HTREEITEM item; int top, height; };
+  std::vector<LibraryPosition> libraryVisible;
+  int libraryScroll = 0, libraryExtent = 0, libraryLargestRow = 0,
+      libraryWheelRemainder = 0;
+  bool libraryPlacing = false, libraryExpanding = false;
+  int libraryPlacedWidth = -1, libraryPlacedHeight = -1, libraryPlacedScroll = -1;
+  unsigned libraryGeometry = 0, libraryPlacedGeometry = ~0u;
   std::vector<std::string> stepIds;
   std::vector<size_t> packRows;
   std::vector<std::pair<size_t, size_t>> refLocalRows;
@@ -3609,11 +3617,18 @@ class Workspace {
                   WS_EX_CLIENTEDGE);
     SendMessageW(search, EM_SETCUEBANNER, FALSE,
                  reinterpret_cast<LPARAM>(L"Search tools"));
+    libraryViewport = make(L"STATIC", L"", WS_VSCROLL | WS_CLIPCHILDREN,
+                           LIBRARY_VIEWPORT, nullptr,
+                           WS_EX_CLIENTEDGE | WS_EX_CONTROLPARENT | WS_EX_COMPOSITED);
+    SetWindowSubclass(libraryViewport, library_viewport_proc, 1, reinterpret_cast<DWORD_PTR>(this));
+    SCROLLINFO libraryScrollInfo{sizeof(libraryScrollInfo), SIF_RANGE | SIF_PAGE | SIF_DISABLENOSCROLL};
+    libraryScrollInfo.nPage = 1;
+    SetScrollInfo(libraryViewport, SB_VERT, &libraryScrollInfo, FALSE);
     tasks = make(WC_TREEVIEWW, L"Tool library",
                  WS_TABSTOP | TVS_HASBUTTONS | TVS_LINESATROOT |
                      TVS_SHOWSELALWAYS | TVS_FULLROWSELECT | TVS_NOHSCROLL |
-                     TVS_NOTOOLTIPS | TVS_NONEVENHEIGHT,
-                 TASKS, nullptr, WS_EX_CLIENTEDGE);
+                     TVS_NOTOOLTIPS | TVS_NONEVENHEIGHT | TVS_NOSCROLL,
+                 TASKS, libraryViewport);
     SendMessageW(tasks, CCM_SETUNICODEFORMAT, TRUE, 0);
     TreeView_SetExtendedStyle(tasks, TVS_EX_DOUBLEBUFFER, TVS_EX_DOUBLEBUFFER);
     TreeView_SetBkColor(tasks, PAPER);
@@ -3700,7 +3715,7 @@ class Workspace {
     const bool filtering = workflowMode && !getstr(state, "pendingSource").empty();
     place(clearFilter, 12, 140, left - 24, 30);
     show_control(clearFilter, filtering);
-    place(tasks, 12, filtering ? 180 : 140, left - 24,
+    place(libraryViewport, 12, filtering ? 180 : 140, left - 24,
           std::max(100, height - (filtering ? 180 : 140) - (workflowMode ? 166 : 84)));
     place(addInput, 12, height - 154, left - 24, 32);
     show_control(addInput, workflowMode && !showingHistory);
@@ -3753,6 +3768,7 @@ class Workspace {
     place(status, 12, height - 24, width - 24, 22);
     if (TreeView_GetItemHeight(tasks) != px(30)) TreeView_SetItemHeight(tasks, px(30));
     if (static_cast<int>(TreeView_GetIndent(tasks)) != px(16)) TreeView_SetIndent(tasks, px(16));
+    library_position(!resized);
     library_reflow(false, !resized);
     layout_fields(!resized);
     if (resized)
@@ -3884,16 +3900,141 @@ class Workspace {
   int library_text_right() const {
     RECT client{};
     GetClientRect(tasks, &client);
-    const int scrollbar = GetSystemMetricsForDpi(SM_CXVSCROLL, dpi);
-    // Reserve the scrollbar even while every category is collapsed. Expanding
-    // a group must not narrow/reflow its text or change the user's anchor.
-    return client.right - px(6) -
-        ((GetWindowLongPtrW(tasks, GWL_STYLE) & WS_VSCROLL) ? 0 : scrollbar);
+    // The viewport reserves its scrollbar even with collapsed categories;
+    // the native child itself has no scrollbars or extra horizontal inset.
+    return client.right - px(6);
+  }
+  const LibraryPosition *library_position_for(HTREEITEM item) const {
+    const auto found = std::find_if(libraryVisible.begin(), libraryVisible.end(),
+        [&](const auto &position) { return position.item == item; });
+    return found == libraryVisible.end() ? nullptr : &*found;
+  }
+  HTREEITEM library_anchor() const {
+    if (libraryVisible.empty()) return nullptr;
+    const auto after = std::upper_bound(libraryVisible.begin(), libraryVisible.end(), libraryScroll,
+        [](int offset, const auto &position) { return offset < position.top; });
+    return (after == libraryVisible.begin() ? after : after - 1)->item;
   }
   int library_anchor_offset(HTREEITEM item) const {
-    RECT bounds{};
-    return item && TreeView_GetItemRect(tasks, item, &bounds, FALSE)
-        ? std::max(0, -static_cast<int>(bounds.top)) : 0;
+    const auto *position = library_position_for(item);
+    return position ? std::max(0, libraryScroll - position->top) : 0;
+  }
+  void library_update_visible() {
+    libraryVisible.clear(); libraryExtent = 0; libraryLargestRow = 0;
+    bool expanded = false;
+    for (const auto &row : libraryRows) {
+      const auto found = libraryItems.find(row.key());
+      if (found == libraryItems.end()) continue;
+      if (row.toolId.empty())
+        expanded = (TreeView_GetItemState(tasks, found->second, TVIS_EXPANDED) & TVIS_EXPANDED) != 0;
+      if (row.toolId.empty() || expanded) {
+        libraryVisible.push_back({found->second, libraryExtent, row.height});
+        libraryExtent += row.height;
+        libraryLargestRow = std::max(libraryLargestRow, row.height);
+      }
+    }
+    ++libraryGeometry;
+  }
+  void library_position(bool repaint = true, bool force = false) {
+    if (!libraryViewport || !tasks || libraryPlacing) return;
+    RECT viewport{};
+    GetClientRect(libraryViewport, &viewport);
+    const int viewWidth = std::max(1L, viewport.right), viewHeight = std::max(1L, viewport.bottom);
+    libraryScroll = std::clamp(libraryScroll, 0, std::max(0, libraryExtent - viewHeight));
+    if (!force && libraryPlacedWidth == viewWidth && libraryPlacedHeight == viewHeight &&
+        libraryPlacedScroll == libraryScroll && libraryPlacedGeometry == libraryGeometry) return;
+    libraryPlacing = true;
+    libraryPlacedWidth = viewWidth; libraryPlacedHeight = viewHeight;
+    libraryPlacedScroll = libraryScroll; libraryPlacedGeometry = libraryGeometry;
+    const bool visible = (GetWindowLongPtrW(tasks, GWL_STYLE) & WS_VISIBLE) != 0;
+    if (visible) SendMessageW(tasks, WM_SETREDRAW, FALSE, 0);
+    SCROLLINFO scroll{sizeof(scroll), SIF_RANGE | SIF_PAGE | SIF_POS | SIF_DISABLENOSCROLL};
+    scroll.nMax = std::max(0, libraryExtent - 1); scroll.nPage = viewHeight; scroll.nPos = libraryScroll;
+    SetScrollInfo(libraryViewport, SB_VERT, &scroll, repaint);
+    // Native TreeView scrolling stops at item boundaries. A bounded, real
+    // child window supplies enough room for the largest row, while the outer
+    // viewport scrolls pixels through that row. Native item/hit rectangles
+    // remain real screen geometry: no translated painting or fake messages.
+    const int childHeight = viewHeight + libraryLargestRow;
+    SetWindowPos(tasks, nullptr, 0, 0, viewWidth, childHeight,
+                 SWP_NOZORDER | SWP_NOACTIVATE | SWP_NOREDRAW | SWP_NOCOPYBITS);
+    int childTop = 0;
+    if (const auto anchor = library_anchor()) {
+      TreeView_SelectSetFirstVisible(tasks, anchor);
+      RECT row{};
+      const auto *position = library_position_for(anchor);
+      if (position && TreeView_GetItemRect(tasks, anchor, &row, FALSE))
+        childTop = -(row.top + libraryScroll - position->top);
+    }
+    SetWindowPos(tasks, nullptr, 0, childTop, viewWidth, childHeight,
+                 SWP_NOZORDER | SWP_NOACTIVATE | SWP_NOREDRAW | SWP_NOCOPYBITS);
+    if (visible) SendMessageW(tasks, WM_SETREDRAW, TRUE, 0);
+    libraryPlacing = false;
+    if (repaint) RedrawWindow(libraryViewport, nullptr, nullptr,
+        RDW_INVALIDATE | RDW_ERASE | RDW_FRAME | RDW_ALLCHILDREN);
+  }
+  void library_ensure_visible(HTREEITEM item) {
+    if (libraryPlacing || rebuilding || libraryExpanding) return;
+    const auto *position = library_position_for(item);
+    if (!position) return;
+    RECT viewport{};
+    GetClientRect(libraryViewport, &viewport);
+    // A click on a lower visible part of a tall row retains that reading
+    // position. Keyboard selection of a wholly offscreen row reveals its name.
+    if (position->top + position->height <= libraryScroll ||
+        position->top >= libraryScroll + viewport.bottom)
+      libraryScroll = position->top;
+    else if (position->height <= viewport.bottom) {
+      if (position->top < libraryScroll) libraryScroll = position->top;
+      else if (position->top + position->height > libraryScroll + viewport.bottom)
+        libraryScroll = position->top + position->height - viewport.bottom;
+    }
+    library_position(true, true);
+  }
+  void library_scroll(UINT action, int thumb = 0) {
+    RECT viewport{};
+    GetClientRect(libraryViewport, &viewport);
+    const int line = px(30), page = std::max(line, static_cast<int>(viewport.bottom) - line);
+    switch (action) {
+    case SB_LINEUP: libraryScroll -= line; break;
+    case SB_LINEDOWN: libraryScroll += line; break;
+    case SB_PAGEUP: libraryScroll -= page; break;
+    case SB_PAGEDOWN: libraryScroll += page; break;
+    case SB_TOP: libraryScroll = 0; break;
+    case SB_BOTTOM: libraryScroll = libraryExtent; break;
+    case SB_THUMBPOSITION:
+    case SB_THUMBTRACK: libraryScroll = thumb; break;
+    default: return;
+    }
+    library_position();
+  }
+  void library_wheel(WPARAM value) {
+    UINT lines = 3;
+    SystemParametersInfoW(SPI_GETWHEELSCROLLLINES, 0, &lines, 0);
+    if (!lines) return;
+    RECT viewport{};
+    GetClientRect(libraryViewport, &viewport);
+    const int step = lines == WHEEL_PAGESCROLL ? std::max(1L, viewport.bottom - px(30))
+        : static_cast<int>(std::min(lines, 100u)) * px(30);
+    libraryWheelRemainder += GET_WHEEL_DELTA_WPARAM(value) * step;
+    const int delta = libraryWheelRemainder / WHEEL_DELTA;
+    libraryWheelRemainder %= WHEEL_DELTA;
+    if (delta) { libraryScroll -= delta; library_position(); }
+  }
+  static LRESULT CALLBACK library_viewport_proc(HWND h, UINT message_, WPARAM w, LPARAM l,
+                                                UINT_PTR, DWORD_PTR context) {
+    auto *app = reinterpret_cast<Workspace *>(context);
+    if (message_ == WM_NOTIFY)
+      return SendMessageW(app->window, message_, w, l);
+    if (message_ == WM_MOUSEWHEEL) { app->library_wheel(w); return 0; }
+    if (message_ == WM_VSCROLL) {
+      SCROLLINFO scroll{sizeof(scroll), SIF_TRACKPOS};
+      GetScrollInfo(h, SB_VERT, &scroll);
+      app->library_scroll(LOWORD(w), scroll.nTrackPos);
+      return 0;
+    }
+    if (message_ == WM_NCDESTROY) RemoveWindowSubclass(h, library_viewport_proc, 1);
+    return DefSubclassProc(h, message_, w, l);
   }
   void library_restore_anchor(HTREEITEM item, int offset) {
     if (!item) return;
@@ -3902,28 +4043,16 @@ class Workspace {
       if (!(TreeView_GetItemState(tasks, parent, TVIS_EXPANDED) & TVIS_EXPANDED)) {
         item = parent; offset = 0;
       }
-    if (TreeView_GetFirstVisible(tasks) != item)
-      TreeView_SelectSetFirstVisible(tasks, item);
-    RECT bounds{};
-    if (!TreeView_GetItemRect(tasks, item, &bounds, FALSE)) return;
-    const int base = std::max(1, TreeView_GetItemHeight(tasks));
-    offset = std::min(offset, std::max(0, static_cast<int>(bounds.bottom - bounds.top) - base));
-    // An integral-height row may already start above the viewport. Preserve
-    // that within-row position, using native line scrolling and bounded work.
-    int previous = library_anchor_offset(item);
-    for (int i = 0, limit = std::abs(offset - previous) / base; i < limit; ++i) {
-      SendMessageW(tasks, WM_VSCROLL, offset > previous ? SB_LINEDOWN : SB_LINEUP, 0);
-      const int current = library_anchor_offset(item);
-      if (current == previous || TreeView_GetFirstVisible(tasks) != item) break;
-      previous = current;
-    }
+    const auto *position = library_position_for(item);
+    if (position) libraryScroll = position->top + std::clamp(offset, 0, position->height - 1);
+    library_position(false);
   }
   void library_reflow(bool force = false, bool repaint = true) {
     if (!tasks || !font || !libraryBold) return;
     const int right = library_text_right();
     if (!force && right == libraryLayoutWidth) return;
     libraryLayoutWidth = right;
-    const auto anchor = TreeView_GetFirstVisible(tasks);
+    const auto anchor = library_anchor();
     const int anchorOffset = library_anchor_offset(anchor);
     const bool visible = (GetWindowLongPtrW(tasks, GWL_STYLE) & WS_VISIBLE) != 0;
     if (visible) SendMessageW(tasks, WM_SETREDRAW, FALSE, 0);
@@ -3956,14 +4085,18 @@ class Workspace {
             static_cast<int>(row.titleLines.size()), row.titleLineHeight,
             static_cast<int>(row.descriptionLines.size()), row.descriptionLineHeight,
             px(6), px(3), baseHeight);
+        row.height = item.iIntegral * baseHeight;
         SendMessageW(tasks, TVM_SETITEMW, 0, reinterpret_cast<LPARAM>(&item));
       }
     }
     ReleaseDC(tasks, dc);
+    library_update_visible();
     library_restore_anchor(anchor, anchorOffset);
+    library_position(false);
     if (visible) {
       SendMessageW(tasks, WM_SETREDRAW, TRUE, 0);
-      if (repaint) RedrawWindow(tasks, nullptr, nullptr, RDW_INVALIDATE | RDW_ERASE | RDW_FRAME);
+      if (repaint) RedrawWindow(libraryViewport, nullptr, nullptr,
+          RDW_INVALIDATE | RDW_ERASE | RDW_FRAME | RDW_ALLCHILDREN);
     }
   }
   LRESULT library_draw(NMTVCUSTOMDRAW &draw) {
@@ -4050,14 +4183,17 @@ class Workspace {
     const auto *row = library_row(item);
     if (!row || !row->toolId.empty()) return;
     const auto category = row->category;
-    HTREEITEM anchor = TreeView_GetFirstVisible(tasks);
+    HTREEITEM anchor = library_anchor();
     const int anchorOffset = library_anchor_offset(anchor);
     const bool visible = (GetWindowLongPtrW(tasks, GWL_STYLE) & WS_VISIBLE) != 0;
     // Native expansion scrolls to expose the new children. Keep the user's
     // existing viewport instead, and present the expand/restore as one update.
     if (visible) SendMessageW(tasks, WM_SETREDRAW, FALSE, 0);
+    libraryExpanding = true;
     if (TreeView_GetSelection(tasks) != item) TreeView_SelectItem(tasks, item);
     TreeView_Expand(tasks, item, action);
+    libraryExpanding = false;
+    library_update_visible();
     // Collapsed children restore to their visible ancestor; otherwise retain
     // both the first item and any partial scroll within its wrapped text.
     library_restore_anchor(anchor, anchorOffset);
@@ -4065,7 +4201,8 @@ class Workspace {
       SendMessageW(tasks, WM_SETREDRAW, TRUE, 0);
       // The tree already uses TVS_EX_DOUBLEBUFFER. Redraw its changed rows and
       // background together, without forcing intermediate erase/paint cycles.
-      RedrawWindow(tasks, nullptr, nullptr, RDW_INVALIDATE | RDW_ERASE | RDW_FRAME);
+      RedrawWindow(libraryViewport, nullptr, nullptr,
+                   RDW_INVALIDATE | RDW_ERASE | RDW_FRAME | RDW_ALLCHILDREN);
     }
     // Programmatic expansion may omit ITEMEXPANDED after EXPANDEDONCE is set.
     if (!libraryFiltered)
@@ -4076,6 +4213,14 @@ class Workspace {
   static LRESULT CALLBACK library_proc(HWND h, UINT message_, WPARAM w, LPARAM l,
                                        UINT_PTR, DWORD_PTR context) {
     auto *app = reinterpret_cast<Workspace *>(context);
+    if (message_ == WM_MOUSEWHEEL) { app->library_wheel(w); return 0; }
+    if (message_ == WM_KEYDOWN && (GetKeyState(VK_CONTROL) & 0x8000)) {
+      if (w == VK_HOME || w == VK_END || w == VK_UP || w == VK_DOWN) {
+        app->library_scroll(w == VK_HOME ? SB_TOP : w == VK_END ? SB_BOTTOM :
+                            w == VK_UP ? SB_LINEUP : SB_LINEDOWN);
+        return 0;
+      }
+    }
     if (message_ == WM_GETDLGCODE) {
       const auto *key = reinterpret_cast<const MSG *>(l);
       if (key && key->message == WM_KEYDOWN &&
@@ -4115,14 +4260,29 @@ class Workspace {
         return 0;
       }
     }
+    if (message_ == WM_KEYDOWN && (w == VK_PRIOR || w == VK_NEXT)) {
+      app->library_scroll(w == VK_PRIOR ? SB_PAGEUP : SB_PAGEDOWN);
+      const int readingPosition = app->libraryScroll;
+      app->libraryExpanding = true;
+      if (const auto item = app->library_anchor()) TreeView_SelectItem(h, item);
+      app->libraryExpanding = false;
+      app->libraryScroll = readingPosition;
+      app->library_position(true, true);
+      return 0;
+    }
     if (message_ == WM_NCDESTROY)
       RemoveWindowSubclass(h, library_proc, 1);
-    return DefSubclassProc(h, message_, w, l);
+    const LRESULT result = DefSubclassProc(h, message_, w, l);
+    if (!app->libraryPlacing && !app->libraryExpanding &&
+        (message_ == WM_KEYDOWN || message_ == WM_CHAR || message_ == WM_LBUTTONDOWN ||
+         message_ == TVM_ENSUREVISIBLE || (message_ == TVM_SELECTITEM && w == TVGN_CARET)))
+      app->library_ensure_visible(message_ == TVM_ENSUREVISIBLE
+          ? reinterpret_cast<HTREEITEM>(l) : TreeView_GetSelection(h));
+    return result;
   }
   void refresh_tasks() {
     LibraryView view{library_key(TreeView_GetSelection(tasks)),
-                     library_key(TreeView_GetFirstVisible(tasks)),
-                     library_anchor_offset(TreeView_GetFirstVisible(tasks))};
+                     library_key(library_anchor()), library_anchor_offset(library_anchor())};
     if (libraryRendered && !libraryFiltered) {
       libraryViews[libraryWorkflow] = view;
       for (HTREEITEM item = TreeView_GetRoot(tasks); item;
@@ -4203,6 +4363,7 @@ class Workspace {
               (TreeView_GetItemState(tasks, item, TVIS_EXPANDED) & TVIS_EXPANDED) != 0;
         }
       TreeView_DeleteAllItems(tasks);
+      libraryVisible.clear(); libraryScroll = 0;
       libraryRows = std::move(rows);
       libraryItems.clear();
       HTREEITEM parent = TVI_ROOT;
@@ -4230,6 +4391,7 @@ class Workspace {
                                      : libraryExpanded[row->category];
         if (expand) TreeView_Expand(tasks, item, TVE_EXPAND);
       }
+      library_update_visible();
     }
     libraryQuery = query;
     librarySource = source;
@@ -4249,8 +4411,10 @@ class Workspace {
     if (TreeView_GetSelection(tasks) != selection) TreeView_SelectItem(tasks, selection);
     const auto first = libraryItems.find(view.first);
     if (first != libraryItems.end()) library_restore_anchor(first->second, view.offset);
+    library_position(false, true);
     SendMessageW(tasks, WM_SETREDRAW, TRUE, 0);
-    RedrawWindow(tasks, nullptr, nullptr, RDW_INVALIDATE | RDW_ERASE);
+    RedrawWindow(libraryViewport, nullptr, nullptr,
+                 RDW_INVALIDATE | RDW_ERASE | RDW_FRAME | RDW_ALLCHILDREN);
     rebuilding = wasRebuilding;
   }
   void refresh_steps() {
@@ -5661,6 +5825,7 @@ class Workspace {
         return library_draw(*reinterpret_cast<NMTVCUSTOMDRAW *>(l));
       if (n->idFrom == TASKS && n->code == TVN_SELCHANGEDW && !rebuilding) {
         const auto *item = reinterpret_cast<NMTREEVIEWW *>(l);
+        library_ensure_visible(item->itemNew.hItem);
         if (libraryFiltered && !library_tool(item->itemNew.hItem).empty())
           libraryViews[workflowMode].selected = library_key(item->itemNew.hItem);
         if (!workflowMode) add_task(item->itemNew.hItem);
@@ -5672,6 +5837,13 @@ class Workspace {
         const auto *row = library_row(item->itemNew.hItem);
         if (row && row->toolId.empty() && !libraryFiltered)
           libraryExpanded[row->category] = (item->itemNew.state & TVIS_EXPANDED) != 0;
+        if (!libraryExpanding) {
+          const auto anchor = library_anchor();
+          const int offset = library_anchor_offset(anchor);
+          library_update_visible();
+          library_restore_anchor(anchor, offset);
+          library_position(true, true);
+        }
         return 0;
       }
       if (n->idFrom == TASKS && n->code == TVN_BEGINDRAGW && workflowMode && !rebuilding) {

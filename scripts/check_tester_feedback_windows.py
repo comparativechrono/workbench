@@ -413,10 +413,10 @@ def samples_blank_access(ui, report):
 
 
 def tree_snapshot(tree, item):
-    first, selected = tree.next(0, 5), tree.selected()
+    first, selected = tree.first_visible(), tree.selected()
     return {'item': tree.label(item), 'expanded': tree.expanded(item),
             'itemBounds': tree.rect(item), 'firstVisible': tree.label(first) if first else None,
-            'firstVisibleHandle': first, 'selected': tree.label(selected) if selected else None,
+            'firstVisibleHandle': first, 'nativeChildFirstVisibleHandle': tree.next(0, 5), 'selected': tree.label(selected) if selected else None,
             'selectedHandle': selected}
 
 
@@ -424,7 +424,7 @@ def triangle_point(ui, tree, item):
     """Read a visible row without EnsureVisible, which could mask the jump bug."""
     left, top, _, bottom = tree.rect(item)
     point = [left - round(10 * ui.user.GetDpiForWindow(ui.main) / 96), (top + bottom) // 2]
-    bounds = ui.bounds(tree.hwnd)
+    bounds = tree.visible_bounds()
     require(bounds[0] < point[0] < bounds[2] and bounds[1] < point[1] < bounds[3],
             'Required triangle is not already visible; no EnsureVisible repair is permitted.')
     return point
@@ -433,8 +433,8 @@ def triangle_point(ui, tree, item):
 def tree_transition(ui, keys, report, item, target, label, keyboard=False, retain_anchor=True):
     tree = ui.library()
     before = tree_snapshot(tree, item)
-    bounds = ui.bounds(tree.hwnd)
-    rectangle = [bounds[0] + 2, bounds[1] + 2, bounds[2] - 19, bounds[3] - 2]
+    bounds = tree.visible_bounds()
+    rectangle = [bounds[0] + 2, bounds[1] + 2, bounds[2] - 2, bounds[3] - 2]
     require(before['expanded'] != target, 'Tree transition must change actual expansion.')
     if keyboard:
         # Selecting the heading is an explicit real pointer action, separated
@@ -559,11 +559,11 @@ def wheel_heading_into_view(ui, tree, item, require_nonzero=False):
     screen. Measured expansion/collapse still uses no EnsureVisible or scroll
     repair, and retains the same anchor/pixel assertions.
     """
-    bounds = ui.bounds(tree.hwnd)
+    bounds = tree.visible_bounds()
     for _ in range(100):
         row = tree.rect(item)
         center = (row[1] + row[3]) // 2
-        nonzero = tree.next(0, 5) != tree.roots()[0]
+        nonzero = tree.first_visible() != tree.roots()[0]
         if bounds[1] + 4 < center < bounds[3] - 4 and (nonzero or not require_nonzero):
             return
         delta = 120 if center <= bounds[1] + 4 else -120
@@ -580,7 +580,7 @@ def tree_overflow(ui, report):
     for width, height in [(960, 680), (1024, 728)]:
         ui.fit_window(width, height)
         # Real wheel navigation establishes the top; no EnsureVisible messages.
-        box = ui.bounds(tree.hwnd)
+        box = tree.visible_bounds()
         for _ in range(35):
             ui.wheel(box[0] + 30, box[1] + 40, 120)
         time.sleep(.2)
@@ -598,7 +598,7 @@ def tree_overflow(ui, report):
         if not tree.expanded(first):
             wheel_heading_into_view(ui, tree, first)
             tree_transition(ui, keys, report, first, True, 'overflow-%d-first-open' % width)
-        require(ui.scroll_info(tree.hwnd)['nMax'] + 1 > ui.scroll_info(tree.hwnd)['nPage'],
+        require(ui.scroll_info(tree.viewport())['nMax'] + 1 > ui.scroll_info(tree.viewport())['nPage'],
                 'Overflow fixture did not create genuine native scrolling.')
         # Establish a real nonzero viewport with the target already visible;
         # variable-height descriptions may need more than one wheel notch.

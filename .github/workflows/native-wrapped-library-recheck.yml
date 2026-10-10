@@ -1,14 +1,8 @@
 name: Recheck frozen wrapped tool library candidate
 
 on:
-  push:
-    branches: [fix/native-ui-0.16.1]
-    paths:
-      - '.github/workflows/native-wrapped-library-recheck.yml'
-      - 'scripts/check_wrapped_library_windows.py'
-      - 'scripts/check_workspace_ui_windows.py'
-      - 'scripts/check_scroll_frames_0160_windows.py'
-      - 'tests/test_wrapped_library_gate.py'
+  # Historical first wrapped-library archive; its tall-row failure is retained.
+  # Production corrections require the candidate builder and new archive hashes.
   workflow_dispatch:
 
 permissions:
