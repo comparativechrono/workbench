@@ -2,26 +2,47 @@
 
 ## Active development: wrapped tool library, 2026-10-10
 
-The new presentation change is **in progress** on `fix/native-ui-0.16.1`,
+The presentation and overflow-scroll correction are implemented in application
+source `ff13db729a6215e9fe5dfa4a4efdb9c769880287` on `fix/native-ui-0.16.1`,
 starting from `568f2a74a62c4befb7ffe9c9f26390fe5a8c1d72`, in
-[draft PR #15](https://github.com/comparativechrono/workbench/pull/15).
-The version remains unpublished **0.16.1**, with the same
-`feature/deployment-acceptance` base at
-`f74d90229be6a78d6ad0c0076c54c04bb7e7cae2`.
+[draft PR #15](https://github.com/comparativechrono/workbench/pull/15). The base
+remains `feature/deployment-acceptance` at
+`f74d90229be6a78d6ad0c0076c54c04bb7e7cae2`; the version is unpublished **0.16.1**.
 
-Names and descriptions must wrap fully within the left tool library, with bold
-names and regular descriptions. Remove the hover label popup while retaining
-native category, keyboard, selection, search/filter and workflow drag behavior.
-Existing workflow, Methods, Samples, reference-management and redraw contracts
-remain in force; no tool pack or version changes are included.
+Full tool names wrap in bold and descriptions in regular weight within the left
+pane; the hover label popup is removed. Native TreeView 104 sits in bounded pixel
+viewport 430. Native coarse scrolling remains enabled behind the clip, allowing
+both long rows and a long catalogue to remain reachable. Category, keyboard,
+search/filter, selection and drag contracts remain, alongside existing workflows,
+Methods, Samples, reference management and exact tool/version pins.
 
-The [wrapped-library handover](wrapped-tool-library-0.16.1-handover.md) tracks
-implementation, source checks, exact Windows packages in both path layouts,
-archive/source correspondence and screenshot review. Those new results are
-pending. Previous evidence and the unresolved historical strict resize
-negative-control requirement remain unchanged; this is a new validation scope,
-not a replacement verdict on those runs. Published **0.16.0** remains unchanged.
-No merge or release, benchmarking or external deployment acceptance is included.
+The [build run](https://github.com/comparativechrono/workbench/actions/runs/38075960020)
+passed **258 source tests in 20 suites**, C++ JSON and three strict native builds.
+Archive audit matched 864 Git source files, 34 runtime modules, six examples,
+90 core/277 Starter files and unchanged pack/runtime baselines; the updater
+reconstructed the exact Starter core. The spaced path passed all ten native
+gates/124 checks. The ordinary path passed nine gates/111 checks and one feedback
+check before a runner console obscured the app. That original failure remains.
+
+Frozen validator `7ea0ce6bf6821089c524c307f99efb0a1892d2a3`,
+[run 38076722339](https://github.com/comparativechrono/workbench/actions/runs/38076722339),
+passed all 13 feedback checks per path on unchanged application archives,
+including overflow at both tested widths. Together this establishes **124 distinct
+native checks per path**: seven wrapped-library, 23 patch, 13 feedback and 81
+regressions. Repeated checks add no unique coverage; 18 separate validator tests
+do not add to the 258 source count. Final evidence audit and review of 41 actual
+display images are complete; the candidate is **ready for unpublished draft
+review**. The [final index](evidence/wrapped-library-0.16.1-final-acceptance-2026-10-10.json)
+binds all scopes and limits. The caption click at the modal-close setup boundary
+does not establish automatic foreground restoration; finite captures do not
+prove zero flashing. Representative-PC and broader display acceptance remain
+outstanding.
+
+The [handover](wrapped-tool-library-0.16.1-handover.md) retains every earlier
+application, driver and infrastructure failure and narrower diagnostic result.
+The historical strict resize negative-control failure remains unchanged.
+Published **0.16.0** remains unchanged; no merge, release, benchmark or external
+deployment acceptance is included.
 
 ## Previous development: Tools resize correction, 2026-10-10
 

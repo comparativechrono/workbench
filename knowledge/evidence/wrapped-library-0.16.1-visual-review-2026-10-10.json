@@ -1,0 +1,337 @@
+{
+  "schema": 1,
+  "kind": "independent actual-display visual review",
+  "reviewedUtc": "2026-10-10T18:41:08.970729+00:00",
+  "appVersion": "0.16.1",
+  "sourceCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+  "gateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+  "run": 38075960020,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/38075960020",
+  "archives": [
+    {
+      "file": "native-workbench-0.16.1-source.zip",
+      "bytes": 48487148,
+      "sha256": "002fbc8401ab744a8172f3ae11d240c925ed7a8d1241bd5d94e0413675bb1b5d"
+    },
+    {
+      "file": "native-workbench-0.16.1-starter-windows.zip",
+      "bytes": 17889148,
+      "sha256": "28f1362287991621dde030da54eb444846142c0243be6b9d86c4b4f1bf99dd47"
+    },
+    {
+      "file": "native-workbench-0.16.1-update-from-0.16.0.zip",
+      "bytes": 13051808,
+      "sha256": "d0a20f0b8288c79dba695e9cc82e78a78e95244ebb267e959d99fb9e438e7aee"
+    }
+  ],
+  "inputAudit": {
+    "path": "knowledge/evidence/wrapped-library-0.16.1-native-scroll-native-2026-10-10.json",
+    "localAuditSha256": "bb7a0fc774e8e46af307db5037903d15615851d6ac3571e0293954ea979d763f",
+    "nativeVerdictAtThisRun": "failed"
+  },
+  "evidenceArtifacts": [
+    {
+      "id": 11678630756,
+      "name": "wrapped-library-windows-ordinary-1",
+      "bytes": 24134250,
+      "sha256": "f8c6bd2e3b8efcc0a8941803c58e0fd2329751376bc8f872c92f3130e8171bf7",
+      "expiresUtc": "2026-11-09T18:34:29Z",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/38075960020/artifacts/11678630756"
+    },
+    {
+      "id": 11679090912,
+      "name": "wrapped-library-windows-path with spaces-1",
+      "bytes": 26904998,
+      "sha256": "b43480f29106ece2d7cd25d68eb996fd7fefba4bdbd0ec438a8f46ac8d0f0aae",
+      "expiresUtc": "2026-11-09T18:34:56Z",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/38075960020/artifacts/11679090912"
+    }
+  ],
+  "method": "Independent visual inspection of all 25 listed actual displayed BMPs through the image viewer. Every local BMP size and SHA-256 was recomputed against the audited artifact member before saving this receipt. Independent GDI oracle rasters were not reviewed as application screenshots.",
+  "conclusion": "No additional visible layout defect found in the unobscured selected captures. Both path cases visibly retain wrapped bold names and regular descriptions, readable token and maximum-description endings, one workflow node and real SAMtools guidance. Spaces-path overflow/collapse endpoints remain populated. Ordinary-path overflow was unreached in this run after the runner console took foreground; acceptance remains incomplete for that gate.",
+  "limits": [
+    "Static screenshots do not establish absence of transient flashing; sampled temporal/native gate reports supply that separate evidence.",
+    "Only hosted Windows and the captured DPI/window sizes were reviewed. No high-DPI, multi-monitor, representative-PC or screen-reader acceptance is claimed.",
+    "Ordinary-path overflow/collapse screenshots were not produced by this run and were not substituted with older candidate captures.",
+    "A visible workflow node does not by itself prove the pointer input, node count or keyboard behavior; use the tied native gate reports.",
+    "The partially visible first/last lines in scrolled intermediate views are viewport clipping; complete-line union coverage is checked separately by the native wrapped gate.",
+    "The ordinary feedback failure image is obstructed by the runner console and cannot support an application flashing/layout conclusion."
+  ],
+  "screenshotsReviewed": [
+    {
+      "pathCase": "ordinary",
+      "artifactId": 11678630756,
+      "member": "wrapped-library/wrapped-960-view-01-displayed.bmp",
+      "bytes": 256290,
+      "sha256": "bdff8a7acc9a514c802105fb49fc31e2b714776373c848d83f937f18c72c9475",
+      "displayPixelsReviewed": true,
+      "width": 163,
+      "height": 393,
+      "observations": "Scrolled 960-width pane crop: full multi-line tool title is visibly bold, description regular, and FINAL DESCRIPTION ANSWER is readable. Partial category text at the top is viewport clipping."
+    },
+    {
+      "pathCase": "ordinary",
+      "artifactId": 11678630756,
+      "member": "wrapped-library/wrapped-1024-hover.bmp",
+      "bytes": 2981942,
+      "sha256": "d40a04b2b8bb5038861a0b24d7406f2c93d7b55f890c07d1c855947496aaf77a",
+      "displayPixelsReviewed": true,
+      "width": 1024,
+      "height": 728,
+      "observations": "1024-width desktop: category arrow visible; category and tool names bold; full regular description remains inside the left pane, with no center-panel overlap or visible hover popup."
+    },
+    {
+      "pathCase": "ordinary",
+      "artifactId": 11678630756,
+      "member": "wrapped-library/unbroken-token-view-02-displayed.bmp",
+      "bytes": 287586,
+      "sha256": "09875afef13827e338cb81eacb78b5cab5e18b9b1a394ea1482c1b9813d0fd27",
+      "displayPixelsReviewed": true,
+      "width": 163,
+      "height": 441,
+      "observations": "Long unbroken tokens wrap within the visible column. Final END TOKEN ANSWER is readable; preceding title is partially above the scrolled viewport."
+    },
+    {
+      "pathCase": "ordinary",
+      "artifactId": 11678630756,
+      "member": "wrapped-library/long-description-view-00-displayed.bmp",
+      "bytes": 287586,
+      "sha256": "f7d653710203a3a8477ca225a16758a90aba4c5778abcbaeb46a7443e0e3ff61",
+      "displayPixelsReviewed": true,
+      "width": 163,
+      "height": 441,
+      "observations": "Start of the maximum-length description: complete category and bold title are visible with regular description text and no horizontal clipping."
+    },
+    {
+      "pathCase": "ordinary",
+      "artifactId": 11678630756,
+      "member": "wrapped-library/long-description-view-23-displayed.bmp",
+      "bytes": 287586,
+      "sha256": "3a1c4fe0a826baea9f5bd70ae2447868299644e350b40d6a172aab8a5b582c2c",
+      "displayPixelsReviewed": true,
+      "width": 163,
+      "height": 441,
+      "observations": "Maximum-length description endpoint is readable through FINAL LONG DESCRIPTION ANSWER. No omitted final suffix is visible."
+    },
+    {
+      "pathCase": "ordinary",
+      "artifactId": 11678630756,
+      "member": "wrapped-library/wrapped-workflow-drag.bmp",
+      "bytes": 2981942,
+      "sha256": "11dff325039d8942008bf7f58b9e62b7d902962b523e0dea396d81b7384d442c",
+      "displayPixelsReviewed": true,
+      "width": 1024,
+      "height": 728,
+      "observations": "Workflow desktop shows one visible node, a fully wrapped left-pane title and regular description, with no left-pane overlap into the canvas. Input mechanics and exact node count are established by the separate native gate, not this static image."
+    },
+    {
+      "pathCase": "ordinary",
+      "artifactId": 11678630756,
+      "member": "wrapped-library/samtools-fai-guidance-view-00-displayed.bmp",
+      "bytes": 287586,
+      "sha256": "ae3a26062f53fca5f9744e6f68029a81ffab04630458c04265335150b138bd0f",
+      "displayPixelsReviewed": true,
+      "width": 163,
+      "height": 441,
+      "observations": "Real SAMtools FASTA lookup index entry has a bold wrapped title, regular wrapped guidance and visible category arrow; later guidance is below the current viewport."
+    },
+    {
+      "pathCase": "ordinary",
+      "artifactId": 11678630756,
+      "member": "wrapped-library/samtools-fai-guidance-view-01-displayed.bmp",
+      "bytes": 287586,
+      "sha256": "2afb67422945a796b08f1bc1b63230da46e1995d844b7ae150e28aebaccc695a",
+      "displayPixelsReviewed": true,
+      "width": 163,
+      "height": 441,
+      "observations": "Scrolled real SAMtools guidance is readable through its final prerequisite sentence. Name and description weights remain visibly distinct."
+    },
+    {
+      "pathCase": "ordinary",
+      "artifactId": 11678630756,
+      "member": "wrapped-library/wrapped-final-desktop.bmp",
+      "bytes": 2981942,
+      "sha256": "e05b9b7acc12342a94655828fab61e1824d22b9335bbc65dafe681730660bf44",
+      "displayPixelsReviewed": true,
+      "width": 1024,
+      "height": 728,
+      "observations": "Final Tools desktop retains the standalone form while the real SAMtools guidance is displayed in the left pane; no center-panel overlap or duplicated native scrollbar is visible."
+    },
+    {
+      "pathCase": "ordinary",
+      "artifactId": 11678630756,
+      "member": "feedback/feedback-failure-0.bmp",
+      "bytes": 2981942,
+      "sha256": "62d23e46d0061ef8ed45703f8abe92231348bd345c1453e0623ae8312a34c1df",
+      "displayPixelsReviewed": true,
+      "width": 1024,
+      "height": 728,
+      "observations": "HostedComputeAgent console visibly obscures most of the ordinary-path application. The main caption remains exposed. This capture cannot establish application flashing, overflow layout or an app focus defect."
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifactId": 11679090912,
+      "member": "wrapped-library/wrapped-960-view-01-displayed.bmp",
+      "bytes": 256290,
+      "sha256": "bdff8a7acc9a514c802105fb49fc31e2b714776373c848d83f937f18c72c9475",
+      "displayPixelsReviewed": true,
+      "width": 163,
+      "height": 393,
+      "observations": "Scrolled 960-width pane crop: full multi-line tool title is visibly bold, description regular, and FINAL DESCRIPTION ANSWER is readable. Partial category text at the top is viewport clipping."
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifactId": 11679090912,
+      "member": "wrapped-library/wrapped-1024-hover.bmp",
+      "bytes": 2981942,
+      "sha256": "09d4f40bb3df9132bfb83122787e8bb9dc2466294bba5caa3c134ea923a44082",
+      "displayPixelsReviewed": true,
+      "width": 1024,
+      "height": 728,
+      "observations": "1024-width desktop: category arrow visible; category and tool names bold; full regular description remains inside the left pane, with no center-panel overlap or visible hover popup."
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifactId": 11679090912,
+      "member": "wrapped-library/unbroken-token-view-02-displayed.bmp",
+      "bytes": 287586,
+      "sha256": "09875afef13827e338cb81eacb78b5cab5e18b9b1a394ea1482c1b9813d0fd27",
+      "displayPixelsReviewed": true,
+      "width": 163,
+      "height": 441,
+      "observations": "Long unbroken tokens wrap within the visible column. Final END TOKEN ANSWER is readable; preceding title is partially above the scrolled viewport."
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifactId": 11679090912,
+      "member": "wrapped-library/long-description-view-00-displayed.bmp",
+      "bytes": 287586,
+      "sha256": "f7d653710203a3a8477ca225a16758a90aba4c5778abcbaeb46a7443e0e3ff61",
+      "displayPixelsReviewed": true,
+      "width": 163,
+      "height": 441,
+      "observations": "Start of the maximum-length description: complete category and bold title are visible with regular description text and no horizontal clipping."
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifactId": 11679090912,
+      "member": "wrapped-library/long-description-view-23-displayed.bmp",
+      "bytes": 287586,
+      "sha256": "3a1c4fe0a826baea9f5bd70ae2447868299644e350b40d6a172aab8a5b582c2c",
+      "displayPixelsReviewed": true,
+      "width": 163,
+      "height": 441,
+      "observations": "Maximum-length description endpoint is readable through FINAL LONG DESCRIPTION ANSWER. No omitted final suffix is visible."
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifactId": 11679090912,
+      "member": "wrapped-library/wrapped-workflow-drag.bmp",
+      "bytes": 2981942,
+      "sha256": "8e73f605e5885d837c9461b46d545819efa013894d0690f0d27e5ab38437386d",
+      "displayPixelsReviewed": true,
+      "width": 1024,
+      "height": 728,
+      "observations": "Workflow desktop shows one visible node, a fully wrapped left-pane title and regular description, with no left-pane overlap into the canvas. Input mechanics and exact node count are established by the separate native gate, not this static image."
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifactId": 11679090912,
+      "member": "wrapped-library/samtools-fai-guidance-view-00-displayed.bmp",
+      "bytes": 287586,
+      "sha256": "ae3a26062f53fca5f9744e6f68029a81ffab04630458c04265335150b138bd0f",
+      "displayPixelsReviewed": true,
+      "width": 163,
+      "height": 441,
+      "observations": "Real SAMtools FASTA lookup index entry has a bold wrapped title, regular wrapped guidance and visible category arrow; later guidance is below the current viewport."
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifactId": 11679090912,
+      "member": "wrapped-library/samtools-fai-guidance-view-01-displayed.bmp",
+      "bytes": 287586,
+      "sha256": "2afb67422945a796b08f1bc1b63230da46e1995d844b7ae150e28aebaccc695a",
+      "displayPixelsReviewed": true,
+      "width": 163,
+      "height": 441,
+      "observations": "Scrolled real SAMtools guidance is readable through its final prerequisite sentence. Name and description weights remain visibly distinct."
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifactId": 11679090912,
+      "member": "wrapped-library/wrapped-final-desktop.bmp",
+      "bytes": 2981942,
+      "sha256": "c075e1e47f276bf4676f7f0a58049ebec80ea29e5c0d0eb29d6ad2cbca161881",
+      "displayPixelsReviewed": true,
+      "width": 1024,
+      "height": 728,
+      "observations": "Final Tools desktop retains the standalone form while the real SAMtools guidance is displayed in the left pane; no center-panel overlap or duplicated native scrollbar is visible."
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifactId": 11679090912,
+      "member": "feedback/overflow-scrolled-960.bmp",
+      "bytes": 2611254,
+      "sha256": "90e1e137dc541b1c17d1020a2182bec75cde84092b55ac6999740e538ed70db2",
+      "displayPixelsReviewed": true,
+      "width": 960,
+      "height": 680,
+      "observations": "960-width spaces-path desktop has a populated scrolled tools pane, wrapped names/descriptions, visible arrows and expanded selected Gate overflow first category. No blank-pane defect is visible in this static endpoint."
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifactId": 11679090912,
+      "member": "feedback/overflow-scrolled-1024.bmp",
+      "bytes": 2981942,
+      "sha256": "320140290e362a8177b21f2fbbcafdbf78c06a7008e6840414b4d53ee2f7c7c8",
+      "displayPixelsReviewed": true,
+      "width": 1024,
+      "height": 728,
+      "observations": "1024-width spaces-path desktop has a populated scrolled tools pane with the selected Gate overflow first category near the bottom; clipping is confined to viewport boundaries."
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifactId": 11679090912,
+      "member": "feedback/overflow-960-collapse-0-last.bmp",
+      "bytes": 247458,
+      "sha256": "6a4e703ed3d42c8205c550918019270e940672c35a3565f3f4cd0bde093b2643",
+      "displayPixelsReviewed": true,
+      "width": 159,
+      "height": 389,
+      "observations": "960-width collapse endpoint retains the selected category at the same visible vertical position; closed arrow and following category are visible, without a black region in this static frame."
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifactId": 11679090912,
+      "member": "feedback/overflow-960-expand-0-last.bmp",
+      "bytes": 247458,
+      "sha256": "b756af4d2376e6a306dc0057587e064beaed361c99ad704e8dc312dfb97a6424",
+      "displayPixelsReviewed": true,
+      "width": 159,
+      "height": 389,
+      "observations": "960-width expansion endpoint retains category position, changes arrow to expanded and shows its child below; no blank/black region in this static frame."
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifactId": 11679090912,
+      "member": "feedback/overflow-1024-collapse-0-last.bmp",
+      "bytes": 277986,
+      "sha256": "558e155b54d73b610d8477d6d7901141e730cac84016e3b4c11cd06dedaf52ba",
+      "displayPixelsReviewed": true,
+      "width": 159,
+      "height": 437,
+      "observations": "1024-width collapse endpoint retains the selected category and surrounding wrapped text; closed arrow visible, without a black region in this static frame."
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifactId": 11679090912,
+      "member": "feedback/overflow-1024-expand-0-last.bmp",
+      "bytes": 277986,
+      "sha256": "3ff2aa3e777f61c6fba95223c216b134645560be6b5d04b00c68886755d16e49",
+      "displayPixelsReviewed": true,
+      "width": 159,
+      "height": 437,
+      "observations": "1024-width expansion endpoint retains category position and shows the top of its child below; no blank/black region in this static frame."
+    }
+  ]
+}

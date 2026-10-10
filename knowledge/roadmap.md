@@ -2,22 +2,28 @@
 
 ## Active set: wrapped native tool library, 2026-10-10
 
-Implement the user's requested readable tool rows in unpublished **0.16.1**,
-continuing [draft PR #15](https://github.com/comparativechrono/workbench/pull/15):
-complete wrapped tool names in bold, complete descriptions in regular text,
-all within the left pane, and no hover label popup. Preserve native category,
-keyboard, search/filter, selection and drag behavior and existing workflows,
-Methods, Samples, reference management and redraw corrections. Published tool
-packs and application **0.16.0** remain unchanged.
+Unpublished **0.16.1** application source
+`ff13db729a6215e9fe5dfa4a4efdb9c769880287` implements full bold wrapped names,
+regular wrapped descriptions and removal of the library hover popup. The bounded
+native viewport supports tall rows and overflow scrolling, preserving category,
+keyboard, search/filter, selection, drag and scientific workflow contracts.
 
-The [handover](wrapped-tool-library-0.16.1-handover.md) records this set's own
-implementation and evidence. Completion requires relevant source checks, an
-exact packaged Windows candidate in ordinary and spaced paths, native library
-and regression checks, archive/source correspondence, and screenshot review.
-These results are pending. Keep older evidence and the separate failed strict
-resize negative control intact. Deliver to the existing draft review PR without
-merging or publishing. Broader display/PC acceptance, signing/IT, Linux CWL and
-SDK recovery remain outstanding; benchmarking is handled separately.
+The exact build passed 258 source tests, C++ JSON, three strict native builds and
+archive/source audit. The full run plus frozen feedback recheck
+[38076722339](https://github.com/comparativechrono/workbench/actions/runs/38076722339)
+passed **124 distinct native checks per Windows path** on unchanged archives.
+The initial ordinary runner-console obstruction and earlier application/driver
+failures remain recorded. Repeated checks and separate validator tests add no
+unique application coverage.
+
+Final evidence audit and 41-image review are complete. This set is **ready for
+unpublished draft review** through existing
+[draft PR #15](https://github.com/comparativechrono/workbench/pull/15), with the
+[handover](wrapped-tool-library-0.16.1-handover.md) and
+[final acceptance index](evidence/wrapped-library-0.16.1-final-acceptance-2026-10-10.json).
+No merge or publication is included. Published **0.16.0**, independent pack pins
+and historical resize evidence remain unchanged. Broader PC/display acceptance,
+signing/IT, Linux CWL and SDK recovery remain outstanding; benchmarking is separate.
 
 ## Previous set: Tools resize correction, 2026-10-10
 

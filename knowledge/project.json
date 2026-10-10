@@ -175,7 +175,9 @@
     "tester_feedback_0_16_1_feedback_visual_ordinary": "evidence/tester-feedback-0.16.1-feedback-visual-ordinary-2026-10-09.json",
     "tester_feedback_0_16_1_feedback_visual_spaces": "evidence/tester-feedback-0.16.1-feedback-visual-spaces-2026-10-09.json",
     "resize_redraw_0_16_1_handover": "resize-redraw-0.16.1-handover.md",
-    "wrapped_tool_library_0_16_1_handover": "wrapped-tool-library-0.16.1-handover.md"
+    "wrapped_tool_library_0_16_1_handover": "wrapped-tool-library-0.16.1-handover.md",
+    "wrapped_tool_library_0_16_1_historical_evidence": "evidence/wrapped-library-0.16.1-historical-evidence-index-2026-10-10.json",
+    "wrapped_tool_library_0_16_1_final_acceptance": "evidence/wrapped-library-0.16.1-final-acceptance-2026-10-10.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -2209,7 +2211,7 @@
     "base_commit": "f74d90229be6a78d6ad0c0076c54c04bb7e7cae2",
     "pull_request": "https://github.com/comparativechrono/workbench/pull/15",
     "pull_request_state": "draft",
-    "status": "in progress; implementation and new exact-package validation pending",
+    "status": "implementation and recorded source/archive/native/visual validation complete; ready for unpublished draft review",
     "authorization": "Show complete wrapped native library names in bold and descriptions in regular text, removing the label hover popup; continue unpublished draft review.",
     "release_authorized": false,
     "released": false,
@@ -2225,22 +2227,322 @@
       "Preserve workflows, exact pack pins, Methods, Samples editing, reference management and existing redraw corrections",
       "Build and validate new exact source/Starter/updater archives in ordinary and space-containing Windows paths with screenshot review"
     ],
-    "verification_progress": {
-      "implementation": "in progress",
-      "source_checks": "pending",
-      "exact_native_windows_checks": "pending in both path layouts",
-      "archive_source_audit": "pending",
-      "screenshot_review": "pending"
-    },
     "prior_handover": "resize-redraw-0.16.1-handover.md",
     "prior_application_source_commit": "51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e",
     "evidence_boundary": "Previous passes apply only to their named bytes. The earlier strict single-transition resize negative control remains failed and is not rerun or reclassified by the new library scope.",
     "known_limits": [
       "Unpublished draft review only; no merge or release and no tool-pack or version changes.",
-      "New application bytes require new exact-package evidence; none is claimed yet.",
-      "Finite hosted captures do not establish representative-PC, high-DPI, multiple-monitor, physical-trackpad or managed-machine acceptance.",
-      "Signing/IT approval, scientific Linux CWL and SDK/build recovery remain separate; benchmarking is managed separately."
+      "Acceptance applies only to the recorded exact ff13 archives and hosted Windows scope; previous failed runs retain their original verdicts.",
+      "Both feedback rechecks used one real exposed owned caption click after the blank Samples modal closed; automatic foreground restoration is not established.",
+      "Finite temporal samples and selected stills do not establish zero flashing or representative-PC, high-DPI, multiple-monitor, screen-reader, physical-trackpad or managed-machine acceptance.",
+      "Signing/IT approval, scientific Linux CWL, SDK/build recovery and release/updater rollout remain separate; benchmarking is managed separately.",
+      "Actions artifacts expire 2026-11-09; durable receipts preserve identities/findings rather than binary captures."
     ],
-    "next_action": "Complete implementation and focused source checks, build frozen archives, validate both Windows paths, review screenshots and save focused evidence in draft PR #15."
+    "next_action": "Review the exact unpublished candidate through draft PR #15 and obtain representative-PC acceptance; no merge or release is included.",
+    "application_source_commit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+    "initial_validator_commit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+    "source_build_run": 38075960020,
+    "source_build_run_url": "https://github.com/comparativechrono/workbench/actions/runs/38075960020",
+    "implementation": {
+      "native_control": "TreeView 104 within native parent viewport 430, with variable integral-height rows and complete accessible name/description text",
+      "display": "Full canonical names at bold font weight 700 and descriptions at regular font weight 400",
+      "wrapping": "Font-measured lines and oversized-token splitting that preserves UTF-16 surrogate pairs",
+      "reflow": "Width/content caching, reserved scrollbar width, preserved first visible row and within-row offset",
+      "hover": "Library tooltip behavior disabled",
+      "contrast": "Windows system colours in high-contrast mode",
+      "preserved": "Native categories, keyboard, selection, search/filter, workflow dragging, tool identities and saved pins",
+      "viewport": "Outer native pixel scrolling; real child window bounded to viewport height plus largest row; actual native screen item/hit geometry retained",
+      "tall_row_contract": "Complete wrapped rows, including a 2048-character fixture, and catalogue overflow passed the tied native gates in both path layouts",
+      "window_class": "Registered application viewport class compatible with composited drawing; exact current Windows startup passed",
+      "overflow_correction": "Native coarse scrolling permanently enabled; child width extends one DPI-adjusted native scrollbar width outside parent clip; all visible text wrapping and paint bounds use parent viewport"
+    },
+    "retained_attempts": [
+      {
+        "application_source_commit": "a2c35bf035281b3446dfab8c133fd34e8545ce78",
+        "validator_commit": "a2c35bf035281b3446dfab8c133fd34e8545ce78",
+        "run": 38072008564,
+        "status": "superseded original candidate; native validation failed",
+        "source_tests": {
+          "passed": 254,
+          "suites": 20,
+          "cpp_json": "passed",
+          "strict_native_builds": 3
+        },
+        "archive_source_audit": "passed for original bytes only",
+        "archives": [
+          {
+            "file": "native-workbench-0.16.1-source.zip",
+            "bytes": 48461110,
+            "sha256": "64677205101d704957e6bbf9da66245256b5dca1ad606ec908f8f0fffec7df14"
+          },
+          {
+            "file": "native-workbench-0.16.1-starter-windows.zip",
+            "bytes": 17886478,
+            "sha256": "e5fc48276f92a4038aaeadcea5b28eefa70386f849ae35579b04f6e117e53085"
+          },
+          {
+            "file": "native-workbench-0.16.1-update-from-0.16.0.zip",
+            "bytes": 13049139,
+            "sha256": "5db241c23ac5d63d70ebbed18980075a6900977ac8281384d8ca6c2df9e02e64"
+          }
+        ],
+        "native": "Seven gates passed per path; three stopped on driver assumptions including a whole-row viewport precondition and exact name-only labels."
+      },
+      {
+        "application_source_commit": "a2c35bf035281b3446dfab8c133fd34e8545ce78",
+        "validator_commit": "5c5da273653d125156911cb7a27633e0924dce91",
+        "status": "frozen-package focused gate failed on real complete-text reachability defect",
+        "observation": "Native wheel input could not reveal a complete wrapped text line."
+      },
+      {
+        "application_source_commit": "a2c35bf035281b3446dfab8c133fd34e8545ce78",
+        "validator_commit": "fa762eb70a946d6968683944fcf7c9fc92165acf",
+        "status": "diagnostic completed; not native GUI acceptance",
+        "observation": "Native whole-item scrolling could not reach the suffix of an oversized row; production viewport correction required.",
+        "native_gui_validated": false
+      },
+      {
+        "application_source_commit": "aed0e2ac898fce412927a7bc997d57c164d60b3c",
+        "validator_commit": "aed0e2ac898fce412927a7bc997d57c164d60b3c",
+        "run": 38074041970,
+        "status": "superseded first viewport candidate; all ten native gates failed per path because native control creation prevented desktop startup",
+        "source_tests": {
+          "passed": 258,
+          "suites": 20,
+          "cpp_json": "passed",
+          "strict_native_builds": 3
+        },
+        "archive_source_audit": "passed for first viewport bytes only",
+        "native": {
+          "successful_gates_per_path": 0,
+          "failed_gates_per_path": 10,
+          "partial_checks_before_failure_per_path": 51,
+          "native_gui_validated": false,
+          "unavailable_checks": "Candidate desktop interaction checks were not reached because native control creation failed."
+        },
+        "focused_native_receipt_sha256": "31b6d41c0083f079d864226c7cb7a99725c9c3f0cb8a3411239098d0118e6c8a",
+        "consequence": "Production viewport class-registration correction requires a fresh exact build and full native validation."
+      },
+      {
+        "application_source_commit": "3bf08f0a8ae94f8842afc3fa07f4c20789f7ed3e",
+        "validator_commit": "3bf08f0a8ae94f8842afc3fa07f4c20789f7ed3e",
+        "run": 38074534436,
+        "status": "native run failed; source/build/archive passed",
+        "complete_native_gates_per_path": 8,
+        "checks_in_complete_gates_per_path": 104,
+        "wrapped": "Four passes/path, then missing keyboard-focus precondition.",
+        "ordinary_feedback": "Eleven passes, then real blank catalogue viewport during overflow scrolling.",
+        "spaces_feedback": "One pass, then runner console obscured application.",
+        "consequence": "Frozen diagnostic/keyboard recheck on identical archives; resolve genuine overflow failure and complete full validation before acceptance.",
+        "archives": [
+          {
+            "file": "native-workbench-0.16.1-source.zip",
+            "bytes": 48479470,
+            "sha256": "a59c12e7150dd45371d9f85e65e412036521f11d510ca8b6bb5ced215087cde2"
+          },
+          {
+            "file": "native-workbench-0.16.1-starter-windows.zip",
+            "bytes": 17889122,
+            "sha256": "48a1dbd91575c04c5b30bf59dd7d3a9c1383e22893c809bfad87f976f1c3caca"
+          },
+          {
+            "file": "native-workbench-0.16.1-update-from-0.16.0.zip",
+            "bytes": 13051787,
+            "sha256": "b5fc660a87410696893c1edf780ae1faebb9c6d629a118de262c0200a3f12fdc"
+          }
+        ]
+      },
+      {
+        "application_source_commit": "3bf08f0a8ae94f8842afc3fa07f4c20789f7ed3e",
+        "validator_commit": "f037fb612097aeff7fd576960a25d17c376504ee",
+        "run": 38075533050,
+        "status": "success within frozen focused-check and diagnostic scope",
+        "focused_checks_passed_per_path": 7,
+        "diagnostic": "Completed with nativeGUIValidated=false; TVS_NOSCROLL prevented native first-visible-item movement and clearing it moved the anchor.",
+        "consequence": "Production overflow correction requires fresh archives/full validation; prior overall failures remain retained."
+      },
+      {
+        "application_source_commit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+        "validator_commit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+        "run": 38075960020,
+        "status": "original full run failed on ordinary infrastructure obstruction; source/build/archive passed",
+        "spaces": {
+          "full_gates": 10,
+          "passed": 124
+        },
+        "ordinary": {
+          "full_gates": 9,
+          "full_gate_passes": 111,
+          "feedback_partial_passes": 1
+        },
+        "failure": "Hosted runner console obscured app and caused foreground timeout."
+      },
+      {
+        "application_source_commit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+        "validator_commit": "7ea0ce6bf6821089c524c307f99efb0a1892d2a3",
+        "run": 38076722339,
+        "status": "success; all three jobs passed",
+        "feedback_checks_passed_per_path": 13,
+        "failed": 0,
+        "application_rebuilt": false,
+        "consequence": "Combined same-archive scope is 124 distinct native checks/path; final evidence audit and visual review passed."
+      }
+    ],
+    "ready_for_acceptance": true,
+    "previous_frozen_validator_commit": "f037fb612097aeff7fd576960a25d17c376504ee",
+    "previous_frozen_validator_run": 38075533050,
+    "previous_frozen_validator_run_url": "https://github.com/comparativechrono/workbench/actions/runs/38075533050",
+    "previous_frozen_validator_run_status": "success: seven focused checks/path and diagnostic completion on unchanged 3bf08f0 archives; not overall acceptance",
+    "previous_3bf08f0_verification": {
+      "implementation": "production overflow correction implemented; fresh exact package validation pending",
+      "source_tests": {
+        "passed": 258,
+        "suites": 20,
+        "strict_native_builds": 3,
+        "cpp_json": "passed"
+      },
+      "source_validation_receipt_sha256": "c6e9bf325d0e6d3c180e3717a53ace9a977f7a1eb645c3e6a18e9a98d13c91b8",
+      "candidate_build": "passed",
+      "archive_source_audit": {
+        "status": "passed",
+        "git_source_files": 862,
+        "runtime_modules": 34,
+        "examples": 6,
+        "core_files": 90,
+        "starter_files": 277,
+        "unchanged_against_both_baselines": {
+          "runtime_files": 39,
+          "pack_files": 186
+        }
+      },
+      "exact_native_windows_checks": {
+        "overall": "failed; not ready for acceptance",
+        "complete_gates_per_path": 8,
+        "checks_in_complete_gates_per_path": 104,
+        "wrapped_partial_passes_per_path": 4,
+        "wrapped_failure": "missing keyboard-focus precondition",
+        "ordinary_feedback_partial_passes": 11,
+        "ordinary_feedback_failure": "real blank catalogue viewport during overflow scrolling",
+        "spaces_feedback_partial_passes": 1,
+        "spaces_feedback_failure": "HostedComputeAgent console obscured the app; infrastructure failure",
+        "verified_focused_observations": "Tested complete names/descriptions, font weights, absence of hover popup and 2048-character text coverage passed both paths",
+        "count_scope": "Full gates and partial outcomes remain distinct; no overall acceptance claimed."
+      },
+      "screenshot_review": "final acceptance review pending",
+      "frozen_recheck": {
+        "validator_commit": "f037fb612097aeff7fd576960a25d17c376504ee",
+        "run": 38075533050,
+        "status": "success",
+        "application_source_commit": "3bf08f0a8ae94f8842afc3fa07f4c20789f7ed3e",
+        "focused_checks_passed_per_path": 7,
+        "diagnostic_completed": true,
+        "diagnostic_native_gui_validated": false,
+        "diagnostic_finding": "TVS_NOSCROLL blocks native first-visible-item anchor movement; clearing the style enables it.",
+        "limit": "Does not erase prior overall native failures or validate a changed production package."
+      }
+    },
+    "verification_progress": {
+      "implementation": "production correction complete and independently reviewed; exact native validation passed",
+      "candidate_build": "passed",
+      "source_tests": {
+        "passed": 258,
+        "suites": 20,
+        "cpp_json": "passed",
+        "strict_native_builds": 3
+      },
+      "archive_source_audit": {
+        "status": "passed",
+        "git_source_files": 864,
+        "runtime_modules": 34,
+        "examples": 6,
+        "core_files": 90,
+        "starter_files": 277,
+        "unchanged_against_both_baselines": {
+          "runtime_files": 39,
+          "pack_files": 186
+        },
+        "updater_inventory_files": 55,
+        "updater_operations": 9,
+        "updater_reconstructs_exact_starter": true
+      },
+      "exact_native_windows_checks": {
+        "status": "124 distinct checks passed per path on unchanged ff13 archives across initial run and frozen feedback recheck",
+        "application_source_commit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+        "source_build_run": 38075960020,
+        "frozen_feedback_run": 38076722339,
+        "unique_checks_per_path": 124,
+        "scopes": {
+          "wrapped_library": 7,
+          "patch": 23,
+          "feedback": 13,
+          "existing_regressions": 81
+        },
+        "original_run_verdict": "failed: ordinary feedback interrupted by hosted runner console after one feedback pass; spaces all ten gates/124 checks passed",
+        "feedback_recheck_checks_passed_per_path": 13,
+        "feedback_recheck_failures": 0,
+        "overflow_widths_passed": [
+          960,
+          1024
+        ],
+        "application_rebuilt_for_recheck": false,
+        "limit": "Repeated observations add no unique coverage; original failed run remains failed."
+      },
+      "screenshot_review": {
+        "status": "complete within captured hosted display scope",
+        "initial_actual_images": 25,
+        "recheck_actual_images": 16,
+        "total_image_records": 41,
+        "finding": "No additional layout defect in unobscured selected captures; fresh recheck overflow/collapse endpoints populated in both paths."
+      },
+      "initial_native_evidence_audit": "passed identity/receipt checks; preserves failed overall native verdict, not acceptance",
+      "frozen_feedback_recheck": {
+        "validator_commit": "7ea0ce6bf6821089c524c307f99efb0a1892d2a3",
+        "run": 38076722339,
+        "status": "success",
+        "portable_gate_tests_passed": 18,
+        "independent_review": "passed",
+        "application_rebuilt": false,
+        "assertions": "All rendering and scrolling assertions unchanged; real titlebar activation only after blank Samples closes at setup boundary.",
+        "native_checks_passed_per_path": 13,
+        "native_failures": 0,
+        "all_jobs_passed": true
+      },
+      "final_evidence_audit": "passed",
+      "input_precondition": "Both feedback rechecks used one exposed owned caption click at the blank-Samples modal-close setup boundary; automatic foreground restoration is not established."
+    },
+    "archives": [
+      {
+        "file": "native-workbench-0.16.1-source.zip",
+        "bytes": 48487148,
+        "sha256": "002fbc8401ab744a8172f3ae11d240c925ed7a8d1241bd5d94e0413675bb1b5d"
+      },
+      {
+        "file": "native-workbench-0.16.1-starter-windows.zip",
+        "bytes": 17889148,
+        "sha256": "28f1362287991621dde030da54eb444846142c0243be6b9d86c4b4f1bf99dd47"
+      },
+      {
+        "file": "native-workbench-0.16.1-update-from-0.16.0.zip",
+        "bytes": 13051808,
+        "sha256": "d0a20f0b8288c79dba695e9cc82e78a78e95244ebb267e959d99fb9e438e7aee"
+      }
+    ],
+    "evidence": {
+      "source": "evidence/wrapped-library-0.16.1-final-source-2026-10-10.json",
+      "archives": "evidence/wrapped-library-0.16.1-native-scroll-archive-2026-10-10.json",
+      "historical_index": "evidence/wrapped-library-0.16.1-historical-evidence-index-2026-10-10.json",
+      "native_initial": "evidence/wrapped-library-0.16.1-native-scroll-native-2026-10-10.json",
+      "class_diagnostic": "evidence/wrapped-library-0.16.1-native-scroll-class-diagnostic-2026-10-10.json",
+      "validator_source": "evidence/wrapped-library-0.16.1-feedback-recheck-source-2026-10-10.json",
+      "recheck_native": "evidence/wrapped-library-0.16.1-feedback-recheck-native-2026-10-10.json",
+      "visual": "evidence/wrapped-library-0.16.1-visual-review-2026-10-10.json",
+      "recheck_visual": "evidence/wrapped-library-0.16.1-feedback-recheck-visual-2026-10-10.json",
+      "final_acceptance": "evidence/wrapped-library-0.16.1-final-acceptance-2026-10-10.json"
+    },
+    "validator_commit": "7ea0ce6bf6821089c524c307f99efb0a1892d2a3",
+    "validator_run": 38076722339,
+    "validator_run_url": "https://github.com/comparativechrono/workbench/actions/runs/38076722339",
+    "validator_run_status": "success: all three jobs passed, 13 feedback checks/path on unchanged application archives",
+    "acceptance_scope": "Exact unpublished archives on hosted Windows in ordinary and spaced paths; representative-PC and broader deployment acceptance outstanding."
   }
 }

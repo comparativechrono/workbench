@@ -1,15 +1,25 @@
 # Native Workbench knowledge base
 
-**Active wrapped tool library, 2026-10-10:** in progress in unpublished
-**0.16.1** on `fix/native-ui-0.16.1`, continuing
+**Active wrapped tool library, 2026-10-10:** implemented in unpublished
+**0.16.1** source `ff13db729a6215e9fe5dfa4a4efdb9c769880287` in
 [draft PR #15](https://github.com/comparativechrono/workbench/pull/15).
-The requested library shows complete wrapped names in bold and descriptions
-in regular text inside the left pane, without the hover label popup. Native
-category browsing, keyboard access, search, selection and dragging stay intact.
-Start with the [new handover](wrapped-tool-library-0.16.1-handover.md) and
-[library contract](expandable-tool-library.md). New implementation and exact-
-package validation are pending; previous passes apply only to their named
-archives. Published **0.16.0** remains unchanged; nothing is merged or released.
+Names wrap in bold, descriptions wrap in regular text, and the hover popup is
+removed. Native scrolling reaches tall rows without losing the library viewport.
+
+The exact build passed **258 source tests**, C++ JSON, three strict native builds
+and the archive/source audit. **124 distinct native checks per Windows path**
+passed across the full run and unchanged-archive feedback recheck
+[38076722339](https://github.com/comparativechrono/workbench/actions/runs/38076722339).
+The separate 18 validator tests and repeated native checks add no new application
+coverage. Final evidence audit and **41-image visual review** are complete;
+the candidate is **ready for unpublished draft review**. The
+[final acceptance index](evidence/wrapped-library-0.16.1-final-acceptance-2026-10-10.json)
+retains all previous failures, including the initial ordinary runner-console
+obstruction. Representative-PC and broader display acceptance remain outstanding.
+Start with the [handover](wrapped-tool-library-0.16.1-handover.md) and
+[library contract](expandable-tool-library.md).
+[Windows review download](https://github.com/comparativechrono/workbench/actions/runs/38075960020/artifacts/11678725746).
+Published **0.16.0** remains unchanged; nothing is merged or released.
 
 **Previous resize correction, 2026-10-10:** implemented in unpublished **0.16.1**
 application source `51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e` in
