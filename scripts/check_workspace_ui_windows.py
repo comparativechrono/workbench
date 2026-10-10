@@ -654,7 +654,10 @@ def gui_contracts(root, evidence, report):
             ui.set_text(ui.child(102), query)
             def choices():
                 library = ui.library()
-                return [item for item in library.tools() if not exact_label or library.label(item) == exact_label]
+                # Wrapped rows expose their description after the complete
+                # title for accessibility. Keep exact operation disambiguation.
+                return [item for item in library.tools() if not exact_label or
+                        library.label(item).partition('\n')[0] == exact_label]
             ui.wait("filter tool " + query, lambda: len(choices()) == 1)
             # The 0.13 candidate also exposes an explicitly indexed alignment.
             # Select the actual ordinary-operation label for the unchanged

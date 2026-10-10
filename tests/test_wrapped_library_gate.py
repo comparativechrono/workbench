@@ -89,6 +89,29 @@ class WrappedLibraryGateTests(unittest.TestCase):
         gate.finalize_report(report)
         self.assertFalse(report['success'])
 
+    def test_partial_boundary_lines_do_not_count_as_complete_text(self):
+        self.assertEqual(gate.complete_line_range(10, 5, 20, 10, 110), (0, 5))
+        self.assertEqual(gate.complete_line_range(10, 5, 20, 11, 109), (1, 4))
+        self.assertEqual(gate.complete_line_range(-80, 8, 20, 0, 70), (4, 7))
+        self.assertEqual(gate.complete_line_range(90, 2, 20, 0, 80), (0, 0))
+        with self.assertRaises(AssertionError):
+            gate.complete_line_range(0, 2, 0, 0, 80)
+
+    def test_coverage_requires_every_line_not_just_top_and_bottom(self):
+        def row(title, description):
+            return {'titleLines': ['title'], 'descriptionLines': ['a', 'b', 'c', 'd'],
+                'blocks': [{'label': 'title', 'completeLineIndices': title},
+                           {'label': 'description', 'completeLineIndices': description}]}
+        observations = [row([0], [0]), row([], [3])]
+        with self.assertRaisesRegex(AssertionError, 'never visibly validated'):
+            gate.line_coverage(observations, require_complete=True)
+        observations.append(row([], [1, 2]))
+        result = gate.line_coverage(observations, require_complete=True)
+        self.assertEqual(result['covered'], {'title': [0], 'description': [0, 1, 2, 3]})
+        observations[-1]['descriptionLines'].append('unexpected reflow')
+        with self.assertRaisesRegex(AssertionError, 'Wrapping changed'):
+            gate.line_coverage(observations, require_complete=True)
+
     def test_tall_native_row_click_is_clipped_to_actual_visible_client(self):
         tree = gate.NativeTree.__new__(gate.NativeTree)
         tree.hwnd = 4

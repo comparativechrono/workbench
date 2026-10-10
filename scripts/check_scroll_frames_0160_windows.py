@@ -302,7 +302,10 @@ def observe(root, evidence, report):
         expected_label = "minimap2 — Paired-end alignment (SAM)"
         def standard_alignment_rows():
             tree = ui.library()
-            return [row for row in tree.tools() if tree.label(row) == expected_label]
+            # Accessibility text includes the wrapped description after its
+            # complete title; disambiguate the exact operation by that title.
+            return [row for row in tree.tools() if
+                    tree.label(row).partition('\n')[0] == expected_label]
         ui.wait("unique standard paired-end alignment operation", lambda: len(standard_alignment_rows()) == 1)
         report["toolSelection"] = {"expectedLabel": expected_label,
             "visibleLabels": [ui.library().label(row) for row in ui.library().tools()],

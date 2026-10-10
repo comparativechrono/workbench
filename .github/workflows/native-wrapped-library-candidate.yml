@@ -4,13 +4,12 @@ on:
   push:
     branches: [fix/native-ui-0.16.1]
     paths:
-      - '.github/workflows/native-wrapped-library-candidate.yml'
+      # Validator-only fixes use the frozen recheck; production changes rebuild.
       - 'desktop/**'
       - 'workspace/**'
       - 'scripts/**'
-      - '!scripts/check_ui_patch_windows.py'
-      - '!scripts/check_tester_feedback_windows.py'
-      - '!scripts/check_wrapped_library_windows.py'
+      - '!scripts/check_*'
+      - '!scripts/native_tree.py'
       - 'tests/**'
       - '!tests/test_ui_patch_gate.py'
       - '!tests/test_tester_feedback_gate.py'
