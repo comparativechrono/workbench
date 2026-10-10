@@ -1,6 +1,17 @@
 # Native Workbench knowledge base
 
-**Active resize correction, 2026-10-10:** implemented in unpublished **0.16.1**
+**Active wrapped tool library, 2026-10-10:** in progress in unpublished
+**0.16.1** on `fix/native-ui-0.16.1`, continuing
+[draft PR #15](https://github.com/comparativechrono/workbench/pull/15).
+The requested library shows complete wrapped names in bold and descriptions
+in regular text inside the left pane, without the hover label popup. Native
+category browsing, keyboard access, search, selection and dragging stay intact.
+Start with the [new handover](wrapped-tool-library-0.16.1-handover.md) and
+[library contract](expandable-tool-library.md). New implementation and exact-
+package validation are pending; previous passes apply only to their named
+archives. Published **0.16.0** remains unchanged; nothing is merged or released.
+
+**Previous resize correction, 2026-10-10:** implemented in unpublished **0.16.1**
 application source `51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e` in
 [draft PR #15](https://github.com/comparativechrono/workbench/pull/15).
 The app places the complete resized layout before painting it. A bounded resize

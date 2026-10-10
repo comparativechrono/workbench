@@ -1,6 +1,7 @@
 #include "desktop_ipc.h"
 #include "record_list.h"
 #include "workspace_layout.h"
+#include "library_text_layout.h"
 #include "resource.h"
 #include "dag_routing.h"
 #include "workbench.h"
@@ -20,6 +21,7 @@
 #include <shobjidl.h>
 #include <sstream>
 #include <uxtheme.h>
+#include <vssym32.h>
 #include <windowsx.h>
 
 namespace {
@@ -556,7 +558,7 @@ class Workspace {
       setupRefresh{}, setupInstall{}, setupRetry{}, setupCancel{}, setupClose{}, packSetup{};
   int generalScroll = 0;
   int generalWheelRemainder = 0, formWheelRemainder = 0;
-  HFONT font{}, bold{}, small{};
+  HFONT font{}, bold{}, small{}, libraryBold{};
   HFONT refFont{};
   HBRUSH paper{}, background{};
   desktop::HostProcess host;
@@ -604,16 +606,19 @@ class Workspace {
   std::vector<HWND> formControls;
   std::map<int, size_t> fieldIds;
   struct LibraryRow {
-    std::wstring category, label;
+    std::wstring category, label, description, accessible;
     std::string toolId;
+    std::vector<std::wstring> titleLines, descriptionLines;
+    int titleLineHeight = 0, descriptionLineHeight = 0;
     std::string key() const {
       return toolId.empty() ? "category:" + narrow(category) : "tool:" + toolId;
     }
     bool operator==(const LibraryRow &other) const {
-      return category == other.category && label == other.label && toolId == other.toolId;
+      return category == other.category && label == other.label &&
+          description == other.description && toolId == other.toolId;
     }
   };
-  struct LibraryView { std::string selected, first; };
+  struct LibraryView { std::string selected, first; int offset = 0; };
   std::vector<LibraryRow> libraryRows;
   std::map<std::string, HTREEITEM> libraryItems;
   std::map<std::wstring, bool> libraryExpanded;
@@ -621,6 +626,8 @@ class Workspace {
   bool libraryFiltered = false, libraryWorkflow = false, libraryRendered = false;
   std::wstring libraryQuery;
   std::string librarySource, libraryInspectorTool;
+  int libraryLayoutWidth = -1;
+  bool libraryHighContrast = false;
   std::vector<std::string> stepIds;
   std::vector<size_t> packRows;
   std::vector<std::pair<size_t, size_t>> refLocalRows;
@@ -754,7 +761,7 @@ class Workspace {
     return DefSubclassProc(h, message_, w, l);
   }
   void fonts() {
-    for (HFONT f : {font, bold, small})
+    for (HFONT f : {font, bold, small, libraryBold})
       if (f)
         DeleteObject(f);
     auto create = [&](int size, int weight) {
@@ -766,6 +773,8 @@ class Workspace {
     font = create(14, FW_NORMAL);
     bold = create(14, FW_SEMIBOLD);
     small = create(12, FW_NORMAL);
+    libraryBold = create(14, FW_BOLD);
+    libraryLayoutWidth = -1;
     if (window)
       EnumChildWindows(
           window,
@@ -3602,7 +3611,8 @@ class Workspace {
                  reinterpret_cast<LPARAM>(L"Search tools"));
     tasks = make(WC_TREEVIEWW, L"Tool library",
                  WS_TABSTOP | TVS_HASBUTTONS | TVS_LINESATROOT |
-                     TVS_SHOWSELALWAYS | TVS_FULLROWSELECT | TVS_NOHSCROLL,
+                     TVS_SHOWSELALWAYS | TVS_FULLROWSELECT | TVS_NOHSCROLL |
+                     TVS_NOTOOLTIPS | TVS_NONEVENHEIGHT,
                  TASKS, nullptr, WS_EX_CLIENTEDGE);
     SendMessageW(tasks, CCM_SETUNICODEFORMAT, TRUE, 0);
     TreeView_SetExtendedStyle(tasks, TVS_EX_DOUBLEBUFFER, TVS_EX_DOUBLEBUFFER);
@@ -3612,6 +3622,7 @@ class Workspace {
     TreeView_SetIndent(tasks, px(16));
     SetWindowTheme(tasks, L"Explorer", nullptr);
     SetWindowSubclass(tasks, library_proc, 1, reinterpret_cast<DWORD_PTR>(this));
+    library_colors();
     LVCOLUMNW col{};
     col.mask = LVCF_TEXT | LVCF_WIDTH;
     add = button(L"Add to workflow", ADD);
@@ -3742,6 +3753,7 @@ class Workspace {
     place(status, 12, height - 24, width - 24, 22);
     if (TreeView_GetItemHeight(tasks) != px(30)) TreeView_SetItemHeight(tasks, px(30));
     if (static_cast<int>(TreeView_GetIndent(tasks)) != px(16)) TreeView_SetIndent(tasks, px(16));
+    library_reflow(false, !resized);
     layout_fields(!resized);
     if (resized)
       RedrawWindow(window, nullptr, nullptr,
@@ -3859,27 +3871,196 @@ class Workspace {
     const auto *row = library_row(item);
     return row ? row->key() : std::string();
   }
+  void library_colors() {
+    HIGHCONTRASTW contrast{sizeof(contrast)};
+    libraryHighContrast = SystemParametersInfoW(SPI_GETHIGHCONTRAST, sizeof(contrast),
+        &contrast, 0) && (contrast.dwFlags & HCF_HIGHCONTRASTON);
+    TreeView_SetBkColor(tasks, libraryHighContrast ? GetSysColor(COLOR_WINDOW) : PAPER);
+    TreeView_SetTextColor(tasks, libraryHighContrast ? GetSysColor(COLOR_WINDOWTEXT) : INK);
+  }
+  int library_text_left(const LibraryRow &row) const {
+    return static_cast<int>(TreeView_GetIndent(tasks)) * (row.toolId.empty() ? 1 : 2) + px(4);
+  }
+  int library_text_right() const {
+    RECT client{};
+    GetClientRect(tasks, &client);
+    const int scrollbar = GetSystemMetricsForDpi(SM_CXVSCROLL, dpi);
+    // Reserve the scrollbar even while every category is collapsed. Expanding
+    // a group must not narrow/reflow its text or change the user's anchor.
+    return client.right - px(6) -
+        ((GetWindowLongPtrW(tasks, GWL_STYLE) & WS_VSCROLL) ? 0 : scrollbar);
+  }
+  int library_anchor_offset(HTREEITEM item) const {
+    RECT bounds{};
+    return item && TreeView_GetItemRect(tasks, item, &bounds, FALSE)
+        ? std::max(0, -static_cast<int>(bounds.top)) : 0;
+  }
+  void library_restore_anchor(HTREEITEM item, int offset) {
+    if (!item) return;
+    for (HTREEITEM parent = TreeView_GetParent(tasks, item); parent;
+         parent = TreeView_GetParent(tasks, parent))
+      if (!(TreeView_GetItemState(tasks, parent, TVIS_EXPANDED) & TVIS_EXPANDED)) {
+        item = parent; offset = 0;
+      }
+    if (TreeView_GetFirstVisible(tasks) != item)
+      TreeView_SelectSetFirstVisible(tasks, item);
+    RECT bounds{};
+    if (!TreeView_GetItemRect(tasks, item, &bounds, FALSE)) return;
+    const int base = std::max(1, TreeView_GetItemHeight(tasks));
+    offset = std::min(offset, std::max(0, static_cast<int>(bounds.bottom - bounds.top) - base));
+    // An integral-height row may already start above the viewport. Preserve
+    // that within-row position, using native line scrolling and bounded work.
+    int previous = library_anchor_offset(item);
+    for (int i = 0, limit = std::abs(offset - previous) / base; i < limit; ++i) {
+      SendMessageW(tasks, WM_VSCROLL, offset > previous ? SB_LINEDOWN : SB_LINEUP, 0);
+      const int current = library_anchor_offset(item);
+      if (current == previous || TreeView_GetFirstVisible(tasks) != item) break;
+      previous = current;
+    }
+  }
+  void library_reflow(bool force = false, bool repaint = true) {
+    if (!tasks || !font || !libraryBold) return;
+    const int right = library_text_right();
+    if (!force && right == libraryLayoutWidth) return;
+    libraryLayoutWidth = right;
+    const auto anchor = TreeView_GetFirstVisible(tasks);
+    const int anchorOffset = library_anchor_offset(anchor);
+    const bool visible = (GetWindowLongPtrW(tasks, GWL_STYLE) & WS_VISIBLE) != 0;
+    if (visible) SendMessageW(tasks, WM_SETREDRAW, FALSE, 0);
+    HDC dc = GetDC(tasks);
+    const int baseHeight = TreeView_GetItemHeight(tasks);
+    for (auto &row : libraryRows) {
+      const int textWidth = std::max(1, right - library_text_left(row));
+      auto wrap = [&](const std::wstring &value, HFONT face, int &lineHeight) {
+        const auto previous = SelectObject(dc, face);
+        TEXTMETRICW metrics{};
+        GetTextMetricsW(dc, &metrics);
+        lineHeight = metrics.tmHeight;
+        auto lines = library_text_layout::wrap(value, textWidth,
+            [&](const std::wstring &line) {
+              SIZE size{};
+              GetTextExtentPoint32W(dc, line.data(), static_cast<int>(line.size()), &size);
+              return static_cast<int>(size.cx);
+            });
+        SelectObject(dc, previous);
+        return lines;
+      };
+      row.titleLines = wrap(row.label, libraryBold, row.titleLineHeight);
+      row.descriptionLines = wrap(row.description, font, row.descriptionLineHeight);
+      const auto found = libraryItems.find(row.key());
+      if (found != libraryItems.end()) {
+        TVITEMEXW item{};
+        item.mask = TVIF_INTEGRAL;
+        item.hItem = found->second;
+        item.iIntegral = library_text_layout::integral_height(
+            static_cast<int>(row.titleLines.size()), row.titleLineHeight,
+            static_cast<int>(row.descriptionLines.size()), row.descriptionLineHeight,
+            px(6), px(3), baseHeight);
+        SendMessageW(tasks, TVM_SETITEMW, 0, reinterpret_cast<LPARAM>(&item));
+      }
+    }
+    ReleaseDC(tasks, dc);
+    library_restore_anchor(anchor, anchorOffset);
+    if (visible) {
+      SendMessageW(tasks, WM_SETREDRAW, TRUE, 0);
+      if (repaint) RedrawWindow(tasks, nullptr, nullptr, RDW_INVALIDATE | RDW_ERASE | RDW_FRAME);
+    }
+  }
+  LRESULT library_draw(NMTVCUSTOMDRAW &draw) {
+    if (draw.nmcd.dwDrawStage == CDDS_PREPAINT) return CDRF_NOTIFYITEMDRAW;
+    if (draw.nmcd.dwDrawStage != CDDS_ITEMPREPAINT) return CDRF_DODEFAULT;
+    const auto item = reinterpret_cast<HTREEITEM>(draw.nmcd.dwItemSpec);
+    const auto *row = library_row(item);
+    if (!row) return CDRF_DODEFAULT;
+    RECT bounds{}, client{};
+    if (!TreeView_GetItemRect(tasks, item, &bounds, FALSE)) return CDRF_SKIPDEFAULT;
+    GetClientRect(tasks, &client);
+    bounds.left = 0; bounds.right = client.right;
+    const bool selected_ = TreeView_GetSelection(tasks) == item;
+    const bool focused = GetFocus() == tasks;
+    const COLORREF background_ = selected_
+        ? (libraryHighContrast ? GetSysColor(COLOR_HIGHLIGHT)
+                               : focused ? RGB(218, 232, 244) : RGB(232, 239, 244))
+        : libraryHighContrast ? GetSysColor(COLOR_WINDOW) : PAPER;
+    const COLORREF foreground = selected_
+        ? (libraryHighContrast ? GetSysColor(COLOR_HIGHLIGHTTEXT) : INK)
+        : libraryHighContrast ? GetSysColor(COLOR_WINDOWTEXT) : INK;
+    const HDC dc = draw.nmcd.hdc;
+    const int saved = SaveDC(dc);
+    IntersectClipRect(dc, bounds.left, bounds.top, bounds.right, bounds.bottom);
+    const auto brush = CreateSolidBrush(background_);
+    FillRect(dc, &bounds, brush); DeleteObject(brush);
+    SetBkMode(dc, TRANSPARENT);
+    const int left = library_text_left(*row), right = library_text_right();
+    int top = bounds.top + px(6);
+    auto text_lines = [&](const std::vector<std::wstring> &lines, HFONT face,
+                          int lineHeight, COLORREF color) {
+      SelectObject(dc, face); SetTextColor(dc, color);
+      const RECT clip{left, bounds.top, right, bounds.bottom};
+      for (const auto &line : lines) {
+        ExtTextOutW(dc, left, top, ETO_CLIPPED, &clip, line.data(),
+                    static_cast<UINT>(line.size()), nullptr);
+        top += lineHeight;
+      }
+    };
+    text_lines(row->titleLines, libraryBold, row->titleLineHeight, foreground);
+    if (!row->descriptionLines.empty()) {
+      top += px(3);
+      text_lines(row->descriptionLines, font, row->descriptionLineHeight,
+                 selected_ || libraryHighContrast ? foreground : MUTED);
+    }
+    if (row->toolId.empty()) {
+      // Use the native button hit zone, including integral-height categories,
+      // so the painted expand glyph and native pointer behavior cannot diverge.
+      RECT buttonBounds{};
+      TVGETITEMPARTRECTINFO part{item, &buttonBounds, TVGIPR_BUTTON};
+      if (SendMessageW(tasks, TVM_GETITEMPARTRECT, 0, reinterpret_cast<LPARAM>(&part))) {
+        const bool expanded = (TreeView_GetItemState(tasks, item, TVIS_EXPANDED) & TVIS_EXPANDED) != 0;
+        const int size = std::min({px(10), static_cast<int>(buttonBounds.right - buttonBounds.left),
+                                  static_cast<int>(buttonBounds.bottom - buttonBounds.top)});
+        const int x = (buttonBounds.left + buttonBounds.right - size) / 2,
+                  y = (buttonBounds.top + buttonBounds.bottom - size) / 2;
+        RECT glyph{x, y, x + size, y + size};
+        HTHEME theme = OpenThemeData(tasks, L"TreeView");
+        if (theme && !libraryHighContrast) {
+          DrawThemeBackground(theme, dc, TVP_GLYPH, expanded ? GLPS_OPENED : GLPS_CLOSED,
+                              &glyph, nullptr);
+        } else {
+          const auto pen = CreatePen(PS_SOLID, std::max(1, px(1)), foreground);
+          const auto oldPen = SelectObject(dc, pen);
+          MoveToEx(dc, glyph.left, (glyph.top + glyph.bottom) / 2, nullptr);
+          LineTo(dc, glyph.right, (glyph.top + glyph.bottom) / 2);
+          if (!expanded) {
+            MoveToEx(dc, (glyph.left + glyph.right) / 2, glyph.top, nullptr);
+            LineTo(dc, (glyph.left + glyph.right) / 2, glyph.bottom);
+          }
+          SelectObject(dc, oldPen); DeleteObject(pen);
+        }
+        if (theme) CloseThemeData(theme);
+      }
+    }
+    if (selected_ && focused && !(SendMessageW(tasks, WM_QUERYUISTATE, 0, 0) & UISF_HIDEFOCUS)) {
+      RECT focus = bounds; InflateRect(&focus, -1, -1);
+      DrawFocusRect(dc, &focus);
+    }
+    RestoreDC(dc, saved);
+    return CDRF_SKIPDEFAULT;
+  }
   void library_expand(HTREEITEM item, UINT action) {
     const auto *row = library_row(item);
     if (!row || !row->toolId.empty()) return;
     const auto category = row->category;
     HTREEITEM anchor = TreeView_GetFirstVisible(tasks);
+    const int anchorOffset = library_anchor_offset(anchor);
     const bool visible = (GetWindowLongPtrW(tasks, GWL_STYLE) & WS_VISIBLE) != 0;
     // Native expansion scrolls to expose the new children. Keep the user's
     // existing viewport instead, and present the expand/restore as one update.
     if (visible) SendMessageW(tasks, WM_SETREDRAW, FALSE, 0);
     if (TreeView_GetSelection(tasks) != item) TreeView_SelectItem(tasks, item);
     TreeView_Expand(tasks, item, action);
-    // A collapsed group's old first-visible child is no longer a valid anchor.
-    // Walk to its visible ancestor; native bottom clamping remains in force.
-    if (anchor) {
-      for (HTREEITEM parent = TreeView_GetParent(tasks, anchor); parent;
-           parent = TreeView_GetParent(tasks, parent))
-        if (!(TreeView_GetItemState(tasks, parent, TVIS_EXPANDED) & TVIS_EXPANDED))
-          anchor = parent;
-      if (TreeView_GetFirstVisible(tasks) != anchor)
-        TreeView_SelectSetFirstVisible(tasks, anchor);
-    }
+    // Collapsed children restore to their visible ancestor; otherwise retain
+    // both the first item and any partial scroll within its wrapped text.
+    library_restore_anchor(anchor, anchorOffset);
     if (visible) {
       SendMessageW(tasks, WM_SETREDRAW, TRUE, 0);
       // The tree already uses TVS_EX_DOUBLEBUFFER. Redraw its changed rows and
@@ -3940,7 +4121,8 @@ class Workspace {
   }
   void refresh_tasks() {
     LibraryView view{library_key(TreeView_GetSelection(tasks)),
-                     library_key(TreeView_GetFirstVisible(tasks))};
+                     library_key(TreeView_GetFirstVisible(tasks)),
+                     library_anchor_offset(TreeView_GetFirstVisible(tasks))};
     if (libraryRendered && !libraryFiltered) {
       libraryViews[libraryWorkflow] = view;
       for (HTREEITEM item = TreeView_GetRoot(tasks); item;
@@ -3975,15 +4157,17 @@ class Workspace {
     for (const auto &entry : catalog.get("tools").object_items()) {
       const auto &t = entry.second;
       std::wstring label = wt(t, "displayName", getstr(t, "name")),
+                   description = wt(t, "displayDescription", getstr(t, "description")),
                    categoryName = wt(t, "category", "Other");
       if (categoryName.empty()) categoryName = L"Other";
       if (!query.empty() &&
           lower(label + L" " + categoryName + L" " + wt(t, "packId") + L" " +
-                wt(t, "description") + L" " + wt(t, "searchTerms"))
+                description + L" " + wt(t, "searchTerms"))
                   .find(query) == std::wstring::npos)
         continue;
       if (!source.empty() && !compatible.count(entry.first)) continue;
-      tools.push_back({categoryName, label, entry.first});
+      tools.push_back({categoryName, label, description,
+                       label + (description.empty() ? L"" : L"\n" + description), entry.first});
     }
     std::sort(tools.begin(), tools.end(), [](const auto &a, const auto &b) {
       const auto ac = lower(a.category), bc = lower(b.category);
@@ -3996,7 +4180,7 @@ class Workspace {
     std::wstring previousCategory;
     for (const auto &tool : tools) {
       if (rows.empty() || previousCategory != tool.category) {
-        rows.push_back({tool.category, tool.category, {}});
+        rows.push_back({tool.category, tool.category, {}, tool.category, {}});
         previousCategory = tool.category;
       }
       rows.push_back(tool);
@@ -4028,15 +4212,16 @@ class Workspace {
         insert.hParent = row.toolId.empty() ? TVI_ROOT : parent;
         insert.hInsertAfter = TVI_LAST;
         insert.item.mask = TVIF_TEXT | TVIF_PARAM | TVIF_STATE;
-        insert.item.pszText = row.label.data();
+        insert.item.pszText = row.accessible.data();
         insert.item.lParam = static_cast<LPARAM>(i + 1);
         insert.item.stateMask = TVIS_BOLD;
-        insert.item.state = row.toolId.empty() ? TVIS_BOLD : 0;
+        insert.item.state = TVIS_BOLD;
         auto item = reinterpret_cast<HTREEITEM>(SendMessageW(
             tasks, TVM_INSERTITEMW, 0, reinterpret_cast<LPARAM>(&insert)));
         libraryItems[row.key()] = item;
         if (row.toolId.empty()) parent = item;
       }
+      library_reflow(true, false);
       for (HTREEITEM item = TreeView_GetRoot(tasks); item;
            item = TreeView_GetNextSibling(tasks, item)) {
         const auto *row = library_row(item);
@@ -4063,11 +4248,7 @@ class Workspace {
     }
     if (TreeView_GetSelection(tasks) != selection) TreeView_SelectItem(tasks, selection);
     const auto first = libraryItems.find(view.first);
-    if (first != libraryItems.end()) {
-      HTREEITEM item = first->second, parent = TreeView_GetParent(tasks, item);
-      if (parent && !(TreeView_GetItemState(tasks, parent, TVIS_EXPANDED) & TVIS_EXPANDED)) item = parent;
-      TreeView_SelectSetFirstVisible(tasks, item);
-    }
+    if (first != libraryItems.end()) library_restore_anchor(first->second, view.offset);
     SendMessageW(tasks, WM_SETREDRAW, TRUE, 0);
     RedrawWindow(tasks, nullptr, nullptr, RDW_INVALIDATE | RDW_ERASE);
     rebuilding = wasRebuilding;
@@ -5445,6 +5626,14 @@ class Workspace {
       // The parent-painted brand and separators still need the new scale.
       InvalidateRect(window, nullptr, FALSE);
       return 0;
+    case WM_SYSCOLORCHANGE:
+    case WM_THEMECHANGED:
+    case WM_SETTINGCHANGE:
+      if (tasks) {
+        library_colors();
+        RedrawWindow(tasks, nullptr, nullptr, RDW_INVALIDATE | RDW_ERASE | RDW_FRAME);
+      }
+      break;
     case WM_GETMINMAXINFO: {
       auto *p = reinterpret_cast<MINMAXINFO *>(l);
       MONITORINFO monitor{sizeof(monitor)};
@@ -5468,6 +5657,8 @@ class Workspace {
       return 0;
     case WM_NOTIFY: {
       auto *n = reinterpret_cast<NMHDR *>(l);
+      if (n->idFrom == TASKS && n->code == NM_CUSTOMDRAW)
+        return library_draw(*reinterpret_cast<NMTVCUSTOMDRAW *>(l));
       if (n->idFrom == TASKS && n->code == TVN_SELCHANGEDW && !rebuilding) {
         const auto *item = reinterpret_cast<NMTREEVIEWW *>(l);
         if (libraryFiltered && !library_tool(item->itemNew.hItem).empty())
@@ -5791,7 +5982,7 @@ public:
       if (appSmallIcon)
         DestroyIcon(appSmallIcon);
     }
-    for (HFONT f : {font, bold, small, refFont})
+    for (HFONT f : {font, bold, small, libraryBold, refFont})
       if (f)
         DeleteObject(f);
     if (paper)

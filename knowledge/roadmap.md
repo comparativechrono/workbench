@@ -1,6 +1,25 @@
 # Development roadmap
 
-## Active set: Tools resize correction, 2026-10-10
+## Active set: wrapped native tool library, 2026-10-10
+
+Implement the user's requested readable tool rows in unpublished **0.16.1**,
+continuing [draft PR #15](https://github.com/comparativechrono/workbench/pull/15):
+complete wrapped tool names in bold, complete descriptions in regular text,
+all within the left pane, and no hover label popup. Preserve native category,
+keyboard, search/filter, selection and drag behavior and existing workflows,
+Methods, Samples, reference management and redraw corrections. Published tool
+packs and application **0.16.0** remain unchanged.
+
+The [handover](wrapped-tool-library-0.16.1-handover.md) records this set's own
+implementation and evidence. Completion requires relevant source checks, an
+exact packaged Windows candidate in ordinary and spaced paths, native library
+and regression checks, archive/source correspondence, and screenshot review.
+These results are pending. Keep older evidence and the separate failed strict
+resize negative control intact. Deliver to the existing draft review PR without
+merging or publishing. Broader display/PC acceptance, signing/IT, Linux CWL and
+SDK recovery remain outstanding; benchmarking is handled separately.
+
+## Previous set: Tools resize correction, 2026-10-10
 
 The bounded correction is implemented in unpublished **0.16.1** application
 source `51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e` in

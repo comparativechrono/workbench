@@ -1,5 +1,27 @@
 # Expandable native tool library
 
+## Current presentation contract, 2026-10-10
+
+The user requested full text in the native library after testers found the
+hover label popup annoying and long labels obscured by the centre pane. Each
+tool row must show the complete `displayName` in **bold**, followed by its
+complete `displayDescription` in regular weight. Wrap both within the left
+pane, size the row for its text, and reflow when the available width changes.
+Do not truncate the visible label or rely on a hover popup to reveal it.
+
+Retain control 104 as the native TreeView, with its category hierarchy,
+selection and accessible text. Category headings remain navigation items, and
+the existing keyboard, search/filter, standalone-selection and workflow-drag
+contracts below remain in force. This changes presentation without changing
+published pack metadata, tool IDs, version pins or saved scientific workflows.
+
+This is an in-progress **0.16.1** follow-up in
+[draft PR #15](https://github.com/comparativechrono/workbench/pull/15).
+The [wrapped-library handover](wrapped-tool-library-0.16.1-handover.md) tracks
+its implementation and new exact-package evidence. The historical 0.11.0
+records below establish their original category implementation and publication,
+not acceptance of these new wrapped rows.
+
 ## Released 0.11.0, 2026-10-08
 
 [Version 0.11.0 is published](https://github.com/comparativechrono/workbench/releases/tag/app-v0.11.0) as a development

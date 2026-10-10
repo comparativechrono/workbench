@@ -1,0 +1,111 @@
+"""Portable failures/oracles for the exact native wrapped-library gate."""
+import importlib.util
+from pathlib import Path
+from types import SimpleNamespace
+import unittest
+
+SPEC = importlib.util.spec_from_file_location('wrapped_library_gate',
+    Path(__file__).resolve().parents[1] / 'scripts/check_wrapped_library_windows.py')
+gate = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(gate)
+
+
+def image(width=30, height=8):
+    result = bytearray(b'\xff\xff\xff\0' * width * height)
+    for y in range(2, 6):
+        for x in range(3, 27, 3):
+            start = (y * width + x) * 4
+            result[start:start + 4] = bytes([62, 44, 32, 0])
+    return result
+
+
+def bold(raw, width=30):
+    result = bytearray(raw)
+    for start in range(0, len(raw) - 4, 4):
+        if min(raw[start:start + 3]) < 225 and (start // 4) % width < width - 1:
+            result[start + 4:start + 8] = raw[start:start + 4]
+    return result
+
+
+class WrappedLibraryGateTests(unittest.TestCase):
+    def test_font_oracle_rejects_regular_title_and_bold_description(self):
+        regular = image(height=10)
+        strong = bold(regular)
+        gate.require_glyph_style(strong, strong, regular)
+        gate.require_glyph_style(regular, regular, strong)
+        with self.assertRaisesRegex(AssertionError, 'clipped, missing, misplaced'):
+            gate.require_glyph_style(regular, strong, regular)
+        with self.assertRaisesRegex(AssertionError, 'clipped, missing, misplaced'):
+            gate.require_glyph_style(strong, regular, strong)
+
+    def test_clipped_or_blank_text_cannot_hide_in_white_margin(self):
+        expected = bold(image(height=10))
+        blank = b'\xff\xff\xff\0' * (len(expected) // 4)
+        with self.assertRaises(AssertionError):
+            gate.require_glyph_style(blank, expected, image(height=10))
+        clipped = bytearray(expected)
+        clipped[30 * 4 * 4:] = blank[30 * 4 * 4:]
+        with self.assertRaises(AssertionError):
+            gate.require_glyph_style(clipped, expected, image(height=10))
+
+    def test_unused_alpha_does_not_change_visible_glyph_comparison(self):
+        actual, expected = bold(image(height=10)), bold(image(height=10))
+        actual[3::4] = bytes([255]) * (len(actual) // 4)
+        self.assertEqual(gate.glyph_error(actual, expected)['fraction'], 0)
+
+    def test_style_requires_distinguishable_wrong_weight_control(self):
+        expected = bold(image(height=10))
+        with self.assertRaisesRegex(AssertionError, 'distinguish'):
+            gate.require_glyph_style(expected, expected, expected)
+
+    def test_invalid_capture_lengths_and_crops_fail_closed(self):
+        with self.assertRaises(AssertionError):
+            gate.glyph_error(bytes(9), bytes(9))
+        with self.assertRaises(AssertionError):
+            gate.crop(bytes(16), 2, 2, [-1, 0, 2, 2])
+        with self.assertRaises(AssertionError):
+            gate.intersect([0, 0, 2, 2], [3, 3, 4, 4])
+
+    def test_word_wrap_preserves_words_and_splits_oversized_tokens(self):
+        self.assertEqual(gate.wrap_text('one two three', 7, len), ['one two', 'three'])
+        self.assertEqual(gate.wrap_text('abcdefghi end', 4, len), ['abcd', 'efgh', 'i', 'end'])
+        self.assertEqual(gate.wrap_text('a\u0001', 4, len), ['a\u0001'])
+        self.assertEqual(gate.wrap_text('😀😀😀', 2, len), ['😀😀', '😀'])
+        with self.assertRaises(AssertionError):
+            gate.wrap_text('W', 1, lambda text: len(text) * 2)
+
+    def test_fixture_exercises_maximum_valid_description(self):
+        self.assertEqual(len(gate.LONG_DESCRIPTION), 2048)
+        self.assertTrue(gate.LONG_DESCRIPTION.endswith('FINAL LONG DESCRIPTION ANSWER'))
+        self.assertLessEqual(len(gate.TOKEN_NAME), 100)
+        self.assertGreater(len(gate.TOKEN_DESCRIPTION.split()[0]), 100)
+
+    def test_failed_or_unfinished_gate_never_passes(self):
+        report = {'nativeGUIObservationsCompleted': True,
+                  'scenarios': [{'status': 'pass'}, {'status': 'failed'}]}
+        gate.finalize_report(report)
+        self.assertFalse(report['success'])
+        report = {'nativeGUIObservationsCompleted': False, 'scenarios': [{'status': 'pass'}]}
+        gate.finalize_report(report)
+        self.assertFalse(report['success'])
+
+    def test_tall_native_row_click_is_clipped_to_actual_visible_client(self):
+        tree = gate.NativeTree.__new__(gate.NativeTree)
+        tree.hwnd = 4
+        tree.send = lambda *args: 1
+        tree.rect = lambda item: [120, -200, 900, 900]
+        def client(hwnd, pointer):
+            pointer._obj.right, pointer._obj.bottom = 180, 400
+            return True
+        def screen(hwnd, pointer):
+            pointer._obj.x, pointer._obj.y = 100, 50
+            return True
+        tree.user = SimpleNamespace(GetClientRect=client, ClientToScreen=screen)
+        self.assertEqual(tree.point(1), (160, 250))
+        tree.rect = lambda item: [120, 500, 900, 900]
+        with self.assertRaisesRegex(AssertionError, 'no usable visible'):
+            tree.point(1)
+
+
+if __name__ == '__main__':
+    unittest.main()

@@ -1,9 +1,20 @@
-name: Native Windows 0.16.1 resize redraw candidate
+name: Native Windows 0.16.1 wrapped tool library candidate
 
 on:
-  # Historical resize-candidate recipe, retained with its original verdicts.
-  # The active wrapped-library set builds new archives in its own workflow.
-  # Explicit manual reuse still requires reviewing all frozen source identities.
+  push:
+    branches: [fix/native-ui-0.16.1]
+    paths:
+      - '.github/workflows/native-wrapped-library-candidate.yml'
+      - 'desktop/**'
+      - 'workspace/**'
+      - 'scripts/**'
+      - '!scripts/check_ui_patch_windows.py'
+      - '!scripts/check_tester_feedback_windows.py'
+      - '!scripts/check_wrapped_library_windows.py'
+      - 'tests/**'
+      - '!tests/test_ui_patch_gate.py'
+      - '!tests/test_tester_feedback_gate.py'
+      - '!tests/test_wrapped_library_gate.py'
   workflow_dispatch:
 
 permissions:
@@ -11,7 +22,7 @@ permissions:
   actions: read
 
 concurrency:
-  group: native-ui-patch-${{ github.ref }}
+  group: native-wrapped-library-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -59,6 +70,8 @@ jobs:
           c++ -std=c++17 -O2 -Wall -Wextra -Werror -DDESKTOP_JSON_ONLY -Idesktop tests/test_desktop_json.cpp desktop/desktop_ipc.cpp -o build/test_desktop_json
           build/test_desktop_json
           python3 tests/test_workspace_layout.py
+          python3 tests/test_library_text_layout.py
+          python3 tests/test_wrapped_library_gate.py
           python3 tests/test_ui_patch_packaging.py
           python3 tests/test_split_release.py
           python3 tests/test_core_update.py
@@ -76,7 +89,7 @@ jobs:
           python3 workspace/tests/test_sample_table_editor.py
           python3 workspace/tests/test_readiness.py
           python3 workspace/tests/test_readiness_service.py
-          python3 -m py_compile scripts/build_ui_patch_candidate.py scripts/check_ui_patch_windows.py scripts/check_tester_feedback_windows.py
+          python3 -m py_compile scripts/build_ui_patch_candidate.py scripts/check_ui_patch_windows.py scripts/check_tester_feedback_windows.py scripts/check_wrapped_library_windows.py
       - name: Freeze one Starter, matching source and core-only updater
         id: package
         shell: bash
@@ -121,42 +134,42 @@ jobs:
           PY
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: ui-patch-candidate-${{ github.sha }}
+          name: wrapped-library-candidate-${{ github.sha }}
           path: ${{ runner.temp }}/patch-candidate
           compression-level: 0
           if-no-files-found: error
           retention-days: 30
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: ui-patch-starter-${{ github.sha }}
+          name: wrapped-library-starter-${{ github.sha }}
           path: ${{ runner.temp }}/patch-transfer/starter
           compression-level: 0
           if-no-files-found: error
           retention-days: 30
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: ui-patch-updater-${{ github.sha }}
+          name: wrapped-library-updater-${{ github.sha }}
           path: ${{ runner.temp }}/patch-transfer/updater
           compression-level: 0
           if-no-files-found: error
           retention-days: 30
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: ui-patch-source-part-1-${{ github.sha }}
+          name: wrapped-library-source-part-1-${{ github.sha }}
           path: ${{ runner.temp }}/patch-transfer/source-part-1
           compression-level: 0
           if-no-files-found: error
           retention-days: 30
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: ui-patch-source-part-2-${{ github.sha }}
+          name: wrapped-library-source-part-2-${{ github.sha }}
           path: ${{ runner.temp }}/patch-transfer/source-part-2
           compression-level: 0
           if-no-files-found: error
           retention-days: 30
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: ui-patch-metadata-${{ github.sha }}
+          name: wrapped-library-metadata-${{ github.sha }}
           path: ${{ runner.temp }}/patch-transfer/metadata
           if-no-files-found: error
           retention-days: 30
@@ -176,16 +189,8 @@ jobs:
           persist-credentials: false
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
-          name: ui-patch-candidate-${{ github.sha }}
+          name: wrapped-library-candidate-${{ github.sha }}
           path: ${{ runner.temp }}/patch-candidate
-      - name: Retrieve the previously tested Starter for the resize negative control
-        if: matrix.folder == 'ordinary'
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
-        with:
-          name: ui-patch-starter-73778e00461e2b83c07b9ea97df2b9c5d4b6317d
-          run-id: 37997370988
-          github-token: ${{ github.token }}
-          path: ${{ runner.temp }}/previous-resize-candidate
       - name: Verify the frozen artifacts and extract independent test installations
         id: prepare
         shell: pwsh
@@ -206,23 +211,21 @@ jobs:
           Invoke-WebRequest -Uri 'https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-0.16.0-starter-windows.zip' -OutFile $baseline
           if ((Get-FileHash $baseline -Algorithm SHA256).Hash -ne 'f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073') { throw 'Published baseline identity mismatch.' }
           $case = Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER
-          foreach ($gate in @('patch', 'feedback', 'batch', 'readiness', 'curated', 'workspace', 'reference-management', 'results', 'scroll')) {
+          foreach ($gate in @('wrapped-library', 'patch', 'feedback', 'batch', 'readiness', 'curated', 'workspace', 'reference-management', 'results', 'scroll')) {
             Expand-Archive $starter (Join-Path $case $gate)
           }
           Expand-Archive $updater (Join-Path $case 'updater')
-      - name: Require reproduction of the previous Tools resize defect
-        if: always() && !cancelled() && steps.prepare.outcome == 'success' && matrix.folder == 'ordinary'
+      - name: Full wrapped tool names and descriptions, typography, hover and native navigation
+        if: always() && !cancelled() && steps.prepare.outcome == 'success'
         shell: pwsh
+        env:
+          CASE_FOLDER: ${{ matrix.folder }}
+          STARTER_SHA256: ${{ needs.build.outputs.starter_sha256 }}
         run: |
           $ErrorActionPreference = 'Stop'
-          $oldArchive = Join-Path $env:RUNNER_TEMP 'previous-resize-candidate/native-workbench-0.16.1-starter-windows.zip'
-          $oldSha = '1291f93b5ece3c4da34eb2f2e29fccc83b6d87ec5fb73abf28bfd9cc8f155b75'
-          if ((Get-FileHash $oldArchive -Algorithm SHA256).Hash -ne $oldSha) { throw 'Resize negative-control archive identity mismatch.' }
-          $oldRoot = Join-Path $env:RUNNER_TEMP 'resize-negative-control'
-          Expand-Archive $oldArchive $oldRoot
-          $app = Join-Path $oldRoot 'native-workbench'
-          & (Join-Path $app 'runtime/python/python.exe') -I -B scripts/check_ui_patch_windows.py --resize-only --expect-known-resize-defect --app-root $app --starter-archive $oldArchive --starter-sha256 $oldSha --source-commit '73778e00461e2b83c07b9ea97df2b9c5d4b6317d' --gate-commit $env:GITHUB_SHA --report "$env:RUNNER_TEMP/patch-evidence/resize-negative/native-resize-negative.json"
-          if ($LASTEXITCODE -ne 0) { throw 'Previous resize defect was not established; retain this result and do not claim the before/after comparison passed.' }
+          $app = Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'wrapped-library/native-workbench'
+          & (Join-Path $app 'runtime/python/python.exe') -I -B scripts/check_wrapped_library_windows.py --app-root $app --starter-archive (Join-Path $env:RUNNER_TEMP 'patch-candidate/${{ needs.build.outputs.starter_name }}') --starter-sha256 $env:STARTER_SHA256 --source-commit $env:GITHUB_SHA --gate-commit $env:GITHUB_SHA --report "$env:RUNNER_TEMP/patch-evidence/wrapped-library/native-wrapped-library.json" --app-version 0.16.1
+          if ($LASTEXITCODE -ne 0) { throw 'Wrapped tool-library checks failed; retain actual screenshots and failures.' }
       - name: Native updater picker, preserved state, keyboard focus and visible work-area bounds
         if: always() && !cancelled() && steps.prepare.outcome == 'success'
         shell: pwsh
@@ -328,7 +331,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: ui-patch-windows-${{ matrix.folder }}-${{ github.run_attempt }}
+          name: wrapped-library-windows-${{ matrix.folder }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/patch-evidence
           if-no-files-found: error
           retention-days: 30

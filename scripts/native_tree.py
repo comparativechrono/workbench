@@ -82,7 +82,7 @@ class NativeTree:
                         ("pszText", ctypes.c_void_p), ("cchTextMax", ctypes.c_int),
                         ("iImage", ctypes.c_int), ("iSelectedImage", ctypes.c_int),
                         ("cChildren", ctypes.c_int), ("lParam", wintypes.LPARAM)]
-        offset, text_bytes = ctypes.sizeof(Item), 4096
+        offset, text_bytes = ctypes.sizeof(Item), 16384
         def payload(address):
             value = Item(mask=1 | 8, hItem=item, stateMask=0xffff,
                          pszText=address + offset, cchTextMax=text_bytes // 2)
@@ -113,6 +113,18 @@ class NativeTree:
     def point(self, item):
         self.send(self.hwnd, 0x1114, 0, item)  # TVM_ENSUREVISIBLE.
         left, top, right, bottom = self.rect(item)
+        # Wrapped rows may be taller than the viewport. Choose an actual
+        # visible portion after the same documented EnsureVisible request;
+        # the mathematical row midpoint can be underneath another panel.
+        client, origin = wintypes.RECT(), wintypes.POINT()
+        if not (self.user.GetClientRect(self.hwnd, ctypes.byref(client)) and
+                self.user.ClientToScreen(self.hwnd, ctypes.byref(origin))):
+            raise ctypes.WinError(ctypes.get_last_error())
+        left, top = max(left, origin.x), max(top, origin.y)
+        right = min(right, origin.x + client.right)
+        bottom = min(bottom, origin.y + client.bottom)
+        if right - left < 4 or bottom - top < 4:
+            raise AssertionError("Native TreeView row has no usable visible click area.")
         return left + min(40, max(2, (right-left)//2)), (top+bottom)//2
 
     def first_tool_point(self):

@@ -1,16 +1,9 @@
 name: Recheck frozen 0.16.1 tester feedback and native patch
 
 on:
-  # Validator-only changes reuse these exact archives. Production and packaging
-  # changes fail the source guard and require a new complete candidate build.
-  push:
-    branches: [fix/native-ui-0.16.1]
-    paths:
-      - .github/workflows/native-ui-patch-recheck.yml
-      - scripts/check_ui_patch_windows.py
-      - scripts/check_tester_feedback_windows.py
-      - tests/test_ui_patch_gate.py
-      - tests/test_tester_feedback_gate.py
+  # Historical resize-candidate recipe, retained with its original verdicts.
+  # The active wrapped-library set builds new archives in its own workflow.
+  # Explicit manual reuse still requires reviewing all frozen source identities.
   workflow_dispatch:
 
 permissions:

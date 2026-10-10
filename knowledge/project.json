@@ -174,7 +174,8 @@
     "tester_feedback_0_16_1_original_report_manifest": "evidence/tester-feedback-0.16.1-raw-index-2026-10-09.json",
     "tester_feedback_0_16_1_feedback_visual_ordinary": "evidence/tester-feedback-0.16.1-feedback-visual-ordinary-2026-10-09.json",
     "tester_feedback_0_16_1_feedback_visual_spaces": "evidence/tester-feedback-0.16.1-feedback-visual-spaces-2026-10-09.json",
-    "resize_redraw_0_16_1_handover": "resize-redraw-0.16.1-handover.md"
+    "resize_redraw_0_16_1_handover": "resize-redraw-0.16.1-handover.md",
+    "wrapped_tool_library_0_16_1_handover": "wrapped-tool-library-0.16.1-handover.md"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -2087,7 +2088,7 @@
       "active_handover": "tester-feedback-0.16.1-handover.md"
     }
   },
-  "active_development_record": "resize_redraw_0_16_1_development",
+  "active_development_record": "wrapped_tool_library_0_16_1_development",
   "resize_redraw_0_16_1_development": {
     "recorded_on": "2026-10-10",
     "kind": "tools-resize-correction",
@@ -2197,5 +2198,49 @@
       "observation": "evidence/resize-redraw-0.16.1-observation-2026-10-10.json",
       "observation_visual": "evidence/resize-redraw-0.16.1-observation-visual-review-2026-10-10.json"
     }
+  },
+  "wrapped_tool_library_0_16_1_development": {
+    "recorded_on": "2026-10-10",
+    "kind": "wrapped-native-tool-library",
+    "application_version": "0.16.1",
+    "branch": "fix/native-ui-0.16.1",
+    "starting_commit": "568f2a74a62c4befb7ffe9c9f26390fe5a8c1d72",
+    "base_branch": "feature/deployment-acceptance",
+    "base_commit": "f74d90229be6a78d6ad0c0076c54c04bb7e7cae2",
+    "pull_request": "https://github.com/comparativechrono/workbench/pull/15",
+    "pull_request_state": "draft",
+    "status": "in progress; implementation and new exact-package validation pending",
+    "authorization": "Show complete wrapped native library names in bold and descriptions in regular text, removing the label hover popup; continue unpublished draft review.",
+    "release_authorized": false,
+    "released": false,
+    "published_baseline": "0.16.0",
+    "published_assets_changed": false,
+    "handover": "wrapped-tool-library-0.16.1-handover.md",
+    "contract": "expandable-tool-library.md",
+    "candidate_workflow": "../.github/workflows/native-wrapped-library-candidate.yml",
+    "scope": [
+      "Wrap each complete displayName in bold and displayDescription in regular weight inside the left library pane, with row heights following the text",
+      "Remove library hover label popups",
+      "Preserve native TreeView categories, keyboard/accessibility, search/filter, selection and workflow dragging",
+      "Preserve workflows, exact pack pins, Methods, Samples editing, reference management and existing redraw corrections",
+      "Build and validate new exact source/Starter/updater archives in ordinary and space-containing Windows paths with screenshot review"
+    ],
+    "verification_progress": {
+      "implementation": "in progress",
+      "source_checks": "pending",
+      "exact_native_windows_checks": "pending in both path layouts",
+      "archive_source_audit": "pending",
+      "screenshot_review": "pending"
+    },
+    "prior_handover": "resize-redraw-0.16.1-handover.md",
+    "prior_application_source_commit": "51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e",
+    "evidence_boundary": "Previous passes apply only to their named bytes. The earlier strict single-transition resize negative control remains failed and is not rerun or reclassified by the new library scope.",
+    "known_limits": [
+      "Unpublished draft review only; no merge or release and no tool-pack or version changes.",
+      "New application bytes require new exact-package evidence; none is claimed yet.",
+      "Finite hosted captures do not establish representative-PC, high-DPI, multiple-monitor, physical-trackpad or managed-machine acceptance.",
+      "Signing/IT approval, scientific Linux CWL and SDK/build recovery remain separate; benchmarking is managed separately."
+    ],
+    "next_action": "Complete implementation and focused source checks, build frozen archives, validate both Windows paths, review screenshots and save focused evidence in draft PR #15."
   }
 }

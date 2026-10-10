@@ -551,6 +551,27 @@ def import_overflow(root, evidence, report):
     require(all(current.get(path) == digest for path, digest in original.items()), 'Fixture import modified existing packs.')
 
 
+def wheel_heading_into_view(ui, tree, item, require_nonzero=False):
+    """Prepare a visible heading using real wheel input, before observations.
+
+    Wrapped descriptions make the number of rows per viewport variable. This
+    setup cannot assume that opening three children leaves a later heading on
+    screen. Measured expansion/collapse still uses no EnsureVisible or scroll
+    repair, and retains the same anchor/pixel assertions.
+    """
+    bounds = ui.bounds(tree.hwnd)
+    for _ in range(100):
+        row = tree.rect(item)
+        center = (row[1] + row[3]) // 2
+        nonzero = tree.next(0, 5) != tree.roots()[0]
+        if bounds[1] + 4 < center < bounds[3] - 4 and (nonzero or not require_nonzero):
+            return
+        delta = 120 if center <= bounds[1] + 4 else -120
+        ui.wheel(bounds[0] + 30, bounds[1] + 40, delta)
+        time.sleep(.05)
+    raise AssertionError('Actual wheel input could not establish a visible wrapped heading.')
+
+
 def tree_overflow(ui, report):
     tree, keys = ui.library(), Keyboard(ui)
     roots = tree.roots()
@@ -575,13 +596,13 @@ def tree_overflow(ui, report):
             tree_transition(ui, keys, report, preceding, True,
                             'overflow-%d-preceding' % width)
         if not tree.expanded(first):
+            wheel_heading_into_view(ui, tree, first)
             tree_transition(ui, keys, report, first, True, 'overflow-%d-first-open' % width)
         require(ui.scroll_info(tree.hwnd)['nMax'] + 1 > ui.scroll_info(tree.hwnd)['nPage'],
                 'Overflow fixture did not create genuine native scrolling.')
-        # Scroll by one wheel notch while retaining the first overflow heading
-        # in view. Several real categories precede it in the ordered tree.
-        ui.wheel(box[0] + 30, box[1] + 40, -120)
-        time.sleep(.2)
+        # Establish a real nonzero viewport with the target already visible;
+        # variable-height descriptions may need more than one wheel notch.
+        wheel_heading_into_view(ui, tree, first, require_nonzero=True)
         before = tree_snapshot(tree, first)
         require(before['firstVisibleHandle'] != roots[0], 'Wheel did not leave the tree top.')
         triangle_point(ui, tree, first)
