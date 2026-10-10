@@ -88,7 +88,7 @@ jobs:
           python3 workspace/tests/test_sample_table_editor.py
           python3 workspace/tests/test_readiness.py
           python3 workspace/tests/test_readiness_service.py
-          python3 -m py_compile scripts/build_ui_patch_candidate.py scripts/check_ui_patch_windows.py scripts/check_tester_feedback_windows.py scripts/check_wrapped_library_windows.py
+          python3 -m py_compile scripts/build_ui_patch_candidate.py scripts/check_ui_patch_windows.py scripts/check_tester_feedback_windows.py scripts/check_wrapped_library_windows.py scripts/check_library_class_probe_windows.py
       - name: Freeze one Starter, matching source and core-only updater
         id: package
         shell: bash
@@ -214,6 +214,16 @@ jobs:
             Expand-Archive $starter (Join-Path $case $gate)
           }
           Expand-Archive $updater (Join-Path $case 'updater')
+      - name: Diagnose native viewport class compatibility (not UI acceptance)
+        if: always() && !cancelled() && steps.prepare.outcome == 'success'
+        shell: pwsh
+        env:
+          CASE_FOLDER: ${{ matrix.folder }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $app = Join-Path (Join-Path $env:RUNNER_TEMP $env:CASE_FOLDER) 'wrapped-library/native-workbench'
+          & (Join-Path $app 'runtime/python/python.exe') -I -B scripts/check_library_class_probe_windows.py --source-commit $env:GITHUB_SHA --gate-commit $env:GITHUB_SHA --report "$env:RUNNER_TEMP/patch-evidence/class-probe/native-class-compatibility.json"
+          if ($LASTEXITCODE -ne 0) { throw 'Isolated class compatibility diagnostic did not complete; this is not UI acceptance.' }
       - name: Full wrapped tool names and descriptions, typography, hover and native navigation
         if: always() && !cancelled() && steps.prepare.outcome == 'success'
         shell: pwsh

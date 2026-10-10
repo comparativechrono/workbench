@@ -510,7 +510,7 @@ class Workspace {
   };
   HINSTANCE instance{};
   HICON appIcon{}, appSmallIcon{};
-  ATOM appWindowClass{}, appSurfaceClass{};
+  ATOM appWindowClass{}, appSurfaceClass{}, appLibraryViewportClass{};
   HWND window{}, name{}, search{}, tasks{}, add{}, clearFilter{},
       steps{}, remove{}, undo{}, up{}, down{}, output{}, browse{}, run{},
       cancel{}, review{}, back{}, dag{}, form{}, status{}, manageTools{},
@@ -658,8 +658,12 @@ class Workspace {
                              0, 1, 1, parent ? parent : window,
                              reinterpret_cast<HMENU>(static_cast<INT_PTR>(id)),
                              instance, nullptr);
-    if (!h)
-      throw std::runtime_error("Could not create a Windows interface control.");
+    if (!h) {
+      const DWORD error = GetLastError();
+      throw std::runtime_error("Could not create Windows interface control " + narrow(klass) +
+          " (ID " + std::to_string(id) + ", error " + std::to_string(error) + "): " +
+          narrow(bw::windows_error(error)));
+    }
     SendMessageW(h, WM_SETFONT, reinterpret_cast<WPARAM>(font), FALSE);
     if (lstrcmpiW(klass, L"BUTTON") == 0 && (style & BS_TYPEMASK) == BS_OWNERDRAW)
       SetWindowSubclass(h, owner_button_proc, 1, 0);
@@ -3617,7 +3621,7 @@ class Workspace {
                   WS_EX_CLIENTEDGE);
     SendMessageW(search, EM_SETCUEBANNER, FALSE,
                  reinterpret_cast<LPARAM>(L"Search tools"));
-    libraryViewport = make(L"STATIC", L"", WS_VSCROLL | WS_CLIPCHILDREN,
+    libraryViewport = make(L"WorkbenchLibraryViewport0161", L"", WS_VSCROLL | WS_CLIPCHILDREN,
                            LIBRARY_VIEWPORT, nullptr,
                            WS_EX_CLIENTEDGE | WS_EX_CONTROLPARENT | WS_EX_COMPOSITED);
     SetWindowSubclass(libraryViewport, library_viewport_proc, 1, reinterpret_cast<DWORD_PTR>(this));
@@ -4024,6 +4028,13 @@ class Workspace {
   static LRESULT CALLBACK library_viewport_proc(HWND h, UINT message_, WPARAM w, LPARAM l,
                                                 UINT_PTR, DWORD_PTR context) {
     auto *app = reinterpret_cast<Workspace *>(context);
+    if (message_ == WM_ERASEBKGND) {
+      RECT bounds{};
+      GetClientRect(h, &bounds);
+      FillRect(reinterpret_cast<HDC>(w), &bounds,
+               app->libraryHighContrast ? GetSysColorBrush(COLOR_WINDOW) : app->paper);
+      return 1;
+    }
     if (message_ == WM_NOTIFY)
       return SendMessageW(app->window, message_, w, l);
     if (message_ == WM_MOUSEWHEEL) { app->library_wheel(w); return 0; }
@@ -6144,8 +6155,10 @@ public:
     // Classes retain their icon handles. Release them before destroying our
     // private icons; an unexpected live class can safely retain them until exit.
     bool iconsUnused = true;
+    if (appLibraryViewportClass)
+      iconsUnused = UnregisterClassW(MAKEINTATOM(appLibraryViewportClass), instance) != FALSE;
     if (appSurfaceClass)
-      iconsUnused = UnregisterClassW(MAKEINTATOM(appSurfaceClass), instance) != FALSE;
+      iconsUnused = (UnregisterClassW(MAKEINTATOM(appSurfaceClass), instance) != FALSE) && iconsUnused;
     if (appWindowClass)
       iconsUnused = (UnregisterClassW(MAKEINTATOM(appWindowClass), instance) != FALSE) && iconsUnused;
     if (iconsUnused) {
@@ -6200,6 +6213,16 @@ public:
     appSurfaceClass = RegisterClassExW(&wc);
     if (!appSurfaceClass)
       throw std::runtime_error("Could not register workspace surface.");
+    // A composited viewport requires a class without parent/private DC flags.
+    // Register that contract explicitly instead of depending on predefined
+    // STATIC class styles. The subclass owns erase/notification/scroll handling.
+    wc.style = 0;
+    wc.lpfnWndProc = DefWindowProcW;
+    wc.lpszClassName = L"WorkbenchLibraryViewport0161";
+    appLibraryViewportClass = RegisterClassExW(&wc);
+    if (!appLibraryViewportClass)
+      throw std::runtime_error("Could not register the tool library viewport: " +
+                               narrow(bw::windows_error()));
     RECT area{};
     SystemParametersInfoW(SPI_GETWORKAREA, 0, &area, 0);
     dpi = GetDpiForSystem();
