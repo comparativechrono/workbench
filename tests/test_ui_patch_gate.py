@@ -1,6 +1,7 @@
 """Portable evidence guards; these are not Windows UI acceptance tests."""
 import importlib.util
 import hashlib
+import json
 from pathlib import Path
 from types import SimpleNamespace
 import tempfile
@@ -14,6 +15,28 @@ SPEC.loader.exec_module(gate)
 
 
 class UIPatchGateTests(unittest.TestCase):
+    def test_observation_completion_never_becomes_application_validation(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            args = ['gate.py', '--app-root', str(root / 'app'), '--starter-archive', str(root / 'input.zip'),
+                    '--report', str(root / 'evidence/observation.json'), '--source-commit', '1' * 40,
+                    '--gate-commit', '2' * 40, '--starter-sha256', 'a' * 64,
+                    '--resize-only', '--resize-observation-only']
+            def completed(unused_args, report):
+                report['nativeGUIObservationsCompleted'] = True
+                report['scenarios'].append({'status': 'pass'})
+            with patch('sys.argv', args), patch.object(gate, 'run_resize_only', side_effect=completed):
+                self.assertEqual(gate.main(), 0)
+            report = json.loads((root / 'evidence/observation.json').read_text())
+            self.assertTrue(report['success'])
+            self.assertTrue(report['diagnosticCompleted'])
+            self.assertFalse(report['nativeGUIValidated'])
+            self.assertEqual(report['kind'], 'native-ui-resize-observation-only')
+            with patch('sys.argv', args + ['--expect-known-resize-defect']), patch.object(gate, 'run_resize_only') as run:
+                with self.assertRaises(AssertionError):
+                    gate.main()
+                run.assert_not_called()
+
     def test_resize_tool_readiness_requires_visible_owned_actual_hit(self):
         state = {'hit': 7, 'process': 12, 'visible': True, 'enabled': True}
         def owner(handle, output):

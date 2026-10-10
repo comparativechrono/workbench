@@ -17,6 +17,7 @@ import platform
 import re
 import shutil
 import sys
+import threading
 import time
 import traceback
 
@@ -208,7 +209,115 @@ def resize_tool_pointer_ready(ui, control, point):
                 (hit == control or ui.user.IsChild(control, hit)))
 
 
-def resize_scenarios(ui, report, label, mode, keys, *, expect_defect=False):
+def resize_observation_bursts(ui, stream, references, group, save):
+    """Observe during resize calls; completion is not a pixel acceptance pass."""
+    canvas = group['canvas']
+    client, origin = wintypes.RECT(), wintypes.POINT()
+    require(ui.user.GetClientRect(ui.main, ctypes.byref(client)) and
+            ui.user.ClientToScreen(ui.main, ctypes.byref(origin)),
+            'Cannot determine the smaller-window client intersection.')
+    intersection = [origin.x, origin.y, origin.x + client.right, origin.y + client.bottom]
+    rectangles = sorted({tuple([max(r['rectangle'][0], intersection[0]),
+                                max(r['rectangle'][1], intersection[1]),
+                                min(r['rectangle'][2], intersection[2]),
+                                min(r['rectangle'][3], intersection[3])])
+                         for reference in references.values() for r in reference['record']['regions']})
+    rectangles = [r for r in rectangles if r[0] < r[2] and r[1] < r[3]]
+    expected = {size: tuple(region_bytes(ref['raw'], canvas, rect) for rect in rectangles)
+                for size, ref in references.items()}
+    require(expected[(960, 680)] != expected[(1024, 728)], 'Diagnostic endpoints are visually indistinguishable.')
+    group.update(observationOnly=True, bursts=[], comparedRectangles=rectangles,
+                 commonClientIntersection=intersection,
+                 assertionStarts='No differential or pixel acceptance assertion in this observational mode.',
+                 acquisition='Main thread owns GDI. Raw frames and timestamps only during each burst; no DwmFlush, pacing, geometry queries, hashing or file writes.',
+                 observationLimit='Read intervals overlapping resize calls do not identify the exact presentation instant; normal compositor latency can produce an earlier endpoint.')
+    for burst_index in range(3):
+        started = time.perf_counter()
+        begin, stop, done = threading.Event(), threading.Event(), threading.Event()
+        calls, errors, captured = [], [], []
+        row = {'burst': burst_index, 'resizeCalls': calls, 'workerErrors': errors,
+               'samples': [], 'captures': [], 'workerJoined': False, 'samplingComplete': False,
+               'frameLimit': 64, 'requestedPostMotionMs': 200}
+        group['bursts'].append(row)
+        def motion():
+            previous_dpi = ui.user.SetThreadDpiAwarenessContext(ctypes.c_void_p(-4))
+            try:
+                require(previous_dpi, 'Cannot establish matching DPI awareness on resize worker.')
+                begin.wait()
+                for index, size in enumerate([(1024, 728), (960, 680)] * 6):
+                    if stop.is_set():
+                        break
+                    call_start = time.perf_counter()
+                    ok = ui.user.MoveWindow(ui.main, canvas[0], canvas[1], *size, True)
+                    call_end = time.perf_counter()
+                    calls.append({'index': index, 'size': list(size),
+                                  'startMs': (call_start - started) * 1000,
+                                  'returnMs': (call_end - started) * 1000, 'returnedSuccess': bool(ok)})
+                    require(ok, 'Concurrent diagnostic resize request failed.')
+            except Exception as error:
+                errors.append(str(error))
+            finally:
+                if previous_dpi:
+                    ui.user.SetThreadDpiAwarenessContext(previous_dpi)
+                done.set()
+        worker = threading.Thread(target=motion, name='resize-observation-motion')
+        worker.start()
+        try:
+            stamp, raw, read_start = stream.immediate()
+            captured.append((read_start, stamp, raw))
+            begin.set()  # At least one capture has finished before any resize.
+            while True:
+                stamp, raw, read_start = stream.immediate()
+                captured.append((read_start, stamp, raw))
+                if done.is_set() and (errors or (calls and (stamp - started) * 1000 >= calls[-1]['returnMs'] + 200)):
+                    break
+                require(len(captured) < 64 and time.perf_counter() - started < 4,
+                        'Concurrent diagnostic exceeded its 64-frame/four-second acquisition bound.')
+        finally:
+            stop.set()
+            begin.set()
+            worker.join(timeout=5)
+            if worker.is_alive():
+                # Terminating only this disposable gate-owned process releases a
+                # hung cross-process MoveWindow before any later UI cleanup.
+                ui.process.kill()
+                worker.join(timeout=5)
+            row['workerJoined'] = not worker.is_alive()
+            row['acquiredFrames'] = len(captured)
+            require(not worker.is_alive(), 'Resize worker did not stop before desktop cleanup.')
+        require(not errors and len(calls) == 12 and all(call['returnedSuccess'] for call in calls),
+                'Concurrent resize worker did not complete all twelve requests: ' + '; '.join(errors))
+        saved = set()
+        for index, (read_start, stamp, raw) in enumerate(captured):
+            observed = tuple(region_bytes(raw, canvas, rect) for rect in rectangles)
+            matched = next((list(size) for size, pixels in expected.items() if pixels == observed), None)
+            start_ms, end_ms = (read_start - started) * 1000, (stamp - started) * 1000
+            sample = {'index': index, 'captureStartMs': start_ms, 'captureEndMs': end_ms,
+                      'matchingEndpoint': matched,
+                      'overlappingResizeCallIndices': [call['index'] for call in calls
+                                                      if start_ms < call['returnMs'] and end_ms > call['startMs']],
+                      'startsAfterFinalReturn': start_ms >= calls[-1]['returnMs']}
+            row['samples'].append(sample)
+            digest = hashlib.sha256(b''.join(observed)).hexdigest()
+            if index in (0, len(captured) - 1) or (matched is None and digest not in saved and len(saved) < 12):
+                saved.add(digest)
+                row['captures'].append(save(raw, '%s-resize-diagnostic-%02d-frame-%03d' %
+                                             (group['installation'], burst_index, index)))
+        after = [sample for sample in row['samples'] if sample['startsAfterFinalReturn'] and
+                 sample['matchingEndpoint'] == [960, 680]]
+        row.update(samplingComplete=True, frames=len(captured),
+                   totalReadIntervalMs=(captured[-1][1] - captured[0][0]) * 1000,
+                   elapsedPostMotionMs=(captured[-1][1] - started) * 1000 - calls[-1]['returnMs'],
+                   capturesOverlappingResizeCalls=sum(bool(s['overlappingResizeCallIndices']) for s in row['samples']),
+                   framesMatchingNeitherEndpoint=sum(s['matchingEndpoint'] is None for s in row['samples']),
+                   firstFinalTargetReadIntervalMsAfterReturn=([after[0]['captureStartMs'] - calls[-1]['returnMs'],
+                                                              after[0]['captureEndMs'] - calls[-1]['returnMs']]
+                                                             if after else None))
+        require(ui.bounds(ui.main) == references[(960, 680)]['record']['geometry']['windowBounds'],
+                'Diagnostic did not end at the requested smaller window size.')
+
+
+def resize_scenarios(ui, report, label, mode, keys, *, expect_defect=False, observation_only=False):
     """Actual shrink/grow, with passive references and no corrective repaint."""
     if mode == 'tool':
         # Use the same populated, nested native form in the old negative control
@@ -277,6 +386,12 @@ def resize_scenarios(ui, report, label, mode, keys, *, expect_defect=False):
                          'capture': save(raw, '%s-%s-resize-reference-%dx%d' % (label, mode, *size))}
             group['references'].append(reference)
             references[size] = {'raw': raw, 'record': reference}
+
+        if observation_only:
+            resize_observation_bursts(ui, stream, references, group, save)
+            passed(report, label + '-resize-observation-completed',
+                   'Three bounded concurrent resize bursts observed; this records completion, not a defect-fix or pixel acceptance verdict.')
+            return group
 
         current = (960, 680)
         for index, target in enumerate([(1024, 728), (960, 680)] * 3):
@@ -722,8 +837,9 @@ def run_resize_only(args, report):
                 not setup_window() and ui.user.IsWindowEnabled(ui.child(417)))
         ui.click_button(410)
         ui.wait('resize-control Tools ready', lambda: ui.user.IsWindowEnabled(ui.child(417)))
-        resize_scenarios(ui, report, 'previous', 'tool', keys,
-                         expect_defect=args.expect_known_resize_defect)
+        resize_scenarios(ui, report, 'observation' if args.resize_observation_only else 'previous', 'tool', keys,
+                         expect_defect=args.expect_known_resize_defect,
+                         observation_only=args.resize_observation_only)
     finally:
         ui.close()
     verify_inventory(root, manifest['files'])
@@ -750,10 +866,13 @@ def main():
     parser.add_argument('--update-sha256')
     parser.add_argument('--resize-only', action='store_true')
     parser.add_argument('--expect-known-resize-defect', action='store_true')
+    parser.add_argument('--resize-observation-only', action='store_true')
     args = parser.parse_args()
     args.bundle_root = None
     require(not args.expect_known_resize_defect or args.resize_only,
             'Expected defect mode is restricted to the separate resize-only negative control.')
+    require(not args.resize_observation_only or (args.resize_only and not args.expect_known_resize_defect),
+            'Resize observation is a separate resize-only diagnostic, not an expected-defect acceptance gate.')
     if not args.resize_only:
         require(all(getattr(args, name) is not None for name in
                     ('baseline_archive', 'update_root', 'update_archive', 'work', 'update_sha256')),
@@ -784,6 +903,11 @@ def main():
             report['kind'] = 'native-ui-resize-negative-control'
             report['negativeControlValidated'] = report['success']
             report['nativeGUIValidated'] = False  # Reproducing old failure is not an application pass.
+        if args.resize_observation_only:
+            report['kind'] = 'native-ui-resize-observation-only'
+            report['diagnosticCompleted'] = report['success']
+            report['nativeGUIValidated'] = False
+            report['successMeaning'] = 'Diagnostic acquisition completed; no application fix or differential verdict.'
         write_json(args.report, report)
     print(json.dumps({'success': report['success'], 'passed': report['passed'], 'failed': report['failed'],
                       'report': str(args.report)}), flush=True)
