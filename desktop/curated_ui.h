@@ -89,7 +89,7 @@
     showingHistory = false; historyRun = Json::object();
     snapshot(value);
     canvas_reset_positions();
-    status_text(L"Synthetic training workflow loaded. Review the inputs, expected answers and Readiness before running.");
+    status_text(L"Synthetic training workflow loaded. Review the inputs, expected answers and planned Methods before running.");
     if (curatedView.window) DestroyWindow(curatedView.window);
     SetForegroundWindow(window);
   }

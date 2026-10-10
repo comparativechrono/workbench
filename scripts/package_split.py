@@ -34,7 +34,7 @@ RUNTIME_MODULES=('app_version.py','catalog.py','engine.py','example.py','curated
                  'service.py','verify_installation.py','pack_checks.py','pack_manager.py',
                  'pack_security.py','core_checks.py','reference_provider.py','reference_manager.py',
                  'reference_provenance.py','reference_transfer.py','reference_library.py','reference_ncbi.py','cwl_export.py','dag_routing.py','setup_manager.py',
-                 'performance.py','readiness.py','diagnostics.py','sample_table.py','run_queue.py','reference_indexes.py','file_io.py','execution_resources.py','recovery.py','project_manager.py')
+                 'performance.py','readiness.py','diagnostics.py','sample_table.py','sample_table_editor.py','run_queue.py','reference_indexes.py','file_io.py','execution_resources.py','recovery.py','project_manager.py')
 RUNTIME_METADATA=('starter-check-profile.json','setup-profile.json')
 FIXED_DATE=(2026,10,5,0,0,0)
 

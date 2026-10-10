@@ -1,0 +1,661 @@
+{
+  "schema": 1,
+  "kind": "resize-fix-attempt-1-focused-validation",
+  "runId": 38041029923,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/38041029923",
+  "sourceCommit": "51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e",
+  "gateCommit": "51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e",
+  "overallOutcome": "failed",
+  "scope": "Original candidate-build attempt; this receipt does not describe a later validator-only recheck.",
+  "paths": {
+    "ordinary": {
+      "gates": {
+        "batch": {
+          "report": "batch/native-batch.json",
+          "bytes": 36092,
+          "sha256": "6c62cfb8391cbd94bc29d566587debfce453ea0d9b327ea1118d89c04f4aa399",
+          "success": true,
+          "passed": 11,
+          "recordedFailed": 0,
+          "configuredSkipCount": 0,
+          "nativeWindowsExecuted": true,
+          "gateSha256": "779b7354a87ee9f62482820ecede482281834278e07f086cd2bfa11134b5caf8",
+          "nativeGUIValidated": true,
+          "assetSha256": "7fd59d5b021867991506e98ef94c5b239245030fb9da55d77accf8d8e2d43682"
+        },
+        "readiness": {
+          "report": "readiness/native-readiness.json",
+          "bytes": 9034,
+          "sha256": "60040f03e32dfc158fa888b0f36fe38bedcdeff2bac59f579fdb002c9750d6e3",
+          "success": true,
+          "passed": 5,
+          "recordedFailed": 0,
+          "configuredSkipCount": 0,
+          "nativeWindowsExecuted": true,
+          "gateSha256": "31ce0603997cfcd3531535d743c07a5ff3128d2187f963c7e3035aa802835df3",
+          "nativeGUIValidated": true,
+          "assetSha256": "7fd59d5b021867991506e98ef94c5b239245030fb9da55d77accf8d8e2d43682"
+        },
+        "curated": {
+          "report": "curated/native-curated.json",
+          "bytes": 14747,
+          "sha256": "18a53b91c648b039660afb5ace090992972e5cd8b5f3b85df0dd3ca34f0f1022",
+          "success": true,
+          "passed": 11,
+          "recordedFailed": 0,
+          "configuredSkipCount": 0,
+          "nativeWindowsExecuted": true,
+          "gateSha256": "6824624ab6be6ea685428a585956f78039ef97e2a9dac37ecb67def5b2fa24d1",
+          "nativeGUIValidated": true,
+          "assetSha256": "7fd59d5b021867991506e98ef94c5b239245030fb9da55d77accf8d8e2d43682"
+        },
+        "workspace": {
+          "report": "workspace/native-workspace.json",
+          "bytes": 24315,
+          "sha256": "b4c04e8dc7a6b16297260a835ce913a07426a111be288b986274ccd775a72316",
+          "success": true,
+          "passed": 32,
+          "recordedFailed": null,
+          "configuredSkipCount": 0,
+          "nativeWindowsExecuted": true,
+          "gateSha256": "30a38a4f5bc8d5a5af93eee80560963f87e4ef019a3e98ec9780f1964d847d13",
+          "nativeGUIValidated": true,
+          "assetSha256": "7fd59d5b021867991506e98ef94c5b239245030fb9da55d77accf8d8e2d43682"
+        },
+        "referenceManagement": {
+          "report": "reference-management/native-reference-management.json",
+          "bytes": 25813,
+          "sha256": "3b6620e1b71954232321040cf74753c6064403a3ea1db3e3e96b47a0c64c43dc",
+          "success": true,
+          "passed": 10,
+          "recordedFailed": null,
+          "configuredSkipCount": 0,
+          "nativeWindowsExecuted": true,
+          "gateSha256": "6e61ffe14fc6c6bcb4838fa4d142d28ff3e7d5eee71c9fbaa479717a715031c0",
+          "nativeGUIValidated": true,
+          "assetSha256": "7fd59d5b021867991506e98ef94c5b239245030fb9da55d77accf8d8e2d43682"
+        },
+        "results": {
+          "report": "results/native-results.json",
+          "bytes": 14511,
+          "sha256": "a69b9bb57354751c378066c9cdd3ed7ee6d1f9f6982f37ba9f4c5b4b77f29ecd",
+          "success": true,
+          "passed": 9,
+          "recordedFailed": 0,
+          "configuredSkipCount": 0,
+          "nativeWindowsExecuted": true,
+          "gateSha256": "5c318c45c297dc7b267724db4db3abfc5c42d9dfc93805a5377a055d3f88747b",
+          "nativeGUIValidated": true,
+          "assetSha256": "7fd59d5b021867991506e98ef94c5b239245030fb9da55d77accf8d8e2d43682"
+        },
+        "scroll": {
+          "report": "scroll/native-scroll.json",
+          "bytes": 320517,
+          "sha256": "3f610538c1029689dbb66e4975222864aa49b74ea123e7179843ed9fb892b476",
+          "success": true,
+          "passed": 3,
+          "recordedFailed": null,
+          "configuredSkipCount": 0,
+          "nativeWindowsExecuted": true,
+          "gateSha256": "e93a5c199415ee7231f052f640352f0c8fa90093946f237ac01840ba97baeed2",
+          "assetSha256": "7fd59d5b021867991506e98ef94c5b239245030fb9da55d77accf8d8e2d43682"
+        },
+        "feedback": {
+          "report": "feedback/native-tester-feedback.json",
+          "bytes": 532218,
+          "sha256": "79f98a3876d4b5e0a1661a0e7db12be2e4db4baed859c4f0dd381b12ff79a34c",
+          "success": true,
+          "passed": 13,
+          "recordedFailed": 0,
+          "configuredSkipCount": 0,
+          "nativeWindowsExecuted": true,
+          "gateSha256": "dc63dd2a47ea2555fd0ceb47a96fcbafc9da915a2b188288e428bda8a0d1f751",
+          "nativeGUIValidated": true,
+          "gateCommit": "51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e"
+        },
+        "patch": {
+          "report": "patch/native-ui-patch.json",
+          "bytes": 348858,
+          "sha256": "4f7278fa57a5892d7fea3f74358ac2fdb750709f40579e4182cdd2211cebc17e",
+          "success": false,
+          "passed": 19,
+          "recordedFailed": 2,
+          "configuredSkipCount": 0,
+          "nativeWindowsExecuted": true,
+          "gateSha256": "9bf5ce0aee6bb240167e48087ea332aff53813bafbccd713dbfdf82e24434e09",
+          "nativeGUIValidated": false,
+          "gateCommit": "51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e"
+        }
+      },
+      "nonPatchPassed": 94,
+      "nonPatchSuccessfulGates": 8,
+      "patch": {
+        "success": false,
+        "passed": 19,
+        "failed": 2,
+        "nativeGUIValidated": false,
+        "nativeGUIObservationsCompleted": false,
+        "unfinishedResultsCases": [
+          "fresh-results-empty",
+          "fresh-results-populated",
+          "upgraded-results-empty",
+          "upgraded-results-populated"
+        ],
+        "errors": [
+          {
+            "installation": "fresh",
+            "scenario": "fresh-desktop-incomplete",
+            "stage": "initial Results query focus, after completed resize/layout observations",
+            "exception": "ctypes.ArgumentError: argument 2: TypeError: expected LP_GuiInfo instance instead of pointer to GuiInfo",
+            "diagnosis": "Constructing a second Keyboard driver rebound GetGUIThreadInfo.argtypes to a different nested GuiInfo class; the original driver could no longer read focus.",
+            "classification": "validator failure; full patch gate remains failed"
+          },
+          {
+            "installation": "upgraded",
+            "scenario": "upgraded-desktop-incomplete",
+            "stage": "initial Results query focus, after completed resize/layout observations",
+            "exception": "ctypes.ArgumentError: argument 2: TypeError: expected LP_GuiInfo instance instead of pointer to GuiInfo",
+            "diagnosis": "Constructing a second Keyboard driver rebound GetGUIThreadInfo.argtypes to a different nested GuiInfo class; the original driver could no longer read focus.",
+            "classification": "validator failure; full patch gate remains failed"
+          }
+        ]
+      },
+      "resizeGroups": [
+        {
+          "installation": "fresh",
+          "mode": "tool",
+          "transitions": 6,
+          "frames": 88,
+          "postCompositorFrames": 82,
+          "immediatePreCompositorFrames": 6,
+          "immediateNonTargetFrames": 4,
+          "postCompositorSourceFrames": 0,
+          "postCompositorNonTargetFrames": 0,
+          "allSamplingCompleted": true,
+          "allTargetRecovered": true,
+          "summedObservationSeconds": 2.8177084999999806,
+          "largestCaptureStartGapMs": 61.966,
+          "firstCaptureStartMsAfterResizeReturnRange": [
+            0.001,
+            0.004
+          ],
+          "referenceCaptureHashes": [
+            {
+              "file": "fresh-tool-resize-reference-1024x728.bmp",
+              "sha256": "47932329766b40fe74fde283ffd2cc4c6fe3bbb22641150021be94be3116210c",
+              "width": 1024,
+              "height": 728
+            },
+            {
+              "file": "fresh-tool-resize-reference-960x680.bmp",
+              "sha256": "5909d842d1893bd8dff835f8d9671d7b9a7dc3f90e5967c7e0397f3aff860266",
+              "width": 1024,
+              "height": 728
+            }
+          ]
+        },
+        {
+          "installation": "fresh",
+          "mode": "workflow",
+          "transitions": 6,
+          "frames": 85,
+          "postCompositorFrames": 79,
+          "immediatePreCompositorFrames": 6,
+          "immediateNonTargetFrames": 3,
+          "postCompositorSourceFrames": 0,
+          "postCompositorNonTargetFrames": 0,
+          "allSamplingCompleted": true,
+          "allTargetRecovered": true,
+          "summedObservationSeconds": 2.7648292999997466,
+          "largestCaptureStartGapMs": 66.15299999999999,
+          "firstCaptureStartMsAfterResizeReturnRange": [
+            0.001,
+            0.002
+          ],
+          "referenceCaptureHashes": [
+            {
+              "file": "fresh-workflow-resize-reference-1024x728.bmp",
+              "sha256": "708a8d90510f0ddeea5dc48417eaa868c8da52669fe8dfc7f10eb7a349895633",
+              "width": 1024,
+              "height": 728
+            },
+            {
+              "file": "fresh-workflow-resize-reference-960x680.bmp",
+              "sha256": "e1696675811ba102156bbf4be3cd31d47ed60ad9b183a6b9cbb27bc5c15cd530",
+              "width": 1024,
+              "height": 728
+            }
+          ]
+        },
+        {
+          "installation": "upgraded",
+          "mode": "tool",
+          "transitions": 6,
+          "frames": 86,
+          "postCompositorFrames": 80,
+          "immediatePreCompositorFrames": 6,
+          "immediateNonTargetFrames": 5,
+          "postCompositorSourceFrames": 0,
+          "postCompositorNonTargetFrames": 0,
+          "allSamplingCompleted": true,
+          "allTargetRecovered": true,
+          "summedObservationSeconds": 2.7763420000003407,
+          "largestCaptureStartGapMs": 58.931000000000004,
+          "firstCaptureStartMsAfterResizeReturnRange": [
+            0.001,
+            0.002
+          ],
+          "referenceCaptureHashes": [
+            {
+              "file": "upgraded-tool-resize-reference-1024x728.bmp",
+              "sha256": "3f1d106c61aaaed8a5f52da4ab4d0b7a528bd33b2b8a8a81ebb37c2737cb0270",
+              "width": 1024,
+              "height": 728
+            },
+            {
+              "file": "upgraded-tool-resize-reference-960x680.bmp",
+              "sha256": "8c57f342b26605262104ff529eb73dc3b7c302d0c823a911bf51cd4ac13119f8",
+              "width": 1024,
+              "height": 728
+            }
+          ]
+        },
+        {
+          "installation": "upgraded",
+          "mode": "workflow",
+          "transitions": 6,
+          "frames": 88,
+          "postCompositorFrames": 82,
+          "immediatePreCompositorFrames": 6,
+          "immediateNonTargetFrames": 3,
+          "postCompositorSourceFrames": 0,
+          "postCompositorNonTargetFrames": 0,
+          "allSamplingCompleted": true,
+          "allTargetRecovered": true,
+          "summedObservationSeconds": 2.7940296999997827,
+          "largestCaptureStartGapMs": 62.817,
+          "firstCaptureStartMsAfterResizeReturnRange": [
+            0.001,
+            0.002
+          ],
+          "referenceCaptureHashes": [
+            {
+              "file": "upgraded-workflow-resize-reference-1024x728.bmp",
+              "sha256": "d63a85314e0cf02646869c16a1d3a44c5ec8659647655d784ab0a9b34cd209ac",
+              "width": 1024,
+              "height": 728
+            },
+            {
+              "file": "upgraded-workflow-resize-reference-960x680.bmp",
+              "sha256": "a319bc52f5eb8d6cd03158881885d99cce2c8c6a0eddd87b948f0e5b3320e61a",
+              "width": 1024,
+              "height": 728
+            }
+          ]
+        }
+      ],
+      "archives": {
+        "starter": {
+          "name": "native-workbench-0.16.1-starter-windows.zip",
+          "bytes": 17879852,
+          "sha256": "7fd59d5b021867991506e98ef94c5b239245030fb9da55d77accf8d8e2d43682"
+        },
+        "baseline": {
+          "name": "baseline-0.16.0.zip",
+          "bytes": 17846873,
+          "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+        },
+        "update": {
+          "name": "native-workbench-0.16.1-update-from-0.16.0.zip",
+          "bytes": 13042517,
+          "sha256": "35bbd786043561ea40a1a12f941da8f370f26fc9df63cd2904dbee16a18bbda5"
+        }
+      },
+      "observedDpi": [
+        96
+      ]
+    },
+    "spaces": {
+      "gates": {
+        "batch": {
+          "report": "batch/native-batch.json",
+          "bytes": 36110,
+          "sha256": "713d60b234f5342c677467d5526f7478ac263f90a8830078903641d576797e6a",
+          "success": true,
+          "passed": 11,
+          "recordedFailed": 0,
+          "configuredSkipCount": 0,
+          "nativeWindowsExecuted": true,
+          "gateSha256": "779b7354a87ee9f62482820ecede482281834278e07f086cd2bfa11134b5caf8",
+          "nativeGUIValidated": true,
+          "assetSha256": "7fd59d5b021867991506e98ef94c5b239245030fb9da55d77accf8d8e2d43682"
+        },
+        "readiness": {
+          "report": "readiness/native-readiness.json",
+          "bytes": 9034,
+          "sha256": "532141d52db78efe3380f833c76ba2807915381733b87f7513e2ee5f27c1641b",
+          "success": true,
+          "passed": 5,
+          "recordedFailed": 0,
+          "configuredSkipCount": 0,
+          "nativeWindowsExecuted": true,
+          "gateSha256": "31ce0603997cfcd3531535d743c07a5ff3128d2187f963c7e3035aa802835df3",
+          "nativeGUIValidated": true,
+          "assetSha256": "7fd59d5b021867991506e98ef94c5b239245030fb9da55d77accf8d8e2d43682"
+        },
+        "curated": {
+          "report": "curated/native-curated.json",
+          "bytes": 14747,
+          "sha256": "c182c08547618b91cf4751964c82eed8d43434067a7c22ca83c2ddc2e828917f",
+          "success": true,
+          "passed": 11,
+          "recordedFailed": 0,
+          "configuredSkipCount": 0,
+          "nativeWindowsExecuted": true,
+          "gateSha256": "6824624ab6be6ea685428a585956f78039ef97e2a9dac37ecb67def5b2fa24d1",
+          "nativeGUIValidated": true,
+          "assetSha256": "7fd59d5b021867991506e98ef94c5b239245030fb9da55d77accf8d8e2d43682"
+        },
+        "workspace": {
+          "report": "workspace/native-workspace.json",
+          "bytes": 24364,
+          "sha256": "f6af5ee0ebdbcb8bd388d0c03bd10e713a9207ee5edc2fe7f567e0217e11eb7c",
+          "success": true,
+          "passed": 32,
+          "recordedFailed": null,
+          "configuredSkipCount": 0,
+          "nativeWindowsExecuted": true,
+          "gateSha256": "30a38a4f5bc8d5a5af93eee80560963f87e4ef019a3e98ec9780f1964d847d13",
+          "nativeGUIValidated": true,
+          "assetSha256": "7fd59d5b021867991506e98ef94c5b239245030fb9da55d77accf8d8e2d43682"
+        },
+        "referenceManagement": {
+          "report": "reference-management/native-reference-management.json",
+          "bytes": 25814,
+          "sha256": "229b69d453a31674dae4d48299d7882fff8d57227e8a7c778dc242052d8b541e",
+          "success": true,
+          "passed": 10,
+          "recordedFailed": null,
+          "configuredSkipCount": 0,
+          "nativeWindowsExecuted": true,
+          "gateSha256": "6e61ffe14fc6c6bcb4838fa4d142d28ff3e7d5eee71c9fbaa479717a715031c0",
+          "nativeGUIValidated": true,
+          "assetSha256": "7fd59d5b021867991506e98ef94c5b239245030fb9da55d77accf8d8e2d43682"
+        },
+        "results": {
+          "report": "results/native-results.json",
+          "bytes": 14511,
+          "sha256": "b487aeb91518e2eb1d1c3913d216dec18f39bdc08dec72720597d55b4a285a0d",
+          "success": true,
+          "passed": 9,
+          "recordedFailed": 0,
+          "configuredSkipCount": 0,
+          "nativeWindowsExecuted": true,
+          "gateSha256": "5c318c45c297dc7b267724db4db3abfc5c42d9dfc93805a5377a055d3f88747b",
+          "nativeGUIValidated": true,
+          "assetSha256": "7fd59d5b021867991506e98ef94c5b239245030fb9da55d77accf8d8e2d43682"
+        },
+        "scroll": {
+          "report": "scroll/native-scroll.json",
+          "bytes": 320554,
+          "sha256": "b2be1c9b83059315c35b6112cccb74a5c84dd035f1e8cded15833e2b4c76b8fa",
+          "success": true,
+          "passed": 3,
+          "recordedFailed": null,
+          "configuredSkipCount": 0,
+          "nativeWindowsExecuted": true,
+          "gateSha256": "e93a5c199415ee7231f052f640352f0c8fa90093946f237ac01840ba97baeed2",
+          "assetSha256": "7fd59d5b021867991506e98ef94c5b239245030fb9da55d77accf8d8e2d43682"
+        },
+        "feedback": {
+          "report": "feedback/native-tester-feedback.json",
+          "bytes": 564339,
+          "sha256": "5808307774afdba0696e6b3664184ca0075d7e1d29b4455a52d61a32ad677a51",
+          "success": true,
+          "passed": 13,
+          "recordedFailed": 0,
+          "configuredSkipCount": 0,
+          "nativeWindowsExecuted": true,
+          "gateSha256": "dc63dd2a47ea2555fd0ceb47a96fcbafc9da915a2b188288e428bda8a0d1f751",
+          "nativeGUIValidated": true,
+          "gateCommit": "51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e"
+        },
+        "patch": {
+          "report": "patch/native-ui-patch.json",
+          "bytes": 350719,
+          "sha256": "907c71d17c89f5188e99ecf0bcfbcdbe44d6abc5e703202c1e817809f78cc487",
+          "success": false,
+          "passed": 19,
+          "recordedFailed": 2,
+          "configuredSkipCount": 0,
+          "nativeWindowsExecuted": true,
+          "gateSha256": "9bf5ce0aee6bb240167e48087ea332aff53813bafbccd713dbfdf82e24434e09",
+          "nativeGUIValidated": false,
+          "gateCommit": "51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e"
+        }
+      },
+      "nonPatchPassed": 94,
+      "nonPatchSuccessfulGates": 8,
+      "patch": {
+        "success": false,
+        "passed": 19,
+        "failed": 2,
+        "nativeGUIValidated": false,
+        "nativeGUIObservationsCompleted": false,
+        "unfinishedResultsCases": [
+          "fresh-results-empty",
+          "fresh-results-populated",
+          "upgraded-results-empty",
+          "upgraded-results-populated"
+        ],
+        "errors": [
+          {
+            "installation": "fresh",
+            "scenario": "fresh-desktop-incomplete",
+            "stage": "initial Results query focus, after completed resize/layout observations",
+            "exception": "ctypes.ArgumentError: argument 2: TypeError: expected LP_GuiInfo instance instead of pointer to GuiInfo",
+            "diagnosis": "Constructing a second Keyboard driver rebound GetGUIThreadInfo.argtypes to a different nested GuiInfo class; the original driver could no longer read focus.",
+            "classification": "validator failure; full patch gate remains failed"
+          },
+          {
+            "installation": "upgraded",
+            "scenario": "upgraded-desktop-incomplete",
+            "stage": "initial Results query focus, after completed resize/layout observations",
+            "exception": "ctypes.ArgumentError: argument 2: TypeError: expected LP_GuiInfo instance instead of pointer to GuiInfo",
+            "diagnosis": "Constructing a second Keyboard driver rebound GetGUIThreadInfo.argtypes to a different nested GuiInfo class; the original driver could no longer read focus.",
+            "classification": "validator failure; full patch gate remains failed"
+          }
+        ]
+      },
+      "resizeGroups": [
+        {
+          "installation": "fresh",
+          "mode": "tool",
+          "transitions": 6,
+          "frames": 85,
+          "postCompositorFrames": 79,
+          "immediatePreCompositorFrames": 6,
+          "immediateNonTargetFrames": 3,
+          "postCompositorSourceFrames": 0,
+          "postCompositorNonTargetFrames": 0,
+          "allSamplingCompleted": true,
+          "allTargetRecovered": true,
+          "summedObservationSeconds": 2.752996900000028,
+          "largestCaptureStartGapMs": 60.539,
+          "firstCaptureStartMsAfterResizeReturnRange": [
+            0.001,
+            0.003
+          ],
+          "referenceCaptureHashes": [
+            {
+              "file": "fresh-tool-resize-reference-1024x728.bmp",
+              "sha256": "9e95e2c12c115df00423743beb932e073e13770c14318c884cafdbedd5a01158",
+              "width": 1024,
+              "height": 728
+            },
+            {
+              "file": "fresh-tool-resize-reference-960x680.bmp",
+              "sha256": "4ed413daf2c8ecef3571f02a7e7d6d8189b6838db4ff4c1b8d3665a2bd92bd5d",
+              "width": 1024,
+              "height": 728
+            }
+          ]
+        },
+        {
+          "installation": "fresh",
+          "mode": "workflow",
+          "transitions": 6,
+          "frames": 90,
+          "postCompositorFrames": 84,
+          "immediatePreCompositorFrames": 6,
+          "immediateNonTargetFrames": 3,
+          "postCompositorSourceFrames": 0,
+          "postCompositorNonTargetFrames": 0,
+          "allSamplingCompleted": true,
+          "allTargetRecovered": true,
+          "summedObservationSeconds": 2.8236910999999623,
+          "largestCaptureStartGapMs": 52.221000000000004,
+          "firstCaptureStartMsAfterResizeReturnRange": [
+            0.001,
+            0.001
+          ],
+          "referenceCaptureHashes": [
+            {
+              "file": "fresh-workflow-resize-reference-1024x728.bmp",
+              "sha256": "997e6c4ab929b108a25d322f1c30f64be8bb38aa709585ab8fdfd5fc5b9632ab",
+              "width": 1024,
+              "height": 728
+            },
+            {
+              "file": "fresh-workflow-resize-reference-960x680.bmp",
+              "sha256": "35776f50824eb5787d72a35ff62760b2f9c360c083aaa67fe054a007eb657dcc",
+              "width": 1024,
+              "height": 728
+            }
+          ]
+        },
+        {
+          "installation": "upgraded",
+          "mode": "tool",
+          "transitions": 6,
+          "frames": 88,
+          "postCompositorFrames": 82,
+          "immediatePreCompositorFrames": 6,
+          "immediateNonTargetFrames": 3,
+          "postCompositorSourceFrames": 0,
+          "postCompositorNonTargetFrames": 0,
+          "allSamplingCompleted": true,
+          "allTargetRecovered": true,
+          "summedObservationSeconds": 2.7939364999999725,
+          "largestCaptureStartGapMs": 58.946000000000005,
+          "firstCaptureStartMsAfterResizeReturnRange": [
+            0.001,
+            0.001
+          ],
+          "referenceCaptureHashes": [
+            {
+              "file": "upgraded-tool-resize-reference-1024x728.bmp",
+              "sha256": "45cad66048b178300ffbd457cda1b476782f05e48e83bcf52edd124053825a09",
+              "width": 1024,
+              "height": 728
+            },
+            {
+              "file": "upgraded-tool-resize-reference-960x680.bmp",
+              "sha256": "7a8b2ce5a62d9e3d93096c2c42f13a29dd7a32b83cc9e36035537bbe0927fdf2",
+              "width": 1024,
+              "height": 728
+            }
+          ]
+        },
+        {
+          "installation": "upgraded",
+          "mode": "workflow",
+          "transitions": 6,
+          "frames": 89,
+          "postCompositorFrames": 83,
+          "immediatePreCompositorFrames": 6,
+          "immediateNonTargetFrames": 0,
+          "postCompositorSourceFrames": 0,
+          "postCompositorNonTargetFrames": 0,
+          "allSamplingCompleted": true,
+          "allTargetRecovered": true,
+          "summedObservationSeconds": 2.7971841000000097,
+          "largestCaptureStartGapMs": 56.556000000000004,
+          "firstCaptureStartMsAfterResizeReturnRange": [
+            0.0,
+            0.001
+          ],
+          "referenceCaptureHashes": [
+            {
+              "file": "upgraded-workflow-resize-reference-1024x728.bmp",
+              "sha256": "426c0724b87337fab2849780fc80518f8440a3a8ec8a831cc47e95416e4bda92",
+              "width": 1024,
+              "height": 728
+            },
+            {
+              "file": "upgraded-workflow-resize-reference-960x680.bmp",
+              "sha256": "d73f4daf1169d90e82984ac5721a802b7ca5139e1da51f3291aba9af5e0bd0ec",
+              "width": 1024,
+              "height": 728
+            }
+          ]
+        }
+      ],
+      "archives": {
+        "starter": {
+          "name": "native-workbench-0.16.1-starter-windows.zip",
+          "bytes": 17879852,
+          "sha256": "7fd59d5b021867991506e98ef94c5b239245030fb9da55d77accf8d8e2d43682"
+        },
+        "baseline": {
+          "name": "baseline-0.16.0.zip",
+          "bytes": 17846873,
+          "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+        },
+        "update": {
+          "name": "native-workbench-0.16.1-update-from-0.16.0.zip",
+          "bytes": 13042517,
+          "sha256": "35bbd786043561ea40a1a12f941da8f370f26fc9df63cd2904dbee16a18bbda5"
+        }
+      },
+      "observedDpi": [
+        96
+      ]
+    }
+  },
+  "limits": [
+    "A successful resize sub-scenario does not make the failed full patch gate successful.",
+    "The earliest pre-compositor frame is retained separately; target-only assertions begin after the first passive compositor completion.",
+    "Resize pixel comparisons cover static text and fixed buttons. Edit interiors, tree, status, mode-button hover/focus and nonclient chrome are excluded.",
+    "Finite hosted Windows 96-DPI observations cannot establish representative-PC, high-DPI, multiple-monitor or physical-trackpad acceptance.",
+    "This allowlisted receipt retains original-report byte hashes and selected measurements; raw reports, paths and session data are not copied."
+  ],
+  "oldNegativeControl": {
+    "report": "resize-negative/native-resize-negative.json",
+    "bytes": 3002,
+    "sha256": "057668be34a7f061bfab5b774c67a706105d081fb6e242c6a51b1f1f8ad26c03",
+    "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+    "gateCommit": "51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e",
+    "gateSha256": "9bf5ce0aee6bb240167e48087ea332aff53813bafbccd713dbfdf82e24434e09",
+    "archives": {
+      "starter": {
+        "name": "native-workbench-0.16.1-starter-windows.zip",
+        "bytes": 17879604,
+        "sha256": "1291f93b5ece3c4da34eb2f2e29fccc83b6d87ec5fb73abf28bfd9cc8f155b75"
+      }
+    },
+    "success": false,
+    "negativeControlValidated": false,
+    "nativeGUIValidated": false,
+    "passed": 0,
+    "failed": 1,
+    "resizeGroups": 0,
+    "resizeFrames": 0,
+    "failure": "Native pointer target is not an unobscured application surface.",
+    "stage": "preparatory selection of the reference-index tool, before resize observation",
+    "actualHit": "owned main window rather than the expected tree control",
+    "diagnosis": "The catalogue returned the matching row while the asynchronous native tree refresh had not yet become hit-ready.",
+    "consequence": "Neither reproduction nor absence of the old resize defect was established in this attempt.",
+    "configuredSkipCount": 0
+  }
+}

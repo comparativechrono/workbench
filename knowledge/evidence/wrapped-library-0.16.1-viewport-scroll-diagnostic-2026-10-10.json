@@ -1,0 +1,771 @@
+{
+  "schema": 1,
+  "kind": "independent ordinary viewport diagnostic audit",
+  "appSourceCommit": "3bf08f0a8ae94f8842afc3fa07f4c20789f7ed3e",
+  "gateCommit": "f037fb612097aeff7fd576960a25d17c376504ee",
+  "run": 38075533050,
+  "artifactId": 11677679331,
+  "originalReport": {
+    "member": "viewport-probe/native-library-viewport-probe.json",
+    "bytes": 519754,
+    "sha256": "70b3be2427069c7b080f0fa540089c86a18deaafcdcd7c661138d9cc83a7cad7",
+    "script": "check_library_viewport_probe_windows.py",
+    "scriptSha256": "5695f663b8ed700c1074dd453a17b18b6e7dc22405b9577ad48d442a0826a92b",
+    "gateAndHelperHashesMatchCommit": true,
+    "helperHashesVerified": 4,
+    "bitmapHashesVerified": 2
+  },
+  "frozenArchivesUnchanged": true,
+  "diagnosticCompleted": true,
+  "nativeGUIValidated": false,
+  "acceptanceEstablished": false,
+  "blankReproducedBeforeExperiments": true,
+  "headingReached": false,
+  "firstBlankObservationIndex": 11,
+  "preMutationObservationCount": 12,
+  "diagnosticMutationObservationCount": 24,
+  "statefulExperimentCount": 12,
+  "experimentDesign": "Ordered stateful native-message observations, not isolated factorial trials. Each result refers only to its immediately preceding and following snapshots; an already-positioned target cannot establish that a message moved the native origin.",
+  "observations": [
+    {
+      "index": 0,
+      "action": "collapsed baseline",
+      "diagnosticMutation": false,
+      "treeClient": [
+        22,
+        193,
+        185,
+        646
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": true,
+      "childCoversViewport": true,
+      "nativeFirstVisibleMatchesExpectedAnchor": true
+    },
+    {
+      "index": 1,
+      "action": "real triangle expanded tail",
+      "diagnosticMutation": false,
+      "treeClient": [
+        22,
+        193,
+        185,
+        646
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": true,
+      "childCoversViewport": true,
+      "nativeFirstVisibleMatchesExpectedAnchor": true
+    },
+    {
+      "index": 2,
+      "action": "real triangle expanded preceding",
+      "diagnosticMutation": false,
+      "treeClient": [
+        22,
+        193,
+        185,
+        886
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": true,
+      "childCoversViewport": true,
+      "nativeFirstVisibleMatchesExpectedAnchor": true
+    },
+    {
+      "index": 3,
+      "action": "before real wheel 0",
+      "diagnosticMutation": false,
+      "treeClient": [
+        22,
+        193,
+        185,
+        886
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": true,
+      "childCoversViewport": true,
+      "nativeFirstVisibleMatchesExpectedAnchor": true
+    },
+    {
+      "index": 4,
+      "action": "before real wheel 1",
+      "diagnosticMutation": false,
+      "treeClient": [
+        22,
+        103,
+        185,
+        796
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": true,
+      "childCoversViewport": true,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 5,
+      "action": "before real wheel 2",
+      "diagnosticMutation": false,
+      "treeClient": [
+        22,
+        13,
+        185,
+        706
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": true,
+      "childCoversViewport": true,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 6,
+      "action": "before real wheel 3",
+      "diagnosticMutation": false,
+      "treeClient": [
+        22,
+        -77,
+        185,
+        616
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": true,
+      "childCoversViewport": true,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 7,
+      "action": "before real wheel 4",
+      "diagnosticMutation": false,
+      "treeClient": [
+        22,
+        -167,
+        185,
+        526
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": true,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 8,
+      "action": "before real wheel 5",
+      "diagnosticMutation": false,
+      "treeClient": [
+        22,
+        -257,
+        185,
+        436
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": true,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 9,
+      "action": "before real wheel 6",
+      "diagnosticMutation": false,
+      "treeClient": [
+        22,
+        -347,
+        185,
+        346
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": true,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 10,
+      "action": "before real wheel 7",
+      "diagnosticMutation": false,
+      "treeClient": [
+        22,
+        -437,
+        185,
+        256
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": true,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 11,
+      "action": "before real wheel 8",
+      "diagnosticMutation": false,
+      "treeClient": [
+        22,
+        -527,
+        185,
+        166
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": false,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 12,
+      "action": "NOSCROLL=True redraw=True before messages",
+      "diagnosticMutation": true,
+      "treeClient": [
+        22,
+        -527,
+        185,
+        166
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": false,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 13,
+      "action": "NOSCROLL=True redraw=True FIRSTVISIBLE expected anchor",
+      "diagnosticMutation": true,
+      "treeClient": [
+        22,
+        -527,
+        185,
+        166
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": false,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 14,
+      "action": "NOSCROLL=True redraw=True FIRSTVISIBLE selected item",
+      "diagnosticMutation": true,
+      "treeClient": [
+        22,
+        -527,
+        185,
+        166
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": false,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 15,
+      "action": "NOSCROLL=True redraw=True FIRSTVISIBLE other unselected item",
+      "diagnosticMutation": true,
+      "treeClient": [
+        22,
+        -527,
+        185,
+        166
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": false,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 16,
+      "action": "NOSCROLL=True redraw=True after redraw enabled",
+      "diagnosticMutation": true,
+      "treeClient": [
+        22,
+        -527,
+        185,
+        166
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": false,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 17,
+      "action": "NOSCROLL=True redraw=True after original style restored",
+      "diagnosticMutation": true,
+      "treeClient": [
+        22,
+        -527,
+        185,
+        166
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": false,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 18,
+      "action": "NOSCROLL=True redraw=False before messages",
+      "diagnosticMutation": true,
+      "treeClient": [
+        22,
+        -527,
+        185,
+        166
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": false,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 19,
+      "action": "NOSCROLL=True redraw=False FIRSTVISIBLE expected anchor",
+      "diagnosticMutation": true,
+      "treeClient": [
+        22,
+        -527,
+        185,
+        166
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": false,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 20,
+      "action": "NOSCROLL=True redraw=False FIRSTVISIBLE selected item",
+      "diagnosticMutation": true,
+      "treeClient": [
+        22,
+        -527,
+        185,
+        166
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": false,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 21,
+      "action": "NOSCROLL=True redraw=False FIRSTVISIBLE other unselected item",
+      "diagnosticMutation": true,
+      "treeClient": [
+        22,
+        -527,
+        185,
+        166
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": false,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 22,
+      "action": "NOSCROLL=True redraw=False after redraw enabled",
+      "diagnosticMutation": true,
+      "treeClient": [
+        22,
+        -527,
+        185,
+        166
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": false,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 23,
+      "action": "NOSCROLL=True redraw=False after original style restored",
+      "diagnosticMutation": true,
+      "treeClient": [
+        22,
+        -527,
+        185,
+        166
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": false,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 24,
+      "action": "NOSCROLL=False redraw=True before messages",
+      "diagnosticMutation": true,
+      "treeClient": [
+        22,
+        -527,
+        168,
+        166
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": false,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 25,
+      "action": "NOSCROLL=False redraw=True FIRSTVISIBLE expected anchor",
+      "diagnosticMutation": true,
+      "treeClient": [
+        22,
+        -527,
+        168,
+        166
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": false,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": true
+    },
+    {
+      "index": 26,
+      "action": "NOSCROLL=False redraw=True FIRSTVISIBLE selected item",
+      "diagnosticMutation": true,
+      "treeClient": [
+        22,
+        -527,
+        168,
+        166
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": false,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 27,
+      "action": "NOSCROLL=False redraw=True FIRSTVISIBLE other unselected item",
+      "diagnosticMutation": true,
+      "treeClient": [
+        22,
+        -527,
+        168,
+        166
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": false,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 28,
+      "action": "NOSCROLL=False redraw=True after redraw enabled",
+      "diagnosticMutation": true,
+      "treeClient": [
+        22,
+        -527,
+        168,
+        166
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": false,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 29,
+      "action": "NOSCROLL=False redraw=True after original style restored",
+      "diagnosticMutation": true,
+      "treeClient": [
+        22,
+        -527,
+        168,
+        166
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": false,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 30,
+      "action": "NOSCROLL=False redraw=False before messages",
+      "diagnosticMutation": true,
+      "treeClient": [
+        22,
+        -527,
+        168,
+        166
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": false,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 31,
+      "action": "NOSCROLL=False redraw=False FIRSTVISIBLE expected anchor",
+      "diagnosticMutation": true,
+      "treeClient": [
+        22,
+        -527,
+        168,
+        166
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": false,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": true
+    },
+    {
+      "index": 32,
+      "action": "NOSCROLL=False redraw=False FIRSTVISIBLE selected item",
+      "diagnosticMutation": true,
+      "treeClient": [
+        22,
+        -527,
+        168,
+        166
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": false,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 33,
+      "action": "NOSCROLL=False redraw=False FIRSTVISIBLE other unselected item",
+      "diagnosticMutation": true,
+      "treeClient": [
+        22,
+        -527,
+        168,
+        166
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": false,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 34,
+      "action": "NOSCROLL=False redraw=False after redraw enabled",
+      "diagnosticMutation": true,
+      "treeClient": [
+        22,
+        -527,
+        168,
+        166
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": false,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    },
+    {
+      "index": 35,
+      "action": "NOSCROLL=False redraw=False after original style restored",
+      "diagnosticMutation": true,
+      "treeClient": [
+        22,
+        -527,
+        168,
+        166
+      ],
+      "viewportClient": [
+        22,
+        193,
+        185,
+        586
+      ],
+      "intersectionExists": false,
+      "childCoversViewport": false,
+      "nativeFirstVisibleMatchesExpectedAnchor": false
+    }
+  ],
+  "capturesVerified": [
+    {
+      "member": "viewport-probe/viewport-before-wheel.bmp",
+      "bytes": 2611254,
+      "sha256": "1e021071c1da8564a0bb20c7040011752ae9ccfe6b4b4aa51f7dd9d8311a69be"
+    },
+    {
+      "member": "viewport-probe/viewport-first-blank-before-experiments.bmp",
+      "bytes": 2611254,
+      "sha256": "9fb7dc78e7e7aeeb3be94ab018621eacb6fd6bebc7d1e32214c38ce99da04fd4"
+    }
+  ],
+  "limits": [
+    "A frozen exact application is observed through actual category clicks and wheel input.",
+    "The first failure screenshot precedes all diagnostic style/redraw/first-visible mutations.",
+    "Native message experiments are diagnostic only; completion is not GUI acceptance.",
+    "No application bytes, catalogue text or item heights are modified.",
+    "No path-with-spaces diagnostic was run; the separate focused acceptance report uses its own fresh extraction.",
+    "Stateful message experiments cannot establish isolated causal effects or a production correction."
+  ]
+}

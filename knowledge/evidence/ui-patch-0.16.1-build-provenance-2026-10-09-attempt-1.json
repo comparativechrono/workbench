@@ -1,0 +1,329 @@
+{
+  "schema": 1,
+  "status": "unpublished review candidate; exact native Windows validation pending",
+  "createdUtc": "2026-10-09T20:24:23.790070+00:00",
+  "sourceCommit": "5e2bc368c5ea869ff794ad9d90a40480b6fd06fe",
+  "appVersion": "0.16.1",
+  "baseVersion": "0.16.0",
+  "platform": "Linux-6.8.0-1064-azure-x86_64-with-glibc2.35",
+  "published": false,
+  "nativeWindowsExecutedByBuilder": false,
+  "inputs": [
+    {
+      "file": "baseline.zip",
+      "bytes": 17846873,
+      "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+    },
+    {
+      "file": "source.zip",
+      "bytes": 47848425,
+      "sha256": "f746f00a82675c2cf52364a3b4d040721c6d06ac5605488efbdc0376ef5b7e44"
+    }
+  ],
+  "compiler": "LLVM-MinGW 20260922 UCRT",
+  "compilerArchiveSha256": "bb7bb7654b33d5aa8712acb837c963b2e0c56352560c76105270a3268c665c21",
+  "sourceCorrespondence": {
+    "sourceCommit": "5e2bc368c5ea869ff794ad9d90a40480b6fd06fe",
+    "currentFilesMatchCommit": 787,
+    "runtimeModulesMatchSource": 33,
+    "zipCrc": "passed"
+  },
+  "preservedPublishedFiles": {
+    "packs": 186,
+    "runtime": 39
+  },
+  "starterPacks": [
+    {
+      "id": "align",
+      "version": "0.4.0",
+      "folder": "packs/align-0.4.0",
+      "manifestSha256": "81c962222c93356a4f7727b23193c71d7dcd515859e62a179574781f411824d3"
+    },
+    {
+      "id": "bam",
+      "version": "0.4.0",
+      "folder": "packs/bam-0.4.0",
+      "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+    },
+    {
+      "id": "variants",
+      "version": "0.4.0",
+      "folder": "packs/variants-0.4.0",
+      "manifestSha256": "ea4b7f0a6c28709e4190b6514c07cbf7bdd58e1a4f2a2d931f2cae3ce6ec3795"
+    }
+  ],
+  "additionalPacks": [
+    {
+      "id": "align",
+      "version": "0.4.1",
+      "folder": "packs/align-0.4.1",
+      "manifestSha256": "7f8f36efbfd6a8255a98eabb06746fbcc5bbdb872f392a65ca3e79a586d04939",
+      "files": [
+        {
+          "path": "PACK-README.md",
+          "size": 1825,
+          "sha256": "c92e13990c5c74775ecf25274ae37e1468c2677ad75e9ccb489e5e54878a0c26"
+        },
+        {
+          "path": "bin/minimap2.exe",
+          "size": 606354,
+          "sha256": "06bf0815a79552ffcb1291046c7828f2bf8b11d9ad7fe0d9309283e966e973fa"
+        },
+        {
+          "path": "bin/paircheck.exe",
+          "size": 299154,
+          "sha256": "4f2dda7e26b5c115a7edee936a8a059eb55ece244931b2799a62cebfcd44ecd4"
+        },
+        {
+          "path": "fixtures/reads1.fastq",
+          "size": 22011,
+          "sha256": "33053fdfd6ca5abbe34883f869958a2e621e7d513ada06f401e91ad256e9cc21"
+        },
+        {
+          "path": "fixtures/reads2.fastq",
+          "size": 22011,
+          "sha256": "18b5ceeefb0115120830005a21808489f2c471c78af4aaaf724cdf99697a80e1"
+        },
+        {
+          "path": "fixtures/reference.fa",
+          "size": 3059,
+          "sha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee"
+        },
+        {
+          "path": "licenses/Cosmocc-3.3.10-README.md",
+          "size": 14863,
+          "sha256": "d0f502e2022b147c95f074f4c5069fde1d1bfbec861d34de46b8cde8e06e4c9b"
+        },
+        {
+          "path": "licenses/Cosmopolitan-LICENSE-3.3.10",
+          "size": 759,
+          "sha256": "188101f17152d898b65719a4c4fc501aa71c16649cc37ebab534bcb3511c6127"
+        },
+        {
+          "path": "licenses/Native-Workbench-MIT.txt",
+          "size": 1216,
+          "sha256": "8fc4c4b462aafaf8349f53b191ceea7496d39c49463224aaa05d366fbb406682"
+        },
+        {
+          "path": "licenses/ape-loader-3.3.10-ISC-header.txt",
+          "size": 1836,
+          "sha256": "f68ed60f7f93609e20d3a9d61a15e35bce298c90accf39e44d6c7cd2e964c9a6"
+        },
+        {
+          "path": "licenses/cosmopolitan-3.3.10/LICENSE",
+          "size": 759,
+          "sha256": "188101f17152d898b65719a4c4fc501aa71c16649cc37ebab534bcb3511c6127"
+        },
+        {
+          "path": "licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.fdlibm",
+          "size": 336,
+          "sha256": "5238b63cbd39512ff69bf9cb2ce054c7bd416030cdb0d3aea1af2ac0e47b2894"
+        },
+        {
+          "path": "licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.freebsd",
+          "size": 6109,
+          "sha256": "4ce916521645614401dd3f625bd534a2281c5e494fe50a631718de1a7c3fb064"
+        },
+        {
+          "path": "licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.musl",
+          "size": 6204,
+          "sha256": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af"
+        },
+        {
+          "path": "licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.openbsd",
+          "size": 19445,
+          "sha256": "89094132def44cf6f815a6527633d3cd673ccf82be8975fd9b717412517fd884"
+        },
+        {
+          "path": "licenses/cosmopolitan-3.3.10/libc/tinymath/LICENSE.optimized-routines",
+          "size": 13491,
+          "sha256": "fb9dee614d78bd7e408174cce841b5d5d50b1f46d2b806124c4923e37859211f"
+        },
+        {
+          "path": "licenses/cosmopolitan-3.3.10/notice-source/libc/intrin/armopt.c",
+          "size": 109,
+          "sha256": "858985a8e6fbe9cfe264479a178989d7535112c734024764927e19eff8d6b22a"
+        },
+        {
+          "path": "licenses/cosmopolitan-3.3.10/notice-source/libc/intrin/musl.c",
+          "size": 101,
+          "sha256": "1f74213f9cdc74844b125f841d72c29ecde8ec490e941050bcd5bc28499d551e"
+        },
+        {
+          "path": "licenses/cosmopolitan-3.3.10/notice-source/libc/log/err.c",
+          "size": 5730,
+          "sha256": "477bcfc04d773fda8b1d0b5b5a33dff62892deea8da759371592ef4a62a1d6dc"
+        },
+        {
+          "path": "licenses/cosmopolitan-3.3.10/notice-source/libc/str/smoothsort.c",
+          "size": 7981,
+          "sha256": "15bcb6ed194bb990e0bd50d5ecd0f8e3d7bac33e0cff935ca69f5fe27abe355c"
+        },
+        {
+          "path": "licenses/cosmopolitan-3.3.10/notice-source/libc/str/strlcpy.c",
+          "size": 2713,
+          "sha256": "538a04c2ba5fdaf976f9ecc2bc0f88650d65fa5e4fd574d70c04a374dc4068f6"
+        },
+        {
+          "path": "licenses/cosmopolitan-3.3.10/notice-source/libc/str/todd.c",
+          "size": 124,
+          "sha256": "835e7eecbdc9b030b3d3623afcc55d89197bd4fd243378690573f829116ab5f8"
+        },
+        {
+          "path": "licenses/cosmopolitan-3.3.10/notice-source/third_party/gdtoa/gdtoa.c",
+          "size": 19547,
+          "sha256": "258ca8e769fda751b15e7e4ad02302d210745aa2e3524932e66bace1bab349af"
+        },
+        {
+          "path": "licenses/cosmopolitan-3.3.10/notice-source/third_party/gdtoa/gdtoa.internal.h",
+          "size": 15838,
+          "sha256": "bfcc967fdc6992454eeee1b47807b1af06b113353f969f80fe27b276a9b9cc97"
+        },
+        {
+          "path": "licenses/cosmopolitan-3.3.10/notice-source/third_party/gdtoa/notice.c",
+          "size": 204,
+          "sha256": "3f5cefed7918c2094199e5b51f1d8a260a9cf0a625dd5bb6401bb9d2dd81b989"
+        },
+        {
+          "path": "licenses/cosmopolitan-3.3.10/notice-source/third_party/puff/puff.c",
+          "size": 40453,
+          "sha256": "4435ebd8f4ac8c26c0c1080c985a91e2359ac3495ce22d2bf1be08101d5ee215"
+        },
+        {
+          "path": "licenses/cosmopolitan-3.3.10/third_party/nsync/LICENSE.txt",
+          "size": 11358,
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        },
+        {
+          "path": "licenses/cosmopolitan-3.3.10/third_party/zlib/LICENSE",
+          "size": 2971,
+          "sha256": "49337b3c5dd49bc752db59acfbe6b96f6f710749e6f2e1d1caf7a33712ed9bd7"
+        },
+        {
+          "path": "licenses/cosmopolitan-3.3.10/third_party/zlib/LICENSE.chromium",
+          "size": 1536,
+          "sha256": "368cca1106be99d39ecd32a38d8305585d802a475effb66380b91ffc9bcf709b"
+        },
+        {
+          "path": "licenses/cosmopolitan-3.3.10/third_party/zlib/LICENSE.zlib",
+          "size": 1002,
+          "sha256": "845efc77857d485d91fb3e0b884aaa929368c717ae8186b66fe1ed2495753243"
+        },
+        {
+          "path": "licenses/minimap2-MIT-LICENSE",
+          "size": 1140,
+          "sha256": "b68a701dea24796190ef9e860ff56e79d578c96183722cf4ec3738793e8e75f4"
+        },
+        {
+          "path": "licenses/minimap2-embedded-runtime-notices.txt",
+          "size": 1717,
+          "sha256": "9b12488a3fd9041ecbbcd75f199337e3a9d434a877d1e23589ac91ddf17ff063"
+        },
+        {
+          "path": "licenses/provenance.json",
+          "size": 7329,
+          "sha256": "7bc4c9061703d0a41e5a8c1eaae675193c7fc2ee3169d0bd1d169d9858256a37"
+        },
+        {
+          "path": "licenses/seqtk-MIT-LICENSE",
+          "size": 1086,
+          "sha256": "506c5701a91dbd753aaab8f34639ec98e038685dbb40d943f63465e291e739d8"
+        },
+        {
+          "path": "licenses/seqtk-embedded-runtime-notices.txt",
+          "size": 1918,
+          "sha256": "90c25a6ac2ca4865b23ce5711df435cadcbd4c58831c923696c7f37d20681c03"
+        },
+        {
+          "path": "licenses/windows-runtime/COPYING",
+          "size": 2326,
+          "sha256": "99a69660981156c21336fdb5661f89341b013c94e4bf9e1c7467b4745718397f"
+        },
+        {
+          "path": "licenses/windows-runtime/COPYING.MinGW-w64-runtime.txt",
+          "size": 12155,
+          "sha256": "1db8da07b436c68833c0673ffee3d9fcb2526047f3820b81661865dfedc79a1f"
+        },
+        {
+          "path": "licenses/windows-runtime/COPYING.MinGW-w64.txt",
+          "size": 5905,
+          "sha256": "f38e6194bd3bfa1b654f118e5acefe0aead437bbe669eee43957ccc65a7127f1"
+        },
+        {
+          "path": "licenses/windows-runtime/COPYING.winpthreads.txt",
+          "size": 2883,
+          "sha256": "63263614cdd29f2f93cba85e992f041b31f9fc7b4033692f31269489a8a1b177"
+        },
+        {
+          "path": "licenses/windows-runtime/LLVM-Apache-2.0-with-exceptions.txt",
+          "size": 15141,
+          "sha256": "8d85c1057d742e597985c7d4e6320b015a9139385cff4cbae06ffc0ebe89afee"
+        },
+        {
+          "path": "pack.ini",
+          "size": 8813,
+          "sha256": "7f8f36efbfd6a8255a98eabb06746fbcc5bbdb872f392a65ca3e79a586d04939"
+        },
+        {
+          "path": "workbench-checks.json",
+          "size": 826,
+          "sha256": "9aba69715c792f7a95fca42426decc2b895305af0f03cb22cd92acc37f5deb90"
+        },
+        {
+          "path": "workbench-schema.json",
+          "size": 7100,
+          "sha256": "414460f4b438dd507233612873ea19a06b91489d66586b21afffcf846c9b682c"
+        }
+      ]
+    }
+  ],
+  "preservedSetupProfileSha256": "4cad899dcc1f6541f6edecc3ace7d0d4dd5d6103b1b16218fece0c0b68d2a4ba",
+  "preservedCatalogueSourcesSha256": "240cef994004c040584d3b8806bb361683693b1e7c0e92c9aedeaddc683fbefc",
+  "nativeExecutables": {
+    "DesktopWorkbench.exe": "8d0dac644f2318f60307f2357d2e9e41db0f8d3c81fbc454af6e08e287d5ef25",
+    "WorkbenchBridge.exe": "3eb4b9bb0387cda22194c72ccd4aafcf161fe848c0b4cb823c6c41e7d57ae6bc",
+    "UpdateWorkbench.exe": "1b765bedcd0c3494f8bf40e204f80c16aa1b8e13cebb2a77b0fe54a9d934c0b6"
+  },
+  "archives": [
+    {
+      "file": "native-workbench-0.16.1-source.zip",
+      "bytes": 48077614,
+      "sha256": "2752898cee34786fc7603475d713ffd588ae4bbe95ee6f948f938c7fef30f2b3"
+    },
+    {
+      "file": "native-workbench-0.16.1-starter-windows.zip",
+      "bytes": 17847426,
+      "sha256": "469460c1f221698cc48c803d5fe4e09dabf32c15c64c26c498946ff4f992b92d"
+    },
+    {
+      "file": "native-workbench-0.16.1-update-from-0.16.0.zip",
+      "bytes": 12982786,
+      "sha256": "64396999b4c0196f0b94eb00ae9b7ad90128cfffaa641398ba27808bc3425e31"
+    }
+  ],
+  "updater": {
+    "applicationRebuilt": false,
+    "result": {
+      "base_version": "0.16.0",
+      "target_version": "0.16.1",
+      "migration": false,
+      "replacement_files": 4,
+      "obsolete_files": 0,
+      "blob_bytes": 3323689,
+      "packs_changed": false
+    },
+    "baseManifestSha256": "7ea7e55caae3d60f1e2844eaee69f785088e23e04fde08d8db0cf7982794898f",
+    "targetManifestSha256": "f61098afe5a4ed9f4b1a87ca7fd06785a77f985a28264d6bc3132ace4f8e3e26",
+    "coreFilesVerified": 87,
+    "packsChanged": false,
+    "additionalPacksInstalledByUpdater": false,
+    "launcherSourceCommit": "5e2bc368c5ea869ff794ad9d90a40480b6fd06fe"
+  },
+  "evidenceCopy": {
+    "sourceArtifactId": 11642917414,
+    "sourceFile": "BUILD-PROVENANCE.json",
+    "sourceFileSha256": "8c168804043df8bf81940a80ec54e71aac71402e98d75c7554e23a4bc863e07f",
+    "applicationBytesModified": false,
+    "note": "Build-time pending-Windows status retained; subsequent native evidence is separate."
+  }
+}

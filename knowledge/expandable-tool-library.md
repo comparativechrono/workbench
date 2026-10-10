@@ -1,5 +1,61 @@
 # Expandable native tool library
 
+## Current presentation contract, 2026-10-10
+
+The user requested full text in the native library after testers found the
+hover label popup annoying and long labels obscured by the centre pane. Each
+tool row must show the complete `displayName` in **bold**, followed by its
+complete `displayDescription` in regular weight. Wrap both within the left
+pane, size the row for its text, and reflow when the available width changes.
+If a complete row is taller than the viewport, ordinary scrolling must reach
+every line. Do not truncate the label or rely on a hover popup to reveal it.
+
+Retain control 104 as the native TreeView, with its category hierarchy,
+selection and accessible text. Category headings remain navigation items, and
+the existing keyboard, search/filter, standalone-selection and workflow-drag
+contracts below remain in force. This changes presentation without changing
+published pack metadata, tool IDs, version pins or saved scientific workflows.
+
+The current implementation at `ff13db729a6215e9fe5dfa4a4efdb9c769880287` measures and
+draws the complete text with separate bold and regular fonts, allocates integral
+TreeView row heights, and wraps oversized tokens without widening the column.
+Full names and descriptions remain in native item text. Reflow caches usable
+width, reserves scrollbar space and preserves the first visible row/offset;
+unchanged catalogue polls leave the tree intact. Tooltips are disabled, and
+high-contrast mode uses Windows system colours.
+
+TreeView 104 is hosted inside native parent viewport 430. The outer viewport
+scrolls pixels through tall rows; the child window is bounded to the viewport
+height plus the largest row. Real native item rectangles and hit targets remain
+aligned with the visible child. This replaces the original candidate's native
+whole-item scrolling, which exact Windows checks showed could not reach the
+suffix of an oversized row. The earlier `3bf08f0` checks reached all text in a
+2,048-character fixture, but a separate overflow-scroll sequence produced a blank
+viewport. That failed candidate prompted a frozen diagnostic, which established that
+`TVS_NOSCROLL` prevents native first-visible-item movement and clearing it allows
+the anchor to move. The current correction permanently leaves native coarse
+scrolling enabled, extending the child by one DPI-adjusted native scrollbar
+width beyond the parent's clip. The visible pixel scrollbar, text wrapping and
+paint bounds use the parent viewport. Current exact-package source/build/archive
+checks passed. The full `ff13db7` run and frozen feedback recheck `7ea0ce6`,
+run 38076722339, together passed 124 distinct native checks per path on unchanged
+archives, including complete wrapped text, font weights, no hover popup and
+overflow scrolling. The original ordinary feedback interruption by a runner
+console remains retained. Final evidence audit and 41-image review are complete;
+the [final index](evidence/wrapped-library-0.16.1-final-acceptance-2026-10-10.json)
+binds the passing hosted candidate scope and its limits.
+The viewport uses a registered application window class compatible with
+composited drawing, following a control-creation failure in the first viewport
+candidate. Current exact startup succeeds; prior failures remain in the handover.
+
+This implemented **0.16.1** follow-up is ready for unpublished draft review,
+with source/archive/native/visual validation recorded, following retained failed candidates, in
+[draft PR #15](https://github.com/comparativechrono/workbench/pull/15).
+The [wrapped-library handover](wrapped-tool-library-0.16.1-handover.md) tracks
+its implementation and new exact-package evidence. The historical 0.11.0
+records below establish their original category implementation and publication,
+not acceptance of these new wrapped rows.
+
 ## Released 0.11.0, 2026-10-08
 
 [Version 0.11.0 is published](https://github.com/comparativechrono/workbench/releases/tag/app-v0.11.0) as a development

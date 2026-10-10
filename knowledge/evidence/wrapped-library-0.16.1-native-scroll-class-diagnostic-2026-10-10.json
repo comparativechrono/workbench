@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "kind": "independent class-creation diagnostic evidence receipt",
+  "sourceCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+  "gateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+  "run": 38075960020,
+  "diagnostics": [
+    {
+      "pathCase": "ordinary",
+      "reportMember": "class-probe/native-class-compatibility.json",
+      "originalReportBytes": 2831,
+      "originalReportSha256": "fc9a46e22debf7d37ab0e64cff4d7f0c5f7df54f2bcabc89ddfbdd89b94195b9",
+      "sourceCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+      "gateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+      "diagnosticCompleted": true,
+      "nativeGUIValidated": false,
+      "acceptanceEstablished": false,
+      "script": "scripts/check_library_class_probe_windows.py",
+      "scriptSha256ComputedFromGateCommit": "84caca82e25fbe2fc44c374989e7973346db95b48fbee44345d76f1eabaf0e35",
+      "scriptHashEmbeddedInReport": false,
+      "oldStaticClass": {
+        "style": 16520,
+        "styleHex": "0x4088",
+        "ownDC": false,
+        "classDC": false,
+        "parentDC": true
+      },
+      "registeredClass": {
+        "style": 0,
+        "styleHex": "0x0",
+        "ownDC": false,
+        "classDC": false,
+        "parentDC": false
+      },
+      "oldCreationSucceeded": false,
+      "registeredClassCreationSucceeded": true,
+      "oldLastErrorAfterCall": 0,
+      "cleanupOperationsSucceeded": 4,
+      "viewportStyles": {
+        "style": 1444937728,
+        "styleHex": "0x56200000",
+        "exStyle": 33620480,
+        "exStyleHex": "0x2010200",
+        "controlId": 430,
+        "initialSize": [
+          1,
+          1
+        ]
+      },
+      "scope": "Isolated native class/window creation; no application launch or mutation."
+    },
+    {
+      "pathCase": "path with spaces",
+      "reportMember": "class-probe/native-class-compatibility.json",
+      "originalReportBytes": 2831,
+      "originalReportSha256": "a05832579825c2759c9362e7a7e775e8aade747990747cfc6026807ca4caa049",
+      "sourceCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+      "gateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+      "diagnosticCompleted": true,
+      "nativeGUIValidated": false,
+      "acceptanceEstablished": false,
+      "script": "scripts/check_library_class_probe_windows.py",
+      "scriptSha256ComputedFromGateCommit": "84caca82e25fbe2fc44c374989e7973346db95b48fbee44345d76f1eabaf0e35",
+      "scriptHashEmbeddedInReport": false,
+      "oldStaticClass": {
+        "style": 16520,
+        "styleHex": "0x4088",
+        "ownDC": false,
+        "classDC": false,
+        "parentDC": true
+      },
+      "registeredClass": {
+        "style": 0,
+        "styleHex": "0x0",
+        "ownDC": false,
+        "classDC": false,
+        "parentDC": false
+      },
+      "oldCreationSucceeded": false,
+      "registeredClassCreationSucceeded": true,
+      "oldLastErrorAfterCall": 0,
+      "cleanupOperationsSucceeded": 4,
+      "viewportStyles": {
+        "style": 1444937728,
+        "styleHex": "0x56200000",
+        "exStyle": 33620480,
+        "exStyleHex": "0x2010200",
+        "controlId": 430,
+        "initialSize": [
+          1,
+          1
+        ]
+      },
+      "scope": "Isolated native class/window creation; no application launch or mutation."
+    }
+  ],
+  "acceptanceEstablished": false,
+  "includedInNativeAcceptanceCounts": false,
+  "limits": [
+    "Isolated hidden native windows; no application interaction acceptance follows from diagnostic completion.",
+    "The probe does not embed a gate-script hash; the receipt records its committed source hash separately.",
+    "Only observed creation success/failure is established; no meaning is inferred from the returned zero error code or formatted error text."
+  ]
+}

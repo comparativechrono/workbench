@@ -1,6 +1,132 @@
 # Development roadmap
 
-## Active set: Windows acceptance and deployment preparation
+## Active set: wrapped native tool library, 2026-10-10
+
+Unpublished **0.16.1** application source
+`ff13db729a6215e9fe5dfa4a4efdb9c769880287` implements full bold wrapped names,
+regular wrapped descriptions and removal of the library hover popup. The bounded
+native viewport supports tall rows and overflow scrolling, preserving category,
+keyboard, search/filter, selection, drag and scientific workflow contracts.
+
+The exact build passed 258 source tests, C++ JSON, three strict native builds and
+archive/source audit. The full run plus frozen feedback recheck
+[38076722339](https://github.com/comparativechrono/workbench/actions/runs/38076722339)
+passed **124 distinct native checks per Windows path** on unchanged archives.
+The initial ordinary runner-console obstruction and earlier application/driver
+failures remain recorded. Repeated checks and separate validator tests add no
+unique application coverage.
+
+Final evidence audit and 41-image review are complete. This set is **ready for
+unpublished draft review** through existing
+[draft PR #15](https://github.com/comparativechrono/workbench/pull/15), with the
+[handover](wrapped-tool-library-0.16.1-handover.md) and
+[final acceptance index](evidence/wrapped-library-0.16.1-final-acceptance-2026-10-10.json).
+No merge or publication is included. Published **0.16.0**, independent pack pins
+and historical resize evidence remain unchanged. Broader PC/display acceptance,
+signing/IT, Linux CWL and SDK recovery remain outstanding; benchmarking is separate.
+
+## Previous set: Tools resize correction, 2026-10-10
+
+The bounded correction is implemented in unpublished **0.16.1** application
+source `51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e` in
+[draft PR #15](https://github.com/comparativechrono/workbench/pull/15). It places
+the complete resized layout before painting, preserving the other accepted
+interface and workflow behavior. **235 source checks**, exact archive/source
+correspondence and **117 distinct native checks per Windows path** passed across
+the recorded runs.
+
+A bounded concurrent-resize comparison recorded 14 mixed-layout frames among
+46 old-package samples and none among 64 corrected-package samples. Screenshot
+review confirmed the old duplicated/shifted controls and clean corrected
+endpoints. This supports the narrow redraw correction. The separate strict
+single-transition negative control did not reproduce stale layout after the
+compositor wait, so the workflow remains failed on that requirement. Preserve
+that failure, pre-wait transients and finite-sampling limits in the
+[resize handover](resize-redraw-0.16.1-handover.md); no exact lag-duration,
+performance or zero-flicker claim is established.
+No merge or release is included. Published **0.16.0**, benchmarking and the
+remaining external acceptance/deployment work stay separate.
+
+## Previous set: tester-feedback revision of unpublished 0.16.1
+
+The [draft PR #15](https://github.com/comparativechrono/workbench/pull/15)
+revision is implemented in application source
+`73778e00461e2b83c07b9ea97df2b9c5d4b6317d`, with published 0.16.0 unchanged.
+It addresses Run/poll redraws and category expansion anchoring/collapse redraws,
+restores separate Methods while keeping Run preflight and removing the primary
+Readiness button, and adds native Samples New/Edit/Save as CSV/TSV plus a verified
+one-row Starter example. File columns, base folders and mapping stay explicit;
+there are no runtime/memory forecasts or invented independent replicates.
+
+Source validation (**220 tests, 18 suites**), three strict native builds and the
+independent archive/source audit passed. Final native coverage is **113 checks
+per Windows path**: 81 completed regressions, 19 patch checks and 13 feedback
+checks. Validator `f9e7120196ddd284d33c0e8221b78fbf4529058f`,
+[run 37999874335](https://github.com/comparativechrono/workbench/actions/runs/37999874335),
+passed on unchanged application archives, with 23 separate portable gate tests.
+Repeated patch checks add no unique coverage. Four earlier partial attempts remain documented through focused failure
+summaries and original-report hashes.
+
+Visual review is complete for 112 regression, 82 patch and 192 final feedback
+capture files. The feedback review covers 51 unique BMP hashes through 52 direct
+views and 140 verified exact-hash reuses, with no unexpected layout defect within
+the captured 96-DPI viewports. Keep the bounded immediate Tools-resize
+old-geometry observation until the first later sample (~0.30–0.32 s), observed-size
+limits, and the distinction between finite temporal samples and zero flicker.
+
+The [handover](tester-feedback-0.16.1-handover.md) is ready for unpublished draft
+review. Durable focused, sanitized receipts and original-report hashes replace
+raw JSON uploads; full originals remain in Actions artifacts that expire on
+2026-11-08. Tokens and detailed runner/input records are excluded from repository
+delivery. No merge or release is included. Benchmarking is separate; external
+acceptance, signing/IT, scientific Linux CWL and SDK/build recovery remain
+outstanding.
+
+## Prior set: native keyboard and narrow-display patch
+
+[Draft PR #15](https://github.com/comparativechrono/workbench/pull/15) carries the
+unpublished **0.16.1** follow-up on `fix/native-ui-0.16.1`, stacked on
+`feature/deployment-acceptance` and draft PR #14. Candidate source
+`8938e709b041106e8a46e1447383e8e9ba3e0cb9` addresses the observed Results
+keyboard focus/Escape defect and the clipped initial window on a 1024-pixel
+desktop. It retains the three-pane layout and uses the monitor work area for
+placement and minimum-size bounds. That candidate completed its unpublished
+draft-review validation before the
+active tester-feedback revision. Published **0.16.0** is unchanged; nothing is merged or released.
+
+[Run 37988570028](https://github.com/comparativechrono/workbench/actions/runs/37988570028)
+passed 141 source tests and 84 native checks per Windows path, and the independent
+archive/source audit passed. These are the third candidate's own results.
+The [validator-only recheck](https://github.com/comparativechrono/workbench/actions/runs/37989535317)
+at `69022689e686b2cacdc98dbdbef728e664941e67` also passed the same 19 patch checks
+per path without rebuilding the application. These are repeated observations
+within the 84-check scope. Crops from the original screenshots corrected the
+earlier full-frame interpretation: General settings and Readiness were present.
+Passive visible captures before PrintWindow show settled fixed controls by the
+first 250-ms capture (about 0.3 seconds elapsed), unchanged at 750/1250 ms;
+immediate frames can retain old geometry. Settled 96-DPI visual review passed;
+these samples do not establish zero flicker or exclude shorter unsampled
+transients. The [native record](evidence/ui-patch-0.16.1-native-validation-2026-10-09.json),
+[visual review](evidence/ui-patch-0.16.1-visual-review-2026-10-09.json) and
+[patch handover](ui-patch-0.16.1-handover.md) retain exact evidence and limits.
+
+The third revision additionally keeps read-only `queue/status` polling from
+disabling editing when no outgoing actions are queued. Mutation guards and FIFO
+ordering remain, with availability refreshed immediately when queuing a mutation.
+Passive 2.4-second focus holds now span polling intervals without refocusing.
+This follows a second attempt with all 84 checks passing in the ordinary path but
+two spaced-path failures at library Tab/Home focus before Results opened. All 65
+existing checks per path passed; the failed attempt and its audits remain retained.
+
+The first candidate's failed native gate and 141 source passes remain separate
+in the handover. The validator now uses corrected control IDs, waits for Setup
+dismissal and makes filter clearing observable; the spaced-path filter-clear
+failure's cause remains unproven. Layout scope is the observed 96-DPI desktop
+with a 960-pixel outer minimum width. Source review identifies busy Cancel/Results
+overlap below 908 logical client pixels and possible footer overlap below 902;
+smaller work areas and high DPI require further work and validation.
+
+## Windows acceptance and deployment companion baseline
 
 The owner accepted this bounded set on **2026-10-09** with “okay, lets do that”.
 [Draft PR #14](https://github.com/comparativechrono/workbench/pull/14) implements
@@ -17,11 +143,10 @@ observations. CI remains failed and all 10 manual acceptance items remain untest
 The 1040-pixel minimum app width also clips on the hosted 1024-pixel desktop.
 The [handover](deployment-acceptance-handover.md) owns exact evidence and limits.
 
-**Next development action:** fix Results keyboard focus/Escape in a separately
-versioned application candidate; address or explicitly bound narrow-display
-behavior. Preserve published 0.16.0 bytes and repeat exact ordinary/spaced gates
-for any changed app. Successful integrity and science checks do not waive the
-failed desktop requirement.
+These failures prompted the 0.16.1 review candidate above. The companion and
+its original observations remain available for review; successful integrity and
+science checks do not waive the failed desktop requirement or establish that the
+new patch passes.
 
 Representative-PC/high-DPI/multiple-monitor/physical-trackpad and managed-machine
 observations remain outstanding. Signing needs a controlled identity, and

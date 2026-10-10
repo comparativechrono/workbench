@@ -1,0 +1,1830 @@
+{
+  "applicationSourceCommit": "51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e",
+  "gateCommit": "6a4f2c37a98706b478af994e099e3a24c01ba0d7",
+  "status": "settled-layout-reviewed-with-immediate-resize-transients",
+  "findings": [
+    "Reviewed all 194 reported patch BMP capture files across ordinary and spaces installations through 69 individually inspected original-resolution hash representatives and 125 exact BMP SHA-256 duplicate reuses. Original BMP hashes/dimensions matched both native reports and viewed PNG RGB pixels matched originals.",
+    "Settled fresh and upgraded Tools/Workflow layouts are readable at the observed 960×680 and 1024×728 outer sizes. Results empty/populated states, setup and updater actions show no fixed-control overlap or blocking label clipping. Long path edits, table ellipsis, and lower scroll-panel content are expected viewport behavior.",
+    "Immediate pre-compositor frames include old source geometry: enlargement can show black bands in newly exposed right/bottom target-window areas; shrink can clip right-side and footer controls. These captures are classified as observed transients, not clean all-frame layout passes.",
+    "Some reference/transition captures include a full 1024×728 desktop rectangle while the application is 960×680. Filename size labels are not used as proof of actual dimensions; captures labelled 1280×900 do not establish that size.",
+    "Finite saved captures and native sampled assertions do not establish zero flicker, every rendered frame, high-DPI/multi-monitor/physical-trackpad behavior or representative-PC acceptance.",
+    "The separately reported baseline comparison did not reproduce a failure after DWM synchronization. This review establishes observed candidate layout only, not a proven differential fix or causal improvement.",
+    "This receipt covers patch captures only; feedback behavior/science assertions are separate. It contains capture filenames and exact hashes with bounded findings, without runner paths, token values, runtime identifiers or raw logs."
+  ],
+  "originalReports": [
+    {
+      "case": "ordinary",
+      "filename": "native-ui-patch.json",
+      "sha256": "909421cdfaea396bf3acf7dabf3e919be97bcae74dce345f4157c895bb458c42"
+    },
+    {
+      "case": "spaces",
+      "filename": "native-ui-patch.json",
+      "sha256": "98670910503c4e643df95d8628ab514fa3e6978db830b888c7fc0a09d622644f"
+    }
+  ],
+  "captures": {
+    "ordinary": [
+      {
+        "filename": "updater-cancel-picker.bmp",
+        "sha256": "61563f336096015ba3a7b5b913ec9f373e5209278ef624e375ecaa28ba3783f3",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Folder picker navigation, location entry, update action and Cancel are readable and separated.",
+          "The selected folder listing remains within its scrollable viewport; no blocking action clipping is observed."
+        ]
+      },
+      {
+        "filename": "updater-invalid-picker.bmp",
+        "sha256": "6381cac6c1e37f8246ba68d1048cda3faf88fb12ca3d82181c5b558cd9be9b59",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Folder picker navigation, location entry, update action and Cancel are readable and separated.",
+          "The selected folder listing remains within its scrollable viewport; no blocking action clipping is observed."
+        ]
+      },
+      {
+        "filename": "updater-invalid-warning.bmp",
+        "sha256": "0e52f8bac762d6f7e77dcdc7c9152b4f1f5f1435cc6a04bceb9817e25b028381",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Invalid-installation explanation and corrective instruction are readable.",
+          "The confirmation button fits without overlap."
+        ]
+      },
+      {
+        "filename": "updater-invalid-retry-picker.bmp",
+        "sha256": "d67930f28758d3244ae5a7d0f7ef7e0be540d40f0aa8821011f89ea220941cda",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Folder picker navigation, location entry, update action and Cancel are readable and separated.",
+          "The selected folder listing remains within its scrollable viewport; no blocking action clipping is observed."
+        ]
+      },
+      {
+        "filename": "updater-install-picker.bmp",
+        "sha256": "23f3255d55d1a94402e5fe0194dd96dd010365bc598f0a71e5fe2fdd0b30580e",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Folder picker navigation, location entry, update action and Cancel are readable and separated.",
+          "The selected folder listing remains within its scrollable viewport; no blocking action clipping is observed."
+        ]
+      },
+      {
+        "filename": "updater-install-success.bmp",
+        "sha256": "2357dc7e12a5d30970a335f342ce658d3a76ceb1fbae7c66d2eed89c55b174ef",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Update-completion message and next-step instruction are readable.",
+          "The confirmation button fits without overlap."
+        ]
+      },
+      {
+        "filename": "updater-repeat-picker.bmp",
+        "sha256": "0a481c55131c06441a75a46e6862b23d0b02ab129763515684d302a817af802f",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Folder picker navigation, location entry, update action and Cancel are readable and separated.",
+          "The selected folder listing remains within its scrollable viewport; no blocking action clipping is observed."
+        ]
+      },
+      {
+        "filename": "updater-repeat-success.bmp",
+        "sha256": "2357dc7e12a5d30970a335f342ce658d3a76ceb1fbae7c66d2eed89c55b174ef",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture updater-install-success.bmp.",
+          "Update-completion message and next-step instruction are readable.",
+          "The confirmation button fits without overlap."
+        ]
+      },
+      {
+        "filename": "fresh-first-open-starter.bmp",
+        "sha256": "8340249724a191191909cbaa3700aa5cd8b95ea201ea6867de664dbe05cddae6",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Setup choices, pack status columns and explanatory text are readable.",
+          "Setup action buttons fit and disabled states are distinct; partial lower rows remain within the scrolling list."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-reference-1024x728.bmp",
+        "sha256": "97ebc1e5e7e2c6c7117b2f88f495024dab60f933d6dc759b58764df820d1c752",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-reference-960x680.bmp",
+        "sha256": "29a9a8a21ffb4ff40dbbedc82d3473fa4e852a8a563951aa63e055dff2f34670",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-00-frame-000.bmp",
+        "sha256": "c20999b8fc62ecc17d7526cf7725b0d4f6a4f4653df9567a487301d48926a0b0",
+        "status": "immediate-resize-transient-observed",
+        "findings": [
+          "Immediate enlargement retains the smaller layout with black newly exposed bands on the right and bottom.",
+          "This frame is visibly transitional; corresponding settled size references and later layout captures fit. It does not establish zero flicker or a persistent settled defect."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-00-last.bmp",
+        "sha256": "97ebc1e5e7e2c6c7117b2f88f495024dab60f933d6dc759b58764df820d1c752",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-tool-resize-reference-1024x728.bmp.",
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-01-frame-000.bmp",
+        "sha256": "29a9a8a21ffb4ff40dbbedc82d3473fa4e852a8a563951aa63e055dff2f34670",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-tool-resize-reference-960x680.bmp.",
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-01-last.bmp",
+        "sha256": "29a9a8a21ffb4ff40dbbedc82d3473fa4e852a8a563951aa63e055dff2f34670",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-tool-resize-reference-960x680.bmp.",
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-02-frame-000.bmp",
+        "sha256": "c20999b8fc62ecc17d7526cf7725b0d4f6a4f4653df9567a487301d48926a0b0",
+        "status": "immediate-resize-transient-observed",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-tool-resize-00-frame-000.bmp.",
+          "Immediate enlargement retains the smaller layout with black newly exposed bands on the right and bottom.",
+          "This frame is visibly transitional; corresponding settled size references and later layout captures fit. It does not establish zero flicker or a persistent settled defect."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-02-last.bmp",
+        "sha256": "97ebc1e5e7e2c6c7117b2f88f495024dab60f933d6dc759b58764df820d1c752",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-tool-resize-reference-1024x728.bmp.",
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-03-frame-000.bmp",
+        "sha256": "56d51f12460ba72bf67dd5cfb7ec72a40e08b49564538601cc586e1aa26b7ede",
+        "status": "immediate-resize-transient-observed",
+        "findings": [
+          "Immediate shrink retains larger geometry, clipping navigation and fixed controls at the right and bottom window edges.",
+          "This frame is visibly transitional; corresponding settled size references and later layout captures fit. It does not establish zero flicker or a persistent settled defect."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-03-last.bmp",
+        "sha256": "29a9a8a21ffb4ff40dbbedc82d3473fa4e852a8a563951aa63e055dff2f34670",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-tool-resize-reference-960x680.bmp.",
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-04-frame-000.bmp",
+        "sha256": "c20999b8fc62ecc17d7526cf7725b0d4f6a4f4653df9567a487301d48926a0b0",
+        "status": "immediate-resize-transient-observed",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-tool-resize-00-frame-000.bmp.",
+          "Immediate enlargement retains the smaller layout with black newly exposed bands on the right and bottom.",
+          "This frame is visibly transitional; corresponding settled size references and later layout captures fit. It does not establish zero flicker or a persistent settled defect."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-04-last.bmp",
+        "sha256": "97ebc1e5e7e2c6c7117b2f88f495024dab60f933d6dc759b58764df820d1c752",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-tool-resize-reference-1024x728.bmp.",
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-05-frame-000.bmp",
+        "sha256": "56d51f12460ba72bf67dd5cfb7ec72a40e08b49564538601cc586e1aa26b7ede",
+        "status": "immediate-resize-transient-observed",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-tool-resize-03-frame-000.bmp.",
+          "Immediate shrink retains larger geometry, clipping navigation and fixed controls at the right and bottom window edges.",
+          "This frame is visibly transitional; corresponding settled size references and later layout captures fit. It does not establish zero flicker or a persistent settled defect."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-05-last.bmp",
+        "sha256": "29a9a8a21ffb4ff40dbbedc82d3473fa4e852a8a563951aa63e055dff2f34670",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-tool-resize-reference-960x680.bmp.",
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "fresh-tool-960-visible-immediate.bmp",
+        "sha256": "56ff4bce35288558fecc700123f7ea7e0ada640ae68163e8b7d7eb15171485f6",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "fresh-tool-960-visible-250ms.bmp",
+        "sha256": "56ff4bce35288558fecc700123f7ea7e0ada640ae68163e8b7d7eb15171485f6",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-tool-960-visible-immediate.bmp.",
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "fresh-tool-960-visible-750ms.bmp",
+        "sha256": "56ff4bce35288558fecc700123f7ea7e0ada640ae68163e8b7d7eb15171485f6",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-tool-960-visible-immediate.bmp.",
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "fresh-tool-960-visible-1250ms.bmp",
+        "sha256": "56ff4bce35288558fecc700123f7ea7e0ada640ae68163e8b7d7eb15171485f6",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-tool-960-visible-immediate.bmp.",
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "fresh-tool-960x680.bmp",
+        "sha256": "dbb80274b5d831c33a58cf1d2f5da85fcc9c44ba91984f8a19093ceb3929beb4",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "fresh-tool-1024x728.bmp",
+        "sha256": "44d359c9865c15bc557aed66b9d6d372bb7a1503482c0f44505472a4824a92d6",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "fresh-tool-1280x900.bmp",
+        "sha256": "44d359c9865c15bc557aed66b9d6d372bb7a1503482c0f44505472a4824a92d6",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-tool-1024x728.bmp.",
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-reference-1024x728.bmp",
+        "sha256": "e33051a60058a219803f5568265de5597ee447c3939ad089cb83b18b31fb3242",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-reference-960x680.bmp",
+        "sha256": "c91978c3e1a410daa6da2ee7f0322a120670dd103e4b2a01bb3993366be47d04",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-00-frame-000.bmp",
+        "sha256": "5e787b580a96d24c1845ed4bfe660b233a76f189e870a8efdbfa6fa490a9af4f",
+        "status": "immediate-resize-transient-observed",
+        "findings": [
+          "Immediate enlargement retains the smaller layout with black newly exposed bands on the right and bottom.",
+          "This frame is visibly transitional; corresponding settled size references and later layout captures fit. It does not establish zero flicker or a persistent settled defect."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-00-last.bmp",
+        "sha256": "e33051a60058a219803f5568265de5597ee447c3939ad089cb83b18b31fb3242",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-workflow-resize-reference-1024x728.bmp.",
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-01-frame-000.bmp",
+        "sha256": "512950c7277e025eb0503c8d5f137a029ada4266c192f34cffcadeaa9ff0904a",
+        "status": "immediate-resize-transient-observed",
+        "findings": [
+          "Immediate shrink retains larger geometry, clipping navigation and fixed controls at the right and bottom window edges.",
+          "This frame is visibly transitional; corresponding settled size references and later layout captures fit. It does not establish zero flicker or a persistent settled defect."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-01-last.bmp",
+        "sha256": "c91978c3e1a410daa6da2ee7f0322a120670dd103e4b2a01bb3993366be47d04",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-workflow-resize-reference-960x680.bmp.",
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-02-frame-000.bmp",
+        "sha256": "5e787b580a96d24c1845ed4bfe660b233a76f189e870a8efdbfa6fa490a9af4f",
+        "status": "immediate-resize-transient-observed",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-workflow-resize-00-frame-000.bmp.",
+          "Immediate enlargement retains the smaller layout with black newly exposed bands on the right and bottom.",
+          "This frame is visibly transitional; corresponding settled size references and later layout captures fit. It does not establish zero flicker or a persistent settled defect."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-02-last.bmp",
+        "sha256": "e33051a60058a219803f5568265de5597ee447c3939ad089cb83b18b31fb3242",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-workflow-resize-reference-1024x728.bmp.",
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-03-frame-000.bmp",
+        "sha256": "512950c7277e025eb0503c8d5f137a029ada4266c192f34cffcadeaa9ff0904a",
+        "status": "immediate-resize-transient-observed",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-workflow-resize-01-frame-000.bmp.",
+          "Immediate shrink retains larger geometry, clipping navigation and fixed controls at the right and bottom window edges.",
+          "This frame is visibly transitional; corresponding settled size references and later layout captures fit. It does not establish zero flicker or a persistent settled defect."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-03-last.bmp",
+        "sha256": "c91978c3e1a410daa6da2ee7f0322a120670dd103e4b2a01bb3993366be47d04",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-workflow-resize-reference-960x680.bmp.",
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-04-frame-000.bmp",
+        "sha256": "5e787b580a96d24c1845ed4bfe660b233a76f189e870a8efdbfa6fa490a9af4f",
+        "status": "immediate-resize-transient-observed",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-workflow-resize-00-frame-000.bmp.",
+          "Immediate enlargement retains the smaller layout with black newly exposed bands on the right and bottom.",
+          "This frame is visibly transitional; corresponding settled size references and later layout captures fit. It does not establish zero flicker or a persistent settled defect."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-04-last.bmp",
+        "sha256": "e33051a60058a219803f5568265de5597ee447c3939ad089cb83b18b31fb3242",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-workflow-resize-reference-1024x728.bmp.",
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-05-frame-000.bmp",
+        "sha256": "512950c7277e025eb0503c8d5f137a029ada4266c192f34cffcadeaa9ff0904a",
+        "status": "immediate-resize-transient-observed",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-workflow-resize-01-frame-000.bmp.",
+          "Immediate shrink retains larger geometry, clipping navigation and fixed controls at the right and bottom window edges.",
+          "This frame is visibly transitional; corresponding settled size references and later layout captures fit. It does not establish zero flicker or a persistent settled defect."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-05-last.bmp",
+        "sha256": "c91978c3e1a410daa6da2ee7f0322a120670dd103e4b2a01bb3993366be47d04",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-workflow-resize-reference-960x680.bmp.",
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-960-visible-immediate.bmp",
+        "sha256": "b0599eb9a83b925e08997e7be4906c59f082e6d77cab4de99f6c3a1c8f453dcd",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-960-visible-250ms.bmp",
+        "sha256": "b0599eb9a83b925e08997e7be4906c59f082e6d77cab4de99f6c3a1c8f453dcd",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-workflow-960-visible-immediate.bmp.",
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-960-visible-750ms.bmp",
+        "sha256": "b0599eb9a83b925e08997e7be4906c59f082e6d77cab4de99f6c3a1c8f453dcd",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-workflow-960-visible-immediate.bmp.",
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-960-visible-1250ms.bmp",
+        "sha256": "b0599eb9a83b925e08997e7be4906c59f082e6d77cab4de99f6c3a1c8f453dcd",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-workflow-960-visible-immediate.bmp.",
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-960x680.bmp",
+        "sha256": "7ce8b927bb6a800dbac880691e233d5d249443ba458ed228ec39f2e05366b6eb",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-1024x728.bmp",
+        "sha256": "2ccb5de37ec35781a8c379e5b429a9920ad03bd4e045e038015581a216259c4c",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-1280x900.bmp",
+        "sha256": "2ccb5de37ec35781a8c379e5b429a9920ad03bd4e045e038015581a216259c4c",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-workflow-1024x728.bmp.",
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "fresh-results-empty.bmp",
+        "sha256": "feb6d244e84713edf729775ca34a1e7ffadb2f75d224848a687ad9098ed68e57",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Search input, empty-results guidance and Close are readable and contained.",
+          "Record-dependent actions are visibly disabled; no fixed-control overlap is observed."
+        ]
+      },
+      {
+        "filename": "fresh-results-populated.bmp",
+        "sha256": "f245a19bff0f2751001145361f4d3c12f7377c926e48f020f46b1151af3985c0",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Selected result, recorded summary, Search and footer actions are readable and contained.",
+          "Long row content is bounded within its column and lower details use the scrolling summary pane."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-reference-1024x728.bmp",
+        "sha256": "de087f20b80815a6adf26bd729d1dfbd8ba9eeb7a4b5b4d017192b00f5eb6f63",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-reference-960x680.bmp",
+        "sha256": "e2c369f343d44124aae409ce874ba8e739b68e5acc2291445c702d0b9fb64a50",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-00-frame-000.bmp",
+        "sha256": "de087f20b80815a6adf26bd729d1dfbd8ba9eeb7a4b5b4d017192b00f5eb6f63",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-tool-resize-reference-1024x728.bmp.",
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-00-last.bmp",
+        "sha256": "de087f20b80815a6adf26bd729d1dfbd8ba9eeb7a4b5b4d017192b00f5eb6f63",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-tool-resize-reference-1024x728.bmp.",
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-01-frame-000.bmp",
+        "sha256": "e2c369f343d44124aae409ce874ba8e739b68e5acc2291445c702d0b9fb64a50",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-tool-resize-reference-960x680.bmp.",
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-01-last.bmp",
+        "sha256": "e2c369f343d44124aae409ce874ba8e739b68e5acc2291445c702d0b9fb64a50",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-tool-resize-reference-960x680.bmp.",
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-02-frame-000.bmp",
+        "sha256": "b25ab7c8cea195b0684bcd3e482b20145991e9934fbd9ac91ed64e42a4cdae0f",
+        "status": "immediate-resize-transient-observed",
+        "findings": [
+          "Immediate enlargement retains the smaller layout with black newly exposed bands on the right and bottom.",
+          "This frame is visibly transitional; corresponding settled size references and later layout captures fit. It does not establish zero flicker or a persistent settled defect."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-02-last.bmp",
+        "sha256": "de087f20b80815a6adf26bd729d1dfbd8ba9eeb7a4b5b4d017192b00f5eb6f63",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-tool-resize-reference-1024x728.bmp.",
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-03-frame-000.bmp",
+        "sha256": "12e670170de18093daedbfdede1ae6752b0aa3b3afc552df2e0ddc341448562f",
+        "status": "immediate-resize-transient-observed",
+        "findings": [
+          "Immediate shrink retains larger geometry, clipping navigation and fixed controls at the right and bottom window edges.",
+          "This frame is visibly transitional; corresponding settled size references and later layout captures fit. It does not establish zero flicker or a persistent settled defect."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-03-last.bmp",
+        "sha256": "e2c369f343d44124aae409ce874ba8e739b68e5acc2291445c702d0b9fb64a50",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-tool-resize-reference-960x680.bmp.",
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-04-frame-000.bmp",
+        "sha256": "b25ab7c8cea195b0684bcd3e482b20145991e9934fbd9ac91ed64e42a4cdae0f",
+        "status": "immediate-resize-transient-observed",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-tool-resize-02-frame-000.bmp.",
+          "Immediate enlargement retains the smaller layout with black newly exposed bands on the right and bottom.",
+          "This frame is visibly transitional; corresponding settled size references and later layout captures fit. It does not establish zero flicker or a persistent settled defect."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-04-last.bmp",
+        "sha256": "de087f20b80815a6adf26bd729d1dfbd8ba9eeb7a4b5b4d017192b00f5eb6f63",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-tool-resize-reference-1024x728.bmp.",
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-05-frame-000.bmp",
+        "sha256": "12e670170de18093daedbfdede1ae6752b0aa3b3afc552df2e0ddc341448562f",
+        "status": "immediate-resize-transient-observed",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-tool-resize-03-frame-000.bmp.",
+          "Immediate shrink retains larger geometry, clipping navigation and fixed controls at the right and bottom window edges.",
+          "This frame is visibly transitional; corresponding settled size references and later layout captures fit. It does not establish zero flicker or a persistent settled defect."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-05-last.bmp",
+        "sha256": "e2c369f343d44124aae409ce874ba8e739b68e5acc2291445c702d0b9fb64a50",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-tool-resize-reference-960x680.bmp.",
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-960-visible-immediate.bmp",
+        "sha256": "bc43bbfad673277c3904b3ea05745f922e8b71dd018db99ece5ae5008239afb4",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-960-visible-250ms.bmp",
+        "sha256": "bc43bbfad673277c3904b3ea05745f922e8b71dd018db99ece5ae5008239afb4",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-tool-960-visible-immediate.bmp.",
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-960-visible-750ms.bmp",
+        "sha256": "bc43bbfad673277c3904b3ea05745f922e8b71dd018db99ece5ae5008239afb4",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-tool-960-visible-immediate.bmp.",
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-960-visible-1250ms.bmp",
+        "sha256": "bc43bbfad673277c3904b3ea05745f922e8b71dd018db99ece5ae5008239afb4",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-tool-960-visible-immediate.bmp.",
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-960x680.bmp",
+        "sha256": "e3b0ecb123d6900bcd523483307efc903b591d4dec3d24c2f5e7cc44a0b26d62",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-1024x728.bmp",
+        "sha256": "004da4f429f48220d10bcb61a61e4a91e1f4415f2633370d318d1d3679f7bc8d",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-1280x900.bmp",
+        "sha256": "004da4f429f48220d10bcb61a61e4a91e1f4415f2633370d318d1d3679f7bc8d",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-tool-1024x728.bmp.",
+          "Tools navigation, selected-tool description, input fields, General settings and fixed Run, Methods, save and load controls are readable and separated.",
+          "Lower editor and settings content clips only at scrolling viewport boundaries; fixed actions fit the observed window."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-reference-1024x728.bmp",
+        "sha256": "de1101752d5c245e0fb0cb667cfe79fc7ec1e6c328268772b0eef246e3e55687",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-reference-960x680.bmp",
+        "sha256": "f2ec5eddc2b4c5e54808f5f2d637118933d46fb4c4c86eced5455b42205cd263",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-00-frame-000.bmp",
+        "sha256": "0da11b4df9443b48d8091c002e1f45c8b1118d5fb6f2c8826e0f3e0e94327d3e",
+        "status": "immediate-resize-transient-observed",
+        "findings": [
+          "Immediate enlargement retains the smaller layout with black newly exposed bands on the right and bottom.",
+          "This frame is visibly transitional; corresponding settled size references and later layout captures fit. It does not establish zero flicker or a persistent settled defect."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-00-last.bmp",
+        "sha256": "de1101752d5c245e0fb0cb667cfe79fc7ec1e6c328268772b0eef246e3e55687",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-workflow-resize-reference-1024x728.bmp.",
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-01-frame-000.bmp",
+        "sha256": "f2ec5eddc2b4c5e54808f5f2d637118933d46fb4c4c86eced5455b42205cd263",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-workflow-resize-reference-960x680.bmp.",
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-01-last.bmp",
+        "sha256": "f2ec5eddc2b4c5e54808f5f2d637118933d46fb4c4c86eced5455b42205cd263",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-workflow-resize-reference-960x680.bmp.",
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-02-frame-000.bmp",
+        "sha256": "0da11b4df9443b48d8091c002e1f45c8b1118d5fb6f2c8826e0f3e0e94327d3e",
+        "status": "immediate-resize-transient-observed",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-workflow-resize-00-frame-000.bmp.",
+          "Immediate enlargement retains the smaller layout with black newly exposed bands on the right and bottom.",
+          "This frame is visibly transitional; corresponding settled size references and later layout captures fit. It does not establish zero flicker or a persistent settled defect."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-02-last.bmp",
+        "sha256": "de1101752d5c245e0fb0cb667cfe79fc7ec1e6c328268772b0eef246e3e55687",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-workflow-resize-reference-1024x728.bmp.",
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-03-frame-000.bmp",
+        "sha256": "f2ec5eddc2b4c5e54808f5f2d637118933d46fb4c4c86eced5455b42205cd263",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-workflow-resize-reference-960x680.bmp.",
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-03-last.bmp",
+        "sha256": "f2ec5eddc2b4c5e54808f5f2d637118933d46fb4c4c86eced5455b42205cd263",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-workflow-resize-reference-960x680.bmp.",
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-04-frame-000.bmp",
+        "sha256": "de1101752d5c245e0fb0cb667cfe79fc7ec1e6c328268772b0eef246e3e55687",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-workflow-resize-reference-1024x728.bmp.",
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-04-last.bmp",
+        "sha256": "de1101752d5c245e0fb0cb667cfe79fc7ec1e6c328268772b0eef246e3e55687",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-workflow-resize-reference-1024x728.bmp.",
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-05-frame-000.bmp",
+        "sha256": "05512244b4b0e36e1bdbc9759a6e46fb2a60ea12d583a3075b987185e5508bef",
+        "status": "immediate-resize-transient-observed",
+        "findings": [
+          "Immediate shrink retains larger geometry, clipping navigation and fixed controls at the right and bottom window edges.",
+          "This frame is visibly transitional; corresponding settled size references and later layout captures fit. It does not establish zero flicker or a persistent settled defect."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-05-last.bmp",
+        "sha256": "f2ec5eddc2b4c5e54808f5f2d637118933d46fb4c4c86eced5455b42205cd263",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-workflow-resize-reference-960x680.bmp.",
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-960-visible-immediate.bmp",
+        "sha256": "6782c8da872a3fb9348635264d1c9b3bf3ac0c05d3b4d4e6b0ff1471967a0553",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-960-visible-250ms.bmp",
+        "sha256": "6782c8da872a3fb9348635264d1c9b3bf3ac0c05d3b4d4e6b0ff1471967a0553",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-workflow-960-visible-immediate.bmp.",
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-960-visible-750ms.bmp",
+        "sha256": "6782c8da872a3fb9348635264d1c9b3bf3ac0c05d3b4d4e6b0ff1471967a0553",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-workflow-960-visible-immediate.bmp.",
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-960-visible-1250ms.bmp",
+        "sha256": "6782c8da872a3fb9348635264d1c9b3bf3ac0c05d3b4d4e6b0ff1471967a0553",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-workflow-960-visible-immediate.bmp.",
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-960x680.bmp",
+        "sha256": "1e05fca6c0eb9ea45b19c975661662943ab4f639e4e2d512d680ded610cb0d18",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-1024x728.bmp",
+        "sha256": "d14fccb506ebc71503320fe0f1e4b925ee0d7aeda47f4a992a5a17aa9e419285",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-1280x900.bmp",
+        "sha256": "d14fccb506ebc71503320fe0f1e4b925ee0d7aeda47f4a992a5a17aa9e419285",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture upgraded-workflow-1024x728.bmp.",
+          "Workflow guidance, General settings, save and load, Methods, zoom and graph actions are readable and contained.",
+          "Lower settings content clips at its scrolling boundary; fixed controls remain separated and disabled states are distinct."
+        ]
+      },
+      {
+        "filename": "upgraded-results-empty.bmp",
+        "sha256": "feb6d244e84713edf729775ca34a1e7ffadb2f75d224848a687ad9098ed68e57",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-results-empty.bmp.",
+          "Search input, empty-results guidance and Close are readable and contained.",
+          "Record-dependent actions are visibly disabled; no fixed-control overlap is observed."
+        ]
+      },
+      {
+        "filename": "upgraded-results-populated.bmp",
+        "sha256": "fc1f1516468e1d7f7466e9e40636165afa8b27d550e2face27f296abec6838fa",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Selected result, recorded summary, Search and footer actions are readable and contained.",
+          "Long row content is bounded within its column and lower details use the scrolling summary pane."
+        ]
+      }
+    ],
+    "spaces": [
+      {
+        "filename": "updater-cancel-picker.bmp",
+        "sha256": "88463d6309d6c090888ccb2a6692fd0ef814416d81970b790ba3ae5aa6180cab",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Native folder picker navigation, Folder edit, update action and Cancel are readable and separated. File-list column overflow remains inside its horizontal-scroll viewport."
+        ]
+      },
+      {
+        "filename": "updater-invalid-picker.bmp",
+        "sha256": "a18eb0aa91a9805af20fc7604158b1a4de0ec08a5c72cf2604ba7921751e8928",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Native folder picker navigation, Folder edit, update action and Cancel are readable and separated. File-list column overflow remains inside its horizontal-scroll viewport."
+        ]
+      },
+      {
+        "filename": "updater-invalid-warning.bmp",
+        "sha256": "0e52f8bac762d6f7e77dcdc7c9152b4f1f5f1435cc6a04bceb9817e25b028381",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture updater-invalid-warning.bmp.",
+          "Invalid-installation explanation and corrective instruction are readable.",
+          "The confirmation button fits without overlap."
+        ]
+      },
+      {
+        "filename": "updater-invalid-retry-picker.bmp",
+        "sha256": "d67930f28758d3244ae5a7d0f7ef7e0be540d40f0aa8821011f89ea220941cda",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture updater-invalid-retry-picker.bmp.",
+          "Folder picker navigation, location entry, update action and Cancel are readable and separated.",
+          "The selected folder listing remains within its scrollable viewport; no blocking action clipping is observed."
+        ]
+      },
+      {
+        "filename": "updater-install-picker.bmp",
+        "sha256": "d67930f28758d3244ae5a7d0f7ef7e0be540d40f0aa8821011f89ea220941cda",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture updater-invalid-retry-picker.bmp.",
+          "Folder picker navigation, location entry, update action and Cancel are readable and separated.",
+          "The selected folder listing remains within its scrollable viewport; no blocking action clipping is observed."
+        ]
+      },
+      {
+        "filename": "updater-install-success.bmp",
+        "sha256": "2357dc7e12a5d30970a335f342ce658d3a76ceb1fbae7c66d2eed89c55b174ef",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture updater-install-success.bmp.",
+          "Update-completion message and next-step instruction are readable.",
+          "The confirmation button fits without overlap."
+        ]
+      },
+      {
+        "filename": "updater-repeat-picker.bmp",
+        "sha256": "ec7181a0b69cb311b5c13b59169435a56032b2142e5b310f58d191d03859e800",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Native folder picker navigation, Folder edit, update action and Cancel are readable and separated. File-list column overflow remains inside its horizontal-scroll viewport."
+        ]
+      },
+      {
+        "filename": "updater-repeat-success.bmp",
+        "sha256": "2357dc7e12a5d30970a335f342ce658d3a76ceb1fbae7c66d2eed89c55b174ef",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture updater-install-success.bmp.",
+          "Update-completion message and next-step instruction are readable.",
+          "The confirmation button fits without overlap."
+        ]
+      },
+      {
+        "filename": "fresh-first-open-starter.bmp",
+        "sha256": "8340249724a191191909cbaa3700aa5cd8b95ea201ea6867de664dbe05cddae6",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-first-open-starter.bmp.",
+          "Setup choices, pack status columns and explanatory text are readable.",
+          "Setup action buttons fit and disabled states are distinct; partial lower rows remain within the scrolling list."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-reference-1024x728.bmp",
+        "sha256": "9e95e2c12c115df00423743beb932e073e13770c14318c884cafdbedd5a01158",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-reference-960x680.bmp",
+        "sha256": "220ef96ce04eec98f34002a14cb8c9e8078e999f77ae4196d21b05d85ed88663",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-00-frame-000.bmp",
+        "sha256": "1736dd3bbac458377e9568f00141d0bca11ca9157f3d86cb121ac342f94e063e",
+        "status": "immediate-resize-transient-observed",
+        "findings": [
+          "Immediate pre-compositor enlargement frame retains the smaller source layout, with black bands in newly exposed right and bottom target-window areas. This frame is not a clean all-frame layout pass. Settled reference and later saved frames have complete controls."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-00-last.bmp",
+        "sha256": "9e95e2c12c115df00423743beb932e073e13770c14318c884cafdbedd5a01158",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-tool-resize-reference-1024x728.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-01-frame-000.bmp",
+        "sha256": "220ef96ce04eec98f34002a14cb8c9e8078e999f77ae4196d21b05d85ed88663",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-tool-resize-reference-960x680.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-01-last.bmp",
+        "sha256": "220ef96ce04eec98f34002a14cb8c9e8078e999f77ae4196d21b05d85ed88663",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-tool-resize-reference-960x680.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-02-frame-000.bmp",
+        "sha256": "9e95e2c12c115df00423743beb932e073e13770c14318c884cafdbedd5a01158",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-tool-resize-reference-1024x728.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-02-last.bmp",
+        "sha256": "9e95e2c12c115df00423743beb932e073e13770c14318c884cafdbedd5a01158",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-tool-resize-reference-1024x728.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-03-frame-000.bmp",
+        "sha256": "78e64369da42ca758af11cea654743384dbd04dc2fe72f752329da269eaddc2e",
+        "status": "immediate-resize-transient-observed",
+        "findings": [
+          "Immediate pre-compositor shrink frame retains the larger source layout: Results and right-side/footer controls are clipped at the smaller window edge. This is not ordinary scroll-viewport clipping. Settled reference and later saved frames have complete controls."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-03-last.bmp",
+        "sha256": "220ef96ce04eec98f34002a14cb8c9e8078e999f77ae4196d21b05d85ed88663",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-tool-resize-reference-960x680.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-04-frame-000.bmp",
+        "sha256": "9e95e2c12c115df00423743beb932e073e13770c14318c884cafdbedd5a01158",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-tool-resize-reference-1024x728.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-04-last.bmp",
+        "sha256": "9e95e2c12c115df00423743beb932e073e13770c14318c884cafdbedd5a01158",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-tool-resize-reference-1024x728.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-05-frame-000.bmp",
+        "sha256": "220ef96ce04eec98f34002a14cb8c9e8078e999f77ae4196d21b05d85ed88663",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-tool-resize-reference-960x680.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-tool-resize-05-last.bmp",
+        "sha256": "220ef96ce04eec98f34002a14cb8c9e8078e999f77ae4196d21b05d85ed88663",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-tool-resize-reference-960x680.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-tool-960-visible-immediate.bmp",
+        "sha256": "76dca34a1712c545ba588228320c42cde726ef6058a705c6bc23d2af3ce4219c",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected.",
+          "This particular immediate capture already shows target-size layout; it does not establish all immediate frames or zero flicker."
+        ]
+      },
+      {
+        "filename": "fresh-tool-960-visible-250ms.bmp",
+        "sha256": "76dca34a1712c545ba588228320c42cde726ef6058a705c6bc23d2af3ce4219c",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-tool-960-visible-immediate.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected.",
+          "This particular immediate capture already shows target-size layout; it does not establish all immediate frames or zero flicker."
+        ]
+      },
+      {
+        "filename": "fresh-tool-960-visible-750ms.bmp",
+        "sha256": "76dca34a1712c545ba588228320c42cde726ef6058a705c6bc23d2af3ce4219c",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-tool-960-visible-immediate.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected.",
+          "This particular immediate capture already shows target-size layout; it does not establish all immediate frames or zero flicker."
+        ]
+      },
+      {
+        "filename": "fresh-tool-960-visible-1250ms.bmp",
+        "sha256": "76dca34a1712c545ba588228320c42cde726ef6058a705c6bc23d2af3ce4219c",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-tool-960-visible-immediate.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected.",
+          "This particular immediate capture already shows target-size layout; it does not establish all immediate frames or zero flicker."
+        ]
+      },
+      {
+        "filename": "fresh-tool-960x680.bmp",
+        "sha256": "45162be7c84bc5a6b379b4c679b7a91a3dba41fcaa583c418e5638504d55e43c",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-tool-1024x728.bmp",
+        "sha256": "6c0a067e7456da43943af40d160d9c7058b78c21884a4bdec03f917718095732",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-tool-1280x900.bmp",
+        "sha256": "6c0a067e7456da43943af40d160d9c7058b78c21884a4bdec03f917718095732",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-tool-1024x728.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-reference-1024x728.bmp",
+        "sha256": "997e6c4ab929b108a25d322f1c30f64be8bb38aa709585ab8fdfd5fc5b9632ab",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-reference-960x680.bmp",
+        "sha256": "939f20d4f53fc070cd831fc7a23120c4382a46e591f3508e58c3d0aeabad8e86",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-00-frame-000.bmp",
+        "sha256": "997e6c4ab929b108a25d322f1c30f64be8bb38aa709585ab8fdfd5fc5b9632ab",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-workflow-resize-reference-1024x728.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-00-last.bmp",
+        "sha256": "997e6c4ab929b108a25d322f1c30f64be8bb38aa709585ab8fdfd5fc5b9632ab",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-workflow-resize-reference-1024x728.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-01-frame-000.bmp",
+        "sha256": "939f20d4f53fc070cd831fc7a23120c4382a46e591f3508e58c3d0aeabad8e86",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-workflow-resize-reference-960x680.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-01-last.bmp",
+        "sha256": "939f20d4f53fc070cd831fc7a23120c4382a46e591f3508e58c3d0aeabad8e86",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-workflow-resize-reference-960x680.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-02-frame-000.bmp",
+        "sha256": "997e6c4ab929b108a25d322f1c30f64be8bb38aa709585ab8fdfd5fc5b9632ab",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-workflow-resize-reference-1024x728.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-02-last.bmp",
+        "sha256": "997e6c4ab929b108a25d322f1c30f64be8bb38aa709585ab8fdfd5fc5b9632ab",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-workflow-resize-reference-1024x728.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-03-frame-000.bmp",
+        "sha256": "a4f2d1d1766259e28fac0d45f7c93f6da8372ec323993f01c4f31fa00bb21157",
+        "status": "immediate-resize-transient-observed",
+        "findings": [
+          "Immediate pre-compositor shrink frame retains the larger source layout: Results and right-side/footer controls are clipped at the smaller window edge. This is not ordinary scroll-viewport clipping. Settled reference and later saved frames have complete controls."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-03-last.bmp",
+        "sha256": "939f20d4f53fc070cd831fc7a23120c4382a46e591f3508e58c3d0aeabad8e86",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-workflow-resize-reference-960x680.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-04-frame-000.bmp",
+        "sha256": "997e6c4ab929b108a25d322f1c30f64be8bb38aa709585ab8fdfd5fc5b9632ab",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-workflow-resize-reference-1024x728.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-04-last.bmp",
+        "sha256": "997e6c4ab929b108a25d322f1c30f64be8bb38aa709585ab8fdfd5fc5b9632ab",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-workflow-resize-reference-1024x728.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-05-frame-000.bmp",
+        "sha256": "a4f2d1d1766259e28fac0d45f7c93f6da8372ec323993f01c4f31fa00bb21157",
+        "status": "immediate-resize-transient-observed",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-workflow-resize-03-frame-000.bmp.",
+          "Immediate pre-compositor shrink frame retains the larger source layout: Results and right-side/footer controls are clipped at the smaller window edge. This is not ordinary scroll-viewport clipping. Settled reference and later saved frames have complete controls."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-resize-05-last.bmp",
+        "sha256": "939f20d4f53fc070cd831fc7a23120c4382a46e591f3508e58c3d0aeabad8e86",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-workflow-resize-reference-960x680.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-960-visible-immediate.bmp",
+        "sha256": "7c2cb31652ad03c3bff2c00cfe24399ccc0ef78f70bf13226bbb0fc18030ecd9",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected.",
+          "This particular immediate capture already shows target-size layout; it does not establish all immediate frames or zero flicker."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-960-visible-250ms.bmp",
+        "sha256": "7c2cb31652ad03c3bff2c00cfe24399ccc0ef78f70bf13226bbb0fc18030ecd9",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-workflow-960-visible-immediate.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected.",
+          "This particular immediate capture already shows target-size layout; it does not establish all immediate frames or zero flicker."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-960-visible-750ms.bmp",
+        "sha256": "7c2cb31652ad03c3bff2c00cfe24399ccc0ef78f70bf13226bbb0fc18030ecd9",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-workflow-960-visible-immediate.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected.",
+          "This particular immediate capture already shows target-size layout; it does not establish all immediate frames or zero flicker."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-960-visible-1250ms.bmp",
+        "sha256": "7c2cb31652ad03c3bff2c00cfe24399ccc0ef78f70bf13226bbb0fc18030ecd9",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-workflow-960-visible-immediate.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected.",
+          "This particular immediate capture already shows target-size layout; it does not establish all immediate frames or zero flicker."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-960x680.bmp",
+        "sha256": "5f46e0f80e9cf581a093c40df68175d0c1df1f8c433ccb3287b639b1cb391a33",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-1024x728.bmp",
+        "sha256": "574fab14162aaa05efaade2b515a97cec06799e443e803ea54b7a3c313b4f6fc",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-workflow-1280x900.bmp",
+        "sha256": "574fab14162aaa05efaade2b515a97cec06799e443e803ea54b7a3c313b4f6fc",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture fresh-workflow-1024x728.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "fresh-results-empty.bmp",
+        "sha256": "feb6d244e84713edf729775ca34a1e7ffadb2f75d224848a687ad9098ed68e57",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-results-empty.bmp.",
+          "Search input, empty-results guidance and Close are readable and contained.",
+          "Record-dependent actions are visibly disabled; no fixed-control overlap is observed."
+        ]
+      },
+      {
+        "filename": "fresh-results-populated.bmp",
+        "sha256": "4af8eaffae40a5f402e469f4ee998fc21beef5509c80e0350cecfee6a45123d7",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Results search, completed record, unavailable-measurement guidance and View saved workflow/Open results folder/Close actions are readable and separated. Long tool labels use list ellipsis and summary details remain scrollable. No fixed-control overlap observed."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-reference-1024x728.bmp",
+        "sha256": "45cad66048b178300ffbd457cda1b476782f05e48e83bcf52edd124053825a09",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-reference-960x680.bmp",
+        "sha256": "6af006e28b014beb982a20eb53b163babc27b7f2eb321d5454d6b35e7d416a9e",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-00-frame-000.bmp",
+        "sha256": "1ccb92efd227b21c3043e1394e4596eb8d2034ded4bb42489703aff2c87f005f",
+        "status": "immediate-resize-transient-observed",
+        "findings": [
+          "Immediate pre-compositor enlargement frame retains the smaller source layout, with black bands in newly exposed right and bottom target-window areas. This frame is not a clean all-frame layout pass. Settled reference and later saved frames have complete controls."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-00-last.bmp",
+        "sha256": "45cad66048b178300ffbd457cda1b476782f05e48e83bcf52edd124053825a09",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-tool-resize-reference-1024x728.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-01-frame-000.bmp",
+        "sha256": "6af006e28b014beb982a20eb53b163babc27b7f2eb321d5454d6b35e7d416a9e",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-tool-resize-reference-960x680.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-01-last.bmp",
+        "sha256": "6af006e28b014beb982a20eb53b163babc27b7f2eb321d5454d6b35e7d416a9e",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-tool-resize-reference-960x680.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-02-frame-000.bmp",
+        "sha256": "45cad66048b178300ffbd457cda1b476782f05e48e83bcf52edd124053825a09",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-tool-resize-reference-1024x728.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-02-last.bmp",
+        "sha256": "45cad66048b178300ffbd457cda1b476782f05e48e83bcf52edd124053825a09",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-tool-resize-reference-1024x728.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-03-frame-000.bmp",
+        "sha256": "6af006e28b014beb982a20eb53b163babc27b7f2eb321d5454d6b35e7d416a9e",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-tool-resize-reference-960x680.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-03-last.bmp",
+        "sha256": "6af006e28b014beb982a20eb53b163babc27b7f2eb321d5454d6b35e7d416a9e",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-tool-resize-reference-960x680.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-04-frame-000.bmp",
+        "sha256": "45cad66048b178300ffbd457cda1b476782f05e48e83bcf52edd124053825a09",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-tool-resize-reference-1024x728.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-04-last.bmp",
+        "sha256": "45cad66048b178300ffbd457cda1b476782f05e48e83bcf52edd124053825a09",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-tool-resize-reference-1024x728.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-05-frame-000.bmp",
+        "sha256": "33a41800049d8d5a95027cb4557ed6f0f6989dc0bb039b0d02df71bdd3510eb9",
+        "status": "immediate-resize-transient-observed",
+        "findings": [
+          "Immediate pre-compositor shrink frame retains the larger source layout: Results and right-side/footer controls are clipped at the smaller window edge. This is not ordinary scroll-viewport clipping. Settled reference and later saved frames have complete controls."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-resize-05-last.bmp",
+        "sha256": "6af006e28b014beb982a20eb53b163babc27b7f2eb321d5454d6b35e7d416a9e",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-tool-resize-reference-960x680.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-960-visible-immediate.bmp",
+        "sha256": "1a9b468803a58e067bf22de778e1997b57f370d21b4df6552cff73c299044343",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected.",
+          "This particular immediate capture already shows target-size layout; it does not establish all immediate frames or zero flicker."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-960-visible-250ms.bmp",
+        "sha256": "1a9b468803a58e067bf22de778e1997b57f370d21b4df6552cff73c299044343",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-tool-960-visible-immediate.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected.",
+          "This particular immediate capture already shows target-size layout; it does not establish all immediate frames or zero flicker."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-960-visible-750ms.bmp",
+        "sha256": "1a9b468803a58e067bf22de778e1997b57f370d21b4df6552cff73c299044343",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-tool-960-visible-immediate.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected.",
+          "This particular immediate capture already shows target-size layout; it does not establish all immediate frames or zero flicker."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-960-visible-1250ms.bmp",
+        "sha256": "1a9b468803a58e067bf22de778e1997b57f370d21b4df6552cff73c299044343",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-tool-960-visible-immediate.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected.",
+          "This particular immediate capture already shows target-size layout; it does not establish all immediate frames or zero flicker."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-960x680.bmp",
+        "sha256": "70e6feecb8d21b1fa4ffe0b61fa3f8013c8333a1ac96d9d88abda47698d76649",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-1024x728.bmp",
+        "sha256": "0db9b17c6e43274faf23eefea6c8e7c24986d6ac0d8e7ded5a593934963c8664",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-tool-1280x900.bmp",
+        "sha256": "0db9b17c6e43274faf23eefea6c8e7c24986d6ac0d8e7ded5a593934963c8664",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-tool-1024x728.bmp.",
+          "Selected tool form, library, General settings, Run tool/Methods and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower form content and References can extend below their scrolling viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-reference-1024x728.bmp",
+        "sha256": "426c0724b87337fab2849780fc80518f8440a3a8ec8a831cc47e95416e4bda92",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-reference-960x680.bmp",
+        "sha256": "21ca7d176f8e93ffc17ae149624a023edc336d95e5339608aacaada9d6c13040",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-00-frame-000.bmp",
+        "sha256": "426c0724b87337fab2849780fc80518f8440a3a8ec8a831cc47e95416e4bda92",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-workflow-resize-reference-1024x728.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-00-last.bmp",
+        "sha256": "426c0724b87337fab2849780fc80518f8440a3a8ec8a831cc47e95416e4bda92",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-workflow-resize-reference-1024x728.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-01-frame-000.bmp",
+        "sha256": "21ca7d176f8e93ffc17ae149624a023edc336d95e5339608aacaada9d6c13040",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-workflow-resize-reference-960x680.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-01-last.bmp",
+        "sha256": "21ca7d176f8e93ffc17ae149624a023edc336d95e5339608aacaada9d6c13040",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-workflow-resize-reference-960x680.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-02-frame-000.bmp",
+        "sha256": "426c0724b87337fab2849780fc80518f8440a3a8ec8a831cc47e95416e4bda92",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-workflow-resize-reference-1024x728.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-02-last.bmp",
+        "sha256": "426c0724b87337fab2849780fc80518f8440a3a8ec8a831cc47e95416e4bda92",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-workflow-resize-reference-1024x728.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-03-frame-000.bmp",
+        "sha256": "21ca7d176f8e93ffc17ae149624a023edc336d95e5339608aacaada9d6c13040",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-workflow-resize-reference-960x680.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-03-last.bmp",
+        "sha256": "21ca7d176f8e93ffc17ae149624a023edc336d95e5339608aacaada9d6c13040",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-workflow-resize-reference-960x680.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-04-frame-000.bmp",
+        "sha256": "426c0724b87337fab2849780fc80518f8440a3a8ec8a831cc47e95416e4bda92",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-workflow-resize-reference-1024x728.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-04-last.bmp",
+        "sha256": "426c0724b87337fab2849780fc80518f8440a3a8ec8a831cc47e95416e4bda92",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-workflow-resize-reference-1024x728.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-05-frame-000.bmp",
+        "sha256": "21ca7d176f8e93ffc17ae149624a023edc336d95e5339608aacaada9d6c13040",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-workflow-resize-reference-960x680.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-resize-05-last.bmp",
+        "sha256": "21ca7d176f8e93ffc17ae149624a023edc336d95e5339608aacaada9d6c13040",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-workflow-resize-reference-960x680.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-960-visible-immediate.bmp",
+        "sha256": "63f780c2d97b61fc448887d1a0e20da47e5414b0a3e146be86179c185d8c2f15",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected.",
+          "This particular immediate capture already shows target-size layout; it does not establish all immediate frames or zero flicker."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-960-visible-250ms.bmp",
+        "sha256": "63f780c2d97b61fc448887d1a0e20da47e5414b0a3e146be86179c185d8c2f15",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-workflow-960-visible-immediate.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected.",
+          "This particular immediate capture already shows target-size layout; it does not establish all immediate frames or zero flicker."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-960-visible-750ms.bmp",
+        "sha256": "63f780c2d97b61fc448887d1a0e20da47e5414b0a3e146be86179c185d8c2f15",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-workflow-960-visible-immediate.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected.",
+          "This particular immediate capture already shows target-size layout; it does not establish all immediate frames or zero flicker."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-960-visible-1250ms.bmp",
+        "sha256": "63f780c2d97b61fc448887d1a0e20da47e5414b0a3e146be86179c185d8c2f15",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-workflow-960-visible-immediate.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected.",
+          "This particular immediate capture already shows target-size layout; it does not establish all immediate frames or zero flicker."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-960x680.bmp",
+        "sha256": "a7870965ae4b0c935ede34d83445346e9debc4e601ea3f7f8bf38eab80947bbe",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-1024x728.bmp",
+        "sha256": "d51e69ae96423b732cb1aab90903b7ad61724c8ac9148d2b4091e3172bb8e0a2",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-workflow-1280x900.bmp",
+        "sha256": "d51e69ae96423b732cb1aab90903b7ad61724c8ac9148d2b4091e3172bb8e0a2",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed spaces capture upgraded-workflow-1024x728.bmp.",
+          "Workflow header, library, canvas, General settings, Methods, zoom and footer actions are readable and separated in the displayed layout. Long paths stay within edit fields; lower References content is clipped by the settings scroll viewport at the smaller size, with fixed controls unaffected."
+        ]
+      },
+      {
+        "filename": "upgraded-results-empty.bmp",
+        "sha256": "feb6d244e84713edf729775ca34a1e7ffadb2f75d224848a687ad9098ed68e57",
+        "status": "passed-within-observed-scope",
+        "findings": [
+          "Exact BMP SHA-256 duplicate of the individually viewed ordinary capture fresh-results-empty.bmp.",
+          "Search input, empty-results guidance and Close are readable and contained.",
+          "Record-dependent actions are visibly disabled; no fixed-control overlap is observed."
+        ]
+      },
+      {
+        "filename": "upgraded-results-populated.bmp",
+        "sha256": "e94fbda66e70d553e41ea0a4f9ed3738a0a94f977c5c09793c6c332eb3b82626",
+        "status": "settled-layout-readable",
+        "findings": [
+          "Results search, completed record, unavailable-measurement guidance and View saved workflow/Open results folder/Close actions are readable and separated. Long tool labels use list ellipsis and summary details remain scrollable. No fixed-control overlap observed."
+        ]
+      }
+    ]
+  }
+}

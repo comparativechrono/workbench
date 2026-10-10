@@ -1,0 +1,701 @@
+{
+  "schema": 1,
+  "kind": "focused-native-validation-receipt",
+  "status": "Unpublished review candidate; recorded automated Windows scope passed.",
+  "appVersion": "0.16.1",
+  "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+  "finalValidatorCommit": "f9e7120196ddd284d33c0e8221b78fbf4529058f",
+  "starterArchiveSha256": "1291f93b5ece3c4da34eb2f2e29fccc83b6d87ec5fb73abf28bfd9cc8f155b75",
+  "assertionCatalogue": {
+    "patch": [
+      "candidate-input-identities",
+      "baseline-fixtures",
+      "updater-cancel",
+      "updater-invalid",
+      "updater-install",
+      "updater-repeat",
+      "upgraded-fixture-readback",
+      "fresh-startup-bounds",
+      "fresh-starter-setup",
+      "fresh-result-fixture",
+      "fresh-library-keyboard",
+      "fresh-layout",
+      "fresh-results-empty",
+      "fresh-results-populated",
+      "upgraded-startup-bounds",
+      "upgraded-library-keyboard",
+      "upgraded-layout",
+      "upgraded-results-empty",
+      "upgraded-results-populated"
+    ],
+    "feedback": [
+      "samples-without-workflow",
+      "run-temporal-960",
+      "run-temporal-1024",
+      "starter-category-temporal-960",
+      "starter-category-temporal-1024",
+      "separate-methods",
+      "run-missing-input",
+      "samples-create-edit-save-reopen",
+      "samples-cancel-and-invalid-import",
+      "samples-example-preview",
+      "samples-example-native-science",
+      "overflow-anchor-temporal-960",
+      "overflow-anchor-temporal-1024"
+    ],
+    "batch": [
+      "Explicit paired-read and sample mappings preview without execution",
+      "Frozen plans and exact pins survive editing and reopen while paused",
+      "Explicit Start produces independent synthetic sample results",
+      "Combined-report mapping preserves independently named sample reports",
+      "Changed frozen inputs and prepared companions fail closed",
+      "Running draft edits preserve frozen plans and cancellation pauses successor",
+      "Native index build and reuse preserve scientific output and exact identities",
+      "Corrupt index or executable fails closed",
+      "Bounded Windows sharing conflicts preserve queue and history",
+      "Native Samples preview and Queue cancellation and execution",
+      "Native index listing and explicit inventory verification"
+    ],
+    "readiness": [
+      "Missing input and destination preparation checks remain actionable",
+      "Native Starter alignment and variant scientific truth",
+      "Recorded phase timings and native process measurements remain explicit",
+      "Reviewed diagnostic export preserves its stated privacy contract",
+      "Separate Methods and Run preparation review and diagnostic controls"
+    ],
+    "curated": [
+      "Offline synthetic catalogue preserves exact dependency pins",
+      "Alignment with QC executes exact synthetic workflow",
+      "Variant calling executes exact synthetic workflow",
+      "Recorded result search filters names and declared metadata",
+      "Changed result files supply no trusted scientific metrics",
+      "Fresh private process restores results and scientific summaries",
+      "Missing exact dependency disables examples without substitution",
+      "Missing input preparation preserves failure and actionable guidance",
+      "Native catalogue explains and loads editable synthetic workflows",
+      "Native results display actual failed preparation and correction",
+      "Native search renders recorded measurements and empty-result state"
+    ],
+    "workspace": [
+      "Default standalone mode",
+      "Independent tool and workflow graphs",
+      "Compatible graph edge",
+      "Bounded compatibility preview",
+      "Atomic cycle and semantic type rejection",
+      "Per-tool settings and input retention",
+      "Workflow additions leave inputs explicitly unbound",
+      "Reusable workflow input owns one file editor",
+      "Native minimap2 SAM to coordinate-sorted BAM chain",
+      "Synthetic SAM to BAM preserves all alignment information",
+      "Manage tools opens and reopens without modal failure",
+      "Previously selected library row opens in empty tool mode",
+      "Single-click standalone tool form",
+      "Native double-click opens its selected operation",
+      "Three independent panes and general settings",
+      "Real library-to-canvas drag twice",
+      "Real compatible graph connection",
+      "Canvas selection opens tool options",
+      "General settings remain available in workflow mode",
+      "Standalone input and browsing context survive mode switch",
+      "Mode-specific status guidance",
+      "Workflow selection survives mode switching",
+      "Observed normal and minimum pane separation",
+      "Repeated option scrolling preserves settled static text",
+      "Blank-canvas pointer pan and reversal",
+      "Zoom controls and scaled hit testing",
+      "Small native control-wheel deltas accumulate",
+      "Draft edit survives nested Add input modal",
+      "Native Add input creates one editable reference slot",
+      "Explicit input connects without duplicate file controls",
+      "Tool deletion and Undo restore selection",
+      "Input deletion and Undo restore files"
+    ],
+    "reference-management": [
+      "Deterministic resumable transfer verifies complete byte identity",
+      "Malformed range or changed entity restarts safely",
+      "Corrupt resume state fails closed and explicit discard preserves ready data",
+      "Reviewed local import preserves exact source and expanded bytes",
+      "Typed selection and reviewed relocation preserve old frozen analyses",
+      "Reopened relocated library supplies verified compatible references offline",
+      "Native provider selection and versioned RefSeq discovery",
+      "Native paused download resume and discard preserve complete resources",
+      "Native local import review and explicit compatible binding",
+      "Native relocation copies and verifies before switching library"
+    ],
+    "results": [
+      "Packaged integrity and five Starter operations execute",
+      "Packed CWL corresponds to frozen and completed native result",
+      "CWL source and scientific contracts match native provenance",
+      "Exported native command definitions match execution records",
+      "Five embedded CWL runners replay with exact native programs",
+      "Independent replay preserves synthetic alignment and variant truth",
+      "Scientific DAG includes dependencies and avoids unrelated cards",
+      "Native executable icon resources and displayed class icons match",
+      "Native canvas accepts forward and backward compatible connections"
+    ],
+    "scroll": [
+      "Standalone option panel temporal scrolling",
+      "General settings panel temporal scrolling",
+      "Workflow option panel temporal scrolling"
+    ]
+  },
+  "buildAndRegressionRun": 37997370988,
+  "finalRecheckRun": 37999874335,
+  "sourceTests": {
+    "passed": 220,
+    "suites": 18,
+    "configuredSkips": 0
+  },
+  "validatorTests": {
+    "passed": 23,
+    "suites": 2,
+    "configuredSkips": 0,
+    "retrievedLogSha256": "af9f431bae26c651ef08addd384066ccc93289a5038d91d8ef81008e91d36ae9"
+  },
+  "archives": [
+    {
+      "file": "native-workbench-0.16.1-source.zip",
+      "bytes": 48270849,
+      "sha256": "0accfb48b8b7b3193b4c72e76c45c404db7979d877ce0805d2687d5a849fe1f1"
+    },
+    {
+      "file": "native-workbench-0.16.1-starter-windows.zip",
+      "bytes": 17879604,
+      "sha256": "1291f93b5ece3c4da34eb2f2e29fccc83b6d87ec5fb73abf28bfd9cc8f155b75"
+    },
+    {
+      "file": "native-workbench-0.16.1-update-from-0.16.0.zip",
+      "bytes": 13042264,
+      "sha256": "86dd3d9796099b366a9e01012acc50d00d501a1fdaab89b7119236b44db4b4d8"
+    }
+  ],
+  "totalUniqueNativeChecksAcrossBothCases": 226,
+  "windowsPaths": {
+    "ordinary": {
+      "passed": 113,
+      "failed": 0,
+      "skipped": 0,
+      "success": true,
+      "reports": {
+        "patch": {
+          "report": "native-ui-patch.json",
+          "sha256": "eb11f0c9b74c3679ce32bbf210cb0b5d56edaa0710c5022e7559daa0f74ed429",
+          "bytes": 88298,
+          "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "gateCommit": "f9e7120196ddd284d33c0e8221b78fbf4529058f",
+          "runId": 37999874335,
+          "gateFileSha256": "4e6a847fc580e3788a6b63952260092e80b3beb1f088abd66f0e74c4f5c4a7dc",
+          "success": true,
+          "passed": 19,
+          "failed": 0,
+          "skipped": 0,
+          "skipReasons": [],
+          "assertionCatalogue": "patch"
+        },
+        "feedback": {
+          "report": "native-tester-feedback.json",
+          "sha256": "a4152090a39f8110b7b9240c869a9c25012b26281d44e09fff696fcd5c829d6b",
+          "bytes": 583203,
+          "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "gateCommit": "f9e7120196ddd284d33c0e8221b78fbf4529058f",
+          "runId": 37999874335,
+          "gateFileSha256": "dc63dd2a47ea2555fd0ceb47a96fcbafc9da915a2b188288e428bda8a0d1f751",
+          "success": true,
+          "passed": 13,
+          "failed": 0,
+          "skipped": 0,
+          "skipReasons": [],
+          "assertionCatalogue": "feedback"
+        },
+        "batch": {
+          "report": "native-batch.json",
+          "sha256": "1f56d68b7cd0bb7f61a31776d01b6719bfe339b95065c2b893d848c751af9dbe",
+          "bytes": 36095,
+          "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "gateCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "runId": 37997370988,
+          "gateFileSha256": "779b7354a87ee9f62482820ecede482281834278e07f086cd2bfa11134b5caf8",
+          "success": true,
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0,
+          "skipReasons": [],
+          "assertionCatalogue": "batch"
+        },
+        "readiness": {
+          "report": "native-readiness.json",
+          "sha256": "9aa0ba53fb60c66f57336d5cf61cf8d2e2580234f1e8443c012c2ea635a68514",
+          "bytes": 9230,
+          "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "gateCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "runId": 37997370988,
+          "gateFileSha256": "31ce0603997cfcd3531535d743c07a5ff3128d2187f963c7e3035aa802835df3",
+          "success": true,
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "skipReasons": [],
+          "assertionCatalogue": "readiness"
+        },
+        "curated": {
+          "report": "native-curated.json",
+          "sha256": "ae46ea057c93f7cbdc8d14eab92e12328c00bed8083d6c358ca915a64fcf72a6",
+          "bytes": 14747,
+          "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "gateCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "runId": 37997370988,
+          "gateFileSha256": "6824624ab6be6ea685428a585956f78039ef97e2a9dac37ecb67def5b2fa24d1",
+          "success": true,
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0,
+          "skipReasons": [],
+          "assertionCatalogue": "curated"
+        },
+        "workspace": {
+          "report": "native-workspace.json",
+          "sha256": "2e8e99080ab13a114262c10d86f41f35ab254d5458f10971904255917b511bb5",
+          "bytes": 24316,
+          "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "gateCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "runId": 37997370988,
+          "gateFileSha256": "30a38a4f5bc8d5a5af93eee80560963f87e4ef019a3e98ec9780f1964d847d13",
+          "success": true,
+          "passed": 32,
+          "failed": 0,
+          "skipped": 0,
+          "skipReasons": [],
+          "assertionCatalogue": "workspace"
+        },
+        "reference-management": {
+          "report": "native-reference-management.json",
+          "sha256": "fa2c1288504ff122051d9f837dd1df032d3f56c59fd4f041a65676cbba08e054",
+          "bytes": 25813,
+          "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "gateCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "runId": 37997370988,
+          "gateFileSha256": "6e61ffe14fc6c6bcb4838fa4d142d28ff3e7d5eee71c9fbaa479717a715031c0",
+          "success": true,
+          "passed": 10,
+          "failed": 0,
+          "skipped": 0,
+          "skipReasons": [],
+          "assertionCatalogue": "reference-management"
+        },
+        "results": {
+          "report": "native-results.json",
+          "sha256": "5a59eff5697ec5189a28283a84dbbc71034761be0c75f050ba5758166cad709f",
+          "bytes": 14511,
+          "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "gateCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "runId": 37997370988,
+          "gateFileSha256": "5c318c45c297dc7b267724db4db3abfc5c42d9dfc93805a5377a055d3f88747b",
+          "success": true,
+          "passed": 9,
+          "failed": 0,
+          "skipped": 0,
+          "skipReasons": [],
+          "assertionCatalogue": "results"
+        },
+        "scroll": {
+          "report": "native-scroll.json",
+          "sha256": "21b075c85769b07656bc118a9853efd48c09de68e686ae08cc353df262879825",
+          "bytes": 320542,
+          "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "gateCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "runId": 37997370988,
+          "gateFileSha256": "e93a5c199415ee7231f052f640352f0c8fa90093946f237ac01840ba97baeed2",
+          "success": true,
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "skipReasons": [],
+          "assertionCatalogue": "scroll"
+        }
+      },
+      "packagedArchiveCorrespondence": {
+        "archivedFilesMatchedBeforeGate": 277,
+        "archivedFilesMatchedAfterGate": 277,
+        "starterArchiveSha256": "1291f93b5ece3c4da34eb2f2e29fccc83b6d87ec5fb73abf28bfd9cc8f155b75",
+        "scope": "Every extracted archived file matches the exact Starter ZIP; Git source correspondence is recorded separately."
+      },
+      "feedbackTemporal": {
+        "runButton": {
+          "series": 6,
+          "frames": 834,
+          "totalObservedSeconds": 26.774106,
+          "largestObservedSampleGapMs": 62.784,
+          "detectedBlackBlockFrames": 0,
+          "stableHoldSeries": 4,
+          "shortestStableHoldSeconds": 6.401694,
+          "unexpectedStableHoldFrames": 0
+        },
+        "starterCategories": {
+          "series": 12,
+          "frames": 231,
+          "totalObservedSeconds": 9.895919,
+          "largestObservedSampleGapMs": 77.889,
+          "detectedBlackBlockFrames": 0,
+          "observedExpansionTransitions": 12,
+          "retainedScrollAnchorAssertions": 12
+        },
+        "overflowCategories": {
+          "series": 23,
+          "frames": 445,
+          "totalObservedSeconds": 18.893346,
+          "largestObservedSampleGapMs": 63.77,
+          "detectedBlackBlockFrames": 0,
+          "observedExpansionTransitions": 23,
+          "retainedScrollAnchorAssertions": 23
+        }
+      },
+      "existingScrollTemporal": [
+        {
+          "panel": "standalone-options",
+          "frames": 320,
+          "unexpectedFrames": 0,
+          "endpointFailures": 0,
+          "requestedEndpointTransitions": 100,
+          "observedEndpointTransitions": 100,
+          "precisionCasesPassed": 6
+        },
+        {
+          "panel": "general-settings",
+          "frames": 320,
+          "unexpectedFrames": 0,
+          "endpointFailures": 0,
+          "requestedEndpointTransitions": 100,
+          "observedEndpointTransitions": 100,
+          "precisionCasesPassed": 6
+        },
+        {
+          "panel": "workflow-options",
+          "frames": 320,
+          "unexpectedFrames": 0,
+          "endpointFailures": 0,
+          "requestedEndpointTransitions": 100,
+          "observedEndpointTransitions": 100,
+          "precisionCasesPassed": 6
+        }
+      ],
+      "nativeSampleScientificAnswer": {
+        "alignmentRecords": 202,
+        "knownSyntheticVariant": "starter:1351 G>A GT=1/1",
+        "planSha256": "beb4cd1cea1bf6e35c5cf5e45b1e5627437342b6e0b42c467e29e686d914f955",
+        "runSha256": "c32dd939e042beef94394b38b7a3c24f7d300f6bd7c83452f5f45d4155ea5815",
+        "nativeQueueObservedCompleted": true,
+        "nativeRunActionEnabledAfterCompletion": true,
+        "nativeCancelActionDisabledAfterCompletion": true,
+        "outputSha256": {
+          "step-1::sam/sam": "55d2709e946cb22191888bd9f3fe49060d44b88ee528b56d521754e39b9666e1",
+          "step-1::pair-check/pair-check": "2c25256e25928cff40cffb9069f201138ae4bd083e3ab626b82cd55099e1c436",
+          "step-2::bam/bam": "1d1b23600ccf1ae7ad21eee989e160596706e54b06417b906d3f5543a63097bc",
+          "step-2::duplicate-stats/duplicate-stats": "0767b06255fcc58bbbb23474af7c5d7aa835ab79f1ed5e799523a3d89bc97b7a",
+          "step-2::flagstat/flagstat": "b9b7e24ae5f0f1f69ef4feb916513d0acc088f3d18b8d75664c38e5ce092cf8f",
+          "step-2::alignment-stats/alignment-stats": "16ec089535c715d978d404fb88e7a57fcffc2cd63c587f417f429a496bc4c347",
+          "step-2::bam-index/bam-index": "ce24784508a90765d6dcc7de2874e7b98323b563f85efc4affb39406a101b3d3",
+          "step-2::names/names": "2bf1b710ed292220e6b024e8ec6d9847c565dcd9b0632c2678defac13d674a3e",
+          "step-2::fixed/fixed": "0e7971a90b0258505a67b795e984caa78c784717ccc6e1951e3062e48305498c",
+          "step-2::coordinates/coordinates": "833c3202dc739c8168fe8583f7809fb8b03628c2f9024d5fa5c1b480153ef50a",
+          "step-3::variants/variants": "785dc5691f2103ac53c9105ae79700e62a562484f488ff4009c1773a954c87f9",
+          "step-3::variant-stats/variant-stats": "3592ba78bbe878380be2e018299b9e407260608e86c968a765fc299aed3364fc",
+          "step-3::variants-index/variants-index": "08163171a7e8a679f6055fd26e94a482b3083ac8525603f4f434d2b9842da70f",
+          "step-3::pileup/pileup": "82f9ec3d9e90af5330c388faecd7a4564bfaf175de29392ed9949bc7ec0815c7",
+          "step-3::calls/calls": "c8d668ba22ba761892c940dfc0d3aaaee619a51c2162182d86f4a0c5089ac9a4",
+          "step-3::normalized/normalized": "2972f9297d4cbe7fdc93df0b67409fa568f16afe92d922404fd35f088db5b6bd",
+          "step-3::reference/reference": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+          "step-3::reference-index/reference-index": "6bf365006e0d9d03de4e0fbfdfc082c6e5bee611888e54450bc2516614ae95a3",
+          "step-4::statistics/statistics": "3592ba78bbe878380be2e018299b9e407260608e86c968a765fc299aed3364fc",
+          "step-5::report/report": "d3829cfdd92769c4368ef5daf3e4ee551217c1c822442401cd4fb7fa86ea53af"
+        }
+      },
+      "curatedRecordedMeasurements": {
+        "alignment-qc": {
+          "samtools.stats.raw_total_sequences": 202,
+          "samtools.stats.reads_mapped": 202,
+          "samtools.stats.average_length": 100,
+          "samtools.flagstat.total.qc_passed": 202,
+          "samtools.flagstat.mapped.qc_passed": 202
+        },
+        "variant-calling": {
+          "samtools.stats.raw_total_sequences": 202,
+          "samtools.stats.reads_mapped": 202,
+          "samtools.stats.average_length": 100,
+          "samtools.flagstat.total.qc_passed": 202,
+          "samtools.flagstat.mapped.qc_passed": 202,
+          "bcftools.stats.number_of_records": 1,
+          "bcftools.stats.number_of_snps": 1,
+          "bcftools.stats.number_of_indels": 0,
+          "bcftools.stats.number_of_samples": 1
+        }
+      }
+    },
+    "spaces": {
+      "passed": 113,
+      "failed": 0,
+      "skipped": 0,
+      "success": true,
+      "reports": {
+        "patch": {
+          "report": "native-ui-patch.json",
+          "sha256": "690e671e7dcc27b6acd44c0c9a84d13e4879b84f2af516f22cdd156db33b2526",
+          "bytes": 88346,
+          "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "gateCommit": "f9e7120196ddd284d33c0e8221b78fbf4529058f",
+          "runId": 37999874335,
+          "gateFileSha256": "4e6a847fc580e3788a6b63952260092e80b3beb1f088abd66f0e74c4f5c4a7dc",
+          "success": true,
+          "passed": 19,
+          "failed": 0,
+          "skipped": 0,
+          "skipReasons": [],
+          "assertionCatalogue": "patch"
+        },
+        "feedback": {
+          "report": "native-tester-feedback.json",
+          "sha256": "2a38b495bd5b25ba08ac6eb92a9cb58c674eec87d5d3eae8de3a6944791516f9",
+          "bytes": 531562,
+          "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "gateCommit": "f9e7120196ddd284d33c0e8221b78fbf4529058f",
+          "runId": 37999874335,
+          "gateFileSha256": "dc63dd2a47ea2555fd0ceb47a96fcbafc9da915a2b188288e428bda8a0d1f751",
+          "success": true,
+          "passed": 13,
+          "failed": 0,
+          "skipped": 0,
+          "skipReasons": [],
+          "assertionCatalogue": "feedback"
+        },
+        "batch": {
+          "report": "native-batch.json",
+          "sha256": "42d6da9c0edf8d9588342d9b7d3baa5598c9e8394780823724f3d4bc3bd9a369",
+          "bytes": 36110,
+          "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "gateCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "runId": 37997370988,
+          "gateFileSha256": "779b7354a87ee9f62482820ecede482281834278e07f086cd2bfa11134b5caf8",
+          "success": true,
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0,
+          "skipReasons": [],
+          "assertionCatalogue": "batch"
+        },
+        "readiness": {
+          "report": "native-readiness.json",
+          "sha256": "d280156817a1dfbb27c995838bf40d252612e338bb42ce05cac3c207e3371503",
+          "bytes": 9593,
+          "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "gateCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "runId": 37997370988,
+          "gateFileSha256": "31ce0603997cfcd3531535d743c07a5ff3128d2187f963c7e3035aa802835df3",
+          "success": true,
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "skipReasons": [],
+          "assertionCatalogue": "readiness"
+        },
+        "curated": {
+          "report": "native-curated.json",
+          "sha256": "9909e3db7dfc7cca8dde66de1ed6a11511eaf03551d2965363af0a738e6290ed",
+          "bytes": 14747,
+          "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "gateCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "runId": 37997370988,
+          "gateFileSha256": "6824624ab6be6ea685428a585956f78039ef97e2a9dac37ecb67def5b2fa24d1",
+          "success": true,
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0,
+          "skipReasons": [],
+          "assertionCatalogue": "curated"
+        },
+        "workspace": {
+          "report": "native-workspace.json",
+          "sha256": "b96b94477c04d6e4be546b099ca27b0ac63c39bc206e34b74326c77a21ec4e10",
+          "bytes": 24364,
+          "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "gateCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "runId": 37997370988,
+          "gateFileSha256": "30a38a4f5bc8d5a5af93eee80560963f87e4ef019a3e98ec9780f1964d847d13",
+          "success": true,
+          "passed": 32,
+          "failed": 0,
+          "skipped": 0,
+          "skipReasons": [],
+          "assertionCatalogue": "workspace"
+        },
+        "reference-management": {
+          "report": "native-reference-management.json",
+          "sha256": "0e3e50dab726139224c9a689e02a97e5c28fc43851509e8693974c20c315e2bc",
+          "bytes": 25813,
+          "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "gateCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "runId": 37997370988,
+          "gateFileSha256": "6e61ffe14fc6c6bcb4838fa4d142d28ff3e7d5eee71c9fbaa479717a715031c0",
+          "success": true,
+          "passed": 10,
+          "failed": 0,
+          "skipped": 0,
+          "skipReasons": [],
+          "assertionCatalogue": "reference-management"
+        },
+        "results": {
+          "report": "native-results.json",
+          "sha256": "d0faf6370ced815692daae4eda9552d07fe64d4ea6e33b88e7f67b110d4b463f",
+          "bytes": 14511,
+          "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "gateCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "runId": 37997370988,
+          "gateFileSha256": "5c318c45c297dc7b267724db4db3abfc5c42d9dfc93805a5377a055d3f88747b",
+          "success": true,
+          "passed": 9,
+          "failed": 0,
+          "skipped": 0,
+          "skipReasons": [],
+          "assertionCatalogue": "results"
+        },
+        "scroll": {
+          "report": "native-scroll.json",
+          "sha256": "e8accd20ddeceb43e7c5998a31906d6c0217ad7cac9d6ff54a72662fcdb4461b",
+          "bytes": 320524,
+          "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "gateCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "runId": 37997370988,
+          "gateFileSha256": "e93a5c199415ee7231f052f640352f0c8fa90093946f237ac01840ba97baeed2",
+          "success": true,
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "skipReasons": [],
+          "assertionCatalogue": "scroll"
+        }
+      },
+      "packagedArchiveCorrespondence": {
+        "archivedFilesMatchedBeforeGate": 277,
+        "archivedFilesMatchedAfterGate": 277,
+        "starterArchiveSha256": "1291f93b5ece3c4da34eb2f2e29fccc83b6d87ec5fb73abf28bfd9cc8f155b75",
+        "scope": "Every extracted archived file matches the exact Starter ZIP; Git source correspondence is recorded separately."
+      },
+      "feedbackTemporal": {
+        "runButton": {
+          "series": 6,
+          "frames": 834,
+          "totalObservedSeconds": 26.743662,
+          "largestObservedSampleGapMs": 62.723,
+          "detectedBlackBlockFrames": 0,
+          "stableHoldSeries": 4,
+          "shortestStableHoldSeconds": 6.403413,
+          "unexpectedStableHoldFrames": 0
+        },
+        "starterCategories": {
+          "series": 12,
+          "frames": 160,
+          "totalObservedSeconds": 9.98518,
+          "largestObservedSampleGapMs": 78.684,
+          "detectedBlackBlockFrames": 0,
+          "observedExpansionTransitions": 12,
+          "retainedScrollAnchorAssertions": 12
+        },
+        "overflowCategories": {
+          "series": 23,
+          "frames": 312,
+          "totalObservedSeconds": 19.125122,
+          "largestObservedSampleGapMs": 78.535,
+          "detectedBlackBlockFrames": 0,
+          "observedExpansionTransitions": 23,
+          "retainedScrollAnchorAssertions": 23
+        }
+      },
+      "existingScrollTemporal": [
+        {
+          "panel": "standalone-options",
+          "frames": 320,
+          "unexpectedFrames": 0,
+          "endpointFailures": 0,
+          "requestedEndpointTransitions": 100,
+          "observedEndpointTransitions": 100,
+          "precisionCasesPassed": 6
+        },
+        {
+          "panel": "general-settings",
+          "frames": 320,
+          "unexpectedFrames": 0,
+          "endpointFailures": 0,
+          "requestedEndpointTransitions": 100,
+          "observedEndpointTransitions": 100,
+          "precisionCasesPassed": 6
+        },
+        {
+          "panel": "workflow-options",
+          "frames": 320,
+          "unexpectedFrames": 0,
+          "endpointFailures": 0,
+          "requestedEndpointTransitions": 100,
+          "observedEndpointTransitions": 100,
+          "precisionCasesPassed": 6
+        }
+      ],
+      "nativeSampleScientificAnswer": {
+        "alignmentRecords": 202,
+        "knownSyntheticVariant": "starter:1351 G>A GT=1/1",
+        "planSha256": "f704d944e5c8acdb5d64e77d8d6344f68c5e9d9ca31a58ff356d50406c61a7ea",
+        "runSha256": "21a7f32baae4e46e037066037d54451f94022a48f4e89d4fa116345ce5901f51",
+        "nativeQueueObservedCompleted": true,
+        "nativeRunActionEnabledAfterCompletion": true,
+        "nativeCancelActionDisabledAfterCompletion": true,
+        "outputSha256": {
+          "step-1::sam/sam": "30e278b1d52936e6f630c38c8de5323bdcf68edf2b358d4b1d24867cdaff8d89",
+          "step-1::pair-check/pair-check": "2c25256e25928cff40cffb9069f201138ae4bd083e3ab626b82cd55099e1c436",
+          "step-2::bam/bam": "30a9180fa7104332f8e828a53023e9d0d5468bf5831bfba7de4c40cdfda65465",
+          "step-2::duplicate-stats/duplicate-stats": "1f45ad194bf904a5ca7463221645d0712963b566f8c4c09861bafe8a0f2b823e",
+          "step-2::flagstat/flagstat": "b9b7e24ae5f0f1f69ef4feb916513d0acc088f3d18b8d75664c38e5ce092cf8f",
+          "step-2::alignment-stats/alignment-stats": "f6c33c7ac2b9fb4c774519acec581d70b5590dcab06e00dac32420bd5c00217a",
+          "step-2::bam-index/bam-index": "e1b88a702c7ecb4b600fdffe2e7e04ec1cc2d364f2a877f668c4a4a400f2e05f",
+          "step-2::names/names": "a0dfd39a38b7a0df806aede70389276e1a3f9a288a5df3ea4512f7c831f872d1",
+          "step-2::fixed/fixed": "bf7b553297ab2e25d065d36a5579ae8f04f777356dd8c6ba204c779e0b5cab91",
+          "step-2::coordinates/coordinates": "ab6bbb1127142e703b4f96fdfbba1a0d281f539916ce056ae0a0477719ceb130",
+          "step-3::variants/variants": "d9b9bc9749153c26d43c82b61e2a3bceb79b9064d177096bdad90e2b630f3886",
+          "step-3::variant-stats/variant-stats": "c0cd635da849a979b7dccffe56aacd059afbc3176061e9c532e13d2d195135f7",
+          "step-3::variants-index/variants-index": "36006e889597c9059d580852ee13539e8a4d19713d8ab283859391fa5d97d081",
+          "step-3::pileup/pileup": "a7d4c81467fb4af4a67554cb5084dfe630e46e40dcd8160fdf083d107c9da275",
+          "step-3::calls/calls": "d77ef2d366312ed974678a17fe242e5a9609b532aa779d59b49612aa47560737",
+          "step-3::normalized/normalized": "3866822a6e582c4d0100d8552215aae0b01bac9d6de67f78229dd32e115eae7e",
+          "step-3::reference/reference": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+          "step-3::reference-index/reference-index": "6bf365006e0d9d03de4e0fbfdfc082c6e5bee611888e54450bc2516614ae95a3",
+          "step-4::statistics/statistics": "c0cd635da849a979b7dccffe56aacd059afbc3176061e9c532e13d2d195135f7",
+          "step-5::report/report": "068342c1c80bca25d1316a7b02e01f57b425a8c6c57820b94490dd32fb474fb1"
+        }
+      },
+      "curatedRecordedMeasurements": {
+        "alignment-qc": {
+          "samtools.stats.raw_total_sequences": 202,
+          "samtools.stats.reads_mapped": 202,
+          "samtools.stats.average_length": 100,
+          "samtools.flagstat.total.qc_passed": 202,
+          "samtools.flagstat.mapped.qc_passed": 202
+        },
+        "variant-calling": {
+          "samtools.stats.raw_total_sequences": 202,
+          "samtools.stats.reads_mapped": 202,
+          "samtools.stats.average_length": 100,
+          "samtools.flagstat.total.qc_passed": 202,
+          "samtools.flagstat.mapped.qc_passed": 202,
+          "bcftools.stats.number_of_records": 1,
+          "bcftools.stats.number_of_snps": 1,
+          "bcftools.stats.number_of_indels": 0,
+          "bcftools.stats.number_of_samples": 1
+        }
+      }
+    }
+  },
+  "limits": [
+    "Finite desktop observations at the recorded hosted display do not establish zero flicker or representative-PC acceptance.",
+    "Run sampling uses a small button region; tree black-block detection tests aligned near-black areas rather than whole-screen equality.",
+    "Overflow checks use two explicitly synthetic catalogue packs with unchanged Starter SAMtools bytes in disposable test installations.",
+    "Synthetic answers are fixture truth, not biological QC thresholds, clinical validation or benchmarking.",
+    "Scientific Linux CWL, high-DPI, multiple-monitor, physical-trackpad, institutional and release acceptance remain separate.",
+    "Earlier failed validator attempts are preserved in a separate attempt-history receipt."
+  ]
+}

@@ -1,0 +1,837 @@
+{
+  "schema": 1,
+  "kind": "independent-completed-regression-visual-review",
+  "recordedUtc": "2026-10-09T22:18:29.770994+00:00",
+  "scope": "Seven completed regression gates only: batch, readiness, curated, workspace, reference-management, results and scroll. Patch and tester-feedback gates are excluded.",
+  "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+  "workflowRun": 37997370988,
+  "installationCase": "spaces",
+  "appVersion": "0.16.1",
+  "assetSha256": "1291f93b5ece3c4da34eb2f2e29fccc83b6d87ec5fb73abf28bfd9cc8f155b75",
+  "captureCount": 56,
+  "excludedScopes": [
+    "patch",
+    "feedback"
+  ],
+  "individuallyViewedCount": 47,
+  "byteIdenticalToIndividuallyViewedCount": 9,
+  "uniqueCaptureHashes": 54,
+  "passed": 56,
+  "blockingDefects": [],
+  "summary": "All 56 capture files are visually acceptable within their captured viewports. No fixed-control overlap, unreadable fixed label or unexpected black rendering was observed. Intentional scroll viewport clipping and long-label/path ellipsis are retained as limits.",
+  "reviewMethod": "Exact original BMP hashes and dimensions were matched to each native report. Images were reviewed at original resolution through lossless PNG conversions; byte-identical counterparts are explicitly identified. No missing-control conclusion was inferred from a downscaled contact sheet.",
+  "reportedPassedChecksInIncludedScopes": 81,
+  "reportCheckCountsAreSeparateFromVisualCounts": true,
+  "limits": [
+    "Observed hosted 96-DPI states only; no high-DPI/transitions, multiple-monitor, physical-trackpad or representative-PC acceptance is inferred.",
+    "Still images do not establish absence of flicker, unseen intermediate frames, keyboard navigation or successful actions. Functional and temporal gate evidence remains separate.",
+    "Text in scrolling panes and long list, graph or path fields may be clipped or ellipsized inside their viewport. Offscreen content is not inferred to be missing.",
+    "Workspace scenario filenames minimum or1280 are labels, not measured window sizes; capture dimensions are recorded per file. Results/DAG renders at1044x788 and legacy scroll fixtures are not initial desktop work-area containment evidence.",
+    "PrintWindow and requested-clean-redraw captures establish rendered layout, not unoccluded physical-screen behavior. Screen-capture provenance remains in each native report.",
+    "This receipt does not accept the initial CI run or candidate as a whole; patch/updater and new tester-feedback scopes require their separate recheck/evidence.",
+    "Scientific truth and provenance claims remain those of the native reports, not additional assertions derived from visual inspection."
+  ],
+  "originalVisualReceiptSha256": "9f8bc593ae9c2d273a79d6ffb18b4f23a2b56d163e1b460baa19679fe23d82fd",
+  "evidenceMinimization": "Focused receipt retains exact report/capture hashes and layout observations. Runtime window handles, local storage paths and redundant raw observations are omitted. Original BMPs remain in Actions artifacts.",
+  "sourceReports": [
+    {
+      "sha256": "42d6da9c0edf8d9588342d9b7d3baa5598c9e8394780823724f3d4bc3bd9a369",
+      "scope": "batch",
+      "artifactRelativeName": "batch/native-batch.json"
+    },
+    {
+      "sha256": "d280156817a1dfbb27c995838bf40d252612e338bb42ce05cac3c207e3371503",
+      "scope": "readiness",
+      "artifactRelativeName": "readiness/native-readiness.json"
+    },
+    {
+      "sha256": "9909e3db7dfc7cca8dde66de1ed6a11511eaf03551d2965363af0a738e6290ed",
+      "scope": "curated",
+      "artifactRelativeName": "curated/native-curated.json"
+    },
+    {
+      "sha256": "b96b94477c04d6e4be546b099ca27b0ac63c39bc206e34b74326c77a21ec4e10",
+      "scope": "workspace",
+      "artifactRelativeName": "workspace/native-workspace.json"
+    },
+    {
+      "sha256": "0e3e50dab726139224c9a689e02a97e5c28fc43851509e8693974c20c315e2bc",
+      "scope": "reference-management",
+      "artifactRelativeName": "reference-management/native-reference-management.json"
+    },
+    {
+      "sha256": "d0faf6370ced815692daae4eda9552d07fe64d4ea6e33b88e7f67b110d4b463f",
+      "scope": "results",
+      "artifactRelativeName": "results/native-results.json"
+    },
+    {
+      "sha256": "e8accd20ddeceb43e7c5998a31906d6c0217ad7cac9d6ff54a72662fcdb4461b",
+      "scope": "scroll",
+      "artifactRelativeName": "scroll/native-scroll.json"
+    }
+  ],
+  "captures": [
+    {
+      "sha256": "565d4741710cbbb078e3bdef93606cc01416086d55fdaa14d4b5dda6b59abf33",
+      "width": 940,
+      "height": 590,
+      "reviewMethod": "Original-resolution view of lossless PNG conversion of this exact BMP.",
+      "findings": [
+        "Queue rows, selected cancelled-run detail, zero-waiting summary and fixed actions are readable.",
+        "The scenario filename is not treated as proof that the selected row completed; the image visibly identifies that row as cancelled."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "batch",
+      "artifactRelativeName": "batch/queue-native-completed.bmp"
+    },
+    {
+      "sha256": "f25fff1e3d45a7a4b898e49bc84ae3d12d3fed79fb246b0e47ae62056b2e8274",
+      "width": 940,
+      "height": 590,
+      "reviewMethod": "Original-resolution view of lossless PNG conversion of this exact BMP.",
+      "findings": [
+        "Queued sample, frozen-result details, waiting count and enabled/disabled queue actions are visible and separated.",
+        "Long analysis labels are ellipsized in their column and details continue below the scrolling viewport."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "batch",
+      "artifactRelativeName": "batch/queue-native-paused.bmp"
+    },
+    {
+      "sha256": "10bdecc23c1077588c3a2fb60db6cf75c14a1c546b93ad86883b239d0375e44b",
+      "width": 940,
+      "height": 590,
+      "reviewMethod": "Byte-identical to individually inspected ordinary-path original BMP; same SHA-256 and dimensions.",
+      "findings": [
+        "Index entries, selected verification state, reference hash/details and Refresh/Verify/Close actions are readable without overlap.",
+        "Long hashes are shortened within table columns; full detail content remains in a scrolling text viewport."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "batch",
+      "artifactRelativeName": "batch/reference-indexes-native-verified.bmp"
+    },
+    {
+      "sha256": "f563957e68efd9400734f36a5ed2ac6d3aab576a7f410ba42cb315c350a2beb2",
+      "width": 940,
+      "height": 680,
+      "reviewMethod": "Original-resolution view of lossless PNG conversion of this exact BMP.",
+      "findings": [
+        "Combined-report mode, explicit report-column mapping, one-job preview and queue action are readable and separated.",
+        "Long mapping text is shortened within the list column; lower explanatory text continues through the scrollable notice."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "batch",
+      "artifactRelativeName": "batch/samples-native-combined-preview.bmp"
+    },
+    {
+      "sha256": "4f14639c4fb3636d61eca386126709f4b44e5192fd480bae8e3531cd341f6a92",
+      "width": 940,
+      "height": 680,
+      "reviewMethod": "Byte-identical to individually inspected ordinary-path original BMP; same SHA-256 and dimensions.",
+      "findings": [
+        "Samples table import/edit/example actions, explicit mapping controls, independent preview rows and output/queue actions are readable and separated.",
+        "The mapping list is scrolled and the notice continues below its scrollable viewport; no fixed control overlap is observed."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "batch",
+      "artifactRelativeName": "batch/samples-native-preview.bmp"
+    },
+    {
+      "sha256": "ea4f2ec25c0dd698869a3bba5572b0feed7aa03d7531178beb91d85f0f5fa9c4",
+      "width": 940,
+      "height": 680,
+      "reviewMethod": "Byte-identical to individually inspected ordinary-path original BMP; same SHA-256 and dimensions.",
+      "findings": [
+        "Workflow choices, description, requirements heading and bottom actions are readable and separated.",
+        "Description and notice panes show scrollbars; partial text at their lower viewport edges is expected."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "curated",
+      "artifactRelativeName": "curated/curated-native-catalogue.bmp"
+    },
+    {
+      "sha256": "e441540526d31ed17cac344aef67d157e1ec7e20479881c9fc84301a9bcd4eb7",
+      "width": 1024,
+      "height": 728,
+      "reviewMethod": "Byte-identical to individually inspected ordinary-path original BMP; same SHA-256 and dimensions.",
+      "findings": [
+        "Main toolbar, workflow actions, footer and right inspector controls are visible without overlap.",
+        "Workflow cards extend beyond the horizontal canvas viewport; its scrollbars and ellipsized card headings are expected."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "curated",
+      "artifactRelativeName": "curated/curated-native-loaded-workflow.bmp"
+    },
+    {
+      "sha256": "ee53bf91460b5b2457fa75f88fb0301109df352bdc1936d8c49ddcd2f1d4036b",
+      "width": 940,
+      "height": 680,
+      "reviewMethod": "Byte-identical to individually inspected ordinary-path original BMP; same SHA-256 and dimensions.",
+      "findings": [
+        "Search field, empty-state explanation and Close action are readable; unavailable result actions are visibly disabled."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "curated",
+      "artifactRelativeName": "curated/results-native-empty-search.bmp"
+    },
+    {
+      "sha256": "8e51192d7142cb176ed1364a97833f608dc95a8795f9941bbf12866d36ccb0e5",
+      "width": 940,
+      "height": 680,
+      "reviewMethod": "Original-resolution view of lossless PNG conversion of this exact BMP.",
+      "findings": [
+        "Failed execution, missing-input cause and corrective guidance are readable; search and footer actions remain separated.",
+        "Long tool metadata is ellipsized within its table column; summary continues through a scrollable viewport."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "curated",
+      "artifactRelativeName": "curated/results-native-failed-preparation.bmp"
+    },
+    {
+      "sha256": "ed08cf66e0212924077b79c256cd3f90cf8c6cf5c5bc3cede9b89061e754cbb2",
+      "width": 940,
+      "height": 680,
+      "reviewMethod": "Original-resolution view of lossless PNG conversion of this exact BMP.",
+      "findings": [
+        "Scrolled missing-input guidance and the statement that measurements are not a QC pass/fail assessment are readable.",
+        "The summary is intentionally scrolled; fixed search and footer controls remain visible."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "curated",
+      "artifactRelativeName": "curated/results-native-failure-guidance.bmp"
+    },
+    {
+      "sha256": "33ae4779ecf461a92c69bc6ee63844945611456d5830ce457ddab8ebf1c1d6c9",
+      "width": 940,
+      "height": 680,
+      "reviewMethod": "Original-resolution view of lossless PNG conversion of this exact BMP.",
+      "findings": [
+        "Selected completed run, sample, status and recorded measurements are readable; search and footer actions are separated.",
+        "Additional measurements continue below the scrollable summary viewport; long tool metadata is ellipsized within its table column."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "curated",
+      "artifactRelativeName": "curated/results-native-filtered-summary.bmp"
+    },
+    {
+      "sha256": "3957bdc58350a33de79ea1bc81abd791aaa43e71004c191605d8379beca1b941",
+      "width": 720,
+      "height": 530,
+      "reviewMethod": "Byte-identical to individually inspected ordinary-path original BMP; same SHA-256 and dimensions.",
+      "findings": [
+        "Diagnostic review title, local-only save notice, JSON preview and Copy text/Save diagnostic ZIP/Close controls are readable and separated.",
+        "Long JSON content continues through a scrolling viewport; no unexpected visual corruption is observed."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "readiness",
+      "artifactRelativeName": "readiness/diagnostics-native-preview.bmp"
+    },
+    {
+      "sha256": "7d25a0d6e9133c564072414b0d950665c80e935163e0ae19b33478a0fc923524",
+      "width": 720,
+      "height": 530,
+      "reviewMethod": "Byte-identical to individually inspected ordinary-path original BMP; same SHA-256 and dimensions.",
+      "findings": [
+        "Planned methods title and explicit planned-not-completed explanation are readable; methods text wraps clearly above Copy text/Done/Close.",
+        "Later workflow methods continue below the scrollable text viewport; no fixed-action clipping is observed."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "readiness",
+      "artifactRelativeName": "readiness/methods-native.bmp"
+    },
+    {
+      "sha256": "a8440846b1b766c853933e6b44e211e753ac8e5bffeecc72d09ac9f620e19f5c",
+      "width": 720,
+      "height": 530,
+      "reviewMethod": "Original-resolution view of lossless PNG conversion of this exact BMP.",
+      "findings": [
+        "Review and run title, input/pack/output checks and Copy text/Run analysis/Close actions are readable and separated.",
+        "Lower storage/check text continues below the scroll viewport; this image alone does not establish scientific execution."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "readiness",
+      "artifactRelativeName": "readiness/run-preflight-native.bmp"
+    },
+    {
+      "sha256": "eaf91628312c8e1e9de7df1ede14c870363fbd876350885c01c10b06e35531e3",
+      "width": 960,
+      "height": 728,
+      "reviewMethod": "individual original-resolution lossless RGB PNG rendering of original BMP",
+      "findings": [
+        "Local library rows, reference details, compatible input selector and action buttons are legible and separated; assignment status is visible."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "reference-management",
+      "artifactRelativeName": "reference-management/references-native-bound-input.bmp"
+    },
+    {
+      "sha256": "637032e4efe4a3100f4378242a8d7545a97833a983834d5e1864577d80515ddb",
+      "width": 960,
+      "height": 728,
+      "reviewMethod": "individual original-resolution lossless RGB PNG rendering of original BMP",
+      "findings": [
+        "Empty downloads table, explanatory text, disabled unavailable actions and final discard status are clearly presented; Close remains visible."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "reference-management",
+      "artifactRelativeName": "reference-management/references-native-downloads-cleared.bmp"
+    },
+    {
+      "sha256": "9aa380ff8185dcf981ed10b71f3006b93ef8985a5cecc86f322575b474918a65",
+      "width": 960,
+      "height": 728,
+      "reviewMethod": "individual original-resolution lossless RGB PNG rendering of original BMP",
+      "findings": [
+        "Import metadata and file-role controls fit; invalidated-review guidance is visible and Review changes is disabled."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "reference-management",
+      "artifactRelativeName": "reference-management/references-native-edited-review-disabled.bmp"
+    },
+    {
+      "sha256": "a66d42f1e44e794ca4b61ef9e315bb37443c547dd1f99ad41e70d0ca89f4c629",
+      "width": 960,
+      "height": 728,
+      "reviewMethod": "individual original-resolution lossless RGB PNG rendering of original BMP",
+      "findings": [
+        "All import metadata, role-file controls and destination actions fit; ready-for-review guidance and enabled Review changes are visible."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "reference-management",
+      "artifactRelativeName": "reference-management/references-native-import-fields.bmp"
+    },
+    {
+      "sha256": "58fabd0a63f0ff170765492c3ec3c9289049f569f47c5b0f70105a8f4ed24c6c",
+      "width": 720,
+      "height": 530,
+      "reviewMethod": "individual original-resolution lossless RGB PNG rendering of original BMP",
+      "findings": [
+        "Scrollable review states user-declared identity and exact file hashes, with clearly separated Copy text, Import files and Close actions."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "reference-management",
+      "artifactRelativeName": "reference-management/references-native-import-review.bmp"
+    },
+    {
+      "sha256": "70a37e233766681e1225bf4f1bd6d46dd844da1a5356f8ae6e0ea7a831e77884",
+      "width": 960,
+      "height": 728,
+      "reviewMethod": "individual original-resolution lossless RGB PNG rendering of original BMP",
+      "findings": [
+        "Selected imported reference, metadata and compatible workspace input are legible; Use for input and Open folder remain accessible."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "reference-management",
+      "artifactRelativeName": "reference-management/references-native-local-compatible-input.bmp"
+    },
+    {
+      "sha256": "21ee14f61a1a6606ffe201655116d5de97b3963576fc4a406151d86453f9ed76",
+      "width": 960,
+      "height": 728,
+      "reviewMethod": "individual original-resolution lossless RGB PNG rendering of original BMP",
+      "findings": [
+        "Provider, accession search, assembly result, file selection and download destination/actions fit; longer details remain in their scrollable viewport."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "reference-management",
+      "artifactRelativeName": "reference-management/references-native-ncbi-discovery.bmp"
+    },
+    {
+      "sha256": "ed0158a0c9160f425ea823be9ed84855849ee24494359c45dc51a17a56cd80ca",
+      "width": 960,
+      "height": 728,
+      "reviewMethod": "individual original-resolution lossless RGB PNG rendering of original BMP",
+      "findings": [
+        "Paused transfers and byte counts are visible, along with resume/discard actions and pause-confirmed status."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "reference-management",
+      "artifactRelativeName": "reference-management/references-native-pause-confirmed.bmp"
+    },
+    {
+      "sha256": "0776aa657e510cd5252722d9cc8cf1d505be2a671e7fb82079a1d3aa3910882b",
+      "width": 960,
+      "height": 728,
+      "reviewMethod": "individual original-resolution lossless RGB PNG rendering of original BMP",
+      "findings": [
+        "Selected paused transfer, details and resume/discard actions are visible with no unexpected overlay or black corruption."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "reference-management",
+      "artifactRelativeName": "reference-management/references-native-paused-downloads.bmp"
+    },
+    {
+      "sha256": "d84cff5964e8263f30cca9b40a1aba6a2730a938a5cb511b3fc4a134fe9f8102",
+      "width": 960,
+      "height": 728,
+      "reviewMethod": "individual original-resolution lossless RGB PNG rendering of original BMP",
+      "findings": [
+        "Local library, relocated path, reference metadata, compatible input and verified-relocation status are legible."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "reference-management",
+      "artifactRelativeName": "reference-management/references-native-relocation-complete.bmp"
+    },
+    {
+      "sha256": "aeb499e6a305c1c891a29be9ae42d4bf90ff47b088bda481d1feefc403637eb5",
+      "width": 720,
+      "height": 530,
+      "reviewMethod": "individual original-resolution lossless RGB PNG rendering of original BMP",
+      "findings": [
+        "Scrollable relocation review explains copied files and retained originals; Copy and switch and Close are fully visible."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "reference-management",
+      "artifactRelativeName": "reference-management/references-native-relocation-review.bmp"
+    },
+    {
+      "sha256": "9be423417103bbc155ceb93b691deeb68d1256e0cdebb701239312bafe56e509",
+      "width": 1044,
+      "height": 788,
+      "reviewMethod": "Original-resolution view of lossless PNG conversion of this exact BMP.",
+      "findings": [
+        "Application icon is visible; toolbar, empty tool panel, general settings and footer controls are readable and separated.",
+        "Long path edit values extend beyond their horizontal text viewport."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "results",
+      "artifactRelativeName": "results/application-icon-normal.bmp"
+    },
+    {
+      "sha256": "00040536f468a0a9e9752b296fa2875389225132673964b74c56acf0f1c1ad06",
+      "width": 1044,
+      "height": 788,
+      "reviewMethod": "Byte-identical to individually inspected ordinary-path original BMP; same SHA-256 and dimensions.",
+      "findings": [
+        "At 83% zoom, the three cards and connection routes remain clear; fixed controls and right inspector remain readable.",
+        "Long card and library labels are intentionally shortened; no desktop work-area fit conclusion is drawn from this 1044x788 capture."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "results",
+      "artifactRelativeName": "results/workflow-backward-routing-zoomed.bmp"
+    },
+    {
+      "sha256": "9deddb072557eb1c57c9a1d91a3932056c4298dfcdd6157545c731955088cfd5",
+      "width": 1044,
+      "height": 788,
+      "reviewMethod": "Byte-identical to individually inspected ordinary-path original BMP; same SHA-256 and dimensions.",
+      "findings": [
+        "Three cards, forward/backward connection routes, inspector and fixed toolbar/footer controls are visible without control overlap.",
+        "Long card and library labels are intentionally shortened; no desktop work-area fit conclusion is drawn from this 1044x788 capture."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "results",
+      "artifactRelativeName": "results/workflow-backward-routing.bmp"
+    },
+    {
+      "sha256": "4dfc5ca31e696dcf51a458086d37ac3ecf8846c437b7a083b56463a8981a1cf1",
+      "width": 292,
+      "height": 441,
+      "reviewMethod": "individual original-resolution lossless RGB PNG rendering of original BMP",
+      "findings": [
+        "General settings controls and explanatory text are readable within the captured panel; clipping at the top or bottom is the expected scroll viewport edge, and long paths remain inside their edit fields."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "scroll",
+      "artifactRelativeName": "scroll/general-settings-clean-bottom.bmp"
+    },
+    {
+      "sha256": "b394443d27aa7264b9841fda0ed3993cdcba613d3766c03bd9c47688d5ec8a54",
+      "width": 292,
+      "height": 441,
+      "reviewMethod": "individual original-resolution lossless RGB PNG rendering of original BMP",
+      "findings": [
+        "General settings controls and explanatory text are readable within the captured panel; clipping at the top or bottom is the expected scroll viewport edge, and long paths remain inside their edit fields."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "scroll",
+      "artifactRelativeName": "scroll/general-settings-clean-notch.bmp"
+    },
+    {
+      "sha256": "f2437c43c338c85b657e5a4986ce5fc859d0e45f91d008fe4f8a6c93cd2b3aef",
+      "width": 292,
+      "height": 441,
+      "reviewMethod": "individual original-resolution lossless RGB PNG rendering of original BMP",
+      "findings": [
+        "General settings controls and explanatory text are readable within the captured panel; clipping at the top or bottom is the expected scroll viewport edge, and long paths remain inside their edit fields."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "scroll",
+      "artifactRelativeName": "scroll/general-settings-clean-top.bmp"
+    },
+    {
+      "sha256": "cf023f8d1f72ee9ef7c21da5168685639b36a7ea90a1d261dfdba866e435a4a9",
+      "width": 920,
+      "height": 720,
+      "reviewMethod": "individual original-resolution lossless RGB PNG rendering of original BMP",
+      "findings": [
+        "Tool setup title, selection choices, tool/version/status table, download summary and Use Workbench action are readable and separated."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "scroll",
+      "artifactRelativeName": "scroll/scroll-first-launch-setup.bmp"
+    },
+    {
+      "sha256": "10fa9a69595d31ae81bb65b1408790077ddcc72db9beaed7c171de7eb98451e3",
+      "width": 468,
+      "height": 441,
+      "reviewMethod": "individual original-resolution lossless RGB PNG rendering of original BMP",
+      "findings": [
+        "Standalone input/settings text and controls remain separated and readable within the captured panel; partial edge controls reflect the scroll viewport crop."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "scroll",
+      "artifactRelativeName": "scroll/standalone-options-clean-bottom.bmp"
+    },
+    {
+      "sha256": "d3847341a04f729fa743ed7baa583991e337ce3386a5e5fecf1c0ec59513784f",
+      "width": 468,
+      "height": 441,
+      "reviewMethod": "individual original-resolution lossless RGB PNG rendering of original BMP",
+      "findings": [
+        "Standalone input/settings text and controls remain separated and readable within the captured panel; partial edge controls reflect the scroll viewport crop."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "scroll",
+      "artifactRelativeName": "scroll/standalone-options-clean-notch.bmp"
+    },
+    {
+      "sha256": "fe6942c316aebf85f58a4e9876084793048fa4ce78589ec14a53fd84bda2510a",
+      "width": 468,
+      "height": 441,
+      "reviewMethod": "individual original-resolution lossless RGB PNG rendering of original BMP",
+      "findings": [
+        "Standalone input/settings text and controls remain separated and readable within the captured panel; partial edge controls reflect the scroll viewport crop."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "scroll",
+      "artifactRelativeName": "scroll/standalone-options-clean-top.bmp"
+    },
+    {
+      "sha256": "b3faee9fa876d25503ff58eb4fe55424f5d9530c10a511d30a47ca7d4f2a3734",
+      "width": 292,
+      "height": 441,
+      "reviewMethod": "individual original-resolution lossless RGB PNG rendering of original BMP",
+      "findings": [
+        "Workflow settings, connection guidance and output actions are readable within the captured panel; partial edge content reflects the scroll viewport crop."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "scroll",
+      "artifactRelativeName": "scroll/workflow-options-clean-bottom.bmp"
+    },
+    {
+      "sha256": "cb81e2cfea8d76f69f7950c777044ec6e8b85e59dbc914d68a8f5af7c57cea2d",
+      "width": 292,
+      "height": 441,
+      "reviewMethod": "individual original-resolution lossless RGB PNG rendering of original BMP",
+      "findings": [
+        "Workflow settings, connection guidance and output actions are readable within the captured panel; partial edge content reflects the scroll viewport crop."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "scroll",
+      "artifactRelativeName": "scroll/workflow-options-clean-notch.bmp"
+    },
+    {
+      "sha256": "e202b36a1812542a14433dd719076acf339920f6d5e7f9aa4a2bc371d3128356",
+      "width": 292,
+      "height": 441,
+      "reviewMethod": "individual original-resolution lossless RGB PNG rendering of original BMP",
+      "findings": [
+        "Workflow settings, connection guidance and output actions are readable within the captured panel; partial edge content reflects the scroll viewport crop."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "scroll",
+      "artifactRelativeName": "scroll/workflow-options-clean-top.bmp"
+    },
+    {
+      "sha256": "631a87569860b749a4a24e94d16b4207922ddb28aeb1e67e1fbc3dd8f5a335f8",
+      "width": 830,
+      "height": 700,
+      "reviewMethod": "Individual original-resolution view of lossless PNG; PNG pixels independently matched to original BMP.",
+      "findings": [
+        "No concrete layout blocker observed.",
+        "Installed pack list, detail pane, search/filter and footer buttons fit; disabled install/cancel controls are legible."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "workspace",
+      "artifactRelativeName": "workspace/manage-tools-first-open.bmp"
+    },
+    {
+      "sha256": "4b220e42923f76fbbe546d66cc517d04a4be660921069951acb175a918e4bcf3",
+      "width": 452,
+      "height": 489,
+      "reviewMethod": "Individual original-resolution view of lossless PNG; PNG pixels independently matched to original BMP.",
+      "findings": [
+        "No concrete layout blocker observed.",
+        "Scrollable options-region crop shows clean text, paired-read fields and Browse buttons. Top and bottom lines clip at the scroll viewport edges; no overlapping field remnants observed."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "workspace",
+      "artifactRelativeName": "workspace/options-scroll-screen-before-redraw.bmp"
+    },
+    {
+      "sha256": "4b220e42923f76fbbe546d66cc517d04a4be660921069951acb175a918e4bcf3",
+      "width": 452,
+      "height": 489,
+      "reviewMethod": "Individual original-resolution view of lossless PNG; PNG pixels independently matched to original BMP.",
+      "findings": [
+        "No concrete layout blocker observed.",
+        "Clean-redraw options-region crop is byte-identical to the before-redraw capture; visible fields and text remain clean."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "workspace",
+      "artifactRelativeName": "workspace/options-scroll-screen-clean-redraw.bmp"
+    },
+    {
+      "sha256": "19b616d9fb082ea809c9a084ab8e7e2509d582b77fbe3522bdfafa4d2ff2c143",
+      "width": 1024,
+      "height": 728,
+      "reviewMethod": "Individual original-resolution view of lossless PNG; PNG pixels independently matched to original BMP.",
+      "findings": [
+        "No concrete layout blocker observed.",
+        "Coordinate-sort tool form and settings render cleanly; Run tool and Methods fit without overlap."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "workspace",
+      "artifactRelativeName": "workspace/tools-after-workflow-library-selection.bmp"
+    },
+    {
+      "sha256": "19b616d9fb082ea809c9a084ab8e7e2509d582b77fbe3522bdfafa4d2ff2c143",
+      "width": 1024,
+      "height": 728,
+      "reviewMethod": "Individual original-resolution view of lossless PNG; PNG pixels independently matched to original BMP.",
+      "findings": [
+        "No concrete layout blocker observed.",
+        "Tool form and fixed controls render cleanly after the recorded notification scenario; image is byte-identical to the same-path library-selection capture."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "workspace",
+      "artifactRelativeName": "workspace/tools-double-click-notification.bmp"
+    },
+    {
+      "sha256": "2965295faab7b7a66ace3ccf8016d17323cc72f3feb3f96917d85745b3c32b74",
+      "width": 1024,
+      "height": 728,
+      "reviewMethod": "Individual original-resolution view of lossless PNG; PNG pixels independently matched to original BMP.",
+      "findings": [
+        "No concrete layout blocker observed.",
+        "Tool form, general settings and fixed footer fit at 1024 by 728. Long library label/path text is confined to its narrow viewport; scrollbars remain available."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "workspace",
+      "artifactRelativeName": "workspace/tools-minimum.bmp"
+    },
+    {
+      "sha256": "53c3089414b9cf1be7215509f9fbfb66cffb4d2c02a9e667bc854c3e1533f85d",
+      "width": 1024,
+      "height": 728,
+      "reviewMethod": "Individual original-resolution view of lossless PNG; PNG pixels independently matched to original BMP.",
+      "findings": [
+        "No concrete layout blocker observed.",
+        "Tool and general-settings panes, References button and Run tool/Methods footer are visible. Middle form is scrolled; its top text clips at the viewport edge. Long paths are confined to their edit fields. Despite filename, capture is 1024 by 728."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "workspace",
+      "artifactRelativeName": "workspace/tools-reference-1280.bmp"
+    },
+    {
+      "sha256": "c5c79143bb73ec51b1ba8417f2d909eeaf877f9e458b0182260fa8bfd709dda2",
+      "width": 1024,
+      "height": 728,
+      "reviewMethod": "Individual original-resolution view of lossless PNG; PNG pixels independently matched to original BMP.",
+      "findings": [
+        "No concrete layout blocker observed.",
+        "Connection routes to the second selected node and matches its visible From source; fixed controls fit. Despite filename, capture is 1024 by 728."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "workspace",
+      "artifactRelativeName": "workspace/workflow-connected-1280.bmp"
+    },
+    {
+      "sha256": "25ea1592758a7290f6bcec46ce045d54f5284378ca596461255b1f4cf1e09ea5",
+      "width": 1024,
+      "height": 728,
+      "reviewMethod": "Individual original-resolution view of lossless PNG; PNG pixels independently matched to original BMP.",
+      "findings": [
+        "No concrete layout blocker observed.",
+        "Reusable-genome edge reaches the reference-index node and the options panel names its source. Lower node/output is clipped by the canvas viewport; action footer remains intact."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "workspace",
+      "artifactRelativeName": "workspace/workflow-explicit-input-connected.bmp"
+    },
+    {
+      "sha256": "495bc72b86ab6e680b364433baecafb209623ba2b69fa1a4e265494c7801eac6",
+      "width": 1024,
+      "height": 728,
+      "reviewMethod": "Individual original-resolution view of lossless PNG; PNG pixels independently matched to original BMP.",
+      "findings": [
+        "No concrete layout blocker observed.",
+        "Reusable-reference input, path edit, Browse and Choose from References controls fit. Other canvas nodes extend outside the scrollable canvas; no fixed-control overlap."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "workspace",
+      "artifactRelativeName": "workspace/workflow-explicit-reference-input.bmp"
+    },
+    {
+      "sha256": "945a0b0bd5a9c0f6bfd0c81d10d3028cd03fda5671c584107fce29d18eeb90e9",
+      "width": 1024,
+      "height": 728,
+      "reviewMethod": "Individual original-resolution view of lossless PNG; PNG pixels independently matched to original BMP.",
+      "findings": [
+        "No concrete layout blocker observed.",
+        "Two connected nodes, selection outline, options form, General settings switch and fixed action/footer controls are visible and separated."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "workspace",
+      "artifactRelativeName": "workspace/workflow-first-selected.bmp"
+    },
+    {
+      "sha256": "34e53b416b02ca2bc7b3bbcb67b2cd57bdf6bf6c82e8e4ccded5818f418a3848",
+      "width": 1024,
+      "height": 728,
+      "reviewMethod": "Individual original-resolution view of lossless PNG; PNG pixels independently matched to original BMP.",
+      "findings": [
+        "No concrete layout blocker observed.",
+        "General settings heading, Tool options switch, folder controls and References button fit; canvas and footer remain intact."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "workspace",
+      "artifactRelativeName": "workspace/workflow-general-settings.bmp"
+    },
+    {
+      "sha256": "9122d674bc551fc827acd17837e1da3437c127e9222a06b2ec9076894354f651",
+      "width": 1024,
+      "height": 728,
+      "reviewMethod": "Individual original-resolution view of lossless PNG; PNG pixels independently matched to original BMP.",
+      "findings": [
+        "No concrete layout blocker observed.",
+        "Canvas, side panels, Run workflow/Methods, zoom controls and Remove/Undo/Arrange fit at 1024 by 728."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "workspace",
+      "artifactRelativeName": "workspace/workflow-minimum.bmp"
+    },
+    {
+      "sha256": "581fe098e8e32425d33c192fbebcbcbde467326886924c4fa3c6739525c41ac7",
+      "width": 1024,
+      "height": 728,
+      "reviewMethod": "Individual original-resolution view of lossless PNG; PNG pixels independently matched to original BMP.",
+      "findings": [
+        "No concrete layout blocker observed.",
+        "Panned nodes and connection render coherently. The second node extends beyond the canvas right viewport and is clipped there; fixed side/footer controls are unaffected."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "workspace",
+      "artifactRelativeName": "workspace/workflow-panned.bmp"
+    },
+    {
+      "sha256": "fd36ca16a17d816024845f1fd837dab165312b75c2a3dab0f764ce68b307118b",
+      "width": 1024,
+      "height": 728,
+      "reviewMethod": "Individual original-resolution view of lossless PNG; PNG pixels independently matched to original BMP.",
+      "findings": [
+        "No concrete layout blocker observed.",
+        "Reusable-input delete hover is a red close control contained inside the node title bar; source options and connection remain legible."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "workspace",
+      "artifactRelativeName": "workspace/workflow-source-delete-hover.bmp"
+    },
+    {
+      "sha256": "fe072e95c3c065cb9a592c1a5599688ab36beb205ee71784df854ea7826b75dc",
+      "width": 1024,
+      "height": 728,
+      "reviewMethod": "Individual original-resolution view of lossless PNG; PNG pixels independently matched to original BMP.",
+      "findings": [
+        "No concrete layout blocker observed.",
+        "Restored reusable input and connection render cleanly, Undo has focus and fixed action controls fit."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "workspace",
+      "artifactRelativeName": "workspace/workflow-source-delete-undone.bmp"
+    },
+    {
+      "sha256": "a3b5c50d61031300eeac7846a1d2c7b81d81191464fa396360390b1fe08821df",
+      "width": 1024,
+      "height": 728,
+      "reviewMethod": "Individual original-resolution view of lossless PNG; PNG pixels independently matched to original BMP.",
+      "findings": [
+        "No concrete layout blocker observed.",
+        "Tool delete hover is a red close control contained inside the node title bar; canvas edge clipping does not affect fixed controls."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "workspace",
+      "artifactRelativeName": "workspace/workflow-tool-delete-hover.bmp"
+    },
+    {
+      "sha256": "fc622b3c087320c415230d06b50ddb7a365f846326214471444c72efa6feaf50",
+      "width": 1024,
+      "height": 728,
+      "reviewMethod": "Individual original-resolution view of lossless PNG; PNG pixels independently matched to original BMP.",
+      "findings": [
+        "No concrete layout blocker observed.",
+        "Both connected nodes fit the canvas at displayed 83 percent zoom. Long node title uses ellipsis. Fixed controls remain legible."
+      ],
+      "visualStatus": "passed-within-observed-scope",
+      "blockingDefects": [],
+      "scope": "workspace",
+      "artifactRelativeName": "workspace/workflow-zoomed-out.bmp"
+    }
+  ]
+}

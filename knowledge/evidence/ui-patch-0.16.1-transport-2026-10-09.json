@@ -1,0 +1,135 @@
+{
+  "schema": 1,
+  "sourceCommit": "8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+  "run": 37988570028,
+  "wrappers": [
+    {
+      "id": 11644197580,
+      "name": "ui-patch-source-part-1-8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+      "size_in_bytes": 25166018,
+      "url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11644197580",
+      "archive_download_url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11644197580/zip",
+      "expired": false,
+      "created_at": "2026-10-09T20:41:41Z",
+      "expires_at": "2026-11-08T20:41:40Z",
+      "updated_at": "2026-10-09T20:41:41Z",
+      "digest": "sha256:56fa0685faaf8d4e23a05369ebc54874b003de8ae82d051a58ec1d863397baff",
+      "workflow_run": {
+        "id": 37988570028,
+        "repository_id": 1403436005,
+        "head_repository_id": 1403436005,
+        "head_branch": "fix/native-ui-0.16.1",
+        "head_sha": "8938e709b041106e8a46e1447383e8e9ba3e0cb9"
+      },
+      "downloadVerified": true,
+      "reviewDownloadUrl": "https://github.com/comparativechrono/workbench/actions/runs/37988570028/artifacts/11644197580"
+    },
+    {
+      "id": 11644122776,
+      "name": "ui-patch-starter-8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+      "size_in_bytes": 17847794,
+      "url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11644122776",
+      "archive_download_url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11644122776/zip",
+      "expired": false,
+      "created_at": "2026-10-09T20:41:39Z",
+      "expires_at": "2026-11-08T20:41:39Z",
+      "updated_at": "2026-10-09T20:41:39Z",
+      "digest": "sha256:a662651a9d80adb046f59789bbd3995b67ea81ef33422774023dcf34cda008ad",
+      "workflow_run": {
+        "id": 37988570028,
+        "repository_id": 1403436005,
+        "head_repository_id": 1403436005,
+        "head_branch": "fix/native-ui-0.16.1",
+        "head_sha": "8938e709b041106e8a46e1447383e8e9ba3e0cb9"
+      },
+      "downloadVerified": true,
+      "reviewDownloadUrl": "https://github.com/comparativechrono/workbench/actions/runs/37988570028/artifacts/11644122776"
+    },
+    {
+      "id": 11643918208,
+      "name": "ui-patch-metadata-8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+      "size_in_bytes": 5721,
+      "url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11643918208",
+      "archive_download_url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11643918208/zip",
+      "expired": false,
+      "created_at": "2026-10-09T20:41:43Z",
+      "expires_at": "2026-11-08T20:41:42Z",
+      "updated_at": "2026-10-09T20:41:43Z",
+      "digest": "sha256:64d92cb724bbc79c5998a29c1bcf4151445e12377781a6d14a59d1c2cdf4f2f7",
+      "workflow_run": {
+        "id": 37988570028,
+        "repository_id": 1403436005,
+        "head_repository_id": 1403436005,
+        "head_branch": "fix/native-ui-0.16.1",
+        "head_sha": "8938e709b041106e8a46e1447383e8e9ba3e0cb9"
+      },
+      "downloadVerified": true,
+      "reviewDownloadUrl": "https://github.com/comparativechrono/workbench/actions/runs/37988570028/artifacts/11643918208"
+    },
+    {
+      "id": 11643868222,
+      "name": "ui-patch-updater-8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+      "size_in_bytes": 12983152,
+      "url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11643868222",
+      "archive_download_url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11643868222/zip",
+      "expired": false,
+      "created_at": "2026-10-09T20:41:40Z",
+      "expires_at": "2026-11-08T20:41:40Z",
+      "updated_at": "2026-10-09T20:41:40Z",
+      "digest": "sha256:32acac46882e959c4b61dacf2c6247a83953c60dc764d7807af797bb8f570346",
+      "workflow_run": {
+        "id": 37988570028,
+        "repository_id": 1403436005,
+        "head_repository_id": 1403436005,
+        "head_branch": "fix/native-ui-0.16.1",
+        "head_sha": "8938e709b041106e8a46e1447383e8e9ba3e0cb9"
+      },
+      "downloadVerified": true,
+      "reviewDownloadUrl": "https://github.com/comparativechrono/workbench/actions/runs/37988570028/artifacts/11643868222"
+    },
+    {
+      "id": 11643798411,
+      "name": "ui-patch-source-part-2-8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+      "size_in_bytes": 22913140,
+      "url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11643798411",
+      "archive_download_url": "https://api.github.com/repos/comparativechrono/workbench/actions/artifacts/11643798411/zip",
+      "expired": false,
+      "created_at": "2026-10-09T20:41:42Z",
+      "expires_at": "2026-11-08T20:41:41Z",
+      "updated_at": "2026-10-09T20:41:42Z",
+      "digest": "sha256:4e722e5f8f5497c308a68d02c2e32bf45c2b935105943075fe1330471493df2d",
+      "workflow_run": {
+        "id": 37988570028,
+        "repository_id": 1403436005,
+        "head_repository_id": 1403436005,
+        "head_branch": "fix/native-ui-0.16.1",
+        "head_sha": "8938e709b041106e8a46e1447383e8e9ba3e0cb9"
+      },
+      "downloadVerified": true,
+      "reviewDownloadUrl": "https://github.com/comparativechrono/workbench/actions/runs/37988570028/artifacts/11643798411"
+    }
+  ],
+  "sourceReassembly": {
+    "schema": 1,
+    "archivesRebuilt": false,
+    "sourceArchive": {
+      "file": "native-workbench-0.16.1-source.zip",
+      "bytes": 48078770,
+      "sha256": "48523c0e7090f661442bec2999c1658a1532ad7a5fa7fe882b1081b23452acc7"
+    },
+    "sourceTransportParts": [
+      {
+        "file": "native-workbench-0.16.1-source.zip.part1",
+        "bytes": 25165824,
+        "sha256": "9733867566b543d9272751349ecd4f6e0ea1e39cb53852d985df0b9a649da1e4"
+      },
+      {
+        "file": "native-workbench-0.16.1-source.zip.part2",
+        "bytes": 22912946,
+        "sha256": "094a7d30b890d5a2c2c9ec5877515c6ff45c0c483eeff75baff6ffd6df3c72c5"
+      }
+    ],
+    "sourceReassembly": "Concatenate part1 then part2 as raw bytes; verify the complete source SHA-256 before extraction."
+  },
+  "validationScope": "Five transport wrapper hashes and ZIP CRCs, both source part identities, and the reassembled source identity independently verified; native results separate."
+}

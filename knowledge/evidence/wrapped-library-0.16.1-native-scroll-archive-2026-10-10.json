@@ -1,0 +1,152 @@
+{
+  "schema": 2,
+  "status": "passed",
+  "kind": "independent downloaded-archive audit",
+  "sourceCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+  "run": 38075960020,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/38075960020",
+  "archives": [
+    {
+      "file": "native-workbench-0.16.1-source.zip",
+      "bytes": 48487148,
+      "sha256": "002fbc8401ab744a8172f3ae11d240c925ed7a8d1241bd5d94e0413675bb1b5d"
+    },
+    {
+      "file": "native-workbench-0.16.1-starter-windows.zip",
+      "bytes": 17889148,
+      "sha256": "28f1362287991621dde030da54eb444846142c0243be6b9d86c4b4f1bf99dd47"
+    },
+    {
+      "file": "native-workbench-0.16.1-update-from-0.16.0.zip",
+      "bytes": 13051808,
+      "sha256": "d0a20f0b8288c79dba695e9cc82e78a78e95244ebb267e959d99fb9e438e7aee"
+    }
+  ],
+  "artifactWrappers": [
+    {
+      "id": 11678940521,
+      "name": "wrapped-library-metadata-ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+      "bytes": 5715,
+      "sha256": "e5376b55c3b44780194e889ca36bde442d53efd6aa07a3c79368ac375e6517c9",
+      "githubApiDigestMatched": true,
+      "expiresUtc": "2026-11-09T18:30:03Z",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/38075960020/artifacts/11678940521"
+    },
+    {
+      "id": 11678915508,
+      "name": "wrapped-library-source-part-1-ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+      "bytes": 25166018,
+      "sha256": "e557f306b07bc1b0c533017ee0a00e5520fd815b9f42e08b972f94749225bd8f",
+      "githubApiDigestMatched": true,
+      "expiresUtc": "2026-11-09T18:29:55Z",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/38075960020/artifacts/11678915508"
+    },
+    {
+      "id": 11678930506,
+      "name": "wrapped-library-source-part-2-ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+      "bytes": 23321518,
+      "sha256": "e3ee126cdc92fd2a9fd89a3f1629556a08356448ed0c7ea0cbc5cd8cab5caa87",
+      "githubApiDigestMatched": true,
+      "expiresUtc": "2026-11-09T18:29:56Z",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/38075960020/artifacts/11678930506"
+    },
+    {
+      "id": 11678725746,
+      "name": "wrapped-library-starter-ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+      "bytes": 17889348,
+      "sha256": "d93084544e5f7ddcd354c98ce495325ed07093af40d2a75db55e7d6ca170b0a1",
+      "githubApiDigestMatched": true,
+      "expiresUtc": "2026-11-09T18:29:53Z",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/38075960020/artifacts/11678725746"
+    },
+    {
+      "id": 11678319898,
+      "name": "wrapped-library-updater-ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+      "bytes": 13052014,
+      "sha256": "cb6a0765e3545613c91f68725384c2d75fb26690580bea32b994a867b62814af",
+      "githubApiDigestMatched": true,
+      "expiresUtc": "2026-11-09T18:29:54Z",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/38075960020/artifacts/11678319898"
+    }
+  ],
+  "transportParts": [
+    {
+      "file": "native-workbench-0.16.1-source.zip.part1",
+      "bytes": 25165824,
+      "sha256": "643793f57855d6cdd3ddd4c8e9376e1022b05f46b132137a93cc2cfc56073cb7"
+    },
+    {
+      "file": "native-workbench-0.16.1-source.zip.part2",
+      "bytes": 23321324,
+      "sha256": "605d8fb7bac9f28f36186ecb81b2014b2ba1494e370c8d357106deded03b8c41"
+    }
+  ],
+  "orderedSourceReassemblyVerified": true,
+  "zipCrc": "passed",
+  "zipPathsAndDuplicateNames": "passed",
+  "maxReadWriteChunkBytes": 1048576,
+  "sourceGitFilesVerified": 864,
+  "completeCommittedSourceSelection": true,
+  "runtimeSourceFilesVerified": 34,
+  "exampleSourceFilesVerified": 6,
+  "coreFilesVerified": 90,
+  "starterArchiveFiles": 277,
+  "publishedPreservedFiles": {
+    "runtime/": 39,
+    "packs/": 186
+  },
+  "previousCandidatePreservedFiles": {
+    "runtime/": 39,
+    "packs/": 186
+  },
+  "packPinsUnchanged": true,
+  "productionTrustUnchanged": true,
+  "setupSelectionUnchanged": true,
+  "publishedStarterArchive": {
+    "file": "published-starter.zip",
+    "bytes": 17846873,
+    "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+  },
+  "previousCandidateStarterArchive": {
+    "file": "native-workbench-0.16.1-starter-windows.zip",
+    "bytes": 17879852,
+    "sha256": "7fd59d5b021867991506e98ef94c5b239245030fb9da55d77accf8d8e2d43682"
+  },
+  "previousCandidateSourceCommit": "51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e",
+  "legacySourceSha256": "5dac9add19436b336cba483a0f915e39aafed383282c2a019a0dbd3cc3c8668e",
+  "legacyNestedZipCrc": "passed",
+  "changedCoreFilesFromPublished": [
+    "NativeWorkbench.exe",
+    "SOURCE-AVAILABILITY.json",
+    "WorkbenchBridge.exe",
+    "examples/starter/samples-README.txt",
+    "examples/starter/samples.csv",
+    "workspace/app_version.py",
+    "workspace/desktop_host.py",
+    "workspace/sample_table_editor.py",
+    "workspace/service.py"
+  ],
+  "changedCoreFilesFromPreviousCandidate": [
+    "NativeWorkbench.exe",
+    "SOURCE-AVAILABILITY.json"
+  ],
+  "removedCoreFilesFromPreviousCandidate": [],
+  "updaterInventoryFiles": 55,
+  "updaterOperations": 9,
+  "updaterTargetExactlyMatchesStarter": true,
+  "sourceCompanionPinnedByStarter": true,
+  "baseManifestSha256": "7ea7e55caae3d60f1e2844eaee69f785088e23e04fde08d8db0cf7982794898f",
+  "targetManifestSha256": "c8d8adf64d2f44cc9cd76b9de55646ebb13f5dfaafba2432efdcb5fa38ca56c5",
+  "nativeExecutables": {
+    "DesktopWorkbench.exe": "ec7aff3ab791cf709134d23793ddeb051ce8c8e0ca1f16bb5404b2e22a10a708",
+    "WorkbenchBridge.exe": "3eb4b9bb0387cda22194c72ccd4aafcf161fe848c0b4cb823c6c41e7d57ae6bc",
+    "UpdateWorkbench.exe": "1b765bedcd0c3494f8bf40e204f80c16aa1b8e13cebb2a77b0fe54a9d934c0b6"
+  },
+  "scope": "Downloaded archive bytes, inventories and committed-source correspondence; application execution remains separate.",
+  "limits": [
+    "Combined candidate artifact wrapper was not downloaded; five bounded transfer wrappers were independently verified.",
+    "Updater reconstruction establishes every file size and cryptographic hash; it does not execute the updater.",
+    "No native execution, signing assessment or build reproducibility claim is established by this audit."
+  ],
+  "auditScriptSha256": "461aba39692868addc233d489269edb4514c881bed4e7556680f4bd9af085786"
+}
