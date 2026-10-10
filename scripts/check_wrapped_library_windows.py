@@ -512,9 +512,33 @@ def exercise(root, evidence, report):
             ui.click_at(row[0] + 80, description_y, expected=tree.hwnd)
             ui.wait('wrapped description selects tool', lambda: tree.selected() == item and any(
                 c['class'].lower() == 'edit' and c['text'] == NAME for c in ui.controls(ui.child(118))))
+            # Opening a standalone tool temporarily disables editable controls
+            # while its host reply arrives. Establish keyboard focus separately
+            # on the already selected row, after that operation has completed.
+            ui.wait('wrapped tool ready for keyboard navigation', lambda:
+                    ui.user.IsWindowEnabled(tree.hwnd) and tree.selected() == item)
+            navigation = {'treeWindow': tree.hwnd, 'categoryHandle': category,
+                          'itemHandle': item, 'focusBeforeRefocus': keys.focus(),
+                          'selectedBeforeRefocus': tree.selected()}
+            report['navigationInput'] = navigation
+            wheel_line_into_view(ui, tree, item, normal_content - reference.line_height, reference.line_height)
+            row = tree.rect(item, False)
+            # Move horizontally from the selection click so the user's focus
+            # click cannot be mistaken for the second half of a double click.
+            refocus = [row[0] + 60, row[1] + normal_content - reference.line_height // 2]
+            navigation['refocusPointer'] = refocus
+            ui.click_at(*refocus, expected=tree.hwnd)
+            ui.wait('selected wrapped row has actual keyboard focus', lambda:
+                    keys.focus() == tree.hwnd and tree.selected() == item)
+            navigation.update(focusBeforeHome=keys.focus(), selectedBeforeHome=tree.selected(),
+                              selectedLabelBeforeHome=tree.label(tree.selected()))
             # Real keyboard input to focused tree, no injected selection notification.
             keys.key(0x24)
+            navigation.update(focusImmediatelyAfterHome=keys.focus(),
+                              selectedImmediatelyAfterHome=tree.selected())
             ui.wait('keyboard Home selects category', lambda: tree.selected() == category)
+            navigation.update(focusAfterHome=keys.focus(), selectedAfterHome=tree.selected(),
+                              selectedLabelAfterHome=tree.label(tree.selected()))
             keys.key(0x25)
             ui.wait('keyboard Left collapses wrapped category', lambda: not tree.expanded(category))
             keys.key(0x27)

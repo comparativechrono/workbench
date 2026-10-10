@@ -151,7 +151,8 @@ class NativeTree:
         result = [max(child[0], viewport[0]), max(child[1], viewport[1]),
                   min(child[2], viewport[2]), min(child[3], viewport[3])]
         if result[0] >= result[2] or result[1] >= result[3]:
-            raise AssertionError("Native TreeView has no visible client intersection.")
+            raise AssertionError("Native TreeView has no visible client intersection: "
+                                 "child=%s viewport=%s" % (child, viewport))
         return result
 
     def first_visible(self):
