@@ -672,17 +672,22 @@ class Workspace {
   static void label_control(HWND h, const std::wstring &value) {
     if (h && control_text(h) != value) SetWindowTextW(h, value.c_str());
   }
-  void place(HWND h, int x, int y, int w, int hgt) {
+  void place(HWND h, int x, int y, int w, int hgt, bool repaint = true) {
     RECT previous{};
     GetWindowRect(h, &previous);
     MapWindowPoints(nullptr, GetParent(h), reinterpret_cast<POINT *>(&previous), 2);
     const int cx = px(x), cy = px(y), cw = px(std::max(1, w)), ch = px(std::max(1, hgt));
     if (previous.left != cx || previous.top != cy ||
-        previous.right - previous.left != cw || previous.bottom - previous.top != ch)
-      MoveWindow(h, cx, cy, cw, ch, TRUE);
+        previous.right - previous.left != cw || previous.bottom - previous.top != ch) {
+      if (repaint)
+        MoveWindow(h, cx, cy, cw, ch, TRUE);
+      else
+        SetWindowPos(h, nullptr, cx, cy, cw, ch,
+                     SWP_NOZORDER | SWP_NOACTIVATE | SWP_NOREDRAW | SWP_NOCOPYBITS);
+    }
   }
   struct PanelPlacement { HWND h; int x, y, w, height; };
-  void place_panel(HWND panel, const std::vector<PanelPlacement> &items) {
+  void place_panel(HWND panel, const std::vector<PanelPlacement> &items, bool repaint = true) {
     constexpr UINT flags = SWP_NOZORDER | SWP_NOACTIVATE | SWP_NOREDRAW | SWP_NOCOPYBITS;
     HDWP batch = BeginDeferWindowPos(static_cast<int>(items.size()));
     for (const auto &p : items) {
@@ -700,8 +705,9 @@ class Workspace {
     // descendant repaint is presented together, without exposing each label's
     // erase/draw cycle. Queue painting so a burst of scroll messages can share
     // one frame. Do not hold a panel DC beyond its paint operation.
-    RedrawWindow(panel, nullptr, nullptr,
-                 RDW_INVALIDATE | RDW_ERASE | RDW_ALLCHILDREN);
+    if (repaint)
+      RedrawWindow(panel, nullptr, nullptr,
+                   RDW_INVALIDATE | RDW_ERASE | RDW_ALLCHILDREN);
   }
   static LRESULT CALLBACK field_proc(HWND h, UINT message_, WPARAM w, LPARAM l,
                                      UINT_PTR, DWORD_PTR context) {
@@ -3655,6 +3661,15 @@ class Workspace {
     const bool resized = width != newWidth || height != newHeight;
     width = newWidth;
     height = newHeight;
+    // MoveWindow(..., TRUE) paints each control immediately. During a resize
+    // that can present the old form/General settings children inside their new
+    // viewport, while later header/footer controls still have old positions.
+    // Place every level without painting or copying old pixels, then present
+    // the completed layout once. Ordinary mode changes and scrolling keep
+    // their existing repaint behavior.
+    auto place = [&](HWND h, int x, int y, int w, int hgt) {
+      this->place(h, x, y, w, hgt, !resized);
+    };
     const auto geometry = workspace_layout::for_client(width, height);
     const int left = geometry.left, right = geometry.right, center = geometry.center,
               centerWidth = geometry.centerWidth, rightX = geometry.rightX,
@@ -3692,7 +3707,7 @@ class Workspace {
     show_control(generalSettings, workflowMode && !showingHistory);
     place(generalPanel, width - right + 1, 102, right - 2, bodyHeight);
     show_control(generalPanel, general);
-    layout_general();
+    layout_general(!resized);
     place(dag, center, 102, centerWidth, bodyHeight);
     show_control(dag, canvas);
     place(form, canvas ? width - right + 1 : center, 102,
@@ -3727,11 +3742,14 @@ class Workspace {
     place(status, 12, height - 24, width - 24, 22);
     if (TreeView_GetItemHeight(tasks) != px(30)) TreeView_SetItemHeight(tasks, px(30));
     if (static_cast<int>(TreeView_GetIndent(tasks)) != px(16)) TreeView_SetIndent(tasks, px(16));
-    layout_fields();
-    InvalidateRect(dag, nullptr, FALSE);
-    if (resized) InvalidateRect(window, nullptr, FALSE);
+    layout_fields(!resized);
+    if (resized)
+      RedrawWindow(window, nullptr, nullptr,
+                   RDW_INVALIDATE | RDW_ERASE | RDW_FRAME | RDW_ALLCHILDREN | RDW_UPDATENOW);
+    else
+      InvalidateRect(dag, nullptr, FALSE);
   }
-  void layout_general() {
+  void layout_general(bool repaint = true) {
     if (!generalPanel) return;
     RECT r{};
     GetClientRect(generalPanel, &r);
@@ -3740,7 +3758,7 @@ class Workspace {
     generalScroll = std::clamp(generalScroll, 0, std::max(0, 532 - h));
     SCROLLINFO si{sizeof(si), SIF_RANGE | SIF_PAGE | SIF_POS | SIF_DISABLENOSCROLL};
     si.nMax = 531; si.nPage = h; si.nPos = generalScroll;
-    SetScrollInfo(generalPanel, SB_VERT, &si, TRUE);
+    SetScrollInfo(generalPanel, SB_VERT, &si, repaint);
     place_panel(generalPanel, {
       {nameLabel, 14, 10 - generalScroll, w, 22},
       {name, 14, 36 - generalScroll, w, 32},
@@ -3753,7 +3771,7 @@ class Workspace {
       {browse, 14, 322 - generalScroll, w, 32},
       {outputHelp, 14, 362 - generalScroll, w, 42},
       {manageReferences, 14, 428 - generalScroll, w, 34},
-      {referenceHelp, 14, 472 - generalScroll, w, 42}});
+      {referenceHelp, 14, 472 - generalScroll, w, 42}}, repaint);
   }
   void enabled() {
     bool edit = ready && !setupBusy && !setupActionPending && !packBusy && !packActionPending &&
@@ -4329,7 +4347,7 @@ class Workspace {
     layout_fields();
     enabled();
   }
-  void layout_fields() {
+  void layout_fields(bool repaint = true) {
     if (!form)
       return;
     RECT r{};
@@ -4357,7 +4375,7 @@ class Workspace {
     si.nMax = formExtent - 1;
     si.nPage = fh;
     si.nPos = formScroll;
-    SetScrollInfo(form, SB_VERT, &si, TRUE);
+    SetScrollInfo(form, SB_VERT, &si, repaint);
     std::vector<PanelPlacement> positions;
     for (auto &f : fields) {
       int fw_ = fw - 32 - (f.button ? 94 : 0);
@@ -4366,7 +4384,7 @@ class Workspace {
       if (f.button)
         positions.push_back({f.button, fw - 108, f.y - formScroll, 88, 34});
     }
-    place_panel(form, positions);
+    place_panel(form, positions, repaint);
   }
   std::string field_value(const Field &f) const {
     auto type = getstr(f.schema, "type");
@@ -5410,7 +5428,9 @@ class Workspace {
       return 0;
     }
     case WM_SIZE:
-      layout();
+      // A minimized client has no visible layout. Keep the normal dimensions
+      // and panel scroll positions until the restored size is available.
+      if (w != SIZE_MINIMIZED) layout();
       return 0;
     case WM_DPICHANGED:
       dpi = HIWORD(w);

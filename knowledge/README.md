@@ -1,5 +1,15 @@
 # Native Workbench knowledge base
 
+**Active resize correction, 2026-10-10:** the owner requested a fix for the
+remaining Tools-window resize defect: controls can briefly display their previous
+layout and clip the right/bottom edge. Work continues in [draft PR #15](https://github.com/comparativechrono/workbench/pull/15)
+on `fix/native-ui-0.16.1`, starting at
+`93c0a6b1189781fb8df960b025a512ed73461240`. The version remains unpublished
+**0.16.1**. New source, exact archives, passive resize observations and regression
+validation are **pending**; earlier passes do not validate changed bytes.
+Start with the [resize handover](resize-redraw-0.16.1-handover.md).
+Published **0.16.0** and the historical records below remain unchanged.
+
 **Active tester-feedback revision, 2026-10-09:**
 [Draft PR #15](https://github.com/comparativechrono/workbench/pull/15) contains
 unpublished **0.16.1** application source

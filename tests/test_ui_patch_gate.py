@@ -14,6 +14,58 @@ SPEC.loader.exec_module(gate)
 
 
 class UIPatchGateTests(unittest.TestCase):
+    def test_resize_source_witness_requires_distinct_source_pixels(self):
+        self.assertEqual(gate.resize_pixel_state(b'old', b'new', b'old'), 'source-geometry')
+        self.assertEqual(gate.resize_pixel_state(b'new', b'new', b'old'), 'target')
+        self.assertEqual(gate.resize_pixel_state(b'blank', b'new', b'old'), 'other')
+        self.assertEqual(gate.resize_pixel_state(b'unchanged', b'unchanged', b'unchanged'), 'target')
+        self.assertEqual(gate.resize_pixel_state(b'wrong', b'unchanged', b'unchanged'), 'other')
+
+    def test_resize_gate_keeps_pre_compositor_latency_separate_from_asserted_frames(self):
+        good = {'samplingComplete': True, 'targetSeen': True, 'immediateNonTargetFrames': 1,
+                'postCompositorSourceFrames': 0, 'postCompositorNonTargetFrames': 0}
+        gate.require_resize_outcome([good])
+        for change in [{'postCompositorSourceFrames': 1, 'postCompositorNonTargetFrames': 1},
+                       {'postCompositorNonTargetFrames': 1}, {'targetSeen': False},
+                       {'samplingComplete': False}]:
+            with self.subTest(change=change), self.assertRaises(AssertionError):
+                gate.require_resize_outcome([dict(good, **change)])
+
+    def test_resize_negative_control_does_not_turn_unrelated_or_unrecovered_errors_into_passes(self):
+        known = {'samplingComplete': True, 'targetSeen': True,
+                 'postCompositorSourceFrames': 1, 'postCompositorNonTargetFrames': 2}
+        gate.require_resize_outcome([known], True)
+        for rows in [[], [dict(known, samplingComplete=False)], [dict(known, targetSeen=False)],
+                     [dict(known, postCompositorSourceFrames=0)],
+                     [dict(known, postCompositorSourceFrames=0, postCompositorNonTargetFrames=0)]]:
+            with self.subTest(rows=rows), self.assertRaises(AssertionError):
+                gate.require_resize_outcome(rows, True)
+
+    def test_resize_regions_crop_real_rgb_and_ignore_only_unused_fourth_byte(self):
+        raw = b''.join(bytes([i, i + 10, i + 20, 200]) for i in range(12))
+        self.assertEqual(gate.region_bytes(raw, [10, 20, 14, 23], [11, 21, 13, 23]),
+                         b''.join(bytes([i, i + 10, i + 20, 0]) for i in [5, 6, 9, 10]))
+        with self.assertRaises(AssertionError):
+            gate.region_bytes(raw, [10, 20, 14, 23], [9, 21, 13, 23])
+
+    def test_resize_only_cli_requires_archive_and_source_identities_without_updater(self):
+        args = SimpleNamespace(resize_only=True, source_commit='1' * 40,
+                               gate_commit='2' * 40, starter_sha256='a' * 64)
+        gate.validate_identities(args)
+        args.starter_sha256 = gate.BASELINE_SHA
+        with self.assertRaises(AssertionError):
+            gate.validate_identities(args)
+
+    def test_resize_destinations_cannot_replace_immutable_input(self):
+        root = Path.cwd()
+        args = SimpleNamespace(app_root=root / 'app', starter_archive=root / 'input.zip',
+                               report=root / 'evidence' / 'resize.json')
+        gate.validate_resize_destinations(args)
+        for report in [root / 'app' / 'resize.json', root / 'input.zip']:
+            args.report = report
+            with self.assertRaises(AssertionError):
+                gate.validate_resize_destinations(args)
+
     def test_candidate_inventory_growth_requires_matching_verified_transaction_count(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

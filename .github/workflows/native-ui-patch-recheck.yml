@@ -1,14 +1,9 @@
 name: Recheck frozen 0.16.1 tester feedback and native patch
 
 on:
-  push:
-    branches: [fix/native-ui-0.16.1]
-    paths:
-      - 'scripts/check_ui_patch_windows.py'
-      - 'scripts/check_tester_feedback_windows.py'
-      - 'tests/test_ui_patch_gate.py'
-      - 'tests/test_tester_feedback_gate.py'
-      - '.github/workflows/native-ui-patch-recheck.yml'
+  # Historical frozen-archive recipe. A production change needs the candidate
+  # build and its complete native matrix, not a recheck of the old bytes.
+  # Before reuse, explicitly pin this recipe to the intended frozen candidate.
   workflow_dispatch:
 
 permissions:

@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 import ctypes
 from datetime import datetime, timezone
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -27,6 +28,7 @@ from check_references_windows import PrivateHost, require, sha256, write_json
 from check_update_090_windows import read_json, preserved_files, synthetic_reference
 from check_update_0160_windows import local_reference_run
 from check_workspace_ui_windows import NativeUI
+from check_scroll_frames_windows import DisplayFrames, visible_bytes
 from check_deployment_ui_windows import (Keyboard, capture, passed, failed,
     finalize_report, focus_observation, observe_close, tree_hashes,
     tree_difference, verify_extracted, verify_preserved, unique_button,
@@ -46,7 +48,8 @@ LIMITS = [
 def validate_identities(args):
     for name in ('source_commit', 'gate_commit'):
         require(re.fullmatch('[0-9a-f]{40}', getattr(args, name)), 'Exact source/gate commit required.')
-    for name in ('starter_sha256', 'update_sha256'):
+    for name in (('starter_sha256',) if getattr(args, 'resize_only', False)
+                 else ('starter_sha256', 'update_sha256')):
         require(re.fullmatch('[0-9a-f]{64}', getattr(args, name)), 'Exact candidate archive SHA-256 required.')
     require(args.starter_sha256 != BASELINE_SHA, 'Candidate must differ from the published baseline.')
 
@@ -125,6 +128,203 @@ class PatchUI(NativeUI):
             self.initial_work_area = self.work_area()
             return
         super().fit_window(width, height)
+
+
+class ResizeFrames(DisplayFrames):
+    def immediate(self):
+        """First read has neither pacing nor compositor synchronization."""
+        started = time.perf_counter()
+        require(self.ui.gdi.BitBlt(self.memory, 0, 0, self.width, self.height,
+                                  self.dc, self.rectangle[0], self.rectangle[1], 0x00CC0020),
+                'Could not read immediate resize pixels.')
+        require(self.ui.gdi.GdiFlush(), 'Could not finish immediate resize read.')
+        self.last_read = time.perf_counter()
+        return self.last_read, ctypes.string_at(self.pixels, self.size), started
+
+
+def resize_pixel_state(actual, target, source):
+    """A source match is evidence only where source and target visibly differ."""
+    if actual == target:
+        return 'target'
+    if source != target and actual == source:
+        return 'source-geometry'
+    return 'other'
+
+
+def require_resize_outcome(rows, expect_defect=False):
+    """Negative control requires a specific reproduced defect and recovery."""
+    require(rows and all(row['samplingComplete'] and row['targetSeen'] for row in rows),
+            'Resize sampling did not complete with observed target recovery.')
+    stale = sum(row['postCompositorSourceFrames'] for row in rows)
+    wrong = sum(row['postCompositorNonTargetFrames'] for row in rows)
+    if expect_defect:
+        require(stale > 0, 'The exact old-package source-geometry defect was not reproduced.')
+    else:
+        require(wrong == 0, 'Displayed resize regions retained old or incomplete geometry after compositor completion.')
+
+
+def resize_regions(ui, rectangle):
+    """Compare static text and fixed buttons; omit carets, library and status."""
+    left, top, right, bottom = rectangle
+    buttons = {113, 115, 415, 416, 402, 403, 112, 414}
+    result = []
+    for control in ui.controls():
+        if not ui.user.IsWindowVisible(control['hwnd']):
+            continue
+        identity, klass = control['id'], control['class']
+        if not ((klass == 'Static' and identity != 119) or
+                (klass == 'Button' and identity in buttons)):
+            continue
+        a, b, c, d = control['bounds']
+        region = [max(left + 8, a - 1), max(top + 32, b - 1),
+                  min(right - 8, c + 1), min(bottom - 8, d + 1)]
+        if region[2] > region[0] and region[3] > region[1]:
+            result.append({'controlId': identity, 'class': klass, 'rectangle': region})
+    require(len(result) >= 8, 'Too few static/control regions for visible resize evidence.')
+    return result
+
+
+def region_bytes(raw, canvas, rectangle):
+    left, top, right, bottom = canvas
+    a, b, c, d = rectangle
+    require(left <= a < c <= right and top <= b < d <= bottom,
+            'Resize comparison region is outside the captured desktop.')
+    width = right - left
+    spans = [(((y - top) * width + a - left) * 4,
+              ((y - top) * width + c - left) * 4) for y in range(b, d)]
+    return visible_bytes(raw, spans)
+
+
+def resize_scenarios(ui, report, label, mode, *, expect_defect=False):
+    """Actual shrink/grow, with passive references and no corrective repaint."""
+    if mode == 'tool':
+        # Use the same populated, nested native form in the old negative control
+        # and both candidate installations; an empty form is a weaker oracle.
+        ui.set_text(ui.child(102), 'Index a reference')
+        ui.wait('one resize reference-index operation', lambda: len(ui.library().tools()) == 1)
+        ui.click_at(*ui.library().first_tool_point(), expected=ui.child(104))
+        ui.wait('populated resize tool form', lambda:
+                ui.user.IsWindowEnabled(ui.child(113)) and
+                any('Index a reference' in control['text'] for control in ui.controls(ui.child(118))))
+        ui.set_text(ui.child(102), '')
+        ui.wait('resize library filter cleared', lambda: not ui.label(ui.child(102)))
+        Keyboard(ui).key(0x09)  # Move the caret out of the edit before references.
+    area = ui.work_area()
+    require(area[2] - area[0] >= 1024 and area[3] - area[1] >= 728,
+            'Resize regression requires the real 1024 by 728 work area.')
+    canvas = [area[0], area[1], area[0] + 1024, area[1] + 728]
+    ui.mouse(area[0] + 480, area[1] + 12)  # Park outside sampled client regions.
+    stream = ResizeFrames(ui, canvas)
+    group = {'installation': label, 'mode': mode, 'canvas': canvas, 'references': [],
+             'transitions': [], 'method': 'Visible desktop BitBlt only; no PrintWindow or target repaint.',
+             'immediateRead': 'Before any sleep, compositor synchronization, geometry query or file write.',
+             'assertionStarts': 'First passive DwmFlush completion after resize; immediate pre-compositor pixels retained separately.',
+             'excludedRegions': 'Edit/caret interiors, tree, status, mode-button hover/focus and nonclient chrome.',
+             'limit': 'Finite hosted desktop samples; compositor pacing does not flush the target paint queue.'}
+    report.setdefault('temporalResize', []).append(group)
+    references = {}
+
+    def move(size):
+        require(ui.user.MoveWindow(ui.main, area[0], area[1], *size, True),
+                'Native resize request failed.')
+
+    def save(raw, name):
+        frame = stream.save(ui.evidence, name + '.bmp', raw)
+        frame.update(dpi=ui.user.GetDpiForWindow(ui.main), method=group['method'])
+        report['captures'].append(frame)
+        return frame
+
+    try:
+        for size in [(1024, 728), (960, 680)]:
+            move(size)
+            geometry = fixed_layout(ui, mode)
+            require(geometry['windowBounds'] == [area[0], area[1], area[0] + size[0], area[1] + size[1]],
+                    'Actual native window did not reach the exact requested test size.')
+            regions = resize_regions(ui, geometry['windowBounds'])
+            started, same, previous = time.perf_counter(), 0, None
+            while time.perf_counter() - started < 3:
+                _, raw, _ = stream.read()
+                value = tuple(region_bytes(raw, canvas, region['rectangle']) for region in regions)
+                same = same + 1 if value == previous else 0
+                previous = value
+                if same >= 8 and time.perf_counter() - started >= .35:
+                    break
+            require(same >= 8, 'Passive resize reference failed to settle without repaint intervention.')
+            reference = {'requestedSize': list(size), 'geometry': geometry, 'regions': regions,
+                         'stableSamples': same + 1, 'settlingSeconds': time.perf_counter() - started,
+                         'capture': save(raw, '%s-%s-resize-reference-%dx%d' % (label, mode, *size))}
+            group['references'].append(reference)
+            references[size] = {'raw': raw, 'record': reference}
+
+        current = (960, 680)
+        for index, target in enumerate([(1024, 728), (960, 680)] * 3):
+            expected = references[target]
+            regions = expected['record']['regions']
+            comparisons = [(region_bytes(expected['raw'], canvas, region['rectangle']),
+                            region_bytes(references[current]['raw'], canvas, region['rectangle']))
+                           for region in regions]
+            require(sum(a != b for a, b in comparisons) >= 3,
+                    'Resize regions do not distinguish source and target geometry.')
+            native_controls = [(ui.child(control['id']), control['bounds'])
+                               for control in expected['record']['geometry']['controls']
+                               if control['id'] in (113, 115, 415, 416)]
+            row = {'fromSize': list(current), 'toSize': list(target), 'samples': [], 'captures': [],
+                   'samplingComplete': False, 'targetSeen': False,
+                   'postCompositorSourceFrames': 0, 'postCompositorNonTargetFrames': 0,
+                   'immediateNonTargetFrames': 0, 'comparedRegions': len(regions),
+                   'sourceDistinctRegions': sum(a != b for a, b in comparisons)}
+            group['transitions'].append(row)
+            start = time.perf_counter()
+            move(target)
+            returned = time.perf_counter()
+            stamp, raw, read_start = stream.immediate()
+            saved, pending_captures = set(), []
+            for sample_index in range(120):
+                # The very first pixels precede every target geometry query.
+                actual_bounds = ui.bounds(ui.main)
+                require(actual_bounds == expected['record']['geometry']['windowBounds'],
+                        'Visible resize was not associated with the requested native window geometry.')
+                require(all(ui.bounds(handle) == bounds for handle, bounds in native_controls),
+                        'Native footer control geometry did not match the resized target.')
+                states = [resize_pixel_state(region_bytes(raw, canvas, region['rectangle']), a, b)
+                          for region, (a, b) in zip(regions, comparisons)]
+                target_frame = all(state == 'target' for state in states)
+                sample = {'index': sample_index,
+                          'phase': 'immediate-pre-compositor' if sample_index == 0 else 'post-compositor',
+                          'captureStartMsAfterReturn': round((read_start - returned) * 1000, 3),
+                          'captureEndMsAfterReturn': round((stamp - returned) * 1000, 3),
+                          'nativeGeometryMatchesTarget': True,
+                          'targetRegions': states.count('target'),
+                          'sourceGeometryRegions': states.count('source-geometry'),
+                          'otherRegions': states.count('other')}
+                row['samples'].append(sample)
+                row['targetSeen'] |= target_frame and sample_index > 0
+                if sample_index == 0:
+                    row['immediateNonTargetFrames'] += int(not target_frame)
+                else:
+                    row['postCompositorSourceFrames'] += int('source-geometry' in states)
+                    row['postCompositorNonTargetFrames'] += int(not target_frame)
+                digest = hashlib.sha256(raw).hexdigest()
+                if sample_index == 0 or (not target_frame and digest not in saved and len(saved) < 12):
+                    saved.add(digest)
+                    pending_captures.append((raw, '%s-%s-resize-%02d-frame-%03d' % (label, mode, index, sample_index)))
+                if stamp - returned >= .45 and sample_index >= 8:
+                    break
+                stamp, raw, read_start = stream.read()
+            pending_captures.append((raw, '%s-%s-resize-%02d-last' % (label, mode, index)))
+            row['captures'] = [save(pixels, name) for pixels, name in pending_captures]
+            row.update(samplingComplete=True, moveWindowMs=round((returned - start) * 1000, 3),
+                       frames=len(row['samples']), elapsedSeconds=stamp - returned,
+                       maxCaptureGapMs=max(b['captureStartMsAfterReturn'] - a['captureStartMsAfterReturn']
+                                           for a, b in zip(row['samples'], row['samples'][1:])))
+            current = target
+        require_resize_outcome(group['transitions'], expect_defect)
+        passed(report, label + '-' + mode + '-temporal-resize',
+               ('Exact old-package source-geometry defect reproduced and naturally recovered.' if expect_defect else
+                label + ': ' + mode + ' shrink/grow regions match target geometry in all post-compositor samples; immediate frames retained separately.'))
+        return group
+    finally:
+        stream.close()
 
 
 def seed_baseline(base, evidence, external):
@@ -271,6 +471,7 @@ def desktop_scenarios(root, evidence, report, label):
             ui.click_button(button)
             ui.wait(mode + ' controls ready', lambda: ui.user.IsWindowEnabled(ui.child(417)) and
                     (mode != 'workflow' or ui.user.IsWindowVisible(ui.child(420))))
+            resize_scenarios(ui, report, label, mode)
             for width, height in [(960, 680), (1024, 728), (1280, 900)]:
                 ui.fit_window(width, height)
                 row = fixed_layout(ui, mode)
@@ -471,16 +672,73 @@ def run(args, report):
     report['nativeGUIObservationsCompleted'] = not report.get('desktopErrors')
 
 
+def run_resize_only(args, report):
+    require(os.name == 'nt', 'Native Windows is unavailable; this gate cannot pass.')
+    root, evidence = args.app_root.resolve(), args.report.resolve().parent
+    require(Path(sys.executable).resolve() == (root / 'runtime/python/python.exe').resolve(),
+            'Use the exact Starter private interpreter.')
+    require(sha256(args.starter_archive) == args.starter_sha256, 'Wrong exact resize-control Starter archive.')
+    report['archives']['starter'] = {'name': args.starter_archive.name,
+                                    'bytes': args.starter_archive.stat().st_size,
+                                    'sha256': args.starter_sha256}
+    report['archiveFilesVerified'] = verify_extracted(args.starter_archive, root)
+    manifest = read_json(root / 'manifest.json')
+    report['coreFilesVerified'] = verify_candidate_core(root, manifest)
+    packs = tree_hashes(root / 'packs')
+    ui = PatchUI(root, evidence)
+    report['nativeWindowsExecuted'] = report['nativeGUILaunched'] = True
+    try:
+        ui.wait('resize-control desktop ready', lambda:
+                ui.user.IsWindowEnabled(ui.child(410)) and ui.library().tools())
+        setup_window = lambda: next((h for h in ui.windows() if ui.label(h) == 'Tool setup · Native Workbench'), None)
+        ui.wait('pristine resize-control setup', setup_window)
+        setup = setup_window()
+        pointer_click(ui, unique_button(ui, setup, 'Starter'))
+        pointer_click(ui, unique_button(ui, setup, 'Use Workbench'))
+        ui.wait('resize-control setup reply complete', lambda:
+                not setup_window() and ui.user.IsWindowEnabled(ui.child(417)))
+        ui.click_button(410)
+        ui.wait('resize-control Tools ready', lambda: ui.user.IsWindowEnabled(ui.child(417)))
+        resize_scenarios(ui, report, 'previous', 'tool', expect_defect=args.expect_known_resize_defect)
+    finally:
+        ui.close()
+    verify_inventory(root, manifest['files'])
+    require(tree_hashes(root / 'packs') == packs, 'Resize negative control changed installed packs.')
+    report['nativeGUIObservationsCompleted'] = True
+    report['negativeControl'] = bool(args.expect_known_resize_defect)
+    report['observedDpi'] = sorted({row['dpi'] for row in report['captures']})
+
+
+def validate_resize_destinations(args):
+    app, report, archive = args.app_root.resolve(), args.report.resolve(), args.starter_archive.resolve()
+    require(not report.is_relative_to(app) and report != archive,
+            'Resize evidence must be outside the disposable application and immutable archive.')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    for name in ('app-root', 'baseline-archive', 'update-root', 'starter-archive', 'update-archive', 'work', 'report'):
+    for name in ('app-root', 'starter-archive', 'report'):
         parser.add_argument('--' + name, type=Path, required=True)
-    for name in ('source-commit', 'gate-commit', 'starter-sha256', 'update-sha256'):
+    for name in ('baseline-archive', 'update-root', 'update-archive', 'work'):
+        parser.add_argument('--' + name, type=Path)
+    for name in ('source-commit', 'gate-commit', 'starter-sha256'):
         parser.add_argument('--' + name, required=True)
+    parser.add_argument('--update-sha256')
+    parser.add_argument('--resize-only', action='store_true')
+    parser.add_argument('--expect-known-resize-defect', action='store_true')
     args = parser.parse_args()
     args.bundle_root = None
+    require(not args.expect_known_resize_defect or args.resize_only,
+            'Expected defect mode is restricted to the separate resize-only negative control.')
+    if not args.resize_only:
+        require(all(getattr(args, name) is not None for name in
+                    ('baseline_archive', 'update_root', 'update_archive', 'work', 'update_sha256')),
+                'Full gate requires baseline, updater, work and update identity arguments.')
     validate_identities(args)
-    validate_destinations(args)
+    if args.resize_only:
+        validate_resize_destinations(args)
+    else:
+        validate_destinations(args)
     args.report.parent.mkdir(parents=True, exist_ok=True)
     report = {'schema': 1, 'kind': 'native-ui-patch', 'appVersion': TARGET_VERSION, 'baselineVersion': '0.16.0',
               'sourceCommit': args.source_commit, 'gateCommit': args.gate_commit, 'gateSha256': sha256(__file__),
@@ -489,7 +747,7 @@ def main():
               'nativeWindowsExecuted': False, 'nativeGUILaunched': False, 'nativeGUIValidated': False,
               'nativeGUIObservationsCompleted': False, 'success': False}
     try:
-        run(args, report)
+        (run_resize_only if args.resize_only else run)(args, report)
     except Exception as error:
         report['failure'] = str(error)
         report['traceback'] = traceback.format_exc()
@@ -498,6 +756,10 @@ def main():
     finally:
         report['finishedUtc'] = utc()
         finalize_report(report)
+        if args.expect_known_resize_defect:
+            report['kind'] = 'native-ui-resize-negative-control'
+            report['negativeControlValidated'] = report['success']
+            report['nativeGUIValidated'] = False  # Reproducing old failure is not an application pass.
         write_json(args.report, report)
     print(json.dumps({'success': report['success'], 'passed': report['passed'], 'failed': report['failed'],
                       'report': str(args.report)}), flush=True)

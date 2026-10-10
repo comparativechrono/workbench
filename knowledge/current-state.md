@@ -1,5 +1,25 @@
 # Current project state
 
+## Active development: Tools resize correction, 2026-10-10
+
+The owner requested a fix for the remaining visual defect while resizing Tools:
+controls can display their previous layout and clip the right/bottom edge even
+after their native bounds have changed. The [resize handover](resize-redraw-0.16.1-handover.md) owns
+this bounded follow-up. It starts at `93c0a6b1189781fb8df960b025a512ed73461240`
+on `fix/native-ui-0.16.1` in [draft PR #15](https://github.com/comparativechrono/workbench/pull/15),
+still based on `feature/deployment-acceptance` at
+`f74d90229be6a78d6ad0c0076c54c04bb7e7cae2`.
+
+The candidate remains unpublished **0.16.1**. Implementation and new validation
+are in progress; a new application-source identity and archive hashes are not
+yet recorded. Required evidence includes a passive old-package resize comparison on a fresh
+ordinary-path installation, then corrected-package captures on fresh and upgraded
+installations in ordinary and spaced paths, relevant source checks, existing
+native regressions, exact archive/source correspondence and screenshot review. The old observation had corrected itself by the first later
+sample at about 0.30–0.32 seconds; that interval is not an exact defect duration.
+Prior passes below remain evidence only for their named archives.
+No merge or release is part of this follow-up; published **0.16.0** is unchanged.
+
 ## Active development: tester-feedback revision of unpublished 0.16.1
 
 Snapshot: **2026-10-09**. [Draft PR #15](https://github.com/comparativechrono/workbench/pull/15)

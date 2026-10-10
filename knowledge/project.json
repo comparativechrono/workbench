@@ -3,7 +3,7 @@
   "document_kind": "project-knowledge-index",
   "project": "Native Workbench",
   "repository": "https://github.com/comparativechrono/workbench",
-  "reviewed_on": "2026-10-09",
+  "reviewed_on": "2026-10-10",
   "source_baseline_commit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
   "format": {
     "prose": "UTF-8 Markdown",
@@ -173,7 +173,8 @@
     "tester_feedback_0_16_1_independent_validation": "evidence/tester-feedback-0.16.1-independent-validation-2026-10-09.json",
     "tester_feedback_0_16_1_original_report_manifest": "evidence/tester-feedback-0.16.1-raw-index-2026-10-09.json",
     "tester_feedback_0_16_1_feedback_visual_ordinary": "evidence/tester-feedback-0.16.1-feedback-visual-ordinary-2026-10-09.json",
-    "tester_feedback_0_16_1_feedback_visual_spaces": "evidence/tester-feedback-0.16.1-feedback-visual-spaces-2026-10-09.json"
+    "tester_feedback_0_16_1_feedback_visual_spaces": "evidence/tester-feedback-0.16.1-feedback-visual-spaces-2026-10-09.json",
+    "resize_redraw_0_16_1_handover": "resize-redraw-0.16.1-handover.md"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -2085,5 +2086,45 @@
       "scope": "The original companion observations, including failed Results Escape checks, remain unchanged.",
       "active_handover": "tester-feedback-0.16.1-handover.md"
     }
+  },
+  "active_development_record": "resize_redraw_0_16_1_development",
+  "resize_redraw_0_16_1_development": {
+    "recorded_on": "2026-10-10",
+    "kind": "tools-resize-correction",
+    "application_version": "0.16.1",
+    "branch": "fix/native-ui-0.16.1",
+    "starting_commit": "93c0a6b1189781fb8df960b025a512ed73461240",
+    "base_branch": "feature/deployment-acceptance",
+    "base_commit": "f74d90229be6a78d6ad0c0076c54c04bb7e7cae2",
+    "pull_request": "https://github.com/comparativechrono/workbench/pull/15",
+    "pull_request_state": "draft",
+    "status": "implementation and exact-candidate validation pending",
+    "authorization": "Fix the remaining Tools-window resize defect; unpublished review candidate only.",
+    "release_authorized": false,
+    "released": false,
+    "published_baseline": "0.16.0",
+    "published_assets_changed": false,
+    "application_source_commit": null,
+    "archives": [],
+    "handover": "resize-redraw-0.16.1-handover.md",
+    "prior_handover": "tester-feedback-0.16.1-handover.md",
+    "prior_application_source_commit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+    "prior_starter_sha256": "1291f93b5ece3c4da34eb2f2e29fccc83b6d87ec5fb73abf28bfd9cc8f155b75",
+    "prior_observation": "Immediate Tools resize frames displayed the previous layout/right-bottom clipping although native bounds were already correct; the visible image was corrected by the first later sample about 0.30-0.32 seconds, not an exact duration measurement.",
+    "verification_progress": {
+      "source_tests": "pending",
+      "strict_native_builds": "pending",
+      "archive_source_audit": "pending",
+      "passive_old_new_resize_comparison": "pending: old package on fresh ordinary path; corrected package on fresh/upgraded ordinary/spaced paths",
+      "existing_native_regressions": "pending on new archives",
+      "screenshot_review": "pending"
+    },
+    "known_limits": [
+      "Previous passes apply only to previous bytes.",
+      "Finite sampling cannot establish zero flicker.",
+      "Representative-PC/high-DPI/multiple-monitor/physical-trackpad/managed-machine acceptance remains outstanding.",
+      "Signing/IT approval, scientific Linux CWL and SDK/build recovery remain separate; benchmarking is managed separately."
+    ],
+    "next_action": "Complete and freeze the bounded resize fix, build matching archives, validate them and update the draft review without merging or releasing."
   }
 }

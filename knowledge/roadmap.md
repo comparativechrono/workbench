@@ -1,5 +1,24 @@
 # Development roadmap
 
+## Active set: Tools resize correction, 2026-10-10
+
+The owner accepted fixing the remaining Tools resize defect with “Okay. Let's
+fix that.” Scope is prompt layout/repaint of the existing controls during resize,
+while preserving the Run/category fixes, separate Methods, Samples editor and
+existing workflows. Continue the unpublished **0.16.1** candidate in
+[draft PR #15](https://github.com/comparativechrono/workbench/pull/15); do not
+merge or publish a release.
+
+Implementation and exact-candidate validation are **pending**. Completion needs
+a passive old-package comparison in a fresh ordinary path and corrected-package
+resize observations on fresh and upgraded installations in ordinary and spaced
+paths, relevant source tests, existing native regressions, source/archive hashes
+and screenshot review. Record the negative control and any
+unreproduced behavior honestly; finite sampled frames do not prove zero flicker.
+The [resize handover](resize-redraw-0.16.1-handover.md) records the starting
+commit, prior artifact identity and evidence boundary. Benchmarking and the
+remaining external acceptance/deployment work stay separate.
+
 ## Active set: tester-feedback revision of unpublished 0.16.1
 
 The [draft PR #15](https://github.com/comparativechrono/workbench/pull/15)

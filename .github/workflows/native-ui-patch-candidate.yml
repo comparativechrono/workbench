@@ -1,4 +1,4 @@
-name: Native Windows 0.16.1 tester feedback candidate
+name: Native Windows 0.16.1 resize redraw candidate
 
 on:
   push:
@@ -16,6 +16,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 concurrency:
   group: native-ui-patch-${{ github.ref }}
@@ -185,6 +186,14 @@ jobs:
         with:
           name: ui-patch-candidate-${{ github.sha }}
           path: ${{ runner.temp }}/patch-candidate
+      - name: Retrieve the previously tested Starter for the resize negative control
+        if: matrix.folder == 'ordinary'
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: ui-patch-starter-73778e00461e2b83c07b9ea97df2b9c5d4b6317d
+          run-id: 37997370988
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/previous-resize-candidate
       - name: Verify the frozen artifacts and extract independent test installations
         id: prepare
         shell: pwsh
@@ -209,6 +218,19 @@ jobs:
             Expand-Archive $starter (Join-Path $case $gate)
           }
           Expand-Archive $updater (Join-Path $case 'updater')
+      - name: Require reproduction of the previous Tools resize defect
+        if: always() && !cancelled() && steps.prepare.outcome == 'success' && matrix.folder == 'ordinary'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $oldArchive = Join-Path $env:RUNNER_TEMP 'previous-resize-candidate/native-workbench-0.16.1-starter-windows.zip'
+          $oldSha = '1291f93b5ece3c4da34eb2f2e29fccc83b6d87ec5fb73abf28bfd9cc8f155b75'
+          if ((Get-FileHash $oldArchive -Algorithm SHA256).Hash -ne $oldSha) { throw 'Resize negative-control archive identity mismatch.' }
+          $oldRoot = Join-Path $env:RUNNER_TEMP 'resize-negative-control'
+          Expand-Archive $oldArchive $oldRoot
+          $app = Join-Path $oldRoot 'native-workbench'
+          & (Join-Path $app 'runtime/python/python.exe') -I -B scripts/check_ui_patch_windows.py --resize-only --expect-known-resize-defect --app-root $app --starter-archive $oldArchive --starter-sha256 $oldSha --source-commit '73778e00461e2b83c07b9ea97df2b9c5d4b6317d' --gate-commit $env:GITHUB_SHA --report "$env:RUNNER_TEMP/patch-evidence/resize-negative/native-resize-negative.json"
+          if ($LASTEXITCODE -ne 0) { throw 'Previous resize defect was not established; retain this result and do not claim the before/after comparison passed.' }
       - name: Native updater picker, preserved state, keyboard focus and visible work-area bounds
         if: always() && !cancelled() && steps.prepare.outcome == 'success'
         shell: pwsh
