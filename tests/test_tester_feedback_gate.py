@@ -158,6 +158,64 @@ class FeedbackGateTests(unittest.TestCase):
         ui.user.IsWindowEnabled = lambda h: False
         self.assertFalse(gate.pointer_state(ui, 7)['ready'])
 
+    def caption_ui(self):
+        foreground, clicks = [99], []
+        def pid(handle, pointer):
+            pointer._obj.value = 42 if handle == 7 else 99
+        def mouse(x, y, flags=0):
+            clicks.append((x, y, flags))
+            if flags == 4:
+                foreground[0] = 7
+        def wait(phase, predicate, **kwargs):
+            self.assertTrue(predicate(), phase)
+        ui = SimpleNamespace(main=7, process=SimpleNamespace(pid=42),
+            work_area=lambda: [0, 0, 1000, 800], mouse=mouse, wait=wait,
+            top_windows=lambda: [{'handle': 7}], send=lambda *args: 2,
+            user=SimpleNamespace(WindowFromPoint=lambda point: 7,
+                GetWindowThreadProcessId=pid, GetForegroundWindow=lambda: foreground[0],
+                IsWindowVisible=lambda handle: True, IsWindowEnabled=lambda handle: True))
+        return ui, foreground, clicks
+
+    def test_caption_activation_rejects_foreign_overlay_and_caption_buttons(self):
+        ui, _, _ = self.caption_ui()
+        self.assertTrue(gate.caption_pointer_state(ui, [250, 15])['ready'])
+        ui.user.WindowFromPoint = lambda point: 99
+        ui.send = lambda *args: self.fail('Do not hit-test behind a foreign overlay.')
+        self.assertFalse(gate.caption_pointer_state(ui, [250, 15])['ready'])
+        ui.user.WindowFromPoint = lambda point: 7
+        ui.send = lambda *args: 20  # HTCLOSE is not a safe activation point.
+        self.assertFalse(gate.caption_pointer_state(ui, [250, 15])['ready'])
+        ui.send = lambda *args: 2
+        ui.user.IsWindowEnabled = lambda handle: False
+        self.assertFalse(gate.caption_pointer_state(ui, [250, 15])['ready'])
+
+    def test_modal_activation_uses_real_caption_input_and_records_ownership(self):
+        ui, foreground, clicks = self.caption_ui()
+        report = {}
+        with patch.object(gate, 'main_caption_rectangle', return_value=[0, 0, 1000, 30]), \
+                patch.object(gate, 'visible_capture'), patch.object(gate.time, 'sleep'):
+            gate.activate_main_after_modal(ui, report, 'Samples closed')
+            self.assertEqual(clicks, [(250, 15, 0), (250, 15, 2), (250, 15, 4)])
+            row = report['modalActivationSetup'][0]
+            self.assertEqual((row['foregroundBefore'], row['foregroundAfter']), (99, 7))
+            self.assertTrue(row['confirmation']['ready'])
+            self.assertTrue(row['clicked'])
+            gate.activate_main_after_modal(ui, report, 'already foreground')
+            self.assertFalse(report['modalActivationSetup'][1]['clicked'])
+            self.assertEqual(len(clicks), 3)
+
+    def test_modal_activation_fails_without_exposed_caption_or_with_owned_dialog(self):
+        ui, _, clicks = self.caption_ui()
+        ui.user.WindowFromPoint = lambda point: 99
+        with patch.object(gate, 'main_caption_rectangle', return_value=[0, 0, 1000, 30]), \
+                patch.object(gate, 'visible_capture'), patch.object(gate.time, 'sleep'):
+            with self.assertRaisesRegex(AssertionError, 'No exposed owned main caption'):
+                gate.activate_main_after_modal(ui, {}, 'Samples closed')
+            ui.top_windows = lambda: [{'handle': 7}, {'handle': 12}]
+            with self.assertRaisesRegex(AssertionError, 'Another owned window'):
+                gate.activate_main_after_modal(ui, {}, 'Samples closed')
+        self.assertEqual(clicks, [])
+
 
 if __name__ == '__main__':
     unittest.main()

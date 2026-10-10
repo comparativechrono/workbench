@@ -408,8 +408,84 @@ def samples_blank_access(ui, report):
     ui.wait('unchanged new table cancelled', lambda: not window(ui, editor_title))
     button(ui, owner, 813)
     ui.wait('blank Samples closed', lambda: not window(ui, title))
+    activate_main_after_modal(ui, report, 'blank Samples closed')
     passed(report, 'samples-without-workflow',
            'Samples and New table work from a fresh empty workspace; cancelling the untouched draft returns without creating an analysis.')
+
+
+def caption_pointer_state(ui, point):
+    """Require the actual exposed main caption, never a covered target."""
+    x, y = point
+    hit = ui.user.WindowFromPoint(wintypes.POINT(x, y))
+    owner = wintypes.DWORD()
+    ui.user.GetWindowThreadProcessId(hit, ctypes.byref(owner))
+    left, top, right, bottom = ui.work_area()
+    available = bool(ui.user.IsWindowVisible(ui.main) and ui.user.IsWindowEnabled(ui.main))
+    exposed = hit == ui.main and owner.value == ui.process.pid and left <= x < right and top <= y < bottom
+    # WM_NCHITTEST returns HTCAPTION=2 only for the draggable title area;
+    # system menu, close/minimize/maximize buttons and borders are not accepted.
+    hit_code = ui.send(ui.main, 0x0084, 0, (x & 0xffff) | ((y & 0xffff) << 16)) if exposed else None
+    return {'point': point, 'hitWindow': hit, 'hitProcess': owner.value,
+            'available': available, 'exposed': exposed, 'hitCode': hit_code,
+            'ready': available and exposed and hit_code == 2}
+
+
+def main_caption_rectangle(ui):
+    class TitleBarInfo(ctypes.Structure):
+        _fields_ = [('cbSize', wintypes.DWORD), ('rcTitleBar', wintypes.RECT),
+                    ('rgstate', wintypes.DWORD * 6)]
+    ui.user.GetTitleBarInfo.argtypes = [wintypes.HWND, ctypes.POINTER(TitleBarInfo)]
+    ui.user.GetTitleBarInfo.restype = wintypes.BOOL
+    info = TitleBarInfo()
+    info.cbSize = ctypes.sizeof(info)
+    require(ui.user.GetTitleBarInfo(ui.main, ctypes.byref(info)), 'Cannot inspect the actual main caption.')
+    box = info.rcTitleBar
+    return [box.left, box.top, box.right, box.bottom]
+
+
+def activate_main_after_modal(ui, report, phase):
+    """One ordinary caption click at a known modal-close setup boundary.
+
+    A hosted runner console can become foreground while the dialog is being
+    destroyed. Recover only through an exposed owned caption; do not suppress
+    foreign windows, inject focus or repair measured rendering scenarios.
+    """
+    ui.wait('main owner enabled after modal close', lambda:
+            ui.user.IsWindowVisible(ui.main) and ui.user.IsWindowEnabled(ui.main), seconds=5)
+    time.sleep(.15)  # Let the native modal destruction/owner activation finish.
+    row = {'phase': phase, 'foregroundBefore': ui.user.GetForegroundWindow(),
+           'mainWindow': ui.main, 'clicked': False, 'candidates': []}
+    report.setdefault('modalActivationSetup', []).append(row)
+    if row['foregroundBefore'] == ui.main:
+        row['foregroundAfter'] = row['foregroundBefore']
+        return
+    require(not any(entry['handle'] != ui.main for entry in ui.top_windows()),
+            'Another owned window is still open after the expected modal close.')
+    visible_capture(ui, report, 'modal-activation-before')
+    left, top, right, bottom = main_caption_rectangle(ui)
+    row['captionBounds'] = [left, top, right, bottom]
+    require(left < right and top < bottom, 'The native main caption has no usable area.')
+    for fraction in (.25, .5, .75):
+        point = [round(left + (right - left) * fraction), (top + bottom) // 2]
+        state = caption_pointer_state(ui, point)
+        row['candidates'].append(state)
+        if not state['ready']:
+            continue
+        # Recheck immediately before genuine SendInput, without click_at's
+        # SetForegroundWindow precondition that the runner refused earlier.
+        confirmed = caption_pointer_state(ui, point)
+        row['confirmation'] = confirmed
+        require(confirmed['ready'], 'The exposed main caption changed before input.')
+        ui.mouse(*point)
+        ui.mouse(*point, 2)
+        ui.mouse(*point, 4)
+        row.update(clicked=True, clickPoint=point)
+        ui.wait('real caption click activates main owner', lambda:
+                ui.user.GetForegroundWindow() == ui.main, seconds=5)
+        row['foregroundAfter'] = ui.user.GetForegroundWindow()
+        visible_capture(ui, report, 'modal-activation-after')
+        return
+    raise AssertionError('No exposed owned main caption is available for ordinary activation.')
 
 
 def tree_snapshot(tree, item):
