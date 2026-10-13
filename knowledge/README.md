@@ -1,5 +1,21 @@
 # Native Workbench knowledge base
 
+**Integration update, 2026-10-13:** the owner authorized checking compatibility
+and merging the completed PR stack. PRs [#18](https://github.com/comparativechrono/workbench/pull/18),
+[#17](https://github.com/comparativechrono/workbench/pull/17),
+[#15](https://github.com/comparativechrono/workbench/pull/15) and
+[#14](https://github.com/comparativechrono/workbench/pull/14) are now merged,
+carrying the already merged #16 work into `main` at
+`9c9cdeacf35d1bf3aa60277f0fb05d5af41c6254`. Every merge preserved the reviewed
+source tree exactly. Five pack archives load together with eight scientific
+workflows and unchanged version pins; 30 focused source checks passed.
+
+Published **0.16.0**, candidate archives and historical validation remain unchanged.
+This is source integration, not a release or deployment-acceptance claim. No open
+PRs remain. The [integration receipt](evidence/stack-integration-2026-10-13.json)
+records merge identities, compatibility checks and outstanding work. Earlier
+review/draft statements below are dated history superseded only for merge status.
+
 **Primer3/PLINK2 ready for draft review, 2026-10-13:** independent **1.0.0**
 packs are complete in [draft PR #18](https://github.com/comparativechrono/workbench/pull/18),
 stacked on unchanged Kalign draft PR #17. Tested source

@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "recordedOn": "2026-10-13",
+  "kind": "owner-authorized-source-stack-integration",
+  "originalMain": "9ac6f906e3acd88e743ed87c76cbf99c9087636d",
+  "reviewedHead": "8ec79cd0d5272edc4596341456114649019a4ca3",
+  "reviewedTree": "be386799379aa412eaa39f72043be863edf01649",
+  "mainMergeCommit": "9c9cdeacf35d1bf3aa60277f0fb05d5af41c6254",
+  "mergedTree": "be386799379aa412eaa39f72043be863edf01649",
+  "mergeStrategy": "Merge commits, leaf upward through the existing stack; no retarget, squash or source conflict resolution.",
+  "allPreMergeBasesWereAncestors": true,
+  "allMergeTreesMatchedReviewedTree": true,
+  "openPullRequestsAfter": [],
+  "merges": [
+    {
+      "number": 18,
+      "url": "https://github.com/comparativechrono/workbench/pull/18",
+      "baseBranch": "feature/kalign-pack",
+      "headBranch": "feature/primer3-plink2-packs",
+      "headAtMerge": "8ec79cd0d5272edc4596341456114649019a4ca3",
+      "mergeCommit": "7ac19cbdbf3363bf6c3b20e3f0306bbd42b3fb7d",
+      "mergedAt": "2026-10-13T13:47:35Z"
+    },
+    {
+      "number": 17,
+      "url": "https://github.com/comparativechrono/workbench/pull/17",
+      "baseBranch": "fix/native-ui-0.16.1",
+      "headBranch": "feature/kalign-pack",
+      "headAtMerge": "7ac19cbdbf3363bf6c3b20e3f0306bbd42b3fb7d",
+      "mergeCommit": "0ee341a6b4bbf55a6fff6f81008fffe5323ab3a1",
+      "mergedAt": "2026-10-13T13:48:10Z"
+    },
+    {
+      "number": 15,
+      "url": "https://github.com/comparativechrono/workbench/pull/15",
+      "baseBranch": "feature/deployment-acceptance",
+      "headBranch": "fix/native-ui-0.16.1",
+      "headAtMerge": "0ee341a6b4bbf55a6fff6f81008fffe5323ab3a1",
+      "mergeCommit": "d7e99d8459895f25a2ff9d1ba3b7e1fa783e9ea3",
+      "mergedAt": "2026-10-13T13:48:45Z"
+    },
+    {
+      "number": 14,
+      "url": "https://github.com/comparativechrono/workbench/pull/14",
+      "baseBranch": "main",
+      "headBranch": "feature/deployment-acceptance",
+      "headAtMerge": "d7e99d8459895f25a2ff9d1ba3b7e1fa783e9ea3",
+      "mergeCommit": "9c9cdeacf35d1bf3aa60277f0fb05d5af41c6254",
+      "mergedAt": "2026-10-13T13:49:26Z"
+    }
+  ],
+  "sourceChecks": {
+    "passed": 30,
+    "skipped": 0,
+    "scope": "Six pack source-contract tests, 14 pack-check tests, 10 exact-version tests; Linux only."
+  },
+  "combinedArchiveCatalogue": {
+    "receipt": "merge-pack-compatibility-2026-10-13.json",
+    "sha256": "f3128eadcfb2ddd2ad092c5aea73ea26c3c8186b239eeacc55da7b693f369230",
+    "packs": 5,
+    "scienceWorkflows": 8,
+    "builtinWorkflows": 1,
+    "errors": [],
+    "allPriorPinsResolveUnchanged": true
+  },
+  "readinessReview": {
+    "mandatoryMergeGateBlocksFound": false,
+    "mainProtected": false,
+    "repositoryRulesets": [],
+    "changesRequestedReviews": 0,
+    "historicalFailures": "PR14's frozen 0.16.0 Results Escape/narrow-display failures and PR15's historical resize negative-control/foreground observations remain recorded. Later separately versioned UI fixes retain their exact candidate evidence; the historical reports are not relabelled.",
+    "nativeEvidence": "Existing exact native archive reports retained. No native Windows suite or packaged application was rebuilt/re-executed for this tree-preserving source merge."
+  },
+  "publishedRelease": {
+    "tag": "app-v0.16.0",
+    "id": 408075619,
+    "assets": 13,
+    "identityAndAssetMetadataUnchanged": true
+  },
+  "newReleasePublished": false,
+  "cataloguePublished": false,
+  "sourceBranchesDeleted": false,
+  "limits": [
+    "Representative-PC, broader display and institutional acceptance remain outstanding.",
+    "Signing, scientific Linux CWL and release/updater validation remain separate; benchmarking is managed separately.",
+    "Native Results does not yet parse the new pack-specific measurement JSON files.",
+    "Compatibility receipt is Linux archive/catalogue evidence, not a new all-packs native execution claim."
+  ],
+  "maintenanceNote": "A subsequent knowledge-only commit records integration status; exact packaged code and prior evidence identities remain unchanged."
+}

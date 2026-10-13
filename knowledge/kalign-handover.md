@@ -1,5 +1,12 @@
 # Kalign optional pack
 
+**Merge update, 2026-10-13:** this pack stage and its dependent PR stack are now
+merged into `main` at `9c9cdeacf35d1bf3aa60277f0fb05d5af41c6254` on the owner's
+instruction. Source trees and candidate archives are unchanged by the merges.
+The [integration receipt](evidence/stack-integration-2026-10-13.json) supersedes
+only the draft/unmerged status in the original review handover below. No release
+or catalogue publication occurred; validation and acceptance limits still apply.
+
 Date: 2026-10-13. Status: **ready for unpublished draft review** in
 [PR #17](https://github.com/comparativechrono/workbench/pull/17).
 

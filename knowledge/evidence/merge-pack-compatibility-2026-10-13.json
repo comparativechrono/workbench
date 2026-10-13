@@ -1,0 +1,122 @@
+{
+  "sourceCommit": "8ec79cd0d5272edc4596341456114649019a4ca3",
+  "kind": "Linux exact-archive validation and combined catalogue compatibility; native importer/execution not rerun",
+  "packs": [
+    {
+      "id": "prodigal",
+      "archiveSha256": "321a8717b2e8841f7caf2c13ac2837638c9cc10000aaeb0919463c70cb07dad4",
+      "manifestSha256": "731ddc3f415e6727e2b4d8bee73103de7c4835ae6e9a66be9b5d67e77cdfd757",
+      "packApi": 1,
+      "minAppVersion": "0.16.0"
+    },
+    {
+      "id": "fasttree",
+      "archiveSha256": "4525aa8001b7b190eecbee5a164bb9586ce9f78d8672635df25ae4e462165c20",
+      "manifestSha256": "83e45c8c7222bea53e4023861450aa79db0a2f003f7e2a82f6c6362923bcdc55",
+      "packApi": 1,
+      "minAppVersion": "0.16.0"
+    },
+    {
+      "id": "kalign",
+      "archiveSha256": "f4c2ecb232673f5fff538155d3554712a52f3b5edc938dc04ad3202e9f2bf173",
+      "manifestSha256": "89779c41ac6b6c60eaacc3e477d20a10daedd7bd79ddf9654002d81a5e5054c7",
+      "packApi": 1,
+      "minAppVersion": "0.16.0"
+    },
+    {
+      "id": "primer3",
+      "archiveSha256": "f8e39d2fad068c77913f1daef711101dd3f941f1fe4b9e6a23f398db2e745d82",
+      "manifestSha256": "f79505a97a8affdfaec5d89e77ea4906d1c67f6e9b63cdfeb0baf00e7da6f7ba",
+      "packApi": 1,
+      "minAppVersion": "0.16.0"
+    },
+    {
+      "id": "plink2",
+      "archiveSha256": "34c2f382e72f34c78098b6222f0ac3d09f562bf0b74ccf5d08ae546c3736bdce",
+      "manifestSha256": "ff6fe0b2033cd50095ea5b98e652f4138f064580778806f9634ccdc71a40fdc8",
+      "packApi": 1,
+      "minAppVersion": "0.16.0"
+    }
+  ],
+  "errors": [],
+  "workflowPins": [
+    {
+      "workflow": "prodigal/predict-genome",
+      "pin": {
+        "packId": "prodigal",
+        "packVersion": "1.0.0",
+        "manifestSha256": "731ddc3f415e6727e2b4d8bee73103de7c4835ae6e9a66be9b5d67e77cdfd757"
+      }
+    },
+    {
+      "workflow": "prodigal/predict-metagenome",
+      "pin": {
+        "packId": "prodigal",
+        "packVersion": "1.0.0",
+        "manifestSha256": "731ddc3f415e6727e2b4d8bee73103de7c4835ae6e9a66be9b5d67e77cdfd757"
+      }
+    },
+    {
+      "workflow": "fasttree/infer-nucleotide",
+      "pin": {
+        "packId": "fasttree",
+        "packVersion": "1.0.0",
+        "manifestSha256": "83e45c8c7222bea53e4023861450aa79db0a2f003f7e2a82f6c6362923bcdc55"
+      }
+    },
+    {
+      "workflow": "fasttree/infer-protein",
+      "pin": {
+        "packId": "fasttree",
+        "packVersion": "1.0.0",
+        "manifestSha256": "83e45c8c7222bea53e4023861450aa79db0a2f003f7e2a82f6c6362923bcdc55"
+      }
+    },
+    {
+      "workflow": "kalign/align-nucleotide",
+      "pin": {
+        "packId": "kalign",
+        "packVersion": "1.0.0",
+        "manifestSha256": "89779c41ac6b6c60eaacc3e477d20a10daedd7bd79ddf9654002d81a5e5054c7"
+      }
+    },
+    {
+      "workflow": "kalign/align-protein",
+      "pin": {
+        "packId": "kalign",
+        "packVersion": "1.0.0",
+        "manifestSha256": "89779c41ac6b6c60eaacc3e477d20a10daedd7bd79ddf9654002d81a5e5054c7"
+      }
+    },
+    {
+      "workflow": "primer3/design-pcr",
+      "pin": {
+        "packId": "primer3",
+        "packVersion": "1.0.0",
+        "manifestSha256": "f79505a97a8affdfaec5d89e77ea4906d1c67f6e9b63cdfeb0baf00e7da6f7ba"
+      }
+    },
+    {
+      "workflow": "plink2/summarize-vcf",
+      "pin": {
+        "packId": "plink2",
+        "packVersion": "1.0.0",
+        "manifestSha256": "ff6fe0b2033cd50095ea5b98e652f4138f064580778806f9634ccdc71a40fdc8"
+      }
+    }
+  ],
+  "workflowIds": [
+    "builtin/report",
+    "fasttree/infer-nucleotide",
+    "fasttree/infer-protein",
+    "kalign/align-nucleotide",
+    "kalign/align-protein",
+    "plink2/summarize-vcf",
+    "primer3/design-pcr",
+    "prodigal/predict-genome",
+    "prodigal/predict-metagenome"
+  ],
+  "allPriorPinsResolveUnchanged": true,
+  "finalPackCount": 5,
+  "finalWorkflowCountIncludingBuiltin": 9
+}
