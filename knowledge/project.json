@@ -185,7 +185,8 @@
     "kalign_handover": "kalign-handover.md",
     "kalign_pack_guide": "../docs/KALIGN-PACK.md",
     "prodigal_fasttree_merge": "evidence/prodigal-fasttree-merge-2026-10-13.json",
-    "kalign_final_review": "evidence/kalign-1.0.0-final-review-2026-10-13.json"
+    "kalign_final_review": "evidence/kalign-1.0.0-final-review-2026-10-13.json",
+    "primer3_plink2_handover": "primer3-plink2-handover.md"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -1198,37 +1199,22 @@
   },
   "active_development": {
     "recorded_on": "2026-10-13",
-    "kind": "optional-pack",
-    "branch": "feature/kalign-pack",
-    "base_branch": "fix/native-ui-0.16.1",
-    "base_commit": "8addaa1278c535e4931eb0b2b85b8f47b51ddd66",
+    "kind": "optional-pack-batch",
+    "branch": "feature/primer3-plink2-packs",
+    "base_branch": "feature/kalign-pack",
+    "base_commit": "8c0321d0cf04751a7c921d42098bed13ebb7b11a",
     "packs": {
-      "kalign": "1.0.0"
+      "primer3": "1.0.0",
+      "plink2": "1.0.0"
     },
-    "tool_version": "3.5.1-workbench1",
-    "status": "implementation, exact Windows validation, source audit and screenshot review complete; ready for unpublished draft review",
+    "status": "implementation in progress; exact native validation pending",
     "application_changed": false,
     "published_application": "0.16.0",
     "unpublished_application_candidate": "0.16.1",
     "released": false,
     "release_authorized": false,
     "catalogue_changed": false,
-    "handover": "kalign-handover.md",
-    "source_commit": "8149bdc02a2104e97ea6512ae0a8bc76c8defc32",
-    "source_tree": "27ecf6181bef93217a4218335311b4e2ca93fa58",
-    "pull_request": "https://github.com/comparativechrono/workbench/pull/17",
-    "pull_request_state": "draft",
-    "ready_for_draft_review": true,
-    "run": 38396201555,
-    "initial_failed_run": 38395587781,
-    "evidence": "evidence/kalign-1.0.0-final-review-2026-10-13.json",
-    "artifact_url": "https://github.com/comparativechrono/workbench/actions/runs/38396201555/artifacts/11812411631",
-    "source_tests_passed": 94,
-    "source_tests_skipped": 1,
-    "native_selected_tests_per_path": 17,
-    "native_selected_skips": 0,
-    "actual_display_images_reviewed": 20,
-    "measurement_display_limit": "Native Results displays status and provenance; Kalign JSON measurements remain output files."
+    "handover": "primer3-plink2-handover.md"
   },
   "ui_patch_0_16_1_development": {
     "recorded_on": "2026-10-09",
@@ -1975,7 +1961,7 @@
       "active_handover": "tester-feedback-0.16.1-handover.md"
     }
   },
-  "active_development_record": "kalign_development",
+  "active_development_record": "primer3_plink2_development",
   "resize_redraw_0_16_1_development": {
     "recorded_on": "2026-10-10",
     "kind": "tools-resize-correction",
@@ -2659,5 +2645,24 @@
     "native_selected_skips": 0,
     "actual_display_images_reviewed": 20,
     "measurement_display_limit": "Native Results displays status and provenance; Kalign JSON measurements remain output files."
+  },
+  "primer3_plink2_development": {
+    "recorded_on": "2026-10-13",
+    "kind": "optional-pack-batch",
+    "branch": "feature/primer3-plink2-packs",
+    "base_branch": "feature/kalign-pack",
+    "base_commit": "8c0321d0cf04751a7c921d42098bed13ebb7b11a",
+    "packs": {
+      "primer3": "1.0.0",
+      "plink2": "1.0.0"
+    },
+    "status": "implementation in progress; exact native validation pending",
+    "application_changed": false,
+    "published_application": "0.16.0",
+    "unpublished_application_candidate": "0.16.1",
+    "released": false,
+    "release_authorized": false,
+    "catalogue_changed": false,
+    "handover": "primer3-plink2-handover.md"
   }
 }

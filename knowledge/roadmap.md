@@ -1,6 +1,16 @@
 # Development roadmap
 
-## Active set: Kalign optional pack, 2026-10-13
+## Active set: Primer3 and PLINK2 optional packs, 2026-10-13
+
+The owner requested this next stage after the reviewed Kalign candidate. The
+initial scope is standard Primer3 PCR primer-pair design and PLINK2 hardcall
+allele/genotype counts and missingness summaries, with independent 1.0.0 packs.
+PCA, association testing and additional Primer3 modes remain later interfaces.
+Development is stacked on the unchanged Kalign review branch; PR #17 remains
+unmerged. See the [batch handover](primer3-plink2-handover.md). Native build,
+scientific contracts and exact Windows validation are in progress.
+
+## Previous set: Kalign optional pack, 2026-10-13
 
 The owner authorized merging PR #16 and starting Kalign. The first batch is
 merged into `fix/native-ui-0.16.1` at `8addaa1278c535e4931eb0b2b85b8f47b51ddd66`;
@@ -37,8 +47,8 @@ Cutadapt (pack `trimming`), HISAT2, mosdepth, featureCounts, kallisto, LoFreq an
 MUSCLE. Existing classic BWA is not bwa-mem2; existing kallisto bulk operations
 do not implement bustools or single-cell BUS processing.
 
-Kalign is ready for unpublished draft review; no further pack stage has started.
-Primer3 and PLINK2 need separately bounded operations; bustools and StringTie
+Kalign is ready for unpublished draft review. Primer3 and PLINK2 are now the
+active bounded-operation stage; bustools and StringTie
 need workflow integration; HMMER, bwa-mem2, Salmon and MACS3 need dedicated
 portability work. Strelka2 needs an initial feasibility and version-specific
 licensing assessment. This is a provisional engineering order, not a schedule.

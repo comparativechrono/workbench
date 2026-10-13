@@ -1,6 +1,14 @@
 # Current project state
 
-## Active development: Kalign pack, 2026-10-13
+## Active development: Primer3 and PLINK2, 2026-10-13
+
+The next independent pack batch is being implemented on
+`feature/primer3-plink2-packs`, based on Kalign delivery
+`8c0321d0cf04751a7c921d42098bed13ebb7b11a`. Scope and pending validation are in
+the [batch handover](primer3-plink2-handover.md). Published application and earlier
+pack/candidate bytes remain unchanged; Kalign PR #17 has not been merged.
+
+## Previous development: Kalign pack, 2026-10-13
 
 Kalign **1.0.0** is ready for unpublished review in
 [draft PR #17](https://github.com/comparativechrono/workbench/pull/17), based on

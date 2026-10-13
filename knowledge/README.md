@@ -1,5 +1,11 @@
 # Native Workbench knowledge base
 
+**Active Primer3/PLINK2 batch, 2026-10-13:** implementation is in progress on
+`feature/primer3-plink2-packs`, stacked on unchanged Kalign draft PR #17. The
+initial interfaces cover paired PCR primer design and VCF hardcall counts/
+missingness. See the [batch handover](primer3-plink2-handover.md). Exact Windows
+and screenshot evidence remains pending; no merge or publication is included.
+
 **Kalign ready for draft review, 2026-10-13:** optional **1.0.0** is implemented in
 [draft PR #17](https://github.com/comparativechrono/workbench/pull/17), based on
 merged PR #16. Exact source `8149bdc02a2104e97ea6512ae0a8bc76c8defc32` passed
