@@ -1,0 +1,51 @@
+--- a/gclib/GBase.cpp
++++ b/gclib/GBase.cpp
+@@ -30,15 +30,13 @@
+ // Error routine (prints error message and exits!)
+ void GError(const char* format,...){
+   #ifdef _WIN32
+-    char msg[4096];
++    // Native Workbench CLI boundary: report fatal errors without a modal dialog.
++    // Scientific processing is unchanged; preserve the upstream exit status.
+     va_list arguments;
+     va_start(arguments,format);
+-    _vsnprintf(msg, 4095, format, arguments);
+-    vfprintf(stderr, format, arguments); // if a console is available
+-    msg[4095]=0;
++    vfprintf(stderr,format,arguments);
+     va_end(arguments);
+-    OutputDebugString(msg);
+-    MessageBox(NULL,msg,NULL,MB_OK|MB_ICONEXCLAMATION|MB_APPLMODAL);
++    fflush(stderr);
+   #else
+     va_list arguments;
+     va_start(arguments,format);
+@@ -55,15 +53,12 @@
+ // Warning routine (just print message without exiting)
+ void GMessage(const char* format,...){
+   #ifdef _WIN32
+-    char msg[4096];
++    // Native Workbench CLI boundary: consume diagnostic arguments once.
+     va_list arguments;
+     va_start(arguments,format);
+-    vfprintf(stderr, format , arguments); // if a console is available
+-    _vsnprintf(msg, 4095, format, arguments);
+-    msg[4095]=0;
++    vfprintf(stderr,format,arguments);
+     va_end(arguments);
+     fflush(stderr);
+-    //OutputDebugString(msg);
+   #else
+     va_list arguments;
+     va_start(arguments,format);
+--- a/stringtie.cpp
++++ b/stringtie.cpp
+@@ -11,7 +11,7 @@
+ #include "proc_mem.h"
+ #endif
+ 
+-#define VERSION "3.0.3"
++#define VERSION "3.0.3-workbench1"
+ 
+ //#define DEBUGPRINT 1
+ 
