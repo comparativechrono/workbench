@@ -1211,7 +1211,7 @@
       "bustools": "1.0.0",
       "stringtie": "1.0.0"
     },
-    "status": "implementation complete; local source/science/native cross-build checks pass; exact Windows and visual validation pending",
+    "status": "native validation found a StringTie CLI portability defect; narrow correction implemented; replacement exact Windows and visual validation pending",
     "application_changed": false,
     "published_application": "0.16.0",
     "unpublished_application_candidate": "0.16.1",
@@ -1222,8 +1222,10 @@
     "handover": "bustools-stringtie-handover.md",
     "tool_versions": {
       "bustools": "0.45.1-workbench1",
-      "stringtie": "3.0.3"
-    }
+      "stringtie": "3.0.3-workbench1"
+    },
+    "pull_request": "https://github.com/comparativechrono/workbench/pull/19",
+    "pull_request_state": "draft"
   },
   "ui_patch_0_16_1_development": {
     "recorded_on": "2026-10-09",
@@ -2730,7 +2732,7 @@
       "bustools": "1.0.0",
       "stringtie": "1.0.0"
     },
-    "status": "implementation complete; local source/science/native cross-build checks pass; exact Windows and visual validation pending",
+    "status": "native validation found a StringTie CLI portability defect; narrow correction implemented; replacement exact Windows and visual validation pending",
     "application_changed": false,
     "published_application": "0.16.0",
     "unpublished_application_candidate": "0.16.1",
@@ -2741,7 +2743,9 @@
     "handover": "bustools-stringtie-handover.md",
     "tool_versions": {
       "bustools": "0.45.1-workbench1",
-      "stringtie": "3.0.3"
-    }
+      "stringtie": "3.0.3-workbench1"
+    },
+    "pull_request": "https://github.com/comparativechrono/workbench/pull/19",
+    "pull_request_state": "draft"
   }
 }

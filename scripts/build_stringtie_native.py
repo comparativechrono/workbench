@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Build pinned, unmodified StringTie 3.0.3 and native BAM/GTF boundary guard."""
-import argparse, concurrent.futures, hashlib, json, os, re, shutil, struct, subprocess, tarfile, urllib.request
+"""Build pinned StringTie 3.0.3 with a narrow nonmodal Windows CLI boundary."""
+import argparse, concurrent.futures, difflib, hashlib, json, os, re, shutil, struct, subprocess, tarfile, urllib.request
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-VERSION=UPSTREAM_VERSION='3.0.3'
+VERSION='3.0.3-workbench1'
+UPSTREAM_VERSION='3.0.3'
+PATCH=ROOT/'tools/stringtie/workbench1.patch'
 SOURCE_COMMIT='3436ad6dfd0ffc806a94086cf747ac6ff2b0dc19'
 SOURCE_NAME='stringtie-3.0.3.tar.gz'
 SOURCE_SHA256='52a5d94b0e85404d740d2c7a0c7cc698d373a1b8888e9a2a395ae294032d95c0'
@@ -21,6 +23,35 @@ def extract(path,dest):
             if p.is_absolute() or '..' in p.parts or not(m.isfile() or m.isdir()):raise ValueError('Unsafe source member '+m.name)
             if m.isfile():
                 target=dest/p;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(t.extractfile(m).read())
+def apply_compatibility(source):
+    """Only Windows fatal-error presentation and the attested version banner."""
+    originals={name:(source/name).read_text() for name in ('gclib/GBase.cpp','stringtie.cpp')}
+    base=originals['gclib/GBase.cpp'];start=base.index('  #ifdef _WIN32\n',base.index('void GError('));end=base.index('  #else\n',start)
+    replacement="""  #ifdef _WIN32
+    // Native Workbench CLI boundary: report fatal errors without a modal dialog.
+    // Scientific processing is unchanged; preserve the upstream exit status.
+    va_list arguments;
+    va_start(arguments,format);
+    vfprintf(stderr,format,arguments);
+    va_end(arguments);
+    fflush(stderr);
+"""
+    base=base[:start]+replacement+base[end:]
+    start=base.index('  #ifdef _WIN32\n',base.index('void GMessage('));end=base.index('  #else\n',start)
+    replacement="""  #ifdef _WIN32
+    // Native Workbench CLI boundary: consume diagnostic arguments once.
+    va_list arguments;
+    va_start(arguments,format);
+    vfprintf(stderr,format,arguments);
+    va_end(arguments);
+    fflush(stderr);
+"""
+    base=base[:start]+replacement+base[end:]
+    modified={'gclib/GBase.cpp':base,'stringtie.cpp':originals['stringtie.cpp'].replace('#define VERSION "3.0.3"','#define VERSION "3.0.3-workbench1"')}
+    patch=''.join(''.join(difflib.unified_diff(originals[name].splitlines(True),modified[name].splitlines(True),fromfile='a/'+name,tofile='b/'+name)) for name in originals)
+    if patch!=PATCH.read_text():raise ValueError('Compatibility changes differ from the reviewed exact patch')
+    for name,text in modified.items():(source/name).write_text(text)
+    return sha(PATCH)
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--cache',type=Path,default=ROOT/'build/stringtie-cache');p.add_argument('--build',type=Path);p.add_argument('--toolchain',type=Path,default=ROOT/'build/toolchains'/TC_NAME);p.add_argument('--fetch',action='store_true');p.add_argument('--linux',action='store_true');p.add_argument('--upstream',action='store_true');p.add_argument('--jobs',type=int,default=2);a=p.parse_args()
     if a.upstream and not a.linux:raise ValueError('Pristine upstream reference requires --linux')
@@ -33,7 +64,8 @@ def main():
     if source_root.exists():shutil.rmtree(source_root)
     for name in SOURCES:extract(cache/name,source_root)
     src=source_root/('stringtie-'+SOURCE_COMMIT);ht=src/'htslib';z=source_root/'zlib-1.3.2';tre=source_root/'tre-0.9.0';config=out/'config';config.mkdir(exist_ok=True)
-    # Generated configure equivalents; no upstream source file is edited. Optional
+    patch_hash=None if a.upstream else apply_compatibility(src)
+    # Generated configure equivalents. Optional
     # remote plugins and non-zlib CRAM codecs are outside the BAM-only operation.
     (config/'config.h').write_text(('#define HAVE_WINDOWS_H 1\n#define HAVE_IO_H 1\n' if not a.linux else '#define HAVE_DRAND48 1\n')+'#define HAVE_FSEEKO 1\n#define HAVE_FTELLO 1\n#define HAVE_GMTIME_R 1\n#define HAVE_DECL___CPUID_COUNT 1\n#define HAVE_DECL___GET_CPUID_MAX 1\n')
     (config/'version.h').write_text('#define HTS_VERSION_TEXT "1.21-stringtie-bundled"\n#define HTSCODECS_VERSION_TEXT "1.4.0-stringtie-bundled"\n')
@@ -59,7 +91,7 @@ def main():
     guard=ROOT/'tools/stringtie/guard.cpp'
     if not a.upstream:
         helper=out/('stringtie-guard'+suffix);cmd=[cxx,'-O2','-std=c++17','-Wall','-Wextra','-Werror','-march=x86-64','-mno-avx','-mno-avx2',*includes,str(guard),*[str(obj) for (f,(obj,_)) in zip(files,built) if f in hfiles+zfiles+tfiles],*link,'-o',str(helper)];subprocess.run(cmd,env=env,check=True);commands.append(cmd);binaries.append(helper)
-    record={'schema':1,'tool':'stringtie','version':VERSION,'upstreamVersion':UPSTREAM_VERSION,'sourceCommit':SOURCE_COMMIT,'upstreamCommit':SOURCE_COMMIT,'sources':{k:{'url':v[0],'sha256':v[1]} for k,v in SOURCES.items()},'platform':'linux-x86_64' if a.linux else 'windows-x86_64','cpuBaseline':'x86-64; no AVX/AVX2 or SSE4 requirement','threadsExposed':1,'upstreamScientificAlgorithmsUnmodified':True,'upstreamSourceUnmodified':True,'executionTestsPerformedByBuild':False,'builderSha256':sha(Path(__file__)),'compiler':subprocess.check_output([cc,'--version'],env=env,text=True).splitlines()[0],'compilerSha256':sha(cc),'commands':commands,'files':{},'generatedConfiguration':{f.relative_to(out).as_posix():sha(f) for folder in [config,treconfig] for f in folder.iterdir()},'buildRoute':'Direct upstream object list, native GThreads Windows route, forced standard stdint.h include, BAM-only HTSlib zlib configuration, TRE POSIX regex symbols; no upstream source patches'}
+    record={'schema':1,'tool':'stringtie','version':UPSTREAM_VERSION if a.upstream else VERSION,'upstreamVersion':UPSTREAM_VERSION,'sourceCommit':SOURCE_COMMIT,'upstreamCommit':SOURCE_COMMIT,'sources':{k:{'url':v[0],'sha256':v[1]} for k,v in SOURCES.items()},'platform':'linux-x86_64' if a.linux else 'windows-x86_64','cpuBaseline':'x86-64; no AVX/AVX2 or SSE4 requirement','threadsExposed':1,'upstreamScientificAlgorithmsUnmodified':True,'upstreamSourceUnmodified':a.upstream,'patchSha256':patch_hash,'executionTestsPerformedByBuild':False,'builderSha256':sha(Path(__file__)),'compiler':subprocess.check_output([cc,'--version'],env=env,text=True).splitlines()[0],'compilerSha256':sha(cc),'commands':commands,'files':{},'generatedConfiguration':{f.relative_to(out).as_posix():sha(f) for folder in [config,treconfig] for f in folder.iterdir()},'buildRoute':'Direct upstream object list, native GThreads Windows route, forced standard stdint.h include, BAM-only HTSlib zlib configuration, TRE POSIX regex symbols; '+('pristine source reference, no compatibility patch' if a.upstream else 'workbench1.patch makes Windows GError nonmodal, consumes GError/GMessage diagnostic arguments once, and attests the build version; scientific algorithms unchanged')}
     if not a.upstream:record.update(guardSourceSha256=sha(guard),guardCompilerSha256=sha(cxx))
     for f in binaries:
         info={'bytes':f.stat().st_size,'sha256':sha(f)}

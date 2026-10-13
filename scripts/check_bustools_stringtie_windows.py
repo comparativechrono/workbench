@@ -18,6 +18,7 @@ from pathlib import Path
 import platform
 import subprocess
 import sys
+import threading
 import traceback
 import zipfile
 
@@ -138,6 +139,55 @@ def candidate_check_catalog(catalog, identity, version):
     return selected, dependency
 
 
+def timed_installation_checks(root, catalog, results, backend, runner, report, *, seconds=120):
+    """Cancel the real native backend at a bounded self-check deadline.
+
+    The cancellation event reaches ordinary engine/bridge cancellation. Closing
+    the backend also closes the bridge's kill-on-close Job Object, so a modal
+    child cannot indefinitely prevent the check report from being preserved.
+    """
+    cancel, expired = threading.Event(), threading.Event()
+    deadline_errors = []
+    results.mkdir(parents=True, exist_ok=True)
+    events = results / 'installation-events.jsonl'
+    log_lock = threading.Lock()
+
+    def event(item):
+        with log_lock, events.open('a', encoding='utf-8', newline='\n') as stream:
+            stream.write(json.dumps(item, ensure_ascii=False) + '\n')
+
+    def deadline():
+        expired.set()
+        cancel.set()
+        try:
+            event({'type': 'error', 'message': 'Native StringTie installation checks exceeded the validation deadline.',
+                   'deadlineSeconds': seconds})
+        except Exception as exc:
+            deadline_errors.append('Could not retain deadline event: ' + str(exc))
+        try:
+            backend.shutdown()
+        except Exception as exc:
+            deadline_errors.append(str(exc))
+
+    timer = threading.Timer(seconds, deadline)
+    timer.daemon = True
+    timer.start()
+    try:
+        checks = runner(root, catalog, results, backend=backend, cancel=cancel, event=event)
+        report['scientificChecks'] = checks
+    finally:
+        timer.cancel()
+        timer.join(timeout=10)
+        report['scientificDeadline'] = {'seconds': seconds, 'exceeded': expired.is_set(),
+                                        'cancellationRequested': cancel.is_set(), 'backendShutdownErrors': deadline_errors}
+        report['retainedCheckResults'] = str(results)
+        report['retainedCheckEventLog'] = str(events)
+    # A deadline callback may already have started when cancellation occurs.
+    # Test the final state only after joining it; a late success cannot hide it.
+    require(not expired.is_set(), 'Native StringTie installation checks exceeded the ' + str(seconds) + '-second deadline.')
+    return checks
+
+
 def stringtie_installation_check(root, archive, report_path):
     """Native exact import and target checks with frozen Starter preflight intact."""
     from catalog import load_catalog, load_pack
@@ -177,11 +227,11 @@ def stringtie_installation_check(root, archive, report_path):
         require(expected_checks, 'Target has no declared scientific checks.')
         report['preflightDependency'] = {**SAMTOOLS, 'pin': pin_for(dependency),
                                          'scope': 'Existing Starter descriptor retained for ordinary alignment inspection; dependency has no selected self-checks.'}
-        results = root / 'results'
-        results.mkdir(exist_ok=True)
+        # Keep partial plans, child logs and check reports inside the uploaded
+        # evidence directory even when validation fails or the deadline fires.
+        results = report_path.parent / 'stringtie-installation-results'
         backend = ObservedBackend(root)
-        checks = run_pack_checks(root, selected, results, backend=backend)
-        report['scientificChecks'] = checks
+        checks = timed_installation_checks(root, selected, results, backend, run_pack_checks, report)
         require(checks.get('success') and checks.get('nativeWindowsExecuted') and
                 report['nativeWindowsExecuted'] and checks.get('passed') == len(expected_checks) and
                 {row['id'] for row in checks['checks']} == expected_checks and

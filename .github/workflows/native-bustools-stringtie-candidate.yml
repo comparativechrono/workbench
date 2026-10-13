@@ -29,7 +29,7 @@ permissions:
   actions: read
 
 concurrency:
-  group: bustools-stringtie-${{ github.event.pull_request.head.ref || github.ref }}
+  group: bustools-stringtie-${{ github.event.pull_request.head.ref || github.ref }}-${{ github.sha }}
   cancel-in-progress: false
 
 jobs:

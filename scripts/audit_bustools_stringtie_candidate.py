@@ -97,8 +97,10 @@ UPSTREAM_IDENTITIES = {
     'stringtie': ('3.0.3', '3436ad6dfd0ffc806a94086cf747ac6ff2b0dc19'),
 }
 # Review the exact changed source boundary and all compiled component notices.
-PATCH_PATHS = {'bustools': {'src/Common.hpp', 'src/roaring.h', 'src/roaring.c'}}
-BUSTOOLS_PATCH_SHA256 = '889fea401c52db2b748c1d5645dc63ccae8844c74cbdfef0af153d1580d261f4'
+PATCH_PATHS = {'bustools': {'src/Common.hpp', 'src/roaring.h', 'src/roaring.c'},
+               'stringtie': {'gclib/GBase.cpp', 'stringtie.cpp'}}
+PATCH_SHA256 = {'bustools': '889fea401c52db2b748c1d5645dc63ccae8844c74cbdfef0af153d1580d261f4',
+                'stringtie': '253fb7891604783bbe87e60947435dd68f447d7cb6449d9f074b5969441b2d42'}
 NOTICE_PATHS = {
     'bustools': {
         'bustools-0.45.1.tar.gz': {
@@ -186,7 +188,7 @@ def source_correspondence(identity, pack, originals):
         'pack/PACK-README.md': 'docs/' + identity.upper() + '-PACK.md',
         'pack/licenses/Workbench-LICENSE.txt': 'LICENSE',
     }
-    for name in ('record_reference.py', 'upstream_windows_compat.h'):
+    for name in ('record_reference.py', 'upstream_windows_compat.h', 'workbench1.patch'):
         original = 'tools/' + identity + '/' + name
         if original in originals:
             paths['pack/licenses/' + name] = original
@@ -215,7 +217,7 @@ def source_correspondence(identity, pack, originals):
     if identity in PATCH_PATHS:
         patch = pack.read('pack/licenses/workbench1.patch')
         require(build['patchSha256'] == digest(patch), 'Build compatibility patch identity differs')
-        require(digest(patch) == BUSTOOLS_PATCH_SHA256, 'Pinned compatibility patch changed')
+        require(digest(patch) == PATCH_SHA256[identity], 'Pinned compatibility patch changed')
         old_paths = re.findall(rb'^--- a/(.+)$', patch, re.M)
         new_paths = re.findall(rb'^\+\+\+ b/(.+)$', patch, re.M)
         require(PATCH_PATHS[identity] and set(old_paths) == set(new_paths) ==

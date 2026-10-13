@@ -77,5 +77,33 @@
     "Corrected HTSCodecs generated version to pinned-source1.4.0.",
     "Deterministic stored-DEFLATE BGZF fixtures preserve exact bytes across Python/zlib versions."
   ],
-  "status": "Corrected before hosted candidate; original failed runs are not relabelled as passes. Raw development reports are local build diagnostics; sanitized identities/findings retained here."
+  "status": "Corrected before hosted candidate; original failed runs are not relabelled as passes. Raw development reports are local build diagnostics; sanitized identities/findings retained here.",
+  "subsequentStringTieWorkbench1Checks": {
+    "initial": {
+      "file": "stringtie-source-workbench1-diagnostic-assertion-failure.json",
+      "sha256": "1133ed4bed8d62abacfcc7e96d31a8573cd45077d1b720210b56d9450710234a",
+      "testsRun": 19,
+      "failures": 1,
+      "errors": 0,
+      "skipped": [],
+      "success": false,
+      "testSourceSha256": "c493765608fbcc949e5840ce9fab2bfe341e030857dfa4cbb216c21c430aed7e",
+      "guardExecutableSha256": "fc300470bf9f0046ab75eec5f098f9f6ca514ce9efb68d8f8c74a32b0e2da591",
+      "scientificBinarySha256": "e5deb7a0590f3dba25776573bf5dd3047b7680a264c0004dafaf2ed0985ba6bf"
+    },
+    "cause": "Diagnostic assertion expected Error: but the unchanged upstream fatal message begins Error creating. It exited with the required code1; assertion text was corrected.",
+    "final": {
+      "file": "stringtie-source-workbench1-tests.json",
+      "sha256": "bee93ea479d0eb9fa9e9fced1f44d89edbcd60c23401189530de2f978a0f920f",
+      "testsRun": 19,
+      "failures": 0,
+      "errors": 0,
+      "skipped": [],
+      "success": true,
+      "testSourceSha256": "954cdd9e5a12e2402dbe595b97950ae753338dc2f7eca49c372fb656ee2c5d80",
+      "guardExecutableSha256": "fc300470bf9f0046ab75eec5f098f9f6ca514ce9efb68d8f8c74a32b0e2da591",
+      "scientificBinarySha256": "e5deb7a0590f3dba25776573bf5dd3047b7680a264c0004dafaf2ed0985ba6bf"
+    },
+    "note": "This local assertion failure is separate from the stalled Windows69a9ec0 attempt."
+  }
 }

@@ -1,6 +1,6 @@
 # StringTie pack 1.0.0
 
-This optional native Windows x64 pack uses pinned **StringTie 3.0.3**.
+This optional native Windows x64 pack uses pinned **StringTie 3.0.3-workbench1** (upstream 3.0.3).
 Two operations accept one coordinate-sorted short-read RNA BAM and a matching
 uncompressed transcript GTF:
 
@@ -93,8 +93,12 @@ python tests/test_stringtie_pack.py --reference-binary build/stringtie-reference
 
 Build source is commit `3436ad6dfd0ffc806a94086cf747ac6ff2b0dc19`; SHA-pinned
 StringTie, zlib 1.3.2 and TRE 0.9.0 archives, build scripts, generated configuration,
-compiler/runtime notices and full constituent source are retained. Scientific
-source is unmodified. Native Windows uses upstream GThreads/HTSlib Windows
+compiler/runtime notices and full constituent source are retained. Scientific algorithms are unchanged. The retained `workbench1.patch` replaces
+Windows fatal-error modal dialogs with stderr reporting and the same exit status 1,
+makes both GError and GMessage consume diagnostic arguments once, and identifies
+the modified build in its version banner. The native adapter
+passes forward-slash paths to the upstream CLI so output directories are parsed
+correctly on Windows. Native Windows uses upstream GThreads/HTSlib Windows
 paths, an explicit standard stdint include and TRE POSIXregex symbols. Only
 zlib/BAM is exposed; remote plugins and optional non-zlib CRAM codecs are disabled.
 The executable is baseline x64 with an 8 MiB stack and system/UCRT dependencies.

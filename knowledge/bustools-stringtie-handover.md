@@ -66,7 +66,9 @@ updater validation remain separate. Existing passes do not validate this set.
 
 The initial interfaces are implemented as separate packs: bustools
 `count-bus` using upstream **0.45.1-workbench1**, and StringTie
-`assemble-guided` / `estimate-reference` using unmodified upstream **3.0.3**.
+`assemble-guided` / `estimate-reference` using **3.0.3-workbench1** with the
+reviewed native CLI changes described below. The assembly and estimation
+algorithms remain upstream 3.0.3.
 The frozen application and all existing pack code remain unchanged.
 
 Local Linux checks include independent known-answer fixtures, fresh pinned
@@ -98,3 +100,23 @@ StringTie setup guidance describes that existing application prerequisite;
 scientific executables and alignment preflight are unchanged. The failed attempt
 is preserved in the evidence directory and does not count as a successful
 Windows result. Corrected exact candidate validation remains pending.
+
+## Second Windows attempt: CLI portability correction
+
+Source `69a9ec0d09ef94076fbe4ba0f59fd89d2a604bd4`, run
+https://github.com/comparativechrono/workbench/actions/runs/38413969992,
+rebuilt successfully and passed all hosted source suites plus downloaded exact
+archive/source correspondence. Both native scientific jobs then stalled; no
+completed native or GUI pass is established for these bytes.
+
+Independent pinned-source inspection identified a native CLI portability defect:
+StringTie splits output paths only on `/`, while the guard supplied native
+backslash paths. A resulting file-open failure can enter upstream Windows
+`GError`, which blocks in `MessageBox` before returning failure. This is a
+source-supported diagnosis; no retained native error report yet confirms the
+specific triggering message in the stalled jobs. The correction normalizes
+child argv paths and makes fatal/warning diagnostics console-only with valid
+variadic handling. The tool is explicitly marked **3.0.3-workbench1**, with
+retained patches and no assembly/estimation algorithm changes. Exact new Windows
+validation is required. The checker also gains a bounded cancellation deadline
+and retains partial plans, child logs and check reports on failure.

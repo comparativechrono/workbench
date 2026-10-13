@@ -174,6 +174,49 @@ class BustoolsStringTieEvidenceContracts(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'Exact Starter SAMtools .* absent or changed'):
                     gate.candidate_check_catalog(catalog, 'stringtie', '1.0.0')
 
+    def test_installation_deadline_cancels_backend_and_preserves_partial_failure(self):
+        backend = mock.Mock()
+        report = {}
+        results = self.root / 'check evidence with spaces'
+        def blocked_runner(root, catalog, folder, *, backend, cancel, event):
+            event({'type': 'log', 'message': 'Child started; waiting for cancellation.'})
+            (folder / 'partial-child.log').write_text('retained child stderr\n')
+            self.assertTrue(cancel.wait(1), 'Deadline did not deliver the ordinary cancellation event.')
+            return {'success': True, 'cancelled': True, 'checks': [{'status': 'failed', 'message': 'cancelled'}]}
+        with self.assertRaisesRegex(ValueError, 'exceeded the .* deadline'):
+            gate.timed_installation_checks(self.root, {}, results, backend, blocked_runner, report, seconds=.02)
+        backend.shutdown.assert_called_once()
+        self.assertTrue(report['scientificDeadline']['exceeded'])
+        self.assertTrue(report['scientificDeadline']['cancellationRequested'])
+        self.assertTrue(report['scientificChecks']['cancelled'])
+        self.assertEqual((results / 'partial-child.log').read_text(), 'retained child stderr\n')
+        self.assertIn('validation deadline', (results / 'installation-events.jsonl').read_text())
+
+    def test_installation_timer_is_cancelled_after_runner_failure(self):
+        backend = mock.Mock()
+        report = {}
+        with mock.patch.object(gate.threading, 'Timer') as timer:
+            with self.assertRaisesRegex(RuntimeError, 'early failure'):
+                gate.timed_installation_checks(self.root, {}, self.root / 'early-failure', backend,
+                    mock.Mock(side_effect=RuntimeError('early failure')), report)
+            timer.return_value.start.assert_called_once()
+            timer.return_value.cancel.assert_called_once()
+        backend.shutdown.assert_not_called()
+        self.assertFalse(report['scientificDeadline']['exceeded'])
+
+    def test_deadline_starting_during_timer_cleanup_cannot_be_reported_as_success(self):
+        report, backend = {}, mock.Mock()
+        with mock.patch.object(gate.threading, 'Timer') as timer:
+            # Reproduce the boundary where the runner has just returned but a
+            # deadline callback starts before cancel() can prevent it.
+            timer.return_value.cancel.side_effect = lambda: timer.call_args.args[1]()
+            with self.assertRaisesRegex(ValueError, 'exceeded the .* deadline'):
+                gate.timed_installation_checks(self.root, {}, self.root / 'deadline-race', backend,
+                    mock.Mock(return_value={'success': True}), report)
+            timer.return_value.join.assert_called_once()
+        backend.shutdown.assert_called_once()
+        self.assertTrue(report['scientificDeadline']['exceeded'])
+
     @staticmethod
     def correspondence_fixture(identity):
         paths = {
@@ -197,6 +240,8 @@ class BustoolsStringTieEvidenceContracts(unittest.TestCase):
                          for path in sorted(audit.PATCH_PATHS.get(identity, set())))
         if patch:
             retained['pack/licenses/workbench1.patch'] = patch
+            if identity == 'stringtie':
+                originals['tools/stringtie/workbench1.patch'] = patch
         retained['pack/licenses/compiler-LICENSE.TXT'] = b'compiler notice fixture'
         build = {'platform': 'windows-x86_64', 'executionTestsPerformedByBuild': False,
                  'version': version + ('-workbench1' if identity in audit.PATCH_PATHS else ''), 'upstreamVersion': version, 'sourceCommit': commit,
@@ -255,7 +300,7 @@ class BustoolsStringTieEvidenceContracts(unittest.TestCase):
         pack.namelist.side_effect = lambda: list(retained)
         # Replace only known test archive pins, so all byte/provenance checks run
         # over a tiny self-contained fixture rather than downloaded sources.
-        with mock.patch.dict(audit.UPSTREAM_PINS, {identity: pins}), mock.patch.object(audit, 'BUSTOOLS_PATCH_SHA256', build['_fixtureReviewedPatchSha256']):
+        with mock.patch.dict(audit.UPSTREAM_PINS, {identity: pins}), mock.patch.dict(audit.PATCH_SHA256, {identity: build['_fixtureReviewedPatchSha256']}):
             return audit.source_correspondence(identity, pack, originals)
 
     def test_compiled_guard_and_recipe_must_match_the_committed_sources(self):
@@ -301,7 +346,7 @@ class BustoolsStringTieEvidenceContracts(unittest.TestCase):
                 self.correspondence(identity, originals, retained, build, pins)
                 retained['pack/licenses/workbench1.patch'] = retained.get('pack/licenses/workbench1.patch', b'') + b'--- a/science.cpp\n+++ b/science.cpp\n'
                 build['patchSha256'] = audit.digest(retained['pack/licenses/workbench1.patch'])
-                with self.assertRaisesRegex(ValueError, '(Pinned|Unreviewed) compatibility patch'):
+                with self.assertRaisesRegex(ValueError, '(Pinned|Unreviewed) compatibility patch|retained source differs from Git'):
                     self.correspondence(identity, originals, retained, build, pins)
 
     def test_upstream_notices_must_match_the_pinned_source_archive(self):
