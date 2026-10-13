@@ -34,12 +34,11 @@ def fixtures(destination):
             rows.append((f"sample_{number}", "".join(sequence)))
         headers = {name: f"{name} synthetic {datatype} training sequence {index}"
                    for index, (name, _) in enumerate(rows, 1)}
-        (destination / f"{datatype}.fa").write_text(
+        (destination / f"{datatype}.fa").write_bytes(
             "".join(f">{headers[name]}\n{sequence.replace('-', '')}\n"
-                    for name, sequence in rows), encoding="ascii", newline="\n")
-        (destination / f"{datatype}-truth.afa").write_text(
-            "".join(f">{headers[name]}\n{sequence}\n" for name, sequence in rows),
-            encoding="ascii", newline="\n")
+                    for name, sequence in rows).encode("utf-8"))
+        (destination / f"{datatype}-truth.afa").write_bytes(
+            "".join(f">{headers[name]}\n{sequence}\n" for name, sequence in rows).encode("utf-8"))
         cases[datatype] = {
             "sequenceIds": [name for name, _ in rows],
             "headers": headers,
@@ -58,7 +57,8 @@ def fixtures(destination):
         "cases": cases,
         "scope": "Small synthetic known-indel homology and residue preservation; no real-data accuracy, phylogenetic inference, time/memory prediction or QC pass threshold.",
     }
-    (destination / "truth.json").write_text(json.dumps(truth, indent=2) + "\n", encoding="utf-8")
+    # Canonical UTF-8/LF bytes on every host, including Windows text-mode defaults.
+    (destination / "truth.json").write_bytes((json.dumps(truth, indent=2) + "\n").encode("utf-8"))
     return truth
 
 
