@@ -46,6 +46,10 @@ to protect the upstream mask array. The artificial training separators do not ad
 
 Paths must be ASCII; spaces are supported. There are no CPU-thread controls:
 this Prodigal build is single-threaded and targets baseline x86-64 without AVX.
+Its Windows executable reserves an 8 MiB process stack (64 KiB initially
+committed) because upstream non-SD training uses fixed local arrays larger
+than the Windows linker default 1 MiB stack. This is a virtual-address
+reservation, not a prediction of total memory use.
 No saved training models, external model files, alternate annotation formats,
 score-dump outputs or translation tables beyond 11/4/25 are exposed initially.
 
@@ -85,6 +89,10 @@ with the exact compatibility patch, build recipe and compiler/runtime notices.
 The patch fixes fourteen undefined overlapping `sprintf` metadata appends by
 writing at the existing string terminator. It changes the displayed version;
 it does not change prediction, training, scoring or translation algorithms.
+A Windows-only linker setting raises the stack reservation to 8 MiB; the
+builder records and verifies the actual PE reserve/commit fields. Native
+regressions cover forced non-SD training and automatic non-SD fallback, both
+of which overflowed the original 1 MiB reservation in the first Windows gate.
 The separate MIT native launcher validates inputs, maps explicit flags and
 starts the bundled executable without a shell. Its source is retained.
 

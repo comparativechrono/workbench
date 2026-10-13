@@ -54,6 +54,7 @@ class SourceTests(unittest.TestCase):
             self.assertEqual(meta['outputs'][0]['type'],'file')
             self.assertEqual({i['id'] for i in w['inputs']},{'alignment','model','rates','support','seed'})
             self.assertTrue(meta['pathPolicy']['asciiOnly'])
+            self.assertEqual(w['steps'][-1]['tool'],'fasttree-adapter')
     def test_fixture_truth_is_independent_and_locked(self):
         f=ROOT/'tools/fasttree/fixtures';truth=json.loads((f/'truth.json').read_text());reference=json.loads((f/'reference.json').read_text())
         self.assertEqual(reference['referenceExecutableSha256'],prep.SOURCES['FastTree'][1])
@@ -149,6 +150,14 @@ class ScientificTests(unittest.TestCase):
             for section in config.sections():
                 if section.startswith(('tool:','asset:')):self.assertEqual(sha(PACK/config[section]['path']),config[section]['sha256'])
             declarations=json.loads((PACK/'workbench-checks.json').read_text())
+            sys.path.insert(0,str(ROOT/'workspace'))
+            from catalog import load_pack,describe_workflow
+            pack=load_pack(PACK/'pack.ini')
+            self.assertEqual(pack['tools']['fasttree-adapter']['path'],'bin/fasttree-guard.exe')
+            for wf in pack['workflows'].values():
+                described=describe_workflow(pack,wf,str(PACK),pack['manifestSha256'])
+                self.assertEqual(described['displayName'],wf['name'])
+                self.assertEqual({t['id'] for t in described['executables']},{'fasttree','fasttree-adapter'})
         files={'tree':'inferred-tree.nwk','summary':'alignment-summary.json','settings':'analysis-settings.json','log':'fasttree.log','model-log':'fasttree-model.log'}
         for check in declarations['checks']:
             p=check['params'];out,_=self.run_tool(check['workflow'].removeprefix('infer-'),p['model'],p['rates'],p['support']);self.assert_truth(out)

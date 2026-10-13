@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "kind": "prodigal-fasttree-source-validation",
+  "recordedOn": "2026-10-13",
+  "sourceCommit": "b7fb88b8a81e55b9faef78861fe7a4ce08e61671",
+  "sourceTree": "5fab7b3fb4f38f57605553020f3cf0a8ad878d45",
+  "run": 38385903740,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/38385903740",
+  "buildJob": 115257507454,
+  "buildJobConclusion": "success",
+  "nativeWindowsExecuted": false,
+  "buildEvidenceArtifact": {
+    "id": 11807525356,
+    "sha256": "bc53edcce91af16bdbe0641d2cf8de2aa80b1a738e8506b0807a2125c507ca1b",
+    "expiresAt": "2026-11-12T10:53:57Z"
+  },
+  "scientificSuites": {
+    "prodigal": {
+      "schema": 1,
+      "success": true,
+      "platform": "Linux-6.8.0-1064-azure-x86_64-with-glibc2.35",
+      "nativeWindowsExecuted": false,
+      "testsRun": 17,
+      "passed": 17,
+      "failed": 0,
+      "skipped": [],
+      "failures": [],
+      "rawReportSha256": "76d82538585b354ba2ffcafd22cc2f999eff31ae484ac464bf102aa68d7f0063"
+    },
+    "fasttree": {
+      "schema": 1,
+      "packId": "fasttree",
+      "packVersion": "1.0.0",
+      "upstreamVersion": "2.2.0",
+      "platform": "linux",
+      "nativeWindowsExecuted": false,
+      "testsRun": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": [
+        {
+          "test": "test_11_actual_published_muscle_chain (__main__.ScientificTests)",
+          "reason": "Actual published Windows MUSCLE chain is a native Windows gate"
+        }
+      ],
+      "success": true,
+      "seconds": 4.939,
+      "testSourceSha256": "9f21741f15f16b709113c587b551a380b28461351c931ade9036a27cfb92d566",
+      "guardExecutableSha256": "a44caea3b607c36125663381b2e8ef8df3d428e7fae95771c6cb22f3d0e56f23",
+      "scientificBinarySha256": "c66f19fbfbaeed4c80d69e9712f5deaa62416ee70b086b4c119dd00473726b5d",
+      "livePinnedLinuxReferenceCases": 20,
+      "packManifestSha256": null,
+      "referenceExecutableSha256": "55a9d997813aae2208bd4c2081bfa690e0ecdba2d6c491805d8689415c43e38e",
+      "scope": "Independent 3-pair synthetic truth, all 5 models x2 rate settings x2 support settings; official Linux branch comparison tolerance relative1%/absolute0.00002; direct bundled upstream agreement; input/pack immutability and malformed-input guards. No realistic performance, nativeGUI, biological-rooting or clinical claim.",
+      "rawReportSha256": "b2fedaeada73044349fa862f24fa0a2b90533043bfb0763f0eb862e91900c208"
+    }
+  },
+  "contractSuites": [
+    {
+      "file": "tests/test_prodigal_fasttree_validation.py",
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/test_pack_checks.py",
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/test_pack_manager.py",
+      "testsRun": 47,
+      "passed": 46,
+      "failed": 0,
+      "skipped": 1,
+      "skipReason": "Windows-only long-path gate on Linux"
+    }
+  ],
+  "additionalLocalScope": [
+    {
+      "file": "tests/test_pack_inventory_budget.py",
+      "passed": 4,
+      "skipped": 0,
+      "notHostedBuildEvidence": true
+    }
+  ],
+  "compilerArchiveSha256": "bb7bb7654b33d5aa8712acb837c963b2e0c56352560c76105270a3268c665c21",
+  "limits": [
+    "Linux source/scientific execution and cross-build only; native Windows evidence is separate.",
+    "Twenty FastTree model/rate/support cases are part of an existing test, not twenty extra unit tests.",
+    "No benchmark, representative-PC or clinical acceptance."
+  ],
+  "contractLogHashes": {
+    "evidence-contract-tests.log": "a25b5619af971eae96a8c9d37ebc69133b4c28e990455e210be0507206df182c",
+    "pack-check-contracts.log": "47631ff69ea7f42c5030ebe4f41234f26a9db16e8a67c6324c8a1e7e94466697",
+    "pack-manager-contracts.log": "dbb176ca1daae9197b03e5a95a73bc1c1182665744f3e9034f33fe2abf2747ce"
+  }
+}

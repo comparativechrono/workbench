@@ -183,8 +183,9 @@ def run_gui(root, evidence, report):
             detail_control = ui.child(1504, results)
             operation_line = "Operation: " + identity + "; pack " + pack + " 1.0.0"
             ui.wait("recorded operation and successful status " + identity, lambda:
-                    operation_line in ui.label(detail_control) and "Execution status: success" in ui.label(detail_control))
+                    operation_line in ui.label(detail_control) and "Execution status: completed" in ui.label(detail_control))
             details = ui.label(detail_control)
+            measurements_unavailable = "No supported hash-verified scientific measurements are available for this run." in details
             require(query in details and descriptors[identity]["manifestSha256"] in details,
                     "Native results omitted submitted analysis name or recorded manifest identity.")
             versions = [{"id": executable["id"], "version": executable["version"]}
@@ -203,7 +204,11 @@ def run_gui(root, evidence, report):
             write_json(evidence / ("pack-results-" + pack + "-detail.json"),
                        {"query": query, "operation": identity, "text": details})
             metadata["results"].append({"query": query, "operation": identity, "versions": versions,
-                                         "manifestSha256": descriptors[identity]["manifestSha256"]})
+                                         "manifestSha256": descriptors[identity]["manifestSha256"],
+                                         "nativeSummaryReportsMeasurementsUnavailable": measurements_unavailable,
+                                         "measurementDisplayScope": "The unchanged application records status, versions and provenance; pack-specific JSON measurements are retained in result files and are not parsed into this native summary." if measurements_unavailable else "Review the retained native detail for supported measurements."})
+            if measurements_unavailable:
+                metadata["limitations"].append(pack + ": the unchanged application has no parser for this pack's JSON measurements; Native Results reports their unavailability and preserves status/version/provenance display.")
             check("Native Results search finds " + query + " and displays its successful native operation, exact pack/executable versions and recorded manifest identity without a QC verdict.")
         click(results, 1508)
         ui.wait("native Results closes", lambda: not window("Recorded results · Native Workbench"))

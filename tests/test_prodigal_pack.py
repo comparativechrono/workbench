@@ -4,6 +4,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'));sys.path.insert(0,str(ROOT/'workspace'))
 from prepare_prodigal_pack import definitions, fixtures, checks, VERSION, _fixture_module
+from build_prodigal_native import pe_stack, WINDOWS_STACK_RESERVE, WINDOWS_STACK_COMMIT
 from catalog import load_pack
 from pack_checks import _assert_output
 reverse_complement=_fixture_module.reverse_complement
@@ -39,7 +40,7 @@ class Declarations(unittest.TestCase):
             outputs={x['id']:x for x in wf['outputs']};meta={x['id']:x for x in schema['workflows'][wf['id']]['outputs']}
             for identity,kind in [('proteins','fasta-protein'),('cds','fasta-nucleotide')]:
                 self.assertEqual(outputs[identity]['nonempty'],'false');self.assertEqual(meta[identity]['type'],kind);self.assertEqual(meta[identity]['state']['compression'],'none')
-            self.assertEqual(wf['steps'][0]['tool'],'prodigal');self.assertEqual(wf['steps'][0]['arg.0'],'-v')
+            self.assertEqual(wf['steps'][-1]['tool'],'prodigal-adapter');self.assertEqual(wf['steps'][0]['tool'],'prodigal');self.assertEqual(wf['steps'][0]['arg.0'],'-v')
             self.assertEqual(schema['workflows'][wf['id']]['pathPolicy'],{'asciiOnly':True})
     def test_constructed_truth_has_both_strands_and_reassigned_stop_codons(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -105,6 +106,8 @@ class Science(unittest.TestCase):
             self.assertEqual(proteins[identity],translate(dna,code,complete_start))
         return rows
     def test_version_and_upstream_metadata_are_preserved(self):
+        if PACK:
+            self.assertEqual(pe_stack(self.binary),(WINDOWS_STACK_RESERVE,WINDOWS_STACK_COMMIT),'Native executable must reserve enough stack for upstream non-SD training')
         result=self.invoke([self.binary,'-v']);self.assertEqual(result.returncode,0);self.assertIn(VERSION,result.stdout+result.stderr)
         _,out=self.predict();gff=out['annotations'].read_text();self.assertIn('version=Prodigal.v'+VERSION,gff);self.assertIn('ID=1_1;partial=00;',gff);self.assertIn('model="',gff)
     def test_genome_exact_constructed_genes_and_both_strands(self):
