@@ -1,0 +1,102 @@
+{
+  "schema": 1,
+  "recordedOn": "2026-10-13",
+  "sourceCommit": "3d1d83b70d053af625b5cb45362851c0fefab2a1",
+  "sourceTree": "32becfa4831b7e50cdcfe342645d0ac02d32b8cb",
+  "workflowRun": "https://github.com/comparativechrono/workbench/actions/runs/38403212748",
+  "published": false,
+  "kind": "source-and-build-validation",
+  "nativeWindowsExecuted": false,
+  "selectedTests": 112,
+  "passed": 111,
+  "skipped": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipReason": "Windows-only long-path filesystem test is not executable on Linux.",
+  "testSuites": [
+    {
+      "file": "primer3-plink2-evidence-contract-tests.log",
+      "sha256": "c31e811c47f992d66e20f9b41cd43f0634edac76521e17dbdc11a485fe59c061",
+      "selected": 11,
+      "passed": 11,
+      "skipped": 0
+    },
+    {
+      "file": "shared-evidence-contract-tests.log",
+      "sha256": "133449d6f429f0588126e0403937f271f33f90517460d5c4b39d69c2eeda0f25",
+      "selected": 8,
+      "passed": 8,
+      "skipped": 0
+    },
+    {
+      "file": "pack-check-contracts.log",
+      "sha256": "fc5c914d8b4f474201586fdb3bb318a84745a9dfe756ce683f9ead77c36ffe96",
+      "selected": 14,
+      "passed": 14,
+      "skipped": 0
+    },
+    {
+      "file": "pack-manager-contracts.log",
+      "sha256": "e01c4ca55e309b7a5e7e8aeffeef1fd294bf4e94ad38a026a55324560d8097ce",
+      "selected": 47,
+      "passed": 46,
+      "skipped": 1
+    }
+  ],
+  "scientificSuites": {
+    "primer3": {
+      "schema": 1,
+      "packId": "primer3",
+      "packVersion": "1.0.0",
+      "upstreamVersion": "2.6.1",
+      "toolVersion": "2.6.1",
+      "platform": "linux",
+      "nativeWindowsExecuted": false,
+      "testsRun": 15,
+      "failures": 0,
+      "errors": 0,
+      "skipped": [],
+      "success": true,
+      "seconds": 0.18,
+      "testSourceSha256": "da942ba37244e4de27dc132a1b930540254529a0b15c91d32a2fdc0028a7cdb8",
+      "guardExecutableSha256": "43ced397a9c5db63e52368ce14ed5e2c1dcb4c0fc8e67f9be1e51123e073fdbd",
+      "scientificBinarySha256": "14259ffafbe2965293a596283dfd4cef3ee862f0f99e656c965062db0296367c",
+      "packManifestSha256": null,
+      "upstreamSourceCommit": "7f9f17d6012f404e83bbf0f931a4d06eb4af465b",
+      "upstreamSourceArchiveSha256": "c981e42765ceb525f56607c6a7cf989ac5068483731c6e083b1e9fb22816463b",
+      "livePinnedLinuxReferenceCases": 3,
+      "liveReferenceExecutableSha256": "2bce4a9e5dca16658513c4bbf11297d930657d2ca9d3f8758821da74861990ce",
+      "scope": "Independent planted primer binding/strand/product/GC and requested Tm/length ranges; pristine upstream comparison; zero-pair success; explicit chemistry; input/pack immutability; bounds/missing dependencies and path guidance. No specificity, experimental PCR, clinical or benchmark claim.",
+      "reportSha256": "40501e71584974f64f5293ec9dc64e6c185cda4a8dfbdd5b1f50dae48d9be178",
+      "executionCount": 40
+    },
+    "plink2": {
+      "schema": 1,
+      "packId": "plink2",
+      "packVersion": "1.0.0",
+      "toolVersion": "2.0.0-a.7.12",
+      "platform": "linux",
+      "nativeWindowsExecuted": false,
+      "testsRun": 17,
+      "failures": 0,
+      "errors": 0,
+      "skipped": [],
+      "success": true,
+      "seconds": 1.565,
+      "testSourceSha256": "cb3f084244d3aebd98e8ca28ce6ca09b015a247a4553f3f0a5aaff8795c2862e",
+      "guardExecutableSha256": "41b7c9572c96a81296252e1167162255677f15f2a6a6dcb063349004071b6fa4",
+      "scientificBinarySha256": "71e7521dbfa2de6b5236d9b553294845ac198d479ec31604a1ee25169fdbe0fa",
+      "packManifestSha256": null,
+      "upstreamSourceCommit": "5c1f185d4144e62fa23087d68760162f712cd2a8",
+      "scope": "Independent synthetic diploid biallelic SNP allele/genotype/missingness counts and denominators; direct bundled unmodified upstream execution; bounded input rejection; input/installation immutability and repeated runs. No PCA, association, filtering, scientific benchmark, GUI, population or clinical claim.",
+      "reportSha256": "926c9497bcf582e911a8b957bf64cfb5261c5ca889418712797d09acd97a5040",
+      "executionCount": 52
+    }
+  },
+  "developmentCorrectionsBeforeFreeze": [
+    "Primer3 uses upstream --about for its version check; --version exits 255.",
+    "PLINK2 required workspace raised from rejected 256 MiB to upstream minimum 640 MiB; this is not a whole-process cap.",
+    "PLINK2 Windows stack linker flags passed with separate -Xlinker arguments to avoid driver comma splitting."
+  ],
+  "sourceCorrespondenceScope": "Pinned retained source, recipes, licences, fixtures and exact executable bytes; not independent bit-identical recompilation."
+}
