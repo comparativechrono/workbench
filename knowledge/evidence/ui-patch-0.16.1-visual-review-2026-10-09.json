@@ -1,0 +1,126 @@
+{
+  "schema": 1,
+  "recordedOn": "2026-10-09",
+  "kind": "final native UI patch visual review aggregate",
+  "appVersion": "0.16.1",
+  "sourceCommit": "8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+  "finalValidatorCommit": "69022689e686b2cacdc98dbdbef728e664941e67",
+  "applicationRebuiltForFinalValidator": false,
+  "archives": [
+    {
+      "file": "native-workbench-0.16.1-source.zip",
+      "bytes": 48078770,
+      "sha256": "48523c0e7090f661442bec2999c1658a1532ad7a5fa7fe882b1081b23452acc7"
+    },
+    {
+      "file": "native-workbench-0.16.1-starter-windows.zip",
+      "bytes": 17847594,
+      "sha256": "7dfed53de2279f51deaea405dbfd29b36cddb733e5a20c43b3112f27a7728a8e"
+    },
+    {
+      "file": "native-workbench-0.16.1-update-from-0.16.0.zip",
+      "bytes": 12982946,
+      "sha256": "f2dc435495f43d837e80837f3ba83ff7b6963294219d5bc88bc8fb0e5d82effd"
+    }
+  ],
+  "runs": [
+    {
+      "id": 37988570028,
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37988570028",
+      "scope": "Exact application build and all regression suites"
+    },
+    {
+      "id": 37989535317,
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/37989535317",
+      "scope": "Same frozen archives; repeated 19 patch checks per path with passive visible resize frames"
+    }
+  ],
+  "reviewCompleted": true,
+  "settledLayoutAccepted": true,
+  "persistentMissingControlObserved": false,
+  "coverage": {
+    "captureFiles": 178,
+    "finalPatch": 82,
+    "curatedWorkspaceResults": 54,
+    "referenceManagementAndScroll": 42,
+    "method": "Delegated individual lossless original-resolution review, with recorded SHA-256 equality covering identical copies; 178 capture files does not mean 178 unique images or views."
+  },
+  "receipts": [
+    {
+      "file": "ui-patch-0.16.1-final-ordinary-patch-visual.json",
+      "bytes": 42764,
+      "sha256": "1104971523d708f9fd133b1921ce3b3601c59cf36399030c12b8319a9a920867",
+      "captureFiles": 41,
+      "scope": "final patch ordinary",
+      "runId": 37989535317
+    },
+    {
+      "file": "ui-patch-0.16.1-final-spaces-patch-visual.json",
+      "bytes": 33057,
+      "sha256": "fef2c55a01821e45145eb5f8581bcdf955fbe6ea326e4c9298fab742bb05b2c5",
+      "captureFiles": 41,
+      "scope": "final patch path with spaces",
+      "runId": 37989535317
+    },
+    {
+      "file": "ui-patch-0.16.1-initial-ordinary-regression-visual.json",
+      "bytes": 24081,
+      "sha256": "b709269f0d3be89d10b0a6ba4b21f139aabbea0058560dcd00c5525fe0ae059c",
+      "captureFiles": 27,
+      "scope": "curated/workspace/results ordinary",
+      "runId": 37988570028
+    },
+    {
+      "file": "ui-patch-0.16.1-initial-spaces-regression-visual.json",
+      "bytes": 24083,
+      "sha256": "384b2933840a571e76643a10fb3011a3176e76cb4f0aad276f86b844fe890d56",
+      "captureFiles": 27,
+      "scope": "curated/workspace/results path with spaces",
+      "runId": 37988570028
+    },
+    {
+      "file": "ui-patch-0.16.1-reference-scroll-visual-2026-10-09.json",
+      "bytes": 22620,
+      "sha256": "6d85617db82249c26f17706d7e28654d8e7b2f73b4a3de889644efc6d97e9561",
+      "captureFiles": 42,
+      "scope": "reference management and scroll both paths",
+      "runId": 37988570028
+    }
+  ],
+  "passiveResizeObservations": {
+    "captureMethod": "Visible desktop BitBlt before PrintWindow, with no keyboard/pointer input or forced redraw between samples.",
+    "ordinary": "Four immediate frames retain earlier geometry. All 12 later passive frames show complete controls; each series is byte-identical from its first settled sample (about 301–334 ms) through its final sample (about 1368–1400 ms).",
+    "spaces": "Fresh tool immediate frame retains earlier geometry and settles by the first nominal 250-ms sample. Fresh workflow and both upgraded series are already settled and byte-identical across their four samples.",
+    "timingScope": "Filename delays are nominal. Actual elapsed times are recorded in the native reports; no universal repaint deadline or between-frame behavior is inferred.",
+    "zeroFlickerClaim": false
+  },
+  "reviewCorrection": {
+    "originalConcern": "Initial full-frame reviews described General settings and Readiness as missing.",
+    "resolution": "Exact crops from the original hashed BMPs show both controls. This was an interpretation error, not an established application defect or capture-timing omission. Corrected original and attempt-2 receipts retain the retraction.",
+    "ordinaryOriginalSha256": "e0397ca200e60adae35282b3e7a716e9752dd73849a1c425a32c679f807ad147",
+    "regionsInOriginalPixels": {
+      "heading": [
+        640,
+        110,
+        795,
+        145
+      ],
+      "readiness": [
+        345,
+        603,
+        448,
+        643
+      ]
+    }
+  },
+  "limits": [
+    "Hosted Windows Server 2022 at 96 DPI; actual patch workspace sizes 960x680 and 1024x728. Requested 1280x900 was capped to the actual monitor work area.",
+    "Immediate resize frames can retain prior geometry. Finite samples do not establish zero flicker or exclude shorter unsampled transients.",
+    "PrintWindow requests paint; those frames are distinguished from passive visible-screen frames.",
+    "Legacy scroll and results fixtures deliberately request other window dimensions; their screenshots do not establish startup work-area containment.",
+    "Representative PCs, smaller work areas, high DPI and transitions, multiple monitors, physical trackpads and managed-machine acceptance remain outstanding.",
+    "Visual layout/readability review does not add scientific acceptance beyond the separately recorded native assertions."
+  ],
+  "rawEvidence": "Original BMPs remain in the hashed Actions artifacts referenced by the native validation record; binaries and screenshots are not committed.",
+  "publicationStatus": "unpublished draft review candidate; no merge or release"
+}

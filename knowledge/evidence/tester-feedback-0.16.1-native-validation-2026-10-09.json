@@ -1,0 +1,148 @@
+{
+  "schema": 1,
+  "recordedOn": "2026-10-09",
+  "status": "passed within recorded native and visual scopes",
+  "applicationSourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+  "applicationVersion": "0.16.1",
+  "gateCommit": "f9e7120196ddd284d33c0e8221b78fbf4529058f",
+  "runId": 37999874335,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37999874335",
+  "archivesRebuilt": false,
+  "archiveAudit": "tester-feedback-0.16.1-archive-audit-2026-10-09.json",
+  "uniqueChecksPerPath": 113,
+  "coverageDefinition": {
+    "sevenCompletedRegressionScopes": 81,
+    "patch": 19,
+    "testerFeedback": 13,
+    "repeatedPatchChecksAddUniqueCoverage": false
+  },
+  "sourceTests": {
+    "applicationSourcePassed": 220,
+    "applicationSuites": 18,
+    "validatorOnlyPassed": 23,
+    "validatorPatchTests": 8,
+    "validatorFeedbackTests": 15,
+    "countsAreSeparate": true
+  },
+  "paths": {
+    "ordinary": {
+      "patch": {
+        "success": true,
+        "passed": 19,
+        "failed": 0,
+        "blocked": 0,
+        "report": {
+          "bytes": 88298,
+          "sha256": "eb11f0c9b74c3679ce32bbf210cb0b5d56edaa0710c5022e7559daa0f74ed429",
+          "runId": 37999874335,
+          "applicationSourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "gateCommit": "f9e7120196ddd284d33c0e8221b78fbf4529058f",
+          "artifactRelativeName": "patch/native-ui-patch.json",
+          "rawContentCommitted": false
+        }
+      },
+      "feedback": {
+        "success": true,
+        "passed": 13,
+        "failed": 0,
+        "blocked": 0,
+        "report": {
+          "bytes": 583203,
+          "sha256": "a4152090a39f8110b7b9240c869a9c25012b26281d44e09fff696fcd5c829d6b",
+          "runId": 37999874335,
+          "applicationSourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "gateCommit": "f9e7120196ddd284d33c0e8221b78fbf4529058f",
+          "artifactRelativeName": "feedback/native-tester-feedback.json",
+          "rawContentCommitted": false
+        }
+      },
+      "temporal": {
+        "series": 41,
+        "sampledFrames": 1510,
+        "sampledBlackBlocks": 0,
+        "unexpectedStableDifferences": 0,
+        "scope": "Run idle/hover and real Starter/scrolled fixture category transitions; finite visible-screen observations only",
+        "rawSamplesInReport": "Original Actions report only; focused counts and timing bounds retained in Git."
+      },
+      "earlierRegressionChecks": 81,
+      "uniqueChecks": 113,
+      "evidenceArtifact": {
+        "id": 11648054427,
+        "sha256": "82b14304b153d00d978d64b14ebd7b63ec04970407ba6cc1fe5a7d34c93cb455",
+        "url": "https://github.com/comparativechrono/workbench/actions/runs/37999874335/artifacts/11648054427",
+        "wrapperVerification": "Digest supplied by the downloading review agent/root; raw reports independently read and hashed here."
+      }
+    },
+    "spaces": {
+      "patch": {
+        "success": true,
+        "passed": 19,
+        "failed": 0,
+        "blocked": 0,
+        "report": {
+          "bytes": 88346,
+          "sha256": "690e671e7dcc27b6acd44c0c9a84d13e4879b84f2af516f22cdd156db33b2526",
+          "runId": 37999874335,
+          "applicationSourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "gateCommit": "f9e7120196ddd284d33c0e8221b78fbf4529058f",
+          "artifactRelativeName": "patch/native-ui-patch.json",
+          "rawContentCommitted": false
+        }
+      },
+      "feedback": {
+        "success": true,
+        "passed": 13,
+        "failed": 0,
+        "blocked": 0,
+        "report": {
+          "bytes": 531562,
+          "sha256": "2a38b495bd5b25ba08ac6eb92a9cb58c674eec87d5d3eae8de3a6944791516f9",
+          "runId": 37999874335,
+          "applicationSourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+          "gateCommit": "f9e7120196ddd284d33c0e8221b78fbf4529058f",
+          "artifactRelativeName": "feedback/native-tester-feedback.json",
+          "rawContentCommitted": false
+        }
+      },
+      "temporal": {
+        "series": 41,
+        "sampledFrames": 1306,
+        "sampledBlackBlocks": 0,
+        "unexpectedStableDifferences": 0,
+        "scope": "Run idle/hover and real Starter/scrolled fixture category transitions; finite visible-screen observations only",
+        "rawSamplesInReport": "Original Actions report only; focused counts and timing bounds retained in Git."
+      },
+      "earlierRegressionChecks": 81,
+      "uniqueChecks": 113,
+      "evidenceArtifact": {
+        "id": 11648519094,
+        "sha256": "bf2df33acab16b1f93f7ee263823b09415eef326860d01fa6aadb1dd2e347c1b",
+        "url": "https://github.com/comparativechrono/workbench/actions/runs/37999874335/artifacts/11648519094",
+        "wrapperVerification": "Digest supplied by the downloading review agent/root; raw reports independently read and hashed here."
+      }
+    }
+  },
+  "limits": [
+    "Hosted Windows 2022, 96 DPI; representative hardware and managed-machine acceptance remain outstanding.",
+    "Temporal frames are finite samples; no claim of zero flicker or exclusion of shorter unsampled transients.",
+    "Earlier patch visual receipts retain immediate Tools-resize old geometry/right-bottom clipping until the first later sampled frame around 0.30–0.32 seconds."
+  ],
+  "independentValidationSummary": {
+    "path": "tester-feedback-0.16.1-independent-validation-2026-10-09.json",
+    "adds": [
+      "All nine gate results and skips per path",
+      "277-file exact application correspondence",
+      "Synthetic known-answer measurements and output hashes",
+      "Finite temporal sample counts and timing bounds"
+    ]
+  },
+  "visualReceipts": [
+    "tester-feedback-0.16.1-regression-visual-ordinary-2026-10-09.json",
+    "tester-feedback-0.16.1-regression-visual-spaces-2026-10-09.json",
+    "tester-feedback-0.16.1-patch-visual-ordinary-2026-10-09.json",
+    "tester-feedback-0.16.1-patch-visual-spaces-2026-10-09.json",
+    "tester-feedback-0.16.1-feedback-visual-ordinary-2026-10-09.json",
+    "tester-feedback-0.16.1-feedback-visual-spaces-2026-10-09.json"
+  ],
+  "evidenceDisclosure": "Focused receipts exclude opaque session/review tokens, detailed input/runner records and raw logs; original report hashes and Actions artifact links remain."
+}

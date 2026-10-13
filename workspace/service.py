@@ -365,6 +365,10 @@ class Workbench:
         issues += [{"severity": "warning", "message": str(e)} for e in result.get("warnings", [])]
         return {"valid": result.get("ok", False), "issues": issues, "methods": result.get("methods", "")}
 
+    def preview_methods(self, graph):
+        """Read planned methods and graph issues without output/resource probes."""
+        return self.engine.review(copy.deepcopy(graph))
+
     def review_diagnostics(self, run_id=None):
         """Freeze a bounded report for explicit local review; collect no files."""
         from diagnostics import build_report, preview_text
@@ -655,12 +659,43 @@ class Workbench:
     def import_sample_table(self, path):
         from sample_table import read_table
         table = read_table(short_text(path, "sample table path", 30000))
+        return self._store_sample_table(table)
+
+    def _retain_sample_token(self, token):
+        if token is not None:
+            token = short_text(token, "retained sample table token", 100)
+            item = self._sample_tables.get(token)
+            now = time.monotonic()
+            if item is None:
+                # This token protects the previous selection during editing;
+                # it is not authority for the fully revalidated new draft.
+                # Losing an old cache entry must not strand unsaved edits.
+                return None
+            # A complete local draft may have been edited for over 15 minutes.
+            # Renew the still-retained immutable original for Cancel without
+            # weakening the normal expiry rules for table reads or previews.
+            self._sample_tables[token] = (now, item[1], item[2])
+        return token
+
+    def _sample_table_room(self, table, retain_token):
         size = len(json.dumps(table, ensure_ascii=False).encode("utf-8"))
+        retained = self._sample_tables[retain_token][2] if retain_token is not None else 0
+        if size + retained > 32 * 1024 * 1024:
+            raise ValueError("These tables exceed the 32 MiB retained-table limit. The selected table is preserved.")
+        return size
+
+    def _store_sample_table(self, table, retain_token=None):
+        # A new token always owns a full immutable table, never its short UI
+        # summary. Editing, saving or importing cannot alter an older token.
+        table = copy.deepcopy(table)
+        retention_requested = retain_token is not None
         with self.lock:
+            retain_token = self._retain_sample_token(retain_token)
+            size = self._sample_table_room(table, retain_token)
             now = time.monotonic()
             self._sample_tables = {key: value for key, value in self._sample_tables.items() if now - value[0] < 900}
             while self._sample_tables and (len(self._sample_tables) >= 4 or sum(item[2] for item in self._sample_tables.values()) + size > 32 * 1024 * 1024):
-                self._sample_tables.pop(next(iter(self._sample_tables)))
+                self._sample_tables.pop(next(key for key in self._sample_tables if key != retain_token))
             token = secrets.token_urlsafe(32)
             self._sample_tables[token] = (now, table, size)
         summary = {key: copy.deepcopy(value) for key, value in table.items() if key != "rows"}
@@ -672,18 +707,53 @@ class Workbench:
             rows.append(copy.deepcopy(row))
             total += length
         summary.update(table_token=token, rowCount=len(table["rows"]), rows=rows,
-                       preview_omitted=len(table["rows"]) - len(rows))
+                       preview_omitted=len(table["rows"]) - len(rows),
+                       retainedSelectionAvailable=not retention_requested or retain_token is not None)
+        if retention_requested and retain_token is None:
+            summary["retentionNotice"] = ("The previous sample-table selection is no longer cached. Your complete editor draft is retained. "
+                                          "Use this table, or import the previous table again if you cancel.")
         return summary
+
+    def _sample_table(self, token, *, refresh=False):
+        token = short_text(token, "sample table token", 100)
+        with self.lock:
+            item = self._sample_tables.get(token)
+            if item is None or time.monotonic() - item[0] >= 900:
+                raise ValueError("This sample table preview expired. Import the table again or apply the complete editor draft.")
+            if refresh:
+                self._sample_tables[token] = (time.monotonic(), item[1], item[2])
+            return copy.deepcopy(item[1])
+
+    def edit_sample_table(self, token):
+        from sample_table_editor import editable_table
+        return dict(editable_table(self._sample_table(token, refresh=True)), table_token=token)
+
+    def apply_sample_table(self, draft, retain_token=None):
+        from sample_table_editor import apply_draft
+        return self._store_sample_table(apply_draft(draft), retain_token)
+
+    def save_sample_table(self, token, path, file_columns, retain_token=None):
+        from sample_table_editor import EXPORT_NOTICE, save_table
+        if isinstance(path, str) and path != path.strip():
+            raise ValueError("Choose an exact new sample-table path without surrounding whitespace.")
+        path = short_text(path, "new sample table path", 30000)
+        # Keep the bounded token reservation and create-new save together:
+        # malformed retention or insufficient room must fail before publication.
+        with self.lock:
+            requested_retention = retain_token
+            retain_token = self._retain_sample_token(retain_token)
+            table = save_table(self._sample_table(token), path, file_columns,
+                               before_write=lambda value: self._sample_table_room(value, retain_token))
+            return dict(self._store_sample_table(table, requested_retention), path=path, saved=True, exportNotice=EXPORT_NOTICE)
+
+    def example_sample_table(self, retain_token=None):
+        from sample_table_editor import synthetic_example
+        return self._store_sample_table(synthetic_example(self.root, self.catalog), retain_token)
 
     def preview_batch(self, request):
         from sample_table import preview_batch
         if "table_token" in request:
-            token = short_text(request["table_token"], "sample table token", 100)
-            with self.lock:
-                item = self._sample_tables.get(token)
-                if item is None or time.monotonic() - item[0] >= 900:
-                    raise ValueError("This sample table preview expired. Import the table again.")
-                table = copy.deepcopy(item[1])
+            table = self._sample_table(request["table_token"])
         else:
             table = copy.deepcopy(request["table"])
         policy = self.resource_policy(request["graph"])

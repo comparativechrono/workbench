@@ -82,7 +82,7 @@ class NativeTree:
                         ("pszText", ctypes.c_void_p), ("cchTextMax", ctypes.c_int),
                         ("iImage", ctypes.c_int), ("iSelectedImage", ctypes.c_int),
                         ("cChildren", ctypes.c_int), ("lParam", wintypes.LPARAM)]
-        offset, text_bytes = ctypes.sizeof(Item), 4096
+        offset, text_bytes = ctypes.sizeof(Item), 16384
         def payload(address):
             value = Item(mask=1 | 8, hItem=item, stateMask=0xffff,
                          pszText=address + offset, cchTextMax=text_bytes // 2)
@@ -110,9 +110,83 @@ class NativeTree:
         return [result.left + origin.x, result.top + origin.y,
                 result.right + origin.x, result.bottom + origin.y]
 
+    def item_height(self, item):
+        """Read the native integral row height, including rows outside the clip."""
+        class ItemEx(ctypes.Structure):
+            _fields_ = [("mask", wintypes.UINT), ("hItem", ctypes.c_void_p),
+                        ("state", wintypes.UINT), ("stateMask", wintypes.UINT),
+                        ("pszText", ctypes.c_void_p), ("cchTextMax", ctypes.c_int),
+                        ("iImage", ctypes.c_int), ("iSelectedImage", ctypes.c_int),
+                        ("cChildren", ctypes.c_int), ("lParam", wintypes.LPARAM),
+                        ("iIntegral", ctypes.c_int), ("uStateEx", wintypes.UINT),
+                        ("hwnd", wintypes.HWND), ("iExpandedImage", ctypes.c_int),
+                        ("iReserved", ctypes.c_int)]
+        value = ItemEx(mask=0x80, hItem=item)  # TVIF_INTEGRAL.
+        raw = self._buffer(bytes(value), ctypes.sizeof(value),
+                           lambda address: self.send(self.hwnd, 0x113E, 0, address))
+        integral = ItemEx.from_buffer_copy(raw).iIntegral
+        base = self.send(self.hwnd, 0x111C)  # TVM_GETITEMHEIGHT.
+        if integral < 1 or base < 1:
+            raise AssertionError("Invalid native integral row height.")
+        return integral * base
+
+    def viewport(self):
+        """The optional native pixel viewport owns clipping and its scrollbar."""
+        self.user.GetParent.argtypes = [wintypes.HWND]
+        self.user.GetParent.restype = wintypes.HWND
+        parent = self.user.GetParent(self.hwnd)
+        return parent if parent and self.user.GetDlgCtrlID(parent) == 430 else self.hwnd
+
+    def client_bounds(self, hwnd=None):
+        hwnd = hwnd or self.hwnd
+        client, origin = wintypes.RECT(), wintypes.POINT()
+        if not (self.user.GetClientRect(hwnd, ctypes.byref(client)) and
+                self.user.ClientToScreen(hwnd, ctypes.byref(origin))):
+            raise ctypes.WinError(ctypes.get_last_error())
+        return [origin.x, origin.y, origin.x + client.right, origin.y + client.bottom]
+
+    def visible_bounds(self):
+        """Read real child/parent client intersection without changing scroll."""
+        child, viewport = self.client_bounds(), self.client_bounds(self.viewport())
+        result = [max(child[0], viewport[0]), max(child[1], viewport[1]),
+                  min(child[2], viewport[2]), min(child[3], viewport[3])]
+        if result[0] >= result[2] or result[1] >= result[3]:
+            raise AssertionError("Native TreeView has no visible client intersection: "
+                                 "child=%s viewport=%s" % (child, viewport))
+        return result
+
+    def first_visible(self):
+        """Find the first actual row intersecting the clipping viewport.
+
+        TVGN_FIRSTVISIBLE refers to the potentially oversized child window;
+        native item rectangles determine what a user can actually see. These
+        are passive documented queries, never EnsureVisible or paint repair.
+        """
+        bounds = self.visible_bounds()
+        item, visited = self.next(0, 5), set()
+        while item:
+            if item in visited or len(visited) >= 4096:
+                raise AssertionError("Unexpected native visible-row chain.")
+            visited.add(item)
+            row = self.rect(item)
+            if row[1] < bounds[3] and row[3] > bounds[1]:
+                return item
+            if row[1] >= bounds[3]:
+                return 0
+            item = self.next(item, 6)  # TVGN_NEXTVISIBLE.
+        return 0
+
     def point(self, item):
         self.send(self.hwnd, 0x1114, 0, item)  # TVM_ENSUREVISIBLE.
         left, top, right, bottom = self.rect(item)
+        # Wrapped rows may be taller than the viewport. Choose an actual
+        # visible portion after the same documented EnsureVisible request;
+        # the mathematical row midpoint can be underneath another panel.
+        client = self.visible_bounds()
+        left, top = max(left, client[0]), max(top, client[1])
+        right, bottom = min(right, client[2]), min(bottom, client[3])
+        if right - left < 4 or bottom - top < 4:
+            raise AssertionError("Native TreeView row has no usable visible click area.")
         return left + min(40, max(2, (right-left)//2)), (top+bottom)//2
 
     def first_tool_point(self):

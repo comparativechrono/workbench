@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "kind": "Frozen feedback validator source checks",
+  "sourceCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+  "gateCommit": "7ea0ce6bf6821089c524c307f99efb0a1892d2a3",
+  "runId": 38076722339,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/38076722339",
+  "jobId": 114285133497,
+  "status": "passed",
+  "suite": "tests/test_tester_feedback_gate.py",
+  "tests": 18,
+  "pythonSyntax": "passed",
+  "buildLogSha256": "f3ccde7b2cfb1c79550e27a0428a9584be9234bbb095cdbc2cda48df7e82bf98",
+  "scope": "Validator-only tests. The unchanged application retains its ff13 source/build validation; these do not add to its source-test count or establish native acceptance."
+}

@@ -1,0 +1,325 @@
+{
+  "schema": 1,
+  "reviewedUtc": "2026-10-10T09:49:53.352603+00:00",
+  "scope": "One bounded concurrent-resize diagnostic on exact previous and candidate Starter archives, ordinary hosted Windows installation, Tools/reference-index form.",
+  "method": "All 22 retained BMP hashes and dimensions checked against native reports. Seven unique BMP representatives directly viewed as lossless original-resolution PNGs and RGB pixel correspondence verified; 15 additional capture records covered by exact BMP hashes. Retained frame endpoint classifications independently recomputed from RGB crops in the recorded 55 common-client rectangles.",
+  "reviewCoverage": {
+    "captureRecords": 22,
+    "uniqueImagesDirectlyViewed": 7,
+    "exactHashReuses": 15,
+    "allRetainedFrameClassificationsIndependentlyVerified": true
+  },
+  "conclusion": "The previous archive visibly presents mixed old/new layouts during the bounded concurrent-resize exercise; no compared mixed-layout frame was recorded for the candidate in this diagnostic. This supports the geometry-before-repaint change for the observed scenario, without establishing an exact repaint duration or universal flicker absence.",
+  "visualFindings": [
+    "Previous mixed captures show duplicated General settings columns, overlapped shifted headings and fields, duplicated footer controls, and black exposed strips. These are visually identifiable mixed layouts, rather than only numerical pixel mismatches.",
+    "Candidate retained captures show complete small or large endpoint layouts without the duplicated panes or footer remnants observed in previous mixed captures.",
+    "Previous non-endpoint frames were recorded in all three bursts, including one read interval beginning after the final MoveWindow returned in each burst. Capture intervals overlapping resize calls cannot identify the exact presentation instant.",
+    "Settled references for both archives fit the fixed controls at 960x680 and 1024x728. Bottom clipping of reference help and References controls occurs inside scrollable panels; long paths clip within their edit fields."
+  ],
+  "limitations": [
+    "The strict post-compositor, single-step negative control did not reproduce the earlier stale-geometry witness and remains a recorded failure; this separate observation does not rewrite it.",
+    "This is a diagnostic completion record, not an application acceptance pass. Both source reports retain nativeGUIValidated=false.",
+    "Three bursts of twelve alternating requests were predefined for each archive. Different MoveWindow durations produced different observation periods and frame counts, so counts and final-target timings are not a performance comparison.",
+    "Classification uses 55 static/control rectangles clipped to the common smaller-window client intersection. Edit interiors, tree, status and nonclient chrome are outside the automatic oracle.",
+    "Only retained BMPs can be independently reclassified from saved pixels; all-frame totals come from the checked native JSON sample records.",
+    "Finite hosted 96-DPI observations do not exclude shorter unsampled changes, universal initial compositor latency, or differences on representative PCs and high-DPI displays.",
+    "The historical roughly 0.3-second value was a sampling bound, not a measured delay; this diagnostic does not establish that exact duration."
+  ],
+  "installations": {
+    "previous": {
+      "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+      "gateCommit": "20514d31650f71d4ab99dd9450a747823a995667",
+      "gateSha256": "5441b76d17ab7566efaa46a3ae6c211541238d4ece6170f382f25c08a7ad79cc",
+      "reportSha256": "29b58024b06ac92c317c3e2836d81c3dcebff93de239ee976f83c39734afbd17",
+      "archive": {
+        "name": "native-workbench-0.16.1-starter-windows.zip",
+        "bytes": 17879604,
+        "sha256": "1291f93b5ece3c4da34eb2f2e29fccc83b6d87ec5fb73abf28bfd9cc8f155b75"
+      },
+      "diagnosticCompleted": true,
+      "nativeGUIValidated": false,
+      "observedDpi": [
+        96
+      ],
+      "commonClientIntersection": [
+        8,
+        51,
+        952,
+        672
+      ],
+      "comparisonRectangles": 55,
+      "bursts": [
+        {
+          "burst": 0,
+          "resizeCalls": 12,
+          "frames": 16,
+          "framesMatchingNeitherEndpoint": 5,
+          "mixedReadIntervalsBeginningAfterFinalReturnMs": [
+            [
+              12.657,
+              58.718
+            ]
+          ],
+          "firstFinalTargetReadIntervalMsAfterReturn": [
+            59.154,
+            75.202
+          ],
+          "totalReadIntervalMs": 472.331,
+          "readIntervalsOverlappingResizeCalls": 6,
+          "workerJoined": true,
+          "samplingComplete": true
+        },
+        {
+          "burst": 1,
+          "resizeCalls": 12,
+          "frames": 15,
+          "framesMatchingNeitherEndpoint": 5,
+          "mixedReadIntervalsBeginningAfterFinalReturnMs": [
+            [
+              27.409,
+              57.65
+            ]
+          ],
+          "firstFinalTargetReadIntervalMsAfterReturn": [
+            58.072,
+            89.553
+          ],
+          "totalReadIntervalMs": 461.325,
+          "readIntervalsOverlappingResizeCalls": 6,
+          "workerJoined": true,
+          "samplingComplete": true
+        },
+        {
+          "burst": 2,
+          "resizeCalls": 12,
+          "frames": 15,
+          "framesMatchingNeitherEndpoint": 4,
+          "mixedReadIntervalsBeginningAfterFinalReturnMs": [
+            [
+              27.239,
+              57.728
+            ]
+          ],
+          "firstFinalTargetReadIntervalMsAfterReturn": [
+            58.151,
+            74.031
+          ],
+          "totalReadIntervalMs": 446.468,
+          "readIntervalsOverlappingResizeCalls": 5,
+          "workerJoined": true,
+          "samplingComplete": true
+        }
+      ],
+      "totalFrames": 46,
+      "totalFramesMatchingNeitherEndpoint": 14,
+      "retainedCaptures": [
+        {
+          "path": "observation-tool-resize-reference-1024x728.bmp",
+          "sha256": "c3b79025dea539b11f4401601c213bfb66b7eedccbdd12f14d7b8ffd8768d8b9",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "observation-tool-resize-reference-960x680.bmp",
+          "sha256": "c30fbea2a57bcbbd5c54cc93e1424f04c653fbb3f0249705bc3110483f6a35c7",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "observation-resize-diagnostic-00-frame-000.bmp",
+          "sha256": "c30fbea2a57bcbbd5c54cc93e1424f04c653fbb3f0249705bc3110483f6a35c7",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "observation-resize-diagnostic-00-frame-003.bmp",
+          "sha256": "8f5638c3fa89120a90aad10958b7b201b7dda3ed847908e04c0f84f957cf70f3",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "observation-resize-diagnostic-00-frame-007.bmp",
+          "sha256": "0dc51780d605b76f7c941632c89ec4ae335d95c6a5fb2dfd37510b3923f3e7f1",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "observation-resize-diagnostic-00-frame-015.bmp",
+          "sha256": "c30fbea2a57bcbbd5c54cc93e1424f04c653fbb3f0249705bc3110483f6a35c7",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "observation-resize-diagnostic-01-frame-000.bmp",
+          "sha256": "c30fbea2a57bcbbd5c54cc93e1424f04c653fbb3f0249705bc3110483f6a35c7",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "observation-resize-diagnostic-01-frame-003.bmp",
+          "sha256": "8f5638c3fa89120a90aad10958b7b201b7dda3ed847908e04c0f84f957cf70f3",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "observation-resize-diagnostic-01-frame-005.bmp",
+          "sha256": "6af287645fe4ffc21b470f7a1084c9feafb908839b6ae5427ac3676b79a4366a",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "observation-resize-diagnostic-01-frame-014.bmp",
+          "sha256": "c30fbea2a57bcbbd5c54cc93e1424f04c653fbb3f0249705bc3110483f6a35c7",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "observation-resize-diagnostic-02-frame-000.bmp",
+          "sha256": "c30fbea2a57bcbbd5c54cc93e1424f04c653fbb3f0249705bc3110483f6a35c7",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "observation-resize-diagnostic-02-frame-003.bmp",
+          "sha256": "8f5638c3fa89120a90aad10958b7b201b7dda3ed847908e04c0f84f957cf70f3",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "observation-resize-diagnostic-02-frame-005.bmp",
+          "sha256": "6af287645fe4ffc21b470f7a1084c9feafb908839b6ae5427ac3676b79a4366a",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "observation-resize-diagnostic-02-frame-014.bmp",
+          "sha256": "c30fbea2a57bcbbd5c54cc93e1424f04c653fbb3f0249705bc3110483f6a35c7",
+          "width": 1024,
+          "height": 728
+        }
+      ]
+    },
+    "candidate": {
+      "sourceCommit": "51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e",
+      "gateCommit": "20514d31650f71d4ab99dd9450a747823a995667",
+      "gateSha256": "5441b76d17ab7566efaa46a3ae6c211541238d4ece6170f382f25c08a7ad79cc",
+      "reportSha256": "b2600bdcdff81cbe9014a24beecf21d7466d20f7a85f4174e5ffecac115d56f3",
+      "archive": {
+        "name": "native-workbench-0.16.1-starter-windows.zip",
+        "bytes": 17879852,
+        "sha256": "7fd59d5b021867991506e98ef94c5b239245030fb9da55d77accf8d8e2d43682"
+      },
+      "diagnosticCompleted": true,
+      "nativeGUIValidated": false,
+      "observedDpi": [
+        96
+      ],
+      "commonClientIntersection": [
+        8,
+        51,
+        952,
+        672
+      ],
+      "comparisonRectangles": 55,
+      "bursts": [
+        {
+          "burst": 0,
+          "resizeCalls": 12,
+          "frames": 20,
+          "framesMatchingNeitherEndpoint": 0,
+          "mixedReadIntervalsBeginningAfterFinalReturnMs": [],
+          "firstFinalTargetReadIntervalMsAfterReturn": [
+            30.533,
+            46.449
+          ],
+          "totalReadIntervalMs": 707.182,
+          "readIntervalsOverlappingResizeCalls": 11,
+          "workerJoined": true,
+          "samplingComplete": true
+        },
+        {
+          "burst": 1,
+          "resizeCalls": 12,
+          "frames": 23,
+          "framesMatchingNeitherEndpoint": 0,
+          "mixedReadIntervalsBeginningAfterFinalReturnMs": [],
+          "firstFinalTargetReadIntervalMsAfterReturn": [
+            13.388,
+            44.916
+          ],
+          "totalReadIntervalMs": 722.007,
+          "readIntervalsOverlappingResizeCalls": 12,
+          "workerJoined": true,
+          "samplingComplete": true
+        },
+        {
+          "burst": 2,
+          "resizeCalls": 12,
+          "frames": 21,
+          "framesMatchingNeitherEndpoint": 0,
+          "mixedReadIntervalsBeginningAfterFinalReturnMs": [],
+          "firstFinalTargetReadIntervalMsAfterReturn": [
+            30.694,
+            62.186
+          ],
+          "totalReadIntervalMs": 724.127,
+          "readIntervalsOverlappingResizeCalls": 12,
+          "workerJoined": true,
+          "samplingComplete": true
+        }
+      ],
+      "totalFrames": 64,
+      "totalFramesMatchingNeitherEndpoint": 0,
+      "retainedCaptures": [
+        {
+          "path": "observation-tool-resize-reference-1024x728.bmp",
+          "sha256": "e1b0907ece321cfac3e202af241debaaff4e0d8631f9b62c532993df0f195d4b",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "observation-tool-resize-reference-960x680.bmp",
+          "sha256": "12c2625028349f29e3c643c4f2d616e1f1dfc3189af2fafa6ed40ce39815c82b",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "observation-resize-diagnostic-00-frame-000.bmp",
+          "sha256": "12c2625028349f29e3c643c4f2d616e1f1dfc3189af2fafa6ed40ce39815c82b",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "observation-resize-diagnostic-00-frame-019.bmp",
+          "sha256": "12c2625028349f29e3c643c4f2d616e1f1dfc3189af2fafa6ed40ce39815c82b",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "observation-resize-diagnostic-01-frame-000.bmp",
+          "sha256": "12c2625028349f29e3c643c4f2d616e1f1dfc3189af2fafa6ed40ce39815c82b",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "observation-resize-diagnostic-01-frame-022.bmp",
+          "sha256": "12c2625028349f29e3c643c4f2d616e1f1dfc3189af2fafa6ed40ce39815c82b",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "observation-resize-diagnostic-02-frame-000.bmp",
+          "sha256": "12c2625028349f29e3c643c4f2d616e1f1dfc3189af2fafa6ed40ce39815c82b",
+          "width": 1024,
+          "height": 728
+        },
+        {
+          "path": "observation-resize-diagnostic-02-frame-020.bmp",
+          "sha256": "12c2625028349f29e3c643c4f2d616e1f1dfc3189af2fafa6ed40ce39815c82b",
+          "width": 1024,
+          "height": 728
+        }
+      ]
+    }
+  }
+}

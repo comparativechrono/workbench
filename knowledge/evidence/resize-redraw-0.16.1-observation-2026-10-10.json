@@ -1,0 +1,3825 @@
+{
+  "schema": 1,
+  "kind": "focused native resize observation receipt",
+  "status": "candidate checks passed; diagnostic comparison completed; required strict negative control failed",
+  "workflowSuccess": false,
+  "differentialResizeFixProven": false,
+  "sourceCommit": "51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e",
+  "gateCommit": "20514d31650f71d4ab99dd9450a747823a995667",
+  "run": 38042425723,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/38042425723",
+  "frozenCandidateRun": 38041029923,
+  "applicationRebuiltForRecheck": false,
+  "archives": [
+    {
+      "file": "native-workbench-0.16.1-source.zip",
+      "bytes": 48380545,
+      "sha256": "92daf78ad2bfc69d221c7274c69d7918e963dfe6e41405ee36ddf768c8f2e387"
+    },
+    {
+      "file": "native-workbench-0.16.1-starter-windows.zip",
+      "bytes": 17879852,
+      "sha256": "7fd59d5b021867991506e98ef94c5b239245030fb9da55d77accf8d8e2d43682"
+    },
+    {
+      "file": "native-workbench-0.16.1-update-from-0.16.0.zip",
+      "bytes": 13042517,
+      "sha256": "35bbd786043561ea40a1a12f941da8f370f26fc9df63cd2904dbee16a18bbda5"
+    }
+  ],
+  "installations": [
+    {
+      "installation": "ordinary",
+      "observedDpi": [
+        96
+      ],
+      "artifact": {
+        "id": 11666188357,
+        "bytes": 10619784,
+        "sha256": "cc0bae877f082d26eafb25060d34c37816d7262beca55232e65bf71ffd10d13f",
+        "githubApiDigestMatched": true,
+        "zipCrc": "passed",
+        "expiresUtc": "2026-11-09T09:47:02Z",
+        "url": "https://github.com/comparativechrono/workbench/actions/runs/38042425723/artifacts/11666188357"
+      },
+      "candidateRecheck": {
+        "patch": {
+          "report": {
+            "file": "native-ui-patch.json",
+            "bytes": 352831,
+            "sha256": "f095d2706a23e2c85404d7d8e32ae4c8c19ca5c0d849bf4490ee0ecbb78c1e6c"
+          },
+          "passed": 23,
+          "failed": 0,
+          "blocked": 0,
+          "skips": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": true,
+          "gateSha256": "5441b76d17ab7566efaa46a3ae6c211541238d4ece6170f382f25c08a7ad79cc",
+          "scenarioIds": [
+            "candidate-input-identities",
+            "baseline-fixtures",
+            "updater-cancel",
+            "updater-invalid",
+            "updater-install",
+            "updater-repeat",
+            "upgraded-fixture-readback",
+            "fresh-startup-bounds",
+            "fresh-starter-setup",
+            "fresh-result-fixture",
+            "fresh-library-keyboard",
+            "fresh-tool-temporal-resize",
+            "fresh-workflow-temporal-resize",
+            "fresh-layout",
+            "fresh-results-empty",
+            "fresh-results-populated",
+            "upgraded-startup-bounds",
+            "upgraded-library-keyboard",
+            "upgraded-tool-temporal-resize",
+            "upgraded-workflow-temporal-resize",
+            "upgraded-layout",
+            "upgraded-results-empty",
+            "upgraded-results-populated"
+          ],
+          "temporalResize": [
+            {
+              "installation": "fresh",
+              "mode": "tool",
+              "transitions": 6,
+              "frames": 84,
+              "immediateFrames": 6,
+              "postCompositorFrames": 78,
+              "postCompositorSourceFrames": 0,
+              "postCompositorNonTargetFrames": 0,
+              "immediateNonTargetFrames": 2,
+              "allTransitionsSamplingComplete": true,
+              "allTransitionsReachedTarget": true,
+              "requestedSizes": [
+                [
+                  960,
+                  680
+                ],
+                [
+                  1024,
+                  728
+                ]
+              ],
+              "totalSeriesSeconds": 2.761668,
+              "maximumCaptureGapMs": 71.48,
+              "moveWindowMs": {
+                "minimum": 17.219,
+                "maximum": 18.762
+              },
+              "immediateCaptureStartMsAfterReturn": {
+                "minimum": 0.001,
+                "maximum": 0.005
+              },
+              "immediateCaptureEndMsAfterReturn": {
+                "minimum": 28.5,
+                "maximum": 58.137
+              },
+              "firstPostCompositorCaptureStartMsAfterReturn": {
+                "minimum": 40.985,
+                "maximum": 71.481
+              },
+              "firstPostCompositorCaptureEndMsAfterReturn": {
+                "minimum": 61.056,
+                "maximum": 91.327
+              }
+            },
+            {
+              "installation": "fresh",
+              "mode": "workflow",
+              "transitions": 6,
+              "frames": 87,
+              "immediateFrames": 6,
+              "postCompositorFrames": 81,
+              "postCompositorSourceFrames": 0,
+              "postCompositorNonTargetFrames": 0,
+              "immediateNonTargetFrames": 3,
+              "allTransitionsSamplingComplete": true,
+              "allTransitionsReachedTarget": true,
+              "requestedSizes": [
+                [
+                  960,
+                  680
+                ],
+                [
+                  1024,
+                  728
+                ]
+              ],
+              "totalSeriesSeconds": 2.776014,
+              "maximumCaptureGapMs": 65.573,
+              "moveWindowMs": {
+                "minimum": 26.476,
+                "maximum": 33.052
+              },
+              "immediateCaptureStartMsAfterReturn": {
+                "minimum": 0.002,
+                "maximum": 0.002
+              },
+              "immediateCaptureEndMsAfterReturn": {
+                "minimum": 21.501,
+                "maximum": 52.105
+              },
+              "firstPostCompositorCaptureStartMsAfterReturn": {
+                "minimum": 34.315,
+                "maximum": 65.575
+              },
+              "firstPostCompositorCaptureEndMsAfterReturn": {
+                "minimum": 53.904,
+                "maximum": 85.315
+              }
+            },
+            {
+              "installation": "upgraded",
+              "mode": "tool",
+              "transitions": 6,
+              "frames": 87,
+              "immediateFrames": 6,
+              "postCompositorFrames": 81,
+              "postCompositorSourceFrames": 0,
+              "postCompositorNonTargetFrames": 0,
+              "immediateNonTargetFrames": 3,
+              "allTransitionsSamplingComplete": true,
+              "allTransitionsReachedTarget": true,
+              "requestedSizes": [
+                [
+                  960,
+                  680
+                ],
+                [
+                  1024,
+                  728
+                ]
+              ],
+              "totalSeriesSeconds": 2.787431,
+              "maximumCaptureGapMs": 62.337,
+              "moveWindowMs": {
+                "minimum": 16.779,
+                "maximum": 18.681
+              },
+              "immediateCaptureStartMsAfterReturn": {
+                "minimum": 0.001,
+                "maximum": 0.002
+              },
+              "immediateCaptureEndMsAfterReturn": {
+                "minimum": 28.914,
+                "maximum": 48.877
+              },
+              "firstPostCompositorCaptureStartMsAfterReturn": {
+                "minimum": 41.953,
+                "maximum": 62.339
+              },
+              "firstPostCompositorCaptureEndMsAfterReturn": {
+                "minimum": 61.329,
+                "maximum": 81.803
+              }
+            },
+            {
+              "installation": "upgraded",
+              "mode": "workflow",
+              "transitions": 6,
+              "frames": 88,
+              "immediateFrames": 6,
+              "postCompositorFrames": 82,
+              "postCompositorSourceFrames": 0,
+              "postCompositorNonTargetFrames": 0,
+              "immediateNonTargetFrames": 0,
+              "allTransitionsSamplingComplete": true,
+              "allTransitionsReachedTarget": true,
+              "requestedSizes": [
+                [
+                  960,
+                  680
+                ],
+                [
+                  1024,
+                  728
+                ]
+              ],
+              "totalSeriesSeconds": 2.807165,
+              "maximumCaptureGapMs": 61.282,
+              "moveWindowMs": {
+                "minimum": 27.276,
+                "maximum": 30.866
+              },
+              "immediateCaptureStartMsAfterReturn": {
+                "minimum": 0.001,
+                "maximum": 0.003
+              },
+              "immediateCaptureEndMsAfterReturn": {
+                "minimum": 20.41,
+                "maximum": 48.193
+              },
+              "firstPostCompositorCaptureStartMsAfterReturn": {
+                "minimum": 34.009,
+                "maximum": 61.285
+              },
+              "firstPostCompositorCaptureEndMsAfterReturn": {
+                "minimum": 53.629,
+                "maximum": 81.078
+              }
+            }
+          ],
+          "passiveVisibleResizeSeries": 4,
+          "passiveVisibleResizeCaptureCount": 16
+        },
+        "feedback": {
+          "report": {
+            "file": "native-tester-feedback.json",
+            "bytes": 532028,
+            "sha256": "dfc2015d40aceab97ce8480eacb532b1a3e1be92425bf28971a3f85e1c636bfd"
+          },
+          "passed": 13,
+          "failed": 0,
+          "blocked": 0,
+          "skips": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": true,
+          "gateSha256": "dc63dd2a47ea2555fd0ceb47a96fcbafc9da915a2b188288e428bda8a0d1f751",
+          "scenarioIds": [
+            "samples-without-workflow",
+            "run-temporal-960",
+            "run-temporal-1024",
+            "starter-category-temporal-960",
+            "starter-category-temporal-1024",
+            "separate-methods",
+            "run-missing-input",
+            "samples-create-edit-save-reopen",
+            "samples-cancel-and-invalid-import",
+            "samples-example-preview",
+            "samples-example-native-science",
+            "overflow-anchor-temporal-960",
+            "overflow-anchor-temporal-1024"
+          ],
+          "temporalFeedback": [
+            {
+              "group": "run",
+              "series": 6,
+              "frames": 832,
+              "elapsedSeconds": 26.798287,
+              "maximumWithinSeriesCaptureGapMs": 62.792,
+              "blackBlockFrames": 0,
+              "unexpectedStableFrames": 0,
+              "allSeriesSamplingComplete": true
+            },
+            {
+              "group": "starterCategories",
+              "series": 12,
+              "frames": 163,
+              "elapsedSeconds": 10.042858,
+              "maximumWithinSeriesCaptureGapMs": 78.683,
+              "blackBlockFrames": 0,
+              "unexpectedStableFrames": 0,
+              "allSeriesSamplingComplete": true
+            },
+            {
+              "group": "overflowCategories",
+              "series": 23,
+              "frames": 314,
+              "elapsedSeconds": 19.154122,
+              "maximumWithinSeriesCaptureGapMs": 78.421,
+              "blackBlockFrames": 0,
+              "unexpectedStableFrames": 0,
+              "allSeriesSamplingComplete": true
+            }
+          ],
+          "archiveFilesVerifiedBefore": 277,
+          "archiveFilesVerifiedAfter": 277
+        }
+      },
+      "priorSameArchiveRegressions": [
+        {
+          "group": "batch",
+          "run": 38041029923,
+          "report": {
+            "file": "native-batch.json",
+            "bytes": 36092,
+            "sha256": "6c62cfb8391cbd94bc29d566587debfce453ea0d9b327ea1118d89c04f4aa399"
+          },
+          "passed": 11,
+          "failed": 0,
+          "skips": 0
+        },
+        {
+          "group": "readiness",
+          "run": 38041029923,
+          "report": {
+            "file": "native-readiness.json",
+            "bytes": 9034,
+            "sha256": "60040f03e32dfc158fa888b0f36fe38bedcdeff2bac59f579fdb002c9750d6e3"
+          },
+          "passed": 5,
+          "failed": 0,
+          "skips": 0
+        },
+        {
+          "group": "curated",
+          "run": 38041029923,
+          "report": {
+            "file": "native-curated.json",
+            "bytes": 14747,
+            "sha256": "18a53b91c648b039660afb5ace090992972e5cd8b5f3b85df0dd3ca34f0f1022"
+          },
+          "passed": 11,
+          "failed": 0,
+          "skips": 0
+        },
+        {
+          "group": "workspace",
+          "run": 38041029923,
+          "report": {
+            "file": "native-workspace.json",
+            "bytes": 24315,
+            "sha256": "b4c04e8dc7a6b16297260a835ce913a07426a111be288b986274ccd775a72316"
+          },
+          "passed": 32,
+          "failed": 0,
+          "skips": 0
+        },
+        {
+          "group": "reference-management",
+          "run": 38041029923,
+          "report": {
+            "file": "native-reference-management.json",
+            "bytes": 25813,
+            "sha256": "3b6620e1b71954232321040cf74753c6064403a3ea1db3e3e96b47a0c64c43dc"
+          },
+          "passed": 10,
+          "failed": 0,
+          "skips": 0
+        },
+        {
+          "group": "results",
+          "run": 38041029923,
+          "report": {
+            "file": "native-results.json",
+            "bytes": 14511,
+            "sha256": "a69b9bb57354751c378066c9cdd3ed7ee6d1f9f6982f37ba9f4c5b4b77f29ecd"
+          },
+          "passed": 9,
+          "failed": 0,
+          "skips": 0
+        },
+        {
+          "group": "scroll",
+          "run": 38041029923,
+          "report": {
+            "file": "native-scroll.json",
+            "bytes": 320517,
+            "sha256": "3f610538c1029689dbb66e4975222864aa49b74ea123e7179843ed9fb892b476"
+          },
+          "passed": 3,
+          "failed": 0,
+          "skips": 0
+        }
+      ],
+      "uniqueCandidateChecksPassed": 117
+    },
+    {
+      "installation": "spaces",
+      "observedDpi": [
+        96
+      ],
+      "artifact": {
+        "id": 11665719052,
+        "bytes": 8128323,
+        "sha256": "f2f0969a440983fe7a3e60ff26d24902f0953b61053140b8b1003fcc8f58ce6d",
+        "githubApiDigestMatched": true,
+        "zipCrc": "passed",
+        "expiresUtc": "2026-11-09T09:46:40Z",
+        "url": "https://github.com/comparativechrono/workbench/actions/runs/38042425723/artifacts/11665719052"
+      },
+      "candidateRecheck": {
+        "patch": {
+          "report": {
+            "file": "native-ui-patch.json",
+            "bytes": 354608,
+            "sha256": "750f0b5bb5d6a59665de3005ec975fb307fe28e9dcea858cd26e94fb4a0031cc"
+          },
+          "passed": 23,
+          "failed": 0,
+          "blocked": 0,
+          "skips": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": true,
+          "gateSha256": "5441b76d17ab7566efaa46a3ae6c211541238d4ece6170f382f25c08a7ad79cc",
+          "scenarioIds": [
+            "candidate-input-identities",
+            "baseline-fixtures",
+            "updater-cancel",
+            "updater-invalid",
+            "updater-install",
+            "updater-repeat",
+            "upgraded-fixture-readback",
+            "fresh-startup-bounds",
+            "fresh-starter-setup",
+            "fresh-result-fixture",
+            "fresh-library-keyboard",
+            "fresh-tool-temporal-resize",
+            "fresh-workflow-temporal-resize",
+            "fresh-layout",
+            "fresh-results-empty",
+            "fresh-results-populated",
+            "upgraded-startup-bounds",
+            "upgraded-library-keyboard",
+            "upgraded-tool-temporal-resize",
+            "upgraded-workflow-temporal-resize",
+            "upgraded-layout",
+            "upgraded-results-empty",
+            "upgraded-results-populated"
+          ],
+          "temporalResize": [
+            {
+              "installation": "fresh",
+              "mode": "tool",
+              "transitions": 6,
+              "frames": 87,
+              "immediateFrames": 6,
+              "postCompositorFrames": 81,
+              "postCompositorSourceFrames": 0,
+              "postCompositorNonTargetFrames": 0,
+              "immediateNonTargetFrames": 3,
+              "allTransitionsSamplingComplete": true,
+              "allTransitionsReachedTarget": true,
+              "requestedSizes": [
+                [
+                  960,
+                  680
+                ],
+                [
+                  1024,
+                  728
+                ]
+              ],
+              "totalSeriesSeconds": 2.802474,
+              "maximumCaptureGapMs": 58.189,
+              "moveWindowMs": {
+                "minimum": 16.701,
+                "maximum": 18.243
+              },
+              "immediateCaptureStartMsAfterReturn": {
+                "minimum": 0.001,
+                "maximum": 0.003
+              },
+              "immediateCaptureEndMsAfterReturn": {
+                "minimum": 30.423,
+                "maximum": 45.884
+              },
+              "firstPostCompositorCaptureStartMsAfterReturn": {
+                "minimum": 43.18,
+                "maximum": 58.191
+              },
+              "firstPostCompositorCaptureEndMsAfterReturn": {
+                "minimum": 62.16,
+                "maximum": 77.587
+              }
+            },
+            {
+              "installation": "fresh",
+              "mode": "workflow",
+              "transitions": 6,
+              "frames": 89,
+              "immediateFrames": 6,
+              "postCompositorFrames": 83,
+              "postCompositorSourceFrames": 0,
+              "postCompositorNonTargetFrames": 0,
+              "immediateNonTargetFrames": 2,
+              "allTransitionsSamplingComplete": true,
+              "allTransitionsReachedTarget": true,
+              "requestedSizes": [
+                [
+                  960,
+                  680
+                ],
+                [
+                  1024,
+                  728
+                ]
+              ],
+              "totalSeriesSeconds": 2.807159,
+              "maximumCaptureGapMs": 61.743,
+              "moveWindowMs": {
+                "minimum": 25.892,
+                "maximum": 32.914
+              },
+              "immediateCaptureStartMsAfterReturn": {
+                "minimum": 0.001,
+                "maximum": 0.001
+              },
+              "immediateCaptureEndMsAfterReturn": {
+                "minimum": 20.691,
+                "maximum": 47.872
+              },
+              "firstPostCompositorCaptureStartMsAfterReturn": {
+                "minimum": 33.921,
+                "maximum": 61.744
+              },
+              "firstPostCompositorCaptureEndMsAfterReturn": {
+                "minimum": 53.112,
+                "maximum": 80.92
+              }
+            },
+            {
+              "installation": "upgraded",
+              "mode": "tool",
+              "transitions": 6,
+              "frames": 88,
+              "immediateFrames": 6,
+              "postCompositorFrames": 82,
+              "postCompositorSourceFrames": 0,
+              "postCompositorNonTargetFrames": 0,
+              "immediateNonTargetFrames": 5,
+              "allTransitionsSamplingComplete": true,
+              "allTransitionsReachedTarget": true,
+              "requestedSizes": [
+                [
+                  960,
+                  680
+                ],
+                [
+                  1024,
+                  728
+                ]
+              ],
+              "totalSeriesSeconds": 2.810552,
+              "maximumCaptureGapMs": 58.442,
+              "moveWindowMs": {
+                "minimum": 16.361,
+                "maximum": 17.966
+              },
+              "immediateCaptureStartMsAfterReturn": {
+                "minimum": 0.001,
+                "maximum": 0.001
+              },
+              "immediateCaptureEndMsAfterReturn": {
+                "minimum": 30.166,
+                "maximum": 34.047
+              },
+              "firstPostCompositorCaptureStartMsAfterReturn": {
+                "minimum": 43.072,
+                "maximum": 58.443
+              },
+              "firstPostCompositorCaptureEndMsAfterReturn": {
+                "minimum": 62.285,
+                "maximum": 77.964
+              }
+            },
+            {
+              "installation": "upgraded",
+              "mode": "workflow",
+              "transitions": 6,
+              "frames": 87,
+              "immediateFrames": 6,
+              "postCompositorFrames": 81,
+              "postCompositorSourceFrames": 0,
+              "postCompositorNonTargetFrames": 0,
+              "immediateNonTargetFrames": 3,
+              "allTransitionsSamplingComplete": true,
+              "allTransitionsReachedTarget": true,
+              "requestedSizes": [
+                [
+                  960,
+                  680
+                ],
+                [
+                  1024,
+                  728
+                ]
+              ],
+              "totalSeriesSeconds": 2.80764,
+              "maximumCaptureGapMs": 62.655,
+              "moveWindowMs": {
+                "minimum": 26.128,
+                "maximum": 30.828
+              },
+              "immediateCaptureStartMsAfterReturn": {
+                "minimum": 0.001,
+                "maximum": 0.002
+              },
+              "immediateCaptureEndMsAfterReturn": {
+                "minimum": 21.3,
+                "maximum": 49.232
+              },
+              "firstPostCompositorCaptureStartMsAfterReturn": {
+                "minimum": 34.718,
+                "maximum": 62.657
+              },
+              "firstPostCompositorCaptureEndMsAfterReturn": {
+                "minimum": 54.066,
+                "maximum": 85.415
+              }
+            }
+          ],
+          "passiveVisibleResizeSeries": 4,
+          "passiveVisibleResizeCaptureCount": 16
+        },
+        "feedback": {
+          "report": {
+            "file": "native-tester-feedback.json",
+            "bytes": 529934,
+            "sha256": "1f4c6211d5a289bcc89d4788e759665d209a5118e62bf83953b3a63d634f2e82"
+          },
+          "passed": 13,
+          "failed": 0,
+          "blocked": 0,
+          "skips": 0,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": true,
+          "gateSha256": "dc63dd2a47ea2555fd0ceb47a96fcbafc9da915a2b188288e428bda8a0d1f751",
+          "scenarioIds": [
+            "samples-without-workflow",
+            "run-temporal-960",
+            "run-temporal-1024",
+            "starter-category-temporal-960",
+            "starter-category-temporal-1024",
+            "separate-methods",
+            "run-missing-input",
+            "samples-create-edit-save-reopen",
+            "samples-cancel-and-invalid-import",
+            "samples-example-preview",
+            "samples-example-native-science",
+            "overflow-anchor-temporal-960",
+            "overflow-anchor-temporal-1024"
+          ],
+          "temporalFeedback": [
+            {
+              "group": "run",
+              "series": 6,
+              "frames": 829,
+              "elapsedSeconds": 26.796898,
+              "maximumWithinSeriesCaptureGapMs": 62.847,
+              "blackBlockFrames": 0,
+              "unexpectedStableFrames": 0,
+              "allSeriesSamplingComplete": true
+            },
+            {
+              "group": "starterCategories",
+              "series": 12,
+              "frames": 165,
+              "elapsedSeconds": 9.986577,
+              "maximumWithinSeriesCaptureGapMs": 78.564,
+              "blackBlockFrames": 0,
+              "unexpectedStableFrames": 0,
+              "allSeriesSamplingComplete": true
+            },
+            {
+              "group": "overflowCategories",
+              "series": 23,
+              "frames": 307,
+              "elapsedSeconds": 19.153437,
+              "maximumWithinSeriesCaptureGapMs": 78.621,
+              "blackBlockFrames": 0,
+              "unexpectedStableFrames": 0,
+              "allSeriesSamplingComplete": true
+            }
+          ],
+          "archiveFilesVerifiedBefore": 277,
+          "archiveFilesVerifiedAfter": 277
+        }
+      },
+      "priorSameArchiveRegressions": [
+        {
+          "group": "batch",
+          "run": 38041029923,
+          "report": {
+            "file": "native-batch.json",
+            "bytes": 36110,
+            "sha256": "713d60b234f5342c677467d5526f7478ac263f90a8830078903641d576797e6a"
+          },
+          "passed": 11,
+          "failed": 0,
+          "skips": 0
+        },
+        {
+          "group": "readiness",
+          "run": 38041029923,
+          "report": {
+            "file": "native-readiness.json",
+            "bytes": 9034,
+            "sha256": "532141d52db78efe3380f833c76ba2807915381733b87f7513e2ee5f27c1641b"
+          },
+          "passed": 5,
+          "failed": 0,
+          "skips": 0
+        },
+        {
+          "group": "curated",
+          "run": 38041029923,
+          "report": {
+            "file": "native-curated.json",
+            "bytes": 14747,
+            "sha256": "c182c08547618b91cf4751964c82eed8d43434067a7c22ca83c2ddc2e828917f"
+          },
+          "passed": 11,
+          "failed": 0,
+          "skips": 0
+        },
+        {
+          "group": "workspace",
+          "run": 38041029923,
+          "report": {
+            "file": "native-workspace.json",
+            "bytes": 24364,
+            "sha256": "f6af5ee0ebdbcb8bd388d0c03bd10e713a9207ee5edc2fe7f567e0217e11eb7c"
+          },
+          "passed": 32,
+          "failed": 0,
+          "skips": 0
+        },
+        {
+          "group": "reference-management",
+          "run": 38041029923,
+          "report": {
+            "file": "native-reference-management.json",
+            "bytes": 25814,
+            "sha256": "229b69d453a31674dae4d48299d7882fff8d57227e8a7c778dc242052d8b541e"
+          },
+          "passed": 10,
+          "failed": 0,
+          "skips": 0
+        },
+        {
+          "group": "results",
+          "run": 38041029923,
+          "report": {
+            "file": "native-results.json",
+            "bytes": 14511,
+            "sha256": "b487aeb91518e2eb1d1c3913d216dec18f39bdc08dec72720597d55b4a285a0d"
+          },
+          "passed": 9,
+          "failed": 0,
+          "skips": 0
+        },
+        {
+          "group": "scroll",
+          "run": 38041029923,
+          "report": {
+            "file": "native-scroll.json",
+            "bytes": 320554,
+            "sha256": "b2be1c9b83059315c35b6112cccb74a5c84dd035f1e8cded15833e2b4c76b8fa"
+          },
+          "passed": 3,
+          "failed": 0,
+          "skips": 0
+        }
+      ],
+      "uniqueCandidateChecksPassed": 117
+    }
+  ],
+  "limits": [
+    "The required strict negative-control assertion failed because the old package showed no post-compositor stale-geometry frames. The observation-only comparison is separate, does not establish universal correctness, and does not turn this workflow into an overall pass.",
+    "Immediate pre-compositor frames include old or mixed geometry in both old and new packages; they are retained separately and excluded from the post-compositor acceptance assertion.",
+    "Finite captured observations at 96 DPI on hosted Windows; representative PCs, high DPI, multiple monitors and physical trackpads remain untested.",
+    "117 unique candidate checks per path combine 81 unchanged-archive regressions from the first run with 23 patch and 13 feedback checks from this recheck. Repeated checks are not added.",
+    "Raw reports remain in expiring Actions artifacts; this receipt preserves their exact hashes and selected counts without session tokens, machine paths, logs or private metadata.",
+    "Observation rows preserve recorded millisecond read intervals and resize call intervals; they are not exact visual presentation times, a latency benchmark or evidence of a performance improvement."
+  ],
+  "negativeControl": {
+    "installation": "ordinary",
+    "report": {
+      "file": "native-resize-negative.json",
+      "bytes": 70257,
+      "sha256": "2118bd17ac857d4db89415d95c08d374bed5023c952090250159d5e2b139e258"
+    },
+    "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+    "gateCommit": "20514d31650f71d4ab99dd9450a747823a995667",
+    "passed": 0,
+    "failed": 1,
+    "blocked": 0,
+    "skips": 0,
+    "negativeControlValidated": false,
+    "failure": "The exact old-package source-geometry defect was not reproduced.",
+    "temporalResize": [
+      {
+        "installation": "previous",
+        "mode": "tool",
+        "transitions": 6,
+        "frames": 88,
+        "immediateFrames": 6,
+        "postCompositorFrames": 82,
+        "postCompositorSourceFrames": 0,
+        "postCompositorNonTargetFrames": 0,
+        "immediateNonTargetFrames": 6,
+        "allTransitionsSamplingComplete": true,
+        "allTransitionsReachedTarget": true,
+        "requestedSizes": [
+          [
+            960,
+            680
+          ],
+          [
+            1024,
+            728
+          ]
+        ],
+        "totalSeriesSeconds": 2.869497,
+        "maximumCaptureGapMs": 80.172,
+        "moveWindowMs": {
+          "minimum": 9.283,
+          "maximum": 9.631
+        },
+        "immediateCaptureStartMsAfterReturn": {
+          "minimum": 0.002,
+          "maximum": 0.004
+        },
+        "immediateCaptureEndMsAfterReturn": {
+          "minimum": 27.726,
+          "maximum": 52.07
+        },
+        "firstPostCompositorCaptureStartMsAfterReturn": {
+          "minimum": 40.447,
+          "maximum": 80.174
+        },
+        "firstPostCompositorCaptureEndMsAfterReturn": {
+          "minimum": 59.73,
+          "maximum": 99.859
+        }
+      }
+    ],
+    "archive": {
+      "name": "native-workbench-0.16.1-starter-windows.zip",
+      "bytes": 17879604,
+      "sha256": "1291f93b5ece3c4da34eb2f2e29fccc83b6d87ec5fb73abf28bfd9cc8f155b75"
+    },
+    "totalFrames": 88
+  },
+  "diagnosticAcquisitionCompleted": true,
+  "diagnosticCountsAreAcceptanceChecks": false,
+  "observationScope": {
+    "installation": "ordinary",
+    "mode": "tool",
+    "observedDpi": 96,
+    "requestedSizes": [
+      [
+        960,
+        680
+      ],
+      [
+        1024,
+        728
+      ]
+    ],
+    "burstCountPerPackage": 3,
+    "resizeCallsPerBurst": 12,
+    "method": "Concurrent repeated resize calls and passive desktop BitBlt reads. Raw frames and timestamps acquired without compositor synchronization, deliberate pacing, geometry queries, hashing or file writes during each burst.",
+    "excludedRegions": "Edit/caret interiors, tree, status, mode-button hover/focus and nonclient chrome.",
+    "interpretation": "The bounded observations contain frames matching neither settled endpoint in the previous package and none in this candidate. Acquisition completion is not an application acceptance or differential fix verdict.",
+    "timingLimitation": "Read intervals can overlap one or more resize calls and do not identify the exact presentation instant. An earlier endpoint can reflect normal compositor latency. Different call durations, read intervals and frame counts preclude performance or duration-improvement claims.",
+    "strictNegativeControl": "Retained as failed because the prior package had no stale geometry in the separate post-compositor assertion. The observational comparison does not turn that failed assertion into a pass."
+  },
+  "observations": [
+    {
+      "package": "previous",
+      "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+      "gateCommit": "20514d31650f71d4ab99dd9450a747823a995667",
+      "gateSha256": "5441b76d17ab7566efaa46a3ae6c211541238d4ece6170f382f25c08a7ad79cc",
+      "report": {
+        "file": "native-resize-observation.json",
+        "bytes": 66861,
+        "sha256": "29b58024b06ac92c317c3e2836d81c3dcebff93de239ee976f83c39734afbd17"
+      },
+      "archive": {
+        "name": "native-workbench-0.16.1-starter-windows.zip",
+        "bytes": 17879604,
+        "sha256": "1291f93b5ece3c4da34eb2f2e29fccc83b6d87ec5fb73abf28bfd9cc8f155b75"
+      },
+      "diagnosticCompleted": true,
+      "countsAsAcceptancePass": false,
+      "commonClientIntersection": [
+        8,
+        51,
+        952,
+        672
+      ],
+      "comparedRectangles": [
+        [
+          19,
+          599,
+          205,
+          633
+        ],
+        [
+          19,
+          647,
+          205,
+          672
+        ],
+        [
+          23,
+          114,
+          201,
+          140
+        ],
+        [
+          228,
+          164,
+          595,
+          186
+        ],
+        [
+          228,
+          164,
+          659,
+          186
+        ],
+        [
+          228,
+          192,
+          595,
+          214
+        ],
+        [
+          228,
+          192,
+          659,
+          214
+        ],
+        [
+          228,
+          220,
+          595,
+          336
+        ],
+        [
+          228,
+          220,
+          659,
+          317
+        ],
+        [
+          228,
+          323,
+          659,
+          345
+        ],
+        [
+          228,
+          342,
+          595,
+          364
+        ],
+        [
+          228,
+          397,
+          659,
+          419
+        ],
+        [
+          228,
+          416,
+          595,
+          438
+        ],
+        [
+          228,
+          425,
+          659,
+          465
+        ],
+        [
+          228,
+          444,
+          595,
+          484
+        ],
+        [
+          228,
+          471,
+          659,
+          493
+        ],
+        [
+          228,
+          490,
+          595,
+          512
+        ],
+        [
+          228,
+          499,
+          659,
+          521
+        ],
+        [
+          228,
+          518,
+          595,
+          540
+        ],
+        [
+          228,
+          573,
+          659,
+          613
+        ],
+        [
+          228,
+          592,
+          595,
+          632
+        ],
+        [
+          228,
+          607,
+          348,
+          641
+        ],
+        [
+          228,
+          619,
+          659,
+          641
+        ],
+        [
+          228,
+          638,
+          595,
+          660
+        ],
+        [
+          228,
+          647,
+          659,
+          669
+        ],
+        [
+          228,
+          655,
+          348,
+          672
+        ],
+        [
+          228,
+          666,
+          595,
+          672
+        ],
+        [
+          232,
+          115,
+          616,
+          143
+        ],
+        [
+          232,
+          115,
+          680,
+          143
+        ],
+        [
+          354,
+          607,
+          440,
+          641
+        ],
+        [
+          354,
+          655,
+          440,
+          672
+        ],
+        [
+          643,
+          607,
+          791,
+          641
+        ],
+        [
+          646,
+          162,
+          921,
+          186
+        ],
+        [
+          646,
+          240,
+          921,
+          264
+        ],
+        [
+          646,
+          306,
+          921,
+          340
+        ],
+        [
+          646,
+          346,
+          921,
+          390
+        ],
+        [
+          646,
+          408,
+          921,
+          432
+        ],
+        [
+          646,
+          474,
+          921,
+          508
+        ],
+        [
+          646,
+          514,
+          921,
+          558
+        ],
+        [
+          646,
+          580,
+          921,
+          616
+        ],
+        [
+          646,
+          624,
+          921,
+          668
+        ],
+        [
+          647,
+          115,
+          937,
+          143
+        ],
+        [
+          707,
+          655,
+          855,
+          672
+        ],
+        [
+          710,
+          162,
+          952,
+          186
+        ],
+        [
+          710,
+          240,
+          952,
+          264
+        ],
+        [
+          710,
+          306,
+          952,
+          340
+        ],
+        [
+          710,
+          346,
+          952,
+          390
+        ],
+        [
+          710,
+          408,
+          952,
+          432
+        ],
+        [
+          710,
+          474,
+          952,
+          508
+        ],
+        [
+          710,
+          514,
+          952,
+          558
+        ],
+        [
+          710,
+          580,
+          952,
+          616
+        ],
+        [
+          710,
+          624,
+          952,
+          668
+        ],
+        [
+          711,
+          115,
+          952,
+          143
+        ],
+        [
+          797,
+          607,
+          941,
+          641
+        ],
+        [
+          861,
+          655,
+          952,
+          672
+        ]
+      ],
+      "burstCount": 3,
+      "bursts": [
+        {
+          "burst": 0,
+          "workerJoined": true,
+          "samplingComplete": true,
+          "frameLimit": 64,
+          "requestedPostMotionMs": 200,
+          "acquiredFrames": 16,
+          "frames": 16,
+          "totalReadIntervalMs": 472.3312999999507,
+          "elapsedPostMotionMs": 215.09630000002744,
+          "capturesOverlappingResizeCalls": 6,
+          "framesMatchingNeitherEndpoint": 5,
+          "firstFinalTargetReadIntervalMsAfterReturn": [
+            59.15420000007998,
+            75.20210000006955
+          ],
+          "resizeCalls": [
+            {
+              "index": 0,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 36.08719999999721,
+              "returnMs": 45.39030000000821,
+              "returnedSuccess": true
+            },
+            {
+              "index": 1,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 45.40939999992588,
+              "returnMs": 56.10400000000482,
+              "returnedSuccess": true
+            },
+            {
+              "index": 2,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 56.11549999991894,
+              "returnMs": 67.07629999993969,
+              "returnedSuccess": true
+            },
+            {
+              "index": 3,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 67.08889999993062,
+              "returnMs": 106.61689999994906,
+              "returnedSuccess": true
+            },
+            {
+              "index": 4,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 106.62869999998748,
+              "returnMs": 117.4394999999322,
+              "returnedSuccess": true
+            },
+            {
+              "index": 5,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 117.45409999991807,
+              "returnMs": 153.698200000008,
+              "returnedSuccess": true
+            },
+            {
+              "index": 6,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 153.71159999995143,
+              "returnMs": 164.4107999999278,
+              "returnedSuccess": true
+            },
+            {
+              "index": 7,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 164.42459999996117,
+              "returnMs": 184.67539999994642,
+              "returnedSuccess": true
+            },
+            {
+              "index": 8,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 184.6868000000086,
+              "returnMs": 194.13909999991574,
+              "returnedSuccess": true
+            },
+            {
+              "index": 9,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 194.15140000000974,
+              "returnMs": 203.72979999990548,
+              "returnedSuccess": true
+            },
+            {
+              "index": 10,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 203.7467000000106,
+              "returnMs": 247.17679999992015,
+              "returnedSuccess": true
+            },
+            {
+              "index": 11,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 247.18699999993987,
+              "returnMs": 257.6022999999168,
+              "returnedSuccess": true
+            }
+          ],
+          "captureReadIntervals": [
+            {
+              "index": 0,
+              "captureStartMs": 0.36729999999352003,
+              "captureEndMs": 35.49179999993157,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 1,
+              "captureStartMs": 36.062599999922895,
+              "captureEndMs": 51.397699999938595,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [
+                0,
+                1
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 2,
+              "captureStartMs": 51.8526999999267,
+              "captureEndMs": 99.86299999991388,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [
+                1,
+                2,
+                3
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 3,
+              "captureStartMs": 100.31929999991007,
+              "captureEndMs": 144.67400000000907,
+              "matchingEndpoint": null,
+              "overlappingResizeCallIndices": [
+                3,
+                4,
+                5
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 4,
+              "captureStartMs": 145.13829999998507,
+              "captureEndMs": 175.83779999995386,
+              "matchingEndpoint": null,
+              "overlappingResizeCallIndices": [
+                5,
+                6,
+                7
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 5,
+              "captureStartMs": 176.2920999999551,
+              "captureEndMs": 240.20699999994122,
+              "matchingEndpoint": null,
+              "overlappingResizeCallIndices": [
+                7,
+                8,
+                9,
+                10
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 6,
+              "captureStartMs": 240.6680999999935,
+              "captureEndMs": 268.8432999999577,
+              "matchingEndpoint": null,
+              "overlappingResizeCallIndices": [
+                10,
+                11
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 7,
+              "captureStartMs": 270.25909999997566,
+              "captureEndMs": 316.3201999999501,
+              "matchingEndpoint": null,
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 8,
+              "captureStartMs": 316.7564999999968,
+              "captureEndMs": 332.80439999998634,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 9,
+              "captureStartMs": 333.2242999999835,
+              "captureEndMs": 363.5742000000164,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 10,
+              "captureStartMs": 364.0037999999777,
+              "captureEndMs": 379.13909999997486,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 11,
+              "captureStartMs": 379.61150000001,
+              "captureEndMs": 394.7099999999182,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 12,
+              "captureStartMs": 395.12679999995726,
+              "captureEndMs": 425.9704999999485,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 13,
+              "captureStartMs": 426.4158999999381,
+              "captureEndMs": 441.58859999993183,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 14,
+              "captureStartMs": 441.9864999999845,
+              "captureEndMs": 457.1220999999923,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 15,
+              "captureStartMs": 457.5671999999713,
+              "captureEndMs": 472.69859999994424,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            }
+          ]
+        },
+        {
+          "burst": 1,
+          "workerJoined": true,
+          "samplingComplete": true,
+          "frameLimit": 64,
+          "requestedPostMotionMs": 200,
+          "acquiredFrames": 15,
+          "frames": 15,
+          "totalReadIntervalMs": 461.3254999999299,
+          "elapsedPostMotionMs": 214.59570000001804,
+          "capturesOverlappingResizeCalls": 6,
+          "framesMatchingNeitherEndpoint": 5,
+          "firstFinalTargetReadIntervalMsAfterReturn": [
+            58.07240000001457,
+            89.55300000002353
+          ],
+          "resizeCalls": [
+            {
+              "index": 0,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 25.566299999923103,
+              "returnMs": 34.85430000000633,
+              "returnedSuccess": true
+            },
+            {
+              "index": 1,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 34.86729999997351,
+              "returnMs": 46.438799999918956,
+              "returnedSuccess": true
+            },
+            {
+              "index": 2,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 46.44919999998365,
+              "returnMs": 57.07719999998062,
+              "returnedSuccess": true
+            },
+            {
+              "index": 3,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 57.08989999993719,
+              "returnMs": 96.20610000001761,
+              "returnedSuccess": true
+            },
+            {
+              "index": 4,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 96.21599999991304,
+              "returnMs": 105.55079999994632,
+              "returnedSuccess": true
+            },
+            {
+              "index": 5,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 105.56039999994482,
+              "returnMs": 114.79989999997997,
+              "returnedSuccess": true
+            },
+            {
+              "index": 6,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 114.8164999999608,
+              "returnMs": 158.46939999994447,
+              "returnedSuccess": true
+            },
+            {
+              "index": 7,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 158.47949999999855,
+              "returnMs": 168.8345999999683,
+              "returnedSuccess": true
+            },
+            {
+              "index": 8,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 168.8477000000148,
+              "returnMs": 190.4720999999654,
+              "returnedSuccess": true
+            },
+            {
+              "index": 9,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 190.4835999999932,
+              "returnMs": 201.52509999991253,
+              "returnedSuccess": true
+            },
+            {
+              "index": 10,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 201.53989999994337,
+              "returnMs": 237.0168999999578,
+              "returnedSuccess": true
+            },
+            {
+              "index": 11,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 237.02989999992496,
+              "returnMs": 248.05859999992208,
+              "returnedSuccess": true
+            }
+          ],
+          "captureReadIntervals": [
+            {
+              "index": 0,
+              "captureStartMs": 1.328800000010233,
+              "captureEndMs": 24.861699999974007,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 1,
+              "captureStartMs": 25.542299999983697,
+              "captureEndMs": 41.0881000000245,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [
+                0,
+                1
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 2,
+              "captureStartMs": 41.64349999996375,
+              "captureEndMs": 87.4969000000192,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [
+                1,
+                2,
+                3
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 3,
+              "captureStartMs": 88.08460000000196,
+              "captureEndMs": 151.79249999994227,
+              "matchingEndpoint": null,
+              "overlappingResizeCallIndices": [
+                3,
+                4,
+                5,
+                6
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 4,
+              "captureStartMs": 152.22829999993337,
+              "captureEndMs": 180.6179999999813,
+              "matchingEndpoint": null,
+              "overlappingResizeCallIndices": [
+                6,
+                7,
+                8
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 5,
+              "captureStartMs": 181.9163000000117,
+              "captureEndMs": 228.01979999997002,
+              "matchingEndpoint": null,
+              "overlappingResizeCallIndices": [
+                8,
+                9,
+                10
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 6,
+              "captureStartMs": 228.50689999995666,
+              "captureEndMs": 275.04129999999805,
+              "matchingEndpoint": null,
+              "overlappingResizeCallIndices": [
+                10,
+                11
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 7,
+              "captureStartMs": 275.4671000000144,
+              "captureEndMs": 305.7086999999683,
+              "matchingEndpoint": null,
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 8,
+              "captureStartMs": 306.13099999993665,
+              "captureEndMs": 337.6115999999456,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 9,
+              "captureStartMs": 338.01229999994575,
+              "captureEndMs": 353.6736999999448,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 10,
+              "captureStartMs": 354.1083999999728,
+              "captureEndMs": 369.0637999999353,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 11,
+              "captureStartMs": 369.4964000000027,
+              "captureEndMs": 384.4364999999925,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 12,
+              "captureStartMs": 384.86599999998816,
+              "captureEndMs": 415.72099999996226,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 13,
+              "captureStartMs": 416.1440999999968,
+              "captureEndMs": 431.4372999999705,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 14,
+              "captureStartMs": 431.88279999992574,
+              "captureEndMs": 462.6542999999401,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            }
+          ]
+        },
+        {
+          "burst": 2,
+          "workerJoined": true,
+          "samplingComplete": true,
+          "frameLimit": 64,
+          "requestedPostMotionMs": 200,
+          "acquiredFrames": 15,
+          "frames": 15,
+          "totalReadIntervalMs": 446.4682000000266,
+          "elapsedPostMotionMs": 214.3280999999888,
+          "capturesOverlappingResizeCalls": 5,
+          "framesMatchingNeitherEndpoint": 4,
+          "firstFinalTargetReadIntervalMsAfterReturn": [
+            58.150699999941935,
+            74.03099999999085
+          ],
+          "resizeCalls": [
+            {
+              "index": 0,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 26.59819999996671,
+              "returnMs": 35.531500000047345,
+              "returnedSuccess": true
+            },
+            {
+              "index": 1,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 35.54440000004888,
+              "returnMs": 46.992300000056275,
+              "returnedSuccess": true
+            },
+            {
+              "index": 2,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 47.00230000003103,
+              "returnMs": 56.93300000007184,
+              "returnedSuccess": true
+            },
+            {
+              "index": 3,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 56.94790000006833,
+              "returnMs": 66.5475000000697,
+              "returnedSuccess": true
+            },
+            {
+              "index": 4,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 66.5608000000475,
+              "returnMs": 77.6487000000543,
+              "returnedSuccess": true
+            },
+            {
+              "index": 5,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 77.66309999999521,
+              "returnMs": 113.59909999998763,
+              "returnedSuccess": true
+            },
+            {
+              "index": 6,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 113.61429999999473,
+              "returnMs": 123.03350000001956,
+              "returnedSuccess": true
+            },
+            {
+              "index": 7,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 123.04440000002614,
+              "returnMs": 134.04260000004342,
+              "returnedSuccess": true
+            },
+            {
+              "index": 8,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 134.0556000000106,
+              "returnMs": 175.8773999999903,
+              "returnedSuccess": true
+            },
+            {
+              "index": 9,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 175.88920000002872,
+              "returnMs": 186.67960000004769,
+              "returnedSuccess": true
+            },
+            {
+              "index": 10,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 186.69339999996737,
+              "returnMs": 222.42519999997512,
+              "returnedSuccess": true
+            },
+            {
+              "index": 11,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 222.43639999999232,
+              "returnMs": 233.42950000005658,
+              "returnedSuccess": true
+            }
+          ],
+          "captureReadIntervals": [
+            {
+              "index": 0,
+              "captureStartMs": 1.2894000000187589,
+              "captureEndMs": 25.902900000005502,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 1,
+              "captureStartMs": 26.574400000072274,
+              "captureEndMs": 42.751899999984744,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [
+                0,
+                1
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 2,
+              "captureStartMs": 43.39419999996608,
+              "captureEndMs": 104.19170000000122,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 3,
+              "captureStartMs": 104.80010000003404,
+              "captureEndMs": 165.97590000003493,
+              "matchingEndpoint": null,
+              "overlappingResizeCallIndices": [
+                5,
+                6,
+                7,
+                8
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 4,
+              "captureStartMs": 167.43510000003425,
+              "captureEndMs": 212.672399999974,
+              "matchingEndpoint": null,
+              "overlappingResizeCallIndices": [
+                8,
+                9,
+                10
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 5,
+              "captureStartMs": 214.03080000004593,
+              "captureEndMs": 260.24710000001505,
+              "matchingEndpoint": null,
+              "overlappingResizeCallIndices": [
+                10,
+                11
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 6,
+              "captureStartMs": 260.66820000005464,
+              "captureEndMs": 291.15790000003017,
+              "matchingEndpoint": null,
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 7,
+              "captureStartMs": 291.5801999999985,
+              "captureEndMs": 307.46050000004743,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 8,
+              "captureStartMs": 307.91229999999814,
+              "captureEndMs": 338.82519999997385,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 9,
+              "captureStartMs": 339.26229999997304,
+              "captureEndMs": 354.21310000003814,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 10,
+              "captureStartMs": 354.67080000000806,
+              "captureEndMs": 369.7945000000118,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 11,
+              "captureStartMs": 370.22269999999935,
+              "captureEndMs": 385.38870000002134,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 12,
+              "captureStartMs": 385.84579999997004,
+              "captureEndMs": 401.17750000001706,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 13,
+              "captureStartMs": 401.6132000000425,
+              "captureEndMs": 432.4110000000019,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 14,
+              "captureStartMs": 432.8732000000173,
+              "captureEndMs": 447.7576000000454,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            }
+          ]
+        }
+      ],
+      "resizeCalls": 36,
+      "frames": 46,
+      "framesMatchingNeitherEndpoint": 14,
+      "capturesOverlappingResizeCalls": 17
+    },
+    {
+      "package": "candidate",
+      "sourceCommit": "51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e",
+      "gateCommit": "20514d31650f71d4ab99dd9450a747823a995667",
+      "gateSha256": "5441b76d17ab7566efaa46a3ae6c211541238d4ece6170f382f25c08a7ad79cc",
+      "report": {
+        "file": "native-resize-observation.json",
+        "bytes": 70636,
+        "sha256": "b2600bdcdff81cbe9014a24beecf21d7466d20f7a85f4174e5ffecac115d56f3"
+      },
+      "archive": {
+        "name": "native-workbench-0.16.1-starter-windows.zip",
+        "bytes": 17879852,
+        "sha256": "7fd59d5b021867991506e98ef94c5b239245030fb9da55d77accf8d8e2d43682"
+      },
+      "diagnosticCompleted": true,
+      "countsAsAcceptancePass": false,
+      "commonClientIntersection": [
+        8,
+        51,
+        952,
+        672
+      ],
+      "comparedRectangles": [
+        [
+          19,
+          599,
+          205,
+          633
+        ],
+        [
+          19,
+          647,
+          205,
+          672
+        ],
+        [
+          23,
+          114,
+          201,
+          140
+        ],
+        [
+          228,
+          164,
+          595,
+          186
+        ],
+        [
+          228,
+          164,
+          659,
+          186
+        ],
+        [
+          228,
+          192,
+          595,
+          214
+        ],
+        [
+          228,
+          192,
+          659,
+          214
+        ],
+        [
+          228,
+          220,
+          595,
+          336
+        ],
+        [
+          228,
+          220,
+          659,
+          317
+        ],
+        [
+          228,
+          323,
+          659,
+          345
+        ],
+        [
+          228,
+          342,
+          595,
+          364
+        ],
+        [
+          228,
+          397,
+          659,
+          419
+        ],
+        [
+          228,
+          416,
+          595,
+          438
+        ],
+        [
+          228,
+          425,
+          659,
+          465
+        ],
+        [
+          228,
+          444,
+          595,
+          484
+        ],
+        [
+          228,
+          471,
+          659,
+          493
+        ],
+        [
+          228,
+          490,
+          595,
+          512
+        ],
+        [
+          228,
+          499,
+          659,
+          521
+        ],
+        [
+          228,
+          518,
+          595,
+          540
+        ],
+        [
+          228,
+          573,
+          659,
+          613
+        ],
+        [
+          228,
+          592,
+          595,
+          632
+        ],
+        [
+          228,
+          607,
+          348,
+          641
+        ],
+        [
+          228,
+          619,
+          659,
+          641
+        ],
+        [
+          228,
+          638,
+          595,
+          660
+        ],
+        [
+          228,
+          647,
+          659,
+          669
+        ],
+        [
+          228,
+          655,
+          348,
+          672
+        ],
+        [
+          228,
+          666,
+          595,
+          672
+        ],
+        [
+          232,
+          115,
+          616,
+          143
+        ],
+        [
+          232,
+          115,
+          680,
+          143
+        ],
+        [
+          354,
+          607,
+          440,
+          641
+        ],
+        [
+          354,
+          655,
+          440,
+          672
+        ],
+        [
+          643,
+          607,
+          791,
+          641
+        ],
+        [
+          646,
+          162,
+          921,
+          186
+        ],
+        [
+          646,
+          240,
+          921,
+          264
+        ],
+        [
+          646,
+          306,
+          921,
+          340
+        ],
+        [
+          646,
+          346,
+          921,
+          390
+        ],
+        [
+          646,
+          408,
+          921,
+          432
+        ],
+        [
+          646,
+          474,
+          921,
+          508
+        ],
+        [
+          646,
+          514,
+          921,
+          558
+        ],
+        [
+          646,
+          580,
+          921,
+          616
+        ],
+        [
+          646,
+          624,
+          921,
+          668
+        ],
+        [
+          647,
+          115,
+          937,
+          143
+        ],
+        [
+          707,
+          655,
+          855,
+          672
+        ],
+        [
+          710,
+          162,
+          952,
+          186
+        ],
+        [
+          710,
+          240,
+          952,
+          264
+        ],
+        [
+          710,
+          306,
+          952,
+          340
+        ],
+        [
+          710,
+          346,
+          952,
+          390
+        ],
+        [
+          710,
+          408,
+          952,
+          432
+        ],
+        [
+          710,
+          474,
+          952,
+          508
+        ],
+        [
+          710,
+          514,
+          952,
+          558
+        ],
+        [
+          710,
+          580,
+          952,
+          616
+        ],
+        [
+          710,
+          624,
+          952,
+          668
+        ],
+        [
+          711,
+          115,
+          952,
+          143
+        ],
+        [
+          797,
+          607,
+          941,
+          641
+        ],
+        [
+          861,
+          655,
+          952,
+          672
+        ]
+      ],
+      "burstCount": 3,
+      "bursts": [
+        {
+          "burst": 0,
+          "workerJoined": true,
+          "samplingComplete": true,
+          "frameLimit": 64,
+          "requestedPostMotionMs": 200,
+          "acquiredFrames": 20,
+          "frames": 20,
+          "totalReadIntervalMs": 707.1824999999308,
+          "elapsedPostMotionMs": 202.47829999993883,
+          "capturesOverlappingResizeCalls": 11,
+          "framesMatchingNeitherEndpoint": 0,
+          "firstFinalTargetReadIntervalMsAfterReturn": [
+            30.533099999956903,
+            46.44889999997304
+          ],
+          "resizeCalls": [
+            {
+              "index": 0,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 36.5186999999878,
+              "returnMs": 55.56920000003629,
+              "returnedSuccess": true
+            },
+            {
+              "index": 1,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 55.58170000006157,
+              "returnMs": 71.99790000004214,
+              "returnedSuccess": true
+            },
+            {
+              "index": 2,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 72.01199999997243,
+              "returnMs": 90.65899999995963,
+              "returnedSuccess": true
+            },
+            {
+              "index": 3,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 90.67189999996117,
+              "returnMs": 131.82749999998578,
+              "returnedSuccess": true
+            },
+            {
+              "index": 4,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 131.8400999999767,
+              "returnMs": 178.38849999998274,
+              "returnedSuccess": true
+            },
+            {
+              "index": 5,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 178.40290000003733,
+              "returnMs": 224.7744999999668,
+              "returnedSuccess": true
+            },
+            {
+              "index": 6,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 224.78780000005827,
+              "returnMs": 271.8839000000344,
+              "returnedSuccess": true
+            },
+            {
+              "index": 7,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 271.89720000001216,
+              "returnMs": 317.95550000003914,
+              "returnedSuccess": true
+            },
+            {
+              "index": 8,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 317.9692999999588,
+              "returnMs": 364.93529999995644,
+              "returnedSuccess": true
+            },
+            {
+              "index": 9,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 364.94890000005853,
+              "returnMs": 412.1148000000403,
+              "returnedSuccess": true
+            },
+            {
+              "index": 10,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 412.1284000000287,
+              "returnMs": 458.52100000001883,
+              "returnedSuccess": true
+            },
+            {
+              "index": 11,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 458.5356000000047,
+              "returnMs": 505.1322000000482,
+              "returnedSuccess": true
+            }
+          ],
+          "captureReadIntervals": [
+            {
+              "index": 0,
+              "captureStartMs": 0.42800000005627226,
+              "captureEndMs": 35.84760000001097,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 1,
+              "captureStartMs": 36.490200000002915,
+              "captureEndMs": 52.26740000000518,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [
+                0
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 2,
+              "captureStartMs": 52.74650000001202,
+              "captureEndMs": 115.68120000004001,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 3,
+              "captureStartMs": 116.1471000000347,
+              "captureEndMs": 162.14990000003127,
+              "matchingEndpoint": [
+                1024,
+                728
+              ],
+              "overlappingResizeCallIndices": [
+                3,
+                4
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 4,
+              "captureStartMs": 162.58690000006482,
+              "captureEndMs": 208.7159000000156,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [
+                4,
+                5
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 5,
+              "captureStartMs": 209.20999999998457,
+              "captureEndMs": 255.22480000006453,
+              "matchingEndpoint": [
+                1024,
+                728
+              ],
+              "overlappingResizeCallIndices": [
+                5,
+                6
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 6,
+              "captureStartMs": 255.71790000003602,
+              "captureEndMs": 301.9970000000285,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [
+                6,
+                7
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 7,
+              "captureStartMs": 302.5546999999733,
+              "captureEndMs": 348.98069999997006,
+              "matchingEndpoint": [
+                1024,
+                728
+              ],
+              "overlappingResizeCallIndices": [
+                7,
+                8
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 8,
+              "captureStartMs": 349.4464999999991,
+              "captureEndMs": 396.4693000000352,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [
+                8,
+                9
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 9,
+              "captureStartMs": 396.899899999994,
+              "captureEndMs": 442.5839000000451,
+              "matchingEndpoint": [
+                1024,
+                728
+              ],
+              "overlappingResizeCallIndices": [
+                9,
+                10
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 10,
+              "captureStartMs": 443.02200000004177,
+              "captureEndMs": 489.530899999977,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [
+                10,
+                11
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 11,
+              "captureStartMs": 489.97559999997975,
+              "captureEndMs": 535.2572000000464,
+              "matchingEndpoint": [
+                1024,
+                728
+              ],
+              "overlappingResizeCallIndices": [
+                11
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 12,
+              "captureStartMs": 535.6653000000051,
+              "captureEndMs": 551.5811000000213,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 13,
+              "captureStartMs": 551.9947000000229,
+              "captureEndMs": 582.7855999999656,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 14,
+              "captureStartMs": 583.2342999999582,
+              "captureEndMs": 598.1881999999814,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 15,
+              "captureStartMs": 598.6202999999932,
+              "captureEndMs": 613.914799999975,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 16,
+              "captureStartMs": 614.3250999999736,
+              "captureEndMs": 629.5109999999795,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 17,
+              "captureStartMs": 629.9424000000045,
+              "captureEndMs": 645.0418000000582,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 18,
+              "captureStartMs": 645.4585000000179,
+              "captureEndMs": 676.3244999999642,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 19,
+              "captureStartMs": 676.7575000000079,
+              "captureEndMs": 707.610499999987,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            }
+          ]
+        },
+        {
+          "burst": 1,
+          "workerJoined": true,
+          "samplingComplete": true,
+          "frameLimit": 64,
+          "requestedPostMotionMs": 200,
+          "acquiredFrames": 23,
+          "frames": 23,
+          "totalReadIntervalMs": 722.0072999999729,
+          "elapsedPostMotionMs": 216.56269999994038,
+          "capturesOverlappingResizeCalls": 12,
+          "framesMatchingNeitherEndpoint": 0,
+          "firstFinalTargetReadIntervalMsAfterReturn": [
+            13.387899999997899,
+            44.91569999993317
+          ],
+          "resizeCalls": [
+            {
+              "index": 0,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 20.801200000050812,
+              "returnMs": 39.603300000067065,
+              "returnedSuccess": true
+            },
+            {
+              "index": 1,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 39.61170000002312,
+              "returnMs": 57.74980000001051,
+              "returnedSuccess": true
+            },
+            {
+              "index": 2,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 57.76400000002013,
+              "returnMs": 100.60910000004242,
+              "returnedSuccess": true
+            },
+            {
+              "index": 3,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 100.62319999997271,
+              "returnMs": 146.287099999995,
+              "returnedSuccess": true
+            },
+            {
+              "index": 4,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 146.30060000001777,
+              "returnMs": 194.68990000007125,
+              "returnedSuccess": true
+            },
+            {
+              "index": 5,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 194.7036000000253,
+              "returnMs": 224.09620000007635,
+              "returnedSuccess": true
+            },
+            {
+              "index": 6,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 224.10820000004605,
+              "returnMs": 272.4101000000019,
+              "returnedSuccess": true
+            },
+            {
+              "index": 7,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 272.42290000003777,
+              "returnMs": 317.9724000000306,
+              "returnedSuccess": true
+            },
+            {
+              "index": 8,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 317.9860999999846,
+              "returnMs": 365.84319999997206,
+              "returnedSuccess": true
+            },
+            {
+              "index": 9,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 365.85730000001604,
+              "returnMs": 412.4370000000681,
+              "returnedSuccess": true
+            },
+            {
+              "index": 10,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 412.45020000008026,
+              "returnMs": 460.1737000000412,
+              "returnedSuccess": true
+            },
+            {
+              "index": 11,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 460.1867000000084,
+              "returnMs": 507.1628000000601,
+              "returnedSuccess": true
+            }
+          ],
+          "captureReadIntervals": [
+            {
+              "index": 0,
+              "captureStartMs": 1.7182000000275366,
+              "captureEndMs": 20.14520000000175,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 1,
+              "captureStartMs": 20.780100000024504,
+              "captureEndMs": 36.60760000002483,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [
+                0
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 2,
+              "captureStartMs": 37.163400000054025,
+              "captureEndMs": 83.88669999999365,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [
+                0,
+                1,
+                2
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 3,
+              "captureStartMs": 84.44819999999709,
+              "captureEndMs": 130.45399999998608,
+              "matchingEndpoint": [
+                1024,
+                728
+              ],
+              "overlappingResizeCallIndices": [
+                2,
+                3
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 4,
+              "captureStartMs": 130.97219999997378,
+              "captureEndMs": 177.02989999997953,
+              "matchingEndpoint": [
+                1024,
+                728
+              ],
+              "overlappingResizeCallIndices": [
+                3,
+                4
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 5,
+              "captureStartMs": 177.46599999998125,
+              "captureEndMs": 208.47109999999702,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [
+                4,
+                5
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 6,
+              "captureStartMs": 208.8855000000649,
+              "captureEndMs": 255.66309999999248,
+              "matchingEndpoint": [
+                1024,
+                728
+              ],
+              "overlappingResizeCallIndices": [
+                5,
+                6
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 7,
+              "captureStartMs": 256.16070000000946,
+              "captureEndMs": 302.41610000007313,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [
+                6,
+                7
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 8,
+              "captureStartMs": 302.95650000005026,
+              "captureEndMs": 349.25510000005033,
+              "matchingEndpoint": [
+                1024,
+                728
+              ],
+              "overlappingResizeCallIndices": [
+                7,
+                8
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 9,
+              "captureStartMs": 349.6883999999909,
+              "captureEndMs": 396.16239999998015,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [
+                8,
+                9
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 10,
+              "captureStartMs": 396.6004000000112,
+              "captureEndMs": 442.8840000000491,
+              "matchingEndpoint": [
+                1024,
+                728
+              ],
+              "overlappingResizeCallIndices": [
+                9,
+                10
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 11,
+              "captureStartMs": 443.32040000006145,
+              "captureEndMs": 489.99370000001363,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [
+                10,
+                11
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 12,
+              "captureStartMs": 490.447500000073,
+              "captureEndMs": 520.1141000000007,
+              "matchingEndpoint": [
+                1024,
+                728
+              ],
+              "overlappingResizeCallIndices": [
+                11
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 13,
+              "captureStartMs": 520.550700000058,
+              "captureEndMs": 552.0784999999933,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 14,
+              "captureStartMs": 552.5243000000728,
+              "captureEndMs": 567.4380000000383,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 15,
+              "captureStartMs": 567.8426000000627,
+              "captureEndMs": 582.8492000000551,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 16,
+              "captureStartMs": 583.265400000073,
+              "captureEndMs": 598.5523000000512,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 17,
+              "captureStartMs": 598.9614000000074,
+              "captureEndMs": 614.3392999999833,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 18,
+              "captureStartMs": 614.7783999999774,
+              "captureEndMs": 629.8772000000099,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 19,
+              "captureStartMs": 630.2838999999949,
+              "captureEndMs": 660.9841000000642,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 20,
+              "captureStartMs": 661.4359999999806,
+              "captureEndMs": 676.6886000000341,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 21,
+              "captureStartMs": 677.1193000000721,
+              "captureEndMs": 692.3322000000098,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 22,
+              "captureStartMs": 692.7623000000267,
+              "captureEndMs": 723.7255000000005,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            }
+          ]
+        },
+        {
+          "burst": 2,
+          "workerJoined": true,
+          "samplingComplete": true,
+          "frameLimit": 64,
+          "requestedPostMotionMs": 200,
+          "acquiredFrames": 21,
+          "frames": 21,
+          "totalReadIntervalMs": 724.1265000000112,
+          "elapsedPostMotionMs": 202.5800999999774,
+          "capturesOverlappingResizeCalls": 12,
+          "framesMatchingNeitherEndpoint": 0,
+          "firstFinalTargetReadIntervalMsAfterReturn": [
+            30.694499999981417,
+            62.18649999993886
+          ],
+          "resizeCalls": [
+            {
+              "index": 0,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 22.509000000013657,
+              "returnMs": 40.71550000003299,
+              "returnedSuccess": true
+            },
+            {
+              "index": 1,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 40.724500000010266,
+              "returnMs": 58.51940000002287,
+              "returnedSuccess": true
+            },
+            {
+              "index": 2,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 58.53309999997691,
+              "returnMs": 101.20100000006005,
+              "returnedSuccess": true
+            },
+            {
+              "index": 3,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 101.21350000008533,
+              "returnMs": 132.77560000005906,
+              "returnedSuccess": true
+            },
+            {
+              "index": 4,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 132.78839999998127,
+              "returnMs": 195.07740000005924,
+              "returnedSuccess": true
+            },
+            {
+              "index": 5,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 195.0906000000714,
+              "returnMs": 242.08060000000842,
+              "returnedSuccess": true
+            },
+            {
+              "index": 6,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 242.09450000000743,
+              "returnMs": 289.3055000000686,
+              "returnedSuccess": true
+            },
+            {
+              "index": 7,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 289.31870000008075,
+              "returnMs": 335.73469999998906,
+              "returnedSuccess": true
+            },
+            {
+              "index": 8,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 335.7484000000568,
+              "returnMs": 383.7684000000081,
+              "returnedSuccess": true
+            },
+            {
+              "index": 9,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 383.7819000000309,
+              "returnMs": 413.86150000005273,
+              "returnedSuccess": true
+            },
+            {
+              "index": 10,
+              "size": [
+                1024,
+                728
+              ],
+              "startMs": 413.874000000078,
+              "returnMs": 461.4776000000802,
+              "returnedSuccess": true
+            },
+            {
+              "index": 11,
+              "size": [
+                960,
+                680
+              ],
+              "startMs": 461.4910999999893,
+              "returnMs": 523.2593000000634,
+              "returnedSuccess": true
+            }
+          ],
+          "captureReadIntervals": [
+            {
+              "index": 0,
+              "captureStartMs": 1.7129000000295491,
+              "captureEndMs": 21.867100000008577,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 1,
+              "captureStartMs": 22.48640000004798,
+              "captureEndMs": 37.574800000015784,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [
+                0
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 2,
+              "captureStartMs": 38.14680000004955,
+              "captureEndMs": 84.95000000004893,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [
+                0,
+                1,
+                2
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 3,
+              "captureStartMs": 85.43059999999514,
+              "captureEndMs": 117.50270000004548,
+              "matchingEndpoint": [
+                1024,
+                728
+              ],
+              "overlappingResizeCallIndices": [
+                2,
+                3
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 4,
+              "captureStartMs": 117.99240000004829,
+              "captureEndMs": 178.90920000002097,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [
+                3,
+                4
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 5,
+              "captureStartMs": 179.45659999998043,
+              "captureEndMs": 226.40920000003462,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [
+                4,
+                5
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 6,
+              "captureStartMs": 226.88860000005207,
+              "captureEndMs": 272.9636000000255,
+              "matchingEndpoint": [
+                1024,
+                728
+              ],
+              "overlappingResizeCallIndices": [
+                5,
+                6
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 7,
+              "captureStartMs": 273.4318999999914,
+              "captureEndMs": 319.982600000003,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [
+                6,
+                7
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 8,
+              "captureStartMs": 320.41990000004716,
+              "captureEndMs": 367.0955000000049,
+              "matchingEndpoint": [
+                1024,
+                728
+              ],
+              "overlappingResizeCallIndices": [
+                7,
+                8
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 9,
+              "captureStartMs": 367.52640000008796,
+              "captureEndMs": 398.19090000003143,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [
+                8,
+                9
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 10,
+              "captureStartMs": 398.6261000000013,
+              "captureEndMs": 445.5748999999969,
+              "matchingEndpoint": [
+                1024,
+                728
+              ],
+              "overlappingResizeCallIndices": [
+                9,
+                10
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 11,
+              "captureStartMs": 446.2295000000722,
+              "captureEndMs": 507.3231000000078,
+              "matchingEndpoint": [
+                1024,
+                728
+              ],
+              "overlappingResizeCallIndices": [
+                10,
+                11
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 12,
+              "captureStartMs": 507.88090000003194,
+              "captureEndMs": 553.528799999981,
+              "matchingEndpoint": [
+                1024,
+                728
+              ],
+              "overlappingResizeCallIndices": [
+                11
+              ],
+              "startsAfterFinalReturn": false
+            },
+            {
+              "index": 13,
+              "captureStartMs": 553.9538000000448,
+              "captureEndMs": 585.4458000000022,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 14,
+              "captureStartMs": 585.8827000000701,
+              "captureEndMs": 600.9316000000808,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 15,
+              "captureStartMs": 601.3366000000815,
+              "captureEndMs": 632.1583999999802,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 16,
+              "captureStartMs": 632.5936000000638,
+              "captureEndMs": 647.8726999999935,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 17,
+              "captureStartMs": 648.2994000000417,
+              "captureEndMs": 663.4374999999864,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 18,
+              "captureStartMs": 663.8437999999951,
+              "captureEndMs": 694.7407999999768,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 19,
+              "captureStartMs": 695.1480000000174,
+              "captureEndMs": 710.1069999999936,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            },
+            {
+              "index": 20,
+              "captureStartMs": 710.5254000000514,
+              "captureEndMs": 725.8394000000408,
+              "matchingEndpoint": [
+                960,
+                680
+              ],
+              "overlappingResizeCallIndices": [],
+              "startsAfterFinalReturn": true
+            }
+          ]
+        }
+      ],
+      "resizeCalls": 36,
+      "frames": 64,
+      "framesMatchingNeitherEndpoint": 0,
+      "capturesOverlappingResizeCalls": 35
+    }
+  ]
+}

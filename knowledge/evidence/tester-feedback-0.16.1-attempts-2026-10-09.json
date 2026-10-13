@@ -1,0 +1,521 @@
+{
+  "schema": 2,
+  "recordedOn": "2026-10-09",
+  "kind": "focused-validator-attempt-history",
+  "applicationSourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+  "attempts": [
+    {
+      "attempt": 1,
+      "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+      "gateCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+      "runId": 37997370988,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37997370988",
+      "conclusion": "failure",
+      "explanation": "Validator failures: obsolete 87-core-file expectation versus the new 90-file core; case-sensitive Methods assertion. Remaining checks did not run.",
+      "paths": {
+        "ordinary": {
+          "completeRegressionPasses": 81,
+          "evidenceArtifactId": 11647359392,
+          "evidenceArtifactUrl": "https://github.com/comparativechrono/workbench/actions/runs/37997370988/artifacts/11647359392",
+          "patch": {
+            "success": false,
+            "passed": 0,
+            "failed": 1,
+            "skipped": 0,
+            "originalReport": {
+              "bytes": 2966,
+              "sha256": "a9a17d2590ba523fe66ca4504362ffc3f23d2c4ced9cf480e29fe179202bae47",
+              "artifactRelativeName": "patch/native-ui-patch.json",
+              "rawContentCommitted": false
+            }
+          },
+          "feedback": {
+            "success": false,
+            "passed": 5,
+            "failed": 1,
+            "skipped": 0,
+            "plannedChecks": 13,
+            "originalReport": {
+              "bytes": 364866,
+              "sha256": "ecb78b2537c10cf623c5ef39aa5645034543c9922e3c21bc637206b03104603b",
+              "artifactRelativeName": "feedback/native-tester-feedback.json",
+              "rawContentCommitted": false
+            }
+          },
+          "completeRegressionScopes": {
+            "batch": {
+              "success": true,
+              "passed": 11,
+              "failed": 0,
+              "skipped": 0,
+              "originalReport": {
+                "bytes": 36095,
+                "sha256": "1f56d68b7cd0bb7f61a31776d01b6719bfe339b95065c2b893d848c751af9dbe",
+                "artifactRelativeName": "batch/native-batch.json",
+                "rawContentCommitted": false
+              }
+            },
+            "curated": {
+              "success": true,
+              "passed": 11,
+              "failed": 0,
+              "skipped": 0,
+              "originalReport": {
+                "bytes": 14747,
+                "sha256": "ae46ea057c93f7cbdc8d14eab92e12328c00bed8083d6c358ca915a64fcf72a6",
+                "artifactRelativeName": "curated/native-curated.json",
+                "rawContentCommitted": false
+              }
+            },
+            "readiness": {
+              "success": true,
+              "passed": 5,
+              "failed": 0,
+              "skipped": 0,
+              "originalReport": {
+                "bytes": 9230,
+                "sha256": "9aa0ba53fb60c66f57336d5cf61cf8d2e2580234f1e8443c012c2ea635a68514",
+                "artifactRelativeName": "readiness/native-readiness.json",
+                "rawContentCommitted": false
+              }
+            },
+            "reference-management": {
+              "success": true,
+              "passed": 10,
+              "failed": 0,
+              "skipped": 0,
+              "originalReport": {
+                "bytes": 25813,
+                "sha256": "fa2c1288504ff122051d9f837dd1df032d3f56c59fd4f041a65676cbba08e054",
+                "artifactRelativeName": "reference-management/native-reference-management.json",
+                "rawContentCommitted": false
+              }
+            },
+            "results": {
+              "success": true,
+              "passed": 9,
+              "failed": 0,
+              "skipped": 0,
+              "originalReport": {
+                "bytes": 14511,
+                "sha256": "5a59eff5697ec5189a28283a84dbbc71034761be0c75f050ba5758166cad709f",
+                "artifactRelativeName": "results/native-results.json",
+                "rawContentCommitted": false
+              }
+            },
+            "scroll": {
+              "success": true,
+              "passed": 3,
+              "failed": 0,
+              "skipped": 0,
+              "originalReport": {
+                "bytes": 320542,
+                "sha256": "21b075c85769b07656bc118a9853efd48c09de68e686ae08cc353df262879825",
+                "artifactRelativeName": "scroll/native-scroll.json",
+                "rawContentCommitted": false
+              }
+            },
+            "workspace": {
+              "success": true,
+              "passed": 32,
+              "failed": 0,
+              "skipped": 0,
+              "originalReport": {
+                "bytes": 24316,
+                "sha256": "2e8e99080ab13a114262c10d86f41f35ab254d5458f10971904255917b511bb5",
+                "artifactRelativeName": "workspace/native-workspace.json",
+                "rawContentCommitted": false
+              }
+            }
+          }
+        },
+        "spaces": {
+          "completeRegressionPasses": 81,
+          "evidenceArtifactId": 11647354540,
+          "evidenceArtifactUrl": "https://github.com/comparativechrono/workbench/actions/runs/37997370988/artifacts/11647354540",
+          "patch": {
+            "success": false,
+            "passed": 0,
+            "failed": 1,
+            "skipped": 0,
+            "originalReport": {
+              "bytes": 2966,
+              "sha256": "e58b90d6916da7aa472db8901d1744888c9e4649b5a7d85c6fec9f05ba35f030",
+              "artifactRelativeName": "patch/native-ui-patch.json",
+              "rawContentCommitted": false
+            }
+          },
+          "feedback": {
+            "success": false,
+            "passed": 5,
+            "failed": 1,
+            "skipped": 0,
+            "plannedChecks": 13,
+            "originalReport": {
+              "bytes": 347354,
+              "sha256": "5765e3c372ce0f43401657279bade1a821bea239def68eb8a2209c60e16ca3d6",
+              "artifactRelativeName": "feedback/native-tester-feedback.json",
+              "rawContentCommitted": false
+            }
+          },
+          "completeRegressionScopes": {
+            "batch": {
+              "success": true,
+              "passed": 11,
+              "failed": 0,
+              "skipped": 0,
+              "originalReport": {
+                "bytes": 36110,
+                "sha256": "42d6da9c0edf8d9588342d9b7d3baa5598c9e8394780823724f3d4bc3bd9a369",
+                "artifactRelativeName": "batch/native-batch.json",
+                "rawContentCommitted": false
+              }
+            },
+            "curated": {
+              "success": true,
+              "passed": 11,
+              "failed": 0,
+              "skipped": 0,
+              "originalReport": {
+                "bytes": 14747,
+                "sha256": "9909e3db7dfc7cca8dde66de1ed6a11511eaf03551d2965363af0a738e6290ed",
+                "artifactRelativeName": "curated/native-curated.json",
+                "rawContentCommitted": false
+              }
+            },
+            "readiness": {
+              "success": true,
+              "passed": 5,
+              "failed": 0,
+              "skipped": 0,
+              "originalReport": {
+                "bytes": 9593,
+                "sha256": "d280156817a1dfbb27c995838bf40d252612e338bb42ce05cac3c207e3371503",
+                "artifactRelativeName": "readiness/native-readiness.json",
+                "rawContentCommitted": false
+              }
+            },
+            "reference-management": {
+              "success": true,
+              "passed": 10,
+              "failed": 0,
+              "skipped": 0,
+              "originalReport": {
+                "bytes": 25813,
+                "sha256": "0e3e50dab726139224c9a689e02a97e5c28fc43851509e8693974c20c315e2bc",
+                "artifactRelativeName": "reference-management/native-reference-management.json",
+                "rawContentCommitted": false
+              }
+            },
+            "results": {
+              "success": true,
+              "passed": 9,
+              "failed": 0,
+              "skipped": 0,
+              "originalReport": {
+                "bytes": 14511,
+                "sha256": "d0faf6370ced815692daae4eda9552d07fe64d4ea6e33b88e7f67b110d4b463f",
+                "artifactRelativeName": "results/native-results.json",
+                "rawContentCommitted": false
+              }
+            },
+            "scroll": {
+              "success": true,
+              "passed": 3,
+              "failed": 0,
+              "skipped": 0,
+              "originalReport": {
+                "bytes": 320524,
+                "sha256": "e8accd20ddeceb43e7c5998a31906d6c0217ad7cac9d6ff54a72662fcdb4461b",
+                "artifactRelativeName": "scroll/native-scroll.json",
+                "rawContentCommitted": false
+              }
+            },
+            "workspace": {
+              "success": true,
+              "passed": 32,
+              "failed": 0,
+              "skipped": 0,
+              "originalReport": {
+                "bytes": 24364,
+                "sha256": "b96b94477c04d6e4be546b099ca27b0ac63c39bc206e34b74326c77a21ec4e10",
+                "artifactRelativeName": "workspace/native-workspace.json",
+                "rawContentCommitted": false
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+      "gateCommit": "91bb99e1aa22acfafa626f813cf15d475ba7e7e9",
+      "runId": 37997995825,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37997995825",
+      "conclusion": "failure",
+      "applicationArchivesRebuilt": false,
+      "explanation": "The inherited wait helper rejected the expected Remove sample row confirmation. Cleanup timed out and masked the primary label; original traceback hash retained. Fixed in the next gate-only revision.",
+      "paths": {
+        "ordinary": {
+          "originalTracebackSha256": "44cb22a20292cd98b5871b611e0177f5a0612779df6acf8d5f70c4b66504dbb3",
+          "patch": {
+            "success": true,
+            "passed": 19,
+            "failed": 0,
+            "skipped": 0,
+            "originalReport": {
+              "bytes": 88293,
+              "sha256": "c745ca277c05ef31f2b1d0ffe0fc1dfbd4ae9054cee1fe2faa0c335e290e4397",
+              "artifactRelativeName": "patch/native-ui-patch.json",
+              "rawContentCommitted": false
+            }
+          },
+          "feedback": {
+            "success": false,
+            "passed": 7,
+            "failed": 1,
+            "skipped": 0,
+            "plannedChecks": 13,
+            "originalReport": {
+              "bytes": 355582,
+              "sha256": "fdd014e949d3c7fc3f85e8de86771fea9ba7cba5a9eb82a9ae2ec835fb6e9987",
+              "artifactRelativeName": "feedback/native-tester-feedback.json",
+              "rawContentCommitted": false
+            }
+          }
+        },
+        "spaces": {
+          "originalTracebackSha256": "6ceaf93428c8528f6247573628a903033afd11e54f539017950cd4fa8c5026e1",
+          "patch": {
+            "success": true,
+            "passed": 19,
+            "failed": 0,
+            "skipped": 0,
+            "originalReport": {
+              "bytes": 88339,
+              "sha256": "f3ce48046f1c809c2c3e05562040fbe7246f89111153b2580ed963a46ba364b7",
+              "artifactRelativeName": "patch/native-ui-patch.json",
+              "rawContentCommitted": false
+            }
+          },
+          "feedback": {
+            "success": false,
+            "passed": 7,
+            "failed": 1,
+            "skipped": 0,
+            "plannedChecks": 13,
+            "originalReport": {
+              "bytes": 367629,
+              "sha256": "cb70c7fa0977b6ff81f133e67f81c4e966f881c649cbd0d6be04efc00781598f",
+              "artifactRelativeName": "feedback/native-tester-feedback.json",
+              "rawContentCommitted": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+      "gateCommit": "516618fea10936229b1f8ee4cc4bdaf8dd12ad9e",
+      "runId": 37998730356,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37998730356",
+      "conclusion": "failure",
+      "applicationArchivesRebuilt": false,
+      "explanation": "Validator queried a disappearing dialog caption using WM_GETTEXT. The next revision snapshots the top-level caption while keeping child-control checks strict.",
+      "paths": {
+        "ordinary": {
+          "patch": {
+            "success": true,
+            "passed": 19,
+            "failed": 0,
+            "originalReport": {
+              "bytes": 88296,
+              "sha256": "0b5554d85c0d79e981260fc7f76fff075fce7ddfc37491b0f31c71dea2528027",
+              "artifactRelativeName": "patch/native-ui-patch.json",
+              "rawContentCommitted": false
+            }
+          },
+          "feedback": {
+            "success": false,
+            "passed": 7,
+            "failed": 1,
+            "originalReport": {
+              "bytes": 349433,
+              "sha256": "7555f66f749fcc9708a8dde6cfee2fa50c4a4f3a120f15666c98b0e9a3d88b7e",
+              "artifactRelativeName": "feedback/native-tester-feedback.json",
+              "rawContentCommitted": false
+            }
+          }
+        },
+        "spaces": {
+          "patch": {
+            "success": true,
+            "passed": 19,
+            "failed": 0,
+            "originalReport": {
+              "bytes": 88343,
+              "sha256": "a673a21937cc72419ffd7fe2ee8fed2c6af3e89adae3e7cb0ac75b8e0d08d6c9",
+              "artifactRelativeName": "patch/native-ui-patch.json",
+              "rawContentCommitted": false
+            }
+          },
+          "feedback": {
+            "success": false,
+            "passed": 7,
+            "failed": 1,
+            "originalReport": {
+              "bytes": 357114,
+              "sha256": "192d69cae2954c098cb074d1d963594875ce739f33caec81090b25f387a1fae8",
+              "artifactRelativeName": "feedback/native-tester-feedback.json",
+              "rawContentCommitted": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "attempt": 4,
+      "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+      "gateCommit": "1b4f8311467014c128d6e72716ceedfc3fea9ec3",
+      "runId": 37999214954,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37999214954",
+      "conclusion": "failure",
+      "applicationArchivesRebuilt": false,
+      "explanation": "Ordinary: Samples reopening pointer target was briefly obscured. Spaces: scientific checks completed before the native queue displayed completion, so close hit the busy guard and timed out. The final validator observes the unobscured pointer target and completed/idle native state.",
+      "paths": {
+        "ordinary": {
+          "patch": {
+            "success": true,
+            "passed": 19,
+            "failed": 0,
+            "originalReport": {
+              "bytes": 88295,
+              "sha256": "87f39bb077c70e0e0118d1a8a280b0e9ee21da080734f9f007de4162da49e26c",
+              "artifactRelativeName": "patch/native-ui-patch.json",
+              "rawContentCommitted": false
+            }
+          },
+          "feedback": {
+            "success": false,
+            "passed": 7,
+            "failed": 1,
+            "originalReport": {
+              "bytes": 357235,
+              "sha256": "50d1032c51aebadc1e66c7613a3b32f36184a058460f5b46534b2f95a8105e2b",
+              "artifactRelativeName": "feedback/native-tester-feedback.json",
+              "rawContentCommitted": false
+            }
+          }
+        },
+        "spaces": {
+          "patch": {
+            "success": true,
+            "passed": 19,
+            "failed": 0,
+            "originalReport": {
+              "bytes": 88349,
+              "sha256": "245c667a60e57e85fc1938d700d44ffe50e28f2855c5fb8ea5c00295d6e43555",
+              "artifactRelativeName": "patch/native-ui-patch.json",
+              "rawContentCommitted": false
+            }
+          },
+          "feedback": {
+            "success": false,
+            "passed": 11,
+            "failed": 1,
+            "originalReport": {
+              "bytes": 359738,
+              "sha256": "fab2d82a8a0642e9a7f11dcf60ecbeb9b4b2cee352178c70aa812f8762acd066",
+              "artifactRelativeName": "feedback/native-tester-feedback.json",
+              "rawContentCommitted": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "attempt": 5,
+      "sourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+      "gateCommit": "f9e7120196ddd284d33c0e8221b78fbf4529058f",
+      "runId": 37999874335,
+      "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/37999874335",
+      "conclusion": "success",
+      "applicationArchivesRebuilt": false,
+      "explanation": "Both paths passed 19 patch and 13 feedback checks on the unchanged archives. Earlier 81 completed regression checks per path bring unique coverage to 113 per path.",
+      "paths": {
+        "ordinary": {
+          "patch": {
+            "success": true,
+            "passed": 19,
+            "failed": 0,
+            "blocked": 0,
+            "originalReport": {
+              "bytes": 88298,
+              "sha256": "eb11f0c9b74c3679ce32bbf210cb0b5d56edaa0710c5022e7559daa0f74ed429",
+              "runId": 37999874335,
+              "applicationSourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+              "gateCommit": "f9e7120196ddd284d33c0e8221b78fbf4529058f",
+              "artifactRelativeName": "patch/native-ui-patch.json",
+              "rawContentCommitted": false
+            }
+          },
+          "feedback": {
+            "success": true,
+            "passed": 13,
+            "failed": 0,
+            "blocked": 0,
+            "originalReport": {
+              "bytes": 583203,
+              "sha256": "a4152090a39f8110b7b9240c869a9c25012b26281d44e09fff696fcd5c829d6b",
+              "runId": 37999874335,
+              "applicationSourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+              "gateCommit": "f9e7120196ddd284d33c0e8221b78fbf4529058f",
+              "artifactRelativeName": "feedback/native-tester-feedback.json",
+              "rawContentCommitted": false
+            }
+          }
+        },
+        "spaces": {
+          "patch": {
+            "success": true,
+            "passed": 19,
+            "failed": 0,
+            "blocked": 0,
+            "originalReport": {
+              "bytes": 88346,
+              "sha256": "690e671e7dcc27b6acd44c0c9a84d13e4879b84f2af516f22cdd156db33b2526",
+              "runId": 37999874335,
+              "applicationSourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+              "gateCommit": "f9e7120196ddd284d33c0e8221b78fbf4529058f",
+              "artifactRelativeName": "patch/native-ui-patch.json",
+              "rawContentCommitted": false
+            }
+          },
+          "feedback": {
+            "success": true,
+            "passed": 13,
+            "failed": 0,
+            "blocked": 0,
+            "originalReport": {
+              "bytes": 531562,
+              "sha256": "2a38b495bd5b25ba08ac6eb92a9cb58c674eec87d5d3eae8de3a6944791516f9",
+              "runId": 37999874335,
+              "applicationSourceCommit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+              "gateCommit": "f9e7120196ddd284d33c0e8221b78fbf4529058f",
+              "artifactRelativeName": "feedback/native-tester-feedback.json",
+              "rawContentCommitted": false
+            }
+          }
+        }
+      }
+    }
+  ],
+  "status": "final unchanged-archive recheck passed",
+  "originalReportHashManifest": "tester-feedback-0.16.1-raw-index-2026-10-09.json",
+  "limits": [
+    "Failure summaries are paraphrases. Raw tracebacks and runner records are omitted; their original report hashes are retained.",
+    "No incomplete attempt is reported as overall accepted; repeated tests do not add unique coverage."
+  ]
+}

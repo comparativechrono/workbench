@@ -1,0 +1,431 @@
+{
+  "schema": 1,
+  "kind": "native-ui-patch",
+  "appVersion": "0.16.1",
+  "baselineVersion": "0.16.0",
+  "sourceCommit": "5e2bc368c5ea869ff794ad9d90a40480b6fd06fe",
+  "gateCommit": "5e2bc368c5ea869ff794ad9d90a40480b6fd06fe",
+  "gateSha256": "b638e881c9c4111c537ca7af1d25c9edd401c1dca0bb22481ee703dc0d2301db",
+  "platform": "Windows-2022Server-10.0.20348-SP0",
+  "startedUtc": "2026-10-09T20:24:51.543979Z",
+  "archives": {
+    "starter": {
+      "name": "native-workbench-0.16.1-starter-windows.zip",
+      "bytes": 17847426,
+      "sha256": "469460c1f221698cc48c803d5fe4e09dabf32c15c64c26c498946ff4f992b92d"
+    },
+    "baseline": {
+      "name": "baseline-0.16.0.zip",
+      "bytes": 17846873,
+      "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+    },
+    "update": {
+      "name": "native-workbench-0.16.1-update-from-0.16.0.zip",
+      "bytes": 12982786,
+      "sha256": "64396999b4c0196f0b94eb00ae9b7ad90128cfffaa641398ba27808bc3425e31"
+    }
+  },
+  "checks": [
+    "Every extracted candidate Starter and updater file matches its exact archive; the packaged launcher is exercised unchanged.",
+    "Published 0.16.0 executes a local native SAMtools reference result and saves independent settings plus connected pipeline pins.",
+    "Packaged folder picker cancels with Escape with every baseline/reference/invalid-folder file unchanged.",
+    "Packaged folder picker rejects a real non-installation folder, explains the required files, reopens for retry and allows Escape with every baseline/reference/invalid-folder file unchanged.",
+    "Selecting the actual baseline through the published folder picker displays success, commits all 87 exact Starter core files, and preserves every recorded pack/user/result/reference file.",
+    "Repeating the update through the same real picker displays success and leaves all installation/reference files and the single transaction unchanged.",
+    "Updated private host reloads the unchanged settings and connected pipeline, finds the actual baseline result, and resolves its preserved exact reference receipt offline.",
+    "fresh: real initial window fits the work area before driver repositioning.",
+    "fresh: real offline Starter setup fits and dismisses without pack changes or installs.",
+    "upgraded: real initial window fits the work area before driver repositioning.",
+    "upgraded: library filtering and Tab/Shift+Tab preserve real enabled focus."
+  ],
+  "scenarios": [
+    {
+      "id": "candidate-input-identities",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:24:54.033235Z",
+      "note": "Every extracted candidate Starter and updater file matches its exact archive; the packaged launcher is exercised unchanged."
+    },
+    {
+      "id": "baseline-fixtures",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:24:55.196487Z",
+      "note": "Published 0.16.0 executes a local native SAMtools reference result and saves independent settings plus connected pipeline pins."
+    },
+    {
+      "id": "updater-cancel",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:24:56.520062Z",
+      "note": "Packaged folder picker cancels with Escape with every baseline/reference/invalid-folder file unchanged."
+    },
+    {
+      "id": "updater-invalid",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:24:58.290287Z",
+      "note": "Packaged folder picker rejects a real non-installation folder, explains the required files, reopens for retry and allows Escape with every baseline/reference/invalid-folder file unchanged."
+    },
+    {
+      "id": "updater-install",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:25:00.497955Z",
+      "note": "Selecting the actual baseline through the published folder picker displays success, commits all 87 exact Starter core files, and preserves every recorded pack/user/result/reference file."
+    },
+    {
+      "id": "updater-repeat",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:25:02.619273Z",
+      "note": "Repeating the update through the same real picker displays success and leaves all installation/reference files and the single transaction unchanged."
+    },
+    {
+      "id": "upgraded-fixture-readback",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:25:02.884874Z",
+      "note": "Updated private host reloads the unchanged settings and connected pipeline, finds the actual baseline result, and resolves its preserved exact reference receipt offline."
+    },
+    {
+      "id": "fresh-startup-bounds",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:25:03.001356Z",
+      "note": "fresh: real initial window fits the work area before driver repositioning."
+    },
+    {
+      "id": "fresh-starter-setup",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:25:04.113736Z",
+      "note": "fresh: real offline Starter setup fits and dismisses without pack changes or installs."
+    },
+    {
+      "id": "fresh-desktop-incomplete",
+      "status": "failed",
+      "observedAt": "2026-10-09T20:25:34.186661Z",
+      "note": "Command '['D:\\\\a\\\\_temp\\\\ordinary\\\\patch\\\\native-workbench\\\\NativeWorkbench.exe']' timed out after 30 seconds"
+    },
+    {
+      "id": "upgraded-startup-bounds",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:25:34.301024Z",
+      "note": "upgraded: real initial window fits the work area before driver repositioning."
+    },
+    {
+      "id": "upgraded-library-keyboard",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:25:34.958241Z",
+      "note": "upgraded: library filtering and Tab/Shift+Tab preserve real enabled focus."
+    },
+    {
+      "id": "upgraded-desktop-incomplete",
+      "status": "failed",
+      "observedAt": "2026-10-09T20:25:35.075797Z",
+      "note": "Missing fixed control: 114"
+    }
+  ],
+  "captures": [
+    {
+      "path": "updater-cancel-picker.bmp",
+      "width": 625,
+      "height": 480,
+      "sha256": "e247fd6efac7d9af4c12de5e25e71c4531cba3f8f86af06b5d5145931c8351bf",
+      "dpi": 96
+    },
+    {
+      "path": "updater-invalid-picker.bmp",
+      "width": 625,
+      "height": 480,
+      "sha256": "46221868a5cab1290bceab6ddf41a0ca09d9ea98f5494c4407b335c5e2db28fa",
+      "dpi": 96
+    },
+    {
+      "path": "updater-invalid-warning.bmp",
+      "width": 393,
+      "height": 192,
+      "sha256": "0e52f8bac762d6f7e77dcdc7c9152b4f1f5f1435cc6a04bceb9817e25b028381",
+      "dpi": 96
+    },
+    {
+      "path": "updater-invalid-retry-picker.bmp",
+      "width": 625,
+      "height": 480,
+      "sha256": "c7e4fbe60b83d868d66d3feca4f6da9f2df40401ec8224377faffa46869ce87f",
+      "dpi": 96
+    },
+    {
+      "path": "updater-install-picker.bmp",
+      "width": 625,
+      "height": 480,
+      "sha256": "c7e4fbe60b83d868d66d3feca4f6da9f2df40401ec8224377faffa46869ce87f",
+      "dpi": 96
+    },
+    {
+      "path": "updater-install-success.bmp",
+      "width": 405,
+      "height": 179,
+      "sha256": "2357dc7e12a5d30970a335f342ce658d3a76ceb1fbae7c66d2eed89c55b174ef",
+      "dpi": 96
+    },
+    {
+      "path": "updater-repeat-picker.bmp",
+      "width": 625,
+      "height": 480,
+      "sha256": "4ab39dc60a89b66e580db94ea32246c4cbe835c0fd944cc02aef6dee75501246",
+      "dpi": 96
+    },
+    {
+      "path": "updater-repeat-success.bmp",
+      "width": 405,
+      "height": 179,
+      "sha256": "2357dc7e12a5d30970a335f342ce658d3a76ceb1fbae7c66d2eed89c55b174ef",
+      "dpi": 96
+    },
+    {
+      "path": "fresh-first-open-starter.bmp",
+      "width": 920,
+      "height": 720,
+      "sha256": "8340249724a191191909cbaa3700aa5cd8b95ea201ea6867de664dbe05cddae6",
+      "dpi": 96
+    },
+    {
+      "path": "upgraded-failure-0.bmp",
+      "width": 960,
+      "height": 680,
+      "sha256": "c7d50a308d162a0f2a3729527b0a4377375f5a347faf3a1da06159dd8e0a8344",
+      "dpi": 96
+    }
+  ],
+  "skips": [],
+  "limits": [
+    "Exact published 0.16.0 to candidate 0.16.1 update only.",
+    "Synthetic local reference and saved-state fixtures, not clinical or realistic-workload acceptance.",
+    "Observed hosted desktop sizes and DPI only; no high-DPI/transition, multiple-monitor or physical-trackpad acceptance.",
+    "Representative PCs and institutional security/approval remain external checks.",
+    "Scientific hosts deny Python socket operations, not OS-level network access."
+  ],
+  "nativeWindowsExecuted": true,
+  "nativeGUILaunched": true,
+  "nativeGUIValidated": false,
+  "nativeGUIObservationsCompleted": false,
+  "success": false,
+  "archiveFilesVerified": {
+    "starter": 274,
+    "update": 51,
+    "baseline": 274
+  },
+  "updaterLauncherSha256": "1b765bedcd0c3494f8bf40e204f80c16aa1b8e13cebb2a77b0fe54a9d934c0b6",
+  "baselineFixtures": {
+    "reference": {
+      "schema": 1,
+      "id": "09000800000000000000000000000001",
+      "label": "Synthetic updater preservation reference",
+      "provider": "synthetic-validation-fixture",
+      "provider_name": "Synthetic update fixture",
+      "release": "1",
+      "species": {
+        "id": "starter",
+        "name": "Synthetic starter"
+      },
+      "assembly": "starter-fixture",
+      "assembly_accession": "",
+      "folder": "D:\\a\\_temp\\ordinary\\patch-gate-work\\external references",
+      "receipt_path": "D:\\a\\_temp\\ordinary\\patch-gate-work\\external references\\reference.json",
+      "downloaded_at": "2026-10-06T00:00:00Z",
+      "fixtureNotice": "Created by this gate from the packaged synthetic FASTA; not downloaded.",
+      "files": [
+        {
+          "id": "genome",
+          "kind": "genome",
+          "label": "Genome FASTA",
+          "filename": "synthetic-reference.fa",
+          "path": "D:\\a\\_temp\\ordinary\\patch-gate-work\\external references\\synthetic-reference.fa",
+          "bytes": 3059,
+          "sha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee"
+        }
+      ],
+      "receipt_sha256": "10091240f31e9731f51f5eaa856d9aa956ffd17764d0e9be762687242fda8d2c"
+    },
+    "saved": {
+      "pipelines": [
+        {
+          "graph": {
+            "name": "Untitled analysis",
+            "nextNode": 3,
+            "nextSource": 2,
+            "schema": 1,
+            "nodes": [
+              {
+                "id": "step-1",
+                "tool": "bam/reference-index",
+                "params": {},
+                "inputs": {
+                  "reference": [
+                    "input-1"
+                  ]
+                },
+                "pin": {
+                  "packId": "bam",
+                  "packVersion": "0.4.0",
+                  "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+                }
+              },
+              {
+                "id": "step-2",
+                "tool": "bam/reference-index",
+                "params": {},
+                "inputs": {
+                  "reference": [
+                    "step-1::reference"
+                  ]
+                },
+                "pin": {
+                  "packId": "bam",
+                  "packVersion": "0.4.0",
+                  "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+                }
+              }
+            ],
+            "sources": [
+              {
+                "id": "input-1",
+                "type": "reference",
+                "label": "Reference FASTA",
+                "fields": [
+                  {
+                    "id": "reference",
+                    "label": "Reference genome",
+                    "type": "file",
+                    "role": "file",
+                    "binding": false,
+                    "preset": true,
+                    "required": true,
+                    "default": "",
+                    "help": "Uncompressed FASTA. Workflows that build an index copy this file into the run folder first.",
+                    "filter": "Uncompressed FASTA reference|*.fa;*.fasta;*.fna|All files|*.*",
+                    "constraint": "",
+                    "differentFrom": ""
+                  }
+                ]
+              }
+            ]
+          },
+          "id": "2a51b3ce526549c48e0ef6245ce7e00c",
+          "name": "UI patch preservation pipeline",
+          "saved_at": "2026-10-09T20:24:55Z"
+        }
+      ],
+      "presets": [
+        {
+          "schema": 1,
+          "kind": "tool-preset",
+          "tool": "align/paired-end",
+          "pin": {
+            "packId": "align",
+            "packVersion": "0.4.1",
+            "manifestSha256": "7f8f36efbfd6a8255a98eabb06746fbcc5bbdb872f392a65ca3e79a586d04939"
+          },
+          "params": {
+            "threads": "3"
+          },
+          "id": "7f6be9416a224f83b75811f9dba6cba1",
+          "name": "UI patch preservation settings",
+          "saved_at": "2026-10-09T20:24:54Z"
+        }
+      ]
+    },
+    "run": {
+      "folder": "D:\\a\\_temp\\ordinary\\patch-gate-work\\baseline\\native-workbench\\results\\preserved-reference-result\\run-20261009-202454-9fbdf83a",
+      "nativeWindowsExecuted": true,
+      "contigs": 1,
+      "referenceSha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+      "runSha256": "35202e8052dab6b713c8f8edc6c0a9ec54a56017f91fcb42989b2e373bd05a23",
+      "cwlChecked": false
+    },
+    "runId": "d122b291756b4c479bba763dcd13b639"
+  },
+  "unchangedScenarioEvidence": {
+    "cancel": {
+      "installation": {},
+      "externalReference": {},
+      "invalidSelection": {}
+    },
+    "invalid": {
+      "installation": {},
+      "externalReference": {},
+      "invalidSelection": {}
+    },
+    "repeat": {
+      "installation": {},
+      "externalReference": {}
+    }
+  },
+  "preservation": {
+    "existingFiles": 208,
+    "changes": {},
+    "additions": {
+      "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+    }
+  },
+  "transaction": {
+    "status": "installed",
+    "version": "0.16.1",
+    "migration": false,
+    "files_verified": 87,
+    "removed_files": 0,
+    "backup": "D:\\a\\_temp\\ordinary\\patch-gate-work\\baseline\\native-workbench\\updates\\core-0.16.1-20261009-202459-1c02c9fe\\backup",
+    "packs_changed": false,
+    "source_and_evidence_preserved": true
+  },
+  "coreFilesVerified": 87,
+  "preservedFiles": 208,
+  "startupBounds": {
+    "fresh": {
+      "windowBounds": [
+        0,
+        0,
+        1024,
+        728
+      ],
+      "workArea": [
+        0,
+        0,
+        1024,
+        728
+      ],
+      "capturedBeforeDriverResize": true
+    },
+    "upgraded": {
+      "windowBounds": [
+        0,
+        0,
+        1024,
+        728
+      ],
+      "workArea": [
+        0,
+        0,
+        1024,
+        728
+      ],
+      "capturedBeforeDriverResize": true
+    }
+  },
+  "startupSetup": {
+    "fresh": {
+      "observed": true,
+      "starterSelected": true,
+      "dismissed": true,
+      "queuedInstalls": 0,
+      "unchangedPackFiles": 186
+    },
+    "upgraded": {
+      "observed": false
+    }
+  },
+  "desktopErrors": {
+    "fresh": "Traceback (most recent call last):\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_ui_patch_windows.py\", line 372, in run\n    desktop_scenarios(root, evidence, report, label)\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_ui_patch_windows.py\", line 183, in desktop_scenarios\n    ui.close()\n    ~~~~~~~~^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_workspace_ui_windows.py\", line 415, in close\n    require(self.process.wait(timeout=30) == 0, \"Native desktop did not close cleanly.\")\n            ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"subprocess.py\", line 1281, in wait\n  File \"subprocess.py\", line 1610, in _wait\nsubprocess.TimeoutExpired: Command '['D:\\\\a\\\\_temp\\\\ordinary\\\\patch\\\\native-workbench\\\\NativeWorkbench.exe']' timed out after 30 seconds\n",
+    "upgraded": "Traceback (most recent call last):\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_ui_patch_windows.py\", line 372, in run\n    desktop_scenarios(root, evidence, report, label)\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_ui_patch_windows.py\", line 215, in desktop_scenarios\n    row = fixed_layout(ui, mode)\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_ui_patch_windows.py\", line 131, in fixed_layout\n    require(handle and ui.user.IsWindowVisible(handle), 'Missing fixed control: ' + str(identity))\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\workbench\\workbench\\scripts\\check_references_windows.py\", line 47, in require\n    raise AssertionError(message)\nAssertionError: Missing fixed control: 114\n"
+  },
+  "observedDpi": [
+    96
+  ],
+  "finishedUtc": "2026-10-09T20:25:35.638651Z",
+  "passed": 11,
+  "failed": 2,
+  "blocked": 0
+}

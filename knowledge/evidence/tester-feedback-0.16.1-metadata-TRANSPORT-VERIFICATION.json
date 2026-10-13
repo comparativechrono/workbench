@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "archivesRebuilt": false,
+  "sourceArchive": {
+    "file": "native-workbench-0.16.1-source.zip",
+    "bytes": 48270849,
+    "sha256": "0accfb48b8b7b3193b4c72e76c45c404db7979d877ce0805d2687d5a849fe1f1"
+  },
+  "sourceTransportParts": [
+    {
+      "file": "native-workbench-0.16.1-source.zip.part1",
+      "bytes": 25165824,
+      "sha256": "ae9180ed9fccd48b883970e2265504d94bf4760fb89b1b7be3077ffe7341b89a"
+    },
+    {
+      "file": "native-workbench-0.16.1-source.zip.part2",
+      "bytes": 23105025,
+      "sha256": "deb4720fdad700f58eabf4bc4c74564ff430f7482e69c9d4e748e1ac057c6746"
+    }
+  ],
+  "sourceReassembly": "Concatenate part1 then part2 as raw bytes; verify the complete source SHA-256 before extraction."
+}

@@ -1,0 +1,1043 @@
+{
+  "schema": 1,
+  "recordedOn": "2026-10-13",
+  "sourceCommit": "3d1d83b70d053af625b5cb45362851c0fefab2a1",
+  "sourceTree": "32becfa4831b7e50cdcfe342645d0ac02d32b8cb",
+  "workflowRun": "https://github.com/comparativechrono/workbench/actions/runs/38403212748",
+  "published": false,
+  "kind": "actual-display-visual-review",
+  "success": true,
+  "paths": {
+    "ordinary": {
+      "nativeReportSha256": "d5246d82b8a3c5cc81e06c67f327336af5623db32c71fd943dcd1c357acbed02",
+      "applicationArchive": {
+        "file": "native-workbench-0.16.1-starter-windows.zip",
+        "bytes": 17889148,
+        "sha256": "28f1362287991621dde030da54eb444846142c0243be6b9d86c4b4f1bf99dd47"
+      },
+      "dpi": 96,
+      "windowBounds": [
+        0,
+        0,
+        1024,
+        728
+      ],
+      "forms": [
+        {
+          "operation": "primer3/design-pcr",
+          "displayName": "Primer3: design PCR primer pairs",
+          "packVersion": "1.0.0",
+          "manifestSha256": "f79505a97a8affdfaec5d89e77ea4906d1c67f6e9b63cdfeb0baf00e7da6f7ba",
+          "checkedInputOptionLabels": [
+            "Divalent salt (mM)",
+            "Effective annealing oligo (nM)",
+            "Maximum calculated Tm (C)",
+            "Maximum candidate pairs",
+            "Maximum primer length (bases)",
+            "Maximum product size (bp)",
+            "Minimum calculated Tm (C)",
+            "Minimum primer length (bases)",
+            "Minimum product size (bp)",
+            "Monovalent salt (mM)",
+            "Optimum calculated Tm (C)",
+            "Optimum primer length (bases)",
+            "Single DNA template",
+            "Single DNA template FASTA",
+            "Total dNTP concentration (mM)"
+          ],
+          "pages": [
+            {
+              "capture": "pack-form-primer3-design-pcr-top",
+              "scroll": {
+                "nMin": 0,
+                "nMax": 2451,
+                "nPage": 495,
+                "nPos": 0
+              }
+            },
+            {
+              "capture": "pack-form-primer3-design-pcr-page-1",
+              "scroll": {
+                "nMin": 0,
+                "nMax": 2451,
+                "nPage": 495,
+                "nPos": 288
+              }
+            },
+            {
+              "capture": "pack-form-primer3-design-pcr-page-2",
+              "scroll": {
+                "nMin": 0,
+                "nMax": 2451,
+                "nPage": 495,
+                "nPos": 576
+              }
+            },
+            {
+              "capture": "pack-form-primer3-design-pcr-page-3",
+              "scroll": {
+                "nMin": 0,
+                "nMax": 2451,
+                "nPage": 495,
+                "nPos": 864
+              }
+            },
+            {
+              "capture": "pack-form-primer3-design-pcr-page-4",
+              "scroll": {
+                "nMin": 0,
+                "nMax": 2451,
+                "nPage": 495,
+                "nPos": 1152
+              }
+            },
+            {
+              "capture": "pack-form-primer3-design-pcr-page-5",
+              "scroll": {
+                "nMin": 0,
+                "nMax": 2451,
+                "nPage": 495,
+                "nPos": 1440
+              }
+            },
+            {
+              "capture": "pack-form-primer3-design-pcr-page-6",
+              "scroll": {
+                "nMin": 0,
+                "nMax": 2451,
+                "nPage": 495,
+                "nPos": 1728
+              }
+            },
+            {
+              "capture": "pack-form-primer3-design-pcr-page-7",
+              "scroll": {
+                "nMin": 0,
+                "nMax": 2451,
+                "nPage": 495,
+                "nPos": 1957
+              }
+            }
+          ],
+          "formBounds": [
+            217,
+            153,
+            695,
+            648
+          ],
+          "visibleLibraryBounds": [
+            22,
+            193,
+            185,
+            634
+          ],
+          "windowBounds": [
+            0,
+            0,
+            1024,
+            728
+          ]
+        },
+        {
+          "operation": "plink2/summarize-vcf",
+          "displayName": "PLINK2: summarize genotype frequencies and missingness",
+          "packVersion": "1.0.0",
+          "manifestSha256": "ff6fe0b2033cd50095ea5b98e652f4138f064580778806f9634ccdc71a40fdc8",
+          "checkedInputOptionLabels": [
+            "Diploid biallelic SNP genotypes",
+            "Diploid genotype VCF"
+          ],
+          "pages": [
+            {
+              "capture": "pack-form-plink2-summarize-vcf-top",
+              "scroll": {
+                "nMin": 0,
+                "nMax": 1086,
+                "nPage": 495,
+                "nPos": 0
+              }
+            },
+            {
+              "capture": "pack-form-plink2-summarize-vcf-page-1",
+              "scroll": {
+                "nMin": 0,
+                "nMax": 1086,
+                "nPage": 495,
+                "nPos": 288
+              }
+            },
+            {
+              "capture": "pack-form-plink2-summarize-vcf-page-2",
+              "scroll": {
+                "nMin": 0,
+                "nMax": 1086,
+                "nPage": 495,
+                "nPos": 576
+              }
+            },
+            {
+              "capture": "pack-form-plink2-summarize-vcf-page-3",
+              "scroll": {
+                "nMin": 0,
+                "nMax": 1086,
+                "nPage": 495,
+                "nPos": 592
+              }
+            }
+          ],
+          "formBounds": [
+            217,
+            153,
+            695,
+            648
+          ],
+          "visibleLibraryBounds": [
+            22,
+            193,
+            185,
+            634
+          ],
+          "windowBounds": [
+            0,
+            0,
+            1024,
+            728
+          ]
+        }
+      ],
+      "captures": [
+        {
+          "path": "pack-library-primer3-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "7f8a5c991be86103750b276f4adee07529d69db262c396df7eb2852dc4334096",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-library-primer3-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "4d0ed81cd6a158abdeb576bb537793b3a58779cde73592dcfff51b284b6a7635",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-library-plink2-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "faf970c7d1adc1e1151fd49c1aa24fbeb346d2c3fd9201a07db9405ee5feb02e",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-library-plink2-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "04c69440feff5c36866c85f47b4d3ca361c23afb624726cd63fb4b91868cb5fa",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-top-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "062e508fe62bb59f580755a29de884f0f45143efca88ce407176bb8225e6ca65",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-top-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "b9f9c1a54eb04e3db29794f36b170a3d8ff6bbfb73588acc286f5d3226357e2d",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-1-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "974c0d49dff80614d1ca39fa0e3b2c5c701cb045f3588f7b401ca5c051a87144",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-1-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "f26aa60312c9f39189935df04dd0d4a240f06c7921f2e56211b6e32163e4776f",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-2-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "3fce7e2d2fa845b8d4a6697b8904efcb3a76cd2537cad30a376c3120fd38a6ae",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-2-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "3c697aa3d9db5de797537c685b0a37b2bbdb38b02ab054eba998a40ec72daeaa",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-3-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "84e89b9fe6a45049c92528e4ae9400a901f99bceb6dae4f4abd7f9d184c82b7d",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-3-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "02c77bcde6e510b2c9ffe2c03fb0a641c1105a78a6ba5e0cf486f3559d9883b0",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-4-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "721e55118e54239f27cd09f3c1d2cdcc5f78d90e17cc8e925556c7a2ccff61a4",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-4-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "fc51b1060263b633eb822fa9107f26df59f62a5264295ddb4fa0d182157789b0",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-5-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "ac51e2f266aec60fbd017603a81b3280a4af54c28cc633f2f4eb7f148e5d2a51",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-5-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "b4cff6bf0515b71ef327daf423366621029263740cdbfd44f70350c667229df5",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-6-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "406ce8a811adfeec077b1708eb95bc6df76f5a54f31801c83566fda924d9a455",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-6-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "a3964f55a75d2203cf7ab55e17b9e15e56f1615c3ecaab09c20100b429a7170a",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-7-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "6cf1e57bdefcb874ccfd1b2b71799c07540f8c83ded4ac397822cb04634c72a6",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-7-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "561dfb25e5c5f84f204ce7a7900a5a2061b3ef5b6614da60093ccf4236831faf",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-form-plink2-summarize-vcf-top-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "62c7a23c740ad63b324382de31c3c33108630d62cdc4dec4c4d7dde79217d075",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-form-plink2-summarize-vcf-top-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "83f500fe8a9dd3891380f9412441b17064b5db625d0bdf655424a4f9b978aaca",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-form-plink2-summarize-vcf-page-1-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "ffbc2c8464740fa4b1c7d9a0834835c44c818bd7f1a41acb7f76282f46fe2c91",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-form-plink2-summarize-vcf-page-1-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "c5a761b9882a95e3c4b14f6c9ecbf6b3a9eb70ac6694e918c7b874910cddd221",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-form-plink2-summarize-vcf-page-2-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "b771cecc64e4b06cb5a969418e484a7a7fdbed3a50995cfe8f4f08fb787ec435",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-form-plink2-summarize-vcf-page-2-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "5af061c3e0f00ff6364122dc4cf200fb00437a5c08cc9a9197b2d8164553ce61",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-form-plink2-summarize-vcf-page-3-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "590730494dbdc1f84d8be3e04a907f5bd5211c96d8eb52218f3becdcbe3325b2",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-form-plink2-summarize-vcf-page-3-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "515115b05b572c51b6a731167eeba98bec2510a59abc069dda317e8c781df31e",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-library-unfiltered-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "a4f316634f099a083a02b7eb023c8d8f6870de64266ed1e72867b90e1e84bd0c",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-library-unfiltered-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "f83683a90e562cf6e4f4a70d1ec62802bf5c348aa742e67b03b852cea79794a5",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-results-primer3-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "1584c95f2c2edc3e86e79415e940b27e652ae22675d11023fa044468ebc6ff44",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-results-primer3-window.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "0234ec69a151d1d646d01235f8b412480e6010a6935356e5c113c1294f82d056",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-results-primer3-versions-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "208255e783b339d23bfa5989ebbcfe25391c5d51515f8eb9525f7367de58d7a5",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-results-primer3-versions-window.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "5b3b94103cfd83729784722e4fc343e9d1ff318f52861625878f5e8f3a34b607",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-results-plink2-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "a54d87b30aa5edafb6c0b9503f2226b8dbaa28d48edcd694b7ed624609311c36",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-results-plink2-window.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "4fe9ca2322fe04d57f8db4bb2e90f988489a7a203f50c3417220ae2696cc71ba",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-results-plink2-versions-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "15901c96df3dbba45f05c6609cc3878736f64cf0d5e59f6858c0d538df63a9e1",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-results-plink2-versions-window.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "56f8226ac5c525e7df1a64ef94116c77bc4ac3b15bab973bd0bfa9a4984106cc",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        }
+      ],
+      "inspection": "Primary agent inspected all 19 actual BMPs through lossless full-width PNG sheets (two stacked screens per sheet, one on the last sheet).",
+      "actualDisplayImagesReviewed": 19
+    },
+    "spaces": {
+      "nativeReportSha256": "c57d180d3832daae3ed1d705d4a6f0c701fd17968e6abe9fd3d9f2d8c9403a3f",
+      "applicationArchive": {
+        "file": "native-workbench-0.16.1-starter-windows.zip",
+        "bytes": 17889148,
+        "sha256": "28f1362287991621dde030da54eb444846142c0243be6b9d86c4b4f1bf99dd47"
+      },
+      "dpi": 96,
+      "windowBounds": [
+        0,
+        0,
+        1024,
+        728
+      ],
+      "forms": [
+        {
+          "operation": "primer3/design-pcr",
+          "displayName": "Primer3: design PCR primer pairs",
+          "packVersion": "1.0.0",
+          "manifestSha256": "f79505a97a8affdfaec5d89e77ea4906d1c67f6e9b63cdfeb0baf00e7da6f7ba",
+          "checkedInputOptionLabels": [
+            "Divalent salt (mM)",
+            "Effective annealing oligo (nM)",
+            "Maximum calculated Tm (C)",
+            "Maximum candidate pairs",
+            "Maximum primer length (bases)",
+            "Maximum product size (bp)",
+            "Minimum calculated Tm (C)",
+            "Minimum primer length (bases)",
+            "Minimum product size (bp)",
+            "Monovalent salt (mM)",
+            "Optimum calculated Tm (C)",
+            "Optimum primer length (bases)",
+            "Single DNA template",
+            "Single DNA template FASTA",
+            "Total dNTP concentration (mM)"
+          ],
+          "pages": [
+            {
+              "capture": "pack-form-primer3-design-pcr-top",
+              "scroll": {
+                "nMin": 0,
+                "nMax": 2451,
+                "nPage": 495,
+                "nPos": 0
+              }
+            },
+            {
+              "capture": "pack-form-primer3-design-pcr-page-1",
+              "scroll": {
+                "nMin": 0,
+                "nMax": 2451,
+                "nPage": 495,
+                "nPos": 288
+              }
+            },
+            {
+              "capture": "pack-form-primer3-design-pcr-page-2",
+              "scroll": {
+                "nMin": 0,
+                "nMax": 2451,
+                "nPage": 495,
+                "nPos": 576
+              }
+            },
+            {
+              "capture": "pack-form-primer3-design-pcr-page-3",
+              "scroll": {
+                "nMin": 0,
+                "nMax": 2451,
+                "nPage": 495,
+                "nPos": 864
+              }
+            },
+            {
+              "capture": "pack-form-primer3-design-pcr-page-4",
+              "scroll": {
+                "nMin": 0,
+                "nMax": 2451,
+                "nPage": 495,
+                "nPos": 1152
+              }
+            },
+            {
+              "capture": "pack-form-primer3-design-pcr-page-5",
+              "scroll": {
+                "nMin": 0,
+                "nMax": 2451,
+                "nPage": 495,
+                "nPos": 1440
+              }
+            },
+            {
+              "capture": "pack-form-primer3-design-pcr-page-6",
+              "scroll": {
+                "nMin": 0,
+                "nMax": 2451,
+                "nPage": 495,
+                "nPos": 1728
+              }
+            },
+            {
+              "capture": "pack-form-primer3-design-pcr-page-7",
+              "scroll": {
+                "nMin": 0,
+                "nMax": 2451,
+                "nPage": 495,
+                "nPos": 1957
+              }
+            }
+          ],
+          "formBounds": [
+            217,
+            153,
+            695,
+            648
+          ],
+          "visibleLibraryBounds": [
+            22,
+            193,
+            185,
+            634
+          ],
+          "windowBounds": [
+            0,
+            0,
+            1024,
+            728
+          ]
+        },
+        {
+          "operation": "plink2/summarize-vcf",
+          "displayName": "PLINK2: summarize genotype frequencies and missingness",
+          "packVersion": "1.0.0",
+          "manifestSha256": "ff6fe0b2033cd50095ea5b98e652f4138f064580778806f9634ccdc71a40fdc8",
+          "checkedInputOptionLabels": [
+            "Diploid biallelic SNP genotypes",
+            "Diploid genotype VCF"
+          ],
+          "pages": [
+            {
+              "capture": "pack-form-plink2-summarize-vcf-top",
+              "scroll": {
+                "nMin": 0,
+                "nMax": 1086,
+                "nPage": 495,
+                "nPos": 0
+              }
+            },
+            {
+              "capture": "pack-form-plink2-summarize-vcf-page-1",
+              "scroll": {
+                "nMin": 0,
+                "nMax": 1086,
+                "nPage": 495,
+                "nPos": 288
+              }
+            },
+            {
+              "capture": "pack-form-plink2-summarize-vcf-page-2",
+              "scroll": {
+                "nMin": 0,
+                "nMax": 1086,
+                "nPage": 495,
+                "nPos": 576
+              }
+            },
+            {
+              "capture": "pack-form-plink2-summarize-vcf-page-3",
+              "scroll": {
+                "nMin": 0,
+                "nMax": 1086,
+                "nPage": 495,
+                "nPos": 592
+              }
+            }
+          ],
+          "formBounds": [
+            217,
+            153,
+            695,
+            648
+          ],
+          "visibleLibraryBounds": [
+            22,
+            193,
+            185,
+            634
+          ],
+          "windowBounds": [
+            0,
+            0,
+            1024,
+            728
+          ]
+        }
+      ],
+      "captures": [
+        {
+          "path": "pack-library-primer3-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "5f7b76b1c1867651a8fc21845b9da615015287445c77ba65eca5e287286e9458",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-library-primer3-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "234948e9fffa5fbec161dbdff0ad20e8193f6b9a007b12e610d1325eff5b9f17",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-library-plink2-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "c22824829ace8610caf7c05a0f67a8390f5f6855c62042399845ec9f794d3757",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-library-plink2-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "7e1a838e23478163efa30f177279b397fd120ba109a3ef5e501a6d6cc030cae8",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-top-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "51ec30c7403a613806ffed63f9b2228d7d476f3034fdae3b6a55339b0de1c0eb",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-top-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "28bf95479b6d262b679f7336788a3d60f4847f9b99d87b0c4cbace3610892f6b",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-1-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "c6210e9b40519a03557e0db2ce08954dfcd9b8b5eb3089d28919e7582a27ef71",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-1-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "35e0605df818f2d765d2fd788a93a435f6296b2ab8529e7b1e49934f43858c02",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-2-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "9c1e2f0924a89f64717144004e29261a304caef79bb6bba6d5ae40ee1c6af914",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-2-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "e71042f91b2c34f5b888fa5843887af3cdb5a9c7ba2d60c2fb2bc9e377c436b4",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-3-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "3a4b605eaa4f4cabc10f7f0d818194cb096f1c1b27d7e33bf4bbd9c8685848fc",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-3-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "be97d509d8a3b418f82904e848620675c42a610f62c3f4c551e2dcff2de1341f",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-4-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "01d1842747a864fa7fb6533763a8e6ef53f59861d44f9c4ac361ab7be683f57d",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-4-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "ec8ba98d912905f7b1794c11adba07599cacbbd7e49be8bdbc73b214c07f7971",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-5-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "d9f2bf93c9530de3a531e63e5fe3f2376e3d320ca01d3b94e2c1f9715daa15fe",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-5-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "31d2bce2c7eb8de42f1a4c830e5ecdb0168b974f36a466bcb9ef9dedaa5b2c2a",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-6-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "9aa7c5e9e8fd083ec61ef6416a556c5dcc8a253b09ca9fbf1279c03002f09fac",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-6-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "fb8b3548b1ff661525516394ae1c1dc43a2dfb2fb9177289c5bf735661521bce",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-7-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "7369a4490a68ba6f5324a1fd9a3e6bcd8bb8372fdcd7cf7e51ec2556f977d968",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-form-primer3-design-pcr-page-7-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "be266ff5c3b6ec0ab88e9cb7f2c59ec6158575e71a45fca6dbe07a8483b207d9",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-form-plink2-summarize-vcf-top-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "ed39d1a13803868e65018ed0a077e98b42dd74ccff696268266d18568900d79b",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-form-plink2-summarize-vcf-top-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "bfc24c7214e7f9f23b5100241b54f1e594c4b9000ef17e759d404a19c3807840",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-form-plink2-summarize-vcf-page-1-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "5a5879ef05b04d1b1dff63d1735847a0789649f5ab4a93c225b03867db36a826",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-form-plink2-summarize-vcf-page-1-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "3ed3cb2c612372e8f36718841581e048474db85b083376803515a50bbae5837e",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-form-plink2-summarize-vcf-page-2-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "9d26281ebe79d335ea21ba8d29367632fb9fb57e1253c956e5f0b749d8d679e6",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-form-plink2-summarize-vcf-page-2-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "99adea347fe07fc4bac7a3974d9dbe72cf6d16bf3697c4f5f3831a0e5de9ecdb",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-form-plink2-summarize-vcf-page-3-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "c85f47d5062d399a1407d0642c8965b2ef59722bb5c270d1b521764ee955338c",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-form-plink2-summarize-vcf-page-3-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "668c099864e7367330c42ca72a9ff88978138cc9686edb1714b5e454466e830d",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-library-unfiltered-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "cd590760920f116d64b15886c6bdfa18a97fbe6d91059bb32581222affb17dff",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-library-unfiltered-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "df9ab2500ad53e6d2c27a3dcda72fab49ce63baab8745c41d1e837cb0d49ea45",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-results-primer3-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "077f9f740b113b953dda158063f9fad38ed23f7601870d6e783f5891b2d8959b",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-results-primer3-window.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "c5145b4b79726af90f9753191c6578148594692e693513eeb3c59b4080cf4995",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-results-primer3-versions-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "437fef8d4854f9ac351187ab7c7105e7d6a81cc3a3c0da0103f905ea6feb6a78",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-results-primer3-versions-window.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "b1e560a522c2bbf856dedcf5d44a4cc574ebd8c9539c37de10777ae86808f6b8",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-results-plink2-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "42512147a4d3dece5d22435f40adfc70536d439a8eba4067cbe2335dada05171",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-results-plink2-window.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "6b4e1d8303dc7b0d9e8e3dff57bcee91f1a91b75bcd3f1709bf139eb9dd6c83c",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        },
+        {
+          "path": "pack-results-plink2-versions-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "07f0620b0e29be711784fea10a8ec51f5e546629727fc31cf502f8be3c5b936f",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actualDisplayReviewed": true
+        },
+        {
+          "path": "pack-results-plink2-versions-window.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "3f0b237a27881f3c56bbab5f80c2e71b30d7df12d00f522a23bb7ec18c1043f1",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "actualDisplayReviewed": false
+        }
+      ],
+      "inspection": "Independent reviewer opened all 19 original actual BMPs directly at full width.",
+      "actualDisplayImagesReviewed": 19
+    }
+  },
+  "actualDisplayImagesReviewed": 38,
+  "supplementaryPrintWindowImages": 38,
+  "allCaptureHashesVerified": 76,
+  "findings": [
+    "Bold wrapped tool names and regular wrapped descriptions stay inside the library viewport.",
+    "Primer3 top plus seven pages expose all 13 options; PLINK2 top plus three pages cover its full form.",
+    "Both forms start at zero and reach the computed scroll end; Run tool and separate Methods remain visible.",
+    "Searchable Results displays completed status and exact pack/tool/adapter versions and hashes.",
+    "No blocking overlap, unintended occlusion, unexpected blank pane or black pane observed.",
+    "Viewport-edge clipping during scrolling and horizontal scrolling of long single-line path fields are expected.",
+    "Results explicitly reports unsupported measurement summaries; scientific outputs are retained in files."
+  ],
+  "limitations": [
+    "96 DPI, 1024x768 hosted desktop and 1024x728 application window only.",
+    "Settled finite screenshots do not establish absence of transient flicker.",
+    "No high-DPI, multi-monitor, smaller-work-area, physical-trackpad or representative-PC acceptance.",
+    "PrintWindow files are supplementary and were not substituted for actual displayed pixels."
+  ],
+  "spacesIndependentReceiptSha256": "f2b93344d7bf818f314d1669bd5e86168233c5fb2977fc431226e6ac73ea2b46"
+}

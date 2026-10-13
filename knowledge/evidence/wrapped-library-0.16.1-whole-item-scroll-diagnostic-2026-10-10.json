@@ -1,0 +1,120 @@
+{
+  "schema": 1,
+  "kind": "independent frozen native-tree scroll diagnostic audit",
+  "appSourceCommit": "a2c35bf035281b3446dfab8c133fd34e8545ce78",
+  "gateCommit": "fa762eb70a946d6968683944fcf7c9fc92165acf",
+  "run": 38073329814,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/38073329814",
+  "artifact": {
+    "id": 11677407199,
+    "name": "native-tree-scroll-probe-ordinary-1",
+    "bytes": 1262746,
+    "sha256": "acf92216ead8ca88c59d252072aeecf13abe9e346464e59319c1fc3ab4aebe11",
+    "expiresUtc": "2026-11-09T17:50:21Z",
+    "url": "https://github.com/comparativechrono/workbench/actions/runs/38073329814/artifacts/11677407199"
+  },
+  "evidenceIntegrity": "passed",
+  "zipCrc": "passed",
+  "pathCase": "ordinary",
+  "frozenArchivesUnchanged": true,
+  "starterSha256": "e5fc48276f92a4038aaeadcea5b28eefa70386f849ae35579b04f6e117e53085",
+  "originalReport": {
+    "member": "wrapped-library/native-tree-scroll-probe.json",
+    "bytes": 97829,
+    "sha256": "e6b2f0f24b063e6d4dd686fea1897cec231590ff4337c57a4f382bfc637f7ac2"
+  },
+  "frozenInputsReportSha256": "d511a6ee8fdb31bf3a32b20842a8d7c24f10d04beb5455d3272871ced3af3809",
+  "gateScript": "scripts/check_library_scroll_probe_windows.py",
+  "gateScriptSha256": "2a9d75a985c4f53a4770a638ec6007c8c7d54a1c4c9eddd491a70f53a90de7b1",
+  "gateAndHelperHashesMatchGateCommit": true,
+  "reportedHelperHashesVerified": 4,
+  "nativeWindowsExecuted": true,
+  "nativeGUILaunched": true,
+  "diagnosticCompleted": true,
+  "reportedSuccessMeansDiagnosticCompletionOnly": true,
+  "nativeGUIValidated": false,
+  "acceptanceEstablished": false,
+  "cases": [
+    {
+      "fixture": "oversized-token",
+      "descriptionCharacters": 264,
+      "observations": 34,
+      "observationsComplete": true,
+      "realWheelObservations": 4,
+      "realScrollbarObservations": 3,
+      "documentedMessageAndStateObservations": 27,
+      "rowTopPositions": [
+        193,
+        283
+      ],
+      "rowHeights": [
+        480
+      ],
+      "viewportHeights": [
+        441
+      ],
+      "finalLineFullyVisibleObservations": 0,
+      "dpi": 96,
+      "titleLines": 7,
+      "descriptionLines": 17
+    },
+    {
+      "fixture": "maximum-description",
+      "descriptionCharacters": 2048,
+      "observations": 40,
+      "observationsComplete": true,
+      "realWheelObservations": 4,
+      "realScrollbarObservations": 3,
+      "documentedMessageAndStateObservations": 33,
+      "rowTopPositions": [
+        193,
+        283
+      ],
+      "rowHeights": [
+        2370
+      ],
+      "viewportHeights": [
+        441
+      ],
+      "finalLineFullyVisibleObservations": 0,
+      "dpi": 96,
+      "titleLines": 5,
+      "descriptionLines": 118
+    }
+  ],
+  "capturesVerified": [
+    {
+      "member": "wrapped-library/oversized-token-initial.bmp",
+      "bytes": 2981942,
+      "sha256": "069a6dbcce9f00cc93ef3b8fe4665e430ea38e7a46b37c8b649d57d90d920764"
+    },
+    {
+      "member": "wrapped-library/oversized-token-final.bmp",
+      "bytes": 2981942,
+      "sha256": "3661dd3415f998918921656f94379b5b6079a59064e5c901b760391334c3c4c7"
+    },
+    {
+      "member": "wrapped-library/maximum-description-initial.bmp",
+      "bytes": 2981942,
+      "sha256": "b0e9eeb8808f56c3a512290714af794b18cf0e17662161b966c028fdd1879aa4"
+    },
+    {
+      "member": "wrapped-library/maximum-description-final.bmp",
+      "bytes": 2981942,
+      "sha256": "7fb0f5e71edca3f28c6b5de01b70c797d93949d61808458e0763d9a55749bf90"
+    },
+    {
+      "member": "wrapped-library/scroll-probe-final-desktop.bmp",
+      "bytes": 2981942,
+      "sha256": "7fb0f5e71edca3f28c6b5de01b70c797d93949d61808458e0763d9a55749bf90"
+    }
+  ],
+  "finding": "Across both fixtures, actual wheel/scrollbar input and documented native scroll messages only placed the target row at y=283 or y=193; no observation showed its final wrapped line fully visible.",
+  "limits": [
+    "Observation of documented scroll messages and actual pointer input on one disposable frozen application.",
+    "Diagnostic completion is not acceptance; no typography or usability pass is assigned.",
+    "No source, row height, row contents, layout or application paint repair is changed by this probe.",
+    "No production fix, new candidate build, full wrapped-library acceptance, or path-with-spaces probe is established by this diagnostic."
+  ],
+  "auditScriptSha256": "d0e4778821afb696c56567e1139a97002ce30b7f7f2a5da59a287bd8f3554329"
+}

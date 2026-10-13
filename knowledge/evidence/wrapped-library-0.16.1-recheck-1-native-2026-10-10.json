@@ -1,0 +1,297 @@
+{
+  "schema": 1,
+  "kind": "independent frozen-archive native recheck audit",
+  "appSourceCommit": "a2c35bf035281b3446dfab8c133fd34e8545ce78",
+  "gateCommit": "5c5da273653d125156911cb7a27633e0924dce91",
+  "run": 38072830289,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/38072830289",
+  "archives": [
+    {
+      "file": "native-workbench-0.16.1-source.zip",
+      "bytes": 48461110,
+      "sha256": "64677205101d704957e6bbf9da66245256b5dca1ad606ec908f8f0fffec7df14"
+    },
+    {
+      "file": "native-workbench-0.16.1-starter-windows.zip",
+      "bytes": 17886478,
+      "sha256": "e5fc48276f92a4038aaeadcea5b28eefa70386f849ae35579b04f6e117e53085"
+    },
+    {
+      "file": "native-workbench-0.16.1-update-from-0.16.0.zip",
+      "bytes": 13049139,
+      "sha256": "5db241c23ac5d63d70ebbed18980075a6900977ac8281384d8ca6c2df9e02e64"
+    }
+  ],
+  "evidenceIntegrity": "passed",
+  "candidateNativeVerdict": "failed",
+  "paths": [
+    {
+      "pathCase": "ordinary",
+      "artifact": {
+        "id": 11677044738,
+        "name": "wrapped-library-recheck-ordinary-1",
+        "bytes": 2303426,
+        "sha256": "9786bd753b21763f042b73ef987dc2a9cffd7ef8315c4e9223d91a3e7521e853",
+        "expiresUtc": "2026-11-09T17:44:04Z",
+        "url": "https://github.com/comparativechrono/workbench/actions/runs/38072830289/artifacts/11677044738"
+      },
+      "freshGithubApiIdentityMatched": true,
+      "zipCrc": "passed",
+      "frozenInputsReportSha256": "1f03aeb140124ab53051fbcee00fc64fdad6dd39b122ffca04de5d4a8363c82f",
+      "frozenArchivesUnchanged": true,
+      "gates": [
+        {
+          "gate": "wrapped-library",
+          "status": "failed",
+          "originalReportMember": "wrapped-library/native-wrapped-library.json",
+          "originalReportBytes": 56128,
+          "originalReportSha256": "c7bb79862d6c00b09f98f7945af6e699ae17d6550ca93232e29fd67fa26252d8",
+          "script": "check_wrapped_library_windows.py",
+          "scriptSha256": "84b5465ed752dffe55ecf526d98094a97342bc32b2eaabc966f69b3bc18a3a25",
+          "scriptMatchesGateCommit": true,
+          "passedChecks": 2,
+          "explicitSkips": [],
+          "reportedAppFileHashesVerified": 0,
+          "reportedHelperHashesVerified": 6,
+          "reportedBitmapHashesVerified": 34,
+          "nativeWindowsExecuted": true,
+          "failure": "Native wheel input could not reveal a complete wrapped text line.",
+          "failedScenarios": 1,
+          "successfulScenarios": [
+            "wrapped-text-960",
+            "wrapped-text-1024"
+          ],
+          "unreachedChecks": "Later tall-description, category/selection/search/keyboard/drag and real SAMtools guidance assertions were not completed.",
+          "incompleteRow": {
+            "fixture": "unbroken-token",
+            "coveredTitleLines": 7,
+            "coveredDescriptionLines": 15,
+            "missingDescriptionLineIndicesZeroBased": [
+              15,
+              16
+            ],
+            "input": "Real wheel input between captures; no EnsureVisible or forced repaint."
+          },
+          "hoverObservations": [
+            {
+              "name": "wrapped-960",
+              "samples": 40,
+              "lastObservedMs": 1984.388,
+              "visibleTooltips": 0
+            },
+            {
+              "name": "wrapped-1024",
+              "samples": 40,
+              "lastObservedMs": 1976.832,
+              "visibleTooltips": 0
+            }
+          ]
+        },
+        {
+          "gate": "workspace",
+          "status": "passed",
+          "originalReportMember": "workspace/native-workspace.json",
+          "originalReportBytes": 24346,
+          "originalReportSha256": "6eacc8685d0c82baa4ab25e3c747379cf008f0c386138c8d61358c8e40fb9301",
+          "script": "check_workspace_ui_windows.py",
+          "scriptSha256": "3eb65a10bdb15331fbca6d088e387d256dc8538017077a6d395f6054e300a3e0",
+          "scriptMatchesGateCommit": true,
+          "passedChecks": 32,
+          "explicitSkips": [],
+          "reportedAppFileHashesVerified": 35,
+          "reportedHelperHashesVerified": 0,
+          "reportedBitmapHashesVerified": 18,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": true
+        },
+        {
+          "gate": "scroll",
+          "status": "passed",
+          "originalReportMember": "scroll/native-scroll.json",
+          "originalReportBytes": 320753,
+          "originalReportSha256": "7a8eafbb432a0afb8e1dc40240ad69c5a382ac2fa7512a6ef348f8c135898fa3",
+          "script": "check_scroll_frames_0160_windows.py",
+          "scriptSha256": "5012b253eba4b4633dce065f8e4c5c0d23b4f1ec575d3195807b4fd9b863f004",
+          "scriptMatchesGateCommit": true,
+          "passedChecks": 3,
+          "explicitSkips": [],
+          "reportedAppFileHashesVerified": 0,
+          "reportedHelperHashesVerified": 0,
+          "reportedBitmapHashesVerified": 10,
+          "nativeWindowsExecuted": true,
+          "panels": [
+            {
+              "panel": "standalone-options",
+              "frames": 320,
+              "unexpectedFrames": 0,
+              "endpointFailures": 0,
+              "precisionPassed": true,
+              "success": true
+            },
+            {
+              "panel": "general-settings",
+              "frames": 320,
+              "unexpectedFrames": 0,
+              "endpointFailures": 0,
+              "precisionPassed": true,
+              "success": true
+            },
+            {
+              "panel": "workflow-options",
+              "frames": 320,
+              "unexpectedFrames": 0,
+              "endpointFailures": 0,
+              "precisionPassed": true,
+              "success": true
+            }
+          ],
+          "scope": "Displayed static text/background during finite scrolling; child edits/buttons masked; actual reported DPI only"
+        }
+      ],
+      "passedGates": 2,
+      "failedGates": 1,
+      "passedChecksInSuccessfulGates": 35,
+      "passedChecksInFailedGate": 2,
+      "explicitSkippedChecks": 0,
+      "candidateVerdict": "failed"
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifact": {
+        "id": 11677401538,
+        "name": "wrapped-library-recheck-path with spaces-1",
+        "bytes": 2301223,
+        "sha256": "c8d872dd6b8bdfe870d54426a155f79133c6a5f310e08b5fbc6dc46e9ebac705",
+        "expiresUtc": "2026-11-09T17:44:09Z",
+        "url": "https://github.com/comparativechrono/workbench/actions/runs/38072830289/artifacts/11677401538"
+      },
+      "freshGithubApiIdentityMatched": true,
+      "zipCrc": "passed",
+      "frozenInputsReportSha256": "f12fda44169cbd1cdfc61d09bd38fda971bdb8b5eb66b902b7684802004b5a63",
+      "frozenArchivesUnchanged": true,
+      "gates": [
+        {
+          "gate": "wrapped-library",
+          "status": "failed",
+          "originalReportMember": "wrapped-library/native-wrapped-library.json",
+          "originalReportBytes": 56124,
+          "originalReportSha256": "28e6c42f5144e9825cf081803d8e876413a8c1a17a971ce4a6071e1b364fbcc0",
+          "script": "check_wrapped_library_windows.py",
+          "scriptSha256": "84b5465ed752dffe55ecf526d98094a97342bc32b2eaabc966f69b3bc18a3a25",
+          "scriptMatchesGateCommit": true,
+          "passedChecks": 2,
+          "explicitSkips": [],
+          "reportedAppFileHashesVerified": 0,
+          "reportedHelperHashesVerified": 6,
+          "reportedBitmapHashesVerified": 34,
+          "nativeWindowsExecuted": true,
+          "failure": "Native wheel input could not reveal a complete wrapped text line.",
+          "failedScenarios": 1,
+          "successfulScenarios": [
+            "wrapped-text-960",
+            "wrapped-text-1024"
+          ],
+          "unreachedChecks": "Later tall-description, category/selection/search/keyboard/drag and real SAMtools guidance assertions were not completed.",
+          "incompleteRow": {
+            "fixture": "unbroken-token",
+            "coveredTitleLines": 7,
+            "coveredDescriptionLines": 15,
+            "missingDescriptionLineIndicesZeroBased": [
+              15,
+              16
+            ],
+            "input": "Real wheel input between captures; no EnsureVisible or forced repaint."
+          },
+          "hoverObservations": [
+            {
+              "name": "wrapped-960",
+              "samples": 40,
+              "lastObservedMs": 1985.925,
+              "visibleTooltips": 0
+            },
+            {
+              "name": "wrapped-1024",
+              "samples": 40,
+              "lastObservedMs": 1985.045,
+              "visibleTooltips": 0
+            }
+          ]
+        },
+        {
+          "gate": "workspace",
+          "status": "passed",
+          "originalReportMember": "workspace/native-workspace.json",
+          "originalReportBytes": 24394,
+          "originalReportSha256": "2b0109b9825c807dda9d8f3bfe6ec061c94401c8c386cd4b27116bb2f25295d7",
+          "script": "check_workspace_ui_windows.py",
+          "scriptSha256": "3eb65a10bdb15331fbca6d088e387d256dc8538017077a6d395f6054e300a3e0",
+          "scriptMatchesGateCommit": true,
+          "passedChecks": 32,
+          "explicitSkips": [],
+          "reportedAppFileHashesVerified": 35,
+          "reportedHelperHashesVerified": 0,
+          "reportedBitmapHashesVerified": 18,
+          "nativeWindowsExecuted": true,
+          "nativeGUIValidated": true
+        },
+        {
+          "gate": "scroll",
+          "status": "passed",
+          "originalReportMember": "scroll/native-scroll.json",
+          "originalReportBytes": 320772,
+          "originalReportSha256": "41cf59db4bc397639753a6ddee76d1d0fd9a2c91982619385280415669775ad6",
+          "script": "check_scroll_frames_0160_windows.py",
+          "scriptSha256": "5012b253eba4b4633dce065f8e4c5c0d23b4f1ec575d3195807b4fd9b863f004",
+          "scriptMatchesGateCommit": true,
+          "passedChecks": 3,
+          "explicitSkips": [],
+          "reportedAppFileHashesVerified": 0,
+          "reportedHelperHashesVerified": 0,
+          "reportedBitmapHashesVerified": 10,
+          "nativeWindowsExecuted": true,
+          "panels": [
+            {
+              "panel": "standalone-options",
+              "frames": 320,
+              "unexpectedFrames": 0,
+              "endpointFailures": 0,
+              "precisionPassed": true,
+              "success": true
+            },
+            {
+              "panel": "general-settings",
+              "frames": 320,
+              "unexpectedFrames": 0,
+              "endpointFailures": 0,
+              "precisionPassed": true,
+              "success": true
+            },
+            {
+              "panel": "workflow-options",
+              "frames": 320,
+              "unexpectedFrames": 0,
+              "endpointFailures": 0,
+              "precisionPassed": true,
+              "success": true
+            }
+          ],
+          "scope": "Displayed static text/background during finite scrolling; child edits/buttons masked; actual reported DPI only"
+        }
+      ],
+      "passedGates": 2,
+      "failedGates": 1,
+      "passedChecksInSuccessfulGates": 35,
+      "passedChecksInFailedGate": 2,
+      "explicitSkippedChecks": 0,
+      "candidateVerdict": "failed"
+    }
+  ],
+  "limits": [
+    "Original first-attempt failures and original archive audit remain unchanged.",
+    "This recheck changes validation drivers only; it does not contain a production fix or establish wrapped-library acceptance.",
+    "Native wheel input failed to reveal the final two description lines of the unbroken-token fixture in both path layouts.",
+    "Passed finite tooltip/frame samples do not establish zero flicker or representative-PC/high-DPI acceptance.",
+    "No raw fixture tokens, private inputs, runner paths or opaque report payloads are copied."
+  ],
+  "auditScriptSha256": "5a95f4eede159658ba37f34d72963bad7af11b08459499315d6cae341dccd0ec"
+}

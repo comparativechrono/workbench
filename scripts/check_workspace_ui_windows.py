@@ -654,7 +654,10 @@ def gui_contracts(root, evidence, report):
             ui.set_text(ui.child(102), query)
             def choices():
                 library = ui.library()
-                return [item for item in library.tools() if not exact_label or library.label(item) == exact_label]
+                # Wrapped rows expose their description after the complete
+                # title for accessibility. Keep exact operation disambiguation.
+                return [item for item in library.tools() if not exact_label or
+                        library.label(item).partition('\n')[0] == exact_label]
             ui.wait("filter tool " + query, lambda: len(choices()) == 1)
             # The 0.13 candidate also exposes an explicitly indexed alignment.
             # Select the actual ordinary-operation label for the unchanged
@@ -673,7 +676,9 @@ def gui_contracts(root, evidence, report):
             by_id = {c["id"]: c for c in rows if c["id"] > 0}
             for identity in (102, 104, 410, 411, 118):
                 require(identity in by_id, "Missing visible native control: " + str(identity))
-            tools, form = by_id[104]["bounds"], by_id[118]["bounds"]
+            library = ui.library()
+            tools = library.visible_bounds() if hasattr(library, 'visible_bounds') else by_id[104]["bounds"]
+            form = by_id[118]["bounds"]
             require(tools[2] <= form[0], "Tool library overlaps the selected tool form.")
             if mode == "tool":
                 for identity in (101, 413, 111, 403):
@@ -685,7 +690,7 @@ def gui_contracts(root, evidence, report):
                 canvas = by_id[117]["bounds"]
                 require(tools[2] <= canvas[0] and canvas[2] <= form[0], "Workflow panes overlap.")
             geometry.append({"mode": mode, "requestedSize": size, "actualWindowBounds": ui.bounds(ui.main),
-                             "dpi": ui.user.GetDpiForWindow(ui.main), "controls": rows})
+                             "dpi": ui.user.GetDpiForWindow(ui.main), "visibleToolPane": tools, "controls": rows})
         def add_input(label):
             ui.click_button(419)
             def modal_window():

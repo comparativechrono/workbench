@@ -1,0 +1,120 @@
+{
+  "schema": 1,
+  "kind": "prodigal-fasttree-unpublished-review-candidate",
+  "recordedOn": "2026-10-13",
+  "readyForDraftReview": true,
+  "published": false,
+  "merged": false,
+  "catalogueChanged": false,
+  "applicationChanged": false,
+  "pullRequest": "https://github.com/comparativechrono/workbench/pull/16",
+  "baseBranch": "fix/native-ui-0.16.1",
+  "baseCommit": "2b2e97aa15970f0e7fb3a5428e8ab7dad6acada2",
+  "candidateSourceCommit": "d175076d57f4c84743cb375369c604085a720204",
+  "candidateSourceTree": "e15f450758f0713755f68c7f5ad2b9b42832c611",
+  "frozenGUIValidatorCommit": "9ea63994661073b115e80533c3288d50d250decb",
+  "frozenGUIValidatorTree": "5e6fa12ff816c2d4b73c027fafcf925421eabeae",
+  "buildAndScienceRun": 38387733137,
+  "frozenFormRun": 38389163430,
+  "candidateArtifact": {
+    "id": 11806999226,
+    "url": "https://github.com/comparativechrono/workbench/actions/runs/38387733137/artifacts/11806999226",
+    "bytes": 7964376,
+    "sha256": "39436067a80e28b89837ba7d266201f9b909792eaee73dc298bed61fb0cf14fd",
+    "expiresAt": "2026-11-12T11:12:01Z"
+  },
+  "packs": {
+    "prodigal": {
+      "id": "prodigal",
+      "version": "1.0.0",
+      "file": "native-workbench-pack-prodigal-1.0.0.zip",
+      "bytes": 1855319,
+      "sha256": "321a8717b2e8841f7caf2c13ac2837638c9cc10000aaeb0919463c70cb07dad4",
+      "manifestSha256": "731ddc3f415e6727e2b4d8bee73103de7c4835ae6e9a66be9b5d67e77cdfd757"
+    },
+    "fasttree": {
+      "id": "fasttree",
+      "version": "1.0.0",
+      "file": "native-workbench-pack-fasttree-1.0.0.zip",
+      "bytes": 853557,
+      "sha256": "4525aa8001b7b190eecbee5a164bb9586ce9f78d8672635df25ae4e462165c20",
+      "manifestSha256": "83e45c8c7222bea53e4023861450aa79db0a2f003f7e2a82f6c6362923bcdc55"
+    }
+  },
+  "sourceCompanion": {
+    "file": "native-workbench-prodigal-fasttree-1.0.0-source-evidence.zip",
+    "bytes": 5246791,
+    "sha256": "2c4f1fb1f1d4f2aa7d855e8eaf47aa8726bea2ef19a1a9b7876e0189c5ef6e64"
+  },
+  "evidence": {
+    "source": {
+      "file": "prodigal-fasttree-1.0.0-source-2026-10-13.json",
+      "sha256": "c4ae4a0830255ce3be982cefbb4a64f57f14a2cca6e26ff80565b2eabd33eec5"
+    },
+    "archive": {
+      "file": "prodigal-fasttree-1.0.0-archive-2026-10-13.json",
+      "sha256": "7257e5bbb172f70d1aa8ef460c5538b0c9861b426bd9d2cdad78b85c6ad1fcc7"
+    },
+    "native": {
+      "file": "prodigal-fasttree-1.0.0-native-2026-10-13.json",
+      "sha256": "b1fdbbf59f0108a68e7203b235317fdf744adc09a67bcb4fde3fdd5bd1551cb4"
+    },
+    "frozen-forms": {
+      "file": "prodigal-fasttree-1.0.0-frozen-forms-2026-10-13.json",
+      "sha256": "911b35ad68b744c9c3d27b367250ec2bcdc7a75aeaf219e99c4c39e91af96dbb"
+    },
+    "visual": {
+      "file": "prodigal-fasttree-1.0.0-visual-2026-10-13.json",
+      "sha256": "7f362e960c99c186784bda972251e601f7560e61b30e12beae2cfc93d0fea85b"
+    },
+    "initial-source": {
+      "file": "prodigal-fasttree-1.0.0-initial-source-2026-10-13.json",
+      "sha256": "209867f43b0b530e34385ec448c72becee1305cbdcaa3d9805dfa3187cb9a9f6"
+    },
+    "initial-archive": {
+      "file": "prodigal-fasttree-1.0.0-initial-archive-2026-10-13.json",
+      "sha256": "77094deaf4a956593ffddc8373453a99216e91927d2093fda672f95020f29b1d"
+    },
+    "initial-native": {
+      "file": "prodigal-fasttree-1.0.0-initial-native-2026-10-13.json",
+      "sha256": "2249a7d70626523a72c2e14303447958e6dd35a5e9e5d0a4b7f1094dd45cc2c8"
+    }
+  },
+  "validation": {
+    "source": "96 passes, 2 explicit platform skips across five hosted suites;20 live official FastTree reference cases are part of suite coverage.",
+    "downloadedSourceAudit": "924 Git files, 967 companion inventory members; recipes, source, binary records and hashes matched.",
+    "nativeWindowsPerPath": {
+      "prodigalTestsPassed": 16,
+      "fasttreeTestsPassed": 14,
+      "selectedTestsSkipped": 0,
+      "muscleGraphChainsPassed": 2,
+      "combinedCoreChecksPassed": 7,
+      "combinedStarterSciencePassed": 1,
+      "combinedInstalledPackChecksPassed": 10,
+      "scope": "Ordinary and spaced paths; overlapping assertions are not summed as unique coverage."
+    },
+    "frozenGUIPerPath": {
+      "checksPassed": 12,
+      "captureFiles": 44,
+      "actualDisplayImagesReviewed": 22,
+      "allFormsStartAtMinimumAndReachMaximum": true
+    },
+    "validatorOnlyTestsPassed": 8,
+    "visual": "44 actual display images directly reviewed; no blocking captured layout finding."
+  },
+  "retainedFailures": {
+    "initialRun": 38385903740,
+    "initialCandidateSourceCommit": "b7fb88b8a81e55b9faef78861fe7a4ce08e61671",
+    "cause": "Prodigal PE default stack too small for unchanged non-SD routine; GUI driver expected wrong run-level status.",
+    "initialSuccessfulGUIWalkLimit": "Retained scroll offsets hid some first pages; corrected through frozen recheck without archive edits."
+  },
+  "remainingLimitations": [
+    "Pack JSON measurements are output files, not parsed native Results summary tiles.",
+    "No GUI Run-button execution assertion; scientific normal runs used the actual private native host.",
+    "No representative-PC/high-DPI/multi-monitor/physical-trackpad acceptance or real-data benchmark.",
+    "No executable signing/institutional deployment, scientific Linux CWL, release or updater validation.",
+    "No OS-level network isolation claim.",
+    "Source/byte correspondence is not independent bit-identical recompilation.",
+    "Actions archives expire 2026-11-12; no release assets or catalogue publication were created."
+  ]
+}
