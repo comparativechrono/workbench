@@ -5,8 +5,9 @@
 `feature/bustools-stringtie-packs`. Initial independent 1.0.0 packs cover BUS
 barcode correction/UMI gene counting and guided short-read transcript assembly/
 reference-only expression estimation. See the
-[stage handover](bustools-stringtie-handover.md). Implementation and local checks are complete; exact
-Windows and visual validation remain pending. No release or merge is included.
+[stage handover](bustools-stringtie-handover.md). Native bustools science passes in both path cases. StringTie native heap
+corruption blocks acceptance; a compiler-proven flags-layout correction and
+fresh exact Windows/visual validation are in progress. No release or merge is included.
 
 **Integration update, 2026-10-13:** the owner authorized checking compatibility
 and merging the completed PR stack. PRs [#18](https://github.com/comparativechrono/workbench/pull/18),

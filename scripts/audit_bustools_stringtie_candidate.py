@@ -7,6 +7,7 @@ trust. Run it on the downloaded Actions candidate, not a local preparation tree.
 from __future__ import annotations
 
 import argparse
+import ast
 import hashlib
 import io
 import json
@@ -98,9 +99,9 @@ UPSTREAM_IDENTITIES = {
 }
 # Review the exact changed source boundary and all compiled component notices.
 PATCH_PATHS = {'bustools': {'src/Common.hpp', 'src/roaring.h', 'src/roaring.c'},
-               'stringtie': {'gclib/GBase.cpp', 'stringtie.cpp'}}
+               'stringtie': {'gclib/GBase.cpp', 'gclib/gff.h', 'stringtie.cpp'}}
 PATCH_SHA256 = {'bustools': '889fea401c52db2b748c1d5645dc63ccae8844c74cbdfef0af153d1580d261f4',
-                'stringtie': '253fb7891604783bbe87e60947435dd68f447d7cb6449d9f074b5969441b2d42'}
+                'stringtie': 'eb4e3cee57f25ba8b67989342c4bdef7a7bcdbf4988b8067cd48ef27a2677a45'}
 NOTICE_PATHS = {
     'bustools': {
         'bustools-0.45.1.tar.gz': {
@@ -264,6 +265,53 @@ def source_correspondence(identity, pack, originals):
             'scope': 'Byte and provenance correspondence; not independent bit-identical recompilation.'}
 
 
+def stringtie_layout_diagnostic(source, originals):
+    """Bind the standalone ABI probe to the exact patched upstream flag union."""
+    prefix = 'build-evidence/1/stringtie-flags/'
+    names = ('flag-layout-check.exe', 'flag-layout-check.cpp', 'flag-layout-check.json')
+    require({name for name in source.namelist() if name.startswith(prefix)} ==
+            {prefix + name for name in names}, 'StringTie layout diagnostic evidence set differs')
+    data = {name: source.read(prefix + name) for name in names}
+    diagnostic = json.loads(data[names[2]])
+    build = json.loads(source.read('corresponding-sources/stringtie/build-provenance.json'))
+    require(diagnostic == build['flagLayoutCheck'] and diagnostic['nativeExecutionPerformed'] is False,
+            'StringTie layout diagnostic build identity or execution claim differs')
+    require(diagnostic['sourceSha256'] == digest(data[names[1]]) and
+            diagnostic['executableSha256'] == digest(data[names[0]]) and
+            diagnostic['builderSha256'] == digest(originals['scripts/build_stringtie_native.py']) and
+            diagnostic['compilerSha256'] == build['guardCompilerSha256'] and
+            diagnostic['patchSha256'] == build['patchSha256'] == PATCH_SHA256['stringtie'],
+            'StringTie layout diagnostic source, binary, compiler or patch provenance differs')
+    pe_x64(data[names[0]])
+    upstream = source.read('corresponding-sources/stringtie/stringtie-3.0.3.tar.gz')
+    require(digest(upstream) == UPSTREAM_PINS['stringtie']['stringtie-3.0.3.tar.gz'],
+            'StringTie layout diagnostic upstream archive differs')
+    with tarfile.open(fileobj=io.BytesIO(upstream)) as archive:
+        header = archive.extractfile('stringtie-' + UPSTREAM_IDENTITIES['stringtie'][1] + '/gclib/gff.h').read().decode()
+    # Reconstruct only the reviewed storage-layout change independently of the
+    # build's temporary source tree. Other upstream algorithms are untouched.
+    start = header.index('   union {', header.index('class GffObj:'))
+    end = header.index('   //-- friends:', start)
+    union = header[start:end]
+    require(union.count('bool flag_') == 17, 'Unexpected upstream GffObj flag layout')
+    union = union.replace('bool flag_', 'unsigned int flag_').replace('      unsigned int flags;',
+        '      // Workbench: one 32-bit storage unit also under the Windows bitfield ABI.\n      unsigned int flags;')
+    patched = header[:start] + union + header[end:]
+    require(diagnostic['patchedHeaderSha256'] == digest(patched.encode()),
+            'StringTie layout diagnostic patched header differs')
+    # Evaluate only this pure source-generator function from the exact committed
+    # recipe; it neither compiles nor runs any executable during the audit.
+    recipe = ast.parse(originals['scripts/build_stringtie_native.py'])
+    generator = next(node for node in recipe.body if isinstance(node, ast.FunctionDef) and node.name == 'flag_layout_probe')
+    namespace = {'re': re}
+    exec(compile(ast.Module(body=[generator], type_ignores=[]), 'audited-layout-generator', 'exec'), namespace)
+    require(data[names[1]] == namespace['flag_layout_probe'](patched).encode(),
+            'StringTie layout diagnostic source differs from the exact flag-union generator')
+    return {'archivePrefix': prefix, 'files': {name: {'bytes': len(value), 'sha256': digest(value)} for name, value in data.items()},
+            'patchedHeaderSha256': diagnostic['patchedHeaderSha256'], 'nativeExecutionVerified': False,
+            'scope': 'Source and binary correspondence only; the separate Windows report must prove execution.'}
+
+
 def audit(candidate, commit):
     record = json.loads((candidate / 'BUILD-PROVENANCE.json').read_text(encoding='utf-8'))
     require(record['sourceCommit'] == commit, 'Build record refers to another commit')
@@ -322,6 +370,7 @@ def audit(candidate, commit):
                 result['packs'][identity] = {**pack_record, 'licenceSourceFilesMatched': len(licence_names),
                                              'x64ExecutablesVerified': executables,
                                              'sourceCorrespondence': correspondence}
+        result['stringtieLayoutDiagnostic'] = stringtie_layout_diagnostic(source, originals)
     expected_sums = {item['file']: item['sha256'] for item in [*record['packs'].values(), record['sourceCompanion']]}
     lines = (candidate / 'SHA256SUMS.txt').read_text(encoding='ascii').splitlines()
     pairs = [line.split('  ', 1) for line in lines]

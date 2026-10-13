@@ -80,6 +80,10 @@ jobs:
               for item in (Path('build') / name).iterdir():
                   if item.is_file() and (item.name == 'build.json' or item.suffix in ('.log', '.txt')):
                       shutil.copyfile(item, out / item.name)
+          diagnostic = Path('build/candidate-build-evidence/stringtie-flags')
+          diagnostic.mkdir()
+          for name in ('flag-layout-check.exe', 'flag-layout-check.cpp', 'flag-layout-check.json'):
+              shutil.copyfile(Path('build/stringtie-windows') / name, diagnostic / name)
           PYCODE
       - name: Check source and Linux scientific behavior
         shell: bash

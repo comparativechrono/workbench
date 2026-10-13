@@ -1,7 +1,8 @@
 # bustools and StringTie optional packs
 
-Date: 2026-10-13. Status: implementation complete; local source/science and native cross-build
-checks pass. Exact packaged Windows execution and visual review remain pending. No release or merge is authorized for this set.
+Date: 2026-10-13. Status: implementation present; native bustools checks pass,
+but StringTie native heap corruption blocks acceptance. A concrete Windows flag-layout
+correction is in development. Exact corrected Windows and visual review remain pending. No release or merge is authorized for this set.
 
 The owner requested the next roadmap stage after merging all completed PRs.
 The clean verified base is `main` at
@@ -106,8 +107,11 @@ Windows result. Corrected exact candidate validation remains pending.
 Source `69a9ec0d09ef94076fbe4ba0f59fd89d2a604bd4`, run
 https://github.com/comparativechrono/workbench/actions/runs/38413969992,
 rebuilt successfully and passed all hosted source suites plus downloaded exact
-archive/source correspondence. Both native scientific jobs then stalled; no
-completed native or GUI pass is established for these bytes.
+archive/source correspondence. Both native scientific jobs stalled until their configured 35-minute job limit
+(GitHub conclusion `cancelled`, 15:07:43 UTC). No explicit cancellation was
+requested by the agent. Partial reports and the cancellation traceback are
+retained in the [stalled-run receipt](evidence/bustools-stringtie-stalled-windows-2026-10-13.json);
+no completed native or GUI pass is established for these bytes.
 
 Independent pinned-source inspection identified a native CLI portability defect:
 StringTie splits output paths only on `/`, while the guard supplied native
@@ -120,3 +124,42 @@ variadic handling. The tool is explicitly marked **3.0.3-workbench1**, with
 retained patches and no assembly/estimation algorithm changes. Exact new Windows
 validation is required. The checker also gains a bounded cancellation deadline
 and retains partial plans, child logs and check reports on failure.
+
+## Native heap failure and bounded diagnosis
+
+The `0c13ab53bcec23710a633306a30a1d3e00c3ca22` clean build failed because the
+reviewed compatibility patch was omitted from the commit. No package or native
+pass exists for that attempt. Source `ddeadd34b68491f7f7450ceac804f8fade4116a6`
+retains the patch and built successfully in
+https://github.com/comparativechrono/workbench/actions/runs/38416822238.
+Downloaded archives passed transport SHA-256, CRC and exact source correspondence.
+
+Both Windows path cases pass all 19 bustools scientific tests. StringTie has
+four passing and four failing declared checks; a subsequent normal assembly
+also failed. The five failures retain child exit `0xC0000374`, nonempty output
+files and empty StringTie logs; no deadline was exceeded. Output presence is not
+success. Full StringTie regressions, HISAT2 graphs and screenshots were not
+reached. See the [native failure receipt](evidence/bustools-stringtie-native-heap-failure-2026-10-13.json).
+
+Independent compiler-layout inspection established that StringTie's `GffObj`
+union overlays mixed boolean/integer bitfields differently on Windows: eight
+bytes rather than four. Clearing its 32-bit `flags` word leaves user flags
+uninitialized. Nascent-guide ownership flags can therefore place genuine
+annotations into a second owning list, explaining guide loss and double frees.
+A narrow consistent-bitfield-type correction, layout regression and repeated
+native known-answer runs are required before accepting new bytes. No assembly
+or expression algorithm change is proposed.
+
+The corrected `workbench1.patch` now changes exactly `gclib/GBase.cpp`,
+`gclib/gff.h` and the version banner in `stringtie.cpp`. Its SHA-256 is
+`eb4e3cee57f25ba8b67989342c4bdef7a7bcdbf4988b8067cd48ef27a2677a45`.
+Using `unsigned int` for all one-bit members preserves their intended meanings
+and makes the entire 29-bit group share the 32-bit clearing word. A source-derived
+probe verifies size, initialization from poisoned storage and all 19 field
+positions. It is separate validation evidence, not a user-facing runtime tool.
+Local Linux builds pass 21 tests, including 20 complete-output repeated runs and
+four comparisons to the pinned pristine executable. The corrected Windows
+archives still require native execution and visual acceptance. An optional
+Linux ASan diagnostic build stopped on a compiler diagnostic in `std::regex`;
+no ASan execution or sanitizer pass is claimed. Production warning flags were
+not relaxed.

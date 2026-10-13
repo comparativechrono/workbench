@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "kind": "retained-native-stall",
+  "sourceCommit": "69a9ec0d09ef94076fbe4ba0f59fd89d2a604bd4",
+  "workflowRunId": 38413969992,
+  "jobIds": [
+    115354292467,
+    115354292735
+  ],
+  "startedUtc": "2026-10-13T14:32:35Z",
+  "completedUtc": "2026-10-13T15:07:43Z",
+  "jobConclusion": "cancelled",
+  "configuredTimeoutMinutes": 35,
+  "explicitCancellationRequestedByAgent": false,
+  "observed": "Native science remained blocked until the job limit; cancellation traceback is inside pack self-check engine execution. No StringTie native pass or specific upstream fatal message established.",
+  "ordinaryJobLogSha256": "aaef46db6785d0e34e89cb575c9ca495ef6cbe8bddc70631dfc7540e9ee4932c",
+  "artifacts": [
+    {
+      "case": "ordinary",
+      "id": 11826525606,
+      "sha256": "1c236962eda88a45f8068f05f0afb34d66680a33f14d38b20026e7b7a7ad2674"
+    },
+    {
+      "case": "spaces",
+      "id": 11826405645,
+      "sha256": "c03b4f3cd88d4454bc5cf0e7c96f3b5d6533e093e0345a41791319aaa3d0ea8a"
+    }
+  ],
+  "nativeAcceptancePassed": false
+}

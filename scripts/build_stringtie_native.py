@@ -24,8 +24,8 @@ def extract(path,dest):
             if m.isfile():
                 target=dest/p;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(t.extractfile(m).read())
 def apply_compatibility(source):
-    """Only Windows fatal-error presentation and the attested version banner."""
-    originals={name:(source/name).read_text() for name in ('gclib/GBase.cpp','stringtie.cpp')}
+    """Windows diagnostics, GFF flag storage ABI, and the attested banner only."""
+    originals={name:(source/name).read_text() for name in ('gclib/GBase.cpp','gclib/gff.h','stringtie.cpp')}
     base=originals['gclib/GBase.cpp'];start=base.index('  #ifdef _WIN32\n',base.index('void GError('));end=base.index('  #else\n',start)
     replacement="""  #ifdef _WIN32
     // Native Workbench CLI boundary: report fatal errors without a modal dialog.
@@ -47,11 +47,33 @@ def apply_compatibility(source):
     fflush(stderr);
 """
     base=base[:start]+replacement+base[end:]
-    modified={'gclib/GBase.cpp':base,'stringtie.cpp':originals['stringtie.cpp'].replace('#define VERSION "3.0.3"','#define VERSION "3.0.3-workbench1"')}
+    header=originals['gclib/gff.h'];start=header.index('   union {',header.index('class GffObj:'));end=header.index('   //-- friends:',start)
+    flags=header[start:end];assert flags.count('bool flag_')==17
+    flags=flags.replace('bool flag_', 'unsigned int flag_')
+    flags=flags.replace('      unsigned int flags;', '      // Workbench: one 32-bit storage unit also under the Windows bitfield ABI.\n      unsigned int flags;')
+    header=header[:start]+flags+header[end:]
+    modified={'gclib/GBase.cpp':base,'gclib/gff.h':header,'stringtie.cpp':originals['stringtie.cpp'].replace('#define VERSION "3.0.3"','#define VERSION "3.0.3-workbench1"')}
     patch=''.join(''.join(difflib.unified_diff(originals[name].splitlines(True),modified[name].splitlines(True),fromfile='a/'+name,tofile='b/'+name)) for name in originals)
     if patch!=PATCH.read_text():raise ValueError('Compatibility changes differ from the reviewed exact patch')
     for name,text in modified.items():(source/name).write_text(text)
     return sha(PATCH)
+def flag_layout_probe(header):
+    """Exercise the exact source union, not a separately maintained approximation."""
+    start=header.index('   union {',header.index('class GffObj:'));end=header.index('   //-- friends:',start)
+    union=header[start:end]
+    fields=re.findall(r'(?:bool|unsigned int)\s+(\w+)\s*:\s*(\d+)',union)
+    assert len(fields)==19 and sum(int(n) for _,n in fields)==29
+    checks=[];offset=0
+    for name,width in fields:
+        value=(1<<int(width))-1
+        checks.append(f'  value.flags=0; value.{name}={value}; if(value.flags != {value<<offset}u) return 3;')
+        offset+=int(width)
+    return ('#include <cstdio>\n#include <cstring>\nstruct Flags {\n'+union+'};\n'
+        'static_assert(sizeof(Flags)==sizeof(unsigned int) && sizeof(Flags)==4, "GFF flags must occupy one 32-bit word");\n'
+        'int main() {\n  Flags value; std::memset(&value, 0xA5, sizeof(value)); value.flags=0;\n'
+        '  if('+ ' || '.join('value.'+name for name,_ in fields)+') return 2;\n'
+        +'\n'.join(checks)+'\n'
+        '  std::puts(R"({"success":true,"unionBytes":4,"poison":165,"fieldsChecked":19})");\n  return 0;\n}\n')
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--cache',type=Path,default=ROOT/'build/stringtie-cache');p.add_argument('--build',type=Path);p.add_argument('--toolchain',type=Path,default=ROOT/'build/toolchains'/TC_NAME);p.add_argument('--fetch',action='store_true');p.add_argument('--linux',action='store_true');p.add_argument('--upstream',action='store_true');p.add_argument('--jobs',type=int,default=2);a=p.parse_args()
     if a.upstream and not a.linux:raise ValueError('Pristine upstream reference requires --linux')
@@ -91,8 +113,20 @@ def main():
     guard=ROOT/'tools/stringtie/guard.cpp'
     if not a.upstream:
         helper=out/('stringtie-guard'+suffix);cmd=[cxx,'-O2','-std=c++17','-Wall','-Wextra','-Werror','-march=x86-64','-mno-avx','-mno-avx2',*includes,str(guard),*[str(obj) for (f,(obj,_)) in zip(files,built) if f in hfiles+zfiles+tfiles],*link,'-o',str(helper)];subprocess.run(cmd,env=env,check=True);commands.append(cmd);binaries.append(helper)
-    record={'schema':1,'tool':'stringtie','version':UPSTREAM_VERSION if a.upstream else VERSION,'upstreamVersion':UPSTREAM_VERSION,'sourceCommit':SOURCE_COMMIT,'upstreamCommit':SOURCE_COMMIT,'sources':{k:{'url':v[0],'sha256':v[1]} for k,v in SOURCES.items()},'platform':'linux-x86_64' if a.linux else 'windows-x86_64','cpuBaseline':'x86-64; no AVX/AVX2 or SSE4 requirement','threadsExposed':1,'upstreamScientificAlgorithmsUnmodified':True,'upstreamSourceUnmodified':a.upstream,'patchSha256':patch_hash,'executionTestsPerformedByBuild':False,'builderSha256':sha(Path(__file__)),'compiler':subprocess.check_output([cc,'--version'],env=env,text=True).splitlines()[0],'compilerSha256':sha(cc),'commands':commands,'files':{},'generatedConfiguration':{f.relative_to(out).as_posix():sha(f) for folder in [config,treconfig] for f in folder.iterdir()},'buildRoute':'Direct upstream object list, native GThreads Windows route, forced standard stdint.h include, BAM-only HTSlib zlib configuration, TRE POSIX regex symbols; '+('pristine source reference, no compatibility patch' if a.upstream else 'workbench1.patch makes Windows GError nonmodal, consumes GError/GMessage diagnostic arguments once, and attests the build version; scientific algorithms unchanged')}
+    record={'schema':1,'tool':'stringtie','version':UPSTREAM_VERSION if a.upstream else VERSION,'upstreamVersion':UPSTREAM_VERSION,'sourceCommit':SOURCE_COMMIT,'upstreamCommit':SOURCE_COMMIT,'sources':{k:{'url':v[0],'sha256':v[1]} for k,v in SOURCES.items()},'platform':'linux-x86_64' if a.linux else 'windows-x86_64','cpuBaseline':'x86-64; no AVX/AVX2 or SSE4 requirement','threadsExposed':1,'upstreamScientificAlgorithmsUnmodified':True,'upstreamSourceUnmodified':a.upstream,'patchSha256':patch_hash,'executionTestsPerformedByBuild':bool(a.linux and not a.upstream),'scientificExecutionTestsPerformedByBuild':False,'builderSha256':sha(Path(__file__)),'compiler':subprocess.check_output([cc,'--version'],env=env,text=True).splitlines()[0],'compilerSha256':sha(cc),'commands':commands,'files':{},'generatedConfiguration':{f.relative_to(out).as_posix():sha(f) for folder in [config,treconfig] for f in folder.iterdir()},'buildRoute':'Direct upstream object list, native GThreads Windows route, forced standard stdint.h include, BAM-only HTSlib zlib configuration, TRE POSIX regex symbols; '+('pristine source reference, no compatibility patch' if a.upstream else 'workbench1.patch makes Windows GError nonmodal, consumes GError/GMessage diagnostic arguments once, restores one 32-bit GFF flag storage unit under the Windows ABI, and attests the build version; scientific algorithms unchanged')}
     if not a.upstream:record.update(guardSourceSha256=sha(guard),guardCompilerSha256=sha(cxx))
+    if not a.upstream:
+        probe_source=out/'flag-layout-check.cpp';probe=out/('flag-layout-check'+suffix)
+        probe_source.write_text(flag_layout_probe((src/'gclib/gff.h').read_text()))
+        probe_cmd=[cxx,'-O2','-std=c++11',str(probe_source),*link,'-o',str(probe)]
+        subprocess.run(probe_cmd,env=env,check=True)
+        probe_record={'schema':1,'sourceSha256':sha(probe_source),'executableSha256':sha(probe),'patchedHeaderSha256':sha(src/'gclib/gff.h'),'builderSha256':sha(Path(__file__)),'compilerSha256':sha(cxx),'patchSha256':patch_hash,'command':probe_cmd,'nativeExecutionPerformed':a.linux}
+        if a.linux:
+            executed=subprocess.run([str(probe)],text=True,capture_output=True,check=True)
+            probe_record['result']=json.loads(executed.stdout)
+        (out/'flag-layout-check.json').write_text(json.dumps(probe_record,indent=2)+'\n')
+        record['flagLayoutCheck']=probe_record
+
     for f in binaries:
         info={'bytes':f.stat().st_size,'sha256':sha(f)}
         if not a.linux:

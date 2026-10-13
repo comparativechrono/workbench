@@ -111,6 +111,127 @@ class BustoolsStringTieEvidenceContracts(unittest.TestCase):
             with self.subTest(field=field, value=value):
                 self.assertFalse(gate.scientific_report_passed({**passed, field: value}))
 
+    def memory_regression_fixture(self):
+        pack = self.root / 'stringtie'
+        for name in ('bin/stringtie-guard.exe', 'fixtures/spliced.bam', 'fixtures/guide.gtf'):
+            path = pack / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(name.encode())
+        binding = {'files': {'flag-layout-check.cpp': {'sha256': 'a' * 64},
+                             'flag-layout-check.exe': {'sha256': 'b' * 64}},
+                   'build': {'patchedHeaderSha256': 'c' * 64}}
+        poison = {'executed': True, 'returncode': 0, 'sourceSha256': 'a' * 64,
+                  'executableSha256': 'b' * 64, 'patchedHeaderSha256': 'c' * 64,
+                  'result': {'success': True, 'unionBytes': 4, 'poison': 165, 'fieldsChecked': 19}}
+        report = {'memoryBoundaryRegression': {'poisonedLayout': poison,
+                  'repeatedModes': {'assemble-guided': 10, 'estimate-reference': 10}, 'fullOutputOracle': True},
+                  'executions': [{'operation': mode, 'repetition': repeat, 'returncode': 0,
+                      'expectedSuccess': True, 'outputOraclePassed': True,
+                      'guardSha256': gate.sha(pack / 'bin/stringtie-guard.exe'),
+                      'bamSha256': gate.sha(pack / 'fixtures/spliced.bam'),
+                      'gtfSha256': gate.sha(pack / 'fixtures/guide.gtf')}
+                     for mode in ('assemble-guided', 'estimate-reference') for repeat in range(1, 11)]}
+        return report, binding, pack
+
+    def test_native_heap_regression_rejects_missing_duplicate_or_intermittent_runs(self):
+        report, binding, pack = self.memory_regression_fixture()
+        self.assertTrue(gate.stringtie_memory_regression_passed(report, binding, pack))
+        for field, value in [('returncode', -1073740940), ('outputOraclePassed', False),
+                             ('guardSha256', 'f' * 64), ('bamSha256', 'f' * 64),
+                             ('gtfSha256', 'f' * 64), ('repetition', 2)]:
+            changed = copy.deepcopy(report)
+            changed['executions'][0][field] = value
+            with self.subTest(field=field):
+                self.assertFalse(gate.stringtie_memory_regression_passed(changed, binding, pack))
+        changed = copy.deepcopy(report)
+        changed['executions'].pop()
+        self.assertFalse(gate.stringtie_memory_regression_passed(changed, binding, pack))
+
+    def test_native_heap_regression_requires_the_exact_executed_poison_probe(self):
+        report, binding, pack = self.memory_regression_fixture()
+        for field, value in [('executed', False), ('returncode', 3), ('sourceSha256', 'f' * 64),
+                             ('executableSha256', 'f' * 64), ('patchedHeaderSha256', 'f' * 64),
+                             ('result', {'success': True, 'unionBytes': 8, 'poison': 165, 'fieldsChecked': 19})]:
+            changed = copy.deepcopy(report)
+            changed['memoryBoundaryRegression']['poisonedLayout'][field] = value
+            with self.subTest(field=field):
+                self.assertFalse(gate.stringtie_memory_regression_passed(changed, binding, pack))
+        changed = copy.deepcopy(report)
+        changed['memoryBoundaryRegression']['fullOutputOracle'] = False
+        self.assertFalse(gate.stringtie_memory_regression_passed(changed, binding, pack))
+
+    def test_layout_probe_extraction_binds_runtime_pack_recipe_compiler_and_patch(self):
+        pack = self.root / 'pack'
+        (pack / 'licenses').mkdir(parents=True)
+        source, executable = b'probe source', b'probe binary'
+        diagnostic = {'sourceSha256': audit.digest(source), 'executableSha256': audit.digest(executable),
+            'builderSha256': 'a' * 64, 'compilerSha256': 'b' * 64, 'patchSha256': 'c' * 64,
+            'nativeExecutionPerformed': False}
+        build = {'builderSha256': 'a' * 64, 'guardCompilerSha256': 'b' * 64,
+                 'patchSha256': 'c' * 64, 'flagLayoutCheck': diagnostic}
+        gate.write_json(pack / 'licenses/build-provenance.json', build)
+        with gate.zipfile.ZipFile(self.root / 'source.zip', 'w') as companion:
+            prefix = 'build-evidence/1/stringtie-flags/'
+            for name, data in [('flag-layout-check.cpp', source), ('flag-layout-check.exe', executable),
+                               ('flag-layout-check.json', json.dumps(diagnostic).encode())]:
+                companion.writestr(prefix + name, data)
+        frozen = {'sourceCompanion': {'file': 'source.zip'}}
+        path, binding = gate.extract_stringtie_layout_check(self.root, frozen, self.root / 'recovered', pack)
+        self.assertEqual(path.read_bytes(), executable)
+        self.assertEqual(binding['files']['flag-layout-check.cpp']['sha256'], audit.digest(source))
+        for field in ('builderSha256', 'guardCompilerSha256', 'patchSha256'):
+            changed = {**build, field: 'f' * 64}
+            gate.write_json(pack / 'licenses/build-provenance.json', changed)
+            with self.subTest(field=field), self.assertRaisesRegex(ValueError, 'recipe, compiler or patch'):
+                gate.extract_stringtie_layout_check(self.root, frozen, self.root / 'recovered', pack)
+
+    def test_layout_source_audit_reconstructs_upstream_header_and_rejects_resigned_probe_changes(self):
+        header = ('class GffObj:public GSeg {\n   union {\n      unsigned int flags;\n      struct {\n' +
+                  ''.join('        bool flag_' + str(i) + ' :1;\n' for i in range(17)) +
+                  '        unsigned int gff_level :4;\n        unsigned int flag_USER_FLAGS :8;\n'
+                  '      };\n   };\n   //-- friends:\n};\n')
+        patched = header.replace('bool flag_', 'unsigned int flag_').replace('      unsigned int flags;',
+            '      // Workbench: one 32-bit storage unit also under the Windows bitfield ABI.\n      unsigned int flags;')
+        # The fixture generator emits its supplied header verbatim, making the
+        # independently reconstructed header comparison explicit and observable.
+        recipe = b'def flag_layout_probe(header):\n    return header\n'
+        stream = io.BytesIO()
+        with tarfile.open(fileobj=stream, mode='w') as archive:
+            entry = tarfile.TarInfo('stringtie-' + audit.UPSTREAM_IDENTITIES['stringtie'][1] + '/gclib/gff.h')
+            entry.size = len(header.encode())
+            archive.addfile(entry, io.BytesIO(header.encode()))
+        pe = bytearray(256)
+        pe[:2] = b'MZ'
+        struct.pack_into('<I', pe, 60, 128)
+        pe[128:132] = b'PE\0\0'
+        struct.pack_into('<H', pe, 132, 0x8664)
+        diagnostic = {'sourceSha256': audit.digest(patched.encode()), 'executableSha256': audit.digest(pe),
+            'builderSha256': audit.digest(recipe), 'compilerSha256': 'c' * 64,
+            'patchSha256': audit.PATCH_SHA256['stringtie'], 'nativeExecutionPerformed': False,
+            'patchedHeaderSha256': audit.digest(patched.encode())}
+        build = {'flagLayoutCheck': diagnostic, 'guardCompilerSha256': 'c' * 64,
+                 'patchSha256': audit.PATCH_SHA256['stringtie']}
+        prefix = 'build-evidence/1/stringtie-flags/'
+        data = {prefix + 'flag-layout-check.cpp': patched.encode(), prefix + 'flag-layout-check.exe': bytes(pe),
+                'corresponding-sources/stringtie/stringtie-3.0.3.tar.gz': stream.getvalue()}
+        source = mock.Mock()
+        source.namelist.side_effect = lambda: list(data)
+        source.read.side_effect = data.__getitem__
+        originals = {'scripts/build_stringtie_native.py': recipe}
+        def check():
+            data[prefix + 'flag-layout-check.json'] = json.dumps(diagnostic).encode()
+            data['corresponding-sources/stringtie/build-provenance.json'] = json.dumps(build).encode()
+            with mock.patch.dict(audit.UPSTREAM_PINS, {'stringtie': {'stringtie-3.0.3.tar.gz': audit.digest(stream.getvalue())}}):
+                return audit.stringtie_layout_diagnostic(source, originals)
+        self.assertFalse(check()['nativeExecutionVerified'])
+        data[prefix + 'flag-layout-check.cpp'] += b'changed probe with newly calculated hash\n'
+        diagnostic['sourceSha256'] = audit.digest(data[prefix + 'flag-layout-check.cpp'])
+        with self.assertRaisesRegex(ValueError, 'exact flag-union generator'):
+            check()
+        diagnostic['patchedHeaderSha256'] = 'f' * 64
+        with self.assertRaisesRegex(ValueError, 'patched header differs'):
+            check()
+
     @staticmethod
     def dependency_catalog():
         tools = {}

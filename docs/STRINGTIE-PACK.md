@@ -95,7 +95,7 @@ Build source is commit `3436ad6dfd0ffc806a94086cf747ac6ff2b0dc19`; SHA-pinned
 StringTie, zlib 1.3.2 and TRE 0.9.0 archives, build scripts, generated configuration,
 compiler/runtime notices and full constituent source are retained. Scientific algorithms are unchanged. The retained `workbench1.patch` replaces
 Windows fatal-error modal dialogs with stderr reporting and the same exit status 1,
-makes both GError and GMessage consume diagnostic arguments once, and identifies
+makes both GError and GMessage consume diagnostic arguments once, restores the intended 32-bit GFF flag storage under the Windows ABI, and identifies
 the modified build in its version banner. The native adapter
 passes forward-slash paths to the upstream CLI so output directories are parsed
 correctly on Windows. Native Windows uses upstream GThreads/HTSlib Windows
@@ -109,3 +109,13 @@ is recorded separately in the maintained project handover.
 Primary sources: [StringTie repository](https://github.com/gpertea/stringtie),
 [manual](https://ccb.jhu.edu/software/stringtie/index.shtml?t=manual),
 [TRE](https://github.com/laurikari/tre), [zlib](https://zlib.net/).
+
+The GFF portability correction uses the same unsigned-int base for all 29 flag
+bits. Windows otherwise allocates the mixed bool/unsigned-int fields across two
+words while upstream initializes one word; uninitialized user flags could mark
+reference guides as synthetic nascent models and give them two owners. The fix
+preserves flag meanings and scientific decisions. A source-derived diagnostic
+probe (outside the runtime pack) asserts the four-byte layout, fills it with
+nonzero bytes, clears the shared flags word, and checks all 19 named fields and
+their independent masks. Native validation also repeats each operation 10 times
+against the complete independent exon, reference-ID, strand and abundance oracle.

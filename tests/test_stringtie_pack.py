@@ -3,7 +3,7 @@
 import argparse,configparser,csv,gzip,hashlib,importlib.util,json,math,os,re,shutil,struct,subprocess,sys,tempfile,time,unittest
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-PACK=None;BUILD=ROOT/'build/stringtie-linux';REFERENCE_BINARY=ROOT/'build/stringtie-reference-linux/stringtie';EXECUTIONS=[];REFERENCE_CASES=[]
+PACK=None;BUILD=ROOT/'build/stringtie-linux';REFERENCE_BINARY=ROOT/'build/stringtie-reference-linux/stringtie';EXECUTIONS=[];REFERENCE_CASES=[];LAYOUT_CHECK=None;MEMORY_BOUNDARY={'poisonedLayout':None,'repeatedModes':{},'fullOutputOracle':False}
 DEFAULT=['200','1','1','0.01','4.75','1']
 def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 def module(name,path):
@@ -142,6 +142,22 @@ class ScientificTests(unittest.TestCase):
         started=time.monotonic();r=subprocess.run(args,capture_output=True,text=True,timeout=10)
         self.assertEqual(r.returncode,1,r.stdout+r.stderr);self.assertIn('Error creating',r.stderr);self.assertEqual(blocker.read_text(),'existing file, not a directory')
         EXECUTIONS.append({'case':self.id(),'scientificBinarySha256':sha(self.binary),'expectedSuccess':False,'returncode':r.returncode,'directUpstreamFatalPath':True,'deadlineSeconds':10,'seconds':round(time.monotonic()-started,3)})
+    def test_20_source_bound_poisoned_flag_layout(self):
+        probe=LAYOUT_CHECK or BUILD/('flag-layout-check.exe' if os.name=='nt' else 'flag-layout-check')
+        source=probe.with_suffix('.cpp');record=json.loads(probe.with_suffix('.json').read_text())
+        self.assertEqual(sha(probe),record['executableSha256']);self.assertEqual(sha(source),record['sourceSha256']);self.assertEqual(sha(ROOT/'scripts/build_stringtie_native.py'),record['builderSha256']);self.assertEqual(sha(ROOT/'tools/stringtie/workbench1.patch'),record['patchSha256'])
+        r=subprocess.run([str(probe)],capture_output=True,text=True,timeout=10)
+        self.assertEqual(r.returncode,0,r.stdout+r.stderr);result=json.loads(r.stdout)
+        self.assertEqual(result,{'success':True,'unionBytes':4,'poison':165,'fieldsChecked':19})
+        MEMORY_BOUNDARY['poisonedLayout']={'executed':True,'returncode':r.returncode,'sourceSha256':sha(source),'executableSha256':sha(probe),'patchedHeaderSha256':record['patchedHeaderSha256'],'result':result}
+    def test_21_repeated_modes_preserve_all_guide_ownership_and_abundance(self):
+        for mode in ('assemble-guided','estimate-reference'):
+            for repetition in range(1,11):
+                out,_=self.run_tool(mode);self.assert_truth(out,mode)
+                summary=json.loads((out/'stringtie-summary.json').read_text());self.assertEqual(summary['mappedRecords'],123)
+                EXECUTIONS[-1].update(repetition=repetition,outputOraclePassed=True)
+                MEMORY_BOUNDARY['repeatedModes'][mode]=repetition
+        MEMORY_BOUNDARY['fullOutputOracle']=True
     def test_15_installed_source_and_binary_identity(self):
         record=json.loads((PACK/'licenses/build-provenance.json' if PACK else BUILD/'build.json').read_text());self.assertFalse(record['upstreamSourceUnmodified']);self.assertEqual(record['patchSha256'],sha(ROOT/'tools/stringtie/workbench1.patch'));self.assertTrue(record['upstreamScientificAlgorithmsUnmodified']);self.assertEqual(record['upstreamCommit'],'3436ad6dfd0ffc806a94086cf747ac6ff2b0dc19');self.assertEqual(sha(self.binary),record['files'][self.binary.name]['sha256']);self.assertEqual(sha(self.guard),record['files'][self.guard.name]['sha256'])
         if PACK:
@@ -159,9 +175,9 @@ class LinuxReferenceTests(unittest.TestCase):
                 expected=d/(mode+str(empty)+'.gtf');args=json.loads((out/'analysis-settings.json').read_text())['arguments'];args[0]=str(REFERENCE_BINARY);args[args.index('-o')+1]=str(expected);args[args.index('-A')+1]=str(expected)+'.tsv';subprocess.run(args,check=True,capture_output=True);self.assertEqual(parse_gtf(out/'transcripts.gtf'),parse_gtf(expected));self.assertEqual((out/'gene-abundance.tsv').read_bytes(),Path(str(expected)+'.tsv').read_bytes());REFERENCE_CASES.append({'operation':mode,'empty':empty,'bamSha256':sha(bam),'referenceBinarySha256':sha(REFERENCE_BINARY),'exactParsedOutputMatch':True})
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--pack',type=Path);p.add_argument('--build',type=Path,default=BUILD);p.add_argument('--reference-binary',type=Path,default=REFERENCE_BINARY);p.add_argument('--report',type=Path);a=p.parse_args();PACK=a.pack.resolve() if a.pack else None;BUILD=a.build.resolve();REFERENCE_BINARY=a.reference_binary.resolve();selected=(PACK/'bin' if PACK else BUILD)/('stringtie-guard.exe' if os.name=='nt' else 'stringtie-guard');binary=selected.parent/('stringtie.exe' if os.name=='nt' else 'stringtie')
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--pack',type=Path);p.add_argument('--build',type=Path,default=BUILD);p.add_argument('--reference-binary',type=Path,default=REFERENCE_BINARY);p.add_argument('--report',type=Path);p.add_argument('--layout-check-binary',type=Path);a=p.parse_args();LAYOUT_CHECK=a.layout_check_binary.resolve() if a.layout_check_binary else None;PACK=a.pack.resolve() if a.pack else None;BUILD=a.build.resolve();REFERENCE_BINARY=a.reference_binary.resolve();selected=(PACK/'bin' if PACK else BUILD)/('stringtie-guard.exe' if os.name=='nt' else 'stringtie-guard');binary=selected.parent/('stringtie.exe' if os.name=='nt' else 'stringtie')
     if not selected.is_file() or not binary.is_file():p.error('Matching built/installed StringTie binaries required')
     if os.name!='nt' and not REFERENCE_BINARY.is_file():p.error('Fresh pinned pristine reference binary required')
-    classes=[SourceTests,ScientificTests]+([LinuxReferenceTests] if os.name!='nt' else []);started=time.monotonic();result=unittest.TextTestRunner(verbosity=2).run(unittest.TestSuite(unittest.defaultTestLoader.loadTestsFromTestCase(c) for c in classes));evidence={'schema':1,'packId':'stringtie','packVersion':'1.0.0','upstreamVersion':'3.0.3','toolVersion':'3.0.3-workbench1','platform':sys.platform,'nativeWindowsExecuted':os.name=='nt','testsRun':result.testsRun,'failures':len(result.failures),'errors':len(result.errors),'skipped':[{'test':str(t),'reason':r} for t,r in result.skipped],'success':result.wasSuccessful(),'seconds':round(time.monotonic()-started,3),'testSourceSha256':sha(__file__),'guardExecutableSha256':sha(selected),'scientificBinarySha256':sha(binary),'packManifestSha256':sha(PACK/'pack.ini') if PACK else None,'upstreamSourceCommit':'3436ad6dfd0ffc806a94086cf747ac6ff2b0dc19','upstreamSourceArchiveSha256':'52a5d94b0e85404d740d2c7a0c7cc698d373a1b8888e9a2a395ae294032d95c0','livePinnedLinuxReferenceCases':len(REFERENCE_CASES),'referenceCases':REFERENCE_CASES,'executions':EXECUTIONS,'scope':'Independent exon/strand/coverage and 1:2 expression truth, zero expression, explicit strandedness, pristine parity, bounded malformed-input rejection, immutability and path semantics; no benchmark/DE/clinical claim.'}
+    classes=[SourceTests,ScientificTests]+([LinuxReferenceTests] if os.name!='nt' else []);started=time.monotonic();result=unittest.TextTestRunner(verbosity=2).run(unittest.TestSuite(unittest.defaultTestLoader.loadTestsFromTestCase(c) for c in classes));evidence={'schema':1,'packId':'stringtie','packVersion':'1.0.0','upstreamVersion':'3.0.3','toolVersion':'3.0.3-workbench1','platform':sys.platform,'nativeWindowsExecuted':os.name=='nt','testsRun':result.testsRun,'failures':len(result.failures),'errors':len(result.errors),'skipped':[{'test':str(t),'reason':r} for t,r in result.skipped],'success':result.wasSuccessful(),'seconds':round(time.monotonic()-started,3),'testSourceSha256':sha(__file__),'guardExecutableSha256':sha(selected),'scientificBinarySha256':sha(binary),'packManifestSha256':sha(PACK/'pack.ini') if PACK else None,'upstreamSourceCommit':'3436ad6dfd0ffc806a94086cf747ac6ff2b0dc19','upstreamSourceArchiveSha256':'52a5d94b0e85404d740d2c7a0c7cc698d373a1b8888e9a2a395ae294032d95c0','livePinnedLinuxReferenceCases':len(REFERENCE_CASES),'referenceCases':REFERENCE_CASES,'memoryBoundaryRegression':MEMORY_BOUNDARY,'executions':EXECUTIONS,'scope':'Independent exon/strand/coverage and 1:2 expression truth, zero expression, explicit strandedness, pristine parity, bounded malformed-input rejection, immutability and path semantics; no benchmark/DE/clinical claim.'}
     if a.report:a.report.parent.mkdir(parents=True,exist_ok=True);a.report.write_text(json.dumps(evidence,indent=2)+'\n')
     sys.exit(not result.wasSuccessful())

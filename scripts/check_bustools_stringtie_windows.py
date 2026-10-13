@@ -114,6 +114,56 @@ def scientific_report_passed(report):
             not report.get('skipped') and bool(report.get('executions')))
 
 
+def extract_stringtie_layout_check(candidate, frozen, destination, pack):
+    """Recover the separate diagnostic from the already verified source archive."""
+    prefix = 'build-evidence/1/stringtie-flags/'
+    names = ('flag-layout-check.exe', 'flag-layout-check.cpp', 'flag-layout-check.json')
+    destination.mkdir(parents=True, exist_ok=True)
+    with zipfile.ZipFile(candidate / frozen['sourceCompanion']['file']) as companion:
+        for name in names:
+            data = companion.read(prefix + name)
+            (destination / name).write_bytes(data)
+    diagnostic = read_json(destination / names[2])
+    build = read_json(pack / 'licenses/build-provenance.json')
+    require(diagnostic['sourceSha256'] == sha(destination / names[1]) and
+            diagnostic['executableSha256'] == sha(destination / names[0]),
+            'StringTie layout diagnostic source or executable differs.')
+    require(diagnostic['builderSha256'] == build['builderSha256'] and
+            diagnostic['compilerSha256'] == build['guardCompilerSha256'] and
+            diagnostic['patchSha256'] == build['patchSha256'] and
+            diagnostic == build['flagLayoutCheck'] and diagnostic['nativeExecutionPerformed'] is False,
+            'StringTie layout diagnostic recipe, compiler or patch differs from the pack.')
+    return destination / names[0], {
+        'sourceCompanion': frozen['sourceCompanion'], 'archivePrefix': prefix,
+        'files': {name: file_record(destination / name) for name in names},
+        'build': diagnostic,
+    }
+
+
+def stringtie_memory_regression_passed(report, binding, pack):
+    """Require the poison check and every repeated exact-output execution."""
+    memory = report.get('memoryBoundaryRegression', {})
+    poison = memory.get('poisonedLayout', {})
+    files = binding['files']
+    if not (poison.get('executed') is True and poison.get('returncode') == 0 and
+            poison.get('sourceSha256') == files['flag-layout-check.cpp']['sha256'] and
+            poison.get('executableSha256') == files['flag-layout-check.exe']['sha256'] and
+            poison.get('patchedHeaderSha256') == binding['build']['patchedHeaderSha256'] and
+            poison.get('result') == {'success': True, 'unionBytes': 4, 'poison': 165, 'fieldsChecked': 19} and
+            memory.get('repeatedModes') == {'assemble-guided': 10, 'estimate-reference': 10} and
+            memory.get('fullOutputOracle') is True):
+        return False
+    repeated = [row for row in report.get('executions', []) if 'repetition' in row]
+    expected = {(mode, repeat) for mode in ('assemble-guided', 'estimate-reference') for repeat in range(1, 11)}
+    if len(repeated) != len(expected) or {(row.get('operation'), row.get('repetition')) for row in repeated} != expected:
+        return False
+    guard = sha(pack / 'bin/stringtie-guard.exe')
+    bam, gtf = sha(pack / 'fixtures/spliced.bam'), sha(pack / 'fixtures/guide.gtf')
+    return all(row.get('returncode') == 0 and row.get('expectedSuccess') is True and
+               row.get('outputOraclePassed') is True and row.get('guardSha256') == guard and
+               row.get('bamSha256') == bam and row.get('gtfSha256') == gtf for row in repeated)
+
+
 def candidate_check_catalog(catalog, identity, version):
     """Retain the target checks and its exact existing SAMtools preflight helper.
 
@@ -463,12 +513,25 @@ def native(args):
             installed[identity] = root / 'packs' / (identity + '-' + VERSIONS[identity])
             expected[identity] = archive_inventory(archive)
             if args.mode == 'science':
+                extra = []
+                if identity == 'stringtie':
+                    layout, binding = extract_stringtie_layout_check(args.candidate, frozen,
+                        evidence / 'stringtie-flags', installed[identity])
+                    report['stringtieLayoutDiagnostic'] = binding
+                    extra = ['--layout-check-binary', layout]
                 run_command([python, '-I', '-B', SOURCE / ('tests/test_' + identity + '_pack.py'),
-                             '--pack', installed[identity], '--report', evidence / (identity + '-regressions.json')],
+                             '--pack', installed[identity], '--report', evidence / (identity + '-regressions.json'), *extra],
                             evidence / (identity + '-regressions.log'))
                 regression = read_json(evidence / (identity + '-regressions.json'))
                 require(scientific_report_passed(regression),
                         'Selected native scientific regressions must execute with no skips: ' + identity)
+                if identity == 'stringtie':
+                    require(all(sha(evidence / 'stringtie-flags' / name) == record['sha256']
+                                for name, record in binding['files'].items()),
+                            'StringTie layout diagnostic files changed during execution.')
+                    require(stringtie_memory_regression_passed(regression, binding, installed[identity]),
+                            'StringTie poisoned layout and 20 repeated exact-output checks must all execute successfully.')
+                    report['stringtieMemoryBoundaryRegression'] = regression['memoryBoundaryRegression']
                 report['checks'].append(identity + ': exact installed scientific and failure regressions.')
         if args.mode == 'science':
             require(args.hisat2_archive and sha(args.hisat2_archive) == HISAT2['sha256'],

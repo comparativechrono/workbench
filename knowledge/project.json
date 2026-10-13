@@ -1211,7 +1211,7 @@
       "bustools": "1.0.0",
       "stringtie": "1.0.0"
     },
-    "status": "native validation found a StringTie CLI portability defect; narrow correction implemented; replacement exact Windows and visual validation pending",
+    "status": "StringTie Windows flags-layout correction implemented; 21 local StringTie tests pass; fresh exact native/visual gates pending",
     "application_changed": false,
     "published_application": "0.16.0",
     "unpublished_application_candidate": "0.16.1",
@@ -1225,7 +1225,9 @@
       "stringtie": "3.0.3-workbench1"
     },
     "pull_request": "https://github.com/comparativechrono/workbench/pull/19",
-    "pull_request_state": "draft"
+    "pull_request_state": "draft",
+    "latest_failed_native_source": "ddeadd34b68491f7f7450ceac804f8fade4116a6",
+    "latest_failed_native_run": "https://github.com/comparativechrono/workbench/actions/runs/38416822238"
   },
   "ui_patch_0_16_1_development": {
     "recorded_on": "2026-10-09",
@@ -2732,7 +2734,7 @@
       "bustools": "1.0.0",
       "stringtie": "1.0.0"
     },
-    "status": "native validation found a StringTie CLI portability defect; narrow correction implemented; replacement exact Windows and visual validation pending",
+    "status": "StringTie Windows flags-layout correction implemented; 21 local StringTie tests pass; fresh exact native/visual gates pending",
     "application_changed": false,
     "published_application": "0.16.0",
     "unpublished_application_candidate": "0.16.1",
@@ -2746,6 +2748,8 @@
       "stringtie": "3.0.3-workbench1"
     },
     "pull_request": "https://github.com/comparativechrono/workbench/pull/19",
-    "pull_request_state": "draft"
+    "pull_request_state": "draft",
+    "latest_failed_native_source": "ddeadd34b68491f7f7450ceac804f8fade4116a6",
+    "latest_failed_native_run": "https://github.com/comparativechrono/workbench/actions/runs/38416822238"
   }
 }
