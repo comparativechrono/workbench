@@ -1,0 +1,110 @@
+{
+  "schema": 1,
+  "kind": "downloaded-pack-source-audit",
+  "sourceCommit": "b7fb88b8a81e55b9faef78861fe7a4ce08e61671",
+  "sourceTree": "5fab7b3fb4f38f57605553020f3cf0a8ad878d45",
+  "nativeWindowsExecuted": false,
+  "published": false,
+  "success": true,
+  "packs": {
+    "prodigal": {
+      "file": "native-workbench-pack-prodigal-1.0.0.zip",
+      "bytes": 1854528,
+      "sha256": "f56030b6b9f28d9717471dfbc0edaa4ca5d965cead2f420597484e7cd167527d",
+      "id": "prodigal",
+      "version": "1.0.0",
+      "manifestSha256": "096d7852bf5f5b72af7ffc6d9723fc27ae63371b982887841e3529f179a92724",
+      "staticValidation": {
+        "id": "prodigal",
+        "name": "Prodigal prokaryotic genes",
+        "version": "1.0.0",
+        "toolVersions": {
+          "prodigal": "2.6.3-workbench1",
+          "prodigal-guard": "1.0.0"
+        },
+        "description": "Predict coding genes, proteins and coding DNA in prokaryotic genomes or metagenomic contigs. Native optional pack; no external runtime.",
+        "category": "Gene prediction",
+        "platform": "windows-x86_64",
+        "packApi": 1,
+        "minAppVersion": "0.16.0",
+        "size": 1854528,
+        "sha256": "f56030b6b9f28d9717471dfbc0edaa4ca5d965cead2f420597484e7cd167527d",
+        "manifestSha256": "096d7852bf5f5b72af7ffc6d9723fc27ae63371b982887841e3529f179a92724"
+      },
+      "licenceSourceFilesMatched": 16,
+      "x64ExecutablesVerified": [
+        "pack/bin/prodigal.exe",
+        "pack/bin/prodigal-guard.exe"
+      ],
+      "sourceCorrespondence": {
+        "retainedRecipeFilesMatchedToGit": 6,
+        "guardSourceBoundToBuild": true,
+        "builderSourceBoundToBuild": true,
+        "binaryHashesMatchedToBuild": 2,
+        "upstreamSourceHashesVerified": {
+          "prodigal-2.6.3.tar.gz": "9caafa079a29ff8f02b5ea84729fec4ecf03975c9ccf4acade4909368b69f317"
+        },
+        "scope": "Byte and provenance correspondence; not independent bit-identical recompilation."
+      }
+    },
+    "fasttree": {
+      "file": "native-workbench-pack-fasttree-1.0.0.zip",
+      "bytes": 853541,
+      "sha256": "9c05d61cd9a827065b02a9d5db6254d29bfd30f0245a790dd12763a18221d460",
+      "id": "fasttree",
+      "version": "1.0.0",
+      "manifestSha256": "3b0a1f2f420d8592577df53ba4894b5c6563fdda7568955f083eca03ca790f09",
+      "staticValidation": {
+        "id": "fasttree",
+        "name": "FastTree phylogenetics",
+        "version": "1.0.0",
+        "toolVersions": {
+          "fasttree": "2.2.0",
+          "fasttree-guard": "1.0.0"
+        },
+        "description": "Serial approximate maximum-likelihood trees from nucleotide/protein alignments, with explicit models and local support.",
+        "category": "Phylogenetics",
+        "platform": "windows-x86_64",
+        "packApi": 1,
+        "minAppVersion": "0.16.0",
+        "size": 853541,
+        "sha256": "9c05d61cd9a827065b02a9d5db6254d29bfd30f0245a790dd12763a18221d460",
+        "manifestSha256": "3b0a1f2f420d8592577df53ba4894b5c6563fdda7568955f083eca03ca790f09"
+      },
+      "licenceSourceFilesMatched": 14,
+      "x64ExecutablesVerified": [
+        "pack/bin/fasttree.exe",
+        "pack/bin/fasttree-guard.exe"
+      ],
+      "sourceCorrespondence": {
+        "retainedRecipeFilesMatchedToGit": 6,
+        "guardSourceBoundToBuild": true,
+        "builderSourceBoundToBuild": true,
+        "binaryHashesMatchedToBuild": 2,
+        "upstreamSourceHashesVerified": {
+          "FastTree.c": "975202a6b74c9996af871404ff043bb2152edcbda539035662514bc12d1f3431",
+          "FastTree-LICENSE.txt": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+        },
+        "scope": "Byte and provenance correspondence; not independent bit-identical recompilation."
+      }
+    }
+  },
+  "sourceCompanion": {
+    "file": "native-workbench-prodigal-fasttree-1.0.0-source-evidence.zip",
+    "bytes": 5238123,
+    "sha256": "7f0d6a91058539d5c1c9b132669dd87c26bd4ce51ab27186f1546b5ae83f05b6"
+  },
+  "gitSourceFilesVerified": 921,
+  "companionInventoryFilesVerified": 964,
+  "recordedOn": "2026-10-13",
+  "run": 38385903740,
+  "downloadAudit": "Independently downloaded GitHub artifact, verified transport digest, extracted and reran source audit against Git.",
+  "candidateArtifact": {
+    "id": 11806845606,
+    "url": "https://github.com/comparativechrono/workbench/actions/runs/38385903740/artifacts/11806845606",
+    "bytes": 7954893,
+    "sha256": "a69987badee54ea16b48c01031677f2d9851d0d9406aed12b57835bc20d39fd8",
+    "expiresAt": "2026-11-12T10:53:56Z"
+  },
+  "rawAuditSha256": "8d7d621ffe36e901d02c5e3ffa71fef45c18cb81e862bf5674bd8065fcd7dbf3"
+}

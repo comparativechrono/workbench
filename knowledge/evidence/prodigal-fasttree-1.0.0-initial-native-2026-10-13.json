@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "kind": "initial-prodigal-fasttree-native-failure",
+  "recordedOn": "2026-10-13",
+  "sourceCommit": "b7fb88b8a81e55b9faef78861fe7a4ce08e61671",
+  "run": 38385903740,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/38385903740",
+  "conclusion": "failure",
+  "readyForAcceptance": false,
+  "paths": {
+    "ordinary": {
+      "artifactId": 11807686352,
+      "artifactSha256": "3e40156830f2053ee04d78be4293bad2ef3deb95b1a70f83c8faee924335dfe3",
+      "reports": {
+        "science": {
+          "rawSha256": "db1cbf147e0bf1b8b45cce58e3e3fab8bfd87f19867822afb7c8ba7afed05bf6",
+          "success": false,
+          "checksPassedBeforeFailure": 1,
+          "nativeWindowsExecuted": true
+        },
+        "gui": {
+          "rawSha256": "01fcddebc024bb6a7e72bf3bf81cdc79ba1122c07f568fe245620bd2b39d9c70",
+          "success": false,
+          "checksPassedBeforeFailure": 9,
+          "nativeWindowsExecuted": true
+        }
+      },
+      "prodigalScience": {
+        "rawSha256": "ee2c07fa065a1c5694496b016484e9885a23bcd5629b92e026d64b63eacd3389",
+        "testsRun": 16,
+        "passed": 14,
+        "failed": 2,
+        "skipped": [],
+        "failedTests": [
+          "test_alternative_genetic_codes_translate_constructed_tga (__main__.Science.test_alternative_genetic_codes_translate_constructed_tga)",
+          "test_non_sd_model_records_actual_flag (__main__.Science.test_non_sd_model_records_actual_flag)"
+        ]
+      }
+    },
+    "spaces": {
+      "artifactId": 11806227561,
+      "artifactSha256": "be693dedb056e1b64dca4207f61cd7619716cfe32ceb34fd82562620b6f4b87f",
+      "reports": {
+        "science": {
+          "rawSha256": "844cad905ded41988dcb327b3db849ed8ab2d03bf99a1ed2e52f89e8696c48e9",
+          "success": false,
+          "checksPassedBeforeFailure": 1,
+          "nativeWindowsExecuted": true
+        },
+        "gui": {
+          "rawSha256": "e5b74d006ee3a051d09833ac6c50ebfa06b12db72a90758dfa4ea586c1c8cb44",
+          "success": false,
+          "checksPassedBeforeFailure": 9,
+          "nativeWindowsExecuted": true
+        }
+      },
+      "prodigalScience": {
+        "rawSha256": "1ab9962c50489e9a98d7d1b5ac7bd67049de5fdb5deebd822fc89395c7d55abd",
+        "testsRun": 16,
+        "passed": 14,
+        "failed": 2,
+        "skipped": [],
+        "failedTests": [
+          "test_alternative_genetic_codes_translate_constructed_tga (__main__.Science.test_alternative_genetic_codes_translate_constructed_tga)",
+          "test_non_sd_model_records_actual_flag (__main__.Science.test_non_sd_model_records_actual_flag)"
+        ]
+      }
+    }
+  },
+  "diagnosis": {
+    "prodigal": "Windows exit 0xC00000FD (stack overflow) in upstream train_starts_nonsd; default 1 MiB stack reserve is smaller than approximately 1.25 MiB of its local arrays. Both forced non-SD and automatic fallback are affected. Linker reserve correction requires a rebuilt exact pack and rerun.",
+    "gui": "Driver expected run-level Execution status: success; actual recorded-results contract is Execution status: completed. Step-level operation status is success. Correct driver and rerun; no application change."
+  },
+  "notReached": [
+    "FastTree extended Windows science in the released-app gate",
+    "Real MUSCLE-to-FastTree graph chains",
+    "Combined Starter scientific regression",
+    "Final unchanged-byte verification",
+    "Completed Results GUI acceptance"
+  ],
+  "limits": [
+    "Passing import and default genome fixtures did not cover the failing non-SD routine.",
+    "Source/static success does not override these native failures.",
+    "The unchanged application has no parser for these new JSON measurement files; Results shows status, versions and provenance, while scientific measurements remain in output JSON files."
+  ]
+}

@@ -1,0 +1,697 @@
+{
+  "schema": 1,
+  "kind": "prodigal-fasttree-final-visual-review",
+  "recordedOn": "2026-10-13",
+  "candidateSourceCommit": "d175076d57f4c84743cb375369c604085a720204",
+  "gateSourceCommit": "9ea63994661073b115e80533c3288d50d250decb",
+  "run": 38389163430,
+  "success": true,
+  "actualDisplayImagesReviewed": 44,
+  "imagesReviewedDirectly": 44,
+  "equivalenceReuseCount": 0,
+  "formReview": {
+    "schema": 1,
+    "kind": "prodigal-fasttree-form-display-visual-review",
+    "reviewedOn": "2026-10-13",
+    "reviewer": "pack_scientific_review",
+    "run": 38389163430,
+    "success": true,
+    "blockingFindings": [],
+    "actualDisplayImagesReviewed": 30,
+    "imagesReviewedDirectly": 30,
+    "equivalenceReuseCount": 0,
+    "method": "All 30 listed PNGs were directly inspected using view_image at original 1024x768 resolution. Each PNG was independently verified pixel-identical in RGB to its retained original screen-BitBlt BMP, whose SHA-256 was independently checked against native.json. No PrintWindow images or contact-sheet substitutes were used.",
+    "scope": "Four new standalone pack forms across all captured scroll pages in ordinary and space-containing paths; layout, wrapped help, visible option controls, final output labels and persistent Run/Methods buttons. Libraries/results are reviewed separately by root.",
+    "observations": [
+      "All four operation headings, input labels and Browse controls are readable on their top/early pages.",
+      "Prodigal genome shows the required blank genetic-code selector, initiation-model selector, contig-end and N-gap choices without overlap; metagenome shows its two applicable switches.",
+      "FastTree forms show the selected substitution model, CAT20 rate choice, SH-like support choice, seed and explanatory text without overlap.",
+      "Each final page shows the complete final output list above the persistent Run tool and Methods buttons.",
+      "Help text wraps within the center column. Text crossing a scroll viewport edge is normally clipped and becomes readable on adjacent pages; no missing section or unreached bottom was found.",
+      "Long paths and queries may exceed single-line edit widths; this review does not claim full path text is simultaneously visible. No option-label or form-control overlap was observed."
+    ],
+    "limitations": [
+      "Hosted 1024x728 application window at 96 DPI, captured within a 1024x768 desktop only.",
+      "Finite settled captures do not establish absence of transient flashing, representative-PC, high-DPI, multiple-monitor or physical-trackpad acceptance.",
+      "Closed dropdowns and their selected values were reviewed; open dropdown-menu contents were not captured in this form-only review."
+    ],
+    "paths": {
+      "ordinary": {
+        "nativeReportSha256": "50e8e3f3a1b63b859a93115b2f4c4238f7b33d868d6fe53f2ffe6fdae93ff270",
+        "candidateSourceCommit": "d175076d57f4c84743cb375369c604085a720204",
+        "gateSourceCommit": "9ea63994661073b115e80533c3288d50d250decb",
+        "applicationSourceCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+        "applicationVersion": "0.16.1",
+        "windowBounds": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "dpi": 96,
+        "horizontalClippingReported": false,
+        "forms": [
+          {
+            "operation": "prodigal/predict-genome",
+            "manifestSha256": "731ddc3f415e6727e2b4d8bee73103de7c4835ae6e9a66be9b5d67e77cdfd757",
+            "scrollPositions": [
+              0,
+              288,
+              576,
+              667
+            ],
+            "lastScrollPositionIsMaximum": true,
+            "review": "pass; all inputs/options and final output labels readable across these pages"
+          },
+          {
+            "operation": "prodigal/predict-metagenome",
+            "manifestSha256": "731ddc3f415e6727e2b4d8bee73103de7c4835ae6e9a66be9b5d67e77cdfd757",
+            "scrollPositions": [
+              0,
+              288,
+              427
+            ],
+            "lastScrollPositionIsMaximum": true,
+            "review": "pass; all inputs/options and final output labels readable across these pages"
+          },
+          {
+            "operation": "fasttree/infer-nucleotide",
+            "manifestSha256": "83e45c8c7222bea53e4023861450aa79db0a2f003f7e2a82f6c6362923bcdc55",
+            "scrollPositions": [
+              0,
+              288,
+              576,
+              808
+            ],
+            "lastScrollPositionIsMaximum": true,
+            "review": "pass; all inputs/options and final output labels readable across these pages"
+          },
+          {
+            "operation": "fasttree/infer-protein",
+            "manifestSha256": "83e45c8c7222bea53e4023861450aa79db0a2f003f7e2a82f6c6362923bcdc55",
+            "scrollPositions": [
+              0,
+              288,
+              576,
+              808
+            ],
+            "lastScrollPositionIsMaximum": true,
+            "review": "pass; all inputs/options and final output labels readable across these pages"
+          }
+        ],
+        "images": [
+          {
+            "image": "ordinary/pack-form-prodigal-predict-genome-top-display.png",
+            "originalBMP": "ordinary/pack-form-prodigal-predict-genome-top-display.bmp",
+            "originalBMPSha256": "69850cb048d0a38053e7edae810abbb6261c635745650c730d001d7daf2c19d2",
+            "reviewedPNGsha256": "53de1600fcf606bca250c8d075a84b6b07602813658c1f93a43dfe45d7f42355",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 0,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "ordinary/pack-form-prodigal-predict-genome-page-1-display.png",
+            "originalBMP": "ordinary/pack-form-prodigal-predict-genome-page-1-display.bmp",
+            "originalBMPSha256": "29b8de55943ab179bff8f7162d9d1ec0b5a03da673ba2c99f81a2679a4304709",
+            "reviewedPNGsha256": "89767951f80c06302bffc19564206714753b2e72623b16a730426f2e993bf768",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 288,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "ordinary/pack-form-prodigal-predict-genome-page-2-display.png",
+            "originalBMP": "ordinary/pack-form-prodigal-predict-genome-page-2-display.bmp",
+            "originalBMPSha256": "036dc04ff3bec5e80f6bf4a2a39feccea28a313cb2f82d1f14f7ea3c13c054e2",
+            "reviewedPNGsha256": "19e432e513464ff45a33dc074f8e1bbe538156a43db617c076c66c577ca95eb9",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 576,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "ordinary/pack-form-prodigal-predict-genome-page-3-display.png",
+            "originalBMP": "ordinary/pack-form-prodigal-predict-genome-page-3-display.bmp",
+            "originalBMPSha256": "33449e779af9c8f59f53545ba32850dcf00dfd008f76f17ca7485866552403ea",
+            "reviewedPNGsha256": "ac5351059a7ec43ee9a5353291c064565d55e334fb817c902879f6507be5e387",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 667,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "ordinary/pack-form-prodigal-predict-metagenome-top-display.png",
+            "originalBMP": "ordinary/pack-form-prodigal-predict-metagenome-top-display.bmp",
+            "originalBMPSha256": "52767a29672f8cf77bc0182e862d35f2dcf9761a50f280771b5d3b3844ad0c94",
+            "reviewedPNGsha256": "38122e09aa6ffc5a26255806a0c41874e30ca1e0381d79e04dce4eff6513cc8f",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 0,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "ordinary/pack-form-prodigal-predict-metagenome-page-1-display.png",
+            "originalBMP": "ordinary/pack-form-prodigal-predict-metagenome-page-1-display.bmp",
+            "originalBMPSha256": "5080aebca171d3f9ca116eee970ae3d70144ab61814441a06ffe606faa65d56f",
+            "reviewedPNGsha256": "9c0281aa72a011bd37475a47e8be7fa0e4b511095ad4511875fb3c0e2e2f9ccd",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 288,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "ordinary/pack-form-prodigal-predict-metagenome-page-2-display.png",
+            "originalBMP": "ordinary/pack-form-prodigal-predict-metagenome-page-2-display.bmp",
+            "originalBMPSha256": "c2ce04e10a4eb16745056dfec9a2ea37eccedadf93ed32475a5ef4425f576122",
+            "reviewedPNGsha256": "c1f0752add51424697ec34236baff57435fb9d654ea19244e7f66f3d406a6557",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 427,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "ordinary/pack-form-fasttree-infer-nucleotide-top-display.png",
+            "originalBMP": "ordinary/pack-form-fasttree-infer-nucleotide-top-display.bmp",
+            "originalBMPSha256": "8a560c3ab05965f077b4c423cad1cf5b1c8f4da67836aea5340f3a65dd66762c",
+            "reviewedPNGsha256": "f1061e8ff648392175ae4f73f1001971201113d294ca23beb9ef908e55b60865",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 0,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "ordinary/pack-form-fasttree-infer-nucleotide-page-1-display.png",
+            "originalBMP": "ordinary/pack-form-fasttree-infer-nucleotide-page-1-display.bmp",
+            "originalBMPSha256": "62552a70bbd0ad4fee23358c329fb5cb8cf01aaab1a11ad97802e97bf3a71403",
+            "reviewedPNGsha256": "97857fdf366130dd3820c2ca26589989690062474792df37a4b7d8417aa35c4d",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 288,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "ordinary/pack-form-fasttree-infer-nucleotide-page-2-display.png",
+            "originalBMP": "ordinary/pack-form-fasttree-infer-nucleotide-page-2-display.bmp",
+            "originalBMPSha256": "11963d372a8961944116a7ceec4dc9bfca3d5aaa0e1e1eb19d2afc6201a5b143",
+            "reviewedPNGsha256": "422b0a1f004a749ae1dff8bea5a22bf9a86bffe68e1c647e162cabcee2d46540",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 576,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "ordinary/pack-form-fasttree-infer-nucleotide-page-3-display.png",
+            "originalBMP": "ordinary/pack-form-fasttree-infer-nucleotide-page-3-display.bmp",
+            "originalBMPSha256": "79ead596660c88e6607bb617d4bc966d193d63b28670a076feb0b7e606af319a",
+            "reviewedPNGsha256": "f714b434a78ef430869ca066405dcca33f1cf4e202c97b07901bbf735d15ea8c",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 808,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "ordinary/pack-form-fasttree-infer-protein-top-display.png",
+            "originalBMP": "ordinary/pack-form-fasttree-infer-protein-top-display.bmp",
+            "originalBMPSha256": "d5b3ff968cad92f9b18cac92a6a639ef70f82c555d7287c08db1ddc2488678f2",
+            "reviewedPNGsha256": "f0d8b674bb42daaa5ae04595409df0ad99d7457442fee1f27336135b5d05e565",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 0,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "ordinary/pack-form-fasttree-infer-protein-page-1-display.png",
+            "originalBMP": "ordinary/pack-form-fasttree-infer-protein-page-1-display.bmp",
+            "originalBMPSha256": "2025948d31070812fb1e383ad9e4bb0ccd1f7e071288f321efbc639f70eda10d",
+            "reviewedPNGsha256": "71b82c9afa8f6d6d2c05fcc0a13570a3fe21db1d7672c3014741b94e7e84c41c",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 288,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "ordinary/pack-form-fasttree-infer-protein-page-2-display.png",
+            "originalBMP": "ordinary/pack-form-fasttree-infer-protein-page-2-display.bmp",
+            "originalBMPSha256": "f6611f32fd42d5d8c2665338537f14f301f531938c3b366aeea4902497831442",
+            "reviewedPNGsha256": "089568d4e777cba16064204ae269c2a9bf49b8d72fce7207616a04092847348f",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 576,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "ordinary/pack-form-fasttree-infer-protein-page-3-display.png",
+            "originalBMP": "ordinary/pack-form-fasttree-infer-protein-page-3-display.bmp",
+            "originalBMPSha256": "24bbbf96cfbe02ec0dfd96e1e7a2cf44292881c116c402497574bd1586f119fe",
+            "reviewedPNGsha256": "1af32d9883c4cfa00d9cb64f0ec862cefa5b9f0c2fcf48532e6155ca10b755b6",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 808,
+            "result": "pass",
+            "findings": []
+          }
+        ]
+      },
+      "spaces": {
+        "nativeReportSha256": "618b4be8bdb19bc70761c1cb9611159e77d099c0b84305b8c9d10ab5d7ab741d",
+        "candidateSourceCommit": "d175076d57f4c84743cb375369c604085a720204",
+        "gateSourceCommit": "9ea63994661073b115e80533c3288d50d250decb",
+        "applicationSourceCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+        "applicationVersion": "0.16.1",
+        "windowBounds": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "dpi": 96,
+        "horizontalClippingReported": false,
+        "forms": [
+          {
+            "operation": "prodigal/predict-genome",
+            "manifestSha256": "731ddc3f415e6727e2b4d8bee73103de7c4835ae6e9a66be9b5d67e77cdfd757",
+            "scrollPositions": [
+              0,
+              288,
+              576,
+              667
+            ],
+            "lastScrollPositionIsMaximum": true,
+            "review": "pass; all inputs/options and final output labels readable across these pages"
+          },
+          {
+            "operation": "prodigal/predict-metagenome",
+            "manifestSha256": "731ddc3f415e6727e2b4d8bee73103de7c4835ae6e9a66be9b5d67e77cdfd757",
+            "scrollPositions": [
+              0,
+              288,
+              427
+            ],
+            "lastScrollPositionIsMaximum": true,
+            "review": "pass; all inputs/options and final output labels readable across these pages"
+          },
+          {
+            "operation": "fasttree/infer-nucleotide",
+            "manifestSha256": "83e45c8c7222bea53e4023861450aa79db0a2f003f7e2a82f6c6362923bcdc55",
+            "scrollPositions": [
+              0,
+              288,
+              576,
+              808
+            ],
+            "lastScrollPositionIsMaximum": true,
+            "review": "pass; all inputs/options and final output labels readable across these pages"
+          },
+          {
+            "operation": "fasttree/infer-protein",
+            "manifestSha256": "83e45c8c7222bea53e4023861450aa79db0a2f003f7e2a82f6c6362923bcdc55",
+            "scrollPositions": [
+              0,
+              288,
+              576,
+              808
+            ],
+            "lastScrollPositionIsMaximum": true,
+            "review": "pass; all inputs/options and final output labels readable across these pages"
+          }
+        ],
+        "images": [
+          {
+            "image": "spaces/pack-form-prodigal-predict-genome-top-display.png",
+            "originalBMP": "spaces/pack-form-prodigal-predict-genome-top-display.bmp",
+            "originalBMPSha256": "771a6f12e65937d36e7157e676d16bb9c7f6840dd8eded4d8ef77b46c07a3983",
+            "reviewedPNGsha256": "f16c9478250b3a033b16633c40f7847e43a86e44e4b668e411c08c97661862e2",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 0,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "spaces/pack-form-prodigal-predict-genome-page-1-display.png",
+            "originalBMP": "spaces/pack-form-prodigal-predict-genome-page-1-display.bmp",
+            "originalBMPSha256": "15478a07de4a48b4c480baa8a70d2509aac2e0bf5e2844ebb716b1bfd93aeab7",
+            "reviewedPNGsha256": "8d0849cb90a6bebfd54298a3654baecda91e4440778b9d6e662c713756b8549c",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 288,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "spaces/pack-form-prodigal-predict-genome-page-2-display.png",
+            "originalBMP": "spaces/pack-form-prodigal-predict-genome-page-2-display.bmp",
+            "originalBMPSha256": "960ed8ba97a9f00e4fe77c0f110d53932af46dd457171791e59e51c71a219774",
+            "reviewedPNGsha256": "2b11ca954bf6b6a20fcd401a0ba8bf20c03ed3fee4f3cf38d7979b5c559ab738",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 576,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "spaces/pack-form-prodigal-predict-genome-page-3-display.png",
+            "originalBMP": "spaces/pack-form-prodigal-predict-genome-page-3-display.bmp",
+            "originalBMPSha256": "e72688a59875cb17c78d75a78230f04c3e028c8a23f17193f2cd49c187ee90a5",
+            "reviewedPNGsha256": "8e0441bf229a671f836758e5747970353bc7ef45ba7fb4560cd182a5fefc299f",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 667,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "spaces/pack-form-prodigal-predict-metagenome-top-display.png",
+            "originalBMP": "spaces/pack-form-prodigal-predict-metagenome-top-display.bmp",
+            "originalBMPSha256": "9245770462e858a9dbee21f672a2b979fe8f17e899fa90dfc60c2176071afbee",
+            "reviewedPNGsha256": "fc6ea39cb130670b3dff215152aa6e7d934b233efd61e26b1e6c5f50086cec92",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 0,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "spaces/pack-form-prodigal-predict-metagenome-page-1-display.png",
+            "originalBMP": "spaces/pack-form-prodigal-predict-metagenome-page-1-display.bmp",
+            "originalBMPSha256": "61fa345b51f671a0f955a4a4e40a632578fd478069e07a423224845fcc223462",
+            "reviewedPNGsha256": "22537b0d0eeee675e55cfbe7138464433c3fa5624b2c443b435b67af37f94daa",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 288,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "spaces/pack-form-prodigal-predict-metagenome-page-2-display.png",
+            "originalBMP": "spaces/pack-form-prodigal-predict-metagenome-page-2-display.bmp",
+            "originalBMPSha256": "47b1e725f72d77a6ed9ab7f3859099bfb806ede7740d8f6ebd1f5ccb72baac87",
+            "reviewedPNGsha256": "5e799a07fa698fae6dd50927551316387215480762c972704ef1b08ec0c258db",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 427,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "spaces/pack-form-fasttree-infer-nucleotide-top-display.png",
+            "originalBMP": "spaces/pack-form-fasttree-infer-nucleotide-top-display.bmp",
+            "originalBMPSha256": "e0da76eba275b6b356526d7d3d96a48477b18fb5d6f07c9209b34d92ce9f3877",
+            "reviewedPNGsha256": "20a180606691d4ec5af41477fa2e5c09f561ea45d994023ababaa1da3950ba7f",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 0,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "spaces/pack-form-fasttree-infer-nucleotide-page-1-display.png",
+            "originalBMP": "spaces/pack-form-fasttree-infer-nucleotide-page-1-display.bmp",
+            "originalBMPSha256": "7b96c03c6bc90be856620e7516c648ff9eac3d98915d5f755ac525e0bb0f488b",
+            "reviewedPNGsha256": "10066382c7a9475d33cfe011ca468c6875b6cd88dd4f2c5929693c3fb6fee5bc",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 288,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "spaces/pack-form-fasttree-infer-nucleotide-page-2-display.png",
+            "originalBMP": "spaces/pack-form-fasttree-infer-nucleotide-page-2-display.bmp",
+            "originalBMPSha256": "3d2f929c795aade32c5d50da697ab4a1505e38b29c5d0e7e628eecc34e853702",
+            "reviewedPNGsha256": "98a729eb40c9bd40cf3bc177ccbceb86356aa3759fb18ed6521fb23c9b671085",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 576,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "spaces/pack-form-fasttree-infer-nucleotide-page-3-display.png",
+            "originalBMP": "spaces/pack-form-fasttree-infer-nucleotide-page-3-display.bmp",
+            "originalBMPSha256": "20d7b5d78ac6b5c3eabb435242992a37cf2ddc5a3e20fa1d7ff58994c89e9462",
+            "reviewedPNGsha256": "292df9ac74ab41df65c3824e4e07a76b0ff046a6a711d85742f4af738871f433",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 808,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "spaces/pack-form-fasttree-infer-protein-top-display.png",
+            "originalBMP": "spaces/pack-form-fasttree-infer-protein-top-display.bmp",
+            "originalBMPSha256": "717e92a1970c1451a5456bed129190884acd1f02f810ab529e61b91f78627a61",
+            "reviewedPNGsha256": "f96bfc8cf0760c88e28812bc7c7c1673af1200c00b310b4548254f6cf278060e",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 0,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "spaces/pack-form-fasttree-infer-protein-page-1-display.png",
+            "originalBMP": "spaces/pack-form-fasttree-infer-protein-page-1-display.bmp",
+            "originalBMPSha256": "d04d6294729b730ae996abceb57dc100bb04995044a4c53b63b78489301cc806",
+            "reviewedPNGsha256": "17fd08235aaed15512b3cac32ba280a5f4fc7cabf83b0563c8c20aed9574cf65",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 288,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "spaces/pack-form-fasttree-infer-protein-page-2-display.png",
+            "originalBMP": "spaces/pack-form-fasttree-infer-protein-page-2-display.bmp",
+            "originalBMPSha256": "21bec2b906cbedcb95de871e78cfba422c2e46f82aa8991ece5e8c13880e8a96",
+            "reviewedPNGsha256": "e47760313fc853c666807afe4a87140676e1baa9354f6eb44bdebdaba1005eb0",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 576,
+            "result": "pass",
+            "findings": []
+          },
+          {
+            "image": "spaces/pack-form-fasttree-infer-protein-page-3-display.png",
+            "originalBMP": "spaces/pack-form-fasttree-infer-protein-page-3-display.bmp",
+            "originalBMPSha256": "9458259aaf8d235e4ec265121be3fa3f298b01171de935bac9439382dde70336",
+            "reviewedPNGsha256": "f2dc95a903d73580caf390b969299a602185c8df383e231fbcd57680615541d9",
+            "originalPixelsVerified": true,
+            "width": 1024,
+            "height": 768,
+            "reviewMethod": "direct original-resolution view_image; no equivalence reuse",
+            "scrollPosition": 808,
+            "result": "pass",
+            "findings": []
+          }
+        ]
+      }
+    }
+  },
+  "libraryAndResultsReview": {
+    "reviewer": "primary agent",
+    "images": [
+      {
+        "pathCase": "ordinary",
+        "file": "pack-library-prodigal-display.bmp",
+        "sha256": "5d2b9df310162a27047651522e6458e7403c2b4b096dcab381a963365fe92120",
+        "method": "screen BitBlt; no PrintWindow repaint",
+        "reviewedDirectly": true,
+        "finding": "Readable wrapped library names and descriptions; Results search, execution status, version/hash details and controls visible without overlap in the captured viewport. Pack JSON measurements explicitly unavailable in native summary."
+      },
+      {
+        "pathCase": "ordinary",
+        "file": "pack-library-fasttree-display.bmp",
+        "sha256": "8b68f20f0b8f08e2166626abb1c3d13ded04880d9ff4be04592a44f868b3ebcb",
+        "method": "screen BitBlt; no PrintWindow repaint",
+        "reviewedDirectly": true,
+        "finding": "Readable wrapped library names and descriptions; Results search, execution status, version/hash details and controls visible without overlap in the captured viewport. Pack JSON measurements explicitly unavailable in native summary."
+      },
+      {
+        "pathCase": "ordinary",
+        "file": "pack-library-unfiltered-display.bmp",
+        "sha256": "ba616dd732245b45bc626659dcbfcec6a32f5e7aca6f8cd94bfb874e811b41d8",
+        "method": "screen BitBlt; no PrintWindow repaint",
+        "reviewedDirectly": true,
+        "finding": "Readable wrapped library names and descriptions; Results search, execution status, version/hash details and controls visible without overlap in the captured viewport. Pack JSON measurements explicitly unavailable in native summary."
+      },
+      {
+        "pathCase": "ordinary",
+        "file": "pack-results-prodigal-display.bmp",
+        "sha256": "58152510dd44a65a7e0c33fa9f9c892ee7db852e5b7f15c5a0029485200bc0ff",
+        "method": "screen BitBlt; no PrintWindow repaint",
+        "reviewedDirectly": true,
+        "finding": "Readable wrapped library names and descriptions; Results search, execution status, version/hash details and controls visible without overlap in the captured viewport. Pack JSON measurements explicitly unavailable in native summary."
+      },
+      {
+        "pathCase": "ordinary",
+        "file": "pack-results-prodigal-versions-display.bmp",
+        "sha256": "5ddbd77aa7808028506a110dec46354bc8c20cabaffd3ffe47b3df88c367c8e1",
+        "method": "screen BitBlt; no PrintWindow repaint",
+        "reviewedDirectly": true,
+        "finding": "Readable wrapped library names and descriptions; Results search, execution status, version/hash details and controls visible without overlap in the captured viewport. Pack JSON measurements explicitly unavailable in native summary."
+      },
+      {
+        "pathCase": "ordinary",
+        "file": "pack-results-fasttree-display.bmp",
+        "sha256": "ed46742b84a23f528b9de71149cb1174dedc5c194ae64f5a1214ea58e26ce66a",
+        "method": "screen BitBlt; no PrintWindow repaint",
+        "reviewedDirectly": true,
+        "finding": "Readable wrapped library names and descriptions; Results search, execution status, version/hash details and controls visible without overlap in the captured viewport. Pack JSON measurements explicitly unavailable in native summary."
+      },
+      {
+        "pathCase": "ordinary",
+        "file": "pack-results-fasttree-versions-display.bmp",
+        "sha256": "e58e1ca55724bdd59066c50cceb9d27284c617caee9d501a7a8b30d552f9b9a1",
+        "method": "screen BitBlt; no PrintWindow repaint",
+        "reviewedDirectly": true,
+        "finding": "Readable wrapped library names and descriptions; Results search, execution status, version/hash details and controls visible without overlap in the captured viewport. Pack JSON measurements explicitly unavailable in native summary."
+      },
+      {
+        "pathCase": "spaces",
+        "file": "pack-library-prodigal-display.bmp",
+        "sha256": "7d87d3ebad504025e3b4757c4b4503f4ce99cc72a806ae253fea46a380de706a",
+        "method": "screen BitBlt; no PrintWindow repaint",
+        "reviewedDirectly": true,
+        "finding": "Readable wrapped library names and descriptions; Results search, execution status, version/hash details and controls visible without overlap in the captured viewport. Pack JSON measurements explicitly unavailable in native summary."
+      },
+      {
+        "pathCase": "spaces",
+        "file": "pack-library-fasttree-display.bmp",
+        "sha256": "400396a7969b912ddbfc952296b5e70375f9a2e1fe0265fc9ce9ef3b403f124f",
+        "method": "screen BitBlt; no PrintWindow repaint",
+        "reviewedDirectly": true,
+        "finding": "Readable wrapped library names and descriptions; Results search, execution status, version/hash details and controls visible without overlap in the captured viewport. Pack JSON measurements explicitly unavailable in native summary."
+      },
+      {
+        "pathCase": "spaces",
+        "file": "pack-library-unfiltered-display.bmp",
+        "sha256": "bb9c1e09416e58c3d219e0cf7c2c9dc0be231aa444dac8ba9df0853b7fae70fb",
+        "method": "screen BitBlt; no PrintWindow repaint",
+        "reviewedDirectly": true,
+        "finding": "Readable wrapped library names and descriptions; Results search, execution status, version/hash details and controls visible without overlap in the captured viewport. Pack JSON measurements explicitly unavailable in native summary."
+      },
+      {
+        "pathCase": "spaces",
+        "file": "pack-results-prodigal-display.bmp",
+        "sha256": "69a7abe086633359b8cd2bd061244ab63c868ed7815f9ae3854fbdb3254e024c",
+        "method": "screen BitBlt; no PrintWindow repaint",
+        "reviewedDirectly": true,
+        "finding": "Readable wrapped library names and descriptions; Results search, execution status, version/hash details and controls visible without overlap in the captured viewport. Pack JSON measurements explicitly unavailable in native summary."
+      },
+      {
+        "pathCase": "spaces",
+        "file": "pack-results-prodigal-versions-display.bmp",
+        "sha256": "4c5f57a9703f38f9050047326ef207891e90a78939db1f60fc6c5179304f762b",
+        "method": "screen BitBlt; no PrintWindow repaint",
+        "reviewedDirectly": true,
+        "finding": "Readable wrapped library names and descriptions; Results search, execution status, version/hash details and controls visible without overlap in the captured viewport. Pack JSON measurements explicitly unavailable in native summary."
+      },
+      {
+        "pathCase": "spaces",
+        "file": "pack-results-fasttree-display.bmp",
+        "sha256": "7638f36c6892d7fe2374b7a957db2fa59b4a4faec49d6e4b3e3a33c6c6c354e0",
+        "method": "screen BitBlt; no PrintWindow repaint",
+        "reviewedDirectly": true,
+        "finding": "Readable wrapped library names and descriptions; Results search, execution status, version/hash details and controls visible without overlap in the captured viewport. Pack JSON measurements explicitly unavailable in native summary."
+      },
+      {
+        "pathCase": "spaces",
+        "file": "pack-results-fasttree-versions-display.bmp",
+        "sha256": "20fb1905dab80598e3b982a398d9ac3df7f67e2cd61dc4ed0e8e964ed831d0fa",
+        "method": "screen BitBlt; no PrintWindow repaint",
+        "reviewedDirectly": true,
+        "finding": "Readable wrapped library names and descriptions; Results search, execution status, version/hash details and controls visible without overlap in the captured viewport. Pack JSON measurements explicitly unavailable in native summary."
+      }
+    ],
+    "finding": "No additional blocking layout problem in 14 actual library/results display images; no scientific-measurement-summary support claimed."
+  },
+  "supplementalPrintWindowCaptures": {
+    "count": 44,
+    "retained": true,
+    "notUsedAsActualDisplayedPixelAcceptance": true
+  },
+  "findings": [
+    "No blocking overlap, wrapping or inaccessible final form-control issue in the captured views.",
+    "Tool names use the scientific program labels, bold wrapped library names and regular descriptions.",
+    "Native Results displays completed status and exact operation/executable provenance. It explicitly cannot parse these pack JSON measurements."
+  ],
+  "limits": [
+    "Hosted 1024x768 desktop,1024x728 main window at96DPI only; no representative-PC acceptance.",
+    "Native form dropdowns were observed closed with selected values; opened menu layout was not validated.",
+    "Finite settled images do not prove zero flashing, display performance, high-DPI, multi-monitor or physical-trackpad behavior.",
+    "Original successful build GUI captures had incomplete top-of-form coverage; this frozen recheck supplies full observed form pages."
+  ]
+}

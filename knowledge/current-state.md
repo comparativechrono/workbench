@@ -1,6 +1,41 @@
 # Current project state
 
-## Active development: wrapped tool library, 2026-10-10
+## Active development: Prodigal and FastTree packs, 2026-10-13
+
+The first approved tool batch adds optional `prodigal` **1.0.0** and `fasttree`
+**1.0.0** packs in [draft PR #16](https://github.com/comparativechrono/workbench/pull/16).
+Pack/validator source is `d175076d57f4c84743cb375369c604085a720204`, based on
+`fix/native-ui-0.16.1` at `2b2e97aa15970f0e7fb3a5428e8ab7dad6acada2`.
+There are no application changes; published **0.16.0** and the wrapped-library
+**0.16.1** candidate below are preserved.
+
+Prodigal provides genome and metagenome gene prediction with explicit biological
+settings and GFF/protein/CDS outputs. FastTree provides nucleotide/protein
+approximate-ML inference from homologous alignments, with explicit models and
+local-support interpretation. Both retain real pinned upstream source,
+compatibility/build provenance, licences, native adapters and measured JSON
+outputs without invented QC thresholds. The unchanged Results interface supports
+search, status and exact tool provenance; it does not yet parse these new JSON
+measurements into native summary tiles.
+
+The corrected [build/native run](https://github.com/comparativechrono/workbench/actions/runs/38387733137)
+passed 16 Prodigal and 14 FastTree tests per Windows path without selected skips,
+both real MUSCLE-to-FastTree DAGs and Starter regressions. The independently
+downloaded archive audit matched 924 Git files and 967 companion entries. Frozen
+validator `9ea63994661073b115e80533c3288d50d250decb`,
+[run 38389163430](https://github.com/comparativechrono/workbench/actions/runs/38389163430),
+passed eight validator tests and 12 GUI checks per path on unchanged archives.
+All four forms were scrolled from their true first page through the last; all
+44 actual display images were reviewed without a blocking layout finding at 96 DPI.
+
+The candidate is **ready for unpublished draft review**. The
+[handover](prodigal-fasttree-handover.md) and
+[final index](evidence/prodigal-fasttree-1.0.0-final-review-2026-10-13.json) retain
+the first candidate's stack failure, GUI-driver correction and earlier limited
+form capture scope. No merge, release, online catalogue, benchmark or broader
+deployment acceptance is included.
+
+## Previous development: wrapped tool library, 2026-10-10
 
 The presentation and overflow-scroll correction are implemented in application
 source `ff13db729a6215e9fe5dfa4a4efdb9c769880287` on `fix/native-ui-0.16.1`,
