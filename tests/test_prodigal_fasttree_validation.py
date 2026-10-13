@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest import mock
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -60,6 +61,28 @@ class CandidateEvidenceContracts(unittest.TestCase):
         item.write_bytes(b'fixture')
         with self.assertRaisesRegex(ValueError, 'collision'):
             gate.zip_files(self.root / 'source.zip', [('source/A', item), ('source/a', item)], {})
+
+    def test_frozen_recheck_allows_only_named_gate_and_evidence_changes(self):
+        for name in ('scripts/check_prodigal_fasttree_gui.py', 'tests/test_prodigal_fasttree_validation.py',
+                     '.github/workflows/native-prodigal-fasttree-recheck.yml', 'knowledge/evidence/new.json'):
+            self.assertTrue(gate.allowed_gate_change(name), name)
+        for name in ('tools/prodigal/guard.cpp', 'scripts/build_prodigal_native.py',
+                     'scripts/prepare_fasttree_pack.py', 'tests/test_fasttree_pack.py',
+                     'workspace/catalog.py', 'docs/PRODIGAL-PACK.md'):
+            self.assertFalse(gate.allowed_gate_change(name), name)
+        with mock.patch.object(gate.subprocess, 'check_output', side_effect=[
+                'b' * 40 + '\n', b'scripts/build_prodigal_native.py\0']):
+            with self.assertRaisesRegex(ValueError, 'production or recipe'):
+                gate.frozen_source_changes('a' * 40, 'b' * 40)
+
+    def test_frozen_recheck_records_exact_allowed_difference(self):
+        with mock.patch.object(gate.subprocess, 'check_output', side_effect=[
+                'b' * 40 + '\n', b'scripts/check_prodigal_fasttree_gui.py\0knowledge/evidence/check.json\0']):
+            self.assertEqual(gate.frozen_source_changes('a' * 40, 'b' * 40),
+                             ['knowledge/evidence/check.json', 'scripts/check_prodigal_fasttree_gui.py'])
+        with mock.patch.object(gate.subprocess, 'check_output', return_value='c' * 40 + '\n'):
+            with self.assertRaisesRegex(ValueError, 'Gate checkout'):
+                gate.frozen_source_changes('a' * 40, 'b' * 40)
 
     def test_frozen_identity_and_companion_member_tampering_are_rejected(self):
         packs = {}

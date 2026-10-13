@@ -126,6 +126,21 @@ def run_gui(root, evidence, report):
                     any(item["text"] == expected_title for item in ui.controls(ui.child(118))) and
                     ui.label(ui.child(113)) == "Run tool" and ui.user.IsWindowEnabled(ui.child(113)))
             form = ui.child(118)
+            # Standalone forms retain scroll position across tool selection.
+            # Reach the true beginning through the same wheel path as a user
+            # before labelling any capture as the top of this form.
+            for _ in range(30):
+                position = ui.scroll_info(form)
+                if position["nPos"] == position["nMin"]:
+                    break
+                left, top, right, bottom = ui.bounds(form)
+                ui.wheel((left + right) // 2, (top + bottom) // 2, 720)
+                ui.wait("rewind native form " + identity, lambda:
+                        ui.scroll_info(form)["nPos"] < position["nPos"])
+            else:
+                raise AssertionError("Native form did not reach its first page: " + identity)
+            require(ui.scroll_info(form)["nPos"] == ui.scroll_info(form)["nMin"],
+                    "Top capture must start at the native form's minimum scroll position.")
             form_bounds = ui.bounds(form)
             library_bounds = ui.library().visible_bounds()
             require(library_bounds[2] <= form_bounds[0],

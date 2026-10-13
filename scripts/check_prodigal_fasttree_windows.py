@@ -13,6 +13,7 @@ import copy
 from datetime import datetime, timezone
 import hashlib
 import importlib.util
+import io
 import json
 import os
 from pathlib import Path, PurePosixPath
@@ -21,6 +22,7 @@ import re
 import subprocess
 import sys
 import traceback
+import tarfile
 import zipfile
 
 sys.dont_write_bytecode = True
@@ -35,6 +37,35 @@ APPLICATIONS = {
 }
 OPERATIONS = {'prodigal': {'predict-genome', 'predict-metagenome'},
               'fasttree': {'infer-nucleotide', 'infer-protein'}}
+FROZEN_GATE_PATHS = {
+    'scripts/check_prodigal_fasttree_windows.py', 'scripts/check_prodigal_fasttree_gui.py',
+    'scripts/audit_prodigal_fasttree_candidate.py', 'tests/test_prodigal_fasttree_validation.py',
+    '.github/workflows/native-prodigal-fasttree-recheck.yml',
+}
+
+
+def allowed_gate_change(name):
+    return name in FROZEN_GATE_PATHS or name.startswith(('knowledge/', 'docs/evidence/'))
+
+
+def frozen_source_changes(candidate_commit, gate_commit):
+    require(all(re.fullmatch(r'[a-f0-9]{40}', value) for value in (candidate_commit, gate_commit)),
+            'Frozen recheck requires exact candidate and gate commits.')
+    require(subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=SOURCE, text=True).strip() == gate_commit,
+            'Gate checkout does not match its recorded commit.')
+    names = subprocess.check_output(['git', 'diff', '--name-only', '-z', candidate_commit, gate_commit], cwd=SOURCE).decode().split('\0')
+    changed = sorted(filter(None, names))
+    require(all(allowed_gate_change(name) for name in changed),
+            'Frozen candidate production or recipe sources changed: ' + ', '.join(name for name in changed if not allowed_gate_change(name)))
+    return changed
+
+
+def git_source_files(commit):
+    archive = subprocess.check_output(['git', 'archive', '--format=tar', commit], cwd=SOURCE)
+    with tarfile.open(fileobj=io.BytesIO(archive), mode='r:') as source:
+        require(all(item.isfile() or item.isdir() for item in source.getmembers()), 'Git source contains unsupported file types.')
+        return {item.name: source.extractfile(item).read() for item in source.getmembers() if item.isfile()}
+
 
 
 def require(condition, message):
@@ -168,7 +199,10 @@ def freeze(args):
     return provenance
 
 
-def verify_candidate(folder, commit):
+def verify_candidate(folder, commit, gate_commit=None):
+    gate_commit = gate_commit or commit
+    changes = frozen_source_changes(commit, gate_commit) if commit != gate_commit else []
+    original_sources = git_source_files(commit) if commit != gate_commit else None
     record = read_json(folder / 'BUILD-PROVENANCE.json')
     require(record['sourceCommit'] == commit and set(record['packs']) == set(PACK_IDS), 'Wrong frozen candidate source/packs.')
     for identity, item in record['packs'].items():
@@ -183,13 +217,29 @@ def verify_candidate(folder, commit):
         require(len(names) == len(set(x.casefold() for x in names)) and
                 set(archive.namelist()) == set(names) | {'SOURCE-INVENTORY.json', 'BUILD-PROVENANCE.json'},
                 'Source companion inventory differs.')
+        if original_sources is not None:
+            require({name[7:] for name in names if name.startswith('source/')} == set(original_sources),
+                    'Frozen companion does not contain the complete original Git source inventory.')
         for row in inventory['files']:
             safe_member(row['path'])
             data = archive.read(row['path'])
             require(len(data) == row['bytes'] and hashlib.sha256(data).hexdigest() == row['sha256'], 'Companion member differs.')
             if row['path'].startswith('source/'):
-                local = SOURCE / row['path'][7:]
-                require(local.is_file() and sha(local) == row['sha256'], 'Companion is not this gate checkout: ' + row['path'])
+                relative = row['path'][7:]
+                local = SOURCE / relative
+                if original_sources is not None:
+                    require(data == original_sources[relative], 'Frozen source differs from original Git commit: ' + relative)
+                if relative not in changes:
+                    require(local.is_file() and sha(local) == row['sha256'], 'Companion production source differs from gate checkout: ' + relative)
+        # Bind the validator revisions themselves, including newly added files,
+        # to the separate gate commit rather than silently treating them as pack
+        # build source. All other archived files already match the checkout.
+        if changes:
+            current_sources = git_source_files(gate_commit)
+            for relative in changes:
+                local = SOURCE / relative
+                require((local.is_file() and local.read_bytes() == current_sources[relative]) if relative in current_sources else not local.exists(),
+                        'Validator working file differs from gate commit: ' + relative)
     return record
 
 
@@ -328,8 +378,9 @@ def native(args):
     root, evidence = args.app_root.resolve(), args.report.resolve().parent
     require(not evidence.is_relative_to(root), 'Evidence must be outside the immutable application tree.')
     evidence.mkdir(parents=True, exist_ok=True)
+    candidate_commit = args.candidate_source_commit or args.source_commit
     report = {'schema': 1, 'kind': 'native-prodigal-fasttree-candidate', 'success': False,
-              'gateSourceCommit': args.source_commit, 'applicationVersion': args.app_version,
+              'candidateSourceCommit': candidate_commit, 'gateSourceCommit': args.source_commit, 'applicationVersion': args.app_version,
               'applicationSourceCommit': APPLICATIONS[args.app_version]['sourceCommit'],
               'applicationArchive': file_record(args.app_archive), 'mode': args.mode,
               'nativeWindowsHost': True, 'nativeWindowsExecuted': False,
@@ -340,7 +391,9 @@ def native(args):
     try:
         require(sha(args.app_archive) == APPLICATIONS[args.app_version]['sha256'], 'Unexpected application archive.')
         report['coreFilesVerifiedBefore'] = verify_extracted(args.app_archive, root)
-        frozen = verify_candidate(args.candidate, args.source_commit)
+        frozen = verify_candidate(args.candidate, candidate_commit, args.source_commit)
+        report['frozenCandidateRecheck'] = candidate_commit != args.source_commit
+        report['gateSourceDifferences'] = frozen_source_changes(candidate_commit, args.source_commit) if candidate_commit != args.source_commit else []
         report['packs'] = frozen['packs']
         report['sourceCompanion'] = frozen['sourceCompanion']
         sys.path.insert(0, str(root / 'workspace'))
@@ -423,7 +476,8 @@ def main(argv=None):
     check.add_argument('--app-archive', type=Path, required=True)
     check.add_argument('--app-version', choices=APPLICATIONS, required=True)
     check.add_argument('--mode', choices=('science', 'gui'), required=True)
-    check.add_argument('--source-commit', required=True)
+    check.add_argument('--source-commit', required=True, help='Actual validator/gate checkout commit.')
+    check.add_argument('--candidate-source-commit', help='Frozen pack build commit; defaults to the gate commit.')
     check.add_argument('--report', type=Path, required=True)
     check.add_argument('--muscle-archive', type=Path)
     args = parser.parse_args(argv)
