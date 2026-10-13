@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "date": "2026-10-13",
+  "sourceCommit": "3b8e2114ae596b14eb1c47a3bc9a8060802fe7cd",
+  "sourceTree": "21e167a6fbcea6d157ecf97f11de2383b0490bb3",
+  "run": 38395587781,
+  "conclusion": "failure",
+  "published": false,
+  "candidatePackSha256": "98b81c567796abdbb27acccbab3f8e3c8a3f48b0a02b1fb549df9e5b6a01d157",
+  "sourceCompanionSha256": "84d83204bb4ff661f63d529ebcae520b91c6f6a9ed6bbb80a8f6faa5e45a2b9b",
+  "cause": "The deterministic fixture generator wrote truth.json using Windows CRLF while archived canonical fixtures use LF. Exact reconstruction correctly failed; all selected native scientific/failure tests passed.",
+  "correction": "Write all generated fixture files as explicit UTF-8 bytes with LF. Preserve exact byte assertions. Rebuild retained-source pack and revalidate.",
+  "unreached": [
+    "Kalign to FastTree typed graph chains",
+    "Combined Starter/install regression"
+  ],
+  "paths": {
+    "ordinary": {
+      "science": {
+        "reportSha256": "b6715fa572a491755d96f6fd9c8cd62e8208cd88f29541d33d700f39005be1fd",
+        "success": false,
+        "checks": 1,
+        "nativeWindowsExecuted": true
+      },
+      "gui": {
+        "reportSha256": "4870fdeb5e39cff9d7afda3011b6e9b2c0338e3ca2d79bc4115f02280c250a70",
+        "success": true,
+        "checks": 7,
+        "nativeWindowsExecuted": true
+      },
+      "regressions": {
+        "testsRun": 17,
+        "failures": 1,
+        "errors": 0,
+        "skipped": [],
+        "success": false,
+        "reportSha256": "dfcaf3c89663327fa3bcac19227fc889534633dfac577cb6b020251463fbbbed"
+      }
+    },
+    "spaces": {
+      "science": {
+        "reportSha256": "abea9406cf95fc949783ece451fc8f43e67e6156eb20b9780d9fb814f243df22",
+        "success": false,
+        "checks": 1,
+        "nativeWindowsExecuted": true
+      },
+      "gui": {
+        "reportSha256": "a9081873d354677400835fe48c72489b13bd3f2e6f88c22ae65cb13293ffc9f8",
+        "success": true,
+        "checks": 7,
+        "nativeWindowsExecuted": true
+      },
+      "regressions": {
+        "testsRun": 17,
+        "failures": 1,
+        "errors": 0,
+        "skipped": [],
+        "success": false,
+        "reportSha256": "ccbd6cf3e997723806619f4edba60825cd334cb545880a1481a4c1d408e9b387"
+      }
+    }
+  }
+}

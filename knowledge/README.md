@@ -1,17 +1,33 @@
 # Native Workbench knowledge base
 
-**Active pack batch, 2026-10-13:** Prodigal **1.0.0** and FastTree **1.0.0**
-are implemented in [draft PR #16](https://github.com/comparativechrono/workbench/pull/16),
-stacked on the unchanged 0.16.1 UI candidate. The corrected source is
-`d175076d57f4c84743cb375369c604085a720204`; exact Windows science passed in both
-ordinary and spaced paths. A frozen recheck completed all form pages and Results;
-44 actual display images were reviewed. The candidate is ready for draft review.
-[Pack/source download](https://github.com/comparativechrono/workbench/actions/runs/38387733137/artifacts/11806999226)
-(expires 2026-11-12).
-The [batch handover](prodigal-fasttree-handover.md) records the initial Windows
-stack failure, correction, exact archives and evidence. No release or catalogue
-publication is included. Published **0.16.0** and the existing application
-candidate remain unchanged.
+**Primer3/PLINK2 ready for draft review, 2026-10-13:** independent **1.0.0**
+packs are complete in [draft PR #18](https://github.com/comparativechrono/workbench/pull/18),
+stacked on unchanged Kalign draft PR #17. Tested source
+`3d1d83b70d053af625b5cb45362851c0fefab2a1` passed both Windows path cases,
+31 scientific tests per path, normal graphs, Starter/pack regressions and GUI
+checks. All 38 actual display images were reviewed. See the
+[handover](primer3-plink2-handover.md) and
+[final evidence](evidence/primer3-plink2-1.0.0-final-review-2026-10-13.json).
+[Pack/source download](https://github.com/comparativechrono/workbench/actions/runs/38403212748/artifacts/11816422463)
+expires 2026-11-12. Measurements remain output files; native Results shows status
+and provenance. Application bytes are unchanged; nothing is merged or published.
+
+**Kalign ready for draft review, 2026-10-13:** optional **1.0.0** is implemented in
+[draft PR #17](https://github.com/comparativechrono/workbench/pull/17), based on
+merged PR #16. Exact source `8149bdc02a2104e97ea6512ae0a8bc76c8defc32` passed
+both Windows path cases, Kalign→FastTree graphs, regressions and native GUI checks.
+All 20 actual display screenshots were reviewed. The [handover](kalign-handover.md)
+and [final evidence](evidence/kalign-1.0.0-final-review-2026-10-13.json) retain the
+initial fixture-line-ending correction, exact hashes and scope limits.
+[Pack/source download](https://github.com/comparativechrono/workbench/actions/runs/38396201555/artifacts/11812411631)
+expires 2026-11-12. No release or catalogue publication is included.
+
+**Merged first pack batch, 2026-10-13:** [PR #16](https://github.com/comparativechrono/workbench/pull/16)
+merged into `fix/native-ui-0.16.1` at `8addaa1278c535e4931eb0b2b85b8f47b51ddd66`
+on the owner's instruction. The [batch handover](prodigal-fasttree-handover.md)
+retains exact native science, GUI review, source audit and download evidence.
+This did not merge PR #15 into main or publish any application, pack or catalogue.
+Published **0.16.0** and the unpublished **0.16.1** application bytes are unchanged.
 
 **Previous wrapped tool library, 2026-10-10:** implemented in unpublished
 **0.16.1** source `ff13db729a6215e9fe5dfa4a4efdb9c769880287` in

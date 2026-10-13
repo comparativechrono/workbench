@@ -1,0 +1,431 @@
+{
+  "schema": 1,
+  "sourceCommit": "8149bdc02a2104e97ea6512ae0a8bc76c8defc32",
+  "run": 38396201555,
+  "success": true,
+  "artifacts": [
+    {
+      "id": 11812551553,
+      "name": "kalign-build-evidence-8149bdc02a2104e97ea6512ae0a8bc76c8defc32",
+      "bytes": 37482,
+      "sha256": "fe0c2dfb90f636594715af6b2e3e134c6a6f7f32e2d25703702043884446004e",
+      "expiresAt": "2026-11-12T12:18:04Z",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/38396201555/artifacts/11812551553"
+    },
+    {
+      "id": 11812411631,
+      "name": "kalign-candidate-8149bdc02a2104e97ea6512ae0a8bc76c8defc32",
+      "bytes": 8089085,
+      "sha256": "0045deb488be104725c325c81fb71370e7e7ce178eb3436dcb97106a99af1306",
+      "expiresAt": "2026-11-12T12:18:02Z",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/38396201555/artifacts/11812411631"
+    },
+    {
+      "id": 11812306798,
+      "name": "kalign-native-ordinary-8149bdc02a2104e97ea6512ae0a8bc76c8defc32",
+      "bytes": 1782164,
+      "sha256": "2143a0cdc92ee9f411f6ab58333d2cc4658ca7c340f5e900d2401c08ba20ab03",
+      "expiresAt": "2026-11-12T12:18:53Z",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/38396201555/artifacts/11812306798"
+    },
+    {
+      "id": 11812291802,
+      "name": "kalign-native-path with spaces-8149bdc02a2104e97ea6512ae0a8bc76c8defc32",
+      "bytes": 1785430,
+      "sha256": "ee48a9f70210040765a32d6f7e6fa6b95102910501a4f56d8355a314baea3b1d",
+      "expiresAt": "2026-11-12T12:18:48Z",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/38396201555/artifacts/11812291802"
+    }
+  ],
+  "paths": {
+    "ordinary": {
+      "science": {
+        "applicationVersion": "0.16.0",
+        "applicationSourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "applicationArchive": {
+          "file": "published-starter.zip",
+          "bytes": 17846873,
+          "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+        },
+        "checks": [
+          "kalign: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+          "kalign: exact installed scientific and failure regressions.",
+          "kalign: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+          "Kalign nucleotide output feeds the immutable FastTree candidate through the real typed graph; residues, taxa and known unrooted pairs agree.",
+          "Kalign protein output feeds the immutable FastTree candidate through the real typed graph; residues, taxa and known unrooted pairs agree.",
+          "Unchanged Starter science and all installed declared pack checks pass together.",
+          "Pinned application and installed pack/dependency bytes remain unchanged after execution."
+        ],
+        "coreFilesVerifiedBefore": 274,
+        "coreFilesVerifiedAfter": 274,
+        "reportSha256": "fcdd681916894eaa6290741f1c9ea7b7485881307218dcc2f5baf9a58067cb82",
+        "fasttreeDependency": {
+          "id": "fasttree",
+          "version": "1.0.0",
+          "sha256": "4525aa8001b7b190eecbee5a164bb9586ce9f78d8672635df25ae4e462165c20",
+          "manifestSha256": "83e45c8c7222bea53e4023861450aa79db0a2f003f7e2a82f6c6362923bcdc55",
+          "sourceCommit": "d175076d57f4c84743cb375369c604085a720204",
+          "run": 38387733137,
+          "artifact": 11806999226,
+          "publicationStatus": "unpublished merged review candidate",
+          "file": "native-workbench-pack-fasttree-1.0.0.zip",
+          "bytes": 853557
+        },
+        "kalignFasttreeGraphChains": [
+          {
+            "datatype": "nucleotide",
+            "pins": [
+              {
+                "packId": "kalign",
+                "packVersion": "1.0.0",
+                "manifestSha256": "89779c41ac6b6c60eaacc3e477d20a10daedd7bd79ddf9654002d81a5e5054c7"
+              },
+              {
+                "packId": "fasttree",
+                "packVersion": "1.0.0",
+                "manifestSha256": "83e45c8c7222bea53e4023861450aa79db0a2f003f7e2a82f6c6362923bcdc55"
+              }
+            ],
+            "alignmentSha256": "148c2e56c51283138ae1894dd2b852d046855fdc9a2b4904f5a20832e4dce59e",
+            "treeSha256": "fd9baa3dd9dbe29447b29b63b715e246567a8ccba5becee02b25ff52e8b27086",
+            "runSha256": "2bda7aadfdc2f4ee40ae39b042b389babf6f8230f58f02593f0100d72fa6faec",
+            "planSha256": "f8d9c95262a095ca25da6a4a688a08484ce9c168753e45fdbf4039e9c957a9e0",
+            "residuesPreserved": true,
+            "knownTaxaAndUnrootedPairs": true
+          },
+          {
+            "datatype": "protein",
+            "pins": [
+              {
+                "packId": "kalign",
+                "packVersion": "1.0.0",
+                "manifestSha256": "89779c41ac6b6c60eaacc3e477d20a10daedd7bd79ddf9654002d81a5e5054c7"
+              },
+              {
+                "packId": "fasttree",
+                "packVersion": "1.0.0",
+                "manifestSha256": "83e45c8c7222bea53e4023861450aa79db0a2f003f7e2a82f6c6362923bcdc55"
+              }
+            ],
+            "alignmentSha256": "8b81a358521ea7a3a07416dda81c93aa11d72a15345fad64e7e7b562a7afb37d",
+            "treeSha256": "e188d206f6e628d3af676269fa2fadf6bffda1aff10f4c30c000fe17ab150af7",
+            "runSha256": "fb9120b2285bcbc1d9564ceb50547f1c68f82e43348f020e4572c3a165d4f27b",
+            "planSha256": "95cc6620e3273811c29682fd9430dfd64973df32da378e3ca93ac08b60ed67d2",
+            "residuesPreserved": true,
+            "knownTaxaAndUnrootedPairs": true
+          }
+        ]
+      },
+      "gui": {
+        "applicationVersion": "0.16.1",
+        "applicationSourceCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+        "applicationArchive": {
+          "file": "native-workbench-0.16.1-starter-windows.zip",
+          "bytes": 17889148,
+          "sha256": "28f1362287991621dde030da54eb444846142c0243be6b9d86c4b4f1bf99dd47"
+        },
+        "checks": [
+          "kalign: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+          "kalign: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+          "The native library discovers Kalign 1.0.0 and displays both alignment operations under their complete catalogue labels.",
+          "Native pointer selection opens kalign/align-nucleotide with exact pack version, declared input/option labels and reachable form pages.",
+          "Native pointer selection opens kalign/align-protein with exact pack version, declared input/option labels and reachable form pages.",
+          "Native Results search finds Pack candidate kalign and displays its successful native operation, exact pack/executable versions and recorded manifest identity without a QC verdict.",
+          "Pinned application and installed pack/dependency bytes remain unchanged after execution."
+        ],
+        "coreFilesVerifiedBefore": 277,
+        "coreFilesVerifiedAfter": 277,
+        "reportSha256": "63e124775dfbb65001adf51b96c2c60d2aece3bb9ac841da7bbf11299b6af912",
+        "forms": [
+          {
+            "operation": "kalign/align-nucleotide",
+            "pages": 3,
+            "topAndBottomReached": true
+          },
+          {
+            "operation": "kalign/align-protein",
+            "pages": 3,
+            "topAndBottomReached": true
+          }
+        ],
+        "nativeSummaryReportsMeasurementsUnavailable": true
+      },
+      "selectedSuite": {
+        "schema": 1,
+        "packId": "kalign",
+        "packVersion": "1.0.0",
+        "upstreamVersion": "3.5.1",
+        "toolVersion": "3.5.1-workbench1",
+        "platform": "win32",
+        "nativeWindowsExecuted": true,
+        "testsRun": 17,
+        "failures": 0,
+        "errors": 0,
+        "skipped": [],
+        "success": true,
+        "testSourceSha256": "678a086e352e97ed2bf80481762930323d358b76f5a439de0f19329652d1e9e6",
+        "guardExecutableSha256": "ce3dab59888f2757860fedbc4228d801d12f885482b07ee9c14a091eddea7a47",
+        "scientificBinarySha256": "8274acf350784b2d8bcc4c9a70b7bbed5059b1e17c1665056cae42a2328756b0",
+        "packManifestSha256": "89779c41ac6b6c60eaacc3e477d20a10daedd7bd79ddf9654002d81a5e5054c7",
+        "upstreamSourceCommit": "3e6de1df29d111c5fa5beb4c4294ef681978fd23",
+        "upstreamSourceArchiveSha256": "01bacb2205e7b6792c570b163b5ccc0713284737ba862ca3b500a96a8a4d1bd9",
+        "livePinnedLinuxReferenceCases": 0,
+        "liveReferenceExecutableSha256": null,
+        "linuxReferenceScope": "Pristine reference execution is a separate Linux-only class, excluded from native Windows selection; the frozen reference and independent truth are verified on both platforms.",
+        "scope": "Independent six-sequence nucleotide/protein indel homology; direct bundled upstream agreement; explicit-alphabet correction, exact residue/ID/order preservation; measured summaries; malformed/bounded input and immutable-file regressions. No benchmark, native GUI, real-data alignment-accuracy, orthology or clinical claim.",
+        "reportSha256": "df8c292eb1de7a3b6b14c8e65fa9576844bfd1b6502b9f3f66df79d9a3e37290",
+        "scopeCount": "2 source contracts plus15 native scientific/failure tests; pristine Linux class excluded from Windows selection, not skipped."
+      },
+      "combinedInstallation": {
+        "reportSha256": "42e4091364b2b686fd3160e1fd08226a20c4796b869b716a5be5976a4803f1fd",
+        "corePassed": 7,
+        "starterSciencePassed": 1,
+        "packChecksPassed": 5,
+        "failed": 0,
+        "skipped": 0,
+        "packChecks": [
+          {
+            "id": "align/paired-mapping-known-answer@0.4.1",
+            "status": "passed",
+            "pin": {
+              "packId": "align",
+              "packVersion": "0.4.1",
+              "manifestSha256": "7f8f36efbfd6a8255a98eabb06746fbcc5bbdb872f392a65ca3e79a586d04939"
+            }
+          },
+          {
+            "id": "fasttree/nucleotide-known-pairs@1.0.0",
+            "status": "passed",
+            "pin": {
+              "packId": "fasttree",
+              "packVersion": "1.0.0",
+              "manifestSha256": "83e45c8c7222bea53e4023861450aa79db0a2f003f7e2a82f6c6362923bcdc55"
+            }
+          },
+          {
+            "id": "fasttree/protein-known-pairs@1.0.0",
+            "status": "passed",
+            "pin": {
+              "packId": "fasttree",
+              "packVersion": "1.0.0",
+              "manifestSha256": "83e45c8c7222bea53e4023861450aa79db0a2f003f7e2a82f6c6362923bcdc55"
+            }
+          },
+          {
+            "id": "kalign/nucleotide-known-indels@1.0.0",
+            "status": "passed",
+            "pin": {
+              "packId": "kalign",
+              "packVersion": "1.0.0",
+              "manifestSha256": "89779c41ac6b6c60eaacc3e477d20a10daedd7bd79ddf9654002d81a5e5054c7"
+            }
+          },
+          {
+            "id": "kalign/protein-known-indels@1.0.0",
+            "status": "passed",
+            "pin": {
+              "packId": "kalign",
+              "packVersion": "1.0.0",
+              "manifestSha256": "89779c41ac6b6c60eaacc3e477d20a10daedd7bd79ddf9654002d81a5e5054c7"
+            }
+          }
+        ]
+      }
+    },
+    "spaces": {
+      "science": {
+        "applicationVersion": "0.16.0",
+        "applicationSourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "applicationArchive": {
+          "file": "published-starter.zip",
+          "bytes": 17846873,
+          "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+        },
+        "checks": [
+          "kalign: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+          "kalign: exact installed scientific and failure regressions.",
+          "kalign: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+          "Kalign nucleotide output feeds the immutable FastTree candidate through the real typed graph; residues, taxa and known unrooted pairs agree.",
+          "Kalign protein output feeds the immutable FastTree candidate through the real typed graph; residues, taxa and known unrooted pairs agree.",
+          "Unchanged Starter science and all installed declared pack checks pass together.",
+          "Pinned application and installed pack/dependency bytes remain unchanged after execution."
+        ],
+        "coreFilesVerifiedBefore": 274,
+        "coreFilesVerifiedAfter": 274,
+        "reportSha256": "2bd3de57ff223a0472f2b232e751edc9ae70f83186f20ea03e47b8a4fe030481",
+        "fasttreeDependency": {
+          "id": "fasttree",
+          "version": "1.0.0",
+          "sha256": "4525aa8001b7b190eecbee5a164bb9586ce9f78d8672635df25ae4e462165c20",
+          "manifestSha256": "83e45c8c7222bea53e4023861450aa79db0a2f003f7e2a82f6c6362923bcdc55",
+          "sourceCommit": "d175076d57f4c84743cb375369c604085a720204",
+          "run": 38387733137,
+          "artifact": 11806999226,
+          "publicationStatus": "unpublished merged review candidate",
+          "file": "native-workbench-pack-fasttree-1.0.0.zip",
+          "bytes": 853557
+        },
+        "kalignFasttreeGraphChains": [
+          {
+            "datatype": "nucleotide",
+            "pins": [
+              {
+                "packId": "kalign",
+                "packVersion": "1.0.0",
+                "manifestSha256": "89779c41ac6b6c60eaacc3e477d20a10daedd7bd79ddf9654002d81a5e5054c7"
+              },
+              {
+                "packId": "fasttree",
+                "packVersion": "1.0.0",
+                "manifestSha256": "83e45c8c7222bea53e4023861450aa79db0a2f003f7e2a82f6c6362923bcdc55"
+              }
+            ],
+            "alignmentSha256": "148c2e56c51283138ae1894dd2b852d046855fdc9a2b4904f5a20832e4dce59e",
+            "treeSha256": "fd9baa3dd9dbe29447b29b63b715e246567a8ccba5becee02b25ff52e8b27086",
+            "runSha256": "0fca17d54fa611787d9d6b3d255548dab00efbd8cc76be938e0707857e46acc2",
+            "planSha256": "1c941e7ce71735e30d55be287fb4fba28c044aa5f9e0b5c0a151c551fa5a14a1",
+            "residuesPreserved": true,
+            "knownTaxaAndUnrootedPairs": true
+          },
+          {
+            "datatype": "protein",
+            "pins": [
+              {
+                "packId": "kalign",
+                "packVersion": "1.0.0",
+                "manifestSha256": "89779c41ac6b6c60eaacc3e477d20a10daedd7bd79ddf9654002d81a5e5054c7"
+              },
+              {
+                "packId": "fasttree",
+                "packVersion": "1.0.0",
+                "manifestSha256": "83e45c8c7222bea53e4023861450aa79db0a2f003f7e2a82f6c6362923bcdc55"
+              }
+            ],
+            "alignmentSha256": "8b81a358521ea7a3a07416dda81c93aa11d72a15345fad64e7e7b562a7afb37d",
+            "treeSha256": "e188d206f6e628d3af676269fa2fadf6bffda1aff10f4c30c000fe17ab150af7",
+            "runSha256": "d1b63e1b8add6fe83237b2e368d1ec4e2f0306dce0ff8229615eb67c49001c4c",
+            "planSha256": "10a4efba313d17c89795e16a2ceed63099e62c45d186e6e947e9bd86341dae4f",
+            "residuesPreserved": true,
+            "knownTaxaAndUnrootedPairs": true
+          }
+        ]
+      },
+      "gui": {
+        "applicationVersion": "0.16.1",
+        "applicationSourceCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+        "applicationArchive": {
+          "file": "native-workbench-0.16.1-starter-windows.zip",
+          "bytes": 17889148,
+          "sha256": "28f1362287991621dde030da54eb444846142c0243be6b9d86c4b4f1bf99dd47"
+        },
+        "checks": [
+          "kalign: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+          "kalign: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+          "The native library discovers Kalign 1.0.0 and displays both alignment operations under their complete catalogue labels.",
+          "Native pointer selection opens kalign/align-nucleotide with exact pack version, declared input/option labels and reachable form pages.",
+          "Native pointer selection opens kalign/align-protein with exact pack version, declared input/option labels and reachable form pages.",
+          "Native Results search finds Pack candidate kalign and displays its successful native operation, exact pack/executable versions and recorded manifest identity without a QC verdict.",
+          "Pinned application and installed pack/dependency bytes remain unchanged after execution."
+        ],
+        "coreFilesVerifiedBefore": 277,
+        "coreFilesVerifiedAfter": 277,
+        "reportSha256": "c4d04b9ac3d4a065e82ab9a90e9f99dabe1457118965252c78f17c7b7aa94eb5",
+        "forms": [
+          {
+            "operation": "kalign/align-nucleotide",
+            "pages": 3,
+            "topAndBottomReached": true
+          },
+          {
+            "operation": "kalign/align-protein",
+            "pages": 3,
+            "topAndBottomReached": true
+          }
+        ],
+        "nativeSummaryReportsMeasurementsUnavailable": true
+      },
+      "selectedSuite": {
+        "schema": 1,
+        "packId": "kalign",
+        "packVersion": "1.0.0",
+        "upstreamVersion": "3.5.1",
+        "toolVersion": "3.5.1-workbench1",
+        "platform": "win32",
+        "nativeWindowsExecuted": true,
+        "testsRun": 17,
+        "failures": 0,
+        "errors": 0,
+        "skipped": [],
+        "success": true,
+        "testSourceSha256": "678a086e352e97ed2bf80481762930323d358b76f5a439de0f19329652d1e9e6",
+        "guardExecutableSha256": "ce3dab59888f2757860fedbc4228d801d12f885482b07ee9c14a091eddea7a47",
+        "scientificBinarySha256": "8274acf350784b2d8bcc4c9a70b7bbed5059b1e17c1665056cae42a2328756b0",
+        "packManifestSha256": "89779c41ac6b6c60eaacc3e477d20a10daedd7bd79ddf9654002d81a5e5054c7",
+        "upstreamSourceCommit": "3e6de1df29d111c5fa5beb4c4294ef681978fd23",
+        "upstreamSourceArchiveSha256": "01bacb2205e7b6792c570b163b5ccc0713284737ba862ca3b500a96a8a4d1bd9",
+        "livePinnedLinuxReferenceCases": 0,
+        "liveReferenceExecutableSha256": null,
+        "linuxReferenceScope": "Pristine reference execution is a separate Linux-only class, excluded from native Windows selection; the frozen reference and independent truth are verified on both platforms.",
+        "scope": "Independent six-sequence nucleotide/protein indel homology; direct bundled upstream agreement; explicit-alphabet correction, exact residue/ID/order preservation; measured summaries; malformed/bounded input and immutable-file regressions. No benchmark, native GUI, real-data alignment-accuracy, orthology or clinical claim.",
+        "reportSha256": "ccfc64bdc7d1c323a16e504ef605c4cd6a7452cb8a520546207b25dc5285a3c5",
+        "scopeCount": "2 source contracts plus15 native scientific/failure tests; pristine Linux class excluded from Windows selection, not skipped."
+      },
+      "combinedInstallation": {
+        "reportSha256": "4a5813c42842e76e24b898250f6a0b922b2bfacfc2c55dac5ff7b71413f24fd4",
+        "corePassed": 7,
+        "starterSciencePassed": 1,
+        "packChecksPassed": 5,
+        "failed": 0,
+        "skipped": 0,
+        "packChecks": [
+          {
+            "id": "align/paired-mapping-known-answer@0.4.1",
+            "status": "passed",
+            "pin": {
+              "packId": "align",
+              "packVersion": "0.4.1",
+              "manifestSha256": "7f8f36efbfd6a8255a98eabb06746fbcc5bbdb872f392a65ca3e79a586d04939"
+            }
+          },
+          {
+            "id": "fasttree/nucleotide-known-pairs@1.0.0",
+            "status": "passed",
+            "pin": {
+              "packId": "fasttree",
+              "packVersion": "1.0.0",
+              "manifestSha256": "83e45c8c7222bea53e4023861450aa79db0a2f003f7e2a82f6c6362923bcdc55"
+            }
+          },
+          {
+            "id": "fasttree/protein-known-pairs@1.0.0",
+            "status": "passed",
+            "pin": {
+              "packId": "fasttree",
+              "packVersion": "1.0.0",
+              "manifestSha256": "83e45c8c7222bea53e4023861450aa79db0a2f003f7e2a82f6c6362923bcdc55"
+            }
+          },
+          {
+            "id": "kalign/nucleotide-known-indels@1.0.0",
+            "status": "passed",
+            "pin": {
+              "packId": "kalign",
+              "packVersion": "1.0.0",
+              "manifestSha256": "89779c41ac6b6c60eaacc3e477d20a10daedd7bd79ddf9654002d81a5e5054c7"
+            }
+          },
+          {
+            "id": "kalign/protein-known-indels@1.0.0",
+            "status": "passed",
+            "pin": {
+              "packId": "kalign",
+              "packVersion": "1.0.0",
+              "manifestSha256": "89779c41ac6b6c60eaacc3e477d20a10daedd7bd79ddf9654002d81a5e5054c7"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "countingScope": "Repeated and overlapping assertions are not summed as unique checks."
+}

@@ -1,9 +1,49 @@
 # Current project state
 
-## Active development: Prodigal and FastTree packs, 2026-10-13
+## Active review: Primer3 and PLINK2, 2026-10-13
+
+Independent **1.0.0** packs are ready in
+[draft PR #18](https://github.com/comparativechrono/workbench/pull/18) on
+`feature/primer3-plink2-packs`, based on Kalign delivery
+`8c0321d0cf04751a7c921d42098bed13ebb7b11a`. Kalign PR #17 remains draft/unmerged.
+Tested source `3d1d83b70d053af625b5cb45362851c0fefab2a1` implements paired PCR
+primer design and bounded VCF hardcall allele/genotype/missingness summaries.
+Published 0.16.0 and frozen 0.16.1 application bytes remain unchanged.
+
+The [hosted run](https://github.com/comparativechrono/workbench/actions/runs/38403212748)
+passed 111 source tests with one explicit Windows-only Linux skip; each Windows
+path passed 14 Primer3 and 17 PLINK2 tests without selected skips, eight science
+and ten GUI gates, exact-pin graphs and Starter/installed-pack regressions.
+Independent audit matched 984 Git files, 1288 source-companion entries and all
+recorded graph/output identities. All 38 actual display screenshots were reviewed.
+The [handover](primer3-plink2-handover.md) and
+[final index](evidence/primer3-plink2-1.0.0-final-review-2026-10-13.json) record
+hashes, downloads, local pre-freeze corrections and limits. Native Results does
+not yet parse these packs' measurement files. Broader display/PC acceptance and
+benchmarking remain separate; no merge, release or catalogue change is included.
+
+## Previous development: Kalign pack, 2026-10-13
+
+Kalign **1.0.0** is ready for unpublished review in
+[draft PR #17](https://github.com/comparativechrono/workbench/pull/17), based on
+merged integration commit `8addaa1278c535e4931eb0b2b85b8f47b51ddd66`.
+Tested source `8149bdc02a2104e97ea6512ae0a8bc76c8defc32` provides serial default
+nucleotide/protein alignment, explicit alphabets, typed MSA outputs and recorded
+measurements. Application binaries are unchanged.
+
+Hosted checks passed 94 source tests (one explicit Linux platform skip), all 17
+selected tests per Windows path without skips, both real Kalign→FastTree DAGs,
+Starter/installed-pack regressions and seven GUI gate checks per path. All 20
+actual display images were reviewed at 96 DPI. The downloaded archive audit
+matched 953 Git files and 1103 companion entries. Native Results does not yet
+parse the pack's JSON measurements. The [handover](kalign-handover.md) records
+exact archives, the initial fixture-newline correction, and acceptance limits.
+Kalign is unmerged/unpublished; no release or catalogue change is included.
+
+## Merged development: Prodigal and FastTree packs, 2026-10-13
 
 The first approved tool batch adds optional `prodigal` **1.0.0** and `fasttree`
-**1.0.0** packs in [draft PR #16](https://github.com/comparativechrono/workbench/pull/16).
+**1.0.0** packs in [merged PR #16](https://github.com/comparativechrono/workbench/pull/16).
 Pack/validator source is `d175076d57f4c84743cb375369c604085a720204`, based on
 `fix/native-ui-0.16.1` at `2b2e97aa15970f0e7fb3a5428e8ab7dad6acada2`.
 There are no application changes; published **0.16.0** and the wrapped-library
@@ -28,11 +68,11 @@ passed eight validator tests and 12 GUI checks per path on unchanged archives.
 All four forms were scrolled from their true first page through the last; all
 44 actual display images were reviewed without a blocking layout finding at 96 DPI.
 
-The candidate is **ready for unpublished draft review**. The
+PR #16 merged into `fix/native-ui-0.16.1` at `8addaa1278c535e4931eb0b2b85b8f47b51ddd66` on the owner's instruction. The
 [handover](prodigal-fasttree-handover.md) and
 [final index](evidence/prodigal-fasttree-1.0.0-final-review-2026-10-13.json) retain
 the first candidate's stack failure, GUI-driver correction and earlier limited
-form capture scope. No merge, release, online catalogue, benchmark or broader
+form capture scope. No main/PR #15 merge, release, online catalogue, benchmark or broader
 deployment acceptance is included.
 
 ## Previous development: wrapped tool library, 2026-10-10

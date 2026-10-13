@@ -181,7 +181,13 @@
     "prodigal_fasttree_handover": "prodigal-fasttree-handover.md",
     "prodigal_pack_guide": "../docs/PRODIGAL-PACK.md",
     "fasttree_pack_guide": "../docs/FASTTREE-PACK.md",
-    "prodigal_fasttree_final_review": "evidence/prodigal-fasttree-1.0.0-final-review-2026-10-13.json"
+    "prodigal_fasttree_final_review": "evidence/prodigal-fasttree-1.0.0-final-review-2026-10-13.json",
+    "kalign_handover": "kalign-handover.md",
+    "kalign_pack_guide": "../docs/KALIGN-PACK.md",
+    "prodigal_fasttree_merge": "evidence/prodigal-fasttree-merge-2026-10-13.json",
+    "kalign_final_review": "evidence/kalign-1.0.0-final-review-2026-10-13.json",
+    "primer3_plink2_handover": "primer3-plink2-handover.md",
+    "primer3_plink2_final_evidence": "evidence/primer3-plink2-1.0.0-final-review-2026-10-13.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -1195,39 +1201,38 @@
   "active_development": {
     "recorded_on": "2026-10-13",
     "kind": "optional-pack-batch",
-    "branch": "feature/prodigal-fasttree-packs",
-    "base_branch": "fix/native-ui-0.16.1",
-    "base_commit": "2b2e97aa15970f0e7fb3a5428e8ab7dad6acada2",
-    "source_commit": "d175076d57f4c84743cb375369c604085a720204",
-    "source_tree": "e15f450758f0713755f68c7f5ad2b9b42832c611",
-    "pull_request": "https://github.com/comparativechrono/workbench/pull/16",
-    "pull_request_state": "draft",
+    "branch": "feature/primer3-plink2-packs",
+    "base_branch": "feature/kalign-pack",
+    "base_commit": "8c0321d0cf04751a7c921d42098bed13ebb7b11a",
     "packs": {
-      "prodigal": "1.0.0",
-      "fasttree": "1.0.0"
+      "primer3": "1.0.0",
+      "plink2": "1.0.0"
     },
-    "status": "implementation, exact native validation, downloaded source audit and visual review complete; ready for unpublished draft review",
+    "status": "ready for unpublished draft review",
     "application_changed": false,
     "published_application": "0.16.0",
     "unpublished_application_candidate": "0.16.1",
     "released": false,
     "release_authorized": false,
     "catalogue_changed": false,
-    "handover": "prodigal-fasttree-handover.md",
-    "run": 38387733137,
-    "initial_failed_run": 38385903740,
-    "ready_for_draft_review": true,
-    "validator_commit": "9ea63994661073b115e80533c3288d50d250decb",
-    "validator_run": 38389163430,
-    "artifact_url": "https://github.com/comparativechrono/workbench/actions/runs/38387733137/artifacts/11806999226",
-    "evidence": "evidence/prodigal-fasttree-1.0.0-final-review-2026-10-13.json",
-    "native_pack_tests_per_path": {
-      "prodigal": 16,
-      "fasttree": 14,
-      "skipped": 0
-    },
-    "actual_display_images_reviewed": 44,
-    "measurement_display_limit": "Native Results displays status and tool provenance; new pack JSON measurements remain in output files."
+    "handover": "primer3-plink2-handover.md",
+    "source_commit": "3d1d83b70d053af625b5cb45362851c0fefab2a1",
+    "source_tree": "32becfa4831b7e50cdcfe342645d0ac02d32b8cb",
+    "pull_request": "https://github.com/comparativechrono/workbench/pull/18",
+    "candidate_run": 38403212748,
+    "final_evidence": "evidence/primer3-plink2-1.0.0-final-review-2026-10-13.json",
+    "candidate_download": "https://github.com/comparativechrono/workbench/actions/runs/38403212748/artifacts/11816422463",
+    "artifact_expires_on": "2026-11-12",
+    "source_selected_tests": 112,
+    "source_passed_tests": 111,
+    "source_platform_skips": 1,
+    "native_selected_tests_per_path": 31,
+    "native_selected_skips": 0,
+    "native_science_gate_checks_per_path": 8,
+    "native_gui_gate_checks_per_path": 10,
+    "actual_display_images_reviewed": 38,
+    "measurement_display_limit": "Native Results displays status and provenance; Primer3/PLINK2 JSON measurements remain output files.",
+    "merged": false
   },
   "ui_patch_0_16_1_development": {
     "recorded_on": "2026-10-09",
@@ -1974,7 +1979,7 @@
       "active_handover": "tester-feedback-0.16.1-handover.md"
     }
   },
-  "active_development_record": "prodigal_fasttree_development",
+  "active_development_record": "primer3_plink2_development",
   "resize_redraw_0_16_1_development": {
     "recorded_on": "2026-10-10",
     "kind": "tools-resize-correction",
@@ -2438,12 +2443,12 @@
     "source_commit": "d175076d57f4c84743cb375369c604085a720204",
     "source_tree": "e15f450758f0713755f68c7f5ad2b9b42832c611",
     "pull_request": "https://github.com/comparativechrono/workbench/pull/16",
-    "pull_request_state": "draft",
+    "pull_request_state": "merged",
     "packs": {
       "prodigal": "1.0.0",
       "fasttree": "1.0.0"
     },
-    "status": "implementation, exact native validation, downloaded source audit and visual review complete; ready for unpublished draft review",
+    "status": "merged into existing fix/native-ui-0.16.1 integration base; unpublished; no main or PR15 merge",
     "application_changed": false,
     "published_application": "0.16.0",
     "unpublished_application_candidate": "0.16.1",
@@ -2464,7 +2469,9 @@
       "skipped": 0
     },
     "actual_display_images_reviewed": 44,
-    "measurement_display_limit": "Native Results displays status and tool provenance; new pack JSON measurements remain in output files."
+    "measurement_display_limit": "Native Results displays status and tool provenance; new pack JSON measurements remain in output files.",
+    "merge_commit": "8addaa1278c535e4931eb0b2b85b8f47b51ddd66",
+    "merge_evidence": "evidence/prodigal-fasttree-merge-2026-10-13.json"
   },
   "tester_feedback_0_16_1_development": {
     "recorded_on": "2026-10-09",
@@ -2622,5 +2629,75 @@
       "artifact_expiry": "2026-11-08",
       "limit": "Original-report hashes do not preserve access to raw content after artifact expiry."
     }
+  },
+  "kalign_development": {
+    "recorded_on": "2026-10-13",
+    "kind": "optional-pack",
+    "branch": "feature/kalign-pack",
+    "base_branch": "fix/native-ui-0.16.1",
+    "base_commit": "8addaa1278c535e4931eb0b2b85b8f47b51ddd66",
+    "packs": {
+      "kalign": "1.0.0"
+    },
+    "tool_version": "3.5.1-workbench1",
+    "status": "implementation, exact Windows validation, source audit and screenshot review complete; ready for unpublished draft review",
+    "application_changed": false,
+    "published_application": "0.16.0",
+    "unpublished_application_candidate": "0.16.1",
+    "released": false,
+    "release_authorized": false,
+    "catalogue_changed": false,
+    "handover": "kalign-handover.md",
+    "source_commit": "8149bdc02a2104e97ea6512ae0a8bc76c8defc32",
+    "source_tree": "27ecf6181bef93217a4218335311b4e2ca93fa58",
+    "pull_request": "https://github.com/comparativechrono/workbench/pull/17",
+    "pull_request_state": "draft",
+    "ready_for_draft_review": true,
+    "run": 38396201555,
+    "initial_failed_run": 38395587781,
+    "evidence": "evidence/kalign-1.0.0-final-review-2026-10-13.json",
+    "artifact_url": "https://github.com/comparativechrono/workbench/actions/runs/38396201555/artifacts/11812411631",
+    "source_tests_passed": 94,
+    "source_tests_skipped": 1,
+    "native_selected_tests_per_path": 17,
+    "native_selected_skips": 0,
+    "actual_display_images_reviewed": 20,
+    "measurement_display_limit": "Native Results displays status and provenance; Kalign JSON measurements remain output files."
+  },
+  "primer3_plink2_development": {
+    "recorded_on": "2026-10-13",
+    "kind": "optional-pack-batch",
+    "branch": "feature/primer3-plink2-packs",
+    "base_branch": "feature/kalign-pack",
+    "base_commit": "8c0321d0cf04751a7c921d42098bed13ebb7b11a",
+    "packs": {
+      "primer3": "1.0.0",
+      "plink2": "1.0.0"
+    },
+    "status": "ready for unpublished draft review",
+    "application_changed": false,
+    "published_application": "0.16.0",
+    "unpublished_application_candidate": "0.16.1",
+    "released": false,
+    "release_authorized": false,
+    "catalogue_changed": false,
+    "handover": "primer3-plink2-handover.md",
+    "source_commit": "3d1d83b70d053af625b5cb45362851c0fefab2a1",
+    "source_tree": "32becfa4831b7e50cdcfe342645d0ac02d32b8cb",
+    "pull_request": "https://github.com/comparativechrono/workbench/pull/18",
+    "candidate_run": 38403212748,
+    "final_evidence": "evidence/primer3-plink2-1.0.0-final-review-2026-10-13.json",
+    "candidate_download": "https://github.com/comparativechrono/workbench/actions/runs/38403212748/artifacts/11816422463",
+    "artifact_expires_on": "2026-11-12",
+    "source_selected_tests": 112,
+    "source_passed_tests": 111,
+    "source_platform_skips": 1,
+    "native_selected_tests_per_path": 31,
+    "native_selected_skips": 0,
+    "native_science_gate_checks_per_path": 8,
+    "native_gui_gate_checks_per_path": 10,
+    "actual_display_images_reviewed": 38,
+    "measurement_display_limit": "Native Results displays status and provenance; Primer3/PLINK2 JSON measurements remain output files.",
+    "merged": false
   }
 }

@@ -1,10 +1,13 @@
 # Prodigal and FastTree pack batch
 
 Date: 2026-10-13. Status: implementation, exact Windows validation, archive audit
-and visual review complete; ready as an unpublished draft review candidate.
-No pack release, merge or catalogue change is published.
+and visual review complete. The owner subsequently authorized merging PR #16;
+it is merged into `fix/native-ui-0.16.1` at
+`8addaa1278c535e4931eb0b2b85b8f47b51ddd66`. The merge tree exactly matches the
+reviewed delivery tree. No release or catalogue change is published. See the
+[merge receipt](evidence/prodigal-fasttree-merge-2026-10-13.json).
 
-Review: [draft PR #16](https://github.com/comparativechrono/workbench/pull/16),
+Review: [merged PR #16](https://github.com/comparativechrono/workbench/pull/16),
 stacked on the unmerged wrapped-library PR #15.
 
 ## Source and scope

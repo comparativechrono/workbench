@@ -1,13 +1,43 @@
 # Development roadmap
 
-## Completed review candidate: Prodigal and FastTree optional packs, 2026-10-13
+## Active review: Primer3 and PLINK2 optional packs, 2026-10-13
+
+The owner requested this next stage after the reviewed Kalign candidate. The
+initial scope is standard Primer3 PCR primer-pair design and PLINK2 hardcall
+allele/genotype counts and missingness summaries, with independent 1.0.0 packs.
+PCA, association testing and additional Primer3 modes remain later interfaces.
+Development is stacked on the unchanged Kalign review branch; PR #17 remains
+unmerged. Implementation, exact Windows validation in both path cases, source
+audit and 38-image actual-display review are complete in
+[draft PR #18](https://github.com/comparativechrono/workbench/pull/18). See the
+[batch handover](primer3-plink2-handover.md) for bounded contracts, exact downloads
+and evidence. Native Results measurement parsing and broader acceptance remain
+outstanding; no application change or publication is included.
+
+## Previous set: Kalign optional pack, 2026-10-13
+
+The owner authorized merging PR #16 and starting Kalign. The first batch is
+merged into `fix/native-ui-0.16.1` at `8addaa1278c535e4931eb0b2b85b8f47b51ddd66`;
+no release or catalogue publication followed. Kalign development starts from
+that exact merged tree on `feature/kalign-pack`.
+
+The first Kalign interface is a separate **1.0.0** pack for nucleotide and protein
+multiple-sequence alignment, with exact upstream source, native Windows builds,
+scientific fixtures and typed outputs for downstream FastTree. Implementation,
+exact Windows gates in both path cases, downloaded source audit and 20-image
+review are complete in [draft PR #17](https://github.com/comparativechrono/workbench/pull/17).
+The [Kalign handover](kalign-handover.md) records tested source, downloads,
+initial correction and limits. Kalign remains unmerged and unpublished.
+Benchmarking remains separate.
+
+## Merged development: Prodigal and FastTree optional packs, 2026-10-13
 
 The owner approved the first small batch from the requested tool inventory:
 **Prodigal** gene prediction and **FastTree** phylogenetic inference. Both start
 as independent **1.0.0** pack candidates; no application version change is
 required. Development is based on the existing wrapped-library candidate at
 `2b2e97aa15970f0e7fb3a5428e8ab7dad6acada2`, preserving draft PR #15.
-Both are implemented and ready in [draft PR #16](https://github.com/comparativechrono/workbench/pull/16).
+Both are implemented and merged in [PR #16](https://github.com/comparativechrono/workbench/pull/16).
 Source and exact-archive native science passed, including both Windows path
 cases, real MUSCLE-to-FastTree graphs and Starter regressions. The frozen form
 recheck and 44-image visual review are complete. See the
@@ -21,8 +51,8 @@ Cutadapt (pack `trimming`), HISAT2, mosdepth, featureCounts, kallisto, LoFreq an
 MUSCLE. Existing classic BWA is not bwa-mem2; existing kallisto bulk operations
 do not implement bustools or single-cell BUS processing.
 
-After this batch, Kalign is the next proposed native-build investigation.
-Primer3 and PLINK2 need separately bounded operations; bustools and StringTie
+Kalign, Primer3 and PLINK2 are ready for unpublished draft review. Their initial
+bounded operations are implemented; bustools and StringTie
 need workflow integration; HMMER, bwa-mem2, Salmon and MACS3 need dedicated
 portability work. Strelka2 needs an initial feasibility and version-specific
 licensing assessment. This is a provisional engineering order, not a schedule.

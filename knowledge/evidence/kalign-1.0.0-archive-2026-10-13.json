@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "kind": "downloaded-pack-source-audit",
+  "sourceCommit": "8149bdc02a2104e97ea6512ae0a8bc76c8defc32",
+  "sourceTree": "27ecf6181bef93217a4218335311b4e2ca93fa58",
+  "nativeWindowsExecuted": false,
+  "published": false,
+  "success": true,
+  "packs": {
+    "kalign": {
+      "file": "native-workbench-pack-kalign-1.0.0.zip",
+      "bytes": 2057266,
+      "sha256": "f4c2ecb232673f5fff538155d3554712a52f3b5edc938dc04ad3202e9f2bf173",
+      "id": "kalign",
+      "version": "1.0.0",
+      "manifestSha256": "89779c41ac6b6c60eaacc3e477d20a10daedd7bd79ddf9654002d81a5e5054c7",
+      "staticValidation": {
+        "id": "kalign",
+        "name": "Kalign multiple sequence alignment",
+        "version": "1.0.0",
+        "toolVersions": {
+          "kalign": "3.5.1-workbench1",
+          "kalign-adapter": "1.0.0"
+        },
+        "description": "Align homologous nucleotide or protein sequences with explicit alphabets and recorded alignment measurements.",
+        "category": "Multiple sequence alignment",
+        "platform": "windows-x86_64",
+        "packApi": 1,
+        "minAppVersion": "0.16.0",
+        "size": 2057266,
+        "sha256": "f4c2ecb232673f5fff538155d3554712a52f3b5edc938dc04ad3202e9f2bf173",
+        "manifestSha256": "89779c41ac6b6c60eaacc3e477d20a10daedd7bd79ddf9654002d81a5e5054c7"
+      },
+      "licenceSourceFilesMatched": 21,
+      "x64ExecutablesVerified": [
+        "pack/bin/kalign.exe",
+        "pack/bin/kalign-guard.exe"
+      ],
+      "sourceCorrespondence": {
+        "retainedRecipeFilesMatchedToGit": 8,
+        "guardSourceBoundToBuild": true,
+        "builderSourceBoundToBuild": true,
+        "compatibilityHeaderBoundToBuild": true,
+        "cliOnlyPatchBoundToBuild": true,
+        "binaryHashesMatchedToBuild": 2,
+        "upstreamSourceHashesVerified": {
+          "kalign-3.5.1.tar.gz": "01bacb2205e7b6792c570b163b5ccc0713284737ba862ca3b500a96a8a4d1bd9"
+        },
+        "fixturesMatchedToGit": 6,
+        "upstreamEmbeddedNoticesVerified": 3,
+        "scope": "Byte and provenance correspondence; not independent bit-identical recompilation."
+      }
+    }
+  },
+  "sourceCompanion": {
+    "file": "native-workbench-kalign-1.0.0-source-evidence.zip",
+    "bytes": 6025727,
+    "sha256": "776e7dcd94df3c9cc342b368d51469c070491dd1ee0d437197492f67a0bd2aa4"
+  },
+  "gitSourceFilesVerified": 953,
+  "companionInventoryFilesVerified": 1103
+}
