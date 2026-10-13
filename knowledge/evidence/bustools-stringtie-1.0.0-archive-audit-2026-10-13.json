@@ -1,0 +1,132 @@
+{
+  "schema": 1,
+  "kind": "downloaded-pack-source-audit",
+  "sourceCommit": "a93b338bca5e71b89e3cd000caaba96dbec73501",
+  "sourceTree": "3b971d0c40e047d8498f2f78799420fbd255492e",
+  "nativeWindowsExecuted": false,
+  "published": false,
+  "success": true,
+  "packs": {
+    "bustools": {
+      "file": "native-workbench-pack-bustools-1.0.0.zip",
+      "bytes": 5836546,
+      "sha256": "387f7ae1b04ba8187e9e24690b5ad102aa1c9d44ce558c04b37ddf3cbf70e629",
+      "id": "bustools",
+      "version": "1.0.0",
+      "manifestSha256": "6efe81d68448338143db24e7b63625d56cbf8890a4d7330b15b789d91c672936",
+      "staticValidation": {
+        "id": "bustools",
+        "name": "bustools BUS molecule counting",
+        "version": "1.0.0",
+        "toolVersions": {
+          "bustools": "0.45.1-workbench1",
+          "bustools-adapter": "1.0.0"
+        },
+        "description": "Barcode correction, sorting and exact-UMI gene counts from a reviewed coherent BUS bundle.",
+        "category": "RNA-seq",
+        "platform": "windows-x86_64",
+        "packApi": 1,
+        "minAppVersion": "0.16.0",
+        "size": 5836546,
+        "sha256": "387f7ae1b04ba8187e9e24690b5ad102aa1c9d44ce558c04b37ddf3cbf70e629",
+        "manifestSha256": "6efe81d68448338143db24e7b63625d56cbf8890a4d7330b15b789d91c672936"
+      },
+      "licenceSourceFilesMatched": 27,
+      "x64ExecutablesVerified": [
+        "pack/bin/bustools-guard.exe",
+        "pack/bin/bustools.exe"
+      ],
+      "sourceCorrespondence": {
+        "retainedRecipeFilesMatchedToGit": 7,
+        "guardSourceBoundToBuild": true,
+        "builderSourceBoundToBuild": true,
+        "compatibilityPatchBoundToBuild": true,
+        "binaryHashesMatchedToBuild": 2,
+        "upstreamSourceHashesVerified": {
+          "bustools-0.45.1.tar.gz": "b014317ea4501c3314ac358eb074dbbe3a10ed6daec53587f17a897e670e40df",
+          "zlib-1.3.2.tar.gz": "bb329a0a2cd0274d05519d61c667c062e06990d72e125ee2dfa8de64f0119d16"
+        },
+        "fixturesMatchedToGitFactory": 6,
+        "generatedFixturesExactBytesVerified": true,
+        "upstreamEmbeddedNoticesVerified": 10,
+        "generatedConfigurationFilesVerified": 0,
+        "scope": "Byte and provenance correspondence; not independent bit-identical recompilation."
+      }
+    },
+    "stringtie": {
+      "file": "native-workbench-pack-stringtie-1.0.0.zip",
+      "bytes": 6852872,
+      "sha256": "6b24cf029ae1371d79e5cec7b39ec83314c0506c135ee59216b218c3ee88a59d",
+      "id": "stringtie",
+      "version": "1.0.0",
+      "manifestSha256": "abfc5ef62ec2b6f2fadc3d80e32cc6dbf06ca10a97fd030e91ec5641ba9f6b62",
+      "staticValidation": {
+        "id": "stringtie",
+        "name": "StringTie RNA transcript assembly and expression",
+        "version": "1.0.0",
+        "toolVersions": {
+          "stringtie": "3.0.3-workbench1",
+          "stringtie-adapter": "1.0.0"
+        },
+        "description": "Reference-guided short-read transcript assembly and reference-only expression estimates.",
+        "category": "RNA analysis",
+        "platform": "windows-x86_64",
+        "packApi": 1,
+        "minAppVersion": "0.16.0",
+        "size": 6852872,
+        "sha256": "6b24cf029ae1371d79e5cec7b39ec83314c0506c135ee59216b218c3ee88a59d",
+        "manifestSha256": "abfc5ef62ec2b6f2fadc3d80e32cc6dbf06ca10a97fd030e91ec5641ba9f6b62"
+      },
+      "licenceSourceFilesMatched": 29,
+      "x64ExecutablesVerified": [
+        "pack/bin/stringtie.exe",
+        "pack/bin/stringtie-guard.exe"
+      ],
+      "sourceCorrespondence": {
+        "retainedRecipeFilesMatchedToGit": 7,
+        "guardSourceBoundToBuild": true,
+        "builderSourceBoundToBuild": true,
+        "compatibilityPatchBoundToBuild": true,
+        "binaryHashesMatchedToBuild": 2,
+        "upstreamSourceHashesVerified": {
+          "stringtie-3.0.3.tar.gz": "52a5d94b0e85404d740d2c7a0c7cc698d373a1b8888e9a2a395ae294032d95c0",
+          "zlib-1.3.2.tar.gz": "bb329a0a2cd0274d05519d61c667c062e06990d72e125ee2dfa8de64f0119d16",
+          "tre-0.9.0.tar.gz": "5b7e5a730f041c6b0dab8f66576cda917577ec06bb393f156b169c51bca170d1"
+        },
+        "fixturesMatchedToGitFactory": 8,
+        "generatedFixturesExactBytesVerified": true,
+        "upstreamEmbeddedNoticesVerified": 6,
+        "generatedConfigurationFilesVerified": 6,
+        "scope": "Byte and provenance correspondence; not independent bit-identical recompilation."
+      }
+    }
+  },
+  "sourceCompanion": {
+    "file": "native-workbench-bustools-stringtie-1.0.0-source-evidence.zip",
+    "bytes": 13818900,
+    "sha256": "bc0af8a0eb657e0ba3a1c8281c64f41645135e389ba74febfb4a228aeaf4fe03"
+  },
+  "gitSourceFilesVerified": 1027,
+  "companionInventoryFilesVerified": 1478,
+  "stringtieLayoutDiagnostic": {
+    "archivePrefix": "build-evidence/1/stringtie-flags/",
+    "files": {
+      "flag-layout-check.exe": {
+        "bytes": 65536,
+        "sha256": "3a2e268bae5a4fa0e813f39484480e2b0bd6c6f089b9a86fe4eeaefbf97f4d61"
+      },
+      "flag-layout-check.cpp": {
+        "bytes": 4267,
+        "sha256": "58a0947452ee6c1dbfbadbeaac2d9b7866a811770e20a028865303ee6c2bb525"
+      },
+      "flag-layout-check.json": {
+        "bytes": 1088,
+        "sha256": "611066aa8fc90add1a447a4052105036831ac6afa3b5408e268e8f34f9eb491a"
+      }
+    },
+    "patchedHeaderSha256": "fa1b980f5829a8a74eb9b5962e81cbf6c5df6b14d3903662108b195a138e4da3",
+    "nativeExecutionVerified": false,
+    "scope": "Source and binary correspondence only; the separate Windows report must prove execution."
+  },
+  "retainedOriginalReceiptSha256": "ff2b482787b7dc752ca460544dfea4c7efdd6c1d82c1fbd5fb61929614acad35"
+}

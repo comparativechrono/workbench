@@ -1,0 +1,111 @@
+{
+  "schema": 1,
+  "kind": "initial-hosted-validation-failure",
+  "sourceCommit": "2044235fb0abff02c8d8259e12abf41df9647bd4",
+  "sourceTree": "9fd399d545b307da68270ee325142cf47ff767e8",
+  "run": 38412546344,
+  "url": "https://github.com/comparativechrono/workbench/actions/runs/38412546344",
+  "build": "passed",
+  "archiveSourceAudit": "passed on downloaded candidate",
+  "nativeScience": "failed in both path cases; bustools18of19selected tests passed, one CRLF test generated CR-CR-LF on Windows",
+  "nativeGUI": "failed before StringTie execution; generic per-pack validator filtered the bundled SAMtools out of its catalogue",
+  "findings": [
+    "bustools test converted already-native CRLF into CR-CR-LF; boundary guard correctly rejected malformed text. Preserve valid LF/CRLF equivalence and deliberate malformed-CR rejection.",
+    "Starter already contains bam0.4.0/SAMtools1.24. Generic isolated-pack checker removed that dependency from its tool catalogue, so correct application preflight refused StringTie checks. New batch validator retains the exact bundled helper while selecting only target checks. Alignment preflight remains unchanged."
+  ],
+  "reports": [
+    {
+      "case": "ordinary",
+      "mode": "science",
+      "success": false,
+      "completedChecks": [
+        "bustools: exact ZIP native import, declared scientific checks and duplicate-version rejection."
+      ],
+      "sha256": "1e666ca384e75d3513e2afca12aa879d5b1694dad609ce915baed12b8018b8b2",
+      "file": "ordinary/science/native.json"
+    },
+    {
+      "case": "ordinary",
+      "mode": "gui",
+      "success": false,
+      "completedChecks": [
+        "bustools: exact ZIP native import, declared scientific checks and duplicate-version rejection."
+      ],
+      "sha256": "c4e344f49abc27890beebf9137b035e6717ef2f2b43999b620e3a95794ccf2f9",
+      "file": "ordinary/gui/native.json"
+    },
+    {
+      "case": "spaces",
+      "mode": "science",
+      "success": false,
+      "completedChecks": [
+        "bustools: exact ZIP native import, declared scientific checks and duplicate-version rejection."
+      ],
+      "sha256": "4a0c1ec0926561d88b5671f5399b3e16383c45e04f808441f0cb5c227e0182fd",
+      "file": "spaces/science/native.json"
+    },
+    {
+      "case": "spaces",
+      "mode": "gui",
+      "success": false,
+      "completedChecks": [
+        "bustools: exact ZIP native import, declared scientific checks and duplicate-version rejection."
+      ],
+      "sha256": "3c34ada9b683d86b944fe1e77f18c1d3aeb8179c7ac6a1c7a8e6e80c6e01bd00",
+      "file": "spaces/gui/native.json"
+    }
+  ],
+  "candidateArchives": {
+    "bustools": {
+      "file": "native-workbench-pack-bustools-1.0.0.zip",
+      "bytes": 5836546,
+      "sha256": "387f7ae1b04ba8187e9e24690b5ad102aa1c9d44ce558c04b37ddf3cbf70e629",
+      "id": "bustools",
+      "version": "1.0.0",
+      "manifestSha256": "6efe81d68448338143db24e7b63625d56cbf8890a4d7330b15b789d91c672936",
+      "staticValidation": {
+        "id": "bustools",
+        "name": "bustools BUS molecule counting",
+        "version": "1.0.0",
+        "toolVersions": {
+          "bustools": "0.45.1-workbench1",
+          "bustools-adapter": "1.0.0"
+        },
+        "description": "Barcode correction, sorting and exact-UMI gene counts from a reviewed coherent BUS bundle.",
+        "category": "RNA-seq",
+        "platform": "windows-x86_64",
+        "packApi": 1,
+        "minAppVersion": "0.16.0",
+        "size": 5836546,
+        "sha256": "387f7ae1b04ba8187e9e24690b5ad102aa1c9d44ce558c04b37ddf3cbf70e629",
+        "manifestSha256": "6efe81d68448338143db24e7b63625d56cbf8890a4d7330b15b789d91c672936"
+      }
+    },
+    "stringtie": {
+      "file": "native-workbench-pack-stringtie-1.0.0.zip",
+      "bytes": 6846549,
+      "sha256": "8eb4c9dea2880345806b48aed8b834c0ba5a36ddb7467aef66e0ec9f5c477cc4",
+      "id": "stringtie",
+      "version": "1.0.0",
+      "manifestSha256": "ab1038ccd2a1a32d1f9a9d6a1db5e6a90a02ed55ca3fb9fad5c48fb28e63565e",
+      "staticValidation": {
+        "id": "stringtie",
+        "name": "StringTie RNA transcript assembly and expression",
+        "version": "1.0.0",
+        "toolVersions": {
+          "stringtie": "3.0.3",
+          "stringtie-adapter": "1.0.0"
+        },
+        "description": "Reference-guided short-read transcript assembly and reference-only expression estimates.",
+        "category": "RNA analysis",
+        "platform": "windows-x86_64",
+        "packApi": 1,
+        "minAppVersion": "0.16.0",
+        "size": 6846549,
+        "sha256": "8eb4c9dea2880345806b48aed8b834c0ba5a36ddb7467aef66e0ec9f5c477cc4",
+        "manifestSha256": "ab1038ccd2a1a32d1f9a9d6a1db5e6a90a02ed55ca3fb9fad5c48fb28e63565e"
+      }
+    }
+  },
+  "status": "Superseded by corrected candidate validation; failed checks are not represented as passed."
+}

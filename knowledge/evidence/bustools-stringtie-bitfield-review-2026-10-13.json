@@ -1,0 +1,269 @@
+{
+  "schema": 1,
+  "kind": "independent-stringtie-bitfield-layout-review",
+  "reviewedAtUtc": "2026-10-13T15:05:26.077371+00:00",
+  "reviewer": "bus_stringtie_review",
+  "repository": "https://github.com/comparativechrono/workbench",
+  "sourceState": "Final uncommitted correction source reviewed; exact source hashes below bind this review before the next hosted Windows candidate.",
+  "upstreamCommit": "3436ad6dfd0ffc806a94086cf747ac6ff2b0dc19",
+  "upstreamArchiveSha256": "52a5d94b0e85404d740d2c7a0c7cc698d373a1b8888e9a2a395ae294032d95c0",
+  "upstreamGffHeaderSha256": "17bcb06d3075c01a3dd72607ebb700a865304f1d67b9c2e3311fe1777cab9c17",
+  "compiler": "clang version 23.1.2 (https://github.com/llvm/llvm-project.git 85ac560262434c9ccfc0c183ec22d4138ed647fb)",
+  "compilerSha256": "bab7f174d7e136ae093ad232d5a894ee00f0a8f9051bcff4eb6a70c132898248",
+  "windowsExecutablesExecuted": false,
+  "compilerProbes": [
+    {
+      "class": "GffObj",
+      "variant": "upstream",
+      "target": "windows-x86_64",
+      "source": "struct Probe {\nunion {\n      unsigned int flags;\n      struct {\n    \t  bool flag_HAS_ERRORS        :1;\n    \t  bool flag_CHILDREN_PROMOTED :1;\n    \t  bool flag_IS_GENE           :1;\n    \t  bool flag_IS_TRANSCRIPT     :1;\n    \t  bool flag_HAS_GFF_ID        :1; //found transcript/RNA feature line (GFF3 or GTF2 with transcript line)\n    \t  bool flag_BY_EXON           :1; //created by subfeature (exon/CDS) directly\n    \t  bool flag_CDS_ONLY          :1; //transcript defined by CDS features only (GffObj::isCDS())\n    \t  bool flag_CDS_NOSTART       :1; //partial CDS at 5' end (no start codon)\n    \t  bool flag_CDS_NOSTOP        :1; //partial CDS at 3' end (no stop codon)\n    \t  bool flag_CDS_X             :1; //transcript having CDS with ribosomal shift (i.e. after merging exons)\n    \t                                  //CDS segments stored in ::cdss are incompatible with the exon segments\n    \t  bool flag_GENE_SEGMENT      :1; //a transcript-like C/D/J/V_gene_segment (NCBI's annotation)\n    \t  bool flag_TRANS_SPLICED     :1;\n    \t  bool flag_DISCONTINUOUS     :1; //discontinuous feature (e.g. cDNA_match) segments linked by same ID\n    \t  bool flag_TARGET_ONLY       :1; //Target= feature (e.g. from RepeatMasker output), lacks ID\n    \t  bool flag_DISCARDED         :1; //it will be  discarded from the final GffReader list\n    \t  bool flag_LST_KEEP          :1; //controlled by isUsed(); if set, this GffObj will not be\n    \t                                  //deallocated when GffReader is destroyed\n    \t  bool flag_FINALIZED         :1; //if finalize() was already called for this GffObj\n    \t  unsigned int gff_level      :4; //hierarchical level (0..15)\n        unsigned int flag_USER_FLAGS :8; //user flags for setUserFlag() and getUserFlag()\n      };\n   };\n};\nint size_probe=sizeof(Probe);\n",
+      "sourceSha256": "219f28db3b6924a634669306127f2a781b6a1cd5c181044bf2db5c729249e1bb",
+      "command": [
+        "/workspace/scratch/5a73a40bd3ca/workbench/build/toolchains/llvm-mingw-20260922-ucrt-ubuntu-22.04-x86_64/bin/x86_64-w64-mingw32-clang++",
+        "-std=c++11",
+        "-fsyntax-only",
+        "-Xclang",
+        "-fdump-record-layouts",
+        "-x",
+        "c++",
+        "-"
+      ],
+      "exitCode": 0,
+      "layout": "\n*** Dumping AST Record Layout\n         0 | struct Probe::(anonymous union)::(anonymous at <stdin>:4:7)\n     0:0-0 |   _Bool flag_HAS_ERRORS\n     0:1-1 |   _Bool flag_CHILDREN_PROMOTED\n     0:2-2 |   _Bool flag_IS_GENE\n     0:3-3 |   _Bool flag_IS_TRANSCRIPT\n     0:4-4 |   _Bool flag_HAS_GFF_ID\n     0:5-5 |   _Bool flag_BY_EXON\n     0:6-6 |   _Bool flag_CDS_ONLY\n     0:7-7 |   _Bool flag_CDS_NOSTART\n     1:0-0 |   _Bool flag_CDS_NOSTOP\n     1:1-1 |   _Bool flag_CDS_X\n     1:2-2 |   _Bool flag_GENE_SEGMENT\n     1:3-3 |   _Bool flag_TRANS_SPLICED\n     1:4-4 |   _Bool flag_DISCONTINUOUS\n     1:5-5 |   _Bool flag_TARGET_ONLY\n     1:6-6 |   _Bool flag_DISCARDED\n     1:7-7 |   _Bool flag_LST_KEEP\n     2:0-0 |   _Bool flag_FINALIZED\n     4:0-3 |   unsigned int gff_level\n    4:4-11 |   unsigned int flag_USER_FLAGS\n           | [sizeof=8, dsize=8, align=4,\n           |  nvsize=8, nvalign=4]\n\n*** Dumping AST Record Layout\n         0 | union Probe::(anonymous at <stdin>:2:1)\n         0 |   unsigned int flags\n         0 |   struct Probe::(anonymous union)::(anonymous at <stdin>:4:7) \n     0:0-0 |     _Bool flag_HAS_ERRORS\n     0:1-1 |     _Bool flag_CHILDREN_PROMOTED\n     0:2-2 |     _Bool flag_IS_GENE\n     0:3-3 |     _Bool flag_IS_TRANSCRIPT\n     0:4-4 |     _Bool flag_HAS_GFF_ID\n     0:5-5 |     _Bool flag_BY_EXON\n     0:6-6 |     _Bool flag_CDS_ONLY\n     0:7-7 |     _Bool flag_CDS_NOSTART\n     1:0-0 |     _Bool flag_CDS_NOSTOP\n     1:1-1 |     _Bool flag_CDS_X\n     1:2-2 |     _Bool flag_GENE_SEGMENT\n     1:3-3 |     _Bool flag_TRANS_SPLICED\n     1:4-4 |     _Bool flag_DISCONTINUOUS\n     1:5-5 |     _Bool flag_TARGET_ONLY\n     1:6-6 |     _Bool flag_DISCARDED\n     1:7-7 |     _Bool flag_LST_KEEP\n     2:0-0 |     _Bool flag_FINALIZED\n     4:0-3 |     unsigned int gff_level\n    4:4-11 |     unsigned int flag_USER_FLAGS\n           | [sizeof=8, dsize=8, align=4,\n           |  nvsize=8, nvalign=4]\n\n*** Dumping AST Record Layout\n         0 | struct Probe\n         0 |   union Probe::(anonymous at <stdin>:2:1) \n         0 |     unsigned int flags\n         0 |     struct Probe::(anonymous union)::(anonymous at <stdin>:4:7) \n     0:0-0 |       _Bool flag_HAS_ERRORS\n     0:1-1 |       _Bool flag_CHILDREN_PROMOTED\n     0:2-2 |       _Bool flag_IS_GENE\n     0:3-3 |       _Bool flag_IS_TRANSCRIPT\n     0:4-4 |       _Bool flag_HAS_GFF_ID\n     0:5-5 |       _Bool flag_BY_EXON\n     0:6-6 |       _Bool flag_CDS_ONLY\n     0:7-7 |       _Bool flag_CDS_NOSTART\n     1:0-0 |       _Bool flag_CDS_NOSTOP\n     1:1-1 |       _Bool flag_CDS_X\n     1:2-2 |       _Bool flag_GENE_SEGMENT\n     1:3-3 |       _Bool flag_TRANS_SPLICED\n     1:4-4 |       _Bool flag_DISCONTINUOUS\n     1:5-5 |       _Bool flag_TARGET_ONLY\n     1:6-6 |       _Bool flag_DISCARDED\n     1:7-7 |       _Bool flag_LST_KEEP\n     2:0-0 |       _Bool flag_FINALIZED\n     4:0-3 |       unsigned int gff_level\n    4:4-11 |       unsigned int flag_USER_FLAGS\n           | [sizeof=8, dsize=8, align=4,\n           |  nvsize=8, nvalign=4]\n",
+      "stderr": ""
+    },
+    {
+      "class": "GffObj",
+      "variant": "upstream",
+      "target": "linux-x86_64",
+      "source": "struct Probe {\nunion {\n      unsigned int flags;\n      struct {\n    \t  bool flag_HAS_ERRORS        :1;\n    \t  bool flag_CHILDREN_PROMOTED :1;\n    \t  bool flag_IS_GENE           :1;\n    \t  bool flag_IS_TRANSCRIPT     :1;\n    \t  bool flag_HAS_GFF_ID        :1; //found transcript/RNA feature line (GFF3 or GTF2 with transcript line)\n    \t  bool flag_BY_EXON           :1; //created by subfeature (exon/CDS) directly\n    \t  bool flag_CDS_ONLY          :1; //transcript defined by CDS features only (GffObj::isCDS())\n    \t  bool flag_CDS_NOSTART       :1; //partial CDS at 5' end (no start codon)\n    \t  bool flag_CDS_NOSTOP        :1; //partial CDS at 3' end (no stop codon)\n    \t  bool flag_CDS_X             :1; //transcript having CDS with ribosomal shift (i.e. after merging exons)\n    \t                                  //CDS segments stored in ::cdss are incompatible with the exon segments\n    \t  bool flag_GENE_SEGMENT      :1; //a transcript-like C/D/J/V_gene_segment (NCBI's annotation)\n    \t  bool flag_TRANS_SPLICED     :1;\n    \t  bool flag_DISCONTINUOUS     :1; //discontinuous feature (e.g. cDNA_match) segments linked by same ID\n    \t  bool flag_TARGET_ONLY       :1; //Target= feature (e.g. from RepeatMasker output), lacks ID\n    \t  bool flag_DISCARDED         :1; //it will be  discarded from the final GffReader list\n    \t  bool flag_LST_KEEP          :1; //controlled by isUsed(); if set, this GffObj will not be\n    \t                                  //deallocated when GffReader is destroyed\n    \t  bool flag_FINALIZED         :1; //if finalize() was already called for this GffObj\n    \t  unsigned int gff_level      :4; //hierarchical level (0..15)\n        unsigned int flag_USER_FLAGS :8; //user flags for setUserFlag() and getUserFlag()\n      };\n   };\n};\nint size_probe=sizeof(Probe);\n",
+      "sourceSha256": "219f28db3b6924a634669306127f2a781b6a1cd5c181044bf2db5c729249e1bb",
+      "command": [
+        "/workspace/scratch/5a73a40bd3ca/workbench/build/toolchains/llvm-mingw-20260922-ucrt-ubuntu-22.04-x86_64/bin/clang++",
+        "--target=x86_64-pc-linux-gnu",
+        "-std=c++11",
+        "-fsyntax-only",
+        "-Xclang",
+        "-fdump-record-layouts",
+        "-x",
+        "c++",
+        "-"
+      ],
+      "exitCode": 0,
+      "layout": "\n*** Dumping AST Record Layout\n         0 | struct Probe::(anonymous union)::(anonymous at <stdin>:4:7)\n     0:0-0 |   _Bool flag_HAS_ERRORS\n     0:1-1 |   _Bool flag_CHILDREN_PROMOTED\n     0:2-2 |   _Bool flag_IS_GENE\n     0:3-3 |   _Bool flag_IS_TRANSCRIPT\n     0:4-4 |   _Bool flag_HAS_GFF_ID\n     0:5-5 |   _Bool flag_BY_EXON\n     0:6-6 |   _Bool flag_CDS_ONLY\n     0:7-7 |   _Bool flag_CDS_NOSTART\n     1:0-0 |   _Bool flag_CDS_NOSTOP\n     1:1-1 |   _Bool flag_CDS_X\n     1:2-2 |   _Bool flag_GENE_SEGMENT\n     1:3-3 |   _Bool flag_TRANS_SPLICED\n     1:4-4 |   _Bool flag_DISCONTINUOUS\n     1:5-5 |   _Bool flag_TARGET_ONLY\n     1:6-6 |   _Bool flag_DISCARDED\n     1:7-7 |   _Bool flag_LST_KEEP\n     2:0-0 |   _Bool flag_FINALIZED\n     2:1-4 |   unsigned int gff_level\n    2:5-12 |   unsigned int flag_USER_FLAGS\n           | [sizeof=4, dsize=4, align=4,\n           |  nvsize=4, nvalign=4]\n\n*** Dumping AST Record Layout\n         0 | union Probe::(anonymous at <stdin>:2:1)\n         0 |   unsigned int flags\n         0 |   struct Probe::(anonymous union)::(anonymous at <stdin>:4:7) \n     0:0-0 |     _Bool flag_HAS_ERRORS\n     0:1-1 |     _Bool flag_CHILDREN_PROMOTED\n     0:2-2 |     _Bool flag_IS_GENE\n     0:3-3 |     _Bool flag_IS_TRANSCRIPT\n     0:4-4 |     _Bool flag_HAS_GFF_ID\n     0:5-5 |     _Bool flag_BY_EXON\n     0:6-6 |     _Bool flag_CDS_ONLY\n     0:7-7 |     _Bool flag_CDS_NOSTART\n     1:0-0 |     _Bool flag_CDS_NOSTOP\n     1:1-1 |     _Bool flag_CDS_X\n     1:2-2 |     _Bool flag_GENE_SEGMENT\n     1:3-3 |     _Bool flag_TRANS_SPLICED\n     1:4-4 |     _Bool flag_DISCONTINUOUS\n     1:5-5 |     _Bool flag_TARGET_ONLY\n     1:6-6 |     _Bool flag_DISCARDED\n     1:7-7 |     _Bool flag_LST_KEEP\n     2:0-0 |     _Bool flag_FINALIZED\n     2:1-4 |     unsigned int gff_level\n    2:5-12 |     unsigned int flag_USER_FLAGS\n           | [sizeof=4, dsize=4, align=4,\n           |  nvsize=4, nvalign=4]\n\n*** Dumping AST Record Layout\n         0 | struct Probe\n         0 |   union Probe::(anonymous at <stdin>:2:1) \n         0 |     unsigned int flags\n         0 |     struct Probe::(anonymous union)::(anonymous at <stdin>:4:7) \n     0:0-0 |       _Bool flag_HAS_ERRORS\n     0:1-1 |       _Bool flag_CHILDREN_PROMOTED\n     0:2-2 |       _Bool flag_IS_GENE\n     0:3-3 |       _Bool flag_IS_TRANSCRIPT\n     0:4-4 |       _Bool flag_HAS_GFF_ID\n     0:5-5 |       _Bool flag_BY_EXON\n     0:6-6 |       _Bool flag_CDS_ONLY\n     0:7-7 |       _Bool flag_CDS_NOSTART\n     1:0-0 |       _Bool flag_CDS_NOSTOP\n     1:1-1 |       _Bool flag_CDS_X\n     1:2-2 |       _Bool flag_GENE_SEGMENT\n     1:3-3 |       _Bool flag_TRANS_SPLICED\n     1:4-4 |       _Bool flag_DISCONTINUOUS\n     1:5-5 |       _Bool flag_TARGET_ONLY\n     1:6-6 |       _Bool flag_DISCARDED\n     1:7-7 |       _Bool flag_LST_KEEP\n     2:0-0 |       _Bool flag_FINALIZED\n     2:1-4 |       unsigned int gff_level\n    2:5-12 |       unsigned int flag_USER_FLAGS\n           | [sizeof=4, dsize=4, align=4,\n           |  nvsize=4, nvalign=4]\n",
+      "stderr": ""
+    },
+    {
+      "class": "GffObj",
+      "variant": "proposed_17_uniform_unsigned_bitfields",
+      "target": "windows-x86_64",
+      "source": "struct Probe {\nunion {\n      unsigned int flags;\n      struct {\n    \t  unsigned int flag_HAS_ERRORS        :1;\n    \t  unsigned int flag_CHILDREN_PROMOTED :1;\n    \t  unsigned int flag_IS_GENE           :1;\n    \t  unsigned int flag_IS_TRANSCRIPT     :1;\n    \t  unsigned int flag_HAS_GFF_ID        :1; //found transcript/RNA feature line (GFF3 or GTF2 with transcript line)\n    \t  unsigned int flag_BY_EXON           :1; //created by subfeature (exon/CDS) directly\n    \t  unsigned int flag_CDS_ONLY          :1; //transcript defined by CDS features only (GffObj::isCDS())\n    \t  unsigned int flag_CDS_NOSTART       :1; //partial CDS at 5' end (no start codon)\n    \t  unsigned int flag_CDS_NOSTOP        :1; //partial CDS at 3' end (no stop codon)\n    \t  unsigned int flag_CDS_X             :1; //transcript having CDS with ribosomal shift (i.e. after merging exons)\n    \t                                  //CDS segments stored in ::cdss are incompatible with the exon segments\n    \t  unsigned int flag_GENE_SEGMENT      :1; //a transcript-like C/D/J/V_gene_segment (NCBI's annotation)\n    \t  unsigned int flag_TRANS_SPLICED     :1;\n    \t  unsigned int flag_DISCONTINUOUS     :1; //discontinuous feature (e.g. cDNA_match) segments linked by same ID\n    \t  unsigned int flag_TARGET_ONLY       :1; //Target= feature (e.g. from RepeatMasker output), lacks ID\n    \t  unsigned int flag_DISCARDED         :1; //it will be  discarded from the final GffReader list\n    \t  unsigned int flag_LST_KEEP          :1; //controlled by isUsed(); if set, this GffObj will not be\n    \t                                  //deallocated when GffReader is destroyed\n    \t  unsigned int flag_FINALIZED         :1; //if finalize() was already called for this GffObj\n    \t  unsigned int gff_level      :4; //hierarchical level (0..15)\n        unsigned int flag_USER_FLAGS :8; //user flags for setUserFlag() and getUserFlag()\n      };\n   };\n};\nint size_probe=sizeof(Probe);\n",
+      "sourceSha256": "c3ca0d0a4dade27e79209c04039d464c0be3786368122ba7ffe2290a93ef466a",
+      "command": [
+        "/workspace/scratch/5a73a40bd3ca/workbench/build/toolchains/llvm-mingw-20260922-ucrt-ubuntu-22.04-x86_64/bin/x86_64-w64-mingw32-clang++",
+        "-std=c++11",
+        "-fsyntax-only",
+        "-Xclang",
+        "-fdump-record-layouts",
+        "-x",
+        "c++",
+        "-"
+      ],
+      "exitCode": 0,
+      "layout": "\n*** Dumping AST Record Layout\n         0 | struct Probe::(anonymous union)::(anonymous at <stdin>:4:7)\n     0:0-0 |   unsigned int flag_HAS_ERRORS\n     0:1-1 |   unsigned int flag_CHILDREN_PROMOTED\n     0:2-2 |   unsigned int flag_IS_GENE\n     0:3-3 |   unsigned int flag_IS_TRANSCRIPT\n     0:4-4 |   unsigned int flag_HAS_GFF_ID\n     0:5-5 |   unsigned int flag_BY_EXON\n     0:6-6 |   unsigned int flag_CDS_ONLY\n     0:7-7 |   unsigned int flag_CDS_NOSTART\n     1:0-0 |   unsigned int flag_CDS_NOSTOP\n     1:1-1 |   unsigned int flag_CDS_X\n     1:2-2 |   unsigned int flag_GENE_SEGMENT\n     1:3-3 |   unsigned int flag_TRANS_SPLICED\n     1:4-4 |   unsigned int flag_DISCONTINUOUS\n     1:5-5 |   unsigned int flag_TARGET_ONLY\n     1:6-6 |   unsigned int flag_DISCARDED\n     1:7-7 |   unsigned int flag_LST_KEEP\n     2:0-0 |   unsigned int flag_FINALIZED\n     2:1-4 |   unsigned int gff_level\n    2:5-12 |   unsigned int flag_USER_FLAGS\n           | [sizeof=4, dsize=4, align=4,\n           |  nvsize=4, nvalign=4]\n\n*** Dumping AST Record Layout\n         0 | union Probe::(anonymous at <stdin>:2:1)\n         0 |   unsigned int flags\n         0 |   struct Probe::(anonymous union)::(anonymous at <stdin>:4:7) \n     0:0-0 |     unsigned int flag_HAS_ERRORS\n     0:1-1 |     unsigned int flag_CHILDREN_PROMOTED\n     0:2-2 |     unsigned int flag_IS_GENE\n     0:3-3 |     unsigned int flag_IS_TRANSCRIPT\n     0:4-4 |     unsigned int flag_HAS_GFF_ID\n     0:5-5 |     unsigned int flag_BY_EXON\n     0:6-6 |     unsigned int flag_CDS_ONLY\n     0:7-7 |     unsigned int flag_CDS_NOSTART\n     1:0-0 |     unsigned int flag_CDS_NOSTOP\n     1:1-1 |     unsigned int flag_CDS_X\n     1:2-2 |     unsigned int flag_GENE_SEGMENT\n     1:3-3 |     unsigned int flag_TRANS_SPLICED\n     1:4-4 |     unsigned int flag_DISCONTINUOUS\n     1:5-5 |     unsigned int flag_TARGET_ONLY\n     1:6-6 |     unsigned int flag_DISCARDED\n     1:7-7 |     unsigned int flag_LST_KEEP\n     2:0-0 |     unsigned int flag_FINALIZED\n     2:1-4 |     unsigned int gff_level\n    2:5-12 |     unsigned int flag_USER_FLAGS\n           | [sizeof=4, dsize=4, align=4,\n           |  nvsize=4, nvalign=4]\n\n*** Dumping AST Record Layout\n         0 | struct Probe\n         0 |   union Probe::(anonymous at <stdin>:2:1) \n         0 |     unsigned int flags\n         0 |     struct Probe::(anonymous union)::(anonymous at <stdin>:4:7) \n     0:0-0 |       unsigned int flag_HAS_ERRORS\n     0:1-1 |       unsigned int flag_CHILDREN_PROMOTED\n     0:2-2 |       unsigned int flag_IS_GENE\n     0:3-3 |       unsigned int flag_IS_TRANSCRIPT\n     0:4-4 |       unsigned int flag_HAS_GFF_ID\n     0:5-5 |       unsigned int flag_BY_EXON\n     0:6-6 |       unsigned int flag_CDS_ONLY\n     0:7-7 |       unsigned int flag_CDS_NOSTART\n     1:0-0 |       unsigned int flag_CDS_NOSTOP\n     1:1-1 |       unsigned int flag_CDS_X\n     1:2-2 |       unsigned int flag_GENE_SEGMENT\n     1:3-3 |       unsigned int flag_TRANS_SPLICED\n     1:4-4 |       unsigned int flag_DISCONTINUOUS\n     1:5-5 |       unsigned int flag_TARGET_ONLY\n     1:6-6 |       unsigned int flag_DISCARDED\n     1:7-7 |       unsigned int flag_LST_KEEP\n     2:0-0 |       unsigned int flag_FINALIZED\n     2:1-4 |       unsigned int gff_level\n    2:5-12 |       unsigned int flag_USER_FLAGS\n           | [sizeof=4, dsize=4, align=4,\n           |  nvsize=4, nvalign=4]\n",
+      "stderr": ""
+    },
+    {
+      "class": "GffObj",
+      "variant": "proposed_17_uniform_unsigned_bitfields",
+      "target": "linux-x86_64",
+      "source": "struct Probe {\nunion {\n      unsigned int flags;\n      struct {\n    \t  unsigned int flag_HAS_ERRORS        :1;\n    \t  unsigned int flag_CHILDREN_PROMOTED :1;\n    \t  unsigned int flag_IS_GENE           :1;\n    \t  unsigned int flag_IS_TRANSCRIPT     :1;\n    \t  unsigned int flag_HAS_GFF_ID        :1; //found transcript/RNA feature line (GFF3 or GTF2 with transcript line)\n    \t  unsigned int flag_BY_EXON           :1; //created by subfeature (exon/CDS) directly\n    \t  unsigned int flag_CDS_ONLY          :1; //transcript defined by CDS features only (GffObj::isCDS())\n    \t  unsigned int flag_CDS_NOSTART       :1; //partial CDS at 5' end (no start codon)\n    \t  unsigned int flag_CDS_NOSTOP        :1; //partial CDS at 3' end (no stop codon)\n    \t  unsigned int flag_CDS_X             :1; //transcript having CDS with ribosomal shift (i.e. after merging exons)\n    \t                                  //CDS segments stored in ::cdss are incompatible with the exon segments\n    \t  unsigned int flag_GENE_SEGMENT      :1; //a transcript-like C/D/J/V_gene_segment (NCBI's annotation)\n    \t  unsigned int flag_TRANS_SPLICED     :1;\n    \t  unsigned int flag_DISCONTINUOUS     :1; //discontinuous feature (e.g. cDNA_match) segments linked by same ID\n    \t  unsigned int flag_TARGET_ONLY       :1; //Target= feature (e.g. from RepeatMasker output), lacks ID\n    \t  unsigned int flag_DISCARDED         :1; //it will be  discarded from the final GffReader list\n    \t  unsigned int flag_LST_KEEP          :1; //controlled by isUsed(); if set, this GffObj will not be\n    \t                                  //deallocated when GffReader is destroyed\n    \t  unsigned int flag_FINALIZED         :1; //if finalize() was already called for this GffObj\n    \t  unsigned int gff_level      :4; //hierarchical level (0..15)\n        unsigned int flag_USER_FLAGS :8; //user flags for setUserFlag() and getUserFlag()\n      };\n   };\n};\nint size_probe=sizeof(Probe);\n",
+      "sourceSha256": "c3ca0d0a4dade27e79209c04039d464c0be3786368122ba7ffe2290a93ef466a",
+      "command": [
+        "/workspace/scratch/5a73a40bd3ca/workbench/build/toolchains/llvm-mingw-20260922-ucrt-ubuntu-22.04-x86_64/bin/clang++",
+        "--target=x86_64-pc-linux-gnu",
+        "-std=c++11",
+        "-fsyntax-only",
+        "-Xclang",
+        "-fdump-record-layouts",
+        "-x",
+        "c++",
+        "-"
+      ],
+      "exitCode": 0,
+      "layout": "\n*** Dumping AST Record Layout\n         0 | struct Probe::(anonymous union)::(anonymous at <stdin>:4:7)\n     0:0-0 |   unsigned int flag_HAS_ERRORS\n     0:1-1 |   unsigned int flag_CHILDREN_PROMOTED\n     0:2-2 |   unsigned int flag_IS_GENE\n     0:3-3 |   unsigned int flag_IS_TRANSCRIPT\n     0:4-4 |   unsigned int flag_HAS_GFF_ID\n     0:5-5 |   unsigned int flag_BY_EXON\n     0:6-6 |   unsigned int flag_CDS_ONLY\n     0:7-7 |   unsigned int flag_CDS_NOSTART\n     1:0-0 |   unsigned int flag_CDS_NOSTOP\n     1:1-1 |   unsigned int flag_CDS_X\n     1:2-2 |   unsigned int flag_GENE_SEGMENT\n     1:3-3 |   unsigned int flag_TRANS_SPLICED\n     1:4-4 |   unsigned int flag_DISCONTINUOUS\n     1:5-5 |   unsigned int flag_TARGET_ONLY\n     1:6-6 |   unsigned int flag_DISCARDED\n     1:7-7 |   unsigned int flag_LST_KEEP\n     2:0-0 |   unsigned int flag_FINALIZED\n     2:1-4 |   unsigned int gff_level\n    2:5-12 |   unsigned int flag_USER_FLAGS\n           | [sizeof=4, dsize=4, align=4,\n           |  nvsize=4, nvalign=4]\n\n*** Dumping AST Record Layout\n         0 | union Probe::(anonymous at <stdin>:2:1)\n         0 |   unsigned int flags\n         0 |   struct Probe::(anonymous union)::(anonymous at <stdin>:4:7) \n     0:0-0 |     unsigned int flag_HAS_ERRORS\n     0:1-1 |     unsigned int flag_CHILDREN_PROMOTED\n     0:2-2 |     unsigned int flag_IS_GENE\n     0:3-3 |     unsigned int flag_IS_TRANSCRIPT\n     0:4-4 |     unsigned int flag_HAS_GFF_ID\n     0:5-5 |     unsigned int flag_BY_EXON\n     0:6-6 |     unsigned int flag_CDS_ONLY\n     0:7-7 |     unsigned int flag_CDS_NOSTART\n     1:0-0 |     unsigned int flag_CDS_NOSTOP\n     1:1-1 |     unsigned int flag_CDS_X\n     1:2-2 |     unsigned int flag_GENE_SEGMENT\n     1:3-3 |     unsigned int flag_TRANS_SPLICED\n     1:4-4 |     unsigned int flag_DISCONTINUOUS\n     1:5-5 |     unsigned int flag_TARGET_ONLY\n     1:6-6 |     unsigned int flag_DISCARDED\n     1:7-7 |     unsigned int flag_LST_KEEP\n     2:0-0 |     unsigned int flag_FINALIZED\n     2:1-4 |     unsigned int gff_level\n    2:5-12 |     unsigned int flag_USER_FLAGS\n           | [sizeof=4, dsize=4, align=4,\n           |  nvsize=4, nvalign=4]\n\n*** Dumping AST Record Layout\n         0 | struct Probe\n         0 |   union Probe::(anonymous at <stdin>:2:1) \n         0 |     unsigned int flags\n         0 |     struct Probe::(anonymous union)::(anonymous at <stdin>:4:7) \n     0:0-0 |       unsigned int flag_HAS_ERRORS\n     0:1-1 |       unsigned int flag_CHILDREN_PROMOTED\n     0:2-2 |       unsigned int flag_IS_GENE\n     0:3-3 |       unsigned int flag_IS_TRANSCRIPT\n     0:4-4 |       unsigned int flag_HAS_GFF_ID\n     0:5-5 |       unsigned int flag_BY_EXON\n     0:6-6 |       unsigned int flag_CDS_ONLY\n     0:7-7 |       unsigned int flag_CDS_NOSTART\n     1:0-0 |       unsigned int flag_CDS_NOSTOP\n     1:1-1 |       unsigned int flag_CDS_X\n     1:2-2 |       unsigned int flag_GENE_SEGMENT\n     1:3-3 |       unsigned int flag_TRANS_SPLICED\n     1:4-4 |       unsigned int flag_DISCONTINUOUS\n     1:5-5 |       unsigned int flag_TARGET_ONLY\n     1:6-6 |       unsigned int flag_DISCARDED\n     1:7-7 |       unsigned int flag_LST_KEEP\n     2:0-0 |       unsigned int flag_FINALIZED\n     2:1-4 |       unsigned int gff_level\n    2:5-12 |       unsigned int flag_USER_FLAGS\n           | [sizeof=4, dsize=4, align=4,\n           |  nvsize=4, nvalign=4]\n",
+      "stderr": ""
+    },
+    {
+      "class": "GffAttr",
+      "variant": "upstream",
+      "target": "windows-x86_64",
+      "source": "struct Probe {\nunion {\n    int id_full;\n    struct {\n      bool      cds:1;\n      int  attr_id:31;\n    };\n  };\n};\nint size_probe=sizeof(Probe);\n",
+      "sourceSha256": "821f8c8fd8f41b0593a3e3033a4860b9154f5e17b844de567664f391a316b1e1",
+      "command": [
+        "/workspace/scratch/5a73a40bd3ca/workbench/build/toolchains/llvm-mingw-20260922-ucrt-ubuntu-22.04-x86_64/bin/x86_64-w64-mingw32-clang++",
+        "-std=c++11",
+        "-fsyntax-only",
+        "-Xclang",
+        "-fdump-record-layouts",
+        "-x",
+        "c++",
+        "-"
+      ],
+      "exitCode": 0,
+      "layout": "\n*** Dumping AST Record Layout\n         0 | struct Probe::(anonymous union)::(anonymous at <stdin>:4:5)\n     0:0-0 |   _Bool cds\n    4:0-30 |   int attr_id\n           | [sizeof=8, dsize=8, align=4,\n           |  nvsize=8, nvalign=4]\n\n*** Dumping AST Record Layout\n         0 | union Probe::(anonymous at <stdin>:2:1)\n         0 |   int id_full\n         0 |   struct Probe::(anonymous union)::(anonymous at <stdin>:4:5) \n     0:0-0 |     _Bool cds\n    4:0-30 |     int attr_id\n           | [sizeof=8, dsize=8, align=4,\n           |  nvsize=8, nvalign=4]\n\n*** Dumping AST Record Layout\n         0 | struct Probe\n         0 |   union Probe::(anonymous at <stdin>:2:1) \n         0 |     int id_full\n         0 |     struct Probe::(anonymous union)::(anonymous at <stdin>:4:5) \n     0:0-0 |       _Bool cds\n    4:0-30 |       int attr_id\n           | [sizeof=8, dsize=8, align=4,\n           |  nvsize=8, nvalign=4]\n",
+      "stderr": ""
+    },
+    {
+      "class": "GffAttr",
+      "variant": "upstream",
+      "target": "linux-x86_64",
+      "source": "struct Probe {\nunion {\n    int id_full;\n    struct {\n      bool      cds:1;\n      int  attr_id:31;\n    };\n  };\n};\nint size_probe=sizeof(Probe);\n",
+      "sourceSha256": "821f8c8fd8f41b0593a3e3033a4860b9154f5e17b844de567664f391a316b1e1",
+      "command": [
+        "/workspace/scratch/5a73a40bd3ca/workbench/build/toolchains/llvm-mingw-20260922-ucrt-ubuntu-22.04-x86_64/bin/clang++",
+        "--target=x86_64-pc-linux-gnu",
+        "-std=c++11",
+        "-fsyntax-only",
+        "-Xclang",
+        "-fdump-record-layouts",
+        "-x",
+        "c++",
+        "-"
+      ],
+      "exitCode": 0,
+      "layout": "\n*** Dumping AST Record Layout\n         0 | struct Probe::(anonymous union)::(anonymous at <stdin>:4:5)\n     0:0-0 |   _Bool cds\n    0:1-31 |   int attr_id\n           | [sizeof=4, dsize=4, align=4,\n           |  nvsize=4, nvalign=4]\n\n*** Dumping AST Record Layout\n         0 | union Probe::(anonymous at <stdin>:2:1)\n         0 |   int id_full\n         0 |   struct Probe::(anonymous union)::(anonymous at <stdin>:4:5) \n     0:0-0 |     _Bool cds\n    0:1-31 |     int attr_id\n           | [sizeof=4, dsize=4, align=4,\n           |  nvsize=4, nvalign=4]\n\n*** Dumping AST Record Layout\n         0 | struct Probe\n         0 |   union Probe::(anonymous at <stdin>:2:1) \n         0 |     int id_full\n         0 |     struct Probe::(anonymous union)::(anonymous at <stdin>:4:5) \n     0:0-0 |       _Bool cds\n    0:1-31 |       int attr_id\n           | [sizeof=4, dsize=4, align=4,\n           |  nvsize=4, nvalign=4]\n",
+      "stderr": ""
+    },
+    {
+      "class": "GffReader",
+      "variant": "upstream",
+      "target": "windows-x86_64",
+      "source": "struct Probe {\nunion {\n\tunsigned int flags;\n    unsigned int gff_type: 6;\n    struct {\n       bool is_gff3: 1;  //GFF3 syntax was detected\n       bool is_gtf:1; //GTF syntax was detected\n       bool gtf_transcript:1; //has \"transcript\" features (2-level GTF)\n       bool gtf_gene:1; //has \"gene\" features (3-level GTF ..Ensembl?)\n       bool is_BED:1; //input is BED-12 format, possibly with attributes in 13th field\n       bool is_TLF:1; //input is GFF3-like Transcript Line Format with exons= attribute\n       //--other flags\n       bool transcripts_Only:1; //default ; only keep recognized transcript features\n       bool keep_Genes:1; //for transcriptsOnly, do not discard genes from gflst\n       bool keep_Attrs:1;\n       bool keep_AllExonAttrs:1; //when keep_Attrs, do not attempt to reduce exon attributes\n       bool noExonAttrs:1;\n       bool ignoreLocus:1; //discard locus features and attributes from input\n       bool merge_CloseExons:1;\n       bool gene2exon:1;\n       bool sortByLoc:1; //if records should be sorted by location\n       bool refAlphaSort:1; //if sortByLoc, reference sequences are\n                       // sorted lexically instead of their id#\n       //Ensembl ID processing:\n       bool xEnsemblID:1; //for ensemble GTF merge gene_version and transcript_version into the ID\n                //for ensemble GFF3, cannot merge version (!), just remove \"transcript:\" and \"gene:\" prefixes\n       bool gff_warns:1;\n    };\n  };\n};\nint size_probe=sizeof(Probe);\n",
+      "sourceSha256": "1e66f7feceb0e0eee81a96a895b6906e7c3a08399c69a26ab92f29b3500e3dbf",
+      "command": [
+        "/workspace/scratch/5a73a40bd3ca/workbench/build/toolchains/llvm-mingw-20260922-ucrt-ubuntu-22.04-x86_64/bin/x86_64-w64-mingw32-clang++",
+        "-std=c++11",
+        "-fsyntax-only",
+        "-Xclang",
+        "-fdump-record-layouts",
+        "-x",
+        "c++",
+        "-"
+      ],
+      "exitCode": 0,
+      "layout": "\n*** Dumping AST Record Layout\n         0 | struct Probe::(anonymous union)::(anonymous at <stdin>:5:5)\n     0:0-0 |   _Bool is_gff3\n     0:1-1 |   _Bool is_gtf\n     0:2-2 |   _Bool gtf_transcript\n     0:3-3 |   _Bool gtf_gene\n     0:4-4 |   _Bool is_BED\n     0:5-5 |   _Bool is_TLF\n     0:6-6 |   _Bool transcripts_Only\n     0:7-7 |   _Bool keep_Genes\n     1:0-0 |   _Bool keep_Attrs\n     1:1-1 |   _Bool keep_AllExonAttrs\n     1:2-2 |   _Bool noExonAttrs\n     1:3-3 |   _Bool ignoreLocus\n     1:4-4 |   _Bool merge_CloseExons\n     1:5-5 |   _Bool gene2exon\n     1:6-6 |   _Bool sortByLoc\n     1:7-7 |   _Bool refAlphaSort\n     2:0-0 |   _Bool xEnsemblID\n     2:1-1 |   _Bool gff_warns\n           | [sizeof=3, dsize=3, align=1,\n           |  nvsize=3, nvalign=1]\n\n*** Dumping AST Record Layout\n         0 | union Probe::(anonymous at <stdin>:2:1)\n         0 |   unsigned int flags\n     0:0-5 |   unsigned int gff_type\n         0 |   struct Probe::(anonymous union)::(anonymous at <stdin>:5:5) \n     0:0-0 |     _Bool is_gff3\n     0:1-1 |     _Bool is_gtf\n     0:2-2 |     _Bool gtf_transcript\n     0:3-3 |     _Bool gtf_gene\n     0:4-4 |     _Bool is_BED\n     0:5-5 |     _Bool is_TLF\n     0:6-6 |     _Bool transcripts_Only\n     0:7-7 |     _Bool keep_Genes\n     1:0-0 |     _Bool keep_Attrs\n     1:1-1 |     _Bool keep_AllExonAttrs\n     1:2-2 |     _Bool noExonAttrs\n     1:3-3 |     _Bool ignoreLocus\n     1:4-4 |     _Bool merge_CloseExons\n     1:5-5 |     _Bool gene2exon\n     1:6-6 |     _Bool sortByLoc\n     1:7-7 |     _Bool refAlphaSort\n     2:0-0 |     _Bool xEnsemblID\n     2:1-1 |     _Bool gff_warns\n           | [sizeof=4, dsize=4, align=4,\n           |  nvsize=4, nvalign=4]\n\n*** Dumping AST Record Layout\n         0 | struct Probe\n         0 |   union Probe::(anonymous at <stdin>:2:1) \n         0 |     unsigned int flags\n     0:0-5 |     unsigned int gff_type\n         0 |     struct Probe::(anonymous union)::(anonymous at <stdin>:5:5) \n     0:0-0 |       _Bool is_gff3\n     0:1-1 |       _Bool is_gtf\n     0:2-2 |       _Bool gtf_transcript\n     0:3-3 |       _Bool gtf_gene\n     0:4-4 |       _Bool is_BED\n     0:5-5 |       _Bool is_TLF\n     0:6-6 |       _Bool transcripts_Only\n     0:7-7 |       _Bool keep_Genes\n     1:0-0 |       _Bool keep_Attrs\n     1:1-1 |       _Bool keep_AllExonAttrs\n     1:2-2 |       _Bool noExonAttrs\n     1:3-3 |       _Bool ignoreLocus\n     1:4-4 |       _Bool merge_CloseExons\n     1:5-5 |       _Bool gene2exon\n     1:6-6 |       _Bool sortByLoc\n     1:7-7 |       _Bool refAlphaSort\n     2:0-0 |       _Bool xEnsemblID\n     2:1-1 |       _Bool gff_warns\n           | [sizeof=4, dsize=4, align=4,\n           |  nvsize=4, nvalign=4]\n",
+      "stderr": ""
+    },
+    {
+      "class": "GffReader",
+      "variant": "upstream",
+      "target": "linux-x86_64",
+      "source": "struct Probe {\nunion {\n\tunsigned int flags;\n    unsigned int gff_type: 6;\n    struct {\n       bool is_gff3: 1;  //GFF3 syntax was detected\n       bool is_gtf:1; //GTF syntax was detected\n       bool gtf_transcript:1; //has \"transcript\" features (2-level GTF)\n       bool gtf_gene:1; //has \"gene\" features (3-level GTF ..Ensembl?)\n       bool is_BED:1; //input is BED-12 format, possibly with attributes in 13th field\n       bool is_TLF:1; //input is GFF3-like Transcript Line Format with exons= attribute\n       //--other flags\n       bool transcripts_Only:1; //default ; only keep recognized transcript features\n       bool keep_Genes:1; //for transcriptsOnly, do not discard genes from gflst\n       bool keep_Attrs:1;\n       bool keep_AllExonAttrs:1; //when keep_Attrs, do not attempt to reduce exon attributes\n       bool noExonAttrs:1;\n       bool ignoreLocus:1; //discard locus features and attributes from input\n       bool merge_CloseExons:1;\n       bool gene2exon:1;\n       bool sortByLoc:1; //if records should be sorted by location\n       bool refAlphaSort:1; //if sortByLoc, reference sequences are\n                       // sorted lexically instead of their id#\n       //Ensembl ID processing:\n       bool xEnsemblID:1; //for ensemble GTF merge gene_version and transcript_version into the ID\n                //for ensemble GFF3, cannot merge version (!), just remove \"transcript:\" and \"gene:\" prefixes\n       bool gff_warns:1;\n    };\n  };\n};\nint size_probe=sizeof(Probe);\n",
+      "sourceSha256": "1e66f7feceb0e0eee81a96a895b6906e7c3a08399c69a26ab92f29b3500e3dbf",
+      "command": [
+        "/workspace/scratch/5a73a40bd3ca/workbench/build/toolchains/llvm-mingw-20260922-ucrt-ubuntu-22.04-x86_64/bin/clang++",
+        "--target=x86_64-pc-linux-gnu",
+        "-std=c++11",
+        "-fsyntax-only",
+        "-Xclang",
+        "-fdump-record-layouts",
+        "-x",
+        "c++",
+        "-"
+      ],
+      "exitCode": 0,
+      "layout": "\n*** Dumping AST Record Layout\n         0 | struct Probe::(anonymous union)::(anonymous at <stdin>:5:5)\n     0:0-0 |   _Bool is_gff3\n     0:1-1 |   _Bool is_gtf\n     0:2-2 |   _Bool gtf_transcript\n     0:3-3 |   _Bool gtf_gene\n     0:4-4 |   _Bool is_BED\n     0:5-5 |   _Bool is_TLF\n     0:6-6 |   _Bool transcripts_Only\n     0:7-7 |   _Bool keep_Genes\n     1:0-0 |   _Bool keep_Attrs\n     1:1-1 |   _Bool keep_AllExonAttrs\n     1:2-2 |   _Bool noExonAttrs\n     1:3-3 |   _Bool ignoreLocus\n     1:4-4 |   _Bool merge_CloseExons\n     1:5-5 |   _Bool gene2exon\n     1:6-6 |   _Bool sortByLoc\n     1:7-7 |   _Bool refAlphaSort\n     2:0-0 |   _Bool xEnsemblID\n     2:1-1 |   _Bool gff_warns\n           | [sizeof=3, dsize=3, align=1,\n           |  nvsize=3, nvalign=1]\n\n*** Dumping AST Record Layout\n         0 | union Probe::(anonymous at <stdin>:2:1)\n         0 |   unsigned int flags\n     0:0-5 |   unsigned int gff_type\n         0 |   struct Probe::(anonymous union)::(anonymous at <stdin>:5:5) \n     0:0-0 |     _Bool is_gff3\n     0:1-1 |     _Bool is_gtf\n     0:2-2 |     _Bool gtf_transcript\n     0:3-3 |     _Bool gtf_gene\n     0:4-4 |     _Bool is_BED\n     0:5-5 |     _Bool is_TLF\n     0:6-6 |     _Bool transcripts_Only\n     0:7-7 |     _Bool keep_Genes\n     1:0-0 |     _Bool keep_Attrs\n     1:1-1 |     _Bool keep_AllExonAttrs\n     1:2-2 |     _Bool noExonAttrs\n     1:3-3 |     _Bool ignoreLocus\n     1:4-4 |     _Bool merge_CloseExons\n     1:5-5 |     _Bool gene2exon\n     1:6-6 |     _Bool sortByLoc\n     1:7-7 |     _Bool refAlphaSort\n     2:0-0 |     _Bool xEnsemblID\n     2:1-1 |     _Bool gff_warns\n           | [sizeof=4, dsize=4, align=4,\n           |  nvsize=4, nvalign=4]\n\n*** Dumping AST Record Layout\n         0 | struct Probe\n         0 |   union Probe::(anonymous at <stdin>:2:1) \n         0 |     unsigned int flags\n     0:0-5 |     unsigned int gff_type\n         0 |     struct Probe::(anonymous union)::(anonymous at <stdin>:5:5) \n     0:0-0 |       _Bool is_gff3\n     0:1-1 |       _Bool is_gtf\n     0:2-2 |       _Bool gtf_transcript\n     0:3-3 |       _Bool gtf_gene\n     0:4-4 |       _Bool is_BED\n     0:5-5 |       _Bool is_TLF\n     0:6-6 |       _Bool transcripts_Only\n     0:7-7 |       _Bool keep_Genes\n     1:0-0 |       _Bool keep_Attrs\n     1:1-1 |       _Bool keep_AllExonAttrs\n     1:2-2 |       _Bool noExonAttrs\n     1:3-3 |       _Bool ignoreLocus\n     1:4-4 |       _Bool merge_CloseExons\n     1:5-5 |       _Bool gene2exon\n     1:6-6 |       _Bool sortByLoc\n     1:7-7 |       _Bool refAlphaSort\n     2:0-0 |       _Bool xEnsemblID\n     2:1-1 |       _Bool gff_warns\n           | [sizeof=4, dsize=4, align=4,\n           |  nvsize=4, nvalign=4]\n",
+      "stderr": ""
+    }
+  ],
+  "independentFindings": [
+    "The pristine GffObj union occupies 8 bytes on Windows: gff_level starts at byte4 bit0 and flag_USER_FLAGS at byte4 bit4; flags=0 writes only bytes0 through3. Linux packs the same union into4 bytes, covering both fields.",
+    "Changing exactly the17 one-bit bool flag members to unsigned int produces a4-byte union on both target ABIs, restoring complete flags-word initialization and the intended field positions.",
+    "All assignments to the17 named fields found in gff.h/gff.cpp use bool setters or literal true/false, so unsigned int:1 retains intended assignment values.",
+    "Uninitialized nascent user flags can make BundleData::keepGuide put a genuine guide into synrnas as well as rnas, overwrite its uptr, lose reference association and later double-delete it. This source mechanism matches the failed Windows output symptoms; native corrected execution remains required.",
+    "The other mixed GffAttr union has an explicit attr_id write after id_full(0); cds lies in the initialized first byte. id_full has no other operational use found. No change is justified from this class scan.",
+    "GffReader uses a separate unsigned gff_type union alternative and a bool-only struct entirely covered by its4-byte flags word; no corresponding uninitialized-field hole was found."
+  ],
+  "sameClassScan": {
+    "scope": "Top-level StringTie .cpp/.h, all gclib .cpp/.c/.h/.hh and bundled HTSlib public headers; scan identified the GffObj, GffAttr and GffReader unions for manual inspection.",
+    "limitations": "A bounded source review, not proof that all upstream memory defects are absent."
+  },
+  "outstanding": [
+    "Exact next committed Windows candidate must execute the poisoned-memory probe and 20 full-output repetitions in ordinary and spaced paths.",
+    "Previous ddeadd34 candidate failed with intermittent 0xC0000374 and remains failed evidence.",
+    "Downloaded exact archive/source correspondence and actual native UI screenshots remain to be reviewed after hosted execution.",
+    "This source review is not independent bit-identical recompilation or representative-PC acceptance."
+  ],
+  "finalReviewedAtUtc": "2026-10-13T15:11:17.631690+00:00",
+  "currentHead": "ddeadd34b68491f7f7450ceac804f8fade4116a6",
+  "finalPatchBinding": {
+    "patchSha256": "eb4e3cee57f25ba8b67989342c4bdef7a7bcdbf4988b8067cd48ef27a2677a45",
+    "reconstructedFromPinnedUpstream": true,
+    "builderExactReviewedPatchCheckPassed": true,
+    "reconstructedFilesMatchWindowsBuildSource": true,
+    "modifiedSourceFileSha256": {
+      "gclib/GBase.cpp": "ba7135c9135589dad9f23e468a37b04468f2bc911f103e8644ef788cba7c60ce",
+      "gclib/gff.h": "fa1b980f5829a8a74eb9b5962e81cbf6c5df6b14d3903662108b195a138e4da3",
+      "stringtie.cpp": "1e02a0af1345001545285da2b412bae0c432dd971f561ca225fa5e7ab871dadc"
+    },
+    "generatedDiagnosticSourceMatchesActualPatchedUnion": true,
+    "diagnostic": {
+      "schema": 1,
+      "sourceSha256": "58a0947452ee6c1dbfbadbeaac2d9b7866a811770e20a028865303ee6c2bb525",
+      "executableSha256": "3a2e268bae5a4fa0e813f39484480e2b0bd6c6f089b9a86fe4eeaefbf97f4d61",
+      "patchedHeaderSha256": "fa1b980f5829a8a74eb9b5962e81cbf6c5df6b14d3903662108b195a138e4da3",
+      "builderSha256": "8ed4ae1a849db98c2cc5bd0497a61a37d49337ec37a1d0c94591bc22138f0131",
+      "compilerSha256": "c9b86311ade81d53235c93fafabdf98328d094de344ea9a9038e0dab6695ee9f",
+      "patchSha256": "eb4e3cee57f25ba8b67989342c4bdef7a7bcdbf4988b8067cd48ef27a2677a45",
+      "command": [
+        "/workspace/scratch/5a73a40bd3ca/workbench/build/toolchains/llvm-mingw-20260922-ucrt-ubuntu-22.04-x86_64/bin/x86_64-w64-mingw32-clang++",
+        "-O2",
+        "-std=c++11",
+        "/workspace/scratch/5a73a40bd3ca/workbench/build/stringtie-windows/flag-layout-check.cpp",
+        "-static",
+        "-pthread",
+        "-lws2_32",
+        "-Wl,--no-insert-timestamp",
+        "-Xlinker",
+        "--stack",
+        "-Xlinker",
+        "8388608,65536",
+        "-o",
+        "/workspace/scratch/5a73a40bd3ca/workbench/build/stringtie-windows/flag-layout-check.exe"
+      ],
+      "nativeExecutionPerformed": false
+    },
+    "standaloneDiagnosticExcludedFromRuntimePack": true
+  },
+  "reviewedFiles": {
+    "tools/stringtie/workbench1.patch": "eb4e3cee57f25ba8b67989342c4bdef7a7bcdbf4988b8067cd48ef27a2677a45",
+    "scripts/build_stringtie_native.py": "8ed4ae1a849db98c2cc5bd0497a61a37d49337ec37a1d0c94591bc22138f0131",
+    "scripts/prepare_stringtie_pack.py": "c251451536cf93934c527313d6516fcaac65c37c329a4a6af839b9e1ff401682",
+    "tests/test_stringtie_pack.py": "62bc2e0569b4fca6bbc88622ff52176d547916a7b60178793d653941b5654cf8",
+    "scripts/audit_bustools_stringtie_candidate.py": "de4e25a1758ab7f7f15305c44c6e8f242486b6267976626e84048dc35af9342d",
+    "scripts/check_bustools_stringtie_windows.py": "7478b6dda0cf3014c6384614dfac44b9b088fb58ba3704874ddcc7c17cd08dc2",
+    "tests/test_bustools_stringtie_validation.py": "736ea2ec7a9349c1c27eb2a7015d1759dde9e913eeef91cf42101db1c28a3dbc",
+    ".github/workflows/native-bustools-stringtie-candidate.yml": "02c1b62f149355cd8f80c4f25443468758d8988fc0432385f66dc59512d7cf09",
+    "docs/STRINGTIE-PACK.md": "5a851a9c11b2e9f081de8d253e060f7d3d5790649529adff1a0a8b0044822247"
+  },
+  "reviewConclusion": {
+    "approvedForNextNativeCandidate": true,
+    "scope": "The exact 17 bool-to-unsigned one-bit changes restore a single initialized 29-bit word. Existing setters assign boolean values, and scientific algorithms, masks and field widths are unchanged. Earlier nonmodal diagnostics and path normalization remain bounded CLI changes.",
+    "diagnosticBoundary": "The immutable source companion carries generated diagnostic source, executable and binding JSON separately from the runtime pack. Source audit reconstructs the patched union from the pinned upstream archive; native gate requires the exact diagnostic and 10 full-output-oracle repetitions for each mode, with no skips or missing/duplicate executions.",
+    "sameClassScan": "No other demonstrated instance of the same uninitialized owning-guide flags defect found in the bounded StringTie/gclib/header scan; GffAttr explicitly initializes its separate attr_id storage and is left unchanged.",
+    "gitDiffWhitespace": "Only upstream whitespace retained in exact patch context; do not rewrite upstream context to silence diff whitespace diagnostics."
+  },
+  "actualLocalEvidence": {
+    "sourceSuiteReport": "build/stringtie-source-bitfield-final-tests.json",
+    "sourceSuiteReportSha256": "eeb59e0ecf3b389a1c479743bcac2b042aeb6073056f98f298c6867f8ad8aa04",
+    "testsRun": 21,
+    "skips": 0,
+    "pristineComparisons": 4,
+    "repeatedExactOutputExecutions": 20,
+    "poisonProbeExecutedOnLinux": true,
+    "nativeWindowsExecuted": false,
+    "reportWasInspectedNotRerunByReviewer": true
+  },
+  "retainedOriginalReceiptSha256": "57112a293c52bda29ec7197375a130b4af7e45d0afe2e04e94038ca649b17e0c"
+}

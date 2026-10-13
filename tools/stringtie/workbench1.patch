@@ -1,0 +1,99 @@
+--- a/gclib/GBase.cpp
++++ b/gclib/GBase.cpp
+@@ -30,15 +30,13 @@
+ // Error routine (prints error message and exits!)
+ void GError(const char* format,...){
+   #ifdef _WIN32
+-    char msg[4096];
++    // Native Workbench CLI boundary: report fatal errors without a modal dialog.
++    // Scientific processing is unchanged; preserve the upstream exit status.
+     va_list arguments;
+     va_start(arguments,format);
+-    _vsnprintf(msg, 4095, format, arguments);
+-    vfprintf(stderr, format, arguments); // if a console is available
+-    msg[4095]=0;
++    vfprintf(stderr,format,arguments);
+     va_end(arguments);
+-    OutputDebugString(msg);
+-    MessageBox(NULL,msg,NULL,MB_OK|MB_ICONEXCLAMATION|MB_APPLMODAL);
++    fflush(stderr);
+   #else
+     va_list arguments;
+     va_start(arguments,format);
+@@ -55,15 +53,12 @@
+ // Warning routine (just print message without exiting)
+ void GMessage(const char* format,...){
+   #ifdef _WIN32
+-    char msg[4096];
++    // Native Workbench CLI boundary: consume diagnostic arguments once.
+     va_list arguments;
+     va_start(arguments,format);
+-    vfprintf(stderr, format , arguments); // if a console is available
+-    _vsnprintf(msg, 4095, format, arguments);
+-    msg[4095]=0;
++    vfprintf(stderr,format,arguments);
+     va_end(arguments);
+     fflush(stderr);
+-    //OutputDebugString(msg);
+   #else
+     va_list arguments;
+     va_start(arguments,format);
+--- a/gclib/gff.h
++++ b/gclib/gff.h
+@@ -730,27 +730,28 @@
+    char* gene_name; //value of gene_name attribute (GTF) if present or Name attribute of the parent gene feature (GFF3)
+    char* geneID; //value of gene_id attribute (GTF) if present, or the ID attribute of a parent gene feature (GFF3)
+    union {
++      // Workbench: one 32-bit storage unit also under the Windows bitfield ABI.
+       unsigned int flags;
+       struct {
+-    	  bool flag_HAS_ERRORS        :1;
+-    	  bool flag_CHILDREN_PROMOTED :1;
+-    	  bool flag_IS_GENE           :1;
+-    	  bool flag_IS_TRANSCRIPT     :1;
+-    	  bool flag_HAS_GFF_ID        :1; //found transcript/RNA feature line (GFF3 or GTF2 with transcript line)
+-    	  bool flag_BY_EXON           :1; //created by subfeature (exon/CDS) directly
+-    	  bool flag_CDS_ONLY          :1; //transcript defined by CDS features only (GffObj::isCDS())
+-    	  bool flag_CDS_NOSTART       :1; //partial CDS at 5' end (no start codon)
+-    	  bool flag_CDS_NOSTOP        :1; //partial CDS at 3' end (no stop codon)
+-    	  bool flag_CDS_X             :1; //transcript having CDS with ribosomal shift (i.e. after merging exons)
++    	  unsigned int flag_HAS_ERRORS        :1;
++    	  unsigned int flag_CHILDREN_PROMOTED :1;
++    	  unsigned int flag_IS_GENE           :1;
++    	  unsigned int flag_IS_TRANSCRIPT     :1;
++    	  unsigned int flag_HAS_GFF_ID        :1; //found transcript/RNA feature line (GFF3 or GTF2 with transcript line)
++    	  unsigned int flag_BY_EXON           :1; //created by subfeature (exon/CDS) directly
++    	  unsigned int flag_CDS_ONLY          :1; //transcript defined by CDS features only (GffObj::isCDS())
++    	  unsigned int flag_CDS_NOSTART       :1; //partial CDS at 5' end (no start codon)
++    	  unsigned int flag_CDS_NOSTOP        :1; //partial CDS at 3' end (no stop codon)
++    	  unsigned int flag_CDS_X             :1; //transcript having CDS with ribosomal shift (i.e. after merging exons)
+     	                                  //CDS segments stored in ::cdss are incompatible with the exon segments
+-    	  bool flag_GENE_SEGMENT      :1; //a transcript-like C/D/J/V_gene_segment (NCBI's annotation)
+-    	  bool flag_TRANS_SPLICED     :1;
+-    	  bool flag_DISCONTINUOUS     :1; //discontinuous feature (e.g. cDNA_match) segments linked by same ID
+-    	  bool flag_TARGET_ONLY       :1; //Target= feature (e.g. from RepeatMasker output), lacks ID
+-    	  bool flag_DISCARDED         :1; //it will be  discarded from the final GffReader list
+-    	  bool flag_LST_KEEP          :1; //controlled by isUsed(); if set, this GffObj will not be
++    	  unsigned int flag_GENE_SEGMENT      :1; //a transcript-like C/D/J/V_gene_segment (NCBI's annotation)
++    	  unsigned int flag_TRANS_SPLICED     :1;
++    	  unsigned int flag_DISCONTINUOUS     :1; //discontinuous feature (e.g. cDNA_match) segments linked by same ID
++    	  unsigned int flag_TARGET_ONLY       :1; //Target= feature (e.g. from RepeatMasker output), lacks ID
++    	  unsigned int flag_DISCARDED         :1; //it will be  discarded from the final GffReader list
++    	  unsigned int flag_LST_KEEP          :1; //controlled by isUsed(); if set, this GffObj will not be
+     	                                  //deallocated when GffReader is destroyed
+-    	  bool flag_FINALIZED         :1; //if finalize() was already called for this GffObj
++    	  unsigned int flag_FINALIZED         :1; //if finalize() was already called for this GffObj
+     	  unsigned int gff_level      :4; //hierarchical level (0..15)
+         unsigned int flag_USER_FLAGS :8; //user flags for setUserFlag() and getUserFlag()
+       };
+--- a/stringtie.cpp
++++ b/stringtie.cpp
+@@ -11,7 +11,7 @@
+ #include "proc_mem.h"
+ #endif
+ 
+-#define VERSION "3.0.3"
++#define VERSION "3.0.3-workbench1"
+ 
+ //#define DEBUGPRINT 1
+ 

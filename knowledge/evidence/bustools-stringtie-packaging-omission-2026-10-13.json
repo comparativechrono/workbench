@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "kind": "clean-build-source-omission",
+  "sourceCommit": "0c13ab53bcec23710a633306a30a1d3e00c3ca22",
+  "run": 38416410225,
+  "url": "https://github.com/comparativechrono/workbench/actions/runs/38416410225",
+  "buildJob": 115361905841,
+  "conclusion": "failure",
+  "stage": "Build pinned upstream reference and native executables",
+  "error": "FileNotFoundError: tools/stringtie/workbench1.patch",
+  "cause": "The root integration commit omitted the newly created reviewed compatibility patch file. Local source contained it; the clean hosted checkout did not.",
+  "correctionCommit": "ddeadd34b68491f7f7450ceac804f8fade4116a6",
+  "correction": "Committed the exact reviewed patch; no patch/code changes. New clean candidate build required.",
+  "patchSha256": "253fb7891604783bbe87e60947435dd68f447d7cb6449d9f074b5969441b2d42",
+  "artifact": {
+    "id": 11823538668,
+    "url": "https://github.com/comparativechrono/workbench/actions/runs/38416410225/artifacts/11823538668",
+    "sha256": "094e39b16423a930f6b1a1723512621a147db93483db27877720632689c231ba"
+  },
+  "windowsExecuted": false,
+  "candidateArchiveProduced": false,
+  "note": "Failure retained; no successful native result is attributed to this incomplete source revision."
+}

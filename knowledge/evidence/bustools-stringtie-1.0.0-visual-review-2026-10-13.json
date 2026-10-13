@@ -1,0 +1,1135 @@
+{
+  "schema": 1,
+  "sourceCommit": "a93b338bca5e71b89e3cd000caaba96dbec73501",
+  "workflowRunId": 38420188054,
+  "actualDisplayCapturesReviewed": 56,
+  "cases": {
+    "ordinary": {
+      "schema": 1,
+      "kind": "independent-ordinary-path-actual-display-review",
+      "reviewer": "bus_stringtie_review",
+      "reviewedAtUtc": "2026-10-13T15:22:14.504698+00:00",
+      "candidateSourceCommit": "a93b338bca5e71b89e3cd000caaba96dbec73501",
+      "gateSourceCommit": "a93b338bca5e71b89e3cd000caaba96dbec73501",
+      "applicationVersion": "0.16.1",
+      "applicationSourceCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+      "applicationArchive": {
+        "file": "native-workbench-0.16.1-starter-windows.zip",
+        "bytes": 17889148,
+        "sha256": "28f1362287991621dde030da54eb444846142c0243be6b9d86c4b4f1bf99dd47"
+      },
+      "packArchives": {
+        "bustools": {
+          "file": "native-workbench-pack-bustools-1.0.0.zip",
+          "bytes": 5836546,
+          "sha256": "387f7ae1b04ba8187e9e24690b5ad102aa1c9d44ce558c04b37ddf3cbf70e629",
+          "id": "bustools",
+          "version": "1.0.0",
+          "manifestSha256": "6efe81d68448338143db24e7b63625d56cbf8890a4d7330b15b789d91c672936",
+          "staticValidation": {
+            "id": "bustools",
+            "name": "bustools BUS molecule counting",
+            "version": "1.0.0",
+            "toolVersions": {
+              "bustools": "0.45.1-workbench1",
+              "bustools-adapter": "1.0.0"
+            },
+            "description": "Barcode correction, sorting and exact-UMI gene counts from a reviewed coherent BUS bundle.",
+            "category": "RNA-seq",
+            "platform": "windows-x86_64",
+            "packApi": 1,
+            "minAppVersion": "0.16.0",
+            "size": 5836546,
+            "sha256": "387f7ae1b04ba8187e9e24690b5ad102aa1c9d44ce558c04b37ddf3cbf70e629",
+            "manifestSha256": "6efe81d68448338143db24e7b63625d56cbf8890a4d7330b15b789d91c672936"
+          }
+        },
+        "stringtie": {
+          "file": "native-workbench-pack-stringtie-1.0.0.zip",
+          "bytes": 6852872,
+          "sha256": "6b24cf029ae1371d79e5cec7b39ec83314c0506c135ee59216b218c3ee88a59d",
+          "id": "stringtie",
+          "version": "1.0.0",
+          "manifestSha256": "abfc5ef62ec2b6f2fadc3d80e32cc6dbf06ca10a97fd030e91ec5641ba9f6b62",
+          "staticValidation": {
+            "id": "stringtie",
+            "name": "StringTie RNA transcript assembly and expression",
+            "version": "1.0.0",
+            "toolVersions": {
+              "stringtie": "3.0.3-workbench1",
+              "stringtie-adapter": "1.0.0"
+            },
+            "description": "Reference-guided short-read transcript assembly and reference-only expression estimates.",
+            "category": "RNA analysis",
+            "platform": "windows-x86_64",
+            "packApi": 1,
+            "minAppVersion": "0.16.0",
+            "size": 6852872,
+            "sha256": "6b24cf029ae1371d79e5cec7b39ec83314c0506c135ee59216b218c3ee88a59d",
+            "manifestSha256": "abfc5ef62ec2b6f2fadc3d80e32cc6dbf06ca10a97fd030e91ec5641ba9f6b62"
+          }
+        }
+      },
+      "sourceCompanion": {
+        "file": "native-workbench-bustools-stringtie-1.0.0-source-evidence.zip",
+        "bytes": 13818900,
+        "sha256": "bc0af8a0eb657e0ba3a1c8281c64f41645135e389ba74febfb4a228aeaf4fe03"
+      },
+      "nativeReport": {
+        "path": "build/bustools-stringtie-hosted-a93b338/ordinary/gui/native.json",
+        "sha256": "515bd19d9b4dc94b94877fd9f401377e2b148bb9a9c5f0249681ee61e7a2ff48",
+        "reportedSuccess": true
+      },
+      "display": {
+        "width": 1024,
+        "height": 768,
+        "workArea": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "windowBounds": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "dpi": 96
+      },
+      "captureIntegrity": {
+        "originalBMPFilesVerified": 56,
+        "actualDisplayImagesViewed": 28,
+        "hashAndDimensionMismatches": [],
+        "conversion": "BMP originals retained; lossless PNG conversions solely for viewing. Original BMP hashes identify evidence.",
+        "allFiles": [
+          {
+            "path": "pack-library-bustools-display.bmp",
+            "sha256": "c5fb0a1ee122d1869909b4ec417d0e10f805435052b93ac844eb9abaab7a1cda",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-library-bustools-window.bmp",
+            "sha256": "ff8562431e3ffd856822c9382fd8002b03a98333635f16e4e9dd5dc0f518dc5b",
+            "width": 1024,
+            "height": 728,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-library-stringtie-display.bmp",
+            "sha256": "83bea1cb4d5398aa0b0084a87fe9ac7909fdb4d17e992b1894f4172e304883e2",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-library-stringtie-window.bmp",
+            "sha256": "4667404679b6ca2d9d69e30fd6dd774da5b27dd7f042afd18791ca670dea1a1e",
+            "width": 1024,
+            "height": 728,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-form-bustools-count-bus-top-display.bmp",
+            "sha256": "9ca0b7ccbee725bf6e2e47e72855a53e8ffd0e756219e7ef3172d4926e0893e5",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-form-bustools-count-bus-top-window.bmp",
+            "sha256": "10c811910c3f7b48e57c1067726ecf99c053da02489fc9aab61900dd26333c38",
+            "width": 1024,
+            "height": 728,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-form-bustools-count-bus-page-1-display.bmp",
+            "sha256": "4c2186cbbefc64e6ad0bae11f6ccdff48c7109aa0eb71bbf38713b42cf40c6b8",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-form-bustools-count-bus-page-1-window.bmp",
+            "sha256": "6e7973f0a2c5160fd3ebec50db5f8fd5e394bf92d91bbdd10c986b30b937b40d",
+            "width": 1024,
+            "height": 728,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-form-bustools-count-bus-page-2-display.bmp",
+            "sha256": "af95c8c378875807e6acc6274fa813a886c3fb4ecd7b65d456ac7bf9fe34b4a9",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-form-bustools-count-bus-page-2-window.bmp",
+            "sha256": "6b1c3afcf1d3e33a017ddc8c569da38df9f6020c62aef433fbcbf369e251180d",
+            "width": 1024,
+            "height": 728,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-form-bustools-count-bus-page-3-display.bmp",
+            "sha256": "4f3cd23e42844fab151e48e464be3b643b41179d365bee6ec82ae5b259c3ce21",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-form-bustools-count-bus-page-3-window.bmp",
+            "sha256": "37fda5ae0aa3076c9f01041ae67fd5ac1340b1d3bb9fd2e164db019da9eac0c9",
+            "width": 1024,
+            "height": 728,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-form-bustools-count-bus-page-4-display.bmp",
+            "sha256": "27cb27e751ae3cb7ff737ce359963c52cd47330ea2e573b41e3069a44ab62921",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-form-bustools-count-bus-page-4-window.bmp",
+            "sha256": "5c85c93158d6a7f6393e4d668abc25bd9ef4aa598640d449262029b2498f3235",
+            "width": 1024,
+            "height": 728,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-form-bustools-count-bus-page-5-display.bmp",
+            "sha256": "a963a5a25622dfb0e1ed5d981510151333b17bd9323c89c914496bd84b3d011b",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-form-bustools-count-bus-page-5-window.bmp",
+            "sha256": "399846deab531322f1b39a0d10c1191854a79ccb60f8f743f2b3a83f7e81576d",
+            "width": 1024,
+            "height": 728,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-form-bustools-count-bus-page-6-display.bmp",
+            "sha256": "b1a13926d75530a4fe36fa243c3708e89c77902f8028cd72248713ce495439d9",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-form-bustools-count-bus-page-6-window.bmp",
+            "sha256": "18a7dda59afb4a84d95691ebf6b46977d6a085779d13a125b898648dee718841",
+            "width": 1024,
+            "height": 728,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-form-stringtie-assemble-guided-top-display.bmp",
+            "sha256": "8d707b7e23e5e4669b5950321c9daf51ed85a128d2e62723030dbd0a7da5535c",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-form-stringtie-assemble-guided-top-window.bmp",
+            "sha256": "66ea38cc8171719f8a7e2e83024ba88ceacf6a1007b6a563d955cf0818343de5",
+            "width": 1024,
+            "height": 728,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-form-stringtie-assemble-guided-page-1-display.bmp",
+            "sha256": "0dcd245b543d5c23382024a2554bba560de7df642a964f7d08ad71ab58673609",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-form-stringtie-assemble-guided-page-1-window.bmp",
+            "sha256": "32359bfda4a3c868434d49b10fa83b1f71990a4eb93c9f5d5610c212536456ec",
+            "width": 1024,
+            "height": 728,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-form-stringtie-assemble-guided-page-2-display.bmp",
+            "sha256": "d20afa32d7700de126ed84745947b6e25fbd94715661d9b25eaf8f2b349decf8",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-form-stringtie-assemble-guided-page-2-window.bmp",
+            "sha256": "28ed679363eb988ba4ff7dabab5432bc9a934cd1fa0dd31d41c52df6b18fdfe7",
+            "width": 1024,
+            "height": 728,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-form-stringtie-assemble-guided-page-3-display.bmp",
+            "sha256": "73793f9afc5d4e939d321e1ca42a597cf46a364d62b8c1daa467c7f7e87478cc",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-form-stringtie-assemble-guided-page-3-window.bmp",
+            "sha256": "bd0152f2a81a0d2b5f757b3ccaec2f821519822b14534ab7d7f8bb9b794ccff2",
+            "width": 1024,
+            "height": 728,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-form-stringtie-assemble-guided-page-4-display.bmp",
+            "sha256": "c5a7812b029f8ba5651132add726c73722fb17875dc186b46dd1fcf5bca7147b",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-form-stringtie-assemble-guided-page-4-window.bmp",
+            "sha256": "de48de4efb5a77e84b098cb2047c7d365223ce97d3002c30533fedf19b496d32",
+            "width": 1024,
+            "height": 728,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-form-stringtie-assemble-guided-page-5-display.bmp",
+            "sha256": "488c7d6dd1d21bef7cafd0e24ee017245077dc1753ae5b2fcdc3bd4af565caac",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-form-stringtie-assemble-guided-page-5-window.bmp",
+            "sha256": "dad1699becb87c90a6fbc76e2a059bbfa323bfb60e226727a369858dca61c3aa",
+            "width": 1024,
+            "height": 728,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-form-stringtie-assemble-guided-page-6-display.bmp",
+            "sha256": "6dcfe9f8586162af9829d12a7032c59ca3daca0ba3992f86aad09cce8aa47521",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-form-stringtie-assemble-guided-page-6-window.bmp",
+            "sha256": "f5597f6d7f11d225390a5a5e63390eb1a0fc038b51065a0b8217aa082af65f88",
+            "width": 1024,
+            "height": 728,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-form-stringtie-estimate-reference-top-display.bmp",
+            "sha256": "c4454f0820f77391bf7afebe018da736304d77f443bdfae08fa6dfb207ad1f56",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-form-stringtie-estimate-reference-top-window.bmp",
+            "sha256": "9c215faeef03a9895ff5a6aac255918a1b9a00d5780bf9bbe7d197a127648418",
+            "width": 1024,
+            "height": 728,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-form-stringtie-estimate-reference-page-1-display.bmp",
+            "sha256": "8e33152d16423e49bab7484dde4ce36271a57305dc14bef7e306fa1206e3c7cd",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-form-stringtie-estimate-reference-page-1-window.bmp",
+            "sha256": "fc7a190f0c25ad64146a0dd65f815d7304500dabed6dab83ba7967eb3698639e",
+            "width": 1024,
+            "height": 728,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-form-stringtie-estimate-reference-page-2-display.bmp",
+            "sha256": "3da43b0780c503b8454e4f8179e4580545b9805f510d983bf7f18feb9704ae16",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-form-stringtie-estimate-reference-page-2-window.bmp",
+            "sha256": "79366640dd2b9f29f48e3a691c3671760aa63456273db256c51061a568837fe9",
+            "width": 1024,
+            "height": 728,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-form-stringtie-estimate-reference-page-3-display.bmp",
+            "sha256": "8270bf213d3143263ca74a350751ebe82ab384599d21d1ff00f0ca32b837ccfe",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-form-stringtie-estimate-reference-page-3-window.bmp",
+            "sha256": "5e25f973dcae5e58c0ac607dcf1a612d82a194a35cdf6ab8540f7bd834351e47",
+            "width": 1024,
+            "height": 728,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-form-stringtie-estimate-reference-page-4-display.bmp",
+            "sha256": "21511aa37eae9dff4d0d444023d6deccd9566317fc249d27ce4f9bb0593f49e3",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-form-stringtie-estimate-reference-page-4-window.bmp",
+            "sha256": "a43658b9c7da7c3bc64b8b15f0e0b4210e3efc53c8163d84fbd8c7d346912938",
+            "width": 1024,
+            "height": 728,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-form-stringtie-estimate-reference-page-5-display.bmp",
+            "sha256": "e2522fb0822bb5a6850da2ae78cbd6333aeb78e9daa244fba0530f336c1821e7",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-form-stringtie-estimate-reference-page-5-window.bmp",
+            "sha256": "a1b568bf299979173f4dd155e70cd6f21f9185f9a8506a992a41ef462a9d7af1",
+            "width": 1024,
+            "height": 728,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-form-stringtie-estimate-reference-page-6-display.bmp",
+            "sha256": "08a9eb62a1738dc5b71a0f64b32b92f1d2c0085808ec3fe2d661528c840d61c4",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-form-stringtie-estimate-reference-page-6-window.bmp",
+            "sha256": "d93787972a957ab5d13a7dbcd06795d5b97bca728c0e39c38495a9f6cf012761",
+            "width": 1024,
+            "height": 728,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-library-unfiltered-display.bmp",
+            "sha256": "fae028423166cb5e3e4c855719a0dbd05eb35defa0a96380ef4c99f51775c215",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-library-unfiltered-window.bmp",
+            "sha256": "a93a0881577c4d55c0f57114ac02c1447174de0b220c7f5048cb8aa894dcf356",
+            "width": 1024,
+            "height": 728,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-results-bustools-display.bmp",
+            "sha256": "6df84aafe4d3f9bc81a6a8e6d52cdfa4a5629494f8ce1ebea97f8dfbed2f83be",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-results-bustools-window.bmp",
+            "sha256": "6e9cf8c80086590949c4a32116126db22a359fabb8b7b07a2787e85246109db9",
+            "width": 940,
+            "height": 680,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-results-bustools-versions-display.bmp",
+            "sha256": "3da7e1df068d9fd48202edab4a591039a7615f0012d68a41f8839a30bd017075",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-results-bustools-versions-window.bmp",
+            "sha256": "788872a77499cb4439ced17568031b2907cbc91b050ebd50b20f9c80f9c57081",
+            "width": 940,
+            "height": 680,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-results-stringtie-display.bmp",
+            "sha256": "590f964e537854187e440899c38e2111eea180dc40917a67e4a3d15562082f05",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-results-stringtie-window.bmp",
+            "sha256": "3a497523aa916b64ddc919f46a92012aec855402024ac3dcf521fb7b8641fe94",
+            "width": 940,
+            "height": 680,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          },
+          {
+            "path": "pack-results-stringtie-versions-display.bmp",
+            "sha256": "3d00a079f77db5ced7077f0f0113662c184dbb30bf1f2514af3826c8f36d5bcb",
+            "width": 1024,
+            "height": 768,
+            "method": "screen BitBlt; no PrintWindow repaint"
+          },
+          {
+            "path": "pack-results-stringtie-versions-window.bmp",
+            "sha256": "aabcdeee50ae47581d2939aa17e152d007d72f29628bfe3ef0ef3566b34e6bb9",
+            "width": 940,
+            "height": 680,
+            "method": "PrintWindow; complete window, including any off-desktop portion"
+          }
+        ]
+      },
+      "forms": [
+        {
+          "operation": "bustools/count-bus",
+          "formBounds": [
+            217,
+            153,
+            695,
+            648
+          ],
+          "pageCount": 7,
+          "scrollPositions": [
+            0,
+            288,
+            576,
+            864,
+            1152,
+            1440,
+            1499
+          ],
+          "fullScrollExtentCoveredWithoutGaps": true,
+          "allDisplayedInputsOptionsAndOutputsReviewed": true
+        },
+        {
+          "operation": "stringtie/assemble-guided",
+          "formBounds": [
+            217,
+            153,
+            695,
+            648
+          ],
+          "pageCount": 7,
+          "scrollPositions": [
+            0,
+            288,
+            576,
+            864,
+            1152,
+            1440,
+            1618
+          ],
+          "fullScrollExtentCoveredWithoutGaps": true,
+          "allDisplayedInputsOptionsAndOutputsReviewed": true
+        },
+        {
+          "operation": "stringtie/estimate-reference",
+          "formBounds": [
+            217,
+            153,
+            695,
+            648
+          ],
+          "pageCount": 7,
+          "scrollPositions": [
+            0,
+            288,
+            576,
+            864,
+            1152,
+            1440,
+            1618
+          ],
+          "fullScrollExtentCoveredWithoutGaps": true,
+          "allDisplayedInputsOptionsAndOutputsReviewed": true
+        }
+      ],
+      "reviewedActualDisplayImages": [
+        {
+          "path": "pack-library-bustools-display.bmp",
+          "sha256": "c5fb0a1ee122d1869909b4ec417d0e10f805435052b93ac844eb9abaab7a1cda",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "d3ba414bd4a3400b5f1e2798c95ff6f1ba474c1dc41bea67387303d2377779c3",
+          "finding": "Complete bold operation name and regular description wrap within the library; no tooltip is required to read the name.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-library-stringtie-display.bmp",
+          "sha256": "83bea1cb4d5398aa0b0084a87fe9ac7909fdb4d17e992b1894f4172e304883e2",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "6724cf96c51cef3a6c729c5ded77e48c179ae914f0506ac955183138fb863a8c",
+          "finding": "The first bold wrapped operation is visible; long description extends below this library viewport. Both complete operation captions are recorded in metadata and each operation is separately selected/captured in its form.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-form-bustools-count-bus-top-display.bmp",
+          "sha256": "9ca0b7ccbee725bf6e2e47e72855a53e8ffd0e756219e7ef3172d4926e0893e5",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "bd984be2fb36fc14869938a2346166e9e2aab9b7bed31b59d180d810bd766082",
+          "finding": "Complete heading, pack version and measured-count semantics are visible. Long aggregate input guidance starts before the selectors.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-form-bustools-count-bus-page-1-display.bmp",
+          "sha256": "4c2186cbbefc64e6ad0bae11f6ccdff48c7109aa0eb71bbf38713b42cf40c6b8",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "fef1b4d7802228f775665c9c23acfb881f0cb71bee270a84a6e2228ca4600cf9",
+          "finding": "Aggregate guidance continues; first BUS selector enters the bottom viewport.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-form-bustools-count-bus-page-2-display.bmp",
+          "sha256": "af95c8c378875807e6acc6274fa813a886c3fb4ecd7b65d456ac7bf9fe34b4a9",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "3e0ebe1617d2ba903acf2c7582691c7b6688809deec0e320608f62861754a365",
+          "finding": "BUS selector and matching transcript selector visible with readable guidance.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-form-bustools-count-bus-page-3-display.bmp",
+          "sha256": "4f3cd23e42844fab151e48e464be3b643b41179d365bee6ec82ae5b259c3ce21",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "204456e88c7096e2b46b4cae77968e88cccea8d34f8ba5a1ba8f94ca28c28df2",
+          "finding": "Transcript order, EC mapping and transcript-to-gene selectors visible; no horizontal overlap.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-form-bustools-count-bus-page-4-display.bmp",
+          "sha256": "27cb27e751ae3cb7ff737ce359963c52cd47330ea2e573b41e3069a44ab62921",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "b3c180b65464953e1336375131af67139399c50b966f9064adf9c0ebce9d67a0",
+          "finding": "Transcript-to-gene and allowlist selectors and their scientific guidance readable.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-form-bustools-count-bus-page-5-display.bmp",
+          "sha256": "a963a5a25622dfb0e1ed5d981510151333b17bd9323c89c914496bd84b3d011b",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "257c9bd8c2a2054489dd8a1cf1a3554938b19f9cc8643d53ea66bf4029a5c5c2",
+          "finding": "Allowlist selector and named barcode-by-gene/UMI output labels visible.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-form-bustools-count-bus-page-6-display.bmp",
+          "sha256": "b1a13926d75530a4fe36fa243c3708e89c77902f8028cd72248713ce495439d9",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "d0953cde10e194198ba5b88da1db4ddd31474505305953167f942176140e6aa1",
+          "finding": "Final named outputs, settings and all log labels visible at bottom of form.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-form-stringtie-assemble-guided-top-display.bmp",
+          "sha256": "8d707b7e23e5e4669b5950321c9daf51ed85a128d2e62723030dbd0a7da5535c",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "7f1a2b304edc7382036bacd79d329fd05f8abeafefb5fdf1df494d3697eadcb7",
+          "finding": "Complete wrapped bold operation name, pack version, operation distinction and BAM/GTF requirements readable; dependency guidance identifies SAMtools.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-form-stringtie-assemble-guided-page-1-display.bmp",
+          "sha256": "0dcd245b543d5c23382024a2554bba560de7df642a964f7d08ad71ab58673609",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "fea5aae71e3fa0f2c106b3137ec8e0af054e5bcdbe4049e0839abade5b1308e8",
+          "finding": "BAM selector and requirement guidance visible; matching annotation introduction readable.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-form-stringtie-assemble-guided-page-2-display.bmp",
+          "sha256": "d20afa32d7700de126ed84745947b6e25fbd94715661d9b25eaf8f2b349decf8",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "498fbb28a77ac14c6065f2bb014ee8c7dcca001435d70f9c40ba37abf8b5f3f7",
+          "finding": "BAM/GTF selectors and annotation bounds visible; tool-settings section enters viewport.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-form-stringtie-assemble-guided-page-3-display.bmp",
+          "sha256": "73793f9afc5d4e939d321e1ca42a597cf46a364d62b8c1daa467c7f7e87478cc",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "09189b7b6be584384a3b1c545e3da86a68130c2bba83c24d5cc5ee265708bee9",
+          "finding": "Required strandedness choice and minimum length visible. XS priority and 100-base training example setting explained; no QC threshold claim.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-form-stringtie-assemble-guided-page-4-display.bmp",
+          "sha256": "c5a7812b029f8ba5651132add726c73722fb17875dc186b46dd1fcf5bca7147b",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "2f22cb94c2077569ad56e92feaa73102691d243b304a7b40dbad8c649716e77e",
+          "finding": "Minimum transcript length, multi-exon coverage, junction coverage and isoform fraction controls readable.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-form-stringtie-assemble-guided-page-5-display.bmp",
+          "sha256": "488c7d6dd1d21bef7cafd0e24ee017245077dc1753ae5b2fcdc3bd4af565caac",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "7329692aa79a766c7170022dc7b4700cf14524dca9dc907f494a879c5fec4d91",
+          "finding": "Junction coverage, isoform fraction, single-exon coverage and multimap fraction controls readable; explanatory text wraps.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-form-stringtie-assemble-guided-page-6-display.bmp",
+          "sha256": "6dcfe9f8586162af9829d12a7032c59ca3daca0ba3992f86aad09cce8aa47521",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "cd3e8120ea7c4cfc2ea701a3f31a57682bb66e90672fb1025c580f136b8c6a38",
+          "finding": "Final coverage/fraction controls and complete named outputs visible at form bottom.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-form-stringtie-estimate-reference-top-display.bmp",
+          "sha256": "c4454f0820f77391bf7afebe018da736304d77f443bdfae08fa6dfb207ad1f56",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "afd04cbc19549698df835807dff056f43993a6645ec96426f528f1550672ba43",
+          "finding": "Complete wrapped bold operation name, pack version, operation distinction and BAM/GTF requirements readable; dependency guidance identifies SAMtools.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-form-stringtie-estimate-reference-page-1-display.bmp",
+          "sha256": "8e33152d16423e49bab7484dde4ce36271a57305dc14bef7e306fa1206e3c7cd",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "77263bd3fdac704c9e2fd4e511102e68147ad5a8b3f55882885662a44611a8a7",
+          "finding": "BAM selector and requirement guidance visible; matching annotation introduction readable.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-form-stringtie-estimate-reference-page-2-display.bmp",
+          "sha256": "3da43b0780c503b8454e4f8179e4580545b9805f510d983bf7f18feb9704ae16",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "d28d7366d7bb7023821541426b8b30815e885b85d4ca16f8b1973ddbc0833e0f",
+          "finding": "BAM/GTF selectors and annotation bounds visible; tool-settings section enters viewport.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-form-stringtie-estimate-reference-page-3-display.bmp",
+          "sha256": "8270bf213d3143263ca74a350751ebe82ab384599d21d1ff00f0ca32b837ccfe",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "06a3d47af95eb91124c5ef245aa3e23be0f5d59b31a603a4d4c6a2f100b43c70",
+          "finding": "Required strandedness choice and minimum length visible. XS priority and 100-base training example setting explained; no QC threshold claim.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-form-stringtie-estimate-reference-page-4-display.bmp",
+          "sha256": "21511aa37eae9dff4d0d444023d6deccd9566317fc249d27ce4f9bb0593f49e3",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "31f3545310d56cbf2a419471f4fa89ccdbf51e79161226017815cd79f6776146",
+          "finding": "Minimum transcript length, multi-exon coverage, junction coverage and isoform fraction controls readable.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-form-stringtie-estimate-reference-page-5-display.bmp",
+          "sha256": "e2522fb0822bb5a6850da2ae78cbd6333aeb78e9daa244fba0530f336c1821e7",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "ed22730ed602f96d12c52a2370f44f99bbe656a74a93157a30c9db4a8fb68f11",
+          "finding": "Junction coverage, isoform fraction, single-exon coverage and multimap fraction controls readable; explanatory text wraps.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-form-stringtie-estimate-reference-page-6-display.bmp",
+          "sha256": "08a9eb62a1738dc5b71a0f64b32b92f1d2c0085808ec3fe2d661528c840d61c4",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "a6495441d9242c76df4bd137b73b1b118170d0697373823ced09cd9a35c6c7cd",
+          "finding": "Final coverage/fraction controls and complete named outputs visible at form bottom.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-library-unfiltered-display.bmp",
+          "sha256": "fae028423166cb5e3e4c855719a0dbd05eb35defa0a96380ef4c99f51775c215",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "1e8e578e5e584f016f2200e1f702a1b1c58003f8fa7ba953d54cc379037fbfc5",
+          "finding": "Unfiltered category names, arrows and selection are readable; no overlap with the central tab.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-results-bustools-display.bmp",
+          "sha256": "6df84aafe4d3f9bc81a6a8e6d52cdfa4a5629494f8ce1ebea97f8dfbed2f83be",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "d5b421ccc30158d89bcddb80155154af570b277a2137fe3626bc3447889971b8",
+          "finding": "Search returns completed bustools run. Summary explicitly reports unsupported measurements and no QC verdict; content is readable.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-results-bustools-versions-display.bmp",
+          "sha256": "3da7e1df068d9fd48202edab4a591039a7615f0012d68a41f8839a30bd017075",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "d5b421ccc30158d89bcddb80155154af570b277a2137fe3626bc3447889971b8",
+          "finding": "Scrolled summary displays exact pack/executable versions, manifest/binary hashes and verified Methods file references; wrapped paths readable.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-results-stringtie-display.bmp",
+          "sha256": "590f964e537854187e440899c38e2111eea180dc40917a67e4a3d15562082f05",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "9a42301acb41a43b439aa4f5b32d6fc0a39ea75d9e1ab1d02be7cdd94de2b12e",
+          "finding": "Search returns completed StringTie guided run. Summary explicitly reports unsupported measurements and no QC verdict; content is readable.",
+          "blockingLayoutIssueObserved": false
+        },
+        {
+          "path": "pack-results-stringtie-versions-display.bmp",
+          "sha256": "3d00a079f77db5ced7077f0f0113662c184dbb30bf1f2514af3826c8f36d5bcb",
+          "width": 1024,
+          "height": 768,
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "actuallyViewed": true,
+          "controlMetadataSha256": "9a42301acb41a43b439aa4f5b32d6fc0a39ea75d9e1ab1d02be7cdd94de2b12e",
+          "finding": "Scrolled summary displays exact pack/executable versions, manifest/binary hashes and verified Methods file references; wrapped paths readable.",
+          "blockingLayoutIssueObserved": false
+        }
+      ],
+      "conclusion": {
+        "blockingLayoutIssuesObserved": false,
+        "approvedForUnpublishedPackReview": true,
+        "readability": "Tool names are bold and wrapped; descriptions use regular weight. Every form page, input and option is readable across the scroll sequence. Run tool and separate Methods buttons remain visible. Results search and provenance text remain accessible.",
+        "scientificPresentation": "Forms distinguish UMI counts from reads/cell calling and StringTie estimates from integer read counts; no invented QC acceptance thresholds. Native Results does not display these packs scientific measurements: it reports their unavailability while showing completion, versions, hashes and verified Methods references."
+      },
+      "nonblockingFindings": [
+        {
+          "finding": "Long aggregate input guidance repeats the individual-field descriptions, requiring several scrolls before all input selectors are reached.",
+          "scope": "All three forms; pronounced for bustools."
+        },
+        {
+          "finding": "Generic unsupported-measurement advice says to restore original bytes or prepare a new run even though the limitation is lack of a native parser for these pack-specific JSON files.",
+          "scope": "Both native Results summaries; report as frozen-application limitation, not missing or invalid scientific output."
+        },
+        {
+          "finding": "Search fields and general-setting path/name edits are single-line and show only the fitting portion. Complete tool names remain readable in the wrapped library cards and form headings.",
+          "scope": "Expected single-line editor behavior, not tool-name occlusion."
+        }
+      ],
+      "limits": [
+        "Static hosted screenshots cannot establish absence of transient flashing, redraw or resize artifacts.",
+        "Observed Windows Server desktop at 1024x768 and 96 DPI only; no representative-PC, high-DPI, multi-monitor, narrow-window or physical-input-device acceptance.",
+        "Only actual BitBlt display pixels support these visual conclusions. Supplemental PrintWindow BMPs were hash/dimension verified but not used as proof of actual display.",
+        "The captured Methods evidence consists of the separate persistent button and verified Methods file references in Results; no opened Methods document dialog is present.",
+        "Results screenshots cover bustools/count-bus and stringtie/assemble-guided. The estimate-reference form is fully captured; its scientific execution is evidenced separately.",
+        "The UI form captures do not prove a complete manually entered GUI analysis; native scientific graph execution is recorded separately.",
+        "This receipt covers ordinary paths only; the parent reviewer owns spaced-path screenshots."
+      ],
+      "retainedOriginalReceiptSha256": "c025ff4e1f1633b7003b7dbc0333abad0e383502c125deb7196ad246644ac0ff"
+    },
+    "spaces": {
+      "schema": 1,
+      "sourceCommit": "a93b338bca5e71b89e3cd000caaba96dbec73501",
+      "workflowRunId": 38420188054,
+      "case": "spaces",
+      "applicationVersion": "0.16.1",
+      "nativeReportSha256": "933cadae2f662abd6dc6eca0067bcd03b04a0280de2d2c640d2f75ef39fee38c",
+      "actualDisplayCapturesReviewed": 28,
+      "reviewedCaptures": [
+        {
+          "path": "pack-library-bustools-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "0ee59b7c0ab665a4af6041017a1271b5961085358a17f37b6c5719d04fe36806",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-library-stringtie-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "9d414ba94018dbcd397dd37651d5de7e9f20743dc878c0094751157022d9c687",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-form-bustools-count-bus-top-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "04b3a090d295468155e4240d94a12b8d2f6d8dfc63b640c6b4003cfee8f0afd3",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-form-bustools-count-bus-page-1-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "8d52916aa9bc4c29477aee827dd0c9cdb27bd0aeb4e2ae5bac65ac9eaf5ecdf9",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-form-bustools-count-bus-page-2-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "e157578ce4c5f376b16e34c2f1a6087cd4cb6360cfa932ac8f83fa9ff57c8a2c",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-form-bustools-count-bus-page-3-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "29f42edc44c7b95d6d41338d9723690e06c26c79fd4950db020e01e6c6ef8266",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-form-bustools-count-bus-page-4-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "394d95bdc666a040d794f8f90e42e4fa0dbdf687564a1cd051e3bda85d3028ba",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-form-bustools-count-bus-page-5-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "0b88059d3a151a496c5b2e99f5dc825ffac75745acf1ab793f166633d0de4f54",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-form-bustools-count-bus-page-6-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "a47202bb81c36b6e5dcf990d706ea88e87d629c05e4c41797c1f384d3b46da5c",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-form-stringtie-assemble-guided-top-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "638015d8b51f9fbe4065edd3b40669fcdc4b1032d9ae45cfcafd3b5a918e0ea9",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-form-stringtie-assemble-guided-page-1-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "73955ade869e13f544baccc391c33e1ee1322079cb93f003d5c9ef5e49ceaef7",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-form-stringtie-assemble-guided-page-2-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "b5a1d8c5a84afbbc1aec65cedf1b40edef325e2bf78af3a7bde0d64588d9d4cc",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-form-stringtie-assemble-guided-page-3-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "5fdfb7833fb557815a6e3c6381641ea1390dc6b3d3f0b392904c927f05e202e3",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-form-stringtie-assemble-guided-page-4-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "1d42546baec2f12a1f954e0aad443d8d22c9018629b75fe710c21536a5e2b493",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-form-stringtie-assemble-guided-page-5-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "1686d16ec6bd0c72ef0498cdd4dc8f01699baef9fe8bbb8efed13f13e5264fc7",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-form-stringtie-assemble-guided-page-6-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "8ae148d70ea6b5b1df1927604d6d1219cadaedf08fe669d0b4afdf3b16e49beb",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-form-stringtie-estimate-reference-top-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "71bb2bb7f70615c3f87df414743330f19107ab4142d2c904221f9cdd4944fe40",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-form-stringtie-estimate-reference-page-1-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "b1be9acd7f2242ac207bb5428fcc1cfbb716a734d60180905f807504dee3eb47",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-form-stringtie-estimate-reference-page-2-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "69cb3e81b389d565cf05fe07f4a677ec2bf86be04015e464a9046f7e1140b722",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-form-stringtie-estimate-reference-page-3-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "f264eafa94ec8ac27c92ef16ccb75a21261986136a92637db536361aa2529796",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-form-stringtie-estimate-reference-page-4-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "082668a9b9ad0a08fcdbfe372842dbf02999d9c2fd4fbaad49e78562078181f4",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-form-stringtie-estimate-reference-page-5-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "bbcf1a6521191705d87adf816757728fb6425b3439b7b5d7b63972bcb3ac2d5c",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-form-stringtie-estimate-reference-page-6-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "c45c863299b8326cac3952321b5d6c7e72c6494fc5514f050f10ff5a0525a92a",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-library-unfiltered-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "9a2fec50d282999a3b0b1001b0063a534113181dd26fcafddfe954b97a6aec21",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-results-bustools-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "78f3d78e25045f823aacbb51209cac8438ff2b1bae6a527fec7dbb7680df229b",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-results-bustools-versions-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "57b22e48bfc00e2525cef50cc776011c4a6a92e5c86fe940d737bb07f9af3a0f",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-results-stringtie-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "e1a27fb8fe0737b23ba8e68f8e8bbead81624fa1d0b2ad854c7baa0bd2c3c7a2",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        },
+        {
+          "path": "pack-results-stringtie-versions-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "95c8ef5277a4b75eada0a471dfdb23ce455d1a493bbe51acd70a5d10772ec65c",
+          "method": "screen BitBlt; no PrintWindow repaint"
+        }
+      ],
+      "reviewMethod": "All 28 full actual-display BitBlt screenshots inspected at original resolution in seven labelled 2x2 sheets. Every top and subsequent form page, both filtered libraries, unfiltered library and both Results/versions views reviewed. Original hashes verified; sheets are inspection aids only.",
+      "success": true,
+      "blockingFindings": [],
+      "observations": [
+        "Bold workflow names wrap inside the library and descriptions use regular weight; selected titles remain readable within each panel.",
+        "All five BUS files and all StringTie input/option fields are reachable across the captured scroll range; labels/help and Browse controls do not overlap.",
+        "Run tool and separate Methods controls remain visible outside the form scroll area.",
+        "Results search returns the intended successful analysis; its details show exact pack/tool versions, manifest identity and verified Methods paths.",
+        "Forms contain long repeated guidance and require scrolling at 1024x768. Viewport-edge clipping during a partial scroll is resolved on adjoining captured pages.",
+        "Generic Results explicitly says supported measurements are unavailable; pack measurement JSON remains an output file, without dedicated native measurement tiles."
+      ],
+      "limits": [
+        "Hosted Windows 2022 desktop at 96 DPI, 1024x768 capture; not representative-PC, high-DPI or accessibility acceptance.",
+        "Static capture review does not establish absence of all transient redraw flicker.",
+        "PrintWindow captures are retained as supplemental window images but are not substituted for actual display evidence.",
+        "No interactive review of a separate Methods dialog is claimed; recorded methods/CWL and Results provenance are independently checked by the native gate."
+      ],
+      "retainedOriginalReceiptSha256": "b5f82550c4f89aa579485084d4d455336584f45b6632b76c5a5bbfdf75dbb1fb"
+    }
+  },
+  "success": true,
+  "blockingFindings": [],
+  "scope": "Static review of all 56 actual BitBlt captures, distinct from supplemental PrintWindow images. Hosted 1024x768 at 96 DPI; no transient flicker or broader display acceptance claim."
+}

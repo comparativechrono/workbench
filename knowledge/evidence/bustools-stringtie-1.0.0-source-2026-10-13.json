@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "sourceCommit": "a93b338bca5e71b89e3cd000caaba96dbec73501",
+  "workflowRunId": 38420188054,
+  "buildJobId": 115375157390,
+  "buildConclusion": "success",
+  "log": {
+    "path": "build/a93b338-hosted-build-job.log",
+    "bytes": 43029,
+    "sha256": "2848a43414766f5cbbc2821f0739966a52dd8f866059c70fc9a9a25c1c9a8e56"
+  },
+  "suites": [
+    {
+      "source": "tests/test_bustools_stringtie_validation.py",
+      "testSourceSha256": "736ea2ec7a9349c1c27eb2a7015d1759dde9e913eeef91cf42101db1c28a3dbc",
+      "testsRun": 25,
+      "passed": 25,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "source": "tests/test_prodigal_fasttree_validation.py",
+      "testSourceSha256": "d4ca51ee44b6d1e36a15bfbdbc815ae0a09766042fcdb685b50e3c328c2a31da",
+      "testsRun": 8,
+      "passed": 8,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "source": "tests/test_bustools_pack.py",
+      "testSourceSha256": "bcabcc2a91c993deececbdc86f9ca61934db2dfcc4f9266c39ca8a399dc315da",
+      "testsRun": 24,
+      "passed": 24,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "source": "tests/test_stringtie_pack.py",
+      "testSourceSha256": "62bc2e0569b4fca6bbc88622ff52176d547916a7b60178793d653941b5654cf8",
+      "testsRun": 21,
+      "passed": 21,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "source": "tests/test_pack_checks.py",
+      "testSourceSha256": "f48cb7b91f0e5a4c9c6b3a2071ab7eeffeec378a7807448092db60bbceb6363a",
+      "testsRun": 14,
+      "passed": 14,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "source": "tests/test_pack_manager.py",
+      "testSourceSha256": "0d65b30fb290ff13bdc984f230f0e2cd170216001da5e5afea76fb3863df5c0e",
+      "testsRun": 47,
+      "passed": 46,
+      "skipped": 1,
+      "failures": 0,
+      "errors": 0
+    }
+  ],
+  "totalTestsRun": 139,
+  "totalPassed": 138,
+  "totalSkipped": 1,
+  "skip": {
+    "test": "test_windows_deep_local_archive_import",
+    "source": "tests/test_pack_manager.py",
+    "reason": "Native Windows long-path filesystem check",
+    "platform": "Linux build host"
+  },
+  "packScientificSuitesSkipped": 0,
+  "candidateFreezeSucceeded": true,
+  "archiveSourceAuditSucceeded": true,
+  "scope": "Completed build job and Linux/source tests only. Exact Windows reports are separately required.",
+  "retainedOriginalReceiptSha256": "6b50abc029cefa5eab7e05a3842024e869b61c87262352aa7aa0f8c3e85221ab"
+}

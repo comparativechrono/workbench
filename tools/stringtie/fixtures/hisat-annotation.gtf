@@ -1,0 +1,2 @@
+chrSynthetic	synthetic_truth	exon	471	500	.	+	.	gene_id "integration_gene"; transcript_id "integration_tx";
+chrSynthetic	synthetic_truth	exon	601	750	.	+	.	gene_id "integration_gene"; transcript_id "integration_tx";

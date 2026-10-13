@@ -1,0 +1,1784 @@
+{
+  "schema": 1,
+  "kind": "bustools-stringtie-native-heap-failure",
+  "candidateSourceCommit": "ddeadd34b68491f7f7450ceac804f8fade4116a6",
+  "sourceTree": "a6783838daa9466ad308f69347af4ee9a237e29c",
+  "workflowRunId": 38416822238,
+  "nativeAcceptancePassed": false,
+  "packs": {
+    "bustools": {
+      "path": "candidate/native-workbench-pack-bustools-1.0.0.zip",
+      "bytes": 5836546,
+      "sha256": "387f7ae1b04ba8187e9e24690b5ad102aa1c9d44ce558c04b37ddf3cbf70e629",
+      "manifestSha256": "6efe81d68448338143db24e7b63625d56cbf8890a4d7330b15b789d91c672936",
+      "version": "1.0.0",
+      "toolVersions": {
+        "bustools": "0.45.1-workbench1",
+        "bustools-adapter": "1.0.0"
+      }
+    },
+    "stringtie": {
+      "path": "candidate/native-workbench-pack-stringtie-1.0.0.zip",
+      "bytes": 6849980,
+      "sha256": "8f0c723c7e045414e0fceec75915ec07c586af43c3ebbab844a6829fe0088aa1",
+      "manifestSha256": "76299780a7ebb9877f430e814f859bfe33fda1b86753d0768e47d5c73e674336",
+      "version": "1.0.0",
+      "toolVersions": {
+        "stringtie": "3.0.3-workbench1",
+        "stringtie-adapter": "1.0.0"
+      }
+    }
+  },
+  "sourceCompanion": {
+    "path": "candidate/native-workbench-bustools-stringtie-1.0.0-source-evidence.zip",
+    "bytes": 13759450,
+    "sha256": "15dabf0cbe7e1bb8855a217eee74a05e4a42bd283bf75ee5b476619320457fb2"
+  },
+  "sourceAudit": {
+    "path": "candidate/archive-source-audit.json",
+    "bytes": 4681,
+    "sha256": "4cf1bce3878ee78ff02c05e7d162d8ee60b6dd4b42683b1d605eea72fac9fc3c"
+  },
+  "summary": {
+    "StringTieDeclaredChecks": {
+      "passed": 4,
+      "failed": 4
+    },
+    "StringTieNormalGraphs": {
+      "passed": 0,
+      "failed": 1
+    },
+    "StringTieNativeAnalyses": {
+      "failed": 5,
+      "success": 4
+    },
+    "observedUpstreamFailureCode": {
+      "signed": -1073740940,
+      "unsigned": 3221226356,
+      "hex": "0xC0000374"
+    },
+    "failedAnalysisStepElapsedMs": [
+      93,
+      94,
+      94,
+      250,
+      359
+    ],
+    "deadlinesExceeded": 0,
+    "StringTieLogsAllEmpty": true,
+    "upstreamDataPathArgumentsAllForwardSlash": true,
+    "bustoolsSourceIndependentNativeSuitePerPath": {
+      "ordinary": 19,
+      "spaces": 19,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "screenshots": 0
+  },
+  "observations": [
+    "The same exact StringTie archive and fixture input hashes produced both passing and failing native analyses. Both StringTie modes fail in the retained evidence.",
+    "Every failed child has guard exit 2 and a retained message reporting upstream exit -1073740940. Logs expose no additional upstream diagnostic.",
+    "All failed children retained nonempty transcript GTF and abundance TSV files. These are diagnostics only; failed runs remain failed.",
+    "Exact pinned Starter SAMtools appears in every StringTie frozen plan. All input hashes are unchanged. The prior missing-preflight-dependency and path-separator issues do not explain an absent helper or backslashes in these runs.",
+    "No installation deadline fired. Subsecond failing step durations demonstrate these observed failures returned promptly; they are not a performance benchmark.",
+    "The Windows exception code is recorded without assigning a memory corruption root cause. Native debugging and a corrected exact-candidate rerun remain required."
+  ],
+  "notReached": [
+    "StringTie full native scientific regression suite in either science path",
+    "HISAT2 RNA BAM to both StringTie real DAG acceptance",
+    "Combined Starter regression completion",
+    "Native GUI launch, screenshots and visual review",
+    "Complete final application integrity check and overall candidate acceptance"
+  ],
+  "scopes": [
+    {
+      "scope": "ordinary/science",
+      "nativeReport": {
+        "path": "ordinary/science/native.json",
+        "bytes": 5461,
+        "sha256": "c73be5086e4d5f5d0467d48302931d5b9765df935d4472d49c8774eafe1edbca"
+      },
+      "success": false,
+      "nativeWindowsExecuted": true,
+      "application": {
+        "applicationVersion": "0.16.0",
+        "applicationSourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "applicationArchive": {
+          "file": "published-starter.zip",
+          "bytes": 17846873,
+          "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+        }
+      },
+      "gateError": "ValueError: Native import/check did not fully execute: stringtie",
+      "captures": [],
+      "bustools": {
+        "installationReport": {
+          "path": "ordinary/science/bustools-installation.json",
+          "bytes": 1462,
+          "sha256": "b06f5507125503edf97ff627ca1057d819b81d6d9a265467ae130f2845b20c13"
+        },
+        "installationSuccess": true,
+        "duplicateVersionRejected": true,
+        "declaredChecks": [
+          {
+            "id": "bustools/independent-bus-truth@1.0.0",
+            "pin": {
+              "packId": "bustools",
+              "packVersion": "1.0.0",
+              "manifestSha256": "6efe81d68448338143db24e7b63625d56cbf8890a4d7330b15b789d91c672936"
+            },
+            "status": "passed",
+            "folder": "D:\\a\\_temp\\ordinary\\released-app\\native-workbench\\results\\run-20261013-145245-87549276"
+          }
+        ],
+        "science": {
+          "report": {
+            "path": "ordinary/science/bustools-regressions.json",
+            "bytes": 55166,
+            "sha256": "6292590722e4362f9ed145171d1d6d00ad8789a067f435f3227b3e27a36c8aa3"
+          },
+          "success": true,
+          "nativeWindowsExecuted": true,
+          "testsRun": 19,
+          "failures": 0,
+          "errors": 0,
+          "skipped": [],
+          "testSourceSha256": "bcabcc2a91c993deececbdc86f9ca61934db2dfcc4f9266c39ca8a399dc315da",
+          "guardExecutableSha256": "005f448cd5518861dae5b4033edc7e272dbf1eb8a51d5611b5d5698616e079a6",
+          "scientificBinarySha256": "20fa810027a4e247fb47a34555581d118c61b12d2932f50c87daa3e7f436af4d",
+          "packManifestSha256": "6efe81d68448338143db24e7b63625d56cbf8890a4d7330b15b789d91c672936"
+        }
+      },
+      "stringtie": {
+        "installationReport": {
+          "path": "ordinary/science/stringtie-installation.json",
+          "bytes": 4394,
+          "sha256": "fe8b4fafe10c40c8a47d5886a3897d2032b4dde6d781568ee055d4561f2c025d"
+        },
+        "installationSuccess": false,
+        "importSuccess": true,
+        "declaredChecks": [
+          {
+            "id": "stringtie/assemble-guided-spliced@1.0.0",
+            "pin": {
+              "packId": "stringtie",
+              "packVersion": "1.0.0",
+              "manifestSha256": "76299780a7ebb9877f430e814f859bfe33fda1b86753d0768e47d5c73e674336"
+            },
+            "status": "failed",
+            "folder": "D:\\a\\_temp\\ordinary\\bustools-stringtie-evidence\\science\\stringtie-installation-results\\run-20261013-145249-b0db1006",
+            "message": "Tool did not complete: failed"
+          },
+          {
+            "id": "stringtie/estimate-reference-spliced@1.0.0",
+            "pin": {
+              "packId": "stringtie",
+              "packVersion": "1.0.0",
+              "manifestSha256": "76299780a7ebb9877f430e814f859bfe33fda1b86753d0768e47d5c73e674336"
+            },
+            "status": "passed",
+            "folder": "D:\\a\\_temp\\ordinary\\bustools-stringtie-evidence\\science\\stringtie-installation-results\\run-20261013-145250-f87edf9b"
+          }
+        ],
+        "passed": 1,
+        "failed": 1,
+        "deadline": {
+          "seconds": 120,
+          "exceeded": false,
+          "cancellationRequested": false,
+          "backendShutdownErrors": []
+        },
+        "preflightDependency": {
+          "packId": "bam",
+          "packVersion": "0.4.0",
+          "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888",
+          "operation": "bam/flagstat",
+          "id": "samtools",
+          "version": "1.24",
+          "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+          "path": "bin/samtools.exe",
+          "providedBy": "unchanged pinned Starter application",
+          "pin": {
+            "packId": "bam",
+            "packVersion": "0.4.0",
+            "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+          },
+          "scope": "Existing Starter descriptor retained for ordinary alignment inspection; dependency has no selected self-checks."
+        },
+        "events": {
+          "path": "ordinary/science/stringtie-installation-results/installation-events.jsonl",
+          "bytes": 6163,
+          "sha256": "f4c8736dd40fe6ced0d17debfd8565648caa465e041810ef93b20ec5d8e3724f"
+        }
+      },
+      "stringtieRuns": [
+        {
+          "runId": "run-20261013-145249-b0db1006",
+          "context": "declared-check",
+          "operation": "assemble-guided",
+          "status": "failed",
+          "elapsedMs": 406,
+          "analysisStep": {
+            "status": "failed",
+            "exit_code": 2,
+            "elapsed_ms": 359
+          },
+          "versionStep": {
+            "status": "success",
+            "exit_code": 0,
+            "elapsed_ms": 32
+          },
+          "upstreamExitSigned": -1073740940,
+          "upstreamExitHex": "0xC0000374",
+          "stderr": "StringTie input/result validation: StringTie failed (exit -1073740940); inspect stringtie.log, BAM integrity, annotation and available memory\n",
+          "childRun": {
+            "path": "ordinary/science/stringtie-installation-results/run-20261013-145249-b0db1006/S1/analysis-20261013-145249-4528-0/run.json",
+            "bytes": 10853,
+            "sha256": "3535a2e752d9e6341a9e4af231d9eb36a3e49cebc492cdb1b66aadbffa351acf"
+          },
+          "outerRun": {
+            "path": "ordinary/science/stringtie-installation-results/run-20261013-145249-b0db1006/run.json",
+            "bytes": 3713,
+            "sha256": "3a6fd507f91fb0c190eaff814fcfca172fd5ca40bed7767d81d179fb41afb4c9"
+          },
+          "plan": {
+            "path": "ordinary/science/stringtie-installation-results/run-20261013-145249-b0db1006/plan.json",
+            "bytes": 25044,
+            "sha256": "9cf2aeab198fb9571ce9a17b1b8e11b315c04b59840526538e09b495ed379e64"
+          },
+          "validationTools": [
+            {
+              "samtools": {
+                "operation": "bam/flagstat",
+                "pin": {
+                  "packId": "bam",
+                  "packVersion": "0.4.0",
+                  "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+                },
+                "executable": {
+                  "id": "samtools",
+                  "path": "bin/samtools.exe",
+                  "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+                  "version": "1.24"
+                }
+              }
+            }
+          ],
+          "files": {
+            "logs/analysis.stderr.log": {
+              "path": "ordinary/science/stringtie-installation-results/run-20261013-145249-b0db1006/S1/analysis-20261013-145249-4528-0/logs/analysis.stderr.log",
+              "bytes": 143,
+              "sha256": "32753bc71b1a03e3baabcb9801d887db4499f909ca6849c5425668d249e5b9dd"
+            },
+            "logs/analysis.stdout.log": {
+              "path": "ordinary/science/stringtie-installation-results/run-20261013-145249-b0db1006/S1/analysis-20261013-145249-4528-0/logs/analysis.stdout.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "stringtie.log": {
+              "path": "ordinary/science/stringtie-installation-results/run-20261013-145249-b0db1006/S1/analysis-20261013-145249-4528-0/stringtie.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "transcripts.gtf": {
+              "path": "ordinary/science/stringtie-installation-results/run-20261013-145249-b0db1006/S1/analysis-20261013-145249-4528-0/transcripts.gtf",
+              "bytes": 1689,
+              "sha256": "41f9d760bd13eb2fe01c4610e195f1e7c026a13efff185f9e544109f37430730"
+            },
+            "gene-abundance.tsv": {
+              "path": "ordinary/science/stringtie-installation-results/run-20261013-145249-b0db1006/S1/analysis-20261013-145249-4528-0/gene-abundance.tsv",
+              "bytes": 416,
+              "sha256": "604a7af3b44deb5af336caae3a2c4aab9124c13a50d340bfda0f2cabf0c42590"
+            },
+            "analysis-settings.json": {
+              "path": "ordinary/science/stringtie-installation-results/run-20261013-145249-b0db1006/S1/analysis-20261013-145249-4528-0/analysis-settings.json",
+              "bytes": 1430,
+              "sha256": "d54bb5e32b5abc734ec7ed3c9ba843478d8b6bdf82ad6ce7ec447ddba0d474e8"
+            }
+          },
+          "inputHashes": [
+            {
+              "id": "alignment",
+              "bytes": 27716,
+              "before": "b1b918330742b9df07a510e3a71183fb75c2764cd8d7da8dca74f7d59b54b698",
+              "after": "b1b918330742b9df07a510e3a71183fb75c2764cd8d7da8dca74f7d59b54b698",
+              "afterCheck": "unchanged"
+            },
+            {
+              "id": "annotation",
+              "bytes": 604,
+              "before": "72d512ca9d1139e92117c2d0c506f4546ffbce71539cee4f83ae6373c0e8260d",
+              "after": "72d512ca9d1139e92117c2d0c506f4546ffbce71539cee4f83ae6373c0e8260d",
+              "afterCheck": "unchanged"
+            }
+          ],
+          "upstreamArguments": [
+            "D:\\a\\_temp\\ordinary\\released-app\\native-workbench\\packs\\stringtie-1.0.0\\bin\\stringtie.exe",
+            "D:/a/_temp/ordinary/released-app/native-workbench/packs/stringtie-1.0.0/fixtures/spliced.bam",
+            "-G",
+            "D:/a/_temp/ordinary/released-app/native-workbench/packs/stringtie-1.0.0/fixtures/guide.gtf",
+            "-o",
+            "D:/a/_temp/ordinary/bustools-stringtie-evidence/science/stringtie-installation-results/run-20261013-145249-b0db1006/S1/analysis-20261013-145249-4528-0/transcripts.gtf",
+            "-A",
+            "D:/a/_temp/ordinary/bustools-stringtie-evidence/science/stringtie-installation-results/run-20261013-145249-b0db1006/S1/analysis-20261013-145249-4528-0/gene-abundance.tsv",
+            "-p",
+            "1",
+            "-m",
+            "200",
+            "-c",
+            "1",
+            "-j",
+            "1",
+            "-f",
+            "0.01",
+            "-s",
+            "4.75",
+            "-M",
+            "1",
+            "-a",
+            "10",
+            "-g",
+            "50",
+            "-l",
+            "STRG"
+          ],
+          "upstreamDataPathsUseForwardSlashes": true,
+          "outputQualification": "Nonempty output files from a failed process are retained diagnostics; they are not accepted scientific outputs."
+        },
+        {
+          "runId": "run-20261013-145250-f87edf9b",
+          "context": "declared-check",
+          "operation": "estimate-reference",
+          "status": "success",
+          "elapsedMs": 109,
+          "analysisStep": {
+            "status": "success",
+            "exit_code": 0,
+            "elapsed_ms": 62
+          },
+          "versionStep": {
+            "status": "success",
+            "exit_code": 0,
+            "elapsed_ms": 47
+          },
+          "upstreamExitSigned": null,
+          "upstreamExitHex": null,
+          "stderr": "",
+          "childRun": {
+            "path": "ordinary/science/stringtie-installation-results/run-20261013-145250-f87edf9b/S1/analysis-20261013-145250-5576-0/run.json",
+            "bytes": 11828,
+            "sha256": "1e0a9b5fb85ef205fec912902d931d1cd47021697a867b06d61df09d68b9f9c9"
+          },
+          "outerRun": {
+            "path": "ordinary/science/stringtie-installation-results/run-20261013-145250-f87edf9b/run.json",
+            "bytes": 11667,
+            "sha256": "4c4078b4fe54188acd2390c59c52de201746ce21b0c5cd2c25f28712a21f2087"
+          },
+          "plan": {
+            "path": "ordinary/science/stringtie-installation-results/run-20261013-145250-f87edf9b/plan.json",
+            "bytes": 24985,
+            "sha256": "cb5cf6499f1fd9cdd99f1034b0945e184e91faa3f323dc80e7f9d66e300c217f"
+          },
+          "validationTools": [
+            {
+              "samtools": {
+                "operation": "bam/flagstat",
+                "pin": {
+                  "packId": "bam",
+                  "packVersion": "0.4.0",
+                  "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+                },
+                "executable": {
+                  "id": "samtools",
+                  "path": "bin/samtools.exe",
+                  "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+                  "version": "1.24"
+                }
+              }
+            }
+          ],
+          "files": {
+            "logs/analysis.stderr.log": {
+              "path": "ordinary/science/stringtie-installation-results/run-20261013-145250-f87edf9b/S1/analysis-20261013-145250-5576-0/logs/analysis.stderr.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "logs/analysis.stdout.log": {
+              "path": "ordinary/science/stringtie-installation-results/run-20261013-145250-f87edf9b/S1/analysis-20261013-145250-5576-0/logs/analysis.stdout.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "stringtie.log": {
+              "path": "ordinary/science/stringtie-installation-results/run-20261013-145250-f87edf9b/S1/analysis-20261013-145250-5576-0/stringtie.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "transcripts.gtf": {
+              "path": "ordinary/science/stringtie-installation-results/run-20261013-145250-f87edf9b/S1/analysis-20261013-145250-5576-0/transcripts.gtf",
+              "bytes": 1986,
+              "sha256": "2d08d5c0cd906313e5665bccd90011ad0a725ff32dde4523c39c7025c8e86f74"
+            },
+            "gene-abundance.tsv": {
+              "path": "ordinary/science/stringtie-installation-results/run-20261013-145250-f87edf9b/S1/analysis-20261013-145250-5576-0/gene-abundance.tsv",
+              "bytes": 272,
+              "sha256": "afbb0f5e866bf307a73b428d9c70b8946a1ffd46bd3d71053ce7e3ef05a967bc"
+            },
+            "analysis-settings.json": {
+              "path": "ordinary/science/stringtie-installation-results/run-20261013-145250-f87edf9b/S1/analysis-20261013-145250-5576-0/analysis-settings.json",
+              "bytes": 1439,
+              "sha256": "783056bee577a3710f99215ae084427e63219a792f66568f98c5854074df55e8"
+            }
+          },
+          "inputHashes": [
+            {
+              "id": "alignment",
+              "bytes": 27716,
+              "before": "b1b918330742b9df07a510e3a71183fb75c2764cd8d7da8dca74f7d59b54b698",
+              "after": "b1b918330742b9df07a510e3a71183fb75c2764cd8d7da8dca74f7d59b54b698",
+              "afterCheck": "unchanged"
+            },
+            {
+              "id": "annotation",
+              "bytes": 604,
+              "before": "72d512ca9d1139e92117c2d0c506f4546ffbce71539cee4f83ae6373c0e8260d",
+              "after": "72d512ca9d1139e92117c2d0c506f4546ffbce71539cee4f83ae6373c0e8260d",
+              "afterCheck": "unchanged"
+            }
+          ],
+          "upstreamArguments": [
+            "D:\\a\\_temp\\ordinary\\released-app\\native-workbench\\packs\\stringtie-1.0.0\\bin\\stringtie.exe",
+            "D:/a/_temp/ordinary/released-app/native-workbench/packs/stringtie-1.0.0/fixtures/spliced.bam",
+            "-G",
+            "D:/a/_temp/ordinary/released-app/native-workbench/packs/stringtie-1.0.0/fixtures/guide.gtf",
+            "-o",
+            "D:/a/_temp/ordinary/bustools-stringtie-evidence/science/stringtie-installation-results/run-20261013-145250-f87edf9b/S1/analysis-20261013-145250-5576-0/transcripts.gtf",
+            "-A",
+            "D:/a/_temp/ordinary/bustools-stringtie-evidence/science/stringtie-installation-results/run-20261013-145250-f87edf9b/S1/analysis-20261013-145250-5576-0/gene-abundance.tsv",
+            "-p",
+            "1",
+            "-m",
+            "200",
+            "-c",
+            "1",
+            "-j",
+            "1",
+            "-f",
+            "0.01",
+            "-s",
+            "4.75",
+            "-M",
+            "1",
+            "-a",
+            "10",
+            "-g",
+            "50",
+            "-l",
+            "STRG",
+            "-e"
+          ],
+          "upstreamDataPathsUseForwardSlashes": true,
+          "outputQualification": "Declared check reported passed against its configured known answer."
+        }
+      ],
+      "recordedNormalGraphs": []
+    },
+    {
+      "scope": "ordinary/gui",
+      "nativeReport": {
+        "path": "ordinary/gui/native.json",
+        "bytes": 5409,
+        "sha256": "1234aa86df6566faa13d2b669a6ec56f467dabd447ae311e72c6098fbb55c755"
+      },
+      "success": false,
+      "nativeWindowsExecuted": true,
+      "application": {
+        "applicationVersion": "0.16.1",
+        "applicationSourceCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+        "applicationArchive": {
+          "file": "native-workbench-0.16.1-starter-windows.zip",
+          "bytes": 17889148,
+          "sha256": "28f1362287991621dde030da54eb444846142c0243be6b9d86c4b4f1bf99dd47"
+        }
+      },
+      "gateError": "ValueError: Native import/check did not fully execute: stringtie",
+      "captures": [],
+      "bustools": {
+        "installationReport": {
+          "path": "ordinary/gui/bustools-installation.json",
+          "bytes": 1465,
+          "sha256": "6167fe6de09001056fb8b710277c168b8d21679a5a3c7b8c46decd46f291ee30"
+        },
+        "installationSuccess": true,
+        "duplicateVersionRejected": true,
+        "declaredChecks": [
+          {
+            "id": "bustools/independent-bus-truth@1.0.0",
+            "pin": {
+              "packId": "bustools",
+              "packVersion": "1.0.0",
+              "manifestSha256": "6efe81d68448338143db24e7b63625d56cbf8890a4d7330b15b789d91c672936"
+            },
+            "status": "passed",
+            "folder": "D:\\a\\_temp\\ordinary\\frozen-ui-app\\native-workbench\\results\\run-20261013-145255-8fb651cc"
+          }
+        ]
+      },
+      "stringtie": {
+        "installationReport": {
+          "path": "ordinary/gui/stringtie-installation.json",
+          "bytes": 4428,
+          "sha256": "9df0736a11616ff1804fa1b2f00176e9c2a97e941f79a191c8dea1ee6a9e1404"
+        },
+        "installationSuccess": false,
+        "importSuccess": true,
+        "declaredChecks": [
+          {
+            "id": "stringtie/assemble-guided-spliced@1.0.0",
+            "pin": {
+              "packId": "stringtie",
+              "packVersion": "1.0.0",
+              "manifestSha256": "76299780a7ebb9877f430e814f859bfe33fda1b86753d0768e47d5c73e674336"
+            },
+            "status": "failed",
+            "folder": "D:\\a\\_temp\\ordinary\\bustools-stringtie-evidence\\gui\\stringtie-installation-results\\run-20261013-145256-8c291e56",
+            "message": "Tool did not complete: failed"
+          },
+          {
+            "id": "stringtie/estimate-reference-spliced@1.0.0",
+            "pin": {
+              "packId": "stringtie",
+              "packVersion": "1.0.0",
+              "manifestSha256": "76299780a7ebb9877f430e814f859bfe33fda1b86753d0768e47d5c73e674336"
+            },
+            "status": "failed",
+            "folder": "D:\\a\\_temp\\ordinary\\bustools-stringtie-evidence\\gui\\stringtie-installation-results\\run-20261013-145256-1f863ab6",
+            "message": "Tool did not complete: failed"
+          }
+        ],
+        "passed": 0,
+        "failed": 2,
+        "deadline": {
+          "seconds": 120,
+          "exceeded": false,
+          "cancellationRequested": false,
+          "backendShutdownErrors": []
+        },
+        "preflightDependency": {
+          "packId": "bam",
+          "packVersion": "0.4.0",
+          "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888",
+          "operation": "bam/flagstat",
+          "id": "samtools",
+          "version": "1.24",
+          "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+          "path": "bin/samtools.exe",
+          "providedBy": "unchanged pinned Starter application",
+          "pin": {
+            "packId": "bam",
+            "packVersion": "0.4.0",
+            "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+          },
+          "scope": "Existing Starter descriptor retained for ordinary alignment inspection; dependency has no selected self-checks."
+        },
+        "events": {
+          "path": "ordinary/gui/stringtie-installation-results/installation-events.jsonl",
+          "bytes": 6443,
+          "sha256": "56b4d47c4576bae49d92c542c86cfdeab1e2504b48d0569e786e12392c838f6f"
+        }
+      },
+      "stringtieRuns": [
+        {
+          "runId": "run-20261013-145256-1f863ab6",
+          "context": "declared-check",
+          "operation": "estimate-reference",
+          "status": "failed",
+          "elapsedMs": 141,
+          "analysisStep": {
+            "status": "failed",
+            "exit_code": 2,
+            "elapsed_ms": 94
+          },
+          "versionStep": {
+            "status": "success",
+            "exit_code": 0,
+            "elapsed_ms": 31
+          },
+          "upstreamExitSigned": -1073740940,
+          "upstreamExitHex": "0xC0000374",
+          "stderr": "StringTie input/result validation: StringTie failed (exit -1073740940); inspect stringtie.log, BAM integrity, annotation and available memory\n",
+          "childRun": {
+            "path": "ordinary/gui/stringtie-installation-results/run-20261013-145256-1f863ab6/S1/analysis-20261013-145256-2676-0/run.json",
+            "bytes": 10818,
+            "sha256": "d780c1b315896a3cf691ab767dd59a5d12165bda1aa9a28d4685863af3c3e602"
+          },
+          "outerRun": {
+            "path": "ordinary/gui/stringtie-installation-results/run-20261013-145256-1f863ab6/run.json",
+            "bytes": 3705,
+            "sha256": "203a89c7c78d73a11a7f9c1338f77b353d3d38eabdfb901c4d6a61ee6f649d9d"
+          },
+          "plan": {
+            "path": "ordinary/gui/stringtie-installation-results/run-20261013-145256-1f863ab6/plan.json",
+            "bytes": 24991,
+            "sha256": "c547735855e3f63dccf85e45087d96c3c000b91393871303f5f542566d23de1b"
+          },
+          "validationTools": [
+            {
+              "samtools": {
+                "operation": "bam/flagstat",
+                "pin": {
+                  "packId": "bam",
+                  "packVersion": "0.4.0",
+                  "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+                },
+                "executable": {
+                  "id": "samtools",
+                  "path": "bin/samtools.exe",
+                  "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+                  "version": "1.24"
+                }
+              }
+            }
+          ],
+          "files": {
+            "logs/analysis.stderr.log": {
+              "path": "ordinary/gui/stringtie-installation-results/run-20261013-145256-1f863ab6/S1/analysis-20261013-145256-2676-0/logs/analysis.stderr.log",
+              "bytes": 143,
+              "sha256": "32753bc71b1a03e3baabcb9801d887db4499f909ca6849c5425668d249e5b9dd"
+            },
+            "logs/analysis.stdout.log": {
+              "path": "ordinary/gui/stringtie-installation-results/run-20261013-145256-1f863ab6/S1/analysis-20261013-145256-2676-0/logs/analysis.stdout.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "stringtie.log": {
+              "path": "ordinary/gui/stringtie-installation-results/run-20261013-145256-1f863ab6/S1/analysis-20261013-145256-2676-0/stringtie.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "transcripts.gtf": {
+              "path": "ordinary/gui/stringtie-installation-results/run-20261013-145256-1f863ab6/S1/analysis-20261013-145256-2676-0/transcripts.gtf",
+              "bytes": 1151,
+              "sha256": "f45f86479649ac92379efacbb3b88a7e1b2b755636a81d21207a54ae85df6526"
+            },
+            "gene-abundance.tsv": {
+              "path": "ordinary/gui/stringtie-installation-results/run-20261013-145256-1f863ab6/S1/analysis-20261013-145256-2676-0/gene-abundance.tsv",
+              "bytes": 272,
+              "sha256": "afbb0f5e866bf307a73b428d9c70b8946a1ffd46bd3d71053ce7e3ef05a967bc"
+            },
+            "analysis-settings.json": {
+              "path": "ordinary/gui/stringtie-installation-results/run-20261013-145256-1f863ab6/S1/analysis-20261013-145256-2676-0/analysis-settings.json",
+              "bytes": 1434,
+              "sha256": "a9c4b3010c296dcf55b735b2f65b2fc2724c8b0d8cd3ca0a0dee667c5da38518"
+            }
+          },
+          "inputHashes": [
+            {
+              "id": "alignment",
+              "bytes": 27716,
+              "before": "b1b918330742b9df07a510e3a71183fb75c2764cd8d7da8dca74f7d59b54b698",
+              "after": "b1b918330742b9df07a510e3a71183fb75c2764cd8d7da8dca74f7d59b54b698",
+              "afterCheck": "unchanged"
+            },
+            {
+              "id": "annotation",
+              "bytes": 604,
+              "before": "72d512ca9d1139e92117c2d0c506f4546ffbce71539cee4f83ae6373c0e8260d",
+              "after": "72d512ca9d1139e92117c2d0c506f4546ffbce71539cee4f83ae6373c0e8260d",
+              "afterCheck": "unchanged"
+            }
+          ],
+          "upstreamArguments": [
+            "D:\\a\\_temp\\ordinary\\frozen-ui-app\\native-workbench\\packs\\stringtie-1.0.0\\bin\\stringtie.exe",
+            "D:/a/_temp/ordinary/frozen-ui-app/native-workbench/packs/stringtie-1.0.0/fixtures/spliced.bam",
+            "-G",
+            "D:/a/_temp/ordinary/frozen-ui-app/native-workbench/packs/stringtie-1.0.0/fixtures/guide.gtf",
+            "-o",
+            "D:/a/_temp/ordinary/bustools-stringtie-evidence/gui/stringtie-installation-results/run-20261013-145256-1f863ab6/S1/analysis-20261013-145256-2676-0/transcripts.gtf",
+            "-A",
+            "D:/a/_temp/ordinary/bustools-stringtie-evidence/gui/stringtie-installation-results/run-20261013-145256-1f863ab6/S1/analysis-20261013-145256-2676-0/gene-abundance.tsv",
+            "-p",
+            "1",
+            "-m",
+            "200",
+            "-c",
+            "1",
+            "-j",
+            "1",
+            "-f",
+            "0.01",
+            "-s",
+            "4.75",
+            "-M",
+            "1",
+            "-a",
+            "10",
+            "-g",
+            "50",
+            "-l",
+            "STRG",
+            "-e"
+          ],
+          "upstreamDataPathsUseForwardSlashes": true,
+          "outputQualification": "Nonempty output files from a failed process are retained diagnostics; they are not accepted scientific outputs."
+        },
+        {
+          "runId": "run-20261013-145256-8c291e56",
+          "context": "declared-check",
+          "operation": "assemble-guided",
+          "status": "failed",
+          "elapsedMs": 141,
+          "analysisStep": {
+            "status": "failed",
+            "exit_code": 2,
+            "elapsed_ms": 94
+          },
+          "versionStep": {
+            "status": "success",
+            "exit_code": 0,
+            "elapsed_ms": 31
+          },
+          "upstreamExitSigned": -1073740940,
+          "upstreamExitHex": "0xC0000374",
+          "stderr": "StringTie input/result validation: StringTie failed (exit -1073740940); inspect stringtie.log, BAM integrity, annotation and available memory\n",
+          "childRun": {
+            "path": "ordinary/gui/stringtie-installation-results/run-20261013-145256-8c291e56/S1/analysis-20261013-145256-7024-0/run.json",
+            "bytes": 10811,
+            "sha256": "eb626e74a590728e6a3642e5a0f489b0a101b0f2c92acea7a692a01674821733"
+          },
+          "outerRun": {
+            "path": "ordinary/gui/stringtie-installation-results/run-20261013-145256-8c291e56/run.json",
+            "bytes": 3697,
+            "sha256": "d884f37c394ea9086dd1bd35ab7d58893ec2f4d8562fc791c366e759a8dbc34c"
+          },
+          "plan": {
+            "path": "ordinary/gui/stringtie-installation-results/run-20261013-145256-8c291e56/plan.json",
+            "bytes": 25043,
+            "sha256": "b1cca8bfe5faae71533b48d13cbcdfb4412e6e3947235abe8cc56ffbdbb2e1c8"
+          },
+          "validationTools": [
+            {
+              "samtools": {
+                "operation": "bam/flagstat",
+                "pin": {
+                  "packId": "bam",
+                  "packVersion": "0.4.0",
+                  "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+                },
+                "executable": {
+                  "id": "samtools",
+                  "path": "bin/samtools.exe",
+                  "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+                  "version": "1.24"
+                }
+              }
+            }
+          ],
+          "files": {
+            "logs/analysis.stderr.log": {
+              "path": "ordinary/gui/stringtie-installation-results/run-20261013-145256-8c291e56/S1/analysis-20261013-145256-7024-0/logs/analysis.stderr.log",
+              "bytes": 143,
+              "sha256": "32753bc71b1a03e3baabcb9801d887db4499f909ca6849c5425668d249e5b9dd"
+            },
+            "logs/analysis.stdout.log": {
+              "path": "ordinary/gui/stringtie-installation-results/run-20261013-145256-8c291e56/S1/analysis-20261013-145256-7024-0/logs/analysis.stdout.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "stringtie.log": {
+              "path": "ordinary/gui/stringtie-installation-results/run-20261013-145256-8c291e56/S1/analysis-20261013-145256-7024-0/stringtie.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "transcripts.gtf": {
+              "path": "ordinary/gui/stringtie-installation-results/run-20261013-145256-8c291e56/S1/analysis-20261013-145256-7024-0/transcripts.gtf",
+              "bytes": 1531,
+              "sha256": "53d6016ca53cdedfdb61d45e10d5177d2aafa416dd8755a97a2daf3aa2648c86"
+            },
+            "gene-abundance.tsv": {
+              "path": "ordinary/gui/stringtie-installation-results/run-20261013-145256-8c291e56/S1/analysis-20261013-145256-7024-0/gene-abundance.tsv",
+              "bytes": 359,
+              "sha256": "54a6163792fb86a700d4494075f213af4c81092a4e17a1df9ce9a67bceb117d5"
+            },
+            "analysis-settings.json": {
+              "path": "ordinary/gui/stringtie-installation-results/run-20261013-145256-8c291e56/S1/analysis-20261013-145256-7024-0/analysis-settings.json",
+              "bytes": 1425,
+              "sha256": "dd28c2480b0a9c6ee0b938d7893fc5c351a3ac71d0f41a389ff1043646a9ff0c"
+            }
+          },
+          "inputHashes": [
+            {
+              "id": "alignment",
+              "bytes": 27716,
+              "before": "b1b918330742b9df07a510e3a71183fb75c2764cd8d7da8dca74f7d59b54b698",
+              "after": "b1b918330742b9df07a510e3a71183fb75c2764cd8d7da8dca74f7d59b54b698",
+              "afterCheck": "unchanged"
+            },
+            {
+              "id": "annotation",
+              "bytes": 604,
+              "before": "72d512ca9d1139e92117c2d0c506f4546ffbce71539cee4f83ae6373c0e8260d",
+              "after": "72d512ca9d1139e92117c2d0c506f4546ffbce71539cee4f83ae6373c0e8260d",
+              "afterCheck": "unchanged"
+            }
+          ],
+          "upstreamArguments": [
+            "D:\\a\\_temp\\ordinary\\frozen-ui-app\\native-workbench\\packs\\stringtie-1.0.0\\bin\\stringtie.exe",
+            "D:/a/_temp/ordinary/frozen-ui-app/native-workbench/packs/stringtie-1.0.0/fixtures/spliced.bam",
+            "-G",
+            "D:/a/_temp/ordinary/frozen-ui-app/native-workbench/packs/stringtie-1.0.0/fixtures/guide.gtf",
+            "-o",
+            "D:/a/_temp/ordinary/bustools-stringtie-evidence/gui/stringtie-installation-results/run-20261013-145256-8c291e56/S1/analysis-20261013-145256-7024-0/transcripts.gtf",
+            "-A",
+            "D:/a/_temp/ordinary/bustools-stringtie-evidence/gui/stringtie-installation-results/run-20261013-145256-8c291e56/S1/analysis-20261013-145256-7024-0/gene-abundance.tsv",
+            "-p",
+            "1",
+            "-m",
+            "200",
+            "-c",
+            "1",
+            "-j",
+            "1",
+            "-f",
+            "0.01",
+            "-s",
+            "4.75",
+            "-M",
+            "1",
+            "-a",
+            "10",
+            "-g",
+            "50",
+            "-l",
+            "STRG"
+          ],
+          "upstreamDataPathsUseForwardSlashes": true,
+          "outputQualification": "Nonempty output files from a failed process are retained diagnostics; they are not accepted scientific outputs."
+        }
+      ],
+      "recordedNormalGraphs": []
+    },
+    {
+      "scope": "spaces/science",
+      "nativeReport": {
+        "path": "spaces/science/native.json",
+        "bytes": 5461,
+        "sha256": "c73be5086e4d5f5d0467d48302931d5b9765df935d4472d49c8774eafe1edbca"
+      },
+      "success": false,
+      "nativeWindowsExecuted": true,
+      "application": {
+        "applicationVersion": "0.16.0",
+        "applicationSourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "applicationArchive": {
+          "file": "published-starter.zip",
+          "bytes": 17846873,
+          "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+        }
+      },
+      "gateError": "ValueError: Native import/check did not fully execute: stringtie",
+      "captures": [],
+      "bustools": {
+        "installationReport": {
+          "path": "spaces/science/bustools-installation.json",
+          "bytes": 1486,
+          "sha256": "09ecc192c15b2d8d7c46c8a3f1f62247d44af69459a1e27f98aba42e863faa01"
+        },
+        "installationSuccess": true,
+        "duplicateVersionRejected": true,
+        "declaredChecks": [
+          {
+            "id": "bustools/independent-bus-truth@1.0.0",
+            "pin": {
+              "packId": "bustools",
+              "packVersion": "1.0.0",
+              "manifestSha256": "6efe81d68448338143db24e7b63625d56cbf8890a4d7330b15b789d91c672936"
+            },
+            "status": "passed",
+            "folder": "D:\\a\\_temp\\path with spaces\\released-app\\native-workbench\\results\\run-20261013-145247-cf190e79"
+          }
+        ],
+        "science": {
+          "report": {
+            "path": "spaces/science/bustools-regressions.json",
+            "bytes": 55599,
+            "sha256": "e3f59d26e36306b7a734e1d65cf9ba38cada146c55f9e56ea18eab1bc5c15a69"
+          },
+          "success": true,
+          "nativeWindowsExecuted": true,
+          "testsRun": 19,
+          "failures": 0,
+          "errors": 0,
+          "skipped": [],
+          "testSourceSha256": "bcabcc2a91c993deececbdc86f9ca61934db2dfcc4f9266c39ca8a399dc315da",
+          "guardExecutableSha256": "005f448cd5518861dae5b4033edc7e272dbf1eb8a51d5611b5d5698616e079a6",
+          "scientificBinarySha256": "20fa810027a4e247fb47a34555581d118c61b12d2932f50c87daa3e7f436af4d",
+          "packManifestSha256": "6efe81d68448338143db24e7b63625d56cbf8890a4d7330b15b789d91c672936"
+        }
+      },
+      "stringtie": {
+        "installationReport": {
+          "path": "spaces/science/stringtie-installation.json",
+          "bytes": 4442,
+          "sha256": "7681c9552f1224c4ad9f1f6af685b7b0556f8f90534145f044b6c9be46f5f9e2"
+        },
+        "installationSuccess": false,
+        "importSuccess": true,
+        "declaredChecks": [
+          {
+            "id": "stringtie/assemble-guided-spliced@1.0.0",
+            "pin": {
+              "packId": "stringtie",
+              "packVersion": "1.0.0",
+              "manifestSha256": "76299780a7ebb9877f430e814f859bfe33fda1b86753d0768e47d5c73e674336"
+            },
+            "status": "passed",
+            "folder": "D:\\a\\_temp\\path with spaces\\bustools-stringtie-evidence\\science\\stringtie-installation-results\\run-20261013-145251-7eb406a0"
+          },
+          {
+            "id": "stringtie/estimate-reference-spliced@1.0.0",
+            "pin": {
+              "packId": "stringtie",
+              "packVersion": "1.0.0",
+              "manifestSha256": "76299780a7ebb9877f430e814f859bfe33fda1b86753d0768e47d5c73e674336"
+            },
+            "status": "failed",
+            "folder": "D:\\a\\_temp\\path with spaces\\bustools-stringtie-evidence\\science\\stringtie-installation-results\\run-20261013-145251-3a2da1f9",
+            "message": "Tool did not complete: failed"
+          }
+        ],
+        "passed": 1,
+        "failed": 1,
+        "deadline": {
+          "seconds": 120,
+          "exceeded": false,
+          "cancellationRequested": false,
+          "backendShutdownErrors": []
+        },
+        "preflightDependency": {
+          "packId": "bam",
+          "packVersion": "0.4.0",
+          "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888",
+          "operation": "bam/flagstat",
+          "id": "samtools",
+          "version": "1.24",
+          "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+          "path": "bin/samtools.exe",
+          "providedBy": "unchanged pinned Starter application",
+          "pin": {
+            "packId": "bam",
+            "packVersion": "0.4.0",
+            "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+          },
+          "scope": "Existing Starter descriptor retained for ordinary alignment inspection; dependency has no selected self-checks."
+        },
+        "events": {
+          "path": "spaces/science/stringtie-installation-results/installation-events.jsonl",
+          "bytes": 6299,
+          "sha256": "f4119afe24b6eb460242a88e197983df31e5f436ccf2a853d2df9ef7f408d058"
+        }
+      },
+      "stringtieRuns": [
+        {
+          "runId": "run-20261013-145251-3a2da1f9",
+          "context": "declared-check",
+          "operation": "estimate-reference",
+          "status": "failed",
+          "elapsedMs": 297,
+          "analysisStep": {
+            "status": "failed",
+            "exit_code": 2,
+            "elapsed_ms": 250
+          },
+          "versionStep": {
+            "status": "success",
+            "exit_code": 0,
+            "elapsed_ms": 47
+          },
+          "upstreamExitSigned": -1073740940,
+          "upstreamExitHex": "0xC0000374",
+          "stderr": "StringTie input/result validation: StringTie failed (exit -1073740940); inspect stringtie.log, BAM integrity, annotation and available memory\n",
+          "childRun": {
+            "path": "spaces/science/stringtie-installation-results/run-20261013-145251-3a2da1f9/S1/analysis-20261013-145251-1724-0/run.json",
+            "bytes": 11138,
+            "sha256": "367e5f69fb083a7c576e21c02764173449587fcb064e3c0c95f10835fc29af83"
+          },
+          "outerRun": {
+            "path": "spaces/science/stringtie-installation-results/run-20261013-145251-3a2da1f9/run.json",
+            "bytes": 3753,
+            "sha256": "a71a298033ff546db656973b693edc6ba65ac599711d70c79eaa9d927a4fe897"
+          },
+          "plan": {
+            "path": "spaces/science/stringtie-installation-results/run-20261013-145251-3a2da1f9/plan.json",
+            "bytes": 25044,
+            "sha256": "ac3cb1f2400288cb32fc31dbf7afdcde01f3961cfea8f093fa4b0a8f4e1b40ae"
+          },
+          "validationTools": [
+            {
+              "samtools": {
+                "operation": "bam/flagstat",
+                "pin": {
+                  "packId": "bam",
+                  "packVersion": "0.4.0",
+                  "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+                },
+                "executable": {
+                  "id": "samtools",
+                  "path": "bin/samtools.exe",
+                  "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+                  "version": "1.24"
+                }
+              }
+            }
+          ],
+          "files": {
+            "logs/analysis.stderr.log": {
+              "path": "spaces/science/stringtie-installation-results/run-20261013-145251-3a2da1f9/S1/analysis-20261013-145251-1724-0/logs/analysis.stderr.log",
+              "bytes": 143,
+              "sha256": "32753bc71b1a03e3baabcb9801d887db4499f909ca6849c5425668d249e5b9dd"
+            },
+            "logs/analysis.stdout.log": {
+              "path": "spaces/science/stringtie-installation-results/run-20261013-145251-3a2da1f9/S1/analysis-20261013-145251-1724-0/logs/analysis.stdout.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "stringtie.log": {
+              "path": "spaces/science/stringtie-installation-results/run-20261013-145251-3a2da1f9/S1/analysis-20261013-145251-1724-0/stringtie.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "transcripts.gtf": {
+              "path": "spaces/science/stringtie-installation-results/run-20261013-145251-3a2da1f9/S1/analysis-20261013-145251-1724-0/transcripts.gtf",
+              "bytes": 1619,
+              "sha256": "008bd53000e0abefb6b55b12d4a1ef8231f6d548dd1c51c6665dbdde74ba6fa2"
+            },
+            "gene-abundance.tsv": {
+              "path": "spaces/science/stringtie-installation-results/run-20261013-145251-3a2da1f9/S1/analysis-20261013-145251-1724-0/gene-abundance.tsv",
+              "bytes": 272,
+              "sha256": "afbb0f5e866bf307a73b428d9c70b8946a1ffd46bd3d71053ce7e3ef05a967bc"
+            },
+            "analysis-settings.json": {
+              "path": "spaces/science/stringtie-installation-results/run-20261013-145251-3a2da1f9/S1/analysis-20261013-145251-1724-0/analysis-settings.json",
+              "bytes": 1479,
+              "sha256": "2e583196deda8ba2d6f84c500ceeae1f10e37b44cb24e79e5e6bb32ea2ae580d"
+            }
+          },
+          "inputHashes": [
+            {
+              "id": "alignment",
+              "bytes": 27716,
+              "before": "b1b918330742b9df07a510e3a71183fb75c2764cd8d7da8dca74f7d59b54b698",
+              "after": "b1b918330742b9df07a510e3a71183fb75c2764cd8d7da8dca74f7d59b54b698",
+              "afterCheck": "unchanged"
+            },
+            {
+              "id": "annotation",
+              "bytes": 604,
+              "before": "72d512ca9d1139e92117c2d0c506f4546ffbce71539cee4f83ae6373c0e8260d",
+              "after": "72d512ca9d1139e92117c2d0c506f4546ffbce71539cee4f83ae6373c0e8260d",
+              "afterCheck": "unchanged"
+            }
+          ],
+          "upstreamArguments": [
+            "D:\\a\\_temp\\path with spaces\\released-app\\native-workbench\\packs\\stringtie-1.0.0\\bin\\stringtie.exe",
+            "D:/a/_temp/path with spaces/released-app/native-workbench/packs/stringtie-1.0.0/fixtures/spliced.bam",
+            "-G",
+            "D:/a/_temp/path with spaces/released-app/native-workbench/packs/stringtie-1.0.0/fixtures/guide.gtf",
+            "-o",
+            "D:/a/_temp/path with spaces/bustools-stringtie-evidence/science/stringtie-installation-results/run-20261013-145251-3a2da1f9/S1/analysis-20261013-145251-1724-0/transcripts.gtf",
+            "-A",
+            "D:/a/_temp/path with spaces/bustools-stringtie-evidence/science/stringtie-installation-results/run-20261013-145251-3a2da1f9/S1/analysis-20261013-145251-1724-0/gene-abundance.tsv",
+            "-p",
+            "1",
+            "-m",
+            "200",
+            "-c",
+            "1",
+            "-j",
+            "1",
+            "-f",
+            "0.01",
+            "-s",
+            "4.75",
+            "-M",
+            "1",
+            "-a",
+            "10",
+            "-g",
+            "50",
+            "-l",
+            "STRG",
+            "-e"
+          ],
+          "upstreamDataPathsUseForwardSlashes": true,
+          "outputQualification": "Nonempty output files from a failed process are retained diagnostics; they are not accepted scientific outputs."
+        },
+        {
+          "runId": "run-20261013-145251-7eb406a0",
+          "context": "declared-check",
+          "operation": "assemble-guided",
+          "status": "success",
+          "elapsedMs": 109,
+          "analysisStep": {
+            "status": "success",
+            "exit_code": 0,
+            "elapsed_ms": 63
+          },
+          "versionStep": {
+            "status": "success",
+            "exit_code": 0,
+            "elapsed_ms": 31
+          },
+          "upstreamExitSigned": null,
+          "upstreamExitHex": null,
+          "stderr": "",
+          "childRun": {
+            "path": "spaces/science/stringtie-installation-results/run-20261013-145251-7eb406a0/S1/analysis-20261013-145251-4320-0/run.json",
+            "bytes": 12130,
+            "sha256": "0394985cf66f550158bfefdca0defc5891e521fdc09138cc6297ed017e12cb1c"
+          },
+          "outerRun": {
+            "path": "spaces/science/stringtie-installation-results/run-20261013-145251-7eb406a0/run.json",
+            "bytes": 11743,
+            "sha256": "ef34f8d61a631089b29e963ad61db948493600b26a7900ce4c3444dc86a1a67e"
+          },
+          "plan": {
+            "path": "spaces/science/stringtie-installation-results/run-20261013-145251-7eb406a0/plan.json",
+            "bytes": 25096,
+            "sha256": "33cc7b11ab3fc8755993c1efafc8e7fcdbb323c3a4feaa5db4d6504dd6ea0352"
+          },
+          "validationTools": [
+            {
+              "samtools": {
+                "operation": "bam/flagstat",
+                "pin": {
+                  "packId": "bam",
+                  "packVersion": "0.4.0",
+                  "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+                },
+                "executable": {
+                  "id": "samtools",
+                  "path": "bin/samtools.exe",
+                  "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+                  "version": "1.24"
+                }
+              }
+            }
+          ],
+          "files": {
+            "logs/analysis.stderr.log": {
+              "path": "spaces/science/stringtie-installation-results/run-20261013-145251-7eb406a0/S1/analysis-20261013-145251-4320-0/logs/analysis.stderr.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "logs/analysis.stdout.log": {
+              "path": "spaces/science/stringtie-installation-results/run-20261013-145251-7eb406a0/S1/analysis-20261013-145251-4320-0/logs/analysis.stdout.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "stringtie.log": {
+              "path": "spaces/science/stringtie-installation-results/run-20261013-145251-7eb406a0/S1/analysis-20261013-145251-4320-0/stringtie.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "transcripts.gtf": {
+              "path": "spaces/science/stringtie-installation-results/run-20261013-145251-7eb406a0/S1/analysis-20261013-145251-4320-0/transcripts.gtf",
+              "bytes": 1876,
+              "sha256": "d3d89b97df473da2b6743253e9cb58ec8120cfaaed967be1653ff9a4d9e8d32e"
+            },
+            "gene-abundance.tsv": {
+              "path": "spaces/science/stringtie-installation-results/run-20261013-145251-7eb406a0/S1/analysis-20261013-145251-4320-0/gene-abundance.tsv",
+              "bytes": 416,
+              "sha256": "604a7af3b44deb5af336caae3a2c4aab9124c13a50d340bfda0f2cabf0c42590"
+            },
+            "analysis-settings.json": {
+              "path": "spaces/science/stringtie-installation-results/run-20261013-145251-7eb406a0/S1/analysis-20261013-145251-4320-0/analysis-settings.json",
+              "bytes": 1470,
+              "sha256": "83f2a799c6b8e36ef8205aaf25e36292ee56e839745ddfcb47106d8e83b1055b"
+            }
+          },
+          "inputHashes": [
+            {
+              "id": "alignment",
+              "bytes": 27716,
+              "before": "b1b918330742b9df07a510e3a71183fb75c2764cd8d7da8dca74f7d59b54b698",
+              "after": "b1b918330742b9df07a510e3a71183fb75c2764cd8d7da8dca74f7d59b54b698",
+              "afterCheck": "unchanged"
+            },
+            {
+              "id": "annotation",
+              "bytes": 604,
+              "before": "72d512ca9d1139e92117c2d0c506f4546ffbce71539cee4f83ae6373c0e8260d",
+              "after": "72d512ca9d1139e92117c2d0c506f4546ffbce71539cee4f83ae6373c0e8260d",
+              "afterCheck": "unchanged"
+            }
+          ],
+          "upstreamArguments": [
+            "D:\\a\\_temp\\path with spaces\\released-app\\native-workbench\\packs\\stringtie-1.0.0\\bin\\stringtie.exe",
+            "D:/a/_temp/path with spaces/released-app/native-workbench/packs/stringtie-1.0.0/fixtures/spliced.bam",
+            "-G",
+            "D:/a/_temp/path with spaces/released-app/native-workbench/packs/stringtie-1.0.0/fixtures/guide.gtf",
+            "-o",
+            "D:/a/_temp/path with spaces/bustools-stringtie-evidence/science/stringtie-installation-results/run-20261013-145251-7eb406a0/S1/analysis-20261013-145251-4320-0/transcripts.gtf",
+            "-A",
+            "D:/a/_temp/path with spaces/bustools-stringtie-evidence/science/stringtie-installation-results/run-20261013-145251-7eb406a0/S1/analysis-20261013-145251-4320-0/gene-abundance.tsv",
+            "-p",
+            "1",
+            "-m",
+            "200",
+            "-c",
+            "1",
+            "-j",
+            "1",
+            "-f",
+            "0.01",
+            "-s",
+            "4.75",
+            "-M",
+            "1",
+            "-a",
+            "10",
+            "-g",
+            "50",
+            "-l",
+            "STRG"
+          ],
+          "upstreamDataPathsUseForwardSlashes": true,
+          "outputQualification": "Declared check reported passed against its configured known answer."
+        }
+      ],
+      "recordedNormalGraphs": []
+    },
+    {
+      "scope": "spaces/gui",
+      "nativeReport": {
+        "path": "spaces/gui/native.json",
+        "bytes": 21333,
+        "sha256": "e7404f3b4f600a1cb676c8cb50c22c60c57cce33b04c620f65a3b783679a7248"
+      },
+      "success": false,
+      "nativeWindowsExecuted": true,
+      "application": {
+        "applicationVersion": "0.16.1",
+        "applicationSourceCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+        "applicationArchive": {
+          "file": "native-workbench-0.16.1-starter-windows.zip",
+          "bytes": 17889148,
+          "sha256": "28f1362287991621dde030da54eb444846142c0243be6b9d86c4b4f1bf99dd47"
+        }
+      },
+      "gateError": "ValueError: Native candidate execution failed: {\"run_id\": \"c82bcb16a9cf4d0f95bd2fb9fc8c02ed\", \"status\": \"failed\", \"events\": [{\"type\": \"run\", \"status\": \"running\", \"folder\": \"D:\\\\a\\\\_temp\\\\path with spaces\\\\bustools-stringtie-evidence\\\\gui\\\\analysis-results\\\\run-20261013-145259-afc58bff\"}, {\"type\": \"step\", \"nodeId\": \"step-1\", \"status\": \"running\"}, {\"type\": \"phase\", \"message\": \"Validating inputs and protecting source files...\", \"nodeId\": \"step-1\"}, {\"type\": \"log\", \"message\": \"Input checked: D:\\\\a\\\\_temp\\\\path with spaces\\\\frozen-ui-app\\\\native-workbench\\\\packs\\\\stringtie-1.0.0\\\\fixtures\\\\spliced.bam\", \"nodeId\": \"step-1\"}, {\"type\": \"log\", \"message\": \"Input checked: D:\\\\a\\\\_temp\\\\path with spaces\\\\frozen-ui-app\\\\native-workbench\\\\packs\\\\stringtie-1.0.0\\\\fixtures\\\\guide.gtf\", \"nodeId\": \"step-1\"}, {\"type\": \"phase\", \"message\": \"Checking tool pack integrity...\", \"nodeId\": \"step-1\"}, {\"type\": \"log\", \"message\": \"Checking stringtie 3.0.3-workbench1...\", \"nodeId\": \"step-1\"}, {\"type\": \"log\", \"message\": \"Checking stringtie-adapter 1.0.0...\", \"nodeId\": \"step-1\"}, {\"type\": \"log\", \"message\": \"Checked 10 bundled runtime/data assets.\", \"nodeId\": \"step-1\"}, {\"type\": \"log\", \"message\": \"Tool pack hashes match the manifest.\", \"nodeId\": \"step-1\"}, {\"type\": \"phase\", \"message\": \"Record bundled StringTie version\", \"nodeId\": \"step-1\"}, {\"type\": \"log\", \"message\": \"Starting: Record bundled StringTie version\", \"nodeId\": \"step-1\"}, {\"type\": \"log\", \"message\": \"Running: \\\"D:\\\\a\\\\_temp\\\\path with spaces\\\\frozen-ui-app\\\\native-workbench\\\\packs\\\\stringtie-1.0.0\\\\bin\\\\stringtie.exe\\\" \\\"--version\\\"\", \"nodeId\": \"step-1\"}, {\"type\": \"log\", \"message\": \"Tool exit code: 0\", \"nodeId\": \"step-1\"}, {\"type\": \"log\", \"message\": \"Completed: Record bundled StringTie version\", \"nodeId\": \"step-1\"}, {\"type\": \"phase\", \"message\": \"Validate RNA inputs and run StringTie\", \"nodeId\": \"step-1\"}, {\"type\": \"log\", \"message\": \"Starting: Validate RNA inputs and run StringTie\", \"nodeId\": \"step-1\"}, {\"type\": \"log\", \"message\": \"Running: \\\"D:\\\\a\\\\_temp\\\\path with spaces\\\\frozen-ui-app\\\\native-workbench\\\\packs\\\\stringtie-1.0.0\\\\bin\\\\stringtie-guard.exe\\\" \\\"assemble-guided\\\" \\\"D:\\\\a\\\\_temp\\\\path with spaces\\\\frozen-ui-app\\\\native-workbench\\\\packs\\\\stringtie-1.0.0\\\\fixtures\\\\spliced.bam\\\" \\\"D:\\\\a\\\\_temp\\\\path with spaces\\\\frozen-ui-app\\\\native-workbench\\\\packs\\\\stringtie-1.0.0\\\\fixtures\\\\guide.gtf\\\" \\\"D:\\\\a\\\\_temp\\\\path with spaces\\\\bustools-stringtie-evidence\\\\gui\\\\analysis-results\\\\run-20261013-145259-afc58bff\\\\S1\\\\analysis-20261013-145259-7808-0\\\" \\\"unstranded\\\" \\\"200\\\" \\\"1\\\" \\\"1\\\" \\\"0.01\\\" \\\"4.75\\\" \\\"1\\\"\", \"nodeId\": \"step-1\"}, {\"type\": \"log\", \"message\": \"StringTie input/result validation: StringTie failed (exit -1073740940); inspect stringtie.log, BAM integrity, annotation and available memory\", \"nodeId\": \"step-1\"}, {\"type\": \"log\", \"message\": \"Tool exit code: 2\", \"nodeId\": \"step-1\"}, {\"type\": \"log\", \"message\": \"Validate RNA inputs and run StringTie failed with exit code 2. See D:\\\\a\\\\_temp\\\\path with spaces\\\\bustools-stringtie-evidence\\\\gui\\\\analysis-results\\\\run-20261013-145259-afc58bff\\\\S1\\\\analysis-20261013-145259-7808-0\\\\logs\\\\analysis.stderr.log. Intermediate files and diagnostics are retained in D:\\\\a\\\\_temp\\\\path with spaces\\\\bustools-stringtie-evidence\\\\gui\\\\analysis-results\\\\run-20261013-145259-afc58bff\\\\S1\\\\analysis-20261013-145259-7808-0.\", \"nodeId\": \"step-1\"}, {\"type\": \"phase\", \"message\": \"Failed\", \"nodeId\": \"step-1\"}, {\"type\": \"step\", \"nodeId\": \"step-1\", \"status\": \"failed\", \"message\": \"Validate RNA inputs and run StringTie failed with exit code 2. See D:\\\\a\\\\_temp\\\\path with spaces\\\\bustools-stringtie-evidence\\\\gui\\\\analysis-results\\\\run-20261013-145259-afc58bff\\\\S1\\\\analysis-20261013-145259-7808-0\\\\logs\\\\analysis.stderr.log. Intermediate files and diagnostics are retained in D:\\\\a\\\\_temp\\\\path with spaces\\\\bustools-stringtie-evidence\\\\gui\\\\analysis-results\\\\run-20261013-145259-afc58bff\\\\S1\\\\analysis-20261013-145259-7808-0.\"}, {\"type\": \"run\", \"status\": \"failed\", \"folder\": \"D:\\\\a\\\\_temp\\\\path with spaces\\\\bustools-stringtie-evidence\\\\gui\\\\analysis-results\\\\run-20261013-145259-afc58bff\"}], \"nodes\": [{\"id\": \"step-1\", \"name\": \"StringTie: assemble guided short-read transcripts\", \"tool\": \"stringtie/assemble-guided\", \"pin\": {\"packId\": \"stringtie\", \"packVersion\": \"1.0.0\", \"manifestSha256\": \"76299780a7ebb9877f430e814f859bfe33fda1b86753d0768e47d5c73e674336\"}, \"started\": \"2026-10-13T14:52:59.578Z\", \"status\": \"failed\", \"inputs\": {\"alignment\": [\"input-1\"], \"annotation\": [\"input-2\"]}, \"outputs\": {}, \"preflight\": {\"alignmentHeaders\": 1, \"referenceChecks\": [], \"sequenceChecks\": [], \"validationTools\": {\"samtools\": {\"operation\": \"variants/pileup\", \"pin\": {\"packId\": \"variants\", \"packVersion\": \"0.4.0\", \"manifestSha256\": \"ea4b7f0a6c28709e4190b6514c07cbf7bdd58e1a4f2a2d931f2cae3ce6ec3795\"}, \"executable\": {\"id\": \"samtools\", \"path\": \"bin/samtools.exe\", \"sha256\": \"49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3\", \"version\": \"1.24\"}}}}, \"message\": \"Validate RNA inputs and run StringTie failed with exit code 2. See D:\\\\a\\\\_temp\\\\path with spaces\\\\bustools-stringtie-evidence\\\\gui\\\\analysis-results\\\\run-20261013-145259-afc58bff\\\\S1\\\\analysis-20261013-145259-7808-0\\\\logs\\\\analysis.stderr.log. Intermediate files and diagnostics are retained in D:\\\\a\\\\_temp\\\\path with spaces\\\\bustools-stringtie-evidence\\\\gui\\\\analysis-results\\\\run-20261013-145259-afc58bff\\\\S1\\\\analysis-20261013-145259-7808-0.\", \"folder\": \"D:\\\\a\\\\_temp\\\\path with spaces\\\\bustools-stringtie-evidence\\\\gui\\\\analysis-results\\\\run-20261013-145259-afc58bff\\\\S1\\\\analysis-20261013-145259-7808-0\", \"finished\": \"2026-10-13T14:52:59.855Z\", \"reservation\": {\"cpus\": 4, \"source\": \"unknown-exclusive\", \"memoryBytes\": null, \"temporaryBytes\": null}}], \"folder\": \"D:\\\\a\\\\_temp\\\\path with spaces\\\\bustools-stringtie-evidence\\\\gui\\\\analysis-results\\\\run-20261013-145259-afc58bff\", \"message\": \"Failed\", \"started_at\": \"2026-10-13T14:52:59Z\", \"name\": \"Pack candidate stringtie\", \"graph\": {\"schema\": 1, \"name\": \"Pack candidate stringtie\", \"nodes\": [{\"id\": \"step-1\", \"tool\": \"stringtie/assemble-guided\", \"pin\": {\"packId\": \"stringtie\", \"packVersion\": \"1.0.0\", \"manifestSha256\": \"76299780a7ebb9877f430e814f859bfe33fda1b86753d0768e47d5c73e674336\"}, \"params\": {\"strandness\": \"unstranded\", \"min-length\": \"200\", \"min-coverage\": \"1\", \"junction-coverage\": \"1\", \"isoform-fraction\": \"0.01\", \"single-coverage\": \"4.75\", \"max-multimap\": \"1\"}, \"inputs\": {\"alignment\": [\"input-1\"], \"annotation\": [\"input-2\"]}}], \"sources\": [{\"id\": \"input-1\", \"label\": \"Sorted RNA BAM\", \"type\": \"bam-rna\", \"files\": {\"alignment\": \"D:\\\\a\\\\_temp\\\\path with spaces\\\\frozen-ui-app\\\\native-workbench\\\\packs\\\\stringtie-1.0.0\\\\fixtures\\\\spliced.bam\"}}, {\"id\": \"input-2\", \"label\": \"Matching transcript GTF\", \"type\": \"text\", \"files\": {\"annotation\": \"D:\\\\a\\\\_temp\\\\path with spaces\\\\frozen-ui-app\\\\native-workbench\\\\packs\\\\stringtie-1.0.0\\\\fixtures\\\\guide.gtf\"}}], \"nextNode\": 2, \"nextSource\": 3}, \"graph_status\": \"prepared\", \"methods_planned\": \"Planned methods (review before use; this describes the selected analysis, not completed results):\\n\\nStep S1 (StringTie: assemble guided short-read transcripts) will be performed using stringtie 3.0.3-workbench1; stringtie-adapter 1.0.0 (pack stringtie 1.0.0). Short-read RNA alignments were processed with StringTie 3.0.3-workbench1 (upstream scientific algorithms unchanged) using a user-selected matching GTF. Reference-guided assembly (-G) permits expressed reference and novel models. Workbench uses the installed SAMtools helper to inspect alignment headers before execution; its exact pack and executable are pinned in the saved plan. Library strandedness and all exposed selection settings were recorded explicitly. One processing thread, 10-base minimum junction anchor, 50-base bundle gap, STRG label, end trimming and NH-based multimap correction were used; other upstream defaults remain. The native guard checks actual coordinate sorting,BAM records,NH tags and XS strand tags on spliced alignments,plus GTF IDs,strands,contig names and bounds. These checks do not establish the exact genome sequence or experimental suitability; a BAM without RG sample name relies on the user selecting one sample. GTF coordinates are one-based inclusive. Coverage,FPKM and TPM are estimates,not integer read counts,QC pass thresholds or differential-expression results. No long-read,mixed,nascent,merge,Ballgown,prepDE or specificity workflow is exposed. Settings: Library strandedness (required)=unstranded; Minimum transcript length (bp)=200; Minimum multi-exon coverage=1; Minimum junction coverage=1; Minimum isoform fraction=0.01; Minimum single-exon coverage=4.75; Maximum multimap fraction=1. Inputs: Sorted RNA BAM: I1 \\u00b7 Sorted RNA BAM | Matching transcript GTF: I2 \\u00b7 Matching transcript GTF.\\n\\nTool references:\\nPertea et al.(2015). StringTie enables improved reconstruction of a transcriptome from RNA-seq reads. Nature Biotechnology33:290\\u2013295. https://doi.org/10.1038/nbt.3122\\nShinder et al.(2026). StringTie3 improves total RNA-seq assembly by resolving nascent and mature transcripts. Nature Methods. https://doi.org/10.1038/s41592-026-03080-3\\n\\nOperations run locally in dependency order under the frozen scheduling policy. CPU reservations govern admission, not operating-system CPU limits; unknown requirements run exclusively. The run record records exact packs, parameters, input identities, outputs and completion states.\\n\", \"schema\": 1, \"id\": \"run-20261013-145259-afc58bff\", \"planSha256\": \"4e6ccd7e5a9ed7d2e58df9f62d783693e492fcadeaa60b9878f72a8e5cf4bc2b\", \"started\": \"2026-10-13T14:52:59.572Z\", \"outputs\": {}, \"scheduler\": \"resource-budgeted-ready-dag\", \"references\": {}, \"workflowExport\": {\"file\": \"workflow.cwl\", \"format\": \"CWL v1.2\", \"definitionSha256\": \"11a655a0711df757a3254b22421e94e2845769b28ee04fa3a5911aa514095b8f\", \"sha256\": \"2a7ee0ef178f02b67e60c125e89f5af69f2a6c21ab7c491a161bc08403fa856d\"}, \"resources\": {\"cpuBudget\": 4, \"maxParallel\": 1, \"stepCpus\": {}, \"temporaryFolder\": \"\"}, \"resourceScope\": \"CPU admission reservations, not OS CPU limits; unknown requirements are exclusive. Memory and temporary expansion are unknown.\", \"finished\": \"2026-10-13T14:52:59.857Z\", \"success\": false, \"methods\": \"Executed methods (only successfully completed operations are described):\\n\\nOperations run locally in dependency order under the frozen scheduling policy. CPU reservations govern admission, not operating-system CPU limits; unknown requirements run exclusively. The run record records exact packs, parameters, input identities, outputs and completion states.\\n\", \"performance\": {\"file\": \"performance.json\", \"schema\": 1, \"sha256\": \"1d494631056adb98d07e8ac8c785f9a65c59d2f2c1a2a3407170d99bd6ab1a52\"}, \"finished_at\": \"2026-10-13T14:52:59Z\", \"events_omitted\": 0, \"active\": false, \"active_run\": null, \"changing_packs\": false, \"changing_references\": false, \"closing\": false, \"queue_preparing\": false, \"queue_running\": false, \"workspace_editable\": true}",
+      "captures": [],
+      "bustools": {
+        "installationReport": {
+          "path": "spaces/gui/bustools-installation.json",
+          "bytes": 1489,
+          "sha256": "7e78cf6c86f905c7c6c68a33c781600f8fa1675aa3ba195df74f43e7dad53043"
+        },
+        "installationSuccess": true,
+        "duplicateVersionRejected": true,
+        "declaredChecks": [
+          {
+            "id": "bustools/independent-bus-truth@1.0.0",
+            "pin": {
+              "packId": "bustools",
+              "packVersion": "1.0.0",
+              "manifestSha256": "6efe81d68448338143db24e7b63625d56cbf8890a4d7330b15b789d91c672936"
+            },
+            "status": "passed",
+            "folder": "D:\\a\\_temp\\path with spaces\\frozen-ui-app\\native-workbench\\results\\run-20261013-145257-cd79fac9"
+          }
+        ]
+      },
+      "stringtie": {
+        "installationReport": {
+          "path": "spaces/gui/stringtie-installation.json",
+          "bytes": 3156,
+          "sha256": "52eabaefa98dd886dc7b015bf686e1921bdb3ec5ab38696a5110bd63b82b8edc"
+        },
+        "installationSuccess": true,
+        "importSuccess": true,
+        "declaredChecks": [
+          {
+            "id": "stringtie/assemble-guided-spliced@1.0.0",
+            "pin": {
+              "packId": "stringtie",
+              "packVersion": "1.0.0",
+              "manifestSha256": "76299780a7ebb9877f430e814f859bfe33fda1b86753d0768e47d5c73e674336"
+            },
+            "status": "passed",
+            "folder": "D:\\a\\_temp\\path with spaces\\bustools-stringtie-evidence\\gui\\stringtie-installation-results\\run-20261013-145257-35e803ff"
+          },
+          {
+            "id": "stringtie/estimate-reference-spliced@1.0.0",
+            "pin": {
+              "packId": "stringtie",
+              "packVersion": "1.0.0",
+              "manifestSha256": "76299780a7ebb9877f430e814f859bfe33fda1b86753d0768e47d5c73e674336"
+            },
+            "status": "passed",
+            "folder": "D:\\a\\_temp\\path with spaces\\bustools-stringtie-evidence\\gui\\stringtie-installation-results\\run-20261013-145258-9f80b3d7"
+          }
+        ],
+        "passed": 2,
+        "failed": 0,
+        "deadline": {
+          "seconds": 120,
+          "exceeded": false,
+          "cancellationRequested": false,
+          "backendShutdownErrors": []
+        },
+        "preflightDependency": {
+          "packId": "bam",
+          "packVersion": "0.4.0",
+          "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888",
+          "operation": "bam/flagstat",
+          "id": "samtools",
+          "version": "1.24",
+          "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+          "path": "bin/samtools.exe",
+          "providedBy": "unchanged pinned Starter application",
+          "pin": {
+            "packId": "bam",
+            "packVersion": "0.4.0",
+            "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+          },
+          "scope": "Existing Starter descriptor retained for ordinary alignment inspection; dependency has no selected self-checks."
+        },
+        "events": {
+          "path": "spaces/gui/stringtie-installation-results/installation-events.jsonl",
+          "bytes": 5995,
+          "sha256": "0a6fc3ee2455b357560623a8383e530acb9be56400c8a8c217752697243ecf5f"
+        }
+      },
+      "stringtieRuns": [
+        {
+          "runId": "run-20261013-145259-afc58bff",
+          "context": "normal-graph",
+          "operation": "assemble-guided",
+          "status": "failed",
+          "elapsedMs": 156,
+          "analysisStep": {
+            "status": "failed",
+            "exit_code": 2,
+            "elapsed_ms": 93
+          },
+          "versionStep": {
+            "status": "success",
+            "exit_code": 0,
+            "elapsed_ms": 47
+          },
+          "upstreamExitSigned": -1073740940,
+          "upstreamExitHex": "0xC0000374",
+          "stderr": "StringTie input/result validation: StringTie failed (exit -1073740940); inspect stringtie.log, BAM integrity, annotation and available memory\n",
+          "childRun": {
+            "path": "spaces/gui/analysis-results/run-20261013-145259-afc58bff/S1/analysis-20261013-145259-7808-0/run.json",
+            "bytes": 10879,
+            "sha256": "8dfc2e6254940e66c79604e447c0f47d071063a42652309a215c431ea2fc0d11"
+          },
+          "outerRun": {
+            "path": "spaces/gui/analysis-results/run-20261013-145259-afc58bff/run.json",
+            "bytes": 3649,
+            "sha256": "eb7cc8bf0476064c64400799f3112d06d9f157b6b64699a52933ec38b40d85ef"
+          },
+          "plan": {
+            "path": "spaces/gui/analysis-results/run-20261013-145259-afc58bff/plan.json",
+            "bytes": 25062,
+            "sha256": "a9e89ebbebd007d94e2c7da6d5bbe26b0e44f57345428ed88caae3a04dd22a05"
+          },
+          "validationTools": [
+            {
+              "samtools": {
+                "operation": "variants/pileup",
+                "pin": {
+                  "packId": "variants",
+                  "packVersion": "0.4.0",
+                  "manifestSha256": "ea4b7f0a6c28709e4190b6514c07cbf7bdd58e1a4f2a2d931f2cae3ce6ec3795"
+                },
+                "executable": {
+                  "id": "samtools",
+                  "path": "bin/samtools.exe",
+                  "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+                  "version": "1.24"
+                }
+              }
+            }
+          ],
+          "files": {
+            "logs/analysis.stderr.log": {
+              "path": "spaces/gui/analysis-results/run-20261013-145259-afc58bff/S1/analysis-20261013-145259-7808-0/logs/analysis.stderr.log",
+              "bytes": 143,
+              "sha256": "32753bc71b1a03e3baabcb9801d887db4499f909ca6849c5425668d249e5b9dd"
+            },
+            "logs/analysis.stdout.log": {
+              "path": "spaces/gui/analysis-results/run-20261013-145259-afc58bff/S1/analysis-20261013-145259-7808-0/logs/analysis.stdout.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "stringtie.log": {
+              "path": "spaces/gui/analysis-results/run-20261013-145259-afc58bff/S1/analysis-20261013-145259-7808-0/stringtie.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "transcripts.gtf": {
+              "path": "spaces/gui/analysis-results/run-20261013-145259-afc58bff/S1/analysis-20261013-145259-7808-0/transcripts.gtf",
+              "bytes": 1543,
+              "sha256": "a2b032637ce26ba95df51b85fba9216643166827212f6f6306037e38241cb990"
+            },
+            "gene-abundance.tsv": {
+              "path": "spaces/gui/analysis-results/run-20261013-145259-afc58bff/S1/analysis-20261013-145259-7808-0/gene-abundance.tsv",
+              "bytes": 416,
+              "sha256": "604a7af3b44deb5af336caae3a2c4aab9124c13a50d340bfda0f2cabf0c42590"
+            },
+            "analysis-settings.json": {
+              "path": "spaces/gui/analysis-results/run-20261013-145259-afc58bff/S1/analysis-20261013-145259-7808-0/analysis-settings.json",
+              "bytes": 1437,
+              "sha256": "b0cd0a6ce58796b1b6e947888427f96cc691fe03bb913c53945c5595ebdec77c"
+            }
+          },
+          "inputHashes": [
+            {
+              "id": "alignment",
+              "bytes": 27716,
+              "before": "b1b918330742b9df07a510e3a71183fb75c2764cd8d7da8dca74f7d59b54b698",
+              "after": "b1b918330742b9df07a510e3a71183fb75c2764cd8d7da8dca74f7d59b54b698",
+              "afterCheck": "unchanged"
+            },
+            {
+              "id": "annotation",
+              "bytes": 604,
+              "before": "72d512ca9d1139e92117c2d0c506f4546ffbce71539cee4f83ae6373c0e8260d",
+              "after": "72d512ca9d1139e92117c2d0c506f4546ffbce71539cee4f83ae6373c0e8260d",
+              "afterCheck": "unchanged"
+            }
+          ],
+          "upstreamArguments": [
+            "D:\\a\\_temp\\path with spaces\\frozen-ui-app\\native-workbench\\packs\\stringtie-1.0.0\\bin\\stringtie.exe",
+            "D:/a/_temp/path with spaces/frozen-ui-app/native-workbench/packs/stringtie-1.0.0/fixtures/spliced.bam",
+            "-G",
+            "D:/a/_temp/path with spaces/frozen-ui-app/native-workbench/packs/stringtie-1.0.0/fixtures/guide.gtf",
+            "-o",
+            "D:/a/_temp/path with spaces/bustools-stringtie-evidence/gui/analysis-results/run-20261013-145259-afc58bff/S1/analysis-20261013-145259-7808-0/transcripts.gtf",
+            "-A",
+            "D:/a/_temp/path with spaces/bustools-stringtie-evidence/gui/analysis-results/run-20261013-145259-afc58bff/S1/analysis-20261013-145259-7808-0/gene-abundance.tsv",
+            "-p",
+            "1",
+            "-m",
+            "200",
+            "-c",
+            "1",
+            "-j",
+            "1",
+            "-f",
+            "0.01",
+            "-s",
+            "4.75",
+            "-M",
+            "1",
+            "-a",
+            "10",
+            "-g",
+            "50",
+            "-l",
+            "STRG"
+          ],
+          "upstreamDataPathsUseForwardSlashes": true,
+          "outputQualification": "Nonempty output files from a failed process are retained diagnostics; they are not accepted scientific outputs."
+        },
+        {
+          "runId": "run-20261013-145257-35e803ff",
+          "context": "declared-check",
+          "operation": "assemble-guided",
+          "status": "success",
+          "elapsedMs": 125,
+          "analysisStep": {
+            "status": "success",
+            "exit_code": 0,
+            "elapsed_ms": 63
+          },
+          "versionStep": {
+            "status": "success",
+            "exit_code": 0,
+            "elapsed_ms": 46
+          },
+          "upstreamExitSigned": null,
+          "upstreamExitHex": null,
+          "stderr": "",
+          "childRun": {
+            "path": "spaces/gui/stringtie-installation-results/run-20261013-145257-35e803ff/S1/analysis-20261013-145258-7184-0/run.json",
+            "bytes": 12074,
+            "sha256": "b43d3656a66a3a6d923b5bbe8def1a51e1255e6e517cb5827c5890699c3e83d4"
+          },
+          "outerRun": {
+            "path": "spaces/gui/stringtie-installation-results/run-20261013-145257-35e803ff/run.json",
+            "bytes": 11691,
+            "sha256": "790fcdc3e4567c9fb342570584a7f5834eb45d8b32d159ea7fc58c382f4e96bc"
+          },
+          "plan": {
+            "path": "spaces/gui/stringtie-installation-results/run-20261013-145257-35e803ff/plan.json",
+            "bytes": 25101,
+            "sha256": "551b9a34c78af27f20e7a8e37fa3aaaacd49843b7646e2a94d0dbfa73c27a40d"
+          },
+          "validationTools": [
+            {
+              "samtools": {
+                "operation": "bam/flagstat",
+                "pin": {
+                  "packId": "bam",
+                  "packVersion": "0.4.0",
+                  "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+                },
+                "executable": {
+                  "id": "samtools",
+                  "path": "bin/samtools.exe",
+                  "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+                  "version": "1.24"
+                }
+              }
+            }
+          ],
+          "files": {
+            "logs/analysis.stderr.log": {
+              "path": "spaces/gui/stringtie-installation-results/run-20261013-145257-35e803ff/S1/analysis-20261013-145258-7184-0/logs/analysis.stderr.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "logs/analysis.stdout.log": {
+              "path": "spaces/gui/stringtie-installation-results/run-20261013-145257-35e803ff/S1/analysis-20261013-145258-7184-0/logs/analysis.stdout.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "stringtie.log": {
+              "path": "spaces/gui/stringtie-installation-results/run-20261013-145257-35e803ff/S1/analysis-20261013-145258-7184-0/stringtie.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "transcripts.gtf": {
+              "path": "spaces/gui/stringtie-installation-results/run-20261013-145257-35e803ff/S1/analysis-20261013-145258-7184-0/transcripts.gtf",
+              "bytes": 1871,
+              "sha256": "68bea3a15039c3abcf280efc2249589473f95e1ce6fd04ab71d8fe72e45bb0f6"
+            },
+            "gene-abundance.tsv": {
+              "path": "spaces/gui/stringtie-installation-results/run-20261013-145257-35e803ff/S1/analysis-20261013-145258-7184-0/gene-abundance.tsv",
+              "bytes": 416,
+              "sha256": "604a7af3b44deb5af336caae3a2c4aab9124c13a50d340bfda0f2cabf0c42590"
+            },
+            "analysis-settings.json": {
+              "path": "spaces/gui/stringtie-installation-results/run-20261013-145257-35e803ff/S1/analysis-20261013-145258-7184-0/analysis-settings.json",
+              "bytes": 1465,
+              "sha256": "7e9c1e769e221db9c09dc3b5d6f2109b6f3b86b06c390fd4bd01e9fc5f468ac1"
+            }
+          },
+          "inputHashes": [
+            {
+              "id": "alignment",
+              "bytes": 27716,
+              "before": "b1b918330742b9df07a510e3a71183fb75c2764cd8d7da8dca74f7d59b54b698",
+              "after": "b1b918330742b9df07a510e3a71183fb75c2764cd8d7da8dca74f7d59b54b698",
+              "afterCheck": "unchanged"
+            },
+            {
+              "id": "annotation",
+              "bytes": 604,
+              "before": "72d512ca9d1139e92117c2d0c506f4546ffbce71539cee4f83ae6373c0e8260d",
+              "after": "72d512ca9d1139e92117c2d0c506f4546ffbce71539cee4f83ae6373c0e8260d",
+              "afterCheck": "unchanged"
+            }
+          ],
+          "upstreamArguments": [
+            "D:\\a\\_temp\\path with spaces\\frozen-ui-app\\native-workbench\\packs\\stringtie-1.0.0\\bin\\stringtie.exe",
+            "D:/a/_temp/path with spaces/frozen-ui-app/native-workbench/packs/stringtie-1.0.0/fixtures/spliced.bam",
+            "-G",
+            "D:/a/_temp/path with spaces/frozen-ui-app/native-workbench/packs/stringtie-1.0.0/fixtures/guide.gtf",
+            "-o",
+            "D:/a/_temp/path with spaces/bustools-stringtie-evidence/gui/stringtie-installation-results/run-20261013-145257-35e803ff/S1/analysis-20261013-145258-7184-0/transcripts.gtf",
+            "-A",
+            "D:/a/_temp/path with spaces/bustools-stringtie-evidence/gui/stringtie-installation-results/run-20261013-145257-35e803ff/S1/analysis-20261013-145258-7184-0/gene-abundance.tsv",
+            "-p",
+            "1",
+            "-m",
+            "200",
+            "-c",
+            "1",
+            "-j",
+            "1",
+            "-f",
+            "0.01",
+            "-s",
+            "4.75",
+            "-M",
+            "1",
+            "-a",
+            "10",
+            "-g",
+            "50",
+            "-l",
+            "STRG"
+          ],
+          "upstreamDataPathsUseForwardSlashes": true,
+          "outputQualification": "Declared check reported passed against its configured known answer."
+        },
+        {
+          "runId": "run-20261013-145258-9f80b3d7",
+          "context": "declared-check",
+          "operation": "estimate-reference",
+          "status": "success",
+          "elapsedMs": 109,
+          "analysisStep": {
+            "status": "success",
+            "exit_code": 0,
+            "elapsed_ms": 62
+          },
+          "versionStep": {
+            "status": "success",
+            "exit_code": 0,
+            "elapsed_ms": 31
+          },
+          "upstreamExitSigned": null,
+          "upstreamExitHex": null,
+          "stderr": "",
+          "childRun": {
+            "path": "spaces/gui/stringtie-installation-results/run-20261013-145258-9f80b3d7/S1/analysis-20261013-145258-6120-0/run.json",
+            "bytes": 12082,
+            "sha256": "1078ceaabc92c38870e962ac1946689f37e552cc9a3d73b570a1e5b6c478bc26"
+          },
+          "outerRun": {
+            "path": "spaces/gui/stringtie-installation-results/run-20261013-145258-9f80b3d7/run.json",
+            "bytes": 11719,
+            "sha256": "28dbdacf2c09caf2afa600968459482e1b9e9dece85b68d7d7cc6afa2bafad8b"
+          },
+          "plan": {
+            "path": "spaces/gui/stringtie-installation-results/run-20261013-145258-9f80b3d7/plan.json",
+            "bytes": 25046,
+            "sha256": "9ec212d2f7455bd470a62e941bfa347f44dc136d9c9478eec3931483ec7a30ce"
+          },
+          "validationTools": [
+            {
+              "samtools": {
+                "operation": "bam/flagstat",
+                "pin": {
+                  "packId": "bam",
+                  "packVersion": "0.4.0",
+                  "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+                },
+                "executable": {
+                  "id": "samtools",
+                  "path": "bin/samtools.exe",
+                  "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+                  "version": "1.24"
+                }
+              }
+            }
+          ],
+          "files": {
+            "logs/analysis.stderr.log": {
+              "path": "spaces/gui/stringtie-installation-results/run-20261013-145258-9f80b3d7/S1/analysis-20261013-145258-6120-0/logs/analysis.stderr.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "logs/analysis.stdout.log": {
+              "path": "spaces/gui/stringtie-installation-results/run-20261013-145258-9f80b3d7/S1/analysis-20261013-145258-6120-0/logs/analysis.stdout.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "stringtie.log": {
+              "path": "spaces/gui/stringtie-installation-results/run-20261013-145258-9f80b3d7/S1/analysis-20261013-145258-6120-0/stringtie.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "transcripts.gtf": {
+              "path": "spaces/gui/stringtie-installation-results/run-20261013-145258-9f80b3d7/S1/analysis-20261013-145258-6120-0/transcripts.gtf",
+              "bytes": 2021,
+              "sha256": "d732c5910f8a04502f7ca66ca7edfe6521e37f7b6219afe90ccfa075d2b178ff"
+            },
+            "gene-abundance.tsv": {
+              "path": "spaces/gui/stringtie-installation-results/run-20261013-145258-9f80b3d7/S1/analysis-20261013-145258-6120-0/gene-abundance.tsv",
+              "bytes": 272,
+              "sha256": "afbb0f5e866bf307a73b428d9c70b8946a1ffd46bd3d71053ce7e3ef05a967bc"
+            },
+            "analysis-settings.json": {
+              "path": "spaces/gui/stringtie-installation-results/run-20261013-145258-9f80b3d7/S1/analysis-20261013-145258-6120-0/analysis-settings.json",
+              "bytes": 1474,
+              "sha256": "a5623875137107e94328be15cdc074e589c2f40548fdc2756a161f6e86138acc"
+            }
+          },
+          "inputHashes": [
+            {
+              "id": "alignment",
+              "bytes": 27716,
+              "before": "b1b918330742b9df07a510e3a71183fb75c2764cd8d7da8dca74f7d59b54b698",
+              "after": "b1b918330742b9df07a510e3a71183fb75c2764cd8d7da8dca74f7d59b54b698",
+              "afterCheck": "unchanged"
+            },
+            {
+              "id": "annotation",
+              "bytes": 604,
+              "before": "72d512ca9d1139e92117c2d0c506f4546ffbce71539cee4f83ae6373c0e8260d",
+              "after": "72d512ca9d1139e92117c2d0c506f4546ffbce71539cee4f83ae6373c0e8260d",
+              "afterCheck": "unchanged"
+            }
+          ],
+          "upstreamArguments": [
+            "D:\\a\\_temp\\path with spaces\\frozen-ui-app\\native-workbench\\packs\\stringtie-1.0.0\\bin\\stringtie.exe",
+            "D:/a/_temp/path with spaces/frozen-ui-app/native-workbench/packs/stringtie-1.0.0/fixtures/spliced.bam",
+            "-G",
+            "D:/a/_temp/path with spaces/frozen-ui-app/native-workbench/packs/stringtie-1.0.0/fixtures/guide.gtf",
+            "-o",
+            "D:/a/_temp/path with spaces/bustools-stringtie-evidence/gui/stringtie-installation-results/run-20261013-145258-9f80b3d7/S1/analysis-20261013-145258-6120-0/transcripts.gtf",
+            "-A",
+            "D:/a/_temp/path with spaces/bustools-stringtie-evidence/gui/stringtie-installation-results/run-20261013-145258-9f80b3d7/S1/analysis-20261013-145258-6120-0/gene-abundance.tsv",
+            "-p",
+            "1",
+            "-m",
+            "200",
+            "-c",
+            "1",
+            "-j",
+            "1",
+            "-f",
+            "0.01",
+            "-s",
+            "4.75",
+            "-M",
+            "1",
+            "-a",
+            "10",
+            "-g",
+            "50",
+            "-l",
+            "STRG",
+            "-e"
+          ],
+          "upstreamDataPathsUseForwardSlashes": true,
+          "outputQualification": "Declared check reported passed against its configured known answer."
+        }
+      ],
+      "recordedNormalGraphs": [
+        "bustools/count-bus"
+      ]
+    }
+  ],
+  "independentRawReceiptSha256": "d215996936a621592b53bb87b37cc61a92db319a04111e786902185c16f358f8",
+  "artifacts": [
+    {
+      "id": 11824133183,
+      "kind": "candidate",
+      "sha256": "7873563fb53740e4e2c887b3c31223b6d2be9c98739127cc41658890c7eac1a3"
+    },
+    {
+      "id": 11824502935,
+      "kind": "build",
+      "sha256": "f3555ff79eaed0e9fd0606c7abc9c1cd7e41098768e999f69e5d69dffdb3a75b"
+    },
+    {
+      "id": 11825007585,
+      "kind": "spaces",
+      "sha256": "d05305fea08962512eabf31ec14e5d7d95fe0a2c42701dc615758143a6e80677"
+    },
+    {
+      "id": 11823579375,
+      "kind": "ordinary",
+      "sha256": "5714036f8eb660dc26e12acb4f5311efdba385a53ba158c1e3787b407c9dbf3c"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "schema": 1,
+  "kind": "pre-freeze-development-corrections",
+  "recordedOn": "2026-10-13",
+  "candidateSourceCommit": "2044235fb0abff02c8d8259e12abf41df9647bd4",
+  "bustools": {
+    "schema": 1,
+    "status": "local-development-failure-before-candidate-freeze",
+    "report": "build/bustools-source-tests-initial-empty-header-failure.json",
+    "reportSha256": "22ff716cd434fb3cc17363abd2164e65b8be1c1424fae487638735f35a81b77f",
+    "testsRun": 22,
+    "failures": 4,
+    "errors": 0,
+    "guardExecutableSha256": "565036b1bf9d17a9eb7a5148644175d0bcfc3648b3bca068acdc06c9beefa795",
+    "scientificBinarySha256": "8ba6b52687b634f2e9bdcad0cf860339bbd2c9833444a2b55f9752cab0d5fc87",
+    "testSourceSha256": "00359422f9efeaae86caa8344b56cfc161ef504ef1eab26c206224701e858780",
+    "referenceBinarySha256": "d69e2182c839a0faf5c8718a11232b196934efec03a0c173f10264146a69d252",
+    "command": [
+      "python3",
+      "tests/test_bustools_pack.py",
+      "--reference-binary",
+      "build/bustools-reference-linux/bustools",
+      "--report",
+      "build/bustools-source-tests.json"
+    ],
+    "findings": [
+      "Pristine upstream bustools sort0.45.1 returns success but emits0bytes when corrected BUS has0records. Three failures: header-only, every barcode discarded and pristineemptycomparison. Guard now restores only exact validated emptyBUSheader after successfulsort and before upstreamcount.",
+      "One assertion expected a nonexistent temporaryfiles logline; actual2.1M-record input exceeds64MiB buffer and exercises chunk/disk merge, now assertion requires no all-fits-in-buffer trace and exact merged multiplicity."
+    ],
+    "limitations": "Failed scientific/current candidate not represented as passed. Corrected artifacts and exact native gate remain separate."
+  },
+  "stringtie": {
+    "initial": {
+      "testsRun": 16,
+      "failures": 0,
+      "errors": 1,
+      "success": false,
+      "skipped": [],
+      "testSourceSha256": "a09bdcc390045afe97e574883356dff3c6545c221291191796c3d92c12f7059e",
+      "guardExecutableSha256": "98a1f709b1b052995316c64f7719dab82abb0397134d31b887046dcfe093981a",
+      "scientificBinarySha256": "f4c07f09609d657d67aa93de4eed3c3fe6f24dcf4a041d8a4059eb2ff1a02367",
+      "file": "stringtie-source-tests-development-failure.json",
+      "sha256": "c79f6df783ea83a5bcf387564fd24cbae6e98a78e740cbca2eca1ee286ceb7da"
+    },
+    "cause": "Stale probe fixture aliases remained in the local fixture directory; the deterministic-factory identity assertion rejected them. Scientific and pristine-comparison assertions passed.",
+    "resolution": "Removed obsolete aliases; committed only canonical factory/text fixtures and ignored generated BAM files. Final full suite passes."
+  },
+  "finalReports": [
+    {
+      "testsRun": 24,
+      "failures": 0,
+      "errors": 0,
+      "success": true,
+      "skipped": [],
+      "testSourceSha256": "87066ac97640a0a1c46262c8f207c4cf591afdb4b943ca5a14964aa5a1664a49",
+      "guardExecutableSha256": "0b7e7f288b46eed677c86cf58aca9dd2897e24a68cd8e26650a8b01cc746c591",
+      "scientificBinarySha256": "8ba6b52687b634f2e9bdcad0cf860339bbd2c9833444a2b55f9752cab0d5fc87",
+      "file": "bustools-source-final-tests.json",
+      "sha256": "5a76bd12b10883edacb0d0bf1f612572c6833284a19e8b35e8d55d5264081849"
+    },
+    {
+      "testsRun": 18,
+      "failures": 0,
+      "errors": 0,
+      "success": true,
+      "skipped": [],
+      "testSourceSha256": "b5de0a31ec602e9b5ccff577fdf2d7ea5b074ffae6a41e6d44ec09a9ef5c0040",
+      "guardExecutableSha256": "98a1f709b1b052995316c64f7719dab82abb0397134d31b887046dcfe093981a",
+      "scientificBinarySha256": "f4c07f09609d657d67aa93de4eed3c3fe6f24dcf4a041d8a4059eb2ff1a02367",
+      "file": "stringtie-source-final-tests.json",
+      "sha256": "5727ff9f21abd603cb8ed8f509ad6e1901c6a16ca89014715b21e9509b686e9e"
+    }
+  ],
+  "sourceReviewCorrections": [
+    "StringTie settings JSON precision and numeric grammar; isoform fraction strict upper bound; mapped reference index and duplicate/conflicting GTF identifiers.",
+    "Documented XS strand-tag priority and measured library choice on untagged input.",
+    "Corrected HTSCodecs generated version to pinned-source1.4.0.",
+    "Deterministic stored-DEFLATE BGZF fixtures preserve exact bytes across Python/zlib versions."
+  ],
+  "status": "Corrected before hosted candidate; original failed runs are not relabelled as passes. Raw development reports are local build diagnostics; sanitized identities/findings retained here.",
+  "subsequentStringTieWorkbench1Checks": {
+    "initial": {
+      "file": "stringtie-source-workbench1-diagnostic-assertion-failure.json",
+      "sha256": "1133ed4bed8d62abacfcc7e96d31a8573cd45077d1b720210b56d9450710234a",
+      "testsRun": 19,
+      "failures": 1,
+      "errors": 0,
+      "skipped": [],
+      "success": false,
+      "testSourceSha256": "c493765608fbcc949e5840ce9fab2bfe341e030857dfa4cbb216c21c430aed7e",
+      "guardExecutableSha256": "fc300470bf9f0046ab75eec5f098f9f6ca514ce9efb68d8f8c74a32b0e2da591",
+      "scientificBinarySha256": "e5deb7a0590f3dba25776573bf5dd3047b7680a264c0004dafaf2ed0985ba6bf"
+    },
+    "cause": "Diagnostic assertion expected Error: but the unchanged upstream fatal message begins Error creating. It exited with the required code1; assertion text was corrected.",
+    "final": {
+      "file": "stringtie-source-workbench1-tests.json",
+      "sha256": "bee93ea479d0eb9fa9e9fced1f44d89edbcd60c23401189530de2f978a0f920f",
+      "testsRun": 19,
+      "failures": 0,
+      "errors": 0,
+      "skipped": [],
+      "success": true,
+      "testSourceSha256": "954cdd9e5a12e2402dbe595b97950ae753338dc2f7eca49c372fb656ee2c5d80",
+      "guardExecutableSha256": "fc300470bf9f0046ab75eec5f098f9f6ca514ce9efb68d8f8c74a32b0e2da591",
+      "scientificBinarySha256": "e5deb7a0590f3dba25776573bf5dd3047b7680a264c0004dafaf2ed0985ba6bf"
+    },
+    "note": "This local assertion failure is separate from the stalled Windows69a9ec0 attempt."
+  }
+}

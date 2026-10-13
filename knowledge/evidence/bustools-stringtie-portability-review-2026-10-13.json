@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "kind": "focused-native-cli-source-review",
+  "status": "source boundary approved; replacement native execution required",
+  "previousCandidate": "69a9ec0d09ef94076fbe4ba0f59fd89d2a604bd4",
+  "previousRun": 38413969992,
+  "upstreamStringTieVersion": "3.0.3",
+  "toolVersion": "3.0.3-workbench1",
+  "patchSha256": "253fb7891604783bbe87e60947435dd68f447d7cb6449d9f074b5969441b2d42",
+  "upstreamModifiedFiles": [
+    "gclib/GBase.cpp",
+    "stringtie.cpp"
+  ],
+  "changes": [
+    "Windows GError prints once to stderr and exits1; remove modal MessageBox and invalid variadic reuse.",
+    "Windows GMessage retains warning output and flush using one variadic formatting operation.",
+    "Mark version3.0.3-workbench1.",
+    "Workbench guard passes generic slash paths for BAM/GTF/output arguments while retaining native executable launch path.",
+    "Validation deadline cancels real backend and retains partial events/plans/logs; timeout assertion follows timer cancellation/join."
+  ],
+  "unchanged": [
+    "StringTie assembly and estimation algorithms",
+    "Upstream threading behavior",
+    "Guard input limits and scientific validation",
+    "Application alignment preflight and exact bundled SAMtools selection"
+  ],
+  "evidenceBasis": "Root and independent source reviewer inspected the exact pinned upstream code and patch. Source supports the path-error/modal-blocking diagnosis; stalled-run native error text was not captured at review time.",
+  "filesReviewed": {
+    "tools/stringtie/guard.cpp": "348d04d2e3ba5eed619ecb505d30849a5d48b3c9c575d0e753a4181066abffeb",
+    "scripts/build_stringtie_native.py": "02cf5af14e53a13a4e8fc2a5dabbb7879591cad9862f293d88638f150ef32165",
+    "scripts/prepare_stringtie_pack.py": "2a1f061402ebd162c780f802f30837c3f693a93ac5dd69224a8760840b3e1306",
+    "tests/test_stringtie_pack.py": "954cdd9e5a12e2402dbe595b97950ae753338dc2f7eca49c372fb656ee2c5d80",
+    "scripts/audit_bustools_stringtie_candidate.py": "ea40aaee5bf143613e3df4a593e0835296f67349522938f0173784eed2745401",
+    "scripts/check_bustools_stringtie_windows.py": "c558d5cc365d36658a8a7e4da07ba78b2b6e765c59f409306b524571f18deac5",
+    "tests/test_bustools_stringtie_validation.py": "def7ddc43ca9e9e049d89ec0478854f296df121caa9b147164e103fea5529305"
+  },
+  "localStringTieTests": {
+    "file": "stringtie-source-workbench1-tests.json",
+    "sha256": "bee93ea479d0eb9fa9e9fced1f44d89edbcd60c23401189530de2f978a0f920f",
+    "testsRun": 19,
+    "failures": 0,
+    "errors": 0,
+    "skipped": [],
+    "success": true,
+    "testSourceSha256": "954cdd9e5a12e2402dbe595b97950ae753338dc2f7eca49c372fb656ee2c5d80",
+    "guardExecutableSha256": "fc300470bf9f0046ab75eec5f098f9f6ca514ce9efb68d8f8c74a32b0e2da591",
+    "scientificBinarySha256": "e5deb7a0590f3dba25776573bf5dd3047b7680a264c0004dafaf2ed0985ba6bf"
+  },
+  "localValidatorTests": 21,
+  "nativeWindowsPassed": false
+}
