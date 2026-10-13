@@ -9,10 +9,12 @@ that exact merged tree on `feature/kalign-pack`.
 
 The first Kalign interface is a separate **1.0.0** pack for nucleotide and protein
 multiple-sequence alignment, with exact upstream source, native Windows builds,
-scientific fixtures and typed outputs for downstream FastTree. See the
-[Kalign handover](kalign-handover.md) for actual implementation and validation
-status. Benchmarking remains separate; earlier source and Windows results do
-not validate this new pack.
+scientific fixtures and typed outputs for downstream FastTree. Implementation,
+exact Windows gates in both path cases, downloaded source audit and 20-image
+review are complete in [draft PR #17](https://github.com/comparativechrono/workbench/pull/17).
+The [Kalign handover](kalign-handover.md) records tested source, downloads,
+initial correction and limits. Kalign remains unmerged and unpublished.
+Benchmarking remains separate.
 
 ## Merged development: Prodigal and FastTree optional packs, 2026-10-13
 
@@ -35,7 +37,7 @@ Cutadapt (pack `trimming`), HISAT2, mosdepth, featureCounts, kallisto, LoFreq an
 MUSCLE. Existing classic BWA is not bwa-mem2; existing kallisto bulk operations
 do not implement bustools or single-cell BUS processing.
 
-Kalign is now the active native-build and pack implementation stage.
+Kalign is ready for unpublished draft review; no further pack stage has started.
 Primer3 and PLINK2 need separately bounded operations; bustools and StringTie
 need workflow integration; HMMER, bwa-mem2, Salmon and MACS3 need dedicated
 portability work. Strelka2 needs an initial feasibility and version-specific

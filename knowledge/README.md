@@ -1,10 +1,14 @@
 # Native Workbench knowledge base
 
-**Active Kalign stage, 2026-10-13:** optional Kalign **1.0.0** is being
-implemented from the merged Prodigal/FastTree integration tree. The supported
-scope is explicit nucleotide/protein alignment with pinned Kalign 3.5.1,
-measured outputs and typed FastTree integration. Exact Windows and visual
-validation are pending. Start with the [Kalign handover](kalign-handover.md).
+**Kalign ready for draft review, 2026-10-13:** optional **1.0.0** is implemented in
+[draft PR #17](https://github.com/comparativechrono/workbench/pull/17), based on
+merged PR #16. Exact source `8149bdc02a2104e97ea6512ae0a8bc76c8defc32` passed
+both Windows path cases, Kalign→FastTree graphs, regressions and native GUI checks.
+All 20 actual display screenshots were reviewed. The [handover](kalign-handover.md)
+and [final evidence](evidence/kalign-1.0.0-final-review-2026-10-13.json) retain the
+initial fixture-line-ending correction, exact hashes and scope limits.
+[Pack/source download](https://github.com/comparativechrono/workbench/actions/runs/38396201555/artifacts/11812411631)
+expires 2026-11-12. No release or catalogue publication is included.
 
 **Merged first pack batch, 2026-10-13:** [PR #16](https://github.com/comparativechrono/workbench/pull/16)
 merged into `fix/native-ui-0.16.1` at `8addaa1278c535e4931eb0b2b85b8f47b51ddd66`

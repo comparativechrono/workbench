@@ -2,12 +2,21 @@
 
 ## Active development: Kalign pack, 2026-10-13
 
-Kalign **1.0.0** is in development on `feature/kalign-pack`, based on the merged
-integration commit `8addaa1278c535e4931eb0b2b85b8f47b51ddd66`. The initial
-scope is serial default nucleotide/protein alignment from ungapped FASTA,
-explicit alphabets, typed MSA outputs and measured alignment summaries. No
-application version change is needed. Native execution and visual acceptance
-remain pending; see the [Kalign handover](kalign-handover.md).
+Kalign **1.0.0** is ready for unpublished review in
+[draft PR #17](https://github.com/comparativechrono/workbench/pull/17), based on
+merged integration commit `8addaa1278c535e4931eb0b2b85b8f47b51ddd66`.
+Tested source `8149bdc02a2104e97ea6512ae0a8bc76c8defc32` provides serial default
+nucleotide/protein alignment, explicit alphabets, typed MSA outputs and recorded
+measurements. Application binaries are unchanged.
+
+Hosted checks passed 94 source tests (one explicit Linux platform skip), all 17
+selected tests per Windows path without skips, both real Kalign→FastTree DAGs,
+Starter/installed-pack regressions and seven GUI gate checks per path. All 20
+actual display images were reviewed at 96 DPI. The downloaded archive audit
+matched 953 Git files and 1103 companion entries. Native Results does not yet
+parse the pack's JSON measurements. The [handover](kalign-handover.md) records
+exact archives, the initial fixture-newline correction, and acceptance limits.
+Kalign is unmerged/unpublished; no release or catalogue change is included.
 
 ## Merged development: Prodigal and FastTree packs, 2026-10-13
 
