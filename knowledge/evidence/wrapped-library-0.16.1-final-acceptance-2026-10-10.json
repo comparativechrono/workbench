@@ -1,0 +1,330 @@
+{
+  "schema": 1,
+  "kind": "Combined exact-package hosted Windows candidate acceptance index",
+  "date": "2026-10-10",
+  "applicationVersion": "0.16.1",
+  "status": "passed within the recorded hosted candidate scope",
+  "appSourceCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+  "appSourceTree": "624bb34f88ac268360f1c6e28eba8a7954992d62",
+  "buildRun": 38075960020,
+  "buildRunUrl": "https://github.com/comparativechrono/workbench/actions/runs/38075960020",
+  "fullRunGateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+  "feedbackRecheckGateCommit": "7ea0ce6bf6821089c524c307f99efb0a1892d2a3",
+  "feedbackRecheckGateTree": "1d230bc55588e391c9bdc4ecad9096ae004d365f",
+  "feedbackRecheckRun": 38076722339,
+  "feedbackRecheckRunUrl": "https://github.com/comparativechrono/workbench/actions/runs/38076722339",
+  "archives": [
+    {
+      "file": "native-workbench-0.16.1-source.zip",
+      "bytes": 48487148,
+      "sha256": "002fbc8401ab744a8172f3ae11d240c925ed7a8d1241bd5d94e0413675bb1b5d"
+    },
+    {
+      "file": "native-workbench-0.16.1-starter-windows.zip",
+      "bytes": 17889148,
+      "sha256": "28f1362287991621dde030da54eb444846142c0243be6b9d86c4b4f1bf99dd47"
+    },
+    {
+      "file": "native-workbench-0.16.1-update-from-0.16.0.zip",
+      "bytes": 13051808,
+      "sha256": "d0a20f0b8288c79dba695e9cc82e78a78e95244ebb267e959d99fb9e438e7aee"
+    }
+  ],
+  "evidence": {
+    "source": {
+      "file": "knowledge/evidence/wrapped-library-0.16.1-final-source-2026-10-10.json",
+      "bytes": 1675,
+      "sha256": "177ea36d70251dc72af9b843987127dfe423fca3d41726b29bab13feeba45832"
+    },
+    "archive": {
+      "file": "knowledge/evidence/wrapped-library-0.16.1-native-scroll-archive-2026-10-10.json",
+      "bytes": 6259,
+      "sha256": "bd4523104a4f6c81c967ba8456dea815489f75f4d38a31ee63bbb7b35dddc4b7"
+    },
+    "native": {
+      "file": "knowledge/evidence/wrapped-library-0.16.1-native-scroll-native-2026-10-10.json",
+      "bytes": 30454,
+      "sha256": "bb7a0fc774e8e46af307db5037903d15615851d6ac3571e0293954ea979d763f"
+    },
+    "recheckSource": {
+      "file": "knowledge/evidence/wrapped-library-0.16.1-feedback-recheck-source-2026-10-10.json",
+      "bytes": 709,
+      "sha256": "9845fe85273f3a5c3e09615d4b7a41194eac63814638dc6c1ca3b7e3e3792d4b"
+    },
+    "recheckNative": {
+      "file": "knowledge/evidence/wrapped-library-0.16.1-feedback-recheck-native-2026-10-10.json",
+      "bytes": 63550,
+      "sha256": "8da449e106a6581a8e61f8f75e351a732273152b39d830ca0c36d5883a229e13"
+    },
+    "visual": {
+      "file": "knowledge/evidence/wrapped-library-0.16.1-visual-review-2026-10-10.json",
+      "bytes": 16836,
+      "sha256": "3fec22da1d652ebf5a6da2406881fcd6878d59eb0158a431db781f4ade47d87e"
+    },
+    "recheckVisual": {
+      "file": "knowledge/evidence/wrapped-library-0.16.1-feedback-recheck-visual-2026-10-10.json",
+      "bytes": 15344,
+      "sha256": "d1e8c177dc0366ac99c318100ba13d4a4a5edd230af1c1f2a03999600cbc52f5"
+    },
+    "history": {
+      "file": "knowledge/evidence/wrapped-library-0.16.1-historical-evidence-index-2026-10-10.json",
+      "bytes": 11522,
+      "sha256": "77c5691d6d2c89cafa426de77122432728a53f3e856bb3363c58ac0366ce686a"
+    }
+  },
+  "sourceValidation": {
+    "status": "passed",
+    "sourceTests": 258,
+    "suites": 20,
+    "configuredSkips": 0,
+    "strictCrossBuilds": 3,
+    "cxxJson": "passed",
+    "sourceReceipt": "knowledge/evidence/wrapped-library-0.16.1-final-source-2026-10-10.json",
+    "validatorOnlyRecheck": {
+      "tests": 18,
+      "suite": "tests/test_tester_feedback_gate.py",
+      "status": "passed",
+      "receipt": "knowledge/evidence/wrapped-library-0.16.1-feedback-recheck-source-2026-10-10.json",
+      "addsToApplicationSourceTestCount": false
+    }
+  },
+  "archiveValidation": {
+    "status": "passed",
+    "committedSourceFilesVerified": 864,
+    "runtimeSourceFilesVerified": 34,
+    "exampleSourceFilesVerified": 6,
+    "coreFilesVerified": 90,
+    "starterArchiveFiles": 277,
+    "preservedPublishedRuntimeFiles": 39,
+    "preservedPublishedPackFiles": 186,
+    "allThreeArchiveHashesVerified": true,
+    "sourceCorrespondenceVerified": true,
+    "updaterInventoryAndTargetReconstructionVerified": true,
+    "establishesUpdaterRolloutAcceptance": false,
+    "receipt": "knowledge/evidence/wrapped-library-0.16.1-native-scroll-archive-2026-10-10.json"
+  },
+  "nativeValidation": {
+    "status": "passed across original full run and unchanged-archive feedback recheck",
+    "paths": [
+      {
+        "pathCase": "ordinary",
+        "completedGateScopes": 10,
+        "distinctPassedChecks": 124,
+        "explicitSkippedChecks": 0,
+        "gates": [
+          {
+            "gate": "wrapped-library",
+            "distinctChecks": 7,
+            "status": "passed",
+            "evidence": "knowledge/evidence/wrapped-library-0.16.1-native-scroll-native-2026-10-10.json",
+            "run": 38075960020,
+            "gateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287"
+          },
+          {
+            "gate": "patch",
+            "distinctChecks": 23,
+            "status": "passed",
+            "evidence": "knowledge/evidence/wrapped-library-0.16.1-native-scroll-native-2026-10-10.json",
+            "run": 38075960020,
+            "gateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287"
+          },
+          {
+            "gate": "feedback",
+            "distinctChecks": 13,
+            "status": "passed",
+            "evidence": "knowledge/evidence/wrapped-library-0.16.1-feedback-recheck-native-2026-10-10.json",
+            "run": 38076722339,
+            "gateCommit": "7ea0ce6bf6821089c524c307f99efb0a1892d2a3"
+          },
+          {
+            "gate": "batch",
+            "distinctChecks": 11,
+            "status": "passed",
+            "evidence": "knowledge/evidence/wrapped-library-0.16.1-native-scroll-native-2026-10-10.json",
+            "run": 38075960020,
+            "gateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287"
+          },
+          {
+            "gate": "readiness",
+            "distinctChecks": 5,
+            "status": "passed",
+            "evidence": "knowledge/evidence/wrapped-library-0.16.1-native-scroll-native-2026-10-10.json",
+            "run": 38075960020,
+            "gateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287"
+          },
+          {
+            "gate": "curated",
+            "distinctChecks": 11,
+            "status": "passed",
+            "evidence": "knowledge/evidence/wrapped-library-0.16.1-native-scroll-native-2026-10-10.json",
+            "run": 38075960020,
+            "gateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287"
+          },
+          {
+            "gate": "workspace",
+            "distinctChecks": 32,
+            "status": "passed",
+            "evidence": "knowledge/evidence/wrapped-library-0.16.1-native-scroll-native-2026-10-10.json",
+            "run": 38075960020,
+            "gateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287"
+          },
+          {
+            "gate": "reference-management",
+            "distinctChecks": 10,
+            "status": "passed",
+            "evidence": "knowledge/evidence/wrapped-library-0.16.1-native-scroll-native-2026-10-10.json",
+            "run": 38075960020,
+            "gateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287"
+          },
+          {
+            "gate": "results",
+            "distinctChecks": 9,
+            "status": "passed",
+            "evidence": "knowledge/evidence/wrapped-library-0.16.1-native-scroll-native-2026-10-10.json",
+            "run": 38075960020,
+            "gateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287"
+          },
+          {
+            "gate": "scroll",
+            "distinctChecks": 3,
+            "status": "passed",
+            "evidence": "knowledge/evidence/wrapped-library-0.16.1-native-scroll-native-2026-10-10.json",
+            "run": 38075960020,
+            "gateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287"
+          }
+        ],
+        "feedbackRecheckedChecks": 13,
+        "feedbackRecheckAddsUniqueChecks": true
+      },
+      {
+        "pathCase": "path with spaces",
+        "completedGateScopes": 10,
+        "distinctPassedChecks": 124,
+        "explicitSkippedChecks": 0,
+        "gates": [
+          {
+            "gate": "wrapped-library",
+            "distinctChecks": 7,
+            "status": "passed",
+            "evidence": "knowledge/evidence/wrapped-library-0.16.1-native-scroll-native-2026-10-10.json",
+            "run": 38075960020,
+            "gateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287"
+          },
+          {
+            "gate": "patch",
+            "distinctChecks": 23,
+            "status": "passed",
+            "evidence": "knowledge/evidence/wrapped-library-0.16.1-native-scroll-native-2026-10-10.json",
+            "run": 38075960020,
+            "gateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287"
+          },
+          {
+            "gate": "feedback",
+            "distinctChecks": 13,
+            "status": "passed",
+            "evidence": "knowledge/evidence/wrapped-library-0.16.1-native-scroll-native-2026-10-10.json",
+            "run": 38075960020,
+            "gateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287"
+          },
+          {
+            "gate": "batch",
+            "distinctChecks": 11,
+            "status": "passed",
+            "evidence": "knowledge/evidence/wrapped-library-0.16.1-native-scroll-native-2026-10-10.json",
+            "run": 38075960020,
+            "gateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287"
+          },
+          {
+            "gate": "readiness",
+            "distinctChecks": 5,
+            "status": "passed",
+            "evidence": "knowledge/evidence/wrapped-library-0.16.1-native-scroll-native-2026-10-10.json",
+            "run": 38075960020,
+            "gateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287"
+          },
+          {
+            "gate": "curated",
+            "distinctChecks": 11,
+            "status": "passed",
+            "evidence": "knowledge/evidence/wrapped-library-0.16.1-native-scroll-native-2026-10-10.json",
+            "run": 38075960020,
+            "gateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287"
+          },
+          {
+            "gate": "workspace",
+            "distinctChecks": 32,
+            "status": "passed",
+            "evidence": "knowledge/evidence/wrapped-library-0.16.1-native-scroll-native-2026-10-10.json",
+            "run": 38075960020,
+            "gateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287"
+          },
+          {
+            "gate": "reference-management",
+            "distinctChecks": 10,
+            "status": "passed",
+            "evidence": "knowledge/evidence/wrapped-library-0.16.1-native-scroll-native-2026-10-10.json",
+            "run": 38075960020,
+            "gateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287"
+          },
+          {
+            "gate": "results",
+            "distinctChecks": 9,
+            "status": "passed",
+            "evidence": "knowledge/evidence/wrapped-library-0.16.1-native-scroll-native-2026-10-10.json",
+            "run": 38075960020,
+            "gateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287"
+          },
+          {
+            "gate": "scroll",
+            "distinctChecks": 3,
+            "status": "passed",
+            "evidence": "knowledge/evidence/wrapped-library-0.16.1-native-scroll-native-2026-10-10.json",
+            "run": 38075960020,
+            "gateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287"
+          }
+        ],
+        "feedbackRecheckedChecks": 13,
+        "feedbackRecheckAddsUniqueChecks": false
+      }
+    ],
+    "unchangedApplicationAndPackagingProvenBetweenRuns": true,
+    "all277PackagedFilesRehashedBeforeAndAfterEachRecheck": true,
+    "counting": "124 distinct native checks per path. Ordinary uses nine complete original gates (111) plus the 13 feedback scenarios from the frozen recheck. The spaces path already passed all 124 in the original run; its later 13 feedback passes are repetition. The original one partial ordinary feedback pass is not added. Diagnostic observations, setup clicks, source tests, screenshot reviews and repeated runs do not increase native check counts.",
+    "inputPrecondition": "Both feedback rechecks used one real click on an exposed, owned HTCAPTION after closing the blank Samples modal; the resulting foreground window was verified before the gate continued. This does not establish automatic foreground restoration after modal close.",
+    "recordedSkips": 0
+  },
+  "visualReview": {
+    "status": "completed within captured hosted display scope",
+    "initialActualDisplayImagesReviewed": 25,
+    "recheckActualDisplayImagesReviewed": 16,
+    "totalReviewedImageRecords": 41,
+    "initialReceipt": "knowledge/evidence/wrapped-library-0.16.1-visual-review-2026-10-10.json",
+    "recheckReceipt": "knowledge/evidence/wrapped-library-0.16.1-feedback-recheck-visual-2026-10-10.json",
+    "finding": "No additional visible layout defect in the unobscured selected captures. Wrapped bold names, regular descriptions, long-entry endings, workflow drag result and SAMtools guidance were reviewed. Fresh recheck captures cover populated overflow/collapse endpoints in both path layouts.",
+    "screenshotsAreNotTransientFrameOracles": true
+  },
+  "historicalResults": {
+    "index": "knowledge/evidence/wrapped-library-0.16.1-historical-evidence-index-2026-10-10.json",
+    "originalFullRunOverallVerdict": "failed",
+    "originalOrdinaryFeedbackVerdict": "failed after one scenario with a foreground obstruction",
+    "originalFullRunReceiptUnchanged": true,
+    "priorFailedAttemptsAndDiagnosticLimitsPreserved": true,
+    "historicalResizeNegativeControlResultUnchanged": true,
+    "laterPassDoesNotRetroactivelyAlterPriorVerdict": true
+  },
+  "limits": [
+    "Acceptance applies to these exact unpublished candidate archives on hosted Windows in ordinary paths and paths containing spaces; it is not publication or deployment approval.",
+    "Static archive/source audits, cross-builds, native GUI/scientific checks and visual reviews have separate scopes and counts.",
+    "Finite sampled temporal checks and selected still images do not establish zero flashing between observations or on all hardware.",
+    "Representative-PC acceptance, high-DPI/multi-monitor behavior, screen readers and physical trackpad validation remain outstanding.",
+    "Executable signing and institutional deployment, scientific Linux CWL validation, realistic Windows-Linux benchmarking, and release/updater rollout validation remain separate outstanding work.",
+    "Hosted evidence artifacts expire according to their recorded retention dates; the durable receipts preserve identities, findings and limitations, not the binary captures.",
+    "No new QC pass thresholds or general scientific validation are inferred from synthetic training results."
+  ],
+  "curation": {
+    "originalReceiptFieldsUnchanged": true,
+    "rawReportsArchivesScreenshotsAndLogsNotCopiedByCuration": true,
+    "privacy": "Only repository-relative receipt/member paths, public repository/artifact links, aggregate observations and evidence identities are retained. No raw fixture values, private runner paths, credentials or signed download URLs are included.",
+    "indexMeaning": "This file combines existing independently audited evidence. It does not rerun tests or modify original reports."
+  }
+}

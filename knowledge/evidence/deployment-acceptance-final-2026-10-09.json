@@ -1,0 +1,575 @@
+{
+  "schemaVersion": 1,
+  "kind": "deployment-acceptance-companion-final-evidence",
+  "recordedOn": "2026-10-09",
+  "status": "complete-observations-with-failed-keyboard-acceptance",
+  "pullRequest": "https://github.com/comparativechrono/workbench/pull/14",
+  "draft": true,
+  "published": false,
+  "sourceIdentity": {
+    "branch": "feature/deployment-acceptance",
+    "baseCommit": "9ac6f906e3acd88e743ed87c76cbf99c9087636d",
+    "toolkitCommit": "1a7d1e5f70e3ca710c9b3f6b1313353e8d46cc78",
+    "toolkitTree": "6ef5ac330f7ea7026d382312641e70e1e91d01c9",
+    "applicationVersion": "0.16.0",
+    "applicationSourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+    "applicationRebuilt": false,
+    "toolkitDirty": false,
+    "finalCommitScope": "Knowledge/evidence only; tested toolkit, workflow, kit documentation and application bytes unchanged."
+  },
+  "workflow": {
+    "id": 37979351047,
+    "url": "https://github.com/comparativechrono/workbench/actions/runs/37979351047",
+    "headSha": "1a7d1e5f70e3ca710c9b3f6b1313353e8d46cc78",
+    "status": "completed",
+    "conclusion": "failure",
+    "jobs": [
+      {
+        "id": 113985604322,
+        "name": "bundle",
+        "conclusion": "success"
+      },
+      {
+        "id": 113985773070,
+        "name": "native (ordinary)",
+        "conclusion": "failure"
+      },
+      {
+        "id": 113985773101,
+        "name": "native (path with spaces)",
+        "conclusion": "failure"
+      }
+    ]
+  },
+  "sourceTests": {
+    "platform": "ubuntu-22.04",
+    "jobId": 113985604322,
+    "passed": 87,
+    "failed": 0,
+    "skipped": 0,
+    "suites": [
+      {
+        "command": "python3 tests/test_deployment_inventory.py",
+        "passed": 23
+      },
+      {
+        "command": "python3 tests/test_deployment_bundle.py",
+        "passed": 25
+      },
+      {
+        "command": "python3 tests/test_deployment_acceptance.py",
+        "passed": 30
+      },
+      {
+        "command": "python3 tests/test_deployment_ui_gate.py",
+        "passed": 9
+      }
+    ],
+    "logResults": [
+      "2026-10-09T19:18:49.4733288Z Ran 23 tests in 0.048s",
+      "2026-10-09T19:18:49.4734491Z OK",
+      "2026-10-09T19:18:49.5867942Z Ran 25 tests in 0.030s",
+      "2026-10-09T19:18:49.5869277Z OK",
+      "2026-10-09T19:18:49.9184317Z Ran 30 tests in 0.175s",
+      "2026-10-09T19:18:49.9184819Z OK",
+      "2026-10-09T19:18:50.0843363Z Ran 9 tests in 0.017s",
+      "2026-10-09T19:18:50.0843798Z OK"
+    ],
+    "scope": "Companion source suites on Linux; no Windows source-test claim."
+  },
+  "archive": {
+    "file": "native-workbench-0.16.0-deployment-toolkit.zip",
+    "bytes": 126486209,
+    "sha256": "756489dce12acee16beee3d90da9142cb84e75a5580cabf4392490ce1f4107fa"
+  },
+  "manifest": {
+    "bytes": 81440,
+    "sha256": "9e9fd96a0ad6e5bfe44d4803b97c8241534f67f176f8688588616388847fe650"
+  },
+  "download": {
+    "id": 11641200131,
+    "url": "https://github.com/comparativechrono/workbench/actions/runs/37979351047/artifacts/11641200131",
+    "bytes": 126494957,
+    "sha256": "7e4fca6d814ad17aa82980db6ca735e9b3f191b1fd1a9e5b885e926290ab5cc5",
+    "expiresAt": "2026-11-08T19:19:03Z"
+  },
+  "windows": [
+    {
+      "pathCase": "ordinary",
+      "jobId": 113985773070,
+      "jobConclusion": "failure",
+      "workflowSteps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Verify the exact kit and initialise an untested machine report",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Exercise the real updater folder picker and native desktop",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 5
+        },
+        {
+          "name": "Run curated science and results on a separate copy of the frozen Starter",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Collect actual Windows signature observations",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Verify the immutable kit remains unchanged and manual acceptance remains untested",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Retain actual observations, failures and screenshots",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 18
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 19
+        }
+      ],
+      "artifact": {
+        "id": 11639996891,
+        "url": "https://github.com/comparativechrono/workbench/actions/runs/37979351047/artifacts/11639996891",
+        "bytes": 1062332,
+        "sha256": "e5ed812e02c891607fecc99dc55fffd83e7ce3c33bc93327232974f23719fb96",
+        "expiresAt": "2026-11-08T19:20:16Z"
+      },
+      "nativeReport": {
+        "path": "native-ui/native-deployment-ui.json",
+        "bytes": 27847,
+        "sha256": "2390156dea79001009ab8316387d79312740e9b84525db0d3d41ae2392314e32",
+        "toolkitCommit": "1a7d1e5f70e3ca710c9b3f6b1313353e8d46cc78",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "bundleManifestSha256": "9e9fd96a0ad6e5bfe44d4803b97c8241534f67f176f8688588616388847fe650",
+        "passed": 14,
+        "failed": 2,
+        "blocked": 0,
+        "skipped": 0,
+        "nativeGUIObservationsCompleted": true,
+        "nativeGUIValidated": false,
+        "success": false,
+        "failedScenarios": [
+          "fresh-results-escape",
+          "upgraded-results-escape"
+        ],
+        "captures": 21,
+        "coreFilesVerified": 87,
+        "preservedFiles": 163,
+        "freshInstalledPackFilesUnchanged": 186
+      },
+      "curated": {
+        "reportPath": "curated/native-curated.json",
+        "passed": 11,
+        "failed": 0,
+        "skipped": 0,
+        "captures": 6,
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "starterSha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073",
+        "answers": {
+          "alignmentRecords": 202,
+          "mappedProperPairs": 202,
+          "sample": "starter",
+          "reference": "starter:3000",
+          "variant": "starter:1351 G>A GT=1/1"
+        }
+      },
+      "signatures": {
+        "reportPath": "acceptance-signatures.json",
+        "observations": 72,
+        "Valid": 60,
+        "NotSigned": 12,
+        "scope": "Inventoried PE content, including extensionless updater blobs, plus .exe/.dll/.pyd paths; script formats are outside the collector scope. Counts are file occurrences, not distinct tools.",
+        "trust": "Actual current Windows trust-context observations; no signing, policy change or institutional approval."
+      },
+      "manual": {
+        "reportPath": "acceptance.json",
+        "notTested": 10,
+        "automatedSummariesImported": 1,
+        "failedAutomatedStatusesRetained": true,
+        "manualAcceptance": "not-tested",
+        "institutionalApproval": "not-established"
+      },
+      "display": {
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "architecture": "AMD64",
+        "desktop": [
+          1024,
+          768
+        ],
+        "workArea": [
+          1024,
+          728
+        ],
+        "dpi": 96,
+        "requestedSizes": [
+          [
+            1040,
+            680
+          ],
+          [
+            1280,
+            900
+          ]
+        ],
+        "actualSizes": [
+          [
+            1040,
+            680
+          ],
+          [
+            1040,
+            728
+          ]
+        ],
+        "minimumApplicationWidth": 1040,
+        "horizontalClipping": true
+      },
+      "resultsEscape": {
+        "scope": "Same observation in fresh and upgraded installations",
+        "foregroundIsResults": true,
+        "focusBeforeAndAfterFirstEscape": null,
+        "closedAfterKeyboardSearch": false,
+        "explicitQueryFocusDiagnostic": {
+          "input": "Real pointer click into query then Escape",
+          "focusControlId": 1501,
+          "focusClass": "Edit",
+          "closed": true,
+          "satisfiesOriginalRequirement": false
+        },
+        "visibleCloseButtonFallbackTested": false
+      },
+      "kitAndActualVerifyLauncherPassed": true,
+      "externalPreparationPassed": true,
+      "immutableKitFinalVerifyPassed": true
+    },
+    {
+      "pathCase": "spaces",
+      "jobId": 113985773101,
+      "jobConclusion": "failure",
+      "workflowSteps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Verify the exact kit and initialise an untested machine report",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Exercise the real updater folder picker and native desktop",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 5
+        },
+        {
+          "name": "Run curated science and results on a separate copy of the frozen Starter",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Collect actual Windows signature observations",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Verify the immutable kit remains unchanged and manual acceptance remains untested",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Retain actual observations, failures and screenshots",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 18
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 19
+        }
+      ],
+      "artifact": {
+        "id": 11640790831,
+        "url": "https://github.com/comparativechrono/workbench/actions/runs/37979351047/artifacts/11640790831",
+        "bytes": 1064359,
+        "sha256": "f1cb68078cfc0893af581fd253e0c244bfdfbe90772323d5d796b155c26b68cf",
+        "expiresAt": "2026-11-08T19:20:15Z"
+      },
+      "nativeReport": {
+        "path": "native-ui/native-deployment-ui.json",
+        "bytes": 27887,
+        "sha256": "279b9a98f86821263eb03bab133b7d50c0a924ea34db58b74c696a0fddb5a5b6",
+        "toolkitCommit": "1a7d1e5f70e3ca710c9b3f6b1313353e8d46cc78",
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "bundleManifestSha256": "9e9fd96a0ad6e5bfe44d4803b97c8241534f67f176f8688588616388847fe650",
+        "passed": 14,
+        "failed": 2,
+        "blocked": 0,
+        "skipped": 0,
+        "nativeGUIObservationsCompleted": true,
+        "nativeGUIValidated": false,
+        "success": false,
+        "failedScenarios": [
+          "fresh-results-escape",
+          "upgraded-results-escape"
+        ],
+        "captures": 21,
+        "coreFilesVerified": 87,
+        "preservedFiles": 163,
+        "freshInstalledPackFilesUnchanged": 186
+      },
+      "curated": {
+        "reportPath": "curated/native-curated.json",
+        "passed": 11,
+        "failed": 0,
+        "skipped": 0,
+        "captures": 6,
+        "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "starterSha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073",
+        "answers": {
+          "alignmentRecords": 202,
+          "mappedProperPairs": 202,
+          "sample": "starter",
+          "reference": "starter:3000",
+          "variant": "starter:1351 G>A GT=1/1"
+        }
+      },
+      "signatures": {
+        "reportPath": "acceptance-signatures.json",
+        "observations": 72,
+        "Valid": 60,
+        "NotSigned": 12,
+        "scope": "Inventoried PE content, including extensionless updater blobs, plus .exe/.dll/.pyd paths; script formats are outside the collector scope. Counts are file occurrences, not distinct tools.",
+        "trust": "Actual current Windows trust-context observations; no signing, policy change or institutional approval."
+      },
+      "manual": {
+        "reportPath": "acceptance.json",
+        "notTested": 10,
+        "automatedSummariesImported": 1,
+        "failedAutomatedStatusesRetained": true,
+        "manualAcceptance": "not-tested",
+        "institutionalApproval": "not-established"
+      },
+      "display": {
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "architecture": "AMD64",
+        "desktop": [
+          1024,
+          768
+        ],
+        "workArea": [
+          1024,
+          728
+        ],
+        "dpi": 96,
+        "requestedSizes": [
+          [
+            1040,
+            680
+          ],
+          [
+            1280,
+            900
+          ]
+        ],
+        "actualSizes": [
+          [
+            1040,
+            680
+          ],
+          [
+            1040,
+            728
+          ]
+        ],
+        "minimumApplicationWidth": 1040,
+        "horizontalClipping": true
+      },
+      "resultsEscape": {
+        "scope": "Same observation in fresh and upgraded installations",
+        "foregroundIsResults": true,
+        "focusBeforeAndAfterFirstEscape": null,
+        "closedAfterKeyboardSearch": false,
+        "explicitQueryFocusDiagnostic": {
+          "input": "Real pointer click into query then Escape",
+          "focusControlId": 1501,
+          "focusClass": "Edit",
+          "closed": true,
+          "satisfiesOriginalRequirement": false
+        },
+        "visibleCloseButtonFallbackTested": false
+      },
+      "kitAndActualVerifyLauncherPassed": true,
+      "externalPreparationPassed": true,
+      "immutableKitFinalVerifyPassed": true
+    }
+  ],
+  "archiveAudit": "deployment-acceptance-archive-audit-2026-10-09.json",
+  "visualReview": "deployment-acceptance-visual-review-2026-10-09.json",
+  "attemptHistory": "deployment-acceptance-attempts-2026-10-09.json",
+  "knownLimits": [
+    "Results Escape after keyboard Search failed on fresh and upgraded published 0.16.0 in both paths. No control had focus before or after Escape. Explicit pointer focus into the query then Escape closed; that diagnostic does not pass the original requirement. The internal application cause is not established. Visible Close fallback was not needed/tested.",
+    "Published minimum width 1040 exceeds the hosted 1024-pixel desktop/work area; right edge clipped. Bounded resize assertions are not acceptance on that narrower display.",
+    "All 10 manual acceptance items remain not-tested. Representative PCs, high DPI and transitions, multiple monitors, physical trackpads, Unicode/path-limit target-PC observations and managed-machine security/IT approval remain outstanding.",
+    "Python socket operations were denied in scientific hosts; no OS network isolation, realistic workload capacity, biological/clinical validation or benchmark is claimed.",
+    "Other migration routes, all optional packs and all earlier application suites were not rerun for the unchanged application. Scientific Linux CWL and SDK/build recovery remain later sets; benchmarking is separate."
+  ],
+  "nextAction": "Review the companion; fix Results keyboard focus/Escape in a separately versioned application candidate, address or explicitly bound narrow-display behavior, preserve published bytes and repeat exact ordinary/spaced native gates.",
+  "publicationObservedUnchanged": {
+    "mainCommit": "9ac6f906e3acd88e743ed87c76cbf99c9087636d",
+    "releaseId": 408075619,
+    "tag": "app-v0.16.0",
+    "publishedAt": "2026-10-09T15:54:56Z",
+    "prerelease": true,
+    "assets": [
+      {
+        "id": 625429123,
+        "name": "align-0.4.1-metadata.json",
+        "bytes": 707,
+        "digest": "sha256:3a1310431f81e3f424e2eaed6490e5928fcc4dcff0f4512429cdf95fba35a15a"
+      },
+      {
+        "id": 625429069,
+        "name": "BUILD-PROVENANCE.json",
+        "bytes": 11402,
+        "digest": "sha256:5929a1f261ac571b61ac5886fc135f749e398e861ee81963d7512739feddc927"
+      },
+      {
+        "id": 625429073,
+        "name": "BUILD-UPDATE-PROVENANCE.json",
+        "bytes": 8838,
+        "digest": "sha256:7032c4bdfe1253d72d1377d71905091a6b331e254921ef59aa12e35f1d093ccf"
+      },
+      {
+        "id": 625429071,
+        "name": "EVIDENCE-SHA256SUMS.txt",
+        "bytes": 708,
+        "digest": "sha256:607cf78bb55e5f2ed929ff74955eb663fb09786b38f0e7608f05cd87623197ec"
+      },
+      {
+        "id": 625429127,
+        "name": "native-workbench-0.16.0-source.zip",
+        "bytes": 47848425,
+        "digest": "sha256:f746f00a82675c2cf52364a3b4d040721c6d06ac5605488efbdc0376ef5b7e44"
+      },
+      {
+        "id": 625429131,
+        "name": "native-workbench-0.16.0-starter-windows.zip",
+        "bytes": 17846873,
+        "digest": "sha256:f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+      },
+      {
+        "id": 625429147,
+        "name": "native-workbench-0.16.0-update-from-0.11.0.zip",
+        "bytes": 13199905,
+        "digest": "sha256:d75d5129e9b9feaef70faa62d5ea91049c0162df8c7bdc74c7bc81d1933eec8f"
+      },
+      {
+        "id": 625429158,
+        "name": "native-workbench-pack-align-0.4.1.zip",
+        "bytes": 575862,
+        "digest": "sha256:3a08cf061f0b62c5502d1420115db3fcae2b04bf695ad3cfd1c3063de0fafa02"
+      },
+      {
+        "id": 625429068,
+        "name": "RELEASE-VALIDATION.json",
+        "bytes": 28177,
+        "digest": "sha256:2ca86c9a5a7e9435131b214a1edc1170f2275270b573ef0759c8b8fe29be4ee0"
+      },
+      {
+        "id": 625429070,
+        "name": "SHA256SUMS.txt",
+        "bytes": 315,
+        "digest": "sha256:7f2e129d8a74b2078cf9f6118274617959193e8a7180f42a5dfefd5fdc212d89"
+      },
+      {
+        "id": 625429192,
+        "name": "source-metadata.json",
+        "bytes": 1764,
+        "digest": "sha256:7f5a01279149b00fb88730b559fe352bf4bb017bfba77ac483e81bee6943d60b"
+      },
+      {
+        "id": 625429107,
+        "name": "UPDATE-SHA256SUMS.txt",
+        "bytes": 113,
+        "digest": "sha256:5dd4c37d323e3663d4e8b2aaa4a32a8e6a537f044de849298718357eae061abd"
+      },
+      {
+        "id": 625429112,
+        "name": "WINDOWS-EVIDENCE.zip",
+        "bytes": 55121741,
+        "digest": "sha256:588f4689090755cde03e6866bb07c83aa74b7b8e41ac5676e08a5093c8b8282b"
+      }
+    ]
+  },
+  "deliveryRecovery": {
+    "problem": "Workspace executor disconnected after validation, local documentation preparation and independent count/hash review.",
+    "recoveredThrough": "GitHub API using the exact existing branch tree, stored artifact metadata, completed review observations and original reports retained in Actions.",
+    "limits": "Original report copies and detailed per-image receipts could not be read from the disconnected local workspace. Durable aggregate receipts reference exact artifact hashes and known native report hashes; no unavailable values are invented. Original reports/screenshots remain downloadable until 2026-11-08."
+  }
+}

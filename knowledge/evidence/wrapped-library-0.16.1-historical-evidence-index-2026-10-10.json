@@ -1,0 +1,211 @@
+{
+  "schema": 1,
+  "kind": "Historical wrapped-library focused evidence curation index",
+  "date": "2026-10-10",
+  "applicationVersion": "0.16.1",
+  "status": "Historical attempts retained; this index makes no latest-candidate acceptance claim.",
+  "records": [
+    {
+      "file": "wrapped-library-0.16.1-attempt-1-archive-2026-10-10.json",
+      "bytes": 6259,
+      "sha256": "a2650ec07fd89f3402d19423ad1034af3b52c0564cf804651835d66b64b431e0",
+      "originalFocusedAuditReceiptSha256": "a2650ec07fd89f3402d19423ad1034af3b52c0564cf804651835d66b64b431e0",
+      "copiedByteForByte": true,
+      "appSourceCommit": "a2c35bf035281b3446dfab8c133fd34e8545ce78",
+      "gateCommit": null,
+      "run": 38072008564,
+      "kind": "independent downloaded-archive audit"
+    },
+    {
+      "file": "wrapped-library-0.16.1-attempt-1-native-2026-10-10.json",
+      "bytes": 20721,
+      "sha256": "2f572fca5bc11033894f85f3a65d5ec1dc3c8b2850b2770919d5fde59d9bf5bf",
+      "originalFocusedAuditReceiptSha256": "2f572fca5bc11033894f85f3a65d5ec1dc3c8b2850b2770919d5fde59d9bf5bf",
+      "copiedByteForByte": true,
+      "appSourceCommit": "a2c35bf035281b3446dfab8c133fd34e8545ce78",
+      "gateCommit": "a2c35bf035281b3446dfab8c133fd34e8545ce78",
+      "run": 38072008564,
+      "kind": "independent first-attempt native evidence audit"
+    },
+    {
+      "file": "wrapped-library-0.16.1-recheck-1-native-2026-10-10.json",
+      "bytes": 11872,
+      "sha256": "434c2cea092e813c6cf0c5535a5733bf793113c4f00c7b06d4996b43a430a07c",
+      "originalFocusedAuditReceiptSha256": "434c2cea092e813c6cf0c5535a5733bf793113c4f00c7b06d4996b43a430a07c",
+      "copiedByteForByte": true,
+      "appSourceCommit": "a2c35bf035281b3446dfab8c133fd34e8545ce78",
+      "gateCommit": "5c5da273653d125156911cb7a27633e0924dce91",
+      "run": 38072830289,
+      "kind": "independent frozen-archive native recheck audit"
+    },
+    {
+      "file": "wrapped-library-0.16.1-whole-item-scroll-diagnostic-2026-10-10.json",
+      "bytes": 4431,
+      "sha256": "a04c06672667637b6763e31f3af4fcd0b559ec850857791ba6d769a782b97da6",
+      "originalFocusedAuditReceiptSha256": "a04c06672667637b6763e31f3af4fcd0b559ec850857791ba6d769a782b97da6",
+      "copiedByteForByte": true,
+      "appSourceCommit": "a2c35bf035281b3446dfab8c133fd34e8545ce78",
+      "gateCommit": "fa762eb70a946d6968683944fcf7c9fc92165acf",
+      "run": 38073329814,
+      "kind": "independent frozen native-tree scroll diagnostic audit"
+    },
+    {
+      "file": "wrapped-library-0.16.1-viewport-startup-archive-2026-10-10.json",
+      "bytes": 6259,
+      "sha256": "d49281a9f9e3b588582477e740182b788524e2e4410c9b0c76cfc1f3fa9d8a46",
+      "originalFocusedAuditReceiptSha256": "d49281a9f9e3b588582477e740182b788524e2e4410c9b0c76cfc1f3fa9d8a46",
+      "copiedByteForByte": true,
+      "appSourceCommit": "aed0e2ac898fce412927a7bc997d57c164d60b3c",
+      "gateCommit": null,
+      "run": 38074041970,
+      "kind": "independent downloaded-archive audit"
+    },
+    {
+      "file": "wrapped-library-0.16.1-viewport-startup-native-2026-10-10.json",
+      "bytes": 26013,
+      "sha256": "31b6d41c0083f079d864226c7cb7a99725c9c3f0cb8a3411239098d0118e6c8a",
+      "originalFocusedAuditReceiptSha256": "31b6d41c0083f079d864226c7cb7a99725c9c3f0cb8a3411239098d0118e6c8a",
+      "copiedByteForByte": true,
+      "appSourceCommit": "aed0e2ac898fce412927a7bc997d57c164d60b3c",
+      "gateCommit": "aed0e2ac898fce412927a7bc997d57c164d60b3c",
+      "run": 38074041970,
+      "kind": "independent startup-failure candidate evidence audit"
+    },
+    {
+      "file": "wrapped-library-0.16.1-classfix-archive-2026-10-10.json",
+      "bytes": 6259,
+      "sha256": "001244b8c16d29ee2cd9e364b27a0c6afd5ddd2ee9542977342e434ed6b681d8",
+      "originalFocusedAuditReceiptSha256": "001244b8c16d29ee2cd9e364b27a0c6afd5ddd2ee9542977342e434ed6b681d8",
+      "copiedByteForByte": true,
+      "appSourceCommit": "3bf08f0a8ae94f8842afc3fa07f4c20789f7ed3e",
+      "gateCommit": null,
+      "run": 38074534436,
+      "kind": "independent downloaded-archive audit"
+    },
+    {
+      "file": "wrapped-library-0.16.1-classfix-native-2026-10-10.json",
+      "bytes": 27205,
+      "sha256": "51780b056a410c1fd8735f75d7194ea90b04f2a644bf7e433cb991c54284ac69",
+      "originalFocusedAuditReceiptSha256": "51780b056a410c1fd8735f75d7194ea90b04f2a644bf7e433cb991c54284ac69",
+      "copiedByteForByte": true,
+      "appSourceCommit": "3bf08f0a8ae94f8842afc3fa07f4c20789f7ed3e",
+      "gateCommit": "3bf08f0a8ae94f8842afc3fa07f4c20789f7ed3e",
+      "run": 38074534436,
+      "kind": "independent class-fix candidate native evidence audit"
+    },
+    {
+      "file": "wrapped-library-0.16.1-class-creation-diagnostic-2026-10-10.json",
+      "bytes": 3769,
+      "sha256": "020a47b95652d0d4a911d95e93a332832539329eb98fae1256103d9a0e2d704a",
+      "originalFocusedAuditReceiptSha256": "020a47b95652d0d4a911d95e93a332832539329eb98fae1256103d9a0e2d704a",
+      "copiedByteForByte": true,
+      "appSourceCommit": "3bf08f0a8ae94f8842afc3fa07f4c20789f7ed3e",
+      "gateCommit": "3bf08f0a8ae94f8842afc3fa07f4c20789f7ed3e",
+      "run": 38074534436,
+      "kind": "independent class-creation diagnostic evidence receipt"
+    },
+    {
+      "file": "wrapped-library-0.16.1-frozen-focus-native-2026-10-10.json",
+      "bytes": 8243,
+      "sha256": "087ebeed22182a53ccf21563d7b2220c5b2d53e4126b0e5bd79dd41fc5ea6aca",
+      "originalFocusedAuditReceiptSha256": "087ebeed22182a53ccf21563d7b2220c5b2d53e4126b0e5bd79dd41fc5ea6aca",
+      "copiedByteForByte": true,
+      "appSourceCommit": "3bf08f0a8ae94f8842afc3fa07f4c20789f7ed3e",
+      "gateCommit": "f037fb612097aeff7fd576960a25d17c376504ee",
+      "run": 38075533050,
+      "kind": "independent frozen-application focused wrapped acceptance audit"
+    },
+    {
+      "file": "wrapped-library-0.16.1-viewport-scroll-diagnostic-2026-10-10.json",
+      "bytes": 17462,
+      "sha256": "585609faaa9b9f12fd0b773d98aad0a233ca65c629a522ffe874e5aaea0d3c2e",
+      "originalFocusedAuditReceiptSha256": "585609faaa9b9f12fd0b773d98aad0a233ca65c629a522ffe874e5aaea0d3c2e",
+      "copiedByteForByte": true,
+      "appSourceCommit": "3bf08f0a8ae94f8842afc3fa07f4c20789f7ed3e",
+      "gateCommit": "f037fb612097aeff7fd576960a25d17c376504ee",
+      "run": 38075533050,
+      "kind": "independent ordinary viewport diagnostic audit"
+    },
+    {
+      "file": "wrapped-library-0.16.1-native-scroll-archive-2026-10-10.json",
+      "bytes": 6259,
+      "sha256": "bd4523104a4f6c81c967ba8456dea815489f75f4d38a31ee63bbb7b35dddc4b7",
+      "originalFocusedAuditReceiptSha256": "bd4523104a4f6c81c967ba8456dea815489f75f4d38a31ee63bbb7b35dddc4b7",
+      "copiedByteForByte": true,
+      "appSourceCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+      "gateCommit": null,
+      "run": 38075960020,
+      "kind": "independent downloaded-archive audit"
+    },
+    {
+      "file": "wrapped-library-0.16.1-native-scroll-native-2026-10-10.json",
+      "bytes": 30454,
+      "sha256": "bb7a0fc774e8e46af307db5037903d15615851d6ac3571e0293954ea979d763f",
+      "originalFocusedAuditReceiptSha256": "bb7a0fc774e8e46af307db5037903d15615851d6ac3571e0293954ea979d763f",
+      "copiedByteForByte": true,
+      "appSourceCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+      "gateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+      "run": 38075960020,
+      "kind": "independent height-fix candidate native evidence audit"
+    },
+    {
+      "file": "wrapped-library-0.16.1-native-scroll-class-diagnostic-2026-10-10.json",
+      "bytes": 3769,
+      "sha256": "cf9d40e901f7023696afb86723907483ea4556d1e1af3e4cc453ec0fc854ac42",
+      "originalFocusedAuditReceiptSha256": "cf9d40e901f7023696afb86723907483ea4556d1e1af3e4cc453ec0fc854ac42",
+      "copiedByteForByte": true,
+      "appSourceCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+      "gateCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+      "run": 38075960020,
+      "kind": "independent class-creation diagnostic evidence receipt"
+    }
+  ],
+  "archiveAssociations": [
+    {
+      "records": [
+        "wrapped-library-0.16.1-attempt-1-native-2026-10-10.json",
+        "wrapped-library-0.16.1-recheck-1-native-2026-10-10.json",
+        "wrapped-library-0.16.1-whole-item-scroll-diagnostic-2026-10-10.json"
+      ],
+      "archiveRecord": "wrapped-library-0.16.1-attempt-1-archive-2026-10-10.json"
+    },
+    {
+      "records": [
+        "wrapped-library-0.16.1-viewport-startup-native-2026-10-10.json"
+      ],
+      "archiveRecord": "wrapped-library-0.16.1-viewport-startup-archive-2026-10-10.json"
+    },
+    {
+      "records": [
+        "wrapped-library-0.16.1-classfix-native-2026-10-10.json",
+        "wrapped-library-0.16.1-class-creation-diagnostic-2026-10-10.json",
+        "wrapped-library-0.16.1-frozen-focus-native-2026-10-10.json",
+        "wrapped-library-0.16.1-viewport-scroll-diagnostic-2026-10-10.json"
+      ],
+      "archiveRecord": "wrapped-library-0.16.1-classfix-archive-2026-10-10.json"
+    },
+    {
+      "records": [
+        "wrapped-library-0.16.1-native-scroll-native-2026-10-10.json",
+        "wrapped-library-0.16.1-native-scroll-class-diagnostic-2026-10-10.json"
+      ],
+      "archiveRecord": "wrapped-library-0.16.1-native-scroll-archive-2026-10-10.json"
+    }
+  ],
+  "curation": {
+    "operation": "Byte-for-byte copies of existing independently audited, focused allowlist receipts; no historical receipt field, verdict, count or hash was changed.",
+    "privacyReview": "All JSON string fields reviewed for absolute/local runner paths, private fixture values, credentials and signed download URLs. Only public repository/artifact links, relative member paths, aggregate observations and evidence identities are retained.",
+    "rawReports": "Original report byte lengths and SHA-256 values remain in the copied receipts. Raw reports, application archives, screenshots and logs are not copied into the repository.",
+    "verificationScope": "Receipt copies and privacy were verified during curation. This step did not rerun the application or independently repeat original source, archive, scientific or native tests.",
+    "receiptHashMeaning": "Each SHA-256 identifies the focused audit receipt bytes exactly; it does not replace any original-report or screenshot hash.",
+    "historicalFailuresPreserved": true,
+    "executableNameMapping": "Archive receipts retain the build-provenance name DesktopWorkbench.exe. Packaging installs those bytes as NativeWorkbench.exe; the archive audit compares their SHA-256 values. This is a naming map, not an additional executable."
+  },
+  "limits": [
+    "The initial attempt, frozen recheck, startup-failing viewport build and classfix full native run remain failed in their original scopes.",
+    "The native-scroll correction build passed all ten native gates in the path containing spaces, but ordinary feedback stopped after one scenario with a foreground failure. Its first-attempt overall verdict remains failed; later rechecks must preserve this receipt.",
+    "Successful diagnostics are not acceptance gates. The frozen focus recheck passed seven focused scenarios in both paths but did not replace failed tester-feedback coverage.",
+    "Finite native frame checks do not establish zero flicker, representative-PC, high-DPI, screen-reader, physical trackpad, performance, release or rollout acceptance.",
+    "Hosted artifact expiration times and original artifact links are retained; repository copies preserve summaries and hashes after artifact expiry."
+  ]
+}

@@ -1,5 +1,110 @@
 # Native Workbench knowledge base
 
+**Primer3/PLINK2 ready for draft review, 2026-10-13:** independent **1.0.0**
+packs are complete in [draft PR #18](https://github.com/comparativechrono/workbench/pull/18),
+stacked on unchanged Kalign draft PR #17. Tested source
+`3d1d83b70d053af625b5cb45362851c0fefab2a1` passed both Windows path cases,
+31 scientific tests per path, normal graphs, Starter/pack regressions and GUI
+checks. All 38 actual display images were reviewed. See the
+[handover](primer3-plink2-handover.md) and
+[final evidence](evidence/primer3-plink2-1.0.0-final-review-2026-10-13.json).
+[Pack/source download](https://github.com/comparativechrono/workbench/actions/runs/38403212748/artifacts/11816422463)
+expires 2026-11-12. Measurements remain output files; native Results shows status
+and provenance. Application bytes are unchanged; nothing is merged or published.
+
+**Kalign ready for draft review, 2026-10-13:** optional **1.0.0** is implemented in
+[draft PR #17](https://github.com/comparativechrono/workbench/pull/17), based on
+merged PR #16. Exact source `8149bdc02a2104e97ea6512ae0a8bc76c8defc32` passed
+both Windows path cases, Kalign→FastTree graphs, regressions and native GUI checks.
+All 20 actual display screenshots were reviewed. The [handover](kalign-handover.md)
+and [final evidence](evidence/kalign-1.0.0-final-review-2026-10-13.json) retain the
+initial fixture-line-ending correction, exact hashes and scope limits.
+[Pack/source download](https://github.com/comparativechrono/workbench/actions/runs/38396201555/artifacts/11812411631)
+expires 2026-11-12. No release or catalogue publication is included.
+
+**Merged first pack batch, 2026-10-13:** [PR #16](https://github.com/comparativechrono/workbench/pull/16)
+merged into `fix/native-ui-0.16.1` at `8addaa1278c535e4931eb0b2b85b8f47b51ddd66`
+on the owner's instruction. The [batch handover](prodigal-fasttree-handover.md)
+retains exact native science, GUI review, source audit and download evidence.
+This did not merge PR #15 into main or publish any application, pack or catalogue.
+Published **0.16.0** and the unpublished **0.16.1** application bytes are unchanged.
+
+**Previous wrapped tool library, 2026-10-10:** implemented in unpublished
+**0.16.1** source `ff13db729a6215e9fe5dfa4a4efdb9c769880287` in
+[draft PR #15](https://github.com/comparativechrono/workbench/pull/15).
+Names wrap in bold, descriptions wrap in regular text, and the hover popup is
+removed. Native scrolling reaches tall rows without losing the library viewport.
+
+The exact build passed **258 source tests**, C++ JSON, three strict native builds
+and the archive/source audit. **124 distinct native checks per Windows path**
+passed across the full run and unchanged-archive feedback recheck
+[38076722339](https://github.com/comparativechrono/workbench/actions/runs/38076722339).
+The separate 18 validator tests and repeated native checks add no new application
+coverage. Final evidence audit and **41-image visual review** are complete;
+the candidate is **ready for unpublished draft review**. The
+[final acceptance index](evidence/wrapped-library-0.16.1-final-acceptance-2026-10-10.json)
+retains all previous failures, including the initial ordinary runner-console
+obstruction. Representative-PC and broader display acceptance remain outstanding.
+Start with the [handover](wrapped-tool-library-0.16.1-handover.md) and
+[library contract](expandable-tool-library.md).
+[Windows review download](https://github.com/comparativechrono/workbench/actions/runs/38075960020/artifacts/11678725746).
+Published **0.16.0** remains unchanged; nothing is merged or released.
+
+**Previous resize correction, 2026-10-10:** implemented in unpublished **0.16.1**
+application source `51077179a6e92020a7e9b992fa0cbe2b5a6c3e1e` in
+[draft PR #15](https://github.com/comparativechrono/workbench/pull/15).
+The app places the complete resized layout before painting it. A bounded resize
+comparison recorded 14 mixed-layout frames in the old package and none in the
+corrected package; screenshot review confirmed the difference. **235 source
+checks** and **117 distinct native checks per Windows path** passed across the
+recorded runs; exact archive/source correspondence passed. The separate strict
+single-transition negative control remains unreproduced, so the workflow is not
+green and no exact lag-duration or zero-flicker claim is made. Start with the [resize handover](resize-redraw-0.16.1-handover.md)
+for exact identities, failed attempts and evidence limits. Published **0.16.0**
+remains unchanged; nothing is merged or released.
+
+**Previous tester-feedback candidate, 2026-10-09:**
+[Draft PR #15](https://github.com/comparativechrono/workbench/pull/15) contains
+unpublished **0.16.1** application source
+`73778e00461e2b83c07b9ea97df2b9c5d4b6317d`: reduced Run/poll redraws,
+anchored category expansion/collapse, separate Methods with Run preflight, and
+native Samples New/Edit/Save as CSV/TSV with a verified one-row Starter example.
+
+The exact archives passed **220 source tests**, strict native builds and the
+archive/source audit. Native Windows checks passed **113 per path**: 81 regression,
+19 patch and 13 tester-feedback checks. Validator-only tests passed **23**,
+separately from application tests. Final validator
+`f9e7120196ddd284d33c0e8221b78fbf4529058f`,
+[run 37999874335](https://github.com/comparativechrono/workbench/actions/runs/37999874335),
+uses the unchanged application archives. Regression, settled patch and final
+feedback visual reviews passed within their recorded 96-DPI scope. The candidate
+is ready for **unpublished draft review**. The bounded immediate Tools-resize
+transient and all four partial attempts are retained. Focused, sanitized receipts
+and original-report hashes are saved; raw reports remain in expiring Actions
+artifacts.
+Start with the [handover](tester-feedback-0.16.1-handover.md).
+Published **0.16.0** remains unchanged; nothing is merged or released.
+
+**Deployment companion baseline:**
+[Draft PR #14](https://github.com/comparativechrono/workbench/pull/14) contains the
+unpublished Windows acceptance and deployment companion for unchanged published
+**0.16.0**. Implementation, exact-kit observations and 54 screenshot reviews are
+complete. Tooling commit: 1a7d1e5f70e3ca710c9b3f6b1313353e8d46cc78;
+[final run](https://github.com/comparativechrono/workbench/actions/runs/37979351047).
+All 87 companion source tests passed. Each Windows path recorded 14 native passes,
+**two failed Results Escape checks**, and 11 curated passes. CI remains failed.
+The hosted 1024-pixel desktop also clips the app's 1040-pixel minimum width.
+
+Start with the [companion handover](deployment-acceptance-handover.md),
+[tester guide](../docs/deployment-acceptance.md) and
+[IT review guide](../docs/institutional-deployment.md). All 10 manual checks remain
+untested; representative PCs, high DPI, multiple monitors, physical trackpads,
+managed-machine approval and signing remain external work. Its failed keyboard
+and narrow-display observations prompted the preceding 0.16.1 UI patch;
+the companion evidence remains unchanged. Benchmarking is separate; scientific
+Linux CWL and SDK/build recovery remain later sets. The published record below is
+unchanged.
+
 **Current release, 2026-10-09:**
 [0.16.0 development prerelease](https://github.com/comparativechrono/workbench/releases/tag/app-v0.16.0),
 packaged source `e855dc4396e0c16ae35f4e840eb9cc734adb4441`.
@@ -112,6 +217,7 @@ verified all 12 assets, five ZIP CRCs and three checksum manifests. See the
 | --- | --- |
 | [Purpose and decisions](purpose-and-decisions.md) | Who is this for, what approach was chosen, and what must not be lost? |
 | [Current state](current-state.md) | What is released, tested, limited or unfinished? |
+| [Native UI patch 0.16.1](ui-patch-0.16.1-handover.md) | What changed after the deployment checks, and which exact candidate evidence and limits apply? |
 | [Architecture](architecture.md) | Where does each responsibility live, and how does a run work? |
 | [Native UI development](native-ui.md) | How do the three panes, standalone tools and workflow canvas work, and what remains to validate? |
 | [0.9.0 handover](cwl-dag-icon-0.9.0-handover.md) | Which CWL/DAG/icon bytes were accepted and published, and what passed? |

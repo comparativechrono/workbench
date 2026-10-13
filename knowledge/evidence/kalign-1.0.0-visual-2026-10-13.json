@@ -1,0 +1,382 @@
+{
+  "schema": 1,
+  "sourceCommit": "8149bdc02a2104e97ea6512ae0a8bc76c8defc32",
+  "run": 38396201555,
+  "reviewedOn": "2026-10-13",
+  "success": true,
+  "actualDisplayImagesReviewed": 20,
+  "printWindowCapturesSupplementary": 20,
+  "reviewMethod": "Direct visual inspection of all actual BitBlt screenshots, shown as lossless full-width two-image sheets. PrintWindow images retained separately.",
+  "findings": [
+    "Wrapped bold operation names and regular descriptions remain inside the library viewport.",
+    "Both forms are reachable from the true top through all help and output labels; scroll-boundary text clipping is expected viewport behavior.",
+    "Run tool and separate Methods controls are visible; form and library panels do not overlap.",
+    "Results search/status, exact pack/tool versions and provenance are readable; no fabricated QC verdict.",
+    "No blocking layout finding in these settled 96-DPI captures."
+  ],
+  "limitations": [
+    "1024x768 hosted desktop, 1024x728 application bounds,96 DPI only.",
+    "No transient-flicker, representative-PC, high-DPI, multiple-monitor or physical-trackpad acceptance.",
+    "Unchanged Results displays no parsed Kalign measurement tiles; JSON measurements are output files."
+  ],
+  "paths": {
+    "ordinary": {
+      "dpi": 96,
+      "windowBounds": [
+        0,
+        0,
+        1024,
+        728
+      ],
+      "workArea": [
+        0,
+        0,
+        1024,
+        728
+      ],
+      "horizontalClipping": false,
+      "reportSha256": "63e124775dfbb65001adf51b96c2c60d2aece3bb9ac841da7bbf11299b6af912",
+      "captures": [
+        {
+          "path": "pack-library-kalign-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "205c5ccca1e6b3f1ada127878fd7fea97be9ce957695c19dcac0bb3378eef878",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "directlyReviewed": true
+        },
+        {
+          "path": "pack-library-kalign-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "b7bcba7623915d593742dc28b4c8419e07c594a95ba4b1f426a2650b0e4d84b7",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "directlyReviewed": false
+        },
+        {
+          "path": "pack-form-kalign-align-nucleotide-top-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "750beb559e7472ddc134980fd6ff29c2778279e5820e09fe79d4b926537bc79e",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "directlyReviewed": true
+        },
+        {
+          "path": "pack-form-kalign-align-nucleotide-top-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "172801a57481456e1e9771b2e93d39b4fbeaa297a4165dceb1b87bbc8e885b0c",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "directlyReviewed": false
+        },
+        {
+          "path": "pack-form-kalign-align-nucleotide-page-1-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "90649ab9aec71bd8352ef8467d99b04e0a1762d253aa99e474481ea1ada0c2cf",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "directlyReviewed": true
+        },
+        {
+          "path": "pack-form-kalign-align-nucleotide-page-1-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "ce770865d52be2483caf12a1957a168e89489e222e7eeafb54e8dc740a921c05",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "directlyReviewed": false
+        },
+        {
+          "path": "pack-form-kalign-align-nucleotide-page-2-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "edfb508eb4130d4e0e213977ef8339b34e38805c8c290a3e11c39e4716d6db9d",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "directlyReviewed": true
+        },
+        {
+          "path": "pack-form-kalign-align-nucleotide-page-2-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "0042c0f4306c5451d8e235fb839a7b105df172228acd9768d74ff69dcc7a8f66",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "directlyReviewed": false
+        },
+        {
+          "path": "pack-form-kalign-align-protein-top-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "6571053c8d51c3a65ef626eb3c556b45ae98ef89e4d5ed34c3aaeeceb34718c1",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "directlyReviewed": true
+        },
+        {
+          "path": "pack-form-kalign-align-protein-top-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "ff6f30370d7313b4d8f9f35f2d20576666c09b49e20a858d754d15dc7948049f",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "directlyReviewed": false
+        },
+        {
+          "path": "pack-form-kalign-align-protein-page-1-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "7621e5f33e938901244f66dce3b4a1ad51c95fb8a43830d6d1521e6d40bf9b1d",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "directlyReviewed": true
+        },
+        {
+          "path": "pack-form-kalign-align-protein-page-1-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "3795377aa98b5f844bd1343b5f56fd3029309f3741df2d9d59493c68d8f3834e",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "directlyReviewed": false
+        },
+        {
+          "path": "pack-form-kalign-align-protein-page-2-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "e6ef19d86aba9a0c236b2a412b0cf56cd7d7d7505f4c999d3b7a5e700ad19e87",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "directlyReviewed": true
+        },
+        {
+          "path": "pack-form-kalign-align-protein-page-2-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "d567b068a616ff89b7539fff6e4013c230eb942762780234a0ec032f11e58398",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "directlyReviewed": false
+        },
+        {
+          "path": "pack-library-unfiltered-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "64a581cfd6a91cff069fc2e6c8fc2df36a18c64258a6eb22dc82c71b44d89651",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "directlyReviewed": true
+        },
+        {
+          "path": "pack-library-unfiltered-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "457850e4fae1bf1a525a9dec39f48ea1d306ffaf0e5a7fe93c3beab6188758db",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "directlyReviewed": false
+        },
+        {
+          "path": "pack-results-kalign-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "c14ef65240c93958ce99958635e5e163dfe0f602867154aa79245bc89377190e",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "directlyReviewed": true
+        },
+        {
+          "path": "pack-results-kalign-window.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "f9093712e3688b2e6fd850b90c5931a6be86348b0cf3f54160eee9d7c4b3ff6b",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "directlyReviewed": false
+        },
+        {
+          "path": "pack-results-kalign-versions-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "d549dae5f8c96db67155f67c938e3386762c6b4f5c0cd2bdef6e77ce1f6ed9b2",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "directlyReviewed": true
+        },
+        {
+          "path": "pack-results-kalign-versions-window.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "0fe0bd927b1e9a1f14bbaacf748c690dc1a636024af6ebd17855b10742fb876c",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "directlyReviewed": false
+        }
+      ]
+    },
+    "spaces": {
+      "dpi": 96,
+      "windowBounds": [
+        0,
+        0,
+        1024,
+        728
+      ],
+      "workArea": [
+        0,
+        0,
+        1024,
+        728
+      ],
+      "horizontalClipping": false,
+      "reportSha256": "c4d04b9ac3d4a065e82ab9a90e9f99dabe1457118965252c78f17c7b7aa94eb5",
+      "captures": [
+        {
+          "path": "pack-library-kalign-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "b6a57e72e92603038ce99f33444f8c56eb43aff6080a521b4990d131cbf2d8e9",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "directlyReviewed": true
+        },
+        {
+          "path": "pack-library-kalign-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "a17fb12cff43be8f986e3a525e70b8c75a8ac3d7fab8cceef55a2084a1263ef5",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "directlyReviewed": false
+        },
+        {
+          "path": "pack-form-kalign-align-nucleotide-top-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "63179450698d25048d27d44c48c637cf7ccfdef23058001d35bda7d9eadce545",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "directlyReviewed": true
+        },
+        {
+          "path": "pack-form-kalign-align-nucleotide-top-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "3e4276d196ab0c761be9769d1e49d3096a61b88b2b16f7b2d2eeff1645c598bb",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "directlyReviewed": false
+        },
+        {
+          "path": "pack-form-kalign-align-nucleotide-page-1-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "c9c8ac06463a452b67058b01d1d68914d36bfd0f437317978549835aaebf5742",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "directlyReviewed": true
+        },
+        {
+          "path": "pack-form-kalign-align-nucleotide-page-1-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "319ef8d4cc25bfef545bed9dbbf3d6388ca2fa19b51e644e53fe17afb5d44562",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "directlyReviewed": false
+        },
+        {
+          "path": "pack-form-kalign-align-nucleotide-page-2-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "9b6b2f4f9085dda5c34dcaa78c1ab099f3bcecd60cf4bb7bb11f16c3a5d66e77",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "directlyReviewed": true
+        },
+        {
+          "path": "pack-form-kalign-align-nucleotide-page-2-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "47dc475cf36baa73db1682a4cf98de4f640973b756af228dd03b2b65992e4bb7",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "directlyReviewed": false
+        },
+        {
+          "path": "pack-form-kalign-align-protein-top-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "a1b6fd8a2d60b38cb49f67f2c65602427127fbc8eeb7e4a3d0ca5c56995df257",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "directlyReviewed": true
+        },
+        {
+          "path": "pack-form-kalign-align-protein-top-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "af46514f58ab14e419481136eec1485a7a075b318d65a282a512ffdcf98c040e",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "directlyReviewed": false
+        },
+        {
+          "path": "pack-form-kalign-align-protein-page-1-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "18a08fbd8ccda286e543e515ce09e1e7c7241e9862a52f28a1d33e1ff1905dda",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "directlyReviewed": true
+        },
+        {
+          "path": "pack-form-kalign-align-protein-page-1-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "05ff35d01ee474c3197287aa1d2643ba0cfec57ce8e29776d7a42f057ee95d47",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "directlyReviewed": false
+        },
+        {
+          "path": "pack-form-kalign-align-protein-page-2-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "46f7b9c453709b70be5a8fcff5fa4c32c0431a4cb1fea27534183a5d08de64cf",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "directlyReviewed": true
+        },
+        {
+          "path": "pack-form-kalign-align-protein-page-2-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "6b6fb56030ec146b6d168e0038ffe3c7483a8d5362f3c8c04ff5cc67f2f3ceef",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "directlyReviewed": false
+        },
+        {
+          "path": "pack-library-unfiltered-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "4650d72c9e6953499112751f982c5d10801d7e8b92a22631a418400698cbec22",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "directlyReviewed": true
+        },
+        {
+          "path": "pack-library-unfiltered-window.bmp",
+          "width": 1024,
+          "height": 728,
+          "sha256": "c8473d4df93950d96e35444083f2afc5da1af4dda0ef00a04f09c78e8431cbe2",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "directlyReviewed": false
+        },
+        {
+          "path": "pack-results-kalign-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "93673b62ecabd740b45476ff9d09ad2bab05c5e9a17df96dd2c92f58d5a5ce9e",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "directlyReviewed": true
+        },
+        {
+          "path": "pack-results-kalign-window.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "9e750899d04fea2ecc58d444ef9ac0e2ee325be73d6afcfcee549d46594a00b2",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "directlyReviewed": false
+        },
+        {
+          "path": "pack-results-kalign-versions-display.bmp",
+          "width": 1024,
+          "height": 768,
+          "sha256": "1c5e9fb6cd960152d0ebfb4fcc1d7143a1ad71abc3fe4f1129be83561261d365",
+          "method": "screen BitBlt; no PrintWindow repaint",
+          "directlyReviewed": true
+        },
+        {
+          "path": "pack-results-kalign-versions-window.bmp",
+          "width": 940,
+          "height": 680,
+          "sha256": "d22c1b5fb5c1fc1bd80e550a5cb8efbb51924ff74edda612eec30dc42200fde3",
+          "method": "PrintWindow; complete window, including any off-desktop portion",
+          "directlyReviewed": false
+        }
+      ]
+    }
+  }
+}

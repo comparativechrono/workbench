@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "kind": "deployment-exact-archive-audit-receipt",
+  "recordedOn": "2026-10-09",
+  "scope": "Independent download and byte/source audit; not native acceptance.",
+  "toolkitCommit": "1a7d1e5f70e3ca710c9b3f6b1313353e8d46cc78",
+  "applicationSourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+  "toolkitDirty": false,
+  "archive": {
+    "file": "native-workbench-0.16.0-deployment-toolkit.zip",
+    "bytes": 126486209,
+    "sha256": "756489dce12acee16beee3d90da9142cb84e75a5580cabf4392490ce1f4107fa"
+  },
+  "artifact": {
+    "id": 11641200131,
+    "url": "https://github.com/comparativechrono/workbench/actions/runs/37979351047/artifacts/11641200131",
+    "bytes": 126494957,
+    "sha256": "7e4fca6d814ad17aa82980db6ca735e9b3f191b1fd1a9e5b885e926290ab5cc5",
+    "expiresAt": "2026-11-08T19:19:03Z"
+  },
+  "manifest": {
+    "bytes": 81440,
+    "sha256": "9e9fd96a0ad6e5bfe44d4803b97c8241534f67f176f8688588616388847fe650"
+  },
+  "checks": {
+    "wrapperApiSizeAndHash": true,
+    "outerAndInnerZipCrc": true,
+    "checksumEntries": 2,
+    "manifestFilesVerified": 375,
+    "toolkitGitFilesVerified": 12,
+    "applicationGitFilesVerified": 748,
+    "starterFilesVerified": 274,
+    "updaterFilesVerified": 78,
+    "coreFilesVerified": 87,
+    "packManifests": 4,
+    "packAssetsVerified": 5,
+    "packExecutablesVerified": 7,
+    "privateRuntimeFiles": 39,
+    "sourceRuntimeCorrespondenceFiles": 33,
+    "updaterInventoryFiles": 77,
+    "updateOperations": 31,
+    "allOriginalArchivesUnchanged": true,
+    "provenanceCorrespondence": true,
+    "packagedAcceptanceCliVerified": true
+  },
+  "originalArchives": [
+    {
+      "role": "starter",
+      "file": "native-workbench-0.16.0-starter-windows.zip",
+      "bytes": 17846873,
+      "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073",
+      "tag": "app-v0.16.0",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-0.16.0-starter-windows.zip"
+    },
+    {
+      "role": "updater",
+      "file": "native-workbench-0.16.0-update-from-0.11.0.zip",
+      "bytes": 13199905,
+      "sha256": "d75d5129e9b9feaef70faa62d5ea91049c0162df8c7bdc74c7bc81d1933eec8f",
+      "tag": "app-v0.16.0",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-0.16.0-update-from-0.11.0.zip"
+    },
+    {
+      "role": "source",
+      "file": "native-workbench-0.16.0-source.zip",
+      "bytes": 47848425,
+      "sha256": "f746f00a82675c2cf52364a3b4d040721c6d06ac5605488efbdc0376ef5b7e44",
+      "tag": "app-v0.16.0",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.16.0/native-workbench-0.16.0-source.zip"
+    },
+    {
+      "role": "baseline",
+      "file": "native-workbench-0.11.0-starter-windows.zip",
+      "bytes": 17044022,
+      "sha256": "e816e2f7cd5efe98af752fbf072fab00344ebaa2b6963795c2fbf4a86b5fa81c",
+      "tag": "app-v0.11.0",
+      "url": "https://github.com/comparativechrono/workbench/releases/download/app-v0.11.0/native-workbench-0.11.0-starter-windows.zip"
+    }
+  ],
+  "nativeBindings": [
+    {
+      "pathCase": "ordinary",
+      "path": "native-ui/native-deployment-ui.json",
+      "bytes": 27847,
+      "sha256": "2390156dea79001009ab8316387d79312740e9b84525db0d3d41ae2392314e32",
+      "toolkitCommit": "1a7d1e5f70e3ca710c9b3f6b1313353e8d46cc78",
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "bundleManifestSha256": "9e9fd96a0ad6e5bfe44d4803b97c8241534f67f176f8688588616388847fe650",
+      "passed": 14,
+      "failed": 2,
+      "blocked": 0,
+      "skipped": 0,
+      "nativeGUIObservationsCompleted": true,
+      "nativeGUIValidated": false,
+      "success": false,
+      "failedScenarios": [
+        "fresh-results-escape",
+        "upgraded-results-escape"
+      ],
+      "captures": 21,
+      "coreFilesVerified": 87,
+      "preservedFiles": 163,
+      "freshInstalledPackFilesUnchanged": 186
+    },
+    {
+      "pathCase": "spaces",
+      "path": "native-ui/native-deployment-ui.json",
+      "bytes": 27887,
+      "sha256": "279b9a98f86821263eb03bab133b7d50c0a924ea34db58b74c696a0fddb5a5b6",
+      "toolkitCommit": "1a7d1e5f70e3ca710c9b3f6b1313353e8d46cc78",
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+      "bundleManifestSha256": "9e9fd96a0ad6e5bfe44d4803b97c8241534f67f176f8688588616388847fe650",
+      "passed": 14,
+      "failed": 2,
+      "blocked": 0,
+      "skipped": 0,
+      "nativeGUIObservationsCompleted": true,
+      "nativeGUIValidated": false,
+      "success": false,
+      "failedScenarios": [
+        "fresh-results-escape",
+        "upgraded-results-escape"
+      ],
+      "captures": 21,
+      "coreFilesVerified": 87,
+      "preservedFiles": 163,
+      "freshInstalledPackFilesUnchanged": 186
+    }
+  ],
+  "archiveAuditNativeWindowsExecuted": false,
+  "knownLimits": [
+    "Results Escape after keyboard Search failed on fresh and upgraded published 0.16.0 in both paths. No control had focus before or after Escape. Explicit pointer focus into the query then Escape closed; that diagnostic does not pass the original requirement. The internal application cause is not established. Visible Close fallback was not needed/tested.",
+    "Published minimum width 1040 exceeds the hosted 1024-pixel desktop/work area; right edge clipped. Bounded resize assertions are not acceptance on that narrower display."
+  ],
+  "recoveryNote": "This durable receipt preserves the independently verified values. The local detailed audit and report copies were prepared and checked before the workspace executor disconnected; original complete reports remain in the hashed Actions artifacts. No file contents or unavailable per-file hashes are reconstructed."
+}

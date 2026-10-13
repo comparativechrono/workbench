@@ -1,0 +1,3496 @@
+{
+  "schema": 1,
+  "kind": "native-ui-patch",
+  "appVersion": "0.16.1",
+  "baselineVersion": "0.16.0",
+  "sourceCommit": "8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+  "gateCommit": "69022689e686b2cacdc98dbdbef728e664941e67",
+  "gateSha256": "580289dbe0093bf143bc20af31996d7596ccd1727f45b601b05096b951016bde",
+  "platform": "Windows-2022Server-10.0.20348-SP0",
+  "startedUtc": "2026-10-09T20:49:42.202673Z",
+  "archives": {
+    "starter": {
+      "name": "native-workbench-0.16.1-starter-windows.zip",
+      "bytes": 17847594,
+      "sha256": "7dfed53de2279f51deaea405dbfd29b36cddb733e5a20c43b3112f27a7728a8e"
+    },
+    "baseline": {
+      "name": "baseline-0.16.0.zip",
+      "bytes": 17846873,
+      "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+    },
+    "update": {
+      "name": "native-workbench-0.16.1-update-from-0.16.0.zip",
+      "bytes": 12982946,
+      "sha256": "f2dc435495f43d837e80837f3ba83ff7b6963294219d5bc88bc8fb0e5d82effd"
+    }
+  },
+  "checks": [
+    "Every extracted candidate Starter and updater file matches its exact archive; the packaged launcher is exercised unchanged.",
+    "Published 0.16.0 executes a local native SAMtools reference result and saves independent settings plus connected pipeline pins.",
+    "Packaged folder picker cancels with Escape with every baseline/reference/invalid-folder file unchanged.",
+    "Packaged folder picker rejects a real non-installation folder, explains the required files, reopens for retry and allows Escape with every baseline/reference/invalid-folder file unchanged.",
+    "Selecting the actual baseline through the published folder picker displays success, commits all 87 exact Starter core files, and preserves every recorded pack/user/result/reference file.",
+    "Repeating the update through the same real picker displays success and leaves all installation/reference files and the single transaction unchanged.",
+    "Updated private host reloads the unchanged settings and connected pipeline, finds the actual baseline result, and resolves its preserved exact reference receipt offline.",
+    "fresh: real initial window fits the work area before driver repositioning.",
+    "fresh: real offline Starter setup fits and dismisses without pack changes or installs.",
+    "Candidate private host creates one real native SAMtools result for populated keyboard search.",
+    "fresh: library filtering and Tab/Shift+Tab preserve real enabled focus.",
+    "fresh: both three-pane modes, navigation and fixed footer controls fit actual work-area bounds without button overlap at every observed size.",
+    "fresh: empty Search retains query focus; immediate Escape closes only Results without pointer intervention.",
+    "fresh: populated Search retains query focus; immediate Escape closes only Results without pointer intervention.",
+    "upgraded: real initial window fits the work area before driver repositioning.",
+    "upgraded: library filtering and Tab/Shift+Tab preserve real enabled focus.",
+    "upgraded: both three-pane modes, navigation and fixed footer controls fit actual work-area bounds without button overlap at every observed size.",
+    "upgraded: empty Search retains query focus; immediate Escape closes only Results without pointer intervention.",
+    "upgraded: populated Search retains query focus; immediate Escape closes only Results without pointer intervention."
+  ],
+  "scenarios": [
+    {
+      "id": "candidate-input-identities",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:49:44.210050Z",
+      "note": "Every extracted candidate Starter and updater file matches its exact archive; the packaged launcher is exercised unchanged."
+    },
+    {
+      "id": "baseline-fixtures",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:49:45.180585Z",
+      "note": "Published 0.16.0 executes a local native SAMtools reference result and saves independent settings plus connected pipeline pins."
+    },
+    {
+      "id": "updater-cancel",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:49:46.267688Z",
+      "note": "Packaged folder picker cancels with Escape with every baseline/reference/invalid-folder file unchanged."
+    },
+    {
+      "id": "updater-invalid",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:49:47.984903Z",
+      "note": "Packaged folder picker rejects a real non-installation folder, explains the required files, reopens for retry and allows Escape with every baseline/reference/invalid-folder file unchanged."
+    },
+    {
+      "id": "updater-install",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:49:50.034466Z",
+      "note": "Selecting the actual baseline through the published folder picker displays success, commits all 87 exact Starter core files, and preserves every recorded pack/user/result/reference file."
+    },
+    {
+      "id": "updater-repeat",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:49:52.025643Z",
+      "note": "Repeating the update through the same real picker displays success and leaves all installation/reference files and the single transaction unchanged."
+    },
+    {
+      "id": "upgraded-fixture-readback",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:49:52.324628Z",
+      "note": "Updated private host reloads the unchanged settings and connected pipeline, finds the actual baseline result, and resolves its preserved exact reference receipt offline."
+    },
+    {
+      "id": "fresh-startup-bounds",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:49:52.437648Z",
+      "note": "fresh: real initial window fits the work area before driver repositioning."
+    },
+    {
+      "id": "fresh-starter-setup",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:49:53.568506Z",
+      "note": "fresh: real offline Starter setup fits and dismisses without pack changes or installs."
+    },
+    {
+      "id": "fresh-result-fixture",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:49:54.417584Z",
+      "note": "Candidate private host creates one real native SAMtools result for populated keyboard search."
+    },
+    {
+      "id": "fresh-library-keyboard",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:50:00.110401Z",
+      "note": "fresh: library filtering and Tab/Shift+Tab preserve real enabled focus."
+    },
+    {
+      "id": "fresh-layout",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:50:03.341028Z",
+      "note": "fresh: both three-pane modes, navigation and fixed footer controls fit actual work-area bounds without button overlap at every observed size."
+    },
+    {
+      "id": "fresh-results-empty",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:50:06.168984Z",
+      "note": "fresh: empty Search retains query focus; immediate Escape closes only Results without pointer intervention."
+    },
+    {
+      "id": "fresh-results-populated",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:50:09.017004Z",
+      "note": "fresh: populated Search retains query focus; immediate Escape closes only Results without pointer intervention."
+    },
+    {
+      "id": "upgraded-startup-bounds",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:50:09.160764Z",
+      "note": "upgraded: real initial window fits the work area before driver repositioning."
+    },
+    {
+      "id": "upgraded-library-keyboard",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:50:14.746324Z",
+      "note": "upgraded: library filtering and Tab/Shift+Tab preserve real enabled focus."
+    },
+    {
+      "id": "upgraded-layout",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:50:17.965827Z",
+      "note": "upgraded: both three-pane modes, navigation and fixed footer controls fit actual work-area bounds without button overlap at every observed size."
+    },
+    {
+      "id": "upgraded-results-empty",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:50:20.776064Z",
+      "note": "upgraded: empty Search retains query focus; immediate Escape closes only Results without pointer intervention."
+    },
+    {
+      "id": "upgraded-results-populated",
+      "status": "pass",
+      "observedAt": "2026-10-09T20:50:23.601303Z",
+      "note": "upgraded: populated Search retains query focus; immediate Escape closes only Results without pointer intervention."
+    }
+  ],
+  "captures": [
+    {
+      "path": "updater-cancel-picker.bmp",
+      "width": 625,
+      "height": 480,
+      "sha256": "712f8edb492d9145b2d646dc1b0a2ceaaf26fbf8e0865fffd6d5a85048548257",
+      "dpi": 96
+    },
+    {
+      "path": "updater-invalid-picker.bmp",
+      "width": 625,
+      "height": 480,
+      "sha256": "46221868a5cab1290bceab6ddf41a0ca09d9ea98f5494c4407b335c5e2db28fa",
+      "dpi": 96
+    },
+    {
+      "path": "updater-invalid-warning.bmp",
+      "width": 393,
+      "height": 192,
+      "sha256": "0e52f8bac762d6f7e77dcdc7c9152b4f1f5f1435cc6a04bceb9817e25b028381",
+      "dpi": 96
+    },
+    {
+      "path": "updater-invalid-retry-picker.bmp",
+      "width": 625,
+      "height": 480,
+      "sha256": "c7e4fbe60b83d868d66d3feca4f6da9f2df40401ec8224377faffa46869ce87f",
+      "dpi": 96
+    },
+    {
+      "path": "updater-install-picker.bmp",
+      "width": 625,
+      "height": 480,
+      "sha256": "c7e4fbe60b83d868d66d3feca4f6da9f2df40401ec8224377faffa46869ce87f",
+      "dpi": 96
+    },
+    {
+      "path": "updater-install-success.bmp",
+      "width": 405,
+      "height": 179,
+      "sha256": "2357dc7e12a5d30970a335f342ce658d3a76ceb1fbae7c66d2eed89c55b174ef",
+      "dpi": 96
+    },
+    {
+      "path": "updater-repeat-picker.bmp",
+      "width": 625,
+      "height": 480,
+      "sha256": "0c2c55b85a834a0f3ca40a160ea5ca8344fa08e6ac187bce1f495b4e66f1bb4c",
+      "dpi": 96
+    },
+    {
+      "path": "updater-repeat-success.bmp",
+      "width": 405,
+      "height": 179,
+      "sha256": "2357dc7e12a5d30970a335f342ce658d3a76ceb1fbae7c66d2eed89c55b174ef",
+      "dpi": 96
+    },
+    {
+      "path": "fresh-first-open-starter.bmp",
+      "width": 920,
+      "height": 720,
+      "sha256": "8340249724a191191909cbaa3700aa5cd8b95ea201ea6867de664dbe05cddae6",
+      "dpi": 96
+    },
+    {
+      "path": "fresh-tool-960-visible-immediate.bmp",
+      "width": 960,
+      "height": 680,
+      "sha256": "d952a198fd0ec6b3c01f1444234dbb2273a30ddf759464365a789b49e7b79225",
+      "method": "visible desktop BitBlt before PrintWindow",
+      "dpi": 96,
+      "secondsAfterResizeObservation": 0.05506589999998823
+    },
+    {
+      "path": "fresh-tool-960-visible-250ms.bmp",
+      "width": 960,
+      "height": 680,
+      "sha256": "ec756fa75d74f2229a1e3aed55d206146c5587d79e43b0f17d96b544b8ee5205",
+      "method": "visible desktop BitBlt before PrintWindow",
+      "dpi": 96,
+      "secondsAfterResizeObservation": 0.333839399999988
+    },
+    {
+      "path": "fresh-tool-960-visible-750ms.bmp",
+      "width": 960,
+      "height": 680,
+      "sha256": "ec756fa75d74f2229a1e3aed55d206146c5587d79e43b0f17d96b544b8ee5205",
+      "method": "visible desktop BitBlt before PrintWindow",
+      "dpi": 96,
+      "secondsAfterResizeObservation": 0.8674695999999926
+    },
+    {
+      "path": "fresh-tool-960-visible-1250ms.bmp",
+      "width": 960,
+      "height": 680,
+      "sha256": "ec756fa75d74f2229a1e3aed55d206146c5587d79e43b0f17d96b544b8ee5205",
+      "method": "visible desktop BitBlt before PrintWindow",
+      "dpi": 96,
+      "secondsAfterResizeObservation": 1.4004401999999914
+    },
+    {
+      "path": "fresh-tool-960x680.bmp",
+      "width": 960,
+      "height": 680,
+      "sha256": "8b09cb967f77d071a66c553901def59090d0557ad056e1871deb49203521d383",
+      "dpi": 96
+    },
+    {
+      "path": "fresh-tool-1024x728.bmp",
+      "width": 1024,
+      "height": 728,
+      "sha256": "2b87af3f3a97897f60dbbe10ac93409f215f2073a69569bc75d8506091782495",
+      "dpi": 96
+    },
+    {
+      "path": "fresh-tool-1280x900.bmp",
+      "width": 1024,
+      "height": 728,
+      "sha256": "2b87af3f3a97897f60dbbe10ac93409f215f2073a69569bc75d8506091782495",
+      "dpi": 96
+    },
+    {
+      "path": "fresh-workflow-960-visible-immediate.bmp",
+      "width": 960,
+      "height": 680,
+      "sha256": "cbb0d6d74c4392b55a0cf5671968a323679a666911747af18fbb14000d97d81b",
+      "method": "visible desktop BitBlt before PrintWindow",
+      "dpi": 96,
+      "secondsAfterResizeObservation": 0.03439489999999523
+    },
+    {
+      "path": "fresh-workflow-960-visible-250ms.bmp",
+      "width": 960,
+      "height": 680,
+      "sha256": "a885db69a62ba4aa2a19dda01b0ae4c83896eb2129b9fa116ae100137f5bdd4d",
+      "method": "visible desktop BitBlt before PrintWindow",
+      "dpi": 96,
+      "secondsAfterResizeObservation": 0.3013561000000209
+    },
+    {
+      "path": "fresh-workflow-960-visible-750ms.bmp",
+      "width": 960,
+      "height": 680,
+      "sha256": "a885db69a62ba4aa2a19dda01b0ae4c83896eb2129b9fa116ae100137f5bdd4d",
+      "method": "visible desktop BitBlt before PrintWindow",
+      "dpi": 96,
+      "secondsAfterResizeObservation": 0.8333352000000218
+    },
+    {
+      "path": "fresh-workflow-960-visible-1250ms.bmp",
+      "width": 960,
+      "height": 680,
+      "sha256": "a885db69a62ba4aa2a19dda01b0ae4c83896eb2129b9fa116ae100137f5bdd4d",
+      "method": "visible desktop BitBlt before PrintWindow",
+      "dpi": 96,
+      "secondsAfterResizeObservation": 1.3699794999999995
+    },
+    {
+      "path": "fresh-workflow-960x680.bmp",
+      "width": 960,
+      "height": 680,
+      "sha256": "923a668a99bc12ed70ad62ac982ac6265676d2d37d4f654908e9f96dd032bd54",
+      "dpi": 96
+    },
+    {
+      "path": "fresh-workflow-1024x728.bmp",
+      "width": 1024,
+      "height": 728,
+      "sha256": "8064626754940779d6a029a97ce9b20622decab4ce7fc81066fbd37b7d435ed8",
+      "dpi": 96
+    },
+    {
+      "path": "fresh-workflow-1280x900.bmp",
+      "width": 1024,
+      "height": 728,
+      "sha256": "8064626754940779d6a029a97ce9b20622decab4ce7fc81066fbd37b7d435ed8",
+      "dpi": 96
+    },
+    {
+      "path": "fresh-results-empty.bmp",
+      "width": 940,
+      "height": 680,
+      "sha256": "feb6d244e84713edf729775ca34a1e7ffadb2f75d224848a687ad9098ed68e57",
+      "dpi": 96
+    },
+    {
+      "path": "fresh-results-populated.bmp",
+      "width": 940,
+      "height": 680,
+      "sha256": "fd1224e59a935ea36c3562025211d3386507911f3d78339551378cbd79cb9bad",
+      "dpi": 96
+    },
+    {
+      "path": "upgraded-tool-960-visible-immediate.bmp",
+      "width": 960,
+      "height": 680,
+      "sha256": "89a00b895b4431363cf365a5c2781dd0a71efdb005f36d57bb0bf01745dc82d9",
+      "method": "visible desktop BitBlt before PrintWindow",
+      "dpi": 96,
+      "secondsAfterResizeObservation": 0.054278500000009444
+    },
+    {
+      "path": "upgraded-tool-960-visible-250ms.bmp",
+      "width": 960,
+      "height": 680,
+      "sha256": "994679b689ef41f82e0acc11801d53ad411934b0d8b0cc7ba1111c565bc9381b",
+      "method": "visible desktop BitBlt before PrintWindow",
+      "dpi": 96,
+      "secondsAfterResizeObservation": 0.319595100000015
+    },
+    {
+      "path": "upgraded-tool-960-visible-750ms.bmp",
+      "width": 960,
+      "height": 680,
+      "sha256": "994679b689ef41f82e0acc11801d53ad411934b0d8b0cc7ba1111c565bc9381b",
+      "method": "visible desktop BitBlt before PrintWindow",
+      "dpi": 96,
+      "secondsAfterResizeObservation": 0.8517031000000088
+    },
+    {
+      "path": "upgraded-tool-960-visible-1250ms.bmp",
+      "width": 960,
+      "height": 680,
+      "sha256": "994679b689ef41f82e0acc11801d53ad411934b0d8b0cc7ba1111c565bc9381b",
+      "method": "visible desktop BitBlt before PrintWindow",
+      "dpi": 96,
+      "secondsAfterResizeObservation": 1.3679955000000064
+    },
+    {
+      "path": "upgraded-tool-960x680.bmp",
+      "width": 960,
+      "height": 680,
+      "sha256": "c7d50a308d162a0f2a3729527b0a4377375f5a347faf3a1da06159dd8e0a8344",
+      "dpi": 96
+    },
+    {
+      "path": "upgraded-tool-1024x728.bmp",
+      "width": 1024,
+      "height": 728,
+      "sha256": "7e0a9b27500b3b0a219c824f204aed0211b1d424bf39127b3dbada63e28f3bb6",
+      "dpi": 96
+    },
+    {
+      "path": "upgraded-tool-1280x900.bmp",
+      "width": 1024,
+      "height": 728,
+      "sha256": "7e0a9b27500b3b0a219c824f204aed0211b1d424bf39127b3dbada63e28f3bb6",
+      "dpi": 96
+    },
+    {
+      "path": "upgraded-workflow-960-visible-immediate.bmp",
+      "width": 960,
+      "height": 680,
+      "sha256": "67bd989100dadd3c9208010e918610262f0f5ef90c47a5a917eb257414008dc8",
+      "method": "visible desktop BitBlt before PrintWindow",
+      "dpi": 96,
+      "secondsAfterResizeObservation": 0.05071170000002212
+    },
+    {
+      "path": "upgraded-workflow-960-visible-250ms.bmp",
+      "width": 960,
+      "height": 680,
+      "sha256": "b6428d5a38e6ad6e8442942c9afbf7fee7c87d011dffc85d2ba48b597c5cff75",
+      "method": "visible desktop BitBlt before PrintWindow",
+      "dpi": 96,
+      "secondsAfterResizeObservation": 0.3171520000000214
+    },
+    {
+      "path": "upgraded-workflow-960-visible-750ms.bmp",
+      "width": 960,
+      "height": 680,
+      "sha256": "b6428d5a38e6ad6e8442942c9afbf7fee7c87d011dffc85d2ba48b597c5cff75",
+      "method": "visible desktop BitBlt before PrintWindow",
+      "dpi": 96,
+      "secondsAfterResizeObservation": 0.8501714999999876
+    },
+    {
+      "path": "upgraded-workflow-960-visible-1250ms.bmp",
+      "width": 960,
+      "height": 680,
+      "sha256": "b6428d5a38e6ad6e8442942c9afbf7fee7c87d011dffc85d2ba48b597c5cff75",
+      "method": "visible desktop BitBlt before PrintWindow",
+      "dpi": 96,
+      "secondsAfterResizeObservation": 1.3818390000000136
+    },
+    {
+      "path": "upgraded-workflow-960x680.bmp",
+      "width": 960,
+      "height": 680,
+      "sha256": "cf3c8fc4d819f101d8ee8209796b8dd0b40754ccecf53cac4ae765eba2b0ebec",
+      "dpi": 96
+    },
+    {
+      "path": "upgraded-workflow-1024x728.bmp",
+      "width": 1024,
+      "height": 728,
+      "sha256": "3ca3a1d1509f8eed014518e28b15f0bea1931bc4b3760483fa2e7f03e1f6ed5d",
+      "dpi": 96
+    },
+    {
+      "path": "upgraded-workflow-1280x900.bmp",
+      "width": 1024,
+      "height": 728,
+      "sha256": "3ca3a1d1509f8eed014518e28b15f0bea1931bc4b3760483fa2e7f03e1f6ed5d",
+      "dpi": 96
+    },
+    {
+      "path": "upgraded-results-empty.bmp",
+      "width": 940,
+      "height": 680,
+      "sha256": "feb6d244e84713edf729775ca34a1e7ffadb2f75d224848a687ad9098ed68e57",
+      "dpi": 96
+    },
+    {
+      "path": "upgraded-results-populated.bmp",
+      "width": 940,
+      "height": 680,
+      "sha256": "0a2143e9f99a6c11e1b5e02805bba825f64a3fc551b11df67a1134e9886faf67",
+      "dpi": 96
+    }
+  ],
+  "skips": [],
+  "limits": [
+    "Exact published 0.16.0 to candidate 0.16.1 update only.",
+    "Synthetic local reference and saved-state fixtures, not clinical or realistic-workload acceptance.",
+    "Observed hosted desktop sizes and DPI only; no high-DPI/transition, multiple-monitor or physical-trackpad acceptance.",
+    "Representative PCs and institutional security/approval remain external checks.",
+    "Scientific hosts deny Python socket operations, not OS-level network access."
+  ],
+  "nativeWindowsExecuted": true,
+  "nativeGUILaunched": true,
+  "nativeGUIValidated": true,
+  "nativeGUIObservationsCompleted": true,
+  "success": true,
+  "archiveFilesVerified": {
+    "starter": 274,
+    "update": 51,
+    "baseline": 274
+  },
+  "updaterLauncherSha256": "1b765bedcd0c3494f8bf40e204f80c16aa1b8e13cebb2a77b0fe54a9d934c0b6",
+  "baselineFixtures": {
+    "reference": {
+      "schema": 1,
+      "id": "09000800000000000000000000000001",
+      "label": "Synthetic updater preservation reference",
+      "provider": "synthetic-validation-fixture",
+      "provider_name": "Synthetic update fixture",
+      "release": "1",
+      "species": {
+        "id": "starter",
+        "name": "Synthetic starter"
+      },
+      "assembly": "starter-fixture",
+      "assembly_accession": "",
+      "folder": "D:\\a\\_temp\\ordinary\\patch-gate-work\\external references",
+      "receipt_path": "D:\\a\\_temp\\ordinary\\patch-gate-work\\external references\\reference.json",
+      "downloaded_at": "2026-10-06T00:00:00Z",
+      "fixtureNotice": "Created by this gate from the packaged synthetic FASTA; not downloaded.",
+      "files": [
+        {
+          "id": "genome",
+          "kind": "genome",
+          "label": "Genome FASTA",
+          "filename": "synthetic-reference.fa",
+          "path": "D:\\a\\_temp\\ordinary\\patch-gate-work\\external references\\synthetic-reference.fa",
+          "bytes": 3059,
+          "sha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee"
+        }
+      ],
+      "receipt_sha256": "10091240f31e9731f51f5eaa856d9aa956ffd17764d0e9be762687242fda8d2c"
+    },
+    "saved": {
+      "pipelines": [
+        {
+          "graph": {
+            "name": "Untitled analysis",
+            "nextNode": 3,
+            "nextSource": 2,
+            "schema": 1,
+            "nodes": [
+              {
+                "id": "step-1",
+                "tool": "bam/reference-index",
+                "params": {},
+                "inputs": {
+                  "reference": [
+                    "input-1"
+                  ]
+                },
+                "pin": {
+                  "packId": "bam",
+                  "packVersion": "0.4.0",
+                  "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+                }
+              },
+              {
+                "id": "step-2",
+                "tool": "bam/reference-index",
+                "params": {},
+                "inputs": {
+                  "reference": [
+                    "step-1::reference"
+                  ]
+                },
+                "pin": {
+                  "packId": "bam",
+                  "packVersion": "0.4.0",
+                  "manifestSha256": "45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888"
+                }
+              }
+            ],
+            "sources": [
+              {
+                "id": "input-1",
+                "type": "reference",
+                "label": "Reference FASTA",
+                "fields": [
+                  {
+                    "id": "reference",
+                    "label": "Reference genome",
+                    "type": "file",
+                    "role": "file",
+                    "binding": false,
+                    "preset": true,
+                    "required": true,
+                    "default": "",
+                    "help": "Uncompressed FASTA. Workflows that build an index copy this file into the run folder first.",
+                    "filter": "Uncompressed FASTA reference|*.fa;*.fasta;*.fna|All files|*.*",
+                    "constraint": "",
+                    "differentFrom": ""
+                  }
+                ]
+              }
+            ]
+          },
+          "id": "bf26bc2ed3c64a7a8c837e7e93f6e380",
+          "name": "UI patch preservation pipeline",
+          "saved_at": "2026-10-09T20:49:45Z"
+        }
+      ],
+      "presets": [
+        {
+          "schema": 1,
+          "kind": "tool-preset",
+          "tool": "align/paired-end",
+          "pin": {
+            "packId": "align",
+            "packVersion": "0.4.1",
+            "manifestSha256": "7f8f36efbfd6a8255a98eabb06746fbcc5bbdb872f392a65ca3e79a586d04939"
+          },
+          "params": {
+            "threads": "3"
+          },
+          "id": "6034c50e2fbe414399d26aaf0c5c1da6",
+          "name": "UI patch preservation settings",
+          "saved_at": "2026-10-09T20:49:44Z"
+        }
+      ]
+    },
+    "run": {
+      "folder": "D:\\a\\_temp\\ordinary\\patch-gate-work\\baseline\\native-workbench\\results\\preserved-reference-result\\run-20261009-204944-641f415b",
+      "nativeWindowsExecuted": true,
+      "contigs": 1,
+      "referenceSha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+      "runSha256": "cbb127f3a2f09a79950b32a03dc1bd6f2fbf3276440e9cf5a83612efeaed1f29",
+      "cwlChecked": false
+    },
+    "runId": "22ac2275c2794eb8b1c354c2c78bbcc6"
+  },
+  "unchangedScenarioEvidence": {
+    "cancel": {
+      "installation": {},
+      "externalReference": {},
+      "invalidSelection": {}
+    },
+    "invalid": {
+      "installation": {},
+      "externalReference": {},
+      "invalidSelection": {}
+    },
+    "repeat": {
+      "installation": {},
+      "externalReference": {}
+    }
+  },
+  "preservation": {
+    "existingFiles": 208,
+    "changes": {},
+    "additions": {
+      "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+    }
+  },
+  "transaction": {
+    "status": "installed",
+    "version": "0.16.1",
+    "migration": false,
+    "files_verified": 87,
+    "removed_files": 0,
+    "backup": "D:\\a\\_temp\\ordinary\\patch-gate-work\\baseline\\native-workbench\\updates\\core-0.16.1-20261009-204949-1409f0d2\\backup",
+    "packs_changed": false,
+    "source_and_evidence_preserved": true
+  },
+  "coreFilesVerified": 87,
+  "preservedFiles": 208,
+  "startupBounds": {
+    "fresh": {
+      "windowBounds": [
+        0,
+        0,
+        1024,
+        728
+      ],
+      "workArea": [
+        0,
+        0,
+        1024,
+        728
+      ],
+      "capturedBeforeDriverResize": true,
+      "reopenedAfterFixture": [
+        0,
+        0,
+        1024,
+        728
+      ]
+    },
+    "upgraded": {
+      "windowBounds": [
+        0,
+        0,
+        1024,
+        728
+      ],
+      "workArea": [
+        0,
+        0,
+        1024,
+        728
+      ],
+      "capturedBeforeDriverResize": true
+    }
+  },
+  "startupSetup": {
+    "fresh": {
+      "observed": true,
+      "starterSelected": true,
+      "dismissed": true,
+      "queuedInstalls": 0,
+      "unchangedPackFiles": 186
+    },
+    "upgraded": {
+      "observed": false
+    }
+  },
+  "freshResultFixture": {
+    "folder": "D:\\a\\_temp\\ordinary\\patch\\native-workbench\\results\\fresh-search-reference-result\\run-20261009-204954-4b8638fd",
+    "nativeWindowsExecuted": true,
+    "contigs": 1,
+    "referenceSha256": "3dd9031bc90515d274079fd7135da6fd8129315a9c364558bf9ec030c9e36dee",
+    "runSha256": "02f273d8c3b0f82bbe30ad4693e6f6c6c1dc7c7301cf650379a658f502fc2622",
+    "cwlChecked": false
+  },
+  "keyboardEdits": [
+    {
+      "stage": "fresh-library-before-filter",
+      "controlId": 102,
+      "originalUtf16Length": 0,
+      "homeSelection": [
+        0,
+        0
+      ],
+      "fullSelection": [
+        0,
+        0
+      ],
+      "emptyAfterBackspace": true,
+      "focusRetained": true,
+      "pointerIntervention": false
+    },
+    {
+      "stage": "fresh-library-after-tab",
+      "controlId": 102,
+      "originalUtf16Length": 9,
+      "homeSelection": [
+        0,
+        0
+      ],
+      "fullSelection": [
+        0,
+        9
+      ],
+      "emptyAfterBackspace": true,
+      "focusRetained": true,
+      "pointerIntervention": false
+    },
+    {
+      "stage": "fresh-results-empty",
+      "controlId": 1501,
+      "originalUtf16Length": 0,
+      "homeSelection": [
+        0,
+        0
+      ],
+      "fullSelection": [
+        0,
+        0
+      ],
+      "emptyAfterBackspace": true,
+      "focusRetained": true,
+      "pointerIntervention": false
+    },
+    {
+      "stage": "fresh-results-populated",
+      "controlId": 1501,
+      "originalUtf16Length": 0,
+      "homeSelection": [
+        0,
+        0
+      ],
+      "fullSelection": [
+        0,
+        0
+      ],
+      "emptyAfterBackspace": true,
+      "focusRetained": true,
+      "pointerIntervention": false
+    },
+    {
+      "stage": "upgraded-library-before-filter",
+      "controlId": 102,
+      "originalUtf16Length": 0,
+      "homeSelection": [
+        0,
+        0
+      ],
+      "fullSelection": [
+        0,
+        0
+      ],
+      "emptyAfterBackspace": true,
+      "focusRetained": true,
+      "pointerIntervention": false
+    },
+    {
+      "stage": "upgraded-library-after-tab",
+      "controlId": 102,
+      "originalUtf16Length": 9,
+      "homeSelection": [
+        0,
+        0
+      ],
+      "fullSelection": [
+        0,
+        9
+      ],
+      "emptyAfterBackspace": true,
+      "focusRetained": true,
+      "pointerIntervention": false
+    },
+    {
+      "stage": "upgraded-results-empty",
+      "controlId": 1501,
+      "originalUtf16Length": 0,
+      "homeSelection": [
+        0,
+        0
+      ],
+      "fullSelection": [
+        0,
+        0
+      ],
+      "emptyAfterBackspace": true,
+      "focusRetained": true,
+      "pointerIntervention": false
+    },
+    {
+      "stage": "upgraded-results-populated",
+      "controlId": 1501,
+      "originalUtf16Length": 0,
+      "homeSelection": [
+        0,
+        0
+      ],
+      "fullSelection": [
+        0,
+        0
+      ],
+      "emptyAfterBackspace": true,
+      "focusRetained": true,
+      "pointerIntervention": false
+    }
+  ],
+  "libraryFocusRetention": {
+    "fresh": {
+      "search": {
+        "controlId": 102,
+        "samples": 117,
+        "durationSeconds": 2.417419900000027,
+        "focusRetained": true,
+        "enabledThroughoutSamples": true,
+        "inputOrRefocusDuringObservation": false,
+        "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+      },
+      "afterTab": {
+        "controlId": 104,
+        "samples": 117,
+        "durationSeconds": 2.41980030000002,
+        "focusRetained": true,
+        "enabledThroughoutSamples": true,
+        "inputOrRefocusDuringObservation": false,
+        "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+      }
+    },
+    "upgraded": {
+      "search": {
+        "controlId": 102,
+        "samples": 117,
+        "durationSeconds": 2.4183943000000454,
+        "focusRetained": true,
+        "enabledThroughoutSamples": true,
+        "inputOrRefocusDuringObservation": false,
+        "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+      },
+      "afterTab": {
+        "controlId": 104,
+        "samples": 117,
+        "durationSeconds": 2.418247699999995,
+        "focusRetained": true,
+        "enabledThroughoutSamples": true,
+        "inputOrRefocusDuringObservation": false,
+        "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+      }
+    }
+  },
+  "passiveResizeCaptureSeries": [
+    {
+      "installation": "fresh",
+      "mode": "tool",
+      "requestedSize": [
+        960,
+        680
+      ],
+      "inputOrForcedRedrawBetweenFrames": false,
+      "frames": [
+        {
+          "path": "fresh-tool-960-visible-immediate.bmp",
+          "width": 960,
+          "height": 680,
+          "sha256": "d952a198fd0ec6b3c01f1444234dbb2273a30ddf759464365a789b49e7b79225",
+          "method": "visible desktop BitBlt before PrintWindow",
+          "dpi": 96,
+          "secondsAfterResizeObservation": 0.05506589999998823
+        },
+        {
+          "path": "fresh-tool-960-visible-250ms.bmp",
+          "width": 960,
+          "height": 680,
+          "sha256": "ec756fa75d74f2229a1e3aed55d206146c5587d79e43b0f17d96b544b8ee5205",
+          "method": "visible desktop BitBlt before PrintWindow",
+          "dpi": 96,
+          "secondsAfterResizeObservation": 0.333839399999988
+        },
+        {
+          "path": "fresh-tool-960-visible-750ms.bmp",
+          "width": 960,
+          "height": 680,
+          "sha256": "ec756fa75d74f2229a1e3aed55d206146c5587d79e43b0f17d96b544b8ee5205",
+          "method": "visible desktop BitBlt before PrintWindow",
+          "dpi": 96,
+          "secondsAfterResizeObservation": 0.8674695999999926
+        },
+        {
+          "path": "fresh-tool-960-visible-1250ms.bmp",
+          "width": 960,
+          "height": 680,
+          "sha256": "ec756fa75d74f2229a1e3aed55d206146c5587d79e43b0f17d96b544b8ee5205",
+          "method": "visible desktop BitBlt before PrintWindow",
+          "dpi": 96,
+          "secondsAfterResizeObservation": 1.4004401999999914
+        }
+      ]
+    },
+    {
+      "installation": "fresh",
+      "mode": "workflow",
+      "requestedSize": [
+        960,
+        680
+      ],
+      "inputOrForcedRedrawBetweenFrames": false,
+      "frames": [
+        {
+          "path": "fresh-workflow-960-visible-immediate.bmp",
+          "width": 960,
+          "height": 680,
+          "sha256": "cbb0d6d74c4392b55a0cf5671968a323679a666911747af18fbb14000d97d81b",
+          "method": "visible desktop BitBlt before PrintWindow",
+          "dpi": 96,
+          "secondsAfterResizeObservation": 0.03439489999999523
+        },
+        {
+          "path": "fresh-workflow-960-visible-250ms.bmp",
+          "width": 960,
+          "height": 680,
+          "sha256": "a885db69a62ba4aa2a19dda01b0ae4c83896eb2129b9fa116ae100137f5bdd4d",
+          "method": "visible desktop BitBlt before PrintWindow",
+          "dpi": 96,
+          "secondsAfterResizeObservation": 0.3013561000000209
+        },
+        {
+          "path": "fresh-workflow-960-visible-750ms.bmp",
+          "width": 960,
+          "height": 680,
+          "sha256": "a885db69a62ba4aa2a19dda01b0ae4c83896eb2129b9fa116ae100137f5bdd4d",
+          "method": "visible desktop BitBlt before PrintWindow",
+          "dpi": 96,
+          "secondsAfterResizeObservation": 0.8333352000000218
+        },
+        {
+          "path": "fresh-workflow-960-visible-1250ms.bmp",
+          "width": 960,
+          "height": 680,
+          "sha256": "a885db69a62ba4aa2a19dda01b0ae4c83896eb2129b9fa116ae100137f5bdd4d",
+          "method": "visible desktop BitBlt before PrintWindow",
+          "dpi": 96,
+          "secondsAfterResizeObservation": 1.3699794999999995
+        }
+      ]
+    },
+    {
+      "installation": "upgraded",
+      "mode": "tool",
+      "requestedSize": [
+        960,
+        680
+      ],
+      "inputOrForcedRedrawBetweenFrames": false,
+      "frames": [
+        {
+          "path": "upgraded-tool-960-visible-immediate.bmp",
+          "width": 960,
+          "height": 680,
+          "sha256": "89a00b895b4431363cf365a5c2781dd0a71efdb005f36d57bb0bf01745dc82d9",
+          "method": "visible desktop BitBlt before PrintWindow",
+          "dpi": 96,
+          "secondsAfterResizeObservation": 0.054278500000009444
+        },
+        {
+          "path": "upgraded-tool-960-visible-250ms.bmp",
+          "width": 960,
+          "height": 680,
+          "sha256": "994679b689ef41f82e0acc11801d53ad411934b0d8b0cc7ba1111c565bc9381b",
+          "method": "visible desktop BitBlt before PrintWindow",
+          "dpi": 96,
+          "secondsAfterResizeObservation": 0.319595100000015
+        },
+        {
+          "path": "upgraded-tool-960-visible-750ms.bmp",
+          "width": 960,
+          "height": 680,
+          "sha256": "994679b689ef41f82e0acc11801d53ad411934b0d8b0cc7ba1111c565bc9381b",
+          "method": "visible desktop BitBlt before PrintWindow",
+          "dpi": 96,
+          "secondsAfterResizeObservation": 0.8517031000000088
+        },
+        {
+          "path": "upgraded-tool-960-visible-1250ms.bmp",
+          "width": 960,
+          "height": 680,
+          "sha256": "994679b689ef41f82e0acc11801d53ad411934b0d8b0cc7ba1111c565bc9381b",
+          "method": "visible desktop BitBlt before PrintWindow",
+          "dpi": 96,
+          "secondsAfterResizeObservation": 1.3679955000000064
+        }
+      ]
+    },
+    {
+      "installation": "upgraded",
+      "mode": "workflow",
+      "requestedSize": [
+        960,
+        680
+      ],
+      "inputOrForcedRedrawBetweenFrames": false,
+      "frames": [
+        {
+          "path": "upgraded-workflow-960-visible-immediate.bmp",
+          "width": 960,
+          "height": 680,
+          "sha256": "67bd989100dadd3c9208010e918610262f0f5ef90c47a5a917eb257414008dc8",
+          "method": "visible desktop BitBlt before PrintWindow",
+          "dpi": 96,
+          "secondsAfterResizeObservation": 0.05071170000002212
+        },
+        {
+          "path": "upgraded-workflow-960-visible-250ms.bmp",
+          "width": 960,
+          "height": 680,
+          "sha256": "b6428d5a38e6ad6e8442942c9afbf7fee7c87d011dffc85d2ba48b597c5cff75",
+          "method": "visible desktop BitBlt before PrintWindow",
+          "dpi": 96,
+          "secondsAfterResizeObservation": 0.3171520000000214
+        },
+        {
+          "path": "upgraded-workflow-960-visible-750ms.bmp",
+          "width": 960,
+          "height": 680,
+          "sha256": "b6428d5a38e6ad6e8442942c9afbf7fee7c87d011dffc85d2ba48b597c5cff75",
+          "method": "visible desktop BitBlt before PrintWindow",
+          "dpi": 96,
+          "secondsAfterResizeObservation": 0.8501714999999876
+        },
+        {
+          "path": "upgraded-workflow-960-visible-1250ms.bmp",
+          "width": 960,
+          "height": 680,
+          "sha256": "b6428d5a38e6ad6e8442942c9afbf7fee7c87d011dffc85d2ba48b597c5cff75",
+          "method": "visible desktop BitBlt before PrintWindow",
+          "dpi": 96,
+          "secondsAfterResizeObservation": 1.3818390000000136
+        }
+      ]
+    }
+  ],
+  "layouts": {
+    "fresh": [
+      {
+        "windowBounds": [
+          0,
+          0,
+          960,
+          680
+        ],
+        "workArea": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "controls": [
+          {
+            "id": 102,
+            "class": "Edit",
+            "bounds": [
+              20,
+              149,
+              204,
+              181
+            ]
+          },
+          {
+            "id": 104,
+            "class": "SysTreeView32",
+            "bounds": [
+              20,
+              191,
+              204,
+              588
+            ]
+          },
+          {
+            "id": 402,
+            "class": "Button",
+            "bounds": [
+              20,
+              600,
+              204,
+              632
+            ]
+          },
+          {
+            "id": 410,
+            "class": "Button",
+            "bounds": [
+              224,
+              58,
+              314,
+              92
+            ]
+          },
+          {
+            "id": 411,
+            "class": "Button",
+            "bounds": [
+              322,
+              58,
+              432,
+              92
+            ]
+          },
+          {
+            "id": 417,
+            "class": "Button",
+            "bounds": [
+              840,
+              58,
+              936,
+              92
+            ]
+          },
+          {
+            "id": 424,
+            "class": "Button",
+            "bounds": [
+              440,
+              58,
+              546,
+              92
+            ]
+          },
+          {
+            "id": 425,
+            "class": "Button",
+            "bounds": [
+              554,
+              58,
+              686,
+              92
+            ]
+          },
+          {
+            "id": 113,
+            "class": "Button",
+            "bounds": [
+              229,
+              608,
+              347,
+              640
+            ]
+          },
+          {
+            "id": 115,
+            "class": "Button",
+            "bounds": [
+              355,
+              608,
+              439,
+              640
+            ]
+          },
+          {
+            "id": 415,
+            "class": "Button",
+            "bounds": [
+              644,
+              608,
+              790,
+              640
+            ]
+          },
+          {
+            "id": 416,
+            "class": "Button",
+            "bounds": [
+              798,
+              608,
+              940,
+              640
+            ]
+          }
+        ],
+        "horizontalClipping": false,
+        "verticalClipping": false,
+        "mode": "tool",
+        "requestedSize": [
+          960,
+          680
+        ]
+      },
+      {
+        "windowBounds": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "workArea": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "controls": [
+          {
+            "id": 102,
+            "class": "Edit",
+            "bounds": [
+              20,
+              149,
+              204,
+              181
+            ]
+          },
+          {
+            "id": 104,
+            "class": "SysTreeView32",
+            "bounds": [
+              20,
+              191,
+              204,
+              636
+            ]
+          },
+          {
+            "id": 402,
+            "class": "Button",
+            "bounds": [
+              20,
+              648,
+              204,
+              680
+            ]
+          },
+          {
+            "id": 410,
+            "class": "Button",
+            "bounds": [
+              224,
+              58,
+              314,
+              92
+            ]
+          },
+          {
+            "id": 411,
+            "class": "Button",
+            "bounds": [
+              322,
+              58,
+              432,
+              92
+            ]
+          },
+          {
+            "id": 417,
+            "class": "Button",
+            "bounds": [
+              904,
+              58,
+              1000,
+              92
+            ]
+          },
+          {
+            "id": 424,
+            "class": "Button",
+            "bounds": [
+              440,
+              58,
+              546,
+              92
+            ]
+          },
+          {
+            "id": 425,
+            "class": "Button",
+            "bounds": [
+              554,
+              58,
+              686,
+              92
+            ]
+          },
+          {
+            "id": 113,
+            "class": "Button",
+            "bounds": [
+              229,
+              656,
+              347,
+              688
+            ]
+          },
+          {
+            "id": 115,
+            "class": "Button",
+            "bounds": [
+              355,
+              656,
+              439,
+              688
+            ]
+          },
+          {
+            "id": 415,
+            "class": "Button",
+            "bounds": [
+              708,
+              656,
+              854,
+              688
+            ]
+          },
+          {
+            "id": 416,
+            "class": "Button",
+            "bounds": [
+              862,
+              656,
+              1004,
+              688
+            ]
+          }
+        ],
+        "horizontalClipping": false,
+        "verticalClipping": false,
+        "mode": "tool",
+        "requestedSize": [
+          1024,
+          728
+        ]
+      },
+      {
+        "windowBounds": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "workArea": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "controls": [
+          {
+            "id": 102,
+            "class": "Edit",
+            "bounds": [
+              20,
+              149,
+              204,
+              181
+            ]
+          },
+          {
+            "id": 104,
+            "class": "SysTreeView32",
+            "bounds": [
+              20,
+              191,
+              204,
+              636
+            ]
+          },
+          {
+            "id": 402,
+            "class": "Button",
+            "bounds": [
+              20,
+              648,
+              204,
+              680
+            ]
+          },
+          {
+            "id": 410,
+            "class": "Button",
+            "bounds": [
+              224,
+              58,
+              314,
+              92
+            ]
+          },
+          {
+            "id": 411,
+            "class": "Button",
+            "bounds": [
+              322,
+              58,
+              432,
+              92
+            ]
+          },
+          {
+            "id": 417,
+            "class": "Button",
+            "bounds": [
+              904,
+              58,
+              1000,
+              92
+            ]
+          },
+          {
+            "id": 424,
+            "class": "Button",
+            "bounds": [
+              440,
+              58,
+              546,
+              92
+            ]
+          },
+          {
+            "id": 425,
+            "class": "Button",
+            "bounds": [
+              554,
+              58,
+              686,
+              92
+            ]
+          },
+          {
+            "id": 113,
+            "class": "Button",
+            "bounds": [
+              229,
+              656,
+              347,
+              688
+            ]
+          },
+          {
+            "id": 115,
+            "class": "Button",
+            "bounds": [
+              355,
+              656,
+              439,
+              688
+            ]
+          },
+          {
+            "id": 415,
+            "class": "Button",
+            "bounds": [
+              708,
+              656,
+              854,
+              688
+            ]
+          },
+          {
+            "id": 416,
+            "class": "Button",
+            "bounds": [
+              862,
+              656,
+              1004,
+              688
+            ]
+          }
+        ],
+        "horizontalClipping": false,
+        "verticalClipping": false,
+        "mode": "tool",
+        "requestedSize": [
+          1280,
+          900
+        ]
+      },
+      {
+        "windowBounds": [
+          0,
+          0,
+          960,
+          680
+        ],
+        "workArea": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "controls": [
+          {
+            "id": 102,
+            "class": "Edit",
+            "bounds": [
+              20,
+              149,
+              204,
+              181
+            ]
+          },
+          {
+            "id": 104,
+            "class": "SysTreeView32",
+            "bounds": [
+              20,
+              191,
+              204,
+              506
+            ]
+          },
+          {
+            "id": 402,
+            "class": "Button",
+            "bounds": [
+              20,
+              600,
+              204,
+              632
+            ]
+          },
+          {
+            "id": 410,
+            "class": "Button",
+            "bounds": [
+              224,
+              58,
+              314,
+              92
+            ]
+          },
+          {
+            "id": 411,
+            "class": "Button",
+            "bounds": [
+              322,
+              58,
+              432,
+              92
+            ]
+          },
+          {
+            "id": 417,
+            "class": "Button",
+            "bounds": [
+              840,
+              58,
+              936,
+              92
+            ]
+          },
+          {
+            "id": 424,
+            "class": "Button",
+            "bounds": [
+              440,
+              58,
+              546,
+              92
+            ]
+          },
+          {
+            "id": 425,
+            "class": "Button",
+            "bounds": [
+              554,
+              58,
+              686,
+              92
+            ]
+          },
+          {
+            "id": 113,
+            "class": "Button",
+            "bounds": [
+              229,
+              608,
+              347,
+              640
+            ]
+          },
+          {
+            "id": 115,
+            "class": "Button",
+            "bounds": [
+              355,
+              608,
+              439,
+              640
+            ]
+          },
+          {
+            "id": 415,
+            "class": "Button",
+            "bounds": [
+              383,
+              110,
+              509,
+              142
+            ]
+          },
+          {
+            "id": 416,
+            "class": "Button",
+            "bounds": [
+              517,
+              110,
+              619,
+              142
+            ]
+          },
+          {
+            "id": 419,
+            "class": "Button",
+            "bounds": [
+              20,
+              518,
+              204,
+              550
+            ]
+          },
+          {
+            "id": 105,
+            "class": "Button",
+            "bounds": [
+              20,
+              558,
+              204,
+              590
+            ]
+          },
+          {
+            "id": 412,
+            "class": "Button",
+            "bounds": [
+              795,
+              110,
+              936,
+              142
+            ]
+          },
+          {
+            "id": 107,
+            "class": "Button",
+            "bounds": [
+              644,
+              608,
+              728,
+              640
+            ]
+          },
+          {
+            "id": 108,
+            "class": "Button",
+            "bounds": [
+              736,
+              608,
+              808,
+              640
+            ]
+          },
+          {
+            "id": 418,
+            "class": "Button",
+            "bounds": [
+              816,
+              608,
+              936,
+              640
+            ]
+          },
+          {
+            "id": 420,
+            "class": "Button",
+            "bounds": [
+              481,
+              608,
+              515,
+              640
+            ]
+          },
+          {
+            "id": 421,
+            "class": "Button",
+            "bounds": [
+              589,
+              608,
+              623,
+              640
+            ]
+          },
+          {
+            "id": 422,
+            "class": "Button",
+            "bounds": [
+              521,
+              608,
+              583,
+              640
+            ]
+          }
+        ],
+        "horizontalClipping": false,
+        "verticalClipping": false,
+        "mode": "workflow",
+        "requestedSize": [
+          960,
+          680
+        ]
+      },
+      {
+        "windowBounds": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "workArea": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "controls": [
+          {
+            "id": 102,
+            "class": "Edit",
+            "bounds": [
+              20,
+              149,
+              204,
+              181
+            ]
+          },
+          {
+            "id": 104,
+            "class": "SysTreeView32",
+            "bounds": [
+              20,
+              191,
+              204,
+              554
+            ]
+          },
+          {
+            "id": 402,
+            "class": "Button",
+            "bounds": [
+              20,
+              648,
+              204,
+              680
+            ]
+          },
+          {
+            "id": 410,
+            "class": "Button",
+            "bounds": [
+              224,
+              58,
+              314,
+              92
+            ]
+          },
+          {
+            "id": 411,
+            "class": "Button",
+            "bounds": [
+              322,
+              58,
+              432,
+              92
+            ]
+          },
+          {
+            "id": 417,
+            "class": "Button",
+            "bounds": [
+              904,
+              58,
+              1000,
+              92
+            ]
+          },
+          {
+            "id": 424,
+            "class": "Button",
+            "bounds": [
+              440,
+              58,
+              546,
+              92
+            ]
+          },
+          {
+            "id": 425,
+            "class": "Button",
+            "bounds": [
+              554,
+              58,
+              686,
+              92
+            ]
+          },
+          {
+            "id": 113,
+            "class": "Button",
+            "bounds": [
+              229,
+              656,
+              347,
+              688
+            ]
+          },
+          {
+            "id": 115,
+            "class": "Button",
+            "bounds": [
+              355,
+              656,
+              439,
+              688
+            ]
+          },
+          {
+            "id": 415,
+            "class": "Button",
+            "bounds": [
+              447,
+              110,
+              573,
+              142
+            ]
+          },
+          {
+            "id": 416,
+            "class": "Button",
+            "bounds": [
+              581,
+              110,
+              683,
+              142
+            ]
+          },
+          {
+            "id": 419,
+            "class": "Button",
+            "bounds": [
+              20,
+              566,
+              204,
+              598
+            ]
+          },
+          {
+            "id": 105,
+            "class": "Button",
+            "bounds": [
+              20,
+              606,
+              204,
+              638
+            ]
+          },
+          {
+            "id": 412,
+            "class": "Button",
+            "bounds": [
+              859,
+              110,
+              1000,
+              142
+            ]
+          },
+          {
+            "id": 107,
+            "class": "Button",
+            "bounds": [
+              708,
+              656,
+              792,
+              688
+            ]
+          },
+          {
+            "id": 108,
+            "class": "Button",
+            "bounds": [
+              800,
+              656,
+              872,
+              688
+            ]
+          },
+          {
+            "id": 418,
+            "class": "Button",
+            "bounds": [
+              880,
+              656,
+              1000,
+              688
+            ]
+          },
+          {
+            "id": 420,
+            "class": "Button",
+            "bounds": [
+              545,
+              656,
+              579,
+              688
+            ]
+          },
+          {
+            "id": 421,
+            "class": "Button",
+            "bounds": [
+              653,
+              656,
+              687,
+              688
+            ]
+          },
+          {
+            "id": 422,
+            "class": "Button",
+            "bounds": [
+              585,
+              656,
+              647,
+              688
+            ]
+          }
+        ],
+        "horizontalClipping": false,
+        "verticalClipping": false,
+        "mode": "workflow",
+        "requestedSize": [
+          1024,
+          728
+        ]
+      },
+      {
+        "windowBounds": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "workArea": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "controls": [
+          {
+            "id": 102,
+            "class": "Edit",
+            "bounds": [
+              20,
+              149,
+              204,
+              181
+            ]
+          },
+          {
+            "id": 104,
+            "class": "SysTreeView32",
+            "bounds": [
+              20,
+              191,
+              204,
+              554
+            ]
+          },
+          {
+            "id": 402,
+            "class": "Button",
+            "bounds": [
+              20,
+              648,
+              204,
+              680
+            ]
+          },
+          {
+            "id": 410,
+            "class": "Button",
+            "bounds": [
+              224,
+              58,
+              314,
+              92
+            ]
+          },
+          {
+            "id": 411,
+            "class": "Button",
+            "bounds": [
+              322,
+              58,
+              432,
+              92
+            ]
+          },
+          {
+            "id": 417,
+            "class": "Button",
+            "bounds": [
+              904,
+              58,
+              1000,
+              92
+            ]
+          },
+          {
+            "id": 424,
+            "class": "Button",
+            "bounds": [
+              440,
+              58,
+              546,
+              92
+            ]
+          },
+          {
+            "id": 425,
+            "class": "Button",
+            "bounds": [
+              554,
+              58,
+              686,
+              92
+            ]
+          },
+          {
+            "id": 113,
+            "class": "Button",
+            "bounds": [
+              229,
+              656,
+              347,
+              688
+            ]
+          },
+          {
+            "id": 115,
+            "class": "Button",
+            "bounds": [
+              355,
+              656,
+              439,
+              688
+            ]
+          },
+          {
+            "id": 415,
+            "class": "Button",
+            "bounds": [
+              447,
+              110,
+              573,
+              142
+            ]
+          },
+          {
+            "id": 416,
+            "class": "Button",
+            "bounds": [
+              581,
+              110,
+              683,
+              142
+            ]
+          },
+          {
+            "id": 419,
+            "class": "Button",
+            "bounds": [
+              20,
+              566,
+              204,
+              598
+            ]
+          },
+          {
+            "id": 105,
+            "class": "Button",
+            "bounds": [
+              20,
+              606,
+              204,
+              638
+            ]
+          },
+          {
+            "id": 412,
+            "class": "Button",
+            "bounds": [
+              859,
+              110,
+              1000,
+              142
+            ]
+          },
+          {
+            "id": 107,
+            "class": "Button",
+            "bounds": [
+              708,
+              656,
+              792,
+              688
+            ]
+          },
+          {
+            "id": 108,
+            "class": "Button",
+            "bounds": [
+              800,
+              656,
+              872,
+              688
+            ]
+          },
+          {
+            "id": 418,
+            "class": "Button",
+            "bounds": [
+              880,
+              656,
+              1000,
+              688
+            ]
+          },
+          {
+            "id": 420,
+            "class": "Button",
+            "bounds": [
+              545,
+              656,
+              579,
+              688
+            ]
+          },
+          {
+            "id": 421,
+            "class": "Button",
+            "bounds": [
+              653,
+              656,
+              687,
+              688
+            ]
+          },
+          {
+            "id": 422,
+            "class": "Button",
+            "bounds": [
+              585,
+              656,
+              647,
+              688
+            ]
+          }
+        ],
+        "horizontalClipping": false,
+        "verticalClipping": false,
+        "mode": "workflow",
+        "requestedSize": [
+          1280,
+          900
+        ]
+      }
+    ],
+    "upgraded": [
+      {
+        "windowBounds": [
+          0,
+          0,
+          960,
+          680
+        ],
+        "workArea": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "controls": [
+          {
+            "id": 102,
+            "class": "Edit",
+            "bounds": [
+              20,
+              149,
+              204,
+              181
+            ]
+          },
+          {
+            "id": 104,
+            "class": "SysTreeView32",
+            "bounds": [
+              20,
+              191,
+              204,
+              588
+            ]
+          },
+          {
+            "id": 402,
+            "class": "Button",
+            "bounds": [
+              20,
+              600,
+              204,
+              632
+            ]
+          },
+          {
+            "id": 410,
+            "class": "Button",
+            "bounds": [
+              224,
+              58,
+              314,
+              92
+            ]
+          },
+          {
+            "id": 411,
+            "class": "Button",
+            "bounds": [
+              322,
+              58,
+              432,
+              92
+            ]
+          },
+          {
+            "id": 417,
+            "class": "Button",
+            "bounds": [
+              840,
+              58,
+              936,
+              92
+            ]
+          },
+          {
+            "id": 424,
+            "class": "Button",
+            "bounds": [
+              440,
+              58,
+              546,
+              92
+            ]
+          },
+          {
+            "id": 425,
+            "class": "Button",
+            "bounds": [
+              554,
+              58,
+              686,
+              92
+            ]
+          },
+          {
+            "id": 113,
+            "class": "Button",
+            "bounds": [
+              229,
+              608,
+              347,
+              640
+            ]
+          },
+          {
+            "id": 115,
+            "class": "Button",
+            "bounds": [
+              355,
+              608,
+              439,
+              640
+            ]
+          },
+          {
+            "id": 415,
+            "class": "Button",
+            "bounds": [
+              644,
+              608,
+              790,
+              640
+            ]
+          },
+          {
+            "id": 416,
+            "class": "Button",
+            "bounds": [
+              798,
+              608,
+              940,
+              640
+            ]
+          }
+        ],
+        "horizontalClipping": false,
+        "verticalClipping": false,
+        "mode": "tool",
+        "requestedSize": [
+          960,
+          680
+        ]
+      },
+      {
+        "windowBounds": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "workArea": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "controls": [
+          {
+            "id": 102,
+            "class": "Edit",
+            "bounds": [
+              20,
+              149,
+              204,
+              181
+            ]
+          },
+          {
+            "id": 104,
+            "class": "SysTreeView32",
+            "bounds": [
+              20,
+              191,
+              204,
+              636
+            ]
+          },
+          {
+            "id": 402,
+            "class": "Button",
+            "bounds": [
+              20,
+              648,
+              204,
+              680
+            ]
+          },
+          {
+            "id": 410,
+            "class": "Button",
+            "bounds": [
+              224,
+              58,
+              314,
+              92
+            ]
+          },
+          {
+            "id": 411,
+            "class": "Button",
+            "bounds": [
+              322,
+              58,
+              432,
+              92
+            ]
+          },
+          {
+            "id": 417,
+            "class": "Button",
+            "bounds": [
+              904,
+              58,
+              1000,
+              92
+            ]
+          },
+          {
+            "id": 424,
+            "class": "Button",
+            "bounds": [
+              440,
+              58,
+              546,
+              92
+            ]
+          },
+          {
+            "id": 425,
+            "class": "Button",
+            "bounds": [
+              554,
+              58,
+              686,
+              92
+            ]
+          },
+          {
+            "id": 113,
+            "class": "Button",
+            "bounds": [
+              229,
+              656,
+              347,
+              688
+            ]
+          },
+          {
+            "id": 115,
+            "class": "Button",
+            "bounds": [
+              355,
+              656,
+              439,
+              688
+            ]
+          },
+          {
+            "id": 415,
+            "class": "Button",
+            "bounds": [
+              708,
+              656,
+              854,
+              688
+            ]
+          },
+          {
+            "id": 416,
+            "class": "Button",
+            "bounds": [
+              862,
+              656,
+              1004,
+              688
+            ]
+          }
+        ],
+        "horizontalClipping": false,
+        "verticalClipping": false,
+        "mode": "tool",
+        "requestedSize": [
+          1024,
+          728
+        ]
+      },
+      {
+        "windowBounds": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "workArea": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "controls": [
+          {
+            "id": 102,
+            "class": "Edit",
+            "bounds": [
+              20,
+              149,
+              204,
+              181
+            ]
+          },
+          {
+            "id": 104,
+            "class": "SysTreeView32",
+            "bounds": [
+              20,
+              191,
+              204,
+              636
+            ]
+          },
+          {
+            "id": 402,
+            "class": "Button",
+            "bounds": [
+              20,
+              648,
+              204,
+              680
+            ]
+          },
+          {
+            "id": 410,
+            "class": "Button",
+            "bounds": [
+              224,
+              58,
+              314,
+              92
+            ]
+          },
+          {
+            "id": 411,
+            "class": "Button",
+            "bounds": [
+              322,
+              58,
+              432,
+              92
+            ]
+          },
+          {
+            "id": 417,
+            "class": "Button",
+            "bounds": [
+              904,
+              58,
+              1000,
+              92
+            ]
+          },
+          {
+            "id": 424,
+            "class": "Button",
+            "bounds": [
+              440,
+              58,
+              546,
+              92
+            ]
+          },
+          {
+            "id": 425,
+            "class": "Button",
+            "bounds": [
+              554,
+              58,
+              686,
+              92
+            ]
+          },
+          {
+            "id": 113,
+            "class": "Button",
+            "bounds": [
+              229,
+              656,
+              347,
+              688
+            ]
+          },
+          {
+            "id": 115,
+            "class": "Button",
+            "bounds": [
+              355,
+              656,
+              439,
+              688
+            ]
+          },
+          {
+            "id": 415,
+            "class": "Button",
+            "bounds": [
+              708,
+              656,
+              854,
+              688
+            ]
+          },
+          {
+            "id": 416,
+            "class": "Button",
+            "bounds": [
+              862,
+              656,
+              1004,
+              688
+            ]
+          }
+        ],
+        "horizontalClipping": false,
+        "verticalClipping": false,
+        "mode": "tool",
+        "requestedSize": [
+          1280,
+          900
+        ]
+      },
+      {
+        "windowBounds": [
+          0,
+          0,
+          960,
+          680
+        ],
+        "workArea": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "controls": [
+          {
+            "id": 102,
+            "class": "Edit",
+            "bounds": [
+              20,
+              149,
+              204,
+              181
+            ]
+          },
+          {
+            "id": 104,
+            "class": "SysTreeView32",
+            "bounds": [
+              20,
+              191,
+              204,
+              506
+            ]
+          },
+          {
+            "id": 402,
+            "class": "Button",
+            "bounds": [
+              20,
+              600,
+              204,
+              632
+            ]
+          },
+          {
+            "id": 410,
+            "class": "Button",
+            "bounds": [
+              224,
+              58,
+              314,
+              92
+            ]
+          },
+          {
+            "id": 411,
+            "class": "Button",
+            "bounds": [
+              322,
+              58,
+              432,
+              92
+            ]
+          },
+          {
+            "id": 417,
+            "class": "Button",
+            "bounds": [
+              840,
+              58,
+              936,
+              92
+            ]
+          },
+          {
+            "id": 424,
+            "class": "Button",
+            "bounds": [
+              440,
+              58,
+              546,
+              92
+            ]
+          },
+          {
+            "id": 425,
+            "class": "Button",
+            "bounds": [
+              554,
+              58,
+              686,
+              92
+            ]
+          },
+          {
+            "id": 113,
+            "class": "Button",
+            "bounds": [
+              229,
+              608,
+              347,
+              640
+            ]
+          },
+          {
+            "id": 115,
+            "class": "Button",
+            "bounds": [
+              355,
+              608,
+              439,
+              640
+            ]
+          },
+          {
+            "id": 415,
+            "class": "Button",
+            "bounds": [
+              383,
+              110,
+              509,
+              142
+            ]
+          },
+          {
+            "id": 416,
+            "class": "Button",
+            "bounds": [
+              517,
+              110,
+              619,
+              142
+            ]
+          },
+          {
+            "id": 419,
+            "class": "Button",
+            "bounds": [
+              20,
+              518,
+              204,
+              550
+            ]
+          },
+          {
+            "id": 105,
+            "class": "Button",
+            "bounds": [
+              20,
+              558,
+              204,
+              590
+            ]
+          },
+          {
+            "id": 412,
+            "class": "Button",
+            "bounds": [
+              795,
+              110,
+              936,
+              142
+            ]
+          },
+          {
+            "id": 107,
+            "class": "Button",
+            "bounds": [
+              644,
+              608,
+              728,
+              640
+            ]
+          },
+          {
+            "id": 108,
+            "class": "Button",
+            "bounds": [
+              736,
+              608,
+              808,
+              640
+            ]
+          },
+          {
+            "id": 418,
+            "class": "Button",
+            "bounds": [
+              816,
+              608,
+              936,
+              640
+            ]
+          },
+          {
+            "id": 420,
+            "class": "Button",
+            "bounds": [
+              481,
+              608,
+              515,
+              640
+            ]
+          },
+          {
+            "id": 421,
+            "class": "Button",
+            "bounds": [
+              589,
+              608,
+              623,
+              640
+            ]
+          },
+          {
+            "id": 422,
+            "class": "Button",
+            "bounds": [
+              521,
+              608,
+              583,
+              640
+            ]
+          }
+        ],
+        "horizontalClipping": false,
+        "verticalClipping": false,
+        "mode": "workflow",
+        "requestedSize": [
+          960,
+          680
+        ]
+      },
+      {
+        "windowBounds": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "workArea": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "controls": [
+          {
+            "id": 102,
+            "class": "Edit",
+            "bounds": [
+              20,
+              149,
+              204,
+              181
+            ]
+          },
+          {
+            "id": 104,
+            "class": "SysTreeView32",
+            "bounds": [
+              20,
+              191,
+              204,
+              554
+            ]
+          },
+          {
+            "id": 402,
+            "class": "Button",
+            "bounds": [
+              20,
+              648,
+              204,
+              680
+            ]
+          },
+          {
+            "id": 410,
+            "class": "Button",
+            "bounds": [
+              224,
+              58,
+              314,
+              92
+            ]
+          },
+          {
+            "id": 411,
+            "class": "Button",
+            "bounds": [
+              322,
+              58,
+              432,
+              92
+            ]
+          },
+          {
+            "id": 417,
+            "class": "Button",
+            "bounds": [
+              904,
+              58,
+              1000,
+              92
+            ]
+          },
+          {
+            "id": 424,
+            "class": "Button",
+            "bounds": [
+              440,
+              58,
+              546,
+              92
+            ]
+          },
+          {
+            "id": 425,
+            "class": "Button",
+            "bounds": [
+              554,
+              58,
+              686,
+              92
+            ]
+          },
+          {
+            "id": 113,
+            "class": "Button",
+            "bounds": [
+              229,
+              656,
+              347,
+              688
+            ]
+          },
+          {
+            "id": 115,
+            "class": "Button",
+            "bounds": [
+              355,
+              656,
+              439,
+              688
+            ]
+          },
+          {
+            "id": 415,
+            "class": "Button",
+            "bounds": [
+              447,
+              110,
+              573,
+              142
+            ]
+          },
+          {
+            "id": 416,
+            "class": "Button",
+            "bounds": [
+              581,
+              110,
+              683,
+              142
+            ]
+          },
+          {
+            "id": 419,
+            "class": "Button",
+            "bounds": [
+              20,
+              566,
+              204,
+              598
+            ]
+          },
+          {
+            "id": 105,
+            "class": "Button",
+            "bounds": [
+              20,
+              606,
+              204,
+              638
+            ]
+          },
+          {
+            "id": 412,
+            "class": "Button",
+            "bounds": [
+              859,
+              110,
+              1000,
+              142
+            ]
+          },
+          {
+            "id": 107,
+            "class": "Button",
+            "bounds": [
+              708,
+              656,
+              792,
+              688
+            ]
+          },
+          {
+            "id": 108,
+            "class": "Button",
+            "bounds": [
+              800,
+              656,
+              872,
+              688
+            ]
+          },
+          {
+            "id": 418,
+            "class": "Button",
+            "bounds": [
+              880,
+              656,
+              1000,
+              688
+            ]
+          },
+          {
+            "id": 420,
+            "class": "Button",
+            "bounds": [
+              545,
+              656,
+              579,
+              688
+            ]
+          },
+          {
+            "id": 421,
+            "class": "Button",
+            "bounds": [
+              653,
+              656,
+              687,
+              688
+            ]
+          },
+          {
+            "id": 422,
+            "class": "Button",
+            "bounds": [
+              585,
+              656,
+              647,
+              688
+            ]
+          }
+        ],
+        "horizontalClipping": false,
+        "verticalClipping": false,
+        "mode": "workflow",
+        "requestedSize": [
+          1024,
+          728
+        ]
+      },
+      {
+        "windowBounds": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "workArea": [
+          0,
+          0,
+          1024,
+          728
+        ],
+        "controls": [
+          {
+            "id": 102,
+            "class": "Edit",
+            "bounds": [
+              20,
+              149,
+              204,
+              181
+            ]
+          },
+          {
+            "id": 104,
+            "class": "SysTreeView32",
+            "bounds": [
+              20,
+              191,
+              204,
+              554
+            ]
+          },
+          {
+            "id": 402,
+            "class": "Button",
+            "bounds": [
+              20,
+              648,
+              204,
+              680
+            ]
+          },
+          {
+            "id": 410,
+            "class": "Button",
+            "bounds": [
+              224,
+              58,
+              314,
+              92
+            ]
+          },
+          {
+            "id": 411,
+            "class": "Button",
+            "bounds": [
+              322,
+              58,
+              432,
+              92
+            ]
+          },
+          {
+            "id": 417,
+            "class": "Button",
+            "bounds": [
+              904,
+              58,
+              1000,
+              92
+            ]
+          },
+          {
+            "id": 424,
+            "class": "Button",
+            "bounds": [
+              440,
+              58,
+              546,
+              92
+            ]
+          },
+          {
+            "id": 425,
+            "class": "Button",
+            "bounds": [
+              554,
+              58,
+              686,
+              92
+            ]
+          },
+          {
+            "id": 113,
+            "class": "Button",
+            "bounds": [
+              229,
+              656,
+              347,
+              688
+            ]
+          },
+          {
+            "id": 115,
+            "class": "Button",
+            "bounds": [
+              355,
+              656,
+              439,
+              688
+            ]
+          },
+          {
+            "id": 415,
+            "class": "Button",
+            "bounds": [
+              447,
+              110,
+              573,
+              142
+            ]
+          },
+          {
+            "id": 416,
+            "class": "Button",
+            "bounds": [
+              581,
+              110,
+              683,
+              142
+            ]
+          },
+          {
+            "id": 419,
+            "class": "Button",
+            "bounds": [
+              20,
+              566,
+              204,
+              598
+            ]
+          },
+          {
+            "id": 105,
+            "class": "Button",
+            "bounds": [
+              20,
+              606,
+              204,
+              638
+            ]
+          },
+          {
+            "id": 412,
+            "class": "Button",
+            "bounds": [
+              859,
+              110,
+              1000,
+              142
+            ]
+          },
+          {
+            "id": 107,
+            "class": "Button",
+            "bounds": [
+              708,
+              656,
+              792,
+              688
+            ]
+          },
+          {
+            "id": 108,
+            "class": "Button",
+            "bounds": [
+              800,
+              656,
+              872,
+              688
+            ]
+          },
+          {
+            "id": 418,
+            "class": "Button",
+            "bounds": [
+              880,
+              656,
+              1000,
+              688
+            ]
+          },
+          {
+            "id": 420,
+            "class": "Button",
+            "bounds": [
+              545,
+              656,
+              579,
+              688
+            ]
+          },
+          {
+            "id": 421,
+            "class": "Button",
+            "bounds": [
+              653,
+              656,
+              687,
+              688
+            ]
+          },
+          {
+            "id": 422,
+            "class": "Button",
+            "bounds": [
+              585,
+              656,
+              647,
+              688
+            ]
+          }
+        ],
+        "horizontalClipping": false,
+        "verticalClipping": false,
+        "mode": "workflow",
+        "requestedSize": [
+          1280,
+          900
+        ]
+      }
+    ]
+  },
+  "resultsKeyboard": {
+    "fresh": {
+      "empty": {
+        "query": "patch-no-matching-result",
+        "resultCount": 0,
+        "searchFocusRetention": {
+          "controlId": 1502,
+          "samples": 117,
+          "durationSeconds": 2.4197566999999935,
+          "focusRetained": true,
+          "enabledThroughoutSamples": true,
+          "inputOrRefocusDuringObservation": false,
+          "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+        },
+        "beforeEscape": {
+          "foregroundWindow": 459320,
+          "resultsWindow": 459320,
+          "focusWindow": 590270,
+          "focusControlId": 1501,
+          "focusClass": "Edit",
+          "focusEnabled": true,
+          "focusInsideResults": true
+        },
+        "pointerInterventionAfterOpen": false,
+        "closedImmediatelyAfterSearch": true,
+        "afterEscape": {
+          "foregroundWindow": 1179732,
+          "resultsWindow": 459320,
+          "focusWindow": 1179732,
+          "focusControlId": 144912,
+          "focusClass": "WorkbenchNativeWorkspace051_4434aa05187100891e52b73ff1897ddbb297eddf059790beaf93305b1f3805fc",
+          "focusEnabled": true,
+          "focusInsideResults": false
+        }
+      },
+      "populated": {
+        "query": "SAMtools",
+        "resultCount": 1,
+        "searchFocusRetention": {
+          "controlId": 1502,
+          "samples": 117,
+          "durationSeconds": 2.4183413000000087,
+          "focusRetained": true,
+          "enabledThroughoutSamples": true,
+          "inputOrRefocusDuringObservation": false,
+          "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+        },
+        "beforeEscape": {
+          "foregroundWindow": 524856,
+          "resultsWindow": 524856,
+          "focusWindow": 524862,
+          "focusControlId": 1501,
+          "focusClass": "Edit",
+          "focusEnabled": true,
+          "focusInsideResults": true
+        },
+        "pointerInterventionAfterOpen": false,
+        "closedImmediatelyAfterSearch": true,
+        "afterEscape": {
+          "foregroundWindow": 1179732,
+          "resultsWindow": 524856,
+          "focusWindow": 1179732,
+          "focusControlId": 144912,
+          "focusClass": "WorkbenchNativeWorkspace051_4434aa05187100891e52b73ff1897ddbb297eddf059790beaf93305b1f3805fc",
+          "focusEnabled": true,
+          "focusInsideResults": false
+        }
+      }
+    },
+    "upgraded": {
+      "empty": {
+        "query": "patch-no-matching-result",
+        "resultCount": 0,
+        "searchFocusRetention": {
+          "controlId": 1502,
+          "samples": 116,
+          "durationSeconds": 2.4003404999999702,
+          "focusRetained": true,
+          "enabledThroughoutSamples": true,
+          "inputOrRefocusDuringObservation": false,
+          "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+        },
+        "beforeEscape": {
+          "foregroundWindow": 590392,
+          "resultsWindow": 590392,
+          "focusWindow": 524940,
+          "focusControlId": 1501,
+          "focusClass": "Edit",
+          "focusEnabled": true,
+          "focusInsideResults": true
+        },
+        "pointerInterventionAfterOpen": false,
+        "closedImmediatelyAfterSearch": true,
+        "afterEscape": {
+          "foregroundWindow": 655808,
+          "resultsWindow": 590392,
+          "focusWindow": 655808,
+          "focusControlId": 177312,
+          "focusClass": "WorkbenchNativeWorkspace051_95b3c5b1d1c89dd184a864f75907a44534fdfe766c8e340e841adb1b7277ec4e",
+          "focusEnabled": true,
+          "focusInsideResults": false
+        }
+      },
+      "populated": {
+        "query": "SAMtools",
+        "resultCount": 1,
+        "searchFocusRetention": {
+          "controlId": 1502,
+          "samples": 117,
+          "durationSeconds": 2.4186300000000074,
+          "focusRetained": true,
+          "enabledThroughoutSamples": true,
+          "inputOrRefocusDuringObservation": false,
+          "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+        },
+        "beforeEscape": {
+          "foregroundWindow": 655928,
+          "resultsWindow": 655928,
+          "focusWindow": 787056,
+          "focusControlId": 1501,
+          "focusClass": "Edit",
+          "focusEnabled": true,
+          "focusInsideResults": true
+        },
+        "pointerInterventionAfterOpen": false,
+        "closedImmediatelyAfterSearch": true,
+        "afterEscape": {
+          "foregroundWindow": 655808,
+          "resultsWindow": 655928,
+          "focusWindow": 655808,
+          "focusControlId": 177312,
+          "focusClass": "WorkbenchNativeWorkspace051_95b3c5b1d1c89dd184a864f75907a44534fdfe766c8e340e841adb1b7277ec4e",
+          "focusEnabled": true,
+          "focusInsideResults": false
+        }
+      }
+    }
+  },
+  "observedDpi": [
+    96
+  ],
+  "finishedUtc": "2026-10-09T20:50:24.079316Z",
+  "passed": 19,
+  "failed": 0,
+  "blocked": 0
+}

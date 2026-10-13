@@ -1,0 +1,333 @@
+{
+  "schema": 1,
+  "kind": "independent actual-display visual review of frozen feedback recheck",
+  "reviewedUtc": "2026-10-10T18:47:30.021503+00:00",
+  "appVersion": "0.16.1",
+  "sourceCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+  "gateCommit": "7ea0ce6bf6821089c524c307f99efb0a1892d2a3",
+  "run": 38076722339,
+  "runUrl": "https://github.com/comparativechrono/workbench/actions/runs/38076722339",
+  "archives": [
+    {
+      "file": "native-workbench-0.16.1-source.zip",
+      "bytes": 48487148,
+      "sha256": "002fbc8401ab744a8172f3ae11d240c925ed7a8d1241bd5d94e0413675bb1b5d"
+    },
+    {
+      "file": "native-workbench-0.16.1-starter-windows.zip",
+      "bytes": 17889148,
+      "sha256": "28f1362287991621dde030da54eb444846142c0243be6b9d86c4b4f1bf99dd47"
+    },
+    {
+      "file": "native-workbench-0.16.1-update-from-0.16.0.zip",
+      "bytes": 13051808,
+      "sha256": "d0a20f0b8288c79dba695e9cc82e78a78e95244ebb267e959d99fb9e438e7aee"
+    }
+  ],
+  "previousReview": {
+    "path": "knowledge/evidence/wrapped-library-0.16.1-visual-review-2026-10-10.json",
+    "sha256": "3fec22da1d652ebf5a6da2406881fcd6878d59eb0158a431db781f4ade47d87e",
+    "unchanged": true,
+    "screenshotsReviewed": 25
+  },
+  "inputIndex": {
+    "sha256": "0a542677220c4c6cec8972ea64272244e3d3039b6ca7e2b9645f518072065405",
+    "kind": "auditor-selected current recheck screenshots"
+  },
+  "evidenceArtifacts": [
+    {
+      "id": 11679136698,
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/38076722339/artifacts/11679136698"
+    },
+    {
+      "id": 11679456290,
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/38076722339/artifacts/11679456290"
+    }
+  ],
+  "method": "Independently viewed all 16 listed actual displayed BMPs, then recomputed their sizes and SHA-256 against the audited artifact member index. These are fresh recheck captures of unchanged ff13 application bytes, not substitutes from a previous candidate or independent oracle rasters.",
+  "conclusion": "Both ordinary and spaces paths now have reviewed, populated 960/1024 overflow desktops and stable collapse/expand endpoints. No additional visible layout defect is found. Both caption pairs show the runner-console obstruction before activation and the unobstructed populated application after activation. The ordinary overflow scope unreached in the original run is now covered by this separate recheck and its passing native feedback gate.",
+  "limits": [
+    "These static endpoints do not prove absence of transient flashing; the tied native temporal gate supplies that separate sampled evidence.",
+    "Both cases required one ordinary click on an exposed owned caption at the modal-close setup boundary. This is not a claim of automatic foreground restoration after closing the modal.",
+    "Only hosted Windows and the captured DPI/window sizes were reviewed. High DPI, multiple monitors, representative PCs and screen-reader acceptance remain untested.",
+    "The first 25-image review remains unchanged and still records the historical ordinary-path obstruction; this receipt adds later evidence rather than rewriting that result."
+  ],
+  "nativeReports": [
+    {
+      "pathCase": "ordinary",
+      "member": "feedback/native-tester-feedback.json",
+      "sha256": "83b4bd9ea90f2b7148bdc18a235e6dc15ea35b9557c3f09a2f48f4ddfcea2a5c",
+      "nativeGateSucceeded": true,
+      "nativeGUIValidatedByGate": true,
+      "modalActivationSetup": [
+        {
+          "phase": "blank Samples closed",
+          "mainWasForegroundBefore": false,
+          "mainIsForegroundAfter": true,
+          "clicked": true,
+          "captionBounds": [
+            30,
+            8,
+            1016,
+            31
+          ],
+          "clickPoint": [
+            276,
+            19
+          ],
+          "candidates": [
+            {
+              "point": [
+                276,
+                19
+              ],
+              "available": true,
+              "exposed": true,
+              "ready": true,
+              "ownedMainWindow": true,
+              "hitCaption": true
+            }
+          ],
+          "confirmation": {
+            "point": [
+              276,
+              19
+            ],
+            "available": true,
+            "exposed": true,
+            "ready": true,
+            "ownedMainWindow": true,
+            "hitCaption": true
+          }
+        }
+      ]
+    },
+    {
+      "pathCase": "path with spaces",
+      "member": "feedback/native-tester-feedback.json",
+      "sha256": "b38e06f44fae664c5afc35cdecf11bcf8bb878932b89fd3cca90c706c3d0adb6",
+      "nativeGateSucceeded": true,
+      "nativeGUIValidatedByGate": true,
+      "modalActivationSetup": [
+        {
+          "phase": "blank Samples closed",
+          "mainWasForegroundBefore": false,
+          "mainIsForegroundAfter": true,
+          "clicked": true,
+          "captionBounds": [
+            30,
+            8,
+            1016,
+            31
+          ],
+          "clickPoint": [
+            276,
+            19
+          ],
+          "candidates": [
+            {
+              "point": [
+                276,
+                19
+              ],
+              "available": true,
+              "exposed": true,
+              "ready": true,
+              "ownedMainWindow": true,
+              "hitCaption": true
+            }
+          ],
+          "confirmation": {
+            "point": [
+              276,
+              19
+            ],
+            "available": true,
+            "exposed": true,
+            "ready": true,
+            "ownedMainWindow": true,
+            "hitCaption": true
+          }
+        }
+      ]
+    }
+  ],
+  "screenshotsReviewed": [
+    {
+      "pathCase": "ordinary",
+      "artifactId": 11679136698,
+      "member": "feedback/modal-activation-before.bmp",
+      "bytes": 2981942,
+      "sha256": "2d798cada2675d2688048299c651c728f6a5f2ae8c307da6ac8135e26de91815",
+      "width": 1024,
+      "height": 728,
+      "displayPixelsReviewed": true,
+      "observations": "HostedComputeAgent console visibly overlaps the application after the Samples modal closes. The application caption is exposed above the console. This is setup-state evidence, not an application rendering-failure image."
+    },
+    {
+      "pathCase": "ordinary",
+      "artifactId": 11679136698,
+      "member": "feedback/modal-activation-after.bmp",
+      "bytes": 2981942,
+      "sha256": "e3b607cc9e4d5d658b3b96082e312639f16cee5dd97d3ae75304e68947a5dfbd",
+      "width": 1024,
+      "height": 728,
+      "displayPixelsReviewed": true,
+      "observations": "Application is visibly active and unobstructed after caption activation; the category list is populated. This static image supports the separately recorded actual owned-caption click and foreground transition."
+    },
+    {
+      "pathCase": "ordinary",
+      "artifactId": 11679136698,
+      "member": "feedback/overflow-scrolled-960.bmp",
+      "bytes": 2611254,
+      "sha256": "7b6a6db71f5a2a93959562ef5581fbbc28f7eed3f34674c1d264a23b2eb24d12",
+      "width": 960,
+      "height": 680,
+      "displayPixelsReviewed": true,
+      "observations": "960-width desktop has a populated scrolled tools pane, wrapped bold names and regular descriptions, a visible parent scrollbar and selected expanded category retained low in the viewport. No blank pane, central-panel overlap or duplicate scrollbar is visible. Background console at 960 width is outside application bounds."
+    },
+    {
+      "pathCase": "ordinary",
+      "artifactId": 11679136698,
+      "member": "feedback/overflow-scrolled-1024.bmp",
+      "bytes": 2981942,
+      "sha256": "9112ad1390aaeba503808fed0a04fbb49b5f1579d092d2528c5ab0f4a5ce7d0b",
+      "width": 1024,
+      "height": 728,
+      "displayPixelsReviewed": true,
+      "observations": "1024-width desktop has a populated scrolled tools pane, wrapped bold names and regular descriptions, a visible parent scrollbar and selected expanded category retained low in the viewport. No blank pane, central-panel overlap or duplicate scrollbar is visible. Background console at 960 width is outside application bounds."
+    },
+    {
+      "pathCase": "ordinary",
+      "artifactId": 11679136698,
+      "member": "feedback/overflow-960-collapse-0-last.bmp",
+      "bytes": 247458,
+      "sha256": "6a4e703ed3d42c8205c550918019270e940672c35a3565f3f4cd0bde093b2643",
+      "width": 159,
+      "height": 389,
+      "displayPixelsReviewed": true,
+      "observations": "Collapse endpoint retains selected category at the same visible vertical position as the corresponding expansion endpoint. Closed arrow and following category are visible; wrapped surrounding text remains within the pane and no black/blank region is visible in this static frame."
+    },
+    {
+      "pathCase": "ordinary",
+      "artifactId": 11679136698,
+      "member": "feedback/overflow-960-expand-0-last.bmp",
+      "bytes": 247458,
+      "sha256": "b756af4d2376e6a306dc0057587e064beaed361c99ad704e8dc312dfb97a6424",
+      "width": 159,
+      "height": 389,
+      "displayPixelsReviewed": true,
+      "observations": "Expansion endpoint retains category position, shows the expanded arrow and its child below. Surrounding wrapped names/descriptions remain readable; no black/blank region is visible in this static frame."
+    },
+    {
+      "pathCase": "ordinary",
+      "artifactId": 11679136698,
+      "member": "feedback/overflow-1024-collapse-0-last.bmp",
+      "bytes": 277986,
+      "sha256": "558e155b54d73b610d8477d6d7901141e730cac84016e3b4c11cd06dedaf52ba",
+      "width": 159,
+      "height": 437,
+      "displayPixelsReviewed": true,
+      "observations": "Collapse endpoint retains selected category at the same visible vertical position as the corresponding expansion endpoint. Closed arrow and following category are visible; wrapped surrounding text remains within the pane and no black/blank region is visible in this static frame."
+    },
+    {
+      "pathCase": "ordinary",
+      "artifactId": 11679136698,
+      "member": "feedback/overflow-1024-expand-0-last.bmp",
+      "bytes": 277986,
+      "sha256": "3ff2aa3e777f61c6fba95223c216b134645560be6b5d04b00c68886755d16e49",
+      "width": 159,
+      "height": 437,
+      "displayPixelsReviewed": true,
+      "observations": "Expansion endpoint retains category position, shows the expanded arrow and its child below. Surrounding wrapped names/descriptions remain readable; no black/blank region is visible in this static frame."
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifactId": 11679456290,
+      "member": "feedback/modal-activation-before.bmp",
+      "bytes": 2981942,
+      "sha256": "02dc534786c511c1aa1c7cda7d7a0a2adae2fbb203b0750a292e2c97e964e53a",
+      "width": 1024,
+      "height": 728,
+      "displayPixelsReviewed": true,
+      "observations": "HostedComputeAgent console visibly overlaps the application after the Samples modal closes. The application caption is exposed above the console. This is setup-state evidence, not an application rendering-failure image."
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifactId": 11679456290,
+      "member": "feedback/modal-activation-after.bmp",
+      "bytes": 2981942,
+      "sha256": "8a6da4456549089036c8ebdcc0973088ba5512ad58bf41fb9e52df40f715a608",
+      "width": 1024,
+      "height": 728,
+      "displayPixelsReviewed": true,
+      "observations": "Application is visibly active and unobstructed after caption activation; the category list is populated. This static image supports the separately recorded actual owned-caption click and foreground transition."
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifactId": 11679456290,
+      "member": "feedback/overflow-scrolled-960.bmp",
+      "bytes": 2611254,
+      "sha256": "11c0db03da61ca308390fe0ec0a645b9a914cd3bd37da83986e031adfc26967b",
+      "width": 960,
+      "height": 680,
+      "displayPixelsReviewed": true,
+      "observations": "960-width desktop has a populated scrolled tools pane, wrapped bold names and regular descriptions, a visible parent scrollbar and selected expanded category retained low in the viewport. No blank pane, central-panel overlap or duplicate scrollbar is visible. Background console at 960 width is outside application bounds."
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifactId": 11679456290,
+      "member": "feedback/overflow-scrolled-1024.bmp",
+      "bytes": 2981942,
+      "sha256": "320140290e362a8177b21f2fbbcafdbf78c06a7008e6840414b4d53ee2f7c7c8",
+      "width": 1024,
+      "height": 728,
+      "displayPixelsReviewed": true,
+      "observations": "1024-width desktop has a populated scrolled tools pane, wrapped bold names and regular descriptions, a visible parent scrollbar and selected expanded category retained low in the viewport. No blank pane, central-panel overlap or duplicate scrollbar is visible. Background console at 960 width is outside application bounds."
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifactId": 11679456290,
+      "member": "feedback/overflow-960-collapse-0-last.bmp",
+      "bytes": 247458,
+      "sha256": "6a4e703ed3d42c8205c550918019270e940672c35a3565f3f4cd0bde093b2643",
+      "width": 159,
+      "height": 389,
+      "displayPixelsReviewed": true,
+      "observations": "Collapse endpoint retains selected category at the same visible vertical position as the corresponding expansion endpoint. Closed arrow and following category are visible; wrapped surrounding text remains within the pane and no black/blank region is visible in this static frame."
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifactId": 11679456290,
+      "member": "feedback/overflow-960-expand-0-last.bmp",
+      "bytes": 247458,
+      "sha256": "b756af4d2376e6a306dc0057587e064beaed361c99ad704e8dc312dfb97a6424",
+      "width": 159,
+      "height": 389,
+      "displayPixelsReviewed": true,
+      "observations": "Expansion endpoint retains category position, shows the expanded arrow and its child below. Surrounding wrapped names/descriptions remain readable; no black/blank region is visible in this static frame."
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifactId": 11679456290,
+      "member": "feedback/overflow-1024-collapse-0-last.bmp",
+      "bytes": 277986,
+      "sha256": "558e155b54d73b610d8477d6d7901141e730cac84016e3b4c11cd06dedaf52ba",
+      "width": 159,
+      "height": 437,
+      "displayPixelsReviewed": true,
+      "observations": "Collapse endpoint retains selected category at the same visible vertical position as the corresponding expansion endpoint. Closed arrow and following category are visible; wrapped surrounding text remains within the pane and no black/blank region is visible in this static frame."
+    },
+    {
+      "pathCase": "path with spaces",
+      "artifactId": 11679456290,
+      "member": "feedback/overflow-1024-expand-0-last.bmp",
+      "bytes": 277986,
+      "sha256": "3ff2aa3e777f61c6fba95223c216b134645560be6b5d04b00c68886755d16e49",
+      "width": 159,
+      "height": 437,
+      "displayPixelsReviewed": true,
+      "observations": "Expansion endpoint retains category position, shows the expanded arrow and its child below. Surrounding wrapped names/descriptions remain readable; no black/blank region is visible in this static frame."
+    }
+  ]
+}

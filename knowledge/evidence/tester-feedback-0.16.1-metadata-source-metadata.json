@@ -1,0 +1,51 @@
+{
+  "file": "native-workbench-0.16.1-source.zip",
+  "bytes": 48270849,
+  "sha256": "0accfb48b8b7b3193b4c72e76c45c404db7979d877ce0805d2687d5a849fe1f1",
+  "packCompanions": [
+    {
+      "id": "bowtie2",
+      "version": "0.5.3",
+      "manifestSha256": "cdaa52bde3dec022e6716d4fc6b6e78481982f1d6491b5cd21ff4d64d33cec32",
+      "file": "native-workbench-pack-bowtie2-0.5.3.zip"
+    },
+    {
+      "id": "hisat2",
+      "version": "0.5.3",
+      "manifestSha256": "06f912deb5926b00a8ca269138b4b3822bb4b3e36d4956e30ca7793655052967",
+      "file": "native-workbench-pack-hisat2-0.5.3.zip"
+    },
+    {
+      "id": "lofreq",
+      "version": "0.5.3",
+      "manifestSha256": "4a00d450461cb434e04ddd377b901f73f9027e27a38f947238b6b18e9f5d862e",
+      "file": "native-workbench-pack-lofreq-0.5.3.zip"
+    },
+    {
+      "id": "muscle",
+      "version": "0.5.2",
+      "manifestSha256": "085273422c7f26af77d23643efa961f1fb6ecbdee301109af67ba551f41b82c4",
+      "file": "native-workbench-pack-muscle-0.5.2.zip"
+    },
+    {
+      "id": "mutect2",
+      "version": "0.5.4",
+      "manifestSha256": "bef9c8ee3b35b3b4ead54ed359a019d6592933e5ee84a05e449d014891f7ab3e",
+      "file": "native-workbench-pack-mutect2-0.5.4.zip"
+    },
+    {
+      "id": "vardict",
+      "version": "0.5.3",
+      "manifestSha256": "f43b5dfa5a7ba9a8a476c956499f67576922d171c00eb63ce36cf25e28caf482",
+      "file": "native-workbench-pack-vardict-0.5.3.zip"
+    },
+    {
+      "id": "vsearch",
+      "version": "0.5.2",
+      "manifestSha256": "2971ca612558983b23a259c4e2416ddbc129dbff9fdfeac5d2bbaa17a3a652d8",
+      "file": "native-workbench-pack-vsearch-0.5.2.zip"
+    }
+  ],
+  "legacySourceSha256": "5dac9add19436b336cba483a0f915e39aafed383282c2a019a0dbd3cc3c8668e",
+  "legacySourceAliases": 175
+}

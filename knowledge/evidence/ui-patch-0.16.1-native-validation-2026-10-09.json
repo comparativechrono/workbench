@@ -1,0 +1,1340 @@
+{
+  "schema": 1,
+  "recordedOn": "2026-10-09",
+  "kind": "exact candidate native validation",
+  "appVersion": "0.16.1",
+  "sourceCommit": "8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+  "initialGateCommit": "8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+  "runId": 37988570028,
+  "runConclusion": "success",
+  "starterSha256": "7dfed53de2279f51deaea405dbfd29b36cddb733e5a20c43b3112f27a7728a8e",
+  "paths": {
+    "ordinary": {
+      "evidenceArtifact": {
+        "id": 11643758770,
+        "url": "https://github.com/comparativechrono/workbench/actions/runs/37988570028/artifacts/11643758770",
+        "sha256": "38ded299a4b1c0dc69d191b699d30965c0ee2bd178430679b658713997dace14"
+      },
+      "scopes": {
+        "patch": {
+          "passed": 19,
+          "failed": 0,
+          "skipped": 0,
+          "reportSha256": "75a258b06667d078d3b449faae63f3d3043417fdab2cc0b1ac6d2e32f3207bac",
+          "rawReportArtifactPath": "patch/native-ui-patch.json",
+          "startupBounds": {
+            "fresh": {
+              "windowBounds": [
+                0,
+                0,
+                1024,
+                728
+              ],
+              "workArea": [
+                0,
+                0,
+                1024,
+                728
+              ],
+              "capturedBeforeDriverResize": true,
+              "reopenedAfterFixture": [
+                0,
+                0,
+                1024,
+                728
+              ]
+            },
+            "upgraded": {
+              "windowBounds": [
+                0,
+                0,
+                1024,
+                728
+              ],
+              "workArea": [
+                0,
+                0,
+                1024,
+                728
+              ],
+              "capturedBeforeDriverResize": true
+            }
+          },
+          "startupSetup": {
+            "fresh": {
+              "observed": true,
+              "starterSelected": true,
+              "dismissed": true,
+              "queuedInstalls": 0,
+              "unchangedPackFiles": 186
+            },
+            "upgraded": {
+              "observed": false
+            }
+          },
+          "resultsKeyboard": {
+            "fresh": {
+              "empty": {
+                "query": "patch-no-matching-result",
+                "resultCount": 0,
+                "searchFocusRetention": {
+                  "controlId": 1502,
+                  "samples": 117,
+                  "durationSeconds": 2.414535899999919,
+                  "focusRetained": true,
+                  "enabledThroughoutSamples": true,
+                  "inputOrRefocusDuringObservation": false,
+                  "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+                },
+                "beforeEscape": {
+                  "foregroundWindow": 459394,
+                  "resultsWindow": 459394,
+                  "focusWindow": 852128,
+                  "focusControlId": 1501,
+                  "focusClass": "Edit",
+                  "focusEnabled": true,
+                  "focusInsideResults": true
+                },
+                "pointerInterventionAfterOpen": false,
+                "closedImmediatelyAfterSearch": true,
+                "afterEscape": {
+                  "foregroundWindow": 917832,
+                  "resultsWindow": 459394,
+                  "focusWindow": 917832,
+                  "focusControlId": 40608,
+                  "focusClass": "WorkbenchNativeWorkspace051_4434aa05187100891e52b73ff1897ddbb297eddf059790beaf93305b1f3805fc",
+                  "focusEnabled": true,
+                  "focusInsideResults": false
+                }
+              },
+              "populated": {
+                "query": "SAMtools",
+                "resultCount": 1,
+                "searchFocusRetention": {
+                  "controlId": 1502,
+                  "samples": 117,
+                  "durationSeconds": 2.413882100000137,
+                  "focusRetained": true,
+                  "enabledThroughoutSamples": true,
+                  "inputOrRefocusDuringObservation": false,
+                  "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+                },
+                "beforeEscape": {
+                  "foregroundWindow": 524930,
+                  "resultsWindow": 524930,
+                  "focusWindow": 524936,
+                  "focusControlId": 1501,
+                  "focusClass": "Edit",
+                  "focusEnabled": true,
+                  "focusInsideResults": true
+                },
+                "pointerInterventionAfterOpen": false,
+                "closedImmediatelyAfterSearch": true,
+                "afterEscape": {
+                  "foregroundWindow": 917832,
+                  "resultsWindow": 524930,
+                  "focusWindow": 917832,
+                  "focusControlId": 40608,
+                  "focusClass": "WorkbenchNativeWorkspace051_4434aa05187100891e52b73ff1897ddbb297eddf059790beaf93305b1f3805fc",
+                  "focusEnabled": true,
+                  "focusInsideResults": false
+                }
+              }
+            },
+            "upgraded": {
+              "empty": {
+                "query": "patch-no-matching-result",
+                "resultCount": 0,
+                "searchFocusRetention": {
+                  "controlId": 1502,
+                  "samples": 117,
+                  "durationSeconds": 2.4134619000001294,
+                  "focusRetained": true,
+                  "enabledThroughoutSamples": true,
+                  "inputOrRefocusDuringObservation": false,
+                  "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+                },
+                "beforeEscape": {
+                  "foregroundWindow": 590466,
+                  "resultsWindow": 590466,
+                  "focusWindow": 917696,
+                  "focusControlId": 1501,
+                  "focusClass": "Edit",
+                  "focusEnabled": true,
+                  "focusInsideResults": true
+                },
+                "pointerInterventionAfterOpen": false,
+                "closedImmediatelyAfterSearch": true,
+                "afterEscape": {
+                  "foregroundWindow": 721058,
+                  "resultsWindow": 590466,
+                  "focusWindow": 721058,
+                  "focusControlId": 40608,
+                  "focusClass": "WorkbenchNativeWorkspace051_95b3c5b1d1c89dd184a864f75907a44534fdfe766c8e340e841adb1b7277ec4e",
+                  "focusEnabled": true,
+                  "focusInsideResults": false
+                }
+              },
+              "populated": {
+                "query": "SAMtools",
+                "resultCount": 1,
+                "searchFocusRetention": {
+                  "controlId": 1502,
+                  "samples": 117,
+                  "durationSeconds": 2.4129320000001826,
+                  "focusRetained": true,
+                  "enabledThroughoutSamples": true,
+                  "inputOrRefocusDuringObservation": false,
+                  "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+                },
+                "beforeEscape": {
+                  "foregroundWindow": 656002,
+                  "resultsWindow": 656002,
+                  "focusWindow": 787130,
+                  "focusControlId": 1501,
+                  "focusClass": "Edit",
+                  "focusEnabled": true,
+                  "focusInsideResults": true
+                },
+                "pointerInterventionAfterOpen": false,
+                "closedImmediatelyAfterSearch": true,
+                "afterEscape": {
+                  "foregroundWindow": 721058,
+                  "resultsWindow": 656002,
+                  "focusWindow": 721058,
+                  "focusControlId": 40608,
+                  "focusClass": "WorkbenchNativeWorkspace051_95b3c5b1d1c89dd184a864f75907a44534fdfe766c8e340e841adb1b7277ec4e",
+                  "focusEnabled": true,
+                  "focusInsideResults": false
+                }
+              }
+            }
+          },
+          "libraryFocusRetention": {
+            "fresh": {
+              "search": {
+                "controlId": 102,
+                "samples": 117,
+                "durationSeconds": 2.4131305999999313,
+                "focusRetained": true,
+                "enabledThroughoutSamples": true,
+                "inputOrRefocusDuringObservation": false,
+                "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+              },
+              "afterTab": {
+                "controlId": 104,
+                "samples": 117,
+                "durationSeconds": 2.4138389999998253,
+                "focusRetained": true,
+                "enabledThroughoutSamples": true,
+                "inputOrRefocusDuringObservation": false,
+                "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+              }
+            },
+            "upgraded": {
+              "search": {
+                "controlId": 102,
+                "samples": 117,
+                "durationSeconds": 2.4130058999999164,
+                "focusRetained": true,
+                "enabledThroughoutSamples": true,
+                "inputOrRefocusDuringObservation": false,
+                "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+              },
+              "afterTab": {
+                "controlId": 104,
+                "samples": 117,
+                "durationSeconds": 2.414170000000013,
+                "focusRetained": true,
+                "enabledThroughoutSamples": true,
+                "inputOrRefocusDuringObservation": false,
+                "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+              }
+            }
+          },
+          "coreFilesVerified": 87,
+          "preservedFiles": 208,
+          "preservation": {
+            "existingFiles": 208,
+            "changes": {},
+            "additions": {
+              "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+            }
+          },
+          "archiveFilesVerified": {
+            "starter": 274,
+            "update": 51,
+            "baseline": 274
+          },
+          "transaction": {
+            "status": "installed",
+            "version": "0.16.1",
+            "migration": false,
+            "files_verified": 87,
+            "removed_files": 0,
+            "backup": "D:\\a\\_temp\\ordinary\\patch-gate-work\\baseline\\native-workbench\\updates\\core-0.16.1-20261009-204208-0598d749\\backup",
+            "packs_changed": false,
+            "source_and_evidence_preserved": true
+          },
+          "observedDpi": [
+            96
+          ]
+        },
+        "curated": {
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0,
+          "reportSha256": "12ec7261baa5e9565921880c2621bfc8d52981b900fa82e0dc72bf16bbef4dff",
+          "rawReportArtifactPath": "curated/native-curated.json",
+          "checks": [
+            "Offline catalogue exposes both synthetic workflows, known answers and available exact 0.4.0 dependency pins beside align 0.4.1.",
+            "alignment-qc: editable exact-pin graph executes through native tools with known synthetic alignment truth and hash-bound result measurements.",
+            "variant-calling: editable exact-pin graph executes through native tools with known synthetic alignment truth and hash-bound result measurements.",
+            "Result search filters recorded names case-insensitively, explicit sample and tool metadata; an unmatched query returns no records.",
+            "A deliberately changed result file is reported unavailable and contributes no trusted metrics; restoring its original bytes restores the summary.",
+            "A fresh private application process restores both results and reconstructs the same scientific summaries from persisted evidence.",
+            "Missing align 0.4.0 disables both curated workflows with exact-version guidance and preserves the draft; installed align 0.4.1 is never substituted.",
+            "An explicitly selected missing read path fails preparation, retains its actual cause and submitted analysis name, and supplies actionable input guidance without scientific metrics or a QC verdict.",
+            "Native curated window lists both workflows, shows exact pins and synthetic expected answers, and loads an editable workflow.",
+            "A fresh native desktop finds the named failed preparation and displays its recorded missing-file error, failed execution state and explicit corrective input guidance.",
+            "Native results search selects the recorded variant run, renders sample/tool versions and scientific metrics, and disables View for an empty result set."
+          ]
+        },
+        "workspace": {
+          "passed": 32,
+          "failed": 0,
+          "skipped": 0,
+          "reportSha256": "8778b6553e9ff5d05e29d1f3e7b5e953ed08516583641cd6c364f57bcb50f0df",
+          "rawReportArtifactPath": "workspace/native-workspace.json",
+          "checks": [
+            "Default standalone mode",
+            "Independent preserved tool and workflow graphs",
+            "Compatible graph edge",
+            "Bounded native compatibility preview",
+            "Atomic cycle and semantic type rejection",
+            "Per-tool settings and input retention",
+            "Workflow additions leave ports unbound without automatic source boxes",
+            "Explicit reusable input owns one file editor and connects without duplication",
+            "Native minimap2 alignment chains to SAMtools coordinate-sorted binary BAM using two explicit inputs",
+            "All 202 synthetic mapped proper-pair records, mate flags, sequence, quality and typed tags survive SAM-to-BAM conversion",
+            "Manage tools loads installed packs on its first click without a modal error and reopens cleanly",
+            "First click opens a previously selected workflow-library row in empty tool mode",
+            "Single-click standalone tool form",
+            "Separate queued native double-click notification opens its hit row after selection clears",
+            "Three independent panes with general settings",
+            "Actual mouse drag from tool list onto workflow canvas twice",
+            "Actual compatible output-to-input mouse connection",
+            "Canvas selection displays tool options on right",
+            "General settings remain available in workflow mode",
+            "Standalone input and browsing folder survive workflow mode",
+            "Mode-specific status guidance replaces the previous workflow drag hint",
+            "Workflow graph/selection survives mode switching",
+            "Normal/minimum observed pane separation",
+            "Real repeated option scrolling leaves static text identical to a clean repaint",
+            "Blank-canvas mouse drag pans and reverses the viewport",
+            "Zoom buttons decrease, increase and reset scale; scaled card hit testing selects both tools",
+            "Injected one-unit native Ctrl-wheel deltas accumulate into visible zoom",
+            "Editing a tool immediately before Add input preserves its draft through the nested modal loop",
+            "Native Add input creates one independently editable reference file slot",
+            "Actual mouse connection from an explicit input output socket to a tool input without duplicate file fields",
+            "Header hover close deletes a tool and Undo restores its selection",
+            "Header hover close deletes an explicit input and Undo restores its files"
+          ]
+        },
+        "reference-management": {
+          "passed": 10,
+          "failed": 0,
+          "skipped": 0,
+          "reportSha256": "8364be1a7d1830ac53ea29fdb4ce973f975c6a17df0a822924d19dedc693983a",
+          "rawReportArtifactPath": "reference-management/native-reference-management.json",
+          "checks": [
+            "Exact packaged transfer code pauses after a production chunk, publishes no incomplete record, reopens and rehashes its checkpoint, truncates an uncheckpointed crash suffix and resumes with exact Range/If-Range into independently verified complete bytes; deterministic provider fixture only.",
+            "Malformed Content-Range and changed entity validators are never appended; deterministic responses force a fresh full request whose final bytes still match the independently pinned fixture.",
+            "Changed checkpointed compressed bytes and malformed checkpoint JSON fail closed; explicit discard removes only pending state and preserves ready bundles and unrelated user content.",
+            "Socket-denied exact private host reviews without copying; stale/replayed review tokens and changed reviewed files fail closed; explicit confirmation copies FASTA and gzip GTF with independently checked source/expanded hashes and clearly user-declared provenance.",
+            "Socket-denied typed selection rejects GTF for a FASTA input; reviewed relocation copies and verifies the library while retaining old paths/receipts and exact queued companions. The previously frozen old-path plan then executes native SAMtools with the correct FASTA dictionary and unchanged reference provenance in methods, plan, results and CWL.",
+            "A fresh socket-denied private host reopens the relocated local library and offers its verified FASTA to a compatible native tool without contacting either provider.",
+            "Native References provider selector offers labelled Ensembl archive and NCBI lookup; ordinary control interaction discovers the exact versioned RefSeq assembly and its three products with assembly/provider details visible.",
+            "Actual native Downloads lists durable paused live Ensembl transfers; Pause retains one resumed transfer, explicit Resume completes the independently pinned genome, and confirmed Discard removes the other partial transfer without changing ready references.",
+            "Native Import local edits explicit roles/metadata and previews hashes without copying; editing metadata invalidates confirmation even after a real close/reopen server refresh, and a fresh explicit preview includes the edited declaration. Closing review imports nothing; confirmation then creates one verified bundle. Local library refresh lists both imported products and offers/uses its FASTA in a compatible standalone SAMtools input, with the exact bound path independently read back from the native inspector.",
+            "Native Relocate library chooses an existing directory, presents exact destination/file hashes and original-retention notice, and explicit Copy and switch moves the active library only after all copies verify."
+          ]
+        },
+        "results": {
+          "passed": 9,
+          "failed": 0,
+          "skipped": 0,
+          "reportSha256": "36db4b6bd8293287d4541330443076a409498325e56b497e49382c8619865321",
+          "rawReportArtifactPath": "results/native-results.json",
+          "checks": [
+            "Exact packaged integrity check and all five starter scientific operations execute without failures or skips.",
+            "Results include a packed CWL v1.2 workflow tied to the frozen plan, real completion record and final export hash.",
+            "CWL source hashes, file roles, scientific parameters, complete output set, pack pins and reference metadata match frozen native provenance.",
+            "Every exported command/copy/binary-pipe definition expands to the actual native bridge argument record.",
+            "All five embedded CWL runners execute independently with packaged private Python and pinned native pack programs.",
+            "Independent CWL replay preserves 202 proper-pair SAM/BAM records and known starter:1351 G>A homozygous SNP truth.",
+            "Saved scientific DAG includes every actual dependency and avoids all unrelated cards with padding, including skipped ranks.",
+            "Packaged executable contains all nine SVG-derived icon resolutions; actual large/small class icons match that resource and differ from Windows default.",
+            "Real native canvas accepts compatible forward and backward connections across manually positioned cards and retains normal/zoomed captures."
+          ]
+        },
+        "scroll": {
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "reportSha256": "420daf42b17b2e216ef1a25807dd487e2eef5348548e7d2208901595dadb2163",
+          "rawReportArtifactPath": "scroll/native-scroll.json",
+          "panels": [
+            {
+              "panel": "standalone-options",
+              "frames": 320,
+              "unexpectedFrames": 0,
+              "endpointTransitions": null,
+              "precisionWheel": [
+                {
+                  "route": "panel",
+                  "case": "negative-one-unit",
+                  "messages": 120,
+                  "expectedOffset": 48,
+                  "actualOffset": 48,
+                  "passed": true
+                },
+                {
+                  "route": "panel",
+                  "case": "positive-one-unit",
+                  "messages": 120,
+                  "expectedOffset": 0,
+                  "actualOffset": 0,
+                  "passed": true
+                },
+                {
+                  "route": "panel",
+                  "case": "opposite-fractions",
+                  "messages": 120,
+                  "expectedOffset": 0,
+                  "actualOffset": 0,
+                  "passed": true
+                },
+                {
+                  "route": "child-edit",
+                  "case": "negative-one-unit",
+                  "messages": 120,
+                  "expectedOffset": 48,
+                  "actualOffset": 48,
+                  "passed": true
+                },
+                {
+                  "route": "child-edit",
+                  "case": "positive-one-unit",
+                  "messages": 120,
+                  "expectedOffset": 0,
+                  "actualOffset": 0,
+                  "passed": true
+                },
+                {
+                  "route": "child-edit",
+                  "case": "opposite-fractions",
+                  "messages": 120,
+                  "expectedOffset": 0,
+                  "actualOffset": 0,
+                  "passed": true
+                }
+              ],
+              "captures": [
+                {
+                  "path": "standalone-options-clean-top.bmp",
+                  "sha256": "fe6942c316aebf85f58a4e9876084793048fa4ce78589ec14a53fd84bda2510a",
+                  "width": 468,
+                  "height": 441
+                },
+                {
+                  "path": "standalone-options-clean-notch.bmp",
+                  "sha256": "d3847341a04f729fa743ed7baa583991e337ce3386a5e5fecf1c0ec59513784f",
+                  "width": 468,
+                  "height": 441
+                },
+                {
+                  "path": "standalone-options-clean-bottom.bmp",
+                  "sha256": "10fa9a69595d31ae81bb65b1408790077ddcc72db9beaed7c171de7eb98451e3",
+                  "width": 468,
+                  "height": 441
+                }
+              ],
+              "timingLimit": "DwmFlush does not flush the target process or entire session; finite desktop samples cannot exclude flashes between samples."
+            },
+            {
+              "panel": "general-settings",
+              "frames": 320,
+              "unexpectedFrames": 0,
+              "endpointTransitions": null,
+              "precisionWheel": [
+                {
+                  "route": "panel",
+                  "case": "negative-one-unit",
+                  "messages": 120,
+                  "expectedOffset": 48,
+                  "actualOffset": 48,
+                  "passed": true
+                },
+                {
+                  "route": "panel",
+                  "case": "positive-one-unit",
+                  "messages": 120,
+                  "expectedOffset": 0,
+                  "actualOffset": 0,
+                  "passed": true
+                },
+                {
+                  "route": "panel",
+                  "case": "opposite-fractions",
+                  "messages": 120,
+                  "expectedOffset": 0,
+                  "actualOffset": 0,
+                  "passed": true
+                },
+                {
+                  "route": "child-edit",
+                  "case": "negative-one-unit",
+                  "messages": 120,
+                  "expectedOffset": 48,
+                  "actualOffset": 48,
+                  "passed": true
+                },
+                {
+                  "route": "child-edit",
+                  "case": "positive-one-unit",
+                  "messages": 120,
+                  "expectedOffset": 0,
+                  "actualOffset": 0,
+                  "passed": true
+                },
+                {
+                  "route": "child-edit",
+                  "case": "opposite-fractions",
+                  "messages": 120,
+                  "expectedOffset": 0,
+                  "actualOffset": 0,
+                  "passed": true
+                }
+              ],
+              "captures": [
+                {
+                  "path": "general-settings-clean-top.bmp",
+                  "sha256": "3d860da6f8fb7920d13159d28f0fa4ceccaa1b42f06ac05906ab0c0540d87f20",
+                  "width": 292,
+                  "height": 441
+                },
+                {
+                  "path": "general-settings-clean-notch.bmp",
+                  "sha256": "e53114e0c4db24b470096d569598fa131fa69e0eb1ae6e4ba627f1138de02c82",
+                  "width": 292,
+                  "height": 441
+                },
+                {
+                  "path": "general-settings-clean-bottom.bmp",
+                  "sha256": "4fc405cbb99cf44c9e393071825132c8f7286b4536d3cbc7436bec98840cc0df",
+                  "width": 292,
+                  "height": 441
+                }
+              ],
+              "timingLimit": "DwmFlush does not flush the target process or entire session; finite desktop samples cannot exclude flashes between samples."
+            },
+            {
+              "panel": "workflow-options",
+              "frames": 320,
+              "unexpectedFrames": 0,
+              "endpointTransitions": null,
+              "precisionWheel": [
+                {
+                  "route": "panel",
+                  "case": "negative-one-unit",
+                  "messages": 120,
+                  "expectedOffset": 48,
+                  "actualOffset": 48,
+                  "passed": true
+                },
+                {
+                  "route": "panel",
+                  "case": "positive-one-unit",
+                  "messages": 120,
+                  "expectedOffset": 0,
+                  "actualOffset": 0,
+                  "passed": true
+                },
+                {
+                  "route": "panel",
+                  "case": "opposite-fractions",
+                  "messages": 120,
+                  "expectedOffset": 0,
+                  "actualOffset": 0,
+                  "passed": true
+                },
+                {
+                  "route": "child-edit",
+                  "case": "negative-one-unit",
+                  "messages": 120,
+                  "expectedOffset": 48,
+                  "actualOffset": 48,
+                  "passed": true
+                },
+                {
+                  "route": "child-edit",
+                  "case": "positive-one-unit",
+                  "messages": 120,
+                  "expectedOffset": 0,
+                  "actualOffset": 0,
+                  "passed": true
+                },
+                {
+                  "route": "child-edit",
+                  "case": "opposite-fractions",
+                  "messages": 120,
+                  "expectedOffset": 0,
+                  "actualOffset": 0,
+                  "passed": true
+                }
+              ],
+              "captures": [
+                {
+                  "path": "workflow-options-clean-top.bmp",
+                  "sha256": "e202b36a1812542a14433dd719076acf339920f6d5e7f9aa4a2bc371d3128356",
+                  "width": 292,
+                  "height": 441
+                },
+                {
+                  "path": "workflow-options-clean-notch.bmp",
+                  "sha256": "cb81e2cfea8d76f69f7950c777044ec6e8b85e59dbc914d68a8f5af7c57cea2d",
+                  "width": 292,
+                  "height": 441
+                },
+                {
+                  "path": "workflow-options-clean-bottom.bmp",
+                  "sha256": "b3faee9fa876d25503ff58eb4fe55424f5d9530c10a511d30a47ca7d4f2a3734",
+                  "width": 292,
+                  "height": 441
+                }
+              ],
+              "timingLimit": "DwmFlush does not flush the target process or entire session; finite desktop samples cannot exclude flashes between samples."
+            }
+          ],
+          "windowBounds": [
+            0,
+            0,
+            1040,
+            680
+          ],
+          "dpi": 96
+        }
+      },
+      "passed": 84,
+      "failed": 0,
+      "skipped": 0,
+      "captureFiles": 77
+    },
+    "spaces": {
+      "evidenceArtifact": {
+        "id": 11643554897,
+        "url": "https://github.com/comparativechrono/workbench/actions/runs/37988570028/artifacts/11643554897",
+        "sha256": "98f3299b3b9fc57ed98d4d5837bb9ea45d46bf6d894e0c986a804205e7466a15"
+      },
+      "scopes": {
+        "patch": {
+          "passed": 19,
+          "failed": 0,
+          "skipped": 0,
+          "reportSha256": "8a68db3567081fbe7fbf43d7ada03a9fbcf979b4bbe844394a24cef87e884bd7",
+          "rawReportArtifactPath": "patch/native-ui-patch.json",
+          "startupBounds": {
+            "fresh": {
+              "windowBounds": [
+                0,
+                0,
+                1024,
+                728
+              ],
+              "workArea": [
+                0,
+                0,
+                1024,
+                728
+              ],
+              "capturedBeforeDriverResize": true,
+              "reopenedAfterFixture": [
+                0,
+                0,
+                1024,
+                728
+              ]
+            },
+            "upgraded": {
+              "windowBounds": [
+                0,
+                0,
+                1024,
+                728
+              ],
+              "workArea": [
+                0,
+                0,
+                1024,
+                728
+              ],
+              "capturedBeforeDriverResize": true
+            }
+          },
+          "startupSetup": {
+            "fresh": {
+              "observed": true,
+              "starterSelected": true,
+              "dismissed": true,
+              "queuedInstalls": 0,
+              "unchangedPackFiles": 186
+            },
+            "upgraded": {
+              "observed": false
+            }
+          },
+          "resultsKeyboard": {
+            "fresh": {
+              "empty": {
+                "query": "patch-no-matching-result",
+                "resultCount": 0,
+                "searchFocusRetention": {
+                  "controlId": 1502,
+                  "samples": 117,
+                  "durationSeconds": 2.416374300000001,
+                  "focusRetained": true,
+                  "enabledThroughoutSamples": true,
+                  "inputOrRefocusDuringObservation": false,
+                  "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+                },
+                "beforeEscape": {
+                  "foregroundWindow": 590522,
+                  "resultsWindow": 590522,
+                  "focusWindow": 917994,
+                  "focusControlId": 1501,
+                  "focusClass": "Edit",
+                  "focusEnabled": true,
+                  "focusInsideResults": true
+                },
+                "pointerInterventionAfterOpen": false,
+                "closedImmediatelyAfterSearch": true,
+                "afterEscape": {
+                  "foregroundWindow": 786838,
+                  "resultsWindow": 590522,
+                  "focusWindow": 786838,
+                  "focusControlId": 104576,
+                  "focusClass": "WorkbenchNativeWorkspace051_37bf485e8c3359a8dd6e11b7ada797fd7f25d993f65dcbb575aea0bdbbd38235",
+                  "focusEnabled": true,
+                  "focusInsideResults": false
+                }
+              },
+              "populated": {
+                "query": "SAMtools",
+                "resultCount": 1,
+                "searchFocusRetention": {
+                  "controlId": 1502,
+                  "samples": 117,
+                  "durationSeconds": 2.417807099999976,
+                  "focusRetained": true,
+                  "enabledThroughoutSamples": true,
+                  "inputOrRefocusDuringObservation": false,
+                  "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+                },
+                "beforeEscape": {
+                  "foregroundWindow": 656058,
+                  "resultsWindow": 656058,
+                  "focusWindow": 590454,
+                  "focusControlId": 1501,
+                  "focusClass": "Edit",
+                  "focusEnabled": true,
+                  "focusInsideResults": true
+                },
+                "pointerInterventionAfterOpen": false,
+                "closedImmediatelyAfterSearch": true,
+                "afterEscape": {
+                  "foregroundWindow": 786838,
+                  "resultsWindow": 656058,
+                  "focusWindow": 786838,
+                  "focusControlId": 104576,
+                  "focusClass": "WorkbenchNativeWorkspace051_37bf485e8c3359a8dd6e11b7ada797fd7f25d993f65dcbb575aea0bdbbd38235",
+                  "focusEnabled": true,
+                  "focusInsideResults": false
+                }
+              }
+            },
+            "upgraded": {
+              "empty": {
+                "query": "patch-no-matching-result",
+                "resultCount": 0,
+                "searchFocusRetention": {
+                  "controlId": 1502,
+                  "samples": 117,
+                  "durationSeconds": 2.4177595000000167,
+                  "focusRetained": true,
+                  "enabledThroughoutSamples": true,
+                  "inputOrRefocusDuringObservation": false,
+                  "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+                },
+                "beforeEscape": {
+                  "foregroundWindow": 721594,
+                  "resultsWindow": 721594,
+                  "focusWindow": 852656,
+                  "focusControlId": 1501,
+                  "focusClass": "Edit",
+                  "focusEnabled": true,
+                  "focusInsideResults": true
+                },
+                "pointerInterventionAfterOpen": false,
+                "closedImmediatelyAfterSearch": true,
+                "afterEscape": {
+                  "foregroundWindow": 590494,
+                  "resultsWindow": 721594,
+                  "focusWindow": 590494,
+                  "focusControlId": 127712,
+                  "focusClass": "WorkbenchNativeWorkspace051_14efac8172a89dfa543f7d4fb8036866cf00dd887fbe2855bd78ffeedf244391",
+                  "focusEnabled": true,
+                  "focusInsideResults": false
+                }
+              },
+              "populated": {
+                "query": "SAMtools",
+                "resultCount": 1,
+                "searchFocusRetention": {
+                  "controlId": 1502,
+                  "samples": 117,
+                  "durationSeconds": 2.417945599999996,
+                  "focusRetained": true,
+                  "enabledThroughoutSamples": true,
+                  "inputOrRefocusDuringObservation": false,
+                  "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+                },
+                "beforeEscape": {
+                  "foregroundWindow": 787130,
+                  "resultsWindow": 787130,
+                  "focusWindow": 656024,
+                  "focusControlId": 1501,
+                  "focusClass": "Edit",
+                  "focusEnabled": true,
+                  "focusInsideResults": true
+                },
+                "pointerInterventionAfterOpen": false,
+                "closedImmediatelyAfterSearch": true,
+                "afterEscape": {
+                  "foregroundWindow": 590494,
+                  "resultsWindow": 787130,
+                  "focusWindow": 590494,
+                  "focusControlId": 127712,
+                  "focusClass": "WorkbenchNativeWorkspace051_14efac8172a89dfa543f7d4fb8036866cf00dd887fbe2855bd78ffeedf244391",
+                  "focusEnabled": true,
+                  "focusInsideResults": false
+                }
+              }
+            }
+          },
+          "libraryFocusRetention": {
+            "fresh": {
+              "search": {
+                "controlId": 102,
+                "samples": 117,
+                "durationSeconds": 2.4122547000000054,
+                "focusRetained": true,
+                "enabledThroughoutSamples": true,
+                "inputOrRefocusDuringObservation": false,
+                "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+              },
+              "afterTab": {
+                "controlId": 104,
+                "samples": 117,
+                "durationSeconds": 2.4161882999999875,
+                "focusRetained": true,
+                "enabledThroughoutSamples": true,
+                "inputOrRefocusDuringObservation": false,
+                "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+              }
+            },
+            "upgraded": {
+              "search": {
+                "controlId": 102,
+                "samples": 117,
+                "durationSeconds": 2.4203442000000166,
+                "focusRetained": true,
+                "enabledThroughoutSamples": true,
+                "inputOrRefocusDuringObservation": false,
+                "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+              },
+              "afterTab": {
+                "controlId": 104,
+                "samples": 116,
+                "durationSeconds": 2.4006610000000137,
+                "focusRetained": true,
+                "enabledThroughoutSamples": true,
+                "inputOrRefocusDuringObservation": false,
+                "limit": "Sampled observations across the normal poll interval; exact poll count is not instrumented."
+              }
+            }
+          },
+          "coreFilesVerified": 87,
+          "preservedFiles": 208,
+          "preservation": {
+            "existingFiles": 208,
+            "changes": {},
+            "additions": {
+              "user-data/session.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+            }
+          },
+          "archiveFilesVerified": {
+            "starter": 274,
+            "update": 51,
+            "baseline": 274
+          },
+          "transaction": {
+            "status": "installed",
+            "version": "0.16.1",
+            "migration": false,
+            "files_verified": 87,
+            "removed_files": 0,
+            "backup": "D:\\a\\_temp\\path with spaces\\patch-gate-work\\baseline\\native-workbench\\updates\\core-0.16.1-20261009-204215-3a361752\\backup",
+            "packs_changed": false,
+            "source_and_evidence_preserved": true
+          },
+          "observedDpi": [
+            96
+          ]
+        },
+        "curated": {
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0,
+          "reportSha256": "b13a9c4ab5dee4d3c8e363d4b57bd45027fba7be235d66a9f8e0aa795948c1ee",
+          "rawReportArtifactPath": "curated/native-curated.json",
+          "checks": [
+            "Offline catalogue exposes both synthetic workflows, known answers and available exact 0.4.0 dependency pins beside align 0.4.1.",
+            "alignment-qc: editable exact-pin graph executes through native tools with known synthetic alignment truth and hash-bound result measurements.",
+            "variant-calling: editable exact-pin graph executes through native tools with known synthetic alignment truth and hash-bound result measurements.",
+            "Result search filters recorded names case-insensitively, explicit sample and tool metadata; an unmatched query returns no records.",
+            "A deliberately changed result file is reported unavailable and contributes no trusted metrics; restoring its original bytes restores the summary.",
+            "A fresh private application process restores both results and reconstructs the same scientific summaries from persisted evidence.",
+            "Missing align 0.4.0 disables both curated workflows with exact-version guidance and preserves the draft; installed align 0.4.1 is never substituted.",
+            "An explicitly selected missing read path fails preparation, retains its actual cause and submitted analysis name, and supplies actionable input guidance without scientific metrics or a QC verdict.",
+            "Native curated window lists both workflows, shows exact pins and synthetic expected answers, and loads an editable workflow.",
+            "A fresh native desktop finds the named failed preparation and displays its recorded missing-file error, failed execution state and explicit corrective input guidance.",
+            "Native results search selects the recorded variant run, renders sample/tool versions and scientific metrics, and disables View for an empty result set."
+          ]
+        },
+        "workspace": {
+          "passed": 32,
+          "failed": 0,
+          "skipped": 0,
+          "reportSha256": "88fcaad3affe09fcc7c741300ddba611310f0757bb4c1230dbcbcadc6fc60d1e",
+          "rawReportArtifactPath": "workspace/native-workspace.json",
+          "checks": [
+            "Default standalone mode",
+            "Independent preserved tool and workflow graphs",
+            "Compatible graph edge",
+            "Bounded native compatibility preview",
+            "Atomic cycle and semantic type rejection",
+            "Per-tool settings and input retention",
+            "Workflow additions leave ports unbound without automatic source boxes",
+            "Explicit reusable input owns one file editor and connects without duplication",
+            "Native minimap2 alignment chains to SAMtools coordinate-sorted binary BAM using two explicit inputs",
+            "All 202 synthetic mapped proper-pair records, mate flags, sequence, quality and typed tags survive SAM-to-BAM conversion",
+            "Manage tools loads installed packs on its first click without a modal error and reopens cleanly",
+            "First click opens a previously selected workflow-library row in empty tool mode",
+            "Single-click standalone tool form",
+            "Separate queued native double-click notification opens its hit row after selection clears",
+            "Three independent panes with general settings",
+            "Actual mouse drag from tool list onto workflow canvas twice",
+            "Actual compatible output-to-input mouse connection",
+            "Canvas selection displays tool options on right",
+            "General settings remain available in workflow mode",
+            "Standalone input and browsing folder survive workflow mode",
+            "Mode-specific status guidance replaces the previous workflow drag hint",
+            "Workflow graph/selection survives mode switching",
+            "Normal/minimum observed pane separation",
+            "Real repeated option scrolling leaves static text identical to a clean repaint",
+            "Blank-canvas mouse drag pans and reverses the viewport",
+            "Zoom buttons decrease, increase and reset scale; scaled card hit testing selects both tools",
+            "Injected one-unit native Ctrl-wheel deltas accumulate into visible zoom",
+            "Editing a tool immediately before Add input preserves its draft through the nested modal loop",
+            "Native Add input creates one independently editable reference file slot",
+            "Actual mouse connection from an explicit input output socket to a tool input without duplicate file fields",
+            "Header hover close deletes a tool and Undo restores its selection",
+            "Header hover close deletes an explicit input and Undo restores its files"
+          ]
+        },
+        "reference-management": {
+          "passed": 10,
+          "failed": 0,
+          "skipped": 0,
+          "reportSha256": "4ed5ddab3b0ce9a890dc6ebaf1b14bc5bd1b6573693fb01b4a2042dd1bd82281",
+          "rawReportArtifactPath": "reference-management/native-reference-management.json",
+          "checks": [
+            "Exact packaged transfer code pauses after a production chunk, publishes no incomplete record, reopens and rehashes its checkpoint, truncates an uncheckpointed crash suffix and resumes with exact Range/If-Range into independently verified complete bytes; deterministic provider fixture only.",
+            "Malformed Content-Range and changed entity validators are never appended; deterministic responses force a fresh full request whose final bytes still match the independently pinned fixture.",
+            "Changed checkpointed compressed bytes and malformed checkpoint JSON fail closed; explicit discard removes only pending state and preserves ready bundles and unrelated user content.",
+            "Socket-denied exact private host reviews without copying; stale/replayed review tokens and changed reviewed files fail closed; explicit confirmation copies FASTA and gzip GTF with independently checked source/expanded hashes and clearly user-declared provenance.",
+            "Socket-denied typed selection rejects GTF for a FASTA input; reviewed relocation copies and verifies the library while retaining old paths/receipts and exact queued companions. The previously frozen old-path plan then executes native SAMtools with the correct FASTA dictionary and unchanged reference provenance in methods, plan, results and CWL.",
+            "A fresh socket-denied private host reopens the relocated local library and offers its verified FASTA to a compatible native tool without contacting either provider.",
+            "Native References provider selector offers labelled Ensembl archive and NCBI lookup; ordinary control interaction discovers the exact versioned RefSeq assembly and its three products with assembly/provider details visible.",
+            "Actual native Downloads lists durable paused live Ensembl transfers; Pause retains one resumed transfer, explicit Resume completes the independently pinned genome, and confirmed Discard removes the other partial transfer without changing ready references.",
+            "Native Import local edits explicit roles/metadata and previews hashes without copying; editing metadata invalidates confirmation even after a real close/reopen server refresh, and a fresh explicit preview includes the edited declaration. Closing review imports nothing; confirmation then creates one verified bundle. Local library refresh lists both imported products and offers/uses its FASTA in a compatible standalone SAMtools input, with the exact bound path independently read back from the native inspector.",
+            "Native Relocate library chooses an existing directory, presents exact destination/file hashes and original-retention notice, and explicit Copy and switch moves the active library only after all copies verify."
+          ]
+        },
+        "results": {
+          "passed": 9,
+          "failed": 0,
+          "skipped": 0,
+          "reportSha256": "62ca6c2083c77d2798a0a3b5a2cf0a145b15bc749caf7d15254b05fe69d8bb10",
+          "rawReportArtifactPath": "results/native-results.json",
+          "checks": [
+            "Exact packaged integrity check and all five starter scientific operations execute without failures or skips.",
+            "Results include a packed CWL v1.2 workflow tied to the frozen plan, real completion record and final export hash.",
+            "CWL source hashes, file roles, scientific parameters, complete output set, pack pins and reference metadata match frozen native provenance.",
+            "Every exported command/copy/binary-pipe definition expands to the actual native bridge argument record.",
+            "All five embedded CWL runners execute independently with packaged private Python and pinned native pack programs.",
+            "Independent CWL replay preserves 202 proper-pair SAM/BAM records and known starter:1351 G>A homozygous SNP truth.",
+            "Saved scientific DAG includes every actual dependency and avoids all unrelated cards with padding, including skipped ranks.",
+            "Packaged executable contains all nine SVG-derived icon resolutions; actual large/small class icons match that resource and differ from Windows default.",
+            "Real native canvas accepts compatible forward and backward connections across manually positioned cards and retains normal/zoomed captures."
+          ]
+        },
+        "scroll": {
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "reportSha256": "1b164f6ea329528f82aba1acccfef63f614e3a8fd6d0615a88cb02bacbaedae9",
+          "rawReportArtifactPath": "scroll/native-scroll.json",
+          "panels": [
+            {
+              "panel": "standalone-options",
+              "frames": 320,
+              "unexpectedFrames": 0,
+              "endpointTransitions": null,
+              "precisionWheel": [
+                {
+                  "route": "panel",
+                  "case": "negative-one-unit",
+                  "messages": 120,
+                  "expectedOffset": 48,
+                  "actualOffset": 48,
+                  "passed": true
+                },
+                {
+                  "route": "panel",
+                  "case": "positive-one-unit",
+                  "messages": 120,
+                  "expectedOffset": 0,
+                  "actualOffset": 0,
+                  "passed": true
+                },
+                {
+                  "route": "panel",
+                  "case": "opposite-fractions",
+                  "messages": 120,
+                  "expectedOffset": 0,
+                  "actualOffset": 0,
+                  "passed": true
+                },
+                {
+                  "route": "child-edit",
+                  "case": "negative-one-unit",
+                  "messages": 120,
+                  "expectedOffset": 48,
+                  "actualOffset": 48,
+                  "passed": true
+                },
+                {
+                  "route": "child-edit",
+                  "case": "positive-one-unit",
+                  "messages": 120,
+                  "expectedOffset": 0,
+                  "actualOffset": 0,
+                  "passed": true
+                },
+                {
+                  "route": "child-edit",
+                  "case": "opposite-fractions",
+                  "messages": 120,
+                  "expectedOffset": 0,
+                  "actualOffset": 0,
+                  "passed": true
+                }
+              ],
+              "captures": [
+                {
+                  "path": "standalone-options-clean-top.bmp",
+                  "sha256": "fe6942c316aebf85f58a4e9876084793048fa4ce78589ec14a53fd84bda2510a",
+                  "width": 468,
+                  "height": 441
+                },
+                {
+                  "path": "standalone-options-clean-notch.bmp",
+                  "sha256": "d3847341a04f729fa743ed7baa583991e337ce3386a5e5fecf1c0ec59513784f",
+                  "width": 468,
+                  "height": 441
+                },
+                {
+                  "path": "standalone-options-clean-bottom.bmp",
+                  "sha256": "10fa9a69595d31ae81bb65b1408790077ddcc72db9beaed7c171de7eb98451e3",
+                  "width": 468,
+                  "height": 441
+                }
+              ],
+              "timingLimit": "DwmFlush does not flush the target process or entire session; finite desktop samples cannot exclude flashes between samples."
+            },
+            {
+              "panel": "general-settings",
+              "frames": 320,
+              "unexpectedFrames": 0,
+              "endpointTransitions": null,
+              "precisionWheel": [
+                {
+                  "route": "panel",
+                  "case": "negative-one-unit",
+                  "messages": 120,
+                  "expectedOffset": 48,
+                  "actualOffset": 48,
+                  "passed": true
+                },
+                {
+                  "route": "panel",
+                  "case": "positive-one-unit",
+                  "messages": 120,
+                  "expectedOffset": 0,
+                  "actualOffset": 0,
+                  "passed": true
+                },
+                {
+                  "route": "panel",
+                  "case": "opposite-fractions",
+                  "messages": 120,
+                  "expectedOffset": 0,
+                  "actualOffset": 0,
+                  "passed": true
+                },
+                {
+                  "route": "child-edit",
+                  "case": "negative-one-unit",
+                  "messages": 120,
+                  "expectedOffset": 48,
+                  "actualOffset": 48,
+                  "passed": true
+                },
+                {
+                  "route": "child-edit",
+                  "case": "positive-one-unit",
+                  "messages": 120,
+                  "expectedOffset": 0,
+                  "actualOffset": 0,
+                  "passed": true
+                },
+                {
+                  "route": "child-edit",
+                  "case": "opposite-fractions",
+                  "messages": 120,
+                  "expectedOffset": 0,
+                  "actualOffset": 0,
+                  "passed": true
+                }
+              ],
+              "captures": [
+                {
+                  "path": "general-settings-clean-top.bmp",
+                  "sha256": "f2437c43c338c85b657e5a4986ce5fc859d0e45f91d008fe4f8a6c93cd2b3aef",
+                  "width": 292,
+                  "height": 441
+                },
+                {
+                  "path": "general-settings-clean-notch.bmp",
+                  "sha256": "b394443d27aa7264b9841fda0ed3993cdcba613d3766c03bd9c47688d5ec8a54",
+                  "width": 292,
+                  "height": 441
+                },
+                {
+                  "path": "general-settings-clean-bottom.bmp",
+                  "sha256": "4dfc5ca31e696dcf51a458086d37ac3ecf8846c437b7a083b56463a8981a1cf1",
+                  "width": 292,
+                  "height": 441
+                }
+              ],
+              "timingLimit": "DwmFlush does not flush the target process or entire session; finite desktop samples cannot exclude flashes between samples."
+            },
+            {
+              "panel": "workflow-options",
+              "frames": 320,
+              "unexpectedFrames": 0,
+              "endpointTransitions": null,
+              "precisionWheel": [
+                {
+                  "route": "panel",
+                  "case": "negative-one-unit",
+                  "messages": 120,
+                  "expectedOffset": 48,
+                  "actualOffset": 48,
+                  "passed": true
+                },
+                {
+                  "route": "panel",
+                  "case": "positive-one-unit",
+                  "messages": 120,
+                  "expectedOffset": 0,
+                  "actualOffset": 0,
+                  "passed": true
+                },
+                {
+                  "route": "panel",
+                  "case": "opposite-fractions",
+                  "messages": 120,
+                  "expectedOffset": 0,
+                  "actualOffset": 0,
+                  "passed": true
+                },
+                {
+                  "route": "child-edit",
+                  "case": "negative-one-unit",
+                  "messages": 120,
+                  "expectedOffset": 48,
+                  "actualOffset": 48,
+                  "passed": true
+                },
+                {
+                  "route": "child-edit",
+                  "case": "positive-one-unit",
+                  "messages": 120,
+                  "expectedOffset": 0,
+                  "actualOffset": 0,
+                  "passed": true
+                },
+                {
+                  "route": "child-edit",
+                  "case": "opposite-fractions",
+                  "messages": 120,
+                  "expectedOffset": 0,
+                  "actualOffset": 0,
+                  "passed": true
+                }
+              ],
+              "captures": [
+                {
+                  "path": "workflow-options-clean-top.bmp",
+                  "sha256": "e202b36a1812542a14433dd719076acf339920f6d5e7f9aa4a2bc371d3128356",
+                  "width": 292,
+                  "height": 441
+                },
+                {
+                  "path": "workflow-options-clean-notch.bmp",
+                  "sha256": "cb81e2cfea8d76f69f7950c777044ec6e8b85e59dbc914d68a8f5af7c57cea2d",
+                  "width": 292,
+                  "height": 441
+                },
+                {
+                  "path": "workflow-options-clean-bottom.bmp",
+                  "sha256": "b3faee9fa876d25503ff58eb4fe55424f5d9530c10a511d30a47ca7d4f2a3734",
+                  "width": 292,
+                  "height": 441
+                }
+              ],
+              "timingLimit": "DwmFlush does not flush the target process or entire session; finite desktop samples cannot exclude flashes between samples."
+            }
+          ],
+          "windowBounds": [
+            0,
+            0,
+            1040,
+            680
+          ],
+          "dpi": 96
+        }
+      },
+      "passed": 84,
+      "failed": 0,
+      "skipped": 0,
+      "captureFiles": 77
+    }
+  },
+  "visualStatus": "Completed: recorded settled 96-DPI layouts accepted in both paths. Immediate resize frames can retain prior geometry; no zero-flicker claim. Original missing-control interpretation is retracted as a review error.",
+  "limits": [
+    "Hosted Windows Server 2022 at96DPI, not representative Windows PCs.",
+    "No high-DPI/transitions/multiple-monitor/physical-trackpad acceptance.",
+    "CWL result replay is not scientific execution by a Linux CWL engine.",
+    "No new signature/institutional policy approval or release publication.",
+    "No realistic benchmarking.",
+    "Legacy scroll/results fixtures force other sizes and do not establish unmodified startup bounds."
+  ],
+  "frozenRecheck": {
+    "runId": 37989535317,
+    "runConclusion": "success",
+    "sourceCommit": "8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+    "gateCommit": "69022689e686b2cacdc98dbdbef728e664941e67",
+    "archivesRebuilt": false,
+    "scope": "Repeat all19 patch/updater/keyboard checks perpath, with visible desktop frames before PrintWindow and passive later observations. Existing65regressions perpath remain bound to the same exact frozen archives.",
+    "sourceGateTests": {
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "platform": "Linux portable guard tests"
+    },
+    "paths": {
+      "ordinary": {
+        "passed": 19,
+        "failed": 0,
+        "skipped": 0,
+        "report": "ui-patch-0.16.1-final-native-ordinary.json",
+        "reportSha256": "ff10be809d74fa6a7cd031110b8152175bd5cfdb51bd126acaa679925ac930d3",
+        "gateSha256": "580289dbe0093bf143bc20af31996d7596ccd1727f45b601b05096b951016bde",
+        "captureFiles": 41,
+        "sourceUnchangedCheck": "passed in Windows recheck workflow",
+        "evidenceArtifact": {
+          "id": 11644831083,
+          "url": "https://github.com/comparativechrono/workbench/actions/runs/37989535317/artifacts/11644831083",
+          "sha256": "ae4b50e07e371413a78da3894de1f52efef0dc2b0a7c3523a875eade8e2c58e4"
+        }
+      },
+      "spaces": {
+        "passed": 19,
+        "failed": 0,
+        "skipped": 0,
+        "report": "ui-patch-0.16.1-final-native-spaces.json",
+        "reportSha256": "8ca213093e3ca8830e3918bbff7e2f4582a1481b745a5a92b1252c950558db80",
+        "gateSha256": "580289dbe0093bf143bc20af31996d7596ccd1727f45b601b05096b951016bde",
+        "captureFiles": 41,
+        "sourceUnchangedCheck": "passed in Windows recheck workflow",
+        "evidenceArtifact": {
+          "id": 11644173880,
+          "url": "https://github.com/comparativechrono/workbench/actions/runs/37989535317/artifacts/11644173880",
+          "sha256": "5069e59707e6a9a0bde024dc8005b7dc0227d66ae5fa4ea3fa888bcc7ecf53c2"
+        }
+      }
+    }
+  },
+  "visualReviewCorrection": {
+    "kind": "review interpretation correction, not application change",
+    "originalConcern": "General settings and Readiness appeared absent in initial full-frame review.",
+    "resolution": "Individual crops from the original hashed BMPs show both controls. The omission claim was incorrect and is retracted.",
+    "ordinaryOriginalSha256": "e0397ca200e60adae35282b3e7a716e9752dd73849a1c425a32c679f807ad147",
+    "regionsInCapturePixels": {
+      "heading": [
+        640,
+        110,
+        795,
+        145
+      ],
+      "readiness": [
+        345,
+        603,
+        448,
+        643
+      ]
+    },
+    "followup": "The same frozen application was rechecked without a rebuild, capturing visible desktop frames before PrintWindow and after passive delays."
+  },
+  "publicationStatus": "unpublished review candidate",
+  "visualReview": {
+    "file": "ui-patch-0.16.1-visual-review-2026-10-09.json",
+    "sha256": "f4103c3b7c5366225c7ddfeb6351e9df552cf7ecb1fdd5e1e13fce92ec040992",
+    "captureFiles": 178,
+    "settledLayoutAccepted": true
+  }
+}

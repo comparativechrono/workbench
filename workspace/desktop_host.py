@@ -236,6 +236,10 @@ class DesktopHost:
             if set(params) - {"graph", "output_folder"}:
                 raise ValueError("Unknown readiness request field.")
             return self.app.review(copy.deepcopy(params.get("graph", self.graph())), params.get("output_folder"))
+        if method == "methods/preview":
+            if set(params) - {"graph"}:
+                raise ValueError("Unknown methods preview field.")
+            return self.app.preview_methods(copy.deepcopy(params.get("graph", self.graph())))
         if method in ("resources/get", "resources/set"):
             allowed = {"graph"} if method == "resources/get" else {"graph", "policy"}
             if set(params) - allowed or method == "resources/set" and "policy" not in params:
@@ -299,6 +303,25 @@ class DesktopHost:
             if set(params) != {"path"}:
                 raise ValueError("Choose a sample table file.")
             return self.app.import_sample_table(params["path"])
+        if method == "sample/edit":
+            if set(params) != {"table_token"}:
+                raise ValueError("Choose a complete imported sample table to edit.")
+            return self.app.edit_sample_table(params["table_token"])
+        if method == "sample/apply":
+            if set(params) - {"table", "retain_token"} or "table" not in params:
+                raise ValueError("Apply the complete sample-table editor draft.")
+            retain = short_text(params["retain_token"], "retained sample table token", 100) if "retain_token" in params else None
+            return self.app.apply_sample_table(params["table"], retain)
+        if method == "sample/save":
+            if set(params) - {"table_token", "path", "file_columns", "retain_token"} or not {"table_token", "path", "file_columns"} <= set(params):
+                raise ValueError("Choose a table, a new CSV/TSV filename and explicit file-path columns.")
+            retain = short_text(params["retain_token"], "retained sample table token", 100) if "retain_token" in params else None
+            return self.app.save_sample_table(params["table_token"], params["path"], params["file_columns"], retain)
+        if method == "sample/example":
+            if set(params) - {"retain_token"}:
+                raise ValueError("Unknown synthetic sample-table field.")
+            retain = short_text(params["retain_token"], "retained sample table token", 100) if "retain_token" in params else None
+            return self.app.example_sample_table(retain)
         if method == "sample/targets":
             if set(params) - {"graph"}:
                 raise ValueError("Unknown sample targets field.")
@@ -527,7 +550,7 @@ def serve(host, input_stream, output_stream):
                 if immediate is not None:
                     send(identity, result=immediate)
                     continue
-            if method in ("review", "import", "diagnostics/save", "sample/table", "sample/preview", "sample/targets", "queue/add", "queue/add-batch", "queue/cancel", "index/list", "index/verify", "resources/set", "restart/review", "restart/queue", "project/export-preview", "project/inspect", "project/resolve", "project/export", "project/import", "project/open", "results/summary"):
+            if method in ("review", "methods/preview", "import", "diagnostics/save", "sample/table", "sample/edit", "sample/apply", "sample/save", "sample/example", "sample/preview", "sample/targets", "queue/add", "queue/add-batch", "queue/cancel", "index/list", "index/verify", "resources/set", "restart/review", "restart/queue", "project/export-preview", "project/inspect", "project/resolve", "project/export", "project/import", "project/open", "results/summary"):
                 if not capacity.acquire(blocking=False):
                     if method == "queue/cancel":
                         try:
@@ -540,7 +563,7 @@ def serve(host, input_stream, output_stream):
                             continue
                     send(identity, error="Two background requests are still running. Wait before trying again.")
                     continue
-                if (method in ("review", "sample/preview", "sample/targets", "queue/add", "resources/set", "project/export-preview")
+                if (method in ("review", "methods/preview", "sample/preview", "sample/targets", "queue/add", "resources/set", "project/export-preview")
                         and "graph" not in params and "run_id" not in params):
                     # Snapshot at command receipt, after preceding model edits,
                     # rather than at the background worker's scheduling time.

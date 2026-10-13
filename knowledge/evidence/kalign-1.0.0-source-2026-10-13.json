@@ -1,0 +1,97 @@
+{
+  "schema": 1,
+  "sourceCommit": "8149bdc02a2104e97ea6512ae0a8bc76c8defc32",
+  "run": 38396201555,
+  "success": true,
+  "nativeWindowsExecuted": false,
+  "testsPassed": 94,
+  "testsSkipped": 1,
+  "suites": [
+    {
+      "name": "Kalign source/science and fresh pristine reference",
+      "passed": 18,
+      "skipped": 0,
+      "liveReferenceCases": 2
+    },
+    {
+      "name": "Kalign evidence contracts",
+      "passed": 8,
+      "skipped": 0
+    },
+    {
+      "name": "Shared evidence contracts",
+      "passed": 8,
+      "skipped": 0
+    },
+    {
+      "name": "Pack checks",
+      "passed": 14,
+      "skipped": 0
+    },
+    {
+      "name": "Pack manager",
+      "passed": 46,
+      "skipped": 1,
+      "skipReason": "Native Windows long-path filesystem check excluded on Linux"
+    }
+  ],
+  "scienceReportSha256": "e2c61231bf39226eece68ffde70431a663525634f0b15a269aaba95c625f2f77",
+  "science": {
+    "schema": 1,
+    "packId": "kalign",
+    "packVersion": "1.0.0",
+    "upstreamVersion": "3.5.1",
+    "toolVersion": "3.5.1-workbench1",
+    "platform": "linux",
+    "nativeWindowsExecuted": false,
+    "testsRun": 18,
+    "failures": 0,
+    "errors": 0,
+    "skipped": [],
+    "success": true,
+    "testSourceSha256": "678a086e352e97ed2bf80481762930323d358b76f5a439de0f19329652d1e9e6",
+    "guardExecutableSha256": "45b632794403e59cae08bb00da2932a11ff696a32f2172562acad3604c89f2a9",
+    "scientificBinarySha256": "f2143dcd1f3c831c01e0acc72337b74344b0b30a04b3c429414415cdfb337d79",
+    "packManifestSha256": null,
+    "upstreamSourceCommit": "3e6de1df29d111c5fa5beb4c4294ef681978fd23",
+    "upstreamSourceArchiveSha256": "01bacb2205e7b6792c570b163b5ccc0713284737ba862ca3b500a96a8a4d1bd9",
+    "livePinnedLinuxReferenceCases": 2,
+    "liveReferenceExecutableSha256": "7a6491c754a79d0ebffcbd210119089b139babea88c19715630b119b3388f14e",
+    "linuxReferenceScope": "Pristine reference execution is a separate Linux-only class, excluded from native Windows selection; the frozen reference and independent truth are verified on both platforms.",
+    "scope": "Independent six-sequence nucleotide/protein indel homology; direct bundled upstream agreement; explicit-alphabet correction, exact residue/ID/order preservation; measured summaries; malformed/bounded input and immutable-file regressions. No benchmark, native GUI, real-data alignment-accuracy, orthology or clinical claim."
+  },
+  "logs": [
+    {
+      "file": "kalign-evidence-contract-tests.log",
+      "sha256": "77d39d232626e3e59e6a916819491f0ba13a87739af70ac3ae4468c1f8dea0c8"
+    },
+    {
+      "file": "kalign-linux-build.log",
+      "sha256": "b0b125ba14643b8c8a2d1f3edce080190934eda22d88819bf3b5a1e4f8ee7351"
+    },
+    {
+      "file": "kalign-linux-science.log",
+      "sha256": "2fdf9c6c736067777c7dbd641f14ac65442e5f580b589e635b1e1ac4db28fd40"
+    },
+    {
+      "file": "kalign-pristine-linux-build.log",
+      "sha256": "adb0a576b736c5730b1e55d03fbd7fe2a05c3c39d48cd97de6cff5ae02cd653d"
+    },
+    {
+      "file": "kalign-windows-build.log",
+      "sha256": "6281022afae0647e1e688cd34168bc46f3888bff1f7f93f4f0c45c13cae2c301"
+    },
+    {
+      "file": "pack-check-contracts.log",
+      "sha256": "45f597df9ea9893d1a96a212209cbe73aaaf836fa5144c6114438b1f3aee4e3e"
+    },
+    {
+      "file": "pack-manager-contracts.log",
+      "sha256": "d258aef431116eade97518ccfe0fde65c1e90b424d88ef78982f575d2bcea33c"
+    },
+    {
+      "file": "shared-evidence-contract-tests.log",
+      "sha256": "fc23540c8545d4075fe2f0420accd022e74e5566176c3bd4c597964ff02c2e14"
+    }
+  ]
+}

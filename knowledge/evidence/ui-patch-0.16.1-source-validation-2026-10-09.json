@@ -1,0 +1,107 @@
+{
+  "schema": 1,
+  "recordedOn": "2026-10-09",
+  "kind": "candidate build source validation",
+  "sourceCommit": "8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+  "sourceTree": "d5a5f1f9ec4c606965e734370a0be4d9cf53d8c3",
+  "runId": 37988570028,
+  "jobId": 114016631932,
+  "jobConclusion": "success",
+  "platform": "GitHub-hosted Ubuntu 22.04",
+  "pythonTests": {
+    "suites": [
+      {
+        "file": "tests/test_workspace_layout.py",
+        "passed": 5,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "file": "tests/test_ui_patch_packaging.py",
+        "passed": 11,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "file": "tests/test_split_release.py",
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "file": "tests/test_core_update.py",
+        "passed": 17,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "file": "tests/test_deployment_ui_gate.py",
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "file": "tests/test_ui_patch_gate.py",
+        "passed": 7,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "file": "workspace/tests/test_curated_workflows.py",
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "file": "workspace/tests/test_results_summary.py",
+        "passed": 26,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "file": "workspace/tests/test_curated_service.py",
+        "passed": 6,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "file": "workspace/tests/test_desktop_host.py",
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "file": "workspace/tests/test_desktop_modes.py",
+        "passed": 11,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "file": "workspace/tests/test_workflow_inputs.py",
+        "passed": 11,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "file": "workspace/tests/test_cwl_results.py",
+        "passed": 5,
+        "failed": 0,
+        "skipped": 0
+      }
+    ],
+    "passed": 141,
+    "failed": 0,
+    "skipped": 0
+  },
+  "additionalChecks": {
+    "cppDesktopJson": "passed",
+    "nativeExecutableBuilds": 3,
+    "strictCompilerWarnings": "passed",
+    "pythonCompile": "passed"
+  },
+  "buildLogSha256": "61252827f5f8bd06ec787553824065c9abc01f1d1e934358b0d57afa5d401d65",
+  "limits": [
+    "Portable source checks and PE cross-compilation are not native Windows execution.",
+    "Only the affected source suites listed here were run; historical full-suite passes are not transferred to this commit."
+  ]
+}
