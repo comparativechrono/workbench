@@ -1,6 +1,19 @@
 # Native Workbench knowledge base
 
-**Active wrapped tool library, 2026-10-10:** implemented in unpublished
+**Active pack batch, 2026-10-13:** Prodigal **1.0.0** and FastTree **1.0.0**
+are implemented in [draft PR #16](https://github.com/comparativechrono/workbench/pull/16),
+stacked on the unchanged 0.16.1 UI candidate. The corrected source is
+`d175076d57f4c84743cb375369c604085a720204`; exact Windows science passed in both
+ordinary and spaced paths. A frozen recheck completed all form pages and Results;
+44 actual display images were reviewed. The candidate is ready for draft review.
+[Pack/source download](https://github.com/comparativechrono/workbench/actions/runs/38387733137/artifacts/11806999226)
+(expires 2026-11-12).
+The [batch handover](prodigal-fasttree-handover.md) records the initial Windows
+stack failure, correction, exact archives and evidence. No release or catalogue
+publication is included. Published **0.16.0** and the existing application
+candidate remain unchanged.
+
+**Previous wrapped tool library, 2026-10-10:** implemented in unpublished
 **0.16.1** source `ff13db729a6215e9fe5dfa4a4efdb9c769880287` in
 [draft PR #15](https://github.com/comparativechrono/workbench/pull/15).
 Names wrap in bold, descriptions wrap in regular text, and the hover popup is

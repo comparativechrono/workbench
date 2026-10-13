@@ -1,15 +1,20 @@
 # Development roadmap
 
-## Active set: Prodigal and FastTree optional packs, 2026-10-13
+## Completed review candidate: Prodigal and FastTree optional packs, 2026-10-13
 
 The owner approved the first small batch from the requested tool inventory:
 **Prodigal** gene prediction and **FastTree** phylogenetic inference. Both start
 as independent **1.0.0** pack candidates; no application version change is
 required. Development is based on the existing wrapped-library candidate at
 `2b2e97aa15970f0e7fb3a5428e8ab7dad6acada2`, preserving draft PR #15.
-See the [batch handover](prodigal-fasttree-handover.md) for implementation and
-exact validation status. Source, native scientific, graph and GUI checks remain
-separate; no release or catalogue publication is included in this batch.
+Both are implemented and ready in [draft PR #16](https://github.com/comparativechrono/workbench/pull/16).
+Source and exact-archive native science passed, including both Windows path
+cases, real MUSCLE-to-FastTree graphs and Starter regressions. The frozen form
+recheck and 44-image visual review are complete. See the
+[batch handover](prodigal-fasttree-handover.md) and
+[final index](evidence/prodigal-fasttree-1.0.0-final-review-2026-10-13.json) for
+exact hashes, initial failures, counts and limits. Source, native science and GUI
+scopes remain separate; no release or catalogue publication is included.
 
 The requested inventory already contains published optional packs for fastp,
 Cutadapt (pack `trimming`), HISAT2, mosdepth, featureCounts, kallisto, LoFreq and

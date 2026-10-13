@@ -3,7 +3,7 @@
   "document_kind": "project-knowledge-index",
   "project": "Native Workbench",
   "repository": "https://github.com/comparativechrono/workbench",
-  "reviewed_on": "2026-10-10",
+  "reviewed_on": "2026-10-13",
   "source_baseline_commit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
   "format": {
     "prose": "UTF-8 Markdown",
@@ -177,7 +177,11 @@
     "resize_redraw_0_16_1_handover": "resize-redraw-0.16.1-handover.md",
     "wrapped_tool_library_0_16_1_handover": "wrapped-tool-library-0.16.1-handover.md",
     "wrapped_tool_library_0_16_1_historical_evidence": "evidence/wrapped-library-0.16.1-historical-evidence-index-2026-10-10.json",
-    "wrapped_tool_library_0_16_1_final_acceptance": "evidence/wrapped-library-0.16.1-final-acceptance-2026-10-10.json"
+    "wrapped_tool_library_0_16_1_final_acceptance": "evidence/wrapped-library-0.16.1-final-acceptance-2026-10-10.json",
+    "prodigal_fasttree_handover": "prodigal-fasttree-handover.md",
+    "prodigal_pack_guide": "../docs/PRODIGAL-PACK.md",
+    "fasttree_pack_guide": "../docs/FASTTREE-PACK.md",
+    "prodigal_fasttree_final_review": "evidence/prodigal-fasttree-1.0.0-final-review-2026-10-13.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -1189,161 +1193,41 @@
     "public_downloads": "evidence/tool-library-0.11.0-public-downloads-2026-10-08.json"
   },
   "active_development": {
-    "recorded_on": "2026-10-09",
-    "kind": "tester-feedback-revision",
-    "application_version": "0.16.1",
-    "branch": "fix/native-ui-0.16.1",
-    "starting_commit": "8cd3457745da52d38b5470c9ae917c8394ca46b0",
-    "base_branch": "feature/deployment-acceptance",
-    "base_commit": "f74d90229be6a78d6ad0c0076c54c04bb7e7cae2",
-    "base_pull_request": "https://github.com/comparativechrono/workbench/pull/14",
-    "pull_request": "https://github.com/comparativechrono/workbench/pull/15",
+    "recorded_on": "2026-10-13",
+    "kind": "optional-pack-batch",
+    "branch": "feature/prodigal-fasttree-packs",
+    "base_branch": "fix/native-ui-0.16.1",
+    "base_commit": "2b2e97aa15970f0e7fb3a5428e8ab7dad6acada2",
+    "source_commit": "d175076d57f4c84743cb375369c604085a720204",
+    "source_tree": "e15f450758f0713755f68c7f5ad2b9b42832c611",
+    "pull_request": "https://github.com/comparativechrono/workbench/pull/16",
     "pull_request_state": "draft",
-    "status": "implementation and recorded source/native/archive/temporal/visual validation complete; ready as an unpublished draft review candidate",
-    "authorization": "Implement the new tester-feedback revision within the existing unpublished review candidate.",
-    "release_authorized": false,
-    "released": false,
-    "published_baseline": "0.16.0",
-    "published_assets_changed": false,
-    "candidate_commit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
-    "application_source_commit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
-    "application_rebuilt": true,
-    "scope": [
-      "Address Run flashing and redundant unchanged-status polling redraws while retaining meaningful state updates and action guards",
-      "Preserve viewport anchoring on category expansion and address collapse black flashing",
-      "Restore separate Methods and remove the primary Readiness button while keeping Run preflight; no runtime or memory forecasts",
-      "Native Samples New/Edit/Save as CSV/TSV with explicit file columns, base folders and mapping",
-      "Verified one-row synthetic Starter example without invented independent replicates",
-      "New exact source/native/archive/temporal/screenshot evidence for this revision"
-    ],
-    "handover": "tester-feedback-0.16.1-handover.md",
-    "prior_candidate_handover": "ui-patch-0.16.1-handover.md",
-    "prior_candidate_application_source_commit": "8938e709b041106e8a46e1447383e8e9ba3e0cb9",
-    "prior_candidate_validator_commit": "69022689e686b2cacdc98dbdbef728e664941e67",
-    "evidence_boundary": "Previous 141 source passes, 84 native checks per path, 19 repeated patch checks per path, archive audit and settled visual review apply only to the prior 8938e709 archives. No previous pass tests this revision.",
-    "verification_progress": {
-      "status": "recorded source/archive/native and bounded visual validation complete",
-      "candidate_build": "passed; frozen archives from application source 73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
-      "source_tests": {
-        "passed": 220,
-        "suites": 18,
-        "failed": 0,
-        "configured_skips": 0,
-        "cpp_json": "passed",
-        "strict_native_builds": 3
-      },
-      "archive_source_audit": "passed",
-      "completed_regression_checks_per_path": 81,
-      "completed_regression_scopes": {
-        "batch": 11,
-        "curated": 11,
-        "readiness": 5,
-        "reference_management": 10,
-        "results": 9,
-        "scroll": 3,
-        "workspace": 32
-      },
-      "patch_checks_per_path": 19,
-      "patch_repeats": "19 passed per path in validator rechecks on identical archives; repeated observations add no unique coverage",
-      "feedback_checks_per_path": {
-        "required": 13,
-        "passed": 13,
-        "failed": 0,
-        "status": "passed",
-        "prior_partial_attempt_passes": [
-          {
-            "ordinary": 5,
-            "spaces": 5
-          },
-          {
-            "ordinary": 7,
-            "spaces": 7
-          },
-          {
-            "ordinary": 7,
-            "spaces": 7
-          },
-          {
-            "ordinary": 7,
-            "spaces": 11
-          }
-        ]
-      },
-      "regression_visual_capture_files": 112,
-      "regression_visual_review": "passed within recorded 96-DPI viewports",
-      "temporal_review": {
-        "series_per_path": 41,
-        "ordinary_frames": 1510,
-        "spaces_frames": 1306,
-        "sampled_black_blocks": 0,
-        "unexpected_stable_differences": 0,
-        "limit": "finite samples, not zero flicker"
-      },
-      "representative_machine_acceptance": "not established",
-      "patch_visual_review": {
-        "capture_files": 82,
-        "unique_images": 43,
-        "exact_byte_duplicates": 39,
-        "status": "settled acceptable; immediate Tools-resize old geometry/right-bottom clipping until first later sample about 0.30\u20130.32 seconds; workflow series stable"
-      },
-      "unique_native_checks_per_path": 113,
-      "validator_source_tests": {
-        "passed": 23,
-        "patch": 8,
-        "feedback": 15,
-        "separate_from_application_tests": true
-      },
-      "observed_display": {
-        "dpi": 96,
-        "workspace_sizes": [
-          [
-            960,
-            680
-          ],
-          [
-            1024,
-            728
-          ]
-        ],
-        "samples_size": [
-          940,
-          680
-        ]
-      },
-      "feedback_visual_review": {
-        "status": "passed within captured 96-DPI scope",
-        "capture_files": 192,
-        "unique_bmp_hashes": 51,
-        "direct_views": 52,
-        "exact_hash_reuses": 140,
-        "all_capture_hashes_dimensions_and_lossless_pixels_verified": true,
-        "unexpected_layout_defects_observed": false
-      }
+    "packs": {
+      "prodigal": "1.0.0",
+      "fasttree": "1.0.0"
     },
-    "known_limits": [
-      "Unpublished 0.16.1 revision only; no merge or release. Published 0.16.0 and all historical receipt files remain unchanged.",
-      "New candidate bytes require new evidence; prior passes and settled screenshots are not transferred.",
-      "Finite temporal sampling does not establish zero flicker or exclude shorter unsampled transients.",
-      "The Starter example is one synthetic sample; repeated rows are not independent biological replicates.",
-      "Prior source geometry had busy Cancel/Results overlap below 908 logical client pixels and footer overlap below 902. Changed controls require fresh layout review, not an inherited fit claim.",
-      "Representative-PC, high-DPI, multiple-monitor, physical-trackpad and managed-machine acceptance remain outstanding.",
-      "Executable signing requires a controlled identity and institutional deployment requires actual IT approval.",
-      "Scientific Linux CWL and SDK/build recovery remain later sets; benchmarking is handled separately."
-    ],
-    "next_action": "Review draft PR #15 and test the exact candidate on representative PCs; preserve recorded source/archive evidence and bounded display/temporal limits. No merge or release in this delivery.",
-    "validator_commit": "f9e7120196ddd284d33c0e8221b78fbf4529058f",
-    "validator_run": 37999874335,
-    "validator_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37999874335",
-    "source_build_run": 37997370988,
-    "validator_run_status": "success",
-    "evidence_delivery": {
-      "repository_contents": "Focused sanitized receipts and original-report SHA-256 manifest with artifact locations; no full raw JSON blobs.",
-      "excluded": "Opaque session/cache/review tokens and detailed runner/input records.",
-      "reason": "Automatic approval review rejected unfiltered raw report uploads; rejected blobs were not referenced in a commit.",
-      "original_reports": "Preserved in local validation workspace and original GitHub Actions artifacts.",
-      "artifact_expiry": "2026-11-08",
-      "limit": "Original-report hashes do not preserve access to raw content after artifact expiry."
-    }
+    "status": "implementation, exact native validation, downloaded source audit and visual review complete; ready for unpublished draft review",
+    "application_changed": false,
+    "published_application": "0.16.0",
+    "unpublished_application_candidate": "0.16.1",
+    "released": false,
+    "release_authorized": false,
+    "catalogue_changed": false,
+    "handover": "prodigal-fasttree-handover.md",
+    "run": 38387733137,
+    "initial_failed_run": 38385903740,
+    "ready_for_draft_review": true,
+    "validator_commit": "9ea63994661073b115e80533c3288d50d250decb",
+    "validator_run": 38389163430,
+    "artifact_url": "https://github.com/comparativechrono/workbench/actions/runs/38387733137/artifacts/11806999226",
+    "evidence": "evidence/prodigal-fasttree-1.0.0-final-review-2026-10-13.json",
+    "native_pack_tests_per_path": {
+      "prodigal": 16,
+      "fasttree": 14,
+      "skipped": 0
+    },
+    "actual_display_images_reviewed": 44,
+    "measurement_display_limit": "Native Results displays status and tool provenance; new pack JSON measurements remain in output files."
   },
   "ui_patch_0_16_1_development": {
     "recorded_on": "2026-10-09",
@@ -2090,7 +1974,7 @@
       "active_handover": "tester-feedback-0.16.1-handover.md"
     }
   },
-  "active_development_record": "wrapped_tool_library_0_16_1_development",
+  "active_development_record": "prodigal_fasttree_development",
   "resize_redraw_0_16_1_development": {
     "recorded_on": "2026-10-10",
     "kind": "tools-resize-correction",
@@ -2544,5 +2428,199 @@
     "validator_run_url": "https://github.com/comparativechrono/workbench/actions/runs/38076722339",
     "validator_run_status": "success: all three jobs passed, 13 feedback checks/path on unchanged application archives",
     "acceptance_scope": "Exact unpublished archives on hosted Windows in ordinary and spaced paths; representative-PC and broader deployment acceptance outstanding."
+  },
+  "prodigal_fasttree_development": {
+    "recorded_on": "2026-10-13",
+    "kind": "optional-pack-batch",
+    "branch": "feature/prodigal-fasttree-packs",
+    "base_branch": "fix/native-ui-0.16.1",
+    "base_commit": "2b2e97aa15970f0e7fb3a5428e8ab7dad6acada2",
+    "source_commit": "d175076d57f4c84743cb375369c604085a720204",
+    "source_tree": "e15f450758f0713755f68c7f5ad2b9b42832c611",
+    "pull_request": "https://github.com/comparativechrono/workbench/pull/16",
+    "pull_request_state": "draft",
+    "packs": {
+      "prodigal": "1.0.0",
+      "fasttree": "1.0.0"
+    },
+    "status": "implementation, exact native validation, downloaded source audit and visual review complete; ready for unpublished draft review",
+    "application_changed": false,
+    "published_application": "0.16.0",
+    "unpublished_application_candidate": "0.16.1",
+    "released": false,
+    "release_authorized": false,
+    "catalogue_changed": false,
+    "handover": "prodigal-fasttree-handover.md",
+    "run": 38387733137,
+    "initial_failed_run": 38385903740,
+    "ready_for_draft_review": true,
+    "validator_commit": "9ea63994661073b115e80533c3288d50d250decb",
+    "validator_run": 38389163430,
+    "artifact_url": "https://github.com/comparativechrono/workbench/actions/runs/38387733137/artifacts/11806999226",
+    "evidence": "evidence/prodigal-fasttree-1.0.0-final-review-2026-10-13.json",
+    "native_pack_tests_per_path": {
+      "prodigal": 16,
+      "fasttree": 14,
+      "skipped": 0
+    },
+    "actual_display_images_reviewed": 44,
+    "measurement_display_limit": "Native Results displays status and tool provenance; new pack JSON measurements remain in output files."
+  },
+  "tester_feedback_0_16_1_development": {
+    "recorded_on": "2026-10-09",
+    "kind": "tester-feedback-revision",
+    "application_version": "0.16.1",
+    "branch": "fix/native-ui-0.16.1",
+    "starting_commit": "8cd3457745da52d38b5470c9ae917c8394ca46b0",
+    "base_branch": "feature/deployment-acceptance",
+    "base_commit": "f74d90229be6a78d6ad0c0076c54c04bb7e7cae2",
+    "base_pull_request": "https://github.com/comparativechrono/workbench/pull/14",
+    "pull_request": "https://github.com/comparativechrono/workbench/pull/15",
+    "pull_request_state": "draft",
+    "status": "implementation and recorded source/native/archive/temporal/visual validation complete; ready as an unpublished draft review candidate",
+    "authorization": "Implement the new tester-feedback revision within the existing unpublished review candidate.",
+    "release_authorized": false,
+    "released": false,
+    "published_baseline": "0.16.0",
+    "published_assets_changed": false,
+    "candidate_commit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+    "application_source_commit": "73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+    "application_rebuilt": true,
+    "scope": [
+      "Address Run flashing and redundant unchanged-status polling redraws while retaining meaningful state updates and action guards",
+      "Preserve viewport anchoring on category expansion and address collapse black flashing",
+      "Restore separate Methods and remove the primary Readiness button while keeping Run preflight; no runtime or memory forecasts",
+      "Native Samples New/Edit/Save as CSV/TSV with explicit file columns, base folders and mapping",
+      "Verified one-row synthetic Starter example without invented independent replicates",
+      "New exact source/native/archive/temporal/screenshot evidence for this revision"
+    ],
+    "handover": "tester-feedback-0.16.1-handover.md",
+    "prior_candidate_handover": "ui-patch-0.16.1-handover.md",
+    "prior_candidate_application_source_commit": "8938e709b041106e8a46e1447383e8e9ba3e0cb9",
+    "prior_candidate_validator_commit": "69022689e686b2cacdc98dbdbef728e664941e67",
+    "evidence_boundary": "Previous 141 source passes, 84 native checks per path, 19 repeated patch checks per path, archive audit and settled visual review apply only to the prior 8938e709 archives. No previous pass tests this revision.",
+    "verification_progress": {
+      "status": "recorded source/archive/native and bounded visual validation complete",
+      "candidate_build": "passed; frozen archives from application source 73778e00461e2b83c07b9ea97df2b9c5d4b6317d",
+      "source_tests": {
+        "passed": 220,
+        "suites": 18,
+        "failed": 0,
+        "configured_skips": 0,
+        "cpp_json": "passed",
+        "strict_native_builds": 3
+      },
+      "archive_source_audit": "passed",
+      "completed_regression_checks_per_path": 81,
+      "completed_regression_scopes": {
+        "batch": 11,
+        "curated": 11,
+        "readiness": 5,
+        "reference_management": 10,
+        "results": 9,
+        "scroll": 3,
+        "workspace": 32
+      },
+      "patch_checks_per_path": 19,
+      "patch_repeats": "19 passed per path in validator rechecks on identical archives; repeated observations add no unique coverage",
+      "feedback_checks_per_path": {
+        "required": 13,
+        "passed": 13,
+        "failed": 0,
+        "status": "passed",
+        "prior_partial_attempt_passes": [
+          {
+            "ordinary": 5,
+            "spaces": 5
+          },
+          {
+            "ordinary": 7,
+            "spaces": 7
+          },
+          {
+            "ordinary": 7,
+            "spaces": 7
+          },
+          {
+            "ordinary": 7,
+            "spaces": 11
+          }
+        ]
+      },
+      "regression_visual_capture_files": 112,
+      "regression_visual_review": "passed within recorded 96-DPI viewports",
+      "temporal_review": {
+        "series_per_path": 41,
+        "ordinary_frames": 1510,
+        "spaces_frames": 1306,
+        "sampled_black_blocks": 0,
+        "unexpected_stable_differences": 0,
+        "limit": "finite samples, not zero flicker"
+      },
+      "representative_machine_acceptance": "not established",
+      "patch_visual_review": {
+        "capture_files": 82,
+        "unique_images": 43,
+        "exact_byte_duplicates": 39,
+        "status": "settled acceptable; immediate Tools-resize old geometry/right-bottom clipping until first later sample about 0.30\u20130.32 seconds; workflow series stable"
+      },
+      "unique_native_checks_per_path": 113,
+      "validator_source_tests": {
+        "passed": 23,
+        "patch": 8,
+        "feedback": 15,
+        "separate_from_application_tests": true
+      },
+      "observed_display": {
+        "dpi": 96,
+        "workspace_sizes": [
+          [
+            960,
+            680
+          ],
+          [
+            1024,
+            728
+          ]
+        ],
+        "samples_size": [
+          940,
+          680
+        ]
+      },
+      "feedback_visual_review": {
+        "status": "passed within captured 96-DPI scope",
+        "capture_files": 192,
+        "unique_bmp_hashes": 51,
+        "direct_views": 52,
+        "exact_hash_reuses": 140,
+        "all_capture_hashes_dimensions_and_lossless_pixels_verified": true,
+        "unexpected_layout_defects_observed": false
+      }
+    },
+    "known_limits": [
+      "Unpublished 0.16.1 revision only; no merge or release. Published 0.16.0 and all historical receipt files remain unchanged.",
+      "New candidate bytes require new evidence; prior passes and settled screenshots are not transferred.",
+      "Finite temporal sampling does not establish zero flicker or exclude shorter unsampled transients.",
+      "The Starter example is one synthetic sample; repeated rows are not independent biological replicates.",
+      "Prior source geometry had busy Cancel/Results overlap below 908 logical client pixels and footer overlap below 902. Changed controls require fresh layout review, not an inherited fit claim.",
+      "Representative-PC, high-DPI, multiple-monitor, physical-trackpad and managed-machine acceptance remain outstanding.",
+      "Executable signing requires a controlled identity and institutional deployment requires actual IT approval.",
+      "Scientific Linux CWL and SDK/build recovery remain later sets; benchmarking is handled separately."
+    ],
+    "next_action": "Review draft PR #15 and test the exact candidate on representative PCs; preserve recorded source/archive evidence and bounded display/temporal limits. No merge or release in this delivery.",
+    "validator_commit": "f9e7120196ddd284d33c0e8221b78fbf4529058f",
+    "validator_run": 37999874335,
+    "validator_run_url": "https://github.com/comparativechrono/workbench/actions/runs/37999874335",
+    "source_build_run": 37997370988,
+    "validator_run_status": "success",
+    "evidence_delivery": {
+      "repository_contents": "Focused sanitized receipts and original-report SHA-256 manifest with artifact locations; no full raw JSON blobs.",
+      "excluded": "Opaque session/cache/review tokens and detailed runner/input records.",
+      "reason": "Automatic approval review rejected unfiltered raw report uploads; rejected blobs were not referenced in a commit.",
+      "original_reports": "Preserved in local validation workspace and original GitHub Actions artifacts.",
+      "artifact_expiry": "2026-11-08",
+      "limit": "Original-report hashes do not preserve access to raw content after artifact expiry."
+    }
   }
 }
