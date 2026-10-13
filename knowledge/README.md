@@ -1,17 +1,17 @@
 # Native Workbench knowledge base
 
-**Active pack batch, 2026-10-13:** Prodigal **1.0.0** and FastTree **1.0.0**
-are implemented in [draft PR #16](https://github.com/comparativechrono/workbench/pull/16),
-stacked on the unchanged 0.16.1 UI candidate. The corrected source is
-`d175076d57f4c84743cb375369c604085a720204`; exact Windows science passed in both
-ordinary and spaced paths. A frozen recheck completed all form pages and Results;
-44 actual display images were reviewed. The candidate is ready for draft review.
-[Pack/source download](https://github.com/comparativechrono/workbench/actions/runs/38387733137/artifacts/11806999226)
-(expires 2026-11-12).
-The [batch handover](prodigal-fasttree-handover.md) records the initial Windows
-stack failure, correction, exact archives and evidence. No release or catalogue
-publication is included. Published **0.16.0** and the existing application
-candidate remain unchanged.
+**Active Kalign stage, 2026-10-13:** optional Kalign **1.0.0** is being
+implemented from the merged Prodigal/FastTree integration tree. The supported
+scope is explicit nucleotide/protein alignment with pinned Kalign 3.5.1,
+measured outputs and typed FastTree integration. Exact Windows and visual
+validation are pending. Start with the [Kalign handover](kalign-handover.md).
+
+**Merged first pack batch, 2026-10-13:** [PR #16](https://github.com/comparativechrono/workbench/pull/16)
+merged into `fix/native-ui-0.16.1` at `8addaa1278c535e4931eb0b2b85b8f47b51ddd66`
+on the owner's instruction. The [batch handover](prodigal-fasttree-handover.md)
+retains exact native science, GUI review, source audit and download evidence.
+This did not merge PR #15 into main or publish any application, pack or catalogue.
+Published **0.16.0** and the unpublished **0.16.1** application bytes are unchanged.
 
 **Previous wrapped tool library, 2026-10-10:** implemented in unpublished
 **0.16.1** source `ff13db729a6215e9fe5dfa4a4efdb9c769880287` in

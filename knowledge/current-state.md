@@ -1,9 +1,18 @@
 # Current project state
 
-## Active development: Prodigal and FastTree packs, 2026-10-13
+## Active development: Kalign pack, 2026-10-13
+
+Kalign **1.0.0** is in development on `feature/kalign-pack`, based on the merged
+integration commit `8addaa1278c535e4931eb0b2b85b8f47b51ddd66`. The initial
+scope is serial default nucleotide/protein alignment from ungapped FASTA,
+explicit alphabets, typed MSA outputs and measured alignment summaries. No
+application version change is needed. Native execution and visual acceptance
+remain pending; see the [Kalign handover](kalign-handover.md).
+
+## Merged development: Prodigal and FastTree packs, 2026-10-13
 
 The first approved tool batch adds optional `prodigal` **1.0.0** and `fasttree`
-**1.0.0** packs in [draft PR #16](https://github.com/comparativechrono/workbench/pull/16).
+**1.0.0** packs in [merged PR #16](https://github.com/comparativechrono/workbench/pull/16).
 Pack/validator source is `d175076d57f4c84743cb375369c604085a720204`, based on
 `fix/native-ui-0.16.1` at `2b2e97aa15970f0e7fb3a5428e8ab7dad6acada2`.
 There are no application changes; published **0.16.0** and the wrapped-library
@@ -28,11 +37,11 @@ passed eight validator tests and 12 GUI checks per path on unchanged archives.
 All four forms were scrolled from their true first page through the last; all
 44 actual display images were reviewed without a blocking layout finding at 96 DPI.
 
-The candidate is **ready for unpublished draft review**. The
+PR #16 merged into `fix/native-ui-0.16.1` at `8addaa1278c535e4931eb0b2b85b8f47b51ddd66` on the owner's instruction. The
 [handover](prodigal-fasttree-handover.md) and
 [final index](evidence/prodigal-fasttree-1.0.0-final-review-2026-10-13.json) retain
 the first candidate's stack failure, GUI-driver correction and earlier limited
-form capture scope. No merge, release, online catalogue, benchmark or broader
+form capture scope. No main/PR #15 merge, release, online catalogue, benchmark or broader
 deployment acceptance is included.
 
 ## Previous development: wrapped tool library, 2026-10-10

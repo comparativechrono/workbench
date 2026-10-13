@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "kind": "owner-authorized-pack-batch-merge",
+  "recordedOn": "2026-10-13",
+  "authorization": "merge and then move onto the next stage, which was Kalign",
+  "pullRequest": 16,
+  "url": "https://github.com/comparativechrono/workbench/pull/16",
+  "merged": true,
+  "mergeCommit": "8addaa1278c535e4931eb0b2b85b8f47b51ddd66",
+  "reviewedHead": "63186aad17826fa9682ea9c179c5946776ba5ec1",
+  "baseBranch": "fix/native-ui-0.16.1",
+  "previousBaseCommit": "2b2e97aa15970f0e7fb3a5428e8ab7dad6acada2",
+  "mergeTree": "b18d6076f4f2b5da08e147d7bc75e1a1c60d6a5f",
+  "mergeTreeMatchesReviewedHead": true,
+  "packSourceCommit": "d175076d57f4c84743cb375369c604085a720204",
+  "frozenGUIValidatorCommit": "9ea63994661073b115e80533c3288d50d250decb",
+  "validatedRuns": [
+    38387733137,
+    38389163430
+  ],
+  "published": false,
+  "catalogueChanged": false,
+  "publishedApplicationVersion": "0.16.0",
+  "scope": "PR16 merged into its existing integration base. PR15 and prior integration work are not merged into main by this action; no release or catalogue publication."
+}

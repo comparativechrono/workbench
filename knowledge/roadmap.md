@@ -1,13 +1,27 @@
 # Development roadmap
 
-## Completed review candidate: Prodigal and FastTree optional packs, 2026-10-13
+## Active set: Kalign optional pack, 2026-10-13
+
+The owner authorized merging PR #16 and starting Kalign. The first batch is
+merged into `fix/native-ui-0.16.1` at `8addaa1278c535e4931eb0b2b85b8f47b51ddd66`;
+no release or catalogue publication followed. Kalign development starts from
+that exact merged tree on `feature/kalign-pack`.
+
+The first Kalign interface is a separate **1.0.0** pack for nucleotide and protein
+multiple-sequence alignment, with exact upstream source, native Windows builds,
+scientific fixtures and typed outputs for downstream FastTree. See the
+[Kalign handover](kalign-handover.md) for actual implementation and validation
+status. Benchmarking remains separate; earlier source and Windows results do
+not validate this new pack.
+
+## Merged development: Prodigal and FastTree optional packs, 2026-10-13
 
 The owner approved the first small batch from the requested tool inventory:
 **Prodigal** gene prediction and **FastTree** phylogenetic inference. Both start
 as independent **1.0.0** pack candidates; no application version change is
 required. Development is based on the existing wrapped-library candidate at
 `2b2e97aa15970f0e7fb3a5428e8ab7dad6acada2`, preserving draft PR #15.
-Both are implemented and ready in [draft PR #16](https://github.com/comparativechrono/workbench/pull/16).
+Both are implemented and merged in [PR #16](https://github.com/comparativechrono/workbench/pull/16).
 Source and exact-archive native science passed, including both Windows path
 cases, real MUSCLE-to-FastTree graphs and Starter regressions. The frozen form
 recheck and 44-image visual review are complete. See the
@@ -21,7 +35,7 @@ Cutadapt (pack `trimming`), HISAT2, mosdepth, featureCounts, kallisto, LoFreq an
 MUSCLE. Existing classic BWA is not bwa-mem2; existing kallisto bulk operations
 do not implement bustools or single-cell BUS processing.
 
-After this batch, Kalign is the next proposed native-build investigation.
+Kalign is now the active native-build and pack implementation stage.
 Primer3 and PLINK2 need separately bounded operations; bustools and StringTie
 need workflow integration; HMMER, bwa-mem2, Salmon and MACS3 need dedicated
 portability work. Strelka2 needs an initial feasibility and version-specific
