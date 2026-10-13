@@ -1,0 +1,127 @@
+{
+  "schema": 1,
+  "synthetic": true,
+  "construction": "Direct SAM/BAM 1.6 encoding, coordinate-sorted, MAPQ60, NM:i:0, NH:i:1, XS:A:+/-. Random DNA uses Python Random(20261013); canonical introns are planted. Two disjoint equal-length transcripts have dense 100-nt reads beginning at exonic offsets 0..400 in steps of 10. Minus transcript has two independent name sets; a third annotated transcript deliberately has no reads. Truth predates StringTie execution.",
+  "coordinates": "exons0 are zero-based half-open; GTF is one-based closed",
+  "reference": {
+    "name": "chrSynthetic",
+    "length": 5000
+  },
+  "alignmentRecords": 123,
+  "alignedBases": 12300,
+  "readLength": 100,
+  "pairing": "single",
+  "transcripts": [
+    {
+      "id": "tx_plus",
+      "gene": "gene_plus",
+      "strand": "+",
+      "exons0": [
+        [
+          100,
+          350
+        ],
+        [
+          450,
+          700
+        ]
+      ],
+      "length": 500,
+      "alignedReads": 41,
+      "splicedReads": 9,
+      "alignedBases": 4100,
+      "meanAlignedBaseCoverage": 8.2,
+      "idealEqualLengthTpm": 333333.3333333333
+    },
+    {
+      "id": "tx_minus",
+      "gene": "gene_minus",
+      "strand": "-",
+      "exons0": [
+        [
+          1500,
+          1750
+        ],
+        [
+          1850,
+          2100
+        ]
+      ],
+      "length": 500,
+      "alignedReads": 82,
+      "splicedReads": 18,
+      "alignedBases": 8200,
+      "meanAlignedBaseCoverage": 16.4,
+      "idealEqualLengthTpm": 666666.6666666666
+    },
+    {
+      "id": "tx_unexpressed",
+      "gene": "gene_unexpressed",
+      "strand": "+",
+      "exons0": [
+        [
+          3000,
+          3250
+        ],
+        [
+          3350,
+          3600
+        ]
+      ],
+      "length": 500,
+      "alignedReads": 0,
+      "splicedReads": 0,
+      "alignedBases": 0,
+      "meanAlignedBaseCoverage": 0.0,
+      "idealEqualLengthTpm": 0.0
+    }
+  ],
+  "interpretation": "Coverage is exact input aligned-base arithmetic. Equal-length unambiguous expression ratio is 1:2, hence ideal TPM one third/two thirds. StringTie outputs are estimates and formatting/algorithm tolerances must be stated in assertions; no arbitrary biological pass threshold is implied.",
+  "empty": {
+    "alignmentRecords": 0,
+    "expectedExpression": 0,
+    "note": "Header-only BAM has the same declared reference; zero expression is a successful no-evidence result."
+  },
+  "integration": {
+    "construction": "Python Random(20261003) recreates the accepted HISAT2 synthetic genome; 12 uniquely named copies of the fixed pair, no aligner used to derive expected coordinates.",
+    "reference": {
+      "name": "chrSynthetic",
+      "length": 1100
+    },
+    "pairs": 12,
+    "records": 24,
+    "transcriptLength": 180,
+    "transcript": "integration_tx",
+    "gene": "integration_gene",
+    "exons0": [
+      [
+        470,
+        500
+      ],
+      [
+        600,
+        750
+      ]
+    ],
+    "strand": "+",
+    "requiredMinimumTranscriptLength": 100,
+    "expectedAlignments": [
+      {
+        "mate": 1,
+        "position1": 471,
+        "cigar": "30M100N30M",
+        "flag": 99
+      },
+      {
+        "mate": 2,
+        "position1": 691,
+        "cigar": "60M",
+        "flag": 147
+      }
+    ],
+    "inputAlignedBases": 1440,
+    "meanAlignedBaseCoverage": 8,
+    "idealSingleTranscriptTpm": 1000000,
+    "note": "An uncovered internal 60-nt interval is retained by reference-only estimation; this is not evidence for full transcript reconstruction from those reads alone."
+  }
+}

@@ -1,0 +1,6 @@
+chrSynthetic	synthetic_truth	exon	101	350	.	+	.	gene_id "gene_plus"; transcript_id "tx_plus";
+chrSynthetic	synthetic_truth	exon	451	700	.	+	.	gene_id "gene_plus"; transcript_id "tx_plus";
+chrSynthetic	synthetic_truth	exon	1501	1750	.	-	.	gene_id "gene_minus"; transcript_id "tx_minus";
+chrSynthetic	synthetic_truth	exon	1851	2100	.	-	.	gene_id "gene_minus"; transcript_id "tx_minus";
+chrSynthetic	synthetic_truth	exon	3001	3250	.	+	.	gene_id "gene_unexpressed"; transcript_id "tx_unexpressed";
+chrSynthetic	synthetic_truth	exon	3351	3600	.	+	.	gene_id "gene_unexpressed"; transcript_id "tx_unexpressed";

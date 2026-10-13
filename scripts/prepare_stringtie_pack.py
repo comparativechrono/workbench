@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+"""Prepare independent StringTie pack 1.0.0 from source-bound native binaries."""
+import argparse,importlib.util,json,shutil,sys,tarfile
+from pathlib import Path
+from build_stringtie_native import ROOT,VERSION as TOOL_VERSION,SOURCE_COMMIT,SOURCE_NAME,SOURCE_SHA256,SOURCES,sha
+sys.path.insert(0,str(ROOT/'desktop'))
+from prepare_modular_packs import artifact,execute,field,number,workflow
+VERSION='1.0.0'
+PARAMETERS=[('min-length','Minimum transcript length (bp)','200',30,10000,True,'Assembly selection parameter, not a QC threshold. Set 100 for the included 180-base HISAT2 training example.'),('min-coverage','Minimum multi-exon coverage','1',0.001,1000000,False,'Assembly selection threshold on estimated coverage; reference-only estimation retains annotated transcripts.'),('junction-coverage','Minimum junction coverage','1',0,1000000,False,'Minimum spliced-read coverage used during assembly; multimap correction remains enabled.'),('isoform-fraction','Minimum isoform fraction','0.01',0,1,False,'Relative expression selection in assembly; must be less than 1. Not an expression quality verdict.'),('single-coverage','Minimum single-exon coverage','4.75',0.001,1000000,False,'Assembly selection threshold for single-exon transcripts.'),('max-multimap','Maximum multimap fraction','1',0,1,False,'Maximum locus fraction of multimap alignments. Default 1 follows pinned upstream 3.0.3; NH weighting remains enabled.')]
+def definitions():
+    items=[];schemas={}
+    for mode,label,desc in [('assemble-guided','assemble guided short-read transcripts','Assemble expressed reference and novel transcript models from short-read RNA alignments, guided by a matching local GTF.'),('estimate-reference','estimate reference transcript expression','Estimate expression only for supplied GTF transcript models; no novel transcript assembly.')]:
+        inputs=[field('alignment','Coordinate-sorted short-read RNA BAM',filter='RNA BAM|*.bam|All files|*.*',help='One sample, binary BGZF BAM up to 4 GiB / 10 million records; mapped reads 1–1000 bases with positive NH tags. Spliced reads require XS:A:+/-; HISAT2 --dta works, STAR needs --outSAMstrandField intronMotif. Actual sorting and all records checked. No CRAM, supplementary records or mixed pairing. ASCII paths; spaces supported.'),field('annotation','Matching transcript annotation GTF',filter='Uncompressed GTF|*.gtf|All files|*.*',help='Same genome assembly as BAM; exact contig names and bounds checked, genome sequence identity is user responsibility. Exons need quoted gene_id/transcript_id and +/- strand. At most 256 MiB, 100000 transcripts / 1 million exons; no overlapping exons within a transcript. No GFF3/gzip.'),field('strandness','Library strandedness (required)','choice',choices='unstranded:Unstranded|rf:First strand (read1 opposes transcript)|fr:Second strand (read1 follows transcript)',help='Choose from library preparation; no strandness is inferred. Existing XS tags take priority over this option in upstream StringTie. For single-end libraries read1 means the sequenced read.')]
+        for ident,title,default,low,high,whole,helptext in PARAMETERS:inputs.append(number(ident,title,default,low,high,help=helptext) if whole else field(ident,title,'text',default=default,help=helptext+f' Supported finite decimal {low}–{high}.'))
+        outputs=[artifact('transcripts','Transcript structures and expression estimates','transcripts.gtf',nonempty=False),artifact('abundance','Gene expression estimates','gene-abundance.tsv'),artifact('summary','Recorded alignment and expression summary','stringtie-summary.json'),artifact('settings','Exact analysis settings','analysis-settings.json'),artifact('log','StringTie execution log','stringtie.log',nonempty=False)]
+        steps=[execute('version','Record bundled StringTie version','stringtie',['--version']),execute('analysis','Validate RNA inputs and run StringTie','stringtie-adapter',[mode,'{input:alignment}','{input:annotation}','{run}','{input:strandness}',*['{input:'+v[0]+'}' for v in PARAMETERS]],produces=[v['id'] for v in outputs])]
+        items.append(workflow(mode,'StringTie: '+label,desc+' Outputs contain expression estimates, not integer read counts.',inputs,outputs,steps))
+        schemas[mode]={'ports':[dict(id='alignment',label='Sorted RNA BAM',type='bam-rna',manifestInputs=['alignment'],min=1,max=1,requiredState={'sort':'coordinate'}),dict(id='annotation',label='Matching transcript GTF',type='text',manifestInputs=['annotation'],min=1,max=1)],'outputs':[dict(id=v['id'],label=v['label'],type='text' if v['id'] in ('transcripts','log') else 'metrics',manifestOutputs=[v['id']]) for v in outputs],'pathPolicy':{'asciiOnly':True},'methods':'Short-read RNA alignments were processed with unmodified StringTie 3.0.3 using a user-selected matching GTF. '+('Reference-guided assembly (-G) permits expressed reference and novel models.' if mode=='assemble-guided' else 'Reference-only estimation (-e -G) estimates supplied transcript models without novel assembly.')+' Library strandedness and all exposed selection settings were recorded explicitly. One processing thread, 10-base minimum junction anchor, 50-base bundle gap, STRG label, end trimming and NH-based multimap correction were used; other upstream defaults remain. The native guard checks actual coordinate sorting,BAM records,NH tags and XS strand tags on spliced alignments,plus GTF IDs,strands,contig names and bounds. These checks do not establish the exact genome sequence or experimental suitability; a BAM without RG sample name relies on the user selecting one sample. GTF coordinates are one-based inclusive. Coverage,FPKM and TPM are estimates,not integer read counts,QC pass thresholds or differential-expression results. No long-read,mixed,nascent,merge,Ballgown,prepDE or specificity workflow is exposed.'}
+    return items,{'schema':1,'category':'RNA analysis','citations':[{'text':'Pertea et al.(2015). StringTie enables improved reconstruction of a transcriptome from RNA-seq reads. Nature Biotechnology33:290–295.','url':'https://doi.org/10.1038/nbt.3122'},{'text':'Shinder et al.(2026). StringTie3 improves total RNA-seq assembly by resolving nascent and mature transcripts. Nature Methods.','url':'https://doi.org/10.1038/s41592-026-03080-3'}],'workflows':schemas}
+def checks():
+    return {'schema':1,'checks':[{'id':mode+'-spliced','workflow':mode,'inputs':{'alignment':[{'alignment':'fixture-spliced'}],'annotation':[{'annotation':'fixture-guide'}]},'params':{'strandness':'unstranded'},'expect':[{'output':'transcripts','kind':'text','contains':['reference_id "tx_plus"' if mode=='assemble-guided' else 'transcript_id "tx_plus"','\texon\t101\t350\t','\texon\t451\t700\t']},{'output':'summary','kind':'text','contains':['"bamRecords": 123','"splicedRecords": 27','"integerReadCountsProduced": false']}]} for mode in ('assemble-guided','estimate-reference')]}
+def main():
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--cache',type=Path,default=ROOT/'build/stringtie-cache');p.add_argument('--build',type=Path,default=ROOT/'build/stringtie-windows');p.add_argument('--destination',type=Path,default=ROOT/'packs/stringtie-1.0.0');a=p.parse_args();cache,build,dest=a.cache.resolve(),a.build.resolve(),a.destination.resolve();r=json.loads((build/'build.json').read_text())
+    for key,value in {'platform':'windows-x86_64','version':TOOL_VERSION,'upstreamCommit':SOURCE_COMMIT,'guardSourceSha256':sha(ROOT/'tools/stringtie/guard.cpp'),'builderSha256':sha(ROOT/'scripts/build_stringtie_native.py'),'upstreamSourceUnmodified':True}.items():
+        if r.get(key)!=value:raise ValueError('Build/source correspondence failed: '+key)
+    for name,(_,digest) in SOURCES.items():
+        if sha(cache/name)!=digest:raise ValueError('Changed source '+name)
+    if dest.exists() and any(dest.iterdir()):raise ValueError('Destination must be new/empty')
+    for d in ('bin','fixtures','licenses'):(dest/d).mkdir(parents=True,exist_ok=True)
+    sections=[]
+    def section(name,v):sections.append('['+name+']\n'+'\n'.join(k+'='+str(x) for k,x in v.items() if k!='id' or name=='pack')+'\n')
+    section('pack',dict(format=2,id='stringtie',version=VERSION,name='StringTie RNA transcript assembly and expression',platform='windows-x86_64',description='Reference-guided short-read transcript assembly and reference-only expression estimates.',color='#59788D'))
+    for name,ident in [('stringtie','stringtie'),('stringtie-guard','stringtie-adapter')]:
+        f=build/(name+'.exe')
+        if sha(f)!=r['files'][f.name]['sha256'] or f.read_bytes()[:2]!=b'MZ':raise ValueError('Changed/non-native binary')
+        shutil.copyfile(f,dest/'bin'/f.name);section('tool:'+ident,dict(path='bin/'+f.name,version=TOOL_VERSION if ident=='stringtie' else VERSION,sha256=sha(f)))
+    items,schema=definitions();assets={}
+    for name,value in [('workbench-schema.json',schema),('workbench-checks.json',checks())]:(dest/name).write_text(json.dumps(value,indent=2)+'\n',encoding='utf-8');assets[name[:-5]]=name
+    spec=importlib.util.spec_from_file_location('stringtie_fixtures',ROOT/'tools/stringtie/fixtures.py');generator=importlib.util.module_from_spec(spec);spec.loader.exec_module(generator);generator.fixtures(dest/'fixtures')
+    for f in sorted((dest/'fixtures').iterdir()):
+        if not f.is_file():raise ValueError('Unexpected fixture directory')
+        path='fixtures/'+f.name;assets['fixture-'+f.stem]=path
+    for name,path in assets.items():section('asset:'+name,dict(path=path,sha256=sha(dest/path)))
+    for item in items:
+        section('workflow:'+item['id'],dict(name=item['name'],description=item['description'],inputs=','.join(v['id'] for v in item['inputs']),outputs=','.join(v['id'] for v in item['outputs']),steps=','.join(v['id'] for v in item['steps'])))
+        for kind in ('input','output','step'):
+            for v in item[kind+'s']:section(kind+':'+item['id']+':'+v['id'],v)
+    (dest/'pack.ini').write_text('\n'.join(sections),encoding='utf-8');licenses=dest/'licenses'
+    for f in [*[cache/n for n in SOURCES],ROOT/'tools/stringtie/guard.cpp',ROOT/'tools/stringtie/fixtures.py',ROOT/'scripts/build_stringtie_native.py',Path(__file__),ROOT/'LICENSE']:shutil.copyfile(f,licenses/('Workbench-LICENSE.txt' if f.name=='LICENSE' else f.name))
+    with tarfile.open(cache/SOURCE_NAME) as t:
+        for path,name in [('LICENSE','StringTie-MIT.txt'),('htslib/htscodecs/LICENSE.md','HTSCodecs-LICENSE.md'),('htslib/Makefile','HTSlib-source-notice.txt'),('gclib/GThreads.cpp','GThreads-source-notice.cpp')]:
+            (licenses/name).write_bytes(t.extractfile('stringtie-'+SOURCE_COMMIT+'/'+path).read())
+    for archive,member,target in [('zlib-1.3.2.tar.gz','zlib-1.3.2/LICENSE','zlib-LICENSE.txt'),('tre-0.9.0.tar.gz','tre-0.9.0/LICENSE','TRE-LICENSE.txt')]:
+        with tarfile.open(cache/archive) as t:(licenses/target).write_bytes(t.extractfile(member).read())
+    shutil.copyfile(build/'build.json',licenses/'build-provenance.json')
+    for name,digest in r['compilerNotices'].items():
+        if sha(build/'compiler-notices'/name)!=digest:raise ValueError('Changed compiler notice')
+        shutil.copyfile(build/'compiler-notices'/name,licenses/('compiler-'+name))
+    for relative,digest in r['generatedConfiguration'].items():
+        if sha(build/relative)!=digest:raise ValueError('Changed build configuration')
+        target=licenses/'configuration'/relative;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(build/relative,target)
+    (licenses/'NOTICE.txt').write_text('StringTie 3.0.3 is compiled locally from unmodified pinned upstream source, including its bundled GCLib/HTSlib/HTSCodecs. Not an official upstream Windows distribution. StringTie/HTSlib are MIT; HTSCodecs BSD; GThreads original zlib-style notice retained. Static zlib 1.3.2 and TRE 0.9.0 source and notices are retained. Full archives preserve all constituent copyright notices. The uncompiled SuperReads subtree is retained as source only, not a runtime component. Compiler/runtime notices retained. Workbench adapter and build scripts are MIT.\nNo upstream source patches. Native Windows uses existing GThreads/HTSlib Windows paths, forced stdint.h include, generated build config, pinned TRE POSIXregex symbols; CRAM codecs and remote plugins disabled for this BAM-only local operation. Processing thread count is one, despite retaining native threading support.\n',encoding='utf-8')
+    shutil.copyfile(ROOT/'docs/STRINGTIE-PACK.md',dest/'PACK-README.md');sys.path.insert(0,str(ROOT/'workspace'));from catalog import load_pack;pack=load_pack(dest/'pack.ini');print(json.dumps({'pack':str(dest),'manifestSha256':sha(dest/'pack.ini'),'workflows':list(pack['workflows']),'checks':len(checks()['checks'])},indent=2))
+if __name__=='__main__':main()

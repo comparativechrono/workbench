@@ -188,7 +188,8 @@
     "kalign_final_review": "evidence/kalign-1.0.0-final-review-2026-10-13.json",
     "primer3_plink2_handover": "primer3-plink2-handover.md",
     "primer3_plink2_final_evidence": "evidence/primer3-plink2-1.0.0-final-review-2026-10-13.json",
-    "stack_integration": "evidence/stack-integration-2026-10-13.json"
+    "stack_integration": "evidence/stack-integration-2026-10-13.json",
+    "bustools_stringtie_handover": "bustools-stringtie-handover.md"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -1201,26 +1202,28 @@
   },
   "active_development": {
     "recorded_on": "2026-10-13",
-    "kind": "completed-source-stack-integration",
-    "branch": "main",
-    "merge_commit": "9c9cdeacf35d1bf3aa60277f0fb05d5af41c6254",
-    "reviewed_tree": "be386799379aa412eaa39f72043be863edf01649",
-    "status": "completed stack merged into main; unpublished application and packs remain unpublished",
-    "merged_prs": [
-      18,
-      17,
-      15,
-      14
-    ],
-    "previously_merged_pr": 16,
-    "open_pull_requests": [],
-    "evidence": "evidence/stack-integration-2026-10-13.json",
-    "compatibility_evidence": "evidence/merge-pack-compatibility-2026-10-13.json",
+    "kind": "optional-pack-batch",
+    "branch": "feature/bustools-stringtie-packs",
+    "base_branch": "main",
+    "base_commit": "9435fd65636917dab30e2c6b393549d1f371ac3d",
+    "base_tree": "9c93246c76ef9f5f75eb50ce4e4fcee77f76da37",
+    "packs": {
+      "bustools": "1.0.0",
+      "stringtie": "1.0.0"
+    },
+    "status": "implementation complete; local source/science/native cross-build checks pass; exact Windows and visual validation pending",
+    "application_changed": false,
     "published_application": "0.16.0",
     "unpublished_application_candidate": "0.16.1",
-    "release_published": false,
+    "merged": false,
+    "released": false,
+    "release_authorized": false,
     "catalogue_changed": false,
-    "next_work_authorized": false
+    "handover": "bustools-stringtie-handover.md",
+    "tool_versions": {
+      "bustools": "0.45.1-workbench1",
+      "stringtie": "3.0.3"
+    }
   },
   "ui_patch_0_16_1_development": {
     "recorded_on": "2026-10-09",
@@ -1967,7 +1970,7 @@
       "active_handover": "tester-feedback-0.16.1-handover.md"
     }
   },
-  "active_development_record": "stack_integration",
+  "active_development_record": "bustools_stringtie_development",
   "resize_redraw_0_16_1_development": {
     "recorded_on": "2026-10-10",
     "kind": "tools-resize-correction",
@@ -2715,5 +2718,30 @@
     "release_published": false,
     "catalogue_changed": false,
     "next_work_authorized": false
+  },
+  "bustools_stringtie_development": {
+    "recorded_on": "2026-10-13",
+    "kind": "optional-pack-batch",
+    "branch": "feature/bustools-stringtie-packs",
+    "base_branch": "main",
+    "base_commit": "9435fd65636917dab30e2c6b393549d1f371ac3d",
+    "base_tree": "9c93246c76ef9f5f75eb50ce4e4fcee77f76da37",
+    "packs": {
+      "bustools": "1.0.0",
+      "stringtie": "1.0.0"
+    },
+    "status": "implementation complete; local source/science/native cross-build checks pass; exact Windows and visual validation pending",
+    "application_changed": false,
+    "published_application": "0.16.0",
+    "unpublished_application_candidate": "0.16.1",
+    "merged": false,
+    "released": false,
+    "release_authorized": false,
+    "catalogue_changed": false,
+    "handover": "bustools-stringtie-handover.md",
+    "tool_versions": {
+      "bustools": "0.45.1-workbench1",
+      "stringtie": "3.0.3"
+    }
   }
 }
