@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import importlib.util
+import copy
 import io
 import json
 from pathlib import Path
@@ -109,6 +110,69 @@ class BustoolsStringTieEvidenceContracts(unittest.TestCase):
                              ('skipped', [['test_x', 'no executable']]), ('executions', [])]:
             with self.subTest(field=field, value=value):
                 self.assertFalse(gate.scientific_report_passed({**passed, field: value}))
+
+    @staticmethod
+    def dependency_catalog():
+        tools = {}
+        for operation in ('assemble-guided', 'estimate-reference'):
+            tools['stringtie/' + operation] = {'id': 'stringtie/' + operation,
+                'packId': 'stringtie', 'packVersion': '1.0.0', 'manifestSha256': 'a' * 64,
+                'packFolder': 'packs/stringtie-1.0.0', 'executables': [],
+                'ports': [{'type': 'bam-rna', 'requiredState': {'sort': 'coordinate'}}]}
+        tools[gate.SAMTOOLS['operation']] = {'id': gate.SAMTOOLS['operation'],
+            **{key: gate.SAMTOOLS[key] for key in ('packId', 'packVersion', 'manifestSha256')},
+            'packFolder': 'packs/bam-0.4.0',
+            'executables': [{key: gate.SAMTOOLS[key] for key in ('id', 'version', 'sha256', 'path')}]}
+        tools['unrelated/check'] = {'id': 'unrelated/check', 'packId': 'unrelated', 'packVersion': '2.0.0',
+                                    'manifestSha256': 'b' * 64, 'executables': []}
+        return {'tools': tools, 'toolVersions': {key: [value] for key, value in tools.items()},
+                'packs': [{'id': name, 'version': version} for name, version in
+                          [('stringtie', '1.0.0'), ('bam', '0.4.0'), ('unrelated', '2.0.0')]]}
+
+    def test_candidate_checks_keep_real_samtools_preflight_and_exclude_unrelated_tools(self):
+        # Exercise the actual engine selector: the historical one-pack filter
+        # reproduces the observed failure even though Starter has the helper.
+        before = list(sys.path)
+        try:
+            sys.path.insert(0, str(ROOT))
+            from workspace.engine import Engine
+        finally:
+            sys.path[:] = before
+        catalog = self.dependency_catalog()
+        original = copy.deepcopy(catalog)
+        selected, dependency = gate.candidate_check_catalog(catalog, 'stringtie', '1.0.0')
+        self.assertEqual(catalog, original)
+        self.assertEqual(set(selected['tools']), {'stringtie/assemble-guided', 'stringtie/estimate-reference', 'bam/flagstat'})
+        engine = Engine.__new__(Engine)
+        engine.catalog, engine.tools = selected, selected['tools']
+        owner = selected['tools']['stringtie/assemble-guided']
+        self.assertEqual(len(engine._alignment_ports(owner)), 1)
+        helper = engine._samtools_selection(owner)
+        self.assertEqual(helper['operation'], gate.SAMTOOLS['operation'])
+        self.assertEqual(helper['pin']['manifestSha256'], gate.SAMTOOLS['manifestSha256'])
+        self.assertEqual(helper['executable']['sha256'], gate.SAMTOOLS['sha256'])
+        broken = copy.deepcopy(selected)
+        del broken['toolVersions'][dependency['id']]
+        del broken['tools'][dependency['id']]
+        engine.catalog, engine.tools = broken, broken['tools']
+        with self.assertRaisesRegex(ValueError, 'Install a SAMtools pack'):
+            engine._samtools_selection(owner)
+
+    def test_candidate_checks_reject_absent_or_changed_samtools_dependencies(self):
+        for mutation in ('absent', 'manifest', 'binary', 'version'):
+            with self.subTest(mutation=mutation):
+                catalog = self.dependency_catalog()
+                dependency = catalog['toolVersions'][gate.SAMTOOLS['operation']][0]
+                if mutation == 'absent':
+                    del catalog['toolVersions'][gate.SAMTOOLS['operation']]
+                elif mutation == 'manifest':
+                    dependency['manifestSha256'] = '0' * 64
+                elif mutation == 'binary':
+                    dependency['executables'][0]['sha256'] = '0' * 64
+                else:
+                    dependency['executables'][0]['version'] = '1.25'
+                with self.assertRaisesRegex(ValueError, 'Exact Starter SAMtools .* absent or changed'):
+                    gate.candidate_check_catalog(catalog, 'stringtie', '1.0.0')
 
     @staticmethod
     def correspondence_fixture(identity):

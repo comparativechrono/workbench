@@ -140,12 +140,31 @@ class ScientificTests(unittest.TestCase):
         self.files['bus'].write_bytes(FIXTURE.bus_bytes([('AAAA','AAAA',4,9)]))
         out,_=self.run_tool();self.assertEqual(read_matrix(out),{'AAAA':{}})
     def test_05_lf_crlf_and_optional_gene_name_are_equivalent(self):
-        first,_=self.run_tool()
+        # Fixture text-mode writes use the host newline convention. Establish
+        # exact LF bytes first, avoiding CR-CR-LF when running on Windows.
         for key,path in self.files.items():
-            if key!='bus':path.write_bytes(path.read_bytes().replace(b'\n',b'\r\n'))
+            if key!='bus':
+                lf=path.read_bytes().replace(b'\r\n',b'\n')
+                self.assertNotIn(b'\r',lf)
+                self.assertIn(b'\n',lf)
+                path.write_bytes(lf)
+        first,_=self.run_tool();self.truth(first)
+        for key,path in self.files.items():
+            if key!='bus':
+                crlf=path.read_bytes().replace(b'\n',b'\r\n')
+                self.assertIn(b'\r\n',crlf)
+                self.assertNotIn(b'\r\r\n',crlf)
+                self.assertNotIn(b'\n',crlf.replace(b'\r\n',b''))
+                path.write_bytes(crlf)
         self.files['genes'].write_bytes(b''.join((tx+'\t'+gene+'\tGene label\r\n').encode() for tx,gene in zip(FIXTURE.TRANSCRIPTS,FIXTURE.GENES)))
         second,_=self.run_tool();self.truth(second)
         self.assertEqual((first/'summary.json').read_bytes(),(second/'summary.json').read_bytes())
+        # The originally failing test generated this malformed sequence.
+        # It must remain a rejected input, not become accepted by the adapter.
+        path=self.files['transcripts']
+        path.write_bytes(path.read_bytes().replace(b'\r\n',b'\r\r\n'))
+        _,child=self.run_tool(False)
+        self.assertIn('Plain ASCII text required',child.stderr)
     def test_06_corrupt_magic_version_truncation_and_header_reject(self):
         good=FIXTURE.bus_bytes()
         variants=[b'BUS\1'+good[4:],good[:4]+struct.pack('<I',2)+good[8:],good[:19],good[:-1],good[:16]+struct.pack('<I',5000)+good[20:]]

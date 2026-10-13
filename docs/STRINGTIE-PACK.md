@@ -9,6 +9,15 @@ uncompressed transcript GTF:
 - **Estimate reference expression** (`estimate-reference`, `-e -G`) estimates only
   supplied models. It does not discover novel transcripts.
 
+Workbench also needs an installed **SAMtools** pack for its alignment-header
+preflight. Starter includes this helper. If it is missing, install **Alignment
+files** (pack ID `bam`) from the Toolshed, then rerun the checks. The published
+`bam` **0.4.0** pack supplies **SAMtools 1.24** and is the candidate validation
+configuration. Workbench records the exact selected helper pack, manifest and
+executable in the saved plan. SAMtools is an application validation prerequisite;
+the bundled StringTie executable does not invoke it. The StringTie guard still
+checks every BAM record after the application's header preflight.
+
 Choose library strandedness explicitly: unstranded, first-strand/read1 opposes
 transcript (`--rf`), or second-strand/read1 follows transcript (`--fr`). For
 single-end libraries this refers to the sequenced read. The program cannot infer
@@ -64,7 +73,8 @@ HISAT2 splice fixture repeated with 12 unique pair names. Set minimum transcript
 length to 100 for this 180-base guide. Its 60-base internal coverage gap means it
 exercises reference expression, not complete de novo transcript reconstruction.
 
-For missing XS/NH tags, realign with the indicated RNA settings. For sorting
+If Workbench reports "Install a SAMtools pack to check alignment prerequisites",
+install or restore the Alignment files pack and rerun. For missing XS/NH tags, realign with the indicated RNA settings. For sorting
 errors, coordinate-sort the BAM. For contig/coordinate failures, select the
 annotation from the same assembly instead of renaming contigs blindly. For
 unexpectedly empty results, review library strandedness, guide compatibility,

@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "kind": "local-prepared-pack-source-correspondence",
+  "sourceCommit": "2044235fb0abff02c8d8259e12abf41df9647bd4",
+  "sourceTree": "9fd399d545b307da68270ee325142cf47ff767e8",
+  "success": true,
+  "nativeWindowsExecuted": false,
+  "published": false,
+  "packs": {
+    "bustools": {
+      "folder": "build/bustools-pack",
+      "manifestSha256": "6efe81d68448338143db24e7b63625d56cbf8890a4d7330b15b789d91c672936",
+      "sourceCorrespondence": {
+        "retainedRecipeFilesMatchedToGit": 7,
+        "guardSourceBoundToBuild": true,
+        "builderSourceBoundToBuild": true,
+        "compatibilityPatchBoundToBuild": true,
+        "binaryHashesMatchedToBuild": 2,
+        "upstreamSourceHashesVerified": {
+          "bustools-0.45.1.tar.gz": "b014317ea4501c3314ac358eb074dbbe3a10ed6daec53587f17a897e670e40df",
+          "zlib-1.3.2.tar.gz": "bb329a0a2cd0274d05519d61c667c062e06990d72e125ee2dfa8de64f0119d16"
+        },
+        "fixturesMatchedToGitFactory": 6,
+        "generatedFixturesExactBytesVerified": true,
+        "upstreamEmbeddedNoticesVerified": 10,
+        "generatedConfigurationFilesVerified": 0,
+        "scope": "Byte and provenance correspondence; not independent bit-identical recompilation."
+      }
+    },
+    "stringtie": {
+      "folder": "build/stringtie-pack-final",
+      "manifestSha256": "6708a28d8077b6629a5cff79c54433602c7e1b2939a130bdf4ba515c0a321faf",
+      "sourceCorrespondence": {
+        "retainedRecipeFilesMatchedToGit": 6,
+        "guardSourceBoundToBuild": true,
+        "builderSourceBoundToBuild": true,
+        "compatibilityPatchBoundToBuild": false,
+        "binaryHashesMatchedToBuild": 2,
+        "upstreamSourceHashesVerified": {
+          "stringtie-3.0.3.tar.gz": "52a5d94b0e85404d740d2c7a0c7cc698d373a1b8888e9a2a395ae294032d95c0",
+          "zlib-1.3.2.tar.gz": "bb329a0a2cd0274d05519d61c667c062e06990d72e125ee2dfa8de64f0119d16",
+          "tre-0.9.0.tar.gz": "5b7e5a730f041c6b0dab8f66576cda917577ec06bb393f156b169c51bca170d1"
+        },
+        "fixturesMatchedToGitFactory": 8,
+        "generatedFixturesExactBytesVerified": true,
+        "upstreamEmbeddedNoticesVerified": 6,
+        "generatedConfigurationFilesVerified": 6,
+        "scope": "Byte and provenance correspondence; not independent bit-identical recompilation."
+      }
+    }
+  },
+  "limits": [
+    "Local prepared pack directories; final downloaded Actions archive audit is separate.",
+    "Byte/source correspondence only; no new native execution or clinical claim."
+  ]
+}

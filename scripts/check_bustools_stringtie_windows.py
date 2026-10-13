@@ -40,6 +40,11 @@ HISAT2 = {'id': 'hisat2', 'version': '0.5.3',
           'manifestSha256': '06f912deb5926b00a8ca269138b4b3822bb4b3e36d4956e30ca7793655052967',
           'url': 'https://github.com/comparativechrono/workbench/releases/download/pack-hisat2-v0.5.3/native-workbench-pack-hisat2-0.5.3.zip',
           'publicationStatus': 'published development prerelease'}
+SAMTOOLS = {'packId': 'bam', 'packVersion': '0.4.0',
+            'manifestSha256': '45b3f9d5092b0b3014f67b29331003e1214c72919f85695a571fb371030a9888',
+            'operation': 'bam/flagstat', 'id': 'samtools', 'version': '1.24',
+            'sha256': '49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3',
+            'path': 'bin/samtools.exe', 'providedBy': 'unchanged pinned Starter application'}
 require, sha, read_json, write_json = common.require, common.sha, common.read_json, common.write_json
 file_record, verify_extracted, run_command = common.file_record, common.verify_extracted, common.run_command
 
@@ -106,6 +111,103 @@ def scientific_report_passed(report):
     return (report.get('success') is True and report.get('nativeWindowsExecuted') is True and
             isinstance(report.get('testsRun'), int) and report['testsRun'] > 0 and
             not report.get('skipped') and bool(report.get('executions')))
+
+
+def candidate_check_catalog(catalog, identity, version):
+    """Retain the target checks and its exact existing SAMtools preflight helper.
+
+    The generic historical release checker removes every other pack descriptor.
+    That makes StringTie checks unable to see SAMtools already in Starter. This
+    scoped catalogue preserves the dependency without changing app preflight.
+    """
+    selected = copy.deepcopy(catalog)
+    selected['tools'] = {key: tool for key, versions in catalog['toolVersions'].items()
+                         for tool in versions if tool.get('packId') == identity and tool.get('packVersion') == version}
+    require(selected['tools'], 'No exact candidate operation selected.')
+    candidates = [tool for tool in catalog['toolVersions'].get(SAMTOOLS['operation'], [])
+                  if all(tool.get(key) == SAMTOOLS[key] for key in ('packId', 'packVersion', 'manifestSha256'))]
+    require(len(candidates) == 1, 'Exact Starter SAMtools dependency is absent or changed.')
+    dependency = candidates[0]
+    matches = [executable for executable in dependency.get('executables', [])
+               if all(executable.get(key) == SAMTOOLS[key] for key in ('id', 'version', 'sha256', 'path'))]
+    require(len(matches) == 1, 'Exact Starter SAMtools executable is absent or changed.')
+    selected['tools'][dependency['id']] = dependency
+    selected['toolVersions'] = {key: [tool] for key, tool in selected['tools'].items()}
+    selected['packs'] = [item for item in catalog['packs']
+                         if (item['id'], item['version']) in {(identity, version), ('bam', '0.4.0')}]
+    return selected, dependency
+
+
+def stringtie_installation_check(root, archive, report_path):
+    """Native exact import and target checks with frozen Starter preflight intact."""
+    from catalog import load_catalog, load_pack
+    from engine import NativeBackend, pin_for
+    from pack_checks import run_pack_checks
+    from pack_manager import PackManager
+    from service import Workbench
+    report = {'schema': 1, 'nativeWindowsHost': os.name == 'nt', 'nativeWindowsExecuted': False, 'success': False}
+    require(os.name == 'nt', 'Installation checks require native Windows.')
+    class ObservedBackend(NativeBackend):
+        def _spawn(self, *arguments, **options):
+            process = super()._spawn(*arguments, **options)
+            report['nativeWindowsExecuted'] = True
+            return process
+    app, backend = None, None
+    try:
+        app = Workbench(root)
+        manager = PackManager(root, app._install_pack_folder)
+        installed = manager.import_archive(archive.resolve())
+        identity, version = installed['packId'], installed['packVersion']
+        require((identity, version) == ('stringtie', '1.0.0'), 'Unexpected target import identity.')
+        report.update(packId=identity, packVersion=version, installation=installed)
+        catalog = load_catalog(root)
+        selected, dependency = candidate_check_catalog(catalog, identity, version)
+        dependency_folder = root / dependency['packFolder']
+        require(sha(dependency_folder / 'pack.ini') == SAMTOOLS['manifestSha256'] and
+                sha(dependency_folder / SAMTOOLS['path']) == SAMTOOLS['sha256'],
+                'Installed Starter preflight dependency bytes differ.')
+        dependency_pack = load_pack(dependency_folder / 'pack.ini')
+        require('workbench-checks' not in dependency_pack['assets'],
+                'Dependency unexpectedly introduces unrelated declared checks.')
+        candidate = next(item for item in selected['packs'] if item['id'] == identity)
+        folder = root / candidate['folder']
+        pack = load_pack(folder / 'pack.ini')
+        spec = read_json(folder / pack['assets']['workbench-checks']['path'])
+        expected_checks = {identity + '/' + case['id'] + '@' + version for case in spec['checks']}
+        require(expected_checks, 'Target has no declared scientific checks.')
+        report['preflightDependency'] = {**SAMTOOLS, 'pin': pin_for(dependency),
+                                         'scope': 'Existing Starter descriptor retained for ordinary alignment inspection; dependency has no selected self-checks.'}
+        results = root / 'results'
+        results.mkdir(exist_ok=True)
+        backend = ObservedBackend(root)
+        checks = run_pack_checks(root, selected, results, backend=backend)
+        report['scientificChecks'] = checks
+        require(checks.get('success') and checks.get('nativeWindowsExecuted') and
+                report['nativeWindowsExecuted'] and checks.get('passed') == len(expected_checks) and
+                {row['id'] for row in checks['checks']} == expected_checks and
+                all(row['status'] == 'passed' for row in checks['checks']),
+                'Exact target scientific checks failed, skipped, or included unrelated checks.')
+        try:
+            manager.import_archive(archive.resolve())
+        except ValueError as exc:
+            require('already installed' in str(exc).lower(), 'Unexpected duplicate import failure: ' + str(exc))
+            report['duplicateVersionRejected'] = True
+        else:
+            raise ValueError('Duplicate version unexpectedly installed.')
+        require(sha(folder / 'pack.ini') == candidate['manifestSha256'] and
+                sha(dependency_folder / 'pack.ini') == SAMTOOLS['manifestSha256'] and
+                sha(dependency_folder / SAMTOOLS['path']) == SAMTOOLS['sha256'],
+                'Candidate/dependency bytes changed during checks.')
+        report['success'] = True
+    except Exception:
+        report['error'] = traceback.format_exc()
+    finally:
+        if app is not None:
+            app.shutdown()
+        if backend is not None:
+            backend.shutdown()
+        write_json(report_path, report)
+    return report
 
 
 def graph_for_case(root, catalog, identity, operation):
@@ -296,10 +398,14 @@ def native(args):
         installed, expected = {}, {}
         for identity in PACK_IDS:
             archive = args.candidate / frozen['packs'][identity]['file']
-            run_command([python, '-I', '-B', SOURCE / 'scripts/check_pack_release_windows.py', '--app-root', root,
-                         '--archive', archive, '--report', evidence / (identity + '-installation.json')],
-                        evidence / (identity + '-installation.log'))
-            result = read_json(evidence / (identity + '-installation.json'))
+            if identity == 'stringtie':
+                result = stringtie_installation_check(root, archive, evidence / (identity + '-installation.json'))
+                report['samtoolsPreflightDependency'] = result.get('preflightDependency')
+            else:
+                run_command([python, '-I', '-B', SOURCE / 'scripts/check_pack_release_windows.py', '--app-root', root,
+                             '--archive', archive, '--report', evidence / (identity + '-installation.json')],
+                            evidence / (identity + '-installation.log'))
+                result = read_json(evidence / (identity + '-installation.json'))
             require(result['success'] and result['nativeWindowsExecuted'] and result['duplicateVersionRejected'],
                     'Native import/check did not fully execute: ' + identity)
             report['nativeWindowsExecuted'] = True

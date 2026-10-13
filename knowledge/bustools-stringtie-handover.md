@@ -82,3 +82,19 @@ are synthesized. StringTie keeps XS-tag precedence over library options and
 requires explicit library selection; fixtures separately test untagged strand
 behavior. BUS and BAM binary fixtures are generated deterministically from
 committed factories.
+
+## First hosted attempt and correction
+
+Draft review: https://github.com/comparativechrono/workbench/pull/19.
+Initial source `2044235fb0abff02c8d8259e12abf41df9647bd4`, run
+https://github.com/comparativechrono/workbench/actions/runs/38412546344.
+The build and downloaded archive/source audit passed. Both Windows paths failed
+before full validation: the bustools test accidentally converted native CRLF to
+CR-CR-LF, and the generic isolated-pack checker hid Starter's existing SAMtools
+from StringTie alignment preflight. The test now verifies exact LF/CRLF bytes
+and deliberate malformed-CR rejection. The batch gate must retain the exact
+bundled `bam` 0.4.0 / SAMtools 1.24 helper while selecting target self-checks.
+StringTie setup guidance describes that existing application prerequisite;
+scientific executables and alignment preflight are unchanged. The failed attempt
+is preserved in the evidence directory and does not count as a successful
+Windows result. Corrected exact candidate validation remains pending.

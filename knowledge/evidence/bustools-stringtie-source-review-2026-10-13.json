@@ -1,0 +1,158 @@
+{
+  "schema": 1,
+  "kind": "independent-pre-hosted-source-review",
+  "reviewedAtUtc": "2026-10-13T14:21:47.977949+00:00",
+  "reviewer": "bus_stringtie_review",
+  "repository": "https://github.com/comparativechrono/workbench",
+  "branch": "feature/bustools-stringtie-packs",
+  "baseHeadAtReceipt": "9435fd65636917dab30e2c6b393549d1f371ac3d",
+  "sourceState": "Reviewed file hashes match the committed development candidate at sourceCommitAtFinalRead. No hosted or packaged archive execution claim is established by this source receipt.",
+  "outcome": "No remaining scientific/interface blocker identified in reviewed bounded operations. Hosted execution, archive correspondence and visual acceptance are separate gates.",
+  "filesReviewedSha256": {
+    "scripts/build_bustools_native.py": "be7d7752bdb35c2663deea6d30afd6e6b8e5108e21486c0b643829860ca73bd9",
+    "scripts/prepare_bustools_pack.py": "24cfdfa83632583be527d43db453d335f8f7c9c6d90e270ee62d49f263f2fe91",
+    "scripts/build_stringtie_native.py": "f77c64f8aeab4bf71da94ec3f3c690147562dc92ebf99334827e5004ee9cf9c3",
+    "scripts/prepare_stringtie_pack.py": "5a454f55b8153e45885a36e7195a54137c2016766df1304ff27781d2321789be",
+    "tools/bustools/guard.cpp": "9ff1cdc3c36035784558c31c0706310c1851ebd5b8bb40294ceb82cc54cebb45",
+    "tools/bustools/fixtures.py": "1b3af5ab3dc737823b2a4670218309cb4d7eb08286a96bbaefeef10c69f7fe65",
+    "tools/bustools/CRoaring-LICENSE": "5b223235c64f595576d15ba2d983ef14f8e9e3ec45aafcad689dc40008e1b29e",
+    "tools/stringtie/guard.cpp": "153ce572c235418f5fedd7c299976473ef98026d3de2946d8bcd9aba526183d8",
+    "tools/stringtie/fixtures.py": "532272673f801b2a3d1998198fd2a9e8d990afe446f8b3c71399efdd3e58dbc9",
+    "tests/test_bustools_pack.py": "87066ac97640a0a1c46262c8f207c4cf591afdb4b943ca5a14964aa5a1664a49",
+    "tests/test_stringtie_pack.py": "b5de0a31ec602e9b5ccff577fdf2d7ea5b074ffae6a41e6d44ec09a9ef5c0040",
+    "docs/BUSTOOLS-PACK.md": "a997c687693428c836202f79f1bb33da0487512c507231e0b2259c81aadbe2cb",
+    "docs/STRINGTIE-PACK.md": "f0c5269fce456f4cc6240d830e7d9eabb5f1f96e0b45998358a408e346ef2a1f"
+  },
+  "independentEvidence": {
+    "bustools": {
+      "inputRecords": 14,
+      "inputReadMultiplicity": 24,
+      "retainedRecords": 12,
+      "retainedReadMultiplicity": 19,
+      "sortedRecords": 11,
+      "matrixOrientation": "barcodes-by-genes",
+      "barcodeRows": 3,
+      "geneColumns": 3,
+      "nonzeroEntries": 3,
+      "exactUmiCounts": 5,
+      "matrix": {
+        "AAAA": {
+          "geneA": 3
+        },
+        "CCCC": {
+          "geneB": 1,
+          "geneC": 1
+        },
+        "TTTT": {}
+      },
+      "basis": "Manual inspection of planted records and pinned upstream correction/gene-intersection code; unique Hamming-1 CCCA corrects to CCCC, ambiguous AAAC and unmatched GGGG discard; exact duplicates collapse. No cell calling or read-count/UMI equivalence assumed."
+    },
+    "stringtie": {
+      "alignmentRecords": 123,
+      "alignedBases": 12300,
+      "splicedRecords": 27,
+      "transcriptLengths": [
+        500,
+        500,
+        500
+      ],
+      "meanAlignedBaseCoverage": [
+        8.2,
+        16.4,
+        0
+      ],
+      "idealExpressionRatio": [
+        1,
+        2,
+        0
+      ],
+      "basis": "Manual derivation from direct BAM fixture construction, exact exon coordinates, 41 reads per transcript copy and two minus-strand copies; reviewed FPKM/TPM oracle, zero-reference retention and untagged single-exon strandedness assertions. Existing XS tags take priority upstream.",
+      "additionalAssertionsReviewed": [
+        "With minus-strand guide removed, guided assembly recovers exact planted minus-strand exon geometry; reference-only mode omits that model.",
+        "Changing all positive NH tags from one to two halves coverage to 4.1 and 8.2; supports explicit upstream multimapping-weight interpretation."
+      ]
+    },
+    "emptyBusNormalization": "Reviewed guard condition: sort exit zero, corrected BUS parses with zero records, sorted output regular and exactly zero bytes; preserve exact corrected header, then revalidate before upstream count. Linux injected failures cover nonempty input with zero-byte sort output and failed sort exit. No records added.",
+    "sourceClosure": "Reviewed pinned source archives/recipes and retained notices. StringTie algorithms unmodified; bustools changes private Roaring inline linkage and version marker, with per-file change notices."
+  },
+  "fixedReviewFindings": [
+    "Capped BUS barcode length at 16 because upstream correction allocation grows exponentially; rejected unsupported high metadata bits, flags and split metadata.",
+    "Documented exact-UMI intersection counting, ambiguous/disjoint-gene exclusions and barcode-by-gene axes; no cell-calling claim.",
+    "Added exact pinned CRoaring Apache-2.0 notice and explicit modified-file notices.",
+    "Corrected StringTie numeric settings JSON serialization and precision; rejected isoform fraction one before upstream execution.",
+    "Rejected mapped BAM records with negative reference IDs, repeated GTF identifying attributes and conflicting gene contexts.",
+    "Corrected generated HTSCodecs version from 1.6.1 to archive-supported 1.4.0; HTSlib 1.21 independently confirmed.",
+    "Documented XS-tag precedence and added meaningful untagged single-exon strand-option checks."
+  ],
+  "localExecutionReportsInspected": [
+    {
+      "path": "build/bustools-source-final-tests.json",
+      "sha256": "5a76bd12b10883edacb0d0bf1f612572c6833284a19e8b35e8d55d5264081849",
+      "reportedSuccess": true,
+      "platform": "linux",
+      "nativeWindowsExecuted": false,
+      "testsRun": 24,
+      "failures": 0,
+      "errors": 0,
+      "skipped": [],
+      "executionRecords": 68,
+      "recordedTestSourceSha256": "87066ac97640a0a1c46262c8f207c4cf591afdb4b943ca5a14964aa5a1664a49",
+      "matchesCurrentTestSource": true,
+      "pristineReferenceCases": 3,
+      "linuxBoundaryFaultCases": 2,
+      "executionPerformedByReviewer": false,
+      "evidenceBasis": "Implementer-produced local report inspected; independent reviewer inspected assertion source and derived fixture arithmetic."
+    },
+    {
+      "path": "build/stringtie-source-final-tests.json",
+      "sha256": "5727ff9f21abd603cb8ed8f509ad6e1901c6a16ca89014715b21e9509b686e9e",
+      "reportedSuccess": true,
+      "platform": "linux",
+      "nativeWindowsExecuted": false,
+      "testsRun": 18,
+      "failures": 0,
+      "errors": 0,
+      "skipped": [],
+      "executionRecords": 47,
+      "recordedTestSourceSha256": "b5de0a31ec602e9b5ccff577fdf2d7ea5b074ffae6a41e6d44ec09a9ef5c0040",
+      "matchesCurrentTestSource": true,
+      "pristineReferenceCases": 4,
+      "linuxBoundaryFaultCases": 0,
+      "executionPerformedByReviewer": false,
+      "evidenceBasis": "Implementer-produced local report inspected; independent reviewer inspected assertion source and derived fixture arithmetic."
+    }
+  ],
+  "primarySources": [
+    "https://bustools.github.io/manual",
+    "https://github.com/BUStools/BUS-format",
+    "https://github.com/BUStools/bustools/tree/d4d7a283dbe9d34d2106e9ba31e2566413be6a70",
+    "https://ccb.jhu.edu/software/stringtie/index.shtml?t=manual",
+    "https://github.com/gpertea/stringtie/tree/3436ad6dfd0ffc806a94086cf747ac6ff2b0dc19",
+    "https://github.com/RoaringBitmap/CRoaring/blob/86de9b526c05cbd59deedc101c4f3aee99ddd905/LICENSE"
+  ],
+  "reviewerChanges": [
+    {
+      "path": "tools/bustools/CRoaring-LICENSE",
+      "bytes": 11352,
+      "sha256": "5b223235c64f595576d15ba2d983ef14f8e9e3ec45aafcad689dc40008e1b29e",
+      "upstreamGitBlob": "3265476ea81f3b52cb34737242e9cf4e5a3b4dd5",
+      "basis": "Exact upstream notice fetched at pinned CRoaring 0.2.65 commit; local Git blob matches upstream. Implementer requested this one source file."
+    }
+  ],
+  "outstandingChecks": [
+    "Exact packaged native Windows application/pack execution in ordinary and space-containing paths.",
+    "Real pinned HISAT2-to-StringTie graph execution and output assertions on Windows.",
+    "Downloaded archive hashes, complete corresponding source inventory and tested-commit correspondence.",
+    "Actual native display screenshot review and layout acceptance.",
+    "Representative PCs, realistic datasets and benchmarking; signing/deployment and release/updater validation remain separate."
+  ],
+  "limitations": [
+    "Existing kallisto pack does not generate BUS; this is an external coherent BUS-bundle interface, not a FASTQ single-cell workflow.",
+    "Barcode/gene mappings, genome identity and library preparation remain user-reviewed associations that file structure cannot prove.",
+    "StringTie coverage/FPKM/TPM are estimates, not integer counts or QC pass thresholds; native Results does not acquire new measurement tiles.",
+    "No merge, release, publication or native Windows success claim is established by this pre-hosted source review."
+  ],
+  "previousReceiptSha256": "fbeb550eda5eac23ad35322006e359ed3c137efd220617effa21d55bd90c8cfb",
+  "initialReviewAtUtc": "2026-10-13T14:18:15.436288+00:00",
+  "sourceCommitAtFinalRead": "2044235fb0abff02c8d8259e12abf41df9647bd4"
+}
