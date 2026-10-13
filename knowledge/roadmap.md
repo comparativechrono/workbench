@@ -1,6 +1,30 @@
 # Development roadmap
 
-## Active set: wrapped native tool library, 2026-10-10
+## Active set: Prodigal and FastTree optional packs, 2026-10-13
+
+The owner approved the first small batch from the requested tool inventory:
+**Prodigal** gene prediction and **FastTree** phylogenetic inference. Both start
+as independent **1.0.0** pack candidates; no application version change is
+required. Development is based on the existing wrapped-library candidate at
+`2b2e97aa15970f0e7fb3a5428e8ab7dad6acada2`, preserving draft PR #15.
+See the [batch handover](prodigal-fasttree-handover.md) for implementation and
+exact validation status. Source, native scientific, graph and GUI checks remain
+separate; no release or catalogue publication is included in this batch.
+
+The requested inventory already contains published optional packs for fastp,
+Cutadapt (pack `trimming`), HISAT2, mosdepth, featureCounts, kallisto, LoFreq and
+MUSCLE. Existing classic BWA is not bwa-mem2; existing kallisto bulk operations
+do not implement bustools or single-cell BUS processing.
+
+After this batch, Kalign is the next proposed native-build investigation.
+Primer3 and PLINK2 need separately bounded operations; bustools and StringTie
+need workflow integration; HMMER, bwa-mem2, Salmon and MACS3 need dedicated
+portability work. Strelka2 needs an initial feasibility and version-specific
+licensing assessment. This is a provisional engineering order, not a schedule.
+Benchmarking remains separate, alongside the previously outstanding deployment,
+representative-PC, signing, scientific Linux CWL and release/updater work.
+
+## Previous set: wrapped native tool library, 2026-10-10
 
 Unpublished **0.16.1** application source
 `ff13db729a6215e9fe5dfa4a4efdb9c769880287` implements full bold wrapped names,
