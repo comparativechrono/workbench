@@ -1,0 +1,355 @@
+{
+  "schema": 1,
+  "kind": "unpublished-draft-review-index",
+  "recordedOn": "2026-10-13",
+  "success": true,
+  "status": "ready for unpublished draft review",
+  "sourceCommit": "a93b338bca5e71b89e3cd000caaba96dbec73501",
+  "sourceTree": "3b971d0c40e047d8498f2f78799420fbd255492e",
+  "workflowRun": "https://github.com/comparativechrono/workbench/actions/runs/38420188054",
+  "workflowConclusion": "success",
+  "branch": "feature/bustools-stringtie-packs",
+  "baseBranch": "main",
+  "baseCommit": "9435fd65636917dab30e2c6b393549d1f371ac3d",
+  "pullRequest": "https://github.com/comparativechrono/workbench/pull/19",
+  "pullRequestState": "draft",
+  "published": false,
+  "merged": false,
+  "catalogueChanged": false,
+  "applicationChanged": false,
+  "packs": {
+    "bustools": {
+      "file": "native-workbench-pack-bustools-1.0.0.zip",
+      "bytes": 5836546,
+      "sha256": "387f7ae1b04ba8187e9e24690b5ad102aa1c9d44ce558c04b37ddf3cbf70e629",
+      "id": "bustools",
+      "version": "1.0.0",
+      "manifestSha256": "6efe81d68448338143db24e7b63625d56cbf8890a4d7330b15b789d91c672936",
+      "staticValidation": {
+        "id": "bustools",
+        "name": "bustools BUS molecule counting",
+        "version": "1.0.0",
+        "toolVersions": {
+          "bustools": "0.45.1-workbench1",
+          "bustools-adapter": "1.0.0"
+        },
+        "description": "Barcode correction, sorting and exact-UMI gene counts from a reviewed coherent BUS bundle.",
+        "category": "RNA-seq",
+        "platform": "windows-x86_64",
+        "packApi": 1,
+        "minAppVersion": "0.16.0",
+        "size": 5836546,
+        "sha256": "387f7ae1b04ba8187e9e24690b5ad102aa1c9d44ce558c04b37ddf3cbf70e629",
+        "manifestSha256": "6efe81d68448338143db24e7b63625d56cbf8890a4d7330b15b789d91c672936"
+      }
+    },
+    "stringtie": {
+      "file": "native-workbench-pack-stringtie-1.0.0.zip",
+      "bytes": 6852872,
+      "sha256": "6b24cf029ae1371d79e5cec7b39ec83314c0506c135ee59216b218c3ee88a59d",
+      "id": "stringtie",
+      "version": "1.0.0",
+      "manifestSha256": "abfc5ef62ec2b6f2fadc3d80e32cc6dbf06ca10a97fd030e91ec5641ba9f6b62",
+      "staticValidation": {
+        "id": "stringtie",
+        "name": "StringTie RNA transcript assembly and expression",
+        "version": "1.0.0",
+        "toolVersions": {
+          "stringtie": "3.0.3-workbench1",
+          "stringtie-adapter": "1.0.0"
+        },
+        "description": "Reference-guided short-read transcript assembly and reference-only expression estimates.",
+        "category": "RNA analysis",
+        "platform": "windows-x86_64",
+        "packApi": 1,
+        "minAppVersion": "0.16.0",
+        "size": 6852872,
+        "sha256": "6b24cf029ae1371d79e5cec7b39ec83314c0506c135ee59216b218c3ee88a59d",
+        "manifestSha256": "abfc5ef62ec2b6f2fadc3d80e32cc6dbf06ca10a97fd030e91ec5641ba9f6b62"
+      }
+    }
+  },
+  "sourceCompanion": {
+    "file": "native-workbench-bustools-stringtie-1.0.0-source-evidence.zip",
+    "bytes": 13818900,
+    "sha256": "bc0af8a0eb657e0ba3a1c8281c64f41645135e389ba74febfb4a228aeaf4fe03"
+  },
+  "applications": {
+    "0.16.0": {
+      "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073",
+      "sourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441"
+    },
+    "0.16.1": {
+      "sha256": "28f1362287991621dde030da54eb444846142c0243be6b9d86c4b4f1bf99dd47",
+      "sourceCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287"
+    }
+  },
+  "artifacts": [
+    {
+      "id": 11826762319,
+      "name": "bustools-stringtie-native-ordinary-a93b338bca5e71b89e3cd000caaba96dbec73501",
+      "size_in_bytes": 4872922,
+      "digest": "sha256:903895253fa4b2b8a214087a06b7d88b28e2fda33926c65b3ed1b91255dff588",
+      "expires_at": "2026-11-12T15:17:35Z",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/38420188054/artifacts/11826762319",
+      "transportHashVerified": true,
+      "zipCrcVerified": true
+    },
+    {
+      "id": 11826607142,
+      "name": "bustools-stringtie-candidate-a93b338bca5e71b89e3cd000caaba96dbec73501",
+      "size_in_bytes": 26518988,
+      "digest": "sha256:507a130d5b6f9c91fc04e1aa4eefb56aa6bc1f30f5e08c86d5a113630a94f320",
+      "expires_at": "2026-11-12T15:16:27Z",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/38420188054/artifacts/11826607142",
+      "transportHashVerified": true,
+      "zipCrcVerified": true
+    },
+    {
+      "id": 11826497492,
+      "name": "bustools-stringtie-native-path with spaces-a93b338bca5e71b89e3cd000caaba96dbec73501",
+      "size_in_bytes": 4861500,
+      "digest": "sha256:5f4e1dd0105b33235274191c06a4082291d1e19509430cd422d6ecb2b2438538",
+      "expires_at": "2026-11-12T15:17:31Z",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/38420188054/artifacts/11826497492",
+      "transportHashVerified": true,
+      "zipCrcVerified": true
+    },
+    {
+      "id": 11826027477,
+      "name": "bustools-stringtie-build-evidence-a93b338bca5e71b89e3cd000caaba96dbec73501",
+      "size_in_bytes": 169835,
+      "digest": "sha256:27410349ad420cd0ec1d75f5771c5d8da5ab14774f687c112222595528c70752",
+      "expires_at": "2026-11-12T15:16:29Z",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/38420188054/artifacts/11826027477",
+      "transportHashVerified": true,
+      "zipCrcVerified": true
+    }
+  ],
+  "sourceValidation": {
+    "testsRun": 139,
+    "passed": 138,
+    "skipped": 1,
+    "skip": {
+      "test": "test_windows_deep_local_archive_import",
+      "source": "tests/test_pack_manager.py",
+      "reason": "Native Windows long-path filesystem check",
+      "platform": "Linux build host"
+    },
+    "packScientificTestsSkipped": 0,
+    "freshPristineComparisonCases": 7
+  },
+  "sourceCorrespondence": {
+    "gitFiles": 1027,
+    "companionInventoryFiles": 1478,
+    "exactUpstreamPatchSha256": {
+      "bustools": "889fea401c52db2b748c1d5645dc63ccae8844c74cbdfef0af153d1580d261f4",
+      "stringtie": "eb4e3cee57f25ba8b67989342c4bdef7a7bcdbf4988b8067cd48ef27a2677a45"
+    },
+    "independentBitIdenticalRebuildClaimed": false
+  },
+  "nativeValidation": {
+    "testsPerScientificPath": {
+      "bustools": 19,
+      "stringtie": 20
+    },
+    "selectedSkipsPerPath": 0,
+    "scienceGatesPerPath": 12,
+    "guiGatesPerPath": 12,
+    "stringtieFullOutputRepetitionsPerPath": 20,
+    "poisonedLayoutExecutions": 2,
+    "retainedGraphsAudited": 16,
+    "graphOutputHashesVerified": 160,
+    "hisat2StringtieGraphs": 4,
+    "combinedRegressionPerPath": {
+      "core": 7,
+      "starterScientific": 1,
+      "declaredPackChecks": 8,
+      "skipped": 0
+    },
+    "scopes": {
+      "ordinary": {
+        "science": {
+          "reportSha256": "cf1c5a2639688ad49b43265a404e80e15091cd2a504f1f2e1143288ba1c040e7",
+          "applicationVersion": "0.16.0",
+          "applicationSourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+          "applicationArchive": {
+            "file": "published-starter.zip",
+            "bytes": 17846873,
+            "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+          },
+          "nativeWindowsExecuted": true,
+          "checks": [
+            "bustools: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+            "bustools: exact installed scientific and failure regressions.",
+            "stringtie: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+            "stringtie: exact installed scientific and failure regressions.",
+            "Exact released HISAT2 ZIP native import, four declared alignment checks and duplicate-version rejection.",
+            "bustools/count-bus: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+            "stringtie/assemble-guided: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+            "stringtie/estimate-reference: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+            "Published HISAT2 paired spliced RNA output feeds StringTie assemble-guided through the real typed graph; independent alignment and transcript truth agree.",
+            "Published HISAT2 paired spliced RNA output feeds StringTie estimate-reference through the real typed graph; independent alignment and transcript truth agree.",
+            "Unchanged Starter science and all installed declared pack checks pass together.",
+            "Pinned application and installed pack bytes remain unchanged after execution."
+          ],
+          "applicationFilesVerifiedBefore": 274,
+          "applicationFilesVerifiedAfter": 274
+        },
+        "gui": {
+          "reportSha256": "515bd19d9b4dc94b94877fd9f401377e2b148bb9a9c5f0249681ee61e7a2ff48",
+          "applicationVersion": "0.16.1",
+          "applicationSourceCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+          "applicationArchive": {
+            "file": "native-workbench-0.16.1-starter-windows.zip",
+            "bytes": 17889148,
+            "sha256": "28f1362287991621dde030da54eb444846142c0243be6b9d86c4b4f1bf99dd47"
+          },
+          "nativeWindowsExecuted": true,
+          "checks": [
+            "bustools: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+            "stringtie: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+            "bustools/count-bus: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+            "stringtie/assemble-guided: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+            "stringtie/estimate-reference: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+            "The native library discovers the installed bustools and StringTie 1.0.0 packs and displays their operations under complete catalogue labels.",
+            "Native pointer selection opens bustools/count-bus with exact pack version, declared input/option labels and reachable form pages.",
+            "Native pointer selection opens stringtie/assemble-guided with exact pack version, declared input/option labels and reachable form pages.",
+            "Native pointer selection opens stringtie/estimate-reference with exact pack version, declared input/option labels and reachable form pages.",
+            "Native Results search finds Pack candidate bustools and displays its successful native operation, exact pack/executable versions and recorded manifest identity without a QC verdict.",
+            "Native Results search finds Pack candidate stringtie and displays its successful native operation, exact pack/executable versions and recorded manifest identity without a QC verdict.",
+            "Pinned application and installed pack bytes remain unchanged after execution."
+          ],
+          "applicationFilesVerifiedBefore": 277,
+          "applicationFilesVerifiedAfter": 277
+        }
+      },
+      "spaces": {
+        "science": {
+          "reportSha256": "72ca232b20be52efdf2dc778003420381dd41cfec54fa4f4569a5a38761528a6",
+          "applicationVersion": "0.16.0",
+          "applicationSourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+          "applicationArchive": {
+            "file": "published-starter.zip",
+            "bytes": 17846873,
+            "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+          },
+          "nativeWindowsExecuted": true,
+          "checks": [
+            "bustools: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+            "bustools: exact installed scientific and failure regressions.",
+            "stringtie: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+            "stringtie: exact installed scientific and failure regressions.",
+            "Exact released HISAT2 ZIP native import, four declared alignment checks and duplicate-version rejection.",
+            "bustools/count-bus: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+            "stringtie/assemble-guided: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+            "stringtie/estimate-reference: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+            "Published HISAT2 paired spliced RNA output feeds StringTie assemble-guided through the real typed graph; independent alignment and transcript truth agree.",
+            "Published HISAT2 paired spliced RNA output feeds StringTie estimate-reference through the real typed graph; independent alignment and transcript truth agree.",
+            "Unchanged Starter science and all installed declared pack checks pass together.",
+            "Pinned application and installed pack bytes remain unchanged after execution."
+          ],
+          "applicationFilesVerifiedBefore": 274,
+          "applicationFilesVerifiedAfter": 274
+        },
+        "gui": {
+          "reportSha256": "933cadae2f662abd6dc6eca0067bcd03b04a0280de2d2c640d2f75ef39fee38c",
+          "applicationVersion": "0.16.1",
+          "applicationSourceCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+          "applicationArchive": {
+            "file": "native-workbench-0.16.1-starter-windows.zip",
+            "bytes": 17889148,
+            "sha256": "28f1362287991621dde030da54eb444846142c0243be6b9d86c4b4f1bf99dd47"
+          },
+          "nativeWindowsExecuted": true,
+          "checks": [
+            "bustools: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+            "stringtie: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+            "bustools/count-bus: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+            "stringtie/assemble-guided: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+            "stringtie/estimate-reference: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+            "The native library discovers the installed bustools and StringTie 1.0.0 packs and displays their operations under complete catalogue labels.",
+            "Native pointer selection opens bustools/count-bus with exact pack version, declared input/option labels and reachable form pages.",
+            "Native pointer selection opens stringtie/assemble-guided with exact pack version, declared input/option labels and reachable form pages.",
+            "Native pointer selection opens stringtie/estimate-reference with exact pack version, declared input/option labels and reachable form pages.",
+            "Native Results search finds Pack candidate bustools and displays its successful native operation, exact pack/executable versions and recorded manifest identity without a QC verdict.",
+            "Native Results search finds Pack candidate stringtie and displays its successful native operation, exact pack/executable versions and recorded manifest identity without a QC verdict.",
+            "Pinned application and installed pack bytes remain unchanged after execution."
+          ],
+          "applicationFilesVerifiedBefore": 277,
+          "applicationFilesVerifiedAfter": 277
+        }
+      }
+    }
+  },
+  "visualValidation": {
+    "actualBitBltCapturesReviewed": 56,
+    "allOriginalCaptureHashesVerified": 112,
+    "dpi": 96,
+    "displayPixels": [
+      1024,
+      768
+    ],
+    "blockingFindings": [],
+    "openedSeparateMethodsDialog": false
+  },
+  "evidence": {
+    "source": {
+      "path": "bustools-stringtie-1.0.0-source-2026-10-13.json",
+      "sha256": "2bd3789929383271e265963c500b2ade0e855e0ece232c755bd80c1bb46c8059"
+    },
+    "archive-audit": {
+      "path": "bustools-stringtie-1.0.0-archive-audit-2026-10-13.json",
+      "sha256": "db84ded28980db95d44e2876e31e81b5bc57bca51b459b0c602f45826d488071"
+    },
+    "native-audit": {
+      "path": "bustools-stringtie-1.0.0-native-audit-2026-10-13.json",
+      "sha256": "d29abd6ac69caea9f51391f099c3224e684b742fda76da192d8f9b915f09e611"
+    },
+    "visual-review": {
+      "path": "bustools-stringtie-1.0.0-visual-review-2026-10-13.json",
+      "sha256": "55f569ffe0bb718851b504b7ee9bc745ca371e6466fd0af8049a306b0e37fbaa"
+    }
+  },
+  "retainedFailedAttempts": [
+    {
+      "sourceCommit": "2044235fb0abff02c8d8259e12abf41df9647bd4",
+      "run": 38412546344,
+      "result": "test newline and isolated dependency-selection failures",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/38412546344",
+      "superseded": true
+    },
+    {
+      "sourceCommit": "69a9ec0d09ef94076fbe4ba0f59fd89d2a604bd4",
+      "run": 38413969992,
+      "result": "native jobs stalled until configured limit; GitHub conclusion cancelled",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/38413969992",
+      "superseded": true
+    },
+    {
+      "sourceCommit": "0c13ab53bcec23710a633306a30a1d3e00c3ca22",
+      "run": 38416410225,
+      "result": "clean build failed because patch file was omitted from commit",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/38416410225",
+      "superseded": true
+    },
+    {
+      "sourceCommit": "ddeadd34b68491f7f7450ceac804f8fade4116a6",
+      "run": 38416822238,
+      "result": "five observed StringTie heap-corruption failures across nine analyses",
+      "url": "https://github.com/comparativechrono/workbench/actions/runs/38416822238",
+      "superseded": true
+    }
+  ],
+  "limits": [
+    "Synthetic bounded fixtures only; no representative-PC or realistic-data performance acceptance.",
+    "Native Results retains searchable status and exact provenance; pack-specific JSON measurements remain output files without dedicated native tiles. Generic unavailable-measurement advice is not specific to unsupported formats.",
+    "Long form guidance requires scrolling at the tested viewport. Static capture review does not prove absence of transient flicker or high-DPI, multiple-monitor, physical-trackpad or accessibility acceptance.",
+    "Methods/CWL contents and Results provenance checked; the separate Methods document dialog was not opened in this screenshot run.",
+    "BUS interface consumes a coherent reviewed external BUS bundle; no FASTQ-to-BUS generation, chemistry inference, cell calling or differential expression.",
+    "StringTie exposes guided short-read assembly and reference-only estimation; no long/mixed/nascent/merge/Ballgown/raw DE count mode.",
+    "Scientific Linux CWL, benchmarking, signing/institutional deployment, representative-PC and release/updater validation remain separate.",
+    "Optional Linux ASan diagnostic did not execute; no sanitizer pass claimed.",
+    "Download artifacts require GitHub access and are currently scheduled to expire 2026-11-12."
+  ]
+}

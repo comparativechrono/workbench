@@ -1,0 +1,2078 @@
+{
+  "schema": 1,
+  "kind": "independent-downloaded-native-evidence-audit",
+  "sourceCommit": "a93b338bca5e71b89e3cd000caaba96dbec73501",
+  "sourceTree": "3b971d0c40e047d8498f2f78799420fbd255492e",
+  "workflowRunId": 38420188054,
+  "success": true,
+  "sourceAudit": {
+    "path": "independent-source-audit.json",
+    "bytes": 5487,
+    "sha256": "94359c5088923a9db8ccc72e70be65123fc0dd55fb80092710b13149782b183b"
+  },
+  "gitSourceFilesVerified": 1027,
+  "companionInventoryFilesVerified": 1478,
+  "candidatePacks": {
+    "bustools": {
+      "file": "native-workbench-pack-bustools-1.0.0.zip",
+      "bytes": 5836546,
+      "sha256": "387f7ae1b04ba8187e9e24690b5ad102aa1c9d44ce558c04b37ddf3cbf70e629",
+      "id": "bustools",
+      "version": "1.0.0",
+      "manifestSha256": "6efe81d68448338143db24e7b63625d56cbf8890a4d7330b15b789d91c672936",
+      "staticValidation": {
+        "id": "bustools",
+        "name": "bustools BUS molecule counting",
+        "version": "1.0.0",
+        "toolVersions": {
+          "bustools": "0.45.1-workbench1",
+          "bustools-adapter": "1.0.0"
+        },
+        "description": "Barcode correction, sorting and exact-UMI gene counts from a reviewed coherent BUS bundle.",
+        "category": "RNA-seq",
+        "platform": "windows-x86_64",
+        "packApi": 1,
+        "minAppVersion": "0.16.0",
+        "size": 5836546,
+        "sha256": "387f7ae1b04ba8187e9e24690b5ad102aa1c9d44ce558c04b37ddf3cbf70e629",
+        "manifestSha256": "6efe81d68448338143db24e7b63625d56cbf8890a4d7330b15b789d91c672936"
+      }
+    },
+    "stringtie": {
+      "file": "native-workbench-pack-stringtie-1.0.0.zip",
+      "bytes": 6852872,
+      "sha256": "6b24cf029ae1371d79e5cec7b39ec83314c0506c135ee59216b218c3ee88a59d",
+      "id": "stringtie",
+      "version": "1.0.0",
+      "manifestSha256": "abfc5ef62ec2b6f2fadc3d80e32cc6dbf06ca10a97fd030e91ec5641ba9f6b62",
+      "staticValidation": {
+        "id": "stringtie",
+        "name": "StringTie RNA transcript assembly and expression",
+        "version": "1.0.0",
+        "toolVersions": {
+          "stringtie": "3.0.3-workbench1",
+          "stringtie-adapter": "1.0.0"
+        },
+        "description": "Reference-guided short-read transcript assembly and reference-only expression estimates.",
+        "category": "RNA analysis",
+        "platform": "windows-x86_64",
+        "packApi": 1,
+        "minAppVersion": "0.16.0",
+        "size": 6852872,
+        "sha256": "6b24cf029ae1371d79e5cec7b39ec83314c0506c135ee59216b218c3ee88a59d",
+        "manifestSha256": "abfc5ef62ec2b6f2fadc3d80e32cc6dbf06ca10a97fd030e91ec5641ba9f6b62"
+      }
+    }
+  },
+  "sourceCompanion": {
+    "file": "native-workbench-bustools-stringtie-1.0.0-source-evidence.zip",
+    "bytes": 13818900,
+    "sha256": "bc0af8a0eb657e0ba3a1c8281c64f41645135e389ba74febfb4a228aeaf4fe03"
+  },
+  "summary": {
+    "nativeScopesPassed": 4,
+    "topLevelChecksPerScope": 12,
+    "bustoolsNativeTestsPerSciencePath": 19,
+    "stringtieNativeTestsPerSciencePath": 20,
+    "selectedScienceSkips": 0,
+    "repeatedStringTieAnalysesPerSciencePath": 20,
+    "totalRepeatedStringTieAnalyses": 40,
+    "poisonedLayoutExecutions": 2,
+    "retainedNormalGraphsAudited": 16,
+    "recordedOutputFilesRehashed": 160,
+    "HISAT2StringTieChainsAudited": 4,
+    "screenshotFilesRehashed": 112,
+    "visualScreenshotReviewPerformedByThisAudit": false
+  },
+  "scopes": [
+    {
+      "scope": "ordinary/science",
+      "nativeReport": {
+        "path": "ordinary/science/native.json",
+        "bytes": 27005,
+        "sha256": "cf1c5a2639688ad49b43265a404e80e15091cd2a504f1f2e1143288ba1c040e7"
+      },
+      "success": true,
+      "sourceCommit": "a93b338bca5e71b89e3cd000caaba96dbec73501",
+      "applicationVersion": "0.16.0",
+      "applicationArchive": {
+        "file": "published-starter.zip",
+        "bytes": 17846873,
+        "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+      },
+      "coreFilesUnchanged": 274,
+      "completedChecks": [
+        "bustools: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+        "bustools: exact installed scientific and failure regressions.",
+        "stringtie: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+        "stringtie: exact installed scientific and failure regressions.",
+        "Exact released HISAT2 ZIP native import, four declared alignment checks and duplicate-version rejection.",
+        "bustools/count-bus: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+        "stringtie/assemble-guided: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+        "stringtie/estimate-reference: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+        "Published HISAT2 paired spliced RNA output feeds StringTie assemble-guided through the real typed graph; independent alignment and transcript truth agree.",
+        "Published HISAT2 paired spliced RNA output feeds StringTie estimate-reference through the real typed graph; independent alignment and transcript truth agree.",
+        "Unchanged Starter science and all installed declared pack checks pass together.",
+        "Pinned application and installed pack bytes remain unchanged after execution."
+      ],
+      "installations": {
+        "bustools": {
+          "report": {
+            "path": "ordinary/science/bustools-installation.json",
+            "bytes": 1462,
+            "sha256": "4913dc5a2b750b66e74e6624e3485e64deb551f3a84e7b699bd22de825bede8e"
+          },
+          "passed": 1,
+          "duplicateVersionRejected": true
+        },
+        "stringtie": {
+          "report": {
+            "path": "ordinary/science/stringtie-installation.json",
+            "bytes": 3127,
+            "sha256": "25a0310dba8d5fdf0bca6c69931334396f5722598428c33664bb07c845e0fc0e"
+          },
+          "passed": 2,
+          "duplicateVersionRejected": true
+        },
+        "hisat2": {
+          "report": {
+            "path": "ordinary/science/hisat2-installation.json",
+            "bytes": 2630,
+            "sha256": "ad6417d0e0b4eb8472bb07d2b8c6afc97e07154ee1ec04244ff0b24ffe243c54"
+          },
+          "passed": 4,
+          "duplicateVersionRejected": true
+        }
+      },
+      "graphs": [
+        {
+          "name": "bustools/count-bus",
+          "run": {
+            "path": "ordinary/science/analysis-results/run-20261013-151702-cc09dadb/run.json",
+            "bytes": 17750,
+            "sha256": "71a11bf4739688d37110b5844338db21587053ab84f92ce825ad6fb7948e4382"
+          },
+          "plan": {
+            "path": "ordinary/science/analysis-results/run-20261013-151702-cc09dadb/plan.json",
+            "bytes": 26547,
+            "sha256": "01f739225aafdccad084a9daecb27943ad9f3c2b07de49e87901874d4c8b6e34"
+          },
+          "methods": {
+            "path": "ordinary/science/analysis-results/run-20261013-151702-cc09dadb/methods-completed.txt",
+            "bytes": 2343,
+            "sha256": "c06a0eb05cb65d6715cf22f0cbe748ec604c7cfdb45f2312085a9f5fd00c1f59"
+          },
+          "cwl": {
+            "path": "ordinary/science/analysis-results/run-20261013-151702-cc09dadb/workflow.cwl",
+            "bytes": 80760,
+            "sha256": "836b6fa5b89a5b6041db43e453e874f2237f918d4180a2eb42258f290714d19f"
+          },
+          "pins": [
+            {
+              "packId": "bustools",
+              "packVersion": "1.0.0",
+              "manifestSha256": "6efe81d68448338143db24e7b63625d56cbf8890a4d7330b15b789d91c672936"
+            }
+          ],
+          "selectedPreflightHelpers": [],
+          "outputFilesRehashed": 11,
+          "readOnlyScientificOracle": {
+            "schema": 1,
+            "inputRecords": 14,
+            "inputReadMultiplicity": 24,
+            "retainedRecords": 12,
+            "retainedReadMultiplicity": 19,
+            "sortedRecords": 11,
+            "discardedBarcodeRecords": 2,
+            "barcodes": 3,
+            "genes": 3,
+            "nonzeroEntries": 3,
+            "countedMolecules": 5,
+            "matrixOrientation": "barcodes-by-genes",
+            "cellCallingPerformed": false,
+            "qcThresholdsApplied": false
+          }
+        },
+        {
+          "name": "stringtie/assemble-guided",
+          "run": {
+            "path": "ordinary/science/analysis-results/run-20261013-151703-39eccb81/run.json",
+            "bytes": 11433,
+            "sha256": "5262ad9c3c03b0b33df489cb1e9eab1591bed2dd0cee4e6656be920375edcf25"
+          },
+          "plan": {
+            "path": "ordinary/science/analysis-results/run-20261013-151703-39eccb81/plan.json",
+            "bytes": 25002,
+            "sha256": "e73f1983102ceb06903729f08ae85786f8425a6d1f55319facfccc51f624e485"
+          },
+          "methods": {
+            "path": "ordinary/science/analysis-results/run-20261013-151703-39eccb81/methods-completed.txt",
+            "bytes": 2419,
+            "sha256": "865228a60286ba1e5760fd96adaf029226632bd67a74cea08f0cfac85f93b47c"
+          },
+          "cwl": {
+            "path": "ordinary/science/analysis-results/run-20261013-151703-39eccb81/workflow.cwl",
+            "bytes": 52046,
+            "sha256": "f924eb15a22f230c044a49d3ed38f052d12dd2a6624498702e3f12ee7d19c985"
+          },
+          "pins": [
+            {
+              "packId": "stringtie",
+              "packVersion": "1.0.0",
+              "manifestSha256": "abfc5ef62ec2b6f2fadc3d80e32cc6dbf06ca10a97fd030e91ec5641ba9f6b62"
+            }
+          ],
+          "selectedPreflightHelpers": [
+            {
+              "operation": "hisat2/rna-single",
+              "pin": {
+                "packId": "hisat2",
+                "packVersion": "0.5.3",
+                "manifestSha256": "06f912deb5926b00a8ca269138b4b3822bb4b3e36d4956e30ca7793655052967"
+              },
+              "executable": {
+                "id": "samtools",
+                "path": "bin/samtools.exe",
+                "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+                "version": "1.24"
+              }
+            }
+          ],
+          "outputFilesRehashed": 5,
+          "readOnlyScientificOracle": {
+            "knownTranscriptGeometryCoverageAndExpressionMatched": true,
+            "transcripts": [
+              "tx_plus",
+              "tx_minus"
+            ],
+            "coverage": {
+              "tx_plus": 8.2,
+              "tx_minus": 16.4
+            },
+            "TPM": {
+              "tx_plus": 333333.333333,
+              "tx_minus": 666666.666667
+            }
+          }
+        },
+        {
+          "name": "stringtie/estimate-reference",
+          "run": {
+            "path": "ordinary/science/analysis-results/run-20261013-151703-4bbb122a/run.json",
+            "bytes": 11483,
+            "sha256": "83ff0563edeff76fbd1f8cb92e7b99d33727684f81589bb892507edeb02610b6"
+          },
+          "plan": {
+            "path": "ordinary/science/analysis-results/run-20261013-151703-4bbb122a/plan.json",
+            "bytes": 24971,
+            "sha256": "75e1db1fa3fbf9ccc19a1a99d1225f541ee5cffeb18a3688b25c3213f65d1662"
+          },
+          "methods": {
+            "path": "ordinary/science/analysis-results/run-20261013-151703-4bbb122a/methods-completed.txt",
+            "bytes": 2439,
+            "sha256": "8eced28fa946d7597d09f5892227fd75e6c978b95d9553779fa620d2c4777335"
+          },
+          "cwl": {
+            "path": "ordinary/science/analysis-results/run-20261013-151703-4bbb122a/workflow.cwl",
+            "bytes": 51995,
+            "sha256": "44575899773b1858ab2ec9b9269fa30f9b3bfd0d48244b94ad9f34cb812211e4"
+          },
+          "pins": [
+            {
+              "packId": "stringtie",
+              "packVersion": "1.0.0",
+              "manifestSha256": "abfc5ef62ec2b6f2fadc3d80e32cc6dbf06ca10a97fd030e91ec5641ba9f6b62"
+            }
+          ],
+          "selectedPreflightHelpers": [
+            {
+              "operation": "hisat2/rna-single",
+              "pin": {
+                "packId": "hisat2",
+                "packVersion": "0.5.3",
+                "manifestSha256": "06f912deb5926b00a8ca269138b4b3822bb4b3e36d4956e30ca7793655052967"
+              },
+              "executable": {
+                "id": "samtools",
+                "path": "bin/samtools.exe",
+                "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+                "version": "1.24"
+              }
+            }
+          ],
+          "outputFilesRehashed": 5,
+          "readOnlyScientificOracle": {
+            "knownTranscriptGeometryCoverageAndExpressionMatched": true,
+            "transcripts": [
+              "tx_plus",
+              "tx_minus",
+              "tx_unexpressed"
+            ],
+            "coverage": {
+              "tx_plus": 8.2,
+              "tx_minus": 16.4,
+              "tx_unexpressed": 0.0
+            },
+            "TPM": {
+              "tx_plus": 333333.333333,
+              "tx_minus": 666666.666667,
+              "tx_unexpressed": 0.0
+            }
+          }
+        },
+        {
+          "name": "hisat2/stringtie/assemble-guided",
+          "run": {
+            "path": "ordinary/science/analysis-results/run-20261013-151704-b4707852/run.json",
+            "bytes": 27107,
+            "sha256": "c88467c1288200cdb59bc3058bee01f6b739db809e5c9da0adb21e424e15ce3b"
+          },
+          "plan": {
+            "path": "ordinary/science/analysis-results/run-20261013-151704-b4707852/plan.json",
+            "bytes": 54758,
+            "sha256": "67e2843b0a4e1cb726c5d4062282052273704c07bd395754bcf23d5ba2410e80"
+          },
+          "methods": {
+            "path": "ordinary/science/analysis-results/run-20261013-151704-b4707852/methods-completed.txt",
+            "bytes": 3904,
+            "sha256": "1d8abe2767cd04c383f3d32963361f133ade20f27c85b54ba18bdb56333a6d97"
+          },
+          "cwl": {
+            "path": "ordinary/science/analysis-results/run-20261013-151704-b4707852/workflow.cwl",
+            "bytes": 122094,
+            "sha256": "bae04977308597e21539ac8b44c03531cd5c87de047faf9ae9620383d6b27457"
+          },
+          "pins": [
+            {
+              "packId": "hisat2",
+              "packVersion": "0.5.3",
+              "manifestSha256": "06f912deb5926b00a8ca269138b4b3822bb4b3e36d4956e30ca7793655052967"
+            },
+            {
+              "packId": "stringtie",
+              "packVersion": "1.0.0",
+              "manifestSha256": "abfc5ef62ec2b6f2fadc3d80e32cc6dbf06ca10a97fd030e91ec5641ba9f6b62"
+            }
+          ],
+          "selectedPreflightHelpers": [
+            {
+              "operation": "hisat2/rna-single",
+              "pin": {
+                "packId": "hisat2",
+                "packVersion": "0.5.3",
+                "manifestSha256": "06f912deb5926b00a8ca269138b4b3822bb4b3e36d4956e30ca7793655052967"
+              },
+              "executable": {
+                "id": "samtools",
+                "path": "bin/samtools.exe",
+                "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+                "version": "1.24"
+              }
+            }
+          ],
+          "outputFilesRehashed": 19,
+          "readOnlyScientificOracle": {
+            "success": true,
+            "pairedFragments": 12,
+            "alignmentRecords": 24,
+            "splicedRecords": 12,
+            "operation": "assemble-guided",
+            "transcriptExons0": [
+              [
+                470,
+                500
+              ],
+              [
+                600,
+                750
+              ]
+            ],
+            "coverage": 8.0,
+            "tpm": 1000000.0,
+            "knownCoverageGapBases": 60,
+            "interpretation": "Guide-supported transcript and abundance from exact paired splice alignments; not de novo reconstruction proof"
+          }
+        },
+        {
+          "name": "hisat2/stringtie/estimate-reference",
+          "run": {
+            "path": "ordinary/science/analysis-results/run-20261013-151705-5cfc3f05/run.json",
+            "bytes": 27135,
+            "sha256": "56e7e91a285e9ed623f45bdf3ccfdb9e7657d92cf35febdf3b9a46b0422cce61"
+          },
+          "plan": {
+            "path": "ordinary/science/analysis-results/run-20261013-151705-5cfc3f05/plan.json",
+            "bytes": 54707,
+            "sha256": "16e2c7ee7d2ec1fac840bc7203d1dcc72c7a832d91071021b08e4f0a63695a4f"
+          },
+          "methods": {
+            "path": "ordinary/science/analysis-results/run-20261013-151705-5cfc3f05/methods-completed.txt",
+            "bytes": 3924,
+            "sha256": "e4d6147b1357071af5c76c0a2987cee72c885c5735c9ed589f6e509d082959c4"
+          },
+          "cwl": {
+            "path": "ordinary/science/analysis-results/run-20261013-151705-5cfc3f05/workflow.cwl",
+            "bytes": 122021,
+            "sha256": "382101fb8beca9f1a4358825b68de0222c945076b5def6534c55e2dd3f93222d"
+          },
+          "pins": [
+            {
+              "packId": "hisat2",
+              "packVersion": "0.5.3",
+              "manifestSha256": "06f912deb5926b00a8ca269138b4b3822bb4b3e36d4956e30ca7793655052967"
+            },
+            {
+              "packId": "stringtie",
+              "packVersion": "1.0.0",
+              "manifestSha256": "abfc5ef62ec2b6f2fadc3d80e32cc6dbf06ca10a97fd030e91ec5641ba9f6b62"
+            }
+          ],
+          "selectedPreflightHelpers": [
+            {
+              "operation": "hisat2/rna-single",
+              "pin": {
+                "packId": "hisat2",
+                "packVersion": "0.5.3",
+                "manifestSha256": "06f912deb5926b00a8ca269138b4b3822bb4b3e36d4956e30ca7793655052967"
+              },
+              "executable": {
+                "id": "samtools",
+                "path": "bin/samtools.exe",
+                "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+                "version": "1.24"
+              }
+            }
+          ],
+          "outputFilesRehashed": 19,
+          "readOnlyScientificOracle": {
+            "success": true,
+            "pairedFragments": 12,
+            "alignmentRecords": 24,
+            "splicedRecords": 12,
+            "operation": "estimate-reference",
+            "transcriptExons0": [
+              [
+                470,
+                500
+              ],
+              [
+                600,
+                750
+              ]
+            ],
+            "coverage": 8.0,
+            "tpm": 1000000.0,
+            "knownCoverageGapBases": 60,
+            "interpretation": "Guide-supported transcript and abundance from exact paired splice alignments; not de novo reconstruction proof"
+          }
+        }
+      ],
+      "scientificSuites": {
+        "bustools": {
+          "report": {
+            "path": "ordinary/science/bustools-regressions.json",
+            "bytes": 55167,
+            "sha256": "28a527363c4e3c2f69b4aa301abfe6bb165dde7a629999aa921b005a6576101e"
+          },
+          "testsRun": 19,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "executionRecords": 55,
+          "scientificBinarySha256": "20fa810027a4e247fb47a34555581d118c61b12d2932f50c87daa3e7f436af4d",
+          "guardExecutableSha256": "005f448cd5518861dae5b4033edc7e272dbf1eb8a51d5611b5d5698616e079a6"
+        },
+        "stringtie": {
+          "report": {
+            "path": "ordinary/science/stringtie-regressions.json",
+            "bytes": 35378,
+            "sha256": "2b1e7a7b44d7009640c894f8101995e4a5a99c17902fce84f8bf053d420394f9"
+          },
+          "testsRun": 20,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "executionRecords": 68,
+          "scientificBinarySha256": "1427c8e1e3e3d05d41f45b8c806ebd700bcf0674c471b3a2b64f24833bf4356c",
+          "guardExecutableSha256": "edda00997fffda7b6c58cb65eaee8fc63d91d05cc520394da7a78fd381737cb6"
+        }
+      },
+      "memoryBoundaryRegression": {
+        "poisonedLayout": {
+          "executed": true,
+          "returncode": 0,
+          "sourceSha256": "58a0947452ee6c1dbfbadbeaac2d9b7866a811770e20a028865303ee6c2bb525",
+          "executableSha256": "3a2e268bae5a4fa0e813f39484480e2b0bd6c6f089b9a86fe4eeaefbf97f4d61",
+          "patchedHeaderSha256": "fa1b980f5829a8a74eb9b5962e81cbf6c5df6b14d3903662108b195a138e4da3",
+          "result": {
+            "success": true,
+            "unionBytes": 4,
+            "poison": 165,
+            "fieldsChecked": 19
+          }
+        },
+        "repeatedModes": {
+          "assemble-guided": 10,
+          "estimate-reference": 10
+        },
+        "fullOutputOracle": true,
+        "repetitionsChecked": 20,
+        "exactProbeFiles": [
+          {
+            "path": "ordinary/science/stringtie-flags/flag-layout-check.cpp",
+            "bytes": 4267,
+            "sha256": "58a0947452ee6c1dbfbadbeaac2d9b7866a811770e20a028865303ee6c2bb525"
+          },
+          {
+            "path": "ordinary/science/stringtie-flags/flag-layout-check.exe",
+            "bytes": 65536,
+            "sha256": "3a2e268bae5a4fa0e813f39484480e2b0bd6c6f089b9a86fe4eeaefbf97f4d61"
+          },
+          {
+            "path": "ordinary/science/stringtie-flags/flag-layout-check.json",
+            "bytes": 1088,
+            "sha256": "611066aa8fc90add1a447a4052105036831ac6afa3b5408e268e8f34f9eb491a"
+          }
+        ]
+      },
+      "combinedInstallationRegression": {
+        "report": {
+          "path": "ordinary/science/installation-regression.json",
+          "bytes": 133350,
+          "sha256": "1388a3f9023e9b64bcc22fc37ef19e0a13dc870efec3c43b73636c94154c53b3"
+        },
+        "corePassed": 7,
+        "starterScientificPassed": 1,
+        "additionalPackChecksPassed": 8,
+        "skipped": 0
+      },
+      "rawReports": [
+        {
+          "path": "ordinary/science/bustools-count-bus-graph.json",
+          "bytes": 1305,
+          "sha256": "f7851cb4da5e53fe2145c3468f0ca85e47b97d745a6705f48a8bd9db0dc6196c"
+        },
+        {
+          "path": "ordinary/science/bustools-count-bus-result-summary.json",
+          "bytes": 5274,
+          "sha256": "98a056709dd8c6f7c685c3c5fb842432f0ea12db1afab46a2f8396e6540e7108"
+        },
+        {
+          "path": "ordinary/science/bustools-installation.json",
+          "bytes": 1462,
+          "sha256": "4913dc5a2b750b66e74e6624e3485e64deb551f3a84e7b699bd22de825bede8e"
+        },
+        {
+          "path": "ordinary/science/bustools-regressions.json",
+          "bytes": 55167,
+          "sha256": "28a527363c4e3c2f69b4aa301abfe6bb165dde7a629999aa921b005a6576101e"
+        },
+        {
+          "path": "ordinary/science/hisat2-installation.json",
+          "bytes": 2630,
+          "sha256": "ad6417d0e0b4eb8472bb07d2b8c6afc97e07154ee1ec04244ff0b24ffe243c54"
+        },
+        {
+          "path": "ordinary/science/hisat2-stringtie-assemble-guided-graph.json",
+          "bytes": 2238,
+          "sha256": "d548ac6bcd6877a33fb4e4fa81ea72ebf6a1d63ae1446063ce287241b4e0d3ed"
+        },
+        {
+          "path": "ordinary/science/hisat2-stringtie-assemble-guided-result-summary.json",
+          "bytes": 7027,
+          "sha256": "ddc65bfdad5db1f6218a166d61f547d182ab03f7a950d561e2750eb05b27978a"
+        },
+        {
+          "path": "ordinary/science/hisat2-stringtie-estimate-reference-graph.json",
+          "bytes": 2244,
+          "sha256": "de58e2aa2651e714f52a4934c97023b459c909a8ae68edb66cb6088c7b308588"
+        },
+        {
+          "path": "ordinary/science/hisat2-stringtie-estimate-reference-result-summary.json",
+          "bytes": 7043,
+          "sha256": "7b7d96a7e6f955707acdab1bd6994bf688cc810312250531d00088e26e929617"
+        },
+        {
+          "path": "ordinary/science/installation-regression.json",
+          "bytes": 133350,
+          "sha256": "1388a3f9023e9b64bcc22fc37ef19e0a13dc870efec3c43b73636c94154c53b3"
+        },
+        {
+          "path": "ordinary/science/native.json",
+          "bytes": 27005,
+          "sha256": "cf1c5a2639688ad49b43265a404e80e15091cd2a504f1f2e1143288ba1c040e7"
+        },
+        {
+          "path": "ordinary/science/stringtie-assemble-guided-graph.json",
+          "bytes": 1121,
+          "sha256": "43f7aa4e7e45a301880281e79e480adb48a2145d972224e2721aa2bf4f533597"
+        },
+        {
+          "path": "ordinary/science/stringtie-assemble-guided-result-summary.json",
+          "bytes": 5320,
+          "sha256": "d3eb6c69800adf055cc3a4967fb58b62a3389078befee42c57853e793a2414e3"
+        },
+        {
+          "path": "ordinary/science/stringtie-estimate-reference-graph.json",
+          "bytes": 1149,
+          "sha256": "b3a83895a06298c6caec6fd7e024a5f64c6b9dded0343fda26a916b3461fe4cc"
+        },
+        {
+          "path": "ordinary/science/stringtie-estimate-reference-result-summary.json",
+          "bytes": 5380,
+          "sha256": "f143178e09c731513311237f08a7c8ff7f261aba78d5ad393f376aabb6e40c6e"
+        },
+        {
+          "path": "ordinary/science/stringtie-installation.json",
+          "bytes": 3127,
+          "sha256": "25a0310dba8d5fdf0bca6c69931334396f5722598428c33664bb07c845e0fc0e"
+        },
+        {
+          "path": "ordinary/science/stringtie-regressions.json",
+          "bytes": 35378,
+          "sha256": "2b1e7a7b44d7009640c894f8101995e4a5a99c17902fce84f8bf053d420394f9"
+        }
+      ]
+    },
+    {
+      "scope": "ordinary/gui",
+      "nativeReport": {
+        "path": "ordinary/gui/native.json",
+        "bytes": 41270,
+        "sha256": "515bd19d9b4dc94b94877fd9f401377e2b148bb9a9c5f0249681ee61e7a2ff48"
+      },
+      "success": true,
+      "sourceCommit": "a93b338bca5e71b89e3cd000caaba96dbec73501",
+      "applicationVersion": "0.16.1",
+      "applicationArchive": {
+        "file": "native-workbench-0.16.1-starter-windows.zip",
+        "bytes": 17889148,
+        "sha256": "28f1362287991621dde030da54eb444846142c0243be6b9d86c4b4f1bf99dd47"
+      },
+      "coreFilesUnchanged": 277,
+      "completedChecks": [
+        "bustools: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+        "stringtie: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+        "bustools/count-bus: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+        "stringtie/assemble-guided: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+        "stringtie/estimate-reference: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+        "The native library discovers the installed bustools and StringTie 1.0.0 packs and displays their operations under complete catalogue labels.",
+        "Native pointer selection opens bustools/count-bus with exact pack version, declared input/option labels and reachable form pages.",
+        "Native pointer selection opens stringtie/assemble-guided with exact pack version, declared input/option labels and reachable form pages.",
+        "Native pointer selection opens stringtie/estimate-reference with exact pack version, declared input/option labels and reachable form pages.",
+        "Native Results search finds Pack candidate bustools and displays its successful native operation, exact pack/executable versions and recorded manifest identity without a QC verdict.",
+        "Native Results search finds Pack candidate stringtie and displays its successful native operation, exact pack/executable versions and recorded manifest identity without a QC verdict.",
+        "Pinned application and installed pack bytes remain unchanged after execution."
+      ],
+      "installations": {
+        "bustools": {
+          "report": {
+            "path": "ordinary/gui/bustools-installation.json",
+            "bytes": 1465,
+            "sha256": "f672dcf4684c078c09f79b209a9fdeb18b503f6fdd0ff4b1331c8128aae4294d"
+          },
+          "passed": 1,
+          "duplicateVersionRejected": true
+        },
+        "stringtie": {
+          "report": {
+            "path": "ordinary/gui/stringtie-installation.json",
+            "bytes": 3108,
+            "sha256": "6d56fe5d1c7e223f49eaea5abec627ce47f103fb9df65647cb6185e21418478a"
+          },
+          "passed": 2,
+          "duplicateVersionRejected": true
+        }
+      },
+      "graphs": [
+        {
+          "name": "bustools/count-bus",
+          "run": {
+            "path": "ordinary/gui/analysis-results/run-20261013-151719-d2b7690b/run.json",
+            "bytes": 17626,
+            "sha256": "ff95aba3f47bdbdfdb718f464d8f757f472d3bb6cfd6e9fa3dcb63d661939a80"
+          },
+          "plan": {
+            "path": "ordinary/gui/analysis-results/run-20261013-151719-d2b7690b/plan.json",
+            "bytes": 26558,
+            "sha256": "73cdbf2537ca903a44a0365ec8367278a6f8bb65eb815bad643d07739b20e4ee"
+          },
+          "methods": {
+            "path": "ordinary/gui/analysis-results/run-20261013-151719-d2b7690b/methods-completed.txt",
+            "bytes": 2343,
+            "sha256": "c06a0eb05cb65d6715cf22f0cbe748ec604c7cfdb45f2312085a9f5fd00c1f59"
+          },
+          "cwl": {
+            "path": "ordinary/gui/analysis-results/run-20261013-151719-d2b7690b/workflow.cwl",
+            "bytes": 80651,
+            "sha256": "e7ac5d12ae8a66cf2edaea9f9ebcdd56b27be97c9011c0c4a10542a7ce36ea7a"
+          },
+          "pins": [
+            {
+              "packId": "bustools",
+              "packVersion": "1.0.0",
+              "manifestSha256": "6efe81d68448338143db24e7b63625d56cbf8890a4d7330b15b789d91c672936"
+            }
+          ],
+          "selectedPreflightHelpers": [],
+          "outputFilesRehashed": 11,
+          "readOnlyScientificOracle": {
+            "schema": 1,
+            "inputRecords": 14,
+            "inputReadMultiplicity": 24,
+            "retainedRecords": 12,
+            "retainedReadMultiplicity": 19,
+            "sortedRecords": 11,
+            "discardedBarcodeRecords": 2,
+            "barcodes": 3,
+            "genes": 3,
+            "nonzeroEntries": 3,
+            "countedMolecules": 5,
+            "matrixOrientation": "barcodes-by-genes",
+            "cellCallingPerformed": false,
+            "qcThresholdsApplied": false
+          }
+        },
+        {
+          "name": "stringtie/assemble-guided",
+          "run": {
+            "path": "ordinary/gui/analysis-results/run-20261013-151719-4984c101/run.json",
+            "bytes": 11381,
+            "sha256": "df245cb76a908f8abc42d66cc276a6f379e77f5604188ae217933621561542e4"
+          },
+          "plan": {
+            "path": "ordinary/gui/analysis-results/run-20261013-151719-4984c101/plan.json",
+            "bytes": 25005,
+            "sha256": "1a238d76676665ecc5aa7ccc8d8f1ce8573474ebfbca8c4c423a58300dc9ebb4"
+          },
+          "methods": {
+            "path": "ordinary/gui/analysis-results/run-20261013-151719-4984c101/methods-completed.txt",
+            "bytes": 2419,
+            "sha256": "865228a60286ba1e5760fd96adaf029226632bd67a74cea08f0cfac85f93b47c"
+          },
+          "cwl": {
+            "path": "ordinary/gui/analysis-results/run-20261013-151719-4984c101/workflow.cwl",
+            "bytes": 52003,
+            "sha256": "cf799e1176037c56549d8314eef58a24fa6c1e9c721eec9a5346535aa85ffd37"
+          },
+          "pins": [
+            {
+              "packId": "stringtie",
+              "packVersion": "1.0.0",
+              "manifestSha256": "abfc5ef62ec2b6f2fadc3d80e32cc6dbf06ca10a97fd030e91ec5641ba9f6b62"
+            }
+          ],
+          "selectedPreflightHelpers": [
+            {
+              "operation": "variants/pileup",
+              "pin": {
+                "packId": "variants",
+                "packVersion": "0.4.0",
+                "manifestSha256": "ea4b7f0a6c28709e4190b6514c07cbf7bdd58e1a4f2a2d931f2cae3ce6ec3795"
+              },
+              "executable": {
+                "id": "samtools",
+                "path": "bin/samtools.exe",
+                "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+                "version": "1.24"
+              }
+            }
+          ],
+          "outputFilesRehashed": 5,
+          "readOnlyScientificOracle": {
+            "knownTranscriptGeometryCoverageAndExpressionMatched": true,
+            "transcripts": [
+              "tx_plus",
+              "tx_minus"
+            ],
+            "coverage": {
+              "tx_plus": 8.2,
+              "tx_minus": 16.4
+            },
+            "TPM": {
+              "tx_plus": 333333.333333,
+              "tx_minus": 666666.666667
+            }
+          }
+        },
+        {
+          "name": "stringtie/estimate-reference",
+          "run": {
+            "path": "ordinary/gui/analysis-results/run-20261013-151719-cb97f070/run.json",
+            "bytes": 11431,
+            "sha256": "6351e8bbab6793ff9f3405df5d85b0240438006a917641dba16d27938d0df721"
+          },
+          "plan": {
+            "path": "ordinary/gui/analysis-results/run-20261013-151719-cb97f070/plan.json",
+            "bytes": 24972,
+            "sha256": "179886917909c249c30524839f418b5a83c65c07542aceae13ec8539afa26ba0"
+          },
+          "methods": {
+            "path": "ordinary/gui/analysis-results/run-20261013-151719-cb97f070/methods-completed.txt",
+            "bytes": 2439,
+            "sha256": "8eced28fa946d7597d09f5892227fd75e6c978b95d9553779fa620d2c4777335"
+          },
+          "cwl": {
+            "path": "ordinary/gui/analysis-results/run-20261013-151719-cb97f070/workflow.cwl",
+            "bytes": 51952,
+            "sha256": "391a6efaf9f7742b2757c70937fad9f60173bd62c33571a85ce228f4fbf1cede"
+          },
+          "pins": [
+            {
+              "packId": "stringtie",
+              "packVersion": "1.0.0",
+              "manifestSha256": "abfc5ef62ec2b6f2fadc3d80e32cc6dbf06ca10a97fd030e91ec5641ba9f6b62"
+            }
+          ],
+          "selectedPreflightHelpers": [
+            {
+              "operation": "variants/pileup",
+              "pin": {
+                "packId": "variants",
+                "packVersion": "0.4.0",
+                "manifestSha256": "ea4b7f0a6c28709e4190b6514c07cbf7bdd58e1a4f2a2d931f2cae3ce6ec3795"
+              },
+              "executable": {
+                "id": "samtools",
+                "path": "bin/samtools.exe",
+                "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+                "version": "1.24"
+              }
+            }
+          ],
+          "outputFilesRehashed": 5,
+          "readOnlyScientificOracle": {
+            "knownTranscriptGeometryCoverageAndExpressionMatched": true,
+            "transcripts": [
+              "tx_plus",
+              "tx_minus",
+              "tx_unexpressed"
+            ],
+            "coverage": {
+              "tx_plus": 8.2,
+              "tx_minus": 16.4,
+              "tx_unexpressed": 0.0
+            },
+            "TPM": {
+              "tx_plus": 333333.333333,
+              "tx_minus": 666666.666667,
+              "tx_unexpressed": 0.0
+            }
+          }
+        }
+      ],
+      "guiEvidence": {
+        "capturesRehashed": 56,
+        "captureMethods": {
+          "screen BitBlt; no PrintWindow repaint": 28,
+          "PrintWindow; complete window, including any off-desktop portion": 28
+        },
+        "formsWithFullScrollCoverage": 3,
+        "resultSearches": 2,
+        "horizontalClippingReported": false,
+        "visualReviewPerformedByThisAudit": false,
+        "measurementLimitation": "Unchanged native summary shows status/version/provenance. Pack measurements remain recorded result files, not parsed native summary metrics."
+      },
+      "rawReports": [
+        {
+          "path": "ordinary/gui/bustools-count-bus-graph.json",
+          "bytes": 1310,
+          "sha256": "472988ac8b26f46fae2f488817c53b317b34ad8acd693e45f072c7bd50b0ece9"
+        },
+        {
+          "path": "ordinary/gui/bustools-count-bus-result-summary.json",
+          "bytes": 5230,
+          "sha256": "ad6bec0874c51142a78eaf912ac89423920706d5319291e5111cc4e6c7c94fa9"
+        },
+        {
+          "path": "ordinary/gui/bustools-installation.json",
+          "bytes": 1465,
+          "sha256": "f672dcf4684c078c09f79b209a9fdeb18b503f6fdd0ff4b1331c8128aae4294d"
+        },
+        {
+          "path": "ordinary/gui/native.json",
+          "bytes": 41270,
+          "sha256": "515bd19d9b4dc94b94877fd9f401377e2b148bb9a9c5f0249681ee61e7a2ff48"
+        },
+        {
+          "path": "ordinary/gui/pack-form-bustools-count-bus-page-1-controls.json",
+          "bytes": 17977,
+          "sha256": "fef1b4d7802228f775665c9c23acfb881f0cb71bee270a84a6e2228ca4600cf9"
+        },
+        {
+          "path": "ordinary/gui/pack-form-bustools-count-bus-page-2-controls.json",
+          "bytes": 17983,
+          "sha256": "3e0ebe1617d2ba903acf2c7582691c7b6688809deec0e320608f62861754a365"
+        },
+        {
+          "path": "ordinary/gui/pack-form-bustools-count-bus-page-3-controls.json",
+          "bytes": 17960,
+          "sha256": "204456e88c7096e2b46b4cae77968e88cccea8d34f8ba5a1ba8f94ca28c28df2"
+        },
+        {
+          "path": "ordinary/gui/pack-form-bustools-count-bus-page-4-controls.json",
+          "bytes": 17954,
+          "sha256": "b3c180b65464953e1336375131af67139399c50b966f9064adf9c0ebce9d67a0"
+        },
+        {
+          "path": "ordinary/gui/pack-form-bustools-count-bus-page-5-controls.json",
+          "bytes": 17983,
+          "sha256": "257c9bd8c2a2054489dd8a1cf1a3554938b19f9cc8643d53ea66bf4029a5c5c2"
+        },
+        {
+          "path": "ordinary/gui/pack-form-bustools-count-bus-page-6-controls.json",
+          "bytes": 17987,
+          "sha256": "d0953cde10e194198ba5b88da1db4ddd31474505305953167f942176140e6aa1"
+        },
+        {
+          "path": "ordinary/gui/pack-form-bustools-count-bus-top-controls.json",
+          "bytes": 17994,
+          "sha256": "bd984be2fb36fc14869938a2346166e9e2aab9b7bed31b59d180d810bd766082"
+        },
+        {
+          "path": "ordinary/gui/pack-form-stringtie-assemble-guided-page-1-controls.json",
+          "bytes": 18742,
+          "sha256": "fea5aae71e3fa0f2c106b3137ec8e0af054e5bcdbe4049e0839abade5b1308e8"
+        },
+        {
+          "path": "ordinary/gui/pack-form-stringtie-assemble-guided-page-2-controls.json",
+          "bytes": 18745,
+          "sha256": "498fbb28a77ac14c6065f2bb014ee8c7dcca001435d70f9c40ba37abf8b5f3f7"
+        },
+        {
+          "path": "ordinary/gui/pack-form-stringtie-assemble-guided-page-3-controls.json",
+          "bytes": 18741,
+          "sha256": "09189b7b6be584384a3b1c545e3da86a68130c2bba83c24d5cc5ee265708bee9"
+        },
+        {
+          "path": "ordinary/gui/pack-form-stringtie-assemble-guided-page-4-controls.json",
+          "bytes": 18733,
+          "sha256": "2f22cb94c2077569ad56e92feaa73102691d243b304a7b40dbad8c649716e77e"
+        },
+        {
+          "path": "ordinary/gui/pack-form-stringtie-assemble-guided-page-5-controls.json",
+          "bytes": 18751,
+          "sha256": "7329692aa79a766c7170022dc7b4700cf14524dca9dc907f494a879c5fec4d91"
+        },
+        {
+          "path": "ordinary/gui/pack-form-stringtie-assemble-guided-page-6-controls.json",
+          "bytes": 18764,
+          "sha256": "cd3e8120ea7c4cfc2ea701a3f31a57682bb66e90672fb1025c580f136b8c6a38"
+        },
+        {
+          "path": "ordinary/gui/pack-form-stringtie-assemble-guided-top-controls.json",
+          "bytes": 18761,
+          "sha256": "7f1a2b304edc7382036bacd79d329fd05f8abeafefb5fdf1df494d3697eadcb7"
+        },
+        {
+          "path": "ordinary/gui/pack-form-stringtie-estimate-reference-page-1-controls.json",
+          "bytes": 18730,
+          "sha256": "77263bd3fdac704c9e2fd4e511102e68147ad5a8b3f55882885662a44611a8a7"
+        },
+        {
+          "path": "ordinary/gui/pack-form-stringtie-estimate-reference-page-2-controls.json",
+          "bytes": 18733,
+          "sha256": "d28d7366d7bb7023821541426b8b30815e885b85d4ca16f8b1973ddbc0833e0f"
+        },
+        {
+          "path": "ordinary/gui/pack-form-stringtie-estimate-reference-page-3-controls.json",
+          "bytes": 18729,
+          "sha256": "06a3d47af95eb91124c5ef245aa3e23be0f5d59b31a603a4d4c6a2f100b43c70"
+        },
+        {
+          "path": "ordinary/gui/pack-form-stringtie-estimate-reference-page-4-controls.json",
+          "bytes": 18721,
+          "sha256": "31f3545310d56cbf2a419471f4fa89ccdbf51e79161226017815cd79f6776146"
+        },
+        {
+          "path": "ordinary/gui/pack-form-stringtie-estimate-reference-page-5-controls.json",
+          "bytes": 18739,
+          "sha256": "ed22730ed602f96d12c52a2370f44f99bbe656a74a93157a30c9db4a8fb68f11"
+        },
+        {
+          "path": "ordinary/gui/pack-form-stringtie-estimate-reference-page-6-controls.json",
+          "bytes": 18752,
+          "sha256": "a6495441d9242c76df4bd137b73b1b118170d0697373823ced09cd9a35c6c7cd"
+        },
+        {
+          "path": "ordinary/gui/pack-form-stringtie-estimate-reference-top-controls.json",
+          "bytes": 18749,
+          "sha256": "afd04cbc19549698df835807dff056f43993a6645ec96426f528f1550672ba43"
+        },
+        {
+          "path": "ordinary/gui/pack-library-bustools-controls.json",
+          "bytes": 7595,
+          "sha256": "d3ba414bd4a3400b5f1e2798c95ff6f1ba474c1dc41bea67387303d2377779c3"
+        },
+        {
+          "path": "ordinary/gui/pack-library-stringtie-controls.json",
+          "bytes": 7597,
+          "sha256": "6724cf96c51cef3a6c729c5ded77e48c179ae914f0506ac955183138fb863a8c"
+        },
+        {
+          "path": "ordinary/gui/pack-library-unfiltered-controls.json",
+          "bytes": 18700,
+          "sha256": "1e8e578e5e584f016f2200e1f702a1b1c58003f8fa7ba953d54cc379037fbfc5"
+        },
+        {
+          "path": "ordinary/gui/pack-results-bustools-controls.json",
+          "bytes": 4803,
+          "sha256": "d5b421ccc30158d89bcddb80155154af570b277a2137fe3626bc3447889971b8"
+        },
+        {
+          "path": "ordinary/gui/pack-results-bustools-detail.json",
+          "bytes": 2082,
+          "sha256": "629ccc52960227b49c708e414e877f4971b681f30106bb31ffe2a99be8a03af4"
+        },
+        {
+          "path": "ordinary/gui/pack-results-bustools-versions-controls.json",
+          "bytes": 4803,
+          "sha256": "d5b421ccc30158d89bcddb80155154af570b277a2137fe3626bc3447889971b8"
+        },
+        {
+          "path": "ordinary/gui/pack-results-stringtie-controls.json",
+          "bytes": 4827,
+          "sha256": "9a42301acb41a43b439aa4f5b32d6fc0a39ea75d9e1ab1d02be7cdd94de2b12e"
+        },
+        {
+          "path": "ordinary/gui/pack-results-stringtie-detail.json",
+          "bytes": 2113,
+          "sha256": "20f966421cebe8912f0c6852814d484e69c8de564106e5b1b3ee996aa0380a45"
+        },
+        {
+          "path": "ordinary/gui/pack-results-stringtie-versions-controls.json",
+          "bytes": 4827,
+          "sha256": "9a42301acb41a43b439aa4f5b32d6fc0a39ea75d9e1ab1d02be7cdd94de2b12e"
+        },
+        {
+          "path": "ordinary/gui/stringtie-assemble-guided-graph.json",
+          "bytes": 1123,
+          "sha256": "35a2ad1166f5296cfabafb48190166d292260440857da616b671f864d7e49bf2"
+        },
+        {
+          "path": "ordinary/gui/stringtie-assemble-guided-result-summary.json",
+          "bytes": 5276,
+          "sha256": "916eb9faee6b90690293777323a3527129b45598b97aa55a1efbdfb4f4f8bb4e"
+        },
+        {
+          "path": "ordinary/gui/stringtie-estimate-reference-graph.json",
+          "bytes": 1151,
+          "sha256": "932be3d3679f64b26c6cb0c743bbaea440a748e1c0f2543127fd2337cfd0faf3"
+        },
+        {
+          "path": "ordinary/gui/stringtie-estimate-reference-result-summary.json",
+          "bytes": 5336,
+          "sha256": "f096331997bb5359f3ca5d57f793c9b6d09a9c74f9879f00857147d2eb2a7a36"
+        },
+        {
+          "path": "ordinary/gui/stringtie-installation.json",
+          "bytes": 3108,
+          "sha256": "6d56fe5d1c7e223f49eaea5abec627ce47f103fb9df65647cb6185e21418478a"
+        },
+        {
+          "path": "ordinary/gui/ui-progress.json",
+          "bytes": 95,
+          "sha256": "5d6a226cad7867fdb02a786f0ef579975654338142ad5fbd59b4deede3bba8f5"
+        }
+      ]
+    },
+    {
+      "scope": "spaces/science",
+      "nativeReport": {
+        "path": "spaces/science/native.json",
+        "bytes": 27005,
+        "sha256": "72ca232b20be52efdf2dc778003420381dd41cfec54fa4f4569a5a38761528a6"
+      },
+      "success": true,
+      "sourceCommit": "a93b338bca5e71b89e3cd000caaba96dbec73501",
+      "applicationVersion": "0.16.0",
+      "applicationArchive": {
+        "file": "published-starter.zip",
+        "bytes": 17846873,
+        "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+      },
+      "coreFilesUnchanged": 274,
+      "completedChecks": [
+        "bustools: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+        "bustools: exact installed scientific and failure regressions.",
+        "stringtie: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+        "stringtie: exact installed scientific and failure regressions.",
+        "Exact released HISAT2 ZIP native import, four declared alignment checks and duplicate-version rejection.",
+        "bustools/count-bus: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+        "stringtie/assemble-guided: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+        "stringtie/estimate-reference: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+        "Published HISAT2 paired spliced RNA output feeds StringTie assemble-guided through the real typed graph; independent alignment and transcript truth agree.",
+        "Published HISAT2 paired spliced RNA output feeds StringTie estimate-reference through the real typed graph; independent alignment and transcript truth agree.",
+        "Unchanged Starter science and all installed declared pack checks pass together.",
+        "Pinned application and installed pack bytes remain unchanged after execution."
+      ],
+      "installations": {
+        "bustools": {
+          "report": {
+            "path": "spaces/science/bustools-installation.json",
+            "bytes": 1486,
+            "sha256": "587d4b87240bb40fb1e7751624cd1e5798d274e32940a8c83b8cabe10904823c"
+          },
+          "passed": 1,
+          "duplicateVersionRejected": true
+        },
+        "stringtie": {
+          "report": {
+            "path": "spaces/science/stringtie-installation.json",
+            "bytes": 3175,
+            "sha256": "fb912485f4dcd9a553fc5937b867cf99d188ee4be01d184c9753b2c01ead6d21"
+          },
+          "passed": 2,
+          "duplicateVersionRejected": true
+        },
+        "hisat2": {
+          "report": {
+            "path": "spaces/science/hisat2-installation.json",
+            "bytes": 2678,
+            "sha256": "f97c92b24c033dfbf5214c0c9a798ce23aae59efa16941bfc9e55230c8a2ddcd"
+          },
+          "passed": 4,
+          "duplicateVersionRejected": true
+        }
+      },
+      "graphs": [
+        {
+          "name": "bustools/count-bus",
+          "run": {
+            "path": "spaces/science/analysis-results/run-20261013-151659-06891f3f/run.json",
+            "bytes": 17950,
+            "sha256": "d903d2ac10ded17ad22b833c634c7a65373700868273ed69fb0e362776222709"
+          },
+          "plan": {
+            "path": "spaces/science/analysis-results/run-20261013-151659-06891f3f/plan.json",
+            "bytes": 26677,
+            "sha256": "c14095af848c11633753ea7daa63121aa35da2f366681907ad60e574aa30fd22"
+          },
+          "methods": {
+            "path": "spaces/science/analysis-results/run-20261013-151659-06891f3f/methods-completed.txt",
+            "bytes": 2343,
+            "sha256": "c06a0eb05cb65d6715cf22f0cbe748ec604c7cfdb45f2312085a9f5fd00c1f59"
+          },
+          "cwl": {
+            "path": "spaces/science/analysis-results/run-20261013-151659-06891f3f/workflow.cwl",
+            "bytes": 81064,
+            "sha256": "4f8468b18d5780cc89ab8ddd98bfc8f31225358b1bae3576c8e2173fd44fb580"
+          },
+          "pins": [
+            {
+              "packId": "bustools",
+              "packVersion": "1.0.0",
+              "manifestSha256": "6efe81d68448338143db24e7b63625d56cbf8890a4d7330b15b789d91c672936"
+            }
+          ],
+          "selectedPreflightHelpers": [],
+          "outputFilesRehashed": 11,
+          "readOnlyScientificOracle": {
+            "schema": 1,
+            "inputRecords": 14,
+            "inputReadMultiplicity": 24,
+            "retainedRecords": 12,
+            "retainedReadMultiplicity": 19,
+            "sortedRecords": 11,
+            "discardedBarcodeRecords": 2,
+            "barcodes": 3,
+            "genes": 3,
+            "nonzeroEntries": 3,
+            "countedMolecules": 5,
+            "matrixOrientation": "barcodes-by-genes",
+            "cellCallingPerformed": false,
+            "qcThresholdsApplied": false
+          }
+        },
+        {
+          "name": "stringtie/assemble-guided",
+          "run": {
+            "path": "spaces/science/analysis-results/run-20261013-151700-451fe669/run.json",
+            "bytes": 11537,
+            "sha256": "24004e56ccf16cdfd3992949da0e55dc2379f3c47e621bdccb9d5e039700675a"
+          },
+          "plan": {
+            "path": "spaces/science/analysis-results/run-20261013-151700-451fe669/plan.json",
+            "bytes": 25059,
+            "sha256": "a83493dd2e8d06b2d022066e91d6b140c04499013ad84b9c5ccacf0ac13220fa"
+          },
+          "methods": {
+            "path": "spaces/science/analysis-results/run-20261013-151700-451fe669/methods-completed.txt",
+            "bytes": 2419,
+            "sha256": "865228a60286ba1e5760fd96adaf029226632bd67a74cea08f0cfac85f93b47c"
+          },
+          "cwl": {
+            "path": "spaces/science/analysis-results/run-20261013-151700-451fe669/workflow.cwl",
+            "bytes": 52194,
+            "sha256": "31d5dcfbb50eb36444ad7bc5f0dcc0ca7d00f58587e6ac5e81d774c1d52f2171"
+          },
+          "pins": [
+            {
+              "packId": "stringtie",
+              "packVersion": "1.0.0",
+              "manifestSha256": "abfc5ef62ec2b6f2fadc3d80e32cc6dbf06ca10a97fd030e91ec5641ba9f6b62"
+            }
+          ],
+          "selectedPreflightHelpers": [
+            {
+              "operation": "hisat2/rna-single",
+              "pin": {
+                "packId": "hisat2",
+                "packVersion": "0.5.3",
+                "manifestSha256": "06f912deb5926b00a8ca269138b4b3822bb4b3e36d4956e30ca7793655052967"
+              },
+              "executable": {
+                "id": "samtools",
+                "path": "bin/samtools.exe",
+                "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+                "version": "1.24"
+              }
+            }
+          ],
+          "outputFilesRehashed": 5,
+          "readOnlyScientificOracle": {
+            "knownTranscriptGeometryCoverageAndExpressionMatched": true,
+            "transcripts": [
+              "tx_plus",
+              "tx_minus"
+            ],
+            "coverage": {
+              "tx_plus": 8.2,
+              "tx_minus": 16.4
+            },
+            "TPM": {
+              "tx_plus": 333333.333333,
+              "tx_minus": 666666.666667
+            }
+          }
+        },
+        {
+          "name": "stringtie/estimate-reference",
+          "run": {
+            "path": "spaces/science/analysis-results/run-20261013-151700-ab25a380/run.json",
+            "bytes": 11587,
+            "sha256": "b8b37e75f42eb4837cfe72634c8f59ef1d1b656788b9ab7f7db0d5aa294fd596"
+          },
+          "plan": {
+            "path": "spaces/science/analysis-results/run-20261013-151700-ab25a380/plan.json",
+            "bytes": 25026,
+            "sha256": "9bd11829512289cc531d851ac40b8f97c276f3aefd8a6088202870269ded7262"
+          },
+          "methods": {
+            "path": "spaces/science/analysis-results/run-20261013-151700-ab25a380/methods-completed.txt",
+            "bytes": 2439,
+            "sha256": "8eced28fa946d7597d09f5892227fd75e6c978b95d9553779fa620d2c4777335"
+          },
+          "cwl": {
+            "path": "spaces/science/analysis-results/run-20261013-151700-ab25a380/workflow.cwl",
+            "bytes": 52143,
+            "sha256": "35bfb23b19d7c81c0451d26983270f116f3e1610f9d5abb73b611dbae3f03ae3"
+          },
+          "pins": [
+            {
+              "packId": "stringtie",
+              "packVersion": "1.0.0",
+              "manifestSha256": "abfc5ef62ec2b6f2fadc3d80e32cc6dbf06ca10a97fd030e91ec5641ba9f6b62"
+            }
+          ],
+          "selectedPreflightHelpers": [
+            {
+              "operation": "hisat2/rna-single",
+              "pin": {
+                "packId": "hisat2",
+                "packVersion": "0.5.3",
+                "manifestSha256": "06f912deb5926b00a8ca269138b4b3822bb4b3e36d4956e30ca7793655052967"
+              },
+              "executable": {
+                "id": "samtools",
+                "path": "bin/samtools.exe",
+                "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+                "version": "1.24"
+              }
+            }
+          ],
+          "outputFilesRehashed": 5,
+          "readOnlyScientificOracle": {
+            "knownTranscriptGeometryCoverageAndExpressionMatched": true,
+            "transcripts": [
+              "tx_plus",
+              "tx_minus",
+              "tx_unexpressed"
+            ],
+            "coverage": {
+              "tx_plus": 8.2,
+              "tx_minus": 16.4,
+              "tx_unexpressed": 0.0
+            },
+            "TPM": {
+              "tx_plus": 333333.333333,
+              "tx_minus": 666666.666667,
+              "tx_unexpressed": 0.0
+            }
+          }
+        },
+        {
+          "name": "hisat2/stringtie/assemble-guided",
+          "run": {
+            "path": "spaces/science/analysis-results/run-20261013-151701-956c9769/run.json",
+            "bytes": 27421,
+            "sha256": "acb8cce30520f18d4c8fd41a96ad3a1d60493e9a55361d50e5d3b1d3de5182ad"
+          },
+          "plan": {
+            "path": "spaces/science/analysis-results/run-20261013-151701-956c9769/plan.json",
+            "bytes": 54865,
+            "sha256": "b689b8abdf3f387719406d7a5db321d09884092506664fe80602656fab4445e3"
+          },
+          "methods": {
+            "path": "spaces/science/analysis-results/run-20261013-151701-956c9769/methods-completed.txt",
+            "bytes": 3904,
+            "sha256": "1d8abe2767cd04c383f3d32963361f133ade20f27c85b54ba18bdb56333a6d97"
+          },
+          "cwl": {
+            "path": "spaces/science/analysis-results/run-20261013-151701-956c9769/workflow.cwl",
+            "bytes": 122504,
+            "sha256": "af5e9048df51c20716b98bc8f63da1cbf8b6b0f0edba583687fc893187586ed5"
+          },
+          "pins": [
+            {
+              "packId": "hisat2",
+              "packVersion": "0.5.3",
+              "manifestSha256": "06f912deb5926b00a8ca269138b4b3822bb4b3e36d4956e30ca7793655052967"
+            },
+            {
+              "packId": "stringtie",
+              "packVersion": "1.0.0",
+              "manifestSha256": "abfc5ef62ec2b6f2fadc3d80e32cc6dbf06ca10a97fd030e91ec5641ba9f6b62"
+            }
+          ],
+          "selectedPreflightHelpers": [
+            {
+              "operation": "hisat2/rna-single",
+              "pin": {
+                "packId": "hisat2",
+                "packVersion": "0.5.3",
+                "manifestSha256": "06f912deb5926b00a8ca269138b4b3822bb4b3e36d4956e30ca7793655052967"
+              },
+              "executable": {
+                "id": "samtools",
+                "path": "bin/samtools.exe",
+                "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+                "version": "1.24"
+              }
+            }
+          ],
+          "outputFilesRehashed": 19,
+          "readOnlyScientificOracle": {
+            "success": true,
+            "pairedFragments": 12,
+            "alignmentRecords": 24,
+            "splicedRecords": 12,
+            "operation": "assemble-guided",
+            "transcriptExons0": [
+              [
+                470,
+                500
+              ],
+              [
+                600,
+                750
+              ]
+            ],
+            "coverage": 8.0,
+            "tpm": 1000000.0,
+            "knownCoverageGapBases": 60,
+            "interpretation": "Guide-supported transcript and abundance from exact paired splice alignments; not de novo reconstruction proof"
+          }
+        },
+        {
+          "name": "hisat2/stringtie/estimate-reference",
+          "run": {
+            "path": "spaces/science/analysis-results/run-20261013-151702-942827fd/run.json",
+            "bytes": 27479,
+            "sha256": "567d4f73739782730701f7d7d50a97dda58e8f8dd958381eaf0682d7349662b5"
+          },
+          "plan": {
+            "path": "spaces/science/analysis-results/run-20261013-151702-942827fd/plan.json",
+            "bytes": 54810,
+            "sha256": "5de3dca06ce2331483ed98d679543a91134058c0a1e00c67ea12aebe98134816"
+          },
+          "methods": {
+            "path": "spaces/science/analysis-results/run-20261013-151702-942827fd/methods-completed.txt",
+            "bytes": 3924,
+            "sha256": "e4d6147b1357071af5c76c0a2987cee72c885c5735c9ed589f6e509d082959c4"
+          },
+          "cwl": {
+            "path": "spaces/science/analysis-results/run-20261013-151702-942827fd/workflow.cwl",
+            "bytes": 122461,
+            "sha256": "3fb2aa7f1303b405a67cdc8e5636472bd687db7d058a219ef0f298db533811af"
+          },
+          "pins": [
+            {
+              "packId": "hisat2",
+              "packVersion": "0.5.3",
+              "manifestSha256": "06f912deb5926b00a8ca269138b4b3822bb4b3e36d4956e30ca7793655052967"
+            },
+            {
+              "packId": "stringtie",
+              "packVersion": "1.0.0",
+              "manifestSha256": "abfc5ef62ec2b6f2fadc3d80e32cc6dbf06ca10a97fd030e91ec5641ba9f6b62"
+            }
+          ],
+          "selectedPreflightHelpers": [
+            {
+              "operation": "hisat2/rna-single",
+              "pin": {
+                "packId": "hisat2",
+                "packVersion": "0.5.3",
+                "manifestSha256": "06f912deb5926b00a8ca269138b4b3822bb4b3e36d4956e30ca7793655052967"
+              },
+              "executable": {
+                "id": "samtools",
+                "path": "bin/samtools.exe",
+                "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+                "version": "1.24"
+              }
+            }
+          ],
+          "outputFilesRehashed": 19,
+          "readOnlyScientificOracle": {
+            "success": true,
+            "pairedFragments": 12,
+            "alignmentRecords": 24,
+            "splicedRecords": 12,
+            "operation": "estimate-reference",
+            "transcriptExons0": [
+              [
+                470,
+                500
+              ],
+              [
+                600,
+                750
+              ]
+            ],
+            "coverage": 8.0,
+            "tpm": 1000000.0,
+            "knownCoverageGapBases": 60,
+            "interpretation": "Guide-supported transcript and abundance from exact paired splice alignments; not de novo reconstruction proof"
+          }
+        }
+      ],
+      "scientificSuites": {
+        "bustools": {
+          "report": {
+            "path": "spaces/science/bustools-regressions.json",
+            "bytes": 55598,
+            "sha256": "612ff0dfa64ec83941202a0c4ce83fe3282f62f4df9efd2510756f0782ac55e8"
+          },
+          "testsRun": 19,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "executionRecords": 55,
+          "scientificBinarySha256": "20fa810027a4e247fb47a34555581d118c61b12d2932f50c87daa3e7f436af4d",
+          "guardExecutableSha256": "005f448cd5518861dae5b4033edc7e272dbf1eb8a51d5611b5d5698616e079a6"
+        },
+        "stringtie": {
+          "report": {
+            "path": "spaces/science/stringtie-regressions.json",
+            "bytes": 35378,
+            "sha256": "0a0c888441f6dd328c8a09dfc0caaa84b793231c07047559bbf03fb2cf20c189"
+          },
+          "testsRun": 20,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "executionRecords": 68,
+          "scientificBinarySha256": "1427c8e1e3e3d05d41f45b8c806ebd700bcf0674c471b3a2b64f24833bf4356c",
+          "guardExecutableSha256": "edda00997fffda7b6c58cb65eaee8fc63d91d05cc520394da7a78fd381737cb6"
+        }
+      },
+      "memoryBoundaryRegression": {
+        "poisonedLayout": {
+          "executed": true,
+          "returncode": 0,
+          "sourceSha256": "58a0947452ee6c1dbfbadbeaac2d9b7866a811770e20a028865303ee6c2bb525",
+          "executableSha256": "3a2e268bae5a4fa0e813f39484480e2b0bd6c6f089b9a86fe4eeaefbf97f4d61",
+          "patchedHeaderSha256": "fa1b980f5829a8a74eb9b5962e81cbf6c5df6b14d3903662108b195a138e4da3",
+          "result": {
+            "success": true,
+            "unionBytes": 4,
+            "poison": 165,
+            "fieldsChecked": 19
+          }
+        },
+        "repeatedModes": {
+          "assemble-guided": 10,
+          "estimate-reference": 10
+        },
+        "fullOutputOracle": true,
+        "repetitionsChecked": 20,
+        "exactProbeFiles": [
+          {
+            "path": "spaces/science/stringtie-flags/flag-layout-check.cpp",
+            "bytes": 4267,
+            "sha256": "58a0947452ee6c1dbfbadbeaac2d9b7866a811770e20a028865303ee6c2bb525"
+          },
+          {
+            "path": "spaces/science/stringtie-flags/flag-layout-check.exe",
+            "bytes": 65536,
+            "sha256": "3a2e268bae5a4fa0e813f39484480e2b0bd6c6f089b9a86fe4eeaefbf97f4d61"
+          },
+          {
+            "path": "spaces/science/stringtie-flags/flag-layout-check.json",
+            "bytes": 1088,
+            "sha256": "611066aa8fc90add1a447a4052105036831ac6afa3b5408e268e8f34f9eb491a"
+          }
+        ]
+      },
+      "combinedInstallationRegression": {
+        "report": {
+          "path": "spaces/science/installation-regression.json",
+          "bytes": 135134,
+          "sha256": "14f42d7dc889312b1c8c2867bbf0e419f17e6c6a6ebeb23a623c27d4868ef255"
+        },
+        "corePassed": 7,
+        "starterScientificPassed": 1,
+        "additionalPackChecksPassed": 8,
+        "skipped": 0
+      },
+      "rawReports": [
+        {
+          "path": "spaces/science/bustools-count-bus-graph.json",
+          "bytes": 1345,
+          "sha256": "dc24434600bd9bf04079be36fe715efd9eade0c8f854fdd2e678a8291adc8f18"
+        },
+        {
+          "path": "spaces/science/bustools-count-bus-result-summary.json",
+          "bytes": 5362,
+          "sha256": "e2ffc2a5c3987f079fa80d2d32ce25d7527ce4f9051aec28b88010efed309804"
+        },
+        {
+          "path": "spaces/science/bustools-installation.json",
+          "bytes": 1486,
+          "sha256": "587d4b87240bb40fb1e7751624cd1e5798d274e32940a8c83b8cabe10904823c"
+        },
+        {
+          "path": "spaces/science/bustools-regressions.json",
+          "bytes": 55598,
+          "sha256": "612ff0dfa64ec83941202a0c4ce83fe3282f62f4df9efd2510756f0782ac55e8"
+        },
+        {
+          "path": "spaces/science/hisat2-installation.json",
+          "bytes": 2678,
+          "sha256": "f97c92b24c033dfbf5214c0c9a798ce23aae59efa16941bfc9e55230c8a2ddcd"
+        },
+        {
+          "path": "spaces/science/hisat2-stringtie-assemble-guided-graph.json",
+          "bytes": 2270,
+          "sha256": "c57e2c17e18053abe66f4d02b398bbdaf752960ec7b71c03be4dbf65ef471f88"
+        },
+        {
+          "path": "spaces/science/hisat2-stringtie-assemble-guided-result-summary.json",
+          "bytes": 7115,
+          "sha256": "ae11b0cbb61c8e620ae2cdf15f76e46f5a8f7ab83792b832705a75aa10e4a125"
+        },
+        {
+          "path": "spaces/science/hisat2-stringtie-estimate-reference-graph.json",
+          "bytes": 2276,
+          "sha256": "4532e17af7cece9a1f7378bf9de6d07a28eb702a0575c86c1edeea1e7336d3ba"
+        },
+        {
+          "path": "spaces/science/hisat2-stringtie-estimate-reference-result-summary.json",
+          "bytes": 7131,
+          "sha256": "2127665109ecc2c3701601693a61ff6ff53d6fd6a2315ab2429e3b4614aa14f9"
+        },
+        {
+          "path": "spaces/science/installation-regression.json",
+          "bytes": 135134,
+          "sha256": "14f42d7dc889312b1c8c2867bbf0e419f17e6c6a6ebeb23a623c27d4868ef255"
+        },
+        {
+          "path": "spaces/science/native.json",
+          "bytes": 27005,
+          "sha256": "72ca232b20be52efdf2dc778003420381dd41cfec54fa4f4569a5a38761528a6"
+        },
+        {
+          "path": "spaces/science/stringtie-assemble-guided-graph.json",
+          "bytes": 1137,
+          "sha256": "7da03a0433228972a64462cb187fcf600dcfd066fe2f77be9dc0aae09561d138"
+        },
+        {
+          "path": "spaces/science/stringtie-assemble-guided-result-summary.json",
+          "bytes": 5408,
+          "sha256": "3eca80c63c82dd23607321709857c3986e9d8087f7dafcab249e1e4ccf4f713d"
+        },
+        {
+          "path": "spaces/science/stringtie-estimate-reference-graph.json",
+          "bytes": 1165,
+          "sha256": "3c459e65ce39c0e8ab0bb96a04b67a5ae2978a82abb5a7f28603fb2c9192a738"
+        },
+        {
+          "path": "spaces/science/stringtie-estimate-reference-result-summary.json",
+          "bytes": 5468,
+          "sha256": "dec35e679aade691c3064cf948ac88160037698cd30d8252e763b33ac7351db7"
+        },
+        {
+          "path": "spaces/science/stringtie-installation.json",
+          "bytes": 3175,
+          "sha256": "fb912485f4dcd9a553fc5937b867cf99d188ee4be01d184c9753b2c01ead6d21"
+        },
+        {
+          "path": "spaces/science/stringtie-regressions.json",
+          "bytes": 35378,
+          "sha256": "0a0c888441f6dd328c8a09dfc0caaa84b793231c07047559bbf03fb2cf20c189"
+        }
+      ]
+    },
+    {
+      "scope": "spaces/gui",
+      "nativeReport": {
+        "path": "spaces/gui/native.json",
+        "bytes": 41270,
+        "sha256": "933cadae2f662abd6dc6eca0067bcd03b04a0280de2d2c640d2f75ef39fee38c"
+      },
+      "success": true,
+      "sourceCommit": "a93b338bca5e71b89e3cd000caaba96dbec73501",
+      "applicationVersion": "0.16.1",
+      "applicationArchive": {
+        "file": "native-workbench-0.16.1-starter-windows.zip",
+        "bytes": 17889148,
+        "sha256": "28f1362287991621dde030da54eb444846142c0243be6b9d86c4b4f1bf99dd47"
+      },
+      "coreFilesUnchanged": 277,
+      "completedChecks": [
+        "bustools: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+        "stringtie: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+        "bustools/count-bus: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+        "stringtie/assemble-guided: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+        "stringtie/estimate-reference: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+        "The native library discovers the installed bustools and StringTie 1.0.0 packs and displays their operations under complete catalogue labels.",
+        "Native pointer selection opens bustools/count-bus with exact pack version, declared input/option labels and reachable form pages.",
+        "Native pointer selection opens stringtie/assemble-guided with exact pack version, declared input/option labels and reachable form pages.",
+        "Native pointer selection opens stringtie/estimate-reference with exact pack version, declared input/option labels and reachable form pages.",
+        "Native Results search finds Pack candidate bustools and displays its successful native operation, exact pack/executable versions and recorded manifest identity without a QC verdict.",
+        "Native Results search finds Pack candidate stringtie and displays its successful native operation, exact pack/executable versions and recorded manifest identity without a QC verdict.",
+        "Pinned application and installed pack bytes remain unchanged after execution."
+      ],
+      "installations": {
+        "bustools": {
+          "report": {
+            "path": "spaces/gui/bustools-installation.json",
+            "bytes": 1489,
+            "sha256": "bc362470efb473c8d04a0170e7170c49f47a6f1f36e8af23bbe670dcc9e7c085"
+          },
+          "passed": 1,
+          "duplicateVersionRejected": true
+        },
+        "stringtie": {
+          "report": {
+            "path": "spaces/gui/stringtie-installation.json",
+            "bytes": 3156,
+            "sha256": "1715e5cf182f6cc195184183ff0edf70ca083672327bc84157b1b3f697be7cdf"
+          },
+          "passed": 2,
+          "duplicateVersionRejected": true
+        }
+      },
+      "graphs": [
+        {
+          "name": "bustools/count-bus",
+          "run": {
+            "path": "spaces/gui/analysis-results/run-20261013-151714-e37ea3c1/run.json",
+            "bytes": 17850,
+            "sha256": "98302ce87ea526ea9796a9e915260589826f2c059b5766793acf498c5d217f05"
+          },
+          "plan": {
+            "path": "spaces/gui/analysis-results/run-20261013-151714-e37ea3c1/plan.json",
+            "bytes": 26688,
+            "sha256": "d4641a4918a7bf0f2885bcc52a47a05f93f7f95dfea619cb24bf069ecb7392cd"
+          },
+          "methods": {
+            "path": "spaces/gui/analysis-results/run-20261013-151714-e37ea3c1/methods-completed.txt",
+            "bytes": 2343,
+            "sha256": "c06a0eb05cb65d6715cf22f0cbe748ec604c7cfdb45f2312085a9f5fd00c1f59"
+          },
+          "cwl": {
+            "path": "spaces/gui/analysis-results/run-20261013-151714-e37ea3c1/workflow.cwl",
+            "bytes": 80979,
+            "sha256": "dc46d157339263f2d1b9ac23ff379ce50501947d3b9b21cb6b2d69905008892e"
+          },
+          "pins": [
+            {
+              "packId": "bustools",
+              "packVersion": "1.0.0",
+              "manifestSha256": "6efe81d68448338143db24e7b63625d56cbf8890a4d7330b15b789d91c672936"
+            }
+          ],
+          "selectedPreflightHelpers": [],
+          "outputFilesRehashed": 11,
+          "readOnlyScientificOracle": {
+            "schema": 1,
+            "inputRecords": 14,
+            "inputReadMultiplicity": 24,
+            "retainedRecords": 12,
+            "retainedReadMultiplicity": 19,
+            "sortedRecords": 11,
+            "discardedBarcodeRecords": 2,
+            "barcodes": 3,
+            "genes": 3,
+            "nonzeroEntries": 3,
+            "countedMolecules": 5,
+            "matrixOrientation": "barcodes-by-genes",
+            "cellCallingPerformed": false,
+            "qcThresholdsApplied": false
+          }
+        },
+        {
+          "name": "stringtie/assemble-guided",
+          "run": {
+            "path": "spaces/gui/analysis-results/run-20261013-151715-5eb633a5/run.json",
+            "bytes": 11485,
+            "sha256": "cd673ba7e6d761d315200bc666c63d39d69654fbf751fef2ff54c0bf802db235"
+          },
+          "plan": {
+            "path": "spaces/gui/analysis-results/run-20261013-151715-5eb633a5/plan.json",
+            "bytes": 25061,
+            "sha256": "d0794f003ec3f5c5d5196f6bae27a01474ee59db2bbd3dd99ea3487f937bb153"
+          },
+          "methods": {
+            "path": "spaces/gui/analysis-results/run-20261013-151715-5eb633a5/methods-completed.txt",
+            "bytes": 2419,
+            "sha256": "865228a60286ba1e5760fd96adaf029226632bd67a74cea08f0cfac85f93b47c"
+          },
+          "cwl": {
+            "path": "spaces/gui/analysis-results/run-20261013-151715-5eb633a5/workflow.cwl",
+            "bytes": 52151,
+            "sha256": "6dca0b70b410e3be3b2e07a56b5a0470169bc0dc570a3761dc8602a73221d66d"
+          },
+          "pins": [
+            {
+              "packId": "stringtie",
+              "packVersion": "1.0.0",
+              "manifestSha256": "abfc5ef62ec2b6f2fadc3d80e32cc6dbf06ca10a97fd030e91ec5641ba9f6b62"
+            }
+          ],
+          "selectedPreflightHelpers": [
+            {
+              "operation": "variants/pileup",
+              "pin": {
+                "packId": "variants",
+                "packVersion": "0.4.0",
+                "manifestSha256": "ea4b7f0a6c28709e4190b6514c07cbf7bdd58e1a4f2a2d931f2cae3ce6ec3795"
+              },
+              "executable": {
+                "id": "samtools",
+                "path": "bin/samtools.exe",
+                "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+                "version": "1.24"
+              }
+            }
+          ],
+          "outputFilesRehashed": 5,
+          "readOnlyScientificOracle": {
+            "knownTranscriptGeometryCoverageAndExpressionMatched": true,
+            "transcripts": [
+              "tx_plus",
+              "tx_minus"
+            ],
+            "coverage": {
+              "tx_plus": 8.2,
+              "tx_minus": 16.4
+            },
+            "TPM": {
+              "tx_plus": 333333.333333,
+              "tx_minus": 666666.666667
+            }
+          }
+        },
+        {
+          "name": "stringtie/estimate-reference",
+          "run": {
+            "path": "spaces/gui/analysis-results/run-20261013-151715-2d280710/run.json",
+            "bytes": 11535,
+            "sha256": "3da88b958c232ab0a5e3d5d0785acba8f0f8da15d6251398a787f3f08fb71222"
+          },
+          "plan": {
+            "path": "spaces/gui/analysis-results/run-20261013-151715-2d280710/plan.json",
+            "bytes": 25030,
+            "sha256": "0c228e477062119736937792233c918545f42a7bb1992199e94247c9d0093284"
+          },
+          "methods": {
+            "path": "spaces/gui/analysis-results/run-20261013-151715-2d280710/methods-completed.txt",
+            "bytes": 2439,
+            "sha256": "8eced28fa946d7597d09f5892227fd75e6c978b95d9553779fa620d2c4777335"
+          },
+          "cwl": {
+            "path": "spaces/gui/analysis-results/run-20261013-151715-2d280710/workflow.cwl",
+            "bytes": 52100,
+            "sha256": "ce1026cb662fb7d3e4c932a99dfab5677f5c24156c33908842dee6bbbaa1cd84"
+          },
+          "pins": [
+            {
+              "packId": "stringtie",
+              "packVersion": "1.0.0",
+              "manifestSha256": "abfc5ef62ec2b6f2fadc3d80e32cc6dbf06ca10a97fd030e91ec5641ba9f6b62"
+            }
+          ],
+          "selectedPreflightHelpers": [
+            {
+              "operation": "variants/pileup",
+              "pin": {
+                "packId": "variants",
+                "packVersion": "0.4.0",
+                "manifestSha256": "ea4b7f0a6c28709e4190b6514c07cbf7bdd58e1a4f2a2d931f2cae3ce6ec3795"
+              },
+              "executable": {
+                "id": "samtools",
+                "path": "bin/samtools.exe",
+                "sha256": "49c2f16425d464e4ad1c1439d7a9e32a3b1c1bf8e5d54403778de610d2f440b3",
+                "version": "1.24"
+              }
+            }
+          ],
+          "outputFilesRehashed": 5,
+          "readOnlyScientificOracle": {
+            "knownTranscriptGeometryCoverageAndExpressionMatched": true,
+            "transcripts": [
+              "tx_plus",
+              "tx_minus",
+              "tx_unexpressed"
+            ],
+            "coverage": {
+              "tx_plus": 8.2,
+              "tx_minus": 16.4,
+              "tx_unexpressed": 0.0
+            },
+            "TPM": {
+              "tx_plus": 333333.333333,
+              "tx_minus": 666666.666667,
+              "tx_unexpressed": 0.0
+            }
+          }
+        }
+      ],
+      "guiEvidence": {
+        "capturesRehashed": 56,
+        "captureMethods": {
+          "screen BitBlt; no PrintWindow repaint": 28,
+          "PrintWindow; complete window, including any off-desktop portion": 28
+        },
+        "formsWithFullScrollCoverage": 3,
+        "resultSearches": 2,
+        "horizontalClippingReported": false,
+        "visualReviewPerformedByThisAudit": false,
+        "measurementLimitation": "Unchanged native summary shows status/version/provenance. Pack measurements remain recorded result files, not parsed native summary metrics."
+      },
+      "rawReports": [
+        {
+          "path": "spaces/gui/bustools-count-bus-graph.json",
+          "bytes": 1350,
+          "sha256": "5a7adbd07fe821671ad70463e6d0ab56f32d6305c93a8c6888d3aa2c2f07080e"
+        },
+        {
+          "path": "spaces/gui/bustools-count-bus-result-summary.json",
+          "bytes": 5318,
+          "sha256": "139f3cf94258dd2d0719803971da566c8ff40dd1e7e2eeaa1abfc9f8da1d5eb5"
+        },
+        {
+          "path": "spaces/gui/bustools-installation.json",
+          "bytes": 1489,
+          "sha256": "bc362470efb473c8d04a0170e7170c49f47a6f1f36e8af23bbe670dcc9e7c085"
+        },
+        {
+          "path": "spaces/gui/native.json",
+          "bytes": 41270,
+          "sha256": "933cadae2f662abd6dc6eca0067bcd03b04a0280de2d2c640d2f75ef39fee38c"
+        },
+        {
+          "path": "spaces/gui/pack-form-bustools-count-bus-page-1-controls.json",
+          "bytes": 17993,
+          "sha256": "f9eb10f2da81aa5b345d6951327850f77ae3b2e58126f3e28b5fea6d4aecfef5"
+        },
+        {
+          "path": "spaces/gui/pack-form-bustools-count-bus-page-2-controls.json",
+          "bytes": 17999,
+          "sha256": "ed658f5da340acb42acb56897eb33a546a3c200c6bf68d1692a2f1ef830e5a5e"
+        },
+        {
+          "path": "spaces/gui/pack-form-bustools-count-bus-page-3-controls.json",
+          "bytes": 17976,
+          "sha256": "7d742f690113babbbdc25e91faba6ebb9bd6cf5a88a9674bc9fc36f5f9269b05"
+        },
+        {
+          "path": "spaces/gui/pack-form-bustools-count-bus-page-4-controls.json",
+          "bytes": 17970,
+          "sha256": "474e09257560f486c78fb4b692a2bbc5e452da9707d7b12c9b7a6993e502d9f5"
+        },
+        {
+          "path": "spaces/gui/pack-form-bustools-count-bus-page-5-controls.json",
+          "bytes": 17999,
+          "sha256": "558fa852f1aafff913f36ddf53cc7783b9ecea5275db366f4cb2da0f4af67d73"
+        },
+        {
+          "path": "spaces/gui/pack-form-bustools-count-bus-page-6-controls.json",
+          "bytes": 18003,
+          "sha256": "79845aaacee200cc753633378630f415f79431d4c38fcddce47d748374f341ba"
+        },
+        {
+          "path": "spaces/gui/pack-form-bustools-count-bus-top-controls.json",
+          "bytes": 18010,
+          "sha256": "9d22e7faefd9be48e87f034641431a8d95337f353f1ff65874cbce6eba0a3186"
+        },
+        {
+          "path": "spaces/gui/pack-form-stringtie-assemble-guided-page-1-controls.json",
+          "bytes": 18758,
+          "sha256": "87be23c033f3476aa6e3370eceba3067625651ff38b576304f4011bed86b57bf"
+        },
+        {
+          "path": "spaces/gui/pack-form-stringtie-assemble-guided-page-2-controls.json",
+          "bytes": 18761,
+          "sha256": "4441813e6c6207060eb11b757463a672e3f138d2791400dd4e47e8cbaeee5b9a"
+        },
+        {
+          "path": "spaces/gui/pack-form-stringtie-assemble-guided-page-3-controls.json",
+          "bytes": 18757,
+          "sha256": "540023a1b78801903cd862604e33ed60958f6d91c5bee25bdfc195027bfcbc37"
+        },
+        {
+          "path": "spaces/gui/pack-form-stringtie-assemble-guided-page-4-controls.json",
+          "bytes": 18749,
+          "sha256": "5e361720731ebbba348b147037bfa58dee45db0934b48ad37eaf5aa52347d382"
+        },
+        {
+          "path": "spaces/gui/pack-form-stringtie-assemble-guided-page-5-controls.json",
+          "bytes": 18767,
+          "sha256": "bc2838a0572d124e9436e389656bf004950851f4ce6249965849095672f7efc7"
+        },
+        {
+          "path": "spaces/gui/pack-form-stringtie-assemble-guided-page-6-controls.json",
+          "bytes": 18780,
+          "sha256": "da80597516a083cc8b841faa8a6a6b7ed5961de2c00787a0c9333d95e0ae05f1"
+        },
+        {
+          "path": "spaces/gui/pack-form-stringtie-assemble-guided-top-controls.json",
+          "bytes": 18777,
+          "sha256": "edb9d5a21dcdc48a5ba9d8ff88ea66406980c169d5dfff62f74dda3cb56ac664"
+        },
+        {
+          "path": "spaces/gui/pack-form-stringtie-estimate-reference-page-1-controls.json",
+          "bytes": 18746,
+          "sha256": "383f88e575a8e5e6d079f5f20015b3cffcd2eef608546a68ef6fa481ac87b5f1"
+        },
+        {
+          "path": "spaces/gui/pack-form-stringtie-estimate-reference-page-2-controls.json",
+          "bytes": 18749,
+          "sha256": "f1d08727c492887455e7bfc198754bc3e2b3df0c710ac7ebaff3fefdcca15770"
+        },
+        {
+          "path": "spaces/gui/pack-form-stringtie-estimate-reference-page-3-controls.json",
+          "bytes": 18745,
+          "sha256": "71fafd4da22cec6428bd9549f82f0774e821b2e1b08fa6aec0b0f6115c8b513f"
+        },
+        {
+          "path": "spaces/gui/pack-form-stringtie-estimate-reference-page-4-controls.json",
+          "bytes": 18737,
+          "sha256": "b80df5935a5f720c98d1821a26b2ee65548da6da61d998dc6dd0e0a00d4aaa09"
+        },
+        {
+          "path": "spaces/gui/pack-form-stringtie-estimate-reference-page-5-controls.json",
+          "bytes": 18755,
+          "sha256": "2ca2cd92137d535f352468a80592793f4c3976c83482a2158f49310edfcdfbc3"
+        },
+        {
+          "path": "spaces/gui/pack-form-stringtie-estimate-reference-page-6-controls.json",
+          "bytes": 18768,
+          "sha256": "9e1f735a67388ae9c064dd139e312e826c0d22c184aa58e9ee5297e1411431d4"
+        },
+        {
+          "path": "spaces/gui/pack-form-stringtie-estimate-reference-top-controls.json",
+          "bytes": 18765,
+          "sha256": "32991673b18ec4f7b396466c133d7b7b707c2ff3ae9b862d208129cd72815adb"
+        },
+        {
+          "path": "spaces/gui/pack-library-bustools-controls.json",
+          "bytes": 7611,
+          "sha256": "35516f602a620fffb1e0a01586db79562df68ea1a63ff01f645f9ebac9c048bb"
+        },
+        {
+          "path": "spaces/gui/pack-library-stringtie-controls.json",
+          "bytes": 7613,
+          "sha256": "8c68cf97a24b0f5ea1fabdc190b9f7ac5a45c00309aebc7c167abb452da59e34"
+        },
+        {
+          "path": "spaces/gui/pack-library-unfiltered-controls.json",
+          "bytes": 18716,
+          "sha256": "a3c95686c49956a22115653301f99c035ec18387d0de79e507efdee8af964fc2"
+        },
+        {
+          "path": "spaces/gui/pack-results-bustools-controls.json",
+          "bytes": 4843,
+          "sha256": "1e82e1ebbc2157adeae8bae4329dc4321f620ad6a8dd17e77ecedac134163581"
+        },
+        {
+          "path": "spaces/gui/pack-results-bustools-detail.json",
+          "bytes": 2122,
+          "sha256": "34afd3b170ba48fbef5a0b4e021628e073294f3deaeb70d759b6b5bafab3ae2a"
+        },
+        {
+          "path": "spaces/gui/pack-results-bustools-versions-controls.json",
+          "bytes": 4843,
+          "sha256": "1e82e1ebbc2157adeae8bae4329dc4321f620ad6a8dd17e77ecedac134163581"
+        },
+        {
+          "path": "spaces/gui/pack-results-stringtie-controls.json",
+          "bytes": 4867,
+          "sha256": "fba2162d473c9c90374f1ed939fb1abf2156a1b306cd67ef0b13d1532c7158f5"
+        },
+        {
+          "path": "spaces/gui/pack-results-stringtie-detail.json",
+          "bytes": 2153,
+          "sha256": "5e4aa7eb0dc733298bec30b376ee98261cc60d08a01a70bc28c8bec9ef2e54b6"
+        },
+        {
+          "path": "spaces/gui/pack-results-stringtie-versions-controls.json",
+          "bytes": 4867,
+          "sha256": "fba2162d473c9c90374f1ed939fb1abf2156a1b306cd67ef0b13d1532c7158f5"
+        },
+        {
+          "path": "spaces/gui/stringtie-assemble-guided-graph.json",
+          "bytes": 1139,
+          "sha256": "08067716b9e2f5ae54eeb63127e587b234cc6542a3e63f3654a005ec993c66d9"
+        },
+        {
+          "path": "spaces/gui/stringtie-assemble-guided-result-summary.json",
+          "bytes": 5364,
+          "sha256": "7869bd028a4f15955487d7155471042a7b13d9530159241cff43c21f5b30a752"
+        },
+        {
+          "path": "spaces/gui/stringtie-estimate-reference-graph.json",
+          "bytes": 1167,
+          "sha256": "30c7d858e868f79c90622477dc3f5b4a0545bc7c428518c88d0ab3d487f2dcc0"
+        },
+        {
+          "path": "spaces/gui/stringtie-estimate-reference-result-summary.json",
+          "bytes": 5424,
+          "sha256": "374ca5d9964a5d00efcda2e0a76f1771e34033ce5406d259ba937a69631d22fb"
+        },
+        {
+          "path": "spaces/gui/stringtie-installation.json",
+          "bytes": 3156,
+          "sha256": "1715e5cf182f6cc195184183ff0edf70ca083672327bc84157b1b3f697be7cdf"
+        },
+        {
+          "path": "spaces/gui/ui-progress.json",
+          "bytes": 95,
+          "sha256": "4eb1ba23bad1331615a04fa58f824acc24e1503ecaf6afb05da01c52b5502c0e"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Read-only verification of exact downloaded reports and retained artifacts, not another Windows execution.",
+    "Repeated suite outputs are temporary; per-execution oracle outcomes and exact source/binary/input hashes are recorded. Retained normal graph outputs were separately rehashed and scientifically rechecked.",
+    "Screenshot hashes and full-scroll/control evidence are verified; parent/reviewer owns visual inspection.",
+    "Synthetic truth does not establish representative-PC acceptance or performance. No QC thresholds, release/updater, signing, deployment or Linux CWL validation claimed."
+  ],
+  "retainedOriginalReceiptSha256": "a171afcd59d05a535817e4703371b97fc1340ed9d76358fd65af39c5314053bd"
+}

@@ -1,13 +1,24 @@
 # Current project state
 
-**Active bustools/StringTie stage, 2026-10-13:** development is based on merged
-`main` at `9435fd65636917dab30e2c6b393549d1f371ac3d`, on
-`feature/bustools-stringtie-packs`. Initial independent 1.0.0 packs cover BUS
-barcode correction/UMI gene counting and guided short-read transcript assembly/
-reference-only expression estimation. See the
-[stage handover](bustools-stringtie-handover.md). Native bustools science passes in both path cases. StringTie native heap
-corruption blocks acceptance; a compiler-proven flags-layout correction and
-fresh exact Windows/visual validation are in progress. No release or merge is included.
+**bustools/StringTie review candidate, 2026-10-13:** independent **1.0.0** packs
+are ready in [draft PR #19](https://github.com/comparativechrono/workbench/pull/19),
+based on merged `main` at `9435fd65636917dab30e2c6b393549d1f371ac3d`.
+Tested source `a93b338bca5e71b89e3cd000caaba96dbec73501` provides explicit BUS
+barcode correction/UMI gene counts and guided short-read transcript assembly/
+reference-only expression estimation. Published **0.16.0**, frozen **0.16.1**
+application bytes and earlier packs remain unchanged.
+
+The [hosted run](https://github.com/comparativechrono/workbench/actions/runs/38420188054)
+passed 138 source tests with one explicit Linux platform skip, 19 bustools and
+20 StringTie tests per Windows path without skips, and 12 science plus 12 GUI
+gates per path. The Windows flag-layout defect is corrected and covered by a
+source-bound poisoned-storage probe and 20 complete-output repetitions per path.
+Both HISAT2 → StringTie modes pass through the real typed graph. All 56 actual
+display screenshots were reviewed. The [handover](bustools-stringtie-handover.md)
+and [final evidence index](evidence/bustools-stringtie-1.0.0-final-review-2026-10-13.json)
+retain exact archives, source correspondence, failed attempts and limits.
+Native Results retains searchable status/provenance; pack measurements remain
+output files without new summary tiles. No merge, release or catalogue change.
 
 **Integration update, 2026-10-13:** the owner authorized checking compatibility
 and merging the completed PR stack. PRs [#18](https://github.com/comparativechrono/workbench/pull/18),

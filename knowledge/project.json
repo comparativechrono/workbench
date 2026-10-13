@@ -189,7 +189,12 @@
     "primer3_plink2_handover": "primer3-plink2-handover.md",
     "primer3_plink2_final_evidence": "evidence/primer3-plink2-1.0.0-final-review-2026-10-13.json",
     "stack_integration": "evidence/stack-integration-2026-10-13.json",
-    "bustools_stringtie_handover": "bustools-stringtie-handover.md"
+    "bustools_stringtie_handover": "bustools-stringtie-handover.md",
+    "bustools_stringtie_source": "evidence/bustools-stringtie-1.0.0-source-2026-10-13.json",
+    "bustools_stringtie_archive_audit": "evidence/bustools-stringtie-1.0.0-archive-audit-2026-10-13.json",
+    "bustools_stringtie_native_audit": "evidence/bustools-stringtie-1.0.0-native-audit-2026-10-13.json",
+    "bustools_stringtie_visual_review": "evidence/bustools-stringtie-1.0.0-visual-review-2026-10-13.json",
+    "bustools_stringtie_final_review": "evidence/bustools-stringtie-1.0.0-final-review-2026-10-13.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -1211,7 +1216,7 @@
       "bustools": "1.0.0",
       "stringtie": "1.0.0"
     },
-    "status": "StringTie Windows flags-layout correction implemented; 21 local StringTie tests pass; fresh exact native/visual gates pending",
+    "status": "ready for unpublished draft review; exact Windows science, source correspondence and visual gates passed",
     "application_changed": false,
     "published_application": "0.16.0",
     "unpublished_application_candidate": "0.16.1",
@@ -1227,7 +1232,24 @@
     "pull_request": "https://github.com/comparativechrono/workbench/pull/19",
     "pull_request_state": "draft",
     "latest_failed_native_source": "ddeadd34b68491f7f7450ceac804f8fade4116a6",
-    "latest_failed_native_run": "https://github.com/comparativechrono/workbench/actions/runs/38416822238"
+    "latest_failed_native_run": "https://github.com/comparativechrono/workbench/actions/runs/38416822238",
+    "tested_source_commit": "a93b338bca5e71b89e3cd000caaba96dbec73501",
+    "tested_source_tree": "3b971d0c40e047d8498f2f78799420fbd255492e",
+    "workflow_run": "https://github.com/comparativechrono/workbench/actions/runs/38420188054",
+    "final_evidence": "evidence/bustools-stringtie-1.0.0-final-review-2026-10-13.json",
+    "download": "https://github.com/comparativechrono/workbench/actions/runs/38420188054/artifacts/11826607142",
+    "pack_sha256": {
+      "bustools": "387f7ae1b04ba8187e9e24690b5ad102aa1c9d44ce558c04b37ddf3cbf70e629",
+      "stringtie": "6b24cf029ae1371d79e5cec7b39ec83314c0506c135ee59216b218c3ee88a59d"
+    },
+    "remaining_limitations": [
+      "Representative-PC and broader display acceptance",
+      "Realistic-data benchmarking (separate work)",
+      "Scientific Linux CWL",
+      "Signing/institutional deployment",
+      "Release/updater validation",
+      "Native parsing of these pack-specific measurement files"
+    ]
   },
   "ui_patch_0_16_1_development": {
     "recorded_on": "2026-10-09",
@@ -2734,7 +2756,7 @@
       "bustools": "1.0.0",
       "stringtie": "1.0.0"
     },
-    "status": "StringTie Windows flags-layout correction implemented; 21 local StringTie tests pass; fresh exact native/visual gates pending",
+    "status": "ready for unpublished draft review; exact Windows science, source correspondence and visual gates passed",
     "application_changed": false,
     "published_application": "0.16.0",
     "unpublished_application_candidate": "0.16.1",
@@ -2750,6 +2772,23 @@
     "pull_request": "https://github.com/comparativechrono/workbench/pull/19",
     "pull_request_state": "draft",
     "latest_failed_native_source": "ddeadd34b68491f7f7450ceac804f8fade4116a6",
-    "latest_failed_native_run": "https://github.com/comparativechrono/workbench/actions/runs/38416822238"
+    "latest_failed_native_run": "https://github.com/comparativechrono/workbench/actions/runs/38416822238",
+    "tested_source_commit": "a93b338bca5e71b89e3cd000caaba96dbec73501",
+    "tested_source_tree": "3b971d0c40e047d8498f2f78799420fbd255492e",
+    "workflow_run": "https://github.com/comparativechrono/workbench/actions/runs/38420188054",
+    "final_evidence": "evidence/bustools-stringtie-1.0.0-final-review-2026-10-13.json",
+    "download": "https://github.com/comparativechrono/workbench/actions/runs/38420188054/artifacts/11826607142",
+    "pack_sha256": {
+      "bustools": "387f7ae1b04ba8187e9e24690b5ad102aa1c9d44ce558c04b37ddf3cbf70e629",
+      "stringtie": "6b24cf029ae1371d79e5cec7b39ec83314c0506c135ee59216b218c3ee88a59d"
+    },
+    "remaining_limitations": [
+      "Representative-PC and broader display acceptance",
+      "Realistic-data benchmarking (separate work)",
+      "Scientific Linux CWL",
+      "Signing/institutional deployment",
+      "Release/updater validation",
+      "Native parsing of these pack-specific measurement files"
+    ]
   }
 }

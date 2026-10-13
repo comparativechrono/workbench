@@ -1,8 +1,10 @@
 # bustools and StringTie optional packs
 
-Date: 2026-10-13. Status: implementation present; native bustools checks pass,
-but StringTie native heap corruption blocks acceptance. A concrete Windows flag-layout
-correction is in development. Exact corrected Windows and visual review remain pending. No release or merge is authorized for this set.
+Date: 2026-10-13. Status: **ready for unpublished draft review** in
+[PR #19](https://github.com/comparativechrono/workbench/pull/19). Corrected exact
+Windows packages, source correspondence and visual review pass. No merge,
+release or catalogue publication is included. Earlier failures below are retained
+history and do not establish any pass for superseded bytes.
 
 The owner requested the next roadmap stage after merging all completed PRs.
 The clean verified base is `main` at
@@ -163,3 +165,72 @@ archives still require native execution and visual acceptance. An optional
 Linux ASan diagnostic build stopped on a compiler diagnostic in `std::regex`;
 no ASan execution or sanitizer pass is claimed. Production warning flags were
 not relaxed.
+
+## Final exact candidate and acceptance
+
+Tested source **`a93b338bca5e71b89e3cd000caaba96dbec73501`**, tree
+`3b971d0c40e047d8498f2f78799420fbd255492e`, passed
+[run 38420188054](https://github.com/comparativechrono/workbench/actions/runs/38420188054).
+The final review documentation is a subsequent documentation-only commit; all
+pack, fixture, builder, validator and workflow bytes match that tested source.
+
+[Download packs, matching sources and build evidence](https://github.com/comparativechrono/workbench/actions/runs/38420188054/artifacts/11826607142).
+The bundle contains the two independent offline-import ZIPs and their complete
+source companion. It is an unpublished Actions artifact, currently expiring
+2026-11-12; GitHub access is required. Import either pack ZIP through Manage tools.
+
+| Archive | SHA-256 |
+| --- | --- |
+| `native-workbench-pack-bustools-1.0.0.zip` | `387f7ae1b04ba8187e9e24690b5ad102aa1c9d44ce558c04b37ddf3cbf70e629` |
+| `native-workbench-pack-stringtie-1.0.0.zip` | `6b24cf029ae1371d79e5cec7b39ec83314c0506c135ee59216b218c3ee88a59d` |
+| `native-workbench-bustools-stringtie-1.0.0-source-evidence.zip` | `bc0af8a0eb657e0ba3a1c8281c64f41645135e389ba74febfb4a228aeaf4fe03` |
+
+The downloaded source audit matches 1,027 Git files and all 1,478 companion
+inventory entries, exact upstream archives/patches/notices, build recipes and
+binary records. SHA-256 transport checks and ZIP CRCs pass. This establishes byte
+and source correspondence, not an independent bit-identical recompilation.
+
+Hosted source suites ran 139 tests: **138 passed**, one explicit Linux skip for
+the native Windows deep-local-archive import test; no failures/errors. Pack
+science has no skips: 24 bustools and 21 StringTie Linux tests, with seven pristine
+comparison cases across the tools. Each native Windows path passes **19 bustools
+and 20 StringTie tests**, with no selected skips. StringTie additionally executes
+the exact poisoned-storage probe and 10 complete-output repetitions of each mode.
+Those repetitions are part of the 20-test suite, not 20 additional test cases.
+
+Both ordinary and space-containing application/input/results paths pass all
+**12 science and 12 GUI gates**. They cover native import/self-checks/duplicate
+version rejection, all three normal exact-pin graphs, incompatible inputs and
+stale pins, Methods/CWL and searchable results, both real HISAT2 → StringTie
+modes, Starter/installed-pack regression and before/after byte integrity.
+Scientific execution uses released app 0.16.0; visual review uses unchanged
+0.16.1. No application rebuild is implied. Installation checks retain the exact
+`bam/flagstat` SAMtools helper. Full-catalog science graphs select the installed
+HISAT2 descriptor, and GUI graphs select Starter `variants/pileup`; their saved
+plans retain the actual pack/manifest pins and identical SAMtools 1.24 executable
+bytes. Do not substitute the installation-helper identity for recorded graph provenance.
+
+All **56 actual BitBlt screenshots** were reviewed, including every page of all
+three forms, filtered/unfiltered libraries and Results/version views. No blocking
+layout problem was found at 1024×768/96 DPI. Full names wrap in bold, descriptions
+are regular weight, and Run tool and separate Methods remain visible. The long
+input guidance requires considerable scrolling. A partially visible row at a
+scroll boundary is reachable in adjacent captures. Supplemental PrintWindow
+images do not replace actual-display evidence.
+
+Evidence: [source tests](evidence/bustools-stringtie-1.0.0-source-2026-10-13.json),
+[archive correspondence](evidence/bustools-stringtie-1.0.0-archive-audit-2026-10-13.json),
+[native audit](evidence/bustools-stringtie-1.0.0-native-audit-2026-10-13.json),
+[visual review](evidence/bustools-stringtie-1.0.0-visual-review-2026-10-13.json) and
+[final index](evidence/bustools-stringtie-1.0.0-final-review-2026-10-13.json).
+The final index retains all artifact URLs, hashes and earlier failed attempts.
+
+Limits remain explicit: bounded synthetic fixtures are not representative-PC or
+realistic-data performance acceptance. No benchmark, scientific Linux CWL,
+signing/institutional deployment or release/updater validation is included.
+No high-DPI, multiple-monitor, physical-trackpad or transient-flicker claim is made.
+The separate Methods document dialog was not opened in this batch's screenshots;
+its persistent button, recorded Methods paths and methods/CWL contents were checked.
+Native Results does not parse these packs' JSON measurements into summary tiles.
+Its generic unavailable-measurement recovery advice can be misleading for an
+unsupported format; improve that distinction in a future application change.
