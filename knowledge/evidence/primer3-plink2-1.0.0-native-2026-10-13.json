@@ -1,0 +1,1356 @@
+{
+  "schema": 1,
+  "recordedOn": "2026-10-13",
+  "sourceCommit": "3d1d83b70d053af625b5cb45362851c0fefab2a1",
+  "sourceTree": "32becfa4831b7e50cdcfe342645d0ac02d32b8cb",
+  "workflowRun": "https://github.com/comparativechrono/workbench/actions/runs/38403212748",
+  "published": false,
+  "kind": "exact-archive-native-windows-validation",
+  "success": true,
+  "nativeWindowsExecuted": true,
+  "paths": {
+    "ordinary": {
+      "science": {
+        "success": true,
+        "applicationVersion": "0.16.0",
+        "applicationSourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "applicationArchive": {
+          "file": "published-starter.zip",
+          "bytes": 17846873,
+          "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+        },
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "checks": [
+          "primer3: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+          "primer3: exact installed scientific and failure regressions.",
+          "plink2: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+          "plink2: exact installed scientific and failure regressions.",
+          "primer3: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+          "plink2: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+          "Unchanged Starter science and all installed declared pack checks pass together.",
+          "Pinned application and installed pack bytes remain unchanged after execution."
+        ],
+        "coreFilesVerifiedBefore": 274,
+        "coreFilesVerifiedAfter": 274,
+        "reportSha256": "0f8d1cec3720eddee73ef17d0a063f991e7a0da6636be02333b97f26ea2aebf8",
+        "checkCount": 8,
+        "normalGraphs": {
+          "primer3": {
+            "success": true,
+            "pin": {
+              "packId": "primer3",
+              "packVersion": "1.0.0",
+              "manifestSha256": "f79505a97a8affdfaec5d89e77ea4906d1c67f6e9b63cdfeb0baf00e7da6f7ba"
+            },
+            "planSha256": "07b62a2d38a394673d2b2b845306eff1b7c44cfd8de58e87b03876e7d7cb71aa",
+            "runSha256": "2b49b5a7b17397ce3c76aea00b53edd67d860bf536fb37a0b3cee4bcf070b8a3",
+            "inputs": [
+              {
+                "file": "planted.fa",
+                "bytes": 280,
+                "sha256": "a1ab1f8a85ae8aceee96e8a2a91c8ab36ff008a17d20441c00244ffdc40959b3"
+              }
+            ],
+            "outputs": [
+              {
+                "output": "primers",
+                "file": "primers.tsv",
+                "sha256": "35972781c8a7d559e667aa1a1e070fa1c0dbdcc7781f0678ca03c07cf8a6a839"
+              },
+              {
+                "output": "boulder",
+                "file": "primer3-result.boulder",
+                "sha256": "843279edc9544dca736b0840f4bf5cbe46e9ed766f8bf3aec2a914cf91e3ad64"
+              },
+              {
+                "output": "request",
+                "file": "primer3-input.boulder",
+                "sha256": "ab114f5a19f237fd0fbd9787c24e42992be464b18cf034628da3245486638397"
+              },
+              {
+                "output": "summary",
+                "file": "primer3-summary.json",
+                "sha256": "2bb9feaf310bd6da552aed89ec86eb063f048f9837acc8dfdb7756ed8fd3ac6e"
+              },
+              {
+                "output": "settings",
+                "file": "analysis-settings.json",
+                "sha256": "a1b9ac9b7d67dde6152319fcecc1f9aed0439ab7b95758224cc1e5bd4577c35b"
+              },
+              {
+                "output": "log",
+                "file": "primer3.log",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            ],
+            "supportingFiles": [
+              {
+                "file": "methods-planned.txt",
+                "sha256": "c69f02e2518035d1d1a58447873ba7eeebe1f1fb9896130aa3d19bdfbe867f80"
+              },
+              {
+                "file": "methods-completed.txt",
+                "sha256": "4ec28ea6584260108d2d6a95fdad83b0893fdecbbed70fc452dba5aeed5c651f"
+              },
+              {
+                "file": "workflow.cwl",
+                "sha256": "34834b62f9d3cfac65b525072e5cbd15c560db4f44d5017a8e9eaca65be20844"
+              }
+            ]
+          },
+          "plink2": {
+            "success": true,
+            "pin": {
+              "packId": "plink2",
+              "packVersion": "1.0.0",
+              "manifestSha256": "ff6fe0b2033cd50095ea5b98e652f4138f064580778806f9634ccdc71a40fdc8"
+            },
+            "planSha256": "7fab86192d5186d8ee762558e9776a89ade81fadcaeb5e3b633d145b4d29a62a",
+            "runSha256": "1e264c1c41ed79389e5ad1f18637c5336363b9ee02d99fb3a563b1f4558f9e46",
+            "inputs": [
+              {
+                "file": "genotypes.vcf",
+                "bytes": 517,
+                "sha256": "c84522cb30dcfdd70cb26903b0966e4399b4b6c58d9ab2654adddadfa817c54b"
+              }
+            ],
+            "outputs": [
+              {
+                "output": "frequencies",
+                "file": "plink.afreq",
+                "sha256": "8b3c410c7a51968fb4132643e3f0757771380d65540e5dc879ea840b52044de3"
+              },
+              {
+                "output": "genotypes",
+                "file": "plink.gcount",
+                "sha256": "7c828f383000d7768d680f369dcebf6b0ff5721c6d168afeb39675fcca4a3078"
+              },
+              {
+                "output": "sample-missingness",
+                "file": "plink.smiss",
+                "sha256": "0bb717370ad884294fb7304f4982aa8a0f399db08942dd1e13aa7a6a08e85786"
+              },
+              {
+                "output": "variant-missingness",
+                "file": "plink.vmiss",
+                "sha256": "3d3c56a88890648dbc8abeedd08c71448c656f5d640128cdb91b197a52e90831"
+              },
+              {
+                "output": "summary",
+                "file": "summary.json",
+                "sha256": "1b0e34e74acca7cd794dbce6509ba48100c37b4985adb841ae8a8c93cb4c9a6f"
+              },
+              {
+                "output": "settings",
+                "file": "settings.json",
+                "sha256": "c4285d29794e7843cc433dbd25683ef1c052bb1f56199e8605031cb866ae221f"
+              },
+              {
+                "output": "log",
+                "file": "plink.log",
+                "sha256": "13b4bc022ee2899f964c468ca8672a7c0a5d38bff01e9c60236a2ad482b72f38"
+              },
+              {
+                "output": "adapter-log",
+                "file": "adapter.log",
+                "sha256": "e5896d1a6e6ef9e5e0ddc07f6a77ddc08c83ee223cff1f54018d6a2bace13f4d"
+              }
+            ],
+            "supportingFiles": [
+              {
+                "file": "methods-planned.txt",
+                "sha256": "d7beacbee11a2ec6576dfaae31cef3b516c3f24154f43487fa7a936c7ff86b18"
+              },
+              {
+                "file": "methods-completed.txt",
+                "sha256": "9f42cc9ca0cdf4c3a5bee15cc7e51f4960d4c4b577cab8d58b1989580fd62e1e"
+              },
+              {
+                "file": "workflow.cwl",
+                "sha256": "3b81d47cf3b84d5a0239a4bc572706201d0dd932104acf4ffebabb7244b5f242"
+              }
+            ]
+          }
+        },
+        "scientificSuites": {
+          "primer3": {
+            "schema": 1,
+            "packId": "primer3",
+            "packVersion": "1.0.0",
+            "upstreamVersion": "2.6.1",
+            "toolVersion": "2.6.1",
+            "platform": "win32",
+            "nativeWindowsExecuted": true,
+            "testsRun": 14,
+            "failures": 0,
+            "errors": 0,
+            "skipped": [],
+            "success": true,
+            "seconds": 1.011,
+            "testSourceSha256": "da942ba37244e4de27dc132a1b930540254529a0b15c91d32a2fdc0028a7cdb8",
+            "guardExecutableSha256": "99325f449a21ca0b558a3b1ccdc7558c4ec2c591d8d35099a91eb66c31a614bb",
+            "scientificBinarySha256": "85f0b53a6be938481498d730b63a229c7dafc7c898a7e9e44aff14f9067bdc8f",
+            "packManifestSha256": "f79505a97a8affdfaec5d89e77ea4906d1c67f6e9b63cdfeb0baf00e7da6f7ba",
+            "upstreamSourceCommit": "7f9f17d6012f404e83bbf0f931a4d06eb4af465b",
+            "upstreamSourceArchiveSha256": "c981e42765ceb525f56607c6a7cf989ac5068483731c6e083b1e9fb22816463b",
+            "livePinnedLinuxReferenceCases": 0,
+            "liveReferenceExecutableSha256": null,
+            "scope": "Independent planted primer binding/strand/product/GC and requested Tm/length ranges; pristine upstream comparison; zero-pair success; explicit chemistry; input/pack immutability; bounds/missing dependencies and path guidance. No specificity, experimental PCR, clinical or benchmark claim.",
+            "reportSha256": "c2b1182b3f7417d1d021b314fb9dd2e3f9ae0a0723e6ecaffefd56aa9d30e153",
+            "executionCount": 40
+          },
+          "plink2": {
+            "schema": 1,
+            "packId": "plink2",
+            "packVersion": "1.0.0",
+            "toolVersion": "2.0.0-a.7.12",
+            "platform": "win32",
+            "nativeWindowsExecuted": true,
+            "testsRun": 17,
+            "failures": 0,
+            "errors": 0,
+            "skipped": [],
+            "success": true,
+            "seconds": 4.577,
+            "testSourceSha256": "cb3f084244d3aebd98e8ca28ce6ca09b015a247a4553f3f0a5aaff8795c2862e",
+            "guardExecutableSha256": "af32b658385412a3d09545844d5e182106bb878453ba04d4cfc6bbe276659581",
+            "scientificBinarySha256": "2d461a0253479f1566294f2f4e89a3e9db0f7a7e3894e0554053e8ede244bb9e",
+            "packManifestSha256": "ff6fe0b2033cd50095ea5b98e652f4138f064580778806f9634ccdc71a40fdc8",
+            "upstreamSourceCommit": "5c1f185d4144e62fa23087d68760162f712cd2a8",
+            "scope": "Independent synthetic diploid biallelic SNP allele/genotype/missingness counts and denominators; direct bundled unmodified upstream execution; bounded input rejection; input/installation immutability and repeated runs. No PCA, association, filtering, scientific benchmark, GUI, population or clinical claim.",
+            "reportSha256": "f4fc11ac0c77cb1a58c4f05c607563b4b6ceeb4ea0f64c9bcc9e733f4fb0f03d",
+            "executionCount": 52
+          }
+        },
+        "installation": {
+          "reportSha256": "157f58686a9ccd5ae1429246c1a0de20ba168eb795136726c1c44f40ec46aafb",
+          "message": "7 of 7 application/integrity checks passed. Starter scientific check passed. 4 of 4 additional pack checks passed.",
+          "passedTopLevel": 8,
+          "failed": 0,
+          "skipped": 0,
+          "additionalPackChecksPassed": 4
+        }
+      },
+      "gui": {
+        "success": true,
+        "applicationVersion": "0.16.1",
+        "applicationSourceCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+        "applicationArchive": {
+          "file": "native-workbench-0.16.1-starter-windows.zip",
+          "bytes": 17889148,
+          "sha256": "28f1362287991621dde030da54eb444846142c0243be6b9d86c4b4f1bf99dd47"
+        },
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "checks": [
+          "primer3: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+          "plink2: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+          "primer3: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+          "plink2: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+          "The native library discovers the installed Primer3 and PLINK2 1.0.0 packs and displays their operations under complete catalogue labels.",
+          "Native pointer selection opens primer3/design-pcr with exact pack version, declared input/option labels and reachable form pages.",
+          "Native pointer selection opens plink2/summarize-vcf with exact pack version, declared input/option labels and reachable form pages.",
+          "Native Results search finds Pack candidate primer3 and displays its successful native operation, exact pack/executable versions and recorded manifest identity without a QC verdict.",
+          "Native Results search finds Pack candidate plink2 and displays its successful native operation, exact pack/executable versions and recorded manifest identity without a QC verdict.",
+          "Pinned application and installed pack bytes remain unchanged after execution."
+        ],
+        "coreFilesVerifiedBefore": 277,
+        "coreFilesVerifiedAfter": 277,
+        "reportSha256": "d5246d82b8a3c5cc81e06c67f327336af5623db32c71fd943dcd1c357acbed02",
+        "checkCount": 10,
+        "normalGraphs": {
+          "primer3": {
+            "success": true,
+            "pin": {
+              "packId": "primer3",
+              "packVersion": "1.0.0",
+              "manifestSha256": "f79505a97a8affdfaec5d89e77ea4906d1c67f6e9b63cdfeb0baf00e7da6f7ba"
+            },
+            "planSha256": "cf29487f3b0e953671b136a54447acf9d0ea24f03d7d90ed0672b27c3a8cb4b7",
+            "runSha256": "2af19415fed966f4b2257d395f95e9fe2178ad36d40f73053b2c84bacb4e5bb1",
+            "inputs": [
+              {
+                "file": "planted.fa",
+                "bytes": 280,
+                "sha256": "a1ab1f8a85ae8aceee96e8a2a91c8ab36ff008a17d20441c00244ffdc40959b3"
+              }
+            ],
+            "outputs": [
+              {
+                "output": "primers",
+                "file": "primers.tsv",
+                "sha256": "35972781c8a7d559e667aa1a1e070fa1c0dbdcc7781f0678ca03c07cf8a6a839"
+              },
+              {
+                "output": "boulder",
+                "file": "primer3-result.boulder",
+                "sha256": "4a4b0b45e6c58953cc8b44bb85449e077b11a2de976205f427800a0dfe7d8b44"
+              },
+              {
+                "output": "request",
+                "file": "primer3-input.boulder",
+                "sha256": "6d67903d1daca633cdaa0682d13a4c58f0c3cc41a4f2f1a5af869c9fb22aa502"
+              },
+              {
+                "output": "summary",
+                "file": "primer3-summary.json",
+                "sha256": "2bb9feaf310bd6da552aed89ec86eb063f048f9837acc8dfdb7756ed8fd3ac6e"
+              },
+              {
+                "output": "settings",
+                "file": "analysis-settings.json",
+                "sha256": "253445e61262ee81d8286985b6fcb0ae906bc9a90c09b64479fd6451922ad9e3"
+              },
+              {
+                "output": "log",
+                "file": "primer3.log",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            ],
+            "supportingFiles": [
+              {
+                "file": "methods-planned.txt",
+                "sha256": "c69f02e2518035d1d1a58447873ba7eeebe1f1fb9896130aa3d19bdfbe867f80"
+              },
+              {
+                "file": "methods-completed.txt",
+                "sha256": "4ec28ea6584260108d2d6a95fdad83b0893fdecbbed70fc452dba5aeed5c651f"
+              },
+              {
+                "file": "workflow.cwl",
+                "sha256": "fff2f713485dc586ed413a29b670cf41f026817be61ff485e6bb4612f596230a"
+              }
+            ]
+          },
+          "plink2": {
+            "success": true,
+            "pin": {
+              "packId": "plink2",
+              "packVersion": "1.0.0",
+              "manifestSha256": "ff6fe0b2033cd50095ea5b98e652f4138f064580778806f9634ccdc71a40fdc8"
+            },
+            "planSha256": "3a1a082b47aa9efa9d47d4eb5548e3c10be93b45b36baed6c2fd894e16154990",
+            "runSha256": "2ec7e39df1c7eef783ee85dd19f4741f10bbfcc708ed2ad85840ec45080b26f7",
+            "inputs": [
+              {
+                "file": "genotypes.vcf",
+                "bytes": 517,
+                "sha256": "c84522cb30dcfdd70cb26903b0966e4399b4b6c58d9ab2654adddadfa817c54b"
+              }
+            ],
+            "outputs": [
+              {
+                "output": "frequencies",
+                "file": "plink.afreq",
+                "sha256": "8b3c410c7a51968fb4132643e3f0757771380d65540e5dc879ea840b52044de3"
+              },
+              {
+                "output": "genotypes",
+                "file": "plink.gcount",
+                "sha256": "7c828f383000d7768d680f369dcebf6b0ff5721c6d168afeb39675fcca4a3078"
+              },
+              {
+                "output": "sample-missingness",
+                "file": "plink.smiss",
+                "sha256": "0bb717370ad884294fb7304f4982aa8a0f399db08942dd1e13aa7a6a08e85786"
+              },
+              {
+                "output": "variant-missingness",
+                "file": "plink.vmiss",
+                "sha256": "3d3c56a88890648dbc8abeedd08c71448c656f5d640128cdb91b197a52e90831"
+              },
+              {
+                "output": "summary",
+                "file": "summary.json",
+                "sha256": "1b0e34e74acca7cd794dbce6509ba48100c37b4985adb841ae8a8c93cb4c9a6f"
+              },
+              {
+                "output": "settings",
+                "file": "settings.json",
+                "sha256": "00f80ae9f94ca8fb072850e1f50e8d9f19bb597f03e60a1b826385be872d28b5"
+              },
+              {
+                "output": "log",
+                "file": "plink.log",
+                "sha256": "7fda4d23ef48928da652e10e4380444548da5e5ec65a347eb18909987e0fe157"
+              },
+              {
+                "output": "adapter-log",
+                "file": "adapter.log",
+                "sha256": "50da810f55f7d2ad5892e8a1563ff57c7adc525cf66fb233ebf8c8b3d6ec0ddd"
+              }
+            ],
+            "supportingFiles": [
+              {
+                "file": "methods-planned.txt",
+                "sha256": "d7beacbee11a2ec6576dfaae31cef3b516c3f24154f43487fa7a936c7ff86b18"
+              },
+              {
+                "file": "methods-completed.txt",
+                "sha256": "9f42cc9ca0cdf4c3a5bee15cc7e51f4960d4c4b577cab8d58b1989580fd62e1e"
+              },
+              {
+                "file": "workflow.cwl",
+                "sha256": "617bd56337d5c433ac14d4b5a474ddc9c8402eb009934fb797a6ef1edea7eaa6"
+              }
+            ]
+          }
+        },
+        "nativeGUI": {
+          "forms": [
+            {
+              "operation": "primer3/design-pcr",
+              "displayName": "Primer3: design PCR primer pairs",
+              "packVersion": "1.0.0",
+              "manifestSha256": "f79505a97a8affdfaec5d89e77ea4906d1c67f6e9b63cdfeb0baf00e7da6f7ba",
+              "checkedInputOptionLabels": [
+                "Divalent salt (mM)",
+                "Effective annealing oligo (nM)",
+                "Maximum calculated Tm (C)",
+                "Maximum candidate pairs",
+                "Maximum primer length (bases)",
+                "Maximum product size (bp)",
+                "Minimum calculated Tm (C)",
+                "Minimum primer length (bases)",
+                "Minimum product size (bp)",
+                "Monovalent salt (mM)",
+                "Optimum calculated Tm (C)",
+                "Optimum primer length (bases)",
+                "Single DNA template",
+                "Single DNA template FASTA",
+                "Total dNTP concentration (mM)"
+              ],
+              "pages": [
+                {
+                  "capture": "pack-form-primer3-design-pcr-top",
+                  "scroll": {
+                    "nMin": 0,
+                    "nMax": 2451,
+                    "nPage": 495,
+                    "nPos": 0
+                  }
+                },
+                {
+                  "capture": "pack-form-primer3-design-pcr-page-1",
+                  "scroll": {
+                    "nMin": 0,
+                    "nMax": 2451,
+                    "nPage": 495,
+                    "nPos": 288
+                  }
+                },
+                {
+                  "capture": "pack-form-primer3-design-pcr-page-2",
+                  "scroll": {
+                    "nMin": 0,
+                    "nMax": 2451,
+                    "nPage": 495,
+                    "nPos": 576
+                  }
+                },
+                {
+                  "capture": "pack-form-primer3-design-pcr-page-3",
+                  "scroll": {
+                    "nMin": 0,
+                    "nMax": 2451,
+                    "nPage": 495,
+                    "nPos": 864
+                  }
+                },
+                {
+                  "capture": "pack-form-primer3-design-pcr-page-4",
+                  "scroll": {
+                    "nMin": 0,
+                    "nMax": 2451,
+                    "nPage": 495,
+                    "nPos": 1152
+                  }
+                },
+                {
+                  "capture": "pack-form-primer3-design-pcr-page-5",
+                  "scroll": {
+                    "nMin": 0,
+                    "nMax": 2451,
+                    "nPage": 495,
+                    "nPos": 1440
+                  }
+                },
+                {
+                  "capture": "pack-form-primer3-design-pcr-page-6",
+                  "scroll": {
+                    "nMin": 0,
+                    "nMax": 2451,
+                    "nPage": 495,
+                    "nPos": 1728
+                  }
+                },
+                {
+                  "capture": "pack-form-primer3-design-pcr-page-7",
+                  "scroll": {
+                    "nMin": 0,
+                    "nMax": 2451,
+                    "nPage": 495,
+                    "nPos": 1957
+                  }
+                }
+              ],
+              "formBounds": [
+                217,
+                153,
+                695,
+                648
+              ],
+              "visibleLibraryBounds": [
+                22,
+                193,
+                185,
+                634
+              ],
+              "windowBounds": [
+                0,
+                0,
+                1024,
+                728
+              ]
+            },
+            {
+              "operation": "plink2/summarize-vcf",
+              "displayName": "PLINK2: summarize genotype frequencies and missingness",
+              "packVersion": "1.0.0",
+              "manifestSha256": "ff6fe0b2033cd50095ea5b98e652f4138f064580778806f9634ccdc71a40fdc8",
+              "checkedInputOptionLabels": [
+                "Diploid biallelic SNP genotypes",
+                "Diploid genotype VCF"
+              ],
+              "pages": [
+                {
+                  "capture": "pack-form-plink2-summarize-vcf-top",
+                  "scroll": {
+                    "nMin": 0,
+                    "nMax": 1086,
+                    "nPage": 495,
+                    "nPos": 0
+                  }
+                },
+                {
+                  "capture": "pack-form-plink2-summarize-vcf-page-1",
+                  "scroll": {
+                    "nMin": 0,
+                    "nMax": 1086,
+                    "nPage": 495,
+                    "nPos": 288
+                  }
+                },
+                {
+                  "capture": "pack-form-plink2-summarize-vcf-page-2",
+                  "scroll": {
+                    "nMin": 0,
+                    "nMax": 1086,
+                    "nPage": 495,
+                    "nPos": 576
+                  }
+                },
+                {
+                  "capture": "pack-form-plink2-summarize-vcf-page-3",
+                  "scroll": {
+                    "nMin": 0,
+                    "nMax": 1086,
+                    "nPage": 495,
+                    "nPos": 592
+                  }
+                }
+              ],
+              "formBounds": [
+                217,
+                153,
+                695,
+                648
+              ],
+              "visibleLibraryBounds": [
+                22,
+                193,
+                185,
+                634
+              ],
+              "windowBounds": [
+                0,
+                0,
+                1024,
+                728
+              ]
+            }
+          ],
+          "libraries": [
+            {
+              "query": "primer3",
+              "labels": [
+                "Primer3: design PCR primer pairs"
+              ],
+              "completeCaptions": [
+                "Primer3: design PCR primer pairs\nRank standard PCR primer pairs from one local DNA template with explicit product, length, Tm and chemistry settings. Candidate design does not establish specificity or experimental success."
+              ],
+              "windowBounds": [
+                0,
+                0,
+                1024,
+                728
+              ]
+            },
+            {
+              "query": "plink2",
+              "labels": [
+                "PLINK2: summarize genotype frequencies and missingness"
+              ],
+              "completeCaptions": [
+                "PLINK2: summarize genotype frequencies and missingness\nMeasure ALT frequencies, genotype counts and per-sample/per-variant missingness from a reviewed GT-only SNP dataset. No automatic QC filtering or pass thresholds."
+              ],
+              "windowBounds": [
+                0,
+                0,
+                1024,
+                728
+              ]
+            }
+          ],
+          "results": [
+            {
+              "query": "Pack candidate primer3",
+              "operation": "primer3/design-pcr",
+              "versions": [
+                {
+                  "id": "primer3",
+                  "version": "2.6.1"
+                },
+                {
+                  "id": "primer3-adapter",
+                  "version": "1.0.0"
+                }
+              ],
+              "manifestSha256": "f79505a97a8affdfaec5d89e77ea4906d1c67f6e9b63cdfeb0baf00e7da6f7ba",
+              "nativeSummaryReportsMeasurementsUnavailable": true,
+              "measurementDisplayScope": "The unchanged application records status, versions and provenance; pack-specific JSON measurements are retained in result files and are not parsed into this native summary."
+            },
+            {
+              "query": "Pack candidate plink2",
+              "operation": "plink2/summarize-vcf",
+              "versions": [
+                {
+                  "id": "plink2",
+                  "version": "2.0.0-a.7.12"
+                },
+                {
+                  "id": "plink2-adapter",
+                  "version": "1.0.0"
+                }
+              ],
+              "manifestSha256": "ff6fe0b2033cd50095ea5b98e652f4138f064580778806f9634ccdc71a40fdc8",
+              "nativeSummaryReportsMeasurementsUnavailable": true,
+              "measurementDisplayScope": "The unchanged application records status, versions and provenance; pack-specific JSON measurements are retained in result files and are not parsed into this native summary."
+            }
+          ],
+          "scope": "Native Primer3/PLINK2 form discovery, complete library captions, input labels, search and persisted result presentation; scientific execution is recorded separately.",
+          "limitations": [
+            "Observed hosted desktop and DPI only; no representative-PC, high-DPI, multiple-monitor or physical-trackpad acceptance.",
+            "PrintWindow captures are labelled separately from actual displayed BitBlt pixels; neither proves absence of transient flicker.",
+            "Complete accessible library names/descriptions are checked; bold/regular text, wrapping and readability require review of the retained actual screenshots.",
+            "primer3: the unchanged application has no parser for this pack's JSON measurements; Native Results reports their unavailability and preserves status/version/provenance display.",
+            "plink2: the unchanged application has no parser for this pack's JSON measurements; Native Results reports their unavailability and preserves status/version/provenance display."
+          ],
+          "windowBounds": [
+            0,
+            0,
+            1024,
+            728
+          ],
+          "workArea": [
+            0,
+            0,
+            1024,
+            728
+          ],
+          "dpi": 96,
+          "horizontalClipping": false
+        }
+      }
+    },
+    "spaces": {
+      "science": {
+        "success": true,
+        "applicationVersion": "0.16.0",
+        "applicationSourceCommit": "e855dc4396e0c16ae35f4e840eb9cc734adb4441",
+        "applicationArchive": {
+          "file": "published-starter.zip",
+          "bytes": 17846873,
+          "sha256": "f96e03e43cac92ba8ca9a0a3807eb671f9924d5e624cadbba94d1a5ca1309073"
+        },
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "checks": [
+          "primer3: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+          "primer3: exact installed scientific and failure regressions.",
+          "plink2: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+          "plink2: exact installed scientific and failure regressions.",
+          "primer3: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+          "plink2: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+          "Unchanged Starter science and all installed declared pack checks pass together.",
+          "Pinned application and installed pack bytes remain unchanged after execution."
+        ],
+        "coreFilesVerifiedBefore": 274,
+        "coreFilesVerifiedAfter": 274,
+        "reportSha256": "3004caf135e93437f381584f5d1ace2d463aa5a2f0e7b18e99f7f74e55bfed70",
+        "checkCount": 8,
+        "normalGraphs": {
+          "primer3": {
+            "success": true,
+            "pin": {
+              "packId": "primer3",
+              "packVersion": "1.0.0",
+              "manifestSha256": "f79505a97a8affdfaec5d89e77ea4906d1c67f6e9b63cdfeb0baf00e7da6f7ba"
+            },
+            "planSha256": "71b55b7d44cac9a154fc7aaf008f6bf72b09d04054b3287ee145e96d4a9c37a3",
+            "runSha256": "6782c0f93cad3b2ac808a63b4cfaab015ae0174fd5a161f39b31af01fdec677b",
+            "inputs": [
+              {
+                "file": "planted.fa",
+                "bytes": 280,
+                "sha256": "a1ab1f8a85ae8aceee96e8a2a91c8ab36ff008a17d20441c00244ffdc40959b3"
+              }
+            ],
+            "outputs": [
+              {
+                "output": "primers",
+                "file": "primers.tsv",
+                "sha256": "35972781c8a7d559e667aa1a1e070fa1c0dbdcc7781f0678ca03c07cf8a6a839"
+              },
+              {
+                "output": "boulder",
+                "file": "primer3-result.boulder",
+                "sha256": "7ad0fafde83932cb05ea2c13b45691362ef27351b49a18dddc0ec25ce4e751e1"
+              },
+              {
+                "output": "request",
+                "file": "primer3-input.boulder",
+                "sha256": "5ff12bff688de85d7a7a45fecced527fd7e3586544e7006f745ca396432464ec"
+              },
+              {
+                "output": "summary",
+                "file": "primer3-summary.json",
+                "sha256": "2bb9feaf310bd6da552aed89ec86eb063f048f9837acc8dfdb7756ed8fd3ac6e"
+              },
+              {
+                "output": "settings",
+                "file": "analysis-settings.json",
+                "sha256": "6625e86ce45855a48b587fba450e3bda3c6331e03a80e0fd32bdeccda76a5a0d"
+              },
+              {
+                "output": "log",
+                "file": "primer3.log",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            ],
+            "supportingFiles": [
+              {
+                "file": "methods-planned.txt",
+                "sha256": "c69f02e2518035d1d1a58447873ba7eeebe1f1fb9896130aa3d19bdfbe867f80"
+              },
+              {
+                "file": "methods-completed.txt",
+                "sha256": "4ec28ea6584260108d2d6a95fdad83b0893fdecbbed70fc452dba5aeed5c651f"
+              },
+              {
+                "file": "workflow.cwl",
+                "sha256": "5043926a2b18d8eaa8229373323af434063773e83c1452e19d1dfb4d87bb1cdc"
+              }
+            ]
+          },
+          "plink2": {
+            "success": true,
+            "pin": {
+              "packId": "plink2",
+              "packVersion": "1.0.0",
+              "manifestSha256": "ff6fe0b2033cd50095ea5b98e652f4138f064580778806f9634ccdc71a40fdc8"
+            },
+            "planSha256": "6805cdcf384404bdb3adc7767b9626d66fb499228a94a2b41362c2da24dc513a",
+            "runSha256": "3e263f06069bbbda75e9272bc2ca53774a132d605412f0f088644057e65af09d",
+            "inputs": [
+              {
+                "file": "genotypes.vcf",
+                "bytes": 517,
+                "sha256": "c84522cb30dcfdd70cb26903b0966e4399b4b6c58d9ab2654adddadfa817c54b"
+              }
+            ],
+            "outputs": [
+              {
+                "output": "frequencies",
+                "file": "plink.afreq",
+                "sha256": "8b3c410c7a51968fb4132643e3f0757771380d65540e5dc879ea840b52044de3"
+              },
+              {
+                "output": "genotypes",
+                "file": "plink.gcount",
+                "sha256": "7c828f383000d7768d680f369dcebf6b0ff5721c6d168afeb39675fcca4a3078"
+              },
+              {
+                "output": "sample-missingness",
+                "file": "plink.smiss",
+                "sha256": "0bb717370ad884294fb7304f4982aa8a0f399db08942dd1e13aa7a6a08e85786"
+              },
+              {
+                "output": "variant-missingness",
+                "file": "plink.vmiss",
+                "sha256": "3d3c56a88890648dbc8abeedd08c71448c656f5d640128cdb91b197a52e90831"
+              },
+              {
+                "output": "summary",
+                "file": "summary.json",
+                "sha256": "1b0e34e74acca7cd794dbce6509ba48100c37b4985adb841ae8a8c93cb4c9a6f"
+              },
+              {
+                "output": "settings",
+                "file": "settings.json",
+                "sha256": "8398ed9d335702d52c97a8ed328f3a0552302538ddcd943f72bb2445bbe554a3"
+              },
+              {
+                "output": "log",
+                "file": "plink.log",
+                "sha256": "1eb8e33a6132a7257311518983bb93f16dd926219c558b4a1866bfc4a86c6c7d"
+              },
+              {
+                "output": "adapter-log",
+                "file": "adapter.log",
+                "sha256": "6cf18edd568b79f3c01a1d36b6920009f1182c91e9b7106e4535624cc6e3c011"
+              }
+            ],
+            "supportingFiles": [
+              {
+                "file": "methods-planned.txt",
+                "sha256": "d7beacbee11a2ec6576dfaae31cef3b516c3f24154f43487fa7a936c7ff86b18"
+              },
+              {
+                "file": "methods-completed.txt",
+                "sha256": "9f42cc9ca0cdf4c3a5bee15cc7e51f4960d4c4b577cab8d58b1989580fd62e1e"
+              },
+              {
+                "file": "workflow.cwl",
+                "sha256": "1fbcff89698aaece7f096bae067427c25afdc764367140a0b4bd5bfa4cdd0cb2"
+              }
+            ]
+          }
+        },
+        "scientificSuites": {
+          "primer3": {
+            "schema": 1,
+            "packId": "primer3",
+            "packVersion": "1.0.0",
+            "upstreamVersion": "2.6.1",
+            "toolVersion": "2.6.1",
+            "platform": "win32",
+            "nativeWindowsExecuted": true,
+            "testsRun": 14,
+            "failures": 0,
+            "errors": 0,
+            "skipped": [],
+            "success": true,
+            "seconds": 1.052,
+            "testSourceSha256": "da942ba37244e4de27dc132a1b930540254529a0b15c91d32a2fdc0028a7cdb8",
+            "guardExecutableSha256": "99325f449a21ca0b558a3b1ccdc7558c4ec2c591d8d35099a91eb66c31a614bb",
+            "scientificBinarySha256": "85f0b53a6be938481498d730b63a229c7dafc7c898a7e9e44aff14f9067bdc8f",
+            "packManifestSha256": "f79505a97a8affdfaec5d89e77ea4906d1c67f6e9b63cdfeb0baf00e7da6f7ba",
+            "upstreamSourceCommit": "7f9f17d6012f404e83bbf0f931a4d06eb4af465b",
+            "upstreamSourceArchiveSha256": "c981e42765ceb525f56607c6a7cf989ac5068483731c6e083b1e9fb22816463b",
+            "livePinnedLinuxReferenceCases": 0,
+            "liveReferenceExecutableSha256": null,
+            "scope": "Independent planted primer binding/strand/product/GC and requested Tm/length ranges; pristine upstream comparison; zero-pair success; explicit chemistry; input/pack immutability; bounds/missing dependencies and path guidance. No specificity, experimental PCR, clinical or benchmark claim.",
+            "reportSha256": "bba1cf05fd34229dd16689d59fb81fe292ac4bd560b46b3d8fc8146406969d65",
+            "executionCount": 40
+          },
+          "plink2": {
+            "schema": 1,
+            "packId": "plink2",
+            "packVersion": "1.0.0",
+            "toolVersion": "2.0.0-a.7.12",
+            "platform": "win32",
+            "nativeWindowsExecuted": true,
+            "testsRun": 17,
+            "failures": 0,
+            "errors": 0,
+            "skipped": [],
+            "success": true,
+            "seconds": 5.058,
+            "testSourceSha256": "cb3f084244d3aebd98e8ca28ce6ca09b015a247a4553f3f0a5aaff8795c2862e",
+            "guardExecutableSha256": "af32b658385412a3d09545844d5e182106bb878453ba04d4cfc6bbe276659581",
+            "scientificBinarySha256": "2d461a0253479f1566294f2f4e89a3e9db0f7a7e3894e0554053e8ede244bb9e",
+            "packManifestSha256": "ff6fe0b2033cd50095ea5b98e652f4138f064580778806f9634ccdc71a40fdc8",
+            "upstreamSourceCommit": "5c1f185d4144e62fa23087d68760162f712cd2a8",
+            "scope": "Independent synthetic diploid biallelic SNP allele/genotype/missingness counts and denominators; direct bundled unmodified upstream execution; bounded input rejection; input/installation immutability and repeated runs. No PCA, association, filtering, scientific benchmark, GUI, population or clinical claim.",
+            "reportSha256": "8ab44c2aee66b36a7780bd6528874759337654776d7954f1bccefe5f5033e3de",
+            "executionCount": 52
+          }
+        },
+        "installation": {
+          "reportSha256": "83d7275762f6fa8ae87c1b40818541bdecdb57a824c818d12db4be6bbc0b740e",
+          "message": "7 of 7 application/integrity checks passed. Starter scientific check passed. 4 of 4 additional pack checks passed.",
+          "passedTopLevel": 8,
+          "failed": 0,
+          "skipped": 0,
+          "additionalPackChecksPassed": 4
+        }
+      },
+      "gui": {
+        "success": true,
+        "applicationVersion": "0.16.1",
+        "applicationSourceCommit": "ff13db729a6215e9fe5dfa4a4efdb9c769880287",
+        "applicationArchive": {
+          "file": "native-workbench-0.16.1-starter-windows.zip",
+          "bytes": 17889148,
+          "sha256": "28f1362287991621dde030da54eb444846142c0243be6b9d86c4b4f1bf99dd47"
+        },
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "checks": [
+          "primer3: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+          "plink2: exact ZIP native import, declared scientific checks and duplicate-version rejection.",
+          "primer3: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+          "plink2: exact-pin normal graph execution, incompatible input/stale pin rejection, methods/CWL and searchable results.",
+          "The native library discovers the installed Primer3 and PLINK2 1.0.0 packs and displays their operations under complete catalogue labels.",
+          "Native pointer selection opens primer3/design-pcr with exact pack version, declared input/option labels and reachable form pages.",
+          "Native pointer selection opens plink2/summarize-vcf with exact pack version, declared input/option labels and reachable form pages.",
+          "Native Results search finds Pack candidate primer3 and displays its successful native operation, exact pack/executable versions and recorded manifest identity without a QC verdict.",
+          "Native Results search finds Pack candidate plink2 and displays its successful native operation, exact pack/executable versions and recorded manifest identity without a QC verdict.",
+          "Pinned application and installed pack bytes remain unchanged after execution."
+        ],
+        "coreFilesVerifiedBefore": 277,
+        "coreFilesVerifiedAfter": 277,
+        "reportSha256": "c57d180d3832daae3ed1d705d4a6f0c701fd17968e6abe9fd3d9f2d8c9403a3f",
+        "checkCount": 10,
+        "normalGraphs": {
+          "primer3": {
+            "success": true,
+            "pin": {
+              "packId": "primer3",
+              "packVersion": "1.0.0",
+              "manifestSha256": "f79505a97a8affdfaec5d89e77ea4906d1c67f6e9b63cdfeb0baf00e7da6f7ba"
+            },
+            "planSha256": "d9de6c91a0dc07a6d16536b65d542fde40a1c21a6708edf8f0fc3eb253cc4f7a",
+            "runSha256": "12d220c0ebfdf0dc01a37c1172aa99a0e0b82df0a49b80945ab40dffbee7d1f2",
+            "inputs": [
+              {
+                "file": "planted.fa",
+                "bytes": 280,
+                "sha256": "a1ab1f8a85ae8aceee96e8a2a91c8ab36ff008a17d20441c00244ffdc40959b3"
+              }
+            ],
+            "outputs": [
+              {
+                "output": "primers",
+                "file": "primers.tsv",
+                "sha256": "35972781c8a7d559e667aa1a1e070fa1c0dbdcc7781f0678ca03c07cf8a6a839"
+              },
+              {
+                "output": "boulder",
+                "file": "primer3-result.boulder",
+                "sha256": "575723ae52f1e4be76a6ee396f1626748facb2395cd7a1ee4df73aa048c65d98"
+              },
+              {
+                "output": "request",
+                "file": "primer3-input.boulder",
+                "sha256": "5d334392af6d51031843181d2d109a031ad21837e8cbff885d90e41f1aa66980"
+              },
+              {
+                "output": "summary",
+                "file": "primer3-summary.json",
+                "sha256": "2bb9feaf310bd6da552aed89ec86eb063f048f9837acc8dfdb7756ed8fd3ac6e"
+              },
+              {
+                "output": "settings",
+                "file": "analysis-settings.json",
+                "sha256": "8d37d4ebb8d986fa035c081ca1b7f804aee9a5e936cded25bc0fc4198f3a841f"
+              },
+              {
+                "output": "log",
+                "file": "primer3.log",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            ],
+            "supportingFiles": [
+              {
+                "file": "methods-planned.txt",
+                "sha256": "c69f02e2518035d1d1a58447873ba7eeebe1f1fb9896130aa3d19bdfbe867f80"
+              },
+              {
+                "file": "methods-completed.txt",
+                "sha256": "4ec28ea6584260108d2d6a95fdad83b0893fdecbbed70fc452dba5aeed5c651f"
+              },
+              {
+                "file": "workflow.cwl",
+                "sha256": "95fa6b30d923831e26d18b7ccc8720c4cba0a7f4b6544cb709b373dab2befbdf"
+              }
+            ]
+          },
+          "plink2": {
+            "success": true,
+            "pin": {
+              "packId": "plink2",
+              "packVersion": "1.0.0",
+              "manifestSha256": "ff6fe0b2033cd50095ea5b98e652f4138f064580778806f9634ccdc71a40fdc8"
+            },
+            "planSha256": "705afbf4dd79cee20fab1938e414a0b857615261eafa9c8e5864bb6c62027b36",
+            "runSha256": "de0adfda480f4309bc4c7fe482527ba664b3a0b02109833624d858b50670fbc0",
+            "inputs": [
+              {
+                "file": "genotypes.vcf",
+                "bytes": 517,
+                "sha256": "c84522cb30dcfdd70cb26903b0966e4399b4b6c58d9ab2654adddadfa817c54b"
+              }
+            ],
+            "outputs": [
+              {
+                "output": "frequencies",
+                "file": "plink.afreq",
+                "sha256": "8b3c410c7a51968fb4132643e3f0757771380d65540e5dc879ea840b52044de3"
+              },
+              {
+                "output": "genotypes",
+                "file": "plink.gcount",
+                "sha256": "7c828f383000d7768d680f369dcebf6b0ff5721c6d168afeb39675fcca4a3078"
+              },
+              {
+                "output": "sample-missingness",
+                "file": "plink.smiss",
+                "sha256": "0bb717370ad884294fb7304f4982aa8a0f399db08942dd1e13aa7a6a08e85786"
+              },
+              {
+                "output": "variant-missingness",
+                "file": "plink.vmiss",
+                "sha256": "3d3c56a88890648dbc8abeedd08c71448c656f5d640128cdb91b197a52e90831"
+              },
+              {
+                "output": "summary",
+                "file": "summary.json",
+                "sha256": "1b0e34e74acca7cd794dbce6509ba48100c37b4985adb841ae8a8c93cb4c9a6f"
+              },
+              {
+                "output": "settings",
+                "file": "settings.json",
+                "sha256": "82d666956ff017ea8285cf0c4a91e42d6fea80c5a558c6a7c53a938d29ab4852"
+              },
+              {
+                "output": "log",
+                "file": "plink.log",
+                "sha256": "03afe9c8c1f2fe0ad2b3bc14dd9b836f35d3088d76c93ae0f49fd5d1c1b635ba"
+              },
+              {
+                "output": "adapter-log",
+                "file": "adapter.log",
+                "sha256": "292c37c75179868a1f61437bab43c1cdf8f60f4f5558bdccbc8e520b0774a4a3"
+              }
+            ],
+            "supportingFiles": [
+              {
+                "file": "methods-planned.txt",
+                "sha256": "d7beacbee11a2ec6576dfaae31cef3b516c3f24154f43487fa7a936c7ff86b18"
+              },
+              {
+                "file": "methods-completed.txt",
+                "sha256": "9f42cc9ca0cdf4c3a5bee15cc7e51f4960d4c4b577cab8d58b1989580fd62e1e"
+              },
+              {
+                "file": "workflow.cwl",
+                "sha256": "af94002bd12ccf5c41f5b15f2017227164f06541c84ac2252b3352eb3900eeaa"
+              }
+            ]
+          }
+        },
+        "nativeGUI": {
+          "forms": [
+            {
+              "operation": "primer3/design-pcr",
+              "displayName": "Primer3: design PCR primer pairs",
+              "packVersion": "1.0.0",
+              "manifestSha256": "f79505a97a8affdfaec5d89e77ea4906d1c67f6e9b63cdfeb0baf00e7da6f7ba",
+              "checkedInputOptionLabels": [
+                "Divalent salt (mM)",
+                "Effective annealing oligo (nM)",
+                "Maximum calculated Tm (C)",
+                "Maximum candidate pairs",
+                "Maximum primer length (bases)",
+                "Maximum product size (bp)",
+                "Minimum calculated Tm (C)",
+                "Minimum primer length (bases)",
+                "Minimum product size (bp)",
+                "Monovalent salt (mM)",
+                "Optimum calculated Tm (C)",
+                "Optimum primer length (bases)",
+                "Single DNA template",
+                "Single DNA template FASTA",
+                "Total dNTP concentration (mM)"
+              ],
+              "pages": [
+                {
+                  "capture": "pack-form-primer3-design-pcr-top",
+                  "scroll": {
+                    "nMin": 0,
+                    "nMax": 2451,
+                    "nPage": 495,
+                    "nPos": 0
+                  }
+                },
+                {
+                  "capture": "pack-form-primer3-design-pcr-page-1",
+                  "scroll": {
+                    "nMin": 0,
+                    "nMax": 2451,
+                    "nPage": 495,
+                    "nPos": 288
+                  }
+                },
+                {
+                  "capture": "pack-form-primer3-design-pcr-page-2",
+                  "scroll": {
+                    "nMin": 0,
+                    "nMax": 2451,
+                    "nPage": 495,
+                    "nPos": 576
+                  }
+                },
+                {
+                  "capture": "pack-form-primer3-design-pcr-page-3",
+                  "scroll": {
+                    "nMin": 0,
+                    "nMax": 2451,
+                    "nPage": 495,
+                    "nPos": 864
+                  }
+                },
+                {
+                  "capture": "pack-form-primer3-design-pcr-page-4",
+                  "scroll": {
+                    "nMin": 0,
+                    "nMax": 2451,
+                    "nPage": 495,
+                    "nPos": 1152
+                  }
+                },
+                {
+                  "capture": "pack-form-primer3-design-pcr-page-5",
+                  "scroll": {
+                    "nMin": 0,
+                    "nMax": 2451,
+                    "nPage": 495,
+                    "nPos": 1440
+                  }
+                },
+                {
+                  "capture": "pack-form-primer3-design-pcr-page-6",
+                  "scroll": {
+                    "nMin": 0,
+                    "nMax": 2451,
+                    "nPage": 495,
+                    "nPos": 1728
+                  }
+                },
+                {
+                  "capture": "pack-form-primer3-design-pcr-page-7",
+                  "scroll": {
+                    "nMin": 0,
+                    "nMax": 2451,
+                    "nPage": 495,
+                    "nPos": 1957
+                  }
+                }
+              ],
+              "formBounds": [
+                217,
+                153,
+                695,
+                648
+              ],
+              "visibleLibraryBounds": [
+                22,
+                193,
+                185,
+                634
+              ],
+              "windowBounds": [
+                0,
+                0,
+                1024,
+                728
+              ]
+            },
+            {
+              "operation": "plink2/summarize-vcf",
+              "displayName": "PLINK2: summarize genotype frequencies and missingness",
+              "packVersion": "1.0.0",
+              "manifestSha256": "ff6fe0b2033cd50095ea5b98e652f4138f064580778806f9634ccdc71a40fdc8",
+              "checkedInputOptionLabels": [
+                "Diploid biallelic SNP genotypes",
+                "Diploid genotype VCF"
+              ],
+              "pages": [
+                {
+                  "capture": "pack-form-plink2-summarize-vcf-top",
+                  "scroll": {
+                    "nMin": 0,
+                    "nMax": 1086,
+                    "nPage": 495,
+                    "nPos": 0
+                  }
+                },
+                {
+                  "capture": "pack-form-plink2-summarize-vcf-page-1",
+                  "scroll": {
+                    "nMin": 0,
+                    "nMax": 1086,
+                    "nPage": 495,
+                    "nPos": 288
+                  }
+                },
+                {
+                  "capture": "pack-form-plink2-summarize-vcf-page-2",
+                  "scroll": {
+                    "nMin": 0,
+                    "nMax": 1086,
+                    "nPage": 495,
+                    "nPos": 576
+                  }
+                },
+                {
+                  "capture": "pack-form-plink2-summarize-vcf-page-3",
+                  "scroll": {
+                    "nMin": 0,
+                    "nMax": 1086,
+                    "nPage": 495,
+                    "nPos": 592
+                  }
+                }
+              ],
+              "formBounds": [
+                217,
+                153,
+                695,
+                648
+              ],
+              "visibleLibraryBounds": [
+                22,
+                193,
+                185,
+                634
+              ],
+              "windowBounds": [
+                0,
+                0,
+                1024,
+                728
+              ]
+            }
+          ],
+          "libraries": [
+            {
+              "query": "primer3",
+              "labels": [
+                "Primer3: design PCR primer pairs"
+              ],
+              "completeCaptions": [
+                "Primer3: design PCR primer pairs\nRank standard PCR primer pairs from one local DNA template with explicit product, length, Tm and chemistry settings. Candidate design does not establish specificity or experimental success."
+              ],
+              "windowBounds": [
+                0,
+                0,
+                1024,
+                728
+              ]
+            },
+            {
+              "query": "plink2",
+              "labels": [
+                "PLINK2: summarize genotype frequencies and missingness"
+              ],
+              "completeCaptions": [
+                "PLINK2: summarize genotype frequencies and missingness\nMeasure ALT frequencies, genotype counts and per-sample/per-variant missingness from a reviewed GT-only SNP dataset. No automatic QC filtering or pass thresholds."
+              ],
+              "windowBounds": [
+                0,
+                0,
+                1024,
+                728
+              ]
+            }
+          ],
+          "results": [
+            {
+              "query": "Pack candidate primer3",
+              "operation": "primer3/design-pcr",
+              "versions": [
+                {
+                  "id": "primer3",
+                  "version": "2.6.1"
+                },
+                {
+                  "id": "primer3-adapter",
+                  "version": "1.0.0"
+                }
+              ],
+              "manifestSha256": "f79505a97a8affdfaec5d89e77ea4906d1c67f6e9b63cdfeb0baf00e7da6f7ba",
+              "nativeSummaryReportsMeasurementsUnavailable": true,
+              "measurementDisplayScope": "The unchanged application records status, versions and provenance; pack-specific JSON measurements are retained in result files and are not parsed into this native summary."
+            },
+            {
+              "query": "Pack candidate plink2",
+              "operation": "plink2/summarize-vcf",
+              "versions": [
+                {
+                  "id": "plink2",
+                  "version": "2.0.0-a.7.12"
+                },
+                {
+                  "id": "plink2-adapter",
+                  "version": "1.0.0"
+                }
+              ],
+              "manifestSha256": "ff6fe0b2033cd50095ea5b98e652f4138f064580778806f9634ccdc71a40fdc8",
+              "nativeSummaryReportsMeasurementsUnavailable": true,
+              "measurementDisplayScope": "The unchanged application records status, versions and provenance; pack-specific JSON measurements are retained in result files and are not parsed into this native summary."
+            }
+          ],
+          "scope": "Native Primer3/PLINK2 form discovery, complete library captions, input labels, search and persisted result presentation; scientific execution is recorded separately.",
+          "limitations": [
+            "Observed hosted desktop and DPI only; no representative-PC, high-DPI, multiple-monitor or physical-trackpad acceptance.",
+            "PrintWindow captures are labelled separately from actual displayed BitBlt pixels; neither proves absence of transient flicker.",
+            "Complete accessible library names/descriptions are checked; bold/regular text, wrapping and readability require review of the retained actual screenshots.",
+            "primer3: the unchanged application has no parser for this pack's JSON measurements; Native Results reports their unavailability and preserves status/version/provenance display.",
+            "plink2: the unchanged application has no parser for this pack's JSON measurements; Native Results reports their unavailability and preserves status/version/provenance display."
+          ],
+          "windowBounds": [
+            0,
+            0,
+            1024,
+            728
+          ],
+          "workArea": [
+            0,
+            0,
+            1024,
+            728
+          ],
+          "dpi": 96,
+          "horizontalClipping": false
+        }
+      }
+    }
+  },
+  "independentAudit": {
+    "normalGraphsVerified": 8,
+    "fixtureInputHashesVerified": 8,
+    "executableHashVersionBindingsVerified": 16,
+    "outputHashesVerified": 56,
+    "primerTruth": "Left [40,60), right [200,220), reverse-complement binding and 180 bp product independently checked.",
+    "plinkTruth": "All six variant rows independently checked: four samples, 24 genotypes, 17 called, 7 missing, 34 called alleles, 18 ALT; all-missing AF undefined.",
+    "savedPinsMethodsCwlSearchVerified": true,
+    "scope": "Independent read-only crosscheck of retained raw reports and outputs; not a second Windows execution."
+  },
+  "limitations": [
+    "Hosted Windows Server 2022 x64, synthetic fixtures only; no representative-PC or large-dataset acceptance.",
+    "Scientific execution uses unchanged released 0.16.0; native presentation uses unchanged frozen 0.16.1.",
+    "Linux pristine Primer3 reference class is excluded from the selected Windows suite; it passed separately on Linux.",
+    "Native Results displays status, versions and provenance; these pack-specific JSON measurements remain output files.",
+    "No scientific Linux CWL execution, benchmarking, signing, institutional deployment, release/updater or clinical validation."
+  ]
+}

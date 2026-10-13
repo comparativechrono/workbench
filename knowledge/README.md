@@ -1,10 +1,16 @@
 # Native Workbench knowledge base
 
-**Active Primer3/PLINK2 batch, 2026-10-13:** implementation is in progress on
-`feature/primer3-plink2-packs`, stacked on unchanged Kalign draft PR #17. The
-initial interfaces cover paired PCR primer design and VCF hardcall counts/
-missingness. See the [batch handover](primer3-plink2-handover.md). Exact Windows
-and screenshot evidence remains pending; no merge or publication is included.
+**Primer3/PLINK2 ready for draft review, 2026-10-13:** independent **1.0.0**
+packs are complete in [draft PR #18](https://github.com/comparativechrono/workbench/pull/18),
+stacked on unchanged Kalign draft PR #17. Tested source
+`3d1d83b70d053af625b5cb45362851c0fefab2a1` passed both Windows path cases,
+31 scientific tests per path, normal graphs, Starter/pack regressions and GUI
+checks. All 38 actual display images were reviewed. See the
+[handover](primer3-plink2-handover.md) and
+[final evidence](evidence/primer3-plink2-1.0.0-final-review-2026-10-13.json).
+[Pack/source download](https://github.com/comparativechrono/workbench/actions/runs/38403212748/artifacts/11816422463)
+expires 2026-11-12. Measurements remain output files; native Results shows status
+and provenance. Application bytes are unchanged; nothing is merged or published.
 
 **Kalign ready for draft review, 2026-10-13:** optional **1.0.0** is implemented in
 [draft PR #17](https://github.com/comparativechrono/workbench/pull/17), based on

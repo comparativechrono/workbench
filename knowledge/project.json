@@ -186,7 +186,8 @@
     "kalign_pack_guide": "../docs/KALIGN-PACK.md",
     "prodigal_fasttree_merge": "evidence/prodigal-fasttree-merge-2026-10-13.json",
     "kalign_final_review": "evidence/kalign-1.0.0-final-review-2026-10-13.json",
-    "primer3_plink2_handover": "primer3-plink2-handover.md"
+    "primer3_plink2_handover": "primer3-plink2-handover.md",
+    "primer3_plink2_final_evidence": "evidence/primer3-plink2-1.0.0-final-review-2026-10-13.json"
   },
   "stable_constraints": [
     "Local analysis with no hidden data uploads",
@@ -1207,14 +1208,31 @@
       "primer3": "1.0.0",
       "plink2": "1.0.0"
     },
-    "status": "implementation in progress; exact native validation pending",
+    "status": "ready for unpublished draft review",
     "application_changed": false,
     "published_application": "0.16.0",
     "unpublished_application_candidate": "0.16.1",
     "released": false,
     "release_authorized": false,
     "catalogue_changed": false,
-    "handover": "primer3-plink2-handover.md"
+    "handover": "primer3-plink2-handover.md",
+    "source_commit": "3d1d83b70d053af625b5cb45362851c0fefab2a1",
+    "source_tree": "32becfa4831b7e50cdcfe342645d0ac02d32b8cb",
+    "pull_request": "https://github.com/comparativechrono/workbench/pull/18",
+    "candidate_run": 38403212748,
+    "final_evidence": "evidence/primer3-plink2-1.0.0-final-review-2026-10-13.json",
+    "candidate_download": "https://github.com/comparativechrono/workbench/actions/runs/38403212748/artifacts/11816422463",
+    "artifact_expires_on": "2026-11-12",
+    "source_selected_tests": 112,
+    "source_passed_tests": 111,
+    "source_platform_skips": 1,
+    "native_selected_tests_per_path": 31,
+    "native_selected_skips": 0,
+    "native_science_gate_checks_per_path": 8,
+    "native_gui_gate_checks_per_path": 10,
+    "actual_display_images_reviewed": 38,
+    "measurement_display_limit": "Native Results displays status and provenance; Primer3/PLINK2 JSON measurements remain output files.",
+    "merged": false
   },
   "ui_patch_0_16_1_development": {
     "recorded_on": "2026-10-09",
@@ -2656,13 +2674,30 @@
       "primer3": "1.0.0",
       "plink2": "1.0.0"
     },
-    "status": "implementation in progress; exact native validation pending",
+    "status": "ready for unpublished draft review",
     "application_changed": false,
     "published_application": "0.16.0",
     "unpublished_application_candidate": "0.16.1",
     "released": false,
     "release_authorized": false,
     "catalogue_changed": false,
-    "handover": "primer3-plink2-handover.md"
+    "handover": "primer3-plink2-handover.md",
+    "source_commit": "3d1d83b70d053af625b5cb45362851c0fefab2a1",
+    "source_tree": "32becfa4831b7e50cdcfe342645d0ac02d32b8cb",
+    "pull_request": "https://github.com/comparativechrono/workbench/pull/18",
+    "candidate_run": 38403212748,
+    "final_evidence": "evidence/primer3-plink2-1.0.0-final-review-2026-10-13.json",
+    "candidate_download": "https://github.com/comparativechrono/workbench/actions/runs/38403212748/artifacts/11816422463",
+    "artifact_expires_on": "2026-11-12",
+    "source_selected_tests": 112,
+    "source_passed_tests": 111,
+    "source_platform_skips": 1,
+    "native_selected_tests_per_path": 31,
+    "native_selected_skips": 0,
+    "native_science_gate_checks_per_path": 8,
+    "native_gui_gate_checks_per_path": 10,
+    "actual_display_images_reviewed": 38,
+    "measurement_display_limit": "Native Results displays status and provenance; Primer3/PLINK2 JSON measurements remain output files.",
+    "merged": false
   }
 }

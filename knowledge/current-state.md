@@ -1,12 +1,26 @@
 # Current project state
 
-## Active development: Primer3 and PLINK2, 2026-10-13
+## Active review: Primer3 and PLINK2, 2026-10-13
 
-The next independent pack batch is being implemented on
+Independent **1.0.0** packs are ready in
+[draft PR #18](https://github.com/comparativechrono/workbench/pull/18) on
 `feature/primer3-plink2-packs`, based on Kalign delivery
-`8c0321d0cf04751a7c921d42098bed13ebb7b11a`. Scope and pending validation are in
-the [batch handover](primer3-plink2-handover.md). Published application and earlier
-pack/candidate bytes remain unchanged; Kalign PR #17 has not been merged.
+`8c0321d0cf04751a7c921d42098bed13ebb7b11a`. Kalign PR #17 remains draft/unmerged.
+Tested source `3d1d83b70d053af625b5cb45362851c0fefab2a1` implements paired PCR
+primer design and bounded VCF hardcall allele/genotype/missingness summaries.
+Published 0.16.0 and frozen 0.16.1 application bytes remain unchanged.
+
+The [hosted run](https://github.com/comparativechrono/workbench/actions/runs/38403212748)
+passed 111 source tests with one explicit Windows-only Linux skip; each Windows
+path passed 14 Primer3 and 17 PLINK2 tests without selected skips, eight science
+and ten GUI gates, exact-pin graphs and Starter/installed-pack regressions.
+Independent audit matched 984 Git files, 1288 source-companion entries and all
+recorded graph/output identities. All 38 actual display screenshots were reviewed.
+The [handover](primer3-plink2-handover.md) and
+[final index](evidence/primer3-plink2-1.0.0-final-review-2026-10-13.json) record
+hashes, downloads, local pre-freeze corrections and limits. Native Results does
+not yet parse these packs' measurement files. Broader display/PC acceptance and
+benchmarking remain separate; no merge, release or catalogue change is included.
 
 ## Previous development: Kalign pack, 2026-10-13
 
